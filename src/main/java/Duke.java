@@ -46,18 +46,24 @@ public class Duke {
         /**
          * Get user instruction and perform them
          */
-        String input = getInput(sc);
+        String[] input = getInput(sc).split("\\s+");
         String output = "";
-        while (!input.equals("bye")) {
+        while (!input[0].equals("bye")) {
 
-            if (input.equals("list")) {
+            if (input[0].equals("list")) {
                 output = list.toString();
+            } else if (input[0].equals("done")){
+                output = list.markDone(Integer.parseInt(input[1]));
             } else {
-                output = list.addItem(input);
+                String tmp = input[0];
+                for (int i = 1; i < input.length; ++i) {
+                    tmp += " " + input[i];
+                }
+                output = list.addItem(tmp);
             }
 
             showMessage(output);
-            input = getInput(sc);
+            input = getInput(sc).split("\\s+");
         }
 
         /**

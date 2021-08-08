@@ -8,7 +8,7 @@ public class Items {
     /**
      * The items are stored in a list.
      */
-    private String[] list;
+    private Task[] list;
 
     /**
      * The number of items in the list.
@@ -16,7 +16,7 @@ public class Items {
     private int len;
 
     public Items() {
-        list = new String[100];
+        list = new Task[100];
         len = 0;
     }
 
@@ -26,8 +26,21 @@ public class Items {
      * @return A status message to be displayed
      */
     public String addItem(String item) {
-        list[len++] = item;
+        Task task = new Task(item);
+        list[len++] = task;
         return "added: " + item;
+    }
+
+    /**
+     * Marks the task at the given index as done
+     * @param index The index to be marked as done
+     * @return  A status message to be displayed
+     */
+    public String markDone(int index) {
+        Task task = list[index-1];
+        task.markDone();
+        return "Great success! Task Complete: \n[" + task.getStatusIcon() + "] " + task.toString();
+
     }
 
     /**
@@ -35,9 +48,9 @@ public class Items {
      * @return The string representation of the Items object
      */
     public String toString() {
-        String str = "";
+        String str = "This your task in list:\n";
         for (int i = 0; i < len; ++i) {
-            str += " " + (i + 1) + ". " + list[i] + "\n";
+            str += " " + (i + 1) + ". [" + list[i].getStatusIcon() + "] " + list[i].toString() + "\n";
         }
         return len == 0 ? "" : str.substring(0, str.length() - 1);
     }
