@@ -14,4 +14,9 @@ public class Task {
     public void setDone(boolean bool) {
         this.isDone = bool;
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+    }
 }
