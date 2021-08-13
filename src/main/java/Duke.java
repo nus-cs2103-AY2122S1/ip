@@ -1,15 +1,22 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
     private boolean bye;
     private final String indentation = "-----------------------------------------------\n";
+    private int count;
+    private final List<String> history;
 
     /**
      * Constructor for the Duke class
      */
     public Duke() {
         bye = false;
+        count = 1;
+        history = new ArrayList<>();
         startMessage();
     }
 
@@ -32,12 +39,18 @@ public class Duke {
                 System.out.println(indentation + "That was an empty message! Say something."
                                                + "\n" + indentation);
                 break;
+            case "list":
+                for (String m: history) {
+                    System.out.println(m);
+                }
+                break;
             case "bye":
                 bye = true;
-                System.out.println(indentation + "Hope to see you again soon!" + "\n" + indentation);
+                System.out.println(indentation + "You're leaving :( I hope you return soon!" + "\n" + indentation);
                 break;
             default:
-                System.out.println(indentation + message + "\n" + indentation);
+                addMessage(message);
+                System.out.println(indentation + "added: " + message + "\n" + indentation);
         }
     }
 
@@ -46,6 +59,14 @@ public class Duke {
      */
     public void goodBye() {
         System.out.println(indentation + "Please come back soon" + indentation);
+    }
+
+    /**
+     * Method to add the message to list
+     * @param message Message to be added
+     */
+    public void addMessage(String message) {
+        history.add(count++ + "." + message);
     }
 
     /**
