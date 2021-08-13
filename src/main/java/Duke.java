@@ -25,11 +25,11 @@ public class Duke {
             if (command.equals("list")) {
                 System.out.println(reply(list()));
             } else if (command.startsWith("done ")) {
-                int index = command.toCharArray()[command.length()-1] - '0' - 1;
+                int index = Integer.parseInt(command.split(" ")[1]) - 1;
                 System.out.println(reply(done(index)));
             } else { // add the task
-                Task t = new Task(command);
-                System.out.println(reply(add(command)));
+                String taskType = command.split(" ")[0];
+                System.out.println(reply(add(command, taskType)));
             }
             command = scan.nextLine();
         }
@@ -44,23 +44,12 @@ public class Duke {
         return divider + "\n" + content + divider;
     }
 
-    private static String echo(String input) {
-        // echo back user commands
-        return String.format("\t %s\n", input);
-    }
-
-    private static String add(String input) {
-        // add task to the taskList
-        taskList.add(new Task(input));
-        return "\t added: " + input + "\n";
-    }
-
     private static String list() {
         // list out all tasks
         int count = 1;
         StringBuilder reply = new StringBuilder();
         for (Task task : taskList) {
-            reply.append(String.format("\t %d.[%s] %s\n", count, task.getStatusIcon(), task));
+            reply.append(String.format("\t %d.%s\n", count, task));
             count++;
         }
         return reply.toString();
@@ -73,7 +62,30 @@ public class Duke {
         t.markAsDone();
         // reply
         return String.format("\t Nice! I've marked this task as done: \n" +
-                "\t   [X] %s\n", t);
+                "\t   %s\n", t);
+    }
+
+    private static String add(String input, String type) {
+        Task t;
+        int delimiter = input.indexOf("/");
+        // add task to the taskList
+        switch (type) {
+            case "todo" :
+                taskList.add(t = new Todo(input.substring(4)));
+                break;
+            case "deadline" :
+                taskList.add(t = new Deadline(input.substring(8, delimiter), input.substring(delimiter+4)));
+                break;
+            case "event" :
+                taskList.add(t = new Event(input.substring(5, delimiter), input.substring(delimiter+4)));
+                break;
+            default :
+                t = new Task(input);
+        }
+        // reply
+        return "\t Got it. I've added this task: \n" +
+                String.format("\t   %s\n", t) +
+                String.format("\t Now you have %d tasks in the list.\n", taskList.size());
     }
 }
 
