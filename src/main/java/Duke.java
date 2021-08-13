@@ -13,29 +13,56 @@ public class Duke {
     /**
      * Wraps a given message above and below with lines and prints it
      *
-     * @param msg
+     * @param msg the message to wrap and print
      */
-    private static void wrap(String msg) {
+    private static void wrapPrint(String msg) {
         System.out.println(line);
         System.out.println(msg);
         System.out.println(line);
     }
 
+    /**
+     * Lists the elements of a given array of Strings and enumerates them
+     *
+     * @param arr the given array of Strings
+     * @return a String that looks like an ordered list of Strings
+     */
+    private static String listStringArr(String[] arr) {
+        String res = "";
+        int i = 0;
+
+        while (arr[i] != null) {
+            res = res + (i + 1) + ". " + arr[i];
+            if (i < arr.length - 1 && arr[i + 1] != null) {
+                res = res + "\n";
+            }
+            i++;
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
-        // initialise scanner
+        // initialise scanner and String array
         Scanner sc = new Scanner(System.in);
+        String[] stringList = new String[100];
+        int idx = 0; // pointer for string array
 
         // Greet
-        wrap("Hello! I'm Bob\nWhat can I do for you?");
+        wrapPrint("Hello! I'm Bob\nWhat can I do for you?");
 
-        // Echo
+        // Add and List
         String input = sc.nextLine();
         while (!input.equals("bye")){
-            wrap(input);
+            if (input.equals("list")) {
+                wrapPrint(listStringArr(stringList));
+            } else {
+                stringList[idx++] = input;
+                wrapPrint("added: " + input);
+            }
             input = sc.nextLine();
         }
 
         // Exit
-        wrap("Bye. Hope to see you again soon!");
+        wrapPrint("Bye. Hope to see you again soon!");
     }
 }
