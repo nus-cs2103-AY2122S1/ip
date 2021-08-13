@@ -12,16 +12,28 @@ public class TaskList {
     /*
      *  Returns true if task is added successfully, false otherwise.
      */
-    public boolean addTask(Task task) {
-        taskList.add(task);
-        return true;
+    public void addTask(Task task) {
+        this.taskList.add(task);
+    }
+
+    public String showTask(int index) {
+        return this.taskList.get(index).toString();
+    }
+
+    public int size() {
+        return this.taskList.size();
+    }
+
+    public void markTaskDone(int index) {
+        // index should be between 0 and n-1
+        this.taskList.get(index).markDone();
     }
 
     @Override
     public String toString() {
         String returnString = "";
-        for (int i = 1; i < taskList.size() + 1; i++) {
-            String row = String.format("%d. %s \n", i, taskList.get(i-1).toString());
+        for (int i = 1; i < this.taskList.size() + 1; i++) {
+            String row = String.format("%d. %s \n", i, this.taskList.get(i-1).toString());
             returnString += row;
         }
         return  returnString;
