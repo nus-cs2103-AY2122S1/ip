@@ -1,3 +1,4 @@
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
@@ -8,7 +9,7 @@ public class Duke {
     private boolean bye;
     private final String indentation = "-----------------------------------------------\n";
     private int count;
-    private final List<String> history;
+    private final List<Task> history;
 
     /**
      * Constructor for the Duke class
@@ -25,7 +26,7 @@ public class Duke {
      */
     public void startMessage() {
         String logo = "Welcome to Petal (•◡•)/ ";
-        String logo2 = "\nI am the best chatbot you'll meet! Don't be shy, say something! :P";
+        String logo2 = "\nI am the best chat bot you'll meet! Don't be shy, say something! :P";
         System.out.println(logo + logo2);
     }
 
@@ -34,23 +35,21 @@ public class Duke {
      * @param message Message initially written by user
      */
     public void formatMessage(String message) {
-        switch(message) {
-            case "":
-                System.out.println(indentation + "That was an empty message! Say something."
-                                               + "\n" + indentation);
-                break;
-            case "list":
-                for (String m: history) {
-                    System.out.println(m);
-                }
-                break;
-            case "bye":
-                bye = true;
-                System.out.println(indentation + "You're leaving :( I hope you return soon!" + "\n" + indentation);
-                break;
-            default:
-                addMessage(message);
-                System.out.println(indentation + "added: " + message + "\n" + indentation);
+        if (message.equals("")) {
+            System.out.println(indentation + "That was an empty message! Say something."
+                    + "\n" + indentation);
+        } else if (message.equals("list")) {
+            printMessage();
+        } else if (message.equals("bye")) {
+            bye = true;
+            System.out.println(indentation + "You're leaving :( I hope you return soon!" + "\n" + indentation);
+        } else if (message.contains("done")) {
+            String[] newMessage = message.split(" ");
+            Task taskToBeCompleted = history.get(Integer.parseInt(newMessage[1]) - 1);
+            taskToBeCompleted.taskDone();
+        } else {
+            addMessage(message);
+            System.out.println(indentation + "added: " + message + "\n" + indentation);
         }
     }
 
@@ -61,12 +60,19 @@ public class Duke {
         System.out.println(indentation + "Please come back soon" + indentation);
     }
 
+    public void printMessage() {
+        int count = 1;
+        for (Task m : history) {
+            System.out.println(count++ + ". " + m);
+        }
+    }
+
     /**
      * Method to add the message to list
      * @param message Message to be added
      */
     public void addMessage(String message) {
-        history.add(count++ + "." + message);
+        history.add(new Task(message));
     }
 
     /**
