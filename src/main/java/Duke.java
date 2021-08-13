@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -6,9 +7,9 @@ public class Duke {
 	private final String MESSAGE_EXIT = "Have a nice day! Good bye XD";
 	private final String MESSAGE_LIST = "Here are the tasks in your list:";
 	private final String MESSAGE_DONE = "Congrats! You have accomplished the following task:";
+	private final String MESSAGE_ADD = "Alright, new task added to the list:";
 	
-	private final Task[] listTasks = new Task[100];
-	private int numTasks = 0;
+	private final ArrayList<Task> listTasks = new ArrayList<>();
 	
 	/**
 	 * Main body of the bot.
@@ -32,10 +33,16 @@ public class Duke {
 	}
 	
 	private void interpretCommand(String command) {
-		if (command.equals("list")) printFullList();
+		if (command.equals("list"))
+			printFullList();
 		else if (command.matches("^done( .*)?"))
 			taskDone(command);
-		else addTask(command);
+		else if (command.matches("^todo( .*)?"))
+			addTodo(command);
+		else if (command.matches("^deadline( .*)?"))
+			addDeadline(command);
+		else if (command.matches("^event( .*)?"))
+			addEvent(command);
 	}
 	
 	/**
@@ -47,7 +54,7 @@ public class Duke {
 		int taskNumber = Integer.parseInt(command.substring(5)) - 1;
 		
 		// Mark the task as done
-		Task task = listTasks[taskNumber];
+		Task task = listTasks.get(taskNumber);
 		task.markAsDone();
 		
 		// Display message
@@ -55,16 +62,53 @@ public class Duke {
 	}
 	
 	/**
-	 * Adds a new task to the list of tasks.
+	 * Adds a new event to the list of tasks.
 	 *
-	 * @param description new task to be added
+	 * @param command command entered by user (event [description] /at [time])
 	 */
-	private void addTask(String description) {
+	private void addEvent(String command) {
+		// Add new event
+		String[] info = command.substring(6).split("/at");
+		Task newTask = new Event(info[0].trim(), info[1].trim());
+		addTask(newTask);
+	}
+	
+	/**
+	 * Adds a new deadline to the list of tasks.
+	 *
+	 * @param command command entered by user (deadline [description] /by [time])
+	 */
+	private void addDeadline(String command) {
+		// Add new deadline
+		String[] info = command.substring(9).split("/by");
+		Task newTask = new Deadline(info[0].trim(), info[1].trim());
+		addTask(newTask);
+	}
+	
+	/**
+	 * Adds a new todo to the list of tasks.
+	 *
+	 * @param command command entered by user (todo [description])
+	 */
+	private void addTodo(String command) {
+		// Add new todo
+		Task newTask = new Todo(command.substring(5).trim());
+		addTask(newTask);
+	}
+	
+	/**
+	 * Adds a new task to the list of tasks. Helper method.
+	 *
+	 * @param newTask new task to be added
+	 */
+	private void addTask(Task newTask) {
 		// Add the newly created task into list of tasks
-		listTasks[numTasks++] = new Task(description);
+		listTasks.add(newTask);
 		
 		// Display message
-		printMessage("added: " + description);
+		printMessage(MESSAGE_ADD + "\n  " +
+				newTask + "\n" +
+				"Now you have " + listTasks.size() + " tasks in the list.");
 	}
 	
 	/**
@@ -73,9 +117,10 @@ public class Duke {
 	private void printFullList() {
 		// Reformat the list of tasks
 		StringBuilder msg = new StringBuilder();
+		int size = listTasks.size();
 		
-		for (int i = 0; i < numTasks - 1; i++) msg.append(i + 1).append(". ").append(listTasks[i]).append("\n");
-		msg.append(numTasks).append(". ").append(listTasks[numTasks - 1]);
+		for (int i = 0; i < size - 1; i++) msg.append(i + 1).append(". ").append(listTasks.get(i)).append("\n");
+		msg.append(size).append(". ").append(listTasks.get(size - 1));
 		
 		// Display message
 		printMessage(MESSAGE_LIST + "\n" + msg);
