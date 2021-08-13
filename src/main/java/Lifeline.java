@@ -42,6 +42,12 @@ public class Lifeline {
                     }
                     markAsDone(inputs[1]);
                     break;
+                case DELETE:
+                    if (inputs.length != 2) {
+                        throw new LifelineException("You did not specify an integer!");
+                    }
+                    deleteTask(inputs[1]);
+                    break;
                 case TODO:
                 case DEADLINE:
                 case EVENT:
@@ -136,6 +142,21 @@ public class Lifeline {
                 System.out.println("You have completed the " + taskToBeCompleted.getClass().getName() + ":\n"
                         + taskToBeCompleted.getName() + "\n");
             }
+        } catch (NumberFormatException e) {
+            throw new LifelineException("Index is not an integer!");
+        }
+    }
+
+    private void deleteTask(String index) throws LifelineException {
+        try {
+            int taskIndex = Integer.parseInt(index) - 1;
+            if (taskIndex < 0 || taskIndex >= taskList.size()) {
+                throw new LifelineException("Index is out of bounds!");
+            }
+            Task taskToDelete = taskList.get(taskIndex);
+            taskList.remove(taskToDelete);
+            System.out.println("I have removed the task:\n" + taskToDelete + "\n");
+            printList();
         } catch (NumberFormatException e) {
             throw new LifelineException("Index is not an integer!");
         }
