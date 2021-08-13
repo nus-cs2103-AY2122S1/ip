@@ -61,7 +61,8 @@ public class Lifeline {
             System.out.println("You have no tasks\n");
         } else {
             int uncompletedTask = 0;
-            System.out.println("Here " + (taskList.size() > 1 ? "are" : "is") + " your " + (taskList.size() > 1 ? "tasks:" : "task:"));
+            System.out.println("Here " + (taskList.size() > 1 ? "are" : "is")
+                    + " your " + (taskList.size() > 1 ? "tasks:" : "task:"));
             for (int i = 0; i < taskList.size(); i++) {
                 Task currTask = taskList.get(i);
                 System.out.println((i + 1) + ". " + currTask);
@@ -69,7 +70,8 @@ public class Lifeline {
                     uncompletedTask++;
                 }
             }
-            System.out.println("You have " + uncompletedTask + " uncompleted " + (uncompletedTask > 1 ? "tasks" : "task") + ".\n");
+            System.out.println("You have " + uncompletedTask + " uncompleted " + (uncompletedTask > 1 ? "tasks" :
+                    "task") + ".\n");
         }
         getInput();
     }
@@ -85,7 +87,8 @@ public class Lifeline {
         int taskIndex = Integer.valueOf(index) - 1;
         Task taskToBeCompleted = taskList.get(taskIndex);
         taskToBeCompleted.setDone(true);
-        System.out.println("You have completed the " + taskToBeCompleted.getClass().getName() + ": \n" + taskToBeCompleted.getName() + "\n");
+        System.out.println("You have completed the " + taskToBeCompleted.getClass().getName() + ": \n"
+                + taskToBeCompleted.getName() + ".\n");
         getInput();
     }
 
