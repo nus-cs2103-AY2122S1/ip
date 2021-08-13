@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Lifeline {
@@ -24,43 +23,55 @@ public class Lifeline {
     }
 
     private void getInput() {
-        this.command = sc.nextLine().trim();
-        String[] commands = command.split("\\s", 2);
-        System.out.println();
-        try {
-            switch (commands[0].toLowerCase()) {
-            case "list":
-                printList();
-                break;
-            case "bye":
-                exit();
-                break;
-            case "done":
-                if (commands.length != 2) {
-                    throw new LifelineException("You did not specify an integer!");
+        boolean exit = false;
+        while (!exit) {
+            try {
+                this.command = sc.nextLine().trim();
+                String[] inputs = command.split("\\s", 2);
+                System.out.println();
+                switch (getInputType(inputs[0])) {
+                case LIST:
+                    printList();
+                    break;
+                case BYE:
+                    exit = true;
+                    break;
+                case DONE:
+                    if (inputs.length != 2) {
+                        throw new LifelineException("You did not specify an integer!");
+                    }
+                    markAsDone(inputs[1]);
+                    break;
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    if (inputs.length != 2) {
+                        throw new LifelineException("Details of task cannot be blank!");
+                    }
+                    createTask(inputs[0], inputs[1]);
+                    break;
+                default:
+                    echo(inputs[0]);
+                    break;
                 }
-                markAsDone(commands[1]);
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                if (commands.length != 2) {
-                    throw new LifelineException("Details of task cannot be blank!");
-                }
-                createTask(commands[0], commands[1]);
-                break;
-            default:
-                echo(commands[0]);
-                break;
+            } catch (LifelineException e) {
+                System.out.println(e.getMessage());
+                System.out.println();
             }
-        } catch (LifelineException e) {
-            System.out.println(e.getMessage());
         }
+        exit();
+    }
 
+    private InputType getInputType(String input) throws LifelineException {
+        try {
+            return InputType.valueOf(input.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new LifelineException("I am sorry! I don't know what that means! ☹");
+        }
     }
 
     private void createTask(String task, String details) throws LifelineException {
-        switch (task) {
+        switch (task.toLowerCase()) {
         case "todo":
             Task newTask = new ToDo(details);
             addToList(newTask);
@@ -88,11 +99,11 @@ public class Lifeline {
 
     private void printList() {
         if (taskList.size() == 0) {
-            System.out.println("You have no tasks\n");
+            System.out.println("You have no remaining tasks.\n");
         } else {
             int uncompletedTask = 0;
             System.out.println("Here " + (taskList.size() > 1 ? "are" : "is")
-                    + " your " + (taskList.size() > 1 ? "tasks:" : "task:"));
+                    + " your remaining " + (taskList.size() > 1 ? "tasks:" : "task:"));
             for (int i = 0; i < taskList.size(); i++) {
                 Task currTask = taskList.get(i);
                 System.out.println((i + 1) + ". " + currTask);
@@ -103,17 +114,16 @@ public class Lifeline {
             System.out.println("You have " + uncompletedTask + " uncompleted " + (uncompletedTask > 1 ? "tasks"
                     : "task") + ".\n");
         }
-        getInput();
     }
 
     private void addToList(Task task) {
         taskList.add(task);
         System.out.println("I have added this task for you:");
         System.out.println(task + "\n");
-        getInput();
     }
 
-    private void markAsDone(String index) throws LifelineException {        try {
+    private void markAsDone(String index) throws LifelineException {
+        try {
             int taskIndex = Integer.parseInt(index) - 1;
             if (taskIndex < 0 || taskIndex >= taskList.size()) {
                 throw new LifelineException("Index is out of bounds!");
@@ -126,8 +136,6 @@ public class Lifeline {
                 System.out.println("You have completed the " + taskToBeCompleted.getClass().getName() + ":\n"
                         + taskToBeCompleted.getName() + "\n");
             }
-
-            getInput();
         } catch (NumberFormatException e) {
             throw new LifelineException("Index is not an integer!");
         }
@@ -135,8 +143,7 @@ public class Lifeline {
 
     private void echo(String input) {
         System.out.println("You have said \"" + input + "\"\n");
-        System.out.println("I am sorry! I don't know what that means ☹");
-        getInput();
+        System.out.println("I am sorry! I don't know what that means ☹\n");
     }
 
     private void exit() {
