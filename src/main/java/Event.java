@@ -6,8 +6,9 @@ public class Event extends Task {
      * Event constructor.
      *
      * @param description the event's description
+     * @throws BadInputFormatException if the description is badly formatted
      */
-    private Event(String description) {
+    private Event(String description) throws BadInputFormatException {
         this(parse(description)[0], parse(description)[1]);
     }
 
@@ -27,8 +28,9 @@ public class Event extends Task {
      *
      * @param description the user's input
      * @return a new Event object
+     * @throws BadInputFormatException if the input is badly formatted
      */
-    public static Event of(String description) {
+    public static Event of(String description) throws BadInputFormatException {
         Event newEvent = new Event(description);
         feedback(newEvent.toString());
         return newEvent;
@@ -39,9 +41,13 @@ public class Event extends Task {
      *
      * @param description the user's input
      * @return an array of tokens represented as strings; index 0 contains the description, index 1 contains the time
+     * @throws BadInputFormatException if the input is not properly formatted
      */
-    private static String[] parse(String description) {
+    private static String[] parse(String description) throws BadInputFormatException {
         String[] tokens = description.split(" /at ");
+        if (tokens.length < 2) {
+            throw new BadInputFormatException();
+        }
         return tokens;
     }
 

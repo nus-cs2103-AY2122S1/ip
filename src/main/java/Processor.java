@@ -6,8 +6,12 @@ public class Processor {
      *
      * @param input the user's input
      * @return an array of tokens represented as strings
+     * @throws InvalidInputException if the input string is null
      */
-    private static String[] tokenParser(String input) {
+    private static String[] tokenParser(String input) throws InvalidInputException {
+        if (input == null) {
+            throw new InvalidInputException();
+        }
         return input.trim().split("\\s+");
     }
 
@@ -18,9 +22,13 @@ public class Processor {
      * @param input the user's input
      * @param regex the regex to delimit the input and obtain the description
      * @return the description
+     * @throws EmptyDescriptionException if the input does not contain a description
      */
-    private static String parseToDescription(String input, String regex)  {
+    private static String parseToDescription(String input, String regex) throws EmptyDescriptionException {
         String[] tokens = input.split((regex));
+        if (tokens.length < 2) {
+            throw new EmptyDescriptionException();
+        }
         return tokens[1];
     }
 
@@ -28,16 +36,24 @@ public class Processor {
      * Processes the user's input based on the commands contained in the input string.
      *
      * @param input the user's input
+     * @throws InvalidInputException if the user's input is not a valid input
      */
-    public static void process(String input) {
+    public static void process(String input) throws InvalidInputException {
         if (Objects.equals(input, "list")) {
             Memory.print();
             return;
         }
 
         String[] tokens = tokenParser(input);
+        int len = tokens.length;
 
-        switch (tokens[0]) {
+        if (len == 0) {
+            throw new EmptyCommandException();
+        }
+
+        String command = tokens[0];
+
+        switch (command) {
         case "done":
             Memory.markTaskAsDoneByIndex(tokens[1]);
             break;
@@ -50,6 +66,8 @@ public class Processor {
         case "event":
             Memory.add(Event.of(parseToDescription(input, "event ")));
             break;
+        default:
+            throw new UnknownCommandException();
         }
     }
 }

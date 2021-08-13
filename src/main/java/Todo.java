@@ -1,6 +1,6 @@
 public class Todo extends Task {
     /**
-     * ToDo constructor.
+     * Todo constructor.
      *
      * @param description the description
      */
@@ -9,10 +9,10 @@ public class Todo extends Task {
     }
 
     /**
-     * Factory ToDo method.
+     * Factory Todo method.
      *
      * @param description the description
-     * @return a new ToDo object
+     * @return a new Todo object
      */
     public static Todo of(String description) {
         Todo newTodo = new Todo(description);

@@ -23,6 +23,18 @@ public class Duke {
                 Processor.process(userInput);
             } catch (IOException e) {
                 System.err.println(e.getMessage());
+            } catch (BadInputFormatException e) {
+                Printer.print("The input is badly formatted.");
+            } catch (EmptyCommandException e) {
+                Printer.print("Command input cannot be empty!");
+            } catch (EmptyDescriptionException e) {
+                Printer.print("Missing task description");
+            } catch (TaskOutOfRangeException e) {
+                Printer.print("Task does not exist!");
+            } catch (UnknownCommandException e) {
+                Printer.print("Command not found.");
+            } catch (InvalidInputException e) {
+                Printer.print("Input is invalid");
             }
         }
 
