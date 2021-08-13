@@ -1,5 +1,10 @@
 import java.util.Scanner;
-
+/**
+ * This class encapsulates a CLI bot named Duke.
+ *
+ * @author Tan Yi Guan
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class Duke {
     // Set up constant
     static final String divider = "\t--------------------------------------------------------";
@@ -23,10 +28,18 @@ public class Duke {
         printExitMessage();
     }
 
+    /**
+     * Formats message passed in and prints it out to the screen.
+     *
+     * @param message Message to be pretty printed.
+     */
     public static void prettyPrint(String message) {
         System.out.println(String.format("%s\n\t%s\n%s", divider, message, divider));
     }
 
+    /**
+     * Prints the welcome message when a user uses the bot for the first time.
+     */
     public static void printWelcomeMessage() {
         System.out.println(banner);
         prettyPrint(
@@ -35,10 +48,18 @@ public class Duke {
                         + "\n\tOnce you are done just type 'exit' to quit the program.");
     }
 
+    /**
+     * Echo user's input.
+     *
+     * @param input Input to be echoed.
+     */
     public static void echo(String input) {
         prettyPrint(input);
     }
 
+    /**
+     * Prints the exit message when user types in the exit command.
+     */
     public static void printExitMessage() {
         prettyPrint("Bye bye! See you again soon!");
     }
