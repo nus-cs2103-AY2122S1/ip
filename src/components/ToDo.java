@@ -2,8 +2,13 @@ package components;
 
 public class ToDo extends Task{
 
-    public ToDo(String taskDescription) {
-        super(taskDescription);
+    public ToDo(String taskDescription, boolean done) {
+        super(taskDescription, done);
+    }
+
+    @Override
+    public ToDo markDone() {
+        return new ToDo(taskDescription, true);
     }
 
     @Override

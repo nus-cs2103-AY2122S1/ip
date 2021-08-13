@@ -6,14 +6,20 @@ public class TaskList {
     private final ArrayList<Task> taskList;
 
     public TaskList() {
-        taskList = new ArrayList<Task>();
+        this.taskList = new ArrayList<Task>();
     }
+
+    private TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+    }
+
 
     /*
      *  Returns true if task is added successfully, false otherwise.
      */
-    public void addTask(Task task) {
+    public TaskList addTask(Task task) {
         this.taskList.add(task);
+        return new TaskList(this.taskList);
     }
 
     public String showTask(int index) {
@@ -24,10 +30,10 @@ public class TaskList {
         return this.taskList.size();
     }
 
-    public boolean markTaskDone(int index) {
+    public TaskList markTaskDone(int index) {
         // index should be between 0 and n-1
-        boolean changed = this.taskList.get(index).markDone();
-        return changed;
+        this.taskList.set(index, this.taskList.get(index).markDone());
+        return new TaskList(this.taskList);
     }
 
     @Override

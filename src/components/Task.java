@@ -1,24 +1,15 @@
 package components;
 
-public class Task {
+abstract public class Task {
     protected String taskDescription;
     protected boolean done;
 
-    protected Task(String taskDescription) {
+    protected Task(String taskDescription, boolean done) {
         this.taskDescription = taskDescription;
-        this.done = false;
+        this.done = done;
     }
 
-    /*
-        Return true if the task done value actually changes.
-     */
-    public boolean markDone() {
-        if (this.done == true) {
-            return false;
-        }
-        this.done = true;
-        return true;
-    }
+    abstract public Task markDone();
 
     @Override
     public String toString() {
