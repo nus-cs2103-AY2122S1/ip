@@ -46,6 +46,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         Task[] taskList = new Task[100];
         int idx = 0; // pointer for string array
+        String msg = "";
 
         // Greet
         wrapPrint("Hello! I'm Bob\nWhat can I do for you?");
@@ -54,15 +55,28 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")){
             if (input.equals("list")) {
-                wrapPrint(listTaskArr(taskList));
+                msg = listTaskArr(taskList);
             } else if (input.startsWith("done")) {
                 int num = Integer.parseInt(input.substring(5));
                 taskList[num - 1].markDone();
-                wrapPrint("Nice! I've marked this task as done:\n  " + taskList[num - 1]);
+                msg = "Nice! I've marked this task as done:\n  " + taskList[num - 1];
+            } else if (input.startsWith("todo")) {
+                taskList[idx++] = new ToDo(input.substring(5));
+                msg = "Got it. I've added this task: \n  " + taskList[idx - 1] + "\nNow you have " + idx;
+                msg = idx == 1 ? msg + " task in the list" : msg + " tasks in the list.";
+            } else if (input.startsWith("deadline")) {
+                taskList[idx++] = new Deadline(input.substring(9));
+                msg = "Got it. I've added this task: \n  " + taskList[idx - 1] + "\nNow you have " + idx;
+                msg = idx == 1 ? msg + " task in the list" : msg + " tasks in the list.";
+            } else if (input.startsWith("event")) {
+                taskList[idx++] = new Event(input.substring(6));
+                msg = "Got it. I've added this task: \n  " + taskList[idx - 1] + "\nNow you have " + idx;
+                msg = idx == 1 ? msg + " task in the list" : msg + " tasks in the list.";
             } else {
-                taskList[idx++] = new Task(input);
-                wrapPrint("added: " + input);
+                msg = "sorry i don't know what this means: " + input;
             }
+            wrapPrint(msg);
+            msg = "";
             input = sc.nextLine();
         }
 
