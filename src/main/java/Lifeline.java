@@ -23,7 +23,7 @@ public class Lifeline {
     }
 
     private void getInput() {
-        this.command = sc.nextLine().trim();
+        this.command = sc.nextLine();
         String[] commands = command.split("\\s", 2);
         System.out.println();
         switch (commands[0]) {
@@ -36,24 +36,44 @@ public class Lifeline {
         case "done":
             markAsDone(commands[1]);
             break;
+        case "todo":
+            Task newTask = new ToDo(commands[1].trim());
+            addToList(newTask);
+            break;
+        case "deadline":
+            String[] info = commands[1].split("/by", 2);
+            newTask = new Deadline(info[0].trim(), info[1].trim());
+            addToList(newTask);
+            break;
+        case "event":
+            info = commands[1].split("/at", 2);
+            newTask = new Event(info[0].trim(), info[1].trim());
+            addToList(newTask);
+            break;
         default:
-            addToList(command);
+            echo(command);
             break;
         }
     }
 
     private void printList() {
-        System.out.println("Here " + (taskList.size() > 1 ? "are" : "is") + " your " + (taskList.size() > 1 ? "tasks:" : "task:"));
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println((i + 1) + ". " + taskList.get(i));
+        if (taskList.size() == 0) {
+            System.out.println("You have no tasks\n");
+        } else {
+            System.out.println("Here " + (taskList.size() > 1 ? "are" : "is") + " your " + (taskList.size() > 1 ? "tasks:" : "task:"));
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.println((i + 1) + ". " + taskList.get(i));
+
+            }
+            System.out.println();
         }
-        System.out.println();
         getInput();
     }
 
-    private void addToList(String input) {
-        taskList.add(new Task(input));
-        echo(input);
+    private void addToList(Task task) {
+        taskList.add(task);
+        System.out.println("I have added this task for you: ");
+        System.out.println(task + "\n");
         getInput();
     }
 
@@ -61,13 +81,13 @@ public class Lifeline {
         int taskIndex = Integer.valueOf(index) - 1;
         Task taskToBeCompleted = taskList.get(taskIndex);
         taskToBeCompleted.setDone(true);
-        System.out.println("You have completed the task: \n" + taskToBeCompleted.getName() + "\n");
+        System.out.println("You have completed the " + taskToBeCompleted.getClass().getName() + ": \n" + taskToBeCompleted.getName() + "\n");
         getInput();
     }
 
     private void echo(String input) {
-        System.out.println("I have added the task: \n" + input + "\n");
-        System.out.println("Anything else?\n");
+        System.out.println("You have said \"" + input + "\"\n");
+        getInput();
     }
 
     private void exit() {
