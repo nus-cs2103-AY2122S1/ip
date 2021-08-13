@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class Processor {
     /**
      * Parses the user's input into a string array of tokens, delimited by whitespace.
@@ -39,11 +37,6 @@ public class Processor {
      * @throws InvalidInputException if the user's input is not a valid input
      */
     public static void process(String input) throws InvalidInputException {
-        if (Objects.equals(input, "list")) {
-            Memory.print();
-            return;
-        }
-
         String[] tokens = tokenParser(input);
         int len = tokens.length;
 
@@ -53,20 +46,26 @@ public class Processor {
 
         String command = tokens[0];
 
-        switch (command) {
-        case "done":
+        switch (Command.fromString(command)) {
+        case LIST:
+            if (len > 1) {
+                throw new BadInputFormatException();
+            }
+            Memory.print();
+            break;
+        case DONE:
             Memory.markTaskAsDoneByIndex(tokens[1]);
             break;
-        case "delete":
+        case DELETE:
             Memory.deleteTaskByIndex(tokens[1]);
             break;
-        case "todo":
+        case TODO:
             Memory.add(Todo.of(parseToDescription(input, "todo ")));
             break;
-        case "deadline":
+        case DEADLINE:
             Memory.add(Deadline.of(parseToDescription(input, "deadline ")));
             break;
-        case "event":
+        case EVENT:
             Memory.add(Event.of(parseToDescription(input, "event ")));
             break;
         default:
