@@ -1,19 +1,24 @@
 import java.util.*;
 
 public class Duke {
-    static final String lineSeparator = "_____________________________________________________________";
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println(formatResponse("Hello! I'm Duke\nWhat can I do for you?"));
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        String[] storedMessages = new String[100];
+        int idx = 0;
         String echoInput = sc.nextLine();
         while (!echoInput.equals("bye")) {
-            System.out.println(formatResponse(echoInput));
+            if (echoInput.equals("list")) {
+                for (int i = 0; i < idx; i++) {
+                    System.out.println(i + ": " + storedMessages[i]);
+                }
+            } else {
+                storedMessages[idx] = echoInput;
+                System.out.println("added: " + echoInput);
+                idx++;
+            }
             echoInput = sc.nextLine();
         }
-        System.out.println(formatResponse("Bye. Hope to see you again soon!"));
-    }
-
-    private static String formatResponse(String response) {
-        return String.format("%s\n    %s\n%s", lineSeparator, response, lineSeparator);
+        System.out.println("Bye. Hope to see you again soon!");
     }
 }
