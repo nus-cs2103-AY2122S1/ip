@@ -1,0 +1,10 @@
+diff a/src/main/java/Duke.java b/src/main/java/Duke.java	(rejected hunks)
+@@ -25,7 +25,7 @@
+      */
+     public void startMessage() {
+         String logo = "Welcome to Petal (•◡•)/ ";
+-        String logo2 = "\nI am the best chat bot you'll meet! Don't be shy, say something! :P";
++        String logo2 = "\nI am the best chatbot you'll meet! Don't be shy, say something! :P";
+         System.out.println(logo + logo2);
+     }
+ 
