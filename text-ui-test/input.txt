@@ -1,9 +1,30 @@
+todo one
+todo two
+todo three
 list
-todo abc
-event eat lunch /at 12am
-deadline return book /by 12pm
-list
-done 3
-done 2
 done 1
+done 2
+done 3
 list
+deadline one /by Sunday
+deadline two /by Monday
+deadline three /by Tuesday
+list
+done 4
+done 5
+done 6
+list
+event one /at Mon 2-4pm
+event two /at Tues 2-4pm
+event three /at Wed 2-4pm
+list
+done 7
+done 8
+done 9
+list
+delete 10
+delete 9
+delete 8
+delete 7
+list
+bye
