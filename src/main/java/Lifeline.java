@@ -1,5 +1,5 @@
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Lifeline {
     private Scanner sc;
@@ -70,8 +70,8 @@ public class Lifeline {
                     uncompletedTask++;
                 }
             }
-            System.out.println("You have " + uncompletedTask + " uncompleted " + (uncompletedTask > 1 ? "tasks" :
-                    "task") + ".\n");
+            System.out.println("You have " + uncompletedTask + " uncompleted " + (uncompletedTask > 1 ? "tasks"
+                    : "task") + ".\n");
         }
         getInput();
     }
