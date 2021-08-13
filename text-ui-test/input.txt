@@ -6,4 +6,6 @@ list
 event meeting /at Sun 1-3pm
 deadline return book /by Sunday
 list
+delete 2
+list
 bye

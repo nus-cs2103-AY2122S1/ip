@@ -9,15 +9,14 @@ Hello! I am
 What can I help you with today?
 
 
-You have said "Hello"
+I am sorry! I don't know what that means! ☹
 
-I am sorry! I don't know what that means ☹
 
 I have added this task for you:
 [T][✗] read book
 
 
-Here is your task:
+Here is your remaining task:
 1. [T][✗] read book
 You have 1 uncompleted task.
 
@@ -26,7 +25,7 @@ You have completed the ToDo:
 read book
 
 
-Here is your task:
+Here is your remaining task:
 1. [T][✓] read book
 You have 0 uncompleted task.
 
@@ -39,11 +38,26 @@ I have added this task for you:
 [D][✗] return book (by: Sunday)
 
 
-Here are your tasks:
+Here are your remaining tasks:
 1. [T][✓] read book
 2. [D][✗] meeting (by: Sun 1-3pm)
 3. [D][✗] return book (by: Sunday)
 You have 2 uncompleted tasks.
+
+
+I have removed the task:
+[D][✗] meeting (by: Sun 1-3pm)
+
+Here are your remaining tasks:
+1. [T][✓] read book
+2. [D][✗] return book (by: Sunday)
+You have 1 uncompleted task.
+
+
+Here are your remaining tasks:
+1. [T][✓] read book
+2. [D][✗] return book (by: Sunday)
+You have 1 uncompleted task.
 
 
 Goodbye! Thanks for chatting with me!
