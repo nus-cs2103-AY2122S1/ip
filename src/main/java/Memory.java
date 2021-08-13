@@ -37,4 +37,13 @@ public class Memory {
         output.addFirst("Here are the tasks in your list:");
         Printer.print(output.toArray(String[]::new));
     }
+
+    /**
+     * Marks the task in memory as done by string index.
+     *
+     * @param stringIndex the index of the task as a string
+     */
+    public static void markTaskAsDoneByIndex(String stringIndex) {
+        list[Integer.parseInt(stringIndex) - 1].markTaskAsDone();
+    }
 }
