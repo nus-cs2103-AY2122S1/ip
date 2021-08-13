@@ -1,5 +1,5 @@
 public class Task {
-    private String description;
+    private final String description;
     private boolean isDone;
 
     public Task(String description) {
@@ -7,12 +7,13 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatus() {
+    private String getStatus() {
         return (isDone ? "X" : " ");
     }
 
-    public String getDescription() {
-        return this.description;
+    @Override
+    public String toString() {
+        return "[" + this.getStatus() + "] " + this.description;
     }
 
     public void markDone() {
