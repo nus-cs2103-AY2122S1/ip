@@ -22,7 +22,7 @@ You have 1 uncompleted task.
 
 
 You have completed the ToDo:
-read book.
+read book
 
 
 Here is your task:
