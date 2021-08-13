@@ -18,14 +18,36 @@ public class Duke {
             case "done":
                 if (sc.hasNextInt()) {
                     int index = sc.nextInt();
-                    System.out.println(line + "     Nice! I've marked this task as done:\n"
-                            + "       " + list.markDone(index) + "\n" + line);
-                    break;
+                    if (index > list.getSize() || index < 1) {
+                        System.err.println(line + "     ☹ OOPS!!! The index of the task is out of range.\n"
+                                + line);
+                    } else {
+                        System.out.println(line + "     Nice! I've marked this task as done:\n"
+                                + "       " + list.markDone(index) + "\n" + line);
+                    }
                 } else {
-                    System.err.println(line + "     ☹ OOPS!!! The index of a task to be marked done must be specified."
+                    System.err.println(line
+                            + "     ☹ OOPS!!! The index of a task to be marked done must be specified.\n"
                             + line);
-                    break;
                 }
+                break;
+            case "delete":
+                if (sc.hasNextInt()) {
+                    int index = sc.nextInt();
+                    if (index > list.getSize() || index < 1) {
+                        System.err.println(line + "     ☹ OOPS!!! The index of the task is out of range.\n"
+                                + line);
+                    } else {
+                        System.out.println(line + "     Noted. I've removed this task:\n"
+                                + "       " + list.removeTask(index) + "\n"
+                                + list.returnItemCount() + "\n" + line);
+                    }
+                } else {
+                    System.err.println(line
+                            + "     ☹ OOPS!!! The index of a task to be marked done must be specified.\n"
+                            + line);
+                }
+                break;
             case "todo":
                 try {
                     command = sc.nextLine();

@@ -29,4 +29,12 @@ public class List {
         t.markDone();
         return t.toString();
     }
+
+    public String removeTask(int index) {
+        return items.remove(index - 1).toString();
+    }
+
+    public int getSize() {
+        return items.size();
+    }
 }
