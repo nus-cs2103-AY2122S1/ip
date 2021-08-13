@@ -31,9 +31,7 @@ public class Event extends Task {
      * @throws BadInputFormatException if the input is badly formatted
      */
     public static Event of(String description) throws BadInputFormatException {
-        Event newEvent = new Event(description);
-        feedback(newEvent.toString());
-        return newEvent;
+        return new Event(description);
     }
 
     /**

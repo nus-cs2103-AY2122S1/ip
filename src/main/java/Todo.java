@@ -15,9 +15,7 @@ public class Todo extends Task {
      * @return a new Todo object
      */
     public static Todo of(String description) {
-        Todo newTodo = new Todo(description);
-        feedback(newTodo.toString());
-        return newTodo;
+        return new Todo(description);
     }
 
     @Override

@@ -1,14 +1,12 @@
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Memory {
     /** The array holding the tasks */
-    private static final Task[] list = new Task[100];
-
-    /** The index of the most recent task string added */
-    private static int index = 0;
+    private static final ArrayList<Task> list = new ArrayList<>();
 
     /**
      * Adds a task string to the Memory.
@@ -16,8 +14,14 @@ public class Memory {
      * @param task the task string
      */
     public static void add(Task task) {
-        list[index] = task;
-        index++;
+        list.add(task);
+        Printer.print(
+                "Got it. I've added this task:",
+                String.format("\t%s", task.toString()),
+                String.format(
+                        "Now you have %d %s in the list",
+                        Memory.getSize(),
+                        Memory.getSize() == 1 ? "task" : "tasks"));
     }
 
     /**
@@ -26,8 +30,8 @@ public class Memory {
      * @return a new string deque with the numbered tasks
      */
     private static ArrayDeque<String> indexAppender() {
-        return IntStream.range(0, index)
-                .mapToObj((pos) -> String.format("%d.%s", pos + 1, list[pos].toString()))
+        return IntStream.range(0, getSize())
+                .mapToObj((pos) -> String.format("%d.%s", pos + 1, list.get(pos).toString()))
                 .collect(Collectors.toCollection(ArrayDeque::new));
     }
 
@@ -68,11 +72,11 @@ public class Memory {
         if (index > getSize()) {
             throw new TaskOutOfRangeException();
         }
-        list[Integer.parseInt(stringIndex) - 1].markTaskAsDone();
+        list.get(Integer.parseInt(stringIndex) - 1).markTaskAsDone();
     }
 
     /** Returns the number of tasks in the array */
     public static int getSize() {
-        return index + 1;
+        return list.size();
     }
 }

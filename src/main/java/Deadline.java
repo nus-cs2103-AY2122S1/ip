@@ -30,9 +30,7 @@ public class Deadline extends Task {
      * @return a new Deadline object
      */
     public static Deadline of(String description) throws BadInputFormatException {
-        Deadline newDeadline = new Deadline(description);
-        feedback(newDeadline.toString());
-        return newDeadline;
+        return new Deadline(description);
     }
 
     /**
