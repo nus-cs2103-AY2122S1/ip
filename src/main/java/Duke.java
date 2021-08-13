@@ -41,8 +41,7 @@ public class Duke {
         } else if (message.equals("list")) {
             printMessage();
         } else if (message.equals("bye")) {
-            bye = true;
-            System.out.println(indentation + "You're leaving :( I hope you return soon!" + "\n" + indentation);
+            goodBye();
         } else if (message.contains("done")) {
             String[] newMessage = message.split(" ");
             Task taskToBeCompleted = history.get(Integer.parseInt(newMessage[1]) - 1);
@@ -57,7 +56,8 @@ public class Duke {
      * Method for the bot to say goodbye
      */
     public void goodBye() {
-        System.out.println(indentation + "Please come back soon" + indentation);
+        bye = true;
+        System.out.println(indentation + "You're leaving :( I hope you return soon!" + "\n" + indentation);
     }
 
     public void printMessage() {
