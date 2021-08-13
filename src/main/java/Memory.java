@@ -14,10 +14,9 @@ public class Memory {
      *
      * @param task the task string
      */
-    public static void add(String task) {
-        list[index] = new Task(task);
+    public static void add(Task task) {
+        list[index] = task;
         index++;
-        Printer.print("added: " + task);
     }
 
     /**
@@ -45,5 +44,9 @@ public class Memory {
      */
     public static void markTaskAsDoneByIndex(String stringIndex) {
         list[Integer.parseInt(stringIndex) - 1].markTaskAsDone();
+    }
+
+    public static int getSize() {
+        return index + 1;
     }
 }

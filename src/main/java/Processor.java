@@ -12,6 +12,19 @@ public class Processor {
     }
 
     /**
+     * Description parser.
+     * Parses the user's input into a string containing the description of the task.
+     *
+     * @param input the user's input
+     * @param regex the regex to delimit the input and obtain the description
+     * @return the description
+     */
+    private static String parseToDescription(String input, String regex)  {
+        String[] tokens = input.split((regex));
+        return tokens[1];
+    }
+
+    /**
      * Processes the user's input based on the commands contained in the input string.
      *
      * @param input the user's input
@@ -24,10 +37,19 @@ public class Processor {
 
         String[] tokens = tokenParser(input);
 
-        if (Objects.equals(tokens[0], "done")) {
+        switch (tokens[0]) {
+        case "done":
             Memory.markTaskAsDoneByIndex(tokens[1]);
-            return;
+            break;
+        case "todo":
+            Memory.add(Todo.of(parseToDescription(input, "todo ")));
+            break;
+        case "deadline":
+            Memory.add(Deadline.of(parseToDescription(input, "deadline ")));
+            break;
+        case "event":
+            Memory.add(Event.of(parseToDescription(input, "event ")));
+            break;
         }
-        Memory.add(input);
     }
 }
