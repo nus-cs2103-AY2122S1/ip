@@ -74,9 +74,8 @@ public class Lifeline {
         System.out.println("Goodbye! Thanks for chatting with me!\n");
     }
 
-    public static void main(String[] args) {
-        Lifeline lifeline = new Lifeline();
-        lifeline.greet();
-        lifeline.getInput();
+    public void start() {
+        this.greet();
+        this.getInput();
     }
 }

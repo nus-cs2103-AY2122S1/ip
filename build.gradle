@@ -30,7 +30,7 @@ test {
 
 application {
     // Change to your main class
-    mainClassName = "Lifeline"
+    mainClassName = "Main"
 }
 
 shadowJar {
