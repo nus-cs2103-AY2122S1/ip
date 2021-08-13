@@ -1,10 +1,14 @@
-public class Task {
+public abstract class Task {
     /** The description of the task */
     protected String description;
 
     /** The status of the task */
     protected boolean isDone;
 
+    private Task() {
+        this("");
+    }
+    
     /**
      * Task constructor.
      *
@@ -29,10 +33,5 @@ public class Task {
     public void markTaskAsDone() {
         isDone = true;
         Printer.print("Nice! I've marked this task as done:", this.toString());
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s %s", isDone ? "[X]" : "[ ]", description);
     }
 }
