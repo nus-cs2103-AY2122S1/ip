@@ -3,11 +3,11 @@ import java.util.ArrayList;
 
 public class Lifeline {
     private Scanner sc;
-    private ArrayList<String> list;
+    private ArrayList<Task> taskList;
     private String command;
 
     Lifeline() {
-        this.list = new ArrayList<>();
+        this.taskList = new ArrayList<>();
         this.sc = new Scanner(System.in);
     }
 
@@ -24,13 +24,17 @@ public class Lifeline {
 
     private void getInput() {
         this.command = sc.nextLine().trim();
+        String[] commands = command.split("\\s", 2);
         System.out.println();
-        switch (command) {
+        switch (commands[0]) {
         case "list":
             printList();
             break;
         case "bye":
             exit();
+            break;
+        case "done":
+            markAsDone(commands[1]);
             break;
         default:
             addToList(command);
@@ -39,21 +43,30 @@ public class Lifeline {
     }
 
     private void printList() {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(i));
+        System.out.println("Here " + (taskList.size() > 1 ? "are" : "is") + " your " + (taskList.size() > 1 ? "tasks:" : "task:"));
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println((i + 1) + ". " + taskList.get(i));
         }
         System.out.println();
         getInput();
     }
 
     private void addToList(String input) {
-        list.add(input);
+        taskList.add(new Task(input));
         echo(input);
         getInput();
     }
 
+    private void markAsDone(String index) {
+        int taskIndex = Integer.valueOf(index) - 1;
+        Task taskToBeCompleted = taskList.get(taskIndex);
+        taskToBeCompleted.setDone(true);
+        System.out.println("You have completed the task: \n" + taskToBeCompleted.getName() + "\n");
+        getInput();
+    }
+
     private void echo(String input) {
-        System.out.println("You have said " + "\"" + input + "\".");
+        System.out.println("I have added the task: \n" + input + "\n");
         System.out.println("Anything else?\n");
     }
 
