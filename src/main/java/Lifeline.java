@@ -88,7 +88,7 @@ public class Lifeline {
         Task taskToBeCompleted = taskList.get(taskIndex);
         taskToBeCompleted.setDone(true);
         System.out.println("You have completed the " + taskToBeCompleted.getClass().getName() + ": \n"
-                + taskToBeCompleted.getName() + ".\n");
+                + taskToBeCompleted.getName() + "\n");
         getInput();
     }
 
