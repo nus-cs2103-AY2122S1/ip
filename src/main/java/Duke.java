@@ -8,15 +8,24 @@ public class Duke {
         String command;
         String line = "    ____________________________________________________________\n";
         System.out.println(line + "     Hello! I'm Duke\n" + "     What can I do for you?\n" + line);
-        command = sc.nextLine();
+        command = sc.next();
         while (!command.equals("bye")) {
-            if (command.equals("list")) {
+            switch(command) {
+            case "list":
                 System.out.println(line + list.returnItems() + line);
-            } else {
+                break;
+            case "done":
+                int index = sc.nextInt();
+                System.out.println(line + "     Nice! I've marked this task as done:\n"
+                        + list.markDone(index) + line);
+                break;
+            default:
+                    command += sc.nextLine();
                 list.addItem(command);
                 System.out.println(line + "     added: " + command + "\n" + line);
+                break;
             }
-            command = sc.nextLine();
+            command = sc.next();
         }
         System.out.println(line + "     Bye. Hope to see you again soon!\n" + line);
     }
