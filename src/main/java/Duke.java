@@ -20,7 +20,7 @@ public class Duke {
                 if (Objects.equals(userInput, "bye")) {
                     break;
                 }
-                Printer.print(userInput);
+                Processor.process(userInput);
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
