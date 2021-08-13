@@ -8,7 +8,7 @@ public class Printer {
      * @return a formatted string
      */
     private static String outputParser(String ...output) {
-        String divider = "\t____________________________________________________________\n";
+        String divider = "\t************************************************************\n";
         return String.format(
                 "%s%s%s",
                 divider,
