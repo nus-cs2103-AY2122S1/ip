@@ -4,8 +4,10 @@ public class Duke {
 	private final String HORIZONTAL_LINE = "\t____________________________________________________________\n";
 	private final String MESSAGE_WELCOME = "Hi! I'm Sora. How can I help you?";
 	private final String MESSAGE_EXIT = "Have a nice day! Good bye XD";
+	private final String MESSAGE_LIST = "Here are the tasks in your list:";
+	private final String MESSAGE_DONE = "Congrats! You have accomplished the following task:";
 	
-	private final String[] listTasks = new String[100];
+	private final Task[] listTasks = new Task[100];
 	private int numTasks = 0;
 	
 	/**
@@ -20,16 +22,36 @@ public class Duke {
 		String input;
 		
 		// Main body of chat box, each if else handles one type of command
-		while (!(input = sc.nextLine().trim()).equals("bye")) {
-			if (input.equals("list")) printFullList();
-			else addTask(input);
-		}
+		while (!(input = sc.nextLine().trim()).equals("bye")) interpretCommand(input);
 		
 		// Close off scanner
 		sc.close();
 		
 		// Print good bye message
 		printMessage(MESSAGE_EXIT);
+	}
+	
+	private void interpretCommand(String command) {
+		if (command.equals("list")) printFullList();
+		else if (command.matches("^done( .*)?"))
+			taskDone(command);
+		else addTask(command);
+	}
+	
+	/**
+	 * Marks the task with the same task number as specified by user as done.
+	 *
+	 * @param command command entered by user (done [task number])
+	 */
+	private void taskDone(String command) {
+		int taskNumber = Integer.parseInt(command.substring(5)) - 1;
+		
+		// Mark the task as done
+		Task task = listTasks[taskNumber];
+		task.markAsDone();
+		
+		// Display message
+		printMessage(MESSAGE_DONE + "\n  " + task);
 	}
 	
 	/**
@@ -39,7 +61,7 @@ public class Duke {
 	 */
 	private void addTask(String description) {
 		// Add the newly created task into list of tasks
-		listTasks[numTasks++] = description;
+		listTasks[numTasks++] = new Task(description);
 		
 		// Display message
 		printMessage("added: " + description);
@@ -56,7 +78,7 @@ public class Duke {
 		msg.append(numTasks).append(". ").append(listTasks[numTasks - 1]);
 		
 		// Display message
-		printMessage(msg.toString());
+		printMessage(MESSAGE_LIST + "\n" + msg);
 	}
 	
 	/**
