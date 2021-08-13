@@ -1,6 +1,9 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Duke {
+    private static String[] list = new String[100];
+    private static int index = 0;
+
     public static void main(String[] args) {
         String logo =
                 "  ('-.    .-. .-')                .-')     .-')   \n"
@@ -15,19 +18,54 @@ public class Duke {
         System.out.println(logo);
 
         Scanner sc = new Scanner(System.in);
-        System.out.println(formatReply("Hello beautiful! Welcome to the Abyss\n\t What can I do for you today?"));
+        System.out.println(formatReply("Hello beautiful. Welcome to the Abyss.", "What can we do for you today?"));
         String cmd = sc.nextLine();
-        while(!cmd.equalsIgnoreCase("bye")) {
-            System.out.println(formatReply(cmd));
+        while(!cmd.equalsIgnoreCase("exit")) {
+            if(cmd.equalsIgnoreCase("list")) {
+                printList();
+            } else if (!cmd.isBlank()) {
+                addToList(cmd);
+            }
             cmd = sc.nextLine();
         }
-        System.out.println(formatReply("Bye. Hope to see you again soon!"));
+        System.out.println(formatReply("Exiting the Abyss. We anticipate your return."));
     }
 
-    private static String formatReply(String s) {
-        String reply = "\t------------------------------------------------------\n"
-                + "\t " + s + "\n\n"
-                + "\t------------------------------------------------------";
+    private static void addToList(String s) {
+        list[index] = s;
+        index++;
+        String reply = "added: " + s;
+        System.out.println(formatReply(reply));
+    }
+
+    private static void printList() {
+        System.out.println(formatListReply(list));
+    }
+
+    private static String formatReply(String ...s) {
+        String reply = "\t------------------------------------------------------\n";
+        for(int i = 0; i < s.length; i++) {
+            if(s[i] == null) {
+                break;
+            }
+            reply += "\t " + s[i] + "\n";
+        }
+        reply += "\n\t------------------------------------------------------";
+        return reply;
+    }
+
+    private static String formatListReply(String ...s) {
+        String reply = "\t------------------------------------------------------\n";
+        for(int i = 0; i < s.length; i++) {
+            if(s[i] == null) {
+                break;
+            }
+            reply += "\t " + (i + 1) +". " + s[i] + "\n";
+        }
+        if(s[0] == null) {
+            reply += "\t Nothing added yet.\n";
+        }
+        reply += "\n\t------------------------------------------------------";
         return reply;
     }
 }
