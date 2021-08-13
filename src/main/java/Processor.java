@@ -57,6 +57,9 @@ public class Processor {
         case "done":
             Memory.markTaskAsDoneByIndex(tokens[1]);
             break;
+        case "delete":
+            Memory.deleteTaskByIndex(tokens[1]);
+            break;
         case "todo":
             Memory.add(Todo.of(parseToDescription(input, "todo ")));
             break;

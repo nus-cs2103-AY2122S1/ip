@@ -25,6 +25,50 @@ public class Memory {
     }
 
     /**
+     * Marks the task in memory as done by string index.
+     *
+     * @param stringIndex the index of the task as a string
+     * @throws TaskOutOfRangeException if the input index exceeds the number of tasks present
+     * @throws BadInputFormatException if the input does not specify a valid index
+     */
+    public static void markTaskAsDoneByIndex(String stringIndex)
+            throws BadInputFormatException, TaskOutOfRangeException {
+        if (isInvalidIndex(stringIndex)) {
+            throw new BadInputFormatException();
+        }
+        int index = Integer.parseInt(stringIndex);
+        if (index > getSize()) {
+            throw new TaskOutOfRangeException();
+        }
+        list.get(Integer.parseInt(stringIndex) - 1).markTaskAsDone();
+    }
+
+    /**
+     * Deletes the task from Memory by the index.
+     *
+     * @param stringIndex the task index in Memory
+     * @throws TaskOutOfRangeException if the input index exceeds the number of tasks present
+     * @throws BadInputFormatException if the input does not specify a valid index
+     */
+    public static void deleteTaskByIndex(String stringIndex)
+            throws TaskOutOfRangeException, BadInputFormatException {
+        if (isInvalidIndex(stringIndex)) {
+            throw new BadInputFormatException();
+        }
+        int index = Integer.parseInt(stringIndex);
+        if (index > getSize()) {
+            throw new TaskOutOfRangeException();
+        }
+        Printer.print(
+                "Noted. I've removed this task:",
+                list.remove(index - 1).toString(),
+                String.format(
+                        "Now you have %d %s in the list.",
+                        getSize(),
+                        getSize() == 1 ? "task" : "tasks"));
+    }
+
+    /**
      * Appends an index number to the tasks in memory in increasing order, starting from 1.
      *
      * @return a new string deque with the numbered tasks
@@ -54,25 +98,6 @@ public class Memory {
             return true;
         }
         return !pattern.matcher(string).matches();
-    }
-
-    /**
-     * Marks the task in memory as done by string index.
-     *
-     * @param stringIndex the index of the task as a string
-     * @throws TaskOutOfRangeException if the input index exceeds the number of tasks present
-     * @throws BadInputFormatException if the input does not specify a valid index
-     */
-    public static void markTaskAsDoneByIndex(String stringIndex)
-            throws BadInputFormatException, TaskOutOfRangeException {
-        if (isInvalidIndex(stringIndex)) {
-            throw new BadInputFormatException();
-        }
-        int index = Integer.parseInt(stringIndex);
-        if (index > getSize()) {
-            throw new TaskOutOfRangeException();
-        }
-        list.get(Integer.parseInt(stringIndex) - 1).markTaskAsDone();
     }
 
     /** Returns the number of tasks in the array */
