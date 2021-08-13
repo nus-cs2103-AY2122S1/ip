@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
+//    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -29,7 +29,8 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    // Change to your main class
+    mainClassName = "Lifeline"
 }
 
 shadowJar {
@@ -37,10 +38,10 @@ shadowJar {
     archiveClassifier = null
 }
 
-checkstyle {
-    toolVersion = '8.29'
-}
+//checkstyle {
+//    toolVersion = '8.29'
+//}
 
-run{
+run {
     standardInput = System.in
 }
