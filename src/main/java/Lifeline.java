@@ -60,12 +60,16 @@ public class Lifeline {
         if (taskList.size() == 0) {
             System.out.println("You have no tasks\n");
         } else {
+            int uncompletedTask = 0;
             System.out.println("Here " + (taskList.size() > 1 ? "are" : "is") + " your " + (taskList.size() > 1 ? "tasks:" : "task:"));
             for (int i = 0; i < taskList.size(); i++) {
-                System.out.println((i + 1) + ". " + taskList.get(i));
-
+                Task currTask = taskList.get(i);
+                System.out.println((i + 1) + ". " + currTask);
+                if (!currTask.isDone()) {
+                    uncompletedTask++;
+                }
             }
-            System.out.println();
+            System.out.println("You have " + uncompletedTask + " uncompleted " + (uncompletedTask > 1 ? "tasks" : "task") + ".\n");
         }
         getInput();
     }

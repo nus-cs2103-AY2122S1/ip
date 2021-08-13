@@ -15,6 +15,10 @@ public class Task {
         return name;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     public String toString() {
         if (isDone) {
             return "[✓] " + this.name;
