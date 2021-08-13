@@ -1,8 +1,10 @@
+import java.util.ArrayDeque;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Memory {
-    /** The array holding the string inputs */
-    private static final String[] list = new String[100];
+    /** The array holding the tasks */
+    private static final Task[] list = new Task[100];
 
     /** The index of the most recent task string added */
     private static int index = 0;
@@ -13,7 +15,7 @@ public class Memory {
      * @param task the task string
      */
     public static void add(String task) {
-        list[index] = task;
+        list[index] = new Task(task);
         index++;
         Printer.print("added: " + task);
     }
@@ -21,16 +23,18 @@ public class Memory {
     /**
      * Appends an index number to the tasks in memory in increasing order, starting from 1.
      *
-     * @return a new string array
+     * @return a new string deque with the numbered tasks
      */
-    private static String[] indexAppender() {
+    private static ArrayDeque<String> indexAppender() {
         return IntStream.range(0, index)
-                .mapToObj((pos) -> String.format("%d.%s", pos + 1, list[pos]))
-                .toArray(String[]::new);
+                .mapToObj((pos) -> String.format("%d.%s", pos + 1, list[pos].toString()))
+                .collect(Collectors.toCollection(ArrayDeque::new));
     }
 
     /** Prints the contents of the memory */
     public static void print() {
-        Printer.print(indexAppender());
+        ArrayDeque<String> output = indexAppender();
+        output.addFirst("Here are the tasks in your list:");
+        Printer.print(output.toArray(String[]::new));
     }
 }
