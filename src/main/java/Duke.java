@@ -33,25 +33,39 @@ public class Duke {
 	}
 	
 	private void interpretCommand(String command) {
-		if (command.equals("list"))
-			printFullList();
-		else if (command.matches("^done( .*)?"))
-			taskDone(command);
-		else if (command.matches("^todo( .*)?"))
-			addTodo(command);
-		else if (command.matches("^deadline( .*)?"))
-			addDeadline(command);
-		else if (command.matches("^event( .*)?"))
-			addEvent(command);
+		try {
+			if (command.equals("list"))
+				printFullList();
+			else if (command.matches("^done( .*)?"))
+				taskDone(command);
+			else if (command.matches("^todo( .*)?"))
+				addTodo(command);
+			else if (command.matches("^deadline( .*)?"))
+				addDeadline(command);
+			else if (command.matches("^event( .*)?"))
+				addEvent(command);
+			else
+				throw new UnknownCommandException();
+		} catch (UnknownCommandException | IllegalFormatException | TaskNotFoundException | EmptyListException e) {
+			printMessage(e.getMessage());
+		}
 	}
 	
 	/**
 	 * Marks the task with the same task number as specified by user as done.
 	 *
 	 * @param command command entered by user (done [task number])
+	 * @throws IllegalFormatException if user gives empty or invalid task number
+	 * @throws TaskNotFoundException  if the task specified by the task number does not exists
 	 */
-	private void taskDone(String command) {
+	private void taskDone(String command) throws IllegalFormatException, TaskNotFoundException {
+		// Throw exception if user gives empty or invalid task number
+		if (!command.matches("^done [0-9]+")) throw new IllegalFormatException("done [task number]");
+		
 		int taskNumber = Integer.parseInt(command.substring(5)) - 1;
+		
+		// Throw exception if taskNumber is invalid
+		if (taskNumber < 0 || taskNumber >= listTasks.size()) throw new TaskNotFoundException();
 		
 		// Mark the task as done
 		Task task = listTasks.get(taskNumber);
@@ -65,8 +79,12 @@ public class Duke {
 	 * Adds a new event to the list of tasks.
 	 *
 	 * @param command command entered by user (event [description] /at [time])
+	 * @throws IllegalFormatException if user inputs an invalid command
 	 */
-	private void addEvent(String command) {
+	private void addEvent(String command) throws IllegalFormatException {
+		// Throw exception if command does not follow format
+		if (!command.matches("^event .* /at .*")) throw new IllegalFormatException("event [description] /at [time]");
+		
 		// Add new event
 		String[] info = command.substring(6).split("/at");
 		Task newTask = new Event(info[0].trim(), info[1].trim());
@@ -77,8 +95,12 @@ public class Duke {
 	 * Adds a new deadline to the list of tasks.
 	 *
 	 * @param command command entered by user (deadline [description] /by [time])
+	 * @throws IllegalFormatException if user inputs an invalid command
 	 */
-	private void addDeadline(String command) {
+	private void addDeadline(String command) throws IllegalFormatException {
+		// Throw exception if command does not follow format
+		if (!command.matches("^deadline .* /by .*")) throw new IllegalFormatException("deadline [description] /by [time]");
+		
 		// Add new deadline
 		String[] info = command.substring(9).split("/by");
 		Task newTask = new Deadline(info[0].trim(), info[1].trim());
@@ -89,8 +111,12 @@ public class Duke {
 	 * Adds a new todo to the list of tasks.
 	 *
 	 * @param command command entered by user (todo [description])
+	 * @throws IllegalFormatException if user inputs an invalid command
 	 */
-	private void addTodo(String command) {
+	private void addTodo(String command) throws IllegalFormatException {
+		// Throw exception if command does not follow format
+		if (!command.matches("^todo .*")) throw new IllegalFormatException("todo [description]");
+		
 		// Add new todo
 		Task newTask = new Todo(command.substring(5).trim());
 		addTask(newTask);
@@ -113,12 +139,17 @@ public class Duke {
 	
 	/**
 	 * Prints all the tasks in the list.
+	 *
+	 * @throws EmptyListException if the list of tasks is empty
 	 */
-	private void printFullList() {
-		// Reformat the list of tasks
+	private void printFullList() throws EmptyListException {
+		// Throw exception if list is empty
+		if (listTasks.size() == 0) throw new EmptyListException();
+		
 		StringBuilder msg = new StringBuilder();
 		int size = listTasks.size();
 		
+		// Reformat the list of tasks into a string
 		for (int i = 0; i < size - 1; i++) msg.append(i + 1).append(". ").append(listTasks.get(i)).append("\n");
 		msg.append(size).append(". ").append(listTasks.get(size - 1));
 		
