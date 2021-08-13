@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         List list = new List();
         String command;
@@ -16,35 +16,76 @@ public class Duke {
                 System.out.println(line + list.returnItems() + line);
                 break;
             case "done":
-                int index = sc.nextInt();
-                System.out.println(line + "     Nice! I've marked this task as done:\n"
-                        + "       " + list.markDone(index) + "\n" + line);
-                break;
+                if (sc.hasNextInt()) {
+                    int index = sc.nextInt();
+                    System.out.println(line + "     Nice! I've marked this task as done:\n"
+                            + "       " + list.markDone(index) + "\n" + line);
+                    break;
+                } else {
+                    System.err.println(line + "     ☹ OOPS!!! The index of a task to be marked done must be specified."
+                            + line);
+                    break;
+                }
             case "todo":
-                command = sc.nextLine();
-                task = new Todo(command);
-                list.addItem(task);
-                System.out.println(line + "     Got it. I've added this task:\n"
-                        + "       " + task + "\n" + list.returnItemCount() + "\n" + line);
-                break;
+                try {
+                    command = sc.nextLine();
+                    task = new Todo(command);
+                    list.addItem(task);
+                    System.out.println(line + "     Got it. I've added this task:\n"
+                            + "       " + task + "\n" + list.returnItemCount() + "\n" + line);
+                } catch (DukeException e) {
+                    System.err.println(line + "     " + e + "\n" + line);
+                } finally {
+                    break;
+                }
             case "deadline":
-                command = sc.nextLine();
-                String[] deadlineEntry = command.split(" /by ");
-                task = new Deadline(deadlineEntry[0], deadlineEntry[1]);
-                list.addItem(task);
-                System.out.println(line + "     Got it. I've added this task:\n"
-                        + "       " + task + "\n" + list.returnItemCount() + "\n" + line);
-                break;
+                try {
+                    command = sc.nextLine();
+                    String[] deadlineEntry = command.split(" /by ");
+                    if (deadlineEntry.length != 2) {
+                        System.err.println(line
+                                + "     ☹ OOPS!!! Usage of deadline does not match 'description' /by 'deadline'\n"
+                                + line);
+                    } else {
+                        task = new Deadline(deadlineEntry[0], deadlineEntry[1]);
+                        list.addItem(task);
+                        System.out.println(line + "     Got it. I've added this task:\n"
+                                + "       " + task + "\n" + list.returnItemCount() + "\n" + line);
+                    }
+                } catch (DukeException e) {
+                    System.err.println(line + "     " + e + "\n" + line);
+                } finally {
+                    break;
+                }
             case "event":
-                command = sc.nextLine();
-                String[] eventEntry = command.split(" /at ");
-                task = new Event(eventEntry[0], eventEntry[1]);
-                list.addItem(task);
-                System.out.println(line + "     Got it. I've added this task:\n"
-                        + "       " + task + "\n" + list.returnItemCount() + "\n" + line);
+                try {
+                    command = sc.nextLine();
+                    String[] eventEntry = command.split(" /at ");
+                    if (eventEntry.length != 2) {
+                        System.err.println(line
+                                + "     ☹ OOPS!!! Usage of event does not match 'description' /at 'timeframe'\n"
+                                + line);
+                    } else {
+                        task = new Event(eventEntry[0], eventEntry[1]);
+                        list.addItem(task);
+                        System.out.println(line + "     Got it. I've added this task:\n"
+                                + "       " + task + "\n" + list.returnItemCount() + "\n" + line);
+                    }
+                } catch (DukeException e) {
+                    System.err.println(line + "     " + e + "\n" + line);
+                } finally {
+                    break;
+                }
+            default:
+                System.err.println(line + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                        + line);
                 break;
             }
-            command = sc.next();
+            if (sc.hasNext()) {
+                command = sc.next();
+            } else {
+                return;
+            }
         }
         System.out.println(line + "     Bye. Hope to see you again soon!\n" + line);
     }
