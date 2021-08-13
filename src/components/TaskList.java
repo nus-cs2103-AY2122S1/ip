@@ -24,16 +24,20 @@ public class TaskList {
         return this.taskList.size();
     }
 
-    public void markTaskDone(int index) {
+    public boolean markTaskDone(int index) {
         // index should be between 0 and n-1
-        this.taskList.get(index).markDone();
+        boolean changed = this.taskList.get(index).markDone();
+        return changed;
     }
 
     @Override
     public String toString() {
         String returnString = "";
         for (int i = 1; i < this.taskList.size() + 1; i++) {
-            String row = String.format("%d. %s \n", i, this.taskList.get(i-1).toString());
+            String row = String.format("%d. %s", i, this.taskList.get(i-1).toString());
+            if (i != this.taskList.size()) {
+                row += "\n";
+            }
             returnString += row;
         }
         return  returnString;

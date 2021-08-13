@@ -1,28 +1,31 @@
 package components;
 
 public class Task {
-    private String taskDescription;
-    private boolean done;
+    protected String taskDescription;
+    protected boolean done;
 
-    public Task(String taskDescription) {
+    protected Task(String taskDescription) {
         this.taskDescription = taskDescription;
         this.done = false;
     }
 
-    public void markDone() {
+    /*
+        Return true if the task done value actually changes.
+     */
+    public boolean markDone() {
+        if (this.done == true) {
+            return false;
+        }
         this.done = true;
-    }
-
-    public void markUnDone() {
-        this.done = false;
+        return true;
     }
 
     @Override
     public String toString() {
         if (this.done) {
-            return String.format("[X] %s", this.taskDescription);
+            return String.format("[ ] [X] %s", this.taskDescription);
         } else {
-            return String.format("[ ] %s", this.taskDescription);
+            return String.format("[ ] [ ] %s", this.taskDescription);
         }
     }
 }
