@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,10 +17,31 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         Scanner scanner = new Scanner(System.in);
+        List<String> tasks = new ArrayList<>();
+
         printOut(WELCOME_MESSAGE);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
-            printOut(input);
+            switch(input) {
+                case "list":
+                    int index = 1;
+                    String message = "";
+                    for (String task : tasks) {
+                        message += String.format("%d. %s\n", index, task);
+                        index++;
+                    }
+                    printOut(message.substring(0,message.length()-1));
+                    break;
+
+                case "done":
+                    // pass
+                    break;
+
+                default:
+                    printOut("added: " + input);
+                    tasks.add(input);
+                    break;
+            }
             input = scanner.nextLine();
         }
         printOut(BYE_MESSAGE);
