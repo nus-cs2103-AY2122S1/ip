@@ -3,39 +3,39 @@ package abyss;
 import java.util.Scanner;
 
 public class Abyss {
-    private static Task[] list = new Task[100];
+    private static Task[] tasks = new Task[100];
     private static int count = 0;
 
     public static void main(String[] args) {
         printLogo();
+        reply("Hello beautiful. Welcome to the Abyss.", "What can we do for you today?");
 
         Scanner sc = new Scanner(System.in);
-        reply("Hello beautiful. Welcome to the Abyss.", "What can we do for you today?");
         String cmd = sc.nextLine();
         while (!cmd.equalsIgnoreCase("exit")) {
             if (cmd.equalsIgnoreCase("list")) {
                 list();
-            } else if (cmd.matches("done \\d+")) {
+            } else if (cmd.matches("^done \\d+$")) {
                 String index = cmd.substring(5);
                 int i = Integer.parseInt(index);
                 if (i <= count) {
                     markAsDone(i);
-                } else {
-                    addToList(cmd);
                 }
-            } else if (!cmd.isBlank()) {
-                addToList(cmd);
+            } else if (cmd.matches("^todo [ -~]+$")) {
+                String description = cmd.substring(5);
+                addToDo(description);
+            } else if (cmd.matches("^deadline [ -~^\\/]+\\/by [ -~]+$")) {
+                String content = cmd.substring(9);
+                String[] parts = content.split("\\/by ", 2);
+                addDeadline(parts[0], parts[1]);
+            } else if (cmd.matches("^event [ -~^\\/]+\\/at [ -~]+$")) {
+                String content = cmd.substring(6);
+                String[] parts = content.split("\\/at ", 2);
+                addEvent(parts[0], parts[1]);
             }
             cmd = sc.nextLine();
         }
         reply("Exiting the Abyss. We anticipate your return.");
-    }
-
-    private static void addToList(String s) {
-        list[count] = new Task(s);
-        count++;
-        String reply = "added: " + s;
-        System.out.println(formatReply(reply));
     }
 
     private static void reply(String... s) {
@@ -43,14 +43,37 @@ public class Abyss {
     }
 
     private static void list() {
-        System.out.println(formatListReply(list));
+        System.out.println(formatListReply(tasks));
     }
 
     private static void markAsDone(int i) {
-        Task task = list[i - 1];
+        Task task = tasks[i - 1];
         task.markAsDone();
         String markedTask = "  " + task.toString();
-        System.out.println(formatReply("Task is swallowed by the Abyss.", markedTask));
+        reply("Task piece is lit up in the Abyss.", markedTask);
+    }
+
+    private static void addToDo(String description) {
+        Task newTask = new ToDo(description);
+        addTask(newTask);
+    }
+
+    private static void addDeadline(String description, String by) {
+        Task newTask = new Deadline(description, by);
+        addTask(newTask);
+    }
+
+    private static void addEvent(String description, String at) {
+        Task newTask = new Event(description, at);
+        addTask(newTask);
+    }
+
+    private static void addTask(Task task) {
+        tasks[count] = task;
+        count++;
+        String addedMsg = "Task piece is added to the Abyss.";
+        String tasksLeftMsg = "The Abyss now contains " + count + " task piece(s).";
+        reply(addedMsg, task.toString(), tasksLeftMsg);
     }
 
     private static String formatReply(String... s) {
@@ -65,17 +88,17 @@ public class Abyss {
         return reply;
     }
 
-    private static String formatListReply(Task[] list) {
+    private static String formatListReply(Task[] tasks) {
         String reply = "\t......................................................\n";
-        for (int i = 0; i < list.length; i++) {
-            Task task = list[i];
+        for (int i = 0; i < tasks.length; i++) {
+            Task task = tasks[i];
             if (task == null) {
                 break;
             }
             reply += "\t " + (i + 1) + "." + task.toString() + "\n";
         }
-        if (list[0] == null) {
-            reply += "\t Nothing added yet.\n";
+        if (tasks[0] == null) {
+            reply += "\t The Abyss is empty.\n";
         }
         reply += "\n\t......................................................";
         return reply;
