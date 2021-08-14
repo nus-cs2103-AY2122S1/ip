@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Duke {
     static List<Task> toDoList = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void runDuke() {
         String dottedLines = "----------------------------------------------------------------------------------------";
         System.out.println(dottedLines);
         System.out.println("Hello I'm LOTTERY-A");
@@ -16,10 +16,10 @@ public class Duke {
         Scanner keyboard = new Scanner(System.in);
 
         label:
-        while(keyboard.hasNext()) {
+        while (keyboard.hasNext()) {
             String userInput = keyboard.next();
             String userDescription = keyboard.nextLine();
-            if(!userDescription.isEmpty()) {
+            if (!userDescription.isEmpty()) {
                 userDescription = userDescription.substring(1);
             }
             try {
@@ -145,9 +145,14 @@ public class Duke {
                     default:
                         throw new DukeException("OOPS!!! I'm Sorry, but I don't know what that means");
                 }
-            } catch(DukeException e) {
+            } catch (DukeException e) {
                 System.out.print(e);
             }
+
         }
+    }
+
+    public static void main(String[] args) {
+        Duke.runDuke();
     }
 }
