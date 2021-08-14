@@ -1,0 +1,5 @@
+todo hello world
+deadline hello world /by time
+event hello world /at time
+done 2
+list

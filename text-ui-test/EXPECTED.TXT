@@ -1,7 +1,16 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Got it. I've added this task:
+[T][ ] hello world
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+[D][ ] hello world (by: time)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+[E][ ] hello world (at: time)
+Now you have 3 tasks in the list.
+Nice! I've marked this task as done:
+[D][X] hello world (by: time)
+1.[T][ ] hello world
+2.[D][ ] hello world (by: time)
+3.[E][ ] hello world (at: time)
+
 
