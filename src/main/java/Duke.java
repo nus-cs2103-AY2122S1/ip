@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+//note that automated testing script simply doesn't work
+//for some reason terminal is unable to detect FC even though i checked and even manually added
+//system32 to path. The window also disappears extremely fast, and a pause command does not prevent this
+
 public class Duke {
     private static Task[] store = new Task[100];
     private static int index = 0;
