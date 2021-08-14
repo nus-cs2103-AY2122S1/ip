@@ -11,25 +11,39 @@ public class Duke implements Runnable {
     private final String FAREWELL = "Bye. Hope to see you again soon!";
     private final String MSG_LISTS = "Here are the tasks in your list:";
     private final String MSG_TASK_COMPLETE = "Nice! I've marked this task as done:\n%s";
+    private final String MSG_TASK_ADDED ="Got it. I've added this task:";
+    private final String MSG_TASK_COUNT = "Now you have %d tasks in the list.";
     private final String ERR_OUT_OF_BOUNDS = "Please enter a number between 1 and %d!";
     private final String ERR_TASK_COMPLETE = "Task %s is already complete!";
+    private final String ERR_NOT_FOUND = "Sorry, I do not recognize that command.";
     private final String ERR_NO_TASKS = "No tasks available!";
+    private final String ERR_NO_TASK_NAME = "Please include a Task name. Usage: todo <name>";
     private final String ERR_INVALID_NUM = "Please provide a valid number! Usage: done <num>";
     private final String ERR_MAX_TASKS = "Sorry! You have reached maximum Task capacity.";
     private final int MAX_TASKS = 100;
     private final Map<String, Consumer<String>> commandsMap = Map.of(
         "list", (args) -> listTasks(),
-        "done", (args) -> completeTask(args)
+        "done", (args) -> completeTask(args),
+        "todo", (args) -> addTodo(args)
     );
     private List<Task> tasks = new ArrayList<>();
 
-    private void addTask(String str) {
+    private void addTodo(String args) {
         if (tasks.size() > MAX_TASKS) {
             printDuke(ERR_MAX_TASKS);
             return;
         }
-        tasks.add(new Task(str));
-        printDuke(String.format("added: %s", str));
+        if (args.equals("")) {
+            printDuke(ERR_NO_TASK_NAME);
+            return;
+        }
+        Task todo = new Todo(args);
+        tasks.add(todo);
+        printDuke(
+            MSG_TASK_ADDED + "\n"
+            + "   " + todo.toString() + "\n"
+            + String.format(MSG_TASK_COUNT, tasks.size())
+        );
     }
 
     private void listTasks() {
@@ -57,12 +71,15 @@ public class Duke implements Runnable {
             tasks.get(idx - 1).markComplete();
             printDuke(String.format(
                 MSG_TASK_COMPLETE,
-                String.format("   %s", tasks.get(idx - 1))
-            ));
+                String.format("   %s", tasks.get(idx - 1))));
         } catch (NumberFormatException e) {
             printDuke(ERR_INVALID_NUM);
             return;
         }
+    }
+
+    private void notFound() {
+        printDuke(ERR_NOT_FOUND);
     }
 
     private void printDuke(String str) {
@@ -74,7 +91,7 @@ public class Duke implements Runnable {
         String[] tmp =  input.split(" ", 2);
         String command = tmp[0];
         String args = tmp.length > 1 ? tmp[1] : "";
-        commandsMap.getOrDefault(command, (str) -> addTask(input)).accept(args);
+        commandsMap.getOrDefault(command, (str) -> notFound()).accept(args);
     }
 
     public void run() {
