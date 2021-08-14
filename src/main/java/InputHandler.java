@@ -1,119 +1,102 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class InputHandler {
     private Database db = new Database();
-    private HashMap<String, Function<String, Boolean>> cmds = new HashMap<>();
-    private String borders;
+    private HashMap<String, CheckedFunction<String, Record>> cmds = new HashMap<>();
 
-    public InputHandler(int borderLength) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < borderLength; i++) sb.append('_');
-        borders = sb.toString();
-
+    public InputHandler() {
+        cmds.put("greet", this::greet);
         cmds.put("bye", this::bye);
         cmds.put("list", this::list);
         cmds.put("done", this::done);
         cmds.put("todo", this::todo);
         cmds.put("deadline", this::deadline);
         cmds.put("event", this::event);
-        /*
-        cmds.put("add", x -> {
-            db.add(new Task(x));
-            System.out.println(formatReply(" added: " + x));
-            return false;
-        });
-         */
-        System.out.println(formatReply(" Hello! I'm Duke\n What can I do for you?"));
     }
 
-    public boolean query(String input) {
+    public Record query(String input) throws DukeException {
         Scanner sc = new Scanner(input);
         String cmd = sc.next();
-        String args = sc.hasNext() ? sc.nextLine().substring(1) : "";
-        boolean terminate = false;
-        if (cmds.containsKey(cmd)) {
-            terminate = cmds.get(cmd).apply(args);
-        } else {
-            // terminate = cmds.get("add").apply(input);
-            System.err.println("Enter a valid command.");
+        String raw = sc.hasNext() ? sc.nextLine().substring(1) : "";
+        if (cmds.containsKey(cmd)) return cmds.get(cmd).apply(raw);
+        else throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    public List<String> parse(String raw, String separator) {
+        List<String> tokens = new Scanner(raw).tokens().collect(Collectors.toList());
+        List<String> args = new ArrayList<>();
+        if (tokens.size() == 0) return args;
+        String curr = new String();
+        for (String in : tokens) {
+            if (in.equals(separator)) {
+                args.add(curr);
+                curr = new String();
+            } else curr += " " + in;
         }
-        return !terminate;
+        args.add(curr);
+        return args;
     }
 
-    private String formatReply(String input) {
-        return borders + "\n" + input + '\n' + borders;
+    public Record greet(String args) {
+        return new Record(" Hello! I'm Duke\n What can I do for you?");
     }
 
-    private boolean bye(String args) {
-        System.out.println(formatReply(" Bye. Hope to see you again soon!"));
-        return true;
+    private Record bye(String args) {
+        return new Record(" Bye. Hope to see you again soon!", true);
     }
 
-    private boolean list(String args) {
-        System.out.println(formatReply(" Here are the tasks in your list:\n" + db.toString()));
-        return false;
+    private Record list(String args) {
+        return new Record(" Here are the tasks in your list:\n" + db.toString());
     }
 
-    private boolean done(String args) {
+    private Record done(String args) throws DukeException {
         try {
             Task t = db.get(Integer.parseInt(args) - 1);
             t.markComplete();
-            System.out.println(formatReply(" Nice! I've marked this task as done:\n   " + t));
+            return new Record(" Nice! I've marked this task as done:\n   " + t);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            System.err.println(" Enter a valid index.");
+            throw new DukeException(" Enter a valid index.");
         }
-        return false;
     }
 
-    private boolean todo(String args) {
+    private Record todo(String args) throws DukeException {
+        if (args.length() == 0)
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         Task t = new Todo(args);
         db.add(t);
-        System.out.println(formatReply(" Got it. I've added this task:\n   " + t
-                + "\n Now you have " + db.size() + " tasks in the list."));
-        return false;
+        return new Record(" Got it. I've added this task:\n   " + t
+                + "\n Now you have " + db.size() + " tasks in the list.");
     }
 
-    private boolean deadline(String args) {
-        List<String> tokens = new Scanner(args).tokens().collect(Collectors.toList());
-        String curr = new String();
+    private Record deadline(String raw) throws DukeException {
+        List<String> args = parse(raw, "/by");
         Deadline t = new Deadline();
-        boolean descAdded = false;
-        for (String in : tokens) {
-            if (in.equals("/by")) {
-                descAdded = true;
-                t.addDesc(curr);
-                curr = new String();
-            } else curr += " " + in;
-        }
-        if (descAdded) t.addDeadline(curr);
-        else t.addDesc(curr);
+        if (args.size() == 0 || args.get(0).equals(new String()))
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        if (args.size() >= 1)
+            t.addDesc(args.get(0));
+        if (args.size() == 2)
+            t.addDeadline(args.get(1));
         db.add(t);
-        System.out.println(formatReply(" Got it. I've added this task:\n   " + t
-                + "\n Now you have " + db.size() + " tasks in the list."));
-        return false;
+        return new Record(" Got it. I've added this task:\n   " + t
+                + "\n Now you have " + db.size() + " tasks in the list.");
     }
 
-    private boolean event(String args) {
-        List<String> tokens = new Scanner(args).tokens().collect(Collectors.toList());
-        String curr = new String();
+    private Record event(String raw) throws DukeException {
+        List<String> args = parse(raw, "/at");
         Event t = new Event();
-        boolean descAdded = false;
-        for (String in : tokens) {
-            if (in.equals("/at")) {
-                descAdded = true;
-                t.addDesc(curr);
-                curr = new String();
-            } else curr += " " + in;
-        }
-        if (descAdded) t.addTime(curr);
-        else t.addDesc(curr);
+        if (args.size() == 0 || args.get(0).equals(new String()))
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        if (args.size() >= 1)
+            t.addDesc(args.get(0));
+        if (args.size() == 2)
+            t.addTime(args.get(1));
         db.add(t);
-        System.out.println(formatReply(" Got it. I've added this task:\n   " + t
-                + "\n Now you have " + db.size() + " tasks in the list."));
-        return false;
+        return new Record(" Got it. I've added this task:\n   " + t
+                + "\n Now you have " + db.size() + " tasks in the list.");
     }
 }

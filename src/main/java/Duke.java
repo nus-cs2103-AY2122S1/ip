@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
 public class Duke {
+    private final static String BORDERS = "____________________________________________________________";
+    private static String formatReply(String input) {
+        return BORDERS + "\n" + input + '\n' + BORDERS;
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -11,11 +16,18 @@ public class Duke {
 
         /* Initialization */
         Scanner sc = new Scanner(System.in);
-        InputHandler inputH = new InputHandler(60);
+        InputHandler inputH = new InputHandler();
+        System.out.println(formatReply(inputH.greet("").msg()));
         String input;
         while (true) {
-            input = sc.nextLine();
-            if (!inputH.query(input)) break;
+            try {
+                input = sc.nextLine();
+                Record r = inputH.query(input);
+                System.out.println(formatReply(r.msg()));
+                if (r.bye()) break;
+            } catch (DukeException e) {
+                System.err.println(formatReply(e.getMessage()));
+            }
         }
 
     }
