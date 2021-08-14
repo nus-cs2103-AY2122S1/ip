@@ -6,21 +6,21 @@ import java.util.Scanner;
 /**
  * The class for the Duke bot
  */
-public class Duke {
+public class Petal {
 
     //True if user has said bye, false if otherwise
     private boolean bye;
     //The protected constant for displaying the lines between messages
     protected static final String indentation = "---------------------------------------"
-                                              + "-------------------------------------"
-                                              + "-------------------------------------";
+                                                + "-------------------------------------"
+                                                + "-------------------------------------";
     //The list which stores the user's message
-    private final List<Task> history;
+    private List<Task> history;
 
     /**
      * Constructor for the Duke class
      */
-    public Duke() {
+    public Petal() {
         bye = false;
         history = new ArrayList<>();
         startMessage();
@@ -146,11 +146,11 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke bot = new Duke();
+        Petal petal = new Petal();
         Scanner scanner = new Scanner(System.in);
-        while(!bot.isBye()) {
+        while(!petal.isBye()) {
             String message = scanner.nextLine();
-            bot.formatMessage(message);
+            petal.formatMessage(message);
         }
         scanner.close();
     }

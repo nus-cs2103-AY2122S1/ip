@@ -13,10 +13,10 @@ public class Task {
     }
 
     public void taskDone() {
-        System.out.println(Duke.indentation + "\nYou have completed the task: " + "'"
-                                            + this.description + "'!"
-                                            + "\nI am so happy for you!\n"
-                                             + Duke.indentation);
+        System.out.println(Petal.indentation + "\nYou have completed the task: " + "'"
+                                             + this.description + "'!"
+                                             + "\nI am so happy for you!\n"
+                                             + Petal.indentation);
         this.isDone = true;
     }
 
