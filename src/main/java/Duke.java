@@ -15,9 +15,8 @@ public class Duke {
 
     private boolean running = true;
     private String instruction;
-    private Task[] toDo = new Task[100];
     private ArrayList<Task> improvedList= new ArrayList<Task>();
-    private int counter = 0;
+    private enum Commands {list, done, todo, event, deadline, delete };
 
     void setInstruction() {
         instruction = userInput.nextLine();
@@ -35,85 +34,72 @@ public class Duke {
         return false;
     }
 
-    void parse() throws NoDescriptionError, UnknownCommandError {
+    void parse() throws NoDescriptionError, UnknownCommandError{
         printLineBreak();
         String[] strings = instruction.split(" ", 2);
         String operative = strings[0];
-
-        if(operative.equalsIgnoreCase("list")) {
-            printArrayList();
-        } else if (operative.equalsIgnoreCase("done")) {
-            try {
-                String item = strings[1];
-                int taskPointer = Integer.parseInt(item) - 1;
-                improvedList.get(taskPointer).markAsDone();
-                completeTaskMessage(improvedList.get(taskPointer));
-            } catch (IndexOutOfBoundsException e) {
-                throw new NoDescriptionError(operative);
-            }
-        } else if (operative.equalsIgnoreCase("delete")) {
-            try {
-                String item = strings[1];
-                int taskPointer = Integer.parseInt(item) - 1;
-                Task deleted = improvedList.remove(taskPointer);
-                deleteTaskMessage(deleted.toString());
-            } catch (IndexOutOfBoundsException e) {
-                throw new NoDescriptionError(operative);
-            }
-        }else if (operative.equalsIgnoreCase("todo")){
-            try {
-                String item = strings[1];
-                Task toAdd = new Todo(item);
-                improvedList.add(toAdd);
-                addedTaskMessage(toAdd.toString());
-            } catch (IndexOutOfBoundsException e) {
-                throw new NoDescriptionError(operative);
-            }
-        }else if (operative.equalsIgnoreCase("event")){
-            try {
-                String item = strings[1];
-                String[] temp = item.split("/at ");
-                String date = temp[1];
-                String description = temp[0];
-                Task toAdd = new Event(description, date);
-                improvedList.add(toAdd);
-                addedTaskMessage(toAdd.toString());
-            } catch (IndexOutOfBoundsException e) {
-                throw new NoDescriptionError(operative);
-            }
-        }else if (operative.equalsIgnoreCase("deadline")){
-            try {
-                String item = strings[1];
-                String[] temp = item.split("/by ");
-                String date = temp[1];
-                String description = temp[0];
-                Task toAdd = new Deadline(description, date);
-                improvedList.add(toAdd);
-                addedTaskMessage(toAdd.toString());
-                counter++;
-            } catch (IndexOutOfBoundsException e) {
-                throw new NoDescriptionError(operative);
-            }
-        } else {
+        Commands command;
+        String[] temp;
+        String item, date, description;
+        Task toAdd;
+        int taskPointer;
+        try {
+            command = Commands.valueOf(operative);
+        } catch (IllegalArgumentException e) {
             throw new UnknownCommandError();
         }
 
+        if(strings.length == 1 && !operative.equalsIgnoreCase("list")) {
+            throw new NoDescriptionError(operative);
+        }
+
+            switch (command) {
+                case list:
+                    printArrayList();
+                    break;
+                case done:
+                    item = strings[1];
+                    taskPointer = Integer.parseInt(item) - 1;
+                    improvedList.get(taskPointer).markAsDone();
+                    completeTaskMessage(improvedList.get(taskPointer));
+                    break;
+                case todo:
+                    item = strings[1];
+                    toAdd = new Todo(item);
+                    improvedList.add(toAdd);
+                    addedTaskMessage(toAdd.toString());
+                    break;
+                case event:
+                    item = strings[1];
+                    temp = item.split("/at ");
+                    date = temp[1];
+                    description = temp[0];
+                    toAdd = new Event(description, date);
+                    improvedList.add(toAdd);
+                    addedTaskMessage(toAdd.toString());
+                    break;
+                case delete:
+                    item = strings[1];
+                    taskPointer = Integer.parseInt(item) - 1;
+                    Task deleted = improvedList.remove(taskPointer);
+                    deleteTaskMessage(deleted.toString());
+                    break;
+                case deadline:
+                    item = strings[1];
+                    temp = item.split("/by ");
+                    date = temp[1];
+                    description = temp[0];
+                    toAdd = new Deadline(description, date);
+                    improvedList.add(toAdd);
+                    addedTaskMessage(toAdd.toString());
+                    break;
+        }
     }
+
+
 
     void printLineBreak () {
         System.out.println(linebreaker);
-    }
-
-    void printList() {
-        System.out.println(listMessage);
-        for(int x = 0; x < 99;x++) {
-            if(toDo[x] == null){
-                break;
-            }
-            String temp = String.valueOf(x + 1);
-            System.out.println(temp + "." + toDo[x].toString());
-        }
-        printLineBreak();
     }
 
     void printArrayList () {
@@ -168,7 +154,7 @@ public class Duke {
             }
             try {
                 weekTwo.parse();
-            } catch (Exception e) {
+            } catch (DukeException e) {
                 System.out.println(e.toString());
                 weekTwo.printLineBreak();
             }
