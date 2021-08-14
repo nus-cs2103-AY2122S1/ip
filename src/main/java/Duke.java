@@ -14,7 +14,7 @@ public class Duke {
         InputHandler inputH = new InputHandler(60);
         String input;
         while (true) {
-            input = sc.next();
+            input = sc.nextLine();
             if (!inputH.query(input)) break;
         }
 
