@@ -5,7 +5,7 @@ public class PetalException extends Exception {
      * @param message The message
      */
     public PetalException(String message) {
-        super(Petal.indentation + "\n" + message);
+        super(message);
     }
 
 }
