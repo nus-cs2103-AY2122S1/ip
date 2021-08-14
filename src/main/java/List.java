@@ -7,14 +7,19 @@ public class List {
         tasks = new Task[max];
     }
 
-    public void addToList(String newTask) {
-        tasks[index] = new Task(newTask);
+    public String addToList(Task newTask) {
+        tasks[index] = newTask;
         index++;
+        return newTask.toString();
     }
 
     public String taskDone(int id) {
         tasks[id - 1].markAsDone();
         return tasks[id - 1].toString();
+    }
+
+    public int taskCount() {
+        return index;
     }
 
     public String getList() {
@@ -29,5 +34,4 @@ public class List {
         }
         return result;
     }
-
 }
