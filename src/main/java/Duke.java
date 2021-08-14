@@ -17,7 +17,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         Scanner scanner = new Scanner(System.in);
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         printOut(WELCOME_MESSAGE);
         String input = scanner.nextLine();
@@ -26,14 +26,14 @@ public class Duke {
                 case "list":
                     int index = 1;
                     String message = "";
-                    for (String task : tasks) {
+                    for (Task task : tasks) {
                         message += String.format("%d. %s\n", index, task);
                         index++;
                     }
                     printOut(message.substring(0,message.length()-1));
                     break;
                 default:
-                    tasks.add(input);
+                    tasks.add(new Task(input));
                     printOut(String.format("added: %s", input));
                     break;
             }
