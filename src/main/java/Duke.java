@@ -5,17 +5,15 @@ public class Duke {
     private static ArrayList<Task> taskList;
 
     public static void main(String[] args) {
-        /* // in case we might need the logo later
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-         */
         // greet the user
-        String greeting = "\t Hello! I'm Duke\n" +
-                "\t What can I do for you?\n" ;
+        String greeting = "     Hello! I'm Duke\n" +
+                "     What can I do for you?\n" ;
         System.out.println(reply(greeting));
         taskList = new ArrayList<>();
         // listen to user input
@@ -34,22 +32,22 @@ public class Duke {
             command = scan.nextLine();
         }
         // farewell the user
-        String bye = "\t Bye. Hope to see you again soon!\n";
+        String bye = "     Bye. Hope to see you again soon!\n";
         System.out.println(reply(bye));
     }
 
     private static String reply(String content) {
         // wrap the reply in a divider
-        String divider = "\t____________________________________________________________";
+        String divider = "    ____________________________________________________________";
         return divider + "\n" + content + divider;
     }
 
     private static String list() {
         // list out all tasks
         int count = 1;
-        StringBuilder reply = new StringBuilder();
+        StringBuilder reply = new StringBuilder("     Here are the tasks in your list:\n");
         for (Task task : taskList) {
-            reply.append(String.format("\t %d.%s\n", count, task));
+            reply.append(String.format("     %d.%s\n", count, task));
             count++;
         }
         return reply.toString();
@@ -61,8 +59,8 @@ public class Duke {
         // mark task as done
         t.markAsDone();
         // reply
-        return String.format("\t Nice! I've marked this task as done: \n" +
-                "\t   %s\n", t);
+        return String.format("     Nice! I've marked this task as done: \n" +
+                "       %s\n", t);
     }
 
     private static String add(String input, String type) {
@@ -71,21 +69,21 @@ public class Duke {
         // add task to the taskList
         switch (type) {
             case "todo" :
-                taskList.add(t = new Todo(input.substring(4)));
+                taskList.add(t = new Todo(input.substring(5)));
                 break;
             case "deadline" :
-                taskList.add(t = new Deadline(input.substring(8, delimiter), input.substring(delimiter+4)));
+                taskList.add(t = new Deadline(input.substring(9, delimiter-1), input.substring(delimiter+4)));
                 break;
             case "event" :
-                taskList.add(t = new Event(input.substring(5, delimiter), input.substring(delimiter+4)));
+                taskList.add(t = new Event(input.substring(6, delimiter-1), input.substring(delimiter+4)));
                 break;
             default :
                 t = new Task(input);
         }
         // reply
-        return "\t Got it. I've added this task: \n" +
-                String.format("\t   %s\n", t) +
-                String.format("\t Now you have %d tasks in the list.\n", taskList.size());
+        return "     Got it. I've added this task: \n" +
+                String.format("       %s\n", t) +
+                String.format("     Now you have %d tasks in the list.\n", taskList.size());
     }
 }
 
