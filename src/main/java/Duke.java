@@ -25,6 +25,9 @@ public class Duke {
             } else if (command.startsWith("done ")) {
                 int index = Integer.parseInt(command.split(" ")[1]) - 1;
                 System.out.println(reply(done(index)));
+            } else if (command.startsWith("delete ")) {
+                int index = Integer.parseInt(command.split(" ")[1]) - 1;
+                System.out.println(reply(delete(index)));
             } else { // add the task
                 try {
                     System.out.println(reply(add(command)));
@@ -67,11 +70,12 @@ public class Duke {
     }
 
     private static String add(String input) throws InvalidCommandException {
+        // String manipulations
         String[] check = input.split(" ");
         String type = check[0];
-        Task t;
-        // add task to the taskList
         String[] split = input.split(" /");
+        // add task to the taskList based on its type
+        Task t;
         switch (type) {
             case "todo" :
                 if (check.length == 1) throw new EmptyDescriptionError("todo");
@@ -86,12 +90,22 @@ public class Duke {
                 taskList.add(t = new Event(split[0].substring(6), split[1].substring(3)));
                 break;
             default :
-                t = new Task(input); // for tasks other than todo, deadline, event
+                t = new Task(input); // for tasks other than todo, deadline, event in future
                 throw new UnknownCommandError("");
-
         }
         // reply
         return "     Got it. I've added this task: \n" +
+                String.format("       %s\n", t) +
+                String.format("     Now you have %d tasks in the list.\n", taskList.size());
+    }
+
+    private static String delete(int index) {
+        // retrieve the task
+        Task t = taskList.get(index);
+        // remove the task
+        taskList.remove(index);
+        // reply
+        return "     Noted. I've removed this task: \n" +
                 String.format("       %s\n", t) +
                 String.format("     Now you have %d tasks in the list.\n", taskList.size());
     }
