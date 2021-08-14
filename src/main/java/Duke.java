@@ -1,10 +1,37 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Task[] store = new Task[100];
-        int index = 0;
+    private static Task[] store = new Task[100];
+    private static int index = 0;
 
+    //subroutine for adding tasks to the array of tasks
+    public static void addTask(String descriptor) {
+        if (descriptor.startsWith("todo")) {
+            descriptor = descriptor.replaceFirst("todo ", "");
+            store[index] = new Todo(descriptor);
+        } else if (descriptor.startsWith("deadline")) {
+            descriptor = descriptor.replaceFirst("deadline ", "");
+            descriptor = descriptor.replaceFirst("/by ", "(by: ");
+            descriptor = descriptor + ")";
+            store[index] = new Deadline(descriptor);
+        } else if (descriptor.startsWith("event")) {
+            descriptor = descriptor.replaceFirst("event ", "");
+            descriptor = descriptor.replaceFirst("/at ", "(at: ");
+            descriptor = descriptor + ")";
+            store[index] = new Event(descriptor);
+        } else {
+            //if necessary, future error handling goes here.
+            //current assumption is no input errors.
+            System.out.println("ADD ERROR");
+        }
+
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + store[index]);
+        System.out.println("Now you have " + (index + 1) + " tasks in the list.");
+        index++;
+    }
+
+    public static void main(String[] args) {
         System.out.println(
                 "░▄░█░░░▄▀▀▀▀▀▄░░░█░▄░\n" +
                 "▄▄▀▄░░░█─▀─▀─█░░░▄▀▄▄\n" +
@@ -26,7 +53,11 @@ public class Duke {
                 store[Integer.parseInt(temp[1]) - 1].setFlag(true);
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println("  " + store[Integer.parseInt(temp[1]) - 1]);
+            } else if (in.startsWith("todo") || in.startsWith("deadline") || in.startsWith("event")) {
+                addTask(in);
             } else {
+                //possibly useless from task 4 onwards. For default tasks
+                //left here for now. Possibly remove in future levels.
                 System.out.println("added: " + in);
                 store[index] = new Task(in);
                 index++;
