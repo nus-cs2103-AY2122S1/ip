@@ -3,7 +3,6 @@
  * that needs to be done before a specific date/time.
  *
  * @author Yeo Jun Wei
- * @version Level-4
  */
 public class Deadline extends Task {
 

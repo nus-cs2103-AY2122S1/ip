@@ -3,7 +3,6 @@
  * that starts at a specific time and ends at a specific time.
  *
  * @author Yeo Jun Wei
- * @version Level-4
  */
 public class Event extends Task {
 

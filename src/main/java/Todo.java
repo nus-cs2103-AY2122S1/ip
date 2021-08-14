@@ -3,7 +3,6 @@
  * without any date or time attached to it.
  *
  * @author Yeo Jun Wei
- * @version Level-4
  */
 public class Todo extends Task {
 

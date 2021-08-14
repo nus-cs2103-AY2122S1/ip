@@ -6,9 +6,9 @@ import java.util.Scanner;
  * helping a person to keep track of various things.
  *
  * @author Yeo Jun Wei
- * @version Level-4
  */
 public class Duke {
+
     /** Horizontal line for formatting */
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
 
@@ -51,29 +51,53 @@ public class Duke {
      * Displays the formatted user-entered task to the user,
      * and adds the task to tasksList.
      *
-     * @param taskDescription Task entered by the user.
-     * @param taskType The type of the task.
+     * @param taskCommand Command entered by the user to add a task.
+     * @throws EmptyTaskDescriptionException If task description is empty.
+     * @throws TimeNotSpecifiedException If the date/time is not specified.
      */
-    private static void addTask(String taskDescription, String taskType) {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("Got it. I've added this task:");
+    private static void addTask(String taskCommand) throws EmptyTaskDescriptionException, TimeNotSpecifiedException {
+        String[] wordsArr = taskCommand.split(" ");
+        String taskType = wordsArr[0];
+
+        int indexOfSpaceChar = taskCommand.indexOf(" ");
+        if (indexOfSpaceChar == -1) {
+            throw new EmptyTaskDescriptionException(taskType);
+        }
+        String taskDescription = taskCommand.substring(indexOfSpaceChar + 1);
+        if (taskDescription.trim().isEmpty()) {
+            throw new EmptyTaskDescriptionException(taskType);
+        }
 
         Task taskToBeAdded;
         if (taskType.equals("todo")) {
             taskToBeAdded = new Todo(taskDescription);
         } else if (taskType.equals("deadline")) {
-            String[] wordsArr = taskDescription.split(" /by ");
-            String task = wordsArr[0];
-            String deadline = wordsArr[1];
+            if (!taskDescription.contains(" /by ")) {
+                throw new TimeNotSpecifiedException(" /by ");
+            }
+            String[] descriptionArr = taskDescription.split(" /by ");
+            String task = descriptionArr[0];
+            String deadline = descriptionArr[1];
+            if (deadline.trim().isEmpty()) {
+                throw new TimeNotSpecifiedException(" /by ");
+            }
             taskToBeAdded = new Deadline(task, deadline);
         } else {
-            String[] wordsArr = taskDescription.split(" /at ");
-            String task = wordsArr[0];
-            String timeFrame = wordsArr[1];
+            if (!taskDescription.contains(" /at ")) {
+                throw new TimeNotSpecifiedException(" /at ");
+            }
+            String[] descriptionArr = taskDescription.split(" /at ");
+            String task = descriptionArr[0];
+            String timeFrame = descriptionArr[1];
+            if (timeFrame.trim().isEmpty()) {
+                throw new TimeNotSpecifiedException(" /at ");
+            }
             taskToBeAdded = new Event(task, timeFrame);
         }
         tasksList.add(taskToBeAdded);
 
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("Got it. I've added this task:");
         System.out.println("  " + taskToBeAdded);
         if (tasksList.size() == 1) {
             System.out.println("Now you have " + tasksList.size() + " task in the list.");
@@ -99,10 +123,18 @@ public class Duke {
      * Marks the specified task as done.
      *
      * @param taskId The id of the task to be marked as done.
+     * @throws TaskIndexOutOfBoundsException If the task index is out of bounds.
+     * @throws TaskAlreadyDoneException If the task has previously been marked as done.
      */
-    private static void markAsDone(String taskId) {
+    private static void markAsDone(String taskId) throws TaskIndexOutOfBoundsException, TaskAlreadyDoneException {
         int taskPositionInList = Integer.valueOf(taskId) - 1;
+        if (taskPositionInList < 0 || (taskPositionInList + 1) > tasksList.size()) {
+            throw new TaskIndexOutOfBoundsException();
+        }
         Task specifiedTask = tasksList.get(taskPositionInList);
+        if (specifiedTask.getStatusIcon().equals("X")) {
+            throw new TaskAlreadyDoneException();
+        }
         specifiedTask.markAsDone();
 
         System.out.println(HORIZONTAL_LINE);
@@ -116,6 +148,7 @@ public class Duke {
     private static void listenToCommands() {
         String command = scanner.nextLine();
         if (command.equals("bye")) {
+            scanner.close();
             exit();
         } else {
             if (command.equals("list")) {
@@ -123,12 +156,19 @@ public class Duke {
             } else {
                 // Splits the string on spaces, and acts accordingly based on the first word
                 String[] wordsArr = command.split(" ");
-                if (wordsArr[0].equals("done")) {
-                    markAsDone(wordsArr[1]);
-                } else {
-                    String taskType = wordsArr[0];
-                    String taskDescription = command.substring(command.indexOf(" ") + 1);
-                    addTask(taskDescription, taskType);
+                try {
+                    if (wordsArr.length == 0) {
+                        throw new UnrecognisedCommandException();
+                    } else if (wordsArr[0].equals("done")) {
+                        markAsDone(wordsArr[1]);
+                    } else if (wordsArr[0].equals("todo") || wordsArr[0].equals("event")
+                            || wordsArr[0].equals("deadline")) {
+                        addTask(command);
+                    } else {
+                        throw new UnrecognisedCommandException();
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
                 }
             }
             listenToCommands();
