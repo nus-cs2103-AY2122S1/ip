@@ -26,6 +26,7 @@ public class DukeChatbot {
     private static final String EXIT_COMMAND = "bye";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String READ_COMMAND_ERROR_MESSAGE = "An unexpected error has occurred.";
+    private static final String LIST_TASKS_COMMAND = "list";
 
     private List<Task> tasks;
 
@@ -60,6 +61,9 @@ public class DukeChatbot {
             case EXIT_COMMAND:
                 printExitMessage();
                 break;
+            case LIST_TASKS_COMMAND:
+                printTasks();
+                break;
             default:
                 addTask(command);
                 break;
@@ -71,6 +75,15 @@ public class DukeChatbot {
         Task task = new Task(taskDescription);
         tasks.add(task);
         printFormattedMessage(String.format("added: %s", task));
+    }
+
+    private void printTasks() {
+        StringBuilder sb = new StringBuilder();
+        int n = tasks.size();
+        for (int i = 0; i < n; i++) {
+            sb.append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
+        }
+        printFormattedMessage(sb.toString());
     }
 
     private void printExitMessage() {
