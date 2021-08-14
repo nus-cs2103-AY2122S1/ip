@@ -6,7 +6,7 @@ import java.util.Scanner;
  * helping a person to keep track of various things.
  *
  * @author Yeo Jun Wei
- * @version Level-3
+ * @version Level-4
  */
 public class Duke {
     /** Horizontal line for formatting */
@@ -48,15 +48,36 @@ public class Duke {
      * Displays the formatted user-entered task to the user,
      * and adds the task to tasksList.
      *
-     * @param task Task entered by the user.
+     * @param taskDescription Task entered by the user.
+     * @param taskType The type of the task.
      */
-    private static void addTask(String task) {
+    private static void addTask(String taskDescription, String taskType) {
         System.out.println(HORIZONTAL_LINE);
-        System.out.println("added: " + task);
-        System.out.println(HORIZONTAL_LINE + "\n");
+        System.out.println("Got it. I've added this task:");
 
-        Task taskToBeAdded = new Task(task);
+        Task taskToBeAdded;
+        if (taskType.equals("todo")) {
+            taskToBeAdded = new Todo(taskDescription);
+        } else if (taskType.equals("deadline")) {
+            String[] wordsArr = taskDescription.split(" /by ");
+            String task = wordsArr[0];
+            String deadline = wordsArr[1];
+            taskToBeAdded = new Deadline(task, deadline);
+        } else {
+            String[] wordsArr = taskDescription.split(" /at ");
+            String task = wordsArr[0];
+            String timeFrame = wordsArr[1];
+            taskToBeAdded = new Event(task, timeFrame);
+        }
         tasksList.add(taskToBeAdded);
+
+        System.out.println("  " + taskToBeAdded);
+        if (tasksList.size() == 1) {
+            System.out.println("Now you have " + tasksList.size() + " task in the list.");
+        } else {
+            System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
+        }
+        System.out.println(HORIZONTAL_LINE + "\n");
     }
 
     /**
@@ -103,7 +124,9 @@ public class Duke {
                 if (wordsArr[0].equals("done")) {
                     markAsDone(wordsArr[1]);
                 } else {
-                    addTask(command);
+                    String taskType = wordsArr[0];
+                    String taskDescription = command.substring(command.indexOf(" ") + 1);
+                    addTask(taskDescription, taskType);
                 }
             }
             listenToCommands();

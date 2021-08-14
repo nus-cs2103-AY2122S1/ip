@@ -2,7 +2,7 @@
  * This Task class implements the characteristics of a task.
  *
  * @author Yeo Jun Wei
- * @version Level-3
+ * @version Level-4
  */
 public class Task {
     /** The description of the task */
