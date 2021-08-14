@@ -25,8 +25,11 @@ public class TaskList {
         return taskToDelete;
     }
 
-    public Task completeTask(int index) {
+    public Task completeTask(int index) throws LifelineException {
         Task taskToMarkAsComplete = taskList.get(index);
+        if (taskToMarkAsComplete.isDone()) {
+            throw new LifelineException("Task is already done!");
+        }
         taskToMarkAsComplete.setDone(true);
         return taskToMarkAsComplete;
     }

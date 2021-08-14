@@ -9,12 +9,13 @@ import java.util.Scanner;
 public class Lifeline {
     private Scanner sc;
     private TaskList taskList;
-    private String command;
     private Storage storage;
+    private Ui ui;
 
     Lifeline(String filepath) {
         this.sc = new Scanner(System.in);
         this.storage = new Storage(filepath);
+        this.ui = new Ui();
         try {
             this.taskList = storage.load();
         } catch (LifelineException e) {
@@ -22,24 +23,11 @@ public class Lifeline {
         }
     }
 
-    private void greet() {
-        String lifeline = " _      _____ ______ ______ _      _____ _   _ ______\n"
-                + "| |    |_   _|  ____|  ____| |    |_   _| \\ | |  ____|\n"
-                + "| |      | | | |__  | |__  | |      | | |  \\| | |__\n"
-                + "| |      | | |  __| |  __| | |      | | | . ` |  __|\n"
-                + "| |____ _| |_| |    | |____| |____ _| |_| |\\  | |____\n"
-                + "|______|_____|_|    |______|______|_____|_| \\_|______|\n";
-        System.out.println("Hello! I am\n" + lifeline);
-        printList();
-        System.out.println("What can I help you with today?\n");
-    }
-
-
     private void getInput() {
         boolean exit = false;
         while (!exit) {
             try {
-                this.command = sc.nextLine().trim();
+                String command = ui.readCommand();
                 if (command.equals("")) {
                     continue;
                 }
@@ -47,7 +35,7 @@ public class Lifeline {
                 System.out.println();
                 switch (getInputType(inputs[0])) {
                 case LIST:
-                    printList();
+                    ui.showTaskList(taskList);
                     break;
                 case BYE:
                     exit = true;
@@ -73,15 +61,14 @@ public class Lifeline {
                     createTask(inputs[0].trim(), inputs[1].trim());
                     break;
                 default:
-                    echo(inputs[0]);
+                    ui.echo(inputs[0]);
                     break;
                 }
             } catch (LifelineException e) {
-                System.out.println(e.getMessage());
-                System.out.println();
+                ui.showError(e.getMessage());
             }
         }
-        exit();
+        ui.exit();
     }
 
     private InputType getInputType(String input) throws LifelineException {
@@ -144,35 +131,15 @@ public class Lifeline {
             }
             break;
         default:
-            echo(command);
+            ui.echo(task);
             break;
         }
         storage.save(taskList);
     }
 
-    private void printList() {
-        if (taskList.size() == 0) {
-            System.out.println("You have no remaining tasks.\n");
-        } else {
-            int uncompletedTask = 0;
-            System.out.println("Here " + (taskList.size() > 1 ? "are" : "is")
-                    + " your " + (taskList.size() > 1 ? "tasks:" : "task:"));
-            for (int i = 0; i < taskList.size(); i++) {
-                Task currTask = taskList.get(i);
-                System.out.println((i + 1) + ". " + currTask);
-                if (!currTask.isDone()) {
-                    uncompletedTask++;
-                }
-            }
-            System.out.println("You have " + uncompletedTask + " uncompleted " + (uncompletedTask > 1 ? "tasks"
-                    : "task") + ".\n");
-        }
-    }
-
     private void addToList(Task task) {
         taskList.add(task);
-        System.out.println("I have added this task for you:");
-        System.out.println(task + "\n");
+        ui.showAddedTask(task);
     }
 
     private void markAsDone(String index) throws LifelineException {
@@ -181,14 +148,7 @@ public class Lifeline {
             if (taskIndex < 0 || taskIndex >= taskList.size()) {
                 throw new LifelineException("Index is out of bounds!");
             }
-            Task taskToBeCompleted = taskList.get(taskIndex);
-            if (taskToBeCompleted.isDone()) {
-                System.out.println("The task is already done!");
-            } else {
-                taskToBeCompleted.setDone(true);
-                System.out.println("You have completed the " + taskToBeCompleted.getClass().getName() + ":\n"
-                        + taskToBeCompleted.getName() + "\n");
-            }
+            taskList.completeTask(taskIndex);
         } catch (NumberFormatException e) {
             throw new LifelineException("Index is not an integer! Please use done <number>");
         }
@@ -202,24 +162,16 @@ public class Lifeline {
             }
             Task taskToDelete = taskList.get(taskIndex);
             taskList.deleteTask(taskIndex);
-            System.out.println("I have removed the task:\n" + taskToDelete + "\n");
-            printList();
+            ui.showDeletedTask(taskToDelete);
+            ui.showTaskList(taskList);
             storage.save(taskList);
         } catch (NumberFormatException e) {
             throw new LifelineException("Index is not an integer!");
         }
     }
 
-    private void echo(String input) {
-        System.out.println("You have said \"" + input + "\"\n");
-    }
-
-    private void exit() {
-        System.out.println("Goodbye! Thanks for chatting with me!\n");
-    }
-
     public void start() {
-        this.greet();
+        ui.greet(taskList);
         this.getInput();
     }
 }

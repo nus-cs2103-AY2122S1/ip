@@ -43,6 +43,11 @@ public class Ui {
         System.out.println(task + "\n");
     }
 
+    public void showCompletedTask(Task task) {
+        System.out.println("You have completed the " + task.getClass().getName() + ":\n"
+                + task.getName() + "\n");
+    }
+
     public void showError(String errorMessage) {
         System.out.println(errorMessage + "\n");
     }
@@ -57,5 +62,13 @@ public class Ui {
         System.out.println("Hello! I am\n" + lifeline);
         showTaskList(taskList);
         System.out.println("What can I help you with today?\n");
+    }
+
+    public void exit() {
+        System.out.println("Goodbye! Thanks for chatting with me!\n");
+    }
+
+    public void echo(String input) {
+        System.out.println("You have said \"" + input + "\"\n");
     }
 }
