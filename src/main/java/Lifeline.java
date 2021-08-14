@@ -1,6 +1,3 @@
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -9,25 +6,19 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 public class Lifeline {
     private Scanner sc;
-    private ArrayList<Task> taskList;
+    private TaskList taskList;
     private String command;
-    private Gson gson;
+    private Storage storage;
 
-    Lifeline() {
-        this.taskList = new ArrayList<>();
+    Lifeline(String filepath) {
         this.sc = new Scanner(System.in);
-        this.gson = new Gson();
+        this.storage = new Storage(filepath);
         try {
-            this.taskList = this.load("./save/tasks.json");
+            this.taskList = storage.load();
         } catch (LifelineException e) {
-            this.taskList = new ArrayList<>();
+            this.taskList = new TaskList(new ArrayList<>());
         }
     }
 
@@ -93,44 +84,6 @@ public class Lifeline {
         exit();
     }
 
-    private void save(ArrayList<Task> tasks) throws LifelineException {
-        try {
-            FileWriter fileWriter = new FileWriter("./save/tasks.json");
-            fileWriter.write(gson.toJson(tasks, ArrayList.class));
-            fileWriter.close();
-        } catch (IOException e) {
-            throw new LifelineException("Unable to save tasks at the moment");
-        }
-    }
-
-    private ArrayList<Task> load(String filepath) throws LifelineException {
-        try {
-            JsonArray arr = JsonParser.parseReader(new FileReader(filepath)).getAsJsonArray();
-            ArrayList<Task> savedTasks = new ArrayList<>();
-            for (int i = 0; i < arr.size(); i++) {
-                JsonObject currTask = arr.get(i).getAsJsonObject();
-                if (currTask.has("by")) {
-                    savedTasks.add(new Deadline(currTask.get("name").getAsString(),
-                            gson.fromJson(currTask.get("by"), LocalDateTime.class),
-                            currTask.get("isDone").getAsBoolean()));
-
-                } else if (currTask.has("startTime")) {
-                    savedTasks.add(new Event(currTask.get("name").getAsString(),
-                            gson.fromJson(currTask.get("date"), LocalDate.class),
-                            gson.fromJson(currTask.get("startTime"), LocalTime.class),
-                            gson.fromJson(currTask.get("endTime"), LocalTime.class),
-                            currTask.get("isDone").getAsBoolean()));
-                } else {
-                    savedTasks.add(new ToDo(currTask.get("name").getAsString(),
-                            currTask.get("isDone").getAsBoolean()));
-                }
-            }
-            return savedTasks;
-        } catch (IOException e) {
-            throw new LifelineException("Unable to find your saved tasks!\n");
-        }
-    }
-
     private InputType getInputType(String input) throws LifelineException {
         try {
             return InputType.valueOf(input.toUpperCase());
@@ -194,7 +147,7 @@ public class Lifeline {
             echo(command);
             break;
         }
-        save(taskList);
+        storage.save(taskList);
     }
 
     private void printList() {
@@ -248,10 +201,10 @@ public class Lifeline {
                 throw new LifelineException("Index is out of bounds!");
             }
             Task taskToDelete = taskList.get(taskIndex);
-            taskList.remove(taskToDelete);
+            taskList.deleteTask(taskIndex);
             System.out.println("I have removed the task:\n" + taskToDelete + "\n");
             printList();
-            save(taskList);
+            storage.save(taskList);
         } catch (NumberFormatException e) {
             throw new LifelineException("Index is not an integer!");
         }

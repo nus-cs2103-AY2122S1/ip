@@ -30,4 +30,8 @@ public class TaskList {
         taskToMarkAsComplete.setDone(true);
         return taskToMarkAsComplete;
     }
+
+    public ArrayList<Task> getTaskList() {
+        return this.taskList;
+    }
 }

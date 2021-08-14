@@ -21,17 +21,17 @@ public class Storage {
         this.gson = new Gson();
     }
 
-    private void save(TaskList tasks) throws LifelineException {
+    public void save(TaskList tasks) throws LifelineException {
         try {
-            FileWriter fileWriter = new FileWriter("./save/tasks.json");
-            fileWriter.write(gson.toJson(tasks, ArrayList.class));
+            FileWriter fileWriter = new FileWriter(filepath);
+            fileWriter.write(gson.toJson(tasks.getTaskList(), ArrayList.class));
             fileWriter.close();
         } catch (IOException e) {
             throw new LifelineException("Unable to save tasks at the moment");
         }
     }
 
-    private TaskList load(String filepath) throws LifelineException {
+    public TaskList load() throws LifelineException {
         try {
             JsonArray arr = JsonParser.parseReader(new FileReader(filepath)).getAsJsonArray();
             TaskList savedTasks = new TaskList(new ArrayList<Task>());
