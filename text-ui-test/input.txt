@@ -22,5 +22,9 @@ todo
 list
 done 7, 3
 done 7
+delete 1, 2
+delete 1
+delete 3
+delete 300
 bye bye
 bye
