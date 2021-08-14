@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -42,6 +41,9 @@ public class Duke {
                 break;
             case "event":
                 Duke.addEvent(userInput);
+                break;
+            case "delete":
+                Duke.deleteTask(userInput);
                 break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -123,6 +125,25 @@ public class Duke {
             Duke.addTask(new Event(eventDescription, by));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Event description and time at cannot be empty");
+        }
+    }
+
+    /**
+     * Deletes a task given it's index from the list of tasks.
+     *
+     * @param userInput given by user.
+     */
+    public static void deleteTask(String[] userInput) throws DukeException {
+        try {
+            int i = Integer.parseInt(userInput[1]);
+            Task task = taskList.get(i - 1);
+            taskList.remove(i - 1);
+            print(String.format("Noted. I've removed this task:\n  %s\nNow you have %d %s in the list.",
+                    task, taskList.size(), taskList.size() == 1
+                            ? "task"
+                            : "tasks"));
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException("Please give a valid number!");
         }
     }
 
