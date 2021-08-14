@@ -1,22 +1,41 @@
+import java.util.ArrayList;
+
 public class TaskList {
-    private StringBuilder tasks;
+    private ArrayList<Task> tasks;
     private int taskLabel;
 
     public TaskList() {
-        this.tasks = new StringBuilder();
-        this.taskLabel = 1;
+        this.tasks = new ArrayList<>();
+        this.taskLabel = 0;
     }
 
-    public void addTask(String task) {
-        this.tasks.append(this.taskLabel + ". " + task + "\n");
+    public int length() {
+        return this.tasks.size();
+    }
+
+    public void addTask(String description) {
+        Task task = new Task(description);
+        this.tasks.add(task);
         taskLabel++;
+    }
+
+    public String markTaskDone(int i) {
+        this.tasks.get(i).markAsDone();
+        String taskDone = tasks.get(i).toString();
+        return "Nice! This task has been marked as done: \n" + taskDone;
     }
 
     @Override
     public String toString() {
-        if (this.taskLabel == 1) {
-            return "You don't have any tasks yet, try adding something! \n";
+        StringBuilder tasksList = new StringBuilder();
+        if (this.taskLabel == 0) {
+            return "You don't have any tasks yet, try adding something!";
         }
-        return "Here are your tasks: \n" + this.tasks.toString();
+
+        for (int i = 0; i < this.taskLabel; i++) {
+            String fullTaskLine = (i + 1) + ". " + this.tasks.get(i).toString() + "\n";
+            tasksList.append(fullTaskLine);
+        }
+        return "Here are your tasks: \n" + tasksList.toString();
     }
 }
