@@ -3,6 +3,11 @@ import java.util.Scanner;
 
 public class Duke {
 
+    private enum Command {
+        DONE,
+        DELETE
+    }
+
     private static String wrapOutput(String s) {
         // Align list items properly
         // Adapted regex from https://stackoverflow.com/questions/15888934/how-to-indent-a-multi-line-paragraph-being-written-to-the-console-in-java
@@ -11,9 +16,9 @@ public class Duke {
         return "\n\t@Herb:~$" + mstr.substring(3) + "\n";
     }
 
-    private static void handleDone(ArrayList<Task> taskList, String[] in) throws DukeException {
+    private static void handleAction(ArrayList<Task> taskList, String[] in, Command c) throws DukeException {
         if (in.length != 2) {
-            throw new InvalidFormatException("`done ${i}`");
+            throw new InvalidFormatException("`" + c.toString().toLowerCase() + " ${i}`");
         } else {
             int index;
             try {
@@ -24,39 +29,38 @@ public class Duke {
             if (index < 1 || index > taskList.size()) {
                 throw new InvalidTaskNumberException();
             } else {
-                Task t = taskList.get(index - 1);
-                t.markAsDone();
-                System.out.println(wrapOutput("Nice, I've marked this task as done!\n   " +
-                        t.toString()));
+                if (c == Command.DONE) {
+                    Task t = taskList.get(index - 1);
+                    t.markAsDone();
+                    System.out.println(wrapOutput("Nice, I've marked this task as done!\n   " +
+                            t.toString()));
+                } else if (c == Command.DELETE) {
+                    Task t = taskList.remove(index - 1);
+
+                    String plurality = " task";
+                    if (taskList.size() != 1) {
+                        plurality += "s";
+                    }
+
+                    System.out.println(wrapOutput("Noted, I've removed this task:\n   " +
+                            t.toString() + "\nNow you have " + taskList.size()
+                            + plurality + " in the list."));
+                }
             }
         }
     }
 
-    private static void handleDelete(ArrayList<Task> taskList, String[] in) throws DukeException {
-        if (in.length != 2) {
-            throw new InvalidFormatException("`delete ${i}`");
-        } else {
-            int index;
-            try {
-                index = Integer.parseInt(in[1]);
-            } catch (NumberFormatException ex) {
-                throw new InvalidIntegerException();
-            }
-            if (index < 1 || index > taskList.size()) {
-                throw new InvalidTaskNumberException();
-            } else {
-                Task t = taskList.remove(index - 1);
-
-                String plurality = " task";
-                if (taskList.size() != 1) {
-                    plurality += "s";
-                }
-
-                System.out.println(wrapOutput("Noted, I've removed this task:\n   " +
-                        t.toString() + "\nNow you have " + taskList.size()
-                        + plurality + " in the list."));
-            }
+    private static void handleList(ArrayList<Task> taskList) {
+        if (taskList.size() == 0) {
+            System.out.println(wrapOutput("No tasks added yet!"));
+            return;
         }
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task t = taskList.get(i);
+            res.append(i + 1).append(". ").append(t.toString()).append("\n");
+        }
+        System.out.println(wrapOutput(res.substring(0, res.length() - 1)));
     }
 
     public static void main(String[] args) {
@@ -82,20 +86,11 @@ public class Duke {
                 System.out.print("--> ");
                 String input = sc.nextLine();
 
-                if (input.equals("list")) {
-                    if (taskList.size() == 0) {
-                        System.out.println(wrapOutput("No tasks added yet!"));
-                        continue;
-                    }
-                    StringBuilder res = new StringBuilder();
-                    for (int i = 0; i < taskList.size(); i++) {
-                        Task t = taskList.get(i);
-                        res.append(i + 1).append(". ").append(t.toString()).append("\n");
-                    }
-                    System.out.println(wrapOutput(res.substring(0, res.length() - 1)));
-                } else if (input.equals("bye")) {
+                if (input.equals("bye")) {
                     System.out.println(endMessage);
                     break;
+                } else if (input.equals("list")) {
+                    handleList(taskList);
                 } else {
                     String[] words = input.split(" ");
                     String mainCommand = words[0];
@@ -103,10 +98,10 @@ public class Duke {
 
                     switch (mainCommand) {
                         case "done":
-                            handleDone(taskList, words);
+                            handleAction(taskList, words, Command.DONE);
                             continue;
                         case "delete":
-                            handleDelete(taskList, words);
+                            handleAction(taskList, words, Command.DELETE);
                             continue;
                         case "todo": {
                             String[] split = input.split(" ");
