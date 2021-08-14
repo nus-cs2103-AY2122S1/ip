@@ -1,15 +1,17 @@
 import java.util.Scanner;
+import static java.lang.Integer.parseInt;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke: Incrementally building a Chatbot.
  *
- * Current Progress: Level 2. Add, List
+ * Current Progress: Level 3. Mark as Done
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted commands:
  *   - any String that is not a command below -> assumed to be a task, adds it to list of tasks
  *   - list -> displays current list of tasks
+ *   - done x -> marks Task x as done
  *   - bye -> exits the program
  *
  * @author Benedict Chua
@@ -38,9 +40,13 @@ public class Duke {
     }
 
     private static void addToList(String task) {
-        // Adds task to list (array) and increment list counter
         tasksList.addToList(task);
         displayMessage(new String[] {"added: " + task});
+    }
+
+    private static void completeTask(String index) {
+        int listIndex = parseInt(index) - 1;
+        displayMessage(tasksList.markTaskAsDone(listIndex));
     }
 
     public static void main(String[] args) {
@@ -55,9 +61,12 @@ public class Duke {
         String command = sc.nextLine();
         while(!command.equals("bye")) {
             // Using switch even though there's only 2 cases here to build up on it in higher Levels
-            switch (command) {
+            switch (command.split(" ")[0]) {
             case "list":
                 displayTasks();
+                break;
+            case "done":
+                completeTask(command.split(" ")[1]);
                 break;
             default:
                 addToList(command);

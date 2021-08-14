@@ -9,7 +9,7 @@
  */
 public class TaskList {
     private static final String INDENTATION = "     ";
-    private String[] taskList;
+    private Task[] taskList;
     private int taskCounter;
 
     /**
@@ -18,7 +18,7 @@ public class TaskList {
      * @param listCapacity The max number of tasks the task list can store.
      */
     public TaskList(int listCapacity) {
-        taskList = new String[listCapacity];
+        taskList = new Task[listCapacity];
         taskCounter = 0;
     }
 
@@ -28,7 +28,7 @@ public class TaskList {
      * @param task the task to add to the list.
      */
     public void addToList(String task) {
-        taskList[taskCounter] = task;
+        taskList[taskCounter] = new Task(task);
         taskCounter++;
     }
 
@@ -37,7 +37,28 @@ public class TaskList {
      */
     public void printList() {
         for (int i = 0; i < taskCounter; i++) {
-            System.out.println(INDENTATION + String.format("%d: %s", i + 1, taskList[i]));
+            Task currTask = taskList[i];
+            System.out.println(INDENTATION + String.format("%d:[%s] %s", i + 1, currTask.getStatusIcon(), currTask));
         }
+    }
+
+    /**
+     * Marks tasks (based on index) as done if it exists.
+     *
+     * @param index index of Task in the TaskList.
+     * @return message of the completion of the Task if it exists, else user will be informed that no such task exists.
+     */
+    public String[] markTaskAsDone(int index) {
+        if (index < taskCounter) {
+            // Task exists, proceed to mark as done
+            String[] message = {"You completed a task! Maybe you aren't so incompetent after all.",
+                    taskList[index].markTaskAsDone()};
+            return message;
+        } else {
+            // Task does not exist
+            String[] message = {"What?! Are you sure that task exists?", "(Hint: check the index)"};
+            return message;
+        }
+
     }
 }
