@@ -40,33 +40,34 @@ public class Petal {
      * @param message Message initially written by user
      */
     public void formatMessage(String message) {
-        if (message.equals("")) {
-            emptyMessage();
-        } else if (message.equals("list")) {
-            printList();
-        } else if (message.equals("bye")) {
-            goodBye();
-        } else if (message.contains("done")) {
-            markTaskAsDone(message);
-        } else if (message.contains("todo") || message.contains("deadline")
-                                            || message.contains("event")) {
-            try {
-                handleTask(message);
-            } catch (EmptyDescException | InvalidInputException e1) {
-                System.out.println(e1.getMessage());
-            } catch (PetalException e) {
-                e.printStackTrace();
+        try {
+            if (message.equals("")) {
+                emptyMessage();
+            } else if (message.equals("list")) {
+                printList();
+            } else if (message.equals("bye")) {
+                goodBye();
+            } else if (message.contains("done")) {
+                markTaskAsDone(message);
+            } else {
+               handleTask(message);
             }
-        } else {
-            System.out.println(indentation);
-            System.out.println("I didn't understand that :( Could you please type it in again?");
-            System.out.println("\nUse 'todo <insert activity>' to create a to-do!");
-            System.out.println("\nUse 'deadline <insert activity> /by <insert deadline>' " +
-                               "to create an activity with a deadline!");
-            System.out.println("\nUse 'event <insert activity> /at <insert start/end time>' " +
-                               "to create an activity with a start/end time!");
-            System.out.println(indentation);
+        } catch (EmptyDescException | InvalidInputException | IndexOutOfBoundsException | NumberFormatException e1)  {
+            System.out.println(e1.getMessage());
+            requiredFormat();
+        } catch (PetalException e) {
+            e.printStackTrace();
         }
+    }
+
+    public void requiredFormat() {
+        System.out.println("\nUse 'todo <insert activity>' to create a to-do!");
+        System.out.println("\nUse 'deadline <insert activity> /by <insert deadline>' "
+                            + "to create an activity with a deadline!");
+        System.out.println("\nUse 'event <insert activity> /at <insert start/end time>' "
+                            + "to create an activity with a start/end time!");
+        System.out.println("\nUse 'done <insert task number>'  to mark task as done!");
+        System.out.println(indentation);
     }
 
     public void handleTask(String message) throws PetalException {
@@ -97,7 +98,7 @@ public class Petal {
                 String[] desc2 = taskWithTime.split("/at");
                 task = new Event(desc2[0], desc2[1]);
         }
-        System.out.println(indentation + "\nGot it. I've added this task:" + task);
+        System.out.println(indentation + "\nGot it. I've added this task.");
         history.add(task);
         System.out.println(task);
         System.out.println("There are now " + history.size() + " task(s) in your list!\n"
@@ -137,10 +138,23 @@ public class Petal {
      * Method to mark the task as done
      * @param message The -ith task to be marked as done
      */
-    public void markTaskAsDone(String message) {
+    public void markTaskAsDone(String message) throws InvalidInputException,
+                                                      IndexOutOfBoundsException,
+                                                      NumberFormatException {
         String[] newMessage = message.split(" ");
-        Task taskToBeCompleted = history.get(Integer.parseInt(newMessage[1]) - 1);
-        taskToBeCompleted.taskDone();
+        if (newMessage.length > 2 || !newMessage[0].equals("done")) {
+            throw new InvalidInputException("Invalid format! Please enter a valid format!");
+        }
+        try {
+            Task taskToBeCompleted = history.get(Integer.parseInt(newMessage[1]) - 1);
+            taskToBeCompleted.taskDone();
+        } catch (IndexOutOfBoundsException e1) {
+            throw new IndexOutOfBoundsException(indentation + "\nThat was an invalid index! Please try again!\n"
+                                                            + indentation);
+        } catch(NumberFormatException e2) {
+             throw new NumberFormatException(indentation + "Index was not a number! Please try again!"
+                                                         + indentation);
+        }
     }
 
     /**
