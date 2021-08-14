@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class Abyss {
     private static Task[] tasks = new Task[100];
     private static int count = 0;
+    private static final String TODO_REGEX = "^todo[ ]+\\S[ -~]*$";
+    private static final String DEADLINE_REGEX ="^deadline[ ]+\\S[ -~]*\\/by[ ]+\\S[ -~]*$";
+    private static final String EVENT_REGEX = "^event[ ]+\\S[ -~]*\\/at[ ]+\\S[ -~]*$";
 
     public static void main(String[] args) {
         printLogo();
@@ -13,33 +16,56 @@ public class Abyss {
         Scanner sc = new Scanner(System.in);
         String cmd = sc.nextLine();
         while (!cmd.equalsIgnoreCase("exit")) {
-            if (cmd.equalsIgnoreCase("list")) {
-                list();
-            } else if (cmd.matches("^done \\d+$")) {
-                String index = cmd.substring(5);
-                int i = Integer.parseInt(index);
-                if (i <= count) {
+            try {
+                if (cmd.equalsIgnoreCase("list")) {
+                    list();
+                } else if (cmd.matches("^done.*")) {
+                    if (!cmd.matches("^done \\d*$")) {
+                        throw new InvalidInputException("Command 'done' should be followed by " +
+                                "the index of the task piece.");
+                    }
+                    
+                    String index = cmd.substring(5);
+                    int i = Integer.parseInt(index);
+                    if (i < 1 || i > count) {
+                        throw new InvalidInputException("Index should be within 1 to " + count);
+                    }
                     markAsDone(i);
+                } else if (cmd.matches("^todo.*")) {
+                    if (!cmd.matches(TODO_REGEX)) {
+                        throw new InvalidInputException("Description of a 'todo' task piece cannot be empty.");
+                    }
+                    String description = cmd.split("todo[ ]+", 2)[1];
+                    addToDo(description);
+                } else if (cmd.matches("^deadline.*")) {
+                    if (!cmd.matches(DEADLINE_REGEX)) {
+                        throw new InvalidInputException("Description and date of a 'deadline' task piece " +
+                                "cannot be empty.");
+                    }
+                    String content = cmd.split("deadline[ ]+", 2)[1];
+                    String[] parts = content.split("\\/by[ ]+", 2);
+                    addDeadline(parts[0], parts[1]);
+                } else if (cmd.matches("^event.*")) {
+                    if (!cmd.matches(EVENT_REGEX)) {
+                        throw new InvalidInputException("Description and date of an 'event' task piece " +
+                                "cannot be empty.");
+                    }
+                    String content = cmd.split("event[ ]+", 2)[1];
+                    String[] parts = content.split("\\/at[ ]+", 2);
+                    addEvent(parts[0], parts[1]);
+                } else {
+                    throw new InvalidInputException("The Abyss does not understand your command.");
                 }
-            } else if (cmd.matches("^todo [ -~]+$")) {
-                String description = cmd.substring(5);
-                addToDo(description);
-            } else if (cmd.matches("^deadline [ -~^\\/]+\\/by [ -~]+$")) {
-                String content = cmd.substring(9);
-                String[] parts = content.split("\\/by ", 2);
-                addDeadline(parts[0], parts[1]);
-            } else if (cmd.matches("^event [ -~^\\/]+\\/at [ -~]+$")) {
-                String content = cmd.substring(6);
-                String[] parts = content.split("\\/at ", 2);
-                addEvent(parts[0], parts[1]);
+            } catch (InvalidInputException e) {
+                reply(e.getMessage());
             }
             cmd = sc.nextLine();
         }
-        reply("Exiting the Abyss. We anticipate your return.");
+        reply("Exiting the Abyss. We look forward to your return.");
     }
 
-    private static void reply(String... s) {
-        System.out.println(formatReply(s));
+    private static void reply(String... messages) {
+        System.out.println(formatReply(messages));
     }
 
     private static void list() {
@@ -76,13 +102,10 @@ public class Abyss {
         reply(addedMsg, task.toString(), tasksLeftMsg);
     }
 
-    private static String formatReply(String... s) {
+    private static String formatReply(String[] messages) {
         String reply = "\t......................................................\n";
-        for (int i = 0; i < s.length; i++) {
-            if (s[i] == null) {
-                break;
-            }
-            reply += "\t " + s[i] + "\n";
+        for (int i = 0; i < messages.length; i++) {
+            reply += "\t " + messages[i] + "\n";
         }
         reply += "\n\t......................................................";
         return reply;
