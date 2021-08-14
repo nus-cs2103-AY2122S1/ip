@@ -22,9 +22,10 @@ public class DukeTask {
      *
      * @param description the full user input that may or may not be a valid type of task
      * @return A new `DukeTask`
-     * @throws InvalidTaskTypeException
+     * @throws InvalidTaskTypeException when the type of task is not recognised
+     * @throws InvalidTaskTimeFormatException when a task does not have valid time inputs
      */
-    public static DukeTask createTask(String description) throws InvalidTaskTypeException {
+    public static DukeTask createTask(String description) throws InvalidTaskTypeException, InvalidTaskTimeFormatException, MissingTaskDescriptionException {
         // A valid task is either a to-do, deadline or event
 
         if (description.contains("todo")) {
@@ -49,7 +50,7 @@ public class DukeTask {
      * @param splitter the regex to split the description by
      * @return a string array whose first item is the action description and second item is the time
      */
-    public static String[] splitDescriptionAndTime(String descriptionWithTime, String splitter) {
+    public static String[] splitActionAndTime(String descriptionWithTime, String splitter) {
         String[] splitParts = descriptionWithTime.split(splitter);
 
         // Trim split parts to remove whitespace before and after
@@ -58,6 +59,12 @@ public class DukeTask {
         }
 
         return splitParts;
+    }
+
+    public static void validateDescriptionNotEmpty(String taskType, String description) throws MissingTaskDescriptionException {
+        if (description.isEmpty()) {
+            throw new MissingTaskDescriptionException(taskType);
+        }
     }
 
     /**

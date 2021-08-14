@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 /**
  * Encapsulates a chatbot that greets the user,
- * echoes commands entered by the user,
+ * adds valid inputs to a task list,
+ * updates the status of tasks in the list,
  * and exits when the user types `bye`.
  */
 public class Duke {
@@ -16,6 +17,7 @@ public class Duke {
         String inputListMessage = "list";
         String inputDoneMessage = "done";
 
+        DukeTaskList list = new DukeTaskList();
         Scanner inputScanner = new Scanner(System.in);
         String inputMessage = inputScanner.nextLine();
 
@@ -24,37 +26,36 @@ public class Duke {
 
             if (inputMessage.equals(inputListMessage)) {
                 // Output the list
-                outputMessage = new DukeListMessage(DukeList.getList());
-            } else if (inputMessage.contains(inputDoneMessage)) {
+                outputMessage = new DukeListMessage(list.getList());
+            } else if (inputMessage.length() >=4 && inputMessage.substring(0, 4).equals(inputDoneMessage)) {
                 try {
                     // Get the task number that should be marked as done
-                    // Assume that the first 5 characters will be done and space
+                    // The task number should be after 'done' and space
                     int taskNumber = Integer.parseInt(inputMessage.substring(5));
 
-                    if (!DukeList.contains(taskNumber)) {
-                        // Inform user if task number does not exist in list
-                        outputMessage = new DukeOutputMessage(
-                            String.format("Task %d does not exist in the list", taskNumber)
-                        );
-                    } else {
-                        // Else mark task as done
-                        DukeTask task = DukeList.getTaskByTaskNumber(taskNumber);
-                        task.markAsDone();
-                        outputMessage = new DukeDoneMessage(task.toString());
-                    }
+                    DukeTask task = list.getTaskByTaskNumber(taskNumber);
+                    task.markAsDone();
+                    outputMessage = new DukeDoneMessage(task.toString());
                 } catch (NumberFormatException e) {
                     outputMessage = new DukeOutputMessage(
                         "Please enter a valid task number when marking a task as done " +
                         "in the form of 'done X', where X is the task number to be marked as done"
                     );
+                } catch (NonExistentTaskNumberException e) {
+                    outputMessage = new DukeOutputMessage(e.getMessage());
                 }
             } else {
                 try {
                     // Add input to list
                     DukeTask task = DukeTask.createTask(inputMessage);
-                    DukeList.addItemToList(task);
-                    outputMessage = new DukeAddedMessage(task.toString());
-                } catch (InvalidTaskTypeException e) {
+                    list.addTaskToList(task);
+                    outputMessage = new DukeAddedMessage(task.toString(), list.getNumberOfTasks());
+                } catch (
+                        InvalidTaskTypeException |
+                        InvalidTaskTimeFormatException |
+                        MissingTaskDescriptionException |
+                        FullTaskListException e
+                ) {
                     outputMessage = new DukeOutputMessage(e.getMessage());
                 }
             }

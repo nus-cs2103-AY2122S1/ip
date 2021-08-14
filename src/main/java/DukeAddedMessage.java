@@ -5,6 +5,7 @@
  */
 public class DukeAddedMessage extends DukeOutputMessage {
     private static String ADDED_PREFIX = "Got it. I've added this task:";
+    private int itemsInList;
 
     /**
      * Constructor to instantiate a `DukeAddedMessage`.
@@ -12,8 +13,9 @@ public class DukeAddedMessage extends DukeOutputMessage {
      *
      * @param message the string to be used in the added message
      */
-    public DukeAddedMessage(String message) {
+    public DukeAddedMessage(String message, int itemsInList) {
         super(message);
+        this.itemsInList = itemsInList;
     }
 
     /**
@@ -23,7 +25,7 @@ public class DukeAddedMessage extends DukeOutputMessage {
      */
     @Override
     public String getMessage() {
-        int numOfTasks = DukeList.getNumberOfTasks();
+        int numOfTasks = this.itemsInList;
         String task = numOfTasks == 1 ? "task" : "tasks";
 
         return String.format(
