@@ -13,14 +13,23 @@ public class Duke {
     public static void main(String[] args) {
         greet();
 
+        TaskList taskList = new TaskList();
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        while (!input.equals("bye")) {
-            displayText(input);
-            input = scanner.nextLine();
+        String inputTask = scanner.nextLine();
+        while (!inputTask.equals("bye")) {
+            if (!inputTask.equals("list")) {
+                if (taskList.addTask(inputTask)) {
+                    displayText(space + "added: " + inputTask);
+                } else {
+                    System.exit(1);
+                }
+            } else {
+                displayText(taskList.printList());
+            }
+            inputTask = scanner.nextLine();
         }
 
-        displayText("Bye. Hope to see you again soon!");
+        displayText(space + "Bye. Hope to see you again soon!");
     }
 
     public static void greet() {
@@ -32,7 +41,7 @@ public class Duke {
 
     public static void displayText(String text) {
         System.out.println(divider);
-        System.out.println(space + text);
+        System.out.println(text);
         System.out.println(divider + "\n");
     }
 }
