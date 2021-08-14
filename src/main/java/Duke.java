@@ -2,9 +2,23 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * This class is an implementation of Project Duke customised to be named LOTTERY-A
+ * that stands for List of Tasks That Eventually Require Your Attention.
+ * It is a CLI designed to work as a todolist of sorts.
+ *
+ * CS2103T ip
+ * AY21/22 Semester 1
+ *
+ * @author Kishendran Vendar Kon (Group G05)
+ */
 public class Duke {
+    /** Arraylist that represents list of Tasks. */
     static List<Task> toDoList = new ArrayList<>();
 
+    /**
+     * Core function of bot that opens scanner and reads user input to decide what to do next.
+     */
     public static void runDuke() {
         String dottedLines = "----------------------------------------------------------------------------------------";
         System.out.println(dottedLines);
