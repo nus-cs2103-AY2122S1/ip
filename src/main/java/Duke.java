@@ -1,25 +1,61 @@
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    final DukeCommandFormatter commandFormatter = new DukeCommandFormatter(System.in, System.out);
+    final List<String> list = new ArrayList<>();
+    final String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
-        DukeCommandFormatter commandFormatter = new DukeCommandFormatter(System.in, System.out);
-        String command;
-        while (!(command = commandFormatter.nextCommand()).equals("bye")){
-            processCommand(commandFormatter, command);
-        }
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.start();
     }
 
-    public static void processCommand(DukeCommandFormatter commandFormatter, String command) {
-        commandFormatter.printOutputLine(command);
+    public void start() {
+        printWelcomeMessage();
+        boolean shouldListen;
+        do {
+            String command = commandFormatter.nextCommand();
+            shouldListen = processCommand(command);
+        } while (shouldListen);
+        printExitMessage();
+    }
+
+    public void printWelcomeMessage() {
+        commandFormatter.printOutputLine("Hello from\n" + logo);
+    }
+
+    public void printExitMessage() {
+        commandFormatter.printOutputLine("Goodbye from\n" + logo);
+    }
+
+    /**
+     * Processes the given command (a line). Returns true if more commands are to be listened to.
+     * @param command The command to be processed.
+     * @return If Duke should continue listening to commands.
+     */
+    public boolean processCommand(String command) {
+        switch (command) {
+            case "list":
+                for (int i = 0; i < list.size(); i++) {
+                    String item = list.get(i);
+                    commandFormatter.printOutputLine(String.format("%d. %s", i + 1, item));
+                }
+                return true;
+            case "bye":
+                return false;
+            default:
+                list.add(command);
+                commandFormatter.printOutputLine(String.format("Added: %s", command));
+                return true;
+        }
     }
 
     private static class DukeCommandFormatter {
