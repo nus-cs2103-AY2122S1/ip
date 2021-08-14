@@ -1,49 +1,18 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
     static Scanner userInput = new Scanner(System.in);
+
+    static String linebreaker = "____________________________________________________________";
     static String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
     static String farewell = "Bye. Hope to see you again soon!";
+    static String listMessage = "Here are the tasks in your list:";
+    static String doneMessage = "Nice! I've marked this task as done: ";
+
     private boolean running = true;
-    static String feelsbadman = "__________████████_____██████\n" +
-            "_________█░░░░░░░░██_██░░░░░░█\n" +
-            "________█░░░░░░░░░░░█░░░░░░░░░█\n" +
-            "_______█░░░░░░░███░░░█░░░░░░░░░█\n" +
-            "_______█░░░░███░░░███░█░░░████░█\n" +
-            "______█░░░██░░░░░░░░███░██░░░░██\n" +
-            "_____█░░░░░░░░░░░░░░░░░█░░░░░░░░███\n" +
-            "____█░░░░░░░░░░░░░██████░░░░░████░░█\n" +
-            "____█░░░░░░░░░█████░░░████░░██░░██░░█\n" +
-            "___██░░░░░░░███░░░░░░░░░░█░░░░░░░░███\n" +
-            "__█░░░░░░░░░░░░░░█████████░░█████████\n" +
-            "_█░░░░░░░░░░█████_████___████_█████___█\n" +
-            "_█░░░░░░░░░░█______█_███__█_____███_█___█\n" +
-            "█░░░░░░░░░░░░█___████_████____██_██████\n" +
-            "░░░░░░░░░░░░░█████████░░░████████░░░█\n" +
-            "░░░░░░░░░░░░░░░░█░░░░░█░░░░░░░░░░░░█\n" +
-            "░░░░░░░░░░░░░░░░░░░░██░░░░█░░░░░░██\n" +
-            "░░░░░░░░░░░░░░░░░░██░░░░░░░███████\n" +
-            "░░░░░░░░░░░░░░░░██░░░░░░░░░░█░░░░░█\n" +
-            "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█\n" +
-            "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█\n" +
-            "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█\n" +
-            "░░░░░░░░░░░█████████░░░░░░░░░░░░░░██\n" +
-            "░░░░░░░░░░█▒▒▒▒▒▒▒▒███████████████▒▒█\n" +
-            "░░░░░░░░░█▒▒███████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█\n" +
-            "░░░░░░░░░█▒▒▒▒▒▒▒▒▒█████████████████\n" +
-            "░░░░░░░░░░████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█\n" +
-            "░░░░░░░░░░░░░░░░░░██████████████████\n" +
-            "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█\n" +
-            "██░░░░░░░░░░░░░░░░░░░░░░░░░░░██\n" +
-            "▓██░░░░░░░░░░░░░░░░░░░░░░░░██\n" +
-            "▓▓▓███░░░░░░░░░░░░░░░░░░░░█\n" +
-            "▓▓▓▓▓▓███░░░░░░░░░░░░░░░██\n" +
-            "▓▓▓▓▓▓▓▓▓███████████████▓▓█\n" +
-            "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██\n" +
-            "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█\n" +
-            "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█";
-    String instruction;
-    String[] toDo = new String[100];
+    private String instruction;
+    private Task[] toDo = new Task[100];
     private int counter = 0;
 
     void setInstruction() {
@@ -63,31 +32,56 @@ public class Duke {
     }
 
     void parse() {
-        if(instruction.equalsIgnoreCase("list")){
+        printLineBreak();
+        String operative = instruction.split(" ")[0];
+
+        if(operative.equalsIgnoreCase("list")) {
             printList();
-        } else {
-            toDo[counter] = instruction;
+        } else if (operative.equalsIgnoreCase("done")) {
+            int taskPointer = Integer.parseInt(instruction.split(" ")[1]) - 1;
+            toDo[taskPointer].markAsDone();
+            completeTaskMessage(toDo[taskPointer]);
+        }else {
+            toDo[counter] = new Task(instruction);
             counter++;
-            System.out.println("added: " + instruction);
+            addedTaskMessage(instruction);
         }
     }
 
+    void printLineBreak () {
+        System.out.println(linebreaker);
+    }
+
     void printList() {
+        System.out.println(listMessage);
         for(int x = 0; x < 99;x++) {
             if(toDo[x] == null){
                 break;
             }
             String temp = String.valueOf(x + 1);
-            System.out.println(temp + ". " + toDo[x]);
+            System.out.println(temp + "." + toDo[x].toString());
         }
+        printLineBreak();
     }
 
     void greet(){
         System.out.println(greeting);
+        printLineBreak();
     }
 
     void sayFarewell() {
         System.out.println(farewell);
+        printLineBreak();
+    }
+
+    void completeTaskMessage (Task task) {
+        System.out.println(doneMessage + "\n" + task.toString());
+        printLineBreak();
+    }
+
+    void addedTaskMessage (String instruction) {
+        System.out.println("added: " + instruction);
+        printLineBreak();
     }
 
     public static void main(String[] args) {
