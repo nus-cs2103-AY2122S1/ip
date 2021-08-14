@@ -58,10 +58,12 @@ public class Task {
         System.out.println("____________________________________________________________\n"
                 + "Here are the tasks in your list: \n");
         for (Task t: list_of_tasks) {
-            String state = t.done ? "X" : " ";
-            System.out.println(t.order + "." + "[" + state + "] " + t.name + "\n");
+            System.out.println(t.order + "." + "[" + t.getStatus() + "] " + t.name + "\n");
         }
         System.out.println("____________________________________________________________\n");
     }
 
+    public String getStatus() {
+        return (done ? "X" : " ");
+    }
 }
