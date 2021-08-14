@@ -1,6 +1,6 @@
 todo read book
 deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
+event  project meeting /at Aug 6th 2-4pm
 done 1
 list
 todo graduate
@@ -11,4 +11,7 @@ todo
 deadline submit assignment
 done 5
 baka
+delete 1
+list
+delete 4
 bye

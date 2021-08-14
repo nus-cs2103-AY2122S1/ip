@@ -5,19 +5,19 @@
     ____________________________________________________________
 
     ____________________________________________________________
-     I've added this task but it's not like I did for you or anything!
+     I've added this task but it's not like I did it for you or anything!
        [T][ ] read book
      Now you have 1 task in the list. Do your best doing them okay?
     ____________________________________________________________
 
     ____________________________________________________________
-     I've added this task but it's not like I did for you or anything!
+     I've added this task but it's not like I did it for you or anything!
        [D][ ] return book (by: June 6th)
      Now you have 2 tasks in the list. Do your best doing them okay?
     ____________________________________________________________
 
     ____________________________________________________________
-     I've added this task but it's not like I did for you or anything!
+     I've added this task but it's not like I did it for you or anything!
        [E][ ] project meeting (by: Aug 6th 2-4pm)
      Now you have 3 tasks in the list. Do your best doing them okay?
     ____________________________________________________________
@@ -34,7 +34,7 @@
     ____________________________________________________________
 
     ____________________________________________________________
-     I've added this task but it's not like I did for you or anything!
+     I've added this task but it's not like I did it for you or anything!
        [T][ ] graduate
      Now you have 4 tasks in the list. Do your best doing them okay?
     ____________________________________________________________
@@ -69,7 +69,25 @@
     ____________________________________________________________
 
     ____________________________________________________________
-     BAKA! I don't understand this command! baka
+     BAKA! I don't understand this command!
+     Command: baka
+     You might want to check for spelling and potential whitespaces!
+    ____________________________________________________________
+
+    ____________________________________________________________
+     I've deleted this task so show me some gratitude!
+       [T][X] read book
+     Now you have 3 tasks in the list. Do your best doing them okay?
+    ____________________________________________________________
+
+    ____________________________________________________________
+     1:[D][X] return book (by: June 6th)
+     2:[E][X] project meeting (by: Aug 6th 2-4pm)
+     3:[T][ ] graduate
+    ____________________________________________________________
+
+    ____________________________________________________________
+     BAKA! Input a valid index!! You have 3 tasks currently!
     ____________________________________________________________
 
     ____________________________________________________________

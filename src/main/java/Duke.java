@@ -5,7 +5,7 @@ import static java.lang.Integer.parseInt;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke: Incrementally building a Chatbot.
  *
- * Current Progress: Level 5. Handle Errors
+ * Current Progress: Level 6. Delete
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted commands:
@@ -13,9 +13,10 @@ import static java.lang.Integer.parseInt;
  *   - 'deadline x /by y' -> adds a Deadline task of x that needs to be done by y
  *   - 'event x /at y' -> adds an Event task of x that starts and ends at a specific time y
  *   - 'list' -> displays current list of tasks
- *   - 'done' x -> marks Task x as done
+ *   - 'done x' -> marks Task x as done
+ *   - 'delete x' -> deletes Task x from the task list
  *   - 'bye' -> exits the program
- *   - any other String -> throws an exception
+ *   - any other String of different patterns -> throws an exception
  *
  * @author Benedict Chua
  */
@@ -71,7 +72,29 @@ public class Duke {
         if (filteredDescription.trim().isEmpty()) {
             throw new EmptyDescriptionException();
         }
-        return filteredDescription;
+        return filteredDescription.trim();
+    }
+
+    /**
+     * Takes in the original inputted command and filters and parses it for the given index.
+     *
+     * The index is the command string minus the first word which is the command itself.
+     * Throws an MissingIndexException when index is missing (including if it contains only white space).
+     *
+     * @param command the original command inputted by the user.
+     * @return the filtered and parsed int that refers to the index of the task.
+     * @throws MissingIndexException when index is missing
+     */
+    private static int filterTaskIndex(String command) throws MissingIndexException {
+        String[] commandItems = command.split(" ", 2);
+        if (commandItems.length == 1) {
+            throw new MissingIndexException();
+        }
+        String indexString  = command.split(" ", 2)[1];
+        if (indexString.trim().isEmpty()) {
+            throw new MissingIndexException();
+        }
+        return parseInt(indexString);
     }
 
     /**
@@ -89,14 +112,17 @@ public class Duke {
      *
      * @param index index of task to be mark as completed (indexing starts from 1)
      */
-    private static void completeTask(String index) {
-        int indexGiven = parseInt(index);
-        displayMessage(tasksList.markTaskAsDone(indexGiven));
+    private static void completeTask(int index) {
+        displayMessage(tasksList.markTaskAsDone(index));
+    }
+
+    private static void deleteTask(int index) {
+        displayMessage(tasksList.deleteTask(index));
     }
 
     public static void main(String[] args) {
         // Initialise program
-        tasksList = new TaskList(100);
+        tasksList = new TaskList();
         Scanner sc = new Scanner(System.in);
 
         // Greets user
@@ -111,7 +137,10 @@ public class Duke {
                     displayTasks();
                     break;
                 case "done":
-                    completeTask(command.split(" ")[1]);
+                    completeTask(filterTaskIndex(command));
+                    break;
+                case "delete":
+                    deleteTask(filterTaskIndex(command));
                     break;
                 case "todo":
                     addToList(filterTaskDescription(command), "ToDo");
@@ -123,7 +152,7 @@ public class Duke {
                     addToList(filterTaskDescription(command), "Event");
                     break;
                 default:
-                    throw new InvalidCommandException(command.split(" ")[0]);
+                    throw new InvalidCommandException(command);
                 }
             } catch (DukeException e) {
                 displayMessage(new String[] {e.toString()});

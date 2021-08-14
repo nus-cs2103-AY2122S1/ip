@@ -29,6 +29,12 @@ class EmptyDescriptionException extends DukeException {
     }
 }
 
+class MissingIndexException extends DukeException {
+    public MissingIndexException() {
+        super("BAKA! You need to provide an index so I know which task you are referring to!");
+    }
+}
+
 class MissingArgumentException extends DukeException {
     public MissingArgumentException(String tag, String type) {
         super(String.format("BAKA! You're missing the %s argument to add a %s!", tag, type));
@@ -37,7 +43,9 @@ class MissingArgumentException extends DukeException {
 
 class InvalidCommandException extends DukeException {
     public InvalidCommandException(String command) {
-        super(String.format("BAKA! I don't understand this command! %s", command));
+        super("BAKA! I don't understand this command!\n" +
+                String.format("     Command: %s\n", command) +
+                "     You might want to check for spelling and potential whitespaces!");
     }
 }
 
