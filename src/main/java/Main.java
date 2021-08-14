@@ -43,24 +43,8 @@ class Main {
         String command = sc.nextLine();
         while (!command.equals("bye")) {
             if (!command.equals("list")) {
-                String[] commandKeywords = command.split(" ");
-                if (commandKeywords.length == 2) {
-                    if (commandKeywords[0].equals("done")) {
-                        try {
-                            int taskIdx = Integer.parseInt(commandKeywords[1]);
-                            if (taskIdx <= duke.getNumberOfTasks() && taskIdx > 0) {
-                                duke.markTaskAsDone(taskIdx - 1);
-                            } else {
-                                duke.noTaskExist();
-                            }
-                        } catch (NumberFormatException ignored) {
-                            Task task = new Task(command);
-                            duke.addTask(task);
-                        }
-                    } else {
-                        Task task = new Task(command);
-                        duke.addTask(task);
-                    }
+               if (duke.checkCompleteCommand(command)) {
+                   duke.completeTask(command);
                 } else {
                     Task task = new Task(command);
                     duke.addTask(task);
@@ -73,5 +57,4 @@ class Main {
         sc.close();
         duke.bye();
     }
-
 }

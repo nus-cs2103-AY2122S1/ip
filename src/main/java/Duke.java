@@ -53,17 +53,38 @@ public class Duke {
         }
     }
 
-    public int getNumberOfTasks() {
-        return this.tasks.size();
-    }
-
-    public void markTaskAsDone(int taskIdx) {
+    private void markTaskAsDone(int taskIdx) {
         Task task = this.tasks.get(taskIdx);
         task.markAsDone();
         System.out.println(" Nice! I've marked this task as done: \n" + "[X] " + task.toString());
     }
 
-    public void noTaskExist() {
-        System.out.println("This task does not exist");
+    /**
+     * Check if a command is a complete task command.
+     *
+     * @param command User input.
+     * @return whether the command is a valid complete task command.
+     */
+    public boolean checkCompleteCommand(String command) {
+        String[] commandKeywords = command.split(" ");
+        if (commandKeywords.length != 2) return false;
+        if (!commandKeywords[0].equals("done")) return false;
+        try {
+            int taskIdx = Integer.parseInt(commandKeywords[1]);
+            return taskIdx > 0 && taskIdx <= this.tasks.size();
+        } catch (NumberFormatException ignored) {
+          return false;
+        }
+    }
+
+    /**
+     * Complete a task given a command.
+     *
+     * @param command User input.
+     */
+    public void completeTask(String command) {
+        String[] commandKeywords = command.split(" ");
+        int taskIdx = Integer.parseInt(commandKeywords[1]);
+        this.markTaskAsDone(taskIdx - 1);
     }
 }
