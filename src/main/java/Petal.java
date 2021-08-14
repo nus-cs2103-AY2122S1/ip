@@ -40,17 +40,27 @@ public class Petal {
      * @param message Message initially written by user
      */
     public void formatMessage(String message) {
+        String[] msg = message.split(" ");
         try {
-            if (message.equals("")) {
-                emptyMessage();
-            } else if (message.equals("list")) {
-                printList();
-            } else if (message.equals("bye")) {
-                goodBye();
-            } else if (message.contains("done")) {
-                markTaskAsDone(message);
-            } else {
-               handleTask(message);
+            switch (msg[0]) {
+                case "":
+                    emptyMessage();
+                    break;
+                case "list":
+                    printList();
+                    break;
+                case "bye":
+                    goodBye();
+                    break;
+                case "done":
+                    markTaskAsDone(message);
+                    break;
+                case "delete":
+                    deleteTask(msg[1]);
+                    break;
+                default:
+                    handleTask(message);
+                    break;
             }
         } catch (EmptyDescException | InvalidInputException | IndexOutOfBoundsException | NumberFormatException e1)  {
             System.out.println(e1.getMessage());
@@ -61,12 +71,12 @@ public class Petal {
     }
 
     public void requiredFormat() {
-        System.out.println("\nUse 'todo <insert activity>' to create a to-do!");
+        System.out.println("Use 'todo <insert activity>' to create a to-do!");
         System.out.println("\nUse 'deadline <insert activity> /by <insert deadline>' "
                             + "to create an activity with a deadline!");
         System.out.println("\nUse 'event <insert activity> /at <insert start/end time>' "
                             + "to create an activity with a start/end time!");
-        System.out.println("\nUse 'done <insert task number>'  to mark task as done!");
+        System.out.println("\nUse 'done <insert task number>' to mark task as done!");
         System.out.println(indentation);
     }
 
@@ -79,10 +89,10 @@ public class Petal {
                             desc.isBlank();
         if (descAvail) {
             throw new EmptyDescException("(っ- ‸ – ς)! It seems like there was no description"
-                                                      + "! Please enter a description");
+                                                      + "! Please enter a description\n");
         }
         if (!isValidInput) {
-            throw new InvalidInputException("っ- ‸ – ς)! I did not understand what you said :(");
+            throw new InvalidInputException("っ- ‸ – ς)! I did not understand what you said :(\n");
         }
         Task task;
         String taskWithTime = message.substring(message.indexOf(" ") + 1);
@@ -103,6 +113,23 @@ public class Petal {
         System.out.println(task);
         System.out.println("There are now " + history.size() + " task(s) in your list!\n"
                                                              + indentation);
+    }
+
+    public void deleteTask(String index) {
+        int indexOfTask;
+        try {
+            indexOfTask = Integer.parseInt(index) - 1;
+            Task toBeDeleted = history.get(indexOfTask);
+            history.remove(indexOfTask);
+            System.out.println(indentation +"\nOkay. I've deleted this task:\n"
+                                           + toBeDeleted
+                                           + "\nYou now have " + history.size() + " task(s)!\n"
+                                           + indentation);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Invalid task number given! Please enter another value!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Invalid task number given! Please enter another value!");
+        }
     }
 
     /**
