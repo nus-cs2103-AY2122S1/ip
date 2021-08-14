@@ -10,7 +10,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input;
         Duke.greet();
-        while (!(input = scanner.nextLine()).equals("bye")) {
+        while (!(input = scanner.nextLine().trim()).equals("bye")) {
             handleUserInput(input);
         }
         Duke.exit();
@@ -20,15 +20,29 @@ public class Duke {
      * Handles user input conditionally based on the command.
      */
     private static void handleUserInput(String input) {
-        switch(input.split(" ")[0]) {
+        String[] userInput = input.split(" ", 2);
+        String command = userInput[0];
+        switch(command) {
             case "list":
                 Duke.printTaskList();
                 break;
             case "done":
                 Duke.setTaskDone(Integer.parseInt(input.split(" ")[1]));
                 break;
-            default:
-                Duke.addTask(input);
+            case "todo":
+                String arg = userInput[1];
+                Duke.addTask(new Todo(arg));
+                break;
+            case "deadline":
+                String deadlineDescription = userInput[1].split(" /by ")[0];
+                String by = userInput[1].split(" /by ")[1];
+                Duke.addTask(new Deadline(deadlineDescription, by));
+                break;
+            case "event":
+                String eventDescription = userInput[1].split(" /at ")[0];
+                String at = userInput[1].split(" /at ")[1];
+                Duke.addTask(new Event(eventDescription, at));
+                break;
         }
     }
 
@@ -61,9 +75,10 @@ public class Duke {
      *
      * @param input to be added and printed.
      */
-    public static void addTask(String input) {
-        taskList.add(new Task(input));
-        Duke.print(String.format("added: %s", input));
+    public static void addTask(Task input) {
+        taskList.add(input);
+        Duke.print(String.format("Got it. I've added this task:\n  %s\nNow you have %d %s in the list.",
+                input, taskList.size(), taskList.size() == 1 ? "task" : "tasks"));
     }
 
     /**
