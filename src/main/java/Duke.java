@@ -1,16 +1,22 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private static final String LINE_SEPARATOR = "\t____________________________________________________________\n";
+    private static final ArrayList<String> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String input;
-        greet();
+        Duke.greet();
         while (!(input = scanner.nextLine()).equals("bye")) {
-            echo(input);
+            if (input.equals("list")) {
+                Duke.printTaskList();
+            } else {
+                Duke.addTask(input);
+            }
         }
-        exit();
+        Duke.exit();
     }
 
     /**
@@ -28,15 +34,6 @@ public class Duke {
     }
 
     /**
-     * Echos the input, printing it as a formatted message.
-     *
-     * @param input String to be echoed.
-     */
-    private static void echo(String input) {
-        Duke.print(input);
-    }
-
-    /**
      * Prints a formatted message with line separator on top and bottom.
      *
      * @param message String to be printed.
@@ -44,5 +41,29 @@ public class Duke {
     private static void print(String message) {
         String indentedMessage = "\t " + message.replaceAll("\n", "\n\t ") + "\n";
         System.out.println(Duke.LINE_SEPARATOR + indentedMessage + Duke.LINE_SEPARATOR);
+    }
+
+    /**
+     * Adds the input to the list of tasks and prints out the input.
+     *
+     * @param input to be added and printed.
+     */
+    public static void addTask(String input) {
+        taskList.add(input);
+        Duke.print(String.format("added: %s", input));
+    }
+
+    /**
+     * Prints out the task list formatted and indented.
+     */
+    private static void printTaskList() {
+        StringBuilder taskString = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            String task = i == taskList.size() - 1
+                    ? String.format("%d. %s", i + 1, taskList.get(i))
+                    : String.format("%d. %s\n", i + 1, taskList.get(i));
+            taskString.append(task);
+        }
+        Duke.print(taskString.toString());
     }
 }
