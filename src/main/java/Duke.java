@@ -6,7 +6,7 @@ import java.util.Scanner;
  * helping a person to keep track of various things.
  *
  * @author Yeo Jun Wei
- * @version Level-2
+ * @version Level-3
  */
 public class Duke {
     /** Horizontal line for formatting */
@@ -19,7 +19,7 @@ public class Duke {
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
 
     /** An ArrayList to store tasks entered by the user */
-    private static final ArrayList<String> tasksList = new ArrayList<>();
+    private static final ArrayList<Task> tasksList = new ArrayList<>();
 
     public static void main(String[] args) {
         greetUser();
@@ -55,7 +55,8 @@ public class Duke {
         System.out.println("added: " + task);
         System.out.println(HORIZONTAL_LINE + "\n");
 
-        tasksList.add(task);
+        Task taskToBeAdded = new Task(task);
+        tasksList.add(taskToBeAdded);
     }
 
     /**
@@ -63,9 +64,25 @@ public class Duke {
      */
     private static void listTasks() {
         System.out.println(HORIZONTAL_LINE);
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasksList.size(); i++) {
-            System.out.println((i + 1) + ". " + tasksList.get(i));
+            System.out.println((i + 1) + "." + tasksList.get(i));
         }
+        System.out.println(HORIZONTAL_LINE + "\n");
+    }
+
+    /**
+     * Marks the specified task as done.
+     *
+     * @param taskId The id of the task to be marked as done.
+     */
+    private static void markAsDone(String taskId) {
+        int taskPositionInList = Integer.valueOf(taskId) - 1;
+        Task specifiedTask = tasksList.get(taskPositionInList);
+        specifiedTask.markAsDone();
+
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("Nice! I've marked this task as done:\n  " + specifiedTask);
         System.out.println(HORIZONTAL_LINE + "\n");
     }
 
@@ -81,7 +98,13 @@ public class Duke {
             if (command.equals("list")) {
                 listTasks();
             } else {
-                addTask(command);
+                // Splits the string on spaces, and acts accordingly based on the first word
+                String[] wordsArr = command.split(" ");
+                if (wordsArr[0].equals("done")) {
+                    markAsDone(wordsArr[1]);
+                } else {
+                    addTask(command);
+                }
             }
             listenToCommands();
         }
