@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Meow {
-    private List<String> tasksList = new ArrayList<String>();
+    private List<Task> tasksList = new ArrayList<>();
 
     /**
      * A public constructor to initialize a Meow object.
@@ -60,8 +60,9 @@ public class Meow {
      * @param inputTask The user input for a task to be added.
      */
     public void addTask(String inputTask) {
-        tasksList.add(inputTask);
-        System.out.println("added: " + inputTask);
+        Task task = new Task(inputTask);
+        tasksList.add(task);
+        System.out.println("added: " + task.getDescription());
     }
 
     /**
@@ -71,8 +72,10 @@ public class Meow {
     public void displayList() {
         int len = tasksList.size();
         if (len > 0) {
+            System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < len; i++) {
-                System.out.println(i + 1 + ". " + tasksList.get(i));
+                Task task = tasksList.get(i);
+                System.out.println(i + 1 + ". " + "[" + task.getStatusIcon() + "] " + task.getDescription());
             }
         } else {
             System.out.println("Meow: You have not added any tasks yet, please add one now~");
@@ -95,5 +98,36 @@ public class Meow {
         } else {
             return false;
         }
+    }
+
+    public void completeTask(int taskNumber) {
+        Task completedTask = tasksList.get(taskNumber - 1);
+        completedTask.markAsDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("[" + completedTask.getStatusIcon() + "] " + completedTask.getDescription());
+
+    }
+
+    public int checkCompleteTask(String input) {
+        int infinity = Integer.MAX_VALUE;
+        String done = input.substring(0, 4).toLowerCase();
+        try {
+            if (done.equals("done")) {
+                String str = input.substring(5, 6);
+                int taskNumber = Integer.parseInt(str);
+                if (taskNumber <= tasksList.size()) {
+                    return taskNumber;
+                } else {
+                    System.out.println("Meow: Hi human, the task you want to complete is not in your task list, try entering a correct task number~");
+                    return infinity;
+                }
+            } else {
+                return 0;
+            }
+        } catch (NumberFormatException exception) {
+            System.out.println(exception.toString());
+            return 0;
+        }
+
     }
 }
