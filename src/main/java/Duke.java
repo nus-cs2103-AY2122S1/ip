@@ -62,9 +62,11 @@ public class Duke {
 
         while(!end) {
             //First word is command
-            String input = s.next();
+            String input = s.next().trim();
             //This chunk might have to change depending on the types of command
             switch (input) {
+                case "":
+                    break;
                 case "done":
                     int indexToMark = s.nextInt() - 1;
                     this.doneTask(indexToMark);
