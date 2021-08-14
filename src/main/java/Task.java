@@ -1,9 +1,7 @@
 public class Task {
-    private boolean done;
+    private boolean done = false;
     private String taskDetails;
-
-    public Task(String taskDetails, boolean done) {
-        this.done = done;
+    public Task(String taskDetails) {
         this.taskDetails = taskDetails;
     }
 
@@ -17,7 +15,6 @@ public class Task {
     }
 
     public String toString() {
-        return String.format("[%s] %s", this.done ? "X" : " ", this.taskDetails);
+        return String.format("[%s] %s", this.done ? "X": " ", this.taskDetails);
     }
-
 }

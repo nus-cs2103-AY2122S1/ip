@@ -17,7 +17,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         Scanner scanner = new Scanner(System.in);
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         printOut(WELCOME_MESSAGE);
         String input = scanner.nextLine();
@@ -26,20 +26,32 @@ public class Duke {
                 case "list":
                     int index = 1;
                     String message = "";
-                    for (String task : tasks) {
+                    for (Task task : tasks) {
                         message += String.format("%d. %s\n", index, task);
                         index++;
                     }
                     printOut(message.substring(0,message.length()-1));
                     break;
-
-                case "done":
-                    // pass
-                    break;
-
                 default:
-                    printOut("added: " + input);
-                    tasks.add(input);
+                    String[] commands = input.split("\\s+");
+                    if (commands.length == 2 && commands[0].equals("done")) {
+                        try {
+                            Task task = tasks.get(Integer.parseInt(commands[1])-1);
+                            if (task.markDone()) {
+                                String msg = String.format("Nice! I've marked this task as done:\n    %s", task);
+                                printOut(msg);
+                            } else {
+                                String msg = String.format("This task has already been marked as done:\n    %s", task);
+                                printOut(msg);
+                            }
+                        } catch (NumberFormatException e) {
+                            tasks.add(new Task(input));
+                            printOut(String.format("added: %s", input));
+                        }
+                    } else {
+                        tasks.add(new Task(input));
+                        printOut(String.format("added: %s", input));
+                    }
                     break;
             }
             input = scanner.nextLine();
