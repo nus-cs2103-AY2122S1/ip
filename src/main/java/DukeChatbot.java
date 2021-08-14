@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class DukeChatbot {
 
     private static final String INDENTATION_UNIT_STRING = " ";
@@ -10,15 +14,47 @@ public class DukeChatbot {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String GREETING = "Hello! I'm Duke!\n"
+    private static final String GREETING_MESSAGE = "Hello! I'm Duke!\n"
             + "What can I do for you?";
+    private static final String EXIT_COMMAND = "bye";
+    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String READ_COMMAND_ERROR_MESSAGE = "An unexpected error has occurred.";
 
     public void printGreeting() {
-        System.out.print(getGreeting());
+        printFormattedMessage(LOGO + GREETING_MESSAGE);
     }
 
-    private String getGreeting() {
-        return indent(surroundWithDividerLines(LOGO + GREETING));
+    public void listenForInput() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String command;
+        do {
+            try {
+                command = br.readLine();
+            } catch (IOException e) {
+                printFormattedMessage(READ_COMMAND_ERROR_MESSAGE);
+                break;
+            }
+            switch (command) {
+            case EXIT_COMMAND:
+                printExitMessage();
+                break;
+            default:
+                printFormattedMessage(command);
+                break;
+            }
+        } while (!command.equals(EXIT_COMMAND));
+    }
+
+    private void printExitMessage() {
+        printFormattedMessage(EXIT_MESSAGE);
+    }
+
+    private void printFormattedMessage(String message) {
+        System.out.println(getFormattedMessage(message));
+    }
+
+    private String getFormattedMessage(String message) {
+        return indent(surroundWithDividerLines(message));
     }
 
     private String surroundWithDividerLines(String message) {
