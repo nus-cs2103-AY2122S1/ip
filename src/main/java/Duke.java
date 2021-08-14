@@ -46,9 +46,37 @@ public class Duke {
             goodBye();
         } else if (message.contains("done")) {
             markTaskAsDone(message);
+        } else if (message.contains("todo") || message.contains("deadline")
+                                            || message.contains("event")) {
+            handleTask(message);
         } else {
             addMessage(message);
         }
+    }
+
+    public void handleTask(String message) {
+        String[] checkType = message.split(" ");
+        System.out.println("Got it. I've added this task:");
+        if (checkType[0].equals("todo")) {
+            String desc = message.substring(message.indexOf(" ") + 1);
+            Todo todo = new Todo(desc);
+            history.add(todo);
+            System.out.println(todo);
+        } else {
+            String taskWithTime = message.substring(message.indexOf(" ") + 1);
+            if (checkType[0].equals("deadline")) {
+                String[] desc = taskWithTime.split("/by");
+                Deadline deadline = new Deadline(desc[0], desc[1]);
+                history.add(deadline);
+                System.out.println(deadline);
+            } else {
+                String[] desc = taskWithTime.split("/at");
+                Event event = new Event(desc[0], desc[1]);
+                history.add(event);
+                System.out.println(event);
+            }
+        }
+        System.out.println("There are now " + history.size() + " task(s) in your list! :)");
     }
 
     /**
