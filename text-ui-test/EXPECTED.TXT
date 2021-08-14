@@ -5,3 +5,63 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+ALL COMMANDS:
+add - Add a task
+bye - Exit Duke
+done - Mark the task as done
+help - Display all commands
+list - List all tasks
+Duke> ALL COMMANDS:
+add - Add a task
+bye - Exit Duke
+done - Mark the task as done
+help - Display all commands
+list - List all tasks
+Duke> Task added with title: hello
+Duke> Task added with title: byebye
+Duke> Task added with title: random event
+Duke> Task added with title: some other thing
+Duke> You have 4 tasks.
+Tasks
+1. [ ] hello
+2. [ ] byebye
+
+Events
+3. [ ] random event (at today)
+
+Tasks with deadlines
+4. [ ] some other thing (by tomorrow)
+
+Duke> I've marked the following task as done!
+[X] hello
+Duke> You have 4 tasks.
+Tasks
+1. [X] hello
+2. [ ] byebye
+
+Events
+3. [ ] random event (at today)
+
+Tasks with deadlines
+4. [ ] some other thing (by tomorrow)
+
+Duke> I've marked the following task as done!
+[X] random event (at today)
+Duke> You have 4 tasks.
+Tasks
+1. [X] hello
+2. [ ] byebye
+
+Events
+3. [X] random event (at today)
+
+Tasks with deadlines
+4. [ ] some other thing (by tomorrow)
+
+Duke> Goodbye from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+

@@ -1,0 +1,11 @@
+help
+add hello
+add byebye
+add random event /at today
+add some other thing /by tomorrow
+list
+done 1
+list
+done 3
+list
+bye
