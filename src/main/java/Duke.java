@@ -13,13 +13,16 @@ public class Duke {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
 
     /** Greeting message to be displayed when bot starts running */
-    private static final String GREETING_MESSAGE = "Hello! I'm JWBot \nWhat can I do for you?";
+    private static final String GREETING_MESSAGE = "Hello! I'm JWBot\nWhat can I do for you?";
 
     /** Goodbye message to be displayed when bot stops running */
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
 
     /** An ArrayList to store tasks entered by the user */
     private static final ArrayList<Task> tasksList = new ArrayList<>();
+
+    /** A Scanner instance to obtain user input */
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         greetUser();
@@ -32,7 +35,7 @@ public class Duke {
     private static void greetUser() {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(GREETING_MESSAGE);
-        System.out.println(HORIZONTAL_LINE + "\n");
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -77,7 +80,7 @@ public class Duke {
         } else {
             System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
         }
-        System.out.println(HORIZONTAL_LINE + "\n");
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -89,7 +92,7 @@ public class Duke {
         for (int i = 0; i < tasksList.size(); i++) {
             System.out.println((i + 1) + "." + tasksList.get(i));
         }
-        System.out.println(HORIZONTAL_LINE + "\n");
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -104,15 +107,14 @@ public class Duke {
 
         System.out.println(HORIZONTAL_LINE);
         System.out.println("Nice! I've marked this task as done:\n  " + specifiedTask);
-        System.out.println(HORIZONTAL_LINE + "\n");
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
      * Listens to the user-entered commands, and acts accordingly.
      */
     private static void listenToCommands() {
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
+        String command = scanner.nextLine();
         if (command.equals("bye")) {
             exit();
         } else {
