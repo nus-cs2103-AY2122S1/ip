@@ -19,53 +19,56 @@ public class Duke {
 
         while (true) {
             String des = sc.nextLine();
-            String command = checkForKeyword(des);
-            try {
-                Duke.printLine();
-                if (command == null) {
-                    throw new DukeException(des + " is not a recognised command\nPlease refer to the available commands using the \"allCmd\" command");
-                } else {
-                    if (command.equals("bye")) {
-                        Duke.byeCommand();
-                        Duke.printLine();
-                        break;
-                    }
+            Duke.run(des);
+        }
+    }
 
-                    if (command.equals("allCmd")) {
-                        Duke.possibleCommands();
-                    }
-
-                    if (command.equals("list")) {
-                        Duke.listCommand();
-                    }
-
-                    if (command.equals("done")) {
-                        Duke.doneCommand(des);
-                    }
-
-                    if (command.equals("deadline")) {
-                        Duke.deadlineCommand(des);
-                    }
-
-                    if (command.equals("event")) {
-                        Duke.eventCommand(des);
-                    }
-
-                    if (command.equals("todo")) {
-                        Duke.toDoCommand(des);
-                    }
-
-                    if (command.equals("delete")) {
-                        Duke.deleteCommand(des);
-                    }
-
+    public static void run(String des) {
+        String command = checkForKeyword(des);
+        try {
+            Duke.printLine();
+            if (command == null) {
+                throw new DukeException(des + " is not a recognised command\nPlease refer to the available commands using the \"allCmd\" command");
+            } else {
+                if (command.equals("bye")) {
+                    Duke.byeCommand();
                     Duke.printLine();
+                    System.exit(0);
                 }
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
+
+                if (command.equals("allCmd")) {
+                    Duke.possibleCommands();
+                }
+
+                if (command.equals("list")) {
+                    Duke.listCommand();
+                }
+
+                if (command.equals("done")) {
+                    Duke.doneCommand(des);
+                }
+
+                if (command.equals("deadline")) {
+                    Duke.deadlineCommand(des);
+                }
+
+                if (command.equals("event")) {
+                    Duke.eventCommand(des);
+                }
+
+                if (command.equals("todo")) {
+                    Duke.toDoCommand(des);
+                }
+
+                if (command.equals("delete")) {
+                    Duke.deleteCommand(des);
+                }
+
                 Duke.printLine();
             }
-
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            Duke.printLine();
         }
 
     }
