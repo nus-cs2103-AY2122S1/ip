@@ -1,10 +1,17 @@
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        // Credits to https://textart4u.blogspot.com/2014/04/frog-leap-unicode-copy-paste-text-art.html
+        // for the frog ASCII text art!
+        String frog =
+                "             ╭━━━╮━━━╮\n" +
+                "             ┃ ▉ ┃ ▉ ┃\n" +
+                " ╱▔▔╲  ╱▔▔▔╲╱    ╰▔▔▔▔╲        RIBBIT!\n" +
+                "╱  ╱╲╲╱╱         ╰━━━━╱\n" +
+                "╲╱╱▔▔╲╱╲         ╱▔▔▔▔▔\n" +
+                " ╱  ╱╲╲╱╱▔▔╲    ╰━━━╮━━━╮\n" +
+                " ╲ ╱  ╲╱    ▔▔▔▔▔▔▔╰╯▔▔╰╯";
+        System.out.println(frog);
+
+        String greeting = "My name is Jo and I love frogs! RIBBIT! ";
     }
 }
