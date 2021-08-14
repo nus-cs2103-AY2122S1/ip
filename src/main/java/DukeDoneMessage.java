@@ -4,7 +4,7 @@
  * It overrides methods in `DukeOutputMessage` to format the message differently for marking a task as done.
  */
 public class DukeDoneMessage extends DukeOutputMessage {
-    private static String DONE_PREFIX = "Nice! I've marked this task as done: ";
+    private static String DONE_PREFIX = "Nice! I've marked this task as done:";
 
     /**
      * Constructor to instantiate a `DukeDoneMessage`.

@@ -4,7 +4,7 @@
  * It overrides methods in `DukeOutputMessage` to format the message differently for adding.
  */
 public class DukeAddedMessage extends DukeOutputMessage {
-    private static String ADDED_PREFIX = "Got it. I've added this task: ";
+    private static String ADDED_PREFIX = "Got it. I've added this task:";
 
     /**
      * Constructor to instantiate a `DukeAddedMessage`.

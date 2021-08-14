@@ -4,7 +4,7 @@
  * It overrides methods in `DukeOutputMessage` to format the message differently for a list.
  */
 public class DukeListMessage extends DukeOutputMessage{
-    private static String LIST_PREFIX = "Here are the tasks in your list: ";
+    private static String LIST_PREFIX = "Here are the tasks in your list:";
 
     /**
      * Constructor to instantiate a `DukeListMessage`.
@@ -33,6 +33,6 @@ public class DukeListMessage extends DukeOutputMessage{
      */
     @Override
     public String getMessageWithFace() {
-        return this.getMessage() + "\n\tヽ(°〇°)ﾉ";
+        return this.getMessage() + "ヽ(°〇°)ﾉ";
     }
 }

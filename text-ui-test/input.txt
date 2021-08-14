@@ -1,0 +1,14 @@
+something
+todo eat cake
+deadline watch movie /by 4pm
+event eat icecream /at everyday
+list
+done 1
+list
+todo read book
+done 3
+list
+done 20
+deadline do homework /by 3pm
+list
+bye
