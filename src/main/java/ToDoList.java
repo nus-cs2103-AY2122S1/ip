@@ -47,11 +47,12 @@ public class ToDoList {
      *
      * @param index Index of task to be marked as done.
      */
-    public void markTaskAsDone(int index) {
+    public void markTaskAsDone(int index) throws DukeException {
         if (index > list.size()) {
-            Duke.prettyPrint("ERROR: Please enter an index that is shown in 'list'.");
+            throw new DukeException(
+                    "IndexOutOfBoundsError: Please enter an index that is shown in 'list'.");
         } else if (index < 0) {
-            Duke.prettyPrint("ERROR: I can't handle negative indexing.");
+            throw new DukeException("NegativeIndexError: I can't handle negative indexing.");
         } else {
             Task task = list.get(index - 1);
             task.markAsDone();

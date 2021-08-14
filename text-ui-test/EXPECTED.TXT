@@ -105,34 +105,34 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______    
 	5. [E][X] hackerschool (at: Sat 10AM)
 	--------------------------------------------------------
 	--------------------------------------------------------
-	ERROR: todo has to be followed by a description.
+	NoDescriptionError: todo has to be followed by a description.
 	--------------------------------------------------------
 	--------------------------------------------------------
-	ERROR: deadline has to be followed by a description.
+	NoDescriptionError: deadline has to be followed by a description.
 	--------------------------------------------------------
 	--------------------------------------------------------
-	ERROR: Please specify a deadline with '/by'.
+	NoDeadlineError: Please specify a deadline with '/by'.
 	--------------------------------------------------------
 	--------------------------------------------------------
-	ERROR: Please input only one deadline!
+	MultipleDateLineError: Please input only one deadline!
 	--------------------------------------------------------
 	--------------------------------------------------------
-	ERROR: event has to be followed by a description.
+	NoDescriptionError: event has to be followed by a description.
 	--------------------------------------------------------
 	--------------------------------------------------------
-	ERROR: Please specify a date/time with '/at'.
+	NoDateTimeError: Please specify a date/time with '/at'.
 	--------------------------------------------------------
 	--------------------------------------------------------
-	ERROR: Please input only one date/time!
+	MultipleDateTimeError: Please input only one date/time!
 	--------------------------------------------------------
 	--------------------------------------------------------
-	ERROR: I can't handle negative indexing.
+	NegativeIndexError: I can't handle negative indexing.
 	--------------------------------------------------------
 	--------------------------------------------------------
-	ERROR: Please enter an index that is shown in 'list'.
+	IndexOutOfBoundsError: Please enter an index that is shown in 'list'.
 	--------------------------------------------------------
 	--------------------------------------------------------
-	ERROR: Unrecognised command. Perhaps you made a typo?
+	NoSuchCommandError: Unrecognised command. Perhaps you made a typo?
 	--------------------------------------------------------
 	--------------------------------------------------------
 	Bye bye! See you again soon!

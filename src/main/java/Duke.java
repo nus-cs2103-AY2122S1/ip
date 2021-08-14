@@ -29,23 +29,40 @@ public class Duke {
         while (command != Command.EXIT) {
             switch (command) {
                 case TODO:
-                    handleTodo(input);
+                    try {
+                        handleTodo(input);
+                    } catch (DukeException e) {
+                        prettyPrint(e.getMessage());
+                    }
                     break;
                 case DEADLINE:
-                    handleDeadline(input);
+                    try {
+                        handleDeadline(input);
+                    } catch (DukeException e) {
+                        prettyPrint(e.getMessage());
+                    }
                     break;
                 case EVENT:
-                    handleEvent(input);
+                    try {
+                        handleEvent(input);
+                    } catch (DukeException e) {
+                        prettyPrint(e.getMessage());
+                    }
                     break;
                 case LIST:
                     list.printList();
                     break;
                 case DONE:
                     int index = extractIndex(input);
-                    list.markTaskAsDone(index);
+                    try {
+                        list.markTaskAsDone(index);
+                    } catch (DukeException e) {
+                        prettyPrint(e.getMessage());
+                    }
                     break;
                 case UNRECOGNISED:
-                    Duke.prettyPrint("ERROR: Unrecognised command. Perhaps you made a typo?");
+                    Duke.prettyPrint(
+                            "NoSuchCommandError: Unrecognised command. Perhaps you made a typo?");
                     break;
             }
             input = sc.nextLine();
@@ -107,13 +124,15 @@ public class Duke {
      *
      * @param input Raw user's input.
      */
-    private static void handleTodo(String input) {
+    private static void handleTodo(String input) throws DukeException {
         String[] extracted = input.split(" ", 2);
+
         // Check whether description is entered
         if (extracted.length < 2) {
-            prettyPrint("ERROR: todo has to be followed by a description.");
-            return;
+            throw new DukeException(
+                    "NoDescriptionError: todo has to be followed by a description.");
         }
+
         ToDo task = new ToDo(extracted[1]);
         list.addToList(task);
     }
@@ -123,22 +142,20 @@ public class Duke {
      *
      * @param input Raw user's input.
      */
-    private static void handleDeadline(String input) {
+    private static void handleDeadline(String input) throws DukeException {
         // Check whether description is entered
         if (input.split(" ").length < 2) {
-            prettyPrint("ERROR: deadline has to be followed by a description.");
-            return;
+            throw new DukeException(
+                    "NoDescriptionError: deadline has to be followed by a description.");
         }
 
         String[] extracted = input.split(" ", 2)[1].split(" /by ");
 
         // Check whether deadline is specified correctly
         if (extracted.length < 2) {
-            prettyPrint("ERROR: Please specify a deadline with '/by'.");
-            return;
+            throw new DukeException("NoDeadlineError: Please specify a deadline with '/by'.");
         } else if (extracted.length > 2) {
-            prettyPrint("ERROR: Please input only one deadline!");
-            return;
+            throw new DukeException("MultipleDateLineError: Please input only one deadline!");
         }
 
         String description = extracted[0];
@@ -152,22 +169,20 @@ public class Duke {
      *
      * @param input Raw user's input.
      */
-    private static void handleEvent(String input) {
+    private static void handleEvent(String input) throws DukeException {
         // Check whether description is entered
         if (input.split(" ").length < 2) {
-            prettyPrint("ERROR: event has to be followed by a description.");
-            return;
+            throw new DukeException(
+                    "NoDescriptionError: event has to be followed by a description.");
         }
 
         String[] extracted = input.split(" ", 2)[1].split(" /at ");
 
         // Check whether deadline is specified correctly
         if (extracted.length < 2) {
-            prettyPrint("ERROR: Please specify a date/time with '/at'.");
-            return;
+            throw new DukeException("NoDateTimeError: Please specify a date/time with '/at'.");
         } else if (extracted.length > 2) {
-            prettyPrint("ERROR: Please input only one date/time!");
-            return;
+            throw new DukeException("MultipleDateTimeError: Please input only one date/time!");
         }
 
         String description = extracted[0];
