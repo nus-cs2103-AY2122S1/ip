@@ -3,11 +3,18 @@ deadline hello world /by time
 event hello world /at time
 done 2
 list
+delete 2
+list
 todo
 event
 deadline
 event hello
 deadline hello
 blah
+done
 done 100
+done hi
+delete
+delete 100
+delete hi
 bye

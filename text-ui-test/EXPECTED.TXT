@@ -15,11 +15,22 @@ Here are the tasks in your list:
 1.[T][ ] hello world
 2.[D][X] hello world  (by: time)
 3.[E][ ] hello world  (at: time)
+Noted. I've removed this task:
+[D][X] hello world  (by: time)
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1.[T][ ] hello world
+2.[E][ ] hello world  (at: time)
 ? OOPS!!! The description of todo cannot be empty.
 ? OOPS!!! The description of event cannot be empty.
 ? OOPS!!! The description of deadline cannot be empty.
 ? OOPS!!! /at must be provided and not empty for an event.
 ? OOPS!!! /by must be provided and not empty for a deadline.
 ? OOPS!!! I'm sorry, but I don't know what that means :-(
+? OOPS!!! An index must be provided to mark task at the index as done.
 ? OOPS!!! Index provided for done is either less than 1 or exceeds the length of the list, hence invalid.
+? OOPS!!! Index for done must be an integer.
+? OOPS!!! An index must be provided to delete task at index.
+? OOPS!!! Index provided for delete is either less than 1 or exceeds the length of the list, hence invalid.
+? OOPS!!! Index for delete must be an integer.
 Bye. Hope to see you again soon!
