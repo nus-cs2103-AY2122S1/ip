@@ -10,8 +10,10 @@ public class Duke {
 
     //True if user has said bye, false if otherwise
     private boolean bye;
-    //The private constant for displaying the lines between messages
-    private final String indentation = "-----------------------------------------------";
+    //The protected constant for displaying the lines between messages
+    protected static final String indentation = "---------------------------------------"
+                                              + "-------------------------------------"
+                                              + "-------------------------------------";
     //The list which stores the user's message
     private final List<Task> history;
 
@@ -28,9 +30,9 @@ public class Duke {
      * Method to give the start message
      */
     public void startMessage() {
-        String logo = "Welcome to Petal (•◡•)/ ";
-        String logo2 = "\nI am the best chat bot you'll meet! Don't be shy, say something! :P";
-        System.out.println(logo + logo2);
+        String logo = "\nWelcome to Petal (•◡•)/ ";
+        String logo2 = "\nI am the best chat bot you'll meet! Don't be shy, say something! :P\n";
+        System.out.println(indentation + logo + logo2 + indentation);
     }
 
     /**
@@ -50,16 +52,14 @@ public class Duke {
                                             || message.contains("event")) {
             handleTask(message);
         } else {
-            System.out.println(indentation + "---------------------------------------"
-                                           + "-----------------------");
+            System.out.println(indentation);
             System.out.println("I didn't understand that :( Could you please type it in again?");
             System.out.println("\nUse 'todo <insert activity>' to create a to-do!");
             System.out.println("\nUse 'deadline <insert activity> /by <insert deadline>' " +
                                "to create an activity with a deadline!");
             System.out.println("\nUse 'event <insert activity> /at <insert start/end time>' " +
                                "to create an activity with a start/end time!");
-            System.out.println(indentation + "---------------------------------------"
-                                           + "-----------------------");
+            System.out.println(indentation);
         }
     }
 
@@ -102,7 +102,8 @@ public class Duke {
      */
     public void goodBye() {
         bye = true;
-        System.out.println(indentation + "You're leaving :( I hope you return soon!" + "\n" + indentation);
+        System.out.println(indentation + "\nYou're leaving :( I hope you return soon!\n"
+                                       + indentation);
     }
 
     /**
