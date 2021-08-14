@@ -152,7 +152,7 @@ public class Lifeline {
 
     private void printList() {
         if (taskList.size() == 0) {
-            System.out.println("You have remaining tasks.\n");
+            System.out.println("You have no remaining tasks.\n");
         } else {
             int uncompletedTask = 0;
             System.out.println("Here " + (taskList.size() > 1 ? "are" : "is")
