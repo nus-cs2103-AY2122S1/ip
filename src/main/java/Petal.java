@@ -43,9 +43,6 @@ public class Petal {
         String[] msg = message.split(" ");
         try {
             switch (msg[0]) {
-                case "":
-                    emptyMessage();
-                    break;
                 case "list":
                     printList();
                     break;
@@ -63,6 +60,7 @@ public class Petal {
                     break;
             }
         } catch (EmptyDescException | InvalidInputException | IndexOutOfBoundsException | NumberFormatException e1)  {
+            System.out.println(indentation);
             System.out.println(e1.getMessage());
             requiredFormat();
         } catch (PetalException e) {
@@ -84,15 +82,15 @@ public class Petal {
         String[] checkType = message.split(" ");
         String desc = message.substring(message.indexOf(" ") + 1);
         boolean isValidInput = checkType[0].equals("todo") || checkType[0].equals("deadline")
-                                                            || checkType[0].equals("event");
-        boolean descAvail = !message.contains(" ") ||
-                            desc.isBlank();
-        if (descAvail) {
-            throw new EmptyDescException("(っ- ‸ – ς)! It seems like there was no description"
-                                                      + "! Please enter a description\n");
-        }
+                                                           || checkType[0].equals("event");
         if (!isValidInput) {
-            throw new InvalidInputException("っ- ‸ – ς)! I did not understand what you said :(\n");
+            throw new InvalidInputException("(っ- ‸ – ς)! I did not understand what you said :(\n");
+        }
+        boolean descNotAvail = !message.contains(" ") ||
+                            desc.isBlank();
+        if (descNotAvail) {
+            throw new EmptyDescException("(っ- ‸ – ς)! It seems like there was no description"
+                                                      + "! Please enter a description.\n");
         }
         Task task;
         String taskWithTime = message.substring(message.indexOf(" ") + 1);
@@ -137,7 +135,7 @@ public class Petal {
      */
     public void emptyMessage() {
         System.out.println(indentation + "\nThat was an empty message! Say something."
-                + "\n" + indentation);
+                                       + "\n" + indentation);
     }
 
     /**
