@@ -1,22 +1,35 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
     private static final String LINE_SEPARATOR = "\t____________________________________________________________\n";
-    private static final ArrayList<String> taskList = new ArrayList<>();
+    private static final ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String input;
         Duke.greet();
         while (!(input = scanner.nextLine()).equals("bye")) {
-            if (input.equals("list")) {
-                Duke.printTaskList();
-            } else {
-                Duke.addTask(input);
-            }
+            handleUserInput(input);
         }
         Duke.exit();
+    }
+
+    /**
+     * Handles user input conditionally based on the command.
+     */
+    private static void handleUserInput(String input) {
+        switch(input.split(" ")[0]) {
+            case "list":
+                Duke.printTaskList();
+                break;
+            case "done":
+                Duke.setTaskDone(Integer.parseInt(input.split(" ")[1]));
+                break;
+            default:
+                Duke.addTask(input);
+        }
     }
 
     /**
@@ -49,21 +62,30 @@ public class Duke {
      * @param input to be added and printed.
      */
     public static void addTask(String input) {
-        taskList.add(input);
+        taskList.add(new Task(input));
         Duke.print(String.format("added: %s", input));
+    }
+
+    /**
+     * Set i-th task to be done and prints confirmation message.
+     */
+    private static void setTaskDone(int i) {
+        Task task = taskList.get(i - 1);
+        task.setDone();
+        print(String.format("Nice! I've marked this task as done:\n  %s", task.toString()));
     }
 
     /**
      * Prints out the task list formatted and indented.
      */
     private static void printTaskList() {
-        StringBuilder taskString = new StringBuilder();
+        StringBuilder tasksString = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
-            String task = i == taskList.size() - 1
-                    ? String.format("%d. %s", i + 1, taskList.get(i))
-                    : String.format("%d. %s\n", i + 1, taskList.get(i));
-            taskString.append(task);
+            String taskAsString = i == taskList.size() - 1
+                    ? String.format("%d.%s", i + 1, taskList.get(i))
+                    : String.format("%d.%s\n", i + 1, taskList.get(i));
+            tasksString.append(taskAsString);
         }
-        Duke.print(taskString.toString());
+        Duke.print(tasksString.toString());
     }
 }
