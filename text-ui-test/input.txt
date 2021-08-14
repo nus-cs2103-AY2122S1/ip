@@ -1,13 +1,26 @@
-event go clubbing /at 23rd Janurary 2am-4am
+event go clubbing /at 23rd January 2am-4am
 list
 hello
 todo brush teeth everyday
 event zoom meeting with profs /at 3rd August 9pm-10pm
+deadline return book /by Sunday
 done 3
 done 2
 done 3
-deadline return book /by Sunday
 deadline complete Math Homework /by 23/04/21
 event Sentosa outing /at 25/07/21 8am-4pm
 list
+event
+event zoom meeting with Teo
+event zoom meeting with Teo /at
+event zoom meeting with Teo /at 2pm-3pm
+deadline
+deadline complete CS Project
+deadline complete CS Project /by
+deadline complete CS Project /by 2359HRs
+todo
+list
+done 7, 3
+done 7
+bye bye
 bye

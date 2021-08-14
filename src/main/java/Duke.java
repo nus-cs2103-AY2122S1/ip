@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<Task>();
 
-    private enum Keywords {bye, list, done, todo, deadline, event, allCmd}
+    private enum Keywords {bye, list, done, todo, deadline, event, allCmd, delete}
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -20,43 +20,49 @@ public class Duke {
         while (true) {
             String des = sc.nextLine();
             String command = checkForKeyword(des);
-            if (command == null) {
+            try {
                 Duke.printLine();
-                System.out.println(des + " is not a recognised command");
-                System.out.println("Please refer to the available commands using the \"allCmd\" command");
-                Duke.printLine();
-            } else {
-                Duke.printLine();
-                if (command.equals("bye")) {
-                    Duke.byeCommand();
+                if (command == null) {
+                    throw new DukeException(des + " is not a recognised command\nPlease refer to the available commands using the \"allCmd\" command");
+                } else {
+                    if (command.equals("bye")) {
+                        Duke.byeCommand();
+                        Duke.printLine();
+                        break;
+                    }
+
+                    if (command.equals("allCmd")) {
+                        Duke.possibleCommands();
+                    }
+
+                    if (command.equals("list")) {
+                        Duke.listCommand();
+                    }
+
+                    if (command.equals("done")) {
+                        Duke.doneCommand(des);
+                    }
+
+                    if (command.equals("deadline")) {
+                        Duke.deadlineCommand(des);
+                    }
+
+                    if (command.equals("event")) {
+                        Duke.eventCommand(des);
+                    }
+
+                    if (command.equals("todo")) {
+                        Duke.toDoCommand(des);
+                    }
+
+                    if (command.equals("delete")) {
+                        Duke.deleteCommand(des);
+                    }
+
                     Duke.printLine();
-                    break;
                 }
-
-                if (command.equals("allCmd")) {
-                    Duke.possibleCommands();
-                }
-
-                if (command.equals("list")) {
-                    Duke.listCommand();
-                }
-
-                if (command.equals("done")) {
-                    Duke.doneCommand(des);
-                }
-
-                if (command.equals("deadline")) {
-                    Duke.deadlineCommand(des);
-                }
-
-                if (command.equals("event")) {
-                    Duke.eventCommand(des);
-                }
-
-                if (command.equals("todo")) {
-                    Duke.toDoCommand(des);
-                }
-
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
                 Duke.printLine();
             }
 
@@ -64,11 +70,11 @@ public class Duke {
 
     }
 
-    public static void byeCommand() {
+    public static void byeCommand() throws DukeException {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void listCommand() {
+    public static void listCommand() throws DukeException {
         int count = 1;
         System.out.println("Here are the tasks in your list:");
         for (Task t : taskList) {
@@ -89,16 +95,17 @@ public class Duke {
         }
     }
 
-    public static void doneCommand(String des) {
+    public static void doneCommand(String des) throws DukeException {
         String sNum = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(sNum);
         if (num <= 0 || num > taskList.size()) {
-            System.out.println("The input number is not a valid task number.");
-            System.out.println("Please refer to the task list using the \"list\" command.");
+            throw new DukeException("The input number is not a valid task number \nPlease refer to the task list using the \"list\" command");
+        } else if (Duke.countSpaces(des) > 1) {
+            throw new DukeException("Too many arguments being provided to \"done\" \nPlease refer to proper usage of commands with \"allCmd\"");
         } else {
             Task atHand = taskList.get(num - 1);
             if (atHand.getIsDone()) {
-                System.out.println("You have already completed this task.");
+                throw new DukeException("You have already completed this task.");
             } else {
                 atHand.markAsDone();
                 System.out.println("I see that you have completed a task. Keep up the good work!");
@@ -109,40 +116,66 @@ public class Duke {
         }
     }
 
-    public static void removeCommand(String des) {
+    public static void deleteCommand(String des) throws DukeException {
         String sNum = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(sNum);
         if (num <= 0 || num > taskList.size()) {
-            System.out.println("The input number is not a valid task number.");
-            System.out.println("Please refer to the task list using the \"list\" command.");
+            throw new DukeException("The input number is not a valid task number \nPlease refer to the task list using the \"list\" command");
+        } else if (Duke.countSpaces(des) > 1) {
+            throw new DukeException("Too many arguments being provided to \"done\" \nPlease refer to proper usage of commands with \"allCmd\"");
         } else {
             taskList.remove(num);
         }
     }
 
-    public static void deadlineCommand(String des) {
+    public static void deadlineCommand(String des) throws DukeException {
+        if (des.equals("deadline")) {
+            throw new DukeException("\"deadline\" command not correctly formatted \nPlease insert task and due date arguments");
+        }
+        if (!des.contains("/")) {
+            throw new DukeException("\"deadline\" command not correctly formatted \nPlease do not forget to include \"by\" and insert due date argument");
+        }
         String description = des.substring(9, des.indexOf('/') - 1);
-        String date = des.substring(des.indexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
-        Task atHand = new Deadline(description, date);
-        Deadline deadlineAtHand = (Deadline) atHand;
-        taskList.add(atHand);
-        System.out.println("Sure. The following task has been added: ");
-        System.out.println(deadlineAtHand);
-        Duke.numberOfTasks();
+        try {
+            String date = des.substring(des.indexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
+            Task atHand = new Deadline(description, date);
+            Deadline deadlineAtHand = (Deadline) atHand;
+            taskList.add(atHand);
+            System.out.println("Sure. The following task has been added: ");
+            System.out.println(deadlineAtHand);
+            Duke.numberOfTasks();
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("\"deadline\" command not correctly formatted \nPlease insert timeframe argument");
+        }
+
     }
 
-    public static void eventCommand(String des) {
+    public static void eventCommand(String des) throws DukeException {
+        if (des.equals("event")) {
+            throw new DukeException("\"event\" command not correctly formatted \nPlease insert task and timeframe arguments");
+        }
+        if (!des.contains("/")) {
+            throw new DukeException("\"event\" command not correctly formatted \nPlease do not forget to include \"by\" and insert timeframe argument");
+        }
         String description = des.substring(6, des.indexOf('/') - 1);
-        String timeframe = des.substring(des.indexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
-        Task atHand = new Event(description, timeframe);
-        Event eventAtHand = (Event) atHand;
-        taskList.add(atHand);
-        System.out.println("Sure. The following task has been added: ");
-        System.out.println(eventAtHand);
-        Duke.numberOfTasks();
+        try {
+            String timeframe = des.substring(des.indexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
+            Task atHand = new Event(description, timeframe);
+            Event eventAtHand = (Event) atHand;
+            taskList.add(atHand);
+            System.out.println("Sure. The following task has been added: ");
+            System.out.println(eventAtHand);
+            Duke.numberOfTasks();
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("\"event\" command not correctly formatted \nPlease insert timeframe argument");
+        }
+
     }
 
-    public static void toDoCommand(String des) {
+    public static void toDoCommand(String des) throws DukeException {
+        if (des.equals("todo")) {
+            throw new DukeException("\"todo\" command not correctly formatted \nPlease insert task argument");
+        }
         String description = des.substring(5);
         Task atHand = new ToDo(description);
         ToDo toDoAtHand = (ToDo) atHand;
@@ -160,7 +193,7 @@ public class Duke {
                 return "bye";
             } else if (keyword.name().equals("list") && des.equals(keyword.name())) {
                 return "list";
-            } else if (keyword.name().equals("done") && des.substring(0, 4).equals("done")) {
+            } else if (keyword.name().equals("done") && des.contains("done") && des.substring(0, 4).equals("done")) {
                 try {
                     String sNum = des.substring(des.lastIndexOf(' ') + 1);
                     int num = Integer.parseInt(sNum);
@@ -176,9 +209,9 @@ public class Duke {
                 } catch (NumberFormatException e) {
                     return null;
                 }
-            } else if (keyword.name().equals("deadline") && des.contains("deadline") && des.substring(0, 8).equals("deadline") && des.contains("/")) {
+            } else if (keyword.name().equals("deadline") && des.contains("deadline") && des.substring(0, 8).equals("deadline")) {
                 return "deadline";
-            } else if (keyword.name().equals("event") && des.contains("event") && des.substring(0, 5).equals("event") && des.contains("/")) {
+            } else if (keyword.name().equals("event") && des.contains("event") && des.substring(0, 5).equals("event")) {
                 return "event";
             } else if (keyword.name().equals("todo") && des.contains("todo") && des.substring(0, 4).equals("todo")) {
                 return "todo";
@@ -197,6 +230,16 @@ public class Duke {
         } else {
             System.out.println("You now have " + taskList.size() + " tasks in the list");
         }
+    }
+
+    public static int countSpaces(String des) {
+        int count = 0;
+        for (int i = 0; i < des.length(); i++) {
+            if (des.charAt(i) == ' ') {
+                count++;
+            }
+        }
+        return count;
     }
 
     public static void possibleCommands() {
