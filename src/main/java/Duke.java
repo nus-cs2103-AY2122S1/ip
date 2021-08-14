@@ -27,8 +27,8 @@ public class Duke {
             } else {
                 Task t = taskList.get(index - 1);
                 t.markAsDone();
-                System.out.println(wrapOutput("Nice, `" + t.getDescription()
-                        + "` has been marked as done!"));
+                System.out.println(wrapOutput("Nice, I've marked this task as done!\n   " +
+                        t.toString()));
             }
         }
     }
@@ -39,7 +39,7 @@ public class Duke {
                 + "\tYou can type:\n"
                 + "\t\t `list` to get a list of tasks\n"
                 + "\t\t `done ${i}` to mark task i as completed\n"
-                + "\t\t `bye` to end this chat.\n";
+                + "\t\t `bye` to end this chat\n";
         String endMessage = "\n\tSad to see you go :(\n\t...shutting down...";
 
         ArrayList<Task> taskList = new ArrayList<>();
@@ -57,7 +57,7 @@ public class Duke {
                 String res = "";
                 for (int i = 0; i < taskList.size(); i++) {
                     Task t = taskList.get(i);
-                    res += (i + 1) + ". [" + t.getStatusIcon() + "] " + t.getDescription() + "\n";
+                    res += (i + 1) + ". " + t.toString() + "\n";
                 }
                 System.out.println(wrapOutput(res.substring(0, res.length() - 1)));
             } else if (input.split(" ")[0].equals("done")) {
