@@ -34,7 +34,7 @@ public class Duke {
                     break;
                 default:
                     tasks.add(input);
-                    printOut(input);
+                    printOut(String.format("added: %s", input));
                     break;
             }
             input = scanner.nextLine();
