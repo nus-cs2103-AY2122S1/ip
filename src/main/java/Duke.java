@@ -16,19 +16,28 @@ public class Duke {
                     + "   \\    /\\    /    |  |____ |  `----.|  `----.|  `--'  | |  |  |  | |  |____        |  |     |  `--'  |    |  '--'  ||  `--'  | |  .  \\  |  |____ |__| \n"
                     + "    \\__/  \\__/     |_______||_______| \\______| \\______/  |__|  |__| |_______|       |__|      \\______/     |_______/  \\______/  |__|\\__\\ |_______|(__) \n"
                     + "                                                                                                                                                       ";
-    static final List list = new List();
+    static final ToDoList list = new ToDoList();
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         printWelcomeMessage();
         String input = sc.nextLine();
-        while (!input.equalsIgnoreCase("exit")) {
-            if (input.equalsIgnoreCase("list")) {
-                list.printList();
-            } else {
-                list.addToList(input);
+        Command command = detectCommand(input);
+        while (command != Command.EXIT) {
+            switch (command) {
+                case ADD:
+                    list.addToList(input);
+                    break;
+                case LIST:
+                    list.printList();
+                    break;
+                case DONE:
+                    int index = extractIndex(input);
+                    list.markTaskAsDone(index);
+                    break;
             }
             input = sc.nextLine();
+            command = detectCommand(input);
         }
         printExitMessage();
     }
@@ -36,27 +45,35 @@ public class Duke {
     /**
      * Formats message passed in and prints it out to the screen.
      *
-     * @param message Message to be pretty printed. */
+     * @param message Message to be pretty printed.
+     */
     public static void prettyPrint(String message) {
         System.out.printf("%s\n\t%s\n%s%n", divider, message, divider);
     }
 
-    /**
-     * Prints the welcome message when a user uses the bot for the first time.
-     */
-    public static void printWelcomeMessage() {
+    /** Prints the welcome message when a user uses the bot for the first time. */
+    private static void printWelcomeMessage() {
         System.out.println(banner);
         prettyPrint(
-                "Hello! I'm Duke, your personal CLI bot!\n\t"
-                        + "I can now help you keep track of things!\n\t"
-                        + "Simply type in what you need me to keep track of and type 'list' to see the things you have added.\n\t"
+                "Hello, I'm Duke, your personal CLI bot!\n\t"
+                        + "I now function as a simple ToDoList.\n\t"
+                        + "Type in tasks that you want me to keep track of and type 'list' to see the tasks you have added.\n\t"
+                        + "You can also mark tasks as done by typing 'done' followed by the index of the task you completed (e.g done 2).\n\t"
                         + "Once you are done, just type 'exit' to quit the program.");
     }
 
-    /**
-     * Prints the exit message when user types in the exit command.
-     */
-    public static void printExitMessage() {
+    private static Command detectCommand(String input) {
+        String[] inputs = input.split(" ");
+        return Command.convertInput(inputs[0]);
+    }
+
+    private static int extractIndex(String input) {
+        String[] inputs = input.split(" ");
+        return Integer.parseInt(inputs[1]);
+    }
+
+    /** Prints the exit message when user types in the exit command. */
+    private static void printExitMessage() {
         prettyPrint("Bye bye! See you again soon!");
     }
 }
