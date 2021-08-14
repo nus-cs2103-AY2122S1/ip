@@ -16,32 +16,40 @@ public class Duke {
         String inputExitMessage = "bye";
         String inputListMessage = "list";
         String inputDoneMessage = "done";
+        String inputDeleteMessage = "delete";
 
         DukeTaskList list = new DukeTaskList();
         Scanner inputScanner = new Scanner(System.in);
         String inputMessage = inputScanner.nextLine();
 
-        while (!inputMessage.equals(inputExitMessage)) {
+        while (!inputMessage.trim().equals(inputExitMessage)) {
             DukeOutputMessage outputMessage;
 
             if (inputMessage.equals(inputListMessage)) {
                 // Output the list
                 outputMessage = new DukeListMessage(list.getList());
-            } else if (inputMessage.length() >=4 && inputMessage.substring(0, 4).equals(inputDoneMessage)) {
+            } else if (inputMessage.length() >= 4 && inputMessage.substring(0, 4).equals(inputDoneMessage)) {
                 try {
                     // Get the task number that should be marked as done
                     // The task number should be after 'done' and space
-                    int taskNumber = Integer.parseInt(inputMessage.substring(5));
+                    int taskNumber = getTaskNumberFromInputMessage(inputMessage.substring(4).trim());
 
                     DukeTask task = list.getTaskByTaskNumber(taskNumber);
                     task.markAsDone();
                     outputMessage = new DukeDoneMessage(task.toString());
-                } catch (NumberFormatException e) {
-                    outputMessage = new DukeOutputMessage(
-                        "Please enter a valid task number when marking a task as done " +
-                        "in the form of 'done X', where X is the task number to be marked as done"
-                    );
-                } catch (NonExistentTaskNumberException e) {
+                } catch (NonExistentTaskNumberException | InvalidTaskNumberException e) {
+                    outputMessage = new DukeOutputMessage(e.getMessage());
+                }
+            } else if (inputMessage.length() >= 6 && inputMessage.substring(0, 6).equals(inputDeleteMessage)) {
+                try {
+                    // Get the task number that should be deleted
+                    // The task number should be after 'delete' and space
+                    int taskNumber = getTaskNumberFromInputMessage(inputMessage.substring(6).trim());
+
+                    DukeTask task = list.getTaskByTaskNumber(taskNumber);
+                    list.deleteTaskFromList(taskNumber);
+                    outputMessage = new DukeDeletedMessage(task.toString(), list.getNumberOfTasks());
+                } catch (NonExistentTaskNumberException | InvalidTaskNumberException e) {
                     outputMessage = new DukeOutputMessage(e.getMessage());
                 }
             } else {
@@ -53,8 +61,7 @@ public class Duke {
                 } catch (
                         InvalidTaskTypeException |
                         InvalidTaskTimeFormatException |
-                        MissingTaskDescriptionException |
-                        FullTaskListException e
+                        MissingTaskDescriptionException e
                 ) {
                     outputMessage = new DukeOutputMessage(e.getMessage());
                 }
@@ -68,5 +75,13 @@ public class Duke {
         // Exit
         DukeExitMessage exitMessage = new DukeExitMessage("Bye, see you again");
         System.out.println(exitMessage.getFormattedMessage());
+    }
+
+    public static int getTaskNumberFromInputMessage(String inputMessage) throws InvalidTaskNumberException {
+        try {
+            return Integer.parseInt(inputMessage);
+        } catch (NumberFormatException e) {
+            throw new InvalidTaskNumberException(inputMessage);
+        }
     }
 }

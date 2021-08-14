@@ -1,23 +1,28 @@
+import java.util.ArrayList;
+
 /**
  * Encapsulates a task list storing the users input tasks.
  */
 public class DukeTaskList {
-    private int maxCapacity = 100;
-    private DukeTask[] list = new DukeTask[maxCapacity];
-    private int indexOfNextNewItem = 0;
+    private ArrayList<DukeTask> list = new ArrayList<>();
 
     /**
-     * Adds tasks to a list that can take up to 100 items.
+     * Adds task to a list.
      *
      * @param task is the task be added to the list
      */
-    public void addTaskToList(DukeTask task) throws FullTaskListException {
-        if (this.indexOfNextNewItem == this.maxCapacity) {
-            throw new FullTaskListException(this.maxCapacity);
-        }
+    public void addTaskToList(DukeTask task) {
+        this.list.add(task);
+    }
 
-        this.list[this.indexOfNextNewItem] = task;
-        this.indexOfNextNewItem += 1;
+    /**
+     * Delete task from a list.
+     *
+     * @param taskNumber is the number of the task to be removed from the list
+     */
+    public void deleteTaskFromList(int taskNumber) throws NonExistentTaskNumberException {
+        validateTaskNumberExists(taskNumber);
+        this.list.remove(taskNumber - 1);
     }
 
     /**
@@ -28,8 +33,8 @@ public class DukeTaskList {
     public String getList() {
         StringBuilder stringBuilderList = new StringBuilder();
 
-        for (int i = 0; i < this.indexOfNextNewItem; i++) {
-            DukeTask task = this.list[i];
+        for (int i = 0; i < this.list.size(); i++) {
+            DukeTask task = this.list.get(i);
             String listItem = String.format("%d. %s\n\t", i + 1, task.toString());
             stringBuilderList.append(listItem);
         }
@@ -45,7 +50,7 @@ public class DukeTaskList {
      * @return true if the task number exists in the list, otherwise false
      */
     private boolean contains(int taskNumber) {
-        return taskNumber > 0 && taskNumber <= this.indexOfNextNewItem;
+        return taskNumber > 0 && taskNumber <= this.list.size();
     }
 
     /**
@@ -55,11 +60,8 @@ public class DukeTaskList {
      * @return a `DukeTask`
      */
     public DukeTask getTaskByTaskNumber(int taskNumber) throws NonExistentTaskNumberException {
-        if (!this.contains(taskNumber)) {
-            throw new NonExistentTaskNumberException(taskNumber);
-        }
-
-        return this.list[taskNumber - 1];
+        validateTaskNumberExists(taskNumber);
+        return this.list.get(taskNumber - 1);
     }
 
     /**
@@ -68,6 +70,12 @@ public class DukeTaskList {
      * @return the number of tasks in the list
      */
     public int getNumberOfTasks() {
-        return this.indexOfNextNewItem;
+        return this.list.size();
+    }
+
+    private void validateTaskNumberExists(int taskNumber) throws NonExistentTaskNumberException {
+        if (!this.contains(taskNumber)) {
+            throw new NonExistentTaskNumberException(taskNumber);
+        }
     }
 }
