@@ -3,6 +3,11 @@ list
 deadline presentation for hackers /by Thursday
 event meeting /at COM1 4-6pm
 todo prep for lesson 3
+todo
+todo
+event conference /at
+deadline submission friday
+Hi
 list
 done 0
 done 7

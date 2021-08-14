@@ -34,16 +34,31 @@
 			 Now you have 4 tasks in the list.
 
 --> 
+	@Herb:~$ A task requires a description following it!
+
+--> 
+	@Herb:~$ A task requires a description following it!
+
+--> 
+	@Herb:~$ Invalid format! Try `event ${item} /at ${time}`
+
+--> 
+	@Herb:~$ Invalid format! Try `deadline ${item} /by ${time}`
+
+--> 
+	@Herb:~$ I'm not too sure what you mean :(
+
+--> 
 	@Herb:~$ 1. [T][ ] complete IP
 			 2. [D][ ] presentation for hackers (by: Thursday)
 			 3. [E][ ] meeting (at: COM1 4-6pm)
 			 4. [T][ ] prep for lesson 3
 
 --> 
-	@Herb:~$ Not a valid task!
+	@Herb:~$ Not a valid task number!
 
 --> 
-	@Herb:~$ Not a valid task!
+	@Herb:~$ Not a valid task number!
 
 --> 
 	@Herb:~$ Enter valid integer!
