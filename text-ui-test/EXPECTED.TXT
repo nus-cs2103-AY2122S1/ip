@@ -1,7 +1,62 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+    ____________________________________________________________
+     Hey! I'm Duke (Tsun)!
+     What do you want?
+     ...It's not like I want to help you or anything!
+    ____________________________________________________________
+
+    ____________________________________________________________
+     I've added this task but it's not like I did for you or anything!
+       [T][ ] read book
+     Now you have 1 task in the list. Do your best doing them okay?
+    ____________________________________________________________
+
+    ____________________________________________________________
+     I've added this task but it's not like I did for you or anything!
+       [D][ ] return book (by: June 6th)
+     Now you have 2 tasks in the list. Do your best doing them okay?
+    ____________________________________________________________
+
+    ____________________________________________________________
+     I've added this task but it's not like I did for you or anything!
+       [E][ ] project meeting (by: Aug 6th 2-4pm)
+     Now you have 3 tasks in the list. Do your best doing them okay?
+    ____________________________________________________________
+
+    ____________________________________________________________
+     You completed a task! Maybe you aren't so incompetent after all.
+       [T][X] read book
+    ____________________________________________________________
+
+    ____________________________________________________________
+     1:[T][X] read book
+     2:[D][ ] return book (by: June 6th)
+     3:[E][ ] project meeting (by: Aug 6th 2-4pm)
+    ____________________________________________________________
+
+    ____________________________________________________________
+     I've added this task but it's not like I did for you or anything!
+       [T][ ] graduate
+     Now you have 4 tasks in the list. Do your best doing them okay?
+    ____________________________________________________________
+
+    ____________________________________________________________
+     You completed a task! Maybe you aren't so incompetent after all.
+       [D][X] return book (by: June 6th)
+    ____________________________________________________________
+
+    ____________________________________________________________
+     You completed a task! Maybe you aren't so incompetent after all.
+       [E][X] project meeting (by: Aug 6th 2-4pm)
+    ____________________________________________________________
+
+    ____________________________________________________________
+     1:[T][X] read book
+     2:[D][X] return book (by: June 6th)
+     3:[E][X] project meeting (by: Aug 6th 2-4pm)
+     4:[T][ ] graduate
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Hmph! It's not like I want to see you again or anything!
+    ____________________________________________________________
 
