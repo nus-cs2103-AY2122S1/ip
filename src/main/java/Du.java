@@ -9,7 +9,12 @@ public class Du {
         String command = sc.nextLine();
 
         while (!Objects.equals(command, "bye")) {
-            Command.echo(command);
+            if (Objects.equals(command, "list")) {
+                Task.print_list_of_tasks();
+            } else {
+                Task task = new Task(command);
+                task.log_add_task();
+            }
             command = sc.nextLine();
         }
         Command.close_programme();
