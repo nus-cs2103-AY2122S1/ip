@@ -11,12 +11,4 @@ abstract public class Task {
 
     abstract public Task markDone();
 
-    @Override
-    public String toString() {
-        if (this.done) {
-            return String.format("[ ] [X] %s", this.taskDescription);
-        } else {
-            return String.format("[ ] [ ] %s", this.taskDescription);
-        }
-    }
 }

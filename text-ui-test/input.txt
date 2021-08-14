@@ -1,0 +1,8 @@
+todo A
+todo B
+deadline C /by 2020-07-21
+event D /at Mon 2-4pm
+done 1
+done 2
+list
+bye
