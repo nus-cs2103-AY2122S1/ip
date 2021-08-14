@@ -45,7 +45,7 @@ public class Duke {
                     list.markTaskAsDone(index);
                     break;
                 case UNRECOGNISED:
-                    Duke.prettyPrint("Unrecognised command. Perhaps you made a typo?");
+                    Duke.prettyPrint("ERROR: Unrecognised command. Perhaps you made a typo?");
                     break;
             }
             input = sc.nextLine();
@@ -109,6 +109,11 @@ public class Duke {
      */
     private static void handleTodo(String input) {
         String[] extracted = input.split(" ", 2);
+        // Check whether description is entered
+        if (extracted.length < 2) {
+            prettyPrint("ERROR: todo has to be followed by a description.");
+            return;
+        }
         ToDo task = new ToDo(extracted[1]);
         list.addToList(task);
     }
@@ -119,7 +124,23 @@ public class Duke {
      * @param input Raw user's input.
      */
     private static void handleDeadline(String input) {
+        // Check whether description is entered
+        if (input.split(" ").length < 2) {
+            prettyPrint("ERROR: deadline has to be followed by a description.");
+            return;
+        }
+
         String[] extracted = input.split(" ", 2)[1].split(" /by ");
+
+        // Check whether deadline is specified correctly
+        if (extracted.length < 2) {
+            prettyPrint("ERROR: Please specify a deadline with '/by'.");
+            return;
+        } else if (extracted.length > 2) {
+            prettyPrint("ERROR: Please input only one deadline!");
+            return;
+        }
+
         String description = extracted[0];
         String deadline = extracted[1];
         Deadline task = new Deadline(description, deadline);
@@ -132,7 +153,23 @@ public class Duke {
      * @param input Raw user's input.
      */
     private static void handleEvent(String input) {
+        // Check whether description is entered
+        if (input.split(" ").length < 2) {
+            prettyPrint("ERROR: event has to be followed by a description.");
+            return;
+        }
+
         String[] extracted = input.split(" ", 2)[1].split(" /at ");
+
+        // Check whether deadline is specified correctly
+        if (extracted.length < 2) {
+            prettyPrint("ERROR: Please specify a date/time with '/at'.");
+            return;
+        } else if (extracted.length > 2) {
+            prettyPrint("ERROR: Please input only one date/time!");
+            return;
+        }
+
         String description = extracted[0];
         String dateTime = extracted[1];
         Event task = new Event(description, dateTime);

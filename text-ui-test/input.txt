@@ -13,7 +13,16 @@ event cs2101 tutorial /at Mon 12PM
 list
 event hackerschool /at Sat 10AM
 list
-asdf
 done 5
 list
+todo
+deadline
+deadline noDeadlineTest
+deadline multipleDeadlineTest /by 12AM /by 2AM
+event
+event noDateTimeTest
+event multipleDateTimeTest /at 12AM /at 2Am
+done -1
+done 1000
+asdf
 exit

@@ -49,9 +49,9 @@ public class ToDoList {
      */
     public void markTaskAsDone(int index) {
         if (index > list.size()) {
-            Duke.prettyPrint("Hmm.. you don't seem to have that many task on hand.");
+            Duke.prettyPrint("ERROR: Please enter an index that is shown in 'list'.");
         } else if (index < 0) {
-            Duke.prettyPrint("Negative task..?! Are you a TA??");
+            Duke.prettyPrint("ERROR: I can't handle negative indexing.");
         } else {
             Task task = list.get(index - 1);
             task.markAsDone();
