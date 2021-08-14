@@ -24,8 +24,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         String dateString = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String startTimeString = startTime.format(DateTimeFormatter.ofPattern("h:m a"));
-        String endTimeString = endTime.format(DateTimeFormatter.ofPattern("h:m a"));
+        String startTimeString = startTime.format(DateTimeFormatter.ofPattern("h:mm a"));
+        String endTimeString = endTime.format(DateTimeFormatter.ofPattern("h:mm a"));
         return "[E]" + super.toString() + " (at: " + dateString + " " + startTimeString + " - " + endTimeString + ")";
 
     }
