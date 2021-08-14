@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static final String[] list = new String[100];
+    private static int count;
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -10,7 +12,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         //Start Prompt.
-        System.out.println(pattern("Hello! I'm Duke\n   What can I do for you?"));
+        System.out.println(getPattern("Hello! I'm Duke\n   What can I do for you?"));
 
         //User input.
         Scanner sc = new Scanner(System.in);
@@ -24,7 +26,8 @@ public class Duke {
     }
 
     /**
-     * Returns a boolean to react to a response.
+     * Returns a boolean to react to a response, while
+     * printing the required information.
      *
      * @param response User inputs.
      * @return continue or not.
@@ -34,8 +37,13 @@ public class Duke {
             case "bye":
                 System.out.println("Bye, see you soon.");
                 return false;
+            case "list":
+                System.out.println(getPattern(toListStrings()));
+                return true;
             default:
-                System.out.println(pattern(response));
+                list[count] = response;
+                count++;
+                System.out.println(getPattern("added: " + response));
                 return true;
         }
     }
@@ -46,13 +54,32 @@ public class Duke {
      * @param r The input string.
      * @return formatted string.
      */
-    public static String pattern(String r) {
+    public static String getPattern(String r) {
         int lens = r.length();
         StringBuffer result = new StringBuffer();
         StringBuffer curr = new StringBuffer();
         String empty = "   ";
         curr.append("*".repeat(50));
-        result.append(empty + curr + "\n" + empty + r + "\n" + empty + curr + "\n");
+        String out = empty + curr + "\n" + empty + r + "\n" + empty + curr + "\n";
+        result.append(out);
         return result.toString();
+    }
+
+    /**
+     * Returns all strings stored with indexing.
+     *
+     * @return all user's stored strings.
+     */
+    public static String toListStrings() {
+        StringBuffer curr = new StringBuffer();
+        String end = "\n   ";
+        for (int i = 0; i < count; i++) {
+            if (i == count - 1) {
+                end = "";
+            }
+            String out = ((Integer)(i + 1)).toString() + ". " + list[i] + end;
+            curr.append(out);
+        }
+        return curr.toString();
     }
 }
