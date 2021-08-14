@@ -1,12 +1,12 @@
-package commands;
+package actions;
 
 import components.TaskList;
 
-public class MarkDoneCommand extends Command {
+public class MarkDoneAction extends Action {
     AppState applicationState;
     int index;
 
-    public MarkDoneCommand(AppState applicationState, int index) {
+    public MarkDoneAction(AppState applicationState, int index) {
         this.applicationState = applicationState;
         this.index = index;
         TaskList taskList = this.applicationState.taskList;

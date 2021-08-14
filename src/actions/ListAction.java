@@ -1,9 +1,9 @@
-package commands;
+package actions;
 
-public class ListCommand extends Command {
+public class ListAction extends Action {
     AppState applicationState;
 
-    public ListCommand(AppState applicationState) {
+    public ListAction(AppState applicationState) {
         this.applicationState = applicationState;
     }
 

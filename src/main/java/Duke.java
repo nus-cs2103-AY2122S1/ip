@@ -1,7 +1,8 @@
-import commands.*;
+import actions.*;
+import commands.CommandParser;
+import commands.DoneCommand;
+import commands.ToDoCommand;
 import components.TaskList;
-import utils.InputParser;
-import components.ToDo;
 
 import java.util.Scanner;
 
@@ -12,45 +13,35 @@ public class Duke {
         TaskList taskList = new TaskList();
         System.out.println(greetingMessage);
 
-        boolean userExit = false;
-        AppState applicationState = new AppState(userExit, taskList);
+        AppState applicationState = new AppState(false, taskList);
         while (!applicationState.isExited()) {
             String userInput = scanner.nextLine();
-            InputParser inputParser = new InputParser(userInput);
-            String command = inputParser.getCommand();
-            String otherArguments = inputParser.getOtherArguments();
-            switch (command) {
+            CommandParser command = new CommandParser(userInput);
+            switch (command.getCommand()) {
                 case "bye":
-                    ByeCommand byeCommand = new ByeCommand(applicationState);
-                    applicationState = byeCommand.run();
+                    ByeAction byeAction = new ByeAction(applicationState);
+                    applicationState = byeAction.run();
                     break;
                 case "list":
-                    ListCommand listCommand = new ListCommand(applicationState);
-                    applicationState = listCommand.run();
+                    ListAction listAction = new ListAction(applicationState);
+                    applicationState = listAction.run();
                     break;
                 case "done":
-                    if (otherArguments.equals("")) {
-                        System.out.println("Please re-enter the command, with the index of the task to be marked as " +
-                                "done.");
-                    } else {
-                        int index = Integer.parseInt(otherArguments.replaceAll(" ", ""));
-                        MarkDoneCommand markDoneCommand = new MarkDoneCommand(applicationState, index - 1);
-                        applicationState = markDoneCommand.run();
-                    }
+                    DoneCommand doneCommand = new DoneCommand(userInput);
+                    MarkDoneAction markDoneAction = new MarkDoneAction(applicationState, doneCommand.index - 1);
+                    applicationState = markDoneAction.run();
                     break;
                 case "todo":
-                    if (otherArguments.equals("")) {
-                        System.out.println("Please re-enter the command, with the todo you want to track.");
-                    } else {
-                        ToDoCommand toDoCommand = new ToDoCommand(applicationState, otherArguments);
-                        applicationState = toDoCommand.run();
-                    }
+                    ToDoCommand toDoCommand = new ToDoCommand(userInput);
+                    ToDoAction toDoAction = new ToDoAction(applicationState, toDoCommand.todo);
+                    applicationState = toDoAction.run();
                     break;
                 default:
-                    System.out.println("Please enter a valid command.");
+                    InvalidAction invalidAction = new InvalidAction(applicationState);
+                    applicationState = invalidAction.run();
             }
         }
-        if (userExit) {
+        if (applicationState.isExited()) {
             String goodbyeMessage = "Bye. Hope to see you again soon!";
             System.out.println(goodbyeMessage);
         }

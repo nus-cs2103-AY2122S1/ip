@@ -1,10 +1,10 @@
-package commands;
+package actions;
 
 
-public class ByeCommand extends Command {
+public class ByeAction extends Action {
     AppState applicationState;
 
-    public ByeCommand(AppState applicationState) {
+    public ByeAction(AppState applicationState) {
         this.applicationState = applicationState;
     }
 
