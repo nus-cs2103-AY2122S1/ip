@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private List<String> tasks = new ArrayList<String>();
+    private List<Task> tasks = new ArrayList<Task>();
 
     /**
      * Greet the user.
@@ -35,9 +35,9 @@ public class Duke {
      *
      * @param task the task to be added.
      */
-    public void addTask(String task) {
+    public void addTask(Task task) {
         this.tasks.add(task);
-        String output = String.format("Added: %s", task);
+        String output = "Added: " + task.toString();
         System.out.println(output);
     }
 
@@ -47,7 +47,23 @@ public class Duke {
      */
     public void displayTasks() {
         for (int i = 0; i < this.tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            Task task = tasks.get(i);
+            boolean isDone = task.isDone;
+            System.out.println((i + 1) + ". " + (isDone ? "[X] " : "[ ] ")  + tasks.get(i).toString());
         }
+    }
+
+    public int getNumberOfTasks() {
+        return this.tasks.size();
+    }
+
+    public void markTaskAsDone(int taskIdx) {
+        Task task = this.tasks.get(taskIdx);
+        task.markAsDone();
+        System.out.println(" Nice! I've marked this task as done: \n" + "[X] " + task.toString());
+    }
+
+    public void noTaskExist() {
+        System.out.println("This task does not exist");
     }
 }
