@@ -43,13 +43,19 @@ public class Lifeline {
                     }
                     markAsDone(commands[1]);
                     break;
+                case "delete":
+                    if (commands.length != 2) {
+                        throw new LifelineException("You did not specify an integer! Please use done <number>");
+                    }
+                    deleteTask(commands[1]);
+                    break;
                 case "todo":
                 case "deadline":
                 case "event":
                     if (commands.length != 2) {
                         throw new LifelineException("Details of task cannot be blank!");
                     }
-                    createTask(commands[0], commands[1]);
+                    createTask(commands[0].trim(), commands[1].trim());
                     break;
                 default:
                     echo(commands[0]);
@@ -132,6 +138,21 @@ public class Lifeline {
             }
         } catch (NumberFormatException e) {
             throw new LifelineException("Index is not an integer! Please use done <number>");
+        }
+    }
+
+    private void deleteTask(String index) throws LifelineException {
+        try {
+            int taskIndex = Integer.parseInt(index) - 1;
+            if (taskIndex < 0 || taskIndex >= taskList.size()) {
+                throw new LifelineException("Index is out of bounds!");
+            }
+            Task taskToDelete = taskList.get(taskIndex);
+            taskList.remove(taskToDelete);
+            System.out.println("I have removed the task:\n" + taskToDelete + "\n");
+            printList();
+        } catch (NumberFormatException e) {
+            throw new LifelineException("Index is not an integer!");
         }
     }
 
