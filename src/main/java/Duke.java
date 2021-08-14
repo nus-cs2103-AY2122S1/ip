@@ -1,15 +1,15 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-//note that automated testing script simply doesn't work
-//for some reason terminal is unable to detect FC even though i checked and even manually added
-//system32 to path. The window also disappears extremely fast, and a pause command does not prevent this
+//automated testing script closes super fast; still have to manually run the final FC command in terminal
+//managed to fix the issue with FC not being found however. Git push issues also fixed.
 
+//most obvious uncaught exceptions are incorrect delete/done commands. fix in the future.
 public class Duke {
     private static ArrayList<Task> store = new ArrayList<>();
     private static int index = 0;
 
-    //subroutine for adding tasks to the array of tasks
+    //subroutine for adding tasks to the collection of tasks
     public static void addTask(String descriptor) throws DukeException {
         if (descriptor.startsWith("todo")) {
             descriptor = descriptor.replaceFirst("todo", "");
@@ -61,10 +61,16 @@ public class Duke {
                     System.out.println((i + 1) + ". " + store.get(i));
                 }
             } else if (in.startsWith("done")) {
-                String[] temp = in.split(" ");
-                store.get(Integer.parseInt(temp[1]) - 1).setFlag(true);
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  " + store.get(Integer.parseInt(temp[1]) - 1));
+                try {
+                    String[] temp = in.split(" ");
+                    store.get(Integer.parseInt(temp[1]) - 1).setFlag(true);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("  " + store.get(Integer.parseInt(temp[1]) - 1));
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Sorry! Your done command has an invalid index choice");
+                } catch (NumberFormatException e) {
+                    System.out.println("Sorry! I can't understand the index for your done command");
+                }
             } else if (in.startsWith("todo") || in.startsWith("deadline") || in.startsWith("event")) {
                 try {
                     addTask(in);
@@ -72,11 +78,17 @@ public class Duke {
                     System.out.println("Sorry! Your request caused " + e);
                 }
             } else if (in.startsWith("delete")) {
-                String[] temp = in.split(" ");
-                Task removed = store.remove(Integer.parseInt(temp[1]) - 1);
-                System.out.println("Noted. I've removed this task:");
-                System.out.println("  " + removed);
-                System.out.println("Now you have " + store.size() + " tasks in the list.");
+                try {
+                    String[] temp = in.split(" ");
+                    Task removed = store.remove(Integer.parseInt(temp[1]) - 1);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("  " + removed);
+                    System.out.println("Now you have " + store.size() + " tasks in the list.");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Sorry! Your delete command has an invalid index choice");
+                } catch (NumberFormatException e) {
+                    System.out.println("Sorry! I can't understand the index for your delete command");
+                }
             } else {
                 System.out.println("Sorry! I don't know what your request means...");
             }
