@@ -14,44 +14,16 @@ public class Duke {
                 }
             } else if (echoInput.startsWith("done")) {
                 try {
-                    int num = Integer.parseInt(echoInput.substring(5));
-                    storedTasks[num - 1].markAsDone();
-                    System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(storedTasks[num - 1].toString());
-                } catch (NumberFormatException nfe) {
-                    System.out.println("done came with an incorrect input");
-                } catch (ArrayIndexOutOfBoundsException ae) {
-                    System.out.println("number provided with done must be from 1 to 100 inclusive");
+                    markTask(storedTasks, echoInput);
+                } catch (DukeException e) {
+                    System.out.println(e.toString());
                 }
-            } else if (echoInput.startsWith("deadline")) {
-                int separator = findIndex(echoInput, '/');
-                String description = echoInput.substring(9, separator);
-                String by = echoInput.substring(separator + 4);
-                System.out.println("Got it. I've added this task:");
-                storedTasks[idx] = new Deadline(description, by);
-                System.out.println(storedTasks[idx].toString());
-                idx++;
-                System.out.println("Now you have " + idx + " tasks in the list.");
-            } else if (echoInput.startsWith("todo")) {
-                String description = echoInput.substring(5);
-                System.out.println("Got it. I have added this task:");
-                storedTasks[idx] = new Todo(description);
-                System.out.println(storedTasks[idx].toString());
-                idx++;
-                System.out.println("Now you have " + idx + " tasks in the list.");
-            } else if (echoInput.startsWith("event")) {
-                int separator = findIndex(echoInput, '/');
-                String description = echoInput.substring(6, separator);
-                String at = echoInput.substring(separator + 4);
-                System.out.println("Got it. I've added this task:");
-                storedTasks[idx] = new Event(description, at);
-                System.out.println(storedTasks[idx].toString());
-                idx++;
-                System.out.println("Now you have " + idx + " tasks in the list.");
             } else {
-                storedTasks[idx] = new Task(echoInput);
-                System.out.println("added: " + echoInput);
-                idx++;
+                try {
+                    idx = addTask(storedTasks, echoInput, idx, '/');
+                } catch (DukeException e) {
+                    System.out.println(e.toString());
+                }
             }
             echoInput = sc.nextLine();
         }
@@ -66,5 +38,61 @@ public class Duke {
             }
         }
         return -1;
+    }
+
+    private static void markTask(Task[] storage, String userInput) throws DukeException {
+        if (userInput.length() <= 5) {
+            throw new DukeException("An index must be provided for done to mark task at the index as done.");
+        } else {
+            try {
+                int num = Integer.parseInt(userInput.substring(5));
+                storage[num - 1].markAsDone();
+            } catch (NumberFormatException nfe) {
+                throw new DukeException("Index for done must be an integer.");
+            } catch (ArrayIndexOutOfBoundsException ae) {
+                throw new DukeException("Index provided for done is either less than 1 or exceeds the length of the list, hence invalid.");
+            }
+        }
+    }
+
+    private static int addTask(Task[] storage, String userInput, int idx, Character separator) throws DukeException {
+        String type;
+
+        if (userInput.startsWith("todo")) {
+            type = "todo";
+        } else if (userInput.startsWith("deadline")) {
+            type = "deadline";
+        } else if (userInput.startsWith("event")) {
+            type = "event";
+        } else {
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
+
+        if (userInput.length() <= type.length() + 1) {
+            throw new DukeException("The description of " + type + " cannot be empty.");
+        }
+
+        String description = userInput.substring(type.length() + 1);
+
+        if (type.equals("todo")) {
+            storage[idx] = new Todo(description);
+        } else {
+            int separatorIdx = findIndex(description, separator);
+
+            if (type.equals("deadline")) {
+                if (separatorIdx == -1 || description.length() <= separatorIdx + 3) throw new DukeException("/by must be provided and not empty for a deadline.");
+                String by = description.substring(separatorIdx + 4);
+                storage[idx] = new Deadline(description.substring(0, separatorIdx), by);
+            } else {
+                if (separatorIdx == -1 || description.length() <= separatorIdx + 3) throw new DukeException("/at must be provided and not empty for an event.");
+                String at = description.substring(separatorIdx + 4);
+                storage[idx] = new Event(description.substring(0, separatorIdx), at);
+            }
+        }
+        System.out.println("Got it. I have added this task:");
+        System.out.println(storage[idx].toString());
+        idx++;
+        System.out.println("Now you have " + idx + " tasks in the list.");
+        return idx;
     }
 }
