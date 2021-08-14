@@ -22,32 +22,67 @@ public class Lifeline {
         System.out.println("What can I help you with today?\n");
     }
 
+
     private void getInput() {
-        this.command = sc.nextLine();
-        String[] commands = command.split("\\s", 2);
-        System.out.println();
-        switch (commands[0]) {
-        case "list":
-            printList();
-            break;
-        case "bye":
-            exit();
-            break;
-        case "done":
-            markAsDone(commands[1]);
-            break;
+        boolean exit = false;
+        while (!exit) {
+            this.command = sc.nextLine().trim();
+            String[] commands = command.split("\\s", 2);
+            System.out.println();
+            try {
+                switch (commands[0].toLowerCase()) {
+                case "list":
+                    printList();
+                    break;
+                case "bye":
+                    exit = true;
+                    break;
+                case "done":
+                    if (commands.length != 2) {
+                        throw new LifelineException("You did not specify an integer! Please use done <number>");
+                    }
+                    markAsDone(commands[1]);
+                    break;
+                case "todo":
+                case "deadline":
+                case "event":
+                    if (commands.length != 2) {
+                        throw new LifelineException("Details of task cannot be blank!");
+                    }
+                    createTask(commands[0], commands[1]);
+                    break;
+                default:
+                    echo(commands[0]);
+                    break;
+                }
+            } catch (LifelineException e) {
+                System.out.println(e.getMessage());
+                System.out.println();
+            }
+        }
+        exit();
+    }
+
+    private void createTask(String task, String details) throws LifelineException {
+        switch (task) {
         case "todo":
-            Task newTask = new ToDo(commands[1].trim());
+            Task newTask = new ToDo(details);
             addToList(newTask);
             break;
         case "deadline":
-            String[] info = commands[1].split("/by", 2);
-            newTask = new Deadline(info[0].trim(), info[1].trim());
+            String[] description = details.split("/by", 2);
+            if (description.length != 2) {
+                throw new LifelineException("Deadline cannot be blank! Use /by <deadline>");
+            }
+            newTask = new Deadline(description[0].trim(), description[1].trim());
             addToList(newTask);
             break;
         case "event":
-            info = commands[1].split("/at", 2);
-            newTask = new Event(info[0].trim(), info[1].trim());
+            description = details.split("/at", 2);
+            if (description.length != 2) {
+                throw new LifelineException("Event date/time cannot be blank! Use /at <Day> <Time>");
+            }
+            newTask = new Event(description[0].trim(), description[1].trim());
             addToList(newTask);
             break;
         default:
@@ -73,28 +108,35 @@ public class Lifeline {
             System.out.println("You have " + uncompletedTask + " uncompleted " + (uncompletedTask > 1 ? "tasks"
                     : "task") + ".\n");
         }
-        getInput();
     }
 
     private void addToList(Task task) {
         taskList.add(task);
-        System.out.println("I have added this task for you: ");
+        System.out.println("I have added this task for you:");
         System.out.println(task + "\n");
-        getInput();
     }
 
-    private void markAsDone(String index) {
-        int taskIndex = Integer.valueOf(index) - 1;
-        Task taskToBeCompleted = taskList.get(taskIndex);
-        taskToBeCompleted.setDone(true);
-        System.out.println("You have completed the " + taskToBeCompleted.getClass().getName() + ": \n"
-                + taskToBeCompleted.getName() + "\n");
-        getInput();
+    private void markAsDone(String index) throws LifelineException {
+        try {
+            int taskIndex = Integer.parseInt(index) - 1;
+            if (taskIndex < 0 || taskIndex >= taskList.size()) {
+                throw new LifelineException("Index is out of bounds!");
+            }
+            Task taskToBeCompleted = taskList.get(taskIndex);
+            if (taskToBeCompleted.isDone()) {
+                System.out.println("The task is already done!");
+            } else {
+                taskToBeCompleted.setDone(true);
+                System.out.println("You have completed the " + taskToBeCompleted.getClass().getName() + ":\n"
+                        + taskToBeCompleted.getName() + "\n");
+            }
+        } catch (NumberFormatException e) {
+            throw new LifelineException("Index is not an integer! Please use done <number>");
+        }
     }
 
     private void echo(String input) {
         System.out.println("You have said \"" + input + "\"\n");
-        getInput();
     }
 
     private void exit() {
