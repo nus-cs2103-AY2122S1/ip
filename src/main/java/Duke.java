@@ -2,6 +2,8 @@ import actions.*;
 import commands.*;
 import components.Event;
 import components.TaskList;
+import exceptions.DukeEmptyStringException;
+import exceptions.DukeInvalidArgumentException;
 
 import java.util.Scanner;
 
@@ -26,14 +28,24 @@ public class Duke {
                     applicationState = listAction.run();
                     break;
                 case "done":
-                    DoneCommand doneCommand = new DoneCommand(userInput);
-                    MarkDoneAction markDoneAction = new MarkDoneAction(applicationState, doneCommand.index - 1);
-                    applicationState = markDoneAction.run();
+                    try {
+                        DoneCommand doneCommand = new DoneCommand(userInput);
+                        MarkDoneAction markDoneAction = new MarkDoneAction(applicationState, doneCommand.index - 1);
+                        applicationState = markDoneAction.run();
+                    } catch (DukeEmptyStringException e) {
+                        System.out.println(e.toString());
+                    } catch (DukeInvalidArgumentException e) {
+                        System.out.println(e.toString());
+                    }
                     break;
                 case "todo":
-                    ToDoCommand toDoCommand = new ToDoCommand(userInput);
-                    ToDoAction toDoAction = new ToDoAction(applicationState, toDoCommand.todo);
-                    applicationState = toDoAction.run();
+                    try {
+                        ToDoCommand toDoCommand = new ToDoCommand(userInput);
+                        ToDoAction toDoAction = new ToDoAction(applicationState, toDoCommand.todo);
+                        applicationState = toDoAction.run();
+                    } catch (DukeEmptyStringException e) {
+                        System.out.println(e.toString());
+                    }
                     break;
                 case "deadline":
                     DeadLineCommand deadLineCommand = new DeadLineCommand(userInput);

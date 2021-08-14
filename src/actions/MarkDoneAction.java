@@ -1,6 +1,7 @@
 package actions;
 
 import components.TaskList;
+import exceptions.DukeIndexOutOfBoundsException;
 
 public class MarkDoneAction extends Action {
     AppState applicationState;
@@ -10,16 +11,20 @@ public class MarkDoneAction extends Action {
         this.applicationState = applicationState;
         this.index = index;
         TaskList taskList = this.applicationState.taskList;
-        if (!(0 <= index && index < taskList.size())) {
-            System.out.println("Index is out of bounds.");
-        }
     }
 
     public AppState run() {
         TaskList taskList = this.applicationState.taskList;
-        TaskList newTaskList = taskList.markTaskDone(index);
-        System.out.println(String.format("Nice! I've marked this task as done:\n%s",
-                newTaskList.showTask(index)));
-        return new AppState(applicationState.userExit, newTaskList);
+        TaskList newTaskList = taskList;
+        try {
+            newTaskList = taskList.markTaskDone(index);
+            System.out.println(String.format("Nice! I've marked this task as done:\n%s",
+                    newTaskList.showTask(index)));
+        } catch (DukeIndexOutOfBoundsException e) {
+            System.out.println(e.toString());
+        } finally {
+            return new AppState(applicationState.userExit, newTaskList);
+        }
+
     }
 }

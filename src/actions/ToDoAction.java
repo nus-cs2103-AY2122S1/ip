@@ -14,7 +14,7 @@ public class ToDoAction extends Action {
 
     public AppState run() {
         TaskList taskList = this.applicationState.taskList;
-        TaskList newTaskList = taskList.addTask(new ToDo(this.todo, false));
+        TaskList newTaskList = taskList.addTask(ToDo.of(this.todo, false));
         System.out.println(String.format("Excellent! I've added this task:\n%s",
                 taskList.showTask(taskList.size() - 1)));
         return new AppState(applicationState.userExit, newTaskList);
