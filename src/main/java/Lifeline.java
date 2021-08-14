@@ -1,3 +1,12 @@
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,10 +14,18 @@ public class Lifeline {
     private Scanner sc;
     private ArrayList<Task> taskList;
     private String command;
+    private Gson gson;
 
     Lifeline() {
         this.taskList = new ArrayList<>();
         this.sc = new Scanner(System.in);
+        this.gson = new Gson();
+        try {
+            this.taskList = this.load("./save/tasks.json");
+        } catch (LifelineException e) {
+            System.out.println(e.getMessage());
+            this.taskList = new ArrayList<>();
+        }
     }
 
     private void greet() {
@@ -19,6 +36,7 @@ public class Lifeline {
                 + "| |____ _| |_| |    | |____| |____ _| |_| |\\  | |____\n"
                 + "|______|_____|_|    |______|______|_____|_| \\_|______|\n";
         System.out.println("Hello! I am\n" + lifeline);
+        printList();
         System.out.println("What can I help you with today?\n");
     }
 
@@ -69,6 +87,42 @@ public class Lifeline {
         exit();
     }
 
+    private void save(ArrayList<Task> tasks) throws LifelineException {
+        try {
+            FileWriter fileWriter = new FileWriter("./save/tasks.json");
+            fileWriter.write(gson.toJson(tasks, ArrayList.class));
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new LifelineException("Unable to save tasks at the moment");
+        }
+    }
+
+    private ArrayList<Task> load(String filepath) throws LifelineException {
+        try {
+            JsonArray arr = JsonParser.parseReader(new FileReader(filepath)).getAsJsonArray();
+            ArrayList<Task> savedTasks = new ArrayList<>();
+            for (int i = 0; i < arr.size(); i++) {
+                JsonObject currTask = arr.get(i).getAsJsonObject();
+                if (currTask.has("by")) {
+                    savedTasks.add(new Deadline(currTask.get("name").getAsString(),
+                            currTask.get("by").getAsString(),
+                            currTask.get("isDone").getAsBoolean()));
+
+                } else if (currTask.has("dateTime")) {
+                    savedTasks.add(new Event(gson.fromJson(currTask.get("name"), String.class),
+                            gson.fromJson(currTask.get("dateTime"), String.class),
+                            gson.fromJson(currTask.get("isDone"), boolean.class)));
+                } else {
+                    savedTasks.add(new ToDo(gson.fromJson(currTask.get("name"), String.class),
+                            gson.fromJson(currTask.get("isDone"), boolean.class)));
+                }
+            }
+            return savedTasks;
+        } catch (IOException e) {
+            throw new LifelineException("Cannot read file or file does not exist");
+        }
+    }
+
     private InputType getInputType(String input) throws LifelineException {
         try {
             return InputType.valueOf(input.toUpperCase());
@@ -103,11 +157,12 @@ public class Lifeline {
             echo(command);
             break;
         }
+        save(taskList);
     }
 
     private void printList() {
         if (taskList.size() == 0) {
-            System.out.println("You have no tasks\n");
+            System.out.println("You have no tasks.\n");
         } else {
             int uncompletedTask = 0;
             System.out.println("Here " + (taskList.size() > 1 ? "are" : "is")
