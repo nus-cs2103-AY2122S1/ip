@@ -33,23 +33,17 @@ public class Duke {
         while(true){
             System.out.println("");
             String action = input.nextLine();
-            String[] splited = action.split(" ");
+            String[] splited = action.split(" ", 2);
             String action1 = splited[0];
-            if (action1.equals("list")){
-                System.out.println(tasklist.toString());
-            }else if(action1.equals("bye")){
+            if(action1.equals("bye")){
                 String byesent = "\n" +
                 "   ____________________________________________________________\n" +
                 "   Bye. Hope to see you again soon!\n" +
                 "   ____________________________________________________________";
                 System.out.println(byesent);
                 break;
-            }else if(action1.equals("done")){
-                int num = Integer.parseInt(splited[1]);
-                tasklist.done(num);
             }else{
-                Task newTask = new Task(action, false);
-                tasklist.addTask(newTask);
+                tasklist.actionHalder(splited);
             }
         }
     }    

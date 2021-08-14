@@ -11,7 +11,9 @@ public class TaskList {
         this.curSize++;
         String item = "\n" +
         "   ____________________________________________________________\n" +
-        "   added: " + task +  "\n" +
+        "   Got it. I've added this task: \n" + 
+        "       " + task +  "\n" +
+        "   Now you have " + curSize + " tasks in the list.\n" +
         "   ____________________________________________________________";
         System.out.println(item);
 
@@ -30,9 +32,56 @@ public class TaskList {
 
     }
 
+    public void actionHalder(String[] actionList){
+
+        String actionName = actionList[0];
+        if (actionName.equals("list")){
+            this.printList();
+        }else if (actionName.equals("done")){
+            int num = Integer.parseInt(actionList[1]);
+            this.done(num);
+        }else if(actionName.equals("todo")){
+            this.addToDo(actionList[1]);
+        }else if(actionName.equals("deadline")){
+            this.addDeadline(actionList[1]);
+        }else if(actionName.equals("event")){
+            this.addEvent(actionList[1]);
+        }else{
+            System.out.println("something wrong");
+        }
+
+    }
+    
+    public void addToDo(String action){
+        ToDo newTask = new ToDo(action, false);
+        this.addTask(newTask);
+    }
+
+    public void addDeadline(String action){
+        String actionlist[] = action.split("/by");
+        action = actionlist[0];
+        String date = actionlist[1];
+        Deadline newTask = new Deadline(action, false, date);
+        this.addTask(newTask);
+
+    }
+
+    public void addEvent(String action){
+        String actionlist[] = action.split("/at");
+        action = actionlist[0];
+        String date = actionlist[1];
+        Event newTask = new Event(action, false, date);
+        this.addTask(newTask);
+    }
+
+    public void printList(){
+        System.out.println(this.toString());
+    }
+
     public String toString(){
         String res = "";
-        res += "    ____________________________________________________________\n";
+        res += "    ____________________________________________________________\n" + 
+        "   Here are the tasks in your list:\n";
         for (int i = 0; i < curSize; i++){
             Task eachTask = this.list[i];
             String each = String.valueOf(i + 1) + ". " + eachTask.toString();
