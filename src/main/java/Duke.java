@@ -6,12 +6,13 @@ import java.util.stream.IntStream;
 import java.util.function.Consumer;
 
 public class Duke implements Runnable {
-    private final String BORDER = "-------------------------------------------------";
+    private final String BORDER = "---------------------------------------------------";
     private final String GREETING = "Hello! I'm Duke, what can I do for you?";
     private final String FAREWELL = "Bye. Hope to see you again soon!";
     private final String MSG_LISTS = "Here are the tasks in your list:";
     private final String MSG_TASK_COMPLETE = "Nice! I've marked this task as done:\n%s";
-    private final String MSG_TASK_ADDED ="Got it. I've added this task:";
+    private final String MSG_TASK_ADDED = "Got it. I've added this task:";
+    private final String MSG_TASK_DELETED = "Noted. I've removed this task:";
     private final String MSG_TASK_COUNT = "Now you have %d tasks in the list.";
     private final String ERR_OUT_OF_BOUNDS = "Please enter a number between 1 and %d!";
     private final String ERR_TASK_COMPLETE = "Task %s is already complete!";
@@ -20,7 +21,8 @@ public class Duke implements Runnable {
     private final String ERR_TODO_FORMAT = "Error in command usage. Usage: todo <name>";
     private final String ERR_DEADLINE_FORMAT = "Error in command usage. Usage: deadline <name> /by <date>";
     private final String ERR_EVENT_FORMAT = "Error in command usage. Usage: event <name> /at <date>";
-    private final String ERR_INVALID_NUM = "Please provide a valid number! Usage: done <num>";
+    private final String ERR_DONE_FORMAT = "Please provide a valid number! Usage: done <num>";
+    private final String ERR_DELETE_FORMAT = "Please provide a valid number! Usage: delete <num>";
     private final String ERR_MAX_TASKS = "Sorry! You have reached maximum Task capacity.";
     private final int MAX_TASKS = 100;
     private final Map<String, Consumer<String>> commandsMap = Map.of(
@@ -28,7 +30,8 @@ public class Duke implements Runnable {
         "done", (args) -> completeTask(args),
         "todo", (args) -> addTodo(args),
         "deadline", (args) -> addDeadline(args),
-        "event", (args) -> addEvent(args)
+        "event", (args) -> addEvent(args),
+        "delete", (args) -> deleteTask(args)
     );
     private List<Task> tasks = new ArrayList<>();
 
@@ -104,7 +107,31 @@ public class Duke implements Runnable {
                 MSG_TASK_COMPLETE,
                 String.format("   %s", tasks.get(idx - 1))));
         } catch (NumberFormatException e) {
-            printDuke(ERR_INVALID_NUM);
+            printDuke(ERR_DONE_FORMAT);
+            return;
+        }
+    }
+
+    private void deleteTask(String args) {
+        try {
+            int idx = Integer.parseInt(args);
+            if (tasks.size() == 0) {
+                printDuke(ERR_NO_TASKS);
+                return;
+            }
+            if (idx < 1 || idx > tasks.size()) {
+                printDuke(String.format(ERR_OUT_OF_BOUNDS, tasks.size()));
+                return;
+            }
+            Task deletedTask = tasks.get(idx - 1);
+            tasks.remove(idx - 1);
+            printDuke(
+                MSG_TASK_DELETED + "\n"
+                + "   " + deletedTask.toString() + "\n"
+                + String.format(MSG_TASK_COUNT, tasks.size())
+            );
+        } catch (NumberFormatException e) {
+            printDuke(ERR_DELETE_FORMAT);
             return;
         }
     }
