@@ -1,14 +1,18 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Lifeline {
     private Scanner sc;
@@ -23,7 +27,6 @@ public class Lifeline {
         try {
             this.taskList = this.load("./save/tasks.json");
         } catch (LifelineException e) {
-            System.out.println(e.getMessage());
             this.taskList = new ArrayList<>();
         }
     }
@@ -46,6 +49,9 @@ public class Lifeline {
         while (!exit) {
             try {
                 this.command = sc.nextLine().trim();
+                if (command.equals("")) {
+                    continue;
+                }
                 String[] inputs = command.split("\\s", 2);
                 System.out.println();
                 switch (getInputType(inputs[0])) {
@@ -105,21 +111,23 @@ public class Lifeline {
                 JsonObject currTask = arr.get(i).getAsJsonObject();
                 if (currTask.has("by")) {
                     savedTasks.add(new Deadline(currTask.get("name").getAsString(),
-                            currTask.get("by").getAsString(),
+                            gson.fromJson(currTask.get("by"), LocalDateTime.class),
                             currTask.get("isDone").getAsBoolean()));
 
-                } else if (currTask.has("dateTime")) {
-                    savedTasks.add(new Event(gson.fromJson(currTask.get("name"), String.class),
-                            gson.fromJson(currTask.get("dateTime"), String.class),
-                            gson.fromJson(currTask.get("isDone"), boolean.class)));
+                } else if (currTask.has("startTime")) {
+                    savedTasks.add(new Event(currTask.get("name").getAsString(),
+                            gson.fromJson(currTask.get("date"), LocalDate.class),
+                            gson.fromJson(currTask.get("startTime"), LocalTime.class),
+                            gson.fromJson(currTask.get("endTime"), LocalTime.class),
+                            currTask.get("isDone").getAsBoolean()));
                 } else {
-                    savedTasks.add(new ToDo(gson.fromJson(currTask.get("name"), String.class),
-                            gson.fromJson(currTask.get("isDone"), boolean.class)));
+                    savedTasks.add(new ToDo(currTask.get("name").getAsString(),
+                            currTask.get("isDone").getAsBoolean()));
                 }
             }
             return savedTasks;
         } catch (IOException e) {
-            throw new LifelineException("Cannot read file or file does not exist");
+            throw new LifelineException("Unable to find your saved tasks!\n");
         }
     }
 
@@ -140,18 +148,47 @@ public class Lifeline {
         case "deadline":
             String[] description = details.split("/by", 2);
             if (description.length != 2) {
-                throw new LifelineException("Deadline cannot be blank! Use /by <deadline>");
+                throw new LifelineException("Deadline cannot be blank! Use deadline <name> /by <deadline>");
             }
-            newTask = new Deadline(description[0].trim(), description[1].trim());
-            addToList(newTask);
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+                LocalDateTime dateTime = LocalDateTime.parse(description[1].trim(), formatter);
+                newTask = new Deadline(description[0].trim(), dateTime);
+                addToList(newTask);
+            } catch (DateTimeParseException e) {
+                throw new LifelineException("Deadline is not of the correct format! Please use deadline <name> /by " +
+                        "<dd/MM/yy HHmm>\n");
+            }
             break;
         case "event":
             description = details.split("/at", 2);
             if (description.length != 2) {
                 throw new LifelineException("Event date/time cannot be blank! Use /at <Day> <Time>");
             }
-            newTask = new Event(description[0].trim(), description[1].trim());
-            addToList(newTask);
+            String[] eventDateAndDuration = description[1].trim().split("\\s", 2);
+            if (eventDateAndDuration.length!= 2) {
+                throw new LifelineException("Event date/time not in proper format! Please use event <name> /at " +
+                        "<dd/MM/yy> <HHmm>-<HHmm>");
+            }
+            String eventDate = eventDateAndDuration[0];
+            String eventDuration = eventDateAndDuration[1];
+            try {
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+                LocalDate date = LocalDate.parse(eventDate.trim(), dateFormatter);
+                String[] duration = eventDuration.split("-", 2);
+                if (duration.length != 2) {
+                    throw new LifelineException("Event date/time not in proper format! Please use event <name> /at " +
+                            "<dd/MM/yy> <HHmm>-<HHmm>");
+                }
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+                LocalTime startTime = LocalTime.parse(duration[0], timeFormatter);
+                LocalTime endTime = LocalTime.parse(duration[1], timeFormatter);
+                newTask = new Event(description[0].trim(), date, startTime, endTime);
+                addToList(newTask);
+            } catch (DateTimeParseException e) {
+                throw new LifelineException("Event date/time not in proper format! Please use event <name> /at " +
+                        "<dd/MM/yy> <HHmm>-<HHmm>");
+            }
             break;
         default:
             echo(command);
@@ -162,7 +199,7 @@ public class Lifeline {
 
     private void printList() {
         if (taskList.size() == 0) {
-            System.out.println("You have no tasks.\n");
+            System.out.println("You have remaining tasks.\n");
         } else {
             int uncompletedTask = 0;
             System.out.println("Here " + (taskList.size() > 1 ? "are" : "is")
@@ -214,6 +251,7 @@ public class Lifeline {
             taskList.remove(taskToDelete);
             System.out.println("I have removed the task:\n" + taskToDelete + "\n");
             printList();
+            save(taskList);
         } catch (NumberFormatException e) {
             throw new LifelineException("Index is not an integer!");
         }
