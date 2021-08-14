@@ -69,9 +69,18 @@ public class Side {
         }
     }
 
+    private static Integer tryIntParsing(String s) {
+        try {
+            int parsedInt = Integer.parseInt(s);
+            return parsedInt;
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
     private static void handleDone(String input, TaskList taskList) throws TaskIndexException {
         if (input.split("\\s+").length == 2) {
-            int taskNum = Integer.parseInt(input.split("\\s+")[1]);
+            int taskNum = tryIntParsing(input.split("\\s+")[1]);
             if (taskNum > taskList.length() || taskNum <= 0) {
                 throw new TaskIndexException();
             } else {
@@ -84,7 +93,7 @@ public class Side {
 
     private static void handleDelete(String input, TaskList taskList) throws DeleteIndexException {
         if (input.split("\\s+").length == 2) {
-            int taskNum = Integer.parseInt(input.split("\\s+")[1]);
+            int taskNum = tryIntParsing(input.split("\\s+")[1]);
             if (taskNum > taskList.length() || taskNum <= 0) {
                 throw new DeleteIndexException();
             } else {
