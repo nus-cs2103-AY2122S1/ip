@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -19,6 +19,8 @@ public class Duke {
                     print(list());
                 } else if (input.startsWith("done")) {
                     print(done(input));
+                } else if (input.startsWith("delete")) {
+                    print(delete(input));
                 } else {
                     print(addTask(input));
                 }
@@ -52,9 +54,7 @@ public class Duke {
         Task task = makeTask(input);
         tasks.add(task);
         return new String[]{
-                "Got it. I've added this task:",
-                "  " + task,
-                String.format("Now you have %d %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks")};
+                "Got it. I've added this task:", "  " + task, getTasksLeftMsg()};
     }
 
     static Task makeTask(String input) throws DukeException {
@@ -77,6 +77,16 @@ public class Duke {
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    static String[] delete(String input) {
+        int ind = Integer.parseInt(input.split(" ", 2)[1]);
+        Task task = tasks.remove(ind - 1);
+        return new String[]{"Noted. I've removed this task:", "  " + task, getTasksLeftMsg()};
+    }
+
+    static String getTasksLeftMsg() {
+        return String.format("Now you have %d %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
     }
 
     static void print(String... lines) {
