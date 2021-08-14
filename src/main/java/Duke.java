@@ -67,7 +67,7 @@ public class Duke {
             int lens = textList.length;
             String listString = "";
             for (int i = 0; i < lens; i++ ) {
-                String nextItem = String.format("%d. %s", (i + 1)h, textList[i]);
+                String nextItem = String.format("%d. %s", (i + 1), textList[i]);
                 listString = listString + nextItem + "\n";
             }
             return listString;
