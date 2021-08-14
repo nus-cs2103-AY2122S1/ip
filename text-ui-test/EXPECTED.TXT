@@ -2,13 +2,86 @@
 |   _   \    /    \    |  |
 |  |_|  /   /  /\  \   |  |
 |  |_|  \  /  ____  \  |  |
-|______ / /__/    \__\ |__|
+|_______/ /__/    \__\ |__|
 
 Hello! I'm Bai.
 What can I do for you?
+
+Available commands:
+   todo <description> - add todo item
+   deadline <description> /by <date> - add a task to be completed by <date>
+   event <description> /at <date> - add an event scheduled at <date>
+   done <number> - mark task <number> as done
+   delete <number> - delete the specified task <number>
+   list - display the list of tasks
+----------------------------------------------------
+----------------------------------------------------
+You have no tasks in your list.
+----------------------------------------------------
+----------------------------------------------------
+Got it. I've added this task:
+[T][ ] borrow book
+
+Now you have 1 tasks in the list.
+----------------------------------------------------
+----------------------------------------------------
+Got it. I've added this task:
+[T][ ] read book
+
+Now you have 2 tasks in the list.
+----------------------------------------------------
+----------------------------------------------------
+Got it. I've added this task:
+[D][ ] return book (by: sun)
+
+Now you have 3 tasks in the list.
+----------------------------------------------------
+----------------------------------------------------
+Got it. I've added this task:
+[E][ ] project meeting (at: mon)
+
+Now you have 4 tasks in the list.
 ----------------------------------------------------
 ----------------------------------------------------
 Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [T][ ] read book
+3. [D][ ] return book (by: sun)
+4. [E][ ] project meeting (at: mon)
+----------------------------------------------------
+----------------------------------------------------
+That task does not exist!
+Please enter a number from 1 to 4.
+----------------------------------------------------
+----------------------------------------------------
+That task does not exist!
+Please enter a number from 1 to 4.
+----------------------------------------------------
+----------------------------------------------------
+Nice! I've marked this task as done:
+[T][X] borrow book
+----------------------------------------------------
+----------------------------------------------------
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [T][ ] read book
+3. [D][ ] return book (by: sun)
+4. [E][ ] project meeting (at: mon)
+----------------------------------------------------
+----------------------------------------------------
+Noted. I've removed this task:
+[T][ ] read book
+
+Now you have 3 tasks in the list.
+----------------------------------------------------
+----------------------------------------------------
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [D][ ] return book (by: sun)
+3. [E][ ] project meeting (at: mon)
+----------------------------------------------------
+----------------------------------------------------
+OOPS!!! I'm sorry, but I don't know what that means! D:
 ----------------------------------------------------
 ====================================================
 Goodbai. Hope to see you again soon! （ ● ___ ●.）

@@ -1,2 +1,14 @@
 list
+todo borrow book
+todo read book
+deadline return book /by sun
+event project meeting /at mon
+list
+done 0
+delete 0
+done 1
+list
+delete 2
+list
+blah
 bye
