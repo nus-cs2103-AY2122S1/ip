@@ -4,32 +4,29 @@
 |___| _|_|_ |____/   |_|__
 
 ---------------------------------------------------------------------
-Hello! I'm Side, your personal assistant. How can I help you today?
+I'm Side, your unpaid personal assistant. Please do less...
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
-Ok, I've added: [T][ ] borrow book
-You now have 1 task!
+Fine, I'll add: [T][ ] borrow book
+You now have 1 task...
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
-Ok, I've added: [E][ ] birthday party (at: Mon 5pm)
-You now have 2 tasks!
+Fine, I'll add: [E][ ] birthday party (at: Mon 5pm)
+You now have 2 tasks...
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
-Ok, I've added: [D][ ] assignment 1 (by: Tues 4pm)
-You now have 3 tasks!
+Fine, I'll add: [D][ ] assignment 1 (by: Tues 4pm)
+You now have 3 tasks...
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
-Nice! This task has been marked as done: 
-[T][x] borrow book
+Fine, I'll mark it for you: [T][x] borrow book
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
-Nice! This task has been marked as done: 
-[E][x] birthday party (at: Mon 5pm)
+Fine, I'll mark it for you: [E][x] birthday party (at: Mon 5pm)
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
-Nice! This task has been marked as done: 
-[D][x] assignment 1 (by: Tues 4pm)
+Fine, I'll mark it for you: [D][x] assignment 1 (by: Tues 4pm)
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------
-Oh, you have to go? Goodbye, I'll see you soon!
+Oh, you have to go? What a pity...
 ---------------------------------------------------------------------
