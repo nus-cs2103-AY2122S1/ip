@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -5,7 +6,7 @@ import java.util.Scanner;
  * helping a person to keep track of various things.
  *
  * @author Yeo Jun Wei
- * @version Level-1
+ * @version Level-2
  */
 public class Duke {
     /** Horizontal line for formatting */
@@ -16,6 +17,9 @@ public class Duke {
 
     /** Goodbye message to be displayed when bot stops running */
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
+
+    /** An ArrayList to store tasks entered by the user */
+    private static final ArrayList<String> tasksList = new ArrayList<>();
 
     public static void main(String[] args) {
         greetUser();
@@ -41,13 +45,27 @@ public class Duke {
     }
 
     /**
-     * Displays the formatted user-entered command to the user.
+     * Displays the formatted user-entered task to the user,
+     * and adds the task to tasksList.
      *
-     * @param command Command entered by the user.
+     * @param task Task entered by the user.
      */
-    private static void echoCommand(String command) {
+    private static void addTask(String task) {
         System.out.println(HORIZONTAL_LINE);
-        System.out.println(command);
+        System.out.println("added: " + task);
+        System.out.println(HORIZONTAL_LINE + "\n");
+
+        tasksList.add(task);
+    }
+
+    /**
+     * Displays all previously entered tasks to the user.
+     */
+    private static void listTasks() {
+        System.out.println(HORIZONTAL_LINE);
+        for (int i = 0; i < tasksList.size(); i++) {
+            System.out.println((i + 1) + ". " + tasksList.get(i));
+        }
         System.out.println(HORIZONTAL_LINE + "\n");
     }
 
@@ -60,7 +78,11 @@ public class Duke {
         if (command.equals("bye")) {
             exit();
         } else {
-            echoCommand(command);
+            if (command.equals("list")) {
+                listTasks();
+            } else {
+                addTask(command);
+            }
             listenToCommands();
         }
     }
