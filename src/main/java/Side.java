@@ -6,7 +6,6 @@ public class Side {
             "Please do less...\n" + LINEBREAK;
     private static final String GOODBYE = LINEBREAK + "\nOh, you have to go? What a pity...\n"
             + LINEBREAK;
-    private static final String NOSUCHTASK = "No such task, more energy wasted...";
 
     private static void printLogo() {
         String logo = " ___  _____  _____   _____  \n"
@@ -39,34 +38,34 @@ public class Side {
         return output;
     }
 
-    private static void addDeadline(String input, TaskList taskList) {
+    private static void addDeadline(String input, TaskList taskList) throws WrongFormatException {
         if (input.contains("/by") && (findTime(input, "/by") != null)) {
             String time = findTime(input, "/by");
             String description = input.replace("/by" + time, "");
             taskList.addDeadline(description, time);
             echo(new Deadline(description, time).toString(), taskList);
         } else {
-            printResponse("Your input is wrong, check before making me work...");
+            throw new WrongFormatException("deadline [task name] /by [time]");
         }
     }
 
-    private static void addEvent(String input, TaskList taskList) {
+    private static void addEvent(String input, TaskList taskList) throws WrongFormatException {
         if (input.contains("/at") && (findTime(input, "/at") != null)) {
             String time = findTime(input, "/at");
             String description = input.replace("/at" + time, "");
             taskList.addEvent(description, time);
             echo(new Event(description, time).toString(), taskList);
         } else {
-            printResponse("Your input is wrong, check before making me work...");
+            throw new WrongFormatException("event [task name] /at [time]");
         }
     }
 
-    private static void addTask(String input, TaskList taskList) {
+    private static void addTask(String input, TaskList taskList) throws WrongFormatException {
         if (input.replace("todo", "").replaceAll(" ", "").length() > 0) {
             taskList.addTask(input);
             echo(new Task(input).toString(), taskList);
         } else {
-            printResponse("Description can't be empty! What a drag...");
+            throw new WrongFormatException("todo [task name]");
         }
     }
 
@@ -80,33 +79,37 @@ public class Side {
         while (!userInput.equalsIgnoreCase("bye")) {
             String command = userInput.split("\\s+")[0];
 
-            switch (command) {
-                case "todo":
-                    addTask(userInput, tasks);
-                    break;
-                case "deadline":
-                    addDeadline(userInput, tasks);
-                    break;
-                case "event":
-                    addEvent(userInput, tasks);
-                    break;
-                case "list":
-                    printResponse(tasks.toString());
-                    break;
-                case "done":
-                    if (userInput.split("\\s+").length == 2) {
-                        int taskNum = Integer.parseInt(userInput.split("\\s+")[1]);
-                        if (taskNum > tasks.length() || taskNum <= 0) {
-                            printResponse(NOSUCHTASK);
+            try {
+                switch (command) {
+                    case "todo":
+                        addTask(userInput, tasks);
+                        break;
+                    case "deadline":
+                        addDeadline(userInput, tasks);
+                        break;
+                    case "event":
+                        addEvent(userInput, tasks);
+                        break;
+                    case "list":
+                        printResponse(tasks.toString());
+                        break;
+                    case "done":
+                        if (userInput.split("\\s+").length == 2) {
+                            int taskNum = Integer.parseInt(userInput.split("\\s+")[1]);
+                            if (taskNum > tasks.length() || taskNum <= 0) {
+                                throw new TaskIndexException();
+                            } else {
+                                printResponse(tasks.markTaskDone(taskNum - 1));
+                            }
                         } else {
-                            printResponse(tasks.markTaskDone(taskNum - 1));
+                            printResponse("I only have 1 hand, I can only mark 1 at a time...");
                         }
-                    } else {
-                        printResponse("I only have 1 hand, I can only mark 1 at a time...");
-                    }
-                    break;
-                default:
-                    printResponse("No such command, what a drag...");
+                        break;
+                    default:
+                        throw new UnknownCommandException();
+                }
+            } catch (UnknownCommandException | TaskIndexException | WrongFormatException e) {
+                printResponse(e.getMessage());
             }
             userInput = scanner.nextLine();
         }
