@@ -15,6 +15,8 @@ public class Duke {
                 return;
             } else if (input.equals("list")) {
                 list();
+            } else if (input.startsWith("done")) {
+                done(Integer.parseInt(input.split(" ", 2)[1]));
             } else {
                 tasks.add(new Task(input));
                 print("added: " + input);
@@ -33,6 +35,12 @@ public class Duke {
             out.add(String.format("%d.%s", i + 1, tasks.get(i)));
         }
         print(out.toArray(new String[0]));
+    }
+
+    static void done(int ind) {
+        Task task = tasks.get(ind - 1);
+        task.setDone();
+        print("Nice! I've marked this task as done:", "  " + task);
     }
 
     static void print(String... lines) {
