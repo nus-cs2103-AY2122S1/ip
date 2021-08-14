@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Main file for chatbot.
@@ -9,16 +12,24 @@ import java.util.Scanner;
  */
 
 public class Duke {
+    /** Exit message. */
     private final static String EXIT = "bye";
+    /** Keyword for listing out all the task. */
+    private final static String LIST = "list";
+    /** Line separator. */
     private final static String LINEBREAK = "\t____________________________________________________________";
 
+    /** For the chatboard to read the user input. */
     private Scanner sc;
+    /** Stores all the task. */
+    private List<Task> taskList;
 
     /**
      * Constructor for Duke.
      */
     Duke() {
         sc = new Scanner(System.in);
+        taskList = new ArrayList<>();
     }
 
     /**
@@ -30,8 +41,13 @@ public class Duke {
         String message;
         while (true) {
             message = sc.nextLine().toLowerCase();
-            if (message.equals(EXIT)) break;
-            echoMessage(message);
+
+            if (message.equals(EXIT))
+                break;
+            else if (message.equals(LIST))
+                listTask();
+            else
+                addTask(message);
         }
         exitMessage();
     }
@@ -45,10 +61,36 @@ public class Duke {
 
     /**
      * Echos the message the user sends for level-1.
+     * @deprecated
      * @param s Message user sent.
      */
     private void echoMessage(String s) {
         printMessage(s);
+    }
+
+    /**
+     * Add the task entered by the user into the list.
+     * @param s task input by the user
+     */
+    private void addTask(String s) {
+        Task task = new Task(s);
+        taskList.add(task);
+        printMessage("added: " + task.toString());
+    }
+
+    /**
+     * List out all the task stored by the user.
+     */
+    private void listTask() {
+        String[] task = taskList.stream()
+                    .map(x -> x.toString())
+                    .collect(Collectors.toList())
+                    .toArray(new String[0]);
+
+        for (int i = 0; i < task.length; i++)
+            task[i] = i + 1 + ". " + task[i];
+
+        printMessage(task);
     }
 
     /**

@@ -15,3 +15,7 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# checkstyle
+checkstyle-8.2-all.jar
+cs2030_checks.xml
