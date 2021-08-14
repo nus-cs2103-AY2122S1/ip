@@ -38,6 +38,17 @@ public class Duke {
                         System.out.println(e.toString());
                     }
                     break;
+                case "delete":
+                    try {
+                        DeleteCommand deleteCommand = new DeleteCommand(userInput);
+                        DeleteAction deleteAction = new DeleteAction(applicationState, deleteCommand.index - 1);
+                        applicationState = deleteAction.run();
+                    } catch (DukeEmptyStringException e) {
+                        System.out.println(e.toString());
+                    } catch (DukeInvalidArgumentException e) {
+                        System.out.println(e.toString());
+                    }
+                    break;
                 case "todo":
                     try {
                         ToDoCommand toDoCommand = new ToDoCommand(userInput);

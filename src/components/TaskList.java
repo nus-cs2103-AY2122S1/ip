@@ -20,6 +20,11 @@ public class TaskList {
         return new TaskList(this.taskList);
     }
 
+    public TaskList deleteTask(int index) {
+        this.taskList.remove(index);
+        return new TaskList(this.taskList);
+    }
+
     public String showTask(int index) throws DukeIndexOutOfBoundsException {
         try {
             return this.taskList.get(index).toString();

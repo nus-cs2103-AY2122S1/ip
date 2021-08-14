@@ -3,11 +3,11 @@ package actions;
 import components.TaskList;
 import exceptions.DukeIndexOutOfBoundsException;
 
-public class MarkDoneAction extends Action {
+public class DeleteAction extends Action {
     AppState applicationState;
     int index;
 
-    public MarkDoneAction(AppState applicationState, int index) {
+    public DeleteAction(AppState applicationState, int index) {
         this.applicationState = applicationState;
         this.index = index;
     }
@@ -16,9 +16,9 @@ public class MarkDoneAction extends Action {
         TaskList taskList = this.applicationState.taskList;
         TaskList newTaskList = taskList;
         try {
-            newTaskList = taskList.markTaskDone(index);
-            System.out.println(String.format("Nice! I've marked this task as done:\n%s",
-                    newTaskList.showTask(index)));
+            System.out.println(String.format("Feeling lazy today? I've deleted:\n%s",
+                    taskList.showTask(index)));
+            newTaskList = taskList.deleteTask(index);
         } catch (DukeIndexOutOfBoundsException e) {
             System.out.println(e.toString());
         } finally {
