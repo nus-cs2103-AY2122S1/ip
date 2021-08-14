@@ -9,7 +9,7 @@ Hello! I am
 What can I help you with today?
 
 
-You have said "Hello"
+I am sorry! I don't know what that means! ☹
 
 
 Details of task cannot be blank!
@@ -52,7 +52,7 @@ I have added this task for you:
 [E][✗] meeting (at: Sun 1-3pm)
 
 
-You did not specify an integer! Please use done <number>
+You did not specify an integer! Please use delete <number>
 
 
 Index is not an integer!
