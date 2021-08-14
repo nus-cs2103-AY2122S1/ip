@@ -27,13 +27,13 @@ public class Lifeline {
         boolean exit = false;
         while (!exit) {
             try {
-                String command = ui.readCommand();
-                if (command.equals("")) {
+                String fullCommand = ui.readCommand();
+                if (fullCommand.equals("")) {
                     continue;
                 }
-                String[] inputs = command.split("\\s", 2);
+                String[] inputs = fullCommand.split("\\s", 2);
                 System.out.println();
-                switch (getInputType(inputs[0])) {
+                switch (getCommandType(inputs[0])) {
                 case LIST:
                     ui.showTaskList(taskList);
                     break;
@@ -71,9 +71,9 @@ public class Lifeline {
         ui.exit();
     }
 
-    private InputType getInputType(String input) throws LifelineException {
+    private Command getCommandType(String input) throws LifelineException {
         try {
-            return InputType.valueOf(input.toUpperCase());
+            return Command.valueOf(input.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new LifelineException("I am sorry! I don't know what that means! ☹");
         }
