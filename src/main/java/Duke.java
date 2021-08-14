@@ -30,12 +30,21 @@ public class Duke {
         System.out.println(byeCommand);
     }
 
+    /**
+     * Add a task.
+     *
+     * @param task the task to be added.
+     */
     public void addTask(String task) {
         this.tasks.add(task);
         String output = String.format("Added: %s", task);
         System.out.println(output);
     }
 
+    /**
+     * display a list of tasks added.
+     *
+     */
     public void displayTasks() {
         for (int i = 0; i < this.tasks.size(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
