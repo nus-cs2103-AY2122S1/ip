@@ -2,6 +2,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    enum Command {
+        LIST, DONE, TODO, DEADLINE, EVENT, DELETE
+    }
+
     private static final String LINE_SEPARATOR = "\t____________________________________________________________\n";
     private static final ArrayList<Task> taskList = new ArrayList<>();
 
@@ -24,25 +28,37 @@ public class Duke {
      * Handles user input conditionally based on the command.
      */
     private static void handleUserInput(String input) throws DukeException {
+        Command command;
         String[] userInput = input.split(" ", 2);
-        String command = userInput[0];
+
+        if (!userInput[0].equals(userInput[0].toLowerCase())) {
+            throw new DukeException(
+                    String.format("Please input command with lowercase! Did you mean %s?", userInput[0].toLowerCase()));
+        }
+
+        try {
+            command = Command.valueOf(userInput[0].toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
+
         switch(command) {
-            case "list":
+            case LIST:
                 Duke.printTaskList();
                 break;
-            case "done":
+            case DONE:
                 Duke.setTaskDone(userInput);
                 break;
-            case "todo":
+            case TODO:
                 Duke.addTodo(userInput);
                 break;
-            case "deadline":
+            case DEADLINE:
                 Duke.addDeadline(userInput);
                 break;
-            case "event":
+            case EVENT:
                 Duke.addEvent(userInput);
                 break;
-            case "delete":
+            case DELETE:
                 Duke.deleteTask(userInput);
                 break;
             default:

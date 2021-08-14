@@ -20,4 +20,5 @@ delete -1
 delete 99999
 delete funnyWord
 list
+List
 bye
