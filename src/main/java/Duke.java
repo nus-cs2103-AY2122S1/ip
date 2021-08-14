@@ -44,10 +44,24 @@ public class Duke {
      *
      * @param description  A String that describes the task to be added.
      */
-    private void addTasks(String description) {
-        tasks.add(new Task(description));
+    private void addTasks(String taskType, String description) {
+        Task t;
+        if (taskType.equals("todo")) {
+            t = new ToDo(description);
+        } else if (taskType.equals("deadline")) {
+            String[] parts = description.split("/by");
+            t = new Deadline(parts[0].trim(), parts[1].trim());
+        } else if (taskType.equals("event")) {
+            String[] parts = description.split("/at");
+            t = new Event(parts[0].trim(), parts[1].trim());
+        } else {
+            return;
+        }
+        tasks.add(t);
         System.out.println("\t_______________________________");
-        System.out.printf("\tadded: %s\n", description);
+        System.out.println("\tGot it. I've added this task: ");
+        System.out.printf("\t  %s\n", t);
+        System.out.printf("\tNow you have %d tasks in the list.\n", tasks.size());
         System.out.println("\t_______________________________");
     }
 
@@ -79,8 +93,8 @@ public class Duke {
                     end = true;
                     break;
                 default:
-                    String fullLine = input + s.nextLine();
-                    this.addTasks(fullLine);
+                    String fullLine = s.nextLine();
+                    this.addTasks(input, fullLine);
             }
         }
         s.close();
