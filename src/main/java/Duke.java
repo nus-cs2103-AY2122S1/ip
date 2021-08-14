@@ -57,6 +57,7 @@ public class Duke {
         String[] inputArray = input.split(" ",2);
         String reply = "";
         String[] tempArray;
+        int index;
 
         switch (inputArray[0]) {
             case "list":
@@ -64,50 +65,61 @@ public class Duke {
                 break;
 
             case "done":
-                reply = this.markTask(Integer.parseInt(inputArray[1]));
+                if (inputArray.length == 1) {
+                    throw new DukeException("The index is missing.");
+                }
+                try {
+                    index = Integer.parseInt(inputArray[1]);
+                } catch (NumberFormatException e) {
+                    throw new DukeException("The index provided is not a number.");
+                }
+                if (index > this.list.size() || index < 1) {
+                    throw new DukeException("The index provided is not within the valid range");
+                }
+                reply = this.markTask(index);
                 break;
 
             case "todo":
                 if (inputArray.length < 2 || inputArray[1].isBlank()) {
-                    throw new DukeException("The description of todo cannot be empty");
+                    throw new DukeException("The description of todo cannot be empty.");
                 }
                 reply = this.addTask(new Todo(inputArray[1]));
                 break;
 
             case "deadline":
                 if (inputArray.length < 2 || inputArray[1].isBlank()) {
-                    throw new DukeException("The description of deadline cannot be empty");
+                    throw new DukeException("The description of deadline cannot be empty.");
                 }
 
                 tempArray = inputArray[1].split(" /by ");
                 if (tempArray.length < 2) {
-                    throw new DukeException("The format for deadline is wrong");
+                    throw new DukeException("The format for deadline is wrong.");
                 } else if(tempArray[0].isBlank()) {
-                    throw new DukeException("The description of deadline cannot be empty");
+                    throw new DukeException("The description of deadline cannot be empty.");
                 } else if(tempArray[1].isBlank()) {
-                    throw new DukeException("The date/time is missing from deadline");
+                    throw new DukeException("The date/time is missing from deadline.");
                 }
                 reply = this.addTask(new Deadline(tempArray[0], tempArray[1]));
                 break;
 
             case "event":
                 if (inputArray.length < 2 || inputArray[1].isBlank()) {
-                    throw new DukeException("The description of event cannot be empty");
+                    throw new DukeException("The description of event cannot be empty.");
                 }
 
                 tempArray = inputArray[1].split(" /at ");
                 if (tempArray.length < 2) {
-                    throw new DukeException("The format for event is wrong");
+                    throw new DukeException("The format for event is wrong.");
                 } else if(tempArray[0].isBlank()) {
-                    throw new DukeException("The description of event cannot be empty");
+                    throw new DukeException("The description of event cannot be empty.");
                 } else if(tempArray[1].isBlank()) {
-                    throw new DukeException("The date/time is missing from event");
+                    throw new DukeException("The date/time is missing from event.");
                 }
                 reply = this.addTask(new Event(tempArray[0], tempArray[1]));
                 break;
 
             default:
-                throw new DukeException("I'm sorry, but I don't know what that means");
+                throw new DukeException("I'm sorry, but I don't know what that means.");
         }
         return reply;
     }
