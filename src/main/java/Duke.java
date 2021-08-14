@@ -1,9 +1,9 @@
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.stream.IntStream;
 
 public class Duke {
-    static ArrayList<String> tasks = new ArrayList<>();
+    static List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         greet();
@@ -14,12 +14,9 @@ public class Duke {
                 print("Bye. Hope to see you again soon!");
                 return;
             } else if (input.equals("list")) {
-                print(IntStream
-                        .range(0, tasks.size())
-                        .mapToObj(x -> (x + 1) + ". " + tasks.get(x))
-                        .toArray(String[]::new));
+                list();
             } else {
-                tasks.add(input);
+                tasks.add(new Task(input));
                 print("added: " + input);
             }
         }
@@ -27,6 +24,15 @@ public class Duke {
 
     static void greet() {
         print("Hello! I'm Duke", "What can I do for you?");
+    }
+
+    static void list() {
+        List<String> out = new ArrayList<>();
+        out.add("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            out.add(String.format("%d.%s", i + 1, tasks.get(i)));
+        }
+        print(out.toArray(new String[0]));
     }
 
     static void print(String... lines) {
