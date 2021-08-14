@@ -3,3 +3,11 @@ deadline hello world /by time
 event hello world /at time
 done 2
 list
+todo
+event
+deadline
+event hello
+deadline hello
+blah
+done 100
+bye

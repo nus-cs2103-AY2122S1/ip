@@ -9,9 +9,7 @@ public class Duke {
         String echoInput = sc.nextLine();
         while (!echoInput.equals("bye")) {
             if (echoInput.equals("list")) {
-                for (int i = 0; i < idx; i++) {
-                    System.out.println(String.format("%d.%s", i, storedTasks[i].toString()));
-                }
+                enumerateList(storedTasks, idx);
             } else if (echoInput.startsWith("done")) {
                 try {
                     markTask(storedTasks, echoInput);
@@ -40,6 +38,13 @@ public class Duke {
         return -1;
     }
 
+    private static void enumerateList(Task[] storage, int idx) {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < idx; i++) {
+            System.out.println(String.format("%d.%s", i + 1, storage[i].toString()));
+        }
+    }
+
     private static void markTask(Task[] storage, String userInput) throws DukeException {
         if (userInput.length() <= 5) {
             throw new DukeException("An index must be provided for done to mark task at the index as done.");
@@ -47,9 +52,11 @@ public class Duke {
             try {
                 int num = Integer.parseInt(userInput.substring(5));
                 storage[num - 1].markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(storage[num - 1].toString());
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Index for done must be an integer.");
-            } catch (ArrayIndexOutOfBoundsException ae) {
+            } catch (NullPointerException ae) {
                 throw new DukeException("Index provided for done is either less than 1 or exceeds the length of the list, hence invalid.");
             }
         }
