@@ -20,10 +20,10 @@ public class Duke {
 
     /**
      * Private method to append items to the back of the list.
-     * @param text The text to be appended.
+     * @param task The text to be appended.
      */
-    private void append(String text) {
-        this.list[index] = new Task(text);
+    private void append(Task task) {
+        this.list[index] = task;
         this.index ++;
     }
 
@@ -41,7 +41,7 @@ public class Duke {
                 output.append("\n");
             }
         }
-        this.printMsg(output.toString());
+        this.printMsg(String.format("Here are the tasks in your list:\n%s",output.toString()));
     }
 
 
@@ -55,7 +55,6 @@ public class Duke {
     private void done(String text) {
         // check for the existence of the second argument and that it can be parsed to an int for lookup
         String[] splitted = text.split(" ");
-        // TODO: Ensure that index 1 is valid. Throw an error if no secondary argument is provided on "done"
         if (splitted.length < 2) {
             printMsg("Command is missing an argument 'index'.");
             return;
@@ -81,7 +80,7 @@ public class Duke {
                             "number.", lookup));
                 }
             } catch(NumberFormatException e) {
-                printMsg(String.format("The specified task number %s, is not a valid integer, please " +
+                this.printMsg(String.format("The specified task number %s, is not a valid integer, please " +
                         "enter a valid numeric task number.", dirtyInt));
             }
         } else {
@@ -89,6 +88,67 @@ public class Duke {
         }
 
 
+    }
+
+
+    public Deadline deadline(String text) {
+        String[] splitted = text.split("\\s");
+        if (splitted.length < 2) {
+            this.printMsg("Command is missing an argument 'deadline description'.");
+        } else {
+            int index = this.linearScan(splitted, "/by");
+            if (index < 0) {
+                this.printMsg("Command is missing the keyword /by.");
+            } else {
+                String description = String.join(" ", Arrays.copyOfRange(splitted, 1, index));
+                String by = String.join(" ",Arrays.copyOfRange(splitted, index + 1, splitted.length));
+                Deadline newDeadline = new Deadline(description, by);
+                this.append(newDeadline);
+                return newDeadline;
+            }
+        }
+        return null;
+    }
+
+    public Event event(String text) {
+        String[] splitted = text.split("\\s");
+        if (splitted.length < 2) {
+            this.printMsg("Command is missing an argument 'index'.");
+        } else {
+            int index = this.linearScan(splitted, "/at");
+            if (index < 0) {
+                this.printMsg("Command is missing the keyword /at.");
+            } else {
+                String description = String.join(" ", Arrays.copyOfRange(splitted, 1, index));
+                String at = String.join(" ",Arrays.copyOfRange(splitted, index + 1, splitted.length));
+                Event newEvent = new Event(description, at);
+                this.append(newEvent);
+                return newEvent;
+            }
+        }
+        return null;
+    }
+
+    public Todo todo(String text) {
+        String[] splitted = text.split("\\s");
+        if (splitted.length < 2) {
+            this.printMsg("Command is missing an argument 'todo description'.");
+        } else {
+            String description = String.join(" ", Arrays.copyOfRange(splitted, 1, splitted.length));
+            Todo newTodo = new Todo(description);
+            this.append(newTodo);
+            return newTodo;
+        }
+        return null;
+    }
+
+    private <T> int linearScan (T[] array, T finder) {
+        for (int i = 0; i < array.length; i ++) {
+            if (finder.equals(array[i])) {
+                return i;
+            }
+        }
+        return -1;
     }
 
 
@@ -100,6 +160,13 @@ public class Duke {
         String bar = "===============================================";
         System.out.printf("%s\n%s\n%s\n", bar, text, bar);
     }
+
+    private void printAdded(String text) {
+        String count = String.format("Now you have %d %s in the list", this.index, this.index > 1 ? "tasks" : "task");
+        this.printMsg(String.format("Got it. I've added this task:\n  %s\n%s.",
+                text, count));
+    }
+
 
 
     /**
@@ -128,8 +195,29 @@ public class Duke {
                     this.done(text);
                 }
 
+                case("event") -> {
+                    Event event = this.event(text);
+                    if (event != null) {
+                        this.printAdded(event.toString());
+                    }
+                }
+
+                case ("deadline") -> {
+                    Deadline deadline = this.deadline(text);
+                    if (deadline != null) {
+                        this.printAdded(deadline.toString());
+                    }
+                }
+
+                case ("todo") -> {
+                    Todo todo = this.todo(text);
+                    if (todo != null) {
+                        this.printAdded(todo.toString());
+                    }
+                }
+
                 default -> {
-                    this.append(text);
+                    this.append(new Task(text));
                     this.printMsg("added: " + text);
                 }
             }
