@@ -2,7 +2,7 @@
 	Hello! I'm Duke, what shall we do today? ٩(｡•́‿•̀｡)۶
 	_________________________________________________
 	_________________________________________________
-	'something' is not a valid task type. Tasks should begin with one of the following: todo, deadline, event ｢(ﾟﾍﾟ)
+	Sorry I do not recognise this command 'something' ｢(ﾟﾍﾟ)
 	_________________________________________________
 	_________________________________________________
 	Got it. I've added this task:

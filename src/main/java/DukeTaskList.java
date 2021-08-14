@@ -30,7 +30,8 @@ public class DukeTaskList {
      *
      * @return the numbered list
      */
-    public String getList() {
+    @Override
+    public String toString() {
         StringBuilder stringBuilderList = new StringBuilder();
 
         for (int i = 0; i < this.list.size(); i++) {

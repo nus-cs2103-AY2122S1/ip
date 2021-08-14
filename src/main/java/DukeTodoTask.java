@@ -5,14 +5,8 @@ public class DukeTodoTask extends DukeTask {
         super(description);
     }
 
-    public static DukeTodoTask createTask(String description) throws MissingTaskDescriptionException {
-        // Remove the 'to-do' prefix and any whitespace
-        String descriptionWithoutPrefix = description.substring(4).trim();
-
-        // Check that description is not empty
-        DukeTask.validateDescriptionNotEmpty(DukeTodoTask.TASK_TYPE, descriptionWithoutPrefix);
-
-        return new DukeTodoTask(descriptionWithoutPrefix);
+    public static DukeTodoTask createTask(String description) {
+        return new DukeTodoTask(description);
     }
 
     @Override

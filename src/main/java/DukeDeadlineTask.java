@@ -4,7 +4,6 @@
  */
 public class DukeDeadlineTask extends DukeTask {
     private static String TIME_SPLITTER = "/by";
-    private static String TASK_TYPE = "deadline";
     private String deadline;
 
     private DukeDeadlineTask(String description, String deadline) {
@@ -17,26 +16,18 @@ public class DukeDeadlineTask extends DukeTask {
      *
      * @param description The input task string by the user
      * @return a `DukeDeadlineTask` containing an action description and deadline information
-     * @throws
      */
-    public static DukeDeadlineTask createTask (String description)
-            throws InvalidTaskTimeFormatException, MissingTaskDescriptionException {
-        // Remove the 'deadline' prefix
-        String descriptionWithoutPrefix = description.substring(8).trim();
-
-        // Check that description is not empty
-        DukeTask.validateDescriptionNotEmpty(DukeDeadlineTask.TASK_TYPE, descriptionWithoutPrefix);
-
+    public static DukeDeadlineTask createTask (String description) throws InvalidTaskTimeFormatException {
         // Split the description into its action and time parts
         String[] splitPartsUsingBy = DukeTask.splitActionAndTime(
-                descriptionWithoutPrefix,
+                description,
                 DukeDeadlineTask.TIME_SPLITTER
         );
 
         try {
             return new DukeDeadlineTask(splitPartsUsingBy[0], splitPartsUsingBy[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidTaskTimeFormatException(DukeDeadlineTask.TASK_TYPE, DukeDeadlineTask.TIME_SPLITTER);
+            throw new InvalidTaskTimeFormatException(DukeActionTypeEnum.DEADLINE.toString(), DukeDeadlineTask.TIME_SPLITTER);
         }
     }
 

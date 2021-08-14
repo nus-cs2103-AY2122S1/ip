@@ -25,22 +25,26 @@ public class DukeTask {
      * @throws InvalidTaskTypeException when the type of task is not recognised
      * @throws InvalidTaskTimeFormatException when a task does not have valid time inputs
      */
-    public static DukeTask createTask(String description) throws InvalidTaskTypeException, InvalidTaskTimeFormatException, MissingTaskDescriptionException {
+    public static DukeTask createTask(String description, DukeActionTypeEnum actionType)
+            throws InvalidTaskTypeException, InvalidTaskTimeFormatException, MissingTaskDescriptionException {
         // A valid task is either a to-do, deadline or event
 
-        if (description.contains("todo")) {
+        // Validate that the task description is not empty
+        validateDescriptionNotEmpty(actionType.toString(), description);
+
+        if (actionType.equals(DukeActionTypeEnum.TODO)) {
             return DukeTodoTask.createTask(description);
         }
 
-        if (description.contains("deadline")) {
+        if (actionType.equals(DukeActionTypeEnum.DEADLINE)) {
             return DukeDeadlineTask.createTask(description);
         }
 
-        if (description.contains("event")) {
+        if (actionType.equals(DukeActionTypeEnum.EVENT)) {
             return DukeEventTask.createTask(description);
         }
 
-        throw new InvalidTaskTypeException(description);
+        throw new InvalidTaskTypeException(actionType);
     }
 
     /**

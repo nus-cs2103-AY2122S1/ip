@@ -1,7 +1,7 @@
 /**
  * Encapsulates the exception thrown when the user inputs a task number that does not exist in the list.
  */
-public class NonExistentTaskNumberException extends Exception {
+public class NonExistentTaskNumberException extends DukeException {
     /**
      * Constructor to instantiate a `NonExistentTaskNumberException`.
      *

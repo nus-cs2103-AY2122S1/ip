@@ -1,7 +1,7 @@
 /**
  * Encapsulates the exception thrown when a task meant to carry time information is incorrectly formatted.
  */
-public class InvalidTaskTimeFormatException extends Exception {
+public class InvalidTaskTimeFormatException extends DukeException {
     /**
      * Constructor to instantiate an `InvalidTaskTimeFormatException`.
      *

@@ -1,7 +1,7 @@
 /**
  * Encapsulates the exception thrown when an input meant to be a task number cannot be parsed into a number.
  */
-public class InvalidTaskNumberException extends Exception {
+public class InvalidTaskNumberException extends DukeException {
     /**
      * Constructor to instantiate an `InvalidTaskNumberException`.
      *

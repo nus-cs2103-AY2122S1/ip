@@ -1,7 +1,7 @@
 /**
  * Encapsulates the exception thrown when a user inputs a valid task with an empty description.
  */
-public class MissingTaskDescriptionException extends Exception {
+public class MissingTaskDescriptionException extends DukeException {
     /**
      * Constructor to instantiate a `MissingTaskDescriptionException`
      *

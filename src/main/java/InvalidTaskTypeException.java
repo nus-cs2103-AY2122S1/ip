@@ -1,17 +1,17 @@
 /**
  * Encapsulates the exception thrown when a user inputs an invalid message that is not a task.
  */
-public class InvalidTaskTypeException extends Exception {
+public class InvalidTaskTypeException extends DukeException {
     /**
      * Constructor to instantiate an `InvalidTaskTypeException`
      *
-     * @param description the invalid input by the user
+     * @param actionType the invalid input by the user
      */
-    public InvalidTaskTypeException(String description) {
+    public InvalidTaskTypeException(DukeActionTypeEnum actionType) {
         super(String.format(
             "'%s' is not a valid task type. " +
             "Tasks should begin with one of the following: todo, deadline, event",
-            description
+            actionType
         ));
     }
 }
