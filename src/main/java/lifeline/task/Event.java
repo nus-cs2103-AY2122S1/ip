@@ -1,3 +1,5 @@
+package lifeline.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -7,14 +9,14 @@ public class Event extends Task {
     private LocalTime endTime;
     private LocalDate date;
 
-    Event(String name, LocalDate date, LocalTime startTime, LocalTime endTime) {
+    public Event(String name, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(name);
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    Event(String name, LocalDate date, LocalTime startTime, LocalTime endTime, boolean isDone) {
+    public Event(String name, LocalDate date, LocalTime startTime, LocalTime endTime, boolean isDone) {
         super(name, isDone);
         this.date = date;
         this.startTime = startTime;

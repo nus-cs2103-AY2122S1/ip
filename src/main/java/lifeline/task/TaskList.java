@@ -1,9 +1,13 @@
+package lifeline.task;
+
+import lifeline.exception.LifelineException;
+
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> taskList;
 
-    TaskList(ArrayList<Task> taskList) {
+    public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
@@ -28,7 +32,7 @@ public class TaskList {
     public Task completeTask(int index) throws LifelineException {
         Task taskToMarkAsComplete = taskList.get(index);
         if (taskToMarkAsComplete.isDone()) {
-            throw new LifelineException("Task is already done!");
+            throw new LifelineException("lifeline.task.Task is already done!");
         }
         taskToMarkAsComplete.setDone(true);
         return taskToMarkAsComplete;

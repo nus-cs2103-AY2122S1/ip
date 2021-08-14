@@ -1,3 +1,8 @@
+package lifeline.parser;
+
+import lifeline.command.Command;
+import lifeline.exception.LifelineException;
+
 public class Parser {
     public static Command parse(String command) throws LifelineException {
         try {

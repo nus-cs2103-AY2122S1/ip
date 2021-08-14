@@ -1,3 +1,10 @@
+import lifeline.command.Command;
+import lifeline.exception.LifelineException;
+import lifeline.parser.Parser;
+import lifeline.storage.Storage;
+import lifeline.task.TaskList;
+import lifeline.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,7 +43,6 @@ public class Lifeline {
                 ui.showError(e.getMessage());
             }
         }
-        ui.exit();
     }
 
     public void start() {

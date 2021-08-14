@@ -1,7 +1,11 @@
+package lifeline.storage;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import lifeline.exception.LifelineException;
+import lifeline.task.*;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -16,7 +20,7 @@ public class Storage {
     private String filepath;
     private Gson gson;
 
-    Storage(String filepath) {
+    public Storage(String filepath) {
         this.filepath = filepath;
         this.gson = new Gson();
     }

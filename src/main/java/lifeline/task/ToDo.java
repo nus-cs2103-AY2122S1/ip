@@ -1,10 +1,12 @@
+package lifeline.task;
+
 public class ToDo extends Task {
 
-    ToDo(String name) {
+    public ToDo(String name) {
         super(name);
     }
 
-    ToDo(String name, boolean isDone) {
+    public ToDo(String name, boolean isDone) {
         super(name, isDone);
     }
 

@@ -1,13 +1,15 @@
+package lifeline.task;
+
 public class Task {
     private String name;
     private boolean isDone;
 
-    Task(String name) {
+    public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
 
-    Task(String name, boolean isDone) {
+    public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
     }

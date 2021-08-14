@@ -1,3 +1,10 @@
+package lifeline.command;
+
+import lifeline.exception.LifelineException;
+import lifeline.storage.Storage;
+import lifeline.task.*;
+import lifeline.ui.Ui;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -17,7 +24,7 @@ public class CommandHandler {
             throws LifelineException {
         String[] commands = command.split("\\s", 2);
         if (commands.length != 2) {
-            throw new LifelineException("Details of task cannot be blank!");
+            throw new LifelineException("Details of deadline cannot be blank!");
         }
         String[] description = commands[1].split("/by", 2);
         if (description.length != 2) {
@@ -114,8 +121,9 @@ public class CommandHandler {
             if (taskIndex < 0 || taskIndex >= taskList.size()) {
                 throw new LifelineException("Index is out of bounds!");
             }
+            Task taskToDelete = taskList.get(taskIndex);
             taskList.deleteTask(taskIndex);
-            ui.showDeletedTask(taskList.get(taskIndex));
+            ui.showDeletedTask(taskToDelete);
             ui.showTaskList(taskList);
             storage.save(taskList);
         } catch (NumberFormatException e) {
