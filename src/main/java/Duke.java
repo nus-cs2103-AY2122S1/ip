@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collection;
 
 public class Duke {
     static Scanner userInput = new Scanner(System.in);
@@ -13,6 +15,7 @@ public class Duke {
     private boolean running = true;
     private String instruction;
     private Task[] toDo = new Task[100];
+    private ArrayList<Task> improvedList= new ArrayList<Task>();
     private int counter = 0;
 
     void setInstruction() {
@@ -39,10 +42,14 @@ public class Duke {
         if(operative.equalsIgnoreCase("list")) {
             printList();
         } else if (operative.equalsIgnoreCase("done")) {
-            String item = strings[1];
-            int taskPointer = Integer.parseInt(item) - 1;
-            toDo[taskPointer].markAsDone();
-            completeTaskMessage(toDo[taskPointer]);
+            try {
+                String item = strings[1];
+                int taskPointer = Integer.parseInt(item) - 1;
+                toDo[taskPointer].markAsDone();
+                completeTaskMessage(toDo[taskPointer]);
+            } catch (IndexOutOfBoundsException e) {
+                throw new NoDescriptionError(operative);
+            }
         }else if (operative.equalsIgnoreCase("todo")){
             try {
                 String item = strings[1];
@@ -137,6 +144,7 @@ public class Duke {
                 weekTwo.parse();
             } catch (Exception e) {
                 System.out.println(e.toString());
+                weekTwo.printLineBreak();
             }
         }
         weekTwo.sayFarewell();

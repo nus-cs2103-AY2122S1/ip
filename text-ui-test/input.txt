@@ -3,4 +3,6 @@ event check2 /at time1
 deadline check3 /by time2
 done 1
 list
+todo
+blah
 bye
