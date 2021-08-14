@@ -1,10 +1,22 @@
 public class Duke {
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        greet();
     }
+
+    static void greet(){
+        printSeparator();
+        println("Hello! I'm Duke");
+        println("What can I do for you?");
+        printSeparator();
+    }
+
+    static void printSeparator(){
+        System.out.println("\t____________________________________");
+    }
+
+    static void println(String out){
+        System.out.println("\t "+out);
+    }
+
 }
