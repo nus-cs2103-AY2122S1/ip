@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Duke {
     // Set up constant
     static final String divider = "\t--------------------------------------------------------";
+
     static final String banner =
             "____    __    ____  _______  __        ______   ______   .___  ___.  _______    .___________.  ______       _______   __    __   __  ___  _______  __  \n"
                     + "\\   \\  /  \\  /   / |   ____||  |      /      | /  __  \\  |   \\/   | |   ____|   |           | /  __  \\     |       \\ |  |  |  | |  |/  / |   ____||  | \n"
@@ -16,7 +17,9 @@ public class Duke {
                     + "   \\    /\\    /    |  |____ |  `----.|  `----.|  `--'  | |  |  |  | |  |____        |  |     |  `--'  |    |  '--'  ||  `--'  | |  .  \\  |  |____ |__| \n"
                     + "    \\__/  \\__/     |_______||_______| \\______| \\______/  |__|  |__| |_______|       |__|      \\______/     |_______/  \\______/  |__|\\__\\ |_______|(__) \n"
                     + "                                                                                                                                                       ";
+
     static final ToDoList list = new ToDoList();
+
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -25,8 +28,14 @@ public class Duke {
         Command command = detectCommand(input);
         while (command != Command.EXIT) {
             switch (command) {
-                case ADD:
-                    list.addToList(input);
+                case TODO:
+                    handleTodo(input);
+                    break;
+                case DEADLINE:
+                    handleDeadline(input);
+                    break;
+                case EVENT:
+                    handleEvent(input);
                     break;
                 case LIST:
                     list.printList();
@@ -34,6 +43,9 @@ public class Duke {
                 case DONE:
                     int index = extractIndex(input);
                     list.markTaskAsDone(index);
+                    break;
+                case UNRECOGNISED:
+                    Duke.prettyPrint("Unrecognised command. Perhaps you made a typo?");
                     break;
             }
             input = sc.nextLine();
@@ -82,6 +94,43 @@ public class Duke {
     private static int extractIndex(String input) {
         String[] inputs = input.split(" ");
         return Integer.parseInt(inputs[1]);
+    }
+
+    /**
+     * Handler for ToDos task creation.
+     *
+     * @param input Raw user's input.
+     */
+    private static void handleTodo(String input) {
+        String[] extracted = input.split(" ", 2);
+        ToDo task = new ToDo(extracted[1]);
+        list.addToList(task);
+    }
+
+    /**
+     * Handler for Deadline task creation.
+     *
+     * @param input Raw user's input.
+     */
+    private static void handleDeadline(String input) {
+        String[] extracted = input.split(" ", 2)[1].split(" /by ");
+        String description = extracted[0];
+        String deadline = extracted[1];
+        Deadline task = new Deadline(description, deadline);
+        list.addToList(task);
+    }
+
+    /**
+     * Handler for Event task creation.
+     *
+     * @param input Raw user's input.
+     */
+    private static void handleEvent(String input) {
+        String[] extracted = input.split(" ", 2)[1].split(" /at ");
+        String description = extracted[0];
+        String dateTime = extracted[1];
+        Event task = new Event(description, dateTime);
+        list.addToList(task);
     }
 
     /** Prints the exit message when user types in the exit command. */
