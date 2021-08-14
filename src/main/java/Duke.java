@@ -17,16 +17,26 @@ public class Duke implements Runnable {
     private final String ERR_TASK_COMPLETE = "Task %s is already complete!";
     private final String ERR_NOT_FOUND = "Sorry, I do not recognize that command.";
     private final String ERR_NO_TASKS = "No tasks available!";
-    private final String ERR_NO_TASK_NAME = "Please include a Task name. Usage: todo <name>";
+    private final String ERR_TODO_FORMAT = "Error in command usage. Usage: todo <name>";
+    private final String ERR_DEADLINE_FORMAT = "Error in command usage. Usage: deadline <name> /by <date>";
     private final String ERR_INVALID_NUM = "Please provide a valid number! Usage: done <num>";
     private final String ERR_MAX_TASKS = "Sorry! You have reached maximum Task capacity.";
     private final int MAX_TASKS = 100;
     private final Map<String, Consumer<String>> commandsMap = Map.of(
         "list", (args) -> listTasks(),
         "done", (args) -> completeTask(args),
-        "todo", (args) -> addTodo(args)
+        "todo", (args) -> addTodo(args),
+        "deadline", (args) -> addDeadline(args)
     );
     private List<Task> tasks = new ArrayList<>();
+
+    private void printLatestTask() {
+        printDuke(
+            MSG_TASK_ADDED + "\n"
+            + "   " + tasks.get(tasks.size() - 1).toString() + "\n"
+            + String.format(MSG_TASK_COUNT, tasks.size())
+        );
+    }
 
     private void addTodo(String args) {
         if (tasks.size() > MAX_TASKS) {
@@ -34,16 +44,21 @@ public class Duke implements Runnable {
             return;
         }
         if (args.equals("")) {
-            printDuke(ERR_NO_TASK_NAME);
+            printDuke(ERR_TODO_FORMAT);
             return;
         }
-        Task todo = new Todo(args);
-        tasks.add(todo);
-        printDuke(
-            MSG_TASK_ADDED + "\n"
-            + "   " + todo.toString() + "\n"
-            + String.format(MSG_TASK_COUNT, tasks.size())
-        );
+        tasks.add(new Todo(args));
+        printLatestTask();
+    }
+
+    private void addDeadline(String args) {
+        if (args.equals("") || !args.contains(" /by ")) {
+            printDuke(ERR_DEADLINE_FORMAT);
+            return;
+        }
+        String[] tmp = args.split(" /by ", 2);
+        tasks.add(new Deadline(tmp[0], tmp[1]));
+        printLatestTask();
     }
 
     private void listTasks() {
