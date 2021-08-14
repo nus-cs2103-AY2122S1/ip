@@ -41,17 +41,23 @@ public class Duke {
      * @return If Duke should continue listening to commands.
      */
     public boolean processCommand(String command) {
-        String[] tokens = command.split(" ");
-        String baseCommand = tokens[0];
-        String[] commandArguments = Arrays.stream(tokens).skip(1).toArray(String[]::new);
-
-        Optional<DukeCommand> dukeCommand = Arrays.stream(DukeCommand.values()).filter(c -> c.getCommand().equals(baseCommand)).findFirst();
+        // Get the longest duke command that matches to command
+        Optional<DukeCommand> dukeCommand = Arrays.stream(DukeCommand.values())
+                .sorted(Comparator.comparingInt(c -> -c.getCommand().length()))
+                .filter(c -> command.startsWith(c.getCommand()))
+                .findFirst();
         if (dukeCommand.isPresent()) {
-            return dukeCommand.get().apply(this, commandArguments);
+            DukeCommand actualCommand = dukeCommand.get();
+            String arguments = command.substring(actualCommand.getCommand().length());
+            String[] tokens = arguments.split("/");
+            String positionalArg = tokens[0].trim();
+            Map<String, String> namedArgs = new HashMap<>();
+            for (int i = 1; i < tokens.length; i++) {
+                String[] namedArg = tokens[i].trim().split(" ", 2);
+                namedArgs.put(namedArg[0], namedArg[1]);
+            }
+            return dukeCommand.get().apply(this, positionalArg, namedArgs);
         } else {
-            final String taskName = command;
-            taskList.add(new DukeTask(taskName));
-            commandFormatter.printOutputLine(String.format("Task added with title: %s", taskName));
             return true;
         }
     }
@@ -80,24 +86,39 @@ public class Duke {
         /**
          * Processes the given command (a line). Returns true if more commands are to be listened to.
          *
-         * @param duke The Duke object which the command uses to execute its commands.
-         * @param args The arguments to the command.
+         * @param duke      The Duke object which the command uses to execute its commands.
+         * @param arg       The positional argument to the command.
+         * @param namedArgs The named arguments to the command.
          * @return If Duke should continue listening to commands.
          */
-        boolean apply(Duke duke, String... args);
+        boolean apply(Duke duke, String arg, Map<String, String> namedArgs);
     }
 
     private enum DukeCommand implements DukeCommandAction {
-        LIST("list", "List all tasks", (Duke duke, String... args) -> {
+        HELP("help", "Display all commands", (Duke duke, String arg, Map<String, String> namedArgs) -> {
+            duke.commandFormatter.printOutputLine("ALL COMMANDS:");
+            Arrays.stream(DukeCommand.values())
+                    .sorted(Comparator.comparing(DukeCommand::getCommand))
+                    .map(DukeCommand::toString)
+                    .forEach(duke.commandFormatter::printOutputLine);
+            return true;
+        }),
+        LIST_TASKS("list", "List all tasks", (Duke duke, String arg, Map<String, String> namedArgs) -> {
+            duke.commandFormatter.printOutputLine(String.format("You have %d %s", duke.taskList.size(), duke.taskList.size() == 1 ? "task" : "tasks"));
             for (int i = 0; i < duke.taskList.size(); i++) {
                 DukeTask task = duke.taskList.get(i);
                 duke.commandFormatter.printOutputLine(String.format("%d. %s", i + 1, task));
             }
             return true;
         }),
-        EXIT("bye", "Exit Duke", (Duke duke, String... args) -> false),
-        MARK_DONE("done", "Mark the task as done", (Duke duke, String... args) -> {
-            int index = Integer.parseInt(args[0]) - 1;
+        ADD_TASK("add", "Add a task", (Duke duke, String arg, Map<String, String> namedArgs) -> {
+            duke.taskList.add(new DukeTask(arg));
+            duke.commandFormatter.printOutputLine(String.format("Task added with title: %s", arg));
+            return true;
+        }),
+        EXIT("bye", "Exit Duke", (Duke duke, String arg, Map<String, String> namedArgs) -> false),
+        MARK_DONE("done", "Mark the task as done", (Duke duke, String arg, Map<String, String> namedArgs) -> {
+            int index = Integer.parseInt(arg) - 1;
             assert (!duke.taskList.isEmpty() && duke.taskList.size() > index);
             DukeTask task = duke.taskList.get(index);
             task.markAsDone();
@@ -126,8 +147,8 @@ public class Duke {
         }
 
         @Override
-        public boolean apply(Duke duke, String... args) {
-            return action.apply(duke, args);
+        public boolean apply(Duke duke, String arg, Map<String, String> namedArgs) {
+            return action.apply(duke, arg, namedArgs);
         }
     }
 }

@@ -6,13 +6,9 @@ public class DukeTask {
         this.name = name;
     }
 
-   public void markAsDone() {
+    public void markAsDone() {
         isDone = true;
-   }
-
-   public String getName() {
-        return name;
-   }
+    }
 
     @Override
     public String toString() {
