@@ -12,6 +12,15 @@ What can I help you with today?
 You have said "Hello"
 
 
+Details of task cannot be blank!
+
+
+Details of task cannot be blank!
+
+
+Details of task cannot be blank!
+
+
 I have added this task for you:
 [T][✗] read book
 
@@ -28,6 +37,15 @@ read book
 Here is your task:
 1. [T][✓] read book
 You have 0 uncompleted task.
+
+
+Index is out of bounds!
+
+
+You did not specify an integer! Please use done <number>
+
+
+Index is not an integer! Please use done <number>
 
 
 I have added this task for you:

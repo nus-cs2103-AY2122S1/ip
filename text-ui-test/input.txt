@@ -1,8 +1,14 @@
 Hello
+todo
+deadline
+event
 todo read book
 list
 done 1
 list
+done 2
+done
+done abc
 event meeting /at Sun 1-3pm
 deadline return book /by Sunday
 list
