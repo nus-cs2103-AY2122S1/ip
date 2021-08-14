@@ -4,6 +4,12 @@
  * It overrides methods in `DukeOutputMessage` to format the message differently for greeting.
  */
 public class DukeGreetingMessage extends DukeOutputMessage {
+    /**
+     * Constructor to instantiate a `DukeGreetingMessage`.
+     * Instantiates a parent `DukeOutputMessage`.
+     *
+     * @param message the string to be used in the greeting message
+     */
     public DukeGreetingMessage(String message) {
         super(message);
     }
