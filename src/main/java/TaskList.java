@@ -2,13 +2,13 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private ArrayList<String> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    public boolean addTask(String task) {
+    public boolean addTask(Task task) {
         try {
             tasks.add(task);
         } catch (Exception e) {
@@ -18,15 +18,20 @@ public class TaskList {
         return true;
     }
 
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
+
     public String printList() {
         StringBuilder listAsString = new StringBuilder();
         int count = 0;
-        for (String task : tasks) {
+        for (Task task : tasks) {
             count++;
-            listAsString.append(Duke.space);
-            listAsString.append(count).append(". ");
-            listAsString.append(task);
-            listAsString.append("\n");
+            listAsString.append(DukeCore.space)
+                    .append(count)
+                    .append(".")
+                    .append(task.getDescriptionWithStatus())
+                    .append("\n");
         }
         if (count > 0) {
             listAsString.setLength(listAsString.length() - 1);
