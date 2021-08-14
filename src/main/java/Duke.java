@@ -11,6 +11,7 @@ public class Duke {
     static String listMessage = "Here are the tasks in your list:";
     static String doneMessage = "Nice! I've marked this task as done:";
     static String addTaskMessage = "Got it. I've added this task:";
+    static String deleteTaskMessage = "Noted. I've removed this task:";
 
     private boolean running = true;
     private String instruction;
@@ -40,22 +41,31 @@ public class Duke {
         String operative = strings[0];
 
         if(operative.equalsIgnoreCase("list")) {
-            printList();
+            printArrayList();
         } else if (operative.equalsIgnoreCase("done")) {
             try {
                 String item = strings[1];
                 int taskPointer = Integer.parseInt(item) - 1;
-                toDo[taskPointer].markAsDone();
-                completeTaskMessage(toDo[taskPointer]);
+                improvedList.get(taskPointer).markAsDone();
+                completeTaskMessage(improvedList.get(taskPointer));
+            } catch (IndexOutOfBoundsException e) {
+                throw new NoDescriptionError(operative);
+            }
+        } else if (operative.equalsIgnoreCase("delete")) {
+            try {
+                String item = strings[1];
+                int taskPointer = Integer.parseInt(item) - 1;
+                Task deleted = improvedList.remove(taskPointer);
+                deleteTaskMessage(deleted.toString());
             } catch (IndexOutOfBoundsException e) {
                 throw new NoDescriptionError(operative);
             }
         }else if (operative.equalsIgnoreCase("todo")){
             try {
                 String item = strings[1];
-                toDo[counter] = new Todo(item);
-                addedTaskMessage(toDo[counter].toString());
-                counter++;
+                Task toAdd = new Todo(item);
+                improvedList.add(toAdd);
+                addedTaskMessage(toAdd.toString());
             } catch (IndexOutOfBoundsException e) {
                 throw new NoDescriptionError(operative);
             }
@@ -65,9 +75,9 @@ public class Duke {
                 String[] temp = item.split("/at ");
                 String date = temp[1];
                 String description = temp[0];
-                toDo[counter] = new Event(description, date);
-                addedTaskMessage(toDo[counter].toString());
-                counter++;
+                Task toAdd = new Event(description, date);
+                improvedList.add(toAdd);
+                addedTaskMessage(toAdd.toString());
             } catch (IndexOutOfBoundsException e) {
                 throw new NoDescriptionError(operative);
             }
@@ -77,8 +87,9 @@ public class Duke {
                 String[] temp = item.split("/by ");
                 String date = temp[1];
                 String description = temp[0];
-                toDo[counter] = new Deadline(description, date);
-                addedTaskMessage(toDo[counter].toString());
+                Task toAdd = new Deadline(description, date);
+                improvedList.add(toAdd);
+                addedTaskMessage(toAdd.toString());
                 counter++;
             } catch (IndexOutOfBoundsException e) {
                 throw new NoDescriptionError(operative);
@@ -105,6 +116,14 @@ public class Duke {
         printLineBreak();
     }
 
+    void printArrayList () {
+        System.out.println(listMessage);
+        for(int i = 0; i < improvedList.size(); i++) {
+            System.out.println(String.valueOf(i+1) + "." + improvedList.get(i).toString());
+        }
+        printLineBreak();
+    }
+
     void greet(){
         System.out.println(greeting);
         printLineBreak();
@@ -120,15 +139,22 @@ public class Duke {
         printLineBreak();
     }
 
-    void addedTaskMessage (String instruction) {
+    void deleteTaskMessage (String task) {
+        System.out.println(deleteTaskMessage);
+        System.out.println("  " + task);
+        taskCounterMessage();
+        printLineBreak();
+    }
+
+    void addedTaskMessage (String task) {
         System.out.println(addTaskMessage);
-        System.out.println("  " + instruction);
+        System.out.println("  " + task);
         taskCounterMessage();
         printLineBreak();
     }
 
     void taskCounterMessage () {
-        System.out.println("Now you have " + (counter + 1) + " tasks in the list.");
+        System.out.println("Now you have " + improvedList.size() + " tasks in the list.");
     }
 
     public static void main(String[] args) {
