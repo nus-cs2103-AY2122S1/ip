@@ -28,21 +28,28 @@ public class TaskList {
      * @param task the task to add to the list.
      * @return String representation of messages stating that the task has been added
      */
-    public String[] addToList(String task, String typeOfTask) {
+    public String[] addToList(String task, String typeOfTask) throws MissingArgumentException {
         switch (typeOfTask) {
         case "ToDo":
             taskList[taskCounter] = new ToDo(task);
             break;
         case "Deadline":
             String[] deadlineDetails = task.split(" /by ");
+            if (deadlineDetails.length == 1) {
+                throw new MissingArgumentException("'/by'", "Deadline");
+            }
             taskList[taskCounter] = new Deadline(deadlineDetails[0], deadlineDetails[1]);
             break;
         case "Event":
             String[] eventDetails = task.split(" /at ");
+            if (eventDetails.length == 1) {
+                throw new MissingArgumentException("'/at'", "Event");
+            }
             taskList[taskCounter] = new Event(eventDetails[0], eventDetails[1]);
             break;
         default:
-            //error
+            // will NOT execute as Duke calls this function to add a task and it only calls them based on
+            // the same switch cases.
             break;
         }
         taskCounter++;
@@ -68,25 +75,18 @@ public class TaskList {
     /**
      * Marks tasks (based on index) as done if it exists.
      *
-     * @param index index of Task in the TaskList.
+     * @param index index given by the User for Task in the TaskList (starts from 1).
      * @return message of the completion of the Task if it exists, else user will be informed that no such task exists.
      */
-    public String[] markTaskAsDone(int index) {
-        if (index < taskCounter) {
-            // Task exists, proceed to mark as done
-            String[] message = {
-                    "You completed a task! Maybe you aren't so incompetent after all.",
-                    taskList[index].markTaskAsDone()
-            };
-            return message;
-        } else {
-            // Task does not exist
-            String[] message = {
-                    "What?! Are you sure that task exists?",
-                    "(Hint: check the index)"
-            };
-            return message;
+    public String[] markTaskAsDone(int index) throws InvalidIndexException {
+        if (index <= 0 || index > taskCounter) {
+            throw new InvalidIndexException(taskCounter);
         }
+        String[] message = {
+                "You completed a task! Maybe you aren't so incompetent after all.",
+                taskList[index - 1].markTaskAsDone()
+        };
+        return message;
 
     }
 }
