@@ -15,9 +15,13 @@ public enum Command {
     LIST(CommandHandler::handleList),
     TODO(CommandHandler::handleToDo);
 
-    public QuadFunction<String, Storage, TaskList, Ui> execute;
+    private QuadFunction<String, Storage, TaskList, Ui> execute;
 
     Command(QuadFunction<String, Storage, TaskList, Ui> execute) {
         this.execute = execute;
+    }
+
+    public QuadFunction<String, Storage, TaskList, Ui> getExecute() {
+        return execute;
     }
 }

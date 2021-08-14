@@ -1,15 +1,20 @@
 package lifeline.command;
 
-import lifeline.exception.LifelineException;
-import lifeline.storage.Storage;
-import lifeline.task.*;
-import lifeline.ui.Ui;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import lifeline.exception.LifelineException;
+import lifeline.storage.Storage;
+import lifeline.task.Deadline;
+import lifeline.task.Event;
+import lifeline.task.Task;
+import lifeline.task.TaskList;
+import lifeline.task.ToDo;
+import lifeline.ui.Ui;
+
 
 public class CommandHandler {
     public static void handleList(String command, Storage storage, TaskList taskList, Ui ui) {
@@ -38,8 +43,8 @@ public class CommandHandler {
             ui.showAddedTask(newTask);
             storage.save(taskList);
         } catch (DateTimeParseException e) {
-            throw new LifelineException("Deadline is not of the correct format! Please use deadline <name> /by " +
-                    "<dd/MM/yy HHmm>\n");
+            throw new LifelineException("Deadline is not of the correct format! Please use deadline <name> /by "
+                    + "<dd/MM/yy HHmm>\n");
         }
     }
 
@@ -49,13 +54,13 @@ public class CommandHandler {
             throw new LifelineException("Details of event cannot be blank!");
         }
         String[] description = commands[1].trim().split("/at", 2);
-        String errorMessage = "Event date/time not in proper format! Please use event <name> /at " +
-                "<dd/MM/yy> <HHmm>-<HHmm>";
+        String errorMessage = "Event date/time not in proper format! Please use event <name> /at "
+                + "<dd/MM/yy> <HHmm>-<HHmm>";
         if (description.length != 2) {
             throw new LifelineException(errorMessage);
         }
         String[] eventDateAndDuration = description[1].trim().split("\\s", 2);
-        if (eventDateAndDuration.length!= 2) {
+        if (eventDateAndDuration.length != 2) {
             throw new LifelineException(errorMessage);
         }
         String eventDate = eventDateAndDuration[0];

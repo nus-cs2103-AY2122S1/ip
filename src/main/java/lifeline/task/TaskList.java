@@ -1,8 +1,8 @@
 package lifeline.task;
 
-import lifeline.exception.LifelineException;
-
 import java.util.ArrayList;
+
+import lifeline.exception.LifelineException;
 
 public class TaskList {
     private ArrayList<Task> taskList;

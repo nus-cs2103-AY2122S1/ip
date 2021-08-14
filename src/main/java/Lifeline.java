@@ -1,12 +1,12 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import lifeline.command.Command;
 import lifeline.exception.LifelineException;
 import lifeline.parser.Parser;
 import lifeline.storage.Storage;
 import lifeline.task.TaskList;
 import lifeline.ui.Ui;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Lifeline {
     private Scanner sc;
@@ -35,7 +35,7 @@ public class Lifeline {
                 }
                 System.out.println();
                 Command c = Parser.parse(fullCommand);
-                c.execute.apply(fullCommand, storage, taskList, ui);
+                c.getExecute().apply(fullCommand, storage, taskList, ui);
                 if (c == Command.BYE) {
                     exit = true;
                 }

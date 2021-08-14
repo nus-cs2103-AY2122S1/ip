@@ -1,12 +1,5 @@
 package lifeline.storage;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import lifeline.exception.LifelineException;
-import lifeline.task.*;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,6 +7,19 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import lifeline.exception.LifelineException;
+import lifeline.task.Deadline;
+import lifeline.task.Event;
+import lifeline.task.Task;
+import lifeline.task.TaskList;
+import lifeline.task.ToDo;
+
 
 public class Storage {
 

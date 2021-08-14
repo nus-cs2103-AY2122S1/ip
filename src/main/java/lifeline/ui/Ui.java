@@ -1,9 +1,9 @@
 package lifeline.ui;
 
+import java.util.Scanner;
+
 import lifeline.task.Task;
 import lifeline.task.TaskList;
-
-import java.util.Scanner;
 
 public class Ui {
     private Scanner sc;
