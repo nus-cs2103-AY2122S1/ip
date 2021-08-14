@@ -1,11 +1,15 @@
 import java.util.Scanner;
 
 class Node {
-    private Task task;
+    private final Task task;
     private Node next;
 
     public Node(Task task) {
         this.task = task;
+    }
+
+    public Task getTask() {
+        return this.task;
     }
 
     public Node getNext() {
@@ -13,21 +17,20 @@ class Node {
     }
 
     public void setNext(Node n) {
-        this.next = n;
-    }
-
-    public Task getTask() {
-        return task;
+        next = n;
     }
 
     public void markTask() {
         task.markAsDone();
     }
 
+
     @Override
     public String toString() {
         return task.toString();
     }
+
+
 }
 
 public class Duke {
@@ -36,6 +39,7 @@ public class Duke {
     private static Node lastNode = dummyHead;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        String userInput = "";
 
         String logo = "┏━━┓╋╋╋┏━━┓╋╋╋┏┓\n" +
                       "┃┏┓┃╋╋╋┃┏┓┃╋╋┏┛┗┓\n" +
@@ -44,16 +48,15 @@ public class Duke {
                       "┃┗━┛┃┃┃┃┗━┛┃┗┛┃┗┓\n" +
                       "┗━━━┻┛┗┻━━━┻━━┻━┛";
 
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Greetings from\n" + logo);
         lineSeparator();
-        System.out.println("I'm BriBot");
         System.out.println("What can I do for you?");
         lineSeparator();
-        String userInput = "";
-        while (userInput != "bye") {
+
+        while (!userInput.equals("bye")) {
             userInput = sc.nextLine();
             String[] words = userInput.split(" ", 2);
-            switch(words[0]) {
+            switch (words[0]) {
                 case "bye":
                     sayGoodBye();
                     break;
@@ -63,8 +66,21 @@ public class Duke {
                 case "done":
                     markNode(Integer.parseInt(words[1]));
                     break;
+                case "todo":
+                    addTodo(userInput);
+                    break;
+                case "deadline":
+                    String restDeadline = words[1];
+                    String[] separatedDeadline = restDeadline.split(" /by ");
+                    addDeadline(separatedDeadline[0], separatedDeadline[1]);
+                    break;
+                case "event":
+                    String restEvent = words[1];
+                    String[] separatedEvent = restEvent.split(" /at ");
+                    addEvent(separatedEvent[0], separatedEvent[1]);
+                    break;
                 default:
-                    addInput(userInput);
+                    System.out.println("Not a command...");
             }
         }
     }
@@ -81,13 +97,36 @@ public class Duke {
         lineSeparator();
     }
 
-    private static void addInput(String userInput) {
+    private static void printAddedMessage(Node node) {
         lineSeparator();
-        System.out.println("added: " + userInput);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(node.getTask().toString());
+        System.out.println("Now you have " + taskCount + " tasks in the list.");
         lineSeparator();
+    }
+
+    private static void addTodo(String description) {
         taskCount++;
-        lastNode.setNext(new Node(new Task(userInput)));
-        lastNode = lastNode.getNext();
+        Node nextNode = new Node(new Todo(description));
+        lastNode.setNext(nextNode);
+        lastNode = nextNode;
+        printAddedMessage(nextNode);
+    }
+
+    private static void addDeadline(String description, String by) {
+        taskCount++;
+        Node nextNode = new Node(new Deadline(description, by));
+        lastNode.setNext(nextNode);
+        lastNode = nextNode;
+        printAddedMessage(nextNode);
+    }
+
+    private static void addEvent(String description, String timing) {
+        taskCount++;
+        Node nextNode = new Node(new Event(description, timing));
+        lastNode.setNext(nextNode);
+        lastNode = nextNode;
+        printAddedMessage(nextNode);
     }
 
     private static void printList() {
