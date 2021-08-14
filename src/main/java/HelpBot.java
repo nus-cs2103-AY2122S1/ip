@@ -4,15 +4,17 @@ import java.util.Scanner;
 
 public class HelpBot {
 	// Command list
-	private static final String EXIT = "bye";
-	private static final String LIST = "list";
+	private enum Command {
+		TASK,
+		EXIT,
+		LIST,
+		DONE,
+	}
 
-	// Constants
+	// Constants/Variables related to the instance
 	private final String name;
 	private final Scanner scanner = new Scanner(System.in);
-
-	// Data storage
-	private final List<String> tasks = new ArrayList<>();
+	private final List<Task> tasks = new ArrayList<>();
 
 	/**
 	 * Constructor for a HelpBot instance.
@@ -30,7 +32,7 @@ public class HelpBot {
 	private void onEnable() {
 		String message = "Hello! I'm \n" + name
 				+ "\nHow may I serve your incredibly needy highness today?";
-		reply(message);
+		HelpBot.reply(message);
 		listen();
 	}
 
@@ -38,7 +40,7 @@ public class HelpBot {
 	 * Method called when player issues exit command on bot.
 	 */
 	private void onDisable() {
-		reply("Good riddance...");
+		HelpBot.reply("Good riddance...");
 	}
 
 	/**
@@ -48,16 +50,10 @@ public class HelpBot {
 		while (scanner.hasNext()) {
 			// Current message sent by the user
 			String current = scanner.nextLine();
-			if (current.equals(EXIT)) {
-				break;
+			if (runCommand(current)) {
+				return;
 			}
-			if (current.equals(LIST)) {
-				listAllTasks();
-				continue;
-			}
-			addTask(current);
 		}
-		onDisable();
 	}
 
 	/**
@@ -66,19 +62,43 @@ public class HelpBot {
 	 * @param task Task to be added to the task list.
 	 */
 	private void addTask(String task) {
-		tasks.add(task);
-		reply("Urgh, fine. Task '" + task + "' has been added.");
+		Task added = new Task(task);
+		tasks.add(added);
+		HelpBot.reply("Urgh, fine. Task '" + task + "' has been added.");
+	}
+
+	/**
+	 * Tries to get a task from the current message and mark it as done.
+	 *
+	 * @param current Current message sent by the user.
+	 */
+	private void setDone(String current) {
+		String task = current.replace("done ", "");
+		setDone(Integer.parseInt(task));
+	}
+
+	/**
+	 * Tries to mark the task at the specified number in the list as done.
+	 *
+	 * @param number Number of the task in the list to be marked.
+	 */
+	private void setDone(int number) {
+		try {
+			tasks.get(number - 1).setDone();
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("Hello? Can you COUNT? You don't HAVE this many tasks!!!");
+		}
 	}
 
 	/**
 	 * Method to list all added tasks in the task list.
 	 */
 	private void listAllTasks() {
-		StringBuilder message = new StringBuilder("Oh. My. God. Ok... Here are your tasks");
+		StringBuilder message = new StringBuilder("Oh. My. God. Fine. Here are your tasks:");
 		for (int i = 0; i < tasks.size(); ++i) {
-			message.append("\n").append(i + 1).append(". ").append(tasks.get(i)).append(".");
+			message.append("\n ").append(i + 1).append(".").append(tasks.get(i));
 		}
-		reply(message.toString());
+		HelpBot.reply(message.toString());
 	}
 
 	/**
@@ -86,9 +106,35 @@ public class HelpBot {
 	 *
 	 * @param message Message to be formatted.
 	 */
-	private void reply(String message) {
+	public static void reply(String message) {
 		System.out.println("____________________________________________________________");
 		System.out.println(message);
 		System.out.println("____________________________________________________________");
+	}
+
+	/**
+	 * Gets command type from message sent by the user.
+	 *
+	 * @param message Message sent by the user.
+	 * @return Whether to exit the program.
+	 */
+	private boolean runCommand(String message) {
+		if (message.startsWith("done")) {
+			String task = message.replace("done ", "");
+			if (Methods.isInt(task)) {
+				setDone(message);
+				return false;
+			}
+		}
+		switch (message) {
+		case "list":
+			listAllTasks();
+			return false;
+		case "bye":
+			onDisable();
+			return true;
+		}
+		addTask(message);
+		return false;
 	}
 }

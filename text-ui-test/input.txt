@@ -1,4 +1,9 @@
-Test my code
-Buy some erasers
-Ponder why I bought more than 1 eraser
+Say hi
+Say bye
+list
+done 1
+list
+done 1
+done 2
+list
 bye
