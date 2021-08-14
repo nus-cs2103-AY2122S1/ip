@@ -124,7 +124,8 @@ public class Duke {
         } else if (Duke.countSpaces(des) > 1) {
             throw new DukeException("Too many arguments being provided to \"done\" \nPlease refer to proper usage of commands with \"allCmd\"");
         } else {
-            taskList.remove(num);
+            taskList.remove(num - 1);
+            System.out.println("Successfully removed task " + num);
         }
     }
 
@@ -201,14 +202,8 @@ public class Duke {
                 } catch (NumberFormatException e) {
                     return null;
                 }
-            } else if (keyword.name() == "delete" && des.contains("delete") && des.substring(0, 5).equals("delete")) {
-                try {
-                    String sNum = des.substring(des.lastIndexOf(' ') + 1);
-                    int num = Integer.parseInt(sNum);
-                    return "delete";
-                } catch (NumberFormatException e) {
-                    return null;
-                }
+            } else if (keyword.name() == "delete" && des.contains("delete") && des.substring(0, 6).equals("delete")) {
+                return "delete";
             } else if (keyword.name().equals("deadline") && des.contains("deadline") && des.substring(0, 8).equals("deadline")) {
                 return "deadline";
             } else if (keyword.name().equals("event") && des.contains("event") && des.substring(0, 5).equals("event")) {
