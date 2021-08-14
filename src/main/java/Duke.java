@@ -9,24 +9,32 @@ public class Duke {
     private static int index = 0;
 
     //subroutine for adding tasks to the array of tasks
-    public static void addTask(String descriptor) {
+    public static void addTask(String descriptor) throws DukeException {
         if (descriptor.startsWith("todo")) {
-            descriptor = descriptor.replaceFirst("todo ", "");
-            store[index] = new Todo(descriptor);
+            descriptor = descriptor.replaceFirst("todo", "");
+            if (descriptor.equals("")) {
+                throw new DukeException("empty description");
+            }
+            store[index] = new Todo(descriptor.stripLeading());
         } else if (descriptor.startsWith("deadline")) {
-            descriptor = descriptor.replaceFirst("deadline ", "");
+            descriptor = descriptor.replaceFirst("deadline", "");
+            if (descriptor.equals("")) {
+                throw new DukeException("empty description");
+            }
             descriptor = descriptor.replaceFirst("/by ", "(by: ");
             descriptor = descriptor + ")";
-            store[index] = new Deadline(descriptor);
+            store[index] = new Deadline(descriptor.stripLeading());
         } else if (descriptor.startsWith("event")) {
-            descriptor = descriptor.replaceFirst("event ", "");
+            descriptor = descriptor.replaceFirst("event", "");
+            if (descriptor.equals("")) {
+                throw new DukeException("empty description");
+            }
             descriptor = descriptor.replaceFirst("/at ", "(at: ");
             descriptor = descriptor + ")";
-            store[index] = new Event(descriptor);
+            store[index] = new Event(descriptor.stripLeading());
         } else {
-            //if necessary, future error handling goes here.
-            //current assumption is no input errors.
-            System.out.println("ADD ERROR");
+            //based on logic in Main, should never reach this branch.
+            throw new DukeException();
         }
 
         System.out.println("Got it. I've added this task:");
@@ -58,13 +66,13 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println("  " + store[Integer.parseInt(temp[1]) - 1]);
             } else if (in.startsWith("todo") || in.startsWith("deadline") || in.startsWith("event")) {
-                addTask(in);
+                try {
+                    addTask(in);
+                } catch (DukeException e) {
+                    System.out.println("Sorry! Your request caused " + e);
+                }
             } else {
-                //possibly useless from task 4 onwards. For default tasks
-                //left here for now. Possibly remove in future levels.
-                System.out.println("added: " + in);
-                store[index] = new Task(in);
-                index++;
+                System.out.println("Sorry! I don't know what your request means...");
             }
             in = sc.nextLine();
         }
