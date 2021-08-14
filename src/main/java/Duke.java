@@ -24,7 +24,9 @@ public class Duke {
 		String input;
 		
 		// Main body of chat box, each if else handles one type of command
-		while (!(input = sc.nextLine().trim()).equals("bye")) interpretCommand(input);
+		while (!(input = sc.nextLine().trim()).equals("bye")) {
+			interpretCommand(input);
+		}
 		
 		// Close off scanner
 		sc.close();
@@ -35,20 +37,21 @@ public class Duke {
 	
 	private void interpretCommand(String command) {
 		try {
-			if (command.equals("list"))
+			if (command.equals("list")) {
 				printFullList();
-			else if (command.matches("^done( .*)?"))
+			} else if (command.matches("^done( .*)?")) {
 				taskDone(command);
-			else if (command.matches("^todo( .*)?"))
+			} else if (command.matches("^todo( .*)?")) {
 				addTodo(command);
-			else if (command.matches("^deadline( .*)?"))
+			} else if (command.matches("^deadline( .*)?")) {
 				addDeadline(command);
-			else if (command.matches("^event( .*)?"))
+			} else if (command.matches("^event( .*)?")) {
 				addEvent(command);
-			else if (command.matches("^delete( .*)?"))
+			} else if (command.matches("^delete( .*)?")) {
 				taskDelete(command);
-			else
+			} else {
 				throw new UnknownCommandException();
+			}
 		} catch (DukeException e) {
 			printMessage(e.getMessage());
 		}
@@ -68,7 +71,9 @@ public class Duke {
 		int taskNumber = Integer.parseInt(command.substring(7)) - 1;
 		
 		// Throw exception if taskNumber is invalid
-		if (taskNumber < 0 || taskNumber >= listTasks.size()) throw new TaskNotFoundException();
+		if (taskNumber < 0 || taskNumber >= listTasks.size()) {
+			throw new TaskNotFoundException();
+		}
 		
 		// Delete the task
 		Task task = listTasks.remove(taskNumber);
@@ -93,7 +98,9 @@ public class Duke {
 		int taskNumber = Integer.parseInt(command.substring(5)) - 1;
 		
 		// Throw exception if taskNumber is invalid
-		if (taskNumber < 0 || taskNumber >= listTasks.size()) throw new TaskNotFoundException();
+		if (taskNumber < 0 || taskNumber >= listTasks.size()) {
+			throw new TaskNotFoundException();
+		}
 		
 		// Mark the task as done
 		Task task = listTasks.get(taskNumber);
@@ -166,7 +173,9 @@ public class Duke {
 	}
 	
 	private void validateCommand(String command, String regex, String format) throws IllegalFormatException {
-		if (!command.matches(regex)) throw new IllegalFormatException(format);
+		if (!command.matches(regex)) {
+			throw new IllegalFormatException(format);
+		}
 	}
 	
 	/**
@@ -176,14 +185,24 @@ public class Duke {
 	 */
 	private void printFullList() throws EmptyListException {
 		// Throw exception if list is empty
-		if (listTasks.size() == 0) throw new EmptyListException();
+		if (listTasks.size() == 0) {
+			throw new EmptyListException();
+		}
 		
 		StringBuilder msg = new StringBuilder();
 		int size = listTasks.size();
 		
 		// Reformat the list of tasks into a string
-		for (int i = 0; i < size - 1; i++) msg.append(i + 1).append(". ").append(listTasks.get(i)).append("\n");
-		msg.append(size).append(". ").append(listTasks.get(size - 1));
+		for (int i = 0; i < size - 1; i++) {
+			msg.append(i + 1)
+					.append(". ")
+					.append(listTasks.get(i))
+					.append("\n");
+		}
+		
+		msg.append(size)
+				.append(". ")
+				.append(listTasks.get(size - 1));
 		
 		// Display message
 		printMessage(MESSAGE_LIST + "\n" + msg);
