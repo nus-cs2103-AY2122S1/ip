@@ -11,9 +11,10 @@ public class Duke {
         DukeGreetingMessage greetingMessage = new DukeGreetingMessage("Hello! I'm Duke, what shall we do today?");
         System.out.println(greetingMessage.getFormattedMessage());
 
-        // Add or list
+        // Add, List or Mark As Done
         String inputExitMessage = "bye";
         String inputListMessage = "list";
+        String inputDoneMessage = "done";
 
         Scanner inputScanner = new Scanner(System.in);
         String inputMessage = inputScanner.nextLine();
@@ -24,12 +25,37 @@ public class Duke {
             if (inputMessage.equals(inputListMessage)) {
                 // Output the list
                 outputMessage = new DukeListMessage(DukeList.getList());
+            } else if (inputMessage.contains(inputDoneMessage)) {
+                try {
+                    // Get the task number that should be marked as done
+                    // Assume that the first 5 characters will be done and space
+                    int taskNumber = Integer.parseInt(inputMessage.substring(5));
+
+                    if (!DukeList.contains(taskNumber)) {
+                        // Inform user if task number does not exist in list
+                        outputMessage = new DukeOutputMessage(
+                            String.format("Task %d does not exist in the list", taskNumber)
+                        );
+                    } else {
+                        // Else mark task as done
+                        DukeTask task = DukeList.getTaskByTaskNumber(taskNumber);
+                        task.markAsDone();
+                        outputMessage = new DukeDoneMessage(task.toString());
+                    }
+                } catch (NumberFormatException e) {
+                    outputMessage = new DukeOutputMessage(
+                        "Please enter a valid task number when marking a task as done " +
+                        "in the form of 'done X', where X is the task number to be marked as done"
+                    );
+                }
             } else {
                 // Add input to list
-                DukeList.addItemToList(inputMessage);
+                DukeTask task = new DukeTask(inputMessage);
+                DukeList.addItemToList(task);
                 outputMessage = new DukeAddedMessage(inputMessage);
             }
 
+            // Print output message
             System.out.println(outputMessage.getFormattedMessage());
             inputMessage = inputScanner.nextLine();
         }

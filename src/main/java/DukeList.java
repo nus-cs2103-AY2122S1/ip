@@ -3,7 +3,7 @@
  * Assumes there will be no more than 100 messages.
  */
 public class DukeList {
-    private static String[] list = new String[100];
+    private static DukeTask[] list = new DukeTask[100];
     private static int indexOfNextNewItem = 0;
 
     /**
@@ -11,7 +11,7 @@ public class DukeList {
      *
      * @param item is the item be added to the list
      */
-    public static void addItemToList(String item) {
+    public static void addItemToList(DukeTask item) {
         DukeList.list[DukeList.indexOfNextNewItem] = item;
         DukeList.indexOfNextNewItem += 1;
     }
@@ -25,10 +25,32 @@ public class DukeList {
         StringBuilder stringBuilderList = new StringBuilder();
 
         for (int i = 0; i < DukeList.indexOfNextNewItem; i++) {
-            String listItem = String.format("%d. %s\n\t", i + 1, DukeList.list[i]);
+            DukeTask task = DukeList.list[i];
+            String listItem = String.format("%d. %s\n\t", i + 1, task.toString());
             stringBuilderList.append(listItem);
         }
 
         return stringBuilderList.toString();
+    }
+
+    /**
+     * Takes in a task number and returns true if the task number exists in the list,
+     * otherwise it returns false.
+     *
+     * @param taskNumber is the number that the task is listed by, starting from 1
+     * @return true if the task number exists in the list, otherwise false
+     */
+    public static boolean contains(int taskNumber) {
+        return taskNumber > 0 && taskNumber <= indexOfNextNewItem;
+    }
+
+    /**
+     * Retrieves the task by the number it is listed by.
+     *
+     * @param taskNumber is the number that the task is listed by, starting from 1
+     * @return a `DukeTask`
+     */
+    public static DukeTask getTaskByTaskNumber(int taskNumber) {
+        return DukeList.list[taskNumber - 1];
     }
 }
