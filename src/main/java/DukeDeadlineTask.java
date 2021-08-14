@@ -1,7 +1,7 @@
 public class DukeDeadlineTask extends DukeTask {
     final String deadline;
 
-    public DukeDeadlineTask(String name, String deadline) {
+     DukeDeadlineTask(String name, String deadline) {
         super(name);
         this.deadline = deadline;
     }

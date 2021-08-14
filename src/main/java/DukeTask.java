@@ -2,7 +2,7 @@ public class DukeTask {
     final String name;
     boolean isDone = false;
 
-    public DukeTask(String name) {
+    DukeTask(String name) {
         this.name = name;
     }
 
