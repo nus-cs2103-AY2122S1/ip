@@ -12,6 +12,10 @@ public class Database {
         return db.get(index);
     }
 
+    public int size() {
+        return db.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

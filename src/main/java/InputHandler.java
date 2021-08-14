@@ -1,6 +1,9 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class InputHandler {
     private final String welcome = " Hello! I'm Duke\n What can I do for you?";
@@ -31,9 +34,46 @@ public class InputHandler {
             }
             return false;
         });
+        cmds.put("todo", x -> {
+            Task t = new Todo(x);
+            db.add(t);
+            System.out.println(formatReply(" Got it. I've added this task:\n   " + t
+                    + "\n Now you have " + db.size() + " tasks in the list."));
+            return false;
+        });
+        cmds.put("deadline", x -> {
+            List<String> tokens = new Scanner(x).tokens().collect(Collectors.toList());
+            String curr = new String(), desc = curr;
+            for (String in : tokens) {
+                if (in.equals("/by")) {
+                    desc = curr;
+                    curr = new String();
+                } else curr += " " + in;
+            }
+            Deadline t = new Deadline(desc.substring(1), curr.substring(1));
+            db.add(t);
+            System.out.println(formatReply(" Got it. I've added this task:\n   " + t
+                    + "\n Now you have " + db.size() + " tasks in the list."));
+            return false;
+        });
+        cmds.put("event", x -> {
+            List<String> tokens = new Scanner(x).tokens().collect(Collectors.toList());
+            String curr = new String(), desc = curr;
+            for (String in : tokens) {
+                if (in.equals("/at")) {
+                    desc = curr;
+                    curr = new String();
+                } else curr += " " + in;
+            }
+            Event t = new Event(desc.substring(1), curr.substring(1));
+            db.add(t);
+            System.out.println(formatReply(" Got it. I've added this task:\n   " + t
+                    + "\n Now you have " + db.size() + " tasks in the list."));
+            return false;
+        });
         cmds.put("add", x -> {
-            System.out.println(formatReply(" added: " + x));
             db.add(new Task(x));
+            System.out.println(formatReply(" added: " + x));
             return false;
         });
         System.out.println(formatReply(welcome));
