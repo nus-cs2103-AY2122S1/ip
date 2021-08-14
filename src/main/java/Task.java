@@ -4,7 +4,7 @@
  *
  * The Task Class is a representation of a task that Duke is keeping track of.
  * It contains information relating to the task:
- * - Description
+ * - description
  * - isDone
  *
  * @author Benedict Chua
@@ -40,7 +40,7 @@ public class Task {
     public String markTaskAsDone() {
         if (!this.isDone) {
             this.isDone = true;
-            return String.format("  [X] %s", this.description);
+            return "  " + this.toString();
         } else {
             return "Wait...  You've already completed this task before you dummy!";
         }
@@ -48,6 +48,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.description;
+        return String.format("[%s] %s", getStatusIcon(), this.description);
     }
 }

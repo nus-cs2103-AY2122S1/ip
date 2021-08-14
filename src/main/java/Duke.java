@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
@@ -5,14 +6,17 @@ import static java.lang.Integer.parseInt;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke: Incrementally building a Chatbot.
  *
- * Current Progress: Level 3. Mark as Done
+ * Current Progress: Level 4. ToDos, Events, Deadlines
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted commands:
- *   - any String that is not a command below -> assumed to be a task, adds it to list of tasks
- *   - list -> displays current list of tasks
- *   - done x -> marks Task x as done
- *   - bye -> exits the program
+ *   - 'todo x' -> adds a ToDo task of x with no date/time attached
+ *   - 'deadline x /by y' -> adds a Deadline task of x that needs to be done by y
+ *   - 'event x /at y' -> adds an Event task of x that starts and ends at a specific time y
+ *   - 'list' -> displays current list of tasks
+ *   - 'done' x -> marks Task x as done
+ *   - 'bye' -> exits the program
+ *   - any other String -> considered as invalid since tasks have valid commands
  *
  * @author Benedict Chua
  */
@@ -39,9 +43,8 @@ public class Duke {
         System.out.println(LINE_SEPARATOR + "\n");
     }
 
-    private static void addToList(String task) {
-        tasksList.addToList(task);
-        displayMessage(new String[] {"added: " + task});
+    private static void addToList(String task, String typeOfTask) {
+        displayMessage(tasksList.addToList(task, typeOfTask));
     }
 
     private static void completeTask(String index) {
@@ -60,7 +63,6 @@ public class Duke {
         // Carries out commands inputted by user into the Scanner
         String command = sc.nextLine();
         while(!command.equals("bye")) {
-            // Using switch even though there's only 2 cases here to build up on it in higher Levels
             switch (command.split(" ")[0]) {
             case "list":
                 displayTasks();
@@ -68,8 +70,17 @@ public class Duke {
             case "done":
                 completeTask(command.split(" ")[1]);
                 break;
+            case "todo":
+                addToList(command.split(" ", 2)[1], "ToDo");
+                break;
+            case "deadline":
+                addToList(command.split(" ", 2)[1], "Deadline");
+                break;
+            case "event":
+                addToList(command.split(" ", 2)[1], "Event");
+                break;
             default:
-                addToList(command);
+                // error
                 break;
             }
             command = sc.nextLine();

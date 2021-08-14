@@ -26,10 +26,33 @@ public class TaskList {
      * Adds a given task to the tasks list.
      *
      * @param task the task to add to the list.
+     * @return String representation of messages stating that the task has been added
      */
-    public void addToList(String task) {
-        taskList[taskCounter] = new Task(task);
+    public String[] addToList(String task, String typeOfTask) {
+        switch (typeOfTask) {
+        case "ToDo":
+            taskList[taskCounter] = new ToDo(task);
+            break;
+        case "Deadline":
+            String[] deadlineDetails = task.split(" /by ");
+            taskList[taskCounter] = new Deadline(deadlineDetails[0], deadlineDetails[1]);
+            break;
+        case "Event":
+            String[] eventDetails = task.split(" /at ");
+            taskList[taskCounter] = new Event(eventDetails[0], eventDetails[1]);
+            break;
+        default:
+            //error
+            break;
+        }
         taskCounter++;
+
+        return new String[] {
+                "I've added this task but it's not like I did for you or anything!",
+                "  " + taskList[taskCounter - 1].toString(),
+                String.format("Now you have %d %s in the list. Do your best doing them okay?",
+                        taskCounter, taskCounter == 1 ? "task" : "tasks")
+        };
     }
 
     /**
@@ -38,7 +61,7 @@ public class TaskList {
     public void printList() {
         for (int i = 0; i < taskCounter; i++) {
             Task currTask = taskList[i];
-            System.out.println(INDENTATION + String.format("%d:[%s] %s", i + 1, currTask.getStatusIcon(), currTask));
+            System.out.println(INDENTATION + String.format("%d:%s", i + 1, currTask));
         }
     }
 
@@ -51,12 +74,17 @@ public class TaskList {
     public String[] markTaskAsDone(int index) {
         if (index < taskCounter) {
             // Task exists, proceed to mark as done
-            String[] message = {"You completed a task! Maybe you aren't so incompetent after all.",
-                    taskList[index].markTaskAsDone()};
+            String[] message = {
+                    "You completed a task! Maybe you aren't so incompetent after all.",
+                    taskList[index].markTaskAsDone()
+            };
             return message;
         } else {
             // Task does not exist
-            String[] message = {"What?! Are you sure that task exists?", "(Hint: check the index)"};
+            String[] message = {
+                    "What?! Are you sure that task exists?",
+                    "(Hint: check the index)"
+            };
             return message;
         }
 
