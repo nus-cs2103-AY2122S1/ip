@@ -43,6 +43,8 @@ public class Duke {
             "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█\n" +
             "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█";
     String instruction;
+    String[] toDo = new String[100];
+    private int counter = 0;
 
     void setInstruction() {
         instruction = userInput.nextLine();
@@ -60,6 +62,26 @@ public class Duke {
         return false;
     }
 
+    void parse() {
+        if(instruction.equalsIgnoreCase("list")){
+            printList();
+        } else {
+            toDo[counter] = instruction;
+            counter++;
+            System.out.println("added: " + instruction);
+        }
+    }
+
+    void printList() {
+        for(int x = 0; x < 99;x++) {
+            if(toDo[x] == null){
+                break;
+            }
+            String temp = String.valueOf(x + 1);
+            System.out.println(temp + ". " + toDo[x]);
+        }
+    }
+
     void greet(){
         System.out.println(greeting);
     }
@@ -69,25 +91,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println(greeting);
-//        boolean running = true;
-//        while(running) {
-//            String toEcho = userInput.nextLine();
-//            if(toEcho.equalsIgnoreCase("bye")) {
-//                running = false;
-//                break;
-//            }
-//            System.out.println('1');
-//            System.out.println(toEcho);
-//            System.out.println('2');
-//        }
-//        System.out.println("Bye. Hope to see you again soon!");
-
         Duke weekTwo = new Duke();
         weekTwo.greet();
 
@@ -96,7 +99,7 @@ public class Duke {
             if(weekTwo.checkBye()){
                 break;
             }
-            weekTwo.echo();
+            weekTwo.parse();
         }
         weekTwo.sayFarewell();
     }
