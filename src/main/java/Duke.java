@@ -12,4 +12,5 @@ public class Duke {
     public void runProgram() {
         System.out.println(borderLine + welcomeMessage + borderLine);
     }
+
 }
