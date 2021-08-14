@@ -74,6 +74,10 @@ public class Duke implements Runnable {
     }
 
     private void listTasks() {
+        if (tasks.size() == 0) {
+            printDuke(ERR_NO_TASKS);
+            return;
+        }
         printDuke(MSG_LISTS + "\n"
             + String.join("\n", IntStream.range(0, tasks.size())
                 .mapToObj(i -> String.format("%d.%s", i + 1, tasks.get(i)))
