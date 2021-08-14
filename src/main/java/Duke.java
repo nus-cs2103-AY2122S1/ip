@@ -60,7 +60,7 @@ public class Duke {
             try {
                 return dukeCommand.get().apply(this, positionalArg, namedArgs);
             } catch (InvalidCommandException e) {
-                commandFormatter.printOutputLine(String.format("Error in \"%s\": %s.\nType \"help %s\" to view proper usage of the command.", actualCommand.getName(), e.getMessage(), actualCommand.getName()));
+                commandFormatter.printOutputLine(String.format("Error in \"%s\": %s\nType \"help %s\" to view proper usage of the command.", actualCommand.getName(), e.getMessage(), actualCommand.getName()));
                 return true;
             }
         } else {
