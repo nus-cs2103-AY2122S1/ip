@@ -69,6 +69,32 @@ public class Side {
         }
     }
 
+    private static void handleDone(String input, TaskList taskList) throws TaskIndexException {
+        if (input.split("\\s+").length == 2) {
+            int taskNum = Integer.parseInt(input.split("\\s+")[1]);
+            if (taskNum > taskList.length() || taskNum <= 0) {
+                throw new TaskIndexException();
+            } else {
+                printResponse(taskList.markTaskDone(taskNum - 1));
+            }
+        } else {
+            printResponse("I only have 1 hand, I can only mark 1 at a time...");
+        }
+    }
+
+    private static void handleDelete(String input, TaskList taskList) throws DeleteIndexException {
+        if (input.split("\\s+").length == 2) {
+            int taskNum = Integer.parseInt(input.split("\\s+")[1]);
+            if (taskNum > taskList.length() || taskNum <= 0) {
+                throw new DeleteIndexException();
+            } else {
+                printResponse(taskList.delete(taskNum - 1));
+            }
+        } else {
+            printResponse("I only have 1 hand, I can only delete 1 at a time...");
+        }
+    }
+
     public static void main(String[] args) {
         printLogo();
         System.out.println(GREETING);
@@ -94,21 +120,15 @@ public class Side {
                         printResponse(tasks.toString());
                         break;
                     case "done":
-                        if (userInput.split("\\s+").length == 2) {
-                            int taskNum = Integer.parseInt(userInput.split("\\s+")[1]);
-                            if (taskNum > tasks.length() || taskNum <= 0) {
-                                throw new TaskIndexException();
-                            } else {
-                                printResponse(tasks.markTaskDone(taskNum - 1));
-                            }
-                        } else {
-                            printResponse("I only have 1 hand, I can only mark 1 at a time...");
-                        }
+                        handleDone(userInput, tasks);
+                        break;
+                    case "delete":
+                        handleDelete(userInput, tasks);
                         break;
                     default:
                         throw new UnknownCommandException();
                 }
-            } catch (UnknownCommandException | TaskIndexException | WrongFormatException e) {
+            } catch (UnknownCommandException | TaskIndexException | WrongFormatException | DeleteIndexException e) {
                 printResponse(e.getMessage());
             }
             userInput = scanner.nextLine();

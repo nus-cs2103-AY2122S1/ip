@@ -15,3 +15,9 @@ class TaskIndexException extends Exception {
         super("No such task, more energy wasted...");
     }
 }
+
+class DeleteIndexException extends Exception {
+    public DeleteIndexException() {
+        super("Can't delete what isn't there...");
+    }
+}

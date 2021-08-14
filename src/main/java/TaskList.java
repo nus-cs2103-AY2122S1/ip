@@ -35,6 +35,15 @@ public class TaskList {
         return tasks.get(i).markAsDone();
     }
 
+    public String delete(int index) {
+        Task taskToDelete = this.tasks.get(index);
+        this.tasks.remove(index);
+        taskLabel--;
+        String taskQuantifier = this.tasks.size() == 1 ? "task..." : "tasks...";
+        String taskCount = "\nYou now have " + tasks.size() + " " + taskQuantifier;
+        return "Fine, I'll delete: " + taskToDelete.toString() + taskCount;
+    }
+
     @Override
     public String toString() {
         StringBuilder tasksList = new StringBuilder();
