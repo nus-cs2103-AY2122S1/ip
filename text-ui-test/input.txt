@@ -1,0 +1,19 @@
+list
+todo declare temperature later
+list
+done 1
+list
+deadline finish tutorial /by today 2359
+list
+deadline review cs2100 lecture /by 15 Aug 8AM
+list
+done 3
+list
+event cs2101 tutorial /at Mon 12PM
+list
+event hackerschool /at Sat 10AM
+list
+asdf
+done 5
+list
+exit

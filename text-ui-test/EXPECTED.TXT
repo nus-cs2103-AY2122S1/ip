@@ -1,7 +1,112 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+____    __    ____  _______  __        ______   ______   .___  ___.  _______    .___________.  ______       _______   __    __   __  ___  _______  __  
+\   \  /  \  /   / |   ____||  |      /      | /  __  \  |   \/   | |   ____|   |           | /  __  \     |       \ |  |  |  | |  |/  / |   ____||  | 
+ \   \/    \/   /  |  |__   |  |     |  ,----'|  |  |  | |  \  /  | |  |__      `---|  |----`|  |  |  |    |  .--.  ||  |  |  | |  '  /  |  |__   |  | 
+  \            /   |   __|  |  |     |  |     |  |  |  | |  |\/|  | |   __|         |  |     |  |  |  |    |  |  |  ||  |  |  | |    <   |   __|  |  | 
+   \    /\    /    |  |____ |  `----.|  `----.|  `--'  | |  |  |  | |  |____        |  |     |  `--'  |    |  '--'  ||  `--'  | |  .  \  |  |____ |__| 
+    \__/  \__/     |_______||_______| \______| \______/  |__|  |__| |_______|       |__|      \______/     |_______/  \______/  |__|\__\ |_______|(__) 
+                                                                                                                                                       
+	--------------------------------------------------------
+	Hello, I'm Duke, your personal CLI bot!
+	I now function as a simple ToDoList.
+	I can keep track of 3 different types of tasks:
+		- ToDo: To add a new todo task, type 'todo' followed by a task description.
+		- Deadline: To add a new deadline, type 'deadline' followed by the task description and specify the deadline using '/by <dateTime>'
+		- Event: To add a new event, type 'event' followed by the event description and specify the timing using '/by <dateTime>'
+	To see all your task currently, type 'list'.
+	You can also mark tasks as done by typing 'done' followed by the index of the task you completed (e.g done 2).
+	Once you are done, just type 'exit' to quit the program.
+	--------------------------------------------------------
+	--------------------------------------------------------
+	You are all done for the day :-)
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Got it. I've added this task:
+	  [T][ ] declare temperature later
+	Now you have 1 tasks in the list.
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Here are the tasks in your list:
+	1. [T][ ] declare temperature later
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Good job on completing this task!
+	  [T][X] declare temperature later
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Here are the tasks in your list:
+	1. [T][X] declare temperature later
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Got it. I've added this task:
+	  [D][ ] finish tutorial (by: today 2359)
+	Now you have 2 tasks in the list.
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Here are the tasks in your list:
+	1. [T][X] declare temperature later
+	2. [D][ ] finish tutorial (by: today 2359)
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Got it. I've added this task:
+	  [D][ ] review cs2100 lecture (by: 15 Aug 8AM)
+	Now you have 3 tasks in the list.
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Here are the tasks in your list:
+	1. [T][X] declare temperature later
+	2. [D][ ] finish tutorial (by: today 2359)
+	3. [D][ ] review cs2100 lecture (by: 15 Aug 8AM)
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Good job on completing this task!
+	  [D][X] review cs2100 lecture (by: 15 Aug 8AM)
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Here are the tasks in your list:
+	1. [T][X] declare temperature later
+	2. [D][ ] finish tutorial (by: today 2359)
+	3. [D][X] review cs2100 lecture (by: 15 Aug 8AM)
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Got it. I've added this task:
+	  [E][ ] cs2101 tutorial (at: Mon 12PM)
+	Now you have 4 tasks in the list.
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Here are the tasks in your list:
+	1. [T][X] declare temperature later
+	2. [D][ ] finish tutorial (by: today 2359)
+	3. [D][X] review cs2100 lecture (by: 15 Aug 8AM)
+	4. [E][ ] cs2101 tutorial (at: Mon 12PM)
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Got it. I've added this task:
+	  [E][ ] hackerschool (at: Sat 10AM)
+	Now you have 5 tasks in the list.
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Here are the tasks in your list:
+	1. [T][X] declare temperature later
+	2. [D][ ] finish tutorial (by: today 2359)
+	3. [D][X] review cs2100 lecture (by: 15 Aug 8AM)
+	4. [E][ ] cs2101 tutorial (at: Mon 12PM)
+	5. [E][ ] hackerschool (at: Sat 10AM)
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Unrecognised command. Perhaps you made a typo?
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Good job on completing this task!
+	  [E][X] hackerschool (at: Sat 10AM)
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Here are the tasks in your list:
+	1. [T][X] declare temperature later
+	2. [D][ ] finish tutorial (by: today 2359)
+	3. [D][X] review cs2100 lecture (by: 15 Aug 8AM)
+	4. [E][ ] cs2101 tutorial (at: Mon 12PM)
+	5. [E][X] hackerschool (at: Sat 10AM)
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Bye bye! See you again soon!
+	--------------------------------------------------------

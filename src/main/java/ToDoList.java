@@ -17,13 +17,13 @@ public class ToDoList {
     /** Prints the list of items that the user entered. */
     public void printList() {
         System.out.println(Duke.divider);
-        System.out.println("\tHere are the tasks in your list:");
         // Custom message for when user types 'list' when nothing is added.
         if (list.size() == 0) {
             System.out.println("\tYou are all done for the day :-)");
         } else {
+            System.out.println("\tHere are the tasks in your list:");
             for (int i = 1; i <= list.size(); i++) {
-                System.out.printf("\t%s. %s%n", i, list.get(i - 1));
+                System.out.printf("\t%s. %s\r\n", i, list.get(i - 1));
             }
         }
         System.out.println(Duke.divider);
@@ -38,7 +38,7 @@ public class ToDoList {
         list.add(task);
         Duke.prettyPrint(
                 String.format(
-                        "Got it. I've added this task:%n\t  %s%n\tNow you have %s tasks in the list.",
+                        "Got it. I've added this task:\r\n\t  %s\r\n\tNow you have %s tasks in the list.",
                         task, list.size()));
     }
 
@@ -55,7 +55,7 @@ public class ToDoList {
         } else {
             Task task = list.get(index - 1);
             task.markAsDone();
-            Duke.prettyPrint(String.format("Good job on completing this task!%n\t  %s", task));
+            Duke.prettyPrint(String.format("Good job on completing this task!\r\n\t  %s", task));
         }
     }
 }

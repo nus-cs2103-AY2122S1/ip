@@ -10,12 +10,12 @@ public class Duke {
     static final String divider = "\t--------------------------------------------------------";
 
     static final String banner =
-            "____    __    ____  _______  __        ______   ______   .___  ___.  _______    .___________.  ______       _______   __    __   __  ___  _______  __  \n"
-                    + "\\   \\  /  \\  /   / |   ____||  |      /      | /  __  \\  |   \\/   | |   ____|   |           | /  __  \\     |       \\ |  |  |  | |  |/  / |   ____||  | \n"
-                    + " \\   \\/    \\/   /  |  |__   |  |     |  ,----'|  |  |  | |  \\  /  | |  |__      `---|  |----`|  |  |  |    |  .--.  ||  |  |  | |  '  /  |  |__   |  | \n"
-                    + "  \\            /   |   __|  |  |     |  |     |  |  |  | |  |\\/|  | |   __|         |  |     |  |  |  |    |  |  |  ||  |  |  | |    <   |   __|  |  | \n"
-                    + "   \\    /\\    /    |  |____ |  `----.|  `----.|  `--'  | |  |  |  | |  |____        |  |     |  `--'  |    |  '--'  ||  `--'  | |  .  \\  |  |____ |__| \n"
-                    + "    \\__/  \\__/     |_______||_______| \\______| \\______/  |__|  |__| |_______|       |__|      \\______/     |_______/  \\______/  |__|\\__\\ |_______|(__) \n"
+            "____    __    ____  _______  __        ______   ______   .___  ___.  _______    .___________.  ______       _______   __    __   __  ___  _______  __  \r\n"
+                    + "\\   \\  /  \\  /   / |   ____||  |      /      | /  __  \\  |   \\/   | |   ____|   |           | /  __  \\     |       \\ |  |  |  | |  |/  / |   ____||  | \r\n"
+                    + " \\   \\/    \\/   /  |  |__   |  |     |  ,----'|  |  |  | |  \\  /  | |  |__      `---|  |----`|  |  |  |    |  .--.  ||  |  |  | |  '  /  |  |__   |  | \r\n"
+                    + "  \\            /   |   __|  |  |     |  |     |  |  |  | |  |\\/|  | |   __|         |  |     |  |  |  |    |  |  |  ||  |  |  | |    <   |   __|  |  | \r\n"
+                    + "   \\    /\\    /    |  |____ |  `----.|  `----.|  `--'  | |  |  |  | |  |____        |  |     |  `--'  |    |  '--'  ||  `--'  | |  .  \\  |  |____ |__| \r\n"
+                    + "    \\__/  \\__/     |_______||_______| \\______| \\______/  |__|  |__| |_______|       |__|      \\______/     |_______/  \\______/  |__|\\__\\ |_______|(__) \r\n"
                     + "                                                                                                                                                       ";
 
     static final ToDoList list = new ToDoList();
@@ -60,17 +60,23 @@ public class Duke {
      * @param message Message to be pretty printed.
      */
     public static void prettyPrint(String message) {
-        System.out.printf("%s\n\t%s\n%s%n", divider, message, divider);
+        System.out.printf("%s\r\n\t%s\r\n%s\r\n", divider, message, divider);
     }
 
     /** Prints the welcome message when a user uses the bot for the first time. */
     private static void printWelcomeMessage() {
         System.out.println(banner);
         prettyPrint(
-                "Hello, I'm Duke, your personal CLI bot!\n\t"
-                        + "I now function as a simple ToDoList.\n\t"
-                        + "Type in tasks that you want me to keep track of and type 'list' to see the tasks you have added.\n\t"
-                        + "You can also mark tasks as done by typing 'done' followed by the index of the task you completed (e.g done 2).\n\t"
+                "Hello, I'm Duke, your personal CLI bot!\r\n\t"
+                        + "I now function as a simple ToDoList.\r\n\t"
+                        + "I can keep track of 3 different types of tasks:\r\n\t"
+                        + "\t- ToDo: To add a new todo task, type 'todo' followed by a task description.\r\n\t"
+                        + "\t- Deadline: To add a new deadline, type 'deadline' followed by the task description "
+                        + "and specify the deadline using '/by <dateTime>'\r\n\t"
+                        + "\t- Event: To add a new event, type 'event' followed by the event description "
+                        + "and specify the timing using '/by <dateTime>'\r\n\t"
+                        + "To see all your task currently, type 'list'.\r\n\t"
+                        + "You can also mark tasks as done by typing 'done' followed by the index of the task you completed (e.g done 2).\r\n\t"
                         + "Once you are done, just type 'exit' to quit the program.");
     }
 
