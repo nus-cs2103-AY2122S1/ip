@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.DukeEmptyStringException;
 import utils.RemoveLastSpaces;
 
 import java.util.ArrayList;
@@ -28,7 +29,15 @@ public class DeadLineCommand extends Command {
             }
         }
         RemoveLastSpaces removeLastSpaces = new RemoveLastSpaces();
-        this.todo = removeLastSpaces.removeLastSpaces(this.todo);
-        this.dateLine = removeLastSpaces.removeLastSpaces(this.dateLine);
+        try {
+            this.todo = removeLastSpaces.removeLastSpaces(this.todo);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeEmptyStringException("Deadline description");
+        }
+        try {
+            this.dateLine = removeLastSpaces.removeLastSpaces(this.dateLine);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeEmptyStringException("Deadline date");
+        }
     }
 }

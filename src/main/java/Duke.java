@@ -48,9 +48,13 @@ public class Duke {
                     }
                     break;
                 case "deadline":
-                    DeadLineCommand deadLineCommand = new DeadLineCommand(userInput);
-                    DeadLineAction deadLineAction = new DeadLineAction(applicationState, deadLineCommand.todo, deadLineCommand.dateLine);
-                    applicationState = deadLineAction.run();
+                    try {
+                        DeadLineCommand deadLineCommand = new DeadLineCommand(userInput);
+                        DeadLineAction deadLineAction = new DeadLineAction(applicationState, deadLineCommand.todo, deadLineCommand.dateLine);
+                        applicationState = deadLineAction.run();
+                    } catch (DukeEmptyStringException e) {
+                        System.out.println(e.toString());
+                    }
                     break;
                 case "event":
                     try {
