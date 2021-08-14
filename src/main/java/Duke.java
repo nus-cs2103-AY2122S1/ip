@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static ArrayList<Task> tasklist = new ArrayList<Task>();
+    private static ArrayList<Task> taskList = new ArrayList<Task>();
 
     private enum Keywords {bye, list, done, todo, deadline, event, allCmd}
 
@@ -25,32 +25,32 @@ public class Duke {
                 System.out.println("Please refer to the available commands using the \"allCmd\" command");
             } else {
                 Duke.printLine();
-                if (command == "bye") {
+                if (command.equals("bye")) {
                     Duke.byeCommand();
                     break;
                 }
 
-                if (command == "allCmd") {
+                if (command.equals("allCmd")) {
                     Duke.possibleCommands();
                 }
 
-                if (command == "list") {
+                if (command.equals("list")) {
                     Duke.listCommand();
                 }
 
-                if (command == "done") {
+                if (command.equals("done")) {
                     Duke.doneCommand(des);
                 }
 
-                if (command == "deadline") {
+                if (command.equals("deadline")) {
                     Duke.deadlineCommand(des);
                 }
 
-                if (command == "event") {
+                if (command.equals("event")) {
                     Duke.eventCommand(des);
                 }
 
-                if (command == "todo") {
+                if (command.equals("todo")) {
                     Duke.toDoCommand(des);
                 }
 
@@ -68,17 +68,17 @@ public class Duke {
     public static void listCommand() {
         int count = 1;
         System.out.println("Here are the tasks in your list:");
-        for (Task t : tasklist) {
+        for (Task t : taskList) {
             System.out.print(count + ". ");
             if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;
-                System.out.println(d.toString());
+                System.out.println(d);
             } else if (t instanceof Event) {
                 Event e = (Event) t;
-                System.out.println(e.toString());
+                System.out.println(e);
             } else if (t instanceof ToDo) {
                 ToDo td = (ToDo) t;
-                System.out.println(td.toString());
+                System.out.println(td);
             } else {
                 System.out.println(t.toString());
             }
@@ -89,11 +89,11 @@ public class Duke {
     public static void doneCommand(String des) {
         String sNum = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(sNum);
-        if (num <= 0 || num > tasklist.size()) {
+        if (num <= 0 || num > taskList.size()) {
             System.out.println("The input number is not a valid task number.");
             System.out.println("Please refer to the task list using the \"list\" command.");
         } else {
-            Task atHand = tasklist.get(num - 1);
+            Task atHand = taskList.get(num - 1);
             atHand.markAsDone();
             System.out.println("I see that you have completed a task. Keep up the good work!");
             System.out.println();
@@ -105,11 +105,11 @@ public class Duke {
     public static void removeCommand(String des) {
         String sNum = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(sNum);
-        if (num <= 0 || num > tasklist.size()) {
+        if (num <= 0 || num > taskList.size()) {
             System.out.println("The input number is not a valid task number.");
             System.out.println("Please refer to the task list using the \"list\" command.");
         } else {
-            tasklist.remove(num);
+            taskList.remove(num);
         }
     }
 
@@ -118,9 +118,9 @@ public class Duke {
         String date = des.substring(des.lastIndexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
         Task atHand = new Deadline(description, date);
         Deadline deadlineAtHand = (Deadline) atHand;
-        tasklist.add(atHand);
+        taskList.add(atHand);
         System.out.println("Sure. The following task has been added: ");
-        System.out.println(deadlineAtHand.toString());
+        System.out.println(deadlineAtHand);
         Duke.numberOfTasks();
     }
 
@@ -129,9 +129,9 @@ public class Duke {
         String timeframe = des.substring(des.lastIndexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
         Task atHand = new Event(description, timeframe);
         Event eventAtHand = (Event) atHand;
-        tasklist.add(atHand);
+        taskList.add(atHand);
         System.out.println("Sure. The following task has been added: ");
-        System.out.println(eventAtHand.toString());
+        System.out.println(eventAtHand);
         Duke.numberOfTasks();
     }
 
@@ -139,21 +139,21 @@ public class Duke {
         String description = des.substring(5);
         Task atHand = new ToDo(description);
         ToDo toDoAtHand = (ToDo) atHand;
-        tasklist.add(atHand);
+        taskList.add(atHand);
         System.out.println("Sure. The following task has been added: ");
-        System.out.println(toDoAtHand.toString());
+        System.out.println(toDoAtHand);
         Duke.numberOfTasks();
     }
 
     public static String checkForKeyword(String des) {
         for (Keywords keyword : Keywords.values()) {
-            if (keyword.name() == "allCmd" && des.equals(keyword.name())) {
+            if (keyword.name().equals("allCmd") && des.equals(keyword.name())) {
                 return "allCmd";
-            } else if (keyword.name() == "bye" && des.equals(keyword.name())) {
+            } else if (keyword.name().equals("bye") && des.equals(keyword.name())) {
                 return "bye";
-            } else if (keyword.name() == "list" && des.equals(keyword.name())) {
+            } else if (keyword.name().equals("list") && des.equals(keyword.name())) {
                 return "list";
-            } else if (keyword.name() == "done" && des.substring(0, 4).equals("done")) {
+            } else if (keyword.name().equals("done") && des.substring(0, 4).equals("done")) {
                 try {
                     String sNum = des.substring(des.lastIndexOf(' ') + 1);
                     int num = Integer.parseInt(sNum);
@@ -169,11 +169,11 @@ public class Duke {
                 } catch (NumberFormatException e) {
                     return null;
                 }
-            } else if (keyword.name() == "deadline" && des.contains("deadline") && des.substring(0, 8).equals("deadline") && des.contains("/")) {
+            } else if (keyword.name().equals("deadline") && des.contains("deadline") && des.substring(0, 8).equals("deadline") && des.contains("/")) {
                 return "deadline";
-            } else if (keyword.name() == "event" && des.contains("event") && des.substring(0, 5).equals("event") && des.contains("/")) {
+            } else if (keyword.name().equals("event") && des.contains("event") && des.substring(0, 5).equals("event") && des.contains("/")) {
                 return "event";
-            } else if (keyword.name() == "todo" && des.contains("todo") && des.substring(0, 4).equals("todo")) {
+            } else if (keyword.name().equals("todo") && des.contains("todo") && des.substring(0, 4).equals("todo")) {
                 return "todo";
             }
         }
@@ -185,10 +185,10 @@ public class Duke {
     }
 
     public static void numberOfTasks() {
-        if (tasklist.size() == 1) {
-            System.out.println("You now have " + tasklist.size() + " task in the list");
+        if (taskList.size() == 1) {
+            System.out.println("You now have " + taskList.size() + " task in the list");
         } else {
-            System.out.println("You now have " + tasklist.size() + " tasks in the list");
+            System.out.println("You now have " + taskList.size() + " tasks in the list");
         }
     }
 
@@ -213,7 +213,7 @@ public class Duke {
         System.out.println("5. deadline ---- Usage --> \"deadline submit essay /by Sunday \", remember not to miss the \"/by\" symbol!");
         System.out.println("               - Inputs the an Deadline task into the task list");
         System.out.println();
-        
+
         System.out.println("6. event ------- Usage --> \"event project meeting /at Mon 2-4pm \", remember not to miss the \"/at\" symbol!");
         System.out.println("               - Inputs the an Event task into the task list");
 
