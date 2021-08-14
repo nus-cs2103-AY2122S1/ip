@@ -32,8 +32,9 @@ public class Lifeline {
                     continue;
                 }
                 String[] inputs = fullCommand.split("\\s", 2);
+                Command c = Parser.parse(inputs[0]);
                 System.out.println();
-                switch (getCommandType(inputs[0])) {
+                switch (c) {
                 case LIST:
                     ui.showTaskList(taskList);
                     break;
@@ -69,14 +70,6 @@ public class Lifeline {
             }
         }
         ui.exit();
-    }
-
-    private Command getCommandType(String input) throws LifelineException {
-        try {
-            return Command.valueOf(input.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new LifelineException("I am sorry! I don't know what that means! ☹");
-        }
     }
 
     private void createTask(String task, String details) throws LifelineException {
