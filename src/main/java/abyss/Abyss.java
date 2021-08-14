@@ -1,12 +1,12 @@
 package abyss;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Abyss {
-    private static Task[] tasks = new Task[100];
-    private static int count = 0;
+    private static ArrayList<Task> tasks = new ArrayList<>();
     private static final String TODO_REGEX = "^todo[ ]+\\S[ -~]*$";
-    private static final String DEADLINE_REGEX ="^deadline[ ]+\\S[ -~]*\\/by[ ]+\\S[ -~]*$";
+    private static final String DEADLINE_REGEX = "^deadline[ ]+\\S[ -~]*\\/by[ ]+\\S[ -~]*$";
     private static final String EVENT_REGEX = "^event[ ]+\\S[ -~]*\\/at[ ]+\\S[ -~]*$";
 
     public static void main(String[] args) {
@@ -20,21 +20,40 @@ public class Abyss {
                 if (cmd.equalsIgnoreCase("list")) {
                     list();
                 } else if (cmd.matches("^done.*")) {
-                    if (!cmd.matches("^done \\d*$")) {
+                    if (!cmd.matches("^done[ ]+\\d*$")) {
                         throw new InvalidInputException("Command 'done' should be followed by " +
                                 "the index of the task piece.");
                     }
-                    
-                    String index = cmd.substring(5);
+                    if (tasks.isEmpty()) {
+                        throw new InvalidInputException("The Abyss is empty");
+                    }
+
+                    String index = cmd.split("done[ ]+", 2)[1];
                     int i = Integer.parseInt(index);
-                    if (i < 1 || i > count) {
-                        throw new InvalidInputException("Index should be within 1 to " + count);
+                    if (i < 1 || i > getNumberOfTasks()) {
+                        throw new InvalidInputException("Index should be within 1 and " + getNumberOfTasks());
                     }
                     markAsDone(i);
+                } else if (cmd.matches("^delete.*")) {
+                    if (!cmd.matches("^delete[ ]+\\d*$")) {
+                        throw new InvalidInputException("Command 'delete' should be followed by " +
+                                "the index of the task piece.");
+                    }
+                    if (tasks.isEmpty()) {
+                        throw new InvalidInputException("The Abyss is empty");
+                    }
+
+                    String index = cmd.split("delete[ ]+", 2)[1];
+                    int i = Integer.parseInt(index);
+                    if (i < 1 || i > getNumberOfTasks()) {
+                        throw new InvalidInputException("Index should be within 1 and " + getNumberOfTasks());
+                    }
+                    deleteTask(i);
                 } else if (cmd.matches("^todo.*")) {
                     if (!cmd.matches(TODO_REGEX)) {
                         throw new InvalidInputException("Description of a 'todo' task piece cannot be empty.");
                     }
+
                     String description = cmd.split("todo[ ]+", 2)[1];
                     addToDo(description);
                 } else if (cmd.matches("^deadline.*")) {
@@ -42,6 +61,7 @@ public class Abyss {
                         throw new InvalidInputException("Description and date of a 'deadline' task piece " +
                                 "cannot be empty.");
                     }
+
                     String content = cmd.split("deadline[ ]+", 2)[1];
                     String[] parts = content.split("\\/by[ ]+", 2);
                     addDeadline(parts[0], parts[1]);
@@ -50,6 +70,7 @@ public class Abyss {
                         throw new InvalidInputException("Description and date of an 'event' task piece " +
                                 "cannot be empty.");
                     }
+
                     String content = cmd.split("event[ ]+", 2)[1];
                     String[] parts = content.split("\\/at[ ]+", 2);
                     addEvent(parts[0], parts[1]);
@@ -69,11 +90,11 @@ public class Abyss {
     }
 
     private static void list() {
-        System.out.println(formatListReply(tasks));
+        System.out.println(formatListReply());
     }
 
     private static void markAsDone(int i) {
-        Task task = tasks[i - 1];
+        Task task = tasks.get(i - 1);
         task.markAsDone();
         String markedTask = "  " + task.toString();
         reply("Task piece is lit up in the Abyss.", markedTask);
@@ -95,11 +116,22 @@ public class Abyss {
     }
 
     private static void addTask(Task task) {
-        tasks[count] = task;
-        count++;
+        tasks.add(task);
         String addedMsg = "Task piece is added to the Abyss.";
-        String tasksLeftMsg = "The Abyss now contains " + count + " task piece(s).";
+        String tasksLeftMsg = "The Abyss now contains " + getNumberOfTasks() + " task piece(s).";
         reply(addedMsg, task.toString(), tasksLeftMsg);
+    }
+
+    private static void deleteTask(int i) {
+        String removedMsg = "Task piece is swallowed by the Abyss.";
+        String tasksLeftMsg = "The Abyss now contains " + (getNumberOfTasks() - 1) + " task piece(s).";
+        String task = tasks.get(i - 1).toString();
+        tasks.remove(i - 1);
+        reply(removedMsg, task, tasksLeftMsg);
+    }
+
+    private static int getNumberOfTasks() {
+        return tasks.size();
     }
 
     private static String formatReply(String[] messages) {
@@ -111,16 +143,13 @@ public class Abyss {
         return reply;
     }
 
-    private static String formatListReply(Task[] tasks) {
+    private static String formatListReply() {
         String reply = "\t......................................................\n";
-        for (int i = 0; i < tasks.length; i++) {
-            Task task = tasks[i];
-            if (task == null) {
-                break;
-            }
+        for (int i = 0; i < getNumberOfTasks(); i++) {
+            Task task = tasks.get(i);
             reply += "\t " + (i + 1) + "." + task.toString() + "\n";
         }
-        if (tasks[0] == null) {
+        if (tasks.isEmpty()) {
             reply += "\t The Abyss is empty.\n";
         }
         reply += "\n\t......................................................";
