@@ -1,3 +1,5 @@
+import main.java.Task;
+
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ public class Duke {
     private final String borderLine = "\n____________________________________________________________\n";
     private final String goodbyeMessage = "Bye. Hope to see you again soon!";
 
-    private List<String> inputList = new ArrayList<String>();
+    private List<Task> taskList = new ArrayList<Task>();
 
     public static void main(String[] args) {
         new Duke().runProgram();
@@ -29,6 +31,15 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 this.displayListItems();
+            } else if (input.contains("done")) {
+                
+                //obtains the task number which we want to mark as done. error is number not in list or input after done is not a number.
+                String stringIndex = input.replace("done ", "");
+                Integer index = Integer.parseInt(stringIndex);
+
+                //need to subtract 1 since the list starts from index 0
+                this.markAsDoneText(index - 1);
+                
             } else {
                 //echos the text input by the user
                 this.displayText(input);
@@ -59,8 +70,10 @@ public class Duke {
     public void displayListItems() {
         System.out.println(borderLine);
 
-        for (int i = 0; i < this.inputList.size(); i++) {
-            String inputMessage = String.format("%d. %s", i+1, this.inputList.get(i));
+        for (int i = 0; i < this.taskList.size(); i++) {
+            Task currentTask = this.taskList.get(i);
+
+            String inputMessage = String.format("%d.[%s] %s", i+1, currentTask.getStatusIcon(), currentTask.getDescription());
             System.out.println(inputMessage);
         }
 
@@ -72,6 +85,13 @@ public class Duke {
      * @param input String message input by the user to be kept in the inputList
      */
     public void addItem(String input) {
-        this.inputList.add(input);
+        this.taskList.add(new Task(input));
+    }
+
+    public void markAsDoneText(Integer index) {
+        this.taskList.get(index).markAsDone();
+
+        String message = String.format("Nice! I've marked this task as done:\n  [X] %s", this.taskList.get(index).getDescription());
+        System.out.println(borderLine + message + borderLine);
     }
 }
