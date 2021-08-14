@@ -4,7 +4,7 @@ import java.util.Scanner;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 2. Add, List
+ * Current Progress: Level 2. Mark As Done
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.
@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class Duke {
 
     private static final String horizontalLine = "____________________________________________________________";
-    private static String[] textList;
+    private static Task[] taskList;
 
     /**
      * Stores text entered by user into list
@@ -25,17 +25,20 @@ public class Duke {
      */
     private static void addText(String newText) {
 
-        if (textList == null) {
-            textList = new String[1];
-            textList[0] = newText;
+        if (taskList == null) {
+            taskList = new Task[1];
+            Task newTask = new Task(newText);
+            taskList[0] = newTask;
+
         } else {
 
-            String[] newTextList = new String[textList.length + 1];
-            for (int i = 0; i < textList.length; i++) {
-                newTextList[0] = textList[0];
+            Task[] newTaskList = new Task[taskList.length + 1];
+            for (int i = 0; i < taskList.length; i++) {
+                newTaskList[0] = taskList[0];
             }
-            newTextList[textList.length] = newText;
-            textList = newTextList;
+            Task newTask = new Task(newText);
+            newTaskList[taskList.length] = newTask;
+            taskList = newTaskList;
 
         }
 
@@ -61,17 +64,42 @@ public class Duke {
      */
     private static String createListString() {
 
-        if (textList == null) {
+        if (taskList == null) {
             return "Enter Text First!";
         } else {
-            int lens = textList.length;
+            int lens = taskList.length;
             String listString = "";
             for (int i = 0; i < lens; i++ ) {
-                String nextItem = String.format("%d. %s", (i + 1), textList[i]);
+                String nextItem = String.format("%d.%s", (i + 1), taskList[i].toString());
                 listString = listString + nextItem + "\n";
             }
             return listString;
         }
+    }
+
+    /**
+     * Marks the designated tasks as complete
+     *
+     * @param taskNumber task to be marked as complete
+     */
+    private static void markTask(int taskNumber) {
+
+        if (taskList == null) {
+
+            printMessage("Add something to tasklist first");
+        } else if ((taskNumber - 1) > taskList.length) {
+
+            printMessage("No such task exists");
+
+        } else {
+
+            taskList[taskNumber - 1].completeTask();
+            String markTaskMessage = "Nice! I've marked this task as done: \n"
+                    + taskList[taskNumber - 1].toString();
+            printMessage(markTaskMessage);
+
+        }
+
     }
 
     public static void main(String[] args) {
@@ -85,27 +113,30 @@ public class Duke {
         //awaits text
         while (!currentCommand.equals("bye")) {
             currentCommand = commandScanner.nextLine();
-            if (currentCommand.equals("bye")) {
-                String byeString = "Bye. Hope to see you again soon!";
-                printMessage(byeString);
-
-            } else if (currentCommand.equals("list")) {
-                printMessage(createListString());
-
+            String[] checkCommand = currentCommand.split(" ");
+            if (checkCommand.length == 0) {
+                printMessage("Please enter some text");
+            } else if (currentCommand.equals("")) {
+                printMessage("Please enter some text");
             } else {
-                //ensures user enters some text
-                if (currentCommand.equals("")) {
-                    printMessage("Please enter some text");
-                } else {
-                    String[] checkWhiteSpace = currentCommand.split(" ");
-                    if (checkWhiteSpace.length == 0) {
-                        printMessage("Please enter some text");
-                    } else {
-                        addText(currentCommand);
-                        String newText = "added: " + currentCommand;
-                        printMessage(newText);
-                    }
+                if (checkCommand[0].equals("bye")) {
+                    String byeString = "Bye. Hope to see you again soon!";
+                    printMessage(byeString);
+                } else if (checkCommand[0].equals("list")) {
+                    printMessage(createListString());
+                } else if (checkCommand[0].equals("done")) {
+                    try {
+                        int taskNumber = Integer.parseInt(checkCommand[1]);
+                        markTask(taskNumber);
 
+                    } catch (Exception e) {
+                        printMessage("Please enter an Integer after the commmand 'done'");
+                    }
+                } else {
+                    //add task to task list
+                    addText(currentCommand);
+                    String newText = "added: " + currentCommand;
+                    printMessage(newText);
                 }
 
             }
