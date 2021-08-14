@@ -14,14 +14,14 @@ public class Duke implements Runnable {
     private final Map<String, Consumer<String>> commandsMap = Map.of(
         "list", (args) -> listTasks()
     );
-    private List<String> tasks = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     private void addTask(String str) {
         if (tasks.size() > MAX_TASKS) {
             printDuke(ERR_MAX_TASKS);
             return;
         }
-        tasks.add(str);
+        tasks.add(new Task(str));
         printDuke(String.format("added: %s", str));
     }
 
