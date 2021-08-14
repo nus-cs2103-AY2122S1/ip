@@ -16,21 +16,7 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            String[] inputArray = input.split(" ");
-            String reply = "";
-            switch (inputArray[0]) {
-                case "list":
-                    reply = dukeList.displayTask();
-                    break;
-                case "done":
-                    reply = dukeList.markTask(Integer.parseInt(inputArray[1]));
-                    break;
-                default:
-                    reply = dukeList.addTask(input);
-                    break;
-            }
-
-            System.out.println(reply);
+            System.out.println(dukeList.handleInput(input));
             input = sc.nextLine();
         }
 
