@@ -4,6 +4,10 @@ public enum Command {
     DONE,
     EXIT;
 
+    /**
+     * @param input Command issued by user in String format.
+     * @return Corresponding command.
+     */
     public static Command convertInput(String input) {
         String lowerCaseInput = input.toLowerCase();
         Command result;
