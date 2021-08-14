@@ -1,9 +1,9 @@
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.function.Function;
 
 public class InputHandler {
     private final String welcome = " Hello! I'm Duke\n What can I do for you?";
-    private final String termination = " Bye. Hope to see you again soon!";
     private Database db = new Database();
     private HashMap<String, Function<String, Boolean>> cmds = new HashMap<>();
     private String borders;
@@ -14,25 +14,38 @@ public class InputHandler {
         borders = sb.toString();
 
         cmds.put("bye", (bye) -> {
-            System.out.println(formatReply(termination));
+            System.out.println(formatReply(" Bye. Hope to see you again soon!"));
             return true;
         });
         cmds.put("list", (list) -> {
-            System.out.println(formatReply(db.toString()));
+            System.out.println(formatReply(" Here are the tasks in your list:\n" + db.toString()));
+            return false;
+        });
+        cmds.put("done", args -> {
+            try {
+                Task t = db.get(Integer.parseInt(args) - 1);
+                t.markComplete();
+                System.out.println(formatReply(" Nice! I've marked this task as done:\n   " + t));
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                System.err.println(" Enter a valid index.");
+            }
             return false;
         });
         cmds.put("add", x -> {
             System.out.println(formatReply(" added: " + x));
-            db.add(x);
+            db.add(new Task(x));
             return false;
         });
         System.out.println(formatReply(welcome));
     }
 
     public boolean query(String input) {
+        Scanner sc = new Scanner(input);
+        String cmd = sc.next();
+        String args = sc.hasNext() ? sc.nextLine().substring(1) : "";
         boolean terminate = false;
-        if (cmds.containsKey(input)) {
-            terminate = cmds.get(input).apply(input);
+        if (cmds.containsKey(cmd)) {
+            terminate = cmds.get(cmd).apply(args);
         } else {
             terminate = cmds.get("add").apply(input);
         }

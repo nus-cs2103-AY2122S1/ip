@@ -2,10 +2,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Database {
-    private List<String> db = new ArrayList<>();
+    private List<Task> db = new ArrayList<>();
 
-    public void add(String task) {
+    public void add(Task task) {
         db.add(task);
+    }
+
+    public Task get(int index) {
+        return db.get(index);
     }
 
     @Override

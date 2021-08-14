@@ -1,7 +1,8 @@
 read book
 return book
 list
-write essay
-submit essay
+done 2
+list
+done 1
 list
 bye
