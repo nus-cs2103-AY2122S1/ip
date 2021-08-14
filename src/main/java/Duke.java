@@ -40,10 +40,44 @@ public class Duke {
      * @param userInput String of task to add.
      * @param tasks List of current tasks.
      */
-
     public static void addTask(String userInput, List<Task> tasks) {
-        tasks.add(new Task(userInput));
-        dukeReply("added: " + userInput);
+        Task taskToAdd;
+        if(userInput.toLowerCase().startsWith("todo")) {
+            taskToAdd = new ToDo(userInput.substring(5));
+        } else if (userInput.toLowerCase().startsWith("deadline")){
+            int dateIndex = userInput.indexOf("/by");
+            String[] dateAndTask = sepDateFromTask(dateIndex,9, userInput);
+            taskToAdd = new Deadline(dateAndTask[0], dateAndTask[1]);
+        }else if(userInput.toLowerCase().startsWith("event")) {
+            int dateIndex = userInput.indexOf("/at");
+            String[] dateAndTask = sepDateFromTask(dateIndex,6, userInput);
+            taskToAdd = new Event(dateAndTask[0], dateAndTask[1]);
+        }else {
+            throw new IllegalArgumentException("Please specify type of task");
+        }
+        tasks.add(taskToAdd);
+        dukeReply(String.format("Got it. I've added this task:\n" +
+                "  %s\nNumber of tasks: %s", taskToAdd.toString(), tasks.size()));
+    }
+
+    /**
+     * Seperates the date and task from the users input.
+     * @param taskIndex Beginning index of the task in the given String.
+     * @param dateIndex Beginning index of the date in the given String.
+     * @param userInput String of task containing task and date.
+     * @return Array with task at index 0 and date at index 1.
+     */
+    public static String[] sepDateFromTask(int dateIndex, int taskIndex, String userInput) {
+        String task;
+        String date;
+        if(dateIndex > 0) {
+            task = userInput.substring(taskIndex, dateIndex - 1);
+            date = userInput.substring(dateIndex + 4);
+        }else {
+            task = userInput.substring(9);
+            date = "?";
+        }
+        return new String[] {task, date};
     }
 
     /**
@@ -61,7 +95,7 @@ public class Duke {
             dukeReply("Youve already marked this task as done!");
         } else {
             task.setDone();
-            dukeReply("Nice! I've marked this task as done:\n" + task.getTask());
+            dukeReply("Nice! I've marked this task as done:\n" + task.toString());
         }
     }
 
@@ -73,7 +107,7 @@ public class Duke {
         drawLine();
         System.out.println("Here are the tasks in your list:");
         for( int i = 0; i < tasks.size(); i++) {
-            System.out.printf("%d. %s\n", i + 1, tasks.get(i).getTask());
+            System.out.printf("%d. %s\n", i + 1, tasks.get(i).toString());
         }
         drawLine();
     }
