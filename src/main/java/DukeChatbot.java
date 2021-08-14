@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Represents the Duke chatbot.
@@ -27,6 +28,7 @@ public class DukeChatbot {
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String READ_COMMAND_ERROR_MESSAGE = "An unexpected error has occurred.";
     private static final String LIST_TASKS_COMMAND = "list";
+    private static final String MARK_TASK_DONE_COMMAND = "done";
 
     private List<Task> tasks;
 
@@ -57,12 +59,18 @@ public class DukeChatbot {
                 printFormattedMessage(READ_COMMAND_ERROR_MESSAGE);
                 break;
             }
-            switch (command) {
+            StringTokenizer st = new StringTokenizer(command);
+            String commandName = st.nextToken();
+            switch (commandName) {
             case EXIT_COMMAND:
                 printExitMessage();
                 break;
             case LIST_TASKS_COMMAND:
                 printTasks();
+                break;
+            case MARK_TASK_DONE_COMMAND:
+                int taskIndex = Integer.parseInt(st.nextToken()) - 1;
+                markTaskDone(taskIndex);
                 break;
             default:
                 addTask(command);
@@ -78,11 +86,19 @@ public class DukeChatbot {
     }
 
     private void printTasks() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         int n = tasks.size();
         for (int i = 0; i < n; i++) {
-            sb.append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
+            sb.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
         }
+        printFormattedMessage(sb.toString());
+    }
+
+    private void markTaskDone(int taskIndex) {
+        Task task = tasks.get(taskIndex);
+        task.complete();
+        StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:\n");
+        sb.append(indent(task.toString(), 2));
         printFormattedMessage(sb.toString());
     }
 
