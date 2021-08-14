@@ -15,11 +15,11 @@ public class Task {
     public String toString() {
         StringBuilder taskLine = new StringBuilder();
         if (this.isDone) {
-            taskLine.append("[x] ");
+            taskLine.append("[T][x]");
         } else {
-            taskLine.append("[ ] ");
+            taskLine.append("[T][ ]");
         }
-        taskLine.append(this.description);
+        taskLine.append(this.description.replaceFirst("todo", ""));
         return taskLine.toString();
     }
 }

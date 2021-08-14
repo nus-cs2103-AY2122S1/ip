@@ -16,9 +16,10 @@ public class Side {
         System.out.println(logo);
     }
 
-    private static void echo(String input) {
+    private static void echo(String input, TaskList tasks) {
         System.out.println(LINEBREAK);
-        System.out.println("added: " + input);
+        String taskQuantifier = tasks.length() == 1 ? "task!" : "tasks!";
+        System.out.println("Ok, I've added: " + input + "\nYou now have " + tasks.length() + " " + taskQuantifier);
         System.out.println(LINEBREAK);
     }
 
@@ -26,6 +27,43 @@ public class Side {
         System.out.println(LINEBREAK);
         System.out.println(input);
         System.out.println(LINEBREAK);
+    }
+
+    private static String findTime(String input, String arg) {
+        int argIdx = input.lastIndexOf(arg);
+        String output = input.substring(argIdx + arg.length());
+
+        if (output.replaceAll("\\s", "").length() < 1) {
+            return null;
+        }
+        return output;
+    }
+
+    private static void addDeadline(String input, TaskList taskList) {
+        if (input.contains("/by") && (findTime(input, "/by") != null)) {
+            String time = findTime(input, "/by");
+            String description = input.replace("/by" + time, "");
+            taskList.addDeadline(description, time);
+            echo(new Deadline(description, time).toString(), taskList);
+        } else {
+            printResponse("Your input is wrong, please try again!");
+        }
+    }
+
+    private static void addEvent(String input, TaskList taskList) {
+        if (input.contains("/at") && (findTime(input, "/at") != null)) {
+            String time = findTime(input, "/at");
+            String description = input.replace("/at" + time, "");
+            taskList.addEvent(description, time);
+            echo(new Event(description, time).toString(), taskList);
+        } else {
+            printResponse("Your input is wrong, please try again!");
+        }
+    }
+
+    private static void addTask(String input, TaskList taskList) {
+        taskList.addTask(input);
+        echo(new Task(input).toString(), taskList);
     }
 
     public static void main(String[] args) {
@@ -36,18 +74,35 @@ public class Side {
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
         while (!userInput.equalsIgnoreCase("bye")) {
-            if (userInput.equalsIgnoreCase("list")) {
-                printResponse(tasks.toString());
-            } else if (userInput.matches("done \\d+")){
-                int taskNum = Character.getNumericValue(userInput.charAt(5));
-                if (taskNum > tasks.length() || taskNum == 0) {
-                    printResponse(NOSUCHTASK);
-                } else {
-                    printResponse(tasks.markTaskDone(taskNum - 1));
-                }
-            } else {
-                tasks.addTask(userInput);
-                echo(userInput);
+            String command = userInput.split("\\s+")[0];
+
+            switch (command) {
+                case "todo":
+                    addTask(userInput, tasks);
+                    break;
+                case "deadline":
+                    addDeadline(userInput, tasks);
+                    break;
+                case "event":
+                    addEvent(userInput, tasks);
+                    break;
+                case "list":
+                    printResponse(tasks.toString());
+                    break;
+                case "done":
+                    if (userInput.split("\\s+").length == 2) {
+                        int taskNum = Integer.parseInt(userInput.split("\\s+")[1]);
+                        if (taskNum > tasks.length() || taskNum <= 0) {
+                            printResponse(NOSUCHTASK);
+                        } else {
+                            printResponse(tasks.markTaskDone(taskNum - 1));
+                        }
+                    } else {
+                        printResponse("Sorry, you can only mark 1 task at a time.");
+                    }
+                    break;
+                default:
+                    printResponse("No such command, please use a valid command!");
             }
             userInput = scanner.nextLine();
         }

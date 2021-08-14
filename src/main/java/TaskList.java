@@ -19,6 +19,18 @@ public class TaskList {
         taskLabel++;
     }
 
+    public void addEvent(String description, String time) {
+        Event event = new Event(description, time);
+        this.tasks.add(event);
+        taskLabel++;
+    }
+
+    public void addDeadline(String description, String time) {
+        Deadline event = new Deadline(description, time);
+        this.tasks.add(event);
+        taskLabel++;
+    }
+
     public String markTaskDone(int i) {
         this.tasks.get(i).markAsDone();
         String taskDone = tasks.get(i).toString();
