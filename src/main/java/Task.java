@@ -7,8 +7,13 @@ public class Task {
         this.isDone = false;
     }
 
-    public void markAsDone() {
-        this.isDone = true;
+    public String markAsDone() {
+        if (!this.isDone) {
+            this.isDone = true;
+            return "Fine, I'll mark it for you: " + this.toString();
+        } else {
+            return "I'm lazy, stop making me mark the same things again...";
+        }
     }
 
     @Override

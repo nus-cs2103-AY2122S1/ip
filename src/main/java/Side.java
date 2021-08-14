@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 public class Side {
     private static final String LINEBREAK = "---------------------------------------------------------------------";
-    private static final String GREETING = LINEBREAK + "" + "\nHello! I'm Side, your personal assistant. " +
-            "How can I help you today?\n" + LINEBREAK;
-    private static final String GOODBYE = LINEBREAK + "\nOh, you have to go? Goodbye, I'll see you soon!\n"
+    private static final String GREETING = LINEBREAK + "" + "\nI'm Side, your unpaid personal assistant. " +
+            "Please do less...\n" + LINEBREAK;
+    private static final String GOODBYE = LINEBREAK + "\nOh, you have to go? What a pity...\n"
             + LINEBREAK;
-    private static final String NOSUCHTASK = "Sorry, this task doesn't exist!";
+    private static final String NOSUCHTASK = "No such task, more energy wasted...";
 
     private static void printLogo() {
         String logo = " ___  _____  _____   _____  \n"
@@ -18,8 +18,8 @@ public class Side {
 
     private static void echo(String input, TaskList tasks) {
         System.out.println(LINEBREAK);
-        String taskQuantifier = tasks.length() == 1 ? "task!" : "tasks!";
-        System.out.println("Ok, I've added: " + input + "\nYou now have " + tasks.length() + " " + taskQuantifier);
+        String taskQuantifier = tasks.length() == 1 ? "task..." : "tasks...";
+        System.out.println("Fine, I'll add: " + input + "\nYou now have " + tasks.length() + " " + taskQuantifier);
         System.out.println(LINEBREAK);
     }
 
@@ -46,7 +46,7 @@ public class Side {
             taskList.addDeadline(description, time);
             echo(new Deadline(description, time).toString(), taskList);
         } else {
-            printResponse("Your input is wrong, please try again!");
+            printResponse("Your input is wrong, check before making me work...");
         }
     }
 
@@ -57,13 +57,17 @@ public class Side {
             taskList.addEvent(description, time);
             echo(new Event(description, time).toString(), taskList);
         } else {
-            printResponse("Your input is wrong, please try again!");
+            printResponse("Your input is wrong, check before making me work...");
         }
     }
 
     private static void addTask(String input, TaskList taskList) {
-        taskList.addTask(input);
-        echo(new Task(input).toString(), taskList);
+        if (input.replace("todo", "").replaceAll(" ", "").length() > 0) {
+            taskList.addTask(input);
+            echo(new Task(input).toString(), taskList);
+        } else {
+            printResponse("Description can't be empty! What a drag...");
+        }
     }
 
     public static void main(String[] args) {
@@ -98,11 +102,11 @@ public class Side {
                             printResponse(tasks.markTaskDone(taskNum - 1));
                         }
                     } else {
-                        printResponse("Sorry, you can only mark 1 task at a time.");
+                        printResponse("I only have 1 hand, I can only mark 1 at a time...");
                     }
                     break;
                 default:
-                    printResponse("No such command, please use a valid command!");
+                    printResponse("No such command, what a drag...");
             }
             userInput = scanner.nextLine();
         }
