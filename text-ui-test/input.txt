@@ -5,4 +5,17 @@ event D /at Mon 2-4pm
 done 1
 done 2
 list
+done 4
+todo E
+done 6
+done -1
+list
+deadline F /by
+deadline /by 2020-08-22
+list
+todo
+delete 2
+delete 1
+list
+delete 999
 bye
