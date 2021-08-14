@@ -55,7 +55,7 @@ public class Lifeline {
                     if (inputs.length != 2) {
                         throw new LifelineException("Details of task cannot be blank!");
                     }
-                    createTask(inputs[0], inputs[1]);
+                    createTask(inputs[0].trim(), inputs[1].trim());
                     break;
                 default:
                     echo(inputs[0]);
