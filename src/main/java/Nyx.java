@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Nyx {
     static final String INDENTATION = "    ";
@@ -17,17 +18,25 @@ public class Nyx {
         System.out.println(LINE + "\n");
 
         Scanner sc = new Scanner(System.in);
+        ArrayList<Task> taskList = new ArrayList<>();
         while (true) {
-            String command = sc.next();
+            String command = sc.nextLine();
             System.out.println(LINE);
-            if (!command.equals("bye")) {
-                System.out.println(INDENTATION + command);
-                System.out.println(LINE + "\n");
-            } else {
-                System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
+
+            if (command.equals("list")) {
+                for (int i = 1; i <= taskList.size(); i++) {
+                    System.out.printf("%s%d. %s%n",INDENTATION, i, taskList.get(i - 1));
+                }
+            } else if (command.equals("bye")) {
+                System.out.println(INDENTATION + "Bye. Hope to see you again soon!\n");
                 System.out.println(LINE + "\n");
                 break;
+            } else {
+                Task task = new Task(command);
+                taskList.add(task);
+                System.out.println(INDENTATION + "added: " + task);
             }
+            System.out.println(LINE + "\n");
         }
     }
 }
