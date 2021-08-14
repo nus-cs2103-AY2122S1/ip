@@ -1,8 +1,7 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InputNotValidError {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -12,7 +11,7 @@ public class Duke {
         run();
     }
 
-    public static void run(){
+    public static void run() throws InputNotValidError{
         System.out.println(great());
         askToDo();
     }
@@ -27,7 +26,7 @@ public class Duke {
         return greatSent;
     }    
 
-    public static void askToDo(){
+    public static void askToDo() throws InputNotValidError{
         Scanner input = new Scanner(System.in);
         TaskList tasklist = new TaskList(100);
         while(true){

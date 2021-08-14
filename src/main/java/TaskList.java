@@ -1,3 +1,7 @@
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class TaskList {
     Task[] list;
     int curSize;
@@ -32,9 +36,37 @@ public class TaskList {
 
     }
 
-    public void actionHalder(String[] actionList){
-
+    public void isValidAction(String[] actionList) throws InputNotValidError{
+        Set<String> validactionset = new HashSet<>(Arrays.asList(
+                                            "list", "done", "todo", "deadline", "event"));
+        Set<String> infoReqired = new HashSet<>(Arrays.asList(
+                                            "list", "done", "todo", "deadline", "event"));
         String actionName = actionList[0];
+        if (!validactionset.contains(actionName)){
+            throw new InputNotValidError("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }else{
+            if ((infoReqired.contains(actionName)) && (actionList.length <= 1)){
+                throw new InputNotValidError("☹ OOPS!!! The description of a " + actionName + " cannot be empty.");
+            }
+        }
+    }
+
+    public void actionHalder(String[] actionList) throws InputNotValidError{
+
+        try{
+            this.isValidAction(actionList);
+        }
+        catch(InputNotValidError e){
+            String error = 
+            "   ____________________________________________________________\n" +
+            "   " + e.getMessage() + '\n' +
+            "   ____________________________________________________________";
+            System.out.println(error);
+            return;
+        }
+          
+        String actionName = actionList[0];
+
         if (actionName.equals("list")){
             this.printList();
         }else if (actionName.equals("done")){
