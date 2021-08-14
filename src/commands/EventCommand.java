@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.DukeEmptyStringException;
 import utils.RemoveLastSpaces;
 
 import java.util.Arrays;
@@ -10,7 +11,7 @@ public class EventCommand {
     public String todo = "";
     public String eventAt = "";
 
-    public EventCommand(String input) {
+    public EventCommand(String input) throws DukeEmptyStringException {
         List<String> array = Arrays.asList(input.split(" "));
         // TODO: make assert statements work
         assert (array.contains("/at"));
@@ -27,7 +28,16 @@ public class EventCommand {
             }
         }
         RemoveLastSpaces removeLastSpaces = new RemoveLastSpaces();
-        this.todo = removeLastSpaces.removeLastSpaces(this.todo);
-        this.eventAt = removeLastSpaces.removeLastSpaces(this.eventAt);
+        try {
+            this.todo = removeLastSpaces.removeLastSpaces(this.todo);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeEmptyStringException("Event description");
+        }
+        try {
+            this.eventAt = removeLastSpaces.removeLastSpaces(this.eventAt);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeEmptyStringException("Event date");
+        }
+
     }
 }

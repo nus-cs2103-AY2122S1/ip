@@ -1,12 +1,24 @@
 package components;
 
+import exceptions.DukeEmptyStringException;
+
 public class Event extends Task {
 
     private String eventAt;
 
-    public Event(String taskDescription, boolean done, String eventAt) {
+    private Event(String taskDescription, boolean done, String eventAt) {
         super(taskDescription, done);
         this.eventAt = eventAt;
+    }
+
+    public static Event of(String taskDescription, boolean done, String eventAt) throws DukeEmptyStringException {
+        if (taskDescription.length() == 0) {
+            throw new DukeEmptyStringException("Event description");
+        }
+        if (eventAt.length() == 0) {
+            throw new DukeEmptyStringException("Event date");
+        }
+        return new Event(taskDescription, done, eventAt);
     }
 
     @Override

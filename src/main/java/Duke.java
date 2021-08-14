@@ -53,9 +53,14 @@ public class Duke {
                     applicationState = deadLineAction.run();
                     break;
                 case "event":
-                    EventCommand eventCommand = new EventCommand(userInput);
-                    EventAction eventAction = new EventAction(applicationState, eventCommand.todo, eventCommand.eventAt);
-                    applicationState = eventAction.run();
+                    try {
+                        EventCommand eventCommand = new EventCommand(userInput);
+                        EventAction eventAction = new EventAction(applicationState, eventCommand.todo,
+                                eventCommand.eventAt);
+                        applicationState = eventAction.run();
+                    } catch (DukeEmptyStringException e) {
+                        System.out.println(e.toString());
+                    }
                     break;
                 default:
                     InvalidAction invalidAction = new InvalidAction(applicationState);
