@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,28 +9,6 @@ public class Duke {
 
         String mstr = s.replaceAll("(?m)^", "\t\t\t ");
         return "\n\t@Herb:~$" + mstr.substring(3) + "\n";
-    }
-
-    private static String[] splitBy(String[] words, String search) {
-        String task = "";
-        String rest = "";
-        boolean found = false;
-
-        for (int i = 1; i < words.length; i++) {
-            String word = words[i];
-            if (!found) {
-                if (!word.equals(search)) {
-                    task += word + " ";
-                } else {
-                    found = true;
-                }
-            } else {
-                rest += word + " ";
-            }
-        }
-
-        return new String[]{task.substring(0, task.length() - 1),
-                rest.substring(0, rest.length() - 1)};
     }
 
     private static void handleDone(ArrayList<Task> taskList, String[] in) {
@@ -105,11 +82,11 @@ public class Duke {
                 } else if (mainCommand.equals("todo")) {
                     t = new ToDo(input.substring(5));
                 } else if (mainCommand.equals("deadline")) {
-                    String[] split = splitBy(words, "/by");
-                    t = new Deadline(split[0], split[1]);
+                    String[] split = input.split("/by");
+                    t = new Deadline(split[0].substring(9).trim(), split[1].trim());
                 } else if (mainCommand.equals("event")) {
-                    String[] split = splitBy(words, "/at");
-                    t = new Event(split[0], split[1]);
+                    String[] split = input.split("/at");
+                    t = new Event(split[0].substring(5).trim(), split[1].trim());
                 } else {
                     System.out.println(wrapOutput("je ne comprehends pas :("));
                     continue;
