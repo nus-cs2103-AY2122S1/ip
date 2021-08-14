@@ -1,10 +1,18 @@
 public class Task {
     private final String content;
-    private final boolean isDone;
+    private boolean isDone;
 
     public Task(String content) {
         this.content = content;
         this.isDone = false;
+    }
+
+    void setDone() {
+        this.isDone = true;
+    }
+
+    String getContent() {
+        return this.content;
     }
 
     public String getStatusIcon() {
@@ -13,6 +21,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.content;
+        return String.format("[%s] %s", getStatusIcon(), getContent());
     }
 }
