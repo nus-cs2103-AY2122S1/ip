@@ -1,9 +1,11 @@
+package Pix;
+
 public class Deadline extends Task {
     private String finishByDate;
     /**
-     * Constructor for the Deadline task.
-     * @param name Name of the Task.
-     * @param finishByDate Date to finish the Task by.
+     * Constructor for the Pix.Deadline task.
+     * @param name Name of the Pix.Task.
+     * @param finishByDate Date to finish the Pix.Task by.
      */
     public Deadline(String name, String finishByDate) {
         super(name);

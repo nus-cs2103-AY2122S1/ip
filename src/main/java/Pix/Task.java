@@ -1,10 +1,12 @@
+package Pix;
+
 public abstract class Task {
     protected String name;
     protected boolean done;
 
     /**
-     * Constructor for the Task.
-     * @param name Name of the Task.
+     * Constructor for the Pix.Task.
+     * @param name Name of the Pix.Task.
      */
     public Task(String name) {
         this.name = name;
@@ -12,7 +14,7 @@ public abstract class Task {
     }
 
     /**
-     * Sets the Task to complete.
+     * Sets the Pix.Task to complete.
      */
     public void CompleteTask() {
         done = true;
