@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,6 +10,28 @@ public class Duke {
 
         String mstr = s.replaceAll("(?m)^", "\t\t\t ");
         return "\n\t@Herb:~$" + mstr.substring(3) + "\n";
+    }
+
+    private static String[] splitBy(String[] words, String search) {
+        String task = "";
+        String rest = "";
+        boolean found = false;
+
+        for (int i = 1; i < words.length; i++) {
+            String word = words[i];
+            if (!found) {
+                if (!word.equals(search)) {
+                    task += word + " ";
+                } else {
+                    found = true;
+                }
+            } else {
+                rest += word + " ";
+            }
+        }
+
+        return new String[]{task.substring(0, task.length() - 1),
+                rest.substring(0, rest.length() - 1)};
     }
 
     private static void handleDone(ArrayList<Task> taskList, String[] in) {
@@ -38,6 +61,9 @@ public class Duke {
                 + "\tHow can I help you?\n\n"
                 + "\tYou can type:\n"
                 + "\t\t `list` to get a list of tasks\n"
+                + "\t\t `todo ${item}` to add a todo\n"
+                + "\t\t `deadline ${item} /by ${time}` to add a deadline\n"
+                + "\t\t `event ${item} /at ${time}` to add an event\n"
                 + "\t\t `done ${i}` to mark task i as completed\n"
                 + "\t\t `bye` to end this chat\n";
         String endMessage = "\n\tSad to see you go :(\n\t...shutting down...";
@@ -60,14 +86,44 @@ public class Duke {
                     res += (i + 1) + ". " + t.toString() + "\n";
                 }
                 System.out.println(wrapOutput(res.substring(0, res.length() - 1)));
-            } else if (input.split(" ")[0].equals("done")) {
-                handleDone(taskList, input.split(" "));
             } else if (input.equals("bye")) {
                 System.out.println(endMessage);
                 break;
             } else {
-                taskList.add(new Task(input));
-                System.out.println(wrapOutput("Added: " + input));
+                String[] words = input.split(" ");
+                String mainCommand = words[0];
+                Task t;
+
+                if (words.length < 2) {
+                    System.out.println(wrapOutput("je ne comprehends pas :("));
+                    continue;
+                }
+
+                if (mainCommand.equals("done")) {
+                    handleDone(taskList, words);
+                    continue;
+                } else if (mainCommand.equals("todo")) {
+                    t = new ToDo(input.substring(5));
+                } else if (mainCommand.equals("deadline")) {
+                    String[] split = splitBy(words, "/by");
+                    t = new Deadline(split[0], split[1]);
+                } else if (mainCommand.equals("event")) {
+                    String[] split = splitBy(words, "/at");
+                    t = new Event(split[0], split[1]);
+                } else {
+                    System.out.println(wrapOutput("je ne comprehends pas :("));
+                    continue;
+                }
+
+                taskList.add(t);
+                String plurality = " task";
+                if (taskList.size() != 1) {
+                    plurality += "s";
+                }
+                System.out.println(wrapOutput("Got it! I've added this task:\n   "
+                        + t.toString() + "\nNow you have " + taskList.size()
+                        + plurality + " in the list."));
+
             }
         }
     }
