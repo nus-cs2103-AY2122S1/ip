@@ -41,10 +41,42 @@ public class Duke {
                 }
 
             }
-            else {
-                Task newTask = new Task(userInput);
-                System.out.println("added: " + userInput);
+            else if (userInput.toLowerCase().equals("todo")) {
+                String restOfLine = sc.nextLine();
+                Task newTask = new Todo(restOfLine);
                 savedTasks.add(newTask);
+                System.out.println("I've added this task:\n" + newTask);
+                System.out.println("Now you have " + savedTasks.size() +" tasks in the list!");
+
+            }
+            else if (userInput.toLowerCase().equals("deadline")) {
+                String body = "";
+                String nextWord = sc.next();
+                while (nextWord.charAt(0) != '/') {
+                    body += nextWord;
+                    nextWord = sc.next();
+                }
+                String deadline = sc.nextLine();
+                Task newTask = new Deadline(body, deadline);
+                savedTasks.add(newTask);
+                System.out.println("I've added this task:\n" + newTask);
+                System.out.println("Now you have " + savedTasks.size() +" tasks in the list!");
+            }
+            else if (userInput.toLowerCase().equals("event")) {
+                String body = "";
+                String nextWord = sc.next();
+                while (nextWord.charAt(0) != '/') {
+                    body += nextWord;
+                    nextWord = sc.next();
+                }
+                String deadline = sc.nextLine();
+                Task newTask = new Event(body, deadline);
+                savedTasks.add(newTask);
+                System.out.println("I've added this task:\n" + newTask);
+                System.out.println("Now you have " + savedTasks.size() +" tasks in the list!");
+            }
+            else {
+                System.out.println("Command not found");
             }
         }
     }
