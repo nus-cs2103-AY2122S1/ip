@@ -15,7 +15,7 @@ public class Petal {
                                                 + "-------------------------------------"
                                                 + "-------------------------------------";
     //The list which stores the user's message
-    private List<Task> history;
+    private final List<Task> history;
 
     /**
      * Constructor for the Duke class
@@ -50,7 +50,13 @@ public class Petal {
             markTaskAsDone(message);
         } else if (message.contains("todo") || message.contains("deadline")
                                             || message.contains("event")) {
-            handleTask(message);
+            try {
+                handleTask(message);
+            } catch (EmptyDescException | InvalidInputException e1) {
+                System.out.println(e1.getMessage());
+            } catch (PetalException e) {
+                e.printStackTrace();
+            }
         } else {
             System.out.println(indentation);
             System.out.println("I didn't understand that :( Could you please type it in again?");
@@ -63,28 +69,37 @@ public class Petal {
         }
     }
 
-    public void handleTask(String message) {
+    public void handleTask(String message) throws PetalException {
         String[] checkType = message.split(" ");
-        System.out.println(indentation + "\nGot it. I've added this task:");
-        if (checkType[0].equals("todo")) {
-            String desc = message.substring(message.indexOf(" ") + 1);
-            Todo todo = new Todo(desc);
-            history.add(todo);
-            System.out.println(todo);
-        } else {
-            String taskWithTime = message.substring(message.indexOf(" ") + 1);
-            if (checkType[0].equals("deadline")) {
-                String[] desc = taskWithTime.split("/by");
-                Deadline deadline = new Deadline(desc[0], desc[1]);
-                history.add(deadline);
-                System.out.println(deadline);
-            } else {
-                String[] desc = taskWithTime.split("/at");
-                Event event = new Event(desc[0], desc[1]);
-                history.add(event);
-                System.out.println(event);
-            }
+        String desc = message.substring(message.indexOf(" ") + 1);
+        boolean isValidInput = checkType[0].equals("todo") || checkType[0].equals("deadline")
+                                                            || checkType[0].equals("event");
+        boolean descAvail = !message.contains(" ") ||
+                            desc.isBlank();
+        if (descAvail) {
+            throw new EmptyDescException("(っ- ‸ – ς)! It seems like there was no description"
+                                                      + "! Please enter a description");
         }
+        if (!isValidInput) {
+            throw new InvalidInputException("っ- ‸ – ς)! I did not understand what you said :(");
+        }
+        Task task;
+        String taskWithTime = message.substring(message.indexOf(" ") + 1);
+        switch (checkType[0]) {
+            case "todo":
+                task = new Todo(desc);
+                break;
+            case "deadline":
+                String[] desc1 = taskWithTime.split("/by");
+                task = new Deadline(desc1[0], desc1[1]);
+                break;
+            default:
+                String[] desc2 = taskWithTime.split("/at");
+                task = new Event(desc2[0], desc2[1]);
+        }
+        System.out.println(indentation + "\nGot it. I've added this task:" + task);
+        history.add(task);
+        System.out.println(task);
         System.out.println("There are now " + history.size() + " task(s) in your list!\n"
                                                              + indentation);
     }
@@ -93,7 +108,7 @@ public class Petal {
      * Method that handles empty message
      */
     public void emptyMessage() {
-        System.out.println(indentation + "That was an empty message! Say something."
+        System.out.println(indentation + "\nThat was an empty message! Say something."
                 + "\n" + indentation);
     }
 
@@ -126,15 +141,6 @@ public class Petal {
         String[] newMessage = message.split(" ");
         Task taskToBeCompleted = history.get(Integer.parseInt(newMessage[1]) - 1);
         taskToBeCompleted.taskDone();
-    }
-
-    /**
-     * Method to add the message to list
-     * @param message Message to be added
-     */
-    public void addMessage(String message) {
-        history.add(new Task(message));
-        System.out.println(indentation + "added: " + message + "\n" + indentation);
     }
 
     /**
