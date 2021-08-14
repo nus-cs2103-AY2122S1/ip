@@ -1,14 +1,18 @@
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The class for the Duke bot
+ */
 public class Duke {
 
+    //True if user has said bye, false if otherwise
     private boolean bye;
+    //The private constant for displaying the lines between messages
     private final String indentation = "-----------------------------------------------\n";
-    private int count;
+    //The list which stores the user's messages
     private final List<Task> history;
 
     /**
@@ -16,7 +20,6 @@ public class Duke {
      */
     public Duke() {
         bye = false;
-        count = 1;
         history = new ArrayList<>();
         startMessage();
     }
@@ -36,20 +39,24 @@ public class Duke {
      */
     public void formatMessage(String message) {
         if (message.equals("")) {
-            System.out.println(indentation + "That was an empty message! Say something."
-                    + "\n" + indentation);
+            emptyMessage();
         } else if (message.equals("list")) {
-            printMessage();
+            printList();
         } else if (message.equals("bye")) {
             goodBye();
         } else if (message.contains("done")) {
-            String[] newMessage = message.split(" ");
-            Task taskToBeCompleted = history.get(Integer.parseInt(newMessage[1]) - 1);
-            taskToBeCompleted.taskDone();
+            markTaskAsDone(message);
         } else {
             addMessage(message);
-            System.out.println(indentation + "added: " + message + "\n" + indentation);
         }
+    }
+
+    /**
+     * Method that handles empty message
+     */
+    public void emptyMessage() {
+        System.out.println(indentation + "That was an empty message! Say something."
+                + "\n" + indentation);
     }
 
     /**
@@ -60,11 +67,24 @@ public class Duke {
         System.out.println(indentation + "You're leaving :( I hope you return soon!" + "\n" + indentation);
     }
 
-    public void printMessage() {
+    /**
+     * Method that prints list
+     */
+    public void printList() {
         int count = 1;
         for (Task m : history) {
             System.out.println(count++ + ". " + m);
         }
+    }
+
+    /**
+     * Method to mark the task as done
+     * @param message The -ith task to be marked as done
+     */
+    public void markTaskAsDone(String message) {
+        String[] newMessage = message.split(" ");
+        Task taskToBeCompleted = history.get(Integer.parseInt(newMessage[1]) - 1);
+        taskToBeCompleted.taskDone();
     }
 
     /**
@@ -73,6 +93,7 @@ public class Duke {
      */
     public void addMessage(String message) {
         history.add(new Task(message));
+        System.out.println(indentation + "added: " + message + "\n" + indentation);
     }
 
     /**
