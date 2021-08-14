@@ -1,0 +1,10 @@
+todo go for a run
+deadline go for a jog /by 8pm today
+deadline use a computer /by 7pm tomorrow
+event using a pc /at 8pm tonight till 7pm tomrrow
+done 1
+done 2
+done 3
+done 4
+list
+bye

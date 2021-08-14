@@ -2,6 +2,7 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
+    private final String indentation = "-----------------------------------------------\n";
 
     public Task(String description) {
         this.description = description;
@@ -13,8 +14,10 @@ public class Task {
     }
 
     public void taskDone() {
-        System.out.println("You have completed the task: " + "'"+ this.description + "'!"
-                                                           + "\nI am so happy for you!");
+        System.out.println(indentation + "You have completed the task: " + "'"
+                                       + this.description + "'!"
+                                       + "\nI am so happy for you!"
+                                       + indentation);
         this.isDone = true;
     }
 

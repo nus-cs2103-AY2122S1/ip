@@ -11,8 +11,8 @@ public class Duke {
     //True if user has said bye, false if otherwise
     private boolean bye;
     //The private constant for displaying the lines between messages
-    private final String indentation = "-----------------------------------------------\n";
-    //The list which stores the user's messages
+    private final String indentation = "-----------------------------------------------";
+    //The list which stores the user's message
     private final List<Task> history;
 
     /**
@@ -50,13 +50,22 @@ public class Duke {
                                             || message.contains("event")) {
             handleTask(message);
         } else {
-            addMessage(message);
+            System.out.println(indentation + "---------------------------------------"
+                                           + "-----------------------");
+            System.out.println("I didn't understand that :( Could you please type it in again?");
+            System.out.println("\nUse 'todo <insert activity>' to create a to-do!");
+            System.out.println("\nUse 'deadline <insert activity> /by <insert deadline>' " +
+                               "to create an activity with a deadline!");
+            System.out.println("\nUse 'event <insert activity> /at <insert start/end time>' " +
+                               "to create an activity with a start/end time!");
+            System.out.println(indentation + "---------------------------------------"
+                                           + "-----------------------");
         }
     }
 
     public void handleTask(String message) {
         String[] checkType = message.split(" ");
-        System.out.println("Got it. I've added this task:");
+        System.out.println(indentation + "\nGot it. I've added this task:");
         if (checkType[0].equals("todo")) {
             String desc = message.substring(message.indexOf(" ") + 1);
             Todo todo = new Todo(desc);
@@ -76,7 +85,8 @@ public class Duke {
                 System.out.println(event);
             }
         }
-        System.out.println("There are now " + history.size() + " task(s) in your list! :)");
+        System.out.println("There are now " + history.size() + " task(s) in your list!\n"
+                                                             + indentation);
     }
 
     /**
@@ -100,9 +110,11 @@ public class Duke {
      */
     public void printList() {
         int count = 1;
+        System.out.println(indentation);
         for (Task m : history) {
             System.out.println(count++ + ". " + m);
         }
+        System.out.println(indentation);
     }
 
     /**
