@@ -20,11 +20,13 @@ public class InputHandler {
         cmds.put("todo", this::todo);
         cmds.put("deadline", this::deadline);
         cmds.put("event", this::event);
+        /*
         cmds.put("add", x -> {
             db.add(new Task(x));
             System.out.println(formatReply(" added: " + x));
             return false;
         });
+         */
         System.out.println(formatReply(" Hello! I'm Duke\n What can I do for you?"));
     }
 
@@ -36,7 +38,8 @@ public class InputHandler {
         if (cmds.containsKey(cmd)) {
             terminate = cmds.get(cmd).apply(args);
         } else {
-            terminate = cmds.get("add").apply(input);
+            // terminate = cmds.get("add").apply(input);
+            System.err.println("Enter a valid command.");
         }
         return !terminate;
     }
@@ -76,14 +79,18 @@ public class InputHandler {
 
     private boolean deadline(String args) {
         List<String> tokens = new Scanner(args).tokens().collect(Collectors.toList());
-        String curr = new String(), desc = curr;
+        String curr = new String();
+        Deadline t = new Deadline();
+        boolean descAdded = false;
         for (String in : tokens) {
             if (in.equals("/by")) {
-                desc = curr;
+                descAdded = true;
+                t.addDesc(curr);
                 curr = new String();
             } else curr += " " + in;
         }
-        Deadline t = new Deadline(desc.substring(1), curr.substring(1));
+        if (descAdded) t.addDeadline(curr);
+        else t.addDesc(curr);
         db.add(t);
         System.out.println(formatReply(" Got it. I've added this task:\n   " + t
                 + "\n Now you have " + db.size() + " tasks in the list."));
@@ -92,14 +99,18 @@ public class InputHandler {
 
     private boolean event(String args) {
         List<String> tokens = new Scanner(args).tokens().collect(Collectors.toList());
-        String curr = new String(), desc = curr;
+        String curr = new String();
+        Event t = new Event();
+        boolean descAdded = false;
         for (String in : tokens) {
             if (in.equals("/at")) {
-                desc = curr;
+                descAdded = true;
+                t.addDesc(curr);
                 curr = new String();
             } else curr += " " + in;
         }
-        Event t = new Event(desc.substring(1), curr.substring(1));
+        if (descAdded) t.addTime(curr);
+        else t.addDesc(curr);
         db.add(t);
         System.out.println(formatReply(" Got it. I've added this task:\n   " + t
                 + "\n Now you have " + db.size() + " tasks in the list."));

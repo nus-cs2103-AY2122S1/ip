@@ -19,6 +19,7 @@ public class Database {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        if (db.size() == 0) return " You have no tasks!";
         for (int i = 1; i <= db.size(); i++) {
             sb.append("\n ");
             sb.append(i + ". " + db.get(i-1));
