@@ -1,0 +1,7 @@
+todo borrow book
+event birthday party /at Mon 5pm
+deadline assignment 1 /by Tues 4pm
+done 1
+done 2
+done 3
+bye
