@@ -4,9 +4,13 @@ public class DeadLine extends Task {
 
     private String deadLine;
 
-    public DeadLine(String taskDescription, boolean done, String deadLine) {
+    private DeadLine(String taskDescription, boolean done, String deadLine) {
         super(taskDescription, done);
         this.deadLine = deadLine;
+    }
+
+    public static DeadLine of(String taskDescription, boolean done, String deadLine) {
+        return new DeadLine(taskDescription, done, deadLine);
     }
 
     @Override

@@ -17,7 +17,7 @@ public class ToDoCommand extends Command {
             RemoveLastSpaces removeLastSpaces = new RemoveLastSpaces();
             this.todo = removeLastSpaces.removeLastSpaces(this.todo);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeEmptyStringException("ToDo");
+            throw new DukeEmptyStringException("ToDo description");
         }
     }
 }

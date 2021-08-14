@@ -9,9 +9,6 @@ public class ToDo extends Task{
     }
 
     public static ToDo of(String taskDescription, boolean done) throws DukeEmptyStringException {
-        if (taskDescription.length() == 0) {
-            throw new DukeEmptyStringException("ToDo Description");
-        }
         return new ToDo(taskDescription, done);
     }
 

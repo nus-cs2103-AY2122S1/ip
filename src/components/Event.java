@@ -12,12 +12,6 @@ public class Event extends Task {
     }
 
     public static Event of(String taskDescription, boolean done, String eventAt) throws DukeEmptyStringException {
-        if (taskDescription.length() == 0) {
-            throw new DukeEmptyStringException("Event description");
-        }
-        if (eventAt.length() == 0) {
-            throw new DukeEmptyStringException("Event date");
-        }
         return new Event(taskDescription, done, eventAt);
     }
 
