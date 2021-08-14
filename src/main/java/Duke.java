@@ -33,8 +33,25 @@ public class Duke {
                     printOut(message.substring(0,message.length()-1));
                     break;
                 default:
-                    tasks.add(new Task(input));
-                    printOut(String.format("added: %s", input));
+                    String[] commands = input.split("\\s+");
+                    if (commands.length == 2 && commands[0].equals("done")) {
+                        try {
+                            Task task = tasks.get(Integer.parseInt(commands[1])-1);
+                            if (task.markDone()) {
+                                String msg = String.format("Nice! I've marked this task as done:\n    %s", task);
+                                printOut(msg);
+                            } else {
+                                String msg = String.format("This task has already been marked as done:\n    %s", task);
+                                printOut(msg);
+                            }
+                        } catch (NumberFormatException e) {
+                            tasks.add(new Task(input));
+                            printOut(String.format("added: %s", input));
+                        }
+                    } else {
+                        tasks.add(new Task(input));
+                        printOut(String.format("added: %s", input));
+                    }
                     break;
             }
             input = scanner.nextLine();
