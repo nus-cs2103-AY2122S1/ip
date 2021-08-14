@@ -8,6 +8,7 @@ public class Duke {
 	private final String MESSAGE_LIST = "Here are the tasks in your list:";
 	private final String MESSAGE_DONE = "Congrats! You have accomplished the following task:";
 	private final String MESSAGE_ADD = "Alright, new task added to the list:";
+	private final String MESSAGE_DELETE = "Sure, I've deleted this task:";
 	
 	private final ArrayList<Task> listTasks = new ArrayList<>();
 	
@@ -44,11 +45,38 @@ public class Duke {
 				addDeadline(command);
 			else if (command.matches("^event( .*)?"))
 				addEvent(command);
+			else if (command.matches("^delete( .*)?"))
+				taskDelete(command);
 			else
 				throw new UnknownCommandException();
-		} catch (UnknownCommandException | IllegalFormatException | TaskNotFoundException | EmptyListException e) {
+		} catch (DukeException e) {
 			printMessage(e.getMessage());
 		}
+	}
+	
+	/**
+	 * Deletes the task with the same task number as specified by user.
+	 *
+	 * @param command command entered by user (delete [task number])
+	 * @throws IllegalFormatException if user gives empty or invalid task number
+	 * @throws TaskNotFoundException  if the task specified by the task number does not exists
+	 */
+	private void taskDelete(String command) throws IllegalFormatException, TaskNotFoundException {
+		// Throw exception if user gives empty or invalid task number
+		validateCommand(command, "^delete [0-9]+", "delete [task number]");
+		
+		int taskNumber = Integer.parseInt(command.substring(7)) - 1;
+		
+		// Throw exception if taskNumber is invalid
+		if (taskNumber < 0 || taskNumber >= listTasks.size()) throw new TaskNotFoundException();
+		
+		// Delete the task
+		Task task = listTasks.remove(taskNumber);
+		
+		// Display message
+		printMessage(MESSAGE_DELETE + "\n  " +
+				task + "\n" +
+				"You still have " + listTasks.size() + " tasks in the list.");
 	}
 	
 	/**
@@ -60,7 +88,7 @@ public class Duke {
 	 */
 	private void taskDone(String command) throws IllegalFormatException, TaskNotFoundException {
 		// Throw exception if user gives empty or invalid task number
-		if (!command.matches("^done [0-9]+")) throw new IllegalFormatException("done [task number]");
+		validateCommand(command, "^done [0-9]+", "done [task number]");
 		
 		int taskNumber = Integer.parseInt(command.substring(5)) - 1;
 		
@@ -83,7 +111,7 @@ public class Duke {
 	 */
 	private void addEvent(String command) throws IllegalFormatException {
 		// Throw exception if command does not follow format
-		if (!command.matches("^event .* /at .*")) throw new IllegalFormatException("event [description] /at [time]");
+		validateCommand(command, "^event .* /at .*", "event [description] /at [time]");
 		
 		// Add new event
 		String[] info = command.substring(6).split("/at");
@@ -99,7 +127,7 @@ public class Duke {
 	 */
 	private void addDeadline(String command) throws IllegalFormatException {
 		// Throw exception if command does not follow format
-		if (!command.matches("^deadline .* /by .*")) throw new IllegalFormatException("deadline [description] /by [time]");
+		validateCommand(command, "^deadline .* /by .*", "deadline [description] /by [time]");
 		
 		// Add new deadline
 		String[] info = command.substring(9).split("/by");
@@ -115,7 +143,7 @@ public class Duke {
 	 */
 	private void addTodo(String command) throws IllegalFormatException {
 		// Throw exception if command does not follow format
-		if (!command.matches("^todo .*")) throw new IllegalFormatException("todo [description]");
+		validateCommand(command, "^todo .*", "todo [description]");
 		
 		// Add new todo
 		Task newTask = new Todo(command.substring(5).trim());
@@ -135,6 +163,10 @@ public class Duke {
 		printMessage(MESSAGE_ADD + "\n  " +
 				newTask + "\n" +
 				"Now you have " + listTasks.size() + " tasks in the list.");
+	}
+	
+	private void validateCommand(String command, String regex, String format) throws IllegalFormatException {
+		if (!command.matches(regex)) throw new IllegalFormatException(format);
 	}
 	
 	/**
