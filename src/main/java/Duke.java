@@ -8,7 +8,7 @@ public class Duke {
     static String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
     static String farewell = "Bye. Hope to see you again soon!";
     static String listMessage = "Here are the tasks in your list:";
-    static String doneMessage = "Nice! I've marked this task as done: ";
+    static String doneMessage = "Nice! I've marked this task as done:";
     static String addTaskMessage = "Got it. I've added this task:";
 
     private boolean running = true;
