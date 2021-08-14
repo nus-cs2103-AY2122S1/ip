@@ -1,30 +1,31 @@
 -----------------------------------------------------------------------------------------------------------------
 Welcome to Petal (•◡•)/ 
 I am the best chat bot you'll meet! Don't be shy, say something! :P
+
+Use 'todo <insert activity>' to create a to-do!
+Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
+Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
+Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-Got it. I've added this task:
-[T][ ] go for a run
+Got it. I've added this task.
+[D][ ] go for a jog (by: 8pm today)
 There are now 1 task(s) in your list!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-Got it. I've added this task:
-[D][ ] go for a jog (by: 8pm today)
+Got it. I've added this task.
+[D][ ] use a computer (by: 7pm tomorrow)
 There are now 2 task(s) in your list!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-Got it. I've added this task:
-[D][ ] use a computer (by: 7pm tomorrow)
+Got it. I've added this task.
+[E][ ] using a pc (at: 8pm tonight till 7pm tomrrow)
 There are now 3 task(s) in your list!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-Got it. I've added this task:
-[E][ ] using a pc (at:  8pm tonight till 7pm tomrrow)
+Got it. I've added this task.
+[T][ ] listening to music 
 There are now 4 task(s) in your list!
------------------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------
-You have completed the task: 'go for a run'!
-I am so happy for you!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 You have completed the task: 'go for a jog '!
@@ -39,10 +40,14 @@ You have completed the task: 'using a pc '!
 I am so happy for you!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-1. [T][X] go for a run
-2. [D][X] go for a jog (by: 8pm today)
-3. [D][X] use a computer (by: 7pm tomorrow)
-4. [E][X] using a pc (at:  8pm tonight till 7pm tomrrow)
+You have completed the task: 'listening to music '!
+I am so happy for you!
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+1. [D][X] go for a jog (by: 8pm today)
+2. [D][X] use a computer (by: 7pm tomorrow)
+3. [E][X] using a pc (at: 8pm tonight till 7pm tomrrow)
+4. [T][X] listening to music 
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 You're leaving :( I hope you return soon!

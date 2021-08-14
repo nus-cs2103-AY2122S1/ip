@@ -1,6 +1,7 @@
 deadline go for a jog /by 8pm today
 deadline use a computer /by 7pm tomorrow
 event using a pc /at 8pm tonight till 7pm tomrrow
+todo listening to music 
 done 1
 done 2
 done 3

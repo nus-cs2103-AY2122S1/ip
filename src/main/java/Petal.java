@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * The class for the Duke bot
@@ -32,7 +31,8 @@ public class Petal {
     public void startMessage() {
         String logo = "\nWelcome to Petal (•◡•)/ ";
         String logo2 = "\nI am the best chat bot you'll meet! Don't be shy, say something! :P\n";
-        System.out.println(indentation + logo + logo2 + indentation);
+        System.out.println(indentation + logo + logo2);
+        requiredFormat();
     }
 
     /**
@@ -50,7 +50,7 @@ public class Petal {
                     goodBye();
                     break;
                 case "done":
-                    markTaskAsDone(message);
+                    markTaskAsDone(msg[1]);
                     break;
                 case "delete":
                     deleteTask(msg[1]);
@@ -68,42 +68,55 @@ public class Petal {
         }
     }
 
+    /**
+     * Method which help to displayed the required format
+     */
     public void requiredFormat() {
-        System.out.println("Use 'todo <insert activity>' to create a to-do!");
-        System.out.println("\nUse 'deadline <insert activity> /by <insert deadline>' "
-                            + "to create an activity with a deadline!");
-        System.out.println("\nUse 'event <insert activity> /at <insert start/end time>' "
-                            + "to create an activity with a start/end time!");
-        System.out.println("\nUse 'done <insert task number>' to mark task as done!");
-        System.out.println(indentation);
+        String todo = "Use 'todo <insert activity>' to create a to-do!";
+        String deadline = "\nUse 'deadline <insert activity> /by <insert deadline>' "
+                            + "to create an activity with a deadline!";
+        String event = "\nUse 'event <insert activity> /at <insert start/end time>' "
+                            + "to create an activity with a start/end time!";
+        String delete = "\n Use 'delete <insert task number> to delete a task!";
+        String done = "\nUse 'done <insert task number>' to mark task as done!\n";
+        System.out.println(todo + deadline + event + done + indentation);
     }
 
+    /**
+     * Method which handles the remaining messages (assumed to be tasks)
+     * @param message The messaged to be handled
+     * @throws PetalException Thrown if input is incorrect
+     */
     public void handleTask(String message) throws PetalException {
-        String[] checkType = message.split(" ");
-        String desc = message.substring(message.indexOf(" ") + 1);
-        boolean isValidInput = checkType[0].equals("todo") || checkType[0].equals("deadline")
-                                                           || checkType[0].equals("event");
-        if (!isValidInput) {
-            throw new InvalidInputException("(っ- ‸ – ς)! I did not understand what you said :(\n");
-        }
-        boolean descNotAvail = !message.contains(" ") ||
-                            desc.isBlank();
-        if (descNotAvail) {
-            throw new EmptyDescException("(っ- ‸ – ς)! It seems like there was no description"
-                                                      + "! Please enter a description.\n");
-        }
         Task task;
-        String taskWithTime = message.substring(message.indexOf(" ") + 1);
-        switch (checkType[0]) {
+        String typeOfTask = message.split(" ")[0];
+        String desc = message.substring(message.indexOf(" ") + 1);
+        boolean isValidInput = typeOfTask.equals("todo") || typeOfTask.equals("deadline")
+                                                         || typeOfTask.equals("event");
+        if (!isValidInput) {
+            throw new InvalidInputException("I did not understand what you said :(\n");
+        }
+        boolean descNotAvail = desc.isBlank();
+        if (descNotAvail) {
+            throw new EmptyDescException("It seems like there was no description"
+                                          + "! Please enter a description.\n");
+        }
+        switch (typeOfTask) {
             case "todo":
-                task = new Todo(desc);
+                task = new ToDo(desc);
                 break;
             case "deadline":
-                String[] desc1 = taskWithTime.split("/by");
+                String[] desc1 = desc.split("/by");
+                if (desc1.length == 1) {
+                    throw new InvalidInputException("Wrong format was used! Please try again.\n");
+                }
                 task = new Deadline(desc1[0], desc1[1]);
                 break;
             default:
-                String[] desc2 = taskWithTime.split("/at");
+                String[] desc2 = desc.split("/at");
+                if (desc2.length == 1) {
+                    throw new InvalidInputException("Wrong format was used! Please try again.\n");
+                }
                 task = new Event(desc2[0], desc2[1]);
         }
         System.out.println(indentation + "\nGot it. I've added this task.");
@@ -113,6 +126,10 @@ public class Petal {
                                                              + indentation);
     }
 
+    /**
+     * Method to delete a task
+     * @param index The index of the task to be deleted
+     */
     public void deleteTask(String index) {
         int indexOfTask;
         try {
@@ -128,14 +145,6 @@ public class Petal {
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException("Invalid task number given! Please enter another value!");
         }
-    }
-
-    /**
-     * Method that handles empty message
-     */
-    public void emptyMessage() {
-        System.out.println(indentation + "\nThat was an empty message! Say something."
-                                       + "\n" + indentation);
     }
 
     /**
@@ -160,25 +169,18 @@ public class Petal {
     }
 
     /**
-     * Method to mark the task as done
+     * Method to mark the task as done //TODO: what if blank string
      * @param message The -ith task to be marked as done
      */
-    public void markTaskAsDone(String message) throws InvalidInputException,
-                                                      IndexOutOfBoundsException,
+    public void markTaskAsDone(String message) throws IndexOutOfBoundsException,
                                                       NumberFormatException {
-        String[] newMessage = message.split(" ");
-        if (newMessage.length > 2 || !newMessage[0].equals("done")) {
-            throw new InvalidInputException("Invalid format! Please enter a valid format!");
-        }
         try {
-            Task taskToBeCompleted = history.get(Integer.parseInt(newMessage[1]) - 1);
+            Task taskToBeCompleted = history.get(Integer.parseInt(message) - 1);
             taskToBeCompleted.taskDone();
-        } catch (IndexOutOfBoundsException e1) {
-            throw new IndexOutOfBoundsException(indentation + "\nThat was an invalid index! Please try again!\n"
-                                                            + indentation);
-        } catch(NumberFormatException e2) {
-             throw new NumberFormatException(indentation + "Index was not a number! Please try again!"
-                                                         + indentation);
+        } catch (IndexOutOfBoundsException e1) { //Parsed string is not within size of history
+            throw new IndexOutOfBoundsException("That was an invalid index! Please try again!\n");
+        } catch(NumberFormatException e2) { //If parsed string is not an integer
+             throw new NumberFormatException("Index was not a number! Please try again!\n");
         }
     }
 
