@@ -29,32 +29,27 @@ public class Duke {
 
     public static void askToDo(){
         Scanner input = new Scanner(System.in);
-        ArrayList<String> todolist = new ArrayList<>();
+        TaskList tasklist = new TaskList(100);
         while(true){
             System.out.println("");
             String action = input.nextLine();
-            if (action.equals("list")){
-                System.out.println("    ____________________________________________________________");
-                int count = 1;
-                for (String eachaction : todolist){
-                    System.out.println(String.valueOf(count) + ". " + eachaction);
-                    count++;
-                }
-                System.out.println("    ____________________________________________________________");
-            }else if(action.equals("bye")){
+            String[] splited = action.split(" ");
+            String action1 = splited[0];
+            if (action1.equals("list")){
+                System.out.println(tasklist.toString());
+            }else if(action1.equals("bye")){
                 String byesent = "\n" +
                 "   ____________________________________________________________\n" +
                 "   Bye. Hope to see you again soon!\n" +
                 "   ____________________________________________________________";
                 System.out.println(byesent);
                 break;
+            }else if(action1.equals("done")){
+                int num = Integer.parseInt(splited[1]);
+                tasklist.done(num);
             }else{
-                todolist.add(action);
-                String item = "\n" +
-                "   ____________________________________________________________\n" +
-                "   added: " + action +  "\n" +
-                "   ____________________________________________________________";
-                System.out.println(item);
+                Task newTask = new Task(action, false);
+                tasklist.addTask(newTask);
             }
         }
     }    
