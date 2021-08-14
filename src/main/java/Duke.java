@@ -10,16 +10,14 @@ public class Duke {
         while (!echoInput.equals("bye")) {
             if (echoInput.equals("list")) {
                 for (int i = 0; i < idx; i++) {
-                    System.out.println(i + "." + storedTasks[i].getStatusIcon() +
-                            " " + storedTasks[i].description);
+                    System.out.println(String.format("%d.%s", i, storedTasks[i].toString()));
                 }
             } else if (echoInput.startsWith("done")) {
                 try {
                     int num = Integer.parseInt(echoInput.substring(5));
                     storedTasks[num - 1].markAsDone();
                     System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(storedTasks[num - 1].getStatusIcon()
-                            + " " + storedTasks[num - 1].description);
+                    System.out.println(storedTasks[num - 1].toString());
                 } catch (NumberFormatException nfe) {
                     System.out.println("done came with an incorrect input");
                 } catch (ArrayIndexOutOfBoundsException ae) {
