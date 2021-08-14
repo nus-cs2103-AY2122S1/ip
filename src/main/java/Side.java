@@ -17,18 +17,24 @@ public class Side {
 
     private static void echo(String input) {
         System.out.println(LINEBREAK);
-        System.out.println("I heard: " + input);
+        System.out.println("added: " + input);
         System.out.println(LINEBREAK);
     }
 
     public static void main(String[] args) {
         printLogo();
         System.out.println(GREETING);
+        TaskList tasks = new TaskList();
 
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
         while (!userInput.equalsIgnoreCase("bye")) {
-            echo(userInput);
+            if (userInput.equalsIgnoreCase("list")) {
+                System.out.println(LINEBREAK + "\n" + tasks.toString() + LINEBREAK);
+            } else {
+                tasks.addTask(userInput);
+                echo(userInput);
+            }
             userInput = scanner.nextLine();
         }
 
