@@ -69,8 +69,7 @@ public class Duke {
      * This is the main point of interaction of user and Duke.
      */
     public void run() {
-        System.out.println("Hello I'm BugGenerator");
-        System.out.println("What can I do for you?");
+        System.out.println("Hello I'm FullOfBugs. What can I do for you?");
         Boolean end = false;
         Scanner s = new Scanner(System.in);
 
