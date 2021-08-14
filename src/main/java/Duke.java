@@ -21,12 +21,15 @@ public class Duke {
             String des = sc.nextLine();
             String command = checkForKeyword(des);
             if (command == null) {
+                Duke.printLine();
                 System.out.println(des + " is not a recognised command");
                 System.out.println("Please refer to the available commands using the \"allCmd\" command");
+                Duke.printLine();
             } else {
                 Duke.printLine();
                 if (command.equals("bye")) {
                     Duke.byeCommand();
+                    Duke.printLine();
                     break;
                 }
 
@@ -94,11 +97,15 @@ public class Duke {
             System.out.println("Please refer to the task list using the \"list\" command.");
         } else {
             Task atHand = taskList.get(num - 1);
-            atHand.markAsDone();
-            System.out.println("I see that you have completed a task. Keep up the good work!");
-            System.out.println();
-            System.out.println("This task has now been marked as completed");
-            System.out.println(atHand.getStatusIcon() + " " + atHand.getDescription());
+            if (atHand.getIsDone()) {
+                System.out.println("You have already completed this task.");
+            } else {
+                atHand.markAsDone();
+                System.out.println("I see that you have completed a task. Keep up the good work!");
+                System.out.println();
+                System.out.println("This task has now been marked as completed");
+                System.out.println(atHand.getStatusIcon() + " " + atHand.getDescription());
+            }
         }
     }
 
@@ -114,8 +121,8 @@ public class Duke {
     }
 
     public static void deadlineCommand(String des) {
-        String description = des.substring(9, des.lastIndexOf('/') - 1);
-        String date = des.substring(des.lastIndexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
+        String description = des.substring(9, des.indexOf('/') - 1);
+        String date = des.substring(des.indexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
         Task atHand = new Deadline(description, date);
         Deadline deadlineAtHand = (Deadline) atHand;
         taskList.add(atHand);
@@ -125,8 +132,8 @@ public class Duke {
     }
 
     public static void eventCommand(String des) {
-        String description = des.substring(6, des.lastIndexOf('/') - 1);
-        String timeframe = des.substring(des.lastIndexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
+        String description = des.substring(6, des.indexOf('/') - 1);
+        String timeframe = des.substring(des.indexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
         Task atHand = new Event(description, timeframe);
         Event eventAtHand = (Event) atHand;
         taskList.add(atHand);
