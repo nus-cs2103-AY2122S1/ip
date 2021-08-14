@@ -1,0 +1,16 @@
+list
+todo do homework
+deadline assignment /by next Monday
+event dinner /at 6pm
+deadline submission /by 29/08/21-1pm
+done 1
+done 4
+list
+invalid command
+todo
+deadline
+deadline assignment /by
+event
+event dinner /at
+done 1000
+done 0
