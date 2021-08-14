@@ -3,6 +3,8 @@
 /out/
 /*.iml
 
+/text-ui-test/
+
 # Gradle build files
 /.gradle/
 /build/
@@ -12,5 +14,3 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
-
-/text-ui-test/
