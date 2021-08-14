@@ -3,6 +3,7 @@ import main.java.Task;
 import main.java.Deadline;
 import main.java.Todo;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -32,11 +33,13 @@ public class Duke {
 
         while (true) {
             input = sc.nextLine().trim();
+            String[] inputArr = input.split(" ");
+
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
                 this.displayListItems();
-            } else if (input.contains("done")) {
+            } else if (inputArr[0].equals("done")) {
                 
                 //obtains the task number which we want to mark as done
                 //TODO: error is number not in list or input after done is not a number.
@@ -51,7 +54,7 @@ public class Duke {
                 //this.displayText(input);
 
                 //adds item input by the user into the inputList
-                this.addTask(input);
+                this.addTask(inputArr);
             }
         }
 
@@ -91,43 +94,109 @@ public class Duke {
      * @param input String message input by the user will be used as a constructor for a new Task object to be put
      *              into the taskList
      */
-    public void addTask(String input) {
-        if (input.contains("todo")) {
-            String content = input.replace("todo ", "");
-            this.addTodo(content);
-        } else if (input.contains("deadline")) {
-            this.addDeadline(input);
-        } else if (input.contains("event")) {
-            this.addEvent(input);
+    public void addTask(String[] inputArr) {
+        if (inputArr[0].equals("todo")) {
+            this.addTodo(inputArr);
+
+        } else if (inputArr[0].equals("deadline")) {
+            this.addDeadline(inputArr);
+
+        } else if (inputArr[0].equals("event")) {
+            this.addEvent(inputArr);
+
         } else {
             //this should not happen
         }
 
     }
 
-    public void addTodo(String input) {
+    public void addTodo(String[] inputArr) {
+        if (inputArr.length < 2) {
+            //TODO: Throw an error here for commands without any content
+            return;
+        }
 
-        Todo todoTask = new Todo(input);
+        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, inputArr.length);
+
+        String description = String.join(" ", descriptionArray);
+
+        Todo todoTask = new Todo(description);
         this.taskList.add(todoTask);
         this.taskCommonMessage(todoTask.toString());
     }
 
-    public void addDeadline(String input) {
-        int byIndex = input.indexOf("/by"); //TODO: Might need to handle cases where it is not a /by command
+    public void addDeadline(String[] inputArr) {
+        if (inputArr.length < 2) {
+            //TODO: Throw an error here for commands without any content
+            return;
+        }
 
-        String by = input.substring(byIndex + 4);
-        String description = input.substring(9, byIndex - 1); //-1 to account for the space before the /by command
+        boolean commandAbsent = true;
+        int commandIndex = 1;
+        for (int i = 0; i < inputArr.length; i++) {
+            String currentStr = inputArr[i];
+            if (currentStr.equals("/by")) {
+                commandAbsent = false;
+                commandIndex = i;
+                break;
+            }
+        }
+        if (commandAbsent) {
+            //TODO: throw some error here due to lack of command
+            this.displayText("☹ OOPS!!! You didn't use the correct /command for deadline!!!!");
+            return;
+        }
+
+        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
+        String description = String.join(" ", descriptionArray);
+
+        String by;
+        if (commandIndex + 1 <= inputArr.length - 1) {
+            String[] byArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
+            by = String.join(" ", byArray);
+        } else {
+            //TODO: might need to throw error here because this case is /by and nothing behind?
+            by = "No data was inputted";
+        }
 
         Deadline deadlineTask = new Deadline(description, by);
         this.taskList.add(deadlineTask);
         this.taskCommonMessage(deadlineTask.toString());
     }
 
-    public void addEvent(String input) {
-        int atIndex = input.indexOf("/at"); //TODO: Might need to handle cases where it is not a /by command
+    public void addEvent(String[] inputArr) {
+        if (inputArr.length < 2) {
+            //TODO: Throw an error here for commands without any content
+            return;
+        }
 
-        String at = input.substring(atIndex + 4);
-        String description = input.substring(6, atIndex - 1); //-1 to account for the space before the /at command
+        boolean commandAbsent = true;
+        int commandIndex = 1;
+        for (int i = 0; i < inputArr.length; i++) {
+            String currentStr = inputArr[i];
+            if (currentStr.equals("/at")) {
+                commandAbsent = false;
+                commandIndex = i;
+                break;
+            }
+        }
+        if (commandAbsent) {
+            //TODO: throw some error here due to lack of command
+            this.displayText("☹ OOPS!!! You didn't use the correct /command for event!!!!");
+            return;
+        }
+
+        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
+        String description = String.join(" ", descriptionArray);
+
+        String at;
+        if (commandIndex + 1 <= inputArr.length - 1) {
+            String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
+            at = String.join(" ", atArray);
+        } else {
+            //TODO: might need to throw error here because this case is /by and nothing behind?
+            at = "No data was inputted";
+        }
 
         Event eventTask = new Event(description, at);
         this.taskList.add(eventTask);
