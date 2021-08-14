@@ -2,6 +2,9 @@ import java.util.Random;
 
 public class Speech {
 
+    public Speech() {
+    }
+
     public void welcome() {
         String[] duke_welcome = {"Hello! I'm Duke!" , "What can I do for you"};
         speak(duke_welcome);

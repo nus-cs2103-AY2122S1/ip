@@ -2,15 +2,20 @@ import java.util.Scanner;
 
 public class Brain {
 
-    public boolean decide(Speech s) {
+    public boolean decide(Speech speech, Storage storage) {
         Scanner sc = new Scanner(System.in);
-        String in = sc.next();
-        switch (in) {
+        String input = sc.nextLine();
+        switch (input) {
             case "bye":
-                s.goodbye();
+                speech.goodbye();
                 return false;
+            case "list":
+                String[] temp = storage.getStorage();
+                speech.speak(temp);
+                return true;
             default :
-                s.speak(in);
+                input = storage.add(input);
+                speech.speak(input);
                 return true;
         }
     }
