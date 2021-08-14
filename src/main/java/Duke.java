@@ -31,8 +31,14 @@ public class Duke {
             this.handleList();
         } else if (command.matches("^done [0-9]+$")) {
             this.handleDone(command);
+        } else if (command.matches("^todo .*")) {
+            this.handleTodo(command);
+        } else if (command.matches("^deadline .* /by .*")) {
+            this.handleDeadline(command);
+        } else if (command.matches("^event .* /at .*")) {
+            this.handleEvent(command);
         } else {
-            this.handleAddTask(command);
+            System.out.println("Unknown command\n");
         }
     }
 
@@ -71,9 +77,31 @@ public class Duke {
         }
     }
 
-    private void handleAddTask(String description) {
-        tasks.add(new Task(description));
-        System.out.println(LINE + String.format("added: %s\n", description) + LINE);
+    private void handleTodo(String command) {
+        String description = command.substring(4);
+        Todo newTodo = new Todo(description.trim());
+        tasks.add(newTodo);
+        System.out.println(this.formatAddTaskString(newTodo));
+    }
+
+    private void handleDeadline(String command) {
+        String[] info = command.substring(8).split("/by");
+        Deadline newDeadline = new Deadline(info[0].trim(), info[1].trim());
+        tasks.add(newDeadline);
+        System.out.println(formatAddTaskString(newDeadline));
+    }
+
+    private void handleEvent(String command) {
+        String[] info = command.substring(5).split("/at");
+        Event newEvent = new Event(info[0].trim(), info[1].trim());
+        tasks.add(newEvent);
+        System.out.println(formatAddTaskString(newEvent));
+    }
+
+    private String formatAddTaskString(Task task) {
+        return LINE +
+                String.format("Got it. I've added this task:\n  %s\nNow you have %d task%s in the list.\n",
+                        task, this.tasks.size(), this.tasks.size() == 1 ? "" : "s") + LINE;
     }
 
     public static void main(String[] args) {
