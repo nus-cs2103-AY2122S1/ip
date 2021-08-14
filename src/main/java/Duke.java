@@ -28,7 +28,7 @@ public class Duke {
 
     public static void askToDo() throws InputNotValidError{
         Scanner input = new Scanner(System.in);
-        TaskList tasklist = new TaskList(100);
+        TaskList tasklist = new TaskList();
         while(true){
             System.out.println("");
             String action = input.nextLine();

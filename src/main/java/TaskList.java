@@ -1,17 +1,18 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class TaskList {
-    Task[] list;
+    ArrayList<Task> list;
     int curSize;
-    public TaskList(int size){
-        this.list = new Task[size];
+    public TaskList(){
+        this.list = new ArrayList<>();
         this.curSize = 0;
     }
 
     public void addTask(Task task){
-        this.list[this.curSize] = task;
+        this.list.add(task);
         this.curSize++;
         String item = "\n" +
         "   ____________________________________________________________\n" +
@@ -24,9 +25,9 @@ public class TaskList {
     }
 
     public void done(int num){
-        Task task = this.list[num  - 1];
+        Task task = this.list.get(num  - 1);
         task.doneTask();
-        this.list[num  - 1] = task;
+        this.list.set(num  - 1, task);
         String item = "\n" +
         "   ____________________________________________________________\n" +
         "   nice Nice! I've marked this task as done: \n" +
@@ -38,9 +39,9 @@ public class TaskList {
 
     public void isValidAction(String[] actionList) throws InputNotValidError{
         Set<String> validactionset = new HashSet<>(Arrays.asList(
-                                            "list", "done", "todo", "deadline", "event"));
+                                            "list", "done", "todo", "deadline", "event", "delete"));
         Set<String> infoReqired = new HashSet<>(Arrays.asList(
-                                            "list", "done", "todo", "deadline", "event"));
+                                            "todo", "deadline", "event", "delete"));
         String actionName = actionList[0];
         if (!validactionset.contains(actionName)){
             throw new InputNotValidError("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -78,6 +79,9 @@ public class TaskList {
             this.addDeadline(actionList[1]);
         }else if(actionName.equals("event")){
             this.addEvent(actionList[1]);
+        }else if(actionName.equals("delete")){
+            int num = Integer.parseInt(actionList[1]);
+            this.delete(num);
         }else{
             System.out.println("something wrong");
         }
@@ -106,6 +110,18 @@ public class TaskList {
         this.addTask(newTask);
     }
 
+    public void delete(int num){
+        Task deleted = this.list.remove(num - 1);
+        this.curSize--;
+        String item = "\n" +
+        "   ____________________________________________________________\n" +
+        "   Noted. I've removed this task:: \n" +
+        "       " + deleted.toString() + "\n" + 
+        "   Now you have " + curSize + " tasks in the list.\n" +
+        "   ____________________________________________________________";
+        System.out.println(item);
+    }
+
     public void printList(){
         System.out.println(this.toString());
     }
@@ -115,7 +131,7 @@ public class TaskList {
         res += "    ____________________________________________________________\n" + 
         "   Here are the tasks in your list:\n";
         for (int i = 0; i < curSize; i++){
-            Task eachTask = this.list[i];
+            Task eachTask = this.list.get(i);
             String each = String.valueOf(i + 1) + ". " + eachTask.toString();
             res += each + "\n";
         }
