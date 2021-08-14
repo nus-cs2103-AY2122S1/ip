@@ -142,6 +142,8 @@ public class Lifeline {
                 throw new LifelineException("Index is out of bounds!");
             }
             taskList.completeTask(taskIndex);
+            ui.showTaskList(taskList);
+            storage.save(taskList);
         } catch (NumberFormatException e) {
             throw new LifelineException("Index is not an integer! Please use done <number>");
         }
