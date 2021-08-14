@@ -26,39 +26,39 @@ public class Lifeline {
     private void getInput() {
         boolean exit = false;
         while (!exit) {
-            this.command = sc.nextLine().trim();
-            String[] commands = command.split("\\s", 2);
-            System.out.println();
             try {
-                switch (commands[0].toLowerCase()) {
-                case "list":
+                this.command = sc.nextLine().trim();
+                String[] inputs = command.split("\\s", 2);
+                System.out.println();
+                switch (getInputType(inputs[0])) {
+                case LIST:
                     printList();
                     break;
-                case "bye":
+                case BYE:
                     exit = true;
                     break;
-                case "done":
-                    if (commands.length != 2) {
+                case DONE:
+                    if (inputs.length != 2) {
                         throw new LifelineException("You did not specify an integer! Please use done <number>");
                     }
-                    markAsDone(commands[1]);
+                    markAsDone(inputs[1]);
                     break;
-                case "delete":
-                    if (commands.length != 2) {
-                        throw new LifelineException("You did not specify an integer! Please use done <number>");
+                case DELETE:
+                    if (inputs.length != 2) {
+                        throw new LifelineException("You did not specify an integer! Please use delete <number>");
                     }
-                    deleteTask(commands[1]);
+                    deleteTask(inputs[1]);
                     break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    if (commands.length != 2) {
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    if (inputs.length != 2) {
                         throw new LifelineException("Details of task cannot be blank!");
                     }
-                    createTask(commands[0].trim(), commands[1].trim());
+                    createTask(inputs[0], inputs[1]);
                     break;
                 default:
-                    echo(commands[0]);
+                    echo(inputs[0]);
                     break;
                 }
             } catch (LifelineException e) {
@@ -67,6 +67,14 @@ public class Lifeline {
             }
         }
         exit();
+    }
+
+    private InputType getInputType(String input) throws LifelineException {
+        try {
+            return InputType.valueOf(input.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new LifelineException("I am sorry! I don't know what that means! ☹");
+        }
     }
 
     private void createTask(String task, String details) throws LifelineException {
