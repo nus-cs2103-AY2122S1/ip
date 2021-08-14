@@ -9,6 +9,7 @@ public class Duke {
     static String farewell = "Bye. Hope to see you again soon!";
     static String listMessage = "Here are the tasks in your list:";
     static String doneMessage = "Nice! I've marked this task as done: ";
+    static String addTaskMessage = "Got it. I've added this task:";
 
     private boolean running = true;
     private String instruction;
@@ -33,18 +34,36 @@ public class Duke {
 
     void parse() {
         printLineBreak();
-        String operative = instruction.split(" ")[0];
+        String[] strings = instruction.split(" ", 2);
+        String operative = strings[0];
 
         if(operative.equalsIgnoreCase("list")) {
             printList();
-        } else if (operative.equalsIgnoreCase("done")) {
-            int taskPointer = Integer.parseInt(instruction.split(" ")[1]) - 1;
-            toDo[taskPointer].markAsDone();
-            completeTaskMessage(toDo[taskPointer]);
-        }else {
-            toDo[counter] = new Task(instruction);
-            counter++;
-            addedTaskMessage(instruction);
+        } else {
+            String item = strings[1];
+            if (operative.equalsIgnoreCase("done")) {
+                int taskPointer = Integer.parseInt(item) - 1;
+                toDo[taskPointer].markAsDone();
+                completeTaskMessage(toDo[taskPointer]);
+            }else if (operative.equalsIgnoreCase("todo")){
+                toDo[counter] = new Todo(item);
+                addedTaskMessage(toDo[counter].toString());
+                counter++;
+            }else if (operative.equalsIgnoreCase("event")){
+                String[] temp = item.split("/at ");
+                String date = temp[1];
+                String description = temp[0];
+                toDo[counter] = new Event(description, date);
+                addedTaskMessage(toDo[counter].toString());
+                counter++;
+            }else if (operative.equalsIgnoreCase("deadline")){
+                String[] temp = item.split("/by ");
+                String date = temp[1];
+                String description = temp[0];
+                toDo[counter] = new Deadline(description, date);
+                addedTaskMessage(toDo[counter].toString());
+                counter++;
+            }
         }
     }
 
@@ -80,8 +99,14 @@ public class Duke {
     }
 
     void addedTaskMessage (String instruction) {
-        System.out.println("added: " + instruction);
+        System.out.println(addTaskMessage);
+        System.out.println("  " + instruction);
+        taskCounterMessage();
         printLineBreak();
+    }
+
+    void taskCounterMessage () {
+        System.out.println("Now you have " + (counter + 1) + " tasks in the list.");
     }
 
     public static void main(String[] args) {
