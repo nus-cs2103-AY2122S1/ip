@@ -69,7 +69,7 @@ public class Pix {
                         String date = String.join(" ", tempArray);
                         AddTask(taskNameDeadline, TaskType.DEADLINE, date);
                     } else { //Cannot find the "/by"
-                        throw new PixUnknownCommandException();
+                        throw new PixInvalidTaskException();
                     }
 
                     NextCommand();
@@ -90,7 +90,7 @@ public class Pix {
                         String date = String.join(" ", tempArray);
                         AddTask(taskNameDeadline, TaskType.EVENT, date);
                     } else { //Cannot find the "/at"
-                        throw new PixUnknownCommandException();
+                        throw new PixInvalidTaskException();
                     }
                     NextCommand();
                     break;
@@ -100,10 +100,15 @@ public class Pix {
                     } else {
                         throw new PixUnknownCommandException();
                     }
+                    NextCommand();
+                    break;
                 default:
                     throw new PixUnknownCommandException();
             }
         } catch (PixUnknownCommandException e) {
+            System.out.println(e.getMessage());
+            NextCommand();
+        } catch (PixInvalidTaskException e) {
             System.out.println(e.getMessage());
             NextCommand();
         }
@@ -135,19 +140,19 @@ public class Pix {
                         ToDo toDo = new ToDo(item);
                         taskList.add(toDo);
                         System.out.println("(｀д´)ゝ Added this task: \n" + toDo);
-                        System.out.println("You have " + taskList.size() + " task(s) in your list");
+                        System.out.println("You now have " + taskList.size() + " task(s) in your list");
                         break;
                     case DEADLINE:
                         Deadline deadline = new Deadline(item, date);
                         taskList.add(deadline);
                         System.out.println("(｀д´)ゝ Added this task: \n" + deadline);
-                        System.out.println("You have " + taskList.size() + " task(s) in your list");
+                        System.out.println("You now have " + taskList.size() + " task(s) in your list");
                         break;
                     case EVENT:
                         Event event = new Event(item, date);
                         taskList.add(event);
                         System.out.println("(｀д´)ゝ Added this task: \n" + event);
-                        System.out.println("You have " + taskList.size() + " task(s) in your list");
+                        System.out.println("You now have " + taskList.size() + " task(s) in your list");
                         break;
                 }
             }
@@ -164,7 +169,7 @@ public class Pix {
     private static void CompleteTask(int n) {
         try {
             taskList.get(n - 1).CompleteTask();
-            System.out.println("Wow. You did it. Yay.");
+            System.out.println("(~_~) Wow. You did it. Yay.");
             System.out.println(taskList.get(n - 1));
         } catch (IndexOutOfBoundsException e) {
             System.out.println("┻━┻ミ＼（≧ロ≦＼） You can't complete what literally isn't there!");
@@ -177,9 +182,13 @@ public class Pix {
      */
     private static void DeleteTask(int n) throws PixException {
         try {
+            Task taskToDelete = taskList.get(n - 1);
+            System.out.println("(≖ᴗ≖✿) Given up already? Task removed:");
+            System.out.println(taskList.get(n - 1));
             taskList.remove(n - 1);
+            System.out.println("You now have " + taskList.size() + " task(s) in your list");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("┻━┻ミ＼（≧ロ≦＼） You can't complete what literally isn't there!");
+            System.out.println("┻━┻ミ＼（≧ロ≦＼） You can't delete what literally isn't there!");
         }
     }
 
