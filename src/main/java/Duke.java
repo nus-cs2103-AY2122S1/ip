@@ -49,6 +49,29 @@ public class Duke {
                     }
 
                     toDoList.get(targetTask - 1).markAsDone();
+                } else if(userInput.equals("delete")) {
+                    if(userDescription.isBlank()) {
+                        throw new DukeException("OOPS!!! The description of delete cannot be empty");
+                    }
+
+                    String regex = "[0-9]+";
+
+                    if(!userDescription.matches(regex)) {
+                        throw new DukeException("OOPS!!! The description of delete must be an integer ");
+                    }
+
+                    int targetTask = Integer.parseInt(userDescription);
+
+                    if(targetTask < 1 || targetTask > toDoList.size()) {
+                        throw new DukeException("OOPS!!! Invalid task number");
+                    }
+
+                    System.out.println(dottedLines);
+                    System.out.println("Noted. I've removed this task:\n" + toDoList.get(targetTask - 1).toString());
+                    toDoList.remove(targetTask - 1);
+                    System.out.println("Now you have " + toDoList.size() + " tasks in the list");
+                    System.out.println(dottedLines);
+
                 } else if (userInput.equals("todo")) {
                     if(userDescription.isBlank()) {
                         throw new DukeException("OOPS!!! The description of a todo cannot be empty");
