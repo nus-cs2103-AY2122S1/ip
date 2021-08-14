@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 class Node {
-    String text;
-    Node next;
+    private Task task;
+    private Node next;
 
-    public Node(String text) {
-        this.text = text;
+    public Node(Task task) {
+        this.task = task;
     }
 
     public Node getNext() {
@@ -16,15 +16,23 @@ class Node {
         this.next = n;
     }
 
+    public Task getTask() {
+        return task;
+    }
+
+    public void markTask() {
+        task.markAsDone();
+    }
+
     @Override
     public String toString() {
-        return text;
+        return task.toString();
     }
 }
 
 public class Duke {
     private static int taskCount = 0;
-    private static Node dummyHead = new Node("");
+    private static Node dummyHead = new Node(new Task(""));
     private static Node lastNode = dummyHead;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -41,18 +49,36 @@ public class Duke {
         System.out.println("I'm BriBot");
         System.out.println("What can I do for you?");
         lineSeparator();
-        while (true) {
-            String userInput = sc.nextLine();
-            if (userInput.equals("bye")) {
-                sayGoodBye();
-                break;
-            } else if (userInput.equals("list")) {
-                printList();
-            } else {
-                addInput(userInput);
+        String userInput = "";
+        while (userInput != "bye") {
+            userInput = sc.nextLine();
+            String[] words = userInput.split(" ", 2);
+            switch(words[0]) {
+                case "bye":
+                    sayGoodBye();
+                    break;
+                case "list":
+                    printList();
+                    break;
+                case "done":
+                    markNode(Integer.parseInt(words[1]));
+                    break;
+                default:
+                    addInput(userInput);
             }
-
         }
+    }
+
+    private static void markNode(int taskNumber) {
+        Node pointer = dummyHead;
+        lineSeparator();
+        for (int i = 0; i < taskNumber; i++) {
+            pointer = pointer.getNext();
+        }
+        pointer.markTask();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("  " + pointer);
+        lineSeparator();
     }
 
     private static void addInput(String userInput) {
@@ -60,7 +86,7 @@ public class Duke {
         System.out.println("added: " + userInput);
         lineSeparator();
         taskCount++;
-        lastNode.setNext(new Node(userInput));
+        lastNode.setNext(new Node(new Task(userInput)));
         lastNode = lastNode.getNext();
     }
 
