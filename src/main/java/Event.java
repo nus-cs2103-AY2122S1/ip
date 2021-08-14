@@ -6,6 +6,7 @@ public class Event extends Task {
         this.dateTime = dateTime;
     }
 
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + dateTime + ")";
     }
