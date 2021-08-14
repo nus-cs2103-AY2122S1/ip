@@ -19,6 +19,7 @@ public class Duke implements Runnable {
     private final String ERR_NO_TASKS = "No tasks available!";
     private final String ERR_TODO_FORMAT = "Error in command usage. Usage: todo <name>";
     private final String ERR_DEADLINE_FORMAT = "Error in command usage. Usage: deadline <name> /by <date>";
+    private final String ERR_EVENT_FORMAT = "Error in command usage. Usage: event <name> /at <date>";
     private final String ERR_INVALID_NUM = "Please provide a valid number! Usage: done <num>";
     private final String ERR_MAX_TASKS = "Sorry! You have reached maximum Task capacity.";
     private final int MAX_TASKS = 100;
@@ -26,7 +27,8 @@ public class Duke implements Runnable {
         "list", (args) -> listTasks(),
         "done", (args) -> completeTask(args),
         "todo", (args) -> addTodo(args),
-        "deadline", (args) -> addDeadline(args)
+        "deadline", (args) -> addDeadline(args),
+        "event", (args) -> addEvent(args)
     );
     private List<Task> tasks = new ArrayList<>();
 
@@ -58,6 +60,16 @@ public class Duke implements Runnable {
         }
         String[] tmp = args.split(" /by ", 2);
         tasks.add(new Deadline(tmp[0], tmp[1]));
+        printLatestTask();
+    }
+
+    private void addEvent(String args) {
+        if (args.equals("") || !args.contains(" /at ")) {
+            printDuke(ERR_EVENT_FORMAT);
+            return;
+        }
+        String[] tmp = args.split(" /at ", 2);
+        tasks.add(new Event(tmp[0], tmp[1]));
         printLatestTask();
     }
 
