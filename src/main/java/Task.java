@@ -5,7 +5,7 @@ public class Task {
     /**
      * Public constructor of a task.
      *
-     * @param description The desceiption of the task. */
+     * @param description The description of the task. */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -19,7 +19,7 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    /** Marks the tasks to be done. */
+    /** Marks task as done. */
     public void markAsDone() {
         this.isDone = true;
     }

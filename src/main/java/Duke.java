@@ -62,11 +62,23 @@ public class Duke {
                         + "Once you are done, just type 'exit' to quit the program.");
     }
 
+    /**
+     * Classifies the user's input into one of the Command.
+     *
+     * @param input Raw user's input.
+     * @return The corresponding Command.
+     */
     private static Command detectCommand(String input) {
         String[] inputs = input.split(" ");
         return Command.convertInput(inputs[0]);
     }
 
+    /**
+     * Extracts out index for commands that deals with modifying specific tasks.
+     *
+     * @param input Raw user's input.
+     * @return Desired index specified by user.
+     */
     private static int extractIndex(String input) {
         String[] inputs = input.split(" ");
         return Integer.parseInt(inputs[1]);

@@ -5,6 +5,8 @@ public enum Command {
     EXIT;
 
     /**
+     * Converts user's input into Enums for ease of determining cases.
+     *
      * @param input Command issued by user in String format.
      * @return Corresponding command.
      */
