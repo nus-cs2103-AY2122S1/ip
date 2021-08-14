@@ -1,23 +1,23 @@
 package actions;
 
+import components.Event;
 import components.TaskList;
-import components.DeadLine;
 
-public class DeadLineAction extends Action {
+public class EventAction extends Action {
     AppState applicationState;
     String todo;
-    String dateLine;
+    String eventAt;
 
-    public DeadLineAction(AppState applicationState, String todo, String dateLine) {
+    public EventAction(AppState applicationState, String todo, String eventAt) {
         this.applicationState = applicationState;
         this.todo = todo;
-        this.dateLine = dateLine;
+        this.eventAt = eventAt;
     }
 
     public AppState run() {
         TaskList taskList = this.applicationState.taskList;
-        TaskList newTaskList = taskList.addTask(new DeadLine(this.todo, false, this.dateLine));
-        System.out.println(String.format("Excellent! I've added this deadline: \n%s",
+        TaskList newTaskList = taskList.addTask(new Event(this.todo, false, this.eventAt));
+        System.out.println(String.format("Excellent! I've added this event: \n%s",
                 taskList.showTask(taskList.size() - 1)));
         return new AppState(applicationState.userExit, newTaskList);
     }

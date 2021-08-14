@@ -1,8 +1,6 @@
 import actions.*;
-import commands.CommandParser;
-import commands.DeadLineCommand;
-import commands.DoneCommand;
-import commands.ToDoCommand;
+import commands.*;
+import components.Event;
 import components.TaskList;
 
 import java.util.Scanner;
@@ -42,6 +40,11 @@ public class Duke {
                     DeadLineCommand deadLineCommand = new DeadLineCommand(userInput);
                     DeadLineAction deadLineAction = new DeadLineAction(applicationState, deadLineCommand.todo, deadLineCommand.dateLine);
                     applicationState = deadLineAction.run();
+                    break;
+                case "event":
+                    EventCommand eventCommand = new EventCommand(userInput);
+                    EventAction eventAction = new EventAction(applicationState, eventCommand.todo, eventCommand.eventAt);
+                    applicationState = eventAction.run();
                     break;
                 default:
                     InvalidAction invalidAction = new InvalidAction(applicationState);
