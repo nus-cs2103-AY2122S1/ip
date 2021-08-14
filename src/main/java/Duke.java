@@ -11,19 +11,18 @@ public class Duke {
         return "\n\t@Herb:~$" + mstr.substring(3) + "\n";
     }
 
-    private static void handleDone(ArrayList<Task> taskList, String[] in) {
+    private static void handleDone(ArrayList<Task> taskList, String[] in) throws DukeException {
         if (in.length != 2) {
-            System.out.println(wrapOutput("Invalid format! Try `done ${i}`"));
+            throw new InvalidFormatException("`done ${i}`");
         } else {
             int index;
             try {
                 index = Integer.parseInt(in[1]);
             } catch (NumberFormatException ex) {
-                System.out.println(wrapOutput("Enter valid integer!"));
-                return;
+                throw new InvalidIntegerException();
             }
             if (index < 1 || index > taskList.size()) {
-                System.out.println(wrapOutput("Not a valid task!"));
+                throw new InvalidTaskNumberException();
             } else {
                 Task t = taskList.get(index - 1);
                 t.markAsDone();
@@ -49,58 +48,75 @@ public class Duke {
 
         System.out.println(welcomeMessage);
         Scanner sc = new Scanner(System.in);
+
         while (true) {
-            System.out.print("--> ");
-            String input = sc.nextLine();
-            if (input.equals("list")) {
-                if (taskList.size() == 0) {
-                    System.out.println(wrapOutput("No tasks added yet!"));
-                    continue;
-                }
-                String res = "";
-                for (int i = 0; i < taskList.size(); i++) {
-                    Task t = taskList.get(i);
-                    res += (i + 1) + ". " + t.toString() + "\n";
-                }
-                System.out.println(wrapOutput(res.substring(0, res.length() - 1)));
-            } else if (input.equals("bye")) {
-                System.out.println(endMessage);
-                break;
-            } else {
-                String[] words = input.split(" ");
-                String mainCommand = words[0];
-                Task t;
+            try {
+                System.out.print("--> ");
+                String input = sc.nextLine();
 
-                if (words.length < 2) {
-                    System.out.println(wrapOutput("je ne comprehends pas :("));
-                    continue;
-                }
-
-                if (mainCommand.equals("done")) {
-                    handleDone(taskList, words);
-                    continue;
-                } else if (mainCommand.equals("todo")) {
-                    t = new ToDo(input.substring(5));
-                } else if (mainCommand.equals("deadline")) {
-                    String[] split = input.split("/by");
-                    t = new Deadline(split[0].substring(9).trim(), split[1].trim());
-                } else if (mainCommand.equals("event")) {
-                    String[] split = input.split("/at");
-                    t = new Event(split[0].substring(5).trim(), split[1].trim());
+                if (input.equals("list")) {
+                    if (taskList.size() == 0) {
+                        System.out.println(wrapOutput("No tasks added yet!"));
+                        continue;
+                    }
+                    StringBuilder res = new StringBuilder();
+                    for (int i = 0; i < taskList.size(); i++) {
+                        Task t = taskList.get(i);
+                        res.append(i + 1).append(". ").append(t.toString()).append("\n");
+                    }
+                    System.out.println(wrapOutput(res.substring(0, res.length() - 1)));
+                } else if (input.equals("bye")) {
+                    System.out.println(endMessage);
+                    break;
                 } else {
-                    System.out.println(wrapOutput("je ne comprehends pas :("));
-                    continue;
-                }
+                    String[] words = input.split(" ");
+                    String mainCommand = words[0];
+                    Task t;
 
-                taskList.add(t);
-                String plurality = " task";
-                if (taskList.size() != 1) {
-                    plurality += "s";
-                }
-                System.out.println(wrapOutput("Got it! I've added this task:\n   "
-                        + t.toString() + "\nNow you have " + taskList.size()
-                        + plurality + " in the list."));
+                    switch (mainCommand) {
+                        case "done":
+                            handleDone(taskList, words);
+                            continue;
+                        case "todo": {
+                            String[] split = input.split(" ");
+                            if (split.length < 2) {
+                                throw new MissingDescriptionException();
+                            }
+                            t = new ToDo(input.substring(5));
+                            break;
+                        }
+                        case "deadline": {
+                            String[] split = input.split("/by ");
+                            if (split.length < 2) {
+                                throw new InvalidFormatException("`deadline ${item} /by ${time}`");
+                            }
+                            t = new Deadline(split[0].substring(9).trim(), split[1].trim());
+                            break;
+                        }
+                        case "event": {
+                            String[] split = input.split("/at ");
+                            if (split.length < 2) {
+                                throw new InvalidFormatException("`event ${item} /at ${time}`");
+                            }
+                            t = new Event(split[0].substring(5).trim(), split[1].trim());
+                            break;
+                        }
+                        default:
+                            throw new UnknownCommandException();
+                    }
 
+                    taskList.add(t);
+                    String plurality = " task";
+                    if (taskList.size() != 1) {
+                        plurality += "s";
+                    }
+                    System.out.println(wrapOutput("Got it! I've added this task:\n   "
+                            + t.toString() + "\nNow you have " + taskList.size()
+                            + plurality + " in the list."));
+
+                }
+            } catch (DukeException e) {
+                System.out.println(wrapOutput(e.getMessage()));
             }
         }
     }
