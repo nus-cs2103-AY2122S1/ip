@@ -44,17 +44,26 @@ public class Duke {
     }
 
     static String[] addTask(String input) {
-        String[] parts = input.split(" ", 2);
-        String type = parts[0];
-        Task task = null;
-        if (type.equals("todo")) {
-            task = new Todo(parts[1]);
-        }
+        Task task = makeTask(input);
         tasks.add(task);
         return new String[]{
                 "Got it. I've added this task:",
-                "  " + task.toString(),
+                "  " + task,
                 String.format("Now you have %d %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks")};
+    }
+
+    static Task makeTask(String input) {
+        String[] parts = input.split(" ", 2);
+        String type = parts[0];
+        if (type.equals("todo")) {
+            return new Todo(parts[1]);
+        } else if (type.equals("deadline")) {
+            String[] subparts = parts[1].split(" /by ", 2);
+            return new Deadline(subparts[0], subparts[1]);
+        } else {
+            String[] subparts = parts[1].split(" /at ", 2);
+            return new Event(subparts[0], subparts[1]);
+        }
     }
 
     static void print(String... lines) {
