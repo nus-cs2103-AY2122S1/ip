@@ -12,4 +12,8 @@ public class Command {
     public boolean isGoodBye() {
         return instruction.equals("bye");
     }
+
+    public boolean isList() {
+        return instruction.equals("list");
+    }
 }

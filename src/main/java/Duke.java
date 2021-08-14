@@ -1,7 +1,14 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Duke {
+    private ArrayList<Command> list;
+
+    public Duke() {
+        list = new ArrayList<>();
+    }
+
     public static void main(String[] args) {
         String logo =
                           "██    ██ ██  ██████ ████████  ██████  ██████  \n"
@@ -13,7 +20,13 @@ public class Duke {
         victor.greet();
         Command command = victor.listen();
         while (!command.isGoodBye()) {
-            victor.echo(command);
+
+            if (!command.isList()) {
+                victor.storeCommand(command);
+                victor.echo(command);
+            } else {
+                victor.printList();
+            }
             command = victor.listen();
         }
         victor.bye();
@@ -37,7 +50,21 @@ public class Duke {
     }
 
     private void echo(Command command) {
-        formatPrint(command.getInstruction());
+        formatPrint("added: " + command.getInstruction());
+    }
+
+    private void storeCommand(Command command) {
+        list.add(command);
+    }
+
+    private void printList() {
+        int count = 1;
+        System.out.println("\n    ____________________________________________________________");
+        for (Command command : this.list) {
+            System.out.printf("     %d. %s\n", count, command.getInstruction());
+            count++;
+        }
+        System.out.println("    ____________________________________________________________\n");
     }
 
     private void bye() {
