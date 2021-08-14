@@ -1,8 +1,9 @@
 import java.util.*;
 
 public class Duke {
-    final DukeCommandFormatter commandFormatter = new DukeCommandFormatter(System.in, System.out);
-    final List<DukeTask> taskList = new ArrayList<>();
+    private final DukeCommandFormatter commandFormatter = new DukeCommandFormatter(System.in, System.out);
+    private final List<DukeTask> taskList = new ArrayList<>();
+
     final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -17,7 +18,7 @@ public class Duke {
     public void start() {
         printWelcomeMessage();
         try {
-            DukeCommand.HELP.apply(this, null, Map.of());
+            DukeCommand.HELP.apply(this, "", Map.of());
         } catch (InvalidCommandException e) {
             e.printStackTrace();
         }
@@ -45,10 +46,7 @@ public class Duke {
      */
     public boolean processCommand(String command) {
         // Get the longest duke command that matches to command
-        Optional<DukeCommand> dukeCommand = Arrays.stream(DukeCommand.values())
-                .sorted(Comparator.comparingInt(c -> -c.getName().length()))
-                .filter(c -> command.startsWith(c.getName()))
-                .findFirst();
+        Optional<DukeCommand> dukeCommand = DukeCommand.getClosestMatch(command);
         if (dukeCommand.isPresent()) {
             DukeCommand actualCommand = dukeCommand.get();
             String arguments = command.substring(actualCommand.getName().length());
@@ -62,7 +60,7 @@ public class Duke {
             try {
                 return dukeCommand.get().apply(this, positionalArg, namedArgs);
             } catch (InvalidCommandException e) {
-                commandFormatter.printOutputLine(String.format("Error in \"%s\": %s", actualCommand.getName(), e.getMessage()));
+                commandFormatter.printOutputLine(String.format("Error in \"%s\": %s.\nType \"help %s\" to view proper usage of the command.", actualCommand.getName(), e.getMessage(), actualCommand.getName()));
                 return true;
             }
         } else {
@@ -76,4 +74,7 @@ public class Duke {
     }
 
 
+    public List<DukeTask> getTaskList() {
+        return taskList;
+    }
 }

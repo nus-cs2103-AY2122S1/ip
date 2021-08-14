@@ -1,27 +1,34 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.text.NumberFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public enum DukeCommand implements DukeCommandAction {
     HELP("help",
             "Display all commands",
-            DukeCommandConfig.NO_ARGUMENTS,
+            new DukeCommandConfig(new DukeCommandArgument("command_name", "The name of the command to view help for", DukeCommandArgumentType.OPTIONAL), Map.of()),
             (Duke duke, String arg, Map<String, String> namedArgs) -> {
-                duke.commandFormatter.printOutputLine("ALL COMMANDS:");
-                Arrays.stream(DukeCommand.values())
-                        .sorted(Comparator.comparing(DukeCommand::getName))
-                        .map(DukeCommand::toString)
-                        .forEach(duke.commandFormatter::printOutputLine);
+                if (arg.isEmpty()) {
+                    duke.output("ALL COMMANDS:");
+                    Arrays.stream(DukeCommand.values())
+                            .sorted(Comparator.comparing(DukeCommand::getName))
+                            .map(DukeCommand::toString)
+                            .forEach(duke::output);
+                } else {
+                    Optional<DukeCommand> command = getClosestMatch(arg);
+                    if (command.isEmpty()) {
+                        throw new InvalidCommandException(String.format("No command named \"%s\".", arg));
+                    } else {
+                        duke.output(command.get().toDetailedString());
+                    }
+                }
                 return true;
             }),
     LIST_TASKS("list",
             "List all tasks",
             DukeCommandConfig.NO_ARGUMENTS,
             (Duke duke, String arg, Map<String, String> namedArgs) -> {
-                duke.output(String.format("You have %d %s.", duke.taskList.size(), duke.taskList.size() == 1 ? "task" : "tasks"));
-                duke.taskList.stream()
+                duke.output(String.format("You have %d %s.", duke.getTaskList().size(), duke.getTaskList().size() == 1 ? "task" : "tasks"));
+                duke.getTaskList().stream()
                         .collect(Collectors.groupingBy(t -> {
                             if (t instanceof DukeEvent) {
                                 return "Events";
@@ -35,29 +42,31 @@ public enum DukeCommand implements DukeCommandAction {
                             duke.output(group);
                             for (int i = 0; i < tasks.size(); i++) {
                                 DukeTask task = tasks.get(i);
-                                int index = duke.taskList.indexOf(task);
-                                duke.commandFormatter.printOutputLine(String.format("%d. %s", index + 1, task));
+                                int index = duke.getTaskList().indexOf(task);
+                                duke.output(String.format("%d. %s", index + 1, task));
                             }
-                            duke.commandFormatter.printOutputLine("");
+                            duke.output("");
                         });
                 return true;
             }),
     ADD_TASK("add",
             "Add a task (with optionally a deadline or a date)",
-            new DukeCommandConfig(new DukeCommandArgument("task", DukeCommandArgumentType.REQUIRED),
-                    Map.of("by", new DukeCommandArgument("deadline", DukeCommandArgumentType.OPTIONAL),
-                            "at", new DukeCommandArgument("date", DukeCommandArgumentType.OPTIONAL))),
+            new DukeCommandConfig(new DukeCommandArgument("task", "The name of the task", DukeCommandArgumentType.REQUIRED),
+                    Map.of("by", new DukeCommandArgument("deadline", "The deadline of the task",  DukeCommandArgumentType.OPTIONAL),
+                            "at", new DukeCommandArgument("date", "The date of the event", DukeCommandArgumentType.OPTIONAL))),
             (Duke duke, String arg, Map<String, String> namedArgs) -> {
                 DukeTask task;
-                if (namedArgs.containsKey("by")) {
+                if (namedArgs.containsKey("by") && namedArgs.containsKey("at")) {
+                    throw new InvalidCommandException("Task cannot be added with both a deadline and a date.");
+                } else if (namedArgs.containsKey("by")) {
                     task = new DukeDeadlineTask(arg, namedArgs.get("by"));
                 } else if (namedArgs.containsKey("at")) {
                     task = new DukeEvent(arg, namedArgs.get("at"));
                 } else {
                     task = new DukeTask(arg);
                 }
-                duke.taskList.add(task);
-                duke.commandFormatter.printOutputLine(String.format("Task added with title: %s", arg));
+                duke.getTaskList().add(task);
+                duke.output(String.format("Task added with title: %s", arg));
                 return true;
             }),
     EXIT("bye",
@@ -66,14 +75,23 @@ public enum DukeCommand implements DukeCommandAction {
             (Duke duke, String arg, Map<String, String> namedArgs) -> false),
     MARK_DONE("done",
             "Mark the task at the given index as done",
-            new DukeCommandConfig(new DukeCommandArgument("index", DukeCommandArgumentType.REQUIRED), Map.of()),
+            new DukeCommandConfig(new DukeCommandArgument("index", "The position of the task in the list", DukeCommandArgumentType.REQUIRED), Map.of()),
             (Duke duke, String arg, Map<String, String> namedArgs) -> {
-                int index = Integer.parseInt(arg) - 1;
-                assert (!duke.taskList.isEmpty() && duke.taskList.size() > index);
-                DukeTask task = duke.taskList.get(index);
+                int index;
+                try {
+                    index = Integer.parseInt(arg) - 1;
+                } catch (NumberFormatException e) {
+                    throw new InvalidCommandException("Index must be a number.");
+                }
+                if (duke.getTaskList().isEmpty()) {
+                    throw new InvalidCommandException("Task list is empty.");
+                } else if (duke.getTaskList().size() <= index) {
+                    throw new InvalidCommandException("Index cannot be greater than list size.");
+                }
+                DukeTask task = duke.getTaskList().get(index);
                 task.markAsDone();
-                duke.commandFormatter.printOutputLine("I've marked the following task as done!");
-                duke.commandFormatter.printOutputLine(task.toString());
+                duke.output("I've marked the following task as done!");
+                duke.output(task.toString());
                 return true;
             });
 
@@ -89,6 +107,13 @@ public enum DukeCommand implements DukeCommandAction {
         this.action = action;
     }
 
+    public static Optional<DukeCommand> getClosestMatch(String command) {
+       return Arrays.stream(DukeCommand.values())
+                .sorted(Comparator.comparingInt(c -> -c.getName().length()))
+                .filter(c -> command.startsWith(c.getName()))
+                .findFirst();
+    }
+
     public String getName() {
         return command;
     }
@@ -101,7 +126,7 @@ public enum DukeCommand implements DukeCommandAction {
         if (config.positionalArg == DukeCommandArgument.NONE) {
             return "";
         } else {
-            return String.format(" [%s]", config.positionalArg.getName());
+            return " " + config.positionalArg.toString();
         }
     }
 
@@ -109,14 +134,25 @@ public enum DukeCommand implements DukeCommandAction {
         if (config.acceptedNamedArgs.isEmpty()) {
             return "";
         }
-        return " " + String.join(" ", config.acceptedNamedArgs.entrySet().stream().map(entry -> String.format("[/%s [%s]]", entry.getKey(), entry.getValue().getName())).toArray(String[]::new));
+        return " " + String.join(" ", config.acceptedNamedArgs.entrySet().stream().map(entry -> String.format("[/%s %s]", entry.getKey(), entry.getValue())).toArray(String[]::new));
+    }
+
+    public String toDetailedString() {
+        String argsString = getDetailedArgumentsString();
+        return String.format("usage: %s\n  %s.%s",
+                formatCommand(),
+                description,
+                argsString.isEmpty() ? "" : String.format("\n\nArguments:\n%s", argsString));
+    }
+
+    private String getDetailedArgumentsString() {
+        return String.format("%s%s", config.positionalArg == DukeCommandArgument.NONE ? "" : String.format("  %s\n", config.positionalArg.toDetailedString()),
+                String.join("\n", config.acceptedNamedArgs.entrySet().stream().map(entry -> String.format("  /%s %s", entry.getKey(), entry.getValue().toDetailedString())).toArray(String[]::new)));
     }
 
     @Override
     public String toString() {
-        return String.format("- %s\n    %s",
-                formatCommand(),
-                description);
+        return String.format("%-10s %s", command, description);
     }
 
     @Override
