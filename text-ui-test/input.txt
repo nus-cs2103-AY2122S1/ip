@@ -10,6 +10,10 @@ done 2
 done
 done abc
 event meeting /at Sun 1-3pm
+delete
+delete abc
+delete 3
+delete 1
 deadline return book /by Sunday
 list
 bye
