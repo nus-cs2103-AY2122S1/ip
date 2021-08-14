@@ -6,8 +6,8 @@ public class DukeException extends Exception {
     }
 
     @Override
-    public String toString() {
-        return e;
+    public String getMessage() {
+        return " ☹ OOPS!!! " + e;
     }
 
 }

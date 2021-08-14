@@ -23,7 +23,7 @@ public class InputHandler {
         String cmd = sc.next();
         String raw = sc.hasNext() ? sc.nextLine().substring(1) : "";
         if (cmds.containsKey(cmd)) return cmds.get(cmd).apply(raw);
-        else throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        else throw new DukeException("I'm sorry, but I don't know what that means :-(");
     }
 
     public List<String> parse(String raw, String separator) {
@@ -59,13 +59,13 @@ public class InputHandler {
             t.markComplete();
             return new Record(" Nice! I've marked this task as done:\n   " + t);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException(" Enter a valid index.");
+            throw new DukeException("Enter a valid index.");
         }
     }
 
     private Record todo(String args) throws DukeException {
         if (args.length() == 0)
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("The description of a todo cannot be empty.");
         Task t = new Todo(args);
         db.add(t);
         return new Record(" Got it. I've added this task:\n   " + t
@@ -76,7 +76,7 @@ public class InputHandler {
         List<String> args = parse(raw, "/by");
         Deadline t = new Deadline();
         if (args.size() == 0 || args.get(0).equals(new String()))
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("The description of a deadline cannot be empty.");
         if (args.size() >= 1)
             t.addDesc(args.get(0));
         if (args.size() == 2)
@@ -90,7 +90,7 @@ public class InputHandler {
         List<String> args = parse(raw, "/at");
         Event t = new Event();
         if (args.size() == 0 || args.get(0).equals(new String()))
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("The description of a deadline cannot be empty.");
         if (args.size() >= 1)
             t.addDesc(args.get(0));
         if (args.size() == 2)

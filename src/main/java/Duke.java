@@ -26,7 +26,7 @@ public class Duke {
                 System.out.println(formatReply(r.msg()));
                 if (r.bye()) break;
             } catch (DukeException e) {
-                System.err.println(formatReply(e.getMessage()));
+                System.out.println(formatReply(e.getMessage()));
             }
         }
 
