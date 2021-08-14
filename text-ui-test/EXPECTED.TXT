@@ -1,7 +1,54 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+What can I do for you
 
+	Got it. I've added this task:
+		 [D][ ] task1 (by: Monday)
+	Now you have 1 tasks in the list.
+	Got it. I've added this task:
+		 [T][ ] task2
+	Now you have 2 tasks in the list.
+	Got it. I've added this task:
+		 [E][ ] task3 (at: Sunday 2pm)
+	Now you have 3 tasks in the list.
+	Here are the tasks in your list:
+	1.[D][ ] task1 (by: Monday)
+	2.[T][ ] task2
+	3.[E][ ] task3 (at: Sunday 2pm)
+
+	Nice! I've marked this task as done:
+		[T][X] task2
+	Got it. I've added this task:
+		 [T][ ] task4
+	Now you have 4 tasks in the list.
+	Got it. I've added this task:
+		 [E][ ] task5 (at: Tuesday 3pm)
+	Now you have 5 tasks in the list.
+	Got it. I've added this task:
+		 [T][ ] task6
+	Now you have 6 tasks in the list.
+	Here are the tasks in your list:
+	1.[D][ ] task1 (by: Monday)
+	2.[T][X] task2
+	3.[E][ ] task3 (at: Sunday 2pm)
+	4.[T][ ] task4
+	5.[E][ ] task5 (at: Tuesday 3pm)
+	6.[T][ ] task6
+
+	Nice! I've marked this task as done:
+		[T][X] task4
+	Nice! I've marked this task as done:
+		[E][X] task5 (at: Tuesday 3pm)
+	Here are the tasks in your list:
+	1.[D][ ] task1 (by: Monday)
+	2.[T][X] task2
+	3.[E][ ] task3 (at: Sunday 2pm)
+	4.[T][X] task4
+	5.[E][X] task5 (at: Tuesday 3pm)
+	6.[T][ ] task6
+
+	Bye. Hope to see you again soon!
