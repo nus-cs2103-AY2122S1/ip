@@ -14,4 +14,10 @@ todo
 blah
 deadline scary deadline
 event nice event
+delete 3
+list
+delete -1
+delete 99999
+delete funnyWord
+list
 bye
