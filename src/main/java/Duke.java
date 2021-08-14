@@ -1,6 +1,7 @@
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Duke {
     final DukeCommandFormatter commandFormatter = new DukeCommandFormatter(System.in, System.out);
@@ -18,6 +19,7 @@ public class Duke {
 
     public void start() {
         printWelcomeMessage();
+        DukeCommand.HELP.apply(this, null, null);
         boolean shouldListen;
         do {
             String command = commandFormatter.nextCommand();
@@ -54,7 +56,7 @@ public class Duke {
             Map<String, String> namedArgs = new HashMap<>();
             for (int i = 1; i < tokens.length; i++) {
                 String[] namedArg = tokens[i].trim().split(" ", 2);
-                namedArgs.put(namedArg[0], namedArg[1]);
+                namedArgs.put(namedArg[0].trim(), namedArg[1].trim());
             }
             return dukeCommand.get().apply(this, positionalArg, namedArgs);
         } else {
@@ -104,15 +106,38 @@ public class Duke {
             return true;
         }),
         LIST_TASKS("list", "List all tasks", (Duke duke, String arg, Map<String, String> namedArgs) -> {
-            duke.commandFormatter.printOutputLine(String.format("You have %d %s", duke.taskList.size(), duke.taskList.size() == 1 ? "task" : "tasks"));
-            for (int i = 0; i < duke.taskList.size(); i++) {
-                DukeTask task = duke.taskList.get(i);
-                duke.commandFormatter.printOutputLine(String.format("%d. %s", i + 1, task));
-            }
+            duke.commandFormatter.printOutputLine(String.format("You have %d %s.", duke.taskList.size(), duke.taskList.size() == 1 ? "task" : "tasks"));
+            duke.taskList.stream()
+                    .collect(Collectors.groupingBy(t -> {
+                        if (t instanceof DukeEvent) {
+                            return "Events";
+                        } else if (t instanceof DukeDeadlineTask) {
+                            return "Tasks with deadlines";
+                        } else {
+                            return "Tasks";
+                        }
+                    }))
+                    .forEach((String group, List<DukeTask> tasks) -> {
+                        duke.commandFormatter.printOutputLine(group);
+                        for (int i = 0; i < tasks.size(); i++) {
+                            DukeTask task = tasks.get(i);
+                            int index = duke.taskList.indexOf(task);
+                            duke.commandFormatter.printOutputLine(String.format("%d. %s", index + 1, task));
+                        }
+                        duke.commandFormatter.printOutputLine("");
+                    });
             return true;
         }),
         ADD_TASK("add", "Add a task", (Duke duke, String arg, Map<String, String> namedArgs) -> {
-            duke.taskList.add(new DukeTask(arg));
+            DukeTask task;
+            if (namedArgs.containsKey("by")) {
+                task = new DukeDeadlineTask(arg, namedArgs.get("by"));
+            } else if (namedArgs.containsKey("at")) {
+                task = new DukeEvent(arg, namedArgs.get("at"));
+            } else {
+                task = new DukeTask(arg);
+            }
+            duke.taskList.add(task);
             duke.commandFormatter.printOutputLine(String.format("Task added with title: %s", arg));
             return true;
         }),
