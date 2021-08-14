@@ -1,7 +1,14 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Represents the Duke chatbot.
+ *
+ * @author Jay Aljelo Saez Ting
+ */
 public class DukeChatbot {
 
     private static final String INDENTATION_UNIT_STRING = " ";
@@ -19,11 +26,27 @@ public class DukeChatbot {
     private static final String EXIT_COMMAND = "bye";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String READ_COMMAND_ERROR_MESSAGE = "An unexpected error has occurred.";
+    private static final String LIST_TASKS_COMMAND = "list";
 
+    private List<Task> tasks;
+
+    /**
+     * Creates a Duke chatbot with an initially empty list of tasks.
+     */
+    public DukeChatbot() {
+        tasks = new ArrayList<>();
+    }
+
+    /**
+     * Prints the greeting message.
+     */
     public void printGreeting() {
         printFormattedMessage(LOGO + GREETING_MESSAGE);
     }
 
+    /**
+     * Listens for inputs for commands and responds accordingly.
+     */
     public void listenForInput() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String command;
@@ -38,11 +61,29 @@ public class DukeChatbot {
             case EXIT_COMMAND:
                 printExitMessage();
                 break;
+            case LIST_TASKS_COMMAND:
+                printTasks();
+                break;
             default:
-                printFormattedMessage(command);
+                addTask(command);
                 break;
             }
         } while (!command.equals(EXIT_COMMAND));
+    }
+
+    private void addTask(String taskDescription) {
+        Task task = new Task(taskDescription);
+        tasks.add(task);
+        printFormattedMessage(String.format("added: %s", task));
+    }
+
+    private void printTasks() {
+        StringBuilder sb = new StringBuilder();
+        int n = tasks.size();
+        for (int i = 0; i < n; i++) {
+            sb.append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
+        }
+        printFormattedMessage(sb.toString());
     }
 
     private void printExitMessage() {
