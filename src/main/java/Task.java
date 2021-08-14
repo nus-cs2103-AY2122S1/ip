@@ -2,7 +2,7 @@ public class Task {
     private boolean done;
     private String taskDetails;
 
-    public Task(boolean done, String taskDetails) {
+    public Task(String taskDetails, boolean done) {
         this.done = done;
         this.taskDetails = taskDetails;
     }
@@ -15,4 +15,9 @@ public class Task {
             return false;
         }
     }
+
+    public String toString() {
+        return String.format("[%s] %s", this.done ? "X" : " ", this.taskDetails);
+    }
+
 }
