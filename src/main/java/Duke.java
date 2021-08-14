@@ -1,5 +1,6 @@
 import actions.*;
 import commands.CommandParser;
+import commands.DeadLineCommand;
 import commands.DoneCommand;
 import commands.ToDoCommand;
 import components.TaskList;
@@ -35,6 +36,11 @@ public class Duke {
                     ToDoCommand toDoCommand = new ToDoCommand(userInput);
                     ToDoAction toDoAction = new ToDoAction(applicationState, toDoCommand.todo);
                     applicationState = toDoAction.run();
+                    break;
+                case "deadline":
+                    DeadLineCommand deadLineCommand = new DeadLineCommand(userInput);
+                    DeadLineAction deadLineAction = new DeadLineAction(applicationState, deadLineCommand.todo, deadLineCommand.dateLine);
+                    applicationState = deadLineAction.run();
                     break;
                 default:
                     InvalidAction invalidAction = new InvalidAction(applicationState);
