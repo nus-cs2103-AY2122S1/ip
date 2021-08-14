@@ -16,13 +16,18 @@ public class Duke {
                     + "   \\    /\\    /    |  |____ |  `----.|  `----.|  `--'  | |  |  |  | |  |____        |  |     |  `--'  |    |  '--'  ||  `--'  | |  .  \\  |  |____ |__| \n"
                     + "    \\__/  \\__/     |_______||_______| \\______| \\______/  |__|  |__| |_______|       |__|      \\______/     |_______/  \\______/  |__|\\__\\ |_______|(__) \n"
                     + "                                                                                                                                                       ";
+    static final List list = new List();
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         printWelcomeMessage();
         String input = sc.nextLine();
         while (!input.equalsIgnoreCase("exit")) {
-            echo(input);
+            if (input.equalsIgnoreCase("list")) {
+                list.printList();
+            } else {
+                list.addToList(input);
+            }
             input = sc.nextLine();
         }
         printExitMessage();
@@ -31,10 +36,9 @@ public class Duke {
     /**
      * Formats message passed in and prints it out to the screen.
      *
-     * @param message Message to be pretty printed.
-     */
+     * @param message Message to be pretty printed. */
     public static void prettyPrint(String message) {
-        System.out.println(String.format("%s\n\t%s\n%s", divider, message, divider));
+        System.out.printf("%s\n\t%s\n%s%n", divider, message, divider);
     }
 
     /**
@@ -44,17 +48,9 @@ public class Duke {
         System.out.println(banner);
         prettyPrint(
                 "Hello! I'm Duke, your personal CLI bot!\n\t"
-                        + "For now, I can only echo back whatever command you give me..."
-                        + "\n\tOnce you are done just type 'exit' to quit the program.");
-    }
-
-    /**
-     * Echo user's input.
-     *
-     * @param input Input to be echoed.
-     */
-    public static void echo(String input) {
-        prettyPrint(input);
+                        + "I can now help you keep track of things!\n\t"
+                        + "Simply type in what you need me to keep track of and type 'list' to see the things you have added.\n\t"
+                        + "Once you are done, just type 'exit' to quit the program.");
     }
 
     /**
