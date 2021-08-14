@@ -10,16 +10,20 @@ public class Duke {
         greet();
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            String input = scanner.nextLine();
-            if (input.equals("bye")) {
-                print("Bye. Hope to see you again soon!");
-                return;
-            } else if (input.equals("list")) {
-                print(list());
-            } else if (input.startsWith("done")) {
-                print(done(Integer.parseInt(input.split(" ", 2)[1])));
-            } else {
-                print(addTask(input));
+            try {
+                String input = scanner.nextLine();
+                if (input.equals("bye")) {
+                    print("Bye. Hope to see you again soon!");
+                    return;
+                } else if (input.equals("list")) {
+                    print(list());
+                } else if (input.startsWith("done")) {
+                    print(done(input));
+                } else {
+                    print(addTask(input));
+                }
+            } catch (Exception e) {
+                print(e.getMessage());
             }
         }
     }
@@ -37,13 +41,14 @@ public class Duke {
         return out.toArray(new String[0]);
     }
 
-    static String[] done(int ind) {
+    static String[] done(String input) {
+        int ind = Integer.parseInt(input.split(" ", 2)[1]);
         Task task = tasks.get(ind - 1);
         task.setDone();
         return new String[]{"Nice! I've marked this task as done:", "  " + task};
     }
 
-    static String[] addTask(String input) {
+    static String[] addTask(String input) throws DukeException {
         Task task = makeTask(input);
         tasks.add(task);
         return new String[]{
@@ -52,17 +57,25 @@ public class Duke {
                 String.format("Now you have %d %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks")};
     }
 
-    static Task makeTask(String input) {
+    static Task makeTask(String input) throws DukeException {
         String[] parts = input.split(" ", 2);
         String type = parts[0];
-        if (type.equals("todo")) {
-            return new Todo(parts[1]);
-        } else if (type.equals("deadline")) {
-            String[] subparts = parts[1].split(" /by ", 2);
-            return new Deadline(subparts[0], subparts[1]);
-        } else {
-            String[] subparts = parts[1].split(" /at ", 2);
-            return new Event(subparts[0], subparts[1]);
+        switch (type) {
+            case "todo":
+                if (parts.length == 1) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                return new Todo(parts[1]);
+            case "deadline": {
+                String[] subparts = parts[1].split(" /by ", 2);
+                return new Deadline(subparts[0], subparts[1]);
+            }
+            case "event": {
+                String[] subparts = parts[1].split(" /at ", 2);
+                return new Event(subparts[0], subparts[1]);
+            }
+            default:
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
