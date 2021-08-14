@@ -7,4 +7,8 @@ todo graduate
 done 2
 done 3
 list
+todo
+deadline submit assignment
+done 5
+baka
 bye
