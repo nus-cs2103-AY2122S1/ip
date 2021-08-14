@@ -21,6 +21,7 @@ public class Duke {
             if(!userDescription.isEmpty()) {
                 userDescription = userDescription.substring(1);
             }
+
             if(userInput.equals("bye")) {
                 System.out.println(dottedLines);
                 System.out.println("Bye. Don't forget, these tasks will still require your attention when you return!");
@@ -32,10 +33,30 @@ public class Duke {
                 }
             } else if(userInput.equals("done")) {
                   toDoList.get(Integer.parseInt(userDescription) - 1).markAsDone();
-            } else {
-                toDoList.add(new Task(userInput + " " + userDescription));
+            } else if(userInput.equals("todo")) {
+                Todo todo = new Todo(userDescription);
+                toDoList.add(todo);
                 System.out.println(dottedLines);
-                System.out.println("added: " + userInput + " " + userDescription);
+                System.out.println("Got it. I've added this task:\n" + todo.toString());
+                System.out.println("Now you have " + toDoList.size() + " tasks in the list");
+                System.out.println(dottedLines);
+            } else if(userInput.equals("deadline")) {
+                int dueByIndex = userDescription.indexOf("/by");
+                Deadline deadline = new Deadline(userDescription.substring(0, dueByIndex - 1),
+                        userDescription.substring(dueByIndex + 4));
+                toDoList.add(deadline);
+                System.out.println(dottedLines);
+                System.out.println("Got it. I've added this task:\n" + deadline.toString());
+                System.out.println("Now you have " + toDoList.size() + " tasks in the list");
+                System.out.println(dottedLines);
+            } else if(userInput.equals("event")) {
+                int duringIndex = userDescription.indexOf("/at");
+                Event event = new Event(userDescription.substring(0, duringIndex - 1),
+                        userDescription.substring(duringIndex + 4));
+                toDoList.add(event);
+                System.out.println(dottedLines);
+                System.out.println("Got it. I've added this task:\n" + event.toString());
+                System.out.println("Now you have " + toDoList.size() + " tasks in the list");
                 System.out.println(dottedLines);
             }
         }
