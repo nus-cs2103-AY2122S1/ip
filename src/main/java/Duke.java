@@ -1,18 +1,9 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        Scanner sc = new Scanner(System.in);
-        duke.greet();
-        String command = sc.nextLine();
-        while(!command.equals("bye")) {
-            duke.echo(command);
-            command = sc.nextLine();
-        }
-        sc.close();
-        duke.bye();
-    }
+    private List<String> tasks = new ArrayList<String>();
 
     /**
      * Greet the user.
@@ -37,5 +28,17 @@ public class Duke {
     public void bye() {
         String byeCommand = "Bye. Hope to see you again soon!";
         System.out.println(byeCommand);
+    }
+
+    public void addTask(String task) {
+        this.tasks.add(task);
+        String output = String.format("Added: %s", task);
+        System.out.println(output);
+    }
+
+    public void displayTasks() {
+        for (int i = 0; i < this.tasks.size(); i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i));
+        }
     }
 }
