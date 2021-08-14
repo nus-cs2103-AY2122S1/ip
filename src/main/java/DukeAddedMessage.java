@@ -4,7 +4,7 @@
  * It overrides methods in `DukeOutputMessage` to format the message differently for adding.
  */
 public class DukeAddedMessage extends DukeOutputMessage {
-    private static String ADDED_PREFIX = "added: ";
+    private static String ADDED_PREFIX = "Got it. I've added this task: ";
 
     /**
      * Constructor to instantiate a `DukeAddedMessage`.
@@ -23,7 +23,15 @@ public class DukeAddedMessage extends DukeOutputMessage {
      */
     @Override
     public String getMessage() {
-        return ADDED_PREFIX + super.getMessage();
+        int numOfTasks = DukeList.getNumberOfTasks();
+        String task = numOfTasks == 1 ? "task" : "tasks";
+
+        return String.format(
+                "%s\n\t\t%s\n\tNow you have %d %s in the list.",
+                ADDED_PREFIX,
+                super.getMessage(),
+                numOfTasks,
+                task);
     }
 
     /**

@@ -53,4 +53,13 @@ public class DukeList {
     public static DukeTask getTaskByTaskNumber(int taskNumber) {
         return DukeList.list[taskNumber - 1];
     }
+
+    /**
+     * Gets the number of tasks in the list
+     *
+     * @return the number of tasks in the list
+     */
+    public static int getNumberOfTasks() {
+        return indexOfNextNewItem;
+    }
 }

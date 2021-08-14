@@ -17,6 +17,50 @@ public class DukeTask {
     }
 
     /**
+     * Creates a specific `DukeTask` based on the prefix in the user input.
+     * Supported types of tasks include todo, deadline and event.
+     *
+     * @param description the full user input that may or may not be a valid type of task
+     * @return A new `DukeTask`
+     * @throws InvalidTaskTypeException
+     */
+    public static DukeTask createTask(String description) throws InvalidTaskTypeException {
+        // A valid task is either a to-do, deadline or event
+
+        if (description.contains("todo")) {
+            return DukeTodoTask.createTask(description);
+        }
+
+        if (description.contains("deadline")) {
+            return DukeDeadlineTask.createTask(description);
+        }
+
+        if (description.contains("event")) {
+            return DukeEventTask.createTask(description);
+        }
+
+        throw new InvalidTaskTypeException(description);
+    }
+
+    /**
+     * Utility method to split tasks into action and time parts.
+     *
+     * @param descriptionWithTime the description of a task including time information
+     * @param splitter the regex to split the description by
+     * @return a string array whose first item is the action description and second item is the time
+     */
+    public static String[] splitDescriptionAndTime(String descriptionWithTime, String splitter) {
+        String[] splitParts = descriptionWithTime.split(splitter);
+
+        // Trim split parts to remove whitespace before and after
+        for (int i = 0; i < splitParts.length; i++) {
+            splitParts[i] = splitParts[i].trim();
+        }
+
+        return splitParts;
+    }
+
+    /**
      * Method to mark a task as done.
      */
     public void markAsDone() {

@@ -49,10 +49,14 @@ public class Duke {
                     );
                 }
             } else {
-                // Add input to list
-                DukeTask task = new DukeTask(inputMessage);
-                DukeList.addItemToList(task);
-                outputMessage = new DukeAddedMessage(inputMessage);
+                try {
+                    // Add input to list
+                    DukeTask task = DukeTask.createTask(inputMessage);
+                    DukeList.addItemToList(task);
+                    outputMessage = new DukeAddedMessage(task.toString());
+                } catch (InvalidTaskTypeException e) {
+                    outputMessage = new DukeOutputMessage(e.getMessage());
+                }
             }
 
             // Print output message
