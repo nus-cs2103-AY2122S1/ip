@@ -1,11 +1,12 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 //note that automated testing script simply doesn't work
 //for some reason terminal is unable to detect FC even though i checked and even manually added
 //system32 to path. The window also disappears extremely fast, and a pause command does not prevent this
 
 public class Duke {
-    private static Task[] store = new Task[100];
+    private static ArrayList<Task> store = new ArrayList<>();
     private static int index = 0;
 
     //subroutine for adding tasks to the array of tasks
@@ -15,7 +16,7 @@ public class Duke {
             if (descriptor.equals("")) {
                 throw new DukeException("empty description");
             }
-            store[index] = new Todo(descriptor.stripLeading());
+            store.add(new Todo(descriptor.stripLeading()));
         } else if (descriptor.startsWith("deadline")) {
             descriptor = descriptor.replaceFirst("deadline", "");
             if (descriptor.equals("")) {
@@ -23,7 +24,7 @@ public class Duke {
             }
             descriptor = descriptor.replaceFirst("/by ", "(by: ");
             descriptor = descriptor + ")";
-            store[index] = new Deadline(descriptor.stripLeading());
+            store.add(new Deadline(descriptor.stripLeading()));
         } else if (descriptor.startsWith("event")) {
             descriptor = descriptor.replaceFirst("event", "");
             if (descriptor.equals("")) {
@@ -31,16 +32,15 @@ public class Duke {
             }
             descriptor = descriptor.replaceFirst("/at ", "(at: ");
             descriptor = descriptor + ")";
-            store[index] = new Event(descriptor.stripLeading());
+            store.add(new Event(descriptor.stripLeading()));
         } else {
             //based on logic in Main, should never reach this branch.
             throw new DukeException();
         }
 
         System.out.println("Got it. I've added this task:");
-        System.out.println("  " + store[index]);
-        System.out.println("Now you have " + (index + 1) + " tasks in the list.");
-        index++;
+        System.out.println("  " + store.get(store.size() - 1));
+        System.out.println("Now you have " + store.size() + " tasks in the list.");
     }
 
     public static void main(String[] args) {
@@ -57,20 +57,26 @@ public class Duke {
         while(!in.equals("bye")) {
             if (in.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < index; i++) {
-                    System.out.println((i + 1) + ". " + store[i]);
+                for (int i = 0; i < store.size(); i++) {
+                    System.out.println((i + 1) + ". " + store.get(i));
                 }
             } else if (in.startsWith("done")) {
                 String[] temp = in.split(" ");
-                store[Integer.parseInt(temp[1]) - 1].setFlag(true);
+                store.get(Integer.parseInt(temp[1]) - 1).setFlag(true);
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  " + store[Integer.parseInt(temp[1]) - 1]);
+                System.out.println("  " + store.get(Integer.parseInt(temp[1]) - 1));
             } else if (in.startsWith("todo") || in.startsWith("deadline") || in.startsWith("event")) {
                 try {
                     addTask(in);
                 } catch (DukeException e) {
                     System.out.println("Sorry! Your request caused " + e);
                 }
+            } else if (in.startsWith("delete")) {
+                String[] temp = in.split(" ");
+                Task removed = store.remove(Integer.parseInt(temp[1]) - 1);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("  " + removed);
+                System.out.println("Now you have " + store.size() + " tasks in the list.");
             } else {
                 System.out.println("Sorry! I don't know what your request means...");
             }
