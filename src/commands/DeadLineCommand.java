@@ -1,5 +1,7 @@
 package commands;
 
+import utils.RemoveLastSpaces;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,5 +27,8 @@ public class DeadLineCommand extends Command {
                 this.dateLine += (array.get(i) + " ");
             }
         }
+        RemoveLastSpaces removeLastSpaces = new RemoveLastSpaces();
+        this.todo = removeLastSpaces.removeLastSpaces(this.todo);
+        this.dateLine = removeLastSpaces.removeLastSpaces(this.dateLine);
     }
 }

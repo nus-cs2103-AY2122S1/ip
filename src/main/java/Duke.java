@@ -34,6 +34,7 @@ public class Duke {
                     break;
                 case "todo":
                     ToDoCommand toDoCommand = new ToDoCommand(userInput);
+                    System.out.println(toDoCommand.todo);
                     ToDoAction toDoAction = new ToDoAction(applicationState, toDoCommand.todo);
                     applicationState = toDoAction.run();
                     break;
