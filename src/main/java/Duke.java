@@ -48,6 +48,18 @@ public class Duke {
     }
 
     /**
+     * Delete the task at the specific index.
+     *
+     * @param index The index of the task in the list that is to be deleted
+     * @return The corresponding String reply after deleting a task
+     */
+    private String deleteTask(int index) {
+        Task deleted = this.list.remove(index - 1);
+        return "\tNoted. I've removed this task:\n\t\t" + deleted.toString()
+                + "\nNow you have " + this.list.size() + " tasks in the list.";
+    }
+
+    /**
      * The method to handle all the text input to call the correct corresponding method
      *
      * @param input The text input from the user to Duke
@@ -77,6 +89,21 @@ public class Duke {
                     throw new DukeException("The index provided is not within the valid range");
                 }
                 reply = this.markTask(index);
+                break;
+
+            case "delete":
+                if (inputArray.length == 1) {
+                    throw new DukeException("The index is missing.");
+                }
+                try {
+                    index = Integer.parseInt(inputArray[1]);
+                } catch (NumberFormatException e) {
+                    throw new DukeException("The index provided is not a number.");
+                }
+                if (index > this.list.size() || index < 1) {
+                    throw new DukeException("The index provided is not within the valid range");
+                }
+                reply = this.deleteTask(index);
                 break;
 
             case "todo":
