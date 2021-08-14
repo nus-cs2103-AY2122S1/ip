@@ -14,5 +14,9 @@ done 7
 done hehe
 done 2
 done 4
+delete him
+delete 1
+delete 100
+delete
 list
 bye

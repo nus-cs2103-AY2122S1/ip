@@ -32,6 +32,33 @@ public class Duke {
         }
     }
 
+    private static void handleDelete(ArrayList<Task> taskList, String[] in) throws DukeException {
+        if (in.length != 2) {
+            throw new InvalidFormatException("`delete ${i}`");
+        } else {
+            int index;
+            try {
+                index = Integer.parseInt(in[1]);
+            } catch (NumberFormatException ex) {
+                throw new InvalidIntegerException();
+            }
+            if (index < 1 || index > taskList.size()) {
+                throw new InvalidTaskNumberException();
+            } else {
+                Task t = taskList.remove(index - 1);
+
+                String plurality = " task";
+                if (taskList.size() != 1) {
+                    plurality += "s";
+                }
+
+                System.out.println(wrapOutput("Noted, I've removed this task:\n   " +
+                        t.toString() + "\nNow you have " + taskList.size()
+                        + plurality + " in the list."));
+            }
+        }
+    }
+
     public static void main(String[] args) {
         String welcomeMessage = "\n\tHi! I'm Herbert, you can call me Herb  ٩(˘◡˘)۶\n"
                 + "\tHow can I help you?\n\n"
@@ -41,6 +68,7 @@ public class Duke {
                 + "\t\t `deadline ${item} /by ${time}` to add a deadline\n"
                 + "\t\t `event ${item} /at ${time}` to add an event\n"
                 + "\t\t `done ${i}` to mark task i as completed\n"
+                + "\t\t `delete ${i}` to delete task i\n"
                 + "\t\t `bye` to end this chat\n";
         String endMessage = "\n\tSad to see you go :(\n\t...shutting down...";
 
@@ -76,6 +104,9 @@ public class Duke {
                     switch (mainCommand) {
                         case "done":
                             handleDone(taskList, words);
+                            continue;
+                        case "delete":
+                            handleDelete(taskList, words);
                             continue;
                         case "todo": {
                             String[] split = input.split(" ");
