@@ -26,8 +26,11 @@ public class Duke {
                 int index = Integer.parseInt(command.split(" ")[1]) - 1;
                 System.out.println(reply(done(index)));
             } else { // add the task
-                String taskType = command.split(" ")[0];
-                System.out.println(reply(add(command, taskType)));
+                try {
+                    System.out.println(reply(add(command)));
+                } catch (InvalidCommandException e) {
+                    System.out.println(reply(e.getMessage()));
+                }
             }
             command = scan.nextLine();
         }
@@ -63,22 +66,29 @@ public class Duke {
                 "       %s\n", t);
     }
 
-    private static String add(String input, String type) {
+    private static String add(String input) throws InvalidCommandException {
+        String[] check = input.split(" ");
+        String type = check[0];
         Task t;
-        int delimiter = input.indexOf("/");
         // add task to the taskList
+        String[] split = input.split(" /");
         switch (type) {
             case "todo" :
+                if (check.length == 1) throw new EmptyDescriptionError("todo");
                 taskList.add(t = new Todo(input.substring(5)));
                 break;
             case "deadline" :
-                taskList.add(t = new Deadline(input.substring(9, delimiter-1), input.substring(delimiter+4)));
+                if (check.length == 1) throw new EmptyDescriptionError("deadline");
+                taskList.add(t = new Deadline(split[0].substring(9), split[1].substring(3)));
                 break;
             case "event" :
-                taskList.add(t = new Event(input.substring(6, delimiter-1), input.substring(delimiter+4)));
+                if (check.length == 1) throw new EmptyDescriptionError("event");
+                taskList.add(t = new Event(split[0].substring(6), split[1].substring(3)));
                 break;
             default :
-                t = new Task(input);
+                t = new Task(input); // for tasks other than todo, deadline, event
+                throw new UnknownCommandError("");
+
         }
         // reply
         return "     Got it. I've added this task: \n" +
