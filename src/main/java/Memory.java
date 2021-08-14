@@ -101,7 +101,7 @@ public class Memory {
     }
 
     /** Returns the number of tasks in the array */
-    public static int getSize() {
+    private static int getSize() {
         return list.size();
     }
 }
