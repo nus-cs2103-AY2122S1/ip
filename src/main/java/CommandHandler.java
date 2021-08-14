@@ -28,6 +28,7 @@ public class CommandHandler {
             LocalDateTime dateTime = LocalDateTime.parse(description[1].trim(), formatter);
             Task newTask = new Deadline(description[0].trim(), dateTime);
             taskList.add(newTask);
+            ui.showAddedTask(newTask);
             storage.save(taskList);
         } catch (DateTimeParseException e) {
             throw new LifelineException("Deadline is not of the correct format! Please use deadline <name> /by " +
@@ -41,12 +42,12 @@ public class CommandHandler {
             throw new LifelineException("Details of event cannot be blank!");
         }
         String[] description = commands[1].trim().split("/at", 2);
-        if (description.length != 2) {
-            throw new LifelineException("Event date/time cannot be blank! Use /at <Day> <Time>");
-        }
-        String[] eventDateAndDuration = description[1].trim().split("\\s", 2);
         String errorMessage = "Event date/time not in proper format! Please use event <name> /at " +
                 "<dd/MM/yy> <HHmm>-<HHmm>";
+        if (description.length != 2) {
+            throw new LifelineException(errorMessage);
+        }
+        String[] eventDateAndDuration = description[1].trim().split("\\s", 2);
         if (eventDateAndDuration.length!= 2) {
             throw new LifelineException(errorMessage);
         }
@@ -64,6 +65,8 @@ public class CommandHandler {
             LocalTime endTime = LocalTime.parse(duration[1], timeFormatter);
             Task newTask = new Event(description[0].trim(), date, startTime, endTime);
             taskList.add(newTask);
+            ui.showAddedTask(newTask);
+            ui.showTaskList(taskList);
             storage.save(taskList);
         } catch (DateTimeParseException e) {
             throw new LifelineException(errorMessage);
@@ -73,7 +76,7 @@ public class CommandHandler {
     public static void handleToDo(String command, Storage storage, TaskList taskList, Ui ui) throws LifelineException {
         String[] commands = command.split("\\s", 2);
         if (commands.length != 2) {
-            throw new LifelineException("Details of event cannot be blank!");
+            throw new LifelineException("Details of todo cannot be blank!");
         }
         Task newTask = new ToDo(commands[1].trim());
         taskList.add(newTask);
@@ -92,7 +95,7 @@ public class CommandHandler {
                 throw new LifelineException("Index is out of bounds!");
             }
             taskList.completeTask(taskIndex);
-            ui.showAddedTask(taskList.get(taskIndex));
+            ui.showCompletedTask(taskList.get(taskIndex));
             ui.showTaskList(taskList);
             storage.save(taskList);
         } catch (NumberFormatException e) {
@@ -104,7 +107,7 @@ public class CommandHandler {
             throws LifelineException {
         String[] commands = command.split("\\s", 2);
         if (commands.length != 2) {
-            throw new LifelineException("You did not specify an integer! Please use done <number>");
+            throw new LifelineException("You did not specify an integer! Please use delete <number>");
         }
         try {
             int taskIndex = Integer.parseInt(commands[1]) - 1;
@@ -116,7 +119,7 @@ public class CommandHandler {
             ui.showTaskList(taskList);
             storage.save(taskList);
         } catch (NumberFormatException e) {
-            throw new LifelineException("Index is not an integer! Please use done <number>");
+            throw new LifelineException("Index is not an integer! Please use delete <number>");
         }
     }
 }
