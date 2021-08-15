@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     // list used to store text entered by user
-    private ArrayList<String> items = new ArrayList<>();
+    private ArrayList<Task> items = new ArrayList<>();
 
     // Lines used to indicate a block of message
     private final String HORIZONTAL_LINE_HEAD = "\t____________________________________________________________";
@@ -16,16 +16,33 @@ public class Duke {
     // Command Tags for the chat bot
     private final String EXIT_TAG = "bye";
     private final String LIST_TAG = "list";
+    private final String DONE_TAG = "done";
+
+
+    public static void main(String[] args) {
+        Duke chatBotMatthew = new Duke();
+        chatBotMatthew.start();
+    }
 
     /**
-     * Formats the message; puts the message in a block.
-     * Horizontal lines - message - Horizontal lines.
-     *
-     * @param msg The message to be printed by the chat bot.
+     * Starts the chat bot.
+     * Chat bot starts receiving commands from user and echo back the command until terminated.
      */
-    private void printFormattedMsg(String msg) {
-        String formattedMsg = String.format("%s\n\t %s%s", HORIZONTAL_LINE_HEAD, msg, HORIZONTAL_LINE_TAIL);
-        System.out.println(formattedMsg);
+    public void start() {
+        greet();
+
+        // scanner to take in user's input(s)
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        while(!input.equalsIgnoreCase(EXIT_TAG)) {
+            checkTag(input);
+            input = scanner.nextLine().trim();
+        }
+
+        // close the scanner as the bot is terminated.
+        scanner.close();
+        exit();
     }
 
     /**
@@ -53,45 +70,65 @@ public class Duke {
         // user inputs list, print the list of items added by user.
         if (msg.equalsIgnoreCase(LIST_TAG)) {
             System.out.println(HORIZONTAL_LINE_HEAD);
+            System.out.println("\t Here are the tasks in your list:");
 
             for (int i = 0; i < this.items.size(); i++) {
-                String item = String.format("\t %s. %s", (i + 1), this.items.get(i));
-                System.out.println(item);
+                Task item = this.items.get(i);
+                String formattedMsg = String.format("\t %s.%s %s", (i + 1), item.getStatusIcon(), item.getDescription());
+
+                System.out.println(formattedMsg);
             }
 
             System.out.println(HORIZONTAL_LINE_TAIL);
         }
 
+        // user completes a task
+        else if (msg.toLowerCase().contains(DONE_TAG)) {
+            String content;
+
+            try {
+                int index = getTaskId(msg);
+                Task item = this.items.get(index);
+                item.taskCompleted();
+
+                content = String.format("Nice! I've marked this task as done:\n\t  %s %s", item.getStatusIcon(), item.getDescription());
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                content = String.format(" Invalid input: %s", e.getMessage());
+            }
+
+            printFormattedMsg(content);
+        }
+
         // add items to the list.
         else {
-            this.items.add(msg);
+            this.items.add(new Task(msg, false));
             printFormattedMsg("added: " + msg);
         }
     }
 
     /**
-     * Starts the chat bot.
-     * Chat bot starts receiving commands from user and echo back the command until terminated.
+     * Returns the id of the task that has been completed.
+     *
+     * @param msg Input of user
+     * @return An integer indicating the id of the task that has been completed.
+     * @throws IndexOutOfBoundsException Invalid id enter.
+     * @throws NumberFormatException Invalid id enter.
      */
-    public void start() {
-        greet();
+    private int getTaskId(String msg) throws IndexOutOfBoundsException, NumberFormatException {
+        int position = msg.indexOf(" ");
+        int index = Integer.parseInt(msg.substring(position + 1)) - 1;
 
-        // scanner to take in user's input(s)
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine().trim();
-
-        while(!input.equalsIgnoreCase(EXIT_TAG)) {
-            checkTag(input);
-            input = scanner.nextLine().trim();
-        }
-
-        // close the scanner as the bot is terminated.
-        scanner.close();
-        exit();
+        return index;
     }
 
-    public static void main(String[] args) {
-        Duke chatBotMatthew = new Duke();
-        chatBotMatthew.start();
+    /**
+     * Formats the message; puts the message in a block.
+     * Horizontal lines - message - Horizontal lines.
+     *
+     * @param msg The message to be printed by the chat bot.
+     */
+    private void printFormattedMsg(String msg) {
+        String formattedMsg = String.format("%s\n\t %s%s", HORIZONTAL_LINE_HEAD, msg, HORIZONTAL_LINE_TAIL);
+        System.out.println(formattedMsg);
     }
 }
