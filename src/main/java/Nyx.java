@@ -74,6 +74,16 @@ public class Nyx {
                     taskList.add(task);
                     System.out.printf("\tGot it. I've added this task:%n\t  %s%n", task);
                     System.out.printf("\tNow you have %d tasks in the list.%n", taskList.size());
+                } else if (command.equals("delete")){
+                    if (taskList.size() == 0) {
+                        System.out.println("\tThere are no tasks currently!");
+                    } else {
+                        int index = Integer.parseInt(info) - 1;
+                        Task task = taskList.get(index);
+                        taskList.remove(index);
+                        System.out.printf("\tNoted! I've removed this task:%n\t  %s%n", task);
+                        System.out.printf("\tNow you have %d tasks in the list.%n", taskList.size());
+                    }
                 } else {
                     throw new NyxException("I dont understand this command... Please try again.");
                 }
