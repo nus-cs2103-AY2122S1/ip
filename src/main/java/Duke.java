@@ -1,9 +1,10 @@
 import java.util.*;
+
 public class Duke {
     public static void main(String[] args) {
         displayLogo();
         greet();
-        echo();
+        addToList();
     }
 
     public static void displayLogo() {
@@ -30,6 +31,30 @@ public class Duke {
                 break;
             }
             System.out.println(str);
+        }
+    }
+
+    public static void addToList() {
+        Scanner sc = new Scanner(System.in);
+        List<String> strList = new ArrayList<String>();
+        while(true) {
+            String str = sc.nextLine();
+
+            if (str.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            }
+            else if (str.equals("list")) {
+                int count = 1;
+                for (String listItem : strList) {
+                    System.out.println(count + ". " + listItem);
+                    count++;
+                }
+            }
+            else {
+                strList.add(str);
+                System.out.println("added: " + str);
+            }
         }
     }
 }
