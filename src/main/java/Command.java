@@ -15,7 +15,7 @@ public class Command {
         System.out.println("Hello from\n" + logo);
 
         System.out.println("Hello! I'm Du, your personal assistant chatbot!:)\n"
-                + "What can I do for you?");
+                + "Please input the tasks you want to add to your list");
     }
 
     /**
@@ -34,7 +34,7 @@ public class Command {
      */
     public static void close_programme() {
         System.out.println("____________________________________________________________\n"
-                + "Bye. Hope to see you again soon!" + "\n"
+                + "Bye. Hope to not see you again:P" + "\n"
                 + "____________________________________________________________");
     }
 

@@ -49,6 +49,15 @@ public class Task {
         complete_task.finish_task();
     }
 
+    public static void remove_task(int order) {
+        System.out.println("____________________________________________________________\n"
+                + "Okies, I have removed this task: \n"
+                + list_of_tasks.get(order - 1) + "\n"
+                + "Now you have " + (list_of_tasks.size() - 1) + " task(s) in the list.\n"
+                + "____________________________________________________________");
+        list_of_tasks.remove(order - 1);
+    }
+
     /**
      * print list of task
      */

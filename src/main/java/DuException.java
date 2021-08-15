@@ -1,2 +1,7 @@
-package PACKAGE_NAME;public class DuException {
+public class DuException extends Exception {
+
+    public DuException(String message) {
+        super(message);
+    }
 }
+
