@@ -3,7 +3,7 @@
  * It stores Tasks as a list.
  */
 public class Tasklist {
-    private Task[] list;
+    private final Task[] list;
     private int numTasks;
 
     public Tasklist() {
@@ -21,9 +21,9 @@ public class Tasklist {
 
     public void addTask(String line, String type) { // adds new task to taskList
         Task newTask;
-        if (type == "T") {
+        if (type.equals("T")) {
             newTask = new Todo(line);
-        } else if (type == "D") {
+        } else if (type.equals("D")) {
             String[] temp = line.split(" /by ");
             newTask = new Deadline(temp[0], temp[1]);
         } else { // later on need to add else if (type == "E"), else portion for validation
@@ -43,11 +43,11 @@ public class Tasklist {
     }
 
     public String toString() { // displays the list
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < numTasks; i++) {
-            result += i + 1 + ". " + list[i] + "\n";
+            result.append(i + 1).append(". ").append(list[i]).append("\n");
         }
-        return result;
+        return result.toString();
     }
 
 }
