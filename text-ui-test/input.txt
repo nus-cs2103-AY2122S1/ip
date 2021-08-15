@@ -1,0 +1,23 @@
+list
+todo
+todo Visit new theme park
+list
+deadline
+deadline Submit report
+deadline Submit report /by
+deadline Submit report /by 3pm
+list
+event
+event Meeting with boss
+event Meeting with boss /at
+event Meeting with boss /at 2pm
+list
+done
+done x
+done 0
+list
+done 1
+list
+done 1
+list
+bye

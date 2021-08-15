@@ -99,9 +99,9 @@ public class Duke {
      */
     private void addTask(Task task) {
         taskList.add(task);
-        printMessage("Got it. I've added this task: ",
+        printMessage("Got it. I've added this task:",
                 task.toString(),
-                String.format("Now you have %o task", taskList.size()));
+                String.format("Now you have %o task(s).", taskList.size()));
     }
 
     /**
@@ -161,7 +161,7 @@ public class Duke {
         if (success)
             printMessage("Nice! I've did mark this task as done:", task.toString());
         else
-            printMessage("Ugh! This task was already done: ", task.toString());
+            printMessage("Ugh! This task was already done:", task.toString());
     }
 
     /**
@@ -205,15 +205,16 @@ public class Duke {
      * Prints out error message if done message does not contains number.
      */
     private void doneErrorMessage() {
-        printMessage("Ugh! The command should be in this format: ",
-                "done <number>");
+        printMessage("Ugh! The command should be in this format:",
+                "done <number>",
+                "Note: number is based on the number from command 'list'");
     }
 
     /**
      * Prints out error message if todo message does not contains description.
      */
     private void todoErrorMessage() {
-        printMessage("Ugh! The command should be in this format: ",
+        printMessage("Ugh! The command should be in this format:",
                 "todo <description>");
     }
 
@@ -221,7 +222,7 @@ public class Duke {
      * Prints out error message if deadline message does not contains /by.
      */
     private void deadlineErrorMessage() {
-        printMessage("Ugh! The command should be in this format: ",
+        printMessage("Ugh! The command should be in this format:",
                 "deadline <description> /by <date/time>");
     }
 
@@ -230,8 +231,8 @@ public class Duke {
      * Prints out error message if event message does not contains /at.
      */
     private void eventErrorMessage() {
-        printMessage("Ugh! The command should be in this format: ",
-               "event <description> /at <date/time> ");
+        printMessage("Ugh! The command should be in this format:",
+               "event <description> /at <date/time>");
     }
 
     /**
