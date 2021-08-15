@@ -1,3 +1,5 @@
+package me.yukun99.ip;
+
 public class Main {
 	// Fancy name for my instance of help bot
 	private static final String LOGO = " ____        _     \n"

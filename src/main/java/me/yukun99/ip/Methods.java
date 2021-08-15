@@ -1,3 +1,5 @@
+package me.yukun99.ip;
+
 /**
  * Class containing helpful static methods for various uses around the program.
  */
