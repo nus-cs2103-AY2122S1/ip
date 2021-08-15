@@ -5,19 +5,19 @@ public enum DukeCommand implements DukeCommandAction {
     HELP("help",
             "Display all commands, or detailed info of given command",
             new DukeCommandConfig(new DukeCommandArgument("command_name", "The name of the command to view help for", DukeCommandArgumentType.OPTIONAL), Map.of()),
-            (Duke duke, String arg, Map<String, String> namedArgs) -> {
+            (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
                 if (arg.isEmpty()) {
-                    duke.output("ALL COMMANDS:");
+                    ui.outputLine("ALL COMMANDS:");
                     Arrays.stream(DukeCommand.values())
                             .sorted(Comparator.comparing(DukeCommand::getName))
                             .map(DukeCommand::toString)
-                            .forEach(duke::output);
+                            .forEach(ui::outputLine);
                 } else {
                     Optional<DukeCommand> command = getClosestMatch(arg);
                     if (command.isEmpty()) {
                         throw new InvalidCommandException(String.format("No command named \"%s\".", arg));
                     } else {
-                        duke.output(command.get().toDetailedString());
+                        ui.outputLine(command.get().toDetailedString());
                     }
                 }
                 return true;
@@ -25,9 +25,9 @@ public enum DukeCommand implements DukeCommandAction {
     LIST_TASKS("list",
             "List all tasks",
             DukeCommandConfig.NO_ARGUMENTS,
-            (Duke duke, String arg, Map<String, String> namedArgs) -> {
-                duke.output(String.format("You have %d %s.", duke.getTaskList().size(), duke.getTaskList().size() == 1 ? "task" : "tasks"));
-                duke.getTaskList().stream()
+            (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
+                ui.outputLine(String.format("You have %d %s.", taskList.size(), taskList.size() == 1 ? "task" : "tasks"));
+                taskList.getTasks().stream()
                         .collect(Collectors.groupingBy(t -> {
                             if (t instanceof DukeEvent) {
                                 return "Events";
@@ -38,12 +38,12 @@ public enum DukeCommand implements DukeCommandAction {
                             }
                         }))
                         .forEach((String group, List<DukeTask> tasks) -> {
-                            duke.output(group);
-                            for (DukeTask task : tasks) {
-                                int index = duke.getTaskList().indexOf(task);
-                                duke.output(String.format("%d. %s", index + 1, task));
+                            ui.outputLine(group);
+                            for (DukeTask task: tasks) {
+                                int index = taskList.indexOf(task);
+                                ui.outputLine(String.format("%d. %s", index + 1, task));
                             }
-                            duke.output("");
+                            ui.outputLine("");
                         });
                 return true;
             }),
@@ -52,7 +52,7 @@ public enum DukeCommand implements DukeCommandAction {
             new DukeCommandConfig(new DukeCommandArgument("task", "The name of the task", DukeCommandArgumentType.REQUIRED),
                     Map.of("by", new DukeCommandArgument("deadline", "The deadline of the task", DukeCommandArgumentType.OPTIONAL),
                             "at", new DukeCommandArgument("date", "The date of the event", DukeCommandArgumentType.OPTIONAL))),
-            (Duke duke, String arg, Map<String, String> namedArgs) -> {
+            (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
                 DukeTask task;
                 if (namedArgs.containsKey("by") && namedArgs.containsKey("at")) {
                     throw new InvalidCommandException("Task cannot be added with both a deadline and a date.");
@@ -63,35 +63,38 @@ public enum DukeCommand implements DukeCommandAction {
                 } else {
                     task = new DukeSimpleTask(arg);
                 }
-                duke.addTask(task);
-                duke.output(String.format("Task added with title: %s", arg));
+                taskList.addTask(task);
+                storage.saveTaskList(taskList);
+                ui.outputLine(String.format("Task added with title: %s", arg));
                 return true;
             }),
     DELETE_TASK("delete",
             "Delete a task",
             new DukeCommandConfig(new DukeCommandArgument("index", "The position of the task in the list", DukeCommandArgumentType.REQUIRED), Map.of()),
-            (Duke duke, String arg, Map<String, String> namedArgs) -> {
-                DukeTask task = duke.removeTaskAt(parseTaskIndex(duke, arg));
-                duke.output("I've removed the following task.");
-                duke.output(task.toString());
+            (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
+                DukeTask task = taskList.removeTaskAt(parseTaskIndex(taskList, arg));
+                storage.saveTaskList(taskList);
+                ui.outputLine("I've removed the following task.");
+                ui.outputLine(task.toString());
                 return true;
             }),
     EXIT("bye",
             "Exit Duke",
             DukeCommandConfig.NO_ARGUMENTS,
-            (Duke duke, String arg, Map<String, String> namedArgs) -> false),
+            (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> false),
     MARK_DONE("done",
             "Mark the task as done",
             new DukeCommandConfig(new DukeCommandArgument("index", "The position of the task in the list", DukeCommandArgumentType.REQUIRED), Map.of()),
-            (Duke duke, String arg, Map<String, String> namedArgs) -> {
-                int index = parseTaskIndex(duke, arg);
-                DukeTask task = duke.markTaskAsDoneAt(index);
-                if (duke.isTaskDoneAt(index)) {
-                    duke.output("The following task is already marked as done! Good job!");
+            (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
+                DukeTask task = taskList.getTaskAt(parseTaskIndex(taskList, arg));
+                if (task.isDone) {
+                    ui.outputLine("The following task is already marked as done! Good job!");
                 } else {
-                    duke.output("I've marked the following task as done!");
+                    task.markAsDone();
+                    storage.saveTaskList(taskList);
+                    ui.outputLine("I've marked the following task as done!");
                 }
-                duke.output(task.toString());
+                ui.outputLine(task.toString());
                 return true;
             });
 
@@ -157,9 +160,9 @@ public enum DukeCommand implements DukeCommandAction {
     }
 
     @Override
-    public boolean apply(Duke duke, String arg, Map<String, String> namedArgs) throws InvalidCommandException {
+    public boolean apply(TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) throws InvalidCommandException {
         config.assertCompatibilityWith(arg, namedArgs);
-        return action.apply(duke, arg, namedArgs);
+        return action.apply(taskList, ui, storage, arg, namedArgs);
     }
 
     @Override
@@ -171,11 +174,11 @@ public enum DukeCommand implements DukeCommandAction {
      * Returns the given argument parsed as an integer representing an index in the task list.
      * Used by {@link DukeCommand#DELETE_TASK} and {@link DukeCommand#MARK_DONE}.
      *
-     * @param duke The duke object containing the task list.
+     * @param taskList The list of tasks.
      * @param arg  The argument to parse as an index.
      * @throws InvalidCommandException If the given index is invalid.
      */
-    private static int parseTaskIndex(Duke duke, String arg) throws InvalidCommandException {
+    private static int parseTaskIndex(TaskList taskList, String arg) throws InvalidCommandException {
         int index;
         try {
             index = Integer.parseInt(arg);
@@ -184,8 +187,8 @@ public enum DukeCommand implements DukeCommandAction {
         }
         if (index < 1) {
             throw new InvalidCommandException("Index must be at least 1.");
-        } else if (duke.getTaskList().size() < index) {
-            int listSize = duke.getTaskList().size();
+        } else if (taskList.size() < index) {
+            int listSize = taskList.size();
             String listSizeMessage = listSize == 0 ? "task list is empty" : String.format("list only has %d %s", listSize, listSize == 1 ? "task" : "tasks");
             throw new InvalidCommandException(String.format("Cannot access task %d; %s.", index, listSizeMessage));
         }

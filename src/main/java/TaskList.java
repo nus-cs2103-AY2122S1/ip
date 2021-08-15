@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class TaskList {
@@ -12,7 +13,7 @@ public class TaskList {
         this.list = list;
     }
 
-    public Iterable<DukeTask> getTasks() {
+    public Collection<DukeTask> getTasks() {
         return this.list;
     }
 
@@ -27,4 +28,12 @@ public class TaskList {
     public void addTask(DukeTask task) {
         list.add(task);
     }
+
+    public int indexOf(DukeTask task) {
+        return list.indexOf(task);
+    }
+
+    public int size() {
+        return list.size();
+    };
 }
