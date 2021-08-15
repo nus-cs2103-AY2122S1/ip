@@ -8,8 +8,8 @@ public class Deadline extends Task {
      * @param endDate The endDate
      */
     public Deadline(String description, String endDate) {
-        super(description);
-        this.endDate = endDate;
+        super(description.trim() + " ");
+        this.endDate = endDate.trim();
     }
 
     /**
@@ -18,6 +18,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + this.endDate + ")";
+        return "[D]" + super.toString() + "(by: " + this.endDate + ")";
     }
 }

@@ -15,14 +15,14 @@ public class Petal {
                                                 + "-------------------------------------"
                                                 + "-------------------------------------";
     //The list which stores the user's message
-    private final List<Task> history;
+    private final List<Task> tasks;
 
     /**
      * Constructor for the Duke class
      */
     public Petal() {
         bye = false;
-        history = new ArrayList<>();
+        tasks = new ArrayList<>();
         startMessage();
     }
 
@@ -41,9 +41,11 @@ public class Petal {
      * @param message Message initially written by user
      */
     public void formatMessage(String message) {
+        //Allows user to type in upper case and removes leading/trailing whitespaces
+        message = message.trim().toLowerCase();
         String[] msg = message.split(" ");
         try {
-            switch (msg[0]) {
+            switch (msg[0]) { //Checks first word in string
                 case "list":
                     printList();
                     break;
@@ -54,10 +56,12 @@ public class Petal {
                     markTaskAsDone(message);
                     break;
                 case "delete":
+                    if (msg.length < 2) //No index was given by the user
+                        throw new InvalidInputException("Invalid task number given! Please enter another value!\n");
                     deleteTask(msg[1]);
                     break;
-                default:
-                    handleTask(message);
+                default: //tasks end up here, as well as unintelligible messages
+                    handleRemaining(message);
                     break;
             }
         } catch (EmptyDescException | InvalidInputException | IndexOutOfBoundsException | NumberFormatException e1)  {
@@ -69,28 +73,17 @@ public class Petal {
     }
 
     /**
-     * Method which help to displayed the required format
+     * Method which helps to display the required format
      */
     public void requiredFormat() {
         String todo = "Use 'todo <insert activity>' to create a to-do!";
         String deadline = "\nUse 'deadline <insert activity> /by <insert deadline>' "
-                            + "to create an activity with a deadline!";
+                + "to create an activity with a deadline!";
         String event = "\nUse 'event <insert activity> /at <insert start/end time>' "
-                            + "to create an activity with a start/end time!";
-        String delete = "\n Use 'delete <insert task number> to delete a task!";
+                + "to create an activity with a start/end time!";
+        String delete = "\nUse 'delete <insert task number> to delete a task!";
         String done = "\nUse 'done <insert task number>' to mark task as done!\n";
-        System.out.println(todo + deadline + event + done + indentation);
-    }
-
-    public ArrayList<String> arrayWithoutWhiteSpaces(String string) {
-        String[] partition = string.split(" ");
-        ArrayList<String> result = new ArrayList<>();
-        for (String s : partition) {
-            if (!s.equals(" ")) {
-                result.add(s);
-            }
-        }
-        return result;
+        System.out.println(todo + deadline + event + delete + done + indentation);
     }
 
     /**
@@ -98,44 +91,54 @@ public class Petal {
      * @param message The messaged to be handled
      * @throws PetalException Thrown if input is incorrect
      */
-    public void handleTask(String message) throws PetalException {
+    public void handleRemaining(String message) throws PetalException {
         Task task;
         String[] typeOfTask = message.split(" ");
         String desc = message.substring(message.indexOf(" ") + 1);
+        //Checks if the phrase contains a valid command
         boolean isValidInput = typeOfTask[0].equals("todo") || typeOfTask[0].equals("deadline")
-                                                            || typeOfTask[0].equals("event");
+                || typeOfTask[0].equals("event");
         if (!isValidInput) {
             throw new InvalidInputException("I did not understand what you said :(\n");
         }
+        //Checks if there is a valid desc
         boolean descNotAvail = typeOfTask.length < 2 || typeOfTask[1].equals("/at")
-                                                     || typeOfTask[1].equals("/by");
+                || typeOfTask[1].equals("/by");
         if (descNotAvail) {
             throw new EmptyDescException("It seems like there was no description"
-                                          + "! Please enter a description.\n");
+                    + "! Please enter a description.\n");
         }
-        switch (typeOfTask[0]) {
+        switch (typeOfTask[0]) { //The only possible types are tod.o, deadline, and event
             case "todo":
                 task = new ToDo(desc);
                 break;
             case "deadline":
                 String[] desc1 = desc.split("/by");
-                if (desc1.length == 1) {
+                if (desc1.length == 1) { //Checking if time/desc is given
                     throw new InvalidInputException("Wrong format was used! Please try again.\n");
                 }
                 task = new Deadline(desc1[0], desc1[1]);
                 break;
-            default:
+            default: //for "event"
                 String[] desc2 = desc.split("/at");
-                if (desc2.length == 1) {
+                if (desc2.length == 1) { //Checking if time/desc is given
                     throw new InvalidInputException("Wrong format was used! Please try again.\n");
                 }
                 task = new Event(desc2[0], desc2[1]);
         }
+        addTask(task);
+    }
+
+    /**
+     * Method to add a task to history
+     * @param task The task to be added
+     */
+    public void addTask(Task task) {
         System.out.println(indentation + "\nGot it. I've added this task.");
-        history.add(task);
+        tasks.add(task);
         System.out.println(task);
-        System.out.println("There are now " + history.size() + " task(s) in your list!\n"
-                                                             + indentation);
+        System.out.println("There are now " + tasks.size() + " task(s) in your list!\n"
+                + indentation);
     }
 
     /**
@@ -146,12 +149,12 @@ public class Petal {
         int indexOfTask;
         try {
             indexOfTask = Integer.parseInt(index) - 1;
-            Task toBeDeleted = history.get(indexOfTask);
-            history.remove(indexOfTask);
+            Task toBeDeleted = tasks.get(indexOfTask);
+            tasks.remove(indexOfTask);
             System.out.println(indentation +"\nOkay. I've deleted this task:\n"
-                                           + toBeDeleted
-                                           + "\nYou now have " + history.size() + " task(s)!\n"
-                                           + indentation);
+                    + toBeDeleted
+                    + "\nYou now have " + tasks.size() + " task(s)!\n"
+                    + indentation);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new NumberFormatException("Invalid task number given! Please enter another value!");
         }
@@ -163,30 +166,33 @@ public class Petal {
     public void goodBye() {
         bye = true;
         System.out.println(indentation + "\nYou're leaving :( I hope you return soon!\n"
-                                       + indentation);
+                + indentation);
     }
 
     /**
      * Method that prints list
      */
-    public void printList() {
+    public void printList() throws InvalidInputException {
+        //If the list is empty
+        if (tasks.size() == 0)
+            throw new InvalidInputException("No items in list yet!\n");
         int count = 1;
         System.out.println(indentation);
-        for (Task m : history) {
+        for (Task m : tasks) {
             System.out.println(count++ + ". " + m);
         }
         System.out.println(indentation);
     }
 
     /**
-     * Method to mark the task as done //TODO: what if blank string
+     * Method to mark the task as done
      * @param message The -ith task to be marked as done
      */
     public void markTaskAsDone(String message) throws IndexOutOfBoundsException,
-                                                      NumberFormatException {
+            NumberFormatException {
         try {
             String indexOfTask = message.split(" ")[1];
-            Task taskToBeCompleted = history.get(Integer.parseInt(indexOfTask) - 1);
+            Task taskToBeCompleted = tasks.get(Integer.parseInt(indexOfTask) - 1);
             taskToBeCompleted.taskDone();
         } catch (IndexOutOfBoundsException e1) { //Parsed string is not within size of history
             throw new IndexOutOfBoundsException("That was an invalid index! Please try again!\n");
@@ -204,9 +210,6 @@ public class Petal {
     }
 
     public static void main(String[] args) {
-        String s = "apple";
-        String[] example = s.split(" ");
-        System.out.println(example.length);
         Petal petal = new Petal();
         Scanner scanner = new Scanner(System.in);
         while(!petal.isBye()) {

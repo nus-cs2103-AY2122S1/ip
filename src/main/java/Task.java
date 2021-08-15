@@ -2,7 +2,7 @@
  * The Task class that encapsulates a directive given
  * by the user to track a certain activity
  */
-public class Task {
+public abstract class Task {
 
     //The description of the task
     protected String description;

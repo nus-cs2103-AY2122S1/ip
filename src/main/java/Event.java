@@ -9,8 +9,8 @@ public class Event extends Task {
      * @param startTime The start time of the event
      */
     public Event(String description, String startTime) {
-        super(description);
-        this.startTime = startTime;
+        super(description.trim() + " ");
+        this.startTime = startTime.trim();
     }
 
     /**
@@ -19,6 +19,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + startTime + ")";
+        return "[E]" + super.toString() + "(at: " + startTime + ")";
     }
 }
