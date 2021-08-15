@@ -1,29 +1,30 @@
 import java.util.Scanner;
 
 public class Duke {
-    static private String[] myList = new String[100];
+    static private Task[] myList = new Task[100];
     static private int index = 0;
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
+        System.out.println("hi sis, type out your task right away! :D");
+
         while (true) {
             Scanner sc = new Scanner(System.in);
             String text = sc.nextLine();
             if (text.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("ciao!");
                 break;
             } else if (text.equals("list")) {
                 for (int i = 0; i < index; i++) {
-                    System.out.printf("%s. %s\n", i + 1, myList[i]);
+                    Task curr = myList[i];
+                    System.out.printf("%s.[%s] %s\n", i + 1, curr.getStatusIcon(), curr.description);
                 }
+            } else if (text.contains("done")){
+                int index = Integer.parseInt(text.split(" ")[1]) - 1;
+                Task curr = myList[index];
+                curr.setDone();
+                System.out.printf("[%s] %s\n", curr.getStatusIcon(), curr.description);
             } else {
-                myList[index] = text;
+                myList[index] = new Task(text);
                 index++;
                 System.out.println("added: " + text);
             }
