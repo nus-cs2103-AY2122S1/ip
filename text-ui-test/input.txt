@@ -1,0 +1,14 @@
+todo bake cake
+todo make cheese
+todo Ask Annie out for date
+done 3
+event Date with Annie /at 30/08/2021 6pm
+deadline project 1 /by saturday
+event mooncake festival /at sunday 1pm
+done 1
+event Annie's birthday party /at 01/26/2022 5pm
+done 2
+list
+done 4
+list
+bye
