@@ -3,7 +3,7 @@ package me.yukun99.ip;
 // Exceptions
 
 import me.yukun99.ip.exceptions.HelpBotIllegalArgumentException;
-import me.yukun99.ip.exceptions.HelpBotIllegalCommandException;
+import me.yukun99.ip.exceptions.HelpBotInvalidCommandException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
 
@@ -44,8 +44,11 @@ public class HelpBot {
 		HelpBot.reply("Good riddance...");
 	}
 
+	/**
+	 * Method called to send user instructions and bot information on startup.
+	 */
 	private void onEnableMessage() {
-		String message = "Oh great, you again! I'm \n"
+		String message = "Oh great, you again... Name's \n"
 				+ name
 				+ "\nHere is the myriad of ways you can inconvenience me:"
 				+ "\n  > 'list' - view all your tasks"
@@ -70,7 +73,7 @@ public class HelpBot {
 				}
 			} catch (HelpBotIllegalArgumentException e) {
 				HelpBot.reply("You didn't give me a task to add!\n" + e);
-			} catch (HelpBotIllegalCommandException e) {
+			} catch (HelpBotInvalidCommandException e) {
 				HelpBot.reply("I literally TOLD you what you can do!\n" + e);
 			}
 		}
@@ -81,8 +84,9 @@ public class HelpBot {
 	 *
 	 * @param task Task to be added to the task list.
 	 * @param type Type of task to be added to the task list.
+	 * @throws HelpBotInvalidTaskTypeException If type of task specified is invalid.
 	 */
-	private void addTask(String[] task, Task.TaskType type) throws IllegalStateException {
+	private void addTask(String[] task, Task.TaskType type) throws HelpBotInvalidTaskTypeException {
 		Task added;
 		switch (type) {
 		case TODO:
@@ -95,12 +99,12 @@ public class HelpBot {
 			added = new Deadline(task[0], task[1]);
 			break;
 		default:
-			throw new IllegalStateException("Unexpected value: " + type);
+			throw new HelpBotInvalidTaskTypeException(type);
 		}
 		Task.tasks.add(added);
 		String reply = "Urgh, fine. Your task has been added:\n"
 				+ added + "\n"
-				+ getTaskAmount();
+				+ Task.getTaskAmount();
 		HelpBot.reply(reply);
 	}
 
@@ -108,6 +112,7 @@ public class HelpBot {
 	 * Tries to get a task from the current message and mark it as done.
 	 *
 	 * @param current Current message sent by the user.
+	 * @throws HelpBotInvalidTaskException If task index in current message is invalid.
 	 */
 	private void setDone(String current) throws HelpBotInvalidTaskException {
 		String task = current.replace("done ", "");
@@ -133,19 +138,15 @@ public class HelpBot {
 	}
 
 	/**
-	 * Gets the message to reply for the current number of tasks.
-	 *
-	 * @return Message to reply for the current number of tasks.
-	 */
-	private String getTaskAmount() {
-		return "You now have " + Task.tasks.size() + " tasks to do.";
-	}
-
-	/**
 	 * Method to list all added tasks in the task list.
 	 */
 	private void listAllTasks() {
 		StringBuilder message = new StringBuilder("Oh. My. God. Fine. Here are your tasks:");
+		if (Task.tasks.size() == 0) {
+			message
+					.append("\n  Oh I'm sorry, were you expecting ME to make you a todo list, you lazy sod?")
+					.append("\n  Do it yourself, idiot.");
+		}
 		for (int i = 0; i < Task.tasks.size(); ++i) {
 			message.append("\n ").append(i + 1).append(".").append(Task.tasks.get(i));
 		}
@@ -168,8 +169,10 @@ public class HelpBot {
 	 *
 	 * @param message Message sent by the user.
 	 * @return Whether to exit the program.
+	 * @throws HelpBotIllegalArgumentException If task to be added is not specified in message.
+	 * @throws HelpBotInvalidCommandException  If command specified in message is not valid.
 	 */
-	private boolean runCommand(String message) throws HelpBotIllegalArgumentException, HelpBotIllegalCommandException {
+	private boolean runCommand(String message) throws HelpBotIllegalArgumentException, HelpBotInvalidCommandException {
 		// Mark task as done command
 		if (message.startsWith("done ")) {
 			try {
@@ -206,6 +209,11 @@ public class HelpBot {
 			}
 			return false;
 		}
+		// Delete task command
+		if (message.startsWith("delete ")) {
+			Task.deleteTask(message.replace("delete ", ""));
+			return false;
+		}
 		switch (message) {
 		// List all tasks command
 		case "list":
@@ -216,9 +224,15 @@ public class HelpBot {
 			onDisable();
 			return true;
 		}
-		throw new HelpBotIllegalCommandException(message);
+		throw new HelpBotInvalidCommandException(message);
 	}
 
+	/**
+	 * Gets the type of task from the message sent by the user.
+	 *
+	 * @param message Message sent by the user.
+	 * @return Type of task from the message.
+	 */
 	private Task.TaskType getTaskType(String message) {
 		return Task.TaskType.valueOf(message.split(" ")[0].toUpperCase());
 	}
@@ -227,6 +241,7 @@ public class HelpBot {
 	 * Parses the message sent by the user for a task to be added.
 	 *
 	 * @param message Message sent by the user.
+	 * @throws HelpBotIllegalArgumentException If time for deadline/event task is not specified.
 	 */
 	private void parseTask(String message, Task.TaskType type) throws HelpBotIllegalArgumentException {
 		String[] result = new String[1];
@@ -251,6 +266,13 @@ public class HelpBot {
 			}
 			break;
 		}
-		addTask(result, type);
+		try {
+			addTask(result, type);
+		} catch (HelpBotInvalidTaskTypeException e) {
+			String reply = "My programmer is SUCH an IDIOT! This is not your fault, user."
+					+ "\nPlease show this to him and tell him that he's an idiot:\n";
+			reply += e.toString();
+			HelpBot.reply(reply);
+		}
 	}
 }

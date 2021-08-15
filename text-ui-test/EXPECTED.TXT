@@ -1,5 +1,5 @@
 ____________________________________________________________
-Oh great, you again! I'm 
+Oh great, you again... Name's 
  ____        _     
 |  _ \      | |    
 | |_) | ___ | |__  
@@ -14,6 +14,11 @@ Here is the myriad of ways you can inconvenience me:
   > 'event (task) /at (date/time)' - add a task with a specified date/time
   > 'update (index) /to (date/time)' - change a task to happen at a new date/time
   > 'bye' - (please for the love of God) let me rest! :)
+____________________________________________________________
+____________________________________________________________
+Oh. My. God. Fine. Here are your tasks:
+  Oh I'm sorry, were you expecting ME to make you a todo list, you lazy sod?
+  Do it yourself, idiot.
 ____________________________________________________________
 ____________________________________________________________
 Urgh, fine. Your task has been added:
@@ -90,7 +95,7 @@ ____________________________________________________________
 Hello, do you know what a number is?
 Exception in Help Bot:
 The following argument is invalid: update, caused by:
-'asd' does not correspond to a valid task, caused by:
+Index 'asd' does not correspond to a valid task, caused by:
 java.lang.NumberFormatException: For input string: "asd"
 ____________________________________________________________
 ____________________________________________________________
@@ -104,15 +109,32 @@ Oh. My. God. Fine. Here are your tasks:
  3. [T][ ] dig up some bodies
 ____________________________________________________________
 ____________________________________________________________
+Can't you just keep track of this yourself? Fine, removed this for you:
+ [E][X] eat lunch (at: 1pm)
+You now have 2 tasks to do.
+____________________________________________________________
+____________________________________________________________
+Oh. My. God. Fine. Here are your tasks:
+ 1. [D][ ] eat dinner (by: 7pm)
+ 2. [T][ ] dig up some bodies
+____________________________________________________________
+____________________________________________________________
+Oh, procrastinating now are we? Sure, removed this:
+ [D][ ] eat dinner (by: 7pm)
+You now have 1 tasks to do.
+____________________________________________________________
+____________________________________________________________
+Oh. My. God. Fine. Here are your tasks:
+ 1. [T][ ] dig up some bodies
+____________________________________________________________
+____________________________________________________________
 I literally TOLD you what you can do!
 Exception in Help Bot:
 The following is not a command: update windows
 ____________________________________________________________
 ____________________________________________________________
 Oh. My. God. Fine. Here are your tasks:
- 1. [E][X] eat lunch (at: 1pm)
- 2. [D][ ] eat dinner (by: 7pm)
- 3. [T][ ] dig up some bodies
+ 1. [T][ ] dig up some bodies
 ____________________________________________________________
 ____________________________________________________________
 Good riddance...
