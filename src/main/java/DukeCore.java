@@ -9,6 +9,7 @@ public class DukeCore {
             + "     |____/ \\__,_|_|\\_\\___|\n";
     static String divider = "    ____________________________________________________________";
     static String space = "     ";
+    static String INVALID_INPUT = space + "Invalid input. Please follow the given format!";
 
     private final Scanner scanner;
     private final TaskList taskList;
@@ -38,16 +39,36 @@ public class DukeCore {
             return false;
         } else if (input.equals("list")) {
             listTasks();
+        } else if (input.startsWith("todo ")) {
+            String description = parseTodo(input);
+            if (description != null) {
+                addTask(new Todo(description));
+            } else {
+                displayText(INVALID_INPUT);
+            }
+        } else if (input.startsWith("deadline ")) {
+            String[] taskDetails = parseDeadline(input);
+            if (taskDetails != null) {
+                addTask(new Deadline(taskDetails[0], taskDetails[1]));
+            } else {
+                displayText(INVALID_INPUT);
+            }
+        } else if (input.startsWith("event ")) {
+            String[] taskDetails = parseEvent(input);
+            if (taskDetails != null) {
+                addTask(new Event(taskDetails[0], taskDetails[1]));
+            } else {
+                displayText(INVALID_INPUT);
+            }
         } else if (input.length() >= 6 && input.startsWith("done ")) {
             if (isValidNum(input.substring(5))) {
                 doneTask(Integer.parseInt(input.substring(5)));
             } else {
-                this.addTask(new Task(input));
+                displayText(INVALID_INPUT);
             }
         } else {
-            this.addTask(new Task(input));
+            displayText(INVALID_INPUT);
         }
-
         return true;
     }
 
@@ -60,9 +81,65 @@ public class DukeCore {
         return true;
     }
 
+    public String parseTodo(String s) {
+        String temp = s.substring(5);
+        temp = temp.trim();
+        return temp.equals("") ? null : temp;
+    }
+
+    public String[] parseDeadline(String s) {
+        String temp = s.substring(9);
+        temp = temp.trim();
+        String description;
+        String by;
+        int m = temp.lastIndexOf("/by ");
+        if (m == -1) {
+            return null;
+        } else {
+            description = temp.substring(0, m);
+            description = description.trim();
+            if (description.equals("")) {
+                return null;
+            }
+            by = temp.substring(m);
+            by = by.substring(4);
+            by = by.trim();
+            if (by.equals("")) {
+                return null;
+            }
+        }
+        return new String[]{description, by};
+    }
+
+    public String[] parseEvent(String s) {
+        String temp = s.substring(6);
+        temp = temp.trim();
+        String description;
+        String at;
+        int m = temp.lastIndexOf("/at ");
+        if (m == -1) {
+            return null;
+        } else {
+            description = temp.substring(0, m);
+            description = description.trim();
+            if (description.equals("")) {
+                return null;
+            }
+            at = temp.substring(m);
+            at = at.substring(4);
+            at = at.trim();
+            if (at.equals("")) {
+                return null;
+            }
+        }
+        return new String[]{description, at};
+    }
+
     public void addTask(Task t) {
         if (taskList.addTask(t)) {
-            displayText(space + "added: " + t.getDescription());
+            displayText(space + "Got it. I've added this task: \n"
+                    + space + "  " + t.getDescriptionWithStatus() + "\n"
+                    + space + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.");
         } else {
             System.exit(1);
         }

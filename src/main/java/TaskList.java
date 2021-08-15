@@ -22,6 +22,10 @@ public class TaskList {
         return this.tasks;
     }
 
+    public int getNumOfTasks() {
+        return this.tasks.size();
+    }
+
     public String printList() {
         StringBuilder listAsString = new StringBuilder();
         int count = 0;
