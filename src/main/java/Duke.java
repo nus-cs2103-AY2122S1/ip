@@ -24,7 +24,7 @@ public class Duke {
             } else if (text.equals("list")) {
                 System.out.println("  Here are the tasks in your list:");
                 for (int i = 0; i < listLength; ++i) {
-                    System.out.println("  " + taskList[i].listEntry());
+                    System.out.println("  " + (i + 1) + taskList[i].listEntry());
                 }
             } else if (text.split(" ")[0].equals("done")) {
                 int toSet = Integer.parseInt(text.split(" ")[1]);

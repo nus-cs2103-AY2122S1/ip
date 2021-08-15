@@ -16,9 +16,9 @@ public class Task {
 
     public String listEntry() {
         if (done) {
-            return this.index + ".[X] " + this.taskName;
+            return ".[X] " + this.taskName;
         } else {
-            return this.index + ".[ ] " + this.taskName;
+            return ".[ ] " + this.taskName;
         }
     }
 }
