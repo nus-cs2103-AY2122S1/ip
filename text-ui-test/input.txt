@@ -1,0 +1,9 @@
+todo borrow book
+event Funfair /at Monday 6pm
+list
+deadline CS quiz /by Fri
+todo run
+list
+done 2
+list
+bye
