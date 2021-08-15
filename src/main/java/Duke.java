@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,8 +18,12 @@ public class Duke {
             if (input.equals("bye")) {
                 System.out.println(bot.getExitMessage());
                 running = false;
+            } else if (input.equals("list")) {
+                System.out.println(bot.getListMessage());
+                input = sc.nextLine();
             } else {
-                System.out.println(input);
+                String message = bot.addItems(input);
+                System.out.println(message);
                 input = sc.nextLine();
             }
         }
@@ -32,6 +37,7 @@ public class Duke {
 class ChatBot {
 
     static String line = "______________________________________\n";
+    private ArrayList<String> tasks = new ArrayList<>();
 
     public String getStartMessage() {
         return line + "Hello! I'm Duke\n" + "What can I do for you?\n" + line;
@@ -39,6 +45,20 @@ class ChatBot {
 
     public String getExitMessage() {
         return line + "bye! for now...\n" + line;
+    }
+
+    public String addItems(String input) {
+        tasks.add(input);
+        return line + "added: " + input +"\n" + line;
+    }
+
+    public String getListMessage() {
+        String listMessage = "";
+
+        for (int i = 0; i < tasks.size(); i++) {
+            listMessage = listMessage + i + ". " + tasks.get(i) + "\n";
+        }
+        return line + listMessage + line;
     }
 
 }
