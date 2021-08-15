@@ -29,6 +29,10 @@ public class Deadline extends Task {
             throw new WrongCommandFormatException(
                     "No deadline specified. Please specify a deadline after `/by`"
             );
+        } else if (this.description.equals(" ")) {
+            throw new WrongCommandFormatException(
+                    "No task specified. Please specify a task before `/by`"
+            );
         }
         this.isDone = isDone;
     }

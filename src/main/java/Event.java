@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Event extends Task {
 
-    private String description = "";
+    private String description = " ";
     private String timeframe;
     private boolean isDone;
 
@@ -28,6 +28,10 @@ public class Event extends Task {
         if (this.timeframe == null) {
             throw new WrongCommandFormatException(
                     "No timeframe specified. Please specify a timeframe after `/at`"
+            );
+        } else if (this.description.equals(" ")) {
+            throw new WrongCommandFormatException(
+                    "No task specified. Please specify a task before `/at`"
             );
         }
         this.isDone = isDone;
