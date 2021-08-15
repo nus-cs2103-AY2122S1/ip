@@ -4,6 +4,8 @@
 public class Task {
     /** Stores the task. */
     private String task;
+    /** Stores if the task is done */
+    private boolean done;
 
     /**
      * Constructor for Task.
@@ -11,6 +13,25 @@ public class Task {
      */
     Task(String task) {
         this.task = task;
+        this.done = false;
+    }
+
+    /**
+     * Marks the task as done.
+     *
+     * If task is successfully marked as done, true will be returned. If task is not successfully marked as done, fasle will be returned instead.
+     * @return if update is successful.
+     */
+    public boolean markDone() {
+        if (done)
+            return false;
+        done = true;
+        return true;
+    }
+
+    /** Checks if task is done or not */
+    public boolean isDone() {
+        return done;
     }
 
     /**
@@ -23,6 +44,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return task.toString();
+        return (done ? "[X] " : "[ ] ")+ task.toString();
     }
 }

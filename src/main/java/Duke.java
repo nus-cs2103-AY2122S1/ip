@@ -17,6 +17,8 @@ public class Duke {
     private final static String EXIT = "bye";
     /** Keyword for listing out all the task. */
     private final static String LIST = "list";
+    /** Keyword for marking task as done */
+    private final static String DONE = "done";
     /** Line separator. */
     private final static String LINEBREAK = "\t____________________________________________________________";
 
@@ -41,12 +43,19 @@ public class Duke {
 
         String message;
         while (true) {
-            message = sc.nextLine().toLowerCase();
+            message = sc.nextLine().strip();
 
             if (message.equals(EXIT))
                 break;
             else if (message.equals(LIST))
                 listTask();
+            else if (message.substring(0, DONE.length()).equals(DONE)
+                    && message.charAt(DONE.length()) == ' ')
+                try {
+                    markDone(Integer.parseInt(message.substring(DONE.length() + 1)));
+                } catch (NumberFormatException e) {
+                    printMessage("Please enter only a number after " + DONE);
+                }
             else
                 addTask(message);
         }
@@ -62,7 +71,7 @@ public class Duke {
 
     /**
      * Echos the message the user sends for level-1.
-     * @deprecated
+     * @deprecated Level-2
      * @param s Message user sent.
      */
     private void echoMessage(String s) {
@@ -76,7 +85,7 @@ public class Duke {
     private void addTask(String s) {
         Task task = new Task(s);
         taskList.add(task);
-        printMessage("added: " + task.toString());
+        printMessage("added: " + s);
     }
 
     /**
@@ -89,6 +98,19 @@ public class Duke {
                     .toArray(new String[0]);
 
         printMessage(task);
+    }
+
+    /**
+     * Mark the nth task as done.
+     * @param n the task to be mark as done.
+     */
+    private void markDone(int n) {
+        Task task = taskList.get(n - 1);
+        boolean success = task.markDone();
+        if (success)
+            printMessage("Nice! I've did mark this task as done:", task.toString());
+        else
+            printMessage("Fie! This task was already done: ", task.toString());
     }
 
     /**
