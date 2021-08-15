@@ -15,19 +15,24 @@ public class MultiType extends RespondWith {
     private final String todo = "todo";
     private final String deadline = "deadline";
     private final String event = "event";
+    private final String delete = "delete";
     private List<Task> userTasks;
 
     public MultiType() {
         userTasks = new ArrayList<>();
-        commands.put(list, (_query) -> listString());
+        commands.put(list, this::listString);
         commands.put(done, this::markDone);
         commands.put(todo, this::addTodo);
         commands.put(deadline, this::addDeadline);
         commands.put(event, this::addEvent);
+        commands.put(delete, this::deleteTask);
     }
 
-    private String listString() {
-        String result = "";
+    private String listString(String _query) {
+        if (userTasks.size() == 0) {
+            return "You're clear (for now)" + System.lineSeparator();
+        }
+        String result = "Here are the tasks in your list:" + System.lineSeparator();
 
         for (int i = 0; i < userTasks.size(); i++) {
             result += String.format("%d. %s%s", (i + 1), userTasks.get(i), System.lineSeparator());
@@ -35,21 +40,32 @@ public class MultiType extends RespondWith {
         return result;
     }
 
-    private String markDone(String query) {
-        int index = Integer.parseInt(query.split(" ")[1]) - 1;
-        Task task = userTasks.get(index);
-        task.finish();
-        return String.format("Nice! I've marked this task as done:%s\t%s%s", System.lineSeparator(), task,
-                System.lineSeparator());
+    private String markDone(String query) throws DukeException {
+        try {
+            int index = Integer.parseInt(query.substring(done.length()).strip()) - 1;
+            if (index >= userTasks.size() || index < 0) {
+                throw DukeException.createIndexOutOfBoundsException(userTasks.size(), index + 1);
+            }
+            Task task = userTasks.get(index);
+            task.finish();
+            return String.format("Nice! I've marked this task as done:%s\t%s%s", System.lineSeparator(), task,
+                    System.lineSeparator());
+        } catch (NumberFormatException e) {
+            throw new DukeException(DukeException.ExceptionCode.INCORRECT_ARGS, "Please give a number");
+        }
     }
 
-    private String formatAdd(Task t) {
+    private String formatTaskCount() {
         String s = "";
         if (userTasks.size() != 1) {
             s = "s";
         }
-        return String.format("Got it. I've added this task:%s%s%sNow you have %d task%s in the list.%s",
-                System.lineSeparator(), t, System.lineSeparator(), userTasks.size(), s, System.lineSeparator());
+        return String.format("Now you have %d task%s in the list.", userTasks.size(), s);
+    }
+
+    private String formatAdd(Task t) {
+        return String.format("Got it. I've added this task:%s%s%s%s%s", System.lineSeparator(), t,
+                System.lineSeparator(), formatTaskCount(), System.lineSeparator());
     }
 
     private String addTodo(String query) {
@@ -76,6 +92,20 @@ public class MultiType extends RespondWith {
         Task task = new Event(queries[0].strip(), queries[1].strip());
         userTasks.add(task);
         return formatAdd(task);
+    }
+
+    private String deleteTask(String query) throws DukeException {
+        try {
+            int index = Integer.parseInt(query.substring(delete.length()).strip()) - 1;
+            if (index >= userTasks.size() || index < 0) {
+                throw DukeException.createIndexOutOfBoundsException(userTasks.size(), index + 1);
+            }
+            Task removedTask = userTasks.remove(index);
+            return String.format("Noted. I've removed this task:%s%s%s%s%s", System.lineSeparator(), removedTask,
+                    System.lineSeparator(), formatTaskCount(), System.lineSeparator());
+        } catch (NumberFormatException e) {
+            throw new DukeException(DukeException.ExceptionCode.INCORRECT_ARGS, "Please give a number");
+        }
     }
 
     @Override

@@ -11,7 +11,7 @@ public abstract class RespondWith {
     public Map<String, Function<String, String>> commands = new HashMap<>();
 
     public RespondWith() {
-        commands.put("bye", (_query) -> this.bye());
+        commands.put("bye", this::bye);
     }
 
     public String respond(String query) {
@@ -26,8 +26,8 @@ public abstract class RespondWith {
 
     protected String endMessage = "bye";
 
-    private String bye() {
-        return "~~~You know you can't get enough of me~~~" + System.lineSeparator();
+    private String bye(String _query) {
+        return "See you again" + System.lineSeparator();
     }
 
     public String formatResponse(String query) {

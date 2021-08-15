@@ -4,7 +4,8 @@ package shared;
 public class DukeException extends RuntimeException {
     public static enum ExceptionCode {
         UNPROCESSABLE_ENTITY("Unprocessable command"), INCORRECT_ARGS("Incompatible arguments"),
-        FEWER_THAN_EXPECTED_ARGS("Too few arguments provided"), MORE_THAN_EXPECTED_ARGS("Too many arguments provided");
+        FEWER_THAN_EXPECTED_ARGS("Too few arguments provided"), MORE_THAN_EXPECTED_ARGS("Too many arguments provided"),
+        OUT_OF_BOUNDS("Out of bounds");
 
         public String message;
 
@@ -39,5 +40,10 @@ public class DukeException extends RuntimeException {
         ExceptionCode code = given < expected ? ExceptionCode.FEWER_THAN_EXPECTED_ARGS
                 : ExceptionCode.MORE_THAN_EXPECTED_ARGS;
         return new DukeException(code, String.format("Expected %d arguments, given %d", expected, given));
+    }
+
+    public static DukeException createIndexOutOfBoundsException(int size, int given) {
+        ExceptionCode code = ExceptionCode.OUT_OF_BOUNDS;
+        return new DukeException(code, String.format("You have %d items, but you wanted item number %d", size, given));
     }
 }
