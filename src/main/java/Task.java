@@ -1,5 +1,5 @@
 /**
- * Class to manage task stored in chatbot
+ * Class to manage task stored in chatbot.
  */
 public class Task {
     /** Stores the task. */

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Main file for chatbot.
@@ -82,13 +83,10 @@ public class Duke {
      * List out all the task stored by the user.
      */
     private void listTask() {
-        String[] task = taskList.stream()
-                    .map(x -> x.toString())
+        String[] task = IntStream.range(0, this.taskList.size())
+                    .mapToObj(x -> (x + 1) + ". " + taskList.get(x).toString())
                     .collect(Collectors.toList())
                     .toArray(new String[0]);
-
-        for (int i = 0; i < task.length; i++)
-            task[i] = i + 1 + ". " + task[i];
 
         printMessage(task);
     }
@@ -101,7 +99,7 @@ public class Duke {
     }
 
     /**
-     * Formats the sentences that will be printed out by the chatbot
+     * Formats the sentences that will be printed out by the chatbot.
      * @param strings Arbitrary number of strings to be printed out
      */
     private void printMessage(String... strings) {
