@@ -3,7 +3,7 @@
  */
 public class Task {
     /** Stores the task. */
-    String task;
+    private String task;
 
     /**
      * Constructor for Task.
