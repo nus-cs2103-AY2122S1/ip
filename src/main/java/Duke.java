@@ -67,7 +67,8 @@ public class Duke {
     public String printList() {
         boolean isEmptyList = false;
         int counter = 1;
-        String output = "   -------------------------------------------- \n";
+        String output = "   -------------------------------------------- \n"
+                    + "   Here are the tasks in your list: \n";
 
         while (!isEmptyList) {
             if (this.taskList.isEmpty()) {
@@ -78,8 +79,7 @@ public class Duke {
                 output += "   -------------------------------------------- \n";
                 isEmptyList = true;
             } else { // adds current task to the list based on counter index
-                String lineAdded = String.format("   %d.[%s] %s \n", counter, this.taskList.get(counter - 1).getStatusIcon(),
-                                    this.taskList.get(counter - 1).description);
+                String lineAdded = String.format("   %d. %s \n", counter, this.taskList.get(counter - 1));
                 output += lineAdded;
                 counter++;
             }
@@ -95,21 +95,103 @@ public class Duke {
     }
 
     public String completeTask(int index) {
-        Task completedTask = this.taskList.get(index - 1).markAsDone();
-        this.taskList.set(index - 1, completedTask);
-        return "   -------------------------------------------- \n"
-                + "   Nice! I've marked this task as done: \n"
-                + "   "
-                + String.format("[X] %s \n", this.taskList.get(index - 1).description)
-                + "   -------------------------------------------- \n";
+        String taskClass;
+        if (this.taskList.get(index - 1) instanceof Todo) {
+            taskClass = "Todo";
+        } else if (this.taskList.get(index - 1) instanceof Deadline) {
+            taskClass = "Deadline";
+        } else if (this.taskList.get(index - 1) instanceof Event) {
+            taskClass = "Event";
+        } else {
+            taskClass = "Task";
+        }
+
+        String output = "   -------------------------------------------- \n"
+                    + "   Nice! I've marked this task as done: \n"
+                    + "      ";
+
+        switch (taskClass) {
+            case "Todo":
+                Todo completedTask = ((Todo) this.taskList.get(index - 1)).markAsDone();
+                this.taskList.set(index - 1, completedTask);
+                output += completedTask.toString() + "\n";
+                break;
+
+            case "Deadline":
+                Deadline completedTask2 = ((Deadline) this.taskList.get(index - 1)).markAsDone();
+                this.taskList.set(index - 1, completedTask2);
+                output += completedTask2.toString() + "\n";
+                break;
+
+            case "Event":
+                Event completedTask3 = ((Event) this.taskList.get(index - 1)).markAsDone();
+                this.taskList.set(index - 1, completedTask3);
+                output += completedTask3.toString() + "\n";
+                break;
+
+            default:
+                Task completedTask4 = this.taskList.get(index - 1).markAsDone();
+                this.taskList.set(index - 1, completedTask4);
+                output += completedTask4.toString() + "\n";
+        }
+        output += "   -------------------------------------------- \n";
+        return output;
     }
 
     public String addTask(String input) {
-        Task newTask = new Task(input);
-        this.taskList.add(newTask);
-        return "   -------------------------------------------- \n"
-                + "   added: " + input + "\n"
+        String firstWord;
+        String remainingWords = "";
+        if (input.contains(" ")) {
+            firstWord = this.getFirstWord(input);
+            remainingWords = this.getRestOfWords(input);
+        } else {
+            firstWord = input;
+        }
+
+        String output;
+
+        switch (firstWord) {
+            case "todo":
+                Todo newTodo = new Todo(remainingWords);
+                this.taskList.add(newTodo);
+                output = "   -------------------------------------------- \n"
+                        + "   Got it. I've added this task: \n"
+                        + "      " + newTodo + "\n";
+                break;
+
+            case "deadline":
+                String[] arr = remainingWords.split("/by", 2);
+                String day = arr[1];
+                Deadline newDeadline = new Deadline(arr[0].trim(), day.trim());
+                this.taskList.add(newDeadline);
+                output = "   -------------------------------------------- \n"
+                        + "   Got it. I've added this task: \n"
+                        + "      " + newDeadline + "\n";
+                break;
+
+            case "event":
+                String[] arr2 = remainingWords.split("/at", 2);
+                String time = arr2[1];
+                Event newEvent = new Event(arr2[0].trim(), time.trim());
+                this.taskList.add(newEvent);
+                output = "   -------------------------------------------- \n"
+                        + "   Got it. I've added this task: \n"
+                        + "      " + newEvent + "\n";
+                break;
+
+            default:
+                Task newTask = new Task(input);
+                this.taskList.add(newTask);
+                output = "   -------------------------------------------- \n"
+                        + "   Got it. I've added this task: \n"
+                        + "      " + newTask + "\n";
+
+        }
+
+        int numTasks = this.taskList.size();
+        output += String.format("   Now you have %d tasks in the list.", numTasks) + "\n"
                 + "   -------------------------------------------- \n";
+        return output;
     }
 
     public String getFirstWord(String input) {

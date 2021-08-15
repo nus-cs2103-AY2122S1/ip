@@ -19,4 +19,9 @@ public class Task {
     public Task markAsDone() {
         return new Task(this.description, true);
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+    }
 }
