@@ -1,5 +1,23 @@
 import java.util.Scanner;
 
+/**
+ * CS2103T Individual Project AY 21/22 Sem 1
+ * Project Duke: Incrementally building a Chatbot.
+ *
+ * Description:
+ * On running the program, Duke greets the user and awaits for inputted commands:
+ *   - 'todo x' -> adds a Task of x with no date/time attached
+ *   - 'deadline x /by y' -> adds Deadline of x that needs to be done by y
+ *   - 'event x /at y' -> adds an Event of x that starts and ends at a specific time y
+ *   - 'list' -> displays current list of tasks
+ *   - 'done x' -> marks Task x as done
+ *   - 'delete x' -> deletes Task x from the task list
+ *   - 'bye' -> exits the program
+ *   - Other input patterns throw exceptions
+ *
+ * @author Lua Yi Da
+ */
+
 public class Side {
     private static final String LINEBREAK = "---------------------------------------------------------------------";
     private static final String GREETING = LINEBREAK + "" + "\nI'm Side, your unpaid personal assistant. " +
@@ -15,6 +33,12 @@ public class Side {
         System.out.println(logo);
     }
 
+    /**
+     * Print response specific to adding tasks.
+     *
+     * @param input String representation of task to add.
+     * @param tasks TaskList to be added to.
+     */
     private static void echo(String input, TaskList tasks) {
         System.out.println(LINEBREAK);
         String taskQuantifier = tasks.length() == 1 ? "task..." : "tasks...";
@@ -22,12 +46,24 @@ public class Side {
         System.out.println(LINEBREAK);
     }
 
+    /**
+     * Generic print response.
+     *
+     * @param input String representation of String to format.
+     */
     private static void printResponse(String input) {
         System.out.println(LINEBREAK);
         System.out.println(input);
         System.out.println(LINEBREAK);
     }
 
+    /**
+     * Helper method to isolate secondary commands like /at and /by.
+     *
+     * @param input String to be searched.
+     * @param arg String to find.
+     * @return String representing time given by usder input.
+     */
     private static String findTime(String input, String arg) {
         int argIdx = input.lastIndexOf(arg);
         String output = input.substring(argIdx + arg.length());
@@ -38,6 +74,13 @@ public class Side {
         return output;
     }
 
+    /**
+     * Handles the logic to add a deadline to TaskList.
+     *
+     * @param input String representation of user input.
+     * @param taskList TaskList to be added to.
+     * @throws WrongFormatException Catches incorrectly formatted input and returns error.
+     */
     private static void addDeadline(String input, TaskList taskList) throws WrongFormatException {
         if (input.contains("/by") && (findTime(input, "/by") != null)) {
             String time = findTime(input, "/by");
@@ -49,6 +92,13 @@ public class Side {
         }
     }
 
+    /**
+     * Handles the logic to add an Event to TaskList.
+     *
+     * @param input String representation of user input.
+     * @param taskList TaskList to be added to.
+     * @throws WrongFormatException Catches incorrectly formatted input and returns error.
+     */
     private static void addEvent(String input, TaskList taskList) throws WrongFormatException {
         if (input.contains("/at") && (findTime(input, "/at") != null)) {
             String time = findTime(input, "/at");
@@ -60,6 +110,13 @@ public class Side {
         }
     }
 
+    /**
+     * Handles the logic to add a task to TaskList.
+     *
+     * @param input String representation of user input.
+     * @param taskList TaskList to be added to.
+     * @throws WrongFormatException Catches incorrectly formatted input and returns error.
+     */
     private static void addTask(String input, TaskList taskList) throws WrongFormatException {
         if (input.replace("todo", "").replaceAll(" ", "").length() > 0) {
             taskList.addTask(input);
@@ -69,6 +126,12 @@ public class Side {
         }
     }
 
+    /**
+     * Helper method to parse string and isolate index passed in by user
+     *
+     * @param s String to be parsed.
+     * @return Integer from parsing String s.
+     */
     private static Integer tryIntParsing(String s) {
         try {
             int parsedInt = Integer.parseInt(s);
@@ -78,6 +141,15 @@ public class Side {
         }
     }
 
+    /**
+     * Handles the logic of marking a task as done.
+     *
+     * @param input String representation of user input.
+     * @param taskList TaskList in which task is to be marked.
+     * @throws TaskIndexException Catches out of bounds task indexes and returns error.
+     * @throws NoIndexException Catches no index input from user and returns error.
+     * @throws TooManyIndexesException Catches too many index input from user and returns error.
+     */
     private static void handleDone(String input, TaskList taskList) throws TaskIndexException, NoIndexException,
             TooManyIndexesException {
         if (input.split("\\s+").length == 2) {
@@ -94,6 +166,15 @@ public class Side {
         }
     }
 
+    /**
+     * Handles the logic of deleting a task
+     *
+     * @param input String representation of user input.
+     * @param taskList TaskList in which task is to be marked.
+     * @throws DeleteIndexException Catches out of bounds task indexes and returns error.
+     * @throws NoIndexException Catches no index input from user and returns error.
+     * @throws TooManyIndexesException Catches too many index input from user and returns error.
+     */
     private static void handleDelete(String input, TaskList taskList) throws DeleteIndexException, NoIndexException,
             TooManyIndexesException {
         if (input.split("\\s+").length == 2) {
@@ -143,7 +224,7 @@ public class Side {
                     default:
                         throw new UnknownCommandException();
                 }
-            } catch (Exception e) {
+            } catch (SideException e) {
                 printResponse(e.getMessage());
             }
             userInput = scanner.nextLine();

@@ -1,3 +1,16 @@
+/**
+ * CS2103T Individual Project AY 21/22 Sem 1
+ * Project Duke: Incrementally building a Chatbot.
+ *
+ * The Task class represents a task that has to be done, currently represented as a string.
+ * It encapsulates the following information:
+ * - description
+ * - time
+ * - isDone
+ *
+ * @author Lua Yi Da
+ */
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -7,6 +20,11 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Marks a task as done.
+     *
+     * @return String response of Side in response to marking a task as done.
+     */
     public String markAsDone() {
         if (!this.isDone) {
             this.isDone = true;
