@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private final String LINE = "--------------------------------\n";
+    private final String LINE = "-----------------------------------------------------------------------\n";
     private final ArrayList<Task> tasks = new ArrayList<>();
 
     private void startApp() {
@@ -22,23 +22,27 @@ public class Duke {
     }
 
     private void handleCommand(String command) {
-        if (command.equals("")) {
-            // If user inputs empty string, do nothing
-            return;
-        } else if (command.equals("bye")) {
-            this.handleBye();
-        } else if (command.equals("list")) {
-            this.handleList();
-        } else if (command.matches("^done [0-9]+$")) {
-            this.handleDone(command);
-        } else if (command.matches("^todo .*")) {
-            this.handleTodo(command);
-        } else if (command.matches("^deadline .* /by .*")) {
-            this.handleDeadline(command);
-        } else if (command.matches("^event .* /at .*")) {
-            this.handleEvent(command);
-        } else {
-            System.out.println("Unknown command\n");
+        try {
+            if (command.equals("")) {
+                // If user inputs empty string, do nothing
+                return;
+            } else if (command.equals("bye")) {
+                this.handleBye();
+            } else if (command.equals("list")) {
+                this.handleList();
+            } else if (command.matches("^done -?[0-9]+$")) {
+                this.handleDone(command);
+            } else if (command.matches("^todo( .*)?")) {
+                this.handleTodo(command);
+            } else if (command.matches("^deadline( .*)?")) {
+                this.handleDeadline(command);
+            } else if (command.matches("^event( .*)?")) {
+                this.handleEvent(command);
+            } else {
+                throw new UnknownCommandException();
+            }
+        } catch (DukeException e) {
+            System.out.println(LINE + e.getMessage() + "\n" + LINE);
         }
     }
 
@@ -55,7 +59,7 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    private void handleDone(String input) {
+    private void handleDone(String input) throws InvalidTaskIndexException {
         String[] splitInput = input.split(" ");
         int taskIdx = -1;
 
@@ -73,25 +77,30 @@ public class Duke {
             t.markAsDone();
             System.out.println(LINE + String.format("Nice! I've marked this task as done:\n  %s\n", t) + LINE);
         } else {
-            System.out.println(LINE + "Invalid index!\n" + LINE);
+            throw new InvalidTaskIndexException();
         }
     }
 
-    private void handleTodo(String command) {
-        String description = command.substring(4);
-        Todo newTodo = new Todo(description.trim());
+    private void handleTodo(String command) throws EmptyTodoDescriptionException {
+        String description = command.substring(4).trim();
+        if (description.equals("")) {
+            throw new EmptyTodoDescriptionException();
+        }
+        Todo newTodo = new Todo(description);
         tasks.add(newTodo);
         System.out.println(this.formatAddTaskString(newTodo));
     }
 
-    private void handleDeadline(String command) {
+    private void handleDeadline(String command) throws InvalidFormatException {
+        this.validateRegex(command, "^deadline .+ /by .+", "deadline {description} /by {time}");
         String[] info = command.substring(8).split("/by");
         Deadline newDeadline = new Deadline(info[0].trim(), info[1].trim());
         tasks.add(newDeadline);
         System.out.println(formatAddTaskString(newDeadline));
     }
 
-    private void handleEvent(String command) {
+    private void handleEvent(String command) throws InvalidFormatException {
+        this.validateRegex(command, "^event .+ /at .+", "event {description} /at {time}");
         String[] info = command.substring(5).split("/at");
         Event newEvent = new Event(info[0].trim(), info[1].trim());
         tasks.add(newEvent);
@@ -102,6 +111,12 @@ public class Duke {
         return LINE +
                 String.format("Got it. I've added this task:\n  %s\nNow you have %d task%s in the list.\n",
                         task, this.tasks.size(), this.tasks.size() == 1 ? "" : "s") + LINE;
+    }
+
+    private void validateRegex(String str, String regex, String validFormat) throws InvalidFormatException {
+        if (!str.matches(regex)) {
+            throw new InvalidFormatException(validFormat);
+        }
     }
 
     public static void main(String[] args) {

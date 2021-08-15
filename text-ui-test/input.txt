@@ -7,10 +7,18 @@ done 1
 done 4
 list
 invalid command
+blah
 todo
 deadline
-deadline assignment /by
+deadline nowhitespace /by
+deadline whitespace /by
+deadline  /by tonight
+deadline something /at sometime
 event
-event dinner /at
+event nowhitespace /at
+event whitespace /at
+event  /at tonight
+event something /by sometime
 done 1000
 done 0
+done -1
