@@ -90,7 +90,13 @@ public class DukeCore {
             }
         } else if (input.length() >= 6 && input.startsWith("done ")) {
             if (isValidNum(input.substring(5))) {
-                doneTask(Integer.parseInt(input.substring(5)));
+                doneTask(Integer.parseInt(input.substring(5).trim()));
+            } else {
+                displayText(INVALID_INPUT);
+            }
+        } else if (input.length() >= 8 && input.startsWith("delete ")) {
+            if (isValidNum(input.substring(7))) {
+                deleteTask(Integer.parseInt(input.substring(7).trim()));
             } else {
                 displayText(INVALID_INPUT);
             }
@@ -102,7 +108,7 @@ public class DukeCore {
 
     public boolean isValidNum(String s) {
         try {
-            Integer.parseInt(s);
+            Integer.parseInt(s.trim());
         } catch (Exception e) {
             return false;
         }
@@ -229,6 +235,22 @@ public class DukeCore {
                 t.markAsDone();
                 displayText(space + "Nice! I've marked this task as done: \n"
                         + space + "  " + t.getDescriptionWithStatus());
+            }
+        } catch (IndexOutOfBoundsException ex) {
+            displayText(space + "Oops, the task doesn't seem to exist.");
+        }
+    }
+
+    public void deleteTask(int taskIndex) {
+        try {
+            Task t = taskList.getTasks().get(taskIndex - 1);
+            String description = t.getDescriptionWithStatus();
+            if (taskList.deleteTask(taskIndex - 1)) {
+                displayText(space + "Noted. I've removed this task: \n"
+                        + space + "  " + description + "\n"
+                        + space + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.");
+            } else {
+                System.exit(1);
             }
         } catch (IndexOutOfBoundsException ex) {
             displayText(space + "Oops, the task doesn't seem to exist.");

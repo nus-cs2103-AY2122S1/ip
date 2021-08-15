@@ -18,6 +18,16 @@ public class TaskList {
         return true;
     }
 
+    public boolean deleteTask(int taskIndex) {
+        try {
+            tasks.remove(taskIndex);
+        } catch (Exception e) {
+            System.err.println("Fail to delete task: " + e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
