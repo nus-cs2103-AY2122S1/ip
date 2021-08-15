@@ -1,5 +1,7 @@
 package me.yukun99.ip;
 
+import me.yukun99.ip.exceptions.HelpBotInvalidTaskException;
+import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
 import me.yukun99.ip.tasks.Deadline;
 import me.yukun99.ip.tasks.Event;
 import me.yukun99.ip.tasks.Task;
@@ -96,9 +98,14 @@ public class HelpBot {
 	 *
 	 * @param current Current message sent by the user.
 	 */
-	private void setDone(String current) {
+	private void setDone(String current) throws HelpBotInvalidTaskException {
 		String task = current.replace("done ", "");
-		setDone(Integer.parseInt(task));
+		try {
+			setDone(Integer.parseInt(task));
+		} catch (NumberFormatException e) {
+			HelpBot.reply("Hello? Do you know what a number is?");
+			throw new HelpBotInvalidTaskException("Invalid Task:", e, task);
+		}
 	}
 
 	/**
@@ -154,19 +161,22 @@ public class HelpBot {
 	private boolean runCommand(String message) {
 		// Mark task as done command
 		if (message.startsWith("done")) {
-			String task = message.replace("done ", "");
-			if (Methods.isInt(task)) {
+			try {
 				setDone(message);
-				return false;
+			} catch (HelpBotInvalidTaskException e) {
+				HelpBot.reply("You do realise this isn't a task, right?\n" + e);
 			}
+			return false;
 		}
 		// Update date of deadline or event tasks
 		if (message.startsWith("update")) {
 			if (message.contains(" /to ") && !message.endsWith(" /to ") && !message.startsWith(" /to ")) {
 				try {
 					Task.updateTask(message.replace("update ", ""));
-				} catch (IllegalStateException e) {
-					HelpBot.reply("Hello? This is a ToDo task! How do you expect me to add a date to this?");
+				} catch (HelpBotInvalidTaskTypeException e) {
+					HelpBot.reply("You can't do this, dumbo.\n" + e);
+				} catch (HelpBotInvalidTaskException e) {
+					HelpBot.reply("You do realise this isn't a task, right?\n" + e);
 				}
 				return false;
 			}

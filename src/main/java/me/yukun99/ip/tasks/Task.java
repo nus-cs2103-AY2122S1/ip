@@ -1,7 +1,8 @@
 package me.yukun99.ip.tasks;
 
 import me.yukun99.ip.HelpBot;
-import me.yukun99.ip.Methods;
+import me.yukun99.ip.exceptions.HelpBotInvalidTaskException;
+import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,13 +54,16 @@ public abstract class Task {
 	 *
 	 * @param message Message sent by the user.
 	 */
-	public static void updateTask(String message) {
+	public static void updateTask(String message) throws HelpBotInvalidTaskException, HelpBotInvalidTaskTypeException {
 		String[] messageSplit = message.split(" /to ");
-		if (!Methods.isInt(messageSplit[0])) {
+		int taskIndex;
+		try {
+			taskIndex = Integer.parseInt(messageSplit[0]) - 1;
+		} catch (NumberFormatException e) {
 			HelpBot.reply("Hello? Do you know what a number is?");
-			return;
+			throw new HelpBotInvalidTaskException("Invalid Task:", e, messageSplit[0]);
 		}
-		Task task = tasks.get(Integer.parseInt(messageSplit[0]) - 1);
+		Task task = tasks.get(taskIndex);
 		task.updateDate(messageSplit[1]);
 		String reply = "Dude, make up your mind! I'll update it, but just this once, okay?\n"
 				+ task;
@@ -71,7 +75,7 @@ public abstract class Task {
 	 *
 	 * @param date New date to be updated.
 	 */
-	protected abstract void updateDate(String date);
+	protected abstract void updateDate(String date) throws HelpBotInvalidTaskTypeException;
 
 	/**
 	 * Checks whether another Task object is equal to the current instance.

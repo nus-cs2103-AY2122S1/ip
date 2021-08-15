@@ -65,10 +65,16 @@ Oh. My. God. Fine. Here are your tasks:
  4. [T][ ] dig up some bodies
 ____________________________________________________________
 ____________________________________________________________
-Hello? This is a ToDo task! How do you expect me to add a date to this?
+You can't do this, dumbo.
+The operation could not be performed on TaskType: TODO
 ____________________________________________________________
 ____________________________________________________________
 Hello? Do you know what a number is?
+____________________________________________________________
+____________________________________________________________
+You do realise this isn't a task, right?
+'asd' does not correspond to a valid task, caused by:
+java.lang.NumberFormatException: For input string: "asd"
 ____________________________________________________________
 ____________________________________________________________
 About time you did your work, you lazy bum! I GUESS I'll mark it as done for you:
