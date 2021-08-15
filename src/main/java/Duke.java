@@ -12,6 +12,10 @@ public class Duke {
     // Default messages sent by the chat bot
     private final String WELCOME_MSG = "Hello! I am Matthew!\n\t What can I do for you?";
     private final String EXIT_MSG = "Bye. Don't have a good day... Have a great day!!!";
+    private final String DISPLAY_LIST_MSG = "\t Here are the tasks in your list:";
+    private final String TASK_DONE_MSG = "Nice! I've marked this task as done: \n\t  ";
+    private final String TASK_ADDED_MSG = "Got it. I've added this task:\n\t   ";
+
 
     // Command Tags for the chat bot
     private final String EXIT_TAG = "bye";
@@ -23,8 +27,8 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        Duke chatBotMatthew = new Duke();
-        chatBotMatthew.start();
+        Duke chatBot = new Duke();
+        chatBot.start();
     }
 
     /**
@@ -118,7 +122,7 @@ public class Duke {
      * @param msg Input from user.
      */
     private void addTodo(String msg) {
-        Task newTask = new Todo(msg);
+        Task newTask = new Todo(getTodoDesc(msg));
         addTask(newTask);
     }
 
@@ -127,7 +131,7 @@ public class Duke {
      */
     private void displayTasks() {
         System.out.println(HORIZONTAL_LINE_HEAD);
-        System.out.println("\t Here are the tasks in your list:");
+        System.out.println(DISPLAY_LIST_MSG);
 
         for (int i = 0; i < this.items.size(); i++) {
             Task item = this.items.get(i);
@@ -149,7 +153,7 @@ public class Duke {
         Task item = this.items.get(index);
         item.taskCompleted();
 
-        String content = String.format("Nice! I've marked this task as done:\n\t  %s", item);
+        String content = String.format(TASK_DONE_MSG + item);
         printFormattedMsg(content);
     }
 
@@ -166,6 +170,19 @@ public class Duke {
         int index = Integer.parseInt(msg.substring(position + 1)) - 1;
 
         return index;
+    }
+
+    /**
+     * Returns the description for a todo type task.
+     *
+     * @param msg Input from user
+     * @return A String representing the description of the task.
+     * @throws StringIndexOutOfBoundsException Wrong Format used by the user.
+     */
+    private String getTodoDesc(String msg) throws StringIndexOutOfBoundsException{
+        int postion = msg.indexOf(" ");
+
+        return msg.substring(postion).trim();
     }
 
     /**
@@ -202,7 +219,7 @@ public class Duke {
      */
     private void addTask(Task task) {
         this.items.add(task);
-        printFormattedMsg("Got it. I've added this task:\n\t   " + task + "\n\t Now you have " + getTaskCount() + " tasks in the list.");
+        printFormattedMsg(TASK_ADDED_MSG + task + "\n\t Now you have " + getTaskCount() + " tasks in the list.");
     }
 
     /**
