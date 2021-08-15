@@ -1,0 +1,7 @@
+todo borrow book
+deadline finish CS2103T IP /by Monday
+event exam /at Mon 2-4pm
+todo return book
+deadline finish assignment /by August 31st
+event lecture /at Mon 3-5pm
+bye
