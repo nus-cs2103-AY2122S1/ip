@@ -22,6 +22,25 @@ public class Duke {
         return false;
     }
 
+    public static boolean isDeleteOps(String input) {
+        if (input == null) {
+            return false;
+        }
+        int length = input.length();
+        if (length < 8) {
+            return false;
+        }
+        if (input.startsWith("delete ")) {
+            try {
+                Integer.parseInt(input.substring(7));
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) throws DukeException {
         System.out.println("____________________________________________________________\n"
         + "Heyllo! Jackie here\n"
@@ -51,15 +70,36 @@ public class Duke {
                         System.out.println(entry);
                     }
                     System.out.println("____________________________________________________________\n");
-                } else if (isDoneOps(temp)) {
-                    int index = Integer.parseInt(temp.substring(5));
-                    taskList.get(index - 1).doneTask();
-                    System.out.println("____________________________________________________________\n"
-                            + "Noice! I've marked this task as done: \n");
-                    String entry = String.format("[X] %s",
-                            taskList.get(index - 1).getContent());
-                    System.out.println(entry);
-                    System.out.println("____________________________________________________________\n");
+                } else if (temp.startsWith("done")) {
+                    if (isDoneOps(temp)) {
+                        int index = Integer.parseInt(temp.substring(5));
+                        if (index > taskList.size())
+                            throw new DukeException("☹ oopsie!!! The specified task does not exit.");
+                        taskList.get(index - 1).doneTask();
+                        System.out.println("____________________________________________________________\n"
+                                + "Noice! I've marked this task as done: \n"
+                                + taskList.get(index - 1).toString()
+                                + "\n"
+                                + "____________________________________________________________\n");
+                    } else {
+                        throw new DukeException("☹ Would you specify the task for me my dear?");
+                    }
+                } else if (temp.startsWith("delete")) {
+                    if (isDeleteOps(temp)) {
+                        int index = Integer.parseInt(temp.substring(7));
+                        if (index > taskList.size())
+                            throw new DukeException("☹ oopsie!!! The specified task does not exit.");
+                        String holder = taskList.get(index - 1).toString();
+                        taskList.remove(index - 1);
+                        taskList.trimToSize();
+                        System.out.println("____________________________________________________________\n"
+                                + "okie! I've removed this annoying task: \n"
+                                + holder
+                                + "\nNow you have " + taskList.size() + " tasks in the list.\n"
+                                + "____________________________________________________________\n");
+                    } else {
+                        throw new DukeException("☹ Would you specify the task for me my dear?");
+                    }
                 } else if (temp.startsWith("todo")) {
                     if (temp.trim().equals("todo")) {
                         throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
