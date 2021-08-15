@@ -1,6 +1,6 @@
 public class Feature extends FeatureMain {
 
-    public Feature (Task command) {
+    public Feature (String command) {
         super(command);
 
     }
