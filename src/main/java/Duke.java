@@ -36,9 +36,7 @@ public class Duke {
             int index = Integer.parseInt(taskNum) - 1;
             this.markTask(index);
         } else {
-            Task task = new Task(command);
-            tasks.add(task);
-            printMessage(String.format("added: %s", command));
+            addTask(command);
         }
     }
 
@@ -67,7 +65,31 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             printMessage("There is no such task!");
         }
+    }
 
+    public void addTask(String command) {
+        Task task;
+        if (command.startsWith("todo")) {
+            task = new Todo(command.replaceFirst("todo ", ""));
+        } else if (command.startsWith("deadline")) {
+            String taskInfo = command.replaceFirst("deadline ", "");
+            int separator = taskInfo.indexOf(" /by ");
+            String description = taskInfo.substring(0, separator);
+            String by = taskInfo.substring(separator + 5);
+            task = new Deadline(description, by);
+        } else if (command.startsWith("event")) {
+            String taskInfo = command.replaceFirst("event ", "");
+            int separator = taskInfo.indexOf(" /at ");
+            String description = taskInfo.substring(0, separator);
+            String at = taskInfo.substring(separator + 5);
+            task = new Event(description, at);
+        } else {
+            task = new Task(command);
+        }
+        tasks.add(task);
+        printMessage(String.format("Got it. I've added this task:"
+                + "\n\t%s"
+                + "\nNow you have %d tasks in the list.", task, this.tasks.size()));
     }
 
     public static void main(String[] args) {
