@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static boolean run;
+    private static String[] tasks;
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,26 +18,30 @@ public class Duke {
                 + "____________________________________________________________";
         System.out.println(greeting);
 
-        boolean run = true;
+        run = true;
+        tasks = new String[100];
+
+
         while(run) {
-            run = eval();
+            run = eval(tasks);
         }
     }
 
-    public static boolean eval() {
+    public static boolean eval(String[] tasks) {
         Scanner inputReader = new Scanner(System.in);
         String input = inputReader.nextLine();
-
-        if (input.equals("bye")) {
-            System.out.println("____________________________________________________________\n"
-                    + "Bye. Don't come again!\n"
-                    + "____________________________________________________________");
-            return false;
-        } else {
-            System.out.println("____________________________________________________________\n"
-                    + input + "\n"
-                    + "____________________________________________________________\n");
-            return true;
+        String[] inputArray = input.split(" ");
+        switch (inputArray[0]) {
+            case "bye":
+                System.out.println("____________________________________________________________\n"
+                        + "Bye. Don't come again!\n"
+                        + "____________________________________________________________");
+                return false;
+            default:
+                System.out.println("____________________________________________________________\n"
+                        + input + "\n"
+                        + "____________________________________________________________\n");
+                return true;
         }
 
     }
