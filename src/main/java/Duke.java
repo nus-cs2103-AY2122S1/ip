@@ -53,7 +53,7 @@ public class Duke {
                 String body = "";
                 String nextWord = sc.next();
                 while (nextWord.charAt(0) != '/') {
-                    body += nextWord;
+                    body += " " + nextWord;
                     nextWord = sc.next();
                 }
                 String deadline = sc.nextLine();
@@ -66,7 +66,7 @@ public class Duke {
                 String body = "";
                 String nextWord = sc.next();
                 while (nextWord.charAt(0) != '/') {
-                    body += nextWord;
+                    body += " " + nextWord;
                     nextWord = sc.next();
                 }
                 String deadline = sc.nextLine();

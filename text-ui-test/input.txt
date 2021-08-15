@@ -1,0 +1,9 @@
+todo Read Book
+deadline finish assignment /by 30 Aug
+event CS2103 tutorial /at Thursday
+list
+done 1
+done 2
+done 3
+list
+bye

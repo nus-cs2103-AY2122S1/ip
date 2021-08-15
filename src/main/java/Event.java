@@ -18,10 +18,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (this.getDone()) {
-            return "[E] [X] " + this.getBody() + " (at:" + this.date + ")";
+            return "[E] [X]" + this.getBody() + " (at:" + this.date + ")";
         }
         else {
-            return "[E] [ ] " + this.getBody() + " (at:" + this.date + ")";
+            return "[E] [ ]" + this.getBody() + " (at:" + this.date + ")";
         }
     }
 }
