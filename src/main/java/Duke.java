@@ -16,7 +16,12 @@ public class Duke {
         String input = scan.nextLine();
 
         while(!input.equals("bye")) {
-            list.add(input);
+            if(input.equals("list")) {
+                list.list();
+            } else {
+                list.add(input);
+            }
+            
             input = scan.nextLine();
         }
 
