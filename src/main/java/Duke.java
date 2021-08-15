@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Duke {
     private static final String LINE = "     ________________________________________\n"; // 5 spaces, 40 dashes
     private static final String INDENT = "     "; // 5 spaces
-    private List<String> taskList;
+    private List<Task> taskList;
     private int taskNo;
     private boolean isRunning;
 
@@ -40,6 +40,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         while (isRunning){
             String userInput = scanner.nextLine();
+            String[] splitInput = userInput.split(" ", 2);
 
             if (userInput.equals("bye")) {
                 // Exit
@@ -47,14 +48,35 @@ public class Duke {
                 isRunning = false;
             } else if (userInput.equals("list")){
                 // List all existing tasks
-                System.out.print(LINE);
+                System.out.println(LINE + INDENT + "Here are the tasks in your list:");
                 for (int i = 0; i < taskNo; i++) {
-                    System.out.println(INDENT + (i+1) + ". " + taskList.get(i));
+                    Task currentTask = taskList.get(i);
+                    System.out.println(INDENT + (i+1) + String.format(".[%s] %s", currentTask.getStatusIcon(), currentTask.description));
                 }
                 System.out.println(LINE);
+            } else if (splitInput[0].equals("done")) {
+                // Mark task as done
+                try {
+                    int doneTaskNo = Integer.parseInt(splitInput[1]);
+                    if (doneTaskNo < 1 || doneTaskNo > taskNo) {
+                        // Handle error if doneTaskNo out of range
+                        System.out.println(LINE + INDENT + "Task number entered out of range!\n" + LINE);
+                        continue;
+                    }
+                    Task doneTask = taskList.get(doneTaskNo - 1);
+                    doneTask.markAsDone();
+                    System.out.println(LINE + INDENT + "Nice! I've marked this task as done:\n"
+                        + INDENT + INDENT + String.format("[%s] %s\n", doneTask.getStatusIcon(), doneTask.description)
+                        + LINE);
+                }
+                catch (NumberFormatException e) {
+                    // Handle error if parseInt finds a non-valid entry
+                    System.out.println(LINE + INDENT + "Please enter a valid integer for task number!\n" + LINE);
+                    continue;
+                }
             } else {
                 // Add task to list
-                taskList.add(userInput);
+                taskList.add(new Task(userInput));
                 taskNo += 1;
                 System.out.println(LINE + INDENT + "added: " + userInput + "\n" + LINE);
             }
