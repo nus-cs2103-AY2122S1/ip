@@ -3,9 +3,9 @@ public class Task {
     private String description;
     private boolean isDone;
 
-    public Task(String description, boolean isDone) {
+    public Task(String description) {
         this.description = description;
-        this.isDone = isDone;
+        this.isDone = false;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Task {
      *
      * @return A String representing the description of the task.
      */
-    public String getDescription() {
-        return description;
+    public String toString() {
+        return getStatusIcon() + " " + this.description;
     }
 }
