@@ -1,20 +1,14 @@
 public class Event extends Task {
 
-    private String name;
-    private boolean completed;
     private String at;
 
-    public Event(String name, boolean completed, String at) {
-        super(name, completed);
+    public Event(String name, String at) {
+        super(name);
         this.at = at;
     }
 
     @Override
     public String toString() {
-        if (this.completed) {
-            return "[E][X] " + name + " (at:" + at + ")";
-        } else {
-            return "[E][ ] " + name + " (at:" + at + ")";
-        }
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 }
