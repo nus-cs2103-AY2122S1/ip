@@ -1,0 +1,11 @@
+todo testing 123
+deadline duke123 /by tonight
+list
+event what are you doing step /at 27 July to 28 August
+done 2
+list
+done 3
+done
+todo whatever
+list
+bye
