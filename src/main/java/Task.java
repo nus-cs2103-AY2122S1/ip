@@ -21,7 +21,7 @@ public class Task {
         } else {
             this.isDone = true;
             System.out.println(
-                    "Finally! Took you long enough to complete `" + taskName + "`"
+                    "Finally! Took you long enough to complete:" + taskName
             );
         }
     }
@@ -36,5 +36,9 @@ public class Task {
         } else {
             return "[ ]";
         }
+    }
+
+    public String getTypeIcon() {
+        return "[ ]";
     }
 }
