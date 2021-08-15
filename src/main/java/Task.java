@@ -6,13 +6,16 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description) throws AisuException {
+        if (description.length() == 0) {
+            throw new AisuException("The description cannot be empty!");
+        }
         this.description = description;
         this.isDone = false;
     }
 
     public String getStatusIcon() {
-        return (isDone ? "☑" : "☐");
+        return (isDone ? "[x]" : "[ ]");
     }
 
     public void markAsDone() {

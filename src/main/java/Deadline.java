@@ -1,7 +1,7 @@
 public class Deadline extends Task {
     private String deadline;
 
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, String deadline) throws AisuException {
         super(description);
         this.deadline = deadline;
     }
@@ -10,5 +10,4 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("[DeadL] %s %s (by: %s)", this.getStatusIcon(), this.description, this.deadline);
     }
-
 }

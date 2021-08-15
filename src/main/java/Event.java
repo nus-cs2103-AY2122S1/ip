@@ -1,7 +1,7 @@
 public class Event extends Task {
     private String eventPeriod;
 
-    public Event(String description, String eventPeriod) {
+    public Event(String description, String eventPeriod) throws AisuException {
         super(description);
         this.eventPeriod = eventPeriod;
     }
