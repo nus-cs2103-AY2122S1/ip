@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class userInput {
+public class UserInput {
+    public UserInput() {
+
+    }
 }
