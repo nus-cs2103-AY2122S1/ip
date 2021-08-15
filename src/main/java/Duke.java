@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     private boolean readingInput;
-    private ArrayList<String> taskList;
+    private ArrayList<Task> taskList;
 
     Duke() {
         this.readingInput = true;
@@ -18,7 +18,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);*/
 
-        Duke d = new Duke();
+        Duke bot = new Duke();
 
         String openingMessage = "   -------------------------------------------- \n"
                         + "   Hello! I'm Duke \n"
@@ -28,27 +28,35 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        while (d.readingInput) {
+        while (bot.readingInput) {
             String input = sc.nextLine();
+            String firstWord;
+            String remainingWords = "";
+            if (input.contains(" ")) {
+                firstWord = bot.getFirstWord(input);
+                remainingWords = bot.getRestOfWords(input);
+            } else {
+                firstWord = input;
+            }
+
             String output;
 
-            switch (input) {
+            switch (firstWord) {
                 case "list":
-                    output = d.printList();
+                    output = bot.printList();
                     break;
 
                 case "bye":
-                    output = "   -------------------------------------------- \n"
-                            + "   Bye! Hope to see you again soon! \n"
-                            + "   -------------------------------------------- \n";
-                    d.readingInput = false;
+                    output = bot.sayBye();
+                    break;
+
+                case "done":
+                    int index = Integer.parseInt(remainingWords);
+                    output = bot.completeTask(index);
                     break;
 
                 default:
-                    output = "   -------------------------------------------- \n"
-                            + "   added: " + input + "\n"
-                            + "   -------------------------------------------- \n";
-                    d.taskList.add(input);
+                    output = bot.addTask(input);
 
             }
             System.out.println(output);
@@ -70,11 +78,47 @@ public class Duke {
                 output += "   -------------------------------------------- \n";
                 isEmptyList = true;
             } else { // adds current task to the list based on counter index
-                String lineAdded = String.format("   %d. %s \n", counter, this.taskList.get(counter - 1));
+                String lineAdded = String.format("   %d.[%s] %s \n", counter, this.taskList.get(counter - 1).getStatusIcon(),
+                                    this.taskList.get(counter - 1).description);
                 output += lineAdded;
                 counter++;
             }
         }
         return output;
+    }
+
+    public String sayBye() {
+        this.readingInput = false;
+        return "   -------------------------------------------- \n"
+                + "   Bye! Hope to see you again soon! \n"
+                + "   -------------------------------------------- \n";
+    }
+
+    public String completeTask(int index) {
+        Task completedTask = this.taskList.get(index - 1).markAsDone();
+        this.taskList.set(index - 1, completedTask);
+        return "   -------------------------------------------- \n"
+                + "   Nice! I've marked this task as done: \n"
+                + "   "
+                + String.format("[X] %s \n", this.taskList.get(index - 1).description)
+                + "   -------------------------------------------- \n";
+    }
+
+    public String addTask(String input) {
+        Task newTask = new Task(input);
+        this.taskList.add(newTask);
+        return "   -------------------------------------------- \n"
+                + "   added: " + input + "\n"
+                + "   -------------------------------------------- \n";
+    }
+
+    public String getFirstWord(String input) {
+        String[] arr = input.split(" ", 2);
+        return arr[0];
+    }
+
+    public String getRestOfWords(String input) {
+        String[] arr = input.split(" ", 2);
+        return arr[1];
     }
 }
