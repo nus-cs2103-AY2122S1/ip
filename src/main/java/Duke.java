@@ -27,9 +27,11 @@ public class Duke {
     }
 
     private static void sayTaskAdded() {
+        int count = taskList.size();
         say("Got it. I've added this task:");
-        say(taskList.get(taskList.size() - 1).toString(), false);
-        // TODO: say the number of incomplete tasks in the list
+        say(taskList.get(count - 1).toString(), false);
+        say(String.format("Now you have %d %s in the list.",
+                count, count == 1 ? "task" : "tasks"), false);
     }
 
     private static void addTodo(String item) {
