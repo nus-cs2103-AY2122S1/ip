@@ -24,11 +24,12 @@ public class Duke {
             } else if (text.equals("list")) {
                 System.out.println("  Here are the tasks in your list:");
                 for (int i = 0; i < listLength; ++i) {
-                    System.out.println("  " + (i + 1) + taskList[i].listEntry());
+                    System.out.println("  " + (i + 1) + "." + taskList[i].listEntry());
                 }
             } else if (text.split(" ")[0].equals("done")) {
                 int toSet = Integer.parseInt(text.split(" ")[1]);
                 taskList[toSet - 1].setDone();
+                System.out.print("  Nice! I've marked this task as done:\n    " + taskList[toSet - 1].listEntry() + "\n");
             } else {
                 taskList[listLength++] = new Task(text);
                 System.out.println("  added: " + text);

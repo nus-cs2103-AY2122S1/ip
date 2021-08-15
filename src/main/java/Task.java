@@ -9,14 +9,13 @@ public class Task {
 
     public void setDone() {
         this.done = true;
-        System.out.print("  Nice! I've marked this task as done:\n    [X] " + this.taskName+ "\n");
     }
 
     public String listEntry() {
         if (done) {
-            return ".[X] " + this.taskName;
+            return "[X] " + this.taskName;
         } else {
-            return ".[ ] " + this.taskName;
+            return "[ ] " + this.taskName;
         }
     }
 }
