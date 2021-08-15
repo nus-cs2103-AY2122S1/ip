@@ -31,6 +31,7 @@ public class Duke {
         Scanner inputReader = new Scanner(System.in);
         String input = inputReader.nextLine();
         String[] inputArray = input.split(" ");
+        String[] params;
         switch (inputArray[0]) {
             case "bye":
                 System.out.println("____________________________________________________________\n"
@@ -53,13 +54,38 @@ public class Duke {
                 + tasks[taskIndex].toString() + "\n"
                 + "____________________________________________________________\n");
                 return true;
-            default:
+            case "event":
+                params = input.split("/at");
+                params[0] = params[0].substring(6, params[0].length() - 1);
+                params[1] = params[1].substring(1);
+                tasks[index] = new Event(params[0], params[1]);
+
                 System.out.println("____________________________________________________________\n"
-                        + "added:" + input + "\n"
+                        + "Got it. I've added this task: \n"
+                        + tasks[index].toString() + "\n"
                         + "____________________________________________________________\n");
-                tasks[index] = new Task(input);
+                index++;
+                return true;
+            case "deadline":
+                params = input.split("/by");
+                params[0] = params[0].substring(9, params[0].length() - 1);
+                params[1] = params[1].substring(1);
+                tasks[index] = new Deadline(params[0], params[1]);
+
+                System.out.println("____________________________________________________________\n"
+                        + "Got it. I've added this task: \n"
+                        + tasks[index].toString() + "\n"
+                        + "____________________________________________________________\n");
+                index++;
+                return true;
+            default:
+                tasks[index] = new ToDo(input);
+                System.out.println("____________________________________________________________\n"
+                        + "Got it. I've added this task: \n"
+                        + tasks[index].toString() + "\n"
+                        + "____________________________________________________________\n");
 //                Might need to check index < 100 in the future
-                index += 1;
+                index++;
                 return true;
         }
 
