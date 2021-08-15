@@ -15,6 +15,7 @@ public class Duke {
     private final String DISPLAY_LIST_MSG = "\t Here are the tasks in your list:";
     private final String TASK_DONE_MSG = "Nice! I've marked this task as done: \n\t  ";
     private final String TASK_ADDED_MSG = "Got it. I've added this task:\n\t   ";
+    private final String TASK_DELETED_MSG = "Got it. I've deleted this task:\n\t   ";
 
 
     // Command Tags for the chat bot
@@ -24,6 +25,7 @@ public class Duke {
     private final String TODO_TAG = "todo";
     private final String DEADLINE_TAG = "deadline";
     private final String EVENT_TAG = "event";
+    private final String DELETE_TAG = "delete";
 
 
     public static void main(String[] args) {
@@ -92,6 +94,8 @@ public class Duke {
                 addDeadline(msg);
             } else if (msgToCheck.contains(EVENT_TAG)) {
                 addEvent(msg);
+            } else if (msg.contains(DELETE_TAG)) {
+                deleteTask(msg);
             } else {
                 throw new UnknownTagException();
             }
@@ -164,6 +168,14 @@ public class Duke {
 
         String content = String.format(TASK_DONE_MSG + item);
         printFormattedMsg(content);
+    }
+
+    private void deleteTask(String msg) throws NoSuchTaskException, IllegalFormatException {
+        int index = getTaskId(msg);
+        Task task = this.items.get(index);
+        this.items.remove(index);
+
+        printFormattedMsg(TASK_DELETED_MSG + task + "\n\t Now you have " + getTaskCount() + " tasks in the list.");
     }
 
     /**
