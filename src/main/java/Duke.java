@@ -48,9 +48,9 @@ public class Duke {
 
         userInputRecord.add(task);
         System.out.println("    ____________________________________________________________\n" +
-                "     Got it. I've added this task: \n" +
-                "     " + task.toString() + "\n" +
-                "     Now you have " + userInputRecord.size() + " tasks in the list. \n" +
+                "     Got it. I've added this task:\n" +
+                "       " + task.toString() + "\n" +
+                "     Now you have " + userInputRecord.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________");
     }
 
@@ -65,9 +65,9 @@ public class Duke {
 
         } else {
             System.out.println("    ____________________________________________________________");
-            System.out.println("    Here are the tasks in your list:");
+            System.out.println("     Here are the tasks in your list:");
             for (int i = 0; i < userInputRecord.size(); i++) {
-                System.out.println("    " + (i + 1) + ". " + userInputRecord.get(i));
+                System.out.println("     " + (i + 1) + "." + userInputRecord.get(i));
             }
             System.out.println("    ____________________________________________________________");
         }
@@ -105,8 +105,8 @@ public class Duke {
 
     public static void main(String[] args) {
         String greeting = "    ____________________________________________________________\n" +
-                "     Hello! I'm Peoduo \n" +
-                "     Can I help you? \n" +
+                "     Hello! I'm Peoduo\n" +
+                "     Can I help you?\n" +
                 "    ____________________________________________________________";
         System.out.println(greeting);
         echo();
