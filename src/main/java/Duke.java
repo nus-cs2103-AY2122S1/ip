@@ -1,26 +1,21 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    // fields of the class
-    /**
-     * Horizontal lines that separates each block of message.
-     */
-    private final String HORIZONTAL_LINE = "\t____________________________________________________________\n";
+    // list used to store text entered by user
+    private ArrayList<String> items = new ArrayList<>();
 
-    /**
-     * Message sent by chat bot when started.
-     */
+    // Lines used to indicate a block of message
+    private final String HORIZONTAL_LINE_HEAD = "\t____________________________________________________________";
+    private final String HORIZONTAL_LINE_TAIL = String.format("\n%s\n", HORIZONTAL_LINE_HEAD);
+
+    // Default messages sent by the chat bot
     private final String WELCOME_MSG = "Hello! I am Matthew!\n\t What can I do for you?";
-
-    /**
-     * Message sent by chat bot when terminated.
-     */
     private final String EXIT_MSG = "Bye. Don't have a good day... Have a great day!!!";
 
-    /**
-     * Indication that terminates the chat bot.
-     */
+    // Command Tags for the chat bot
     private final String EXIT_TAG = "bye";
+    private final String LIST_TAG = "list";
 
     /**
      * Formats the message; puts the message in a block.
@@ -29,7 +24,7 @@ public class Duke {
      * @param msg The message to be printed by the chat bot.
      */
     private void printFormattedMsg(String msg) {
-        String formattedMsg = HORIZONTAL_LINE + String.format("\t %s\n", msg) + HORIZONTAL_LINE;
+        String formattedMsg = String.format("%s\n\t %s%s", HORIZONTAL_LINE_HEAD, msg, HORIZONTAL_LINE_TAIL);
         System.out.println(formattedMsg);
     }
 
@@ -48,18 +43,45 @@ public class Duke {
     }
 
     /**
+     * Check if the inputted string match the 'list' tag.
+     * Prints the list of items if inputted msg is 'list.
+     * Otherwise, adds the item to the list.
+     *
+     * @param msg User's input.
+     */
+    private void checkTag(String msg) {
+        // user inputs list, print the list of items added by user.
+        if (msg.equalsIgnoreCase(LIST_TAG)) {
+            System.out.println(HORIZONTAL_LINE_HEAD);
+
+            for (int i = 0; i < this.items.size(); i++) {
+                String item = String.format("\t %s. %s", (i + 1), this.items.get(i));
+                System.out.println(item);
+            }
+
+            System.out.println(HORIZONTAL_LINE_TAIL);
+        }
+
+        // add items to the list.
+        else {
+            this.items.add(msg);
+            printFormattedMsg("added: " + msg);
+        }
+    }
+
+    /**
      * Starts the chat bot.
      * Chat bot starts receiving commands from user and echo back the command until terminated.
      */
-    private void start() {
+    public void start() {
         greet();
 
         // scanner to take in user's input(s)
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().trim();
 
-        while(!input.toLowerCase().equals(EXIT_TAG)) {
-            printFormattedMsg(input);
+        while(!input.equalsIgnoreCase(EXIT_TAG)) {
+            checkTag(input);
             input = scanner.nextLine().trim();
         }
 
