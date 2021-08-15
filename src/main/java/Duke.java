@@ -14,10 +14,15 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         System.out.println("Hello from\n" + logo + greeting);
         String input = scan.nextLine();
+        String[] segment;
 
         while(!input.equals("bye")) {
+            segment = input.split(" ");
+
             if(input.equals("list")) {
                 list.list();
+            } else if (segment[0].equals("done") && segment.length == 2) {
+                list.done(Integer.parseInt(segment[1]));
             } else {
                 list.add(input);
             }
