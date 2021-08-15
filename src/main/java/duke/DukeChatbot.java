@@ -1,7 +1,8 @@
 package duke;
 
+import duke.task.DeadlineTask;
 import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.ToDoTask;
 import duke.ui.CommandParser;
 import duke.ui.CommandType;
 import duke.ui.MessageFormatter;
@@ -65,9 +66,8 @@ public class DukeChatbot {
                 case EXIT:
                     printExitMessage();
                     break;
-                case ADD_TODO:
-                    String toDoDescription = commandParser.getToDoDescription(command);
-                    ToDo toDo = new ToDo(toDoDescription);
+                case ADD_TODO_TASK:
+                    ToDoTask toDo = commandParser.getToDoTask(command);
                     addTask(toDo);
                     break;
                 case LIST_TASKS:
@@ -76,6 +76,10 @@ public class DukeChatbot {
                 case MARK_TASK_DONE:
                     int taskIndex = commandParser.getTaskIndexOfTaskMarkedDone(command);
                     markTaskDone(taskIndex);
+                    break;
+                case ADD_DEADLINE_TASK:
+                    DeadlineTask deadlineTask = commandParser.getDeadlineTask(command);
+                    addTask(deadlineTask);
                     break;
                 default:
                     // The default case should be unreachable. If this is reached, something is wrong.

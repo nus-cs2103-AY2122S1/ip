@@ -5,14 +5,14 @@ package duke.task;
  *
  * @author Jay Aljelo Saez Ting
  */
-public class ToDo extends Task {
+public class ToDoTask extends Task {
     private static final String TYPE_MARK = "T";
     /**
      * Creates a to-do task with the given task description.
      *
-     * @param taskDescription The description of the task.
+     * @param taskDescription The description of the to-do task.
      */
-    public ToDo(String taskDescription) {
+    public ToDoTask(String taskDescription) {
         super(taskDescription);
     }
 

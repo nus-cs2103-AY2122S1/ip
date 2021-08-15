@@ -1,5 +1,8 @@
 package duke.ui;
 
+import duke.task.DeadlineTask;
+import duke.task.ToDoTask;
+
 import java.util.StringTokenizer;
 
 /**
@@ -12,6 +15,7 @@ public class CommandParser {
     private static final String ADD_TODO_COMMAND = "todo";
     private static final String LIST_TASKS_COMMAND = "list";
     private static final String MARK_TASK_DONE_COMMAND = "done";
+    private static final String ADD_DEADLINE_TASK_COMMAND = "deadline";
 
     /**
      * Parses the commands to get the command name.
@@ -30,11 +34,13 @@ public class CommandParser {
         case EXIT_COMMAND:
             return CommandType.EXIT;
         case ADD_TODO_COMMAND:
-            return CommandType.ADD_TODO;
+            return CommandType.ADD_TODO_TASK;
         case LIST_TASKS_COMMAND:
             return CommandType.LIST_TASKS;
         case MARK_TASK_DONE_COMMAND:
             return CommandType.MARK_TASK_DONE;
+        case ADD_DEADLINE_TASK_COMMAND:
+            return CommandType.ADD_DEADLINE_TASK;
         default:
             throw new IllegalArgumentException("This command does not exist.");
         }
@@ -67,13 +73,13 @@ public class CommandParser {
     }
 
     /**
-     * Parses an "Add To-do Task" command to get the description of the to-do task.
+     * Parses an "Add To-do Task" command to get the to-do task.
      *
      * @param command The "Add To-do Task" command.
-     * @return The description of the to-do task.
+     * @return The to-do task.
      * @throws IllegalArgumentException If the command is empty, not an 'Add To-do Task' command, or malformed.
      */
-    public String getToDoDescription(String command) throws IllegalArgumentException {
+    public ToDoTask getToDoTask(String command) throws IllegalArgumentException {
         StringTokenizer st = new StringTokenizer(command);
         if (!st.hasMoreTokens()) {
             throw new IllegalArgumentException("This command is empty.");
@@ -85,6 +91,40 @@ public class CommandParser {
         if (!st.hasMoreTokens()) {
             throw new IllegalArgumentException("A description needs to be specified for an 'Add To-do Task' command.");
         }
-        return st.nextToken("").strip();
+        String taskDescription = st.nextToken("").strip();
+        return new ToDoTask(taskDescription);
+    }
+
+    public DeadlineTask getDeadlineTask(String command) throws IllegalArgumentException {
+        String[] tokens = command.split(" ");
+        if (tokens.length == 0) {
+            throw new IllegalArgumentException("This command is empty.");
+        }
+        String commandName = tokens[0];
+        if (!commandName.equals(ADD_DEADLINE_TASK_COMMAND)) {
+            throw new IllegalArgumentException("This command is not an 'Add Deadline Task' command.");
+        }
+        if (tokens.length == 1) {
+            throw new IllegalArgumentException(
+                    "A task description needs to be specified for an 'Add Deadline Task' command.");
+        }
+        StringBuilder taskDescription = new StringBuilder();
+        int afterByIndex = -1;
+        for (int i = 1; i < tokens.length; i++) {
+            String token = tokens[i];
+            if (token.equals("/by")) {
+                afterByIndex = i + 1;
+                break;
+            }
+            taskDescription.append(token).append(" ");
+        }
+        if (afterByIndex == -1 || afterByIndex == tokens.length) {
+            throw new IllegalArgumentException("A deadline needs to be specified for an 'Add Deadline Task' command.");
+        }
+        StringBuilder deadline = new StringBuilder();
+        for (int i = afterByIndex; i < tokens.length; i++) {
+            deadline.append(tokens[i]).append(" ");
+        }
+        return new DeadlineTask(taskDescription.toString().strip(), deadline.toString().strip());
     }
 }
