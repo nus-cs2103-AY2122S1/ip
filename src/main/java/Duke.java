@@ -16,7 +16,7 @@ public class Duke {
     }
 
     public void printMessage(String message) {
-        String formatDisplay = String.format("    %s", message);
+        String formatDisplay = String.format("\t%s", message.replaceAll("\n", "\n\t"));
         System.out.println(formatDisplay);
     }
 
@@ -30,6 +30,11 @@ public class Duke {
     public void receiveCommand(String command) {
         if (command.equals("list")) {
             this.displayTasks();
+        } else if (command.matches("done \\d+")) {
+            String taskNum = command.replaceAll("\\D+","");
+            System.out.println(taskNum);
+            int index = Integer.parseInt(taskNum) - 1;
+            this.markTask(index);
         } else {
             Task task = new Task(command);
             tasks.add(task);
@@ -52,6 +57,17 @@ public class Duke {
                 printMessage(String.format("%d.%s", num, task));
             }
         }
+    }
+
+    public void markTask(int index) {
+        try {
+            Task task = this.tasks.get(index);
+            task.MarkAsDone();
+            printMessage(String.format("Nice! I've marked this task as done: \n\t%s", task));
+        } catch (IndexOutOfBoundsException e) {
+            printMessage("There is no such task!");
+        }
+
     }
 
     public static void main(String[] args) {
