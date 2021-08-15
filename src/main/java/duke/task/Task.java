@@ -1,9 +1,13 @@
+package duke.task;
+
 /**
  * Represents a user task.
  *
  * @author Jay Aljelo Saez Ting
  */
-public class Task {
+public abstract class Task {
+
+    private static String DONE_MARK = "X";
 
     private String description;
     private boolean isDone;
@@ -21,20 +25,27 @@ public class Task {
     /**
      * Marks the task as done.
      */
-    public void complete() {
+    public void markDone() {
         isDone = true;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (isDone) {
-            sb.append("[X]");
-        } else {
-            sb.append("[ ]");
-        }
+        sb.append(getTypeIndicator());
+        sb.append(getDoneIndicator());
         sb.append(" ");
         sb.append(description);
         return sb.toString();
+    }
+
+    abstract String getTypeIndicator();
+
+    private String getDoneIndicator() {
+        if (isDone) {
+            return String.format("[%s]", DONE_MARK);
+        } else {
+            return "[ ]";
+        }
     }
 }
