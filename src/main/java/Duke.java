@@ -21,8 +21,8 @@ public class Duke {
 
 
     }
-
-
+    private static final String taskRemoved = "Noted, I've removed this task:";
+    private static final String DELETE = "delete";
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
@@ -93,7 +93,7 @@ public class Duke {
     /**
      * Prints all the strings added.
      */
-    private void list() {
+    private void list() throws DukeException {
         String output = "";
         if (ptr == 0) return;
         output += "1." + this.inputs.get(0);
@@ -157,7 +157,58 @@ public class Duke {
     }
 
 
+    /**
+     * To understand the input.
+     *
+     * @param input The input String
+     * @throws DukeException Exception due to wrong input.
+     */
+    public void inputsParser(String input) throws DukeException {
+        String[] twoInputs = input.split(" ", 2);
+        if (twoInputs[0].equals(DELETE)) {
+            if (twoInputs.length == 1) {
+                throw new DukeException("Number expected after done.");
+            }
+            String s = twoInputs[1].trim();
+            int val = Integer.parseInt(s) - 1;
+            if (val >= ptr)
+                throw new DukeException("☹ OOPS!!! The list is not that long!");
+            Task removed = inputs.remove(val);
+            print(taskRemoved + "\n\t" + removed.toString());
+            ptr--;
+        } else if (twoInputs[0].equals("done")) {
 
+            //and at what point is this considered using exception handling to dictate the control
+            if (twoInputs.length == 1) {
+                throw new DukeException("Number expected after done.");
+            }
+            String s = twoInputs[1].trim();
+            int val = Integer.parseInt(s) - 1;
+            if (val >= ptr)
+                throw new DukeException("☹ OOPS!!! The list is not that long!");
+            inputs.get(val).done();
+            print(taskComplete + "\n\t" + this.inputs.get(val));
+            //this is ridiculous, is there a way to nest the exceptions within the class
+            //without having to use the array as an input... -- maybe encapsulate the parsing in a function to make it look neat
+        } else if (twoInputs[0].equals(TODO)) {
+            if (twoInputs.length == 1)
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            todo(twoInputs[1]);
+        } else if (twoInputs[0].equals(EVENT)) {
+            if (twoInputs.length == 1)
+                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+            event(twoInputs[1]);
+        } else if (twoInputs[0].equals(DEADLINE)) {
+            if (twoInputs.length == 1)
+                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            deadline(twoInputs[1]);
+        } else if (input.equals("list")) {
+            this.list();
+
+        } else {
+            throw new DukeException();
+        }
+    }
 
 
 
@@ -172,43 +223,8 @@ public class Duke {
         this.print(greetings);
         String inpt = sc.nextLine();
         while(!inpt.equals("bye")) {
-            //split the inpt to two if possible
-            String[] twoInputs = inpt.split(" ", 2);
-
             try {
-
-                if (twoInputs[0].equals("done")) {
-
-                    //and at what point is this considered using exception handling to dictate the control
-                    if (twoInputs.length == 1) {
-                        throw new DukeException("Number expected after done.");
-                    }
-                    String s = twoInputs[1].trim();
-                    int val = Integer.parseInt(s) - 1;
-                    if (val >= ptr)
-                        throw new DukeException("☹ OOPS!!! The list is not that long!");
-                    inputs.get(val).done();
-                    print(taskComplete + "\n\t" + this.inputs.get(val));
-                //this is ridiculous, is there a way to nest the exceptions within the class
-                //without having to use the array as an input... -- maybe encapsulate the parsing in a function to make it look neat
-                } else if (twoInputs[0].equals(TODO)) {
-                    if (twoInputs.length == 1)
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                    todo(twoInputs[1]);
-                } else if (twoInputs[0].equals(EVENT)) {
-                    if (twoInputs.length == 1)
-                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-                    event(twoInputs[1]);
-                } else if (twoInputs[0].equals(DEADLINE)) {
-                    if (twoInputs.length == 1)
-                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-                    deadline(twoInputs[1]);
-                } else if (inpt.equals("list")) {
-                    this.list();
-
-                } else {
-                    throw new DukeException();
-                }
+                inputsParser(inpt);
             } catch (DukeException e) {
                 this.print(e.getMessage());
             }
