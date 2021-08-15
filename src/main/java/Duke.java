@@ -3,9 +3,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Duke {
-    private ArrayList<Command> list;
+    protected boolean isTerminated;
+    protected ArrayList<Task> list;
 
     public Duke() {
+        this.isTerminated = false;
         list = new ArrayList<>();
     }
 
@@ -18,18 +20,33 @@ public class Duke {
                         + "  ████   ██  ██████    ██     ██████  ██   ██ \n";
         Duke victor = new Duke();
         victor.greet();
-        Command command = victor.listen();
-        while (!command.isGoodBye()) {
+        Command command;
 
-            if (!command.isList()) {
-                victor.storeCommand(command);
-                victor.echo(command);
-            } else {
-                victor.printList();
-            }
+        while(!victor.isTerminated) {
             command = victor.listen();
+            victor.executeCommand(command);
         }
-        victor.bye();
+    }
+
+    private void executeCommand(Command command) {
+        if (command.isInstruction) {
+            switch(command.getInstruction()) {
+                case "list":
+                    printList();
+                    break;
+                case "done":
+                    markAsDone(Integer.parseInt(command.getParameter(1)));
+                    break;
+                case "bye":
+                    bye();
+                    break;
+                default :
+                    System.out.println("Invalid command");
+            }
+        } else {
+            storeTask(new Task(command.getInstruction()));
+            echo(command);
+        }
     }
 
     private void greet() {
@@ -45,23 +62,29 @@ public class Duke {
     private Command listen() {
         Scanner scanner = new Scanner(System.in);
         String instruction = scanner.nextLine();
-        Command command = new Command(instruction);
-        return command;
+        return new Command(instruction);
     }
 
     private void echo(Command command) {
         formatPrint("added: " + command.getInstruction());
     }
 
-    private void storeCommand(Command command) {
-        list.add(command);
+    private void storeTask(Task task) {
+        list.add(task);
+    }
+
+    private void markAsDone(int taskNumber) {
+        Task task = this.list.get(taskNumber - 1);
+        task.markAsDone();
+        formatPrint("Nice! I've marked this task as done:", "  [X] " + task.getDescription());
     }
 
     private void printList() {
         int count = 1;
-        System.out.println("\n    ____________________________________________________________");
-        for (Command command : this.list) {
-            System.out.printf("     %d. %s\n", count, command.getInstruction());
+        System.out.print("\n    ____________________________________________________________" +
+                "\n    Here are the tasks in your list:\n");
+        for (Task task : this.list) {
+            System.out.printf("     %d.[%s] %s\n", count, task.getStatusIcon(), task.getDescription());
             count++;
         }
         System.out.println("    ____________________________________________________________\n");
@@ -74,6 +97,11 @@ public class Duke {
         int random_int = rand.nextInt(goodbye.length);
         String bye = goodbye[random_int];
         formatPrint(bye);
+        terminate();
+    }
+
+    private void terminate() {
+        this.isTerminated = true;
     }
 
     private void formatPrint(String... lines) {
