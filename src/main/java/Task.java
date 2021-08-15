@@ -2,7 +2,7 @@
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 3. Mark As Done
+ * Current Progress: Level 4. ToDos, Events, Deadlines
  *
  * Description:
  * Encapsulates the Task Class which contains a task description
@@ -28,6 +28,26 @@ public class Task {
 
         this.completed = true;
 
+    }
+
+    /**
+     * Getter that returns the completion status of the task
+     *
+     * @return boolean Returns the completion status of the task
+     */
+    public boolean isCompleted() {
+
+        return this.completed;
+    }
+
+    /**
+     * Getter that returns the description of the task
+     *
+     * @return String Returns the description of the task
+     */
+    public String getDescription() {
+
+        return this.description;
     }
 
     @Override
