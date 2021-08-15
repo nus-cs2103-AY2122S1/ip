@@ -3,6 +3,11 @@ deadline buy groceries /by 11/22/23
 event meet (imaginary) girlfriend /at 14/08/21
 list
 done 2
-done 1
+list
+delete 5
+delete -1
+delete 1
+deadline buy books /at tom0\rrow
+event /by 887799
 list
 bye

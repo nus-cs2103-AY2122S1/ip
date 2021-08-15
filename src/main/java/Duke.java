@@ -1,4 +1,12 @@
-import main.java.*;
+import main.java.Task;
+import main.java.Deadline;
+import main.java.Todo;
+import main.java.Event;
+import main.java.DukeException;
+import main.java.CommandException;
+import main.java.DescriptionException;
+import main.java.InvalidCommandException;
+import main.java.TaskNumberException;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -11,6 +19,12 @@ public class Duke {
     private final String goodbyeMessage = "Bye. Hope to see you again soon!";
 
     private List<Task> taskList = new ArrayList<Task>();
+
+    //probably not needed for now but might be needed in the future
+    private enum tasks {list, todo, deadline, event, delete, done, bye};
+
+
+
 
     public static void main(String[] args) {
         new Duke().runProgram();
@@ -29,7 +43,11 @@ public class Duke {
         String input;
 
         while (true) {
+
+            //removes additional space from the input
             input = sc.nextLine().trim();
+
+            //removes space in the command input and stores the strings in an array
             String[] inputArr = input.split(" ");
 
             if (input.equals("bye")) {
@@ -78,8 +96,7 @@ public class Duke {
 
     /**
      * adds a Task object into the taskList
-     * @param inputArr String message input by the user will be used as a constructor for a new Task object to be put
-     *              into the taskList
+     * @param inputArr String array containing input by the user
      */
     public void addTask(String[] inputArr) throws InvalidCommandException {
         try {
@@ -101,6 +118,11 @@ public class Duke {
 
     }
 
+    /**
+     * Adds a TooDo Task into the List containing Tasks
+     * @param inputArr String array containing input by the user
+     * @throws DescriptionException exception thrown when there are no descriptions provided
+     */
     public void addTodo(String[] inputArr) throws DescriptionException {
         if (inputArr.length < 2) {
             throw new DescriptionException("todo");
@@ -115,6 +137,12 @@ public class Duke {
         this.taskAddCommonMessage(todoTask.toString());
     }
 
+    /**
+     * Adds a Deadline Task into the List containing Tasks
+     * @param inputArr String array containing input by the user
+     * @throws DescriptionException exception thrown when there are no descriptions provided
+     * @throws CommandException exception thrown when the specific command(s) for Deadline are not present
+     */
     public void addDeadline(String[] inputArr) throws DescriptionException, CommandException {
         if (inputArr.length < 2) {
             throw new DescriptionException("deadline");
@@ -151,6 +179,12 @@ public class Duke {
         this.taskAddCommonMessage(deadlineTask.toString());
     }
 
+    /**
+     * Adds an Event Task into the List containing Tasks
+     * @param inputArr String array containing input by the user
+     * @throws DescriptionException exception thrown when there are no descriptions provided
+     * @throws CommandException exception thrown when the command(s) for Event are not present
+     */
     public void addEvent(String[] inputArr) throws DescriptionException, CommandException {
         if (inputArr.length < 2) {
             throw new DescriptionException("event");
@@ -188,12 +222,20 @@ public class Duke {
 
     }
 
+    /**
+     * Message displayed when a task is added to the Task List
+     * @param taskString the task added to the list
+     */
     public void taskAddCommonMessage(String taskString) {
         String message = "Got it. I've added this task:\n" + taskString + "\n";
         message += String.format("Now you have %d tasks in the list.", this.taskList.size());
         this.displayText(message);
     }
 
+    /**
+     * Message displayed when a task is deleted from the Task List
+     * @param taskString the task deleted from the list
+     */
     public void taskDeleteCommonMessage(String taskString) {
         String message = "Noted. I've removed this task:\n" + taskString + "\n";
         message += String.format("Now you have %d tasks in the list.", this.taskList.size());
@@ -231,11 +273,11 @@ public class Duke {
      */
     public void displayListItems() {
 
+        //shown when there are no tasks in the list
         if (this.taskList.isEmpty()) {
             this.displayText("Your List is Empty");
             return;
         }
-
 
         System.out.println(borderLine);
 
@@ -249,8 +291,13 @@ public class Duke {
         System.out.println(borderLine);
     }
 
+    /**
+     * Deletes a task from the Tasks List
+     * @param index the task to be deleted using 1 as the starting index
+     * @throws TaskNumberException exception thrown when the task's index is not present in the list
+     */
     public void deleteTask(Integer index) throws TaskNumberException {
-        if (index > this.taskList.size()) {
+        if (index > this.taskList.size() || index < 0) {
             throw new TaskNumberException();
 
         } else {

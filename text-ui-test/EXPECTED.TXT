@@ -21,7 +21,7 @@ ____________________________________________________________
 
 ____________________________________________________________
 Got it. I've added this task:
-[E][ ] meet (imaginary) girlfriend (by: 14/08/21)
+[E][ ] meet (imaginary) girlfriend (at: 14/08/21)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 
@@ -30,7 +30,7 @@ ____________________________________________________________
 
 1. [T][ ] read books
 2. [D][ ] buy groceries (by: 11/22/23)
-3. [E][ ] meet (imaginary) girlfriend (by: 14/08/21)
+3. [E][ ] meet (imaginary) girlfriend (at: 14/08/21)
 
 ____________________________________________________________
 
@@ -42,16 +42,45 @@ ____________________________________________________________
 
 
 ____________________________________________________________
-Nice! I've marked this task as done:
-  [T][X] read books
-____________________________________________________________
 
-
-____________________________________________________________
-
-1. [T][X] read books
+1. [T][ ] read books
 2. [D][X] buy groceries (by: 11/22/23)
-3. [E][ ] meet (imaginary) girlfriend (by: 14/08/21)
+3. [E][ ] meet (imaginary) girlfriend (at: 14/08/21)
+
+____________________________________________________________
+
+
+____________________________________________________________
+main.java.TaskNumberException: The number is either not in the list or your input after the done or delete command is not an Integer! (pls do that)
+____________________________________________________________
+
+
+____________________________________________________________
+main.java.TaskNumberException: The number is either not in the list or your input after the done or delete command is not an Integer! (pls do that)
+____________________________________________________________
+
+
+____________________________________________________________
+Noted. I've removed this task:
+[T][ ] read books
+Now you have 2 tasks in the list.
+____________________________________________________________
+
+
+____________________________________________________________
+main.java.CommandException: Your task of deadline requires the command /by
+____________________________________________________________
+
+
+____________________________________________________________
+main.java.CommandException: Your task of event requires the command /at
+____________________________________________________________
+
+
+____________________________________________________________
+
+1. [D][X] buy groceries (by: 11/22/23)
+2. [E][ ] meet (imaginary) girlfriend (at: 14/08/21)
 
 ____________________________________________________________
 
