@@ -2,6 +2,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManager {
+    // Success Messages
+    private static final String TASKS_COUNT_MESSAGE = "Now you have %d %s in the list.";
+    private static final String UNDONE_TASKS_COUNT_MESSAGE = "You have %d incomplete %s remaining.";
+    private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:\n  %s\n\n" + TASKS_COUNT_MESSAGE;
+    private static final String MARKED_TASK_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n  %s\n\n" +
+            UNDONE_TASKS_COUNT_MESSAGE;
+
+    // Error Messages
+    private static final String TASK_NOT_FOUND_MESSAGE =
+            "You don't have a task with that number.";
+
     private final List<Task> taskList;
 
     public TaskManager() {
@@ -10,18 +21,37 @@ public class TaskManager {
 
     public String addTask(Task task) {
         taskList.add(task);
-        return String.format("added: %s", task.getTaskName());
+        int taskCount = getTaskCount();
+        String pluralised = taskCount > 1 ? "tasks" : "task";
+        return String.format(TASK_ADDED_MESSAGE, task, taskCount, pluralised);
     }
 
-    public Task markTaskAsDone(int taskNumber) {
+    public String markTaskAsDone(int taskNumber) {
         try {
             // User input is 1-indexed
             int taskIndex = taskNumber - 1;
             Task task = taskList.get(taskIndex);
-            return task.markAsDone();
+            task.markAsDone();
+            int undoneTaskCount = getUndoneTaskCount();
+            String pluralised = undoneTaskCount > 1 || undoneTaskCount == 0 ? "tasks" : "task";
+            return String.format(MARKED_TASK_AS_DONE_MESSAGE, task, undoneTaskCount, pluralised);
         } catch (IndexOutOfBoundsException e) {
-            throw e;
+            return TASK_NOT_FOUND_MESSAGE;
         }
+    }
+
+    private int getTaskCount() {
+        return taskList.size();
+    }
+
+    private int getUndoneTaskCount() {
+        int count = 0;
+        for (Task t : taskList) {
+            if (!t.checkTaskDone()) {
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override
