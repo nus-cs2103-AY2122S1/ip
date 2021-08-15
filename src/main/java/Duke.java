@@ -6,10 +6,12 @@ import java.util.Scanner;
  * keep track of various things.
  */
 public class Duke {
-    //Standard replies and horizontal line
-    private static final String line = "\t____________________________________________________________\n";
+    //Duke initialisation
+    private static final String line = "\t____________________________________________________________";
     private static final String intro = "Hello! I'm Duke\n\t What can I do for you?";
     private static final String bye = "Bye. Hope to see you again soon!";
+    private static String[] list = new String[100];
+    private static int listCount = 0;
 
     /**
      * Provides horizontal lines with indentation.
@@ -17,12 +19,29 @@ public class Duke {
      * @param str
      * @return formatted reply
      */
-    private static String reply(String str) {
-        return line + "\t " + str + "\n" + line;
+    private static void reply(String str) {
+         System.out.println(line);
+         System.out.println("\t " + str);
+         System.out.println(line + "\n");
+    }
+
+    /**
+     * Prints out the list.
+     */
+    private static void printList() {
+        System.out.println(line);
+        if (listCount == 0) {
+            System.out.println("\t List is empty");
+        } else {
+            for (int i = 0; i < listCount; i++) {
+                System.out.println("\t " + (i + 1) + ". " + list[i]);
+            }
+        }
+        System.out.println(line + "\n");
     }
 
     public static void main(String[] args) {
-        System.out.println(reply(intro));
+        reply(intro);
         Scanner sc = new Scanner(System.in);
         boolean on = true;
         while (on) {
@@ -30,10 +49,15 @@ public class Duke {
             switch (input) {
                 case "bye":
                     on = false;
-                    System.out.println(reply(bye));
+                    reply(bye);
                     sc.close();
                     break;
-                default: System.out.println(reply(input));
+                case "list":
+                    printList();
+                    break;
+                default:
+                    list[listCount++] = input;
+                    reply("added: " + input);
             }
         }
     }
