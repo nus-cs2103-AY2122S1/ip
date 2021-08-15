@@ -8,7 +8,7 @@ public class Duke {
     }
 
     public static void start() {
-        ArrayList<Task> l = new ArrayList<Task>();
+        MyList l = new MyList();
 
         System.out.println(
                 "Yo! Duke here \n"
@@ -22,37 +22,22 @@ public class Duke {
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                int listLength = l.size();
-                if (listLength == 0) {
-                    System.out.println("Your list is empty.");
-                } else {
-                    System.out.println("Your list items:");
-                    for (int i = 0; i < listLength; i ++) {
-                        Task t = l.get(i);
-                        String statusIcon = t.getStatusIcon();
-                        System.out.printf("%d. %s %s \n", i + 1, statusIcon, t.getTaskName());
-                    }
-                }
+                l.listAll();
             } else if (input.equals("done")) {
                 if (s.hasNextInt()) {
                     int index = s.nextInt();
-                    try {
-                        l.get(index - 1).markComplete();
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Invalid index, please try again");
-                    }
+                    l.markComplete(index);
                 } else {
                     System.out.println("Invalid index, please try again");
                 }
-            } else {
+            } else if (input.equals("todo")) {
                 Scanner s2 = new Scanner(s.nextLine());
-                String taskName = input;
+                String description = "";
                 while (s2.hasNext()) {
-                    taskName += " " + s2.next();
+                    description = s2.nextLine();
                 }
-                Task newTask = new Task(taskName, false);
-                l.add(newTask);
-                System.out.println("Added `" + taskName + "` to your list");
+                Todo newTodo = new Todo(description, false);
+                l.addTask(newTodo);
             }
             input = s.next();
         }
