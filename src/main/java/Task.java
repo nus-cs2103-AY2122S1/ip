@@ -14,6 +14,7 @@ public class Task {
         }
     }
 
+    @Override
     public String toString() {
         return String.format("[%s] %s", this.done ? "X": " ", this.taskDetails);
     }
