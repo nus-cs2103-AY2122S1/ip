@@ -19,4 +19,10 @@ public class Task {
         this.status = true;
     }
 
+    @Override
+    public String toString() {
+        return String.format("[%s] %s",
+                this.status ? "x" : " ", this.content);
+    }
+
 }

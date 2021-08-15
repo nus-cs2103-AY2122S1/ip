@@ -11,7 +11,7 @@ public class Duke {
         if (length < 6) {
             return false;
         }
-        if (input.substring(0, 5).equals("done ")) {
+        if (input.startsWith("done ")) {
             try {
                 Integer.parseInt(input.substring(5));
                 return true;
@@ -20,7 +20,7 @@ public class Duke {
             }
         }
         return false;
-    };
+    }
 
     public static void main(String[] args) {
         System.out.println("____________________________________________________________\n"
@@ -45,8 +45,8 @@ public class Duke {
                         + "Darling, here are the tasks in your list:\n");
                 for (int i = 0; i < taskList.size(); i++) {
                     Task task = taskList.get(i);
-                    String entry = String.format("%d. [%s] %s",
-                            i+1, task.getStatus() ? "X" : " ", task.getContent());
+                    String entry = String.format("%d. %s",
+                            i+1, task.toString());
                     System.out.println(entry);
                 }
                 System.out.println("____________________________________________________________\n");
@@ -59,6 +59,27 @@ public class Duke {
                         taskList.get(index - 1).getContent());
                 System.out.println(entry);
                 System.out.println("____________________________________________________________\n");
+            } else if (temp.startsWith("todo ")) {
+                Todo task = new Todo(temp);
+                taskList.add(task);
+                System.out.println("____________________________________________________________\n"
+                        + "Gotcha my dear. I've added this task for you: \n" + task.toString()
+                        + "\nNow you have " + taskList.size() + " tasks in the list.\n"
+                        + "____________________________________________________________\n");
+            } else if (temp.startsWith("deadline ")) {
+                Deadline task = new Deadline(temp);
+                taskList.add(task);
+                System.out.println("____________________________________________________________\n"
+                        + "Gotcha my dear. I've added this task for you: \n" + task.toString()
+                        + "\nNow you have " + taskList.size() + " tasks in the list.\n"
+                        + "____________________________________________________________\n");
+            } else if (temp.startsWith("event ")) {
+                Event task = new Event(temp);
+                taskList.add(task);
+                System.out.println("____________________________________________________________\n"
+                        + "Gotcha my dear. I've added this task for you: \n" + task.toString()
+                        + "\nNow you have " + taskList.size() + " tasks in the list.\n"
+                        + "____________________________________________________________\n");
             } else {
                 System.out.println("____________________________________________________________\n"
                         + "added: " + temp
