@@ -28,6 +28,8 @@ public class Duke {
             String input = inputReader.nextLine();
             run = eval(input);
         }
+
+        inputReader.close();
     }
 
     public static boolean eval(String input) {
@@ -79,8 +81,16 @@ public class Duke {
                         + "____________________________________________________________\n");
                 index++;
                 return true;
+            case "todo":
+                tasks[index] = new ToDo(input.substring(5));
+
+                System.out.println("____________________________________________________________\n"
+                        + "Got it. I've added this task: \n"
+                        + tasks[index].toString() + "\n"
+                        + "____________________________________________________________\n");
+                index++;
+                return true;
             default:
-                tasks[index] = new ToDo(input);
                 System.out.println("____________________________________________________________\n"
                         + "Got it. I've added this task: \n"
                         + tasks[index].toString() + "\n"
