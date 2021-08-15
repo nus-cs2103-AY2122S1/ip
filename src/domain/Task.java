@@ -1,5 +1,7 @@
 package domain;
 
+import helpers.StringHelpers;
+
 public class Task {
     static enum TaskState {
         NEW(" "), DONE("X");
@@ -11,10 +13,11 @@ public class Task {
         }
 
         public String toString() {
-            return String.format("[%s]", representation);
+            return StringHelpers.bracketWrap(representation);
         }
     }
 
+    public String typeString = null;
     private TaskState state;
     public String name;
 
@@ -29,6 +32,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("%s %s", state, name);
+        return String.format("%s %s %s", typeString == null ? "" : StringHelpers.bracketWrap(typeString), state, name);
     }
 }

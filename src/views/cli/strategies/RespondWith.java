@@ -10,18 +10,29 @@ import helpers.StringHelpers;
 public abstract class RespondWith {
     public Map<String, Function<String, String>> commands = new HashMap<>();
 
+    public RespondWith() {
+        // do nothing, let CLI handle this
+        commands.put("bye", (_query) -> {
+            return "";
+        });
+    }
+
     public String respond(String query) {
-        Function<String, String> f = commands.get(query.split(" ")[0]);
-        if (f != null) {
-            return f.apply(query);
+        try {
+            Function<String, String> f = commands.get(query.split(" ")[0]);
+            if (f != null) {
+                return f.apply(query);
+            }
+            return null;
+        } catch (IndexOutOfBoundsException e) {
+            return Constants.Display.INVALID_INPUT_RESPONSE;
         }
-        return null;
     }
 
     protected String endMessage = "bye";
 
     public String bye() {
-        return "Bye. Hope to see you again soon!";
+        return "~~~You know you can't get enough of me~~~";
     }
 
     public String formatResponse(String query) {

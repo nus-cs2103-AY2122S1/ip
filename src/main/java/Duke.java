@@ -11,7 +11,7 @@ public class Duke {
     }
 
     public static void run() {
-        CLI chatbot = new CLI(new MarkDone());
+        CLI chatbot = new CLI(new MultiType());
         chatbot.listen();
     }
 

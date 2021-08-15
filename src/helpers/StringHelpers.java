@@ -15,6 +15,10 @@ public class StringHelpers {
         return wrapper + inner + wrapper;
     }
 
+    public static String bracketWrap(String inner) {
+        return String.format("[%s]", inner);
+    }
+
     // reference
     // https://stackoverflow.com/questions/15888934/how-to-indent-a-multi-line-paragraph-being-written-to-the-console-in-java
     public static String indent(String s) {
