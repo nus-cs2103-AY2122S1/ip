@@ -4,20 +4,16 @@ import java.util.ArrayList;
  * Class for each individual task and a list of the tasks
  */
 public class Task {
-    private String name;
-    private int order;
-    private boolean done;
+    protected String name;
+    protected boolean done;
     private static ArrayList<Task> list_of_tasks = new ArrayList<>();
-    private static int number_of_tasks = 0;
 
     /**
      * public constructor to create a new task
      * @param name name of the task
      */
     public Task(String name) {
-        number_of_tasks++;
         this.name = name;
-        this.order = number_of_tasks;
         this.done = false;
         list_of_tasks.add(this);
     }
@@ -27,7 +23,9 @@ public class Task {
      */
     public void log_add_task() {
         System.out.println("____________________________________________________________\n"
-                + "added: " + name + "\n"
+                + "Got it. I've added this task: \n"
+                + this + "\n"
+                + "Now you have " + list_of_tasks.size() + " task(s) in the list.\n"
                 + "____________________________________________________________");
     }
 
@@ -38,7 +36,7 @@ public class Task {
         this.done = true;
         System.out.println("____________________________________________________________\n"
                 + "Nice! I've marked this task as done: \n"
-                + "[X] " + this.name + "\n"
+                + this + "\n"
                 + "____________________________________________________________");
     }
 
@@ -57,12 +55,18 @@ public class Task {
     public static void print_list_of_tasks() {
         System.out.println("____________________________________________________________\n"
                 + "Here are the tasks in your list: \n");
-        for (Task t: list_of_tasks) {
-            System.out.println(t.order + "." + "[" + t.getStatus() + "] " + t.name + "\n");
+        for (int i = 0; i < list_of_tasks.size(); i++) {
+            System.out.println((i + 1) + "." + list_of_tasks.get(i).toString()
+//                    "[" + list_of_tasks.get(i).getStatus() + "] "
+//                            + list_of_tasks.get(i).name + "\n"
+            );
         }
-        System.out.println("____________________________________________________________\n");
+        System.out.println("____________________________________________________________");
     }
 
+    /**
+     * @return state of task
+     */
     public String getStatus() {
         return (done ? "X" : " ");
     }
