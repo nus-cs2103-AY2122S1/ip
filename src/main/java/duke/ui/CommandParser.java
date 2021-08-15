@@ -18,6 +18,7 @@ public class CommandParser {
     private static final String MARK_TASK_DONE_COMMAND = "done";
     private static final String ADD_DEADLINE_TASK_COMMAND = "deadline";
     private static final String ADD_EVENT_TASK_COMMAND = "event";
+    private static final String DELETE_TASK_COMMAND = "delete";
 
     /**
      * Parses the commands to get the command name.
@@ -45,6 +46,8 @@ public class CommandParser {
             return CommandType.ADD_DEADLINE_TASK;
         case ADD_EVENT_TASK_COMMAND:
             return CommandType.ADD_EVENT_TASK;
+        case DELETE_TASK_COMMAND:
+            return CommandType.DELETE_TASK;
         default:
             throw new DukeInvalidCommandException("This command does not exist.");
         }
@@ -75,6 +78,39 @@ public class CommandParser {
         }
         if (taskNumberSb.length() == 0) {
             throw new DukeInvalidCommandException("A task number is required for a 'Mark Task Done' command.");
+        }
+        try {
+            return Integer.parseInt(taskNumberSb.toString()) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidCommandException("The task number is not a number.");
+        }
+    }
+
+    /**
+     * Parses a "Delete Task" command to get the index of the task to be deleted in the list of tasks.
+     *
+     * @param command The "Delete Task" command.
+     * @return The index of the task.
+     * @throws DukeInvalidCommandException If the command is empty, not a "Delete Task" command, or malformed.
+     */
+    public int getTaskIndexOfTaskDeleted(String command) throws DukeInvalidCommandException {
+        String[] tokens = command.strip().split(" ");
+        if (tokens.length == 0 || tokens[0].length() == 0) {
+            throw new DukeInvalidCommandException("This command is empty.");
+        }
+        String commandName = tokens[0];
+        if (!commandName.equals(DELETE_TASK_COMMAND)) {
+            throw new DukeInvalidCommandException("This command is not a 'Delete Task' command.");
+        }
+        StringBuilder taskNumberSb = new StringBuilder();
+        for (int i = 1; i < tokens.length; i++) {
+            taskNumberSb.append(tokens[i]);
+            if (taskNumberSb.length() > 0) {
+                break;
+            }
+        }
+        if (taskNumberSb.length() == 0) {
+            throw new DukeInvalidCommandException("A task number is required for a 'Delete Task' command.");
         }
         try {
             return Integer.parseInt(taskNumberSb.toString()) - 1;
