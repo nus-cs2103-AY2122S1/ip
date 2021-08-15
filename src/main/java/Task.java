@@ -1,20 +1,14 @@
-public class Task {
-    private String taskName;
-    private boolean state = false;
+public abstract class Task {
+    public abstract void setState(boolean state);
 
-    public Task(String taskName) {
-        this.taskName = taskName;
-    }
+    public abstract boolean getState();
 
-    public void setState(boolean state) {
-        this.state = state;
-    }
+    public abstract String getTaskName();
 
-    public boolean getState() {
-        return this.state;
-    }
+    public abstract String getSymbol();
 
-    public String getTaskName() {
-        return this.taskName;
+    @Override
+    public String toString() {
+        return "";
     }
 }
