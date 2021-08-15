@@ -22,7 +22,7 @@ public class TaskList {
      * @return Returns formatted string to be printed out to show task has been added or not.
      */
     public String addTask(String description) {
-        if (currentIndex >= 2) {
+        if (currentIndex >= 100) {
             return "List is full.";
         }
         Task task = new Task(description);
