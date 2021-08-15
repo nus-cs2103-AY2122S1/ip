@@ -14,6 +14,7 @@ list
 event hackerschool /at Sat 10AM
 list
 done 5
+delete 2
 list
 todo
 deadline
@@ -24,5 +25,9 @@ event noDateTimeTest
 event multipleDateTimeTest /at 12AM /at 2Am
 done -1
 done 1000
+done
+delete
+delete -1
+delete 1000
 asdf
 exit

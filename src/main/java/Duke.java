@@ -53,16 +53,26 @@ public class Duke {
                     list.printList();
                     break;
                 case DONE:
-                    int index = extractIndex(input);
                     try {
+                        int index = extractIndex(input);
                         list.markTaskAsDone(index);
+                    } catch (DukeException e) {
+                        prettyPrint(e.getMessage());
+                    }
+                    break;
+                case DELETE:
+                    try {
+                        int index = extractIndex(input);
+                        list.removeFromList(index);
                     } catch (DukeException e) {
                         prettyPrint(e.getMessage());
                     }
                     break;
                 case UNRECOGNISED:
                     Duke.prettyPrint(
-                            "NoSuchCommandError: Unrecognised command. Perhaps you made a typo?");
+                            String.format(
+                                    "NoSuchCommandError: Unrecognised command `%s`. Perhaps you made a typo?",
+                                    input.split(" ", 2)[0]));
                     break;
             }
             input = sc.nextLine();
@@ -114,8 +124,15 @@ public class Duke {
      * @param input Raw user's input.
      * @return Desired index specified by user.
      */
-    private static int extractIndex(String input) {
-        String[] inputs = input.split(" ");
+    private static int extractIndex(String input) throws DukeException {
+        String[] inputs = input.split(" ", 2);
+
+        // Check whether user input index
+        if (inputs.length < 2) {
+            throw new DukeException(
+                    "NoIndexError: Please enter an index to indicate your task of interest.");
+        }
+
         return Integer.parseInt(inputs[1]);
     }
 
@@ -155,7 +172,7 @@ public class Duke {
         if (extracted.length < 2) {
             throw new DukeException("NoDeadlineError: Please specify a deadline with '/by'.");
         } else if (extracted.length > 2) {
-            throw new DukeException("MultipleDateLineError: Please input only one deadline!");
+            throw new DukeException("MultipleDeadLineError: Please input only one deadline!");
         }
 
         String description = extracted[0];

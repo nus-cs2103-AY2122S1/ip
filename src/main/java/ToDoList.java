@@ -59,4 +59,20 @@ public class ToDoList {
             Duke.prettyPrint(String.format("Good job on completing this task!\r\n\t  %s", task));
         }
     }
+
+    public void removeFromList(int index) throws DukeException {
+        if (index > list.size()) {
+            throw new DukeException(
+                    "IndexOutOfBoundsError: Please enter an index that is shown in 'list'.");
+        } else if (index < 0) {
+            throw new DukeException("NegativeIndexError: I can't handle negative indexing.");
+        } else {
+            Task task = list.get(index - 1);
+            Duke.prettyPrint(
+                    String.format(
+                            "Noted. I've removed this task:\r\n\t  %s\r\n\tNow you have %s tasks in the list.",
+                            task, list.size() - 1));
+            list.remove(index - 1);
+        }
+    }
 }

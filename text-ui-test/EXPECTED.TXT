@@ -97,12 +97,16 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______    
 	  [E][X] hackerschool (at: Sat 10AM)
 	--------------------------------------------------------
 	--------------------------------------------------------
+	Noted. I've removed this task:
+	  [D][ ] finish tutorial (by: today 2359)
+	Now you have 4 tasks in the list.
+	--------------------------------------------------------
+	--------------------------------------------------------
 	Here are the tasks in your list:
 	1. [T][X] declare temperature later
-	2. [D][ ] finish tutorial (by: today 2359)
-	3. [D][X] review cs2100 lecture (by: 15 Aug 8AM)
-	4. [E][ ] cs2101 tutorial (at: Mon 12PM)
-	5. [E][X] hackerschool (at: Sat 10AM)
+	2. [D][X] review cs2100 lecture (by: 15 Aug 8AM)
+	3. [E][ ] cs2101 tutorial (at: Mon 12PM)
+	4. [E][X] hackerschool (at: Sat 10AM)
 	--------------------------------------------------------
 	--------------------------------------------------------
 	NoDescriptionError: todo has to be followed by a description.
@@ -114,7 +118,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______    
 	NoDeadlineError: Please specify a deadline with '/by'.
 	--------------------------------------------------------
 	--------------------------------------------------------
-	MultipleDateLineError: Please input only one deadline!
+	MultipleDeadLineError: Please input only one deadline!
 	--------------------------------------------------------
 	--------------------------------------------------------
 	NoDescriptionError: event has to be followed by a description.
@@ -132,7 +136,19 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______    
 	IndexOutOfBoundsError: Please enter an index that is shown in 'list'.
 	--------------------------------------------------------
 	--------------------------------------------------------
-	NoSuchCommandError: Unrecognised command. Perhaps you made a typo?
+	NoIndexError: Please enter an index to indicate your task of interest.
+	--------------------------------------------------------
+	--------------------------------------------------------
+	NoIndexError: Please enter an index to indicate your task of interest.
+	--------------------------------------------------------
+	--------------------------------------------------------
+	NegativeIndexError: I can't handle negative indexing.
+	--------------------------------------------------------
+	--------------------------------------------------------
+	IndexOutOfBoundsError: Please enter an index that is shown in 'list'.
+	--------------------------------------------------------
+	--------------------------------------------------------
+	NoSuchCommandError: Unrecognised command `asdf`. Perhaps you made a typo?
 	--------------------------------------------------------
 	--------------------------------------------------------
 	Bye bye! See you again soon!

@@ -11,6 +11,7 @@ public enum Command {
     TODO,
     DEADLINE,
     EVENT,
+    DELETE,
     EXIT;
 
     /**
@@ -40,6 +41,9 @@ public enum Command {
                 break;
             case "exit":
                 result = Command.EXIT;
+                break;
+            case "delete":
+                result = Command.DELETE;
                 break;
             default:
                 result = Command.UNRECOGNISED;
