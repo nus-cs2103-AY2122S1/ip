@@ -1,20 +1,14 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     public static void main(String[] args) {
-        List list = new List();
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
         start();
     }
 
     public static void start() {
-        List l = new List();
+        ArrayList<String> l = new ArrayList<String>();
 
         System.out.println(
                 "Yo! Duke here \n"
@@ -27,18 +21,18 @@ public class Duke {
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                int listLength = l.getLength();
+                int listLength = l.size();
                 if (listLength == 0) {
                     System.out.println("Your list is empty.");
                 } else {
                     System.out.println("Your list items:");
                     for (int i = 0; i < listLength; i ++) {
-                        System.out.printf("%d. %s \n", i + 1, l.getItemAtIndex(i));
+                        System.out.printf("%d. %s \n", i + 1, l.get(i));
                     }
                 }
 
             } else {
-                l.addItem(input);
+                l.add(input);
                 System.out.println("Added `" + input + "` to your list");
             }
             input = s.nextLine();
