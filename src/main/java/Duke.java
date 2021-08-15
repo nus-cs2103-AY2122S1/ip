@@ -89,27 +89,11 @@ public class Duke {
             return ans.toString();
         }
 
-        public void addTask(String task) {
-            Type type;
-            if(task.startsWith("todo")) {
-                task = task.substring(5);
-                type = Type.TODO;
-
-            } else if (task.startsWith("deadline")) {
-                task = task.substring(9);
-                type = Type.DEADLINE;
-                task = task.replace("/by", "(by:");
-                task += ")";
-            } else {
-                task = task.substring(6);
-                type = Type.EVENT;
-                task = task.replace("/at", "(at:");
-                task += ")";
-            }
+        public void addTask(String task, Type type) {
             Task taskObj = new Task(task, type);
             tasks.add(taskObj);
             System.out.println(String.format("Got it. I've added this task:\n" + taskObj.toString()));
-            System.out.println(String.format("Now you have %d tasks in the list", tasks.size()));
+            System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
         }
 
         public void doneTask(int taskNumber) {
@@ -124,24 +108,54 @@ public class Duke {
             return "Bye. Hope to see you again soon!";
         }
 
-        public void interpretInput(String input) {
+        public void interpretInput(String input) throws DukeException{
+            String task;
+            Type type;
             if(input.equals("bye")) {
                 System.out.println(byeString());
             } else if(input.equals("list")) {
                 System.out.println(taskListString());
-            } else {
-                if(input.startsWith("done")) {
-                    doneTask(Integer.parseInt(input.substring(5)));
-                } else {
-                    addTask(input);
+            } else if(input.equals("hello")) {
+                System.out.println("Hello! I'm Duke\n" +
+                        "What can I do for you?");
+            } else if (input.startsWith("done ")) {
+                doneTask(Integer.parseInt(input.substring(5)));
+            } else if(input.startsWith("todo ")) {
+                // Remove all whitespaces to test if it is empty
+                String testInput = input.replaceAll("\\s+","");
+                if(testInput.equals("todo")) {
+                    throw new EmptyTodoException();
                 }
+                task = input.substring(5);
+                type = Type.TODO;
+                addTask(task, type);
+            } else if (input.startsWith("deadline ")) {
+                task = input.substring(9);
+                type = Type.DEADLINE;
+                task = task.replace("/by", "(by:");
+                task += ")";
+                addTask(task, type);
+            } else if (input.startsWith("event ")) {
+                task = input.substring(6);
+                type = Type.EVENT;
+                task = task.replace("/at", "(at:");
+                task += ")";
+                addTask(task, type);
+            }
+            else {
+                throw new CommandNotFoundException();
             }
         }
 
         public void run() {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
-            interpretInput(input);
+            try {
+                interpretInput(input);
+            } catch(DukeException dukeException) {
+                System.out.println(dukeException.getMessage());
+                run();
+            }
             if(input.equals("bye"))  {
                 // do nothing
             } else {
