@@ -44,8 +44,12 @@ public class Duke {
                 while (s3.hasNextLine()) {
                     description = s3.nextLine();
                 }
-                Deadline newDeadline = new Deadline(description, false);
-                l.addTask(newDeadline);
+                try {
+                    Deadline newDeadline = new Deadline(description, false);
+                    l.addTask(newDeadline);
+                } catch (WrongCommandFormatException e) {
+                    System.out.println(e.getMessage());
+                }
             }
             input = s.next();
         }

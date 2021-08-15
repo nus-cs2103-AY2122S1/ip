@@ -5,23 +5,29 @@ public class Deadline extends Task {
     private String deadline;
     private String description = " ";
 
-    public Deadline(String description, boolean isDone) {
+    public Deadline(String description, boolean isDone) throws WrongCommandFormatException{
         super(description, isDone);
         Scanner s = new Scanner(description);
         while (s.hasNext()) {
             String next = s.next();
             if (next.equals("/at")) {
-                System.out.println("Wrong keyword used. Please try again with /by");
+                throw new WrongCommandFormatException("Wrong keyword used. Please try again with /by");
             } else if (next.equals("/by")) {
-                Scanner s2 = new Scanner(s.nextLine());
-                if (s2.hasNextLine()) {
-                    this.deadline = s2.nextLine();
+                if (s.hasNextLine()) {
+                    this.deadline = s.nextLine();
                 } else {
-                    System.out.println("No deadline specified. Please specify a deadline after `/d`");
+                    throw new WrongCommandFormatException(
+                            "No deadline specified. Please specify a deadline after `/d`"
+                    );
                 }
             } else {
               this.description += next;
             }
+        }
+        if (this.deadline == null) {
+            throw new WrongCommandFormatException(
+                    "No deadline specified. Please specify a deadline after `/d`"
+            );
         }
     }
 
