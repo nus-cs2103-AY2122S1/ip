@@ -1,9 +1,9 @@
 public class DukeDeadlineTask extends DukeTask {
-    final String deadline;
+    final DukeDate deadline;
 
      DukeDeadlineTask(String name, String deadline) {
         super(name);
-        this.deadline = deadline;
+        this.deadline = DukeDate.of(deadline);
     }
 
     public DukeDeadlineTask(String name, boolean isDone, String deadline) {

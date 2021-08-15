@@ -1,9 +1,9 @@
 public class DukeEvent extends DukeTask {
-    final String date;
+    final DukeDate date;
 
     DukeEvent(String name, String date) {
         super(name);
-        this.date = date;
+        this.date = DukeDate.of(date);
     }
 
     public DukeEvent(String name, boolean isDone, String date) {
