@@ -5,19 +5,24 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        TaskList taskList = new TaskList();
+
         greet();
 
         while (sc.hasNextLine()) {
             String msg = sc.nextLine();
+
             if (msg.equals("bye")) {
                 exit();
+            } else if (msg.equals("list")) {
+                taskList.list();
             } else {
-                printMessage(msg);
+                taskList.add(msg);
             }
         }
     }
 
-    private static void printMessage(String msg) {
+    public static void printMessage(String msg) {
         System.out.println(LINE_SEPARATOR + msg + "\n" + LINE_SEPARATOR);
     }
 
