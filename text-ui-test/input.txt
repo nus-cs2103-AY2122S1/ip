@@ -10,5 +10,16 @@ todo borrow book
 event orbital meeting /at Tues 4-5pm
 list
 done 6
+done 6
 list
+delete 2
+delete 4
+list
+blahblah
+delete
+done
+done -1
+delete 10
+deadline buy stationery
+event
 bye
