@@ -24,9 +24,20 @@ public class Duke {
                 isRunning = false;
             } else if (next.equals("list")) {
                 System.out.println(sepLine);
+                System.out.println("These are your tasks! \n");
                 for (int i = 0; i < taskList.size(); i++) {
                     System.out.print(i + 1 + ". " + taskList.get(i) + "\n");
                 }
+                System.out.println(sepLine);
+            } else if (next.substring(0, 4).equals("done")) {
+                // Mark a task as done
+                // We assume the command is of the form "done xxx" where xxx is an integert
+                System.out.println(sepLine);
+                Integer taskNum = Integer.parseInt(next.substring(5));
+                Task taskToComplete = taskList.get(taskNum - 1);
+                taskToComplete.markAsDone();
+                System.out.println("The task has been marked as done!");
+                System.out.println(taskToComplete);
                 System.out.println(sepLine);
             } else {
                 // Add a task to the task list
@@ -34,5 +45,6 @@ public class Duke {
                 System.out.println(sepLine + "\n added: " + next + "\n" + sepLine);
             }
         }
+        sc.close();
     }
 }
