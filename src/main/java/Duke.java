@@ -1,72 +1,30 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
 
 
 
 
-
-    private static String taskComplete = "Nice, I've marked this task as done";
-    private static String logo = " ____        _        \n"
+    private static final String taskComplete = "Nice, I've marked this task as done";
+    private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static String greetings = "Greetings! I'm Duke\n\tWhat can I do for you?";
-    private static String bye = "Godspeed young padawan!";
-    private static String hline = "\t----------------------------";
+    private static final String greetings = "Greetings! I'm Duke\n\tWhat can I do for you?";
+    private static final String bye = "Godspeed young padawan!";
+    private static final String hline = "\t----------------------------";
     //hashmap cannot enumerate
     //array of inputs capped at 100
     private Task[] inputs =  new Task[100];
     //pointer to the last location of inputs available
     private int ptr = 0;
-    private static String notDone = "[ ]";
-    private static String done = "[X]";
-
-    /**
-     * Class of a task to be done.
-     *
-     */
-    private static class Task {
-        public String name;
-        public String checkBox;
-
-        /**
-         * Constructor of task.
-         *
-         * @param s Name of the task.
-         */
-        public Task(String s) {
-            this.name = s;
-            this.checkBox = s = notDone;
-        }
-
-        /**
-         * Marks when the task is done.
-         */
-        public void done() {
-            this.checkBox = done;
-        }
-
-        @Override
-        public String toString() {
-            return this.checkBox + " " + this.name;
-        }
 
 
-        public boolean equals(String s) {
-            return this.name.equals(s);
-        }
 
-        @Override
-        public boolean equals(Object obj) {
-            if (obj instanceof Task) {
-                Task t = (Task) obj;
-                return t.name.equals(this.name);
-            }
-            return false;
-        }
-    }
 
 
     /**
@@ -105,14 +63,16 @@ public class Duke {
     }
 
     /**
-     * Adds the input String to the list.
+     * Adds the input task to the list.
      *
-     * @param s Input string.
+     * @param t Input task
      */
-    private void add(String s) {
-        this.inputs[ptr] = new Task(s);
+    private void add(Task t) {
+        this.inputs[ptr] = t;
         this.ptr++;
-        this.print(s);
+        this.print("Got it, i've added this task\n\t  " + t.toString() +
+                "\n\tNow you have " + ptr + " tasks in the list.");
+
     }
 
     /**
@@ -130,6 +90,36 @@ public class Duke {
     }
 
     /**
+     * Creates a todo task with the ipt String
+     *
+     * @param ipt
+     */
+    private void todo(String ipt) {
+        Task t = new ToDos(ipt);
+        this.add(t);
+
+    }
+
+    /**
+     * Creates a deadLine task with the input string
+     *
+     * @param input
+     */
+    private void deadline(String input) {
+        String[] arr = input.split("/by", 2);
+        Task t = new Deadlines(arr[0], arr[1]);
+        this.add(t);
+
+    }
+
+    private void event(String input) {
+        String[] arr = input.split("/at", 2);
+        Task t = new Events(arr[0], arr[1]);
+        this.add(t);
+    }
+
+
+    /**
      * Running Duke.
      */
     public void run() {
@@ -140,18 +130,33 @@ public class Duke {
         this.print(greetings);
         String inpt = sc.nextLine();
         while(!inpt.equals("bye")) {
-            //to check if the first four letters are done
-            if (inpt.length() > 4) {
-                if (inpt.substring(0, 4).equals("done")) {
-                    //TODO: should check if there is an int?
-                    String s = inpt.substring(4).trim();
-                    int val = Integer.parseInt(s) - 1;
-                    inputs[val].done();
-                    print(taskComplete + "\n\t" + inputs[val]);
-                    inpt = sc.nextLine();
-                    continue;
-                }
+            //split the inpt to two if possible
+            String[] twoInputs = inpt.split(" ", 2);
+
+
+            if (twoInputs[0].equals("done")) {
+                //TODO: should check if there is an int?
+                String s = twoInputs[1].trim();
+                int val = Integer.parseInt(s) - 1;
+                inputs[val].done();
+                print(taskComplete + "\n\t" + inputs[val]);
+                inpt = sc.nextLine();
+                continue;
+            } else if (twoInputs[0].equals(TODO)) {
+                todo(twoInputs[1]);
+                inpt = sc.nextLine();
+                continue;
+            } else if (twoInputs[0].equals(EVENT)) {
+                event(twoInputs[1]);
+                inpt = sc.nextLine();
+                continue;
+            } else if (twoInputs[0].equals(DEADLINE)) {
+                deadline(twoInputs[1]);
+                inpt = sc.nextLine();
+                continue;
             }
+
+
 
             if (inpt.equals("list")) {
                 this.list();
@@ -166,7 +171,7 @@ public class Duke {
             if (this.isAdded(inpt)) {
                 this.print("added: " + inpt);
             } else {
-                this.add(inpt);
+                this.add(new Task(inpt));
             }
             inpt = sc.nextLine();
         }
