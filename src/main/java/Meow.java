@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Meow {
     private List<Task> tasksList = new ArrayList<>();
@@ -75,7 +76,7 @@ public class Meow {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < len; i++) {
                 Task task = tasksList.get(i);
-                System.out.println(i + 1 + ". " + "[" + task.getStatusIcon() + "] " + task.getDescription());
+                System.out.println(i + 1 + ". " + task.toString());
             }
         } else {
             System.out.println("Meow: You have not added any tasks yet, please add one now~");
@@ -130,7 +131,7 @@ public class Meow {
             if (done.equals("done")) {
                 String str = input.substring(5, 6);
                 int taskNumber = Integer.parseInt(str);
-                if (taskNumber <= tasksList.size()) {
+                if (taskNumber <= tasksList.size() && taskNumber != 0) {
                     return taskNumber;
                 } else {
                     System.out.println("Meow: Hi human, the task you want to complete is not in your task list, try entering a correct task number~");
@@ -146,7 +147,95 @@ public class Meow {
 
     }
 
-    public void addTodo(String todo) {
+    private void addTodo(String todo) {
+        Todo newTodo = new Todo(todo);
+        tasksList.add(newTodo);
+        int taskListLength = tasksList.size();
+        String task = taskListLength <= 1 ? " task " : " tasks ";
+        System.out.println("Got it. I've added this task:");
+        System.out.println(newTodo.toString());
+        System.out.println("Now you have " + taskListLength + task + "in the list.");
+    }
+
+    private void addDeadline(String deadline, String by) {
+        Deadline newDeadline = new Deadline(deadline, by);
+        tasksList.add(newDeadline);
+        int taskListLength = tasksList.size();
+        String task = taskListLength <= 1 ? " task " : " tasks ";
+        System.out.println("Got it. I've added this task:");
+        System.out.println(newDeadline.toString());
+        System.out.println("Now you have " + taskListLength + task + "in the list.");
+    }
+
+    private void addEvent(String event, String at) {
+        Event newEvent = new Event(event, at);
+        tasksList.add(newEvent);
+        int taskListLength = tasksList.size();
+        String task = taskListLength <= 1 ? " task " : " tasks ";
+        System.out.println("Got it. I've added this task:");
+        System.out.println(newEvent.toString());
+        System.out.println("Now you have " + taskListLength + task + "in the list.");
+    }
+
+    private String getTypeOfTask(String input) {
+        try {
+            // Split by whitespace
+            String[] split = input.split(" ");
+            String typeOfTask = split[0].toLowerCase();
+
+            if (typeOfTask.equals("todo")) {
+                return "todo";
+            } else if (typeOfTask.equals("deadline")) {
+                return "deadline";
+            } else if (typeOfTask.equals("event")){
+                return "event";
+            } else {
+                return "invalidInput";
+            }
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            throw exception;
+        }
+    }
+
+    private String getTask(String input, String typeOfTask) {
+        return input.substring(typeOfTask.length() + 1);
 
     }
+
+    private String[] getTaskAndDate(String task, String typeOfTask) {
+        String[] split;
+        if (typeOfTask.equals("deadline")) {
+            split = task.split("/by");
+        } else {
+            split = task.split("/at");
+        }
+        return split;
+    }
+
+    /**
+     * Add different types of tasks into the task list
+     * according to user input command.
+     *
+     * @param input The user input command.
+     */
+    public void addDifferentTask(String input) {
+        String typeOfTask = getTypeOfTask(input);
+        if (typeOfTask != "invalidInput") {
+            String task = getTask(input, typeOfTask);
+            if (typeOfTask.equals("todo")) {
+                addTodo(task);
+            } else {
+                String[] taskAndDate = getTaskAndDate(task, typeOfTask);
+                if (typeOfTask.equals("deadline")) {
+                    addDeadline(taskAndDate[0], taskAndDate[1]);
+                } else {
+                    addEvent(taskAndDate[0], taskAndDate[1]);
+                }
+            }
+        } else {
+            System.out.println("Meow: You have entered an invalid command, please try again~");
+        }
+    }
+
+
 }

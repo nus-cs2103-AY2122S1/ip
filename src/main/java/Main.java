@@ -108,7 +108,7 @@ public class Main {
             } else {
                 int taskToComplete = meow.checkCompleteTask(input);
                 if (taskToComplete == 0)  {
-                    meow.addTask(input);
+                    meow.addDifferentTask(input);
                 } else if (taskToComplete != Integer.MAX_VALUE){
                     meow.completeTask(taskToComplete);
                 }
