@@ -3,28 +3,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static class Task {
-        protected boolean completed = false;
-        protected String name;
-
-        public Task(String name) {
-            this.name = name;
-            this.completed = false;
-        }
-
-        public void markComplete() {
-            this.completed = true;
-        }
-
-        public String getStatusIcon() {
-            return this.completed ? "X" : " ";
-        }
-
-        @Override
-        public String toString() {
-            return String.format("[%s] %s", this.getStatusIcon() , this.name);
-        }
-    }
     private static final Scanner scanner = new Scanner(System.in);
     private static final String ENDING_COMMAND = "bye";
 
@@ -48,9 +26,23 @@ public class Duke {
         say(message);
     }
 
-    private static void add(String item) {
-        say(String.format("added: %s", item));
-        taskList.add(new Task(item));
+    private static void add(char type, String item) {
+        switch(type) {
+            case 'T':
+                taskList.add(new ToDo(item));
+                break;
+            case 'D':
+                taskList.add(new Deadline(item));
+                break;
+            case 'E':
+                taskList.add(new Event(item));
+                break;
+            default:
+                break;
+        }
+        say("Got it. I've added this task:");
+        say(taskList.get(taskList.size() - 1).toString(), false);
+        // TODO: say the number of incomplete tasks in the list
     }
 
     private static void done(int index) {
@@ -74,8 +66,17 @@ public class Duke {
             } else if (command.startsWith("done")) {
                 String[] splitted = command.split(" ");
                 done(Integer.parseInt(splitted[1]));
-            } else {
-                add(command);
+            } else if (command.startsWith("todo")) {
+                String[] splitted = command.split(" ", 2);
+                add('T', splitted[1]);
+            } else if (command.startsWith("deadline")) {
+                // TODO: implement deadline by
+                String[] splitted = command.split(" ", 2);
+                add('D', splitted[1]);
+            } else if (command.startsWith("event")) {
+                // TODO: implement event at
+                String[] splitted = command.split(" ", 2);
+                add('E', splitted[1]);
             }
             command = prompt();
         }
