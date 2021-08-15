@@ -6,7 +6,12 @@ public class Duke {
 
     public void run() {
         this.greetUser();
-        this.echo();
+        Scanner sc = new Scanner(System.in);
+        String userInput = sc.nextLine();
+        while (!userInput.equals("bye")) {
+           receiveCommand(userInput);
+           userInput = sc.nextLine();
+        }
         this.exit();
     }
 
@@ -22,20 +27,13 @@ public class Duke {
         printMessage(detailsMessage);
     }
 
-    public void echo() {
-        Scanner sc = new Scanner(System.in);
-        boolean continueEcho = true;
-        while (continueEcho) {
-            String userInput = sc.nextLine();
-            if (userInput.equals("bye")) {
-                continueEcho = false;
-            } else if (userInput.equals("list")) {
-                this.displayTasks();
-            } else {
-                Task task = new Task(userInput);
-                tasks.add(task);
-                printMessage(String.format("added: %s", userInput));
-            }
+    public void receiveCommand(String command) {
+        if (command.equals("list")) {
+            this.displayTasks();
+        } else {
+            Task task = new Task(command);
+            tasks.add(task);
+            printMessage(String.format("added: %s", command));
         }
     }
 
