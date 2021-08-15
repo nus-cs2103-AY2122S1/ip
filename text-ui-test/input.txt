@@ -1,0 +1,28 @@
+list
+todo borrow book
+list
+deadline return book /by Sunday
+list
+done 1
+list
+event project meeting /at Mon 2-4pm
+list
+done 3
+done 599
+todo
+todo                    
+todo                        join sports club
+list
+done 2
+list
+deadline      return book     /by   Sunday      
+deadline return book/by Sunday
+deadline            /by Sunday
+deadline return book /by         
+deadline r /by nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+list
+done 7
+list
+done 7
+bye
+
