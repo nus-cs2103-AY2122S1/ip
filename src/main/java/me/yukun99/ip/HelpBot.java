@@ -5,8 +5,6 @@ import me.yukun99.ip.tasks.Event;
 import me.yukun99.ip.tasks.Task;
 import me.yukun99.ip.tasks.ToDo;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class HelpBot {
