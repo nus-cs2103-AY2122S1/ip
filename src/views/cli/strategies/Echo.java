@@ -1,5 +1,6 @@
-package modules.cli.strategies;
+package views.cli.strategies;
 
+// Level-1
 public class Echo extends RespondWith {
     @Override
     public String respond(String query) {

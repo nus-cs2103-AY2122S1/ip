@@ -1,7 +1,7 @@
 package main.java;
 
-import modules.cli.CLI;
-import modules.cli.strategies.Echo;
+import views.cli.CLI;
+import views.cli.strategies.*;
 
 public class Duke {
     public static void test() {
@@ -11,7 +11,7 @@ public class Duke {
     }
 
     public static void run() {
-        CLI chatbot = new CLI(new Echo());
+        CLI chatbot = new CLI(new SimpleListStorage());
         chatbot.listen();
     }
 

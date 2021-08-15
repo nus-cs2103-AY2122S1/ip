@@ -1,9 +1,9 @@
-package modules.cli;
+package views.cli;
 
 import java.util.Scanner;
 
 import interfaces.PrintableMixin;
-import modules.cli.strategies.RespondWith;
+import views.cli.strategies.RespondWith;
 
 public class CLI implements PrintableMixin {
     private Greeter greeter;

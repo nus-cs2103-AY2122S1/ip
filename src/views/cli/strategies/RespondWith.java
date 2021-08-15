@@ -1,4 +1,4 @@
-package modules.cli.strategies;
+package views.cli.strategies;
 
 import constants.Constants;
 import helpers.StringHelpers;

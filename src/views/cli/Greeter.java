@@ -1,4 +1,4 @@
-package modules.cli;
+package views.cli;
 
 public class Greeter {
     private static String welcomeMessage;
