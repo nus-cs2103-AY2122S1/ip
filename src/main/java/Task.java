@@ -15,12 +15,8 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getNameWithChecker() {
-        return "[" + getStatusIcon() + "] " + this.description;
-    }
-
     @Override
     public String toString() {
-        return this.description;
+        return "[" + getStatusIcon() + "] " + this.description;
     }
 }
