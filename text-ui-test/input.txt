@@ -1,0 +1,24 @@
+todo read book
+deadline finish book /by Monday
+list
+event meeting /at Tuesday 2-4pm
+todo top up card
+done 1
+done 2
+deadline return book /by Sunday
+event birthday party /at Saturday 10am-10pm
+list
+done 4
+list
+todo borrow new book
+event book convention /at Wednesday 3-6pm
+list
+done 7
+done 10
+done 5s
+done s
+deadline assignment by Monday
+event Meeting Again at Thursday 2-4pm
+list
+bye
+
