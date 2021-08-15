@@ -166,7 +166,7 @@ public class Duke {
                 run();
             }
             if(input.equals("bye"))  {
-                // do nothing
+                return;
             } else {
                 run();
             }
