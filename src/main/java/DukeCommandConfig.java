@@ -3,8 +3,8 @@ import java.util.Map;
 class DukeCommandConfig {
     static final DukeCommandConfig NO_ARGUMENTS = new DukeCommandConfig(DukeCommandArgument.NONE, Map.of());
 
-    DukeCommandArgument positionalArg;
-    Map<String, DukeCommandArgument> acceptedNamedArgs;
+    final DukeCommandArgument positionalArg;
+    final Map<String, DukeCommandArgument> acceptedNamedArgs;
 
     DukeCommandConfig(DukeCommandArgument positionalArg, Map<String, DukeCommandArgument> acceptedNamedArgs) {
         this.positionalArg = positionalArg;

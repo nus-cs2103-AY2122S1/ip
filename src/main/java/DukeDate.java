@@ -16,7 +16,7 @@ public abstract class DukeDate {
     }
 
     private static class DukeStringDate extends DukeDate {
-        private String date;
+        private final String date;
 
         private DukeStringDate(String date) {
             this.date = date;
@@ -29,7 +29,7 @@ public abstract class DukeDate {
     }
 
     private static class DukeLocalDate extends DukeDate {
-        private LocalDate date;
+        private final LocalDate date;
 
         private DukeLocalDate(LocalDate date) {
             this.date = date;
