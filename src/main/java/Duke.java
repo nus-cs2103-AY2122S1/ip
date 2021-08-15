@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class Duke {
     private static final String HORIZONTAL_LINE = "    ____________________________________________________________";
     private static final String INDENTATION = "     ";
+    private static final String LIST = "list";
     private static final String BYE = "bye";
 
     private static void greet() {
@@ -30,6 +31,20 @@ public class Duke {
     private static void echo(String command) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(INDENTATION + command);
+        System.out.println(HORIZONTAL_LINE);
+    }
+
+    private static void addTask(TaskManager taskManager, String taskName) {
+        System.out.println(HORIZONTAL_LINE);
+        Task task = new Task(taskName);
+        taskManager.addTask(task);
+        System.out.println(INDENTATION + "added: " + task.getName());
+        System.out.println(HORIZONTAL_LINE);
+    }
+
+    private static void listTasks(TaskManager taskManager) {
+        System.out.println(HORIZONTAL_LINE);
+        taskManager.printTasks();
         System.out.println(HORIZONTAL_LINE);
     }
 
@@ -51,6 +66,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        TaskManager taskManager = new TaskManager();
         Scanner scanner = new Scanner(System.in);
         greet();
         String command = scanner.nextLine();
@@ -58,8 +74,10 @@ public class Duke {
             if (command.equals(BYE)) {
                 bye();
                 break;
+            } else if (command.equals(LIST)) {
+                listTasks(taskManager);
             } else {
-                echo(command);
+                addTask(taskManager, command);
             }
             command = scanner.nextLine();
         }
