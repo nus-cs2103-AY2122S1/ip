@@ -16,12 +16,6 @@
 
     ____________________________________________________________
      This command is invalid.
-     This command is empty.
-     Please try again.
-    ____________________________________________________________
-
-    ____________________________________________________________
-     This command is invalid.
      This command does not exist.
      Please try again.
     ____________________________________________________________
@@ -32,13 +26,7 @@
 
     ____________________________________________________________
      This command is invalid.
-     A description needs to be specified for an 'Add To-do Task' command.
-     Please try again.
-    ____________________________________________________________
-
-    ____________________________________________________________
-     This command is invalid.
-     A description needs to be specified for an 'Add To-do Task' command.
+     A description is required for an 'Add To-do Task' command.
      Please try again.
     ____________________________________________________________
 
@@ -50,13 +38,7 @@
 
     ____________________________________________________________
      This command is invalid.
-     A task number needs to be specified for a 'Mark Task Done' command.
-     Please try again.
-    ____________________________________________________________
-
-    ____________________________________________________________
-     This command is invalid.
-     A task number needs to be specified for a 'Mark Task Done' command.
+     A task number is required for a 'Mark Task Done' command.
      Please try again.
     ____________________________________________________________
 
@@ -79,31 +61,19 @@
 
     ____________________________________________________________
      This command is invalid.
-     A description needs to be specified for an 'Add Deadline Task' command.
+     A description is required for an 'Add Deadline Task' command.
      Please try again.
     ____________________________________________________________
 
     ____________________________________________________________
      This command is invalid.
-     A description needs to be specified for an 'Add Deadline Task' command.
+     A deadline is required for an 'Add Deadline Task' command.
      Please try again.
     ____________________________________________________________
 
     ____________________________________________________________
      This command is invalid.
-     A deadline needs to be specified for an 'Add Deadline Task' command.
-     Please try again.
-    ____________________________________________________________
-
-    ____________________________________________________________
-     This command is invalid.
-     A deadline needs to be specified for an 'Add Deadline Task' command.
-     Please try again.
-    ____________________________________________________________
-
-    ____________________________________________________________
-     This command is invalid.
-     A deadline needs to be specified for an 'Add Deadline Task' command.
+     A deadline is required for an 'Add Deadline Task' command.
      Please try again.
     ____________________________________________________________
 
@@ -121,31 +91,19 @@
 
     ____________________________________________________________
      This command is invalid.
-     A description needs to be specified for an 'Add Event Task' command.
+     A description is required for an 'Add Event Task' command.
      Please try again.
     ____________________________________________________________
 
     ____________________________________________________________
      This command is invalid.
-     A description needs to be specified for an 'Add Event Task' command.
+     An event time is required for an 'Add Event Task' command.
      Please try again.
     ____________________________________________________________
 
     ____________________________________________________________
      This command is invalid.
-     An event time needs to be specified for an 'Add Event Task' command.
-     Please try again.
-    ____________________________________________________________
-
-    ____________________________________________________________
-     This command is invalid.
-     An event time needs to be specified for an 'Add Event Task' command.
-     Please try again.
-    ____________________________________________________________
-
-    ____________________________________________________________
-     This command is invalid.
-     An event time needs to be specified for an 'Add Event Task' command.
+     An event time is required for an 'Add Event Task' command.
      Please try again.
     ____________________________________________________________
 
