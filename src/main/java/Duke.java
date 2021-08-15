@@ -58,6 +58,19 @@ public class Duke {
                                 throw new InvalidInputException("Task number does not exist.");
                             }
                             break;
+                        case "delete":
+                            try {
+                                int index = Integer.parseInt(text);
+                                text = "Noted. I've removed this task: \n" +
+                                        "\t\t" + taskList.get(index - 1).toString() + "\n" +
+                                        "\tNow you have " + (taskList.size() - 1) + " tasks in the list.";
+                                taskList.remove(index - 1);
+                            } catch (NumberFormatException e) {
+                                throw new InvalidInputException("To delete a task: enter \"delete (task number)\"");
+                            } catch (IndexOutOfBoundsException e) {
+                                throw new InvalidInputException("Task number does not exist.");
+                            }
+                            break;
                         case "todo":
                             if (text.length() == 0) {
                                 throw new InvalidInputException("ToDo task needs a description.");
