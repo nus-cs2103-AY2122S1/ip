@@ -4,7 +4,7 @@ import java.util.Scanner;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 4. ToDos, Events, Deadlines
+ * Current Progress: A-TextUiTesting
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.
