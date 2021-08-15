@@ -4,6 +4,7 @@ public class Deadline extends Task {
 
     private String deadline;
     private String description = " ";
+    private boolean isDone;
 
     public Deadline(String description, boolean isDone) throws WrongCommandFormatException{
         super(description, isDone);
@@ -17,7 +18,7 @@ public class Deadline extends Task {
                     this.deadline = s.nextLine();
                 } else {
                     throw new WrongCommandFormatException(
-                            "No deadline specified. Please specify a deadline after `/d`"
+                            "No deadline specified. Please specify a deadline after `/by`"
                     );
                 }
             } else {
@@ -26,14 +27,24 @@ public class Deadline extends Task {
         }
         if (this.deadline == null) {
             throw new WrongCommandFormatException(
-                    "No deadline specified. Please specify a deadline after `/d`"
+                    "No deadline specified. Please specify a deadline after `/by`"
             );
         }
+        this.isDone = isDone;
     }
 
     @Override
     public String getTypeIcon() {
         return "[D]";
+    }
+
+    @Override
+    public String getStatusIcon() {
+        if (isDone) {
+            return "[X]";
+        } else {
+            return "[ ]";
+        }
     }
 
     @Override
@@ -52,5 +63,20 @@ public class Deadline extends Task {
                 + " (by:"
                 + this.deadline
                 + ")";
+    }
+
+    @Override
+    public void markComplete() {
+        if (this.isDone) {
+            System.out.println("`" + this.description + "`" + " is already completed.");
+        } else {
+            System.out.println("Completed: "
+                            + this.description
+                            + " (by:"
+                            + this.deadline + ")"
+            );
+            System.out.println("You didn't overshoot the deadline right?");
+            this.isDone = true;
+        }
     }
 }
