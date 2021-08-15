@@ -32,7 +32,7 @@ public class Duke {
     private static void printList(int len) {
         for (int i = 0; i < len; i++) {
             Task curr = myList[i];
-            System.out.printf("%s.[%s] %s\n", i + 1, curr.getStatusIcon(), curr.description);
+            System.out.printf("%s. %s\n", i + 1, curr);
         }
     }
 
@@ -40,6 +40,6 @@ public class Duke {
         int index = Integer.parseInt(text.split(" ")[1]) - 1;
         Task curr = myList[index];
         curr.setDone();
-        System.out.printf("[%s] %s\n", curr.getStatusIcon(), curr.description);
+        System.out.println(curr);
     }
 }
