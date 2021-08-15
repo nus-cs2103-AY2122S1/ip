@@ -1,7 +1,19 @@
+invalid attempt
+todo
 todo a todo task
+deadline
+deadline 1
 deadline cs2103t ip /thur 2359
+event
+event 1
 event sem1 /aug-nov
 list
 done 1
 list
+delete 1
+list
+done
+delete
+done 10
+delete 10
 bye
