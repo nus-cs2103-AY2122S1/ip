@@ -1,3 +1,5 @@
+package task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class TaskManager {
     /**
      * This is constructor method of TaskManager
      */
-    TaskManager() {
+    public TaskManager() {
         tasks = new ArrayList<>();
     }
 
@@ -26,6 +28,15 @@ public class TaskManager {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * Get size of tasks
+     *
+     * @return tasks size
+     */
+    public int size() {
+        return tasks.size();
     }
 
     /**

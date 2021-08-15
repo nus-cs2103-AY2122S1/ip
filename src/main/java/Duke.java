@@ -1,3 +1,5 @@
+import task.*;
+
 import java.util.Scanner;
 
 /**
@@ -18,6 +20,9 @@ import java.util.Scanner;
 public class Duke {
     private static final String HORIZONTAL_LINE = "    ____________________________________________________________";
     private static final String INDENTATION = "     ";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
     private static final String LIST = "list";
     private static final String DONE = "done";
     private static final String BYE = "bye";
@@ -35,11 +40,34 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    private static void addTask(TaskManager taskManager, String taskName) {
+    private static void addTask(TaskManager taskManager, String operation, String content) {
         System.out.println(HORIZONTAL_LINE);
-        Task task = new Task(taskName);
-        taskManager.addTask(task);
-        System.out.println(INDENTATION + "added: " + task.getName());
+        System.out.println(INDENTATION + "Got it. I've added this task:");
+        switch (operation) {
+            case TODO:
+                Todo todo = new Todo(content);
+                taskManager.addTask(todo);
+                System.out.println(INDENTATION + "  " + todo.toString());
+                break;
+            case DEADLINE: {
+                String taskName = content.split(" /by ", 2)[0];
+                String byTime = content.split(" /by ", 2)[1];
+                Deadline deadline = new Deadline(taskName, byTime);
+                taskManager.addTask(deadline);
+                System.out.println(INDENTATION + "  " + deadline.toString());
+                break;
+            }
+            case EVENT: {
+                String taskName = content.split(" /at ", 2)[0];
+                String atTime = content.split(" /at ", 2)[1];
+                Event event = new Event(taskName, atTime);
+                taskManager.addTask(event);
+                System.out.println(INDENTATION + "  " + event.toString());
+                break;
+            }
+        }
+        System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
+                (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
         System.out.println(HORIZONTAL_LINE);
     }
 
@@ -92,13 +120,18 @@ public class Duke {
                 listTasks(taskManager);
             } else if (operation.contains(DONE)) {
                 try {
-                    int number = Integer.parseInt(command.split(" ")[1]);
+                    int number = Integer.parseInt(command.split(" ", 2)[1]);
                     completeTask(taskManager, number);
                 } catch (Exception e) {
                     System.out.println("Input error: " + e.getMessage() + ", please try again.");
                 }
             } else {
-                addTask(taskManager, command);
+                try {
+                    String content = command.split(" ", 2)[1];
+                    addTask(taskManager, operation, content);
+                } catch (Exception e) {
+                    System.out.println("Input error: " + e.getMessage() + ", please try again.");
+                }
             }
             command = scanner.nextLine();
             operation = command.split(" ")[0];

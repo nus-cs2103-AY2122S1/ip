@@ -1,3 +1,5 @@
+package task;
+
 /**
  * The is the Task class that contains the properties
  * of a task.
@@ -7,7 +9,7 @@
  * @since   1.0
  */
 
-public class Task {
+public abstract class Task {
     private final String name;
     private final boolean isDone;
 
@@ -16,7 +18,7 @@ public class Task {
      *
      * @param name task name
      */
-    Task(String name) {
+    public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
@@ -27,7 +29,7 @@ public class Task {
      * @param name   task name
      * @param isDone task status: done or not done
      */
-    Task(String name, boolean isDone) {
+    public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
     }
@@ -46,9 +48,7 @@ public class Task {
      *
      * @return task with done status
      */
-    public Task markAsDone() {
-        return new Task(name, true);
-    }
+    public abstract Task markAsDone();
 
     /**
      * Get name of task.
