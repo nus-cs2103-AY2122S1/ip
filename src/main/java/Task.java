@@ -18,8 +18,9 @@ public class Task {
         return this.completed;
     }
 
-    // Return task details
-    public String getDetails() {
-        return details;
+    @Override
+    public String toString() {
+        String status = this.completed ? "[X]" : "[ ]";
+        return status + " " + details;
     }
 }
