@@ -29,10 +29,27 @@ public class Duke {
                 // cant put done word as a task
             }else if (userInput.toLowerCase().startsWith("done")) {
                 markTaskDone(userInput, tasks);
+            } else if(userInput.toLowerCase().startsWith("delete")) {
+                deleteTask(userInput, tasks);
             } else {
-                addTask(userInput, tasks);
+                try {
+                    addTask(userInput, tasks);
+                }catch(IllegalArgumentException e) {
+                    dukeReply("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }catch(StringIndexOutOfBoundsException e) {
+                    //Occurs if only type of task is entered. Maybe add a checcValidity funcitno
+                    dukeReply("OOPS!!! The description of a todo cannot be empty.");
+                }
             }
         }
+    }
+
+    public static void deleteTask(String userInput, List<Task> tasks) {
+        int taskToDel = Integer.parseInt(userInput.substring(7)) - 1;
+        tasks.remove(taskToDel);
+        Task task = tasks.get(taskToDel);
+        dukeReply(String.format("Noted. I've removed this task:\n%s\nNow you have %s tasks in list"
+                , task, tasks.size()));
     }
 
     /**
@@ -42,22 +59,24 @@ public class Duke {
      */
     public static void addTask(String userInput, List<Task> tasks) {
         Task taskToAdd;
+
         if(userInput.toLowerCase().startsWith("todo")) {
             taskToAdd = new ToDo(userInput.substring(5));
         } else if (userInput.toLowerCase().startsWith("deadline")){
             int dateIndex = userInput.indexOf("/by");
             String[] dateAndTask = sepDateFromTask(dateIndex,9, userInput);
             taskToAdd = new Deadline(dateAndTask[0], dateAndTask[1]);
-        }else if(userInput.toLowerCase().startsWith("event")) {
+        } else if(userInput.toLowerCase().startsWith("event")) {
             int dateIndex = userInput.indexOf("/at");
             String[] dateAndTask = sepDateFromTask(dateIndex,6, userInput);
             taskToAdd = new Event(dateAndTask[0], dateAndTask[1]);
-        }else {
+        } else {
             throw new IllegalArgumentException("Please specify type of task");
         }
+
         tasks.add(taskToAdd);
         dukeReply(String.format("Got it. I've added this task:\n" +
-                "  %s\nNumber of tasks: %s", taskToAdd.toString(), tasks.size()));
+                "%s\nNumber of tasks: %s", taskToAdd.toString(), tasks.size()));
     }
 
     /**
@@ -74,7 +93,7 @@ public class Duke {
             task = userInput.substring(taskIndex, dateIndex - 1);
             date = userInput.substring(dateIndex + 4);
         }else {
-            task = userInput.substring(9);
+            task = userInput.substring(taskIndex);
             date = "?";
         }
         return new String[] {task, date};
