@@ -33,11 +33,19 @@ public class Duke {
             } else if (input.equals("todo")) {
                 Scanner s2 = new Scanner(s.nextLine());
                 String description = "";
-                while (s2.hasNext()) {
+                while (s2.hasNextLine()) {
                     description = s2.nextLine();
                 }
                 Todo newTodo = new Todo(description, false);
                 l.addTask(newTodo);
+            } else if (input.equals("deadline")) {
+                Scanner s3 = new Scanner(s.nextLine());
+                String description = "";
+                while (s3.hasNextLine()) {
+                    description = s3.nextLine();
+                }
+                Deadline newDeadline = new Deadline(description, false);
+                l.addTask(newDeadline);
             }
             input = s.next();
         }
