@@ -1,6 +1,6 @@
-import message.ExitMessage;
-import message.GreetingMessage;
-import message.OutputMessage;
+import jarvis.message.ExitMessage;
+import jarvis.message.GreetingMessage;
+import jarvis.message.OutputMessage;
 
 import java.util.Scanner;
 

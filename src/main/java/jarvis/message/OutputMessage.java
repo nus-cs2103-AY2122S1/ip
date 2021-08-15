@@ -1,4 +1,4 @@
-package message;
+package jarvis.message;
 
 public class OutputMessage {
     public static final String TAB = "\t";

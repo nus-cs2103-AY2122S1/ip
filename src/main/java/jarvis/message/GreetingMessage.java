@@ -1,4 +1,4 @@
-package message;
+package jarvis.message;
 
 public class GreetingMessage extends OutputMessage{
     private static final String defaultGreetingMessage = "Hello! I'm JARVIS"

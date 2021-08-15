@@ -1,4 +1,4 @@
-package message;
+package jarvis.message;
 
 public class ExitMessage extends OutputMessage{
     private static final String defaultExitMessage = "Bye Bye! I am always ready when you need me!";
