@@ -11,7 +11,7 @@ public class Task {
 
     public void setDone() {
         this.done = true;
-        System.out.print("Nice! I've marked this task as done:\n  [X] " + this.taskName+ "\n");
+        System.out.print("  Nice! I've marked this task as done:\n    [X] " + this.taskName+ "\n");
     }
 
     public String listEntry() {
