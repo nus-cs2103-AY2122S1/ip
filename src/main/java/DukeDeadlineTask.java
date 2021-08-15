@@ -8,7 +8,7 @@ public class DukeDeadlineTask extends DukeTask {
 
     public DukeDeadlineTask(String name, boolean isDone, String deadline) {
         super(name, isDone);
-        this.deadline = deadline;
+        this.deadline = DukeDate.of(deadline);
     }
 
     @Override

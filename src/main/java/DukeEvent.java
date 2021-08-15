@@ -8,7 +8,7 @@ public class DukeEvent extends DukeTask {
 
     public DukeEvent(String name, boolean isDone, String date) {
         super(name, isDone);
-        this.date = date;
+        this.date = DukeDate.of(date);
     }
 
     @Override
