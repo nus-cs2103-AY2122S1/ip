@@ -4,30 +4,48 @@ import java.util.Scanner;
 public class Duke {
 
     private final ArrayList<Task> tasks = new ArrayList<>();
+    private Boolean end = false;
 
     /**
      * This method marks the task at the specified index and prints out a response
      * to the "done" command.
      *
      * @param indexToMark  An int that represents the task to be marked
+     * @throws TaskNotFoundException  An exception indicating the task does not exist
+     * @throws TaskIsCompleteException  An exception indicating the task is already completed
      */
-    private void doneTask(int indexToMark) {
-        tasks.get(indexToMark).markAsDone();
-        System.out.println("\t_______________________________");
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.printf("\t%s\n", tasks.get(indexToMark));
-        System.out.println("\t_______________________________");
+    private void doneTask(int indexToMark) throws TaskNotFoundException, TaskIsCompleteException {
+        if (tasks.size() - 1 > indexToMark) {
+            Task t = tasks.get(indexToMark);
+            if (t.isDone) {
+                throw new TaskIsCompleteException(indexToMark + 1);
+            } else {
+                t.markAsDone();
+                System.out.println("\t_______________________________");
+                System.out.println("\tNice! I've marked this task as done:");
+                System.out.printf("\t%s\n", tasks.get(indexToMark));
+                System.out.println("\t_______________________________");
+            }
+        } else {
+            throw new TaskNotFoundException(indexToMark + 1);
+        }
     }
 
     /**
      * This method list out all the task so far upon "list" command.
+     *
+     * @throws EmptyListException
      */
-    private void listOutTasks() {
-        System.out.println("\t_______________________________");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("\t%d. %s\n", i+1, tasks.get(i));
+    private void listOutTasks() throws EmptyListException {
+        if (tasks.size() != 0) {
+            System.out.println("\t_______________________________");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.printf("\t%d. %s\n", i + 1, tasks.get(i));
+            }
+            System.out.println("\t_______________________________");
+        } else {
+            throw new EmptyListException();
         }
-        System.out.println("\t_______________________________");
     }
 
     /**
@@ -43,40 +61,51 @@ public class Duke {
      * This method registers and add the tasks to the list.
      *
      * @param description  A String that describes the task to be added.
+     * @throws UnknownCommandException  An exception indicating an unknown command given
+     * @throws CommandParamException    An exception indicating invalid description of command
+     * @throws EmptyDescriptionException  An exception indicating empty description for a task
      */
-    private void addTasks(String taskType, String description) {
+    private void addTasks(String taskType, String description) throws UnknownCommandException, CommandParamException, EmptyDescriptionException {
         Task t;
         if (taskType.equals("todo")) {
+            if (description.equals("")) {
+                throw new EmptyDescriptionException(taskType);
+            }
             t = new ToDo(description);
         } else if (taskType.equals("deadline")) {
-            String[] parts = description.split("/by");
-            t = new Deadline(parts[0].trim(), parts[1].trim());
+            if (description.equals("")) {
+                throw new EmptyDescriptionException(taskType);
+            }
+            if (description.contains("/by")) {
+                String[] parts = description.split("/by");
+                t = new Deadline(parts[0].trim(), parts[1].trim());
+            } else {
+                throw new CommandParamException(taskType);
+            }
         } else if (taskType.equals("event")) {
-            String[] parts = description.split("/at");
-            t = new Event(parts[0].trim(), parts[1].trim());
+            if (description.equals("")) {
+                throw new EmptyDescriptionException(taskType);
+            }
+            if (description.contains("/at")) {
+                String[] parts = description.split("/at");
+                t = new Event(parts[0].trim(), parts[1].trim());
+            } else {
+                throw new CommandParamException(taskType);
+            }
         } else {
-            return;
+            throw new UnknownCommandException();
         }
         tasks.add(t);
         System.out.println("\t_______________________________");
         System.out.println("\tGot it. I've added this task: ");
         System.out.printf("\t  %s\n", t);
-        System.out.printf("\tNow you have %d tasks in the list.\n", tasks.size());
+        System.out.printf("\tNow you have %d ", tasks.size());
+        System.out.println((tasks.size() == 1 ? "task" : "tasks") + " in the list.");
         System.out.println("\t_______________________________");
     }
 
-    /**
-     * This is the main point of interaction of user and Duke.
-     */
-    public void run() {
-        System.out.println("Hello I'm FullOfBugs. What can I do for you?");
-        Boolean end = false;
-        Scanner s = new Scanner(System.in);
-
-        while(!end) {
-            //First word is command
-            String input = s.next().trim();
-            //This chunk might have to change depending on the types of command
+    private void readCommand(String input, Scanner s) { //try - catch here
+        try {
             switch (input) {
                 case "":
                     break;
@@ -89,12 +118,29 @@ public class Duke {
                     break;
                 case "bye":
                     this.endDuke();
-                    end = true;
+                    this.end = true;
                     break;
                 default:
                     String fullLine = s.nextLine();
                     this.addTasks(input, fullLine);
             }
+        } catch (DukeException e) {
+            System.out.println("\t_______________________________");
+            System.out.printf("\t%s\n", e.getMessage());
+            System.out.println("\t_______________________________");
+        }
+    }
+
+    /**
+     * This is the main point of interaction of user and Duke.
+     */
+    public void run() {
+        System.out.println("Hello I'm FullOfBugs. What can I do for you?");
+        Scanner s = new Scanner(System.in);
+
+        while(!this.end) {
+            String input = s.next().trim();
+            this.readCommand(input, s);
         }
         s.close();
     }
