@@ -13,12 +13,19 @@ public class Duke {
 
     public static void start() {
         System.out.println(
-                "Hello! I'm Duke \n"
-                        + "What can I do for you? \n"
+                "Yo! Duke here \n"
+                + "What did you call me for? \n"
+                + "It better be something useful or else... \n"
         );
 
         Scanner s = new Scanner(System.in);
-        System.out.println(s.next());
-    }
+        String input = s.next();
 
+        while (!input.equals("bye")) {
+            System.out.println(input);
+            input = s.next();
+        }
+
+        System.out.println("Good riddance! Time to continue my beauty sleep :)");
+    }
 }
