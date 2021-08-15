@@ -1,9 +1,9 @@
 import java.util.Map;
 
 public class DukeCommandWithArgs {
-    DukeCommand baseCommand;
-    String positionalArg;
-    Map<String, String> namedArgs;
+    private final DukeCommand baseCommand;
+    private final String positionalArg;
+    private final Map<String, String> namedArgs;
 
     public DukeCommandWithArgs(DukeCommand baseCommand, String positionalArg, Map<String, String> namedArgs) {
         this.baseCommand = baseCommand;

@@ -1,5 +1,6 @@
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Ui {
@@ -31,5 +32,13 @@ public class Ui {
 
     public void printExitMessage() {
         outputLine("Goodbye from\n" + logo);
+    }
+
+    public void printHelp() {
+        try {
+            DukeCommand.HELP.apply(null, this, null, "", Map.of());
+        } catch (InvalidCommandException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -3,7 +3,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class TaskList {
-    List<DukeTask> list;
+    private final List<DukeTask> list;
 
     public TaskList() {
         this(new ArrayList<>());

@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Duke {
     private static final String SAVE_FILE_LOCATION = "duke-task-list.txt";
     private final Ui ui;
@@ -28,31 +26,22 @@ public class Duke {
 
     public void start() {
         ui.printWelcomeMessage();
-        try {
-            DukeCommand.HELP.apply(taskList, ui, storage, "", Map.of());
-        } catch (InvalidCommandException e) {
-            e.printStackTrace();
-        }
-        boolean shouldListen;
+        ui.printHelp();
+        boolean shouldContinue = true;
         do {
-            String command = ui.nextCommand();
-            shouldListen = parseAndRun(command);
-        } while (shouldListen);
+            String commandStr = ui.nextCommand();
+            DukeCommandWithArgs command = parser.parse(commandStr);
+            if (command == null) {
+                // Command not found
+                ui.outputLine(String.format("Unknown command: %s. Type \"help\" for a list of available commands.", commandStr));
+            } else {
+                try {
+                    shouldContinue = command.runWith(taskList, ui, storage);
+                } catch (InvalidCommandException e) {
+                    ui.outputLine(String.format("Error in \"%s\": %s\nType \"help %s\" to view proper usage of the command.", command.getBaseCommand().getName(), e.getMessage(), command.getBaseCommand().getName()));
+                }
+            }
+        } while (shouldContinue);
         ui.printExitMessage();
-    }
-
-    public boolean parseAndRun(String commandStr) {
-        DukeCommandWithArgs command = parser.parse(commandStr);
-        if (command == null) {
-            // Command not found
-            ui.outputLine(String.format("Unknown command: %s. Type \"help\" for a list of available commands.", commandStr));
-            return true;
-        }
-        try {
-            return command.runWith(taskList, ui, storage);
-        } catch (InvalidCommandException e) {
-            ui.outputLine(String.format("Error in \"%s\": %s\nType \"help %s\" to view proper usage of the command.", command.getBaseCommand().getName(), e.getMessage(), command.getBaseCommand().getName()));
-            return true;
-        }
     }
 }
