@@ -1,3 +1,5 @@
+import jdk.jfr.Event;
+
 public class DukeList {
     private Task[] list = new Task[100];
     private int count = 0;
@@ -34,6 +36,19 @@ public class DukeList {
         String limit = strings.length == 1 ? "" : strings[1];
 
         Deadlines input = new Deadlines(strings[0], limit);
+        list[count] = input;
+        count += 1;
+
+        displayTask(input);
+    }
+
+    
+    public void addEvents(String text) {
+        String[] strings = text.split(" /at ", 2);
+
+        String limit = strings.length == 1 ? "" : strings[1];
+
+        Events input = new Events(strings[0], limit);
         list[count] = input;
         count += 1;
 
