@@ -4,7 +4,7 @@ public class Duke {
     
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        String[] stringArray = new String[100];
+        Task[] taskArray = new Task[100];
         int listIndex = 0;
 
         String logo = " ____        _        \n"
@@ -20,12 +20,24 @@ public class Duke {
 
             if (input.equals("list")) {
                 for (int i = 0; i < 100; i++) {
-                    if (stringArray[i] == null) {
+                    if (taskArray[i] == null) {
                         break;
                     }
                     int listNumber = i + 1;
-                    System.out.println(listNumber + ". " + stringArray[i]);
+                    System.out.println(listNumber + ". " + taskArray[i].toString());
                 }
+                continue;
+            }
+
+            if (input.equals("done")) {
+                int index = scan.nextInt();
+                int arrayIndex = index - 1;
+                if (index > listIndex || index < 1) {
+                    System.out.println("Sorry, that task does not exist!");
+                    continue;
+                }
+                taskArray[arrayIndex].setCompleted();
+                System.out.println("Ok, very nice. I have set the following task as completed.\n" + taskArray[arrayIndex].toString());
                 continue;
             }
 
@@ -34,7 +46,7 @@ public class Duke {
             }
 
             System.out.println("Added: " + input);
-            stringArray[listIndex] = input;
+            taskArray[listIndex] = new Task(input);
             listIndex += 1;
         }
 
