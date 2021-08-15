@@ -71,7 +71,7 @@ public class Nyx {
                         INDENTATION, INDENTATION, task);
                 System.out.printf("%sNow you have %d tasks in the list.%n", INDENTATION, taskList.size());
             } else {
-                System.out.println("I dont understand this command... Please try again.");
+                System.out.println(INDENTATION + "I dont understand this command... Please try again.");
             }
             System.out.println(LINE + "\n");
         }

@@ -1,0 +1,13 @@
+todo gym workout 
+deadline CS2103 Quiz /by Sunday 15th June
+good morning
+list
+done 1
+event class party /at Thursday 19th August 7pm
+list
+done 2
+list
+done 7
+done 3
+list
+bye
