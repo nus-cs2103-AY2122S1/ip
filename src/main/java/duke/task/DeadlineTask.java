@@ -6,6 +6,7 @@ package duke.task;
  * @author Jay Aljelo Saez Ting
  */
 public class DeadlineTask extends TemporalTask {
+
     private static final String TYPE_MARK = "D";
     private static final String TIME_RELATION = "by";
 

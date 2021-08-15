@@ -6,7 +6,9 @@ package duke.task;
  * @author Jay Aljelo Saez Ting
  */
 public class ToDoTask extends Task {
+
     private static final String TYPE_MARK = "T";
+
     /**
      * Creates a to-do task with the given task description.
      *

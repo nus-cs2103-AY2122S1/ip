@@ -4,14 +4,13 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.ToDoTask;
 
-import java.util.StringTokenizer;
-
 /**
  * Helper class to parse commands.
  *
  * @author Jay Aljelo Saez Ting
  */
 public class CommandParser {
+
     private static final String EXIT_COMMAND = "bye";
     private static final String ADD_TODO_COMMAND = "todo";
     private static final String LIST_TASKS_COMMAND = "list";
@@ -124,7 +123,7 @@ public class CommandParser {
      *
      * @param command The "Add To-do Task" command.
      * @return The to-do task.
-     * @throws DukeInvalidCommandException If the command is empty, not an 'Add To-do Task' command, or malformed.
+     * @throws DukeInvalidCommandException If the command is empty, not an "Add To-do Task" command, or malformed.
      */
     public ToDoTask getToDoTask(String command) throws DukeInvalidCommandException {
         String[] tokens = command.strip().split(" ");
