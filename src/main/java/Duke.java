@@ -8,32 +8,11 @@ import java.util.stream.IntStream;
  * Main file for chatbot.
  *
  * @author marcuspeh
- * @version Level-6
+ * @version A-Enums
  * @since 15 Aug 2021
  */
 
 public class Duke {
-    /** Exit message. */
-    private final static String EXIT = "bye";
-    /** Keyword for listing out all the task. */
-    private final static String LIST = "list";
-    /** Keyword for marking task as done. */
-    private final static String DONE = "done";
-    /** Keyword for marking task as Deadline task." */
-    private final static String DEADLINE = "deadline";
-    /** Deadline separator. */
-    private final static String DEADLINESEPARATOR = " /by ";
-    /** Keyword for marking task as Events. */
-    private final static String EVENTS = "event";
-    /** Event separator. */
-    private final static String EVENTSEPARATOR = " /at ";
-    /** Keyword for marking task as Todos. */
-    private final static String TODOS = "todo";
-    /** Keyword for deleting task. */
-    private final static String DELETE = "delete";
-    /** Line separator. */
-    private final static String LINEBREAK = "\t____________________________________________________________";
-
     /** For the chatboard to read the user input. */
     private Scanner sc;
     /** Stores all the task. */
@@ -58,41 +37,41 @@ public class Duke {
             message = sc.nextLine().strip();
             String command = message.split(" ")[0].toLowerCase();
 
-            if (command.equals(EXIT))
+            if (command.equals(Keyword.EXIT.getKeyword()))
                 break;
-            else if (command.equals(LIST))
+            else if (command.equals(Keyword.LIST.getKeyword()))
                 listTask();
-            else if (command.equals(DONE))
+            else if (command.equals(Keyword.DONE.getKeyword()))
                 try {
-                    markDone(Integer.parseInt(message.substring(DONE.length() + 1)));
+                    markDone(Integer.parseInt(message.substring(Keyword.DONE.length() + 1)));
                 } catch (NumberFormatException e) {
                     doneErrorMessage();
                 } catch (IndexOutOfBoundsException e) {
                     doneIndexErrorMessage();
                 }
-            else if (command.equals(DEADLINE))
+            else if (command.equals(Keyword.DEADLINE.getKeyword()))
                 try {
-                    String[] details = message.split(DEADLINESEPARATOR);
-                    addDeadline(details[0].substring(DEADLINE.length() + 1), details[1]);
+                    String[] details = message.split(Keyword.DEADLINE.getSeparator());
+                    addDeadline(details[0].substring(Keyword.DEADLINE.length() + 1), details[1]);
                 } catch (IndexOutOfBoundsException e) {
                     deadlineErrorMessage();
                 }
-            else if (command.equals(EVENTS))
+            else if (command.equals(Keyword.EVENTS.getKeyword()))
                 try {
-                    String[] details = message.split(EVENTSEPARATOR);
-                    addEvent(details[0].substring(EVENTS.length() + 1), details[1]);
+                    String[] details = message.split(Keyword.EVENTS.getSeparator());
+                    addEvent(details[0].substring(Keyword.EVENTS.length() + 1), details[1]);
                 } catch (IndexOutOfBoundsException e) {
                     eventErrorMessage();
                 }
-            else if (command.equals(TODOS))
+            else if (command.equals(Keyword.TODOS.getKeyword()))
                 try {
-                    addTodo(message.substring(TODOS.length() + 1));
+                    addTodo(message.substring(Keyword.TODOS.length() + 1));
                 } catch (IndexOutOfBoundsException e) {
                     todoErrorMessage();
                 }
-            else if (command.equals(DELETE))
+            else if (command.equals(Keyword.DELETE.getKeyword()))
                 try {
-                    deleteTask(Integer.parseInt(message.substring(DELETE.length() + 1)));
+                    deleteTask(Integer.parseInt(message.substring(Keyword.DELETE.length() + 1)));
                 } catch (NumberFormatException e) {
                     deleteErrorMessage();
                 } catch (IndexOutOfBoundsException e) {
@@ -176,6 +155,11 @@ public class Duke {
             printMessage("Ugh! This task was already done:", task.toString());
     }
 
+    /**
+     * Delete the nth task from the task list.
+     *
+     * @param n the task to be deleted.
+     */
     private void deleteTask(int n) {
         Task task = taskList.remove(n - 1);
         printMessage("Noted. I've removed this task:",
@@ -255,7 +239,7 @@ public class Duke {
     }
 
     /**
-     * Prints out error message if done message does not contains number.
+     * Prints out error message if delete message does not contains number.
      */
     private void deleteErrorMessage() {
         printMessage("Ugh! The command should be in this format:",
@@ -263,7 +247,7 @@ public class Duke {
     }
 
     /**
-     * Prints out error message if done message is out of range.
+     * Prints out error message if delete message is out of range.
      */
     private void deleteIndexErrorMessage() {
         printMessage("Ugh! The command should be in this format:",
@@ -285,10 +269,10 @@ public class Duke {
      * @param strings Arbitrary number of strings to be printed out
      */
     private void printMessage(String... strings) {
-        System.out.println(LINEBREAK);
+        System.out.println("\t____________________________________________________________");
         for (String str: strings)
             System.out.println("\t" + str);
-        System.out.println(LINEBREAK);
+        System.out.println("\t____________________________________________________________");
     }
 
     /**
