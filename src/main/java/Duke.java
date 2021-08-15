@@ -1,5 +1,3 @@
-package main.java;
-
 import views.cli.CLI;
 import views.cli.strategies.*;
 
