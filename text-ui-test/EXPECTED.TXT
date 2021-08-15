@@ -1,7 +1,153 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+        ____________________________________________________________
+         Hello! I am Matthew!
+         What can I do for you?
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Got it. I've added this task:
+           [T][ ] read book
+         Now you have 1 tasks in the list.
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Got it. I've added this task:
+           [D][ ] finish book (by: Monday)
+         Now you have 2 tasks in the list.
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Here are the tasks in your list:
+         1.[T][ ] read book
+         2.[D][ ] finish book (by: Monday)
+
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Got it. I've added this task:
+           [E][ ] meeting (at: Tuesday 2-4pm)
+         Now you have 3 tasks in the list.
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Got it. I've added this task:
+           [T][ ] top up card
+         Now you have 4 tasks in the list.
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Nice! I've marked this task as done:
+          [T][X] read book
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Nice! I've marked this task as done:
+          [D][X] finish book (by: Monday)
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Got it. I've added this task:
+           [D][ ] return book (by: Sunday)
+         Now you have 5 tasks in the list.
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Got it. I've added this task:
+           [E][ ] birthday party (at: Saturday 10am-10pm)
+         Now you have 6 tasks in the list.
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Here are the tasks in your list:
+         1.[T][X] read book
+         2.[D][X] finish book (by: Monday)
+         3.[E][ ] meeting (at: Tuesday 2-4pm)
+         4.[T][ ] top up card
+         5.[D][ ] return book (by: Sunday)
+         6.[E][ ] birthday party (at: Saturday 10am-10pm)
+
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Nice! I've marked this task as done:
+          [T][X] top up card
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Here are the tasks in your list:
+         1.[T][X] read book
+         2.[D][X] finish book (by: Monday)
+         3.[E][ ] meeting (at: Tuesday 2-4pm)
+         4.[T][X] top up card
+         5.[D][ ] return book (by: Sunday)
+         6.[E][ ] birthday party (at: Saturday 10am-10pm)
+
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Got it. I've added this task:
+           [T][ ] borrow new book
+         Now you have 7 tasks in the list.
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Got it. I've added this task:
+           [E][ ] book convention (at: Wednesday 3-6pm)
+         Now you have 8 tasks in the list.
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Here are the tasks in your list:
+         1.[T][X] read book
+         2.[D][X] finish book (by: Monday)
+         3.[E][ ] meeting (at: Tuesday 2-4pm)
+         4.[T][X] top up card
+         5.[D][ ] return book (by: Sunday)
+         6.[E][ ] birthday party (at: Saturday 10am-10pm)
+         7.[T][ ] borrow new book
+         8.[E][ ] book convention (at: Wednesday 3-6pm)
+
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Nice! I've marked this task as done:
+          [T][X] borrow new book
+        ____________________________________________________________
+
+        ____________________________________________________________
+          Invalid input: Index 9 out of bounds for length 8
+        ____________________________________________________________
+
+        ____________________________________________________________
+          Invalid input: For input string: "5s"
+        ____________________________________________________________
+
+        ____________________________________________________________
+          Invalid input: For input string: "s"
+        ____________________________________________________________
+
+        ____________________________________________________________
+          Invalid input: Wrong format!
+        ____________________________________________________________
+
+        ____________________________________________________________
+          Invalid input: Wrong format!
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Here are the tasks in your list:
+         1.[T][X] read book
+         2.[D][X] finish book (by: Monday)
+         3.[E][ ] meeting (at: Tuesday 2-4pm)
+         4.[T][X] top up card
+         5.[D][ ] return book (by: Sunday)
+         6.[E][ ] birthday party (at: Saturday 10am-10pm)
+         7.[T][X] borrow new book
+         8.[E][ ] book convention (at: Wednesday 3-6pm)
+
+        ____________________________________________________________
+
+        ____________________________________________________________
+         Bye. Don't have a good day... Have a great day!!!
+        ____________________________________________________________
+
 
