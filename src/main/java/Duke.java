@@ -143,6 +143,30 @@ public class Duke {
     }
 
     /**
+     * Deletes the specified task from the list.
+     *
+     * @param taskId The id of the task to be deleted.
+     * @throws TaskIndexOutOfBoundsException If the task index is out of bounds.
+     */
+    private static void deleteTask(String taskId) throws TaskIndexOutOfBoundsException {
+        int taskPositionInList = Integer.valueOf(taskId) - 1;
+        if (taskPositionInList < 0 || (taskPositionInList + 1) > tasksList.size()) {
+            throw new TaskIndexOutOfBoundsException();
+        }
+        Task removedTask = tasksList.remove(taskPositionInList);
+
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("Got it! I've removed this task:");
+        System.out.println("  " + removedTask);
+        if (tasksList.size() == 1) {
+            System.out.println("Now you have " + tasksList.size() + " task in the list.");
+        } else {
+            System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
+        }
+        System.out.println(HORIZONTAL_LINE);
+    }
+
+    /**
      * Listens to the user-entered commands, and acts accordingly.
      */
     private static void listenToCommands() {
@@ -160,7 +184,15 @@ public class Duke {
                     if (wordsArr.length == 0) {
                         throw new UnrecognisedCommandException();
                     } else if (wordsArr[0].equals("done")) {
+                        if (wordsArr.length != 2) {
+                            throw new MissingTaskIndexException();
+                        }
                         markAsDone(wordsArr[1]);
+                    } else if (wordsArr[0].equals("delete")) {
+                        if (wordsArr.length != 2) {
+                            throw new MissingTaskIndexException();
+                        }
+                        deleteTask(wordsArr[1]);
                     } else if (wordsArr[0].equals("todo") || wordsArr[0].equals("event")
                             || wordsArr[0].equals("deadline")) {
                         addTask(command);

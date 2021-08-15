@@ -48,3 +48,11 @@ class TimeNotSpecifiedException extends DukeException {
                 + "Please follow this format: [Task]" + taskSpecifier + "[Date/Time]");
     }
 }
+
+class MissingTaskIndexException extends DukeException {
+
+    public MissingTaskIndexException() {
+        super("Task index is not specified!\n"
+                + "Please follow this format: [done/delete] [index]");
+    }
+}
