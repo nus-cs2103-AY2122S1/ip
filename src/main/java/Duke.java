@@ -8,6 +8,7 @@ public class Duke {
     private static final String SEPARATOR = "_".repeat(50);
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String TAB = " ".repeat(4);
 
     private static void parseInput(String input, List<Task> tasks) {
         String[] commands = input.split("\\s+");
@@ -94,6 +95,10 @@ public class Duke {
     }
 
     private static void printOut(String message) {
-        System.out.println(String.format("%s\n%s\n%s", SEPARATOR, message, SEPARATOR));
+        String[] lines = message.split("\n");
+        for (int i = 0; i < lines.length; i++) {
+            lines[i] = TAB + lines[i];
+        }
+        System.out.println(String.format("%s\n%s\n%s", TAB+SEPARATOR, String.join("\n", lines), TAB+SEPARATOR));
     }
 }
