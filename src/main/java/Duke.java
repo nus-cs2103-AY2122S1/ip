@@ -22,14 +22,15 @@ public class Duke {
         run = true;
         tasks = new Task[100];
 
+        Scanner inputReader = new Scanner(System.in);
+
         while(run) {
-            run = eval();
+            String input = inputReader.nextLine();
+            run = eval(input);
         }
     }
 
-    public static boolean eval() {
-        Scanner inputReader = new Scanner(System.in);
-        String input = inputReader.nextLine();
+    public static boolean eval(String input) {
         String[] inputArray = input.split(" ");
         String[] params;
         switch (inputArray[0]) {
