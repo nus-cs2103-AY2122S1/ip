@@ -2,4 +2,13 @@ todo borrow book
 list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+todo
+deadline
+event
+done 1
+done 2
+done 3
+done 10
+done errrr
+RandomCommand
 bye

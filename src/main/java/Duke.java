@@ -13,10 +13,14 @@ public class Duke {
             if (userInput.equals("list")) {
                 printUserInputRecord(userInputRecord);
             } else if(userInput.startsWith("done")){
-                if (!isDoneCommand(userInput)) {
-                    add(userInput,userInputRecord);
+                if(isDoneCommand(userInput)) {
+                    markAsDone(userInput, userInputRecord);
                 } else {
-                    markAsDone(userInput,userInputRecord);
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                            "    ____________________________________________________________");
+                    userInput = myScanner.nextLine();
+                    continue;
                 }
             } else {
                 add(userInput,userInputRecord);
@@ -30,26 +34,57 @@ public class Duke {
     private static void add(String userInput, ArrayList<Task> userInputRecord) {
         Task task;
         if(userInput.startsWith("todo")) {
-            String description = userInput.substring(5,userInput.length());
-            task = new ToDo(description);
+            try {
+                String description = userInput.substring(5);
+                if (description.trim().isEmpty()) {
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     OOPS!!! The description of a todo cannot be empty.\n" +
+                            "    ____________________________________________________________");
+                    return;
+                }
+                task = new ToDo(description);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("    ____________________________________________________________\n" +
+                        "     OOPS!!! The description of a todo cannot be empty.\n" +
+                        "    ____________________________________________________________");
+                return;
+            }
         } else if(userInput.startsWith("deadline")) {
-            int byPosition = userInput.lastIndexOf("/by");
-            String ddl = userInput.substring(byPosition + 4);
-            String description = userInput.substring(9,byPosition); //Length of "deadline " = 9
-            task = new Deadline(description,ddl);
+            try {
+                int byPosition = userInput.lastIndexOf("/by");
+                String ddl = userInput.substring(byPosition + 4);
+                String description = userInput.substring(9,byPosition); //Length of "deadline " = 9
+                task = new Deadline(description,ddl);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("    ____________________________________________________________\n" +
+                        "     OOPS!!! The description of a deadline cannot be empty.\n" +
+                        "    ____________________________________________________________");
+                return;
+            }
+
         } else if(userInput.startsWith("event")) {
-            int atPosition = userInput.lastIndexOf("/at");
-            String time = userInput.substring(atPosition + 4);
-            String description = userInput.substring(6,atPosition);//Length of "event " = 6
-            task = new Event(description,time);
+            try {
+                int atPosition = userInput.lastIndexOf("/at");
+                String time = userInput.substring(atPosition + 4);
+                String description = userInput.substring(6, atPosition);//Length of "event " = 6
+                task = new Event(description, time);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("    ____________________________________________________________\n" +
+                        "     OOPS!!! The description of an event cannot be empty.\n" +
+                        "    ____________________________________________________________");
+                return;
+            }
         } else {
-            task = new Task(userInput);
+            System.out.println("    ____________________________________________________________\n" +
+                    "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                    "    ____________________________________________________________");
+            return;
         }
 
         userInputRecord.add(task);
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task:\n" +
-                "       " + task.toString() + "\n" +
+                "       " + task + "\n" +
                 "     Now you have " + userInputRecord.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________");
     }
@@ -75,9 +110,9 @@ public class Duke {
 
     /**This method checks if a String starting with done is indeed a done command.
      * Examples:
-     * Case 1: done 3 => Interpreted as mark the third task as done
-     * Case 2: done         5 ==> Interpreted as mark the fifth task as done(the spaces are trimmed)
-     * Case 3: done with my schoolwork ==> Interpreted as an event, and will be added into list in echo().
+     * Case 1: done 3 => valid, standard form
+     * Case 2: done         5 ==> valid, after trimmed
+     * Case 3: done with my schoolwork ==> invalid, will generate an exception
      * **/
     private static boolean isDoneCommand(String userInput) {
         String copy = userInput.replace("done", "");
@@ -94,11 +129,12 @@ public class Duke {
             taskDone.setDone(true);
             userInputRecord.set(itemToComplete, taskDone);
             System.out.println("    ____________________________________________________________\n" +
+                    "     Nice! I've marked this task as done:\n" +
                     "     " + userInputRecord.get(itemToComplete) + "\n" +
                     "    ____________________________________________________________");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("    ____________________________________________________________\n" +
-                    "      Oops, the ID of the task does not exist \n" +
+                    "      Oops, the ID of the task does not exist\n" +
                     "    ____________________________________________________________");
         }
     }
