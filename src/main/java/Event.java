@@ -2,15 +2,20 @@ package main.java;
 
 public class Event extends Task {
 
-    protected String by;
+    protected String at;
 
-    public Event(String description, String by) {
+    /**
+     * Constructor for new Event object
+     * @param description description of the event task
+     * @param at the date in which the event is to be held at
+     */
+    public Event(String description, String at) {
         super(description);
-        this.by = by;
+        this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (by: " + by + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 }
