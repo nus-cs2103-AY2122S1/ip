@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -26,10 +26,6 @@ public class Duke {
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
-
-
-
-
     private static final String taskComplete = "Nice, I've marked this task as done";
     private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -41,12 +37,9 @@ public class Duke {
     private static final String hline = "\t----------------------------";
     //hashmap cannot enumerate
     //array of inputs capped at 100
-    private final Task[] inputs =  new Task[100];
+    private final ArrayList<Task> inputs =  new ArrayList<>();
     //pointer to the last location of inputs available
     private int ptr = 0;
-
-
-
 
 
     /**
@@ -77,7 +70,7 @@ public class Duke {
      */
     private boolean isAdded(Task t) {
         for (int i = 0; i < ptr; i++) {
-            if (inputs[i].equals(t)) {
+            if (inputs.get(i).equals(t)) {
                 return true;
             }
         }
@@ -90,7 +83,7 @@ public class Duke {
      * @param t Input task
      */
     private void add(Task t) {
-        this.inputs[ptr] = t;
+        this.inputs.add(t);
         this.ptr++;
         this.print("Got it, I've added this task\n\t  " + t.toString() +
                 "\n\tNow you have " + ptr + " tasks in the list.");
@@ -103,10 +96,10 @@ public class Duke {
     private void list() {
         String output = "";
         if (ptr == 0) return;
-        output += "1." + inputs[0];
+        output += "1." + this.inputs.get(0);
         for (int i = 1; i < ptr; i++) {
             int indi = i + 1;
-            output += "\n\t" + indi + "." + inputs[i];
+            output += "\n\t" + indi + "." + this.inputs.get(i);
         }
         this.print(output);
     }
@@ -185,17 +178,17 @@ public class Duke {
             try {
 
                 if (twoInputs[0].equals("done")) {
-                    //TODO: should check if there is an int?
+
                     //and at what point is this considered using exception handling to dictate the control
-                    if (twoInputs[1] == null) {
+                    if (twoInputs.length == 1) {
                         throw new DukeException("Number expected after done.");
                     }
                     String s = twoInputs[1].trim();
                     int val = Integer.parseInt(s) - 1;
                     if (val >= ptr)
                         throw new DukeException("☹ OOPS!!! The list is not that long!");
-                    inputs[val].done();
-                    print(taskComplete + "\n\t" + inputs[val]);
+                    inputs.get(val).done();
+                    print(taskComplete + "\n\t" + this.inputs.get(val));
                 //this is ridiculous, is there a way to nest the exceptions within the class
                 //without having to use the array as an input... -- maybe encapsulate the parsing in a function to make it look neat
                 } else if (twoInputs[0].equals(TODO)) {
@@ -218,8 +211,6 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 this.print(e.getMessage());
-            } catch (NumberFormatException e) {
-                this.print("Expected a number as an input after done");
             }
             inpt = sc.nextLine();
         }
