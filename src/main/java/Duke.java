@@ -156,19 +156,20 @@ public class Duke {
             }
         }
 
-        public void run() {
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
-            try {
-                interpretInput(input);
-            } catch(DukeException dukeException) {
-                System.out.println(dukeException.getMessage());
-                run();
-            }
-            if(input.equals("bye"))  {
-                return;
-            } else {
-                run();
+        public void run(Scanner scanner) {
+            if(scanner.hasNext()) {
+                String input = scanner.nextLine();
+                try {
+                    interpretInput(input);
+                } catch(DukeException dukeException) {
+                    System.out.println(dukeException.getMessage());
+                    run(scanner);
+                }
+                if(input.equals("bye"))  {
+                    scanner.close();
+                } else {
+                    run(scanner);
+                }
             }
         }
     }
@@ -178,6 +179,7 @@ public class Duke {
         String hello = "Hello! I'm Duke\n" +
                 "What can I do for you?";
         System.out.println(hello);
-        taskManager.run();
+        Scanner scanner = new Scanner(System.in);
+        taskManager.run(scanner);
     }
 }

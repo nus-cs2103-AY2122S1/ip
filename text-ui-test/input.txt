@@ -1,6 +1,6 @@
-event go birthday party /at 9th January 9pm
-list
 deadline submit assignment /by 29th August 9pm
+list
+event go birthday party /at 9th January 9pm
 todo study for ma2104 everyday
 done 3
 done 2
