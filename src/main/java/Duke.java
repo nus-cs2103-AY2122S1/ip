@@ -10,12 +10,13 @@ public class Duke {
         String greeting = "\nHello I'm Duke!\n"
                 + "What can I do for you?\n";
         String exit = "Bye. Hope to see you again soon!";
+        DukeList list = new DukeList();
         Scanner scan = new Scanner(System.in);
         System.out.println("Hello from\n" + logo + greeting);
         String input = scan.nextLine();
 
         while(!input.equals("bye")) {
-            System.out.println(input);
+            list.add(input);
             input = scan.nextLine();
         }
 
