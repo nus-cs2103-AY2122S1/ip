@@ -24,11 +24,7 @@ public class Task {
         this.isDone = true;
     }
 
-    /**
-     * Returns the description of the task.
-     *
-     * @return A String representing the description of the task.
-     */
+    @Override
     public String toString() {
         return getStatusIcon() + " " + this.description;
     }
