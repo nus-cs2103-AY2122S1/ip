@@ -1,0 +1,7 @@
+todo go to sleep
+deadline do homework /by next Friday
+event zoom meeting /at Mon 2PM
+list
+done 2
+list
+bye
