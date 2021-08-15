@@ -137,6 +137,11 @@ public class Duke {
      * List out all the task stored by the user.
      */
     private void listTask() {
+        if (taskList.size() == 0) {
+            printMessage("You have no task.");
+            return;
+        }
+
         String[] task = IntStream.range(0, this.taskList.size())
                     .mapToObj(x -> (x + 1) + ". " + taskList.get(x).toString())
                     .collect(Collectors.toList())
