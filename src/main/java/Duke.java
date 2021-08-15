@@ -5,12 +5,12 @@ public class Duke {
 
     private static boolean running = true;
 
-    private static String addTasks(List taskList, Task task) {
+    private static String addTasks(TaskList taskList, Task task) {
         return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
                 taskList.addToList(task), taskList.taskCount());
     }
 
-    public static void runDuke(List taskList) throws DukeException{
+    public static void runDuke(TaskList taskList) throws DukeException{
         boolean descriptionEmpty = false;
         Scanner input = new Scanner(System.in);
 
@@ -57,7 +57,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        List taskList = new List(100);
+        TaskList taskList = new TaskList();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         while (running) {
             try {
