@@ -85,12 +85,23 @@ public class Duke {
                     }
                     break;
 
+                case "delete":
+                    int deleteIndex = Integer.parseInt(remainingWords);
+                    try {
+                        System.out.println(bot.deleteTask(deleteIndex));
+                    } catch (DukeException e) {
+                        String errorMessage = "   -------------------------------------------- \n"
+                                + "      Invalid index. Specified task does not exist to be deleted. \n"
+                                + "   -------------------------------------------- \n";
+                        System.out.println(errorMessage);
+                    }
+                    break;
+
                 default:
                     String errorMessage = "   -------------------------------------------- \n"
                                         + "      OOPS!!! I have no idea what that means :-( \n"
                                         + "   -------------------------------------------- \n";
                     System.out.println(errorMessage);
-
             }
         }
         sc.close();
@@ -126,11 +137,8 @@ public class Duke {
     }
 
     public String completeTask(int index) throws DukeException {
-        if (!(index >= 0 && index - 1 <= taskList.size() && !taskList.isEmpty()) || index > taskList.size()) {
-            String errorMessage = "\n"
-                    + "   -------------------------------------------- \n"
-                    + "      OOPS!!! Invalid task number given \n"
-                    + "   -------------------------------------------- \n";
+        if (index <= 0 || index > taskList.size() || taskList.isEmpty()) {
+            String errorMessage = "OOPS!!! Invalid task number given.";
             throw new DukeException(errorMessage);
         } else {
             String taskClass;
@@ -177,16 +185,41 @@ public class Duke {
         }
     }
 
+    public String deleteTask(int deleteIndex) throws DukeException {
+        if (deleteIndex <= 0 || deleteIndex > taskList.size() || taskList.isEmpty()) {
+            String errorMessage = "OOPS!!! Invalid index to be deleted.";
+            throw new DukeException(errorMessage);
+        } else {
+            String deletedTask = this.taskList.get(deleteIndex - 1).toString();
+            if (this.taskList.size() == 1) { // if there is only one task in the list
+                this.taskList.clear();
+            } else if (deleteIndex == 1){ // deleting leftmost element
+                this.taskList = new ArrayList<>(taskList.subList(1, taskList.size()));
+            } else if (deleteIndex == taskList.size()) { // deleting rightmost element
+                this.taskList = new ArrayList<>(taskList.subList(0, taskList.size() - 1));
+            } else { // deleting somewhere in between
+                ArrayList<Task> newList = new ArrayList<>(this.taskList.subList(0, deleteIndex - 1));
+                for (int i = deleteIndex; i < taskList.size(); i++) {
+                    newList.add(taskList.get(i));
+                }
+                this.taskList = newList;
+            }
+
+            return "   -------------------------------------------- \n"
+                    + "   Noted. I've removed this task: \n      "
+                    + deletedTask
+                    + String.format("\n   Now you have %d tasks in the list.", taskList.size()) + "\n"
+                    + "   -------------------------------------------- \n";
+        }
+    }
+
     public String addTodo(String input) throws DukeException {
         if (!input.equals("")) {
             Todo newTodo = new Todo(input);
             this.taskList.add(newTodo);
             return printTaskMessage(newTodo.toString(), this.taskList.size());
         } else {
-            String errorMessage = "\n"
-                    + "   -------------------------------------------- \n"
-                    + "      OOPS!!! The description of a todo cannot be empty. \n"
-                    + "   -------------------------------------------- \n";
+            String errorMessage = "OOPS!!! The description of a todo cannot be empty.";
             throw new DukeException(errorMessage);
         }
     }
@@ -199,10 +232,7 @@ public class Duke {
             this.taskList.add(newDeadline);
             return printTaskMessage(newDeadline.toString(), this.taskList.size());
         } else {
-            String errorMessage = "\n"
-                    + "   -------------------------------------------- \n"
-                    + "      OOPS!!! The description of a deadline cannot be empty. \n"
-                    + "   -------------------------------------------- \n";
+            String errorMessage = "OOPS!!! The description of a deadline cannot be empty.";
             throw new DukeException(errorMessage);
         }
     }
@@ -215,19 +245,16 @@ public class Duke {
             this.taskList.add(newEvent);
             return printTaskMessage(newEvent.toString(), this.taskList.size());
         } else {
-            String errorMessage = "\n"
-                    + "   -------------------------------------------- \n"
-                    + "      OOPS!!! The description of an event cannot be empty. \n"
-                    + "   -------------------------------------------- \n";
+            String errorMessage = "OOPS!!! The description of an event cannot be empty.";
             throw new DukeException(errorMessage);
         }
     }
 
     public String printTaskMessage(String input, int numTasks) {
         return "   -------------------------------------------- \n"
-                + "   Got it. I've added this task: \n"
-                + "      " + input + "\n"
-                + String.format("   Now you have %d tasks in the list.", numTasks) + "\n"
+                + "   Got it. I've added this task: \n      "
+                + input
+                + String.format("\n   Now you have %d tasks in the list.", numTasks) + "\n"
                 + "   -------------------------------------------- \n";
     }
 
