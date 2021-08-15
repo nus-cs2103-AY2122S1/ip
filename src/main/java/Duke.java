@@ -30,8 +30,9 @@ public class Duke {
             }
             else if (userInput.toLowerCase().equals("done")) {
                 int nextNum = sc.nextInt();
-                if (nextNum > savedTasks.size()) {
-                    System.out.println("Chosen number out of range");
+                if (nextNum > savedTasks.size() || nextNum < 1) {
+                    DukeException exception = new DukeException("Number out of range!");
+                    System.out.println(exception);
                 }
                 else {
                     Task oldTask = savedTasks.get(nextNum-1);
@@ -43,40 +44,97 @@ public class Duke {
             }
             else if (userInput.toLowerCase().equals("todo")) {
                 String restOfLine = sc.nextLine();
-                Task newTask = new Todo(restOfLine);
-                savedTasks.add(newTask);
-                System.out.println("I've added this task:\n" + newTask);
-                System.out.println("Now you have " + savedTasks.size() +" tasks in the list!");
+                if (restOfLine.equals("")) {
+                    DukeException exception = new DukeException("Description of todo cannot be empty :(");
+                    System.out.println(exception);
+                }
+                else {
+                    Task newTask = new Todo(restOfLine);
+                    savedTasks.add(newTask);
+                    System.out.println("I've added this task:\n" + newTask);
+                    System.out.println("Now you have " + savedTasks.size() + " tasks in the list!");
+                }
 
             }
             else if (userInput.toLowerCase().equals("deadline")) {
                 String body = "";
-                String nextWord = sc.next();
-                while (nextWord.charAt(0) != '/') {
-                    body += " " + nextWord;
-                    nextWord = sc.next();
+                String deadline = "";
+                int counter = 0;
+                String restOfLine = sc.nextLine();
+                String[] words = restOfLine.split(" ");
+                for (int i = 1; i < words.length; i++) {
+                    if (words[i].equals("/by")) {
+                        counter = i+1;
+                        break;
+                    }
+                    else {
+                        body += " " + words[i];
+                    }
                 }
-                String deadline = sc.nextLine();
+                if (body.equals("")) {
+                    DukeException exception = new DukeException("Description of deadline cannot be empty :(");
+                    System.out.println(exception);
+                    continue;
+                }
+                if (counter == 0) {
+                    DukeException exception = new DukeException("Deadline of deadline cannot be empty :(");
+                    System.out.println(exception);
+                    continue;
+                }
+                for (int i = counter; i < words.length; i ++) {
+                    deadline += " " + words[i];
+                }
+                if (deadline.equals("")) {
+                    DukeException exception = new DukeException("Deadline of deadline cannot be empty :(");
+                    System.out.println(exception);
+                    continue;
+                }
                 Task newTask = new Deadline(body, deadline);
                 savedTasks.add(newTask);
                 System.out.println("I've added this task:\n" + newTask);
-                System.out.println("Now you have " + savedTasks.size() +" tasks in the list!");
+                System.out.println("Now you have " + savedTasks.size() + " tasks in the list!");
             }
             else if (userInput.toLowerCase().equals("event")) {
                 String body = "";
-                String nextWord = sc.next();
-                while (nextWord.charAt(0) != '/') {
-                    body += " " + nextWord;
-                    nextWord = sc.next();
+                String deadline = "";
+                int counter = 0;
+                String restOfLine = sc.nextLine();
+                String[] words = restOfLine.split(" ");
+                for (int i = 1; i < words.length; i++) {
+                    if (words[i].equals("/at")) {
+                        counter = i+1;
+                        break;
+                    }
+                    else {
+                        body += " " + words[i];
+                    }
                 }
-                String deadline = sc.nextLine();
+                if (body.equals("")) {
+                    DukeException exception = new DukeException("Description of event cannot be empty :(");
+                    System.out.println(exception);
+                    continue;
+                }
+                if (counter == 0) {
+                    DukeException exception = new DukeException("Date of event cannot be empty :(");
+                    System.out.println(exception);
+                    continue;
+                }
+                for (int i = counter; i < words.length; i ++) {
+                    deadline += " " + words[i];
+                }
+                if (deadline.equals("")) {
+                    DukeException exception = new DukeException("Deadline of deadline cannot be empty :(");
+                    System.out.println(exception);
+                    continue;
+                }
                 Task newTask = new Event(body, deadline);
                 savedTasks.add(newTask);
                 System.out.println("I've added this task:\n" + newTask);
-                System.out.println("Now you have " + savedTasks.size() +" tasks in the list!");
+                System.out.println("Now you have " + savedTasks.size() + " tasks in the list!");
             }
             else {
-                System.out.println("Command not found");
+                DukeException exception = new DukeException("I'm sorry but I don't understand what that means :(");
+                System.out.println(exception);
             }
         }
     }
