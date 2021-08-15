@@ -20,5 +20,10 @@ done s
 deadline assignment by Monday
 event Meeting Again at Thursday 2-4pm
 list
+delete 1
+list
+delete 4
+delete -1
+delete xs
+list
 bye
-
