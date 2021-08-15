@@ -21,4 +21,13 @@ public class Todo extends Task{
         return "[T]";
     }
 
+    @Override
+    public String toString() {
+        String typeIcon = getTypeIcon();
+        String statusIcon = getStatusIcon();
+        return typeIcon
+                + " "
+                + statusIcon
+                + this.description;
+    }
 }
