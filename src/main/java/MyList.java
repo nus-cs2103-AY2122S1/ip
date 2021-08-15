@@ -6,7 +6,7 @@ public class MyList {
     public void addTask(Task t) {
         myList.add(t);
         System.out.println("Got it! I have added:");
-        System.out.printf("%s %s%s \n",t.getTypeIcon(), t.getStatusIcon(), t.getTaskName());
+        System.out.println(t.toString());
     }
 
     public void listAll() {
@@ -19,7 +19,7 @@ public class MyList {
                 Task t = myList.get(i);
                 String statusIcon = t.getStatusIcon();
                 String typeIcon = t.getTypeIcon();
-                System.out.printf("%d. %s %s%s \n", i + 1, typeIcon, statusIcon, t.getTaskName());
+                System.out.printf("%d. %s \n", i + 1, t.toString());
             }
         }
     }
