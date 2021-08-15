@@ -19,6 +19,7 @@ public class Duke {
     private static final String HORIZONTAL_LINE = "    ____________________________________________________________";
     private static final String INDENTATION = "     ";
     private static final String LIST = "list";
+    private static final String DONE = "done";
     private static final String BYE = "bye";
 
     private static void greet() {
@@ -42,8 +43,20 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    private static void completeTask(TaskManager taskManager, int number) {
+        if (taskManager.completeTask(number)) {
+            System.out.println(HORIZONTAL_LINE);
+            System.out.println(INDENTATION + "Nice! I've marked this task as done:");
+            System.out.println(INDENTATION + "  " + taskManager.findTaskByNumber(number).toString());
+            System.out.println(HORIZONTAL_LINE);
+        } else {
+            System.out.println("Complete task error.");
+        }
+    }
+
     private static void listTasks(TaskManager taskManager) {
         System.out.println(HORIZONTAL_LINE);
+        System.out.println(INDENTATION + "Here are the tasks in your list:");
         taskManager.printTasks();
         System.out.println(HORIZONTAL_LINE);
     }
@@ -70,16 +83,25 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         greet();
         String command = scanner.nextLine();
+        String operation = command.split(" ")[0];
         while (true) {
-            if (command.equals(BYE)) {
+            if (operation.equals(BYE)) {
                 bye();
                 break;
-            } else if (command.equals(LIST)) {
+            } else if (operation.equals(LIST)) {
                 listTasks(taskManager);
+            } else if (operation.contains(DONE)) {
+                try {
+                    int number = Integer.parseInt(command.split(" ")[1]);
+                    completeTask(taskManager, number);
+                } catch (Exception e) {
+                    System.out.println("Input error: " + e.getMessage() + ", please try again.");
+                }
             } else {
                 addTask(taskManager, command);
             }
             command = scanner.nextLine();
+            operation = command.split(" ")[0];
         }
     }
 }
