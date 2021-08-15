@@ -2,7 +2,7 @@ public class Task {
     protected int id;
     protected String description;
     protected boolean isDone;
-    private static int idCounter = 1;
+    protected static int idCounter = 1;
 
     public Task(String description) {
         this.id = idCounter;
@@ -23,7 +23,8 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getDescription() {
-        return description;
+    @Override
+    public String toString() {
+        return this.getStatusIcon() + " " + this.description;
     }
 }
