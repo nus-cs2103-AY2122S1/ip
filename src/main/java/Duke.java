@@ -30,6 +30,12 @@ public class Duke {
 
             if (input.equals("bye")) {
                 System.out.println("See you again in my frog hole! RIBBIT!");
+            } else if (input.startsWith("done")) {
+                int index = input.charAt(5) - 49;
+                taskList[index].markAsDone();
+                System.out.println("You have swallowed that pesky fly! RIBBIT!");
+                System.out.println(taskList[index].print());
+                System.out.println(LINE);
             } else if (input.equals("list")) {
                 for (int i = 0; i < size; i++) {
                     System.out.println(i + 1 + "." + taskList[i].print());
@@ -47,5 +53,6 @@ public class Duke {
         Duke jo = new Duke();
         jo.greeting();
         jo.echo();
+        
     }
 }

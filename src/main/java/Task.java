@@ -11,7 +11,7 @@ public class Task {
         return this.name;
     }
 
-    public void done() {
+    public void markAsDone() {
         this.completed = true;
     }
 
