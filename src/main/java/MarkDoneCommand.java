@@ -8,6 +8,6 @@ public class MarkDoneCommand implements Command{
     @Override
     public void run() {
         task.setDone(true);
-        Message.print(new String[] {"Nice, I have marked this task as done:", "\tDone: " + task.toString()});
+        Message.print(new String[] {"Nice, I have marked this task as done:", "\t" + task.toString()});
     }
 }
