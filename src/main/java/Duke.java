@@ -11,7 +11,7 @@ public class Duke {
 
         Scanner input = new Scanner(System.in);
         Processor.process(input); 
-        input.close(); 
+        input.close();
         Processor.exit();
     }
 }
