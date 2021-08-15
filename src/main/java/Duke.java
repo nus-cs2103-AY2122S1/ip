@@ -9,6 +9,8 @@ public class Duke {
 //                + "|____/ \\__,_|_|\\_\\___|\n";
         Scanner sc = new Scanner(System.in);
         boolean dukeOpen = true;
+        String[] taskList = new String[100];
+        int taskIndex = 0;
 
         System.out.println("Hello! I'm Duke\n" +
                 "What can I do for you?");
@@ -17,8 +19,21 @@ public class Duke {
             if (userInput.equals("bye")) {
                 dukeOpen = false;
                 System.out.println("Bye. Hope to see you again soon!");
+
+            } else if (userInput.equals("list")) {
+                int i = 0;
+                for (String task : taskList) {
+                    if (task != null) {
+                        System.out.println(++i + ". " + task);
+                    } else {
+                        break;
+                    }
+                }
+
             } else {
-                System.out.println(userInput);
+                taskList[taskIndex] = userInput;
+                taskIndex++;
+                System.out.println("added: " + userInput);
             }
         }
     }
