@@ -1,3 +1,9 @@
+/**
+ * Encapsulates the Main Program that facilitates interaction between ChatBot and user.
+ *
+ * @author Clifford
+ */
+
 import java.util.Scanner;
 
 public class Duke {
