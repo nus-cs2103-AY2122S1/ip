@@ -83,7 +83,23 @@ public class Duke {
                     }
                 } catch (NumberFormatException e) {
                     throw new InvalidTaskNumberException(tasks.size());
-                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+                break;
+            case "delete":
+                if (commands.length != 2) throw new UnknownCommandException();
+                try {
+                    int taskIndex = Integer.parseInt(commands[1]) - 1;
+                    if (taskIndex < 0 || taskIndex >= tasks.size()) {
+                        throw new InvalidTaskNumberException(tasks.size());
+                    }
+                    Task task = tasks.get(taskIndex);
+                    tasks.remove(taskIndex);
+                    message = String.format(
+                            "Noted. I've removed this task:\n    %s\nNow you have %d tasks in the list.",
+                            task,
+                            tasks.size()
+                    );
+                } catch (NumberFormatException e) {
                     throw new InvalidTaskNumberException(tasks.size());
                 }
                 break;
