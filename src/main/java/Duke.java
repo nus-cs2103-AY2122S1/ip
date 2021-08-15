@@ -29,6 +29,8 @@ public class Duke {
                 list.done(Integer.parseInt(segment[1]));
             } else if (segment[0].equals("todo")) {
                 list.addTodo(input.substring(5));
+            } else if (segment[0].equals("deadline")) {
+                list.addDeadlines(input.substring(9));
             } else {
                 list.add(input);
             }
