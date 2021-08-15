@@ -100,6 +100,12 @@ public class Meow {
         }
     }
 
+    /**
+     * Complete the specific task as done in the task list
+     * based on the task number provided by the user.
+     *
+     * @param taskNumber The task number that the user wants to mark as done.
+     */
     public void completeTask(int taskNumber) {
         Task completedTask = tasksList.get(taskNumber - 1);
         completedTask.markAsDone();
@@ -108,6 +114,15 @@ public class Meow {
 
     }
 
+    /**
+     * Check whether the task is able to be marked as done, 0 indicating that
+     * this is an invalid task, Integer.MAX_VALUE indicating that this task is
+     * not in the task list, any number other than 0 or Integer.MAX_VALUE indicating
+     * the task number to be marked as done.
+     *
+     * @param input The task number that the user wants to mark as done.
+     * @return An integer indicating which task to be marked as done.
+     */
     public int checkCompleteTask(String input) {
         int infinity = Integer.MAX_VALUE;
         String done = input.substring(0, 4).toLowerCase();
@@ -128,6 +143,10 @@ public class Meow {
             System.out.println(exception.toString());
             return 0;
         }
+
+    }
+
+    public void addTodo(String todo) {
 
     }
 }
