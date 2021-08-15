@@ -1,0 +1,8 @@
+todo drink water
+deadline make origami /by Now
+event attend concert /at 9-11-2001
+event make windows 11 /at Microsoft
+list
+done 2
+list
+bye
