@@ -10,9 +10,13 @@ public class Duke {
         String greeting = "\nHello I'm Duke!\n"
                 + "What can I do for you?\n";
         String exit = "Bye. Hope to see you again soon!";
+
         DukeList list = new DukeList();
+
         Scanner scan = new Scanner(System.in);
+
         System.out.println("Hello from\n" + logo + greeting);
+
         String input = scan.nextLine();
         String[] segment;
 
@@ -23,6 +27,8 @@ public class Duke {
                 list.list();
             } else if (segment[0].equals("done") && segment.length == 2) {
                 list.done(Integer.parseInt(segment[1]));
+            } else if (segment[0].equals("todo")) {
+                list.addTodo(input.substring(5));
             } else {
                 list.add(input);
             }
