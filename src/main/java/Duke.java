@@ -3,51 +3,14 @@ import java.util.Scanner;
 
 public class Duke {
     /**
-     * A task that can be mark as completed.
-     */
-    private static class Task {
-        /**
-        * The description of the task.
-        */
-        private String description;
-
-        /**
-         * If true, the task is completed. Else, the task is not completed.
-         */
-        private boolean isCompleted = false;
-
-        /**
-         * A private constructor used to initialize the task.
-         *
-         * @param description the description of the task.
-         */
-        private Task(String description) {
-            this.description = description;
-        }
-
-        /**
-         * Marks the task as done.
-         */
-        private void markAsDone() {
-            this.isCompleted = true;
-        }
-
-        /**
-         * Return the string representation of task.
-         *
-         * @return the string representation of task.
-         */
-        @Override
-        public String toString() {
-            String displayCompletion = isCompleted ? "[X]" : "[]";
-            return displayCompletion + ' ' + description;
-        }
-    }
-
-    /**
      * The list of tasks that are inputted by the user.
      */
     private static ArrayList<Task> taskList = new ArrayList<>();
+
+    /**
+     * The number of tasks.
+     */
+    private static int noOfTasks = 0;
 
     /**
      * Prints a line.
@@ -82,7 +45,9 @@ public class Duke {
      */
     private static void addToList(Task task) {
         taskList.add(task);
-        System.out.printf("added: %s%n", task.description);
+        noOfTasks++;
+        System.out.printf("Got it. I've added this task:%n  %s%nNow you have %d tasks in the list.%n",
+            task, noOfTasks);
     }
 
     /**
@@ -108,6 +73,26 @@ public class Duke {
     }
 
     /**
+     * Creates deadline when given userInput.
+     */
+    public static Deadline createDeadline(String userInput) {
+        String[] splitBySlash = userInput.split("/");
+        String description = splitBySlash[0].substring(9, splitBySlash[0].length() - 1);
+        String by = splitBySlash[1].substring(3);
+        return new Deadline(description, by);
+    }
+
+    /**
+     * Creates event when given userInput.
+     */
+    public static Event createEvent(String userInput) {
+        String[] splitBySlash = userInput.split("/");
+        String description = splitBySlash[0].substring(6, splitBySlash[0].length() - 1);
+        String dayTime = splitBySlash[1].substring(3);
+        return new Event(description, dayTime);
+    }
+
+    /**
      * Interacts with the user.
      *
      * @param args array of strings.
@@ -122,10 +107,21 @@ public class Duke {
             printLine();
             if (userInput.equals("list")) {
                 printTasks();
-            } else if (splitInput[0].equals("done")) {
-                markTaskAsDone(Integer.parseInt(splitInput[1]));
             } else {
-                addToList(new Task(userInput));
+                switch (splitInput[0]) {
+                    case "done":
+                        markTaskAsDone(Integer.parseInt(splitInput[1]));
+                        break;
+                    case "todo":
+                        addToList(new Todo(userInput.substring(5)));
+                        break;
+                    case "deadline":
+                        addToList(createDeadline(userInput));
+                        break;
+                    case "event":
+                        addToList(createEvent(userInput));
+                        break;
+                }
             }
             printLine();
             userInput = scanner.nextLine();
