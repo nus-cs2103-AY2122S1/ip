@@ -7,5 +7,14 @@ public class Task {
         this.isDone = false;
     }
 
-    
+
+    private String status() {
+        return this.isDone ? "X" : " ";
+    }
+
+
+    @Override
+    public String toString() {
+        return String.format("[%s] ", this.status()) + description;
+    }
 }
