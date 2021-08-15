@@ -17,19 +17,31 @@ public class Duke {
                     System.out.println("There are no tasks!");
                 } else {
                     for (int i = 1; i < task.size() + 1; i++) {
-                        String str = String.format("%d.[%s] %s", i, task.get(i - 1).getStatusIcon(), task.get(i - 1).getDescription());
-                        System.out.println(str);
+                        System.out.println(task.get(i - 1));
                     }
                 }
             } else if (input.substring(0, 4).equals("done")) {
                 int taskNo = Integer.parseInt(input.substring(input.length() - 1));
                 task.get(taskNo - 1).markAsDone();
-                System.out.println("Nice! I've marked this task as done:\n  [X] " + task.get(taskNo - 1).getDescription());
+                System.out.println("Nice! I've marked this task as done:\n  " + task.get(taskNo - 1));
             } else{
-                Task newTask = new Task(input);
+                Task newTask = new Task("");
+                if (input.substring(0, 4).equals("todo")) {
+                    newTask = new Todo(input.substring(5));
+                } else if (input.substring(0, 8).equals("deadline")) {
+                    int index = input.indexOf("by");
+                    newTask = new Deadline(input.substring(9, index - 1), input.substring(index + 3));
+                } else if (input.substring(0, 5).equals("event")) {
+                    int index = input.indexOf("at");
+                    newTask = new Event(input.substring(6, index - 1), input.substring(index + 3));
+                } else {
+                    newTask = new Task(input);
+                }
                 task.add(newTask);
-                System.out.println("added: " + input);
+                System.out.println(String.format("Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.",
+                        newTask, task.size()));
             }
+
             input = sc.nextLine();
         }
 
