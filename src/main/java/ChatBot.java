@@ -6,9 +6,14 @@
 
 public class ChatBot {
     private boolean isRunning;
+    private String[] responses;
+    private static final int ResponseLimit = 100;
+    private int currentIdx;
 
     public ChatBot() {
-        isRunning = true;
+        this.isRunning = true;
+        this.responses = new String[ResponseLimit];
+        this.currentIdx = 0;
     }
 
     public boolean isRunning() {
@@ -44,16 +49,49 @@ public class ChatBot {
         if(input.toLowerCase().trim().equals("bye")) {
             return farewell();
         }
-        return echo(input);
+        if(input.toLowerCase().trim().equals("list")) {
+            return printList();
+        }
+        return record(input);
     }
 
     /**
-     * echo respond to the user by returning what the user inputs.
+     * Record non-keyword items to a list and informs the user if the operation is successsful.
      *
-     * @param input the request by the user
-     * @return a response exactly said by the user
+     * @param input the item user input
+     * @return a String to tell the user that the item is recorded
+     * @throws ArrayIndexOutOfBoundsException is thrown if user exceeds the limit of items.
      */
-    public String echo(String input) {
-        return input;
+    public String record(String input) throws ArrayIndexOutOfBoundsException {
+        try {
+            if(currentIdx >= ResponseLimit) {
+                throw new ArrayIndexOutOfBoundsException(
+                    String.format("ChatBot can only record maximum of %d responses.", ResponseLimit));
+            }
+            responses[currentIdx] = input;
+            currentIdx++;
+            return "added: " + input;
+        } catch(ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            return String.format("I cannot remember so many things! Swipe your card to unlock my fullest potential!",
+                ResponseLimit);
+        }
+    }
+
+    /**
+     * formats the items recorded in a list to be shown to user.
+     *
+     * @return list representation of items recorded by user
+     */
+    public String printList() {
+        if(currentIdx == 0) {
+            return "--- List is Empty ---";
+        }
+        StringBuilder sb = new StringBuilder("--- Start of List ---\n");
+        for(int i = 0; i < currentIdx; i++) {
+            sb = sb.append(Integer.toString(i + 1)).append(". ").append(responses[i]).append("\n");
+        }
+        sb = sb.append("--- End Of List ---");
+        return sb.toString();
     }
 }
