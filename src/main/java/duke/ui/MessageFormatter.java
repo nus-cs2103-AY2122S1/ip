@@ -4,6 +4,11 @@ import duke.task.Task;
 
 import java.util.List;
 
+/**
+ * Helper class for formatting the Duke chatbot's messages.
+ *
+ * @author Jay Aljelo Saez Ting
+ */
 public class MessageFormatter {
 
     private static final String INDENTATION_UNIT_STRING = " ";
@@ -22,6 +27,12 @@ public class MessageFormatter {
         return indent(surroundWithDividerLines(message));
     }
 
+    /**
+     * Creates a formatted String representing the list of tasks passed.
+     *
+     * @param tasks The list of tasks to be formatted.
+     * @return The formatted String representing the list of tasks.
+     */
     public String formatTasksList(List<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         int n = tasks.size();
@@ -31,6 +42,12 @@ public class MessageFormatter {
         return sb.toString().stripTrailing();
     }
 
+    /**
+     * Creates a formatted String representing a single task.
+     *
+     * @param task The task to be formatted.
+     * @return The formatted String representing the task.
+     */
     public String formatTask(Task task) {
         return indent(task.toString(), 2);
     }
@@ -49,14 +66,6 @@ public class MessageFormatter {
         return indent(string, INDENTATION_UNIT_STRING, INDENTATION_UNIT_COUNT);
     }
 
-    /**
-     * Indents the passed string by the passed number of unit indentations.
-     * Every line, unless it is empty, is indented. The unit indentation is a single blank space character.
-     *
-     * @param string The string to be indented.
-     * @param count The number of unit indentations.
-     * @return The indented string.
-     */
     private String indent(String string, int count) {
         return indent(string, INDENTATION_UNIT_STRING, count);
     }
