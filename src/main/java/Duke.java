@@ -17,7 +17,8 @@ public class Duke {
         );
 
         Scanner s = new Scanner(System.in);
-        String input = s.nextLine();
+
+        String input = s.next();
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
@@ -32,21 +33,28 @@ public class Duke {
                         System.out.printf("%d. %s %s \n", i + 1, statusIcon, t.getTaskName());
                     }
                 }
-            } else if (input.substring(0, 4).equals("done")) {
-                try {
-                    int index = Integer.parseInt(input.substring(5));
-                    l.get(index - 1).markComplete();
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid index, please try again");
-                } catch (IndexOutOfBoundsException ee) {
+            } else if (input.equals("done")) {
+                if (s.hasNextInt()) {
+                    int index = s.nextInt();
+                    try {
+                        l.get(index - 1).markComplete();
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Invalid index, please try again");
+                    }
+                } else {
                     System.out.println("Invalid index, please try again");
                 }
             } else {
-                Task newTask = new Task(input, false);
+                Scanner s2 = new Scanner(s.nextLine());
+                String taskName = input;
+                while (s2.hasNext()) {
+                    taskName += " " + s2.next();
+                }
+                Task newTask = new Task(taskName, false);
                 l.add(newTask);
-                System.out.println("Added `" + input + "` to your list");
+                System.out.println("Added `" + taskName + "` to your list");
             }
-            input = s.nextLine();
+            input = s.next();
         }
 
         System.out.println("Good riddance! Time to continue my beauty sleep :)");
