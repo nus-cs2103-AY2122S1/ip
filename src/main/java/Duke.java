@@ -10,26 +10,32 @@ public class Duke {
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String TAB = " ".repeat(4);
 
-    private static void parseInput(String input, List<Task> tasks) {
+    private static void parseInput(String input, List<Task> tasks) throws DukeException {
         String[] commands = input.split("\\s+");
         String keyWord = commands[0];
-        String taskDetails;
+        String taskDescription;
         String extraDetails;
         String message = "";
         Task newTask = null;
-        int index = 0;
+        int index = commands.length;
         switch(keyWord) {
             case "list":
-                index = 1;
-                for (Task task : tasks) {
-                    message += String.format("%d. %s\n", index, task);
-                    index++;
+                if (commands.length != 1) throw new UnknownCommandException();
+                if (tasks.size() == 0) {
+                    message = "No tasks added so far!";
+                } else {
+                    index = 1;
+                    for (Task task : tasks) {
+                        message += String.format("%d. %s\n", index, task);
+                        index++;
+                    }
+                    message = message.substring(0, message.length() - 1);
                 }
-                message = message.substring(0,message.length()-1);
                 break;
             case "todo":
-                taskDetails = String.join(" ", Arrays.copyOfRange(commands, 1, commands.length));
-                newTask = new Todo(taskDetails);
+                taskDescription = String.join(" ", Arrays.copyOfRange(commands, 1, commands.length));
+                if (taskDescription.length() == 0) throw new EmptyDescriptionException();
+                newTask = new Todo(taskDescription);
                 break;
             case "deadline":
                 for (int i = 1; i < commands.length; i++) {
@@ -38,9 +44,14 @@ public class Duke {
                         break;
                     }
                 }
-                taskDetails = String.join(" ", Arrays.copyOfRange(commands, 1, index));
+
+                if (commands.length == 1 || index == 1) throw new EmptyDescriptionException();
+                taskDescription = String.join(" ", Arrays.copyOfRange(commands, 1, index));
+
+                if (index+1 == commands.length) throw new EmptyTimestampException();
                 extraDetails = String.join(" ", Arrays.copyOfRange(commands, index+1, commands.length));
-                newTask = new Deadline(taskDetails, extraDetails);
+
+                newTask = new Deadline(taskDescription, extraDetails);
                 break;
             case "event":
                 for (int i = 1; i < commands.length; i++) {
@@ -49,26 +60,35 @@ public class Duke {
                         break;
                     }
                 }
-                taskDetails = String.join(" ", Arrays.copyOfRange(commands, 1, index));
+
+                if (commands.length == 1 || index == 1) throw new EmptyDescriptionException();
+                taskDescription = String.join(" ", Arrays.copyOfRange(commands, 1, index));
+
+                if (index+1 == commands.length) throw new EmptyTimestampException();
                 extraDetails = String.join(" ", Arrays.copyOfRange(commands, index+1, commands.length));
-                newTask = new Event(taskDetails, extraDetails);
+
+                newTask = new Event(taskDescription, extraDetails);
                 break;
             case "done":
+                if (commands.length != 2) throw new UnknownCommandException();
                 try {
                     int taskIndex = Integer.parseInt(commands[1]) - 1;
                     if (taskIndex < 0 || taskIndex >= tasks.size()) {
-                        message = String.format("Sorry, this task index is out of bounds! Please input an integer between 0-%d", tasks.size());
+                        throw new InvalidTaskNumberException(tasks.size());
                     } else {
                         Task task = tasks.get(taskIndex);
-                        if (task.markDone()) {
-                            message = String.format("Nice! I've marked this task as done:\n    %s", task);
-                        } else {
-                            message = String.format("This was completed previously!:\n    %s", task);
-                        }
+                        message = task.markDone()
+                                ? String.format("Nice! I've marked this task as done:\n    %s", task)
+                                : String.format("This was completed previously!:\n    %s", task);
                     }
                 } catch (NumberFormatException e) {
-                    message = String.format("Sorry, this task index is invalid! Please input an integer between 0-%d", tasks.size());
+                    throw new InvalidTaskNumberException(tasks.size());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidTaskNumberException(tasks.size());
                 }
+                break;
+            default:
+                throw new UnknownCommandException();
         }
         if (newTask != null) {
             tasks.add(newTask);
@@ -88,7 +108,11 @@ public class Duke {
         printOut(WELCOME_MESSAGE);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
-            parseInput(input, tasks);
+            try {
+                parseInput(input, tasks);
+            } catch (DukeException e) {
+                printOut(e.getMessage());
+            }
             input = scanner.nextLine();
         }
         printOut(BYE_MESSAGE);
