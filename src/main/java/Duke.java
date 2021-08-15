@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static boolean run;
-    private static String[] tasks;
+    private static Task[] tasks;
     private static int index;
 
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class Duke {
         System.out.println(greeting);
 
         run = true;
-        tasks = new String[100];
+        tasks = new Task[100];
 
         while(run) {
             run = eval();
@@ -40,15 +40,23 @@ public class Duke {
             case "list":
                 System.out.println("____________________________________________________________");
                 for(int i = 0; i < index; i++) {
-                    System.out.printf("%d. %s\n", i + 1, tasks[i]);
+                    System.out.printf("%d. %s\n", i + 1, tasks[i].toString());
                 }
                 System.out.println("____________________________________________________________");
                 return true;
+            case "done":
+                int taskIndex = Integer.parseInt(inputArray[1]);
+                tasks[taskIndex].setDone();
+                
+                System.out.println("____________________________________________________________"
+                + "Nice! I've marked this task as done: "
+                + tasks[taskIndex].toString()
+                + "____________________________________________________________");
             default:
                 System.out.println("____________________________________________________________\n"
-                        + "added:" + input + "\n"
+                        + "added: " + input + "\n"
                         + "____________________________________________________________\n");
-                tasks[index] = input;
+                tasks[index] = new Task(input);
 //                Might need to check index < 100 in the future
                 index += 1;
                 return true;
