@@ -9,28 +9,28 @@ public class Duke {
     // Constants for the program
     static final String DIVIDER = "--------------------------------------------------------------------------------";
     static final String PROMPT = "Enter Command: ";
+    static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
     static Scanner sc = new Scanner(System.in);
+    static TaskList taskList = new TaskList();
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(DIVIDER);
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
-        System.out.println(DIVIDER);
+        format(LOGO + "\nHello! I'm Duke\n" + "What can I do for you?");
         System.out.print(PROMPT);
-
         String str = sc.nextLine();
         while (!str.equals("bye")) {
-            printResponse(str);
+            if (str.equals("list")) {
+                taskList.printTaskList();
+            } else{
+                format(taskList.addTask(str));
+            }
+            System.out.print(PROMPT);
             str = sc.nextLine();
         }
-
         format("Bye. Hope to see you again soon!");
-
     }
 
     /**
@@ -42,15 +42,5 @@ public class Duke {
         System.out.println(DIVIDER);
         System.out.println(input);
         System.out.println(DIVIDER);
-    }
-
-    /**
-     * Prints the formatted response from given user input.
-     *
-     * @param input User's input.
-     */
-    public static void printResponse(String input) {
-        format(input);
-        System.out.print(PROMPT);
     }
 }
