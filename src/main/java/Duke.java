@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private ArrayList<String> list = new ArrayList<String>();
+
     public void run() {
         this.greetUser();
         this.echo();
@@ -27,7 +30,8 @@ public class Duke {
             if (userInput.equals("bye")) {
                 continueEcho = false;
             } else {
-                printMessage(userInput);
+                list.add(userInput);
+                printMessage(String.format("added: %s", userInput));
             }
         }
     }
