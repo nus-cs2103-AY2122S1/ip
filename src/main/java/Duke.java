@@ -65,7 +65,8 @@ public class Duke {
      * @throws CommandParamException    An exception indicating invalid description of command
      * @throws EmptyDescriptionException  An exception indicating empty description for a task
      */
-    private void addTasks(String taskType, String description) throws UnknownCommandException, CommandParamException, EmptyDescriptionException {
+    private void addTasks(String taskType, String description) throws UnknownCommandException,
+                                                CommandParamException, EmptyDescriptionException {
         Task t;
         if (taskType.equals("todo")) {
             if (description.equals("")) {
@@ -78,6 +79,9 @@ public class Duke {
             }
             if (description.contains("/by")) {
                 String[] parts = description.split("/by");
+                if (parts.length < 2 || parts[0].trim().equals("") || parts[1].trim().equals("")) {
+                    throw new CommandParamException(taskType);
+                }
                 t = new Deadline(parts[0].trim(), parts[1].trim());
             } else {
                 throw new CommandParamException(taskType);
@@ -88,6 +92,9 @@ public class Duke {
             }
             if (description.contains("/at")) {
                 String[] parts = description.split("/at");
+                if (parts.length < 2 || parts[0].trim().equals("") || parts[1].trim().equals("")) {
+                    throw new CommandParamException(taskType);
+                }
                 t = new Event(parts[0].trim(), parts[1].trim());
             } else {
                 throw new CommandParamException(taskType);
@@ -100,7 +107,7 @@ public class Duke {
         System.out.println("\tGot it. I've added this task: ");
         System.out.printf("\t  %s\n", t);
         System.out.printf("\tNow you have %d ", tasks.size());
-        System.out.println((tasks.size() == 1 ? "task" : "tasks") + " in the list.");
+        System.out.println((tasks.size() <= 1 ? "task" : "tasks") + " in the list.");
         System.out.println("\t_______________________________");
     }
 
@@ -118,7 +125,7 @@ public class Duke {
             System.out.println("\tNoted. I've removed this task:");
             System.out.printf("\t  %s\n", t);
             System.out.printf("\tNow you have %d ", tasks.size());
-            System.out.println((tasks.size() == 1 ? "task" : "tasks") + " in the list.");
+            System.out.println((tasks.size() <= 1 ? "task" : "tasks") + " in the list.");
             System.out.println("\t_______________________________");
         } else {
             throw new TaskNotFoundException(indexToDelete + 1);
