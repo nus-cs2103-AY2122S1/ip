@@ -104,6 +104,14 @@ public class Duke {
             System.out.println("Nice! I've marked this task as done:\n" + task.toString());
         }
 
+        public void deleteTask(int taskNumber) {
+            taskNumber--;
+            Task task = tasks.get(taskNumber);
+            tasks.remove(taskNumber);
+            System.out.println("Noted. I've removed this task:\n" + task.toString());
+            System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+        }
+
         public String byeString() {
             return "Bye. Hope to see you again soon!";
         }
@@ -141,8 +149,9 @@ public class Duke {
                 task = task.replace("/at", "(at:");
                 task += ")";
                 addTask(task, type);
-            }
-            else {
+            } else if (input.startsWith("delete ")) {
+                deleteTask(Integer.parseInt(input.substring(7)));
+            } else {
                 throw new CommandNotFoundException();
             }
         }
