@@ -60,9 +60,79 @@ public class Duke {
                 command = scanner.nextLine();
 
             } else if (command.startsWith("deadline ")) {
-                System.out.println("DEADLINE");
+
+                String[] splitup = command.split(" ");
+                String desc = "";
+                String by = "";
+                boolean byfound = false;
+                for (int i = 1; i < splitup.length; i++) {
+                    if (byfound) {
+                        if (by == "") {
+                            by = splitup[i];
+                        } else {
+                            by = by + " " + splitup[i];
+                        }
+                    } else {
+                        if (i == 1) {
+                            desc = splitup[1];
+                        } else if (splitup[i].equals("/by")) {
+                            byfound = true;
+                        } else {
+                            desc = desc + " " + splitup[i];
+                        }
+                    }
+                }
+
+                Deadline deadline = new Deadline(desc, by);
+                list.add(deadline);
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println(deadline.toString());
+                if (list.size() == 1) {
+                    System.out.println("Now you have 1 task in the list.");
+                } else {
+                    System.out.println("Now you have " + list.size() +" tasks in the list.");
+                }
+
+                command = scanner.nextLine();
+
             } else if (command.startsWith("event ")) {
-                System.out.println("EVENT");
+
+                String[] splitup = command.split(" ");
+                String desc = "";
+                String at = "";
+                boolean atFound = false;
+                for (int i = 1; i < splitup.length; i++) {
+                    if (atFound) {
+                        if (at == "") {
+                            at = splitup[i];
+                        } else {
+                            at = at + " " + splitup[i];
+                        }
+                    } else {
+                        if (i == 1) {
+                            desc = splitup[1];
+                        } else if (splitup[i].equals("/at")) {
+                            atFound = true;
+                        } else {
+                            desc = desc + " " + splitup[i];
+                        }
+                    }
+                }
+
+                Event event = new Event(desc, at);
+                list.add(event);
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println(event.toString());
+                if (list.size() == 1) {
+                    System.out.println("Now you have 1 task in the list.");
+                } else {
+                    System.out.println("Now you have " + list.size() +" tasks in the list.");
+                }
+
+                command = scanner.nextLine();
+
             } else {
                 System.out.println(line + "\n" + "Understood, Master Wayne. Added: " + command + "\n" + line);
                 Task t = new Task(command);
