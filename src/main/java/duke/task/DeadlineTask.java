@@ -8,10 +8,10 @@ public class DeadlineTask extends TemporalTask {
      * Creates a task with a deadline with the given task description.
      *
      * @param taskDescription The description of the task with a deadline.
-     * @param deadline The deadline.
+     * @param time The deadline.
      */
-    public DeadlineTask(String taskDescription, String deadline) {
-        super(taskDescription, deadline);
+    public DeadlineTask(String taskDescription, String time) {
+        super(taskDescription, time);
     }
 
     @Override

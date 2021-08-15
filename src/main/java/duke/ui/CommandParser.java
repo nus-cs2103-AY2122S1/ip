@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.task.DeadlineTask;
+import duke.task.EventTask;
 import duke.task.ToDoTask;
 
 import java.util.StringTokenizer;
@@ -16,6 +17,7 @@ public class CommandParser {
     private static final String LIST_TASKS_COMMAND = "list";
     private static final String MARK_TASK_DONE_COMMAND = "done";
     private static final String ADD_DEADLINE_TASK_COMMAND = "deadline";
+    private static final String ADD_EVENT_TASK_COMMAND = "event";
 
     /**
      * Parses the commands to get the command name.
@@ -41,6 +43,8 @@ public class CommandParser {
             return CommandType.MARK_TASK_DONE;
         case ADD_DEADLINE_TASK_COMMAND:
             return CommandType.ADD_DEADLINE_TASK;
+        case ADD_EVENT_TASK_COMMAND:
+            return CommandType.ADD_EVENT_TASK;
         default:
             throw new IllegalArgumentException("This command does not exist.");
         }
@@ -109,22 +113,55 @@ public class CommandParser {
                     "A task description needs to be specified for an 'Add Deadline Task' command.");
         }
         StringBuilder taskDescription = new StringBuilder();
-        int afterByIndex = -1;
+        int timeStartIndex = -1;
         for (int i = 1; i < tokens.length; i++) {
             String token = tokens[i];
             if (token.equals("/by")) {
-                afterByIndex = i + 1;
+                timeStartIndex = i + 1;
                 break;
             }
             taskDescription.append(token).append(" ");
         }
-        if (afterByIndex == -1 || afterByIndex == tokens.length) {
+        if (timeStartIndex == -1 || timeStartIndex == tokens.length) {
             throw new IllegalArgumentException("A deadline needs to be specified for an 'Add Deadline Task' command.");
         }
         StringBuilder deadline = new StringBuilder();
-        for (int i = afterByIndex; i < tokens.length; i++) {
+        for (int i = timeStartIndex; i < tokens.length; i++) {
             deadline.append(tokens[i]).append(" ");
         }
         return new DeadlineTask(taskDescription.toString().strip(), deadline.toString().strip());
+    }
+
+    public EventTask getEventTask(String command) throws IllegalArgumentException {
+        String[] tokens = command.split(" ");
+        if (tokens.length == 0) {
+            throw new IllegalArgumentException("This command is empty.");
+        }
+        String commandName = tokens[0];
+        if (!commandName.equals(ADD_EVENT_TASK_COMMAND)) {
+            throw new IllegalArgumentException("This command is not an 'Add Event Task' command.");
+        }
+        if (tokens.length == 1) {
+            throw new IllegalArgumentException(
+                    "A task description needs to be specified for an 'Add Event Task' command.");
+        }
+        StringBuilder taskDescription = new StringBuilder();
+        int timeStartIndex = -1;
+        for (int i = 1; i < tokens.length; i++) {
+            String token = tokens[i];
+            if (token.equals("/at")) {
+                timeStartIndex = i + 1;
+                break;
+            }
+            taskDescription.append(token).append(" ");
+        }
+        if (timeStartIndex == -1 || timeStartIndex == tokens.length) {
+            throw new IllegalArgumentException("A deadline needs to be specified for an 'Add Event Task' command.");
+        }
+        StringBuilder deadline = new StringBuilder();
+        for (int i = timeStartIndex; i < tokens.length; i++) {
+            deadline.append(tokens[i]).append(" ");
+        }
+        return new EventTask(taskDescription.toString().strip(), deadline.toString().strip());
     }
 }

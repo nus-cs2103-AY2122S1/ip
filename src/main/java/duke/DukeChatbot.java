@@ -1,6 +1,7 @@
 package duke;
 
 import duke.task.DeadlineTask;
+import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
 import duke.ui.CommandParser;
@@ -80,6 +81,10 @@ public class DukeChatbot {
                 case ADD_DEADLINE_TASK:
                     DeadlineTask deadlineTask = commandParser.getDeadlineTask(command);
                     addTask(deadlineTask);
+                    break;
+                case ADD_EVENT_TASK:
+                    EventTask eventTask = commandParser.getEventTask(command);
+                    addTask(eventTask);
                     break;
                 default:
                     // The default case should be unreachable. If this is reached, something is wrong.
