@@ -1,6 +1,8 @@
 import jarvis.message.ExitMessage;
 import jarvis.message.GreetingMessage;
 import jarvis.message.OutputMessage;
+import jarvis.output.Output;
+import jarvis.task.TaskList;
 
 import java.util.Scanner;
 
@@ -9,18 +11,24 @@ public class Jarvis {
         Scanner scanner = new Scanner(System.in);
 
         OutputMessage greetingMessage = new GreetingMessage();
-        System.out.println(greetingMessage.getFormattedMessage());
+        Output.showFormattedOutputMessage(greetingMessage);
 
         String exitTrigger = "bye";
+        String listTrigger = "list";
         String userInput = scanner.nextLine();
+        TaskList taskList = new TaskList();
 
         while(!userInput.equals(exitTrigger)) {
-            OutputMessage echoMessage = new OutputMessage(userInput);
-            System.out.println(echoMessage.getFormattedMessage());
+            if (userInput.equals(listTrigger)) {
+                OutputMessage taskListMessage = new OutputMessage(taskList.toString());
+                Output.showFormattedOutputMessage(taskListMessage);
+            } else {
+                taskList.addTask(userInput);
+            }
             userInput = scanner.nextLine();
         }
 
         OutputMessage exitMessage = new ExitMessage();
-        System.out.println(exitMessage.getFormattedMessage());
+        Output.showFormattedOutputMessage(exitMessage);
     }
 }
