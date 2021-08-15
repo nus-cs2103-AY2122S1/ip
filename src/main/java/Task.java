@@ -2,7 +2,7 @@
  * This is the Task class.
  * A Task contains a description and a status of being done or not.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -19,7 +19,5 @@ public class Task {
         this.isDone = true;
     }
 
-    public String toString() {
-        return String.format("%s %s", getStatusIcon(), this.description);
-    }
+    public abstract String toString();
 }

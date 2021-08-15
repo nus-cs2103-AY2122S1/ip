@@ -19,10 +19,23 @@ public class Tasklist {
         return numTasks == 0;
     }
 
-    public void addTask(String description) { // adds new task to taskList
-        Task newTask = new Task(description);
+    public void addTask(String line, String type) { // adds new task to taskList
+        Task newTask;
+        if (type == "T") {
+            newTask = new Todo(line);
+        } else if (type == "D") {
+            String[] temp = line.split(" /by ");
+            newTask = new Deadline(temp[0], temp[1]);
+        } else { // later on need to add else if (type == "E"), else portion for validation
+            String[] temp = line.split(" /at ");
+            newTask = new Event(temp[0], temp[1]);
+        }
         this.list[numTasks] = newTask;
         numTasks += 1;
+
+        System.out.println(" Got it! I've added this task:");
+        System.out.println("   " + newTask);
+        System.out.println(" Now you have " + this.numTasks + " task(s) in the list.");
     }
 
     public void markDone(int n) { // need some adjustments.
