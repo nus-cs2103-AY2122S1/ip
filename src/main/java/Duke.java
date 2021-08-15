@@ -3,7 +3,7 @@ import java.util.*;
 public class Duke {
     private static final String SAVE_FILE_LOCATION = "duke-task-list.txt";
     private final DukeCommandFormatter commandFormatter;
-    private final List<DukeTask> taskList;
+    private final TaskList taskList;
     private final Storage storage;
 
     final String logo = " ____        _        \n"
@@ -20,12 +20,12 @@ public class Duke {
     public Duke() {
         this.commandFormatter = new DukeCommandFormatter(System.in, System.out);
         this.storage = new Storage(SAVE_FILE_LOCATION);
-        List<DukeTask> taskList;
+        TaskList taskList;
         try {
             taskList = storage.loadTaskList();
         } catch (DukeStorageException e) {
             output(e.getMessage());
-            taskList = new ArrayList<>();
+            taskList = new TaskList();
         }
         this.taskList = taskList;
     }
@@ -85,12 +85,12 @@ public class Duke {
     }
 
     public void addTask(DukeTask task) {
-        taskList.add(task);
+        taskList.addTask(task);
         storage.saveTaskList(taskList);
     }
 
     public DukeTask removeTaskAt(int index) {
-        DukeTask task = taskList.remove(index);
+        DukeTask task = taskList.removeTaskAt(index);
         storage.saveTaskList(taskList);
         return task;
     }
@@ -100,17 +100,21 @@ public class Duke {
     }
 
     public List<DukeTask> getTaskList() {
-        return taskList;
+        List<DukeTask> tasks = new ArrayList<>();
+        for (DukeTask task: taskList.getTasks()) {
+            tasks.add(task);
+        }
+        return tasks;
     }
 
     public DukeTask markTaskAsDoneAt(int index) {
-        DukeTask task = taskList.get(index);
+        DukeTask task = taskList.getTaskAt(index);
         task.markAsDone();
         storage.saveTaskList(taskList);
         return task;
     }
 
     public boolean isTaskDoneAt(int index) {
-        return taskList.get(index).isDone;
+        return taskList.getTaskAt(index).isDone;
     }
 }

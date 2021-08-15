@@ -12,7 +12,7 @@ public class Storage {
         this.saveFileLocation = saveFileLocation;
     }
 
-    public List<DukeTask> loadTaskList() throws DukeStorageException {
+    public TaskList loadTaskList() throws DukeStorageException {
         try {
             FileInputStream fileInputStream = new FileInputStream(saveFileLocation);
             Scanner scanner = new Scanner(fileInputStream);
@@ -22,18 +22,18 @@ public class Storage {
             }
             scanner.close();
             fileInputStream.close();
-            return tasks;
+            return new TaskList(tasks);
         } catch (IOException e) {
-            return new ArrayList<>();
+            return new TaskList();
         } catch (TaskParseException e) {
             throw new DukeStorageException(String.format("Error when reading %s; file ignored", saveFileLocation));
         }
     }
 
-    public void saveTaskList(List<DukeTask> taskList) {
+    public void saveTaskList(TaskList taskList) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(saveFileLocation);
-            for (DukeTask task: taskList) {
+            for (DukeTask task: taskList.getTasks()) {
                 fileOutputStream.write(task.toSerializedString().getBytes());
                 fileOutputStream.write("\n".getBytes());
             }
