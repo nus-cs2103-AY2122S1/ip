@@ -13,28 +13,28 @@ public class MyJournal {
                 + "3. Type 'bye' to exit");
         while (true) {
             ans = reader.nextLine();
+            String thisLine = ans;
+            Scanner line = new Scanner(thisLine);
             if (ans.equals("bye")) {
                 break;
             } else if (ans.equals("list")) {
                 for (int i = 0; i < count; i++) {
                     System.out.println((i + 1) + ". " + (items[i].getState() ? "[X] ": "[ ] ") + items[i].getTaskName());
                 }
-            } else if (ans.substring(0,4).equals("done")) {
-//                if (reader.hasNextInt()) {
-                int index = Integer.parseInt(ans.substring(5, ans.length()), 10) - 1;
-//                            reader.nextInt();
-//
-                if (items[index] == null || index >= count) {
-                    System.out.println("That task does not exist");
-                    continue;
+            } else if (line.next().equals("done")) {
+                if (line.hasNextInt()) {
+                    int index = line.nextInt() - 1;
+                    if (index >= count || index < 0 || items[index] == null) {
+                        System.out.println("That task does not exist");
+                        continue;
+                    } else {
+                        items[index].setState(true);
+                        System.out.println("Okay!! I have marked this task as done:\n"
+                                + "[X] " + items[index].getTaskName());
+                    }
                 } else {
-                    items[index].setState(true);
-                    System.out.println("Okay!! I have marked this task as done:\n"
-                            + "[X] " + items[index].getTaskName());
+                    System.out.println("Which task do you want to mark as done?");
                 }
-//                } else {
-//                    System.out.println("Which task do you want to mark as done?");
-//                }
             } else {
                 items[count] = new Task(ans);
                 System.out.println("added: " + ans);
