@@ -20,4 +20,16 @@ done 1
 list
 done 1
 list
+delete
+list
+delete -1
+list
+delete x
+list
+delete 3
+list
+delete 1
+list
+delete 1
+list
 bye
