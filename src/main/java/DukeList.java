@@ -28,6 +28,19 @@ public class DukeList {
     }
 
 
+    public void addDeadlines(String text) {
+        String[] strings = text.split(" /by ", 2);
+
+        String limit = strings.length == 1 ? "" : strings[1];
+
+        Deadlines input = new Deadlines(strings[0], limit);
+        list[count] = input;
+        count += 1;
+
+        displayTask(input);
+    }
+
+
     public void list() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < count; i++) {
