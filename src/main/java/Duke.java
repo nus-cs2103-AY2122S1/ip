@@ -78,7 +78,7 @@ public class Duke {
     private static void runDuke() {
         chat("Hello I'm Duke\nWhat can I do for you?");
         Scanner scanner = new Scanner(System.in);
-        while (true) {
+        while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
                 break;

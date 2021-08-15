@@ -1,7 +1,77 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________________
+Hello I'm Duke
+What can I do for you?
+____________________________________________________________
+
+____________________________________________________________
+Here are the tasks in your list:
+
+____________________________________________________________
+
+____________________________________________________________
+Got it. I've added this task:
+ [T][ ] debug code
+Now you have 1 tasks in the list
+____________________________________________________________
+
+____________________________________________________________
+Got it. I've added this task:
+ [D][ ] ip project (by: Sunday)
+Now you have 2 tasks in the list
+____________________________________________________________
+
+____________________________________________________________
+Got it. I've added this task:
+ [T][ ] take a break
+Now you have 3 tasks in the list
+____________________________________________________________
+
+____________________________________________________________
+Got it. I've added this task:
+ [E][ ] CS2103T Lecture (at: Friday 1600)
+Now you have 4 tasks in the list
+____________________________________________________________
+
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][ ] debug code
+2.[D][ ] ip project (by: Sunday)
+3.[T][ ] take a break
+4.[E][ ] CS2103T Lecture (at: Friday 1600)
+____________________________________________________________
+
+____________________________________________________________
+Got it. I've added this task:
+ [E][ ] meet up with Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero Oliver Paul Quincy Randolph Sherman Thomas Uncas Victor William Xerxes Yancy Zeus Wolfeschlegelsteinhausenbergerdorffwelchevoralternwarengewissenhaftschaferswessenschafewarenwohlgepflegeundsorgfaltigkeitbeschutzenvonangreifendurchihrraubgierigfeindewelchevoralternzwolftausendjahresvorandieerscheinenvanderersteerdemenschderraumschiffgebrauchlichtalsseinursprungvonkraftgestartseinlangefahrthinzwischensternartigraumaufdersuchenachdiesternwelchegehabtbewohnbarplanetenkreisedrehensichundwohinderneurassevonverstandigmenschlichkeitkonntefortpflanzenundsicherfreuenanlebenslanglichfreudeundruhemitnichteinfurchtvorangreifenvonandererintelligentgeschopfsvonhinzwischensternartigraum (at: Sunday 12pm)
+Now you have 5 tasks in the list
+____________________________________________________________
+
+____________________________________________________________
+Nice! I've marked this task as done:
+  [E][X] CS2103T Lecture (at: Friday 1600)
+____________________________________________________________
+
+____________________________________________________________
+Nice! I've marked this task as done:
+  [T][X] debug code
+____________________________________________________________
+
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][X] debug code
+2.[D][ ] ip project (by: Sunday)
+3.[T][ ] take a break
+4.[E][X] CS2103T Lecture (at: Friday 1600)
+5.[E][ ] meet up with Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero Oliver Paul Quincy Randolph Sherman Thomas Uncas Victor William Xerxes Yancy Zeus Wolfeschlegelsteinhausenbergerdorffwelchevoralternwarengewissenhaftschaferswessenschafewarenwohlgepflegeundsorgfaltigkeitbeschutzenvonangreifendurchihrraubgierigfeindewelchevoralternzwolftausendjahresvorandieerscheinenvanderersteerdemenschderraumschiffgebrauchlichtalsseinursprungvonkraftgestartseinlangefahrthinzwischensternartigraumaufdersuchenachdiesternwelchegehabtbewohnbarplanetenkreisedrehensichundwohinderneurassevonverstandigmenschlichkeitkonntefortpflanzenundsicherfreuenanlebenslanglichfreudeundruhemitnichteinfurchtvorangreifenvonandererintelligentgeschopfsvonhinzwischensternartigraum (at: Sunday 12pm)
+____________________________________________________________
+
+____________________________________________________________
+Got it. I've added this task:
+ [D][ ] do homework (by: no idea :-p)
+Now you have 6 tasks in the list
+____________________________________________________________
+
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________
 
