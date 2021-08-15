@@ -10,17 +10,19 @@ public class Duke {
         return scanner.next();
     }
 
-    public static void dukeAction(Scanner scanner){
+    public static void dukeAction(Scanner scanner) {
         String inp = getFirstWord(scanner);
 
         while(!inp.equals("bye")) {
+            System.out.println("----------------------------------------------------");
             switch (inp) {
                 case "list":
-                    System.out.println("Here are the tasks in your list:");
+                    System.out.println( "Here are the tasks in your list:");
                     for (int i = 0; i < taskList.length; i++) {
                         if (taskList[i] == null) break;
                         System.out.printf("\t%s." + taskList[i].toString() + "%n", i + 1);
                     }
+                    System.out.println("----------------------------------------------------");
                     inp = getFirstWord(scanner);
                     break;
 
@@ -28,16 +30,34 @@ public class Duke {
                     int doneNumber = Integer.parseInt(scanner.next()) - 1;
                     taskList[doneNumber].setDone();
                     System.out.println("Nice! I've marked this task as done:\n"
-                                        + "%t" + taskList[doneNumber].toString());
+                                        + taskList[doneNumber].toString() +
+                            "\n----------------------------------------------------");
                     inp = getFirstWord(scanner);
                     break;
 
-                default:
-                    inp += scanner.nextLine();
-                    Task task = new Task(inp);
-                    taskList[counter++] = task;
-                    System.out.println("added: " + inp);
+                case "todo":
+                    Todo todo = new Todo(scanner.nextLine().trim());
+                    todo.addToList(taskList, counter);
+                    counter++;
                     inp = getFirstWord(scanner);
+                    break;
+
+                case "deadline":
+                    String[] taskTimeD = Deadline.getDeadlineTaskAndTime(scanner);
+                    Deadline deadline = new Deadline(taskTimeD[0].trim(), taskTimeD[1]);
+                    deadline.addToList(taskList, counter);
+                    counter++;
+                    inp = getFirstWord(scanner);
+                    break;
+
+                case "event":
+                    String[] taskTimeE = Event.getEventTaskAndTime(scanner);
+                    Event event = new Event(taskTimeE[0].trim(), taskTimeE[1]);
+                    event.addToList(taskList, counter);
+                    counter++;
+                    inp = getFirstWord(scanner);
+                    break;
+
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
