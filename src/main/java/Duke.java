@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private ArrayList<String> list = new ArrayList<String>();
+    private ArrayList<String> tasks = new ArrayList<>();
 
     public void run() {
         this.greetUser();
@@ -29,8 +29,10 @@ public class Duke {
             String userInput = sc.nextLine();
             if (userInput.equals("bye")) {
                 continueEcho = false;
+            } else if (userInput.equals("list")) {
+                this.displayTasks();
             } else {
-                list.add(userInput);
+                tasks.add(userInput);
                 printMessage(String.format("added: %s", userInput));
             }
         }
@@ -38,6 +40,19 @@ public class Duke {
 
     public void exit() {
         printMessage("Hope to see you again!! ^_^");
+    }
+
+    public void displayTasks() {
+        int len = this.tasks.size();
+        if (len == 0) {
+            printMessage("You have no task!");
+        } else {
+            for (int i = 0; i < len; i++) {
+                int num = i + 1;
+                String text = this.tasks.get(i);
+                printMessage(String.format("%d. %s", num, text));
+            }
+        }
     }
 
     public static void main(String[] args) {
