@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Duke {
 
     public static void main(String[] args) {
@@ -15,13 +16,25 @@ public class Duke {
 
 
         while (running) {
-            if (input.equals("bye")) {
+
+            String[] inputs = input.split(" ");
+            // might want to change this to switch if if-else get too much
+            if (inputs[0].equals("bye")) {
                 System.out.println(bot.getExitMessage());
                 running = false;
-            } else if (input.equals("list")) {
+            } else if (inputs[0].equals("list")) {
+
                 System.out.println(bot.getListMessage());
                 input = sc.nextLine();
+
+            } else if (inputs[0].equals("done")) {
+
+                String message = bot.completeTask(Integer.parseInt(inputs[1]));
+                System.out.println(message);
+                input = sc.nextLine();
+
             } else {
+
                 String message = bot.addItems(input);
                 System.out.println(message);
                 input = sc.nextLine();
@@ -37,7 +50,7 @@ public class Duke {
 class ChatBot {
 
     static String line = "______________________________________\n";
-    private ArrayList<String> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     public String getStartMessage() {
         return line + "Hello! I'm Duke\n" + "What can I do for you?\n" + line;
@@ -48,17 +61,28 @@ class ChatBot {
     }
 
     public String addItems(String input) {
-        tasks.add(input);
+        Task t = new Task(input);
+        tasks.add(t);
         return line + "added: " + input +"\n" + line;
     }
 
     public String getListMessage() {
-        String listMessage = "";
+        String listMessage = "Here are your tasks... if you choose to do it...\n";
 
         for (int i = 0; i < tasks.size(); i++) {
-            listMessage = listMessage + i + ". " + tasks.get(i) + "\n";
+            String status = tasks.get(i).getDone();
+            String message = tasks.get(i).getMessage();
+            listMessage = listMessage + (i + 1) + ".[" + status + "] " + message + "\n";
         }
         return line + listMessage + line;
     }
 
+    public String completeTask(int index) {
+        Task complete = tasks.get(index - 1);
+        complete.completeTask();
+
+        return line + "Well done! You finally completed it!\n" + line;
+    }
+
 }
+
