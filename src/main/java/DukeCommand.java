@@ -61,9 +61,9 @@ public enum DukeCommand implements DukeCommandAction {
                 } else if (namedArgs.containsKey("at")) {
                     task = new DukeEvent(arg, namedArgs.get("at"));
                 } else {
-                    task = new DukeTask(arg);
+                    task = new DukeSimpleTask(arg);
                 }
-                duke.getTaskList().add(task);
+                duke.addTask(task);
                 duke.output(String.format("Task added with title: %s", arg));
                 return true;
             }),
@@ -71,8 +71,7 @@ public enum DukeCommand implements DukeCommandAction {
             "Delete a task",
             new DukeCommandConfig(new DukeCommandArgument("index", "The position of the task in the list", DukeCommandArgumentType.REQUIRED), Map.of()),
             (Duke duke, String arg, Map<String, String> namedArgs) -> {
-                DukeTask task = duke.getTaskList().get(parseTaskIndex(duke, arg));
-                duke.getTaskList().remove(task);
+                DukeTask task = duke.removeTaskAt(parseTaskIndex(duke, arg));
                 duke.output("I've removed the following task.");
                 duke.output(task.toString());
                 return true;
@@ -85,11 +84,11 @@ public enum DukeCommand implements DukeCommandAction {
             "Mark the task as done",
             new DukeCommandConfig(new DukeCommandArgument("index", "The position of the task in the list", DukeCommandArgumentType.REQUIRED), Map.of()),
             (Duke duke, String arg, Map<String, String> namedArgs) -> {
-                DukeTask task = duke.getTaskList().get(parseTaskIndex(duke, arg));
-                if (task.isDone) {
+                int index = parseTaskIndex(duke, arg);
+                DukeTask task = duke.markTaskAsDoneAt(index);
+                if (duke.isTaskDoneAt(index)) {
                     duke.output("The following task is already marked as done! Good job!");
                 } else {
-                    task.markAsDone();
                     duke.output("I've marked the following task as done!");
                 }
                 duke.output(task.toString());

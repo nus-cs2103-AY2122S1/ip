@@ -1,8 +1,10 @@
+import java.io.*;
 import java.util.*;
 
 public class Duke {
-    private final DukeCommandFormatter commandFormatter = new DukeCommandFormatter(System.in, System.out);
-    private final List<DukeTask> taskList = new ArrayList<>();
+    private final DukeCommandFormatter commandFormatter;
+    private final List<DukeTask> taskList;
+    private static final String SAVE_FILE_LOCATION = "duke-task-list.txt";
 
     final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -13,6 +15,44 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.start();
+    }
+
+    public Duke() {
+        this.commandFormatter = new DukeCommandFormatter(System.in, System.out);
+        this.taskList = loadTaskList();
+    }
+
+    private List<DukeTask> loadTaskList() {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(SAVE_FILE_LOCATION);
+            Scanner scanner = new Scanner(fileInputStream);
+            List<DukeTask> tasks = new ArrayList<>();
+            while (scanner.hasNext()) {
+                tasks.add(DukeTask.fromSerializedString(scanner.nextLine()));
+            }
+            scanner.close();
+            fileInputStream.close();
+            return tasks;
+        } catch (IOException e) {
+            return new ArrayList<>();
+        } catch (TaskParseException e) {
+            output(String.format("Error when reading %s; file ignored", SAVE_FILE_LOCATION));
+            return new ArrayList<>();
+        }
+    }
+
+    private static void saveTaskList(List<DukeTask> taskList) {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(SAVE_FILE_LOCATION);
+            for (DukeTask task: taskList) {
+                fileOutputStream.write(task.toSerializedString().getBytes());
+                fileOutputStream.write("\n".getBytes());
+            }
+            fileOutputStream.close();
+        } catch (IOException e) {
+            // File not found
+            e.printStackTrace();
+        }
     }
 
     public void start() {
@@ -69,12 +109,33 @@ public class Duke {
         }
     }
 
+    public void addTask(DukeTask task) {
+        taskList.add(task);
+        saveTaskList(taskList);
+    }
+
+    public DukeTask removeTaskAt(int index) {
+        DukeTask task = taskList.remove(index);
+        saveTaskList(taskList);
+        return task;
+    }
+
     public void output(String outputLine) {
         commandFormatter.printOutputLine(outputLine);
     }
 
-
     public List<DukeTask> getTaskList() {
         return taskList;
+    }
+
+    public DukeTask markTaskAsDoneAt(int index) {
+        DukeTask task = taskList.get(index);
+        task.markAsDone();
+        saveTaskList(taskList);
+        return task;
+    }
+
+    public boolean isTaskDoneAt(int index) {
+        return taskList.get(index).isDone;
     }
 }
