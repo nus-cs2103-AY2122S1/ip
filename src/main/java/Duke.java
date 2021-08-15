@@ -1,6 +1,28 @@
 import java.util.Scanner;
 
+
 public class Duke {
+
+
+    /**
+     * DukeException, an exception that arose from inaccurate input.
+     *
+     */
+    public class DukeException extends Exception {
+
+        public DukeException() {
+            super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+
+        public DukeException(String message) {
+            super(message);
+        }
+
+
+    }
+
+
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
@@ -19,7 +41,7 @@ public class Duke {
     private static final String hline = "\t----------------------------";
     //hashmap cannot enumerate
     //array of inputs capped at 100
-    private Task[] inputs =  new Task[100];
+    private final Task[] inputs =  new Task[100];
     //pointer to the last location of inputs available
     private int ptr = 0;
 
@@ -43,7 +65,7 @@ public class Duke {
      * Method to print the Logo for Duke.
      */
     private void print_logo() {
-        System.out.println("Hello from\n" + this.logo);
+        System.out.println("Hello from\n" + Duke.logo);
 
     }
 
@@ -53,7 +75,7 @@ public class Duke {
      * @param t The Task to check.
      * @return True if the string has been added and false otherwise.
      */
-    private boolean isAdded(String t) {
+    private boolean isAdded(Task t) {
         for (int i = 0; i < ptr; i++) {
             if (inputs[i].equals(t)) {
                 return true;
@@ -92,10 +114,14 @@ public class Duke {
     /**
      * Creates a todo task with the ipt String
      *
-     * @param ipt
+     * @param ipt The input string
      */
     private void todo(String ipt) {
         Task t = new ToDos(ipt);
+        if (isAdded(t)) {
+            this.print("Added: " + t.toString());
+            return;
+        }
         this.add(t);
 
     }
@@ -103,20 +129,43 @@ public class Duke {
     /**
      * Creates a deadLine task with the input string
      *
-     * @param input
+     * @param input The input String
+     * @throws DukeException Exceptions in a duke object.
      */
-    private void deadline(String input) {
+    private void deadline(String input) throws DukeException {
         String[] arr = input.split("/by", 2);
+
+        if (arr.length == 1) throw new DukeException("☹ OOPS!!! The deadline must be filled in prefixed by /by");
         Task t = new Deadlines(arr[0], arr[1]);
+        if (isAdded(t)) {
+            this.print("Added: " + t.toString());
+            return;
+        }
         this.add(t);
 
     }
 
-    private void event(String input) {
+
+    /**
+     * Creates an Event with the input String
+     *
+     * @param input The input String
+     * @throws DukeException Exceptions in a Duke object due to problems with task input.
+     */
+    private void event(String input) throws DukeException {
         String[] arr = input.split("/at", 2);
+        if (arr.length == 1) throw new DukeException("☹ OOPS!!! The event deadline must be filled in prefixed by /at");
         Task t = new Events(arr[0], arr[1]);
+        if (isAdded(t)) {
+            this.print("Added: " + t.toString());
+            return;
+        }
         this.add(t);
     }
+
+
+
+
 
 
     /**
@@ -133,45 +182,44 @@ public class Duke {
             //split the inpt to two if possible
             String[] twoInputs = inpt.split(" ", 2);
 
+            try {
 
-            if (twoInputs[0].equals("done")) {
-                //TODO: should check if there is an int?
-                String s = twoInputs[1].trim();
-                int val = Integer.parseInt(s) - 1;
-                inputs[val].done();
-                print(taskComplete + "\n\t" + inputs[val]);
-                inpt = sc.nextLine();
-                continue;
-            } else if (twoInputs[0].equals(TODO)) {
-                todo(twoInputs[1]);
-                inpt = sc.nextLine();
-                continue;
-            } else if (twoInputs[0].equals(EVENT)) {
-                event(twoInputs[1]);
-                inpt = sc.nextLine();
-                continue;
-            } else if (twoInputs[0].equals(DEADLINE)) {
-                deadline(twoInputs[1]);
-                inpt = sc.nextLine();
-                continue;
-            }
+                if (twoInputs[0].equals("done")) {
+                    //TODO: should check if there is an int?
+                    //and at what point is this considered using exception handling to dictate the control
+                    if (twoInputs[1] == null) {
+                        throw new DukeException("Number expected after done.");
+                    }
+                    String s = twoInputs[1].trim();
+                    int val = Integer.parseInt(s) - 1;
+                    if (val >= ptr)
+                        throw new DukeException("☹ OOPS!!! The list is not that long!");
+                    inputs[val].done();
+                    print(taskComplete + "\n\t" + inputs[val]);
+                //this is ridiculous, is there a way to nest the exceptions within the class
+                //without having to use the array as an input... -- maybe encapsulate the parsing in a function to make it look neat
+                } else if (twoInputs[0].equals(TODO)) {
+                    if (twoInputs.length == 1)
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    todo(twoInputs[1]);
+                } else if (twoInputs[0].equals(EVENT)) {
+                    if (twoInputs.length == 1)
+                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                    event(twoInputs[1]);
+                } else if (twoInputs[0].equals(DEADLINE)) {
+                    if (twoInputs.length == 1)
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    deadline(twoInputs[1]);
+                } else if (inpt.equals("list")) {
+                    this.list();
 
-
-
-            if (inpt.equals("list")) {
-                this.list();
-                inpt = sc.nextLine();
-                continue;
-            }
-
-            //checks if the input has been added
-            //if the input has been added print added: {input}
-            //else if the input has not been added add it and print
-            //the input
-            if (this.isAdded(inpt)) {
-                this.print("added: " + inpt);
-            } else {
-                this.add(new Task(inpt));
+                } else {
+                    throw new DukeException();
+                }
+            } catch (DukeException e) {
+                this.print(e.getMessage());
+            } catch (NumberFormatException e) {
+                this.print("Expected a number as an input after done");
             }
             inpt = sc.nextLine();
         }

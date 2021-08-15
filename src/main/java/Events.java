@@ -10,4 +10,13 @@ public class Events extends Task {
     public String toString() {
         return this.label + super.toString() + " " + this.date;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Events) {
+            Events e = (Events) obj;
+            return this.name.equals(e.name) && e.date.equals(this.date);
+        }
+        return false;
+    }
 }

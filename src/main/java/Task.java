@@ -2,11 +2,12 @@
  * Class of a task to be done.
  *
  */
-public class Task {
-    public String name;
-    public String checkBox;
+public abstract class Task {
+    protected String name;
+    protected String checkBox;
     private static String notDone = "[ ]";
     private static String done = "[X]";
+
 
     /**
      * Constructor of task.
@@ -31,9 +32,6 @@ public class Task {
     }
 
 
-    public boolean equals(String s) {
-        return this.name.equals(s);
-    }
 
     @Override
     public boolean equals(Object obj) {

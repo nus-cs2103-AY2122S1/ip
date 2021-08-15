@@ -10,4 +10,13 @@ public class Deadlines extends Task {
     public String toString() {
         return this.label + super.toString() + " " + this.dl;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadlines) {
+            Deadlines dl = (Deadlines) obj;
+            return this.name.equals(dl.name) && this.dl.equals(dl.dl);
+        }
+        return false;
+    }
 }
