@@ -38,23 +38,24 @@ public class Duke {
                         + "____________________________________________________________");
                 return false;
             case "list":
-                System.out.println("____________________________________________________________");
+                System.out.println("____________________________________________________________\n");
                 for(int i = 0; i < index; i++) {
-                    System.out.printf("%d. %s\n", i + 1, tasks[i].toString());
+                    System.out.printf("%d. %s\n", i + 1, tasks[i]);
                 }
                 System.out.println("____________________________________________________________");
                 return true;
             case "done":
-                int taskIndex = Integer.parseInt(inputArray[1]);
+                int taskIndex = Integer.parseInt(inputArray[1]) - 1;
                 tasks[taskIndex].setDone();
-                
-                System.out.println("____________________________________________________________"
-                + "Nice! I've marked this task as done: "
-                + tasks[taskIndex].toString()
-                + "____________________________________________________________");
+
+                System.out.println("____________________________________________________________\n"
+                + "Nice! I've marked this task as done: \n"
+                + tasks[taskIndex].toString() + "\n"
+                + "____________________________________________________________\n");
+                return true;
             default:
                 System.out.println("____________________________________________________________\n"
-                        + "added: " + input + "\n"
+                        + "added:" + input + "\n"
                         + "____________________________________________________________\n");
                 tasks[index] = new Task(input);
 //                Might need to check index < 100 in the future
