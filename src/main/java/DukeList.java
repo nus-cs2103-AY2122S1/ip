@@ -5,6 +5,13 @@ public class DukeList {
     public DukeList() {}
 
 
+    private void displayTask(Task task) {
+        String response = "Got it. I've added this task:\n";
+        String taskCount = "\nNow you have " + this.count + "tasks in the list";
+        System.out.println(response + task.toString() + taskCount);
+    }
+
+
     public void add(String text) {
         list[count] = new Task(text);
         count += 1;
@@ -12,7 +19,17 @@ public class DukeList {
     }
 
 
+    public void addTodo(String text) {
+        ToDos input = new ToDos(text);
+        list[count] = input;
+        count += 1;
+
+        displayTask(input);
+    }
+
+
     public void list() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < count; i++) {
             System.out.println((i + 1) + "." + list[i].toString());
         }
