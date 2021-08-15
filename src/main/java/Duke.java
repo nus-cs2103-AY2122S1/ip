@@ -5,8 +5,24 @@ public class Duke {
 	private OutputHandler oh = new OutputHandler();
 	private List<Task> tasks = new ArrayList<>();
 
-	private void store(String description) {
-		tasks.add(new Task(description));
+	private Task store(String line) {
+		Task task = null;
+		String type = line.split(" ")[0];
+		if (type.equals("todo")) {
+			task = new ToDo(line.substring(5));
+
+		} else if (type.equals("deadline")) {
+			int pos = line.indexOf("/by");
+			task = new Deadline(line.substring(9, pos), line.substring(pos+4));
+
+		} else if (type.equals("event")) {
+			int pos = line.indexOf("/at");
+			task = new Event(line.substring(6, pos), line.substring(pos+4));
+
+		} /* else error */
+
+		tasks.add(task);
+		return task;
 	}
 
 	private void display() {
@@ -47,8 +63,10 @@ public class Duke {
 				markDone(Integer.parseInt(input.split(" ")[1]) - 1);
 
 			} else {
-				store(input);
-				oh.add("added: " + input);
+				Task task = store(input);
+				oh.add("Got it. I've added this task:");
+				oh.add("  " + task);
+				oh.add(String.format("Now you have %d task(s) in the list.", tasks.size()));
 				oh.print();
 
 			}

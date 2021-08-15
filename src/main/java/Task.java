@@ -1,8 +1,9 @@
 import java.util.*;
 
-public class Task {
-	private String description;
-	private boolean isDone;
+abstract class Task {
+	protected String description;
+	protected boolean isDone;
+	protected String type;
 
 	public Task(String description) {
 		this.description = description;
@@ -18,6 +19,6 @@ public class Task {
 	}
 
 	public String toString() {
-		return String.format("[%s] %s", (isDone ? "X" : " "), description);
+		return String.format("[%s][%s] %s", type, (isDone ? "X" : " "), description);
 	}
 }
