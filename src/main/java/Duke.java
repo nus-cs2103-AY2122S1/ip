@@ -50,6 +50,20 @@ public class Duke {
                 } catch (WrongCommandFormatException e) {
                     System.out.println(e.getMessage());
                 }
+            } else if (input.equals("event")) {
+                Scanner s4 = new Scanner(s.nextLine());
+                String description = "";
+                while (s4.hasNextLine()) {
+                    description = s4.nextLine();
+                }
+                try {
+                    Event newEvent = new Event(description, false);
+                    l.addTask(newEvent);
+                } catch (WrongCommandFormatException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else {
+                System.out.println("No command specified. Please try again");
             }
             input = s.next();
         }
