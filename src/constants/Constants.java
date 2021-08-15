@@ -28,6 +28,7 @@ public class Constants {
         static {
             BREAKLINE = StringHelpers.repeat(BREAKLINE_LENGTH, BREAKLINE_PATTERN) + System.lineSeparator();
         }
+
     }
 
     public static class DukeBot {

@@ -1,11 +1,22 @@
 package views.cli.strategies;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 import constants.Constants;
 import helpers.StringHelpers;
 
 public abstract class RespondWith {
+    public Map<String, Function<String, String>> commands = new HashMap<>();
 
-    abstract public String respond(String query);
+    public String respond(String query) {
+        Function<String, String> f = commands.get(query.split(" ")[0]);
+        if (f != null) {
+            return f.apply(query);
+        }
+        return null;
+    }
 
     protected String endMessage = "bye";
 
