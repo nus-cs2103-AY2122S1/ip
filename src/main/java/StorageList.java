@@ -13,7 +13,7 @@ public class StorageList {
         for(int i=0; i<storageList.size(); i++){
             int num = i+1;
             Task task = storageList.get(i);
-            System.out.println(num + "." + "[" + task.getStatusIcon() +  "] " + task.getDescription());
+            System.out.println(num + "." + task.toString());
         }
     }
 

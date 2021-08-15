@@ -23,7 +23,23 @@ public class Duke {
             String input = sc.nextLine();
             if(input.length()>=4 && input.substring(0, 4).equals("done")){
                 marking(input);
-            }else{
+            }else if(input.length()>=4 && input.substring(0, 4).equals("todo")){
+                ToDos todo = new ToDos(input.substring(5));
+                sl.add(todo);
+                linesToPrint(todo.toString(), sl.size());
+            }else if(input.length()>=8 && input.substring(0, 8).equals("deadline")) {
+                String by = input.substring(input.indexOf("/")+4);
+                Deadlines dl = new Deadlines(input.substring(9, input.indexOf("/")), by);
+                sl.add(dl);
+                linesToPrint(dl.toString(), sl.size());
+            }else if(input.length()>=5 && input.substring(0, 5).equals("event")) {
+                String at = input.substring(input.indexOf("/")+4);
+                Events event = new Events(input.substring(6,  input.indexOf("/")), at);
+                sl.add(event);
+                linesToPrint(event.toString(), sl.size());
+            }
+
+            else{
                 Task task = new Task(input);
                 String desc = task.getDescription();
                 switch(desc){
@@ -42,6 +58,11 @@ public class Duke {
 
         }
 
+    }
+    public static void linesToPrint(String task, int size){
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + size + " tasks in the list.");
     }
 
     public static void marking(String input){
