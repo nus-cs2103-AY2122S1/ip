@@ -7,50 +7,6 @@ public class RobotFriend {
     private final static String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private final static String ROBOT_TEXT_SPACE = "         ";
 
-    private static class Task {
-        /**
-         * the status of the task
-         */
-        private boolean isComplete;
-
-        /**
-         * the name of the task
-         */
-        private final String taskName;
-
-        /**
-         * Constructs a uncompleted task with the name as taskName
-         *
-         * @param taskName task name
-         */
-        public Task(String taskName) {
-            this.taskName = taskName;
-            this.isComplete = false;
-        }
-
-        /**
-         * set isComplete as true
-         */
-        private void completeTask() {
-            this.isComplete = true;
-        }
-
-        /**
-         * Returns the taskName with the prefix of the status of completion of the task
-         *
-         * @return taskName with the prefix of the status of completion of the task
-         */
-        @Override
-        public String toString() {
-            if (isComplete) {
-                return "[✓] " + taskName;
-            } else {
-                return "[ ] " + taskName;
-            }
-        }
-
-    }
-
     private static final Task[] list = new Task[100];
     private static int listIndex = 0;
 
@@ -88,16 +44,38 @@ public class RobotFriend {
     }
 
     /**
-     * Adds user inputted String to global list and prints the user added item.
+     * Adds user inputted String to global list and prints the user added tasks and the current number of tasks.
      *
      * @param userInput user inputted String
      */
     private static void addToList(String userInput) {
-        list[listIndex] = new Task(userInput);
+        Task newTask;
+        String[] tokens = userInput.split(" ");
+        System.out.println(tokens[0]);
+        switch (tokens[0]) {
+            case "todo":
+                newTask = new ToDo(userInput.substring("todo".length() + 1));
+                break;
+            case "deadline":
+                int indexOfBy = userInput.indexOf("/by");
+                newTask = new Deadline(userInput.substring("deadline".length() + 1, indexOfBy - 1),
+                        userInput.substring(indexOfBy + "/by".length() + 1));
+                break;
+            case "event":
+                int indexOfAt = userInput.indexOf("/at");
+                newTask = new Event(userInput.substring("event".length() + 1, indexOfAt - 1),
+                        userInput.substring(indexOfAt + "/by".length() + 1));
+                break;
+            default:
+                newTask = new Task(userInput);
+
+        }
+        list[listIndex] = newTask;
         listIndex++;
         System.out.println(LINE);
         System.out.println(ROBOT_ICON + ": " + "You have added this following task to the list:");
-        System.out.println(userInput);
+        System.out.println(newTask.toString());
+        System.out.println(ROBOT_TEXT_SPACE + "Now you have " + listIndex + " tasks!");
         System.out.println(LINE);
     }
 
