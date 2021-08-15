@@ -41,24 +41,25 @@ public class Duke {
                 try {
                     markTask(storedTasks, echoInput);
                 } catch (DukeException e) {
-                    System.out.println(e.toString());
+                    System.out.println(e);
                 }
             } else if (echoInput.startsWith(Commands.DELETE.getCommand())) {
                 try {
                     deleteTask(storedTasks, echoInput);
                 } catch (DukeException e) {
-                    System.out.println(e.toString());
+                    System.out.println(e);
                 }
             } else {
                 try {
                     addTask(storedTasks, echoInput, '/');
                 } catch (DukeException e) {
-                    System.out.println(e.toString());
+                    System.out.println(e);
                 }
             }
             echoInput = sc.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
+        sc.close();
     }
 
     //returns -1 if character not found in String
