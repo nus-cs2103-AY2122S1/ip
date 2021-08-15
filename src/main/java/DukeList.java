@@ -11,5 +11,12 @@ public class DukeList {
         System.out.println("added: " + text);
     }
 
+
+    public void list() {
+        for (int i = 0; i < count; i++) {
+            System.out.println(list[i]);
+        }
+    }
+
     
 }
