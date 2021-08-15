@@ -9,7 +9,7 @@ public class DukeList {
 
     private void displayTask(Task task) {
         String response = "Got it. I've added this task:\n";
-        String taskCount = "\nNow you have " + this.count + "tasks in the list";
+        String taskCount = "\nNow you have " + this.count + " tasks in the list";
         System.out.println(response + task.toString() + taskCount);
     }
 
