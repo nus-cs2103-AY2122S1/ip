@@ -31,6 +31,8 @@ public class Duke {
                 list.addTodo(input.substring(5));
             } else if (segment[0].equals("deadline")) {
                 list.addDeadlines(input.substring(9));
+            } else if (segment[0].equals("event")) {
+                list.addEvents(input.substring(6));
             } else {
                 list.add(input);
             }
