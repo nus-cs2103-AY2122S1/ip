@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
  * Main file for chatbot.
  *
  * @author marcuspeh
- * @version Level-4
+ * @version Level-5
  * @since 15 Aug 2021
  */
 
@@ -63,27 +63,29 @@ public class Duke {
             else if (command.equals(DONE))
                 try {
                     markDone(Integer.parseInt(message.substring(DONE.length() + 1)));
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     doneErrorMessage();
+                } catch (IndexOutOfBoundsException e) {
+                    doneIndexErrorMessage();
                 }
             else if (command.equals(DEADLINE))
                 try {
                     String[] details = message.split(DEADLINESEPARATOR);
                     addDeadline(details[0].substring(DEADLINE.length() + 1), details[1]);
-                } catch (Exception e) {
+                } catch (IndexOutOfBoundsException e) {
                     deadlineErrorMessage();
                 }
             else if (command.equals(EVENTS))
                 try {
                     String[] details = message.split(EVENTSEPARATOR);
                     addEvent(details[0].substring(EVENTS.length() + 1), details[1]);
-                } catch (Exception e) {
+                } catch (IndexOutOfBoundsException e) {
                     eventErrorMessage();
                 }
             else if (command.equals(TODOS))
                 try {
                     addTodo(message.substring(TODOS.length() + 1));
-                } catch (Exception e) {
+                } catch (IndexOutOfBoundsException e) {
                     todoErrorMessage();
                 }
             else
@@ -205,6 +207,14 @@ public class Duke {
      * Prints out error message if done message does not contains number.
      */
     private void doneErrorMessage() {
+        printMessage("Ugh! The command should be in this format:",
+                "done <number>");
+    }
+
+    /**
+     * Prints out error message if done message is out of range.
+     */
+    private void doneIndexErrorMessage() {
         printMessage("Ugh! The command should be in this format:",
                 "done <number>",
                 "Note: number is based on the number from command 'list'");

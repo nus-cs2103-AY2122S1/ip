@@ -69,7 +69,6 @@
 	____________________________________________________________
 	Ugh! The command should be in this format:
 	done <number>
-	Note: number is based on the number from command 'list'
 	____________________________________________________________
 	____________________________________________________________
 	Ugh! The command should be in this format:
