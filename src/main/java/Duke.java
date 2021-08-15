@@ -6,19 +6,23 @@ import java.util.Scanner;
  * Driver class to simulate the 'Annie' chat bot program.
  *
  * @author limzk126
- * @version Level-3
+ * @version Level-4
  */
 public class Duke {
     private final String LINE = "______________________________________________________________\n";
     private final String WELCOME_MSG = "Hi I am Annie!\nHow can I assist you?";
     private final String GOODBYE_MSG = "Bye. See you soon!";
     private final String LIST_MSG = "Here are the tasks in your list:\n";
+    private final String ADD_MSG = "Gotcha. I've added this task:\n";
+    private final String NUMTASK_MSG = "You have %d tasks in your list now.\n";
+    private final String DONE_MSG = "I have marked this task as done: \n";
 
     // List to store user task inputs.
-    private List<Task> taskList = new ArrayList<>();
+    private final List<Task> taskList = new ArrayList<>();
 
     // Flag to indicate if program is ended by user.
     private boolean isEnded = false;
+
 
     /*
      * Prints a horizontal line, followed by the text input by user on a newline,
@@ -27,14 +31,12 @@ public class Duke {
     private void printText(String text) {
         System.out.printf("%s", LINE);
         System.out.println(text);
-        System.out.printf("%s\n", LINE);
-    }
 
-    // Adds task to the list and notifies the user that it has successfully done so.
-    private void addTask(Task task) {
-        String message = "Task added: " + task.getDescription();
-        printText(message);
-        taskList.add(task);
+        if (!text.equals(GOODBYE_MSG)) {
+            System.out.printf(NUMTASK_MSG, taskList.size());
+        }
+
+        System.out.printf("%s\n", LINE);
     }
 
     // Prints a numbered checklist of the user's task.
@@ -44,9 +46,9 @@ public class Duke {
         System.out.printf("%s", LINE);
         System.out.printf("%s", LIST_MSG);
 
+        // Print list.
         for (Task task : taskList) {
-            System.out.printf("%d.[%s] %s\n", ++taskNum, task.getStatusIcon(),
-                    task.getDescription());
+            System.out.printf("%d.%s\n", ++taskNum, task.toString());
         }
 
         System.out.printf("%s\n", LINE);
@@ -56,21 +58,70 @@ public class Duke {
      * Marks the specified task as done and notifies the user that it has successfully
      * done so.
      */
-    private void completeTask(int num) {
+    private void completeTask(String text) {
+        String stringTaskNum = text.substring(text.indexOf(' ') + 1);
+
+        int num = Integer.parseInt(stringTaskNum);
         Task task = taskList.get(num - 1);
 
-        String message = "I have marked this task as done: " + task.getDescription();
-        printText(message);
-
         task.markDone();
+
+        // Message to notify user.
+        String message = DONE_MSG + task;
+        printText(message);
     }
 
-    // Retrieves the task number specified by the user when they issue the 'done' command.
-    private int getTaskNum(String text) {
-        String[] words = text.split(" ");
-        int TaskNum = Integer.parseInt(words[1]);
+    // Adds task without deadline to list and notifies user.
+    private void addTodo (String text) {
+        String taskName = text.substring(text.indexOf(' ') + 1);
 
-        return TaskNum;
+        // Create and add task.
+        Todo task = new Todo(taskName);
+        taskList.add(task);
+
+        // Message to notify user.
+        String message = ADD_MSG + task;
+        printText(message);
+    }
+
+    // Adds task with deadline to list and notifies user.
+    private void addDeadline(String text) {
+        // Split the command by the first '/'.
+        String[] str = new String[2];
+        str[0] = text.substring(0, text.indexOf("/")).trim();
+        str[1] = text.substring(text.indexOf('/') + 1).trim();
+
+        // Retrieve name of task and its date/time.
+        String taskName = str[0].substring(str[0].indexOf(' ') + 1).trim();
+        String taskDate = str[1].substring(str[1].indexOf(' ') + 1).trim();
+
+        // Create and add task.
+        Deadline task = new Deadline(taskName, taskDate);
+        taskList.add(task);
+
+        // Message to notify user.
+        String message = ADD_MSG + task;
+        printText(message);
+    }
+
+    // Adds event to list and notifies user.
+    private void addEvent(String text) {
+        // Split the command by the first '/'.
+        String[] str = new String[2];
+        str[0] = text.substring(0, text.indexOf("/")).trim();
+        str[1] = text.substring(text.indexOf('/') + 1).trim();
+
+        // Retrieve name of task and its date/time.
+        String taskName = str[0].substring(str[0].indexOf(' ') + 1).trim();
+        String taskDate = str[1].substring(str[1].indexOf(' ') + 1).trim();
+
+        // Create and add task.
+        Event task = new Event(taskName, taskDate);
+        taskList.add(task);
+
+        // Message to notify user.
+        String message = ADD_MSG + task;
+        printText(message);
     }
 
     // Processes text to find out what command user has issued to the program.
@@ -83,12 +134,18 @@ public class Duke {
             printList();
         } else if (text.matches("done (.*)")) {
             // Complete task.
-            int TaskNum = getTaskNum(text);
-            completeTask(TaskNum);
-        } else {
-            // Add text to list.
-            addTask(new Task(text));
+            completeTask(text);
+        } else if (text.matches("todo (.*)")) {
+            // Add task without deadline.
+            addTodo(text);
+        } else if (text.matches("deadline (.*)")) {
+            // Add task with deadline.
+            addDeadline(text);
+        } else if (text.matches("event (.*)")) {
+            // Add an event.
+            addEvent(text);
         }
+
     }
 
     /**
@@ -96,7 +153,7 @@ public class Duke {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        String textInput = "";
+        String textInput;
 
         // Program starts. Say hello.
         printText(WELCOME_MSG);
