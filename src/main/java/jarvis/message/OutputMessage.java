@@ -1,8 +1,8 @@
 package jarvis.message;
 
 public class OutputMessage {
-    public static final String TAB = "\t";
-    public static final String NEW_LINE = "\n";
+    protected static final String TAB = "\t";
+    protected static final String NEW_LINE = "\n";
     private static final String DIVIDER = "____________________________________________________________";
     private final String message;
 
