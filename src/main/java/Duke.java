@@ -18,7 +18,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()) {
-            String input = sc.next();
+            String input = sc.nextLine();
 
             // if it is "bye", we exit the loop
             if (input.equals("bye")) {
