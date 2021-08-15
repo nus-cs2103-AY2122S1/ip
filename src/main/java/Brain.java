@@ -15,10 +15,20 @@ public class Brain {
                 speech.speak(temp);
                 return true;
             default :
-                input = storage.add(input);
-                speech.speak(input);
-                return true;
-        }
+                if (input.startsWith("done")) {
+                    try {
+                        String msg = storage.done(input.substring(4));
+                        speech.added(msg);
+                    }catch (Exception NumberFormatException) {
+                        speech.error("an invalid code input");
+                    }
+                    return true;
+                } else {
+                            input = storage.add(input);
+                            speech.speak(input);
+                            return true;
+                        }
+                }
     }
 
 

@@ -15,6 +15,16 @@ public class Storage {
         return "added: " + action;
     }
 
+    public String done (String input) throws Exception {
+        int list_no;
+        list_no = Integer.parseInt(input.trim()); //possible NumberFormatException
+        Collection<Task> values = mapper.values();
+        Task second = values.stream().skip(list_no-1).findFirst().orElse(null);
+        String key_mod = second.getDescription();
+        mapper.put(key_mod, mapper.get(key_mod).setDone());
+        return mapper.get(key_mod).toString();
+    }
+
     public String[] getStorage() {
         Collection<Task> values = mapper.values();
         Iterator<Task> look = values.iterator();

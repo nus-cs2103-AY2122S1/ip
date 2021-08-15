@@ -10,6 +10,18 @@ public class Speech {
         speak(duke_welcome);
     }
 
+    public void added(String msg) {
+        String[] duke_added = {"Nice! I've marked this task as done:", msg};
+        speak(duke_added);
+    }
+
+    public void error(String error_msg) {
+        String[] duke_error = {"Hmm, i dont quite understand you", "I think you made " + error_msg };
+        speak(duke_error);
+    }
+
+
+
     public void goodbye() {
         speak("Bye. Hope to see you again soon!");
     }

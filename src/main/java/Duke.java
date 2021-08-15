@@ -13,7 +13,6 @@ public class Duke {
 
     public void run(){
         speech.welcome();
-
         while (true) {
             System.out.print("Say something to Duke: ");
             boolean cont = brain.decide(speech, storage);
