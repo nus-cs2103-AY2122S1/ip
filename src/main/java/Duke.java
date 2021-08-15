@@ -36,7 +36,7 @@ public class Duke {
 
     private static void say(String message, boolean isFirst) {
         String name = isFirst ? "Iris:": "     ";
-        System.out.println(String.format("%s %s", name, message));
+        System.out.printf("%s %s%n", name, message);
     }
 
     private static String prompt() {
@@ -53,6 +53,12 @@ public class Duke {
         taskList.add(new Task(item));
     }
 
+    private static void done(int index) {
+        Task task = taskList.get(index - 1);
+        task.markComplete();
+        say(String.format("Good job! I've marked this task as done: %s", task));
+    }
+
     private static void listTasks() {
         for (int i = 0; i < taskList.size(); i++) {
             say(String.format("%d. %s", i + 1, taskList.get(i)), i == 0);
@@ -63,12 +69,13 @@ public class Duke {
         say("Hello! I'm Iris. What can I do for you?");
         String command = prompt();
         while (!command.equals(ENDING_COMMAND)) {
-            switch(command) {
-                case "list":
-                    listTasks();
-                    break;
-                default:
-                    add(command);
+            if (command.equals("list")) {
+                listTasks();
+            } else if (command.startsWith("done")) {
+                String[] splitted = command.split(" ");
+                done(Integer.parseInt(splitted[1]));
+            } else {
+                add(command);
             }
             command = prompt();
         }
