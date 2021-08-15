@@ -104,36 +104,36 @@ public class Duke {
         System.out.println("\t_______________________________");
     }
 
-//    /**
-//     * This method removes a task of the specified index.
-//     *
-//     * @param indexToDelete   An int representing the index of the to-be deleted task.
-//     * @throws TaskNotFoundException  An exception indicating the task does not exist.
-//     */
-//    public void deleteTask(int indexToDelete) throws TaskNotFoundException {
-//        if (tasks.size() - 1 >= indexToDelete && indexToDelete >= 0) {
-//            Task t = this.tasks.get(indexToDelete);
-//            this.tasks.remove(indexToDelete);
-//            System.out.println("\t_______________________________");
-//            System.out.println("\tNoted. I've removed this task:");
-//            System.out.printf("\t  %s\n", t);
-//            System.out.printf("\tNow you have %d ", tasks.size());
-//            System.out.println((tasks.size() == 1 ? "task" : "tasks") + " in the list.");
-//            System.out.println("\t_______________________________");
-//        } else {
-//            throw new TaskNotFoundException(indexToDelete + 1);
-//        }
-//    }
+    /**
+     * This method removes a task of the specified index.
+     *
+     * @param indexToDelete   An int representing the index of the to-be deleted task.
+     * @throws TaskNotFoundException  An exception indicating the task does not exist.
+     */
+    public void deleteTask(int indexToDelete) throws TaskNotFoundException {
+        if (tasks.size() - 1 >= indexToDelete && indexToDelete >= 0) {
+            Task t = this.tasks.get(indexToDelete);
+            this.tasks.remove(indexToDelete);
+            System.out.println("\t_______________________________");
+            System.out.println("\tNoted. I've removed this task:");
+            System.out.printf("\t  %s\n", t);
+            System.out.printf("\tNow you have %d ", tasks.size());
+            System.out.println((tasks.size() == 1 ? "task" : "tasks") + " in the list.");
+            System.out.println("\t_______________________________");
+        } else {
+            throw new TaskNotFoundException(indexToDelete + 1);
+        }
+    }
 
     private void readCommand(String input, Scanner s) { //try - catch here
         try {
             switch (input) {
                 case "":
                     break;
-//                case "delete":
-//                    int indexToDelete = s.nextInt() - 1;
-//                    this.deleteTask(indexToDelete);
-//                    break;
+                case "delete":
+                    int indexToDelete = s.nextInt() - 1;
+                    this.deleteTask(indexToDelete);
+                    break;
                 case "done":
                     int indexToMark = s.nextInt() - 1;
                     this.doneTask(indexToMark);
