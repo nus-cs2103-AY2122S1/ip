@@ -38,18 +38,19 @@ public class Aisu {
                 } else if (input.startsWith("done ")) { // mark task as completed
                     int n = Integer.parseInt(input.substring(5));
                     tasklist.markDone(n);
-                    System.out.println(" Nice! I've marked this task as completed:");
-                    System.out.println(tasklist.GetTaskAt(n));
                 } else if (input.startsWith("todo ")) {
                     tasklist.addTask(input.substring(5), "T");
                 } else if (input.startsWith("deadline ")) {
                     tasklist.addTask(input.substring(9), "D");
                 } else if (input.startsWith("event ")) {
                     tasklist.addTask(input.substring(6), "E");
+                } else if (input.startsWith("delete ")) {
+                    int n = Integer.parseInt(input.substring(7));
+                    tasklist.deleteTask(n);
                 } else {
                     tasklist.addTask(input, "Error");
                 }
-            } catch (AisuException | ArrayIndexOutOfBoundsException e) {
+            } catch (AisuException | ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println(e);
             } finally {
                 System.out.println(Aisu.DIV_TAIL);

@@ -1,25 +1,22 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This is the Tasklist class.
  * It stores Tasks as a list.
  */
 public class Tasklist {
-    private final Task[] list;
-    private int numTasks;
+    private final List<Task> list;
 
     public Tasklist() {
-        this.list = new Task[100]; // list of size 100
-        this.numTasks = 0;
+        this.list = new ArrayList<>();
     }
 
-    public Task GetTaskAt(int n) throws ArrayIndexOutOfBoundsException {
-        if (n <= 0 || n > numTasks) {
+    private Task GetTaskAt(int n) throws ArrayIndexOutOfBoundsException {
+        if (n <= 0 || n > this.list.size()) {
             throw new ArrayIndexOutOfBoundsException("That is an invalid task number!");
         }
-        return this.list[n-1];
-    }
-
-    public Boolean isEmpty() {
-        return numTasks == 0;
+        return this.list.get(n-1);
     }
 
     public void addTask(String line, String type) throws AisuException { // adds new task to taskList
@@ -41,32 +38,45 @@ public class Tasklist {
                 throw new AisuException("Your formatting is wrong! Write as: event (task) /at (date range)");
             }
         } else {
-            throw new AisuException("I don't understand what you mean :(");
+            throw new AisuException("That's an invalid task format...");
         }
 
-        this.list[numTasks] = newTask;
-        numTasks += 1;
+        this.list.add(newTask);
 
         System.out.println(" Got it! I've added this task:");
         System.out.println("   " + newTask);
-        System.out.println(" Now you have " + this.numTasks + " task(s) in the list.");
+        System.out.println(" Now you have " + this.list.size() + " task(s) in the list.");
+    }
+
+    public void deleteTask(int n) throws ArrayIndexOutOfBoundsException {
+        if (n <= 0 || n > this.list.size()) {
+            throw new ArrayIndexOutOfBoundsException("That is an invalid task number!");
+        }
+        Task deletedTask = this.list.get(n - 1);
+        this.list.remove(n - 1);
+
+        System.out.println(" Noted~ I've removed this task:");
+        System.out.println("   " + deletedTask);
+        System.out.println(" Now you have " + this.list.size() + " task(s) in the list.");
     }
 
     public void markDone(int n) throws ArrayIndexOutOfBoundsException {
-        if (n <= 0 || n > numTasks) {
+        if (n <= 0 || n > this.list.size()) {
             throw new ArrayIndexOutOfBoundsException("That is an invalid task number!");
         }
-        this.list[n - 1].markAsDone();
+        this.list.get(n - 1).markAsDone();
+        System.out.println(" Nice! I've marked this task as completed:");
+        System.out.println(this.GetTaskAt(n));
     }
 
     @Override
     public String toString() { // displays the list
-        if (this.isEmpty()) {
+        if (this.list.isEmpty()) {
             return "Oops, the list is empty! :O";
         }
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < numTasks; i++) {
-            result.append(i + 1).append(". ").append(list[i]).append("\n");
+        for (int i = 0; i < this.list.size(); i++) {
+            result.append(i + 1).append(". ").append(list.get(i)).append("\n");
         }
         return result.toString();
     }
