@@ -128,6 +128,20 @@ public class Duke {
         }
     }
 
+    private static void deleteTask(TaskManager taskManager, int number) {
+        try {
+            Task task = taskManager.deleteTask(number);
+            System.out.println(HORIZONTAL_LINE);
+            System.out.println(INDENTATION + "Noted. I've removed this task:");
+            System.out.println(INDENTATION + "  " + task.toString());
+            System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
+                    (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
+            System.out.println(HORIZONTAL_LINE);
+        } catch (DukeException de) {
+            System.out.println(de.getMessage());
+        }
+    }
+
     private static void listTasks(TaskManager taskManager) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(INDENTATION + "Here are the tasks in your list:");
@@ -168,6 +182,11 @@ public class Duke {
                 int number = getTaskNumber(command);
                 if (number > 0) {
                     completeTask(taskManager, number);
+                }
+            } else if (operation == Operation.DELETE) {
+                int number = getTaskNumber(command);
+                if (number > 0) {
+                    deleteTask(taskManager, number);
                 }
             } else if (operation == Operation.TODO ||
                     operation == Operation.DEADLINE ||

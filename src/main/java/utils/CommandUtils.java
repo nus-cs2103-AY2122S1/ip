@@ -39,6 +39,8 @@ public class CommandUtils {
                 return Operation.LIST;
             } else if (operation.equals(Operation.DONE.getValue())) {
                 return Operation.DONE;
+            } else if (operation.equals(Operation.DELETE.getValue())) {
+                return Operation.DELETE;
             } else if (operation.equals(Operation.BYE.getValue())) {
                 return Operation.BYE;
             } else {

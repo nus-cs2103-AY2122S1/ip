@@ -70,6 +70,20 @@ public class TaskManager {
     }
 
     /**
+     * Delete task by number, start from 1.
+     *
+     * @param number number of task
+     * @throws DukeException if task number is out of bounds
+     */
+    public Task deleteTask(int number) throws DukeException {
+        int index = number - 1;
+        if (index < 0 || index >= tasks.size()) {
+            throw new DukeException(INDENTATION + "☹ OOPS!!! Task number is out of bounds.");
+        }
+        return tasks.remove(index);
+    }
+
+    /**
      * Print tasks from TaskManager with format:
      *      1. Task1
      *      2. Task2
