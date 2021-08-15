@@ -1,8 +1,10 @@
 package message;
 
 public class ExitMessage extends OutputMessage{
+    private static final String defaultExitMessage = "Bye Bye! I am always ready when you need me!";
+
     public ExitMessage() {
-        super("Bye. Hope to see you again soon!");
+        super(ExitMessage.defaultExitMessage);
     }
 
     public ExitMessage(String message) {

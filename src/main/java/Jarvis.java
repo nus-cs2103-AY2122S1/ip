@@ -4,7 +4,7 @@ import message.OutputMessage;
 
 import java.util.Scanner;
 
-public class Duke {
+public class Jarvis {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

@@ -15,7 +15,15 @@ public class OutputMessage {
     }
 
     public String getFormattedMessage() {
-        return TAB + DIVIDER + NEW_LINE + TAB + this.getMessage() + NEW_LINE + TAB + DIVIDER + NEW_LINE;
+        return OutputMessage.TAB
+                + OutputMessage.DIVIDER
+                + OutputMessage.NEW_LINE
+                + OutputMessage.TAB
+                + this.getMessage()
+                + OutputMessage.NEW_LINE
+                + OutputMessage.TAB
+                + OutputMessage.DIVIDER
+                + OutputMessage.NEW_LINE;
     }
 }
 
