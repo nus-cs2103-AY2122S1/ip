@@ -24,7 +24,6 @@ public class CLI implements PrintableMixin {
             query = sc.nextLine();
             print(responder.formatResponse(query));
         } while (!responder.shouldEnd(query));
-        print(responder.bye());
         sc.close();
     }
 
