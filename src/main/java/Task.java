@@ -7,15 +7,17 @@ public class Task {
         this.completed = false;
     }
 
-    public String getName() {
-        return this.name;
+    public Task(String name, boolean completed) {
+        this.name = name;
+        this.completed = completed;
     }
 
     public void markAsDone() {
         this.completed = true;
     }
 
-    public String print() {
+    @Override
+    public String toString() {
         if (this.completed) {
             return "[X] " + name;
         } else {
