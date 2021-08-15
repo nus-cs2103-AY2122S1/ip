@@ -74,7 +74,7 @@ public class Duke {
 
             for (int i = 0; i < this.items.size(); i++) {
                 Task item = this.items.get(i);
-                String formattedMsg = String.format("\t %s.%s %s", (i + 1), item.getStatusIcon(), item.getDescription());
+                String formattedMsg = String.format("\t %s.%s", (i + 1), item);
 
                 System.out.println(formattedMsg);
             }
@@ -91,7 +91,7 @@ public class Duke {
                 Task item = this.items.get(index);
                 item.taskCompleted();
 
-                content = String.format("Nice! I've marked this task as done:\n\t  %s %s", item.getStatusIcon(), item.getDescription());
+                content = String.format("Nice! I've marked this task as done:\n\t  %s", item);
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 content = String.format(" Invalid input: %s", e.getMessage());
             }
@@ -101,7 +101,7 @@ public class Duke {
 
         // add items to the list.
         else {
-            this.items.add(new Task(msg, false));
+            this.items.add(new Task(msg));
             printFormattedMsg("added: " + msg);
         }
     }
