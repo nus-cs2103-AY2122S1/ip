@@ -2,68 +2,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static class Task {
-        private final String name;
-        private boolean completed;
-
-        public Task(String name) {
-            this.name = name;
-            completed = false;
-        }
-
-        public String getName() {
-            return this.name;
-        }
-        private void toggleCompleted() {
-            this.completed = !this.completed;
-        }
-        public String toString() {
-            return "[" + (completed ? "X" : " ") + "] " + this.name;
-        }
-    }
-
-    public static class ToDo extends Task {
-        public ToDo(String name) {
-            super(name);
-        }
-
-        @Override
-        public String toString() {
-            return "[T]" + super.toString();
-        }
-    }
-
-    public static class Deadline extends Task {
-        private String doneBy;
-        public Deadline(String name, String by) {
-            super(name);
-            this.doneBy = by;
-        }
-        @Override
-        public String toString() {
-            return "[D]" + super.toString() + " (by: " + doneBy + ")";
-        }
-    }
-
-    public static class Event extends Task{
-        private String at;
-        public Event(String name, String at) {
-            super(name);
-            this.at = at;
-        }
-
-        @Override
-        public String toString() {
-            return "[E]" + super.toString() + "(at: " + at + ")";
-        }
-    }
-
-    public static class DukeException extends Exception {
-        public DukeException(String message) {
-            super(message);
-        }
-    }
-
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
