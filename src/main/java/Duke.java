@@ -3,33 +3,62 @@ import java.util.Scanner;
 
 public class Duke {
     private static String input = "";
+    private static String[] list = new String[100];
+    private static int listLength = 0;
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String logo = " ____        _ _\n"
+                    + "|  _ \\ _   _(_|_)\n"
+                    + "| | | | | | | | |\n"
+                    + "| |_| | |_| | | |\n"
+                    + "|____/ \\__,_|_|_|\n";
+        System.out.println(logo);
         greet();
 
         Scanner sc = new Scanner(System.in);
         while (!(input = sc.nextLine().toLowerCase()).equals("bye")) {
-            echo(input);
+            if (input.equals("list")) {
+                list();
+            } else {
+                add(input);
+            }
         }
         exit();
     }
 
+    /**
+     * This method prints the greetings to the user's terminal.
+     */
     public static void greet() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        System.out.println("Hello! I'm Duii");
+        System.out.println("What do you need help with?");
     }
 
-    public static void echo(String cmd) {
-        System.out.println(cmd);
+    /**
+     * This method adds the input task into the list.
+     *
+     * @param task The task to be added to the list.
+     */
+    public static void add(String task) {
+        list[listLength] = task;
+        System.out.println("added: " + task);
+        listLength++;
     }
 
+    /**
+     * This method enumerates all the tasks in the list.
+     */
+    public static void list() {
+        System.out.println("Here's your current list: ");
+        for (int i = 0; i < listLength; i++) {
+            System.out.println(String.format("%d. %s", i + 1, list[i]));
+        }
+    }
+
+    /**
+     * This method prints the exit message to the user's terminal.
+     */
     public static void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("You're going already? Hope to see you again soon!");
     }
 }
