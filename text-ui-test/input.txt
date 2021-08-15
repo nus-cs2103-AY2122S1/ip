@@ -5,6 +5,7 @@ event dinner /at 6pm
 deadline submission /by 29/08/21-1pm
 done 1
 done 4
+delete 2
 list
 invalid command
 blah
@@ -22,3 +23,7 @@ event something /by sometime
 done 1000
 done 0
 done -1
+delete 1000
+delete 0
+delete -1
+bye

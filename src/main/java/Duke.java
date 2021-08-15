@@ -46,6 +46,8 @@ public class Duke {
                 this.handleDeadline(command);
             } else if (command.matches("^event( .*)?")) {
                 this.handleEvent(command);
+            } else if (command.matches("^delete -?[0-9]+$")) {
+                this.handleDelete(command);
             } else {
                 throw new UnknownCommandException();
             }
@@ -146,6 +148,34 @@ public class Duke {
     }
 
     /**
+     * Handles the "delete {taskIndex}" command.
+     *
+     * @param input
+     * @throws InvalidTaskIndexException
+     */
+    private void handleDelete(String input) throws InvalidTaskIndexException {
+        String[] splitInput = input.split(" ");
+        int taskIdx = -1;
+
+        // We should not have an error here as we have performed regex string matching above
+        // But just to be safe
+        try {
+            taskIdx = Integer.parseInt(splitInput[1]);
+        } catch (NumberFormatException e) {
+            System.out.println(LINE + "Invalid input!\n" + LINE);
+        }
+
+        // Handle invalid index
+        if (taskIdx >= 1 && taskIdx <= tasks.size()) {
+            Task t = tasks.get(taskIdx - 1);
+            tasks.remove(taskIdx - 1);
+            System.out.println(LINE + String.format("Noted. I've removed this task:\n  %s\n%s\n", t, formatNumTaskString()) + LINE);
+        } else {
+            throw new InvalidTaskIndexException();
+        }
+    }
+
+    /**
      * Formats the inputted task as a string to be displayed back to the user.
      *
      * @param task The Task created.
@@ -153,8 +183,17 @@ public class Duke {
      */
     private String formatAddTaskString(Task task) {
         return LINE +
-                String.format("Got it. I've added this task:\n  %s\nNow you have %d task%s in the list.\n",
-                        task, this.tasks.size(), this.tasks.size() == 1 ? "" : "s") + LINE;
+                String.format("Got it. I've added this task:\n  %s\n%s\n",
+                        task, formatNumTaskString()) + LINE;
+    }
+
+    /**
+     * Formats the number of tasks as a string that is to be displayed to the user.
+     *
+     * @return The formatted string containing number of tasks.
+     */
+    private String formatNumTaskString() {
+        return String.format("Now you have %d task%s in the list.", this.tasks.size(), this.tasks.size() == 1 ? "" : "s");
     }
 
     /**
