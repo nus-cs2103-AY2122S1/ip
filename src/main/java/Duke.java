@@ -25,18 +25,17 @@ public class Duke {
         Scanner inputReader = new Scanner(System.in);
         String input = inputReader.nextLine();
 
-        switch (input) {
-            case "bye":
-                System.out.println("____________________________________________________________\n"
-                        + "Bye. Don't come again!\n"
-                        + "____________________________________________________________");
-                return false;
-            default:
-                System.out.println("____________________________________________________________\n"
-                        + input + "\n"
-                        + "____________________________________________________________\n");
-                return true;
-
+        if (input.equals("bye")) {
+            System.out.println("____________________________________________________________\n"
+                    + "Bye. Don't come again!\n"
+                    + "____________________________________________________________");
+            return false;
+        } else {
+            System.out.println("____________________________________________________________\n"
+                    + input + "\n"
+                    + "____________________________________________________________\n");
+            return true;
         }
+
     }
 }
