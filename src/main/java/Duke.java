@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     // User commands
+    private static final String LIST_COMMAND = "list";
     private static final String EXIT_COMMAND = "bye";
 
     // User-facing messages
@@ -18,17 +21,24 @@ public class Duke {
         prettifier.print(GREETING_MESSAGE);
 
         Scanner scanner = new Scanner(System.in);
+        TaskManager taskManager = new TaskManager();
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
-            if (command.equals(EXIT_COMMAND)) {
+            switch (command) {
+            case LIST_COMMAND:
+                prettifier.print(taskManager.toString());
+                break;
+            case EXIT_COMMAND:
                 prettifier.print(EXIT_MESSAGE);
+                scanner.close();
+                return;
+            default:
+                // Add task to the task manager
+                String result = taskManager.addTask(new Task(command));
+                prettifier.print(result);
                 break;
             }
-            // Echo user command
-            prettifier.print(command);
         }
-
-        scanner.close();
     }
 
 }

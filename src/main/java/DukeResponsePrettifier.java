@@ -1,14 +1,16 @@
 public class DukeResponsePrettifier {
-    private final int indentationLevel;
+    private final String indent;
     private final String separator;
 
     public DukeResponsePrettifier(int indentationLevel, String separator) {
-        this.indentationLevel = indentationLevel;
+        this.indent = " ".repeat(indentationLevel);
         this.separator = separator;
     }
 
     private String indent(String str) {
-        return " ".repeat(indentationLevel) + str;
+        // Indent all lines
+        String indentedString = str.replace("\n", "\n" + indent);
+        return indent + indentedString;
     }
 
     private void printSeparator() {
