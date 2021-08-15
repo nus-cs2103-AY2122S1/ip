@@ -1,0 +1,28 @@
+
+
+blah
+list
+todo
+todo
+todo read book
+done
+done
+done blah
+done 42
+done 1
+deadline
+deadline
+deadline return book
+deadline return book /by
+deadline return book /by
+deadline return book /by June 6th
+deadline do homework /by no idea :-p
+event
+event
+event project meeting
+event project meeting /at
+event project meeting /at
+event project meeting /at Aug 6th 2-4pm
+event graduation /at a long time away TT
+list
+bye

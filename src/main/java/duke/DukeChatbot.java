@@ -21,8 +21,8 @@ import java.util.List;
  */
 public class DukeChatbot {
 
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
+    private static final String LOGO = " ____        _\n"
+            + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
@@ -117,9 +117,13 @@ public class DukeChatbot {
     }
 
     private void printTasks() {
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
-        sb.append(messageFormatter.formatTasksList(tasks));
-        printFormattedMessage(sb.toString());
+        if (tasks.size() == 0) {
+            printFormattedMessage("You have no tasks in the list.");
+        } else {
+            StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+            sb.append(messageFormatter.formatTasksList(tasks));
+            printFormattedMessage(sb.toString());
+        }
     }
 
     private void markTaskDone(int taskIndex) throws IllegalArgumentException {
