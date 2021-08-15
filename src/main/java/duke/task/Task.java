@@ -7,7 +7,7 @@ package duke.task;
  */
 public abstract class Task {
 
-    private static String DONE_MARK = "X";
+    private static final String DONE_MARK = "X";
 
     private String description;
     private boolean isDone;

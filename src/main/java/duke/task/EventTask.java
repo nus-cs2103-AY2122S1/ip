@@ -6,6 +6,7 @@ package duke.task;
  * @author Jay Aljelo Saez Ting
  */
 public class EventTask extends TemporalTask {
+
     private static final String TYPE_MARK = "E";
     private static final String TIME_RELATION = "at";
 

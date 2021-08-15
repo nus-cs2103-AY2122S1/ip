@@ -129,6 +129,38 @@
     ____________________________________________________________
 
     ____________________________________________________________
+     This command is invalid.
+     A task number is required for a 'Delete Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     The task number is not a number.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     The task number does not exist.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Noted. I've removed this task:
+       [E][ ] project meeting (at: Aug 6th 2-4pm)
+     Now you have 4 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][X] read book
+     2.[D][ ] return book (by: June 6th)
+     3.[D][ ] do homework (by: no idea :-p)
+     4.[E][ ] graduation (at: a long time away TT)
+    ____________________________________________________________
+
+    ____________________________________________________________
      Bye. Hope to see you again soon!
     ____________________________________________________________
 
