@@ -10,5 +10,10 @@ done 2
 done 3
 done 10
 done errrr
+delete 3
+delete 2
+delete 1
+delete 10
+delete errr
 RandomCommand
 bye

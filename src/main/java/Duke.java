@@ -19,11 +19,17 @@ public class Duke {
                     System.out.println("    ____________________________________________________________\n" +
                             "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                             "    ____________________________________________________________");
-                    userInput = myScanner.nextLine();
-                    continue;
+                }
+            } else if(userInput.startsWith("delete")) {
+                if (isDeleteCommand(userInput)) {
+                    delete(userInput, userInputRecord);
+                } else {
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                            "    ____________________________________________________________");
                 }
             } else {
-                add(userInput,userInputRecord);
+                add(userInput, userInputRecord);
             }
             userInput = myScanner.nextLine();
         }
@@ -121,6 +127,13 @@ public class Duke {
         return copy.isEmpty();
     }
 
+    private static boolean isDeleteCommand(String userInput) {
+        String copy = userInput.replace("delete", "");
+        copy = copy.replaceAll("[0-9]", "");
+        copy = copy.trim();
+        return copy.isEmpty();
+    }
+
     //This method marks a saved event as done
     private static void markAsDone(String userInput, ArrayList<Task> userInputRecord) {
         int itemToComplete = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
@@ -131,6 +144,23 @@ public class Duke {
             System.out.println("    ____________________________________________________________\n" +
                     "     Nice! I've marked this task as done:\n" +
                     "     " + userInputRecord.get(itemToComplete) + "\n" +
+                    "    ____________________________________________________________");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("    ____________________________________________________________\n" +
+                    "      Oops, the ID of the task does not exist\n" +
+                    "    ____________________________________________________________");
+        }
+    }
+
+    private static void delete(String userInput, ArrayList<Task> userInputRecord) {
+        try {
+            int itemToDelete = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
+            Task itemDeleted = userInputRecord.get(itemToDelete);
+            userInputRecord.remove(itemToDelete);
+            System.out.println("    ____________________________________________________________\n" +
+                    "     Noted. I've removed this task:\n" +
+                    "     " + itemDeleted + "\n" +
+                    "     " + "Now you have " + userInputRecord.size() + " tasks in the list.\n" +
                     "    ____________________________________________________________");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("    ____________________________________________________________\n" +
