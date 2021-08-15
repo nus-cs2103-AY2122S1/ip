@@ -11,8 +11,8 @@ public class Duke {
     public static void start() {
         inSession = true;
         greet();
+        Scanner sc = new Scanner(System.in);
         while (inSession) {
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
             String action = input.split(" ", 2)[0].toLowerCase();
             switch (action) {
