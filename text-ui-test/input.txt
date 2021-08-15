@@ -1,3 +1,4 @@
+list
 todo gym workout 
 deadline CS2103 Quiz /by Sunday 15th June
 good morning
