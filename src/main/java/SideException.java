@@ -21,3 +21,15 @@ class DeleteIndexException extends Exception {
         super("Can't delete what isn't there...");
     }
 }
+
+class NoIndexException extends Exception {
+    public NoIndexException() {
+        super("Can't do anything without task number...");
+    }
+}
+
+class TooManyIndexesException extends Exception {
+    public TooManyIndexesException(String input) {
+        super("I only have 1 hand, I can only " + input + " 1 at a time...");
+    }
+}

@@ -78,7 +78,8 @@ public class Side {
         }
     }
 
-    private static void handleDone(String input, TaskList taskList) throws TaskIndexException {
+    private static void handleDone(String input, TaskList taskList) throws TaskIndexException, NoIndexException,
+            TooManyIndexesException {
         if (input.split("\\s+").length == 2) {
             int taskNum = tryIntParsing(input.split("\\s+")[1]);
             if (taskNum > taskList.length() || taskNum <= 0) {
@@ -86,12 +87,15 @@ public class Side {
             } else {
                 printResponse(taskList.markTaskDone(taskNum - 1));
             }
+        } else if (input.split("\\s+").length == 1) {
+            throw new NoIndexException();
         } else {
-            printResponse("I only have 1 hand, I can only mark 1 at a time...");
+            throw new TooManyIndexesException("mark");
         }
     }
 
-    private static void handleDelete(String input, TaskList taskList) throws DeleteIndexException {
+    private static void handleDelete(String input, TaskList taskList) throws DeleteIndexException, NoIndexException,
+            TooManyIndexesException {
         if (input.split("\\s+").length == 2) {
             int taskNum = tryIntParsing(input.split("\\s+")[1]);
             if (taskNum > taskList.length() || taskNum <= 0) {
@@ -99,8 +103,10 @@ public class Side {
             } else {
                 printResponse(taskList.delete(taskNum - 1));
             }
+        } else if (input.split("\\s+").length == 1) {
+            throw new NoIndexException();
         } else {
-            printResponse("I only have 1 hand, I can only delete 1 at a time...");
+            throw new TooManyIndexesException("delete");
         }
     }
 
@@ -137,7 +143,7 @@ public class Side {
                     default:
                         throw new UnknownCommandException();
                 }
-            } catch (UnknownCommandException | TaskIndexException | WrongFormatException | DeleteIndexException e) {
+            } catch (Exception e) {
                 printResponse(e.getMessage());
             }
             userInput = scanner.nextLine();
