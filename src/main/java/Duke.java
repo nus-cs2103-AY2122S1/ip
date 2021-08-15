@@ -9,28 +9,48 @@ public class Duke {
     // Constants for the program
     static final String DIVIDER = "--------------------------------------------------------------------------------";
     static final String PROMPT = "Enter Command: ";
-    static final String LOGO = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    static Scanner sc = new Scanner(System.in);
-    static TaskList taskList = new TaskList();
+    private static final String WELCOMEMESSAGE = String.format("%s\n%s\n%s\n%s\n%s", DIVIDER, LOGO,
+            "Hello! I'm Duke :)\nWhat can I do for you? (Type 'help' to see what I can do!)", DIVIDER, PROMPT);
+    private static final String GOODBYEMESSAGE = String.format("%s\n%s\n%s", DIVIDER,
+            "Bye :< Hope to see you again soon!", DIVIDER);
+
+    private static TaskList taskList;
 
     public static void main(String[] args) {
-        format(LOGO + "\nHello! I'm Duke\n" + "What can I do for you?");
-        System.out.print(PROMPT);
-        String str = sc.nextLine();
-        while (!str.equals("bye")) {
-            if (str.equals("list")) {
-                taskList.printTaskList();
-            } else{
-                format(taskList.addTask(str));
+        Scanner sc = new Scanner(System.in);
+        taskList = new TaskList();
+
+        // Welcome message
+        System.out.print(WELCOMEMESSAGE);
+
+        // Logic of program based on user input
+        String input = sc.nextLine();
+        while (!input.equals("bye")) {
+            switch (input.split(" ")[0]) {
+                case "list":
+                    taskList.printTaskList();
+                    break;
+                case "done":
+                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                    formatPrint(taskList.markTaskDone(index));
+                    break;
+                case "help":
+                    printHelp();
+                    break;
+                default:
+                    formatPrint(taskList.addTask(input));
             }
             System.out.print(PROMPT);
-            str = sc.nextLine();
+            input = sc.nextLine();
         }
-        format("Bye. Hope to see you again soon!");
+
+        // Goodbye message for user and program stops
+        System.out.println(GOODBYEMESSAGE);
     }
 
     /**
@@ -38,9 +58,22 @@ public class Duke {
      *
      * @param input Input to be printed.
      */
-    public static void format(String input) {
+    public static void formatPrint(String input) {
         System.out.println(DIVIDER);
         System.out.println(input);
+        System.out.println(DIVIDER);
+    }
+
+    /**
+     * Prints the help page for users.
+     */
+    public static void printHelp() {
+        System.out.println(DIVIDER);
+        System.out.println("Here is the list of my available commands!\n"
+            + "1. [input task to be added] //Adds tasks to task list\n"
+            + "2. list //Display list of items you have added\n"
+            + "3. done [index of completed task] //Marks specified tasks as completed\n"
+            + "4. bye //End the program");
         System.out.println(DIVIDER);
     }
 }
