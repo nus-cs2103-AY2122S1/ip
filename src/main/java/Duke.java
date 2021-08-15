@@ -40,8 +40,8 @@ public class Duke {
         taskList.add(new Deadline(item, by));
     }
 
-    private static void addEvent(String item) {
-        taskList.add(new Event(item));
+    private static void addEvent(String item, String at) {
+        taskList.add(new Event(item, at));
     }
 
     private static void done(int index) {
@@ -75,9 +75,9 @@ public class Duke {
                 addDeadline(splitted[0], splitted[1]);
                 sayTaskAdded();
             } else if (command.startsWith("event")) {
-                // TODO: implement event at
                 String eventMetadata = command.split(" ", 2)[1];
-                addEvent(eventMetadata);
+                String[] splitted = eventMetadata.split(" /at ", 2);
+                addEvent(splitted[0], splitted[1]);
                 sayTaskAdded();
             }
             command = prompt();
