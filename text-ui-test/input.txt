@@ -5,4 +5,11 @@ event make windows 11 /at Microsoft
 list
 done 2
 list
+todo eat cheese
+list
+delete 2
+list
+delete
+done 1
+list
 bye
