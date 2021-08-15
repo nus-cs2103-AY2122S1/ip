@@ -38,13 +38,11 @@ public class Duke {
         this.tasks.add(task);
         String output = "Added: " + task.toString();
         System.out.println(output);
-        System.out.println("Now you have " + this.tasks.size() + " tasks in the list");
-        //todo: notify user the number of tasks
+        System.out.println("Now you have " + this.tasks.size() + " task" + ((tasks.size() <= 1) ? "" : "s") + " in the list");
     }
 
     /**
      * display a list of tasks added.
-     *
      */
     public void displayTasks() {
         System.out.println("Here are the tasks in your list:");
@@ -73,22 +71,22 @@ public class Duke {
     public void processCommand(String command) {
         String action = this.getAction(command);
         switch (action) {
-            case "list" :
+            case "list":
                 this.displayTasks();
                 break;
-            case "todo" : {
+            case "todo": {
                 String task = this.getTask(command);
                 ToDo toDo = this.createTodo(task);
                 this.addTask(toDo);
                 break;
             }
-            case "deadline" : {
+            case "deadline": {
                 String task = this.getTask(command);
                 DeadLine ddl = this.createDeadLine(task);
                 this.addTask(ddl);
                 break;
             }
-            case "event" : {
+            case "event": {
                 String task = this.getTask(command);
                 Event event = this.createEvent(task);
                 this.addTask(event);
@@ -98,7 +96,7 @@ public class Duke {
                 try {
                     String task = this.getTask(command);
                     int taskIdx = Integer.parseInt(task);
-                    if ( taskIdx > 0 && taskIdx <= this.tasks.size()) {
+                    if (taskIdx > 0 && taskIdx <= this.tasks.size()) {
                         this.markTaskAsDone(taskIdx - 1);
                     } else {
                         System.out.println("Task does not exist.");
