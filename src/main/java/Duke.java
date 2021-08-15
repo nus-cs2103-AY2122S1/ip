@@ -51,7 +51,7 @@ public class Duke {
                 }
                 taskDetails = String.join(" ", Arrays.copyOfRange(commands, 1, index));
                 extraDetails = String.join(" ", Arrays.copyOfRange(commands, index+1, commands.length));
-                newTask = new Deadline(taskDetails, extraDetails);
+                newTask = new Event(taskDetails, extraDetails);
                 break;
             case "done":
                 try {
