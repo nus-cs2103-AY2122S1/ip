@@ -7,13 +7,13 @@ Oh great, you again! I'm
 | |_) | (_) | |_) |
 |____/ \___/|_.__/ 
 
-You may now inconvenience me in the following ways:
-  - view all your tasks by typing 'list'
-  - add a todo task by typing the task name
-  - add a deadline task by typing the task name, followed by '/by (deadline)'
-  - add a event task by typing the task name, followed by '/at (event date)'
-  - edit a task's date by typing 'update (index) /to (new date/time)'
-  - type 'bye' to (please for the love of God) leave me alone! :)
+Here is the myriad of ways you can inconvenience me:
+  > 'list' - view all your tasks
+  > 'todo (task)' - add a simple todo task
+  > 'deadline (task) /by (date/time)' - add a task with a deadline
+  > 'event (task) /at (date/time)' - add a task with a specified date/time
+  > 'update (index) /to (date/time)' - change a task to happen at a new date/time
+  > 'bye' - (please for the love of God) let me rest! :)
 ____________________________________________________________
 ____________________________________________________________
 Urgh, fine. Your task has been added:
@@ -22,83 +22,97 @@ You now have 1 tasks to do.
 ____________________________________________________________
 ____________________________________________________________
 Urgh, fine. Your task has been added:
- [E][ ] eat dinner (at: 5pm)
+ [D][ ] eat dinner (by: 5pm)
 You now have 2 tasks to do.
 ____________________________________________________________
 ____________________________________________________________
 Urgh, fine. Your task has been added:
- [D][ ] watch lectures (by: 3pm)
+ [T][ ] dig up some bodies
 You now have 3 tasks to do.
 ____________________________________________________________
 ____________________________________________________________
-Urgh, fine. Your task has been added:
- [T][ ] dig up some bodies
-You now have 4 tasks to do.
+You didn't specify the time, dummy!
+Exception in Help Bot:
+The following argument is invalid: null
+____________________________________________________________
+____________________________________________________________
+I literally TOLD you what you can do!
+Exception in Help Bot:
+The following is not a command: eat lunch /at 12pm
+____________________________________________________________
+____________________________________________________________
+You didn't specify the time, dummy!
+Exception in Help Bot:
+The following argument is invalid: null
+____________________________________________________________
+____________________________________________________________
+I literally TOLD you what you can do!
+Exception in Help Bot:
+The following is not a command: eat dinner /by 5pm
+____________________________________________________________
+____________________________________________________________
+I literally TOLD you what you can do!
+Exception in Help Bot:
+The following is not a command: dig up some bodies
 ____________________________________________________________
 ____________________________________________________________
 Oh. My. God. Fine. Here are your tasks:
  1. [E][ ] eat lunch (at: 12pm)
- 2. [E][ ] eat dinner (at: 5pm)
- 3. [D][ ] watch lectures (by: 3pm)
- 4. [T][ ] dig up some bodies
+ 2. [D][ ] eat dinner (by: 5pm)
+ 3. [T][ ] dig up some bodies
 ____________________________________________________________
 ____________________________________________________________
 Dude, make up your mind! I'll update it, but just this once, okay?
- [E][ ] eat dinner (at: 7pm)
+ [E][ ] eat lunch (at: 1pm)
 ____________________________________________________________
 ____________________________________________________________
 Oh. My. God. Fine. Here are your tasks:
- 1. [E][ ] eat lunch (at: 12pm)
- 2. [E][ ] eat dinner (at: 7pm)
- 3. [D][ ] watch lectures (by: 3pm)
- 4. [T][ ] dig up some bodies
+ 1. [E][ ] eat lunch (at: 1pm)
+ 2. [D][ ] eat dinner (by: 5pm)
+ 3. [T][ ] dig up some bodies
 ____________________________________________________________
 ____________________________________________________________
 Dude, make up your mind! I'll update it, but just this once, okay?
- [D][ ] watch lectures (by: 4pm)
+ [D][ ] eat dinner (by: 7pm)
 ____________________________________________________________
 ____________________________________________________________
 Oh. My. God. Fine. Here are your tasks:
- 1. [E][ ] eat lunch (at: 12pm)
- 2. [E][ ] eat dinner (at: 7pm)
- 3. [D][ ] watch lectures (by: 4pm)
- 4. [T][ ] dig up some bodies
+ 1. [E][ ] eat lunch (at: 1pm)
+ 2. [D][ ] eat dinner (by: 7pm)
+ 3. [T][ ] dig up some bodies
 ____________________________________________________________
 ____________________________________________________________
 You can't do this, dumbo.
-The operation could not be performed on TaskType: TODO
+Exception in Help Bot:
+The operation could not be performed on task type: todo
 ____________________________________________________________
 ____________________________________________________________
-Hello? Do you know what a number is?
-____________________________________________________________
-____________________________________________________________
-You do realise this isn't a task, right?
+Hello, do you know what a number is?
+Exception in Help Bot:
+The following argument is invalid: update, caused by:
 'asd' does not correspond to a valid task, caused by:
 java.lang.NumberFormatException: For input string: "asd"
 ____________________________________________________________
 ____________________________________________________________
 About time you did your work, you lazy bum! I GUESS I'll mark it as done for you:
-   [E][X] eat lunch (at: 12pm)
+   [E][X] eat lunch (at: 1pm)
 ____________________________________________________________
 ____________________________________________________________
 Oh. My. God. Fine. Here are your tasks:
- 1. [E][X] eat lunch (at: 12pm)
- 2. [E][ ] eat dinner (at: 7pm)
- 3. [D][ ] watch lectures (by: 4pm)
- 4. [T][ ] dig up some bodies
+ 1. [E][X] eat lunch (at: 1pm)
+ 2. [D][ ] eat dinner (by: 7pm)
+ 3. [T][ ] dig up some bodies
 ____________________________________________________________
 ____________________________________________________________
-Urgh, fine. Your task has been added:
- [T][ ] update windows
-You now have 5 tasks to do.
+I literally TOLD you what you can do!
+Exception in Help Bot:
+The following is not a command: update windows
 ____________________________________________________________
 ____________________________________________________________
 Oh. My. God. Fine. Here are your tasks:
- 1. [E][X] eat lunch (at: 12pm)
- 2. [E][ ] eat dinner (at: 7pm)
- 3. [D][ ] watch lectures (by: 4pm)
- 4. [T][ ] dig up some bodies
- 5. [T][ ] update windows
+ 1. [E][X] eat lunch (at: 1pm)
+ 2. [D][ ] eat dinner (by: 7pm)
+ 3. [T][ ] dig up some bodies
 ____________________________________________________________
 ____________________________________________________________
 Good riddance...

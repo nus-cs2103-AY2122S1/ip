@@ -1,13 +1,17 @@
+event eat lunch /at 12pm
+deadline eat dinner /by 5pm
+todo dig up some bodies
+event eat lunch /by 12pm
 eat lunch /at 12pm
-eat dinner /at 5pm
-watch lectures /by 3pm
+deadline eat dinner /at 5pm
+eat dinner /by 5pm
 dig up some bodies
+list
+update 1 /to 1pm
 list
 update 2 /to 7pm
 list
-update 3 /to 4pm
-list
-update 4 /to 1pm
+update 3 /to 1pm
 update asd /to 1pm
 done 1
 list

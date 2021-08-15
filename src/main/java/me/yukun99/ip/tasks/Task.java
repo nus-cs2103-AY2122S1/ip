@@ -60,8 +60,7 @@ public abstract class Task {
 		try {
 			taskIndex = Integer.parseInt(messageSplit[0]) - 1;
 		} catch (NumberFormatException e) {
-			HelpBot.reply("Hello? Do you know what a number is?");
-			throw new HelpBotInvalidTaskException("Invalid Task:", e, messageSplit[0]);
+			throw new HelpBotInvalidTaskException(e, "update", messageSplit[0]);
 		}
 		Task task = tasks.get(taskIndex);
 		task.updateDate(messageSplit[1]);

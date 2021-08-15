@@ -1,7 +1,12 @@
 package me.yukun99.ip;
 
+// Exceptions
+
+import me.yukun99.ip.exceptions.HelpBotIllegalArgumentException;
+import me.yukun99.ip.exceptions.HelpBotIllegalCommandException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
+
 import me.yukun99.ip.tasks.Deadline;
 import me.yukun99.ip.tasks.Event;
 import me.yukun99.ip.tasks.Task;
@@ -42,13 +47,13 @@ public class HelpBot {
 	private void onEnableMessage() {
 		String message = "Oh great, you again! I'm \n"
 				+ name
-				+ "\nYou may now inconvenience me in the following ways:"
-				+ "\n  - view all your tasks by typing 'list'"
-				+ "\n  - add a todo task by typing the task name"
-				+ "\n  - add a deadline task by typing the task name, followed by '/by (deadline)'"
-				+ "\n  - add a event task by typing the task name, followed by '/at (event date)'"
-				+ "\n  - edit a task's date by typing 'update (index) /to (new date/time)'"
-				+ "\n  - type 'bye' to (please for the love of God) leave me alone! :)";
+				+ "\nHere is the myriad of ways you can inconvenience me:"
+				+ "\n  > 'list' - view all your tasks"
+				+ "\n  > 'todo (task)' - add a simple todo task"
+				+ "\n  > 'deadline (task) /by (date/time)' - add a task with a deadline"
+				+ "\n  > 'event (task) /at (date/time)' - add a task with a specified date/time"
+				+ "\n  > 'update (index) /to (date/time)' - change a task to happen at a new date/time"
+				+ "\n  > 'bye' - (please for the love of God) let me rest! :)";
 		HelpBot.reply(message);
 	}
 
@@ -59,8 +64,14 @@ public class HelpBot {
 		while (scanner.hasNext()) {
 			// Current message sent by the user
 			String current = scanner.nextLine();
-			if (runCommand(current)) {
-				return;
+			try {
+				if (runCommand(current)) {
+					return;
+				}
+			} catch (HelpBotIllegalArgumentException e) {
+				HelpBot.reply("You didn't give me a task to add!\n" + e);
+			} catch (HelpBotIllegalCommandException e) {
+				HelpBot.reply("I literally TOLD you what you can do!\n" + e);
 			}
 		}
 	}
@@ -104,7 +115,7 @@ public class HelpBot {
 			setDone(Integer.parseInt(task));
 		} catch (NumberFormatException e) {
 			HelpBot.reply("Hello? Do you know what a number is?");
-			throw new HelpBotInvalidTaskException("Invalid Task:", e, task);
+			throw new HelpBotInvalidTaskException(e, "done", task);
 		}
 	}
 
@@ -158,9 +169,9 @@ public class HelpBot {
 	 * @param message Message sent by the user.
 	 * @return Whether to exit the program.
 	 */
-	private boolean runCommand(String message) {
+	private boolean runCommand(String message) throws HelpBotIllegalArgumentException, HelpBotIllegalCommandException {
 		// Mark task as done command
-		if (message.startsWith("done")) {
+		if (message.startsWith("done ")) {
 			try {
 				setDone(message);
 			} catch (HelpBotInvalidTaskException e) {
@@ -169,17 +180,31 @@ public class HelpBot {
 			return false;
 		}
 		// Update date of deadline or event tasks
-		if (message.startsWith("update")) {
+		if (message.startsWith("update ")) {
 			if (message.contains(" /to ") && !message.endsWith(" /to ") && !message.startsWith(" /to ")) {
 				try {
 					Task.updateTask(message.replace("update ", ""));
 				} catch (HelpBotInvalidTaskTypeException e) {
 					HelpBot.reply("You can't do this, dumbo.\n" + e);
 				} catch (HelpBotInvalidTaskException e) {
-					HelpBot.reply("You do realise this isn't a task, right?\n" + e);
+					HelpBot.reply("Hello, do you know what a number is?\n" + e);
 				}
 				return false;
 			}
+		}
+		// Add new task command
+		if (message.startsWith("todo ") || message.startsWith("event ") || message.startsWith("deadline ")) {
+			Task.TaskType type = getTaskType(message);
+			message = message.replace(type.toString().toLowerCase() + " ", "");
+			if (message.startsWith("/by ") || message.startsWith("/at ")) {
+				throw new HelpBotIllegalArgumentException(null);
+			}
+			try {
+				parseTask(message, type);
+			} catch (HelpBotIllegalArgumentException e) {
+				HelpBot.reply("You didn't specify the time, dummy!\n" + e);
+			}
+			return false;
 		}
 		switch (message) {
 		// List all tasks command
@@ -191,9 +216,11 @@ public class HelpBot {
 			onDisable();
 			return true;
 		}
-		// Add new task command
-		parseTask(message);
-		return false;
+		throw new HelpBotIllegalCommandException(message);
+	}
+
+	private Task.TaskType getTaskType(String message) {
+		return Task.TaskType.valueOf(message.split(" ")[0].toUpperCase());
 	}
 
 	/**
@@ -201,20 +228,28 @@ public class HelpBot {
 	 *
 	 * @param message Message sent by the user.
 	 */
-	private void parseTask(String message) {
+	private void parseTask(String message, Task.TaskType type) throws HelpBotIllegalArgumentException {
 		String[] result = new String[1];
-		Task.TaskType type = null;
-		if (message.contains(" /by ") && !message.endsWith(" /by ") && !message.startsWith(" /by ")) {
-			result = message.split(" /by ");
-			type = Task.TaskType.DEADLINE;
-		}
-		if (message.contains(" /at ") && !message.endsWith(" /at ") && !message.startsWith(" /at ")) {
-			result = message.split(" /at ");
-			type = Task.TaskType.EVENT;
-		}
-		if (type == null) {
-			result[0] = message;
-			type = Task.TaskType.TODO;
+		switch (type) {
+		case TODO:
+			result[0] = message.replace("todo ", "");
+			break;
+		case EVENT:
+			result = message
+					.replace("event ", "")
+					.split(" /at ");
+			if (result.length < 2) {
+				throw new HelpBotIllegalArgumentException(null);
+			}
+			break;
+		case DEADLINE:
+			result = message
+					.replace("deadline ", "")
+					.split(" /by ");
+			if (result.length < 2) {
+				throw new HelpBotIllegalArgumentException(null);
+			}
+			break;
 		}
 		addTask(result, type);
 	}

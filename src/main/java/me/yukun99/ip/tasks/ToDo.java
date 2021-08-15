@@ -8,7 +8,7 @@ public class ToDo extends Task {
 	}
 
 	protected void updateDate(String date) throws HelpBotInvalidTaskTypeException {
-		throw new HelpBotInvalidTaskTypeException("ToDo tasks do not have a date to update!", TaskType.TODO);
+		throw new HelpBotInvalidTaskTypeException(TaskType.TODO);
 	}
 
 	@Override

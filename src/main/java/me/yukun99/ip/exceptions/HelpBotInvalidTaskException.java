@@ -1,15 +1,16 @@
 package me.yukun99.ip.exceptions;
 
-public class HelpBotInvalidTaskException extends HelpBotException {
+public class HelpBotInvalidTaskException extends HelpBotIllegalArgumentException {
 	private final String task;
 
-	public HelpBotInvalidTaskException(String errorMessage, Throwable error, String task) {
-		super(errorMessage, error);
+	public HelpBotInvalidTaskException(Throwable error, String argument, String task) {
+		super(error, argument);
 		this.task = task;
 	}
 
 	public String toString() {
-		return "'" + task + "' does not correspond to a valid task, caused by:\n"
-				+ super.toString();
+		return super.toString() + ", caused by:\n"
+				+ "'" + task + "' does not correspond to a valid task, caused by:\n"
+				+ super.getCause();
 	}
 }
