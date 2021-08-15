@@ -2,22 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private boolean readingInput;
     private ArrayList<Task> taskList;
 
     Duke() {
-        this.readingInput = true;
         this.taskList = new ArrayList<>();
     }
 
     public static void main(String[] args) {
-        /*String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);*/
-
         Duke bot = new Duke();
 
         String openingMessage = "   -------------------------------------------- \n"
@@ -28,7 +19,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        while (bot.readingInput) {
+        while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String firstWord;
             String remainingWords = "";
@@ -79,7 +70,7 @@ public class Duke {
                 output += "   -------------------------------------------- \n";
                 isEmptyList = true;
             } else { // adds current task to the list based on counter index
-                String lineAdded = String.format("   %d. %s \n", counter, this.taskList.get(counter - 1));
+                String lineAdded = String.format("   %d.%s \n", counter, this.taskList.get(counter - 1));
                 output += lineAdded;
                 counter++;
             }
@@ -88,7 +79,6 @@ public class Duke {
     }
 
     public String sayBye() {
-        this.readingInput = false;
         return "   -------------------------------------------- \n"
                 + "   Bye! Hope to see you again soon! \n"
                 + "   -------------------------------------------- \n";
