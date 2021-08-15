@@ -70,7 +70,7 @@ public class Duke {
     private void add(Task t) {
         this.inputs[ptr] = t;
         this.ptr++;
-        this.print("Got it, i've added this task\n\t  " + t.toString() +
+        this.print("Got it, I've added this task\n\t  " + t.toString() +
                 "\n\tNow you have " + ptr + " tasks in the list.");
 
     }
