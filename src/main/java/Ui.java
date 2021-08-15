@@ -32,5 +32,4 @@ public class Ui {
     public void printExitMessage() {
         outputLine("Goodbye from\n" + logo);
     }
-
 }
