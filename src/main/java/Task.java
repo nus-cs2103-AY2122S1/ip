@@ -16,7 +16,14 @@ public class Task {
     }
 
     public void markComplete() {
-        this.isDone = true;
+        if (isDone) {
+            System.out.println(taskName + " is already completed.");
+        } else {
+            this.isDone = true;
+            System.out.println(
+                    "Finally! Took you long enough to complete `" + taskName + "`"
+            );
+        }
     }
 
     public void markIncomplete() {
