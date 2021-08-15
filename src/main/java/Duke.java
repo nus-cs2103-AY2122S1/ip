@@ -23,6 +23,13 @@ public class Duke {
                     }
                 }
                 command = scanner.nextLine();
+            } else if (command.contains("done")) {
+                String[] splitup = command.split(" ");
+                int index = Integer.parseInt(splitup[1]);
+                done.set(index - 1, true); //actual index is index - 1
+                System.out.println("Very well, Master Wayne. This task has been marked as per your request.");
+                System.out.println((index) + ".[X] " + todo.get(index - 1)); //actual index is index - 1
+                command = scanner.nextLine();
 
             } else {
                 System.out.println(line + "\n" + "Understood, Master Wayne. Added: " + command + "\n" + line);
