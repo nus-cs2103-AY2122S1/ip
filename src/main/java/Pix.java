@@ -1,9 +1,3 @@
-package Pix;
-
-import Pix.exception.PixException;
-import Pix.exception.PixInvalidTaskException;
-import Pix.exception.PixUnknownCommandException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -118,14 +112,14 @@ public class Pix {
      * Displays the itemList.
      */
     private static void DisplayList() {
-        System.out.println("ヽ(ｏ`皿′ｏ)ﾉ Why can't you keep track of these yourself:");
+        System.out.println("Why can't you keep track of these yourself:");
         for (int i = 1; i < taskList.size() + 1; i++) {
             System.out.println(i + ". " + taskList.get(i - 1).toString());
         }
     }
 
     /**
-     * Adds the Pix.Task to the taskList.
+     * Adds the Task to the taskList.
      * @param item The task to be added to the taskList.
      * @param type The type of task to be added.
      * @param date The date/time of the task (if applicable)
@@ -139,19 +133,19 @@ public class Pix {
                     case TODO:
                         ToDo toDo = new ToDo(item);
                         taskList.add(toDo);
-                        System.out.println("(｀д´)ゝ Added this task: \n" + toDo);
+                        System.out.println(" this task: \n" + toDo);
                         System.out.println("You now have " + taskList.size() + " task(s) in your list");
                         break;
                     case DEADLINE:
                         Deadline deadline = new Deadline(item, date);
                         taskList.add(deadline);
-                        System.out.println("(｀д´)ゝ Added this task: \n" + deadline);
+                        System.out.println("Added this task: \n" + deadline);
                         System.out.println("You now have " + taskList.size() + " task(s) in your list");
                         break;
                     case EVENT:
                         Event event = new Event(item, date);
                         taskList.add(event);
-                        System.out.println("(｀д´)ゝ Added this task: \n" + event);
+                        System.out.println("Added this task: \n" + event);
                         System.out.println("You now have " + taskList.size() + " task(s) in your list");
                         break;
                 }
@@ -169,10 +163,10 @@ public class Pix {
     private static void CompleteTask(int n) {
         try {
             taskList.get(n - 1).CompleteTask();
-            System.out.println("(~_~) Wow. You did it. Yay.");
+            System.out.println("Wow. You did it. Yay.");
             System.out.println(taskList.get(n - 1));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("┻━┻ミ＼（≧ロ≦＼） You can't complete what literally isn't there!");
+            System.out.println("You can't complete what literally isn't there!");
         }
     }
 
@@ -180,15 +174,15 @@ public class Pix {
      * Deletes the selected task from the Task List.
      * @param n The number of the Task to be deleted.
      */
-    private static void DeleteTask(int n) throws PixException {
+    private static void DeleteTask(int n) {
         try {
             Task taskToDelete = taskList.get(n - 1);
-            System.out.println("(≖ᴗ≖✿) Given up already? Task removed:");
-            System.out.println(taskList.get(n - 1));
+            System.out.println("Given up already? Task removed:");
+            System.out.println(taskToDelete);
             taskList.remove(n - 1);
             System.out.println("You now have " + taskList.size() + " task(s) in your list");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("┻━┻ミ＼（≧ロ≦＼） You can't delete what literally isn't there!");
+            System.out.println("You can't delete what literally isn't there!");
         }
     }
 
@@ -203,7 +197,7 @@ public class Pix {
     }
 
     /**
-     * Closes and exits Pix.Pix.
+     * Closes and exits Pix.
      */
     private static void ExitPix() {
         System.out.println("Please don't come back...");
@@ -225,8 +219,8 @@ public class Pix {
 
     public static void main(String[] args) throws PixException {
 
-        System.out.println("(╬≖_≖) This is Pix.Pix. Why did you summon me AGAIN...");
-        System.out.println("ლಠ益ಠ)ლ What do want now?");
+        System.out.println("This is Pix. Why did you summon me AGAIN...");
+        System.out.println("What do want now?");
 
         NextCommand();
     }

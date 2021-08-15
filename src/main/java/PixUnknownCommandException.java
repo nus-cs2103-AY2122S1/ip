@@ -1,5 +1,3 @@
-package Pix.exception;
-
 /**
  * Triggers when the user inputs an unknown command.
  */

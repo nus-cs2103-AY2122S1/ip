@@ -1,6 +1,4 @@
-package Pix.exception;
-
-public class PixInvalidTaskException extends PixException{
+public class PixInvalidTaskException extends PixException {
 
     @Override
     public String getMessage() {
