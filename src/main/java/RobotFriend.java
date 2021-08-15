@@ -51,7 +51,6 @@ public class RobotFriend {
     private static void addToList(String userInput) {
         Task newTask;
         String[] tokens = userInput.split(" ");
-        System.out.println(tokens[0]);
         switch (tokens[0]) {
             case "todo":
                 newTask = new ToDo(userInput.substring("todo".length() + 1));
