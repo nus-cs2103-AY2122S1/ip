@@ -11,22 +11,31 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String msg = sc.nextLine();
-            String[] words = msg.split(" ");
+            if (msg.equals("bye")) {
+                exit();
+            } else if (msg.equals("list")) {
+                printMessage(taskList.toString());
+            } else {
+                String[] words = msg.split(" ");
 
-            // switch statement for the first word
-            switch (words[0]) {
-                case "bye":
-                    exit();
-                    break;
-                case "list":
-                    printMessage(taskList.toString());
-                    break;
-                case "done":
-                    taskList.doTask(words[1]);
-                    break;
-                default:
-                    taskList.add(msg);
-                    break;
+                // switch statement for the first word
+                switch (words[0]) {
+                    case "done":
+                        taskList.doTask(words[1]);
+                        break;
+                    case "todo":
+                        taskList.addToDo(msg);
+                        break;
+                    case "deadline":
+                        taskList.addDeadline(msg);
+                        break;
+                    case "event":
+                        taskList.addEvent(msg);
+                        break;
+                    default:
+                        Duke.printMessage("Unsupported operation.");
+                        break;
+                }
             }
         }
     }
