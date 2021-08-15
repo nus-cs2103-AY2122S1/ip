@@ -1,7 +1,11 @@
 /**
- * Class to manage task stored in chatbot.
+ * Abstract Class to manage task stored in chatbot.
+ *
+ * @author marcuspeh
+ * @version Level-4
+ * @since 15 Aug 2021
  */
-public class Task {
+public abstract class Task {
     /** Stores the task. */
     private String task;
     /** Stores if the task is done. */
@@ -9,6 +13,7 @@ public class Task {
 
     /**
      * Constructor for Task.
+     *
      * @param task task to be stored
      */
     Task(String task) {
@@ -20,6 +25,7 @@ public class Task {
      * Marks the task as done.
      * If task is successfully marked as done, true will be returned.
      * If task is not successfully marked as done, fasle will be returned instead.
+     *
      * @return if update is successful.
      */
     public boolean markDone() {
@@ -36,6 +42,7 @@ public class Task {
 
     /**
      * Getter for task.
+     *
      * @return task
      */
     public String getTask() {
