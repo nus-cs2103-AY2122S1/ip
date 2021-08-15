@@ -4,15 +4,17 @@
  * @author Clifford
  */
 
+import java.util.regex.*;
+
 public class ChatBot {
     private boolean isRunning;
-    private String[] responses;
-    private static final int ResponseLimit = 100;
+    private Task[] tasks;
+    private static final int tasksLimit = 100;
     private int currentIdx;
 
     public ChatBot() {
         this.isRunning = true;
-        this.responses = new String[ResponseLimit];
+        this.tasks = new Task[tasksLimit];
         this.currentIdx = 0;
     }
 
@@ -52,6 +54,16 @@ public class ChatBot {
         if(input.toLowerCase().trim().equals("list")) {
             return printList();
         }
+        String[] temp = input.trim().split(" ", 2);
+        if(temp[0].equals("done")) {
+            try {
+                int taskId  = Integer.parseInt(temp[1]);
+                return markAsDone(taskId);
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                e.printStackTrace();
+                return "done should be followed by an integer argument!";
+            }
+        }
         return record(input);
     }
 
@@ -64,17 +76,17 @@ public class ChatBot {
      */
     public String record(String input) throws ArrayIndexOutOfBoundsException {
         try {
-            if(currentIdx >= ResponseLimit) {
+            if(currentIdx >= tasksLimit) {
                 throw new ArrayIndexOutOfBoundsException(
-                    String.format("ChatBot can only record maximum of %d responses.", ResponseLimit));
+                    String.format("ChatBot can only record maximum of %d responses.", tasksLimit));
             }
-            responses[currentIdx] = input;
+            tasks[currentIdx] = new Task(input);
             currentIdx++;
             return "added: " + input;
         } catch(ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
             return String.format("I cannot remember so many things! Swipe your card to unlock my fullest potential!",
-                ResponseLimit);
+                tasksLimit);
         }
     }
 
@@ -89,9 +101,28 @@ public class ChatBot {
         }
         StringBuilder sb = new StringBuilder("--- Start of List ---\n");
         for(int i = 0; i < currentIdx; i++) {
-            sb = sb.append(Integer.toString(i + 1)).append(". ").append(responses[i]).append("\n");
+            sb = sb.append(Integer.toString(i + 1)).append(". ").append(tasks[i].toString()).append("\n");
         }
         sb = sb.append("--- End Of List ---");
         return sb.toString();
+    }
+
+    /**
+     *
+     * @param taskId the id of the task starting from 1 for the first task
+     * @return a String that confirms the success or failure of the operation mark as done operation.
+     * @throws IllegalArgumentException is throw when a task that does not exist is markAsDone
+     */
+    public String markAsDone(int taskId) throws IllegalArgumentException {
+        try {
+            if(taskId <= 0 || taskId > currentIdx) {
+                throw new IllegalArgumentException(
+                    String.format("taskId of %1$d valid as there are %2$d recorded task", taskId, currentIdx));
+            }
+            return tasks[taskId - 1].markAsDone();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return "No such task exists!";
+        }
     }
 }
