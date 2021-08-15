@@ -20,11 +20,13 @@ public class Duke {
         Duke victor = new Duke();
         victor.greet();
         Command command;
+        Scanner scanner = new Scanner(System.in);
 
         while(!victor.isTerminated) {
-            command = victor.listen();
+            command = victor.listen(scanner);
             victor.executeCommand(command);
         }
+        scanner.close();
     }
 
     private void executeCommand(Command command) {
@@ -58,8 +60,7 @@ public class Duke {
         formatPrint(greeting, question);
     }
 
-    private Command listen() {
-        Scanner scanner = new Scanner(System.in);
+    private Command listen(Scanner scanner) {
         String instruction = scanner.nextLine();
         return new Command(instruction);
     }
