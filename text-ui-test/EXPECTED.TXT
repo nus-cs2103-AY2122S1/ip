@@ -1,7 +1,176 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+    ____________________________________________________________
+      ____        _
+     |  _ \ _   _| | _____
+     | | | | | | | |/ / _ \
+     | |_| | |_| |   <  __/
+     |____/ \__,_|_|\_\___|
+     Hello! I'm Duke!
+     What can I do for you?
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     This command is empty.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     This command is empty.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     This command does not exist.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     You have no tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     A description needs to be specified for an 'Add To-do Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     A description needs to be specified for an 'Add To-do Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] read book
+     Now you have 1 task in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     A task number needs to be specified for a 'Mark Task Done' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     A task number needs to be specified for a 'Mark Task Done' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     The task number is not a number.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     The task number does not exist.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [T][X] read book
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     A description needs to be specified for an 'Add Deadline Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     A description needs to be specified for an 'Add Deadline Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     A deadline needs to be specified for an 'Add Deadline Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     A deadline needs to be specified for an 'Add Deadline Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     A deadline needs to be specified for an 'Add Deadline Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][ ] return book (by: June 6th)
+     Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][ ] do homework (by: no idea :-p)
+     Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     A description needs to be specified for an 'Add Event Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     A description needs to be specified for an 'Add Event Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     An event time needs to be specified for an 'Add Event Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     An event time needs to be specified for an 'Add Event Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     This command is invalid.
+     An event time needs to be specified for an 'Add Event Task' command.
+     Please try again.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Got it. I've added this task:
+       [E][ ] project meeting (at: Aug 6th 2-4pm)
+     Now you have 4 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Got it. I've added this task:
+       [E][ ] graduation (at: a long time away TT)
+     Now you have 5 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][X] read book
+     2.[D][ ] return book (by: June 6th)
+     3.[D][ ] do homework (by: no idea :-p)
+     4.[E][ ] project meeting (at: Aug 6th 2-4pm)
+     5.[E][ ] graduation (at: a long time away TT)
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Bye. Hope to see you again soon!
+    ____________________________________________________________
 
