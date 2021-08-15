@@ -1,4 +1,3 @@
-
 public class Duke {
 
     private Speech speech;
@@ -6,7 +5,7 @@ public class Duke {
     private Storage storage;
 
     public Duke() {
-        speech = new Speech();
+        speech = new Speech(false);
         brain = new Brain();
         storage = new Storage();
     }

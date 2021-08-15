@@ -2,40 +2,56 @@ import java.util.Random;
 
 public class Speech {
 
-    public Speech() {
+    boolean basicMode;
+
+    public Speech(boolean mode) {
+        this.basicMode = mode;
     }
+
 
     public void welcome() {
-        String[] duke_welcome = {"Hello! I'm Duke!" , "What can I do for you"};
-        speak(duke_welcome);
+        String[] dukeWelcome = {"Hello! I'm Duke!" , "What can I do for you"};
+        speak(dukeWelcome);
     }
 
-    public void added(String msg) {
-        String[] duke_added = {"Nice! I've marked this task as done:", msg};
-        speak(duke_added);
+    public void done_msg(String msg) {
+        String[] dukeAdded = {"Nice! I've marked this task as done:", msg};
+        speak(dukeAdded);
+    }
+
+    public void task_added(String msg, int task_left) {
+        String[] dukeAddedTask = {"Got it. I've added this task:", "  " + msg, "Now you have " + task_left + " tasks in the list."};
+        speak(dukeAddedTask);
     }
 
     public void error(String error_msg) {
-        String[] duke_error = {"Hmm, i dont quite understand you", "I think you made " + error_msg };
-        speak(duke_error);
+        String[] dukeError = {"Hmm, i dont quite understand you", "I think you made " + error_msg };
+        speak(dukeError);
     }
-
-
 
     public void goodbye() {
         speak("Bye. Hope to see you again soon!");
     }
 
+
+
+
     // Duke Speech Template
     public void speak(String[] in) {
-        String top_border = "          ___________________________________________________\n";
-        String bot_border = "          | ________________________________________________|\n" + "          |/\n";
-        String emoticon = emoticon_rand();
-        String msges = "";
-        for( String x : in){
-            msges += message_format(x, 48);
+        if (!basicMode){
+            String topBorder = "          ___________________________________________________\n";
+            String botBorder = "          | ________________________________________________|\n" + "          |/\n";
+            String emoticon = emoticonRand();
+            String msges = "";
+            for( String x : in){
+                msges += message_format(x, 48);
+            }
+            System.out.println( topBorder + msges + botBorder + emoticon);
+        } else {
+            for( String x : in){
+                System.out.println(x);
+            }
         }
-        System.out.println( top_border + msges + bot_border + emoticon);
     }
     public void speak(String in) {
         String[] temp = {in};
@@ -47,7 +63,7 @@ public class Speech {
         return msg;
     }
 
-    private String emoticon_rand() {
+    private String emoticonRand() {
         String[] emoticon = {"(ﾍﾟ◇ﾟ)」" ,"( ＾◡＾)っ", "(*°▽°)ノ", "(o^ω^)" , "(✿˘▽˘)"};
         int rando = new Random().nextInt(emoticon.length-1);
         return emoticon[rando];

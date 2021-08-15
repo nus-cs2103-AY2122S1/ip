@@ -1,4 +1,3 @@
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Brain {
@@ -15,21 +14,33 @@ public class Brain {
                 speech.speak(temp);
                 return true;
             default :
-                if (input.startsWith("done")) {
-                    try {
+                try {
+                    if (input.startsWith("done")) {
                         String msg = storage.done(input.substring(4));
-                        speech.added(msg);
-                    }catch (Exception NumberFormatException) {
-                        speech.error("an invalid code input");
+                        speech.done_msg(msg);
+                    } else if (input.startsWith("deadline")) {
+                        String msg = storage.deadline(input.substring(8));
+                        speech.task_added(msg, storage.task_left());
+                    } else if (input.startsWith("todo")) {
+                        String msg = storage.todo(input.substring(4));
+                        speech.task_added(msg, storage.task_left());
+                    } else if (input.startsWith("event")) {
+                        String msg = storage.event(input.substring(5));
+                        speech.task_added(msg, storage.task_left());
+                    } else {
+
+                        input = storage.basicAdd(input);
+                        speech.speak(input);
                     }
-                    return true;
-                } else {
-                            input = storage.add(input);
-                            speech.speak(input);
-                            return true;
-                        }
+
+                } catch (Exception NumberFormatException) {
+                    speech.error("an invalid code input");
                 }
+                return true;
+
+        }
     }
+
 
 
 

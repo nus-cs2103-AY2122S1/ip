@@ -1,10 +1,18 @@
 public class Task {
-    private boolean isDone;
-    private String description;
+    protected boolean isDone;
+    protected String description;
+
+    public Task() {
+        setNotDone();
+    }
 
     public Task(String description){
         setNotDone();
-        this.description = description;
+        setDescription(description);
+    }
+
+    protected void setDescription(String in){
+        this.description = in;
     }
 
     public Task setDone(){
