@@ -1,10 +1,8 @@
 public class Task {
-    private final int index;
     private final String taskName;
     private boolean done;
 
-    public Task(int index, String taskName) {
-        this.index = index;
+    public Task(String taskName) {
         this.taskName = taskName;
         this.done = false;
     }

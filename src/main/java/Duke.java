@@ -30,7 +30,7 @@ public class Duke {
                 int toSet = Integer.parseInt(text.split(" ")[1]);
                 taskList[toSet - 1].setDone();
             } else {
-                taskList[listLength++] = new Task(listLength, text);
+                taskList[listLength++] = new Task(text);
                 System.out.println("  added: " + text);
             }
 
