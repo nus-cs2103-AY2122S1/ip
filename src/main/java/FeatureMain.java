@@ -7,14 +7,18 @@ import java.util.List;
  */
 public class FeatureMain {
     private String currentCommand;
-    private static List<String> commands = new ArrayList<String>();
+    private static List<Task> commands = new ArrayList<Task>();
+    private int taskNumber;
 
-    public FeatureMain(String command) {
-        if (command.toLowerCase().equals("list")) {
+    public FeatureMain(Task task) {
+        String command = task.description;
+        if (isList(command.toLowerCase())) {
+            this.currentCommand = command.toLowerCase();
+        } else if (isDone(command.toLowerCase())){
             this.currentCommand = command.toLowerCase();
         } else {
             this.currentCommand = command.toLowerCase();
-            FeatureMain.commands.add(command);
+            FeatureMain.commands.add(task);
         }
     }
 
@@ -24,10 +28,43 @@ public class FeatureMain {
      * @return Specific feature pertaining to command
      */
     public String processCommand() {
-        if (this.currentCommand.equals("list")) {
+        if (isList(this.currentCommand)) {
             return userCommands();
+        } else if (isDone(this.currentCommand)) {
+            return markDone();
         } else {
             return addCommand();
+        }
+    }
+
+    // checks if command given is a list
+    private boolean isList(String command) {
+        return command.equals("list");
+    }
+
+    //checks if command given is done, also adds task mumber if valid
+    private boolean isDone(String command) {
+        if (command.length() > 4) {
+            if (command.substring(0, 4).equals("done") &&
+                    isNumeric(command.substring(5))) {
+                taskNumber = Integer.parseInt(command.substring(5));
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+    }
+
+    // checks if String is numeric
+    public static boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
         }
     }
 
@@ -60,12 +97,31 @@ public class FeatureMain {
      */
     private static String userCommands() {
         int count = 1;
-        for (String item : commands) {
-            System.out.println(count + ". " + item);
+        for (Task item : commands) {
+            System.out.println(count + ". " + "[ " + item.getStatusIcon() + " ] "+ item.getDescription());
             count++;
         }
         newLine();
         return commands.toString();
+    }
+
+    private String markDone() {
+        if (taskNumber <= commands.size()) {
+            System.out.println("Nice! I've marked this task as done: ");
+
+            Task taskToChange = commands.get(taskNumber - 1);
+            taskToChange.markAsDone();
+
+            System.out.println("   " + "[ " + taskToChange.getStatusIcon() + " ] " + " " + taskToChange.getDescription());
+            newLine();
+            return "   " + taskToChange.getStatusIcon() + " " + taskToChange.getDescription();
+        } else {
+            System.out.println("Task does not exist");
+            newLine();
+            return "Task does not exist";
+        }
+
+
     }
 
     // Simply creates a new line in the terminal

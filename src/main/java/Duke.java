@@ -14,7 +14,8 @@ public class Duke {
             command = scanner.nextLine();
             // Processes user input
             if (!command.toLowerCase().equals("bye")) {
-                FeatureMain feature = new Feature(command);
+                Task task = new Task(command);
+                FeatureMain feature = new Feature(task);
                 feature.processCommand();
             }
         }

@@ -1,6 +1,6 @@
-public class Feature extends FeatureMain{
+public class Feature extends FeatureMain {
 
-    public Feature (String command) {
+    public Feature (Task command) {
         super(command);
 
     }
