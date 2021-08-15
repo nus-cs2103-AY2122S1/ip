@@ -17,7 +17,7 @@ public class Task {
 
     public void markComplete() {
         if (isDone) {
-            System.out.println(taskName + " is already completed.");
+            System.out.println("`" + taskName + "`" + " is already completed.");
         } else {
             this.isDone = true;
             System.out.println(
