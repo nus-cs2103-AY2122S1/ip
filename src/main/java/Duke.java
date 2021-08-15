@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Duke {
@@ -29,33 +28,33 @@ public class Duke {
     }
 
     private void executeCommand(Command command) {
-        if (command.isInstruction) {
-            switch(command.getInstruction()) {
-                case "list":
-                    printList();
-                    break;
-                case "done":
-                    markAsDone(Integer.parseInt(command.getParameter(1)));
-                    break;
-                case "bye":
-                    bye();
-                    break;
-                default :
-                    System.out.println("Invalid command");
-            }
-        } else {
-            storeTask(new Task(command.getInstruction()));
-            echo(command);
+        switch(command.getInstruction()) {
+            case "list":
+                printList();
+                break;
+            case "todo":
+                createTask(new Todo(command.getParameter_1()));
+                break;
+            case "deadline":
+                createTask(new Deadline(command.getParameter_1(), command.getParameter_2()));
+                break;
+            case "event":
+                createTask(new Event(command.getParameter_1(), command.getParameter_2()));
+                break;
+            case "done":
+                markAsDone(Integer.parseInt(command.getParameter_1()));
+                break;
+            case "bye":
+                bye();
+                break;
+            default :
+                System.out.println("Invalid command");
         }
     }
 
     private void greet() {
-        String[] greetings = {"Hey there, friend.", "Howdy, pardner! Might I say, you're looking fit as a fiddle.",
-                "Howdy, pardner! So, when do the rustlers show up?", "Howdy, pardner!"};
+        String greeting = "Howdy, pardner!";
         String question = "Is there anything old Vic can do you for?";
-        Random rand = new Random();
-        int random_int = rand.nextInt(greetings.length);
-        String greeting = greetings[random_int];
         formatPrint(greeting, question);
     }
 
@@ -63,14 +62,6 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String instruction = scanner.nextLine();
         return new Command(instruction);
-    }
-
-    private void echo(Command command) {
-        formatPrint("added: " + command.getInstruction());
-    }
-
-    private void storeTask(Task task) {
-        list.add(task);
     }
 
     private void markAsDone(int taskNumber) {
@@ -84,18 +75,20 @@ public class Duke {
         System.out.print("\n    ____________________________________________________________" +
                 "\n    Here are the tasks in your list:\n");
         for (Task task : this.list) {
-            System.out.printf("     %d.[%s] %s\n", count, task.getStatusIcon(), task.getDescription());
+            System.out.printf("     %d.%s\n", count, task.toString());
             count++;
         }
         System.out.println("    ____________________________________________________________\n");
     }
 
+    private void createTask(Task task) {
+        list.add(task);
+        formatPrint("Got it. I've added this task:", "  " + task.toString(),
+                "Now you have " + list.size() + " tasks in the list.");
+    }
+
     private void bye() {
-        String[] goodbye = {"Be seeing you.", "'Til our trails cross again, pardner.",
-                "Well, happy trails, then!", "See ya round, buckaroo."};
-        Random rand = new Random();
-        int random_int = rand.nextInt(goodbye.length);
-        String bye = goodbye[random_int];
+        String bye = "See ya round, buckaroo.";
         formatPrint(bye);
         terminate();
     }
