@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,6 +12,8 @@ public class Duke {
                 + "What can I do for you? \n"
                 + sepLine;
 
+        ArrayList<Task> taskList = new ArrayList<>();
+
         System.out.println(start);
 
         // Main loop for commands
@@ -19,8 +22,16 @@ public class Duke {
             if (next.equals("bye")) {
                 System.out.println(sepLine + "\n" + "Bye. Hope to see you again soon!" + "\n" + sepLine);
                 isRunning = false;
+            } else if (next.equals("list")) {
+                System.out.println(sepLine);
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.print(i + 1 + ". " + taskList.get(i) + "\n");
+                }
+                System.out.println(sepLine);
             } else {
-                System.out.println(sepLine + "\n" + next + "\n" + sepLine);
+                // Add a task to the task list
+                taskList.add(new Task(next));
+                System.out.println(sepLine + "\n added: " + next + "\n" + sepLine);
             }
         }
     }
