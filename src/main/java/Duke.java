@@ -1,6 +1,12 @@
 import java.util.Scanner;
 
 public class Duke {
+
+
+
+
+
+    private static String taskComplete = "Nice, I've marked this task as done";
     private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -11,9 +17,57 @@ public class Duke {
     private static String hline = "\t----------------------------";
     //hashmap cannot enumerate
     //array of inputs capped at 100
-    private String[] inputs =  new String[100];
+    private Task[] inputs =  new Task[100];
     //pointer to the last location of inputs available
     private int ptr = 0;
+    private static String notDone = "[ ]";
+    private static String done = "[X]";
+
+    /**
+     * Class of a task to be done.
+     *
+     */
+    private static class Task {
+        public String name;
+        public String checkBox;
+
+        /**
+         * Constructor of task.
+         *
+         * @param s Name of the task.
+         */
+        public Task(String s) {
+            this.name = s;
+            this.checkBox = s = notDone;
+        }
+
+        /**
+         * Marks when the task is done.
+         */
+        public void done() {
+            this.checkBox = done;
+        }
+
+        @Override
+        public String toString() {
+            return this.checkBox + " " + this.name;
+        }
+
+
+        public boolean equals(String s) {
+            return this.name.equals(s);
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj instanceof Task) {
+                Task t = (Task) obj;
+                return t.name.equals(this.name);
+            }
+            return false;
+        }
+    }
+
 
     /**
      * Dukes own method to print a string
@@ -36,14 +90,14 @@ public class Duke {
     }
 
     /**
-     * Checks if the input string has been added before or not.
+     * Checks if the input task has been added before or not.
      *
-     * @param s The string to check.
+     * @param t The Task to check.
      * @return True if the string has been added and false otherwise.
      */
-    private boolean isAdded(String s) {
+    private boolean isAdded(String t) {
         for (int i = 0; i < ptr; i++) {
-            if (s.equals(inputs[i])) {
+            if (inputs[i].equals(t)) {
                 return true;
             }
         }
@@ -56,7 +110,7 @@ public class Duke {
      * @param s Input string.
      */
     private void add(String s) {
-        this.inputs[ptr] = s;
+        this.inputs[ptr] = new Task(s);
         this.ptr++;
         this.print(s);
     }
@@ -67,10 +121,10 @@ public class Duke {
     private void list() {
         String output = "";
         if (ptr == 0) return;
-        output += "1. " + inputs[0];
+        output += "1." + inputs[0];
         for (int i = 1; i < ptr; i++) {
             int indi = i + 1;
-            output += "\n\t" + indi + ". " + inputs[i];
+            output += "\n\t" + indi + "." + inputs[i];
         }
         this.print(output);
     }
@@ -86,7 +140,18 @@ public class Duke {
         this.print(greetings);
         String inpt = sc.nextLine();
         while(!inpt.equals("bye")) {
-
+            //to check if the first four letters are done
+            if (inpt.length() > 4) {
+                if (inpt.substring(0, 4).equals("done")) {
+                    //TODO: should check if there is an int?
+                    String s = inpt.substring(4).trim();
+                    int val = Integer.parseInt(s) - 1;
+                    inputs[val].done();
+                    print(taskComplete + "\n\t" + inputs[val]);
+                    inpt = sc.nextLine();
+                    continue;
+                }
+            }
 
             if (inpt.equals("list")) {
                 this.list();
