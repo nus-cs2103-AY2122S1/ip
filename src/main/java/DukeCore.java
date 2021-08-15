@@ -9,7 +9,7 @@ public class DukeCore {
             + "     |____/ \\__,_|_|\\_\\___|\n";
     static String divider = "    ____________________________________________________________";
     static String space = "     ";
-    static String INVALID_INPUT = space + "Invalid input. Please follow the given format!";
+    static String INVALID_INPUT = space + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     private final Scanner scanner;
     private final TaskList taskList;
@@ -35,30 +35,58 @@ public class DukeCore {
     }
 
     public boolean parseLine(String input) {
+        input = input.trim();  // to remove all leading and trailing space of user's input
         if (input.equals("bye")) {
             return false;
         } else if (input.equals("list")) {
             listTasks();
-        } else if (input.startsWith("todo ")) {
-            String description = parseTodo(input);
-            if (description != null) {
+        } else if (input.startsWith("todo")) {
+            try {
+                String description = parseTodo(input);
                 addTask(new Todo(description));
-            } else {
-                displayText(INVALID_INPUT);
+            } catch (DukeException e) {
+                String errorMessage = e.getMessage();
+                if (errorMessage.equals("wrong input format")) {
+                    displayText(INVALID_INPUT);
+                } else if (errorMessage.equals("empty todo description")) {
+                    displayText(space + "☹ OOPS!!! The description of a todo cannot be empty.");
+                }
             }
-        } else if (input.startsWith("deadline ")) {
-            String[] taskDetails = parseDeadline(input);
-            if (taskDetails != null) {
+        } else if (input.startsWith("deadline")) {
+            try {
+                String[] taskDetails = parseDeadline(input);
                 addTask(new Deadline(taskDetails[0], taskDetails[1]));
-            } else {
-                displayText(INVALID_INPUT);
+            } catch (DukeException e) {
+                String errorMessage = e.getMessage();
+                switch (errorMessage) {
+                case "wrong input format":
+                    displayText(INVALID_INPUT);
+                    break;
+                case "empty deadline description":
+                    displayText(space + "☹ OOPS!!! The description of a deadline cannot be empty.");
+                    break;
+                case "empty deadline by":
+                    displayText(space + "☹ OOPS!!! The deadline of a deadline cannot be empty.");
+                    break;
+                }
             }
-        } else if (input.startsWith("event ")) {
-            String[] taskDetails = parseEvent(input);
-            if (taskDetails != null) {
+        } else if (input.startsWith("event")) {
+            try {
+                String[] taskDetails = parseEvent(input);
                 addTask(new Event(taskDetails[0], taskDetails[1]));
-            } else {
-                displayText(INVALID_INPUT);
+            } catch (DukeException e) {
+                String errorMessage = e.getMessage();
+                switch (errorMessage) {
+                case "wrong input format":
+                    displayText(INVALID_INPUT);
+                    break;
+                case "empty event description":
+                    displayText(space + "☹ OOPS!!! The description of an event cannot be empty.");
+                    break;
+                case "empty event at":
+                    displayText(space + "☹ OOPS!!! The start/end time of an event cannot be empty.");
+                    break;
+                }
             }
         } else if (input.length() >= 6 && input.startsWith("done ")) {
             if (isValidNum(input.substring(5))) {
@@ -74,62 +102,109 @@ public class DukeCore {
 
     public boolean isValidNum(String s) {
         try {
-            int index = Integer.parseInt(s);
+            Integer.parseInt(s);
         } catch (Exception e) {
             return false;
         }
         return true;
     }
 
-    public String parseTodo(String s) {
-        String temp = s.substring(5);
+    public String parseTodo(String s) throws DukeException {
+        String temp;
+        try {
+            if (s.charAt(4) != ' ') {
+                throw new DukeException("wrong input format");
+            }
+            temp = s.substring(5);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("empty todo description");
+        }
         temp = temp.trim();
-        return temp.equals("") ? null : temp;
+        if (temp.equals("")) {
+            throw new DukeException("empty todo description");
+        }
+        return temp;
     }
 
-    public String[] parseDeadline(String s) {
-        String temp = s.substring(9);
-        temp = temp.trim();
+    public String[] parseDeadline(String s) throws DukeException {
+        String temp;
         String description;
         String by;
-        int m = temp.lastIndexOf("/by ");
+
+        try {
+            if (s.charAt(8) != ' ') {
+                throw new DukeException("wrong input format");
+            }
+            temp = s.substring(9);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("empty deadline description");
+        }
+        temp = temp.trim();
+
+        int m = temp.lastIndexOf("/by");
         if (m == -1) {
-            return null;
+            throw new DukeException("wrong input format");
         } else {
             description = temp.substring(0, m);
             description = description.trim();
             if (description.equals("")) {
-                return null;
+                throw new DukeException("empty deadline description");
             }
+
             by = temp.substring(m);
-            by = by.substring(4);
+            try {
+                if (by.charAt(3) != ' ') {
+                    throw new DukeException("wrong input format");
+                }
+                by = by.substring(4);
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("empty deadline by");
+            }
             by = by.trim();
             if (by.equals("")) {
-                return null;
+                throw new DukeException("empty deadline by");
             }
         }
         return new String[]{description, by};
     }
 
     public String[] parseEvent(String s) {
-        String temp = s.substring(6);
-        temp = temp.trim();
+        String temp;
         String description;
         String at;
-        int m = temp.lastIndexOf("/at ");
+
+        try {
+            if (s.charAt(5) != ' ') {
+                throw new DukeException("wrong input format");
+            }
+            temp = s.substring(6);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("empty event description");
+        }
+        temp = temp.trim();
+
+        int m = temp.lastIndexOf("/at");
         if (m == -1) {
-            return null;
+            throw new DukeException("wrong input format");
         } else {
             description = temp.substring(0, m);
             description = description.trim();
             if (description.equals("")) {
-                return null;
+                throw new DukeException("empty event description");
             }
+
             at = temp.substring(m);
-            at = at.substring(4);
+            try {
+                if (at.charAt(3) != ' ') {
+                    throw new DukeException("wrong input format");
+                }
+                at = at.substring(4);
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("empty event at");
+            }
             at = at.trim();
             if (at.equals("")) {
-                return null;
+                throw new DukeException("empty event at");
             }
         }
         return new String[]{description, at};
