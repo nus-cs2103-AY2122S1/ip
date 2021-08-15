@@ -8,23 +8,49 @@ public class Duke {
         } else {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < commands.size(); i++) {
-                System.out.println((i + 1) + ".  [" + commands.get(i).getStatusIcon() + "]" + commands.get(i).description);
+                System.out.println((i + 1) + ". " + commands.get(i));
             }
         }
     }
-    void add(String command){
-        commands.add(new Task(command));
-        System.out.println("Added task: " + command);
+    void add(String input){
+        String[] inputSplit = input.split("\\s", 2);
+        String commandType = inputSplit[0].toLowerCase();
+        boolean correctInput = true;
+        switch (commandType){
+            case "todo":
+                commands.add(new ToDo(inputSplit[1]));
+                break;
+            case "deadline":
+                String[] deadline = inputSplit[1].split("/by");
+                commands.add(new Deadline(deadline[0], deadline[1]));
+                break;
+            case "event":
+                String[] event = inputSplit[1].split("/at");
+                commands.add(new Event(event[0], event[1]));
+                break;
+            default:
+                correctInput = false;
+                System.out.println("You can't add this to your task list");
+        }
+        if(correctInput){
+            System.out.println("I have added this task: ");
+            System.out.println(commands.get(commands.size()-1));
+            System.out.println("You now have " + commands.size() + " tasks in your list");
+        }
+
     }
 
     void done(int listNumber){
         if(listNumber < commands.size()) {
             commands.get(listNumber).markAsDone();
             System.out.println("Good job! I've marked this task as completed: ");
-            System.out.println("  [" + commands.get(listNumber).getStatusIcon() + "]" + commands.get(listNumber).description);
+            System.out.println(commands.get(listNumber));
+            commands.remove(listNumber);
+            System.out.println("You now have " + commands.size() + " tasks in your list");
         } else{
             System.out.println("There is no such task in your to-do list! ☹️");
         }
+
     }
 
     public static void main(String[] args) {
@@ -44,14 +70,14 @@ public class Duke {
             //Exit command
             System.out.println("............................................................");
             String input = sc.nextLine().trim();
-            String[] command = input.split(" ", 2);
+            String[] command = input.split("\\s+", 2);
             if(command[0].equalsIgnoreCase("bye")){
                 System.out.println("\n\tByeBye! Hope to see you again!");
                 break;
             } else if(command[0].equalsIgnoreCase("list")){
                 duke.list();
             } else if (command[0].equalsIgnoreCase("done")){
-                if (command[0].equals(input)) {
+                if (!command[0].equals(input)) {
                     if(!duke.commands.isEmpty()) {
                         int listNumber = Integer.parseInt(command[1]);
                         duke.done(listNumber - 1);
