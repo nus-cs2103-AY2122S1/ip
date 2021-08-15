@@ -1,22 +1,27 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        String line = "\n----------------------------------------------";
 
+    private static final String LINE = "----------------------------------------------";
+    private String[] store = new String[100];
+    private int items = 0;
+
+    public void greeting() {
         // Credits to https://textart4u.blogspot.com/2014/04/frog-leap-unicode-copy-paste-text-art.html
         // for the frog ASCII text art!
         String frog =
                 "             ╭━━━╮━━━╮\n" +
-                "             ┃ ▉ ┃ ▉ ┃\n" +
-                " ╱▔▔╲  ╱▔▔▔╲╱    ╰▔▔▔▔╲        RIBBIT!\n" +
-                "╱  ╱╲╲╱╱         ╰━━━━╱\n" +
-                "╲╱╱▔▔╲╱╲         ╱▔▔▔▔▔\n" +
-                " ╱  ╱╲╲╱╱▔▔╲    ╰━━━╮━━━╮\n" +
-                " ╲ ╱  ╲╱    ▔▔▔▔▔▔▔╰╯▔▔╰╯\n";
-        String greeting = "I am Jo and I love frogs! RIBBIT! \n";
-        System.out.println(frog + greeting + "How may I help you?" + line);
+                        "             ┃ ▉ ┃ ▉ ┃\n" +
+                        " ╱▔▔╲  ╱▔▔▔╲╱    ╰▔▔▔▔╲        RIBBIT!\n" +
+                        "╱  ╱╲╲╱╱         ╰━━━━╱\n" +
+                        "╲╱╱▔▔╲╱╲         ╱▔▔▔▔▔\n" +
+                        " ╱  ╱╲╲╱╱▔▔╲    ╰━━━╮━━━╮\n" +
+                        " ╲ ╱  ╲╱    ▔▔▔▔▔▔▔╰╯▔▔╰╯\n";
+        String greeting = "I am Jo the Frog! RIBBIT! \n";
+        System.out.println(frog + greeting + "How may I help you?\n" + LINE);
+    }
 
+    public void echo() {
         String input = "";
         do {
             Scanner scanner = new Scanner(System.in);
@@ -24,10 +29,22 @@ public class Duke {
 
             if (input.equals("bye")) {
                 System.out.println("See you again in my frog hole! RIBBIT!");
+            } else if (input.equals("list")) {
+                for (int i = 0; i < items; i++) {
+                    System.out.println(i + 1 + ". " + store[i]);
+                }
+                System.out.println(LINE);
             } else {
-                System.out.println(input + line);
+                store[items] = input;
+                items++;
+                System.out.println("croaked: " + input + "\n" + LINE);
             }
-
         } while (!input.equals("bye"));
+    }
+
+    public static void main(String[] args) {
+        Duke jo = new Duke();
+        jo.greeting();
+        jo.echo();
     }
 }
