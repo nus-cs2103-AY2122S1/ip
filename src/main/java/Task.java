@@ -29,4 +29,12 @@ public class Task {
     public void markIncomplete() {
         this.isDone = false;
     }
+
+    public String getStatusIcon() {
+        if (isDone) {
+            return "[X]";
+        } else {
+            return "[ ]";
+        }
+    }
 }
