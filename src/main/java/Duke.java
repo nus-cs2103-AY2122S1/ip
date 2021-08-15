@@ -47,7 +47,18 @@ public class Duke {
                     this.displayText(e.toString());
                 }
                 
-            } else {
+            } else if (inputArr[0].equals("delete")) {
+
+                //obtains the task number which we want to delete
+                Integer index = Integer.parseInt(inputArr[1]);
+
+                try {
+                    this.deleteTask(index);
+                } catch (DukeException e) {
+                    this.displayText(e.toString());
+                }
+            }
+            else {
 
                 //adds item input by the user into the inputList
                 try {
@@ -101,7 +112,7 @@ public class Duke {
 
         Todo todoTask = new Todo(description);
         this.taskList.add(todoTask);
-        this.taskCommonMessage(todoTask.toString());
+        this.taskAddCommonMessage(todoTask.toString());
     }
 
     public void addDeadline(String[] inputArr) throws DescriptionException, CommandException {
@@ -137,7 +148,7 @@ public class Duke {
 
         Deadline deadlineTask = new Deadline(description, by);
         this.taskList.add(deadlineTask);
-        this.taskCommonMessage(deadlineTask.toString());
+        this.taskAddCommonMessage(deadlineTask.toString());
     }
 
     public void addEvent(String[] inputArr) throws DescriptionException, CommandException {
@@ -173,23 +184,29 @@ public class Duke {
 
         Event eventTask = new Event(description, at);
         this.taskList.add(eventTask);
-        this.taskCommonMessage(eventTask.toString());
+        this.taskAddCommonMessage(eventTask.toString());
 
     }
 
-    public void taskCommonMessage(String taskString) {
-         String message = "Got it. I've added this task:\n" + taskString + "\n";
-         message += String.format("Now you have %d tasks in the list.", this.taskList.size());
-         this.displayText(message);
+    public void taskAddCommonMessage(String taskString) {
+        String message = "Got it. I've added this task:\n" + taskString + "\n";
+        message += String.format("Now you have %d tasks in the list.", this.taskList.size());
+        this.displayText(message);
+    }
+
+    public void taskDeleteCommonMessage(String taskString) {
+        String message = "Noted. I've removed this task:\n" + taskString + "\n";
+        message += String.format("Now you have %d tasks in the list.", this.taskList.size());
+        this.displayText(message);
     }
 
     /**
      * Marks a task in the taskList as done
      * @param index index of the Task in the taskList to be marked as Done, but need to - 1 due to index starting at 0
      */
-    public void markAsDoneText(Integer index) throws DoneNumberException {
+    public void markAsDoneText(Integer index) throws TaskNumberException {
         if (index > this.taskList.size()) {
-            throw new DoneNumberException();
+            throw new TaskNumberException();
 
         } else {
             //because our list starts from index 0 instead of index 1
@@ -213,6 +230,13 @@ public class Duke {
      * Displays all the items in the taskList and their completion status.
      */
     public void displayListItems() {
+
+        if (this.taskList.isEmpty()) {
+            this.displayText("Your List is Empty");
+            return;
+        }
+
+
         System.out.println(borderLine);
 
         for (int i = 0; i < this.taskList.size(); i++) {
@@ -223,5 +247,18 @@ public class Duke {
         }
 
         System.out.println(borderLine);
+    }
+
+    public void deleteTask(Integer index) throws TaskNumberException {
+        if (index > this.taskList.size()) {
+            throw new TaskNumberException();
+
+        } else {
+            //because our list starts from index 0 instead of index 1
+            int realIndex = index - 1;
+            String removedTask = this.taskList.get(realIndex).toString();
+            this.taskList.remove(realIndex);
+            this.taskDeleteCommonMessage(removedTask);
+        }
     }
 }
