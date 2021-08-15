@@ -22,7 +22,7 @@ public class ToDo extends Task {
         String taskStatus = this.isCompleted() ? "X" : " ";
         return "[" + "T" + "]"
                 + "[" + taskStatus + "]"
-                + " " + this.getDescription() + " ";
+                + " " + this.getDescription();
     }
 
 }

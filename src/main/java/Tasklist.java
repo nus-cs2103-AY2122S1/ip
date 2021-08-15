@@ -53,7 +53,8 @@ public class Tasklist {
 
         tasks.add(newTask);
         String successMessage = "Got it. I've added this task:\n"
-                + "  " + newTask.toString();
+                + "  " + newTask.toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
         return successMessage;
     }
 
@@ -76,7 +77,7 @@ public class Tasklist {
         } else {
 
             tasks.get(taskNumber - 1).completeTask();
-            String markTaskMessage = "Nice! I've marked this task as done: \n"
+            String markTaskMessage = "Nice! I've marked this task as done:\n"
                     + tasks.get(taskNumber - 1).toString();
             return markTaskMessage;
 
