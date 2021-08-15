@@ -23,17 +23,17 @@ public class Duke {
                 System.out.println("Lollipop: Here are your tasks");
                 for (int i = 0; i < taskList.size(); i++) {
                     Task task = taskList.get(i);
-                    System.out.printf("%d. [%s] %s%n", i + 1, task.getStatusIcon(), task.getDescription());
+                    System.out.printf("%d. [%s] %s%n", i + 1, task.getStatusIcon(), task.toString());
                 }
             } else if (command.contains("done")) {
                 int taskNumber = parseInt(command.split(" ")[1]);
                 Task task = taskList.get(taskNumber - 1);
                 task.markAsDone();
-                System.out.printf("Lollipop: %s has been marked as done.%n", task.getDescription());
+                System.out.printf("Lollipop: %s has been marked as done.%n", task.toString());
             } else {
                 Task task = new Task(command);
                 taskList.add(task);
-                System.out.printf("Lollipop: %s has been added.%n", task.getDescription());
+                System.out.printf("Lollipop: %s has been added.%n", task.toString());
             }
 
             System.out.println("");
