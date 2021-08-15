@@ -3,10 +3,32 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private static class Task {
+        protected boolean completed = false;
+        protected String name;
+
+        public Task(String name) {
+            this.name = name;
+            this.completed = false;
+        }
+
+        public void markComplete() {
+            this.completed = true;
+        }
+
+        public String getStatusIcon() {
+            return this.completed ? "X" : " ";
+        }
+
+        @Override
+        public String toString() {
+            return String.format("[%s] %s", this.getStatusIcon() , this.name);
+        }
+    }
     private static final Scanner scanner = new Scanner(System.in);
     private static final String ENDING_COMMAND = "bye";
 
-    private static List<String> taskList = new ArrayList<>();
+    private static List<Task> taskList = new ArrayList<>();
 
     private static void say(String message) {
         System.out.println(String.format("Iris: %s", message));
@@ -28,7 +50,7 @@ public class Duke {
 
     private static void add(String item) {
         say(String.format("added: %s", item));
-        taskList.add(item);
+        taskList.add(new Task(item));
     }
 
     private static void listTasks() {
