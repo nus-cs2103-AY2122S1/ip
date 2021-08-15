@@ -1,5 +1,9 @@
 package duke.ui;
 
+import duke.task.Task;
+
+import java.util.List;
+
 public class MessageFormatter {
 
     private static final String INDENTATION_UNIT_STRING = " ";
@@ -16,6 +20,19 @@ public class MessageFormatter {
      */
     public String getFormattedMessage(String message) {
         return indent(surroundWithDividerLines(message));
+    }
+
+    public String formatTasksList(List<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+        int n = tasks.size();
+        for (int i = 0; i < n; i++) {
+            sb.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
+        }
+        return sb.toString().stripTrailing();
+    }
+
+    public String formatTask(Task task) {
+        return indent(task.toString(), 2);
     }
 
     private String surroundWithDividerLines(String message) {
@@ -40,7 +57,7 @@ public class MessageFormatter {
      * @param count The number of unit indentations.
      * @return The indented string.
      */
-    public String indent(String string, int count) {
+    private String indent(String string, int count) {
         return indent(string, INDENTATION_UNIT_STRING, count);
     }
 
@@ -53,6 +70,6 @@ public class MessageFormatter {
             }
             sb.append("\n");
         }
-        return sb.toString();
+        return sb.toString().stripTrailing();
     }
 }
