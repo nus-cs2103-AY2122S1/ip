@@ -1,0 +1,10 @@
+todo borrow book
+done 1
+deadline return book /by June 6th
+event project meeting /at Aug 10th
+todo join sport club
+done 2
+done 1
+event myedurec stuff /at now
+list
+bye
