@@ -15,7 +15,6 @@ public class Task {
 
     public void done() {
         this.isDone = true;
-        System.out.println(this.toString());
     }
 
 
