@@ -1,0 +1,7 @@
+todo a todo task
+deadline cs2103t ip /thur 2359
+event sem1 /aug-nov
+list
+done 1
+list
+bye
