@@ -24,12 +24,9 @@ public class Duke {
                         if (inputSplit.length < 2) {
                             throw new DukeException("Description of ToDo cannot be empty!");
                         }
-
                         Task todo = new ToDo(inputSplit[1]);
                         list.add(todo);
-                        System.out.println("Got it. I've added this task: \t");
-                        System.out.println(todo.toString());
-                        System.out.println("Now you have " + list.size() + " tasks in your list.");
+                        todo.addResponse(list.size());
                         break;
                     case "deadline":
                         if (inputSplit.length < 2) {
@@ -41,9 +38,7 @@ public class Duke {
                         String dead = inputSplit[1].split("/by ", 2)[1];
                         Task deadline = new Deadline(desc, dead);
                         list.add(deadline);
-                        System.out.println("Got it. I've added this task: ");
-                        System.out.println(deadline.toString());
-                        System.out.println("Now you have " + list.size() + " tasks in your list.");
+                        deadline.addResponse(list.size());
                         break;
                     case "event":
                         if (inputSplit.length < 2) {
@@ -55,14 +50,15 @@ public class Duke {
                         String at = inputSplit[1].split("/at ", 2)[1];
                         Task event = new Event(name, at);
                         list.add(event);
-                        System.out.println("Got it. I've added this task: ");
-                        System.out.println(event.toString());
-                        System.out.println("Now you have " + list.size() + " tasks in your list.");
+                        event.addResponse(list.size());
                         break;
                     case "bye":
                         loop = false;
                         break;
                     case "list":
+                        if (list.size() == 0) {
+                            throw new DukeException("The list is empty!!");
+                        }
                         for (int i = 1; i <= list.size(); i++) {
                             Task task = list.get(i - 1);
                             System.out.println(i + "."
