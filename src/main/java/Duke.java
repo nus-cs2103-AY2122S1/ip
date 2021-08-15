@@ -29,6 +29,8 @@ public class Duke {
     private final static String EVENTSEPARATOR = " /at ";
     /** Keyword for marking task as Todos. */
     private final static String TODOS = "todo";
+    /** Keyword for deleting task. */
+    private final static String DELETE = "delete";
     /** Line separator. */
     private final static String LINEBREAK = "\t____________________________________________________________";
 
@@ -54,7 +56,7 @@ public class Duke {
         String message;
         while (true) {
             message = sc.nextLine().strip();
-            String command = message.split(" ")[0];
+            String command = message.split(" ")[0].toLowerCase();
 
             if (command.equals(EXIT))
                 break;
@@ -87,6 +89,14 @@ public class Duke {
                     addTodo(message.substring(TODOS.length() + 1));
                 } catch (IndexOutOfBoundsException e) {
                     todoErrorMessage();
+                }
+            else if (command.equals(DELETE))
+                try {
+                    deleteTask(Integer.parseInt(message.substring(DELETE.length() + 1)));
+                } catch (NumberFormatException e) {
+                    deleteErrorMessage();
+                } catch (IndexOutOfBoundsException e) {
+                    deleteIndexErrorMessage();
                 }
             else
                 chatErrorMessage();
@@ -166,6 +176,13 @@ public class Duke {
             printMessage("Ugh! This task was already done:", task.toString());
     }
 
+    private void deleteTask(int n) {
+        Task task = taskList.remove(n - 1);
+        printMessage("Noted. I've removed this task:",
+                task.toString(),
+                String.format("Now you have %o task(s).", taskList.size()));
+    }
+
     /**
      * Print out the greeting message used when the chat started.
      */
@@ -200,7 +217,8 @@ public class Duke {
                 "deadline <description> /by <date/time> - Adds a new deadline to the task list",
                 "event <description> /at <date/time> - Adds a new event to the task list",
                 "list - return a list of all the task",
-                "done <number> - Sets the task to be done");
+                "done <number> - Sets the task to be done",
+                "delete <number> - Delete the task");
     }
 
     /**
@@ -236,6 +254,22 @@ public class Duke {
                 "deadline <description> /by <date/time>");
     }
 
+    /**
+     * Prints out error message if done message does not contains number.
+     */
+    private void deleteErrorMessage() {
+        printMessage("Ugh! The command should be in this format:",
+                "delete <number>");
+    }
+
+    /**
+     * Prints out error message if done message is out of range.
+     */
+    private void deleteIndexErrorMessage() {
+        printMessage("Ugh! The command should be in this format:",
+                "delete <number>",
+                "Note: number is based on the number from command 'list'");
+    }
 
     /**
      * Prints out error message if event message does not contains /at.
