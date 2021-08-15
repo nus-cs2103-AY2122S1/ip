@@ -17,6 +17,10 @@ public class Task {
         }
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
+
     public void setDone(boolean done) {
         this.isDone = done;
     }

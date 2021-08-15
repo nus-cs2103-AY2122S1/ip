@@ -28,10 +28,29 @@ public class Duke {
 
     //This method adds the user's input to the reminder list
     private static void add(String userInput, ArrayList<Task> userInputRecord) {
-        Task task = new Task(userInput);
+        Task task;
+        if(userInput.startsWith("todo")) {
+            String description = userInput.substring(5,userInput.length());
+            task = new ToDo(description);
+        } else if(userInput.startsWith("deadline")) {
+            int byPosition = userInput.lastIndexOf("/by");
+            String ddl = userInput.substring(byPosition + 4);
+            String description = userInput.substring(9,byPosition); //Length of "deadline " = 9
+            task = new Deadline(description,ddl);
+        } else if(userInput.startsWith("event")) {
+            int atPosition = userInput.lastIndexOf("/at");
+            String time = userInput.substring(atPosition + 4);
+            String description = userInput.substring(6,atPosition);//Length of "event " = 6
+            task = new Event(description,time);
+        } else {
+            task = new Task(userInput);
+        }
+
         userInputRecord.add(task);
         System.out.println("    ____________________________________________________________\n" +
-                "      added: " + userInput + "\n" +
+                "     Got it. I've added this task: \n" +
+                "     " + task.toString() + "\n" +
+                "     Now you have " + userInputRecord.size() + " tasks in the list. \n" +
                 "    ____________________________________________________________");
     }
 
@@ -75,7 +94,6 @@ public class Duke {
             taskDone.setDone(true);
             userInputRecord.set(itemToComplete, taskDone);
             System.out.println("    ____________________________________________________________\n" +
-                    "     Nice! I've marked this task as done: \n" +
                     "     " + userInputRecord.get(itemToComplete) + "\n" +
                     "    ____________________________________________________________");
         } catch (IndexOutOfBoundsException e) {
