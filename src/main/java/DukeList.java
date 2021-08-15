@@ -19,4 +19,13 @@ public class DukeList {
     }
 
 
+    public void done(int item) {
+        Task task = list[item - 1];
+        task.done();
+
+        String response = "Nice! I've marked this task as done:\n";
+        System.out.println(response + task.toString());
+    }
+
+
 }
