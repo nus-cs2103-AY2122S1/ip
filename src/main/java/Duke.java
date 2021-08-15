@@ -17,7 +17,7 @@ public class Duke {
     private final static String EXIT = "bye";
     /** Keyword for listing out all the task. */
     private final static String LIST = "list";
-    /** Keyword for marking task as done */
+    /** Keyword for marking task as done. */
     private final static String DONE = "done";
     /** Line separator. */
     private final static String LINEBREAK = "\t____________________________________________________________";
@@ -71,8 +71,8 @@ public class Duke {
 
     /**
      * Echos the message the user sends for level-1.
-     * @deprecated Level-2
      * @param s Message user sent.
+     * @deprecated Level-2
      */
     private void echoMessage(String s) {
         printMessage(s);
@@ -132,7 +132,7 @@ public class Duke {
     }
 
     /**
-     * Main function to run the chatbot
+     * Main function to run the chatbot.
      */
     public static void main(String[] args) {
         Duke duke = new Duke();

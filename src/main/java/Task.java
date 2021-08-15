@@ -4,7 +4,7 @@
 public class Task {
     /** Stores the task. */
     private String task;
-    /** Stores if the task is done */
+    /** Stores if the task is done. */
     private boolean done;
 
     /**
@@ -18,8 +18,8 @@ public class Task {
 
     /**
      * Marks the task as done.
-     *
-     * If task is successfully marked as done, true will be returned. If task is not successfully marked as done, fasle will be returned instead.
+     * If task is successfully marked as done, true will be returned.
+     * If task is not successfully marked as done, fasle will be returned instead.
      * @return if update is successful.
      */
     public boolean markDone() {
@@ -29,7 +29,7 @@ public class Task {
         return true;
     }
 
-    /** Checks if task is done or not */
+    /** Checks if task is done or not. */
     public boolean isDone() {
         return done;
     }
@@ -44,6 +44,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return (done ? "[X] " : "[ ] ")+ task.toString();
+        return (done ? "[X] " : "[ ] ") + task.toString();
     }
 }
