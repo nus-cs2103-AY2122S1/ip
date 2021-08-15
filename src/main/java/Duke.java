@@ -66,11 +66,21 @@ public class Duke {
                         }
                         break;
                     case "done":
-                        int index = Integer.parseInt(inputSplit[1]);
-                        Task task = list.get(index - 1);
-                        task.toggleCompleted();
-                        System.out.println("Nice! I've marked this task as done: ");
-                        System.out.println("[X] " + task.getName());
+                        if(inputSplit.length < 2) {
+                            throw new DukeException("Please enter the index of the task you wish to delete.");
+                        }
+                        try {
+                            int index = Integer.parseInt(inputSplit[1]);
+                            if (index > list.size() || index <= 0) {
+                                throw new DukeException("That number is not in the list!");
+                            }
+                            Task task = list.get(index - 1);
+                            task.toggleCompleted();
+                            System.out.println("Nice! I've marked this task as done: ");
+                            System.out.println(task);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Please input a proper number pls");
+                        }
                         break;
                     case "delete":
                         int i = Integer.parseInt(inputSplit[1]);
