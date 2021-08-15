@@ -1,26 +1,31 @@
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+
 public class Storage {
 
-    private String[] data;
-    private int pos;
+    private LinkedHashMap<String, Task> mapper;
 
     public Storage() {
-        data = new String[100];
-        pos = 0;
+        mapper = new LinkedHashMap<>();
     }
 
     public String add(String action) {
-        data[pos] = action;
-        pos++;
+        mapper.put(action, new Task(action));
         return "added: " + action;
     }
 
     public String[] getStorage() {
-        String[] temp = new String[pos];
-        for(int x = 0; x < pos; x++){
-            String list_pos = Integer.toString(x+1);
-            temp[x] = list_pos + ". " + data[x];
+        Collection<Task> values = mapper.values();
+        Iterator<Task> look = values.iterator();
+        String[] check = new String[mapper.size()];;
+        int iter_pos = 0;
+        while (look.hasNext()){
+            String p_pos = (iter_pos + 1) + ". ";
+            check[iter_pos] = p_pos + look.next().toString();
+            iter_pos++;
         }
-        return temp;
+        return check;
     }
 
 }
