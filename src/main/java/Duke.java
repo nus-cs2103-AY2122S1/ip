@@ -1,8 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private static boolean run;
-    private static Task[] tasks;
+    private static ArrayList<Task> tasks;
     private static int index;
 
     public static void main(String[] args) {
@@ -20,7 +21,7 @@ public class Duke {
         System.out.println(greeting);
 
         run = true;
-        tasks = new Task[100];
+        tasks = new ArrayList<Task>();
 
         Scanner inputReader = new Scanner(System.in);
 
@@ -35,6 +36,8 @@ public class Duke {
     public static boolean eval(String input) {
         String[] inputArray = input.split(" ");
         String[] params;
+        int selectedTask;
+
         switch (inputArray[0]) {
             case "bye":
                 System.out.println("____________________________________________________________\n"
@@ -44,28 +47,28 @@ public class Duke {
             case "list":
                 System.out.println("____________________________________________________________\n");
                 for(int i = 0; i < index; i++) {
-                    System.out.printf("%d. %s\n", i + 1, tasks[i]);
+                    System.out.printf("%d. %s\n", i + 1, tasks.get(i).toString());
                 }
                 System.out.println("____________________________________________________________");
                 return true;
             case "done":
-                int taskIndex = Integer.parseInt(inputArray[1]) - 1;
-                tasks[taskIndex].setDone();
+                selectedTask = Integer.parseInt(inputArray[1]) - 1;
+                tasks.get(selectedTask).setDone();
 
                 System.out.println("____________________________________________________________\n"
                 + "Nice! I've marked this task as done: \n"
-                + tasks[taskIndex].toString() + "\n"
+                + tasks.get(selectedTask).toString() + "\n"
                 + "____________________________________________________________\n");
                 return true;
             case "event":
                 params = input.split("/at");
                 params[0] = params[0].substring(6, params[0].length() - 1);
                 params[1] = params[1].substring(1);
-                tasks[index] = new Event(params[0], params[1]);
+                tasks.add(new Event(params[0], params[1]));
 
                 System.out.println("____________________________________________________________\n"
                         + "Got it. I've added this task: \n"
-                        + tasks[index].toString() + "\n"
+                        + tasks.get(index).toString() + "\n"
                         + "____________________________________________________________\n");
                 index++;
                 return true;
@@ -73,28 +76,38 @@ public class Duke {
                 params = input.split("/by");
                 params[0] = params[0].substring(9, params[0].length() - 1);
                 params[1] = params[1].substring(1);
-                tasks[index] = new Deadline(params[0], params[1]);
+                tasks.add(new Deadline(params[0], params[1]));
 
                 System.out.println("____________________________________________________________\n"
                         + "Got it. I've added this task: \n"
-                        + tasks[index].toString() + "\n"
+                        + tasks.get(index).toString() + "\n"
                         + "____________________________________________________________\n");
                 index++;
                 return true;
             case "todo":
-                tasks[index] = new ToDo(input.substring(5));
+                try {
+                    String name = input.substring(5);
+                    if (name.equals("")) {
+                        throw new StringIndexOutOfBoundsException("empty todo description");
+                    }
+                    tasks.add(new ToDo(name));
+                    System.out.println("____________________________________________________________\n"
+                            + "Got it. I've added this task: \n"
+                            + tasks.get(index).toString() + "\n"
+                            + "____________________________________________________________\n");
+                    index++;
+                }
+                catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("____________________________________________________________\n" +
+                            "☹ OOPS!!! The description of a todo cannot be empty.\n" +
+                            "____________________________________________________________");
+                }
 
-                System.out.println("____________________________________________________________\n"
-                        + "Got it. I've added this task: \n"
-                        + tasks[index].toString() + "\n"
-                        + "____________________________________________________________\n");
-                index++;
                 return true;
             default:
-                System.out.println("____________________________________________________________\n"
-                        + "Got it. I've added this task: \n"
-                        + tasks[index].toString() + "\n"
-                        + "____________________________________________________________\n");
+                System.out.println("____________________________________________________________\n" +
+                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "____________________________________________________________\n");
 //                Might need to check index < 100 in the future
                 index++;
                 return true;
