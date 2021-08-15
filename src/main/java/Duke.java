@@ -1,8 +1,12 @@
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final String LINE = "     ________________________________________\n"; // 5 spaces, 40 dashes
     private static final String INDENT = "     "; // 5 spaces
+    private List<String> taskList;
+    private int taskNo;
     private boolean isRunning;
 
     public static void main(String[] args) {
@@ -15,10 +19,12 @@ public class Duke {
 
         Duke duke = new Duke();
         duke.greet();
-        duke.echo();
+        duke.converse();
     }
 
     public Duke() {
+        taskList = new ArrayList<>(100);
+        taskNo = 0;
         isRunning = true;
     }
 
@@ -30,18 +36,28 @@ public class Duke {
         System.out.println(greeting);
     }
 
-    public void echo() {
+    public void converse() {
         Scanner scanner = new Scanner(System.in);
         while (isRunning){
             String userInput = scanner.nextLine();
+
             if (userInput.equals("bye")) {
                 // Exit
                 System.out.println(LINE + INDENT + "Bye. Hope to see you again soon!\n" + LINE);
                 isRunning = false;
+            } else if (userInput.equals("list")){
+                // List all existing tasks
+                System.out.print(LINE);
+                for (int i = 0; i < taskNo; i++) {
+                    System.out.println(INDENT + (i+1) + ". " + taskList.get(i));
+                }
+                System.out.println(LINE);
             } else {
-                System.out.println(LINE + INDENT + userInput + "\n" + LINE);
+                // Add task to list
+                taskList.add(userInput);
+                taskNo += 1;
+                System.out.println(LINE + INDENT + "added: " + userInput + "\n" + LINE);
             }
         }
     }
-
 }
