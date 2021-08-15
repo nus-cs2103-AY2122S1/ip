@@ -43,8 +43,13 @@ public class Duke {
         String input = scanner.nextLine().trim();
 
         while(!input.equalsIgnoreCase(EXIT_TAG)) {
-            checkTag(input);
-            input = scanner.nextLine().trim();
+            try {
+                checkTag(input);
+            } catch (DukeException e) {
+                printFormattedMsg(e.getMessage());
+            } finally {
+                input = scanner.nextLine().trim();
+            }
         }
 
         // close the scanner as the bot is terminated.
@@ -72,8 +77,9 @@ public class Duke {
      * Otherwise, adds the item to the list.
      *
      * @param msg User's input.
+     * @throws UnknownTagException Tag used is undefined.
      */
-    private void checkTag(String msg) {
+    private void checkTag(String msg) throws UnknownTagException {
         String msgToCheck = msg.toLowerCase();
         try {
             if (msgToCheck.equals(LIST_TAG)) {
@@ -86,13 +92,11 @@ public class Duke {
                 addDeadline(msg);
             } else if (msgToCheck.contains(EVENT_TAG)) {
                 addEvent(msg);
+            } else {
+                throw new UnknownTagException();
             }
-        } catch (StringIndexOutOfBoundsException e){
-            String content = String.format(" Invalid input: Wrong format!");
-            printFormattedMsg(content);
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            String content = String.format(" Invalid input: %s", e.getMessage());
-            printFormattedMsg(content);
+        } catch (DukeException e) {
+            printFormattedMsg(e.getMessage());
         }
     }
 
@@ -100,8 +104,9 @@ public class Duke {
      * Add an event to the list.
      *
      * @param msg Input from user
+     * @throws IllegalFormatException Wrong format used by user.
      */
-    private void addEvent(String msg) {
+    private void addEvent(String msg) throws IllegalFormatException{
         Task newTask = new Event(getTaskDesc(msg), getTaskDates(msg));
         addTask(newTask);
     }
@@ -110,8 +115,9 @@ public class Duke {
      * Add a deadline to the list.
      *
      * @param msg Input from user
+     * @throws IllegalFormatException Wrong format used by user.
      */
-    private void addDeadline(String msg) {
+    private void addDeadline(String msg) throws IllegalFormatException{
         Task newTask = new Deadline(getTaskDesc(msg), getTaskDates(msg));
         addTask(newTask);
     }
@@ -120,8 +126,9 @@ public class Duke {
      * Add a todo to the list.
      *
      * @param msg Input from user.
+     * @throws IllegalFormatException Wrong format used by user.
      */
-    private void addTodo(String msg) {
+    private void addTodo(String msg) throws IllegalFormatException{
         Task newTask = new Todo(getTodoDesc(msg));
         addTask(newTask);
     }
@@ -147,8 +154,10 @@ public class Duke {
      * Mark the task as completed once it is done.
      *
      * @param msg Input from user.
+     * @throws NoSuchTaskException Invalid id used.
+     * @throws IllegalFormatException Wrong format used by user.
      */
-    private void taskDone(String msg) {
+    private void taskDone(String msg) throws NoSuchTaskException, IllegalFormatException{
         int index = getTaskId(msg);
         Task item = this.items.get(index);
         item.taskCompleted();
@@ -162,14 +171,32 @@ public class Duke {
      *
      * @param msg Input of user
      * @return An integer indicating the id of the task that has been completed.
-     * @throws IndexOutOfBoundsException Invalid id enter.
-     * @throws NumberFormatException Invalid id enter.
+     * @throws NoSuchTaskException Invalid id enter.
+     * @throws IllegalFormatException Invalid id enter.
      */
-    private int getTaskId(String msg) throws IndexOutOfBoundsException, NumberFormatException {
+    private int getTaskId(String msg) throws NoSuchTaskException, IllegalFormatException {
         int position = msg.indexOf(" ");
-        int index = Integer.parseInt(msg.substring(position + 1)) - 1;
 
-        return index;
+        if (position >= msg.length() || position < 0) {
+            throw new IllegalFormatException();
+        } else {
+
+            try {
+                int index = Integer.parseInt(msg.substring(position + 1)) - 1;
+
+                if (index >= items.size()) {
+                    throw new NoSuchTaskException();
+                }
+
+                if (index > msg.length() || index < 0) {
+                    throw new IllegalFormatException();
+                }
+
+                return index;
+            } catch (NumberFormatException e) {
+                throw new IllegalFormatException();
+            }
+        }
     }
 
     /**
@@ -179,10 +206,14 @@ public class Duke {
      * @return A String representing the description of the task.
      * @throws StringIndexOutOfBoundsException Wrong Format used by the user.
      */
-    private String getTodoDesc(String msg) throws StringIndexOutOfBoundsException{
-        int postion = msg.indexOf(" ");
+    private String getTodoDesc(String msg) throws IllegalFormatException{
+        int position = msg.indexOf(" ");
 
-        return msg.substring(postion).trim();
+        if (position >= msg.length() || position < 0) {
+            throw new IllegalFormatException();
+        }
+
+        return msg.substring(position).trim();
     }
 
     /**
@@ -190,11 +221,15 @@ public class Duke {
      *
      * @param msg Input from user
      * @return A String representing the description of the task.
-     * @throws StringIndexOutOfBoundsException Wrong Format used by the user.
+     * @throws IllegalFormatException Wrong Format used by the user.
      */
-    private String getTaskDesc(String msg) throws StringIndexOutOfBoundsException{
+    private String getTaskDesc(String msg) throws IllegalFormatException{
         int startPosition = msg.indexOf(" ");
         int endPosition = msg.indexOf("/");
+
+        if (startPosition < 0 || startPosition >= msg.length() || endPosition < 0 || endPosition >= msg.length()) {
+            throw new IllegalFormatException();
+        }
 
         return msg.substring(startPosition, endPosition).trim();
     }
@@ -204,10 +239,14 @@ public class Duke {
      *
      * @param msg Input from user.
      * @return A String representing the date (deadline type) / time (event type).
-     * @throws StringIndexOutOfBoundsException Wrong Format used by the user.
+     * @throws IllegalFormatException Wrong Format used by the user.
      */
-    private String getTaskDates(String msg) throws StringIndexOutOfBoundsException{
+    private String getTaskDates(String msg) throws IllegalFormatException{
         int position = msg.indexOf("/") + 2;
+
+        if (position < 2 || position >= msg.length()) {
+            throw new IllegalFormatException();
+        }
 
         return msg.substring(position + 1).trim();
     }
