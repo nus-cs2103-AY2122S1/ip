@@ -7,7 +7,7 @@ package duke;
  */
 public class Duke {
     /**
-     * Initialises the Duke chatbot.
+     * Initialises and runs the Duke chatbot.
      * Command line arguments are ignored.
      *
      * @param args The command line arguments.

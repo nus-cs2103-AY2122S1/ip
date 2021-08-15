@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Represents a task with a deadline.
+ *
+ * @author Jay Aljelo Saez Ting
+ */
 public class DeadlineTask extends TemporalTask {
     private static final String TYPE_MARK = "D";
     private static final String TIME_RELATION = "by";

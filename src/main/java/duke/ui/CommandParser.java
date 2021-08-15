@@ -24,7 +24,7 @@ public class CommandParser {
      *
      * @param command The command.
      * @return The type of command.
-     * @throws IllegalArgumentException If the command is empty or the command does not exist.
+     * @throws IllegalArgumentException If the command is empty, or the command does not exist.
      */
     public CommandType getCommandTypeFromCommand(String command) throws IllegalArgumentException {
         StringTokenizer st = new StringTokenizer(command);
@@ -99,6 +99,13 @@ public class CommandParser {
         return new ToDoTask(taskDescription);
     }
 
+    /**
+     * Parses an "Add Deadline Task" command to get the deadline task.
+     *
+     * @param command The "Add Deadline Task" command.
+     * @return The deadline task.
+     * @throws IllegalArgumentException If the command is empty, not an "Add Deadline Task" command, or malformed.
+     */
     public DeadlineTask getDeadlineTask(String command) throws IllegalArgumentException {
         String[] tokens = command.split(" ");
         if (tokens.length == 0) {
@@ -132,6 +139,13 @@ public class CommandParser {
         return new DeadlineTask(taskDescription.toString().strip(), deadline.toString().strip());
     }
 
+    /**
+     * Parses an "Add Event Task" command to get the event task.
+     *
+     * @param command The "Add Event Task" command.
+     * @return The event task.
+     * @throws IllegalArgumentException If the command is empty, not an "Add Event Task" command, or malformed.
+     */
     public EventTask getEventTask(String command) throws IllegalArgumentException {
         String[] tokens = command.split(" ");
         if (tokens.length == 0) {

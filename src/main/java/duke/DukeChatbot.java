@@ -105,8 +105,9 @@ public class DukeChatbot {
     private void addTask(Task task) {
         tasks.add(task);
         StringBuilder sb = new StringBuilder("Got it. I've added this task:\n");
-        sb.append(messageFormatter.indent(task.toString(), 2));
+        sb.append(messageFormatter.formatTask(task)).append("\n");
         int n = tasks.size();
+        // Check whether singular or plural should be printed.
         if (n != 1) {
             sb.append(String.format("Now you have %d tasks in the list.\n", n));
         } else {
@@ -117,10 +118,7 @@ public class DukeChatbot {
 
     private void printTasks() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
-        int n = tasks.size();
-        for (int i = 0; i < n; i++) {
-            sb.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
-        }
+        sb.append(messageFormatter.formatTasksList(tasks));
         printFormattedMessage(sb.toString());
     }
 
@@ -133,7 +131,7 @@ public class DukeChatbot {
         }
         task.markDone();
         StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:\n");
-        sb.append(messageFormatter.indent(task.toString(), 2));
+        sb.append(messageFormatter.formatTask(task));
         printFormattedMessage(sb.toString());
     }
 
@@ -143,5 +141,6 @@ public class DukeChatbot {
 
     private void printFormattedMessage(String message) {
         System.out.println(messageFormatter.getFormattedMessage(message));
+        System.out.println();
     }
 }
