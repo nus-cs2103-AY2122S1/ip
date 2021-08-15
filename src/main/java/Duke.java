@@ -1,6 +1,19 @@
 import java.util.*;
 public class Duke {
+    List<String> commands = new ArrayList<>();
+
+    void list(){
+        for(int i = 0; i < commands.size(); i++){
+            System.out.println((i+1) + ". " + commands.get(i));
+        }
+    }
+    void add(String command){
+        commands.add(command);
+        System.out.println("Added task: " + command);
+    }
+
     public static void main(String[] args) {
+        Duke duke = new Duke();
         String logo = "   _       _           \n"
                 + "  /_\\  ___| |__  _   _ \n"
                 + " //_\\\\/ __| '_ \\| | | |\n"
@@ -19,8 +32,11 @@ public class Duke {
             if(command.equalsIgnoreCase("bye")){
                 System.out.println("\n\tByeBye! Hope to see you again!");
                 break;
-            }else {
-                System.out.println("\n\t"+command);
+            } else if(command.equalsIgnoreCase("list")){
+                duke.list();
+            }
+            else {
+                duke.add(command);
             }
             System.out.println("____________________________________________________________");
         }
