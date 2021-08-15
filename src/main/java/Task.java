@@ -23,7 +23,11 @@ public class Task {
         return isDone;
     }
 
+    public String toString(){
+        return "[" + getStatusIcon() + "]" + " " + description;
+    }
+
     public void displayTask(){
-        System.out.println("[" + getStatusIcon() + "]" + " " + description);
+        System.out.println(toString());
     }
 }

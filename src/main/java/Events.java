@@ -1,13 +1,18 @@
 public class Events extends Task{
-    protected String description;
-    protected boolean isDone;
+    protected String by;
 
-    public Events(String description){
+    public Events(String description, String by){
         super(description);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (by: " + by + ")";
     }
 
     @Override
     public void displayTask(){
-        System.out.println("[E]"+"[" + getStatusIcon() + "]" + " " + description);
+        System.out.println(toString());
     }
 }
