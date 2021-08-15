@@ -1,3 +1,6 @@
+/**
+ * This class encapsulates a deadline task in the Duke Application.
+ */
 public class Deadline extends Task {
     private String by;
 

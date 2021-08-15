@@ -1,3 +1,6 @@
+/**
+ * This class encapsulates an event task in the Duke Application.
+ */
 public class Event extends Task {
     private String at;
 

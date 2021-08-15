@@ -1,3 +1,6 @@
+/**
+ * This class encapsulates a todo task in the Duke Application.
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);

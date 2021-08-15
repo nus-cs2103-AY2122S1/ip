@@ -5,6 +5,9 @@ public class Duke {
     private final String LINE = "-----------------------------------------------------------------------\n";
     private final ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * Starts the Duke application.
+     */
     private void startApp() {
         // Print welcome text
         String logo = " ____        _        \n"
@@ -21,6 +24,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Handles input commands to the Duke application.
+     *
+     * @param command The input command from the user.
+     */
     private void handleCommand(String command) {
         try {
             if (command.equals("")) {
@@ -46,11 +54,17 @@ public class Duke {
         }
     }
 
+    /**
+     * Handles the "bye" command.
+     */
     private void handleBye() {
         System.out.println(LINE + "Bye. Hope to see you again soon!\n" + LINE);
         System.exit(0);
     }
 
+    /**
+     * Handles the "list" command.
+     */
     private void handleList() {
         System.out.println(LINE + "Here are the tasks in your list:");
         for (int i = 0; i < this.tasks.size(); i++) {
@@ -59,6 +73,12 @@ public class Duke {
         System.out.println(LINE);
     }
 
+    /**
+     * Handles the "done {taskIndex}" command.
+     *
+     * @param input The input command from the user.
+     * @throws InvalidTaskIndexException
+     */
     private void handleDone(String input) throws InvalidTaskIndexException {
         String[] splitInput = input.split(" ");
         int taskIdx = -1;
@@ -81,6 +101,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Handles the "todo {description}" command.
+     *
+     * @param command The input command from the user.
+     * @throws EmptyTodoDescriptionException
+     */
     private void handleTodo(String command) throws EmptyTodoDescriptionException {
         String description = command.substring(4).trim();
         if (description.equals("")) {
@@ -91,6 +117,12 @@ public class Duke {
         System.out.println(this.formatAddTaskString(newTodo));
     }
 
+    /**
+     * Handles the "deadline {description} /by {time}" command.
+     *
+     * @param command The input command from the user.
+     * @throws InvalidFormatException
+     */
     private void handleDeadline(String command) throws InvalidFormatException {
         this.validateRegex(command, "^deadline .+ /by .+", "deadline {description} /by {time}");
         String[] info = command.substring(8).split("/by");
@@ -99,6 +131,12 @@ public class Duke {
         System.out.println(formatAddTaskString(newDeadline));
     }
 
+    /**
+     * Handles the "event {description} /at {time}" command.
+     *
+     * @param command The input command from the user.
+     * @throws InvalidFormatException
+     */
     private void handleEvent(String command) throws InvalidFormatException {
         this.validateRegex(command, "^event .+ /at .+", "event {description} /at {time}");
         String[] info = command.substring(5).split("/at");
@@ -107,12 +145,26 @@ public class Duke {
         System.out.println(formatAddTaskString(newEvent));
     }
 
+    /**
+     * Formats the inputted task as a string to be displayed back to the user.
+     *
+     * @param task The Task created.
+     * @return The string to be displayed to the user during addition of a new task.
+     */
     private String formatAddTaskString(Task task) {
         return LINE +
                 String.format("Got it. I've added this task:\n  %s\nNow you have %d task%s in the list.\n",
                         task, this.tasks.size(), this.tasks.size() == 1 ? "" : "s") + LINE;
     }
 
+    /**
+     * Validates the given string against the provided regex.
+     *
+     * @param str The given string.
+     * @param regex The given regex.
+     * @param validFormat The correct input format to be displayed to the user when this regex fails.
+     * @throws InvalidFormatException
+     */
     private void validateRegex(String str, String regex, String validFormat) throws InvalidFormatException {
         if (!str.matches(regex)) {
             throw new InvalidFormatException(validFormat);
