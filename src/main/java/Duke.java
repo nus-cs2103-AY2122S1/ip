@@ -49,8 +49,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for (Task listItem : strList) {
                     System.out.println(count + "."
-                            + "[" + listItem.getStatusIcon() + "] "
-                            + listItem.getDescription());
+                            + listItem.toString());
                     count++;
                 }
             }
@@ -61,6 +60,39 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:\n"
                                     + "[" + doneTask.getStatusIcon() + "] "
                                     + doneTask.getDescription());
+            }
+            else if (str.startsWith("todo")) {
+                Todo newTodo = new Todo(str.replaceFirst("todo", ""));
+                strList.add(newTodo);
+                int numOfTasks = strList.size();
+                System.out.println("Got it. I've added this task:\n"
+                                    + newTodo.toString() + "\n"
+                                    + "Now you have " + numOfTasks
+                                    + " tasks in the list.");
+            }
+            else if (str.startsWith("deadline")) {
+                String desc = str.split("/")[0]
+                        .replaceFirst("deadline", "");
+                String by = str.split("/by")[1];
+                Deadline newDeadline = new Deadline(desc, by);
+                strList.add(newDeadline);
+                int numOfTasks = strList.size();
+                System.out.println("Got it. I've added this task:\n"
+                        + newDeadline.toString() + "\n"
+                        + "Now you have " + numOfTasks
+                        + " tasks in the list.");
+            }
+            else if (str.startsWith("event")) {
+                String desc = str.split("/")[0]
+                        .replaceFirst("event", "");
+                String startEnd = str.split("/at")[1];
+                Event newEvent = new Event(desc, startEnd);
+                strList.add(newEvent);
+                int numOfTasks = strList.size();
+                System.out.println("Got it. I've added this task:\n"
+                        + newEvent.toString() + "\n"
+                        + "Now you have " + numOfTasks
+                        + " tasks in the list.");
             }
             else {
                 strList.add(new Task(str));
