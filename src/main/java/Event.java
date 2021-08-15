@@ -1,3 +1,9 @@
+/**
+ * Event class used to represent a task that has a start and end date.
+ * Contains method that
+ * (i) overrides the Parent toString method to display the task type,
+ * as well as status and description.
+ */
 public class Event extends Task {
     protected String timeframe;
 
@@ -6,6 +12,12 @@ public class Event extends Task {
         this.timeframe = timeframe;
     }
 
+    /**
+     * Overriding toString method to display the relevant information
+     *
+     * @return String type object that includes the task type, parent
+     * toString method(), and timeframe.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.timeframe + ")";

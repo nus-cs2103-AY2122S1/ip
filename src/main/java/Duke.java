@@ -1,12 +1,40 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Duke class used to run the Duke chat-bot.
+ * Contains methods that
+ * (i)    runs the chat-bot
+ * (ii)   exits the chat-bot
+ * (iii)  lists all tasks
+ * (iv)   marks a given task as done
+ * (v)    deletes a given task
+ * (vi)   inputs a deadline task
+ * (vii)  inputs an event task
+ * (viii) inputs a todo task
+ * (ix)   check user input for keywords
+ * (x)    display separator line
+ * (xi)   displays total number of tasks
+ * (xii)  counts number of spaces in user input
+ * (xiii) provide a user guide
+ */
 public class Duke {
-    private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static final ArrayList<Task> taskList = new ArrayList<Task>();
 
     private enum Keywords {bye, list, done, todo, deadline, event, allCmd, delete}
 
     public static void main(String[] args) {
+        Duke.run();
+    }
+
+    /**
+     * The run method runs the Duke chat-bot.
+     * By taking in user keyboard input, it checks the input for keywords
+     * and responds accordingly. Invalid input is caught and the custom
+     * DukeException is thrown to inform the user that the command is invalid
+     * or not properly formatted.
+     */
+    public static void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,10 +42,6 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you today?");
-        Duke.run();
-    }
-
-    public static void run() {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -72,11 +96,16 @@ public class Duke {
         }
     }
 
-    public static void byeCommand() throws DukeException {
+    public static void byeCommand() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void listCommand() throws DukeException {
+    /**
+     * The listCommand() method lists all tasks.
+     * Individual tasks are typecast into their respective classes in order for
+     * the toString() methods to work as intended.
+     */
+    public static void listCommand() {
         int count = 1;
         System.out.println("Here are the tasks in your list:");
         for (Task t : taskList) {
@@ -97,6 +126,13 @@ public class Duke {
         }
     }
 
+    /**
+     * The doneCommand() method marks a given Task as completed.
+     *
+     * @param des the user input into the Duke chat-box.
+     * @throws DukeException if done command is not formatted properly
+     *                       or if task has already been completed.
+     */
     public static void doneCommand(String des) throws DukeException {
         String sNum = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(sNum);
@@ -118,6 +154,13 @@ public class Duke {
         }
     }
 
+    /**
+     * The deleteCommand() method deletes a given command.
+     *
+     * @param des the user input into the Duke chat-box.
+     * @throws DukeException if input number is not valid or if too many arguments
+     *                       are provided to deleteCommand().
+     */
     public static void deleteCommand(String des) throws DukeException {
         String sNum = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(sNum);
@@ -131,15 +174,22 @@ public class Duke {
         }
     }
 
+    /**
+     * The deadlineCommand() method inputs a Deadline task into the Duke chat-bot.
+     *
+     * @param des the user input into the Duke chat-box.
+     * @throws DukeException if input is not correctly formatted with task and due
+     *                       date arguments.
+     */
     public static void deadlineCommand(String des) throws DukeException {
         if (des.equals("deadline")) {
             throw new DukeException("\"deadline\" command not correctly formatted \nPlease insert task and due date arguments");
         }
-        if (!des.contains("/")) {
+        if (!des.contains("/by")) {
             throw new DukeException("\"deadline\" command not correctly formatted \nPlease do not forget to include \"by\" and insert due date argument");
         }
-        String description = des.substring(9, des.indexOf('/') - 1);
         try {
+            String description = des.substring(9, des.indexOf('/') - 1);
             String date = des.substring(des.indexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
             Task atHand = new Deadline(description, date);
             Deadline deadlineAtHand = (Deadline) atHand;
@@ -148,20 +198,27 @@ public class Duke {
             System.out.println(deadlineAtHand);
             Duke.numberOfTasks();
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("\"deadline\" command not correctly formatted \nPlease insert timeframe argument");
+            throw new DukeException("\"deadline\" command not correctly formatted");
         }
 
     }
 
+    /**
+     * The eventCommand() method inputs a Event task into the Duke chat-bot.
+     *
+     * @param des the user input into the Duke chat-box.
+     * @throws DukeException if input is not correctly formatted with task and
+     *                       timeframe arguments.
+     */
     public static void eventCommand(String des) throws DukeException {
         if (des.equals("event")) {
             throw new DukeException("\"event\" command not correctly formatted \nPlease insert task and timeframe arguments");
         }
-        if (!des.contains("/")) {
-            throw new DukeException("\"event\" command not correctly formatted \nPlease do not forget to include \"by\" and insert timeframe argument");
+        if (!des.contains("/at")) {
+            throw new DukeException("\"event\" command not correctly formatted \nPlease do not forget to include \"at\" and insert timeframe argument");
         }
-        String description = des.substring(6, des.indexOf('/') - 1);
         try {
+            String description = des.substring(6, des.indexOf('/') - 1);
             String timeframe = des.substring(des.indexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
             Task atHand = new Event(description, timeframe);
             Event eventAtHand = (Event) atHand;
@@ -170,11 +227,17 @@ public class Duke {
             System.out.println(eventAtHand);
             Duke.numberOfTasks();
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("\"event\" command not correctly formatted \nPlease insert timeframe argument");
+            throw new DukeException("\"event\" command not correctly formatted");
         }
 
     }
 
+    /**
+     * The toDoCommand() method inputs a ToDo task into the Duke chat-bot.
+     *
+     * @param des the user input into the Duke chat-box.
+     * @throws DukeException if input is not correctly formatted with task argument.
+     */
     public static void toDoCommand(String des) throws DukeException {
         if (des.equals("todo")) {
             throw new DukeException("\"todo\" command not correctly formatted \nPlease insert task argument");
@@ -188,6 +251,14 @@ public class Duke {
         Duke.numberOfTasks();
     }
 
+    /**
+     * The checkForKeyword() method checks user input for keywords and responds
+     * accordingly by calling the respective commands.
+     *
+     * @param des the user input into the Duke chat-box.
+     * @return String type object that informs the Duke.run() method which
+     * command should be called.
+     */
     public static String checkForKeyword(String des) {
         for (Keywords keyword : Keywords.values()) {
             if (keyword.name().equals("allCmd") && des.equals(keyword.name())) {
@@ -221,6 +292,9 @@ public class Duke {
         System.out.println("_____________________________________________________________________________________________________________");
     }
 
+    /**
+     * The numberOfTasks() method informs the user of the total number of tasks.
+     */
     public static void numberOfTasks() {
         if (taskList.size() == 1) {
             System.out.println("You now have " + taskList.size() + " task in the list");
@@ -229,6 +303,13 @@ public class Duke {
         }
     }
 
+    /**
+     * The countSpaces method counts the number of blank spaces in a given String.
+     *
+     * @param des the user input into the Duke chat-box.
+     * @return Integer type object that represents the number of blank spaces in
+     * the user input.
+     */
     public static int countSpaces(String des) {
         int count = 0;
         for (int i = 0; i < des.length(); i++) {
@@ -239,6 +320,11 @@ public class Duke {
         return count;
     }
 
+    /**
+     * The possibleCommands() method serves as an in-built user-guide that
+     * furnishes the user with information on how to use and format all
+     * the commands available.
+     */
     public static void possibleCommands() {
         System.out.println("The possible commands are as follows:");
         System.out.println();
@@ -263,6 +349,10 @@ public class Duke {
 
         System.out.println("6. event ------- Usage --> \"event project meeting /at Mon 2-4pm \", remember not to miss the \"/at\" symbol!");
         System.out.println("               - Inputs the an Event task into the task list");
+
+        System.out.println("7. delete ------ Usage --> delete x, where x is an integer.");
+        System.out.println("               - Deletes the corresponding task");
+        System.out.println();
 
     }
 }

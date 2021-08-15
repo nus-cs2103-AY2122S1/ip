@@ -13,10 +13,14 @@ list
 event
 event zoom meeting with Teo
 event zoom meeting with Teo /at
+event complete CS Project /by 2359HRs
+event /at 2300-0000HRs
 event zoom meeting with Teo /at 2pm-3pm
 deadline
 deadline complete CS Project
 deadline complete CS Project /by
+deadline complete CS Project /at 2359HRs
+deadline /by 2359HRs
 deadline complete CS Project /by 2359HRs
 todo
 list
