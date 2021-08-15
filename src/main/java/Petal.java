@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
@@ -50,7 +51,7 @@ public class Petal {
                     goodBye();
                     break;
                 case "done":
-                    markTaskAsDone(msg[1]);
+                    markTaskAsDone(message);
                     break;
                 case "delete":
                     deleteTask(msg[1]);
@@ -60,8 +61,7 @@ public class Petal {
                     break;
             }
         } catch (EmptyDescException | InvalidInputException | IndexOutOfBoundsException | NumberFormatException e1)  {
-            System.out.println(indentation);
-            System.out.println(e1.getMessage());
+            System.out.println(indentation + "\n" + e1.getMessage());
             requiredFormat();
         } catch (PetalException e) {
             e.printStackTrace();
@@ -82,6 +82,17 @@ public class Petal {
         System.out.println(todo + deadline + event + done + indentation);
     }
 
+    public ArrayList<String> arrayWithoutWhiteSpaces(String string) {
+        String[] partition = string.split(" ");
+        ArrayList<String> result = new ArrayList<>();
+        for (String s : partition) {
+            if (!s.equals(" ")) {
+                result.add(s);
+            }
+        }
+        return result;
+    }
+
     /**
      * Method which handles the remaining messages (assumed to be tasks)
      * @param message The messaged to be handled
@@ -89,19 +100,20 @@ public class Petal {
      */
     public void handleTask(String message) throws PetalException {
         Task task;
-        String typeOfTask = message.split(" ")[0];
+        String[] typeOfTask = message.split(" ");
         String desc = message.substring(message.indexOf(" ") + 1);
-        boolean isValidInput = typeOfTask.equals("todo") || typeOfTask.equals("deadline")
-                                                         || typeOfTask.equals("event");
+        boolean isValidInput = typeOfTask[0].equals("todo") || typeOfTask[0].equals("deadline")
+                                                            || typeOfTask[0].equals("event");
         if (!isValidInput) {
             throw new InvalidInputException("I did not understand what you said :(\n");
         }
-        boolean descNotAvail = desc.isBlank();
+        boolean descNotAvail = typeOfTask.length < 2 || typeOfTask[1].equals("/at")
+                                                     || typeOfTask[1].equals("/by");
         if (descNotAvail) {
             throw new EmptyDescException("It seems like there was no description"
                                           + "! Please enter a description.\n");
         }
-        switch (typeOfTask) {
+        switch (typeOfTask[0]) {
             case "todo":
                 task = new ToDo(desc);
                 break;
@@ -140,10 +152,8 @@ public class Petal {
                                            + toBeDeleted
                                            + "\nYou now have " + history.size() + " task(s)!\n"
                                            + indentation);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new NumberFormatException("Invalid task number given! Please enter another value!");
-        } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Invalid task number given! Please enter another value!");
         }
     }
 
@@ -175,12 +185,13 @@ public class Petal {
     public void markTaskAsDone(String message) throws IndexOutOfBoundsException,
                                                       NumberFormatException {
         try {
-            Task taskToBeCompleted = history.get(Integer.parseInt(message) - 1);
+            String indexOfTask = message.split(" ")[1];
+            Task taskToBeCompleted = history.get(Integer.parseInt(indexOfTask) - 1);
             taskToBeCompleted.taskDone();
         } catch (IndexOutOfBoundsException e1) { //Parsed string is not within size of history
             throw new IndexOutOfBoundsException("That was an invalid index! Please try again!\n");
-        } catch(NumberFormatException e2) { //If parsed string is not an integer
-             throw new NumberFormatException("Index was not a number! Please try again!\n");
+        } catch (NumberFormatException e2) { //If parsed string is not an integer
+            throw new NumberFormatException("Index was not a number! Please try again!\n");
         }
     }
 
@@ -193,6 +204,9 @@ public class Petal {
     }
 
     public static void main(String[] args) {
+        String s = "apple";
+        String[] example = s.split(" ");
+        System.out.println(example.length);
         Petal petal = new Petal();
         Scanner scanner = new Scanner(System.in);
         while(!petal.isBye()) {
