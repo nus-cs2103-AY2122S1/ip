@@ -1,4 +1,6 @@
+import exception.DukeException;
 import task.*;
+import utils.CommandUtils;
 
 import java.util.Scanner;
 
@@ -20,12 +22,6 @@ import java.util.Scanner;
 public class Duke {
     private static final String HORIZONTAL_LINE = "    ____________________________________________________________";
     private static final String INDENTATION = "     ";
-    private static final String TODO = "todo";
-    private static final String DEADLINE = "deadline";
-    private static final String EVENT = "event";
-    private static final String LIST = "list";
-    private static final String DONE = "done";
-    private static final String BYE = "bye";
 
     private static void greet() {
         System.out.println(HORIZONTAL_LINE);
@@ -40,45 +36,95 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    private static void addTask(TaskManager taskManager, String operation, String content) {
+    private static Operation getOperation(String command) {
+        try {
+            return CommandUtils.extractOperation(command);
+        } catch (DukeException de) {
+            System.out.println(HORIZONTAL_LINE);
+            System.out.println(de.getMessage());
+            System.out.println(HORIZONTAL_LINE);
+        }
+        return null;
+    }
+
+    private static int getTaskNumber(String command) {
+        int number = 0;
+        try {
+            number = CommandUtils.extractTaskNumber(command);
+        } catch (DukeException de) {
+            System.out.println(HORIZONTAL_LINE);
+            System.out.println(de.getMessage());
+            System.out.println(HORIZONTAL_LINE);
+        }
+        return number;
+    }
+
+    private static String getTaskDescription(String command) {
+        String description = "";
+        try {
+            description = CommandUtils.extractTaskDescription(command);
+        } catch (DukeException de) {
+            System.out.println(HORIZONTAL_LINE);
+            System.out.println(de.getMessage());
+            System.out.println(HORIZONTAL_LINE);
+        }
+        return description;
+    }
+
+    private static void addTask(TaskManager taskManager, Operation operation, String description) {
         System.out.println(HORIZONTAL_LINE);
-        System.out.println(INDENTATION + "Got it. I've added this task:");
         switch (operation) {
             case TODO:
-                Todo todo = new Todo(content);
+                Todo todo = new Todo(description);
                 taskManager.addTask(todo);
+                System.out.println(INDENTATION + "Got it. I've added this task:");
                 System.out.println(INDENTATION + "  " + todo.toString());
+                System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
+                        (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
                 break;
-            case DEADLINE: {
-                String taskName = content.split(" /by ", 2)[0];
-                String byTime = content.split(" /by ", 2)[1];
-                Deadline deadline = new Deadline(taskName, byTime);
-                taskManager.addTask(deadline);
-                System.out.println(INDENTATION + "  " + deadline.toString());
+            case DEADLINE:
+                try {
+                    String[] taskDetails = CommandUtils.extractTaskDetails(description, " /by ");
+                    String taskName = taskDetails[0];
+                    String byTime = taskDetails[1];
+                    Deadline deadline = new Deadline(taskName, byTime);
+                    taskManager.addTask(deadline);
+                    System.out.println(INDENTATION + "Got it. I've added this task:");
+                    System.out.println(INDENTATION + "  " + deadline.toString());
+                    System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
+                            (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
+                } catch (DukeException de) {
+                    System.out.println(de.getMessage());
+                }
                 break;
-            }
-            case EVENT: {
-                String taskName = content.split(" /at ", 2)[0];
-                String atTime = content.split(" /at ", 2)[1];
-                Event event = new Event(taskName, atTime);
-                taskManager.addTask(event);
-                System.out.println(INDENTATION + "  " + event.toString());
+            case EVENT:
+                try {
+                    String[] taskDetails = CommandUtils.extractTaskDetails(description, " /at ");
+                    String taskName = taskDetails[0];
+                    String atTime = taskDetails[1];
+                    Event event = new Event(taskName, atTime);
+                    taskManager.addTask(event);
+                    System.out.println(INDENTATION + "Got it. I've added this task:");
+                    System.out.println(INDENTATION + "  " + event.toString());
+                    System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
+                            (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
+                } catch (DukeException de) {
+                    System.out.println(de.getMessage());
+                }
                 break;
-            }
         }
-        System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
-                (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
         System.out.println(HORIZONTAL_LINE);
     }
 
     private static void completeTask(TaskManager taskManager, int number) {
-        if (taskManager.completeTask(number)) {
+        try {
+            taskManager.completeTask(number);
             System.out.println(HORIZONTAL_LINE);
             System.out.println(INDENTATION + "Nice! I've marked this task as done:");
             System.out.println(INDENTATION + "  " + taskManager.findTaskByNumber(number).toString());
             System.out.println(HORIZONTAL_LINE);
-        } else {
-            System.out.println("Complete task error.");
+        } catch (DukeException de) {
+            System.out.println(de.getMessage());
         }
     }
 
@@ -111,30 +157,28 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         greet();
         String command = scanner.nextLine();
-        String operation = command.split(" ")[0];
+        Operation operation = getOperation(command);
         while (true) {
-            if (operation.equals(BYE)) {
+            if (operation == Operation.BYE) {
                 bye();
                 break;
-            } else if (operation.equals(LIST)) {
+            } else if (operation == Operation.LIST) {
                 listTasks(taskManager);
-            } else if (operation.contains(DONE)) {
-                try {
-                    int number = Integer.parseInt(command.split(" ", 2)[1]);
+            } else if (operation == Operation.DONE) {
+                int number = getTaskNumber(command);
+                if (number > 0) {
                     completeTask(taskManager, number);
-                } catch (Exception e) {
-                    System.out.println("Input error: " + e.getMessage() + ", please try again.");
                 }
-            } else {
-                try {
-                    String content = command.split(" ", 2)[1];
-                    addTask(taskManager, operation, content);
-                } catch (Exception e) {
-                    System.out.println("Input error: " + e.getMessage() + ", please try again.");
+            } else if (operation == Operation.TODO ||
+                    operation == Operation.DEADLINE ||
+                    operation == Operation.EVENT) {
+                String description = getTaskDescription(command);
+                if (!description.equals("")) {
+                    addTask(taskManager, operation, description);
                 }
             }
             command = scanner.nextLine();
-            operation = command.split(" ")[0];
+            operation = getOperation(command);
         }
     }
 }
