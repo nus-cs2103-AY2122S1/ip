@@ -27,15 +27,21 @@ public class Duke {
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                for (int i = 0; i < l.getLength(); i ++) {
-                    System.out.printf("%d. %s \n", i + 1, l.getItemAtIndex(i));
+                int listLength = l.getLength();
+                if (listLength == 0) {
+                    System.out.println("Your list is empty.");
+                } else {
+                    System.out.println("Your list items:");
+                    for (int i = 0; i < listLength; i ++) {
+                        System.out.printf("%d. %s \n", i + 1, l.getItemAtIndex(i));
+                    }
                 }
-                input = s.nextLine();
+
             } else {
                 l.addItem(input);
-                System.out.println("added: " + input);
-                input = s.nextLine();
+                System.out.println("Added `" + input + "` to your list");
             }
+            input = s.nextLine();
         }
 
         System.out.println("Good riddance! Time to continue my beauty sleep :)");
