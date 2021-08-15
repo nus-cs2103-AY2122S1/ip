@@ -48,10 +48,10 @@ public class ChatBot {
      * @return the response by the ChatBot
      */
     public String listen(String input) {
-        if(input.toLowerCase().trim().equals("bye")) {
+        if(input.trim().equals("bye")) {
             return farewell();
         }
-        if(input.toLowerCase().trim().equals("list")) {
+        if(input.trim().equals("list")) {
             return printList();
         }
         String[] temp = input.trim().split(" ", 2);
