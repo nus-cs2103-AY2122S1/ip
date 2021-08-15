@@ -13,8 +13,10 @@ public class Duke {
         while (!command.toLowerCase().equals("bye")) {
             command = scanner.nextLine();
             // Processes user input
-            FeatureMain feature = new FeatureMain(command);
-            feature.echoCommand();
+            if (!command.toLowerCase().equals("bye")) {
+                FeatureMain feature = new Feature(command);
+                feature.processCommand();
+            }
         }
 
         printFarewell.printFarewell();
