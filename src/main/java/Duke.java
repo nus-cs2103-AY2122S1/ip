@@ -26,23 +26,22 @@ public class Duke {
         say(message);
     }
 
-    private static void add(char type, String item) {
-        switch(type) {
-            case 'T':
-                taskList.add(new ToDo(item));
-                break;
-            case 'D':
-                taskList.add(new Deadline(item));
-                break;
-            case 'E':
-                taskList.add(new Event(item));
-                break;
-            default:
-                break;
-        }
+    private static void sayTaskAdded() {
         say("Got it. I've added this task:");
         say(taskList.get(taskList.size() - 1).toString(), false);
         // TODO: say the number of incomplete tasks in the list
+    }
+
+    private static void addTodo(String item) {
+        taskList.add(new ToDo(item));
+    }
+
+    private static void addDeadline(String item) {
+        taskList.add(new Deadline(item));
+    }
+
+    private static void addEvent(String item) {
+        taskList.add(new Event(item));
     }
 
     private static void done(int index) {
@@ -68,15 +67,18 @@ public class Duke {
                 done(Integer.parseInt(splitted[1]));
             } else if (command.startsWith("todo")) {
                 String[] splitted = command.split(" ", 2);
-                add('T', splitted[1]);
+                addTodo(splitted[1]);
+                sayTaskAdded();
             } else if (command.startsWith("deadline")) {
                 // TODO: implement deadline by
                 String[] splitted = command.split(" ", 2);
-                add('D', splitted[1]);
+                addDeadline(splitted[1]);
+                sayTaskAdded();
             } else if (command.startsWith("event")) {
                 // TODO: implement event at
                 String[] splitted = command.split(" ", 2);
-                add('E', splitted[1]);
+                addEvent(splitted[1]);
+                sayTaskAdded();
             }
             command = prompt();
         }
