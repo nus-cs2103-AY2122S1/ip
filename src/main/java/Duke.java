@@ -1,10 +1,16 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 public class Duke {
     private static boolean run;
     private static ArrayList<Task> tasks;
     private static int index;
+
+    private enum Commands {
+        BYE (),
+    }
+
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -42,14 +48,14 @@ public class Duke {
             case "bye":
                 System.out.println("____________________________________________________________\n"
                         + "Bye. Don't come again!\n"
-                        + "____________________________________________________________");
+                        + "____________________________________________________________\n");
                 return false;
             case "list":
                 System.out.println("____________________________________________________________\n");
                 for(int i = 0; i < index; i++) {
                     System.out.printf("%d. %s\n", i + 1, tasks.get(i).toString());
                 }
-                System.out.println("____________________________________________________________");
+                System.out.println("____________________________________________________________\n");
                 return true;
             case "done":
                 selectedTask = Integer.parseInt(inputArray[1]) - 1;
@@ -62,10 +68,9 @@ public class Duke {
                 return true;
             case "delete":
                 selectedTask = Integer.parseInt(inputArray[1]) - 1;
-                System.out.println("Noted. I've removed this task: \n" +
+                System.out.println("Noted. I've removed this task:\n" +
                         tasks.get(selectedTask).toString() + "\n" +
-                        "Now you have " + (index - 1) + " tasks in the list.");
-
+                        "Now you have " + (index - 1) + " tasks in the list.\n");
                 tasks.remove(selectedTask);
                 index--;
                 return true;
@@ -76,7 +81,7 @@ public class Duke {
                 tasks.add(new Event(params[0], params[1]));
 
                 System.out.println("____________________________________________________________\n"
-                        + "Got it. I've added this task: \n"
+                        + "Got it. I've added this task:\n"
                         + tasks.get(index).toString() + "\n"
                         + "____________________________________________________________\n");
                 index++;
@@ -88,7 +93,7 @@ public class Duke {
                 tasks.add(new Deadline(params[0], params[1]));
 
                 System.out.println("____________________________________________________________\n"
-                        + "Got it. I've added this task: \n"
+                        + "Got it. I've added this task:\n"
                         + tasks.get(index).toString() + "\n"
                         + "____________________________________________________________\n");
                 index++;
@@ -101,26 +106,23 @@ public class Duke {
                     }
                     tasks.add(new ToDo(name));
                     System.out.println("____________________________________________________________\n"
-                            + "Got it. I've added this task: \n"
+                            + "Got it. I've added this task:\n"
                             + tasks.get(index).toString() + "\n"
                             + "____________________________________________________________\n");
                     index++;
                 }
                 catch (StringIndexOutOfBoundsException e) {
                     System.out.println("____________________________________________________________\n" +
-                            "☹ OOPS!!! The description of a todo cannot be empty.\n" +
-                            "____________________________________________________________");
+                            "OOPS!!! The description of a todo cannot be empty.\n" +
+                            "____________________________________________________________\n");
                 }
 
                 return true;
             default:
                 System.out.println("____________________________________________________________\n" +
-                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                         "____________________________________________________________\n");
-//                Might need to check index < 100 in the future
-                index++;
                 return true;
         }
-
     }
 }
