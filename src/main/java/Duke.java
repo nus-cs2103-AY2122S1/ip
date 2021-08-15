@@ -20,19 +20,21 @@ public class Duke {
         }
     }
 
-    private static void  printUserInputRecord(ArrayList<String> userInputRecord) {
+    private static void printUserInputRecord(ArrayList<String> userInputRecord) {
         if(userInputRecord.isEmpty()) {
             System.out.println("    ____________________________________________________________\n" +
                     "       Ah oh, seems like nothing is added yet :( \n" +
                     "       Try to input something first! \n" +
                     "    ____________________________________________________________"
             );
+
+        } else {
+            System.out.println("    ____________________________________________________________");
+            for (int i = 0; i < userInputRecord.size(); i++) {
+                System.out.println("       " + (i + 1) + ". " + userInputRecord.get(i));
+            }
+            System.out.println("    ____________________________________________________________");
         }
-        System.out.println("    ____________________________________________________________ch");
-        for (int i = 0; i < userInputRecord.size(); i++) {
-            System.out.println("       " + (i + 1) + ". " + userInputRecord.get(i));
-        }
-        System.out.println("    ____________________________________________________________");
     }
 
     public static void main(String[] args) {
