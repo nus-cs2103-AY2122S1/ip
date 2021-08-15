@@ -27,6 +27,7 @@ deadline/by
 deadline /by
 deadline
 deadline              
+deadline return book /by  //by  Sunday
 list
 done 7
 list

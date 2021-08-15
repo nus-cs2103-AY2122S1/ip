@@ -153,6 +153,12 @@
     ____________________________________________________________
 
     ____________________________________________________________
+     Got it. I've added this task: 
+       [D][ ] return book /by  / (by: Sunday)
+     Now you have 8 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
      1.[T][X] borrow book
      2.[D][X] return book (by: Sunday)
      3.[E][X] project meeting (at: Mon 2-4pm)
@@ -160,6 +166,7 @@
      5.[D][ ] return book (by: Sunday)
      6.[D][ ] return book (by: Sunday)
      7.[D][ ] r (by: nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn)
+     8.[D][ ] return book /by  / (by: Sunday)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -175,6 +182,7 @@
      5.[D][ ] return book (by: Sunday)
      6.[D][ ] return book (by: Sunday)
      7.[D][X] r (by: nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn)
+     8.[D][ ] return book /by  / (by: Sunday)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -201,13 +209,13 @@
     ____________________________________________________________
      Noted. I've removed this task: 
        [D][X] r (by: nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn)
-     Now you have 6 tasks in the list.
+     Now you have 7 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Noted. I've removed this task: 
        [T][X] borrow book
-     Now you have 5 tasks in the list.
+     Now you have 6 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
