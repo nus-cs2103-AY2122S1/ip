@@ -17,6 +17,9 @@ public class Duke {
     private final String EXIT_TAG = "bye";
     private final String LIST_TAG = "list";
     private final String DONE_TAG = "done";
+    private final String TODO_TAG = "todo";
+    private final String DEADLINE_TAG = "deadline";
+    private final String EVENT_TAG = "event";
 
 
     public static void main(String[] args) {
@@ -67,43 +70,87 @@ public class Duke {
      * @param msg User's input.
      */
     private void checkTag(String msg) {
-        // user inputs list, print the list of items added by user.
-        if (msg.equalsIgnoreCase(LIST_TAG)) {
-            System.out.println(HORIZONTAL_LINE_HEAD);
-            System.out.println("\t Here are the tasks in your list:");
-
-            for (int i = 0; i < this.items.size(); i++) {
-                Task item = this.items.get(i);
-                String formattedMsg = String.format("\t %s.%s", (i + 1), item);
-
-                System.out.println(formattedMsg);
+        String msgToCheck = msg.toLowerCase();
+        try {
+            if (msgToCheck.equals(LIST_TAG)) {
+                displayTasks();
+            } else if (msgToCheck.contains(DONE_TAG)) {
+                taskDone(msg);
+            } else if (msgToCheck.contains(TODO_TAG)) {
+                addTodo(msg);
+            } else if (msgToCheck.contains(DEADLINE_TAG)) {
+                addDeadline(msg);
+            } else if (msgToCheck.contains(EVENT_TAG)) {
+                addEvent(msg);
             }
-
-            System.out.println(HORIZONTAL_LINE_TAIL);
-        }
-
-        // user completes a task
-        else if (msg.toLowerCase().contains(DONE_TAG)) {
-            String content;
-
-            try {
-                int index = getTaskId(msg);
-                Task item = this.items.get(index);
-                item.taskCompleted();
-
-                content = String.format("Nice! I've marked this task as done:\n\t  %s", item);
-            } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                content = String.format(" Invalid input: %s", e.getMessage());
-            }
-
+        } catch (StringIndexOutOfBoundsException e){
+            String content = String.format(" Invalid input: Wrong format!");
+            printFormattedMsg(content);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            String content = String.format(" Invalid input: %s", e.getMessage());
             printFormattedMsg(content);
         }
+    }
 
-        // add items to the list.
-        else {
-            this.items.add(new Task(msg));
-            printFormattedMsg("added: " + msg);
+    /**
+     * Add an event to the list.
+     *
+     * @param msg Input from user
+     */
+    private void addEvent(String msg) {
+        Task newTask = new Event(getTaskDesc(msg), getTaskDates(msg));
+        addTask(newTask);
+    }
+
+    /**
+     * Add a deadline to the list.
+     *
+     * @param msg Input from user
+     */
+    private void addDeadline(String msg) {
+        Task newTask = new Deadline(getTaskDesc(msg), getTaskDates(msg));
+        addTask(newTask);
+    }
+
+    /**
+     * Add a todo to the list.
+     *
+     * @param msg Input from user.
+     */
+    private void addTodo(String msg) {
+        Task newTask = new Todo(msg);
+        addTask(newTask);
+    }
+
+    /**
+     * Display the list of task that has been added.
+     */
+    private void displayTasks() {
+        System.out.println(HORIZONTAL_LINE_HEAD);
+        System.out.println("\t Here are the tasks in your list:");
+
+        for (int i = 0; i < this.items.size(); i++) {
+            Task item = this.items.get(i);
+            String formattedMsg = String.format("\t %s.%s", (i + 1), item);
+
+            System.out.println(formattedMsg);
         }
+
+        System.out.println(HORIZONTAL_LINE_TAIL);
+    }
+
+    /**
+     * Mark the task as completed once it is done.
+     *
+     * @param msg Input from user.
+     */
+    private void taskDone(String msg) {
+        int index = getTaskId(msg);
+        Task item = this.items.get(index);
+        item.taskCompleted();
+
+        String content = String.format("Nice! I've marked this task as done:\n\t  %s", item);
+        printFormattedMsg(content);
     }
 
     /**
@@ -119,6 +166,52 @@ public class Duke {
         int index = Integer.parseInt(msg.substring(position + 1)) - 1;
 
         return index;
+    }
+
+    /**
+     * Returns the description for a deadline or event type task.
+     *
+     * @param msg Input from user
+     * @return A String representing the description of the task.
+     * @throws StringIndexOutOfBoundsException Wrong Format used by the user.
+     */
+    private String getTaskDesc(String msg) throws StringIndexOutOfBoundsException{
+        int startPosition = msg.indexOf(" ");
+        int endPosition = msg.indexOf("/");
+
+        return msg.substring(startPosition, endPosition).trim();
+    }
+
+    /**
+     * Returns the date/time for the deadline/event respectively.
+     *
+     * @param msg Input from user.
+     * @return A String representing the date (deadline type) / time (event type).
+     * @throws StringIndexOutOfBoundsException Wrong Format used by the user.
+     */
+    private String getTaskDates(String msg) throws StringIndexOutOfBoundsException{
+        int position = msg.indexOf("/") + 2;
+
+        return msg.substring(position + 1).trim();
+    }
+
+    /**
+     * Add a new task to the list.
+     *
+     * @param task The new task to be added
+     */
+    private void addTask(Task task) {
+        this.items.add(task);
+        printFormattedMsg("Got it. I've added this task:\n\t   " + task + "\n\t Now you have " + getTaskCount() + " tasks in the list.");
+    }
+
+    /**
+     * Returns the current number of items in the list.
+     *
+     * @return An int representing the current number of items in th list.
+     */
+    private int getTaskCount() {
+        return this.items.size();
     }
 
     /**
