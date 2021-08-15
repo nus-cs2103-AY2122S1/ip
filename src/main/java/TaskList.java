@@ -8,7 +8,8 @@ public class TaskList {
 
         Duke.printMessage("Got it. I've added this task:\n  "
                 + task.toString()
-                + "\nNow you have " + taskList.size() + " tasks in the list.");
+                + "\nNow you have " + taskList.size()
+                + (taskList.size() != 1 ? " tasks" : " task") + " in the list.");
     }
 
     public void addToDo(String input) {

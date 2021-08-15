@@ -1,0 +1,14 @@
+todo hello
+list
+deadline hi /by tomorrow
+list
+event bye /at tomorrow
+list
+done 1
+list
+done 2
+list
+done 3
+list
+goodbye
+bye
