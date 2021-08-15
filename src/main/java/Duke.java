@@ -60,6 +60,15 @@ public class Duke {
                 + tasks.get(selectedTask).toString() + "\n"
                 + "____________________________________________________________\n");
                 return true;
+            case "delete":
+                selectedTask = Integer.parseInt(inputArray[1]) - 1;
+                System.out.println("Noted. I've removed this task: \n" +
+                        tasks.get(selectedTask).toString() + "\n" +
+                        "Now you have " + (index - 1) + " tasks in the list.");
+
+                tasks.remove(selectedTask);
+                index--;
+                return true;
             case "event":
                 params = input.split("/at");
                 params[0] = params[0].substring(6, params[0].length() - 1);
