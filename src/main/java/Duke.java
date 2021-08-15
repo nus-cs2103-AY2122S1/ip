@@ -3,7 +3,14 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<Task> list = new ArrayList<>(100);
+    private final static ArrayList<Task> list = new ArrayList<>(100);
+
+    private enum TaskType {
+        TASK,
+        TODO,
+        DEADLINE,
+        EVENT
+    }
 
     private static void chat(String content) {
         System.out.println(
@@ -13,15 +20,12 @@ public class Duke {
         );
     }
 
-    private static void addItem(String item) {
-        list.add(new Task(item));
-    }
-
     private static void displayList() {
         StringBuilder listString = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            listString.append(String.valueOf(i + 1) + ".[" + task.getStatusIcon() + "] " + task.description);
+            String line = i + 1 + "." + task.toString();
+            listString.append(line);
             if (i != list.size() - 1) {
                 listString.append("\n");
             }
@@ -29,35 +33,74 @@ public class Duke {
         chat(listString.toString());
     }
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        chat("Hello I'm\n" + logo + "What can I do for you?");
+    private static void addTask(String input, TaskType type) {
+        int descriptionEnd;
+        String description;
+        String when;
+        Task task;
+        switch (type) {
+            case TASK:
+                task = new Task(input);
+                break;
+            case TODO:
+                task = new ToDo(input.substring(5));
+                break;
+            case DEADLINE:
+                descriptionEnd = input.indexOf(" /by ");
+                description = input.substring(9, descriptionEnd);
+                when = input.substring(descriptionEnd + 5);
+                task = new Deadline(description, when);
+                break;
+            case EVENT:
+                descriptionEnd = input.indexOf(" /at ");
+                description = input.substring(6, descriptionEnd);
+                when = input.substring(descriptionEnd + 5);
+                task = new Event(description, when);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
+        }
+        list.add(task);
+        chat("Got it. I've added this task:\n "
+                + task.toString() + "\n"
+                + "Now you have " + list.size() + " tasks in the list"
+        );
+    }
+
+    private static void markDone(String input) {
+        Task task = list.get(Integer.parseInt(input.substring(5)) - 1);
+        task.markDone();
+        chat("Nice! I've marked this task as done: \n"
+                + "  "
+                + task.toString());
+    }
+
+    private static void runDuke() {
+        chat("Hello I'm Duke\nWhat can I do for you?");
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine();
-            String[] arguments = input.split(" ");
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
                 displayList();
-            } else if (arguments[0].equals("done")) {
-                Task task = list.get(Integer.valueOf(arguments[1]) - 1);
-                task.markDone();
-                chat("Nice! I've marked this task as done: \n"
-                        + "  ["
-                        + task.getStatusIcon()
-                        + "] "
-                        + task.description);
+            } else if (input.startsWith("done ")) {
+                markDone(input);
+            } else if (input.startsWith("todo ")) {
+                addTask(input, TaskType.TODO);
+            } else if (input.startsWith("deadline ")) {
+                addTask(input, TaskType.DEADLINE);
+            } else if (input.startsWith("event ")) {
+                addTask(input, TaskType.EVENT);
             } else {
-                addItem(input);
-                chat("added: " + input);
+                addTask(input, TaskType.TASK);
             }
         }
         chat("Bye. Hope to see you again soon!");
+    }
+
+    public static void main(String[] args) {
+        runDuke();
     }
 
 
