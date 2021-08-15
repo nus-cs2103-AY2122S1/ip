@@ -18,22 +18,11 @@ public class Duke {
             String userInput = input.nextLine(); //what user typed in
             String firstWord = userInput;   //first word of what's typed in
             String restOfInput = " ";
-            String date = " ";
-            String description = " ";
 
             if (userInput.contains(" ")) { //if there's a spacing after first word
                 firstWord = userInput.split(" ",2)[0];
                 restOfInput = userInput.split(" ",2)[1];
-
-                if (restOfInput.contains("/by")) {
-                    description = restOfInput.split("/by",2)[0];
-                    date = restOfInput.split("/by",2)[1];
-                } else if (restOfInput.contains("/at")) {
-                    description = restOfInput.split("/at",2)[0];
-                    date = restOfInput.split("/at",2)[1];
-                }
             }
-
             else { // if only one word is typed in with no spaces following
                 descriptionEmpty = true;
             }
@@ -54,11 +43,11 @@ public class Duke {
                     System.out.println(addTasks(taskList, currToDo));
                     break;
                 case "deadline":
-                    Task currDeadline = new Deadline(description, date, descriptionEmpty);
+                    Task currDeadline = new Deadline(restOfInput, descriptionEmpty);
                     System.out.println(addTasks(taskList, currDeadline));
                     break;
                 case "event":
-                    Task currEvent = new Event(description, date, descriptionEmpty);
+                    Task currEvent = new Event(restOfInput, descriptionEmpty);
                     System.out.println(addTasks(taskList, currEvent));
                     break;
                 default:

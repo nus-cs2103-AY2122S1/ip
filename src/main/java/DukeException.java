@@ -6,13 +6,4 @@ public class DukeException extends IllegalArgumentException {
         super(message);
     }
 
-    public DukeException(String message, String task) {
-        super(message);
-        this.task = task;
-    }
-
-    @Override
-    public String toString() {
-        return "☹ OOPS!!! The description of a " + task + " cannot be empty.";
-    }
 }

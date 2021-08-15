@@ -1,7 +1,7 @@
 todo borrow book
 deadline return book /by Saturday
 event project meeting /at Sun 1-3pm
-deadline Orbital submission /at Mon 11:59pm
+deadline Orbital submission /by Mon 11:59pm
 list
 done 2
 done 4
