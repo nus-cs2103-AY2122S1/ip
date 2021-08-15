@@ -5,19 +5,20 @@ public class Response {
     public Response(String s) {
         this.content = s;
     }
-    
-    public static String start() {
+
+    public static Response added(String item) {
+        String msg = "added: " + item;
+        return new Response(msg);
+    }
+
+    public static Response start() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n\n";
 
-        // String startMsg = "Hello from\n" + logo;
-        String startMsg = "";
-
-        startMsg += new Response(logo + "Hello there, I'm Duke!\nWhat can I do for you?").toString();
-        return startMsg;
+        return new Response(logo + "Hello there, I'm Duke!\nWhat can I do for you?");
     }
 
     @Override
