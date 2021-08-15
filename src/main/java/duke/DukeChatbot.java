@@ -64,6 +64,7 @@ public class DukeChatbot {
             try {
                 command = br.readLine();
                 commandType = commandParser.getCommandTypeFromCommand(command);
+                int taskIndex;
                 switch (commandType) {
                 case EXIT:
                     printExitMessage();
@@ -76,7 +77,7 @@ public class DukeChatbot {
                     printTasks();
                     break;
                 case MARK_TASK_DONE:
-                    int taskIndex = commandParser.getTaskIndexOfTaskMarkedDone(command);
+                    taskIndex = commandParser.getTaskIndexOfTaskMarkedDone(command);
                     markTaskDone(taskIndex);
                     break;
                 case ADD_DEADLINE_TASK:
@@ -86,6 +87,10 @@ public class DukeChatbot {
                 case ADD_EVENT_TASK:
                     EventTask eventTask = commandParser.getEventTask(command);
                     addTask(eventTask);
+                    break;
+                case DELETE_TASK:
+                    taskIndex = commandParser.getTaskIndexOfTaskDeleted(command);
+                    deleteTask(taskIndex);
                     break;
                 default:
                     // The default case should be unreachable. If this is reached, something is wrong.
@@ -107,13 +112,7 @@ public class DukeChatbot {
         tasks.add(task);
         StringBuilder sb = new StringBuilder("Got it. I've added this task:\n");
         sb.append(messageFormatter.formatTask(task)).append("\n");
-        int n = tasks.size();
-        // Check whether singular or plural should be printed.
-        if (n != 1) {
-            sb.append(String.format("Now you have %d tasks in the list.\n", n));
-        } else {
-            sb.append("Now you have 1 task in the list.\n");
-        }
+        sb.append(getListLengthMessage());
         printFormattedMessage(sb.toString());
     }
 
@@ -138,6 +137,29 @@ public class DukeChatbot {
         StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:\n");
         sb.append(messageFormatter.formatTask(task));
         printFormattedMessage(sb.toString());
+    }
+
+    private void deleteTask(int taskIndex) throws DukeInvalidCommandException {
+        Task task;
+        try {
+            task = tasks.remove(taskIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidCommandException("The task number does not exist.");
+        }
+        StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n");
+        sb.append(messageFormatter.formatTask(task)).append("\n");
+        sb.append(getListLengthMessage());
+        printFormattedMessage(sb.toString());
+    }
+
+    private String getListLengthMessage() {
+        int n = tasks.size();
+        // Check whether singular or plural should be printed.
+        if (n != 1) {
+            return String.format("Now you have %d tasks in the list.", n);
+        } else {
+            return "Now you have 1 task in the list.";
+        }
     }
 
     private void printExitMessage() {

@@ -18,4 +18,9 @@ event project meeting /at
 event project meeting /at Aug 6th 2-4pm
 event graduation /at a long time away TT
 list
+delete
+delete blah
+delete 42
+delete 4
+list
 bye
