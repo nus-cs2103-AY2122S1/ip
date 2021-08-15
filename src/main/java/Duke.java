@@ -36,8 +36,8 @@ public class Duke {
         taskList.add(new ToDo(item));
     }
 
-    private static void addDeadline(String item) {
-        taskList.add(new Deadline(item));
+    private static void addDeadline(String item, String by) {
+        taskList.add(new Deadline(item, by));
     }
 
     private static void addEvent(String item) {
@@ -63,21 +63,21 @@ public class Duke {
             if (command.equals("list")) {
                 listTasks();
             } else if (command.startsWith("done")) {
-                String[] splitted = command.split(" ");
-                done(Integer.parseInt(splitted[1]));
+                String doneMetadata = command.split(" ")[1];
+                done(Integer.parseInt(doneMetadata));
             } else if (command.startsWith("todo")) {
-                String[] splitted = command.split(" ", 2);
-                addTodo(splitted[1]);
+                String todoMetadata = command.split(" ", 2)[1];
+                addTodo(todoMetadata);
                 sayTaskAdded();
             } else if (command.startsWith("deadline")) {
-                // TODO: implement deadline by
-                String[] splitted = command.split(" ", 2);
-                addDeadline(splitted[1]);
+                String deadlineMetadata = command.split(" ", 2)[1];
+                String[] splitted = deadlineMetadata.split(" /by ", 2);
+                addDeadline(splitted[0], splitted[1]);
                 sayTaskAdded();
             } else if (command.startsWith("event")) {
                 // TODO: implement event at
-                String[] splitted = command.split(" ", 2);
-                addEvent(splitted[1]);
+                String eventMetadata = command.split(" ", 2)[1];
+                addEvent(eventMetadata);
                 sayTaskAdded();
             }
             command = prompt();
