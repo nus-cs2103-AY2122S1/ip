@@ -5,7 +5,7 @@
  */
 
 public class Printer {
-    private static final String horizontalSeparator =
+    private static final String HorizontalSeparator =
         "------------------------------------------------------------------------";
 
     public Printer() {}
@@ -18,11 +18,11 @@ public class Printer {
     public static void prettyPrint(String input) {
         StringBuilder sb = new StringBuilder();
         StringBuilder formattedSb = sb
-            .append(horizontalSeparator)
+            .append(HorizontalSeparator)
             .append("\n")
             .append(input)
             .append("\n")
-            .append(horizontalSeparator);
+            .append(HorizontalSeparator);
         System.out.println(formattedSb.toString());
     }
 }
