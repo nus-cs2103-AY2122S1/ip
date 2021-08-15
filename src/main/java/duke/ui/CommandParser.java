@@ -24,12 +24,12 @@ public class CommandParser {
      *
      * @param command The command.
      * @return The type of command.
-     * @throws IllegalArgumentException If the command is empty, or the command does not exist.
+     * @throws DukeInvalidCommandException If the command is empty or the command does not exist.
      */
-    public CommandType getCommandTypeFromCommand(String command) throws IllegalArgumentException {
+    public CommandType getCommandTypeFromCommand(String command) throws DukeInvalidCommandException {
         String[] tokens = command.strip().split(" ");
         if (tokens.length == 0 || tokens[0].length() == 0) {
-            throw new IllegalArgumentException("This command is empty.");
+            throw new DukeInvalidCommandException("This command is empty.");
         }
         String commandName = tokens[0];
         switch (commandName) {
@@ -46,7 +46,7 @@ public class CommandParser {
         case ADD_EVENT_TASK_COMMAND:
             return CommandType.ADD_EVENT_TASK;
         default:
-            throw new IllegalArgumentException("This command does not exist.");
+            throw new DukeInvalidCommandException("This command does not exist.");
         }
     }
 
@@ -55,16 +55,16 @@ public class CommandParser {
      *
      * @param command The "Mark Task Done" command.
      * @return The index of the task.
-     * @throws IllegalArgumentException If the command is empty, not a "Mark Task Done" command, or malformed.
+     * @throws DukeInvalidCommandException If the command is empty, not a "Mark Task Done" command, or malformed.
      */
-    public int getTaskIndexOfTaskMarkedDone(String command) throws IllegalArgumentException {
+    public int getTaskIndexOfTaskMarkedDone(String command) throws DukeInvalidCommandException {
         String[] tokens = command.strip().split(" ");
         if (tokens.length == 0 || tokens[0].length() == 0) {
-            throw new IllegalArgumentException("This command is empty.");
+            throw new DukeInvalidCommandException("This command is empty.");
         }
         String commandName = tokens[0];
         if (!commandName.equals(MARK_TASK_DONE_COMMAND)) {
-            throw new IllegalArgumentException("This command is not a 'Mark Task Done' command.");
+            throw new DukeInvalidCommandException("This command is not a 'Mark Task Done' command.");
         }
         StringBuilder taskNumberSb = new StringBuilder();
         for (int i = 1; i < tokens.length; i++) {
@@ -74,12 +74,12 @@ public class CommandParser {
             }
         }
         if (taskNumberSb.length() == 0) {
-            throw new IllegalArgumentException("A task number needs to be specified for a 'Mark Task Done' command.");
+            throw new DukeInvalidCommandException("A task number is required for a 'Mark Task Done' command.");
         }
         try {
             return Integer.parseInt(taskNumberSb.toString()) - 1;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("The task number is not a number.");
+            throw new DukeInvalidCommandException("The task number is not a number.");
         }
     }
 
@@ -88,16 +88,16 @@ public class CommandParser {
      *
      * @param command The "Add To-do Task" command.
      * @return The to-do task.
-     * @throws IllegalArgumentException If the command is empty, not an 'Add To-do Task' command, or malformed.
+     * @throws DukeInvalidCommandException If the command is empty, not an 'Add To-do Task' command, or malformed.
      */
-    public ToDoTask getToDoTask(String command) throws IllegalArgumentException {
+    public ToDoTask getToDoTask(String command) throws DukeInvalidCommandException {
         String[] tokens = command.strip().split(" ");
         if (tokens.length == 0 || tokens[0].length() == 0) {
-            throw new IllegalArgumentException("This command is empty.");
+            throw new DukeInvalidCommandException("This command is empty.");
         }
         String commandName = tokens[0];
         if (!commandName.equals(ADD_TODO_COMMAND)) {
-            throw new IllegalArgumentException("This command is not an 'Add To-do Task' command.");
+            throw new DukeInvalidCommandException("This command is not an 'Add To-do Task' command.");
         }
         StringBuilder taskDescriptionSb = new StringBuilder();
         for (int i = 1; i < tokens.length; i++) {
@@ -105,7 +105,7 @@ public class CommandParser {
         }
         String taskDescription = taskDescriptionSb.toString().strip();
         if (taskDescription.length() == 0) {
-            throw new IllegalArgumentException("A description needs to be specified for an 'Add To-do Task' command.");
+            throw new DukeInvalidCommandException("A description is required for an 'Add To-do Task' command.");
         }
         return new ToDoTask(taskDescription);
     }
@@ -115,16 +115,16 @@ public class CommandParser {
      *
      * @param command The "Add Deadline Task" command.
      * @return The deadline task.
-     * @throws IllegalArgumentException If the command is empty, not an "Add Deadline Task" command, or malformed.
+     * @throws DukeInvalidCommandException If the command is empty, not an "Add Deadline Task" command, or malformed.
      */
-    public DeadlineTask getDeadlineTask(String command) throws IllegalArgumentException {
+    public DeadlineTask getDeadlineTask(String command) throws DukeInvalidCommandException {
         String[] tokens = command.strip().split(" ");
-        if (tokens.length == 0) {
-            throw new IllegalArgumentException("This command is empty.");
+        if (tokens.length == 0 || tokens[0].length() == 0) {
+            throw new DukeInvalidCommandException("This command is empty.");
         }
         String commandName = tokens[0];
         if (!commandName.equals(ADD_DEADLINE_TASK_COMMAND)) {
-            throw new IllegalArgumentException("This command is not an 'Add Deadline Task' command.");
+            throw new DukeInvalidCommandException("This command is not an 'Add Deadline Task' command.");
         }
         StringBuilder taskDescriptionSb = new StringBuilder();
         int timeStartIndex = tokens.length;
@@ -143,11 +143,10 @@ public class CommandParser {
         String taskDescription = taskDescriptionSb.toString().strip();
         String deadline = deadlineSb.toString().strip();
         if (taskDescription.length() == 0) {
-            throw new IllegalArgumentException(
-                    "A description needs to be specified for an 'Add Deadline Task' command.");
+            throw new DukeInvalidCommandException("A description is required for an 'Add Deadline Task' command.");
         }
         if (deadline.length() == 0) {
-            throw new IllegalArgumentException("A deadline needs to be specified for an 'Add Deadline Task' command.");
+            throw new DukeInvalidCommandException("A deadline is required for an 'Add Deadline Task' command.");
         }
         return new DeadlineTask(taskDescription, deadline);
     }
@@ -157,16 +156,16 @@ public class CommandParser {
      *
      * @param command The "Add Event Task" command.
      * @return The event task.
-     * @throws IllegalArgumentException If the command is empty, not an "Add Event Task" command, or malformed.
+     * @throws DukeInvalidCommandException If the command is empty, not an "Add Event Task" command, or malformed.
      */
-    public EventTask getEventTask(String command) throws IllegalArgumentException {
+    public EventTask getEventTask(String command) throws DukeInvalidCommandException {
         String[] tokens = command.strip().split(" ");
-        if (tokens.length == 0) {
-            throw new IllegalArgumentException("This command is empty.");
+        if (tokens.length == 0 || tokens[0].length() == 0) {
+            throw new DukeInvalidCommandException("This command is empty.");
         }
         String commandName = tokens[0];
         if (!commandName.equals(ADD_EVENT_TASK_COMMAND)) {
-            throw new IllegalArgumentException("This command is not an 'Add Event Task' command.");
+            throw new DukeInvalidCommandException("This command is not an 'Add Event Task' command.");
         }
         StringBuilder taskDescriptionSb = new StringBuilder();
         int timeStartIndex = tokens.length;
@@ -185,11 +184,10 @@ public class CommandParser {
         String taskDescription = taskDescriptionSb.toString().strip();
         String time = timeSb.toString().strip();
         if (taskDescription.length() == 0) {
-            throw new IllegalArgumentException(
-                    "A description needs to be specified for an 'Add Event Task' command.");
+            throw new DukeInvalidCommandException("A description is required for an 'Add Event Task' command.");
         }
         if (time.length() == 0) {
-            throw new IllegalArgumentException("An event time needs to be specified for an 'Add Event Task' command.");
+            throw new DukeInvalidCommandException("An event time is required for an 'Add Event Task' command.");
         }
         return new EventTask(taskDescription, time);
     }

@@ -6,6 +6,7 @@ import duke.task.Task;
 import duke.task.ToDoTask;
 import duke.ui.CommandParser;
 import duke.ui.CommandType;
+import duke.ui.DukeInvalidCommandException;
 import duke.ui.MessageFormatter;
 
 import java.io.BufferedReader;
@@ -95,7 +96,7 @@ public class DukeChatbot {
             } catch (IOException e) {
                 printFormattedMessage(READ_COMMAND_ERROR_MESSAGE);
                 break;
-            } catch (IllegalArgumentException e) {
+            } catch (DukeInvalidCommandException e) {
                 printFormattedMessage(String.format(INVALID_COMMAND_ERROR_TEMPLATE, e.getMessage()));
                 commandType = null;
             }
@@ -126,12 +127,12 @@ public class DukeChatbot {
         }
     }
 
-    private void markTaskDone(int taskIndex) throws IllegalArgumentException {
+    private void markTaskDone(int taskIndex) throws DukeInvalidCommandException {
         Task task;
         try {
             task = tasks.get(taskIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("The task number does not exist.");
+            throw new DukeInvalidCommandException("The task number does not exist.");
         }
         task.markDone();
         StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:\n");
