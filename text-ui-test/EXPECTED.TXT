@@ -30,4 +30,16 @@ Here are the tasks in your list:
 1. [T] [X] Read Book
 2. [D] [X] finish assignment (by: 30 Aug)
 3. [E] [X] CS2103 tutorial (at: Thursday)
+Alright! I've removed this task:
+[T] [X] Read Book
+Now you have 2 tasks left in the list!
+Here are the tasks in your list:
+1. [D] [X] finish assignment (by: 30 Aug)
+2. [E] [X] CS2103 tutorial (at: Thursday)
+Alright! I've removed this task:
+[D] [X] finish assignment (by: 30 Aug)
+Now you have 1 tasks left in the list!
+Alright! I've removed this task:
+[E] [X] CS2103 tutorial (at: Thursday)
+Now you have 0 tasks left in the list!
 Bye! Hope to see you again soon!

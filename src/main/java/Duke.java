@@ -21,11 +21,16 @@ public class Duke {
                 break;
             }
             else if (userInput.toLowerCase().equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i=0; i< savedTasks.size(); i++) {
-                    Task currTask = savedTasks.get(i);
-                    int index = i+1;
-                    System.out.println(index + ". " + currTask);
+                if (savedTasks.size() == 0) {
+                    System.out.println("No tasks in your list! Add one using todo, deadline or event!");
+                }
+                else {
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < savedTasks.size(); i++) {
+                        Task currTask = savedTasks.get(i);
+                        int index = i + 1;
+                        System.out.println(index + ". " + currTask);
+                    }
                 }
             }
             else if (userInput.toLowerCase().equals("done")) {
@@ -131,6 +136,20 @@ public class Duke {
                 savedTasks.add(newTask);
                 System.out.println("I've added this task:\n" + newTask);
                 System.out.println("Now you have " + savedTasks.size() + " tasks in the list!");
+            }
+            else if (userInput.toLowerCase().equals("delete")) {
+                int nextNum = sc.nextInt();
+                if (nextNum > savedTasks.size() || nextNum < 1) {
+                    DukeException exception = new DukeException("Number out of range!");
+                    System.out.println(exception);
+                }
+                else {
+                    int index = nextNum-1;
+                    Task removedTask = savedTasks.get(index);
+                    savedTasks.remove(index);
+                    System.out.println("Alright! I've removed this task:\n" + removedTask);
+                    System.out.println(String.format("Now you have %d tasks left in the list!", savedTasks.size()));
+                }
             }
             else {
                 DukeException exception = new DukeException("I'm sorry but I don't understand what that means :(");
