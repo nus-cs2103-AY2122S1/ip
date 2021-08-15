@@ -13,6 +13,12 @@ public class Task {
     }
 
 
+    public void done() {
+        this.isDone = true;
+        System.out.println(this.toString());
+    }
+
+
     @Override
     public String toString() {
         return String.format("[%s] ", this.status()) + description;
