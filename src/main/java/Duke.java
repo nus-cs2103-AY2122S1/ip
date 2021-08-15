@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private final ArrayList<String> taskList = new ArrayList<>();
+    private final ArrayList<Task> taskList = new ArrayList<>();
 
     public void run() {
 
@@ -13,10 +13,16 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while(!(input = sc.nextLine()).equals("bye")) {
-            if (input.equals("list")) {
+            String[] words = input.split(" ");
+            String command = words[0];
+            if (command.equals("list")) {
                 displayList();
+            } else if (command.equals("done")) {
+                String taskIndex = words[words.length - 1];
+                markDone(taskIndex);
             } else {
-                addToList(input);
+                Task tempTask = new Task(input);
+                addToList(tempTask);
             }
         }
 
@@ -38,7 +44,7 @@ public class Duke {
         System.out.println("__________________________________");
     }
 
-    private void addToList(String task) {
+    private void addToList(Task task) {
         this.taskList.add(task);
         System.out.println("__________________________________");
         System.out.println("added: " + task);
@@ -48,8 +54,18 @@ public class Duke {
     private void displayList() {
         System.out.println("__________________________________");
         for (int i = 0; i < this.taskList.size(); i++) {
-            System.out.println(i + 1 + ". " + taskList.get(i));
+            Task task = taskList.get(i);
+            System.out.println(i + 1 + ". " + task.getNameWithChecker());
         }
+        System.out.println("__________________________________");
+    }
+
+    private void markDone(String taskIndex) {
+        int intTaskIndex = Integer.parseInt(taskIndex) - 1;
+        Task task = this.taskList.get(intTaskIndex);
+        task.markAsDone();
+        System.out.println("__________________________________");
+        System.out.println("Nice! I've marked this task as done:\n" + task.getNameWithChecker());
         System.out.println("__________________________________");
     }
 
