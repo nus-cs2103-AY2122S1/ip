@@ -1,6 +1,6 @@
 package domain;
 
-import helpers.StringHelpers;
+import shared.StringHelpers;
 
 public class Task {
     static enum TaskState {

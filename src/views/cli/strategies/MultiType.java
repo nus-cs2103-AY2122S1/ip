@@ -7,8 +7,8 @@ import domain.Deadline;
 import domain.Event;
 import domain.Task;
 import domain.Todo;
+import shared.DukeException;
 
-// Level-4
 public class MultiType extends RespondWith {
     private final String list = "list";
     private final String done = "done";
@@ -58,15 +58,21 @@ public class MultiType extends RespondWith {
         return formatAdd(task);
     }
 
-    private String addDeadline(String query) throws IndexOutOfBoundsException {
+    private String addDeadline(String query) throws DukeException {
         String[] queries = query.substring(deadline.length()).split("/by");
+        if (queries.length != 2) {
+            throw DukeException.createArgumentCountException(2, queries.length);
+        }
         Task task = new Deadline(queries[0].strip(), queries[1].strip());
         userTasks.add(task);
         return formatAdd(task);
     }
 
-    private String addEvent(String query) throws IndexOutOfBoundsException {
+    private String addEvent(String query) throws DukeException {
         String[] queries = query.substring(event.length()).split("/at");
+        if (queries.length != 2) {
+            throw DukeException.createArgumentCountException(2, queries.length);
+        }
         Task task = new Event(queries[0].strip(), queries[1].strip());
         userTasks.add(task);
         return formatAdd(task);
@@ -74,11 +80,14 @@ public class MultiType extends RespondWith {
 
     @Override
     public String respond(String query) {
-        String specialResponse = super.respond(query);
-        if (specialResponse != null) {
-            return specialResponse;
+        try {
+            String specialResponse = super.respond(query);
+            if (specialResponse != null) {
+                return specialResponse;
+            }
+            throw new DukeException(DukeException.ExceptionCode.UNPROCESSABLE_ENTITY);
+        } catch (DukeException e) {
+            return e.getMessage() + System.lineSeparator();
         }
-        userTasks.add(new Task(query));
-        return "added: " + query + System.lineSeparator();
     }
 }

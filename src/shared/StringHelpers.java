@@ -1,4 +1,4 @@
-package helpers;
+package shared;
 
 public class StringHelpers {
     // reference

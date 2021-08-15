@@ -1,6 +1,6 @@
 package constants;
 
-import helpers.StringHelpers;
+import shared.StringHelpers;
 
 public class Constants {
 

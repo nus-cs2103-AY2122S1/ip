@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import constants.Constants;
-import helpers.StringHelpers;
+import shared.StringHelpers;
 
 public abstract class RespondWith {
     public Map<String, Function<String, String>> commands = new HashMap<>();
@@ -15,15 +15,13 @@ public abstract class RespondWith {
     }
 
     public String respond(String query) {
-        try {
-            Function<String, String> f = commands.get(query.split(" ")[0]);
-            if (f != null) {
-                return f.apply(query);
-            }
-            return null;
-        } catch (IndexOutOfBoundsException e) {
-            return Constants.Display.INVALID_INPUT_RESPONSE;
+
+        Function<String, String> f = commands.get(query.split(" ")[0]);
+        if (f != null) {
+            return f.apply(query);
         }
+        return null;
+
     }
 
     protected String endMessage = "bye";
