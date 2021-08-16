@@ -1,3 +1,6 @@
+list hello
+list
+delete 1
 deadline cs2103t quiz /by Monday
 todo cs2103t project level 1
 todo cs2103t project level 2
@@ -24,12 +27,15 @@ todo
 event
 event /at
 event hello /at
+event /at hello
 deadline
 deadline /by
 deadline hello /by
+deadline /by hello
 done -1
 done -2
 done 20
 done 1000
 done
+bye Duke
 bye
