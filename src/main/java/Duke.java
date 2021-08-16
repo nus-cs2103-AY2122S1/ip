@@ -3,7 +3,12 @@ import java.util.Scanner;
 
 public class Duke {
     /** The data structure to store all the tasks. **/
-    ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
+
+    /** A enum type indicating the type of the task. **/
+    private enum taskType {
+        TODO, DEADLINE, EVENT
+    }
 
     /**
      * A public method to print message with certain indentation and format.
@@ -76,20 +81,34 @@ public class Duke {
      */
     public String[] listAllTasks() {
         int n = tasks.size();
-        String taskList[] = new String[n];
-        for (int i = 0; i < n; i++) {
-            taskList[i] = String.format("%d. %s", i + 1, tasks.get(i));
+        String taskList[] = new String[n + 1];
+        taskList[0] = "Here are the tasks in your list:";
+        for (int i = 1; i <= n; i++) {
+            taskList[i] = String.format("%d. %s", i, tasks.get(i - 1));
         }
         return taskList;
     }
 
     /**
-     * A method that read the name of a task, and then add the task to the task list.
+     * A method that read a add-task-command, and then add the task to the task list.
      *
-     * @param description The description of the task.
+     * @param type The type of the task.
+     *
+     * @param inputCommand The input instruction.
      */
-    public void addTask(String description) {
-        tasks.add(new Task(description));
+    public void addTask(taskType type, String inputCommand) {
+        String s2 = inputCommand.substring(inputCommand.indexOf(" ") + 1, inputCommand.length());
+        if (type == taskType.TODO) {
+            tasks.add(new Todo(s2));
+        } else {
+            String description = s2.substring(0, s2.indexOf("/"));
+            String time = s2.substring(s2.indexOf("/") + 4, s2.length());
+            if (type == taskType.DEADLINE) {
+                tasks.add(new Deadline(description, time));
+            } else {
+                tasks.add(new Event(description, time));
+            }
+        }
     }
 
     /**
@@ -113,6 +132,8 @@ public class Duke {
             if (isExitCommand(inputCommand)) {
                 printMessage(new String[] {"Bye. Hope to see you again soon!"});
                 return;
+            } else if (inputCommand.length() <= 1) {
+                continue;
             } else if (inputCommand.equals("list")){
                 printMessage(listAllTasks());
             } else if (isMarkAsDoneCommand(inputCommand)) {
@@ -129,8 +150,20 @@ public class Duke {
                         "Nice! I've marked this task as done:",
                         tasks.get(taskNumber).toString()});
             } else {
-                addTask(inputCommand);
-                printMessage(new String[] {"added: " + inputCommand});
+                taskType type = null;
+                String s1 = inputCommand.substring(0, inputCommand.indexOf(" "));
+                if (s1.equals("todo")) {
+                    type = taskType.TODO;
+                } else if (s1.equals("deadline")) {
+                    type = taskType.DEADLINE;
+                } else if (s1.equals("event")) {
+                    type = taskType.EVENT;
+                }
+                addTask(type, inputCommand);
+                printMessage(new String[] {
+                        "Got it. I've added this task:",
+                        tasks.get(tasks.size() - 1).toString(),
+                        "Now you have " + tasks.size() + " tasks in the list."});
             }
         }
     }

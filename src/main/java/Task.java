@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     /** A String that stores the description of the task. **/
     protected String description;
 
@@ -38,10 +38,18 @@ public class Task {
     /**
      * A override toString() method.
      *
-     * @return A String.
+     * @return A String. The String representation of the task.
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format("[%s][%s] %s",
+                this.getTypeIcon(), this.getStatusIcon(), this.description);
     }
+
+    /**
+     * A public abstract method to generate the type icon of the task.
+     *
+     * @return A String. The type icon of the task.
+     */
+    public abstract String getTypeIcon();
 }
