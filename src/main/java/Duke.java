@@ -19,13 +19,15 @@ import java.util.Scanner;
  * (xiii) provide a user guide
  */
 public class Duke {
-    private static final ArrayList<Task> taskList = new ArrayList<Task>();
+    private final ArrayList<Task> taskList = new ArrayList<Task>();
 
     private enum Keywords {bye, list, done, todo, deadline, event, allCmd, delete}
 
     public static void main(String[] args) {
-        Duke.run();
+        Duke chatBot = new Duke();
+        chatBot.run();
     }
+
 
     /**
      * The run method runs the Duke chat-bot.
@@ -34,7 +36,7 @@ public class Duke {
      * DukeException is thrown to inform the user that the command is invalid
      * or not properly formatted.
      */
-    public static void run() {
+    private void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -48,55 +50,55 @@ public class Duke {
             String des = sc.nextLine();
             String command = checkForKeyword(des);
             try {
-                Duke.printLine();
+                this.printLine();
                 if (command == null) {
                     throw new DukeException(des + " is not a recognised command\nPlease refer to the available commands using the \"allCmd\" command");
                 } else {
                     if (command.equals("bye")) {
-                        Duke.byeCommand();
-                        Duke.printLine();
+                        this.byeCommand();
+                        this.printLine();
                         break;
                     }
 
                     if (command.equals("allCmd")) {
-                        Duke.possibleCommands();
+                        this.possibleCommands();
                     }
 
                     if (command.equals("list")) {
-                        Duke.listCommand();
+                        this.listCommand();
                     }
 
                     if (command.equals("done")) {
-                        Duke.doneCommand(des);
+                        this.doneCommand(des);
                     }
 
                     if (command.equals("deadline")) {
-                        Duke.deadlineCommand(des);
+                        this.deadlineCommand(des);
                     }
 
                     if (command.equals("event")) {
-                        Duke.eventCommand(des);
+                        this.eventCommand(des);
                     }
 
                     if (command.equals("todo")) {
-                        Duke.toDoCommand(des);
+                        this.toDoCommand(des);
                     }
 
                     if (command.equals("delete")) {
-                        Duke.deleteCommand(des);
+                        this.deleteCommand(des);
                     }
 
-                    Duke.printLine();
+                    this.printLine();
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
-                Duke.printLine();
+                this.printLine();
             }
 
         }
     }
 
-    public static void byeCommand() {
+    private void byeCommand() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
@@ -105,7 +107,7 @@ public class Duke {
      * Individual tasks are typecast into their respective classes in order for
      * the toString() methods to work as intended.
      */
-    public static void listCommand() {
+    private void listCommand() {
         int count = 1;
         System.out.println("Here are the tasks in your list:");
         for (Task t : taskList) {
@@ -133,12 +135,12 @@ public class Duke {
      * @throws DukeException if done command is not formatted properly
      *                       or if task has already been completed.
      */
-    public static void doneCommand(String des) throws DukeException {
+    private void doneCommand(String des) throws DukeException {
         String sNum = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(sNum);
         if (num <= 0 || num > taskList.size()) {
             throw new DukeException("The input number is not a valid task number \nPlease refer to the task list using the \"list\" command");
-        } else if (Duke.countSpaces(des) > 1) {
+        } else if (this.countSpaces(des) > 1) {
             throw new DukeException("Too many arguments being provided to \"done\" \nPlease refer to proper usage of commands with \"allCmd\"");
         } else {
             Task atHand = taskList.get(num - 1);
@@ -161,12 +163,12 @@ public class Duke {
      * @throws DukeException if input number is not valid or if too many arguments
      *                       are provided to deleteCommand().
      */
-    public static void deleteCommand(String des) throws DukeException {
+    private void deleteCommand(String des) throws DukeException {
         String sNum = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(sNum);
         if (num <= 0 || num > taskList.size()) {
             throw new DukeException("The input number is not a valid task number \nPlease refer to the task list using the \"list\" command");
-        } else if (Duke.countSpaces(des) > 1) {
+        } else if (this.countSpaces(des) > 1) {
             throw new DukeException("Too many arguments being provided to \"done\" \nPlease refer to proper usage of commands with \"allCmd\"");
         } else {
             taskList.remove(num - 1);
@@ -181,7 +183,7 @@ public class Duke {
      * @throws DukeException if input is not correctly formatted with task and due
      *                       date arguments.
      */
-    public static void deadlineCommand(String des) throws DukeException {
+    private void deadlineCommand(String des) throws DukeException {
         if (des.equals("deadline")) {
             throw new DukeException("\"deadline\" command not correctly formatted \nPlease insert task and due date arguments");
         }
@@ -196,7 +198,7 @@ public class Duke {
             taskList.add(atHand);
             System.out.println("Sure. The following task has been added: ");
             System.out.println(deadlineAtHand);
-            Duke.numberOfTasks();
+            this.numberOfTasks();
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("\"deadline\" command not correctly formatted");
         }
@@ -204,13 +206,13 @@ public class Duke {
     }
 
     /**
-     * The eventCommand() method inputs a Event task into the Duke chat-bot.
+     * The eventCommand() method inputs an Event task into the Duke chat-bot.
      *
      * @param des the user input into the Duke chat-box.
      * @throws DukeException if input is not correctly formatted with task and
      *                       timeframe arguments.
      */
-    public static void eventCommand(String des) throws DukeException {
+    private void eventCommand(String des) throws DukeException {
         if (des.equals("event")) {
             throw new DukeException("\"event\" command not correctly formatted \nPlease insert task and timeframe arguments");
         }
@@ -225,7 +227,7 @@ public class Duke {
             taskList.add(atHand);
             System.out.println("Sure. The following task has been added: ");
             System.out.println(eventAtHand);
-            Duke.numberOfTasks();
+            this.numberOfTasks();
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("\"event\" command not correctly formatted");
         }
@@ -238,7 +240,7 @@ public class Duke {
      * @param des the user input into the Duke chat-box.
      * @throws DukeException if input is not correctly formatted with task argument.
      */
-    public static void toDoCommand(String des) throws DukeException {
+    private void toDoCommand(String des) throws DukeException {
         if (des.equals("todo")) {
             throw new DukeException("\"todo\" command not correctly formatted \nPlease insert task argument");
         }
@@ -248,7 +250,7 @@ public class Duke {
         taskList.add(atHand);
         System.out.println("Sure. The following task has been added: ");
         System.out.println(toDoAtHand);
-        Duke.numberOfTasks();
+        this.numberOfTasks();
     }
 
     /**
@@ -256,10 +258,10 @@ public class Duke {
      * accordingly by calling the respective commands.
      *
      * @param des the user input into the Duke chat-box.
-     * @return String type object that informs the Duke.run() method which
+     * @return String type object that informs the run() method which
      * command should be called.
      */
-    public static String checkForKeyword(String des) {
+    private String checkForKeyword(String des) {
         for (Keywords keyword : Keywords.values()) {
             if (keyword.name().equals("allCmd") && des.equals(keyword.name())) {
                 return "allCmd";
@@ -288,14 +290,14 @@ public class Duke {
         return null;
     }
 
-    public static void printLine() {
+    private void printLine() {
         System.out.println("_____________________________________________________________________________________________________________");
     }
 
     /**
      * The numberOfTasks() method informs the user of the total number of tasks.
      */
-    public static void numberOfTasks() {
+    private void numberOfTasks() {
         if (taskList.size() == 1) {
             System.out.println("You now have " + taskList.size() + " task in the list");
         } else {
@@ -310,7 +312,7 @@ public class Duke {
      * @return Integer type object that represents the number of blank spaces in
      * the user input.
      */
-    public static int countSpaces(String des) {
+    private int countSpaces(String des) {
         int count = 0;
         for (int i = 0; i < des.length(); i++) {
             if (des.charAt(i) == ' ') {
@@ -325,7 +327,7 @@ public class Duke {
      * furnishes the user with information on how to use and format all
      * the commands available.
      */
-    public static void possibleCommands() {
+    private void possibleCommands() {
         System.out.println("The possible commands are as follows:");
         System.out.println();
 
