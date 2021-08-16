@@ -14,7 +14,7 @@ Now you have 2 tasks in the list.
 __________________________________
 __________________________________
 Got it. I've added this task:
-added: [E][ ] project meeting (by: Aug 6th 2-4pm)
+added: [E][ ] project meeting (at: Aug 6th 2-4pm)
 Now you have 3 tasks in the list.
 __________________________________
 __________________________________
@@ -30,7 +30,7 @@ __________________________________
 __________________________________
 1. [T][ ] read book
 2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (by: Aug 6th 2-4pm)
+3. [E][ ] project meeting (at: Aug 6th 2-4pm)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
 __________________________________
@@ -45,7 +45,7 @@ __________________________________
 __________________________________
 1. [T][X] read book
 2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (by: Aug 6th 2-4pm)
+3. [E][ ] project meeting (at: Aug 6th 2-4pm)
 4. [T][X] join sports club
 5. [T][ ] borrow book
 __________________________________
@@ -56,17 +56,17 @@ Now you have 6 tasks in the list.
 __________________________________
 __________________________________
 Got it. I've added this task:
-added: [E][ ] project meeting (by: Mon 2-4pm)
+added: [E][ ] project meeting (at: Mon 2-4pm)
 Now you have 7 tasks in the list.
 __________________________________
 __________________________________
 1. [T][X] read book
 2. [D][ ] return book (by: June 6th)
-3. [E][ ] project meeting (by: Aug 6th 2-4pm)
+3. [E][ ] project meeting (at: Aug 6th 2-4pm)
 4. [T][X] join sports club
 5. [T][ ] borrow book
 6. [D][ ] return book (by: Sunday)
-7. [E][ ] project meeting (by: Mon 2-4pm)
+7. [E][ ] project meeting (at: Mon 2-4pm)
 __________________________________
 __________________________________
 Bye. Hope to see you again soon!
