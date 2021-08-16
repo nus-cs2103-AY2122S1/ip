@@ -73,4 +73,22 @@ Nice! I've marked this task as done:
      Now you have 7 tasks in the list.
     ____________________________________________________________
 
+    ____________________________________________________________
+
+    Noted. I've removed this task:
+    [D][ ]  return book (by: June 6th)
+    Now you have 6 tasks in the list
+    ____________________________________________________________
+
+    ____________________________________________________________
+
+    Here are the tasks in your list:
+     1. [T][X]  read book
+     2. [E][ ]  project meeting (at: Aug 6th 2-4pm)
+     3. [T][X]  join sports club
+     4. [T][ ]  borrow book
+     5. [D][ ]  return book (by: Sunday)
+     6. [E][ ]  project meeting (at: Mon 2-4pm)
+    ____________________________________________________________
+
 Don't wake me up again

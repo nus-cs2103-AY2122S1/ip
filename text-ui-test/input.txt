@@ -14,4 +14,6 @@ event
 event /at
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+delete 2
+list
 bye

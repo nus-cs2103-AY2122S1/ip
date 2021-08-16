@@ -1,11 +1,9 @@
 import java.util.*;
 import java.util.stream.Stream;
 
-
-
 public class Duke {
-
-    private Task[] tasks = new Task[100];
+    final String strBreak = "    ____________________________________________________________\n";
+    private ArrayList<Task> tasks = new ArrayList<>();
     private int count = 0;
 
     private void addTask(String input) throws DukeException {
@@ -13,19 +11,22 @@ public class Duke {
         String taskDescription = Stream.of(input.split(" "))
                 .skip(1).reduce("", (x, y) -> x + " " + y);
         Task newTask = Task.makeTask(type, taskDescription);
-        tasks[count] = newTask;
+        tasks.add(newTask);
         count++;
-        String strBreak = "    ____________________________________________________________\n";
         String toPrint = String.format("     Got it. I've added this task:\n     %s\n     Now you have %x task%s in the list.",
                 newTask.toString(), this.count, this.count > 1 ? "s" : "");
         System.out.println(strBreak + toPrint + "\n" + strBreak);
     }
 
     private String getTasks() {
-        String strBreak = "    ____________________________________________________________\n";
+        if (count == 0) {
+            return (
+                    strBreak + "    You have nothing on your list\n" + strBreak
+                    );
+        }
         String tasksStr = strBreak + "\n    Here are the tasks in your list:\n";
         for (int i = 0; i < count; i++) {
-            tasksStr += "     " + (i + 1) + ". " + this.tasks[i].toString() + "\n";
+            tasksStr += "     " + (i + 1) + ". " + this.tasks.get(i).toString() + "\n";
         }
         return (tasksStr + strBreak);
     }
@@ -40,7 +41,10 @@ public class Duke {
                 System.out.println(currentDuke.getTasks());
             } else if (input.split(" ")[0].equals("done")) {
                 int index = Integer.parseInt(input.split(" ")[1]);
-                currentDuke.tasks[index - 1].markDone();
+                currentDuke.tasks.get(index - 1).markDone();
+            } else if (input.split(" ")[0].equals("delete")) {
+                int index = Integer.parseInt(input.split(" ")[1]);
+                currentDuke.removeTask(index - 1);
             } else {
                 try {
                     currentDuke.addTask(input);
@@ -60,4 +64,11 @@ public class Duke {
 //    private static void echo(String input) {
 //        System.out.println(input);
 //    }
+    private void removeTask(int index) {
+        Task removedTask = this.tasks.get(index);
+        this.tasks.remove(index);
+        this.count--;
+        System.out.println(String.format("%s\n    Noted. I've removed this task:\n    %s\n    Now you have %x tasks in the list\n%s",
+                strBreak, removedTask, this.count, strBreak));
+    }
 }
