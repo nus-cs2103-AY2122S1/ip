@@ -1,11 +1,12 @@
 todo
 blah
 todo read book
+delete 1
 deadline return book /by June 6th
 event project meeting /at Aug 6th 2-4pm
 todo join sports club
 done 1
-done 4
+done 3
 todo borrow book
 list
 deadline return book /by Sunday

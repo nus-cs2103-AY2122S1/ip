@@ -69,6 +69,16 @@ public class Duke {
                     }
                     markAsDone(Integer.parseInt(command.getParameter_1()));
                     break;
+                case "delete":
+                    if (command.getParameter_1() == null) {
+                        throw new DukeException("☹ OOPS!!! The task number cannot be empty.");
+                    }
+                    if (Integer.parseInt(command.getParameter_1()) < 1 ||
+                            Integer.parseInt(command.getParameter_1()) > list.size()) {
+                        throw new DukeException("☹ OOPS!!! The task number is invalid");
+                    }
+                    deleteTask(Integer.parseInt(command.getParameter_1()));
+                    break;
                 case "bye":
                     bye();
                     break;
@@ -112,6 +122,13 @@ public class Duke {
     private void createTask(Task task) {
         list.add(task);
         formatPrint("Got it. I've added this task:", "  " + task.toString(),
+                "Now you have " + list.size() + " tasks in the list.");
+    }
+
+    private void deleteTask(int taskNumber) {
+        Task task = this.list.get(taskNumber - 1);
+        this.list.remove(task);
+        formatPrint("Noted. I've removed this task:", "  " + task.toString(),
                 "Now you have " + list.size() + " tasks in the list.");
     }
 
