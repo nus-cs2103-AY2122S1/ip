@@ -3,9 +3,17 @@ import java.util.Map;
 import java.util.Optional;
 
 
+/**
+ * Parser class that contains static methods to parse raw text.
+ */
 public class Parser {
 
-
+    /**
+     * Parses raw user input. Returns a Map of keywords to values, where the '/' character is
+     * parsed as a keyword.
+     * @param text The user input to be parsed
+     * @return Map of string to string, of keyword to value pairs.
+     */
     public static Map<String, String> parseCommand(String text) {
         HashMap<String, String> inputMap = new HashMap<>();
         String[] splitted = text.split("\\s");
@@ -35,14 +43,15 @@ public class Parser {
                 inputMap.put(key, null);
             }
         }
-
-//        for (String name: inputMap.keySet()) {
-//            String value = inputMap.get(name);
-//            System.out.println("key: " + name + " value: " + value);
-//        }
         return inputMap;
     }
 
+    /**
+     * Tries to parse an int.
+     * @param text A supposed numeric string.
+     * @return Optional of the parsed string. If the string is erroneous,
+     * returns an empty optional.
+     */
     public static Optional<Integer> parseInt(String text) {
         try {
             return Optional.of(Integer.parseInt(text));
