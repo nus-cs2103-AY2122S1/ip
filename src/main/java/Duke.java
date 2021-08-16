@@ -11,15 +11,15 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        addToList();
+        markAsDone();
     }
 
     /**
      * Method for duke to add things to a list and display them when called for by the user.
      * Inputs are taken by a scanner from the user's keyboard.
      */
-    public static void addToList() {
-        ArrayList<String> taskList = new ArrayList<>();
+    public static void markAsDone() {
+        ArrayList<Task> taskList = new ArrayList<>();
         System.out.println("-----------------------------------------");
         System.out.println(" Hello! I am Duke");
         System.out.println(" What can I do for you?");
@@ -27,8 +27,13 @@ public class Duke {
         System.out.println();
 
         Scanner sc = new Scanner(System.in);
+
         while (sc.hasNextLine()) {
+
             String command = sc.nextLine();
+            Task task = new Task(command);
+            String[] inputValue = command.split(" ");
+
             if (command.equals("bye")) {
                 System.out.println("    -----------------------------------------");
                 System.out.println("     Bye. Hope to see you again soon!");
@@ -36,18 +41,30 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 System.out.println("    -----------------------------------------");
+                System.out.println(("    Here are the tasks in your list:"));
                 for (int i = 0; i < taskList.size(); i++) {
                     int currNum = i + 1;
-                    System.out.println("     " + currNum + ". " + taskList.get(i));
+                    Task currTask = taskList.get(i);
+                    System.out.println("     " + currNum + ". " + "[" + currTask.getStatusIcon() + "] "
+                            + currTask.getDescription());
                 }
                 System.out.println("    -----------------------------------------");
                 System.out.println();
-            } else {
+            } else if (inputValue.length == 2 && inputValue[0].equals("done")) {
+                int idx = Integer.parseInt(inputValue[1]);
+                Task taskToComplete = taskList.get(idx - 1);
+                taskToComplete.setIsDone(true);
                 System.out.println("    -----------------------------------------");
-                System.out.println("     added: " + command);
+                System.out.println("     Nice! I've marked this task as done:");
+                System.out.println("       [" + taskToComplete.getStatusIcon() + "] " + taskToComplete.getDescription());
                 System.out.println("    -----------------------------------------");
                 System.out.println();
-                taskList.add(command);
+            } else {
+                taskList.add(task);
+                System.out.println("    -----------------------------------------");
+                System.out.println("     added: [" + task.getStatusIcon() + "] " + task.getDescription());
+                System.out.println("    -----------------------------------------");
+                System.out.println();
             }
         }
         sc.close();
