@@ -1,6 +1,11 @@
+import java.io.OptionalDataException;
 import java.util.Scanner;
 
 public class Duke {
+
+    private static final String[] taskList = new String[100];
+    private static int tasks = 0;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -16,10 +21,20 @@ public class Duke {
 
         while (!userInput.equals("bye")) {
             userInput = scanner.nextLine();
-            System.out.println(userInput);
+            if (userInput.equals("list")) {
+                for (int i = 0; i < tasks; i++) {
+                    System.out.printf("%d. %s%n", i+1, taskList[i]);
+                }
+            } else if (userInput.equals("bye")) {
+                System.out.println("Good bye.");
+            } else {
+                taskList[tasks] = userInput;
+                tasks += 1;
+                System.out.printf("added: %s\n", userInput);
+            }
         }
 
-        System.out.println("Good bye.");
+
 
     }
 }
