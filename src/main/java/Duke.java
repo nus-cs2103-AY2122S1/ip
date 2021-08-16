@@ -30,10 +30,10 @@ public class Duke {
                 break;
             default:
                 correctInput = false;
-                System.out.println("You can't add this to your task list");
+                System.out.println("I'm sorry, I don't know what that means! ☹");
         }
         if(correctInput){
-            System.out.println("I have added this task: ");
+            System.out.println("I have added this task:");
             System.out.println(commands.get(commands.size()-1));
             System.out.println("You now have " + commands.size() + " tasks in your list");
         }
@@ -43,7 +43,7 @@ public class Duke {
     void done(int listNumber){
         if(listNumber < commands.size()) {
             commands.get(listNumber).markAsDone();
-            System.out.println("Good job! I've marked this task as completed: ");
+            System.out.println("Good job! I've marked this task as completed:");
             System.out.println(commands.get(listNumber));
             commands.remove(listNumber);
             System.out.println("You now have " + commands.size() + " tasks in your list");
@@ -55,12 +55,12 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        String logo = "   _       _           \n"
-                + "  /_\\  ___| |__  _   _ \n"
+        String logo = "   _       _\n"
+                + "  /_\\  ___| |__  _   _\n"
                 + " //_\\\\/ __| '_ \\| | | |\n"
                 + "/  _  \\__ \\ | | | |_| |\n"
                 + "\\_/ \\_/___/_| |_|\\__, |\n"
-                + "                 |___/ \n";
+                + "                 |___/\n";
 
         //Greeting message
         System.out.println("Hello! I'm\n" +logo+ "\nWhat can I do for you?");
