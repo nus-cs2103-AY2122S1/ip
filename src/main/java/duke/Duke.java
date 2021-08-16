@@ -25,6 +25,8 @@ public class Duke {
         String greetings = "Hello from\n" + logo + "\nWhat can I do for you?";
         new Response(greetings).print();
 
+        // Duke commands work with a registry so that add-ons can be developed with
+        // commands simply registered like so
         COMMAND_MANAGER.registerCommands(new ListCommand(), new DoneCommand(), new ToDoCommand(), new EventCommand(),
                 new DeadlineCommand(), new DeleteCommand());
 
