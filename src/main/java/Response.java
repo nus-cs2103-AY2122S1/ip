@@ -1,29 +1,48 @@
 /**
  * Response class contains the logic for processing the commands from Duke.
- * At level-1, it supports (i) the bye command,
- * (ii) as well as echoing the user input
+ * At level-2, it supports (i) the list command, (ii) the bye command,
+ * (iii) as well as adding items to the list
  */
+
 public class Response {
-    private final String input;
+    private String[] lst = new String[100];
+    private int itemCount = 0;
 
     /**
-     * Constructor to initialise the Response class
-     * @param input The input from the user to be echoed
+     * Simple function that handles the bye command
+     * @return A string to bids farewell to the user
      */
-    Response(String input) {
-        this.input = input;
+    String bye() {
+            return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Echos the user input or says bye to the user depending on
-     * the user input
-     * @return a string that is either the user input,
-     * or a farewell statement
+     * Simple function that handles the list command
+     * @return A numbered list with the items that were added
      */
-    String Echo() {
-        if (input.equals("bye")) {
-            return "Bye. Hope to see you again soon!";
+    String list() {
+        String res = "";
+        for (int i = 0; i < itemCount; i++) {
+            res += (i+1) + ". " + lst[i] + "\n";
         }
-        return input + "\n";
+        return res;
+    }
+
+    /**
+     * Handles the input commands from Duke
+     * @param string the command input from Duke
+     * @return depending on the output, it will either be a numbered list
+     * of items currently in the list or bid the user farewell or
+     * inform the user that an item has been added to the list
+     */
+    String output(String string) {
+        if (string.equals("list")) {
+            return list();
+        } else if (string.equals("bye")) {
+            return bye();
+        }
+        lst[itemCount] = string;
+        itemCount++;
+        return "added: " + string;
     }
 }
