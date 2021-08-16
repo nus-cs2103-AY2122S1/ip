@@ -7,6 +7,10 @@ import java.util.Scanner;
  */
 
 public class Duke {
+
+    /**
+     * List of tasks that are stored
+     */
     private static ArrayList<String> tasks;
 
     /**
