@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * Encapsulates a chatbot that greets the user,
  * adds valid inputs to a task list,
- * updates the status of tasks in the list,
+ * updates tasks in the list,
  * and exits when the user types `bye`.
  */
 public class Duke {

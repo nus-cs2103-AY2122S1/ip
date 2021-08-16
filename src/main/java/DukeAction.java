@@ -3,11 +3,12 @@ public abstract class DukeAction {
 
     public static DukeActionTypeEnum getActionType(String message) throws NonExistentActionTypeException {
         String trimmedMessage = message.trim();
+        String[] messagesSplitUsingSpace = trimmedMessage.split(" ");
+        String commandWord = messagesSplitUsingSpace[0];
 
         for (DukeActionTypeEnum actionType : DukeActionTypeEnum.values()) {
-            int inputTypeLength = actionType.toString().length();
-            if (trimmedMessage.length() >= inputTypeLength
-                    && trimmedMessage.substring(0, inputTypeLength).equals(actionType.toString())) {
+            int actionTypeLength = actionType.toString().length();
+            if (commandWord.length() >= actionTypeLength && commandWord.equals(actionType.toString())) {
                 return actionType;
             }
         }
