@@ -25,7 +25,7 @@ public class TodoList {
                         result.toString()));
     }
 
-    public void markAsDone(int taskNumber) {
+    public void markAsDone(int taskNumber) throws DukeException{
         try {
             Task task = tasks[taskNumber - 1];
             task.markAsDone();
@@ -33,8 +33,8 @@ public class TodoList {
                     taskNumber,
                     task);
             PrintResponse.print(response);
-        } catch (IndexOutOfBoundsException e) {
-            PrintResponse.print(String.format("Task number %d invalid", taskNumber));
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
+            throw new DukeException(String.format("Task number %d invalid", taskNumber));
         }
     }
 

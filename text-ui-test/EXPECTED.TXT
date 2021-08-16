@@ -1,43 +1,57 @@
-Look at me! I'm
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Look at me! I'm DUKE
 How can I help?
 
 ============Duke says============
 Ooh yeah! Here are your 0 tasks
 
 =================================
-Whats next? 
+
 ============Duke says============
-IDGI...
+>:( follow format below:
+done <number between 1 and 100>
 =================================
-Whats next? 
+Whats next?
+============Duke says============
+>:( follow format below:
+done <number between 1 and 100>
+=================================
+Whats next?
 ============Duke says============
 Task number 0 invalid
 =================================
-Whats next? 
+Whats next?
 ============Duke says============
 Caan Do!
 	added: borrow book
 Look at me! 1 tasks in the list now!
 =================================
-Whats next? 
+
+============Duke says============
+Say something I can understand!! >:(
+=================================
+Whats next?
 ============Duke says============
 Caan Do!
   added: return book
 Look at me! 2 tasks in the list now!
 =================================
-Whats next? 
+
+============Duke says============
+>:( Follow format below:
+deadline <taskname...> /at <datetime...>
+=================================
+Whats next?
 ============Duke says============
 Caan Do!
   added: visit library
 Look at me! 3 in the list now!
 =================================
-Whats next? 
+
+============Duke says============
+>:( include task name after todo:
+todo <some task name>
+=================================
+Whats next?
 ============Duke says============
 Ooh yeah! Here are your 3 tasks
 1. [T][ ] borrow book
@@ -45,12 +59,22 @@ Ooh yeah! Here are your 3 tasks
 3. [E][ ] visit library (at: 4pm tuesday)
 
 =================================
-Whats next? 
+
+============Duke says============
+>:( follow format below:
+done <number between 1 and 100>
+=================================
+Whats next?
 ============Duke says============
 Ooh yeah! Task 2 marked as done:
   [D][X] return book (by: 12 Aug)
 =================================
-Whats next? 
+
+============Duke says============
+>:( Follow format below:
+deadline <taskname...> /by <datetime...>
+=================================
+Whats next?
 ============Duke says============
 Ooh yeah! Here are your 3 tasks
 1. [T][ ] borrow book
@@ -58,7 +82,12 @@ Ooh yeah! Here are your 3 tasks
 3. [E][ ] visit library (at: 4pm tuesday)
 
 =================================
-Whats next? 
+
+============Duke says============
+>:( follow format below:
+done <number between 1 and 100>
+=================================
+Whats next?
 ============Duke says============
 Ooooh yeah! Can do!
 =================================
