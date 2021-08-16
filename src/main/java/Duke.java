@@ -19,25 +19,56 @@ public class Duke {
         String input = sc.next();
         while (!input.equals("bye")) {
             System.out.println(divider);
-            if (input.equals("list")) {
-                int index = 1;
-                for (Task task : list) {
-                    System.out.println(index + ". " + "[" + task.getStatusIcon() + "] " + task);
-                    index++;
+            switch (input) {
+                case "list": {
+                    int index = 1;
+                    for (Task task : list) {
+                        System.out.println(index + ". " + task);
+                        index++;
+                    }
+                    break;
                 }
-            } else if (input.equals("done")) {
-                int index = sc.nextInt();
-                if (index < 1 || index > list.toArray().length) {
-                    // TODO: handle error here
-                    System.out.println("OOPS!!! I'm sorry, index is out of range!");
-                } else {
-                    Task task = list.get(index - 1);
-                    task.markAsDone();
-                    System.out.println("Nice! I've marked this task as done: \n  [X] " + task);
+                case "done": {
+                    int index = sc.nextInt();
+                    if (index < 1 || index > list.toArray().length) {
+                        // TODO: handle error here
+                        System.out.println("OOPS!!! I'm sorry, index is out of range!");
+                    } else {
+                        Task task = list.get(index - 1);
+                        task.markAsDone();
+                        System.out.println("Nice! I've marked this task as done: \n  " + task);
+                    }
+                    break;
                 }
-            } else {
-                list.add(new Task(input));
-                System.out.println("added: " + input);
+                case "todo": {
+                    String description = sc.nextLine();
+                    Task task = new Todo(description);
+                    list.add(task);
+                    System.out.println("Got it. I've added this task: \n  " +
+                            task +
+                            "\nNow you have " + list.toArray().length + " task(s) in the list.");
+                    break;
+                }
+                case "deadline": {
+                    String input2 = sc.nextLine();
+                    String[] line = input2.split(" /by ");
+                    Task task = new Deadline(line[0], line[1]);
+                    list.add(task);
+                    System.out.println("Got it. I've added this task: \n  " +
+                            task +
+                            "\nNow you have " + list.toArray().length + " task(s) in the list.");
+                    break;
+                }
+                case "event": {
+                    String input2 = sc.nextLine();
+                    String[] line = input2.split(" /at ");
+                    Task task = new Event(line[0], line[1]);
+                    list.add(task);
+                    System.out.println("Got it. I've added this task: \n  " +
+                            task +
+                            "\nNow you have " + list.toArray().length + " task(s) in the list.");
+                    break;
+                }
             }
             System.out.println(divider);
             input = sc.next();

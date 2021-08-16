@@ -1,8 +1,5 @@
-public class Task {
-    // task: can add task, list of tasks, can print tasks, can check done tasks
-    // TaskList
-    // one task
-    // then outside can contain a list of task object 
+public abstract class Task {
+    // TODO: children: todo, deadline, event
     protected String description;
     protected Boolean isDone;
 
@@ -21,6 +18,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
