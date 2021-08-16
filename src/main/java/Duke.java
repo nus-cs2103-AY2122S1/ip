@@ -29,6 +29,18 @@ public class Duke {
                 "Now you have %d tasks in the list", addedTask.toString(), TaskManager.taskCount()));
     }
 
+    private static void completeTask(String input) {
+        String[] parsedInput = input.split(" ");
+        if (parsedInput.length < 2) {
+            throw new IllegalArgumentException("Not enough argument for done");
+        }
+        int id = Integer.parseInt(parsedInput[1]);
+        reply(String.format(
+                "Nice! I've marked this task as done: \n" +
+                "%s", TaskManager.completeTask(id-1).toString()
+        ));
+    }
+
     public static void main(String[] args) {
         greet();
         Scanner scanner = new Scanner(System.in);
@@ -41,9 +53,7 @@ public class Duke {
                     quit();
                     break;
                 } else if (userInput.startsWith("done")) {
-                    int id = Integer.parseInt(userInput.split(" ")[1]);
-                    // need to -1 due to 0-indexing
-                    reply(TaskManager.completeTask(id - 1));
+                    completeTask(userInput);
                 } else {
                     addTask(userInput);
                 }

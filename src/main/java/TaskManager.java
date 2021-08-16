@@ -34,13 +34,11 @@ public class TaskManager {
         return taskList.size();
     }
 
-    public static String completeTask(int taskId) throws IllegalArgumentException {
+    public static Task completeTask(int taskId) throws IllegalArgumentException {
         if (taskId < taskList.size() && taskId >= 0) {
             taskList.set(taskId, taskList.get(taskId).done());
 
-            return String.format(
-                    "Nice! I've marked this task as done: \n" +
-                    "%s", taskList.get(taskId).toString());
+            return taskList.get(taskId);
         } else {
             throw new IllegalArgumentException("☹ OOPS!!! Task Index is invalid!!");
         }
