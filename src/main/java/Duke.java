@@ -1,8 +1,10 @@
 public class Duke {
     final Listener listener;
+    final TaskList taskList;
 
     private Duke() {
-        listener = new Listener();
+        taskList = new TaskList();
+        listener = new Listener(taskList);
     }
 
     private void start(){

@@ -16,6 +16,14 @@ public class TaskList {
         tasks.add(result);
     }
 
+    public void toggleDone(int index) {
+        boolean result = tasks.get(index - 1).toggleDone();
+        System.out.println(result
+                ? Display.OUTPUT_DISPLAY + "すごい! Duke-さん marked this task as done! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧"
+                : Display.OUTPUT_DISPLAY + "Duke-さん marked this task as not done!");
+        System.out.println(Display.OUTPUT_SPACES + tasks.get(index - 1));
+    }
+
     public void displayList() {
         if (tasks.size() == 0) {
             System.out.println(Display.OUTPUT_DISPLAY + "There is nothing to display! :angery:");

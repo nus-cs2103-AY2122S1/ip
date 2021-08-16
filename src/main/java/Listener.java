@@ -12,9 +12,10 @@ public class Listener {
 
     Pattern donePattern = Pattern.compile("done (\\d+)");
 
-    public Listener() {
+    public Listener(TaskList taskList) {
         sc = new Scanner(System.in);
-        taskList = new TaskList();
+        this.taskList = taskList;
+
     }
 
     public void startListen() {
@@ -32,7 +33,7 @@ public class Listener {
                 // Display items
                 taskList.displayList();
             } else if (checkDone.matches()) {
-                System.out.println("COMPLETE INDEX " + checkDone.group(1));
+                taskList.toggleDone(Integer.parseInt(checkDone.group(1)));
             } else {
                 // Add input to list
                 taskList.add(input);
