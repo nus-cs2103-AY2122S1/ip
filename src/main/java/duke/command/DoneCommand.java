@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Duke;
-import duke.Response;
+import duke.exception.InvalidArgumentException;
 
 /**
  * Represents a command for which marks a task in the main dukelist as
@@ -14,8 +14,7 @@ public class DoneCommand implements Command {
         try {
             i = Integer.parseInt(args);
         } catch (NumberFormatException exception) {
-            new Response("Invalid Input! Please enter an integer...").print();
-            return;
+            throw new InvalidArgumentException("Invalid Input! Please enter an integer...");
         }
         Duke.getList().markCompleted(i).print();
     }

@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Duke;
-import duke.Response;
+import duke.exception.InvalidArgumentException;
 import duke.task.EventTask;
 
 /**
@@ -11,11 +11,9 @@ public class EventCommand implements Command {
 
     @Override
     public void exec(String args) {
-        if (args.isEmpty()) {
-            new Response("☹ OOPS!!! The description of an event cannot be empty.").print();
-        } else {
-            Duke.getList().addWithResponse(new EventTask(args)).print();
-        }
+        if (args == null || args.isEmpty())
+            throw new InvalidArgumentException("☹ OOPS!!! The description of an event cannot be empty.");
+        Duke.getList().addWithResponse(new EventTask(args)).print();
     }
 
     @Override

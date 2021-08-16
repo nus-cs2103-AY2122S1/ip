@@ -2,7 +2,7 @@ package duke.command;
 
 import java.util.HashMap;
 import java.util.Map;
-import duke.Response;
+import duke.exception.InvalidCommandException;
 
 /**
  * Manager of all Duke's commands. All commands has to registered/added to its
@@ -35,18 +35,16 @@ public class CommandManager {
         String[] arr = input.split(" ", 2);
         Command command = registry.get(arr[0]);
         if (command != null) {
-            command.exec(arr.length <= 1 ? "" : arr[1]);
+            command.exec(arr.length <= 1 ? null : arr[1]);
         } else {
-            this.defaultExec(input);
+            this.defaultExec();
         }
     }
 
     /**
      * The default behaviour with the input if there are no commands called.
-     * 
-     * @param input of the user
      */
-    private void defaultExec(String input) {
-        new Response("☹ OOPS!!! I'm sorry, but I don't know what that means :-(").print();
+    private void defaultExec() {
+        throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }
