@@ -9,10 +9,6 @@ public class Duke {
         System.out.println(message);
     }
 
-    public static void echo(String input) {
-        System.out.println(input);
-    }
-
     public static void bye() {
         System.out.println("Bye. Hope to see you again soon!");
     }

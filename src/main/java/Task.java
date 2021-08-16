@@ -1,8 +1,8 @@
-public class Item {
+public class Task {
     private String name;
     private boolean done;
 
-    public Item(String name) {
+    public Task(String name) {
         this.name = name;
         this.done = false;
     }
