@@ -75,7 +75,7 @@ public class Duke {
      * @param str   Thing to add to the list.
      */
     private static void addToTDL(String str) {
-        
+        toDoList.add(str);
     }
 
 
