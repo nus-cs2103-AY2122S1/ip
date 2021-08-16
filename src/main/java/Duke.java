@@ -31,11 +31,30 @@ public class Duke {
                             System.out.println("\t" + (i + 1) + ". " + currTask);
                         }
                     }
-                } else if (command.equals("done")) {
+                } else if (command.equals("delete")) {
                     arguments = sc.nextLine().stripLeading();
+                    if (arguments.isEmpty()) {
+                        throw new NoIndexException();
+                    }
                     int index = Integer.parseInt(arguments);
                     if (index < 1 || index > tasks.size()) {
-                        throw new DoneIndexException();
+                        throw new InvalidIndexException();
+                    } else {
+                        Task taskDeleted = tasks.remove(index - 1);
+                        System.out.println("\tNoted! I've removed this task:");
+                        System.out.println("\t  " + taskDeleted);
+                    }
+                    System.out.printf("\tNow you have %s " +
+                            (tasks.size() == 1 ? "task" : "tasks")
+                            + " in the list.%n", tasks.size());
+                } else if (command.equals("done")) {
+                    arguments = sc.nextLine().stripLeading();
+                    if (arguments.isEmpty()) {
+                        throw new NoIndexException();
+                    }
+                    int index = Integer.parseInt(arguments);
+                    if (index < 1 || index > tasks.size()) {
+                        throw new InvalidIndexException();
                     } else {
                         Task taskToBeMarked = tasks.get(index - 1);
                         taskToBeMarked.markTaskAsDone();
