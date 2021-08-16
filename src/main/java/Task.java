@@ -1,3 +1,6 @@
+/**
+ * Represents a task object.
+ */
 public abstract class Task {
     /** The description of the task */
     protected String description;

@@ -4,6 +4,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * Holds the tasks and relevant metadata. Provides methods of accessing, manipulating, and deleting data.
+ */
 public class Memory {
     /** The array holding the tasks */
     private static final ArrayList<Task> list = new ArrayList<>();

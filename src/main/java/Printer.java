@@ -1,5 +1,8 @@
 import java.util.Arrays;
 
+/**
+ * Utility class that handles all output to the console.
+ */
 public class Printer {
     /**
      * Parses and formats the output.
@@ -20,7 +23,7 @@ public class Printer {
     }
 
     /**
-     * Prints the formatted output on the screen.
+     * Prints the formatted output to the console.
      *
      * @param output variable length arguments, where each argument corresponds to a new line to be printed
      */
