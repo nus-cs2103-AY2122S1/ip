@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Augury {
-    static String VER     = "v0.2.0"; // Level-2: Add, List
+    static String VER     = "v0.3.0"; // Level-3: Mark as Done
     static String WELCOME =
             "    +-------------------------------+\n" +
             "    | *                 *         * |\n" +
@@ -13,7 +14,7 @@ public class Augury {
             "    |      *             *          |\n" +
             "    |             *         "+VER+"  |\n" +
             "    +-------------------------------+";
-    static ArrayList<String> taskList = new ArrayList<>();
+    static TaskList taskList = new TaskList();
 
     public static void speak(String text) {
         System.out.println("\t_________________________________");
@@ -26,19 +27,27 @@ public class Augury {
     }
 
     public void handleAddTask(String task) {
-        taskList.add(task);
+        taskList.add(new Task(task));
         speak("added task: " + task);
     }
 
     public void handleDisplayTasks() {
-        StringBuilder res = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
-            res.append(Integer.toString(i + 1))
-                .append(". ")
-                .append(taskList.get(i))
-                .append("\n\t ");
+        speak(taskList.toString());
+    }
+
+    public void handleMarkAsDone(String args) {
+        // clean input: split commas, trim whitespace
+        String[] args_String = args.split(",");
+        for (int i = 0; i < args_String.length; i++) {
+            args_String[i] = args_String[i].trim();
         }
-        speak(res.toString());
+        // convert to ints and sort
+        ArrayList<Integer> args_Integer = new ArrayList<>();
+        for (String s : args_String) {
+            args_Integer.add(Integer.parseInt(s));
+        }
+
+        speak(taskList.markAsDone(args_Integer));
     }
 
     public void loop() {
@@ -52,6 +61,8 @@ public class Augury {
                 break;
             } else if (input.equals("list")) {
                 handleDisplayTasks();
+            } else if (input.length() > 4 && input.substring(0,4).equals("done")) {
+                handleMarkAsDone(input.substring(5));
             } else {
                 handleAddTask(input);
             }
