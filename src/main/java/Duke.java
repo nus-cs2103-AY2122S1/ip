@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,6 +11,7 @@ public class Duke {
         + "| | | | | | | |/ / _ \\\n"
         + "| |_| | |_| |   <  __/\n"
         + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final ArrayList<String> tasks = new ArrayList<>();
 
     /**
      * Starts the bot
@@ -19,21 +21,35 @@ public class Duke {
     public static void main(String[] args) {
         printLogo();
         greet();
-        handleCmds();
+        handleCommands();
     }
 
-    private static void handleCmds() {
+    private static void handleCommands() {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String cmd = sc.nextLine();
             switch (cmd) {
+            case "list":
+                printAllTasks();
+                break;
             case "bye":
                 sc.close();
                 robotPrint("Bye. Hope to see you again soon!");
                 return;
             default:
-                robotPrint(cmd);
+                addTask(cmd);
             }
+        }
+    }
+
+    private static void addTask(String task) {
+        tasks.add(task);
+        robotPrint("added --> " + task);
+    }
+
+    private static void printAllTasks() {
+        for (int i = 0; i < tasks.size(); i++) {
+            robotPrint((i + 1) + ". " + tasks.get(i));
         }
     }
 
