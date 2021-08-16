@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -5,7 +6,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         boolean dukeOpen = true;
-        Task[] taskList = new Task[100];
+        ArrayList<Task> taskList = new ArrayList<>();
         int taskIndex = 0;
 
         System.out.println("Hello! I'm Duke\n" +
@@ -20,6 +21,7 @@ public class Duke {
                 } else if (userInput.equals("list")) {
                     // List all tasks in the task list.
                     int i = 0;
+                    System.out.println("Here are the tasks in your list:");
                     for (Task task : taskList) {
                         if (task != null) {
                             System.out.println(++i + "." + task.toString());
@@ -36,10 +38,10 @@ public class Duke {
                     String[] splitString = userInput.split(" ");
                     if (splitString.length > 1) {
 
-                        int taskNumber = Integer.parseInt(splitString[1]);
+                        int taskNumber = Integer.parseInt(splitString[1].trim());
 
                         try {
-                            Task doneTask = taskList[taskNumber - 1];
+                            Task doneTask = taskList.get(taskNumber - 1);
                             doneTask.markDone();
                             System.out.println("Nice! I've marked this task as done:\n" + "  " +
                                     doneTask.toString());
@@ -53,6 +55,31 @@ public class Duke {
                                 "you want to mark as done.");
                     }
 
+                } else if (userInput.startsWith("delete")) {
+                    // Deletes a task from the task list.
+                    String[] splitString = userInput.split(" ", 2);
+
+                    if (splitString.length > 1 && splitString[1].trim().length() > 0) {
+
+                        int taskNumber = Integer.parseInt(splitString[1].trim());
+
+                        try {
+                            Task deletedTask = taskList.get(taskNumber - 1);
+                            taskList.remove(taskNumber - 1);
+                            taskIndex--;
+                            String taskCount = (taskIndex == 1) ? "1 task" : taskIndex + " tasks";
+                            System.out.println("Noted. I've removed this task:\n" + "  " +
+                                    deletedTask.toString() + "\n" + "Now you have " + taskCount +
+                                    " in the list.");
+
+                        } catch (Exception e) {
+                            throw new DukeException("☹ OOPS!!! That task does not exist.");
+                        }
+
+                    } else {
+                        throw new DukeException("☹ OOPS!!! Please state which task number you want to delete.");
+                    }
+
                 } else if (userInput.startsWith(("todo")) || userInput.startsWith("deadline")
                         || userInput.startsWith("event")) {
                     // Adds a Task to the task list.
@@ -60,7 +87,8 @@ public class Duke {
                     String[] splitString = userInput.split(" ", 2);
 
                     if (splitString.length > 1 && splitString[1].trim().length() > 0) {
-                        String substring = splitString[1];
+                        String substring = splitString[1].trim();
+
                         if (userInput.startsWith("todo")) {
                             newTask = new ToDo(substring);
 
@@ -83,7 +111,7 @@ public class Duke {
                             }
                         }
 
-                        taskList[taskIndex] = newTask;
+                        taskList.add(taskIndex, newTask);
                         taskIndex++;
                         String taskCount = (taskIndex == 1) ? "1 task" : taskIndex + " tasks";
                         System.out.println("Got it. I've added this task:\n" + "  " + newTask.toString() +

@@ -8,6 +8,10 @@ list
 done 1
 done 4
 list
+delete 300
+delete -5
+delete 1
+list
 todo
 deadline
 event
