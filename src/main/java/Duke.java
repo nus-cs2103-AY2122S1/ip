@@ -1,3 +1,5 @@
+import javax.naming.NoInitialContextException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Node {
@@ -34,9 +36,11 @@ class Node {
 }
 
 public class Duke {
-    private static int taskCount = 0;
-    private static Node dummyHead = new Node(new Task(""));
-    private static Node lastNode = dummyHead;
+//    private static int taskCount = 0;
+//    private static Node dummyHead = new Node(new Task(""));
+//    private static Node lastNode = dummyHead;
+    private static ArrayList<Task> tasks = new ArrayList<>();
+
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         String userInput = "";
@@ -65,7 +69,14 @@ public class Duke {
                         printList();
                         break;
                     case "done":
-                        markNode(Integer.parseInt(words[1]));
+                        if (words.length < 2) {
+                            throw new DukeException("☹ OOPS!!! Please specify which task you wish to complete.");
+                        }
+                        int index = Integer.parseInt(words[1]) - 1;
+                        if (index < 0 || index >= tasks.size()) {
+                            throw new DukeException("☹ OOPS!!! You just gave an invalid task to be completed.");
+                        }
+                        markNode(index);
                         break;
                     case "todo":
                         if (words.length < 2) {
@@ -108,56 +119,54 @@ public class Duke {
         }
     }
 
-    private static void markNode(int taskNumber) {
-        Node pointer = dummyHead;
+    private static void markNode(int index) {
+        Task task = tasks.get(index);
+        task.markAsDone();
         lineSeparator();
-        for (int i = 0; i < taskNumber; i++) {
-            pointer = pointer.getNext();
-        }
-        pointer.markTask();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + pointer);
+        System.out.println("  " + task);
         lineSeparator();
+//        Node pointer = dummyHead;
+//        lineSeparator();
+//        for (int i = 0; i < taskNumber; i++) {
+//            pointer = pointer.getNext();
+//        }
+//        pointer.markTask();
+//        System.out.println("Nice! I've marked this task as done:");
+//        System.out.println("  " + pointer);
+//        lineSeparator();
     }
 
-    private static void printAddedMessage(Node node) {
+    private static void printAddedMessage(Task task) {
         lineSeparator();
         System.out.println("Got it. I've added this task:");
-        System.out.println(node.getTask().toString());
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
+        System.out.println(task);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         lineSeparator();
     }
 
     private static void addTodo(String description) {
-        taskCount++;
-        Node nextNode = new Node(new Todo(description));
-        lastNode.setNext(nextNode);
-        lastNode = nextNode;
-        printAddedMessage(nextNode);
+        Task task = new Todo(description);
+        tasks.add(task);
+        printAddedMessage(task);
     }
 
     private static void addDeadline(String description, String by) {
-        taskCount++;
-        Node nextNode = new Node(new Deadline(description, by));
-        lastNode.setNext(nextNode);
-        lastNode = nextNode;
-        printAddedMessage(nextNode);
+        Task task = new Deadline(description, by);
+        tasks.add(task);
+        printAddedMessage(task);
     }
 
     private static void addEvent(String description, String timing) {
-        taskCount++;
-        Node nextNode = new Node(new Event(description, timing));
-        lastNode.setNext(nextNode);
-        lastNode = nextNode;
-        printAddedMessage(nextNode);
+        Task task = new Event(description, timing);
+        tasks.add(task);
+        printAddedMessage(task);
     }
 
     private static void printList() {
-        Node pointer = dummyHead;
         lineSeparator();
-        for (int i = 0; i < taskCount; i++) {
-            pointer = pointer.getNext();
-            System.out.println((i+1) + ". " + pointer.toString());
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i+1) + ". " + tasks.get(i));
         }
         lineSeparator();
     }
