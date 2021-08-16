@@ -26,32 +26,39 @@ public class Duke {
                     System.out.println(styleResponse(GOODBYE));
                     break scanner;
                 case "list":
-                    System.out.println(styleResponse(this.list()));
+                    System.out.println(this.list());
                     break;
                 default:
-                    System.out.println(styleResponse(this.add(currLine)));
+                    System.out.println(this.add(currLine));
             }
         }
         sc.close();
     }
-
+    /**
+     * Adds item to to-do list.
+     * @param inputString
+     * @return Returns and echoes string that was added.
+     */
     public String add(String inputString) {
         this.itemList.add(new Item(inputString));
-        return "Added: " + inputString;
+        return styleResponse("Added: " + inputString);
     }
-
+    /**
+     * Prints all items in list.
+     * @return String of tally.
+     */
     public String list() {
         ListIterator<Item> iterator = this.itemList.listIterator();
         if (!iterator.hasNext()) {
             return "Empty!";
         } else {
-            String returnBuffer = "";
+            ArrayList<String> returnBuffer = new ArrayList<>();
             Integer currIdx = 1;
             while (iterator.hasNext()) {
-                returnBuffer = returnBuffer.concat(currIdx.toString() + ". " + iterator.next().toString()) + "\n";
+                returnBuffer.add(currIdx.toString() + ". " + iterator.next().toString());
                 currIdx++;
             }
-            return returnBuffer;
+            return styleResponse(returnBuffer);
         }
     }
 
@@ -73,6 +80,6 @@ public class Duke {
         for (String line : inputStrings) {
             returnBuffer = returnBuffer.concat("     " + line + "\n");
         }
-        return returnBuffer + "\n     --------------------";
+        return returnBuffer + "     --------------------";
     }
 }
