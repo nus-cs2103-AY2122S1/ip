@@ -14,12 +14,14 @@ public class Duke {
         System.out.println(logo);
 
         Scanner sc = new Scanner(System.in);
-        String command = "";
-        String[] list = new String[100];
+        Task[] taskList = new Task[100];
         int currentIndex = 0;
 
         while (true) {
-            command = sc.nextLine();
+            String userInput = sc.nextLine();
+            String[] commandAndArgument = userInput.split(" ", 2);
+            String command = commandAndArgument[0];
+
             if (command.equals("bye")) {
                 String exitText = "____________________________________________________________\n"
                         + "Bye. Hope to see you again soon!\n"
@@ -29,17 +31,28 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 System.out.println("____________________________________________________________");
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < currentIndex; i++) {
-                    System.out.println(String.format("%d. %s", i + 1, list[i]));
+                    System.out.println(String.format("%d.%s", i + 1, taskList[i]));
                 }
                 System.out.println("____________________________________________________________");
+            } else if (command.equals("done")) {
+                int taskIndex = Integer.parseInt(commandAndArgument[1]) - 1;
+                taskList[taskIndex].markAsDone();
+                String markedAsDoneText = String.format(
+                        "____________________________________________________________\n"
+                                + "Nice! I've marked this task as done:\n"
+                                + "%s\n"
+                                + "____________________________________________________________",
+                        taskList[taskIndex]);
+                System.out.println(markedAsDoneText);
             } else {
-                list[currentIndex] = command;
+                taskList[currentIndex] = new Task(userInput);
                 currentIndex++;
-                String echoText = "____________________________________________________________\n"
-                        + "added: " + command + '\n'
+                String addTaskText = "____________________________________________________________\n"
+                        + "added: " + userInput + '\n'
                         + "____________________________________________________________";
-                System.out.println(echoText);
+                System.out.println(addTaskText);
             }
         }
     }
