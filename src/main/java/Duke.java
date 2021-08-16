@@ -17,6 +17,7 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
 
             } else if (userInput.equals("list")) {
+                // List all tasks in the task list.
                 int i = 0;
                 for (Task task : taskList) {
                     if (task != null) {
@@ -27,14 +28,31 @@ public class Duke {
                 }
 
             } else if (userInput.startsWith("done ")) {
+                // Mark a certain task as done.
                 Task doneTask = taskList[Integer.parseInt(userInput.split(" ")[1]) - 1];
                 doneTask.markDone();
                 System.out.println("Nice! I've marked this task as done: \n" + "  " + doneTask.toString());
 
             } else {
-                taskList[taskIndex] = new Task(userInput);
+                // Adds a Task to the task list.
+                Task newTask;
+                String substring = userInput.split(" ", 2)[1];
+                if (userInput.startsWith("todo ")) {
+                    newTask = new ToDo(substring);
+
+                } else if (userInput.startsWith("deadline ")) {
+                    String[] nameAndTime = substring.split(" /by ");
+                    newTask = new Deadline(nameAndTime[0], nameAndTime[1]);
+
+                } else {
+                    String[] nameAndTime = substring.split(" /at ");
+                    newTask = new Event(nameAndTime[0], nameAndTime[1]);
+                }
+                taskList[taskIndex] = newTask;
                 taskIndex++;
-                System.out.println("added: " + userInput);
+                String taskCount = (taskIndex == 1) ? "1 task" : taskIndex + " tasks";
+                System.out.println("Got it. I've added this task: \n" + "  " + newTask.toString() +
+                        "\n" + "Now you have " + taskCount + " in the list.");
             }
         }
     }

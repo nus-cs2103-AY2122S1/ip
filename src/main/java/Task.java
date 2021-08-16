@@ -1,6 +1,6 @@
 public class Task {
-    private String taskName;
-    private boolean isDone;
+    protected String taskName;
+    protected boolean isDone;
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -9,14 +9,5 @@ public class Task {
 
     public void markDone() {
         this.isDone = true;
-    }
-
-    @Override
-    public String toString() {
-        if (this.isDone) {
-            return "[X] " + this.taskName;
-        } else {
-            return "[ ] " + this.taskName;
-        }
     }
 }
