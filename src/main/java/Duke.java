@@ -77,7 +77,7 @@ public class Duke {
                     input = sc.nextLine();
                     break;
                 default:
-                    System.out.println(commandList);
+                    System.out.println(bot.getCommand());
                     input = sc.nextLine();
 
             }

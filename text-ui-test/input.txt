@@ -1,0 +1,13 @@
+hi
+deadline return book /by sunday
+todo eat lunch
+event lecture /at tuesday 2pm-4pm
+todo homework
+todo play some games
+list
+done 2
+list
+done 3
+list
+not a command
+bye

@@ -47,4 +47,8 @@ public class ChatBot {
         return line + "I've added this task:\n" + t +"\n" + "You have " + tasks.size() + " tasks left!\n" + line;
     }
 
+    public String getCommand() {
+        return line + "Unknown Command!\n" + line;
+    }
+
 }
