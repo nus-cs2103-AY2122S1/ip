@@ -62,7 +62,7 @@ public class Duke {
 	 *
 	 * @param command command entered by user (delete [task number])
 	 * @throws IllegalFormatException if user gives empty or invalid task number
-	 * @throws TaskNotFoundException  if the task specified by the task number does not exists
+	 * @throws TaskNotFoundException if the task specified by the task number does not exists
 	 */
 	private void taskDelete(String command) throws IllegalFormatException, TaskNotFoundException {
 		// Throw exception if user gives empty or invalid task number
@@ -89,7 +89,7 @@ public class Duke {
 	 *
 	 * @param command command entered by user (done [task number])
 	 * @throws IllegalFormatException if user gives empty or invalid task number
-	 * @throws TaskNotFoundException  if the task specified by the task number does not exists
+	 * @throws TaskNotFoundException if the task specified by the task number does not exists
 	 */
 	private void taskDone(String command) throws IllegalFormatException, TaskNotFoundException {
 		// Throw exception if user gives empty or invalid task number
