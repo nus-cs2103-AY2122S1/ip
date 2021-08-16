@@ -25,8 +25,10 @@ public class Duke {
      * exit behavior.
      */
     public void bye() {
+        System.out.println("___________________________________________________");
         String byeCommand = "Bye. Hope to see you again soon!";
         System.out.println(byeCommand);
+        System.out.println("___________________________________________________\n");
     }
 
     /**
@@ -37,26 +39,32 @@ public class Duke {
     public void addTask(Task task) {
         this.tasks.add(task);
         String output = "Added: " + task.toString();
+        System.out.println("___________________________________________________");
         System.out.println(output);
         System.out.println("Now you have " + this.tasks.size() + " task" + ((tasks.size() <= 1) ? "" : "s") + " in the list");
+        System.out.println("___________________________________________________\n");
     }
 
     /**
      * display a list of tasks added.
      */
     public void displayTasks() {
+        System.out.println("___________________________________________________");
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < this.tasks.size(); i++) {
             Task task = tasks.get(i);
             System.out.println((i + 1) + ". " + tasks.get(i).toString());
         }
+        System.out.println("___________________________________________________\n");
     }
 
 
     private void markTaskAsDone(int taskIdx) {
         Task task = this.tasks.get(taskIdx);
         task.markAsDone();
+        System.out.println("___________________________________________________");
         System.out.println(" Nice! I've marked this task as done: \n" + task);
+        System.out.println("___________________________________________________\n");
     }
 
     private String getAction(String command) {
