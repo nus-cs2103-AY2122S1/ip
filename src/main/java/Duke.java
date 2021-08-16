@@ -44,10 +44,18 @@ public class Duke {
                     // determine type of task, create new task
                     if (taskType.equals("deadline")) {
                         String[] details = taskDetails.split(" /by ");
-                        newTask = new Deadline(details[0], details[1]);
+                        if (details.length == 1) {
+                            throw new DukeException("deadlineTime");
+                        } else {
+                            newTask = new Deadline(details[0], details[1]);
+                        }
                     } else if (taskType.equals("event")) {
                         String[] details = taskDetails.split(" /at ");
-                        newTask = new Event(details[0], details[1]);
+                        if (details.length == 1) {
+                            throw new DukeException("eventPeriod");
+                        } else {
+                            newTask = new Event(details[0], details[1]);
+                        }
                     } else if (taskType.equals("todo")) {
                         newTask = new Todo(taskDetails);
                     } else { // taskName is invalid
