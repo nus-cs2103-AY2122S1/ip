@@ -12,6 +12,7 @@ public class Meow {
         BYE,
         LIST,
         DONE,
+        DELETE,
         TODO,
         EVENT,
         DEADLINE
@@ -63,11 +64,13 @@ public class Meow {
     private void displayList() throws NoItemInTheListException {
         int len = tasksList.size();
         if (len > 0) {
+            System.out.println("------------------------------------------------------------------------------");
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < len; i++) {
                 Task task = tasksList.get(i);
                 System.out.println(i + 1 + ". " + task.toString());
             }
+            System.out.println("------------------------------------------------------------------------------");
         } else {
             throw new NoItemInTheListException();
         }
@@ -88,8 +91,10 @@ public class Meow {
             if (taskNumber <= tasksList.size() && taskNumber > 0) {
                 Task completedTask = tasksList.get(taskNumber - 1);
                 completedTask.markAsDone();
+                System.out.println("------------------------------------------------------------------------------");
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("[" + completedTask.getStatusIcon() + "] " + completedTask.getDescription());
+                System.out.println(completedTask.toString());
+                System.out.println("------------------------------------------------------------------------------");
             } else {
                 throw new InvalidTaskIndex();
             }
@@ -97,7 +102,6 @@ public class Meow {
             // String cannot be parsed to integer
            throw new NotSuchTaskFoundException();
         }
-
     }
 
     private void addTodo(String todo) {
@@ -105,9 +109,11 @@ public class Meow {
         tasksList.add(newTodo);
         int taskListLength = tasksList.size();
         String task = taskListLength <= 1 ? " task " : " tasks ";
+        System.out.println("------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:");
         System.out.println(newTodo.toString());
         System.out.println("Now you have " + taskListLength + task + "in the list.");
+        System.out.println("------------------------------------------------------------------------------");
     }
 
     private void addDeadline(String deadline, String by) {
@@ -115,9 +121,11 @@ public class Meow {
         tasksList.add(newDeadline);
         int taskListLength = tasksList.size();
         String task = taskListLength <= 1 ? " task " : " tasks ";
+        System.out.println("------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:");
         System.out.println(newDeadline.toString());
         System.out.println("Now you have " + taskListLength + task + "in the list.");
+        System.out.println("------------------------------------------------------------------------------");
     }
 
     private void addEvent(String event, String at) {
@@ -125,9 +133,11 @@ public class Meow {
         tasksList.add(newEvent);
         int taskListLength = tasksList.size();
         String task = taskListLength <= 1 ? " task " : " tasks ";
+        System.out.println("------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:");
         System.out.println(newEvent.toString());
         System.out.println("Now you have " + taskListLength + task + "in the list.");
+        System.out.println("------------------------------------------------------------------------------");
     }
 
     private String getTask(String input, Command typeOfTask) throws MeowException {
@@ -154,6 +164,27 @@ public class Meow {
             split = task.split(" /at ");
         }
         return split;
+    }
+
+    private void deleteTask(String index) throws MeowException {
+        try {
+            int taskNumber = Integer.parseInt(index);
+            if (taskNumber <= tasksList.size() && taskNumber > 0) {
+                Task removedTask = tasksList.remove(taskNumber - 1);
+                int taskListLength = tasksList.size();
+                String task = taskListLength <= 1 ? " task " : " tasks ";
+                System.out.println("------------------------------------------------------------------------------");
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(removedTask.toString());
+                System.out.println("Now you have " + taskListLength + task + "in the list.");
+                System.out.println("------------------------------------------------------------------------------");
+            } else {
+                throw new InvalidTaskIndex();
+            }
+        } catch (NumberFormatException exception) {
+            // String cannot be parsed to integer
+            throw new NotSuchTaskFoundException();
+        }
     }
 
     /**
@@ -206,6 +237,10 @@ public class Meow {
                         throw new EmptyDeadlineTimeException();
                     }
 
+                }
+                case DELETE: {
+                    deleteTask(commandWord[1].trim());
+                    break;
                 }
                 default: {
                     throw new InvalidInputException();
