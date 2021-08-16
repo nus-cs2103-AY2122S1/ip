@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     /** Number of tasks stored. */
-    private static final Task[] list = new Task[100];
+    private static final ArrayList<Task> list = new ArrayList<>(100);
     private static int count;
 
     public static void main(String[] args) {
@@ -101,7 +102,7 @@ public class Duke {
             if (i == count - 1) {
                 end = "";
             }
-            String out = ((Integer)(i + 1)).toString() + "." + list[i].toString() + end;
+            String out = ((Integer)(i + 1)).toString() + "." + list.get(i).toString() + end;
             curr.append(out);
         }
         return curr.toString();
@@ -139,13 +140,13 @@ public class Duke {
      */
     public static boolean checkDone(String response, int len) throws EmptyInputException,OutOfRangeException{
         //check with the special response "done X", where X is a number.
-        if (len >= 6 && response.substring(0, 5).equals("done ")
+        if (len >= 6 && response.startsWith("done ")
                 && chekDigit(response.substring(5,len))) {
             int curr = Integer.parseInt(response.substring(5,len));
             if (curr > count || curr <= 0) {
                 throw new OutOfRangeException();
             }
-            Task shouldMark = list[curr - 1];
+            Task shouldMark = list.get(curr - 1);
             shouldMark.markAsDone();
             String title = "Nice! I've marked this task as done: \n";
             String out = "     " + shouldMark.toString();
@@ -181,9 +182,9 @@ public class Duke {
      */
     public static boolean checkTodo(String response, int len) throws EmptyInputException{
         //check with the special response "todo X", where X is what to do.
-        if (len >= 5 && response.substring(0, 5).equals("todo ")) {
-            list[count] = new Todo(response.substring(5, len));
-            Task curr = list[count];
+        if (len >= 5 && response.startsWith("todo ")) {
+            list.add(count, new Todo(response.substring(5, len)));
+            Task curr = list.get(count);
             count ++;
             System.out.println(getPattern(getOutputFrame(curr.toString())));
             return true;
@@ -204,13 +205,13 @@ public class Duke {
      */
     public static  boolean checkDeadline(String response, int len) throws EmptyInputException{
         //check with the special response "deadline X", where X is what to do and by what time.
-        if (len >= 9 && response.substring(0, 9).equals("deadline ")
+        if (len >= 9 && response.startsWith("deadline ")
                 && response.substring(9, len).contains(" /by ")) {
             String[] parts = response.substring(9, len).split(" /by ");
             String content = parts[0];
             String time = parts[1];
-            list[count] = new Deadline(content, time);
-            Task curr = list[count];
+            list.add(count, new Deadline(content, time));
+            Task curr = list.get(count);
             count ++;
             System.out.println(getPattern(getOutputFrame(curr.toString())));
             return true;
@@ -231,13 +232,13 @@ public class Duke {
      */
     public static boolean checkEvent(String response, int len) throws EmptyInputException{
         //check with the special response "todo X", where X is what to do.
-        if (len >= 6 && response.substring(0, 6).equals("event ")
+        if (len >= 6 && response.startsWith("event ")
                 && response.substring(6, len).contains(" /at ")) {
             String[] parts = response.substring(9, len).split(" /at ");
             String content = parts[0];
             String time = parts[1];
-            list[count] = new Event(content, time);
-            Task curr = list[count];
+            list.add(count, new Event(content, time));
+            Task curr = list.get(count);
             count ++;
             System.out.println(getPattern(getOutputFrame(curr.toString())));
             return true;
