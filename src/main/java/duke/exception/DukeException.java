@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Exception class unique to Duke.
+ * Exception class unique that is unique to Duke.
  *
  * @author limzk126
  * @version Level-5

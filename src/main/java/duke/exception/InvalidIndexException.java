@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Exception class to handle marking of non-existing tasks.
+ * Exception class to handle the marking of non-existing tasks.
  *
  * @author limzk126
  * @version Level-5

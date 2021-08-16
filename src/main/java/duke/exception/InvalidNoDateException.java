@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Exception class to handle wrong format for tasks without deadline.
+ * Exception class to handle the wrong format for tasks without deadline.
  *
  * @author limzk126
  * @version Level-5
