@@ -17,6 +17,9 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String userInput;
 
+        String tasks[] = new String[100];
+        int counter = 0;
+
         while (true) {
             userInput = scanner.nextLine();
 
@@ -25,9 +28,17 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println(dash);
                 break;
-            } else {
+            } else if (userInput.matches("list")){
                 System.out.println(dash);
-                System.out.println(userInput);
+                for (int i = 0; i < counter; i++) {
+                    System.out.println(i+1 + ". " + tasks[i]);
+                }
+                System.out.println(dash);
+            } else {
+                tasks[counter] = userInput;
+                counter += 1;
+                System.out.println(dash);
+                System.out.println("added: " + userInput);
                 System.out.println(dash);
             }
         }
