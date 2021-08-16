@@ -13,19 +13,17 @@ public class ChatBot {
         return line + "bye! for now...\n" + line;
     }
 
-    public String addItems(String input) {
-        Task t = new Task(input);
+    public String addTodo(String input) {
+        Task t = new Todo(input);
         tasks.add(t);
-        return line + "added: " + input +"\n" + line;
+        return line + "I've added this task:\n" + t +"\n" + "You have " + tasks.size() + " tasks left!\n" + line;
     }
 
     public String getListMessage() {
         String listMessage = "Here are your tasks... if you choose to do it...\n";
 
         for (int i = 0; i < tasks.size(); i++) {
-            String status = tasks.get(i).getDone();
-            String message = tasks.get(i).getMessage();
-            listMessage = listMessage + (i + 1) + ".[" + status + "] " + message + "\n";
+            listMessage = listMessage + (i + 1) + "." + tasks.get(i).toString() + "\n";
         }
         return line + listMessage + line;
     }
@@ -34,7 +32,19 @@ public class ChatBot {
         Task complete = tasks.get(index - 1);
         complete.completeTask();
 
-        return line + "Well done! You finally completed " + complete.getMessage() + "!\n" + line;
+        return line + "Well done! You finally completed" + complete.getName() + "!\n" + line;
+    }
+
+    public String addDeadline(String name, String deadline) {
+        Task t = new Deadline(name, deadline);
+        tasks.add(t);
+        return line + "I've added this task:\n" + t +"\n" + "You have " + tasks.size() + " tasks left!\n" + line;
+    }
+
+    public String addEvent(String name, String time) {
+        Task t = new Event(name, time);
+        tasks.add(t);
+        return line + "I've added this task:\n" + t +"\n" + "You have " + tasks.size() + " tasks left!\n" + line;
     }
 
 }

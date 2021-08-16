@@ -1,9 +1,9 @@
 public class Task {
-    private String message;
+    private String name;
     private boolean done;
 
-    public Task(String message) {
-        this.message = message;
+    public Task(String name) {
+        this.name = name;
         this.done = false;
     }
 
@@ -11,12 +11,17 @@ public class Task {
         return this.done ? "X" : " ";
     }
 
-    public String getMessage() {
-        return this.message;
+    public String getName() {
+        return this.name;
     }
 
     public void completeTask() {
         this.done = true;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.getDone() + "] " + this.getName();
     }
 
 }
