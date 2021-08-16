@@ -1,17 +1,17 @@
 public class Task {
-    private String title;
+    private String description;
     private boolean status;
     private int number;
     private static int itemCounter = 1;
 
-    public Task(String title) {
-        this.title = title;
+    public Task(String description) {
+        this.description = description;
         this.status = false;
         this.number = itemCounter;
         itemCounter++;
     }
 
-    public String isDone() {
+    public String getStatusIcon() {
         if (!status) {
             return "[ ] ";
         } else {
@@ -23,8 +23,8 @@ public class Task {
         this.status = true;
     }
 
-    public String getTitle() {
-        return title;
+    public String getDescription() {
+        return description;
     }
 
     public int getNumber() {

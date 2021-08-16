@@ -31,7 +31,7 @@ public class Duke {
         for (Task item : dukeList) {
             if (item != null) {
                 isEmpty = true;
-                showListText.append("\n").append(item.getNumber()).append(".").append(item.isDone()).append(item.getTitle());
+                showListText.append("\n").append(item.getNumber()).append(".").append(item.getStatusIcon()).append(item.getDescription());
             }
         }
         if (!isEmpty) {
@@ -47,7 +47,7 @@ public class Duke {
             if (item != null && (item.getNumber() == itemNumber)) {
                 item.markAsDone();
                 message = ("Nice! I've marked this task as done:\n"
-                                        + item.isDone() + " " + item.getTitle());
+                                        + item.getStatusIcon() + " " + item.getDescription());
             }
         }
         System.out.println(message);
