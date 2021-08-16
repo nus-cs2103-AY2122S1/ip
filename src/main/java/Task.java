@@ -5,7 +5,7 @@ public class Task {
     private String name;
     private boolean completed;
 
-    private Task(String name) {
+    public Task(String name) {
         this.id = Task.maxId;
         this.name = name;
         this.completed = false;
@@ -33,7 +33,7 @@ public class Task {
     }
 
     public String details() {
-        String checkbox = "[" + " " + "]";
+        String checkbox = "[" + (getCompleted() ? "X" : " ") + "]";
         return checkbox + " " + this.getName();
     }
 
