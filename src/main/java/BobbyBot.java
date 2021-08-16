@@ -23,15 +23,20 @@ public class BobbyBot {
         switch (command) {
         case "bye":
             sayBye();
+            break;
         case "list":
             printList();
+            break;
         case "done":
             markAsDone(Integer.parseInt(userInputList.get(1)));
+            break;
         case "todo":
+            userInputList.remove(0);
             description = String.join(" ", userInputList);
             createToDo(description);
             break;
         case "deadline":
+            userInputList.remove(0);
             //split description and by
             userInputArgs = String.join(" ", userInputList).split("/by ");
             description = userInputArgs[0];
@@ -39,6 +44,7 @@ public class BobbyBot {
             createDeadline(description, by);
             break;
         case "event":
+            userInputList.remove(0);
             //split description and at
             userInputArgs = String.join(" ", userInputList).split("/at ");
             description = userInputArgs[0];
