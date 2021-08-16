@@ -10,6 +10,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         String command;
+        String listCommand = "";
+        int i = 1;
 
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -20,16 +22,20 @@ public class Duke {
 
         System.out.println(INTRO);
         while (true) {
-            command = sc.next();
+            command = sc.nextLine();
 
             if (command.equals("bye")) {
                 System.out.println(OUTRO);
                 break;
+
+            } else if (command.equals("list")) {
+                System.out.println(listCommand);
+
             } else {
-                System.out.println(command);
+                listCommand = listCommand + i + ". " + command + "\n";
+                i++;
+                System.out.println("added: " + command);
             }
-
         }
-
     }
 }
