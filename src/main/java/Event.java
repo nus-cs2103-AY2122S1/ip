@@ -1,7 +1,9 @@
 public class Event extends Item {
 
     public Event(String[] strings) {
-        super(strings);
+        String line = String.join(" ", strings);
+        String substring = line.substring(line.indexOf("/at"), line.length());
+        System.out.println(substring);
     }
 
     @Override
