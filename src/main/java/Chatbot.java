@@ -39,28 +39,41 @@ public class Chatbot {
             return false;
         } else if (input.equals("list")) {
             listItems();
-            return true;
         } else if (input.contains("done")) {
             markAsDone(input);
-            return true;
+        } else {
+            addItem(input);
         }
 
-        taskList.add(new Task(input));
-        System.out.printf("Item successfully added: %s%n", input);
         printDashedLine();
-
         return true;
+    }
+
+    void addItem(String input) {
+        Task newItem;
+        if (input.contains("todo")) {
+            newItem = new ToDo(input.split(" ", 2)[1]);
+        } else if (input.contains("deadline")) {
+            String[] description = input.split(" ", 2)[1].split("/");
+            String name = description[0];
+            String deadline = description[1].split(" ")[1];
+            newItem = new Deadline(name, deadline);
+        } else {
+            String[] description = input.split(" ", 2)[1].split("/");
+            String name = description[0];
+            String time = description[1].split(" ", 2)[1];
+            newItem = new Event(name, time);
+        }
+        taskList.add(newItem);
     }
 
     void listItems() {
         taskList.listItems();
-        printDashedLine();
     }
 
     void markAsDone(String input) {
         int index = Integer.parseInt(input.split(" ")[1]);
         taskList.markTaskAsDone(index);
-        printDashedLine();
     }
 
     void printDashedLine() {

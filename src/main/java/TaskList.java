@@ -29,9 +29,13 @@ public class TaskList {
 
     void add(Task item) {
         list.add(item);
+        System.out.println("Noted! I've added the following task:");
+        System.out.printf("    %s%n", item.toString());
+        System.out.printf("Total tasks: %d%n", list.size());
     }
 
     void listItems() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             System.out.printf("%d. %s%n", (i + 1), list.get(i));
         }
