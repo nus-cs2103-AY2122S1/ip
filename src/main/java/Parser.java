@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -11,6 +12,7 @@ public class Parser {
     /**
      * Parses raw user input. Returns a Map of keywords to values, where the '/' character is
      * parsed as a keyword.
+     *
      * @param text The user input to be parsed
      * @return Map of string to string, of keyword to value pairs.
      */
@@ -20,27 +22,33 @@ public class Parser {
 
         String key = splitted[0];
         StringBuilder arguments = new StringBuilder();
-        for (int i = 1; i < splitted.length; i++) {
-            if (splitted[i].startsWith("/")) {
+        for (int i = 1;
+             i < splitted.length;
+             i++) {
+            if (splitted[i].startsWith("/") && ValidParams.isValid(splitted[i])) {
                 if (arguments.length() > 0) {
                     arguments.deleteCharAt(arguments.length() - 1);
-                    inputMap.put(key, arguments.toString());
+                    inputMap.put(key,
+                            arguments.toString());
                     arguments.setLength(0);
-                    key = splitted[i];
                 } else {
-                    inputMap.put(key, null);
-                    key = splitted[i];
+                    inputMap.put(key,
+                            null);
                 }
+                key = splitted[i];
             } else {
-                arguments.append(String.format("%s ", splitted[i]));
+                arguments.append(String.format("%s ",
+                        splitted[i]));
             }
         }
         if (arguments.length() > 0) {
             arguments.deleteCharAt(arguments.length() - 1);
-            inputMap.put(key, arguments.toString());
+            inputMap.put(key,
+                    arguments.toString());
         } else {
             if (!inputMap.containsKey(key)) {
-                inputMap.put(key, null);
+                inputMap.put(key,
+                        null);
             }
         }
         return inputMap;
@@ -48,6 +56,7 @@ public class Parser {
 
     /**
      * Tries to parse an int.
+     *
      * @param text A supposed numeric string.
      * @return Optional of the parsed string. If the string is erroneous,
      * returns an empty optional.
@@ -57,6 +66,25 @@ public class Parser {
             return Optional.of(Integer.parseInt(text));
         } catch (NumberFormatException e) {
             return Optional.empty();
+        }
+    }
+
+
+    /**
+     * Ensures only the right commands are parsed with ValidParams enum.
+     */
+    public enum ValidParams {
+        AT("/at"), BY("/by");
+
+        private final String value;
+
+        ValidParams(String value) {
+            this.value = value;
+        }
+
+        public static boolean isValid(String test) {
+            return Arrays.stream(ValidParams.values())
+                    .anyMatch(x -> x.value.equals(test));
         }
     }
 }

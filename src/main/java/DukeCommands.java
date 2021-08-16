@@ -21,7 +21,8 @@ public enum DukeCommands {
                 output.deleteCharAt(output.length() - 1);
                 Duke.printMsg(output.toString());
                 return true;
-            }), DONE("done",
+            }),
+    DONE("done",
             (Map<String, String> map, ArrayList<Task> list) -> {
                 Parser.parseInt(map.get("done"))
                         .map(x -> {
@@ -40,7 +41,8 @@ public enum DukeCommands {
 
 
                 return true;
-            }), EVENT("event",
+            }),
+    EVENT("event",
             (Map<String, String> map, ArrayList<Task> list) -> {
                 if (!map.containsKey("/at")) {
                     throw new DukeException("Missing positional argument '/at'.");
@@ -54,7 +56,8 @@ public enum DukeCommands {
                             list.size()));
                 }
                 return true;
-            }), DELETE("delete",
+            }),
+    DELETE("delete",
             (Map<String, String> map, ArrayList<Task> list) -> {
                 Parser.parseInt(map.get("delete"))
                         .map(x -> {
@@ -74,7 +77,8 @@ public enum DukeCommands {
                                 )
                         );
                 return true;
-            }), DEADLINE("deadline",
+            }),
+    DEADLINE("deadline",
             (Map<String, String> map, ArrayList<Task> list) -> {
 
                 if (!map.containsKey("/by")) {
@@ -89,7 +93,8 @@ public enum DukeCommands {
                             list.size()));
                 }
                 return true;
-            }), TODO("todo",
+            }),
+    TODO("todo",
             (Map<String, String> map, ArrayList<Task> list) -> {
                 if (map.get("todo") == null) {
                     throw new DukeException("Todo body cannot be empty.");
@@ -100,7 +105,8 @@ public enum DukeCommands {
                             list.size()));
                 }
                 return true;
-            }), INVALID("invalid",
+            }),
+    INVALID("invalid",
             (Map<String, String> map, ArrayList<Task> list) -> {
                 throw new DukeException("Unrecognized command.");
             });
