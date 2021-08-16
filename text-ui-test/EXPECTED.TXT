@@ -3,40 +3,67 @@ Hello! I'm Duke
 What can I do for you?
 ===============================================
 ===============================================
-Got it. I've added this task:
-  [E][ ] meet friends for lunch (at: deck)
+I have added the following task:
+  [D][ ] test1 (by: test2)
 Now you have 1 task in the list.
 ===============================================
 ===============================================
-Got it. I've added this task:
-  [D][ ] complete ip week 2 (by: thursday)
+I have added the following task:
+  [T][ ] test 3
 Now you have 2 tasks in the list.
 ===============================================
 ===============================================
-Got it. I've added this task:
-  [T][ ] watch lecture for 2103
+I have added the following task:
+  [E][ ] test 4 (at: test 5)
 Now you have 3 tasks in the list.
 ===============================================
 ===============================================
-Got it. I've added this task:
-  [D][ ] complete ip level 4 task (by: today)
-Now you have 4 tasks in the list.
+I have marked the following task as completed:
+  [E][X] test 4 (at: test 5)
+===============================================
+===============================================
+Invalid index provided.
+===============================================
+===============================================
+Invalid index provided.
+===============================================
+===============================================
+I have marked the following task as completed:
+  [D][X] test1 (by: test2)
 ===============================================
 ===============================================
 Here are the tasks in your list:
-1. [E][ ] meet friends for lunch (at: deck)
-2. [D][ ] complete ip week 2 (by: thursday)
-3. [T][ ] watch lecture for 2103
-4. [D][ ] complete ip level 4 task (by: today)
+1. [D][X] test1 (by: test2)
+2. [T][ ] test 3
+3. [E][X] test 4 (at: test 5)
 ===============================================
 ===============================================
-Nice! I've marked this task as done:
-  [D][X] complete ip level 4 task (by: today)
+Invalid index.
+===============================================
+===============================================
+I have removed the following task:
+  [D][X] test1 (by: test2)
+Now you have 2 tasks in the list.
 ===============================================
 ===============================================
 Here are the tasks in your list:
-1. [E][ ] meet friends for lunch (at: deck)
-2. [D][ ] complete ip week 2 (by: thursday)
-3. [T][ ] watch lecture for 2103
-4. [D][X] complete ip level 4 task (by: today)
+1. [T][ ] test 3
+2. [E][X] test 4 (at: test 5)
+===============================================
+===============================================
+I have removed the following task:
+  [T][ ] test 3
+Now you have 1 task in the list.
+===============================================
+===============================================
+Here are the tasks in your list:
+1. [E][X] test 4 (at: test 5)
+===============================================
+===============================================
+I have removed the following task:
+  [E][X] test 4 (at: test 5)
+Now you have 0 tasks in the list.
+===============================================
+===============================================
+Here are the tasks in your list:
 ===============================================

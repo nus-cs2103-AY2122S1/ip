@@ -1,7 +1,15 @@
-event meet friends for lunch /at deck
-deadline complete ip week 2 /by thursday
-todo watch lecture for 2103
-deadline complete ip level 4 task /by today
+deadline test1 /by test2
+todo test 3
+event test 4 /at test 5
+done 3
+done 5
+done 0
+done 1
 list
-done 4
+delete 5
+delete 1
+list
+delete 1
+list
+delete 1
 list
