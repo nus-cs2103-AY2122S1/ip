@@ -33,6 +33,12 @@ public class Duke {
         exit();
     }
 
+    /**
+     * This method parses the input from the user.
+     *
+     * @param input The input inserted by the user.
+     * @throws DukeException This exception is thrown when the input is invalid.
+     */
     public static void parseInput(String input) throws DukeException {
         if (input.equals("list")) {
             list();
@@ -41,13 +47,21 @@ public class Duke {
             if (inputArr.length == 1) {
                 throw new DukeException("Indicate the id of the task which you have completed!");
             }
-            markDone(Integer.parseInt(inputArr[1]));
+            try {
+                markDone(Integer.parseInt(inputArr[1]));
+            } catch (DukeException e) {
+                throw new DukeException(e.getMessage());
+            }
         } else if (Pattern.matches("delete.*", input)) {
             String[] inputArr = input.split(" ");
             if (inputArr.length == 1) {
                 throw new DukeException("Indicate the id of the task which you want to remove!");
             }
-            delete(Integer.parseInt(inputArr[1]));
+            try {
+                delete(Integer.parseInt(inputArr[1]));
+            } catch (DukeException e) {
+                throw new DukeException(e.getMessage());
+            }
         } else if (Pattern.matches("event.*", input)) {
             String[] inputArr = input.replaceFirst("event ","").split("/at");
             if (inputArr.length == 1) {
@@ -95,23 +109,39 @@ public class Duke {
     }
 
     /**
-     * To include error handling if id > length of list.
-     * @param id
+     * This method marks a specific task as completed.
+     *
+     * @param id The id of the task as per display with the list() method.
+     * @throws DukeException This error is thrown if the id specified is invalid.
      */
-    public static void markDone(int id) {
-        System.out.println("You've finished the task? Good job!");
-        System.out.println("This task has been marked as done:");
-        list.get(id - 1).complete();
-        System.out.println(list.get(id - 1).displayInfo());
-        System.out.println();
+    public static void markDone(int id) throws DukeException{
+        if (id - 1 > listLength) {
+            throw new DukeException("The id you entered was invalid!");
+        } else {
+            System.out.println("You've finished the task? Good job!");
+            System.out.println("This task has been marked as done:");
+            list.get(id - 1).complete();
+            System.out.println(list.get(id - 1).displayInfo());
+            System.out.println();
+        }
     }
 
-    public static void delete(int id) {
-        System.out.println("Okay! Removing the task:");
-        Task removed = list.remove(id - 1);
-        System.out.println(removed.displayInfo());
-        listLength--;
-        System.out.println();
+    /**
+     * This method deletes specific task from the list.
+     *
+     * @param id The id of the task as per display with the list() method.
+     * @throws DukeException This error is thrown if the id specified is invalid.
+     */
+    public static void delete(int id) throws DukeException {
+        if (id - 1 > listLength) {
+            throw new DukeException("The id you entered was invalid!");
+        } else {
+            System.out.println("Okay! Removing the task:");
+            Task removed = list.remove(id - 1);
+            System.out.println(removed.displayInfo());
+            listLength--;
+            System.out.println();
+        }
     }
 
     /**
