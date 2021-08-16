@@ -3,30 +3,6 @@ package memory;
 import java.util.Arrays;
 
 public class Storage {
-    public static class Task {
-        private final String description;
-        private boolean isDone;
-
-        Task(String entry) {
-            this.description = entry;
-        }
-
-        void markDone() {
-            isDone = true;
-        }
-
-        void markIncomplete() {
-            isDone = false;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public String getStatus() {
-            return isDone ? "x" : " ";
-        }
-    }
     private final Task[] storage;
     private int index;
 
@@ -35,21 +11,32 @@ public class Storage {
         index = 0;
     }
 
-    public boolean push(String value) {
-        if (index >= storage.length) {
-            return false;
-        }
+    public Task push(String value) {
         storage[index] = new Task(value);
         index += 1;
-        return true;
+        return storage[index - 1];
     }
 
-    public boolean markDone(int i) {
-        if (i >= index || i < 0) {
-            return false;
+    public Task push(String[] args) {
+        String command = args[0];
+        switch (command) {
+            case "todo":
+                storage[index] = new ToDo(args[1]);
+                break;
+            case "deadline":
+                storage[index] = new Deadline(args[1], args[2]);
+                break;
+            case "event":
+                storage[index] = new Event(args[1], args[2]);
+                break;
         }
+        index += 1;
+        return storage[index - 1];
+    }
+
+    public Task markDone(int i) {
         storage[i].markDone();
-        return true;
+        return storage[i];
     }
 
     public Task[] getStorage() {
@@ -58,5 +45,9 @@ public class Storage {
 
     public Task getTaskByIdx(int id) {
         return storage[id];
+    }
+
+    public int numTasks() {
+        return index;
     }
 }
