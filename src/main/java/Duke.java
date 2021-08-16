@@ -105,7 +105,7 @@ public class Duke {
                 throw new InvalidTaskException();
         }
         list.add(task);
-        display("Got it. I've added this task:\n "
+        display("Got it. I've added this task:\n"
                 + "  "
                 + task.toString() + "\n"
                 + "Now you have " + list.size() + " tasks in the list"
@@ -126,7 +126,7 @@ public class Duke {
             // IndexOutOfBoundsException thrown here if taskNum > list size
             Task task = list.get(taskNum);
             task.markDone();
-            display("Nice! I've marked this task as done: \n"
+            display("Nice! I've marked this task as done:\n"
                     + "  "
                     + task.toString());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -148,7 +148,7 @@ public class Duke {
             // IndexOutOfBoundsException thrown here if taskNum > list size
             Task task = list.get(taskNum);
             list.delete(taskNum);
-            display("Noted. I've removed this task: \n"
+            display("Noted. I've removed this task:\n"
                     + "  "
                     + task.toString() + "\n"
                     + "Now you have " + list.size() + " tasks in the list");
