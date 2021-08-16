@@ -5,3 +5,59 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+------------------
+Hello! I'm Duke
+What can I do for you?
+------------------
+
+------------------
+Got it. I've added this task:
+  [T][ ] read book
+Now you have 1 in the list
+------------------
+------------------
+Got it. I've added this task:
+  [D][ ] return book (by:  thursday 4pm)
+Now you have 2 in the list
+------------------
+------------------
+Got it. I've added this task:
+  [E][ ] conference (at:  friday 12-1pm)
+Now you have 3 in the list
+------------------
+------------------
+Got it. I've added this task:
+  [T][ ] join sports club
+Now you have 4 in the list
+------------------
+------------------
+Got it. I've added this task:
+  [T][ ] borrow book
+Now you have 5 in the list
+------------------
+------------------
+1.[T][ ]read book
+2.[D][ ]return book  (by:  thursday 4pm)
+3.[E][ ]conference  (at:  friday 12-1pm)
+4.[T][ ]join sports club
+5.[T][ ]borrow book
+------------------
+
+------------------
+Nice! I've marked this task as done:
+  [X] return book  (by:  thursday 4pm)
+------------------
+
+------------------
+1.[T][ ]read book
+2.[D][X] return book  (by:  thursday 4pm)
+3.[E][ ]conference  (at:  friday 12-1pm)
+4.[T][ ]join sports club
+5.[T][ ]borrow book
+------------------
+
+------------------
+Bye. Hope to see you soon!
+
+------------------
+

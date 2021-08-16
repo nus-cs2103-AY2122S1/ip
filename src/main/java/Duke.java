@@ -94,7 +94,7 @@ public class Duke {
         record.get(num-1).setCompleted();
         System.out.println("------------------");
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(" " + "[X] " + record.get(num-1).toString());
+        System.out.println("  " + "[X] " + record.get(num-1).toString());
         System.out.println("------------------\n");
     }
 
