@@ -39,6 +39,9 @@ public class Duke {
                     );
                 // if we are marking a task as done
                 } else if (inputs[0].equals("done")) {
+                    if (inputs.length < 2) {
+                        throw new DukeException("☹ OOPS!!! Task number to be marked as done cannot be empty.");
+                    }
                     String[] result = input.split(" ");
                     int ind = Integer.valueOf(result[1]) - 1;
 
