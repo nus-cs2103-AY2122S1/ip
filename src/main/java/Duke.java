@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    private static ArrayList<String> textHistory = new ArrayList<>();
 
     /**
      * When run, opens a chat bot that greets the user and echos any user's input. If the input
@@ -32,13 +35,25 @@ public class Duke {
     private static boolean evaluateUserInput(String input) {
         if (input.equalsIgnoreCase("bye")) {
             return false;
+        } else if (input.equalsIgnoreCase("list")) {
+            listHistory();
+            return true;
         }
         echoUser(input);
+        Duke.textHistory.add(input);
         return true;
     }
 
     private static void echoUser(String text) {
-        System.out.println(text + "\n");
+        System.out.println("Added: " + text + "\n");
+    }
+
+    private static void listHistory() {
+        System.out.println("-----------------------------------------------------------");
+        for (int i = 0; i < Duke.textHistory.size(); i++) {
+            System.out.println((i + 1) + ". " + Duke.textHistory.get(i));
+        }
+        System.out.println("-----------------------------------------------------------");
     }
 
     private static void startUp() {
