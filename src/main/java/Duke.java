@@ -76,6 +76,7 @@ public class Duke {
      */
     private static void addToTDL(String str) {
         toDoList.add(str);
+        dukeSays("added: " + str);
     }
 
 
