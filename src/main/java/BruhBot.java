@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class BruhBot {
@@ -8,11 +10,12 @@ public class BruhBot {
             + " |_______/ |__/       \\______/ |__/  |__/";
 
     private static final String GREETING = String.format("What can\n%s\ndo for you today?", LOGO);
-    private static final String FAREWELL = "Bye. Hope to see you again soon!";
+    private static final String FAREWELL = "Bye. Hope to see you again soon!\n";
     private static final String STOP_SIGNAL_STRING = "bye";
 
     private String userCommand = "";
     private Scanner userCommandScanner = new Scanner(System.in);
+    private List<String> tasks = new ArrayList<>();
 
     /**
      * Initializes the chatbot.
@@ -39,9 +42,28 @@ public class BruhBot {
 
     private boolean respond(String command) {
         boolean isStopCommand = userCommand.equals(STOP_SIGNAL_STRING);
-        String response = (isStopCommand ? FAREWELL : command) + '\n';
+        String response = isStopCommand ? FAREWELL : process(command);
         System.out.println(formatResponse(response));
         return isStopCommand;
+    }
+
+    /**
+     * Processes the command entered, then returns the appropriate response.
+     * 
+     * @param command The command entered by the user.
+     * @return The response to be displayed.
+     */
+    private String process(String command) {
+        if (command.equals("list")) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < tasks.size(); i++) {
+                sb.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
+            }
+            return sb.toString();
+        } else {
+            tasks.add(command);
+            return "added: " + command + '\n';
+        }
     }
 
     private String formatResponse(String content) {
