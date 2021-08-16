@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,7 +13,7 @@ public class Duke {
         startBot();
 
         //level 1
-        Scanner sc = new Scanner(System.in);
+        /*Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String message = sc.nextLine();
 
@@ -22,12 +24,42 @@ public class Duke {
                 System.out.println(message);
             }
         }
+        sc.close();*/
+
+        //level 2
+        List<String> toDoList = new ArrayList<>();
+
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String message = sc.nextLine();
+
+            if (message.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            } else if (message.equals("list")) {
+                list(toDoList);
+            } else {
+                toDoList.add(message);
+                System.out.println(add(message));
+            }
+        }
         sc.close();
     }
 
     public static void startBot() {
         String intro = "Hello! I'm Duke\n" +
-                "     What can I do for you?";
+                "    What can I do for you?";
         System.out.println(intro);
+    }
+
+    public static String add(String add) {
+        return "added: "+ add;
+    }
+
+    public static void list(List<String> list) {
+        int order = 1;
+        for(String s : list){
+            System.out.println(order++ +". "+s);
+        }
     }
 }
