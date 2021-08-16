@@ -8,6 +8,6 @@ public class Event extends Task {
 
     @Override
     public String listEntry() {
-        return "[E]" + super.listEntry() + "at: " + this.period;
+        return "[E]" + super.listEntry() + " (at: " + this.period + ")";
     }
 }

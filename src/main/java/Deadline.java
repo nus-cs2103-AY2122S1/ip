@@ -8,6 +8,6 @@ public class Deadline extends Task {
 
     @Override
     public String listEntry() {
-        return "[D]" + super.listEntry() + "by: " + this.deadline;
+        return "[D]" + super.listEntry() + " (by: " + this.deadline + ")";
     }
 }
