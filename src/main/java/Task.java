@@ -1,6 +1,6 @@
-public class Task {
-    private String description;
-    private boolean done;
+public abstract class Task {
+    protected String description;
+    protected boolean done;
 
     public Task(String input) {
         description = input;

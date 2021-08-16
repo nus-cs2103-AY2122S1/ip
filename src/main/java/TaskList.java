@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.regex.Matcher;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -11,9 +13,10 @@ public class TaskList {
         return ("There are " + tasks.size() + " tasks in your list");
     }
 
-    public void add(String input) {
-        Task result = new Task(input);
-        tasks.add(result);
+    public void add(Matcher input, TaskType type) {
+        Optional.ofNullable(
+                TaskType.getTask(input, type))
+                    .map(tasks::add);
     }
 
     public void toggleDone(int index) {
