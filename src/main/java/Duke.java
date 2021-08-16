@@ -1,6 +1,8 @@
 public class Duke {
 
+    /* Default line separator design. */
     private static String sepLine = "///\\\\\\///\\\\\\<<<===================================>>>///\\\\\\///\\\\\\";
+
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -11,7 +13,23 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         System.out.println(sepLine);
-        
+
+        runInputLoopMain();
+    }
+
+    /**
+     * The main loop used when detecting keyboard input.
+     * Stops when "bye" is detected.
+     */
+    private static void runInputLoopMain() {
+        /* Stores last input by user. */
+        String lastInput = null;
+
+        while (lastInput != "bye") {
+            
+
+        }
 
     }
+
 }
