@@ -1,10 +1,23 @@
 package Model;
 
 public class Task {
-	private String desc;
+	private final String desc;
+	private boolean isDone = false;
 	
-	Task(String desc) {
+	public Task(String desc) {
 		this.desc = desc;
+	}
+	
+	public void checkDone() {
+		this.isDone = true;
+	}
+	
+	public void uncheckDone() {
+		this.isDone = false;
+	}
+	
+	public boolean isDone() {
+		return this.isDone;
 	}
 	
 	@Override

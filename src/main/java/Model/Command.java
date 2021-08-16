@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * list of commands available for dude chatbot
+ * list of commands available for dude chatting bot
  * <ol>
  *
  *  <li>
@@ -11,7 +11,10 @@ package Model;
  *      LIST : list the entire tasks array
  *  </li>
  *  <li>
- *      ADD : add the sentence to the storage
+ *      ADD : add the whole sentence to the storage
+ *  </li>
+ *  <li>
+ *      DONE : mark the task as done, 1 argument is required which is the number of task (the rest is ignored)
  *  </li>
  *  <li>
  *      INVALID : any other commands other than bye, the whole sentence would be echoed back instead

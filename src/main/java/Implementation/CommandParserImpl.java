@@ -31,6 +31,9 @@ public class CommandParserImpl implements CommandParser {
 				// ignore the rest of the arguments here
 				commandProcessor.processCommand(Command.LIST, List.of());
 				break;
+			case "done":
+				commandProcessor.processCommand(Command.DONE, List.of(parsedCommands.get(1)));
+				break;
 			default:
 				// add
 				commandProcessor.processCommand(Command.ADD, List.of(input));
