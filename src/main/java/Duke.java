@@ -43,62 +43,62 @@ public class Duke {
             String inputLine = scanner.nextLine().trim();
             String command = inputLine.split(" ")[0];
             String inputLineWithoutCommand = inputLine.replace(command, "").trim();
-            switch (command) {
-            case LIST_COMMAND:
-                prettifier.print(taskManager.toString());
-                break;
-            case MARK_TASK_AS_DONE_COMMAND:
-                if (inputLineWithoutCommand.isEmpty()) {
-                    prettifier.print(MARK_DONE_BAD_ARGS_MESSAGE);
+            try {
+                switch (command) {
+                case LIST_COMMAND:
+                    prettifier.print(taskManager.toString());
                     break;
-                }
-                try {
-                    int taskNumber = Integer.parseInt(inputLineWithoutCommand);
-                    prettifier.print(taskManager.markTaskAsDone(taskNumber));
-                } catch (NumberFormatException e) {
-                    // User provided an argument that is not parsable.
-                    prettifier.print(INVALID_TASK_NUMBER_MESSAGE);
-                }
-                break;
-            case ADD_TODO_COMMAND:
-                String toDoName = inputLineWithoutCommand;
-                if (toDoName.isEmpty()) {
-                    prettifier.print(TODO_BAD_ARGS_MESSAGE);
+                case MARK_TASK_AS_DONE_COMMAND:
+                    if (inputLineWithoutCommand.isEmpty()) {
+                        throw new DukeException(MARK_DONE_BAD_ARGS_MESSAGE);
+                    }
+                    try {
+                        int taskNumber = Integer.parseInt(inputLineWithoutCommand);
+                        prettifier.print(taskManager.markTaskAsDone(taskNumber));
+                    } catch (NumberFormatException e) {
+                        // User provided an argument that is not parsable.
+                        throw new DukeException(INVALID_TASK_NUMBER_MESSAGE);
+                    }
                     break;
-                }
-                ToDo toDo = new ToDo(toDoName);
-                prettifier.print(taskManager.addTask(toDo));
-                break;
-            case ADD_DEADLINE_COMMAND:
-                String[] deadlineDetails = inputLineWithoutCommand.split(DEADLINE_COMMAND_DELIMITER);
-                if (deadlineDetails.length < 2) {
-                    prettifier.print(DEADLINE_BAD_ARGS_MESSAGE);
+                case ADD_TODO_COMMAND:
+                    String toDoName = inputLineWithoutCommand;
+                    if (toDoName.isEmpty()) {
+                        throw new DukeException(TODO_BAD_ARGS_MESSAGE);
+                    }
+                    ToDo toDo = new ToDo(toDoName);
+                    prettifier.print(taskManager.addTask(toDo));
                     break;
-                }
-                String deadlineName = deadlineDetails[0];
-                String deadlineDueDate = deadlineDetails[1];
-                Deadline deadline = new Deadline(deadlineName, deadlineDueDate);
-                prettifier.print(taskManager.addTask(deadline));
-                break;
-            case ADD_EVENT_COMMAND:
-                String[] eventDetails = inputLineWithoutCommand.split(EVENT_COMMAND_DELIMITER);
-                if (eventDetails.length < 2) {
-                    prettifier.print(EVENT_BAD_ARGS_MESSAGE);
+                case ADD_DEADLINE_COMMAND:
+                    String[] deadlineDetails = inputLineWithoutCommand.split(DEADLINE_COMMAND_DELIMITER);
+                    if (deadlineDetails.length < 2) {
+                        throw new DukeException(DEADLINE_BAD_ARGS_MESSAGE);
+                    }
+                    String deadlineName = deadlineDetails[0];
+                    String deadlineDueDate = deadlineDetails[1];
+                    Deadline deadline = new Deadline(deadlineName, deadlineDueDate);
+                    prettifier.print(taskManager.addTask(deadline));
                     break;
+                case ADD_EVENT_COMMAND:
+                    String[] eventDetails = inputLineWithoutCommand.split(EVENT_COMMAND_DELIMITER);
+                    if (eventDetails.length < 2) {
+                        throw new DukeException(EVENT_BAD_ARGS_MESSAGE);
+                    }
+                    String eventName = eventDetails[0];
+                    String eventTimestamp = eventDetails[1];
+                    Event event = new Event(eventName, eventTimestamp);
+                    prettifier.print(taskManager.addTask(event));
+                    break;
+                case EXIT_COMMAND:
+                    prettifier.print(EXIT_MESSAGE);
+                    scanner.close();
+                    return;
+                default:
+                    throw new DukeException(INVALID_COMMAND_MESSAGE);
                 }
-                String eventName = eventDetails[0];
-                String eventTimestamp = eventDetails[1];
-                Event event = new Event(eventName, eventTimestamp);
-                prettifier.print(taskManager.addTask(event));
-                break;
-            case EXIT_COMMAND:
-                prettifier.print(EXIT_MESSAGE);
-                scanner.close();
-                return;
-            default:
-                prettifier.print(INVALID_COMMAND_MESSAGE);
-                break;
+            } catch (DukeException e) {
+                prettifier.print(e.getMessage());
             }
+
         }
     }
 
