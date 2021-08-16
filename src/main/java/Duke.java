@@ -61,7 +61,7 @@ public class Duke {
     private static void dukeSays(String printThis) {
         System.out.println("");
         System.out.println(sepLineOpen);
-        System.out.println(printThis);
+        System.out.println("    " + printThis);
         System.out.println(sepLineClose);
     }
 
