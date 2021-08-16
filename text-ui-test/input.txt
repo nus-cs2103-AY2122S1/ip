@@ -4,4 +4,11 @@ event meeting tmr /at 2-4am Sunday
 list
 done 2
 list
+todo
+todo1
+event
+eventasfaf
+deadline
+deadlineasfasf
+asfasf
 bye

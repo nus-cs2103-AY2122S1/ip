@@ -11,32 +11,37 @@ public class FeatureMain {
     private int taskNumber;
 
     public FeatureMain(String command) {
-        if (isList(command)) {
-            this.currentCommand = command;
-            userCommands();
-        } else if (isDone(command)) {
-            this.currentCommand = command;
-            markDone();
-        } else if (isToDo(command)) {
-            this.currentCommand = command;
-            Task task = new ToDo(command.substring(5), Task.TYPE.T);
-            FeatureMain.commands.add(task);
-            printTask(task);
-        } else if (isDeadLine(command)) {
-            this.currentCommand = command;
-            Task task = new DeadLine(command.substring(9), Task.TYPE.D, returnDeadline(command));
-            FeatureMain.commands.add(task);
-            printTask(task);
-        } else if (isEvent(command)) {
-            this.currentCommand = command;
-            Task task = new Event(command.substring(6), Task.TYPE.E, returnTimeline(command));
-            FeatureMain.commands.add(task);
-            printTask(task);
-        } else {
-            this.currentCommand = command;
-            FeatureMain.commands.add(new Task(command, Task.TYPE.O));
-            addCommand();
+        try {
+            if (isList(command)) {
+                this.currentCommand = command;
+                userCommands();
+            } else if (isDone(command)) {
+                this.currentCommand = command;
+                markDone();
+            } else if (isToDo(command)) {
+                this.currentCommand = command;
+                Task task = new ToDo(command.substring(5), Task.TYPE.T);
+                FeatureMain.commands.add(task);
+                printTask(task);
+            } else if (isDeadLine(command)) {
+                this.currentCommand = command;
+                Task task = new DeadLine(command.substring(9), Task.TYPE.D, returnDeadline(command));
+                FeatureMain.commands.add(task);
+                printTask(task);
+            } else if (isEvent(command)) {
+                this.currentCommand = command;
+                Task task = new Event(command.substring(6), Task.TYPE.E, returnTimeline(command));
+                FeatureMain.commands.add(task);
+                printTask(task);
+            } else {
+                this.currentCommand = command;
+                // Unknown Command, throw error
+                throw new DukeException("Error, Invalid Command");
+            }
+        } catch (DukeException e) {
+            System.out.println(e + "\n");
         }
+
     }
 
 
@@ -46,39 +51,60 @@ public class FeatureMain {
     }
 
     //checks if command given is done, also adds task number if valid
-    private boolean isDone(String command) {
-        if (command.length() > 4) {
-            if (command.substring(0, 5).equals("done ") &&
-                    isNumeric(command.substring(5))) {
-                taskNumber = Integer.parseInt(command.substring(5));
-                return true;
+    private boolean isDone(String command) throws DukeException {
+        if (command.length() >= 4 && command.startsWith("done")) {
+            if (command.length() == 4)  {
+                throw new DukeException("The Done command must be followed by a number!");
             } else {
-                return false;
+                if (isNumeric(command.substring(5))) {
+                    taskNumber = Integer.parseInt(command.substring(5));
+                    return true;
+                } else {
+                    throw new DukeException("The Done command requires a number, separated by whitespace!");
+                }
             }
         } else {
             return false;
         }
     }
 
-    private boolean isToDo(String command) {
-        if (command.length() > 4) {
-            return command.startsWith("todo ");
+    private boolean isToDo(String command) throws DukeException {
+        if (command.length() >= 4 && command.startsWith("todo")) {
+            if (command.length() == 4) {
+                throw new DukeException("ToDo", 1);
+            } else if (command.charAt(4) != ' ') {
+                throw new DukeException("ToDo", 0);
+            } else {
+                return true;
+            }
         } else {
             return false;
         }
     }
 
-    private boolean isDeadLine(String command) {
-        if (command.length() > 8) {
-            return command.startsWith("deadline ");
+    private boolean isDeadLine(String command) throws DukeException{
+        if (command.length() >= 8 && command.startsWith("deadline")) {
+            if (command.length() == 8) {
+                throw new DukeException("Deadline", 1);
+            } else if (command.charAt(8) != ' ') {
+                throw new DukeException("Deadline", 0);
+            } else {
+                return true;
+            }
         } else {
             return false;
         }
     }
 
-    private boolean isEvent(String command) {
-        if (command.length() > 5) {
-            return command.startsWith("event ");
+    private boolean isEvent(String command) throws DukeException {
+        if (command.length() >= 5 && command.startsWith("event")) {
+            if (command.length() == 5) {
+                throw new DukeException("Event", 1);
+            } else if (command.charAt(5) != ' '){
+                throw new DukeException("Event", 0);
+            } else {
+                return true;
+            }
         } else {
             return false;
         }

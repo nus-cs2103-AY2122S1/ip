@@ -34,4 +34,18 @@ Nice! I've marked this task as done:
 3. [E][ ] meeting tmr  (at:  2-4am Sunday)
 
 
+The description of ToDo cannot be empty!
+
+The ToDo Command and Description must be separated by whitespace!
+
+The description of Event cannot be empty!
+
+The Event Command and Description must be separated by whitespace!
+
+The description of Deadline cannot be empty!
+
+The Deadline Command and Description must be separated by whitespace!
+
+Error, Invalid Command
+
 Bye. Hope to see you again soon!
