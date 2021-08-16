@@ -6,21 +6,13 @@ public class Duke {
     private static String goodBye = "See ya next time! *quack* *quack* *quack*";
 
     private static String logo =
-            "⠀⠀⠀⠀⠀⠀⠀⣠⡀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠤⠤⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀\n" +
-            "⠀⠀⠀⠀⠀⢀⣾⣟⠳⢦⡀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠉⠉⠉⠉⠉⠒⣲⡄\n" +
-            "⠀⠀⠀⠀⠀⣿⣿⣿⡇⡇⡱⠲⢤⣀⠀⠀⠀⢸⠀⠀⠀1984⠀⣠⠴⠊⢹⠁\n" +
-            "⠀⠀⠀⠀⠀⠘⢻⠓⠀⠉⣥⣀⣠⠞⠀⠀⠀⢸⠀⠀⠀⠀⢀⡴⠋⠀⠀⠀⢸⠀\n" +
-            "⠀⠀⠀⠀⢀⣀⡾⣄⠀⠀⢳⠀⠀⠀⠀⠀⠀⢸⢠⡄⢀⡴⠁⠀⠀⠀⠀⠀⡞⠀\n" +
-            "⠀⠀⠀⣠⢎⡉⢦⡀⠀⠀⡸⠀⠀⠀⠀⠀⢀⡼⣣⠧⡼⠀⠀⠀⠀⠀⠀⢠⠇⠀\n" +
-            "⠀⢀⡔⠁⠀⠙⠢⢭⣢⡚⢣⠀⠀⠀⠀⠀⢀⣇⠁⢸⠁⠀⠀⠀⠀⠀⠀⢸⠀⠀\n" +
-            "⠀⡞⠀⠀⠀⠀⠀⠀⠈⢫⡉⠀⠀⠀⠀⢠⢮⠈⡦⠋⠀⠀⠀⠀⠀⠀⠀⣸⠀⠀\n" +
-            "⢀⠇⠀⠀⠀⠀⠀⠀⠀⠀⠙⢦⡀⣀⡴⠃⠀⡷⡇⢀⡴⠋⠉⠉⠙⠓⠒⠃⠀⠀\n" +
-            "⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⠀⡼⠀⣷⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-            "⡞⠀⠀⠀⠀⠀⠀⠀⣄⠀⠀⠀⠀⠀⠀⡰⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-            "⢧⠀⠀⠀⠀⠀⠀⠀⠈⠣⣀⠀⠀⡰⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
+            "    __\n" +
+            "___( o)>\n" +
+            "\\ <_. )\n" +
+            " `---'   hjw";
 
     private static void greet() {
-        System.out.println(logo);
+        //System.out.println(logo);
         printLine(selfIntro);
     }
 
@@ -43,19 +35,38 @@ public class Duke {
         String userInput;
         Duke.greet();
         boolean bye = false;
+        String[] inputArr;
         while (!bye) {
             userInput = sc.nextLine();
-            switch(userInput)
-            {
-                case "bye":
-                    bye = true;
-                    Duke.sayBye();
-                    break;
-                case "list":
-                    printLine(tList.getTasks());
-                    break;
-                default:
-                    printLine(tList.addTask(userInput));
+            inputArr = userInput.split(" ");
+            if (inputArr.length == 1) {
+                switch (inputArr[0]) {
+                    case "bye":
+                        bye = true;
+                        Duke.sayBye();
+                        break;
+                    case "list":
+                        printLine(tList.getTasks());
+                        break;
+                    default:
+                        printLine(tList.addTask(userInput));
+                }
+            } else {
+                switch (inputArr[0]) {
+                    case "done":
+                        try {
+                            printLine(
+                                    tList.markComplete(
+                                            Integer.parseInt(inputArr[1])
+                                    )
+                            );
+                        } catch (NumberFormatException e) {
+                            printLine("Bad command. *quack*");
+                        }
+                        break;
+                    default:
+                        printLine(tList.addTask(userInput));
+                }
             }
         }
     }
