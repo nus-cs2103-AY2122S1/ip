@@ -3,13 +3,15 @@ import java.util.Scanner;
 public class Duke {
     private static final String LINE = "____________________________________________________________";
     private static final Scanner sc = new Scanner(System.in);
+    private static final TaskList list = new TaskList();
 
     public static void main(String[] args) {
         greet();
         while (true) {
             String input = sc.nextLine();
             if (input.equals("bye")) break;
-            echo(input);
+            else if (input.equals("list")) echo(list.toString());
+            else echo(input);
         }
         exit();
     }
