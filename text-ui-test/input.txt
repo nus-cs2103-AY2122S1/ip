@@ -16,4 +16,9 @@ done -500
 done 42
 done 2
 list
+delete
+delete -420
+delete 57
+delete 1
+list
 bye

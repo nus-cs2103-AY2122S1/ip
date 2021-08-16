@@ -12,16 +12,17 @@ public class BruhBot {
     private static final String GREETING = String.format("What can\n%s\ndo for you today?", LOGO);
     private static final String FAREWELL = "Bye. Hope to see you again soon!\n";
     private static final String STOP_SIGNAL_STRING = "bye";
+    private static final String GENERIC_ERROR_MESSAGE = "Please enter a valid command.\n";
 
     private String userCommand = "";
     private Scanner userCommandScanner = new Scanner(System.in);
     private List<Task> tasks = new ArrayList<>();
 
     /**
-     * Initializes the chatbot.
+     * Initializes the chatbot with a greeting.
      */
     public void init() {
-        greet();
+        System.out.println(GREETING + '\n');
     }
 
     public void shutdown() {
@@ -34,17 +35,13 @@ public class BruhBot {
     public void listen() {
         while (true) {
             userCommand = userCommandScanner.nextLine();
-            if (respond(userCommand)) {
+
+            boolean isStopCommand = userCommand.equals(STOP_SIGNAL_STRING);
+            System.out.println(formatResponse(process(userCommand)));
+            if (isStopCommand) {
                 break;
             }
         }
-    }
-
-    private boolean respond(String command) {
-        boolean isStopCommand = userCommand.equals(STOP_SIGNAL_STRING);
-        String response = isStopCommand ? FAREWELL : process(command);
-        System.out.println(formatResponse(response));
-        return isStopCommand;
     }
 
     /**
@@ -55,10 +52,10 @@ public class BruhBot {
      * @return The response to be displayed.
      */
     private String process(String command) {
-        final String GENERIC_ERROR_MESSAGE = "Please enter a valid command.\n";
-
         if (command.isEmpty()) {
             return GENERIC_ERROR_MESSAGE;
+        } else if (command.equals("bye")) {
+            return FAREWELL;
         } else if (command.equals("list")) {
             return listTasks();
         } else {
@@ -66,12 +63,18 @@ public class BruhBot {
             String keyword = sections[0];
             try {
                 switch (keyword) {
-                    case "done":
+                    case "done": {
                         checkArguments(sections, "Please specify an index.\n");
                         int index = Integer.parseInt(sections[1]) - 1;
                         tasks.get(index).markAsDone();
                         return String.format("Nice! I've marked this task as done:\n  %s\n",
                                 tasks.get(index).toString());
+                    }
+                    case "delete": {
+                        checkArguments(sections, "Please specify an index.\n");
+                        int index = Integer.parseInt(sections[1]) - 1;
+                        return generateRemoveTaskResponse(tasks.remove(index));
+                    }
                     case "todo": {
                         checkArguments(sections, String.format("The description of a %s cannot be empty.\n", keyword));
                         Todo newTask = new Todo(sections[1]);
@@ -101,7 +104,7 @@ public class BruhBot {
             } catch (InvalidArgumentException | MissingArgumentException e) {
                 return e.getMessage();
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                return "Please specify a valid index to mark as complete.\n";
+                return "Please specify a valid index.\n";
             } catch (DukeException e) {
                 return GENERIC_ERROR_MESSAGE;
             }
@@ -120,6 +123,11 @@ public class BruhBot {
                 newTask.toString(), tasks.size(), (tasks.size() == 1 ? "" : 's'));
     }
 
+    private String generateRemoveTaskResponse(Task removedTask) {
+        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d task%s in the list.\n",
+                removedTask.toString(), tasks.size(), (tasks.size() == 1 ? "" : 's'));
+    }
+
     private String listTasks() {
         if (tasks.isEmpty()) {
             return "You have no tasks.\n";
@@ -136,9 +144,5 @@ public class BruhBot {
         final String divider = "____________________________________________________________\n";
         String out = divider + content.replaceAll("(?m)^", " ") + divider;
         return out.replaceAll("(?m)^", "    ");
-    }
-
-    private void greet() {
-        System.out.println(GREETING + '\n');
     }
 }
