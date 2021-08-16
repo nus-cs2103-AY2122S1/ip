@@ -35,7 +35,7 @@ public class Duke {
      * Method that listens and scans for user input.
      * Program will exit when the command "bye" is given to the scanner.
      */
-    public void listen() throws DukeException {
+    public void listen(){
         Scanner scanner = new Scanner(System.in);
         this.printMsg("Hello! I'm Duke\nWhat can I do for you?");
         boolean terminate = true;
