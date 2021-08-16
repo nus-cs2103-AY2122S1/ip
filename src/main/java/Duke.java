@@ -61,8 +61,7 @@ public class Duke {
                 commands.get(listNumber).markAsDone();
                 System.out.println("Good job! I've marked this task as completed:");
                 System.out.println(commands.get(listNumber));
-                commands.remove(listNumber);
-                System.out.println("You now have " + commands.size() + " tasks in your list");
+                System.out.println("You now have " + (commands.size()-1) + " tasks to complete");
             } else {
                 throw new InvalidTaskException();
             }
@@ -70,6 +69,21 @@ public class Duke {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    void remove(int listNumber){
+        try {
+            if (listNumber < commands.size()) {
+                System.out.println("Okay! I have removed this task for you:");
+                System.out.println(commands.get(listNumber));
+                commands.remove(listNumber);
+                System.out.println("You now have " + commands.size() + " tasks in your list.");
+            } else {
+                throw new InvalidTaskException();
+            }
+        } catch (DukeException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] args){
@@ -105,7 +119,18 @@ public class Duke {
                             throw new EmptyTaskListException();
                         }
                     } else {
-                        throw new InvalidDoneCommandException();
+                        throw new EmptyTaskNumberException();
+                    }
+                } else if (command[0].equalsIgnoreCase("delete")) {
+                    if (!command[0].equals(input)) {
+                        if (!duke.commands.isEmpty()) {
+                            int listNumber = Integer.parseInt(command[1]);
+                            duke.remove(listNumber - 1);
+                        } else {
+                            throw new EmptyTaskListException();
+                        }
+                    } else {
+                        throw new EmptyTaskNumberException();
                     }
                 } else {
                     duke.add(input);

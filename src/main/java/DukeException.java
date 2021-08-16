@@ -22,8 +22,8 @@ public class DukeException extends Exception {
         }
     }
 
-    class InvalidDoneCommandException extends DukeException {
-        InvalidDoneCommandException() {
+    class EmptyTaskNumberException extends DukeException {
+        EmptyTaskNumberException() {
             super("You haven't mentioned the task number! ☹");
         }
     }
