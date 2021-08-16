@@ -6,7 +6,7 @@ public class Duke {
 
     public static void main(String[] args) {
         greet();
-        echo();
+        add();
 
         // close scanner
         scanner.close();
@@ -19,7 +19,7 @@ public class Duke {
      */
     private static void printMessage(String message) {
         String horizontalLine = "____________________________________________________________";
-        System.out.println("\t" + horizontalLine + "\n\t" + message + "\n\t" + horizontalLine);
+        System.out.println(horizontalLine + "\n" + message + "\n" + horizontalLine);
     }
 
     /**
@@ -27,11 +27,11 @@ public class Duke {
      */
     static void greet() {
         String logo = " ____        _        \n"
-                + "\t|  _ \\ _   _| | _____ \n"
-                + "\t| | | | | | | |/ / _ \\\n"
-                + "\t| |_| | |_| |   <  __/\n"
-                + "\t|____/ \\__,_|_|\\_\\___|\n";
-        printMessage(logo + "\n\tWelcome! I'm Duke\n\tWhat can I do for you?");
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        printMessage(logo + "\nWelcome! I'm Duke\nWhat can I do for you?");
     }
 
     /**
@@ -44,5 +44,40 @@ public class Duke {
             command = scanner.nextLine();
         }
         printMessage("Bye. See you next time!");
+    }
+
+    /**
+     * Add and store text entered and display them back when requested.
+     */
+    static void add() {
+        String command = scanner.nextLine();
+        String[] list = new String[100];
+        int index = 0;
+        while (!command.equals("bye")) {
+            if (command.equals("list")) {
+                printMessage(listToString(list));
+            } else {
+                list[index] = command;
+                index++;
+                printMessage("added: " + command);
+            }
+            command = scanner.nextLine();
+        }
+        printMessage("Bye. See you next time!");
+    }
+
+    /**
+     * Convert a list of text to a message string.
+     * @param list The list of text stored.
+     * @return The string of messages.
+     */
+    private static String listToString(String[] list) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < list.length; i++) {
+            if (list[i] == null) break;
+            result.append(i+1).append(". ").append(list[i]);
+            if (list[i+1] != null) result.append("\n");
+        }
+        return result.toString();
     }
 }
