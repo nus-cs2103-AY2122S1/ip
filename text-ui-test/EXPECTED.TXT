@@ -91,7 +91,7 @@
 	☹ OOPS!!! Task Index is invalid!!
 	____________________________________
 	____________________________________
-	Not enough argument for done
+	Not enough arguments
 	____________________________________
 	____________________________________
 	Noted. I've removed this task: 
@@ -116,7 +116,7 @@
 	4. [T][ ] new thing
 	____________________________________
 	____________________________________
-	Not enough argument for delete
+	Not enough arguments
 	____________________________________
 	____________________________________
 	Bye. Hope to see you again soon!
