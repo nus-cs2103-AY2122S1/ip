@@ -1,7 +1,13 @@
+yeehor
 todo Borrow Book
 list
-deadline return book /by Sunday
+deadline return book /by 2pm
+deadline
+event zoom meeting
+deadline go home
 event project meeting /at Mon 2-4pm
 done 2
+done
+todo
 list
 bye

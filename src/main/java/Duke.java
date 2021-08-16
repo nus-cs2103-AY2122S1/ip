@@ -17,23 +17,47 @@ public class Duke {
         greet();
 
         Scanner sc = new Scanner(System.in);
-        while (!(input = sc.nextLine().toLowerCase()).equals("bye")) {
-            if (input.equals("list")) {
-                list();
-            } else if (Pattern.matches("done.*", input)){
-                markDone(Integer.parseInt(input.split(" ")[1]));
-            } else if (Pattern.matches("event.*", input)) {
-                String[] inputArr = input.replaceFirst("event ","").split("/at");
-                add(new Event(inputArr[0], inputArr[1]));
-            } else if (Pattern.matches("deadline.*", input)) {
-                String[] inputArr = input.replaceFirst("deadline ", "").split("/by");
-                add(new Deadline(inputArr[0], inputArr[1]));
-            } else if (Pattern.matches("todo.*", input)) {
-                String inputArr = input.replaceFirst("todo ", "");
-                add(new Task(inputArr));
+        input = sc.nextLine().toLowerCase();
+        while (!input.equals("bye")) {
+            try {
+                parseInput(input);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                System.out.println();
+            } finally {
+                input = sc.nextLine().toLowerCase();
+                continue;
             }
         }
         exit();
+    }
+
+    public static void parseInput(String input) throws DukeException {
+        if (input.equals("list")) {
+            list();
+        } else if (Pattern.matches("done.*", input)){
+            markDone(input);
+        } else if (Pattern.matches("event.*", input)) {
+            String[] inputArr = input.replaceFirst("event ","").split("/at");
+            if (inputArr.length == 1) {
+                throw new DukeException("Describe the event and indicate its time!");
+            }
+            add(new Event(inputArr[0], inputArr[1]));
+        } else if (Pattern.matches("deadline.*", input)) {
+            String[] inputArr = input.replaceFirst("deadline ", "").split("/by");
+            if (inputArr.length == 1) {
+                throw new DukeException("Describe the activity and its deadline!");
+            }
+            add(new Deadline(inputArr[0], inputArr[1]));
+        } else if (Pattern.matches("todo.*", input)) {
+            String inputArr = input.replaceFirst("todo", "");
+            if (inputArr.equals("")) {
+                throw new DukeException("Describe the activity!");
+            }
+            add(new Task(inputArr.strip()));
+        } else {
+            throw new DukeException("I don't get what you mean? Try Again!");
+        }
     }
 
     /**
@@ -50,7 +74,7 @@ public class Duke {
      *
      * @param task The task to be added to the list.
      */
-    public static void add(Task task) {
+    public static void add(Task task) throws DukeException {
         list[listLength] = task;
         System.out.println("New Task? I've added it to the list:");
         System.out.println(task.displayInfo());
@@ -59,7 +83,13 @@ public class Duke {
         System.out.println();
     }
 
-    public static void markDone(int id) {
+    public static void markDone(String input) throws DukeException {
+        int id;
+        try {
+            id = Integer.parseInt(input.split(" ")[1]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Indicate the id of the task which you have completed!");
+        }
         System.out.println("You've finished the task? Good job!");
         System.out.println("This task has been marked as done:");
         list[id - 1].complete();

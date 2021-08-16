@@ -7,6 +7,8 @@
 Hello! I'm Duii, your personal assistant!
 What do you need help with?
 
+I don't get what you mean? Try Again!
+
 New Task? I've added it to the list:
 [T] [ ] borrow book
 Now you have 1 task(s) in the list.
@@ -15,8 +17,14 @@ Here's your current list:
 1. [T] [ ] borrow book
 
 New Task? I've added it to the list:
-[D] [ ] return book  (by:  sunday)
+[D] [ ] return book  (by:  2pm)
 Now you have 2 task(s) in the list.
+
+Describe the activity and its deadline!
+
+Describe the event and indicate its time!
+
+Describe the activity and its deadline!
 
 New Task? I've added it to the list:
 [E] [ ] project meeting  (at:  mon 2-4pm)
@@ -24,11 +32,15 @@ Now you have 3 task(s) in the list.
 
 You've finished the task? Good job!
 This task has been marked as done:
-[D] [X] return book  (by:  sunday)
+[D] [X] return book  (by:  2pm)
+
+Indicate the id of the task which you have completed!
+
+Describe the activity!
 
 Here's your current list:
 1. [T] [ ] borrow book
-2. [D] [X] return book  (by:  sunday)
+2. [D] [X] return book  (by:  2pm)
 3. [E] [ ] project meeting  (at:  mon 2-4pm)
 
 You're going already? Hope to see you again soon!
