@@ -1,9 +1,9 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Blue {
-
     private static final String LOGO = " ____  _                \n"
             + "|  . \\| | _   _   ____  \n"
             + "|____/| || | | | /  _  \\\n"
@@ -11,18 +11,18 @@ public class Blue {
             + "|____/|_||_____| \\_____/\n";
     private static final String GREET_CONTENT = "Hello! I'm Blue\n"
             + "What can I do for you?";
-    private static final String EXIT_CONTENT = "Bye. Hope to never see you again!";
-
-    private static final List<String> storedText = new ArrayList<>();
+    private static final String UNKNOWN_CONTENT = "Oops something went wrong";
+    private static final String EXIT_CONTENT
+            = "Bye. Hope to never see you again!";
+    private static final List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println(LOGO);
         greet();
-        String command = "";
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            command = scanner.nextLine();
-            boolean shouldContinue = handle(command);
+            String input = scanner.nextLine();
+            boolean shouldContinue = handle(input);
             if (!shouldContinue)
                 break;
         }
@@ -33,33 +33,70 @@ public class Blue {
         speak(GREET_CONTENT);
     }
 
-    private static boolean handle(String command) {
+    private static boolean handle(String input) {
+        String command = getCommand(input);
         if (command.equals(Command.EXIT)) {
             speak(EXIT_CONTENT);
             return false;
         }
         if (command.equals(Command.LIST))
-            listText();
+            listTasks();
+        else if (command.equals(Command.DONE))
+            handleDone(input);
         else
-            storeAndDisplayText(command);
+            storeAndDisplayTasks(input);
         return true;
     }
 
-    private static void storeAndDisplayText(String text) {
-        storedText.add(text);
-        String content = "added: " + text;
+    private static void storeAndDisplayTasks(String title) {
+        Task task = new Task(title);
+        tasks.add(task);
+        String content = "added: " + title;
         speak(content);
     }
 
-    private static void listText() {
-        String[] lines = new String[storedText.size()];
-        for (int i = 0; i < storedText.size(); i++) {
+    private static void listTasks() {
+        String content = "Here are the tasks in your list:\n";
+        String[] lines = new String[tasks.size()];
+        for (int i = 0; i < tasks.size(); i++) {
             String intString = Integer.toString(i + 1);
-            String text = storedText.get(i);
-            lines[i] = intString + ". " + text;
+            Task task = tasks.get(i);
+            lines[i] = intString + ". " + task;
         }
-        String content = String.join("\n", lines);
+        content += String.join("\n", lines);
         speak(content);
+    }
+
+    private static void handleDone(String input) {
+        String[] arguments = getArguments(input);
+        if (arguments.length > 0) {
+            int index = Integer.parseInt(arguments[0]) - 1;
+            if (index < tasks.size()) {
+                Task task = tasks.get(index);
+                task.markDone();
+                String content = "Nice! I've marked this task as done:\n";
+                content += task;
+                speak(content);
+                return;
+            }
+        }
+        speak(UNKNOWN_CONTENT);
+    }
+
+    private static String getCommand(String input) {
+        if (input.length() > 0)
+            return input.split(" ")[0];
+        else
+            return "";
+    }
+
+    private static String[] getArguments(String input) {
+        if (input.length() > 0) {
+            String[] split = input.split(" ");
+            if (split.length >= 2)
+                return Arrays.copyOfRange(split, 1, split.length);
+        }
+        return new String[]{};
     }
 
     private static void speak(String content) {
