@@ -35,14 +35,48 @@ public class Duke {
 
     private static void returnTaskList() {
         divider();
+        System.out.println(String.format("%4sHere are the tasks in your list:", " "));
         System.out.println(taskList);
         divider();
     }
 
     private static void updateTaskList(String command) {
+        // The type of the task indicated before the first space.
+        int indexOfFirstSpace = command.indexOf(" ");
+        String taskType = command.substring(0, indexOfFirstSpace);
+        String description = command.substring(indexOfFirstSpace + 1);
+
+        Task newTask;
+
+        switch (taskType) {
+            case "todo":
+                newTask = new ToDo(description);
+                break;
+            case "deadline":
+                int deadlineIndex = description.indexOf("/by");
+                newTask = new Deadline(description.substring(0, deadlineIndex),
+                        description.substring(deadlineIndex + 4));
+                break;
+            case "event":
+                int timeIndex = description.indexOf("/at");
+                newTask = new Event(description.substring(0, timeIndex),
+                        description.substring(timeIndex + 4));
+                break;
+            default:
+                System.out.println("Uncategorised task.");
+                return;
+
+        }
+
         divider();
-        Duke.taskList = taskList.add(command);
-        System.out.println(String.format("%4sadded: %s", " ", command));
+        Duke.taskList = taskList.add(newTask);
+        System.out.println(
+                String.format("%4sGot it. I've added this task:\n%5s%s",
+                        " ", " ", newTask)
+        );
+        System.out.println(
+                String.format("%4s%s", " ", taskList.status())
+        );
         divider();
     }
 

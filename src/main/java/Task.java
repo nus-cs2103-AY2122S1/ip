@@ -1,9 +1,9 @@
 public class Task {
-    private String name;
+    private String description;
     private boolean isCompleted;
 
-    public Task(String name) {
-        this.name = name;
+    public Task(String description) {
+        this.description = description;
         isCompleted = false;
     }
 
@@ -14,6 +14,6 @@ public class Task {
     @Override
     public String toString() {
         char marked = isCompleted ? 'X' : ' ';
-        return String.format("[%c] %s", marked, this.name);
+        return String.format("[%c] %s", marked, this.description);
     }
 }

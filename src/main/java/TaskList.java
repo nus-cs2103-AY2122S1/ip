@@ -23,11 +23,9 @@ public class TaskList {
         return index >= 0 && index < length;
     }
 
-    public TaskList add(String item) {
-        String indent = "    ";
-        Task newItem = new Task(item);
+    public TaskList add(Task newTask) {
         ArrayList<Task> newList = new ArrayList<>(tasks);
-        newList.add(newItem);
+        newList.add(newTask);
         return new TaskList(newList);
     }
 
@@ -35,6 +33,13 @@ public class TaskList {
         Task task = tasks.get(index);
         task.markAsCompleted();
         return task;
+    }
+
+    public String status() {
+        String t = this.length != 1 ? "tasks" : "task";
+        return
+                String.format("Now you have %d %s in the list.",
+                this.length, t);
     }
 
     @Override
