@@ -34,11 +34,14 @@ public class Duke {
 
         while (true){
             String userInput = userScanner.nextLine();
-            if (userInput.equals("bye")) {
-                System.out.println(formatReply(new String[]{"BYEEEEEE!","Hope to see you again soon :)"}));
-                System.exit(0);
-            }
 
+            switch(userInput){
+                case "bye":
+                    System.out.println(formatReply(new String[]{"BYEEEEEE!","Hope to see you again soon :)"}));
+                    System.exit(0);
+                default:
+                    System.out.println(formatReply(new String[]{userInput}));
+            }
         }
     }
 }
