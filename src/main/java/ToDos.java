@@ -1,11 +1,11 @@
-public class ToDos extends Task{
+public class ToDos extends Task {
 
-  public ToDos(String description) {
-    super(description);
-  }
+    public ToDos(String description) {
+        super(description);
+    }
 
-  @Override
-  public String toString() {
-    return String.format("[T] [%s] " + this.description, this.getStatusIcon());
-  }
+    @Override
+    public String toString() {
+        return String.format("[T] [%s] " + this.description, this.getStatusIcon());
+    }
 }

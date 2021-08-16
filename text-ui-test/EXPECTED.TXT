@@ -11,9 +11,25 @@ Hello from
      ________________________________________
 
      ________________________________________
+     Todo description cannot be empty!
+     ________________________________________
+
+     ________________________________________
      Got it. I've added this task:
           [T] [ ] borrow book
      Now you have 1 tasks in the list.
+     ________________________________________
+
+     ________________________________________
+     Deadline description cannot be empty!
+     ________________________________________
+
+     ________________________________________
+     Deadline must has a date written after a slash!
+     ________________________________________
+
+     ________________________________________
+     Deadline date must be in the format of 'by date'!
      ________________________________________
 
      ________________________________________
@@ -23,28 +39,33 @@ Hello from
      ________________________________________
 
      ________________________________________
-     Got it. I've added this task:
-          [E] [ ] project meeting (at: Mon 2-4pm)
-     Now you have 3 tasks in the list.
+     Event description cannot be empty!
+     ________________________________________
+
+     ________________________________________
+     Event must has a date written after a slash!
+     ________________________________________
+
+     ________________________________________
+     Event date must be in the format of 'at date'!
      ________________________________________
 
      ________________________________________
      Got it. I've added this task:
-          [D] [ ] do homework (by: LOL)
-     Now you have 4 tasks in the list.
+          [E] [ ] project meeting (at: Monday 2-4pm)
+     Now you have 3 tasks in the list.
      ________________________________________
 
      ________________________________________
      Here are the tasks in your list:
      1.[T] [ ] borrow book
      2.[D] [ ] return book (by: Sunday)
-     3.[E] [ ] project meeting (at: Mon 2-4pm)
-     4.[D] [ ] do homework (by: LOL)
+     3.[E] [ ] project meeting (at: Monday 2-4pm)
      ________________________________________
 
      ________________________________________
      Nice! I've marked this task as done:
-          [D] [X] do homework (by: LOL)
+          [E] [X] project meeting (at: Monday 2-4pm)
      ________________________________________
 
      ________________________________________
@@ -53,11 +74,31 @@ Hello from
      ________________________________________
 
      ________________________________________
+     Nice! I've marked this task as done:
+          [T] [X] borrow book
+     ________________________________________
+
+     ________________________________________
+     Done Task number is missing!
+     ________________________________________
+
+     ________________________________________
+     Task number entered out of range!
+     ________________________________________
+
+     ________________________________________
+     Task number entered out of range!
+     ________________________________________
+
+     ________________________________________
      Here are the tasks in your list:
-     1.[T] [ ] borrow book
+     1.[T] [X] borrow book
      2.[D] [X] return book (by: Sunday)
-     3.[E] [ ] project meeting (at: Mon 2-4pm)
-     4.[D] [X] do homework (by: LOL)
+     3.[E] [X] project meeting (at: Monday 2-4pm)
+     ________________________________________
+
+     ________________________________________
+     My intelligence has not evolved to understand this command :(
      ________________________________________
 
      ________________________________________
