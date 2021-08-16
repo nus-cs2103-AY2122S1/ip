@@ -7,6 +7,10 @@ event zoom meeting
 deadline go home
 event project meeting /at Mon 2-4pm
 done 2
+delete 2
+list
+delete 1
+list
 done
 todo
 list

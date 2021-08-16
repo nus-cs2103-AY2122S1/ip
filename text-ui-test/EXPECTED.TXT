@@ -34,13 +34,24 @@ You've finished the task? Good job!
 This task has been marked as done:
 [D] [X] return book  (by:  2pm)
 
+Okay! Removing the task:
+[D] [X] return book  (by:  2pm)
+
+Here's your current list:
+1. [T] [ ] borrow book
+2. [E] [ ] project meeting  (at:  mon 2-4pm)
+
+Okay! Removing the task:
+[T] [ ] borrow book
+
+Here's your current list:
+1. [E] [ ] project meeting  (at:  mon 2-4pm)
+
 Indicate the id of the task which you have completed!
 
 Describe the activity!
 
 Here's your current list:
-1. [T] [ ] borrow book
-2. [D] [X] return book  (by:  2pm)
-3. [E] [ ] project meeting  (at:  mon 2-4pm)
+1. [E] [ ] project meeting  (at:  mon 2-4pm)
 
 You're going already? Hope to see you again soon!
