@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     private static boolean isRunning = false;
-    private static String[] record = new String[100];
-    private static int index = 0;
+    private static ArrayList<Task> record = new ArrayList<>();
+    private static Integer totalNumber = 0;
 
     public static void main(String[] args) {
         Duke.isRunning = true;
@@ -22,6 +23,10 @@ public class Duke {
                 exit();
             } else if (command.equals("list")) {
                 displayList();
+            } else if (command.startsWith("done")) {
+                String substring = command.substring(5);
+                int index = Integer.parseInt(substring);
+                markAsDone(index);
             } else {
                 populate(command);
             }
@@ -50,8 +55,9 @@ public class Duke {
     }
 
     private static void populate(String item) {
-        record[Duke.index] = item;
-        Duke.index++;
+        Task task = new Task(item);
+        record.add(task);
+        Duke.totalNumber++;
         System.out.println("------------------");
         System.out.println("added: " + item + "\n");
         System.out.println("------------------\n");
@@ -60,12 +66,22 @@ public class Duke {
     private static void displayList() {
         Integer number = 1;
         System.out.println("------------------");
-        for (String str : record) {
-            if (str != null) {
-                System.out.println(number.toString() + ". " + str);
+        for (Task t : record) {
+            if (t.isCompleted()) {
+                System.out.println(number.toString() + "." + "[X] " + t.toString());
+            } else {
+                System.out.println(number.toString() + "." + "[ ] " + t.toString());
             }
             number++;
         }
+        System.out.println("------------------\n");
+    }
+
+    private static void markAsDone(int num) {
+        record.get(num-1).setCompleted();
+        System.out.println("------------------");
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(" " + "[X] " + record.get(num-1).toString());
         System.out.println("------------------\n");
     }
 
