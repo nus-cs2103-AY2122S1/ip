@@ -1,15 +1,14 @@
 import java.util.*;
 
 public class Duke {
-    private static final String HELLO = "\nHello! I'm Duke \nWhat can I do for you?\n";
+    private static final String HELLO = "\nHello! I'm Duke\nWhat can I do for you?\n";
     private static final String LINE = "===============================================";
-    private static final String logo =
-            " ____        _        \n"
+    private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String BYE = "\nBye. Hope to see you again soon!\n";
+    private static final String BYE = "Bye. Hope to see you again soon!\n";
 
     private final ArrayList<Task> taskList = new ArrayList<>();
 
@@ -32,7 +31,7 @@ public class Duke {
             }
             userInput = sc.nextLine();
         }
-        System.out.println(LINE + BYE + LINE);
+        System.out.println(BYE + LINE);
         sc.close();
     }
 
@@ -101,7 +100,7 @@ public class Duke {
                 System.out.println("The task has already been completed" + "\n" + LINE);
             } else {
                 currTask.markAsDone();
-                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("Nice! I've marked this task as done:");
                 System.out.println(currTask.toString() + "\n" + LINE);
             }
         } catch (NumberFormatException | IndexOutOfBoundsException exception) {
