@@ -1,10 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private static boolean inSession;
     private static String greetMessage = "Hello! I'm Duke \nWhat can I do for you?";
     private static String exitMessage = "Bye. Hope to see you again soon!\n";
-    private static Task[] toDoList = new Task[100];
+    private static ArrayList<Task> toDoList = new ArrayList<>();
     private static String addedMessage = "Got it. I've added this task:\n";
     private static int counter = 0;
 
@@ -23,8 +24,18 @@ public class Duke {
                     displayList();
                     break;
                 case ("done"):
-                    String taskNumber = input.split(" ")[1];
-                    markAsDone(taskNumber);
+                    try {
+                        markAsDone(input);
+                    } catch (DukeException e) {
+                        System.err.println(e.getMessage());
+                    }
+                    break;
+                case ("delete"):
+                    try {
+                        delete(input);
+                    } catch (DukeException e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
                 case ("todo"):
                     try {
@@ -65,65 +76,103 @@ public class Duke {
     public static void addTodo(String input) throws DukeException {
         String[] info = input.split(" ", 2);
         if (info.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("☹ OOPS!!! " +
+                    "The description of a todo cannot be empty.");
         }
         Todo newTodo = new Todo(info[1]);
-        toDoList[counter] = newTodo;
+        toDoList.add(newTodo);
         counter++;
-        System.out.println(addedMessage + newTodo.toString() + "\nNow you have " + counter + " tasks in the list.");
+        System.out.println(addedMessage + newTodo.toString() +
+                "\nNow you have " + counter + " tasks in the list.");
     }
 
     public static void addDeadline(String input) throws DukeException {
         String[] info = input.split(" ", 2);
         if (info.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("☹ OOPS!!! " +
+                    "The description of a deadline cannot be empty.");
         }
         String[] description = info[1].split("/by ", 2);
         if (description.length == 1) {
-            throw new DukeException("☹ OOPS!!! The deadline of a deadline cannot be empty.");
+            throw new DukeException("☹ OOPS!!! " +
+                    "The deadline of a deadline cannot be empty.");
         }
         Deadline newDeadline = new Deadline(description[0], description[1]);
-        toDoList[counter] = newDeadline;
+        toDoList.add(newDeadline);
         counter++;
-        System.out.println(addedMessage + newDeadline.toString() + "\nNow you have " + counter + " tasks in the list.");
+        System.out.println(addedMessage + newDeadline.toString() +
+                "\nNow you have " + counter + " tasks in the list.");
     }
 
     public static void addEvent(String input) throws DukeException {
         String[] info = input.split(" ", 2);
         if (info.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("☹ OOPS!!! " +
+                    "The description of an event cannot be empty.");
         }
         String[] description = info[1].split("/at ", 2);
         if (description.length == 1) {
-            throw new DukeException("☹ OOPS!!! The date of an event cannot be empty.");
+            throw new DukeException("☹ OOPS!!! " +
+                    "The date of an event cannot be empty.");
         }
         Event newEvent = new Event(description[0], description[1]);
-        toDoList[counter] = newEvent;
+        toDoList.add(newEvent);
         counter++;
-        System.out.println(addedMessage + newEvent.toString() + "\nNow you have " + counter + " tasks in the list.");
+        System.out.println(addedMessage + newEvent.toString() +
+                "\nNow you have " + counter + " tasks in the list.");
     }
 
     public static void displayList() {
         String listString = "Here are the tasks in your list:";
-        for (Task t : toDoList) {
-            if (t != null) {
-                listString += "\n" + t.getId() + "." + t.toString();
-            }
+        for (int i = 0; i < toDoList.size(); i++) {
+            listString += "\n" + (i + 1) + "." + toDoList.get(i).toString();
         }
         System.out.println(listString);
     }
 
-    public static void markAsDone(String taskNumber) {
-        int i = Integer.parseInt(taskNumber);
-        for (Task t : toDoList) {
-            if (t != null) {
-                if (t.getId() == i) {
-                    t.setDone();
-                    System.out.println("Nice! I've marked this task as done:\n"
-                            + "  " + t.toString());
-                }
-            }
+    public static void markAsDone(String input) throws DukeException {
+        String[] info = input.split(" ", 2);
+        if (info.length == 1) {
+            throw new DukeException("☹ OOPS!!! " +
+                    "Please enter the task number you would like to mark as done.");
         }
+        int i;
+        try {
+            i = Integer.parseInt(info[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("☹ OOPS!!! " +
+                    "Please enter an integer for the task you would like to mark as done.");
+        }
+        if (i > toDoList.size()) {
+            throw new DukeException("☹ OOPS!!! " +
+                    "There isn't a task number " + i + ".");
+        }
+        Task t = toDoList.get(i - 1);
+        t.setDone();
+        System.out.println("Nice! I've marked this task as done:\n"
+                            + "  " + t.toString());
+    }
+
+    public static void delete(String input) throws DukeException {
+        String[] info = input.split(" ", 2);
+        if (info.length == 1) {
+            throw new DukeException("☹ OOPS!!! " +
+                    "Please enter the task number you would like to delete.");
+        }
+        int i;
+        try {
+            i = Integer.parseInt(info[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("☹ OOPS!!! " +
+                    "Please enter an integer for the task you would like to delete.");
+        }
+        if (i > toDoList.size()) {
+            throw new DukeException("☹ OOPS!!! " +
+                    "There isn't a task number " + i + ".");
+        }
+        Task t = toDoList.remove(i - 1);
+        System.out.println("Noted! I've removed this task:\n"
+                + "  " + t.toString() + "\nNow you have " + toDoList.size()  + " tasks in the list.");
     }
 
     public static void unknownCommand() {
