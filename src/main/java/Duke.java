@@ -13,7 +13,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        ArrayList<Task> todos = new ArrayList<>(100);
+        ArrayList<Task> taskList = new ArrayList<>(100);
         Scanner sc = new Scanner(System.in);
 
         toScreen("Hello, I'm Duke!", "How can I help you?");
@@ -27,20 +27,31 @@ public class Duke {
                 //display tasklist
                 System.out.println(indent + line + "\n" +
                         indent + "Here are the tasks in your list: ");
-                for (int i = 0; i < todos.size(); i++) {
-                    System.out.println(indent + indent + (i + 1) + "." + todos.get(i).toString());
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.println(indent + indent + (i + 1) + "." + taskList.get(i).toString());
                 }
                 System.out.println(indent + line);
             } else if (cmd.equalsIgnoreCase("done")) {
                 //mark task as done
                 try {
                     int finishedTaskIndex = Integer.parseInt(remainder);
-                    Task finishedTask = todos.get(finishedTaskIndex - 1);
+                    Task finishedTask = taskList.get(finishedTaskIndex - 1);
                     finishedTask.markAsDone();
                     toScreen("Nice! I've marked the following task as done: ",
-                            finishedTaskIndex + "." + finishedTask.toString());
+                            finishedTask.toString());
                 } catch (IndexOutOfBoundsException e) {
-                    toScreen("Task could not be marked as done.", "Please input valid task number.");
+                    toScreen("Task could not be marked as done.", "Please input valid task index.");
+                }
+            } else if (cmd.equalsIgnoreCase("delete")) {
+                //mark task as done
+                try {
+                    int deletedTaskIndex = Integer.parseInt(remainder);
+                    Task deletedTask = taskList.get(deletedTaskIndex - 1);
+                    taskList.remove(deletedTaskIndex - 1);
+                    toScreen("Ok, I've deleted the following task: ",
+                            deletedTask.toString());
+                } catch (IndexOutOfBoundsException e) {
+                    toScreen("Task could not be deleted.", "Please input valid task index.");
                 }
             } else if (cmd.equalsIgnoreCase("todo")) {
                 //add Todo task
@@ -49,10 +60,10 @@ public class Duke {
                         throw new DukeException("oops");
                     }
                     Task temp = new Todo(remainder);
-                    todos.add(temp);
+                    taskList.add(temp);
                     toScreen("Ok! A new task has been added:",
                             indent + temp.toString(),
-                            "You now have " + todos.size() + " task(s) in total.");
+                            "You now have " + taskList.size() + " task(s) in total.");
                 } catch (DukeException de) {
                     toScreen("Sorry, the Todo task could not be added.",
                             "Please include the description for this task.");
@@ -67,10 +78,10 @@ public class Duke {
                     String actionName = remainder.substring(0, slash);
                     String time = remainder.substring(slash + 4);
                     Task temp = new Deadline(actionName, time);
-                    todos.add(temp);
+                    taskList.add(temp);
                     toScreen("Ok! A new task has been added:",
                             indent + temp.toString(),
-                            "You now have " + todos.size() + " task(s) in total.");
+                            "You now have " + taskList.size() + " task(s) in total.");
                 } catch (DukeException de) {
                     toScreen("Sorry, the Deadline task could not be added.",
                             "Please include the description and deadline for this task with /by.");
@@ -85,10 +96,10 @@ public class Duke {
                     String actionName = remainder.substring(0, slash);
                     String time = remainder.substring(slash + 4);
                     Task temp = new Event(actionName, time);
-                    todos.add(temp);
+                    taskList.add(temp);
                     toScreen("Ok! A new task has been added:",
                             indent + temp.toString(),
-                            "You now have " + todos.size() + " task(s) in total.");
+                            "You now have " + taskList.size() + " task(s) in total.");
                 } catch (DukeException de) {
                     toScreen("Sorry, the Event task could not be added.",
                             "Please include the description and time of this task with /at.");
