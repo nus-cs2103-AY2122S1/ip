@@ -57,8 +57,16 @@ public class Duke {
                     taskList[listLength++] = newTask;
                     System.out.print("  Got it. I've added this task:\n    " + newTask.listEntry() + "\n  Now you have " + listLength + " tasks in the list.\n");
                 
-                } else { // single word command is invalid
-                    throw new DukeException("invalidInput");
+                } else { // single word command is invalid or incomplete task input
+                    if (text.equals("deadline")) {
+                        throw new DukeException("deadlineDesc");
+                    } else if (text.equals("event")) {
+                        throw new DukeException("eventDesc");
+                    } else if (text.equals("todo")) {
+                        throw new DukeException("todoDesc");
+                    } else {
+                        throw new DukeException("invalidInput");
+                    }
                 }
                 
             } catch (DukeException e) {
