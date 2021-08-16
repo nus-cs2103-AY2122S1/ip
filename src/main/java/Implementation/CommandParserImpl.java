@@ -29,7 +29,11 @@ public class CommandParserImpl implements CommandParser {
 	public void processInputHelper(List<String> parsedCommands) {
 		switch (parsedCommands.get(0)) {
 			case "bye":
-				commandProcessor.processCommand(Command.BYE, Map.of());
+				try {
+					commandProcessor.processCommand(Command.BYE, Map.of());
+				} catch(Exception e) {
+				
+				}
 				break;
 			case "list":
 				commandProcessor.processCommand(Command.LIST, Map.of());
@@ -70,7 +74,7 @@ public class CommandParserImpl implements CommandParser {
 			}
 			default:
 				// add
-				commandProcessor.processCommand(Command.INVALID, Map.of("message", parsedCommands.get(0)));
+				commandProcessor.processCommand(Command.INVALID, Map.of("message", "☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
 				break;
 		}
 	}
