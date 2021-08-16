@@ -22,32 +22,46 @@ public class Duke {
     public void response(String input) {
         String[] words = input.split(" ");
         String command = words[0];
-        switch (command) {
-            case "list":
-                printList();
-                return;
-            case "done":
-                int taskNumber = Integer.parseInt(words[1]);
-                markAsDone(taskNumber);
-                return;
-            case "todo":
-                Task todo = new Todo(combine(words, 1, words.length));
-                addToList(todo);
-                return;
-            case "deadline":
-                String rest = combine(words, 1, words.length);
-                String[] newList = rest.split(" /by ");
-                Task deadline = new Deadline(newList[0],newList[1]);
-                addToList(deadline);
-                return;
-            case "event":
-                String restOfWords = combine(words, 1, words.length);
-                String[] eventList = restOfWords.split(" /at ");
-                Task event = new Event(eventList[0], eventList[1]);
-                addToList(event);
-                return;
-            default:
-                System.out.println("Oops! I'm sorry, but I don't know what that means!");
+        try {
+            switch (command) {
+                case "list":
+                    printList();
+                    return;
+                case "done":
+                    int taskNumber = Integer.parseInt(words[1]);
+                    markAsDone(taskNumber);
+                    return;
+                case "todo":
+                    if (words.length == 1) {
+                        throw new DukeException("The description of a todo cannot be empty.");
+                    }
+                    Task todo = new Todo(combine(words, 1, words.length));
+                    addToList(todo);
+                    return;
+                case "deadline":
+                    String rest = combine(words, 1, words.length);
+                    String[] newList = rest.split(" /by ");
+                    if (newList.length != 2) {
+                        throw new DukeException("Incorrect command was given for deadline. Try this: deadline name_here /by date_here");
+                    }
+                    Task deadline = new Deadline(newList[0], newList[1]);
+                    addToList(deadline);
+                    return;
+                case "event":
+                    String restOfWords = combine(words, 1, words.length);
+                    String[] eventList = restOfWords.split(" /at ");
+                    if (eventList.length != 2) {
+                        throw new DukeException("Incorrect command was given for event. Try this: deadline name_here /at date_here");
+                    }
+                    Task event = new Event(eventList[0], eventList[1]);
+                    addToList(event);
+                    return;
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            }
+
+        } catch(DukeException e) {
+            System.out.println("OOPS!!! " + e.getMessage());
         }
     }
 

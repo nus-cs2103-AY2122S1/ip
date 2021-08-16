@@ -14,4 +14,8 @@ Nice! I've marked this task as done:
 Here are the tasks in your list:
 1.[T][ ] borrow book
 2.[D][X] return book (by: June 6th)
+OOPS!!! The description of a todo cannot be empty.
+OOPS!!! I'm sorry, but I don't know what that means :-(
+OOPS!!! Incorrect command was given for event. Try this: deadline name_here /at date_here
+OOPS!!! Incorrect command was given for deadline. Try this: deadline name_here /by date_here
 Bye. Hope to see you again soon!
