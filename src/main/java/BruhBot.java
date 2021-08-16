@@ -62,22 +62,59 @@ public class BruhBot {
         } else if (command.equals("list")) {
             return listTasks();
         } else {
-            String[] words = command.split(" ");
-            if (words.length > 1) {
-                if (words[0].equals("done")) {
-                    try {
-                        int index = Integer.parseInt(words[1]) - 1;
-                        tasks.get(index).markAsDone();
-                        return String.format("Nice! I've marked this task as done:\n  %s\n",
-                                tasks.get(index).toString());
-                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                        return "Please specify a valid index to mark as complete.\n";
+            String[] sections = command.split(" ", 2);
+            String keyword = sections[0];
+            try {
+                switch (keyword) {
+                    case "done":
+                        checkValidFormat(sections);
+                        try {
+                            int index = Integer.parseInt(sections[1]) - 1;
+                            tasks.get(index).markAsDone();
+                            return String.format("Nice! I've marked this task as done:\n  %s\n",
+                                    tasks.get(index).toString());
+                        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                            return "Please specify a valid index to mark as complete.\n";
+                        }
+                    case "todo": {
+                        checkValidFormat(sections);
+                        Todo newTask = new Todo(sections[1]);
+                        tasks.add(newTask);
+                        return generateAddTaskResponse(newTask);
+                    }
+                    case "deadline": {
+                        checkValidFormat(sections);
+                        String[] parts = sections[1].split(" /by ", 2);
+                        checkValidFormat(parts);
+                        Deadline newTask = new Deadline(parts[0], parts[1]);
+                        tasks.add(newTask);
+                        return generateAddTaskResponse(newTask);
+                    }
+                    case "event": {
+                        checkValidFormat(sections);
+                        String[] parts = sections[1].split(" /at ", 2);
+                        checkValidFormat(parts);
+                        Event newTask = new Event(parts[0], parts[1]);
+                        tasks.add(newTask);
+                        return generateAddTaskResponse(newTask);
                     }
                 }
+            } catch (InvalidArgumentException e) {
+                return "Please specify the correct arguments for this command.\n";
             }
         }
-        tasks.add(new Task(command));
-        return "added: " + command + '\n';
+        return GENERIC_ERROR_MESSAGE;
+    }
+
+    private void checkValidFormat(String[] sections) throws InvalidArgumentException {
+        if (sections.length != 2 || sections[1].isEmpty()) {
+            throw new InvalidArgumentException();
+        }
+    }
+
+    private String generateAddTaskResponse(Task newTask) {
+        return String.format("Got it. I've added to this task:\n  %s\nNow you have %d task%s in the list.\n",
+                newTask.toString(), tasks.size(), (tasks.size() == 1 ? "" : 's'));
     }
 
     private String listTasks() {
@@ -85,6 +122,7 @@ public class BruhBot {
             return "You have no tasks.\n";
         }
         StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             sb.append(String.format("%d.%s\n", i + 1, tasks.get(i).toString()));
         }
