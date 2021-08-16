@@ -1,7 +1,11 @@
-public class Task {
+public abstract class Task {
     protected int id;
     protected String description;
     protected boolean isDone;
+
+    public enum TaskTypes {
+        TODO, DEADLINE, EVENT
+    }
 
     public static int numOfTasks = 0;
 
