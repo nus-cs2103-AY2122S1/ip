@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,6 +17,8 @@ public class Duke {
         initialiseBot();
 
         boolean status = true;
+        List<String> textStored = new ArrayList<>();
+        int numberOfText = 0;
 
         Scanner sc = new Scanner(System.in);
 
@@ -25,13 +28,30 @@ public class Duke {
             if (message.equals("bye")) {
                 status = false;
                 closeBot();
+            } else if (message.equals("list")) {
+                printStoredText(textStored);
             } else {
-                echo(message);
+//                echo(message);
+                numberOfText++;
+                add(message, numberOfText, textStored);
             }
         }
 
         sc.close();
 
+    }
+
+    private static void printStoredText(List<String> textStored) {
+        String message = "Here are the tasks in your list:";
+        System.out.println(message);
+        textStored.forEach(System.out::println);
+    }
+
+    private static void add(String message, int numberOfText, List<String> textStored) {
+        String displayedMessage = "added: " + message;
+        String storedMessage = String.valueOf(numberOfText) + ". " + message;
+        textStored.add(storedMessage);
+        System.out.println(displayedMessage);
     }
 
     private static void closeBot() {
