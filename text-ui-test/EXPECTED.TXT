@@ -1,7 +1,35 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+    * * * * * * * * * * * * * * * * * * * *
+    Hi, I'm Sync-Me Sebby.
+    I'm here to assist you with tracking and synchronizing of your personal tasks.
+    Let me know how I can help?
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Got it. I've added this task: 
+      [D][ ] return laptop (by: Friday)
+    Now you have 1 task in the list.
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Got it. I've added this task: 
+      [T][ ] buy battery
+    Now you have 2 tasks in the list.
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Got it. I've added this task: 
+      [E][ ] interview meeting (at: Tues 8-10pm)
+    Now you have 3 tasks in the list.
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Here are the tasks in your list: 
+    1.[D][ ] return laptop (by: Friday)
+    2.[T][ ] buy battery
+    3.[E][ ] interview meeting (at: Tues 8-10pm)
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Goodbye. See you again soon!
+    * * * * * * * * * * * * * * * * * * * *
 

@@ -1,0 +1,5 @@
+deadline return laptop /by Friday
+todo buy battery
+event interview meeting /at Tues 8-10pm
+list
+bye
