@@ -7,27 +7,37 @@ public class Duke {
     private int size = 0;
 
     public void greeting() {
-        // Credits to https://textart4u.blogspot.com/2014/04/frog-leap-unicode-copy-paste-text-art.html
+        // Credits to http://allaboutfrogs.org/gallery/frogstuff/ascii.html
         // for the frog ASCII text art!
         String frog =
-                "             ╭━━━╮━━━╮\n" +
-                        "             ┃ ▉ ┃ ▉ ┃\n" +
-                        " ╱▔▔╲  ╱▔▔▔╲╱    ╰▔▔▔▔╲        RIBBIT!\n" +
-                        "╱  ╱╲╲╱╱         ╰━━━━╱\n" +
-                        "╲╱╱▔▔╲╱╲         ╱▔▔▔▔▔\n" +
-                        " ╱  ╱╲╲╱╱▔▔╲    ╰━━━╮━━━╮\n" +
-                        " ╲ ╱  ╲╱    ▔▔▔▔▔▔▔╰╯▔▔╰╯\n";
+                "    _____\n" +
+                        "   /     \\______\n" +
+                        "  | o     |     \\____\n" +
+                        "  /\\_____/           \\___\n" +
+                        " /                       \\\n" +
+                        "|_______/                 \\\n" +
+                        "  \\______   _       ___    \\\n" +
+                        "        /\\_//      /   \\    |\n" +
+                        "       // //______/    /___/\n" +
+                        "      /\\/\\/\\      \\   / \\ \\\n" +
+                        "                    \\ \\   \\ \\\n" +
+                        "                      \\ \\   \\ \\\n" +
+                        "                       \\ \\  /\\/\\\n" +
+                        "                       /\\/\\\n";
         String greeting = "I am Jo the Frog! RIBBIT! \n";
         System.out.println(frog + greeting + "How may I help you?\n" + LINE);
     }
 
     public void echo() {
-        String input = "";
-        do {
-            Scanner scanner = new Scanner(System.in);
-            input = scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
+
+        while (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+
             if (input.equals("bye")) {
                 System.out.println("See you again in my frog hole! RIBBIT!");
+                scanner.close();
+                return;
             } else if (input.startsWith("done")) {
                 int index = input.charAt(5) - 49;
                 taskList[index].markAsDone();
@@ -62,7 +72,7 @@ public class Duke {
                 System.out.println("Now you have " + size + " flies to eat! RIBBIT!");
                 System.out.println(LINE);
             }
-        } while (!input.equals("bye"));
+        }
     }
 
     public static void main(String[] args) {

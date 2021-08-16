@@ -1,0 +1,9 @@
+todo sleep
+deadline cs2103t homework /by thursday
+event CCA! /at tues 6.30-9.30pm
+list
+done 1
+done 2
+done 3
+list
+bye

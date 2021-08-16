@@ -1,7 +1,49 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+    _____
+   /     \______
+  | o     |     \____
+  /\_____/           \___
+ /                       \
+|_______/                 \
+  \______   _       ___    \
+        /\_//      /   \    |
+       // //______/    /___/
+      /\/\/\      \   / \ \
+                    \ \   \ \
+                      \ \   \ \
+                       \ \  /\/\
+                       /\/\
+I am Jo the Frog! RIBBIT!
+How may I help you?
+----------------------------------------------
+A fly has been added to the menu:
+  [T][ ] sleep
+Now you have 1 flies to eat! RIBBIT!
+----------------------------------------------
+A fly has been added to the menu:
+  [D][ ] cs2103t homework  (by: thursday)
+Now you have 2 flies to eat! RIBBIT!
+----------------------------------------------
+A fly has been added to the menu:
+  [E][ ] CCA!  (at: tues 6.30-9.30pm)
+Now you have 3 flies to eat! RIBBIT!
+----------------------------------------------
+Here is your menu for today:
+1.[T][ ] sleep
+2.[D][ ] cs2103t homework  (by: thursday)
+3.[E][ ] CCA!  (at: tues 6.30-9.30pm)
+----------------------------------------------
+You have swallowed that pesky fly! RIBBIT!
+  [T][X] sleep
+----------------------------------------------
+You have swallowed that pesky fly! RIBBIT!
+  [D][X] cs2103t homework  (by: thursday)
+----------------------------------------------
+You have swallowed that pesky fly! RIBBIT!
+  [E][X] CCA!  (at: tues 6.30-9.30pm)
+----------------------------------------------
+Here is your menu for today:
+1.[T][X] sleep
+2.[D][X] cs2103t homework  (by: thursday)
+3.[E][X] CCA!  (at: tues 6.30-9.30pm)
+----------------------------------------------
+See you again in my frog hole! RIBBIT!
