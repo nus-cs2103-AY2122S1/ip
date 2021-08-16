@@ -2,10 +2,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManager {
-    static public List<Task> taskList = new ArrayList<>();
+    static private List<Task> taskList = new ArrayList<>();
 
-    public static boolean addTask(Task newTask) {
-        return taskList.add(newTask);
+    public static Task addTask(String rawTask) {
+        Task ret = null;
+        // parse raw task string
+        String[] t = rawTask.split(" ", 2);
+        String type = t[0];
+        String args = t[1];
+
+        switch (type) {
+            case "todo":
+                ret = ToDo.of(args);
+                break;
+            case "deadline":
+                ret = Deadline.of(args);
+                break;
+            case "event":
+                ret = Event.of(args);
+                break;
+            default:
+                ret = new Task(rawTask);
+                break;
+        }
+        taskList.add(ret);
+
+        return ret;
+    }
+
+    public static int taskCount() {
+        return taskList.size();
     }
 
     public static String completeTask(int taskId) {

@@ -26,6 +26,13 @@ public class Duke {
         reply("Bye. Hope to see you again soon!");
     }
 
+    private static void addTask(String input) {
+        Task addedTask = TaskManager.addTask(input);
+        reply(String.format("Got it. I've added this task: \n" +
+                "%s\n" +
+                "Now you have %d tasks in the list", addedTask.toString(), TaskManager.taskCount()));
+    }
+
     public static void main(String[] args) {
         greet();
         while(true) {
@@ -35,14 +42,12 @@ public class Duke {
             } else if (userInput.equals("bye")) {
                 quit();
                 break;
-            } else if (userInput.startsWith("done")){
+            } else if (userInput.startsWith("done")) {
                 int id = Integer.parseInt(userInput.split(" ")[1]);
                 // need to -1 due to 0-indexing
-                reply(TaskManager.completeTask(id-1));
+                reply(TaskManager.completeTask(id - 1));
             } else {
-                Task newTask = new Task(userInput);
-                TaskManager.addTask(newTask);
-                reply(String.format("added: %s", newTask.toString()));
+                addTask(userInput);
             }
         }
     }

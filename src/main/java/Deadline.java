@@ -2,9 +2,15 @@ public class Deadline extends Task{
 
     private String time;
 
-    public Deadline(String description, String time) {
+    private Deadline(String description, String time) {
         super(description);
         this.time = time;
+    }
+
+    public static Deadline of(String args) {
+        // parse args
+        String[] parsedArgs = args.split(" /by ");
+        return new Deadline(parsedArgs[0], parsedArgs[1]);
     }
 
     @Override
