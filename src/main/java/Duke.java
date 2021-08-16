@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,6 +8,7 @@ public class Duke {
     private static String sepLineOpen = "///<<<============ Duke Says: ===========>>>\\\\\\";
     private static String sepLineClose = "\\\\\\<<<===================================>>>///";
 
+    private static ArrayList<String> toDoList = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -57,6 +59,8 @@ public class Duke {
     /**
      * Used when Duke is supposed to say something.
      * This would print the message between 2 line separators.
+     *
+     * @param printThis The message to print inside Duke's text bubble
      */
     private static void dukeSays(String printThis) {
         System.out.println("");
@@ -64,5 +68,15 @@ public class Duke {
         System.out.println("    " + printThis);
         System.out.println(sepLineClose);
     }
+
+    /**
+     * Used for adding things to the to do list.
+     *
+     * @param str   Thing to add to the list.
+     */
+    private static void addToTDL(String str) {
+        
+    }
+
 
 }
