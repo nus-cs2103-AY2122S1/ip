@@ -21,5 +21,6 @@ public class DukeResponsePrettifier {
         printSeparator();
         System.out.println(indent(response));
         printSeparator();
+        System.out.println();
     }
 }

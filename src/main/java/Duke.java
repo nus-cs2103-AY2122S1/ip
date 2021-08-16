@@ -8,9 +8,9 @@ public class Duke {
 
     private static final String ADD_TODO_COMMAND = "todo";
     private static final String ADD_DEADLINE_COMMAND = "deadline";
-    private static final String DEADLINE_COMMAND_DELIMITER = "/by";
+    private static final String DEADLINE_COMMAND_DELIMITER = " /by ";
     private static final String ADD_EVENT_COMMAND = "event";
-    private static final String EVENT_COMMAND_DELIMITER = "/at";
+    private static final String EVENT_COMMAND_DELIMITER = " /at ";
 
     // User-facing messages
     private static final String GREETING_MESSAGE = "Hello! I'm Duke. What can I do for you?";
@@ -18,13 +18,15 @@ public class Duke {
 
     // User-facing error messages
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command.";
-    private static final String MISSING_TASK_NUMBER_MESSAGE =
-            "You have to let me know which task to be marked as completed.";
-    private static final String INVALID_TASK_NUMBER_MESSAGE =
-            "You need to give me a valid number to mark as completed.";
-    private static final String MISSING_TASK_NAME_MESSAGE = "You have to let me know what the name of the task is.";
-    private static final String MISSING_DEADLINE_DUE_DATE_MESSAGE = "You have to let me know when the deadline is by.";
-    private static final String MISSING_EVENT_TIMESTAMP_MESSAGE = "You have to let me know when the event is.";
+    private static final String INVALID_TASK_NUMBER_MESSAGE = "Invalid task number.";
+    private static final String MARK_DONE_BAD_ARGS_MESSAGE = "Invalid use of the 'done' command.\n\n" +
+            "To mark a task as done, use 'done <task-number>'.";
+    private static final String TODO_BAD_ARGS_MESSAGE = "Invalid use of the 'todo' command.\n\n" +
+            "To add a new todo, use 'todo <name>'.";
+    private static final String DEADLINE_BAD_ARGS_MESSAGE = "Invalid use of the 'deadline' command.\n\n" +
+            "To add a new deadline, use 'deadline <name> /by <due-date>'.";
+    private static final String EVENT_BAD_ARGS_MESSAGE = "Invalid use of the 'event' command.\n\n" +
+            "To add a new event, use 'event <name> /at <event-timestamp>'.";
 
     // ResponsePrettifier settings
     private static final int INDENTATION_LEVEL = 4;
@@ -38,21 +40,20 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
         while (scanner.hasNextLine()) {
-            String inputLine = scanner.nextLine();
-            String[] inputArguments = inputLine.split(" ");
-            String command = inputArguments[0];
+            String inputLine = scanner.nextLine().trim();
+            String command = inputLine.split(" ")[0];
+            String inputLineWithoutCommand = inputLine.replace(command, "").trim();
             switch (command) {
             case LIST_COMMAND:
                 prettifier.print(taskManager.toString());
                 break;
             case MARK_TASK_AS_DONE_COMMAND:
-                if (inputArguments.length < 2) {
-                    // Index of task to be marked as done is not provided
-                    prettifier.print(MISSING_TASK_NUMBER_MESSAGE);
+                if (inputLineWithoutCommand.isEmpty()) {
+                    prettifier.print(MARK_DONE_BAD_ARGS_MESSAGE);
                     break;
                 }
                 try {
-                    int taskNumber = Integer.parseInt(inputArguments[1]);
+                    int taskNumber = Integer.parseInt(inputLineWithoutCommand);
                     prettifier.print(taskManager.markTaskAsDone(taskNumber));
                 } catch (NumberFormatException e) {
                     // User provided an argument that is not parsable.
@@ -60,60 +61,33 @@ public class Duke {
                 }
                 break;
             case ADD_TODO_COMMAND:
-                String toDoName = inputLine.substring(ADD_TODO_COMMAND.length() + 1).trim();
+                String toDoName = inputLineWithoutCommand;
                 if (toDoName.isEmpty()) {
-                    // Name was not provided
-                    prettifier.print(MISSING_TASK_NAME_MESSAGE);
+                    prettifier.print(TODO_BAD_ARGS_MESSAGE);
                     break;
                 }
                 ToDo toDo = new ToDo(toDoName);
                 prettifier.print(taskManager.addTask(toDo));
                 break;
             case ADD_DEADLINE_COMMAND:
-                String[] deadlineDetails = inputLine.
-                        substring(ADD_DEADLINE_COMMAND.length() + 1).
-                        split(DEADLINE_COMMAND_DELIMITER);
+                String[] deadlineDetails = inputLineWithoutCommand.split(DEADLINE_COMMAND_DELIMITER);
                 if (deadlineDetails.length < 2) {
-                    // "/by" was not provided, or an empty string was provided after "/by"
-                    prettifier.print(MISSING_DEADLINE_DUE_DATE_MESSAGE);
+                    prettifier.print(DEADLINE_BAD_ARGS_MESSAGE);
                     break;
                 }
-                String deadlineName = deadlineDetails[0].trim();
-                if (deadlineName.isEmpty()) {
-                    // Name of Deadline was not provided
-                    prettifier.print(MISSING_TASK_NAME_MESSAGE);
-                    break;
-                }
-                String deadlineDueDate = deadlineDetails[1].trim();
-                if (deadlineDueDate.isEmpty()) {
-                    // Due Date is empty string after trimming whitespace
-                    prettifier.print(MISSING_DEADLINE_DUE_DATE_MESSAGE);
-                    break;
-                }
+                String deadlineName = deadlineDetails[0];
+                String deadlineDueDate = deadlineDetails[1];
                 Deadline deadline = new Deadline(deadlineName, deadlineDueDate);
                 prettifier.print(taskManager.addTask(deadline));
                 break;
             case ADD_EVENT_COMMAND:
-                String[] eventDetails = inputLine.
-                        substring(ADD_EVENT_COMMAND.length() + 1).
-                        split(EVENT_COMMAND_DELIMITER);
+                String[] eventDetails = inputLineWithoutCommand.split(EVENT_COMMAND_DELIMITER);
                 if (eventDetails.length < 2) {
-                    // "/at" was not provided, or an empty string was provided after "/at"
-                    prettifier.print(MISSING_EVENT_TIMESTAMP_MESSAGE);
+                    prettifier.print(EVENT_BAD_ARGS_MESSAGE);
                     break;
                 }
-                String eventName = eventDetails[0].trim();
-                if (eventName.isEmpty()) {
-                    // Name of Event was not provided
-                    prettifier.print(MISSING_TASK_NAME_MESSAGE);
-                    break;
-                }
-                String eventTimestamp = eventDetails[1].trim();
-                if (eventTimestamp.isEmpty()) {
-                    // Timestamp is empty string after trimming whitespace
-                    prettifier.print(MISSING_EVENT_TIMESTAMP_MESSAGE);
-                    break;
-                }
+                String eventName = eventDetails[0];
+                String eventTimestamp = eventDetails[1];
                 Event event = new Event(eventName, eventTimestamp);
                 prettifier.print(taskManager.addTask(event));
                 break;
