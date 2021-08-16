@@ -5,25 +5,25 @@ You have 0 tasks in your list now.
 ________________________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________________________
-duke.exception.InvalidNoDateException: Sorry >.< but this format is not allowed!
-Please write in the following format: [<Type> <Description>].
+duke.exception.InvalidNoDateException: Sorry >.< but this format is Invalid!
+Please follow this format: [<Type> <Description>].
 You have 0 tasks in your list now.
 ________________________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________________________
-duke.exception.InvalidCommandException: Sorry. I do not know what this means :(
+duke.exception.InvalidCommandException: Sorry >.< I do not understand your command!
 You have 0 tasks in your list now.
 ________________________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________________________
-duke.exception.InvalidNoDateException: Sorry >.< but this format is not allowed!
-Please write in the following format: [<Type> <Description>].
+duke.exception.InvalidNoDateException: Sorry >.< but this format is Invalid!
+Please follow this format: [<Type> <Description>].
 You have 0 tasks in your list now.
 ________________________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________________________
-duke.exception.InvalidDateException: Sorry >.< but this format is not allowed!
-Please write in the following format: [<Type> <Description> / <Date/Time>].
+duke.exception.InvalidDateException: Sorry >.< but this format is invalid!
+Please follow this format: [<Type> <Description> / <Date/Time>].
 You have 0 tasks in your list now.
 ________________________________________________________________________________________________________________________________________
 
