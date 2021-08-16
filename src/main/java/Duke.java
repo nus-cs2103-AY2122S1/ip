@@ -22,7 +22,7 @@ public class Duke {
         reply("Bye. Hope to see you again soon!");
     }
 
-    private static void addTask(String input) {
+    private static void addTask(String input) throws DukeException, IllegalArgumentException {
         Task addedTask = TaskManager.addTask(input);
         reply(String.format("Got it. I've added this task: \n" +
                 "%s\n" +
@@ -34,17 +34,26 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         while(true) {
             String userInput = scanner.nextLine();
-            if (userInput.equals("list")) {
-                reply(TaskManager.listTasks());
-            } else if (userInput.equals("bye")) {
-                quit();
-                break;
-            } else if (userInput.startsWith("done")) {
-                int id = Integer.parseInt(userInput.split(" ")[1]);
-                // need to -1 due to 0-indexing
-                reply(TaskManager.completeTask(id - 1));
-            } else {
-                addTask(userInput);
+            try {
+                if (userInput.equals("list")) {
+                    reply(TaskManager.listTasks());
+                } else if (userInput.equals("bye")) {
+                    quit();
+                    break;
+                } else if (userInput.startsWith("done")) {
+                    int id = Integer.parseInt(userInput.split(" ")[1]);
+                    // need to -1 due to 0-indexing
+                    reply(TaskManager.completeTask(id - 1));
+                } else {
+                    addTask(userInput);
+                }
+            } catch (IllegalArgumentException e) {
+                reply(e.getMessage());
+            } catch (DukeException e) {
+                reply(e.getMessage());
+            } catch (Exception e) {
+                // catch unhandled exceptions
+                e.printStackTrace();
             }
         }
     }

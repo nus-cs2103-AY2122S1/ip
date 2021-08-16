@@ -1,16 +1,17 @@
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TaskManager {
     static private List<Task> taskList = new ArrayList<>();
 
-    public static Task addTask(String rawTask) {
+    public static Task addTask(String rawTask) throws DukeException, IllegalArgumentException {
         Task ret = null;
         // parse raw task string
         String[] t = rawTask.split(" ", 2);
         String type = t[0];
-        String args = t[1];
-
+        Optional<String> args = t.length > 1 ? Optional.of(t[1]) : Optional.empty();
         switch (type) {
             case "todo":
                 ret = ToDo.of(args);
@@ -22,8 +23,7 @@ public class TaskManager {
                 ret = Event.of(args);
                 break;
             default:
-                ret = new Task(rawTask);
-                break;
+                throw new InvalidDukeCommandException();
         }
         taskList.add(ret);
 
@@ -34,15 +34,15 @@ public class TaskManager {
         return taskList.size();
     }
 
-    public static String completeTask(int taskId) {
-        if (taskId < taskList.size()) {
+    public static String completeTask(int taskId) throws IllegalArgumentException {
+        if (taskId < taskList.size() && taskId >= 0) {
             taskList.set(taskId, taskList.get(taskId).done());
 
             return String.format(
                     "Nice! I've marked this task as done: \n" +
                     "%s", taskList.get(taskId).toString());
         } else {
-            return "complete task failed, taskId > taskListSize";
+            throw new IllegalArgumentException("☹ OOPS!!! Task Index is invalid!!");
         }
     }
 

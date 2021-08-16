@@ -1,3 +1,6 @@
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 public class Event extends Task{
 
     private String time;
@@ -7,9 +10,13 @@ public class Event extends Task{
         this.time = time;
     }
 
-    public static Event of(String args) {
+    public static Event of(Optional<String> args) throws IllegalArgumentException {
         // parse args
-        String[] parsedArgs = args.split(" /at ");
+        String[] parsedArgs = args.orElseThrow(() -> new IllegalArgumentException("☹ OOPS!!! The args of a event cannot be empty."))
+                                  .split(" /at ");
+        if (parsedArgs.length < 2) {
+            throw new IllegalArgumentException("☹ OOPS!!! Insufficient args for event.");
+        }
         return new Event(parsedArgs[0], parsedArgs[1]);
     }
 
