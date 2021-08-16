@@ -1,10 +1,30 @@
 public class Duke {
+
+    private UI ui;
+    private boolean exit;
+
+    public Duke () {
+        this.ui = new UI ();
+        exit = false;
+    }
+
+    public void start () {
+        System.out.println(ui.greet());
+
+        while (!exit) {
+            String userCommand = ui.echoCommand();
+
+            if (userCommand.equals("bye")) {
+                System.out.println(ui.exit());
+                exit = true;
+            } else {
+                System.out.println(userCommand);
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        new Duke().start();
     }
 }
