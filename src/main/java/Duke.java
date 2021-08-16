@@ -3,7 +3,9 @@ import java.util.Scanner;
 public class Duke {
 
     /* Default line separator design. */
-    private static String sepLine = "///\\\\\\///\\\\\\<<<===================================>>>///\\\\\\///\\\\\\";
+    private static String sepLine = "===========================================";
+    private static String sepLineOpen = "///<<<============ Duke Says: ===========>>>\\\\\\";
+    private static String sepLineClose = "\\\\\\<<<===================================>>>///";
 
 
     public static void main(String[] args) {
@@ -46,9 +48,9 @@ public class Duke {
      */
     private static void dukeSays(String printThis) {
         System.out.println("");
-        System.out.println(sepLine);
+        System.out.println(sepLineOpen);
         System.out.println(printThis);
-        System.out.println(sepLine);
+        System.out.println(sepLineClose);
     }
 
 }
