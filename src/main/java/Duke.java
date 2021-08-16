@@ -1,48 +1,45 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-                /*String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo); */
 
+
+    private static String breakline = "____________________________________________________________";
+
+    public static void start() {
+        System.out.println(breakline);
         String greetingMsg = "Hello! I'm Duke\nWhat can I do for you?";
-        String breakline = "____________________________________________________________";
+        System.out.println(greetingMsg);
+        System.out.println(breakline);
+    }
+
+    public static void exit() {
+        String byeMsg = "Bye. Hope to see you again soon!";
+        System.out.println(byeMsg);
+        System.out.println(breakline);
+    }
+
+    public static void main(String[] args) {
+
         String exitCmd = "bye";
         String listCmd = "list";
         String cmd;
-        String byeMsg = "Bye. Hope to see you again soon!";
         Scanner scanner = new Scanner(System.in);
+        Tasklist tasklist = new Tasklist();
 
-        String[] tasks = new String[100];
-
-        System.out.println(breakline);
-        System.out.println(greetingMsg);
-        System.out.println(breakline);
-
+        start();
         int count = 0;
         do {
             cmd = scanner.nextLine();
-
             if(cmd.equals(exitCmd)) {
-                System.out.println(byeMsg);
-                System.out.println(breakline);
+                exit();
                 break;
             } else if(cmd.equals(listCmd)) {
-                for(int i=0;i < count; i++) {
-                    System.out.printf("%d. %s\n", i+1, tasks[i]);
-                }
-                System.out.println(breakline);
+                tasklist.list();
             } else {
-                tasks[count] = cmd;
-                System.out.printf("added: %s\n", cmd);
-                System.out.println(breakline);
+                Task task = new Task(cmd);
+                tasklist.add(task);
                 count++;
             }
         } while (!cmd.equals(exitCmd));
-
     }
 }
