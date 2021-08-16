@@ -1,6 +1,9 @@
+/**
+ * Represents a Deadline object.
+ */
 public class Deadline extends Task {
     /** The date to complete the task by */
-    private final String by;
+    private String by;
 
     /**
      * Deadline constructor.

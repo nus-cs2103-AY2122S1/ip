@@ -1,6 +1,9 @@
+/**
+ * Represents an Event object.
+ */
 public class Event extends Task {
     /** The time when the event is happening. */
-    private final String at;
+    private String at;
 
     /**
      * Event constructor.
