@@ -3,6 +3,9 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class to create chatBot called MyJournal.
+ */
 public class MyJournal {
     public static void main(String[] args) {
         ArrayList<Task> items = new ArrayList<>();
