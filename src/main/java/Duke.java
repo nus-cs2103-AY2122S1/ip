@@ -44,54 +44,69 @@ public class Duke {
         System.out.println("What can I do for you?");
         List<Task> ls = new ArrayList<>();
         do {
-            input = scan.nextLine();
-            arr = input.split(" ");
-            if (input.equals("bye")) {
-                System.out.println("Good Bye. Have a nice day!");
-            }
-            else if (arr.length == 2) {
-                if (arr[0].equals("done")
-                        && Integer.parseInt(arr[1]) <= ls.size()
-                        && Integer.parseInt(arr[1]) > 0) {
-                    System.out.println("Nice! I've marked this task as done: ");
-                    ls.get(parseInt(arr[1]) - 1).markAsDone();
-                    System.out.println(ls.get(parseInt(arr[1]) - 1).toString());
+            try {
+                input = scan.nextLine();
+                arr = input.split(" ");
+                if (input.equals("bye")) {
+                    System.out.println("Good Bye. Have a nice day!");
                 }
-                else if (arr[0].equals("done") && ls.size() == 0) {
-                    System.out.println("You have not added any task!");
+                else if (arr.length == 2) {
+                    if (arr[0].equals("done")
+                            && Integer.parseInt(arr[1]) <= ls.size()
+                            && Integer.parseInt(arr[1]) > 0) {
+                        System.out.println("Nice! I've marked this task as done: ");
+                        ls.get(parseInt(arr[1]) - 1).markAsDone();
+                        System.out.println(ls.get(parseInt(arr[1]) - 1).toString());
+                    }
+                    else if (arr[0].equals("done") && ls.size() == 0) {
+                        throw new InvalidCommandException("You have not added any task!");
+                    }
+                    else {
+                        throw new InvalidValueException("Enter a valid number!");
+                    }
                 }
-                else {
-                    System.out.println("Enter a valid number!");
-                }
-            }
-            else if (arr.length > 2) {
-                if (arr[0].equals("todo")) {
+                else if (arr[0].equals("todo")) {
+                    if (arr.length < 2) {
+                        throw new EmptyDescriptionException("Missing description / date");
+                    }
                     System.out.println("Got it. I've added this task: ");
                     ls.add(new Todo(arr[0]));
                     System.out.println(ls.get(ls.size() - 1).toString());
                     System.out.println("Now you have " + ls.size() + " tasks in the list.");
                 }
                 else if (arr[0].equals("deadline")) {
+                    if (arr.length < 2) {
+                        throw new EmptyDescriptionException("Missing description / date");
+                    }
                     System.out.println("Got it. I've added this task: ");
                     ls.add(new Deadline(getDescription(arr), getDeadline(arr)));
                     System.out.println("Now you have " + ls.size() + " tasks in the list.");
                 }
                 else if (arr[0].equals("event")) {
+                    if (arr.length < 2) {
+                        throw new EmptyDescriptionException("Missing description / date");
+                    }
                     System.out.println("Got it. I've added this task: ");
                     ls.add(new Event(getDescription(arr), getDeadline(arr)));
                     System.out.println("Now you have " + ls.size() + " tasks in the list.");
                 }
-            }
-            else if (input.equals("list")) {
-                System.out.println("Here are the tasks in your list: ");
-                for(int i = 0; i < ls.size(); i++) {
-                    System.out.println((i + 1) + "." + ls.get(i).toString());
+                else if (input.equals("list")) {
+                    System.out.println("Here are the tasks in your list: ");
+                    for(int i = 0; i < ls.size(); i++) {
+                        System.out.println((i + 1) + "." + ls.get(i).toString());
+                    }
+                }
+                else {
+                    throw new InvalidCommandException("Command not Found");
                 }
             }
-            else {
-                System.out.println("added: " + input);
-                ls.add(new Task(input));
+            catch (InvalidCommandException e) {
+                System.out.println(e.toString());
             }
+            catch (EmptyDescriptionException e) {
+                System.out.println(e.toString());
+            }
+
         } while (!input.equals("bye"));
     }
 }
