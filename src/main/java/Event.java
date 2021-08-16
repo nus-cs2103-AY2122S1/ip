@@ -8,7 +8,7 @@ package main.java;
  */
 public class Event extends Task {
 
-    private String date;
+    private final String date;
 
     /**
      * Constructor for Deadline task.

@@ -1,4 +1,15 @@
 blah
+done 1
+done
+todo
+deadline
+event
+list 1
+bye 1
+deadline no date
+event no date
+done -1
+done 1.1
 list
 todo read textbook
 list

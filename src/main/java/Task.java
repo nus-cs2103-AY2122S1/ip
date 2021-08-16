@@ -1,7 +1,7 @@
 package main.java;
 
 /**
- * A task contains its description and a boolean of whether it is done or not.
+ * A task contains its description and information of whether it is done or not.
  *
  * @author Zhen Xuan (Tutorial Group 04)
  * @version CS2103T AY21/22 S2

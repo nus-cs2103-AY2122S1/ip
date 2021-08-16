@@ -56,4 +56,13 @@ public class TaskList {
         }
         System.out.println(Duke.LINE + "\n");
     }
+
+    /**
+     * Return the number of items in the TaskList.
+     *
+     * @return listCount
+     */
+    protected int count() {
+        return this.listCount;
+    }
 }

@@ -4,7 +4,51 @@
 	____________________________________________________________
 
 	____________________________________________________________
-	 Invalid command
+	 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!! You do not that much tasks. Try adding more tasks.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!! You did not indicate the task to be marked done. Use 'done <task's number>' to mark the task as done.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!! The description of a todo cannot be empty. Use 'todo <description>' to add a todo.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!! The description of a deadline cannot be empty. Use 'deadline <description> /at <date>' to add a deadline.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!! The description of an event cannot be empty. Use 'event <description> /at <date>' to add an event.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!! There are too many arguments that I do not understand. Sorry.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!! There are too many arguments that I do not understand. Sorry.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!! The description / date of a deadline cannot be empty. Use 'deadline <description> /at <date>' to add a deadline.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!! The description / date of an event cannot be empty. Use 'event <description> /at <date>' to add an event.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!! The list is numbered 1, 2, 3, .... There are no items numbered 0 nor with a negative number.
+	____________________________________________________________
+
+	____________________________________________________________
+	 ☹ OOPS!!! You did not provide a valid number.
 	____________________________________________________________
 
 	____________________________________________________________
