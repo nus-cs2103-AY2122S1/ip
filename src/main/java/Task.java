@@ -13,11 +13,12 @@ public class Task {
 
     public void markTaskDone() {
         this.isDone = true;
-        printTaskStatus();
+        System.out.println(this);
     }
 
-    public void printTaskStatus() {
-        System.out.println(" [" + this.getStatusIcon() + "] " + this.description);
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
     //...
