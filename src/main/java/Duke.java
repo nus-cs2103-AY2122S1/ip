@@ -4,7 +4,7 @@ public class Duke {
 
     public static void main(String[] args) {
         //To do list storage DS
-        ArrayList<String> toDo = new ArrayList<>();
+        ArrayList<Task> toDo = new ArrayList<>();
 
         // Some String format
         String logo = " ____        _        \n"
@@ -24,16 +24,29 @@ public class Duke {
 
         //Init new scanner to take in inputs
         Scanner s = new Scanner(System.in);
-        System.out.println("Add to-do list (input)/ View list(list) / End (bye) :");
+        System.out.println("Add to-do list (input)/ View list(list) / Complete task (done {input}) / End (bye) :");
         String input = s.nextLine();
+        Task t = new Task(input);
 
         //A loop to check for bye. Else will echo the users input
         while (!input.equals("bye")) {
-            if (!input.equals("list")) {
+            if (!input.equals("list") && !input.contains("done")) {
                 System.out.println(start + "added: " + input + "\n" + end);
-                toDo.add(input);
-                System.out.println("Add to-do list (input)/ View list(list) / End (bye) :");
+                toDo.add(t);
+                System.out.println("Add to-do list (input)/ View list(list) / Complete task (done {input}) / End (bye) :");
                 input = s.nextLine();
+                t = new Task(input);
+            }
+
+            else if (input.contains("done")) {
+                System.out.println("Nice! I've marked this task as done: ");
+                int i = Integer.valueOf(input.substring(5));
+                toDo.get((int) i - 1).markAsDone();
+                String res = (i) + ". " + toDo.get(i-1).toString();
+                System.out.println(res);
+                System.out.println("Add to-do list (input)/ View list(list) / Complete task (done {input}) / End (bye) :");
+                input = s.nextLine();
+                t = new Task(input);
             }
 
             else if (input.equals("list")) {
@@ -41,12 +54,13 @@ public class Duke {
                 System.out.println(end);
                 System.out.println("Your to-do list:");
                 for (int i = 0; i < toDo.size(); i++) {
-                    String res = (i + 1) + ". " + toDo.get(i);
+                    String res = (i + 1) + ". " + toDo.get(i).toString();
                     System.out.println(res);
                 }
                 System.out.println(end);
-                System.out.println("Add to-do list (just input)/ View list(command: list) / End (command: bye) :");
+                System.out.println("Add to-do list (input)/ View list(list) / Complete task (done {input}) / End (bye) :");
                 input = s.nextLine();
+                t = new Task(input);
             }
         }
 
