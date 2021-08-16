@@ -1,10 +1,16 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     static final String NAME = "Tze Henn";
+    static final ArrayList<String> list = new ArrayList<>();
 
     public static void lineGenerator() {
         System.out.println("____________________________________________________________");
+    }
+
+    public static void addToList(String item) {
+        list.add(item);
     }
 
     public static void main(String[] args) {
@@ -21,17 +27,26 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         System.out.print("\nEnter command: ");
-        String input = sc.next();
+        String input = sc.nextLine();
 
 
         while (!input.equals("bye")) {
             lineGenerator();
-            System.out.println(input);
+            if (input.equals("list")) {
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.print(i + 1);
+                    System.out.println(". " + list.get(i));
+                }
+            } else {
+                System.out.println("added: " + input);
+                addToList(input);
+            }
             lineGenerator();
             System.out.print("\nEnter command: ");
-            input = sc.next();
+            input = sc.nextLine();
         }
         lineGenerator();
         System.out.println("Bye. Hope to see you again soon!");
+        lineGenerator();
     }
 }
