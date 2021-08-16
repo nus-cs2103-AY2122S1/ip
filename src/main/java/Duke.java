@@ -1,13 +1,15 @@
+import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Duke {
-
-    String LOGO = " ____        _        \n"
+    static final String LOGO = " ____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
         + "| | | | | | | |/ / _ \\\n"
         + "| |_| | |_| |   <  __/\n"
         + "|____/ \\__,_|_|\\_\\___|\n";;
-    String GOODBYE = "Bye. Hope to see you again soon!";
+    static final String GOODBYE = "Bye. Hope to see you again soon!";
+    LinkedList<Item> itemList = new LinkedList<>();
     public static void main(String[] args) {
         new Duke().run();
     }
@@ -16,16 +18,40 @@ public class Duke {
         System.out.println("Hello from\n" + LOGO);
         Scanner sc = new Scanner(System.in);
         String currLine;
-        while (true) {
+        scanner: while (true) {
             currLine = sc.nextLine();
-            if (currLine.equals("bye")) {
-                System.out.println(styleResponse(GOODBYE));
-                break;
+            switch (currLine) {
+                case "bye":
+                    System.out.println(styleResponse(GOODBYE));
+                    break scanner;
+                case "list":
+                    System.out.println(styleResponse(this.list()));
+                    break;
+                default:
+                    System.out.println(styleResponse(this.add(currLine)));
             }
-            System.out.println(styleResponse(echo(currLine)));
         }
-        
         sc.close();
+    }
+
+    public String add(String inputString) {
+        this.itemList.add(new Item(inputString));
+        return "Added: " + inputString;
+    }
+
+    public String list() {
+        ListIterator<Item> iterator = this.itemList.listIterator();
+        if (!iterator.hasNext()) {
+            return "Empty!";
+        } else {
+            String returnBuffer = "";
+            Integer currIdx = 1;
+            while (iterator.hasNext()) {
+                returnBuffer = returnBuffer.concat(currIdx.toString() + ". " + iterator.next().toString()) + "\n";
+                currIdx++;
+            }
+            return returnBuffer;
+        }
     }
 
     public static String echo(String inputString) {
