@@ -26,17 +26,24 @@ public class BobCat {
             hLine();
             switch (reply) {
                 case "list":
-                    String[] toShow = storage.getStorage();
+                    Storage.Task[] toShow = storage.getStorage();
                     for (int i = 0; i < toShow.length; i++) {
-                        System.out.println("\t" + (i + 1) + ". " + toShow[i]);
+                        Storage.Task entry = toShow[i];
+                        System.out.println("\t" + (i + 1) + ".[" + entry.getStatus() + "] " + entry.getDescription());
                     }
                     break;
                 case "bye":
                     System.out.println("Bye! Hope to see you again soon!");
                     break;
+                case "done":
+
                 default:
-                    storage.push(reply);
-                    System.out.println("\t" + "added: " + reply);
+                    boolean success = storage.push(reply);
+                    if (success) {
+                        System.out.println("\t" + "added: " + reply);
+                    } else {
+                        System.out.println("\t" + "Unable to add: Memory is full!");
+                    }
             }
             hLine();
         }
