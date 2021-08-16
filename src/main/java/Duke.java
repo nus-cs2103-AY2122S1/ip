@@ -57,20 +57,36 @@ public class Duke {
                 if (input.equals("bye")) {
                     System.out.println("Good Bye. Have a nice day!");
                 }
-                else if (arr.length == 2) {
-                    if (arr[0].equals("done")
-                            && Integer.parseInt(arr[1]) <= ls.size()
-                            && Integer.parseInt(arr[1]) > 0) {
-                        System.out.println("Nice! I've marked this task as done: ");
-                        ls.get(parseInt(arr[1]) - 1).markAsDone();
-                        System.out.println(ls.get(parseInt(arr[1]) - 1).toString());
-                    }
-                    else if (arr[0].equals("done") && ls.size() == 0) {
-                        throw new InvalidCommandException("You have not added any task!");
-                    }
-                    else {
-                        throw new InvalidValueException("Enter a valid number!");
-                    }
+                else if (arr[0].equals("done")
+                        && Integer.parseInt(arr[1]) <= ls.size()
+                        && Integer.parseInt(arr[1]) > 0) {
+                    System.out.println("Nice! I've marked this task as done: ");
+                    ls.get(parseInt(arr[1]) - 1).markAsDone();
+                    System.out.println(ls.get(parseInt(arr[1]) - 1).toString());
+                }
+                else if (arr[0].equals("done") && ls.size() == 0) {
+                    throw new InvalidCommandException("You have not added any task!");
+                }
+                else if (arr[0].equals("done")
+                        && (Integer.parseInt(arr[1]) > ls.size()
+                        || Integer.parseInt(arr[1]) <= 0)) {
+                    throw new InvalidValueException("Enter a valid number!");
+                }
+                else if (arr[0].equals("delete")
+                        && Integer.parseInt(arr[1]) <= ls.size()
+                        && Integer.parseInt(arr[1]) > 0) {
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println(ls.get(parseInt(arr[1]) - 1).toString());
+                    ls.remove(parseInt(arr[1]) - 1);
+
+                }
+                else if (arr[0].equals("delete") && ls.size() == 0) {
+                    throw new InvalidCommandException("You have not added any task!");
+                }
+                else if (arr[0].equals("delete")
+                        && (Integer.parseInt(arr[1]) > ls.size()
+                        || Integer.parseInt(arr[1]) <= 0)) {
+                    throw new InvalidValueException("Enter a valid number!");
                 }
                 else if (arr[0].equals("todo")) {
                     if (arr.length < 2) {
@@ -111,6 +127,9 @@ public class Duke {
                 System.out.println(e.toString());
             }
             catch (EmptyDescriptionException e) {
+                System.out.println(e.toString());
+            }
+            catch (InvalidValueException e) {
                 System.out.println(e.toString());
             }
 
