@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import memory.Storage;
 
 public class BobCat {
     public static class Response {
@@ -20,6 +21,25 @@ public class BobCat {
             System.out.println("\t" + reply[reply.length - 1]);
             hLine();
         }
+
+        public static void respond(String reply, Storage storage) {
+            hLine();
+            switch (reply) {
+                case "list":
+                    String[] toShow = storage.getStorage();
+                    for (int i = 0; i < toShow.length; i++) {
+                        System.out.println("\t" + (i + 1) + ". " + toShow[i]);
+                    }
+                    break;
+                case "bye":
+                    System.out.println("Bye! Hope to see you again soon!");
+                    break;
+                default:
+                    storage.push(reply);
+                    System.out.println("\t" + "added: " + reply);
+            }
+            hLine();
+        }
     }
 
     public static void main(String[] args) {
@@ -31,17 +51,17 @@ public class BobCat {
 //        System.out.println("Hello from\n" + logo);
 
         Scanner scanObj = new Scanner(System.in);
+
         boolean toTerminate = false;
+        Storage storage = new Storage();
 
         Response.respond(new String[]{"Hello! I'm BobCat!", "What can I do for you?"});
         while(!toTerminate) {
             String inp = scanObj.nextLine();
             if (inp.equals("bye")) {
                 toTerminate = true;
-                Response.respond("Bye! Hope to see you again soon!");
-            } else {
-                Response.respond(inp);
             }
+            Response.respond(inp, storage);
         }
     }
 }
