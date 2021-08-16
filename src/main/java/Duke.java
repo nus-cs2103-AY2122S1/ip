@@ -2,9 +2,10 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class Duke {
-    private static String indent = "    ";
+    private static TaskList taskList = new TaskList();
 
     private static void divider() {
+        String indent = "    ";
         StringBuilder builder = new StringBuilder(100);
         Stream.generate(() -> '-').limit(60).forEach(e -> builder.append(e));
         String line = indent + '+' + builder.toString() + "+\n";
@@ -12,6 +13,7 @@ public class Duke {
     }
 
     private static void greet() {
+        String indent = "    ";
         String greeting = indent + "Hello! I'm Duke\n"
                 + indent+ "What can I do for you?";
 
@@ -21,6 +23,7 @@ public class Duke {
     }
 
     private static void exit() {
+        String indent = "    ";
         String exitMessage = indent + "Bye. Hope to see you again soon!";
 
         divider();
@@ -28,9 +31,15 @@ public class Duke {
         divider();
     }
 
-    private static void echo(String command) {
+    private static void returnTaskList() {
         divider();
-        System.out.println(indent + command);
+        System.out.println(taskList);
+        divider();
+    }
+
+    private static void updateTaskList(String command) {
+        divider();
+        Duke.taskList = taskList.add(command);
         divider();
     }
 
@@ -42,13 +51,15 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            String command = sc.nextLine();
+            String command = sc.nextLine().strip();
             if (command.equals("bye")) {
                 exit();
                 break;
+            } else if (command.equals("list")) {
+                Duke.returnTaskList();
             } else {
-                // Echo the command
-                echo(command);
+                // Add the task to the task list
+                Duke.updateTaskList(command);
             }
         }
 
