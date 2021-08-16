@@ -77,10 +77,17 @@ public class Duke {
                         break;
                     case "done":
                         checkLen(commandPair, false, 2, "You did not indicate the task to be marked done. Use 'done <task's number>' to mark the task as done.");
-                        int index = isNumeric(commandPair[1]);
-                        if (index > tl.count())
+                        int toBeDone = isNumeric(commandPair[1]);
+                        if (toBeDone > tl.count())
                             throw new IllegalArgumentException("You do not that much tasks. Try adding more tasks.");
-                        tl.setDone(index - 1);
+                        tl.setDone(toBeDone - 1);
+                        break;
+                    case "delete":
+                        checkLen(commandPair, false, 2, "You did not indicate the task to be deleted. Use 'delete <task's number>' to delete the task.");
+                        int toBeDeleted = isNumeric(commandPair[1]);
+                        if (toBeDeleted > tl.count())
+                            throw new IllegalArgumentException("You do not that much tasks. Try adding more tasks.");
+                        tl.delete(toBeDeleted - 1);
                         break;
                     case "todo":
                         checkLen(commandPair, false, 2, "The description of a todo cannot be empty. Use 'todo <description>' to add a todo.");
