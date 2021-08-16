@@ -1,0 +1,7 @@
+event meet friends for lunch /at deck
+deadline complete ip week 2 /by thursday
+todo watch lecture for 2103
+deadline complete ip level 4 task /by today
+list
+done 4
+list
