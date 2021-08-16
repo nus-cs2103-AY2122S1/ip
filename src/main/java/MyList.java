@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class MyList {
@@ -7,6 +8,13 @@ public class MyList {
         myList.add(t);
         System.out.println("Got it! I have added:");
         System.out.println(t.toString());
+        int noOfItems = this.myList.size();
+        if (noOfItems == 1) {
+            System.out.printf("You now have %d item in your list \n", noOfItems);
+        } else {
+            System.out.printf("You now have %d items in your list \n", noOfItems);
+        }
+
     }
 
     public void listAll() {
