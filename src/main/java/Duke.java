@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -60,5 +61,18 @@ public class Duke {
 
     public static String styleResponse(String inputString) {
         return "     --------------------\n     " + inputString + "\n     --------------------";
+    }
+
+    /**
+     * Uses a line-wise input array of Strings and formats it for output.
+     * @param inputStrings
+     * @return String of output.
+     */
+    public static String styleResponse(ArrayList<String> inputStrings) {
+        String returnBuffer = "     --------------------\n";
+        for (String line : inputStrings) {
+            returnBuffer = returnBuffer.concat("     " + line + "\n");
+        }
+        return returnBuffer + "\n     --------------------";
     }
 }
