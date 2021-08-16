@@ -34,7 +34,7 @@ public class Duke {
                         throw new DukeException("invalidDone");
                     } else {
                         int toSet = Integer.parseInt(text.split(" ")[1]);
-                        if (toSet > listLength) {
+                        if (toSet > listLength || toSet < 1) {
                             throw new DukeException("invalidDone");
                         } else {
                             taskList.get(toSet - 1).setDone();
@@ -48,7 +48,7 @@ public class Duke {
                         throw new DukeException("invalidDelete");
                     } else {
                         int toDelete = Integer.parseInt(text.split(" ")[1]);
-                        if (toDelete > listLength) {
+                        if (toDelete > listLength || toDelete < 1) {
                             throw new DukeException("invalidDelete");
                         } else {
                             Task deleted = taskList.remove(toDelete - 1);
