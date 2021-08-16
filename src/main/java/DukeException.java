@@ -51,10 +51,16 @@ class NoSuchTaskException extends DukeException {
  * Threw when the task index given is out of bound.
  */
 class InvalidTaskIndexException extends DukeException {
+    String action;
+
+    public InvalidTaskIndexException(String action) {
+        this.action = action;
+    }
+
     @Override
     public String toString() {
         return "___________________________________________________\n"
-                + "Please enter done followed by a valid number so I can mark it as done for you:)\n"
+                + "Please enter the command " + action + " with a valid number\n"
                 + "___________________________________________________\n";
     }
 }

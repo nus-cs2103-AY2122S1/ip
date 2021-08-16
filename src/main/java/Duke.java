@@ -66,8 +66,14 @@ public class Duke {
             }
             case "done": {
                 String task = this.getTask(command);
-                int taskIdx = this.getTaskIdx(task);
+                int taskIdx = this.getTaskIdx(this.getAction(command), task);
                 this.markTaskAsDone(taskIdx - 1);
+                break;
+            }
+            case "delete": {
+                String task = this.getTask(command);
+                int taskIdx = this.getTaskIdx(this.getAction(command), task);
+                this.deleteTask(taskIdx - 1);
                 break;
             }
             default:
@@ -139,12 +145,12 @@ public class Duke {
         }
     }
 
-    private int getTaskIdx(String idxString) throws InvalidTaskIndexException, NoSuchTaskException {
+    private int getTaskIdx(String action, String idxString) throws InvalidTaskIndexException, NoSuchTaskException {
         int taskIdx;
         try {
              taskIdx = Integer.parseInt(idxString);
         } catch (NumberFormatException e) {
-            throw new InvalidTaskIndexException();
+            throw new InvalidTaskIndexException(action);
         }
 
         if (taskIdx > 0 && taskIdx <= this.tasks.size()) {
@@ -152,5 +158,15 @@ public class Duke {
         } else {
             throw new NoSuchTaskException();
         }
+    }
+
+    private void deleteTask(int taskIdx) {
+        Task toBeDeleted = this.tasks.get(taskIdx);
+        System.out.println("___________________________________________________");
+        System.out.println(" Noted. I've removed this task:");
+        System.out.println(toBeDeleted);
+        tasks.remove(toBeDeleted);
+        System.out.println("Now you have " + this.tasks.size() + " task" + ((tasks.size() <= 1) ? "" : "s") + " in the list");
+        System.out.println("___________________________________________________\n");
     }
 }
