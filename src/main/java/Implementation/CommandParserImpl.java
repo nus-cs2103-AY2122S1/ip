@@ -12,7 +12,7 @@ import java.util.List;
  * if the command is invalid
  */
 public class CommandParserImpl implements CommandParser {
-	private CommandProcessor commandProcessor;
+	private final CommandProcessor commandProcessor;
 	
 	public CommandParserImpl(CommandProcessor commandProcessor) {
 		this.commandProcessor = commandProcessor;
@@ -24,10 +24,10 @@ public class CommandParserImpl implements CommandParser {
 		switch (parsedCommands.get(0)) {
 			case "bye":
 				// ignore the rest of the arguments here
-				commandProcessor.processCommand(Command.BYE, Arrays.asList());
+				commandProcessor.processCommand(Command.BYE, List.of());
 			default:
 				// invalid
-				commandProcessor.processCommand(Command.INVALID, Arrays.asList(input));
+				commandProcessor.processCommand(Command.INVALID, List.of(input));
 		}
 	}
 }

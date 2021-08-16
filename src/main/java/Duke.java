@@ -14,12 +14,13 @@ import static Util.Display.printSentence;
  */
 public class Duke {
 	// initialize the buffered reader to take input from the console
-	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
 	// initialize the command processor from logic processing, use the commandParse to process the console input
-	private static CommandProcessor commandProcessor = new CommandProcessorImpl();
-	private static CommandParser commandParser = new CommandParserImpl(commandProcessor);
+	private static final CommandProcessor commandProcessor = new CommandProcessorImpl();
+	private static final CommandParser commandParser = new CommandParserImpl(commandProcessor);
 	
+	@SuppressWarnings("InfiniteLoopStatement")
 	public static void main(String[] args) throws IOException {
 		String logo = " ____        ____      \n"
 				+ "|  _ \\ _   _|  _ \\____\n"
