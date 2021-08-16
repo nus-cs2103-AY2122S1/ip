@@ -1,4 +1,3 @@
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,7 +9,7 @@ public class Duke {
                     "| |_| | |_| |   <  __/",
                     "|____/ \\__,_|_|\\_\\___|",
                     "Hello! I'm Duke",
-                    "What can I do for you?\n"};
+                    "What can I do for you?"};
         System.out.println(StringFormat.formatString(startMessage));
 
         // Storage for tasks
@@ -42,17 +41,27 @@ public class Duke {
                     if (inputs.length < 2) {
                         throw new DukeException("☹ OOPS!!! Task number to be marked as done cannot be empty.");
                     }
-                    String[] result = input.split(" ");
-                    int ind = Integer.valueOf(result[1]) - 1;
+                    int ind = Integer.valueOf(inputs[1]) - 1;
 
                     System.out.println(
                         StringFormat.tabAndFormat(storage.markDone(ind))
                     );
+                // if we are deleting a task from storage
+                } else if (inputs[0].equals("delete")) {
+                    if (inputs.length < 2) {
+                        throw new DukeException("☹ OOPS!!! Task number to be deleted cannot be empty.");
+                    }
+                    int ind = Integer.valueOf(inputs[1]) - 1;
+
+                    System.out.println(
+                        StringFormat.tabAndFormat(storage.delete(ind))
+                    );
+                
                 // if we are making a task
                 } else {
                     taskHandler(storage, inputs, input);
                 }
-            } catch (DukeException | IllegalArgumentException | NoSuchElementException e){
+            } catch (DukeException | IllegalArgumentException e){
                 System.out.println(StringFormat.tabAndFormat(e.getMessage()));
             }
         }
@@ -77,7 +86,7 @@ public class Duke {
             }
             String[] result = inputs[1].split(" /by ");
             if (result.length < 2) {
-                throw new DukeException("☹ OOPS!!! The information for a deadline must have:\n\t1. Brief description\n\t2. Deadline");
+                throw new DukeException("☹ OOPS!!! The information for a deadline must have:\n1. Brief description\n2. Deadline\nWhere the two fields are separated by \"/by\"");
             }
             System.out.println(
                 StringFormat.tabAndFormat(
@@ -93,7 +102,7 @@ public class Duke {
             }
             String[] result = inputs[1].split(" /at ");
             if (result.length < 2) {
-                throw new DukeException("☹ OOPS!!! The information for an event must have:\n\t1. Brief description\n\t2. Date/Interval");
+                throw new DukeException("☹ OOPS!!! The information for an event must have:\n1. Brief description\n2. Date/Interval\nWhere the two fields are separated by \"/at\"");
             }
             System.out.println(
                 StringFormat.tabAndFormat(

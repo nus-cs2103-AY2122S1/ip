@@ -1,22 +1,32 @@
 deadline cs2103t quiz /by Monday
 todo cs2103t project level 1
 todo cs2103t project level 2
+todo cs2103t project level 3
+todo cs2103t project level 4
+todo cs2103t project level 5
+todo cs2103t project level 6
 event Christmas /at December
+list
 done 1
 list
 done 2
 list
+delete 3
+list
 done 3
 list
-done 4
+delete 3
 list
 done 5
 list
+delete
 todo
 event
+event /at
 event hello /at
 deadline
-deadline hello /at
+deadline /by
+deadline hello /by
 done -1
 done -2
 done 20
