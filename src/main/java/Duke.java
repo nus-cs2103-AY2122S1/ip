@@ -42,13 +42,13 @@ public class Duke {
                 } else {
                     if (command.equals("deadline")) {
                         //split description and by
-                        String[] userInputArgs = userInput.split("/by ");
+                        String[] userInputArgs = String.join(" ",userInputList).split("/by ");
                         String description = userInputArgs[0];
                         String by = userInputArgs[1];
                         tasks[totalTasks] = new Deadline(description, by);
                     } else if (command.equals("event")){
                         //split description and at
-                        String[] userInputArgs = userInput.split("/at ");
+                        String[] userInputArgs = String.join(" ",userInputList).split("/at ");
                         String description = userInputArgs[0];
                         String at = userInputArgs[1];
                         tasks[totalTasks] = new Event(description, at);
