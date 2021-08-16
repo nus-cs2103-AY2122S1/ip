@@ -23,17 +23,21 @@ public class Petal {
     public Petal() {
         bye = false;
         tasks = new ArrayList<>();
-        startMessage();
     }
 
     /**
      * Method to give the start message
      */
-    public void startMessage() {
+    public void start() {
+        Scanner scanner = new Scanner(System.in);
         String logo = "\nWelcome to Petal (•◡•)/ ";
         String logo2 = "\nI am the best chat bot you'll meet! Don't be shy, say something! :P\n";
-        System.out.println(indentation + logo + logo2);
-        requiredFormat();
+        System.out.println(indentation + logo + logo2 + indentation);
+        while (!bye) {
+            String message = scanner.nextLine();
+            formatMessage(message);
+        }
+        scanner.close();
     }
 
     /**
@@ -53,19 +57,33 @@ public class Petal {
                     goodBye();
                     break;
                 case "done":
-                    markTaskAsDone(message);
+                    markTaskAsDone(message.substring(message.indexOf(' ') + 1).trim());
                     break;
                 case "delete":
-                    deleteTask(message);
+                    deleteTask(message.substring(message.indexOf(' ') + 1).trim());
                     break;
-                default: //tasks end up here, as well as unintelligible messages
-                    handleRemaining(message);
+                case "todo":
+                    message += " "; //To allow empty desc to be taken as substring
+                    handleTasks("todo", message.substring(message.indexOf(' ') + 1).trim());
+                    break;
+                case "deadline":
+                    handleTasks("deadline", message.substring(message.indexOf(' ') + 1).trim());
+                    break;
+                case "event":
+                    handleTasks("event", message.substring(message.indexOf(' ') + 1).trim());
+                    break;
+                default: //All messages here do not meet the required format or are unintelligible
+                    wrongFormat();
                     break;
             }
-        } catch (EmptyDescException | InvalidInputException | IndexOutOfBoundsException | NumberFormatException e1)  {
-            System.out.println(indentation + "\n" + e1.getMessage());
+        } catch (EmptyDescException | InvalidInputException e) {
+            System.out.println(indentation + "\n" + e.getMessage());
             requiredFormat();
         }
+    }
+
+    public void wrongFormat() throws InvalidInputException {
+        throw new InvalidInputException("I do not understand what you mean :(\n");
     }
 
     /**
@@ -83,46 +101,33 @@ public class Petal {
     }
 
     /**
-     * Method to handle the last case of user input
-     * @param message User input
-     * @throws EmptyDescException Thrown if user enters a command without a description
-     * @throws InvalidInputException Thrown if the input does not match the required format
-     *                               or if the message is unintelligible
+     * Method to handle the tasks
+     * @param type The type of task: to.do, deadline, event
+     * @param message The desc/time of the task
+     * @throws EmptyDescException Thrown when the task lacks a description
+     * @throws InvalidInputException Thrown when an invalid format is given or when a time is not given
      */
-    public void handleRemaining(String message) throws InvalidInputException, EmptyDescException {
-        Task task;
-        String[] typeOfTask = message.split(" ");
-        String desc = message.substring(message.indexOf(" ") + 1);
-        //Checks if the phrase contains a valid command
-        boolean isValidInput = typeOfTask[0].equals("todo") || typeOfTask[0].equals("deadline")
-                || typeOfTask[0].equals("event");
-        if (!isValidInput) {
-            throw new InvalidInputException("I did not understand what you said :(\n");
+    public void handleTasks(String type, String message) throws EmptyDescException, InvalidInputException {
+        Task task ;
+        String[] deadlineEvent = type.equals("deadline") ? message.split("/by")
+                                                         : message.split("/at");
+        if (message.isBlank() || deadlineEvent[0].isBlank()) {
+            throw new EmptyDescException("The description cannot be empty! Enter a valid one! :(\n");
         }
-        //Checks if there is a valid desc
-        boolean descNotAvail = typeOfTask.length < 2 || typeOfTask[1].equals("/at")
-                || typeOfTask[1].equals("/by");
-        if (descNotAvail) {
-            throw new EmptyDescException("It seems like there was no description"
-                    + "! Please enter a description.\n");
+        //No time given or the command /by or /at wasn't given by the user
+        if ((type.equals("deadline") || type.equals("event")) && deadlineEvent.length < 2) {
+            throw new InvalidInputException("The format used was wrong! Try again :(\n");
         }
-        switch (typeOfTask[0]) { //The only possible types are tod.o, deadline, and event
+        switch (type) {
             case "todo":
-                task = new ToDo(desc);
+                task = new ToDo(message);
                 break;
             case "deadline":
-                String[] desc1 = desc.split("/by");
-                if (desc1.length == 1) { //Checking if time/desc is given
-                    throw new InvalidInputException("Wrong format was used! Please try again.\n");
-                }
-                task = new Deadline(desc1[0], desc1[1]);
+                task = new Deadline(deadlineEvent[0], deadlineEvent[1]);
                 break;
-            default: //for "event"
-                String[] desc2 = desc.split("/at");
-                if (desc2.length == 1) { //Checking if time/desc is given
-                    throw new InvalidInputException("Wrong format was used! Please try again.\n");
-                }
-                task = new Event(desc2[0], desc2[1]);
+            default: //Represents the Event task
+                task = new Event(deadlineEvent[0], deadlineEvent[1]);
+                break;
         }
         addTask(task);
     }
@@ -132,30 +137,29 @@ public class Petal {
      * @param task The task to be added
      */
     public void addTask(Task task) {
-        System.out.println(indentation + "\nGot it. I've added this task.");
         tasks.add(task);
-        System.out.println(task);
-        System.out.println("There are now " + tasks.size() + " task(s) in your list!\n"
-                + indentation);
+        System.out.println(indentation + "\nOkay. I've added this task:\n"
+                                       + task
+                                       + "\nYou now have " + tasks.size() + " task(s)!\n"
+                                       + indentation);
     }
 
     /**
      * Method to delete a task from the list
-     * @param message The message given by the user input
+     * @param index The message given by the user input
      * @throws InvalidInputException Thrown if no index inputted by the user or
      *                               when index is out-of-bounds/not valid int or when
      *                               desc is empty
      */
-    public void deleteTask(String message) throws InvalidInputException, EmptyDescException {
+    public void deleteTask(String index) throws InvalidInputException, EmptyDescException {
         try {
-            String index = message.split("delete")[0].trim();
             int indexOfTask = Integer.parseInt(index) - 1;
             Task toBeDeleted = tasks.get(indexOfTask);
             tasks.remove(indexOfTask);
             System.out.println(indentation + "\nOkay. I've deleted this task:\n"
-                    + toBeDeleted
-                    + "\nYou now have " + tasks.size() + " task(s)!\n"
-                    + indentation);
+                                           + toBeDeleted
+                                           + "\nYou now have " + tasks.size() + " task(s)!\n"
+                                           + indentation);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyDescException("No task number given! Please enter a valid index!\n");
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -177,7 +181,6 @@ public class Petal {
      * @throws InvalidInputException Thrown when the list is empty
      */
     public void printList() throws InvalidInputException {
-        //If the list is empty
         if (tasks.size() == 0)
             throw new InvalidInputException("No items in list yet!\n");
         int count = 1;
@@ -190,39 +193,23 @@ public class Petal {
 
     /**
      * Method to mark a particular task as done
-     * @param message Message that represents the user input
+     * @param indexOfTask String representation of the index of the task
      * @throws IndexOutOfBoundsException Thrown if string is not within size of list
      * @throws NumberFormatException Thrown if string cannot be converted into valid int
      */
-    public void markTaskAsDone(String message) throws IndexOutOfBoundsException,
-            NumberFormatException {
+    public void markTaskAsDone(String indexOfTask) throws InvalidInputException {
         try {
-            String indexOfTask = message.split(" ")[1];
             Task taskToBeCompleted = tasks.get(Integer.parseInt(indexOfTask) - 1);
             taskToBeCompleted.taskDone();
-        } catch (IndexOutOfBoundsException e1) { //Parsed string is not within size of history
-            throw new IndexOutOfBoundsException("That was an invalid index! Please try again!\n");
-        } catch (NumberFormatException e2) { //If parsed string is not an integer
-            throw new NumberFormatException("Index was not a number! Please try again!\n");
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            //Parsed string is not within size of history or no index given
+            throw new InvalidInputException("That was an invalid index! Please try again!\n");
         }
-    }
-
-    /**
-     * Method to check if the user has said bye
-     * @return True if yes, false if no
-     */
-    public boolean isBye() {
-        return bye;
     }
 
     public static void main(String[] args) {
         Petal petal = new Petal();
-        Scanner scanner = new Scanner(System.in);
-        while(!petal.isBye()) {
-            String message = scanner.nextLine();
-            petal.formatMessage(message);
-        }
-        scanner.close();
+        petal.start();
     }
 }
 
