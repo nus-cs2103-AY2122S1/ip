@@ -15,7 +15,11 @@ public class Main {
             try {
                 chatbot.doCommand(userInput);
             } catch (InvalidCommandException e) {
-                System.out.println(div + "OOPS!!! I'm sorry, but I don't know what that means :-(" + div);
+                System.out.println(div + "OOPS!!! I'm sorry but I don't know what that mean :-(\n" + div);
+            } catch (InvalidArgumentException e) {
+                System.out.println(div + "You did not specify the correct details for this task\n" + div);
+            } catch (TooManyArgumentsException e) {
+                System.out.println(div + "You gave me too many details for this task!\n" + div);
             }
         }
     }

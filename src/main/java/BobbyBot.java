@@ -11,7 +11,16 @@ public class BobbyBot {
     public BobbyBot() {
         System.out.println(div + "Hello! I'm Bobby\nWhat can I do for you?\n" + div);
     }
-    public void doCommand(String userInput) throws InvalidCommandException {
+
+    /**
+     * Perform command based on String user input
+     * @param userInput string command for chatbot
+     * @throws InvalidCommandException Command not one of the acceptedCommands
+     * @throws InvalidArgumentException Invalid or no arguments given
+     * @throws TooManyArgumentsException Too many /by or /at connectors
+     */
+    public void doCommand(String userInput) throws InvalidCommandException,
+            InvalidArgumentException, TooManyArgumentsException {
         List<String> userInputList = new LinkedList<>(Arrays.asList(userInput.split(" ")));
         String command = userInputList.get(0);
         String description;
@@ -32,23 +41,43 @@ public class BobbyBot {
             break;
         case "todo":
             userInputList.remove(0);
+            if (userInputList.size() == 0) {
+                throw new InvalidArgumentException("No arguments submitted for todo");
+            }
             description = String.join(" ", userInputList);
             createToDo(description);
             break;
         case "deadline":
             userInputList.remove(0);
+            if (userInputList.size() == 0) {
+                throw new InvalidArgumentException("No arguments submitted for deadline");
+            }
             //split description and by
             userInputArgs = String.join(" ", userInputList).split("/by ");
+            if (userInputArgs.length > 2) {
+                throw new TooManyArgumentsException("Too many arguments given for deadline");
+            } else if (userInputArgs.length == 1) {
+                throw new InvalidArgumentException("Could not find connector /by ");
+            }
             description = userInputArgs[0];
             String by = userInputArgs[1];
             createDeadline(description, by);
             break;
         case "event":
             userInputList.remove(0);
+            if (userInputList.size() == 0) {
+                throw new InvalidArgumentException("No arguments submitted for event");
+            }
             //split description and at
             userInputArgs = String.join(" ", userInputList).split("/at ");
+            if (userInputArgs.length > 2) {
+                throw new TooManyArgumentsException("Too many arguments given");
+            } else if (userInputArgs.length == 1) {
+                throw new InvalidArgumentException("Could not find connector /at");
+            }
             description = userInputArgs[0];
             String at = userInputArgs[1];
+
             createEvent(description, at);
             break;
         }
