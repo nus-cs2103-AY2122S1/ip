@@ -177,48 +177,57 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         this.printMsg("Hello! I'm Duke\nWhat can I do for you?");
         boolean terminate = false;
-        while (!terminate) {
-            String text = scanner.nextLine().toLowerCase();
+        while (!terminate && scanner.hasNextLine()) {
+            String scannedLine = scanner.nextLine();
+            String text = scannedLine.toLowerCase();
             // get the first word of the text
             String command = text.split(" ")[0];
             switch (command.toLowerCase()) {
                 // break out of the while loop
-                case ("bye") -> {
+                case "bye": {
                     this.printMsg("Bye. Hope to see you again soon!");
                     scanner.close();
                     terminate = true;
                 }
                 // list out the items in the list if "list" is called
-                case ("list") -> this.list();
-
-                case("done") -> {
-                    this.done(text);
+                case ("list"): {
+                    this.list();
+                    break;
                 }
 
-                case("event") -> {
+                case("done"): {
+                    this.done(text);
+                    break;
+                }
+
+                case("event"): {
                     Event event = this.event(text);
                     if (event != null) {
                         this.printAdded(event.toString());
                     }
+                    break;
                 }
 
-                case ("deadline") -> {
+                case ("deadline"): {
                     Deadline deadline = this.deadline(text);
                     if (deadline != null) {
                         this.printAdded(deadline.toString());
                     }
+                    break;
                 }
 
-                case ("todo") -> {
+                case ("todo"): {
                     Todo todo = this.todo(text);
                     if (todo != null) {
                         this.printAdded(todo.toString());
                     }
+                    break;
                 }
 
-                default -> {
+                default: {
                     this.append(new Task(text));
                     this.printMsg("added: " + text);
+                    break;
                 }
             }
         }
