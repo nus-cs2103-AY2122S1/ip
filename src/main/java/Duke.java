@@ -1,7 +1,10 @@
 import java.util.*;
 
 public class Duke {
+
     public static void main(String[] args) {
+        //To do list storage DS
+        ArrayList<String> toDo = new ArrayList<>();
 
         // Some String format
         String logo = " ____        _        \n"
@@ -21,12 +24,30 @@ public class Duke {
 
         //Init new scanner to take in inputs
         Scanner s = new Scanner(System.in);
+        System.out.println("Add to-do list (input)/ View list(list) / End (bye) :");
         String input = s.nextLine();
 
         //A loop to check for bye. Else will echo the users input
         while (!input.equals("bye")) {
-            System.out.println(start + input + "\n" +  end);
-            input = s.nextLine();
+            if (!input.equals("list")) {
+                System.out.println(start + "added: " + input + "\n" + end);
+                toDo.add(input);
+                System.out.println("Add to-do list (input)/ View list(list) / End (bye) :");
+                input = s.nextLine();
+            }
+
+            else if (input.equals("list")) {
+                //print the list in order
+                System.out.println(end);
+                System.out.println("Your to-do list:");
+                for (int i = 0; i < toDo.size(); i++) {
+                    String res = (i + 1) + ". " + toDo.get(i);
+                    System.out.println(res);
+                }
+                System.out.println(end);
+                System.out.println("Add to-do list (just input)/ View list(command: list) / End (command: bye) :");
+                input = s.nextLine();
+            }
         }
 
         //If the input is bye, return this message
