@@ -16,19 +16,38 @@ public class TaskList {
     }
 
     /**
-     * Adds task that user has given and formats it.
+     * Process user input and adds task that user has given and formats the message specific to the task.
      *
      * @param description Task that user has entered.
+     * @param taskType The type of task user has specified
      * @return Returns formatted string to be printed out to show task has been added or not.
      */
-    public String addTask(String description) {
+    public String addTask(String description, Command taskType) {
         if (currentIndex >= 100) {
             return "List is full.";
         }
-        Task task = new Task(description);
-        list[currentIndex] = task;
+        String details = description.split(" ", 2)[1];
+        switch (taskType) {
+            case TODO:
+                ToDo toDo = new ToDo(details);
+                list[currentIndex] = toDo;
+                break;
+            case DEADLINE:
+                String[] extractDeadline = details.split(" /by ");
+                Deadline deadline = new Deadline(extractDeadline[0], extractDeadline[1]);
+                list[currentIndex] = deadline;
+                break;
+            case EVENT:
+                String[] extractEvent = details.split(" /at ");
+                Event event = new Event(extractEvent[0], extractEvent[1]);
+                list[currentIndex] = event;
+                break;
+            default:
+                break;
+        }
         currentIndex++;
-        return "added: " + description;
+        String totalTask = String.format("Now you have %d task(s) in the list.", currentIndex);
+        return String.format("Got it! I've added this task:\n  %s\n%s", list[currentIndex - 1], totalTask);
     }
 
     /**
@@ -37,7 +56,7 @@ public class TaskList {
     public void printTaskList() {
         System.out.println(Duke.DIVIDER);
         if (currentIndex == 0) {
-            System.out.println("List is empty.");
+            System.out.println("List is empty. Add something to the list!");
             System.out.println(Duke.DIVIDER);
             return;
         }

@@ -30,23 +30,34 @@ public class Duke {
 
         // Logic of program based on user input
         String input = sc.nextLine();
-        while (!input.equals("bye")) {
-            switch (input.split(" ")[0]) {
-                case "list":
+        Command command = Command.valueOfLabel(input.split(" ")[0]);
+        while (command != Command.BYE) {
+            switch (command) {
+                case LIST:
                     taskList.printTaskList();
                     break;
-                case "done":
+                case DONE:
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
                     formatPrint(taskList.markTaskDone(index));
                     break;
-                case "help":
+                case HELP:
                     printHelp();
                     break;
+                case TODO:
+                    formatPrint(taskList.addTask(input, Command.TODO));
+                    break;
+                case DEADLINE:
+                    formatPrint(taskList.addTask(input, Command.DEADLINE));
+                    break;
+                case EVENT:
+                    formatPrint(taskList.addTask(input, Command.EVENT));
+                    break;
                 default:
-                    formatPrint(taskList.addTask(input));
+                    formatPrint("Invalid command @_@ Try typing 'help' to see my list of commands!");
             }
             System.out.print(PROMPT);
             input = sc.nextLine();
+            command = Command.valueOfLabel(input.split(" ")[0]);
         }
 
         // Goodbye message for user and program stops
@@ -70,10 +81,12 @@ public class Duke {
     public static void printHelp() {
         System.out.println(DIVIDER);
         System.out.println("Here is the list of my available commands!\n"
-            + "1. [input task to be added] //Adds tasks to task list\n"
-            + "2. list //Display list of items you have added\n"
-            + "3. done [index of completed task] //Marks specified tasks as completed\n"
-            + "4. bye //End the program");
+            + "1. todo [description] - Adds a ToDo task to task list\n"
+            + "2. deadline [description] /by [deadline] - Adds a Deadline to task list\n"
+            + "3. event [description] /at [event duration] - Adds a Event to task list\n"
+            + "4. list - Display list of items you have added\n"
+            + "5. done [index of completed task] - Marks specified tasks as completed\n"
+            + "6. bye - End the program");
         System.out.println(DIVIDER);
     }
 }
