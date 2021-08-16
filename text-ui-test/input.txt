@@ -12,10 +12,13 @@ event mooncake festival / sunday 1pm
 done 1
 event Annie's birthday party / 01/26/2022 5pm
 done 2
+delete 2
 list
 done 4
 done 100
 done -100
-done 0
+done with life
+delete 2
+delete 3
 list
 bye
