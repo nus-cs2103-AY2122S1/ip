@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Duke {
     private static final String EXIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
-    private static List<String> tasks = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
 
     private static void printReply(String string) {
         System.out.println(new Reply(string));
@@ -22,7 +22,7 @@ public class Duke {
     }
 
     private static void add(String string) {
-        tasks.add(string);
+        tasks.add(new Task(string));
         printReply("added: " + string);
     }
 
@@ -30,7 +30,7 @@ public class Duke {
         StringBuilder tasksBuilder = new StringBuilder();
         for (int i = 0; i < tasks.size(); ++i) {
             String counter = String.valueOf(i + 1);
-            tasksBuilder.append(counter).append(". ").append(tasks.get(i));
+            tasksBuilder.append(counter).append(". ").append(tasks.get(i).toString());
             if (i < tasks.size() - 1) {
                 // Append newline for all tasks before last task
                 tasksBuilder.append("\n");
