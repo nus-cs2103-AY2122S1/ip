@@ -10,12 +10,12 @@ public class BruhBot {
             + " |_______/ |__/       \\______/ |__/  |__/";
 
     private static final String GREETING = String.format("What can\n%s\ndo for you today?", LOGO);
-    private static final String FAREWELL = "Bye. Hope to see you again soon!\n";
+    private static final String FAREWELL = "Bye. Hope to see you again soon!";
     private static final String STOP_SIGNAL_STRING = "bye";
 
     private String userCommand = "";
     private Scanner userCommandScanner = new Scanner(System.in);
-    private List<String> tasks = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     /**
      * Initializes the chatbot.
@@ -48,22 +48,47 @@ public class BruhBot {
     }
 
     /**
-     * Processes the command entered, then returns the appropriate response.
+     * Processes the command entered, calls the appropriate method & returns the
+     * appropriate response.
      * 
      * @param command The command entered by the user.
      * @return The response to be displayed.
      */
     private String process(String command) {
-        if (command.equals("list")) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < tasks.size(); i++) {
-                sb.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
-            }
-            return sb.toString();
+        final String GENERIC_ERROR_MESSAGE = "Please enter a valid command.\n";
+
+        if (command.isEmpty()) {
+            return GENERIC_ERROR_MESSAGE;
+        } else if (command.equals("list")) {
+            return listTasks();
         } else {
-            tasks.add(command);
-            return "added: " + command + '\n';
+            String[] words = command.split(" ");
+            if (words.length > 1) {
+                if (words[0].equals("done")) {
+                    try {
+                        int index = Integer.parseInt(words[1]) - 1;
+                        tasks.get(index).markAsDone();
+                        return String.format("Nice! I've marked this task as done:\n  %s\n",
+                                tasks.get(index).toString());
+                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                        return "Please specify a valid index to mark as complete.\n";
+                    }
+                }
+            }
         }
+        tasks.add(new Task(command));
+        return "added: " + command + '\n';
+    }
+
+    private String listTasks() {
+        if (tasks.isEmpty()) {
+            return "You have no tasks.\n";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(String.format("%d.%s\n", i + 1, tasks.get(i).toString()));
+        }
+        return sb.toString();
     }
 
     private String formatResponse(String content) {
