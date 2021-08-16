@@ -47,36 +47,43 @@ public class Duke {
     }
 
     /**
-     * Add and store text entered and display them back when requested.
+     * Add and store tasks entered and display them back with complete status when requested.
      */
     static void add() {
         String command = scanner.nextLine();
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int index = 0;
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 printMessage(listToString(list));
+            } else if (command.substring(0,4).equals("done")) {
+                int doneIndex = Integer.parseInt(command.substring(5, 6));
+                list[doneIndex - 1].markAsDone();
+                printMessage("Nice! I've marked this task as done:\n\t" + list[doneIndex - 1]);
             } else {
-                list[index] = command;
+                list[index] = new Task(command);
                 index++;
                 printMessage("added: " + command);
             }
+
             command = scanner.nextLine();
         }
         printMessage("Bye. See you next time!");
     }
 
     /**
-     * Convert a list of text to a message string.
-     * @param list The list of text stored.
+     * Convert a list of tasks to a message string.
+     *
+     * @param list The list of tasks stored.
      * @return The string of messages.
      */
-    private static String listToString(String[] list) {
+    private static String listToString(Task[] list) {
         StringBuilder result = new StringBuilder();
+        result.append("Here are the tasks in your list:\n");
         for (int i = 0; i < list.length; i++) {
             if (list[i] == null) break;
-            result.append(i+1).append(". ").append(list[i]);
-            if (list[i+1] != null) result.append("\n");
+            result.append(i + 1).append(". ").append(list[i]);
+            if (list[i + 1] != null) result.append("\n");
         }
         return result.toString();
     }
