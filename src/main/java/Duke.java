@@ -45,18 +45,35 @@ public class Duke {
         this.tl.addTask(newTask);
     }
 
+    private Task getTaskByIndex(int index) {
+        return this.tl.getTaskByIndex(index);
+    }
+
+    private void markDone(int itemNum) {
+        this.tl.markDone(itemNum);
+        System.out.println("-----------------------------------------\n" +
+                "Nice! I've marked this task as done:\n" +
+                this.getTaskByIndex(itemNum - 1).toString() +
+                "-----------------------------------------\n");
+    }
+
     private void run() {
         this.greet();
         Scanner sc = new Scanner(System.in);
         String t;
         while (sc.hasNextLine()) {
             t = sc.nextLine();
-            switch (t) {
+            String[] items = t.split(" ");
+
+            switch (items[0]) {
                 case "bye":
                     this.exit();
                     break;
                 case "list":
                     System.out.println(this.tl.toString());
+                    break;
+                case "done":
+                    this.markDone(Integer.parseInt(items[1]));
                     break;
                 default:
                     this.add(t);

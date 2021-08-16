@@ -7,8 +7,12 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public void markDone() {
+        this.isDone = true;
+    }
+
     @Override
     public String toString() {
-        return String.format("%s\n", this.desc);
+        return String.format("[%s] %s\n",isDone ? "X" : " " ,this.desc);
     }
 }
