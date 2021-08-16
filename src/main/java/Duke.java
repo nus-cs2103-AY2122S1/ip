@@ -1,10 +1,6 @@
 import java.util.Scanner;
 
 public class Duke {
-
-    private static String[] tasks = new String[100];
-    private static int counter = 0;
-
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.greet();
@@ -13,21 +9,30 @@ public class Duke {
         boolean breakWhile = false;
 
         while (scanner.hasNext()) {
-            String userInput = scanner.nextLine();
-            switch (userInput) {
+            String firstWord = scanner.next();
+
+            switch (firstWord) {
                 case "bye":
                     duke.exit();
                     breakWhile = true;
                     break;
+                case "done":
+                    String stringIndex = scanner.next();
+                    int index = Integer.parseInt(stringIndex) - 1;
+                    Task.markDone(index);
+                    System.out.println("\nDuke: Nice! I've marked this task as done:\n" + Task.retrieveTask(index));
+                    break;
                 case "list":
-                    Duke.displayList();
+                    Task.displayList();
                     break;
                 default:
-                    duke.add(userInput);
+                    String remaining = firstWord.concat(" " + scanner.nextLine());
+                    System.out.println("\nDuke: I have added \"" + remaining + "\" into your task list.");
+                    Task.add(remaining);
                     break;
             }
-
             if (breakWhile) break;
+            Duke.usersTurn();
         }
     }
 
@@ -38,27 +43,6 @@ public class Duke {
 
     private void exit() {
         System.out.print("\nDuke: Bye. Hope to see you again soon!");
-    }
-
-    private void add(String input) {
-        System.out.println("\nDuke: I have added \"" + input + "\" into your task list.");
-        Duke.usersTurn();
-        tasks[counter] = input;
-        counter++;
-    }
-
-    private static void displayList() {
-        System.out.println("\nList\n--------------------");
-        for (int i = 0; i < tasks.length; i++) {
-            String task = tasks[i];
-            if (task == null) {
-                if (i == 0) System.out.println("List is empty!");
-                break;
-            }
-            int index = i + 1;
-            System.out.println(index + ". " + tasks[i]);
-        }
-        Duke.usersTurn();
     }
 
     private static void usersTurn() {
