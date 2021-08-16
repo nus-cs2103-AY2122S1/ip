@@ -3,6 +3,15 @@ todo go shopping
 event workshop /at Tuesday 6-8pm
 deadline finish homework /by ASAP
 list
+done 5
 done 3
 list
+delete 4
+delete 2
+list
+event 
+event Meeting Wed 10pm
+deadline Project Fri 2pm
+blob
+invalid command
 bye

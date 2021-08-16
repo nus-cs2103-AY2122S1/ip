@@ -15,23 +15,26 @@
 	____________________________________________________________
 	Got it. I've added this task:
 	  [T][ ] go shopping
-	Now you have 1 task in the list.
+	Now you have 1 task in your list.
 	____________________________________________________________
 	____________________________________________________________
 	Got it. I've added this task:
 	  [E][ ] workshop  (at:  Tuesday 6-8pm)
-	Now you have 2 tasks in the list.
+	Now you have 2 tasks in your list.
 	____________________________________________________________
 	____________________________________________________________
 	Got it. I've added this task:
 	  [D][ ] finish homework  (by:  ASAP)
-	Now you have 3 tasks in the list.
+	Now you have 3 tasks in your list.
 	____________________________________________________________
 	____________________________________________________________
 	Here are the tasks in your list:
 	1. [T][ ] go shopping
 	2. [E][ ] workshop  (at:  Tuesday 6-8pm)
 	3. [D][ ] finish homework  (by:  ASAP)
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! The index you entered is invalid. Please try again.
 	____________________________________________________________
 	____________________________________________________________
 	Nice! I've marked this task as done:
@@ -42,6 +45,34 @@
 	1. [T][ ] go shopping
 	2. [E][ ] workshop  (at:  Tuesday 6-8pm)
 	3. [D][X] finish homework  (by:  ASAP)
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! The index you entered is invalid. Please try again.
+	____________________________________________________________
+	____________________________________________________________
+	Noted! I've removed this task:
+	  [E][ ] workshop  (at:  Tuesday 6-8pm)
+	Now you have 2 tasks in your list.
+	____________________________________________________________
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [T][ ] go shopping
+	2. [D][X] finish homework  (by:  ASAP)
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! The description of a event cannot be left empty. Please try again.
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! Arguments do not follow proper format. Don't forget the /at
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! Arguments do not follow proper format. Don't forget the /by
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! I'm sorry, but I don't know what "blob" means :-(
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! I'm sorry, but I don't know what "invalid command" means :-(
 	____________________________________________________________
 	____________________________________________________________
 	Bye. Hope to see you again soon!
