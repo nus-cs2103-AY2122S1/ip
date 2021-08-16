@@ -41,9 +41,11 @@ public class Duke {
 
             if (lastInput.equals("bye")) {
                 break;
-            }
+            } else if (lastInput.equals("list")) {
 
-            dukeSays(lastInput);
+            } else {
+                dukeSays(lastInput);
+            }
         }
 
         dukeExiter();
