@@ -1,0 +1,16 @@
+deadline cs2103t quiz /by Monday
+todo cs2103t project level 1
+todo cs2103t project level 2
+testing generic task
+event Christmas /at December
+done 1
+list
+done 2
+list
+done 3
+list
+done 4
+list
+done 5
+list
+bye
