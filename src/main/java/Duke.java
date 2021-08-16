@@ -19,7 +19,7 @@ public class Duke {
     private static void result(){
         Scanner sc = new Scanner(System.in);
 
-        while(true){
+        while(sc.hasNext()){
             String input = sc.nextLine();
             if(input.length()>=4 && input.substring(0, 4).equals("done")){
                 marking(input);
