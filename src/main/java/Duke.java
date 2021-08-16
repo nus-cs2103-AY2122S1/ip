@@ -37,7 +37,7 @@ public class Duke {
     private static int taskCount = 0;
     private static Node dummyHead = new Node(new Task(""));
     private static Node lastNode = dummyHead;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         String userInput = "";
 
@@ -56,31 +56,54 @@ public class Duke {
         while (!userInput.equals("bye")) {
             userInput = sc.nextLine();
             String[] words = userInput.split(" ", 2);
-            switch (words[0]) {
-                case "bye":
-                    sayGoodBye();
-                    break;
-                case "list":
-                    printList();
-                    break;
-                case "done":
-                    markNode(Integer.parseInt(words[1]));
-                    break;
-                case "todo":
-                    addTodo(userInput);
-                    break;
-                case "deadline":
-                    String restDeadline = words[1];
-                    String[] separatedDeadline = restDeadline.split(" /by ");
-                    addDeadline(separatedDeadline[0], separatedDeadline[1]);
-                    break;
-                case "event":
-                    String restEvent = words[1];
-                    String[] separatedEvent = restEvent.split(" /at ");
-                    addEvent(separatedEvent[0], separatedEvent[1]);
-                    break;
-                default:
-                    System.out.println("Not a command...");
+            try {
+                switch (words[0]) {
+                    case "bye":
+                        sayGoodBye();
+                        break;
+                    case "list":
+                        printList();
+                        break;
+                    case "done":
+                        markNode(Integer.parseInt(words[1]));
+                        break;
+                    case "todo":
+                        if (words.length < 2) {
+                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        addTodo(words[1]);
+                        break;
+                    case "deadline":
+                        if (words.length < 2) {
+                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        }
+                        String restDeadline = words[1];
+                        String[] separatedDeadline = restDeadline.split(" /by ");
+                        if (separatedDeadline.length < 2) {
+                            throw new DukeException("☹ OOPS!!! Please ensure that the '/by' keyword is used and "
+                                                  + "that a description and due date is given.");
+                        }
+                        addDeadline(separatedDeadline[0], separatedDeadline[1]);
+                        break;
+                    case "event":
+                        if (words.length < 2) {
+                            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                        }
+                        String restEvent = words[1];
+                        String[] separatedEvent = restEvent.split(" /at ");
+                        if (separatedEvent.length < 2) {
+                            throw new DukeException("☹ OOPS!!! Please ensure that the '/at' keyword is used and "
+                                    + "that a description and a timing is given.");
+                        }
+                        addEvent(separatedEvent[0], separatedEvent[1]);
+                        break;
+                    default:
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                lineSeparator();
+                System.out.println(e.getMessage());
+                lineSeparator();
             }
         }
     }
