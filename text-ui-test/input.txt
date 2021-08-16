@@ -4,4 +4,8 @@ todo meeting /at Mon 2-3pm
 list
 done 1
 done 2
+delete 1
+list
+todo
+deadline
 bye
