@@ -59,9 +59,16 @@ public class Duke {
                 continue;
             }
 
-//            if (userInput.matches("")){
-//                //TODO: DEADLINES
-//            }
+            if (userInput.matches("^(deadline ).+")){
+                String splitName = userInput.split(" ",2)[1];
+                String[] name_by = splitName.split("/by");
+                Task toAdd = new Deadline(name_by[0],name_by[1]);
+                taskList.add(toAdd);
+                String reply = toAdd.addMsg();
+                reply = taskList.newLength() + "\n"+ reply;
+                System.out.println(formatReply(reply));
+                continue;
+            }
 //            if (userInput.matches("")){
 //                //TODO: EVENTS
 //            }
