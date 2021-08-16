@@ -52,7 +52,7 @@ public class Duke {
      * @param s input commands that is read by scanner in 'main'
      * @return the corresponding response message as a String
      */
-    public static String chat(String s) throws IllegalArgumentException {
+    public static String chat(String s) {
         String check = s.replaceAll(" ", "");
         String[] words = s.split(" ");
         if (check.equalsIgnoreCase("bye")) {
@@ -68,8 +68,10 @@ public class Duke {
                 if (index >= tasks.size() || index < 0) {
                     throw new IllegalArgumentException("Please input correct index, no such index :( ");
                 }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new IllegalArgumentException("You must've forgotten. Please indicate index :) ");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Please input correct index, no such index :( ");
+            } catch (IllegalArgumentException e) {
+                System.out.println("     " + e.getMessage());
             }
             return "";
         } else {
