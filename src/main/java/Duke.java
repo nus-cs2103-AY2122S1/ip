@@ -9,7 +9,7 @@ public class Duke {
     private static List<Task> taskList = new ArrayList<>();
 
     private static void say(String message) {
-        System.out.println(String.format("Iris: %s", message));
+        System.out.printf("Iris: %s%n", message);
     }
 
     private static void say(String message, boolean isFirst) {
