@@ -139,6 +139,14 @@ public class Duke {
                     System.out.println(e.getMessage());
                 }
 
+            // Delete tasks
+            } else if (input.split(" ")[0].equals("delete")) {
+                try {
+                    deleteTask(input);
+                } catch (InvalidInputException e) {
+                    System.out.println(e.getMessage());
+                }
+
             // Add to-do task
             } else if (input.split(" ")[0].equals("todo")){
                 try {
@@ -224,6 +232,22 @@ public class Duke {
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             throw new InvalidInputException("Duke says: Please enter the index of the completed task");
         }
+    }
 
+    private static void deleteTask(String input) throws InvalidInputException {
+        try {
+            int taskIndex = Integer.parseInt(String.valueOf(input.charAt(7)));
+
+            if (taskIndex > tasks.size()) {
+                System.out.println("Duke says: You don't have that many tasks!");
+            } else {
+                System.out.println("Duke says: You have deleted the task " +
+                        tasks.get(taskIndex - 1).getName());
+                tasks.remove(taskIndex - 1);
+
+            }
+        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+            throw new InvalidInputException("Duke says: Please enter the index of the task you want to delete");
+        }
     }
 }
