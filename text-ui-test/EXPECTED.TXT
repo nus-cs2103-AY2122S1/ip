@@ -40,7 +40,47 @@ Nice! I've marked this task as done:
 --------------------------
 
 --------------------------
-Invalid command detected
+ERROR: Invalid command detected
+--------------------------
+
+--------------------------
+ERROR: The description of a todo cannot be empty.
+--------------------------
+
+--------------------------
+ERROR: The description of an event cannot be empty.
+--------------------------
+
+--------------------------
+ERROR: Incorrect description format. Description should follow this pattern: *description* /at *time*
+--------------------------
+
+--------------------------
+ERROR: Incorrect description format. Description should follow this pattern: *description* /at *time*
+--------------------------
+
+--------------------------
+ERROR: The description of a deadline cannot be empty.
+--------------------------
+
+--------------------------
+ERROR: Incorrect description format. Description should follow this pattern: *description* /by *time*
+--------------------------
+
+--------------------------
+ERROR: Incorrect description format. Description should follow this pattern: *description* /by *time*
+--------------------------
+
+--------------------------
+ERROR: The done command expects an integer argument indicating the index of a task.
+--------------------------
+
+--------------------------
+ERROR: Invalid integer. Integer should match the index of a task. Run list to look at the list of tasks and their corresponding indices.
+--------------------------
+
+--------------------------
+ERROR: Invalid argument for done command. Argument should be an integer.
 --------------------------
 
 --------------------------

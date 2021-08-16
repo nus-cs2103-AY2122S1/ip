@@ -4,4 +4,14 @@ deadline assignment 1 /by Tuesday 2359
 done 2
 list
 add watch movie
+todo
+event
+event team meeting
+event team meeting /at
+deadline
+deadline assignment 1
+deadline assignment 1 /by
+done
+done -1
+done foo
 bye
