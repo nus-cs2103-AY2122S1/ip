@@ -1,0 +1,12 @@
+todo borrow The Fault in my Stars
+list
+done 1
+deadline return The Fault in my Stars /by 20 Aug 2021
+event John's Birthday Party /at Next Sunday
+list
+done 1
+done 2
+done 3
+list
+bye
+list
