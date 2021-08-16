@@ -2,14 +2,10 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
+
         Scanner sc = new Scanner(System.in);
         boolean dukeOpen = true;
-        String[] taskList = new String[100];
+        Task[] taskList = new Task[100];
         int taskIndex = 0;
 
         System.out.println("Hello! I'm Duke\n" +
@@ -22,16 +18,21 @@ public class Duke {
 
             } else if (userInput.equals("list")) {
                 int i = 0;
-                for (String task : taskList) {
+                for (Task task : taskList) {
                     if (task != null) {
-                        System.out.println(++i + ". " + task);
+                        System.out.println(++i + "." + task.toString());
                     } else {
                         break;
                     }
                 }
 
+            } else if (userInput.startsWith("done ")) {
+                Task doneTask = taskList[Integer.parseInt(userInput.split(" ")[1]) - 1];
+                doneTask.markDone();
+                System.out.println("Nice! I've marked this task as done: \n" + "  " + doneTask.toString());
+
             } else {
-                taskList[taskIndex] = userInput;
+                taskList[taskIndex] = new Task(userInput);
                 taskIndex++;
                 System.out.println("added: " + userInput);
             }
