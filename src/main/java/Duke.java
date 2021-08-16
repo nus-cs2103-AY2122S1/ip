@@ -31,7 +31,7 @@ public class Duke {
                 // Mark a certain task as done.
                 Task doneTask = taskList[Integer.parseInt(userInput.split(" ")[1]) - 1];
                 doneTask.markDone();
-                System.out.println("Nice! I've marked this task as done: \n" + "  " + doneTask.toString());
+                System.out.println("Nice! I've marked this task as done:\n" + "  " + doneTask.toString());
 
             } else {
                 // Adds a Task to the task list.
@@ -51,7 +51,7 @@ public class Duke {
                 taskList[taskIndex] = newTask;
                 taskIndex++;
                 String taskCount = (taskIndex == 1) ? "1 task" : taskIndex + " tasks";
-                System.out.println("Got it. I've added this task: \n" + "  " + newTask.toString() +
+                System.out.println("Got it. I've added this task:\n" + "  " + newTask.toString() +
                         "\n" + "Now you have " + taskCount + " in the list.");
             }
         }
