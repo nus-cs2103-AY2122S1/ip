@@ -17,8 +17,7 @@ public class Duke {
 
         while (running) {
 
-            String[] inputs = input.split(" ");
-            // might want to change this to switch if if-else get too much
+            String[] inputs = input.split(" ", 2);
             String str = inputs[0];
 
             switch (str)
@@ -37,46 +36,21 @@ public class Duke {
                     input = sc.nextLine();
                     break;
                 case "deadline":
-                    String name = "";
-                    String deadline = "";
-                    // should not use '+' in for loop for strings
-                    for (int i = 1; i < inputs.length; i++) {
-                        if (inputs[i].equals("/by")) {
-                            for (int j = i + 1; j < inputs.length; j++) {
-                                deadline = deadline + " " + inputs[j];
-                            }
-                            break;
-                        }
-                        name = name + " " + inputs[i];
-                    }
-                    System.out.println(bot.addDeadline(name, deadline));
+                    String[] info = inputs[1].split("/by");
+                    System.out.println(bot.addDeadline(info[0], info[1]));
                     input = sc.nextLine();
                     break;
                 case "todo":
-                    String todo = "";
-                    for (int i = 1; i < inputs.length; i++) {
-                        todo = todo + " " + inputs[i];
-                    }
-                    System.out.println(bot.addTodo(todo));
+                    System.out.println(bot.addTodo(inputs[1]));
                     input = sc.nextLine();
                     break;
                 case "event":
-                    String event = "";
-                    String time = "";
-                    // should not use '+' in for loop for strings
-                    for (int i = 1; i < inputs.length; i++) {
-                        if (inputs[i].equals("/at")) {
-                            for (int j = i + 1; j < inputs.length; j++) {
-                                time = time + " " + inputs[j];
-                            }
-                            break;
-                        }
-                        event = event + " " + inputs[i];
-                    }
-                    System.out.println(bot.addEvent(event, time));
+                    info = inputs[1].split("/at");
+                    System.out.println(bot.addEvent(info[0], info[1]));
                     input = sc.nextLine();
                     break;
                 default:
+                    //maybe add a help command
                     System.out.println(bot.getCommand());
                     input = sc.nextLine();
 

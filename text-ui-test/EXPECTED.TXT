@@ -9,67 +9,67 @@ ______________________________________
 
 ______________________________________
 I've added this task:
-[D][ ]  return book (by: sunday)
+[D][ ] return book  (by: sunday)
 You have 1 tasks left!
 ______________________________________
 
 ______________________________________
 I've added this task:
-[T][ ]  eat lunch
+[T][ ] eat lunch
 You have 2 tasks left!
 ______________________________________
 
 ______________________________________
 I've added this task:
-[E][ ]  lecture (by: tuesday 2pm-4pm)
+[E][ ] lecture  (by: tuesday 2pm-4pm)
 You have 3 tasks left!
 ______________________________________
 
 ______________________________________
 I've added this task:
-[T][ ]  homework
+[T][ ] homework
 You have 4 tasks left!
 ______________________________________
 
 ______________________________________
 I've added this task:
-[T][ ]  play some games
+[T][ ] play some games
 You have 5 tasks left!
 ______________________________________
 
 ______________________________________
 Here are your tasks... if you choose to do it...
-1.[D][ ]  return book (by: sunday)
-2.[T][ ]  eat lunch
-3.[E][ ]  lecture (by: tuesday 2pm-4pm)
-4.[T][ ]  homework
-5.[T][ ]  play some games
+1.[D][ ] return book  (by: sunday)
+2.[T][ ] eat lunch
+3.[E][ ] lecture  (by: tuesday 2pm-4pm)
+4.[T][ ] homework
+5.[T][ ] play some games
 ______________________________________
 
 ______________________________________
-Well done! You finally completed eat lunch!
-______________________________________
-
-______________________________________
-Here are your tasks... if you choose to do it...
-1.[D][ ]  return book (by: sunday)
-2.[T][X]  eat lunch
-3.[E][ ]  lecture (by: tuesday 2pm-4pm)
-4.[T][ ]  homework
-5.[T][ ]  play some games
-______________________________________
-
-______________________________________
-Well done! You finally completed lecture!
+Well done! You finally completedeat lunch!
 ______________________________________
 
 ______________________________________
 Here are your tasks... if you choose to do it...
-1.[D][ ]  return book (by: sunday)
-2.[T][X]  eat lunch
-3.[E][X]  lecture (by: tuesday 2pm-4pm)
-4.[T][ ]  homework
-5.[T][ ]  play some games
+1.[D][ ] return book  (by: sunday)
+2.[T][X] eat lunch
+3.[E][ ] lecture  (by: tuesday 2pm-4pm)
+4.[T][ ] homework
+5.[T][ ] play some games
+______________________________________
+
+______________________________________
+Well done! You finally completedlecture !
+______________________________________
+
+______________________________________
+Here are your tasks... if you choose to do it...
+1.[D][ ] return book  (by: sunday)
+2.[T][X] eat lunch
+3.[E][X] lecture  (by: tuesday 2pm-4pm)
+4.[T][ ] homework
+5.[T][ ] play some games
 ______________________________________
 
 ______________________________________
