@@ -1,47 +1,10 @@
-import javax.naming.NoInitialContextException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Node {
-    private final Task task;
-    private Node next;
-
-    public Node(Task task) {
-        this.task = task;
-    }
-
-    public Task getTask() {
-        return this.task;
-    }
-
-    public Node getNext() {
-        return next;
-    }
-
-    public void setNext(Node n) {
-        next = n;
-    }
-
-    public void markTask() {
-        task.markAsDone();
-    }
-
-
-    @Override
-    public String toString() {
-        return task.toString();
-    }
-
-
-}
-
 public class Duke {
-//    private static int taskCount = 0;
-//    private static Node dummyHead = new Node(new Task(""));
-//    private static Node lastNode = dummyHead;
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String userInput = "";
 
@@ -72,11 +35,21 @@ public class Duke {
                         if (words.length < 2) {
                             throw new DukeException("☹ OOPS!!! Please specify which task you wish to complete.");
                         }
-                        int index = Integer.parseInt(words[1]) - 1;
-                        if (index < 0 || index >= tasks.size()) {
+                        int doneIndex = Integer.parseInt(words[1]) - 1;
+                        if (doneIndex < 0 || doneIndex >= tasks.size()) {
                             throw new DukeException("☹ OOPS!!! You just gave an invalid task to be completed.");
                         }
-                        markNode(index);
+                        markTask(doneIndex);
+                        break;
+                    case "delete":
+                        if (words.length < 2) {
+                            throw new DukeException("☹ OOPS!!! Please specify which task you wish to delete.");
+                        }
+                        int delIndex = Integer.parseInt(words[1]) - 1;
+                        if (delIndex < 0 || delIndex >= tasks.size()) {
+                            throw new DukeException("☹ OOPS!!! You just gave an invalid task to be deleted.");
+                        }
+                        deleteTask(delIndex);
                         break;
                     case "todo":
                         if (words.length < 2) {
@@ -119,22 +92,22 @@ public class Duke {
         }
     }
 
-    private static void markNode(int index) {
+    private static void deleteTask(int delIndex) {
+        Task task = tasks.get(delIndex);
+        tasks.remove(delIndex);
+        lineSeparator();
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + task);
+        lineSeparator();
+    }
+
+    private static void markTask(int index) {
         Task task = tasks.get(index);
         task.markAsDone();
         lineSeparator();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + task);
         lineSeparator();
-//        Node pointer = dummyHead;
-//        lineSeparator();
-//        for (int i = 0; i < taskNumber; i++) {
-//            pointer = pointer.getNext();
-//        }
-//        pointer.markTask();
-//        System.out.println("Nice! I've marked this task as done:");
-//        System.out.println("  " + pointer);
-//        lineSeparator();
     }
 
     private static void printAddedMessage(Task task) {
@@ -165,6 +138,7 @@ public class Duke {
 
     private static void printList() {
         lineSeparator();
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i+1) + ". " + tasks.get(i));
         }
