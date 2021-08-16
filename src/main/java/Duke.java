@@ -1,6 +1,7 @@
 import java.util.Scanner;
 public class Duke {
-    private static String selfIntro = "Hello, I'm Duck\n       What do you need?";
+    private static TaskList tList = new TaskList();
+    private static String selfIntro = "Hello, I'm Duck\nWhat do you need?";
 
     private static String goodBye = "See ya next time! *quack* *quack* *quack*";
 
@@ -29,9 +30,10 @@ public class Duke {
 
     public static void printLine(String content) {
         System.out.println(
-                "       ------------------------------------------------\n       "
+                "------------------------------------------------\n"
+                + "Duck says:\n"
                 + content
-                + "\n       ------------------------------------------------"
+                + "\n------------------------------------------------"
             );
 
     }
@@ -43,11 +45,17 @@ public class Duke {
         boolean bye = false;
         while (!bye) {
             userInput = sc.nextLine();
-            if (userInput.equals("bye")) {
-                bye = true;
-                Duke.sayBye();
-            } else {
-                Duke.printLine(userInput);
+            switch(userInput)
+            {
+                case "bye":
+                    bye = true;
+                    Duke.sayBye();
+                    break;
+                case "list":
+                    printLine(tList.getTasks());
+                    break;
+                default:
+                    printLine(tList.addTask(userInput));
             }
         }
     }
