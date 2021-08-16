@@ -1,14 +1,20 @@
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-
+/**
+ * Waits for and processes a User Input
+ */
 public class Listener {
 
     final Scanner sc;
-    final TaskList itemList;
+    final TaskList taskList;
+
+    Pattern donePattern = Pattern.compile("done (\\d+)");
 
     public Listener() {
         sc = new Scanner(System.in);
-        itemList = new TaskList();
+        taskList = new TaskList();
     }
 
     public void startListen() {
@@ -17,17 +23,21 @@ public class Listener {
             String input = sc.nextLine();
             System.out.println(Display.LINE);
 
+            Matcher checkDone = donePattern.matcher(input);
+
             if (input.equals("gubbai")) {
                 // Stop listening if "gubbai" is mentioned
                 break;
             } else if (input.equals("list")) {
                 // Display items
-                System.out.println(Display.OUTPUT_DISPLAY + "Displaying List:");
-                itemList.displayList();
+                taskList.displayList();
+            } else if (checkDone.matches()) {
+                System.out.println("COMPLETE INDEX " + checkDone.group(1));
             } else {
                 // Add input to list
-                itemList.add(input);
+                taskList.add(input);
                 System.out.println(Display.OUTPUT_DISPLAY + "added: " + input);
+                taskList.printSize();
             }
 
             System.out.println(Display.LINE);
