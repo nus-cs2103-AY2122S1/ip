@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# cd to text-ui-test if in */ip
+if [[ "$PWD/" = */ip/ ]];
+then
+    cd text-ui-test
+fi
+
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then

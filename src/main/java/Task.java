@@ -1,5 +1,5 @@
 public class Task {
-    protected String taskDescription;
+    protected final String taskDescription;
     protected boolean isDone;
 
     public Task(String taskDescription) {

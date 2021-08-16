@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,7 +67,7 @@ public class Duke {
     }
 
     private static void defaultHandler() {
-        System.out.println("Invalid command detected");
+        System.out.println(wrapBetweenLines("Invalid command detected"));
     }
 
     /**

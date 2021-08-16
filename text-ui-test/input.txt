@@ -1,0 +1,7 @@
+todo read book
+event team meeting /at Monday 6pm
+deadline assignment 1 /by Tuesday 2359
+done 2
+list
+add watch movie
+bye
