@@ -20,6 +20,11 @@ public class Tasklist {
         lastItem++;
     }
 
+    // Get number of tasks in list
+    public int getTotalTasks() {
+        return this.lastItem;
+    }
+
     // String representation of the tasklist
     @Override
     public String toString() {

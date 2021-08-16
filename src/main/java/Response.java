@@ -10,22 +10,30 @@ public class Response {
         this.content = list.toString();
     }
 
-    public static Response added(Task item) {
-        String msg = "added: " + item.getDescription();
+    public static Response added(Tasklist tasklist, Task task) {
+        String msg = "Got it. I've added this task:\n\t" 
+            + task.toString()
+            + "\nNow you have "
+            + tasklist.getTotalTasks()
+            + (tasklist.getTotalTasks() == 1 ? " task " : " tasks ")
+            + "in the list.";
+
         Response response = new Response(msg);
         System.out.println(response);
         return response;
     }
 
-    public static Response completed(Task item) {
-        String msg = "Nice! I've marked this task as done:\n" + item.toString();
+    public static Response completed(Task task) {
+        String msg = "Nice! I've marked this task as done:\n" 
+            + task.toString();
         Response response = new Response(msg);
         System.out.println(response);
         return response;
     }
 
-    public static Response listAllItems(Tasklist list) {
-        Response response = new Response("Here are the tasks in your list:\n" + list.toString());
+    public static Response listAllItems(Tasklist tasklist) {
+        Response response = new Response("Here are the tasks in your list:\n" 
+            + tasklist.toString());
         System.out.println(response);
         return response;
     }
@@ -37,7 +45,8 @@ public class Response {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n\n";
 
-        Response response = new Response(logo + "Hello there, I'm Duke!\nWhat can I do for you?");
+        Response response = new Response(logo 
+            + "Hello there, I'm Duke!\nWhat can I do for you?");
         System.out.println(response);
         return response;
     }

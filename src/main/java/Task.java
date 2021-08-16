@@ -14,6 +14,11 @@ public class Task {
         this.completed = true;
     }
 
+    // Get status of task
+    public Boolean isCompleted() {
+        return this.completed;
+    }
+
     // Get description of task
     public String getDescription() {
         return this.description;
