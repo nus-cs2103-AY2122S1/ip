@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class ChatBot {
 
-    static String line = "______________________________________\n";
+    static String line = "___________________________________________________\n";
     private ArrayList<Task> tasks = new ArrayList<>();
 
     public String getStartMessage() {
@@ -32,7 +32,7 @@ public class ChatBot {
         Task complete = tasks.get(index - 1);
         complete.completeTask();
 
-        return line + "Well done! You finally completed" + complete.getName() + "!\n" + line;
+        return line + "Well done! You finally completed " + complete.getName() + "!\n" + line;
     }
 
     public String addDeadline(String name, String deadline) {
@@ -49,6 +49,10 @@ public class ChatBot {
 
     public String getCommand() {
         return line + "Unknown Command!\n" + line;
+    }
+
+    public int getTotalTasks() {
+        return tasks.size();
     }
 
 }

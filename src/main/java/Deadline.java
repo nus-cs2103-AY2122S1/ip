@@ -7,10 +7,6 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-//    public String getMarker() {
-//        return this.marker;
-//    }
-
     @Override
     public String toString() {
         return this.marker + super.toString() + " (by:" + deadline + ")";
