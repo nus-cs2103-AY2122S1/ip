@@ -6,6 +6,7 @@ public class Duke {
         DEADLINE,
         EVENT
     }
+    //Added enum in previous commits
     private static TaskList tList = new TaskList();
     private static String selfIntro = "Hello, I'm Duck\nWhat do you need?";
 
