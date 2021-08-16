@@ -13,15 +13,15 @@ public class Duke {
         Task newTask = Task.makeTask(type, taskDescription);
         tasks[count] = newTask;
         count++;
-        String strBreak = "    ____________________________________________________________ \n";
-        String toPrint = String.format("     Got it. I've added this task: \n     %s\n     Now you have %x task%s in the list.",
+        String strBreak = "    ____________________________________________________________\n";
+        String toPrint = String.format("     Got it. I've added this task:\n     %s\n     Now you have %x task%s in the list.",
                 newTask.toString(), this.count, this.count > 1 ? "s" : "");
         System.out.println(strBreak + toPrint + "\n" + strBreak);
     }
 
     private String getTasks() {
-        String strBreak = "    ____________________________________________________________ \n";
-        String tasksStr = strBreak + "\n    Here are the tasks in your list: \n";
+        String strBreak = "    ____________________________________________________________\n";
+        String tasksStr = strBreak + "\n    Here are the tasks in your list:\n";
         for (int i = 0; i < count; i++) {
             tasksStr += "     " + (i + 1) + ". " + this.tasks[i].toString() + "\n";
         }
