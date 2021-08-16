@@ -20,4 +20,5 @@ public class DukeException extends IllegalArgumentException {
     public Response getResponse() {
         return this.response;
     }
+
 }

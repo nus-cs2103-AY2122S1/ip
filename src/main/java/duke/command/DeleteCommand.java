@@ -4,10 +4,9 @@ import duke.Duke;
 import duke.exception.InvalidArgumentException;
 
 /**
- * Represents a command for which marks a task in the main dukelist as
- * completed.
+ * Represents a command that removes a task from the main DukeList.
  */
-public class DoneCommand implements Command {
+public class DeleteCommand implements Command {
 
     @Override
     public void exec(String args) {
@@ -17,12 +16,12 @@ public class DoneCommand implements Command {
         } catch (NumberFormatException exception) {
             throw new InvalidArgumentException("Invalid Input! Please enter an integer...");
         }
-        Duke.getList().markCompleted(i).print();
+        Duke.getList().deleteWithResponse(i).print();
     }
 
     @Override
     public String getLabel() {
-        return "done";
+        return "delete";
     }
 
 }

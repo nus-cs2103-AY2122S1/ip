@@ -6,6 +6,7 @@ import duke.Duke;
  * Encapsulate a command on a DukeList.
  */
 public class ListCommand implements Command {
+
     @Override
     public void exec(String args) {
         Duke.getList().currentListResponse().print();
@@ -15,4 +16,5 @@ public class ListCommand implements Command {
     public String getLabel() {
         return "list";
     }
+
 }

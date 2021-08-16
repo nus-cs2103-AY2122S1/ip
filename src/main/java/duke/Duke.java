@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import duke.command.CommandManager;
 import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ListCommand;
@@ -25,7 +26,7 @@ public class Duke {
         new Response(greetings).print();
 
         COMMAND_MANAGER.registerCommands(new ListCommand(), new DoneCommand(), new ToDoCommand(), new EventCommand(),
-                new DeadlineCommand());
+                new DeadlineCommand(), new DeleteCommand());
 
         echoInput(new BufferedReader(new InputStreamReader(System.in)));
     }

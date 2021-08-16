@@ -19,4 +19,5 @@ public class Response {
     public void print() {
         System.out.println(ANSI_CYAN + PARTITION + "\n" + message + "\n" + PARTITION + ANSI_RESET);
     }
+
 }

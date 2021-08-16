@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
+import duke.exception.InvalidArgumentException;
 import duke.task.Task;
 
 /**
@@ -24,8 +25,7 @@ public class DukeList {
      */
     public Response addWithResponse(Task task) {
         this.list.add(task);
-        return new Response("Got it. I've added this task:\n" + task + "\nNow you have " + this.list.size()
-                + " task(s) in the list.");
+        return new Response("Got it. I've added this task:\n" + task + "\n" + currentSizeMessage());
     }
 
     /**
@@ -47,12 +47,38 @@ public class DukeList {
      * @return response on whether it is succcessful
      */
     public Response markCompleted(int i) {
-        if (i < 1 || i > this.list.size())
-            return new Response("Invalid index! You only have " + this.list.size() + " tasks registered!");
+        this.testInRange(i);
+
         Task task = this.list.get(i - 1);
         if (task.isCompleted())
             return new Response("Bruh I've already marked it as completed!\n" + task);
         task.markCompleted();
         return new Response("Nice! I've marked this task as done:\n" + task);
     }
+
+    /**
+     * Removes the task in the given index from the list, and returns a response on
+     * whether the operation is successful.
+     * 
+     * @param i index of task to be removed
+     * @return response on whether it is succcessful
+     */
+    public Response deleteWithResponse(int i) {
+        this.testInRange(i);
+
+        Task task = this.list.remove(i - 1);
+        return new Response("Noted. I've removed this task:\n" + task + "\n" + currentSizeMessage());
+    }
+
+    private String currentSizeMessage() {
+        int size = this.list.size();
+        String unit = size == 1 ? "task" : "tasks";
+        return "You now have " + this.list.size() + " " + unit + " in the list!";
+    }
+
+    private void testInRange(int i) {
+        if (i < 1 || i > this.list.size())
+            throw new InvalidArgumentException("Invalid index!\n" + currentSizeMessage());
+    }
+
 }

@@ -4,8 +4,9 @@ package duke.command;
  * Represent all commands used in Duke bot.
  */
 public interface Command {
+
     /**
-     * Execute the command with given array of arguments.
+     * Execute the command with given arguments.
      * 
      * @param args arguments of the command
      */
@@ -18,4 +19,5 @@ public interface Command {
      * @return label of the command
      */
     String getLabel();
+
 }
