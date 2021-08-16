@@ -16,11 +16,8 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    /**
-     * Get the status message of the task.
-     * @return A formatted string containing the status and description of the task.
-     */
-    public String getStatusMessage() {
+    @Override
+    public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 

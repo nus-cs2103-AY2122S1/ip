@@ -7,10 +7,10 @@ public class TaskList {
 
     /**
      * Add task to the list.
-     * @param item the name of the task.
+     * @param task the name of the task.
      */
-    public void add(String item) {
-        this.tasklist.add(new Task(item));
+    public void add(Task task) {
+        this.tasklist.add(task);
     }
 
     /**
@@ -22,6 +22,13 @@ public class TaskList {
         return tasklist.get(index);
     }
 
+    /**
+     * Retrieve the size of the task list.
+     * @return the size of the task list.
+     */
+    public int getLength() {
+        return this.tasklist.size();
+    }
 
     /**
      * Display all items in the list.
@@ -30,7 +37,7 @@ public class TaskList {
         System.out.println("    * * * * * * * * * * * * * * * * * * * *");
         System.out.println("    Here are the tasks in your list: ");
         for (int i = 0; i < tasklist.size(); i++) {
-            String item = "    " + (i + 1) + "." +  this.getTask(i).getStatusMessage();
+            String item = "    " + (i + 1) + "." +  this.getTask(i);
             System.out.println(item);
         }
         System.out.println("    * * * * * * * * * * * * * * * * * * * *\n");
