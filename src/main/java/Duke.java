@@ -10,23 +10,35 @@ public class Duke {
         while (true) {
             Scanner sc = new Scanner(System.in);
             String text = sc.nextLine();
-            if (text.equals("bye")) {
+            if (text.equals("q")) {
                 System.out.println("ciao!");
                 break;
-            } else if (text.equals("list")) {
+            } else if (text.equals("ls")) {
                 printList(index);
             } else if (text.contains("done")){
                 markAsDone(text);
             } else {
                 addTask(text, index);
-                index++;
             }
         }
     }
 
     private static void addTask(String text, int i) {
-        myList[i] = new Task(text);
-        System.out.println("added: " + text);
+        if (text.contains("todo")) {
+            myList[i] = new Todo(text.split(" ", 2)[1]);
+        } else if (text.contains("deadline")) {
+            String[] task = text.split(" ", 2)[1].split(" /by ", 2);
+            myList[i] = new Deadline(task[0], task[1]);
+        } else if (text.contains("event")) {
+            String[] task = text.split(" ", 2)[1].split(" /at ", 2);
+            myList[i] = new Event(task[0], task[1]);
+        } else {
+            System.out.println("Please use the keyword --todo, deadline or event--");
+            return;
+        }
+        System.out.println("added: " + myList[i]);
+        index++;
+        System.out.printf("Now you have %d task(s) in the list.\n", index);
     }
 
     private static void printList(int len) {
