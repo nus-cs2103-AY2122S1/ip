@@ -12,4 +12,12 @@ event item four /by tomorrow
 event item four /at tomorrow
 done 2,3
 list
+todo 5
+todo 6
+todo 7
+todo 8
+delete 9
+delete 1,9,1
+delete 5,2
+list
 bye

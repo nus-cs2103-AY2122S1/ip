@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -45,22 +47,48 @@ public class TaskList {
         return tasks.size();
     }
 
-    public String markAsDone(ArrayList<Integer> args) {
+    public String markAsDone(ArrayList<Integer> listOfTasks) {
         StringBuilder res = new StringBuilder("Nice! I've marked these tasks as done: \n\t\t");
 
-        for (int i = 0; i < args.size(); i++) {
+        for (int i = 0; i < listOfTasks.size(); i++) {
             // have to decrement by one since tasks ArrayList is 0-indexed,
             // but the user-provided arguments uses a 1-indexed list
-            int index = args.get(i) - 1;
+            int index = listOfTasks.get(i) - 1;
 
             tasks.get(index).markAsDone();
             res.append(tasks.get(index));
-            if (i != args.size() - 1) {
+            if (i != listOfTasks.size() - 1) {
                 // do not append newline to the last item
                 res.append("\n\t\t");
             }
         }
+        return res.toString();
+    }
 
+    public String deleteTasks(ArrayList<Integer> listOfTasks) {
+        StringBuilder res = new StringBuilder("I've removed these tasks: \n\t\t");
+
+        // reverse-sort the tasks and remove duplicates
+        Set<Integer> s = new LinkedHashSet<>(listOfTasks);
+        listOfTasks.clear();
+        listOfTasks.addAll(s);
+        Collections.sort(listOfTasks);
+        Collections.reverse(listOfTasks);
+
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            // have to decrement by one since tasks ArrayList is 0-indexed,
+            // but the user-provided arguments uses a 1-indexed list
+            int index = listOfTasks.get(i) - 1;
+
+            res.append(tasks.get(index));
+            tasks.remove(index);
+
+            if (i != listOfTasks.size() - 1) {
+                // do not append newline to the last item
+                res.append("\n\t\t");
+            }
+        }
+        res.append("\n\t ").append(tasks.size()).append(" tasks remain.");
         return res.toString();
     }
 
