@@ -2,8 +2,8 @@ package Util;
 
 public class Display {
 	public static void printSentence(String sentence) {
-		System.out.println("____________________________________________________________\n" +
-				sentence +
-				"____________________________________________________________\n");
+		System.out.println(("\t____________________________________________________________\n" +
+				"\t" + sentence.replace("\n", "\n\t") +
+				"\n\t____________________________________________________________\n"));
 	}
 }

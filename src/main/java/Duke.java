@@ -39,6 +39,6 @@ public class Duke {
 	
 	public static void starting() {
 		printSentence(" Hello! I'm Dude\n" +
-				" What can I do for you?\n");
+				" What can I do for you?");
 	}
 }

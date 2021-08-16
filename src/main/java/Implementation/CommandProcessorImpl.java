@@ -22,11 +22,11 @@ public class CommandProcessorImpl implements CommandProcessor {
 	}
 	
 	public void processBye() {
-		printSentence(" Bye. Hope to see you again soon!\n");
+		printSentence(" Bye. Hope to see you again soon!");
 		System.exit(0);
 	}
 	
 	public void processInvalid(String sentence) {
-		printSentence(" " + sentence + "\n");
+		printSentence(" " + sentence);
 	}
 }
