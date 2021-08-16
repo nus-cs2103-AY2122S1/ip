@@ -13,4 +13,11 @@ Got it! I have added:
 You now have 3 items in your list 
 Completed:  run (by: tonight)
 You didn't overshoot the deadline right?
+No task specified. Please specify a task before `/at`
+No specific command specified. Please try again
+No specific command specified. Please try again
+No task specified. Please specify a task before `/at`
+Got it! I have added:
+[E] [ ] party (at: tmr night)
+You now have 4 items in your list 
 Good riddance! Time to continue my beauty sleep :)
