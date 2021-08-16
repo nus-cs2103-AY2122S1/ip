@@ -14,6 +14,9 @@ public class DukeCommandException extends Exception{
             case "done":
                 msg = "Wrong usage of \"done\".\nCorrect usage: \"done TASK_NUMBER\".";
                 break;
+            case "delete":
+                msg = "Wrong usage of \"delete\".\nCorrect usage: \"delete TASK_NUMBER\"";
+                break;
             default:
                 msg = command + " is not a supported command.";
         }

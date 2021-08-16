@@ -1,3 +1,4 @@
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
 public class TaskList {
@@ -56,6 +57,24 @@ public class TaskList {
             } else {
                 return "Something seems to have went terribly wrong";
             }
+        } else {
+            return String.format("Uh oh, seems like there is no task number %d", taskID);
+        }
+    }
+
+    public String deleteTask(int taskID) {
+        if (taskID - 1 < listSize) {
+            Task t = userList.get(taskID - 1);
+            userList.remove(taskID - 1);
+            listSize--;
+            return String.format(
+                    "Alright,\nTask: %s [%s] [%s] (%s)\nHas been removed, you have %d tasks in the list",
+                    t.getName(),
+                    t.getTaskType(),
+                    t.isCompleted() ? "X" : " ",
+                    getTaskTime(t),
+                    listSize
+            );
         } else {
             return String.format("Uh oh, seems like there is no task number %d", taskID);
         }

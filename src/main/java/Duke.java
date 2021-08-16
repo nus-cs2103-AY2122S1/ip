@@ -104,20 +104,25 @@ public class Duke {
                             throw new DukeCommandException("done");
                         case "event":
                             throw new DukeCommandException("event");
+                        case "delete":
+                            throw new DukeCommandException("delete");
                         default:
                             throw new DukeCommandException(inputArr[0]);
                     }
                 } else {
                     switch (inputArr[0]) {
                         case "done":
+                            try {
                                 printLine(
                                         tList.markComplete(
                                                 Integer.parseInt(inputArr[1])
                                         )
                                 );
+                            } catch (NumberFormatException nfe) {
+                                printLine("Incorrect argument for command Done, must be an integer");
+                            }
                             break;
                         case "todo":
-                            //todo: Currently all task adding may accept empty fields. Need to deal with that
                             printLine(addTask(userInput, TaskType.TODO));
                             break;
                         case "deadline":
@@ -126,12 +131,22 @@ public class Duke {
                         case "event":
                             printLine(addTask(userInput, TaskType.EVENT));
                             break;
+                        case "delete":
+                            try {
+                                printLine(
+                                        tList.deleteTask(
+                                                Integer.parseInt(inputArr[1])
+                                        )
+                                );
+                            } catch (NumberFormatException nfe) {
+                                printLine("Incorrect argument for command Delete, must be an integer");
+                            }
+                            break;
                         default:
                             throw new DukeCommandException(inputArr[0]);
                     }
                 }
-            }
-            catch (DukeCommandException dce) {
+            } catch (DukeCommandException dce) {
                 printLine(dce.getMsg());
             }
         }
