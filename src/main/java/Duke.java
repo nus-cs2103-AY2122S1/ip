@@ -22,7 +22,7 @@ public class Duke {
                     System.out.println("  See you next time!");
                     bye = true;
                     
-                } else if (text.equals("list")) { // list function: iterates through taskList and prints each Task's listEntry
+                } else if (text.equals("list")) { // list function: iterates through taskList, prints Tasks' listEntry
                     System.out.println("  Here are the tasks in your list:");
                     for (int i = 0; i < listLength; ++i) {
                         System.out.println("  " + (i + 1) + "." + taskList[i].listEntry());
@@ -37,7 +37,8 @@ public class Duke {
                             throw new DukeException("invalidDone");
                         } else {
                             taskList[toSet - 1].setDone();
-                            System.out.print("  Nice! I've marked this task as done:\n    " + taskList[toSet - 1].listEntry() + "\n");
+                            System.out.print("  Nice! I've marked this task as done:\n    " + 
+                                    taskList[toSet - 1].listEntry() + "\n");
                         }
                     }
                     
@@ -60,7 +61,7 @@ public class Duke {
                     } else {
                         Task newTask;
 
-                        // split text string, first string will be the type of task and second string will be the task details
+                        // split text string, first string will be the task type and second string will be task details
                         String[] taskString = text.split(" ", 2);
                         String taskType = taskString[0];
                         String taskDetails = taskString[1];
@@ -98,14 +99,15 @@ public class Duke {
                         }
                         // add task to taskList
                         taskList[listLength++] = newTask;
-                        System.out.print("  Got it. I've added this task:\n    " + newTask.listEntry() + "\n  Now you have " + listLength + " tasks in the list.\n");
+                        System.out.print("  Got it. I've added this task:\n    " + newTask.listEntry() + 
+                                "\n  Now you have " + listLength + " tasks in the list.\n");
                     }
                 }
                 
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
 
-            } catch (NumberFormatException e) { // throws if the index given in the done function is not an integer
+            } catch (NumberFormatException e) { // NFE throws if the index given in the done function is not an integer
                 System.out.println(new DukeException("invalidDone").getMessage());
                 
             } finally {
