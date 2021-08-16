@@ -3,9 +3,27 @@ Hello! I'm Duke
 What can I do for you?
 __________________________________
 __________________________________
+The list is currently empty!
+__________________________________
+__________________________________
 Got it. I've added this task:
 added: [T][ ] read book
 Now you have 1 tasks in the list.
+__________________________________
+__________________________________
+You left the field blank!
+__________________________________
+__________________________________
+Sorry, I don't understand that command.
+__________________________________
+__________________________________
+You forgot to enter a message after the command!
+__________________________________
+__________________________________
+You forgot to enter a message after the command!
+__________________________________
+__________________________________
+You forgot to enter a message after the command!
 __________________________________
 __________________________________
 Got it. I've added this task:
@@ -55,9 +73,15 @@ added: [D][ ] return book (by: Sunday)
 Now you have 6 tasks in the list.
 __________________________________
 __________________________________
+Please use /by when you want to call the deadline command.
+__________________________________
+__________________________________
 Got it. I've added this task:
 added: [E][ ] project meeting (at: Mon 2-4pm)
 Now you have 7 tasks in the list.
+__________________________________
+__________________________________
+Please use /at when you want to call the event command.
 __________________________________
 __________________________________
 1. [T][X] read book
@@ -67,6 +91,17 @@ __________________________________
 5. [T][ ] borrow book
 6. [D][ ] return book (by: Sunday)
 7. [E][ ] project meeting (at: Mon 2-4pm)
+__________________________________
+__________________________________
+Noted. I've removed this task:
+[E][ ] project meeting (at: Aug 6th 2-4pm)
+Now you have 6 tasks in the list.
+__________________________________
+__________________________________
+You entered an invalid task number of 7. Please enter a task number from 1 to 6.
+__________________________________
+__________________________________
+You entered an invalid task number of 10. Please enter a task number from 1 to 6.
 __________________________________
 __________________________________
 Bye. Hope to see you again soon!

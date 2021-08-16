@@ -177,6 +177,28 @@ public class Duke {
     }
 
     /**
+     * Deletes a Task from the list of Tasks.
+     * @param taskIndex Index of the Task to be deleted.
+     * @throws EmptyListException If the list of Tasks is empty and there is nothing to be deleted.
+     * @throws InvalidIndexException If the index of the Task provided is out of range of the current list of Tasks.
+     */
+
+    private void deleteTask(String taskIndex) throws EmptyListException, InvalidIndexException {
+
+        int intTaskIndex = Integer.parseInt(taskIndex) - 1; // -1 because user inputs start from 1 not 0
+        int taskListSize = this.taskList.size();
+        if (taskListSize == 0) {
+            throw new EmptyListException();
+        }
+        else if (intTaskIndex < 0 || intTaskIndex >= taskListSize) {
+            throw new InvalidIndexException(1, taskListSize, intTaskIndex + 1);
+        }
+        Task task = this.taskList.remove(intTaskIndex);
+        System.out.println("Noted. I've removed this task:\n" + task);
+        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
+    }
+
+    /**
      * Logic for handling different commands and executing the appropriate methods for the inputted command.
      * @param input The entire user input.
      */
@@ -195,8 +217,8 @@ public class Duke {
                     if (words.length == 1) { // throws an error if there is no message input after the command word
                         throw new MessageEmptyException();
                     }
-                    String taskIndex = words[words.length - 1];
-                    markDone(taskIndex);
+                    String doneTaskIndex = words[words.length - 1];
+                    markDone(doneTaskIndex);
                     break;
                 case "deadline":
                     if (words.length == 1) { // throws an error if there is no message input after the command word
@@ -218,6 +240,13 @@ public class Duke {
                     }
                     // excludes command "event" from the string
                     addEvent(input.substring(6));
+                    break;
+                case "delete":
+                    if (words.length == 1) { // throws an error if there is no message input after the command word
+                        throw new MessageEmptyException();
+                    }
+                    String deleteTaskIndex = words[words.length - 1];
+                    deleteTask(deleteTaskIndex);
                     break;
                 case "": // empty user input
                     throw new EmptyCommandException();
