@@ -34,8 +34,19 @@ public class Duke {
         while (lastInput != "bye") {
             lastInput = currScanner.nextLine();
 
+            
         }
 
+    }
+
+    /**
+     * Used when Duke is supposed to say something.
+     * This would print the message between 2 line separators.
+     */
+    private static void dukeSays(String printThis) {
+        System.out.println(sepLine);
+        System.out.println(printThis);
+        System.out.println(sepLine);
     }
 
 }
