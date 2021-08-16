@@ -40,8 +40,15 @@ public class Duke {
         String input = "";
         String[] arr;
         Scanner scan = new Scanner(System.in);
-        System.out.println("Hello! I'm Amped");
-        System.out.println("What can I do for you?");
+        System.out.println(
+                "Hello! I'm Amped :) \n"
+                + "Type: \n"
+                + "1. A task (todo/deadline/event) followed by description to add tasks \n"
+                + "   e.g \"deadline submit homework /by Sunday 12 pm\" \n"
+                + "2. \"list\" to see the list of tasks \n"
+                + "3. \"done [number]\" to mark a particular task as done \n"
+                + "4. \"bye\" to exit"
+        );
         List<Task> ls = new ArrayList<>();
         do {
             try {
