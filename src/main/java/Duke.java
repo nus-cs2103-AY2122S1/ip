@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,7 +9,7 @@ public class Duke {
                     "| |_| | |_| |   <  __/",
                     "|____/ \\__,_|_|\\_\\___|",
                     "Hello! I'm Duke",
-                    "What can I do for you?"};
+                    "What can I do for you?\n"};
         System.out.println(StringFormat.formatString(startMessage));
 
         // Storage for tasks
@@ -24,18 +22,15 @@ public class Duke {
         while(sc.hasNext()) {
             String input = sc.nextLine();
 
-            // Regex Matcher to check the input to mark items as done
-            Pattern p = Pattern.compile("done\\s+\\d+");
-            Matcher m = p.matcher(input);
-
+            String[] inputs = input.split(" ", 2);
+            
 
             // if it is "bye", we exit the loop
-            if (input.equals("bye")) {
+            if (inputs[0].equals("bye")) {
                 System.out.println(StringFormat.formatString("Bye. Hope to see you again soon!\n"));
                 break;
-                
             // if it is "list", we list the stored inputs
-            } else if (input.equals("list")) {
+            } else if (inputs[0].equals("list")) {
                 System.out.println(
                     StringFormat.formatString(
                         StringFormat.tabAllNewline(
@@ -43,9 +38,8 @@ public class Duke {
                         )
                     )
                 );
-
-            // if input == "done" and the next input is a number, we are marking a task as done.
-            } else if (m.find()) {
+            // if we are marking a task as done
+            } else if (inputs[0].equals("done")) {
                 String[] result = input.split(" ");
                 int ind = Integer.valueOf(result[1]) - 1;
 
@@ -56,17 +50,58 @@ public class Duke {
                         )
                     )
                 );
-
-            // if it is not "list" or "bye", we store the user input and notify them.
+            // if we are making a task
             } else {
-                System.out.println(
-                    StringFormat.formatString(
-                        storage.add(new Task(input)
-                        )
-                    ) 
-                );
+                taskHandler(storage, inputs, input);
             }
         }
         sc.close();
+    }
+
+    public static void taskHandler(TaskStorage storage, String[] inputs, String input) {
+        // if we are creating a todo task
+        if (inputs[0].equals("todo")) {
+            System.out.println(
+                StringFormat.formatString(
+                    StringFormat.tabAllNewline(
+                        storage.add(
+                            new Todo(inputs[1])
+                        )
+                    )
+                )
+            );   
+        // if we are creating a deadline task 
+        } else if (inputs[0].equals("deadline")) {
+            String[] result = inputs[1].split(" /by ");
+            System.out.println(
+                StringFormat.formatString(
+                    StringFormat.tabAllNewline(
+                        storage.add(
+                            new Deadline(result[0], result[1])
+                        )
+                    )
+                )
+            );
+        // if we are creating an event task
+        } else if (inputs[0].equals("event")) {
+            String[] result = inputs[1].split(" /at ");
+            System.out.println(
+                StringFormat.formatString(
+                    StringFormat.tabAllNewline(
+                        storage.add(
+                            new Deadline(result[0], result[1])
+                        )
+                    )
+                )
+            );
+        // if we are creating a generic task
+        } else {
+            System.out.println(
+                StringFormat.formatString(
+                    storage.add(new Task(input)
+                    )
+                ) 
+            );
+        }
     }
 }

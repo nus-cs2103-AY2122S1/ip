@@ -8,7 +8,10 @@ public class TaskStorage {
     // Adds a new task to the storage and returns a confirmation message
     public String add(Task task) {
         storage[++current] = task;
-        return "Added: " + task.getDescription();
+        String returnString = "Got it. I've added this task: \n  "
+            + task.toString() + "\n"
+            + "Now you have " + (current + 1) + " tasks in the list.";
+        return returnString;
     }
 
     // Checks if the storage is empty
@@ -18,8 +21,10 @@ public class TaskStorage {
 
     // Marks a task as done, and returns a confirmation message
     public String markDone(int ind) {
-        if (storage[ind] == null) {
-            throw new NoSuchElementException("There is no such task!");
+        if (ind < 0 || ind >= storage.length){ 
+            throw new IllegalArgumentException("Bad index entered by user >:(");
+        } else if (storage[ind] == null) {
+            throw new NoSuchElementException("There is no such task! >:(");
         }
         storage[ind].markDone();
 
@@ -28,8 +33,10 @@ public class TaskStorage {
 
     // Gets a task from the storage
     public Task get(int ind) {
-        if (storage[ind] == null) {
-            throw new NoSuchElementException("There is no task at the given index: " + ind);
+        if (ind < 0 || ind >= storage.length){ 
+            throw new IllegalArgumentException("Bad index entered by user >:(");
+        } else if (storage[ind] == null) {
+            throw new NoSuchElementException("There is no such task! >:(");
         }
         return storage[ind];
     }
@@ -38,9 +45,10 @@ public class TaskStorage {
     @Override
     public String toString() {
         String result = "Here are the tasks in your list:\n";
-        for (int i = 0; i <= current; i++) {
+        for (int i = 0; i < current; i++) {
             result += (String.valueOf(i + 1) + "." + storage[i].toString() + "\n");
         }
+        result += (String.valueOf(current + 1) + "." + storage[current].toString());
         return result;
     }
 }
