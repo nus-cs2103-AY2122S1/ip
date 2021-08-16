@@ -10,7 +10,7 @@ public class Jared {
         historyCount ++;
     }
 
-    public static void list() {
+    private static void list() {
         String res = "";
         for (int i = 0; i < historyCount; i++) {
             res += String.format("%d. %s\n", i, Jared.history[i]);
