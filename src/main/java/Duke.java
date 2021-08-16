@@ -1,26 +1,34 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
-        
-        System.out.println("Hello I'm Duke\nWhat can I do for you?");
-        Scanner test = new Scanner(System.in);
-        String input = test.nextLine();
-        String[] dukeList = new String[100];
+    private static String greetText = "Hello I'm Duke\nWhat can I do for you?";
+    private static String exitText = "Bye. Hope to see you again soon!";
+    private static String dukeLogo = " ____        _        \n"
+                                   + "|  _ \\ _   _| | _____ \n"
+                                   + "| | | | | | | |/ / _ \\\n"
+                                   + "| |_| | |_| |   <  __/\n"
+                                   + "|____/ \\__,_|_|\\_\\___|\n";
+
+
+    public static void echo(String input) {
+        System.out.println(input);
+    }
+
+
+    public static void start() {
+        System.out.println(greetText);
         while (true) {
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine().toLowerCase();
             if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println(exitText);
                 break;
             } else {
-                System.out.println(input);
-                input = test.nextLine();
+                echo(input);
             }
         }
+    }
+    public static void main(String[] args) {
+       Duke.start();
     }
 }
