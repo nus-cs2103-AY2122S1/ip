@@ -29,6 +29,15 @@ public class Todo extends Task{
     }
 
     @Override
+    public String getStatusIcon() {
+        if (isDone) {
+            return "[X]";
+        } else {
+            return "[ ]";
+        }
+    }
+
+    @Override
     public String toString() {
         String typeIcon = getTypeIcon();
         String statusIcon = getStatusIcon();
