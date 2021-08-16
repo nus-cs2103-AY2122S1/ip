@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        List<String> list = new ArrayList();
+        List<Task> list = new ArrayList<>();
         String divider = "____________________________________________________________";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,30 +15,43 @@ public class Duke {
         System.out.println(logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         System.out.println(divider);
-        // System.in: take user's input
         Scanner sc = new Scanner(System.in);
         String input = sc.next();
         while (!input.equals("bye")) {
-            // System.out.println(divider + "\n" + input + "\n" + divider);
+            System.out.println(divider);
             if (input.equals("list")) {
-                System.out.println(divider);
                 int index = 1;
-                for (String item : list) {
-                    System.out.println(index + ". " + item);
+                for (Task task : list) {
+                    System.out.println(index + ". " + "[" + task.getStatusIcon() + "] " + task);
                     index++;
                 }
-                System.out.println(divider);
+            } else if (input.equals("done")) {
+                int index = sc.nextInt();
+                if (index < 1 || index > list.toArray().length) {
+                    // TODO: handle error here
+                    System.out.println("OOPS!!! I'm sorry, index is out of range!");
+                } else {
+                    Task task = list.get(index - 1);
+                    task.markAsDone();
+                    System.out.println("Nice! I've marked this task as done: \n  [X] " + task);
+                }
             } else {
-                list.add(input);
-                System.out.println(divider + "\n" + "added: " + input + "\n" + divider);
-                // prompt for next input only when invoke next()
+                list.add(new Task(input));
+                System.out.println("added: " + input);
             }
+            System.out.println(divider);
             input = sc.next();
         }
         System.out.println(divider + "\n" + "Bye. Hope to see you again soon!" + "\n" + divider);
         sc.close();
     }
 }
+
+
+
+
+
+
 
 
 
