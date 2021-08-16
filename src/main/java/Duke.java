@@ -25,11 +25,7 @@ public class Duke {
             boolean isEnd = false;
             switch (command) {
                 case "list":
-                    printBanner(
-                        IntStream.range(0, messages.size())
-                            .mapToObj(i -> String.format("%d. %s", i + 1, messages.get(i)))
-                            .toArray(String[]::new)
-                    );
+                    printBanner(retrieveTaskList());
                     break;
                 case "bye":
                     printBanner(BYE_MSG.split("\n"));
@@ -47,6 +43,12 @@ public class Duke {
         }
 
         sc.close();
+    }
+
+    public static String[] retrieveTaskList() {
+        return IntStream.range(0, messages.size())
+            .mapToObj(i -> String.format("%d. %s", i + 1, messages.get(i)))
+            .toArray(String[]::new);
     }
 
     public static void printBanner(String[] lines) {
