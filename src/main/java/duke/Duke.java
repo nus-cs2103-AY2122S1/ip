@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+import duke.exception.DukeException;
 
 /**
  * Main class for the bot.
@@ -40,7 +41,12 @@ public class Duke {
         if (input.equals("bye")) {
             terminate();
         } else {
-            COMMAND_MANAGER.processAndExecuteInput(input);
+            try {
+                COMMAND_MANAGER.processAndExecuteInput(input);
+            } catch (DukeException ex) {
+                ex.getResponse().print();
+            }
+
             echoInput(reader);
         }
     }
