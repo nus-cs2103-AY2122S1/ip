@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class BobbyBot {
-    private static final Task[] tasks = new Task[100];
+    private static final List<Task> tasks = new ArrayList<Task>();
     private static final String div = "____________________________________________________________\n";
     private static int totalTasks = 0;
     private static final String[] acceptedCommands = {"bye", "list", "done", "deadline", "todo", "event"};
@@ -114,7 +115,7 @@ public class BobbyBot {
     private void printList() {
         System.out.println(div + "Here are the tasks in your list:");
         for (int i = 0; i < totalTasks; i++) {
-            System.out.println((i + 1) + ". " + tasks[i]);
+            System.out.println((i + 1) + ". " + tasks.get(i));
         }
         System.out.println(div);
     }
@@ -124,20 +125,23 @@ public class BobbyBot {
      * @param taskNo Task Number (starting from index 1)
      */
     private void markAsDone(int taskNo) {
-        Task taskCompleted = tasks[taskNo - 1];
+        Task taskCompleted = tasks.get(taskNo - 1);
         taskCompleted.markAsDone();
         System.out.println(div + "Nice! I've marked this task as done:");
         System.out.println("  " + taskCompleted + "\n" + div);
     }
 
+    private void deleteTask(int taskNo) {
+        tasks.remove(taskNo-1);
+    }
     /**
      * Creates a todo task
      * @param description description of task
      */
     private void createToDo(String description) {
-        tasks[totalTasks] = new ToDo(description);
+        tasks.add(new ToDo(description));
         totalTasks++;
-        System.out.println(div + "Got it. I've added this task:\n  " + tasks[totalTasks - 1] + "\n"
+        System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
                 + "Now you have " + totalTasks + " tasks in the list.\n" + div);
     }
 
@@ -147,9 +151,9 @@ public class BobbyBot {
      * @param at time period of Event (start-end)
      */
     private void createEvent(String description, String at) {
-        tasks[totalTasks] = new Event(description, at);
+        tasks.add(new Event(description, at));
         totalTasks++;
-        System.out.println(div + "Got it. I've added this task:\n  " + tasks[totalTasks - 1] + "\n"
+        System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
                 + "Now you have " + totalTasks + " tasks in the list.\n" + div);
     }
 
@@ -159,9 +163,9 @@ public class BobbyBot {
      * @param by date and time that the task should be completed by
      */
     private void createDeadline(String description, String by) {
-        tasks[totalTasks] = new Deadline(description, by);
+        tasks.add(new Deadline(description, by));
         totalTasks++;
-        System.out.println(div + "Got it. I've added this task:\n  " + tasks[totalTasks - 1] + "\n"
+        System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
                 + "Now you have " + totalTasks + " tasks in the list.\n" + div);
     }
 }
