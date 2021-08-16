@@ -40,50 +40,68 @@ public class MyJournal {
                 Scanner currLine = new Scanner(input);
                 String taskName = "";
                 String time = "";
-                if (firstWord.equals("todo")) {
-                    currLine.next();
-                    while (currLine.hasNext()) {
-                        String currWord = currLine.next();
-                        taskName = taskName + currWord + " ";
-                    }
-                    items.add(new Todo(taskName));
-                    System.out.println("Okay!! I've added the following task:\n"
-                            + items.get(items.size() - 1) + "\n"
-                            + "Now you have " + items.size() + " in the list");
-                } else if (firstWord.equals("event")) {
-                    currLine.next();
-                    while (currLine.hasNext()) {
-                        String currWord = currLine.next();
-                        if (currWord.equals("/at")) {
-                            break;
+                try {
+                    if (firstWord.equals("todo")) {
+                        currLine.next();
+                        if (currLine.hasNext()) {
+                            while (currLine.hasNext()) {
+                                String currWord = currLine.next();
+                                taskName = taskName + currWord + " ";
+                            }
+                            items.add(new Todo(taskName));
+                            System.out.println("Okay!! I've added the following task:\n"
+                                    + items.get(items.size() - 1) + "\n"
+                                    + "Now you have " + items.size() + " in the list");
+                        } else {
+                            throw new EmptyDescriptionException("OOPS!!! Please specify the todo!!");
                         }
-                        taskName = taskName + currWord + " ";
-                    }
-                    while (currLine.hasNext()) {
-                        time = time + " " + currLine.next();
-                    }
-                    items.add(new Event(taskName, time));
-                    System.out.println("Okay!! I've added the following task:\n"
-                            + items.get(items.size() - 1) + "\n"
-                            + "Now you have " + items.size() + " in the list");
-                } else if (firstWord.equals("deadline")) {
-                    currLine.next();
-                    while (currLine.hasNext()) {
-                        String currWord = currLine.next();
-                        if (currWord.equals("/by")) {
-                            break;
+                    } else if (firstWord.equals("event")) {
+                        currLine.next();
+                        if (currLine.hasNext()) {
+                            while (currLine.hasNext()) {
+                                String currWord = currLine.next();
+                                if (currWord.equals("/at")) {
+                                    break;
+                                }
+                                taskName = taskName + currWord + " ";
+                            }
+                            while (currLine.hasNext()) {
+                                time = time + " " + currLine.next();
+                            }
+                            items.add(new Event(taskName, time));
+                            System.out.println("Okay!! I've added the following task:\n"
+                                    + items.get(items.size() - 1) + "\n"
+                                    + "Now you have " + items.size() + " in the list");
+                        } else {
+                            throw new EmptyDescriptionException("OOPS!!! Please specify the event!!");
                         }
-                        taskName = taskName + currWord + " ";
+                    } else if (firstWord.equals("deadline")) {
+                        currLine.next();
+                        if (currLine.hasNext()) {
+                            while (currLine.hasNext()) {
+                                String currWord = currLine.next();
+                                if (currWord.equals("/by")) {
+                                    break;
+                                }
+                                taskName = taskName + currWord + " ";
+                            }
+                            while (currLine.hasNext()) {
+                                time = time + " " + currLine.next();
+                            }
+                            items.add(new Deadline(taskName, time));
+                            System.out.println("Okay!! I've added the following task:\n"
+                                    + items.get(items.size() - 1) + "\n"
+                                    + "Now you have " + items.size() + " in the list");
+                        } else {
+                            throw new EmptyDescriptionException("OOPS!!! Please specify the deadline!!");
+                        }
+                    } else {
+                        throw new InvalidTypeException("OOPS!!! Please put either todo/event/deadline!");
                     }
-                    while (currLine.hasNext()) {
-                        time = time + " " + currLine.next();
-                    }
-                    items.add(new Deadline(taskName, time));
-                    System.out.println("Okay!! I've added the following task:\n"
-                            + items.get(items.size() - 1) + "\n"
-                            + "Now you have " + items.size() + " in the list");
-                } else {
-                    System.out.println("Please put either Todo, Event or Deadline");
+                } catch (EmptyDescriptionException exception) {
+                    System.out.println(exception.getMessage());
+                } catch (InvalidTypeException exception) {
+                    System.out.println(exception.getMessage());
                 }
             }
         }
