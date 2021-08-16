@@ -2,7 +2,7 @@ package Interface;
 
 import Model.Command;
 
-import java.util.List;
+import java.util.Map;
 
 public interface CommandProcessor {
 	/**
@@ -11,5 +11,5 @@ public interface CommandProcessor {
 	 * @param command   one of the command from Command enum class
 	 * @param arguments corresponding arguments for each command
 	 */
-	void processCommand(Command command, List<String> arguments);
+	void processCommand(Command command, Map<String, String> arguments);
 }

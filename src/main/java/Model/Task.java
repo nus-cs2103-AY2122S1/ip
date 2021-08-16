@@ -20,8 +20,12 @@ public class Task {
 		return this.isDone;
 	}
 	
+	public String getDesc() {
+		return this.desc;
+	}
+	
 	@Override
 	public String toString() {
-		return this.desc;
+		return (this.isDone() ? "[X] " : "[ ] ") + this.desc;
 	}
 }

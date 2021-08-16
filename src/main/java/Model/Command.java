@@ -11,7 +11,18 @@ package Model;
  *      LIST : list the entire tasks array
  *  </li>
  *  <li>
- *      ADD : add the whole sentence to the storage
+ *     Adding a Task: divided into 3 smaller parts :
+ *     <ul>
+ *      <li>
+ *       DEADLINE : add a new deadline, takes 3 arguments section: description, \by, deadline
+ *      </li>
+ *      <li>
+ *     EVENT : add a new deadline, takes 3 arguments section: description, \at, deadline
+ *      </li>
+ *      <li>
+ *        TODOS : add a new deadline, takes 1 argument : description
+ *      </li>
+ *    </ul>
  *  </li>
  *  <li>
  *      DONE : mark the task as done, 1 argument is required which is the number of task (the rest is ignored)
@@ -24,7 +35,9 @@ package Model;
 public enum Command {
 	BYE,
 	LIST,
-	ADD,
+	DEADLINE,
+	EVENT,
+	TODOS,
 	DONE,
 	INVALID // special command for invalid input
 }
