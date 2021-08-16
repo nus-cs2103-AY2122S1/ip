@@ -35,6 +35,25 @@ public class Processor {
                     + "if you want to add this as a task, please add a / to the front");
             } else if (newInput.substring(0,1).equals("/")) {
                 addTask(newInput.substring(1));
+            } else if (newInput.length() > 6 && newInput.subSequence(0, 6).equals("event ")) {
+                int timeIndex = newInput.indexOf("/at", 6);
+                if (timeIndex == -1) {
+                    printString("Not a valid event. Please add a time with /at or mark it as a todo.");
+                } else {
+                    Event newEvent = new Event(newInput.substring(6, timeIndex - 1), newInput.substring(timeIndex + 4));
+                    addTask(newEvent);
+                }
+            } else if (newInput.length() > 5 && newInput.subSequence(0, 5).equals("todo ")) {
+                ToDo newTodo = new ToDo(newInput.substring(5));
+                addTask(newTodo);
+            } else if (newInput.length() > 9 && newInput.subSequence(0, 9).equals("deadline ")) {
+                int timeIndex = newInput.indexOf("/by", 8);
+                if (timeIndex == -1) {
+                    printString("Not a valid deadline. Please add a time with /by or mark it as a todo.");
+                } else {
+                    Deadline newDeadline = new Deadline(newInput.substring(9, timeIndex - 1), newInput.substring(timeIndex + 4));
+                    addTask(newDeadline);
+                }
             } else {
                 addTask(newInput);
             }
@@ -80,8 +99,22 @@ public class Processor {
         System.out.println(decoratorString);
     }
     
+    /**
+     * add a task to task list, for task of specifics
+     * @param newTask task to add
+     */
+    private static void addTask(Task newTask) {
+        tasks.add(newTask);
+        taskAmount++;
+        printString("Got it. I've added this task:\n  " + spaceString + newTask + "\n" + spaceString + "Now you have " + taskAmount + " tasks in the list.");
+    }
+    
+    /**
+     * add a task to tasklist, for task without types
+     * @param taskName
+     */
     private static void addTask(String taskName) {
-        Task newTask = new Task(taskAmount + 1, taskName);
+        Task newTask = new Task(taskName);
         tasks.add(newTask);
         taskAmount++;
         printString("Added: " + taskName);
@@ -91,16 +124,21 @@ public class Processor {
         if (tasks.size() == 0) {
             printString("No current task available");
         } else {
-            String out = tasks.get(0) + "\n";
+            String out = "1." + tasks.get(0) + "\n";
             for (int i = 1; i < tasks.size(); i++) {
-                out = out + spaceString + tasks.get(i) + "\n";
+                int index = i + 1;
+                out = out + spaceString + index + "." + tasks.get(i) + "\n";
             }
             printList(out);
         }
     }
     
     private static void markAsDone(int doneIndex) {
-        tasks.get(doneIndex - 1).done();
-        printString("Nice, I've marked this as done!\n" + spaceString + "[X] " + tasks.get(doneIndex - 1).name());
+        if (doneIndex > taskAmount || doneIndex < 0) {
+            printString("Please input a valid task index.");
+        } else {
+            tasks.get(doneIndex - 1).done();
+            printString("Nice, I've marked this as done!\n" + spaceString + "  " + tasks.get(doneIndex - 1));
+        }
     }
 }
