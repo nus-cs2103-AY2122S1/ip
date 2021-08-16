@@ -59,7 +59,7 @@ public class Duke {
                 
                 // if we are making a task
                 } else {
-                    taskHandler(storage, inputs, input);
+                    taskHandler(storage, inputs);
                 }
             } catch (DukeException | IllegalArgumentException e){
                 System.out.println(StringFormat.tabAndFormat(e.getMessage()));
