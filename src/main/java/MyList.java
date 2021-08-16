@@ -39,4 +39,11 @@ public class MyList {
             System.out.println("Invalid index, please try again");
         }
     }
+
+    public void deleteTask(int index) {
+        Task removed = this.myList.remove(index - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(removed.toString());
+        System.out.printf("You now have %d items in your list \n", this.myList.size());
+    }
 }

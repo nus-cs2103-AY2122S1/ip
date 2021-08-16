@@ -24,10 +24,14 @@ public class Duke {
             if (input.equals("list")) {
                 l.listAll();
             } else if (input.equals("done")) {
-                if (s.hasNextInt()) {
-                    int index = s.nextInt();
+                Scanner s1 = new Scanner(s.nextLine());
+                int counter = 0;
+                while (s1.hasNextInt()) {
+                    int index = s1.nextInt();
                     l.markComplete(index);
-                } else {
+                    counter ++;
+                }
+                if (counter == 0) {
                     System.out.println("Invalid index, please try again");
                 }
             } else if (input.equals("todo")) {
@@ -66,6 +70,14 @@ public class Duke {
                     l.addTask(newEvent);
                 } catch (WrongCommandFormatException e) {
                     System.out.println(e.getMessage());
+                }
+            } else if (input.equals("delete")) {
+                Scanner s5 = new Scanner(s.nextLine());
+                if (s5.hasNextInt()) {
+                    int index = s5.nextInt();
+                    l.deleteTask(index);
+                } else {
+                    System.out.println("Invalid index, please try again");
                 }
             } else {
                 System.out.println("No specific command specified. Please try again");
