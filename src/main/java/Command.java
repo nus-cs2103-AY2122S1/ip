@@ -1,5 +1,5 @@
 public class Command {
-    protected String instruction;
+    protected Instruction instruction;
     protected String parameter_1;
     protected String parameter_2;
 
@@ -15,10 +15,11 @@ public class Command {
             }
         }
 
-        this.instruction = inputValues[0];
+//        this.instruction = Instruction.valueOf(inputValues[0].toUpperCase());
+        this.instruction = Instruction.toInstruction(inputValues[0]);
     }
 
-    public String getInstruction() {
+    public Instruction getInstruction() {
         return this.instruction;
     }
 

@@ -32,16 +32,16 @@ public class Duke {
     private void executeCommand(Command command) {
         try {
             switch (command.getInstruction()) {
-                case "list":
+                case LIST:
                     printList();
                     break;
-                case "todo":
+                case TODO:
                     if (command.getParameter_1() == null) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
                     createTask(new Todo(command.getParameter_1()));
                     break;
-                case "deadline":
+                case DEADLINE:
                     if (command.getParameter_1() == null) {
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
@@ -50,7 +50,7 @@ public class Duke {
                     }
                     createTask(new Deadline(command.getParameter_1(), command.getParameter_2()));
                     break;
-                case "event":
+                case EVENT:
                     if (command.getParameter_1() == null) {
                         throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
                     }
@@ -59,7 +59,7 @@ public class Duke {
                     }
                     createTask(new Event(command.getParameter_1(), command.getParameter_2()));
                     break;
-                case "done":
+                case DONE:
                     if (command.getParameter_1() == null) {
                         throw new DukeException("☹ OOPS!!! The task number cannot be empty.");
                     }
@@ -69,7 +69,7 @@ public class Duke {
                     }
                     markAsDone(Integer.parseInt(command.getParameter_1()));
                     break;
-                case "delete":
+                case DELETE:
                     if (command.getParameter_1() == null) {
                         throw new DukeException("☹ OOPS!!! The task number cannot be empty.");
                     }
@@ -79,11 +79,13 @@ public class Duke {
                     }
                     deleteTask(Integer.parseInt(command.getParameter_1()));
                     break;
-                case "bye":
+                case BYE:
                     bye();
                     break;
-                default:
+                case ERROR:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                default:
+                    throw new DukeException("☹ OOPS!!! Something went wrong");
             }
         }
         catch (DukeException e) {
