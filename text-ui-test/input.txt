@@ -14,10 +14,13 @@ list
 done 2
 done 3
 list
+delete 2
+list
 todo
 deadline
 event
 done
+delete
 deadline project submission
 deadline project submission /by
 event volleyball cca

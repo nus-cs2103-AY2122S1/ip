@@ -38,8 +38,8 @@ public class Duke {
                         taskList.printTaskList();
                         break;
                     case DONE:
-                        int index = extractIndex(input, Command.DONE);
-                        formatPrint(taskList.markTaskDone(index));
+                        int doneIndex = extractIndex(input, Command.DONE);
+                        formatPrint(taskList.markTaskDone(doneIndex));
                         break;
                     case HELP:
                         printHelp();
@@ -55,6 +55,10 @@ public class Duke {
                     case EVENT:
                         String eventInfo = extractInfo(input, Command.EVENT);
                         formatPrint(taskList.addTask(eventInfo, Command.EVENT));
+                        break;
+                    case DELETE:
+                        int deleteIndex = extractIndex(input, Command.DELETE);
+                        formatPrint(taskList.deleteTask(deleteIndex));
                         break;
                     default:
                         throw new DukeException("Invalid command @_@ Try typing 'help' to see my list of commands!");
@@ -94,19 +98,36 @@ public class Duke {
             + "3. event [description] /at [event duration] - Adds a Event to task list\n"
             + "4. list - Display list of items you have added\n"
             + "5. done [index of completed task] - Marks specified tasks as completed\n"
-            + "6. bye - End the program");
+            + "6. delete [index of task to be deleted] - Deletes specified task\n"
+            + "7. bye - End the program");
         System.out.println(DIVIDER);
     }
 
+    /**
+     * Extract out the information given in user input by separating out command.
+     *
+     * @param input User raw input.
+     * @param command The specific command given by user.
+     * @return String containing information that we need.
+     * @throws DukeException Prevent empty descriptions.
+     */
     public static String extractInfo(String input, Command command) throws DukeException{
         String[] info = input.split(" ", 2);
         if (info.length < 2) {
-            throw new DukeException(String.format("Error: OOPS!!! The description of a %s cannot be empty.",
+            throw new DukeException(String.format("Error: OOPS!!! The description of %s cannot be empty.",
                     command.label));
         }
         return info[1];
     }
 
+    /**
+     * Extract out the index given in user input by separating out command.
+     *
+     * @param input User raw input.
+     * @param command The specific command given by user.
+     * @return int of the task user wants to select.
+     * @throws DukeException Prevent empty indexes.
+     */
     public static int extractIndex(String input, Command command) throws DukeException{
         String[] info = input.split(" ", 2);
         if (info.length < 2 || info[1].equals("")) {

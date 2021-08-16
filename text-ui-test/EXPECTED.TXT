@@ -16,7 +16,8 @@ Here is the list of my available commands!
 3. event [description] /at [event duration] - Adds a Event to task list
 4. list - Display list of items you have added
 5. done [index of completed task] - Marks specified tasks as completed
-6. bye - End the program
+6. delete [index of task to be deleted] - Deletes specified task
+7. bye - End the program
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
@@ -101,19 +102,35 @@ Here are the tasks in your list:
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
-Error: OOPS!!! The description of a todo cannot be empty.
+Noted! I've removed this task:
+  [D][X] return book (by: Sunday)
+Now you have 2 task(s) in the list.
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
-Error: OOPS!!! The description of a deadline cannot be empty.
+Here are the tasks in your list:
+1.[T][X] borrow book
+2.[E][X] project meeting (by: Mon 2-4pm)
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
-Error: OOPS!!! The description of a event cannot be empty.
+Error: OOPS!!! The description of todo cannot be empty.
+--------------------------------------------------------------------------------
+Enter Command: 
+--------------------------------------------------------------------------------
+Error: OOPS!!! The description of deadline cannot be empty.
+--------------------------------------------------------------------------------
+Enter Command: 
+--------------------------------------------------------------------------------
+Error: OOPS!!! The description of event cannot be empty.
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
 Error: OOPS!!! The index argument for done cannot be empty.
+--------------------------------------------------------------------------------
+Enter Command: 
+--------------------------------------------------------------------------------
+Error: OOPS!!! The index argument for delete cannot be empty.
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------

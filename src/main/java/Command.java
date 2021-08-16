@@ -11,6 +11,7 @@ public enum Command {
     EVENT("event"),
     HELP("help"),
     BYE("bye"),
+    DELETE("delete"),
     INVALID("invalid");
 
     public final String label;
