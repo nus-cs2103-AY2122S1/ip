@@ -10,7 +10,10 @@ public class Duke {
         // Initialise the taskList
         ArrayList<Task> taskList = new ArrayList<>();
 
+        // Init the scanner
         Scanner in = new Scanner(System.in);
+
+        // Intro message
         System.out.println(
                 "Hello! I'm Duke" +
                         "\n" +
@@ -22,26 +25,55 @@ public class Duke {
             try {
                 String nextTask = in.nextLine();  // Read user input
 
+                // Case where user marks a task as done
                 // Uses a series of checks to only check for "done (number)"
                 if (nextTask.startsWith("done ")) {
+
+                    // there must be a number following "done"
                     if (Character.isDigit(nextTask.charAt(5))) {
                         int taskIndex = Character.getNumericValue(nextTask.charAt(5)) - 1;
+
+                        if (taskIndex >= taskList.size() || taskIndex < 0) {
+                            throw new DukeException("Invalid task number!");
+                        }
+
                         taskList.get(taskIndex).markAsDone();
                         System.out.println("Nice! I've marked this task as done: " +
                                 "\n" +
                                 taskList.get(taskIndex) +
                                 "\n" +
                                 divider);
-                    }
-                    // case where "done" is a task e.g. "done my homework"
-                    else {
-                        taskList.add(new Task(nextTask));
-                        System.out.println(divider + "\n" + "added: " + nextTask + "\n" + "\n" + divider);
+                    } else {
+                        throw new DukeException("Please use this format: 'done (task number)'");
                     }
                     continue;
+
+                // case where user wants to delete a task item, similar to done
+                } else if (nextTask.startsWith("delete ")) {
+                    if (Character.isDigit(nextTask.charAt(7))) {
+                        int taskIndex = Character.getNumericValue(nextTask.charAt(7)) - 1;
+
+                        if (taskIndex >= taskList.size() || taskIndex < 0) {
+                            throw new DukeException("Invalid task number!");
+                        }
+
+                        System.out.println("Nice! Noted. I've removed this task: " +
+                                "\n" +
+                                taskList.get(taskIndex) +
+                                "\n" +
+                                divider);
+
+                        taskList.remove(taskIndex);
+
+                        System.out.println("You now have " + taskList.size() + " tasks remaining!");
+                        continue;
+                    } else {
+                        throw new DukeException("Please use this format: 'done (task number)'");
+                    }
+
                 }
 
-                // If we want to show the list, it has to not add it to taskList
+                // Case where user wants to see the entire task list
                 else if (nextTask.equals("list")) {
                     System.out.println(divider);
                     System.out.println("Here are the items in your task list: ");
@@ -50,27 +82,29 @@ public class Duke {
                     }
                     System.out.println("\n" + divider);
                     continue;
+
+                // Case where user exits the program
                 } else if (nextTask.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
                 }
 
-
-                // new todo task
-                else if (nextTask.startsWith("todo")) {
+                // Case where user wants to add a new to do task
+                else if (nextTask.startsWith("todo ")) {
                     try {
                         String todoDesc = nextTask.substring(5);
                         taskList.add(new Todo(todoDesc));
+
+                    // catch the exception created by .substring method and throw a new DukeException which is caught at the end
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty." + "\n" + divider + "\n");
                     }
-
                 }
 
-                // new event task
-                else if (nextTask.startsWith("event")) {
-                    // need to check that for event and deadline they use the /at and /by properly else reject
+                // Case where user wants to add a new event task
+                else if (nextTask.startsWith("event ")) {
 
+                    // need to check that for event they use the /at properly else reject
                     if (!nextTask.contains("/at ")) {
                         throw new DukeException("Please use this format: 'event <task> /at <date and time>' to specify the date and time!");
                     }
@@ -81,35 +115,38 @@ public class Duke {
 
                 }
 
-                // new deadline task
-                else if (nextTask.startsWith("deadline")) {
-                    // need to check that for event and deadline they use the /at and /by properly else reject
+                // Case where user wants to add a new deadline task
+                else if (nextTask.startsWith("deadline ")) {
 
+                    // need to check that for deadline they use the /by properly else reject
                     if (!nextTask.contains("/by ")) {
                         throw new DukeException("Please use this format: 'deadline <task> /by <date and time>' to specify the date and time!");
                     }
-                    //System.out.println(e.getMessage());
 
                     int deadlineDateIndex = nextTask.indexOf("/by ") + 4;
                     String deadlineDesc = nextTask.substring(9, deadlineDateIndex - 4); //skip the "deadline "
                     taskList.add(new Deadline(deadlineDesc, nextTask.substring(deadlineDateIndex)));
 
+                // Else case for all non-recognised user inputs
                 } else {
                     throw new DukeException("Please enter a valid command");
 
                 }
 
+                // When adding a new task, this message be printed
                 System.out.println(taskList.size() > 1
                         ? divider + "\n" + "added: " + taskList.get(taskList.size() - 1) + "\n" +
-                          "now you have: " + taskList.size() + " tasks! type 'list' to see them!" + "\n" + divider
+                        "now you have: " + taskList.size() + " tasks! type 'list' to see them!" + "\n" + divider
                         : divider + "\n" + "added: " + taskList.get(taskList.size() - 1) + "\n" +
-                          "now you have: " + taskList.size() + " task! type 'list' to see them!" + "\n" + divider);
+                        "now you have: " + taskList.size() + " task! type 'list' to see them!" + "\n" + divider);
 
-
+            // catch all the custom exceptions and displays the message
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                System.out.println(e.getMessage() + "\n" + divider);
+
+            // catch the remaining exceptions
             } catch (Exception e) {
-                System.out.println("Please enter a valid task");
+                System.out.println("Please enter a valid task" + "\n" + divider);
             }
 
         }
