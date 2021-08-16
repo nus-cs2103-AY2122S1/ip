@@ -56,6 +56,17 @@ public class Duke {
         say(String.format("Good job! I've marked this task as done: %s", task));
     }
 
+    private static void delete(int index) {
+        Task task = taskList.get(index - 1);
+        taskList.remove(index - 1);
+        int count = taskList.size();
+        say("Noted. I've removed this task:");
+        say(task.toString(), false);
+        say(String.format("Now you have %d %s in the list.",
+                count, count == 1 ? "task" : "tasks"), false);
+
+    }
+
     private static void listTasks() {
         for (int i = 0; i < taskList.size(); i++) {
             say(String.format("%d. %s", i + 1, taskList.get(i)), i == 0);
@@ -76,6 +87,8 @@ public class Duke {
             listTasks();
         } else if (command.startsWith("done")) {
             done(Integer.parseInt(getMetadata(command)));
+        } else if (command.startsWith("delete")) {
+            delete(Integer.parseInt(getMetadata(command)));
         } else if (command.startsWith("todo")) {
             addTodo(getMetadata(command));
             sayTaskAdded();
