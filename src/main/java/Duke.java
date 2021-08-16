@@ -5,32 +5,50 @@ public class Duke {
 	private OutputHandler oh = new OutputHandler();
 	private List<Task> tasks = new ArrayList<>();
 
-	private Task store(String line) {
+	private void printStartUpMessage() {
+		oh.add("Hello! I'm Duke");
+		oh.add("What can I do for you?");
+		oh.print();
+	}
+
+	private void printClosingMessage() {
+		oh.add("Bye. Hope to see you again soon!");
+		oh.print();
+	}
+
+	private void store(String line) {
 		Task task = null;
 		String type = line.split(" ")[0];
 		if (type.equals("todo")) {
-			task = new ToDo(line.substring(5));
+			task = ToDo.init(line);
 
 		} else if (type.equals("deadline")) {
-			int pos = line.indexOf("/by");
-			task = new Deadline(line.substring(9, pos), line.substring(pos+4));
+			task = Deadline.init(line);
 
 		} else if (type.equals("event")) {
-			int pos = line.indexOf("/at");
-			task = new Event(line.substring(6, pos), line.substring(pos+4));
+			task = Event.init(line);
 
-		} /* else error */
+		} else {
+			throw new UnknownCommandException(line);
+		}
 
 		tasks.add(task);
-		return task;
+		oh.add("Got it. I've added this task:");
+		oh.add("  " + task);
+		oh.add(String.format("Now you have %d task(s) in the list.", tasks.size()));
+		oh.print();
 	}
 
 	private void display() {
-		oh.add("Here are the tasks in your list:");
-		int counter = 1;
-		for (Task task : tasks) {
-			oh.add("" + counter + "." + task);
-			counter++;
+		if (tasks.isEmpty()) {
+			oh.add("Your list of tasks is empty!");
+		} else {
+			oh.add("Here are the tasks in your list:");
+			int counter = 1;
+			for (Task task : tasks) {
+				oh.add("" + counter + "." + task);
+				counter++;
+			}
 		}
 		oh.print();
 	}
@@ -42,38 +60,40 @@ public class Duke {
 		oh.print();
 	}
 
-	private void run() {
-		oh.add("Hello! I'm Duke");
-		oh.add("What can I do for you?");
+	private void printErrorMessage(DukeException ex) {
+		oh.add(ex.getMessage());
+		for (String line : ex.getHelpMessages()) {
+			oh.add(line);
+		}
 		oh.print();
+	}
 
-		/**
-		 * There are some serious error catching to do for most 
-		 * of these with regards to input format validation.
-		 */
+	private void run() {
+		printStartUpMessage();
+
 		while (true) {
-			String input = sc.nextLine();
-			if (input.equals("list")) {
-				display();
+			try {
+				String input = sc.nextLine();
+				if (input.equals("list")) {
+					display();
 
-			} else if (input.equals("bye")) {
-				break;
+				} else if (input.equals("bye")) {
+					break;
 
-			} else if (input.split(" ")[0].equals("done")) {
-				markDone(Integer.parseInt(input.split(" ")[1]) - 1);
+				} else if (input.split(" ")[0].equals("done")) {
+					/* todo: catch format and ioob exceptions */
+					markDone(Integer.parseInt(input.split(" ")[1]) - 1);
 
-			} else {
-				Task task = store(input);
-				oh.add("Got it. I've added this task:");
-				oh.add("  " + task);
-				oh.add(String.format("Now you have %d task(s) in the list.", tasks.size()));
-				oh.print();
+				} else {
+					store(input);
 
+				}
+			} catch (DukeException ex) {
+				printErrorMessage(ex);
 			}
 		}
 
-		oh.add("Bye. Hope to see you again soon!");
-		oh.print();
+		printClosingMessage();
 	}
 
 	public static void main(String[] args) {

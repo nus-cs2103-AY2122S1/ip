@@ -10,6 +10,10 @@ abstract class Task {
 		this.isDone = false;
 	}
 
+	public String getType() {
+		return this.type;
+	}
+
 	public String getDescription() {
 		return this.description;
 	}
@@ -18,7 +22,9 @@ abstract class Task {
 		this.isDone = true;
 	}
 
+	abstract String getFormat();
+
 	public String toString() {
-		return String.format("[%s][%s] %s", type, (isDone ? "X" : " "), description);
+		return String.format("[%c][%s] %s", type.charAt(0), (isDone ? "X" : " "), description);
 	}
 }
