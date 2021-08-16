@@ -33,11 +33,15 @@ public class Duke {
                 System.out.println(indent + line);
             } else if (cmd.equalsIgnoreCase("done")) {
                 //mark task as done
-                int finishedTaskIndex = Integer.parseInt(remainder);
-                Task finishedTask = todos.get(finishedTaskIndex - 1);
-                finishedTask.markAsDone();
-                toScreen("Nice! I've marked the following task as done: ",
-                        finishedTaskIndex + "." + finishedTask.toString());
+                try {
+                    int finishedTaskIndex = Integer.parseInt(remainder);
+                    Task finishedTask = todos.get(finishedTaskIndex - 1);
+                    finishedTask.markAsDone();
+                    toScreen("Nice! I've marked the following task as done: ",
+                            finishedTaskIndex + "." + finishedTask.toString());
+                } catch (IndexOutOfBoundsException e) {
+                    toScreen("Task could not be marked as done.", "Please input valid task number.");
+                }
             } else if (cmd.equalsIgnoreCase("todo")) {
                 //add Todo task
                 try {
