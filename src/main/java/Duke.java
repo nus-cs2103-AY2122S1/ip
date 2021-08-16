@@ -16,9 +16,10 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         ChatBot bot = new ChatBot();
         Printer.prettyPrint(bot.greet());
+        Scanner sc = new Scanner(System.in);
         while(bot.isRunning()) {
-            Scanner sc = new Scanner(System.in);
             Printer.prettyPrint(bot.listen(sc.nextLine()));
         }
+        sc.close();
     }
 }

@@ -26,7 +26,7 @@ abstract public class Task {
             return "Task is already marked as done";
         }
         isDone = true;
-        return "Nice! I've marked this task as done:\n" + " " + toString();
+        return "Nice! I've marked this task as done:\n  " + toString();
     }
 
     @Override

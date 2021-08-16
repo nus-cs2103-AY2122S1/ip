@@ -25,16 +25,16 @@ public class ChatBot {
     /**
      * greet is called when the user starts up the program.
      *
-     * @return a String when user starts interacting with ChatBot
+     * @return a welcome message when user starts interacting with ChatBot
      */
     public String greet() {
-        return "Hello! I'm Chatty Clifford! \nHow may I be of service to you?";
+        return "Hello! I'm Chatty Clifford!\nHow may I be of service to you?";
     }
 
     /**
      * farewell is called when the user exits the program.
      *
-     * @return a String when user finishes interacting with ChatBot
+     * @return a farewell message when user finishes interacting with ChatBot
      */
     public String farewell() {
         this.isRunning = false;
@@ -61,33 +61,33 @@ public class ChatBot {
                 return markAsDone(taskId);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 e.printStackTrace();
-                return "done should be followed by an integer argument!";
+                return "done should be in format: done [DESCRIPTION]";
             }
         }
         if(temp[0].equals("todo")) {
             try {
-                return recordTodo(temp[1]);
+                return recordTodo(temp[1].trim());
             } catch (ArrayIndexOutOfBoundsException e) {
                 e.printStackTrace();
-                return "todo should be followed by a description of the task!";
+                return "todo should be in format: todo [DESCRIPTION]";
             }
         }
         if(temp[0].equals("deadline")) {
             try {
                 String[] descriptionDatePair = temp[1].split("/by", 2);
-                return recordDeadline(descriptionDatePair[0], descriptionDatePair[1]);
+                return recordDeadline(descriptionDatePair[0].trim(), descriptionDatePair[1].trim());
             } catch (ArrayIndexOutOfBoundsException e) {
                 e.printStackTrace();
-                return "deadline not in format: [DESCRIPTION] /by [DATE]!";
+                return "deadline should be in format: [DESCRIPTION] /by [DATE]!";
             }
         }
         if(temp[0].equals("event")) {
             try {
                 String[] descriptionDatePair = temp[1].split("/at", 2);
-                return recordEvent(descriptionDatePair[0], descriptionDatePair[1]);
+                return recordEvent(descriptionDatePair[0].trim(), descriptionDatePair[1].trim());
             } catch (ArrayIndexOutOfBoundsException e) {
                 e.printStackTrace();
-                return "event not in format: [DESCRIPTION] /at [DATE]!";
+                return "event should be in format: [DESCRIPTION] /at [DATE]!";
             }
         }
         return "Sorry, I don't understand what you are saying!";
@@ -123,8 +123,7 @@ public class ChatBot {
             return "Noted task down! I've added this task:\n  " + task.toString();
         } catch(ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
-            return String.format("I cannot remember so many things! Swipe your card to unlock my fullest potential!",
-                tasksLimit);
+            return "I cannot remember so many things!";
         }
     }
 
@@ -155,7 +154,7 @@ public class ChatBot {
         try {
             if(taskId <= 0 || taskId > currentIdx) {
                 throw new IllegalArgumentException(
-                    String.format("taskId of %1$d valid as there are %2$d recorded task", taskId, currentIdx));
+                    String.format("taskId of %1$d invalid as there are %2$d recorded task(s)", taskId, currentIdx));
             }
             return tasks[taskId - 1].markAsDone();
         } catch (IllegalArgumentException e) {

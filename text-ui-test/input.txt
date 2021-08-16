@@ -1,0 +1,21 @@
+list
+  list
+done 2
+todo
+todo wash clothes
+deadline
+deadline finish CS2103 homework
+event
+event go BTS concert
+event eat dinner /at Friday, 7pm
+  event eat lunch/atFriday,     2pm
+deadline finish homework /by 12/3/2021 11.59pm
+  deadline finish book/by16/3/2021,   11.59pm
+list
+done 8
+done 1
+done 3
+done 3
+list
+I like CS2101.
+bye
