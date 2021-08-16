@@ -12,7 +12,7 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public String displayStatus() {
+    public String getStatus() {
         return this.isDone ? "X" : " ";
     }
 
@@ -20,8 +20,15 @@ public class Task {
         this.isDone = true;
     }
 
-    @Override
-    public String toString() {
+    public String getType() {
+        return "T";
+    }
+
+    public String getTaskName() {
         return this.taskName;
+    }
+
+    public String displayInfo() {
+        return String.format("[T] [%s] %s", this.getStatus(), this.getTaskName());
     }
 }

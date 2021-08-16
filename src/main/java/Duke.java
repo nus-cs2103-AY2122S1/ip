@@ -1,5 +1,6 @@
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.regex.*;
 
 public class Duke {
     private static String input = "";
@@ -19,10 +20,17 @@ public class Duke {
         while (!(input = sc.nextLine().toLowerCase()).equals("bye")) {
             if (input.equals("list")) {
                 list();
-            } else if (input.split(" ")[0].equals("done")) {
+            } else if (Pattern.matches("done.*", input)){
                 markDone(Integer.parseInt(input.split(" ")[1]));
-            } else {
-                add(new Task(input));
+            } else if (Pattern.matches("event.*", input)) {
+                String[] inputArr = input.replaceFirst("event ","").split("/at");
+                add(new Event(inputArr[0], inputArr[1]));
+            } else if (Pattern.matches("deadline.*", input)) {
+                String[] inputArr = input.replaceFirst("deadline ", "").split("/by");
+                add(new Deadline(inputArr[0], inputArr[1]));
+            } else if (Pattern.matches("todo.*", input)) {
+                String inputArr = input.replaceFirst("todo ", "");
+                add(new Task(inputArr));
             }
         }
         exit();
@@ -43,15 +51,17 @@ public class Duke {
      */
     public static void add(Task task) {
         list[listLength] = task;
-        System.out.println("added: " + task.toString());
+        System.out.println("New Task? I've added it to the list: ");
+        System.out.println(task.displayInfo());
         listLength++;
+        System.out.println(String.format("Now you have %d task(s) in the list.", listLength));
     }
 
     public static void markDone(int id) {
         System.out.println("You've finished the task? Good job!");
         System.out.println("This task has been marked as done: ");
         list[id - 1].complete();
-        System.out.println(String.format("[%s] %s", list[id - 1].displayStatus(), list[id - 1].toString()));
+        System.out.println(String.format("[%s] %s", list[id - 1].getStatus(), list[id - 1].getTaskName()));
     }
 
     /**
@@ -60,7 +70,7 @@ public class Duke {
     public static void list() {
         System.out.println("Here's your current list: ");
         for (int i = 0; i < listLength; i++) {
-            System.out.println(String.format("%d.[%s] %s", i + 1, list[i].displayStatus(), list[i]));
+            System.out.println(String.format("%d. %s", i + 1, list[i].displayInfo()));
         }
     }
 
