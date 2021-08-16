@@ -6,7 +6,7 @@ public class Kermit {
      * @param text Text to be formatted.
      * @return Formatted version of text.
      */
-    public static String formatText(String text) {
+    private static String formatText(String text) {
         String horizontalDivider = "____________________________________________________________";
         return horizontalDivider + "\n" + text + "\n" + horizontalDivider;
     }
