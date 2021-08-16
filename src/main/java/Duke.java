@@ -1,13 +1,16 @@
 import java.util.Scanner;
 
 public class Duke {
+    private Task[] tasks = new Task[100];
+    private int count = 0;
+
     /**
      * Print with 4 spaces infront of param str.
      *
      * @param str A String to be printed
      */
     public static void printWithTabIndent(String str) {
-        System.out.println(String.format("    %s", str));
+        System.out.println("    " + str);
     }
 
     /**
@@ -30,16 +33,59 @@ public class Duke {
 
     /**
      * Pretty print the tasks list with the horizontal lines.
-     *
-     * @param tasks Task[] Array of Task
-     * @param count num of tasks to print
      */
-    public static void printTasks(Task[] tasks, int count) {
-        printLine();
-        for (int i = 0; i < count; i++) {
-            printWithTabIndent(String.format("%d. %s", i + 1, tasks[i].toString()));
+    public void printTasks() {
+        if (count == 0) {
+            printMessage("Nothing in the list!");
+        } else {
+            printLine();
+            for (int i = 0; i < count; i++) {
+                printWithTabIndent(String.format("%d. %s", i + 1, tasks[i].toString()));
+            }
+            printLine();
         }
-        printLine();
+    }
+
+    public void markTaskDone(String message) {
+        if (message.equals("done")) {
+            printMessage("Please enter the task number.");
+        } else if (message.matches("^done \\d+$")) {
+            String taskNo = message.split(" ")[1];
+            try {
+                int taskNoInt = Integer.parseInt(taskNo) - 1;
+                if (count == 0) {
+                    printMessage("Nothing in the list");
+                } else if (taskNoInt >= count || taskNoInt < 0) {
+                    printMessage(String.format("Enter a valid number between 1 - %d", count));
+                } else if (tasks[taskNoInt].isDone()) {
+                    printMessage(
+                            String.format("Task %s is already done!\n    %s",
+                                    taskNo,
+                                    tasks[taskNoInt].toString()
+                            )
+                    );
+                } else {
+                    tasks[taskNoInt].markAsDone();
+                    printMessage(
+                            String.format("Nice! I've marked this task as done:\n       %s",
+                                    tasks[taskNoInt].toString()
+                            )
+                    );
+                }
+            } catch (NumberFormatException e) {
+                printMessage("Not a number!");
+            }
+        } else if (message.matches("^done [a-zA-Z]+.*$")) {
+            printMessage("Invalid Input");
+        } else {
+            addTask(message);
+        }
+    }
+
+    public void addTask(String message) {
+        printMessage("added: " + message);
+        tasks[count] = new Task(message);
+        count++;
     }
 
     public static void main(String[] args) {
@@ -51,51 +97,18 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Scanner scanner = new Scanner(System.in);
-        Task[] tasks = new Task[100];
-        int count = 0;
+        Duke duke = new Duke();
 
         printMessage("Hello! I'm Duke\n    What can I do for you?");
         String message = scanner.nextLine();
         while (!message.equals("bye")) {
             message = message.trim();
-            if (message.equals("list") && count == 0) {
-                printMessage("Nothing in the list!");
-            } else if (message.equals("list")) {
-                printTasks(tasks, count);
-            } else if (message.equals("done")) {
-                printMessage("Please enter the task number.");
-            } else if (message.matches("^done [a-zA-Z]+.*$")) {
-                printMessage("Invalid Input");
-            } else if (message.matches("^done \\d+$")) {
-                String taskNo = message.split(" ")[1];
-                try {
-                    int taskNoInt = Integer.parseInt(taskNo) - 1;
-                    if (count == 0) {
-                        printMessage("Nothing in the list!");
-                    } else if (taskNoInt > count || taskNoInt < 1) {
-                        printMessage(String.format("Enter a valid number between 1 - %d", count));
-                    } else if (tasks[taskNoInt].isDone()) {
-                        printMessage(
-                                String.format("Task %s is already done!\n    %s",
-                                        taskNo,
-                                        tasks[taskNoInt].toString()
-                                )
-                        );
-                    } else {
-                        tasks[taskNoInt].markAsDone();
-                        printMessage(
-                                String.format("Nice! I've marked this task as done:\n       %s",
-                                        tasks[taskNoInt].toString()
-                                )
-                        );
-                    }
-                } catch (NumberFormatException e) {
-                    printMessage("Not a number!");
-                }
+            if (message.equals("list")) {
+                duke.printTasks();
+            } else if (message.matches("^done.*")) {
+                duke.markTaskDone(message);
             } else if (!message.equals("")) {
-                printMessage("added: " + message);
-                tasks[count] = new Task(message);
-                count++;
+                duke.addTask(message);
             }
             message = scanner.nextLine();
         }
