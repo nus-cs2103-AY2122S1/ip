@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     /** The data structure to store all the tasks. **/
-    ArrayList<String> tasks = new ArrayList<>();
+    ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * A public method to print message with certain indentation and format.
@@ -36,6 +36,7 @@ public class Duke {
      * A public method to check whether the input command is an exit command.
      *
      * @param inputCommand The user input command.
+     *
      * @return A boolean value indicates whether the input command is an exit command.
      */
     public boolean isExitCommand(String inputCommand) {
@@ -47,9 +48,31 @@ public class Duke {
     }
 
     /**
+     * A public method to check whether the command entered is to mark the task as done.
+     *
+     * @param inputCommand The user input command.
+     *
+     * @return A boolean value indivates whether the input command is a mark-as-done command.
+     */
+    public boolean isMarkAsDoneCommand(String inputCommand) {
+        if (inputCommand.length() < 6) {
+            return false;
+        }
+        String firstHalf = inputCommand.substring(0, 4);
+        String secondHalf = inputCommand.substring(5, inputCommand.length());
+        if (!firstHalf.equals("done")) {
+            return false;
+        }
+        for (int i = 0; i < secondHalf.length(); i++) {
+            if (secondHalf.charAt(i) > '9' || secondHalf.charAt(i) < '0') return false;
+        }
+        return true;
+    }
+
+    /**
      * A method that list all current tasks.
      *
-     * @return An array of String, each String contains the number and name of a task.
+     * @return An array of String, each String contains a task.
      */
     public String[] listAllTasks() {
         int n = tasks.size();
@@ -63,16 +86,27 @@ public class Duke {
     /**
      * A method that read the name of a task, and then add the task to the task list.
      *
-     * @param task The name of the task.
+     * @param description The description of the task.
      */
-    public void addTask(String task) {
-        tasks.add(task);
+    public void addTask(String description) {
+        tasks.add(new Task(description));
+    }
+
+    /**
+     * A method that read the number of a task, and mark it as done.
+     *
+     * @param taskNumber The unique number of a task.
+     */
+    public void markAsDone(int taskNumber) {
+        tasks.get(taskNumber).markAsDone();
     }
 
     /**
      * A method that allows Duke to read the input command and react.
+     *
+     * @throws Exception Task number larger than total number of tasks.
      */
-    public void chat() {
+    public void chat() throws taskNumberOutOfBoundException{
         Scanner sc = new Scanner(System.in);
         while (true) {
             String inputCommand = sc.nextLine();
@@ -81,6 +115,19 @@ public class Duke {
                 return;
             } else if (inputCommand.equals("list")){
                 printMessage(listAllTasks());
+            } else if (isMarkAsDoneCommand(inputCommand)) {
+                int taskNumber = 0;
+                for (int i = 5; i < inputCommand.length(); i++) {
+                    taskNumber = taskNumber * 10 + (int) (inputCommand.charAt(i) - '0');
+                }
+                taskNumber --;
+                if (taskNumber >= tasks.size()) {
+                    throw new taskNumberOutOfBoundException();
+                }
+                markAsDone(taskNumber);
+                printMessage(new String[] {
+                        "Nice! I've marked this task as done:",
+                        tasks.get(taskNumber).toString()});
             } else {
                 addTask(inputCommand);
                 printMessage(new String[] {"added: " + inputCommand});
@@ -97,6 +144,11 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Duke chatBot = new Duke();
         chatBot.greet();
-        chatBot.chat();
+        try {
+            chatBot.chat();
+        } catch (taskNumberOutOfBoundException e) {
+            chatBot.printMessage(new String[]
+                    {"Input task number is larger than total number of tasks."});
+        }
     }
 }
