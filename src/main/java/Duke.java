@@ -33,9 +33,6 @@ public class Duke {
                     break;
                 // if it is "list", we list the stored inputs
                 } else if (inputs[0].equals("list")) {
-                    if (storage.isEmpty()) {
-                        throw new DukeException("☹ OOPS!!! List is empty!");
-                    }
                     System.out.println(
                         StringFormat.tabAndFormat(storage.toString())
                     );
