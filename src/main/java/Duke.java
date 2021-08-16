@@ -3,8 +3,20 @@ import java.util.List;
 import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
+/**
+ * Project Duke
+ *
+ * @author Willy Angga Prawira
+ */
+
 public class Duke {
 
+    /**
+     * A method to get the description from a task entered by the user
+     *
+     * @param arr The array that contains strings from the user input
+     * @return A string containing the description only
+     */
     public static String getDescription(String[] arr) {
         String str = "";
         for(int i = 1; i < arr.length; i++) {
@@ -18,6 +30,12 @@ public class Duke {
         return str;
     }
 
+    /**
+     * A method to get the deadline from a task entered by the user
+     *
+     * @param arr The array that contains strings from the user input
+     * @return A string containing the deadline only
+     */
     public static String getDeadline(String[] arr) {
         String str = "";
         boolean bool = false;
