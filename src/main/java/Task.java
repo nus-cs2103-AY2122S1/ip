@@ -1,34 +1,34 @@
-//enum TaskType {
-//    ToDo,
-//    Deadline,
-//    Event
-//
-//    private String time
-//    public abstract
-//}
+enum TaskType {
+    ToDo,
+    Deadline,
+    Event
+}
 
 public class Task {
     private String description;
     private boolean done = false;
 
-    public static Task makeTask(String type, String description) {
+    public static Task makeTask(String type, String description) throws DukeException {
+        if (description.length() == 0) {
+            throw new DukeException("The description cannot be empty");
+        }
         switch (type) {
             case "todo": {
-                return (new ToDos(description));
+                return (ToDos.of(description));
             }
             case "deadline": {
-                return (new Deadline(description));
+                return (Deadline.of(description));
             }
             case "event": {
-                return (new Event(description));
+                return (Event.of(description));
             }
             default: {
-                return null;
+                throw new DukeException("Sorry I don't understand");
             }
         }
     }
 
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
     }
 

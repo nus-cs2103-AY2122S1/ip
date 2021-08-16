@@ -1,12 +1,14 @@
 import java.util.*;
 import java.util.stream.Stream;
 
+
+
 public class Duke {
 
-    Task[] tasks = new Task[100];
-    int count = 0;
+    private Task[] tasks = new Task[100];
+    private int count = 0;
 
-    private void addTask(String input) {
+    private void addTask(String input) throws DukeException {
         String type = input.split(" ")[0];
         String taskDescription = Stream.of(input.split(" "))
                 .skip(1).reduce("", (x, y) -> x + " " + y);
@@ -40,7 +42,11 @@ public class Duke {
                 int index = Integer.parseInt(input.split(" ")[1]);
                 currentDuke.tasks[index - 1].markDone();
             } else {
-                currentDuke.addTask(input);
+                try {
+                    currentDuke.addTask(input);
+                } catch (DukeException e){
+                    System.out.println(e);
+                }
             }
             input = sc.nextLine();
         }

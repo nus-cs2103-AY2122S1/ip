@@ -6,6 +6,12 @@ todo borrow book
 done 1
 done 4
 list
+kjbadkfa asdkjfaksdjfb
+deadline
+deadline do hw /by
+todo
+event
+event /at
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 bye
