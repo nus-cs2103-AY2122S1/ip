@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        TodoList todoList = new TodoList();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -13,8 +14,15 @@ public class Duke {
         String userInput = scanner.nextLine();
 
         while(!userInput.equals("bye")) {
-            printResponse(userInput);
-            System.out.print("What's next? ");
+            switch (userInput) {
+                case "list":
+                    printResponse(todoList.list());
+                    break;
+                default:
+                    printResponse(todoList.add(userInput));
+            }
+
+            System.out.print("Whats next? ");
             userInput = scanner.nextLine();
         }
         printResponse("Ooooh yeah! Can do!");
