@@ -1,23 +1,9 @@
 import java.util.Scanner;
 
 public class Todo extends Task {
-    public String taskName = "";
-    private boolean state = false;
 
-    public Todo(String input) {
-        Scanner line = new Scanner(input);
-        line.next();
-        while (line.hasNext()) {
-            taskName = taskName + line.next() + " ";
-        }
-    }
-
-    public void setState(boolean state) {
-        this.state = state;
-    }
-
-    public boolean getState() {
-        return this.state;
+    public Todo(String taskName) {
+        super(taskName);
     }
 
     public String getTaskName() {
@@ -30,6 +16,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return taskName;
+        return getSymbol() + " " + super.toString();
     }
 }

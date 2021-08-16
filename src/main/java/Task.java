@@ -1,7 +1,19 @@
 public abstract class Task {
-    public abstract void setState(boolean state);
+    public String taskName;
+    public boolean state;
 
-    public abstract boolean getState();
+    public Task(String taskName) {
+        this.taskName = taskName;
+        this.state = false;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
+    }
+
+    public boolean getState() {
+        return this.state;
+    }
 
     public abstract String getTaskName();
 
@@ -9,6 +21,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "";
+        return (getState() ? "[X] " : "[ ] ") + taskName;
     }
 }

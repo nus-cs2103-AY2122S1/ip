@@ -1,31 +1,11 @@
 import java.util.Scanner;
 
 public class Deadline extends Task {
-    public String taskName = "";
-    private boolean state = false;
-    public String time = "";
+    public String time;
 
-    public Deadline(String input) {
-        Scanner line = new Scanner(input);
-        line.next();
-        while (line.hasNext()) {
-            String currWord = line.next();
-            if (currWord.equals("/by")) {
-                break;
-            }
-            taskName = taskName + currWord + " ";
-        }
-        while (line.hasNext()) {
-            time = " " + time + line.next();
-        }
-    }
-
-    public void setState(boolean state) {
-        this.state = state;
-    }
-
-    public boolean getState() {
-        return this.state;
+    public Deadline(String taskName, String time) {
+        super(taskName);
+        this.time = time;
     }
 
     public String getTaskName() {
@@ -38,6 +18,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return this.taskName + "(by:" + this.time + ")";
+        return getSymbol() + " " + super.toString() + "(by:" + this.time + ")";
     }
 }
