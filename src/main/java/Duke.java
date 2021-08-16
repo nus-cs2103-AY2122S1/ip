@@ -2,11 +2,13 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public Duke() {
+    private TaskList tl;
 
+    public Duke() {
+        this.tl = new TaskList();
     }
 
-    public void greet() {
+    private void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -20,13 +22,13 @@ public class Duke {
         System.out.println("Hello from\n" + logo + greetings);
     }
 
-    public void echo(String action) {
+    private void echo(String t) {
         System.out.println("-----------------------------------------\n" +
-                String.format("%s\n", action) +
+                String.format("%s\n", t) +
                 "-----------------------------------------\n");
     }
 
-    public void exit() {
+    private void exit() {
         String exitMessage =
                 "-----------------------------------------\n" +
                 "Bye. Hope to see you again soon!\n" +
@@ -35,16 +37,30 @@ public class Duke {
         System.exit(0);
     }
 
-    public void run() {
+    private void add(String t) {
+        System.out.println("-----------------------------------------\n" +
+                String.format("added: %s\n", t) +
+                "-----------------------------------------\n");
+        Task newTask = new Task(t, false);
+        this.tl.addTask(newTask);
+    }
+
+    private void run() {
         this.greet();
         Scanner sc = new Scanner(System.in);
-        String action;
+        String t;
         while (sc.hasNextLine()) {
-            action = sc.nextLine();
-            if ((action.equals("bye"))) {
-                this.exit();
-            } else {
-                this.echo(action);
+            t = sc.nextLine();
+            switch (t) {
+                case "bye":
+                    this.exit();
+                    break;
+                case "list":
+                    System.out.println(this.tl.toString());
+                    break;
+                default:
+                    this.add(t);
+                    break;
             }
         }
     }
