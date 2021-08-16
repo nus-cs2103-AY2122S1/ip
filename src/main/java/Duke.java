@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -107,6 +106,7 @@ public class Duke {
         }
         list.add(task);
         display("Got it. I've added this task:\n "
+                + "  "
                 + task.toString() + "\n"
                 + "Now you have " + list.size() + " tasks in the list"
         );
@@ -134,6 +134,29 @@ public class Duke {
         }
     }
 
+    private static void deleteTask(String input) throws InvalidArgumentsException, InvalidTaskException {
+        int taskNum;
+        try {
+            // filter out deleteXXXX
+            // StringIndexOutOfBoundsException thrown here if input = "delete",
+            // which is caught by IndexOutOfBoundsException
+            if (input.charAt(6) != ' ') {
+                throw new InvalidTaskException();
+            }
+            // NumberFormatException thrown here if substring is a invalid integer string
+            taskNum = Integer.parseInt(input.substring(7)) - 1;
+            // IndexOutOfBoundsException thrown here if taskNum > list size
+            Task task = list.get(taskNum);
+            list.delete(taskNum);
+            display("Noted. I've removed this task: \n"
+                    + "  "
+                    + task.toString() + "\n"
+                    + "Now you have " + list.size() + " tasks in the list");
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidArgumentsException();
+        }
+    }
+
     private static void runDuke() {
         display("Hello I'm Duke\nWhat can I do for you?");
         Scanner scanner = new Scanner(System.in);
@@ -146,6 +169,12 @@ public class Duke {
             } else if (input.startsWith("done")) {
                 try {
                     markDone(input);
+                } catch (DukeException e) {
+                    display(e.getMessage());
+                }
+            } else if (input.startsWith("delete")) {
+                try {
+                    deleteTask(input);
                 } catch (DukeException e) {
                     display(e.getMessage());
                 }

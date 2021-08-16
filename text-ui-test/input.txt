@@ -4,14 +4,19 @@ deadline ip project /by Sunday
 done 5
 todo take a break
 todo
+done 1
+delete 1
 event CS2103T Lecture /at Friday 1600
 list
 event meet up with Adolph Blaine Charles David Earl Frederick Gerald Hubert Irvin John Kenneth Lloyd Martin Nero Oliver Paul Quincy Randolph Sherman Thomas Uncas Victor William Xerxes Yancy Zeus Wolfeschlegelsteinhausenbergerdorffwelchevoralternwarengewissenhaftschaferswessenschafewarenwohlgepflegeundsorgfaltigkeitbeschutzenvonangreifendurchihrraubgierigfeindewelchevoralternzwolftausendjahresvorandieerscheinenvanderersteerdemenschderraumschiffgebrauchlichtalsseinursprungvonkraftgestartseinlangefahrthinzwischensternartigraumaufdersuchenachdiesternwelchegehabtbewohnbarplanetenkreisedrehensichundwohinderneurassevonverstandigmenschlichkeitkonntefortpflanzenundsicherfreuenanlebenslanglichfreudeundruhemitnichteinfurchtvorangreifenvonandererintelligentgeschopfsvonhinzwischensternartigraum /at Sunday 12pm
 event cancel previous event
 done 4
+delete -2
 deadline brush teeth /by
-done 1
+done 2
 deadline complete homework /at
 list
 deadline do homework /by no idea :-p
+delete 5
+list
 bye
