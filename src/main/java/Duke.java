@@ -1,11 +1,13 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     static String border = "--------------------------------------------------";
 
+    /**
+     * format multiline data with indentations
+     * @param resp String[] of each line to print
+     * @return combined String for printing
+     */
     private static String formatReply(String[] resp){
 
         String textOut = "";
@@ -18,8 +20,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        ArrayList<Task> taskList = new ArrayList<>();
-
+        TaskArrayList taskList = new TaskArrayList();
 
         String logo = "\n" +
                 "██████╗░░█████╗░███╗░░██╗\t░█████╗░░█████╗░░█████╗░░█████╗░\n" +
@@ -46,13 +47,9 @@ public class Duke {
                     System.out.println(formatReply(new String[]{"BYEEEEEE!","Hope to see you again soon :)"}));
                     System.exit(0);
                 case "list":
-                    // TODO: return list of members
-                    for (Task i : taskList){
-                        System.out.println(i);
-                    }
+                    System.out.println(formatReply(taskList.enumerate()));
                     break;
                 default:
-                    // TODO: add items to list
                     Task toAdd = new Task(userInput);
                     taskList.add(toAdd);
                     System.out.println(formatReply(toAdd.addMsg()));

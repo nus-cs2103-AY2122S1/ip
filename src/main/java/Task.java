@@ -1,18 +1,22 @@
 /**
- * member of a List for Duke to create
+ * Task created by Duke
  */
 public class Task {
-    String storedText;
-    Task(String storedText){
-        this.storedText = storedText;
+    String name;
+    Task(String name){
+        this.name = name;
     }
 
     public String[] addMsg(){
-        return new String[]{"added: " + this.storedText};
+        return new String[]{"added: " + this.name};
+    }
+
+    public String getName(){
+        return this.name;
     }
 
     public String toString(){
-        return this.storedText;
+        return this.name;
     }
 }
 
