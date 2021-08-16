@@ -28,6 +28,10 @@ public class Duke {
                 case "list":
                     System.out.println(this.list());
                     break;
+                case "done":
+                    int idx = Integer.valueOf(currLine[1]);
+                    this.markIdxAsDone(idx);
+                    break;
                 default:
                     System.out.println(this.add(currLine[0]));
             }
@@ -60,6 +64,14 @@ public class Duke {
             }
             return styleResponse(returnBuffer);
         }
+    }
+
+    /**
+     * Marks to-do list at index i (0-count).
+     * @param i 0 is the first item in the list.
+     */
+    public void markIdxAsDone(int i) {
+        this.itemList.get(i - 1).markAsDone();
     }
 
     public static String echo(String inputString) {
