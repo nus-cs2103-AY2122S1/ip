@@ -8,7 +8,8 @@ public class Duke {
      * Simple string array to store inputs
      **/
     private final ArrayList<Task> list;
-    /**
+
+   /**
      * Simple index to keep track of the current element in the list
      **/
     private int index;
@@ -18,165 +19,6 @@ public class Duke {
      **/
     public Duke() {
         this.list = new ArrayList<>();
-        this.index = 0;
-    }
-
-    /**
-     * Private method to append items to the back of the list.
-     *
-     * @param task The text to be appended.
-     */
-    private void append(Task task) {
-        this.list.add(task);
-        this.index++;
-    }
-
-    /**
-     * Simple method that iterates through the task list and prints out all the entries
-     */
-    public void list() {
-        StringBuilder output = new StringBuilder();
-        for (int i = 0; i < this.index; i++) {
-            // i + 1 is used to start indexing from 1
-            output.append(i + 1).append(". ");
-            output.append(this.list.get(i).toString());
-            // ensure the newline is not added on the last element
-            if (i != this.index - 1) {
-                output.append("\n");
-            }
-        }
-        this.printMsg(String.format("Here are the tasks in your list:\n%s", output.toString()));
-    }
-
-    /**
-     * Method to be called when the first argument to the input is "done".
-     * Parses the second argument as an integer and checks if it is a valid index.
-     * If valid, marks the task that is currently stored in memory to be complete.
-     *
-     * @param text Command line argument string
-     */
-    private void done(String text) throws DukeException {
-        // check for the existence of the second argument and that it can be parsed to an int for lookup
-        String[] splitted = text.split(" ");
-        if (splitted.length < 2) {
-            throw new DukeException("Command is missing an argument 'index'.");
-        }
-
-        String dirtyInt = splitted[1];
-
-
-        // ensure that it is defined
-        if (dirtyInt != null) {
-            // try to parse it into an int
-            try {
-                int lookup = Integer.parseInt(dirtyInt);
-                if (lookup < 1) {
-                    throw new DukeException(String.format("The specified task number %d does not exist. Enter a number that is at least 1.", lookup));
-                } else if (lookup < this.index + 1) {
-                    Task task = this.list.get(lookup - 1);
-                    task.markAsDone();
-                    this.printMsg(String.format("Nice! I've marked this task as done:\n  %s", task));
-                } else {
-                    throw new DukeException(String.format("The task number %s is invalid, please enter a valid " +
-                            "number.", lookup));
-                }
-            } catch (NumberFormatException e) {
-                throw new DukeException(String.format("The specified task number %s, is not a valid integer, please " +
-                        "enter a valid numeric task number.", dirtyInt));
-            }
-        } else {
-            System.out.println(Arrays.toString(splitted));
-        }
-    }
-
-
-    private Task delete(String input) throws DukeException {
-        String[] splitted = input.split("\\s");
-        if (splitted.length < 2) {
-            throw new DukeException("Command is missing a positional argument 'index'.");
-        } else {
-            try {
-                int index = Integer.parseInt(splitted[1]) - 1;
-                if (index < 0 || index >= this.index) {
-                    throw new DukeException("Invalid index specified.");
-                } else {
-                    Task itemToRemove = this.list.get(index);
-                    this.list.remove(index);
-                    this.index--;
-                    return itemToRemove;
-                }
-            } catch (NumberFormatException e) {
-                throw new DukeException("Command contains an illegitimate character for positional argument 'index'");
-            }
-        }
-
-    }
-
-    public Deadline deadline(String text) throws DukeException {
-        String[] splitted = text.split("\\s");
-        if (splitted.length < 2) {
-            throw new DukeException("Command is missing an argument 'deadline description'.");
-        } else {
-            int index = this.linearScan(splitted, "/by");
-            if (index < 0) {
-                throw new DukeException("Command is missing the keyword /by.");
-            } else if (index == 1) {
-                throw new DukeException("The description body cannot be empty!");
-            } else {
-                if (splitted.length - 1 == index) {
-                    throw new DukeException("The deadline cannot be empty!");
-                }
-                String description = String.join(" ", Arrays.copyOfRange(splitted, 1, index));
-                String by = String.join(" ", Arrays.copyOfRange(splitted, index + 1, splitted.length));
-                Deadline newDeadline = new Deadline(description, by);
-                this.append(newDeadline);
-                return newDeadline;
-            }
-        }
-    }
-
-    public Event event(String text) throws DukeException {
-        String[] splitted = text.split("\\s");
-        if (splitted.length < 2) {
-            throw new DukeException("Command is missing an argument 'index'.");
-        } else {
-            int index = this.linearScan(splitted, "/at");
-            if (index < 0) {
-                throw new DukeException("Command is missing the keyword /at.");
-            } else if (index == 1) {
-                throw new DukeException("The description body cannot be empty!");
-            } else {
-                if (splitted.length - 1 == index) {
-                    throw new DukeException("The deadline cannot be empty!");
-                }
-                String description = String.join(" ", Arrays.copyOfRange(splitted, 1, index));
-                String at = String.join(" ", Arrays.copyOfRange(splitted, index + 1, splitted.length));
-                Event newEvent = new Event(description, at);
-                this.append(newEvent);
-                return newEvent;
-            }
-        }
-    }
-
-    public Todo todo(String text) throws DukeException {
-        String[] splitted = text.split("\\s");
-        if (splitted.length < 2) {
-            throw new DukeException("The description body cannot be empty!");
-        } else {
-            String description = String.join(" ", Arrays.copyOfRange(splitted, 1, splitted.length));
-            Todo newTodo = new Todo(description);
-            this.append(newTodo);
-            return newTodo;
-        }
-    }
-
-    private <T> int linearScan(T[] array, T finder) {
-        for (int i = 0; i < array.length; i++) {
-            if (finder.equals(array[i])) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     /**
@@ -184,132 +26,30 @@ public class Duke {
      *
      * @param text The text to be printed.
      */
-    private void printMsg(String text) {
+    public static void printMsg(String text) {
         String bar = "===============================================";
         System.out.printf("%s\n%s\n%s\n", bar, text, bar);
-    }
-
-    private void printAdded(String text) {
-        String count = String.format("Now you have %d %s in the list", this.index, this.index > 1 ? "tasks" : "task");
-        this.printMsg(String.format("Got it. I've added this task:\n  %s\n%s.",
-                text, count));
-    }
-
-    private void printDeleted(String text) {
-        String count = String.format("Now you have %d %s in the list", this.index, this.index > 1 ? "tasks" : "task");
-        this.printMsg(String.format("Noted. I've removed this task:\n  %s\n%s", text, count));
     }
 
     /**
      * Method that listens and scans for user input.
      * Program will exit when the command "bye" is given to the scanner.
      */
-    public void listen() {
+    public void listen() throws DukeException {
         Scanner scanner = new Scanner(System.in);
         this.printMsg("Hello! I'm Duke\nWhat can I do for you?");
-        boolean terminate = false;
-        while (!terminate && scanner.hasNextLine()) {
+        boolean terminate = true;
+        while (terminate && scanner.hasNextLine()) {
             String scannedLine = scanner.nextLine();
-            String text = scannedLine.toLowerCase();
-            // get the first word of the text
-            Optional<DukeCommands> prefix = DukeCommands.getCommand(text.split(" ")[0]);
+            Optional<DukeCommands> prefix = DukeCommands.getCommand(scannedLine.split(" ")[0]);
             DukeCommands command = prefix.orElseGet(() -> DukeCommands.INVALID);
-            switch (command) {
-                // break out of the while loop
-                case BYE: {
-                    this.printMsg("Bye. Hope to see you again soon!");
-                    scanner.close();
-                    terminate = true;
-                }
-                // list out the items in the list if "list" is called
-                case LIST: {
-                    this.list();
-                    break;
-                }
-
-                case DONE: {
-                    try {
-                        this.done(text);
-                    } catch (DukeException e) {
-                        this.printMsg(e.toString());
-                    }
-                    break;
-                }
-
-                case EVENT: {
-                    try {
-                        Event event = this.event(text);
-                        this.printAdded(event.toString());
-                    } catch (DukeException e) {
-                        this.printMsg(e.toString());
-                    }
-                    break;
-                }
-
-                case DEADLINE: {
-                    try {
-                        Deadline deadline = this.deadline(text);
-                        this.printAdded(deadline.toString());
-                    } catch (DukeException e) {
-                        this.printMsg(e.toString());
-                    }
-                    break;
-                }
-
-                case TODO: {
-                    try {
-                        Todo todo = this.todo(text);
-                        this.printAdded(todo.toString());
-                    } catch (DukeException e) {
-                        this.printMsg(e.toString());
-                    }
-                    break;
-
-                }
-                case DELETE: {
-                    try {
-                        Task deleted = this.delete(text);
-                        this.printDeleted(deleted.toString());
-                    } catch (DukeException e) {
-                        this.printMsg(e.toString());
-                    }
-                    break;
-                }
-
-                default: {
-                    this.printMsg("Sorry, I don't know what that command means.");
-                    break;
-                }
+            try {
+                terminate = command.action.run(Parser.parseCommand(scannedLine), this.list);
+            } catch(DukeException e) {
+                printMsg(e.toString());
             }
         }
     }
 
-
-    /**
-     * Enum for handling user command
-     **/
-    public enum DukeCommands {
-        BYE("bye"),
-        LIST("list"),
-        DONE("done"),
-        EVENT("event"),
-        DELETE("delete"),
-        DEADLINE("deadline"),
-        TODO("todo"),
-        INVALID("invalid");
-
-
-        final String command;
-
-        DukeCommands(String command) {
-            this.command = command;
-        }
-
-        public static Optional<DukeCommands> getCommand(String command) {
-            return Arrays.stream(DukeCommands.values()).filter(x ->
-                    command.startsWith(x.command)
-            ).findFirst();
-        }
-    }
 
 }
