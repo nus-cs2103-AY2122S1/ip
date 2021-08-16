@@ -45,5 +45,24 @@ Here are the tasks in your list:
 ____________________________________________________________
 
 Enter command: ____________________________________________________________
+Got it. I've added this task: 
+  [T][ ] eat
+Now you have 4 tasks in the list.
+____________________________________________________________
+
+Enter command: ____________________________________________________________
+Noted! I've removed this task: 
+  [T][ ] borrow book
+Now you have 3 tasks in the list.
+____________________________________________________________
+
+Enter command: ____________________________________________________________
+Here are the tasks in your list: 
+1.[D][X] return book  (by: Sunday)
+2.[E][ ] project meeting  (at: Mon 2-4pm)
+3.[T][ ] eat
+____________________________________________________________
+
+Enter command: ____________________________________________________________
 Bye. Hope to see you again soon!
 ____________________________________________________________

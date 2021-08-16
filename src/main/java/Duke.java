@@ -28,7 +28,7 @@ public class Duke {
 
         while (!input.equals("bye")) {
             lineGenerator();
-            Task t = null;
+            Task t;
             if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list: ");
                 for (int i = 0; i < list.size(); i++) {
@@ -39,6 +39,13 @@ public class Duke {
                 String[] splitStr = input.split("\\s+");
                 System.out.print("  ");
                 list.get(Integer.parseInt(splitStr[1]) - 1).markTaskDone();
+            } else if (input.startsWith("delete")) {
+                System.out.println("Noted! I've removed this task: ");
+                String[] splitStr = input.split("\\s+");
+                System.out.print("  ");
+                System.out.println(list.get(Integer.parseInt(splitStr[1]) - 1));
+                list.remove(Integer.parseInt(splitStr[1]) - 1);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
             } else {
 
                 if (input.startsWith("todo")) {
@@ -50,12 +57,12 @@ public class Duke {
                     }
                 } else if (input.startsWith("deadline")) {
                     int slashPosition = input.indexOf('/');
-                    String description = input.substring(9, slashPosition);
+                    String description = input.substring("deadline".length() + 1, slashPosition);
                     String by = input.substring(slashPosition + 4);
                     t = new Deadline(description, by);
                 } else if (input.startsWith("event")) {
                     int slashPosition = input.indexOf('/');
-                    String description = input.substring(6, slashPosition);
+                    String description = input.substring("event".length() + 1, slashPosition);
                     String at = input.substring(slashPosition + 4);
                     t = new Event(description, at);
                 } else {
