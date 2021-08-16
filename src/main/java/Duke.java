@@ -28,6 +28,20 @@ public class Duke {
         printLine();
     }
 
+    /**
+     * Pretty print the tasks list with the horizontal lines.
+     *
+     * @param tasks Task[] Array of Task
+     * @param count num of tasks to print
+     */
+    public static void printTasks(Task[] tasks, int count) {
+        printLine();
+        for (int i = 0; i < count; i++) {
+            printWithTabIndent(String.format("%d. %s", i + 1, tasks[i].toString()));
+        }
+        printLine();
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -37,24 +51,51 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Scanner scanner = new Scanner(System.in);
-        String[] tasks = new String[100];
-        int count = -1;
+        Task[] tasks = new Task[100];
+        int count = 0;
 
         printMessage("Hello! I'm Duke\n    What can I do for you?");
         String message = scanner.nextLine();
         while (!message.equals("bye")) {
-            if (message.equals("list") && count == -1) {
+            message = message.trim();
+            if (message.equals("list") && count == 0) {
                 printMessage("Nothing in the list!");
             } else if (message.equals("list")) {
-                printLine();
-                for (int i = 0; i <= count; i++) {
-                    printWithTabIndent(String.format("%d. %s", i + 1, tasks[i]));
+                printTasks(tasks, count);
+            } else if (message.equals("done")) {
+                printMessage("Please enter the task number.");
+            } else if (message.matches("^done [a-zA-Z]+.*$")) {
+                printMessage("Invalid Input");
+            } else if (message.matches("^done \\d+$")) {
+                String taskNo = message.split(" ")[1];
+                try {
+                    int taskNoInt = Integer.parseInt(taskNo) - 1;
+                    if (count == 0) {
+                        printMessage("Nothing in the list!");
+                    } else if (taskNoInt > count || taskNoInt < 1) {
+                        printMessage(String.format("Enter a valid number between 1 - %d", count));
+                    } else if (tasks[taskNoInt].isDone()) {
+                        printMessage(
+                                String.format("Task %s is already done!\n    %s",
+                                        taskNo,
+                                        tasks[taskNoInt].toString()
+                                )
+                        );
+                    } else {
+                        tasks[taskNoInt].markAsDone();
+                        printMessage(
+                                String.format("Nice! I've marked this task as done:\n       %s",
+                                        tasks[taskNoInt].toString()
+                                )
+                        );
+                    }
+                } catch (NumberFormatException e) {
+                    printMessage("Not a number!");
                 }
-                printLine();
-            } else {
+            } else if (!message.equals("")) {
                 printMessage("added: " + message);
+                tasks[count] = new Task(message);
                 count++;
-                tasks[count] = message;
             }
             message = scanner.nextLine();
         }
