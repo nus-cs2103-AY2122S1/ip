@@ -4,7 +4,7 @@ public class Duke {
     private Duke() {
         listener = new Listener();
     }
-    
+
     private void start(){
         Display.intro();
         listener.startListen();
