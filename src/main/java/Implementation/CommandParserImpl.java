@@ -6,7 +6,6 @@ import Model.Command;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * An entity that takes in the input from the console and parse it to valid command or throw exception
@@ -22,7 +21,7 @@ public class CommandParserImpl implements CommandParser {
 	@Override
 	public void processInput(String input) {
 		List<String> parsedCommands = Arrays.asList(input.split(" "));
-
+		
 		switch (parsedCommands.get(0)) {
 			case "bye":
 				// ignore the rest of the arguments here
