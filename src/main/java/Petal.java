@@ -76,7 +76,7 @@ public class Petal {
                     wrongFormat();
                     break;
             }
-        } catch (EmptyDescException | InvalidInputException e) {
+        } catch (PetalException e) {
             System.out.println(indentation + "\n" + e.getMessage());
             requiredFormat();
         }
@@ -92,9 +92,9 @@ public class Petal {
     public void requiredFormat() {
         String todo = "Use 'todo <insert activity>' to create a to-do!";
         String deadline = "\nUse 'deadline <insert activity> /by <insert deadline>' "
-                + "to create an activity with a deadline!";
+                          + "to create an activity with a deadline!";
         String event = "\nUse 'event <insert activity> /at <insert start/end time>' "
-                + "to create an activity with a start/end time!";
+                          + "to create an activity with a start/end time!";
         String delete = "\nUse 'delete <insert task number> to delete a task!";
         String done = "\nUse 'done <insert task number>' to mark task as done!\n";
         System.out.println(todo + deadline + event + delete + done + indentation);
@@ -160,10 +160,10 @@ public class Petal {
                                            + toBeDeleted
                                            + "\nYou now have " + tasks.size() + " task(s)!\n"
                                            + indentation);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new EmptyDescException("No task number given! Please enter a valid index!\n");
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new InvalidInputException("Invalid task number given! Please enter another value!\n");
+        } catch (ArrayIndexOutOfBoundsException e) { //No task number given
+            throw new EmptyDescException("No task number given! Please enter a valid index!\n", e);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) { //Invalid task number
+            throw new InvalidInputException("Invalid task number given! Please enter another value!\n", e);
         }
     }
 
@@ -203,7 +203,7 @@ public class Petal {
             taskToBeCompleted.taskDone();
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             //Parsed string is not within size of history or no index given
-            throw new InvalidInputException("That was an invalid index! Please try again!\n");
+            throw new InvalidInputException("That was an invalid index! Please try again!\n", e);
         }
     }
 

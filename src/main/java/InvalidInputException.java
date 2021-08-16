@@ -5,11 +5,25 @@
  */
 public class InvalidInputException extends PetalException {
 
+    //The exception message
+    private String message;
+    //Initialized if this exception is used as a wrapper
+    private Throwable cause;
+
     /**
      * Constructor for InvalidInputException
      * @param message The exception message
      */
     public InvalidInputException(String message) {
         super(message);
+    }
+
+    /**
+     * Constructor for InvalidInputException (Used as wrapper)
+     * @param message The exception message
+     * @param cause Initial cause
+     */
+    public InvalidInputException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

@@ -1,31 +1,71 @@
 -----------------------------------------------------------------------------------------------------------------
 Welcome to Petal (•◡•)/ 
 I am the best chat bot you'll meet! Don't be shy, say something! :P
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+Okay. I've added this task:
+[D][ ] go for a jog (by: 8pm today)
+You now have 1 task(s)!
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+Okay. I've added this task:
+[D][ ] use a computer (by: 7pm tomorrow)
+You now have 2 task(s)!
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+Okay. I've added this task:
+[E][ ] using a pc (at: 8pm tonight till 7pm tomorrow)
+You now have 3 task(s)!
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+Okay. I've added this task:
+[T][ ] listening to music
+You now have 4 task(s)!
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+The description cannot be empty! Enter a valid one! :(
 
 Use 'todo <insert activity>' to create a to-do!
 Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
 Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
+Use 'delete <insert task number> to delete a task!
 Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-Got it. I've added this task.
-[D][ ] go for a jog (by: 8pm today)
-There are now 1 task(s) in your list!
+The format used was wrong! Try again :(
+
+Use 'todo <insert activity>' to create a to-do!
+Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
+Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
+Use 'delete <insert task number> to delete a task!
+Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-Got it. I've added this task.
-[D][ ] use a computer (by: 7pm tomorrow)
-There are now 2 task(s) in your list!
+The format used was wrong! Try again :(
+
+Use 'todo <insert activity>' to create a to-do!
+Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
+Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
+Use 'delete <insert task number> to delete a task!
+Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-Got it. I've added this task.
-[E][ ] using a pc (at: 8pm tonight till 7pm tomrrow)
-There are now 3 task(s) in your list!
+The format used was wrong! Try again :(
+
+Use 'todo <insert activity>' to create a to-do!
+Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
+Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
+Use 'delete <insert task number> to delete a task!
+Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-Got it. I've added this task.
-[T][ ] listening to music 
-There are now 4 task(s) in your list!
+The format used was wrong! Try again :(
+
+Use 'todo <insert activity>' to create a to-do!
+Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
+Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
+Use 'delete <insert task number> to delete a task!
+Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 You have completed the task: 'go for a jog '!
@@ -40,14 +80,14 @@ You have completed the task: 'using a pc '!
 I am so happy for you!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-You have completed the task: 'listening to music '!
+You have completed the task: 'listening to music'!
 I am so happy for you!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 1. [D][X] go for a jog (by: 8pm today)
 2. [D][X] use a computer (by: 7pm tomorrow)
-3. [E][X] using a pc (at: 8pm tonight till 7pm tomrrow)
-4. [T][X] listening to music 
+3. [E][X] using a pc (at: 8pm tonight till 7pm tomorrow)
+4. [T][X] listening to music
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 You're leaving :( I hope you return soon!
