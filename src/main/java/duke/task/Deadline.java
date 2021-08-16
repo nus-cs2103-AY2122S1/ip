@@ -4,7 +4,7 @@ package duke.task;
  * Encapsulates task Deadline.
  *
  * @author limzk126
- * @version Level-5
+ * @version Level-6
  */
 public class Deadline extends Task{
     protected String by;
@@ -22,6 +22,6 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by + ")\n";
     }
 }

@@ -4,7 +4,7 @@ package duke.task;
  * Encapsulates event date.
  *
  * @author limzk126
- * @version Level-5
+ * @version Level-6
  */
 public class Event extends Task {
     protected String at;
@@ -22,6 +22,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")\n";
     }
 }

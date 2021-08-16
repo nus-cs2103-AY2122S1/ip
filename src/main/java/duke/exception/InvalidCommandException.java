@@ -4,7 +4,7 @@ package duke.exception;
  * Exception class to handle the Invalid commands.
  *
  * @author limzk126
- * @version Level-5
+ * @version Level-6
  */
 public class InvalidCommandException extends DukeException {
     /**

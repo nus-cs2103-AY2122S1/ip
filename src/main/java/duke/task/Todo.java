@@ -4,7 +4,7 @@ package duke.task;
  * A task without any deadline.
  *
  * @author limzk126
- * @version Level-5
+ * @version Level-6
  */
 public class Todo extends Task {
     /**
@@ -18,6 +18,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString() + "\n";
     }
 }

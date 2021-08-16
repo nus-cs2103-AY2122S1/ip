@@ -4,7 +4,7 @@ package duke.task;
  * Encapsulates task description and status of completion.
  *
  * @author limzk126
- * @version Level-5
+ * @version Level-6
  */
 public class Task {
     protected String description;
@@ -17,7 +17,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     public String getStatusIcon() {

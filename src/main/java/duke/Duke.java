@@ -1,6 +1,11 @@
 package duke;
 
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidDateException;
+import duke.exception.InvalidIndexException;
+import duke.exception.InvalidNoDateException;
+import duke.exception.InvalidCommandException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -14,7 +19,7 @@ import java.util.Scanner;
  * Driver class to simulate the 'Annie' chat bot program.
  *
  * @author limzk126
- * @version Level-5
+ * @version Level-6
  */
 public class Duke {
     private final String LINE = "_________________________________________________________________"
@@ -23,8 +28,9 @@ public class Duke {
     private final String GOODBYE_MSG = "Bye. See you soon!";
     private final String LIST_MSG = "Here are the tasks in your list:\n";
     private final String ADD_MSG = "Gotcha. I've added this task:\n";
-    private final String NUMTASK_MSG = "You have %d tasks in your list now.\n";
-    private final String DONE_MSG = "I have marked this task as done: \n";
+    private final String NUMTASK_MSG = "Your current task count: ";
+    private final String DONE_MSG = "I have marked this task as done:\n";
+    private final String DELETE_MSG = "I have deleted this task:\n";
 
     // List to store user task inputs.
     private final List<Task> taskList = new ArrayList<>();
@@ -39,11 +45,6 @@ public class Duke {
     private void printText(String text) {
         System.out.printf("%s", LINE);
         System.out.println(text);
-
-        if (!text.equals(GOODBYE_MSG)) {
-            System.out.printf(NUMTASK_MSG, taskList.size());
-        }
-
         System.out.printf("%s\n", LINE);
     }
 
@@ -69,7 +70,13 @@ public class Duke {
     private void completeTask(String text) throws DukeException {
         String stringTaskNum = text.substring(text.indexOf(' ') + 1);
 
-        int num = Integer.parseInt(stringTaskNum);
+        int num;
+        // handles non integer value input for task number.
+        try {
+            num = Integer.parseInt(stringTaskNum);
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException();
+        }
 
         // Check if task number is within bounds.
         if (num <= 0 || num > taskList.size()) {
@@ -80,8 +87,31 @@ public class Duke {
         task.markDone();
 
         // Message to notify user.
-        String message = DONE_MSG + task;
-        printText(message);
+        printText(DONE_MSG + task + NUMTASK_MSG + taskList.size());
+    }
+
+    // Deletes task from list.
+    private void deleteTask(String text) throws DukeException {
+        String stringTaskNum = text.substring(text.indexOf(' ') + 1);
+
+        int num;
+        // handles non integer value input for task number.
+        try {
+            num = Integer.parseInt(stringTaskNum);
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException();
+        }
+
+        // Check if task number is within bounds.
+        if (num <= 0 || num > taskList.size()) {
+            throw new InvalidIndexException();
+        }
+
+        Task task = taskList.get(num);
+        taskList.remove(num);
+
+        // Message to notify user.
+        printText(DELETE_MSG + task + NUMTASK_MSG + taskList.size());
     }
 
     // Adds task without deadline to list and notifies user.
@@ -98,8 +128,7 @@ public class Duke {
         taskList.add(task);
 
         // Message to notify user.
-        String message = ADD_MSG + task;
-        printText(message);
+        printText(ADD_MSG + task + NUMTASK_MSG + taskList.size());
     }
 
     // Adds task with deadline to list and notifies user.
@@ -123,8 +152,7 @@ public class Duke {
         taskList.add(task);
 
         // Message to notify user.
-        String message = ADD_MSG + task;
-        printText(message);
+        printText(ADD_MSG + task + NUMTASK_MSG + taskList.size());
     }
 
     // Adds event to list and notifies user.
@@ -148,8 +176,7 @@ public class Duke {
         taskList.add(task);
 
         // Message to notify user.
-        String message = ADD_MSG + task;
-        printText(message);
+        printText(ADD_MSG + task + NUMTASK_MSG + taskList.size());
     }
 
     // Checks if the command with date is in valid format.
@@ -184,7 +211,11 @@ public class Duke {
         } else if (text.matches("event(.*)")) {
             // Add an event.
             addEvent(text);
+        } else if (text.matches("delete(.*)")) {
+            // Delete a task.
+            deleteTask(text);
         } else {
+            // Command not valid.
             throw new InvalidCommandException();
         }
     }
