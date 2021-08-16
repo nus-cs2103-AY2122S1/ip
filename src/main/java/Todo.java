@@ -37,4 +37,16 @@ public class Todo extends Task{
                 + statusIcon
                 + this.description;
     }
+
+    @Override
+    public void markComplete() {
+        if (isDone) {
+            System.out.println("`" + this.description.substring(1) + "`" + " is already completed.");
+        } else {
+            this.isDone = true;
+            System.out.println(
+                    "Finally! Took you long enough to complete:" + this.description
+            );
+        }
+    }
 }

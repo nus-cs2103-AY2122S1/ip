@@ -72,7 +72,7 @@ public class Deadline extends Task {
     @Override
     public void markComplete() {
         if (this.isDone) {
-            System.out.println("`" + this.description + "`" + " is already completed.");
+            System.out.println("`" + this.description.substring(1) + "`" + " is already completed.");
         } else {
             System.out.println("Completed: "
                             + this.description
