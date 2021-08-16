@@ -30,4 +30,9 @@ public enum Command {
         }
         throw new UnknownCommandException();
     }
+
+    @Override
+    public String toString() {
+        return text;
+    }
 }
