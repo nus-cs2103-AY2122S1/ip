@@ -17,4 +17,9 @@ done 7
 done orange
 done
 list
+delete 2
+delete 9
+delete apple
+delete
+list
 bye

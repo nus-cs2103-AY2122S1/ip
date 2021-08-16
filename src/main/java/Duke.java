@@ -69,7 +69,7 @@ public class Duke {
         taskList.add(task);
         noOfTasks++;
         System.out.printf("Got it. I've added this task:%n  %s%nNow you have %d tasks in the list.%n",
-            task, noOfTasks);
+                task, noOfTasks);
     }
 
     /**
@@ -91,15 +91,39 @@ public class Duke {
      */
     private static void markTaskAsDone(String[] splitInput) throws NoTaskNumException, InvalidTaskNumException {
         try {
-            // If splitInput length is 1, that means no number is inputted.
+            // If splitInput length is 1, that means no task number is inputted.
             if (splitInput.length == 1) {
                 throw new NoTaskNumException();
             }
             int taskNo = Integer.parseInt(splitInput[1]);
             Task task = taskList.get(taskNo - 1);
             task.markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.printf("  %s%n", task);
+            System.out.printf("Nice! I've marked this task as done:%n  %s%n", task);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            // When non numeric or out of bounds task number is inputted.
+            throw new InvalidTaskNumException();
+        }
+    }
+
+    /**
+     * Deletes the task with taskNo specified and prints the task deleted.
+     *
+     * @param splitInput the user input split by space.
+     * @throws NoTaskNumException if no task number for delete is inputted.
+     * @throws InvalidTaskNumException if invalid task number for deletion is inputted.
+     */
+    private static void deleteTask(String[] splitInput) throws NoTaskNumException, InvalidTaskNumException {
+        try {
+            // If splitInput length is 1, that means no task number is inputted.
+            if (splitInput.length == 1) {
+                throw new NoTaskNumException();
+            }
+            int taskNo = Integer.parseInt(splitInput[1]);
+            Task task = taskList.get(taskNo - 1);
+            taskList.remove(taskNo - 1);
+            noOfTasks--;
+            System.out.printf("Noted. I've removed this task:%n  %s%nNow you have %d tasks in the list.%n", task,
+                    noOfTasks);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             // When non numeric or out of bounds task number is inputted.
             throw new InvalidTaskNumException();
@@ -179,20 +203,23 @@ public class Duke {
                     printTasks();
                 } else {
                     switch (splitInput[0]) {
-                        case "done":
-                            markTaskAsDone(splitInput);
-                            break;
-                        case "todo":
-                            addToList(createTodo(userInput));
-                            break;
-                        case "deadline":
-                            addToList(createDeadline(userInput));
-                            break;
-                        case "event":
-                            addToList(createEvent(userInput));
-                            break;
-                        default:
-                            throw new UnknownCommandException(splitInput[0]);
+                    case "done":
+                        markTaskAsDone(splitInput);
+                        break;
+                    case "todo":
+                        addToList(createTodo(userInput));
+                        break;
+                    case "deadline":
+                        addToList(createDeadline(userInput));
+                        break;
+                    case "event":
+                        addToList(createEvent(userInput));
+                        break;
+                    case "delete":
+                        deleteTask(splitInput);
+                        break;
+                    default:
+                        throw new UnknownCommandException(splitInput[0]);
                     }
                 }
             } catch (NoTaskNumException e) {
@@ -201,12 +228,12 @@ public class Duke {
                 System.out.println("☹ OOPS!!! The task number inputted is invalid.");
             } catch (NoDateTimeInputException e) {
                 switch (e.command) {
-                    case DEADLINE:
-                        System.out.println("☹ OOPS!!! The day of a deadline cannot be empty.");
-                        break;
-                    case EVENT:
-                        System.out.println("☹ OOPS!!! The date and time of a event cannot be empty.");
-                        break;
+                case DEADLINE:
+                    System.out.println("☹ OOPS!!! The day of a deadline cannot be empty.");
+                    break;
+                case EVENT:
+                    System.out.println("☹ OOPS!!! The date and time of a event cannot be empty.");
+                    break;
                 }
             } catch (NoDescriptionException e) {
                 System.out.printf("☹ OOPS!!! The description of a %s cannot be empty.%n", e.command);
