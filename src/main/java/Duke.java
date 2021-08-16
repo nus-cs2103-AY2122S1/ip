@@ -13,26 +13,62 @@ public class Duke {
     }
 
     public static void add(String str) {
-        Task newTask = new Task(str);
+        Task newTask = null;
+        String[] arr1 = str.split(" ", 2);
+        String type = arr1[0];
+        String desc;
+        String date;
+        String[] arr2;
+
+        switch (type) {
+            case "todo":
+                desc = arr1[1];
+                newTask = new Todo(desc);
+                break;
+            case "deadline":
+                arr2 = arr1[1].split(" /", 2);
+                desc = arr2[0];
+                date = arr2[1].substring(3);
+                newTask = new Deadline(desc, date);
+                break;
+            case "event":
+                arr2 = arr1[1].split(" /", 2);
+                desc = arr2[0];
+                date = arr2[1].substring(3);
+                newTask = new Event(desc, date);
+                break;
+        }
+
         list[listIndex] = newTask;
-        System.out.println("added: " + str);
+        String word;
+        if (listIndex == 0) {
+            word = "task";
+        } else {
+            word = "tasks";
+        }
+
+        System.out.println("Got it. I've added this task: ");
+        System.out.printf("   [%s][%s] %s\n", newTask.getType(), newTask.getStatusIcon(), newTask.getDescription());
+        System.out.printf("Now you have %d %s in the list.%n", listIndex + 1, word);
+
         listIndex++;
     }
 
     public static void complete(int completedTask) {
-        if (!list[completedTask - 1].isDone) {
-            list[completedTask - 1].markDone();
+        Task currentTask = list[completedTask - 1];
+        if (!currentTask.isDone) {
+            currentTask.markDone();
         }
 
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("   [X] " + list[completedTask - 1].getDescription());
+        System.out.printf("[%s][X] %s", currentTask.getType(), currentTask.getDescription());
     }
 
     public static void getList() {
         int i = 0;
         while (i < listIndex) {
             int num = i+1;
-            System.out.println(num + ". [" + list[i].getStatusIcon() + "] " + list[i].getDescription());
+            System.out.printf("%d. [%s][%s] %s\n", num, list[i].getType(), list[i].getStatusIcon(), list[i].getDescription());
             i++;
         }
     }
@@ -54,7 +90,6 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String str;
-
 
         while (!(str = sc.nextLine()).equals("bye")) {
             if (str.equals("list")) {
