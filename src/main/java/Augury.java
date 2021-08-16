@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Augury {
-    static String VER     = "v0.1.0"; // Level-1: Greet, Echo Exit
+    static String VER     = "v0.2.0"; // Level-2: Add, List
     static String WELCOME =
             "    +-------------------------------+\n" +
             "    | *                 *         * |\n" +
@@ -25,6 +25,22 @@ public class Augury {
         System.out.println(WELCOME);
     }
 
+    public void handleAddTask(String task) {
+        taskList.add(task);
+        speak("added task: " + task);
+    }
+
+    public void handleDisplayTasks() {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            res.append(Integer.toString(i + 1))
+                .append(". ")
+                .append(taskList.get(i))
+                .append("\n\t ");
+        }
+        speak(res.toString());
+    }
+
     public void loop() {
         Scanner scan = new Scanner(System.in);
         speak("Hello! How may I help you?");
@@ -34,8 +50,10 @@ public class Augury {
             if (input.equals("bye")) {
                 speak("Goodbye!");
                 break;
+            } else if (input.equals("list")) {
+                handleDisplayTasks();
             } else {
-                speak(input);
+                handleAddTask(input);
             }
         }
 
