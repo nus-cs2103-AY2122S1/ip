@@ -24,7 +24,7 @@ public class Duke {
                 System.out.println("    Here are the tasks in your list:");
                 for (int j=0; j < arr.length; j++){
                     if (arr[j] != null) {
-                        System.out.println("    " + (j + 1) + ". " + "[" + arr[j].getStatusIcon() + "] " + arr[j].getTask());
+                        System.out.println("    " + (j + 1) + ". " + arr[j].toString());
                     }
                     else {
                         break;
@@ -44,6 +44,40 @@ public class Duke {
                 int ind = Integer.parseInt((inp.split("\\s"))[1])-1;
                 arr[ind].markAsDone();
                 System.out.println("        " + "[" + arr[ind].getStatusIcon() + "] " + arr[ind].getTask());
+                System.out.println("_____________________________________________________________________");
+            }
+            else if (inp.contains("todo")) {
+                String desc = inp.split("\\s",2)[1];
+                Task t= new Todo(desc);
+                arr[i++] = t;
+                System.out.println("_____________________________________________________________________");
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("        " + t.toString());
+                System.out.println("    Now you have " + i + " tasks in a the list.");
+                System.out.println("_____________________________________________________________________");
+            }
+            else if (inp.contains("deadline")) {
+                String desc = ((inp.split("\\s",2)[1]).split("/"))[0];
+                String byText = inp.split("/")[1];
+                String time = byText.split("\\s",2)[1];
+                Task t= new Deadline(desc, time);
+                arr[i++] = t;
+                System.out.println("_____________________________________________________________________");
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("        " + t.toString());
+                System.out.println("    Now you have " + i + " tasks in a the list.");
+                System.out.println("_____________________________________________________________________");
+            }
+            else if (inp.contains("event")) {
+                String desc = ((inp.split("\\s",2)[1]).split("/"))[0];
+                String atText = inp.split("/")[1];
+                String time = atText.split("\\s",2)[1];
+                Task t= new Event(desc, time);
+                arr[i++] = t;
+                System.out.println("_____________________________________________________________________");
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("        " + t.toString());
+                System.out.println("    Now you have " + i + " tasks in a the list.");
                 System.out.println("_____________________________________________________________________");
             }
             else {
