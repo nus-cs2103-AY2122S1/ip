@@ -18,6 +18,9 @@ public class DukeException extends Exception {
             case "todoDesc":
                 this.customMessage = "  OOPS!!! The description of a todo cannot be empty!";
                 break;
+            case "invalidDone":
+                this.customMessage = "  OOPS!!! That is not a valid task index!";
+                break;
             case "invalidInput":
                 this.customMessage = "  OOPS!!! I don't recognise the command you've given me.";
                 break;

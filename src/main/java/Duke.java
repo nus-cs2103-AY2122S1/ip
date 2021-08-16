@@ -29,9 +29,17 @@ public class Duke {
                     }
                     
                 } else if (text.split(" ")[0].equals("done")) { // if done keyword used, calls the Task's setDone()
-                    int toSet = Integer.parseInt(text.split(" ")[1]);
-                    taskList[toSet - 1].setDone();
-                    System.out.print("  Nice! I've marked this task as done:\n    " + taskList[toSet - 1].listEntry() + "\n");
+                    if (text.split(" ").length == 1) {
+                        throw new DukeException("invalidDone");
+                    } else {
+                        int toSet = Integer.parseInt(text.split(" ")[1]);
+                        if (toSet > listLength) {
+                            throw new DukeException("invalidDone");
+                        } else {
+                            taskList[toSet - 1].setDone();
+                            System.out.print("  Nice! I've marked this task as done:\n    " + taskList[toSet - 1].listEntry() + "\n");
+                        }
+                    }
                     
                 } else if (text.split(" ").length > 1){ // task name and details provided, new task to be added
                     Task newTask;
@@ -49,6 +57,7 @@ public class Duke {
                         } else {
                             newTask = new Deadline(details[0], details[1]);
                         }
+                        
                     } else if (taskType.equals("event")) {
                         String[] details = taskDetails.split(" /at ");
                         if (details.length == 1) {
@@ -56,8 +65,10 @@ public class Duke {
                         } else {
                             newTask = new Event(details[0], details[1]);
                         }
+                        
                     } else if (taskType.equals("todo")) {
                         newTask = new Todo(taskDetails);
+                        
                     } else { // taskName is invalid
                         throw new DukeException("invalidInput");
                     }
@@ -68,10 +79,13 @@ public class Duke {
                 } else { // single word command is invalid or incomplete task input
                     if (text.equals("deadline")) {
                         throw new DukeException("deadlineDesc");
+                        
                     } else if (text.equals("event")) {
                         throw new DukeException("eventDesc");
+                        
                     } else if (text.equals("todo")) {
                         throw new DukeException("todoDesc");
+                        
                     } else {
                         throw new DukeException("invalidInput");
                     }
@@ -79,6 +93,9 @@ public class Duke {
                 
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
+
+            } catch (NumberFormatException e) { // throws if the index given in the done command is not an integer
+                System.out.println(new DukeException("invalidDone").getMessage());
                 
             } finally {
                 System.out.println("  ____________________________________________________________\n");
