@@ -32,13 +32,18 @@ public class Duke {
         while(!shouldExit) {
             String userInput = getUserInput();
             switch (userInput) {
+                case "list":
+                    reply(TaskManager.listTasks());
+                    break;
                 case "bye":
                     quit();
                     shouldExit = true;
                     break;
                 default:
-                    // basically echo
-                    reply(userInput);
+                    // basically echoing
+                    Task newTask = new Task(userInput);
+                    TaskManager.addTask(newTask);
+                    reply(String.format("added: %s", newTask.toString()));
             }
         }
     }
