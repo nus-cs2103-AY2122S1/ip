@@ -29,6 +29,10 @@ Nice! I've marked this task as done:
    [D][X] return book  (by:  sunday)
 
 
+Mark Done: Invalid Number, only numbers greater than 0 are accepted
+
+The Done command requires a number, separated by whitespace!
+
 1. [T][ ] fly
 2. [D][X] return book  (by:  sunday)
 3. [E][ ] meeting tmr  (at:  2-4am Sunday)
@@ -47,5 +51,16 @@ The description of Deadline cannot be empty!
 The Deadline Command and Description must be separated by whitespace!
 
 Error, Invalid Command
+
+Noted. I've removed this task: 
+   [D][X] return book  (by:  sunday)
+Now you have 2 tasks in the list.
+
+
+Delete Task: Invalid Number, only numbers greater than 0 are accepted
+
+The Delete command requires a number, separated by whitespace!
+
+Unable to Delete: Task does not exist
 
 Bye. Hope to see you again soon!

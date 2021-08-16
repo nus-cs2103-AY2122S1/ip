@@ -34,6 +34,9 @@ public class FeatureMain {
                 Task task = new Event(command.substring(6), Task.TYPE.E, returnTimeline(command));
                 FeatureMain.commands.add(task);
                 printTask(task);
+            } else if (isDelete(command)) {
+                this.currentCommand = command;
+                deleteTask();
             } else {
                 this.currentCommand = command;
                 // Unknown Command, throw error
@@ -115,7 +118,7 @@ public class FeatureMain {
     }
 
     /**
-     * Checks if it is a 'Event' command
+     * Checks if it is an 'Event' command
      *
      * @throws DukeException Either a syntax error or lack of description
      * @return returns true if it is said command
@@ -128,6 +131,29 @@ public class FeatureMain {
                 throw new DukeException("Event", 0);
             } else {
                 return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if it is a 'Delete' command
+     *
+     * @throws DukeException -
+     * @return returns true if it is said command
+     */
+    private boolean isDelete(String command) throws DukeException {
+        if (command.length() >= 6 && command.startsWith("delete")) {
+            if (command.length() == 6)  {
+                throw new DukeException("The Delete command must be followed by a number!");
+            } else {
+                if (isNumeric(command.substring(7))) {
+                    taskNumber = Integer.parseInt(command.substring(7));
+                    return true;
+                } else {
+                    throw new DukeException("The Delete command requires a number, separated by whitespace!");
+                }
             }
         } else {
             return false;
@@ -203,20 +229,55 @@ public class FeatureMain {
         return commands.toString();
     }
 
-    private String markDone() {
-        if (taskNumber <= commands.size()) {
-            System.out.println("Nice! I've marked this task as done: ");
-
-            Task taskToChange = commands.get(taskNumber - 1);
-            taskToChange.markAsDone();
-
-            System.out.println("   " + taskToChange);
-            newLine();
-            return "   " + taskToChange;
+    /**
+     * Marks tasks as done
+     *
+     * @throws DukeException Handles numbers less than 1
+     * @return returns a String message
+     */
+    private String markDone() throws DukeException {
+        if (taskNumber <= 0) {
+            throw new DukeException("Mark Done:", 2);
         } else {
-            System.out.println("Task does not exist");
-            newLine();
-            return "Task does not exist";
+            if (taskNumber <= commands.size()) {
+                System.out.println("Nice! I've marked this task as done: ");
+
+                Task taskToChange = commands.get(taskNumber - 1);
+                taskToChange.markAsDone();
+
+                System.out.println("   " + taskToChange);
+                newLine();
+                return "   " + taskToChange;
+            } else {
+                throw new DukeException("Task does not exist");
+            }
+        }
+
+    }
+
+    /**
+     * Deletes Tasks from the list
+     *
+     * @throws DukeException Handles numbers less than 1
+     * @return returns a String message
+     */
+    private String deleteTask() throws DukeException {
+        if (taskNumber <= 0) {
+            throw new DukeException("Delete Task:", 2);
+        } else {
+            if (taskNumber <= commands.size()) {
+                System.out.println("Noted. I've removed this task: ");
+
+                Task taskToDelete = commands.get(taskNumber - 1);
+                commands.remove(taskNumber - 1);
+
+                System.out.println("   " + taskToDelete);
+                System.out.println("Now you have " + FeatureMain.commands.size() + " tasks in the list.");
+                newLine();
+                return "   " + taskToDelete;
+            } else {
+                throw new DukeException("Unable to Delete: Task does not exist");
+            }
         }
     }
 

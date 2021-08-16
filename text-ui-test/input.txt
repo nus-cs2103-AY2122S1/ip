@@ -3,6 +3,8 @@ deadline return book /by sunday
 event meeting tmr /at 2-4am Sunday
 list
 done 2
+done -1
+done asda
 list
 todo
 todo1
@@ -11,4 +13,8 @@ eventasfaf
 deadline
 deadlineasfasf
 asfasf
+delete 2
+delete -1
+delete adsad
+delete 7
 bye
