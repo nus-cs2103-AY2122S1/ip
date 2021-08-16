@@ -17,7 +17,7 @@ public class Duke {
                     System.out.println("There are no tasks!");
                 } else {
                     for (int i = 1; i < task.size() + 1; i++) {
-                        System.out.println(task.get(i - 1));
+                        System.out.printf("  %d.%s%n", i, task.get(i - 1));
                     }
                 }
             } else if (input.substring(0, 4).equals("done")) {
@@ -30,10 +30,10 @@ public class Duke {
                     newTask = new Todo(input.substring(5));
                 } else if (input.substring(0, 8).equals("deadline")) {
                     int index = input.indexOf("by");
-                    newTask = new Deadline(input.substring(9, index - 1), input.substring(index + 3));
+                    newTask = new Deadline(input.substring(9, index - 2), input.substring(index + 3));
                 } else if (input.substring(0, 5).equals("event")) {
                     int index = input.indexOf("at");
-                    newTask = new Event(input.substring(6, index - 1), input.substring(index + 3));
+                    newTask = new Event(input.substring(6, index - 2), input.substring(index + 3));
                 } else {
                     newTask = new Task(input);
                 }
