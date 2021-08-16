@@ -19,6 +19,7 @@ public class TaskList {
         res += "\n\t " + tasks.size() + " tasks in total.";
         return res;
     }
+
     public String add(String description, Task.TaskTypes type, String time) {
         String res = "";
         Task t;
@@ -38,6 +39,10 @@ public class TaskList {
         }
         res += "\n\t " + tasks.size() + " tasks in total.";
         return res;
+    }
+
+    public int size() {
+        return tasks.size();
     }
 
     public String markAsDone(ArrayList<Integer> args) {

@@ -5,7 +5,7 @@
 	|   ||                      *   |
 	|   ||   a task manager         |
 	|      *             *          |
-	|             *         v0.4.5  |
+	|             *         v0.5.0  |
 	+-------------------------------+
 	_________________________________
 	 Hello! How may I help you?
@@ -17,13 +17,13 @@
 	_________________________________
 	_________________________________
 	 I've added your event: 
-		[E][ ] item two (at: 22)
+		[E][ ] item two (at: 22/2/2012 2pm)
 	 2 tasks in total.
 	_________________________________
 	_________________________________
 	 Here are your tasks:
 	 1. [T][ ] item one
-	 2. [E][ ] item two (at: 22)
+	 2. [E][ ] item two (at: 22/2/2012 2pm)
 	_________________________________
 	_________________________________
 	 I've added your deadline: 
@@ -33,19 +33,49 @@
 	_________________________________
 	 Here are your tasks:
 	 1. [T][ ] item one
-	 2. [E][ ] item two (at: 22)
+	 2. [E][ ] item two (at: 22/2/2012 2pm)
 	 3. [D][ ] item three (by: next tuesday)
 	_________________________________
 	_________________________________
+	 Description of todo cannot be empty!
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Task 500 does not exist, please try again
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Description of deadline cannot be empty!
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Deadline task must include time! (using /by time)
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Event task must include time! (using /at time)
+	 Please try again.
+	_________________________________
+	_________________________________
+	 Event task must include time! (using /at time)
+	 Please try again.
+	_________________________________
+	_________________________________
+	 I've added your event: 
+		[E][ ] item four (at: tomorrow)
+	 4 tasks in total.
+	_________________________________
+	_________________________________
 	 Nice! I've marked these tasks as done: 
-		[E][X] item two (at: 22)
+		[E][X] item two (at: 22/2/2012 2pm)
 		[D][X] item three (by: next tuesday)
 	_________________________________
 	_________________________________
 	 Here are your tasks:
 	 1. [T][ ] item one
-	 2. [E][X] item two (at: 22)
+	 2. [E][X] item two (at: 22/2/2012 2pm)
 	 3. [D][X] item three (by: next tuesday)
+	 4. [E][ ] item four (at: tomorrow)
 	_________________________________
 	_________________________________
 	 Goodbye!
