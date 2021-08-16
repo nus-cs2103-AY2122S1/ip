@@ -1,3 +1,8 @@
+import java.util.Arrays;
+
+/**
+ * Utility class that handles parsing of strings to other useful data structures.
+ */
 public class Parser {
     /**
      * Parses the user's input into a string array of tokens, delimited by whitespace.
@@ -14,16 +19,18 @@ public class Parser {
     }
 
     /**
-     * Description parser.
      * Parses the user's input into a string containing the description of the task.
      *
      * @param input the user's input
-     * @param regex the regex to delimit the input and obtain the description
+     * @param command the type of command
      * @return the description
      * @throws EmptyDescriptionException if the input does not contain a description
      */
-    public static String descriptionParser(String input, String regex) throws EmptyDescriptionException {
-        String[] tokens = input.split((regex));
+    public static String descriptionParser(String input, Command command) throws EmptyDescriptionException {
+        String[] tokens = Arrays.stream(input.trim()
+                .split((command.toString())))
+                .map(String::trim)
+                .toArray(String[]::new);
         if (tokens.length < 2) {
             throw new EmptyDescriptionException();
         }

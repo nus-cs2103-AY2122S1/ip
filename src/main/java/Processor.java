@@ -29,13 +29,13 @@ public class Processor {
             Memory.deleteTaskByIndex(tokens[1]);
             break;
         case TODO:
-            Memory.add(Todo.of(Parser.descriptionParser(input, "todo ")));
+            Memory.add(Todo.of(Parser.descriptionParser(input, Command.TODO)));
             break;
         case DEADLINE:
-            Memory.add(Deadline.of(Parser.descriptionParser(input, "deadline ")));
+            Memory.add(Deadline.of(Parser.descriptionParser(input, Command.DEADLINE)));
             break;
         case EVENT:
-            Memory.add(Event.of(Parser.descriptionParser(input, "event ")));
+            Memory.add(Event.of(Parser.descriptionParser(input, Command.EVENT)));
             break;
         default:
             throw new UnknownCommandException();
