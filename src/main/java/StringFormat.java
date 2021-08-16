@@ -33,17 +33,4 @@ public class StringFormat {
         return formatString(tabAllNewline(str));
     }
 
-    public static void main(String[] args) {
-        // test:
-        // System.out.println(StringFormat.formatString("Hello! I'm Duke", "What can I do for you?"));
-        // String[] testArr = {"hello", "it's", "me"};
-        // System.out.println(StringFormat.formatString(testArr));
-        TaskStorage taskStorage = new TaskStorage();
-        Task test1 = new Task("Hello there");
-        Task test2 = new Task("General Kenobi");
-        taskStorage.add(test1);
-        taskStorage.add(test2);
-        String testString = tabAllNewline(taskStorage.toString());
-        System.out.println(testString);
-    }
 }

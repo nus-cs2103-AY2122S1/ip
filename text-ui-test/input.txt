@@ -1,7 +1,6 @@
 deadline cs2103t quiz /by Monday
 todo cs2103t project level 1
 todo cs2103t project level 2
-testing generic task
 event Christmas /at December
 done 1
 list
@@ -13,4 +12,13 @@ done 4
 list
 done 5
 list
+todo
+event
+event hello /at
+deadline
+deadline hello /at
+done -1
+done -2
+done 20
+done 1000
 bye
