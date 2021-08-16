@@ -14,25 +14,41 @@ public class Yoyo {
                 + "What can I do for you?\n";
         System.out.println(greetings);
         Scanner scanner = new Scanner(System.in);
-        String[] texts = new String[100];
-        int numTexts = 0;
+        Task[] tasks = new Task[100];
+        int numTasks = 0;
 
         while (true) {
             String input = scanner.nextLine();
-            if (input.equals("bye")) {
+            String[] inputWords = input.split(" ");
+            String command = inputWords[0];
+            if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!\n");
                 break;
-            } else if (input.equals("list")) {
+            } else if (command.equals("list")) {
                 printLineDecoration();
-                for (int i = 0; i < numTexts; i++) {
-                    System.out.println(i + 1 + ". " + texts[i]);
+                for (int i = 0; i < numTasks; i++) {
+                    System.out.println(i + 1 + "." + tasks[i].showStatus());
                 }
                 printLineDecoration();
                 System.out.println("\n");
+            } else if (command.equals("done")) {
+                System.out.println("inside done\n");
+                try {
+                    int taskIndex = Integer.parseInt(inputWords[1]) - 1;
+                    tasks[taskIndex].toggleDone();
+                    printLineDecoration();
+                    System.out.println("Nice! I've marked this task as done:\n"
+                            + tasks[taskIndex].showStatus());
+                    printLineDecoration();
+                    System.out.println();
+
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Please enter a valid index!\n");
+                }
             } else {
                 printLineDecoration();
-                texts[numTexts] = input;
-                numTexts++;
+                tasks[numTasks] = new Task(input);
+                numTasks++;
                 System.out.println("added: " + input);
                 printLineDecoration();
                 System.out.println("\n");
