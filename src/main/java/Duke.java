@@ -52,7 +52,7 @@ public class Duke {
      * @param s input commands that is read by scanner in 'main'
      * @return the corresponding response message as a String
      */
-    public static String chat(String s) {
+    public static String chat(String s) throws IllegalArgumentException {
         String check = s.replaceAll(" ", "");
         String[] words = s.split(" ");
         if (check.equalsIgnoreCase("bye")) {
@@ -61,8 +61,16 @@ public class Duke {
             getList();
             return "";
         } else if (words[0].equalsIgnoreCase("done")) {
-            int index = Integer.parseInt(words[1]) - 1;
-            tasks.get(index).setIsDone();
+            //implementation in main ensures that words[0] will not be null
+            try {
+                int index = Integer.parseInt(words[1]) - 1;
+                tasks.get(index).setIsDone();
+                if (index >= tasks.size() || index < 0) {
+                    throw new IllegalArgumentException("Please input correct index, no such index :( ");
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new IllegalArgumentException("You must've forgotten. Please indicate index :) ");
+            }
             return "";
         } else {
             return addTask(s);
@@ -123,8 +131,12 @@ public class Duke {
          * the String representation
          */
         public void setIsDone() {
-            this.isDone = "X";
-            System.out.println("Well done! The task is completed!");
+            if (this.isDone.equals(" ")) {
+                this.isDone = "X";
+                System.out.println("Well done! The task is completed!");
+            } else {
+                System.out.println("You have already completed this task before!");
+            }
             System.out.println("       [" + isDone + "] " + this.getTask());
         }
 
