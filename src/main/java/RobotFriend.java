@@ -1,5 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * RobotFriend is a simple bot that allows users to keep track of different types of tasks.
+ */
 public class RobotFriend {
 
     private final static String ROBOT_ICON = "[~o_o~]";
@@ -7,8 +11,7 @@ public class RobotFriend {
     private final static String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private final static String ROBOT_TEXT_SPACE = "         ";
 
-    private static final Task[] list = new Task[100];
-    private static int listIndex = 0;
+    private static final ArrayList<Task> list = new ArrayList<>();
 
     /**
      * Prints greeting text of the robotFriend.
@@ -19,7 +22,8 @@ public class RobotFriend {
         System.out.println(ROBOT_TEXT_SPACE + "Commands:");
         System.out.println(ROBOT_TEXT_SPACE + "bye: terminate session:");
         System.out.println(ROBOT_TEXT_SPACE + "list: view all tasks in the list.");
-        System.out.println(ROBOT_TEXT_SPACE + "done i: mark task number i as complete and view the task:");
+        System.out.println(ROBOT_TEXT_SPACE + "done i: mark task number i as complete and view the task.");
+        System.out.println(ROBOT_TEXT_SPACE + "delete i: delete the task at the given index i.");
         System.out.println(ROBOT_TEXT_SPACE + "todo *description*: add todo task.");
         System.out.println(ROBOT_TEXT_SPACE + "event *description* /at *date*: add event task.");
         System.out.println(ROBOT_TEXT_SPACE + "deadline *description* /by *timing*: add deadline task.");
@@ -51,15 +55,14 @@ public class RobotFriend {
      * Prints current number of tasks.
      */
     private static void printCurrentNumberOfTask() {
-        System.out.println(ROBOT_TEXT_SPACE + "Now you have " + listIndex + " tasks!");
+        System.out.println(ROBOT_ICON + ": " + "Now you have " + list.size() + " tasks!");
     }
 
     /**
      * Add task to list.
      */
     private static void addTask(Task task) {
-        list[listIndex] = task;
-        listIndex++;
+        list.add(task);
     }
 
     /**
@@ -159,20 +162,23 @@ public class RobotFriend {
         String[] tokens = userInput.split(" ");
         try {
             switch (tokens[0]) {
-                case "done":
-                    completeAndPrintTask(userInput);
-                    return;
-                case "todo":
-                    newTask = makeToDoTask(userInput);
-                    break;
-                case "deadline":
-                    newTask = makeDeadlineTask(userInput);
-                    break;
-                case "event":
-                    newTask = makeEventTask(userInput);
-                    break;
-                default:
-                    throw new InvalidCommandException();
+            case "done":
+                completeAndPrintTask(userInput);
+                return;
+            case "delete":
+                deleteAndPrintTask(userInput);
+                return;
+            case "todo":
+                newTask = makeToDoTask(userInput);
+                break;
+            case "deadline":
+                newTask = makeDeadlineTask(userInput);
+                break;
+            case "event":
+                newTask = makeEventTask(userInput);
+                break;
+            default:
+                throw new InvalidCommandException();
             }
         } catch (InvalidCommandException | NoTaskDescriptionException | NoDateIndicatorException | NoDateException err) {
             printErrorMessage(err);
@@ -192,10 +198,19 @@ public class RobotFriend {
     private static void printList() {
         System.out.println(LINE);
         System.out.println(ROBOT_ICON + ": " + "Your list contains the following task/s:");
-        for (int i = 0; i < listIndex; i++) {
-            System.out.println((i + 1) + ". " + list[i].toString());
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println((i + 1) + ". " + list.get(i).toString());
         }
         System.out.println(LINE);
+    }
+
+    /**
+     * Deletes the task from list.
+     *
+     * @param task task
+     */
+    private static void deleteTask(Task task) {
+        list.remove(task);
     }
 
     /**
@@ -208,27 +223,56 @@ public class RobotFriend {
         int taskNumber;
         boolean isTaskDoneCommand = tokens.length == 2 && tokens[0].equals("done");
         try {
-            if (!isTaskDoneCommand) {
-                throw new InvalidDoneCommandException();
-            }
             try {
                 taskNumber = Integer.parseInt(tokens[1]);
             } catch (NumberFormatException err) {
-                throw new InvalidDoneIndexException();
+                throw new InvalidIndexException("done");
             }
-
-            if (taskNumber > listIndex) {
-                throw new InvalidDoneIndexException();
+            if (!isTaskDoneCommand || taskNumber > list.size()) {
+                throw new InvalidIndexException("done");
             }
-        } catch (InvalidDoneCommandException | InvalidDoneIndexException err) {
+        } catch (InvalidIndexException err) {
             printErrorMessage(err);
             return;
         }
 
         System.out.println(LINE);
         System.out.println(ROBOT_ICON + ": " + "You have completed the following task:");
-        list[taskNumber - 1].completeTask();
-        System.out.println(list[taskNumber - 1].toString());
+        list.get(taskNumber - 1).completeTask();
+        System.out.println(list.get(taskNumber - 1).toString());
+        System.out.println(LINE);
+    }
+
+    /**
+     * Delete the task and prints out the task and current number of tasks,
+     * throws error if done command is not properly formatted.
+     *
+     * @param userInput the index of the task in list
+     */
+    private static void deleteAndPrintTask(String userInput) {
+        String[] tokens = userInput.split(" ");
+        int taskNumber;
+        boolean isTaskDeleteCommand = tokens.length == 2 && tokens[0].equals("delete");
+        try {
+            try {
+                taskNumber = Integer.parseInt(tokens[1]);
+            } catch (NumberFormatException err) {
+                throw new InvalidIndexException("delete");
+            }
+
+            if (!isTaskDeleteCommand || taskNumber > list.size()) {
+                throw new InvalidIndexException("delete");
+            }
+        } catch (InvalidIndexException err) {
+            printErrorMessage(err);
+            return;
+        }
+
+        System.out.println(LINE);
+        System.out.println(ROBOT_ICON + ": " + "You have removed the following task:");
+        System.out.println(list.get(taskNumber - 1).toString());
+        deleteTask(list.get(taskNumber - 1));
+        System.out.println(ROBOT_ICON + ": " + "You have " + list.size() + " task/s left.");
         System.out.println(LINE);
     }
 
@@ -238,7 +282,6 @@ public class RobotFriend {
         while (true) {
             String userInput = scanner.nextLine();
             String[] tokens = userInput.split(" ");
-            boolean isTaskCompleteCommand = tokens.length == 2 && tokens[0].equals("done");
             if (userInput.equals(BYE)) {
                 bye();
                 break;

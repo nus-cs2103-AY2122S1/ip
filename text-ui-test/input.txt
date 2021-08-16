@@ -10,5 +10,8 @@ done 100
 done x
 done x x
 done 2
+delete x
+delete x x
+delete 1
 list
 bye
