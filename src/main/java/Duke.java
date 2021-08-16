@@ -75,6 +75,19 @@ public class Duke {
                         System.out.println(bot.addEvent(info[0], info[1]));
                         input = sc.nextLine();
                         break;
+                    case "delete":
+                        if (inputs.length == 1) {
+                            throw new DukeException("The task number to delete cannot be empty you dum dum\n");
+                        }
+                        // check if the following string is a number
+                        index = Integer.parseInt(inputs[1]);
+                        // check if the number is valid.
+                        if (index <= 0 || index > bot.getTotalTasks()) {
+                            throw new DukeException("Please enter a valid number\n");
+                        }
+                        System.out.println(bot.deleteTask(index));
+                        input = sc.nextLine();
+                        break;
                     default:
                         //maybe add a help command
                         System.out.println(bot.getCommand());

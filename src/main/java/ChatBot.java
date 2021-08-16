@@ -55,4 +55,11 @@ public class ChatBot {
         return tasks.size();
     }
 
+    public String deleteTask(int index) {
+        Task delete = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        return line + "The task has been removed:\n" + delete +
+                "\n" + "You have " + tasks.size() + " tasks left!\n" + line;
+    }
+
 }

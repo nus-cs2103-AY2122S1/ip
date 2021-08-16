@@ -23,4 +23,9 @@ event
 event meeting
 event meeting /at
 event meeting at
+delete 0
+delete 1
+list
+delete 2
+list
 bye
