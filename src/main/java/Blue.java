@@ -11,8 +11,6 @@ public class Blue {
             + "|____/|_||_____| \\_____/\n";
     private static final String GREET_CONTENT = "Hello! I'm Blue\n"
             + "What can I do for you?";
-    private static final String ERROR_CONTENT
-            = "Oops something went wrong... Are you sure your input is correct?";
     private static final String EXIT_CONTENT
             = "Bye. Hope to never see you again!";
     private static final List<Task> tasks = new ArrayList<>();
@@ -57,17 +55,10 @@ public class Blue {
                 handleDone(input);
                 break;
             default:
-                storeAndDisplayTasks(input);
+                speak("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 break;
         }
         return true;
-    }
-
-    private static void storeAndDisplayTasks(String title) {
-        Task task = new Task(title);
-        tasks.add(task);
-        String content = "added: " + title;
-        speak(content);
     }
 
     private static void listTasks() {
@@ -90,7 +81,7 @@ public class Blue {
             content += "Now you have " + tasks.size() + " tasks in the list.";
             speak(content);
         } else
-            speak(ERROR_CONTENT);
+            speak("☹ OOPS!!! The description of a todo cannot be empty.");
     }
 
     private static void handleDeadline(String input) {
@@ -105,7 +96,7 @@ public class Blue {
             content += "Now you have " + tasks.size() + " tasks in the list.";
             speak(content);
         } else
-            speak(ERROR_CONTENT);
+            speak("☹ OOPS!!! The description of a deadline cannot be empty.");
     }
 
     private static void handleEvent(String input) {
@@ -114,28 +105,32 @@ public class Blue {
             int indexAt = input.indexOf(" /at ");
             String title = input.substring(indexSpace + 1, indexAt);
             String at = input.substring(indexAt + 5);
-            Event event  = new Event(title, at);
+            Event event = new Event(title, at);
             tasks.add(event);
             String content = "Got it. I've added this task:\n" + event + "\n";
             content += "Now you have " + tasks.size() + " tasks in the list.";
             speak(content);
         } else
-            speak(ERROR_CONTENT);
+            speak("☹ OOPS!!! The time of an event cannot be empty.");
     }
 
     private static void handleDone(String input) {
         String[] arguments = getArguments(input);
         if (arguments.length > 0) {
-            int index = Integer.parseInt(arguments[0]) - 1;
-            if (index < tasks.size()) {
-                Task task = tasks.get(index);
-                task.markDone();
-                String content = "Nice! I've marked this task as done:\n" + task;
-                speak(content);
-                return;
+            try {
+                int index = Integer.parseInt(arguments[0]) - 1;
+                if (0 <= index && index < tasks.size()) {
+                    Task task = tasks.get(index);
+                    task.markDone();
+                    String content = "Nice! I've marked this task as done:\n" + task;
+                    speak(content);
+                } else
+                    speak("☹ OOPS!!! No task found at index " + (index + 1) + ".");
+            } catch (NumberFormatException e) {
+                speak("☹ OOPS!!! Index must be a number.");
             }
-        }
-        speak(ERROR_CONTENT);
+        } else
+            speak("☹ OOPS!!! The index of done cannot be empty.");
     }
 
     private static String getCommand(String input) {
