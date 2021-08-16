@@ -22,32 +22,31 @@ public class Duke {
                 String input = scanner.nextLine();
                 printLine();
                 String[] inputArr = input.split(" ", 2);
-
-                if (input.equals("bye")) {
-                    System.out.println("    " + "Bye. Hope to see you again soon!");
-                    run = false;
-                } else if (input.equals("list")) {
-                    listItems();
-                } else if (inputArr[0].equals("done")) {
-                    int number = Integer.parseInt(inputArr[1]);
-                    System.out.println("    Nice! I've marked this task as done: ");
-                    list.get(number - 1).markedAsDone();
-                    System.out.println("      " + list.get(number - 1).toString());
-                } else if (inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")) {
-                    switch (inputArr[0]) {
-                        case "todo":
-                            addTask(new Todo(inputArr[1]));
-                            break;
-                        case "deadline":
-                            String[] messageArr = inputArr[1].split(" /by ", 2);
-                            addTask(new Deadline(messageArr[0], messageArr[1]));
-                            break;
-                        case "event":
-                            messageArr = inputArr[1].split(" /at ", 2);
-                            addTask(new Event(messageArr[0], messageArr[1]));
-                            break;
-                    }
-
+                switch (inputArr[0]) {
+                    case "todo":
+                        addTask(new Todo(inputArr[1]));
+                        break;
+                    case "deadline":
+                        String[] messageArr = inputArr[1].split(" /by ", 2);
+                        addTask(new Deadline(messageArr[0], messageArr[1]));
+                        break;
+                    case "event":
+                        messageArr = inputArr[1].split(" /at ", 2);
+                        addTask(new Event(messageArr[0], messageArr[1]));
+                        break;
+                    case "done":
+                        int number = Integer.parseInt(inputArr[1]);
+                        System.out.println("    Nice! I've marked this task as done: ");
+                        list.get(number - 1).markedAsDone();
+                        System.out.println("      " + list.get(number - 1).toString());
+                        break;
+                    case "list":
+                        listItems();
+                        break;
+                    case "bye":
+                        System.out.println("    " + "Bye. Hope to see you again soon!");
+                        run = false;
+                        break;
                 }
                 printLine();
             }
