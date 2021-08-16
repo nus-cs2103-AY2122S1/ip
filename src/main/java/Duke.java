@@ -9,7 +9,7 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    public static void main(String[] args) {
+    public static void run() {
         lineGenerator();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -66,5 +66,9 @@ public class Duke {
         lineGenerator();
         System.out.println("Bye. Hope to see you again soon!");
         lineGenerator();
+    }
+
+    public static void main(String[] args) {
+        run();
     }
 }
