@@ -1,19 +1,21 @@
 import java.util.Scanner;
 
 public class Jared {
-    private static String[] history = new String[100];
+    private static Task[] history = new Task[100];
     private static int historyCount = 0;
 
     private static void add(String input) {
-        System.out.println("added: " + input);
-        Jared.history[historyCount] = input;
+        Task newTask = new Task(input);
+        System.out.println("added: " + newTask.toString());
+        history[historyCount] = newTask;
         historyCount ++;
     }
 
     private static void list() {
         String res = "";
         for (int i = 0; i < historyCount; i++) {
-            res += String.format("%d. %s\n", i, Jared.history[i]);
+            Task currTask = history[i];
+            res += String.format("%d.[%s] %s\n", i + 1, currTask.getStatusIcon(), currTask.toString());
         }
         System.out.println(res);
     }
@@ -33,6 +35,7 @@ public class Jared {
             } else if (next.equals("list")) {
                 list();
             } else {
+
                 add(next);
             }
         }
