@@ -10,9 +10,13 @@ public class Duke {
 
         private boolean done;
 
-        public Task(String name) {
+        private String taskType;
+
+
+        public Task(String name, String taskType) {
             this.name = name;
             done = false;
+            this.taskType = taskType;
         }
 
         public String getName() {
@@ -23,8 +27,43 @@ public class Duke {
             done = true;
         }
 
-        public boolean getDone() {
-            return done;
+        public String toString() {
+            return (taskType + (done ? " (done) " : " (not done) ") + name);
+        }
+    }
+
+    public static class ToDo extends Task {
+
+        public ToDo(String name) {
+            super(name, "#ToDo");
+        }
+    }
+
+    public static class Deadline extends Task {
+
+        private final String deadline;
+
+        public Deadline(String name, String deadline) {
+            super(name, "#Deadline");
+            this.deadline = deadline;
+        }
+
+        public String toString() {
+            return super.toString() + " (" + deadline + ")";
+        }
+    }
+
+    public static class Event extends Task {
+
+        private final String time;
+
+        public Event(String name, String time) {
+            super(name, "#Event");
+            this.time = time;
+        }
+
+        public String toString() {
+            return super.toString() + " (" + time + ")";
         }
     }
 
@@ -61,8 +100,7 @@ public class Duke {
                 } else {
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println(i + 1 + "."
-                                + (tasks.get(i).done ? "(Done)" : "(Not done)")
-                                + " " + tasks.get(i).getName());
+                                + tasks.get(i).toString());
                     }
                 }
 
@@ -79,10 +117,37 @@ public class Duke {
                             tasks.get(taskIndex - 1).getName() + ". Well done!");
                 }
 
+            // Add to-do task
+            } else if (input.split(" ")[0].equals("todo")){
+                ToDo newToDo = new ToDo(input.substring(5));
+                tasks.add(newToDo);
+                System.out.println("Duke says: I've added the task: ");
+                System.out.println("     " + newToDo.toString());
+                System.out.println("You now have " + tasks.size() + " tasks, jiayouz!");
+
+            // Add deadline task
+            } else if (input.split(" ")[0].equals("deadline")){
+                Deadline newDeadline = new Deadline(input.substring(9).split(" /")[0],
+                        input.substring(9).split(" /")[1]);
+                //TODO add error check if no /
+                tasks.add(newDeadline);
+                System.out.println("Duke says: I've added the task: ");
+                System.out.println("     " + newDeadline.toString());
+                System.out.println("You now have " + tasks.size() + " tasks, jiayouz!");
+
+            // Add event task
+            } else if (input.split(" ")[0].equals("event")){
+                Event newEvent = new Event(input.substring(6).split(" /")[0],
+                        input.substring(6).split(" /")[1]);
+                tasks.add(newEvent);
+                System.out.println("Duke says: I've added the task: ");
+                System.out.println("     " + newEvent.toString());
+                System.out.println("You now have " + tasks.size() + " tasks, jiayouz!");
+
             // Add tasks
             } else {
                 System.out.println("Duke says: Task '" + input + "' added");
-                tasks.add(new Task(input));
+                tasks.add(new Task(input, "#genericTask"));
             }
 
             //System.out.println("Duke says: " + input);
