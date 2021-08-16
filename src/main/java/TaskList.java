@@ -2,17 +2,17 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final List<String> list = new ArrayList<>();
+    private final List<Task> list = new ArrayList<>(List.of(new Task("read book"), new Task("return book"), new Task("buy bread")));
 
-    public void addTask(String task) {
+    public void addTask(Task task) {
         list.add(task);
     }
 
     @Override
     public String toString() {
+        StringBuilder result = new StringBuilder("Here are the tasks in your list:\n");
         int len = list.size();
-        if (len == 0) return "";
-        StringBuilder result = new StringBuilder();
+        if (len == 0) return result.toString();
         for (int i = 1; i < len; i++) {
             result.append(String.format("%s. %s\n", i, list.get(i - 1)));
         }

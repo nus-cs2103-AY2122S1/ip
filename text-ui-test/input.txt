@@ -1,4 +1,3 @@
-read book
-return book
 list
+done 2
 bye

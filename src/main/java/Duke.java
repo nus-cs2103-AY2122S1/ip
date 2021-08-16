@@ -42,7 +42,7 @@ public class Duke {
     }
 
     private static void addTask(String task) {
-        list.addTask(task);
+        list.addTask(new Task(task));
         String message = String.format("added: %s", task);
         echo(message);
     }
