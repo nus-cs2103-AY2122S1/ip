@@ -23,15 +23,32 @@ public class Duke {
                 System.out.println("Lollipop: Here are your tasks");
                 for (int i = 0; i < taskList.size(); i++) {
                     Task task = taskList.get(i);
-                    System.out.printf("%d. [%s] %s%n", i + 1, task.getStatusIcon(), task.toString());
+                    System.out.printf("%d. %s%n", i + 1, task.toString());
                 }
-            } else if (command.contains("done")) {
+            } else if (command.startsWith("done")) {
                 int taskNumber = parseInt(command.split(" ")[1]);
                 Task task = taskList.get(taskNumber - 1);
                 task.markAsDone();
                 System.out.printf("Lollipop: %s has been marked as done.%n", task.toString());
-            } else {
-                Task task = new Task(command);
+            } else if (command.startsWith("todo")) {
+                String description = command.split(" ", 2)[1];
+                Task task = new Todo(description);
+                taskList.add(task);
+                System.out.printf("Lollipop: %s has been added.%n", task.toString());
+            } else if (command.startsWith("deadline")) {
+                String description = command.split(" ", 2)[1];
+                String[] splitDescription = description.split(" /by ");
+                description = splitDescription[0];
+                String deadline = splitDescription[1];
+                Task task = new Deadline(description, deadline);
+                taskList.add(task);
+                System.out.printf("Lollipop: %s has been added.%n", task.toString());
+            } else if (command.startsWith(("event"))) {
+                String description = command.split(" ", 2)[1];
+                String[] splitDescription = description.split(" /at ");
+                description = splitDescription[0];
+                String time = splitDescription[1];
+                Task task = new Event(description, time);
                 taskList.add(task);
                 System.out.printf("Lollipop: %s has been added.%n", task.toString());
             }
