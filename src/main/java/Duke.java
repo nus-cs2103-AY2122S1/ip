@@ -17,7 +17,7 @@ public class Duke {
         initialiseBot();
 
         boolean status = true;
-        List<String> textStored = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         int numberOfText = 0;
 
         Scanner sc = new Scanner(System.in);
@@ -29,11 +29,13 @@ public class Duke {
                 status = false;
                 closeBot();
             } else if (message.equals("list")) {
-                printStoredText(textStored);
+                printStoredText(tasks);
+            } else if (message.contains("done")) {
+                changeStatus(message, tasks);
             } else {
 //                echo(message);
                 numberOfText++;
-                add(message, numberOfText, textStored);
+                add(message, numberOfText, tasks);
             }
         }
 
@@ -41,16 +43,50 @@ public class Duke {
 
     }
 
-    private static void printStoredText(List<String> textStored) {
-        String message = "Here are the tasks in your list:";
-        System.out.println(message);
-        textStored.forEach(System.out::println);
+    private static int getTaskNumber(String message) {
+        String numberString = "";
+        for (int i = 0; i < message.length(); i++) {
+            char currentChar = message.charAt(i);
+            if (!numberString.isEmpty() && Character.isWhitespace(currentChar)) {
+                break; //task number string complete
+            } else if (Character.isDigit(currentChar)) {
+                numberString += message.charAt(i);
+            } else {}
+        }
+
+        int number;
+        if (numberString.isEmpty()) {
+            number = -1;
+        } else {
+            number = Integer.parseInt(numberString);
+        }
+        return number;
     }
 
-    private static void add(String message, int numberOfText, List<String> textStored) {
+    private static void changeStatus(String message, List<Task> tasks) {
+        int taskPosition = getTaskNumber(message) - 1;
+        if (taskPosition < 0) {
+            System.out.println("error");
+        } else {
+            Task taskMarked = tasks.get(taskPosition);
+            taskMarked.markAsDone();
+            String displayedMessage = "Nice! I've marked this task as done: \n"
+                    + "  [X] "
+                    + taskMarked.getTaskName();
+            System.out.println(displayedMessage);
+        }
+    }
+
+    private static void printStoredText(List<Task> tasks) {
+        String message = "Here are the tasks in your list:";
+        System.out.println(message);
+        tasks.forEach(System.out::println);
+    }
+
+    private static void add(String message, int numberOfText, List<Task> tasks) {
         String displayedMessage = "added: " + message;
-        String storedMessage = String.valueOf(numberOfText) + ". " + message;
-        textStored.add(storedMessage);
+        Task storedTask = new Task(numberOfText, message);
+        tasks.add(storedTask);
         System.out.println(displayedMessage);
     }
 
