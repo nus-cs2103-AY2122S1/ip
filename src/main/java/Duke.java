@@ -162,7 +162,7 @@ public class Duke {
                 addTask(type, inputCommand);
                 printMessage(new String[] {
                         "Got it. I've added this task:",
-                        tasks.get(tasks.size() - 1).toString(),
+                        "  " + tasks.get(tasks.size() - 1).toString(),
                         "Now you have " + tasks.size() + " tasks in the list."});
             }
         }
