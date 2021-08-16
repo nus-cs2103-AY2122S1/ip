@@ -1,53 +1,64 @@
 public class TodoList {
     private final Task[] tasks = new Task[100];
-    private int emptyIndex = 0;
+    private int availableIndex = 0;
     public TodoList() { }
 
-    public String add(String taskName) {
-        Task task = new Task(taskName);
-        tasks[emptyIndex] = task;
-        emptyIndex++;
-        return "added: " + taskName;
+    public void addTodo(String taskName) {
+        Todo todo = new Todo(taskName);
+        tasks[availableIndex] = todo;
+        availableIndex++;
+        PrintResponse.print(String.format("Caan Do!\n\tadded: %s\n" +
+                        "Look at me! " +
+                        "%d tasks in the list now!",
+                taskName,
+                availableIndex));
     }
 
-    public String list() {
+    public void list() {
         StringBuilder result = new StringBuilder();
-        for(int i = 0; i < emptyIndex; i++) {
+        for(int i = 0; i < availableIndex; i++) {
             result.append(String.format("%d. %s\n", i + 1, tasks[i].toString()));
         }
-        return result.toString();
+        PrintResponse.print(
+                String.format("Ooh yeah! Here are your %d tasks\n%s",
+                        availableIndex,
+                        result.toString()));
     }
 
-    public String markAsDone(int taskNumber) {
+    public void markAsDone(int taskNumber) {
         try {
             Task task = tasks[taskNumber - 1];
             task.markAsDone();
-            return String.format("Task %d marked as done:\n\t%s",
+            String response = String.format("Ooh yeah! Task %d marked as done:\n\t%s",
                     taskNumber,
                     task);
+            PrintResponse.print(response);
         } catch (IndexOutOfBoundsException e) {
-            return String.format("Task number %d invalid", taskNumber);
+            PrintResponse.print(String.format("Task number %d invalid", taskNumber));
         }
     }
 
-    private static class Task {
-        private final String taskName;
-        private boolean done = false;
+    public void addDeadline(String name, String dateTime) {
+        Deadline deadline = new Deadline(name, dateTime);
+        tasks[availableIndex] = deadline;
+        availableIndex++;
+        PrintResponse.print(
+                String.format("Caan Do!\n" +
+                                "\tadded: %s\n" +
+                                "Look at me! %d tasks in the list now!",
+                        name,
+                        availableIndex));
+    }
 
-        public Task(String taskName) {
-            this.taskName = taskName;
-        }
-
-        public void markAsDone() {
-            this.done = true;
-        }
-
-        @Override
-        public String toString() {
-            if(done) {
-                return String.format("[X] %s", this.taskName);
-            }
-            return String.format("[ ] %s", this.taskName);
-        }
+    public void addEvent(String name, String dateTime) {
+        Event event = new Event(name, dateTime);
+        tasks[availableIndex] = event;
+        availableIndex++;
+        PrintResponse.print(
+                String.format("Caan Do!\n" +
+                        "\tadded: %s\n" +
+                        "Look at me! %d in the list now!",
+                        name,
+                        availableIndex));
     }
 }
