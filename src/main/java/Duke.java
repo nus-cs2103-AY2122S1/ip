@@ -50,6 +50,7 @@ public class Duke {
             }
         } else if (command.startsWith("event")) {
             try {
+                formatChecker(command);
                 String substring = command.substring(6);
                 String item = substring.substring(0, substring.indexOf("/"));
                 String duration = substring.substring(substring.indexOf("/") + 1).substring(2);
@@ -58,9 +59,14 @@ public class Duke {
                 System.out.println("------------------");
                 System.out.println("OOPS!!! The description of a event cannot be empty.");
                 System.out.println("------------------\n");
+            } catch (DukeException e) {
+                System.out.println("------------------");
+                System.out.println("C'mon now.... The format is wrong! Try again!");
+                System.out.println("------------------\n");
             }
         } else if (command.startsWith("deadline")) {
             try {
+                formatChecker(command);
                 String substring = command.substring(9);
                 String item = substring.substring(0, substring.indexOf("/"));
                 String deadline = substring.substring(substring.indexOf("/") + 1).substring(2);
@@ -68,6 +74,10 @@ public class Duke {
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("------------------");
                 System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                System.out.println("------------------\n");
+            } catch (DukeException e) {
+                System.out.println("------------------");
+                System.out.println("C'mon now.... The format is wrong! Try again!");
                 System.out.println("------------------\n");
             }
         } else {
@@ -87,5 +97,17 @@ public class Duke {
         System.out.println("------------------");
         System.out.println("Bye. Hope to see you soon!\n");
         System.out.println("------------------\n");
+    }
+
+    private static void formatChecker(String command) throws DukeException{
+        if (command.startsWith("event")) {
+            if (!command.substring(command.indexOf("/")).startsWith("/at")) {
+                throw new DukeException();
+            }
+        } else {
+            if (!command.substring(command.indexOf("/")).startsWith("/by")) {
+                throw new DukeException();
+            }
+        }
     }
 }
