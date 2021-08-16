@@ -68,7 +68,7 @@ public class Duke {
         sc.close();
     }
 
-    public static void taskHandler(TaskStorage storage, String[] inputs, String input) throws DukeException {
+    public static void taskHandler(TaskStorage storage, String[] inputs) throws DukeException {
         // if we are creating a todo task
         if (inputs[0].equals("todo")) {
             if (inputs.length < 2) {
