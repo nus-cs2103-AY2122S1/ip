@@ -5,11 +5,6 @@ How can I help?
 Ooh yeah! Here are your 0 tasks
 
 =================================
-
-============Duke says============
->:( follow format below:
-done <number between 1 and 100>
-=================================
 Whats next?
 ============Duke says============
 >:( follow format below:
@@ -17,39 +12,25 @@ done <number between 1 and 100>
 =================================
 Whats next?
 ============Duke says============
-Task number 0 invalid
+Task number 0 invalid.
 =================================
 Whats next?
 ============Duke says============
 Caan Do!
-	added: borrow book
+  added: borrow book
 Look at me! 1 tasks in the list now!
 =================================
-
-============Duke says============
-Say something I can understand!! >:(
-=================================
 Whats next?
 ============Duke says============
 Caan Do!
-  added: return book
+  added: [D][ ] return book (by: 12 Aug)
 Look at me! 2 tasks in the list now!
 =================================
-
-============Duke says============
->:( Follow format below:
-deadline <taskname...> /at <datetime...>
-=================================
 Whats next?
 ============Duke says============
 Caan Do!
-  added: visit library
+  added: [E][ ] visit library (at: 4pm tuesday)
 Look at me! 3 in the list now!
-=================================
-
-============Duke says============
->:( include task name after todo:
-todo <some task name>
 =================================
 Whats next?
 ============Duke says============
@@ -59,20 +40,10 @@ Ooh yeah! Here are your 3 tasks
 3. [E][ ] visit library (at: 4pm tuesday)
 
 =================================
-
-============Duke says============
->:( follow format below:
-done <number between 1 and 100>
-=================================
 Whats next?
 ============Duke says============
 Ooh yeah! Task 2 marked as done:
   [D][X] return book (by: 12 Aug)
-=================================
-
-============Duke says============
->:( Follow format below:
-deadline <taskname...> /by <datetime...>
 =================================
 Whats next?
 ============Duke says============
@@ -82,10 +53,20 @@ Ooh yeah! Here are your 3 tasks
 3. [E][ ] visit library (at: 4pm tuesday)
 
 =================================
-
+Whats next?
+============Duke says============
+Ooh yeah! Task 2 deleted:
+  [D][X] return book (by: 12 Aug)
+Now you have 2 tasks in the list.
+=================================
+Whats next?
 ============Duke says============
 >:( follow format below:
 done <number between 1 and 100>
+=================================
+Whats next?
+============Duke says============
+Task number 0 invalid.
 =================================
 Whats next?
 ============Duke says============

@@ -23,6 +23,7 @@ public class Duke {
             switch (firstWord) {
                 case "list":
                     todoList.list();
+                    break;
                 case "done":
                     if (userInput.matches("^done [0-9]+")) {
                         int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
@@ -31,6 +32,16 @@ public class Duke {
                         throw new DukeException(">:( follow format below:\n" +
                                 "done <number between 1 and 100>");
                     }
+                    break;
+                case "delete":
+                    if (userInput.matches("^delete [0-9]+")) {
+                        int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+                        todoList.deleteTask(taskNumber);
+                    } else {
+                        throw new DukeException(">:( follow format below:\n" +
+                                "done <number between 1 and 100>");
+                    }
+                    break;
                 case "deadline":
                     if (userInput.matches("^deadline .+ /by .+")) {
                         String[] deadlineDetails = userInput.substring(indexOfSpace + 1).split(" /by ");
@@ -41,6 +52,7 @@ public class Duke {
                         throw new DukeException(">:( Follow format below:\n" +
                                 "deadline <taskname...> /by <datetime...>");
                     }
+                    break;
                 case "event":
                     if(userInput.matches("^event .+ /at .+")) {
                         String[] deadlineDetails = userInput.substring(indexOfSpace + 1).split(" /at ");
@@ -51,6 +63,7 @@ public class Duke {
                         throw new DukeException(">:( Follow format below:\n" +
                                 "deadline <taskname...> /at <datetime...>");
                     }
+                    break;
                 case "todo":
                     if(userInput.matches("^todo .+")) {
                         String name = userInput.substring(indexOfSpace + 1);
@@ -59,6 +72,7 @@ public class Duke {
                         throw new DukeException(">:( include task name after todo:\n" +
                                 "todo <some task name>");
                     }
+                    break;
                 default:
                     throw new DukeException("Say something I can understand!! >:(");
             }
