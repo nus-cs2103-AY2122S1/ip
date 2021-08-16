@@ -2,7 +2,7 @@
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-TextUiTesting
+ * Current Progress: Level 5. Handle Errors
  *
  * Description:
  * Encapsulates the Task Class which contains a task description
@@ -21,12 +21,20 @@ public class Task {
     }
 
     /**
-     * Sets Task Completion Status to true
+     * Sets Task Completion Status to true and returns true if successfully marked
+     *
+     * @return boolean returns true if task successfully marked and false if task
+     *                 already marked
      *
      */
-    public void completeTask() {
+    public boolean completeTask() {
 
-        this.completed = true;
+        if (this.completed) {
+            return false;
+        } else {
+            this.completed = true;
+            return true;
+        }
 
     }
 

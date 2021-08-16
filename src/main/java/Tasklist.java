@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-TextUiTesting
+ * Current Progress: Level 5. Handle Errors
  *
  * Description:
  * Encapsulates the TaskList which contains a list of tasks
@@ -20,11 +20,34 @@ public class Tasklist {
     }
 
     /**
+     * Checks whether user inputted the time for the deadline/event task
+     *
+     * @param strArr String array containing the inputted description and time
+     * @param event String stating the type of task to be added
+     * @return String Returns the time of the task
+     * @throws MissingArgumentException throws a MissingArgumentException if no time found
+     */
+    private static String checkTime(String[] strArr, String event) throws MissingArgumentException {
+
+        if (strArr.length < 2) {
+            throw new MissingArgumentException("time", event);
+        } else if (strArr[1].trim().isEmpty()) {
+            throw new MissingArgumentException("time", event);
+        } else {
+            return strArr[1];
+        }
+
+    }
+
+    /**
      * Adds the task to the list
      *
+     * @param description String containing the description and time of the task
+     * @param taskType String stating the type of task to be added
      * @return String Returns the success message of added the task to the list
+     * @throws DukeException throws a duke exception depending on the error found
      */
-    public String addTask(String description, String taskType) {
+    public String addTask(String description, String taskType) throws DukeException {
 
         Task newTask;
         switch(taskType) {
@@ -33,22 +56,15 @@ public class Tasklist {
                 break;
             case "deadline":
                 String[] deadlineDetails = description.split(" /by ", 2);
-                if (deadlineDetails.length < 2) {
-                    return "Please enter date after description";
-                } else {
-                    newTask = new Deadline(deadlineDetails[0], deadlineDetails[1]);
-                }
+                newTask = new Deadline(deadlineDetails[0], checkTime(deadlineDetails, "deadline"));
                 break;
             case "event":
                 String[] eventDetails = description.split(" /at ", 2);
-                if (eventDetails.length < 2) {
-                    return "Please enter duration after description";
-                } else {
-                    newTask = new Event(eventDetails[0], eventDetails[1]);
-                }
+                newTask = new Event(eventDetails[0], checkTime(eventDetails, "event"));
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + description);
+                //unexpected error occurs
+                throw new InvalidCommandException();
         }
 
         tasks.add(newTask);
@@ -63,8 +79,10 @@ public class Tasklist {
      *
      * @param taskNumber task to be marked as complete
      * @return String message to be printed depending on if tasks is marked
+     * @throws IndexOutOfRangeException throws the exception if index given is out of
+     *              range of the current list
      */
-    public String markTask(int taskNumber) {
+    public String markTask(int taskNumber) throws IndexOutOfRangeException {
 
         if (tasks.size() == 0) {
 
@@ -72,14 +90,22 @@ public class Tasklist {
 
         } else if ((taskNumber - 1) > tasks.size()) {
 
-            return "No such task exists";
+            throw new IndexOutOfRangeException(taskNumber, tasks.size() );
 
         } else {
 
-            tasks.get(taskNumber - 1).completeTask();
-            String markTaskMessage = "Nice! I've marked this task as done:\n"
-                    + tasks.get(taskNumber - 1).toString();
-            return markTaskMessage;
+            if (tasks.get(taskNumber - 1).completeTask()) {
+
+                String markTaskMessage = "Nice! I've marked this task as done:\n"
+                        + tasks.get(taskNumber - 1).toString();
+                return markTaskMessage;
+
+            } else {
+
+                String markTaskMessage = tasks.get(taskNumber - 1).toString() + " already marked!";
+                return markTaskMessage;
+
+            }
 
         }
 
