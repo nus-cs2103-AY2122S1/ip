@@ -31,6 +31,10 @@ public class Duke {
                     int taskNumber = Integer.parseInt(words[1]);
                     markAsDone(taskNumber);
                     return;
+                case "delete":
+                    int taskNumberToBeDeleted = Integer.parseInt(words[1]);
+                    deleteTask(taskNumberToBeDeleted);
+                    return;
                 case "todo":
                     if (words.length == 1) {
                         throw new DukeException("The description of a todo cannot be empty.");
@@ -62,6 +66,8 @@ public class Duke {
 
         } catch(DukeException e) {
             System.out.println("OOPS!!! " + e.getMessage());
+        } catch(java.lang.NumberFormatException e) {
+            System.out.println("OOPS!!! " + e.getLocalizedMessage() + " was input instead of an integer.");
         }
     }
 
@@ -88,14 +94,31 @@ public class Duke {
     }
 
     private void printListNumber() {
-        System.out.println("You now have " + list.size() + " tasks in the list.");
+        System.out.println("You now have " + this.list.size() + " tasks in the list.");
     }
 
-    private void markAsDone(int id) {
-        Task currentTask = list.get(id - 1);
-        currentTask.markAsCompleted();
-        System.out.println("Nice! I've marked this task as done:\n "
-                + currentTask.details());
+    private void markAsDone(int id) throws DukeException {
+        try {
+            Task currentTask = this.list.get(id - 1);
+            currentTask.markAsCompleted();
+            System.out.println("Nice! I've marked this task as done:\n "
+                    + currentTask.details());
+        } catch (java.lang.IndexOutOfBoundsException e) {
+            throw new DukeException("That task does not exist.");
+        }
+
+    }
+
+    private void deleteTask(int id) throws DukeException {
+        try {
+            Task deletedTask = this.list.remove(id - 1);
+            System.out.println("Noted. I've removed this task: \n "
+                    + deletedTask.details()
+            );
+            printListNumber();
+        } catch (java.lang.IndexOutOfBoundsException e) {
+            throw new DukeException("That task does not exist.");
+        }
     }
 
 

@@ -7,4 +7,5 @@ todo
 blah
 event hello at 3
 deadline hello by 3
+delete 2
 bye
