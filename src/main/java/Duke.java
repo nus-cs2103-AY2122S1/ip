@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 public class Duke {
     public static class Response {
         private static void hLine() {
@@ -24,17 +23,17 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
 
         Scanner scanObj = new Scanner(System.in);
         boolean toTerminate = false;
 
-        Response.respond(new String[]{"Hello! I'm Duke", "What can I do for you?"});
+        Response.respond(new String[]{"Hello! I'm Duke!", "What can I do for you?"});
         while(!toTerminate) {
             String inp = scanObj.nextLine();
             if (inp.equals("bye")) {
