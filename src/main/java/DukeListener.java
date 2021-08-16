@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 /**
  * Waits for and processes a User Input
  */
-public class Listener {
+public class DukeListener {
 
     final Scanner sc;
     final TaskList taskList;
@@ -15,7 +15,7 @@ public class Listener {
     Pattern deadlinePattern = Pattern.compile("deadline (.+) /by (.+)", Pattern.CASE_INSENSITIVE);
     Pattern eventPattern = Pattern.compile("event (.+) /at (.+)", Pattern.CASE_INSENSITIVE);
 
-    public Listener(TaskList taskList) {
+    public DukeListener(TaskList taskList) {
         sc = new Scanner(System.in);
         this.taskList = taskList;
 
@@ -62,7 +62,7 @@ public class Listener {
                 taskList.printSize();
 
             } else {
-                System.out.println(Display.OUTPUT_DISPLAY + "Nothing happened haha bruh");
+                System.out.println(Display.OUTPUT_DISPLAY + "Nothing happened えええええ～だめだ!!");
             }
 
             System.out.println(Display.LINE);
