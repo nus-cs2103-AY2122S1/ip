@@ -3,7 +3,12 @@ todo b
 deadline c /by today
 event d /at tomorrow
 done 2
+deadline e
+todo
 list
+done abc
+done 10
+deadline f /by yesterday
 done 4
 list
 bye
