@@ -21,21 +21,33 @@ public class Duke {
             while (run) {
                 String input = scanner.nextLine();
                 printLine();
+                String[] inputArr = input.split(" ", 2);
+
                 if (input.equals("bye")) {
                     System.out.println("    " + "Bye. Hope to see you again soon!");
                     run = false;
                 } else if (input.equals("list")) {
                     listItems();
-                } else if (input.contains("done ")) {
-                    if (input.length() < 6) {
-                        throw new Exception("Done command not followed with a number");
-                    }
-                    int number = Integer.parseInt(input.substring(5));
+                } else if (inputArr[0].equals("done")) {
+                    int number = Integer.parseInt(inputArr[1]);
                     System.out.println("    Nice! I've marked this task as done: ");
-                    list.get(number-1).markedAsDone();
-                    System.out.println("      [X] "+list.get(number-1).getDescription());
-                } else {
-                    addItem(input);
+                    list.get(number - 1).markedAsDone();
+                    System.out.println("      " + list.get(number - 1).toString());
+                } else if (inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")) {
+                    switch (inputArr[0]) {
+                        case "todo":
+                            addTask(new Todo(inputArr[1]));
+                            break;
+                        case "deadline":
+                            String[] messageArr = inputArr[1].split(" /by ", 2);
+                            addTask(new Deadline(messageArr[0], messageArr[1]));
+                            break;
+                        case "event":
+                            messageArr = inputArr[1].split(" /at ", 2);
+                            addTask(new Event(messageArr[0], messageArr[1]));
+                            break;
+                    }
+
                 }
                 printLine();
             }
@@ -47,16 +59,18 @@ public class Duke {
     }
 
     public static void listItems() {
+        System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             int num = i + 1;
-            System.out.println("    " + num + ".[" + list.get(i).getStatusIcon()+ "] "+list.get(i).getDescription());
+            System.out.println("      " + num + "." + list.get(i).toString());
         }
     }
 
-    public static void addItem(String s) {
-        Task t = new Task(s);
+    public static void addTask(Task t) {
+        System.out.println("     Got it. I've added this task: ");
         list.add(t);
-        System.out.println("    added: " + s);
+        System.out.println("      " + t.toString());
+        System.out.println("     Now you have " + list.size() + " tasks in the list.");
     }
 
     public static void printLine() {

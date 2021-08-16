@@ -1,10 +1,7 @@
 public class Task {
-    private enum Type {
-        T, D, E
-    }
+
     protected String description;
     protected boolean isDone;
-    protected Type type;
 
     public Task(String description) {
         this.description = description;
@@ -17,6 +14,11 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public String toString() {
+        String s = "[" + getStatusIcon() + "] " + getDescription();
+        return s;
     }
 
     public void markedAsDone() {
