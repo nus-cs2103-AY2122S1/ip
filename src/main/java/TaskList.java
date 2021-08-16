@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final List<String> list = new ArrayList<>(List.of("Test1", "Test2"));
+    private final List<String> list = new ArrayList<>();
 
     public void addTask(String task) {
         list.add(task);

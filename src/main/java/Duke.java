@@ -11,7 +11,7 @@ public class Duke {
             String input = sc.nextLine();
             if (input.equals("bye")) break;
             else if (input.equals("list")) echo(list.toString());
-            else echo(input);
+            else addTask(input);
         }
         exit();
     }
@@ -39,5 +39,11 @@ public class Duke {
         System.out.println(LINE);
         System.out.println("Goodbye, hope to see you again soon!");
         System.out.println(LINE);
+    }
+
+    private static void addTask(String task) {
+        list.addTask(task);
+        String message = String.format("added: %s", task);
+        echo(message);
     }
 }
