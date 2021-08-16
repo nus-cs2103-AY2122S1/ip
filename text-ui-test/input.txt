@@ -1,7 +1,20 @@
+apple
+
 todo borrow book
+todo
 deadline finish CS2103T IP /by Monday
+deadline /by Tuesday
+deadline apple
+deadline
 event exam /at Mon 2-4pm
-todo return book
+event /at Tues 2-7am
+event pear123
+event
 deadline finish assignment /by August 31st
 event lecture /at Mon 3-5pm
+done 1
+done 7
+done orange
+done
+list
 bye
