@@ -34,7 +34,7 @@ public class ChatBot {
         Task complete = tasks.get(index - 1);
         complete.completeTask();
 
-        return line + "Well done! You finally completed it!\n" + line;
+        return line + "Well done! You finally completed " + complete.getMessage() + "!\n" + line;
     }
 
 }

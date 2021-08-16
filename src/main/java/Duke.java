@@ -18,25 +18,28 @@ public class Duke {
 
             String[] inputs = input.split(" ");
             // might want to change this to switch if if-else get too much
-            if (inputs[0].equals("bye")) {
-                System.out.println(bot.getExitMessage());
-                running = false;
-            } else if (inputs[0].equals("list")) {
+            String str = inputs[0];
 
-                System.out.println(bot.getListMessage());
-                input = sc.nextLine();
+            switch (str)
+            {
+                case "bye":
+                    System.out.println(bot.getExitMessage());
+                    running = false;
+                    break;
+                case "list":
+                    System.out.println(bot.getListMessage());
+                    input = sc.nextLine();
+                    break;
+                case "done":
+                    String msg = bot.completeTask(Integer.parseInt(inputs[1]));
+                    System.out.println(msg);
+                    input = sc.nextLine();
+                    break;
+                default:
+                    String message = bot.addItems(input);
+                    System.out.println(message);
+                    input = sc.nextLine();
 
-            } else if (inputs[0].equals("done")) {
-
-                String message = bot.completeTask(Integer.parseInt(inputs[1]));
-                System.out.println(message);
-                input = sc.nextLine();
-
-            } else {
-
-                String message = bot.addItems(input);
-                System.out.println(message);
-                input = sc.nextLine();
             }
         }
         sc.close();
