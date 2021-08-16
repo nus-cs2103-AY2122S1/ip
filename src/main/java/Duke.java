@@ -47,18 +47,18 @@ public class Duke {
 
     /**
      * Adds item to the todolist.
-     * @param str
+     * @param task
      */
-    private static void addToList(String str) {
-        taskList[listIndex++] = new Task(str);
-        echo("added: " + str);
+    private static void addToList(Task task) {
+        taskList[listIndex++] = task;
+        echo("Got it. I've added this task:\n  " + task + "\nNow you have " + listIndex + " tasks in the list.");
     }
     /**
      * Marks task as done in taskList.
      * @param input The input string.
      */
     private static void doTask(String input) {
-        int taskID = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
+        int taskID = Integer.parseInt(input);
         String msg;
         int taskIndex = taskID - 1;
         if (taskList[taskIndex] != null) {
@@ -87,14 +87,11 @@ public class Duke {
      * Prints out the todolist.
      */
     private static void printList() {
-        int index = 1;
         String line = "________________________________";
         System.out.println(line);
-        for (Task item : taskList) {
-            if (item == null) {
-                break;
-            }
-            System.out.println(index++ + "." + item);
+        System.out.println("Here are the tasks in your list:");
+        for (int index = 0; index < listIndex; index++) {
+            System.out.println((index + 1) + "." + taskList[index]);
         }
         System.out.println(line);
         System.out.println();
@@ -108,15 +105,42 @@ public class Duke {
         while (!isExited) {
             // String input
             String input = sc.nextLine();
-            if (isInputBye(input)) {
-                isExited = true;
-                bye();
-            } else if (isInputList(input)) {
-                printList();
-            } else if (isInputDone(input)) {
-                doTask(input);
-            } else {
-                addToList(input);
+            switch(input) {
+                case "bye":
+                    isExited = true;
+                    bye();
+                    break;
+                case "list":
+                    printList();
+                    break;
+                default:
+                    String[] split = input.split(" ", 2);
+                    switch(split[0]) {
+                        case "done":
+                            if (split.length > 1) {
+                                doTask(split[1]);
+                                break;
+                            }
+                        case "todo":
+                            if (split.length > 1) {
+                                addToList(new ToDo(split[1]));
+                                break;
+                            }
+                        case "deadline":
+                            if (split.length > 1) {
+                                String[] deadline = split[1].split("/", 2);
+                                addToList(new Deadline(deadline[0], deadline[1].substring(3)));
+                                break;
+                            }
+                        case "event":
+                            if (split.length > 1) {
+                                String[] event = split[1].split("/", 2);
+                                addToList(new Event(event[0], event[1].substring(3)));
+                                break;
+                            }
+                        default:
+                            echo("OOPS! Something went wrong x.x");
+                    }
             }
         }
     }
