@@ -2,13 +2,11 @@ import java.util.ArrayList;
 
 public class TaskStorage {
 
-    // private Task[] storage = new Task[100];
     private ArrayList<Task> storage = new ArrayList<>();
 
     // Adds a new task to the storage and returns a confirmation message
     public String add(Task task) {
         storage.add(task);
-        // storage[++current] = task;
         String returnString = "Got it. I've added this task:\n  "
             + task.toString() + "\n"
             + "Now you have " + storage.size() + " tasks in the list.";
@@ -23,7 +21,7 @@ public class TaskStorage {
     // Marks a task as done, and returns a confirmation message
     public String markDone(int ind) {
         if (ind < 0 || ind >= storage.size()){ 
-            throw new IllegalArgumentException("Bad index entered by user >:(");
+            throw new IllegalArgumentException("Bad index entered by user. >:(");
         }
         storage.get(ind).markDone();
 
@@ -33,14 +31,14 @@ public class TaskStorage {
     // Gets a task from the storage
     public Task get(int ind) {
         if (ind < 0 || ind >= storage.size()){ 
-            throw new IllegalArgumentException("Bad index entered by user >:(");
+            throw new IllegalArgumentException("Bad index entered by user. >:(");
         }
         return storage.get(ind);
     }
 
     public String delete(int ind) {
         if (ind < 0 || ind >= storage.size()){ 
-            throw new IllegalArgumentException("Bad index entered by user >:(");
+            throw new IllegalArgumentException("Bad index entered by user. >:(");
         }
         String result = "Noted. I've removed this task:\n  " + storage.get(ind).toString() + "\n";
         storage.remove(ind);
@@ -51,11 +49,10 @@ public class TaskStorage {
     // Lists out all tasks from the storage in order of index
     @Override
     public String toString() {
-        String result = "Here are the tasks in your list:\n";
-        for (int i = 0; i < storage.size() - 1; i++) {
-            result += (String.valueOf(i + 1) + "." + storage.get(i).toString() + "\n");
+        String result = "Here are the tasks in your list:";
+        for (int i = 0; i < storage.size(); i++) {
+            result += ("\n" + String.valueOf(i + 1) + "." + storage.get(i).toString());
         }
-        result += (String.valueOf(storage.size()) + "." + storage.get(storage.size() - 1).toString());
         return result;
     }
 }

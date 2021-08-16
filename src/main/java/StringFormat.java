@@ -1,6 +1,6 @@
 public class StringFormat {
 
-    private static final String lineBreak = "\t" + "____________________________________________________________\n";
+    private static final String lineBreak = "\t____________________________________________________________\n";
 
     // formats string argument(s) sequentially
     public static String formatString(String one, String... strings) {
@@ -25,7 +25,7 @@ public class StringFormat {
 
     // Add a tab after every newline
     public static String tabAllNewline(String str) {
-        return str.replace("\n", "\n" + "\t");
+        return str.replace("\n", "\n\t");
     }
 
     public static String tabAndFormat(String str) {

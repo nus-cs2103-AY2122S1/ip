@@ -26,40 +26,23 @@ public class Duke {
             
             try {
                 // if it is "bye", we exit the loop
-                if (inputs[0].equals("bye")) {
+                if (inputs[0].equals("bye") && inputs.length == 1) {
                     System.out.println(
                         StringFormat.formatString("Bye. Hope to see you again soon!")
                     );
                     break;
                 // if it is "list", we list the stored inputs
-                } else if (inputs[0].equals("list")) {
+                } else if (inputs[0].equals("list") && inputs.length == 1) {
                     System.out.println(
                         StringFormat.tabAndFormat(storage.toString())
                     );
-                // if we are marking a task as done
-                } else if (inputs[0].equals("done")) {
-                    if (inputs.length < 2) {
-                        throw new DukeException("☹ OOPS!!! Task number to be marked as done cannot be empty.");
-                    }
-                    int ind = Integer.valueOf(inputs[1]) - 1;
-
-                    System.out.println(
-                        StringFormat.tabAndFormat(storage.markDone(ind))
-                    );
-                // if we are deleting a task from storage
-                } else if (inputs[0].equals("delete")) {
-                    if (inputs.length < 2) {
-                        throw new DukeException("☹ OOPS!!! Task number to be deleted cannot be empty.");
-                    }
-                    int ind = Integer.valueOf(inputs[1]) - 1;
-
-                    System.out.println(
-                        StringFormat.tabAndFormat(storage.delete(ind))
-                    );
-                
-                // if we are making a task
+                // if we are editing tasks
+                } else if (inputs[0].equals("done") || inputs[0].equals("delete")) {
+                    taskEditor(storage, inputs);
+                                    
+                // if we are creating a task
                 } else {
-                    taskHandler(storage, inputs, input);
+                    taskCreator(storage, inputs);
                 }
             } catch (DukeException | IllegalArgumentException e){
                 System.out.println(StringFormat.tabAndFormat(e.getMessage()));
@@ -68,7 +51,54 @@ public class Duke {
         sc.close();
     }
 
-    public static void taskHandler(TaskStorage storage, String[] inputs, String input) throws DukeException {
+    // function to help in editing tasks
+    private static void taskEditor(TaskStorage storage, String[] inputs) throws DukeException {
+        // if we are marking a task as done
+        if (inputs[0].equals("done")) {
+            if (inputs.length < 2) {
+                throw new DukeException("☹ OOPS!!! Enter proper task number to be marked as done.");
+            }
+            // checking following string is a valid number
+            if (checkStringIfInteger(inputs[1])) {
+                int ind = Integer.valueOf(inputs[1]) - 1;
+                System.out.println(
+                    StringFormat.tabAndFormat(storage.markDone(ind))
+                );
+            } else {
+                System.out.println(StringFormat.formatString("☹ OOPS!!! Enter proper task number to be deleted."));
+            }
+
+        // if we are deleting a task from storage
+        } else if (inputs[0].equals("delete")) {
+            if (inputs.length != 2) {
+                throw new DukeException("☹ OOPS!!! Enter proper task number to be deleted.");
+            }
+            // checking following string is a valid number
+            if (checkStringIfInteger(inputs[1])) {
+                // if it is, we can go ahead with the deletion
+                int ind = Integer.valueOf(inputs[1]) - 1;
+                System.out.println(
+                    StringFormat.tabAndFormat(storage.delete(ind))
+                );
+                // 
+            } else {
+                System.out.println(StringFormat.formatString("☹ OOPS!!! Enter proper task number to be deleted."));
+            }
+        }
+    }
+
+    // function to check if a String is an integer
+    private static boolean checkStringIfInteger(String test) {
+        try {
+            Integer.parseInt(test);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    // function to help in creating tasks
+    private static void taskCreator(TaskStorage storage, String[] inputs) throws DukeException {
         // if we are creating a todo task
         if (inputs[0].equals("todo")) {
             if (inputs.length < 2) {
