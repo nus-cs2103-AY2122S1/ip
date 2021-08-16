@@ -1,6 +1,7 @@
 todo testing 123
 deadline duke123 /by tonight
 done asdfg
+done 3
 todo
 list
 event what are you doing step /at
@@ -12,4 +13,6 @@ done 3
 done
 todo whatever
 list
+delete 4
+delete 4
 bye
