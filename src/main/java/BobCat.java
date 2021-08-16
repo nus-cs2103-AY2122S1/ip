@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Duke {
+public class BobCat {
     public static class Response {
         private static void hLine() {
             System.out.println("\t----------------------------------------------");
@@ -33,7 +33,7 @@ public class Duke {
         Scanner scanObj = new Scanner(System.in);
         boolean toTerminate = false;
 
-        Response.respond(new String[]{"Hello! I'm Duke!", "What can I do for you?"});
+        Response.respond(new String[]{"Hello! I'm BobCat!", "What can I do for you?"});
         while(!toTerminate) {
             String inp = scanObj.nextLine();
             if (inp.equals("bye")) {
