@@ -38,6 +38,12 @@ public class Duke {
                     task.markAsDone();
                     System.out.printf("Lollipop: %s has been marked as done.%n", task.toString());
 
+                } else if (command.startsWith("delete")) {
+                    int taskNumber = parseInt(command.split(" ")[1]);
+                    Task task = taskList.get(taskNumber - 1);
+                    taskList.remove(taskNumber - 1);
+                    System.out.printf("Lollipop: %s has been deleted.%n", task.toString());
+
                 } else if (command.startsWith("todo")) {
                     String[] splitCommand = command.split(" ", 2);
                     if (splitCommand.length == 1) {
