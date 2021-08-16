@@ -9,4 +9,5 @@ list
 todo
 deadline
 blah
+delete 1
 bye

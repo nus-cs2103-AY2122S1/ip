@@ -75,6 +75,28 @@ public class Duke {
     }
 
     /**
+     * A public method to check whether the command entered is to delete a task.
+     *
+     * @param inputCommand The user input command.
+     *
+     * @return A boolean value indivates whether the input command is a delete-command.
+     */
+    public boolean isDeleteCommand(String inputCommand) {
+        if (inputCommand.length() < 8) {
+            return false;
+        }
+        String firstHalf = inputCommand.substring(0, 6);
+        String secondHalf = inputCommand.substring(7, inputCommand.length());
+        if (!firstHalf.equals("delete")) {
+            return false;
+        }
+        for (int i = 0; i < secondHalf.length(); i++) {
+            if (secondHalf.charAt(i) > '9' || secondHalf.charAt(i) < '0') return false;
+        }
+        return true;
+    }
+
+    /**
      * A method that list all current tasks.
      *
      * @return An array of String, each String contains a task.
@@ -117,6 +139,15 @@ public class Duke {
      */
     public void markAsDone(int taskNumber) {
         tasks.get(taskNumber).markAsDone();
+    }
+
+    /**
+     * A method that read the number of a task, and remove it.
+     *
+     * @param taskNumber The unique number of a task.
+     */
+    public void deleteTask(int taskNumber) {
+        tasks.remove(taskNumber);
     }
 
     /**
@@ -189,7 +220,25 @@ public class Duke {
                 markAsDone(taskNumber);
                 printMessage(new String[] {
                         "Nice! I've marked this task as done:",
-                        tasks.get(taskNumber).toString()});
+                        tasks.get(taskNumber).toString()
+                });
+            } else if (isDeleteCommand(inputCommand)) {
+                int taskNumber = 0;
+                for (int i = 7; i < inputCommand.length(); i++) {
+                    taskNumber = taskNumber * 10 + (int) (inputCommand.charAt(i) - '0');
+                }
+                taskNumber --;
+                if (taskNumber >= tasks.size()) {
+                    throw new taskNumberOutOfBoundException(
+                            "Input task number is larger than total number of tasks.");
+                }
+
+                printMessage(new String[] {
+                        "Noted. I've removed this task:",
+                        "  " + tasks.get(taskNumber).toString(),
+                        "Now you have " + (tasks.size() - 1) + " tasks in the list."
+                });
+                deleteTask(taskNumber);
             } else {
                 try {
                     addTaskDecode(inputCommand);
