@@ -29,7 +29,7 @@ public class TodoList {
         try {
             Task task = tasks[taskNumber - 1];
             task.markAsDone();
-            String response = String.format("Ooh yeah! Task %d marked as done:\n\t%s",
+            String response = String.format("Ooh yeah! Task %d marked as done:\n  %s",
                     taskNumber,
                     task);
             PrintResponse.print(response);
@@ -44,7 +44,7 @@ public class TodoList {
         availableIndex++;
         PrintResponse.print(
                 String.format("Caan Do!\n" +
-                                "\tadded: %s\n" +
+                                "  added: %s\n" +
                                 "Look at me! %d tasks in the list now!",
                         name,
                         availableIndex));
@@ -56,7 +56,7 @@ public class TodoList {
         availableIndex++;
         PrintResponse.print(
                 String.format("Caan Do!\n" +
-                        "\tadded: %s\n" +
+                        "  added: %s\n" +
                         "Look at me! %d in the list now!",
                         name,
                         availableIndex));

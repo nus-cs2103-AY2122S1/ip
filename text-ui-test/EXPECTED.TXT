@@ -1,7 +1,64 @@
-Hello from
+Look at me! I'm
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+How can I help?
+
+============Duke says============
+Ooh yeah! Here are your 0 tasks
+
+=================================
+Whats next? 
+============Duke says============
+IDGI...
+=================================
+Whats next? 
+============Duke says============
+Task number 0 invalid
+=================================
+Whats next? 
+============Duke says============
+Caan Do!
+	added: borrow book
+Look at me! 1 tasks in the list now!
+=================================
+Whats next? 
+============Duke says============
+Caan Do!
+  added: return book
+Look at me! 2 tasks in the list now!
+=================================
+Whats next? 
+============Duke says============
+Caan Do!
+  added: visit library
+Look at me! 3 in the list now!
+=================================
+Whats next? 
+============Duke says============
+Ooh yeah! Here are your 3 tasks
+1. [T][ ] borrow book
+2. [D][ ] return book (by: 12 Aug)
+3. [E][ ] visit library (at: 4pm tuesday)
+
+=================================
+Whats next? 
+============Duke says============
+Ooh yeah! Task 2 marked as done:
+  [D][X] return book (by: 12 Aug)
+=================================
+Whats next? 
+============Duke says============
+Ooh yeah! Here are your 3 tasks
+1. [T][ ] borrow book
+2. [D][X] return book (by: 12 Aug)
+3. [E][ ] visit library (at: 4pm tuesday)
+
+=================================
+Whats next? 
+============Duke says============
+Ooooh yeah! Can do!
+=================================

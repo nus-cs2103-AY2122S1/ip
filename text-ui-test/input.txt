@@ -1,0 +1,10 @@
+list
+done
+done 0
+todo borrow book
+deadline return book /by 12 Aug
+event visit library /at 4pm tuesday
+list
+done 2
+list
+bye
