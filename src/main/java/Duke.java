@@ -42,6 +42,20 @@ public class Duke {
                                     taskList.get(toSet - 1).listEntry() + "\n");
                         }
                     }
+
+                } else if (text.split(" ")[0].equals("delete")) { // delete function: delete a task
+                    if (text.split(" ").length == 1) {
+                        throw new DukeException("invalidDelete");
+                    } else {
+                        int toDelete = Integer.parseInt(text.split(" ")[1]);
+                        if (toDelete > listLength) {
+                            throw new DukeException("invalidDelete");
+                        } else {
+                            Task deleted = taskList.remove(toDelete - 1);
+                            System.out.print("  Noted. I've removed this task:\n    " + deleted.listEntry() +
+                                    "\n  Now you have " + --listLength + " tasks in the list.\n");
+                        }
+                    }
                     
                 } else { // task function: add tasks
                     if (text.split(" ").length == 1) { // task details not given or not valid task
