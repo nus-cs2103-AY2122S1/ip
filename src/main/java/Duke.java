@@ -6,23 +6,10 @@ import java.lang.String;
  * @author Chesterwongz
  */
 public class Duke {
-    /**
-     * False if Duke is running. True if user has exited Duke.
-     */
-    private static boolean isExited = false;
 
-    /**
-     * Checks if user wants to exit Duke.
-     *
-     * @param input The user's input
-     * @return Returns true if user wants to exit the Duke, and false otherwise.
-     */
-    private static boolean checkExit(String input) {
-        if (input.compareToIgnoreCase("bye") == 0) {
-            isExited = true;
-        }
-        return isExited;
-    }
+    private static final String[] todoList = new String[100];
+    private static int listIndex = 0;
+
     /**
      * Frames the message with underscore lines.
      *
@@ -70,18 +57,43 @@ public class Duke {
         print(msg);  // Output user input
     }
 
+    private static void addToList(String str) {
+        todoList[listIndex++] = str;
+        print("added: " + str);
+    }
+
+    private static void printList() {
+        int index = 1;
+        String line = "________________________________";
+        System.out.println(line);
+        for (String item : todoList) {
+            if (item == null) {
+                break;
+            }
+            System.out.println(index++ + ". " + item);
+        }
+        System.out.println(line);
+        System.out.println();
+    }
+
     public static void main(String[] args) {
-        // Level 1.
         logo();
         greet();
         Scanner sc = new Scanner(System.in);
+        boolean isExited = false;
         while (!isExited) {
             // String input
             String input = sc.nextLine();
-            if (checkExit(input)) {
-                bye();
-            } else {
-                echo(input);
+            switch (input) {
+                case "bye":
+                    isExited = true;
+                    bye();
+                    break;
+                case "list":
+                    printList();
+                    break;
+                default:
+                    addToList(input);
             }
         }
     }
