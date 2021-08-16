@@ -50,23 +50,42 @@ public class Duke {
      * Add and store tasks entered and display them back with complete status when requested.
      */
     static void add() {
-        String command = scanner.nextLine();
+        String command = "";
         Task[] list = new Task[100];
         int index = 0;
-        while (!command.equals("bye")) {
-            if (command.equals("list")) {
+        while (true) {
+            command = scanner.nextLine();
+            if (command.equals("bye")) {
+                // end bot
+                break;
+            } else if (command.equals("list")) {
+                // view list
                 printMessage(listToString(list));
-            } else if (command.substring(0,4).equals("done")) {
-                int doneIndex = Integer.parseInt(command.substring(5, 6));
-                list[doneIndex - 1].markAsDone();
-                printMessage("Nice! I've marked this task as done:\n\t" + list[doneIndex - 1]);
+            } else if (command.length() > 5 && command.substring(0, 5).equals("done ")) {
+                // done command
+                try {
+                    int doneIndex = Integer.parseInt(command.substring(5));
+                    try {
+                        list[doneIndex - 1].markAsDone();
+                        printMessage("Nice! I've marked this task as done:\n\t" + list[doneIndex - 1]);
+                    } catch (NullPointerException e) {
+                        // Task at doneIndex does not exist
+                        printMessage("Task " + doneIndex + " does not exist. Please check your task list!");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        // mark done index more than 100
+                        printMessage("Duke can only save up to 100 task ;(");
+                    }
+                } catch (NumberFormatException e) {
+                    // command done is not followed by a number
+                    list[index] = new Task(command);
+                    index++;
+                    printMessage("added: " + command);
+                }
             } else {
                 list[index] = new Task(command);
                 index++;
                 printMessage("added: " + command);
             }
-
-            command = scanner.nextLine();
         }
         printMessage("Bye. See you next time!");
     }
@@ -79,11 +98,15 @@ public class Duke {
      */
     private static String listToString(Task[] list) {
         StringBuilder result = new StringBuilder();
-        result.append("Here are the tasks in your list:\n");
-        for (int i = 0; i < list.length; i++) {
-            if (list[i] == null) break;
-            result.append(i + 1).append(". ").append(list[i]);
-            if (list[i + 1] != null) result.append("\n");
+        if (list[0] != null) {
+            result.append("Here are the tasks in your list:\n");
+            for (int i = 0; i < list.length; i++) {
+                if (list[i] == null) break;
+                result.append(i + 1).append(". ").append(list[i]);
+                if (list[i + 1] != null) result.append("\n");
+            }
+        } else {
+            result.append("There is not task yet. Try to add a task first.");
         }
         return result.toString();
     }
