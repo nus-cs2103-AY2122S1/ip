@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
-        List<Task> taskList = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         String logo = "\t ____        _        \n"
                 + "\t|  _ \\ _   _| | _____ \n"
@@ -15,30 +15,30 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
 
         Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
+        String command = sc.next();
+        String arguments = sc.nextLine().stripLeading();
 
         while (!command.equals("bye")) {
             if (command.equals("list")) {
-
                 System.out.println("\t____________________________________________________________");
                 System.out.println("\tHere are the tasks in your list:");
-                if (taskList.isEmpty()) {
+                if (tasks.isEmpty()) {
                     System.out.println("\t  You currently have no tasks. Why not add a task?");
                 } else {
-                    for (int i = 0; i < taskList.size(); i++) {
-                        Task currTask = taskList.get(i);
+                    for (int i = 0; i < tasks.size(); i++) {
+                        Task currTask = tasks.get(i);
                         System.out.println("\t" + (i + 1) + ". " + currTask);
                     }
                 }
                 System.out.println("\t____________________________________________________________");
-            } else if (command.split(" ")[0].equals("done")) {
-                int index = Integer.parseInt(command.split(" ")[1]);
-                if (index < 1 || index > taskList.size()) {
+            } else if (command.equals("done")) {
+                int index = Integer.parseInt(arguments);
+                if (index < 1 || index > tasks.size()) {
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\tThe index you entered is invalid. Please try again.");
                     System.out.println("\t____________________________________________________________");
                 } else {
-                    Task taskToBeMarked = taskList.get(index - 1);
+                    Task taskToBeMarked = tasks.get(index - 1);
                     taskToBeMarked.markTaskAsDone();
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\tNice! I've marked this task as done:");
@@ -46,12 +46,30 @@ public class Duke {
                     System.out.println("\t____________________________________________________________");
                 }
             } else {
-                taskList.add(new Task(command));
                 System.out.println("\t____________________________________________________________");
-                System.out.println("\tadded: " + command);
+                System.out.println("\tGot it. I'v added this task:");
+                if (command.equals("todo")) {
+                    Todo newTask = new Todo(arguments);
+                    tasks.add(newTask);
+                    System.out.println("\t  " + newTask);
+                } else if (command.equals("deadline")) {
+                    String[] argArr = arguments.split("/by");
+                    Deadline newTask = new Deadline(argArr[0], argArr[1]);
+                    tasks.add(newTask);
+                    System.out.println("\t  " + newTask);
+                } else if (command.equals("event")) {
+                    String[] argArr = arguments.split("/at");
+                    Event newTask = new Event(argArr[0], argArr[1]);
+                    tasks.add(newTask);
+                    System.out.println("\t  " + newTask);
+                }
+                System.out.println(String.format("\tNow you have %s " +
+                        (tasks.size() == 1 ? "task" : "tasks" )
+                        + " in the list.", tasks.size()));
                 System.out.println("\t____________________________________________________________");
             }
-            command = sc.nextLine();
+            command = sc.next();
+            arguments = sc.nextLine().stripLeading();
         }
 
         System.out.println("\t____________________________________________________________");
