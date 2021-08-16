@@ -37,8 +37,20 @@ public class Duke {
         int id = Integer.parseInt(parsedInput[1]);
         reply(String.format(
                 "Nice! I've marked this task as done: \n" +
-                "%s", TaskManager.completeTask(id-1).toString()
+                "%s", TaskManager.completeTask(id - 1).toString()
         ));
+    }
+
+    private static void deleteTask(String input) throws IllegalArgumentException {
+        String[] parsedInput = input.split(" ");
+        if (parsedInput.length < 2) {
+            throw new IllegalArgumentException("Not enough argument for delete");
+        }
+        int id = Integer.parseInt(parsedInput[1]);
+        Task deletedTask = TaskManager.deleteTask(id);
+        reply(String.format("Noted. I've removed this task: \n" +
+                "%s\n" +
+                "Now you have %d tasks in the list.", deletedTask.toString(), TaskManager.taskCount()));
     }
 
     public static void main(String[] args) {
@@ -54,6 +66,8 @@ public class Duke {
                     break;
                 } else if (userInput.startsWith("done")) {
                     completeTask(userInput);
+                } else if (userInput.startsWith("delete")) {
+                    deleteTask(userInput);
                 } else {
                     addTask(userInput);
                 }

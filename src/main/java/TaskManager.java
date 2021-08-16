@@ -30,6 +30,15 @@ public class TaskManager {
         return ret;
     }
 
+    public static Task deleteTask(int taskId) throws IllegalArgumentException {
+        if (taskId < taskList.size() && taskId >= 0) {
+            return taskList.remove(taskId);
+        } else {
+            throw new IllegalArgumentException("☹ OOPS!!! Task Index is invalid!!");
+        }
+
+    }
+
     public static int taskCount() {
         return taskList.size();
     }

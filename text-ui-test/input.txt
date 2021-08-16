@@ -18,4 +18,9 @@ list
 done -1
 done 999
 done
+delete 2
+delete 3
+todo new thing
+list
+delete
 bye
