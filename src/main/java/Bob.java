@@ -15,6 +15,10 @@ public class Bob {
             if (Objects.equals(response, "list")) {
                 System.out.println(taskList.getList());
                 response = scanner.nextLine();
+            } else if (response.matches("done(.*)")) {
+                String[] splitResponse = response.split(" ", 2);
+                System.out.println(taskList.markIndexCompleted(Integer.parseInt(splitResponse[1]) - 1));
+                response = scanner.nextLine();
             } else {
                 taskList.addTask(new Task(response));
                 System.out.println("added: " + response + "\n");
@@ -23,6 +27,5 @@ public class Bob {
         }
 
         System.out.println("Bye! Shoo!");
-
     }
 }

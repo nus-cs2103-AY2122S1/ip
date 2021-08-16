@@ -12,10 +12,14 @@ public class TaskList {
     }
 
     public String getList() {
-        String result = "";
+        String result = "Here's your tasks! Wow I'm so helpful! \n";
         for (int index = 0; index < this.taskList.size(); index++) {
-            result = result + (index + 1) + ". " + this.taskList.get(index).getTask() + "\n";
+            result = result + (index + 1) + "." + this.taskList.get(index).printTask() + "\n";
         }
         return result;
+    }
+
+    public String markIndexCompleted(int index) {
+        return this.taskList.get(index).markCompleted();
     }
 }
