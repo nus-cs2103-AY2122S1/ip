@@ -1,0 +1,15 @@
+todo
+todo borrow book
+list
+done 1
+deadline
+deadline return book
+deadline return book /by 31/08/2021
+event
+event book convention
+event book convention /at 29/08/2021
+list
+done 3
+done 2
+list
+bye

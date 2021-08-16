@@ -3,6 +3,9 @@
 /out/
 /*.iml
 
+# Java bytecode
+**/*.class
+
 # Gradle build files
 /.gradle/
 /build/
@@ -13,5 +16,5 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+/text-ui-test/ACTUAL.TXT
+/text-ui-test/EXPECTED-UNIX.TXT
