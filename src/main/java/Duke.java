@@ -2,19 +2,20 @@ import java.util.*;
 
 public class Duke {
 
-    String[] tasks = new String[100];
+    Task[] tasks = new Task[100];
     int count = 0;
 
-    private void addTask(String task) {
-        tasks[count] = task;
+    private void addTask(String taskDescription) {
+        Task newTask = new Task(taskDescription, count);
+        tasks[count] = newTask;
         count++;
-        System.out.println("added: " + task);
+        System.out.println("added: " + taskDescription);
     }
 
     private String getTasks() {
-        String tasksStr = "";
+        String tasksStr = "Here are the tasks in your list: \n";
         for (int i = 0; i < count; i++) {
-            tasksStr += (i + 1) + "." + this.tasks[i] + "\n";
+            tasksStr += this.tasks[i].toString() + "\n";
         }
         return (tasksStr);
     }
@@ -27,6 +28,9 @@ public class Duke {
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 System.out.println(currentDuke.getTasks());
+            } else if (input.split(" ")[0].equals("done")) {
+                int index = Integer.parseInt(input.split(" ")[1]);
+                currentDuke.tasks[index - 1].markDone();
             } else {
                 currentDuke.addTask(input);
             }
