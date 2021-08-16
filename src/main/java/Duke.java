@@ -42,9 +42,9 @@ public class Duke {
             if (lastInput.equals("bye")) {
                 break;
             } else if (lastInput.equals("list")) {
-
+                listOutTDL();
             } else {
-                dukeSays(lastInput);
+                addToTDL(lastInput);
             }
         }
 
@@ -79,6 +79,23 @@ public class Duke {
     private static void addToTDL(String str) {
         toDoList.add(str);
         dukeSays("added: " + str);
+    }
+
+    /**
+     * Used to print out contents of the list nicely.
+     */
+    private static void listOutTDL() {
+        String printThis = "";
+
+        int serialNo = 1;
+        for (String ele : toDoList) {
+            String currLine = serialNo + ". " + ele + "\n";
+            printThis = printThis + currLine;
+
+            serialNo++;
+        }
+
+        dukeSays(printThis);
     }
 
 
