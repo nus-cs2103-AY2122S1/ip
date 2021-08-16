@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         boolean bye = false;
-        Task[] taskList = new Task[100];
+        ArrayList<Task> taskList = new ArrayList<>(100);
         int listLength = 0;
 
         System.out.println("  ____________________________________________________________");
@@ -25,7 +26,7 @@ public class Duke {
                 } else if (text.equals("list")) { // list function: iterates through taskList, prints Tasks' listEntry
                     System.out.println("  Here are the tasks in your list:");
                     for (int i = 0; i < listLength; ++i) {
-                        System.out.println("  " + (i + 1) + "." + taskList[i].listEntry());
+                        System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
                     }
                     
                 } else if (text.split(" ")[0].equals("done")) { // done function: sets a task to done
@@ -36,9 +37,9 @@ public class Duke {
                         if (toSet > listLength) {
                             throw new DukeException("invalidDone");
                         } else {
-                            taskList[toSet - 1].setDone();
+                            taskList.get(toSet - 1).setDone();
                             System.out.print("  Nice! I've marked this task as done:\n    " + 
-                                    taskList[toSet - 1].listEntry() + "\n");
+                                    taskList.get(toSet - 1).listEntry() + "\n");
                         }
                     }
                     
@@ -98,7 +99,7 @@ public class Duke {
                                 throw new DukeException("invalidInput");
                         }
                         // add task to taskList
-                        taskList[listLength++] = newTask;
+                        taskList.add(listLength++, newTask);
                         System.out.print("  Got it. I've added this task:\n    " + newTask.listEntry() + 
                                 "\n  Now you have " + listLength + " tasks in the list.\n");
                     }
