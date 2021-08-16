@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Encapsulates a task in DukeList.
  */
-public class Task {
+public abstract class Task {
     private boolean completed;
     protected String name;
 
