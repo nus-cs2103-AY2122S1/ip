@@ -17,5 +17,6 @@ public class BobCat {
             }
             Response.respond(inp, storage);
         }
+        scanObj.close();
     }
 }
