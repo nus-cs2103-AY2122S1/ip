@@ -17,4 +17,5 @@ event what
 list
 done -1
 done 999
+done
 bye
