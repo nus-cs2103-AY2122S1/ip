@@ -48,6 +48,11 @@ public class BobbyBot {
         }
     }
 
+    /**
+     * Checks if command is valid
+     * @param command command for chatbot eg. (list,delete,todo..)
+     * @return boolean if command is valid
+     */
     private boolean commandIsValid(String command) {
         //check valid command
         boolean commandIsValid = false;
@@ -79,6 +84,10 @@ public class BobbyBot {
         System.out.println(div);
     }
 
+    /**
+     * Mark a task as done
+     * @param taskNo Task Number (starting from index 1)
+     */
     private void markAsDone(int taskNo) {
         Task taskCompleted = tasks[taskNo - 1];
         taskCompleted.markAsDone();
@@ -86,6 +95,10 @@ public class BobbyBot {
         System.out.println("  " + taskCompleted + "\n" + div);
     }
 
+    /**
+     * Creates a todo task
+     * @param description description of task
+     */
     private void createToDo(String description) {
         tasks[totalTasks] = new ToDo(description);
         totalTasks++;
@@ -93,6 +106,11 @@ public class BobbyBot {
                 + "Now you have " + totalTasks + " tasks in the list.\n" + div);
     }
 
+    /**
+     * Creates an event task
+     * @param description description of task
+     * @param at time period of Event (start-end)
+     */
     private void createEvent(String description, String at) {
         tasks[totalTasks] = new Event(description, at);
         totalTasks++;
@@ -100,6 +118,11 @@ public class BobbyBot {
                 + "Now you have " + totalTasks + " tasks in the list.\n" + div);
     }
 
+    /**
+     * Creates a deadline task
+     * @param description description of task
+     * @param by date and time that the task should be completed by
+     */
     private void createDeadline(String description, String by) {
         tasks[totalTasks] = new Deadline(description, by);
         totalTasks++;
