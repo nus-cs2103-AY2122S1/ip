@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -61,30 +62,79 @@ public class Duke {
             } else if (command.equals("list")) {
                 // view list
                 printMessage(listToString(list));
-            } else if (command.length() > 5 && command.substring(0, 5).equals("done ")) {
-                // done command
-                try {
-                    int doneIndex = Integer.parseInt(command.substring(5));
-                    try {
-                        list[doneIndex - 1].markAsDone();
-                        printMessage("Nice! I've marked this task as done:\n\t" + list[doneIndex - 1]);
-                    } catch (NullPointerException e) {
-                        // Task at doneIndex does not exist
-                        printMessage("Task " + doneIndex + " does not exist. Please check your task list!");
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        // mark done index more than 100
-                        printMessage("Duke can only save up to 100 task ;(");
-                    }
-                } catch (NumberFormatException e) {
-                    // command done is not followed by a number
-                    list[index] = new Task(command);
-                    index++;
-                    printMessage("added: " + command);
-                }
             } else {
-                list[index] = new Task(command);
-                index++;
-                printMessage("added: " + command);
+                // split command to check for actions
+                String[] actions = command.split(" ");
+
+                switch (actions[0]) {
+                    case "done":
+                        try {
+                            int doneIndex = Integer.parseInt(command.substring(5));
+                            try {
+                                list[doneIndex - 1].markAsDone();
+                                printMessage("Nice! I've marked this task as done:\n\t" + list[doneIndex - 1]);
+                            } catch (NullPointerException e) {
+                                // Task at doneIndex does not exist
+                                printMessage("Task " + doneIndex + " does not exist. Please check your task list!");
+                            } catch (ArrayIndexOutOfBoundsException e) {
+                                // mark done index more than 100
+                                printMessage("Duke can only save up to 100 tasks ;(");
+                            }
+                        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+                            // command done is not followed by a number
+                            printMessage("Invalid input. Please check your done command format.");
+                        }
+                        break;
+                    case "todo":
+                        StringBuilder todoDescription = new StringBuilder();
+                        for (int i = 1; i < actions.length; i++) {
+                            todoDescription.append(actions[i]).append(" ");
+                        }
+                        Todo todo = new Todo(todoDescription.toString());
+                        list[index] = todo;
+                        index++;
+                        printMessage("Got it. I've added this task: \n\t" + todo + "\nNow you have " + index + " tasks in the list.");
+                        break;
+                    case "event":
+                        String[] eventSplit = command.split(" /at ");
+                        String at = "";
+                        try {
+                            at = eventSplit[1];
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            // no /at found in command
+                            printMessage("Invalid input. Please check your task format.");
+                            break;
+                        }
+                        String eventDescription = eventSplit[0].split("event ")[1];
+                        Event event = new Event(eventDescription, at);
+                        list[index] = event;
+                        index++;
+                        printMessage("Got it. I've added this task: \n\t" + event + "\nNow you have " + index + " tasks in the list.");
+                        break;
+                    case "deadline":
+                        String[] ddlSplit = command.split(" /by ");
+                        String by = "";
+                        try {
+                            by = ddlSplit[1];
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            // no /by found in command
+                            printMessage("Invalid input. Please check your task format.");
+                            break;
+                        }
+                        String ddlDescription = ddlSplit[0].split("deadline ")[1];
+                        Deadline deadline = new Deadline(ddlDescription, by);
+                        list[index] = deadline;
+                        index++;
+                        printMessage("Got it. I've added this task: \n\t" + deadline + "\nNow you have " + index + " tasks in the list.");
+                        break;
+                    default:
+                        // any other command creates a task by default
+                        Task task = new Task(command);
+                        list[index] = task;
+                        index++;
+                        printMessage("Got it. I've added this task: \n\t" + task + "\nNow you have " + index + " tasks in the list.");
+                        break;
+                }
             }
         }
         printMessage("Bye. See you next time!");
