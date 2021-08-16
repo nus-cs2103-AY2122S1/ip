@@ -14,7 +14,7 @@ public class Kermit {
         Scanner sc = new Scanner(System.in);
         String command = "";
 
-        final String introductionText = "Hello from Kermit, eaten any flies today?\nWhat can I do for you?";
+        final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
         final String goodbyeText = "Bye. Hope to see you again soon!";
 
         System.out.println(formatText(introductionText));
