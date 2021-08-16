@@ -1,6 +1,6 @@
 public class Duke {
 
-    public Duke() {
+    private Duke() {
         Greetings.chat();
     }
 

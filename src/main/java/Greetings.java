@@ -5,6 +5,9 @@ public class Greetings extends Responses{
         if (uResponse.equals("bye")) {
             Exit.chat();
         }
+        else if (uResponse.equals("list")) {
+            List.chat();
+        }
         else {
             Echo.chat(uResponse);
         }
