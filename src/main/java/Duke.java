@@ -10,13 +10,13 @@ public class Duke {
                 + "\t| |_| | |_| |   <  __/\n"
                 + "\t|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("\t____________________________________________________________");
-        System.out.println("\tHello from\n" + logo);
-        System.out.println("\tHello! I'm Duke" + "\tWhat can I do for you?");
+        System.out.println(logo);
+        System.out.println("\tHello! I'm Duke\n" + "\tWhat can I do for you?");
         System.out.println("\t____________________________________________________________");
 
         Scanner sc = new Scanner(System.in);
         String command = sc.next();
-        String arguments = sc.nextLine().stripLeading();
+        String arguments = "";
 
         while (!command.equals("bye")) {
             if (command.equals("list")) {
@@ -32,6 +32,7 @@ public class Duke {
                 }
                 System.out.println("\t____________________________________________________________");
             } else if (command.equals("done")) {
+                arguments = sc.nextLine().stripLeading();
                 int index = Integer.parseInt(arguments);
                 if (index < 1 || index > tasks.size()) {
                     System.out.println("\t____________________________________________________________");
@@ -47,33 +48,41 @@ public class Duke {
                 }
             } else {
                 System.out.println("\t____________________________________________________________");
-                System.out.println("\tGot it. I'v added this task:");
-                if (command.equals("todo")) {
-                    Todo newTask = new Todo(arguments);
-                    tasks.add(newTask);
-                    System.out.println("\t  " + newTask);
-                } else if (command.equals("deadline")) {
-                    String[] argArr = arguments.split("/by");
-                    Deadline newTask = new Deadline(argArr[0], argArr[1]);
-                    tasks.add(newTask);
-                    System.out.println("\t  " + newTask);
-                } else if (command.equals("event")) {
-                    String[] argArr = arguments.split("/at");
-                    Event newTask = new Event(argArr[0], argArr[1]);
-                    tasks.add(newTask);
-                    System.out.println("\t  " + newTask);
+                System.out.println("\tGot it. I've added this task:");
+                arguments = sc.nextLine().stripLeading();
+                switch (command) {
+                    case "todo": {
+                        Todo newTask = new Todo(arguments);
+                        tasks.add(newTask);
+                        System.out.println("\t  " + newTask);
+                        break;
+                    }
+                    case "deadline": {
+                        String[] argArr = arguments.split("/by");
+                        Deadline newTask = new Deadline(argArr[0], argArr[1]);
+                        tasks.add(newTask);
+                        System.out.println("\t  " + newTask);
+                        break;
+                    }
+                    case "event": {
+                        String[] argArr = arguments.split("/at");
+                        Event newTask = new Event(argArr[0], argArr[1]);
+                        tasks.add(newTask);
+                        System.out.println("\t  " + newTask);
+                        break;
+                    }
                 }
-                System.out.println(String.format("\tNow you have %s " +
-                        (tasks.size() == 1 ? "task" : "tasks" )
-                        + " in the list.", tasks.size()));
+                System.out.printf("\tNow you have %s " +
+                        (tasks.size() == 1 ? "task" : "tasks")
+                        + " in the list.%n", tasks.size());
                 System.out.println("\t____________________________________________________________");
             }
             command = sc.next();
-            arguments = sc.nextLine().stripLeading();
         }
 
         System.out.println("\t____________________________________________________________");
         System.out.println("\tBye. Hope to see you again soon!");
         System.out.println("\t____________________________________________________________");
+        sc.close();
     }
 }

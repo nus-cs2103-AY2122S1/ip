@@ -1,0 +1,8 @@
+list
+todo go shopping
+event workshop /at Tuesday 6-8pm
+deadline finish homework /by ASAP
+list
+done 3
+list
+bye
