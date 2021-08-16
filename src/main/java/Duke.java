@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,6 +18,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        ArrayList<Task> taskList = new ArrayList<>();
+
+
         String logo = "\n" +
                 "██████╗░░█████╗░███╗░░██╗\t░█████╗░░█████╗░░█████╗░░█████╗░\n" +
                 "██╔══██╗██╔══██╗████╗░██║\t██╔══██╗██╔══██╗██╔══██╗██╔══██╗\n" +
@@ -39,8 +45,17 @@ public class Duke {
                 case "bye":
                     System.out.println(formatReply(new String[]{"BYEEEEEE!","Hope to see you again soon :)"}));
                     System.exit(0);
+                case "list":
+                    // TODO: return list of members
+                    for (Task i : taskList){
+                        System.out.println(i);
+                    }
+                    break;
                 default:
-                    System.out.println(formatReply(new String[]{userInput}));
+                    // TODO: add items to list
+                    Task toAdd = new Task(userInput);
+                    taskList.add(toAdd);
+                    System.out.println(formatReply(toAdd.addMsg()));
             }
         }
     }
