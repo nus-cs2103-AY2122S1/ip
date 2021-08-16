@@ -137,5 +137,6 @@ public class Duke {
         System.out.println("What would you like me to add to the list?");
         Duke duke = new Duke();
         duke.addList();
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     }
 }
