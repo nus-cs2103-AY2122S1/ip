@@ -23,7 +23,7 @@ public class Event extends Task {
      * @return the string representation of Event details
      */
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
 }
