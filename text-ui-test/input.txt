@@ -1,3 +1,4 @@
+list
 todo read book
 deadline return book /by June 6th
 event project meeting /at Aug 6th 2-4pm
@@ -7,4 +8,13 @@ list
 done 1
 done 4
 list
+todo
+deadline
+event
+deadline return book
+event project meeting
+done 100
+done -1
+done
+blah
 bye
