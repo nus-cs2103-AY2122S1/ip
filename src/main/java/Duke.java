@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Objects;
 
 public class Duke {
     /** Handles user input for the program. */
@@ -17,24 +16,14 @@ public class Duke {
         while (true) {
             try {
                 String userInput = reader.readLine();
-                if (Objects.equals(userInput, "bye")) {
+                if (userInput.equals("bye")) {
                     break;
                 }
                 Processor.process(userInput);
             } catch (IOException e) {
-                System.err.println(e.getMessage());
-            } catch (BadInputFormatException e) {
-                Printer.print("The input is badly formatted.");
-            } catch (EmptyCommandException e) {
-                Printer.print("Command input cannot be empty!");
-            } catch (EmptyDescriptionException e) {
-                Printer.print("Missing task description");
-            } catch (TaskOutOfRangeException e) {
-                Printer.print("Task does not exist!");
-            } catch (UnknownCommandException e) {
-                Printer.print("Command not found.");
+                e.printStackTrace();
             } catch (InvalidInputException e) {
-                Printer.print("Input is invalid");
+                Printer.print(e.getMessage());
             }
         }
 
@@ -48,6 +37,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         System.out.println("Hello from\n" + logo);
         run();
     }

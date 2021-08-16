@@ -1,5 +1,5 @@
 public class TaskOutOfRangeException extends InvalidInputException {
     public TaskOutOfRangeException() {
-        super();
+        super("Task does not exist!");
     }
 }

@@ -1,5 +1,5 @@
 public class UnknownCommandException extends InvalidInputException {
     public UnknownCommandException() {
-        super();
+        super("Command not found.");
     }
 }

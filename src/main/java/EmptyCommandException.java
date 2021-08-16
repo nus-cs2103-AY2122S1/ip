@@ -1,5 +1,5 @@
 public class EmptyCommandException extends InvalidInputException {
     public EmptyCommandException() {
-        super();
+        super("Command input cannot be empty!");
     }
 }

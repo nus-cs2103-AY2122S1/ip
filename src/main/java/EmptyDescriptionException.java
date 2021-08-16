@@ -1,5 +1,5 @@
 public class EmptyDescriptionException extends InvalidInputException {
     public EmptyDescriptionException() {
-        super();
+        super("Missing task description");
     }
 }
