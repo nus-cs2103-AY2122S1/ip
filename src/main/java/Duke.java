@@ -19,7 +19,7 @@ public class Duke {
      */
     private static void printMessage(String message) {
         String horizontalLine = "____________________________________________________________";
-        System.out.println(horizontalLine + "\n" + message + "\n" + horizontalLine);
+        System.out.println("\t" + horizontalLine + "\n\t" + message + "\n\t" + horizontalLine);
     }
 
     /**
@@ -27,11 +27,11 @@ public class Duke {
      */
     static void greet() {
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        printMessage(logo + "\nWelcome! I'm Duke\nWhat can I do for you?");
+                + "\t|  _ \\ _   _| | _____ \n"
+                + "\t| | | | | | | |/ / _ \\\n"
+                + "\t| |_| | |_| |   <  __/\n"
+                + "\t|____/ \\__,_|_|\\_\\___|\n";
+        printMessage(logo + "\n\tWelcome! I'm Duke\n\tWhat can I do for you?");
     }
 
     /**
