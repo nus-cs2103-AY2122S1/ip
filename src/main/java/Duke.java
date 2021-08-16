@@ -1,6 +1,8 @@
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
+import static java.lang.Integer.*;
+
 public class Duke {
     public static void main(String[] args) {
         System.out.println("_____________________________________________________________________");
@@ -9,20 +11,20 @@ public class Duke {
         System.out.println("    How can I help to make your day as amazing as you are?");
         System.out.println("_____________________________________________________________________");
 
-        String[] arr = new String[100];
+
+        Task[] arr = new Task[100];
         int i = 0;
 
         while (true) {
             Scanner sc = new Scanner(System.in);
             String inp = sc.nextLine();
-            arr[i++] = inp;
 
             if (inp.equals("list")) {
                 System.out.println("_____________________________________________________________________");
-                arr[--i] = null;
+                System.out.println("    Here are the tasks in your list:");
                 for (int j=0; j < arr.length; j++){
                     if (arr[j] != null) {
-                        System.out.println("    " + (j + 1) + ". " + arr[j]);
+                        System.out.println("    " + (j + 1) + ". " + "[" + arr[j].getStatusIcon() + "] " + arr[j].getTask());
                     }
                     else {
                         break;
@@ -36,7 +38,17 @@ public class Duke {
                 System.out.println("_____________________________________________________________________");
                 break;
             }
-            else{
+            else if (inp.contains("done")) {
+                System.out.println("_____________________________________________________________________");
+                System.out.println("    Nice! I've marked this task as done:");
+                int ind = Integer.parseInt((inp.split("\\s"))[1])-1;
+                arr[ind].markAsDone();
+                System.out.println("        " + "[" + arr[ind].getStatusIcon() + "] " + arr[ind].getTask());
+                System.out.println("_____________________________________________________________________");
+            }
+            else {
+                Task t = new Task(inp);
+                arr[i++] = t;
                 System.out.println("_____________________________________________________________________");
                 System.out.println("    added: " + inp);
                 System.out.println("_____________________________________________________________________");
