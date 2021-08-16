@@ -1,14 +1,24 @@
-public class Task {
+/**
+ * A class that abstracts a task.
+ */
+public abstract class Task {
+
+    public abstract String taskDescription();
+
+    // The type of task
+    public enum Type {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
 
     private boolean isDone = false;
     private final String taskName;
+    private final Type type;
 
-    /**
-     * Creates a new task that is to be completed.
-     * @param taskName The name of the task.
-     */
-    public Task(String taskName) {
+    public Task(String taskName, Type type) {
         this.taskName = taskName;
+        this.type = type;
     }
 
     /**
@@ -25,12 +35,26 @@ public class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[X] " + this.taskName;
+            return typeString() +  "[X] " + this.taskDescription();
         }
-        return "[] " + this.taskName;
+        return typeString() + "[] " + this.taskDescription();
     }
 
     public String getTaskName() {
         return taskName;
+    }
+
+    /**
+     * Prints the string representation of the type of task.
+     * @return The required string representation.
+     */
+    public String typeString() {
+        if (this.type.equals(Type.TODO)) {
+            return "[T]";
+        } else if (this.type.equals(Type.EVENT)) {
+            return "[E]";
+        } else {
+            return "[D]";
+        }
     }
 }

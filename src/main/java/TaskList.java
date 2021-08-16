@@ -13,7 +13,8 @@ public class TaskList {
      */
     public static void addTask(Task task) {
         taskList.add(task);
-        System.out.println("Added: " + task.getTaskName() + "\n");
+        System.out.println("Got it! This task has been added:");
+        System.out.println("  " + task);
     }
 
     /**
@@ -34,7 +35,7 @@ public class TaskList {
      *              the first task in the taskList ArrayList.
      */
     public static void markTaskAsCompleted(int index) {
-        System.out.println("Got it! This task has been completed: ");
+        System.out.println("congratulations! This task has been completed: ");
         taskList.get(index - 1).isFinished();
         System.out.println("  " + taskList.get(index - 1) + "\n");
     }
