@@ -35,10 +35,11 @@ public class Duke {
 
                 for (int i = 0; i < lst.size(); i++) {
                     Task currentTask = lst.get(i);
-                    System.out.println((i + 1) + "." + currentTask.getStatusAndDescription());
+                    System.out.println((i + 1) + "." + currentTask.getStatusAndDescription() );
                 }
 
             }  else if (command.substring(0, 4).equals("done")) {
+
             int index = Integer.parseInt(command.substring(5)) - 1;
             String subtext = "Nice! I've marked this task as done:\n";
 
@@ -51,7 +52,7 @@ public class Duke {
                 ToDo toDo = new ToDo(command.substring(5));
                 lst.add(toDo);
                 System.out.format("Got it. I've added this task:\n" + toDo.getStatusAndDescription() + "\n"
-                        + "Now you have %d tasks in this list.", lst.size());
+                        + "Now you have %d tasks in this list.\n", lst.size());
 
             } else if (command.substring(0, 8).equals("deadline")) {
 
@@ -59,7 +60,7 @@ public class Duke {
                 Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), command.substring(escapeIndex + 4));
                 lst.add(deadline);
                 System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
-                        + "Now you have %d tasks in this list.", lst.size());
+                        + "Now you have %d tasks in this list.\n", lst.size());
 
             } else if (command.substring(0, 5).equals("event")) {
 
@@ -67,7 +68,7 @@ public class Duke {
                 Deadline deadline = new Deadline(command.substring(6, escapeIndex - 1), command.substring(escapeIndex + 4));
                 lst.add(deadline);
                 System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
-                        + "Now you have %d tasks in this list.", lst.size());
+                        + "Now you have %d tasks in this list.\n", lst.size());
             } else {
                 lst.add(new Task(command));
                 System.out.println("added: " + command);
