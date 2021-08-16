@@ -49,6 +49,22 @@ public class Duke {
                 continue;
             }
 
+            if (userInput.matches("^(todo ).+")){
+                String splitName = userInput.split(" ",2)[1];
+                Task toAdd = new Todo(splitName);
+                taskList.add(toAdd);
+                String reply = toAdd.addMsg();
+                reply = taskList.newLength() + "\n"+ reply;
+                System.out.println(formatReply(reply));
+                continue;
+            }
+
+//            if (userInput.matches("")){
+//                //TODO: DEADLINES
+//            }
+//            if (userInput.matches("")){
+//                //TODO: EVENTS
+//            }
 
             switch(userInput){
                 case "bye":
