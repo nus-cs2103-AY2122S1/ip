@@ -9,11 +9,6 @@ public class Duke {
      **/
     private final ArrayList<Task> list;
 
-   /**
-     * Simple index to keep track of the current element in the list
-     **/
-    private int index;
-
     /**
      * Basic constructor to initialise the list
      **/
@@ -37,7 +32,7 @@ public class Duke {
      */
     public void listen(){
         Scanner scanner = new Scanner(System.in);
-        this.printMsg("Hello! I'm Duke\nWhat can I do for you?");
+        Duke.printMsg("Hello! I'm Duke\nWhat can I do for you?");
         boolean terminate = true;
         while (terminate && scanner.hasNextLine()) {
             String scannedLine = scanner.nextLine();
