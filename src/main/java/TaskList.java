@@ -15,35 +15,56 @@ public class TaskList {
         this.currentIndex = 0;
     }
 
+    public String[] extractDeadline (String info) throws DukeException{
+        if (!info.contains("/by")) {
+            throw new DukeException("Error: '/by' argument is missing!");
+        }
+        String[] description = info.split(" /by ", 2);
+
+        if (description.length < 2 || description[1].equals("")) {
+            throw new DukeException("Error: OOPS!!! Argument after '/by' is empty!");
+        }
+        return description;
+    }
+
+    public String[] extractEvent (String info) throws DukeException{
+        if (!info.contains("/at")) {
+            throw new DukeException("Error: '/at' argument is missing!");
+        }
+        String[] description = info.split(" /at ", 2);
+        if (description.length < 2 || description[1].equals("")) {
+            throw new DukeException("Error: OOPS!!! Argument after '/at' is empty!");
+        }
+        return description;
+    }
     /**
      * Process user input and adds task that user has given and formats the message specific to the task.
      *
-     * @param description Task that user has entered.
+     * @param info Information about the task that user has entered.
      * @param taskType The type of task user has specified
      * @return Returns formatted string to be printed out to show task has been added or not.
      */
-    public String addTask(String description, Command taskType) {
+    public String addTask(String info, Command taskType) throws DukeException{
         if (currentIndex >= 100) {
             return "List is full.";
         }
-        String details = description.split(" ", 2)[1];
         switch (taskType) {
             case TODO:
-                ToDo toDo = new ToDo(details);
+                ToDo toDo = new ToDo(info);
                 list[currentIndex] = toDo;
                 break;
             case DEADLINE:
-                String[] extractDeadline = details.split(" /by ");
-                Deadline deadline = new Deadline(extractDeadline[0], extractDeadline[1]);
+                String[] deadlineInfo = extractDeadline(info);
+                Deadline deadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
                 list[currentIndex] = deadline;
                 break;
             case EVENT:
-                String[] extractEvent = details.split(" /at ");
-                Event event = new Event(extractEvent[0], extractEvent[1]);
+                String[] eventInfo = extractEvent(info);
+                Event event = new Event(eventInfo[0], eventInfo[1]);
                 list[currentIndex] = event;
                 break;
             default:
-                break;
+                throw new DukeException("Error: No such task type!");
         }
         currentIndex++;
         String totalTask = String.format("Now you have %d task(s) in the list.", currentIndex);
@@ -74,7 +95,7 @@ public class TaskList {
      * @param index index of task to be mark as done.
      * @return a message of whether task has been successfully added or not
      */
-    public String markTaskDone(int index) {
+    public String markTaskDone(int index) throws DukeException{
         if (index >= 0 && index < currentIndex) {
             if (list[index].getStatusIcon().equals(" ")) {
                 list[index].markDone();
@@ -83,7 +104,7 @@ public class TaskList {
                 return "Task has already been completed!";
             }
         } else {
-            return "No such task :< (Check the index input!!!)";
+            throw new DukeException("No such task :< (Check the index input!!!)");
         }
     }
 }

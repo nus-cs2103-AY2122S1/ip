@@ -14,4 +14,12 @@ list
 done 2
 done 3
 list
+todo
+deadline
+event
+done
+deadline project submission
+deadline project submission /by
+event volleyball cca
+event volleyball cca /at 
 bye

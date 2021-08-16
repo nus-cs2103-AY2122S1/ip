@@ -32,32 +32,40 @@ public class Duke {
         String input = sc.nextLine();
         Command command = Command.valueOfLabel(input.split(" ")[0]);
         while (command != Command.BYE) {
-            switch (command) {
-                case LIST:
-                    taskList.printTaskList();
-                    break;
-                case DONE:
-                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                    formatPrint(taskList.markTaskDone(index));
-                    break;
-                case HELP:
-                    printHelp();
-                    break;
-                case TODO:
-                    formatPrint(taskList.addTask(input, Command.TODO));
-                    break;
-                case DEADLINE:
-                    formatPrint(taskList.addTask(input, Command.DEADLINE));
-                    break;
-                case EVENT:
-                    formatPrint(taskList.addTask(input, Command.EVENT));
-                    break;
-                default:
-                    formatPrint("Invalid command @_@ Try typing 'help' to see my list of commands!");
+            try {
+                switch (command) {
+                    case LIST:
+                        taskList.printTaskList();
+                        break;
+                    case DONE:
+                        int index = extractIndex(input, Command.DONE);
+                        formatPrint(taskList.markTaskDone(index));
+                        break;
+                    case HELP:
+                        printHelp();
+                        break;
+                    case TODO:
+                        String toDoInfo = extractInfo(input, Command.TODO);
+                        formatPrint(taskList.addTask(toDoInfo, Command.TODO));
+                        break;
+                    case DEADLINE:
+                        String deadlineInfo = extractInfo(input, Command.DEADLINE);
+                        formatPrint(taskList.addTask(deadlineInfo, Command.DEADLINE));
+                        break;
+                    case EVENT:
+                        String eventInfo = extractInfo(input, Command.EVENT);
+                        formatPrint(taskList.addTask(eventInfo, Command.EVENT));
+                        break;
+                    default:
+                        throw new DukeException("Invalid command @_@ Try typing 'help' to see my list of commands!");
+                }
+            } catch (DukeException e) {
+                formatPrint(e.getMessage());
+            } finally {
+                System.out.println(PROMPT);
+                input = sc.nextLine();
+                command = Command.valueOfLabel(input.split(" ")[0]);
             }
-            System.out.println(PROMPT);
-            input = sc.nextLine();
-            command = Command.valueOfLabel(input.split(" ")[0]);
         }
 
         // Goodbye message for user and program stops
@@ -88,5 +96,23 @@ public class Duke {
             + "5. done [index of completed task] - Marks specified tasks as completed\n"
             + "6. bye - End the program");
         System.out.println(DIVIDER);
+    }
+
+    public static String extractInfo(String input, Command command) throws DukeException{
+        String[] info = input.split(" ", 2);
+        if (info.length < 2) {
+            throw new DukeException(String.format("Error: OOPS!!! The description of a %s cannot be empty.",
+                    command.label));
+        }
+        return info[1];
+    }
+
+    public static int extractIndex(String input, Command command) throws DukeException{
+        String[] info = input.split(" ", 2);
+        if (info.length < 2 || info[1].equals("")) {
+            throw new DukeException(String.format("Error: OOPS!!! The index argument for %s cannot be empty.",
+                    command.label));
+        }
+        return Integer.parseInt(info[1]) - 1;
     }
 }
