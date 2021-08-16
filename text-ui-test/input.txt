@@ -8,4 +8,8 @@ list
 deadline do homework /by no idea :-p
 blah
 todo
+delete 5
+done -1
+delete 1
+list
 bye
