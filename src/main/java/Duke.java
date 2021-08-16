@@ -1,8 +1,16 @@
+import java.util.Scanner;
+
 public class Duke {
     private static final String LINE = "____________________________________________________________";
+    private static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         greet();
+        while (true) {
+            String input = sc.nextLine();
+            if (input.equals("bye")) break;
+            echo(input);
+        }
     }
 
     private static void greet() {
@@ -15,6 +23,12 @@ public class Duke {
         System.out.println(logo);
         System.out.println("Hi, I'm Duke, your Personal Assistant Chatbot\n" +
                 "What can I do for you today?");
+        System.out.println(LINE);
+    }
+
+    private static void echo(String message) {
+        System.out.println(LINE);
+        System.out.println(message);
         System.out.println(LINE);
     }
 }
