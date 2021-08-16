@@ -4,12 +4,11 @@ public class Duke {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         boolean bye = false;
-        String[] intro = {"What can I do for you?", "How can I help you?", "What's up?", "What's good?"};
         Task[] taskList = new Task[100];
         int listLength = 0;
 
         System.out.println("  ____________________________________________________________");
-        System.out.printf("  Hello! I'm Duck.\n  %s\n", intro[(int)(intro.length * Math.random())]);
+        System.out.print("  Hello! I'm Duck.\n  What's up?\n");
         System.out.println("  ____________________________________________________________\n");
 
         while (!bye) {
@@ -58,6 +57,7 @@ public class Duke {
 
             System.out.println("  ____________________________________________________________\n");
         }
+
+        input.close();
     }
 }
-
