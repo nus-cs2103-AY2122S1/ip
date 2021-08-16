@@ -42,13 +42,14 @@ public class CommandParserImpl implements CommandParser {
 							"index", parsedCommands.get(1)
 					));
 				} catch (Exception e) {
-					processException(new IllegalArgumentException("done requires a valid index"));
+					processException(e);
 				}
 				
 				break;
 			case "deadline": {
 				try {
 					int byIndex = parsedCommands.indexOf("/by");
+					if (byIndex == -1) throw new IllegalArgumentException("/by command not found");
 					
 					String desc = String.join(" ", parsedCommands.subList(1, byIndex));
 					if (desc.isBlank()) throw new IllegalArgumentException("deadline desc cannot be empty");
@@ -83,19 +84,34 @@ public class CommandParserImpl implements CommandParser {
 			case "event": {
 				try {
 					int byIndex = parsedCommands.indexOf("/at");
+					if (byIndex == -1) throw new IllegalArgumentException("/at command not found");
+					
 					String desc = String.join(" ", parsedCommands.subList(1, byIndex));
+					if (desc.isBlank()) throw new IllegalArgumentException("event desc cannot be empty");
+					
 					String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
+					if (timing.isBlank()) throw new IllegalArgumentException("event timing cannot be empty");
 					
 					commandProcessor.processCommand(Command.EVENT, Map.of(
 							"description", desc,
 							"timing", timing
 					));
 				} catch (Exception e) {
-					processException(new IllegalArgumentException("event requires a valid description and timing"));
+					processException(e);
 				}
 				
 				break;
 			}
+			case "delete":
+				try {
+					commandProcessor.processCommand(Command.DELETE, Map.of(
+							"index", parsedCommands.get(1)
+					));
+				} catch (Exception e) {
+					processException(e);
+				}
+				
+				break;
 			default:
 				processException(new IllegalCallerException("I'm sorry, but I don't know what that means :-("));
 				break;

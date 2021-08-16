@@ -43,6 +43,9 @@ public class CommandProcessorImpl implements CommandProcessor {
 				// convert 1-indexing to 0-indexing
 				processDone(Integer.parseInt(arguments.getOrDefault("index", "-1")) - 1);
 				break;
+			case DELETE:
+				processDelete(Integer.parseInt(arguments.getOrDefault("index", "-1")) - 1);
+				break;
 			default:
 				printSentence("command not recognized by processor");
 		}
@@ -63,13 +66,28 @@ public class CommandProcessorImpl implements CommandProcessor {
 	 */
 	public void processDone(int index) {
 		if (index >= taskList.size() || index < 0) {
-			printSentence(" Non-existent task");
-			return;
+			throw new IllegalArgumentException("non valid index for marking the task done");
 		}
 		
 		taskList.get(index).checkDone();
 		printSentence("Nice! I've marked this task as done: \n" +
 				"\t [X] " + taskList.get(index).getDesc());
+	}
+	
+	/**
+	 * delete the task in the list
+	 *
+	 * @param index 0-indexed integer
+	 */
+	private void processDelete(int index) {
+		if (index >= taskList.size() || index < 0) {
+			throw new IllegalArgumentException("non valid index for deletion");
+		}
+		
+		Task removedTask = taskList.remove(index);
+		printSentence(" Noted. I've removed this task: \n" +
+				"\t" + removedTask.toString() + "\n" +
+				" Now you have " + taskList.size() + " tasks in the list.");
 	}
 	
 	public void processBye() {

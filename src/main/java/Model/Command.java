@@ -38,5 +38,6 @@ public enum Command {
 	DEADLINE,
 	EVENT,
 	TODOS,
+	DELETE,
 	DONE,
 }
