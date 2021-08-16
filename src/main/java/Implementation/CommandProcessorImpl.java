@@ -27,6 +27,9 @@ public class CommandProcessorImpl implements CommandProcessor {
 			case ADD:
 				processAdd(arguments.get(0));
 				break;
+			case DONE:
+				
+				break;
 			case INVALID:
 				processInvalid(arguments.get(0));
 				break;

@@ -22,5 +22,6 @@ public enum Command {
 	BYE,
 	LIST,
 	ADD,
+	DONE,
 	INVALID // special command for invalid input
 }
