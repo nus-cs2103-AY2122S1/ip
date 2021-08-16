@@ -62,6 +62,15 @@ public class Duke {
         }
     }
 
+    private static String getMetadata(String command) throws IrisException {
+        String[] splitted = command.split(" ", 2);
+        if (splitted.length == 1) {
+            throw new IrisException("The description cannot be empty");
+        } else {
+            return splitted[1];
+        }
+    }
+
     private static void handleCommand(String command) throws IrisException {
         if (command.equals("list")) {
             listTasks();
@@ -69,8 +78,7 @@ public class Duke {
             String doneMetadata = command.split(" ")[1];
             done(Integer.parseInt(doneMetadata));
         } else if (command.startsWith("todo")) {
-            String todoMetadata = command.split(" ", 2)[1];
-            addTodo(todoMetadata);
+            addTodo(getMetadata(command));
             sayTaskAdded();
         } else if (command.startsWith("deadline")) {
             String deadlineMetadata = command.split(" ", 2)[1];
