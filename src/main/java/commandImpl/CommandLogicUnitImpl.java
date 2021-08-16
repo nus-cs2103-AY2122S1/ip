@@ -15,6 +15,12 @@ import static util.Display.printSentence;
 public class CommandLogicUnitImpl implements CommandLogicUnit {
 	private final ArrayList<Task> taskList = new ArrayList<>();
 	
+	/**
+	 * command processing functions, in this implementation it accepts all the commands
+	 *
+	 * @param command   one of the command from Command enum class
+	 * @param arguments corresponding arguments for each command
+	 */
 	@Override
 	public void processCommand(Command command, Map<String, String> arguments) {
 		switch (command) {
@@ -90,12 +96,12 @@ public class CommandLogicUnitImpl implements CommandLogicUnit {
 				" Now you have " + taskList.size() + " tasks in the list.");
 	}
 	
-	public void processBye() {
+	private void processBye() {
 		printSentence(" Bye. Hope to see you again soon!");
 		System.exit(0);
 	}
 	
-	public void processList() {
+	private void processList() {
 		StringBuilder stringBuilder = new StringBuilder();
 		
 		IntStream.range(1, taskList.size() + 1)
