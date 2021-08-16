@@ -11,4 +11,6 @@ You now have 2 items in your list
 Got it! I have added:
 [T] [ ] sleep
 You now have 3 items in your list 
+Completed:  run (by: tonight)
+You didn't overshoot the deadline right?
 Good riddance! Time to continue my beauty sleep :)

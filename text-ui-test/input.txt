@@ -1,4 +1,5 @@
 todo eat
 deadline run /by tonight
 todo sleep
+done 2
 bye
