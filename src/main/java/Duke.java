@@ -63,7 +63,7 @@ public class Duke {
         Task task = this.tasks.get(taskIdx);
         task.markAsDone();
         System.out.println("___________________________________________________");
-        System.out.println(" Nice! I've marked this task as done: \n" + task);
+        System.out.println(" Nice! I've marked this task as done:\n" + task);
         System.out.println("___________________________________________________\n");
     }
 
