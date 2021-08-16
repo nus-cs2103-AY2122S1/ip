@@ -2,22 +2,20 @@ import java.util.Scanner;
 
 class Main {
     public static void main(String[] args) {
-        levelFive();
+        enumVersion();
     }
 
-    public static void levelFive() {
+    public static void enumVersion() {
         Duke duke = new Duke();
         duke.greet();
         Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
-        while (!command.equals("bye")) {
+        while (duke.isLive()) {
+            String command = sc.nextLine();
             try {
                 duke.processCommand(command);
             } catch (DukeException e) {
-                System.out.println(e);
+                System.out.println(e.toString());
             }
-            command = sc.nextLine();
         }
-        duke.bye();
     }
 }

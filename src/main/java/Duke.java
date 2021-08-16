@@ -1,8 +1,26 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Specify the type of action to be taken by the duke.
+ */
+enum ActionType {
+    LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE, UNRECOGNIZED
+}
+
 public class Duke {
-    private List<Task> tasks = new ArrayList<Task>();
+    private final List<Task> tasks = new ArrayList<>();
+
+    /**
+     * To show if the duke is still active.
+     *
+     * @return whether the duke is still active.
+     */
+    public boolean isLive() {
+        return isLive;
+    }
+
+    private boolean isLive = true;
 
     /**
      * Greet the user.
@@ -12,10 +30,7 @@ public class Duke {
         System.out.println(greet);
     }
 
-    /**
-     * exit behavior.
-     */
-    public void bye() {
+    private void bye() {
         System.out.println("___________________________________________________");
         String byeCommand = "Bye. Hope to see you again soon!";
         System.out.println(byeCommand);
@@ -29,7 +44,6 @@ public class Duke {
         System.out.println("___________________________________________________");
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < this.tasks.size(); i++) {
-            Task task = tasks.get(i);
             System.out.println((i + 1) + ". " + tasks.get(i).toString());
         }
         System.out.println("___________________________________________________\n");
@@ -42,38 +56,44 @@ public class Duke {
      */
     public void processCommand(String command) throws DukeException {
         String action = this.getAction(command);
-        switch (action) {
-            case "list":
+        ActionType actionType = this.getActionType(action);
+        switch (actionType) {
+            case LIST:
                 this.displayTasks();
                 break;
-            case "todo": {
+            case TODO: {
                 String task = this.getTask(command);
                 ToDo toDo = this.createTodo(task);
                 this.addTask(toDo);
                 break;
             }
-            case "deadline": {
+            case DEADLINE: {
                 String task = this.getTask(command);
                 DeadLine ddl = this.createDeadLine(task);
                 this.addTask(ddl);
                 break;
             }
-            case "event": {
+            case EVENT: {
                 String task = this.getTask(command);
                 Event event = this.createEvent(task);
                 this.addTask(event);
                 break;
             }
-            case "done": {
+            case DONE: {
                 String task = this.getTask(command);
                 int taskIdx = this.getTaskIdx(this.getAction(command), task);
                 this.markTaskAsDone(taskIdx - 1);
                 break;
             }
-            case "delete": {
+            case DELETE: {
                 String task = this.getTask(command);
                 int taskIdx = this.getTaskIdx(this.getAction(command), task);
                 this.deleteTask(taskIdx - 1);
+                break;
+            }
+            case BYE: {
+                this.bye();
+                this.isLive = false;
                 break;
             }
             default:
@@ -100,6 +120,27 @@ public class Duke {
 
     private String getAction(String command) {
         return command.split(" ")[0];
+    }
+
+    private ActionType getActionType(String action) {
+        switch (action) {
+            case "list":
+                return ActionType.LIST;
+            case "done":
+                return ActionType.DONE;
+            case "deadline":
+                return ActionType.DEADLINE;
+            case "event":
+                return ActionType.EVENT;
+            case "todo" :
+                return ActionType.TODO;
+            case "delete":
+                return ActionType.DELETE;
+            case "bye" :
+                return ActionType.BYE;
+            default:
+                return ActionType.UNRECOGNIZED;
+        }
     }
 
     private String getTask(String command) throws EmptyDescriptionException {
