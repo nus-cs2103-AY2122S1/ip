@@ -12,7 +12,7 @@ public class Duke {
     //Duke initialisation
     protected static final String LINE = "\t____________________________________________________________";
     private static final String INTRO = "Hello! I'm Duke\n\t What can I do for you?";
-    private static final String BYE = "Bye. Hope to see you again soon!";
+    private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
 
     /**
      * Provides horizontal lines with indentation.
@@ -63,43 +63,44 @@ public class Duke {
         while (on) {
             String input = sc.nextLine();
             String[] commandPair = input.split(" ", 2);
+            Command command = StringToCommand.convert(commandPair[0]);
             try {
-                switch (commandPair[0]) {
-                    case "bye":
+                switch (command) {
+                    case BYE:
                         checkLen(commandPair, true, 1, "");
                         on = false;
-                        reply(BYE);
+                        reply(BYE_MESSAGE);
                         sc.close();
                         break;
-                    case "list":
+                    case LIST:
                         checkLen(commandPair, true, 1, "");
                         tl.printList();
                         break;
-                    case "done":
+                    case DONE:
                         checkLen(commandPair, false, 2, "You did not indicate the task to be marked done. Use 'done <task's number>' to mark the task as done.");
                         int toBeDone = isNumeric(commandPair[1]);
                         if (toBeDone > tl.count())
                             throw new IllegalArgumentException("You do not that much tasks. Try adding more tasks.");
                         tl.setDone(toBeDone - 1);
                         break;
-                    case "delete":
+                    case DELETE:
                         checkLen(commandPair, false, 2, "You did not indicate the task to be deleted. Use 'delete <task's number>' to delete the task.");
                         int toBeDeleted = isNumeric(commandPair[1]);
                         if (toBeDeleted > tl.count())
                             throw new IllegalArgumentException("You do not that much tasks. Try adding more tasks.");
                         tl.delete(toBeDeleted - 1);
                         break;
-                    case "todo":
+                    case TODO:
                         checkLen(commandPair, false, 2, "The description of a todo cannot be empty. Use 'todo <description>' to add a todo.");
                         tl.addTask(new ToDo(commandPair[1]));
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         checkLen(commandPair, false, 2, "The description of a deadline cannot be empty. Use 'deadline <description> /at <date>' to add a deadline.");
                         String[] deadlinePair = commandPair[1].split("/by", 2);
                         checkLen(deadlinePair, false, 2, "The description / date of a deadline cannot be empty. Use 'deadline <description> /at <date>' to add a deadline.");
                         tl.addTask(new Deadline(deadlinePair[0], deadlinePair[1]));
                         break;
-                    case "event":
+                    case EVENT:
                         checkLen(commandPair, false, 2, "The description of an event cannot be empty. Use 'event <description> /at <date>' to add an event.");
                         String[] eventPair = commandPair[1].split("/at", 2);
                         checkLen(eventPair, false, 2, "The description / date of an event cannot be empty. Use 'event <description> /at <date>' to add an event.");
