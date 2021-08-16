@@ -27,21 +27,28 @@ public class Duke {
                     markAsDone(taskNumber);
                     break;
                 case ("todo"):
-                    String todoDescription = input.split(" ",2)[1];
-                    addTodo(todoDescription);
+                    try {
+                        addTodo(input);
+                    } catch (DukeException e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
                 case ("deadline"):
-                    String[] deadlineInfo = input.split(" ", 2)[1]
-                            .split("/by ", 2);
-                    addDeadline(deadlineInfo[0], deadlineInfo[1]);
+                    try {
+                        addDeadline(input);
+                    } catch (DukeException e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
                 case ("event"):
-                    String[] eventInfo = input.split(" ", 2)[1]
-                            .split("/at ", 2);
-                    addEvent(eventInfo[0], eventInfo[1]);
+                    try {
+                        addEvent(input);
+                    } catch (DukeException e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
                 default:
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    unknownCommand();
             }
         }
     }
@@ -55,22 +62,42 @@ public class Duke {
         System.out.println(exitMessage);
     }
 
-    public static void addTodo(String description) {
-        Todo newTodo = new Todo(description);
+    public static void addTodo(String input) throws DukeException {
+        String[] info = input.split(" ", 2);
+        if (info.length == 1) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        Todo newTodo = new Todo(info[1]);
         toDoList[counter] = newTodo;
         counter++;
         System.out.println(addedMessage + newTodo.toString() + "\nNow you have " + counter + " tasks in the list.");
     }
 
-    public static void addDeadline(String description, String by) {
-        Deadline newDeadline = new Deadline(description, by);
+    public static void addDeadline(String input) throws DukeException {
+        String[] info = input.split(" ", 2);
+        if (info.length == 1) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+        String[] description = info[1].split("/by ", 2);
+        if (description.length == 1) {
+            throw new DukeException("☹ OOPS!!! The deadline of a deadline cannot be empty.");
+        }
+        Deadline newDeadline = new Deadline(description[0], description[1]);
         toDoList[counter] = newDeadline;
         counter++;
         System.out.println(addedMessage + newDeadline.toString() + "\nNow you have " + counter + " tasks in the list.");
     }
 
-    public static void addEvent(String description, String at) {
-        Event newEvent = new Event(description, at);
+    public static void addEvent(String input) throws DukeException {
+        String[] info = input.split(" ", 2);
+        if (info.length == 1) {
+            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+        }
+        String[] description = info[1].split("/at ", 2);
+        if (description.length == 1) {
+            throw new DukeException("☹ OOPS!!! The date of an event cannot be empty.");
+        }
+        Event newEvent = new Event(description[0], description[1]);
         toDoList[counter] = newEvent;
         counter++;
         System.out.println(addedMessage + newEvent.toString() + "\nNow you have " + counter + " tasks in the list.");
@@ -97,6 +124,10 @@ public class Duke {
                 }
             }
         }
+    }
+
+    public static void unknownCommand() {
+        System.err.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     public static void main(String[] args) {
