@@ -40,29 +40,32 @@ public class Duke {
                 // if not a specified command, add new task to list
                 // remove first command string
                 userInputList.remove(0);
-                if (command.equals("todo")) {
-                    String description = String.join(" ", userInputList);
+                String description;
+                String[] userInputArgs;
+
+                switch (command) {
+                case "todo":
+                    description = String.join(" ", userInputList);
                     tasks[totalTasks] = new ToDo(description);
-                } else {
-                    if (command.equals("deadline")) {
-                        //split description and by
-                        String[] userInputArgs = String.join(" ", userInputList).split("/by ");
-                        String description = userInputArgs[0];
-                        String by = userInputArgs[1];
-                        tasks[totalTasks] = new Deadline(description, by);
-                    } else if (command.equals("event")) {
-                        //split description and at
-                        String[] userInputArgs = String.join(" ", userInputList).split("/at ");
-                        String description = userInputArgs[0];
-                        String at = userInputArgs[1];
-                        tasks[totalTasks] = new Event(description, at);
-                    }
+                    break;
+                case "deadline":
+                    //split description and by
+                    userInputArgs = String.join(" ", userInputList).split("/by ");
+                    description = userInputArgs[0];
+                    String by = userInputArgs[1];
+                    tasks[totalTasks] = new Deadline(description, by);
+                    break;
+                case "event":
+                    //split description and at
+                    userInputArgs = String.join(" ", userInputList).split("/at ");
+                    description = userInputArgs[0];
+                    String at = userInputArgs[1];
+                    tasks[totalTasks] = new Event(description, at);
+                    break;
                 }
                 totalTasks++;
                 System.out.println(div + "Got it. I've added this task:\n  " + tasks[totalTasks - 1] + "\n"
                         + "Now you have " + totalTasks + " tasks in the list.\n" + div);
-
-                break;
             }
         }
     }
