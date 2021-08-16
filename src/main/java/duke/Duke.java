@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import duke.command.CommandManager;
+import duke.command.DoneCommand;
 import duke.command.ListCommand;
 
 /**
@@ -19,7 +20,8 @@ public class Duke {
         String greetings = "Hello from\n" + logo + "\nWhat can I do for you?";
         new Response(greetings).print();
 
-        COMMAND_MANAGER.registerCommand("list", new ListCommand(LIST));
+        COMMAND_MANAGER.registerCommand("list", new ListCommand());
+        COMMAND_MANAGER.registerCommand("done", new DoneCommand());
 
         echoInput(new BufferedReader(new InputStreamReader(System.in)));
     }
