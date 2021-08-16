@@ -94,15 +94,14 @@ public class Duke {
      *
      * @param type The type of the task.
      *
-     * @param inputCommand The input instruction.
+     * @param s The input instruction.
      */
-    public void addTask(taskType type, String inputCommand) {
-        String s2 = inputCommand.substring(inputCommand.indexOf(" ") + 1, inputCommand.length());
+    public void addTask(taskType type, String s) {
         if (type == taskType.TODO) {
-            tasks.add(new Todo(s2));
+            tasks.add(new Todo(s));
         } else {
-            String description = s2.substring(0, s2.indexOf("/"));
-            String time = s2.substring(s2.indexOf("/") + 4, s2.length());
+            String description = s.substring(0, s.indexOf("/"));
+            String time = s.substring(s.indexOf("/") + 4, s.length());
             if (type == taskType.DEADLINE) {
                 tasks.add(new Deadline(description, time));
             } else {
@@ -121,6 +120,47 @@ public class Duke {
     }
 
     /**
+     * A method that decode the add-task-command.
+     *
+     * @param inputCommand The command entered.
+     *
+     * @throws descriptionEmptyException
+     *
+     * @throws timeEmptyException
+     *
+     * @throws noMeaningCommandException
+     */
+    public void addTaskDecode(String inputCommand)
+            throws descriptionEmptyException, timeEmptyException, noMeaningCommandException{
+        taskType type = null;
+        int len = inputCommand.length();
+        String s1 = inputCommand.substring(0, Math.min(4, len));
+        String s2 = inputCommand.substring(0, Math.min(8, len));
+        String s3 = inputCommand.substring(0, Math.min(5, len));
+
+        if (s1.equals("todo")) {
+            type = taskType.TODO;
+        } else if (s2.equals("deadline")) {
+            type = taskType.DEADLINE;
+        } else if (s3.equals("event")) {
+            type = taskType.EVENT;
+        } else {
+            throw new noMeaningCommandException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+        if (inputCommand.indexOf(" ") == -1) {
+            throw new descriptionEmptyException(" ☹ OOPS!!! The description of a " + inputCommand + " cannot be empty.");
+        }
+        if (type != taskType.TODO && inputCommand.indexOf("/") == -1) {
+            throw new timeEmptyException(" ☹ OOPS!!! The time of a "
+                    + (type == taskType.EVENT ? "event" : "deadline")
+                    + " cannot be empty.");
+        }
+
+        addTask(type, inputCommand.substring(inputCommand.indexOf(" ") + 1, inputCommand.length()));
+    }
+
+    /**
      * A method that allows Duke to read the input command and react.
      *
      * @throws Exception Task number larger than total number of tasks.
@@ -132,7 +172,7 @@ public class Duke {
             if (isExitCommand(inputCommand)) {
                 printMessage(new String[] {"Bye. Hope to see you again soon!"});
                 return;
-            } else if (inputCommand.length() <= 1) {
+            } else if (inputCommand.length() < 1) {
                 continue;
             } else if (inputCommand.equals("list")){
                 printMessage(listAllTasks());
@@ -143,23 +183,26 @@ public class Duke {
                 }
                 taskNumber --;
                 if (taskNumber >= tasks.size()) {
-                    throw new taskNumberOutOfBoundException();
+                    throw new taskNumberOutOfBoundException(
+                            "Input task number is larger than total number of tasks.");
                 }
                 markAsDone(taskNumber);
                 printMessage(new String[] {
                         "Nice! I've marked this task as done:",
                         tasks.get(taskNumber).toString()});
             } else {
-                taskType type = null;
-                String s1 = inputCommand.substring(0, inputCommand.indexOf(" "));
-                if (s1.equals("todo")) {
-                    type = taskType.TODO;
-                } else if (s1.equals("deadline")) {
-                    type = taskType.DEADLINE;
-                } else if (s1.equals("event")) {
-                    type = taskType.EVENT;
+                try {
+                    addTaskDecode(inputCommand);
+                } catch (descriptionEmptyException e) {
+                    printMessage(new String[] {e.toString()});
+                    continue;
+                } catch (timeEmptyException e) {
+                    printMessage(new String[] {e.toString()});
+                    continue;
+                } catch (noMeaningCommandException e) {
+                    printMessage(new String[] {e.toString()});
+                    continue;
                 }
-                addTask(type, inputCommand);
                 printMessage(new String[] {
                         "Got it. I've added this task:",
                         "  " + tasks.get(tasks.size() - 1).toString(),
@@ -180,8 +223,7 @@ public class Duke {
         try {
             chatBot.chat();
         } catch (taskNumberOutOfBoundException e) {
-            chatBot.printMessage(new String[]
-                    {"Input task number is larger than total number of tasks."});
+            chatBot.printMessage(new String[] {e.toString()});
         }
     }
 }

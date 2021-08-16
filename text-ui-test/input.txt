@@ -6,3 +6,7 @@ deadline task3 /by Sunday
 event task4 /at 2-3pm
 done 4
 list
+todo
+deadline
+blah
+bye
