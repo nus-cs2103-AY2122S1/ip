@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class Task {
 	private final String desc;
@@ -10,10 +10,6 @@ public class Task {
 	
 	public void checkDone() {
 		this.isDone = true;
-	}
-	
-	public void uncheckDone() {
-		this.isDone = false;
 	}
 	
 	public boolean isDone() {

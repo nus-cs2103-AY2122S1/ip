@@ -1,4 +1,4 @@
-package Util;
+package util;
 
 public class Display {
 	public static void printSentence(String sentence) {

@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 /**
  * list of commands available for dude chatting bot

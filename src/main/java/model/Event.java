@@ -1,7 +1,7 @@
-package Model;
+package model;
 
 public class Event extends Task {
-	private String time;
+	private final String time;
 	
 	public Event(String desc, String time) {
 		super(desc);

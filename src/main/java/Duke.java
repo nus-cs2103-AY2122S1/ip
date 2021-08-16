@@ -1,13 +1,13 @@
-import Implementation.CommandParserImpl;
-import Implementation.CommandProcessorImpl;
-import Interface.CommandParser;
-import Interface.CommandProcessor;
+import commandImpl.CommandLogicUnitImpl;
+import commandImpl.CommandProcessorImpl;
+import commandInterface.CommandLogicUnit;
+import commandInterface.CommandProcessor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static Util.Display.printSentence;
+import static util.Display.printSentence;
 
 /**
  * main driver program
@@ -17,8 +17,8 @@ public class Duke {
 	private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
 	// initialize the command processor from logic processing, use the commandParse to process the console input
-	private static final CommandProcessor commandProcessor = new CommandProcessorImpl();
-	private static final CommandParser commandParser = new CommandParserImpl(commandProcessor);
+	private static final CommandLogicUnit commandLogicUnit = new CommandLogicUnitImpl();
+	private static final CommandProcessor commandProcessor = new CommandProcessorImpl(commandLogicUnit);
 	
 	@SuppressWarnings("InfiniteLoopStatement")
 	public static void main(String[] args) throws IOException {
@@ -33,7 +33,7 @@ public class Duke {
 		
 		while (true) {
 			String str = reader.readLine();
-			commandParser.processInput(str);
+			commandProcessor.processInput(str);
 		}
 	}
 	
