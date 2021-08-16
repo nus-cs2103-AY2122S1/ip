@@ -9,7 +9,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return name;
+        return String.format("[%s] %s", getStatus(), name);
     }
 
     public String getStatus() {
