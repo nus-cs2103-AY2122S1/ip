@@ -42,6 +42,14 @@ public class Duke {
         while (true){
             String userInput = userScanner.nextLine();
 
+            if (userInput.matches("(done )[0-9]+")){
+                String splitNum = userInput.split(" ")[1];
+                String[] reply = taskList.markDone(Integer.parseInt(splitNum));
+                System.out.println(formatReply(reply));
+                continue;
+            }
+
+
             switch(userInput){
                 case "bye":
                     System.out.println(formatReply(new String[]{"BYEEEEEE!","Hope to see you again soon :)"}));
