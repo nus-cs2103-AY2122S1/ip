@@ -36,22 +36,6 @@ public class Duke {
      */
     public static boolean echo(String response) {
         int len = response.length();
-        boolean isDone = checkDone(response, len);
-        if (isDone) {
-            return true;
-        }
-        boolean isTodo = checkTodo(response, len);
-        if (isTodo) {
-            return true;
-        }
-        boolean isDeadline = checkDeadline(response, len);
-        if (isDeadline) {
-            return true;
-        }
-        boolean isEvent = checkEvent(response, len);
-        if (isEvent) {
-            return true;
-        }
         switch (response) {
             case "bye":
                 System.out.println(getPattern("Bye, see you soon. ^-^"));
@@ -60,10 +44,29 @@ public class Duke {
                 System.out.println(getPattern(toListStrings()));
                 return true;
             default:
-                list[count] = new Task(response);
-                count++;
-                System.out.println(getPattern("added: " + response));
-                return true;
+                try {
+                    boolean isDone = checkDone(response, len);
+                    if (isDone) {
+                        return true;
+                    }
+                    boolean isTodo = checkTodo(response, len);
+                    if (isTodo) {
+                        return true;
+                    }
+                    boolean isDeadline = checkDeadline(response, len);
+                    if (isDeadline) {
+                        return true;
+                    }
+                    boolean isEvent = checkEvent(response, len);
+                    if (isEvent) {
+                        return true;
+                    }
+                    //This means there's no match of operations.
+                    throw new NotRecognizeException();
+                } catch (DukeException e) {
+                    System.out.println(getPattern(e.getMessage()));
+                    return true;
+                }
         }
     }
 
@@ -78,7 +81,7 @@ public class Duke {
         StringBuilder result = new StringBuilder();
         StringBuilder curr = new StringBuilder();
         String empty = "   ";
-        curr.append("*".repeat(50));
+        curr.append("*".repeat(80));
         String out = empty + curr + "\n" + empty + r + "\n" + empty + curr + "\n";
         result.append(out);
         return result.toString();
@@ -113,7 +116,11 @@ public class Duke {
      */
     public static boolean chekDigit(String input) {
         boolean flag = true;
-        for (int i = 0; i < input.length(); i++) {
+        int i = 0;
+        if (input.charAt(0) == '-') {
+           i = 1;
+        }
+        for (; i < input.length(); i++) {
             char curr = input.charAt(i);
             if (!(curr >= '0' && curr <= '9')) {
                 flag = false;
@@ -130,19 +137,25 @@ public class Duke {
      * @param response The user input.
      * @return Is done operation or not.
      */
-    public static boolean checkDone(String response, int len) {
+    public static boolean checkDone(String response, int len) throws EmptyInputException,OutOfRangeException{
         //check with the special response "done X", where X is a number.
-        if (len >= 6 && response.substring(0, 5).equals("done ") && chekDigit(response.substring(5,len))) {
+        if (len >= 6 && response.substring(0, 5).equals("done ")
+                && chekDigit(response.substring(5,len))) {
             int curr = Integer.parseInt(response.substring(5,len));
+            if (curr > count || curr <= 0) {
+                throw new OutOfRangeException();
+            }
             Task shouldMark = list[curr - 1];
             shouldMark.markAsDone();
             String title = "Nice! I've marked this task as done: \n";
             String out = "     " + shouldMark.toString();
             System.out.println(getPattern(title + out));
             return true;
-            //ERROR IF TASK NOT EXIST
+        } else if (response.equals("done")) {
+            throw new EmptyInputException("done");
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -166,7 +179,7 @@ public class Duke {
      * @param len The length of user input.
      * @return Whether the input is related to todo or not.
      */
-    public static boolean checkTodo(String response, int len) {
+    public static boolean checkTodo(String response, int len) throws EmptyInputException{
         //check with the special response "todo X", where X is what to do.
         if (len >= 5 && response.substring(0, 5).equals("todo ")) {
             list[count] = new Todo(response.substring(5, len));
@@ -174,9 +187,11 @@ public class Duke {
             count ++;
             System.out.println(getPattern(getOutputFrame(curr.toString())));
             return true;
-            //ERROR IF TASK NOT EXIST
+        } else if (response.equals("todo")) {
+            throw new EmptyInputException("todo");
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -187,7 +202,7 @@ public class Duke {
      * @param len The length of user input.
      * @return Whether the input is related to deadline or not.
      */
-    public static  boolean checkDeadline(String response, int len) {
+    public static  boolean checkDeadline(String response, int len) throws EmptyInputException{
         //check with the special response "deadline X", where X is what to do and by what time.
         if (len >= 9 && response.substring(0, 9).equals("deadline ")
                 && response.substring(9, len).contains(" /by ")) {
@@ -199,9 +214,11 @@ public class Duke {
             count ++;
             System.out.println(getPattern(getOutputFrame(curr.toString())));
             return true;
-            //ERROR IF TASK NOT EXIST
+        } else if (response.equals("deadline")) {
+            throw new EmptyInputException("deadline");
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -212,7 +229,7 @@ public class Duke {
      * @param len The length of user input.
      * @return Whether the input is related to event or not.
      */
-    public static boolean checkEvent(String response, int len) {
+    public static boolean checkEvent(String response, int len) throws EmptyInputException{
         //check with the special response "todo X", where X is what to do.
         if (len >= 6 && response.substring(0, 6).equals("event ")
                 && response.substring(6, len).contains(" /at ")) {
@@ -224,8 +241,10 @@ public class Duke {
             count ++;
             System.out.println(getPattern(getOutputFrame(curr.toString())));
             return true;
-            //ERROR IF TASK NOT EXIST
+        } else if (response.equals("event")) {
+            throw new EmptyInputException("event");
+        } else {
+            return false;
         }
-        return false;
     }
 }
