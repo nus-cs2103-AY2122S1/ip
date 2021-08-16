@@ -33,13 +33,25 @@ public class Duke {
         /* Stores last input by user. */
         String lastInput = null;
 
-        while (lastInput != "bye") {
+        while (true) {
             System.out.println("");
             lastInput = currScanner.nextLine();
+
+            if (lastInput.equals("bye")) {
+                break;
+            }
 
             dukeSays(lastInput);
         }
 
+        dukeExiter();
+    }
+
+    /**
+     * Runs when program is going to exit.
+     */
+    private static void dukeExiter() {
+        dukeSays("Bye. Hope to see you soon!");
     }
 
     /**
