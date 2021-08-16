@@ -1,16 +1,40 @@
+//enum TaskType {
+//    ToDo,
+//    Deadline,
+//    Event
+//
+//    private String time
+//    public abstract
+//}
+
 public class Task {
     private String description;
     private boolean done = false;
-    private int id;
 
-    public Task(String description, int id) {
+    public static Task makeTask(String type, String description) {
+        switch (type) {
+            case "todo": {
+                return (new ToDos(description));
+            }
+            case "deadline": {
+                return (new Deadline(description));
+            }
+            case "event": {
+                return (new Event(description));
+            }
+            default: {
+                return null;
+            }
+        }
+    }
+
+    public Task(String description) {
         this.description = description;
-        this.id = id;
     }
 
     public void markDone() {
         this.done = true;
-        System.out.println("Nice! I've marked this task as done: \n[X] " + this.description);
+        System.out.println("Nice! I've marked this task as done: \n" + this.toString());
     }
 
     @Override
@@ -19,7 +43,7 @@ public class Task {
                 ? "[X]"
                 : "[ ]";
         return (
-                (this.id + 1) + ". " + doneIndicator + " " + this.description
+                doneIndicator + " " + this.description
                 );
     }
 }

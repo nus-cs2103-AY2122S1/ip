@@ -1,23 +1,31 @@
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Duke {
 
     Task[] tasks = new Task[100];
     int count = 0;
 
-    private void addTask(String taskDescription) {
-        Task newTask = new Task(taskDescription, count);
+    private void addTask(String input) {
+        String type = input.split(" ")[0];
+        String taskDescription = Stream.of(input.split(" "))
+                .skip(1).reduce("", (x, y) -> x + " " + y);
+        Task newTask = Task.makeTask(type, taskDescription);
         tasks[count] = newTask;
         count++;
-        System.out.println("added: " + taskDescription);
+        String strBreak = "    ____________________________________________________________ \n";
+        String toPrint = String.format("     Got it. I've added this task: \n     %s\n     Now you have %x task%s in the list.",
+                newTask.toString(), this.count, this.count > 1 ? "s" : "");
+        System.out.println(strBreak + toPrint + "\n" + strBreak);
     }
 
     private String getTasks() {
-        String tasksStr = "Here are the tasks in your list: \n";
+        String strBreak = "    ____________________________________________________________ \n";
+        String tasksStr = strBreak + "\n    Here are the tasks in your list: \n";
         for (int i = 0; i < count; i++) {
-            tasksStr += this.tasks[i].toString() + "\n";
+            tasksStr += "     " + (i + 1) + ". " + this.tasks[i].toString() + "\n";
         }
-        return (tasksStr);
+        return (tasksStr + strBreak);
     }
 
     public static void main(String[] args) {
