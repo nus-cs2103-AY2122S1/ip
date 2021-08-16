@@ -15,10 +15,8 @@ public class Duke {
 
         // Intro message
         System.out.println(
-                "Hello! I'm Duke" +
-                        "\n" +
-                        "What can I do for you?" +
-                        "\n" +
+                "Hello! I'm Duke" + "\n" +
+                        "What can I do for you?" + "\n" +
                         divider);
 
         while (true) {
@@ -27,9 +25,13 @@ public class Duke {
 
                 // Case where user marks a task as done
                 // Uses a series of checks to only check for "done (number)"
-                if (nextTask.startsWith("done ")) {
+                if (nextTask.startsWith("done")) {
 
                     // there must be a number following "done"
+                    if (nextTask.length() == 4) {
+                        throw new DukeException("Please use this format: 'done (task number)'");
+                    }
+
                     if (Character.isDigit(nextTask.charAt(5))) {
                         int taskIndex = Character.getNumericValue(nextTask.charAt(5)) - 1;
 
@@ -38,18 +40,19 @@ public class Duke {
                         }
 
                         taskList.get(taskIndex).markAsDone();
-                        System.out.println("Nice! I've marked this task as done: " +
-                                "\n" +
-                                taskList.get(taskIndex) +
-                                "\n" +
+                        System.out.println(divider + "\n" + "Nice! I've marked this task as done: " + "\n" +
+                                taskList.get(taskIndex) + "\n" +
                                 divider);
-                    } else {
-                        throw new DukeException("Please use this format: 'done (task number)'");
                     }
                     continue;
 
                 // case where user wants to delete a task item, similar to done
-                } else if (nextTask.startsWith("delete ")) {
+                } else if (nextTask.startsWith("delete")) {
+
+                    if (nextTask.length() == 6) {
+                        throw new DukeException("Please use this format: 'delete (task number)'");
+                    }
+
                     if (Character.isDigit(nextTask.charAt(7))) {
                         int taskIndex = Character.getNumericValue(nextTask.charAt(7)) - 1;
 
@@ -57,52 +60,45 @@ public class Duke {
                             throw new DukeException("Invalid task number!");
                         }
 
-                        System.out.println("Nice! Noted. I've removed this task: " +
-                                "\n" +
-                                taskList.get(taskIndex) +
-                                "\n" +
+                        System.out.println(divider + "\n" + "Nice! Noted. I've removed this task: " + "\n" +
+                                taskList.get(taskIndex) + "\n" +
+                                "You now have " + (taskList.size() - 1) + " tasks remaining!" + "\n" +
                                 divider);
 
                         taskList.remove(taskIndex);
-
-                        System.out.println("You now have " + taskList.size() + " tasks remaining!");
                         continue;
-                    } else {
-                        throw new DukeException("Please use this format: 'done (task number)'");
                     }
-
                 }
 
                 // Case where user wants to see the entire task list
                 else if (nextTask.equals("list")) {
-                    System.out.println(divider);
-                    System.out.println("Here are the items in your task list: ");
+                    System.out.println(divider + "\n" + "Here are the items in your task list: ");
                     for (int i = 0; i < taskList.size(); i++) {
                         System.out.println(i + 1 + ". " + taskList.get(i));
                     }
-                    System.out.println("\n" + divider);
+                    System.out.println(divider);
                     continue;
 
                 // Case where user exits the program
                 } else if (nextTask.equals("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
+                    System.out.println(divider + "\n" + "Bye. Hope to see you again soon!" + "\n" + divider);
                     break;
                 }
 
                 // Case where user wants to add a new to do task
-                else if (nextTask.startsWith("todo ")) {
+                else if (nextTask.startsWith("todo")) {
                     try {
                         String todoDesc = nextTask.substring(5);
                         taskList.add(new Todo(todoDesc));
 
                     // catch the exception created by .substring method and throw a new DukeException which is caught at the end
                     } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty." + "\n" + divider + "\n");
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
                 }
 
                 // Case where user wants to add a new event task
-                else if (nextTask.startsWith("event ")) {
+                else if (nextTask.startsWith("event")) {
 
                     // need to check that for event they use the /at properly else reject
                     if (!nextTask.contains("/at ")) {
@@ -116,7 +112,7 @@ public class Duke {
                 }
 
                 // Case where user wants to add a new deadline task
-                else if (nextTask.startsWith("deadline ")) {
+                else if (nextTask.startsWith("deadline")) {
 
                     // need to check that for deadline they use the /by properly else reject
                     if (!nextTask.contains("/by ")) {
@@ -138,17 +134,16 @@ public class Duke {
                         ? divider + "\n" + "added: " + taskList.get(taskList.size() - 1) + "\n" +
                         "now you have: " + taskList.size() + " tasks! type 'list' to see them!" + "\n" + divider
                         : divider + "\n" + "added: " + taskList.get(taskList.size() - 1) + "\n" +
-                        "now you have: " + taskList.size() + " task! type 'list' to see them!" + "\n" + divider);
+                        "now you have: " + taskList.size() + " task! type 'list' to see them!" +  "\n" +divider);
 
             // catch all the custom exceptions and displays the message
             } catch (DukeException e) {
-                System.out.println(e.getMessage() + "\n" + divider);
+                System.out.println(divider + "\n" + e.getMessage() + "\n" + divider);
 
             // catch the remaining exceptions
             } catch (Exception e) {
-                System.out.println("Please enter a valid task" + "\n" + divider);
+                System.out.println(divider + "\n" + "Please enter a valid task" + "\n" + divider + "\n" );
             }
-
         }
     }
 }
