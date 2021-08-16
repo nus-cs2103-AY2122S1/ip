@@ -1,5 +1,11 @@
 import java.util.Scanner;
+import java.lang.StringBuilder;
 public class Duke {
+    private enum TaskType {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
     private static TaskList tList = new TaskList();
     private static String selfIntro = "Hello, I'm Duck\nWhat do you need?";
 
@@ -30,6 +36,29 @@ public class Duke {
 
     }
 
+    private static String addTask(String input, TaskType tType) {
+        String msg;
+        String[] inputArr;
+        switch (tType) {
+            case TODO:
+                inputArr = input.split(" ", 2);
+                msg = tList.addTask(new ToDo(inputArr[1]));
+                break;
+                //Possible exception: no string after todo.
+            case DEADLINE:
+                inputArr = input.split(" ", 2)[1].split(" /by ", 2);
+                msg = tList.addTask(new Deadline(inputArr[0], inputArr[1]));
+                break;
+            case EVENT:
+                inputArr = input.split(" ", 2)[1].split(" /at ", 2);
+                msg = tList.addTask(new Event(inputArr[0], inputArr[1]));
+                break;
+            default:
+                msg = "If you see this, something has went terribly wrong";
+        }
+        return msg;
+    }
+
     public static void runDuck() {
         Scanner sc = new Scanner(System.in);
         String userInput;
@@ -38,7 +67,7 @@ public class Duke {
         String[] inputArr;
         while (!bye) {
             userInput = sc.nextLine();
-            inputArr = userInput.split(" ");
+            inputArr = userInput.split(" ", 2);
             if (inputArr.length == 1) {
                 switch (inputArr[0]) {
                     case "bye":
@@ -49,23 +78,28 @@ public class Duke {
                         printLine(tList.getTasks());
                         break;
                     default:
-                        printLine(tList.addTask(userInput));
+                        printLine(userInput);
                 }
             } else {
                 switch (inputArr[0]) {
                     case "done":
-                        try {
-                            printLine(
-                                    tList.markComplete(
-                                            Integer.parseInt(inputArr[1])
-                                    )
-                            );
-                        } catch (NumberFormatException e) {
-                            printLine("Bad command. *quack*");
-                        }
+                        printLine(
+                                tList.markComplete(
+                                        Integer.parseInt(inputArr[1])
+                                )
+                        );
+                        break;
+                    case "todo":
+                        printLine(addTask(userInput, TaskType.TODO));
+                        break;
+                    case "deadline":
+                        printLine(addTask(userInput, TaskType.DEADLINE));
+                        break;
+                    case "event":
+                        printLine(addTask(userInput, TaskType.EVENT));
                         break;
                     default:
-                        printLine(tList.addTask(userInput));
+                        printLine(userInput);
                 }
             }
         }

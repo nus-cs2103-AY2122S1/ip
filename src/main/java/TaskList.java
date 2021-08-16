@@ -12,13 +12,19 @@ public class TaskList {
             return "The list is empty! *quack*";
         }
         StringBuilder sb = new StringBuilder();
+        Task t;
+        String time;
         for (int i = 1; i<=this.listSize; i++) {
+            t = userList.get(i - 1);
+            time = getTaskTime(t);
             sb.append(
                     String.format(
-                            "%d. %s  [%s]\n",
+                            "%d. %s  [%s] [%s] (%s)\n",
                             i,
-                            userList.get(i - 1).getName(),
-                            userList.get(i - 1).isCompleted() ? "X" : " "
+                            t.getName(),
+                            t.getTaskType(),
+                            t.isCompleted() ? "X" : " ",
+                            time
                     )
             );
         }
@@ -26,22 +32,49 @@ public class TaskList {
         return sb.toString();
     }
 
-    public String addTask(String taskName) {
-        Task newTask = new Task(taskName);
-        userList.add(newTask);
+    public String addTask(Task task) {
+        userList.add(task);
         listSize++;
-        return "added: " + newTask.getName();
+        String time = getTaskTime(task);
+        return String.format(
+                "added: %s [%s] (%s)\nCurrently %d tasks in the list",
+                task.getName(),
+                task.getTaskType(),
+                time,
+                listSize
+        );
     }
 
     public String markComplete(int taskID) {
         if (taskID - 1 < listSize) {
             if (userList.get(taskID - 1).completeTask()) {
-                return String.format("You have completed task %d. %s", taskID, userList.get(taskID - 1).getName());
+                return String.format(
+                        "You have completed task %d. %s",
+                        taskID,
+                        userList.get(taskID - 1).getName()
+                );
             } else {
                 return "Something seems to have went terribly wrong";
             }
         } else {
             return String.format("Uh oh, seems like there is no task number %d", taskID);
         }
+    }
+
+    private String getTaskTime(Task t) {
+        String time;
+        switch (t.getTaskType()) {
+            case "D":
+                Deadline d = (Deadline) t;
+                time = "by: " + d.getTime();
+                break;
+            case "E":
+                Event e = (Event) t;
+                time = "at: " + e.getTime();
+                break;
+            default:
+                time = "No time specified";
+        }
+        return time;
     }
 }
