@@ -28,8 +28,12 @@ public class Task {
         this.isDone = false;
     }
 
+    String completionStatus() {
+        return (isDone ? "[X] " : "[ ] ");
+    }
+
     @Override
     public String toString() {
-        return (isDone ? "[X] " : "[ ] ") + desc;
+        return this.completionStatus() + desc;
     }
 }
