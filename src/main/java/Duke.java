@@ -18,16 +18,18 @@ public class Duke {
         System.out.println(greet);
 
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> library = new ArrayList<>(100);
+        ArrayList<Task> library = new ArrayList<>(100);
 
         while (true) {
             String input = scanner.nextLine();
             String output = "";
 
             if (input.equals("list")) {
+                output += "Here are the tasks in your list:\n";
+
                 int count = 1;
-                for (String book: library) {
-                    output += String.format("%d. %s\n", count++, book);
+                for (Task task: library) {
+                    output += String.format("%d.[%s] %s\n", count++, task.getStatus(), task);
                 }
             }
             else if (input.equals("blah")) {
@@ -36,9 +38,20 @@ public class Duke {
             else if (input.equals("bye")) {
                 break;
             }
+            else if (input.contains("done")) {
+                int index = Integer.parseInt(input.split(" ")[1]) - 1;
+
+                Task target = library.get(index);
+                target.setDone();
+
+                output += "Nice! I've marked this task as done:\n";
+                output += String.format("[%s] %s\n", target.getStatus(), target);
+            }
             else {
-                library.add(input);
-                output = "added: " + input;
+                Task newTask = new Task(input);
+                library.add(newTask);
+
+                output = String.format("added: %s\n", input);
             }
 
             System.out.println(output);
