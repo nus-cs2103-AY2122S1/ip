@@ -25,14 +25,29 @@ public class Duke {
         switch (command) {
             case "list":
                 printList();
-                break;
+                return;
             case "done":
                 int taskNumber = Integer.parseInt(words[1]);
                 markAsDone(taskNumber);
-                break;
+                return;
+            case "todo":
+                Task todo = new Todo(combine(words, 1, words.length));
+                addToList(todo);
+                return;
+            case "deadline":
+                String rest = combine(words, 1, words.length);
+                String[] newList = rest.split(" /by ");
+                Task deadline = new Deadline(newList[0],newList[1]);
+                addToList(deadline);
+                return;
+            case "event":
+                String restOfWords = combine(words, 1, words.length);
+                String[] eventList = restOfWords.split(" /at ");
+                Task event = new Event(eventList[0], eventList[1]);
+                addToList(event);
+                return;
             default:
-                addToList(input);
-                break;
+                System.out.println("Oops! I'm sorry, but I don't know what that means!");
         }
     }
 
@@ -52,9 +67,14 @@ public class Duke {
         }
     }
 
-    private void addToList(String input) {
-        this.list.add(new Task(input));
-        System.out.println("added: " + input);
+    private void addToList(Task input) {
+        this.list.add(input);
+        System.out.println("Got it. I've added this task:\n  " + input.details());
+        printListNumber();
+    }
+
+    private void printListNumber() {
+        System.out.println("You now have " + list.size() + " tasks in the list.");
     }
 
     private void markAsDone(int id) {
@@ -62,6 +82,16 @@ public class Duke {
         currentTask.markAsCompleted();
         System.out.println("Nice! I've marked this task as done:\n "
                 + currentTask.details());
+    }
+
+
+    private String combine(String[] splitList, int start, int end) {
+        StringBuilder result = new StringBuilder();
+        for (int i = start; i < end; i++) {
+            result.append(splitList[i]);
+            result.append(" ");
+        }
+        return result.substring(0,result.length() - 1).toString();
     }
 
     public static void printLogo() {

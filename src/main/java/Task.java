@@ -1,11 +1,13 @@
-public class Task {
+public abstract class Task {
     private static int maxId = 1;
 
     private final int id;
     private String name;
     private boolean completed;
+    private final TaskType taskType;
 
-    public Task(String name) {
+    public Task(String name, TaskType taskType) {
+        this.taskType = taskType;
         this.id = Task.maxId;
         this.name = name;
         this.completed = false;
@@ -34,7 +36,11 @@ public class Task {
 
     public String details() {
         String checkbox = "[" + (getCompleted() ? "X" : " ") + "]";
-        return checkbox + " " + this.getName();
+        return taskType() + checkbox + " " + this.getName();
+    }
+
+    public String taskType() {
+        return "[" + this.taskType.toString() + "]";
     }
 
     public static void increaseMax() {
@@ -51,8 +57,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String checkbox = "[" + (this.getCompleted() ? "X" : " ") + "]";
-        return this.getId() + "." + checkbox + " " + this.getName();
+        return this.getId() + "." + details();
     }
 
 }
