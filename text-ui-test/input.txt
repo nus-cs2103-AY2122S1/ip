@@ -1,0 +1,8 @@
+todo item one
+event item two /at 22/2/2012 2pm
+list
+deadline item three /by next Tuesday
+list
+done 2,3
+list
+bye

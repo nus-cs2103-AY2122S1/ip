@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class Augury {
-    static String VER     = "v0.4.5"; // Level-4: ToDos, Events, Deadlines + A-Inheritance
+    static String VER     = "v0.4.5"; // A-TextUiTesting
     static String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
