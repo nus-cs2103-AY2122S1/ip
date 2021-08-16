@@ -10,6 +10,7 @@ enum ActionType {
 
 public class Duke {
     private final List<Task> tasks = new ArrayList<>();
+    private boolean isLive = true;
 
     /**
      * To show if the duke is still active.
@@ -20,21 +21,12 @@ public class Duke {
         return isLive;
     }
 
-    private boolean isLive = true;
-
     /**
      * Greet the user.
      */
     public void greet() {
         String greet = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(greet);
-    }
-
-    private void bye() {
-        System.out.println("___________________________________________________");
-        String byeCommand = "Bye. Hope to see you again soon!";
-        System.out.println(byeCommand);
-        System.out.println("___________________________________________________\n");
     }
 
     /**
@@ -53,6 +45,7 @@ public class Duke {
      * Process the command input by user.
      *
      * @param command command input of the user.
+     * @throws DukeException exceptions when processing the command
      */
     public void processCommand(String command) throws DukeException {
         String action = this.getAction(command);
@@ -99,6 +92,13 @@ public class Duke {
             default:
                 throw new UnrecognizableCommandException();
         }
+    }
+
+    private void bye() {
+        System.out.println("___________________________________________________");
+        String byeCommand = "Bye. Hope to see you again soon!";
+        System.out.println(byeCommand);
+        System.out.println("___________________________________________________\n");
     }
 
     private void addTask(Task task) {

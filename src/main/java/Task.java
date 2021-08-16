@@ -34,7 +34,7 @@ class Task {
 class ToDo extends Task {
 
     /**
-     * Constructor for a task.
+     * Constructor for a todo task.
      *
      * @param description description for the task.
      */
@@ -57,7 +57,7 @@ class  DeadLine extends Task {
     String deadline;
 
     /**
-     * Constructor for a task.
+     * Constructor for a deadline task.
      *
      * @param description description for the task.
      */
@@ -81,7 +81,7 @@ class Event extends Task {
     String timePeriod;
 
     /**
-     * Constructor for a task.
+     * Constructor for a event task.
      *
      * @param description description for the task.
      */
