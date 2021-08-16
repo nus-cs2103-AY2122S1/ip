@@ -54,6 +54,9 @@ public class Blue {
             case Command.DONE:
                 handleDone(input);
                 break;
+            case Command.DELETE:
+                handleDelete(input);
+                break;
             default:
                 speak("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 break;
@@ -122,8 +125,7 @@ public class Blue {
                 if (0 <= index && index < tasks.size()) {
                     Task task = tasks.get(index);
                     task.markDone();
-                    String content = "Nice! I've marked this task as done:\n" + task;
-                    speak(content);
+                    speak("Nice! I've marked this task as done:\n" + task);
                 } else
                     speak("☹ OOPS!!! No task found at index " + (index + 1) + ".");
             } catch (NumberFormatException e) {
@@ -131,6 +133,25 @@ public class Blue {
             }
         } else
             speak("☹ OOPS!!! The index of done cannot be empty.");
+    }
+
+    private static void handleDelete(String input) {
+        String[] arguments = getArguments(input);
+        if (arguments.length > 0) {
+            try {
+                int index = Integer.parseInt(arguments[0]) - 1;
+                if (0 <= index && index < tasks.size()) {
+                    Task task = tasks.remove(index);
+                    String content = "Noted. I've removed this task:\n" + task + "\n";
+                    content += "Now you have " + tasks.size() + " tasks in the list.";
+                    speak(content);
+                } else
+                    speak("☹ OOPS!!! No task found at index " + (index + 1) + ".");
+            } catch (NumberFormatException e) {
+                speak("☹ OOPS!!! Index must be a number.");
+            }
+        } else
+            speak("☹ OOPS!!! The index of delete cannot be empty.");
     }
 
     private static String getCommand(String input) {

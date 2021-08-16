@@ -4,5 +4,6 @@ public class Command {
     public final static String DEADLINE = "deadline";
     public final static String EVENT = "event";
     public final static String DONE = "done";
+    public final static String DELETE = "delete";
     public final static String EXIT = "bye";
 }
