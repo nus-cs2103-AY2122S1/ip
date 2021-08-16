@@ -1,8 +1,9 @@
 public class Event extends Task {
     protected String at;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws IllegalArgumentException {
         super(description);
+        if (at.equals("")) {throw new IllegalArgumentException();}
         this.at = at;
     }
 

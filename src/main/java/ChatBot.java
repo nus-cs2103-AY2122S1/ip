@@ -4,8 +4,6 @@
  * @author Clifford
  */
 
-import java.util.regex.*;
-
 public class ChatBot {
     private boolean isRunning;
     private Task[] tasks;
@@ -76,7 +74,7 @@ public class ChatBot {
             try {
                 String[] descriptionDatePair = temp[1].split("/by", 2);
                 return recordDeadline(descriptionDatePair[0].trim(), descriptionDatePair[1].trim());
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
                 e.printStackTrace();
                 return "deadline should be in format: [DESCRIPTION] /by [DATE]!";
             }
@@ -85,7 +83,7 @@ public class ChatBot {
             try {
                 String[] descriptionDatePair = temp[1].split("/at", 2);
                 return recordEvent(descriptionDatePair[0].trim(), descriptionDatePair[1].trim());
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
                 e.printStackTrace();
                 return "event should be in format: [DESCRIPTION] /at [DATE]!";
             }
