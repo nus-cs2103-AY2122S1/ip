@@ -28,7 +28,6 @@ public class Duke {
 
     public static void main(String[] args) {
         greet();
-
         while(true) {
             String userInput = getUserInput();
             if (userInput.equals("list")) {
@@ -36,6 +35,10 @@ public class Duke {
             } else if (userInput.equals("bye")) {
                 quit();
                 break;
+            } else if (userInput.startsWith("done")){
+                int id = Integer.parseInt(userInput.split(" ")[1]);
+                // need to -1 due to 0-indexing
+                reply(TaskManager.completeTask(id-1));
             } else {
                 Task newTask = new Task(userInput);
                 TaskManager.addTask(newTask);
