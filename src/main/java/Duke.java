@@ -47,6 +47,13 @@ public class Duke {
         while (!userInput.equals(EXIT)) {
             if (userInput.equals("list")) {
                 tasks.displayAllItems();
+            } else if (userInput.startsWith("done")) {
+                // get task number
+                int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+                Task task = tasks.getTask(taskNumber - 1);
+                // mark done as done
+                task.markAsDone();
+                display("Nice! This task is marked as done: \n" + "      " + task.getStatusMessage());
             } else {
                 tasks.add(userInput);
                 display("added: " + userInput);
