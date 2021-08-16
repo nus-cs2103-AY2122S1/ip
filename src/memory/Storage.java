@@ -1,7 +1,10 @@
 package memory;
 
+import exception.InvalidCommandException;
+
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Optional;
 
 public class Storage {
     private final ArrayList<Task> storage;
@@ -35,9 +38,13 @@ public class Storage {
         return storage.get(index - 1);
     }
 
-    public Task markDone(int i) {
-        storage.get(i).markDone();
-        return storage.get(i);
+    public Task markDone(int id) {
+        if (id >= index || id < 0) {
+            throw new InvalidCommandException("Provided Index is out of bounds! Given index is " +
+                    (id + 1) + " but there are " + index + " elements in the list");
+        }
+        storage.get(id).markDone();
+        return storage.get(id);
     }
 
     public Task[] getStorage() {
@@ -45,10 +52,17 @@ public class Storage {
     }
 
     public Task getTaskByIdx(int id) {
+        if (id >= index || id < 0) {
+            throw new InvalidCommandException("Provided Index is out of bounds! Given index is " +
+                    (id + 1) + " but there are " + index + " elements in the list");
+        }
         return storage.get(id);
     }
 
     public Task deleteTaskByIdx(int id) {
+        if (id >= index || id < 0) {
+            throw new InvalidCommandException("Provided Index is out of bounds!");
+        }
         index -= 1;
         return storage.remove(id);
     }

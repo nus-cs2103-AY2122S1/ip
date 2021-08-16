@@ -3,8 +3,6 @@ import exception.InvalidCommandException;
 import memory.Storage;
 import memory.Task;
 
-import java.util.regex.Pattern;
-
 // This class defines the logic of the chatbot
 public class Response {
     private static void hLine() {
@@ -53,21 +51,33 @@ public class Response {
                 display("Bye! Hope to see you again soon!");
                 break;
             case "done":
-                Task markedTask = storage.markDone(Integer.parseInt(queryArr[1]));
+                Task markedTask;
+                try {
+                    markedTask = storage.markDone(Integer.parseInt(queryArr[1]));
+                } catch (InvalidCommandException e) {
+                    display(e.getMessage());
+                    break;
+                }
                 display("Nice! I've marked this task as done:");
                 display(markedTask);
                 break;
             case "delete":
-                Task deletedTask = storage.deleteTaskByIdx(Integer.parseInt(queryArr[1]));
+                Task deletedTask;
+                try {
+                    deletedTask = storage.deleteTaskByIdx(Integer.parseInt(queryArr[1]));
+                } catch (InvalidCommandException e) {
+                    display(e.getMessage());
+                    break;
+                }
                 display("Noted. I've removed this task:");
                 display(deletedTask);
-                display("\t" + "Now you have " + storage.numTasks() + " tasks in the list");
+                display("Now you have " + storage.numTasks() + " tasks in the list");
                 break;
             default:
                 Task addedTask = storage.push(queryArr);
                 display("Got it. I've added this task:");
                 display(addedTask);
-                display("\t" + "Now you have " + storage.numTasks() + " tasks in the list");
+                display("Now you have " + storage.numTasks() + " tasks in the list");
                 break;
         }
         hLine();

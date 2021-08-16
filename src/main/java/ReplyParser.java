@@ -15,6 +15,11 @@ public class ReplyParser {
         if (basicCommand.contains(command)) {
             return new String[]{command};
         } else if (taskMarking.contains(command)){
+            if (queryArr.length != 2) {
+                throw new CommandArityException(queryArr.length > 1
+                        ? "☹ OOPS!!! You've entered too many indices. Multiple " + command + " is unsupported right now!"
+                        : "☹ OOPS!!! Index needs to be specified!");
+            }
             return new String[]{command, String.valueOf(Integer.parseInt(queryArr[1]) - 1)};
         } else if (taskCreation.contains(command)) {
             if (command.equals("todo")) {
