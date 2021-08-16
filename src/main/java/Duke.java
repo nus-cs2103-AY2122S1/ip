@@ -61,6 +61,12 @@ public class Duke {
         }
     }
 
+    /**
+     * To add things to the stored list of tasks
+     *
+     * @param s the name of task to be added
+     * @return message as confirmation of adding operation
+     */
     public static String addTask(String s) {
         if (tasks == null) {
             tasks = new ArrayList<>();
@@ -69,6 +75,9 @@ public class Duke {
         return "added: " + s;
     }
 
+    /**
+     * To display the entire list of tasks sequentially
+     */
     public static void getList() {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println("     " + (i + 1) + "." + tasks.get(i));
