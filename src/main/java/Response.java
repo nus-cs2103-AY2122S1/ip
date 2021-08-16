@@ -1,3 +1,5 @@
+import exception.CommandArityException;
+import exception.InvalidCommandException;
 import memory.Storage;
 import memory.Task;
 
@@ -28,7 +30,14 @@ public class Response {
 
     public static void respond(String query, Storage storage) {
         hLine();
-        String[] queryArr = ReplyParser.parse(query);
+        String[] queryArr;
+        try {
+            queryArr = ReplyParser.parse(query);
+        } catch (InvalidCommandException | CommandArityException e){
+            display(e.getMessage());
+            return;
+        }
+
         String command = queryArr[0];
         switch (command) {
             case "list":
