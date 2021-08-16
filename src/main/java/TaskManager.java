@@ -8,6 +8,7 @@ public class TaskManager {
     private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:\n  %s\n\n" + TASKS_COUNT_MESSAGE;
     private static final String MARKED_TASK_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n  %s\n\n" +
             UNDONE_TASKS_COUNT_MESSAGE;
+    private static final String DELETED_TASK_MESSAGE = "Noted. I've removed this task:\n  %s\n\n" + TASKS_COUNT_MESSAGE;
 
     // Error Messages
     private static final String TASK_NOT_FOUND_MESSAGE =
@@ -26,7 +27,7 @@ public class TaskManager {
         return String.format(TASK_ADDED_MESSAGE, task, taskCount, pluralised);
     }
 
-    public String markTaskAsDone(int taskNumber) {
+    public String markTaskAsDone(int taskNumber) throws DukeException {
         try {
             // User input is 1-indexed
             int taskIndex = taskNumber - 1;
@@ -36,7 +37,20 @@ public class TaskManager {
             String pluralised = undoneTaskCount > 1 || undoneTaskCount == 0 ? "tasks" : "task";
             return String.format(MARKED_TASK_AS_DONE_MESSAGE, task, undoneTaskCount, pluralised);
         } catch (IndexOutOfBoundsException e) {
-            return TASK_NOT_FOUND_MESSAGE;
+            throw new DukeException(TASK_NOT_FOUND_MESSAGE);
+        }
+    }
+
+    public String deleteTask(int taskNumber) throws DukeException {
+        try {
+            // User input is 1-indexed
+            int taskIndex = taskNumber - 1;
+            Task task = taskList.remove(taskIndex);
+            int taskCount = getTaskCount();
+            String pluralised = taskCount > 1 || taskCount == 0 ? "tasks" : "task";
+            return String.format(DELETED_TASK_MESSAGE, task, taskCount, pluralised);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(TASK_NOT_FOUND_MESSAGE);
         }
     }
 

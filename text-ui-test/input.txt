@@ -1,6 +1,9 @@
 todo
 todo borrow book
 list
+done
+done asd
+done 999
 done 1
 deadline
 deadline return book
@@ -10,6 +13,9 @@ event book convention
 event book convention /at 29/08/2021
 list
 done 3
-done 2
+delete
+delete asd
+delete 999
+delete 2
 list
 bye

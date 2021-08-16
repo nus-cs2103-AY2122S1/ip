@@ -4,6 +4,7 @@ public class Duke {
     // User commands
     private static final String LIST_COMMAND = "list";
     private static final String MARK_TASK_AS_DONE_COMMAND = "done";
+    private static final String DELETE_TASK_COMMAND = "delete";
     private static final String EXIT_COMMAND = "bye";
 
     private static final String ADD_TODO_COMMAND = "todo";
@@ -21,6 +22,8 @@ public class Duke {
     private static final String INVALID_TASK_NUMBER_MESSAGE = "Invalid task number.";
     private static final String MARK_DONE_BAD_ARGS_MESSAGE = "Invalid use of the 'done' command.\n\n" +
             "To mark a task as done, use 'done <task-number>'.";
+    private static final String DELETE_TASK_BAD_ARGS_MESSAGE = "Invalid use of the 'delete' command.\n\n" +
+            "To delete a task, use 'delete <task-number>'.";
     private static final String TODO_BAD_ARGS_MESSAGE = "Invalid use of the 'todo' command.\n\n" +
             "To add a new todo, use 'todo <name>'.";
     private static final String DEADLINE_BAD_ARGS_MESSAGE = "Invalid use of the 'deadline' command.\n\n" +
@@ -57,6 +60,17 @@ public class Duke {
                         prettifier.print(taskManager.markTaskAsDone(taskNumber));
                     } catch (NumberFormatException e) {
                         // User provided an argument that is not parsable.
+                        throw new DukeException(INVALID_TASK_NUMBER_MESSAGE);
+                    }
+                    break;
+                case DELETE_TASK_COMMAND:
+                    if (inputLineWithoutCommand.isEmpty()) {
+                        throw new DukeException(DELETE_TASK_BAD_ARGS_MESSAGE);
+                    }
+                    try {
+                        int taskNumber = Integer.parseInt(inputLineWithoutCommand);
+                        prettifier.print(taskManager.deleteTask(taskNumber));
+                    } catch (NumberFormatException e) {
                         throw new DukeException(INVALID_TASK_NUMBER_MESSAGE);
                     }
                     break;
