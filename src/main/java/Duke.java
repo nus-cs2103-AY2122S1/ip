@@ -1,4 +1,4 @@
-import java.util.NoSuchElementException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -18,18 +18,27 @@ public class Duke {
         System.out.println(greet);
 
         Scanner scanner = new Scanner(System.in);
+        ArrayList<String> library = new ArrayList<>(100);
+
         while (true) {
             String input = scanner.nextLine();
             String output = "";
 
             if (input.equals("list")) {
-                output = "list";
+                int count = 1;
+                for (String book: library) {
+                    output += String.format("%d. %s\n", count++, book);
+                }
             }
             else if (input.equals("blah")) {
                 output = "blah";
             }
             else if (input.equals("bye")) {
                 break;
+            }
+            else {
+                library.add(input);
+                output = "added: " + input;
             }
 
             System.out.println(output);
