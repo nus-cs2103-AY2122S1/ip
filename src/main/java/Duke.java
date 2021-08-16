@@ -24,6 +24,46 @@ public class Duke {
             return str;
         }
     }
+
+    private static class Todo extends Task{
+        public Todo(String task) {
+            super(task);
+        }
+
+        @Override
+        public String toString() {
+            return "[T]" + super.toString();
+        }
+    }
+
+    private static class Deadline extends Task {
+        private String by;
+
+        public Deadline(String task, String by) {
+            super(task);
+            this.by = by;
+        }
+
+        @Override
+        public String toString() {
+            return "[D]" + super.toString() + " (by: " + by + ")";
+        }
+    }
+
+    private static class Event extends Task {
+        private String at;
+
+        public Event(String task, String at) {
+            super(task);
+            this.at = at;
+        }
+
+        @Override
+        public String toString() {
+            return "[E]" + super.toString() + " (at: " + at + ")";
+        }
+    }
+
     private static class ToDoList {
         private Task[] list;
         private int index;
@@ -51,7 +91,8 @@ public class Duke {
         public void add(Task task) {
             list[index] = task;
             index++;
-            System.out.println("added: " + task);
+            System.out.println("Got it. I've added this task:\n" + "  " + task + "\n" +
+                    "Now you have " + index + " tasks in the list.");
         }
 
         public void showList() {
@@ -73,8 +114,10 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         tdl.open();
         while (tdl.isOpen()) {
-            String str = sc.next();
-            switch (str) {
+            String input = sc.nextLine();
+            String[] inputs = input.split(" ");
+            String action = inputs[0];
+            switch (action) {
                 case "bye":
                     tdl.exit();
                     break;
@@ -82,13 +125,33 @@ public class Duke {
                     tdl.showList();
                     break;
                 case "done":
-                    int index = sc.nextInt();
+                    int index = Integer.parseInt(inputs[1]);
                     tdl.markAsDone(index);
                     break;
-                default:
-                    str += sc.nextLine();
-                    Task t = new Task(str);
+                case "todo":
+                    int tFirst = input.indexOf(" ");
+                    String tTask = input.substring(tFirst + 1);
+                    Todo t = new Todo(tTask);
                     tdl.add(t);
+                    break;
+                case "deadline":
+                    int dFirst = input.indexOf(" ");
+                    int dSecond = input.indexOf("/");
+                    String dTask = input.substring(dFirst + 1, dSecond - 1);
+                    String by = input.substring(dSecond + 4);
+                    Deadline d = new Deadline(dTask, by);
+                    tdl.add(d);
+                    break;
+                case "event":
+                    int eFirst = input.indexOf(" ");
+                    int eSecond = input.indexOf("/");
+                    String eTask = input.substring(eFirst + 1, eSecond - 1);
+                    String at = input.substring(eSecond + 4);
+                    Event e = new Event(eTask, at);
+                    tdl.add(e);
+                    break;
+                default:
+                    System.out.println("Sorry, I do not understand what was written\nPlease try again.");
                     break;
             }
         }
