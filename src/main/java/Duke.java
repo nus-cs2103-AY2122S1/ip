@@ -21,9 +21,17 @@ public class Duke {
                 exit = true;
             } else if (userCommand.equals("list")) {
                 System.out.println(ui.retrieveList());
-            } else {
-                toDoList.add(userCommand);
-                System.out.println(ui.addedTask(userCommand));
+            } else if (userCommand.startsWith("done")) {
+                char taskIndex = userCommand.charAt(5);
+                int index = Integer.parseInt(String.valueOf(taskIndex));
+                Task taskAtIndex = toDoList.getTask(index);
+                taskAtIndex.markAsDone();
+                System.out.println(ui.doneTask(taskAtIndex));
+            }
+            else {
+                Task task = new Task(userCommand);
+                toDoList.add(task);
+                System.out.println(ui.addedTask(task.description));
             }
         }
     }

@@ -26,13 +26,13 @@ public class UI {
     }
 
     public String retrieveList() {
-        ArrayList<String> list = ToDoList.getTodoList();
+        ArrayList<Task> list = ToDoList.getTodoList();
         if (list.size() == 0) {
             return "You currently have no tasks!";
         } else {
             String userList = "";
-            for (String task : list) {
-                userList =  userList + (list.indexOf(task) + 1) + ". " + task + "\n";
+            for (Task task : list) {
+                userList =  userList + (list.indexOf(task) + 1) + ". " + task.toString() + "\n";
             }
             return userList;
         }
@@ -40,6 +40,10 @@ public class UI {
 
     public String addedTask(String task) {
         return String.format("added: %s", task);
+    }
+
+    public String doneTask (Task task) {
+        return String.format("Nice! I've marked this task as done: \n %s", task.toString());
     }
 
     /**

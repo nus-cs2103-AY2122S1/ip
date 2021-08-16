@@ -1,19 +1,22 @@
 import java.util.ArrayList;
 
 public class ToDoList {
-    private static ArrayList<String> todoList;
+    private static ArrayList<Task> todoList;
 
     public ToDoList () {
         todoList = new ArrayList<>();
     }
 
-    public static ArrayList<String> getTodoList () {
+    public static ArrayList<Task> getTodoList () {
         return todoList;
     }
 
-    public void add (String task) {
+    public void add (Task task) {
         todoList.add(task);
     }
 
+    public Task getTask (int index) {
+        return todoList.get(index - 1);
+    }
 
 }
