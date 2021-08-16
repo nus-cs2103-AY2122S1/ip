@@ -32,7 +32,6 @@ public class Duke {
             this.displayTasks();
         } else if (command.matches("done \\d+")) {
             String taskNum = command.replaceAll("\\D+","");
-            System.out.println(taskNum);
             int index = Integer.parseInt(taskNum) - 1;
             this.markTask(index);
         } else {
