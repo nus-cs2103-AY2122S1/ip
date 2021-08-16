@@ -37,15 +37,27 @@ public class Duke {
                 }
                 System.out.println("____________________________________________________________");
             } else if (command.equals("done")) {
-                int taskIndex = Integer.parseInt(commandAndArgument[1]) - 1;
-                taskList[taskIndex].markAsDone();
-                String markedAsDoneText = String.format(
-                        "____________________________________________________________\n"
-                                + "Nice! I've marked this task as done:\n"
-                                + "%s\n"
-                                + "____________________________________________________________",
-                        taskList[taskIndex]);
-                System.out.println(markedAsDoneText);
+                try {
+                    int taskIndex = Integer.parseInt(commandAndArgument[1]) - 1;
+                    if (taskIndex >= currentIndex) {
+                        System.out.println("____________________________________________________________\n"
+                                + "Please enter a valid task number\n"
+                                + "____________________________________________________________");
+                    } else {
+                        taskList[taskIndex].markAsDone();
+                        String markedAsDoneText = String.format(
+                                "____________________________________________________________\n"
+                                        + "Nice! I've marked this task as done:\n"
+                                        + "%s\n"
+                                        + "____________________________________________________________",
+                                taskList[taskIndex]);
+                        System.out.println(markedAsDoneText);
+                    }
+                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                    System.out.println("____________________________________________________________\n"
+                            + "Please enter a valid task number\n"
+                            + "____________________________________________________________");
+                }
             } else {
                 taskList[currentIndex] = new Task(userInput);
                 currentIndex++;
