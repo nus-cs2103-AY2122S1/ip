@@ -1,23 +1,43 @@
 Lollipop: Hello! I am your personal chatbot, Lollipop! What would you like to do today?
 
-You: Lollipop: Here are your tasks
+You: Lollipop: You have no tasks available.
+
+You: Lollipop: [T][ ] read book has been added.
+
+You: Lollipop: [D][ ] return book (by: June 6th) has been added.
+
+You: Lollipop: [E][ ] project meeting (at: Aug 6th 2-4pm) has been added.
+
+You: Lollipop: [T][ ] join sports club has been added.
 
 You: Lollipop: [T][ ] borrow book has been added.
 
-You: Lollipop: [D][ ] return book (by: Sunday) has been added.
+You: Lollipop: Here are your tasks
+1. [T][ ] read book
+2. [D][ ] return book (by: June 6th)
+3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+4. [T][ ] join sports club
+5. [T][ ] borrow book
 
-You: Lollipop: [E][ ] project meeting (at: Mon 2-4pm) has been added.
+You: Lollipop: [T][X] read book has been marked as done.
+
+You: Lollipop: [D][X] return book (by: June 6th) has been marked as done.
+
+You: Lollipop: [T][X] join sports club has been marked as done.
 
 You: Lollipop: Here are your tasks
-1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (at: Mon 2-4pm)
+1. [T][X] read book
+2. [D][X] return book (by: June 6th)
+3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+4. [T][X] join sports club
+5. [T][ ] borrow book
 
-You: Lollipop: [D][X] return book (by: Sunday) has been marked as done.
+You: Lollipop: [E][ ] project meeting (at: Aug 6th 2-4pm) has been deleted.
 
 You: Lollipop: Here are your tasks
-1. [T][ ] borrow book
-2. [D][X] return book (by: Sunday)
-3. [E][ ] project meeting (at: Mon 2-4pm)
+1. [T][X] read book
+2. [D][X] return book (by: June 6th)
+3. [T][X] join sports club
+4. [T][ ] borrow book
 
 You: Lollipop: See you again soon!

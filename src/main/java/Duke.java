@@ -26,10 +26,14 @@ public class Duke {
         while (!command.equals("bye")) {
             try {
                 if (command.equals("list")) {
-                    System.out.println("Lollipop: Here are your tasks");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        Task task = taskList.get(i);
-                        System.out.printf("%d. %s%n", i + 1, task.toString());
+                    if (taskList.size() == 0) {
+                        System.out.println("Lollipop: You have no tasks available.");
+                    } else {
+                        System.out.println("Lollipop: Here are your tasks");
+                        for (int i = 0; i < taskList.size(); i++) {
+                            Task task = taskList.get(i);
+                            System.out.printf("%d. %s%n", i + 1, task.toString());
+                        }
                     }
 
                 } else if (command.startsWith("done")) {
