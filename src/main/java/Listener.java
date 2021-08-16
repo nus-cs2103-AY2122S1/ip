@@ -1,14 +1,14 @@
 import java.util.Scanner;
-import java.util.ArrayList;
+
 
 public class Listener {
 
     final Scanner sc;
-    final ArrayList<String> itemList;
+    final TaskList itemList;
 
     public Listener() {
         sc = new Scanner(System.in);
-        itemList = new ArrayList<>();
+        itemList = new TaskList();
     }
 
     public void startListen() {
@@ -23,10 +23,7 @@ public class Listener {
             } else if (input.equals("list")) {
                 // Display items
                 System.out.println(Display.OUTPUT_DISPLAY + "Displaying List:");
-                for (int i = 0; i < itemList.size(); i++){
-                    System.out.println(Display.OUTPUT_SPACES + (i+1) + "." + itemList.get(i));
-                }
-
+                itemList.displayList();
             } else {
                 // Add input to list
                 itemList.add(input);
@@ -34,11 +31,9 @@ public class Listener {
             }
 
             System.out.println(Display.LINE);
-
-
         }
 
-        // Quit the program
+        // Quit the program after listening stops
         System.out.println(
                 Display.OUTPUT_DISPLAY + "君の運命のヒトは僕じゃない\n"
                 + Display.LINE
