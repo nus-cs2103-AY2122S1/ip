@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class Duke {
 
     private static boolean isRunning = false;
+    private static String[] record = new String[100];
+    private static int index = 0;
 
     public static void main(String[] args) {
         Duke.isRunning = true;
@@ -18,8 +20,10 @@ public class Duke {
             String command = input.nextLine();
             if (command.equals("bye")) {
                 exit();
+            } else if (command.equals("list")) {
+                displayList();
             } else {
-                echo(command);
+                populate(command);
             }
         }
 
@@ -44,4 +48,25 @@ public class Duke {
         System.out.println("Bye. Hope to see you soon!\n");
         System.out.println("------------------\n");
     }
+
+    private static void populate(String item) {
+        record[Duke.index] = item;
+        Duke.index++;
+        System.out.println("------------------");
+        System.out.println("added: " + item + "\n");
+        System.out.println("------------------\n");
+    }
+
+    private static void displayList() {
+        Integer number = 1;
+        System.out.println("------------------");
+        for (String str : record) {
+            if (str != null) {
+                System.out.println(number.toString() + ". " + str);
+            }
+            number++;
+        }
+        System.out.println("------------------\n");
+    }
+
 }
