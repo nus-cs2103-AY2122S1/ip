@@ -1,7 +1,7 @@
 public class ToDo extends Item {
 
     public ToDo(String[] strings) {
-        super(strings);
+        
     }
 
     @Override
