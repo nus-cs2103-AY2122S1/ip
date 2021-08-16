@@ -28,9 +28,31 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String input = sc.nextLine();
-            String[] splitInput = input.split(" ");
+            // index 0 has command, index 1 has command arguments
+            String[] splitInput = input.split(" ", 2);
             String cmd = splitInput[0];
             switch (cmd) {
+            case "todo":
+                if (splitInput.length <= 1) {
+                    robotPrint("Invalid command! Please use as \"todo [task]\"");
+                    break;
+                }
+                addTodo(splitInput[1]);
+                break;
+            case "deadline":
+                if (splitInput.length <= 1) {
+                    robotPrint("Invalid command! Please use as \"deadline [task] /by [time]\"");
+                    break;
+                }
+                addDeadline(splitInput[1]);
+                break;
+            case "event":
+                if (splitInput.length <= 1) {
+                    robotPrint("Invalid command! Please use as \"event [task] /at [time period]\"");
+                    break;
+                }
+                addEvent(splitInput[1]);
+                break;
             case "done":
                 if (splitInput.length != 2) {
                     robotPrint("Invalid command! Please use as \"done [task id]\"");
@@ -54,22 +76,24 @@ public class Duke {
                 robotPrint("Bye. Hope to see you again soon!");
                 return;
             default:
-                addTask(input);
+                robotPrint("Unknown command!");
             }
         }
     }
 
     private static void markTaskDone(String index) {
         // try to parse int
-        int i = 0;
+        int i;
         try {
             i = Integer.parseInt(index);
         } catch (NumberFormatException e) {
             robotPrint("Unable to parse task id!");
+            return;
         }
 
         if (i < 0 || i > tasks.size()) {
             robotPrint("Invalid task id!");
+            return;
         }
 
         Task task = tasks.get(i - 1);
@@ -78,9 +102,39 @@ public class Duke {
         System.out.println("\t " + task);
     }
 
-    private static void addTask(String task) {
-        tasks.add(new Task(task));
-        robotPrint("added --> " + task);
+    private static void addTodo(String description) {
+        Todo todo = new Todo(description);
+        tasks.add(todo);
+        printTaskAdded(todo);
+    }
+
+    private static void addDeadline(String args) {
+        String[] splitArgs = args.split(" /by ");
+        if (splitArgs.length != 2) {
+            robotPrint("Unable to parse deadline!");
+            return;
+        }
+        Deadline deadline = new Deadline(splitArgs[0], splitArgs[1]);
+        tasks.add(deadline);
+        printTaskAdded(deadline);
+    }
+
+    private static void addEvent(String args) {
+        String[] splitArgs = args.split(" /at ");
+        if (splitArgs.length != 2) {
+            robotPrint("Unable to parse event!");
+            return;
+        }
+        Event event = new Event(splitArgs[0], splitArgs[1]);
+        tasks.add(event);
+        printTaskAdded(event);
+    }
+
+    private static void printTaskAdded(Task task) {
+        robotPrint("Got it. I've added this task:");
+        System.out.println("\t" + task);
+        String numOfTasks = tasks.size() + " task" + (tasks.size() > 1 ? "s" : "");
+        robotPrint("Now you have " + numOfTasks + " in the list.");
     }
 
     private static void printAllTasks() {
