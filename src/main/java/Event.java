@@ -9,6 +9,6 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + (this.done? "[X] " : "[ ] ")
                 + this.name
-                +String.format("(at: %s)",this.at);
+                +String.format("(at:%s)",this.at);
     }
 }

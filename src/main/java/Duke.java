@@ -34,7 +34,7 @@ public class Duke {
         System.out.println(
                 "\t"+border+"\n" +
                 "\tHello, I'm DAN 9000\n" +
-                "\thow can I help you?\n" +
+                "\tHow can I help you?\n" +
                 "\t" + border);
 
         Scanner userScanner = new Scanner(System.in);

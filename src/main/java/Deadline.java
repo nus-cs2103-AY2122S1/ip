@@ -9,6 +9,6 @@ public class Deadline extends Task{
     public String toString() {
         return "[D]" + (this.done? "[X] " : "[ ] ")
                 + this.name
-                +String.format("(by: %s)",this.by);
+                +String.format("(by:%s)",this.by);
     }
 }
