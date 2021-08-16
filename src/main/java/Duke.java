@@ -42,6 +42,16 @@ public class Duke {
         while (true){
             String userInput = userScanner.nextLine();
 
+            if (userInput.equals("bye")){
+                System.out.println(formatReply("BYEEEEEE!\nHope to see you again soon :)"));
+                System.exit(0);
+            }
+
+            if (userInput.equals("list")) {
+                System.out.println(formatReply(taskList.enumerate()));
+                continue;
+            }
+
             if (userInput.matches("(^done )[0-9]+")){
                 String splitNum = userInput.split(" ")[1];
                 String reply = taskList.markDone(Integer.parseInt(splitNum));
@@ -49,49 +59,31 @@ public class Duke {
                 continue;
             }
 
+            // add tasks section
+            Task toAdd = null;
             if (userInput.matches("^(todo ).+")){
                 String splitName = userInput.split(" ",2)[1];
-                Task toAdd = new Todo(splitName);
-                taskList.add(toAdd);
-                String reply = toAdd.addMsg();
-                reply = taskList.newLength() + "\n"+ reply;
-                System.out.println(formatReply(reply));
-                continue;
+                toAdd = new Todo(splitName);
             }
-
             if (userInput.matches("^(deadline ).+")){
                 String splitName = userInput.split(" ",2)[1];
                 String[] name_by = splitName.split("/by");
-                Task toAdd = new Deadline(name_by[0],name_by[1]);
-                taskList.add(toAdd);
-                String reply = toAdd.addMsg();
-                reply = taskList.newLength() + "\n"+ reply;
-                System.out.println(formatReply(reply));
-                continue;
+                toAdd = new Deadline(name_by[0],name_by[1]);
             }
             if (userInput.matches("^(event ).+")){
                 String splitName = userInput.split(" ",2)[1];
                 String[] name_at = splitName.split("/at");
-                Task toAdd = new Event(name_at[0],name_at[1]);
+                toAdd = new Event(name_at[0],name_at[1]);
+            }
+            if (toAdd != null){
                 taskList.add(toAdd);
                 String reply = toAdd.addMsg();
-                reply = taskList.newLength() + "\n"+ reply;
+                reply = reply + "\n" + taskList.newLength();
                 System.out.println(formatReply(reply));
                 continue;
             }
 
-            switch(userInput){
-                case "bye":
-                    System.out.println(formatReply("BYEEEEEE!\nHope to see you again soon :)"));
-                    System.exit(0);
-                case "list":
-                    System.out.println(formatReply(taskList.enumerate()));
-                    break;
-                default:
-                    Task toAdd = new Task(userInput);
-                    taskList.add(toAdd);
-                    System.out.println(formatReply(toAdd.addMsg()));
-            }
+            // ignore invalid inputs
         }
     }
 }
