@@ -30,27 +30,54 @@ public class Duke {
     }
 
     private void executeCommand(Command command) {
-        switch(command.getInstruction()) {
-            case "list":
-                printList();
-                break;
-            case "todo":
-                createTask(new Todo(command.getParameter_1()));
-                break;
-            case "deadline":
-                createTask(new Deadline(command.getParameter_1(), command.getParameter_2()));
-                break;
-            case "event":
-                createTask(new Event(command.getParameter_1(), command.getParameter_2()));
-                break;
-            case "done":
-                markAsDone(Integer.parseInt(command.getParameter_1()));
-                break;
-            case "bye":
-                bye();
-                break;
-            default :
-                System.out.println("Invalid command");
+        try {
+            switch (command.getInstruction()) {
+                case "list":
+                    printList();
+                    break;
+                case "todo":
+                    if (command.getParameter_1() == null) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    createTask(new Todo(command.getParameter_1()));
+                    break;
+                case "deadline":
+                    if (command.getParameter_1() == null) {
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
+                    if (command.getParameter_2() == null) {
+                        throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
+                    }
+                    createTask(new Deadline(command.getParameter_1(), command.getParameter_2()));
+                    break;
+                case "event":
+                    if (command.getParameter_1() == null) {
+                        throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                    }
+                    if (command.getParameter_2() == null) {
+                        throw new DukeException("☹ OOPS!!! The date of an event cannot be empty.");
+                    }
+                    createTask(new Event(command.getParameter_1(), command.getParameter_2()));
+                    break;
+                case "done":
+                    if (command.getParameter_1() == null) {
+                        throw new DukeException("☹ OOPS!!! The task number cannot be empty.");
+                    }
+                    if (Integer.parseInt(command.getParameter_1()) < 1 ||
+                            Integer.parseInt(command.getParameter_1()) > list.size()) {
+                        throw new DukeException("☹ OOPS!!! The task number is invalid");
+                    }
+                    markAsDone(Integer.parseInt(command.getParameter_1()));
+                    break;
+                case "bye":
+                    bye();
+                    break;
+                default:
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        }
+        catch (DukeException e) {
+            formatPrint(e.getMessage());
         }
     }
 
