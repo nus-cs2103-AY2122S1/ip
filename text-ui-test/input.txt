@@ -1,0 +1,19 @@
+blah
+list
+todo
+todo borrow book
+deadline
+deadline do homework
+deadline do homework /by
+deadline do homework /by no idea :-p
+event
+event project meeting
+event project meeting /at
+event project meeting /at Mon 2-4pm
+list
+done
+done -500
+done 42
+done 2
+list
+bye

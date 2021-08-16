@@ -10,7 +10,7 @@ public class BruhBot {
             + " |_______/ |__/       \\______/ |__/  |__/";
 
     private static final String GREETING = String.format("What can\n%s\ndo for you today?", LOGO);
-    private static final String FAREWELL = "Bye. Hope to see you again soon!";
+    private static final String FAREWELL = "Bye. Hope to see you again soon!\n";
     private static final String STOP_SIGNAL_STRING = "bye";
 
     private String userCommand = "";
@@ -62,58 +62,61 @@ public class BruhBot {
         } else if (command.equals("list")) {
             return listTasks();
         } else {
-            String[] sections = command.split(" ", 2);
+            String[] sections = command.split(" ", 2); // Split into at most 2 parts
             String keyword = sections[0];
             try {
                 switch (keyword) {
                     case "done":
-                        checkValidFormat(sections);
-                        try {
-                            int index = Integer.parseInt(sections[1]) - 1;
-                            tasks.get(index).markAsDone();
-                            return String.format("Nice! I've marked this task as done:\n  %s\n",
-                                    tasks.get(index).toString());
-                        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                            return "Please specify a valid index to mark as complete.\n";
-                        }
+                        checkArguments(sections, "Please specify an index.\n");
+                        int index = Integer.parseInt(sections[1]) - 1;
+                        tasks.get(index).markAsDone();
+                        return String.format("Nice! I've marked this task as done:\n  %s\n",
+                                tasks.get(index).toString());
                     case "todo": {
-                        checkValidFormat(sections);
+                        checkArguments(sections, String.format("The description of a %s cannot be empty.\n", keyword));
                         Todo newTask = new Todo(sections[1]);
                         tasks.add(newTask);
                         return generateAddTaskResponse(newTask);
                     }
                     case "deadline": {
-                        checkValidFormat(sections);
-                        String[] parts = sections[1].split(" /by ", 2);
-                        checkValidFormat(parts);
-                        Deadline newTask = new Deadline(parts[0], parts[1]);
+                        checkArguments(sections, String.format("The description of a %s cannot be empty.\n", keyword));
+                        sections = sections[1].split(" /by ", 2);
+                        checkArguments(sections,
+                                String.format("Please specify the date/time of your deadline.\n", keyword));
+                        Deadline newTask = new Deadline(sections[0], sections[1]);
                         tasks.add(newTask);
                         return generateAddTaskResponse(newTask);
                     }
                     case "event": {
-                        checkValidFormat(sections);
-                        String[] parts = sections[1].split(" /at ", 2);
-                        checkValidFormat(parts);
-                        Event newTask = new Event(parts[0], parts[1]);
+                        checkArguments(sections, String.format("The description of a %s cannot be empty.\n", keyword));
+                        sections = sections[1].split(" /at ", 2);
+                        checkArguments(sections, String.format("Please specify a time for your event.\n", keyword));
+                        Event newTask = new Event(sections[0], sections[1]);
                         tasks.add(newTask);
                         return generateAddTaskResponse(newTask);
                     }
+                    default:
+                        throw new InvalidArgumentException(keyword);
                 }
-            } catch (InvalidArgumentException e) {
-                return "Please specify the correct arguments for this command.\n";
+            } catch (InvalidArgumentException | MissingArgumentException e) {
+                return e.getMessage();
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                return "Please specify a valid index to mark as complete.\n";
+            } catch (DukeException e) {
+                return GENERIC_ERROR_MESSAGE;
             }
         }
-        return GENERIC_ERROR_MESSAGE;
     }
 
-    private void checkValidFormat(String[] sections) throws InvalidArgumentException {
+    private void checkArguments(String[] sections, String errorMessage) throws DukeException {
+        // Sections is guaranteed to have 1 or 2 elements. 2nd element might be empty.
         if (sections.length != 2 || sections[1].isEmpty()) {
-            throw new InvalidArgumentException();
+            throw new MissingArgumentException(errorMessage);
         }
     }
 
     private String generateAddTaskResponse(Task newTask) {
-        return String.format("Got it. I've added to this task:\n  %s\nNow you have %d task%s in the list.\n",
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d task%s in the list.\n",
                 newTask.toString(), tasks.size(), (tasks.size() == 1 ? "" : 's'));
     }
 
