@@ -6,12 +6,19 @@
 [0m
 🤖: Hello! I'm Duke
 🤖: What can I do for you?
+🤖: [91mNo tasks added yet![0m
+🤖: [91mInvalid arguments! Please use the command in the following format: "todo [task]"[0m
+🤖: [91mInvalid arguments! Please use the command in the following format: "deadline [task] /by [time]"[0m
+🤖: [91mInvalid arguments! Please use the command in the following format: "event [task] /at [time period]"[0m
 🤖: Got it. I've added this task:
 	[T] [ ] buy milk
 🤖: Now you have 1 task in the list.
+🤖: [91mInvalid task selected![0m
+🤖: [91mUnable to parse deadline![0m
 🤖: Got it. I've added this task:
 	[D] [ ] return book (by: June 6th)
 🤖: Now you have 2 tasks in the list.
+🤖: [91mUnable to parse event![0m
 🤖: Got it. I've added this task:
 	[E] [ ] project meeting (at: Aug 6th 2-4pm)
 🤖: Now you have 3 tasks in the list.
@@ -20,10 +27,10 @@
 	2. [D] [ ] return book (by: June 6th)
 	3. [E] [ ] project meeting (at: Aug 6th 2-4pm)
 🤖: Nice! I've marked this task as done:
-	 [T] [X] buy milk
+	[T] [X] buy milk
 🤖: Here are the tasks in your list:
 	1. [T] [X] buy milk
 	2. [D] [ ] return book (by: June 6th)
 	3. [E] [ ] project meeting (at: Aug 6th 2-4pm)
-🤖: Unknown command!
+🤖: [91mUnknown Command![0m
 🤖: Bye. Hope to see you again soon!

@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Duke {
     private static final String ROBOT_EMOJI = "\uD83E\uDD16";
     private static final String COLOR_CYAN = "\u001B[36m";
+    private static final String COLOR_RED = "\u001B[91m";
     private static final String COLOR_RESET = "\u001B[0m";
     private static final String LOGO =
         " ____        _        \n"
@@ -27,79 +28,82 @@ public class Duke {
     private static void handleCommands() {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String input = sc.nextLine();
-            // index 0 has command, index 1 has command arguments
-            String[] splitInput = input.split(" ", 2);
-            String cmd = splitInput[0];
-            switch (cmd) {
-            case "todo":
-                if (splitInput.length <= 1) {
-                    robotPrint("Invalid command! Please use as \"todo [task]\"");
+            try {
+                String input = sc.nextLine();
+                // index 0 has command, index 1 has command arguments
+                String[] splitInput = input.split(" ", 2);
+                String cmd = splitInput[0];
+                switch (cmd) {
+                case "todo":
+                    if (splitInput.length <= 1) {
+                        throw new InvalidArgumentsException("todo [task]");
+                    }
+                    addTodo(splitInput[1]);
                     break;
-                }
-                addTodo(splitInput[1]);
-                break;
-            case "deadline":
-                if (splitInput.length <= 1) {
-                    robotPrint("Invalid command! Please use as \"deadline [task] /by [time]\"");
+                case "deadline":
+                    if (splitInput.length <= 1) {
+                        throw new InvalidArgumentsException("deadline [task] /by [time]");
+                    }
+                    addDeadline(splitInput[1]);
                     break;
-                }
-                addDeadline(splitInput[1]);
-                break;
-            case "event":
-                if (splitInput.length <= 1) {
-                    robotPrint("Invalid command! Please use as \"event [task] /at [time period]\"");
+                case "event":
+                    if (splitInput.length <= 1) {
+                        throw new InvalidArgumentsException("event [task] /at [time period]");
+                    }
+                    addEvent(splitInput[1]);
                     break;
-                }
-                addEvent(splitInput[1]);
-                break;
-            case "done":
-                if (splitInput.length != 2) {
-                    robotPrint("Invalid command! Please use as \"done [task id]\"");
+                case "done":
+                    if (splitInput.length != 2) {
+                        throw new InvalidArgumentsException("done [task id]");
+                    }
+                    
+                    markTaskDone(splitInput[1]);
                     break;
-                }
-                markTaskDone(splitInput[1]);
-                break;
-            case "list":
-                if (splitInput.length != 1) {
-                    robotPrint("Invalid command! Please use as \"list\"");
+                case "list":
+                    if (splitInput.length != 1) {
+                        throw new InvalidArgumentsException("list");
+                    } else if (tasks.size() == 0) {
+                        throw new NoTasksException();
+                    }
+                    
+                    printAllTasks();
                     break;
+                case "bye":
+                    if (splitInput.length != 1) {
+                        throw new InvalidArgumentsException("bye");
+                    }
+                    sc.close();
+                    robotPrint("Bye. Hope to see you again soon!");
+                    return;
+                default:
+                    robotPrintErr("Unknown Command!");
                 }
-                printAllTasks();
-                break;
-            case "bye":
-                if (splitInput.length != 1) {
-                    robotPrint("Invalid command! Please use as \"bye\"");
-                    break;
-                }
-                sc.close();
-                robotPrint("Bye. Hope to see you again soon!");
-                return;
-            default:
-                robotPrint("Unknown command!");
+            } catch (InvalidTaskSelectedException
+                    | InvalidArgumentsException
+                    | UnableToParseException
+                    | NoTasksException e) {
+                robotPrintErr(e.getMessage());
             }
         }
     }
 
-    private static void markTaskDone(String index) {
+    private static void markTaskDone(String index) throws UnableToParseException, InvalidTaskSelectedException {
         // try to parse int
         int i;
         try {
             i = Integer.parseInt(index);
         } catch (NumberFormatException e) {
-            robotPrint("Unable to parse task id!");
-            return;
+            throw new UnableToParseException("task id");
         }
 
         if (i < 0 || i > tasks.size()) {
-            robotPrint("Invalid task id!");
-            return;
+            throw new InvalidTaskSelectedException();
         }
 
         Task task = tasks.get(i - 1);
         task.markAsDone();
         robotPrint("Nice! I've marked this task as done:");
-        System.out.println("\t " + task);
+        System.out.println("\t" + task);
     }
 
     private static void addTodo(String description) {
@@ -108,22 +112,20 @@ public class Duke {
         printTaskAdded(todo);
     }
 
-    private static void addDeadline(String args) {
+    private static void addDeadline(String args) throws UnableToParseException {
         String[] splitArgs = args.split(" /by ");
         if (splitArgs.length != 2) {
-            robotPrint("Unable to parse deadline!");
-            return;
+            throw new UnableToParseException("deadline");
         }
         Deadline deadline = new Deadline(splitArgs[0], splitArgs[1]);
         tasks.add(deadline);
         printTaskAdded(deadline);
     }
 
-    private static void addEvent(String args) {
+    private static void addEvent(String args) throws UnableToParseException {
         String[] splitArgs = args.split(" /at ");
         if (splitArgs.length != 2) {
-            robotPrint("Unable to parse event!");
-            return;
+            throw new UnableToParseException("event");
         }
         Event event = new Event(splitArgs[0], splitArgs[1]);
         tasks.add(event);
@@ -151,6 +153,10 @@ public class Duke {
     private static void greet() {
         robotPrint("Hello! I'm Duke");
         robotPrint("What can I do for you?");
+    }
+    
+    private static void robotPrintErr(String string) {
+        robotPrint(COLOR_RED + string + COLOR_RESET);
     }
 
     private static void robotPrint(String string) {
