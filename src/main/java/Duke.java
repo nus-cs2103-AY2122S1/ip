@@ -1,10 +1,11 @@
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.regex.*;
 
 public class Duke {
     private static String input = "";
-    private static Task[] list = new Task[100];
+    private static ArrayList<Task> list = new ArrayList<>();
     private static int listLength = 0;
 
     public static void main(String[] args) {
@@ -35,8 +36,18 @@ public class Duke {
     public static void parseInput(String input) throws DukeException {
         if (input.equals("list")) {
             list();
-        } else if (Pattern.matches("done.*", input)){
-            markDone(input);
+        } else if (Pattern.matches("done.*", input)) {
+            String[] inputArr = input.split(" ");
+            if (inputArr.length == 1) {
+                throw new DukeException("Indicate the id of the task which you have completed!");
+            }
+            markDone(Integer.parseInt(inputArr[1]));
+        } else if (Pattern.matches("delete.*", input)) {
+            String[] inputArr = input.split(" ");
+            if (inputArr.length == 1) {
+                throw new DukeException("Indicate the id of the task which you want to remove!");
+            }
+            delete(Integer.parseInt(inputArr[1]));
         } else if (Pattern.matches("event.*", input)) {
             String[] inputArr = input.replaceFirst("event ","").split("/at");
             if (inputArr.length == 1) {
@@ -75,7 +86,7 @@ public class Duke {
      * @param task The task to be added to the list.
      */
     public static void add(Task task) throws DukeException {
-        list[listLength] = task;
+        list.add(task);
         System.out.println("New Task? I've added it to the list:");
         System.out.println(task.displayInfo());
         listLength++;
@@ -83,17 +94,23 @@ public class Duke {
         System.out.println();
     }
 
-    public static void markDone(String input) throws DukeException {
-        int id;
-        try {
-            id = Integer.parseInt(input.split(" ")[1]);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Indicate the id of the task which you have completed!");
-        }
+    /**
+     * To include error handling if id > length of list.
+     * @param id
+     */
+    public static void markDone(int id) {
         System.out.println("You've finished the task? Good job!");
         System.out.println("This task has been marked as done:");
-        list[id - 1].complete();
-        System.out.println(list[id - 1].displayInfo());
+        list.get(id - 1).complete();
+        System.out.println(list.get(id - 1).displayInfo());
+        System.out.println();
+    }
+
+    public static void delete(int id) {
+        System.out.println("Okay! Removing the task:");
+        Task removed = list.remove(id - 1);
+        System.out.println(removed.displayInfo());
+        listLength--;
         System.out.println();
     }
 
@@ -103,7 +120,7 @@ public class Duke {
     public static void list() {
         System.out.println("Here's your current list:");
         for (int i = 0; i < listLength; i++) {
-            System.out.println(String.format("%d. %s", i + 1, list[i].displayInfo()));
+            System.out.println(String.format("%d. %s", i + 1, list.get(i).displayInfo()));
         }
         System.out.println();
     }
