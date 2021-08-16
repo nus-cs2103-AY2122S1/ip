@@ -62,6 +62,10 @@ public class Duke {
                     if (isEvent) {
                         return true;
                     }
+                    boolean isDelete = checkDelete(response,len);
+                    if (isDelete) {
+                        return true;
+                    }
                     //This means there's no match of operations.
                     throw new NotRecognizeException();
                 } catch (DukeException e) {
@@ -143,10 +147,12 @@ public class Duke {
         if (len >= 6 && response.startsWith("done ")
                 && chekDigit(response.substring(5,len))) {
             int curr = Integer.parseInt(response.substring(5,len));
-            if (curr > count || curr <= 0) {
+            Task shouldMark;
+            try {
+                shouldMark = list.get(curr - 1);
+            } catch (IndexOutOfBoundsException e) {
                 throw new OutOfRangeException();
             }
-            Task shouldMark = list.get(curr - 1);
             shouldMark.markAsDone();
             String title = "Nice! I've marked this task as done: \n";
             String out = "     " + shouldMark.toString();
@@ -183,10 +189,10 @@ public class Duke {
     public static boolean checkTodo(String response, int len) throws EmptyInputException{
         //check with the special response "todo X", where X is what to do.
         if (len >= 5 && response.startsWith("todo ")) {
-            list.add(count, new Todo(response.substring(5, len)));
-            Task curr = list.get(count);
+            Todo todo = new Todo(response.substring(5, len));
+            list.add(todo);
             count ++;
-            System.out.println(getPattern(getOutputFrame(curr.toString())));
+            System.out.println(getPattern(getOutputFrame(todo.toString())));
             return true;
         } else if (response.equals("todo")) {
             throw new EmptyInputException("todo");
@@ -210,10 +216,10 @@ public class Duke {
             String[] parts = response.substring(9, len).split(" /by ");
             String content = parts[0];
             String time = parts[1];
-            list.add(count, new Deadline(content, time));
-            Task curr = list.get(count);
+            Deadline deadline = new Deadline(content, time);
+            list.add(deadline);
             count ++;
-            System.out.println(getPattern(getOutputFrame(curr.toString())));
+            System.out.println(getPattern(getOutputFrame(deadline.toString())));
             return true;
         } else if (response.equals("deadline")) {
             throw new EmptyInputException("deadline");
@@ -231,19 +237,52 @@ public class Duke {
      * @return Whether the input is related to event or not.
      */
     public static boolean checkEvent(String response, int len) throws EmptyInputException{
-        //check with the special response "todo X", where X is what to do.
+        //check with the special response "event X", where X includes what to do and time to do.
         if (len >= 6 && response.startsWith("event ")
                 && response.substring(6, len).contains(" /at ")) {
             String[] parts = response.substring(9, len).split(" /at ");
             String content = parts[0];
             String time = parts[1];
-            list.add(count, new Event(content, time));
-            Task curr = list.get(count);
+            Event event = new Event(content, time);
+            list.add(event);
             count ++;
-            System.out.println(getPattern(getOutputFrame(curr.toString())));
+            System.out.println(getPattern(getOutputFrame(event.toString())));
             return true;
         } else if (response.equals("event")) {
             throw new EmptyInputException("event");
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns a boolean checking whether the user input is
+     * related to delete operations.
+     *
+     * @param response The user input.
+     * @param len The length of user input.
+     * @return Whether the input is related to delete or not.
+     */
+    public static boolean checkDelete(String response, int len) throws EmptyInputException,OutOfRangeException{
+        //check with the special response "delete X", where X is index of deleted item.
+        if (len >= 8 && response.startsWith("delete ")
+                && chekDigit(response.substring(7,len))) {
+            int curr = Integer.parseInt(response.substring(7,len));
+            Task shouldDelete;
+            try {
+                shouldDelete = list.get(curr - 1);
+            } catch (IndexOutOfBoundsException e) {
+                throw new OutOfRangeException();
+            }
+            list.remove(curr - 1);
+            count--;
+            String title = "Noted. I've removed this task: \n";
+            String out = "     " + shouldDelete.toString() + "\n   ";
+            String end = "Now you have " + count + " tasks in the list.";
+            System.out.println(getPattern(title + out + end));
+            return true;
+        } else if (response.equals("delete")) {
+            throw new EmptyInputException("delete");
         } else {
             return false;
         }
