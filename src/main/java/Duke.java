@@ -34,7 +34,7 @@ public class Duke {
         while (lastInput != "bye") {
             lastInput = currScanner.nextLine();
 
-            
+            dukeSays(lastInput);
         }
 
     }
