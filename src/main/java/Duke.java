@@ -32,24 +32,35 @@ public class Duke {
             } else if(userInput.toLowerCase().startsWith("delete")) {
                 deleteTask(userInput, tasks);
             } else {
-                try {
-                    addTask(userInput, tasks);
-                }catch(IllegalArgumentException e) {
-                    dukeReply("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }catch(StringIndexOutOfBoundsException e) {
-                    //Occurs if only type of task is entered. Maybe add a checcValidity funcitno
-                    dukeReply("OOPS!!! The description of a todo cannot be empty.");
-                }
+                addTask(userInput, tasks);
+
             }
         }
     }
+    public static void checkValidity(String userInput, int taskIndex) {
 
+    }
+
+    /**
+     * Deletes a task from the array of tasks.
+     * @param userInput String of task to delete.
+     * @param tasks List of current tasks.
+     */
     public static void deleteTask(String userInput, List<Task> tasks) {
-        int taskToDel = Integer.parseInt(userInput.substring(7)) - 1;
-        tasks.remove(taskToDel);
-        Task task = tasks.get(taskToDel);
-        dukeReply(String.format("Noted. I've removed this task:\n%s\nNow you have %s tasks in list"
-                , task, tasks.size()));
+        try {
+            int taskToDel = Integer.parseInt(userInput.substring(7)) - 1;
+            System.out.println(taskToDel);
+            Task task = tasks.get(taskToDel);
+            tasks.remove(taskToDel);
+            dukeReply(String.format("Noted. I've removed this task:\n%s\nNow you have %s tasks in list"
+                    , task, tasks.size()));
+        } catch(StringIndexOutOfBoundsException e) {
+            dukeReply("OOPS!!! You cannot delete nothing!");
+        } catch(NumberFormatException e) {
+            dukeReply("OOPS!!! Must be a number bodoh");
+        } catch(IndexOutOfBoundsException e) {
+            dukeReply("OOPS!!! NUmber doesnt exist");
+        }
     }
 
     /**
@@ -59,24 +70,28 @@ public class Duke {
      */
     public static void addTask(String userInput, List<Task> tasks) {
         Task taskToAdd;
-
-        if(userInput.toLowerCase().startsWith("todo")) {
-            taskToAdd = new ToDo(userInput.substring(5));
-        } else if (userInput.toLowerCase().startsWith("deadline")){
-            int dateIndex = userInput.indexOf("/by");
-            String[] dateAndTask = sepDateFromTask(dateIndex,9, userInput);
-            taskToAdd = new Deadline(dateAndTask[0], dateAndTask[1]);
-        } else if(userInput.toLowerCase().startsWith("event")) {
-            int dateIndex = userInput.indexOf("/at");
-            String[] dateAndTask = sepDateFromTask(dateIndex,6, userInput);
-            taskToAdd = new Event(dateAndTask[0], dateAndTask[1]);
-        } else {
-            throw new IllegalArgumentException("Please specify type of task");
+        try{
+            if(userInput.toLowerCase().startsWith("todo")) {
+                taskToAdd = new ToDo(userInput.substring(5));
+            } else if (userInput.toLowerCase().startsWith("deadline")){
+                int dateIndex = userInput.indexOf("/by");
+                String[] dateAndTask = sepDateFromTask(dateIndex,9, userInput);
+                taskToAdd = new Deadline(dateAndTask[0], dateAndTask[1]);
+            } else if(userInput.toLowerCase().startsWith("event")) {
+                int dateIndex = userInput.indexOf("/at");
+                String[] dateAndTask = sepDateFromTask(dateIndex,6, userInput);
+                taskToAdd = new Event(dateAndTask[0], dateAndTask[1]);
+            } else {
+                throw new IllegalArgumentException("Please specify type of task");
+            }
+            tasks.add(taskToAdd);
+            dukeReply(String.format("Got it. I've added this task:\n" +
+                    "%s\nNumber of tasks: %s", taskToAdd.toString(), tasks.size()));
+        }catch(IllegalArgumentException e) {
+            dukeReply("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } catch(StringIndexOutOfBoundsException e) {
+            dukeReply("OOPS!!! The description of a todo cannot be empty.");
         }
-
-        tasks.add(taskToAdd);
-        dukeReply(String.format("Got it. I've added this task:\n" +
-                "%s\nNumber of tasks: %s", taskToAdd.toString(), tasks.size()));
     }
 
     /**
@@ -105,16 +120,21 @@ public class Duke {
      * @param tasks List of current tasks.
      */
     public static void markTaskDone(String userInput, List<Task> tasks) {
-        // catch .NumberFormatException here and invalid inputs - neg, doesnt exisst
-        // StringIndexOutOfBoundsException -- done
-        //IndexOutOfBoundsException - done number not there
-        int taskIndex = Integer.parseInt(userInput.substring(5)) - 1;
-        Task task = tasks.get(taskIndex);
-        if(task.checkStatus()) {
-            dukeReply("Youve already marked this task as done!");
-        } else {
-            task.setDone();
-            dukeReply("Nice! I've marked this task as done:\n" + task.toString());
+        try {
+            int taskIndex = Integer.parseInt(userInput.substring(5)) - 1;
+            Task task = tasks.get(taskIndex);
+            if (task.checkStatus()) {
+                dukeReply("Youve already marked this task as done!");
+            } else {
+                task.setDone();
+                dukeReply("Nice! I've marked this task as done:\n" + task.toString());
+            }
+        } catch(StringIndexOutOfBoundsException e) {
+            dukeReply("OOPS!!! You cannot mark nothing as done!");
+        } catch(NumberFormatException e) {
+            dukeReply("OOPS!!! Must be a number bodoh");
+        } catch(IndexOutOfBoundsException e) {
+            dukeReply("OOPS!!! NUmber doesnt exist");
         }
     }
 
