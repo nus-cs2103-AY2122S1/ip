@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Duke {
@@ -17,7 +18,28 @@ public class Duke {
                 "What can I do for you?");
     }
 
+    private static String getUserInput() {
+        return new Scanner(System.in).nextLine();
+    }
+
+    private static void quit() {
+        reply("Bye. Hope to see you again soon!");
+    }
+
     public static void main(String[] args) {
         greet();
+        boolean shouldExit = false;
+        while(!shouldExit) {
+            String userInput = getUserInput();
+            switch (userInput) {
+                case "bye":
+                    quit();
+                    shouldExit = true;
+                    break;
+                default:
+                    // basically echo
+                    reply(userInput);
+            }
+        }
     }
 }
