@@ -51,7 +51,7 @@ public class Response {
                 break;
             default:
                 Task addedTask = storage.push(queryArr);
-                display("Got it. I've added this task: ");
+                display("Got it. I've added this task:");
                 display(addedTask);
                 display("\t" + "Now you have " + storage.numTasks() + " tasks in the list");
                 break;
