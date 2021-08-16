@@ -8,7 +8,7 @@ public class TaskStorage {
     // Adds a new task to the storage and returns a confirmation message
     public String add(Task task) {
         storage[++current] = task;
-        String returnString = "Got it. I've added this task: \n  "
+        String returnString = "Got it. I've added this task:\n  "
             + task.toString() + "\n"
             + "Now you have " + (current + 1) + " tasks in the list.";
         return returnString;
@@ -28,7 +28,7 @@ public class TaskStorage {
         }
         storage[ind].markDone();
 
-        return "Nice! I've marked this task as done: \n  " + storage[ind].toString();
+        return "Nice! I've marked this task as done:\n  " + storage[ind].toString();
     }
 
     // Gets a task from the storage

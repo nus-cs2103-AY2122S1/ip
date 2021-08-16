@@ -29,6 +29,10 @@ public class StringFormat {
         return str.replace("\n", "\n" + tab);
     }
 
+    public static String tabAndFormat(String str) {
+        return formatString(tabAllNewline(str));
+    }
+
     public static void main(String[] args) {
         // test:
         // System.out.println(StringFormat.formatString("Hello! I'm Duke", "What can I do for you?"));

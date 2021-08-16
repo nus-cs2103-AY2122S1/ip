@@ -27,16 +27,14 @@ public class Duke {
 
             // if it is "bye", we exit the loop
             if (inputs[0].equals("bye")) {
-                System.out.println(StringFormat.formatString("Bye. Hope to see you again soon!\n"));
+                System.out.println(
+                    StringFormat.formatString("Bye. Hope to see you again soon!\n")
+                );
                 break;
             // if it is "list", we list the stored inputs
             } else if (inputs[0].equals("list")) {
                 System.out.println(
-                    StringFormat.formatString(
-                        StringFormat.tabAllNewline(
-                            storage.toString()
-                        )
-                    )
+                    StringFormat.tabAndFormat(storage.toString())
                 );
             // if we are marking a task as done
             } else if (inputs[0].equals("done")) {
@@ -44,11 +42,7 @@ public class Duke {
                 int ind = Integer.valueOf(result[1]) - 1;
 
                 System.out.println(
-                    StringFormat.formatString(
-                        StringFormat.tabAllNewline(
-                            storage.markDone(ind)
-                        )
-                    )
+                    StringFormat.tabAndFormat(storage.markDone(ind))
                 );
             // if we are making a task
             } else {
@@ -62,23 +56,17 @@ public class Duke {
         // if we are creating a todo task
         if (inputs[0].equals("todo")) {
             System.out.println(
-                StringFormat.formatString(
-                    StringFormat.tabAllNewline(
-                        storage.add(
-                            new Todo(inputs[1])
-                        )
-                    )
+                StringFormat.tabAndFormat(
+                    storage.add(new Todo(inputs[1]))
                 )
             );   
         // if we are creating a deadline task 
         } else if (inputs[0].equals("deadline")) {
             String[] result = inputs[1].split(" /by ");
             System.out.println(
-                StringFormat.formatString(
-                    StringFormat.tabAllNewline(
-                        storage.add(
-                            new Deadline(result[0], result[1])
-                        )
+                StringFormat.tabAndFormat(
+                    storage.add(
+                        new Deadline(result[0], result[1])
                     )
                 )
             );
@@ -86,20 +74,17 @@ public class Duke {
         } else if (inputs[0].equals("event")) {
             String[] result = inputs[1].split(" /at ");
             System.out.println(
-                StringFormat.formatString(
-                    StringFormat.tabAllNewline(
-                        storage.add(
-                            new Deadline(result[0], result[1])
-                        )
+                StringFormat.tabAndFormat(
+                    storage.add(
+                        new Event(result[0], result[1])
                     )
                 )
             );
         // if we are creating a generic task
         } else {
             System.out.println(
-                StringFormat.formatString(
-                    storage.add(new Task(input)
-                    )
+                StringFormat.tabAndFormat(
+                    storage.add(new Task(input))
                 ) 
             );
         }
