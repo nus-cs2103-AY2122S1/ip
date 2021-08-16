@@ -10,10 +10,10 @@ public class Listener {
     final Scanner sc;
     final TaskList taskList;
 
-    Pattern donePattern = Pattern.compile("done (\\d+)");
-    Pattern todoPattern = Pattern.compile("todo (.+)");
-    Pattern deadlinePattern = Pattern.compile("deadline (.+) /by (.+)");
-    Pattern eventPattern = Pattern.compile("event (.+) /at (.+)");
+    Pattern donePattern = Pattern.compile("done (\\d+)", Pattern.CASE_INSENSITIVE);
+    Pattern todoPattern = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
+    Pattern deadlinePattern = Pattern.compile("deadline (.+) /by (.+)", Pattern.CASE_INSENSITIVE);
+    Pattern eventPattern = Pattern.compile("event (.+) /at (.+)", Pattern.CASE_INSENSITIVE);
 
     public Listener(TaskList taskList) {
         sc = new Scanner(System.in);
@@ -47,18 +47,19 @@ public class Listener {
                 // Add a to-do task to list
                 System.out.println(Display.OUTPUT_DISPLAY + "Got it. I've added a To-do.");
                 taskList.add(checkTodo, TaskType.TODO);
-                System.out.println(taskList.printSize());
+                taskList.printSize();
 
             } else if (checkDeadline.matches()) {
                 // Add a deadline to list
                 System.out.println(Display.OUTPUT_DISPLAY + "Got it. I've added a Deadline.");
                 taskList.add(checkDeadline, TaskType.DEADLINE);
-                System.out.println(taskList.printSize());
+                taskList.printSize();
+
             } else if (checkEvent.matches()) {
                 // Add an event to list
                 System.out.println(Display.OUTPUT_DISPLAY + "Got it. I've added an Event. Don't miss it!");
                 taskList.add(checkEvent, TaskType.EVENT);
-                System.out.println(taskList.printSize());
+                taskList.printSize();
 
             } else {
                 System.out.println(Display.OUTPUT_DISPLAY + "Nothing happened haha bruh");

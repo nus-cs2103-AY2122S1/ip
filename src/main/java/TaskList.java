@@ -9,8 +9,11 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
-    public String printSize() {
-        return ("There are " + tasks.size() + " tasks in your list");
+    public void printSize() {
+        System.out.println(tasks.size() == 1
+                ? "There is 1 task in your list"
+                : "There are " + tasks.size() + " tasks in your list");
+
     }
 
     public void add(Matcher input, TaskType type) {
