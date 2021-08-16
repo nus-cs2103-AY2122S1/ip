@@ -6,6 +6,7 @@ public class Duke {
         duke.greet();
 
         Scanner scanner = new Scanner(System.in);
+        Task task = new Task();
         boolean breakWhile = false;
 
         while (scanner.hasNext()) {
@@ -19,7 +20,7 @@ public class Duke {
                 case "done":
                     String stringIndex = scanner.next();
                     int index = Integer.parseInt(stringIndex) - 1;
-                    Task.markDone(index);
+                    task.markDone(index);
                     System.out.println("\nDuke: Nice! I've marked this task as done:\n" + Task.retrieveTask(index));
                     break;
                 case "list":
@@ -27,8 +28,11 @@ public class Duke {
                     break;
                 default:
                     String remaining = firstWord.concat(" " + scanner.nextLine());
-                    System.out.println("\nDuke: I have added \"" + remaining + "\" into your task list.");
-                    Task.add(remaining);
+                    int lengthBefore = Task.listLength();
+                    task.add(remaining);
+                    System.out.println("\nDuke: Got it. I have added this task:\n" +
+                            Task.retrieveTask(lengthBefore) + "\nNow you have " +
+                            Task.listLength() + " tasks in the list.");
                     break;
             }
             if (breakWhile) break;

@@ -1,5 +1,5 @@
 public class Task {
-    private String description;
+    protected String description;
     private boolean isDone;
     private static Task[] tasks = new Task[100];
     private static int counter = 0;
@@ -11,7 +11,50 @@ public class Task {
         Task.counter++;
     }
 
-    private String getStatusIcon() {
+    public Task() {}
+
+    private class Todo extends Task {
+        public Todo(String description) {
+            super(description);
+        }
+
+        @Override
+        public String toString() {
+            return "[T]" + "[" + this.getStatusIcon() + "] " + this.description;
+        }
+    }
+
+    private class Deadline extends Task {
+        private String time;
+
+        public Deadline(String description, String time) {
+            super(description);
+            this.time = time;
+        }
+
+        @Override
+        public String toString() {
+            return "[D]" + "[" + this.getStatusIcon() + "] " + this.description
+                    + "(" + time.replace(" ", ": ") + ")";
+        }
+    }
+
+    private class Event extends Task {
+        private String time;
+
+        public Event(String description, String time) {
+            super(description);
+            this.time = time;
+        }
+
+        @Override
+        public String toString() {
+            return "[E]" + "[" + this.getStatusIcon() + "] " + this.description
+                    + "(" + time.replace(" ", ": ") + ")";
+        }
+    }
+
+    protected String getStatusIcon() {
         return isDone ? "X" : " ";
     }
 
@@ -19,16 +62,34 @@ public class Task {
         this.isDone = true;
     }
 
-    public static void markDone(int index) {
+    public void markDone(int index) {
         tasks[index].taskDone();
     }
 
-    public static void add(String input) {
-        new Task(input);
+    public void add(String input) {
+        String[] splitTask = input.split(" ", 2);
+
+        switch (splitTask[0]) {
+            case "todo":
+                new Todo(splitTask[1]);
+                break;
+            case "deadline":
+                String[] splitTime = splitTask[1].split("/", 2);
+                new Deadline(splitTime[0], splitTime[1]);
+                break;
+            case "event":
+                String[] splitTimeEvent = splitTask[1].split("/", 2);
+                new Event(splitTimeEvent[0], splitTimeEvent[1]);
+                break;
+        }
     }
 
     public static Task retrieveTask(int index) {
         return tasks[index];
+    }
+
+    public static int listLength() {
+        return Task.counter;
     }
 
     public static void displayList() {
@@ -42,10 +103,5 @@ public class Task {
             int index = i + 1;
             System.out.println(index + ". " + tasks[i]);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
