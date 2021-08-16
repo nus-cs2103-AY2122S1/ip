@@ -3,28 +3,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static class Task {
-        protected String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        public String getStatusIcon() {
-            return (isDone ? "[X]" : "[ ]");
-        }
-
-        public void setDone() {
-            this.isDone = true;
-        }
-
-        public String getDescription() {
-            return this.description;
-        }
-    }
-
     public static void main(String[] args) {
 
         final String INTRO = "Hello! I'm Duke\n" +
@@ -52,9 +30,12 @@ public class Duke {
                 break;
 
             } else if (command.equals("list")) {
+
+                System.out.println("Here are the tasks in your list:");
+
                 for (int i = 0; i < lst.size(); i++) {
                     Task currentTask = lst.get(i);
-                    System.out.println((i + 1) + "." + currentTask.getStatusIcon() + " " + currentTask.getDescription());
+                    System.out.println((i + 1) + "." + currentTask.getStatusAndDescription());
                 }
 
             }  else if (command.substring(0, 4).equals("done")) {
@@ -63,9 +44,30 @@ public class Duke {
 
             Task currentTask = lst.get(index);
             currentTask.setDone();
+            System.out.println(subtext + currentTask.getStatusAndDescription());
 
-            System.out.println(subtext + currentTask.getStatusIcon() + " " + currentTask.getDescription());
+            } else if (command.substring(0, 4).equals("todo")) {
 
+                ToDo toDo = new ToDo(command.substring(5));
+                lst.add(toDo);
+                System.out.format("Got it. I've added this task:\n" + toDo.getStatusAndDescription() + "\n"
+                        + "Now you have %d tasks in this list.", lst.size());
+
+            } else if (command.substring(0, 8).equals("deadline")) {
+
+                int escapeIndex = command.lastIndexOf("/");
+                Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), command.substring(escapeIndex + 4));
+                lst.add(deadline);
+                System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
+                        + "Now you have %d tasks in this list.", lst.size());
+
+            } else if (command.substring(0, 5).equals("event")) {
+
+                int escapeIndex = command.lastIndexOf("/");
+                Deadline deadline = new Deadline(command.substring(6, escapeIndex - 1), command.substring(escapeIndex + 4));
+                lst.add(deadline);
+                System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
+                        + "Now you have %d tasks in this list.", lst.size());
             } else {
                 lst.add(new Task(command));
                 System.out.println("added: " + command);
