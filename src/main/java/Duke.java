@@ -28,9 +28,11 @@ public class Duke {
 
     private static void list() {
         StringBuilder tasksBuilder = new StringBuilder();
+        tasksBuilder.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); ++i) {
             String counter = String.valueOf(i + 1);
-            tasksBuilder.append(counter).append(". ").append(tasks.get(i).toString());
+            Task currentTask = tasks.get(i);
+            tasksBuilder.append(counter).append(".[").append(currentTask.getStatusIcon()).append("] ").append(currentTask);
             if (i < tasks.size() - 1) {
                 // Append newline for all tasks before last task
                 tasksBuilder.append("\n");
@@ -39,19 +41,37 @@ public class Duke {
         printReply(tasksBuilder.toString());
     }
 
+    public static void done(int counter) {
+        if (counter <= 0 || counter > tasks.size()) {
+            printReply("Sorry, no such task found.");
+            return;
+        }
+        Task doneTask = tasks.get(counter - 1);
+        doneTask.markAsDone();
+        printReply("Nice! I've marked this task as done:\n\t[" + doneTask.getStatusIcon() + "] " + doneTask);
+    }
+
     public static void main(String[] args) {
         greet();
         String readIn;
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            readIn = scanner.nextLine();
-            if (readIn.equals(EXIT_COMMAND)) {
-                break;
-            } else if (readIn.equals(LIST_COMMAND)) {
-                list();
-            } else {
-                add(readIn);
+            try {
+                readIn = scanner.nextLine();
+                if (readIn.equals(EXIT_COMMAND)) {
+                    break;
+                } else if (readIn.equals(LIST_COMMAND)) {
+                    list();
+                } else if (readIn.startsWith("done")) {
+                    String[] splitCommand = readIn.split(" ");
+                    int counter = Integer.parseInt(splitCommand[1]);
+                    done(counter);
+                } else {
+                    add(readIn);
+                }
+            } catch (Exception e) {
+                printReply("ERROR: " + e.getMessage());
             }
         }
         printReply("Bye. Hope to see you again soon!");
