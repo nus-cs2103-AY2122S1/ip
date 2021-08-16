@@ -24,7 +24,7 @@ public abstract class Task {
     /**
      * Marks a task as completed.
      */
-    public void isFinished() {
+    public void setAsFinished() {
         this.isDone = true;
     }
 
@@ -42,6 +42,10 @@ public abstract class Task {
 
     public String getTaskName() {
         return taskName;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

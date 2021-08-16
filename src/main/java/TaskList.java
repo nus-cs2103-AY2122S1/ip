@@ -15,6 +15,8 @@ public class TaskList {
         taskList.add(task);
         System.out.println("Got it! This task has been added:");
         System.out.println("  " + task);
+        System.out.println("You currently have " + numberOfUncompletedTasks()
+                + " uncompleted tasks remaining.");
     }
 
     /**
@@ -35,8 +37,24 @@ public class TaskList {
      *              the first task in the taskList ArrayList.
      */
     public static void markTaskAsCompleted(int index) {
+        if (taskList.get(index - 1).isDone()) {
+            System.out.println("This task has already been completed.");
+            return;
+        }
         System.out.println("congratulations! This task has been completed: ");
-        taskList.get(index - 1).isFinished();
+        taskList.get(index - 1).setAsFinished();
         System.out.println("  " + taskList.get(index - 1) + "\n");
+        System.out.println("You currently have " + numberOfUncompletedTasks()
+                + " uncompleted tasks remaining.");
+    }
+
+    private static int numberOfUncompletedTasks() {
+        int i = 0;
+        for (Task task : taskList) {
+            if (!task.isDone()) {
+                i++;
+            }
+        }
+        return i;
     }
 }
