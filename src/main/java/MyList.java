@@ -28,7 +28,6 @@ public class MyList {
                 String statusIcon = t.getStatusIcon();
                 String typeIcon = t.getTypeIcon();
                 System.out.printf("%d. %s \n", i + 1, t.toString());
-                System.out.println("You now have " + listLength + " items in your list.");
             }
         }
     }
