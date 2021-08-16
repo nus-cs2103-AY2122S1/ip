@@ -3,31 +3,33 @@ import java.util.stream.Stream;
 
 public class Duke {
     private static TaskList taskList = new TaskList();
+    private static String doneCommand = "Nice! I've marked this task as done:";
 
     private static void divider() {
         String indent = "    ";
         StringBuilder builder = new StringBuilder(100);
         Stream.generate(() -> '-').limit(60).forEach(e -> builder.append(e));
-        String line = indent + '+' + builder.toString() + "+\n";
+
+        String line = String.format("%4s+%s+\n", " ", builder.toString());
         System.out.println(line);
     }
 
     private static void greet() {
-        String indent = "    ";
-        String greeting = indent + "Hello! I'm Duke\n"
-                + indent+ "What can I do for you?";
+        String intro = "Hello! I'm Duke";
+        String greeting = "What can I do for you?";
 
         divider();
-        System.out.println(greeting);
+        System.out.println(
+                String.format("%4s%s\n%4s%s", " ", intro, " ", greeting)
+        );
         divider();
     }
 
     private static void exit() {
-        String indent = "    ";
-        String exitMessage = indent + "Bye. Hope to see you again soon!";
+        String exitMessage ="Bye. Hope to see you again soon!";
 
         divider();
-        System.out.println(exitMessage);
+        System.out.println(String.format("%4s", exitMessage));
         divider();
     }
 
@@ -40,6 +42,21 @@ public class Duke {
     private static void updateTaskList(String command) {
         divider();
         Duke.taskList = taskList.add(command);
+        System.out.println(String.format("%4sadded: %s", " ", command));
+        divider();
+    }
+
+    private static void markTaskAsCompleted(int index) {
+        boolean isValid = taskList.isValidTaskIndex(index);
+        divider();
+        if (isValid) {
+            Task task = taskList.markTaskAsCompleted(index);
+            System.out.println(
+                    String.format("%4s%s\n%6s%s", " ", doneCommand, " ", task)
+            );
+        } else {
+            System.out.println(String.format("%4s%s", " ", "There is no such task."));
+        }
         divider();
     }
 
@@ -57,6 +74,15 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 Duke.returnTaskList();
+            } else if (command.startsWith("done")) {
+                try {
+                    int taskIndex = Integer.parseInt(command.substring(5)) - 1;
+                    Duke.markTaskAsCompleted(taskIndex);
+                } catch (NumberFormatException e){
+                    System.out.println(e);
+                } finally {
+
+                }
             } else {
                 // Add the task to the task list
                 Duke.updateTaskList(command);
