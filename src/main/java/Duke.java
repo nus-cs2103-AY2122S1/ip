@@ -48,8 +48,13 @@ public class Duke {
                     Events event = new Events(input.substring(6,  input.indexOf("/")), at);
                     sl.add(event);
                     linesToPrint(event.toString(), sl.size());
+                }else if(input.length()>=6 && input.substring(0, 6).equals("delete")){
+                    if(input.length()==6){
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                    int idx = Integer.parseInt(input.substring(7)) - 1;
+                    delete(idx);
                 }
-
                 else{
                     Task task = new Task(input);
                     String desc = task.getDescription();
@@ -72,6 +77,15 @@ public class Duke {
         }
 
     }
+
+    private static void delete(int idx) {
+        String desc = sl.get(idx).getDescription();
+        sl.delete(idx);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(desc);
+        System.out.println("Now you have " + sl.size() + " tasks in the list.");
+    }
+
     public static void linesToPrint(String task, int size){
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
@@ -87,7 +101,7 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     sl.get(taskNum).displayTask();
                 }else{
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("☹ OOPS!!! index out of bounds");
                 }
             }else{
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

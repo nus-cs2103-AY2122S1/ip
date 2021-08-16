@@ -25,4 +25,8 @@ public class StorageList {
         return storageList.size();
     }
 
+    public void delete(int idx){
+        storageList.remove(idx);
+    }
+
 }
