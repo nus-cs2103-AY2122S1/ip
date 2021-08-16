@@ -11,7 +11,7 @@ public class Deadline extends Task {
         String checkBox = done
                 ? "[X] "
                 : "[ ] ";
-        return "[D]" + checkBox + description + "(by: " + by + ")";
+        return "[D]" + checkBox + description + " (by: " + by + ")";
     }
 
 }

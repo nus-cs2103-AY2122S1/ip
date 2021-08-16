@@ -13,7 +13,7 @@ public class Listener {
     Pattern donePattern = Pattern.compile("done (\\d+)");
     Pattern todoPattern = Pattern.compile("todo (.+)");
     Pattern deadlinePattern = Pattern.compile("deadline (.+) /by (.+)");
-//    Pattern eventPattern = Pattern.compile("event (.+) /at (.+)");
+    Pattern eventPattern = Pattern.compile("event (.+) /at (.+)");
 
     public Listener(TaskList taskList) {
         sc = new Scanner(System.in);
@@ -30,6 +30,7 @@ public class Listener {
             Matcher checkDone = donePattern.matcher(input);
             Matcher checkTodo = todoPattern.matcher(input);
             Matcher checkDeadline = deadlinePattern.matcher(input);
+            Matcher checkEvent = eventPattern.matcher(input);
 
             if (input.equals("gubbai")) {
                 // Stop listening if "gubbai" is mentioned
@@ -53,6 +54,12 @@ public class Listener {
                 System.out.println(Display.OUTPUT_DISPLAY + "Got it. I've added a Deadline.");
                 taskList.add(checkDeadline, TaskType.DEADLINE);
                 System.out.println(taskList.printSize());
+            } else if (checkEvent.matches()) {
+                // Add an event to list
+                System.out.println(Display.OUTPUT_DISPLAY + "Got it. I've added an Event. Don't miss it!");
+                taskList.add(checkEvent, TaskType.EVENT);
+                System.out.println(taskList.printSize());
+
             } else {
                 System.out.println(Display.OUTPUT_DISPLAY + "Nothing happened haha bruh");
             }

@@ -12,7 +12,7 @@ public enum TaskType {
             case DEADLINE:
                 return new Deadline(input.group(1), input.group(2));
             case EVENT:
-//                return new Event(input.group(1), input.group(2));
+                return new Event(input.group(1), input.group(2));
             default: return null;
         }
     }
