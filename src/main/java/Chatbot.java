@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 public class Chatbot {
     private final String name;
-    private Storage storage;
+    private final TaskList taskList;
 
     Chatbot(String name) {
         this.name = name;
-        this.storage = new Storage();
+        this.taskList = new TaskList();
     }
 
     void initialize() {
@@ -16,7 +16,7 @@ public class Chatbot {
 
     void greet() {
         printDashedLine();
-        System.out.printf("Hey there! I'm %s%n", this.name);
+        System.out.printf("Hey there! I'm %s%n", name);
         System.out.println("How can I help you?");
         printDashedLine();
     }
@@ -38,16 +38,29 @@ public class Chatbot {
             System.out.println("Goodbye human. See you soon!");
             return false;
         } else if (input.equals("list")) {
-            storage.listItems();
-            printDashedLine();
+            listItems();
+            return true;
+        } else if (input.contains("done")) {
+            markAsDone(input);
             return true;
         }
 
-        this.storage = storage.add(input);
-        System.out.printf("Item succesfully added: %s%n", input);
+        taskList.add(new Task(input));
+        System.out.printf("Item successfully added: %s%n", input);
         printDashedLine();
 
         return true;
+    }
+
+    void listItems() {
+        taskList.listItems();
+        printDashedLine();
+    }
+
+    void markAsDone(String input) {
+        int index = Integer.parseInt(input.split(" ")[1]);
+        taskList.markTaskAsDone(index);
+        printDashedLine();
     }
 
     void printDashedLine() {
