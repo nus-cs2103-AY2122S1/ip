@@ -67,10 +67,12 @@ Here are the tasks in your list:
 4.[T][ ] whatever
 ____________________________________________________________
 ____________________________________________________________
-Hi I don't understand your command :(
+Noted. I've removed this task:
+  [T][ ] whatever
+Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Hi I don't understand your command :(
+Hi, 4 is not a valid index. List has currently 3 items.
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!

@@ -2,7 +2,7 @@
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 5. Handle Errors
+ * Current Progress: Level 6. Delete
  *
  * Description:
  * Extends the Task Class which where it is a task that needs
