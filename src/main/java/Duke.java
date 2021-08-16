@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /** this class implements the Duke assistant/chat-bot
@@ -6,6 +7,7 @@ import java.util.Scanner;
  */
 
 public class Duke {
+    private static ArrayList<String> tasks;
 
     /**
      * Greets the user as well as reads user's inputs with a scanner
@@ -30,7 +32,9 @@ public class Duke {
             System.out.println(currentLine);
             System.out.println(separator);
             String message = chat(currentLine);
-            System.out.println("     " + message);
+            if (!message.equals("")) {
+                System.out.println("     " + message);
+            }
             System.out.println(separator);
             if (message.equals("Bye. Hope to see you again soon!")){
                 System.exit(0);
@@ -45,12 +49,29 @@ public class Duke {
      * @param s input commands that is read by scanner in 'main'
      * @return the corresponding response message as a String
      */
-    public static String chat(String s){
+    public static String chat(String s) {
         String check = s.replaceAll(" ", "");
-        if (check.toLowerCase().equals("bye")) {
+        if (check.equalsIgnoreCase("bye")) {
             return "Bye. Hope to see you again soon!";
+        } else if (check.equalsIgnoreCase("list")) {
+            getList();
+            return "";
         } else {
-            return s;
+            return addTask(s);
+        }
+    }
+
+    public static String addTask(String s) {
+        if (tasks == null) {
+            tasks = new ArrayList<>();
+        }
+        tasks.add(s);
+        return "added: " + s;
+    }
+
+    public static void getList() {
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("     " + (i + 1) + "." + tasks.get(i));
         }
     }
 }
