@@ -7,7 +7,7 @@ public class Duke {
         try {
             result = input.substring(input.indexOf(start) + start.length() + 1);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(String.format("The field(s) of %s cannot be empty.", start));
+            throw new DukeException(String.format(Messages.EMPTY.toString(), start));
         }
         return result;
     }
@@ -17,7 +17,7 @@ public class Duke {
         try {
             result = input.substring(input.indexOf(start) + start.length() + 1, input.indexOf(end));
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException(String.format("The field(s) of %s cannot be empty.", start));
+            throw new DukeException(String.format(Messages.EMPTY.toString(), start));
         }
         return result;
     }
@@ -52,8 +52,7 @@ public class Duke {
                     for (Task task : library) {
                         output += String.format("%d.%s\n", count++, task);
                     }
-                }
-                else if (input.equals("bye")) {
+                } else if (input.equals("bye")) {
                     break;
                 } else if (input.contains("done")) {
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
@@ -61,8 +60,8 @@ public class Duke {
                     Task target = library.get(index);
                     target.setDone();
 
-                    output += "Nice! I've marked this task as done:\n";
-                    output += target + "\n";
+                    output += "Nice! I've marked this task as done:\n"
+                            + target + "\n";
                 } else if (input.contains("todo")) {
                     String name = cut(input, "todo");
 
@@ -92,13 +91,21 @@ public class Duke {
                     output += "Got it. I've added this task:\n"
                             + newEvent + "\n"
                             + String.format("Now you have %d tasks in the list.\n", library.size());
+                } else if (input.contains("delete")) {
+                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
+
+                    Task target = library.remove(index);
+
+                    output += "Noted. I've removed this task:\n"
+                            + target + "\n"
+                            + String.format("Now you have %d tasks in the list.\n", library.size());
                 } else {
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException(Messages.KNOWN.toString());
                 }
             } catch (DukeException e) {
                 output += "☹ OOPS!!! " + e.getMessage() + "\n";
             } catch (IndexOutOfBoundsException e) {
-                output += "☹ OOPS!!! The task selected does not exist.\n";
+                output += "☹ OOPS!!! "+ Messages.EXIST.toString() +"\n";
             }
             System.out.println(output);
         }
