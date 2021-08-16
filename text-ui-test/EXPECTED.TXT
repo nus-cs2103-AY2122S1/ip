@@ -1,13 +1,13 @@
 Hello, I am Duke. What can I do for you?
-Got it. I've added this task:
-	 [T][ ] borrow The Fault in my Stars
+Got it. I've added this task: 
+	 [T][ ] borrow The Fault in my Stars 
 Now you have 1 task in the list.
 Here are the tasks in your list:
 1. [T][ ] borrow The Fault in my Stars
 Nice! I've marked this task as done:
 [T][X] borrow The Fault in my Stars
-Got it. I've added this task:
-  [D][ ] return The Fault in my Stars (by: 20 Aug 2021)
+Got it. I've added this task: 
+  [D][ ] return The Fault in my Stars (by: 20 Aug 2021) 
 Now you have 2 task in the list.
 Got it. I've added this task:
 	 [E][ ] John's Birthday Party  (at:  Next Sunday)
