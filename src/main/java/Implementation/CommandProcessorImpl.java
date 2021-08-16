@@ -43,9 +43,6 @@ public class CommandProcessorImpl implements CommandProcessor {
 				// convert 1-indexing to 0-indexing
 				processDone(Integer.parseInt(arguments.getOrDefault("index", "-1")) - 1);
 				break;
-			case INVALID:
-				processInvalid("invalid command: " + arguments.getOrDefault("message", "default message"));
-				break;
 			default:
 				printSentence("command not recognized by processor");
 		}
@@ -94,9 +91,5 @@ public class CommandProcessorImpl implements CommandProcessor {
 		if (this.taskList.size() > 0) stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 		
 		printSentence(stringBuilder.toString());
-	}
-	
-	public void processInvalid(String sentence) {
-		printSentence(" " + sentence);
 	}
 }

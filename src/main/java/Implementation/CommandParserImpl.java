@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static Util.Display.printSentence;
+
 /**
  * An entity that takes in the input from the console and parse it to valid command or throw exception
  * if the command is invalid
@@ -26,56 +28,81 @@ public class CommandParserImpl implements CommandParser {
 		processInputHelper(parsedCommands);
 	}
 	
-	public void processInputHelper(List<String> parsedCommands) {
+	private void processInputHelper(List<String> parsedCommands) {
 		switch (parsedCommands.get(0)) {
 			case "bye":
-				try {
-					commandProcessor.processCommand(Command.BYE, Map.of());
-				} catch(Exception e) {
-				
-				}
+				commandProcessor.processCommand(Command.BYE, Map.of());
 				break;
 			case "list":
 				commandProcessor.processCommand(Command.LIST, Map.of());
 				break;
 			case "done":
-				commandProcessor.processCommand(Command.DONE, Map.of(
-						"index", parsedCommands.get(1)
-				));
+				try {
+					commandProcessor.processCommand(Command.DONE, Map.of(
+							"index", parsedCommands.get(1)
+					));
+				} catch (Exception e) {
+					processException(new IllegalArgumentException("done requires a valid index"));
+				}
+				
 				break;
 			case "deadline": {
-				int byIndex = parsedCommands.indexOf("/by");
-				String desc = String.join(" ", parsedCommands.subList(1, byIndex));
-				String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
+				try {
+					int byIndex = parsedCommands.indexOf("/by");
+					
+					String desc = String.join(" ", parsedCommands.subList(1, byIndex));
+					if (desc.isBlank()) throw new IllegalArgumentException("deadline desc cannot be empty");
+					
+					String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
+					if (timing.isBlank()) throw new IllegalArgumentException("deadline timing cannot be empty");
+					
+					commandProcessor.processCommand(Command.DEADLINE, Map.of(
+							"description", desc,
+							"timing", timing
+					));
+				} catch (Exception e) {
+					processException(e);
+				}
 				
-				commandProcessor.processCommand(Command.DEADLINE, Map.of(
-						"description", desc,
-						"timing", timing
-				));
 				break;
 			}
 			case "todo": {
-				String desc = String.join(" ", parsedCommands.subList(1, parsedCommands.size()));
-				commandProcessor.processCommand(Command.TODOS, Map.of(
-						"description", desc
-				));
+				try {
+					String desc = String.join(" ", parsedCommands.subList(1, parsedCommands.size()));
+					
+					if (desc.isBlank()) throw new IllegalArgumentException("todo desc cannot be empty");
+					
+					commandProcessor.processCommand(Command.TODOS, Map.of(
+							"description", desc
+					));
+				} catch (Exception e) {
+					processException(e);
+				}
 				break;
 			}
 			case "event": {
-				int byIndex = parsedCommands.indexOf("/at");
-				String desc = String.join(" ", parsedCommands.subList(1, byIndex));
-				String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
+				try {
+					int byIndex = parsedCommands.indexOf("/at");
+					String desc = String.join(" ", parsedCommands.subList(1, byIndex));
+					String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
+					
+					commandProcessor.processCommand(Command.EVENT, Map.of(
+							"description", desc,
+							"timing", timing
+					));
+				} catch (Exception e) {
+					processException(new IllegalArgumentException("event requires a valid description and timing"));
+				}
 				
-				commandProcessor.processCommand(Command.EVENT, Map.of(
-						"description", desc,
-						"timing", timing
-				));
 				break;
 			}
 			default:
-				// add
-				commandProcessor.processCommand(Command.INVALID, Map.of("message", "☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+				processException(new IllegalCallerException("I'm sorry, but I don't know what that means :-("));
 				break;
 		}
+	}
+	
+	private void processException(Exception e) {
+		printSentence("☹ OOPS!!! " + e.getMessage());
 	}
 }

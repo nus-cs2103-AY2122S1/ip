@@ -39,5 +39,4 @@ public enum Command {
 	EVENT,
 	TODOS,
 	DONE,
-	INVALID // special command for invalid input
 }
