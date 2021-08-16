@@ -2,6 +2,8 @@ import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
+        List<String> taskList = new ArrayList<>();
+
         String logo = "\t ____        _        \n"
                 + "\t|  _ \\ _   _| | _____ \n"
                 + "\t| | | | | | | |/ / _ \\\n"
@@ -16,9 +18,21 @@ public class Duke {
         String command = sc.nextLine();
 
         while (!command.equals("bye")) {
-            System.out.println("\t____________________________________________________________");
-            System.out.println("\t" + command);
-            System.out.println("\t____________________________________________________________");
+            switch (command) {
+                case "list":
+                    System.out.println("\t____________________________________________________________");
+                    for (int i = 0; i < taskList.size(); i++) {
+                        System.out.println("\t" + (i + 1) + ". " + taskList.get(i));
+                    }
+                    System.out.println("\t____________________________________________________________");
+                    break;
+                default:
+                    taskList.add(command);
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("\t added: " + command);
+                    System.out.println("\t____________________________________________________________");
+                    break;
+            }
             command = sc.nextLine();
         }
 
