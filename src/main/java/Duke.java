@@ -105,6 +105,19 @@ public class Duke {
                     } catch (Exception e) {
                         throw new DukeEventException();
                     }
+                } else if (str.startsWith("delete")) {
+                    try {
+                        int deleteTaskIndex = Integer.parseInt(str.substring(7)) - 1;
+                        Task deleteTask = strList.get(deleteTaskIndex);
+                        strList.remove(deleteTaskIndex);
+                        int numOfTasks = strList.size();
+                        System.out.println("Noted. I've removed this task:\n"
+                                + deleteTask.toString() + "\n"
+                                + "Now you have " + numOfTasks
+                                + " tasks in the list.") ;
+                    } catch (Exception e) {
+                        throw new DukeDeleteException();
+                    }
                 } else {
 //                    strList.add(new Task(str));
 //                    System.out.println("added: " + str);
@@ -124,6 +137,9 @@ public class Duke {
                 continue;
             } catch (DukeEventException e) {
                 System.out.println("OOPS!!! The description of a event cannot be empty.");
+                continue;
+            } catch (DukeDeleteException e) {
+                System.out.println("OOPS!!! The index of a DELETE command cannot be empty.");
                 continue;
             }
         }
