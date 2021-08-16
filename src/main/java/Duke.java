@@ -6,7 +6,7 @@ public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String ENDING_COMMAND = "bye";
 
-    private static List<Task> taskList = new ArrayList<>();
+    private static final List<Task> taskList = new ArrayList<>();
 
     private static void say(String message) {
         System.out.printf("Iris: %s%n", message);
@@ -15,6 +15,10 @@ public class Duke {
     private static void say(String message, boolean isFirst) {
         String name = isFirst ? "Iris:": "     ";
         System.out.printf("%s %s%n", name, message);
+    }
+
+    private static void sayError(IrisException exception) {
+        say(exception.getMessage());
     }
 
     private static String prompt() {
@@ -58,29 +62,39 @@ public class Duke {
         }
     }
 
+    private static void handleCommand(String command) throws IrisException {
+        if (command.equals("list")) {
+            listTasks();
+        } else if (command.startsWith("done")) {
+            String doneMetadata = command.split(" ")[1];
+            done(Integer.parseInt(doneMetadata));
+        } else if (command.startsWith("todo")) {
+            String todoMetadata = command.split(" ", 2)[1];
+            addTodo(todoMetadata);
+            sayTaskAdded();
+        } else if (command.startsWith("deadline")) {
+            String deadlineMetadata = command.split(" ", 2)[1];
+            String[] splitted = deadlineMetadata.split(" /by ", 2);
+            addDeadline(splitted[0], splitted[1]);
+            sayTaskAdded();
+        } else if (command.startsWith("event")) {
+            String eventMetadata = command.split(" ", 2)[1];
+            String[] splitted = eventMetadata.split(" /at ", 2);
+            addEvent(splitted[0], splitted[1]);
+            sayTaskAdded();
+        } else {
+            throw new IrisException("I'm sorry, but I don't know what that means.");
+        }
+    }
+
     public static void main(String[] args) {
         say("Hello! I'm Iris. What can I do for you?");
         String command = prompt();
         while (!command.equals(ENDING_COMMAND)) {
-            if (command.equals("list")) {
-                listTasks();
-            } else if (command.startsWith("done")) {
-                String doneMetadata = command.split(" ")[1];
-                done(Integer.parseInt(doneMetadata));
-            } else if (command.startsWith("todo")) {
-                String todoMetadata = command.split(" ", 2)[1];
-                addTodo(todoMetadata);
-                sayTaskAdded();
-            } else if (command.startsWith("deadline")) {
-                String deadlineMetadata = command.split(" ", 2)[1];
-                String[] splitted = deadlineMetadata.split(" /by ", 2);
-                addDeadline(splitted[0], splitted[1]);
-                sayTaskAdded();
-            } else if (command.startsWith("event")) {
-                String eventMetadata = command.split(" ", 2)[1];
-                String[] splitted = eventMetadata.split(" /at ", 2);
-                addEvent(splitted[0], splitted[1]);
-                sayTaskAdded();
+            try {
+                handleCommand(command);
+            } catch (IrisException exception) {
+                sayError(exception);
             }
             command = prompt();
         }
