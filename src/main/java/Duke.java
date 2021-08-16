@@ -5,6 +5,10 @@ import java.util.Scanner;
  * in inputs.
  */
 public class Duke {
+    /**
+     * Main method for the Duke class.
+     * @params the inputs from the user.
+     */
     public static void main(String[] args) {
         Response response = new Response();
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");

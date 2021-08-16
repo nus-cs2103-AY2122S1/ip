@@ -9,31 +9,29 @@ public class Response {
     private int itemCount = 0;
 
     /**
-     * Simple function that handles the bye command
+     * Simple function that handles the bye command.
      * @return A string to bids farewell to the user
      */
     String bye() {
-            return "Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Simple function that handles the list command
+     * Simple function that handles the list command.
      * @return A numbered list with the items that were added
      */
     String list() {
         String res = "";
         for (int i = 0; i < itemCount; i++) {
-            res += (i+1) + ". " + lst[i] + "\n";
+            res += (i + 1) + ". " + lst[i] + "\n";
         }
         return res;
     }
 
     /**
-     * Handles the input commands from Duke
+     * Handles the input commands from Duke.
      * @param string the command input from Duke
-     * @return depending on the output, it will either be a numbered list
-     * of items currently in the list or bid the user farewell or
-     * inform the user that an item has been added to the list
+     * @return a numbered list, a farewell, or an added message 
      */
     String output(String string) {
         if (string.equals("list")) {
