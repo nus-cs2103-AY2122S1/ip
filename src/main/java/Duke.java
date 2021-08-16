@@ -18,10 +18,10 @@ public class Duke {
     public void run() {
         System.out.println("Hello from\n" + LOGO);
         Scanner sc = new Scanner(System.in);
-        String currLine;
+        String[] currLine;
         scanner: while (true) {
-            currLine = sc.nextLine();
-            switch (currLine) {
+            currLine = sc.nextLine().split(" ");
+            switch (currLine[0]) {
                 case "bye":
                     System.out.println(styleResponse(GOODBYE));
                     break scanner;
@@ -29,7 +29,7 @@ public class Duke {
                     System.out.println(this.list());
                     break;
                 default:
-                    System.out.println(this.add(currLine));
+                    System.out.println(this.add(currLine[0]));
             }
         }
         sc.close();
