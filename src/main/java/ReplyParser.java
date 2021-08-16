@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class ReplyParser {
     private static final Set<String> taskCreation = Set.of("todo", "event", "deadline");
-    private static final Set<String> taskMarking = Set.of("done");
+    private static final Set<String> taskMarking = Set.of("done", "delete");
     private static final Set<String> basicCommand = Set.of("list", "bye"); //basicCommands don't need argument
 
     public static String[] parse(String query) {

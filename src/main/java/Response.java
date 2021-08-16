@@ -53,10 +53,15 @@ public class Response {
                 display("Bye! Hope to see you again soon!");
                 break;
             case "done":
-                int idx = Integer.parseInt(queryArr[1]);
-                Task markedTask = storage.markDone(idx);
+                Task markedTask = storage.markDone(Integer.parseInt(queryArr[1]));
                 display("Nice! I've marked this task as done:");
                 display(markedTask);
+                break;
+            case "delete":
+                Task deletedTask = storage.deleteTaskByIdx(Integer.parseInt(queryArr[1]));
+                display("Noted. I've removed this task:");
+                display(deletedTask);
+                display("\t" + "Now you have " + storage.numTasks() + " tasks in the list");
                 break;
             default:
                 Task addedTask = storage.push(queryArr);

@@ -1,50 +1,56 @@
 package memory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Storage {
-    private final Task[] storage;
+    private final ArrayList<Task> storage;
     private int index;
 
     public Storage() {
-        storage = new Task[100];
+        storage = new ArrayList<>();
         index = 0;
     }
 
     public Task push(String value) {
-        storage[index] = new Task(value);
+        storage.add(new Task(value));
         index += 1;
-        return storage[index - 1];
+        return storage.get(index - 1);
     }
 
     public Task push(String[] args) {
         String command = args[0];
         switch (command) {
             case "todo":
-                storage[index] = new ToDo(args[1]);
+                storage.add(new ToDo(args[1]));
                 break;
             case "deadline":
-                storage[index] = new Deadline(args[1], args[2]);
+                storage.add(new Deadline(args[1], args[2]));
                 break;
             case "event":
-                storage[index] = new Event(args[1], args[2]);
+                storage.add(new Event(args[1], args[2]));
                 break;
         }
         index += 1;
-        return storage[index - 1];
+        return storage.get(index - 1);
     }
 
     public Task markDone(int i) {
-        storage[i].markDone();
-        return storage[i];
+        storage.get(i).markDone();
+        return storage.get(i);
     }
 
     public Task[] getStorage() {
-        return Arrays.copyOfRange(storage, 0, index);
+        return storage.toArray(new Task[0]);
     }
 
     public Task getTaskByIdx(int id) {
-        return storage[id];
+        return storage.get(id);
+    }
+
+    public Task deleteTaskByIdx(int id) {
+        index -= 1;
+        return storage.remove(id);
     }
 
     public int numTasks() {
