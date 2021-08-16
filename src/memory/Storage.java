@@ -44,7 +44,19 @@ public class Storage {
         return true;
     }
 
+    public boolean markDone(int i) {
+        if (i >= index || i < 0) {
+            return false;
+        }
+        storage[i].markDone();
+        return true;
+    }
+
     public Task[] getStorage() {
         return Arrays.copyOfRange(storage, 0, index);
+    }
+
+    public Task getTaskByIdx(int id) {
+        return storage[id];
     }
 }
