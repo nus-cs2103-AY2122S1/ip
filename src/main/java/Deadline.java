@@ -1,5 +1,10 @@
+/**
+ * Deadline class, subclass of Task
+ * Encapsulates Task with end time
+ */
 public class Deadline extends Task {
 
+    //String representing the deadline
     protected String endDate;
 
     /**

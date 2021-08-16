@@ -1,3 +1,7 @@
+/**
+ * Event class, subclass of Task.
+ * Encapsulates a Task with a start/end time
+ */
 public class Event extends Task {
 
     //The start time of the Event

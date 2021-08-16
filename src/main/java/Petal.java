@@ -38,7 +38,7 @@ public class Petal {
 
     /**
      * Method that formats the message to be displayed
-     * @param message Message initially written by user
+     * @param message User input
      */
     public void formatMessage(String message) {
         //Allows user to type in upper case and removes leading/trailing whitespaces
@@ -56,9 +56,7 @@ public class Petal {
                     markTaskAsDone(message);
                     break;
                 case "delete":
-                    if (msg.length < 2) //No index was given by the user
-                        throw new InvalidInputException("Invalid task number given! Please enter another value!\n");
-                    deleteTask(msg[1]);
+                    deleteTask(message);
                     break;
                 default: //tasks end up here, as well as unintelligible messages
                     handleRemaining(message);
@@ -67,8 +65,6 @@ public class Petal {
         } catch (EmptyDescException | InvalidInputException | IndexOutOfBoundsException | NumberFormatException e1)  {
             System.out.println(indentation + "\n" + e1.getMessage());
             requiredFormat();
-        } catch (PetalException e) {
-            e.printStackTrace();
         }
     }
 
@@ -87,11 +83,13 @@ public class Petal {
     }
 
     /**
-     * Method which handles the remaining messages (assumed to be tasks)
-     * @param message The messaged to be handled
-     * @throws PetalException Thrown if input is incorrect
+     * Method to handle the last case of user input
+     * @param message User input
+     * @throws EmptyDescException Thrown if user enters a command without a description
+     * @throws InvalidInputException Thrown if the input does not match the required format
+     *                               or if the message is unintelligible
      */
-    public void handleRemaining(String message) throws PetalException {
+    public void handleRemaining(String message) throws InvalidInputException, EmptyDescException {
         Task task;
         String[] typeOfTask = message.split(" ");
         String desc = message.substring(message.indexOf(" ") + 1);
@@ -142,21 +140,26 @@ public class Petal {
     }
 
     /**
-     * Method to delete a task
-     * @param index The index of the task to be deleted
+     * Method to delete a task from the list
+     * @param message The message given by the user input
+     * @throws InvalidInputException Thrown if no index inputted by the user or
+     *                               when index is out-of-bounds/not valid int or when
+     *                               desc is empty
      */
-    public void deleteTask(String index) {
-        int indexOfTask;
+    public void deleteTask(String message) throws InvalidInputException, EmptyDescException {
         try {
-            indexOfTask = Integer.parseInt(index) - 1;
+            String index = message.split("delete")[0].trim();
+            int indexOfTask = Integer.parseInt(index) - 1;
             Task toBeDeleted = tasks.get(indexOfTask);
             tasks.remove(indexOfTask);
-            System.out.println(indentation +"\nOkay. I've deleted this task:\n"
+            System.out.println(indentation + "\nOkay. I've deleted this task:\n"
                     + toBeDeleted
                     + "\nYou now have " + tasks.size() + " task(s)!\n"
                     + indentation);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new EmptyDescException("No task number given! Please enter a valid index!\n");
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new NumberFormatException("Invalid task number given! Please enter another value!");
+            throw new InvalidInputException("Invalid task number given! Please enter another value!\n");
         }
     }
 
@@ -170,7 +173,8 @@ public class Petal {
     }
 
     /**
-     * Method that prints list
+     * Method to print the list
+     * @throws InvalidInputException Thrown when the list is empty
      */
     public void printList() throws InvalidInputException {
         //If the list is empty
@@ -185,8 +189,10 @@ public class Petal {
     }
 
     /**
-     * Method to mark the task as done
-     * @param message The -ith task to be marked as done
+     * Method to mark a particular task as done
+     * @param message Message that represents the user input
+     * @throws IndexOutOfBoundsException Thrown if string is not within size of list
+     * @throws NumberFormatException Thrown if string cannot be converted into valid int
      */
     public void markTaskAsDone(String message) throws IndexOutOfBoundsException,
             NumberFormatException {

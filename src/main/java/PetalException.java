@@ -1,4 +1,11 @@
+/**
+ * The parent PetalException. It represents all possible
+ * exceptions in relation to the Petal bot.
+ */
 public class PetalException extends Exception {
+
+    //Exception message
+    private String message;
 
     /**
      * Constructor for the PetalException class
@@ -6,6 +13,7 @@ public class PetalException extends Exception {
      */
     public PetalException(String message) {
         super(message);
+        this.message = message;
     }
 
 }
