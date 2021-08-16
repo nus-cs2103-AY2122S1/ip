@@ -55,7 +55,7 @@ public class Duke {
                         if (words.length < 2) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
-                        addTodo(words[1]);
+                        addTask(words[1], "", TaskType.TODO);
                         break;
                     case "deadline":
                         if (words.length < 2) {
@@ -67,7 +67,7 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! Please ensure that the '/by' keyword is used and "
                                                   + "that a description and due date is given.");
                         }
-                        addDeadline(separatedDeadline[0], separatedDeadline[1]);
+                        addTask(separatedDeadline[0], separatedDeadline[1], TaskType.DEADLINE);
                         break;
                     case "event":
                         if (words.length < 2) {
@@ -79,7 +79,7 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! Please ensure that the '/at' keyword is used and "
                                     + "that a description and a timing is given.");
                         }
-                        addEvent(separatedEvent[0], separatedEvent[1]);
+                        addTask(separatedEvent[0], separatedEvent[1], TaskType.EVENT);
                         break;
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -118,22 +118,25 @@ public class Duke {
         lineSeparator();
     }
 
-    private static void addTodo(String description) {
-        Task task = new Todo(description);
-        tasks.add(task);
-        printAddedMessage(task);
-    }
-
-    private static void addDeadline(String description, String by) {
-        Task task = new Deadline(description, by);
-        tasks.add(task);
-        printAddedMessage(task);
-    }
-
-    private static void addEvent(String description, String timing) {
-        Task task = new Event(description, timing);
-        tasks.add(task);
-        printAddedMessage(task);
+    private static void addTask(String description, String timing, TaskType taskType) {
+        Task task;
+        switch (taskType) {
+            case TODO:
+                task = new Todo(description);
+                tasks.add(task);
+                printAddedMessage(task);
+                break;
+            case DEADLINE:
+                task = new Deadline(description, timing);
+                tasks.add(task);
+                printAddedMessage(task);
+                break;
+            case EVENT:
+                task = new Event(description, timing);
+                tasks.add(task);
+                printAddedMessage(task);
+                break;
+        }
     }
 
     private static void printList() {
