@@ -25,13 +25,13 @@ public class Deadline extends Task {
               this.description += next;
             }
         }
-        if (this.deadline == null) {
-            throw new WrongCommandFormatException(
-                    "No deadline specified. Please specify a deadline after `/by`"
-            );
-        } else if (this.description.equals(" ")) {
+         if (this.description.equals(" ")) {
             throw new WrongCommandFormatException(
                     "No task specified. Please specify a task before `/by`"
+            );
+        } else if (this.deadline == null) {
+            throw new WrongCommandFormatException(
+                    "No deadline specified. Please specify a deadline after `/by`"
             );
         }
         this.isDone = isDone;

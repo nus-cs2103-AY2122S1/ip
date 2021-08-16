@@ -25,13 +25,13 @@ public class Event extends Task {
                 this.description += next;
             }
         }
-        if (this.timeframe == null) {
-            throw new WrongCommandFormatException(
-                    "No timeframe specified. Please specify a timeframe after `/at`"
-            );
-        } else if (this.description.equals(" ")) {
+        if (this.description.equals(" ")) {
             throw new WrongCommandFormatException(
                     "No task specified. Please specify a task before `/at`"
+            );
+        } else if (this.timeframe == null) {
+            throw new WrongCommandFormatException(
+                    "No timeframe specified. Please specify a timeframe after `/at`"
             );
         }
         this.isDone = isDone;
