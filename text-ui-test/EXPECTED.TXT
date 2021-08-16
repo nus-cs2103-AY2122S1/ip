@@ -11,58 +11,64 @@ Hello from
 -----------------------------------------
 
     -----------------------------------------
-     added: [ ] read book
+     Got it. I have added this task:
+       [T][ ] read book
+     Now you have 1 tasks in the list
     -----------------------------------------
 
     -----------------------------------------
-     added: [ ] return book
+     Got it. I have added this task:
+       [D][ ] return book (by: Tuesday 17th August)
+     Now you have 2 tasks in the list
     -----------------------------------------
 
     -----------------------------------------
-     added: [ ] borrow book again
+     Got it. I have added this task:
+       [E][ ] borrow book again (at: Monday 23rd August)
+     Now you have 3 tasks in the list
     -----------------------------------------
 
     -----------------------------------------
     Here are the tasks in your list:
-     1. [ ] read book
-     2. [ ] return book
-     3. [ ] borrow book again
+     1. [T][ ] read book
+     2. [D][ ] return book (by: Tuesday 17th August)
+     3. [E][ ] borrow book again (at: Monday 23rd August)
     -----------------------------------------
 
     -----------------------------------------
      Nice! I've marked this task as done:
-       [X] read book
+       [T][X] read book
     -----------------------------------------
 
     -----------------------------------------
     Here are the tasks in your list:
-     1. [X] read book
-     2. [ ] return book
-     3. [ ] borrow book again
+     1. [T][X] read book
+     2. [D][ ] return book (by: Tuesday 17th August)
+     3. [E][ ] borrow book again (at: Monday 23rd August)
     -----------------------------------------
 
     -----------------------------------------
      Nice! I've marked this task as done:
-       [X] return book
+       [D][X] return book (by: Tuesday 17th August)
     -----------------------------------------
 
     -----------------------------------------
     Here are the tasks in your list:
-     1. [X] read book
-     2. [X] return book
-     3. [ ] borrow book again
+     1. [T][X] read book
+     2. [D][X] return book (by: Tuesday 17th August)
+     3. [E][ ] borrow book again (at: Monday 23rd August)
     -----------------------------------------
 
     -----------------------------------------
      Nice! I've marked this task as done:
-       [X] borrow book again
+       [E][X] borrow book again (at: Monday 23rd August)
     -----------------------------------------
 
     -----------------------------------------
     Here are the tasks in your list:
-     1. [X] read book
-     2. [X] return book
-     3. [X] borrow book again
+     1. [T][X] read book
+     2. [D][X] return book (by: Tuesday 17th August)
+     3. [E][X] borrow book again (at: Monday 23rd August)
     -----------------------------------------
 
     -----------------------------------------

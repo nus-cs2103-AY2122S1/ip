@@ -1,6 +1,6 @@
-read book
-return book
-borrow book again
+todo read book
+deadline return book /by Tuesday 17th August
+event borrow book again /at Monday 23rd August
 list
 done 1
 list
