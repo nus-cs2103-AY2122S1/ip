@@ -26,11 +26,8 @@ public class DukeTask {
      * @throws InvalidTaskTimeFormatException when a task does not have valid time inputs
      */
     public static DukeTask createTask(String description, DukeActionTypeEnum actionType)
-            throws InvalidTaskTypeException, InvalidTaskTimeFormatException, MissingTaskDescriptionException {
+            throws InvalidTaskTypeException, InvalidTaskTimeFormatException {
         // A valid task is either a to-do, deadline or event
-
-        // Validate that the task description is not empty
-        validateDescriptionNotEmpty(actionType.toString(), description);
 
         if (actionType.equals(DukeActionTypeEnum.TODO)) {
             return DukeTodoTask.createTask(description);
@@ -63,12 +60,6 @@ public class DukeTask {
         }
 
         return splitParts;
-    }
-
-    public static void validateDescriptionNotEmpty(String taskType, String description) throws MissingTaskDescriptionException {
-        if (description.isEmpty()) {
-            throw new MissingTaskDescriptionException(taskType);
-        }
     }
 
     /**

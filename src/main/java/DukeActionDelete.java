@@ -7,8 +7,11 @@ public class DukeActionDelete extends DukeAction {
         this.taskNumber = taskNumber;
     }
 
-    public static DukeActionDelete createAction(String message) throws InvalidTaskNumberException {
-        return new DukeActionDelete(DukeAction.getTaskNumberFromMessage(message));
+    public static DukeActionDelete createAction(String description) throws InvalidTaskNumberException, MissingActionDescriptionException {
+        // Validate before creating the action
+        DukeAction.validateDescriptionNotEmpty(DukeActionTypeEnum.DELETE, description);
+
+        return new DukeActionDelete(DukeAction.getTaskNumberFromMessage(description));
     }
 
     public void executeAction(DukeTaskList list) throws NonExistentTaskNumberException {

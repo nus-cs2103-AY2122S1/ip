@@ -6,8 +6,12 @@ public class DukeActionDone extends DukeAction {
         this.taskNumber = taskNumber;
     }
 
-    public static DukeActionDone createAction(String message) throws InvalidTaskNumberException {
-        return new DukeActionDone(DukeAction.getTaskNumberFromMessage(message));
+    public static DukeActionDone createAction(String description)
+            throws InvalidTaskNumberException, MissingActionDescriptionException {
+        // Validate before creating the action
+        DukeAction.validateDescriptionNotEmpty(DukeActionTypeEnum.DONE, description);
+
+        return new DukeActionDone(DukeAction.getTaskNumberFromMessage(description));
     }
 
     public void executeAction(DukeTaskList list) throws NonExistentTaskNumberException {

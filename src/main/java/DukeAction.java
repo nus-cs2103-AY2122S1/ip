@@ -29,8 +29,15 @@ public abstract class DukeAction {
         }
     }
 
+    public static void validateDescriptionNotEmpty(DukeActionTypeEnum actionType, String description)
+            throws MissingActionDescriptionException {
+        if (description.isEmpty()) {
+            throw new MissingActionDescriptionException(actionType.toString());
+        }
+    }
+
     public static DukeAction makeAction(String inputMessage)
-            throws InvalidTaskNumberException, NonExistentActionTypeException {
+            throws InvalidTaskNumberException, NonExistentActionTypeException, MissingActionDescriptionException {
         DukeActionTypeEnum actionType = getActionType(inputMessage);
         String messageWithoutCommand = removeCommandPrefix(inputMessage, actionType.toString());
         String trimmedMessage = messageWithoutCommand.trim();
