@@ -2,12 +2,19 @@ import java.util.Scanner;
 
 public class Duke {
 
+    private static final Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         greet();
+        echo();
+
+        // close scanner
+        scanner.close();
     }
 
     /**
      * Print a message that is enclosed by 2 horizontal lines.
+     *
      * @param message The message to be printed between 2 horizontal lines.
      */
     private static void printMessage(String message) {
@@ -24,6 +31,18 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        printMessage(logo + "\nHello! I'm Duke\nWhat can I do for you?");
+        printMessage(logo + "\nWelcome! I'm Duke\nWhat can I do for you?");
+    }
+
+    /**
+     * Echos commands entered by the user, and exits when the user types bye.
+     */
+    static void echo() {
+        String command = scanner.nextLine();
+        while (!command.equals("bye")) {
+            printMessage(command);
+            command = scanner.nextLine();
+        }
+        printMessage("Bye. See you next time!");
     }
 }
