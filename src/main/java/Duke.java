@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static ArrayList<String> list = new ArrayList<>();
+    private static ArrayList<Task> list = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -26,6 +26,14 @@ public class Duke {
                     run = false;
                 } else if (input.equals("list")) {
                     listItems();
+                } else if (input.contains("done ")) {
+                    if (input.length() < 6) {
+                        throw new Exception("Done command not followed with a number");
+                    }
+                    int number = Integer.parseInt(input.substring(5));
+                    System.out.println("    Nice! I've marked this task as done: ");
+                    list.get(number-1).markedAsDone();
+                    System.out.println("      [X] "+list.get(number-1).getDescription());
                 } else {
                     addItem(input);
                 }
@@ -41,12 +49,13 @@ public class Duke {
     public static void listItems() {
         for (int i = 0; i < list.size(); i++) {
             int num = i + 1;
-            System.out.println("    " + num + ". " + list.get(i));
+            System.out.println("    " + num + ".[" + list.get(i).getStatusIcon()+ "] "+list.get(i).getDescription());
         }
     }
 
     public static void addItem(String s) {
-        list.add(s);
+        Task t = new Task(s);
+        list.add(t);
         System.out.println("    added: " + s);
     }
 
