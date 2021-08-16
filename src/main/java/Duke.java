@@ -86,10 +86,16 @@ public class Duke {
      */
     private static void listOutTDL() {
         String printThis = "";
+        String nextLine = "\n";
 
         int serialNo = 1;
         for (String ele : toDoList) {
-            String currLine = serialNo + ". " + ele + "\n";
+            String endOfCurrLine = nextLine;
+            if (serialNo == toDoList.size()) {
+                endOfCurrLine = "";
+            }
+
+            String currLine = serialNo + ". " + ele + endOfCurrLine;
             printThis = printThis + currLine;
 
             serialNo++;
