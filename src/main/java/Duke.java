@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Duke {
     static String SEPARATOR = "____________________________________________________________";
@@ -22,12 +24,20 @@ public class Duke {
             var command = sc.nextLine();
             boolean isEnd = false;
             switch (command) {
+                case "list":
+                    printBanner(
+                        IntStream.range(0, messages.size())
+                            .mapToObj(i -> String.format("%d. %s", i + 1, messages.get(i)))
+                            .toArray(String[]::new)
+                    );
+                    break;
                 case "bye":
                     printBanner(BYE_MSG.split("\n"));
                     isEnd = true;
                     break;
                 default:
-                    printBanner(new String[] {command});
+                    messages.add(command);
+                    printBanner(new String[] {"added: " + command});
                     break;
             }
 
