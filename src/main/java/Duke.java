@@ -29,6 +29,7 @@ public class Duke {
     public static void main(String[] args) {
         reply(INTRO);
         Scanner sc = new Scanner(System.in);
+        TaskList tl = new TaskList();
         boolean on = true;
         while (on) {
             String input = sc.nextLine();
@@ -40,21 +41,21 @@ public class Duke {
                     sc.close();
                     break;
                 case "list":
-                    Task.printList();
+                    tl.printList();
                     break;
                 case "done":
-                    Task.setDone(Integer.valueOf(commandPair[1]) - 1);
+                    tl.setDone(Integer.valueOf(commandPair[1]) - 1);
                     break;
                 case "todo":
-                    new ToDo(commandPair[1]);
+                    tl.addTask(new ToDo(commandPair[1]));
                     break;
                 case "deadline":
                     String[] deadlinePair = commandPair[1].split("/by", 2);
-                    new Deadline(deadlinePair[0], deadlinePair[1]);
+                    tl.addTask(new Deadline(deadlinePair[0], deadlinePair[1]));
                     break;
                 case "event":
                     String[] eventPair = commandPair[1].split("/at", 2);
-                    new Event(eventPair[0], eventPair[1]);
+                    tl.addTask(new Event(eventPair[0], eventPair[1]));
                     break;
                 default:
                     reply("Invalid command");

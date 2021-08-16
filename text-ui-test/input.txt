@@ -1,0 +1,11 @@
+blah
+list
+todo read textbook
+list
+deadline ip /by Aug 19th
+done 1
+list
+event lecture /at Aug 17th 12-2pm
+done 2
+list
+bye

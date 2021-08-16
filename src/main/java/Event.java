@@ -18,7 +18,6 @@ public class Event extends Task {
     public Event(String description, String date) {
         super(description);
         this.date = date;
-        super.printInitTask();
     }
 
     /**
