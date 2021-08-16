@@ -44,18 +44,66 @@ public class Duke {
                     "    ____________________________________________________________");
             }
             //Stop duke if user types "bye"
-            //Added a check to ensure there is only one keyword in the input to exit Duke
             else if (keyword.equals("bye") && descriptionArray.length == 1) {
                 break;
             }
             //prints out all the stored tasks if user types "list"
-            //Added a check to ensure there is only one keyword in the input to call list
             else if (keyword.equals("list") && descriptionArray.length == 1) {
                 System.out.println("    ____________________________________________________________\n    " + "Here are the tasks in your list:");
                 for (int i = 0; i < pointer; i++) {
-                    System.out.println("    " + (i + 1) + ". " + "[" + userList[i].getStatusIcon() + "] " + userList[i].getDescription());
+                    System.out.println("    " + (i + 1) + ". " + userList[i].toString());
                 }
                 System.out.println("    ____________________________________________________________");
+            }
+            //checks if keyword is todo and there is a description of the todo
+            else if (keyword.equals("todo") && descriptionArray.length > 1) {
+                userList[pointer] = new ToDo(description.replace(keyword, ""));
+                System.out.println("    ____________________________________________________________\n    " +
+                    "Got it. I've added this task:\n    " + userList[pointer].toString() + "\n    " + "Now you have " + (pointer + 1) + " tasks in the list.\n" +
+                    "    ____________________________________________________________");
+                pointer++;
+            }
+            //checks if keyword is deadline and there is a description of the deadline
+            else if (keyword.equals("deadline") && descriptionArray.length > 1) {
+                //checks if there is a "/by" to separate the description
+                if (description.contains("/by")) {
+                    //Removes the "deadline" string and splits the description using "/by"
+                    String[] updatedDeadline = description.replace(keyword, "").split("/by");
+                    String deadlineDescription = updatedDeadline[0];
+                    String deadlineBy = updatedDeadline[1];
+                    userList[pointer] = new Deadline(deadlineDescription, deadlineBy);
+                    System.out.println("    ____________________________________________________________\n    " +
+                        "Got it. I've added this task:\n    " + userList[pointer].toString() + "\n    " + "Now you have " + (pointer + 1) + " tasks in the list.\n" +
+                        "    ____________________________________________________________");
+                    pointer++;
+                } else {
+                    userList[pointer] = new Task(description);
+                    pointer++;
+                    System.out.println("    ____________________________________________________________\n    " +
+                        "added: " + description + "\n" +
+                        "    ____________________________________________________________");
+                }
+            }
+            //checks if keyword is event and there is a description of the event
+            else if (keyword.equals("event") && descriptionArray.length > 1) {
+                //checks if there is an "/at" to separate the description
+                if (description.contains("/at")) {
+                    //Removes the "event" string and splits the description using "/at"
+                    String[] updatedEvent = description.replace(keyword, "").split("/at");
+                    String eventDescription = updatedEvent[0];
+                    String eventBy = updatedEvent[1];
+                    userList[pointer] = new Event(eventDescription, eventBy);
+                    System.out.println("    ____________________________________________________________\n    " +
+                        "Got it. I've added this task:\n    " + userList[pointer].toString() + "\n    " + "Now you have " + (pointer + 1) + " tasks in the list.\n" +
+                        "    ____________________________________________________________");
+                    pointer++;
+                } else {
+                    userList[pointer] = new Task(description);
+                    pointer++;
+                    System.out.println("    ____________________________________________________________\n    " +
+                        "added: " + description + "\n" +
+                        "    ____________________________________________________________");
+                }
             }
             //marks task as done if user types "done" and a number
             else if (keyword.equals("done") && descriptionArray.length == 2) {
@@ -72,7 +120,7 @@ public class Duke {
                     else {
                         userList[taskNumber - 1].markAsDone();
                         System.out.println("    ____________________________________________________________\n    " + "Nice! I've marked this task as done:");
-                        System.out.println("[" + userList[taskNumber - 1].getStatusIcon() + "] " + userList[taskNumber - 1].getDescription());
+                        System.out.println("    " + userList[taskNumber - 1].toString());
                         System.out.println("    ____________________________________________________________");
                     }
                 }
