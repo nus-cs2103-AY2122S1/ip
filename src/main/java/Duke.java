@@ -15,34 +15,46 @@ public class Duke {
 
     public class Task {
 
-        public String task;
-        public Boolean done;
-        public Type type;
+        /** The task itself, in String form */
+        private String task;
 
-        public Task(String task) {
-            this.task = task;
-            this.done = false;
-            this.type = Type.TODO;
-        }
+        /** The done status of the task */
+        private Boolean done;
 
+        /** The type of the task, defined by the enum Type */
+        private Type type;
+
+        /**
+         * Constructor to initialise the task
+         * @param task The task itself.
+         * @param type The type of the task defined by the enum Type.
+         */
         public Task(String task, Type type) {
             this.task = task;
             this.done = false;
             this.type = type;
         }
 
-        public String getTask() {
-            return this.task;
-        }
-
+        /**
+         * Getter to see if the task is done.
+         * @return Boolean about whether the task is done.
+         */
         public Boolean isDone() {
             return this.done;
         }
 
+        /**
+         * Setter to set the task as done or not done.
+         * @param done Boolean about whether the task is done.
+         */
         public void setDone(Boolean done) {
             this.done = done;
         }
 
+        /**
+         * String representation of the done status of task
+         * @return String representation of the done status of task.
+         */
         public String checkBox() {
             if(this.isDone()) {
                 return "[X]";
@@ -51,6 +63,10 @@ public class Duke {
             }
         }
 
+        /**
+         * String representation of the type of task.
+         * @return String representation of the type of task.
+         */
         public String typeString() {
             if(this.type == Type.TODO) {
                 return "[T]";
@@ -69,12 +85,13 @@ public class Duke {
 
     public class TaskManager {
 
-        public ArrayList<Task> tasks = new ArrayList<>();
+        /** Initialising an empty array into which tasks can be added/manipulated/deleted */
+        private ArrayList<Task> tasks = new ArrayList<>();
 
-        public TaskManager() {
-            // empty constructor for now
-        }
-
+        /**
+         * This method provides a string that is the visual representation of the tasks seen by the user.
+         * @return The visual representation of task list.
+         */
         public String taskListString() {
             StringBuilder ans = new StringBuilder();
             ans.append("Here are the tasks in your list:\n");
@@ -89,6 +106,11 @@ public class Duke {
             return ans.toString();
         }
 
+        /**
+         * Method to add a task to our list.
+         * @param task The string of the task.
+         * @param type The type of the task: event, deadline, or other type.
+         */
         public void addTask(String task, Type type) {
             Task taskObj = new Task(task, type);
             tasks.add(taskObj);
@@ -96,6 +118,10 @@ public class Duke {
             System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
         }
 
+        /**
+         * Method to check the task off as done in the list.
+         * @param taskNumber The number of the task in our list.
+         */
         public void doneTask(int taskNumber) {
             taskNumber--;
             Task task = tasks.get(taskNumber);
@@ -104,6 +130,10 @@ public class Duke {
             System.out.println("Nice! I've marked this task as done:\n" + task.toString());
         }
 
+        /**
+         * Method to delete the task from the list.
+         * @param taskNumber The number of the task in our list.
+         */
         public void deleteTask(int taskNumber) {
             taskNumber--;
             Task task = tasks.get(taskNumber);
@@ -112,10 +142,19 @@ public class Duke {
             System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
         }
 
+        /**
+         * The string that is outputted when the user terminates the chatbot.
+         * @return Message to say bye to user.
+         */
         public String byeString() {
             return "Bye. Hope to see you again soon!";
         }
 
+        /**
+         * Assesses the input and activates the necessary response.
+         * @param input The string of input command.
+         * @throws DukeException Exceptions specific to this chatbot.
+         */
         public void interpretInput(String input) throws DukeException{
             String task;
             Type type;
@@ -156,6 +195,11 @@ public class Duke {
             }
         }
 
+        /**
+         * Method call to activate the chatbot.
+         * If command bye is given, the chatbot terminates.
+         * @param scanner Scanner that takes in the input.
+         */
         public void run(Scanner scanner) {
             if(scanner.hasNext()) {
                 String input = scanner.nextLine();
