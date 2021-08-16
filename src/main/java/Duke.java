@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static Scanner sc = new Scanner(System.in);
-    private static ArrayList<String> textList = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     private static void lineSpacing() {
         System.out.println("____________________________________________________________");
@@ -27,21 +27,36 @@ public class Duke {
                 lineSpacing();
                 break;
             }
-            switch (userInput) {
-                case "list":
-                    lineSpacing();
-                    for(int i = 0; i < textList.size(); i++) {
-                        System.out.println(String.format("%d. %s", i + 1, textList.get(i)));
-                    }
-                    lineSpacing();
-                    break;
-                default:
-                    textList.add(userInput);
-                    lineSpacing();
-                    System.out.println(String.format("added : %s", userInput));
-                    lineSpacing();
 
+           if (userInput.equals("list")) {
+                lineSpacing();
+                for (int i = 0; i < taskList.size(); i++) {
+                    Task currentTask = taskList.get(i);
+                    System.out.println(String.format("%d.[%s] %s", i + 1, currentTask.getStatusIcon(), currentTask));
+                }
+                lineSpacing();
+                continue;
             }
+
+           //takes first 4 characters of userInput, if userInput has less than 4 characters it will just
+            // take the whole userInput
+           if (userInput.substring(0, Math.min(userInput.length(), 4)).equals("done")) {
+                    String[] inputArray = userInput.split(" ");
+                    Task completedTask = taskList.get(Integer.parseInt(inputArray[1]) - 1);
+                    completedTask.markAsDone();
+                    lineSpacing();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(String.format("[%s] %s", completedTask.getStatusIcon(), completedTask));
+                    lineSpacing();
+                    continue;
+           }
+
+           taskList.add(new Task(userInput));
+           lineSpacing();
+           System.out.println(String.format("added : %s", userInput));
+           lineSpacing();
+
+
         }
     }
 }
