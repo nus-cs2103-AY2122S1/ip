@@ -11,7 +11,7 @@ public class Duke {
     /**
      * List of tasks that are stored
      */
-    private static ArrayList<String> tasks;
+    private static ArrayList<Task> tasks;
 
     /**
      * Greets the user as well as reads user's inputs with a scanner
@@ -55,10 +55,15 @@ public class Duke {
      */
     public static String chat(String s) {
         String check = s.replaceAll(" ", "");
+        String[] words = s.split(" ");
         if (check.equalsIgnoreCase("bye")) {
             return "Bye. Hope to see you again soon!";
         } else if (check.equalsIgnoreCase("list")) {
             getList();
+            return "";
+        } else if (words[0].equalsIgnoreCase("done")) {
+            int index = Integer.parseInt(words[1]) - 1;
+            tasks.get(index).setIsDone();
             return "";
         } else {
             return addTask(s);
@@ -75,7 +80,10 @@ public class Duke {
         if (tasks == null) {
             tasks = new ArrayList<>();
         }
-        tasks.add(s);
+
+        Task t = new Task(s);
+
+        tasks.add(t);
         return "added: " + s;
     }
 
@@ -83,8 +91,34 @@ public class Duke {
      * To display the entire list of tasks sequentially
      */
     public static void getList() {
+        System.out.println("The current list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + tasks.get(i));
+            System.out.println("     " + (i + 1) + "." + "[" + tasks.get(i).getStatus() + "]"
+                    + tasks.get(i).getTask());
+        }
+    }
+
+    public static class Task{
+        private final String task;
+        private String isDone;
+
+        public Task(String what) {
+            this.task = what;
+            this.isDone = " ";
+        }
+
+        public void setIsDone() {
+            this.isDone = "X";
+            System.out.println("Well done! The task is completed!");
+            System.out.println("       [" + isDone + "] " + this.getTask());
+        }
+
+        public String getStatus() {
+            return this.isDone;
+        }
+
+        public String getTask() {
+            return this.task;
         }
     }
 }
