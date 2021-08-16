@@ -10,6 +10,8 @@ done 2
 delete 2
 list
 delete 1
+delete 5
+done 9
 list
 done
 todo

@@ -44,6 +44,10 @@ Here's your current list:
 Okay! Removing the task:
 [T] [ ] borrow book
 
+The id you entered was invalid!
+
+The id you entered was invalid!
+
 Here's your current list:
 1. [E] [ ] project meeting  (at:  mon 2-4pm)
 
