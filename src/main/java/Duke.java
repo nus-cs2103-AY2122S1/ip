@@ -91,6 +91,14 @@ public class Duke {
                     taskList.add(newEvent);
                     msg = "Got it. I've added this task:\n  " + newEvent + "\nNow you have " + taskList.size();
                     msg = taskList.size() == 1 ? msg + " task in the list" : msg + " tasks in the list.";
+                } else if (input.startsWith("remove")) {
+                    // input validation
+                    int num = Integer.parseInt(input.substring(7));
+                    if (num < 1 || num > taskList.size()) throw new DukeException("you typed an invalid number: " + num);
+
+                    Task removed = taskList.remove(num - 1);
+                    msg = "Noted. I've removed this task:\n  " + removed + "\nNow you have " + taskList.size();
+                    msg = taskList.size() == 1 ? msg + " task in the list" : msg + " tasks in the list.";
                 } else {
                     throw new DukeException("you typed in something i don't recognise");
                 }

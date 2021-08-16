@@ -11,4 +11,10 @@ done 10
 deadline f /by yesterday
 done 4
 list
+remove 3
+list
+remove 3
+list
+remove 6
+remove aaa
 bye
