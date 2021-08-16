@@ -1,18 +1,19 @@
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
-    /** Simple string array to store inputs **/
-    private Task[] list;
-    /** Simple index to keep track of the current element in the list**/
+    /**
+     * Simple string array to store inputs
+     **/
+    private final Task[] list;
+    /**
+     * Simple index to keep track of the current element in the list
+     **/
     private int index;
-    /** Enum for handling user command**/
-    public enum Commands {
-        BYE, LIST, DONE
-    }
 
-    /** Basic constructor to initialise the list **/
+    /**
+     * Basic constructor to initialise the list
+     **/
     public Duke() {
         this.list = new Task[100];
         this.index = 0;
@@ -20,11 +21,12 @@ public class Duke {
 
     /**
      * Private method to append items to the back of the list.
+     *
      * @param task The text to be appended.
      */
     private void append(Task task) {
         this.list[index] = task;
-        this.index ++;
+        this.index++;
     }
 
     /**
@@ -41,9 +43,8 @@ public class Duke {
                 output.append("\n");
             }
         }
-        this.printMsg(String.format("Here are the tasks in your list:\n%s",output.toString()));
+        this.printMsg(String.format("Here are the tasks in your list:\n%s", output.toString()));
     }
-
 
     /**
      * Method to be called when the first argument to the input is "done".
@@ -52,12 +53,11 @@ public class Duke {
      *
      * @param text Command line argument string
      */
-    private void done(String text) {
+    private void done(String text) throws DukeException {
         // check for the existence of the second argument and that it can be parsed to an int for lookup
         String[] splitted = text.split(" ");
         if (splitted.length < 2) {
-            printMsg("Command is missing an argument 'index'.");
-            return;
+            throw new DukeException("Command is missing an argument 'index'.");
         }
 
         String dirtyInt = splitted[1];
@@ -69,18 +69,17 @@ public class Duke {
             try {
                 int lookup = Integer.parseInt(dirtyInt);
                 if (lookup < 1) {
-                    this.printMsg(String.format("The specified task number %d does not exist. Enter a number that is at least 1.", lookup));
-                }
-                else if (lookup < this.index + 1) {
+                    throw new DukeException(String.format("The specified task number %d does not exist. Enter a number that is at least 1.", lookup));
+                } else if (lookup < this.index + 1) {
                     Task task = this.list[lookup - 1];
                     task.markAsDone();
                     this.printMsg(String.format("Nice! I've marked this task as done:\n  %s", task));
                 } else {
-                    this.printMsg(String.format("The task number %s is invalid, please enter a valid " +
+                    throw new DukeException(String.format("The task number %s is invalid, please enter a valid " +
                             "number.", lookup));
                 }
-            } catch(NumberFormatException e) {
-                this.printMsg(String.format("The specified task number %s, is not a valid integer, please " +
+            } catch (NumberFormatException e) {
+                throw new DukeException(String.format("The specified task number %s, is not a valid integer, please " +
                         "enter a valid numeric task number.", dirtyInt));
             }
         } else {
@@ -90,60 +89,66 @@ public class Duke {
 
     }
 
-
-    public Deadline deadline(String text) {
+    public Deadline deadline(String text) throws DukeException {
         String[] splitted = text.split("\\s");
         if (splitted.length < 2) {
-            this.printMsg("Command is missing an argument 'deadline description'.");
+            throw new DukeException("Command is missing an argument 'deadline description'.");
         } else {
             int index = this.linearScan(splitted, "/by");
             if (index < 0) {
-                this.printMsg("Command is missing the keyword /by.");
+                throw new DukeException("Command is missing the keyword /by.");
+            } else if (index == 1) {
+                throw new DukeException("The description body cannot be empty!");
             } else {
+                if (splitted.length - 1 == index) {
+                    throw new DukeException("The deadline cannot be empty!");
+                }
                 String description = String.join(" ", Arrays.copyOfRange(splitted, 1, index));
-                String by = String.join(" ",Arrays.copyOfRange(splitted, index + 1, splitted.length));
+                String by = String.join(" ", Arrays.copyOfRange(splitted, index + 1, splitted.length));
                 Deadline newDeadline = new Deadline(description, by);
                 this.append(newDeadline);
                 return newDeadline;
             }
         }
-        return null;
     }
 
-    public Event event(String text) {
+    public Event event(String text) throws DukeException {
         String[] splitted = text.split("\\s");
         if (splitted.length < 2) {
-            this.printMsg("Command is missing an argument 'index'.");
+            throw new DukeException("Command is missing an argument 'index'.");
         } else {
             int index = this.linearScan(splitted, "/at");
             if (index < 0) {
-                this.printMsg("Command is missing the keyword /at.");
+                throw new DukeException("Command is missing the keyword /at.");
+            } else if (index == 1) {
+                throw new DukeException("The description body cannot be empty!");
             } else {
+                if (splitted.length - 1 == index) {
+                    throw new DukeException("The deadline cannot be empty!");
+                }
                 String description = String.join(" ", Arrays.copyOfRange(splitted, 1, index));
-                String at = String.join(" ",Arrays.copyOfRange(splitted, index + 1, splitted.length));
+                String at = String.join(" ", Arrays.copyOfRange(splitted, index + 1, splitted.length));
                 Event newEvent = new Event(description, at);
                 this.append(newEvent);
                 return newEvent;
             }
         }
-        return null;
     }
 
-    public Todo todo(String text) {
+    public Todo todo(String text) throws DukeException {
         String[] splitted = text.split("\\s");
         if (splitted.length < 2) {
-            this.printMsg("Command is missing an argument 'todo description'.");
+            throw new DukeException("The description body cannot be empty!");
         } else {
             String description = String.join(" ", Arrays.copyOfRange(splitted, 1, splitted.length));
             Todo newTodo = new Todo(description);
             this.append(newTodo);
             return newTodo;
         }
-        return null;
     }
 
-    private <T> int linearScan (T[] array, T finder) {
-        for (int i = 0; i < array.length; i ++) {
+    private <T> int linearScan(T[] array, T finder) {
+        for (int i = 0; i < array.length; i++) {
             if (finder.equals(array[i])) {
                 return i;
             }
@@ -151,9 +156,9 @@ public class Duke {
         return -1;
     }
 
-
     /**
      * Simple formatting tool to be used when printing commands
+     *
      * @param text The text to be printed.
      */
     private void printMsg(String text) {
@@ -166,8 +171,6 @@ public class Duke {
         this.printMsg(String.format("Got it. I've added this task:\n  %s\n%s.",
                 text, count));
     }
-
-
 
     /**
      * Method that listens and scans for user input.
@@ -195,42 +198,59 @@ public class Duke {
                     break;
                 }
 
-                case("done"): {
-                    this.done(text);
+                case ("done"): {
+                    try {
+                        this.done(text);
+                    } catch(DukeException e) {
+                        this.printMsg(e.toString());
+                    }
                     break;
                 }
 
-                case("event"): {
-                    Event event = this.event(text);
-                    if (event != null) {
+                case ("event"): {
+                    try {
+                        Event event = this.event(text);
                         this.printAdded(event.toString());
+                    } catch (DukeException e) {
+                        this.printMsg(e.toString());
                     }
                     break;
                 }
 
                 case ("deadline"): {
-                    Deadline deadline = this.deadline(text);
-                    if (deadline != null) {
+                    try {
+                        Deadline deadline = this.deadline(text);
                         this.printAdded(deadline.toString());
+                    } catch (DukeException e) {
+                        this.printMsg(e.toString());
                     }
                     break;
                 }
 
                 case ("todo"): {
-                    Todo todo = this.todo(text);
-                    if (todo != null) {
+                    try {
+                        Todo todo = this.todo(text);
                         this.printAdded(todo.toString());
+                    } catch (DukeException e) {
+                        this.printMsg(e.toString());
                     }
                     break;
                 }
 
                 default: {
-                    this.append(new Task(text));
-                    this.printMsg("added: " + text);
+                    this.printMsg("Sorry, I don't know what that command means.");
                     break;
                 }
             }
         }
+    }
+
+
+    /**
+     * Enum for handling user command
+     **/
+    public enum Commands {
+        BYE, LIST, DONE
     }
 
 }
