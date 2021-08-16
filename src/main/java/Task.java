@@ -10,11 +10,15 @@ public class Task {
         return this.name;
     }
 
+    public void setCompleted() {
+        this.isCompleted = true;
+    }
+
     public boolean isCompleted() {
         return this.isCompleted;
     }
 
-    public void setCompleted() {
-        this.isCompleted = true;
+    public String logo() {
+        return "";
     }
 }
