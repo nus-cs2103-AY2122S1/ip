@@ -64,25 +64,63 @@ public class ChatBot {
                 return "done should be followed by an integer argument!";
             }
         }
-        return record(input);
+        if(temp[0].equals("todo")) {
+            try {
+                return recordTodo(temp[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                e.printStackTrace();
+                return "todo should be followed by a description of the task!";
+            }
+        }
+        if(temp[0].equals("deadline")) {
+            try {
+                String[] descriptionDatePair = temp[1].split("/by", 2);
+                return recordDeadline(descriptionDatePair[0], descriptionDatePair[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                e.printStackTrace();
+                return "deadline not in format: [DESCRIPTION] /by [DATE]!";
+            }
+        }
+        if(temp[0].equals("event")) {
+            try {
+                String[] descriptionDatePair = temp[1].split("/at", 2);
+                return recordEvent(descriptionDatePair[0], descriptionDatePair[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                e.printStackTrace();
+                return "event not in format: [DESCRIPTION] /at [DATE]!";
+            }
+        }
+        return "Sorry, I don't understand what you are saying!";
+    }
+
+    public String recordTodo(String description) {
+        return record(new Todo(description));
+    }
+
+    public String recordDeadline(String description, String date) {
+        return record(new Deadline(description, date));
+    }
+
+    public String recordEvent(String description, String date) {
+        return record(new Event(description, date));
     }
 
     /**
-     * Record non-keyword items to a list and informs the user if the operation is successsful.
+     * Record a task to a list and informs the user if the operation is successful.
      *
-     * @param input the item user input
+     * @param task the task to be added to list
      * @return a String to tell the user that the item is recorded
      * @throws ArrayIndexOutOfBoundsException is thrown if user exceeds the limit of items.
      */
-    public String record(String input) throws ArrayIndexOutOfBoundsException {
+    public String record(Task task) throws ArrayIndexOutOfBoundsException {
         try {
             if(currentIdx >= tasksLimit) {
                 throw new ArrayIndexOutOfBoundsException(
                     String.format("ChatBot can only record maximum of %d responses.", tasksLimit));
             }
-            tasks[currentIdx] = new Task(input);
+            tasks[currentIdx] = task;
             currentIdx++;
-            return "added: " + input;
+            return "Noted task down! I've added this task:\n  " + task.toString();
         } catch(ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
             return String.format("I cannot remember so many things! Swipe your card to unlock my fullest potential!",
