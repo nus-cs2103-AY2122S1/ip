@@ -22,10 +22,10 @@ public class Listener {
                 break;
             } else if (input.equals("list")) {
                 // Display items
+                System.out.println(Display.OUTPUT_DISPLAY + "Displaying List:");
                 for (int i = 0; i < itemList.size(); i++){
-                    System.out.println((i+1) + "." + itemList.get(i));
+                    System.out.println(Display.OUTPUT_SPACES + (i+1) + "." + itemList.get(i));
                 }
-                System.out.println("End of list :)");
 
             } else {
                 // Add input to list
@@ -40,7 +40,7 @@ public class Listener {
 
         // Quit the program
         System.out.println(
-                "君の運命のヒトは僕じゃない\n"
+                Display.OUTPUT_DISPLAY + "君の運命のヒトは僕じゃない\n"
                 + Display.LINE
         );
     }

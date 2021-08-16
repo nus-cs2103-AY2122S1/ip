@@ -1,6 +1,7 @@
 public class Display {
     public static final String LINE = "____________________________________________________________\n";
     public static final String OUTPUT_DISPLAY = "  →   ";
+    public static final String OUTPUT_SPACES =  "      ";
 
     public static void intro() {
         String welcomeText = "                                                                                                            \n" +
