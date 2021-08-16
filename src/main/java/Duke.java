@@ -26,7 +26,7 @@ public class Duke {
         taskList = new TaskList();
 
         // Welcome message
-        System.out.print(WELCOMEMESSAGE);
+        System.out.println(WELCOMEMESSAGE);
 
         // Logic of program based on user input
         String input = sc.nextLine();
@@ -55,7 +55,7 @@ public class Duke {
                 default:
                     formatPrint("Invalid command @_@ Try typing 'help' to see my list of commands!");
             }
-            System.out.print(PROMPT);
+            System.out.println(PROMPT);
             input = sc.nextLine();
             command = Command.valueOfLabel(input.split(" ")[0]);
         }
