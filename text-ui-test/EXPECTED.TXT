@@ -11,21 +11,58 @@ Hello from
 -----------------------------------------
 
     -----------------------------------------
-     added: read book
+     added: [ ] read book
     -----------------------------------------
 
     -----------------------------------------
-     added: return book
+     added: [ ] return book
     -----------------------------------------
 
     -----------------------------------------
-     added: 5 + 5
+     added: [ ] borrow book again
     -----------------------------------------
 
     -----------------------------------------
-     1. read book
-     2. return book
-     3. 5 + 5
+    Here are the tasks in your list:
+     1. [ ] read book
+     2. [ ] return book
+     3. [ ] borrow book again
+    -----------------------------------------
+
+    -----------------------------------------
+     Nice! I've marked this task as done:
+       [X] read book
+    -----------------------------------------
+
+    -----------------------------------------
+    Here are the tasks in your list:
+     1. [X] read book
+     2. [ ] return book
+     3. [ ] borrow book again
+    -----------------------------------------
+
+    -----------------------------------------
+     Nice! I've marked this task as done:
+       [X] return book
+    -----------------------------------------
+
+    -----------------------------------------
+    Here are the tasks in your list:
+     1. [X] read book
+     2. [X] return book
+     3. [ ] borrow book again
+    -----------------------------------------
+
+    -----------------------------------------
+     Nice! I've marked this task as done:
+       [X] borrow book again
+    -----------------------------------------
+
+    -----------------------------------------
+    Here are the tasks in your list:
+     1. [X] read book
+     2. [X] return book
+     3. [X] borrow book again
     -----------------------------------------
 
     -----------------------------------------

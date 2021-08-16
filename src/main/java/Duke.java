@@ -15,7 +15,7 @@ public class Duke {
     }
 
     /**
-     * Method for duke to add things to a list and display them when called for by the user.
+     * Method for duke to mark tasks as done.
      * Inputs are taken by a scanner from the user's keyboard.
      */
     public static void markAsDone() {
