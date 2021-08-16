@@ -20,9 +20,17 @@ public class Tasklist {
 
     public void list() {
         for(int i=0;i < currCount; i++) {
-            System.out.printf("%d. %s\n", i+1, tasklist[i]);
+            if(!tasklist[i].isDone()) {
+                System.out.printf("%d.[ ] %s\n", i + 1, tasklist[i]);
+            } else {
+                System.out.printf("%d.[X] %s\n", i + 1, tasklist[i]);
+            }
         }
         System.out.println(breakline);
+    }
+
+    public Task getTask(int idx) {
+        return tasklist[idx];
     }
 
 

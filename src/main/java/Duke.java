@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-
     private static String breakline = "____________________________________________________________";
 
     public static void start() {
@@ -20,26 +19,26 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        String exitCmd = "bye";
-        String listCmd = "list";
         String cmd;
         Scanner scanner = new Scanner(System.in);
         Tasklist tasklist = new Tasklist();
 
         start();
-        int count = 0;
         do {
-            cmd = scanner.nextLine();
-            if(cmd.equals(exitCmd)) {
+            cmd = scanner.next();
+            if(cmd.equals("bye")) {
                 exit();
                 break;
-            } else if(cmd.equals(listCmd)) {
+            } else if(cmd.equals("list")) {
                 tasklist.list();
+            } else if(cmd.equals("done")){
+                int idx = Integer.parseInt(scanner.next()) - 1;
+                tasklist.getTask(idx).setStatus(true);
             } else {
                 Task task = new Task(cmd);
                 tasklist.add(task);
-                count++;
             }
-        } while (!cmd.equals(exitCmd));
+        } while (!cmd.equals("bye"));
     }
 }
+
