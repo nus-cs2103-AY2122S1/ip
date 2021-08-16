@@ -19,8 +19,11 @@ public class Duke {
         System.out.print("Bye. Hope to see you again soon!");
     }
 
-    public static void doneMethod(String input) {
+    public static void doneMethod(String input) throws DukeException{
         int number = Integer.parseInt(String.valueOf(input.charAt(5)));
+        if (number > inputArr.size()) {
+            throw new DukeException("Item does not exist, we cannot mark it as done.");
+        }
         inputArr.get(number - 1).markAsDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(inputArr.get(number-1).toString());
@@ -40,7 +43,7 @@ public class Duke {
         }
         else if (input.startsWith("deadline")) {
             if (input.length() == 8) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
             }
             int byIndex = input.indexOf("/");
             String by = input.substring(byIndex+4);
@@ -49,7 +52,7 @@ public class Duke {
         }
         else {
             if (input.length() == 5) {
-                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a event cannot be empty.");
             }
             int byIndex = input.indexOf("/");
             String by = input.substring(byIndex+4);
@@ -59,6 +62,17 @@ public class Duke {
         inputArr.add(currTask);
         System.out.println("Got it. I have added this task:");
         System.out.println(currTask);
+        System.out.println("Now you have " + inputArr.size() + " tasks in the list.");
+    }
+
+    public static void deleteMethod(String input) throws DukeException{
+        int number = Integer.parseInt(String.valueOf(input.charAt(7)));
+        if (number > inputArr.size()) {
+            throw new DukeException("Item does not exist, we cannot delete it.");
+        }
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(inputArr.get(number-1).toString());
+        inputArr.remove(number - 1);
         System.out.println("Now you have " + inputArr.size() + " tasks in the list.");
     }
 
@@ -76,6 +90,8 @@ public class Duke {
                     break;
                 } else if (input.startsWith("done")) {
                     doneMethod(input);
+                } else if (input.startsWith("delete")) {
+                    deleteMethod(input);
                 } else {
                     taskMethod(input);
                 }
