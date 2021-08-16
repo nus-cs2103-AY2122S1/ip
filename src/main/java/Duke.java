@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Duke {
 
     /* Default line separator design. */
@@ -22,11 +24,14 @@ public class Duke {
      * Stops when "bye" is detected.
      */
     private static void runInputLoopMain() {
+        /* Create scanner for detecting input. */
+        Scanner currScanner = new Scanner(System.in);
+
         /* Stores last input by user. */
         String lastInput = null;
 
         while (lastInput != "bye") {
-            
+            lastInput = currScanner.nextLine();
 
         }
 
