@@ -1,3 +1,7 @@
+/**
+ * Represents a general task that the user wants to add
+ * in his or her todo list.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

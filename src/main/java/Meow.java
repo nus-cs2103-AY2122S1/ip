@@ -1,13 +1,24 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
+/**
+ * Represents a chat bot Meow who will be performing different tasks
+ * according to user input.
+ */
 public class Meow {
+    private boolean isExit = false;
     private List<Task> tasksList = new ArrayList<>();
+    enum Command {
+        BYE,
+        LIST,
+        DONE,
+        TODO,
+        EVENT,
+        DEADLINE
+    }
 
     /**
      * A public constructor to initialize a Meow object.
-     *
      */
     public Meow() {
 
@@ -16,61 +27,40 @@ public class Meow {
     /**
      * Print the greeting message from the chat bot cat Meow.
      *
+     * @return A boolean indicating whether the user wants to exit to
+     * chat bot or nor.
      */
-    public void greet() {
-        System.out.println("Meow: Hi human, I'm your cat Meow~ What can I do for you?");
+    public boolean getIsExit() {
+        return this.isExit;
     }
 
     /**
-     * Print the commands entered by the user.
-     *
-     * @param input The user input.
+     * Print the greeting message from the chat bot cat Meow.
      */
-    public void echo(String input) {
-        System.out.println(input);
+    public void greet() {
+
+        System.out.println(
+                "------------------------------------------------------------------------------\n" +
+                "Meow: Hi human, I'm your cat Meow~ What can I do for you?\n" +
+                "------------------------------------------------------------------------------"
+        );
     }
+
 
     /**
      * Print the goodbye message from the chat bot cat Meow.
-     *
      */
-    public void exit() {
-        System.out.println("Meow: Bye human, see you soon! Your cat Meow is going to sleep now~");
+    private void exit() {
+
+        System.out.println(
+                "------------------------------------------------------------------------------\n" +
+                        "Meow: Bye human, see you soon! Your cat Meow is going to sleep now~\n" +
+                        "------------------------------------------------------------------------------"
+        );
     }
 
-    /**
-     * Return a boolean indicating whether the user wants to exit or not
-     * by checking user's input. This method is not case-sensitive.
-     *
-     * @param input The user input.
-     * @return A boolean indicating whether the user wants to exit or not.
-     */
-    public boolean checkExit(String input) {
-        String userInput = input.toLowerCase();
-        if (userInput.equals("bye")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
-    /**
-     * Add the user input to the list of tasks, and print out
-     * the task added.
-     *
-     * @param inputTask The user input for a task to be added.
-     */
-    public void addTask(String inputTask) {
-        Task task = new Task(inputTask);
-        tasksList.add(task);
-        System.out.println("added: " + task.getDescription());
-    }
-
-    /**
-     * Print a list of tasks that the user has added.
-     *
-     */
-    public void displayList() {
+    private void displayList() throws NoItemInTheListException {
         int len = tasksList.size();
         if (len > 0) {
             System.out.println("Here are the tasks in your list:");
@@ -79,40 +69,8 @@ public class Meow {
                 System.out.println(i + 1 + ". " + task.toString());
             }
         } else {
-            System.out.println("Meow: You have not added any tasks yet, please add one now~");
+            throw new NoItemInTheListException();
         }
-    }
-
-    /**
-     * Return a boolean indicating whether the user wants to display
-     * a list of tasks added or not by checking user's input.
-     * This method is not case-sensitive.
-     *
-     * @param input The user input.
-     * @return A boolean indicating whether the user wants to display
-     * a list of tasks added.
-     */
-    public boolean checkDisplayList(String input) {
-        String userInput = input.toLowerCase();
-        if (userInput.equals("list")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Complete the specific task as done in the task list
-     * based on the task number provided by the user.
-     *
-     * @param taskNumber The task number that the user wants to mark as done.
-     */
-    public void completeTask(int taskNumber) {
-        Task completedTask = tasksList.get(taskNumber - 1);
-        completedTask.markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[" + completedTask.getStatusIcon() + "] " + completedTask.getDescription());
-
     }
 
     /**
@@ -121,28 +79,23 @@ public class Meow {
      * not in the task list, any number other than 0 or Integer.MAX_VALUE indicating
      * the task number to be marked as done.
      *
-     * @param input The task number that the user wants to mark as done.
+     * @param index The task number that the user wants to mark as done.
      * @return An integer indicating which task to be marked as done.
      */
-    public int checkCompleteTask(String input) {
-        int infinity = Integer.MAX_VALUE;
-        String done = input.substring(0, 4).toLowerCase();
+    private void completeTask(String index) throws MeowException{
         try {
-            if (done.equals("done")) {
-                String str = input.substring(5, 6);
-                int taskNumber = Integer.parseInt(str);
-                if (taskNumber <= tasksList.size() && taskNumber != 0) {
-                    return taskNumber;
-                } else {
-                    System.out.println("Meow: Hi human, the task you want to complete is not in your task list, try entering a correct task number~");
-                    return infinity;
-                }
+            int taskNumber = Integer.parseInt(index);
+            if (taskNumber <= tasksList.size() && taskNumber > 0) {
+                Task completedTask = tasksList.get(taskNumber - 1);
+                completedTask.markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[" + completedTask.getStatusIcon() + "] " + completedTask.getDescription());
             } else {
-                return 0;
+                throw new InvalidTaskIndex();
             }
         } catch (NumberFormatException exception) {
-            System.out.println(exception.toString());
-            return 0;
+            // String cannot be parsed to integer
+           throw new NotSuchTaskFoundException();
         }
 
     }
@@ -177,64 +130,91 @@ public class Meow {
         System.out.println("Now you have " + taskListLength + task + "in the list.");
     }
 
-    private String getTypeOfTask(String input) {
+    private String getTask(String input, Command typeOfTask) throws MeowException {
         try {
-            // Split by whitespace
-            String[] split = input.split(" ");
-            String typeOfTask = split[0].toLowerCase();
-
-            if (typeOfTask.equals("todo")) {
-                return "todo";
-            } else if (typeOfTask.equals("deadline")) {
-                return "deadline";
-            } else if (typeOfTask.equals("event")){
-                return "event";
+            return input.trim().substring(typeOfTask.toString().length() + 1);
+        } catch (StringIndexOutOfBoundsException exception) {
+            if (typeOfTask.equals(Command.TODO)) {
+                throw new EmptyTodoDescriptionException();
+            } else if (typeOfTask.equals(Command.DEADLINE)) {
+                throw new EmptyDeadlineDescriptionException();
             } else {
-                return "invalidInput";
+                throw new EmptyEventDescriptionException();
             }
-        } catch (ArrayIndexOutOfBoundsException exception) {
-            throw exception;
+
         }
-    }
-
-    private String getTask(String input, String typeOfTask) {
-        return input.substring(typeOfTask.length() + 1);
 
     }
 
-    private String[] getTaskAndDate(String task, String typeOfTask) {
+    private String[] getTaskAndDate(String task, Command typeOfTask) {
         String[] split;
-        if (typeOfTask.equals("deadline")) {
-            split = task.split("/by");
+        if (typeOfTask.equals(Command.DEADLINE)) {
+            split = task.split(" /by ");
         } else {
-            split = task.split("/at");
+            split = task.split(" /at ");
         }
         return split;
     }
 
     /**
-     * Add different types of tasks into the task list
-     * according to user input command.
+     * The chat bot will perform different tasks according to
+     * the command that the user has entered.
      *
-     * @param input The user input command.
+     * @param input The input command from the user.
+     * @throws MeowException If the user input is invalid.
      */
-    public void addDifferentTask(String input) {
-        String typeOfTask = getTypeOfTask(input);
-        if (typeOfTask != "invalidInput") {
-            String task = getTask(input, typeOfTask);
-            if (typeOfTask.equals("todo")) {
-                addTodo(task);
-            } else {
-                String[] taskAndDate = getTaskAndDate(task, typeOfTask);
-                if (typeOfTask.equals("deadline")) {
-                    addDeadline(taskAndDate[0], taskAndDate[1]);
-                } else {
-                    addEvent(taskAndDate[0], taskAndDate[1]);
+    public void checkCommand(String input) throws MeowException {
+        try {
+            String[] commandWord = input.split(" ");
+            Command userCommand = Command.valueOf(commandWord[0].trim().toUpperCase());
+            switch (userCommand) {
+                case BYE: {
+                    exit();
+                    isExit = true;
+                    break;
+                }
+                case LIST: {
+                    displayList();
+                    break;
+                }
+                case DONE: {
+                    completeTask(commandWord[1].trim());
+                    break;
+                }
+                case TODO: {
+                    String task = getTask(input, userCommand);
+                    addTodo(task);
+                    break;
+                }
+                case EVENT: {
+                    String task = getTask(input, userCommand);
+                    String[] taskAndDate = getTaskAndDate(task, userCommand);
+                    try {
+                        addEvent(taskAndDate[0], taskAndDate[1]);
+                        break;
+                    } catch (ArrayIndexOutOfBoundsException exception) {
+                        throw new EmptyEventTimeException();
+                    }
+                }
+                case DEADLINE: {
+                    String task = getTask(input, userCommand);
+                    String[] taskAndDate = getTaskAndDate(task, userCommand);
+                    try {
+                        addDeadline(taskAndDate[0], taskAndDate[1]);
+                        break;
+                    } catch (ArrayIndexOutOfBoundsException exception) {
+                        throw new EmptyDeadlineTimeException();
+                    }
+
+                }
+                default: {
+                    throw new InvalidInputException();
                 }
             }
-        } else {
-            System.out.println("Meow: You have entered an invalid command, please try again~");
+        } catch (IllegalArgumentException exception) {
+            throw new InvalidInputException();
         }
+
     }
 
 
