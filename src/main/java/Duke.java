@@ -1,11 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/** this class implements the Duke assistant/chat-bot
+/** This class implements the Duke assistant/chat-bot
  * @author damithc
  * edited by Wanyu
  */
-
 public class Duke {
 
     /**
@@ -80,9 +79,7 @@ public class Duke {
         if (tasks == null) {
             tasks = new ArrayList<>();
         }
-
         Task t = new Task(s);
-
         tasks.add(t);
         return "added: " + s;
     }
@@ -98,25 +95,53 @@ public class Duke {
         }
     }
 
+    /**
+     * This class implements the tasks to be tracked by the
+     * Duke assistant
+     */
     public static class Task{
+        /**
+         * Description of the task
+         */
         private final String task;
+        /**
+         * Status of the task represented by String
+         */
         private String isDone;
 
+        /**
+         * Constructor for a Task
+         * @param what the input string to describe the task
+         */
         public Task(String what) {
             this.task = what;
             this.isDone = " ";
         }
 
+        /**
+         * To mark a task as complete by changing
+         * the String representation
+         */
         public void setIsDone() {
             this.isDone = "X";
             System.out.println("Well done! The task is completed!");
             System.out.println("       [" + isDone + "] " + this.getTask());
         }
 
+        /**
+         * To retrieve the status of the task
+         * whether it is complete or not
+         * @return the string representation of the task's state
+         */
         public String getStatus() {
             return this.isDone;
         }
 
+        /**
+         * To retrieve the description of the task
+         *
+         * @return the String that is the description of the task
+         */
         public String getTask() {
             return this.task;
         }
