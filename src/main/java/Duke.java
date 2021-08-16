@@ -59,10 +59,28 @@ public class Duke {
                             + "____________________________________________________________");
                 }
             } else {
-                taskList[currentIndex] = new Task(userInput);
+                Task newTask;
+                if (command.equals("todo")) {
+                    newTask = new ToDo(commandAndArgument[1]);
+                } else if (command.equals("deadline")) {
+                    String taskDetails = commandAndArgument[1];
+                    String[] descriptionAndDateTime = taskDetails.split(" /by ", 2);
+                    newTask = new Deadline(descriptionAndDateTime[0], descriptionAndDateTime[1]);
+                } else if (command.equals("event")) {
+                    String taskDetails = commandAndArgument[1];
+                    String[] descriptionAndDateTime = taskDetails.split(" /at ", 2);
+                    newTask = new Event(descriptionAndDateTime[0], descriptionAndDateTime[1]);
+                } else {
+                    System.out.println("Invalid command. List of valid commands include: "
+                            + "list|todo|deadline|event|done|bye");
+                    continue;
+                }
+                taskList[currentIndex] = newTask;
                 currentIndex++;
                 String addTaskText = "____________________________________________________________\n"
-                        + "added: " + userInput + '\n'
+                        + "Got it. I've added this task:\n"
+                        + newTask + '\n'
+                        + "Now you have " + currentIndex + (currentIndex == 1 ? " task" : " tasks") + " in the list.\n"
                         + "____________________________________________________________";
                 System.out.println(addTaskText);
             }
