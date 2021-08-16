@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.LinkedList;
 public class GreetingBot {
 
     public GreetingBot() {
@@ -8,21 +8,52 @@ public class GreetingBot {
 
     public void startBot() {
         greet();
+        store();
+        exit();
     }
 
 
     private void greet() {
         String greetingMessage = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(greetingMessage);
-        echo();
+
     }
+
+    private void store() {
+        Scanner inputScanner = new Scanner(System.in);
+        LinkedList<String> myList = new LinkedList<>();
+        while (true) {
+            String nextLine = inputScanner.nextLine();
+            if (nextLine.equals("list")) {
+                list(myList);
+            } else if  (nextLine.equals("bye")) {
+                break;
+            } else {
+                myList.add(nextLine);
+                System.out.println("added: " + nextLine);
+            }
+        }
+    }
+
+    private void list(LinkedList<String> myList) {
+        int counter = 0;
+        while(counter < myList.size()) {
+            System.out.println((counter + 1) + ". " + myList.get(counter));
+
+            counter += 1;
+        }
+
+
+
+    }
+
 
     private void echo() {
         Scanner inputScanner = new Scanner(System.in);
         while (true) {
             String nextLine = inputScanner.nextLine();
             if (nextLine.equals("bye")) {
-                exit();
+              break;
             } else {
                 System.out.println(nextLine);
             }
