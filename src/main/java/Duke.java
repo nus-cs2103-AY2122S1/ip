@@ -5,11 +5,11 @@ public class Duke {
 
     /**
      * format multiline data with indentations
-     * @param resp String[] of each line to print
+     * @param rawStr String[] of each line to print
      * @return combined String for printing
      */
-    private static String formatReply(String[] resp){
-
+    private static String formatReply(String rawStr){
+        String[] resp = rawStr.split("\n");
         String textOut = "";
         for (String line : resp){
             textOut += "\t" + line + "\n";
@@ -42,9 +42,9 @@ public class Duke {
         while (true){
             String userInput = userScanner.nextLine();
 
-            if (userInput.matches("(done )[0-9]+")){
+            if (userInput.matches("(^done )[0-9]+")){
                 String splitNum = userInput.split(" ")[1];
-                String[] reply = taskList.markDone(Integer.parseInt(splitNum));
+                String reply = taskList.markDone(Integer.parseInt(splitNum));
                 System.out.println(formatReply(reply));
                 continue;
             }
@@ -52,7 +52,7 @@ public class Duke {
 
             switch(userInput){
                 case "bye":
-                    System.out.println(formatReply(new String[]{"BYEEEEEE!","Hope to see you again soon :)"}));
+                    System.out.println(formatReply("BYEEEEEE!\nHope to see you again soon :)"));
                     System.exit(0);
                 case "list":
                     System.out.println(formatReply(taskList.enumerate()));

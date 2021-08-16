@@ -8,27 +8,30 @@ public class TaskArrayList extends ArrayList<Task> {
         super();
     }
 
+
+    public String newLength(){
+        return String.format("Now you have 5 tasks in the list.");
+    }
+
     /**
      * enumerate members for printing
      * @return String[] of "X. taskname" style
      */
-    public String[] enumerate(){
-        String[] out = new String[this.size()];
-
+    public String enumerate(){
+        String out  = "";
         int num = 0;
         for (Task task: this){
-            out[num] = String.format("%d. ",num+1) +task.toString();
+            out += String.format("%d. ",num+1) +task.toString() + "\n";
             num ++;
         }
         return out;
     }
-    public String[] markDone(int index){
+    public String markDone(int index){
         if (index >= this.size()){
-            return new String[]{String.format("task %d not found",index)};
+            return String.format("task %d not found",index);
         }
         this.get(index-1).markDone();
-        return new String[]{
-                "Nice! I've marked this task as done:",
-                this.get(index-1).toString()};
+        return "Nice! I've marked this task as done:\n"+
+                this.get(index-1).toString();
     }
 }
