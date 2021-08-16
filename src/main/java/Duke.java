@@ -35,8 +35,6 @@ public class Duke {
             System.out.println("=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=\n"
                              + "  Bye. Hope to see you again soon!\n"
                              + "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=");
-        } else if (echoString.equals("list")){
-            addList();
         } else {
             System.out.println("=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=\n"
                     + "  " + echoString + "\n"
@@ -134,9 +132,9 @@ public class Duke {
 
         System.out.println("Hello from\n" + logo);
         System.out.println("Let's Talk!\n");
-        System.out.println("What would you like me to add to the list?");
+//        System.out.println("What would you like me to add to the list?");
         Duke duke = new Duke();
-        duke.addList();
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        duke.echo();
+//        duke.addList();
     }
 }
