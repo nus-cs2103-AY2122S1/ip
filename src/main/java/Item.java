@@ -1,10 +1,9 @@
 public class Item {
     private String name;
-    private boolean isDone;
+    private boolean isDone = false;
 
-    public Item(String name) {
-        this.name = name;
-        this.isDone = false;
+    public Item(String[] strings) {
+        this.name = strings[0];
     }
 
     public void markAsDone() {

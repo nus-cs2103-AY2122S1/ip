@@ -33,7 +33,7 @@ public class Duke {
                     this.markIdxAsDone(idx);
                     break;
                 default:
-                    System.out.println(this.add(currLine[0]));
+                    System.out.println(this.add(currLine));
             }
         }
         sc.close();
@@ -43,9 +43,23 @@ public class Duke {
      * @param inputString
      * @return Returns and echoes string that was added.
      */
-    public String add(String inputString) {
-        this.itemList.add(new Item(inputString));
-        return styleResponse("Added: " + inputString);
+    public String add(String[] inputStrings) {
+        ArrayList<String> printBuffer = new ArrayList<>();
+        printBuffer.add("Got it. I've added this task:");
+        Item toAdd = null;
+        switch (inputStrings[0]) {
+            case "todo":
+                toAdd = new ToDo(inputStrings);
+                break;
+            case "deadline":
+                toAdd = new Deadline(inputStrings);
+                break;
+            case "event":
+                toAdd = new Event(inputStrings);
+                break;
+        }
+        this.itemList.add(toAdd);
+        return styleResponse(printBuffer);
     }
     /**
      * Prints all items in list.
