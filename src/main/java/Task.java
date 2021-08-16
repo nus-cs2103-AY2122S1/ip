@@ -8,8 +8,9 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+    public String toString() {
+        String statusIcon = this.isDone ? "[X]" : "[ ]"; // mark done task with X
+        return statusIcon + " " + description;
     }
 
     public void setDone() {
