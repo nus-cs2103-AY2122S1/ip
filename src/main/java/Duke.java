@@ -35,7 +35,11 @@ public class Duke {
 
         while (iter.hasNext()) {
             res.append(iter.nextIndex() + 1).append(".").append(iter.next());
+            if (iter.hasNext()) {
+                res.append("\n");
+            }
         }
+
         return res.toString();
     }
 
