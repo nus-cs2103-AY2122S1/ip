@@ -35,6 +35,9 @@ public class Duke {
         // initialize Scanner object
         Scanner scan = new Scanner(System.in);
 
+        // initialize TaskList
+        TaskList tasks = new TaskList();
+
         // print greeting message
         greet();
 
@@ -42,7 +45,12 @@ public class Duke {
         String userInput = scan.nextLine();
 
         while (!userInput.equals(EXIT)) {
-            display(userInput);
+            if (userInput.equals("list")) {
+                tasks.displayAllItems();
+            } else {
+                tasks.add(userInput);
+                display("added: " + userInput);
+            }
             userInput = scan.nextLine();
         }
 
