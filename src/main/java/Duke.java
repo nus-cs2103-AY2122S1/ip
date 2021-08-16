@@ -5,7 +5,8 @@ public class Duke {
     public static boolean active;
     public static String startMessage = "Hello! I'm Duke \nWhat can I do for you?";
     public static String endMessage = "Bye! Hope to see you again soon!";
-    public static String[] list = new String[100];
+    //public static String[] list = new String[100];
+    public static TaskItem[] taskList = new TaskItem[100];
     public static int listIndex = 0;
 
 
@@ -17,37 +18,62 @@ public class Duke {
             java.util.Scanner scanner = new java.util.Scanner(System.in);
             String input = scanner.nextLine();
 
-            if (input.equals("list")) {
+            if (input.split(" ")[0].equals("done")) {
+                String[] splitString = input.split(" ");
+                String taskItemNumber = splitString[1];
+                Duke.markAsFinished(taskItemNumber);
+            } else if (input.equals("list")) {
                 Duke.printList();
-            }
-
-            if (!input.equals("list") && !input.equals("bye")) {
+            } else if (!input.equals("list") && !input.equals("bye")) {
                 Duke.addToList(input);
-            }
-
-            if (input.equals("bye")) {
+            } else if (input.equals("bye")) {
                 Duke.active = false;
                 Duke.sendEndMessage();
                 break;
             }
+
+
         }
     }
 
+    public static void markAsFinished(String taskItemNumber) {
+        int taskNumber = Integer.parseInt(taskItemNumber);
+
+        taskList[taskNumber - 1].completeTask();
+
+        System.out.println("____________________________________________________________");
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("[X] " + taskList[taskNumber - 1].describeTaskItem());
+        System.out.println("____________________________________________________________");
+
+    }
+
     public static void addToList(String input) {
-        Duke.list[Duke.listIndex] = input;
+        Duke.taskList[Duke.listIndex] = new TaskItem(input);
         Duke.listIndex++;
+        System.out.println("____________________________________________________________");
         System.out.println("added: " + input);
+        System.out.println("____________________________________________________________");
     }
 
     public static void printList() {
         int number = 1;
+        System.out.println("____________________________________________________________");
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < taskList.length; i++) {
+            if (taskList[i] != null) {
+                if (!taskList[i].isCompleted()) {
+                    System.out.println(number + ".[ ] " + taskList[i].describeTaskItem());
+                }
 
-        for (int i = 0; i < list.length; i++) {
-            if (list[i] != null) {
-                System.out.println(number + ". " + list[i]);
+                if (taskList[i].isCompleted()) {
+                    System.out.println(number + ".[X] " + taskList[i].describeTaskItem());
+                }
+
                 number++;
             }
         }
+        System.out.println("____________________________________________________________");
     }
 
     public static void sendStartMessage() {
