@@ -14,12 +14,13 @@ public class Duke {
         String userInput = scanner.nextLine();
 
         while(!userInput.equals("bye")) {
-            switch (userInput) {
-                case "list":
-                    printResponse(todoList.list());
-                    break;
-                default:
-                    printResponse(todoList.add(userInput));
+            if (userInput.equals("list")) {
+                printResponse(todoList.list());
+            } else if (userInput.matches("done [0-9]+")) {
+                int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+                printResponse(todoList.markAsDone(taskNumber));
+            } else {
+                printResponse(todoList.add(userInput));
             }
 
             System.out.print("Whats next? ");
