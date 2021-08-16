@@ -61,7 +61,9 @@ public class Duke {
                     throw new DukeException("invalidInput");
                 }
                 
-            } catch (DukeException ignored) {
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                
             } finally {
                 System.out.println("  ____________________________________________________________\n");
             }
