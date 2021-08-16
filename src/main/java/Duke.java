@@ -2,12 +2,14 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
+    private static String[] tasks = new String[100];
+    private static int taskCount = 0;
 
-    public static String formatDukeResponse(String response) {
+    private static String formatDukeResponse(String response) {
         return HORIZONTAL_LINE + "\n" + response + "\n" + HORIZONTAL_LINE + "\n";
     }
 
-    public static void printWelcomeMessage() {
+    private static void printWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -17,13 +19,29 @@ public class Duke {
         System.out.println(formatDukeResponse(welcomeMessage));
     }
 
-    public static void printExitMessage() {
+    private static void printExitMessage() {
         String exitMessage = "Bye. Hope to see you again soon!";
         System.out.println(formatDukeResponse(exitMessage));
     }
 
-    public static void printEchoMessage(String message) {
-        System.out.println(formatDukeResponse(message));
+    private static void addTask(String taskName) {
+        tasks[taskCount] = taskName;
+        taskCount++;
+    }
+
+    private static void printAddTaskMessage(String taskName) {
+        System.out.println(formatDukeResponse("added: " + taskName));
+    }
+
+    private static void printTasksMessage() {
+        StringBuilder tasksMessage = new StringBuilder();
+
+        for (int i = 0; i < taskCount; i++) {
+            int taskNumber = i + 1;
+            tasksMessage.append("\n").append(taskNumber).append(". ").append(tasks[i]);
+        }
+
+        System.out.println(formatDukeResponse(tasksMessage.toString()));
     }
 
     public static void main(String[] args) {
@@ -36,7 +54,12 @@ public class Duke {
                 sc.close();
                 break;
             }
-            printEchoMessage(userInput);
+            if (userInput.equals("list")) {
+                printTasksMessage();
+                continue;
+            }
+            addTask(userInput);
+            printAddTaskMessage(userInput);
         }
 
         printExitMessage();
