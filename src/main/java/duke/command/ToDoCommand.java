@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Duke;
+import duke.Response;
 import duke.task.ToDoTask;
 
 /**
@@ -10,7 +11,11 @@ public class ToDoCommand implements Command {
 
     @Override
     public void exec(String args) {
-        Duke.getList().addWithResponse(new ToDoTask(args)).print();
+        if (args.isEmpty()) {
+            new Response("☹ OOPS!!! The description of a todo cannot be empty.").print();
+        } else {
+            Duke.getList().addWithResponse(new ToDoTask(args)).print();
+        }
     }
 
     @Override

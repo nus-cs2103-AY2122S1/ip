@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Duke;
+import duke.Response;
 import duke.task.DeadlineTask;
 
 /**
@@ -10,7 +11,11 @@ public class DeadlineCommand implements Command {
 
     @Override
     public void exec(String args) {
-        Duke.getList().addWithResponse(new DeadlineTask(args)).print();
+        if (args.isEmpty()) {
+            new Response("☹ OOPS!!! The description of a deadline cannot be empty.").print();
+        } else {
+            Duke.getList().addWithResponse(new DeadlineTask(args)).print();
+        }
     }
 
     @Override

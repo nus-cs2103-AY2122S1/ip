@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Duke;
+import duke.Response;
 import duke.task.EventTask;
 
 /**
@@ -10,7 +11,11 @@ public class EventCommand implements Command {
 
     @Override
     public void exec(String args) {
-        Duke.getList().addWithResponse(new EventTask(args)).print();
+        if (args.isEmpty()) {
+            new Response("☹ OOPS!!! The description of an event cannot be empty.").print();
+        } else {
+            Duke.getList().addWithResponse(new EventTask(args)).print();
+        }
     }
 
     @Override
