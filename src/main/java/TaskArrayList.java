@@ -10,7 +10,7 @@ public class TaskArrayList extends ArrayList<Task> {
 
 
     public String newLength(){
-        return String.format("Now you have 5 tasks in the list.");
+        return String.format("Now you have %d tasks in the list.",this.size());
     }
 
     /**
@@ -27,7 +27,7 @@ public class TaskArrayList extends ArrayList<Task> {
         return out;
     }
     public String markDone(int index){
-        if (index >= this.size()){
+        if (index > this.size()){
             return String.format("task %d not found",index);
         }
         this.get(index-1).markDone();
