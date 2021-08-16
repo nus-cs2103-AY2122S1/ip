@@ -1,7 +1,29 @@
-Hello from
- ____        _        
+[36m ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
-
+[0m
+🤖: Hello! I'm Duke
+🤖: What can I do for you?
+🤖: Got it. I've added this task:
+	[T] [ ] buy milk
+🤖: Now you have 1 task in the list.
+🤖: Got it. I've added this task:
+	[D] [ ] return book (by: June 6th)
+🤖: Now you have 2 tasks in the list.
+🤖: Got it. I've added this task:
+	[E] [ ] project meeting (at: Aug 6th 2-4pm)
+🤖: Now you have 3 tasks in the list.
+🤖: Here are the tasks in your list:
+	1. [T] [ ] buy milk
+	2. [D] [ ] return book (by: June 6th)
+	3. [E] [ ] project meeting (at: Aug 6th 2-4pm)
+🤖: Nice! I've marked this task as done:
+	 [T] [X] buy milk
+🤖: Here are the tasks in your list:
+	1. [T] [X] buy milk
+	2. [D] [ ] return book (by: June 6th)
+	3. [E] [ ] project meeting (at: Aug 6th 2-4pm)
+🤖: Unknown command!
+🤖: Bye. Hope to see you again soon!
