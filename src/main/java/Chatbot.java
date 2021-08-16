@@ -1,10 +1,12 @@
 import java.util.Scanner;
 
 public class Chatbot {
-    String name;
+    private final String name;
+    private Storage storage;
 
     Chatbot(String name) {
         this.name = name;
+        this.storage = new Storage();
     }
 
     void initialize() {
@@ -31,22 +33,21 @@ public class Chatbot {
     }
 
     boolean parseInput(String input) {
-        if (endListening(input)) {
-            printDashedLine();
+        printDashedLine();
+        if (input.equals("bye")) {
             System.out.println("Goodbye human. See you soon!");
-
             return false;
+        } else if (input.equals("list")) {
+            storage.listItems();
+            printDashedLine();
+            return true;
         }
 
-        printDashedLine();
-        System.out.println(input);
+        this.storage = storage.add(input);
+        System.out.printf("Item succesfully added: %s%n", input);
         printDashedLine();
 
         return true;
-    }
-
-    boolean endListening(String input) {
-        return input.equals("bye");
     }
 
     void printDashedLine() {
