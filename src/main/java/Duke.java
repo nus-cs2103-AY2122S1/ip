@@ -22,31 +22,69 @@ public class Duke {
                 String input = scanner.nextLine();
                 printLine();
                 String[] inputArr = input.split(" ", 2);
-                switch (inputArr[0]) {
-                    case "todo":
-                        addTask(new Todo(inputArr[1]));
-                        break;
-                    case "deadline":
-                        String[] messageArr = inputArr[1].split(" /by ", 2);
-                        addTask(new Deadline(messageArr[0], messageArr[1]));
-                        break;
-                    case "event":
-                        messageArr = inputArr[1].split(" /at ", 2);
-                        addTask(new Event(messageArr[0], messageArr[1]));
-                        break;
-                    case "done":
-                        int number = Integer.parseInt(inputArr[1]);
-                        System.out.println("    Nice! I've marked this task as done: ");
-                        list.get(number - 1).markedAsDone();
-                        System.out.println("      " + list.get(number - 1).toString());
-                        break;
-                    case "list":
-                        listItems();
-                        break;
-                    case "bye":
-                        System.out.println("    " + "Bye. Hope to see you again soon!");
-                        run = false;
-                        break;
+                try {
+                    if (inputArr.length < 1) {
+                        throw new DukeException("You didn't put any commands.");
+                    }
+                    String[] messageArr = new String[2];
+                    switch (inputArr[0]) {
+                        case "todo":
+                            if (inputArr.length < 2) {
+                                throw new DukeException("The description of a todo cannot be empty.");
+                            }
+                            addTask(new Todo(inputArr[1]));
+                            break;
+                        case "deadline":
+                            if (inputArr.length < 2) {
+                                throw new DukeException("The description of a deadline cannot be empty.");
+                            }
+                            messageArr = inputArr[1].split(" /by ", 2);
+                            addTask(new Deadline(messageArr[0], messageArr[1]));
+                            break;
+                        case "event":
+                            if (inputArr.length < 2) {
+                                throw new DukeException("The description of a event cannot be empty.");
+                            }
+                            messageArr = inputArr[1].split(" /at ", 2);
+                            addTask(new Event(messageArr[0], messageArr[1]));
+                            break;
+                        case "done":
+                            if (inputArr.length < 2) {
+                                throw new DukeException("Please specify which task to delete.");
+                            }
+                            int number = Integer.parseInt(inputArr[1]);
+                            if (list.get(number - 1) == null) {
+                                throw new DukeException("This task doesn't exist");
+                            }
+                            System.out.println("    Nice! I've marked this task as done: ");
+                            list.get(number - 1).markedAsDone();
+                            System.out.println("      " + list.get(number - 1).toString());
+                            break;
+                        case "list":
+                            listItems();
+                            break;
+                        case "bye":
+                            System.out.println("    " + "Bye. Hope to see you again soon!");
+                            run = false;
+                            break;
+                        case "remove":
+                            if (inputArr.length < 2) {
+                                throw new DukeException("Please specify which task to delete.");
+                            }
+                            int removeIndex = Integer.parseInt(inputArr[1]);
+                            if (list.get(removeIndex - 1) == null) {
+                                throw new DukeException("This task doesn't exist");
+                            }
+                            System.out.println("    Noted. I've removed this task: ");
+                            System.out.println("      " + list.get(removeIndex - 1).toString());
+                            list.remove(removeIndex - 1);
+                            System.out.println("     Now you have " + list.size() + " tasks in the list.");
+                            break;
+                        default:
+                            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    }
+                } catch (DukeException de) {
+                    System.out.println("    " + de.getMessage());
                 }
                 printLine();
             }
