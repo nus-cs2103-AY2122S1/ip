@@ -1,5 +1,5 @@
+read book
+return book
+5 + 5
 list
-blah
-??
-5
 bye
