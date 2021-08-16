@@ -181,12 +181,6 @@ public class Duke {
                     }
                     printHorizontalLine();
 
-                } catch (NullPointerException e) {
-                    // error encountered when trying to mark a null task as done
-                    printHorizontalLine();
-                    System.out.println("Uh oh! No such task exists.");
-                    printHorizontalLine();
-
                 } catch (NumberFormatException e) {
                     // error encountered when command followed by done is not Number e.g. done one
                     printHorizontalLine();
