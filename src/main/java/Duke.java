@@ -69,9 +69,16 @@ public class Duke {
                 System.out.println(formatReply(reply));
                 continue;
             }
-//            if (userInput.matches("")){
-//                //TODO: EVENTS
-//            }
+            if (userInput.matches("^(event ).+")){
+                String splitName = userInput.split(" ",2)[1];
+                String[] name_at = splitName.split("/at");
+                Task toAdd = new Event(name_at[0],name_at[1]);
+                taskList.add(toAdd);
+                String reply = toAdd.addMsg();
+                reply = taskList.newLength() + "\n"+ reply;
+                System.out.println(formatReply(reply));
+                continue;
+            }
 
             switch(userInput){
                 case "bye":
