@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private Task[] listArr = new Task[100];
+    private String[] listArr = new String[100];
     private int listArrCount = 0;
 
     public class Task {
@@ -48,10 +48,10 @@ public class Duke {
         String listItem = scanner.nextLine();
         if(listItem.equals("bye")) {
             System.out.println("=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=\n"
-                    + "  Byebye from the List Adder!\n"
+                    + "  Bye. Hope to see you again soon!\n"
                     + "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=");
-        }  else {
-            if (listItem.equals("list")){
+        } else {
+            if (listItem.equals("list")) {
                 String listString = "";
                 if(listArr[0]==null) {
                     listString = "\n Your list is empty!";
@@ -67,35 +67,69 @@ public class Duke {
                         + " This be ye list of things to do Sire: "
                         + listString + "\n"
                         + "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=");
-            } else if (listItem.length() > 4 && listItem.substring(0,4).equals("done")){
-                String number = listItem.substring(5,listItem.length());
-                System.out.println(number);
-                try{
-                    int i = Integer.parseInt(number) - 1;
-                    if (i >= listArrCount){
-                        System.out.println(" You don't have that many tasks! \n");
-                    } else {
-                        listArr[i].setDone();
-                        System.out.println("=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=\n"
-                                + "Good job, I have marked the task as done!" + "\n"
-                                + listArr[i].toString() + "\n"
-                                + "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=");
-                    }
-                } catch (NumberFormatException e){
-                    System.out.println("That is not a valid index!\n");
-
-                }
-            } else{
-                listArr[listArrCount] = new Task(listItem);
+            } else {
+                listArr[listArrCount] = listItem;
                 listArrCount++;
                 System.out.println("=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=\n"
-                        + " Here are the tasks in your list:\n"
                         + " added: " + listItem + "\n"
                         + "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=");
             }
             addList();
         }
     }
+//    private void addList() {
+//        Scanner scanner = new Scanner(System.in);
+//        String listItem = scanner.nextLine();
+//        if(listItem.equals("bye")) {
+//            System.out.println("=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=\n"
+//                    + "  Byebye from the List Adder!\n"
+//                    + "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=");
+//        }  else {
+//            if (listItem.equals("list")){
+//                String listString = "";
+//                if(listArr[0]==null) {
+//                    listString = "\n Your list is empty!";
+//                } else {
+//                    for(int i = 0; i<10; i++) {
+//                        if(listArr[i] != null){
+//                            int count = i + 1;
+//                            listString += "\n " + count + ". " + listArr[i];
+//                        }
+//                    }
+//                }
+//                System.out.println("=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=\n"
+//                        + " This be ye list of things to do Sire: "
+//                        + listString + "\n"
+//                        + "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=");
+//            } else if (listItem.length() > 4 && listItem.substring(0,4).equals("done")){
+//                String number = listItem.substring(5,listItem.length());
+//                System.out.println(number);
+//                try{
+//                    int i = Integer.parseInt(number) - 1;
+//                    if (i >= listArrCount){
+//                        System.out.println(" You don't have that many tasks! \n");
+//                    } else {
+//                        listArr[i].setDone();
+//                        System.out.println("=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=\n"
+//                                + "Good job, I have marked the task as done!" + "\n"
+//                                + listArr[i].toString() + "\n"
+//                                + "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=");
+//                    }
+//                } catch (NumberFormatException e){
+//                    System.out.println("That is not a valid index!\n");
+//
+//                }
+//            } else{
+//                listArr[listArrCount] = new Task(listItem);
+//                listArrCount++;
+//                System.out.println("=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=\n"
+//                        + " Here are the tasks in your list:\n"
+//                        + " added: " + listItem + "\n"
+//                        + "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=");
+//            }
+//            addList();
+//        }
+//    }
 
     public static void main(String[] args) {
         String logo = "                     ,,       \n" +
@@ -132,9 +166,8 @@ public class Duke {
 
         System.out.println("Hello from\n" + logo);
         System.out.println("Let's Talk!\n");
-//        System.out.println("What would you like me to add to the list?");
+        System.out.println("What would you like me to add to the list?");
         Duke duke = new Duke();
-        duke.echo();
-//        duke.addList();
+        duke.addList();
     }
 }
