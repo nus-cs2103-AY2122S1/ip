@@ -14,13 +14,6 @@ public class Duke {
         ArrayList<Task> lst = new ArrayList<>();
         String command;
 
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
-
         System.out.println(INTRO);
         while (true) {
             try {
@@ -52,7 +45,7 @@ public class Duke {
                     String desc = command.substring(4);
 
                     if (desc.isEmpty()) {
-                        throw new ToDoException();
+                        throw new DukeException("todo");
                     }
 
                     ToDo toDo = new ToDo(command.substring(5));
@@ -65,7 +58,7 @@ public class Duke {
                     String desc = command.substring(5);
 
                     if (desc.isEmpty()) {
-                        throw new EventException();
+                        throw new DukeException("event");
                     }
 
                     int escapeIndex = command.lastIndexOf("/");
@@ -78,7 +71,7 @@ public class Duke {
                     String desc = command.substring(8);
 
                     if (desc.isEmpty()) {
-                        throw new DeadlineException();
+                        throw new DukeException("deadline");
                     }
 
                     int escapeIndex = command.lastIndexOf("/");
@@ -87,13 +80,24 @@ public class Duke {
                     System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
                             + "Now you have %d tasks in this list.\n", lst.size());
 
+                } else if (command.substring(0, 6).equals("delete")){
+                    int index = Integer.parseInt(command.substring(7)) - 1;
+
+                    if (index >= lst.size()) {
+                        throw new DeleteException();
+                    }
+
+                    Task currentTask = lst.get(index);
+                    lst.remove(index);
+                    System.out.format("Noted. I've removed this task:\n" + currentTask.getStatusAndDescription() + "\nNow you have %d tasks in the list\n", lst.size());
+
                 } else {
                     lst.add(new Task(command));
                     System.out.println("added: " + command);
                 }
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means! Please fill in a valid command");
-            } catch (EventException | ToDoException | DeadlineException e) {
+            } catch (DukeException | DeleteException e) {
                 System.out.println(e.getMessage());
             }
         }
