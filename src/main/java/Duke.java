@@ -23,55 +23,78 @@ public class Duke {
 
         System.out.println(INTRO);
         while (true) {
-            command = sc.nextLine();
+            try {
+                command = sc.nextLine();
 
-            if (command.equals("bye")) {
-                System.out.println(OUTRO);
-                break;
+                if (command.equals("bye")) {
+                    System.out.println(OUTRO);
+                    break;
 
-            } else if (command.equals("list")) {
+                } else if (command.equals("list")) {
 
-                System.out.println("Here are the tasks in your list:");
+                    System.out.println("Here are the tasks in your list:");
 
-                for (int i = 0; i < lst.size(); i++) {
-                    Task currentTask = lst.get(i);
-                    System.out.println((i + 1) + "." + currentTask.getStatusAndDescription() );
+                    for (int i = 0; i < lst.size(); i++) {
+                        Task currentTask = lst.get(i);
+                        System.out.println((i + 1) + "." + currentTask.getStatusAndDescription());
+                    }
+
+                } else if (command.substring(0, 4).equals("done")) {
+
+                    int index = Integer.parseInt(command.substring(5)) - 1;
+                    String subtext = "Nice! I've marked this task as done:\n";
+
+                    Task currentTask = lst.get(index);
+                    currentTask.setDone();
+                    System.out.println(subtext + currentTask.getStatusAndDescription());
+
+                } else if (command.substring(0, 4).equals("todo")) {
+                    String desc = command.substring(4);
+
+                    if (desc.isEmpty()) {
+                        throw new ToDoException();
+                    }
+
+                    ToDo toDo = new ToDo(command.substring(5));
+                    lst.add(toDo);
+                    System.out.format("Got it. I've added this task:\n" + toDo.getStatusAndDescription() + "\n"
+                            + "Now you have %d tasks in this list.\n", lst.size());
+
+                } else if (command.substring(0, 5).equals("event")) {
+
+                    String desc = command.substring(5);
+
+                    if (desc.isEmpty()) {
+                        throw new EventException();
+                    }
+
+                    int escapeIndex = command.lastIndexOf("/");
+                    Deadline deadline = new Deadline(command.substring(5, escapeIndex - 1), command.substring(escapeIndex + 4));
+                    lst.add(deadline);
+                    System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
+                            + "Now you have %d tasks in this list.\n", lst.size());
+                } else if (command.substring(0, 8).equals("deadline")) {
+
+                    String desc = command.substring(8);
+
+                    if (desc.isEmpty()) {
+                        throw new DeadlineException();
+                    }
+
+                    int escapeIndex = command.lastIndexOf("/");
+                    Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), command.substring(escapeIndex + 4));
+                    lst.add(deadline);
+                    System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
+                            + "Now you have %d tasks in this list.\n", lst.size());
+
+                } else {
+                    lst.add(new Task(command));
+                    System.out.println("added: " + command);
                 }
-
-            }  else if (command.substring(0, 4).equals("done")) {
-
-            int index = Integer.parseInt(command.substring(5)) - 1;
-            String subtext = "Nice! I've marked this task as done:\n";
-
-            Task currentTask = lst.get(index);
-            currentTask.setDone();
-            System.out.println(subtext + currentTask.getStatusAndDescription());
-
-            } else if (command.substring(0, 4).equals("todo")) {
-
-                ToDo toDo = new ToDo(command.substring(5));
-                lst.add(toDo);
-                System.out.format("Got it. I've added this task:\n" + toDo.getStatusAndDescription() + "\n"
-                        + "Now you have %d tasks in this list.\n", lst.size());
-
-            } else if (command.substring(0, 8).equals("deadline")) {
-
-                int escapeIndex = command.lastIndexOf("/");
-                Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), command.substring(escapeIndex + 4));
-                lst.add(deadline);
-                System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
-                        + "Now you have %d tasks in this list.\n", lst.size());
-
-            } else if (command.substring(0, 5).equals("event")) {
-
-                int escapeIndex = command.lastIndexOf("/");
-                Deadline deadline = new Deadline(command.substring(6, escapeIndex - 1), command.substring(escapeIndex + 4));
-                lst.add(deadline);
-                System.out.format("Got it. I've added this task:\n" + deadline.getStatusAndDescription() + "\n"
-                        + "Now you have %d tasks in this list.\n", lst.size());
-            } else {
-                lst.add(new Task(command));
-                System.out.println("added: " + command);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means! Please fill in a valid command");
+            } catch (EventException | ToDoException | DeadlineException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
