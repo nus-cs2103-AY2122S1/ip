@@ -7,6 +7,7 @@ public class Task {
     protected boolean isDone;
     private TYPE type;
 
+    // ToDos, DeadLines, Events, Others(Placeholder)
     protected enum TYPE {
         T, D, E, O
     }
