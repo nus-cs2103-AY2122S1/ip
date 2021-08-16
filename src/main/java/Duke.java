@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,9 +10,8 @@ public class Duke {
         final String OUTRO = "Bye. Hope to see you again soon!";
         Scanner sc = new Scanner(System.in);
 
+        ArrayList<String> lst = new ArrayList<>();
         String command;
-        String listCommand = "";
-        int i = 1;
 
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -29,11 +29,12 @@ public class Duke {
                 break;
 
             } else if (command.equals("list")) {
-                System.out.println(listCommand);
+                for (int i = 0; i < lst.size(); i++) {
+                    System.out.println((i + 1) + ". " + lst.get(i));
+                }
 
             } else {
-                listCommand = listCommand + i + ". " + command + "\n";
-                i++;
+                lst.add(command);
                 System.out.println("added: " + command);
             }
         }
