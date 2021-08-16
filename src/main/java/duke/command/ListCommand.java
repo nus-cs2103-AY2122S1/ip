@@ -10,4 +10,9 @@ public class ListCommand implements Command {
     public void exec(String args) {
         Duke.getList().currentListResponse().print();
     }
+
+    @Override
+    public String getLabel() {
+        return "list";
+    }
 }

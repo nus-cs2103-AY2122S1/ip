@@ -19,4 +19,9 @@ public class DoneCommand implements Command {
         }
         Duke.getList().markCompleted(i).print();
     }
+
+    @Override
+    public String getLabel() {
+        return "done";
+    }
 }

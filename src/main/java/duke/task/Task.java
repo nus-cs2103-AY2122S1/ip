@@ -5,7 +5,7 @@ package duke.task;
  */
 public class Task {
     private boolean completed;
-    private String name;
+    protected String name;
 
     public Task(String name) {
         this.completed = false;

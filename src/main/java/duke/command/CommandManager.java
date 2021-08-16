@@ -3,6 +3,7 @@ package duke.command;
 import java.util.HashMap;
 import java.util.Map;
 import duke.Duke;
+import duke.task.Task;
 
 /**
  * Manager of all Duke's commands. All commands has to registered/added to its
@@ -16,13 +17,13 @@ public class CommandManager {
     }
 
     /**
-     * Puts a command under its registry, mapped to it's label.
+     * Puts commands under its registry, mapped to its label.
      * 
-     * @param label   of the command
      * @param command to be registered
      */
-    public void registerCommand(String label, Command command) {
-        this.registry.put(label, command);
+    public void registerCommands(Command... commands) {
+        for (Command command : commands)
+            this.registry.put(command.getLabel(), command);
     }
 
     /**
@@ -47,6 +48,6 @@ public class CommandManager {
      * @param input of the user
      */
     private void defaultExec(String input) {
-        Duke.getList().addWithResponse(input).print();
+        Duke.getList().addWithResponse(new Task(input)).print();
     }
 }

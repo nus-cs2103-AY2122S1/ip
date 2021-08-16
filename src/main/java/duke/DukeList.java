@@ -19,12 +19,13 @@ public class DukeList {
     /**
      * Add a task to the list and return a response on the added task.
      * 
-     * @param element to be added to the list
+     * @param task to be added to the list
      * @return response to the addition
      */
-    public Response addWithResponse(String element) {
-        list.add(new Task(element));
-        return new Response("added: " + element);
+    public Response addWithResponse(Task task) {
+        this.list.add(task);
+        return new Response("Got it. I've added this task:\n" + task + "\nNow you have " + this.list.size()
+                + " task(s) in the list.");
     }
 
     /**
@@ -34,7 +35,7 @@ public class DukeList {
      */
     public Response currentListResponse() {
         String message = IntStream.range(0, this.list.size()).mapToObj(i -> (i + 1) + ". " + list.get(i))
-                .reduce((str1, str2) -> str1 + "\n" + str2).orElse("You have not added any elements!");
+                .reduce((str1, str2) -> str1 + "\n" + str2).orElse("You have not added any tasks!");
         return new Response(message);
     }
 
