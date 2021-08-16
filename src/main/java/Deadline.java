@@ -1,14 +1,14 @@
 public class Deadline extends Task {
 
-    private String Deadline;
+    private String deadline;
 
-    public Deadline(String taskName, String Deadline) {
+    public Deadline(String taskName, String deadline) {
         super(taskName);
-        this.Deadline = Deadline;
+        this.deadline = deadline;
     }
 
     public String getWhen() {
-        return this.Deadline;
+        return this.deadline;
     }
 
     @Override

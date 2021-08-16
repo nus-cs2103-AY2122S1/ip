@@ -42,6 +42,7 @@ public class Duke {
     public static void greet() {
         System.out.println("Hello! I'm Duii, your personal assistant!");
         System.out.println("What do you need help with?");
+        System.out.println();
     }
 
     /**
@@ -51,27 +52,30 @@ public class Duke {
      */
     public static void add(Task task) {
         list[listLength] = task;
-        System.out.println("New Task? I've added it to the list: ");
+        System.out.println("New Task? I've added it to the list:");
         System.out.println(task.displayInfo());
         listLength++;
         System.out.println(String.format("Now you have %d task(s) in the list.", listLength));
+        System.out.println();
     }
 
     public static void markDone(int id) {
         System.out.println("You've finished the task? Good job!");
-        System.out.println("This task has been marked as done: ");
+        System.out.println("This task has been marked as done:");
         list[id - 1].complete();
-        System.out.println(String.format("[%s] %s", list[id - 1].getStatus(), list[id - 1].getTaskName()));
+        System.out.println(list[id - 1].displayInfo());
+        System.out.println();
     }
 
     /**
      * This method enumerates all the tasks in the list.
      */
     public static void list() {
-        System.out.println("Here's your current list: ");
+        System.out.println("Here's your current list:");
         for (int i = 0; i < listLength; i++) {
             System.out.println(String.format("%d. %s", i + 1, list[i].displayInfo()));
         }
+        System.out.println();
     }
 
     /**
