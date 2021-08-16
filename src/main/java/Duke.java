@@ -32,6 +32,7 @@ public class Duke {
         String lastInput = null;
 
         while (lastInput != "bye") {
+            System.out.println("");
             lastInput = currScanner.nextLine();
 
             dukeSays(lastInput);
@@ -44,6 +45,7 @@ public class Duke {
      * This would print the message between 2 line separators.
      */
     private static void dukeSays(String printThis) {
+        System.out.println("");
         System.out.println(sepLine);
         System.out.println(printThis);
         System.out.println(sepLine);
