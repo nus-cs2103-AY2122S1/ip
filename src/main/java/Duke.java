@@ -1,11 +1,13 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Duke {
     /**
      * Simple string array to store inputs
      **/
-    private final Task[] list;
+    private final ArrayList<Task> list;
     /**
      * Simple index to keep track of the current element in the list
      **/
@@ -15,7 +17,7 @@ public class Duke {
      * Basic constructor to initialise the list
      **/
     public Duke() {
-        this.list = new Task[100];
+        this.list = new ArrayList<>();
         this.index = 0;
     }
 
@@ -25,7 +27,7 @@ public class Duke {
      * @param task The text to be appended.
      */
     private void append(Task task) {
-        this.list[index] = task;
+        this.list.add(task);
         this.index++;
     }
 
@@ -37,7 +39,7 @@ public class Duke {
         for (int i = 0; i < this.index; i++) {
             // i + 1 is used to start indexing from 1
             output.append(i + 1).append(". ");
-            output.append(this.list[i].toString());
+            output.append(this.list.get(i).toString());
             // ensure the newline is not added on the last element
             if (i != this.index - 1) {
                 output.append("\n");
@@ -71,7 +73,7 @@ public class Duke {
                 if (lookup < 1) {
                     throw new DukeException(String.format("The specified task number %d does not exist. Enter a number that is at least 1.", lookup));
                 } else if (lookup < this.index + 1) {
-                    Task task = this.list[lookup - 1];
+                    Task task = this.list.get(lookup - 1);
                     task.markAsDone();
                     this.printMsg(String.format("Nice! I've marked this task as done:\n  %s", task));
                 } else {
@@ -85,7 +87,28 @@ public class Duke {
         } else {
             System.out.println(Arrays.toString(splitted));
         }
+    }
 
+
+    private Task delete(String input) throws DukeException {
+        String[] splitted = input.split("\\s");
+        if (splitted.length < 2) {
+            throw new DukeException("Command is missing a positional argument 'index'.");
+        } else {
+            try {
+                int index = Integer.parseInt(splitted[1]) - 1;
+                if (index < 0 || index >= this.index) {
+                    throw new DukeException("Invalid index specified.");
+                } else {
+                    Task itemToRemove = this.list.get(index);
+                    this.list.remove(index);
+                    this.index--;
+                    return itemToRemove;
+                }
+            } catch (NumberFormatException e) {
+                throw new DukeException("Command contains an illegitimate character for positional argument 'index'");
+            }
+        }
 
     }
 
@@ -172,6 +195,11 @@ public class Duke {
                 text, count));
     }
 
+    private void printDeleted(String text) {
+        String count = String.format("Now you have %d %s in the list", this.index, this.index > 1 ? "tasks" : "task");
+        this.printMsg(String.format("Noted. I've removed this task:\n  %s\n%s", text, count));
+    }
+
     /**
      * Method that listens and scans for user input.
      * Program will exit when the command "bye" is given to the scanner.
@@ -184,30 +212,31 @@ public class Duke {
             String scannedLine = scanner.nextLine();
             String text = scannedLine.toLowerCase();
             // get the first word of the text
-            String command = text.split(" ")[0];
-            switch (command.toLowerCase()) {
+            Optional<DukeCommands> prefix = DukeCommands.getCommand(text.split(" ")[0]);
+            DukeCommands command = prefix.orElseGet(() -> DukeCommands.INVALID);
+            switch (command) {
                 // break out of the while loop
-                case "bye": {
+                case BYE: {
                     this.printMsg("Bye. Hope to see you again soon!");
                     scanner.close();
                     terminate = true;
                 }
                 // list out the items in the list if "list" is called
-                case ("list"): {
+                case LIST: {
                     this.list();
                     break;
                 }
 
-                case ("done"): {
+                case DONE: {
                     try {
                         this.done(text);
-                    } catch(DukeException e) {
+                    } catch (DukeException e) {
                         this.printMsg(e.toString());
                     }
                     break;
                 }
 
-                case ("event"): {
+                case EVENT: {
                     try {
                         Event event = this.event(text);
                         this.printAdded(event.toString());
@@ -217,7 +246,7 @@ public class Duke {
                     break;
                 }
 
-                case ("deadline"): {
+                case DEADLINE: {
                     try {
                         Deadline deadline = this.deadline(text);
                         this.printAdded(deadline.toString());
@@ -227,10 +256,20 @@ public class Duke {
                     break;
                 }
 
-                case ("todo"): {
+                case TODO: {
                     try {
                         Todo todo = this.todo(text);
                         this.printAdded(todo.toString());
+                    } catch (DukeException e) {
+                        this.printMsg(e.toString());
+                    }
+                    break;
+
+                }
+                case DELETE: {
+                    try {
+                        Task deleted = this.delete(text);
+                        this.printDeleted(deleted.toString());
                     } catch (DukeException e) {
                         this.printMsg(e.toString());
                     }
@@ -249,8 +288,28 @@ public class Duke {
     /**
      * Enum for handling user command
      **/
-    public enum Commands {
-        BYE, LIST, DONE
+    public enum DukeCommands {
+        BYE("bye"),
+        LIST("list"),
+        DONE("done"),
+        EVENT("event"),
+        DELETE("delete"),
+        DEADLINE("deadline"),
+        TODO("todo"),
+        INVALID("invalid");
+
+
+        final String command;
+
+        DukeCommands(String command) {
+            this.command = command;
+        }
+
+        public static Optional<DukeCommands> getCommand(String command) {
+            return Arrays.stream(DukeCommands.values()).filter(x ->
+                    command.startsWith(x.command)
+            ).findFirst();
+        }
     }
 
 }
