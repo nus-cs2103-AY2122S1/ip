@@ -21,11 +21,12 @@ public class Kermit {
 
         while (true) {
             command = sc.nextLine();
+            // Quit program
             if (command.equals("bye")) {
                 System.out.println(formatText(goodbyeText));
                 break;
             } else {
-                System.out.println(formatText(command));
+                System.out.println(formatText("Added: " + command));
             }
         }
     }
