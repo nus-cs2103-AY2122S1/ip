@@ -39,6 +39,14 @@ public class Duke {
 		oh.print();
 	}
 
+	private void delete(int index) {
+		oh.add("Noted. I've removed this task:");
+		oh.add("  " + tasks.get(index));
+		tasks.remove(index);
+		oh.add(String.format("Now you have %d task(s) in the list.", tasks.size()));
+		oh.print();
+	}
+
 	private void display() {
 		if (tasks.isEmpty()) {
 			oh.add("Your list of tasks is empty!");
@@ -83,6 +91,10 @@ public class Duke {
 				} else if (input.split(" ")[0].equals("done")) {
 					/* todo: catch format and ioob exceptions */
 					markDone(Integer.parseInt(input.split(" ")[1]) - 1);
+
+				} else if (input.split(" ")[0].equals("delete")) {
+					/* todo: catch format and ioob exceptions */
+					delete(Integer.parseInt(input.split(" ")[1]) - 1);
 
 				} else {
 					store(input);
