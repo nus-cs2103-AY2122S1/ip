@@ -8,6 +8,10 @@ public class TaskList {
         list.add(task);
     }
 
+    public Task markTaskAsDone(int index) {
+        return list.get(index - 1).markAsDone();
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("Here are the tasks in your list:\n");

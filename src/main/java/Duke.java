@@ -11,17 +11,24 @@ public class Duke {
             String input = sc.nextLine();
             if (input.equals("bye")) break;
             else if (input.equals("list")) echo(list.toString());
+            else if (input.contains("done")) {
+                input = input.substring(5);
+                int index = Integer.parseInt(input);
+                markTaskAsDone(index);
+            }
             else addTask(input);
         }
         exit();
     }
 
     private static void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = """
+                 ____        _       \s
+                |  _ \\ _   _| | _____\s
+                | | | | | | | |/ / _ \\
+                | |_| | |_| |   <  __/
+                |____/ \\__,_|_|\\_\\___|
+                """;
         System.out.println(LINE);
         System.out.println(logo);
         System.out.println("Hi, I'm Duke, your Personal Assistant Chatbot\n" +
@@ -44,6 +51,12 @@ public class Duke {
     private static void addTask(String task) {
         list.addTask(new Task(task));
         String message = String.format("added: %s", task);
+        echo(message);
+    }
+
+    private static void markTaskAsDone(int index) {
+        Task task = list.markTaskAsDone(index);
+        String message = String.format("Nice! I've marked this task as done:\n   %s", task);
         echo(message);
     }
 }

@@ -11,8 +11,9 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    public void markAsDone() {
+    public Task markAsDone() {
         isDone = true;
+        return this;
     }
 
     @Override
