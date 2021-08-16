@@ -1,0 +1,11 @@
+todo borrow book
+deadline math assignment /by 15 Sep 12pm
+todo read book
+event project meeting /at 7pm
+deadline return book /by 21 Sep 2359H
+todo buy groceries
+list
+done 1
+done 3
+list
+bye
