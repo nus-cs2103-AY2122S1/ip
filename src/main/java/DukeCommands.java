@@ -82,7 +82,8 @@ public enum DukeCommands {
             (Map<String, String> map, ArrayList<Task> list) -> {
 
                 if (!map.containsKey("/by")) {
-                    throw new DukeException("Missing positional argument '/at'.");
+                    throw new DukeException("Missing positional argument " +
+                            "'/by'.");
                 } else if (map.get("deadline") == null || map.get("/by") == null) {
                     throw new DukeException("Deadline body cannot be empty.");
                 } else {
