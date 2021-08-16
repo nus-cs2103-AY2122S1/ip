@@ -38,65 +38,93 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         List<Task> strList = new ArrayList<Task>();
         while(true) {
-            String str = sc.nextLine();
+            try {
+                String str = sc.nextLine();
 
-            if (str.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            }
-            else if (str.equals("list")) {
-                int count = 1;
-                System.out.println("Here are the tasks in your list:");
-                for (Task listItem : strList) {
-                    System.out.println(count + "."
-                            + listItem.toString());
-                    count++;
+                if (str.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                } else if (str.equals("list")) {
+                    int count = 1;
+                    System.out.println("Here are the tasks in your list:");
+                    for (Task listItem : strList) {
+                        System.out.println(count + "."
+                                + listItem.toString());
+                        count++;
+                    }
+                } else if (str.startsWith("done")) {
+                    try {
+                        int doneTaskIndex = Integer.parseInt(str.substring(5)) - 1;
+                        Task doneTask = strList.get(doneTaskIndex);
+                        doneTask.setDone();
+                        System.out.println("Nice! I've marked this task as done:\n"
+                                + "[" + doneTask.getStatusIcon() + "] "
+                                + doneTask.getDescription());
+                    } catch (Exception e) {
+                        throw new DukeDoneException();
+                    }
+                } else if (str.startsWith("todo")) {
+                    if (str.length() > 5) {
+                        Todo newTodo = new Todo(str.replaceFirst("todo", ""));
+                        strList.add(newTodo);
+                        int numOfTasks = strList.size();
+                        System.out.println("Got it. I've added this task:\n"
+                                + newTodo.toString() + "\n"
+                                + "Now you have " + numOfTasks
+                                + " tasks in the list.");
+                    } else {
+                        throw new DukeTodoException();
+                    }
+                } else if (str.startsWith("deadline")) {
+                    try {
+                        String desc = str.split("/")[0]
+                                .replaceFirst("deadline", "");
+                        String by = str.split("/by")[1];
+                        Deadline newDeadline = new Deadline(desc, by);
+                        strList.add(newDeadline);
+                        int numOfTasks = strList.size();
+                        System.out.println("Got it. I've added this task:\n"
+                                + newDeadline.toString() + "\n"
+                                + "Now you have " + numOfTasks
+                                + " tasks in the list.");
+                    } catch (Exception e) {
+                        throw new DukeDeadlineException();
+                    }
+                } else if (str.startsWith("event")) {
+                    try {
+                        String desc = str.split("/")[0]
+                                .replaceFirst("event", "");
+                        String startEnd = str.split("/at")[1];
+                        Event newEvent = new Event(desc, startEnd);
+                        strList.add(newEvent);
+                        int numOfTasks = strList.size();
+                        System.out.println("Got it. I've added this task:\n"
+                                + newEvent.toString() + "\n"
+                                + "Now you have " + numOfTasks
+                                + " tasks in the list.");
+                    } catch (Exception e) {
+                        throw new DukeEventException();
+                    }
+                } else {
+//                    strList.add(new Task(str));
+//                    System.out.println("added: " + str);
+                    throw new DukeUnknownException();
                 }
-            }
-            else if (str.startsWith("done")){
-                int doneTaskIndex = Integer.parseInt(str.substring(5)) - 1;
-                Task doneTask = strList.get(doneTaskIndex);
-                doneTask.setDone();
-                System.out.println("Nice! I've marked this task as done:\n"
-                                    + "[" + doneTask.getStatusIcon() + "] "
-                                    + doneTask.getDescription());
-            }
-            else if (str.startsWith("todo")) {
-                Todo newTodo = new Todo(str.replaceFirst("todo", ""));
-                strList.add(newTodo);
-                int numOfTasks = strList.size();
-                System.out.println("Got it. I've added this task:\n"
-                                    + newTodo.toString() + "\n"
-                                    + "Now you have " + numOfTasks
-                                    + " tasks in the list.");
-            }
-            else if (str.startsWith("deadline")) {
-                String desc = str.split("/")[0]
-                        .replaceFirst("deadline", "");
-                String by = str.split("/by")[1];
-                Deadline newDeadline = new Deadline(desc, by);
-                strList.add(newDeadline);
-                int numOfTasks = strList.size();
-                System.out.println("Got it. I've added this task:\n"
-                        + newDeadline.toString() + "\n"
-                        + "Now you have " + numOfTasks
-                        + " tasks in the list.");
-            }
-            else if (str.startsWith("event")) {
-                String desc = str.split("/")[0]
-                        .replaceFirst("event", "");
-                String startEnd = str.split("/at")[1];
-                Event newEvent = new Event(desc, startEnd);
-                strList.add(newEvent);
-                int numOfTasks = strList.size();
-                System.out.println("Got it. I've added this task:\n"
-                        + newEvent.toString() + "\n"
-                        + "Now you have " + numOfTasks
-                        + " tasks in the list.");
-            }
-            else {
-                strList.add(new Task(str));
-                System.out.println("added: " + str);
+            } catch (DukeUnknownException e) {
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means.");
+                continue;
+            } catch (DukeDoneException e) {
+                System.out.println("OOPS!!! The index of a DONE command cannot be empty.");
+                continue;
+            } catch (DukeTodoException e) {
+                System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                continue;
+            } catch (DukeDeadlineException e) {
+                System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                continue;
+            } catch (DukeEventException e) {
+                System.out.println("OOPS!!! The description of a event cannot be empty.");
+                continue;
             }
         }
     }
