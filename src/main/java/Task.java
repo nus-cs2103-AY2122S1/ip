@@ -1,5 +1,5 @@
-/**
- *
+/** Represents a task that can be completed
+ * @author mokdarren
  */
 public class Task {
     protected String description;
@@ -14,10 +14,17 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Getter for isDone status
+     * @return "X" or " "
+     */
     public String getStatus() {
         return (isDone ? "X" : " ");
     }
 
+    /**
+     * Marks task as done
+     */
     public void markAsDone() {
         this.isDone = true;
     }

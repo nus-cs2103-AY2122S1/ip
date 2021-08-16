@@ -1,6 +1,13 @@
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    /**
+     * Our main method. Starts up the chatbot and waits for user inputs
+     * @param args Command Line Arguments
+     */
     public static void main(String[] args) {
         String div = "____________________________________________________________\n";
         System.out.println(div + "Hello! I'm Bobby\nWhat can I do for you?\n" + div);
@@ -9,25 +16,48 @@ public class Duke {
         int totalTasks = 0;
         while (true) {
             String userInput = sc.nextLine();
-            String[] userInputList = userInput.split(" ");
-            if (userInput.equals("bye")) {
+            List<String> userInputList = new LinkedList<String>(Arrays.asList(userInput.split(" ")));
+            String command = userInputList.get(0);
+            if (command.equals("bye")) {
                 System.out.println(div + "Bye. Hope to see you again soon!\n" + div);
-            } else if (userInput.equals("list")) {
+            } else if (command.equals("list")) {
                 System.out.println(div + "Here are the tasks in your list:");
                 for (int i = 0; i < totalTasks; i++) {
                     System.out.println((i + 1) + ". " + tasks[i]);
                 }
                 System.out.println(div);
-            } else if (userInputList[0].equals("done")) {
-                Task taskCompleted = tasks[Integer.parseInt(userInputList[1])-1];
+            } else if (command.equals("done")) {
+                Task taskCompleted = tasks[Integer.parseInt(userInputList.get(1)) - 1];
                 taskCompleted.markAsDone();
                 System.out.println(div + "Nice! I've marked this task as done:");
                 System.out.println("  " + taskCompleted + "\n" + div);
-            } else {
+            }
+            else {
                 // if not a specified command, add new task to list
-                tasks[totalTasks] = new Task(userInput);
+                // remove first command string
+                userInputList.remove(0);
+                if (command.equals("todo")) {
+                    String description = String.join(" ",userInputList);
+                    tasks[totalTasks] = new ToDo(description);
+                } else {
+                    if (command.equals("deadline")) {
+                        //split description and by
+                        String[] userInputArgs = userInput.split("/by ");
+                        String description = userInputArgs[0];
+                        String by = userInputArgs[1];
+                        tasks[totalTasks] = new Deadline(description, by);
+                    } else if (command.equals("event")){
+                        //split description and at
+                        String[] userInputArgs = userInput.split("/at ");
+                        String description = userInputArgs[0];
+                        String at = userInputArgs[1];
+                        tasks[totalTasks] = new Event(description, at);
+                    }
+                }
                 totalTasks++;
-                System.out.println(div + "added: " + userInput + "\n" + div);
+                System.out.println(div + "Got it. I've added this task:\n  " + tasks[totalTasks - 1] + "\n"
+                        + "Now you have " + totalTasks + " tasks in the list.\n" + div);
+
             }
         }
     }
