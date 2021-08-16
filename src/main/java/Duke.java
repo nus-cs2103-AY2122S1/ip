@@ -11,6 +11,7 @@ public class Duke {
             if (input.equals("bye")) break;
             echo(input);
         }
+        exit();
     }
 
     private static void greet() {
@@ -29,6 +30,12 @@ public class Duke {
     private static void echo(String message) {
         System.out.println(LINE);
         System.out.println(message);
+        System.out.println(LINE);
+    }
+
+    private static void exit() {
+        System.out.println(LINE);
+        System.out.println("Goodbye, hope to see you again soon!");
         System.out.println(LINE);
     }
 }
