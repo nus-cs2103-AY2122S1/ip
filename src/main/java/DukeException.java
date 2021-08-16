@@ -2,7 +2,7 @@
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 6. Delete
+ * Current Progress: Level 5. Handle Errors
  *
  * Description:
  * Class to encapsulates all possible exceptions that will be

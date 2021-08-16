@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 6. Delete
+ * Current Progress: Level 5. Handle Errors
  *
  * Description:
  * Encapsulates the TaskList which contains a list of tasks
@@ -84,7 +84,11 @@ public class Tasklist {
      */
     public String markTask(int taskNumber) throws IndexOutOfRangeException {
 
-        if (taskNumber > tasks.size()) {
+        if (tasks.size() == 0) {
+
+            return "Add something to tasklist first";
+
+        } else if (taskNumber > tasks.size()) {
 
             throw new IndexOutOfRangeException(taskNumber, tasks.size() );
 
@@ -102,33 +106,6 @@ public class Tasklist {
                 return markTaskMessage;
 
             }
-
-        }
-
-    }
-
-    /**
-     * Delete the designated tasks from the task list
-     *
-     * @param taskNumber task to be deleted
-     * @return String message to be printed depending on if tasks is marked
-     * @throws IndexOutOfRangeException throws the exception if index given is out of
-     *              range of the current list
-     */
-    public String deleteTask(int taskNumber) throws IndexOutOfRangeException {
-
-        if (taskNumber> tasks.size()) {
-
-            throw new IndexOutOfRangeException(taskNumber, tasks.size());
-
-        } else {
-
-            Task taskToRemove = tasks.get(taskNumber - 1);
-            tasks.remove(taskNumber - 1);
-            String deletedTaskMessage = "Noted. I've removed this task:\n"
-                    + "  " + taskToRemove.toString() + "\n"
-                    + "Now you have " + tasks.size() + " tasks in the list.";;
-            return deletedTaskMessage;
 
         }
 

@@ -4,7 +4,7 @@ import java.util.Scanner;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 6. Delete
+ * Current Progress: Level 5. Handle Errors
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.
@@ -77,17 +77,16 @@ public class Duke {
      * Checks whether user inputted an appropriate integer to mark the task
      *
      * @param strArr String array containing the integer
-     * @param event String stating whether task is to be marked or deleted
      * @return int Returns the task number to be marked
      * @throws MissingArgumentException throws a MissingArgumentException if no integer found
      * @throws InvalidArgumentException throws a InvalidArgumentException if no integer inputted after done command
      */
-    private static int checkInteger(String[] strArr, String event) throws MissingArgumentException, InvalidArgumentException {
+    private static int checkInteger(String[] strArr) throws MissingArgumentException, InvalidArgumentException {
 
         if (strArr.length < 2) {
-            throw new MissingArgumentException("integer", event);
+            throw new MissingArgumentException("integer", "marking of task");
         } else if (!isNumeric(strArr[1])) {
-            throw new InvalidArgumentException("integer", event);
+            throw new InvalidArgumentException("integer", "marking of task");
         } else {
             return Integer.parseInt(strArr[1]);
         }
@@ -111,7 +110,7 @@ public class Duke {
                         printMessage(taskList.toString());
                         break;
                     case "done":
-                        int taskNumber = checkInteger(checkCommand, "marking of task");
+                        int taskNumber = checkInteger(checkCommand);
                         String message = taskList.markTask(taskNumber);
                         printMessage(message);
                         break;
@@ -123,11 +122,6 @@ public class Duke {
                         break;
                     case "todo":
                         printMessage(taskList.addTask(checkDescription(checkCommand, "todo"), "todo"));
-                        break;
-                    case "delete":
-                        int taskDeletedNumber = checkInteger(checkCommand, "delete");
-                        String deleteMessage = taskList.deleteTask(taskDeletedNumber);
-                        printMessage(deleteMessage);
                         break;
                     default:
                         throw new InvalidCommandException();
