@@ -31,6 +31,14 @@ public class TaskList {
     }
 
     /**
+     * Remove task from the list.
+     * @param index index of task to be removed.
+     */
+    public void removeTask(int index) {
+        this.tasklist.remove(index);
+    }
+
+    /**
      * Display all items in the list.
      */
     public void displayAllItems() {

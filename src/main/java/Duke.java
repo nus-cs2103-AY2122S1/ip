@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -31,6 +32,16 @@ public class Duke {
     }
 
     /**
+     * Display success message for adding task.
+     * @param tasks The list of tasks.
+     * @param task The individual task which can be Todo, Deadline or Event.
+     */
+    public static void displaySuccessMessage(TaskList tasks, Task task) {
+        display("Got it. I've added this task: \n" + "      " + task + "\n    Now you have "
+                + tasks.getLength() + (tasks.getLength() <= 1 ? " task" : " tasks") + " in the list.");
+    }
+
+    /**
      *
      * @param userInput user input command.
      * @param splitText the command to split by.
@@ -52,7 +63,7 @@ public class Duke {
      * @return true if the command is valid; false otherwise.
      */
     public static boolean isCommandValid(String userInput) {
-        String[] expectedCommands = {"todo", "deadline", "event", "done", "list", "bye"};
+        String[] expectedCommands = {"todo", "deadline", "event", "done", "list", "bye", "delete"};
         String userCommand = userInput.split(" ")[0];
         for (int i = 0; i < expectedCommands.length; i++) {
             if (userCommand.equals(expectedCommands[i])) {
@@ -90,6 +101,12 @@ public class Duke {
             if (isCommandValid(userInput)) {
                 if (userInput.equals("list")) {
                     tasks.displayAllItems();
+                } else if (userInput.startsWith("delete") && isDescExists(userInput)) {
+                    int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+                    Task task = tasks.getTask(taskNumber - 1);
+                    tasks.removeTask(taskNumber - 1);
+                    display("Gotchu mate. I've removed this task: \n" + "      " + task + "\n    Now you have "
+                            + tasks.getLength() + (tasks.getLength() <= 1 ? " task" : " tasks") + " in the list.");
                 } else if (userInput.startsWith("done") && isDescExists(userInput)) {
                     // get task number
                     int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
@@ -103,27 +120,24 @@ public class Duke {
                     // add task to list
                     Todo todo = new Todo(desc);
                     tasks.add(todo);
-                    display("Got it. I've added this task: \n" + "      " + todo + "\n    Now you have "
-                            + tasks.getLength() + (tasks.getLength() == 1 ? " task" : " tasks") + " in the list.");
+                    displaySuccessMessage(tasks, todo);
                 } else if (userInput.startsWith("deadline") && isDescExists(userInput)) {
                     String[] arr = processUserInput(userInput,"deadline ", "/by ");
                     Deadline dl = new Deadline(arr[0], arr[1]);
                     tasks.add(dl);
-                    display("Got it. I've added this task: \n" + "      " + dl + "\n    Now you have "
-                            + tasks.getLength() + (tasks.getLength() == 1 ? " task" : " tasks") + " in the list.");
+                    displaySuccessMessage(tasks, dl);
                 } else if (userInput.startsWith("event") && isDescExists(userInput)) {
                     String[] arr = processUserInput(userInput,"event ", "/at ");
                     // add task to list
                     Event event = new Event(arr[0], arr[1]);
                     tasks.add(event);
-                    display("Got it. I've added this task: \n" + "      " + event + "\n    Now you have "
-                            + tasks.getLength() + (tasks.getLength() == 1 ? " task" : " tasks") + " in the list.");
+                    displaySuccessMessage(tasks, event);
                 } else {
                     display("OOPS! The description cannot be empty. Please try again.");
                 }
             } else {
                 display("OOPS! I do not understand what does that mean. Maybe you can try either one of " +
-                        "[todo, deadline, event, done, list, bye]?");
+                        "[todo, deadline, event, done, list, bye, delete]?");
             }
             userInput = scan.nextLine();
         }
