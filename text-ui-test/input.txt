@@ -10,4 +10,11 @@ list
 done 2
 done 3
 list
+ooga booga
+deadline monke
+todo
+event what
+list
+done -1
+done 999
 bye
