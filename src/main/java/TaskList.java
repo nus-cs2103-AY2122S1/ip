@@ -20,6 +20,10 @@ public class TaskList {
         return this.al.get(index);
     }
 
+    public int getLength() {
+        return this.al.size();
+    }
+
     @Override
     public String toString() {
         String result = "-----------------------------------------\n" + "Here are the tasks in your list:\n";

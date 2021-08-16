@@ -37,12 +37,30 @@ public class Duke {
         System.exit(0);
     }
 
-    private void add(String t) {
-        System.out.println("-----------------------------------------\n" +
-                String.format("added: %s\n", t) +
-                "-----------------------------------------\n");
-        Task newTask = new Task(t, false);
+    private void add(String[] t) {
+        Task newTask = null;
+        switch (t[0]) {
+            case "todo":
+//                System.out.println("in todo");
+                newTask = new Todo(t[1]);
+                break;
+            case "deadline":
+//                System.out.println("in dl");
+                newTask = new Deadline(t[1], t[2]);
+                break;
+            case "event":
+//                System.out.println("in event");
+                newTask = new Event(t[1], t[2]);
+                break;
+        }
         this.tl.addTask(newTask);
+        System.out.println("-----------------------------------------\n" +
+                "Got it. I've added this task: \n" +
+                newTask.toString() +
+                String.format("Now you have %s tasks in the list.\n", this.tl.getLength()) +
+                "-----------------------------------------\n");
+
+
     }
 
     private Task getTaskByIndex(int index) {
@@ -60,10 +78,11 @@ public class Duke {
     private void run() {
         this.greet();
         Scanner sc = new Scanner(System.in);
+        Parser p = new Parser();
         String t;
         while (sc.hasNextLine()) {
             t = sc.nextLine();
-            String[] items = t.split(" ");
+            String[] items = p.parse(t);
 
             switch (items[0]) {
                 case "bye":
@@ -75,8 +94,13 @@ public class Duke {
                 case "done":
                     this.markDone(Integer.parseInt(items[1]));
                     break;
+                case "todo":
+                case "deadline":
+                case "event":
+                    this.add(items);
+                    break;
                 default:
-                    this.add(t);
+                    System.out.println("out of bounds mate");
                     break;
             }
         }
