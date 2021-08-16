@@ -36,7 +36,7 @@ Nice! I've marked this task as done:
 --------------------------
 1. [T] [ ] read book
 2. [E] [X] team meeting (at: Monday 6pm)
-3. [E] [ ] assignment 1 (at: Tuesday 2359)
+3. [D] [ ] assignment 1 (by: Tuesday 2359)
 --------------------------
 
 --------------------------
@@ -81,6 +81,24 @@ ERROR: Invalid integer. Integer should match the index of a task. Run list to lo
 
 --------------------------
 ERROR: Invalid argument for done command. Argument should be an integer.
+--------------------------
+
+--------------------------
+Noted. I've removed this task:
+[T] [ ] read book
+Now you have 2 tasks in the list.
+--------------------------
+
+--------------------------
+ERROR: The delete command expects an integer argument indicating the index of a task.
+--------------------------
+
+--------------------------
+ERROR: Invalid integer. Integer should match the index of a task. Run list to look at the list of tasks and their corresponding indices.
+--------------------------
+
+--------------------------
+ERROR: Invalid argument for delete command. Argument should be an integer.
 --------------------------
 
 --------------------------

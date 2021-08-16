@@ -14,4 +14,8 @@ deadline assignment 1 /by
 done
 done -1
 done foo
+delete 1
+delete
+delete -1
+delete bar
 bye

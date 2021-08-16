@@ -12,7 +12,7 @@ public class Duke {
     private final static List<Task> taskList = new ArrayList<Task>();
 
     /**
-     * Wrap a string between 2 line breaks.
+     * Wraps a string between 2 line breaks.
      * 
      * @param s String to be wrapped.
      * @return New string between 2 line breaks.
@@ -21,6 +21,11 @@ public class Duke {
         return LINE_BREAK + s + "\n" + LINE_BREAK;
     }
 
+    /**
+     * Prints the specified message in a standardized format.
+     * 
+     * @param s The message to be printed.
+     */
     private static void dukePrint(String s) {
         System.out.println(wrapBetweenLines(s));
     }
@@ -65,7 +70,7 @@ public class Duke {
             throw new InvalidDukeCommandException(
                     "Incorrect description format. Description should follow this pattern: *description* /by *time*");
         }
-        taskList.add(new Event(taskDescription, finishDate));
+        taskList.add(new Deadline(taskDescription, finishDate));
         String returnMessage = String.format("Got it. I've added this task:\n%s\nNow you have %d task%s in the list.",
                 taskDescription, taskList.size(), taskList.size() > 1 ? "s" : "");
         dukePrint(returnMessage);
@@ -86,14 +91,11 @@ public class Duke {
             throw new InvalidDukeCommandException(
                     "The done command expects an integer argument indicating the index of a task.");
         }
-        try {
-            Integer.valueOf(args);
-        } catch (NumberFormatException e) {
-            throw new InvalidDukeCommandException("Invalid argument for done command. Argument should be an integer.");
-        }
         Task task;
         try {
             task = taskList.get(Integer.valueOf(args) - 1);
+        } catch (NumberFormatException e) {
+            throw new InvalidDukeCommandException("Invalid argument for done command. Argument should be an integer.");
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidDukeCommandException("Invalid integer. Integer should match the index of a task."
                     + " Run list to look at the list of tasks and their corresponding indices.");
@@ -101,6 +103,26 @@ public class Duke {
         String acknowledgementMessage = "Nice! I've marked this task as done:\n";
         task.markAsDone();
         dukePrint(acknowledgementMessage + task);
+    }
+
+    private static void deleteHandler(String args) throws InvalidDukeCommandException {
+        if (args.equals("")) {
+            throw new InvalidDukeCommandException(
+                    "The delete command expects an integer argument indicating the index of a task.");
+        }
+        Task task;
+        try {
+            task = taskList.remove(Integer.valueOf(args) - 1);
+        } catch (NumberFormatException e) {
+            throw new InvalidDukeCommandException(
+                    "Invalid argument for delete command. Argument should be an integer.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidDukeCommandException("Invalid integer. Integer should match the index of a task."
+                    + " Run list to look at the list of tasks and their corresponding indices.");
+        }
+        String returnMessage = String.format("Noted. I've removed this task:\n%s\nNow you have %d task%s in the list.",
+                task, taskList.size(), taskList.size() > 1 ? "s" : "");
+        dukePrint(returnMessage);
     }
 
     private static void byeHandler() {
@@ -112,7 +134,7 @@ public class Duke {
     }
 
     /**
-     * Run tasks based on the corresponding commands given by the user
+     * Run tasks based on the corresponding commands given by the user.
      * 
      * @param s Command input of user
      */
@@ -139,6 +161,9 @@ public class Duke {
                     break;
                 case "deadline":
                     deadlineHandler(args);
+                    break;
+                case "delete":
+                    deleteHandler(args);
                     break;
                 default:
                     defaultHandler();
