@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static final Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke\n What can I do for you?");
 
@@ -10,10 +12,9 @@ public class Duke {
 
 
         while (!stop) {
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
             if (input.equals("list")) {
-                System.out.println("Here are the tasks in your list: ");
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < inputArr.size(); i++) {
                     Task currTask = inputArr.get(i);
                     System.out.println((i+1) + "." + currTask.toString());
@@ -21,7 +22,7 @@ public class Duke {
             }
             else if (input.equals("bye")) {
                 stop = true;
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.print("Bye. Hope to see you again soon!");
                 break;
             }
             else if (input.startsWith("done")) {
@@ -31,7 +32,7 @@ public class Duke {
                 System.out.println(inputArr.get(number-1).toString());
             }
             else {
-                System.out.println("Got it. I have added this task: ");
+                System.out.println("Got it. I have added this task:");
                 Task currTask;
                 if (input.startsWith("todo")) {
                     currTask = new Todo(input.substring(5));
