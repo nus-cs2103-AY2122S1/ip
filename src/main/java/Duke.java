@@ -3,14 +3,10 @@ import java.util.Scanner;
 
 public class Duke {
     static final String NAME = "Tze Henn";
-    static final ArrayList<String> list = new ArrayList<>();
+    static final ArrayList<Task> list = new ArrayList<>();
 
     public static void lineGenerator() {
         System.out.println("____________________________________________________________");
-    }
-
-    public static void addToList(String item) {
-        list.add(item);
     }
 
     public static void main(String[] args) {
@@ -33,13 +29,19 @@ public class Duke {
         while (!input.equals("bye")) {
             lineGenerator();
             if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list: ");
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.print(i + 1);
-                    System.out.println(". " + list.get(i));
+                    System.out.print((i + 1) + ".");
+                    list.get(i).printTaskStatus();
                 }
+            } else if (input.substring(0, 4).equals("done")) {
+                System.out.println("Nice! I've marked this task as done: ");
+                String[] splitStr = input.split("\\s+");
+                list.get(Integer.parseInt(splitStr[1]) - 1).markTaskDone();
             } else {
                 System.out.println("added: " + input);
-                addToList(input);
+                Task t = new Task(input);
+                list.add(t);
             }
             lineGenerator();
             System.out.print("\nEnter command: ");
