@@ -41,7 +41,7 @@ public class Duke {
                 }
             }
             else if (input.equals("blah")) {
-                output = "blah";
+                output = "blah\n";
             }
             else if (input.equals("bye")) {
                 break;
