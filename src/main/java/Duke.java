@@ -18,10 +18,6 @@ public class Duke {
                 "What can I do for you?");
     }
 
-    private static String getUserInput() {
-        return new Scanner(System.in).nextLine();
-    }
-
     private static void quit() {
         reply("Bye. Hope to see you again soon!");
     }
@@ -35,8 +31,9 @@ public class Duke {
 
     public static void main(String[] args) {
         greet();
+        Scanner scanner = new Scanner(System.in);
         while(true) {
-            String userInput = getUserInput();
+            String userInput = scanner.nextLine();
             if (userInput.equals("list")) {
                 reply(TaskManager.listTasks());
             } else if (userInput.equals("bye")) {
