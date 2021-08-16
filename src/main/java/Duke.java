@@ -40,10 +40,14 @@ public class Duke {
                 System.out.print("  ");
                 list.get(Integer.parseInt(splitStr[1]) - 1).markTaskDone();
             } else {
-                System.out.println("Got it. I've added this task: ");
+
                 if (input.startsWith("todo")) {
-                    String description = input.substring(5);
-                    t = new Todo(description);
+                    try {
+                        String description = input.substring(5).trim();
+                        t = new Todo(description);
+                    } catch (Exception e){
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty :-(", e);
+                    }
                 } else if (input.startsWith("deadline")) {
                     int slashPosition = input.indexOf('/');
                     String description = input.substring(9, slashPosition);
@@ -54,7 +58,10 @@ public class Duke {
                     String description = input.substring(6, slashPosition);
                     String at = input.substring(slashPosition + 4);
                     t = new Event(description, at);
+                } else {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+                System.out.println("Got it. I've added this task: ");
                 list.add(t);
                 System.out.println("  " + t);
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
