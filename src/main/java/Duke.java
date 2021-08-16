@@ -192,7 +192,6 @@ public class Duke {
         if (position >= msg.length() || position < 0) {
             throw new IllegalFormatException();
         } else {
-
             try {
                 int index = Integer.parseInt(msg.substring(position + 1)) - 1;
 
@@ -206,6 +205,7 @@ public class Duke {
 
                 return index;
             } catch (NumberFormatException e) {
+                // input after a whitespace is not a number.
                 throw new IllegalFormatException();
             }
         }
