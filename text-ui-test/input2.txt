@@ -99,6 +99,8 @@ todo random
 todo random
 todo random
 todo random
+delete 1
+todo random
 bye
 
 

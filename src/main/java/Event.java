@@ -1,3 +1,9 @@
+/**
+ * Encapsulates a task that has a description and takes place at a specific time.
+ *
+ * @author Clifford
+ */
+
 public class Event extends Task {
     protected String at;
 

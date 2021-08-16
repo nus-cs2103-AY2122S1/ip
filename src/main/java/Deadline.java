@@ -1,3 +1,9 @@
+/**
+ * Encapsulates a task that has a description and an end date
+ *
+ * @author Clifford
+ */
+
 public class Deadline extends Task {
     protected String by;
 

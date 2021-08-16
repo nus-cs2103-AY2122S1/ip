@@ -20,4 +20,14 @@ list
 I like CS2101.
 event someevent /at
 deadline project1 /by
+delete -1
+delete 3
+list
+delete 3
+list
+delete 1
+delete 1
+delete 1
+list
+deadline something /by       /by /by
 bye
