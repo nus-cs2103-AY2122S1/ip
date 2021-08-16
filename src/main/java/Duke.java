@@ -3,18 +3,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Duke {
+    public static List todoList;
     public static void greet() {
         String message = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(message);
     }
 
     public static void echo(String input) {
-        if (input != "bye") {
-            System.out.println(input);
-        } else {
-            System.out.println("TEST");
-            bye();
-        }
+        System.out.println(input);
     }
 
     public static void bye() {
@@ -29,9 +25,10 @@ public class Duke {
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(System.in));
         String input;
+        Duke.todoList = new List();
 
         while (!(input = reader.readLine()).equals("bye")) {
-            echo(input);
+            Duke.todoList.addTask(input);
         }
         bye();
     }
