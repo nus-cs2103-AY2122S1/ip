@@ -6,10 +6,17 @@ public class Todo extends Task{
     private String description;
     private boolean isDone;
 
-    public Todo(String description, boolean isDone) {
+    public Todo(String description, boolean isDone) throws WrongCommandFormatException {
         super(description, isDone);
-        this.description = description;
-        this.isDone = isDone;
+        if (description.equals("")) {
+            throw new WrongCommandFormatException(
+                    "No task specified. Please try again"
+            );
+        } else {
+            this.description = description;
+            this.isDone = isDone;
+        }
+
     }
 
     public String getTaskType() {

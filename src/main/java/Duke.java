@@ -36,8 +36,13 @@ public class Duke {
                 while (s2.hasNextLine()) {
                     description = s2.nextLine();
                 }
-                Todo newTodo = new Todo(description, false);
-                l.addTask(newTodo);
+                try {
+                    Todo newTodo = new Todo(description, false);
+                    l.addTask(newTodo);
+                } catch (WrongCommandFormatException e) {
+                    System.out.println(e.getMessage());
+                }
+
             } else if (input.equals("deadline")) {
                 Scanner s3 = new Scanner(s.nextLine());
                 String description = "";
@@ -63,7 +68,7 @@ public class Duke {
                     System.out.println(e.getMessage());
                 }
             } else {
-                System.out.println("No command specified. Please try again");
+                System.out.println("No specific command specified. Please try again");
             }
             input = s.next();
         }
