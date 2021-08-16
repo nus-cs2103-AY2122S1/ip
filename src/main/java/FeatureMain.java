@@ -3,6 +3,7 @@ import java.util.List;
 
 /**
  *  This class handles user commands when keyed onto the terminal
+ *
  * @author Ryan Tian Jun
  */
 public class FeatureMain {
@@ -50,7 +51,12 @@ public class FeatureMain {
         return command.equals("list");
     }
 
-    //checks if command given is done, also adds task number if valid
+    /**
+     * Checks if it is a 'Done' command
+     *
+     * @throws DukeException Either a syntax error or lack of number provided
+     * @return returns true if it is said command
+     */
     private boolean isDone(String command) throws DukeException {
         if (command.length() >= 4 && command.startsWith("done")) {
             if (command.length() == 4)  {
@@ -68,6 +74,12 @@ public class FeatureMain {
         }
     }
 
+    /**
+     * Checks if it is a 'Todo' command
+     *
+     * @throws DukeException Either a syntax error or lack of description
+     * @return returns true if it is said command
+     */
     private boolean isToDo(String command) throws DukeException {
         if (command.length() >= 4 && command.startsWith("todo")) {
             if (command.length() == 4) {
@@ -82,6 +94,12 @@ public class FeatureMain {
         }
     }
 
+    /**
+     * Checks if it is a 'Deadline' command
+     *
+     * @throws DukeException Either a syntax error or lack of description
+     * @return returns true if it is said command
+     */
     private boolean isDeadLine(String command) throws DukeException{
         if (command.length() >= 8 && command.startsWith("deadline")) {
             if (command.length() == 8) {
@@ -96,6 +114,12 @@ public class FeatureMain {
         }
     }
 
+    /**
+     * Checks if it is a 'Event' command
+     *
+     * @throws DukeException Either a syntax error or lack of description
+     * @return returns true if it is said command
+     */
     private boolean isEvent(String command) throws DukeException {
         if (command.length() >= 5 && command.startsWith("event")) {
             if (command.length() == 5) {
@@ -116,7 +140,7 @@ public class FeatureMain {
         if (startNumber > 0 && command.length() > 3) {
             return command.substring(startNumber + 3);
         } else {
-            return "no Deadline";
+            return "No Deadline";
         }
     }
 
@@ -126,7 +150,7 @@ public class FeatureMain {
         if (startNumber > 0 && command.length() > 3) {
             return command.substring(startNumber + 3);
         } else {
-            return "no Timeline";
+            return "No Timeline";
         }
     }
 

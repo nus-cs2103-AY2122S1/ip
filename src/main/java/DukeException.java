@@ -1,3 +1,9 @@
+/**
+ *  This class represents the Exceptions thrown by Duke
+ *  Consult comments for error codes
+ * @author Ryan Tian Jun
+ */
+
 public class DukeException extends Exception {
     private String message;
 
