@@ -20,8 +20,8 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    public boolean markAsDone() {
-        return true;
+    public Task markAsDone() {
+        return new Task(this.getDescription(), true);
     }
 
     @Override
