@@ -79,7 +79,11 @@ public class Duke {
                     case "event":
                         // Add an event task in the list.
                         output = list.addItem(new Event(input[1], input[2]));
+
                         break;
+                    case "delete":
+                        // Delete an event from the list.
+                        output = list.removeItem(Integer.parseInt(input[1]));
                 }
                 showMessage(output);
             } catch (DukeException e) {
@@ -163,6 +167,18 @@ public class Duke {
                     throw new DukeException("Do you mean `bye`?");
                 }
                 return new String[] {input[0]};
+
+            case "delete":
+                if (input.length != 2) {
+                    throw new DukeException("'delete' command needs exactly 1 argument. (example: 'delete 5')");
+                }
+                try {
+                    // Check if the argument is a number
+                    Integer.parseInt(input[1]);
+                } catch (Exception e) {
+                    throw new DukeException("'delete' command needs an integer as a number. (example: 'delete 5')");
+                }
+                return new String[] {input[0], input[1]};
 
             default:
                 throw new DukeException("What you mean?");
