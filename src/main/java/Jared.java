@@ -14,6 +14,11 @@ public class Jared {
             String desc = body.split("/by",2)[0];
             String date = body.split("/by",2)[1];
             newTask = new Deadline(desc, date);
+        } else if (command.equals("event")) {
+            String body = next.split(" ", 2)[1];
+            String desc = body.split("/at",2)[0];
+            String date = body.split("/at",2)[1];
+            newTask = new Event(desc, date);
         } else {
             newTask = new Task(next);
         }
