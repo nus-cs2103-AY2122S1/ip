@@ -1,3 +1,6 @@
+/**
+ * Task class that encapsulate task behaviour and data.
+ */
 public class Task {
 
   final String title;

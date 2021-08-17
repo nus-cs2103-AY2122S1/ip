@@ -2,10 +2,21 @@ import java.util.ArrayList;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+/**
+ * Handles matching input to behaviour and execution action.
+ * Using function `takeInput` with the input string will run the function
+ * and return true or false (whether or not to continue monitoring input)
+ */
 public class DukeLogic {
 
   private static ArrayList<Task> tasks = new ArrayList<>();
 
+  /**
+   * Takes in and handles input for Duke (the logic).
+   *
+   * @param input User input passed in to Duke.
+   * @return boolean of whether or not to continue Duke.
+   */
   public static boolean takeInput(String input) {
     if (matches("bye").apply(input)) {
       Duke.renderOutput("Goodbye!");
