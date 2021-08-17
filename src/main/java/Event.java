@@ -9,7 +9,7 @@ public class Event extends Task {
      */
     public Event(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = by.equals("") ? "at: " : by;
     }
 
     /**
@@ -19,6 +19,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + by + ")";
+        return "[E]" + super.toString() + "(" + by + ")";
     }
 }

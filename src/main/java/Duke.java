@@ -42,6 +42,7 @@ public class Duke {
         for(int i = 1; i < arr.length; i++) {
             if (arr[i].charAt(0) == '/') {
                 bool = true;
+                str += arr[i].substring(1) + ": ";
             }
             else if (bool && i == arr.length - 1) {
                 str += arr[i];
@@ -52,6 +53,21 @@ public class Duke {
 
         }
         return str;
+    }
+
+    /**
+     * A method to check if a string is an integer or not
+     *
+     * @param s A string from the user input
+     * @return True if it is an integer, false otherwise
+     */
+    public static boolean isNumeric(String s) {
+        try {
+            int d = Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     public static void main(String[] args) {
@@ -78,6 +94,8 @@ public class Duke {
                 } else if (arr[0].equals("done")) {
                     if (arr.length == 1) {
                         throw new InvalidCommandException("Please specify a number");
+                    } else if (arr[0].equals("done") && !isNumeric(arr[1])) {
+                        throw new InvalidCommandException("Please enter a number");
                     } else if (arr[0].equals("done") && ls.size() == 0) {
                         throw new InvalidCommandException("You have not added any task!");
                     } else if (arr[0].equals("done")
@@ -92,6 +110,8 @@ public class Duke {
                 } else if (arr[0].equals("delete")) {
                     if (arr.length == 1) {
                         throw new InvalidCommandException("Please specify a number");
+                    } else if (arr[0].equals("delete") && !isNumeric(arr[1])) {
+                        throw new InvalidCommandException("Please enter a number");
                     } else if (arr[0].equals("delete") && ls.size() == 0) {
                         throw new InvalidCommandException("You have not added any task!");
                     } else if (arr[0].equals("delete")
@@ -108,7 +128,7 @@ public class Duke {
                         throw new EmptyDescriptionException("Missing description / date");
                     }
                     System.out.println("Got it. I've added this task: ");
-                    ls.add(new Todo(arr[0]));
+                    ls.add(new Todo(getDescription(arr)));
                     System.out.println(ls.get(ls.size() - 1).toString());
                     System.out.println("Now you have " + ls.size() + " tasks in the list.");
                 } else if (arr[0].equals("deadline")) {
