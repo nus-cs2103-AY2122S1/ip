@@ -1,0 +1,10 @@
+deadline module homework /by 18th September
+todo read book
+event concert /at 6th November 9pm
+list
+done 1
+done 3
+list
+delete 2
+list
+bye
