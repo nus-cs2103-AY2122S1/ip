@@ -3,25 +3,53 @@ import java.util.Scanner;
 public class Duke {
 
 //    private Storage storage;
-//    private TaskList tasks;
+    private TaskList tasks;
+    enum CommandEnum {
+        ADD,
+        LIST,
+        EXIT
+    }
 //    private Ui ui;
 
-    public Duke() {
+    public Duke(TaskList tasks) {
+        this.tasks = tasks;
+    }
+
+    public static CommandEnum inputConverter(String input) {
+        if (input.equals("list")) {
+            return CommandEnum.LIST;
+        } else if (input.equals("bye")) {
+            return CommandEnum.EXIT;
+        } else {
+            return CommandEnum.ADD;
+        }
     }
 
     public void run() {
         Welcome.of().exec();
         Scanner scanner = new Scanner(System.in);
         String input = "";
+        Boolean isRunning = true;
         System.out.println("What can I do for you?");
-        while (!(input = scanner.nextLine()).equals("bye")) {
-            Echo.of(input).exec();
+        while (isRunning) {
+            input = scanner.nextLine();
+            switch (Duke.inputConverter(input)) {
+                case ADD:
+                    Add.of(this.tasks, input).exec();
+                    break;
+                case LIST:
+                    List.of(this.tasks).exec();
+                    break;
+                case EXIT:
+                    isRunning = false;
+                    Exit.of().exec();
+                    break;
+            }
         }
-        Exit.of().exec();
     }
 
     public static void main(String[] args) {
 
-        new Duke().run();
+        new Duke(new TaskList()).run();
     }
 }
