@@ -60,10 +60,23 @@ public class Processor {
                     return new DoneTask(doneIndex);
                 }
             } catch (NumberFormatException e) {
-                throw new DukeExcpetion("Invalid task index, please input an integer.\n" + spaceString + "if you want to add this as a task, please add a / to the front");
+                throw new DukeExcpetion("Invalid task index, please input an integer.");
             }
         } else if (newInput.length() > 4 && newInput.substring(0, 4).equals("done")) {
             throw new DukeExcpetion("Please leave a space between done and the index of the task.");
+        } else if (newInput.length() > 7 && newInput.substring(0, 7).equals("delete ")) {               
+            try {
+                int deleteIndex = Integer.parseInt(newInput.substring(7));
+                if (deleteIndex <= 0 || deleteIndex > taskAmount.get()) {
+                    throw new DukeExcpetion("Please input a valid task index.");
+                } else {
+                    return new DeleteTask(deleteIndex);
+                }
+            } catch (NumberFormatException e) {
+                throw new DukeExcpetion("Invalid task index, please input an integer.");
+            }
+        } else if (newInput.length() > 6 && newInput.substring(0, 6).equals("delete")) {
+            throw new DukeExcpetion("Please leave a space between delete and the index of the task.");
         } else if (newInput.length() > 6 && newInput.subSequence(0, 6).equals("event ")) {
             int timeIndex = newInput.indexOf("/at", 6);
             if (timeIndex == -1) {
