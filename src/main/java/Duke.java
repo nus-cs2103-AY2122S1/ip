@@ -120,9 +120,10 @@ public class Duke {
             echo("List is empty: Start adding tasks");
             return;
         }
-
-        StringBuilder listStringBuilder = new StringBuilder();
         String newline = "\n\t";
+        StringBuilder listStringBuilder = new StringBuilder();
+        listStringBuilder.append("Here are the tasks in your list:");
+        listStringBuilder.append(newline);
         for (int idx = 0; idx < TODO_LIST.size(); idx ++) {
             Task task = TODO_LIST.get(idx);
             listStringBuilder.append(idx + 1); // shift to 1-indexing
