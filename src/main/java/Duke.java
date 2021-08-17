@@ -1,10 +1,21 @@
+import java.util.Scanner;
+
 public class Duke {
+    //true indicates the conversation is ongoing
+    public static boolean conversationState;
+    private static MessageFactory factory = new MessageFactory();
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        DukeMessage msg = factory.createMessage(null);
+        msg.display();
+        while(conversationState) {
+            String userString;
+            Scanner scan = new Scanner( System.in );
+
+            userString = scan.nextLine().toString();
+            msg = factory.createMessage(userString);
+
+            msg.display();
+        }
     }
 }
