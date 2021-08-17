@@ -32,8 +32,10 @@ public class Duke {
                         System.out.println(this.list());
                         break;
                     case "done":
-                        int idx = Integer.valueOf(currLine[1]);
-                        System.out.println(this.markIdxAsDone(idx));
+                        System.out.println(this.markIdxAsDone(currLine));
+                        break;
+                    case "delete":
+                        System.out.println(this.deleteIdx(currLine));
                         break;
                     default:
                         System.out.println(this.add(currLine));
@@ -95,12 +97,21 @@ public class Duke {
      * Marks to-do list at index i (0-count).
      * @param i 0 is the first item in the list.
      */
-    public String markIdxAsDone(int i) {
+    public String markIdxAsDone(String[] currLine) {
+        int i = Integer.valueOf(currLine[1]);
         Item x = this.itemList.get(i - 1);
         ArrayList<String> printBuffer = new ArrayList<>();
         printBuffer.add("Nice! I've marked this task as done:");
         x.markAsDone();
         printBuffer.add("  " + x.toString());
+        return styleResponse(printBuffer);
+    }
+
+    public String deleteIdx(String[] currLine) {
+        int i = Integer.valueOf(currLine[1]);
+        ArrayList<String> printBuffer = new ArrayList<>();
+        printBuffer.add("Noted. I've removed this task:");
+        printBuffer.add("  " + this.itemList.remove(i - 1).toString());
         return styleResponse(printBuffer);
     }
 
