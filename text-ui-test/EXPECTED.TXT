@@ -31,4 +31,21 @@ Here are the tasks in your list:
 4.[T][X] join sports club
 5.[T][ ] borrow book
 
+DukeException: Oops! Improper formatting for done. Please use: done <task number>
+DukeException: Oops! Improper formatting for done. Please use: done <task number>
+DukeException: Oops! The task to mark as done is not within the range of the list.
+DukeException: Oops! The task to mark as done is not within the range of the list.
+DukeException: Oops! Improper formatting for todo. Please use: todo <description>
+DukeException: Oops! Improper formatting for todo. Please use: todo <description>
+DukeException: Oops! Improper formatting for deadline. Please use: deadline <description> /by <date/time>
+DukeException: Oops! Improper formatting for deadline. Please use: deadline <description> /by <date/time>
+DukeException: Oops! Inappropriate formatting for deadlines.
+DukeException: Oops! Missing description for deadline.
+DukeException: Oops! Improper formatting for event. Please use: event <description> /at <date/time>
+DukeException: Oops! Improper formatting for event. Please use: event <description> /at <date/time>
+DukeException: Oops! Inappropriate formatting for events.
+DukeException: Oops! Missing description for event.
+DukeException: Oops! I'm sorry, but I don't know what that means :-(
+DukeException: Oops! I'm sorry, but I don't know what that means :-(
+DukeException: Oops! I'm sorry, but I don't know what that means :-(
 Bye. Hope to see you again soon!

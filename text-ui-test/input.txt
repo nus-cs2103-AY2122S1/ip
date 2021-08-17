@@ -7,4 +7,21 @@ todo join sports club
 todo borrow book
 done 4
 list
+done
+done!
+done 6
+done 0
+todo
+todo@
+deadline
+deadline#
+deadline A
+deadline /by B
+event
+event#
+event A
+event /at B
+blah
+ecent
+dine
 bye

@@ -48,7 +48,7 @@ public class Duke {
                             throw new DukeException("Oops! Improper formatting for done. " +
                                     "Please use: done <task number>");
                         }
-                        if (input.length() < 6) {
+                        if (input.length() == 5) {
                             throw new DukeException("Oops! The number following 'done' cannot be empty.");
                         }
                         int pos = Integer.valueOf(input.substring(5));
@@ -68,7 +68,7 @@ public class Duke {
                             throw new DukeException("Oops! Improper formatting for todo. " +
                                     "Please use: todo <description>");
                         }
-                        if (input.length() < 6) {
+                        if (input.length() == 5) {
                             throw new DukeException("Oops! The description of todo cannot be empty.");
                         }
 
@@ -117,8 +117,7 @@ public class Duke {
                             throw new DukeException("Oops! The description and date/time of event cannot be empty.");
                         }
                         if(!input.contains(" /at ")){
-                            throw new DukeException("Oops! You are missing a date/time."+
-                                    " Please format events like this: event <description> /at <date/time>");
+                            throw new DukeException("Oops! Inappropriate formatting for events.");
                         }
                         if (input.split(" /at ")[0].equals("event")) {
                             throw new DukeException("Oops! Missing description for event.");
