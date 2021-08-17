@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -18,9 +17,10 @@ public class Duke {
     public static void main(String[] args) {
         startUp();
         Scanner scanner = new Scanner(System.in);
+        UserInputs userInput = new UserInputs();
         while (true) {
-            String input = UserInputs.getUserInput(scanner);
-            if (!UserInputs.evaluateUserInput(input)) {
+            String input = userInput.getUserInput(scanner);
+            if (!userInput.evaluateUserInput(input)) {
                 endChat();
                 break;
             }
@@ -28,13 +28,14 @@ public class Duke {
     }
 
     private static void startUp() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello, I'm\n" + logo);
-        System.out.println("\n What can I help you with? \n\n");
+        System.out.println(logo + "\n");
+        System.out.println("Hello, I'm Duke");
+        System.out.println("What can I help you with?\n");
     }
 
     private static void endChat() {

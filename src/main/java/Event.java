@@ -18,13 +18,13 @@ public class Event extends Task {
      * @return The newly created event task.
      */
     public static Event newEventTask(String input) {
-        String name = input.split("-at")[0];
-        String time = input.split("-at")[1];
+        String name = input.split(" -at ")[0];
+        String time = input.split(" -at ")[1];
         return new Event(name, time);
     }
 
     @Override
     public String taskDescription() {
-        return this.getTaskName() + " (at:" + this.eventTime + ")";
+        return this.getTaskName() + " (at: " + this.eventTime + ")";
     }
 }

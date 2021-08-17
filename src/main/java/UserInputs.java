@@ -2,16 +2,22 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * A class containing static functions for reading and evaluating user inputs.
+ * A class responsible for reading and evaluating user inputs.
  */
 public class UserInputs {
+
+    private TaskList taskList;
+
+    public UserInputs() {
+        taskList = new TaskList();
+    }
 
     /**
      * Takes the user input to the chat bot.
      * @param scanner The scanner used to scan for user input.
      * @return The user input as a String.
      */
-    public static String getUserInput(Scanner scanner) {
+    public String getUserInput(Scanner scanner) {
         return scanner.nextLine();
     }
 
@@ -21,38 +27,37 @@ public class UserInputs {
      * @return False if the user's input is supposed to close the chat bot. Else, the chat bot continues
      * and wait for the user to input another word.
      */
-    public static boolean evaluateUserInput(String input) {
+    public boolean evaluateUserInput(String input) {
         if (input.equalsIgnoreCase("bye")) {
             // Ends the chat
             return false;
         } else if (input.equalsIgnoreCase("list")) {
             // Shows the task history
-            TaskList.listHistory();
+            this.taskList.listHistory();
             return true;
         } else if (input.toLowerCase().startsWith("done")) {
             // Sets a task as done
             int index = Integer.parseInt(input.split(" ")[1]);
-            TaskList.markTaskAsCompleted(index);
+            this.taskList.markTaskAsCompleted(index);
             return true;
         } else if (input.toLowerCase().startsWith("todo")) {
             // Creates a todo task
-            System.out.println("todo");
             Task task = Todo.newTodoTask(UserInputs.removeFirstWordFromString(input));
-            TaskList.addTask(task);
+            this.taskList.addTask(task);
             return true;
         } else if (input.toLowerCase().startsWith("deadline")) {
             //Creates a deadline task
             Task task = Deadline.newDeadlineTask(UserInputs.removeFirstWordFromString(input));
-            TaskList.addTask(task);
+            this.taskList.addTask(task);
             return true;
         } else if (input.toLowerCase().startsWith("event")) {
             // Creates an event task
             Task task = Event.newEventTask(UserInputs.removeFirstWordFromString(input));
-            TaskList.addTask(task);
+            this.taskList.addTask(task);
             return true;
         }
         // Unrecognised input
-        System.out.println("Invalid input. Please try again.");
+        System.out.println("Invalid input. Please try again.\n");
         return true;
     }
 

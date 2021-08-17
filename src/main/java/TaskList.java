@@ -1,32 +1,36 @@
 import java.util.ArrayList;
 
 /**
- * A class that that contains static functions and variables to abstract a task list.
+ * A class that abstracts a list of tasks set by the user.
  */
 public class TaskList {
 
-    private final static ArrayList<Task> taskList = new ArrayList<>();
+    private final ArrayList<Task> taskList = new ArrayList<>();
+    private int uncompletedTasks = 0;
+
+    public TaskList() {}
 
     /**
      * Add a task to the task list.
      * @param task The task to be added to the task list.
      */
-    public static void addTask(Task task) {
-        taskList.add(task);
+    public void addTask(Task task) {
+        this.taskList.add(task);
+        this.uncompletedTasks++;
         System.out.println("Got it! This task has been added:");
-        System.out.println("  " + task);
-        System.out.println("You currently have " + numberOfUncompletedTasks()
-                + " uncompleted tasks remaining.");
+        System.out.println(task);
+        System.out.println("You currently have " + this.uncompletedTasks
+                + " uncompleted tasks remaining.\n");
     }
 
     /**
      * Prints the task list for the user to view.
      */
-    public static void listHistory() {
+    public void listHistory() {
         System.out.println("-----------------------------------------------------------");
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println((i + 1) + ". " + taskList.get(i));
+        for (int i = 0; i < this.taskList.size(); i++) {
+            System.out.println((i + 1) + ". " + this.taskList.get(i));
         }
         System.out.println("-----------------------------------------------------------");
     }
@@ -36,25 +40,20 @@ public class TaskList {
      * @param index The index of the task list. Note that the index provided starts from 1. So the index 1 represents
      *              the first task in the taskList ArrayList.
      */
-    public static void markTaskAsCompleted(int index) {
-        if (taskList.get(index - 1).isDone()) {
-            System.out.println("This task has already been completed.");
+    public void markTaskAsCompleted(int index) {
+        if (index > this.taskList.size()) {
+            System.out.println("This entry does not exist.\n");
             return;
         }
-        System.out.println("congratulations! This task has been completed: ");
-        taskList.get(index - 1).setAsFinished();
-        System.out.println("  " + taskList.get(index - 1) + "\n");
-        System.out.println("You currently have " + numberOfUncompletedTasks()
-                + " uncompleted tasks remaining.");
-    }
-
-    private static int numberOfUncompletedTasks() {
-        int i = 0;
-        for (Task task : taskList) {
-            if (!task.isDone()) {
-                i++;
-            }
+        if (this.taskList.get(index - 1).isDone()) {
+            System.out.println("This task has already been completed.\n");
+            return;
         }
-        return i;
+        System.out.println("congratulations! This task has been completed:");
+        this.taskList.get(index - 1).setAsFinished();
+        this.uncompletedTasks--;
+        System.out.println(this.taskList.get(index - 1));
+        System.out.println("You currently have " + this.uncompletedTasks
+                + " uncompleted tasks remaining.\n");
     }
 }

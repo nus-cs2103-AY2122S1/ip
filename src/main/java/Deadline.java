@@ -18,13 +18,13 @@ public class Deadline extends Task {
      * @return The newly created task deadline
      */
     public static Deadline newDeadlineTask(String input) {
-        String taskName = input.split("-by")[0];
-        String completedBy = input.split("-by")[1];
+        String taskName = input.split(" -by ")[0];
+        String completedBy = input.split(" -by ")[1];
         return new Deadline(taskName, completedBy);
     }
 
     @Override
     public String taskDescription() {
-        return this.getTaskName() + " (by:" + this.deadline + ")";
+        return this.getTaskName() + " (by: " + this.deadline + ")";
     }
 }
