@@ -89,7 +89,13 @@ public class Duke {
 
     private static void markItemDoneInTDL(String command) {
         String taskNumberStr = command.substring(5);
-        int taskNo = Integer.parseInt(taskNumberStr);
+        int taskNo = -1;
+        try {
+            taskNo = Integer.parseInt(taskNumberStr);
+        } catch (NumberFormatException e) {
+            dukeSays("Please enter an integer.");
+            return;
+        }
         String dukeOutput = currTDL.markTaskAsDone(taskNo);
         dukeSays(dukeOutput);
     }

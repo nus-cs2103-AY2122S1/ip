@@ -30,8 +30,12 @@ public class TDList {
      * @return Duke's output from this command
      */
     public String markTaskAsDone(int taskNo) {
-        if (taskNo >= 0 && taskNo < toDoList.size()) {
-            TDLTask currTask = toDoList.get(taskNo);
+        //Task list starts from 1 instead of 0 so input in command is 1 more than
+        //the task's index in the list
+        int taskIndex = taskNo - 1;
+
+        if (taskIndex >= 0 && taskIndex < toDoList.size()) {
+            TDLTask currTask = toDoList.get(taskIndex);
             currTask.setAsDone();
 
             return "Nice! I've marked this task as done:\n" + currTask.getLineOfTaskInfo();
