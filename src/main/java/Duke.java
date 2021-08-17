@@ -26,7 +26,7 @@ public class Duke {
                         String task = tasks.getTask(taskIndex);
                         System.out.println("Nice! I've marked this task as done: ");
                         System.out.println(task);
-                    } catch (NullPointerException e) {
+                    } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! The number you gave is out of range!");
                     }
                 } else if (firstCommand.equals("deadline") || firstCommand.equals("todo") || firstCommand.equals("event") ) {

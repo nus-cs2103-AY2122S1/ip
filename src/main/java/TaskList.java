@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ public class TaskList {
     /**
      * Contains tasks added by user.
      */
-    private Task[] tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Represents the index of the next task to be added by the user.
@@ -19,7 +20,7 @@ public class TaskList {
      * Constructor for TaskList.
      */
     private TaskList() {
-        this.tasks = new Task[100];
+        this.tasks = new ArrayList<Task>(100);
     }
 
     /**
@@ -39,13 +40,13 @@ public class TaskList {
     public void addTask(String task, String type, String time) {
         switch(type) {
             case "deadline":
-                this.tasks[taskIndex] = new Deadline(task, time);
+                this.tasks.add(new Deadline(task, time));
                 break;
             case "event":
-                this.tasks[taskIndex] = new Event(task, time);
+                this.tasks.add(new Event(task, time));
                 break;
             case "todo":
-                this.tasks[taskIndex] = new Todo(task);
+                this.tasks.add(new Todo(task));
                 break;
         }
         this.taskIndex++;
@@ -59,7 +60,7 @@ public class TaskList {
             System.out.println("No tasks added yet!");
         } else {
             for (int i = 0; i < this.getTasksLength(); i++) {
-                System.out.println((i + 1) + "." + this.tasks[i]);
+                System.out.println((i + 1) + "." + this.tasks.get(i));
             }
         }
     }
@@ -69,7 +70,7 @@ public class TaskList {
      * @param taskIndex The index of the task.
      */
     public void markTaskDone(int taskIndex) {
-        Task doneTask = this.tasks[taskIndex - 1];
+        Task doneTask = this.tasks.get(taskIndex - 1);
         doneTask.markAsDone();
     }
 
@@ -79,7 +80,7 @@ public class TaskList {
      * @return Returns task description.
      */
     public String getTask(int index) {
-        Task currentTask = tasks[index - 1];
+        Task currentTask = tasks.get(index - 1);
         return currentTask.toString();
     }
 
