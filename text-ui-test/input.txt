@@ -1,0 +1,15 @@
+hello
+list
+todo Make a sandwich
+list
+event Catch up with friends /at 11:30am
+list
+deadline Do CS2103T iP /by Thu, Aug 19th 2359
+list
+done 1
+list
+done 2
+list
+done 3
+list
+bye
