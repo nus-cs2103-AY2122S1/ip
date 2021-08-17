@@ -42,7 +42,7 @@ public class Duke {
                 }
 
             } else if (input.startsWith("todo")) {
-                Todo todo = new Todo(input);
+                Todo todo = new Todo(input.substring(5));
                 System.out.println("Got it. I've added this task:\n  " + todo.toString());
                 savedInputs.add(todo);
                 System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
