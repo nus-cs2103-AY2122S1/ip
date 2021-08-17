@@ -197,7 +197,11 @@ public class Duke {
     public static String getDate(String[] s, int start) {
         String temp = "";
         for (int i = start; i < s.length; i++) {
-            temp += s[i] + " ";
+            if (i + 1 < s.length) {
+                temp += s[i] + " ";
+            } else {
+                temp += s[i];
+            }
         }
         return temp;
     }
