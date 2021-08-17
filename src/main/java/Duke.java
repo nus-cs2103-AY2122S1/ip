@@ -79,39 +79,60 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         System.out.println(lineBreak);
 
-        while (in.hasNextLine()) {
-          input = in.nextLine();
+        try {
+            while (in.hasNextLine()) {
+                input = in.nextLine();
 
-            if (input.equals("bye")) {
-                itemList.clear();
-                System.out.println("Bye. Hope to see you again soon!");
-                return;
-            } else if (input.equals("list")) {
-                printItemList();
-                System.out.println(lineBreak);
-            } else {
-                String check = getFirstWord(input);
-
-                if (check.equals("done")) {
-                    markTaskDone(input);
-                } else if (check.equals("todo")) {
-                    String description = input.substring(5);
-                    addToDo(description);
-                } else if (check.equals("deadline")) {
-                    String[] arr = input.split("/");
-                    String description = getSecondWord(arr[0]);
-                    String time = getSecondWord(arr[1]);
-                    addDeadline(description, time);
-                } else if (check.equals("event")) {
-                    String[] arr = input.split("/");
-                    String description = getSecondWord(arr[0]);
-                    String time = getSecondWord(arr[1]);
-                    addEvent(description, time);
+                if (input.equals("bye")) {
+                    itemList.clear();
+                    System.out.println("Bye. Hope to see you again soon!");
+                    return;
+                } else if (input.equals("list")) {
+                    printItemList();
+                    System.out.println(lineBreak);
                 } else {
-                    addToDo(input);
+                    String check = getFirstWord(input);
+
+                    if (check.equals("done")) {
+                        markTaskDone(input);
+                    } else if (check.equals("todo")) {
+                        String description = input.substring(5);
+                        if (input.length() <= 1) {
+                            throw new InvalidDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        addToDo(description);
+                    } else if (check.equals("deadline")) {
+                        String[] arr = input.split("/");
+                        String description = getSecondWord(arr[0]);
+                        String time = getSecondWord(arr[1]);
+                        if (getSecondWord(arr[1]).length() < 1) {
+                            throw new InvalidTimeException("☹ OOPS!!! The timing of a deadline cannot be empty.");
+                        } else if (!getFirstWord(arr[1]).equals("by:")) {
+                            throw new InvalidTimeException("☹ OOPS!!! Please enter a suitable deadline!");
+                        }
+                        addDeadline(description, time);
+                    } else if (check.equals("event")) {
+                        String[] arr = input.split("/");
+                        String description = getSecondWord(arr[0]);
+                        String time = getSecondWord(arr[1]);
+                        if (getSecondWord(arr[1]).length() < 1) {
+                            throw new InvalidTimeException("☹ OOPS!!! The timing of an event cannot be empty.");
+                        } else if (!getFirstWord(arr[1]).equals("at")) {
+                            throw new InvalidTimeException("☹ OOPS!!! Please enter a suitable event timing!");
+                        }
+                        addEvent(description, time);
+                    } else {
+                        throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                    System.out.println(lineBreak);
                 }
-                System.out.println(lineBreak);
             }
+        } catch (InvalidInputException | InvalidTimeException | InvalidDescriptionException e) {
+            System.out.println(e.getMessage());
+            start();
+        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+            System.out.println("☹ OOPS!!! Please include an appropriate description/time!");
+            start();
         }
         return;
     }
