@@ -89,9 +89,20 @@ public class Duke {
         getCommand();
     }
 
-    private static void addTodo(String command) {
+    private static void addTodo(String command) throws DukeException {
         // Take the substring containing the task description of the command
+        String errorMessage = "\t Invalid command, description is required, please follow template:\n";
+        errorMessage += "\t \t todo {description}";
+
+        if (command.length() < 5) {
+            throw new DukeException(errorMessage);
+        }
+
         String description = command.substring(5);
+        if (description.isEmpty() || description.isBlank()) {
+            throw new DukeException(errorMessage);
+        }
+
         ToDo t = new ToDo(description);
 
         System.out.println("\t I have added to the list: \n\t \t" + t.toString());
