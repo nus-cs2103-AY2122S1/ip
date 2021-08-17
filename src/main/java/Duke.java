@@ -13,9 +13,9 @@ public class Duke {
     Scanner scanner = new Scanner(System.in);
 
     // Initialize command variables
-    String commandLine = "";
+    String commandLine;
     String command = "";
-    int doneTask = -1;
+    String description = "";
 
     // Exit command
     final String exitCommand = "bye";
@@ -30,6 +30,18 @@ public class Duke {
 
     // Done command
     final String doneCommand = "done";
+    int doneTask = -1;
+
+    // Todo command
+    final String todoCommand = "todo";
+
+    // Deadline command
+    final String deadlineCommand = "deadline";
+    String by = "";
+
+    // Event command
+    final String eventCommand = "event";
+    String at = "";
 
     // Duke chatbot
     while (!command.equals(exitCommand)) {
@@ -49,17 +61,34 @@ public class Duke {
           }
           break;
         case doneCommand:
-          list[doneTask].markAsDone();
+          if (doneTask > -1) {
+            list[doneTask].markAsDone();
+          }
           responseContent = "Nice! I've marked this task as done:\n" +
               "       " + list[doneTask];
           break;
-        case "":
-          responseContent = "";
+        case todoCommand:
+          list[index] = new Todo(description);
+          index++;
+          responseContent = "Got it. I've added this task:\n"
+              + "       " + list[index-1] + "\n"
+              + "     Now you have " + index + " tasks in the list.";
+          break;
+        case deadlineCommand:
+          list[index] = new Deadline(description, by);
+          index++;
+          responseContent = "Got it. I've added this task:\n"
+              + "       " + list[index-1] + "\n"
+              + "     Now you have " + index + " tasks in the list.";
+          break;
+        case eventCommand:
+          list[index] = new Event(description, at);
+          index++;
+          responseContent = "Got it. I've added this task:\n"
+              + "       " + list[index-1] + "\n"
+              + "     Now you have " + index + " tasks in the list.";
           break;
         default:
-          list[index] = new Task(command);
-          index++;
-          responseContent = "added: " + command;
           break;
       }
 
@@ -71,13 +100,32 @@ public class Duke {
         System.out.println(response);
       }
 
-      // Get command
+      // Extract command variables
       commandLine = scanner.nextLine();
       command = commandLine.split(" ")[0];
-      if (command.equals(doneCommand)) {
-        doneTask = Integer.parseInt(commandLine.split(" ")[1]) - 1;
-      } else {
-        command = commandLine;
+      String rest;
+
+      switch (command) {
+        case doneCommand:
+          rest = commandLine.split(" ", 2)[1];
+          doneTask = Integer.parseInt(rest) - 1;
+          break;
+        case deadlineCommand:
+          rest = commandLine.split(" ", 2)[1];
+          description = rest.split(" /by ")[0];
+          by = rest.split(" /by ")[1];
+          break;
+        case eventCommand:
+          rest = commandLine.split(" ", 2)[1];
+          description = rest.split(" /at ")[0];
+          at = rest.split(" /at ")[1];
+          break;
+        case todoCommand:
+          rest = commandLine.split(" ", 2)[1];
+          description = rest;
+          break;
+        default:
+          break;
       }
     }
 
