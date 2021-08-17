@@ -231,7 +231,7 @@ public class Duke {
             }
             System.out.println("     There are " + tasks.size() + " tasks now, keep up!");
         } else {
-            System.out.println("     There are no items in your list, keesfep adding them!");
+            System.out.println("     There are no items in your list, keep adding them!");
         }
     }
 
