@@ -46,12 +46,13 @@ public class TaskList {
     /**
      * Given the index number of a task, marks that task as completed
      *
-     * @param taskIndex an int representing the index of the task
+     * @param taskNumber an int representing the index of the task
      * @return the String representation of the completed task
      */
-    public String completeTask(int taskIndex) {
-        Task task = this.tasks.get(taskIndex);
+    public String completeTask(int taskNumber) {
+        int taskIndex = taskNumber - 1;
         // Assumes that the task exists.
+        Task task = this.tasks.get(taskIndex);
         task.completeTask();
         return task.toString();
     }
@@ -63,6 +64,20 @@ public class TaskList {
      */
     public String countTasks() {
         return String.format("\nNow you have %d tasks in the list.", this.tasks.size());
+    }
+
+    /**
+     * Deletes a task when given its index number
+     *
+     * @param taskNumber an int representing the index of the task
+     * @return the String representation of the deleted task
+     */
+    public String deleteTask(int taskNumber) {
+        int taskIndex = taskNumber - 1;
+        // Assumes that the task exists.
+        Task task = this.tasks.get(taskIndex);
+        this.tasks.remove(taskIndex);
+        return task.toString();
     }
 
     /**

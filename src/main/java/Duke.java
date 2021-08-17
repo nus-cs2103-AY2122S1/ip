@@ -67,9 +67,14 @@ public class Duke extends Chatbot {
                 Chatbot.printMessage(listedTasks);
             } else if (message.startsWith("done ")) {
                 // Mark a task as done
-                int indexNumber = Integer.parseInt(message.substring(5)) - 1;
+                int indexNumber = Integer.parseInt(message.substring(5));
                 String completedTask = this.taskList.completeTask(indexNumber);
                 Chatbot.printMessage("Nice! I've marked this task as done:\n\t" + completedTask);
+            } else if (message.startsWith("delete ")) {
+                // Mark a task as done
+                int indexNumber = Integer.parseInt(message.substring(7));
+                String completedTask = this.taskList.deleteTask(indexNumber);
+                Chatbot.printMessage("Noted. I've removed this task:\n\t" + completedTask);
             } else {
                 // Add a task to the list
                 Task task;
