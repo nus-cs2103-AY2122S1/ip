@@ -3,23 +3,17 @@ import java.util.*;
 public class Duke {
     public static void main(String[] args) {
         String linebreak = "~~~~~~~~~~";
-        String command;
-
-        // This string was the initial string
-        /*
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-         */
+        String command; // this is the container for the command received from the user
+        String[] todoList = new String[100]; // this array stores previous commands
+        int pointer = 0; // this tracks the newest position to add an item in todoList
 
         // The chat bot name is Notaro bc it's Not-a-ro-bot :>
-        // This is the introduction of the chat bot
+        // This is the introduction of the chat bot, and includes a list of the commands for the user
         System.out.println("Hi! I'm Taro, short for Notaro because I'm Not-a-ro-bot!!");
-        System.out.println("What can I do for you today? :>");
-        System.out.println("(Tip: Type \"bye\" to leave!)");
+        System.out.println("Here are some special keywords! :");
+        System.out.println("bye : End our conversation :(");
+        System.out.println("list : Adds stuff into your todo list!");
+        System.out.println("\nWhat can I do for you today? :>");
         System.out.println(linebreak);
 
 
@@ -32,10 +26,23 @@ public class Duke {
                 System.out.println("Bye bye!! Thanks for stopping by!");
                 System.out.println(linebreak);
                 break;
-            }
 
-            System.out.println(command);
-            System.out.println(linebreak);
+            } else if (command.equals("list")) {
+                for (int counter = 0; counter < 100; counter++) {
+                    if (todoList[counter] != null) {
+                        System.out.println((counter + 1) + ". " + todoList[counter]);
+                    } else {
+                        System.out.println(linebreak);
+                        break;
+                    }
+                }
+
+            } else {
+                System.out.println("added: " + command);
+                System.out.println(linebreak);
+                todoList[pointer] = command;
+                pointer++;
+            }
         }
     }
 }
