@@ -23,7 +23,7 @@ public class Duke {
             }
 
             public String toString() {
-                return this.description;
+                return "[" + this.getStatusIcon() + "] " + this.description;
             }
         }
 
@@ -62,7 +62,15 @@ public class Duke {
                     }
                 }
 
-            } else {
+            } else if (command.split(" ")[0].equals("done")) {
+                System.out.println("Yay good job!!");
+                int ref = Integer.parseInt(command.split(" ")[1]) - 1;
+                todoList[ref].markAsDone();
+                System.out.println(todoList[ref]);
+                System.out.println(linebreak);
+
+
+            } else { // an item is added
                 System.out.println("added: " + command);
                 System.out.println(linebreak);
                 todoList[pointer] = new Task(command);
