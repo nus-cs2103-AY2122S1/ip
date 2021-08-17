@@ -32,7 +32,7 @@ public class Duke {
     private final String GREETING = "Hallo! My name's Peter!\n\tHow may I be of service to you?";
     private final String GOODBYE = "Good day! I'm gonna find Lois if you're not using me!";
     private final String TASK_REPORT = "Here are all your tasks! No Procrastination!";
-    private String[] taskTracker = new String[100];
+    private Task[] taskTracker = new Task[100];
     private int taskNo = 0;
 
     private void printHorizontalLine() {
@@ -50,7 +50,7 @@ public class Duke {
     }
 
     private void addTask(String input){
-        taskTracker[taskNo++] = input;
+        taskTracker[taskNo++] = new Task(input);
         response("Task Added: " + input);
     }
 
@@ -59,7 +59,7 @@ public class Duke {
         formattedTask.append(TASK_REPORT + "\n\t");
         for (int i = 0; i < taskTracker.length; i++) {
             if (taskTracker[i] != null) {
-                String eachLine = (i + 1) + ". " + taskTracker[i] + "\n\t";
+                String eachLine = (i + 1) + ". " + taskTracker[i].toString() + "\n\t";
                 formattedTask.append(eachLine);
             }
         }
