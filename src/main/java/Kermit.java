@@ -32,7 +32,11 @@ public class Kermit {
 
             // Clear contents of stringBuilder
             strBuilder.setLength(0);
+
             for (int i = 1; i < commandArr.length; i++) {
+                if (i != 1) {
+                    strBuilder.append(" ");
+                }
                 strBuilder.append(commandArr[i]);
             }
 
@@ -42,18 +46,20 @@ public class Kermit {
                 break;
             // List out all objects that user added to list
             } else if (command.equals("list")){
-                System.out.println(formatText(listText + "\n" + list.toString()));
+                System.out.println(formatText(listText + "\n" + list));
             // Add objects to list
-            } else if (commandArr[0].equals("done")){
+            } else if (command.equals("done")){
                 int index = Integer.parseInt(strBuilder.toString()) - 1;
                 // Get task name
                 String taskText = list.completeTask(index);
                 System.out.println(formatText(completeTaskText + "\n" + taskText));
-            // Add new item to list
-            } else {
-                Task newTask = new Task(command);
+            // Add new todo task item
+            } else if (command.equals("todo")) {
+                Task newTask = new ToDos(strBuilder.toString());
                 list.add(newTask);
-                System.out.println(formatText("Added: " + command));
+                System.out.println(formatText("Got it. I've added this task:\n" + newTask +"\nNow you have " + list.size() + " tasks in the list."));
+            } else {
+                System.out.println(formatText("This is an invalid command"));
             }
         }
     }
