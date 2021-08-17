@@ -10,12 +10,17 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine(); // scan the line for the user's input
+        List list = new List();
         while (true) {//create loop for the chat
             if (input.equals("bye") || input.equals("Bye") || input.equals("BYE")) {//input is bye
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else { //input is not bye so echo input
-                System.out.println(input);
+            } else if(input.equals("list")) {// shows the current list
+                list.show();
+                input = sc.nextLine();
+            } else { //input is not bye so add input to list
+                System.out.println("added: " + input);
+                list.add(input);
                 input = sc.nextLine();
             }
 
