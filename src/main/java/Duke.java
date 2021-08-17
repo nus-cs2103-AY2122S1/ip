@@ -22,7 +22,7 @@ public class Duke {
      */
     public String format(String input) {
         return String.format("\t--------------------- " +
-                "\n\t%1$s\n\t--------------------- ", input);
+                "\n\t%1$s--------------------- ", input);
     }
 
     /**
@@ -33,11 +33,13 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         String input = "";
-        while(!((input = scanner.nextLine().toLowerCase()).equals("bye"))) {
+        while(!((input = scanner.next().toLowerCase()).equals("bye"))) {
             if (input.equals("list")) {
                 System.out.println(format(commands.list()));
+            } else if (input.equals("done")) {
+                System.out.println(format(commands.done((scanner.nextInt()) - 1)));
             } else {
-                System.out.println(format(commands.add(input)));
+                System.out.println(format(commands.add(input + scanner.nextLine())));
             }
         }
         scanner.close();
