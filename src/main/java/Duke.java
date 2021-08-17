@@ -112,15 +112,28 @@ public class Duke {
         getCommand();
     }
 
-    private static void addDeadline(String command) {
+    private static void addDeadline(String command) throws DukeException {
         // Template of command: deadline {description} /by {byWhen}
         // Find the end of description, which is the start of byWhen
+        String errorMessage = "\t Invalid command, description and time is required, please follow template:\n";
+        errorMessage += "\t \t deadline {description} /by {time}";
+
         int endOfDescription = command.indexOf("/");
+        if (endOfDescription == -1 || command.length() < 9) {
+            throw new DukeException(errorMessage);
+        }
 
         // Find substring containing task description
         String description = command.substring(9, endOfDescription);
+        if (description.isEmpty() || description.isBlank()) {
+            throw new DukeException(errorMessage);
+        }
 
         String byWhen = command.substring(endOfDescription + 1);
+        if (byWhen.isEmpty() || byWhen.isBlank()) {
+            throw new DukeException(errorMessage);
+        }
+
         Deadline t = new Deadline(description, byWhen);
 
         System.out.println("\t I have added to the list: \n\t \t" + t.toString());
