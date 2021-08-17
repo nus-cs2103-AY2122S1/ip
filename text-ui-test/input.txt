@@ -1,0 +1,10 @@
+blah
+list
+todo sweep floor
+event computing day /at 3pm Monday
+deadline geq quiz /by 22nd August
+list
+done 2
+done 3
+list
+bye
