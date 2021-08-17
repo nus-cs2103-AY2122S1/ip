@@ -23,12 +23,13 @@ class TaskList {
     @Override
     public String toString() {
         if (list.isEmpty()) {
-            return "You have no tasks!\n";
+            return "You have no tasks!";
         } else {
             StringBuilder sb = new StringBuilder("Current tasks:\n");
             for (int i = 0; i < list.size(); i++) {
                 sb.append(String.format("%d.%s\n", i + 1, list.get(i).toString()));
             }
+            sb.append("Total: ").append(list.size()).append(" tasks");
             return sb.toString();
         }
     }

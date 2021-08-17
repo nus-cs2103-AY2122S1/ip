@@ -9,16 +9,16 @@ Hello! What can I do for you?
 You have no tasks!
 
 I've added:
- [T][ ] borrow book
+  [T][ ] borrow book
 
 I've added:
- [T][ ] read book
+  [T][ ] read book
 
 I've added:
- [D][ ] discuss book (by: 23 Aug)
+  [D][ ] discuss book (by: 23 Aug)
 
 I've added:
- [E][ ] team meeting (at: Sat 8-9pm)
+  [E][ ] team meeting (at: Sat 8-9pm)
 
 I've marked this task as done:
   [T][X] read book
@@ -30,9 +30,10 @@ Current tasks:
 2.[T][X] read book
 3.[D][ ] discuss book (by: 23 Aug)
 4.[E][ ] team meeting (at: Sat 8-9pm)
+Total: 4 tasks
 
 I've added:
- [D][ ] final submission (by: Sunday)
+  [D][ ] final submission (by: Sunday)
 
 I've marked this task as done:
   [D][X] final submission (by: Sunday)
@@ -43,10 +44,12 @@ Current tasks:
 3.[D][ ] discuss book (by: 23 Aug)
 4.[E][ ] team meeting (at: Sat 8-9pm)
 5.[D][X] final submission (by: Sunday)
+Total: 5 tasks
 
 I've added:
- [T][ ] discard junk
+  [T][ ] discard junk
 
 Unknown command!
 
 Bye. Hope to see you again soon!
+
