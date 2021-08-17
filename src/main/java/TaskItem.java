@@ -19,4 +19,13 @@ public class TaskItem {
     public void completeTask() {
         this.completed = true;
     }
+
+    @Override
+    public String toString() {
+        if (completed) {
+            return "[X]" + this.task;
+        } else {
+            return "[ ]" + this.task;
+        }
+    }
 }

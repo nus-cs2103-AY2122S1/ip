@@ -14,18 +14,33 @@ public class Duke {
         Duke.active = true;
 
         Duke.sendStartMessage();
-        while (active) {
-            java.util.Scanner scanner = new java.util.Scanner(System.in);
-            String input = scanner.nextLine();
 
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        while (active) {
+            String input = scanner.nextLine();
             if (input.split(" ")[0].equals("done")) {
                 String[] splitString = input.split(" ");
                 String taskItemNumber = splitString[1];
                 Duke.markAsFinished(taskItemNumber);
-            } else if (input.equals("list")) {
+            }   else if (input.split(" ")[0].equals("todo")) {
+                input = input.replace(input.split(" ")[0], "");
+                ToDo newToDo = new ToDo(input);
+                Duke.addToList(newToDo);
+            }   else if (input.split(" ")[0].equals("deadline")) {
+                input = input.replace(input.split(" ")[0], "");
+                String by = input.split("/")[1].split(" ", 2)[1];
+                String description = input.split("/")[0];
+                Deadline dead = new Deadline(description, by);
+                Duke.addToList(dead);
+            }   else if (input.split(" ")[0].equals("event")) {
+                input = input.replace(input.split(" ")[0], "");
+                String date = input.split("/")[1].split(" ")[1];
+                String time = input.split("/")[1].split(" ")[2];
+                String description = input.split("/")[0];
+                Event someEvent = new Event(description, date, time);
+                Duke.addToList(someEvent);
+            }   else if (input.equals("list")) {
                 Duke.printList();
-            } else if (!input.equals("list") && !input.equals("bye")) {
-                Duke.addToList(input);
             } else if (input.equals("bye")) {
                 Duke.active = false;
                 Duke.sendEndMessage();
@@ -43,16 +58,20 @@ public class Duke {
 
         System.out.println("____________________________________________________________");
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[X] " + taskList[taskNumber - 1].describeTaskItem());
+        System.out.println(taskList[taskNumber - 1].toString());
         System.out.println("____________________________________________________________");
 
     }
 
-    public static void addToList(String input) {
-        Duke.taskList[Duke.listIndex] = new TaskItem(input);
+    public static void addToList(TaskItem taskItem) {
+        Duke.taskList[Duke.listIndex] = taskItem;
+
         Duke.listIndex++;
         System.out.println("____________________________________________________________");
-        System.out.println("added: " + input);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(taskItem.toString());
+        if (listIndex == 1) System.out.println("Now you have " + 1 + " task in the list.");
+        if (listIndex > 1) System.out.println("Now you have " + (Duke.listIndex) + " tasks in your list.");
         System.out.println("____________________________________________________________");
     }
 
@@ -62,13 +81,15 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.length; i++) {
             if (taskList[i] != null) {
-                if (!taskList[i].isCompleted()) {
-                    System.out.println(number + ".[ ] " + taskList[i].describeTaskItem());
-                }
+//                if (!taskList[i].isCompleted()) {
+//                    System.out.println(number + ".[ ] " + taskList[i].toString());
+//                }
+//
+//                if (taskList[i].isCompleted()) {
+//                    System.out.println(number + ".[X] " + taskList[i].toString());
+//                }
 
-                if (taskList[i].isCompleted()) {
-                    System.out.println(number + ".[X] " + taskList[i].describeTaskItem());
-                }
+                System.out.println(number + "." + taskList[i].toString());
 
                 number++;
             }
