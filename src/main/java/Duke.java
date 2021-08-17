@@ -102,7 +102,15 @@ public class Duke {
             && !args[0].equalsIgnoreCase("event")) {
                 System.out.println("     Invalid input :(");
             } else {
-                System.out.println("     Oops, you have left out the task description!");
+                if (args[0].equalsIgnoreCase("todo")) {
+                    System.out.println("     Oops, you have left out the task description for todo!");
+                }
+                if (args[0].equalsIgnoreCase("deadline")) {
+                    System.out.println("     Hey, no deadline recorded does not mean no deadline >:(");
+                }
+                if (args[0].equalsIgnoreCase("event")) {
+                    System.out.println("     I can't add an event without a date!");
+                }
             }
             System.out.println("     Please input in the form: <Type of Task> <Name of Task>" +
                     " and include keyword '/at' OR '/by' with date if relevant.");
