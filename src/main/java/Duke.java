@@ -1,8 +1,21 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Duke {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> list = new ArrayList<>();
         greeting();
-        echo();
+        String cmd = sc.nextLine();
+        while (!cmd.equals("bye")) {
+            if (cmd.equals("list")) {
+                iterList(list);
+            } else {
+                addToList(list, cmd);
+            }
+            cmd = sc.nextLine();
+        }
+        sc.close();
         exit();
     }
 
@@ -10,14 +23,17 @@ public class Duke {
         System.out.println("Aloha! I'm Sophia\nWhat can I do for you?\n");
     }
 
-    private static void echo() {
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
-        while (!command.equals("bye")) {
-            System.out.println(command);
-            command = sc.nextLine();
+    private static void iterList(ArrayList<String> ls) {
+        int i = 1;
+        for (String s : ls) {
+            System.out.println(i + ". " + s);
+            i++;
         }
-        sc.close();
+    }
+
+    private static void addToList(ArrayList<String> ls, String text) {
+        ls.add(text);
+        System.out.println("added: " + text);
     }
 
     private static void exit() {
