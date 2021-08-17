@@ -48,4 +48,25 @@ DukeException: Oops! Missing description for event.
 DukeException: Oops! I'm sorry, but I don't know what that means :-(
 DukeException: Oops! I'm sorry, but I don't know what that means :-(
 DukeException: Oops! I'm sorry, but I don't know what that means :-(
+Noted. I've removed this task:
+  [T][X] join sports club
+Now you have 4 tasks in the list.
+Here are the tasks in your list:
+1.[T][X] read book
+2.[D][ ] return book (by: June 6th)
+3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+4.[T][ ] borrow book
+
+Noted. I've removed this task:
+  [T][X] read book
+Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1.[D][ ] return book (by: June 6th)
+2.[E][ ] project meeting (at: Aug 6th 2-4pm)
+3.[T][ ] borrow book
+
+DukeException: Oops! Improper formatting for delete. Please use: delete <task number>
+DukeException: Oops! Improper formatting for delete. Please use: delete <task number>
+DukeException: Oops! The task to delete is not within the range of the list.
+DukeException: Oops! The task to delete is not within the range of the list.
 Bye. Hope to see you again soon!

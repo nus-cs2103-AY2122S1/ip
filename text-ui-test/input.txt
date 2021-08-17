@@ -24,4 +24,12 @@ event /at B
 blah
 ecent
 dine
+delete 4
+list
+delete 1
+list
+delete
+delete!
+delete 6
+delete 0
 bye
