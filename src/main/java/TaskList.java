@@ -14,7 +14,6 @@ public class TaskList {
                 (tasks.size() == 1
                     ? "There is 1 task in your list"
                     : "There are " + tasks.size() + " tasks in your list"));
-
     }
 
     public void add(Matcher input, TaskType type) {
@@ -38,8 +37,6 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There's no task at index " + (index - 1) + "!!");
         }
-
-
     }
 
     public void displayList() {

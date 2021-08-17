@@ -31,24 +31,28 @@ ____________________________________________________________
 ____________________________________________________________
 
   →   Got it. I've added a To-do.
+      [T][ ] buy groceries
   →   There is 1 task in your list
 ____________________________________________________________
 
 ____________________________________________________________
 
   →   Got it. I've added a Deadline.
+      [D][ ] grocery shopping (by: Monday)
   →   There are 2 tasks in your list
 ____________________________________________________________
 
 ____________________________________________________________
 
   →   Got it. I've added an Event. Don't miss it!
+      [E][ ] flash sale at supermarket (at: Saturday)
   →   There are 3 tasks in your list
 ____________________________________________________________
 
 ____________________________________________________________
 
   →   Got it. I've added a To-do.
+      [T][ ] more grocery shopping
   →   There are 4 tasks in your list
 ____________________________________________________________
 
