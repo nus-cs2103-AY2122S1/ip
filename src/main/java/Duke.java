@@ -15,7 +15,7 @@ public class Duke {
         final String DELETE = "delete";
         //Enumeration
         enum Command {
-            CLIST, CDONE, CBYE, CDELETE
+            CLIST, CDONE, CBYE, CDELETE, COTHER
         };
 
         boolean isEnd = false;
