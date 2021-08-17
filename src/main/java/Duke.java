@@ -1,8 +1,23 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Description:
+ * Duke the ChatBot allows users to add 3 different types of tasks, mark them as done, and delete tasks.
+ * The commands for usage are as follows:
+ * 1. "todo <name>" where name is what the user would like the todo to be called.
+ * 2. "event <name>" where name is what the user would like the event to be called.
+ * 3. "deadline <name>" where name is what the user would like the deadline to be called.
+ * 4. "list" to view current tasks added to the tasks list.
+ * 5. "done <number>" where number is the task with the corresponding number in the list which the user would like to mark as completed.
+ * 6. "delete <number>" where number is the task with the corresponding number in the list which the user would like to remove.
+ * 7. "bye" to leave the ChatBot.
+ * Disclaimer: any other commands will not be recognised and user will be prompted to enter a valid command.
+ *
+ * @author Leong Hong Fai
+ */
+
 public class Duke {
-    private static Task[] store = new Task[100];
     private static ArrayList<Task> storage = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -15,11 +30,21 @@ public class Duke {
         commands();
     }
 
+    /**
+     * Prints out text to say goodbye to user.
+     */
     private static void byeCommand() {
         System.out.println("    ______________________________________");
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println("    ______________________________________");
     }
+
+    /**
+     * Prints out the current list of tasks the user has.
+     *
+     * @param command entered by user.
+     * @throws DukeException upon invalid commands or empty tasks list.
+     */
     private static void printList(String command) throws DukeException {
         String[] words = command.split(" ");
         if (words.length > 1) {
@@ -37,6 +62,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Adds a ToDo to the list of tasks.
+     *
+     * @param command entered by the user.
+     * @throws DukeException upon invalid command format.
+     */
     private static void addToDo(String command) throws DukeException {
         if (command.length() < 6) {
             throw new DukeException("invalidToDo");
@@ -53,12 +84,19 @@ public class Duke {
 
     }
 
+
+    /**
+     * Adds a deadline to the list of tasks.
+     *
+     * @param command entered by the user.
+     * @throws DukeException upon invalid command format.
+     */
     private static void addDeadline(String command) throws DukeException {
         String[] words = command.split(" ");
         if (words.length <= 3 ) {
             throw new DukeException("invalidDeadline");
         }
-         else if (!words[2].equals("/by")) {
+         else if (!command.contains("/by")) {
             throw new DukeException("invalidDeadline");
         }
         else {
@@ -75,12 +113,19 @@ public class Duke {
         }
     }
 
+
+    /**
+     * Adds event to the list of tasks.
+     *
+     * @param command entered by the user.
+     * @throws DukeException upon invalid command format.
+     */
     private static void addEvent(String command) throws DukeException {
         String[] words = command.split(" ");
         if (words.length <= 3 ) {
             throw new DukeException("invalidEvent");
         }
-        else if (!words[2].equals("/at")) {
+        else if (!command.contains("/at")) {
             throw new DukeException("invalidEvent");
         }
         else {
@@ -97,6 +142,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Marks a specific task in the list as completed.
+     *
+     * @param command entered by the user.
+     * @throws DukeException upon incorrect command format.
+     */
     private static void markCompleted(String command) throws DukeException {
         String restOfCommand = command.substring(5);
         boolean numeric;
@@ -123,8 +174,41 @@ public class Duke {
         }
     }
 
+
+    /**
+     * Deletes a specified task from the list of tasks.
+     *
+     * @param command entered by the user.
+     * @throws DukeException upon incorrect command format.
+     */
+    private static void deleteTask(String command) throws DukeException {
+        String restOfCommand = command.substring(7);
+        boolean numeric;
+        try {
+            int temp = Integer.parseInt(restOfCommand);
+            numeric = true;
+        } catch (NumberFormatException err) {
+            numeric = false;
+        }
+        if (numeric) {
+            int taskNum = Integer.parseInt(restOfCommand) - 1;
+            if (taskNum < storage.size()) {
+                Task currTask = storage.get(taskNum);
+                storage.remove(taskNum);
+                System.out.println("    ______________________________________");
+                System.out.println("     Noted. I've removed this task:");
+                System.out.printf("       %s\n", currTask);
+                System.out.printf("     Now you have %d tasks in the list.\n", storage.size());
+                System.out.println("    ______________________________________");
+            } else {
+                throw new DukeException("invalidTaskNumber");
+            }
+        } else {
+            throw new DukeException("invalidNumberFormatDelete");
+        }
+    }
+
     private static void commands() throws DukeException {
-        store = new Task[100];
         int pointer = 1;
         System.out.println("Hello! I'm Duke\n");
         System.out.println("What can I do for you?");
@@ -149,8 +233,11 @@ public class Duke {
                         case ("event"):
                             addEvent(command);
                             break;
-                        case("done"):
+                        case ("done"):
                             markCompleted(command);
+                            break;
+                        case ("delete"):
+                            deleteTask(command);
                             break;
                         default:
                             throw new DukeException("invalidCommand");
@@ -167,7 +254,6 @@ public class Duke {
                 break;
             }
         }
-
     }
 
 

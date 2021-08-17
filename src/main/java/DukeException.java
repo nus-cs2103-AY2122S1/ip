@@ -1,3 +1,11 @@
+/**
+ * Description:
+ * DukeException class stores a variety of error messages that will be printed accordingly based on the
+ * error encountered while Duke is running.
+ *
+ * @author Leong Hong Fai
+ */
+
 public class DukeException extends RuntimeException {
     private final String INVALIDTODO = "Enter a valid todo in this format 'todo <task here>'";
     private final String NOTASKSEXCEPTION = "There are no tasks in the list yet!";
@@ -6,6 +14,7 @@ public class DukeException extends RuntimeException {
     private final String INVALIDTASKNUMBER = "Current task number does not exist. Enter <list> to see all tasks";
     private final String INVALIDNUMBERFORMAT = "Enter a valid number in this format 'done <number>'";
     private final String INVALIDCOMMAND = "Enter a valid command!";
+    private final String INVALIDNUMBERFORMATDELETE = "Enter a valid number in this format 'delete <number>'";
     private String type;
     private String errorMessage;
 
@@ -34,9 +43,16 @@ public class DukeException extends RuntimeException {
             case ("invalidCommand"):
                 errorMessage = INVALIDCOMMAND;
                 break;
+            case ("invalidNumberFormatDelete"):
+                errorMessage = INVALIDNUMBERFORMATDELETE;
         }
     }
 
+    /**
+     * Simple string representation of DukeException.
+     *
+     * @return A string consisting of the relevant error message.
+     */
     public String toString() {
         return errorMessage;
     }
