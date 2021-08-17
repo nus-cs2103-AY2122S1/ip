@@ -1,0 +1,15 @@
+todo eat breakfast with Jason Mamoa
+deadline math homework /by this coming sunday
+event dinner with friends /at ha you dont have friends, stop lying!
+bad values
+done 3
+list
+done 1
+done done
+deadline pee /by before i pee in my pants
+list
+deadline bad
+event just as bad/at still bad
+done -1
+event go to school /at school obviously
+bye

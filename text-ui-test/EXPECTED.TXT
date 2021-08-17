@@ -1,7 +1,93 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+                     ,,
+`7MM"""Yp,          *MM
+  MM    Yb           MM
+  MM    dP  ,pW"Wq.  MM,dMMb.
+  MM"""bg. 6W'   `Wb MM    `Mb
+  MM    `Y 8M     M8 MM     M8
+  MM    ,9 YA.   ,A9 MM.   ,M9
+.JMMmmmd9   `Ybmd9'  P^YbmdP'
 
+      .--..--..--..--..--..--.
+    .' \  (`._   (_)     _   \
+  .'    |  '._)         (_)  |
+  \ _.')\      .----..---.   /
+  |(_.'  |    /    .-\-.  \  |
+  \     0|    |   ( O| O) | o|
+   |  _  |  .--.____.'._.-.  |
+   \ (_) | o         -` .-`  |
+    |    \   |`-._ _ _ _ _\ /
+    \    |   |  `. |_||_|   |
+    | o  |    \_      \     |     -.   .-.
+    |.-.  \     `--..-'   O |     `.`-' .'
+  _.'  .' |     `-.-'      /-.__   ' .-'
+.' `-.` '.|='=.='=.='=.='=|._/_ `-'.'
+`-._  `.  |________/\_____|    `-.'
+   .'   ).| '=' '='\/ '=' |
+   `._.`  '---------------'
+           //___\   //___\
+             ||       ||
+             ||_.-.   ||_.-.
+            (_.--__) (_.--__)
+asciiart.eu/cartoons/spongebob-squarepants
+
+Let's Talk!
+
+What would you like me to add to the list?
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+Got it, I've added this task:
+[T][ ] eat breakfast with Jason Mamoa
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+Got it, I've added this task:
+[D][ ] math homework (by: this coming sunday)
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+Got it, I've added this task:
+[E][ ] dinner with friends (at: ha you dont have friends, stop lying!)
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+I am not too sure what that task is... please specify!!
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+Good job, I have marked the task as done!
+[E][X] dinner with friends (at: ha you dont have friends, stop lying!)
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+ This be ye list of things to do Sire:
+ 1. [T][ ] eat breakfast with Jason Mamoa
+ 2. [D][ ] math homework (by: this coming sunday)
+ 3. [E][X] dinner with friends (at: ha you dont have friends, stop lying!)
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+Good job, I have marked the task as done!
+[T][X] eat breakfast with Jason Mamoa
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+That is not a valid index!
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+Got it, I've added this task:
+[D][ ] pee (by: before i pee in my pants)
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+ This be ye list of things to do Sire:
+ 1. [T][X] eat breakfast with Jason Mamoa
+ 2. [D][ ] math homework (by: this coming sunday)
+ 3. [E][X] dinner with friends (at: ha you dont have friends, stop lying!)
+ 4. [D][ ] pee (by: before i pee in my pants)
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+Woah that is some wonky Deadline you got there. Try harder!
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+Woah that is some wonky Event you got there. Try harder!
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+ That task does not exist!
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+Got it, I've added this task:
+[E][ ] go to school (at: school obviously)
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+Bye bye from the List Adder!
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
