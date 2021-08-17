@@ -1,10 +1,39 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String logo = "    ____    ____    ____    __  __   ____ \n" +
+                "   / __ \\  / __ \\  / __ \\  / / / /  / __ \\\n" +
+                "  / /_/ / / /_/ / / / / / / /_/ /  / /_/ /\n" +
+                " / .___/  \\____/ /_/ /_/  \\__, /   \\____/ \n" +
+                "/_/                      /____/           \n";
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println(logo);
+        System.out.println("Hello! I'm Ponyo.\n" +
+                "What can I do for you?\n" +
+                "____________________________________________________________\n");
+
+        while (true) {
+            String cmd = scan.nextLine();
+            System.out.println("\t____________________________________________________________\n");
+            String toPrint = "";
+
+            switch (cmd) {
+                case "list":
+                    toPrint = "\tlist";
+                    break;
+                case "bye":
+                    toPrint = "\tBye. Hope to see you again soon!";
+                    break;
+                default:
+                    toPrint = "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            }
+            System.out.println(toPrint);
+            System.out.println("\t____________________________________________________________\n");
+
+            if (cmd.equals("bye")) break;
+        }
     }
 }
