@@ -20,7 +20,7 @@ public class Duke {
     }
 
     /**
-     * Beautifies list of items by wrappiing it around a border.
+     * Beautifies list of items by wrapping it around a border.
      *
      * @param elements
      */
@@ -35,7 +35,7 @@ public class Duke {
     }
 
     /**
-     *
+     * Marks an item on the list as completed.
      * @param input
      */
     private static void markAsDone(String input) {
@@ -44,9 +44,64 @@ public class Duke {
         Integer idx = keywords.length > 1 ? Integer.parseInt(keywords[1]) - 1 : -1;
         Task task = listOfItems.get(idx);
         task.setDone();
-        String confirmationMessage = "You have successfully completed task " + keywords[1] + ":" + "\n";
-        outputWrapper(confirmationMessage + task);
+        String completionMessage = "You have successfully completed task " + keywords[1] + ":" + "\n";
+        outputWrapper(completionMessage + task);
+    }
 
+    /**
+     * function for printing the confirmation message for any item added to list
+     * @param task
+     */
+    private static void printConfirmation(Task task) {
+        String confirmationMessage = "You have successfully added an item:\n" + task + " \nto the list.\n";
+        String numberOfItems = "There " + (listOfItems.size() > 1 ? "are " : "is ") + listOfItems.size()
+                                        +  (listOfItems.size() > 1 ? " items " : " item ") + "in the list right now";
+        outputWrapper(confirmationMessage + numberOfItems);
+    }
+
+    /**
+     * Add an item to the list as todo.
+     * @param input
+     */
+    private static void markAsTodo(String input) {
+        // split input into command + text and date
+        String[] keywords = input.split("/");
+        // split input into command and text
+        String[] elements = keywords[0].split(" ", 2);
+
+        String command = elements[0];
+        String textDescription = elements[1];
+        Task todo = new Todo(textDescription);
+        listOfItems.add(todo);
+        printConfirmation(todo);
+    }
+
+    private static void markAsEvent(String input) {
+        // split input into command + text and date
+        String[] keywords = input.split("/");
+        // split input into command and text
+        String[] elements = keywords[0].split(" ", 2);
+
+        String time = keywords[1];
+        String command = elements[0];
+        String textDescription = elements[1];
+        Task event = new Event(textDescription, time);
+        listOfItems.add(event);
+        printConfirmation(event);
+    }
+
+    private static void markAsDeadline(String input) {
+        // split input into command + text and date
+        String[] keywords = input.split("/");
+        // split input into command and text
+        String[] elements = keywords[0].split(" ", 2);
+
+        String time = keywords[1];
+        String command = elements[0];
+        String textDescription = elements[1];
+        Task deadline = new Deadline(textDescription, time);
+        listOfItems.add(deadline);
+        printConfirmation(deadline);
     }
     /**
      * Handles the user's input and determines which command should be run.
@@ -54,13 +109,22 @@ public class Duke {
      * @param input
      */
     private static void handleInput(String input) {
-        String keywords = input.split(" ")[0];
-        switch(keywords) {
+        String command = input.split(" ")[0];
+        switch(command) {
             case "items":
                 outputWrapper(listOfItems);
                 break;
             case "completed":
                 markAsDone(input);
+                break;
+            case "todo":
+                markAsTodo(input);
+                break;
+            case "event":
+                markAsEvent(input);
+                break;
+            case "deadline":
+                markAsDeadline(input);
                 break;
             default:
                 listOfItems.add(new Task(input));

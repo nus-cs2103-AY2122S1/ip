@@ -1,6 +1,9 @@
 public class Task {
-    private boolean isDone;
-    private String item;
+    protected boolean isDone;
+    protected String item;
+    protected String hasCross = "[X]";
+    protected String hasNoCross = "[]";
+
     public Task(String input) {
         isDone = false;
         item = input;
@@ -12,8 +15,6 @@ public class Task {
 
     @Override
     public String toString() {
-        String hasCross = "[X]";
-        String hasNoCross = "[]";
         if (isDone) {
             return hasCross + " " + item;
         } else {
