@@ -45,6 +45,30 @@ public class Command {
         return String.format("added: %1$s \n\t", input);
     }
 
+    public String todo(String input) {
+        Todo toAdd = new Todo(input);
+        records[count] = toAdd;
+        count += 1;
+        return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
+                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), count);
+    }
+
+    public String event(String description, String at) {
+        Event toAdd = new Event(description, at);
+        records[count] = toAdd;
+        count += 1;
+        return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
+                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), count);
+    }
+
+    public String deadline(String description, String by) {
+        Deadline toAdd = new Deadline(description, by);
+        records[count] = toAdd;
+        count += 1;
+        return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
+                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), count);
+    }
+
     /**
      * Returns message representing list of all items user added.
      *

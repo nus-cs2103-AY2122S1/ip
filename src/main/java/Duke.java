@@ -38,6 +38,14 @@ public class Duke {
                 System.out.println(format(commands.list()));
             } else if (input.equals("done")) {
                 System.out.println(format(commands.done((scanner.nextInt()) - 1)));
+            } else if (input.equals("todo")) {
+                System.out.println(format(commands.todo(scanner.nextLine().trim())));
+            } else if (input.equals("deadline")) {
+                String[] text = scanner.nextLine().split("/by ");
+                System.out.println(format(commands.deadline(text[0].trim(), text[1])));
+            } else if(input.equals("event")) {
+                String[] text = scanner.nextLine().split("/at ");
+                System.out.println(format(commands.event(text[0].trim(), text[1])));
             } else {
                 System.out.println(format(commands.add(input + scanner.nextLine())));
             }
