@@ -71,36 +71,36 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        String dory = "      _                  \n"
-                + "     | |                 \n"
-                + "   __| |   ___    _ __   _   _ \n"
+        String dory = "      _\n"
+                + "     | |\n"
+                + "   __| |   ___    _ __   _   _\n"
                 + "  /    |  /   \\  | /__| | | | |\n"
                 + " |   O | |  O  | | |    | |_| |\n"
                 + "  \\__,_|  \\___/  |_|     \\__, |\n"
                 + "   ________________________/  |\n"
-                + "  (__________________________/ \n"
+                + "  (__________________________/\n"
                 + "\n"
-                + " how to use:  \n"
-                + "     * type down something and i'll remember  \n"
-                + "         'todo' followed by your 'task' \n"
-                + "             eg. todo go to sleep \n"
-                + "         'deadline' followed by the '/by deadline' \n"
-                + "             eg. deadline finish test /by tomorrow \n"
-                + "         'event' followed by the '/at time' \n"
-                + "             eg. event christmas /at december \n"
-                + "     * type 'list' to show everything  \n"
-                + "     * type 'bye' to leave \n"
-                + "     * type 'done' followed by the task number \n"
-                + "       to mark it as done \n"
-                + " ▹";
+                + " how to use:\n"
+                + "     * type down something and i'll remember\n"
+                + "         'todo' followed by your 'task'\n"
+                + "             eg. todo go to sleep\n"
+                + "         'deadline' followed by the '/by deadline'\n"
+                + "             eg. deadline finish test /by tomorrow\n"
+                + "         'event' followed by the '/at time'\n"
+                + "             eg. event christmas /at december\n"
+                + "     * type 'list' to show everything\n"
+                + "     * type 'bye' to leave\n"
+                + "     * type 'done' followed by the task number\n"
+                + "       to mark it as done\n"
+                + " >";
 
 
         String fish = "                              ....\n"
-                + "                             /¸... \\ \n"
-                + "   hi my name is dory    .·´ \\ \\   `.¸.´)\n"
+                + "                             /.... \\\n"
+                + "   hi my name is dory    .-`\\ \\   `...')\n"
                 + "   and i can help you   ( o   | |      (\n"
-                + "    remember things      ·.¸ / /¸.·´`·.¸)\n"
-                + "                             `\\___\\   ";
+                + "    remember things      `-_ / /_./``-._)\n"
+                + "                             `\\___\\";
 
         // introduction to chat bot
 
@@ -122,8 +122,8 @@ public class Duke {
             System.out.println("------------------------------------");
 
             if (nextInput.equals("bye")) {
-                System.out.println(" ▹ see you! hope to see you again :-) ");
-                System.out.println("──────────────────────────────────Oo");
+                System.out.println(" > see you! hope to see you again :-)");
+                System.out.println("==================================Oo");
                 input.close();
                 break;
 
@@ -132,7 +132,7 @@ public class Duke {
                 if (tasks.size() == 0) {
                     System.out.println("add anything using 'todo', 'deadline' or 'event'");
                 } else {
-                    System.out.println(" ▹ here you go! ");
+                    System.out.println(" > here you go!");
                     // loop through the arraylist to show everything
                     for (int count = 0; count < tasks.size(); count++) {
                         Task eachTask = tasks.get(count);
@@ -140,16 +140,16 @@ public class Duke {
                         System.out.println(countFromOne + ". " + eachTask.toString());
                     }
                 }
-                System.out.println("──────────────────────────────────Oo");
+                System.out.println("==================================Oo");
 
             } else if (nextInput.contains("done")) {
                 // to extract number from the input
                 String taskToBeMarked = nextInput.replaceAll("[^0-9]", "");
                 int numToBeMarked = Integer.parseInt(taskToBeMarked) - 1;
                 tasks.get(numToBeMarked).markAsDone();
-                System.out.println(" ▹ i've marked this as done:");
+                System.out.println(" > i've marked this as done:");
                 System.out.println("  " + tasks.get(numToBeMarked).toString());
-                System.out.println("──────────────────────────────────Oo");
+                System.out.println("==================================Oo");
 
             } else {
                 // add the task to the arraylist of tasks
@@ -158,7 +158,7 @@ public class Duke {
                     String updatedTask = nextInput.replace("todo ", "");
                     ToDos toDoTask = new ToDos(updatedTask);
                     tasks.add(toDoTask);
-                    System.out.println(" ▹ added: ");
+                    System.out.println(" > added:");
                     System.out.println("    " + toDoTask.toString());
 
                 } else if (nextInput.contains("deadline")) {
@@ -167,7 +167,7 @@ public class Duke {
                     String finishBy = updatedTask.split("/by ")[1].trim();
                     Deadlines deadlineTask = new Deadlines(deadlineToAdd, finishBy);
                     tasks.add(deadlineTask);
-                    System.out.println(" ▹ added: ");
+                    System.out.println(" > added:");
                     System.out.println("    " + deadlineTask.toString());
 
                 } else if (nextInput.contains("event")) {
@@ -176,7 +176,7 @@ public class Duke {
                     String dateOfEvent = updatedTask.split("/at ")[1].trim();
                     Events eventTask = new Events(eventToAdd, dateOfEvent);
                     tasks.add(eventTask);
-                    System.out.println(" ▹ added: ");
+                    System.out.println(" > added:");
                     System.out.println("    " + eventTask.toString());
 
                 }
@@ -189,7 +189,7 @@ public class Duke {
                     System.out.println("add anything using 'todo', 'deadline' or 'event'");
                 }
 
-                System.out.println("──────────────────────────────────Oo");
+                System.out.println("==================================Oo");
             }
         }
     }
