@@ -99,10 +99,13 @@ public class Duke extends Chatbot {
                 int indexNumber = Integer.parseInt(getInputAfterCommand(DELETE_TASK_COMMAND, message));
                 output = this.taskList.deleteTask(indexNumber);
             } else if (message.startsWith(CREATE_TODO_COMMAND)) {
+                // Create a todo
                 output = this.taskList.addTodo(getInputAfterCommand(CREATE_TODO_COMMAND, message));
             } else if (message.startsWith(CREATE_EVENT_COMMAND)) {
+                // Create an event
                 output = this.taskList.addEvent(getInputAfterCommand(CREATE_EVENT_COMMAND, message));
             } else if (message.startsWith(CREATE_DEADLINE_COMMAND)) {
+                // Create a deadline
                 output = this.taskList.addDeadline(getInputAfterCommand(CREATE_DEADLINE_COMMAND, message));
             } else {
                 throw new DukeException("I don't know what that command means.\nPlease input a valid command.");
