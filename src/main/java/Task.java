@@ -14,7 +14,7 @@ public class Task {
 
     @Override
     public String toString(){
-        return String.format((this.isDone ? "[X] " : "[ ] ") + this.taskTitle);
+        return String.format("[%c] %s", (this.isDone ? 'X' : ' '), this.taskTitle);
     }
 
 }
