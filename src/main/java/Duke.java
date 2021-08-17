@@ -41,7 +41,7 @@ public class Duke {
     /**
      * Adds a task to the taskList.
      *
-     * @param task
+     * @param task the task to be added to the list.
      */
     private static void addToList(Task task) {
         taskList.add(task);
@@ -53,7 +53,7 @@ public class Duke {
      * Adds a To-do task to the taskList.
      *
      * @param input The String array containing the to-do description at index 1.
-     * @throws DukeException
+     * @throws DukeException The exception to be thrown when input is not as expected.
      */
     private static void addToDo(String[] input) throws DukeException {
         if (input.length > 1) {
@@ -67,7 +67,7 @@ public class Duke {
      * Adds a deadline task to the taskList.
      *
      * @param input The String array containing the deadline description at index 1.
-     * @throws DukeException
+     * @throws DukeException The exception to be thrown when input is not as expected.
      */
     private static void addDeadline(String[] input) throws DukeException {
         if (input.length > 1) {
@@ -83,10 +83,10 @@ public class Duke {
     }
 
     /**
-     * Adds a event task to the taskList.
+     * Adds an event task to the taskList.
      *
      * @param input The String array containing the event description at index 1.
-     * @throws DukeException
+     * @throws DukeException The exception to be thrown when input is not as expected.
      */
     private static void addEvent(String[] input) throws DukeException {
         if (input.length > 1) {
@@ -105,7 +105,7 @@ public class Duke {
      * Marks task as done in taskList.
      *
      * @param input The String array with the index of the task to be done in input[1], if it is there.
-     * @throws DukeException
+     * @throws DukeException The exception to be thrown when input is not as expected.
      */
     private static void doTask(String[] input) throws DukeException {
         if (input.length < 2) {
@@ -130,7 +130,7 @@ public class Duke {
      * Removes a task from the task list.
      *
      * @param input The String array with the index of the task to be removed in input[1], if it is there.
-     * @throws DukeException
+     * @throws DukeException The exception to be thrown when input is not as expected.
      */
     private static void deleteTask(String[] input) throws DukeException {
         if (input.length < 2) {
@@ -153,7 +153,6 @@ public class Duke {
      * Frames the message with underscore lines and prints it.
      *
      * @param msg The String we want to frame.
-     * @return The framed String.
      */
     private static void echo(String msg) {
         String line = "__________________________________________________________";
