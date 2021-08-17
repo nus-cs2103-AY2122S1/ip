@@ -6,5 +6,5 @@ public class STATICS {
                               + "|____/ \\__,_|_|\\_\\___|\n";
     public static String INDENTED_HORIZONTAL_LINE = "    ____________________________________________________________";
     public static String INDENT = "     ";
-    public static String INTRODUCTION =  "Hello! I'm Duke\n" + STATICS.INDENT + "What can I do for you?";
+    public static String INTRODUCTION = "Hello! I'm Duke\n" + STATICS.INDENT + "What can I do for you?";
 }
