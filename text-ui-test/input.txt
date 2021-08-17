@@ -9,4 +9,8 @@ todo
 list
 meep
 list
+delete 1
+delete 2
+list
+meep
 bye
