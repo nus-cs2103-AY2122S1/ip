@@ -13,8 +13,27 @@ public class Duke {
     /**
      * Commands that Duke might use.
      */
-    private static String DONE_COMMAND = "Nice! I've marked this task as done:";
-    private static String DELETE_COMMAND = "Noted. I've removed this task:";
+
+    private enum Commands {
+        GREET(String.format("Hello! I'm Duke\n%4sWhat can I do for you?", " ")),
+        ADD("Got it. I've added this task:"),
+        DONE("Nice! I've marked this task as done:"),
+        DELETE("Noted. I've removed this task:"),
+        LIST("Here are the tasks in your list:"),
+        EXIT("Bye. Hope to see you again soon!"),
+        INVALID("☹ OOPS!!! I'm sorry, but I don't know what that means :-("),
+        NOSUCHTASK("There is no such task.");
+
+        private final String command;
+
+        private Commands(String command) {
+            this.command = command;
+        }
+
+        public void printCommand() {
+            System.out.println(String.format("%4s%s", " ", this.command));
+        }
+    }
 
     /**
      * Dividing line for formatting Duke's replies.
@@ -31,13 +50,8 @@ public class Duke {
      * Method that prints Duke's greetings.
      */
     private static void greet() {
-        String intro = "Hello! I'm Duke";
-        String greeting = "What can I do for you?";
-
         divider();
-        System.out.println(
-                String.format("%4s%s\n%4s%s", " ", intro, " ", greeting)
-        );
+        Commands.GREET.printCommand();
         divider();
     }
 
@@ -45,10 +59,8 @@ public class Duke {
      * Method that prints Duke's exit message.
      */
     private static void exit() {
-        String exitMessage ="Bye. Hope to see you again soon!";
-
         divider();
-        System.out.println(String.format("%4s%s", " ", exitMessage));
+        Commands.EXIT.printCommand();
         divider();
     }
 
@@ -57,7 +69,7 @@ public class Duke {
      */
     private static void returnTaskList() {
         divider();
-        System.out.println(String.format("%4sHere are the tasks in your list:", " "));
+        Commands.LIST.printCommand();
         System.out.println(taskList);
         divider();
     }
@@ -65,7 +77,7 @@ public class Duke {
     /**
      * Method for Duke to handle invalid inputs by the user.
      *
-     * @param input
+     * @param input The user input to Duke.
      */
     private static void handleInvalidInputs(String input) {
         switch (input) {
@@ -80,13 +92,8 @@ public class Duke {
                 break;
             }
             default:
-                System.out.println(
-                        String.format(
-                                "%4s☹ OOPS!!! I'm sorry, but I don't know what that means :-(",
-                                " ")
-                );
+                Commands.INVALID.printCommand();
         }
-        return;
     }
 
     /**
@@ -123,19 +130,17 @@ public class Duke {
                         description.substring(timeIndex + 4));
                 break;
             default:
-                System.out.println("Uncategorised task.");
+                Commands.INVALID.printCommand();
                 return;
 
         }
 
         divider();
         Duke.taskList = taskList.add(newTask);
+        Commands.ADD.printCommand();
         System.out.println(
-                String.format("%4sGot it. I've added this task:\n%5s%s",
-                        " ", " ", newTask)
-        );
-        System.out.println(
-                String.format("%4s%s", " ", taskList.status())
+                String.format("%5s%s\n%4s%s", " ", newTask,
+                        " ", taskList.status())
         );
         divider();
     }
@@ -150,12 +155,13 @@ public class Duke {
         divider();
         if (isValid) {
             Task task = taskList.markTaskAsCompleted(index);
+            Commands.DONE.printCommand();
             System.out.println(
-                    String.format("%4s%s\n%6s%s\n%4s%s", " ",
-                            DONE_COMMAND, " ", task, " ", taskList.status())
+                    String.format("%6s%s\n%4s%s", " ", task,
+                            " ", taskList.status())
             );
         } else {
-            System.out.println(String.format("%4s%s", " ", "There is no such task."));
+            Commands.NOSUCHTASK.printCommand();
         }
         divider();
     }
@@ -171,12 +177,13 @@ public class Duke {
         if (isValid) {
             Task task = taskList.getTask(index);
             Duke.taskList = taskList.deleteTask(index);
+            Commands.DELETE.printCommand();
             System.out.println(
-                    String.format("%4s%s\n%6s%s\n%4s%s",
-                            " ", DELETE_COMMAND, " ", task, " ", taskList.status())
+                    String.format("%6s%s\n%4s%s", " ", task,
+                            " ", taskList.status())
             );
         } else {
-            System.out.println(String.format("%4s%s", " ", "There is no such task."));
+            Commands.NOSUCHTASK.printCommand();
         }
         divider();
     }
@@ -184,7 +191,7 @@ public class Duke {
     /**
      * Main method to execute Duke's functions.
      *
-     * @param args
+     * @param args Command line arguments.
      */
     public static void main(String[] args) {
         // Greeting the user
@@ -204,6 +211,11 @@ public class Duke {
                     || command.startsWith("delete")) {
                 try {
                     String[] arrOfCommandWords = command.split(" ", 2);
+                    if (arrOfCommandWords.length <= 1) {
+                        // No task specified.
+                        Commands.INVALID.printCommand();
+                        continue;
+                    }
                     int taskIndex = Integer.parseInt(arrOfCommandWords[1]) - 1;
                     if (command.startsWith("done")) {
                         Duke.markTaskAsCompleted(taskIndex);
@@ -211,7 +223,7 @@ public class Duke {
                         Duke.deleteTask(taskIndex);
                     }
                 } catch (NumberFormatException e){
-                    System.out.println(e);
+                    System.out.println(e.getMessage());
                 } finally {
                     // TODO: implement cleanup
                 }
