@@ -1,7 +1,24 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello!
+1. Type a task (todo/event/deadline) to be added into your task list.
+2. Type 'list' if you want to generate your task list.
+3. Type 'bye' to exit
+Okay!! I've added the following task:
+[T] [ ] read book 
+Now you have 1 in the list
+Okay!! I've added the following task:
+[E] [ ] watch movie (at: 6pm monday)
+Now you have 2 in the list
+Okay!! I've added the following task:
+[D] [ ] do homework (by: 7pm tuesday)
+Now you have 3 in the list
+1. [T] [ ] read book 
+2. [E] [ ] watch movie (at: 6pm monday)
+3. [D] [ ] do homework (by: 7pm tuesday)
+InvalidTaskNumberException: OOPS!!! Please specify the task that needs to be deleted!
+Okay!! I have marked this task as done:
+[E] [X] watch movie (at: 6pm monday)
+Okay!! I have removed the following task:
+[T] [ ] read book 
+InvalidTypeException: OOPS!!! Please put either todo/event/deadline!
+EmptyDescriptionException: OOPS!!! Please specify the todo!!
+Bye. Hope to see you again soon!:)
