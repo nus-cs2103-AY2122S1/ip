@@ -10,6 +10,14 @@ public class Deadline extends Task {
         return "D";
     }
 
+    public static boolean isValid(String[] arr) throws DukeException {
+        if (arr.length == 1) {
+            throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+
+        return true;
+    }
+
     public String getDescription() {
         return String.format("%s (by: %s)", this.description, this.date);
     }

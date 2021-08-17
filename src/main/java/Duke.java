@@ -12,7 +12,7 @@ public class Duke {
         System.out.println(str);
     }
 
-    public static void add(String str) {
+    public static void add(String str) throws DukeException {
         Task newTask = null;
         String[] arr1 = str.split(" ", 2);
         String type = arr1[0];
@@ -22,21 +22,29 @@ public class Duke {
 
         switch (type) {
             case "todo":
-                desc = arr1[1];
-                newTask = new Todo(desc);
+                if (Todo.isValid(arr1)) {
+                    desc = arr1[1];
+                    newTask = new Todo(desc);
+                }
                 break;
             case "deadline":
-                arr2 = arr1[1].split(" /", 2);
-                desc = arr2[0];
-                date = arr2[1].substring(3);
-                newTask = new Deadline(desc, date);
+                if (Deadline.isValid(arr1)) {
+                    arr2 = arr1[1].split(" /", 2);
+                    desc = arr2[0];
+                    date = arr2[1].substring(3);
+                    newTask = new Deadline(desc, date);
+                }
                 break;
             case "event":
-                arr2 = arr1[1].split(" /", 2);
-                desc = arr2[0];
-                date = arr2[1].substring(3);
-                newTask = new Event(desc, date);
+                if (Event.isValid(arr1)) {
+                    arr2 = arr1[1].split(" /", 2);
+                    desc = arr2[0];
+                    date = arr2[1].substring(3);
+                    newTask = new Event(desc, date);
+                }
                 break;
+            default:
+                throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         list[listIndex] = newTask;
@@ -92,12 +100,16 @@ public class Duke {
         String str;
 
         while (!(str = sc.nextLine()).equals("bye")) {
-            if (str.equals("list")) {
-                Duke.getList();
-            } else if (str.contains("done")) {
-                Duke.complete(Character.getNumericValue(str.charAt(5)));
-            } else {
-                Duke.add(str);
+            try {
+                if (str.equals("list")) {
+                    Duke.getList();
+                } else if (str.contains("done")) {
+                    Duke.complete(Character.getNumericValue(str.charAt(5)));
+                } else {
+                    Duke.add(str);
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
 

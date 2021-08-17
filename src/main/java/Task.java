@@ -15,6 +15,10 @@ public class Task {
         return this.description;
     }
 
+    public static boolean isValid(String[] arr) throws DukeException {
+        return true;
+    }
+
     public String getType() {
         return " ";
     }
