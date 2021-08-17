@@ -12,6 +12,13 @@ public class DukeLogic {
 
   private static ArrayList<Task> tasks = new ArrayList<>();
 
+  enum Actions {
+    DELETE,
+    MARK_COMPLETE,
+    //  EDIT
+    //  MARK_INCOMPLETE,
+  }
+
   /**
    * Takes in and handles input for Duke (the logic).
    *
@@ -28,7 +35,10 @@ public class DukeLogic {
       listTasks();
       return true;
     } else if (startsWithOrEquals("done ").apply(input)) {
-      markDone(getArgs(input, "done "));
+      doTaskAction(getArgs(input, "done "), Actions.MARK_COMPLETE);
+      return true;
+    } else if (startsWithOrEquals("delete ").apply(input)) {
+      doTaskAction(getArgs(input, "delete "), Actions.DELETE);
       return true;
     } else if (startsWithOrEquals("todo ").apply(input)) {
       addTask(getArgs(input, "todo "), Task.Type.TODO);
@@ -80,17 +90,31 @@ public class DukeLogic {
     }
   }
 
-  private static void markDone(String taskNumStr) {
+  private static void doTaskAction(String taskNumStr, Actions action) {
     try {
       int taskNum = Integer.parseInt(taskNumStr);
       Task task = tasks.get(taskNum - 1);
-      task.markComplete(true);
-      Duke.renderOutput("Great! I've marked this task as done:\n    " + task);
+      String output = "";
+      switch (action) {
+        case DELETE:
+          tasks.remove(taskNum - 1);
+          output = "Noted. I have deleted the following:\n    " + task;
+          output += String.format("%s\nYou now have %d tasks in the list", output, tasks.size());
+          break;
+        case MARK_COMPLETE:
+          task.markComplete(true);
+          output = "Great! I've marked this task as done:\n    " + task;
+          break;
+        default:
+          throw new IllegalArgumentException("Invalid action");
+      }
+      Duke.renderOutput(output);
     } catch (NumberFormatException err) {
       Duke.renderOutput(
-        "Which task would you like to mark done?\n" +
-        "USAGE:\ndone {task number}\n\n" +
-        "Example: done 4\n" +
+        "Which task are you interacting with?\n" +
+        "USAGE:\n{action} {task number}\n" +
+        "Example: > done 4\n" +
+        "         > delete 2\n" +
         "Try the `list` command to see the list of tasks"
       );
     } catch (IndexOutOfBoundsException err) {

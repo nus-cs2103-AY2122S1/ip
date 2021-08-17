@@ -97,3 +97,31 @@ What can I do for you?
     ____________________________________________________________
      Expected '{title} /at {date}' for event tasks
     ____________________________________________________________
+    ____________________________________________________________
+     Which task are you interacting with?
+     USAGE:
+     {action} {task number}
+     Example: > done 4
+              > delete 2
+     Try the `list` command to see the list of tasks
+    ____________________________________________________________
+    ____________________________________________________________
+     There is no task at that index.
+    ____________________________________________________________
+    ____________________________________________________________
+     Which task are you interacting with?
+     USAGE:
+     {action} {task number}
+     Example: > done 4
+              > delete 2
+     Try the `list` command to see the list of tasks
+    ____________________________________________________________
+    ____________________________________________________________
+     Noted. I have deleted the following:
+         [D] [x] learn magic (by: tomorrow)Noted. I have deleted the following:
+         [D] [x] learn magic (by: tomorrow)
+     You now have 2 tasks in the list
+    ____________________________________________________________
+    ____________________________________________________________
+     There is no task at that index.
+    ____________________________________________________________

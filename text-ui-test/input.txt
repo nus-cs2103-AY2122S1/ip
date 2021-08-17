@@ -25,3 +25,8 @@ deadline foo /by
 event foo /at
 deadline /by bar
 event /at bar
+delete
+delete 9
+delete foos
+delete 2
+done 3

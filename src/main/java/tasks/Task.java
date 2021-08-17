@@ -52,7 +52,9 @@ public class Task {
 
   protected Task(String title, Type type) {
     title = title.trim();
-    if (title.length() == 0) throw new InvalidTaskException("Task description cannot be empty");
+    if (title.length() == 0) {
+      throw new InvalidTaskException("Task description cannot be empty");
+    }
     this.title = title;
     this.type = type;
   }
