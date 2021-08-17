@@ -45,7 +45,7 @@ public class Duke {
         }
         sc.close();*/
 
-        //level 3
+        //level 4
         List<Task> toDoList = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
@@ -62,9 +62,29 @@ public class Duke {
                 //like invalid number entry
                 displayCheckedTask(toDoList.get(checkDone(message) - 1));
             } else {
-                Task newTask = new Task(message);
-                toDoList.add(newTask);
-                System.out.println(add(message));
+                if (isToDo(message)) {
+                    String taskName = message.substring(message.indexOf(" "));
+                    Task newTask = new Todo(taskName);
+                    toDoList.add(newTask);
+                    System.out.println(add(newTask.displayTask(), toDoList.size()));
+                } else {
+                    String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
+                    String temp = message.substring(message.indexOf("/") + 1);
+                    String due = temp.substring(temp.indexOf(" ") + 1);
+                    if (isDeadline(message)) {
+                        Task newTask = new Deadline(taskName, due);
+                        toDoList.add(newTask);
+                        System.out.println(add(newTask.displayTask(), toDoList.size()));
+                    } else if (isEvent(message)) {
+                        Task newTask = new Event(taskName, due);
+                        toDoList.add(newTask);
+                        System.out.println(add(newTask.displayTask(), toDoList.size()));
+                    } else {
+                        //nothing
+                        System.out.println("Task Type not found.");
+                    }
+                }
+
             }
         }
         sc.close();
@@ -76,17 +96,13 @@ public class Duke {
         System.out.println(intro);
     }
 
-    public static String add(String add) {
-        return "added: "+ add;
+    public static String add(String add, int size) {
+        return "Got it. I've added this task:\n "+ add + "\n Now you have " + size +  " tasks in the list.";
     }
 
     public static void list(List<Task> list) {
         int order = 1;
 
-        //level 2
-        /*for(String s : list){
-            System.out.println(order++ +". "+s);
-        }*/
         System.out.println("Here are the tasks in your list:");
         for (Task s : list) {
             System.out.println(order++ +"." + s.displayTask());
@@ -116,5 +132,17 @@ public class Duke {
         item.checkOffTask();
         String display = "Nice! I've marked this task as done: \n  " + item.displayTask();
         System.out.println(display);
+    }
+
+    public static boolean isDeadline(String message) {
+        return (message.length() > 8) && (message.startsWith("deadline"));
+    }
+
+    public static boolean isToDo(String message) {
+        return (message.length() > 4) && (message.startsWith("todo"));
+    }
+
+    public static boolean isEvent(String message) {
+        return (message.length() >5) && (message.startsWith("event"));
     }
 }
