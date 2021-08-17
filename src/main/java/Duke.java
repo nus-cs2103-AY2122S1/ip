@@ -73,12 +73,12 @@ public class Duke extends Chatbot {
             } else {
                 // Add a task to the list
                 Task task;
-                if (message.startsWith("todo ")) {
-                    task = this.taskList.addTodo(message.substring(5));
-                } else if (message.startsWith("event ")) {
-                    task = this.taskList.addEvent(message.substring(6));
-                } else if (message.startsWith("deadline ")) {
-                    task = this.taskList.addDeadline(message.substring(9));
+                if (message.startsWith("todo")) {
+                    task = this.taskList.addTodo(message.substring(4).trim());
+                } else if (message.startsWith("event")) {
+                    task = this.taskList.addEvent(message.substring(5).trim());
+                } else if (message.startsWith("deadline")) {
+                    task = this.taskList.addDeadline(message.substring(8).trim());
                 } else {
                     throw new DukeException("I don't know what that command means.\nPlease input a valid command.");
                 }
