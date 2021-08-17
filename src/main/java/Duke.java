@@ -2,44 +2,20 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        class Task {
-            protected String description;
-            protected boolean isDone;
-            protected int number;
-
-            public Task(String description, int number) {
-                this.description = description;
-                this.isDone = false;
-                this.number = number;
-            }
-
-            public String getStatusIcon() {
-                return (isDone ? "X" : " "); // mark done task with X
-            }
-
-            public void markAsDone() {
-                this.isDone = true;
-            }
-
-            public String getTask() {
-                return number + ". [" + this.getStatusIcon() + "] " + this.description;
-            }
-
-            public String getTaskNoNum() {
-                return "[" + this.getStatusIcon() + "] " + this.description;
-            }
-        }
-
         Scanner myObj = new Scanner(System.in);
+
         System.out.println("____________________________________________________________");
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
+
         boolean exit = false;
         Task[] tasks = new Task[100];
         int current = 0;
+
         while (!exit) {
             String userInput = myObj.nextLine();
+
             if (userInput.equals("bye")) {
                 System.out.println("____________________________________________________________");
                 System.out.println("Bye. Hope to see you again soon!");
@@ -63,12 +39,37 @@ public class Duke {
                 }
                 System.out.println("____________________________________________________________");
             } else {
-                System.out.println("____________________________________________________________");
-                System.out.println("added: " + userInput);
-                System.out.println("____________________________________________________________");
-                Task task = new Task(userInput, current + 1);
-                tasks[current] = task;
-                current++;
+                if (userInput.startsWith("todo ")) {
+                    tasks[current] = new Todo(userInput.substring(5), current + 1);
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + tasks[current].getTaskNoNum());
+                    System.out.println("Now you have " + (current + 1) + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+                    current++;
+                } else if (userInput.startsWith("deadline ")) {
+                    int slash = userInput.indexOf("/by");
+                    tasks[current] = new Deadline(userInput.substring(9, slash), current + 1, userInput.substring(slash + 4));
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + tasks[current].getTaskNoNum());
+                    System.out.println("Now you have " + (current + 1) + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+                    current++;
+                } else if (userInput.startsWith("event ")) {
+                    int slash = userInput.indexOf("/at");
+                    tasks[current] = new Event(userInput.substring(6, slash), current + 1, userInput.substring(slash + 4));
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + tasks[current].getTaskNoNum());
+                    System.out.println("Now you have " + (current + 1) + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+                    current++;
+                } else {
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Please prefix your task with deadline, todo, or event.");
+                    System.out.println("____________________________________________________________");
+                }
             }
         }
     }
