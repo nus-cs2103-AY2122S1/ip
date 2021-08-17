@@ -8,4 +8,16 @@ done 4
 todo borrow book
 done 3
 done 2
+deadline
+event
+todo
+deadline homework
+event fun run
+deadline homework /at June 6th
+event fun run /by June 7th
+deadline /by June 8th
+event /at June 6th
+blah
+random
+hello
 bye
