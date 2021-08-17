@@ -3,6 +3,8 @@ invalid test
  list
 list
 todo
+event
+deadline
 todo Water Plants
 todo Feed Cows
 event Kay's Birthday /at 32 May

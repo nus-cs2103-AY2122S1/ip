@@ -4,7 +4,9 @@ I don't quite understand the command 'invalid test'. Please try again!
 I don't quite understand the command ' invalid test'. Please try again!
 I don't quite understand the command ' list'. Please try again!
 You have no tasks!
-I don't quite understand the command 'todo'. Please try again!
+The description of a todo cannot be empty.
+The description of an event cannot be empty.
+The description of a deadline cannot be empty.
 Got it. I've added this task:
   [T][ ] Water Plants
 Now you have 1 task in the list
