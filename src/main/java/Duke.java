@@ -26,7 +26,7 @@ public class Duke {
     Scanner sc = new Scanner(System.in);
     while (sc.hasNextLine()) {
       String input = sc.nextLine();
-      renderOutput(input);
+      DukeLogic.takeInput(input);
       if (input.strip().equalsIgnoreCase("bye")) {
         break;
       }
@@ -38,7 +38,7 @@ public class Duke {
    *
    * @param output Multi-line or single line string.
    */
-  private static void renderOutput(String output) {
+  protected static void renderOutput(String output) {
     System.out.println("    ____________________________________________________________");
     output.lines().map(x -> "     " + x).forEach(System.out::println);
     System.out.println("    ____________________________________________________________");
