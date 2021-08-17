@@ -28,8 +28,8 @@ public class Kermit {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String command = "";
-        String flag = "";
-        String word = "";
+        String flag;
+        String word;
         
         StringBuilder descriptionBuilder = new StringBuilder();
         StringBuilder flagBuilder = new StringBuilder();
@@ -59,6 +59,9 @@ public class Kermit {
                 command = commandArr[0];
                 flag = flagArr[0];
 
+                String description = "";
+                String flagArguments = "";
+
                 // Clear contents of string builders
                 descriptionBuilder.setLength(0);
                 flagBuilder.setLength(0);
@@ -81,6 +84,9 @@ public class Kermit {
                     flagBuilder.append(word);
                 }
 
+                description = descriptionBuilder.toString();
+                flagArguments = flagBuilder.toString();
+
                 // Quit program
                 switch (command) {
                     case "bye":
@@ -92,27 +98,46 @@ public class Kermit {
                         break;
                     // Add objects to list
                     case "done":
-                        int index = Integer.parseInt(descriptionBuilder.toString()) - 1;
+                        int index = Integer.parseInt(description) - 1;
                         // Get task name
                         String taskText = list.completeTask(index);
                         System.out.println(formatText(completeTaskText + "\n" + taskText));
                         break;
                     // Add new todo task
                     case "todo":
-                        Task newToDo = new ToDos(descriptionBuilder.toString());
+                        if (description.equals("")) {
+                            throw new KermitException("The description of a " + command + " cannot be empty");
+                        }
+
+                        Task newToDo = new ToDos(description);
                         list.add(newToDo);
                         System.out.println(formatText(printAddTask(newToDo, list)));
                         break;
                     // Add new deadline task
                     case "deadline":
-                        Task newDeadline = new Deadline(descriptionBuilder.toString(), flagBuilder.toString());
+                        if (description.equals("")) {
+                            throw new KermitException("The description of a " + command + " cannot be empty");
+                        }
+
+                        // Empty flag arguments for tasks error
+                        if (flagArguments.equals("")) {
+                            throw new KermitException("Deadlines should be formatted as\n deadline <description> /by <deadline>");
+                        }
+                        Task newDeadline = new Deadline(description, flagArguments);
                         list.add(newDeadline);
                         System.out.println(formatText(printAddTask(newDeadline, list)));
                         break;
 
                     // Add new event task
                     case "event":
-                        Task newEvent = new Event(descriptionBuilder.toString(), flagBuilder.toString());
+                        if (description.equals("")) {
+                            throw new KermitException("The description of a " + command + " cannot be empty");
+                        }
+                        // Empty flag arguments for tasks error
+                        if (flagArguments.equals("")) {
+                            throw new KermitException("Events should be formatted as\n event <description> /at <deadline>");
+                        }
+                        Task newEvent = new Event(description, flagArguments);
                         list.add(newEvent);
                         System.out.println(formatText(printAddTask(newEvent, list)));
                         break;
