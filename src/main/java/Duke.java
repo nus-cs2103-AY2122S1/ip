@@ -42,8 +42,9 @@ public class Duke {
     private static void addDeadline(String userInput) {
         List<String> inputArray = Arrays.asList(userInput.split(" /by "));
         String by = inputArray.get(1);
-        String description = String.join(" ",
-                new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" "))).remove(0));
+        ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
+        descriptionArray.remove(0);
+        String description = String.join(" ", descriptionArray);
         Deadline newDeadline = new Deadline(description, by);
         taskList.add(newDeadline);
         displayAddedTask(newDeadline);
@@ -52,8 +53,9 @@ public class Duke {
     private static void addEvent(String userInput) {
         List<String> inputArray = Arrays.asList(userInput.split(" /at "));
         String timeFrame = inputArray.get(1);
-        String description = String.join(" ",
-                new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" "))).remove(0));
+        ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
+        descriptionArray.remove(0);
+        String description = String.join(" ", descriptionArray);
         Event newEvent = new Event(description, timeFrame);
         taskList.add(newEvent);
         displayAddedTask(newEvent);
@@ -61,7 +63,9 @@ public class Duke {
 
     private static void addTodo(String userInput) {
         List<String>  inputArray = Arrays.asList(userInput.split(" "));
-        String description = String.join(" ", new ArrayList<String>(inputArray).remove(0));
+        ArrayList<String> descriptionArray =  new ArrayList<String>(inputArray);
+        descriptionArray.remove(0);
+        String description = String.join(" ",descriptionArray);
         Todo newTodo = new Todo(description);
         taskList.add(newTodo);
         displayAddedTask(newTodo);
