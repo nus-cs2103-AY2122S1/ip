@@ -57,6 +57,12 @@ public class Response {
         return response;
     }
 
+    public static Response error(String msg) {
+        Response response = new Response(msg);
+        System.out.println(response);
+        return response;
+    }
+    
     @Override
     public String toString() {
         String linebreak = "\t_______________________________________________\n";

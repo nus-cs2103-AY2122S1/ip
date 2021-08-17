@@ -11,7 +11,7 @@ public class Tasklist {
     // Mark a certain task as done
     public Task markAsDone(int index) {
         this.taskList[index - 1].completeTask();
-        return this.taskList[index - 1];
+        return this.taskList[index - 1]; 
     }
 
     // Method to add a task to the list

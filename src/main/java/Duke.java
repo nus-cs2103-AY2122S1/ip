@@ -24,52 +24,109 @@ public class Duke {
 
             // Check if input starts with "done"
             else if (firstToken.equals("done")) {
-                // Determine index of task to mark as done
-                int index = Integer.parseInt(input.split(" ")[1]);
+                try {
+                    // Determine index of task to mark as done
+                    int index = Integer.parseInt(input.split(" ")[1]);
 
-                // Mark item as done
-                Task completedTask = store.markAsDone(index);
-                Response.completed(completedTask);
+                    if (index > store.getTotalTasks() || index < 1) {
+                        throw new DukeException("Please provide a valid task number.");
+                    }
+
+                    // Mark item as done
+                    Task completedTask = store.markAsDone(index);
+                    Response.completed(completedTask);
+
+                } catch (DukeException e) {
+                    Response.error(e.getMessage());
+
+                } catch (NumberFormatException e) {
+                    Response.error("Please provide a valid task number.");
+                }
+                
             }
             
             // Check if user adding a ToDo
             else if (firstToken.equals("todo")) {
-                String description = input.substring(5);
-                ToDo todo = new ToDo(description);
-                store.addTask(todo);
-                Response.added(store, todo);
+                try {
+                    if (input.split(" ").length <= 1) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    String description = input.substring(5);
+                    ToDo todo = new ToDo(description);
+                    store.addTask(todo);
+                    Response.added(store, todo);
+
+                } catch (DukeException e) {
+                    Response.error(e.getMessage());
+                }
             }
             
             // Check if user adding a Deadline
             else if (firstToken.equals("deadline")) {
-                String dueDate = input.split("/by")[1].strip();
-                String description = input
-                    .split("/by")[0]
-                    .strip()
-                    .substring(9);
+                try {
+                    // Check for valid description provided
+                    if (input.split("/by")[0].split(" ").length <= 1) {
+                        throw new DukeException("☹ OOPS!!! Please provide a valid deadline description.");
+                    }
 
-                Deadline deadline = new Deadline(description, dueDate);
-                store.addTask(deadline);
-                Response.added(store, deadline);
+                    // Check for valid due date provided
+                    if (input.split("/by").length != 2) {
+                        throw new DukeException("☹ OOPS!!! Please provide a valid due date.");
+                    }
+                    String dueDate = input.split("/by")[1].strip();
+                    
+                    String description = input
+                        .split("/by")[0]
+                        .strip()
+                        .substring(9);
+
+                    Deadline deadline = new Deadline(description, dueDate);
+                    store.addTask(deadline);
+                    Response.added(store, deadline);
+
+                } catch (DukeException e) {
+                    Response.error(e.getMessage());
+                }
+
             }
 
             // Check if user adding an Event
             else if (firstToken.equals("event")) {
-                String eventTime = input.split("/at")[1].strip();
-                String description = input
-                    .split("/at")[0]
-                    .strip()
-                    .substring(6);
-                Event event = new Event(description, eventTime);
-                store.addTask(event);
-                Response.added(store, event);
+                try {
+                    // Check for valid description provided
+                    if (input.split("/at")[0].split(" ").length <= 1) {
+                        throw new DukeException("☹ OOPS!!! Please provide a valid event description.");
+                    }
+                    
+                    // Check for valid event time provided
+                    if (input.split("/at").length != 2) {
+                        throw new DukeException("☹ OOPS!!! Please provide a valid event time.");
+                    }
+                    String eventTime = input.split("/at")[1].strip();
+
+                    
+                    String description = input
+                        .split("/at")[0]
+                        .strip()
+                        .substring(6);
+
+                    Event event = new Event(description, eventTime);
+                    store.addTask(event);
+                    Response.added(store, event);
+
+                } catch (DukeException e) {
+                    Response.error(e.getMessage());
+                }
             }
 
-            // Otherwise, add input to storage and inform user of addition
+            // Otherwise, throw an error
             else {
-                Task task = new Task(input);
-                store.addTask(task);
-                Response.added(store, task);
+                try {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    
+                } catch (DukeException e) {
+                    Response.error(e.getMessage());
+                }
             }
         }
         inputScanner.close();
