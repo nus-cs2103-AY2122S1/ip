@@ -34,17 +34,12 @@ public class Task {
         this.setDone(true);
     }
 
+    public String getStatusIcon() {
+        return (isDone ? "X" : " "); // mark done task with X
+    }
+
     @Override
     public String toString() {
-        StringBuilder taskStringBuilder = new StringBuilder();
-
-        if (done) {
-            taskStringBuilder.append("[x] ");
-        } else {
-            taskStringBuilder.append("[ ] ");
-        }
-        taskStringBuilder.append(action);
-
-        return taskStringBuilder.toString();
+        return "[" + getStatusIcon() + "] " + description;
     }
 }
