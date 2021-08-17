@@ -3,7 +3,7 @@ import java.util.*;
 public class Duke {
 
     // This class represents the tasks added by the user
-    class Task {
+    protected class Task {
         protected final String description;
         protected boolean isDone;
 
@@ -25,7 +25,7 @@ public class Duke {
             }
     }
 
-    class Deadline extends Task {
+    protected class Deadline extends Task {
         protected final String dateBy;
 
         public Deadline(String description, String dateBy) {
@@ -39,7 +39,7 @@ public class Duke {
         }
     }
 
-    class Event extends Task {
+    protected class Event extends Task {
         protected final String eventDetails;
 
         public Event(String description, String eventDetails) {
@@ -53,7 +53,7 @@ public class Duke {
         }
     }
 
-    class Todo extends Task {
+    protected class Todo extends Task {
 
         public Todo(String description) {
             super(description);
@@ -65,7 +65,25 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    protected static class DukeExceptions extends Exception {
+        public DukeExceptions(String message) {
+            super(message);
+        }
+    }
+
+    protected static class CommandDoesNotExist extends DukeExceptions {
+        public CommandDoesNotExist(String message) {
+            super("Sorry! The command \"" + message + "\" doesn't exist :(\nPlease try again!");
+        }
+    }
+
+    protected static class EmptyDescription extends DukeExceptions {
+        public EmptyDescription(String message) {
+            super(message);
+        }
+    }
+
+    public static void main(String[] args) throws DukeExceptions {
 
         String linebreak = "~~~~~~~~~~";
         String command; // this is the container for the command received from the user
@@ -95,6 +113,9 @@ public class Duke {
                 break;
 
             } else if (command.toLowerCase().equals("list")) {
+                if (pointer == 0) {
+                    System.out.println("Yay! Nothing on your list right now :>");
+                }
                 for (int counter = 0; counter < 100; counter++) {
                     if (todoList[counter] != null) {
                         System.out.println((counter + 1) + ". " + todoList[counter].toString());
@@ -116,28 +137,40 @@ public class Duke {
             } else {
 
                 String taskType = command.toLowerCase().split(" ", 2)[0];
-                System.out.println("added: " + command);
-                System.out.println(linebreak);
 
-                if (taskType.equals("todo")) {
-                    String taskInfo = command.split(" ", 2)[1];
-                    todoList[pointer] = duke.new Todo(taskInfo);
+                switch (taskType) {
+                    case "todo" -> {
+                        System.out.println("added: " + command);
+                        System.out.println(linebreak);
+                        String taskInfo = command.split(" ", 2)[1];
+                        if (taskInfo == "") {
+                            throw new EmptyDescription("todo");
+                        }
+                        todoList[pointer] = duke.new Todo(taskInfo);
+                        break;
 
-                } else if (taskType.equals("deadline")) {
-                    String taskInfo = command.split(" ", 2)[1];
-                    String description = taskInfo.split("/by",2)[0];
-                    String dateBy = taskInfo.split("/by",2)[1];
-                    todoList[pointer] = duke.new Deadline(description, dateBy);
+                    }
+                    case "deadline" -> {
+                        System.out.println("added: " + command);
+                        System.out.println(linebreak);
+                        String taskInfo = command.split(" ", 2)[1];
+                        String description = taskInfo.split("/by", 2)[0];
+                        String dateBy = taskInfo.split("/by", 2)[1];
+                        todoList[pointer] = duke.new Deadline(description, dateBy);
+                        break;
 
-                } else if (taskType.equals("event")) {
-                    String taskInfo = command.split(" ", 2)[1];
-                    String description = taskInfo.split("/at",2)[0];
-                    String eventDetails = taskInfo.split("/at",2)[1];
-                    todoList[pointer] = duke.new Event(description, eventDetails);
+                    }
+                    case "event" -> {
+                        System.out.println("added: " + command);
+                        System.out.println(linebreak);
+                        String taskInfo = command.split(" ", 2)[1];
+                        String description = taskInfo.split("/at", 2)[0];
+                        String eventDetails = taskInfo.split("/at", 2)[1];
+                        todoList[pointer] = duke.new Event(description, eventDetails);
+                        break;
 
-                } else {
-                    System.out.println("Sorry! I don't understand this command :(");
-                    break;
+                    }
+                    default -> throw new CommandDoesNotExist(command);
                 }
 
                 pointer++;
