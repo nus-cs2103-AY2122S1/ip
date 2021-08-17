@@ -6,16 +6,27 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> taskArr = new ArrayList<String>();
+        ArrayList<Task> taskArr = new ArrayList<Task>();
         String command = sc.nextLine();
         while (! command.equals("bye")) {
+            String[] commandArr = command.split(" ");
             if (command.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < taskArr.size(); i++) {
                     int j = i + 1;
                     System.out.println(j + ". " + taskArr.get(i));
                 }
-            } else {
-                taskArr.add(command);
+            } else if (commandArr[0].equals("done")) {
+                int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
+                Task taskRef = taskArr.get(taskArrRef);
+                taskRef.taskDone();
+                System.out.println("Nice! I've marked this task as done:\n"+ taskRef);
+            }
+
+
+            else {
+                Task t = new Task(command);
+                taskArr.add(t);
                 System.out.println("added: " + command);
             }
             command = sc.nextLine();
