@@ -14,13 +14,18 @@ public class Processor {
 
     /**
      * Reads and processes a command, updates the message to be printed.
+     * Returns whether the program should continue to run.
+     *
+     * @return A boolean representing whether the program should continue to run.
      */
-    public void process() {
+    public boolean process() {
         this.command = this.input.nextLine();
         if (this.command.equals("bye")) {
             this.message = Duke.EXITING_MESSAGE;
+            return false;
         } else {
             this.message = this.command;
+            return true;
         }
     }
 
