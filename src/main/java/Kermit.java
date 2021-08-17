@@ -41,25 +41,29 @@ public class Kermit {
             }
 
             // Quit program
-            if (command.equals("bye")) {
-                System.out.println(formatText(goodbyeText));
-                break;
-            // List out all objects that user added to list
-            } else if (command.equals("list")){
-                System.out.println(formatText(listText + "\n" + list));
-            // Add objects to list
-            } else if (command.equals("done")){
-                int index = Integer.parseInt(strBuilder.toString()) - 1;
-                // Get task name
-                String taskText = list.completeTask(index);
-                System.out.println(formatText(completeTaskText + "\n" + taskText));
-            // Add new todo task item
-            } else if (command.equals("todo")) {
-                Task newTask = new ToDos(strBuilder.toString());
-                list.add(newTask);
-                System.out.println(formatText("Got it. I've added this task:\n" + newTask +"\nNow you have " + list.size() + " tasks in the list."));
-            } else {
-                System.out.println(formatText("This is an invalid command"));
+            switch (command) {
+                case "bye":
+                    System.out.println(formatText(goodbyeText));
+                    return;
+                // List out all objects that user added to list
+                case "list":
+                    System.out.println(formatText(listText + "\n" + list));
+                    break;
+                // Add objects to list
+                case "done":
+                    int index = Integer.parseInt(strBuilder.toString()) - 1;
+                    // Get task name
+                    String taskText = list.completeTask(index);
+                    System.out.println(formatText(completeTaskText + "\n" + taskText));
+                    break;
+                // Add new todo task item
+                case "todo":
+                    Task newTask = new ToDos(strBuilder.toString());
+                    list.add(newTask);
+                    System.out.println(formatText("Got it. I've added this task:\n" + newTask +"\nNow you have " + list.size() + " tasks in the list."));
+                    break;
+                default:
+                    System.out.println(formatText("This is an invalid command"));
             }
         }
     }
