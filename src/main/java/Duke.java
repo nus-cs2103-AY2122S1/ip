@@ -1,3 +1,5 @@
+import exception.TaskManagerException;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -38,25 +40,30 @@ public class Duke {
     }
 
     public static void makeDecision(String userInput) {
-        if (userInput.equals("list")) {
-            TaskManager.listTasks();
+        try {
+            if (userInput.equals("list")) {
+                TaskManager.listTasks();
 
-        } else if (userInput.startsWith("done")) {
-            String taskNumberString = userInput.substring(4).trim();
-            int taskNumber = Integer.parseInt(taskNumberString);
-            TaskManager.markTaskAsDone(taskNumber);
+            } else if (userInput.startsWith("done")) {
+                String taskNumberString = userInput.substring(4).trim();
+                int taskNumber = Integer.parseInt(taskNumberString);
+                TaskManager.markTaskAsDone(taskNumber);
 
-        } else if (userInput.startsWith("todo")) {
-            TaskManager.addToDoTask(userInput.substring(4));
+            } else if (userInput.startsWith("todo")) {
+                TaskManager.addToDoTask(userInput.substring(4));
 
-        } else if (userInput.startsWith("event")) {
-            TaskManager.addEventTask(userInput.substring(5));
+            } else if (userInput.startsWith("event")) {
+                TaskManager.addEventTask(userInput.substring(5));
 
-        } else if (userInput.startsWith("deadline")) {
-            TaskManager.addDeadlineTask(userInput.substring(8));
+            } else if (userInput.startsWith("deadline")) {
+                TaskManager.addDeadlineTask(userInput.substring(8));
 
-        } else {
-            Echoer.error("Please ensure instruction follows specified format.");
+            } else {
+                Echoer.error("Please ensure instruction follows specified format.");
+            }
+
+        } catch (TaskManagerException exception) {
+            Echoer.error(exception.getLocalizedMessage());
         }
     }
 }
