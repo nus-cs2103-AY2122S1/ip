@@ -21,7 +21,13 @@ public class Duke {
         this.tasks = new ArrayList<>(100);
     }
 
-    private Commands getCommand(String input) throws DukeException {
+    /**
+     * Gets commands from enum.
+     * @param input The user input.
+     * @return A command corresponding to the enum.
+     * @throws UnknownCommandException Invalid command.
+     */
+    private Commands getCommand(String input) throws UnknownCommandException {
         try {
             return Commands.valueOf(input.toUpperCase());
         } catch (IllegalArgumentException error) {
