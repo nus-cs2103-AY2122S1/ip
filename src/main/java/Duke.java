@@ -12,11 +12,27 @@ public class Duke {
         System.out.println(message);
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+        String[] tasks = new String[100];
+        int counter = 0;
         while(!input.equals("bye")) {
-            System.out.println("\t" + input);
-            input = scanner.nextLine();
+            if(input.equals("list")) {
+                for(String s:tasks) {
+                    if(s != null) {
+                        System.out.println(("\t" + s));
+                    }
+                }
+                input = scanner.nextLine();
+            } else {
+                counter = counter + 1;
+                tasks[counter - 1] = Integer.toString(counter) + ". " + input;
+                System.out.println("\t" + "added: " + input);
+                input = scanner.nextLine();
+            }
         }
         String ending = "Bye. Hope to see you again soon!";
+
         System.out.println("\t" + ending);
+
+
     }
 }
