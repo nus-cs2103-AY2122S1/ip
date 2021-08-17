@@ -38,8 +38,15 @@ public class Duke {
                 tasks.add(new Event(furtherSplits[0], furtherSplits[1]));
                 printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
             } else {
-                tasks.add(new Task(input));
-                printer.PrintMessage(String.format("added: %s", input));
+                try {
+                    if (input.equals("blah")) {
+                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    }
+                    tasks.add(new Task(input));
+                    printer.PrintMessage(String.format("added: %s", input));
+                } catch (DukeException e) {
+                    printer.PrintMessage(e.getMessage());
+                }
             }
             input = sc.nextLine();
         }
