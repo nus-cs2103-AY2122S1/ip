@@ -43,6 +43,30 @@ public class Duke {
 
                     command = scanner.nextLine();
 
+                } else if (split[0].equals("delete")) {
+                    try {
+                        checkLength(split.length);
+                        int index = Integer.parseInt(split[1]);
+                        checkIndex(index, list.size());
+
+                        System.out.println(line);
+                        System.out.println("Very well, Master Wayne. This task has been deleted as per your request.");
+                        System.out.println((index) + ". " + list.get(index - 1)); //actual index is index - 1
+
+                        list.remove(index - 1);
+                        if (list.size() == 1) {
+                            System.out.println("Now you have 1 task in the list.");
+                        } else {
+                            System.out.println("Now you have " + list.size() + " tasks in the list.");
+                        }
+
+                        System.out.println(line);
+
+                    } catch (DukeException e) {
+                        System.out.println("***WARNING*** An error has occured Master Wayne: " + e.getMessage());
+                    }
+
+                    command = scanner.nextLine();
                 } else if (split[0].equals("todo")) {
 
                     for (int i = 1; i < split.length; i++) {
@@ -164,8 +188,6 @@ public class Duke {
             ;
         }
         System.out.println("Have a pleasant day, Master Wayne.\n");
-
-
     }
 
     public static void checkDesc(String test) throws DukeException {
