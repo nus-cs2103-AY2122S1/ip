@@ -15,9 +15,17 @@ public class TaskList {
         this.list.add(task);
     }
 
+    public void setDone(int index) {
+        this.list.get(index).setDone();
+    }
+
+    public Task getTask(int index) {
+        return this.list.get(index);
+    }
+
     @Override
     public String toString() {
-        String result = "";
+        String result = "Here are the tasks in your list!\n";
         for (int i = 1; i < this.list.size() + 1; i++) {
             result += i + ". " + this.list.get(i - 1);
             if(i != this.list.size()) {

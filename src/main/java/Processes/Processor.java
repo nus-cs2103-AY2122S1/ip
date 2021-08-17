@@ -1,5 +1,7 @@
 package Processes;
 
+import java.util.List;
+
 import Enum.Command;
 import Util.Output;
 
@@ -8,7 +10,7 @@ public class Processor implements IProcessor {
     private final TaskList list = new TaskList();
 
     @Override
-    public void processCommand(Command command, String line) {
+    public void processCommand(Command command, List<String> arguments) {
         switch(command) {
             case BYE:
                 processBye();
@@ -16,8 +18,11 @@ public class Processor implements IProcessor {
             case LIST:
                 processList();
                 break;
+            case DONE:
+                processDone(arguments.get(1));
+                break;
             default:
-                processDefault(line);
+                processDefault(String.join(" ", arguments));
         }
     }
 
@@ -30,6 +35,13 @@ public class Processor implements IProcessor {
     @Override
     public void processList() {
         Output.print(this.list.toString());
+    }
+
+    @Override
+    public void processDone(String index) {
+        int i = Integer.parseInt(index);
+        this.list.setDone(i - 1);
+        Output.print("Nice! I've marked this task as done:\n   " + this.list.getTask(i - 1));
     }
 
     @Override

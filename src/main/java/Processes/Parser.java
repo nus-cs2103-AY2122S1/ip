@@ -1,5 +1,9 @@
 package Processes;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import java.util.Scanner;
 
 import Enum.Command;
@@ -16,16 +20,19 @@ public class Parser implements IParser {
 
     @Override
     public boolean parseLine(String line) {
-        switch (line) {
-            case "bye":
-                this.processor.processCommand(Command.BYE, "");
-                return false;
-            case "list":
-                this.processor.processCommand(Command.LIST, "");
-                return true;
-            default:
-                this.processor.processCommand(Command.DEFAULT, line);
-                return true;
+        List<String> arguments = new ArrayList<String>(Arrays.asList(line.split(" ")));
+        if(line.equals("bye")) {
+            this.processor.processCommand(Command.BYE, arguments);
+            return false;
+        } else if(line.equals("list")) {
+            this.processor.processCommand(Command.LIST, arguments);
+            return true;
+        } else if(arguments.get(0).equals("done")) {
+            this.processor.processCommand(Command.DONE, arguments);
+            return true;
+        } else {
+            this.processor.processCommand(Command.DEFAULT, arguments);
+            return true;
         }
     }
 
