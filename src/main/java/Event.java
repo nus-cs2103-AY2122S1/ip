@@ -1,5 +1,7 @@
 public class Event extends Task {
-    protected String datetime;
+
+    private String datetime;
+
     public Event(String description, String time) {
         super(description);
         datetime = time;
