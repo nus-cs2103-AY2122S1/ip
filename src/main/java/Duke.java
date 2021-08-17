@@ -1,144 +1,122 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private ArrayList<Task> taskArr = new ArrayList<Task>();
 
-    private Task[] listArr = new Task[100];
-    private int listArrCount = 0;
 
-    public class Task {
-        public String taskName;
-        public boolean isDone = false;
-        public Task(String taskName) {
-            this.taskName = taskName;
-        }
+    private void textFrame(String s) {
+        System.out.println(".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.\n"
+                        + s + "\n"
+                        + ".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.");
+    }
 
-        public void setDone() {
-            isDone = true;
-        }
+    private void errorFrame(String s) {
+        System.out.println(".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.\n"
+                        + s + "\n"
+                        + ".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.");
+    }
 
-        @Override
-        public String toString() {
-            String completedBox;
-            if(isDone) {
-                completedBox="[X]";
-            } else {
-                completedBox="[ ]";
+    private void listTasks() {
+        String listString = "";
+        if (taskArr.size() == 0) {
+            listString = "\n Your list is empty!";
+        } else {
+            for (int i = 0; i < taskArr.size(); i++) {
+                int count = i + 1;
+                listString += "\n " + count + ". " + taskArr.get(i);
             }
-            return completedBox + " " + taskName;
         }
+        textFrame(" This be ye list of things to do Sire:" + listString );
     }
 
-    public class ToDo extends Task {
-        public ToDo(String taskName) {
-            super(taskName);
+    private void addTask(String taskString, String taskType) {
+        try{
+            switch(taskType) {
+                case "todo":
+                    taskArr.add(new ToDo(taskString));
+                    break;
+                case "deadline":
+                    String[] deadlineArr = taskString.split(" /by ", 2);
+                    if(deadlineArr.length == 1) {
+                        throw new DukeException("deadline format");
+                    } else {
+                        taskArr.add(new Deadline(deadlineArr[0], deadlineArr[1]));
+                    }
+                    break;
+                case "event":
+                    String[] eventArr = taskString.split(" /at ", 2);
+                    if(eventArr.length == 1) {
+                        throw new DukeException("event format");
+                    } else {
+                        taskArr.add(new Event(eventArr[0], eventArr[1]));
+                    }
+                    break;
+                default:
+                    System.out.println("should never reach here");
+            }
+            textFrame("Got it I've added this task:\n" + taskArr.get(taskArr.size() - 1));
+        } catch (DukeException e) {
+            errorFrame(e.getErrorMessage());
         }
 
-        @Override
-        public String toString() {
-            return "[T]" + super.toString();
-        }
     }
 
-    public class Deadline extends Task {
-        String by;
-        public Deadline(String taskName, String by) {
-            super(taskName);
-            this.by = by;
-        }
-
-        @Override
-        public String toString() {
-            return "[D]" + super.toString() + " (by: " + by + ")";
-        }
-    }
-
-    public class Event extends Task {
-        String at;
-        public Event(String taskName, String at) {
-            super(taskName);
-            this.at=at;
-        }
-
-        @Override
-        public String toString() {
-            return "[E]" + super.toString() + " (at: " + at + ")";
-        }
-    }
-
-    private Scanner scanner = new Scanner(System.in);
-
-    public void insertNewTask(Task t) {
-        listArr[listArrCount] = t;
-        listArrCount++;
-    }
-
-    public void textFrame(String s) {
-        System.out.println("=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=\n"
-                + s + "\n"
-                + "=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=");
-    }
-
-    private void addList() {
-        while(scanner.hasNext()){
-            String listItem = scanner.nextLine();
-            if(listItem.equals("bye")) {
+    public void startBob() {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            String inputText = scanner.nextLine();
+            if (inputText.equals("bye")) {
                 textFrame("Bye bye from the List Adder!");
-            }  else {
-                if (listItem.equals("list")) {
-                    String listString = "";
-                    if (listArr[0] == null) {
-                        listString = "\n Your list is empty!";
+                break;
+            } else {
+                String[] inputArr = inputText.split(" ", 2);
+                try {
+                    if (inputArr.length == 1) {
+                        switch (inputArr[0]) {
+                            case "list":
+                                listTasks();
+                                break;
+                            case "todo":
+                                throw new DukeException("empty todo");
+                            case "deadline":
+                                throw new DukeException("empty deadline");
+                            case "event":
+                                throw new DukeException("empty event");
+                            default:
+                                throw new DukeException("invalid input");
+                        }
                     } else {
-                        for (int i = 0; i < 10; i++) {
-                            if (listArr[i] != null) {
-                                int count = i + 1;
-                                listString += "\n " + count + ". " + listArr[i];
-                            }
+                        switch (inputArr[0]) {
+                            case "todo":
+                                addTask(inputArr[1], "todo");
+                                break;
+                            case "deadline":
+                                addTask(inputArr[1], "deadline");
+                                break;
+                            case "event":
+                                addTask(inputArr[1], "event");
+                                break;
+                            case "done":
+                                try {
+                                    int index = Integer.parseInt(inputArr[1]) - 1;
+                                    if (index >= taskArr.size() || index <= -1) {
+                                        errorFrame(" That task does not exist!");
+                                    } else {
+                                        taskArr.get(index).setDone();
+                                        textFrame("Good job, I have marked the task as done!" + "\n" +
+                                                taskArr.get(index).toString());
+                                    }
+                                } catch (NumberFormatException e) {
+                                    errorFrame("That is not a valid index!");
+                                }
+                                break;
+                            default:
+                                throw new DukeException("invalid input");
                         }
                     }
-                    textFrame(" This be ye list of things to do Sire:" + listString );
-                } else if (listItem.length() > 5 && listItem.substring(0, 5).equals("done ")) {
-                    String number = listItem.substring(5, listItem.length());
-                    try {
-                        int i = Integer.parseInt(number) - 1;
-                        if (i >= listArrCount || i <= -1) {
-                            System.out.println(" That task does not exist!\n");
-                        } else {
-                            listArr[i].setDone();
-                            textFrame("Good job, I have marked the task as done!" + "\n" + listArr[i].toString());
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("That is not a valid index!\n");
-
-                    }
-                } else if (listItem.length() > 5 && listItem.substring(0, 5).equals("todo ")) {
-                    Task t = new ToDo(listItem.substring(5, listItem.length()));
-                    insertNewTask(t);
-                    textFrame("Got it, I've added this task:\n" + t);
-                } else if (listItem.length() > 9 && listItem.substring(0,9).equals("deadline ")){
-                    int index = listItem.indexOf(" /by ");
-                    if(index != -1) {
-                        String taskName = listItem.substring(9, index);
-                        String by =  listItem.substring(index + 5, listItem.length());
-                        Task t = new Deadline(taskName, by);
-                        insertNewTask(t);
-                        textFrame("Got it, I've added this task:\n" + t);
-                    } else {
-                        textFrame("Woah that is some wonky Deadline you got there. Try harder!");
-                    }
-                } else if (listItem.length() > 6 && listItem.substring(0,6).equals("event ")) {
-                    int index = listItem.indexOf(" /at ");
-                    if(index != -1) {
-                        String taskName = listItem.substring(6, index);
-                        String at =  listItem.substring(index + 5, listItem.length());
-                        Task t = new Event(taskName, at);
-                        insertNewTask(t);
-                        textFrame("Got it, I've added this task:\n" + t);
-                    } else {
-                        textFrame("Woah that is some wonky Event you got there. Try harder!");
-                    }
-                } else {
-                    textFrame("I am not too sure what that task is... please specify!!");
+                } catch (DukeException e) {
+                    errorFrame(e.getErrorMessage());
                 }
             }
         }
@@ -181,6 +159,6 @@ public class Duke {
         System.out.println("Let's Talk!\n");
         System.out.println("What would you like me to add to the list?");
         Duke duke = new Duke();
-        duke.addList();
+        duke.startBob();
     }
 }
