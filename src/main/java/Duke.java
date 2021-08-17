@@ -25,7 +25,8 @@ public class Duke {
             }
             switch (input) {
                 case "list":
-                    Printer.prettyPrint(Printer.listTask(tasks));
+                    Printer.prettyPrint("Here are the tasks in your list:\n" +
+                            Printer.listTask(tasks));
                     break;
                 default:
                     tasks[numOfTask++] = input;
