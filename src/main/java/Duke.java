@@ -1,6 +1,9 @@
-public class Duke {
+import java.util.Scanner;
 
-    public static void printLogo() {
+public class Duke {
+    private Scanner input = new Scanner(System.in);
+
+    private void printLogo() {
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
@@ -9,7 +12,36 @@ public class Duke {
         System.out.println(logo);
     }
 
+    private void checkInput() {
+        String userInput = this.input.nextLine();
+        if (userInput.equals("bye")) {
+            this.exit();
+            return;
+        }
+        this.echo(userInput);
+        this.checkInput();
+    }
+
+
+    private void greet() {
+        System.out.println("Welcome! I'm Duke.");
+        System.out.println("What can I do for you?\n");
+    }
+
+    private void echo(String userInput) {
+        System.out.println("\t" + userInput + "\n");
+    }
+
+
+    private void exit() {
+        System.out.println("\t" + "Bye, hope to see you again!");
+    }
+
+
     public static void main(String[] args) {
-        Duke.printLogo();
+        Duke duke = new Duke();
+        duke.printLogo();
+        duke.greet();
+        duke.checkInput();
     }
 }
