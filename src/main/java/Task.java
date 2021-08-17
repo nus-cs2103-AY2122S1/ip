@@ -2,23 +2,23 @@
  * Encapsulates a task to be completed
  */
 public class Task {
-    private String name = "";
-    private boolean completed = false;
+    private String description = "";
+    private boolean isCompleted = false;
 
     /**
      * Task constructor
      *
-     * @param name Name of task.
+     * @param description Name of task.
      */
-    public Task(String name) {
-        this.name = name;
+    public Task(String description) {
+        this.description = description;
     }
 
     /**
      * Marks task as complete
      */
-    public void complete() {
-        this.completed = true;
+    public void markAsComplete() {
+        this.isCompleted = true;
     }
 
     /**
@@ -26,6 +26,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + (completed ? "X" : "") + "] " + this.name;
+        return "[" + (isCompleted ? "X" : "") + "] " + this.description;
     }
 }
