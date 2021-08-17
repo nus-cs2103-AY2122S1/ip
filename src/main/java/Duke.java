@@ -12,15 +12,18 @@ public class Duke {
         TaskList taskGroup = new TaskList();
 
         // takes input from the keyboard
-        String res = sc.nextLine();
-        while (! res.equals("bye")) {
+        String command = sc.next();
+        while (!command.equals("bye")) {
             // prints the response
-            if (res.equals("list")) {
-                respond(taskGroup.toString());
+            if (command.equals("list")) {
+                respond(taskGroup.display());
+            } else if (command.equals("done")) {
+                int index = Integer.parseInt(sc.next());
+                respond(taskGroup.completeTask(index));
             } else {
-                respond(taskGroup.add(res));
+                respond(taskGroup.add(new Task(command)));
             }
-            res = sc.nextLine();
+            command = sc.next();
         }
 
         respond(byeMessage);
