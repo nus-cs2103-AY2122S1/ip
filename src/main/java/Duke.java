@@ -14,6 +14,7 @@ public class Duke {
         deadline,
         event,
         done,
+        delete,
         error,
     }
 
@@ -70,6 +71,22 @@ public class Duke {
         printDivider();
     }
 
+    /*
+    Deletes a task
+    Input: index number
+     */
+    static void removeTask(List<Task> lst, int index) {
+        Task temp = lst.get(index);
+        lst.remove(index);
+        printDivider();
+        System.out.println("Noted. I've removed this task: \n"
+                + "\t" + temp.toString() + "\n"
+                + "Now you have " + lst.size() + " tasks in the list.");
+
+        printDivider();
+    }
+
+    //Prints the most recently added Task
     static void printTask(List<Task> lst) {
         int lastItem = lst.size() - 1;
         printDivider();
@@ -126,7 +143,7 @@ public class Duke {
                 String time = "";
 
                 //Switch variables
-                Keywords key = Keywords.todo;
+                Keywords key = Keywords.error;
                 int index = 0;
 
                 //Looks for keywords
@@ -140,9 +157,21 @@ public class Duke {
                     if (temp.equals("done")) {
                         if (checkForInt(words[1])) {
                             index = parseInt(words[1]) - 1;
+                            if (index < 0) {
+                                throw new DukeException("!!! Please input a number greater than 0 !!!");
+                            }
                             key = Keywords.done;
                         }
+                    } else if (temp.equals("delete")) {
+                        if (checkForInt(words[1])) {
+                            index = parseInt(words[1]) - 1;
+                            if (index < 0) {
+                                throw new DukeException("!!! Please input a number greater than 0 !!!");
+                            }
+                            key = Keywords.delete;
+                        }
                     } else if (temp.equals("todo")) {
+                        key = Keywords.todo;
                         desc = input.replaceFirst("todo ", "");
                     } else if (temp.equals("deadline")) {
                         key = Keywords.deadline;
@@ -171,7 +200,6 @@ public class Duke {
                     if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
                         throw new DukeException("!!! The description cannot be empty. !!!");
                     }
-                    throw new DukeException("!!! I'm sorry, but I don't know what that means. !!!");
                 }
 
                 switch (key) {
@@ -192,13 +220,24 @@ public class Duke {
                         printTask(list);
                         break;
                     case done:
+                        if (index >= list.size()) {
+                            throw new DukeException("!!! The number you input exceeds the size of the list !!!");
+                        }
                         list.get(index).markAsDone();
                         markTask(list.get(index));
+                        break;
+                    case delete:
+                        if (index >= list.size()) {
+                            throw new DukeException("!!! The number you input exceeds the size of the list !!!");
+                        }
+                        removeTask(list, index);
                         break;
                     case bye:
                         close();
                         System.exit(0);
                         break;
+                    case error:
+                        throw new DukeException("!!! I'm sorry, but I don't know what that means. !!!");
                 }
             } catch (DukeException ex) {
                 printDivider();
