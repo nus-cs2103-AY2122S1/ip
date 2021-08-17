@@ -3,11 +3,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String LINEBREAK = "____________________________________________________________";
 
-    public static void main(String[] args) {
-        String linebreak = "____________________________________________________________";
-        List<String> commands = new ArrayList<String>();
+    private void print(String s) {
+        System.out.printf("%s\n%s\n%s\n", LINEBREAK, s, LINEBREAK);
+    }
 
+    private void greet() {
         System.out.print("               _,........__\n");
         System.out.print("            ,-'            \"`-.\n");
         System.out.print("          ,'                   `-.\n");
@@ -41,34 +43,38 @@ public class Duke {
         System.out.print("               ,'           )     `.         |\n");
         System.out.print("                7____,,..--'      /          |\n");
         System.out.print("                                  `---.__,--.'\n");
-        System.out.println(linebreak);
-        System.out.println(" Greetings! I'm Squirtle\n Squirt Squirt?");
+        System.out.println(" BOW BEFORE ME\n FOR I AM SQUIRTLE, DESTROYER OF MEN, TAKER OF LIVES.");
+        System.out.println(LINEBREAK);
+    }
 
-        System.out.println(linebreak);
-
+    private void run() {
+        List<String> commands = new ArrayList<String>();
+        greet();
         Scanner input = new Scanner(System.in);
+        System.out.println("\nDANCE FOR ME, INSECT.");
+
         while (true) {
-            System.out.print("Give me a command master: ");
-            String inputString = input.nextLine();
+            String inputString = input.nextLine().trim();
 
             if (inputString.equals("bye")) {
-                System.out.println(linebreak);
-                System.out.println(" See you again master!");
-                System.out.println(linebreak);
+                print(" RUN WHILE YOU CAN, WEAKLING.");
                 break;
             } else if (inputString.equals("list")) {
-                System.out.println(linebreak);
+                System.out.println(LINEBREAK);
                 for (int i = 0; i < commands.size(); i++) {
                     System.out.printf(" %s. %s\n", i, commands.get(i));
                 }
-                System.out.println(linebreak);
+                System.out.println(LINEBREAK);
             } else {
-                System.out.println(linebreak);
-                System.out.println(" " + inputString);
-                System.out.println(linebreak);
+                print(" " + inputString);
                 commands.add(inputString);
             }
         }
         input.close();
+    }
+
+    public static void main(String[] args) {
+        Duke Squirtle = new Duke();
+        Squirtle.run();
     }
 }
