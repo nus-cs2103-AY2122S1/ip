@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
-    private static String[] tasks = new String[100];
+    private static Task[] tasks = new Task[100];
     private static int taskCount = 0;
 
     private static String formatDukeResponse(String response) {
@@ -25,23 +25,40 @@ public class Duke {
     }
 
     private static void addTask(String taskName) {
-        tasks[taskCount] = taskName;
+        Task task = new Task(taskName);
+        tasks[taskCount] = task;
         taskCount++;
+        printAddTaskMessage(task);
     }
 
-    private static void printAddTaskMessage(String taskName) {
-        System.out.println(formatDukeResponse("added: " + taskName));
+    private static void markTask(int taskNumber) {
+        // to handle ArrayIndexOutOfBoundsException
+        Task task = tasks[taskNumber - 1];
+        task.markAsDone();
+        printMarkTaskDoneMessage(task);
+    }
+
+    private static void printAddTaskMessage(Task task) {
+        System.out.println(formatDukeResponse("Got it. I've added this task:\n" + task));
     }
 
     private static void printTasksMessage() {
-        StringBuilder tasksMessage = new StringBuilder();
+        StringBuilder tasksMessage = new StringBuilder("Here are the tasks in your list:");
 
         for (int i = 0; i < taskCount; i++) {
             int taskNumber = i + 1;
-            tasksMessage.append("\n").append(taskNumber).append(". ").append(tasks[i]);
+            tasksMessage.append("\n").append(taskNumber).append(".").append(tasks[i]);
         }
 
         System.out.println(formatDukeResponse(tasksMessage.toString()));
+    }
+
+    private static void printMarkTaskDoneMessage(Task task) {
+        System.out.println(formatDukeResponse("Nice! I've marked this task as done:\n" + task));
+    }
+
+    private static void printInvalidCommandMessage() {
+        System.out.println(formatDukeResponse("Oops!!! I'm sorry, but I don't know what that means."));
     }
 
     public static void main(String[] args) {
@@ -49,17 +66,30 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String userInput = sc.nextLine();
-            if (userInput.equals("bye")) {
+            String[] userInput = sc.nextLine().split(" ", 2);
+            String command = userInput[0];
+            String description = userInput.length == 2 ? userInput[1] : "";
+
+            if (command.equals("bye")) {
                 sc.close();
                 break;
             }
-            if (userInput.equals("list")) {
-                printTasksMessage();
-                continue;
+            switch (command) {
+                case "list":
+                    printTasksMessage();
+                    break;
+                case "done":
+                    // to handle NumberFormatException
+                    int taskNumber = Integer.parseInt(userInput[1]);
+                    markTask(taskNumber);
+                    break;
+                case "task":
+                    addTask(description);
+                    break;
+                default:
+                    printInvalidCommandMessage();
+                    break;
             }
-            addTask(userInput);
-            printAddTaskMessage(userInput);
         }
 
         printExitMessage();
