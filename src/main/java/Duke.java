@@ -24,6 +24,7 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 scanner.close();
                 break;
+
             } else if (input.equals("list")) {
                 StringBuilder outputList = new StringBuilder();
                 outputList.append("Here are the tasks in your list:\n");
@@ -31,6 +32,7 @@ public class Duke {
                     outputList.append(i + "." + savedInputs.get(i-1).toString() + "\n");
                 }
                 System.out.println(outputList.toString());
+
             } else if (input.startsWith("done")) {
                 int pos = Integer.valueOf(input.split(" ")[1]);
                 if (pos > 0 && pos <= savedInputs.size()) {
@@ -38,11 +40,13 @@ public class Duke {
                 } else {
                     System.out.println("Invalid task number to mark as done");
                 }
+
             } else if (input.startsWith("todo")) {
                 Todo todo = new Todo(input);
                 System.out.println("Got it. I've added this task:\n  " + todo.toString());
                 savedInputs.add(todo);
-                System.out.println("Now you have " + savedInputs.size() + " tasks tin the list.");
+                System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
+
             } else if (input.startsWith("deadline")) {
                 String by = input.split(" /by ")[1];
                 String description = input.split(" /by ")[0].substring(9);
@@ -51,6 +55,7 @@ public class Duke {
                 System.out.println("Got it. I've added this task:\n  " + deadline.toString());
                 savedInputs.add(deadline);
                 System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
+
             } else if (input.startsWith("event")) {
                 String at = input.split(" /at ")[1];
                 String description = input.split(" /at ")[0].substring(6);
