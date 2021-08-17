@@ -1,3 +1,7 @@
+/**
+ * The Task class encapsulates a task with a String description
+ * and a boolean representing if task is done.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

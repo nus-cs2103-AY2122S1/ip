@@ -1,0 +1,8 @@
+todo read book
+deadline read book /by Mon, 2pm
+event return book /at Mon, 2-4pm
+list
+done 1
+list
+done 3
+bye

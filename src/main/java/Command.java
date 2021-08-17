@@ -1,5 +1,6 @@
-import java.util.Arrays;
-
+/**
+ * The Command class encapsulates all commands behaviour for a bot.
+ */
 public class Command {
     private String name;
     private Task[] records = new Task[100];
@@ -45,14 +46,26 @@ public class Command {
         return String.format("added: %1$s \n\t", input);
     }
 
-    public String todo(String input) {
-        Todo toAdd = new Todo(input);
+    /**
+     * Returns added message for command to-do.
+     *
+     * @param description description of to-do task.
+     * @return added message for command to-do.
+     */
+    public String todo(String description) {
+        Todo toAdd = new Todo(description);
         records[count] = toAdd;
         count += 1;
         return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
                         "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), count);
     }
 
+    /**
+     * Returns added message for command event.
+     * @param description description of event task.
+     * @param at string of event date/time.
+     * @return added message for command event.
+     */
     public String event(String description, String at) {
         Event toAdd = new Event(description, at);
         records[count] = toAdd;
@@ -61,6 +74,12 @@ public class Command {
                         "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), count);
     }
 
+    /**
+     * Returns added message for command deadline.
+     * @param description description of deadline task.
+     * @param by string of deadline date/time.
+     * @return added message for command deadline.
+     */
     public String deadline(String description, String by) {
         Deadline toAdd = new Deadline(description, by);
         records[count] = toAdd;

@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Duke {
-    final private String name;
     private Command commands;
 
     /**
@@ -10,7 +9,6 @@ public class Duke {
      * @param name name of bot.
      */
     public Duke(String name) {
-        this.name = name;
         commands = new Command(name);
     }
 
@@ -32,7 +30,7 @@ public class Duke {
         System.out.println(format(commands.greeting()));
 
         Scanner scanner = new Scanner(System.in);
-        String input = "";
+        String input;
         while(!((input = scanner.next().toLowerCase()).equals("bye"))) {
             if (input.equals("list")) {
                 System.out.println(format(commands.list()));

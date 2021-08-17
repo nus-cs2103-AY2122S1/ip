@@ -1,3 +1,7 @@
+/**
+ * The Deadline class extends Task class and encapsulate a deadline task
+ * that need to be done before a specific date/time.
+ */
 public class Deadline extends Task {
     protected String by;
 

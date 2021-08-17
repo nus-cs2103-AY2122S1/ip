@@ -5,3 +5,45 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+	--------------------- 
+	Hihi! This is halp! 
+	How can I help?
+	--------------------- 
+	--------------------- 
+	Got it. I've added this task:
+	 [T][ ] read book 
+	Now you have 1 tasks in the list.
+	--------------------- 
+	--------------------- 
+	Got it. I've added this task:
+	 [D][ ] read book (by: Mon, 2pm) 
+	Now you have 2 tasks in the list.
+	--------------------- 
+	--------------------- 
+	Got it. I've added this task:
+	 [E][ ] return book (at: Mon, 2-4pm) 
+	Now you have 3 tasks in the list.
+	--------------------- 
+	--------------------- 
+	Here are the tasks in your list:
+	1. [T][ ] read book 
+	2. [D][ ] read book (by: Mon, 2pm) 
+	3. [E][ ] return book (at: Mon, 2-4pm) 
+	--------------------- 
+	--------------------- 
+	Nice! I've marked this task as done:
+	 [T][X] read book 
+	--------------------- 
+	--------------------- 
+	Here are the tasks in your list:
+	1. [T][X] read book 
+	2. [D][ ] read book (by: Mon, 2pm) 
+	3. [E][ ] return book (at: Mon, 2-4pm) 
+	--------------------- 
+	--------------------- 
+	Nice! I've marked this task as done:
+	 [E][X] return book (at: Mon, 2-4pm) 
+	--------------------- 
+	--------------------- 
+	Bye bye!
+	--------------------- 
