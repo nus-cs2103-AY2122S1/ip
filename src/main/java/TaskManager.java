@@ -2,16 +2,16 @@ import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class TaskManager {
     static private List<Task> taskList = new ArrayList<>();
 
-    public static Task addTask(String rawTask) throws DukeException, IllegalArgumentException {
+    public static Task addTask(String type, Optional<String> args) throws DukeException, IllegalArgumentException {
         Task ret = null;
         // parse raw task string
-        String[] t = rawTask.split(" ", 2);
-        String type = t[0];
-        Optional<String> args = t.length > 1 ? Optional.of(t[1]) : Optional.empty();
         switch (type) {
             case "todo":
                 ret = ToDo.of(args);
@@ -54,11 +54,8 @@ public class TaskManager {
     }
 
     public static String listTasks() {
-        StringBuilder ret = new StringBuilder();
-        ret.append("Here are the tasks in your list:\n");
-        for(int i=0; i < taskList.size(); i++) {
-            ret.append(String.format("%d. %s\n", i+1, taskList.get(i).toString()));
-        }
-        return ret.toString();
+        return Stream.iterate(0, x -> x < taskList.size(), x -> x+1)
+                .map(x -> String.format("%d. %s", x+1, taskList.get(x).toString()))
+                .collect(Collectors.joining("\n"));
     }
 }
