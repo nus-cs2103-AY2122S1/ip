@@ -9,28 +9,50 @@ public class Duke {
         ArrayList<Task> taskArr = new ArrayList<Task>();
         String command = sc.nextLine();
         while (! command.equals("bye")) {
-            String[] commandArr = command.split(" ");
-            if (command.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for(int i = 0; i < taskArr.size(); i++) {
-                    int j = i + 1;
-                    System.out.println(j + ". " + taskArr.get(i));
-                }
-            } else if (commandArr[0].equals("done")) {
-                int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
-                Task taskRef = taskArr.get(taskArrRef);
-                taskRef.taskDone();
-                System.out.println("Nice! I've marked this task as done:\n"+ taskRef);
+            addTask(command, taskArr);
+            command = sc.nextLine();
+        }
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+    public static void addTask(String command, ArrayList<Task> taskArr) {
+        String[] commandArr = command.split(" ");
+        if (command.equals("list")) {
+            System.out.println("Here are the tasks in your list:");
+            for(int i = 0; i < taskArr.size(); i++) {
+                int j = i + 1;
+                System.out.println(j + ". " + taskArr.get(i));
             }
+        } else if (commandArr[0].equals("done")) {
+            int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
+            Task taskRef = taskArr.get(taskArrRef);
+            taskRef.taskDone();
+            System.out.println("Nice! I've marked this task as done:\n"+ taskRef);
+        } else {
+            System.out.println("Got it. I've added this task: ");
+            if (commandArr[0].equals("todo")) {
+                Task t = new Todo(command);
+                taskArr.add(t);
+                System.out.println(t);
 
+            } else if (commandArr[0].equals("deadline")) {
+                Task t = new Deadline(command, "Sunday");
+                taskArr.add(t);
+                System.out.println(t);
 
-            else {
+            } else if (commandArr[0].equals("event")) {
+                Task t = new Event(command, "Sunday");
+                taskArr.add(t);
+                System.out.println(t);
+
+            } else {
                 Task t = new Task(command);
                 taskArr.add(t);
                 System.out.println("added: " + command);
             }
-            command = sc.nextLine();
+
         }
-        System.out.println("Bye. Hope to see you again soon!");
+
+
+
     }
 }
