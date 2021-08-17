@@ -56,8 +56,12 @@ public class Duke extends Chatbot {
         String message = Chatbot.acceptUserInput();
         if (message.equals("bye")) {
             Chatbot.printMessage(FAREWELL_MESSAGE);
+        } else if (message.equals("list")) {
+            String listedTasks = this.taskList.toString();
+            Chatbot.printMessage(listedTasks);
+            taskMode();
         } else {
-            taskList.addTask(message);
+            this.taskList.addTask(message);
             Chatbot.printMessage("added: " + message);
             taskMode();
         }
