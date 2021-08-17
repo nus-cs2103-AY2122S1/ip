@@ -16,9 +16,11 @@ public class Event extends Item {
         super.checkInput(strings);
         String line = String.join(" ", strings);
         int idx = line.indexOf("/at");
-        if (idx == line.length() - 3) {
+        if (idx == -1) {
+            throw new DukeException("please specify /at.");
+        } else if (idx == line.length() - 3) {
             throw new DukeException("by when?");
-        } else if (idx == 7) {
+        } else if (idx == 6) {
             throw new DukeException("what is the item?");
         }
     }

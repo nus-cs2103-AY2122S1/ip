@@ -16,9 +16,11 @@ public class Deadline extends Item {
         super.checkInput(strings);
         String line = String.join(" ", strings);
         int idx = line.indexOf("/by");
-        if (idx == line.length() - 3) {
+        if (idx == -1) {
+            throw new DukeException("please specify /by.");
+        } else if (idx == line.length() - 3) {
             throw new DukeException("by when?");
-        } else if (idx == 10) {
+        } else if (idx == 9) {
             throw new DukeException("what is the item?");
         }
     }
