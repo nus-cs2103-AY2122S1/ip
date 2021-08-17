@@ -11,7 +11,7 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     private final static String LINE_SPLIT =
-            "____________________________________________________________";
+            "___________________________________________________________________________";
 
     private final static int MAX_STORAGE = 100;
 
@@ -57,6 +57,12 @@ public class Duke {
         exit();
     }
 
+    public static void exit() {
+        TODO_LIST.clear();
+        SCANNER.close();
+        echo("Bye. Hope to see you again soon!");
+    }
+
     public static void echo(String command) {
         System.out.println(LINE_SPLIT);
         System.out.println('\t' + command);
@@ -72,6 +78,22 @@ public class Duke {
         Task newTask = new Task(description);
         TODO_LIST.add(newTask);
         echo("added: ".concat(newTask.getDescription()));
+    }
+
+    public static void markTaskAsDone(String taskId) {
+        if (TODO_LIST.isEmpty()) {
+            echo("task invalid: list is empty");
+            return;
+        }
+
+        int taskNumber = Integer.parseInt(taskId);
+        if (taskNumber < 0 || TODO_LIST.size() < taskNumber) {
+            echo("task invalid: task does not exist");
+            return;
+        }
+        Task selectedTask = TODO_LIST.get(taskNumber - 1); // shift to 0-indexing
+        selectedTask.markAsDone();
+        echo("Nice! I've marked this task as done:\n\t  " + selectedTask);
     }
 
     public static void displayList() {
@@ -93,27 +115,5 @@ public class Duke {
         // clear final newline characters
         listStringBuilder.setLength(listStringBuilder.length() - newline.length());
         echo(listStringBuilder.toString());
-    }
-
-    public static void markTaskAsDone(String taskId) {
-        if (TODO_LIST.isEmpty()) {
-            echo("task invalid: list is empty");
-            return;
-        }
-
-        int taskNumber = Integer.parseInt(taskId);
-        if (taskNumber < 0 || TODO_LIST.size() < taskNumber) {
-            echo("task invalid: task does not exist");
-            return;
-        }
-        Task selectedTask = TODO_LIST.get(taskNumber - 1); // shift to 0-indexing
-        selectedTask.markAsDone();
-        echo("Nice! I've marked this task as done:\n\t  " + selectedTask);
-    }
-
-    public static void exit() {
-        TODO_LIST.clear();
-        SCANNER.close();
-        echo("Bye. Hope to see you again soon!");
     }
 }
