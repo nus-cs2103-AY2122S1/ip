@@ -39,8 +39,13 @@ public class Duke {
     public static void run() {
         String userInput = SCANNER.nextLine();
         userInput = userInput.trim();
+
         while (!userInput.equals("bye")) {
-            addToList(userInput);
+            if (userInput.equals("list")) {
+                displayList();
+            } else {
+                addToList(userInput);
+            }
             userInput = SCANNER.nextLine();
             userInput = userInput.trim();
         }
@@ -55,11 +60,32 @@ public class Duke {
 
     public static void addToList(String action) {
         if (TODO_LIST.size() == MAX_STORAGE) {
-            echo("unable to add: Max storage in your list!");
+            echo("unable to add: max storage in your list");
             return;
         }
+
         TODO_LIST.add(action);
         echo("added: ".concat(action));
+    }
+
+    public static void displayList() {
+        if (TODO_LIST.isEmpty()) {
+            echo("list is empty: start adding tasks");
+            return;
+        }
+
+        StringBuilder listStringBuilder = new StringBuilder();
+        String newline = "\n\t";
+        for (int idx = 0; idx < TODO_LIST.size(); idx ++) {
+            String action = TODO_LIST.get(idx);
+            listStringBuilder.append(idx);
+            listStringBuilder.append(". ");
+            listStringBuilder.append(action);
+            listStringBuilder.append(newline);
+        }
+
+        listStringBuilder.setLength(listStringBuilder.length() - newline.length());
+        echo(listStringBuilder.toString());
     }
 
     public static void exit() {
