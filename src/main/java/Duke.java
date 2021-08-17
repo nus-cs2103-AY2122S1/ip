@@ -23,9 +23,15 @@ public class Duke {
                 Printer.prettyPrint("Bye (*´▽｀)ノシ. Have a good day!\n");
                 break;
             }
-            tasks[numOfTask++] = input;
-            Printer.prettyPrint("added: " +
-                    input + "\n");
+            switch (input) {
+                case "list":
+                    Printer.prettyPrint(Printer.listTask(tasks));
+                    break;
+                default:
+                    tasks[numOfTask++] = input;
+                    Printer.prettyPrint("added: " +
+                            input + "\n");
+            }
             input = scanner.nextLine();
         }
     }
