@@ -8,10 +8,12 @@ public class Tasks {
         this.tasks = new ArrayList<>();
     }
 
-    public void addTask(String taskName) {
-        Task newTask = new Task(taskName);
-        tasks.add(newTask);
-        System.out.println("\t added: " + taskName + "\n");
+    public void addTask(Task task) {
+        tasks.add(task);
+        String plural = tasks.size() == 1 ? " task " : " tasks ";
+        System.out.println("\t Got it. I've added this task: ");
+        System.out.println("\t \t " + task);
+        System.out.println("\t Now you have " + tasks.size() + plural + "in the list. \n");
     }
 
     @Override

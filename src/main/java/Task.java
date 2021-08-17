@@ -1,22 +1,26 @@
 public class Task {
     private boolean completed;
-    private String taskName;
+    private String description;
 
-    public Task(String taskName) {
-        this.taskName = taskName;
+    protected Task(String taskName) {
+        this.description = taskName;
         this.completed = false;
     }
 
     @Override
     public String toString() {
         String check = this.completed ? "[X] " : "[ ] ";
-        return check + taskName;
+        return check + description;
     }
 
     public void markAsDone() {
         this.completed = true;
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println("\t " + this + "\n");
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
 }
