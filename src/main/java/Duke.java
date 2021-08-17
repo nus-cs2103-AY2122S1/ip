@@ -94,14 +94,20 @@ public class Duke {
                 break;
             case "event":
                 if (preposition == null || !preposition.equals("at")) {
-                    System.out.println("Use the preposition at.");
+                    System.out.println("Use the preposition \"at\".");
+                    return;
+                } else if (dateBuilder.length() == 0) {
+                    System.out.println("Enter the date of the event.");
                     return;
                 }
                 newTask = new Event(descriptionBuilder.toString().trim(), dateBuilder.toString().trim());
                 break;
             case "deadline":
                 if (preposition == null || !preposition.equals("by")) {
-                    System.out.println("Use the preposition by.");
+                    System.out.println("Use the preposition \"by\".");
+                    return;
+                } else if (dateBuilder.length() == 0) {
+                    System.out.println("Enter the deadline.");
                     return;
                 }
                 newTask = new Deadline(descriptionBuilder.toString().trim(), dateBuilder.toString().trim());
