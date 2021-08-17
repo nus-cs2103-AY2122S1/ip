@@ -5,8 +5,15 @@
  * @version CS2103 AY21/22 Sem 1
  */
 public class Duke extends Chatbot {
-    private static String GREETING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
-    private static String FAREWELL_MESSAGE = "See you soon! :)";
+    private static final String GREETING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String FAREWELL_MESSAGE = "See you soon! :)";
+    private static final String FAREWELL_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String COMPLETE_TASK_COMMAND = "done";
+    private static final String DELETE_TASK_COMMAND = "delete";
+    private static final String CREATE_TODO_COMMAND = "todo";
+    private static final String CREATE_EVENT_COMMAND = "event";
+    private static final String CREATE_DEADLINE_COMMAND = "deadline";
 
     private TaskList taskList;
 
@@ -52,38 +59,55 @@ public class Duke extends Chatbot {
     }
 
     /**
+     * Gets the description supplied by the user after a command.
+     * @param command a String that describes the command (e.g. "event")
+     * @param message the String that is input by the user (e.g. "event Meeting /at tomorrow")
+     * @throws DukeException
+     * @return a String representing the description after the command (e.g. "Meeting /at tomorrow")
+     */
+    public String getInputAfterCommand(String command, String message) throws DukeException {
+        if (message.length() <= command.length()) {
+            throw new DukeException(String.format("The description of a %s cannot be empty.", command));
+        }
+        String description = message.substring(command.length()).trim();
+        if (description.length() == 0) {
+            throw new DukeException(String.format("The description of a %s cannot be empty.", command));
+        }
+        return description;
+    }
+
+    /**
      * Handles the logic for managing a user's tasks.
      */
-    public void taskMode() throws DukeException {
-        String message = Chatbot.acceptUserInput();
-        if (message.equals("bye")) {
+    public void taskMode() {
+        String message = Chatbot.acceptUserInput().trim();
+        if (message.equals(FAREWELL_COMMAND)) {
             Chatbot.printMessage(FAREWELL_MESSAGE);
             return;
         }
         try {
-            if (message.equals("list")) {
+            if (message.equals(LIST_COMMAND)) {
                 // List the tasks
-                String listedTasks = this.taskList.toString();
-                Chatbot.printMessage(listedTasks);
-            } else if (message.startsWith("done ")) {
+                Chatbot.printMessage(this.taskList.toString());
+            } else if (message.startsWith(COMPLETE_TASK_COMMAND)) {
                 // Mark a task as done
-                int indexNumber = Integer.parseInt(message.substring(5));
+                int indexNumber = Integer.parseInt(getInputAfterCommand(COMPLETE_TASK_COMMAND, message));
                 String completedTask = this.taskList.completeTask(indexNumber);
                 Chatbot.printMessage("Nice! I've marked this task as done:\n\t" + completedTask);
-            } else if (message.startsWith("delete ")) {
-                // Mark a task as done
-                int indexNumber = Integer.parseInt(message.substring(7));
-                String completedTask = this.taskList.deleteTask(indexNumber);
-                Chatbot.printMessage("Noted. I've removed this task:\n\t" + completedTask);
+            } else if (message.startsWith(DELETE_TASK_COMMAND)) {
+                // Delete a task
+                int indexNumber = Integer.parseInt(getInputAfterCommand(DELETE_TASK_COMMAND, message));
+                String deletedTask = this.taskList.deleteTask(indexNumber);
+                Chatbot.printMessage("Noted. I've removed this task:\n\t" + deletedTask);
             } else {
                 // Add a task to the list
                 Task task;
-                if (message.startsWith("todo")) {
-                    task = this.taskList.addTodo(message.substring(4).trim());
-                } else if (message.startsWith("event")) {
-                    task = this.taskList.addEvent(message.substring(5).trim());
-                } else if (message.startsWith("deadline")) {
-                    task = this.taskList.addDeadline(message.substring(8).trim());
+                if (message.startsWith(CREATE_TODO_COMMAND)) {
+                    task = this.taskList.addTodo(getInputAfterCommand(CREATE_TODO_COMMAND, message));
+                } else if (message.startsWith(CREATE_EVENT_COMMAND)) {
+                    task = this.taskList.addEvent(getInputAfterCommand(CREATE_EVENT_COMMAND, message));
+                } else if (message.startsWith(CREATE_DEADLINE_COMMAND)) {
+                    task = this.taskList.addDeadline(getInputAfterCommand(CREATE_DEADLINE_COMMAND, message));
                 } else {
                     throw new DukeException("I don't know what that command means.\nPlease input a valid command.");
                 }
