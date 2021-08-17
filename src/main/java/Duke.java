@@ -1,11 +1,12 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static String name = "Duke";
     private static boolean isRunning = false;
 
     public static void main(String[] args) {
         Duke.isRunning = true;
-        ToDoList tdl = new ToDoList();
+        ToDoList tdl = new ToDoList(Duke.name);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -31,22 +32,19 @@ public class Duke {
                 int index = Integer.parseInt(substring);
                 tdl.markAsDone(index);
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("------------------");
-                System.out.println("OOPS!!! The description of a done cannot be empty.");
-                System.out.println("------------------\n");
+                dukePrinter("And I'm supposed to guess which item you're done with?");
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("------------------");
-                System.out.println("OOPS!!! Index is out of bound.");
-                System.out.println("------------------\n");
+                dukePrinter("Where's this item? It's not even on the list!");
             }
         } else if (command.startsWith("todo")) {
             try {
+                formatChecker(command);
                 String substring = command.substring(5);
                 tdl.addToDo(substring);
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("------------------");
-                System.out.println("OOPS!!! The description of a todo cannot be empty.");
-                System.out.println("------------------\n");
+                dukePrinter("OOPS!!! The description of a todo cannot be empty.");
+            } catch (DukeException e) {
+                dukePrinter(e.getMessage());
             }
         } else if (command.startsWith("event")) {
             try {
@@ -56,13 +54,10 @@ public class Duke {
                 String duration = substring.substring(substring.indexOf("/") + 1).substring(2);
                 tdl.addEvent(item, duration);
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("------------------");
-                System.out.println("OOPS!!! The description of a event cannot be empty.");
-                System.out.println("------------------\n");
+                dukePrinter("Hold up... You got the format all wrong! It's supposed to " +
+                        "be <event> <name> /at <duration>");
             } catch (DukeException e) {
-                System.out.println("------------------");
-                System.out.println("C'mon now.... The format is wrong! Try again!");
-                System.out.println("------------------\n");
+                dukePrinter(e.getMessage());
             }
         } else if (command.startsWith("deadline")) {
             try {
@@ -72,42 +67,63 @@ public class Duke {
                 String deadline = substring.substring(substring.indexOf("/") + 1).substring(2);
                 tdl.addDeadline(item, deadline);
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("------------------");
-                System.out.println("OOPS!!! The description of a deadline cannot be empty.");
-                System.out.println("------------------\n");
+                dukePrinter("Hold up... You got the format all wrong! It's supposed to " +
+                        "be <deadline> <name> /by <dueDate>");
             } catch (DukeException e) {
-                System.out.println("------------------");
-                System.out.println("C'mon now.... The format is wrong! Try again!");
-                System.out.println("------------------\n");
+                dukePrinter(e.getMessage());
+            }
+        } else if (command.startsWith("delete")) {
+            try {
+                String substring = command.substring(7);
+                int index = Integer.parseInt(substring);
+                tdl.delete(index);
+            } catch (StringIndexOutOfBoundsException e) {
+                dukePrinter("And which item do you want to delete...? Try again :/");
+            } catch (IndexOutOfBoundsException e) {
+                dukePrinter("You're trying to delete something non-existent? Damn who is this guy?");
             }
         } else {
-            System.out.println("Damn... I'm confused...");
+           dukePrinter("I'm confused... I need a raise...");
         }
     }
 
     private static void greeting() {
-        System.out.println("------------------");
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println("------------------\n");
+        System.out.println("========== " + Duke.name + " ===========");
+        System.out.println("Hello... I'm " + Duke.name + ":/");
+        System.out.println("And how can I help you? Make it snappy!");
+        System.out.println("========== " + Duke.name + " ===========\n");
     }
 
     private static void exit() {
         Duke.isRunning = false;
-        System.out.println("------------------");
-        System.out.println("Bye. Hope to see you soon!\n");
-        System.out.println("------------------\n");
+        System.out.println("========== " + Duke.name + " ===========");
+        System.out.println("Wow! I can get off work now :D");
+        System.out.println("========== " + Duke.name + " ===========\n");
     }
 
-    private static void formatChecker(String command) throws DukeException{
-        if (command.startsWith("event")) {
+    private static void formatChecker(String command) throws DukeException {
+        if (command.startsWith("todo")) {
+            if (command.substring(4).isBlank()) {
+                throw new DukeException("C'mon.. you're gonna do nothing?");
+            }
+        } else if (command.startsWith("event")) {
             if (!command.substring(command.indexOf("/")).startsWith("/at")) {
-                throw new DukeException();
+                throw new DukeException("You got the format wrong.. Geez it's supposed to be <event> <name> /at <duration>");
+            } else if (command.substring(5).isBlank()) {
+                throw new DukeException("Really? An event of nothing?");
             }
         } else {
             if (!command.substring(command.indexOf("/")).startsWith("/by")) {
-                throw new DukeException();
+                throw new DukeException("You got the format wrong.. Geez it's supposed to be <deadline> <name> /by <dueDate>");
+            } else if (command.substring(8).isBlank()) {
+                throw new DukeException("Hold up.. last i checked doing nothing has no deadline");
             }
         }
+    }
+
+    private static void dukePrinter(String message) {
+        System.out.println("========== " + Duke.name + " ===========");
+        System.out.println(message);
+        System.out.println("========== " + Duke.name + " ===========\n");
     }
 }

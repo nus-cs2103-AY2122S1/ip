@@ -5,59 +5,103 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-------------------
-Hello! I'm Duke
-What can I do for you?
-------------------
+========== Duke ===========
+Hello... I'm Duke:/
+And how can I help you? Make it snappy!
+========== Duke ===========
 
-------------------
-Got it. I've added this task:
+========== Duke ===========
+Aye Aye Capt'. I've added this To Do:
   [T][ ] read book
-Now you have 1 in the list
-------------------
-------------------
-Got it. I've added this task:
-  [D][ ] return book (by:  thursday 4pm)
-Now you have 2 in the list
-------------------
-------------------
-Got it. I've added this task:
+Now you have 1 in the list. Wew.....
+========== Duke ===========
+
+========== Duke ===========
+You got the format wrong.. Geez it's supposed to be <deadline> <name> /by <dueDate>
+========== Duke ===========
+
+========== Duke ===========
+Aye Aye Capt'. I've added this Event:
   [E][ ] conference (at:  friday 12-1pm)
-Now you have 3 in the list
-------------------
-------------------
-Got it. I've added this task:
+Now you have 2 in the list
+========== Duke ===========
+
+========== Duke ===========
+Aye Aye Capt'. I've added this To Do:
   [T][ ] join sports club
+Now you have 3 in the list. Wew.....
+========== Duke ===========
+
+========== Duke ===========
+Aye Aye Capt'. I've added this Deadline:
+  [D][ ] return book (by:  thursday 4pm)
 Now you have 4 in the list
-------------------
-------------------
-Got it. I've added this task:
-  [T][ ] borrow book
-Now you have 5 in the list
-------------------
-------------------
-1.[T][ ]read book
-2.[D][ ]return book  (by:  thursday 4pm)
-3.[E][ ]conference  (at:  friday 12-1pm)
-4.[T][ ]join sports club
-5.[T][ ]borrow book
-------------------
+========== Duke ===========
 
-------------------
-Nice! I've marked this task as done:
-  [X] return book  (by:  thursday 4pm)
-------------------
+========== Duke ===========
+You got the format wrong.. Geez it's supposed to be <event> <name> /at <duration>
+========== Duke ===========
 
-------------------
-1.[T][ ]read book
-2.[D][X] return book  (by:  thursday 4pm)
-3.[E][ ]conference  (at:  friday 12-1pm)
-4.[T][ ]join sports club
-5.[T][ ]borrow book
-------------------
+========== Duke ===========
+1.[T][ ] read book
+2.[E][ ] conference  (at:  friday 12-1pm)
+3.[T][ ] join sports club
+4.[D][ ] return book  (by:  thursday 4pm)
+========== Duke ===========
 
-------------------
-Bye. Hope to see you soon!
+========== Duke ===========
+Good! Good! Took you long enough to complete this:
+  [X] conference  (at:  friday 12-1pm)
+========== Duke ===========
 
-------------------
+========== Duke ===========
+1.[T][ ] read book
+2.[E][X] conference  (at:  friday 12-1pm)
+3.[T][ ] join sports club
+4.[D][ ] return book  (by:  thursday 4pm)
+========== Duke ===========
+
+========== Duke ===========
+Got it sir. I've removed this task:
+  [E][X] conference  (at:  friday 12-1pm)
+Now you have 3 in the list
+========== Duke ===========
+
+========== Duke ===========
+1.[T][ ] read book
+2.[T][ ] join sports club
+3.[D][ ] return book  (by:  thursday 4pm)
+========== Duke ===========
+
+========== Duke ===========
+C'mon.. you're gonna do nothing?
+========== Duke ===========
+
+========== Duke ===========
+Hold up... You got the format all wrong! It's supposed to be <event> <name> /at <duration>
+========== Duke ===========
+
+========== Duke ===========
+Hold up... You got the format all wrong! It's supposed to be <deadline> <name> /by <dueDate>
+========== Duke ===========
+
+========== Duke ===========
+And I'm supposed to guess which item you're done with?
+========== Duke ===========
+
+========== Duke ===========
+And which item do you want to delete...? Try again :/
+========== Duke ===========
+
+========== Duke ===========
+You're trying to delete something non-existent? Damn who is this guy?
+========== Duke ===========
+
+========== Duke ===========
+Where's this item? It's not even on the list!
+========== Duke ===========
+
+========== Duke ===========
+Wow! I can get off work now :D
+========== Duke ===========
 

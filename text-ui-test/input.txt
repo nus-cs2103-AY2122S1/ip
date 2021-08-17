@@ -2,8 +2,18 @@ todo read book
 deadline return book /at thursday 4pm
 event conference /at friday 12-1pm
 todo join sports club
-todo borrow book
+deadline return book /by thursday 4pm
+event conference2 /by friday 12-1pm
 list
 done 2
 list
+delete 2
+list
+todo
+event conf 2pm
+deadline
+done
+delete
+delete 6
+done 9
 bye

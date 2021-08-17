@@ -1,8 +1,9 @@
 public class Event extends Task {
     private String duration;
+    private String name;
 
     Event(String name, String duration) {
-        super(name);
+        this.name = name;
         this.duration = duration;
     }
 
@@ -12,7 +13,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + this.duration + ")";
+        return this.name + " (at: " + this.duration + ")";
     }
 
     public String getDuration() {

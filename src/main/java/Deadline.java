@@ -1,8 +1,9 @@
 public class Deadline extends Task {
+    private String name;
     private String deadline;
 
     Deadline(String name, String deadline) {
-        super(name);
+        this.name = name;
         this.deadline = deadline;
     }
 
@@ -13,7 +14,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + this.deadline + ")";
+        return this.name + " (by: " + this.deadline + ")";
     }
 
     public String getDeadline() {

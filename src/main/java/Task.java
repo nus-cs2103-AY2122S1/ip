@@ -1,14 +1,5 @@
-public class Task {
-    private String name;
+abstract public class Task {
     private boolean isCompleted = false;
-
-    Task(String name) {
-        this.name = name;
-    }
-
-    public String toString() {
-        return this.name;
-    }
 
     public void setCompleted() {
         this.isCompleted = true;
@@ -18,7 +9,5 @@ public class Task {
         return this.isCompleted;
     }
 
-    public String logo() {
-        return "";
-    }
+    abstract public String logo();
 }
