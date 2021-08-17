@@ -21,9 +21,11 @@ public class Duke {
         printReply("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    private static void add(String string) {
-        tasks.add(new Task(string));
-        printReply("added: " + string);
+    private static void add(Task task) {
+        tasks.add(task);
+        String addMessage = "Got it. I've added this task:\n\t" + task
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
+        printReply(addMessage);
     }
 
     private static void list() {
@@ -67,8 +69,23 @@ public class Duke {
                     String[] splitCommand = readIn.split(" ");
                     int counter = Integer.parseInt(splitCommand[1]);
                     done(counter);
+                } else if (readIn.startsWith("deadline")) {
+                    String fullTask = readIn.substring(readIn.indexOf(' ') + 1);
+                    String[] splitTask = fullTask.split(" /by ");
+                    String description = splitTask[0];
+                    String by = splitTask[1];
+                    add(new Deadline(description, by));
+                } else if (readIn.startsWith("event")) {
+                    String fullTask = readIn.substring(readIn.indexOf(' ') + 1);
+                    String[] splitTask = fullTask.split(" /at ");
+                    String description = splitTask[0];
+                    String at = splitTask[1];
+                    add(new Event(description, at));
+                } else if (readIn.startsWith("todo")) {
+                    String description = readIn.substring(readIn.indexOf(' ') + 1);
+                    add(new Todo(description));
                 } else {
-                    add(readIn);
+                    printReply("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (Exception e) {
                 printReply("ERROR: " + e.getMessage());
