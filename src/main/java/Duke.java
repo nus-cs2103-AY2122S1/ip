@@ -5,7 +5,8 @@ public class Duke {
     /**
      * Continuous scan loops until user input "bye"
      */
-    public void  run(){
+    public static void  run(){
+        Speech.welcome();
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.print("Say something to Duke: ");
@@ -22,7 +23,7 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        Speech.welcome();
-        new Duke().run();
+        Speech.testMode(true);
+        run();
     }
 }

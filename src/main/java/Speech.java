@@ -2,6 +2,15 @@ import java.util.Random;
 
 public class Speech {
 
+    static boolean testing = false;
+
+    /**
+     * Sets the speech to output simple of formatted
+     */
+    public static void testMode(boolean mode){
+        testing = mode;
+    }
+
     /**
      * Welcome msg speech ( To be called only once at the start of DUKE
      */
@@ -52,6 +61,7 @@ public class Speech {
      * @param in takes in a string array and cycle through and printing msg
      */
     public static void speak(String[] in) {
+        if (!testing){
             String topBorder = "          ___________________________________________________\n";
             String botBorder = "          | ________________________________________________|\n" + "          |/\n";
             String emoticon = emoticonRand();
@@ -60,6 +70,12 @@ public class Speech {
                 msges += message_format(x, 48);
             }
             System.out.println( topBorder + msges + botBorder + emoticon);
+        } else {
+            for(String x : in){
+                System.out.println(x);
+            }
+        }
+
     }
 
     /**
