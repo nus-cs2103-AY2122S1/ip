@@ -23,7 +23,7 @@ public class Task {
      */
     public void log_add_task() {
         System.out.println("____________________________________________________________\n"
-                + "Got it. I've added this task: \n"
+                + "Got it. I've added this task:\n"
                 + this + "\n"
                 + "Now you have " + list_of_tasks.size() + " task(s) in the list.\n"
                 + "____________________________________________________________");
@@ -35,7 +35,7 @@ public class Task {
     private void finish_task() {
         this.done = true;
         System.out.println("____________________________________________________________\n"
-                + "Nice! I've marked this task as done: \n"
+                + "Nice! I've marked this task as done:\n"
                 + this + "\n"
                 + "____________________________________________________________");
     }
@@ -63,7 +63,7 @@ public class Task {
      */
     public static void print_list_of_tasks() {
         System.out.println("____________________________________________________________\n"
-                + "Here are the tasks in your list: \n");
+                + "Here are the tasks in your list:\n");
         for (int i = 0; i < list_of_tasks.size(); i++) {
             System.out.println((i + 1) + "." + list_of_tasks.get(i).toString()
 //                    "[" + list_of_tasks.get(i).getStatus() + "] "

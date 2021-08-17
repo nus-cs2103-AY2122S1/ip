@@ -6,7 +6,7 @@ Hello from
 |____/ \__,_|
 
 Hello! I'm Du, your personal assistant chatbot!:)
-What can I do for you?
+Please input the tasks you want to add to your list
 ____________________________________________________________
 Got it. I've added this task:
 [T][ ] read book
@@ -14,20 +14,20 @@ Now you have 1 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[D][ ] return book (by: by Sunday)
+[D][ ] return book (by: Sunday)
 Now you have 2 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[E][ ] project meeting (at: at Mon 2-4pm)
+[E][ ] project meeting (at: Mon 2-4pm)
 Now you have 3 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 
 1.[T][ ] read book
-2.[D][ ] return book (by: by Sunday)
-3.[E][ ] project meeting (at: at Mon 2-4pm)
+2.[D][ ] return book (by: Sunday)
+3.[E][ ] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
@@ -42,10 +42,10 @@ ____________________________________________________________
 Here are the tasks in your list:
 
 1.[T][ ] read book
-2.[D][ ] return book (by: by Sunday)
-3.[E][ ] project meeting (at: at Mon 2-4pm)
+2.[D][ ] return book (by: Sunday)
+3.[E][ ] project meeting (at: Mon 2-4pm)
 4.[T][X] join sports club
 ____________________________________________________________
 ____________________________________________________________
-Bye. Hope to see you again soon!
+Bye. Hope to not see you again:P
 ____________________________________________________________

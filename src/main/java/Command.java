@@ -7,10 +7,10 @@ public class Command {
      * called when the user first start the programme
      */
     public static void greet() {
-        String logo = " ____ \n"
+        String logo = " ____\n"
                 + "|  _ \\ _   _\n"
-                + "| | | | | | | \n"
-                + "| |_| | |_| | \n"
+                + "| | | | | | |\n"
+                + "| |_| | |_| |\n"
                 + "|____/ \\__,_|\n";
         System.out.println("Hello from\n" + logo);
 
