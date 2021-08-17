@@ -21,9 +21,12 @@ public class Duke {
         this.tasks = new ArrayList<>(100);
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+    private Commands getCommand(String input) throws DukeException {
+        try {
+            return Commands.valueOf(input.toUpperCase());
+        } catch (IllegalArgumentException error) {
+            throw new UnknownCommandException();
+        }
     }
 
     /**
@@ -48,13 +51,13 @@ public class Duke {
      */
     private void deleteTask(String taskNum) throws TaskNotFoundException, InvalidTaskException {
         int i = Integer.parseInt(taskNum);
-        if (i < 0 || i >= this.tasks.size()) {
+        if (i <= 0 || i > this.tasks.size()) {
             throw new TaskNotFoundException();
         }
         Task task = this.tasks.get(i - 1);
         this.tasks.remove(i - 1);
         // Show number of tasks in list
-        String str = (tasks.size() > 1) ? " tasks in the list." : " task in the list.";
+        String str = (tasks.size() == 1) ? " task in the list." : " tasks in the list.";
         print(MESSAGE_DELETE + "\n  " + task + "\n" + "Nee has " + tasks.size() + str);
     }
 
@@ -94,7 +97,7 @@ public class Duke {
      */
     private void finishTask(String taskNum) throws TaskNotFoundException, InvalidTaskException {
         int i = Integer.parseInt(taskNum);
-        if (i < 0 || i >= this.tasks.size()) {
+        if (i <= 0 || i > this.tasks.size()) {
             throw new TaskNotFoundException();
         }
         Task task = this.tasks.get(i - 1);
@@ -173,32 +176,32 @@ public class Duke {
                 String input = sc.nextLine();
                 // Takes in 2 commands
                 String[] commands = input.split("\\s", 2);
-                switch (commands[0].toLowerCase()) {
-                    case "done":
+                switch (this.getCommand(commands[0])) {
+                    case DONE:
                         if (commands.length < 2) {
                             throw new InvalidTaskException();
                         }
                         finishTask(commands[1]);
                         break;
-                    case "list":
+                    case LIST:
                         printTasks();
                         break;
-                    case "event":
+                    case EVENT:
                         addEvent(commands);
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         addDeadline(commands);
                         break;
-                    case "todo":
+                    case TODO:
                         addTodo(commands);
                         break;
-                    case "delete":
+                    case DELETE:
                         if (commands.length < 2) {
                             throw new InvalidTaskException();
                         }
                         deleteTask(commands[1]);
                         break;
-                    case "bye":
+                    case BYE:
                         goodbye();
                         // Close scanner
                         running = false;
@@ -217,5 +220,10 @@ public class Duke {
         print(MESSAGE_GREET);
         // Get next input
         waitInput();
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
     }
 }
