@@ -17,9 +17,9 @@ public class Printer {
             if (tasks[i] != null)
                 result.append("\t ")
                         .append(i + 1)
-                        .append(".[")
+                        .append(".")
                         .append(tasks[i].getStatusIcon())
-                        .append("] ")
+                        .append(" ")
                         .append(tasks[i].description)
                         .append("\n");
         }
