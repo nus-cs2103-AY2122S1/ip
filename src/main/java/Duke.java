@@ -60,59 +60,82 @@ public class Duke {
         } else if (check.equalsIgnoreCase("list")) {
             getList();
             return "";
-        } else if (words[0].equalsIgnoreCase("done")) {
+        } else if (words[0].equalsIgnoreCase("done") || check.toLowerCase().startsWith("done")) {
             try {
-                int index = Integer.parseInt(words[1]) - 1;
+                int index = -1;
+                if (words.length == 1 && check.length() == 4) {
+                    throw new IllegalArgumentException("Please input index :)");
+                }
+                if (words.length > 1) {
+                    index = Integer.parseInt(words[1]) - 1;
+                }
+                if (words.length == 1) {
+                    index = Integer.parseInt(check.substring(4));
+                }
                 tasks.get(index).setIsDone();
                 if (index >= tasks.size() || index < 0) {
-                    System.out.println("Please input correct index, no such index :( ");
+                    throw new IllegalArgumentException("No such index. Please input correct index, no such index :(");
                 }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("You must've forgotten. Please indicate index :) ");
+            } catch (IndexOutOfBoundsException e) {
+                if (check.length() == 4) {
+                    System.out.println("     You must've forgotten, please input index :)");
+                } else {
+                    System.out.println("     Please indicate correct index :)");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("     " + e.getMessage());
             }
             return "";
         } else {
             try {
                 createTask(words);
             } catch (IllegalArgumentException e) {
-                System.out.println("Please input in the form: <Type of Task> <Name of Task>" +
-                        "and include keyword '/at' OR '/by' with date if relevant.");
+                System.out.println("     " + e.getMessage());
+                System.out.println("     Please input in the form: <Type of Task> <Name of Task>" +
+                        " and include keyword '/at' OR '/by' with date if relevant.");
             }
             return "";
         }
     }
 
+    /**
+     * To create a Task object that may be ToDO, Deadline or Event
+     * depending on user's input, before adding it to the list of tasks
+     *
+     * @param args the String array representation of the input by user
+     */
     public static void createTask(String[] args) {
         if (args.length < 2) {
-            System.out.println("     Oops, you have left out the task!");
+            if (!args[0].equalsIgnoreCase("todo") && !args[0].equalsIgnoreCase("deadline")
+            && !args[0].equalsIgnoreCase("event")) {
+                System.out.println("     Invalid input :(");
+            } else {
+                System.out.println("     Oops, you have left out the task description!");
+            }
+            System.out.println("     Please input in the form: <Type of Task> <Name of Task>" +
+                    " and include keyword '/at' OR '/by' with date if relevant.");
         } else if (args[0].equalsIgnoreCase("todo")) {
-            try {
-                ToDo t = new ToDo(filterInfo(args));
-                addTask(t);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("     You must've forgotten. Please indicate index :) ");
-            }
+            ToDo t = new ToDo(filterInfo(args));
+            addTask(t);
         } else if (args[0].equalsIgnoreCase("deadline")) {
-            try {
-                Deadline d = new Deadline(filterInfo(args), lookForDeadline(args));
-                addTask(d);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("     You must've forgotten. Please indicate index :) ");
-            } catch (IllegalArgumentException e) {
-                System.out.println("     " + e.getMessage());
-            }
+            Deadline d = new Deadline(filterInfo(args), lookForDeadline(args));
+            addTask(d);
         } else if (args[0].equalsIgnoreCase("event")) {
-            try {
-                Event d = new Event(filterInfo(args), searchForEventDay(args));
-                addTask(d);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("You must've forgotten. Please indicate index :) ");
-            } catch (IllegalArgumentException e) {
-                System.out.println("     " + e.getMessage());
-            }
+            Event d = new Event(filterInfo(args), searchForEventDay(args));
+            addTask(d);
+        } else {
+            System.out.println("     Invalid input :(");
+            System.out.println("     Please input in the form: <Type of Task> <Name of Task>" +
+                    " and include keyword '/at' OR '/by' with date if relevant.");
         }
     }
 
+    /**
+     * To get the String representation of the date/deadline as input by user
+     *
+     * @param words the String array representation of the input by user
+     * @return the concatenated String that is the date specified by user
+     */
     public static String filterInfo(String[] words) {
         String temp = "";
         for (int i = 1; i < words.length; i++) {
@@ -125,7 +148,16 @@ public class Duke {
         return temp;
     }
 
-
+    /**
+     * To identify the start of String representation of date of Event
+     * by finding the "/at" expression
+     *
+     * @param args the String array representation of the input by user
+     * @return the String representation of the date by passing it to method
+     * getDate which requires a starting index as an argument
+     * @throws IllegalArgumentException thrown when encountering a String Array without
+     * the presence of "/at" expression, which is not a valid input for Event
+     */
     public static String searchForEventDay(String[] args) throws IllegalArgumentException {
         for (int i = 1; i < args.length; i++) {
             if (args[i].equals("/at")) {
@@ -139,6 +171,16 @@ public class Duke {
         throw new IllegalArgumentException("Please input in the form: <Event> <Name> /at <Date>.");
     }
 
+    /**
+     * To identify the start of String representation of date for Deadline
+     * by finding the "/by" expression
+     *
+     * @param arg the String array representation of the input by user
+     * @return the String representation of the date by passing it to method
+     * getDate which requires a starting index as an argument
+     * @throws IllegalArgumentException thrown when encountering a String Array without
+     * the presence of "/by" expression, which is not a valid input for Deadline
+     */
     public static String lookForDeadline(String[] arg) throws IllegalArgumentException {
         for (int i = 1; i < arg.length; i++) {
             if (arg[i].equals("/by")) {
@@ -152,6 +194,14 @@ public class Duke {
         throw new IllegalArgumentException("Please input in the form: <Deadline> <Name> /by <Date>.");
     }
 
+    /**
+     * To create a String representation of date by
+     * concatenating a String from the starting index to the last index
+     *
+     * @param s the String array representation of the input by user
+     * @param start the starting index
+     * @return String representation of date as input by user
+     */
     public static String getDate(String[] s, int start) {
         String temp = "";
         for (int i = start; i < s.length; i++) {
@@ -194,6 +244,7 @@ public class Duke {
          * Description of the task
          */
         private final String task;
+
         /**
          * Status of the task represented by String
          */
@@ -215,9 +266,9 @@ public class Duke {
         public void setIsDone() {
             if (this.isDone.equals(" ")) {
                 this.isDone = "X";
-                System.out.println("Well done! The task is completed!");
+                System.out.println("     Well done! The task is completed!");
             } else {
-                System.out.println("You have already completed this task before!");
+                System.out.println("     You have already completed this task before!");
             }
             System.out.println("       [" + isDone + "] " + this.getTask());
         }
@@ -225,6 +276,7 @@ public class Duke {
         /**
          * To retrieve the status of the task
          * whether it is complete or not
+         *
          * @return the string representation of the task's state
          */
         public String getStatus() {
@@ -240,55 +292,138 @@ public class Duke {
             return this.task;
         }
 
+        /**
+         * To retrieve the information on the type of Task
+         *
+         * @return the String description of the type of Task
+         */
         public String getType() {
             return "regular";
         }
     }
 
+    /**
+     * The ToDo class is a child class for Task
+     * to support different specificities of a task
+     * as input by user
+     */
     public static class ToDo extends Task{
-        String type = "[T]";
+        /**
+         * The String to store the type of task information
+         * that identifies a ToDo task
+         */
+        final String type = "[T]";
 
+        /**
+         * Constructor for a ToDo task
+         *
+         * @param s the input string to describe the ToDO task
+         */
         public ToDo(String s) {
             super(s);
         }
 
+        /**
+         * To retrieve the information on the type of Task
+         *
+         * @return the String description of the type of Task
+         */
         public String getType() {
             return this.type;
         }
     }
 
+    /**
+     * The Deadline class is a child class for Task
+     * to support different specificities of a task
+     * as input by user
+     */
     public static class Deadline extends Task{
-        String type = "[D]";
-        String dueDate;
+        /**
+         * The String to store the type of task information
+         * that identifies a Deadline task
+         */
+        final String type = "[D]";
 
+        /**
+         * The String to store the do-by-date information
+         * that identifies a Deadline task
+         */
+        final String dueDate;
+
+        /**
+         * Constructor for a Deadline task
+         *
+         * @param s the input string to describe the Deadline task
+         * @param date the do-by-date
+         */
         public Deadline(String s, String date) {
             super(s);
             this.dueDate = date;
         }
 
+        /**
+         * To retrieve the information on the type of Task
+         *
+         * @return the String description of the type of Task
+         */
         public String getType() {
             return this.type;
         }
 
+        /**
+         * To retrieve the description of the Deadline task
+         *
+         * @return the String that is the description of the Deadline task
+         */
         @Override
         public String getTask() {
             return super.getTask() + "(by: " + this.dueDate + ")";
         }
     }
 
+    /**
+     * The Event class is a child class for Task
+     * to support different specificities of a task
+     * as input by user
+     */
     public static class Event extends Task{
-        String type = "[E]";
-        String date;
+        /**
+         * The String to store the type of task information
+         * that identifies an Event task
+         */
+        final String type = "[E]";
 
+        /**
+         * The String to store the date information
+         * that identifies an Event task
+         */
+        final String date;
+
+        /**
+         * Constructor for an Event task
+         * @param s the input string to describe the Event task
+         * @param date the date of the event
+         */
         public Event(String s, String date) {
             super(s);
             this.date = date;
         }
 
+        /**
+         * To retrieve the information on the type of Task
+         *
+         * @return the String description of the type of Task
+         */
         public String getType() {
             return this.type;
         }
 
+        /**
+         * To retrieve the description of the Event task
+         *
+         * @return the String that is the description of the Event task
+         */
         @Override
         public String getTask() {
             return super.getTask() + "(at: " + this.date + ")";
