@@ -1,14 +1,15 @@
+import java.util.ArrayList;
+
 public class Task {
     protected String description;
     private boolean isDone;
-    private static Task[] tasks = new Task[100];
-    private static int counter = 0;
+//    private static Task[] tasks = new Task[100];
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     private Task(String description) {
         this.description = description;
         this.isDone = false;
-        Task.tasks[counter] = this;
-        Task.counter++;
+        tasks.add(this);
     }
 
     public Task() {}
@@ -63,7 +64,11 @@ public class Task {
     }
 
     public void markDone(int index) {
-        tasks[index].taskDone();
+        tasks.get(index).taskDone();
+    }
+
+    public void delete(int index) {
+        tasks.remove(index);
     }
 
     public void add(String input) {
@@ -120,23 +125,23 @@ public class Task {
     }
 
     public static Task retrieveTask(int index) {
-        return tasks[index];
+        return tasks.get(index);
     }
 
     public static int listLength() {
-        return Task.counter;
+        return tasks.size();
     }
 
     public static void displayList() {
         System.out.println("\nHere are the tasks in your list:\n--------------------");
-        for (int i = 0; i < tasks.length; i++) {
-            Task task = tasks[i];
-            if (task == null) {
-                if (i == 0) System.out.println("List is empty!");
-                break;
+        if (tasks.size() == 0) {
+            System.out.println("List is empty!");
+        } else {
+            int index = 1;
+            for (Task t : tasks) {
+                System.out.println(index + ". " + t);
+                index++;
             }
-            int index = i + 1;
-            System.out.println(index + ". " + tasks[i]);
         }
     }
 }

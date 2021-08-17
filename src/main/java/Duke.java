@@ -26,6 +26,14 @@ public class Duke {
                 case "list":
                     Task.displayList();
                     break;
+                case "delete":
+                    String stringIndex2 = scanner.next();
+                    int index2 = Integer.parseInt(stringIndex2) - 1;
+                    Task deletedTask = Task.retrieveTask(index2);
+                    task.delete(index2);
+                    System.out.println("\nDuke: Noted. I've removed this task:\n"
+                    + deletedTask + "\nNow you have " + Task.listLength() + " tasks in the list.");
+                    break;
                 default:
                     String remaining = firstWord.concat(" " + scanner.nextLine());
                     int lengthBefore = Task.listLength();
