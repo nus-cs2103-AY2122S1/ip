@@ -1,33 +1,33 @@
 public class Task {
 
-    private String action;
+    private String description;
 
-    private boolean done;
+    private boolean isDone;
 
-    public Task(String action, boolean done) {
-        this.action = action;
-        this.done = done;
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
-    public Task(String action) {
-        this.action = action;
-        this.done = false;
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
     }
 
-    public String getAction() {
-        return action;
+    public String getDescription() {
+        return description;
     }
 
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
-    public void setAction(String action) {
-        this.action = action;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public void markAsDone() {

@@ -69,7 +69,7 @@ public class Duke {
 
         Task newTask = new Task(action);
         TODO_LIST.add(newTask);
-        echo("added: ".concat(newTask.getAction()));
+        echo("added: ".concat(newTask.getDescription()));
     }
 
     public static void displayList() {
