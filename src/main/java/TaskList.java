@@ -12,6 +12,10 @@ class TaskList {
         list.add(t);
     }
 
+    public int size() {
+        return list.size();
+    }
+
     public Task get(int taskNo) {
         return list.get(--taskNo);
     }
