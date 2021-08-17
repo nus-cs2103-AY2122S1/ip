@@ -25,9 +25,14 @@ public class Duke {
                 duke.list();
             } else if (command.startsWith("done")) {
                 duke.done(command.substring(5));
+            } else if (command.startsWith("todo")) {
+                duke.add(command.substring(5), "todo");
+            } else if (command.startsWith("deadline")) {
+                duke.add(command.substring(9), "deadline");
+            } else if (command.startsWith("event")) {
+                duke.add(command.substring(6), "event");
             } else {
-                System.out.println("here");
-                duke.add(command);
+                break;
             }
         }
 
@@ -41,10 +46,36 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void add(String description) {
+    public void add(String description, String taskType) {
         if (toDoList.size() < 100) {
-            toDoList.add(new Task(description));
-            System.out.println(String.format("added: %s", description));
+
+            System.out.println("Got it. I've added this task:");
+
+            if (taskType == "todo") {
+                Task task = new Todo(description);
+                toDoList.add(task);
+                System.out.println(task);
+
+            } else if (taskType == "deadline") {
+                String newDescription = description.substring(0, description.indexOf(" /by "));
+                String by = description.substring(description.indexOf("/by ") + 4);
+                Task task = new Deadline(newDescription, by);
+                toDoList.add(task);
+                System.out.println(task);
+
+            } else {
+                String newDescription = description.substring(0, description.indexOf(" /at "));
+                String at = description.substring(description.indexOf("/at ") + 4);
+                Task task = new Event(newDescription, at);
+                toDoList.add(task);
+                System.out.println(task);
+            }
+
+            if (toDoList.size() > 1) {
+                System.out.println(String.format("Now you have %d tasks in the list.", toDoList.size()));
+            } else {
+                System.out.println(String.format("Now you have 1 task in the list."));
+            }
         }
 
     }
