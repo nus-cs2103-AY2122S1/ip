@@ -3,8 +3,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-
-
     public static ArrayList<Task> itemList = new ArrayList<Task>();
 
     public static void greet() {
