@@ -23,6 +23,8 @@ public class TaskList {
 
     /**
      * Returns a string representing the list of tasks.
+     *
+     * @return A string representing the task list
      */
     @Override
     public String toString() {
