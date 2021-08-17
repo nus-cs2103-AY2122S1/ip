@@ -22,16 +22,19 @@ public class Duke {
             if (input.equals("bye")) {
                 Printer.prettyPrint("Bye (*´▽｀)ノシ. Have a good day!\n");
                 break;
-            }
-            switch (input) {
-                case "list":
-                    Printer.prettyPrint("Here are the tasks in your list:\n" +
-                            Printer.listTask(tasks));
-                    break;
-                default:
-                    tasks[numOfTask++] = new Task(input);
-                    Printer.prettyPrint("added: " +
-                            input + "\n");
+            } else if (input.startsWith("done")) {
+                tasks[Integer.parseInt(input.split(" ")[1]) - 1].markAsDone();
+            } else {
+                switch (input) {
+                    case "list":
+                        Printer.prettyPrint("Here are the tasks in your list:\n" +
+                                Printer.listTask(tasks));
+                        break;
+                    default:
+                        tasks[numOfTask++] = new Task(input);
+                        Printer.prettyPrint("added: " +
+                                input + "\n");
+                }
             }
             input = scanner.nextLine();
         }
