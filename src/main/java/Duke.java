@@ -16,7 +16,7 @@ public class Duke {
         boolean tryMore = true;
 
         while (tryMore) {
-            String data = scan.nextLine();
+            String data = scan.next();
 
 
             switch (data.toLowerCase()) {
@@ -28,20 +28,16 @@ public class Duke {
                         System.out.println(i + ". " + myList.get(i - 1).toString());
                     }
                     break;
-                case "done .*":
-                    System.out.println("Here");
+                case "done":
+                    Task task = myList.get(scan.nextInt() - 1);
+                    task.markAsDone();
+                    System.out.println(" Nice! I've marked this task as done: \n"
+                                + task.toString());
                     break;
                 default:
                     printMsg(data);
                     myList.add(new Task(data));
             }
-
-
-//            } else if ((data.length() >= 2) && data.substring(0, 3).equals("done")) {
-//                myList.get(data.charAt(5)).isDone = true;
-//                System.out.println(" Nice! I've marked this task as done: \n"
-//                        + myList.get(data.charAt(5)).toString());
-
         }
         printMsg("Bye. Hope to see you again soon!");
     }
