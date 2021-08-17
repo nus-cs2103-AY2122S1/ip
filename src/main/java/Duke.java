@@ -60,7 +60,6 @@ public class Duke {
                     .split("/at")[0]
                     .strip()
                     .substring(6);
-                System.out.println(description);
                 Event event = new Event(description, eventTime);
                 store.addTask(event);
                 Response.added(store, event);

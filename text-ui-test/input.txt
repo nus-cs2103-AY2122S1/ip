@@ -1,0 +1,11 @@
+list
+todo test multiple words
+deadline do technical test /at /by time string
+event do technical test /by /at time string
+list
+done 2
+list
+done 1
+done 3
+list
+bye
