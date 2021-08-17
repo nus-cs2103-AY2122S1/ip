@@ -32,6 +32,8 @@ public class Duke {
     private final String GREETING = "Hallo! My name's Peter!\n\tHow may I be of service to you?";
     private final String GOODBYE = "Good day! I'm gonna find Lois if you're not using me!";
     private final String TASK_REPORT = "Here are all your tasks! No Procrastination!";
+    private final String TASK_COMPLETE = "Task Completed: ";
+    private final String CHEERING = "Great job! You're the best! Keep up the good work! Oho! Oho! Ohooooooo!";
     private Task[] taskTracker = new Task[100];
     private int taskNo = 0;
 
@@ -67,6 +69,14 @@ public class Duke {
         return formattedTask.toString();
     }
 
+    private void completeTask(String input){
+        Integer index = Integer.parseInt(input.split(" ", 2)[1]);
+        Task completedTask = taskTracker[index - 1];
+        completedTask.maskAsDone();
+        String output = TASK_COMPLETE + (index) + ". " + completedTask.taskTitle + "\n\t" + CHEERING;
+        response(output);
+    }
+
     private void run() {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -76,6 +86,8 @@ public class Duke {
                 return;
             }else if (input.equals("list")){
                 response(formatTask());
+            }else if (input.startsWith("done")) {
+                completeTask(input);
             }else {
                 addTask(input);
             }
