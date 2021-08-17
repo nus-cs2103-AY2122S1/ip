@@ -66,7 +66,8 @@ public class Duke {
 
         } else if (userInput.startsWith("done")) {
             String taskNumberString = userInput.substring(4).trim();
-            markTaskAsDone(taskNumberString);
+            int taskNumber = Integer.parseInt(taskNumberString);
+            markTaskAsDone(taskNumber);
 
         } else if (userInput.startsWith("todo")) {
             String description = userInput.substring(4).trim();
@@ -99,17 +100,16 @@ public class Duke {
                 TODO_LIST.size() + " tasks in the list");
     }
 
-    public static void markTaskAsDone(String taskId) {
+    public static void markTaskAsDone(int taskNumber) {
         if (TODO_LIST.isEmpty()) {
-            echo("task invalid: list is empty");
+            echo("Task invalid: List is empty");
+            return;
+        }
+        if (taskNumber < 0 || TODO_LIST.size() < taskNumber) {
+            echo("Task invalid: Task does not exist");
             return;
         }
 
-        int taskNumber = Integer.parseInt(taskId);
-        if (taskNumber < 0 || TODO_LIST.size() < taskNumber) {
-            echo("task invalid: task does not exist");
-            return;
-        }
         Task selectedTask = TODO_LIST.get(taskNumber - 1); // shift to 0-indexing
         selectedTask.markAsDone();
         echo("Nice! I've marked this task as done:\n\t  " + selectedTask);
