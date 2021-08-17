@@ -55,6 +55,8 @@ public class TDLTask {
      * @return the String containing the line describing the task.
      */
     public String getLineOfTaskInfo() {
+        String taskTypeCheckbox = this.getTaskTypeStringHeader();
+
         String doneCheckboxStr = "";
         if (isDone) {
             doneCheckboxStr = "[X]";
@@ -62,7 +64,7 @@ public class TDLTask {
             doneCheckboxStr = "[ ]";
         }
 
-        String returnThis = doneCheckboxStr + " " + this.getTaskName();
+        String returnThis = taskTypeCheckbox + doneCheckboxStr + " " + this.getTaskDescription();
 
         return returnThis;
     }
@@ -74,6 +76,24 @@ public class TDLTask {
      */
     public TaskType getTaskType() {
         return TaskType.NONE;
+    }
+
+    /**
+     * Returns a string containing the letter representing the task type in square brackets.
+     *
+     * @return a string containing [X] where X is the letter representing the task type.
+     */
+    public String getTaskTypeStringHeader() {
+        return "[ ]";
+    }
+
+    /**
+     * Returns a string containing the task's name and additional descriptions if applicable.
+     *
+     * @return the string describing the task.
+     */
+    public String getTaskDescription() {
+        return this.getTaskName();
     }
 
 
