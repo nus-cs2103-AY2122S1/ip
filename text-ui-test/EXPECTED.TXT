@@ -70,20 +70,20 @@ Here are the tasks in your list:
 3. [D] [X] Do CS2103T iP (by: Thu, Aug 19th 2359)
 ____________________________________________________________________________
 ____________________________________________________________________________
-The description of a todo cannot be empty
+☹ BURP-ribbit ribbit. The description of a todo cannot be empty
 ____________________________________________________________________________
 ____________________________________________________________________________
-The description of a event cannot be empty
+☹ BURP-ribbit ribbit. he description of a event cannot be empty
 ____________________________________________________________________________
 ____________________________________________________________________________
-Events should be formatted as:
+☹ BURP-ribbit ribbit. Events should be formatted as:
 event <description> /at <time of event>
 ____________________________________________________________________________
 ____________________________________________________________________________
-The description of a deadline cannot be empty
+☹ BURP-ribbit ribbit. The description of a deadline cannot be empty
 ____________________________________________________________________________
 ____________________________________________________________________________
-Deadlines should be formatted as:
+☹ BURP-ribbit ribbit. Deadlines should be formatted as:
 deadline <description> /by <deadline>
 ____________________________________________________________________________
 ____________________________________________________________________________
