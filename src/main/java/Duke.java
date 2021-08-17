@@ -1,9 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        Scanner sc= new Scanner(System.in);
-        String s = "";
+        String s;
+        ArrayList<Task> list = new ArrayList<Task>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -27,8 +28,20 @@ public class Duke {
                 break;
             }
 
+            if (s.equals("list")) {
+                System.out.println("___________________________________________");
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.println(i+1 + ". " + list.get(i).getName());
+                }
+                System.out.println("___________________________________________");
+                continue;
+            }
+
+            Task t = new Task(s);
+
             System.out.println("___________________________________________");
-            System.out.println("\t" + s);
+            list.add(t);
+            System.out.println("\tadded: " + t.getName());
             System.out.println("___________________________________________");
         }
     }
