@@ -15,4 +15,11 @@ blahhh
 Uvuvwevwevwe
 done -32
 done 999
+delete 33
+delete -99
+delete
+
+delete 1
+delete 2
+list
 bye
