@@ -2,6 +2,8 @@
 /.idea/
 /out/
 /*.iml
+*.class
+
 
 # Gradle build files
 /.gradle/
@@ -12,6 +14,8 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+.AppleDouble
+.LSOverride
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
