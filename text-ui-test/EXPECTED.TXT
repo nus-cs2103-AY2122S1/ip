@@ -9,6 +9,8 @@ Understood Sir/Mdm, I have added the indicated task:
    [T][ ] feed momo
 Now you have 2 tasks.
 
+Pardon me Sir/Mdm, but I do not understand.
+
 Understood Sir/Mdm, I have added the indicated task: 
    [D][ ] assignment (by: Monday 5pm)
 Now you have 3 tasks.
@@ -53,6 +55,12 @@ Please specify a task you would like marked as done Sir/Mdm:
 3. [D][X] assignment (by: Monday 5pm)
 4. [E][X] exam (at: 23/11/21)
 
+Please enter a proper number within this range Sir/Mdm:
+1. [T][X] check email
+2. [T][X] feed momo
+3. [D][X] assignment (by: Monday 5pm)
+4. [E][X] exam (at: 23/11/21)
+
 Please specify a task within this range Sir/Mdm:
 1. [T][X] check email
 2. [T][X] feed momo
@@ -82,4 +90,48 @@ Please provide a description and date of the deadline Sir/Mdm.
 Please provide a date of the deadline Sir/Mdm.
 
 Please provide a description of the deadline Sir/Mdm.
+
+Please specify a task you would like to delete Sir/Mdm:
+1. [T][X] check email
+2. [T][X] feed momo
+3. [D][X] assignment (by: Monday 5pm)
+4. [E][X] exam (at: 23/11/21)
+
+Please enter a proper number within this range Sir/Mdm:
+1. [T][X] check email
+2. [T][X] feed momo
+3. [D][X] assignment (by: Monday 5pm)
+4. [E][X] exam (at: 23/11/21)
+
+Please specify a task within this range Sir/Mdm:
+1. [T][X] check email
+2. [T][X] feed momo
+3. [D][X] assignment (by: Monday 5pm)
+4. [E][X] exam (at: 23/11/21)
+
+Please enter a proper number within this range Sir/Mdm:
+1. [T][X] check email
+2. [T][X] feed momo
+3. [D][X] assignment (by: Monday 5pm)
+4. [E][X] exam (at: 23/11/21)
+
+Much obliged Sir/Mdm! I shall delete this task:
+   [E][X] exam (at: 23/11/21)
+Now you have 3 tasks.
+
+Much obliged Sir/Mdm! I shall delete this task:
+   [D][X] assignment (by: Monday 5pm)
+Now you have 2 tasks.
+
+Much obliged Sir/Mdm! I shall delete this task:
+   [T][X] feed momo
+Now you have 1 task.
+
+Much obliged Sir/Mdm! I shall delete this task:
+   [T][X] check email
+Now you have 0 tasks.
+
+You have no tasks to delete Sir/Mdm!
+
+Goodbye Sir/Mdm. Hope to serve you again soon!
 

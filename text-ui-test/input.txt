@@ -1,5 +1,6 @@
 todo check email
 todo feed momo
+list 0
 deadline assignment /Monday 5pm
 event exam /23/11/21
 list
@@ -10,6 +11,7 @@ done 3
 done 4
 list
 done
+done ok
 done 400
 done 4g5
 todo
@@ -21,3 +23,13 @@ event /date
 deadline
 deadline project
 deadline /date
+delete
+delete ok
+delete 5
+delete 4g5
+delete 4
+delete 3
+delete 2
+delete 1
+delete 0
+bye

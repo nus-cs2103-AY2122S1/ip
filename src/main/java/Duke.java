@@ -1,12 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
 
-    private Task[] tasks = new Task[100];
-
-    private int count = 0;
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     private void serve() {
         System.out.println("Good Day Sir/Mdm, I am Duke.\nWhat can I do for you?\n");
@@ -29,10 +27,16 @@ public class Duke {
                 System.out.println("Here are your tasks Sir/Mdm:" + this.list());
                 System.out.println();
                 continue;
-            }
-            if (input.split(" ")[0].equals("done")) {
+            } else if (input.split(" ")[0].equals("done")) {
                 try {
                     markAsDone(input);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                    System.out.println();
+                }
+            } else if (input.split(" ")[0].equals("delete")) {
+                try {
+                    deleteTask(input);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                     System.out.println();
@@ -63,13 +67,17 @@ public class Duke {
             throw new DukeException("Please enter a proper number within this range Sir/Mdm:" + this.list());
         }
 
-        if (taskToMark < 0 || taskToMark > count - 1) {
+        if (this.tasks.isEmpty()) {
+            throw (new DukeException("You have no tasks to mark as done Sir/Mdm!"));
+        }
+
+        if (taskToMark < 0 || taskToMark > this.tasks.size() - 1) {
             throw (new DukeException("Please specify a task within this range Sir/Mdm:" + this.list()));
         }
 
-        tasks[taskToMark].markAsDone();
+        this.tasks.get(taskToMark).markAsDone();
         System.out.println("Good job Sir/Mdm! I shall mark this task as complete:\n   " +
-                tasks[taskToMark] + "\n");
+                this.tasks.get(taskToMark) + "\n");
     }
 
 
@@ -84,9 +92,10 @@ public class Duke {
                 throw new DukeException("Please provide a description of the todo Sir/Mdm.");
             }
             Task newTask = new Todo(description);
-            this.add(newTask);
+            this.tasks.add(newTask);
             System.out.println("Understood Sir/Mdm, I have added the indicated task: " + "\n   " + newTask);
-            System.out.println("Now you have " + count + (count == 1 ? " task." : " tasks.") + "\n");
+            System.out.println("Now you have " + this.tasks.size() + (this.tasks.size() == 1 ? " task." : " tasks.")
+                    + "\n");
 
         } else if (deadlinePattern.matcher(input).find() || input.equals("deadline")) {
             int index = input.indexOf('/');
@@ -103,9 +112,10 @@ public class Duke {
             }
             String date = input.substring(index + 1);
             Task newTask = new Deadline(description, date);
-            this.add(newTask);
+            this.tasks.add(newTask);
             System.out.println("Understood Sir/Mdm, I have added the indicated task: " + "\n   " + newTask);
-            System.out.println("Now you have " + count + (count == 1 ? " task." : " tasks.") + "\n");
+            System.out.println("Now you have " + this.tasks.size() + (this.tasks.size() == 1 ? " task." : " tasks.")
+                    + "\n");
 
         } else if (eventPattern.matcher(input).find() || input.equals("event")) {
             int index = input.indexOf('/');
@@ -123,30 +133,57 @@ public class Duke {
             }
             String date = input.substring(index + 1);
             Task newTask = new Event(description, date);
-            this.add(newTask);
+            this.tasks.add(newTask);
             System.out.println("Understood Sir/Mdm, I have added the indicated task: " + "\n   " + newTask);
-            System.out.println("Now you have " + count + (count == 1 ? " task." : " tasks.") + "\n");
+            System.out.println("Now you have " + this.tasks.size() + (this.tasks.size() == 1 ? " task." : " tasks.")
+                    + "\n");
         } else {
             throw new DukeException("Pardon me Sir/Mdm, but I do not understand.");
         }
 
     }
 
-    private void add(Task task) {
-        tasks[this.count] = task;
-        this.count++;
-    }
-
     private String list() {
         String list = "";
-        for (int i = 0; i < tasks.length; i++) {
-            if (tasks[i] == null) break;
-            list = list + "\n" + (i + 1) + ". " + tasks[i];
+        for (int i = 0; i < this.tasks.size(); i++) {
+            list = list + "\n" + (i + 1) + ". " + this.tasks.get(i);
         }
 
         return list;
 
     }
+
+    private void deleteTask(String input) throws DukeException {
+        String[] parsedInput = input.split(" ");
+
+        if (parsedInput.length != 2) {
+            throw (new DukeException("Please specify a task you would like to delete Sir/Mdm:" + this.list()));
+        }
+
+        int taskToDelete;
+
+        try {
+            taskToDelete = Integer.parseInt(parsedInput[1]) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please enter a proper number within this range Sir/Mdm:" + this.list());
+        }
+
+        if (this.tasks.isEmpty()) {
+            throw (new DukeException("You have no tasks to delete Sir/Mdm!"));
+        }
+
+        if (taskToDelete < 0 || taskToDelete > this.tasks.size() - 1) {
+            throw (new DukeException("Please specify a task within this range Sir/Mdm:" + this.list()));
+        }
+
+
+        Task deletedTask = this.tasks.get(taskToDelete);
+        this.tasks.remove(taskToDelete);
+        System.out.println("Much obliged Sir/Mdm! I shall delete this task:\n   " +
+                deletedTask + "\n" + "Now you have " + this.tasks.size() +
+                (this.tasks.size() == 1 ? " task." : " tasks.") + "\n");
+    }
+
 
     public static void main(String[] args) {
         Duke duke = new Duke();
