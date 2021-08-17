@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
+/**
+ * Biscuit is a Personal Assistant Chatbot that helps a person to keep track of various things
+ */
+public class Biscuit {
     private static ArrayList<Task> list = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -28,7 +31,7 @@ public class Duke {
                 "      ██░░░░░░██░░░░░░██░░░░░░░░░░████\n" +
                 "████████████████████████████████████████\n";
 
-        String separator = "════════════════════════════════════════";
+        String separator = "────────────────────────────────────────";
         System.out.println("Woof from\n" + logo);
         System.out.println("Woof! I'm Biscuit.\nWhat can I do for you?\n" + separator);
         Scanner scanner = new Scanner(System.in);
@@ -39,7 +42,7 @@ public class Duke {
             System.out.println(separator);
             switch (processedInput[0]) {
                 case "todo":
-                    addTask(new Todo(processedInput[1]));
+                    addTask(new ToDo(processedInput[1]));
                     break;
                 case "deadline":
                     String[] deadlineData = processedInput[1].split("/by ");
@@ -60,7 +63,7 @@ public class Duke {
                     }
                     break;
                 case "bye":
-                    System.out.println("Bye! Hope to see you again soon! \uD83D\uDC3E");
+                    System.out.println("Bye! Hope to see you again soon! 8==8");
                     isContinue = false;
                     break;
                 default:
