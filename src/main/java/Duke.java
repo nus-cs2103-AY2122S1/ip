@@ -1,24 +1,31 @@
 import java.util.Scanner;
+import commands.*;
+import exceptions.NoSuchCommandException;
+
 public class Duke {
-    private static final String BYE_COMMAND = "Bye. Hope to see you again soon!";
-    private static final String GREETING_COMMAND = 
+    //private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String GREETING_MESSAGE = 
     "Hello! I'm Duke" + "\n" + "What can I do for you?";
 
-    public static void main(String[] args) {
-        System.out.println(GREETING_COMMAND);
-        runDukeBot();
-        System.out.println(BYE_COMMAND);
+    private static final CommandConverter ComConvert = new CommandConverter();
+    private static final TasksHandler TasksHandler = new TasksHandler();
+
+    static String dukeStart() {
+        return GREETING_MESSAGE;
     }
 
-    private static void runDukeBot() {
-        Scanner sc = new Scanner(System.in);
-        TasksHandler handler = new TasksHandler();
+    static void runDukeBot(Scanner sc) {
         while (sc.hasNextLine()) {
-            String[] instructions = sc.nextLine().split(" ");
-            if (handler.addAndDisplayTasks(instructions)) {
-                break;
-            };
+            String instructions = sc.nextLine();
+            try {
+                Command command_given = ComConvert.convertInputToCommand(instructions);
+                TasksHandler.storeTasks(command_given);
+                if (TasksHandler.handleTasks(command_given)) {
+                    break;
+                }
+            } catch (NoSuchCommandException e) {
+                System.err.println(e);
+            }
         }
-        sc.close();
     }
 }
