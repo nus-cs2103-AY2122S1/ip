@@ -14,6 +14,7 @@ public class Duke {
         deadline,
         event,
         done,
+        error,
     }
 
     //Logo
@@ -44,9 +45,12 @@ public class Duke {
         printDivider();
     }
 
-    //Prints list of task
-    //Input: List
+    /*
+    Prints list of task
+    Input: List
+     */
     static void printList(List<Task> lst) {
+        printDivider();
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < lst.size(); i++) {
             Task task = lst.get(i);
@@ -55,8 +59,10 @@ public class Duke {
         printDivider();
     }
 
-    //Marks task as Done
-    //Input: Task
+    /*
+    Marks task as Done
+    Input: Task
+    */
     static void markTask(Task task) {
         printDivider();
         System.out.println("Nice! I've marked this task as done:");
@@ -73,8 +79,10 @@ public class Duke {
         printDivider();
     }
 
-    //Checks if String is an int
-    //Input: String
+    /*
+    Checks if String is an int
+    Input: String
+    */
     static boolean checkForInt(String str) {
         try {
             int test = parseInt(str);
@@ -110,73 +118,92 @@ public class Duke {
 
         //Waits for userInput
         while (true) {
-            String input = userInput.nextLine();
+            try {
+                String input = userInput.nextLine();
+                //Processed input
+                String[] words = input.split(" ");
+                String desc = input;
+                String time = "";
 
-            //Processed input
-            String[] words = input.split(" ");
-            String desc = input;
-            String time = "";
+                //Switch variables
+                Keywords key = Keywords.todo;
+                int index = 0;
 
-            //Switch variables
-            Keywords key = Keywords.todo;
-            int index = 0;
+                //Looks for keywords
+                //Simple keywords
+                if (input.equals("bye")) {
+                    key = Keywords.bye;
+                } else if (input.equals("list")) {
+                    key = Keywords.list;
+                } else if (words.length > 1) {
+                    String temp = words[0];
+                    if (temp.equals("done")) {
+                        if (checkForInt(words[1])) {
+                            index = parseInt(words[1]) - 1;
+                            key = Keywords.done;
+                        }
+                    } else if (temp.equals("todo")) {
+                        desc = input.replaceFirst("todo ", "");
+                    } else if (temp.equals("deadline")) {
+                        key = Keywords.deadline;
+                        List<String> postFilter = processDesc("/by", words);
+                        desc = postFilter.get(0);
+                        time = postFilter.get(1);
+                        if (time == "") {
+                            throw new DukeException("!!! The date of a deadline cannot be empty. Use /by to input date!!!");
+                        } else if (desc == "") {
+                            throw new DukeException("!!! Input the description then use /by to input date !!!");
+                        }
 
-            //Looks for keywords
-            //Simple keywords
-            if (input.equals("bye")) {
-                key = Keywords.bye;
-            } else if (input.equals("list")) {
-                key = Keywords.list;
-            //Complicated Keywords
-            } else if (words.length > 1) {
-                String temp = words[0];
-                if (temp.equals("done")) {
-                    if (checkForInt(words[1])) {
-                        index = parseInt(words[1]) - 1;
-                        key = Keywords.done;
+                    } else if (temp.equals("event")) {
+                        key = Keywords.event;
+                        List<String> postFilter = processDesc("/at", words);
+                        desc = postFilter.get(0);
+                        time = postFilter.get(1);
+                        if (time == "") {
+                            throw new DukeException("!!! The date of a event cannot be empty. Use /at to input date !!!");
+                        } else if (desc == "") {
+                            throw new DukeException("!!! Input the description then use /at to input date !!!");
+                        }
                     }
-                } else if (temp.equals("todo")) {
-                    desc = input.replaceFirst("todo ", "");
-                } else if (temp.equals("deadline")) {
-                    key = Keywords.deadline;
-                    List<String> postFilter = processDesc("/by", words);
-                    desc = postFilter.get(0);
-                    time = postFilter.get(1);
-
-                } else if (temp.equals("event")) {
-                    key = Keywords.event;
-                    List<String> postFilter = processDesc("/at", words);
-                    desc = postFilter.get(0);
-                    time = postFilter.get(1);
+                } else {
+                    //Error Handling (Can be improved)
+                    if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
+                        throw new DukeException("!!! The description cannot be empty. !!!");
+                    }
+                    throw new DukeException("!!! I'm sorry, but I don't know what that means. !!!");
                 }
-            }
 
-            //Performs the Appropriate Action
-            switch (key) {
+                switch (key) {
 
-                case list:
-                    printList(list);
-                    break;
-                case todo:
-                    list.add(new ToDo(desc));
-                    printTask(list);
-                    break;
-                case deadline:
-                    list.add(new Deadline(desc, time));
-                    printTask(list);
-                    break;
-                case event:
-                    list.add(new Event(desc, time));
-                    printTask(list);
-                    break;
-                case done:
-                    list.get(index).markAsDone();
-                    markTask(list.get(index));
-                    break;
-                case bye:
-                    close();
-                    System.exit(0);
-                    break;
+                    case list:
+                        printList(list);
+                        break;
+                    case todo:
+                        list.add(new ToDo(desc));
+                        printTask(list);
+                        break;
+                    case deadline:
+                        list.add(new Deadline(desc, time));
+                        printTask(list);
+                        break;
+                    case event:
+                        list.add(new Event(desc, time));
+                        printTask(list);
+                        break;
+                    case done:
+                        list.get(index).markAsDone();
+                        markTask(list.get(index));
+                        break;
+                    case bye:
+                        close();
+                        System.exit(0);
+                        break;
+                }
+            } catch (DukeException ex) {
+                printDivider();
+                System.out.println(ex.getMessage());
+                printDivider();
             }
         }
     }
