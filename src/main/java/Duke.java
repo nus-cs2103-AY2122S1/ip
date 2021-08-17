@@ -35,7 +35,8 @@ public class Duke {
                 } else if (segment[0].equals("event")) {
                     list.addEvents(input.split("event", 2)[1]);
                 } else {
-                    list.add(input);
+                    throw new DukeException("☹ OOPS!!! I'm sorry,"
+                            + " but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
