@@ -1,18 +1,41 @@
 public class Task {
-    private boolean isDone = false;
-    private String description;
+    public enum Type {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
+    protected boolean isDone = false;
+    protected String description;
+    public Type type;
 
-    public Task(String description) {
+    public Task(String description, Type type) {
         this.description = description;
+        this.type = type;
     }
 
     public void setDone(boolean done) {
-        isDone = done;
+        this.isDone = done;
+    }
+
+    protected String getCheckBox() {
+        return isDone ? "[X] " : "[ ] ";
+    }
+
+    protected String getTypeBox() {
+        String taskType = "T";
+        switch (this.type) {
+            case DEADLINE:
+                taskType = "D";
+                break;
+            case EVENT:
+                taskType = "E";
+                break;
+        }
+        return "[" + taskType + "]";
     }
 
     @Override
     public String toString() {
-        String checkBox = isDone ? "🗵 " : "☐ ";
-        return checkBox + description;
+        return getTypeBox() + getCheckBox() + description;
     }
 }

@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static ArrayList<Task> list = new ArrayList<>();
+
     public static void main(String[] args) {
         String logo =
                 "████████████████████████████████████████\n"+
@@ -27,17 +29,26 @@ public class Duke {
                 "████████████████████████████████████████\n";
 
         String separator = "════════════════════════════════════════";
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("Woof from\n" + logo);
         System.out.println("Woof! I'm Biscuit.\nWhat can I do for you?\n" + separator);
+        Scanner scanner = new Scanner(System.in);
         boolean isContinue = true;
-        ArrayList<Task> list = new ArrayList<>();
         while (isContinue) {
             String input = scanner.nextLine();
-            String[] processedInput = input.trim().split("\\s+");
+            String[] processedInput = input.trim().split("\\s+", 2);
             System.out.println(separator);
             switch (processedInput[0]) {
+                case "todo":
+                    addTask(new Todo(processedInput[1]));
+                    break;
+                case "deadline":
+                    String[] deadlineData = processedInput[1].split("/by ");
+                    addTask(new Deadline(deadlineData[0], deadlineData[1]));
+                    break;
+                case "event":
+                    String[] eventData = processedInput[1].split("/at ");
+                    addTask(new Event(eventData[0], eventData[1]));
+                    break;
                 case "done":
                     Task current = list.get(Integer.parseInt(processedInput[1]) - 1);
                     current.setDone(true);
@@ -53,10 +64,16 @@ public class Duke {
                     isContinue = false;
                     break;
                 default:
-                    System.out.println("added: " + input);
-                    list.add(new Task(input));
+                    System.out.println("໒(◉ᴥ◉)७ OOPS!!! I'm sorry, but I don't know what that means...");
+                    break;
             }
             System.out.println(separator);
         }
+    }
+
+    public static void addTask(Task task) {
+        list.add(task);
+        System.out.println("Got it. I've added this task:\n\t" + task);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 }
