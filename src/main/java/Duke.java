@@ -3,6 +3,11 @@ import java.util.Scanner;
 
 public class Duke {
     private ArrayList<Task> taskArr = new ArrayList<Task>();
+    private enum TaskType {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
 
 
     private void textFrame(String s) {
@@ -30,13 +35,13 @@ public class Duke {
         textFrame(" This be ye list of things to do Sire:" + listString );
     }
 
-    private void addTask(String taskString, String taskType) {
+    private void addTask(String taskString, TaskType taskType) {
         try{
             switch(taskType) {
-                case "todo":
+                case TODO:
                     taskArr.add(new ToDo(taskString));
                     break;
-                case "deadline":
+                case DEADLINE:
                     String[] deadlineArr = taskString.split(" /by ", 2);
                     if(deadlineArr.length == 1) {
                         throw new DukeException("deadline format");
@@ -44,7 +49,7 @@ public class Duke {
                         taskArr.add(new Deadline(deadlineArr[0], deadlineArr[1]));
                     }
                     break;
-                case "event":
+                case EVENT:
                     String[] eventArr = taskString.split(" /at ", 2);
                     if(eventArr.length == 1) {
                         throw new DukeException("event format");
@@ -91,13 +96,13 @@ public class Duke {
                     } else {
                         switch (inputArr[0]) {
                             case "todo":
-                                addTask(inputArr[1], "todo");
+                                addTask(inputArr[1], TaskType.TODO);
                                 break;
                             case "deadline":
-                                addTask(inputArr[1], "deadline");
+                                addTask(inputArr[1], TaskType.DEADLINE);
                                 break;
                             case "event":
-                                addTask(inputArr[1], "event");
+                                addTask(inputArr[1], TaskType.EVENT);
                                 break;
                             case "done":
                                 try {
