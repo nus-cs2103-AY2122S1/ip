@@ -1,10 +1,30 @@
+import  java.util.Scanner;
+
 public class Duke {
+    private static Scanner scanner;
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        scanner = new Scanner(System.in);
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        chat();
+    }
+
+    /**
+     * Prints (to screen) Duke's response to the user input, entered from the Command Line.
+     */
+    private static void chat() {
+        String input;
+
+        while (true) {
+            input = scanner.nextLine();
+
+            if (input.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                scanner.close();
+                break;
+            } else {
+                System.out.println(input);
+            }
+        }
     }
 }
