@@ -80,6 +80,28 @@ public class Duke {
                 " tasks in the list.");
     }
 
+    public static void MarkDone(int index) throws DukeException{
+        if (index < 0) {
+            throw new DukeException("☹ OOPS!!! The index is invalid!!!");
+        } else {
+            System.out.println("Nice! I've marked this task as done:");
+            list.get(index).MarkDone();
+            System.out.println(" " + list.get(index).PrintTaskInfo());
+        }
+    }
+
+    public static void Delete(int index) throws DukeException{
+        if (index < 0) {
+            throw new DukeException("☹ OOPS!!! The index is invalid!!!");
+        } else {
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(" " + list.get(index).PrintTaskInfo());
+            list.remove(index);
+            System.out.println("Now you have " + list.size() + " tasks in the list.");
+        }
+    }
+
+
     public static void PrintMessage() {
         Scanner scanner = new Scanner(System.in);
         String Message = "";
@@ -100,10 +122,20 @@ public class Duke {
             else if (Message.startsWith("done")) {
                 int index = Message.charAt(Message.length() - 1) - 49;
 
-                System.out.println("Nice! I've marked this task as done:");
-                list.get(index).MarkDone();
-                System.out.println(" " + list.get(index).PrintTaskInfo());
+                try {
+                    MarkDone(index);
+                } catch (DukeException e){
+                    e.PrintErrorMessage();
+                }
 
+            } else if (Message.startsWith("delete")) {
+                int index =  Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1;
+
+                try {
+                    Delete(index);
+                } catch (DukeException e){
+                    e.PrintErrorMessage();
+                }
             }
             else  {
                 try {
