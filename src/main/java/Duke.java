@@ -62,21 +62,6 @@ public class Duke {
           responseContent = "added: " + command;
           break;
       }
-//      if (command.equals(listCommand)) {
-//        for (int i = 0; i < index; i++) {
-//          if (i != index - 1) {
-//            responseContent = responseContent + (i + 1) + "." + list[i] + "\n     ";
-//          } else {
-//            responseContent = responseContent + (i + 1) + "." + list[i];
-//          }
-//        }
-//      } else if (command.equals("")) {
-//        responseContent = "";
-//      } else {
-//        responseContent = "added: " + command;
-//        list[index] = new Task(command);
-//        index++;
-//      }
 
       // Response
       String response = "    ____________________________________________________________\n"
