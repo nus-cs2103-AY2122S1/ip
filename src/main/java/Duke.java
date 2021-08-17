@@ -35,12 +35,16 @@ public class Duke {
                 System.out.println(t);
 
             } else if (commandArr[0].equals("deadline")) {
-                Task t = new Deadline(command, "Sunday");
+                int spaceIndex = command.indexOf(" ");
+                int slashIndex = command.indexOf("/");
+                Task t = new Deadline(command.substring(spaceIndex), command.substring(slashIndex + 4, command.length()));
                 taskArr.add(t);
                 System.out.println(t);
 
             } else if (commandArr[0].equals("event")) {
-                Task t = new Event(command, "Sunday");
+                int spaceIndex = command.indexOf(" ");
+                int slashIndex = command.indexOf("/");
+                Task t = new Event(command.substring(spaceIndex), command.substring(slashIndex + 4, command.length()));
                 taskArr.add(t);
                 System.out.println(t);
 
@@ -49,6 +53,7 @@ public class Duke {
                 taskArr.add(t);
                 System.out.println("added: " + command);
             }
+            System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
 
         }
 
