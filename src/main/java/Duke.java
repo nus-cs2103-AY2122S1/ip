@@ -18,13 +18,25 @@ public class Duke {
             String text = scanner.nextLine();
             String[] splitText = text.trim().split("\\s+");
             System.out.println("    ____________________________________________________________\n");
-            if (splitText[0].equals("list")) {
-                taskList.listOut();
-            } else if (splitText[0].equals("bye")) {
-                end = false;
-                System.out.println("    Bye. Hope to see you again soon!");
-            } else {
-                taskList.add(text);
+            switch (splitText[0]) {
+                case "list":
+                    taskList.listOut();
+                    break;
+                case "bye":
+                    end = false;
+                    System.out.println("    Bye. Hope to see you again soon!");
+                    break;
+                case "done":
+                    try {
+                        int index = Integer.parseInt(splitText[1]);
+                        taskList.finishTask(index);
+                    } catch (Exception e) {
+                        System.out.println("Error: The value you inputted is not valid!");
+                    }
+                    break;
+                default:
+                    taskList.add(text);
+                    break;
             }
             System.out.println("    ____________________________________________________________\n");
         }
