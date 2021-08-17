@@ -1,9 +1,15 @@
 hello
 deadline return book /by Sunday
+deadline
 event example2 /at Monday
-event example /at Monday
+event
+todo something
+todo
 list
 done 3
 list
 done 6
+delete 1
+list
+delete 6
 bye
