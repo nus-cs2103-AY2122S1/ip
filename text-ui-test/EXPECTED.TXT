@@ -17,7 +17,7 @@
 	____________________________________________________________
 
 	____________________________________________________________
-	Bad index entered by user. >:(
+	☹ OOPS!!! Index entered is not valid. Please use 'list' and check for the appropriate index for task(s).
 	____________________________________________________________
 
 	____________________________________________________________
@@ -179,81 +179,63 @@
 	____________________________________________________________
 
 	____________________________________________________________
-	☹ OOPS!!! Enter proper task number to be deleted.
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	☹ OOPS!!! The description of a todo cannot be empty.
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	☹ OOPS!!! The information for an event cannot be empty.
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	☹ OOPS!!! The information for an event must have:
-	1. Brief description
-	2. Date/Interval
-	Where the two fields are separated by "/at"
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	☹ OOPS!!! The information for an event must have:
-	1. Brief description
-	2. Date/Interval
-	Where the two fields are separated by "/at"
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	☹ OOPS!!! The information for an event must have:
-	1. Brief description
-	2. Date/Interval
-	Where the two fields are separated by "/at"
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	☹ OOPS!!! The information for a deadline cannot be empty.
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	☹ OOPS!!! The information for a deadline must have:
-	1. Brief description
-	2. Deadline
-	Where the two fields are separated by "/by"
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	☹ OOPS!!! The information for a deadline must have:
-	1. Brief description
-	2. Deadline
-	Where the two fields are separated by "/by"
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	☹ OOPS!!! The information for a deadline must have:
-	1. Brief description
-	2. Deadline
-	Where the two fields are separated by "/by"
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	Bad index entered by user. >:(
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	Bad index entered by user. >:(
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	Bad index entered by user. >:(
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________
-	Bad index entered by user. >:(
+	☹ OOPS!!! Index entered is not valid. Please use 'list' and check for the appropriate index for task(s).
 	____________________________________________________________
 
 	____________________________________________________________
-	☹ OOPS!!! Enter proper task number to be marked as done.
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 
 	____________________________________________________________

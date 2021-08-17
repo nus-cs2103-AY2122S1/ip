@@ -22,7 +22,6 @@ delete 3
 list
 done 5
 list
-delete
 todo
 event
 event /at
@@ -33,8 +32,9 @@ deadline /by
 deadline hello /by
 deadline /by hello
 done -1
-done -2
-done 20
+done -2 hello
+done 2 hello
+delete 1 lol
 done 1000
 done
 bye Duke
