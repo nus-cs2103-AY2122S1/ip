@@ -12,6 +12,11 @@ public class ToDo extends ArrayList<Task> {
         super();
     }
 
+    public void completeTask(int index) {
+        Task task = super.get(index);
+        task.markAsComplete();
+    }
+
     /**
      * @return String representation of todo list
      */
