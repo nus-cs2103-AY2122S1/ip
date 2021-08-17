@@ -17,7 +17,9 @@ public class Duke {
 
         System.out.println(displayLabel(welcomeLabel));
         //Level1(new Scanner(System.in));
-        Level2(new Scanner(System.in));
+        //Level2(new Scanner(System.in));
+        Level3(new Scanner(System.in));
+        System.out.println(displayLabel(byeLabel));
     }
 
     // displays the information keyed in with lines and indentation
@@ -35,21 +37,28 @@ public class Duke {
      */
     public static void Level1(Scanner userInput) {
         String input = userInput.nextLine();
-        while (!input.equals("bye")) {
+        while (!input.equals("bye") ) {
             System.out.println(displayLabel(input));
             input = userInput.nextLine();
         }
-        System.out.println(displayLabel(byeLabel));
     }
 
-    // gets the items in the list when the user inputs list
-    public static String getItems(ArrayList<String> items) {
+    /* gets the items in the list when the user inputs list
+       For level 2, the parameter was an ArrayList<String>, but from
+       level 3 onwards, the parameter became ArrayList<? extends Object>
+       to cater to Strings and Task/Subclasses of Task.
+     */
+    public static String getItems(ArrayList<? extends Object> items) {
         String collection = "";
         for (int index = 0; index < items.size(); index++) {
-            if (index != 0) {
-                collection += "     ";
+            if (index != 0) { collection += "     "; }
+            String info = "";
+            if (items.get(index) instanceof Task) {
+                info = items.get(index).toString();
+            } else {
+                info = (String) items.get(index);
             }
-            collection += Integer.toString(index + 1) + ". " + items.get(index);
+            collection += Integer.toString(index + 1) + ". " + info;
             if (index != items.size() - 1) {
                 collection += "\n";
             }
@@ -59,8 +68,8 @@ public class Duke {
 
     /* added the information that was inputted,
      * prints out all the information when list is inputted,
-     *  and displays the bye message and terminates when the
-     *  user inputs bye
+     * and displays the bye message and terminates when the
+     * user inputs bye
      */
     public static void Level2(Scanner userInput) {
         String input = userInput.nextLine();
@@ -75,8 +84,52 @@ public class Duke {
             }
             input = userInput.nextLine();
         }
-        System.out.println(displayLabel(byeLabel));
     }
 
+    // Adding onto Level 2, marks tasks as done.
+    public static void Level3(Scanner userInput) {
+        String input = userInput.nextLine();
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (!input.equals("bye")) {
+            if (input.contains("done")) {
+                int index = Integer.parseInt(input.substring(5, 6)) - 1;
+                tasks.get(index).setIsDone();
+                System.out.println(displayLabel("Nice! I've marked this task as done: \n" +
+                        "       " + tasks.get(index).toString()));
+            } else if (!input.equals("list")) {
+                tasks.add(new Task(input));
+                System.out.println(displayLabel("added: " + input));
+            }  else {
+                String itemCollection = getItems(tasks);
+                System.out.println(displayLabel("Here are the tasks in your list: \n"
+                        + "     " + itemCollection));
+            }
+            input = userInput.nextLine();
+        }
+    }
+
+}
+
+class Task {
+
+    private String newTask;
+    private boolean isDone;
+
+    public Task(String newTask) {
+        this.newTask = newTask;
+    }
+
+    public String getIsDone() {
+        return isDone ? "[X]" : "[ ]";
+    }
+
+    public void setIsDone() {
+        isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return getIsDone() + " " + newTask;
+    }
 
 }
