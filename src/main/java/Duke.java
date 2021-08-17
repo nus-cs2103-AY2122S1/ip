@@ -1,27 +1,28 @@
+import java.util.Scanner;
+
 public class Duke {
 
-    private Speech speech;
-    private Brain brain;
-    private Storage storage;
-
-    public Duke() {
-        speech = new Speech(false);
-        brain = new Brain();
-        storage = new Storage();
-    }
-
-    public void run(){
-        speech.welcome();
+    /**
+     * Continuous scan loops until user input "bye"
+     */
+    public void  run(){
+        Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.print("Say something to Duke: ");
-            boolean cont = brain.decide(speech, storage);
+            String input = sc.nextLine();
+            boolean cont = Brain.decide(input);
             if (!cont) {
                 break;
             }
         }
     }
-    
+
+    /**
+     * Main program
+     * @param args
+     */
     public static void main(String[] args) {
+        Speech.welcome();
         new Duke().run();
     }
 }

@@ -1,48 +1,41 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Brain {
 
-    public boolean decide(Speech speech, Storage storage) {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        switch (input) {
+    public static Storage storage = new Storage();
+
+    /**
+     * Takes the first word and decides the next course of action.
+     * @param input takes in a string based on the scanner
+     * @return boolean value to indicate whether to continue running the program
+     */
+    public static boolean decide(String input) {
+        String[] parsedInput = input.split(" ", 2);
+        switch (parsedInput[0]) {
             case "bye":
-                speech.goodbye();
+                Speech.goodbye();
                 return false;
             case "list":
-                String[] temp = storage.getStorage();
-                speech.speak(temp);
+                storage.getStorage();
                 return true;
-            default :
-                try {
-                    if (input.startsWith("done")) {
-                        String msg = storage.done(input.substring(4));
-                        speech.done_msg(msg);
-                    } else if (input.startsWith("deadline")) {
-                        String msg = storage.deadline(input.substring(8));
-                        speech.task_added(msg, storage.task_left());
-                    } else if (input.startsWith("todo")) {
-                        String msg = storage.todo(input.substring(4));
-                        speech.task_added(msg, storage.task_left());
-                    } else if (input.startsWith("event")) {
-                        String msg = storage.event(input.substring(5));
-                        speech.task_added(msg, storage.task_left());
-                    } else {
-
-                        input = storage.basicAdd(input);
-                        speech.speak(input);
-                    }
-
-                } catch (Exception NumberFormatException) {
-                    speech.error("an invalid code input");
-                }
+            case "done":
+                storage.done(parsedInput[1]);
                 return true;
-
+            case "deadline":
+                storage.deadline(parsedInput[1]);
+                return true;
+            case "todo":
+                storage.todo(parsedInput[1]);
+                return true;
+            case "event":
+                storage.event(parsedInput[1]);
+                return true;
+            default:
+                storage.basicAdd(input);
+                return true;
         }
+
     }
-
-
-
-
 
 }
