@@ -31,7 +31,7 @@ public class Duke {
                 case "list":
                     printTasks();
                     break;
-                case "done":
+                case "done": {
                     if (inputWords.length == 1) {
                         throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
                     }
@@ -41,26 +41,35 @@ public class Duke {
                     }
                     markTaskAsDone(taskId);
                     break;
+                }
                 case "todo":
                     if (inputWords.length == 1) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
                     addTodo(inputWords[1]);
                     break;
-                case "deadline": {
+                case "deadline":
                     if (inputWords.length == 1) {
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
                     addDeadline(inputWords[1]);
                     break;
-                }
-                case "event": {
+                case "event":
                     if (inputWords.length == 1) {
                         throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                     }
                     addEvent(inputWords[1]);
                     break;
-                }
+                case "delete":
+                    if (inputWords.length == 1) {
+                        throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
+                    }
+                    int taskId = Integer.parseInt(inputWords[1]);
+                    if (taskId < 1 || taskId > arr.size()) {
+                        throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
+                    }
+                    deleteTask(taskId);
+                    break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -135,6 +144,17 @@ public class Duke {
     public static void printAfterAdding() {
         System.out.println("Got it. I've added this task:");
         System.out.println("   " + arr.get(arr.size() - 1));
+        System.out.println("Now you have " + arr.size() + " task(s) in the list.");
+    }
+
+    /**
+     * Deletes a specific task.
+     * @param taskId ID of the task to be deleted.
+     */
+    public static void deleteTask(int taskId) {
+        System.out.println("Noted. I have removed this task:");
+        System.out.println("   " + arr.get(taskId - 1));
+        arr.remove(taskId - 1);
         System.out.println("Now you have " + arr.size() + " task(s) in the list.");
     }
 }
