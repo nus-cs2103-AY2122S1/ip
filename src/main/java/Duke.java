@@ -14,19 +14,23 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String border = "____________________________________________________________";
         Printer printer = new Printer(border);
-        ArrayList<Task> items = new ArrayList<Task>();
-
+        ArrayList<Task> tasks = new ArrayList<Task>();
         String input = sc.nextLine();
-        while (!input.equals("bye")) {
-            items.add(new Task(input));
-            printer.PrintMessage(String.format("added: %s", input));
-            input = sc.nextLine();
 
-            if (input.equals("list")) {
-                printer.PrintList(items);
-                input = sc.nextLine();
+        do {
+            String[] splitInput = input.split(" ");
+            if (splitInput[0].equals("done")) {
+                int index = Integer.parseInt(splitInput[1]) - 1;
+                String returnString = tasks.get(index).markDone();
+                printer.PrintMessage(returnString);
+            } else if (input.equals("list")) {
+                printer.PrintList(tasks);
+            } else {
+                tasks.add(new Task(input));
+                printer.PrintMessage(String.format("added: %s", input));
             }
-        }
+            input = sc.nextLine();
+        } while (!input.equals("bye"));
         printer.PrintMessage("Bye. Hope to see you again soon!");
     }
 }

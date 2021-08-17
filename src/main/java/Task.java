@@ -11,7 +11,8 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    public void markDone() {
+    public String markDone() {
         this.isDone = true;
+        return String.format("Nice! I've marked this task as done:\n  [X] %s", this.description);
     }
 }
