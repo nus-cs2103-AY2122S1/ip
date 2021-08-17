@@ -5,13 +5,14 @@ public class Duke {
 
     public static void printTasks() {
         if (taskList.size() == 0) {
-            System.out.println("You have no tasks!");
+            System.out.println("You have no tasks!\n");
         } else {
             System.out.println("Here are your tasks!");
             for (int i = 0; i<taskList.size(); i++) {
                 String task = taskList.get(i).toString();
                 System.out.printf("%d.%s%n", i + 1, task);
             }
+            System.out.println("");
         }
     }
 
@@ -19,7 +20,7 @@ public class Duke {
         Todo todo = new Todo(task);
         taskList.add(todo);
         System.out.println("Okay! I've added this task:\n" + todo.toString());
-        System.out.printf("You have %d task(s) in the list.\n", taskList.size());
+        System.out.printf("You have %d task(s) in the list.\n\n", taskList.size());
     }
 
     public static void addDeadline(String task) {
@@ -29,7 +30,7 @@ public class Duke {
         Deadline deadline = new Deadline(description, by);
         taskList.add(deadline);
         System.out.println("Okay! I've added this task:\n" + deadline.toString());
-        System.out.printf("You have %d task(s) in the list.\n", taskList.size());
+        System.out.printf("You have %d task(s) in the list.\n\n", taskList.size());
     }
 
     public static void addEvent(String task) {
@@ -39,7 +40,7 @@ public class Duke {
         Event event = new Event(description, at);
         taskList.add(event);
         System.out.println("Okay! I've added this task:\n" + event.toString());
-        System.out.printf("You have %d task(s) in the list.\n", taskList.size());
+        System.out.printf("You have %d task(s) in the list.\n\n", taskList.size());
     }
 
     public static void markTask(int index) {
@@ -71,7 +72,7 @@ public class Duke {
                 String task = input.substring(6);
                 addEvent(task);
             } else {
-                System.out.println(input);
+                System.out.println(input + "\n");
             }
         }
         while (!input.equalsIgnoreCase("BYE"));
@@ -92,7 +93,7 @@ public class Duke {
                 "deadline [Description] /by [Date/Time] - add deadline\n" +
                 "event [Description] /at [Date/Time]    - add event\n" +
                 "done [Task Number]                     - mark task as done\n" +
-                "bye                                    - say goodbye";
+                "bye                                    - say goodbye\n";
         System.out.println(logo + greeting);
         System.out.println(usage);
 

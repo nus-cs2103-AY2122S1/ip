@@ -1,0 +1,9 @@
+list
+todo buy milk
+list
+deadline assignment /by Tuesday
+event hades raid /at 19th Aug 9-11pm
+list
+done 2
+list
+bye
