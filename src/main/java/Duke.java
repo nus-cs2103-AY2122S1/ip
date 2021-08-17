@@ -70,23 +70,41 @@ public class Duke {
         case todoCommand:
           list[index] = new Todo(description);
           index++;
-          responseContent = "Got it. I've added this task:\n"
-              + "       " + list[index-1] + "\n"
-              + "     Now you have " + index + " tasks in the list.";
+          if (index == 1) {
+            responseContent = "Got it. I've added this task:\n"
+                + "       " + list[index - 1] + "\n"
+                + "     Now you have " + index + " task in the list.";
+          } else {
+            responseContent = "Got it. I've added this task:\n"
+                + "       " + list[index - 1] + "\n"
+                + "     Now you have " + index + " tasks in the list.";
+          }
           break;
         case deadlineCommand:
           list[index] = new Deadline(description, by);
           index++;
-          responseContent = "Got it. I've added this task:\n"
-              + "       " + list[index-1] + "\n"
-              + "     Now you have " + index + " tasks in the list.";
+          if (index == 1) {
+            responseContent = "Got it. I've added this task:\n"
+                + "       " + list[index - 1] + "\n"
+                + "     Now you have " + index + " task in the list.";
+          } else {
+            responseContent = "Got it. I've added this task:\n"
+                + "       " + list[index - 1] + "\n"
+                + "     Now you have " + index + " tasks in the list.";
+          }
           break;
         case eventCommand:
           list[index] = new Event(description, at);
           index++;
-          responseContent = "Got it. I've added this task:\n"
-              + "       " + list[index-1] + "\n"
-              + "     Now you have " + index + " tasks in the list.";
+          if (index == 1) {
+            responseContent = "Got it. I've added this task:\n"
+                + "       " + list[index - 1] + "\n"
+                + "     Now you have " + index + " task in the list.";
+          } else {
+            responseContent = "Got it. I've added this task:\n"
+                + "       " + list[index - 1] + "\n"
+                + "     Now you have " + index + " tasks in the list.";
+          }
           break;
         default:
           break;
