@@ -115,6 +115,8 @@ public class Duke {
      * related to mark done of tasks.
      *
      * @return Is done operation or not.
+     * @throws EmptyInputException When there is no input of digits.
+     * @throws OutOfRangeException When digit is out of range.
      */
     public static boolean checkDone() throws EmptyInputException,OutOfRangeException{
         //check with the special response "done X", where X is a number.
@@ -157,6 +159,7 @@ public class Duke {
      * related to todo operations.
      *
      * @return Whether the input is related to todo or not.
+     * @throws EmptyInputException When there is no input of digits.
      */
     public static boolean checkTodo() throws EmptyInputException{
         //check with the special response "todo X", where X is what to do.
@@ -178,6 +181,7 @@ public class Duke {
      * related to deadline operations.
      *
      * @return Whether the input is related to deadline or not.
+     * @throws EmptyInputException When there is no input of digits.
      */
     public static  boolean checkDeadline() throws EmptyInputException{
         //check with the special response "deadline X", where X is what to do and by what time.
@@ -203,6 +207,7 @@ public class Duke {
      * related to event operations.
      *
      * @return Whether the input is related to event or not.
+     * @throws EmptyInputException When there is no input of digits.
      */
     public static boolean checkEvent() throws EmptyInputException{
         //check with the special response "event X", where X includes what to do and time to do.
@@ -228,6 +233,8 @@ public class Duke {
      * related to delete operations.
      *
      * @return Whether the input is related to delete or not.
+     * @throws EmptyInputException When there is no input of digits.
+     * @throws OutOfRangeException When digit is out of range.
      */
     public static boolean checkDelete() throws EmptyInputException,OutOfRangeException{
         //check with the special response "delete X", where X is index of deleted item.
