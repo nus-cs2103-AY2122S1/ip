@@ -13,12 +13,25 @@ public class TaskList {
 
     /**
      * Given a string, creates a Task from that string and adds it to the list of task
-     * @param taskTitle the title of the task to be added.
+     * @param taskTitle a String of the title of the task to be added.
      */
     public void addTask(String taskTitle) {
         Task task = new Task(taskTitle);
         this.tasks[counter] = task;
         counter ++;
+    }
+
+    /**
+     * Given the index number of a task, marks that task as completed
+     *
+     * @param taskIndex an int representing the index of the task
+     * @return the String representation of the completed task
+     */
+    public String completeTask(int taskIndex) {
+        Task task = this.tasks[taskIndex];
+        // Assumes that the task exists.
+        task.completeTask();
+        return task.toString();
     }
 
     /**

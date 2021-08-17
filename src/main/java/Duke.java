@@ -17,7 +17,9 @@ public class Duke extends Chatbot {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
         Duke duke = new Duke();
+
         duke.greet();
         duke.taskMode();
     }
@@ -56,14 +58,19 @@ public class Duke extends Chatbot {
         String message = Chatbot.acceptUserInput();
         if (message.equals("bye")) {
             Chatbot.printMessage(FAREWELL_MESSAGE);
-        } else if (message.equals("list")) {
+            return;
+        }
+        if (message.equals("list")) {
             String listedTasks = this.taskList.toString();
             Chatbot.printMessage(listedTasks);
-            taskMode();
+        } else if (message.startsWith("done ")) {
+            int indexNumber = Integer.parseInt(message.substring(5)) - 1;
+            String completedTask = this.taskList.completeTask(indexNumber);
+            Chatbot.printMessage("Nice! I've marked this task as done: \n" + completedTask);
         } else {
             this.taskList.addTask(message);
             Chatbot.printMessage("added: " + message);
-            taskMode();
         }
+        taskMode();
     }
 }
