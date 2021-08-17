@@ -16,7 +16,7 @@ public class Task {
      * Constructor for Task object, takes in taskDescription string.`
      * @param taskDescription Description of the task.
 //     */
-    private Task (String taskDescription) {
+    protected Task(String taskDescription) {
         this.taskDescription = taskDescription;
         this.isDone = false;
     }
