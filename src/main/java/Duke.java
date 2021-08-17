@@ -14,12 +14,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String greetings =
-                "-----------------------------------------\n" +
-                "Hello! I'm Duke\n" +
-                "What can I do for you?\n" +
-                "-----------------------------------------\n";
-        System.out.println("Hello from\n" + logo + greetings);
+        System.out.println("Hello from\n" + logo);
     }
 
     private void echo(String t) {
@@ -37,20 +32,29 @@ public class Duke {
         System.exit(0);
     }
 
-    private void add(String[] t) {
+    private void add(String[] t) throws DukeException {
         Task newTask = null;
         switch (t[0]) {
             case "todo":
-//                System.out.println("in todo");
-                newTask = new Todo(t[1]);
+                if (t[1].equals("")) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                } else {
+                    newTask = new Todo(t);
+                }
                 break;
             case "deadline":
-//                System.out.println("in dl");
-                newTask = new Deadline(t[1], t[2]);
+                if (t[1].equals("") || t[2].equals("")) {
+                    throw new DukeException("☹ OOPS!!! The description or deadline of a deadline cannot be empty.");
+                } else {
+                    newTask = new Deadline(t);
+                }
                 break;
             case "event":
-//                System.out.println("in event");
-                newTask = new Event(t[1], t[2]);
+                if (t[1].equals("") || t[2].equals("")) {
+                    throw new DukeException("☹ OOPS!!! The description or scheduled time of an event cannot be empty.");
+                } else {
+                    newTask = new Event(t);
+                }
                 break;
         }
         this.tl.addTask(newTask);
@@ -59,8 +63,6 @@ public class Duke {
                 newTask.toString() +
                 String.format("Now you have %s tasks in the list.\n", this.tl.getLength()) +
                 "-----------------------------------------\n");
-
-
     }
 
     private Task getTaskByIndex(int index) {
@@ -75,6 +77,8 @@ public class Duke {
                 "-----------------------------------------\n");
     }
 
+
+
     private void run() {
         this.greet();
         Scanner sc = new Scanner(System.in);
@@ -84,25 +88,30 @@ public class Duke {
             t = sc.nextLine();
             String[] items = p.parse(t);
 
-            switch (items[0]) {
-                case "bye":
-                    this.exit();
-                    break;
-                case "list":
-                    System.out.println(this.tl.toString());
-                    break;
-                case "done":
-                    this.markDone(Integer.parseInt(items[1]));
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    this.add(items);
-                    break;
-                default:
-                    System.out.println("out of bounds mate");
-                    break;
+            try {
+                switch (items[0]) {
+                    case "bye":
+                        this.exit();
+                        break;
+                    case "list":
+                        System.out.println(this.tl.toString());
+                        break;
+                    case "done":
+                        this.markDone(Integer.parseInt(items[1]));
+                        break;
+                    case "todo":
+                    case "deadline":
+                    case "event":
+                        this.add(items);
+                        break;
+
+                    default:
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
+
         }
     }
 

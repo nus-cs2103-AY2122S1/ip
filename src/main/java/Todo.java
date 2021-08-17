@@ -1,8 +1,7 @@
 public class Todo extends Task{
 
-    public Todo(String desc) {
-        super(desc, false);
-
+    public Todo(String[] desc) {
+        super(desc[1], false);
     }
 
     @Override

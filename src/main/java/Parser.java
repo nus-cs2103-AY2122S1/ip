@@ -25,14 +25,11 @@ public class Parser {
             result[1] = remainder.substring(0, separator);
             result[2] = remainder.substring(separator + 4);
         }
-//        System.out.println(result[0]);
-//        System.out.println(result[1]);
-//        System.out.println(result[2]);
         return result;
     }
 
     public static void main(String[] args) {
         Parser p = new Parser();
-        p.parse("deadline return book /by Sunday");
+        p.parse("done");
     }
 }

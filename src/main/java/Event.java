@@ -1,9 +1,9 @@
 public class Event extends Task{
     protected String at;
 
-    public Event(String desc, String at) {
-        super(desc, false);
-        this.at = at;
+    public Event(String[] desc) {
+        super(desc[1], false);
+        this.at = desc[2];
     }
 
     @Override

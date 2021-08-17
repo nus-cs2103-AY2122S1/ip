@@ -1,9 +1,9 @@
 public class Deadline extends Task{
     protected String by;
 
-    public Deadline(String desc, String by) {
-        super(desc, false);
-        this.by = by;
+    public Deadline(String[] desc) {
+        super(desc[1], false);
+        this.by = desc[2];
     }
 
     @Override
