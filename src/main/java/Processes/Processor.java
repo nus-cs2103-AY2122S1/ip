@@ -22,14 +22,39 @@ public class Processor implements IProcessor {
                 processDone(arguments.get(1));
                 break;
             default:
-                processDefault(String.join(" ", arguments));
+                processDefault(arguments);
         }
     }
 
     @Override
-    public void processDefault(String line) {
-        this.list.addTask(new Task(line));
-        Output.print("Added: " + line);
+    public void processDefault(List<String> arguments) {
+        String type = arguments.get(0);
+        if(type.equals("todo")) {
+            arguments.remove(0);
+            this.list.addTask(new Todo(String.join(" ", arguments)));
+        } else if(type.equals("deadline")) {
+            arguments.remove(0);
+            String line = String.join(" ", arguments);
+            String[] input = line.split(" /by ");
+            if (input.length == 1) {
+                Output.print("Invalid command!");
+                return;
+            }
+            this.list.addTask(new Deadline(input[0], input[1]));
+        } else if(type.equals("event")) {
+            arguments.remove(0);
+            String line = String.join(" ", arguments);
+            String[] input = line.split(" /at ");
+            if (input.length == 1) {
+                Output.print("Invalid command!");
+                return;
+            }
+            this.list.addTask(new Event(input[0], input[1]));
+        } else {
+            Output.print("Invalid command!");
+            return;
+        }
+        Output.print("Got it. I've added this task:\n   " + this.list.getLastTask() + "\nNow you have " + this.list.getSize() + " in the list.");
     }
 
     @Override

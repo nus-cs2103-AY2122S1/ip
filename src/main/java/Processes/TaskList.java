@@ -23,6 +23,14 @@ public class TaskList {
         return this.list.get(index);
     }
 
+    public Task getLastTask() {
+        return this.getTask(this.getSize() - 1);
+    }
+
+    public int getSize() {
+        return this.list.size();
+    }
+
     @Override
     public String toString() {
         String result = "Here are the tasks in your list!\n";
