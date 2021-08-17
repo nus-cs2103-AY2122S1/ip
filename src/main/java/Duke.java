@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -5,20 +6,35 @@ public class Duke {
 
     final static String EXIT = "bye";
 
+    private List<Task> taskList = new ArrayList<>();
+
     /**
      * Display formatted message.
      * @param message Message to be printed in console.
      */
-    public static void display(String message) {
+    public void display(String message) {
         System.out.println("    * * * * * * * * * * * * * * * * * * * *");
         System.out.println("    " + message);
         System.out.println("    * * * * * * * * * * * * * * * * * * * *\n");
     }
 
     /**
+     * Display all items in the list.
+     */
+    public void displayAllItems() {
+        System.out.println("    * * * * * * * * * * * * * * * * * * * *");
+        System.out.println("    Here are the tasks in your list: ");
+        for (int i = 0; i < taskList.size(); i++) {
+            String item = "    " + (i + 1) + "." +  taskList.get(i);
+            System.out.println(item);
+        }
+        System.out.println("    * * * * * * * * * * * * * * * * * * * *\n");
+    }
+
+    /**
      * Display greeting message.
      */
-    public static void greet() {
+    public void greet() {
         display("Hi, I'm Sync-Me Sebby.\n    " +
                 "I'm here to assist you with tracking and synchronizing of your personal tasks.\n    " +
                 "Let me know how I can help?");
@@ -27,8 +43,8 @@ public class Duke {
     /**
      * Display exit message.
      */
-    public static void exit() {
-        display("Goodbye. See you again soon!");
+    public void exit() {
+        this.display("Goodbye. See you again soon!");
     }
 
     /**
@@ -36,41 +52,27 @@ public class Duke {
      * @param tasks The list of tasks.
      * @param task The individual task which can be Todo, Deadline or Event.
      */
-    public static void displaySuccessMessage(TaskList tasks, Task task) {
-        display("Got it. I've added this task: \n" + "      " + task + "\n    Now you have "
-                + tasks.getLength() + (tasks.getLength() <= 1 ? " task" : " tasks") + " in the list.");
+    public void displaySuccessMessage(List<Task> tasks, Task task) {
+        this.display("Got it. I've added this task: \n" + "      " + task + "\n    Now you have "
+                + tasks.size() + (tasks.size() <= 1 ? " task" : " tasks") + " in the list.");
     }
 
-    /**
-     *
-     * @param userInput user input command.
-     * @param splitText the command to split by.
-     * @param splitTime the time to split by.
-     * @return an array consisting of the description and the time of the task.
-     */
-    public static String[] processUserInput(String userInput, String splitText, String splitTime) {
-        // split the user input string
+    public String getCommand(String userInput) {
+        return userInput.split(" ")[0];
+    }
+
+    public String getDescription(String userInput, String splitText, String splitTime) {
         String[] splitInput = userInput.split(splitText)[1].split(splitTime);
-        String desc = splitInput[0].trim();
-        String time = splitInput[1];
-        String[] arr = {desc, time};
-        return arr;
+        return splitInput[0].trim();
     }
 
-    /**
-     * Checks if the command given by user is valid.
-     * @param userInput the user input provided by scanner.
-     * @return true if the command is valid; false otherwise.
-     */
-    public static boolean isCommandValid(String userInput) {
-        String[] expectedCommands = {"todo", "deadline", "event", "done", "list", "bye", "delete"};
-        String userCommand = userInput.split(" ")[0];
-        for (int i = 0; i < expectedCommands.length; i++) {
-            if (userCommand.equals(expectedCommands[i])) {
-                return true;
-            }
-        }
-        return false;
+    public String getTime(String userInput, String splitTime) {
+        String[] splitInput = userInput.split(splitTime);
+        return splitInput[1];
+    }
+
+    public int getTaskNumber(String userInput) {
+        return Integer.parseInt(userInput.split(" ")[1]);
     }
 
     /**
@@ -78,75 +80,122 @@ public class Duke {
      * @param userInput the user input provided by scanner.
      * @return true if description is provided; false otherwise.
      */
-    public static boolean isDescExists(String userInput) {
+    public boolean isDescExists(String userInput) {
         String[] arr = userInput.split(" ");
         return arr.length >= 2;
     }
 
-    public static void main(String[] args) {
+    public boolean isTaskExists(int taskNumber) {
+        return taskNumber <= this.taskList.size();
+    }
+
+    public void operate(String userInput) {
+        String command = this.getCommand(userInput);
+        switch (command) {
+
+            case "todo":
+                if (this.isDescExists(userInput)) {
+                    // get task description
+                    String desc = this.getDescription(userInput, "todo", "ignore");
+                    // add task to list
+                    Todo todo = new Todo(desc);
+                    this.taskList.add(todo);
+                    displaySuccessMessage(this.taskList, todo);
+                } else {
+                    display("OOPS! The description cannot be empty. Please try again.");
+                }
+                break;
+
+            case "deadline":
+                if (this.isDescExists(userInput)) {
+                    String descDeadline = this.getDescription(userInput, "deadline ", "/by ");
+                    String timeDeadline = this.getTime(userInput,"/by ");
+                    Deadline dl = new Deadline(descDeadline, timeDeadline);
+                    this.taskList.add(dl);
+                    displaySuccessMessage(this.taskList, dl);
+                } else {
+                    display("OOPS! The description cannot be empty. Please try again.");
+                }
+                break;
+
+            case "event":
+               if (this.isDescExists(userInput)) {
+                   String descEvent = this.getDescription(userInput, "event ", "/at ");
+                   String timeEvent = this.getTime(userInput,  "/at ");
+                   // add task to list
+                   Event event = new Event(descEvent, timeEvent);
+                   this.taskList.add(event);
+                   displaySuccessMessage(this.taskList, event);
+               } else {
+                   display("OOPS! The description cannot be empty. Please try again.");
+               }
+               break;
+
+            case "done":
+                if (this.isDescExists(userInput)) {
+                    // get task number
+                    int taskNumber = this.getTaskNumber(userInput);
+                    if (isTaskExists(taskNumber)) {
+                        Task task = this.taskList.get(taskNumber - 1);
+                        // mark done as done
+                        task.markAsDone();
+                        display("Nice! This task is marked as done: \n" + "      " + task);
+                    } else {
+                        display("This task does not exist! Please try again.");
+                    }
+                } else {
+                    display("OOPS! The description cannot be empty. Please try again.");
+                }
+                break;
+
+            case "delete":
+               if (this.isDescExists(userInput)) {
+                   int taskNumberDel = this.getTaskNumber(userInput);
+                   if (isTaskExists(taskNumberDel)) {
+                       Task taskDel = this.taskList.get(taskNumberDel - 1);
+                       this.taskList.remove(taskNumberDel - 1);
+                       display("Gotchu mate. I've removed this task: \n" + "      " + taskDel + "\n    Now you have "
+                               + this.taskList.size() + (this.taskList.size() <= 1 ? " task" : " tasks") + " in the list.");
+                   } else {
+                       display("This task does not exist! Please try again.");
+                   }
+               } else {
+                   display("OOPS! The description cannot be empty. Please try again.");
+               }
+               break;
+
+            case "list":
+                this.displayAllItems();
+                break;
+
+            default:
+                display("OOPS! I do not understand what does that mean. Maybe you can try either one of " +
+                        "[todo, deadline, event, done, list, delete]?");
+        }
+    }
+
+    public void start() {
+
+        this.greet();
 
         // initialize Scanner object
         Scanner scan = new Scanner(System.in);
-
-        // initialize TaskList
-        TaskList tasks = new TaskList();
-
-        // print greeting message
-        greet();
 
         // read user input
         String userInput = scan.nextLine();
 
         while (!userInput.equals(EXIT)) {
-            if (isCommandValid(userInput)) {
-                if (userInput.equals("list")) {
-                    tasks.displayAllItems();
-                } else if (userInput.startsWith("delete") && isDescExists(userInput)) {
-                    int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
-                    Task task = tasks.getTask(taskNumber - 1);
-                    tasks.removeTask(taskNumber - 1);
-                    display("Gotchu mate. I've removed this task: \n" + "      " + task + "\n    Now you have "
-                            + tasks.getLength() + (tasks.getLength() <= 1 ? " task" : " tasks") + " in the list.");
-                } else if (userInput.startsWith("done") && isDescExists(userInput)) {
-                    // get task number
-                    int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
-                    Task task = tasks.getTask(taskNumber - 1);
-                    // mark done as done
-                    task.markAsDone();
-                    display("Nice! This task is marked as done: \n" + "      " + task);
-                } else if (userInput.startsWith("todo") && isDescExists(userInput)) {
-                    // get task description
-                    String desc = userInput.split("todo ")[1];
-                    // add task to list
-                    Todo todo = new Todo(desc);
-                    tasks.add(todo);
-                    displaySuccessMessage(tasks, todo);
-                } else if (userInput.startsWith("deadline") && isDescExists(userInput)) {
-                    String[] arr = processUserInput(userInput,"deadline ", "/by ");
-                    Deadline dl = new Deadline(arr[0], arr[1]);
-                    tasks.add(dl);
-                    displaySuccessMessage(tasks, dl);
-                } else if (userInput.startsWith("event") && isDescExists(userInput)) {
-                    String[] arr = processUserInput(userInput,"event ", "/at ");
-                    // add task to list
-                    Event event = new Event(arr[0], arr[1]);
-                    tasks.add(event);
-                    displaySuccessMessage(tasks, event);
-                } else {
-                    display("OOPS! The description cannot be empty. Please try again.");
-                }
-            } else {
-                display("OOPS! I do not understand what does that mean. Maybe you can try either one of " +
-                        "[todo, deadline, event, done, list, bye, delete]?");
-            }
+            this.operate(userInput);
             userInput = scan.nextLine();
         }
-
         scan.close();
 
-        // print exit message
-        exit();
+        this.exit();
+    }
 
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.start();
     }
 
 }
