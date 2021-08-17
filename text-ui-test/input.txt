@@ -1,0 +1,6 @@
+deadline buy bread /by Friday
+event eat bread /at Friday night 8pm
+list
+done 1
+list
+bye

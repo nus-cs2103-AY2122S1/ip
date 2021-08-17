@@ -12,7 +12,7 @@ public class TaskList {
     }
 
     public String getList() {
-        String result = "Here's your tasks! Wow I'm so helpful! \n";
+        String result = "Here's your tasks! Wow I'm so helpful!\n";
         for (int index = 0; index < this.taskList.size(); index++) {
             result = result + (index + 1) + "." + this.taskList.get(index).printTask() + "\n";
         }

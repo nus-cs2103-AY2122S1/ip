@@ -11,6 +11,13 @@ public class Bob {
 
         String response = scanner.nextLine();
 
+    }
+
+    public {
+
+
+
+
         while (!Objects.equals(response, "bye")) {
 
             if (Objects.equals(response, "list")) { //show list of tasks
@@ -38,11 +45,13 @@ public class Bob {
                 taskList.addTask(newTask); //add a task
                 System.out.println("Okay okay I've added the task:");
                 System.out.println(newTask.printTask());
-                System.out.println("Yay " + taskList.noOfTasks() + " tasks! \n");
+                System.out.println("Yay " + taskList.noOfTasks() + " tasks!\n");
                 response = scanner.nextLine();
+            } else {
+                throw new InvalidInputException();
             }
         }
 
-        System.out.println("Bye! Shoo!");
+        System.out.print("Bye! Shoo!");
     }
 }
