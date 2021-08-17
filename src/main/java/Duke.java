@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) {
+        String[] task = new String[100];
+        int taskNum = 0;
         String indentation = "       ";
         String Horizontal_line = "-----------------------------";
         String greeting = "Hello! I'm Duke \n" + indentation + "What can I do for you?\n";
@@ -27,7 +29,9 @@ public class Duke {
             switch(keyword) {
                 case LIST:
                     System.out.println(indentation + Horizontal_line);
-                    System.out.println(indentation + "list");
+                    for (int i = 0; i < taskNum; i++) {
+                        System.out.println(indentation + (i + 1) + "." + "  " + task[i]);
+                    }
                     System.out.println(indentation + Horizontal_line);
                     break;
                 case BLAH:
@@ -42,10 +46,15 @@ public class Duke {
                     scanner.close();
                     isEnd = true;
                     break;
+                default:
+                    task[taskNum] = keyword;
+                    taskNum++;
+                    System.out.println(indentation + Horizontal_line);
+                    System.out.println(indentation + "Added: "+ keyword);
+                    System.out.println(indentation + Horizontal_line);
             }
         }
 
 
-        //System.out.println(keyword);
     }
 }
