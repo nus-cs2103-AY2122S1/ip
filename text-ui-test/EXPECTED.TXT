@@ -2,7 +2,7 @@ Hello! I'm Duke
 What can I do for you?
 
 Got it. I've added this task:
-[T][ ] read book
+[T][ ] read books
 Now you have 1 tasks in the list
 
 Got it. I've added this task:
@@ -18,13 +18,13 @@ Got it. I've added this task:
 Now you have 4 tasks in the list
 
 Here are the tasks in your list:
-1. [T][ ] read book
+1. [T][ ] read books
 2. [D][ ] return book (by: June 6th)
 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
 4. [T][ ] join sports club
 
 Nice! I've marked this task as done:
- [X] read book
+ [X] read books
 Nice! I've marked this task as done:
  [X] join sports club
 Got it. I've added this task:
@@ -32,7 +32,7 @@ Got it. I've added this task:
 Now you have 5 tasks in the list
 
 Here are the tasks in your list:
-1. [T][X] read book
+1. [T][X] read books
 2. [D][ ] return book (by: June 6th)
 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
 4. [T][X] join sports club
