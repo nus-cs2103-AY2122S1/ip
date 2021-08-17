@@ -109,6 +109,7 @@ public class Duke {
         }
     }
 
+    // Handles subclasses of Tasks.
     public static void Level4(Scanner userInput) {
         String input = userInput.nextLine();
         ArrayList<Task> tasks = new ArrayList<>();
@@ -140,9 +141,104 @@ public class Duke {
             }
             input = userInput.nextLine();
         }
+    }
+
+    public static void Level5(Scanner userInput) throws DukeException {
+        String input = userInput.nextLine();
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (!input.equals("bye")) {
+            if (input.equals("todo") || input.equals("event") || input.equals("deadline")) {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            } else if (input.equals("blah")) {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } else if (input.contains("done")) {
+                int index = Integer.parseInt(input.substring(5, 6)) - 1;
+                tasks.get(index).setIsDone();
+                System.out.println(displayLabel("Nice! I've marked this task as done: \n" +
+                        "       " + tasks.get(index).toString()));
+            } else if (!input.equals("list")) {
+                if (input.contains("todo")) {
+                    String info = input.substring(5);
+                    tasks.add(new ToDo(info));
+                } else if (input.contains("deadline")) {
+                    String[] info = input.substring(9).split("/by");
+                    tasks.add(new Deadline(info[0], info[1]));
+                } else if (input.contains("event")) {
+                    String[] info = input.substring(6).split("/at");
+                    tasks.add(new Event(info[0], info[1]));
+                } else {
+                    tasks.add(new Task(input));
+                }
+                System.out.println(displayLabel("Got it. I've added this task:  \n" +
+                        "       " + tasks.get(tasks.size() - 1).toString() + "\n     Now you have "
+                        + Integer.toString(tasks.size()) + " tasks in the list."));
+            } else {
+                String itemCollection = getItems(tasks);
+                System.out.println(displayLabel(itemCollection));
+            }
+            input = userInput.nextLine();
+        }
         System.out.println(displayLabel(byeLabel));
     }
 
+    public static void Level6(Scanner userInput) throws DukeException {
+        String input = userInput.nextLine();
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (!input.equals("bye")) {
+            if (input.equals("todo") || input.equals("event") || input.equals("deadline")) {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            } else if (input.equals("blah")) {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } else if (input.contains("done")) {
+                int index = Integer.parseInt(input.substring(5, 6)) - 1;
+                tasks.get(index).setIsDone();
+                System.out.println(displayLabel("Nice! I've marked this task as done: \n" +
+                        "       " + tasks.get(index).toString()));
+            } else if (input.contains("delete")) {
+                int index = Integer.parseInt(input.substring(7, 8)) - 1;
+                Task removedTask = tasks.get(index);
+                tasks.remove(removedTask);
+                System.out.println(displayLabel("Noted. I've removed this task:  \n" +
+                        "       " + removedTask.toString() + "\n     Now you have "
+                        + Integer.toString(tasks.size()) + " tasks in the list."));
+            } else if (!input.equals("list")) {
+                if (input.contains("todo")) {
+                    String info = input.substring(5);
+                    tasks.add(new ToDo(info));
+                } else if (input.contains("deadline")) {
+                    String[] info = input.substring(9).split("/by");
+                    tasks.add(new Deadline(info[0], info[1]));
+                } else if (input.contains("event")) {
+                    String[] info = input.substring(6).split("/at");
+                    tasks.add(new Event(info[0], info[1]));
+                } else {
+                    tasks.add(new Task(input));
+                }
+                System.out.println(displayLabel("Got it. I've added this task:  \n" +
+                        "       " + tasks.get(tasks.size() - 1).toString() + "\n     Now you have "
+                        + Integer.toString(tasks.size()) + " tasks in the list."));
+            } else {
+                String itemCollection = getItems(tasks);
+                System.out.println(displayLabel(itemCollection));
+            }
+            input = userInput.nextLine();
+        }
+    }
+
+}
+
+class DukeException extends Exception {
+
+    private String text;
+
+    public DukeException(String text) {
+        this.text = text;
+    }
+
+    @Override
+    public String getMessage() {
+        return text;
+    }
 
 }
 
