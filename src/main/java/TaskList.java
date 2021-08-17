@@ -24,6 +24,10 @@ public class TaskList {
         return this.al.size();
     }
 
+    public void deleteTask(int itemNum) {
+        this.al.remove(itemNum);
+    }
+
     @Override
     public String toString() {
         String result = "-----------------------------------------\n" + "Here are the tasks in your list:\n";

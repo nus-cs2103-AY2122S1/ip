@@ -77,7 +77,16 @@ public class Duke {
                 "-----------------------------------------\n");
     }
 
-
+    private void deleteTask(int itemNum) {
+        Task toBeDeleted = this.getTaskByIndex(itemNum - 1);
+        String taskName = toBeDeleted.toString();
+        this.tl.deleteTask(itemNum - 1);
+        System.out.println("-----------------------------------------\n" +
+                "Noted. I've removed this task: \n" +
+                taskName +
+                String.format("Now you have %s tasks in the list.\n", this.tl.getLength()) +
+                "-----------------------------------------\n");
+    }
 
     private void run() {
         this.greet();
@@ -104,7 +113,9 @@ public class Duke {
                     case "event":
                         this.add(items);
                         break;
-
+                    case "delete":
+                        this.deleteTask(Integer.parseInt(items[1]));
+                        break;
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
