@@ -2,8 +2,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static final String NAME = "Tze Henn";
-    static final ArrayList<Task> list = new ArrayList<>();
+    private static final String NAME = "Tze Henn";
+    private static final ArrayList<Task> list = new ArrayList<>();
+
+    enum Commands {
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT
+    }
 
     public static void lineGenerator() {
         System.out.println("____________________________________________________________");
@@ -27,20 +31,20 @@ public class Duke {
             String input = sc.nextLine();
 
 
-            while (!input.equals("bye")) {
+            while (!input.equals(Commands.BYE.toString().toLowerCase())) {
                 lineGenerator();
                 Task t;
-                if (input.equals("list")) {
+                if (input.equals(Commands.LIST.toString().toLowerCase())) {
                     System.out.println("Here are the tasks in your list: ");
                     for (int i = 0; i < list.size(); i++) {
                         System.out.println((i + 1) + "." + list.get(i));
                     }
-                } else if (input.startsWith("done")) {
+                } else if (input.startsWith(Commands.DONE.toString().toLowerCase())) {
                     System.out.println("Nice! I've marked this task as done: ");
                     String[] splitStr = input.split("\\s+");
                     System.out.print("  ");
                     list.get(Integer.parseInt(splitStr[1]) - 1).markTaskDone();
-                } else if (input.startsWith("delete")) {
+                } else if (input.startsWith(Commands.DELETE.toString().toLowerCase())) {
                     System.out.println("Noted! I've removed this task: ");
                     String[] splitStr = input.split("\\s+");
                     System.out.print("  ");
@@ -48,18 +52,18 @@ public class Duke {
                     list.remove(Integer.parseInt(splitStr[1]) - 1);
                     System.out.println("Now you have " + list.size() + " tasks in the list.");
                 } else {
-                    if (input.startsWith("todo")) {
+                    if (input.startsWith(Commands.TODO.toString().toLowerCase())) {
                         String description = input.substring(4).trim();
                         if (description.isEmpty()) {
                             throw new DukeException("OOPS!!! The description of a todo cannot be empty :-(");
                         }
                         t = new Todo(description);
-                    } else if (input.startsWith("deadline")) {
+                    } else if (input.startsWith(Commands.DEADLINE.toString().toLowerCase())) {
                         int slashPosition = input.indexOf('/');
                         String description = input.substring("deadline".length() + 1, slashPosition);
                         String by = input.substring(slashPosition + 4);
                         t = new Deadline(description, by);
-                    } else if (input.startsWith("event")) {
+                    } else if (input.startsWith(Commands.EVENT.toString().toLowerCase())) {
                         int slashPosition = input.indexOf('/');
                         String description = input.substring("event".length() + 1, slashPosition);
                         String at = input.substring(slashPosition + 4);
