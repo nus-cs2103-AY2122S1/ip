@@ -1,10 +1,19 @@
 todo read books
 todo sleep
+todo
+list 2 
+done
+produce ERROR
 deadline run it down /by Thursday
+list
 event birthday party /at IDK where
 event WRONG ADDED
+event
 deadline fake
+deadline
 list
+event birthday party /at IDK /at where
+deadline run it down /by Thursday /by
 done 3
 list
 done 4
