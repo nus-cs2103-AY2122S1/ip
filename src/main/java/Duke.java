@@ -2,17 +2,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static String command;
-    private static ArrayList<Task> arr = new ArrayList<>();
-    private static Scanner in = new Scanner(System.in);
+    private static final ArrayList<Task> arr = new ArrayList<>();
+    private static final Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello, I'm Duke");
+        String command;
         do {
             System.out.print(">> ");
             command = in.nextLine();
@@ -59,7 +54,7 @@ public class Duke {
      */
     public static void printTasks() {
         for (int i = 0; i < arr.size(); i++) {
-            System.out.println(i + 1 + ": " + arr.get(i));;
+            System.out.println(i + 1 + ": " + arr.get(i));
         }
     }
 
