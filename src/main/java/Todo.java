@@ -9,6 +9,6 @@ public class Todo extends Task{
     }
 
     public String getDescription() {
-        return this.getDescription();
+        return this.description;
     }
 }

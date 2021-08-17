@@ -47,7 +47,7 @@ public class Duke {
             word = "tasks";
         }
 
-        System.out.println("Got it. I've added this task: ");
+        System.out.println("Got it. I've added this task:");
         System.out.printf("   [%s][%s] %s\n", newTask.getType(), newTask.getStatusIcon(), newTask.getDescription());
         System.out.printf("Now you have %d %s in the list.%n", listIndex + 1, word);
 
@@ -60,7 +60,7 @@ public class Duke {
             currentTask.markDone();
         }
 
-        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("Nice! I've marked this task as done:");
         System.out.printf("[%s][X] %s", currentTask.getType(), currentTask.getDescription());
     }
 
