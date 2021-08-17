@@ -6,6 +6,13 @@ public class TDLTask {
     private String taskName;
     private boolean isDone;
 
+    public enum TaskType {
+        NONE,
+        TODO,
+        EVENT,
+        DEADLINE
+    }
+
     /**
      * A constructor used to create a new TDLTask.
      *
@@ -58,6 +65,15 @@ public class TDLTask {
         String returnThis = doneCheckboxStr + " " + this.getTaskName();
 
         return returnThis;
+    }
+
+    /**
+     * Gets the type of the Task in enum form.
+     *
+     * @return the enum representing the type of the current task.
+     */
+    public TaskType getTaskType() {
+        return TaskType.NONE;
     }
 
 
