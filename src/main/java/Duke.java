@@ -2,6 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class encapsulates Duke, an interactive task management chat-bot.
+ *
+ * @author Kleon Ang
+ */
 public class Duke {
     private static final String EXIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
