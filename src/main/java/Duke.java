@@ -1,8 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         Presentation pst = new Presentation();
+        List<String> taskList = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -10,24 +13,25 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        pst.horizontalLine();
-        System.out.println("\nHello! I'm Duke. \nWhat can I do for you?");
-        pst.horizontalLine();
+        pst.respond("Hello! I'm Duke. \nWhat can I do for you?");
 
-        Scanner sc = new Scanner(System.in);
-        pst.space();
-        pst.space();
+        Scanner sc = new Scanner(System.in).useDelimiter("\n");
         pst.enterCommand();
         String command = sc.next();
         while (!command.equals("bye")) {
-            pst.response(command);
+            if (command.equals("list")) {
+                pst.printTaskList(taskList);
+            } else {
+                pst.respond("Added: " + command);
+                taskList.add(command);
+            }
+            pst.enterCommand();
             command = sc.next();
         }
 
         sc.close();
-        pst.space();
-        System.out.println("Program exiting...");
-        System.out.println("Bye. Hope to see you again soon!\n");
+        pst.addSpace();
+        System.out.println("Program exiting... \nBye. Hope to see you again soon!\n");
     }
 
 }
