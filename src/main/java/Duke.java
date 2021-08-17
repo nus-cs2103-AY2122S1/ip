@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static final String HORIZONTAL_LINE = "  -----------------------";
-    private static final String INDENTATION = "    ";
+    protected static final String HORIZONTAL_LINE = "  -----------------------";
+    protected static final String INDENTATION = "    ";
 
     public static void greet() {
         String logo = " ____        _        \n"
@@ -17,7 +17,7 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    public static void echo(String s) {
+    public static void showMessage(String s) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(INDENTATION + s);
         System.out.println(HORIZONTAL_LINE);
@@ -32,15 +32,19 @@ public class Duke {
     public static void main(String[] args) {
         greet();
         Scanner sc = new Scanner(System.in);
-        while(sc.hasNextLine()) {
+        TaskManagement taskManagement = new TaskManagement();
+        while (sc.hasNextLine()) {
             String input = sc.nextLine();
             switch (input) {
                 case "bye":
                     bye();
                     sc.close();
                     return;
+                case "list":
+                    taskManagement.showTasks();
+                    break;
                 default:
-                    echo(input);
+                    showMessage("added: " + taskManagement.addTask(input));
             }
         }
         sc.close();
