@@ -15,13 +15,20 @@ public class Jarvis {
 
         String exitTrigger = "bye";
         String listTrigger = "list";
-        String userInput = scanner.nextLine();
+        String doneTrigger = "done";
+        String userInput = scanner.nextLine().trim();
         TaskList taskList = new TaskList();
 
         while(!userInput.equals(exitTrigger)) {
-            if (userInput.equals(listTrigger)) {
+            String[] action = userInput.split(" ");
+            String actionType = action[0];
+
+            if (actionType.equals(listTrigger)) {
                 OutputMessage taskListMessage = new OutputMessage(taskList.toString());
                 Output.showFormattedOutputMessage(taskListMessage);
+            } else if (actionType.equals(doneTrigger)) {
+                int taskIndex = Integer.parseInt(action[1]) - 1;
+                taskList.markAsDone(taskIndex);
             } else {
                 taskList.addTask(userInput);
             }
