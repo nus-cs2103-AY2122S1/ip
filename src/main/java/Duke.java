@@ -20,16 +20,12 @@ public class Duke {
             if (descriptor.equals("")) {
                 throw new DukeException("empty description");
             }
-            descriptor = descriptor.replaceFirst("/by ", "(by: ");
-            descriptor = descriptor + ")";
             store.add(new Deadline(descriptor.stripLeading()));
         } else if (descriptor.startsWith("event")) {
             descriptor = descriptor.replaceFirst("event", "");
             if (descriptor.equals("")) {
                 throw new DukeException("empty description");
             }
-            descriptor = descriptor.replaceFirst("/at ", "(at: ");
-            descriptor = descriptor + ")";
             store.add(new Event(descriptor.stripLeading()));
         } else {
             //based on logic in Main, should never reach this branch.
