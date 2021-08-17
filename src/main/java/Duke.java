@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -10,6 +12,60 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    private static void displayAddedTask(Task currentTask) {
+        lineSpacing();
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(currentTask);
+        System.out.println(String.format("Now you have %d tasks in the list.", taskList.size()));
+        lineSpacing();
+    }
+
+    private static void printList() {
+        lineSpacing();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currentTask = taskList.get(i);
+            System.out.println(String.format("%d.%s", i + 1, currentTask));
+        }
+        lineSpacing();
+    }
+
+    private static void doneTask(String userInput) {
+        String[] inputArray = userInput.split(" ");
+        Task completedTask = taskList.get(Integer.parseInt(inputArray[1]) - 1);
+        completedTask.markAsDone();
+        lineSpacing();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(completedTask);
+        lineSpacing();
+    }
+
+    private static void addDeadline(String userInput) {
+        List<String> inputArray = Arrays.asList(userInput.split(" /by "));
+        String by = inputArray.get(1);
+        String description = String.join(" ",
+                new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" "))).remove(0));
+        Deadline newDeadline = new Deadline(description, by);
+        taskList.add(newDeadline);
+        displayAddedTask(newDeadline);
+    }
+
+    private static void addEvent(String userInput) {
+        List<String> inputArray = Arrays.asList(userInput.split(" /at "));
+        String timeFrame = inputArray.get(1);
+        String description = String.join(" ",
+                new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" "))).remove(0));
+        Event newEvent = new Event(description, timeFrame);
+        taskList.add(newEvent);
+        displayAddedTask(newEvent);
+    }
+
+    private static void addTodo(String userInput) {
+        List<String>  inputArray = Arrays.asList(userInput.split(" "));
+        String description = String.join(" ", new ArrayList<String>(inputArray).remove(0));
+        Todo newTodo = new Todo(description);
+        taskList.add(newTodo);
+        displayAddedTask(newTodo);
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -29,34 +85,30 @@ public class Duke {
             }
 
            if (userInput.equals("list")) {
-                lineSpacing();
-                for (int i = 0; i < taskList.size(); i++) {
-                    Task currentTask = taskList.get(i);
-                    System.out.println(String.format("%d.[%s] %s", i + 1, currentTask.getStatusIcon(), currentTask));
-                }
-                lineSpacing();
+                printList();
                 continue;
             }
 
-           //takes first 4 characters of userInput, if userInput has less than 4 characters it will just
-            // take the whole userInput
-           if (userInput.substring(0, Math.min(userInput.length(), 4)).equals("done")) {
-                    String[] inputArray = userInput.split(" ");
-                    Task completedTask = taskList.get(Integer.parseInt(inputArray[1]) - 1);
-                    completedTask.markAsDone();
-                    lineSpacing();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(String.format("[%s] %s", completedTask.getStatusIcon(), completedTask));
-                    lineSpacing();
-                    continue;
+           if (userInput.startsWith("done ")) {
+               doneTask(userInput);
+               continue;
            }
 
-           taskList.add(new Task(userInput));
-           lineSpacing();
-           System.out.println(String.format("added : %s", userInput));
-           lineSpacing();
+           if (userInput.startsWith("deadline ")) {
+               addDeadline(userInput);
+               continue;
+           }
 
+            if (userInput.startsWith("event ")) {
+                addEvent(userInput);
+                continue;
+            }
 
+            if (userInput.startsWith(("todo "))) {
+                addTodo(userInput);
+                continue;
+            }
         }
     }
+
 }
