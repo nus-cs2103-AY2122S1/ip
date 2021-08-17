@@ -34,10 +34,33 @@ public class GreetingBot {
                 int taskIndex = Integer.parseInt(splitWords[1]);
                 myList.get(taskIndex - 1).setDone(true);
             } else {
-                Task nextTask = new Task(nextLine, counter);
-                myList.add(nextTask);
-                counter += 1;
-                System.out.println("added: " + nextLine);
+                System.out.println("Got it. I've added this task:");
+                if (nextLine.startsWith("todo")) {
+                    String[] splitLine = nextLine.split("todo");
+                    String title = splitLine[1];
+                    Task nextTask = new Todo(title, counter);
+                    myList.add(nextTask);
+                    counter += 1;
+                    System.out.println(nextTask.getInfo());
+                } else if (nextLine.startsWith("deadline")) {
+                    String[] splitLine = nextLine.split("/by ");
+                    String date = splitLine[1];
+                    String title = splitLine[0].split("deadline")[1];
+                    Task nextTask = new Deadline(title, counter, date);
+                    myList.add(nextTask);
+                    counter += 1;
+                    System.out.println(nextTask.getInfo());
+                } else if (nextLine.startsWith("event")) {
+                    String[] splitLine = nextLine.split("/at ");
+                    String date = splitLine[1];
+                    String title = splitLine[0].split("event")[1];
+                    Task nextTask = new Event(title, counter, date);
+                    myList.add(nextTask);
+                    counter += 1;
+                    System.out.println(nextTask.getInfo());
+                }
+                int totalTasks = myList.size();
+                System.out.println("Now you have " + totalTasks + " tasks in the list.");
             }
         }
     }
@@ -59,7 +82,7 @@ public class GreetingBot {
         while (true) {
             String nextLine = inputScanner.nextLine();
             if (nextLine.equals("bye")) {
-              break;
+                break;
             } else {
                 System.out.println(nextLine);
             }
@@ -71,3 +94,6 @@ public class GreetingBot {
         System.out.println(exitMessage);
     }
 }
+
+
+
