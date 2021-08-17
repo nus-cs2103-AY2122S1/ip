@@ -53,8 +53,23 @@ public class Duke {
      * @param input String that user inputs.
      */
     public void addToList(String input) {
-        this.list.add(new Task(input));
-        formatAndPrint("added: " + input);
+        Task task = new Task(input);
+        String[] splitType = input.split(" ", 2);
+        String type = splitType[0];
+        if (type.equals("todo")) {
+            task = new Todo(splitType[1]);
+        } else if (type.equals("deadline")) {
+            String[] splitMessage = splitType[1].split(" /by ", 2);
+            task = new Deadline(splitMessage[0], splitMessage[1]);
+        } else if (type.equals("event")) {
+            String[] splitMessage = splitType[1].split(" /at ", 2);
+            task = new Event(splitMessage[0], splitMessage[1]);
+        }
+        this.list.add(task);
+        formatAndPrint(String.format("Got it. I've added this task:\n%s\nNow you have %d %s in your list.",
+                task,
+                list.size(),
+                list.size() == 1 ? "task" : "tasks"));
     }
 
     /**
