@@ -4,29 +4,6 @@ public class Duke {
     private static int listSize = 0;
     private static Task[] list = new Task[100]; // List to store all the tasks
 
-    public static class Task {
-        protected String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        public String getStatusIcon() {
-            return (isDone ? "X" : " "); // mark done task with X
-        }
-
-        public void complete() {
-            this.isDone = true;
-        }
-
-        @Override
-        public String toString() {
-            return "[" + this.getStatusIcon() + "] " + description;
-        }
-    }
-
     public static void handleInput(String input) {
         if (input.equals("list")) {
             for (int i = 0; i < listSize; i++) {
@@ -43,10 +20,28 @@ public class Duke {
         }
     }
 
-    public static void addTask(String desc) {
-        list[listSize] = new Task(desc);
+    public static void addTask(String desc) throws IllegalArgumentException {
+        Task newTask;
+        if (desc.startsWith("todo ")) {
+            newTask = new Todo(desc.substring(5));
+        } else if (desc.startsWith("deadline ")) {
+            int location = findEscape(desc);
+            newTask = new Deadline(desc.substring(9, location - 1), desc.substring(location + 4));
+        } else if (desc.startsWith("event ")) {
+            int location = findEscape(desc);
+            newTask = new Event(desc.substring(6, location - 1), desc.substring(location + 4));
+        } else {
+            throw new IllegalArgumentException("Please specify a type of task!");
+        }
+        list[listSize] = newTask;
         listSize++;
-        System.out.println("added: " + desc);
+        System.out.println("added: " + newTask);
+    }
+
+    public static int findEscape(String desc) {
+        int escapePos = desc.indexOf("/");
+        if (escapePos < 0) throw new IllegalArgumentException("Please provide a time");
+        return escapePos;
     }
 
     public static void completeTask(String input) {
@@ -59,8 +54,6 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-
-
 
         while (true) {
             String input = scanner.nextLine();
