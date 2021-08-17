@@ -4,12 +4,18 @@ public class Jared {
     private static Task[] history = new Task[100];
     private static int historyCount = 0;
 
-    private static void add(String command, String desc) {
+    private static void add(String command, String next) {
         Task newTask;
         if (command.equals("todo")) {
+            String desc = next.split(" ",2)[1];
             newTask = new Todo(desc);
+        } else if (command.equals("deadline")) {
+            String body = next.split(" ",2)[1];
+            String desc = body.split("/by",2)[0];
+            String date = body.split("/by",2)[1];
+            newTask = new Deadline(desc, date);
         } else {
-            newTask = new Task(desc);
+            newTask = new Task(next);
         }
         history[historyCount] = newTask;
         historyCount ++;
@@ -28,9 +34,10 @@ public class Jared {
         System.out.println(res);
     }
 
-    private static void done(int index) {
-        int taskNum = index - 1;
-        Task currTask = history[taskNum];
+    private static void done(String next) {
+        int taskNum = Integer.valueOf(next.split(" ", 2)[1]);
+        int index = taskNum - 1;
+        Task currTask = history[index];
         currTask.markDone();
         String res = String.format("Nice! I've marked this task as done:\n%s",
                 currTask.toString());
@@ -49,19 +56,15 @@ public class Jared {
             String next = scan.nextLine();
             String[] inputArr = next.split(" ",2);
             String command = inputArr[0];
-            String desc = "0";
-            if (inputArr.length > 1) {
-                desc = next.split(" ", 2)[1];
-            }
 
             if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
             } else if (command.equals("list")) {
                 list();
             } else if (command.equals("done")) {
-                done(Integer.valueOf(desc));
+                done(next);
             } else {
-                add(command, desc);
+                add(command, next);
             }
         }
 
