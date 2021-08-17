@@ -17,7 +17,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String userInput;
 
-        String tasks[] = new String[100];
+        Task tasks[] = new Task[100];
         int counter = 0;
 
         while (true) {
@@ -31,13 +31,25 @@ public class Duke {
 
             } else if (userInput.matches("list")){
                 System.out.println(dash);
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < counter; i++) {
-                    System.out.println(i+1 + ". " + tasks[i]);
+                    Task currTask = tasks[i];
+                    System.out.println(i+1 + ".[" + currTask.getStatusIcon() + "] " + currTask.getDescription());
                 }
                 System.out.println(dash);
 
-            } else {
-                tasks[counter] = userInput;
+            } else if (userInput.contains("done")){
+                Integer index = Integer.parseInt(userInput.substring(5));
+                Task currTask = tasks[index - 1];
+                currTask.completeTask();
+
+                System.out.println(dash);
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(" [" + currTask.getStatusIcon()+ "] " + currTask.getDescription());
+                System.out.println(dash);
+
+            } else  {
+                tasks[counter] = new Task(userInput);
                 counter += 1;
                 System.out.println(dash);
                 System.out.println("added: " + userInput);
