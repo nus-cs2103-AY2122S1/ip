@@ -1,5 +1,5 @@
-import java.io.OptionalDataException;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class Duke {
 
@@ -17,13 +17,19 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you today? ");
 
+        String userCommand;
         String userInput;
 
         mainLoop:
         while (true) {
-            userInput = scanner.next();
-            switch (userInput) {
+            userCommand = scanner.next();
+            userInput = scanner.nextLine().trim();
+
+            switch (userCommand) {
                 case "list":
+                    if (tasks == 0) {
+                        System.out.println("Currently no tasks!");
+                    }
                     for (int i = 0; i < tasks; i++) {
                         System.out.printf("%d. %s%n", i + 1, taskList[i]);
                     }
@@ -32,8 +38,7 @@ public class Duke {
                     System.out.println("Good bye.");
                     break mainLoop;
                 case "done":
-                    int done = scanner.nextInt() - 1;
-
+                    int done = Integer.parseInt(userInput) - 1;
                     if (done >= tasks || done < 0) {
                         System.out.println("Task does not exist!");
                         continue;
@@ -46,13 +51,58 @@ public class Duke {
                             "%s\n", doneTask.toString());
 
                     break;
+                case ("todo"):
+                    taskList[tasks] = new Todo(userInput);
+                    addTask(taskList[tasks]);
+                    break;
+                case("deadline"):
+                    String[] deadlineInfo = splitBetween(userInput, "/by");
+                    taskList[tasks] = new Deadline(buildDescription(deadlineInfo, "by"));
+                    addTask(taskList[tasks]);
+                    break;
+                case("event"):
+                    String[] eventInfo = splitBetween(userInput, "/at");
+                    taskList[tasks] = new Event(buildDescription(eventInfo, "by"));
+                    addTask(taskList[tasks]);
+                    break;
                 default:
-                    taskList[tasks] = new Task(userInput);
-                    tasks += 1;
-                    System.out.printf("added: %s\n", userInput);
+                    System.out.println("Sorry I do not understand this directive.");
                     break;
             }
-            scanner.nextLine();
         }
+    }
+
+    private static void addTask(Task newTask) {
+        tasks += 1;
+        System.out.printf("Got it, I've added this task:\n %s\n", newTask.toString());
+        System.out.printf("Now you have %d tasks in your list.\n", tasks);
+    }
+
+    private static String[] splitBetween(String str, String separator) {
+        StringJoiner start = new StringJoiner(" ");
+        StringJoiner end = new StringJoiner(" ");
+
+        int i = 0;
+        boolean after = false;
+
+        String[] strArray = str.split(" ");
+
+        while (i < strArray.length) {
+            String currentString = strArray[i];
+            if (after) {
+                end.add(currentString);
+            } else if (currentString.equals(separator)) {
+                after = true;
+            } else {
+                start.add(currentString);
+            }
+            i++;
+        }
+
+        return new String[] {String.valueOf(start), String.valueOf(end)};
+    }
+
+    private static String buildDescription(String[] info, String preposition) {
+        return String.format("%s (%s: %s)", info[0], preposition, info[1]);
     }
 }
