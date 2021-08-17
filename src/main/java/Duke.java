@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static String[] commandList = new String[100];
+    private static Task[] taskList = new Task[100];
     private static int counter = 0;
 
     public static void main(String[] args) {
@@ -29,13 +29,14 @@ public class Duke {
                 System.out.println("Nothing has been added to the list");
             }
             for (int i = 0; i < counter; i++) {
-                System.out.println((i + 1) + ". " + commandList[i]);
+                System.out.println((i + 1) + ". " + taskList[i]);
             }
             getCommand();
         } else {
             // User command is something else, add command to command list and continue asking for commands
             System.out.println("\t added: " + command);
-            commandList[counter] = command;
+            Task t = new Task(command);
+            taskList[counter] = t;
             counter++;
             getCommand();
         }
