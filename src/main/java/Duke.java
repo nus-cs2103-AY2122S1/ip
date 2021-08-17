@@ -41,18 +41,43 @@ public class Duke {
                         listOfTasks.append(newTask);
                     }
                 }
-                printWithLines(listOfTasks.toString());
+                printWithLines("Here are the tasks in your list:\n" + listOfTasks);
                 break;
             case "done":
                 int index = Integer.parseInt(commands[1]) - 1;
                 tasks[index].markAsDone();
                 printWithLines("Great job on completing this task!\n" + tasks[index].toString());
                 break;
+            case "todo":
+                String todoDescription = msg.substring(5);
+                ToDo todo = new ToDo(todoDescription);
+                addTask(todo);
+                break;
+            case "deadline":
+                String[] descriptionAndBy = msg.substring(9).split(" /by ");
+                String deadlineDescription = descriptionAndBy[0];
+                String deadlineBy = descriptionAndBy[1];
+                Deadline deadline = new Deadline(deadlineDescription, deadlineBy);
+                addTask(deadline);
+                break;
+            case "event":
+                String[] descriptionAndAt = msg.substring(6).split(" /at ");
+                String eventDescription = descriptionAndAt[0];
+                String eventAt = descriptionAndAt[1];
+                Event event = new Event(eventDescription, eventAt);
+                addTask(event);
+                break;
             default:
-                tasks[nextIndex] = new Task(msg);
-                nextIndex++;
-                printWithLines("added: " + msg);
+                addTask(new Task(msg));
                 break;
         }
+    }
+
+    private static void addTask(Task task) {
+        tasks[nextIndex] = task;
+        nextIndex++;
+
+        printWithLines("Got it. I've added this task:\n  " + task
+                + "\nNow you have " + nextIndex + " tasks in the list.");
     }
 }
