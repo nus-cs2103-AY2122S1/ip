@@ -1,6 +1,6 @@
 /**
  * Task class to represent the tasks in the list.
- * At level-3, it supports (i) getting status icon
+ * At level-4, it supports (i) getting status icon
  * and (ii) marking a task as done
  */
 public class Task {
@@ -13,7 +13,7 @@ public class Task {
      * @param description the name of the task
      */
     public Task(String description) {
-        this.description = description;
+        this.description = description.trim();
         this.isDone = false;
     }
 
@@ -30,5 +30,10 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + this.description;
     }
 }
