@@ -103,8 +103,8 @@ class DukeBot {
         System.out.println(greetings);
 
         while (true) {
-            // split at the first white space
-            String[] inputs = sc.nextLine().split(" ", 2);
+            String command = sc.nextLine();
+            String[] inputs = command.split(" ", 2);   // split at the first white space
 
             String response;
             try {
@@ -114,7 +114,7 @@ class DukeBot {
             }
             System.out.println(response + "\n");
 
-            if (inputs[0].equals("bye")) {
+            if (command.equals("bye")) {
                 break;
             }
         }
