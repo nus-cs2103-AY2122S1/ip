@@ -1,9 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    static String linebreak = "____________________________________________________________";
 
     public static void main(String[] args) {
+        String linebreak = "____________________________________________________________";
+        List<String> commands = new ArrayList<String>();
+
         System.out.print("               _,........__\n");
         System.out.print("            ,-'            \"`-.\n");
         System.out.print("          ,'                   `-.\n");
@@ -52,10 +56,19 @@ public class Duke {
                 System.out.println(" See you again master!");
                 System.out.println(linebreak);
                 break;
+            } else if (inputString.equals("list")) {
+                System.out.println(linebreak);
+                for (int i = 0; i < commands.size(); i++) {
+                    System.out.printf(" %s. %s\n", i, commands.get(i));
+                }
+                System.out.println(linebreak);
+            } else {
+                System.out.println(linebreak);
+                System.out.println(" " + inputString);
+                System.out.println(linebreak);
+                commands.add(inputString);
             }
-            System.out.println(linebreak);
-            System.out.println(inputString);
-            System.out.println(linebreak);
         }
+        input.close();
     }
 }
