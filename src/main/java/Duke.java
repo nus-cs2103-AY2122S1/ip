@@ -8,6 +8,8 @@ public class Duke extends Chatbot {
     private static String GREETING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     private static String FAREWELL_MESSAGE = "See you soon! :)";
 
+    private TaskList taskList;
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -17,7 +19,14 @@ public class Duke extends Chatbot {
         System.out.println("Hello from\n" + logo);
         Duke duke = new Duke();
         duke.greet();
-        duke.echo();
+        duke.taskMode();
+    }
+
+    /**
+     * A constructor for Duke chatbot.
+     */
+    public Duke() {
+        this.taskList = new TaskList();
     }
 
     /**
@@ -37,6 +46,20 @@ public class Duke extends Chatbot {
         } else {
             Chatbot.printMessage(message);
             echo();
+        }
+    }
+
+    /**
+     * Manages a user's tasks.
+     */
+    public void taskMode() {
+        String message = Chatbot.acceptUserInput();
+        if (message.equals("bye")) {
+            Chatbot.printMessage(FAREWELL_MESSAGE);
+        } else {
+            taskList.addTask(message);
+            Chatbot.printMessage("added: " + message);
+            taskMode();
         }
     }
 }
