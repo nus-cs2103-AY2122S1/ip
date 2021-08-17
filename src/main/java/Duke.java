@@ -79,7 +79,13 @@ public class Duke {
 
     protected static class EmptyDescription extends DukeExceptions {
         public EmptyDescription(String message) {
-            super(message);
+            super("Sorry! There needs to be a description for a " + message + " item :(\nPlease try again!");
+        }
+    }
+
+    protected static class EmptyDetails extends DukeExceptions {
+        public EmptyDetails(String message) {
+            super("Sorry! Please include more details for a " + message + " item :(\nPlease try again!");
         }
     }
 
@@ -140,32 +146,51 @@ public class Duke {
 
                 switch (taskType) {
                     case "todo" -> {
-                        System.out.println("added: " + command);
-                        System.out.println(linebreak);
-                        String taskInfo = command.split(" ", 2)[1];
-                        if (taskInfo == "") {
+                        String[] taskInfo = command.split(" ", 2);
+                        if (taskInfo.length == 1) {
                             throw new EmptyDescription("todo");
                         }
-                        todoList[pointer] = duke.new Todo(taskInfo);
+
+                        System.out.println("added: " + command);
+                        System.out.println(linebreak);
+                        todoList[pointer] = duke.new Todo(taskInfo[1]);
                         break;
 
                     }
                     case "deadline" -> {
+                        String[] taskInfo = command.split(" ", 2);
+                        if (taskInfo.length == 1) {
+                            throw new EmptyDescription("todo");
+                        }
+
+                        String[] additionalTaskInfo = taskInfo[1].split("/by", 2);
+                        if (additionalTaskInfo.length == 1) {
+                            throw new EmptyDetails("deadline");
+                        }
+                        String description = additionalTaskInfo[0];
+                        String dateBy = additionalTaskInfo[1];
+
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
-                        String taskInfo = command.split(" ", 2)[1];
-                        String description = taskInfo.split("/by", 2)[0];
-                        String dateBy = taskInfo.split("/by", 2)[1];
                         todoList[pointer] = duke.new Deadline(description, dateBy);
                         break;
 
                     }
                     case "event" -> {
+                        String[] taskInfo = command.split(" ", 2);
+                        if (taskInfo.length == 1) {
+                            throw new EmptyDescription("todo");
+                        }
+
+                        String[] additionalTaskInfo = taskInfo[1].split("/at", 2);
+                        if (additionalTaskInfo.length == 1) {
+                            throw new EmptyDetails("event");
+                        }
+                        String description = additionalTaskInfo[0];
+                        String eventDetails = additionalTaskInfo[1];
+
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
-                        String taskInfo = command.split(" ", 2)[1];
-                        String description = taskInfo.split("/at", 2)[0];
-                        String eventDetails = taskInfo.split("/at", 2)[1];
                         todoList[pointer] = duke.new Event(description, eventDetails);
                         break;
 
