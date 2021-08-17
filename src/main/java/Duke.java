@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Duke {
+
+    public static final String HORIZONTAL_LINE = "____________________________________________________________ \n";
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -32,7 +35,6 @@ public class Duke {
     }
 
     public static String reply(String output) {
-        String hline = "____________________________________________________________ \n";
-        return (hline + output + '\n' + hline);
+        return (HORIZONTAL_LINE + output + '\n' + HORIZONTAL_LINE);
     }
 }
