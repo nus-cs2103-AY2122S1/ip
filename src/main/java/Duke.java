@@ -10,10 +10,13 @@ public class Duke {
         String Horizontal_line = "---------------------------------------------------------------";
         String greeting = "Hello! I'm Duke.\n" + indentation + "What can I do for you?\n";
         final String LIST = "list";
-        final String BLAH = "blah";
         final String BYE = "bye";
         final String DONE = "done";
         final String DELETE = "delete";
+        enum Command {
+            CLIST, CDONE, CBYE, CDELETE, COTHER
+        };
+
         boolean isEnd = false;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -30,23 +33,36 @@ public class Duke {
         while (!isEnd) {
             String keywords = scanner.nextLine();
             String[] keyword = keywords.split(" ");
-            switch(keyword[0]) {
-                case LIST:
+            Command command;
+            if (keyword[0].equals("list")) {
+                command = Command.CLIST;
+            } else if (keyword[0].equals("bye")) {
+                command = Command.CBYE;
+            } else if (keyword[0].equals("done")) {
+                command = Command.CDONE;
+            } else if (keyword[0].equals("delete")) {
+                command = Command.CDELETE;
+            } else {
+                command = Command.COTHER;
+            }
+
+            switch(command) {
+                case CLIST:
                     System.out.println(indentation + Horizontal_line);
                     try {
 
-                        for (int i = 0; i < taskNum; i++) {
+                        for (int i = 0; i < task.size(); i++) {
                             String s = indentation;
                             String s2 = "";
 
                             if (task.get(i) instanceof Todo) {
-                                s += (task.get(i).getIndex() + 1) + "." + " [T]";
+                                s += (i + 1) + "." + " [T]";
                                 s2 = task.get(i).getName();
                             } else if (task.get(i) instanceof Deadline) {
-                                s += (task.get(i).getIndex() + 1) + "." + " [D]";
+                                s += (i + 1) + "." + " [D]";
                                 s2 = task.get(i).getName() +  " ( " + ((Deadline) task.get(i)).getTime() + " )";
                             } else if (task.get(i) instanceof Event){
-                                s += (task.get(i).getIndex() + 1) + "." + " [E]";
+                                s += (i + 1) + "." + " [E]";
                                 s2 = task.get(i).getName() +  " ( " + ((Event) task.get(i)).getTime() + " )";
                             }
                             if (task.get(i).isDone() == false) {
@@ -64,7 +80,7 @@ public class Duke {
                     System.out.println(indentation + Horizontal_line);
 
                     break;
-                case DONE:
+                case CDONE:
 
                     try {
                         Integer num = Integer.valueOf(keyword[1]) - 1;
@@ -101,7 +117,7 @@ public class Duke {
                     }
 
                     break;
-                case DELETE:
+                case CDELETE:
                     try {
                         Integer num = Integer.valueOf(keyword[1]) - 1;
 
@@ -140,7 +156,7 @@ public class Duke {
                         System.out.println(indentation + Horizontal_line);
                     }
                     break;
-                case BYE:
+                case CBYE:
                     System.out.println(indentation + Horizontal_line);
                     System.out.println(indentation + "Bye. Hope to see you again soon!");
                     System.out.println(indentation + Horizontal_line);
