@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,7 +13,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = "";
         while (!input.equals("bye")) {
-            input = sc.next();
+            input = sc.nextLine();
             System.out.println(input);
         }
         sc.close();
