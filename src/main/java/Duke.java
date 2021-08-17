@@ -14,13 +14,12 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String border = "____________________________________________________________";
         Printer printer = new Printer(border);
-        ArrayList<String> items = new ArrayList<String>();
+        ArrayList<Task> items = new ArrayList<Task>();
 
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            items.add(input);
-            String newString = String.format("added: %s", input);
-            printer.PrintMessage(newString);
+            items.add(new Task(input));
+            printer.PrintMessage(String.format("added: %s", input));
             input = sc.nextLine();
 
             if (input.equals("list")) {

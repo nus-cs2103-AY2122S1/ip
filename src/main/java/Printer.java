@@ -12,9 +12,11 @@ public class Printer {
         System.out.println(border);
     }
 
-    public void PrintList(ArrayList<String> message) {
+    public void PrintList(ArrayList<Task> message) {
+        System.out.println("Here are the tasks in your list: ");
         for (int i = 1; i <= message.size(); i++) {
-            String toPrint = String.format("%d. %s", i, message.get(i-1));
+            Task thisTask = message.get(i-1);
+            String toPrint = String.format("%d.[%s] %s", i, thisTask.getStatusIcon(), thisTask.description);
             System.out.println(toPrint);
         }
     }
