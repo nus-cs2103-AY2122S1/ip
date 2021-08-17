@@ -9,7 +9,7 @@ public class Duke {
                 "\thow may I serve you?\n");
 
         // Initialize string array to store the list
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
         int numOfTask = 0;
 
         // Initialize scanner to get user input
@@ -29,7 +29,7 @@ public class Duke {
                             Printer.listTask(tasks));
                     break;
                 default:
-                    tasks[numOfTask++] = input;
+                    tasks[numOfTask++] = new Task(input);
                     Printer.prettyPrint("added: " +
                             input + "\n");
             }

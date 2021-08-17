@@ -11,11 +11,11 @@ public class Printer {
         System.out.printf("\t%s\n\t%s\n\t%s\n%n", divider, content, divider);
     }
 
-    public static String listTask(String[] tasks) {
+    public static String listTask(Task[] tasks) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < tasks.length - 1; i++) {
             if (tasks[i] != null)
-                result.append("\t ").append(i + 1).append(".").append(tasks[i]).append("\n");
+                result.append("\t ").append(i + 1).append(".").append(tasks[i].description).append("\n");
         }
         return result.toString();
     }
