@@ -108,6 +108,11 @@ public class Duke {
         }
     }
 
+    /**
+     * To delete a task from the list
+     *
+     * @param ind the index of task to be deleted
+     */
     public static void deleteTask(int ind) {
         //because of how this method is called, ind will be valid
         Task t = tasks.remove(ind);
@@ -155,6 +160,9 @@ public class Duke {
         }
     }
 
+    /**
+     * To display commands to help user with input as much as possible
+     */
     public static void helperMessage() {
         System.out.println("     If you wish to add a task: " +
                 " Please input in the form: <Type of Task> <Name of Task>" +
