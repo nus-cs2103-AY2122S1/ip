@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         // Greet the user
-        Printer.beautyPrint("Welcome to\n" +
+        Printer.prettyPrint("Welcome to\n" +
                 Printer.logo +
                 "\tI'm Desmond,\n" +
                 "\thow may I serve you?\n");
@@ -20,11 +20,11 @@ public class Duke {
         // and exit when the input is "bye"
         while (true) {
             if (input.equals("bye")) {
-                Printer.beautyPrint("Bye (*´▽｀)ノシ. Have a good day!\n");
+                Printer.prettyPrint("Bye (*´▽｀)ノシ. Have a good day!\n");
                 break;
             }
             tasks[numOfTask++] = input;
-            Printer.beautyPrint("added: " +
+            Printer.prettyPrint("added: " +
                     input + "\n");
             input = scanner.nextLine();
         }

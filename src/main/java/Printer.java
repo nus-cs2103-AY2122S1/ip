@@ -7,7 +7,7 @@ public class Printer {
 
     private static final String divider = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
-    public static void beautyPrint(String content) {
+    public static void prettyPrint(String content) {
         System.out.printf("\t%s\n\t%s\n\t%s\n%n", divider, content, divider);
     }
 }
