@@ -31,7 +31,7 @@ public class TaskList {
      */
     public void add(Event event) {
         this.list.add(event);
-        System.out.println("     Got it. I've added this task: ");
+        System.out.println("     Got it. I've added this task:");
         System.out.println("       " + event);
         System.out.printf("     Now you have %d tasks in the list.%n", list.size());
     }
@@ -44,7 +44,7 @@ public class TaskList {
      */
     public void add(Deadline deadline) {
         this.list.add(deadline);
-        System.out.println("     Got it. I've added this task: ");
+        System.out.println("     Got it. I've added this task:");
         System.out.println("       " + deadline);
         System.out.printf("     Now you have %d tasks in the list.%n", list.size());
     }
@@ -56,7 +56,7 @@ public class TaskList {
      */
     public void add(ToDo toDo) {
         this.list.add(toDo);
-        System.out.println("     Got it. I've added this task: ");
+        System.out.println("     Got it. I've added this task:");
         System.out.println("       " + toDo);
         System.out.printf("     Now you have %d tasks in the list.%n", list.size());
     }
@@ -84,5 +84,17 @@ public class TaskList {
                 System.out.println("     " + (i + 1) + "." + this.list.get(i));
             }
         }
+    }
+
+    /**
+     * Deletes a task at a certain index
+     *
+     * @param index index from 1 (i.e lowest index is 1, so subtract 1 to get real index)
+     */
+    public void deleteTask(int index) {
+        Task item = this.list.remove(index - 1);
+        System.out.println("     Noted. I've removed this task:");
+        System.out.println("       " + item);
+        System.out.printf("     Now you have %d tasks in the list.%n", list.size());
     }
 }

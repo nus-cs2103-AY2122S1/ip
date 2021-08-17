@@ -1,6 +1,16 @@
 import java.util.Scanner;
 
 public class Duke {
+    enum ValidCommands {
+        DEADLINE("deadline"), DELETE("delete"), DONE("done"), END("bye"), EVENT("event"), LIST("list"), TODO("todo");
+
+        String input;
+
+        ValidCommands(String input) {
+            this.input = input;
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         TaskList taskList = new TaskList();
@@ -10,8 +20,10 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("    ____________________________________________________________\n"
-                + "    Hello! I'm Duke \n" + "    What can I do for you?\n" +
+                + "    Hello! I'm Duke\n" + "    What can I do for you?\n" +
                 "    ____________________________________________________________\n");
+
+
         boolean end;
         end = true;
         while (end) {
@@ -35,8 +47,13 @@ public class Duke {
                     }
                     break;
                 case "todo":
-                    ToDo item = new ToDo(splitText[1]);
-                    taskList.add(item);
+                    try {
+                        ToDo item = new ToDo(splitText[1]);
+                        taskList.add(item);
+                    }
+                    catch (Exception e) {
+                        System.out.println("    ☹ OOPS!!!  The description of a todo cannot be empty.");
+                    }
                     break;
                 case "deadline":
                     try {
@@ -44,7 +61,7 @@ public class Duke {
                         Deadline deadline = new Deadline(furtherSplitDeadline[0], furtherSplitDeadline[1]);
                         taskList.add(deadline);
                     } catch (Exception e) {
-                        System.out.println("    Error: Use /by to add a deadline!");
+                        System.out.println("    ☹ OOPS!!!  Use /by to add a deadline!");
                     }
                     break;
                 case "event":
@@ -53,11 +70,19 @@ public class Duke {
                         Event event = new Event(furtherSplitEvent[0], furtherSplitEvent[1]);
                         taskList.add(event);
                     } catch (Exception e) {
-                        System.out.println("    Error: Use /at to add a timing for the event!");
+                        System.out.println("    ☹ OOPS!!!  Use /at to add a timing for the event!");
+                    }
+                    break;
+                case "delete":
+                    try {
+                        int index = Integer.parseInt(splitText[1]);
+                        taskList.deleteTask(index);
+                    } catch (Exception e) {
+                        System.out.println("    ☹ OOPS!!!  Did you input an invalid index?");
                     }
                     break;
                 default:
-                    System.out.println("    Error: use a valid command!");
+                    System.out.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             System.out.println("    ____________________________________________________________\n");
         }
