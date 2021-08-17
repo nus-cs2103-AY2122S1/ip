@@ -1,6 +1,16 @@
-todo task1
-deadline task2 /by today
-event task3 /at home
+todo
+todo 1st task /
+deadline
+deadline 2nd task
+deadline 2nd task /
+deadline 2nd task /by today
+event 3rd task
+event 3rd task /
+event 3rd task /at home
+done
+done -1
+done -X
+done 10000
 done 2
 list
 wrong input
