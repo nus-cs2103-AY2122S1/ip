@@ -1,8 +1,9 @@
 /**
  * The Task class that encapsulates a directive given
- * by the user to track a certain activity
+ * by the user to track a certain activity and may have
+ * start/end timings.
  */
-public abstract class Task {
+public class Task {
 
     //The description of the task
     protected String description;
@@ -14,7 +15,7 @@ public abstract class Task {
      * @param description The description of the task
      */
     public Task(String description) {
-        this.description = description;
+        this.description = firstLetter(description);
         this.isDone = false;
     }
 
@@ -35,6 +36,16 @@ public abstract class Task {
                                              + "\nI am so happy for you!\n"
                                              + Petal.indentation);
         this.isDone = true;
+    }
+
+    /**
+     * Method to capitalize the first letter of the string
+     * @param str The string
+     * @return String but with first letter capitalized
+     */
+    public String firstLetter(String str) {
+        str = str.substring(0, 1).toUpperCase() + str.substring(1);
+        return str;
     }
 
     /**

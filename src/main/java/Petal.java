@@ -35,7 +35,7 @@ public class Petal {
         System.out.println(indentation + logo + logo2 + indentation);
         while (!bye) {
             String message = scanner.nextLine();
-            formatMessage(message);
+            formatMessage(message.trim().toLowerCase());
         }
         scanner.close();
     }
@@ -46,7 +46,6 @@ public class Petal {
      */
     public void formatMessage(String message) {
         //Allows user to type in upper case and removes leading/trailing whitespaces
-        message = message.trim().toLowerCase();
         String[] msg = message.split(" ");
         try {
             switch (msg[0]) { //Checks first word in string

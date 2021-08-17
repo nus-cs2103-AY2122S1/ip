@@ -5,18 +5,12 @@
  */
 public class EmptyDescException extends PetalException {
 
-    //Exception message
-    private String message;
-    //Initialized if used as wrapper
-    private Throwable cause;
-
     /**
      * Constructor for the EmptyDescException
      * @param message The exception message
      */
     public EmptyDescException(String message) {
         super(message);
-        this.message = message;
     }
 
     /**
@@ -26,8 +20,6 @@ public class EmptyDescException extends PetalException {
      */
     public EmptyDescException(String message, Throwable cause) {
         super(message);
-        this.message = message;
-        this.cause = cause;
     }
 
 }

@@ -4,22 +4,22 @@ I am the best chat bot you'll meet! Don't be shy, say something! :P
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 Okay. I've added this task:
-[D][ ] go for a jog (by: 8pm today)
+[D][ ] Go for a jog (by: 8pm today)
 You now have 1 task(s)!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 Okay. I've added this task:
-[D][ ] use a computer (by: 7pm tomorrow)
+[D][ ] Use a computer (by: 7pm tomorrow)
 You now have 2 task(s)!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 Okay. I've added this task:
-[E][ ] using a pc (at: 8pm tonight till 7pm tomorrow)
+[E][ ] Using a pc (at: 8pm tonight till 7pm tomorrow)
 You now have 3 task(s)!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 Okay. I've added this task:
-[T][ ] listening to music
+[T][ ] Listening to music
 You now have 4 task(s)!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
@@ -68,26 +68,59 @@ Use 'delete <insert task number> to delete a task!
 Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-You have completed the task: 'go for a jog '!
+You have completed the task: 'Go for a jog '!
 I am so happy for you!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-You have completed the task: 'use a computer '!
+You have completed the task: 'Use a computer '!
 I am so happy for you!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-You have completed the task: 'using a pc '!
+You have completed the task: 'Using a pc '!
 I am so happy for you!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-You have completed the task: 'listening to music'!
+You have completed the task: 'Listening to music'!
 I am so happy for you!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-1. [D][X] go for a jog (by: 8pm today)
-2. [D][X] use a computer (by: 7pm tomorrow)
-3. [E][X] using a pc (at: 8pm tonight till 7pm tomorrow)
-4. [T][X] listening to music
+1. [D][X] Go for a jog (by: 8pm today)
+2. [D][X] Use a computer (by: 7pm tomorrow)
+3. [E][X] Using a pc (at: 8pm tonight till 7pm tomorrow)
+4. [T][X] Listening to music
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+Okay. I've added this task:
+[T][ ] Let's go to the beach!
+You now have 5 task(s)!
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+Okay. I've added this task:
+[D][ ] Let's finish watching this show (by: tonight)
+You now have 6 task(s)!
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+Okay. I've added this task:
+[E][ ] Finish watching movie (at: 8-9pm)
+You now have 7 task(s)!
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+The format used was wrong! Try again :(
+
+Use 'todo <insert activity>' to create a to-do!
+Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
+Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
+Use 'delete <insert task number> to delete a task!
+Use 'done <insert task number>' to mark task as done!
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+The format used was wrong! Try again :(
+
+Use 'todo <insert activity>' to create a to-do!
+Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
+Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
+Use 'delete <insert task number> to delete a task!
+Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 You're leaving :( I hope you return soon!

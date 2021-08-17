@@ -5,9 +5,7 @@
 public class PetalException extends Exception {
 
     //Exception message
-    private String message;
-    //Initialized if used as wrapper exception
-    private Throwable cause;
+    private final String message;
 
     /**
      * Constructor for the PetalException class
@@ -26,7 +24,6 @@ public class PetalException extends Exception {
     public PetalException(String message, Throwable cause) {
         super(message, cause);
         this.message = message;
-        this.cause = cause;
     }
 
 }
