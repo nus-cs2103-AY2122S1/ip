@@ -1,16 +1,6 @@
 import java.util.Scanner;
 
 public class Duke {
-    enum ValidCommands {
-        DEADLINE("deadline"), DELETE("delete"), DONE("done"), END("bye"), EVENT("event"), LIST("list"), TODO("todo");
-
-        String input;
-
-        ValidCommands(String input) {
-            this.input = input;
-        }
-    }
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         TaskList taskList = new TaskList();
@@ -43,7 +33,7 @@ public class Duke {
                         int index = Integer.parseInt(splitText[1]);
                         taskList.finishTask(index);
                     } catch (Exception e) {
-                        System.out.println("    Error: The value you inputted is not valid!");
+                        System.out.println("    ☹ OOPS!!! The value you inputted is not valid!");
                     }
                     break;
                 case "todo":
