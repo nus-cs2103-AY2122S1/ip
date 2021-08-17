@@ -4,17 +4,19 @@ import java.util.*;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> lst = new ArrayList<>();
+        ArrayList<Task> lst = new ArrayList<>();
 
         System.out.println(greet());
         String input = sc.nextLine();
         while(!input.equals("bye")) {
-            if (!input.equals("list")) {
-                System.out.println(addList(input, lst));
-            } else {
+            if (input.equals("list")) {
                 System.out.println(printList(lst));
+            } else if (input.substring(0,Math.min(input.length(),5)).equals("done ")) {
+                String index = input.split(" ", 2)[1];
+                System.out.println(doTask(index, lst));
+            } else {
+                System.out.println(addList(input, lst));
             }
-
             input = sc.nextLine();
         }
 
@@ -30,23 +32,47 @@ public class Duke {
         return output;
     }
 
-    public static String printList(ArrayList<String> lst) {
+    public static String doTask(String index, ArrayList<Task> lst) {
+        int idx;
+        try {
+            idx = Integer.parseInt(index);
+            lst.get(idx - 1);
+        } catch (NumberFormatException nfe) {
+            return "Please check the format of the index.";
+        } catch (IndexOutOfBoundsException e) {
+            return "The task does not exist in task list.";
+        }
+
+
+        StringBuilder s = new StringBuilder();
+        s.append("    ____________________________________________________________\n");
+        s.append("    Nice! I've marked this task as done: \n");
+
+        lst.get(idx - 1).finishTask();
+        s.append("       " + lst.get(idx - 1).toString() + "\n");
+
+        s.append("    ____________________________________________________________\n");
+
+        return s.toString();
+    }
+
+    public static String printList(ArrayList<Task> lst) {
         StringBuilder s = new StringBuilder();
         s.append("    ____________________________________________________________\n");
         for (int i = 0; i < lst.size(); i++) {
-            s.append(String.format("     %d. %s\n", i + 1, lst.get(i)));
+            s.append(String.format("     %d. %s\n", i + 1, lst.get(i).toString()));
         }
         s.append("    ____________________________________________________________\n");
 
         return s.toString();
     }
 
-    public static String addList(String input, ArrayList<String> lst) {
+    public static String addList(String input, ArrayList<Task> lst) {
         String output = "    ____________________________________________________________\n"
                 + "     added:" + input +"\n"
 
                 + "    ____________________________________________________________\n";
-        lst.add(input);
+        lst.add(new Task(input));
 
         return output;
     }
