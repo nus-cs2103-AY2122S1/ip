@@ -35,7 +35,11 @@ public class GreetingBot {
                     String[] splitWords = nextLine.split(" ");
                     int taskIndex = Integer.parseInt(splitWords[1]);
                     setDone(taskIndex);
-                }  else {
+                } else if (nextLine.startsWith("delete")) {
+                    String[] splitWords = nextLine.split(" ");
+                    int taskIndex = Integer.parseInt(splitWords[1]);
+                    deleteTask(taskIndex);
+                } else {
                     newTask(nextLine);
                 }
                     int totalTasks = myList.size();
@@ -58,6 +62,15 @@ public class GreetingBot {
         }
     }
 
+    private void deleteTask(int taskNumber) throws DukeException {
+        if (myList.size() > taskNumber) {
+            throw new DukeException("Dude I don't think you have a list THAT long!");
+        } else {
+            String infoOfTask = myList.get(taskNumber - 1).toString();
+            myList.remove(taskNumber - 1);
+            System.out.println("Noted. I've removed this task:\n" + infoOfTask);
+        }
+    }
 
 
     private void newTask(String nextLine) throws DukeException {
@@ -101,7 +114,10 @@ public class GreetingBot {
         }
     }
 
-    private void list(LinkedList<Task> myList) {
+    private void list(LinkedList<Task> myList) throws DukeException{
+        if (myList.isEmpty()) {
+            throw new DukeException("Yo! Your list looks empty to me!");
+        }
         System.out.println("Here are the tasks in your list:");
         int counter = 0;
         while(counter < myList.size()) {
