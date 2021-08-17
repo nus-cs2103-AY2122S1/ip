@@ -15,11 +15,7 @@ public class Duke {
             if (cmd.equals("list")) {
                 iterList(list);
             } else if (m.matches()) {
-                String[] tokens = cmd.split(" ");
-                int index = Integer.parseInt(tokens[1]) - 1;
-                Task task = list.get(index);
-                task.completeTask();
-                System.out.println("Nice! I've marked this task as done:\n  " + task.getStatusIcon() + " " + task);
+                completeATask(cmd, list);
             } else {
                 addToList(list, new Task(cmd));
             }
@@ -30,11 +26,11 @@ public class Duke {
     }
 
     private static void greeting() {
-        System.out.println("Aloha! I'm Sophia\nWhat can I do for you?\n");
+        System.out.println("Aloha! I'm Sophia\nWhat can I do for you?");
     }
 
     private static void iterList(ArrayList<Task> ls) {
-        System.out.println("Here are the tasks in your list:\n");
+        System.out.println("Here are the tasks in your list:");
         int i = 1;
         for (Task s : ls) {
             System.out.println(i + "." + s.getStatusIcon() + " " + s);
@@ -45,6 +41,14 @@ public class Duke {
     private static void addToList(ArrayList<Task> ls, Task text) {
         ls.add(text);
         System.out.println("added: " + text);
+    }
+
+    private static void completeATask(String input, ArrayList<Task> ls) {
+        String[] tokens = input.split(" ");
+        int index = Integer.parseInt(tokens[1]) - 1;
+        Task task = ls.get(index);
+        task.completeTask();
+        System.out.println("Nice! I've marked this task as done:\n  " + task.getStatusIcon() + " " + task);
     }
 
     private static void exit() {
