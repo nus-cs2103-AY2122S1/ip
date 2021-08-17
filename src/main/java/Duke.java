@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        Presentation pst = new Presentation();
+        CommandManager commandManager = new CommandManager();
         List<Task> taskList = new ArrayList<>();
 
         String logo = " ____        _        \n"
@@ -13,37 +13,29 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        pst.respondWith("Hello! I'm Duke. \nWhat can I do for you?");
 
+        commandManager.gettingStart();
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
-        pst.enterCommand();
-        String command = sc.next();
-        command = command.trim();
+        String command = sc.next().trim();
 
         while (!command.equals("bye")) {
             if (command.equals("list")) {
-                // If command is list, print out all current tasks
-                pst.printTaskList(taskList);
+                commandManager.respondList(taskList);
             } else if (command.startsWith("done")) {
-                // If command is done, set the specified task to completed
-                command = command.substring(4).replaceAll("\\s+", "");
-                int position = Integer.parseInt(command) - 1;
-                Task calledTask = taskList.remove(position);
-                calledTask.markAsCompleted();
-                taskList.add(position, calledTask);
-                pst.respondWith("Nice! I've marked this task as done: \n" + calledTask);
+                commandManager.respondDone(command, taskList);
+            } else if (command.startsWith("todo")) {
+                commandManager.respondTodo(command, taskList);
+            } else if (command.startsWith("deadline")) {
+                commandManager.respondDeadline(command, taskList);
+            } else if (command.startsWith("event")) {
+                commandManager.respondEvent(command, taskList);
             } else {
-                // Else, add the task to the list
-                pst.respondWith("Added: " + command);
-                taskList.add(new Task(command));
+                commandManager.defaultResponse();
             }
-            pst.enterCommand();
-            command = sc.next();
-            command = command.trim();
+            command = sc.next().trim();
         }
 
         sc.close();
-        pst.addSpace();
-        System.out.println("Program exiting... \nBye. Hope to see you again soon!\n");
+        commandManager.respondBye();
     }
 }
