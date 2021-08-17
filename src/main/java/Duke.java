@@ -1,8 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.logging.XMLFormatter;
 
 public class Duke {
-    private static ArrayList<String> toDoList = new ArrayList<>();
+
+    private static ArrayList<Task> toDoList = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -44,16 +46,32 @@ public class Duke {
             }
             reply(toDoListToPrint);
         } else {
-            addToToDoList(userInput);
+            // parse input here
+            String[] parsedUserInput = userInput.split(" ", 2);
+            if (parsedUserInput[0].equals("done")) {
+                int taskDone = Integer.parseInt(parsedUserInput[1]) - 1;
+                toDoList.get(taskDone).markAsCompleted();
+                reply("Nice! I've marked this task as done: \n" + addToStringToPrint(taskDone, ""));
+            } else {
+                addToToDoList(userInput);
+            }
         }
     }
 
     public static String addToStringToPrint(int pos, String toDoListToPrint) {
-        return toDoListToPrint + (pos + 1) + ". " + toDoList.get(pos);
+        Task currentTask = toDoList.get(pos);
+        return toDoListToPrint + (pos + 1) + ".[" + checkIfTaskCompleted(currentTask) + "] " + currentTask.getTaskName();
+    }
+
+    public static String checkIfTaskCompleted(Task currentTask) {
+        return currentTask.checkIfCompleted()
+                ? "✅"
+                : "X";
     }
 
     public static void addToToDoList(String userInput) {
-        toDoList.add(userInput);
+        Task newTask = new Task(userInput);
+        toDoList.add(newTask);
         reply("Added: " + userInput);
     }
 }
