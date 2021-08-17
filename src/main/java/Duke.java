@@ -69,7 +69,7 @@ public class Duke {
                                                 CommandParamException, EmptyDescriptionException {
         Task t;
         if (taskType.equals("todo")) {
-            if (description.equals("")) {
+            if (description.trim().equals("")) {
                 throw new EmptyDescriptionException(taskType);
             }
             t = new ToDo(description.trim());
