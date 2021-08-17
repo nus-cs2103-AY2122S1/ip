@@ -209,7 +209,7 @@ public class Duke {
     /**
      * To add things to the stored list of tasks
      *
-     * @param t the task to be added
+     * @param t the task to be added/e
      */
     public static void addTask(Task t) {
         if (tasks == null) {
@@ -223,12 +223,16 @@ public class Duke {
      * To display the entire list of tasks sequentially
      */
     public static void getList() {
-        System.out.println("     The current list has these items:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + tasks.get(i).getType() + "[" + tasks.get(i).getStatus() + "] "
-                    + tasks.get(i).getTask());
+        if (tasks != null && !tasks.isEmpty()) {
+            System.out.println("     The current list has these items:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println("     " + (i + 1) + "." + tasks.get(i).getType() + "[" + tasks.get(i).getStatus() + "] "
+                        + tasks.get(i).getTask());
+            }
+            System.out.println("     There are " + tasks.size() + " tasks now, keep up!");
+        } else {
+            System.out.println("     There are no items in your list, keesfep adding them!");
         }
-        System.out.println("     There are " +tasks.size() + " tasks now, keep up!");
     }
 
     /**
