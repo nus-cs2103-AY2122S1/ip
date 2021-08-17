@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
 public class Duke {
+
+    enum Commands {
+        BYE, LIST, DONE, TODO, EVENT, DEADLINE, DELETE;
+    }
+
     private static String name = "Duke";
     private static boolean isRunning = false;
 
@@ -22,11 +27,11 @@ public class Duke {
     }
 
     private static void startBot(String command, ToDoList tdl) {
-        if (command.equals("bye")) {
+        if (command.equals(Commands.BYE.toString().toLowerCase())) {
             exit();
-        } else if (command.equals("list")) {
+        } else if (command.equals(Commands.LIST.toString().toLowerCase())) {
             tdl.displayList();
-        } else if (command.startsWith("done")) {
+        } else if (command.startsWith(Commands.DONE.toString().toLowerCase())) {
             try {
                 String substring = command.substring(5);
                 int index = Integer.parseInt(substring);
@@ -36,7 +41,7 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 dukePrinter("Where's this item? It's not even on the list!");
             }
-        } else if (command.startsWith("todo")) {
+        } else if (command.startsWith(Commands.TODO.toString().toLowerCase())) {
             try {
                 formatChecker(command);
                 String substring = command.substring(5);
@@ -46,7 +51,7 @@ public class Duke {
             } catch (DukeException e) {
                 dukePrinter(e.getMessage());
             }
-        } else if (command.startsWith("event")) {
+        } else if (command.startsWith(Commands.EVENT.toString().toLowerCase())) {
             try {
                 formatChecker(command);
                 String substring = command.substring(6);
@@ -59,7 +64,7 @@ public class Duke {
             } catch (DukeException e) {
                 dukePrinter(e.getMessage());
             }
-        } else if (command.startsWith("deadline")) {
+        } else if (command.startsWith(Commands.DEADLINE.toString().toLowerCase())) {
             try {
                 formatChecker(command);
                 String substring = command.substring(9);
@@ -72,7 +77,7 @@ public class Duke {
             } catch (DukeException e) {
                 dukePrinter(e.getMessage());
             }
-        } else if (command.startsWith("delete")) {
+        } else if (command.startsWith(Commands.DELETE.toString().toLowerCase())) {
             try {
                 String substring = command.substring(7);
                 int index = Integer.parseInt(substring);

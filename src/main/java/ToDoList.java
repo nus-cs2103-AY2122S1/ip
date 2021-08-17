@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class ToDoList {
+
     private String name;
     private ArrayList<Task> record = new ArrayList<>();
     private Integer totalNumber = 0;
