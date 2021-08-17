@@ -1,0 +1,10 @@
+todo think wisely
+event playgames /at 2021
+deadline make bro happy /by 20324
+list
+done 1
+done 2
+done 3
+list
+lol
+bye

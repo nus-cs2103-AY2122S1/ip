@@ -28,44 +28,50 @@ public class Duke {
         while(true) {
             String userInput = myObj.nextLine();
             String output;
-            String regex = "([A-Za-z]+) ?([A-Za-z ]*)? ?(/by|/at|\\d+)? ?(.*)?";
+
+            String regex = "([A-Za-z]+)\\s?([A-Za-z ]*)?\\s?(/by|/at|\\d+)?\\s?(.*)?";
             Matcher m = Pattern.compile(regex).matcher(userInput);
             m.find();
-            System.out.println(m.group(1));
+
+            Task task;
             if (m.group(1).equals("bye")) {
                 break;
             } else if (m.group(1).equals("list")) {
                 StringBuilder result = new StringBuilder();
                 result.append("Here are the tasks in your list! \n");
                 int index = 1;
-                for (Task task : taskList) {
-                    result.append(String.valueOf(index) + ". " + task.toString() + '\n');
+                for (Task listedTask : taskList) {
+                    result.append(String.valueOf(index) + ". " + listedTask.toString() + '\n');
                     index++;
                 }
                 reply(result.toString());
             } else if (m.group(1).equals("done")) {
                 int taskIndex = Integer.parseInt(m.group(3)) - 1;
-                Task task = taskList.get(taskIndex);
+                task = taskList.get(taskIndex);
                 task.markFinished();
                 output = "Well done! I marked the following task as finished: \n"
                         + "    " + task.toString() + '\n';
                 reply(output);
             } else if (m.group(1).equals("event")){
-                taskList.add(new Event(m.group(2), m.group(4)));
+                task = new Event(m.group(2), m.group(4));
+                taskList.add(task);
                 output = "Got it! I've added this task: \n"
-                        + "  " + userInput + '\n'
+                        + "  " + task.toString() + '\n'
                         + String.format("Now you have %d tasks in the list \n", taskList.size());
                 reply(output);
+
             } else if (m.group(1).equals("deadline")){
-                taskList.add(new Deadline(m.group(2), m.group(4)));
+                task = new Deadline(m.group(2), m.group(4));
+                taskList.add(task);
                 output = "Got it! I've added this task: \n"
-                        + "  " + userInput + '\n'
+                        + "  " + task.toString() + '\n'
                         + String.format("Now you have %d tasks in the list \n", taskList.size());
                 reply(output);
             } else if (m.group(1).equals("todo")) {
-                taskList.add(new ToDo(m.group(2)));
+                task = new ToDo(m.group(2));
+                taskList.add(task);
                 output = "Got it! I've added this task: \n"
-                        + "  " + userInput + '\n'
+                        + "  " + task.toString() + '\n'
                         + String.format("Now you have %d tasks in the list \n", taskList.size());
                 reply(output);
             } else {
