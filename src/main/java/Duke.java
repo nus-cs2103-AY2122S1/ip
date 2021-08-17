@@ -1,10 +1,12 @@
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Duke {
+    private static Task[] storage = new Task[100];
+    private static int storageCount = 0;
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Task[] storage = new Task[100];
-        int storageCount = 0;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,6 +16,7 @@ public class Duke {
         System.out.println("What can I do for you today?");
         System.out.println("------------------");
         String input;
+        Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             input = sc.nextLine();
             switch (input) {
@@ -23,7 +26,7 @@ public class Duke {
                 case "list":
                     for (int i = 1; i <= storageCount; i++) {
                         Task task = storage[i - 1];
-                        System.out.printf("%d: [%s] %s\n", i, task.getStatusIcon(), task.getDescription());
+                        System.out.printf("%d: %s\n", i, task);
                     }
                     System.out.println("------------------");
                     break;
@@ -46,16 +49,69 @@ public class Duke {
                             }
                             if (storage[taskNumber - 1].markAsDone()) {
                             System.out.println("Nice! I've marked this task as done: ");
-                            System.out.println("    [X] " + storage[taskNumber - 1].getDescription());
+                            System.out.println("    " + storage[taskNumber - 1]);
                         }}
                     } else if (storageCount < 100) {
-                        storage[storageCount++] = new Task(input);
-                        System.out.println("added: " + input);
+                        addTask(splitInput);
                     } else {
                         System.out.println("Maximum storage size reached.");
                     }
                     System.out.println("------------------");
             }
         }
+
+        sc.close();
+    }
+
+    private static void addTask(String[] splitInput) {
+        String action;
+        StringBuilder descriptionBuilder = new StringBuilder();
+        String preposition = null; // eg. at, by, etc
+        StringBuilder dateBuilder = new StringBuilder();
+        if (splitInput == null || splitInput.length < 2) {
+            System.out.println("Invalid input. Please enter the action, followed by \"/at\" or \"/by\".");
+            System.out.println("For example: todo Buy a gift for mum");
+            System.out.println("For example: deadline CS2103T individual project /by 19 August");
+            System.out.println("For example: event CS2103T lecture /at 19 August");
+            return;
+        }
+        action = splitInput[0];
+        for (int i = 1; i < splitInput.length; i++) {
+            if (splitInput[i].contains("/")) {
+                preposition = splitInput[i].substring(1);
+            } else if (preposition == null) { // Left part of the message
+                descriptionBuilder.append(splitInput[i]).append(" ");
+            } else {
+                dateBuilder.append(splitInput[i]).append(" ");
+            }
+        }
+        Task newTask;
+        switch (action) {
+            case "todo":
+                newTask = new Todo(descriptionBuilder.toString().trim());
+                break;
+            case "event":
+                if (preposition == null || !preposition.equals("at")) {
+                    System.out.println("Use the preposition at.");
+                    return;
+                }
+                newTask = new Event(descriptionBuilder.toString().trim(), dateBuilder.toString().trim());
+                break;
+            case "deadline":
+                if (preposition == null || !preposition.equals("by")) {
+                    System.out.println("Use the preposition by.");
+                    return;
+                }
+                newTask = new Deadline(descriptionBuilder.toString().trim(), dateBuilder.toString().trim());
+                break;
+            default:
+                System.out.println("Only todo, event or deadline allowed.");
+                return;
+        }
+        storage[storageCount++] = newTask;
+        System.out.println("Got it. I have added this task:");
+        System.out.println("    " + newTask);
+        System.out.println("Now you have " + storageCount + " task"
+                + (storageCount == 1 ? " in the list" : "s in the list"));
     }
 }

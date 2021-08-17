@@ -1,16 +1,22 @@
 import java.util.Objects;
 
 public class Task {
-    private final String description;
+    private final String description, taskType;
     private boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, String taskType) {
         this.description = description;
+        this.taskType = taskType;
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+    /**
+     * Gets the status string <code>[&lt;taskType&gt;][&lt;isDone&gt;]</code>
+     *
+     * @return the associated string
+     */
+    public String getStatus() {
+        return (isDone ? String.format("[%s][X]", taskType) : String.format("[%s][ ]", taskType)); // mark done task with X
     }
 
     public boolean isDone() {
@@ -37,5 +43,10 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(description, isDone);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s", this.getStatus(), this.getDescription());
     }
 }
