@@ -2,31 +2,31 @@ import java.util.*;
 
 public class Duke {
 
-    // This class represents the tasks added by the user
-    public class Task {
-        protected String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        public String getStatusIcon() {
-            return (isDone ? "X" : " "); // mark done task with X
-        }
-
-        public void markAsDone() {
-            this.isDone = true;
-        }
-
-        public String toString() {
-            return this.description;
-        }
-    }
-
-
     public static void main(String[] args) {
+
+        // This class represents the tasks added by the user
+        class Task {
+            protected String description;
+            protected boolean isDone;
+
+            public Task(String description) {
+                this.description = description;
+                this.isDone = false;
+            }
+
+            public String getStatusIcon() {
+                return (isDone ? "X" : " "); // mark done task with X
+            }
+
+            public void markAsDone() {
+                this.isDone = true;
+            }
+
+            public String toString() {
+                return this.description;
+            }
+        }
+
         String linebreak = "~~~~~~~~~~";
         String command; // this is the container for the command received from the user
         Task[] todoList = new Task[100]; // this array stores previous commands
@@ -55,7 +55,7 @@ public class Duke {
             } else if (command.equals("list")) {
                 for (int counter = 0; counter < 100; counter++) {
                     if (todoList[counter] != null) {
-                        System.out.println((counter + 1) + ". " + todoList[counter]);
+                        System.out.println((counter + 1) + ". " + todoList[counter].toString());
                     } else {
                         System.out.println(linebreak);
                         break;
@@ -65,7 +65,7 @@ public class Duke {
             } else {
                 System.out.println("added: " + command);
                 System.out.println(linebreak);
-                todoList[pointer] = command;
+                todoList[pointer] = new Task(command);
                 pointer++;
             }
         }
