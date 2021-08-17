@@ -4,6 +4,7 @@ public class ChatBot {
 
     static Scanner userInput = new Scanner(System.in);
     private String[] list = new String[100];
+    private int lastIndex = 0;
 
 
     private String welcomeMessage() {
@@ -18,6 +19,17 @@ public class ChatBot {
         return logo + greeting;
     }
 
+    private boolean listEmpty() {
+        boolean empty = true;
+        for (String str : list) {
+            if (str != null) {
+                empty = false;
+                break;
+            }
+        }
+        return empty;
+    }
+
     private void startInput() {
         String input = userInput.nextLine();
 
@@ -25,7 +37,21 @@ public class ChatBot {
             System.out.println("See ya again later!");
             return;
         }
-        System.out.println(input);
+        if (input.equals("list")) {
+            if (this.listEmpty()) {
+                System.out.println("You haven't added anything yet!");
+            } else {
+                for (int i = 0; i < list.length; i++) {
+                    if (list[i] != null) {
+                        System.out.println(i + 1 + ". " + list[i]);
+                    }
+                }
+            }
+        } else {
+            list[lastIndex] = input;
+            lastIndex++;
+            System.out.println("added: " + input);
+        }
         startInput();
     }
 
