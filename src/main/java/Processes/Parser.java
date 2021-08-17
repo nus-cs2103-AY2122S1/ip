@@ -20,6 +20,9 @@ public class Parser implements IParser {
             case "bye":
                 this.processor.processCommand(Command.BYE, "");
                 return false;
+            case "list":
+                this.processor.processCommand(Command.LIST, "");
+                return true;
             default:
                 this.processor.processCommand(Command.DEFAULT, line);
                 return true;

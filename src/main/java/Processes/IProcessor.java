@@ -4,6 +4,7 @@ import Enum.Command;
 
 public interface IProcessor {
     void processCommand(Command command, String line);
-    void processDefault(String line);
     void processBye();
+    void processList();
+    void processDefault(String line);
 }

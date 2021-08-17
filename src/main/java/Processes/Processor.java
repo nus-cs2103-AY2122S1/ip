@@ -5,11 +5,16 @@ import Util.Output;
 
 public class Processor implements IProcessor {
 
+    private final TaskList list = new TaskList();
+
     @Override
     public void processCommand(Command command, String line) {
         switch(command) {
             case BYE:
                 processBye();
+                break;
+            case LIST:
+                processList();
                 break;
             default:
                 processDefault(line);
@@ -18,7 +23,13 @@ public class Processor implements IProcessor {
 
     @Override
     public void processDefault(String line) {
-        Output.print(line);
+        this.list.addTask(new Task(line));
+        Output.print("Added: " + line);
+    }
+
+    @Override
+    public void processList() {
+        Output.print(this.list.toString());
     }
 
     @Override
