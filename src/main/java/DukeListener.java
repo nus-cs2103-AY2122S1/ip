@@ -62,7 +62,7 @@ public class DukeListener {
                 taskList.printSize();
 
             } else {
-                System.out.println(Display.OUTPUT_DISPLAY + "Nothing happened えええええ～だめだ!!");
+                System.out.println(Display.OUTPUT_DISPLAY + "Nothing happened eeeeeee~dameda!!");
             }
 
             System.out.println(Display.LINE);
@@ -70,7 +70,7 @@ public class DukeListener {
 
         // Quit the program after listening stops
         System.out.println(
-                Display.OUTPUT_DISPLAY + "君の運命のヒトは僕じゃない\n"
+                Display.OUTPUT_DISPLAY + "kimi no unmei no hito wa boku jyanai\n"
                 + Display.LINE
         );
     }

@@ -4,28 +4,7 @@ public class Display {
     public static final String OUTPUT_SPACES =  "      ";
 
     public static void intro() {
-        String welcomeText = "                                                                                                            \n" +
-                "I8,        8        ,8I  88                                                 88                              \n" +
-                "`8b       d8b       d8'  88                                          ,d     88                              \n" +
-                " \"8,     ,8\"8,     ,8\"   88                                          88     88                              \n" +
-                "  Y8     8P Y8     8P    88,dPPYba,    ,adPPYba,  8b,dPPYba,       MM88MMM  88,dPPYba,    ,adPPYba,         \n" +
-                "  `8b   d8' `8b   d8'    88P'    \"8a  a8P_____88  88P'   `\"8a        88     88P'    \"8a  a8P_____88         \n" +
-                "   `8a a8'   `8a a8'     88       88  8PP\"\"\"\"\"\"\"  88       88        88     88       88  8PP\"\"\"\"\"\"\"         \n" +
-                "    `8a8'     `8a8'      88       88  \"8b,   ,aa  88       88        88,    88       88  \"8b,   ,aa         \n" +
-                "     `8'       `8'       88       88   `\"Ybbd8\"'  88       88        \"Y888  88       88   `\"Ybbd8\"'         \n" +
-                "                                                                                                            \n" +
-                "                                                                                                            \n" +
-                "                                                                                                            \n" +
-                "88888888ba,                 88                        88                                                    \n" +
-                "88      `\"8b                88                        \"\"                                                    \n" +
-                "88        `8b               88                                                                              \n" +
-                "88         88  88       88  88   ,d8   ,adPPYba,      88  ,adPPYba,      ,adPPYba,  88       88  ,adPPYba,  \n" +
-                "88         88  88       88  88 ,a8\"   a8P_____88      88  I8[    \"\"      I8[    \"\"  88       88  I8[    \"\"  \n" +
-                "88         8P  88       88  8888[     8PP\"\"\"\"\"\"\"      88   `\"Y8ba,        `\"Y8ba,   88       88   `\"Y8ba,   \n" +
-                "88      .a8P   \"8a,   ,a88  88`\"Yba,  \"8b,   ,aa      88  aa    ]8I      aa    ]8I  \"8a,   ,a88  aa    ]8I  \n" +
-                "88888888Y\"'     `\"YbbdP'Y8  88   `Y8a  `\"Ybbd8\"'      88  `\"YbbdP\"'      `\"YbbdP\"'   `\"YbbdP'Y8  `\"YbbdP\"'  \n" +
-                "                                                                                                            \n" +
-                "                                                                                                            ";
+        String welcomeText = "When the Duke is sus";
 
         String mascot ="\n" +
                 "       `:ossys/`              \n" +

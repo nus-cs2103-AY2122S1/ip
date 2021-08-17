@@ -10,9 +10,10 @@ public class TaskList {
     }
 
     public void printSize() {
-        System.out.println(tasks.size() == 1
-                ? "There is 1 task in your list"
-                : "There are " + tasks.size() + " tasks in your list");
+        System.out.println( Display.OUTPUT_DISPLAY +
+                (tasks.size() == 1
+                    ? "There is 1 task in your list"
+                    : "There are " + tasks.size() + " tasks in your list"));
 
     }
 
@@ -25,8 +26,8 @@ public class TaskList {
     public void toggleDone(int index) {
         boolean result = tasks.get(index - 1).toggleDone();
         System.out.println(result
-                ? Display.OUTPUT_DISPLAY + "すごい! Duke-さん marked this task as done! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧"
-                : Display.OUTPUT_DISPLAY + "Duke-さん marked this task as not done!");
+                ? Display.OUTPUT_DISPLAY + "sugoi! Duke-san marked this task as done!"
+                : Display.OUTPUT_DISPLAY + "Duke-san marked this task as not done!");
         System.out.println(Display.OUTPUT_SPACES + tasks.get(index - 1));
     }
 
