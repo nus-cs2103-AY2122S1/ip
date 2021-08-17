@@ -15,7 +15,7 @@ public class Duke {
      */
     private static void chat() {
         String input;
-        ArrayList<String> savedInputs = new ArrayList<>(100);
+        ArrayList<Task> savedInputs = new ArrayList<>(100);
 
         while (true) {
             input = scanner.nextLine();
@@ -26,13 +26,21 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 StringBuilder outputList = new StringBuilder();
+                outputList.append("Here are the tasks in your list:\n");
                 for (int i = 1; i <= savedInputs.size(); i++) {
-                    outputList.append(i + ". " + savedInputs.get(i-1) + "\n");
+                    outputList.append(i + "." + savedInputs.get(i-1).toString() + "\n");
                 }
                 System.out.println(outputList.toString());
+            } else if (input.startsWith("done")) {
+                int pos = Integer.valueOf(input.split(" ")[1]);
+                if (pos > 0 && pos <= savedInputs.size()) {
+                    savedInputs.get(pos - 1).markAsDone();
+                } else {
+                    System.out.println("Invalid task number to mark as done");
+                }
             } else {
                 System.out.println(input);
-                savedInputs.add(input);
+                savedInputs.add(new Task(input));
             }
         }
     }
