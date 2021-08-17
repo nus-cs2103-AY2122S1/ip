@@ -18,13 +18,13 @@ public class Duke {
     private static void addTask(String description) {
         final Task taskToAdd = new Task(description);
         tasks[numTasks++] = taskToAdd;
-        System.out.println(String.format("added: %s", taskToAdd.getDescription()));
+        System.out.printf("added: %s%n", taskToAdd.getDescription());
     }
 
     private static void listTasks() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; tasks[i] != null; i++) {
-            System.out.println(String.format("%d.%s", i + 1, tasks[i]));
+            System.out.printf("%d.%s%n", i + 1, tasks[i]);
         }
     }
 
