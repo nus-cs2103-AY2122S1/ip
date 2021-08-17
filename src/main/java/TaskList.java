@@ -12,6 +12,10 @@ class TaskList {
         list.add(t);
     }
 
+    public Task delete(int taskNo) {
+        return list.remove(--taskNo);
+    }
+
     public int size() {
         return list.size();
     }

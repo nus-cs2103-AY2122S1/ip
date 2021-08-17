@@ -44,6 +44,25 @@ class DukeBot {
                 : "Task already done.";
     }
 
+    private String handleDelete(String[] inputs) throws InvalidCommandException {
+        if (inputs.length < 2) {
+            throw new InvalidCommandException("Which task would you like to delete?");
+        }
+        int taskNo;
+        try {
+            taskNo = Integer.parseInt(inputs[1]);
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException("I don't see a task number! >.<");
+        }
+        if (taskNo > taskList.size() || taskNo <= 0) {
+            String msg = taskList.size() == 0
+                    ? "You don't have any tasks!"
+                    : "Invalid take number! Must be between 1 and " + taskList.size();
+            throw new InvalidCommandException(msg);
+        }
+        return "Noted. I've deleted this task:\n  " + taskList.delete(taskNo);
+    }
+
     private String handleToDo(String[] inputs) throws InvalidCommandException {
         if (inputs.length < 2) {
             throw new InvalidCommandException("The description of a todo cannot be empty.");
@@ -87,6 +106,8 @@ class DukeBot {
             return handleList(inputs);
         case "done":
             return handleDone(inputs);
+        case "delete":
+            return handleDelete(inputs);
         case "todo":
             return handleToDo(inputs);
         case "deadline":
