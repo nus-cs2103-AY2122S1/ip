@@ -21,18 +21,18 @@ public class Duke {
         String[] segment;
 
         while(!input.equals("bye")) {
-            segment = input.split(" ");
+            segment = input.split(" ", 2);
 
             if(input.equals("list")) {
                 list.list();
             } else if (segment[0].equals("done") && segment.length == 2) {
                 list.done(Integer.parseInt(segment[1]));
             } else if (segment[0].equals("todo")) {
-                list.addTodo(input.substring(5));
+                    list.addTodo(input.split("todo", 2)[1]);
             } else if (segment[0].equals("deadline")) {
-                list.addDeadlines(input.substring(9));
+                list.addDeadlines(input.split("deadline", 2)[1]);
             } else if (segment[0].equals("event")) {
-                list.addEvents(input.substring(6));
+                list.addEvents(input.split("event", 2)[1]);
             } else {
                 list.add(input);
             }
