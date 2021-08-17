@@ -15,7 +15,13 @@ public class Printer {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < tasks.length - 1; i++) {
             if (tasks[i] != null)
-                result.append("\t ").append(i + 1).append(".").append(tasks[i].description).append("\n");
+                result.append("\t ")
+                        .append(i + 1)
+                        .append(".[")
+                        .append(tasks[i].getStatusIcon())
+                        .append("] ")
+                        .append(tasks[i].description)
+                        .append("\n");
         }
         return result.toString();
     }
