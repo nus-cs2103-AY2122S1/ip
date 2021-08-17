@@ -45,10 +45,24 @@ public class Duke {
                 listData.get(index).markAsDone();
 
                 sendMessage("Nice! I've marked this task as done:\n  " + listData.get(index));
+            } else if (userInput.indexOf("todo ") == 0) {
+                Todo newTodo = new Todo(userInput.substring(5));
+                listData.add(newTodo);
+
+                sendMessage("Got it. I've added this task:\n  " + newTodo + "\nNow you have " + listData.size() + " tasks in the list.");
+            } else if (userInput.indexOf("deadline ") == 0) {
+                Deadline newDeadline = new Deadline(userInput.substring(9, userInput.indexOf(" /by ")), userInput.substring(userInput.indexOf("/by ") + 4));
+                listData.add(newDeadline);
+
+                sendMessage("Got it. I've added this task:\n  " + newDeadline + "\nNow you have " + listData.size() + " tasks in the list.");
+            } else if (userInput.indexOf("event ") == 0) {
+                Event newEvent = new Event(userInput.substring(6, userInput.indexOf(" /at")), userInput.substring(userInput.indexOf("/at ") + 4));
+                listData.add(newEvent);
+
+                sendMessage("Got it. I've added this task:\n  " + newEvent + "\nNow you have " + listData.size() + " tasks in the list.");
             } else {
-                // ADD command
-                sendMessage("added: " + userInput);
-                listData.add(new Task(userInput));
+                // ECHO command
+                sendMessage(userInput);
             }
         }
     }
