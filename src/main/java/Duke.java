@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -6,7 +7,8 @@ public class Duke {
      */
     private static String exitString = "bye";
     private static String exitMessage = "Bye. Hope to see you again soon!";
-    private static String introMessage = "Hello! I'm Duke\n    What can I do for you?";
+    private static String introMessage = "Hello! I'm Duke\nWhat can I do for you?";
+    private static ArrayList<String> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -41,9 +43,27 @@ public class Duke {
      */
     private static void react(String userInput) {
         switch (userInput) {
+            case ("list"):
+                printTaskList();
+                break;
             default:
-                System.out.println(formatMessage(userInput));
+                tasks.add(userInput);
+                System.out.println(formatMessage("added: " + userInput));
         }
+    }
+
+    /**
+     * Method to print the list of items in the tasks array list.
+     */
+    private static void printTaskList() {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            output.append(i+1).append(". ").append(tasks.get(i));
+            if (i != tasks.size() - 1) {
+                output.append("\n");
+            }
+        }
+        System.out.println(formatMessage(output.toString()));
     }
 
     /**
@@ -51,8 +71,8 @@ public class Duke {
      * @param message string to be printed.
      */
     private static String formatMessage(String message) {
-        return  "    _____________________________________\n" +
-                "    " + message +                       "\n" +
-                "    _____________________________________\n";
+        return  "_____________________________________\n" +
+                message +                            "\n" +
+                "_____________________________________\n";
     }
 }
