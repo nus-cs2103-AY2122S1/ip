@@ -7,18 +7,28 @@ public class Duke {
 
         Scanner newScan = new Scanner(System.in);
         String userInput = newScan.nextLine();
-        ArrayList<String> contents = new ArrayList<>();
+        ArrayList<Task> contents = new ArrayList<>();
 
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 int counter = 1;
-                for (String x:contents) {
-                    System.out.println(counter + ". " + contents.get(counter - 1) + "\n");
+                System.out.println("    ***\n" + "    These are your tasks in the list:");
+                for (Task x: contents) {
+                    System.out.println("      " + counter + ". " + x.getStatusIcon() + " " +
+                            x.getDescription());
                     counter++;
                 }
+                System.out.println("    ***\n");
+            } else if (userInput.contains("done")) {
+                String index = userInput.substring(5, userInput.length());
+                int x = Integer.parseInt(index);
+                Task temp = contents.get(x - 1);
+                temp.markedDone();
+                System.out.println("    ***\n" + "    You have successfully done this task:\n" +
+                        "      " + temp.getStatusIcon() + " " + temp.getDescription() + "\n    ***\n");
             } else {
-                System.out.println("    ***\n" + "    Added: " + userInput + "\n    ***");
-                contents.add(userInput);
+                Task newTask = new Task(userInput);
+                contents.add(newTask);
             }
             newScan = new Scanner(System.in);
             userInput = newScan.nextLine();
