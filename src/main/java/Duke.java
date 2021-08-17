@@ -28,6 +28,8 @@ public class Duke {
                     list.list();
                 } else if (segment[0].equals("done") && segment.length == 2) {
                     list.done(Integer.parseInt(segment[1]));
+                } else if (segment[0].equals("delete") && segment.length == 2) {
+                    list.delete(Integer.parseInt(segment[1]));
                 } else if (segment[0].equals("todo")) {
                     list.addTodo(input.split("todo", 2)[1]);
                 } else if (segment[0].equals("deadline")) {
