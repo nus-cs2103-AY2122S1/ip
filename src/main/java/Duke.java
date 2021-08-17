@@ -43,51 +43,130 @@ public class Duke {
         System.out.println(SPACE + "What I do for you?");
         System.out.println(SPACE + BOT_LINE);
 
-        /**
-         * Get user instruction and perform them
-         */
-        String[] input = getInput(sc).split("\\s+");
+        String rawInput = getInput(sc);
         String output = "";
-        String command = input[0];
-        while (!command.equals("bye")) {
+        label:
+        while (true) {
 
-            if (command.equals("list")) {
-                // Displays the tasks in the list
-                output = list.toString();
+            try {
+                String[] input = parseInput(rawInput);
+                String command = input[0];
 
-            } else if (command.equals("done")) {
-                // Marks a task as done.
-                output = list.markDone(Integer.parseInt(input[1]));
+                switch (command) {
+                    case "bye":
+                        // Quit program
+                        break label;
+                    case "list":
+                        // Displays the tasks in the list
+                        output = list.toString();
 
-            } else if (command.equals("todo")) {
-                // Add a todo task in the list.
-                Todo todo = new Todo(combineStringArray(input, 1, input.length));
-                output = list.addItem(todo);
+                        break;
+                    case "done":
+                        // Marks a task as done.
+                        output = list.markDone(Integer.parseInt(input[1]));
 
-            } else if (command.equals("deadline")) {
-                // Add a deadline task in the list.
-                String arguments = combineStringArray(input, 1, input.length);
-                String[] divided = arguments.split(" \\/by ");
-                Deadline dl = new Deadline(divided[0], divided[1]);
-                output = list.addItem(dl);
+                        break;
+                    case "todo":
+                        // Add a todo task in the list.
+                        output = list.addItem(new Todo(input[1]));
 
-            } else if (command.equals("event")) {
-                // Add an event task in the list.
-                String arguments = combineStringArray(input, 1, input.length);
-                String[] divided = arguments.split(" \\/at ");
-                Event event = new Event(divided[0], divided[1]);
-                output = list.addItem(event);
+                        break;
+                    case "deadline":
+                        // Add a deadline task in the list.
+                        output = list.addItem(new Deadline(input[1], input[2]));
+
+                        break;
+                    case "event":
+                        // Add an event task in the list.
+                        output = list.addItem(new Event(input[1], input[2]));
+                        break;
+                }
+                showMessage(output);
+            } catch (DukeException e) {
+                showMessage(e.getMessage());
             }
 
-            showMessage(output);
-            input = getInput(sc).split("\\s+");
-            command = input[0];
+            rawInput = getInput(sc);
         }
 
         /**
          * Good bye message from Borat
          */
         showMessage("Bye. Have a good time!");
+    }
+
+    /**
+     * Parse the user input string into a meaningful String array.
+     * @param rawInput The user input
+     * @return Parsed input ready to be processed
+     * @throws DukeException An invalid input will produce this exception
+     */
+    private static String[] parseInput(String rawInput) throws DukeException {
+        String[] input = rawInput.split("\\s+");
+        if (input.length < 1) {
+            throw new DukeException("What you mean?");
+        }
+        switch (input[0]) {
+            case "list":
+                if (input.length != 1) {
+                    throw new DukeException("Do you mean `list`?");
+                }
+                return new String[] {input[0]};
+
+            case "done":
+                if (input.length != 2) {
+                    throw new DukeException("'done' command needs exactly 1 argument. (example: 'done 5')");
+                }
+                try {
+                    // Check if the argument is a number
+                    Integer.parseInt(input[1]);
+                } catch (Exception e) {
+                    throw new DukeException("'done' command needs an integer as a number. (example: 'done 5')");
+                }
+                return new String[] {input[0], input[1]};
+
+            case "todo":
+                if (input.length < 2) {
+                    throw new DukeException("'todo' command needs a description. (example: 'todo watch Borat')");
+                }
+                String description = combineStringArray(input, 1, input.length);
+                return new String[] {input[0], description};
+
+            case "deadline":
+                if (input.length < 2) {
+                    throw new DukeException("'deadline' command needs a description. (example: 'deadline watch Borat /by tonight')");
+                }
+                String arguments = combineStringArray(input, 1, input.length);
+                String[] divided = arguments.split(" /by ");
+                if (divided.length < 2) {
+                    throw new DukeException("'deadline' command needs a deadline. use '/by'. (example: 'deadline watch Borat /by tonight')");
+                } else if (divided.length > 2) {
+                    throw new DukeException("'deadline' command has too many deadline. use 1 '/by'. (example: 'deadline watch Borat /by tonight')");
+                }
+                return new String[] {input[0], divided[0], divided[1]};
+
+            case "event":
+                if (input.length < 2) {
+                    throw new DukeException("'event' command needs a description. (example: 'event Borat concert /at Aug 6th 2-4pm')");
+                }
+                String args = combineStringArray(input, 1, input.length);
+                String[] div = args.split(" /at ");
+                if (div.length < 2) {
+                    throw new DukeException("'event' command needs a deadline. use '/by'. (example: 'event Borat concert /at Aug 6th 2-4pm')");
+                } else if (div.length > 2) {
+                    throw new DukeException("'event' command has too many deadline. use 1 '/by'. (example: 'event Borat concert /at Aug 6th 2-4pm')");
+                }
+                return new String[] {input[0], div[0], div[1]};
+
+            case "bye":
+                if (input.length != 1) {
+                    throw new DukeException("Do you mean `bye`?");
+                }
+                return new String[] {input[0]};
+
+            default:
+                throw new DukeException("What you mean?");
+        }
     }
 
     /**
@@ -107,7 +186,7 @@ public class Duke {
         message = SPACE + message.replace("\n", "\n" + SPACE);
         System.out.println(SPACE + USER_LINE);
         System.out.println(message);
-        System.out.println("");
+        System.out.println(" ");
         System.out.println(SPACE + BOT_LINE);
     }
 
@@ -119,17 +198,17 @@ public class Duke {
      * @return The sentence.
      */
     private static String combineStringArray(String[] arr, int start, int exclusiveEnd) {
-        String tmp = "";
+        StringBuilder tmp = new StringBuilder();
         if (exclusiveEnd > arr.length) {
             exclusiveEnd = arr.length;
         }
         for (int i = start; i < exclusiveEnd; ++i) {
             if (i + 1 >= exclusiveEnd) {
-                tmp += arr[i];
+                tmp.append(arr[i]);
             } else {
-                tmp += arr[i] + " ";
+                tmp.append(arr[i]).append(" ");
             }
         }
-        return tmp;
+        return tmp.toString();
     }
 }

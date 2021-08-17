@@ -25,7 +25,10 @@ public class Items {
      * @param task A Task to be added to the list
      * @return A status message to be displayed
      */
-    public String addItem(Task task) {
+    public String addItem(Task task) throws DukeException {
+        if (len >= 100) {
+            throw new DukeException("Your task list is full!");
+        }
         list[len++] = task;
         String res = "Got it. I've added this task: \n" + "  " + task.toString() + "\n";
         res += ("Now you have " + len + " tasks in the list");
@@ -37,8 +40,16 @@ public class Items {
      * @param index The index to be marked as done
      * @return  A status message to be displayed
      */
-    public String markDone(int index) {
-        Task task = list[index-1];
+    public String markDone(int index) throws DukeException {
+        index = index - 1;
+        if (index < 0 || index >= len) {
+            if (len == 0) {
+                throw new DukeException("No task found, please add task");
+            } else {
+                throw new DukeException("No task found, input a number from [1..." + len + "]");
+            }
+        }
+        Task task = list[index];
         task.markDone();
         return "Great success! Task Complete: \n" + "  " + task.toString();
 
