@@ -21,15 +21,14 @@ public class Duke {
         for (int i = 0; i < tasksList.length; i++) {
             Task t = tasksList[i];
             if (t == null) break;
-            System.out.println(i + 1 +  "."+ t.showPrefix() + t.showStatus() + t.name);
+            t.showThisTask(i + 1);
             
         }
     }
 
     public static void completeTask(Task task) {
-        task.markAsDone();
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(task.showPrefix() + "[X] " + task.name);
+        task.markAsDone();
     }
 
     public static boolean checkTaskExists(int num) {
@@ -101,7 +100,7 @@ public class Duke {
             
         }
         
-        System.out.println("Bye! Neko wishes to see you again soon!");
+        System.out.println("Bye! Neko wishes to see you again soon!\n");
         
     }
 }

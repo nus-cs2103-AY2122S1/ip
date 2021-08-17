@@ -17,4 +17,15 @@ public class Deadline extends Task{
     public void addThisTask() {
         System.out.println("Got it. I've added this task: \n" + this.prefix + super.showStatus() + this.name + "(by:" + this.date + ")");
     }
+
+    @Override
+    public void showThisTask(int num) {
+        System.out.println(num +  "."+ this.prefix + showStatus() + this.name + "(by:" + this.date + ")");
+    }
+
+    @Override
+    public void markAsDone() {
+        this.hasDone = true;
+        System.out.println(this.prefix + "[X] " + this.name + "(by:" + this.date + ")");
+    }
 }

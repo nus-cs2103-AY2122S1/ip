@@ -16,4 +16,11 @@ public class Todo extends Task{
         System.out.println("Got it. I've added this task: \n" + this.prefix + super.showStatus() + this.name);
     }
 
+    @Override
+    public void showThisTask(int num) {
+        System.out.println(num +  "."+ this.prefix + showStatus() + this.name);
+    }
+
+    
+
 }

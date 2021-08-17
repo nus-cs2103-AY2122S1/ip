@@ -11,6 +11,7 @@ public class Task {
 
     public void markAsDone() {
         this.hasDone = true;
+        System.out.println(this.prefix + "[X] " + this.name);
     }
 
     public String showStatus() {
@@ -27,5 +28,9 @@ public class Task {
 
     public void addThisTask() {
         System.out.println("Got it. I've added this task: \n" + this.prefix + showStatus() + this.name);
+    }
+
+    public void showThisTask(int num) {
+        System.out.println(num +  "."+ this.prefix + showStatus() + this.name);
     }
 }
