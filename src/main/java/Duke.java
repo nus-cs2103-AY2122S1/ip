@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static Task[] taskList = new Task[100];
+    private static ArrayList<Task> taskList = new ArrayList<>();
     private static int counter = 0;
 
     public static void main(String[] args) {
@@ -27,6 +28,8 @@ public class Duke {
                 showList();
             } else if (command.toLowerCase().contains("done")) {
                 finishTask(command);
+            } else if (command.toLowerCase().contains("delete")) {
+                 deleteTask(command);
             } else if (command.toLowerCase().contains("todo")) {
                 addTodo(command);
             } else if (command.toLowerCase().contains("deadline")) {
@@ -41,6 +44,7 @@ public class Duke {
                 errorMessage += "\t \t deadline {description} /by {time} - To add a Deadline task\n";
                 errorMessage += "\t \t event {description} /at {time} - To add an Event task\n";
                 errorMessage += "\t \t done {number} - To mark the indicated task as done\n";
+                errorMessage += "\t \t delete {number} - To delete the indicated task\n";
                 errorMessage += "\t \t bye (To exit programme)\n";
                 throw new DukeException(errorMessage);
                 //otherCommand(command);
@@ -51,28 +55,25 @@ public class Duke {
         }
     }
 
-    // Function for when user inputs "bye"
     private static void sayBye() {
         // User command is bye, print bye message and programme stops
         System.out.println("\t Bye. Hope to see you again soon");
     }
 
-    // Function for when user inputs "list"
     private static void showList() {
         // User command is list, print current list of commands and continues asking for commands
         if (counter == 0) {
             System.out.println("Nothing has been added to the list");
         }
         for (int i = 0; i < counter; i++) {
-            System.out.println((i + 1) + ". " + taskList[i]);
+            System.out.println((i + 1) + ". " + taskList.get(i));
         }
         getCommand();
     }
 
-    // Function for when user inputs "done"
     private static void finishTask(String command) throws DukeException {
-        if (command.length() < 5) {
-            String errorMessage = "\t Invalid command, please key in number of task to be done as follows:\n";
+        if (command.length() < 5 || isValidString(command.substring(5))) {
+            String errorMessage = "\t Invalid command, please key in number of the task to be done as follows:\n";
             errorMessage += "\t \t done {number}";
             throw new DukeException(errorMessage);
         }
@@ -83,9 +84,29 @@ public class Duke {
             throw new DukeException(errorMessage);
         }
 
-        taskList[taskDone].markAsDone();
+        taskList.get(taskDone).markAsDone();
         System.out.println("\t Good job! This task has been completed:");
-        System.out.println("\t \t" + taskList[taskDone].toString());
+        System.out.println("\t \t" + taskList.get(taskDone).toString());
+        getCommand();
+    }
+
+    private static void deleteTask(String command) throws DukeException {
+        if (command.length() < 7 || isValidString(command.substring(7))) {
+            String errorMessage = "\t Invalid command, please key in number of the task to be deleted as follows:\n";
+            errorMessage += "\t \t delete {number}";
+            throw new DukeException(errorMessage);
+        }
+
+        int deleteTask = Integer.parseInt(command.substring(7)) - 1;
+        if (deleteTask < 0 || deleteTask > counter - 1) {
+            String errorMessage = "\t List number out of range, please enter a valid number\n";
+            throw new DukeException(errorMessage);
+        }
+
+        System.out.println("\t Noted. The task has been removed!");
+        System.out.println("\t \t" + taskList.get(deleteTask).toString());
+        taskList.remove(deleteTask);
+        counter--;
         getCommand();
     }
 
@@ -106,7 +127,7 @@ public class Duke {
         ToDo t = new ToDo(description);
 
         System.out.println("\t I have added to the list: \n\t \t" + t.toString());
-        taskList[counter] = t;
+        taskList.add(t);
         counter++;
         System.out.println("\t There are " + counter + " items in the list");
         getCommand();
@@ -137,7 +158,7 @@ public class Duke {
         Deadline t = new Deadline(description, time);
 
         System.out.println("\t I have added to the list: \n\t \t" + t.toString());
-        taskList[counter] = t;
+        taskList.add(t);
         counter++;
         System.out.println("\t There are " + counter + " items in the list");
         getCommand();
@@ -168,16 +189,9 @@ public class Duke {
         Event t = new Event(description, time);
 
         System.out.println("\t I have added to the list: \n\t \t" + t.toString());
-        taskList[counter] = t;
+        taskList.add(t);
         counter++;
         System.out.println("\t There are " + counter + " items in the list");
-        getCommand();
-    }
-
-    // Function for when user command is something else
-    private static void otherCommand(String command) {
-        // User command is something else, add command to command list and continue asking for commands
-        System.out.println(command);
         getCommand();
     }
 
