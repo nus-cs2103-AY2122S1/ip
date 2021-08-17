@@ -54,36 +54,40 @@ public class Duke extends Chatbot {
     /**
      * Handles the logic for managing a user's tasks.
      */
-    public void taskMode() {
+    public void taskMode() throws DukeException {
         String message = Chatbot.acceptUserInput();
         if (message.equals("bye")) {
             Chatbot.printMessage(FAREWELL_MESSAGE);
             return;
         }
-        if (message.equals("list")) {
-            // List the tasks
-            String listedTasks = this.taskList.toString();
-            Chatbot.printMessage(listedTasks);
-        } else if (message.startsWith("done ")) {
-            // Mark a task as done
-            int indexNumber = Integer.parseInt(message.substring(5)) - 1;
-            String completedTask = this.taskList.completeTask(indexNumber);
-            Chatbot.printMessage("Nice! I've marked this task as done:\n\t" + completedTask);
-        } else {
-            // Add a task to the list
-            Task task;
-            if (message.startsWith("todo ")) {
-                task = this.taskList.addTodo(message.substring(5));
-            } else if (message.startsWith("event ")) {
-                task = this.taskList.addEvent(message.substring(6));
-            } else if (message.startsWith("deadline ")) {
-                task = this.taskList.addDeadline(message.substring(9));
+        try {
+            if (message.equals("list")) {
+                // List the tasks
+                String listedTasks = this.taskList.toString();
+                Chatbot.printMessage(listedTasks);
+            } else if (message.startsWith("done ")) {
+                // Mark a task as done
+                int indexNumber = Integer.parseInt(message.substring(5)) - 1;
+                String completedTask = this.taskList.completeTask(indexNumber);
+                Chatbot.printMessage("Nice! I've marked this task as done:\n\t" + completedTask);
             } else {
-                Chatbot.printMessage("Invalid command.");
-                return;
+                // Add a task to the list
+                Task task;
+                if (message.startsWith("todo ")) {
+                    task = this.taskList.addTodo(message.substring(5));
+                } else if (message.startsWith("event ")) {
+                    task = this.taskList.addEvent(message.substring(6));
+                } else if (message.startsWith("deadline ")) {
+                    task = this.taskList.addDeadline(message.substring(9));
+                } else {
+                    throw new DukeException("I don't know what that command means.\nPlease input a valid command.");
+                }
+                Chatbot.printMessage("Got it. I've added this task:\n\t" + task.toString() + this.taskList.countTasks());
             }
-            Chatbot.printMessage("Got it. I've added this task:\n\t" + task.toString() + this.taskList.countTasks());
+        } catch (DukeException e) {
+            Chatbot.printMessage(e.getMessage());
+        } finally {
+            taskMode();
         }
-        taskMode();
     }
 }

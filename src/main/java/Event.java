@@ -2,7 +2,7 @@ public class Event extends Task {
     private final char TYPE_INDICATOR = 'E';
     private String timeDue;
 
-    public Event(String s) {
+    public Event(String s) throws DukeException {
         super(s.substring(0, s.indexOf("/at ")));
         this.timeDue = s.substring(s.indexOf("/at ") + 4);
         this.typeIndicator = TYPE_INDICATOR;

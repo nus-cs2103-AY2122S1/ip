@@ -8,7 +8,10 @@ public class Task {
      *
      * @param title a String representing the user-input title of the task.
      */
-    public Task(String title) {
+    public Task(String title) throws DukeException {
+        if (title.length() == 0) {
+            throw new DukeException("The description of a Task cannot be empty.");
+        }
         this.title = title;
         this.done = false;
     }
