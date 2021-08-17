@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -17,17 +19,31 @@ public class Duke {
     public static String[] welcomeMessages = {"Hello! I'm Duke", "What can I do for you?"};
     public static String[] goodbyeMessages = {"Bye. Hope to see you again soon!"};
 
+    private static final List<String> list = new ArrayList<>();
+
     public static void main(String[] args) throws IOException {
         Duke.printMessages(welcomeMessages);
 
         while (true) {
             String input = Duke.getUserInput();
+            
             if (input.equals("bye")) {
                 Duke.printMessages(goodbyeMessages);
                 break;
             }
 
-            String[] defaultMessages = {input};
+            if (input.equals("list")) {
+                int numberOfItems = Duke.list.size();
+                String[] listMessages = new String[numberOfItems];
+                for (int index = 0; index < numberOfItems; index++) {
+                    listMessages[index] = (index + 1) + ". " + Duke.list.get(index);
+                }
+                Duke.printMessages(listMessages);
+                continue;
+            }
+
+            Duke.list.add(input);
+            String[] defaultMessages = { "added: " + input };
             Duke.printMessages(defaultMessages);
         }
     }
