@@ -7,11 +7,16 @@ done 2
 list
 done 2
 list
+delete 1
+list
 bow and arrows
 list all tasks!
 done
 done no task all day...
 done -5
+delete
+delete my life
+delete 4
 todo
 deadline
 deadline NewDeadline /by June 12 /by June 15

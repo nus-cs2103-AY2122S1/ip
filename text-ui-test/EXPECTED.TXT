@@ -39,6 +39,15 @@ Current tasks:
 4.[E][ ] team meeting (at: Sat 8-9pm)
 Total: 4 tasks
 
+Noted. I've deleted this task:
+  [T][ ] borrow book
+
+Current tasks:
+1.[T][X] read book
+2.[D][ ] discuss book (by: 23 Aug)
+3.[E][ ] team meeting (at: Sat 8-9pm)
+Total: 3 tasks
+
 Unknown command!
 
 Unknown command! Did you mean 'list'?
@@ -47,7 +56,13 @@ Which task would you like to mark as done?
 
 I don't see a task number! >.<
 
-Invalid take number! Must be between 1 and 4
+Invalid take number! Must be between 1 and 3
+
+Which task would you like to delete?
+
+I don't see a task number! >.<
+
+Invalid take number! Must be between 1 and 3
 
 The description of a todo cannot be empty.
 
