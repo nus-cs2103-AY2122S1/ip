@@ -46,77 +46,81 @@ public class Kermit {
         System.out.println(formatText(introductionText));
 
         while (true) {
-            // Task description and flag should be separated by some /command
-            String[] userInput = sc.nextLine().split("/");
-            String commandString = userInput[0];
-            String flagString = userInput.length > 1 ? userInput[1]: "";
+            try {
+                // Task description and flag should be separated by some /command
+                String[] userInput = sc.nextLine().split("/");
+                String commandString = userInput[0];
+                String flagString = userInput.length > 1 ? userInput[1] : "";
 
-            String[] commandArr = commandString.split(" ");
-            String[] flagArr = flagString.split(" ");
+                String[] commandArr = commandString.split(" ");
+                String[] flagArr = flagString.split(" ");
 
-            // first item is command
-            command = commandArr[0];
-            flag = flagArr[0];
+                // first item is command
+                command = commandArr[0];
+                flag = flagArr[0];
 
-            // Clear contents of string builders
-            descriptionBuilder.setLength(0);
-            flagBuilder.setLength(0);
+                // Clear contents of string builders
+                descriptionBuilder.setLength(0);
+                flagBuilder.setLength(0);
 
-            // Get description of task
-            for (int i = 1; i < commandArr.length; i++) {
-                word = commandArr[i];
+                // Get description of task
+                for (int i = 1; i < commandArr.length; i++) {
+                    word = commandArr[i];
                     if (i != 1) {
                         descriptionBuilder.append(" ");
                     }
                     descriptionBuilder.append(word);
-            }
-
-            // Get the flags provided for task
-            for (int i = 1; i < flagArr.length; i++) {
-                word = flagArr[i];
-                if (i != 1) {
-                    flagBuilder.append(" ");
                 }
-                flagBuilder.append(word);
-            }
 
-            // Quit program
-            switch (command) {
-                case "bye":
-                    System.out.println(formatText(goodbyeText));
-                    return;
-                // List out all objects that user added to list
-                case "list":
-                    System.out.println(formatText(listText + "\n" + list));
-                    break;
-                // Add objects to list
-                case "done":
-                    int index = Integer.parseInt(descriptionBuilder.toString()) - 1;
-                    // Get task name
-                    String taskText = list.completeTask(index);
-                    System.out.println(formatText(completeTaskText + "\n" + taskText));
-                    break;
-                // Add new todo task
-                case "todo":
-                    Task newToDo = new ToDos(descriptionBuilder.toString());
-                    list.add(newToDo);
-                    System.out.println(formatText(printAddTask(newToDo, list)));
-                    break;
-                // Add new deadline task
-                case "deadline":
-                    Task newDeadline = new Deadline(descriptionBuilder.toString(), flagBuilder.toString());
-                    list.add(newDeadline);
-                    System.out.println(formatText(printAddTask(newDeadline, list)));
-                    break;
+                // Get the flags provided for task
+                for (int i = 1; i < flagArr.length; i++) {
+                    word = flagArr[i];
+                    if (i != 1) {
+                        flagBuilder.append(" ");
+                    }
+                    flagBuilder.append(word);
+                }
 
-                // Add new event task
-                case "event":
-                    Task newEvent = new Event(descriptionBuilder.toString(), flagBuilder.toString());
-                    list.add(newEvent);
-                    System.out.println(formatText(printAddTask(newEvent, list)));
-                    break;
-                default:
-                    System.out.println(formatText(invalidCommandText));
+                // Quit program
+                switch (command) {
+                    case "bye":
+                        System.out.println(formatText(goodbyeText));
+                        return;
+                    // List out all objects that user added to list
+                    case "list":
+                        System.out.println(formatText(listText + "\n" + list));
+                        break;
+                    // Add objects to list
+                    case "done":
+                        int index = Integer.parseInt(descriptionBuilder.toString()) - 1;
+                        // Get task name
+                        String taskText = list.completeTask(index);
+                        System.out.println(formatText(completeTaskText + "\n" + taskText));
+                        break;
+                    // Add new todo task
+                    case "todo":
+                        Task newToDo = new ToDos(descriptionBuilder.toString());
+                        list.add(newToDo);
+                        System.out.println(formatText(printAddTask(newToDo, list)));
+                        break;
+                    // Add new deadline task
+                    case "deadline":
+                        Task newDeadline = new Deadline(descriptionBuilder.toString(), flagBuilder.toString());
+                        list.add(newDeadline);
+                        System.out.println(formatText(printAddTask(newDeadline, list)));
+                        break;
+
+                    // Add new event task
+                    case "event":
+                        Task newEvent = new Event(descriptionBuilder.toString(), flagBuilder.toString());
+                        list.add(newEvent);
+                        System.out.println(formatText(printAddTask(newEvent, list)));
+                        break;
+                    default:
+                        throw new KermitException(invalidCommandText);
+                }
+            } catch (KermitException e) {
+                System.out.println(formatText(e.getMessage()));
             }
         }
     }
