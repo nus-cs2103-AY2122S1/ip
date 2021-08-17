@@ -40,16 +40,24 @@ public class Duke {
 
         while (true) {
             userInput = sc.nextLine();
-            if (userInput.equals("bye")) {
-                this.printBye();
-                break;
-            } else if (userInput.equals("list")) {
-                printList();
-                continue;
+
+            switch (userInput) {
+                case "bye":
+                    this.printBye();
+                    sc.close();
+                    return;
+
+                case "list":
+                    printList();
+                    break;
+
+                default:
+                    this.arrList.add(userInput);
+                    this.printMessage("added: " + userInput);
+                    break;
             }
-            this.arrList.add(userInput);
-            this.printMessage("added: " + userInput);
+
         }
-        sc.close();
+
     }
 }
