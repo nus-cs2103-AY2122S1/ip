@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -25,10 +26,8 @@ public class Duke {
             "     Hello! I'm Duke\n" +
             "     What can I do for you?\n" +
             "    ____________________________________________________________";
-        //Array to store whatever text entered by the user
-        Task[] userList = new Task[100];
-        //Pointer for array
-        int pointer = 0;
+        //ArrayList to store whatever text entered by the user
+        ArrayList<Task> userList = new ArrayList<Task>();
 
         Scanner userInput = new Scanner(System.in);
         System.out.println(greetingStatement);
@@ -40,9 +39,6 @@ public class Duke {
             try {
                 //Added a check to ensure only valid inputs are recorded
                 if (description.equals("")) {
-//                    System.out.println("    ____________________________________________________________\n" +
-//                        "     Please insert a valid input!\n" +
-//                        "    ____________________________________________________________");
                     throw new DukeException("Please insert a valid input!");
                 }
                 //Stop duke if user types "bye"
@@ -58,14 +54,14 @@ public class Duke {
                 else if (keyword.equals("list")) {
                     //Checks if description is left empty
                     if (descriptionArray.length == 1) {
-                        if (pointer == 0) {
+                        if (userList.size() == 0) {
                             System.out.println("    ____________________________________________________________\n" +
                                 "    Oops, you have no tasks currently." +
                                 "    ____________________________________________________________");
                         } else {
                             System.out.println("    ____________________________________________________________\n    " + "Here are the tasks in your list:");
-                            for (int i = 0; i < pointer; i++) {
-                                System.out.println("    " + (i + 1) + ". " + userList[i].toString());
+                            for (int i = 0; i < userList.size(); i++) {
+                                System.out.println("    " + (i + 1) + ". " + userList.get(i).toString());
                             }
                             System.out.println("    ____________________________________________________________");
                         }
@@ -77,11 +73,11 @@ public class Duke {
                 else if (keyword.equals("todo")) {
                     //checks if description is empty
                     if (descriptionArray.length > 1) {
-                        userList[pointer] = new ToDo(description.replace(keyword, ""));
+                        ToDo newToDo = new ToDo(description.replace(keyword, ""));
+                        userList.add(newToDo);
                         System.out.println("    ____________________________________________________________\n    " +
-                            "Got it. I've added this task:\n    " + userList[pointer].toString() + "\n    " + "Now you have " + (pointer + 1) + " tasks in the list.\n" +
+                            "Got it. I've added this task:\n    " + newToDo.toString() + "\n    " + "Now you have " + userList.size() + " tasks in the list.\n" +
                             "    ____________________________________________________________");
-                        pointer++;
                     } else {
                         throw new DukeException("The description of a todo cannot be empty.");
                     }
@@ -103,11 +99,11 @@ public class Duke {
                             } else {
                                 String deadlineDescription = updatedDeadline[0];
                                 String deadlineBy = updatedDeadline[1];
-                                userList[pointer] = new Deadline(deadlineDescription, deadlineBy);
+                                Deadline newDeadline = new Deadline(deadlineDescription, deadlineBy);
+                                userList.add(newDeadline);
                                 System.out.println("    ____________________________________________________________\n    " +
-                                    "Got it. I've added this task:\n    " + userList[pointer].toString() + "\n    " + "Now you have " + (pointer + 1) + " tasks in the list.\n" +
+                                    "Got it. I've added this task:\n    " + newDeadline.toString() + "\n    " + "Now you have " + userList.size() + " tasks in the list.\n" +
                                     "    ____________________________________________________________");
-                                pointer++;
                             }
                         } else {
                             throw new DukeException("I'm sorry, please add a '/by' in your description!");
@@ -130,11 +126,11 @@ public class Duke {
                             } else {
                                 String eventDescription = updatedEvent[0];
                                 String eventBy = updatedEvent[1];
-                                userList[pointer] = new Event(eventDescription, eventBy);
+                                Event newEvent = new Event(eventDescription, eventBy);
+                                userList.add(newEvent);
                                 System.out.println("    ____________________________________________________________\n    " +
-                                    "Got it. I've added this task:\n    " + userList[pointer].toString() + "\n    " + "Now you have " + (pointer + 1) + " tasks in the list.\n" +
+                                    "Got it. I've added this task:\n    " + newEvent.toString() + "\n    " + "Now you have " + userList.size() + " tasks in the list.\n" +
                                     "    ____________________________________________________________");
-                                pointer++;
                             }
                         } else {
                             throw new DukeException("I'm sorry, please add an '/at' in your description!");
@@ -149,15 +145,15 @@ public class Duke {
                         if (isInteger(descriptionArray[1])) {
                             int taskNumber = Integer.parseInt(descriptionArray[1]);
                             //Checks for a valid task number
-                            if (taskNumber > pointer || taskNumber <= 0) {
+                            if (taskNumber > userList.size() || taskNumber <= 0) {
                                 throw new DukeException("Please insert a valid Task Number!");
                             }
                             //If task number is valid mark task as done
                             else {
-                                userList[taskNumber - 1].markAsDone();
-                                System.out.println("    ____________________________________________________________\n    " + "Nice! I've marked this task as done:");
-                                System.out.println("    " + userList[taskNumber - 1].toString());
-                                System.out.println("    ____________________________________________________________");
+                                userList.get(taskNumber - 1).markAsDone();
+                                System.out.println("    ____________________________________________________________\n    " + "Nice! I've marked this task as done:\n" +
+                                "    " + userList.get(taskNumber - 1).toString() +
+                                "\n    ____________________________________________________________");
                             }
                         }
                         //else throw DukeException for invalid scenarios ie "done two" instead of "done 2"
@@ -169,13 +165,41 @@ public class Duke {
                     }
 
                 }
+                //deletes task if user types "delete" and a number
+                else if (keyword.equals("delete")) {
+                    //checks if there is a 2nd input(task number to be deleted)
+                    if (descriptionArray.length == 2) {
+                        //check if 2nd input is an integer
+                        if (isInteger(descriptionArray[1])) {
+                            int taskNumber = Integer.parseInt(descriptionArray[1]);
+                            //Checks for a valid task number
+                            if (taskNumber > userList.size() || taskNumber <= 0) {
+                                throw new DukeException("Please insert a valid Task Number!");
+                            }
+                            //If task number is valid, delete task
+                            else {
+                                System.out.println("    ____________________________________________________________\n    " + "Noted. I've removed this task:\n" +
+                                    "    " + userList.get(taskNumber - 1).toString() +
+                                    "\n    ____________________________________________________________");
+                                userList.remove(taskNumber - 1);
+                            }
+                        }
+                        //else throw DukeException for invalid scenarios ie "delete two" instead of "delete 2"
+                        else {
+                            throw new DukeException("I'm sorry, please input a number instead!");
+                        }
+                    } else {
+                        throw new DukeException("I'm sorry, please input the number of the task you wish to delete.");
+                    }
+
+                }
                 //else throw DukeException for invalid keyword
                 else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 System.out.println("    ____________________________________________________________\n" +
-                    " ☹ OOPS!!! " + e.getMessage() + "\n" +
+                    "     ☹ OOPS!!! " + e.getMessage() + "\n" +
                     "    ____________________________________________________________");
             }
         }

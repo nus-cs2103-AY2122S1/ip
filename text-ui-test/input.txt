@@ -16,6 +16,9 @@ event birthday party /at IDK /at where
 deadline run it down /by Thursday /by
 done 3
 list
+delete 3
 done 4
 list
+delete 5
+delete
 bye

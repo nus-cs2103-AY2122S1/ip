@@ -13,16 +13,16 @@
     Now you have 2 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
- ☹ OOPS!!! The description of a todo cannot be empty.
+     ☹ OOPS!!! The description of a todo cannot be empty.
     ____________________________________________________________
     ____________________________________________________________
- ☹ OOPS!!! The description of a list MUST be empty.
+     ☹ OOPS!!! The description of a list MUST be empty.
     ____________________________________________________________
     ____________________________________________________________
- ☹ OOPS!!! I'm sorry, please input the number of the completed task
+     ☹ OOPS!!! I'm sorry, please input the number of the completed task
     ____________________________________________________________
     ____________________________________________________________
- ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
@@ -41,16 +41,16 @@
     Now you have 4 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
- ☹ OOPS!!! I'm sorry, please add an '/at' in your description!
+     ☹ OOPS!!! I'm sorry, please add an '/at' in your description!
     ____________________________________________________________
     ____________________________________________________________
- ☹ OOPS!!! The description of an event cannot be empty.
+     ☹ OOPS!!! The description of an event cannot be empty.
     ____________________________________________________________
     ____________________________________________________________
- ☹ OOPS!!! I'm sorry, please add a '/by' in your description!
+     ☹ OOPS!!! I'm sorry, please add a '/by' in your description!
     ____________________________________________________________
     ____________________________________________________________
- ☹ OOPS!!! The description of a deadline cannot be empty.
+     ☹ OOPS!!! The description of a deadline cannot be empty.
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list:
@@ -60,10 +60,10 @@
     4. [E][ ]  birthday party  (at:  IDK where)
     ____________________________________________________________
     ____________________________________________________________
- ☹ OOPS!!! I'm sorry, please only have ONE '/at' in your description!
+     ☹ OOPS!!! I'm sorry, please only have ONE '/at' in your description!
     ____________________________________________________________
     ____________________________________________________________
- ☹ OOPS!!! The description of a deadline cannot be empty.
+     ☹ OOPS!!! The description of a deadline cannot be empty.
     ____________________________________________________________
     ____________________________________________________________
     Nice! I've marked this task as done:
@@ -77,15 +77,23 @@
     4. [E][ ]  birthday party  (at:  IDK where)
     ____________________________________________________________
     ____________________________________________________________
-    Nice! I've marked this task as done:
-    [E][X]  birthday party  (at:  IDK where)
+    Noted. I've removed this task:
+    [D][X]  run it down  (by:  Thursday)
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! Please insert a valid Task Number!
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list:
     1. [T][ ]  read books
     2. [T][ ]  sleep
-    3. [D][X]  run it down  (by:  Thursday)
-    4. [E][X]  birthday party  (at:  IDK where)
+    3. [E][ ]  birthday party  (at:  IDK where)
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! Please insert a valid Task Number!
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! I'm sorry, please input the number of the task you wish to delete.
     ____________________________________________________________
     ____________________________________________________________
      Bye. Hope to see you again soon!
