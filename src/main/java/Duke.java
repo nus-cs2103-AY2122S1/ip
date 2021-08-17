@@ -14,12 +14,12 @@ public class Duke {
         Task[] listOfItems = new Task[100];
         int index = 0;
         while (true) {
-            String input = sc.nextLine().toLowerCase();
+            String input = sc.nextLine();
             boolean isLastCharDigit =  Character.isDigit(input.charAt(input.length() - 1));
             if (input.equals("list")) {
                 System.out.println("\tHere are the tasks in your list:");
                 for (int i = 0; i < index; i++) {
-                    System.out.println("\t" + (i + 1) + ". [" + listOfItems[i].getStatusIcon() + "] " + listOfItems[i].getDescription());
+                    System.out.println("\t" + (i + 1) + ". " + listOfItems[i].toString());
                 }
             } else if (input.equals("bye")) {
                 System.out.println(" \t Bye. Hope to see you again soon!");
@@ -30,7 +30,7 @@ public class Duke {
                 if (i < index) {
                     listOfItems[i].markAsDone();
                     System.out.println("Nice! I've marked this task as done:\n\t" +
-                            "[" + listOfItems[i].getStatusIcon() + "] " + listOfItems[i].getDescription());
+                          listOfItems[i].toString());
                 } else {
                     System.out.println("\tNo task found or invalid input!");
                 }
@@ -39,9 +39,25 @@ public class Duke {
                 System.out.println("\tinvalid input!");
             }
             else {
-                listOfItems[index] = new Task(input);
+                if (input.contains("todo")) {
+                    listOfItems[index] = new Todo(input);
+                } else if (input.contains("deadline")) {
+                    int i = input.indexOf('/');
+                    String deadline = input.substring(i + 1, input.length() - 1+1);
+                    listOfItems[index] = new Deadline(input.substring(0, i), deadline);
+                } else if (input.contains("event")) {
+                    int i = input.indexOf('/');
+                    String deadline = input.substring(i + 1, input.length() - 1+1);
+                    listOfItems[index] = new Event(input.substring(0, i), deadline);
+                } else {
+                    listOfItems[index] = new Task(input);
+                }
+
+                System.out.println("\tGot it. I've added this task:");
+                System.out.println("\t\t" + listOfItems[index].toString());
                 index++;
-                System.out.println("\tadded: " + input);
+                System.out.println("\tNow you have " + index + " tasks in the list.");
+
             }
         }
     }
