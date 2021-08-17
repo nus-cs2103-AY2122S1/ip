@@ -27,7 +27,7 @@ public class Duke {
                 int value = Character.getNumericValue(input.charAt(5));
                 Done.of(tasks, value).exec();
             } else {
-                Add.of(this.tasks, new Task(input)).exec();
+                Add.of(this.tasks, input).exec();
             }
         }
         Exit.of().exec();

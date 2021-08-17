@@ -15,10 +15,12 @@ class TaskList {
     public Task get(int index) {
         return this.list[index];
     }
-
+    public int size() {
+        return this.size;
+    }
     public void display() {
         for (int i = 0; i < this.size; i++) {
-            System.out.println(String.format("%s.[%s] %s", i+1, this.list[i].getStatusIcon(), this.list[i].getDescription()));
+            System.out.println(String.format("%s. %s", i+1, this.list[i].toString()));
         }
     }
 }
