@@ -19,7 +19,8 @@ public class TDList {
     public void tdlAdd(String str) {
         TDLTask createdTask = new TDLTask(str);
         toDoList.add(createdTask);
-        Duke.dukeSays("added: " + str);
+        Duke.dukeSays("Ok, I have added this task: \n" + createdTask.getLineOfTaskInfo()
+            + "\nCurrent total amount of tasks in list: " + toDoList.size());
     }
 
     /**
