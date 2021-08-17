@@ -32,11 +32,17 @@ public class Duke {
         System.out.println("Woof from\n" + logo);
         System.out.println("Woof! I'm Biscuit.\nWhat can I do for you?\n" + separator);
         boolean isContinue = true;
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         while (isContinue) {
             String input = scanner.nextLine();
+            String[] processedInput = input.trim().split("\\s+");
             System.out.println(separator);
-            switch (input) {
+            switch (processedInput[0]) {
+                case "done":
+                    Task current = list.get(Integer.parseInt(processedInput[1]) - 1);
+                    current.setDone(true);
+                    System.out.println("Nice! I've marked this task as done, woof!\n\t" + current);
+                    break;
                 case "list":
                     for (int i = 0; i < list.size(); i++) {
                         System.out.println(i + 1 + ". " + list.get(i));
@@ -48,7 +54,7 @@ public class Duke {
                     break;
                 default:
                     System.out.println("added: " + input);
-                    list.add(input);
+                    list.add(new Task(input));
             }
             System.out.println(separator);
         }
