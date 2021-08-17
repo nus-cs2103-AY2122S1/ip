@@ -7,8 +7,10 @@ done 3
 list
 invalidcommand
 todo
-deadline /by EMPTY DESCRIPTION
-event /at EMPTY DESCRIPTION
+deadline
+event
 todo return book
+list
+delete 2
 list
 bye

@@ -49,13 +49,13 @@ Hello from
 	Please input a valid command.
 ---------------------------------------------------------
 ---------------------------------------------------------
-	The description of a Task cannot be empty.
+	The description of a todo cannot be empty.
 ---------------------------------------------------------
 ---------------------------------------------------------
-	The description of a Task cannot be empty.
+	The description of a deadline cannot be empty.
 ---------------------------------------------------------
 ---------------------------------------------------------
-	The description of a Task cannot be empty.
+	The description of a event cannot be empty.
 ---------------------------------------------------------
 ---------------------------------------------------------
 	Got it. I've added this task:
@@ -68,6 +68,17 @@ Hello from
 	2.[D][ ] return book  (by: Sunday)
 	3.[E][x] project meeting  (at: Mon 2-4pm)
 	4.[T][ ] return book
+---------------------------------------------------------
+---------------------------------------------------------
+	Noted. I've removed this task:
+		[D][ ] return book  (by: Sunday)
+	Now you have 3 tasks in the list.
+---------------------------------------------------------
+---------------------------------------------------------
+	Here are the tasks in your list:
+	1.[T][x] borrow book
+	2.[E][x] project meeting  (at: Mon 2-4pm)
+	3.[T][ ] return book
 ---------------------------------------------------------
 ---------------------------------------------------------
 	See you soon! :)
