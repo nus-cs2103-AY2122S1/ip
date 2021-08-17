@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<String> list = new ArrayList<>();
+    private static ArrayList<Task> list = new ArrayList<>();
 
     private static Scanner sc;
 
@@ -27,7 +26,7 @@ public class Duke {
         String listString = "";
         for (int i = 0; i < list.size(); i++) {
             int index = i + 1;
-            listString = listString + index + ". " + list.get(i) + "\n";
+            listString = listString + index + ".[" + list.get(i).getStatusIcon() + "] " + list.get(i).description + "\n";
         }
         return listString;
     }
@@ -42,11 +41,26 @@ public class Duke {
             return;
         }
         else if (message.equals("list")) {
-            System.out.println(friendGreeting + "Your to-do list: \n");
+            System.out.println(friendGreeting + "Your to-do list has the following tasks: \n");
             System.out.println(printList());
         }
+        else if (message.length() > 4 && message.startsWith("done ") && message.substring(5).chars().allMatch(Character::isDigit)) {
+            int taskIndex = Integer.parseInt(message.substring(5)) - 1;
+            if (0 <= taskIndex && taskIndex < list.size()) {
+                Task task = list.get(taskIndex);
+                String description = task.description;
+                task.markAsDone();
+                if (!task.isDone) {
+                    System.out.println(friendGreeting + "Hooray! You've completed task \n[X] " + description);
+                } else {
+                    System.out.println(description + " has already been done! :)");
+                }
+            } else {
+                System.out.println("Sorry, task number " + taskIndex + " cannot be found :(");
+            }
+        }
         else {
-            list.add(message);
+            list.add(new Task(message));
             System.out.println(friendGreeting + "added: " + message + " to your to-do list!");
         }
         handleInput();
