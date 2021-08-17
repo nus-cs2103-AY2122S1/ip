@@ -4,11 +4,18 @@ todo read book
 deadline discuss book /by 23 Aug
 event team meeting /at Sat 8-9pm
 done 2
+list
 done 2
 list
-deadline final submission /by Sunday
-done 5
-list
-todo discard junk
 bow and arrows
+list all tasks!
+done
+done no task all day...
+done -5
+todo
+deadline
+deadline NewDeadline /by June 12 /by June 15
+event
+event NewEvent
+bye bye
 bye

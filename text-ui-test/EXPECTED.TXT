@@ -23,6 +23,13 @@ I've added:
 I've marked this task as done:
   [T][X] read book
 
+Current tasks:
+1.[T][ ] borrow book
+2.[T][X] read book
+3.[D][ ] discuss book (by: 23 Aug)
+4.[E][ ] team meeting (at: Sat 8-9pm)
+Total: 4 tasks
+
 Task already done.
 
 Current tasks:
@@ -32,24 +39,27 @@ Current tasks:
 4.[E][ ] team meeting (at: Sat 8-9pm)
 Total: 4 tasks
 
-I've added:
-  [D][ ] final submission (by: Sunday)
-
-I've marked this task as done:
-  [D][X] final submission (by: Sunday)
-
-Current tasks:
-1.[T][ ] borrow book
-2.[T][X] read book
-3.[D][ ] discuss book (by: 23 Aug)
-4.[E][ ] team meeting (at: Sat 8-9pm)
-5.[D][X] final submission (by: Sunday)
-Total: 5 tasks
-
-I've added:
-  [T][ ] discard junk
-
 Unknown command!
+
+Unknown command! Did you mean 'list'?
+
+Which task would you like to mark as done?
+
+I don't see a task number! >.<
+
+Invalid take number! Must be between 1 and 4
+
+The description of a todo cannot be empty.
+
+The description of a deadline cannot be empty.
+
+Wrong deadline format! Requires <task name> /by <time>
+
+The description of an event cannot be empty.
+
+Wrong event format! Requires <task name> /at <time>
+
+Unknown command! Did you mean 'bye'?
 
 Bye. Hope to see you again soon!
 
