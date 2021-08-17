@@ -14,6 +14,11 @@ public class Duke {
         return y_border + "[PEPPER JACK] " + str + "\n" + y_border;
     }
 
+    private static String addTaskReply(String t, int sum) {
+        return reply("\nPepper Jack added this task: \n\t" + t + "\nYou have " + String.valueOf(sum) +
+                " task(s) now so get off that crack rock!");
+    }
+
     public static void main(String[] args) {
         String logo =
                 "$$$$$$$\\                                                             $$$$$\\                     $$\\       \n" +
@@ -59,7 +64,27 @@ public class Duke {
                 int index = Integer.parseInt(user_input_split[1]) - 1;
                 Task t = lst.get(index);
                 t.setDone();
-                System.out.print(reply("Noice! Pepper Jack marked this task as done:\n\t" + t));
+                System.out.print(reply("\nNoice! Pepper Jack marked this task as done:\n\t" + t));
+            }
+            else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+                // Add new type of task
+                Task t;
+                if (command.equals("todo")) {
+                    // Make new to do
+                    t = new Todo(user_input_split[1]);
+                }
+                else if (command.equals("deadline")) {
+                    // Make new deadline
+                    String[] desc_date_split = user_input_split[1].split(" /by ", 2);
+                    t = new Deadline(desc_date_split[0], desc_date_split[1]);
+                }
+                else {
+                    // Make new event
+                    String[] desc_date_split = user_input_split[1].split(" /at ", 2);
+                    t = new Event(desc_date_split[0], desc_date_split[1]);
+                }
+                lst.add(t);
+                System.out.println(addTaskReply(t.toString(), lst.size()));
             }
             else {
                 // Add user input
