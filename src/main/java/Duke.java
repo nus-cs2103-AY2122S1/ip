@@ -20,7 +20,6 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             String command = scanner.nextLine();
-            Task task = new Task(command);
             if (command.equals("bye")) {
                 System.out.println("    ______________________________________");
                 System.out.println("     Bye. Hope to see you again soon!");
@@ -31,12 +30,12 @@ public class Duke {
                 System.out.println("    ______________________________________");
                 System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < pointer - 1; i++) {
-                    System.out.printf("     %d.[%s] %s\n", i + 1, store[i].getStatusIcon() ,store[i].toString());
+                    System.out.printf("     %d.%s \n", i + 1, store[i].toString());
                 }
                 System.out.println("    ______________________________________");
-            } else if (command.length() >= 6 && command.substring(0,4).equals("done")) {
-                String restOfCommand = command.substring(5,command.length());
-               boolean numeric = false;
+            } else if (command.length() >= 6 && command.startsWith("done")) {
+                String restOfCommand = command.substring(5);
+               boolean numeric;
                try {
                    int temp = Integer.parseInt(restOfCommand);
                    numeric = true;
@@ -50,7 +49,7 @@ public class Duke {
                        currTask.setCompleted();
                        System.out.println("    ______________________________________");
                        System.out.println("     Nice! I've marked this task as done:");
-                       System.out.printf("       [%s] %s\n", currTask.getStatusIcon(), currTask.toString());
+                       System.out.printf("       %s\n", currTask);
                        System.out.println("    ______________________________________");
                    } catch (NullPointerException err) {
                        System.out.println("    ______________________________________");
@@ -58,17 +57,60 @@ public class Duke {
                        System.out.println("    ______________________________________");
                    }
                } else {
-                   store[pointer - 1] = task;
-                   pointer = pointer += 1;
                    System.out.println("    ______________________________________");
-                   System.out.printf("     added: %s\n",task.toString());
+                   System.out.println("     Enter task number to delete after done!");
                    System.out.println("    ______________________________________");
                }
-            } else  {
+            } else if (command.startsWith("todo")) {
+                String name = command.substring(5);
+                Task task  = new ToDo(name);
                 store[pointer - 1] = task;
-                pointer = pointer += 1;
+                pointer += 1;
                 System.out.println("    ______________________________________");
-                System.out.printf("     added: %s\n",task.toString());
+                System.out.println("     Got it. I've added this task: ");
+                System.out.printf("       %s\n",task);
+                System.out.printf("     Now you have %d tasks in the list\n", pointer - 1);
+                System.out.println("    ______________________________________");
+            } else if (command.startsWith("deadline")) {
+                if (!command.contains("/by")) {
+                    System.out.println("    ______________________________________");
+                    System.out.println("     Enter valid command!");
+                    System.out.println("    ______________________________________");
+                } else {
+                    int position = command.indexOf("/by");
+                    String name = command.substring(9, position);
+                    String date = command.substring(position + 4);
+                    Task task  = new Deadline(name, date);
+                    store[pointer - 1] = task;
+                    pointer += 1;
+                    System.out.println("    ______________________________________");
+                    System.out.println("     Got it. I've added this task: ");
+                    System.out.printf("       %s\n",task);
+                    System.out.printf("     Now you have %d tasks in the list\n", pointer - 1);
+                    System.out.println("    ______________________________________");
+                }
+            } else if (command.startsWith("event")) {
+                if (!command.contains("/at")) {
+                    System.out.println("    ______________________________________");
+                    System.out.println("     Enter valid command!");
+                    System.out.println("    ______________________________________");
+                } else {
+                    int position = command.indexOf("/at");
+                    String name = command.substring(6, position);
+                    String date = command.substring(position + 4);
+                    Task task  = new Event(name, date);
+                    store[pointer - 1] = task;
+                    pointer += 1;
+                    System.out.println("    ______________________________________");
+                    System.out.println("     Got it. I've added this task: ");
+                    System.out.printf("       %s\n",task);
+                    System.out.printf("     Now you have %d tasks in the list\n", pointer - 1);
+                    System.out.println("    ______________________________________");
+                }
+            }
+            else {
+                System.out.println("    ______________________________________");
+                System.out.println("     Enter valid command!");
                 System.out.println("    ______________________________________");
             }
         }
