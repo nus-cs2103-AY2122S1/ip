@@ -1,7 +1,19 @@
+import java.util.Optional;
+
 public class Event extends Task{
 
-    public Event(String description, String time) {
+    private Event(String description, String time) {
         super(description, "E", time);
+    }
+
+    public static Event create(Optional<String> description, Optional<String> time) throws DukeExceptions{
+        String desc = description.orElseThrow(() -> new DukeExceptions(
+                "Oops, event command requires a description \n"
+        ));
+        String timemod = time.orElseThrow(()-> new DukeExceptions(
+                "Oops, event command requires a set time \n"
+        ));
+        return new Event(desc, timemod);
     }
 
     @Override

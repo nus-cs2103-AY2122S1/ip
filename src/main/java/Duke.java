@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.*;
+import java.util.Optional;
 
 public class Duke {
 
@@ -29,54 +30,79 @@ public class Duke {
             String userInput = myObj.nextLine();
             String output;
 
-            String regex = "([A-Za-z]+)\\s?([A-Za-z ]*)?\\s?(/by|/at|\\d+)?\\s?(.*)?";
+            String regex = "([A-Za-z]+)\\s*([A-Za-z ]+)?\\s*(/by|/at|\\d+)?\\s*(.+)?";
             Matcher m = Pattern.compile(regex).matcher(userInput);
             m.find();
 
-            Task task;
-            if (m.group(1).equals("bye")) {
-                break;
-            } else if (m.group(1).equals("list")) {
-                StringBuilder result = new StringBuilder();
-                result.append("Here are the tasks in your list! \n");
-                int index = 1;
-                for (Task listedTask : taskList) {
-                    result.append(String.valueOf(index) + ". " + listedTask.toString() + '\n');
-                    index++;
-                }
-                reply(result.toString());
-            } else if (m.group(1).equals("done")) {
-                int taskIndex = Integer.parseInt(m.group(3)) - 1;
-                task = taskList.get(taskIndex);
-                task.markFinished();
-                output = "Well done! I marked the following task as finished: \n"
-                        + "    " + task.toString() + '\n';
-                reply(output);
-            } else if (m.group(1).equals("event")){
-                task = new Event(m.group(2), m.group(4));
-                taskList.add(task);
-                output = "Got it! I've added this task: \n"
-                        + "  " + task.toString() + '\n'
-                        + String.format("Now you have %d tasks in the list \n", taskList.size());
-                reply(output);
+            try {
+                String command = Optional.ofNullable(m.group(1)).orElseThrow(() ->
+                        new DukeExceptions("Oops, you can't give me no command \n"));
+                Optional<String> desc = Optional.ofNullable(m.group(2));
+                Optional<String> modifier = Optional.ofNullable(m.group(3));
+                Optional<String> time = Optional.ofNullable(m.group(4));
 
-            } else if (m.group(1).equals("deadline")){
-                task = new Deadline(m.group(2), m.group(4));
-                taskList.add(task);
-                output = "Got it! I've added this task: \n"
-                        + "  " + task.toString() + '\n'
-                        + String.format("Now you have %d tasks in the list \n", taskList.size());
+                Task task;
+                if (command.equals("bye")) {
+                    break;
+
+                } else if (command.equals("list")) {
+                    if (desc.isPresent() || modifier.isPresent() || time.isPresent()) {
+                        throw new DukeExceptions("Oops, the list command cannot have any modifier or description \n");
+                    }
+
+                    StringBuilder result = new StringBuilder();
+                    result.append("Here are the tasks in your list! \n");
+                    int index = 1;
+                    for (Task listedTask : taskList) {
+                        result.append(String.valueOf(index) + ". " + listedTask.toString() + '\n');
+                        index++;
+                    }
+                    output = result.toString();
+
+                } else if (command.equals("done")) {
+
+                    if (desc.isPresent() || time.isPresent()) {
+                        throw new DukeExceptions(
+                                "Oops, the done command can only have an integer (index) modifier \n"
+                        );
+                    }
+
+                    int taskIndex = modifier.map(Integer::parseInt).orElseThrow(() -> new DukeExceptions(
+                            "Oops, you forgot to tell me which item you want to mark as done! \n"));
+                    task = taskList.get(taskIndex - 1);
+                    task.markFinished();
+                    output = "Well done! I marked the following task as finished: \n"
+                            + "    " + task.toString() + '\n';
+
+                } else if (command.equals("event")) {
+                    task = Event.create(desc, time);
+                    taskList.add(task);
+                    output = "Got it! I've added this task: \n"
+                            + "  " + task.toString() + '\n'
+                            + String.format("Now you have %d tasks in the list \n", taskList.size());
+
+                } else if (command.equals("deadline")) {
+                    task = Deadline.create(desc, time);
+                    taskList.add(task);
+                    output = "Got it! I've added this task: \n"
+                            + "  " + task.toString() + '\n'
+                            + String.format("Now you have %d tasks in the list \n", taskList.size());
+
+                } else if (command.equals("todo")) {
+                    task = ToDo.create(desc);
+                    taskList.add(task);
+                    output = "Got it! I've added this task: \n"
+                            + "  " + task.toString() + '\n'
+                            + String.format("Now you have %d tasks in the list \n", taskList.size());
+
+                } else {
+                    output = "Oops.. I don't understand your command.. \n";
+                }
                 reply(output);
-            } else if (m.group(1).equals("todo")) {
-                task = new ToDo(m.group(2));
-                taskList.add(task);
-                output = "Got it! I've added this task: \n"
-                        + "  " + task.toString() + '\n'
-                        + String.format("Now you have %d tasks in the list \n", taskList.size());
-                reply(output);
-            } else {
-                reply("Oops.. I dont understand what you mean.. \n");
+            } catch (DukeExceptions e) {
+                reply(e.getMessage());
             }
+
         }
         reply(goodbye);
     }

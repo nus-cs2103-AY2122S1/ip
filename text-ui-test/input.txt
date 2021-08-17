@@ -7,4 +7,16 @@ done 2
 done 3
 list
 lol
+todo
+done
+done bob
+done 2 bob
+done 2 /at paringan
+event terina
+event terina /at
+deadline
+deadline terina
+deadline terina /by
+list 34
 bye
+
