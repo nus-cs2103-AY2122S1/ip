@@ -39,18 +39,77 @@ public class ChatBot {
     }
 
     private boolean checkDone(String str) {
-        return str.equals("done");
+        boolean isDone = false;
+        if (str.length() > 3) {
+            isDone = str.substring(0,4).equals("done");
+        }
+        return isDone;
     }
+
+    private void doneSeq(String str) {
+        System.out.println("Good job for this thing done man:");
+        int indexNum = Integer.parseInt(str.replaceAll("[^0-9]", ""));
+        list[indexNum - 1].setComplete();
+        System.out.println("   " + list[indexNum - 1].printTask());
+    }
+
+    private boolean checkToDo(String str) {
+        boolean isToDo = false;
+        if (str.length() >= 4) {
+            isToDo = str.substring(0,4).equals("todo");
+        }
+        return isToDo;
+    }
+
+    private void todoSeq(String str) {
+        System.out.println("Alrighty! I have added this task:");
+        list[lastIndex] = new ToDo(str.substring(5));
+        System.out.println("   " + list[lastIndex].printTask());
+        lastIndex++;
+        System.out.println("Now you have " + lastIndex + " task(s) in total!");
+    }
+
+    private boolean checkDeadLine(String str) {
+        boolean isDeadLine = false;
+        if (str.length() >= 8) {
+            isDeadLine = str.substring(0,8).equals("deadline");
+        }
+        return isDeadLine;
+    }
+
+    private void deadlineSeq(String str) {
+        System.out.println("Alrighty! I have added this task:");
+        list[lastIndex] = new Deadline(str.substring(9, str.indexOf("/")), str.substring(str.indexOf("/") + 4));
+        System.out.println("   " + list[lastIndex].printTask());
+        lastIndex++;
+        System.out.println("Now you have " + lastIndex + " task(s) in total!");
+    }
+
+    private boolean checkEvent(String str) {
+        boolean isEvent = false;
+        if (str.length() >= 5) {
+            isEvent= str.substring(0,5).equals("event");
+        }
+        return isEvent;
+    }
+
+    private void eventSeq(String str) {
+        System.out.println("Alrighty! I have added this task:");
+        list[lastIndex] = new Event(str.substring(6, str.indexOf("/")), str.substring(str.indexOf("/") + 4));
+        System.out.println("   " + list[lastIndex].printTask());
+        lastIndex++;
+        System.out.println("Now you have " + lastIndex + " task(s) in total!");
+    }
+
 
     private void startInput() {
         String input = userInput.nextLine();
-        boolean doneInput = false;
+        boolean doneInput = checkDone(input);
+        boolean todoInput = checkToDo(input);
+        boolean deadlineInput = checkDeadLine(input);
+        boolean eventInput = checkEvent(input);
 
-        if (input.length() > 3) {
-            doneInput = checkDone(input.substring(0,4));
-        }
-
-        if (input.equals("bye") || input.equals("bye ")) {                   //bye input
+        if (input.equals("bye")) {                                          //bye input
             System.out.println("See ya again later!");
             return;
         } else if (input.equals("list")) {                                   //list input
@@ -60,14 +119,13 @@ public class ChatBot {
                 printList();
             }
         } else if (doneInput) {                                              //done input
-            System.out.println("Good job for this thing done man:");
-            int indexNum = Integer.parseInt(input.replaceAll("[^0-9]", ""));
-            list[indexNum - 1].setComplete();
-            System.out.println("   " + list[indexNum - 1].printTask());
-        } else {                                                             //all other inputs
-            list[lastIndex] = new Task(input);
-            lastIndex++;
-            System.out.println("added: " + input);
+            doneSeq(input);
+        } else if (todoInput){
+            todoSeq(input);
+        } else if (deadlineInput) {
+            deadlineSeq(input);
+        } else if (eventInput) {
+            eventSeq(input);
         }
         startInput();
     }

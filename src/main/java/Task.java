@@ -1,12 +1,11 @@
 public class Task {
-    static private int totalList = 1;
+    protected boolean complete;
+    protected String task;
 
-    private String task;
-    private boolean complete = false;
 
     public Task(String task) {
         this.task = task;
-        totalList++;
+        this.complete = false;
     }
 
     String printTask() {
@@ -16,7 +15,6 @@ public class Task {
         } else {
             result = "[ ] ";
         }
-
         return result + this.task;
     }
 
