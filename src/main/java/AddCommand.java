@@ -7,10 +7,10 @@ public class AddCommand implements Command {
 
     @Override
     public void run() {
-        Duke.tasks[Duke.count++] = this.task;
+        TaskStorage.getInstance().add(this.task);
         Message.print(new String[] {
                 "Got it. I have added this task:",
                 "\t" + task.toString(),
-                String.format("Now you have %d task%s in your list", Duke.count, Duke.count > 1 ? "s" : "")});
+                String.format("Now you have %d task%s in your list", TaskStorage.getInstance().getSize(), TaskStorage.getInstance().getSize() > 1 ? "s" : "")});
     }
 }
