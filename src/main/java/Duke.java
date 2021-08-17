@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,6 +8,7 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private final String lineBreak = "\n____________________________________________________________\n";
+    private ArrayList<String> list = new ArrayList<>();
 
     public Duke() {}
 
@@ -36,6 +38,30 @@ public class Duke {
     }
 
     /**
+     * Adds the given input into list
+     * @param input the given text
+     * @return message indicating successful addition to list
+     */
+    public String add(String input) {
+        this.list.add(input);
+        return wrapText("added: " + input);
+    }
+
+    /**
+     * Outputs the list of items in numbered format
+     * @return list of items
+     */
+    public String showList () {
+        String[] lst = list.toArray(new String[0]);
+        String output = "";
+        int index = 1;
+        for (String s : lst) {
+            output += String.format("\n%d. %s", index++, s);
+        }
+        return wrapText(output);
+    }
+
+    /**
      * Helper function to wrap given text with line break
      * @param input the text to wrap
      * @return input wrapped with line breaks
@@ -50,12 +76,15 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String input = sc.next();
+            String input = sc.nextLine();
             if (input.equals("bye")) {
                 System.out.println(bot.goodbye());
                 break;
+            } else if (input.equals("list")) {
+                System.out.println(bot.showList());
+            } else {
+                System.out.println(bot.add(input));
             }
-            System.out.println(bot.echo(input));
         }
 
         sc.close();
