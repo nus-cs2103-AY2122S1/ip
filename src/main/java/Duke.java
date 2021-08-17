@@ -100,9 +100,12 @@ public class Duke {
                     break;
 
                 case ("event"):
-                    String[] name_at = cmd_args[1].split("/at");
-                    toAdd = new Event(name_at[0],name_at[1]);
-                    System.out.println(formatReply(addTaskMessage(taskList, toAdd)));
+                    try{
+                        toAdd = Event.fromCmd(cmd_args);
+                        System.out.println(formatReply(addTaskMessage(taskList, toAdd)));
+                    } catch (DukeException e) {
+                        System.out.println(formatReply(e.toString()));
+                    }
                     break;
 
                 default:
