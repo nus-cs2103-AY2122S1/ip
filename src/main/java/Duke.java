@@ -8,9 +8,13 @@ public class Duke {
     private static String sepLineOpen = "///<<<============ Duke Says: ===========>>>\\\\\\";
     private static String sepLineClose = "\\\\\\<<<===================================>>>///";
 
-    private static ArrayList<String> toDoList = new ArrayList<>();
+    private static TDList currTDL;
 
     public static void main(String[] args) {
+        //Initialize variables
+        currTDL = new TDList();
+
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -64,44 +68,21 @@ public class Duke {
      *
      * @param printThis The message to print inside Duke's text bubble
      */
-    private static void dukeSays(String printThis) {
+    public static void dukeSays(String printThis) {
         System.out.println("");
         System.out.println(sepLineOpen);
         System.out.println(printThis);
         System.out.println(sepLineClose);
     }
 
-    /**
-     * Used for adding things to the to do list.
-     *
-     * @param str   Thing to add to the list.
-     */
+
     private static void addToTDL(String str) {
-        toDoList.add(str);
-        dukeSays("added: " + str);
+        currTDL.tdlAdd(str);
     }
 
-    /**
-     * Used to print out contents of the list nicely.
-     */
+
     private static void listOutTDL() {
-        String printThis = "";
-        String nextLine = "\n";
-
-        int serialNo = 1;
-        for (String ele : toDoList) {
-            String endOfCurrLine = nextLine;
-            if (serialNo == toDoList.size()) {
-                endOfCurrLine = "";
-            }
-
-            String currLine = serialNo + ". " + ele + endOfCurrLine;
-            printThis = printThis + currLine;
-
-            serialNo++;
-        }
-
-        dukeSays(printThis);
+        currTDL.printOutTDL();
     }
 
 
