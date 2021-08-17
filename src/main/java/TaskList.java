@@ -15,10 +15,10 @@ public class TaskList {
      * @param taskTitle a String of the title of the To-do to be added.
      * @return the newly created Todo.
      */
-    public Task addTodo(String taskTitle) {
+    public String addTodo(String taskTitle) {
         Todo task = new Todo(taskTitle);
         this.tasks.add(task);
-        return task;
+        return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
     }
 
     /**
@@ -26,10 +26,10 @@ public class TaskList {
      * @param taskTitle a String of the title of the Deadline to be added.
      * @return the newly created Deadline.
      */
-    public Task addDeadline(String taskTitle) {
+    public String addDeadline(String taskTitle) {
         Deadline task = new Deadline(taskTitle);
         this.tasks.add(task);
-        return task;
+        return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
     }
 
     /**
@@ -37,10 +37,10 @@ public class TaskList {
      * @param taskTitle a String of the title of the Deadline to be added.
      * @return the newly created Deadline.
      */
-    public Task addEvent(String taskTitle) {
+    public String addEvent(String taskTitle) {
         Event task = new Event(taskTitle);
         this.tasks.add(task);
-        return task;
+        return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
     }
 
     /**
@@ -54,7 +54,7 @@ public class TaskList {
         // Assumes that the task exists.
         Task task = this.tasks.get(taskIndex);
         task.completeTask();
-        return task.toString();
+        return "Nice! I've marked this task as done:\n\t" + task.toString();
     }
 
     /**
@@ -75,9 +75,7 @@ public class TaskList {
     public String deleteTask(int taskNumber) {
         int taskIndex = taskNumber - 1;
         // Assumes that the task exists.
-        Task task = this.tasks.get(taskIndex);
-        this.tasks.remove(taskIndex);
-        return task.toString();
+        return "Noted. I've removed this task:\n\t" + this.tasks.remove(taskIndex).toString();
     }
 
     /**

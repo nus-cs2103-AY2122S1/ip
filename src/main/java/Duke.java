@@ -86,33 +86,28 @@ public class Duke extends Chatbot {
             return;
         }
         try {
+            String output;
             if (message.equals(LIST_COMMAND)) {
                 // List the tasks
-                Chatbot.printMessage(this.taskList.toString());
+                output = this.taskList.toString();
             } else if (message.startsWith(COMPLETE_TASK_COMMAND)) {
                 // Mark a task as done
                 int indexNumber = Integer.parseInt(getInputAfterCommand(COMPLETE_TASK_COMMAND, message));
-                String completedTask = this.taskList.completeTask(indexNumber);
-                Chatbot.printMessage("Nice! I've marked this task as done:\n\t" + completedTask);
+                output = this.taskList.completeTask(indexNumber);
             } else if (message.startsWith(DELETE_TASK_COMMAND)) {
                 // Delete a task
                 int indexNumber = Integer.parseInt(getInputAfterCommand(DELETE_TASK_COMMAND, message));
-                String deletedTask = this.taskList.deleteTask(indexNumber);
-                Chatbot.printMessage("Noted. I've removed this task:\n\t" + deletedTask);
+                output = this.taskList.deleteTask(indexNumber);
+            } else if (message.startsWith(CREATE_TODO_COMMAND)) {
+                output = this.taskList.addTodo(getInputAfterCommand(CREATE_TODO_COMMAND, message));
+            } else if (message.startsWith(CREATE_EVENT_COMMAND)) {
+                output = this.taskList.addEvent(getInputAfterCommand(CREATE_EVENT_COMMAND, message));
+            } else if (message.startsWith(CREATE_DEADLINE_COMMAND)) {
+                output = this.taskList.addDeadline(getInputAfterCommand(CREATE_DEADLINE_COMMAND, message));
             } else {
-                // Add a task to the list
-                Task task;
-                if (message.startsWith(CREATE_TODO_COMMAND)) {
-                    task = this.taskList.addTodo(getInputAfterCommand(CREATE_TODO_COMMAND, message));
-                } else if (message.startsWith(CREATE_EVENT_COMMAND)) {
-                    task = this.taskList.addEvent(getInputAfterCommand(CREATE_EVENT_COMMAND, message));
-                } else if (message.startsWith(CREATE_DEADLINE_COMMAND)) {
-                    task = this.taskList.addDeadline(getInputAfterCommand(CREATE_DEADLINE_COMMAND, message));
-                } else {
-                    throw new DukeException("I don't know what that command means.\nPlease input a valid command.");
-                }
-                Chatbot.printMessage("Got it. I've added this task:\n\t" + task.toString() + this.taskList.countTasks());
+                throw new DukeException("I don't know what that command means.\nPlease input a valid command.");
             }
+            Chatbot.printMessage(output);
         } catch (DukeException e) {
             Chatbot.printMessage(e.getMessage());
         } finally {
