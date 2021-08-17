@@ -113,7 +113,7 @@ public class Duke {
     }
 
     private static void addDeadline(String command) throws DukeException {
-        // Template of command: deadline {description} /by {byWhen}
+        // Template of command: deadline {description} /by {time}
         // Find the end of description, which is the start of byWhen
         String errorMessage = "\t Invalid command, description and time is required, please follow template:\n";
         errorMessage += "\t \t deadline {description} /by {time}";
@@ -129,12 +129,12 @@ public class Duke {
             throw new DukeException(errorMessage);
         }
 
-        String byWhen = command.substring(endOfDescription + 1);
-        if (byWhen.isEmpty() || byWhen.isBlank()) {
+        String time = command.substring(endOfDescription + 1);
+        if (isValidString(time)  || !time.substring(0,2).equals("by") || isValidString(time.substring(2))) {
             throw new DukeException(errorMessage);
         }
 
-        Deadline t = new Deadline(description, byWhen);
+        Deadline t = new Deadline(description, time);
 
         System.out.println("\t I have added to the list: \n\t \t" + t.toString());
         taskList[counter] = t;
@@ -143,16 +143,29 @@ public class Duke {
         getCommand();
     }
 
-    private static void addEvent(String command) {
-        // Template of command: event {description} /by {startTime}
-        // Find the end of description, which is the start of startTime
+    private static void addEvent(String command) throws DukeException{
+        // Template of command: event {description} /by {time}
+        // Find the end of description, which is the start of time
+        String errorMessage = "\t Invalid command, description and time is required, please follow template:\n";
+        errorMessage += "\t \t event {description} /at {time}";
+
         int endOfDescription = command.indexOf("/");
+        if (endOfDescription == -1 || command.length() < 6) {
+            throw new DukeException(errorMessage);
+        }
 
         // Find substring containing task description
         String description = command.substring(6, endOfDescription);
+        if (description.isEmpty() || description.isBlank()) {
+            throw new DukeException(errorMessage);
+        }
 
-        String startTime = command.substring(endOfDescription + 1);
-        Event t = new Event(description, startTime);
+        String time = command.substring(endOfDescription + 1);
+        if (isValidString(time) || !time.substring(0,2).equals("at") || isValidString(time.substring(2))) {
+            throw new DukeException(errorMessage);
+        }
+
+        Event t = new Event(description, time);
 
         System.out.println("\t I have added to the list: \n\t \t" + t.toString());
         taskList[counter] = t;
@@ -166,5 +179,9 @@ public class Duke {
         // User command is something else, add command to command list and continue asking for commands
         System.out.println(command);
         getCommand();
+    }
+
+    private static boolean isValidString(String s) {
+        return s.isBlank() || s.isEmpty();
     }
 }
