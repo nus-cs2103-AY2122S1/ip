@@ -17,32 +17,34 @@ public class Duke {
                 "What can I do for you?\n" +
                 "____________________________________________________________\n");
 
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         while (true) {
             String cmd = scan.nextLine();
             System.out.println("\t____________________________________________________________\n");
             String toPrint = "";
 
-            switch (cmd) {
-                case "list":
-                    for (int i = 0; i < tasks.size(); i++) {
-                        toPrint += "\t" + (i + 1) + ". " + tasks.get(i);
-                        if (i != tasks.size() - 1)
-                            toPrint += "\n";
-                    }
-                    break;
-                case "bye":
-                    toPrint = "\tBye. Hope to see you again soon!";
-                    break;
-                case "blah":
-                    toPrint = "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-                    break;
-                default:
-                    tasks.add(cmd);
-                    toPrint = "\tadded: " + cmd;
-                    break;
+            if (cmd.equals("list")) {
+                for (int i = 0; i < tasks.size(); i++) {
+                    toPrint += "\t" + (i + 1) + ".[" + tasks.get(i).getStatusIcon() + "] " + tasks.get(i).description;
+                    if (i != tasks.size() - 1)
+                        toPrint += "\n";
+                }
+            } else if (cmd.equals("blah")) {
+                toPrint = "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            } else if (cmd.equals("bye")) {
+                toPrint = "\tBye. Hope to see you again soon!";
+            } else if (cmd.contains("done")) {
+                int toMark = Integer.parseInt(cmd.substring(5)) - 1;
+                tasks.get(toMark).markAsDone();
+                toPrint = "\tNice! I've marked this task as done: \n" +
+                        "\t\t[" + tasks.get(toMark).getStatusIcon() + "] " + tasks.get(toMark).description;
+            } else {
+                Task t = new Task(cmd);
+                tasks.add(t);
+                toPrint = "\tadded: " + cmd;
             }
+
             System.out.println(toPrint);
             System.out.println("\t____________________________________________________________\n");
 
