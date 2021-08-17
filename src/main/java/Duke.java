@@ -8,17 +8,24 @@ public class Duke {
                 "\tI'm Desmond,\n" +
                 "\thow may I serve you?\n");
 
+        // Initialize string array to store the list
+        String[] tasks = new String[100];
+        int numOfTask = 0;
+
         // Initialize scanner to get user input
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        // Echo to user input and exit when the input is "bye"
+        // Add task based on user input
+        // and exit when the input is "bye"
         while (true) {
             if (input.equals("bye")) {
                 Printer.beautyPrint("Bye (*´▽｀)ノシ. Have a good day!\n");
                 break;
             }
-            Printer.beautyPrint(input + "\n");
+            tasks[numOfTask++] = input;
+            Printer.beautyPrint("added: " +
+                    input + "\n");
             input = scanner.nextLine();
         }
     }
