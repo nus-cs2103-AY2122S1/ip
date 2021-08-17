@@ -26,15 +26,31 @@ public class Duke {
 
 
         while (!isEnd) {
-            String keyword = scanner.next();
-            switch(keyword) {
+            String keywords = scanner.nextLine();
+            String[] keyword = keywords.split(" ");
+            switch(keyword[0]) {
                 case LIST:
                     System.out.println(indentation + Horizontal_line);
                     for (int i = 0; i < taskNum; i++) {
+                        String s = indentation;
+                        String s2 = "";
+
+                        if (task[i] instanceof Todo) {
+                            s += (task[i].getIndex() + 1) + "." + " [T]";
+                            s2 = task[i].getName();
+                        } else if (task[i] instanceof Deadline) {
+                            s += (task[i].getIndex() + 1) + "." + " [D]";
+                            s2 = task[i].getName() +  " ( " + ((Deadline) task[i]).getTime() + " )";
+                        } else if (task[i] instanceof Event){
+                            s += (task[i].getIndex() + 1) + "." + " [E]";
+                            s2 = task[i].getName() +  " ( " + ((Event) task[i]).getTime() + " )";
+                        }
                         if (task[i].isDone() == false) {
-                            System.out.println(indentation + (task[i].getIndex() + 1) + "." + " [ ] " + task[i].getName());
+                            s += "[ ]" + s2;
+                            System.out.println(s);
                         } else {
-                            System.out.println(indentation + (task[i].getIndex() + 1) + "." + " [X] " + task[i].getName());
+                            s += "[X]" + s2;
+                            System.out.println(s);
                         }
                     }
                     System.out.println(indentation + Horizontal_line);
@@ -45,16 +61,17 @@ public class Duke {
                     System.out.println(indentation + Horizontal_line);
                     break;
                 case DONE:
-                    int num = scanner.nextInt();
+
                     try {
-                        task[num - 1].setDone(true);
+                        Integer num = Integer.valueOf(keyword[1]) - 1;
+                        task[num].setDone(true);
                         System.out.println(indentation + Horizontal_line);
                         System.out.println(indentation + "Nice! I've marked this task as done: ");
-                        System.out.println(indentation + "  [X] " + task[num - 1].getName());
+                        System.out.println(indentation + "  [X] " + task[num].getName());
                         System.out.println(indentation + Horizontal_line);
                     } catch (NullPointerException e) {
                         System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "Sorry, you do not have task " + num);
+                        System.out.println(indentation + "Sorry, you do not have this task");
                         System.out.println(indentation + Horizontal_line);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println(indentation + Horizontal_line);
@@ -71,11 +88,80 @@ public class Duke {
                     isEnd = true;
                     break;
                 default:
-                    task[taskNum] = new Task(keyword, false, taskNum);
-                    taskNum++;
-                    System.out.println(indentation + Horizontal_line);
-                    System.out.println(indentation + "Added: "+ keyword);
-                    System.out.println(indentation + Horizontal_line);
+                    try {
+                        switch (keyword[0]) {
+
+                            case "deadline":
+                                String taskname_ddl = "";
+                                String tasktime_ddl = "";
+                                boolean timepart_ddl = false;
+                                for (int i = 1; i < keyword.length; i++) {
+                                    if (keyword[i].startsWith("/")) {
+                                        timepart_ddl = true;
+                                        tasktime_ddl = keyword[i].substring(1) + ": ";
+                                    } else if (timepart_ddl) {
+                                        tasktime_ddl += " " + keyword[i];
+                                    } else {
+                                        taskname_ddl += " " + keyword[i];
+                                    }
+                                }
+                                task[taskNum] = new Deadline(taskname_ddl, false, taskNum, tasktime_ddl);
+                                taskNum++;
+                                System.out.println(indentation + Horizontal_line);
+                                System.out.println(indentation + "Got it. I've added this task: ");
+                                System.out.println(indentation + "   [D][ ] "+ taskname_ddl + " ( " + tasktime_ddl + " )");
+                                System.out.format(indentation + "Now you have %d tasks in the list %n", taskNum);
+                                System.out.println(indentation + Horizontal_line);
+                                break;
+                            case "todo":
+                                String taskname_todo = "";
+                                for (int i = 1; i < keyword.length; i++) {
+                                    taskname_todo += " " + keyword[i];
+                                }
+                                task[taskNum] = new Todo(taskname_todo, false, taskNum);
+                                taskNum++;
+                                System.out.println(indentation + Horizontal_line);
+                                System.out.println(indentation + "Got it. I've added this task: ");
+                                System.out.println(indentation + "   [T][ ] "+ taskname_todo);
+                                System.out.format(indentation + "Now you have %d tasks in the list %n", taskNum);
+                                System.out.println(indentation + Horizontal_line);
+                                break;
+                            case "event":
+                                String taskname_event = "";
+                                String tasktime_event = "";
+                                boolean timepart_event = false;
+                                for (int i = 1; i < keyword.length; i++) {
+                                    if (keyword[i].startsWith("/")) {
+                                        timepart_event = true;
+                                        tasktime_event = keyword[i].substring(1) + ": ";
+                                    } else if (timepart_event) {
+                                        tasktime_event += " " + keyword[i];
+                                    } else {
+                                        taskname_event += " " + keyword[i];
+                                    }
+                                }
+                                task[taskNum] = new Event(taskname_event, false, taskNum, tasktime_event);
+                                taskNum++;
+                                System.out.println(indentation + Horizontal_line);
+                                System.out.println(indentation + "Got it. I've added this task: ");
+                                System.out.println(indentation + "   [E][ ] "+ taskname_event + " ( " + tasktime_event + " )");
+                                System.out.format(indentation + "Now you have %d tasks in the list %n", taskNum);
+                                System.out.println(indentation + Horizontal_line);
+                                break;
+                            default:
+                                System.out.println(indentation + Horizontal_line);
+                                System.out.println(indentation + "please enter a valid type of task or command");
+                                System.out.println(indentation + Horizontal_line);
+                                break;
+
+                        }
+
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(indentation + "please follow the format of adding event");
+                        System.out.println(indentation + Horizontal_line);
+                    }
+
             }
         }
 

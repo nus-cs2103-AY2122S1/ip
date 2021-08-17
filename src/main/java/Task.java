@@ -3,6 +3,7 @@ public class Task {
     private boolean isDone;
     private int index;
 
+
     public Task(String name, boolean isDone, int index) {
         this.name = name;
         this.isDone = isDone;
