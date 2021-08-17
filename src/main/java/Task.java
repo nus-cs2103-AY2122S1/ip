@@ -18,7 +18,8 @@ public class Task {
      * Gets task name.
      * @return task name and whether it is completed.
      */
-    public String getTaskName() {
+    @Override
+    public String toString() {
         return "[" + (this.done ? "X" : " ") + "] " + this.taskName;
     }
 }
