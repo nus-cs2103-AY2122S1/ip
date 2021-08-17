@@ -39,37 +39,14 @@ public class Duke {
                 }
                 System.out.println("____________________________________________________________");
             } else {
-                if (userInput.startsWith("todo ")) {
-                    tasks[current] = new Todo(userInput.substring(5), current + 1);
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + tasks[current].getTaskNoNum());
-                    System.out.println("Now you have " + (current + 1) + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
+                System.out.println("____________________________________________________________");
+                try {
+                    parseInput(userInput, tasks, current);
                     current++;
-                } else if (userInput.startsWith("deadline ")) {
-                    int slash = userInput.indexOf("/by");
-                    tasks[current] = new Deadline(userInput.substring(9, slash), current + 1, userInput.substring(slash + 4));
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + tasks[current].getTaskNoNum());
-                    System.out.println("Now you have " + (current + 1) + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
-                    current++;
-                } else if (userInput.startsWith("event ")) {
-                    int slash = userInput.indexOf("/at");
-                    tasks[current] = new Event(userInput.substring(6, slash), current + 1, userInput.substring(slash + 4));
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + tasks[current].getTaskNoNum());
-                    System.out.println("Now you have " + (current + 1) + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
-                    current++;
-                } else {
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Please prefix your task with deadline, todo, or event.");
-                    System.out.println("____________________________________________________________");
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
                 }
+                System.out.println("____________________________________________________________");
             }
         }
     }
@@ -89,5 +66,43 @@ public class Duke {
             return false;
         }
         return true;
+    }
+
+    public static void parseInput(String userInput, Task[] tasks, int current) throws IllegalArgumentException {
+        if (userInput.startsWith("todo")) {
+            if (userInput.substring(4).trim().isEmpty()) {
+                throw new IllegalArgumentException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+            tasks[current] = new Todo(userInput.substring(5), current + 1);
+            System.out.println("Got it. I've added this task:");
+            System.out.println("  " + tasks[current].getTaskNoNum());
+            System.out.println("Now you have " + (current + 1) + " tasks in the list.");
+        } else if (userInput.startsWith("deadline")) {
+            if (userInput.substring(8).trim().isEmpty()) {
+                throw new IllegalArgumentException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+            }
+            int slash = userInput.indexOf("/by");
+            if (slash == -1) {
+                throw new IllegalArgumentException(" Please set a deadline by adding /by");
+            }
+            tasks[current] = new Deadline(userInput.substring(9, slash), current + 1, userInput.substring(slash + 4));
+            System.out.println("Got it. I've added this task:");
+            System.out.println("  " + tasks[current].getTaskNoNum());
+            System.out.println("Now you have " + (current + 1) + " tasks in the list.");
+        } else if (userInput.startsWith("event")) {
+            if (userInput.substring(5).trim().isEmpty()) {
+                throw new IllegalArgumentException(" ☹ OOPS!!! The description of an event cannot be empty.");
+            }
+            int slash = userInput.indexOf("/at");
+            if (slash == -1) {
+                throw new IllegalArgumentException(" Please set a deadline by adding /at");
+            }
+            tasks[current] = new Event(userInput.substring(6, slash), current + 1, userInput.substring(slash + 4));
+            System.out.println("Got it. I've added this task:");
+            System.out.println("  " + tasks[current].getTaskNoNum());
+            System.out.println("Now you have " + (current + 1) + " tasks in the list.");
+        } else {
+            throw new IllegalArgumentException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
     }
 }
