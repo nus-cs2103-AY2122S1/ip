@@ -19,7 +19,7 @@ import java.util.Scanner;
  * (xiii) provide a user guide
  */
 public class Duke {
-    private final ArrayList<Task> taskList = new ArrayList<Task>();
+    private final ArrayList<Task> taskList = new ArrayList<>();
 
     private enum Keywords {bye, list, done, todo, deadline, event, allCmd, delete}
 
@@ -193,11 +193,10 @@ public class Duke {
         try {
             String description = des.substring(9, des.indexOf('/') - 1);
             String date = des.substring(des.indexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
-            Task atHand = new Deadline(description, date);
-            Deadline deadlineAtHand = (Deadline) atHand;
+            Deadline atHand = new Deadline(description, date);
             taskList.add(atHand);
             System.out.println("Sure. The following task has been added: ");
-            System.out.println(deadlineAtHand);
+            System.out.println(atHand);
             this.numberOfTasks();
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("\"deadline\" command not correctly formatted");
@@ -222,11 +221,10 @@ public class Duke {
         try {
             String description = des.substring(6, des.indexOf('/') - 1);
             String timeframe = des.substring(des.indexOf('/') + 4); //+4 as we do not want to include the "/by " in our output
-            Task atHand = new Event(description, timeframe);
-            Event eventAtHand = (Event) atHand;
+            Event atHand = new Event(description, timeframe);
             taskList.add(atHand);
             System.out.println("Sure. The following task has been added: ");
-            System.out.println(eventAtHand);
+            System.out.println(atHand);
             this.numberOfTasks();
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("\"event\" command not correctly formatted");
@@ -245,11 +243,10 @@ public class Duke {
             throw new DukeException("\"todo\" command not correctly formatted \nPlease insert task argument");
         }
         String description = des.substring(5);
-        Task atHand = new ToDo(description);
-        ToDo toDoAtHand = (ToDo) atHand;
+        ToDo atHand = new ToDo(description);
         taskList.add(atHand);
         System.out.println("Sure. The following task has been added: ");
-        System.out.println(toDoAtHand);
+        System.out.println(atHand);
         this.numberOfTasks();
     }
 
@@ -269,21 +266,21 @@ public class Duke {
                 return "bye";
             } else if (keyword.name().equals("list") && des.equals(keyword.name())) {
                 return "list";
-            } else if (keyword.name().equals("done") && des.contains("done") && des.substring(0, 4).equals("done")) {
+            } else if (keyword.name().equals("done") && des.contains("done") && des.startsWith("done")) {
                 try {
                     String sNum = des.substring(des.lastIndexOf(' ') + 1);
-                    int num = Integer.parseInt(sNum);
+                    Integer.parseInt(sNum);
                     return "done";
                 } catch (NumberFormatException e) {
                     return null;
                 }
-            } else if (keyword.name() == "delete" && des.contains("delete") && des.substring(0, 6).equals("delete")) {
+            } else if (keyword.name().equals("delete") && des.contains("delete") && des.startsWith("delete")) {
                 return "delete";
-            } else if (keyword.name().equals("deadline") && des.contains("deadline") && des.substring(0, 8).equals("deadline")) {
+            } else if (keyword.name().equals("deadline") && des.contains("deadline") && des.startsWith("deadline")) {
                 return "deadline";
-            } else if (keyword.name().equals("event") && des.contains("event") && des.substring(0, 5).equals("event")) {
+            } else if (keyword.name().equals("event") && des.contains("event") && des.startsWith("event")) {
                 return "event";
-            } else if (keyword.name().equals("todo") && des.contains("todo") && des.substring(0, 4).equals("todo")) {
+            } else if (keyword.name().equals("todo") && des.contains("todo") && des.startsWith("todo")) {
                 return "todo";
             }
         }
@@ -331,7 +328,7 @@ public class Duke {
         System.out.println("The possible commands are as follows:");
         System.out.println();
 
-        System.out.println("1. bye  -------- exit the Duke chatbot");
+        System.out.println("1. bye  -------- exit the Duke chat-bot");
         System.out.println();
 
         System.out.println("2. list -------- list all tasks");
