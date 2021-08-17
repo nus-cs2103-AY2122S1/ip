@@ -28,9 +28,6 @@ public class Duke {
 
     // Duke chatbot
     while (!command.equals(exitCommand)) {
-      // Get command
-      command = scanner.nextLine();
-
       // Initialize response content
       String responseContent = "";
 
@@ -43,6 +40,8 @@ public class Duke {
             responseContent = responseContent + (i + 1) + ". " + list[i];
           }
         }
+      } else if (command.equals("")) {
+        responseContent = "";
       } else {
         responseContent = "added: " + command;
         list[index] = command;
@@ -53,7 +52,12 @@ public class Duke {
       String response = "    ____________________________________________________________\n"
           + "     " + responseContent + "\n"
           + "    ____________________________________________________________\n";
-      System.out.println(response);
+      if (!responseContent.equals("")) {
+        System.out.println(response);
+      }
+
+      // Get command
+      command = scanner.nextLine();
     }
 
     // Exit
