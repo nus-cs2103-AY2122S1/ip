@@ -20,7 +20,7 @@ public class DukeListener {
         while(true) {
             // Receive Input text
             String input = sc.nextLine();
-            System.out.println(Display.LINE);
+            System.out.println(Ui.LINE);
 
             if (input.equals("gubbai")) {
                 // Stop listening if "gubbai" is mentioned
@@ -28,13 +28,13 @@ public class DukeListener {
             }
 
             parser.parseInput(input);
-            System.out.println(Display.LINE);
+            System.out.println(Ui.LINE);
         }
 
         // Quit the program after listening stops
         System.out.println(
-                Display.OUTPUT_DISPLAY + "kimi no unmei no hito wa boku jyanai\n"
-                + Display.LINE
+                Ui.OUTPUT_DISPLAY + "kimi no unmei no hito wa boku jyanai\n"
+                + Ui.LINE
         );
     }
 }

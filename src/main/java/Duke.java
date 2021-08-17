@@ -8,7 +8,7 @@ public class Duke {
     }
 
     private void start(){
-        Display.intro();
+        Ui.intro();
         listener.startListen();
     }
 

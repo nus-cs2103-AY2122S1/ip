@@ -35,22 +35,22 @@ public class DukeParser {
 
         } else if (checkTodo.matches()) {
             // Add a to-do task to list
-            System.out.println(Display.OUTPUT_DISPLAY + "Got it. I've added a To-do.");
+            System.out.println(Ui.OUTPUT_DISPLAY + "Got it. I've added a To-do.");
             taskList.add(checkTodo, TaskType.TODO);
 
         } else if (checkDeadline.matches()) {
             // Add a deadline to list
-            System.out.println(Display.OUTPUT_DISPLAY + "Got it. I've added a Deadline.");
+            System.out.println(Ui.OUTPUT_DISPLAY + "Got it. I've added a Deadline.");
             taskList.add(checkDeadline, TaskType.DEADLINE);
 
         } else if (checkEvent.matches()) {
             // Add an event to list
-            System.out.println(Display.OUTPUT_DISPLAY + "Got it. I've added an Event. Don't miss it!");
+            System.out.println(Ui.OUTPUT_DISPLAY + "Got it. I've added an Event. Don't miss it!");
             taskList.add(checkEvent, TaskType.EVENT);
 
         } else {
             // Invalid command
-            System.out.println(Display.OUTPUT_DISPLAY + "☹ eeeeeee~dameda!! " + input + " isn't a valid command!");
+            System.out.println(Ui.OUTPUT_DISPLAY + "☹ eeeeeee~dameda!! " + input + " isn't a valid command!");
         }
     }
 }

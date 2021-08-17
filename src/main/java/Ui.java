@@ -1,4 +1,4 @@
-public class Display {
+public class Ui {
     public static final String LINE = "____________________________________________________________\n";
     public static final String OUTPUT_DISPLAY = "  →   ";
     public static final String OUTPUT_SPACES =  "      ";
@@ -35,10 +35,10 @@ public class Display {
                 mascot + '\n'
         );
         System.out.println(
-                Display.LINE +
+                Ui.LINE +
                 "Hello! I'm Duke!\n" +
                 "What can I do for you?\n" +
-                Display.LINE
+                Ui.LINE
         );
     }
 
