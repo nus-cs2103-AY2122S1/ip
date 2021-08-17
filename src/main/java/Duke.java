@@ -91,9 +91,12 @@ public class Duke {
                     break;
 
                 case ("deadline"):
-                    String[] name_by = cmd_args[1].split("/by");
-                    toAdd = new Deadline(name_by[0],name_by[1]);
-                    System.out.println(formatReply(addTaskMessage(taskList, toAdd)));
+                    try{
+                        toAdd = Deadline.fromCmd(cmd_args);
+                        System.out.println(formatReply(addTaskMessage(taskList, toAdd)));
+                    } catch (DukeException e){
+                        System.out.println(formatReply(e.toString()));
+                    }
                     break;
 
                 case ("event"):
