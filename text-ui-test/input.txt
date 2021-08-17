@@ -3,4 +3,17 @@ event eat bread /at Friday night 8pm
 list
 done 1
 list
+todo
+todo bake bread
+list
+blah
+done 4
+deadline
+deadline buy more bread
+deadline buy more bread /by tonight
+done 4
+event
+event have fun /at 7am
+event have fun
+list
 bye

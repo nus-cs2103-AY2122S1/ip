@@ -20,4 +20,45 @@ Here's your tasks! Wow I'm so helpful!
 1.[D] [X] buy bread (by: Friday)
 2.[E] [ ] eat bread (at: Friday night 8pm)
 
+You didn't specify your task! >:(
+
+Okay okay I've added the task:
+[T] [ ] bake bread
+Yay 3 tasks!
+
+Here's your tasks! Wow I'm so helpful!
+1.[D] [X] buy bread (by: Friday)
+2.[E] [ ] eat bread (at: Friday night 8pm)
+3.[T] [ ] bake bread
+
+That doesn't make any sense! >:(
+
+Huh what task is that :/
+
+You didn't specify your task! >:(
+
+When is the deadline? >:(
+
+Okay okay I've added the task:
+[D] [ ] buy more bread (by: tonight)
+Yay 4 tasks!
+
+Wow you finally did something productive!
+[D] [X] buy more bread (by: tonight)
+
+You didn't specify your task! >:(
+
+Okay okay I've added the task:
+[E] [ ] have fun (at: 7am)
+Yay 5 tasks!
+
+When is the event? >:(
+
+Here's your tasks! Wow I'm so helpful!
+1.[D] [X] buy bread (by: Friday)
+2.[E] [ ] eat bread (at: Friday night 8pm)
+3.[T] [ ] bake bread
+4.[D] [X] buy more bread (by: tonight)
+5.[E] [ ] have fun (at: 7am)
+
 Bye! Shoo!
