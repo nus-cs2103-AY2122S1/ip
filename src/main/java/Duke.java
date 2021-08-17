@@ -77,6 +77,8 @@ public class Duke {
                             case "list":
                                 listTasks();
                                 break;
+                            case "delete":
+                                throw new DukeException("empty delete");
                             case "todo":
                                 throw new DukeException("empty todo");
                             case "deadline":
@@ -106,6 +108,22 @@ public class Duke {
                                         taskArr.get(index).setDone();
                                         textFrame("Good job, I have marked the task as done!" + "\n" +
                                                 taskArr.get(index).toString());
+                                    }
+                                } catch (NumberFormatException e) {
+                                    errorFrame("That is not a valid index!");
+                                }
+                                break;
+                            case "delete":
+                                try {
+                                    int index = Integer.parseInt(inputArr[1]) - 1;
+                                    if (index >= taskArr.size() || index <= -1) {
+                                        errorFrame(" That task does not exist!");
+                                    } else {
+                                        Task deletedTask = taskArr.remove(index);
+                                        textFrame("Loser! I have deleted that task for you" + "\n" +
+                                                deletedTask + "\n" +
+                                                "Now you have " + taskArr.size() + " tasks left.");
+
                                     }
                                 } catch (NumberFormatException e) {
                                     errorFrame("That is not a valid index!");
