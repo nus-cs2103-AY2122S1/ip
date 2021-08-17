@@ -18,4 +18,8 @@ public class Task {
                 " " +
                 this.description);
     }
+
+    public String toString() {
+        return String.format("%s %s", this.getStatusIcon(), this.description);
+    }
 }
