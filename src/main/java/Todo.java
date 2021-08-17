@@ -1,16 +1,11 @@
 public class Todo extends Task {
 
-    public Todo(String description, int number) {
-        super(description, number);
+    public Todo(String description) {
+        super(description);
     }
 
     @Override
     public String getTask() {
-        return number + "." + this.getTaskNoNum();
-    }
-
-    @Override
-    public String getTaskNoNum() {
-        return "[T]" + super.getTaskNoNum();
+        return "[T]" + super.getTask();
     }
 }

@@ -2,18 +2,13 @@ public class Deadline extends Task {
 
     protected String by;
 
-    public Deadline(String description, int number, String by) {
-        super(description, number);
+    public Deadline(String description, String by) {
+        super(description);
         this.by = by;
     }
 
     @Override
     public String getTask() {
-        return number + "." + this.getTaskNoNum();
-    }
-
-    @Override
-    public String getTaskNoNum() {
-        return "[D]" + super.getTaskNoNum() + "(by: " + by + ")";
+        return "[D]" + super.getTask() + "(by: " + by + ")";
     }
 }

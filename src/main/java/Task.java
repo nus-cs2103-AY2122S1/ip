@@ -1,12 +1,10 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected int number;
 
-    public Task(String description, int number) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.number = number;
     }
 
     public String getStatusIcon() {
@@ -18,10 +16,6 @@ public class Task {
     }
 
     public String getTask() {
-        return number + "." + this.getTaskNoNum();
-    }
-
-    public String getTaskNoNum() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }

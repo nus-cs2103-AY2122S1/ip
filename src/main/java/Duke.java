@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -10,8 +11,7 @@ public class Duke {
         System.out.println("____________________________________________________________");
 
         boolean exit = false;
-        Task[] tasks = new Task[100];
-        int current = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
 
         while (!exit) {
             String userInput = myObj.nextLine();
@@ -23,26 +23,36 @@ public class Duke {
                 exit = true;
             } else if (userInput.equals("list")) {
                 System.out.println("____________________________________________________________");
-                for (int i = 0; i < current; i++) {
-                    System.out.println(tasks[i].getTask());
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println((i + 1) + "." + tasks.get(i).getTask());
                 }
                 System.out.println("____________________________________________________________");
             } else if (isDoneCall(userInput)) {
                 int index = Integer.parseInt(userInput.substring(5));
                 System.out.println("____________________________________________________________");
-                if (tasks[index - 1] != null) {
-                    tasks[index - 1].markAsDone();
+                if (tasks.get(index - 1) != null) {
+                    tasks.get(index - 1).markAsDone();
                     System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println("  " + tasks[index - 1].getTaskNoNum());
+                    System.out.println("  " + tasks.get(index - 1).getTask());
                 } else {
                     System.out.println("There is no such task.");
                 }
                 System.out.println("____________________________________________________________");
+            } else if (isRemoveCall(userInput)) {
+                int index = Integer.parseInt(userInput.substring(7));
+                System.out.println("____________________________________________________________");
+                if (tasks.get(index - 1) != null) {
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println("  " + tasks.get(index - 1).getTask());
+                    tasks.remove(index - 1);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                } else {
+                    System.out.println("There is no such task.");
+                }
             } else {
                 System.out.println("____________________________________________________________");
                 try {
-                    parseInput(userInput, tasks, current);
-                    current++;
+                    parseInput(userInput, tasks);
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
@@ -50,6 +60,7 @@ public class Duke {
             }
         }
     }
+
     public static boolean isDoneCall (String strNum) {
         if (strNum == null) {
             return false;
@@ -68,15 +79,33 @@ public class Duke {
         return true;
     }
 
-    public static void parseInput(String userInput, Task[] tasks, int current) throws IllegalArgumentException {
+    public static boolean isRemoveCall (String str) {
+        if (str == null) {
+            return false;
+        }
+        if (str.length() < 8) {
+            return false;
+        }
+        try {
+            int d = Integer.parseInt(str.substring(7));
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        if (!str.startsWith("remove ")) {
+            return false;
+        }
+        return true;
+    }
+
+    public static void parseInput(String userInput, ArrayList<Task> tasks) throws IllegalArgumentException {
         if (userInput.startsWith("todo")) {
             if (userInput.substring(4).trim().isEmpty()) {
                 throw new IllegalArgumentException(" ☹ OOPS!!! The description of a todo cannot be empty.");
             }
-            tasks[current] = new Todo(userInput.substring(5), current + 1);
+            tasks.add(new Todo(userInput.substring(5)));
             System.out.println("Got it. I've added this task:");
-            System.out.println("  " + tasks[current].getTaskNoNum());
-            System.out.println("Now you have " + (current + 1) + " tasks in the list.");
+            System.out.println("  " + tasks.get(tasks.size() - 1).getTask());
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         } else if (userInput.startsWith("deadline")) {
             if (userInput.substring(8).trim().isEmpty()) {
                 throw new IllegalArgumentException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -85,10 +114,10 @@ public class Duke {
             if (slash == -1) {
                 throw new IllegalArgumentException(" Please set a deadline by adding /by");
             }
-            tasks[current] = new Deadline(userInput.substring(9, slash), current + 1, userInput.substring(slash + 4));
+            tasks.add(new Deadline(userInput.substring(9, slash), userInput.substring(slash + 4)));
             System.out.println("Got it. I've added this task:");
-            System.out.println("  " + tasks[current].getTaskNoNum());
-            System.out.println("Now you have " + (current + 1) + " tasks in the list.");
+            System.out.println("  " + tasks.get(tasks.size() - 1).getTask());
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         } else if (userInput.startsWith("event")) {
             if (userInput.substring(5).trim().isEmpty()) {
                 throw new IllegalArgumentException(" ☹ OOPS!!! The description of an event cannot be empty.");
@@ -97,10 +126,10 @@ public class Duke {
             if (slash == -1) {
                 throw new IllegalArgumentException(" Please set a deadline by adding /at");
             }
-            tasks[current] = new Event(userInput.substring(6, slash), current + 1, userInput.substring(slash + 4));
+            tasks.add(new Event(userInput.substring(6, slash), userInput.substring(slash + 4)));
             System.out.println("Got it. I've added this task:");
-            System.out.println("  " + tasks[current].getTaskNoNum());
-            System.out.println("Now you have " + (current + 1) + " tasks in the list.");
+            System.out.println("  " + tasks.get(tasks.size() - 1).getTask());
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         } else {
             throw new IllegalArgumentException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
