@@ -43,7 +43,7 @@ public class TaskList {
     public void delete(int index) {
         try {
             Task removed = tasks.remove(index - 1);
-            System.out.println(Display.OUTPUT_DISPLAY + "Noted. I've removed this task:");
+            System.out.println(Display.OUTPUT_DISPLAY + "Noted. Duke-san removed this task:");
             System.out.println(Display.OUTPUT_SPACES + removed);
             this.printSize();
         } catch (IndexOutOfBoundsException e) {
