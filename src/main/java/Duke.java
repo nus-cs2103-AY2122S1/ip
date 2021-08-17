@@ -14,17 +14,13 @@ public class Duke {
     private final static TaskManager TASK_MANAGER = new TaskManager();
 
     public static void main(String[] args) {
-        printLogo();
         greet();
         run();
         exit();
     }
 
-    public static void printLogo() {
-        Echoer.print("Hello from\n" + LOGO);
-    }
-
     public static void greet() {
+        Echoer.print("Hello from\n" + LOGO);
         Echoer.info("Hello! I'm Duke.\n\tWhat can I do for you?");
     }
 
