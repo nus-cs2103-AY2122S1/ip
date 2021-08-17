@@ -41,16 +41,7 @@ public class Duke {
         userInput = userInput.trim();
 
         while (!userInput.equals("bye")) {
-            if (userInput.equals("list")) {
-                displayList();
-
-            } else if (userInput.startsWith("done")) {
-                String taskId = userInput.substring(4).trim();
-                markTaskAsDone(taskId);
-
-            } else {
-                addToList(userInput);
-            }
+            checkUserInput(userInput);
             userInput = SCANNER.nextLine();
             userInput = userInput.trim();
         }
@@ -69,15 +60,43 @@ public class Duke {
         System.out.println(LINE_SPLIT + '\n');
     }
 
-    public static void addToList(String description) {
+    public static void checkUserInput(String userInput) {
+        if (userInput.equals("list")) {
+            displayList();
+
+        } else if (userInput.startsWith("done")) {
+            String taskNumberString = userInput.substring(4).trim();
+            markTaskAsDone(taskNumberString);
+
+        } else if (userInput.startsWith("todo")) {
+            String description = userInput.substring(4).trim();
+            addToList(new Todo(description));
+
+        } else if (userInput.startsWith("event")) {
+            String[] inputParts = userInput.substring(6).split("/at");
+            String description = inputParts[0].trim();
+            String timing = inputParts[1].trim();
+            addToList(new Event(description, timing));
+
+        } else if (userInput.startsWith("deadline")) {
+            String[] inputParts = userInput.substring(8).split("/by");
+            String description = inputParts[0].trim();
+            String by = inputParts[1].trim();
+            addToList(new Deadline(description, by));
+
+        } else {
+            echo("Invalid input: Please ensure instruction follows specified format");
+        }
+    }
+
+    public static void addToList(Task newTask) {
         if (TODO_LIST.size() == MAX_STORAGE) {
-            echo("unable to add: max storage in your list");
+            echo("Unable to add task: Task List is full");
             return;
         }
-
-        Task newTask = new Task(description);
         TODO_LIST.add(newTask);
-        echo("added: ".concat(newTask.getDescription()));
+        echo("Got it. I've added this task:\n\t  " + newTask + "\n\tNow you have " +
+                TODO_LIST.size() + " tasks in the list");
     }
 
     public static void markTaskAsDone(String taskId) {
