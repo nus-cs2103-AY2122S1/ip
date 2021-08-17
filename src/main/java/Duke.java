@@ -77,15 +77,22 @@ public class Duke {
         }
     }
 
-    protected static class EmptyDescription extends DukeExceptions {
-        public EmptyDescription(String message) {
+    protected static class EmptyDescriptionException extends DukeExceptions {
+        public EmptyDescriptionException(String message) {
             super("Sorry! There needs to be a description for a " + message + " item :(\nPlease try again!");
         }
     }
 
-    protected static class EmptyDetails extends DukeExceptions {
-        public EmptyDetails(String message) {
+    protected static class EmptyDetailsException extends DukeExceptions {
+        public EmptyDetailsException(String message) {
             super("Sorry! Please include more details for a " + message + " item :(\nPlease try again!");
+        }
+    }
+
+    // TODO it shows 1 to 0 if "done" is entered before any items are appended to the list
+    protected static class NotDoneRightException extends DukeExceptions {
+        public NotDoneRightException(String start, String end) {
+            super("Please input an integer in the range of " + start + " to " + end + "!");
         }
     }
 
@@ -93,7 +100,7 @@ public class Duke {
 
         String linebreak = "~~~~~~~~~~";
         String command; // this is the container for the command received from the user
-        Task[] todoList = new Task[100]; // this array stores previous commands
+        ArrayList<Task> todoList = new ArrayList<Task>(); // this array stores previous commands
         int pointer = 0; // this tracks the newest position to add an item in todoList
         Duke duke = new Duke();
 
@@ -122,20 +129,25 @@ public class Duke {
                 if (pointer == 0) {
                     System.out.println("Yay! Nothing on your list right now :>");
                 }
-                for (int counter = 0; counter < 100; counter++) {
-                    if (todoList[counter] != null) {
-                        System.out.println((counter + 1) + ". " + todoList[counter].toString());
-                    } else {
-                        System.out.println(linebreak);
-                        break;
-                    }
+
+                int counter = 0;
+                for (Task task : todoList) {
+                    System.out.println((counter + 1) + ". " + todoList.get(counter).toString());
+                    counter++;
                 }
+                System.out.println(linebreak);
 
             } else if (command.toLowerCase().split(" ")[0].equals("done")) {
-                System.out.println("Yay good job!!");
+
+                if (command.split(" ").length == 1 || Integer.parseInt(command.split(" ")[1]) < 1
+                        || Integer.parseInt(command.split(" ")[1])> todoList.size()) {
+                    throw new NotDoneRightException("1", String.valueOf(todoList.size()));
+                }
+
                 int ref = Integer.parseInt(command.split(" ")[1]) - 1;
-                todoList[ref].markAsDone();
-                System.out.println(todoList[ref]);
+                todoList.get(ref).markAsDone();
+                System.out.println("Yay good job!!");
+                System.out.println(todoList.get(ref));
                 System.out.println(linebreak);
 
 
@@ -148,50 +160,50 @@ public class Duke {
                     case "todo" -> {
                         String[] taskInfo = command.split(" ", 2);
                         if (taskInfo.length == 1) {
-                            throw new EmptyDescription("todo");
+                            throw new EmptyDescriptionException("todo");
                         }
 
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
-                        todoList[pointer] = duke.new Todo(taskInfo[1]);
+                        todoList.add(duke.new Todo(taskInfo[1]));
                         break;
 
                     }
                     case "deadline" -> {
                         String[] taskInfo = command.split(" ", 2);
                         if (taskInfo.length == 1) {
-                            throw new EmptyDescription("todo");
+                            throw new EmptyDescriptionException("todo");
                         }
 
                         String[] additionalTaskInfo = taskInfo[1].split("/by", 2);
                         if (additionalTaskInfo.length == 1) {
-                            throw new EmptyDetails("deadline");
+                            throw new EmptyDetailsException("deadline");
                         }
                         String description = additionalTaskInfo[0];
                         String dateBy = additionalTaskInfo[1];
 
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
-                        todoList[pointer] = duke.new Deadline(description, dateBy);
+                        todoList.add(duke.new Deadline(description, dateBy));
                         break;
 
                     }
                     case "event" -> {
                         String[] taskInfo = command.split(" ", 2);
                         if (taskInfo.length == 1) {
-                            throw new EmptyDescription("todo");
+                            throw new EmptyDescriptionException("todo");
                         }
 
                         String[] additionalTaskInfo = taskInfo[1].split("/at", 2);
                         if (additionalTaskInfo.length == 1) {
-                            throw new EmptyDetails("event");
+                            throw new EmptyDetailsException("event");
                         }
                         String description = additionalTaskInfo[0];
                         String eventDetails = additionalTaskInfo[1];
 
                         System.out.println("added: " + command);
                         System.out.println(linebreak);
-                        todoList[pointer] = duke.new Event(description, eventDetails);
+                        todoList.add(duke.new Event(description, eventDetails));
                         break;
 
                     }
