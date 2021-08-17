@@ -1,12 +1,15 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    List<String> itemList;
+    List<String> taskList;
+    boolean[] isDone;
 
     public Duke() {
-        itemList = new ArrayList<>(100);
+        taskList = new ArrayList<>(100);
+        isDone = new boolean[100];
     }
 
     void startConversation() {
@@ -16,35 +19,53 @@ public class Duke {
         while (true) {
             // conversation loop
             String input = sc.nextLine();
-            if (input.equals("bye")) {
+            String[] strArr = input.split(" ");
+            String cmd = strArr[0];
+            if (cmd.equals("bye")) {
                 break;
             }
 
-            switch (input) {
+            switch (cmd) {
             case "":
                 break;
             case "list":
-                listItem();
+                listTask();
+                break;
+            case "done":
+                markTaskDone(Integer.parseInt(strArr[1]));
                 break;
             default:
-                addItem(input);
+                addTask(input);
             }
         }
         sayBye("Alex");
     }
 
-    private void addItem(String item) {
-        this.itemList.add(item);
+    private void addTask(String task) {
+        this.taskList.add(task);
         printHorizLine();
-        System.out.println("\tadded " + item);
+        System.out.println("\tadded " + task);
         printHorizLine();
     }
 
-    private void listItem() {
+    private void listTask() {
         printHorizLine();
-        for (int i = 1; i <= this.itemList.size(); i++) {
-            System.out.format("\t%d. %s\n", i, itemList.get(i-1));
+        for (int i = 1; i <= this.taskList.size(); i++) {
+            if (!isDone[i-1]) {
+                System.out.format("\t%d.[ ] %s\n", i, taskList.get(i-1));
+            } else {
+                System.out.format("\t%d.[X] %s\n", i, taskList.get(i-1));
+            }
+
         }
+        printHorizLine();
+    }
+
+    private void markTaskDone(int idx) {
+        printHorizLine();
+        this.isDone[idx - 1] = true;
+        System.out.println("\tNice! I've marked this task as done:");
+        System.out.println("\t\t[X] " + this.taskList.get(idx-1));
         printHorizLine();
     }
 
