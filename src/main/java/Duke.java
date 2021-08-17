@@ -3,8 +3,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+
 public class Duke {
     // TODO: handle more errors
+    // TODO: use enum
     public static void main(String[] args) {
         List<Task> list = new ArrayList<>();
         String divider = "____________________________________________________________";
