@@ -29,7 +29,7 @@ public class Duke {
         String exitMessage ="Bye. Hope to see you again soon!";
 
         divider();
-        System.out.println(String.format("%4s", exitMessage));
+        System.out.println(String.format("%4s%s", " ", exitMessage));
         divider();
     }
 
@@ -43,6 +43,9 @@ public class Duke {
     private static void updateTaskList(String command) {
         // The type of the task indicated before the first space.
         int indexOfFirstSpace = command.indexOf(" ");
+        if (indexOfFirstSpace == -1) {
+            return;
+        }
         String taskType = command.substring(0, indexOfFirstSpace);
         String description = command.substring(indexOfFirstSpace + 1);
 
@@ -122,6 +125,6 @@ public class Duke {
                 Duke.updateTaskList(command);
             }
         }
-
+        sc.close();
     }
 }
