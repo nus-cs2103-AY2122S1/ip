@@ -21,8 +21,12 @@ public class DukeList {
     }
 
 
-    public void addTodo(String text) {
+    public void addTodo(String text) throws DukeException {
         String message = text.trim();
+
+        if (message.equals("")) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
 
         ToDos input = new ToDos(message);
         list[count] = input;
