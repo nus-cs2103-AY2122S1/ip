@@ -17,7 +17,7 @@ public class Duke {
                     counter++;
                 }
             } else {
-                System.out.println("    ***\n" + "     " + userInput + "\n    ***");
+                System.out.println("    ***\n" + "    Added: " + userInput + "\n    ***");
                 contents.add(userInput);
             }
             newScan = new Scanner(System.in);
