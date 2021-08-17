@@ -1,6 +1,12 @@
 import java.util.Scanner;
 
 public class Duke {
+    // Saved tasks
+    private static final String[] tasks = new String[100];
+
+    // Index in the tasks array of the next task
+    private static int nextTaskIndex = 0;
+
     /**
      * Print out the separation line between elements of the program
      */
@@ -32,7 +38,7 @@ public class Duke {
     /**
      * Print out the greetings to the user
      */
-    public static void greetings() {
+    private static void greetings() {
         String logo = "\t  ____        _        \n"
                 + "\t |  _ \\ _   _| | _____ \n"
                 + "\t | | | | | | | |/ / _ \\\n"
@@ -52,7 +58,21 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String currentCommand = sc.nextLine();
         while (!currentCommand.equals("bye")) {
-            displayContentBetweenLines(currentCommand);
+            if (currentCommand.equals("list")) {
+                insertSeparateLine();
+                for (int i = 0; i < 100; i++) {
+                    if (!(tasks[i] == null)) {
+                        displayContent((i + 1) + ". " + tasks[i]);
+                    } else {
+                        break;
+                    }
+                }
+                insertSeparateLine();
+            } else {
+                tasks[nextTaskIndex] = currentCommand;
+                nextTaskIndex++;
+                displayContentBetweenLines("added: " + currentCommand);
+            }
             currentCommand = sc.nextLine();
         }
 
