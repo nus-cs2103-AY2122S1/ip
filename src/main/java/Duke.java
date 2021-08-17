@@ -3,28 +3,30 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Im Duke\nWhat can I do for you?");
-
-        Scanner sc = new Scanner(System.in);
         String border = "____________________________________________________________";
         Printer printer = new Printer(border);
+        printer.PrintIntro();
+
         ArrayList<Task> tasks = new ArrayList<Task>();
+        Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            String[] splitInput = input.split(" ");
+            String[] splitInput = input.split(" ", 2);
             if (splitInput[0].equals("done")) {
                 int index = Integer.parseInt(splitInput[1]) - 1;
                 String returnString = tasks.get(index).markDone();
                 printer.PrintMessage(returnString);
             } else if (input.equals("list")) {
                 printer.PrintList(tasks);
+            } else if (splitInput[0].equals("todo")) {
+                tasks.add(new Todo(splitInput[1]));
+            } else if (splitInput[0].equals("deadline")) {
+                String[] furtherSplits = splitInput[1].split("/by");
+                tasks.add(new Deadline(furtherSplits[0], furtherSplits[1]));
+            } else if (splitInput[0].equals("event")) {
+                String[] furtherSplits = splitInput[1].split("/at");
+                tasks.add(new Event(furtherSplits[0], furtherSplits[1]));
             } else {
                 tasks.add(new Task(input));
                 printer.PrintMessage(String.format("added: %s", input));
