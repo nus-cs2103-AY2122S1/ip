@@ -11,14 +11,14 @@ class DukeBot {
 
     private String handleBye(String[] inputs) throws InvalidCommandException {
         if (inputs.length > 1) {
-            throw new InvalidCommandException("Unknown command!");
+            throw new InvalidCommandException("Unknown command! Did you mean 'bye'?");
         }
         return "Bye. Hope to see you again soon!";
     }
 
     private String handleList(String[] inputs) throws InvalidCommandException {
         if (inputs.length > 1) {
-            throw new InvalidCommandException("Unknown command!");
+            throw new InvalidCommandException("Unknown command! Did you mean 'list'?");
         }
         return taskList.toString();
     }
@@ -31,7 +31,7 @@ class DukeBot {
         try {
             taskNo = Integer.parseInt(inputs[1]);
         } catch (NumberFormatException e) {
-            throw new InvalidCommandException("Give me a task number! >.<");
+            throw new InvalidCommandException("I don't see a task number! >.<");
         }
         if (taskNo > taskList.size() || taskNo <= 0) {
             String msg = taskList.size() == 0
