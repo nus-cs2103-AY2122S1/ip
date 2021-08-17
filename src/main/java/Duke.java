@@ -11,7 +11,7 @@ public class Duke {
      */
     private static String reply(String str) {
         String y_border = "------------------------------------------------------------\n";
-        return y_border + "PEPPER JACK: " + str + "\n" + y_border;
+        return y_border + "[PEPPER JACK] " + str + "\n" + y_border;
     }
 
     public static void main(String[] args) {
@@ -30,11 +30,12 @@ public class Duke {
         System.out.println("The name is\n" + logo);
         System.out.print(reply("This Pepper Jack, wassup!"));
 
+        ArrayList<String> lst = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
         while(true) {
             // Get user input
-            System.out.print("YOU: ");
+            System.out.print("[YOU] ");
             String user_input = sc.nextLine();
 
             if (user_input.equals("bye")){
@@ -42,8 +43,19 @@ public class Duke {
                 System.out.print(reply("Pepper Jack loves Fraggle Rock!"));
                 break;
             }
+            else if (user_input.equals("list")){
+                // Show list
+                String lst_display = "\n\n";
+
+                for (int i = 0; i < lst.size(); i++){
+                    lst_display = lst_display + String.format("\t%d. %s\n", i + 1, lst.get(i));
+                }
+                System.out.print(reply(lst_display));
+            }
             else {
-                System.out.print(reply(user_input));
+                // Add user input
+                lst.add(user_input);
+                System.out.print(reply("added: " + user_input));
             }
         }
     }
