@@ -7,8 +7,7 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private final String lineBreak = "\n____________________________________________________________\n";
-    private ArrayList<Task> list = new ArrayList<>();
+    private final ArrayList<Task> list = new ArrayList<>();
 
     public Duke() {}
 
@@ -39,12 +38,16 @@ public class Duke {
 
     /**
      * Adds the given task into list
-     * @param input the given text
+     * @param t the task to add
      * @return message indicating successful addition to list
      */
-    public String add(String input) {
-        this.list.add(new Task(input));
-        return wrapText("added:" + input);
+    public String add(Task t) {
+        this.list.add(t);
+        return wrapText(
+                String.format(
+                        "Got it. I've added this task:\n %s\nNow you have %d task(s) in the list",
+                        t.toString(),
+                        Task.count));
     }
 
     /**
@@ -53,12 +56,12 @@ public class Duke {
      */
     public String showList () {
         Task[] lst = list.toArray(new Task[0]);
-        String output = "Here are the tasks in your list:\n";
+        StringBuilder output = new StringBuilder("Here are the tasks in your list:");
         int index = 1;
         for (Task t : lst) {
-            output += String.format("\n%d.%s", index++, t.toString());
+            output.append(String.format("\n%d.%s", index++, t.toString()));
         }
-        return wrapText(output);
+        return wrapText(output.toString());
     }
 
     /**
@@ -69,7 +72,7 @@ public class Duke {
     public String markDone(int index) {
         Task t = this.list.get(index - 1);
         t.setDone();
-        return wrapText(String.format("Nice! I've marked this task as done: \n %s", t.toString()));
+        return wrapText(String.format("Nice! I've marked this task as done:\n %s", t.toString()));
     }
 
     /**
@@ -78,6 +81,7 @@ public class Duke {
      * @return input wrapped with line breaks
      */
     private String wrapText(String input) {
+        String lineBreak = "\n____________________________________________________________\n";
         return lineBreak + input + lineBreak;
     }
 
@@ -86,20 +90,32 @@ public class Duke {
         System.out.println(bot.greet());
 
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
+
+        scanner: while (sc.hasNext()) {
             String command = sc.next();
-            if (command.equals("bye")) {
-                System.out.println(bot.goodbye());
-                break;
-            } else if (command.equals("list")) {
-                System.out.println(bot.showList());
-            } else if (command.equals("add")){
-                System.out.println(bot.add(sc.nextLine()));
-            } else if (command.equals("done")) {
-                System.out.println(bot.markDone(sc.nextInt()));
+            String[] input = sc.nextLine().split(" /[a-z][a-z] ");
+
+            switch (command) {
+                case "bye":
+                    System.out.println(bot.goodbye());
+                    break scanner;
+                case "list":
+                    System.out.println(bot.showList());
+                    break;
+                case "todo":
+                    System.out.println(bot.add(new Todo(input[0])));
+                    break;
+                case "deadline":
+                    System.out.println(bot.add(new Deadline(input[0], input[1])));
+                    break;
+                case "event":
+                    System.out.println(bot.add(new Event(input[0], input[1])));
+                    break;
+                case "done":
+                    System.out.println(bot.markDone(Integer.parseInt(input[0].strip())));
+                    break;
             }
         }
-
         sc.close();
     }
 }

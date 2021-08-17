@@ -1,4 +1,5 @@
 public class Task {
+    protected static int count = 0;
     protected String description;
     protected boolean isDone;
 
@@ -9,6 +10,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        Task.count++;
     }
 
     /**
