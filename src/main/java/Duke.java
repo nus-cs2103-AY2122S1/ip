@@ -4,7 +4,65 @@ import java.util.Scanner;
 
 public class Duke {
 
+    public static final String TODO = "todo";
+    public static final String DEADLINE = "deadline";
+    public static final String EVENT = "event";
 
+    private static void initialiseBot() {
+        String message = "Hello! I'm Duke\n"
+                + "What can I do for you?";
+        System.out.println(message);
+    }
+
+    private static void closeBot() {
+        String message = "Bye. Hope to see you again soon!";
+        System.out.println(message);
+    }
+
+    private static Task getTask(String message, String taskType) throws EmptyTaskDescriptionException, InvalidDateAndTimeException, InvalidInputException {
+
+        switch (taskType) {
+            case TODO:
+                if (message.trim().equals(TODO)) {
+                    throw new EmptyTaskDescriptionException("Empty Todo Description", TODO);
+                } else {
+                    if (!Character.isWhitespace(message.charAt(4))) {
+                        throw new InvalidInputException("invalid input");
+                    } else {
+                        String taskName = message.substring(TODO.length() + 1);
+                        return new Todo(taskName);
+                    }
+                }
+            case DEADLINE:
+                if (message.trim().equals(DEADLINE)) {
+                    throw new EmptyTaskDescriptionException("Empty Deadline Description", DEADLINE);
+                } else {
+                    String deadline = getDateAndTime(message, DEADLINE);
+
+                    int startingIndex = message.indexOf(" ");
+                    int endingIndex = message.indexOf("/");
+                    String taskName = message.substring(startingIndex + 1, endingIndex - 1);
+
+                    //todo deadline return book being invalid input rather than invalid date
+
+                    return new Deadline(taskName, deadline);
+                }
+            case EVENT:
+                if (message.trim().equals(EVENT)) {
+                    throw new EmptyTaskDescriptionException("Empty Event Description", EVENT);
+                } else {
+                    String eventTime = getDateAndTime(message, EVENT);
+
+                    int startingIndex = message.indexOf(" ");
+                    int endingIndex = message.indexOf("/");
+                    String taskName = message.substring(startingIndex + 1, endingIndex - 1);
+
+                    return new Event(taskName, eventTime);
+                }
+        }
+
+        return new Task();
+    }
 
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
@@ -23,11 +81,8 @@ public class Duke {
 
         while (status) {
             String message = sc.nextLine();
-            message.trim();
 
-            if (message.isEmpty()) {
-
-            } else if (message.equals("bye")) {
+            if (message.equals("bye")) {
                 status = false;
                 closeBot();
             } else if (message.equals("list")) {
@@ -35,30 +90,53 @@ public class Duke {
             } else if (message.startsWith("done")) {
                 markTaskAsDone(message, tasks);
             } else if (message.startsWith("todo")) {
-                String taskName = getTaskName(message);
-                addTodo(taskName, tasks);
+                Task todo = null;
+                try {
+                    todo = getTask(message, TODO);
+                    if (todo.isEmpty()) {
+                        throw new InvalidInputException("error");
+                    }
+                    addTask(todo, tasks);
+                } catch (DukeException e) {
+                    e.printErrorMessage();
+                }
             } else if (message.startsWith("deadline")) {
-                String deadline = getDateAndTime(message, "deadline");
-                String taskName = getTaskName(message);
-                addDeadline(taskName, deadline, tasks);
+                Task deadline = null;
+                try {
+                    deadline = getTask(message, DEADLINE);
+                    if (deadline.isEmpty()) {
+                        throw new InvalidInputException("error");
+                    }
+                    addTask(deadline, tasks);
+                } catch (DukeException e) {
+                    e.printErrorMessage();
+                }
             } else if (message.startsWith("event")) {
-                String eventTime = getDateAndTime(message, "event");
-                String taskName = getTaskName(message);
-                addEvent(taskName, eventTime, tasks);
+                Task event = null;
+                try {
+                    event = getTask(message, EVENT);
+                    if (event.isEmpty()) {
+                        throw new InvalidInputException("error");
+                    }
+                    addTask(event, tasks);
+                } catch (DukeException e) {
+                    e.printErrorMessage();
+                }
             } else {
-//                echo(message);
-                add(message, tasks);
+                try {
+                    throw new InvalidInputException("invalid input");
+                } catch (DukeException e) {
+                    e.printErrorMessage();
+                }
             }
         }
 
         sc.close();
-
     }
 
-    private static void addEvent(String taskName, String eventTime, List<Task> tasks) {
-        Event storedEvent = new Event(taskName, eventTime);
-        tasks.add(storedEvent);
-        String displayedMessage = getAddedSuccessMessage(storedEvent, tasks);
+    private static void addTask(Task task, List<Task> tasks) {
+        tasks.add(task);
+        String displayedMessage = getAddedSuccessMessage(task, tasks);
         System.out.println(displayedMessage);
     }
 
@@ -76,63 +154,42 @@ public class Duke {
         return tasks.size();
     }
 
-    private static void addDeadline(String taskName, String deadline, List<Task> tasks) {
-        Deadline storedDeadline = new Deadline(taskName, deadline);
-        tasks.add(storedDeadline);
-        String displayedMessage = getAddedSuccessMessage(storedDeadline, tasks);
-        System.out.println(displayedMessage);
-    }
-
-    private static String getDateAndTime(String message, String taskType) {
-
-        if (taskType.equals("deadline")) {
-            int startingIndex = message.indexOf("/by ");
-
-            if (startingIndex < 0 || startingIndex + 3 == message.length() - 1) {
-                return "";
-            }
-
-            String result = message.substring(startingIndex + 4);
-            return result;
-        } else if (taskType.equals("event")) {
-            int startingIndex = message.indexOf("/at ");
-
-            if (startingIndex < 0 || startingIndex + 3 == message.length() - 1) {
-                return "";
-            }
-
-            String result = message.substring(startingIndex + 4);
-            return result;
-
-        } else {
-            return "";
-        }
-
-    }
-
-    private static String getTaskName(String message) {
+    private static void checkValidTaskName(String message) throws InvalidInputException {
         int startingIndex = message.indexOf(" ");
         int endingIndex = message.indexOf("/");
 
-        if (message.startsWith("todo") && startingIndex != message.length() - 1) {
-            return message.substring(startingIndex + 1);
-        } else if (startingIndex < 0 || (endingIndex - startingIndex < 2)) {
-            //TODO no task name
-            return "error";
-        } else {
-            return message.substring(startingIndex + 1, endingIndex - 1);
+        if (startingIndex < 0 || endingIndex - startingIndex <= 1) {
+            throw new InvalidInputException("invalid input");
         }
-
     }
 
-    private static void addTodo(String taskName, List<Task> tasks) {
-        Todo storedTodo = new Todo(taskName);
-        tasks.add(storedTodo);
-        String displayedMessage = getAddedSuccessMessage(storedTodo, tasks);
-        System.out.println(displayedMessage);
+    private static String getDateAndTime(String message, String taskType) throws InvalidDateAndTimeException, InvalidInputException {
+        int startingIndex;
+
+        checkValidTaskName(message);
+
+        switch (taskType) {
+            case DEADLINE:
+                startingIndex = message.indexOf("/by ");
+
+                if (startingIndex < 0 || startingIndex + 3 == message.length() - 1) {
+                    throw new InvalidDateAndTimeException("Invalid deadline", DEADLINE);
+                }
+
+                return message.substring(startingIndex + 4);
+            case EVENT:
+                startingIndex = message.indexOf("/at ");
+
+                if (startingIndex < 0 || startingIndex + 3 == message.length() - 1) {
+                    throw new InvalidDateAndTimeException("Invalid event time", EVENT);
+                }
+
+                return message.substring(startingIndex + 4);
+            }
+        return "";
     }
 
-    private static int getTaskNumber(String message) {
+    private static int getTaskNumber (String message) throws InvalidInputException {
         String numberString = "";
         for (int i = 0; i < message.length(); i++) {
             char currentChar = message.charAt(i);
@@ -145,7 +202,7 @@ public class Duke {
 
         int number;
         if (numberString.isEmpty()) {
-            number = -1;
+            throw new InvalidInputException("invalid task number entered");
         } else {
             number = Integer.parseInt(numberString);
         }
@@ -153,17 +210,22 @@ public class Duke {
     }
 
     private static void markTaskAsDone(String message, List<Task> tasks) {
-        int taskPosition = getTaskNumber(message) - 1;
-        if (taskPosition < 0) {
-            System.out.println("error");
-        } else {
-            Task taskMarked = tasks.get(taskPosition);
-            taskMarked.markAsDone();
-            String displayedMessage = "Nice! I've marked this task as done:\n"
-                    + "  "
-                    + taskMarked.toString();
-            System.out.println(displayedMessage);
+        try {
+            int taskPosition = getTaskNumber(message) - 1;
+            if (taskPosition < 0) {
+                System.out.println("error");
+            } else {
+                Task taskMarked = tasks.get(taskPosition);
+                taskMarked.markAsDone();
+                String displayedMessage = "Nice! I've marked this task as done:\n"
+                        + "  "
+                        + taskMarked.toString();
+                System.out.println(displayedMessage);
+            }
+        } catch (DukeException e) {
+            e.printErrorMessage();
         }
+
     }
 
     private static void printTasks(List<Task> tasks) {
@@ -176,27 +238,9 @@ public class Duke {
         }
     }
 
-    private static void add(String message, List<Task> tasks) {
-        String displayedMessage = "added: " + message;
-        Task storedTask = new Task(message);
-        tasks.add(storedTask);
-        System.out.println(displayedMessage);
-    }
 
-    private static void closeBot() {
-        String message = "Bye. Hope to see you again soon!";
-        System.out.println(message);
-    }
 
-    private static void echo(String message) {
-        System.out.println(message);
-    }
 
-    private static void initialiseBot() {
-        String message = "Hello! I'm Duke\n"
-                + "What can I do for you?";
-        System.out.println(message);
-    }
 
 
 }
