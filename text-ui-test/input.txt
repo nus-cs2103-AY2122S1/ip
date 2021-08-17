@@ -1,0 +1,7 @@
+todo Eat, code, and sleep
+event project meeting /at Monday 2-3pm
+deadline cs2103 ip /by Thursday 2359
+list
+done 2
+list
+bye
