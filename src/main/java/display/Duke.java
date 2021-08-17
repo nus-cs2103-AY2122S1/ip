@@ -97,6 +97,13 @@ public class Duke {
                     log.append("\n\t Got it. I've added this task:\n\t\t").append(event)
                             .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
                     break;
+                case "delete":
+                    idx = Integer.parseInt(words[1]);
+                    task = tasks.get(idx - 1);
+                    tasks.remove(idx - 1);
+                    log.append("\n\t Noted. I've removed this task:\n\t\t").append(task)
+                            .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
+                    break;
                 default:
                     throw new DukeException(
                             "\n\t ☹ My dictionary does not contain this sophisticated language.\n\t Maybe someday :)");
