@@ -17,7 +17,7 @@ public class Duke {
         ArrayList<Task> tasks = new ArrayList<Task>();
         String input = sc.nextLine();
 
-        do {
+        while (!input.equals("bye")) {
             String[] splitInput = input.split(" ");
             if (splitInput[0].equals("done")) {
                 int index = Integer.parseInt(splitInput[1]) - 1;
@@ -30,7 +30,7 @@ public class Duke {
                 printer.PrintMessage(String.format("added: %s", input));
             }
             input = sc.nextLine();
-        } while (!input.equals("bye"));
+        }
         printer.PrintMessage("Bye. Hope to see you again soon!");
     }
 }

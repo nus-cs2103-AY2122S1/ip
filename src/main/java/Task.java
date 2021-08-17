@@ -15,4 +15,8 @@ public class Task {
         this.isDone = true;
         return String.format("Nice! I've marked this task as done:\n  [X] %s", this.description);
     }
+
+    public String toString() {
+        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+    }
 }
