@@ -8,7 +8,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         while(loop) {
             String input = scanner.nextLine();
-            loop = duke.echo(input);
+            loop = duke.process(input);
         }
 
     }
