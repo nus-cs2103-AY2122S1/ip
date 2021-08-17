@@ -37,6 +37,9 @@ public class Saber {
         add,
         bye,
         done,
+        deadline,
+        event,
+        todo,
         list,
     }
 
@@ -45,6 +48,41 @@ public class Saber {
         System.out.println(lineBreak + "\n      I have added: "  + task + "\n\n" + lineBreak);
         totalTask++;
         newTaskIndex++;
+    }
+
+    public static void handleDeadlineTask(String task, String time) {
+        Task deadline = new Deadline(task, time);
+        taskArray[newTaskIndex] = deadline;
+        System.out.println(lineBreak + "\n      Right, Master.\n"
+                +  "      I'll ensure that you will \n      do this task before the deadline: \n"
+                + "\n        " + deadline);
+        totalTask++;
+        newTaskIndex++;
+        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task "
+                : "have " + totalTask + " tasks ";
+        System.out.println("\n      Currently, Master " + taskPlural +
+                "\n      in the list." + "\n\n" + lineBreak);
+    }
+
+    public static void handleDoneTask(int taskIndex) {
+        Task task = taskArray[taskIndex];
+        task.markAsDone();
+        System.out.println(lineBreak + "\n      Understand, Master.\n" + "      I'll mark this done right away.\n"
+                + "\n        " + task + "\n\n" + lineBreak);
+    }
+
+    public static void handleEventTask(String task, String time) {
+        Task event = new Event(task, time);
+        taskArray[newTaskIndex] = event;
+        System.out.println(lineBreak + "\n      Right, Master.\n"
+                +  "      I'll make sure you remember \n      to come to this event: \n"
+                + "\n        " + event);
+        totalTask++;
+        newTaskIndex++;
+        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task "
+                : "have " + totalTask + " tasks ";
+        System.out.println("\n      Currently, Master " + taskPlural +
+                "\n      in the list." + "\n\n" + lineBreak);
     }
 
     public static void handleListTask() {
@@ -56,11 +94,18 @@ public class Saber {
         System.out.println(lineBreak);
     }
 
-    public static void handleDoneTask(int taskIndex) {
-        Task task = taskArray[taskIndex];
-        task.markAsDone();
-        System.out.println(lineBreak + "\n      Understand, Master.\n" + "      I'll mark this done right away.\n" +
-                "\n        " + task + "\n\n" + lineBreak);
+    public static void handleTodoTask(String task) {
+        Task todo = new ToDo(task);
+        taskArray[newTaskIndex] = todo;
+        System.out.println(lineBreak + "\n      Yes, Master.\n"
+                +  "      I'll add the following to your Todo list: \n"
+                + "\n        " + todo);
+        totalTask++;
+        newTaskIndex++;
+        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task "
+                : "have " + totalTask + " tasks ";
+        System.out.println("\n      Currently, Master " + taskPlural +
+                "\n      in the list." + "\n\n" + lineBreak);
     }
 
     public static void main(String[] args) {
@@ -74,8 +119,8 @@ public class Saber {
             InputCommand commandType = command.getCommandType();
             switch (commandType) {
                 case add:
-                    String task = command.getArgument();
-                    handleAddTask(task);
+                    String taskForAdd = command.getArgument();
+                    handleAddTask(taskForAdd);
                     break;
 
                 case bye:
@@ -85,6 +130,23 @@ public class Saber {
                 case done:
                     int taskIndex = Integer.parseInt(command.getArgument());
                     handleDoneTask(taskIndex - 1);
+                    break;
+
+                case deadline:
+                    String deadlineTask = command.getArgument();
+                    String deadlineTime = command.getTime();
+                    handleDeadlineTask(deadlineTask, deadlineTime);
+                    break;
+
+                case event:
+                    String eventTask = command.getArgument();
+                    String eventTime = command.getTime();
+                    handleEventTask(eventTask, eventTime);
+                    break;
+
+                case todo:
+                    String taskForTodo = command.getArgument();
+                    handleTodoTask(taskForTodo);
                     break;
 
                 case list:
