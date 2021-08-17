@@ -163,7 +163,7 @@ public class Duke {
                     continue;
                 }
                 if (taskNo<=0) {
-                    System.err.println("HOW CAN I REMOVE THE TASK AT INDEX " +taskNo+"? IT DOESNT MAKE ANY SENSE");
+                    System.err.println("HOW CAN I COMPLETE THE TASK AT INDEX " +taskNo+"? IT DOESNT MAKE ANY SENSE");
                     continue;
                 }
                 taskNo--;
@@ -173,6 +173,10 @@ public class Duke {
                 System.out.println(toBeDone.name + " has been marked as done");
             }else if(command.contains("todo")){
                 String task=command.substring(5);
+                if(task.equals("")){
+                    System.err.println("I NEED A NAME SIR");
+                    continue;
+                }
                 ToDo toBeAdded=new ToDo(task);
                 if(!(tasks.contains(toBeAdded))){
                     tasks.add(toBeAdded);
@@ -184,9 +188,17 @@ public class Duke {
 
             }else if(command.contains("deadline")){
                 String taskNDate=command.substring(9);
+                if(!(taskNDate.contains("/by"))){
+                    System.err.println("BY WHEN? HOW CAN YOU HAVE A DEADLINE WITHOUT A DEADLINE???");
+                    continue;
+                }
                 int splitIndex=taskNDate.indexOf("/by");
                 String task =taskNDate.substring(0,splitIndex-1);
                 String date =taskNDate.substring(splitIndex+4);
+                if(task.equals("")){
+                    System.err.println("I NEED A NAME SIR");
+                    continue;
+                }
                 Deadline toBeAdded = new Deadline(task,date);
                 if(!(tasks.contains(toBeAdded))){
                     tasks.add(toBeAdded);
@@ -198,9 +210,17 @@ public class Duke {
 
             }else if(command.contains("event")){
                 String taskNDate=command.substring(6);
+                if(!(taskNDate.contains("/at"))){
+                    System.err.println("AT WHEN? YOU HAVE AN EVENT BUT YOU DONT KNOW WHERE IT IS???");
+                    continue;
+                }
                 int splitIndex=taskNDate.indexOf("/at");
                 String task =taskNDate.substring(0,splitIndex-1);
                 String date =taskNDate.substring(splitIndex+4);
+                if(task.equals("")){
+                    System.err.println("I NEED A NAME SIR");
+                    continue;
+                }
                 Event toBeAdded = new Event(task,date);
                 if(!(tasks.contains(toBeAdded))){
                     tasks.add(toBeAdded);
