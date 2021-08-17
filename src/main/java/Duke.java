@@ -6,7 +6,7 @@ public class Duke {
         Task[] task = new Task[100];
         int taskNum = 0;
         String indentation = "       ";
-        String Horizontal_line = "-----------------------------";
+        String Horizontal_line = "---------------------------------------------------------------";
         String greeting = "Hello! I'm Duke.\n" + indentation + "What can I do for you?\n";
         final String LIST = "list";
         final String BLAH = "blah";
@@ -55,11 +55,6 @@ public class Duke {
                     }
                     System.out.println(indentation + Horizontal_line);
                     break;
-                case BLAH:
-                    System.out.println(indentation + Horizontal_line);
-                    System.out.println("blah");
-                    System.out.println(indentation + Horizontal_line);
-                    break;
                 case DONE:
 
                     try {
@@ -92,6 +87,12 @@ public class Duke {
                         switch (keyword[0]) {
 
                             case "deadline":
+                                if (keyword.length == 1) {
+                                    System.out.println(indentation + Horizontal_line);
+                                    System.out.println(indentation + "OOPS!!! The description of a deadline cannot be empty.");
+                                    System.out.println(indentation + Horizontal_line);
+                                    break;
+                                }
                                 String taskname_ddl = "";
                                 String tasktime_ddl = "";
                                 boolean timepart_ddl = false;
@@ -105,6 +106,12 @@ public class Duke {
                                         taskname_ddl += " " + keyword[i];
                                     }
                                 }
+                                if (tasktime_ddl.equals("")) {
+                                    System.out.println(indentation + Horizontal_line);
+                                    System.out.println(indentation + "OOPS!!! The time of a deadline cannot be empty.");
+                                    System.out.println(indentation + Horizontal_line);
+                                    break;
+                                }
                                 task[taskNum] = new Deadline(taskname_ddl, false, taskNum, tasktime_ddl);
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
@@ -114,6 +121,12 @@ public class Duke {
                                 System.out.println(indentation + Horizontal_line);
                                 break;
                             case "todo":
+                                if (keyword.length == 1) {
+                                    System.out.println(indentation + Horizontal_line);
+                                    System.out.println(indentation + "OOPS!!! The description of a todo cannot be empty.");
+                                    System.out.println(indentation + Horizontal_line);
+                                    break;
+                                }
                                 String taskname_todo = "";
                                 for (int i = 1; i < keyword.length; i++) {
                                     taskname_todo += " " + keyword[i];
@@ -127,6 +140,13 @@ public class Duke {
                                 System.out.println(indentation + Horizontal_line);
                                 break;
                             case "event":
+                                if (keyword.length == 1) {
+                                    System.out.println(indentation + Horizontal_line);
+                                    System.out.println(indentation + "OOPS!!! The description of a event cannot be empty.");
+                                    System.out.println(indentation + Horizontal_line);
+                                    break;
+                                }
+
                                 String taskname_event = "";
                                 String tasktime_event = "";
                                 boolean timepart_event = false;
@@ -140,6 +160,12 @@ public class Duke {
                                         taskname_event += " " + keyword[i];
                                     }
                                 }
+                                if (tasktime_event.equals("")) {
+                                    System.out.println(indentation + Horizontal_line);
+                                    System.out.println(indentation + "OOPS!!! The time of a event cannot be empty.");
+                                    System.out.println(indentation + Horizontal_line);
+                                    break;
+                                }
                                 task[taskNum] = new Event(taskname_event, false, taskNum, tasktime_event);
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
@@ -150,7 +176,7 @@ public class Duke {
                                 break;
                             default:
                                 System.out.println(indentation + Horizontal_line);
-                                System.out.println(indentation + "please enter a valid type of task or command");
+                                System.out.println(indentation + "OOPS!!! I'm sorry, but I don't know what that means :-(");
                                 System.out.println(indentation + Horizontal_line);
                                 break;
 
