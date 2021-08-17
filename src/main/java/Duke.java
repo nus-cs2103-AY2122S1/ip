@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    static List<Task> tasks = new ArrayList<>();
+
     public static void main(String[] args) {
         String logo = "    ____    ____    ____    __  __   ____ \n" +
                 "   / __ \\  / __ \\  / __ \\  / / / /  / __ \\\n" +
@@ -11,13 +13,10 @@ public class Duke {
                 "/_/                      /____/           \n";
 
         Scanner scan = new Scanner(System.in);
-
         System.out.println(logo);
         System.out.println("Hello! I'm Ponyo.\n" +
                 "What can I do for you?\n" +
                 "____________________________________________________________\n");
-
-        List<Task> tasks = new ArrayList<>();
 
         while (true) {
             String cmd = scan.nextLine();
@@ -26,7 +25,7 @@ public class Duke {
 
             if (cmd.equals("list")) {
                 for (int i = 0; i < tasks.size(); i++) {
-                    toPrint += "\t" + (i + 1) + ".[" + tasks.get(i).getStatusIcon() + "] " + tasks.get(i).description;
+                    toPrint += "\t" + (i + 1) + "." + tasks.get(i);
                     if (i != tasks.size() - 1)
                         toPrint += "\n";
                 }
@@ -37,18 +36,32 @@ public class Duke {
             } else if (cmd.contains("done")) {
                 int toMark = Integer.parseInt(cmd.substring(5)) - 1;
                 tasks.get(toMark).markAsDone();
-                toPrint = "\tNice! I've marked this task as done: \n" +
-                        "\t\t[" + tasks.get(toMark).getStatusIcon() + "] " + tasks.get(toMark).description;
-            } else {
-                Task t = new Task(cmd);
+                toPrint = "\tNice! I've marked this task as done: \n\t\t" + tasks.get(toMark);
+            } else if (cmd.contains("todo")) {
+                Task t = new Todo(cmd.substring(5));
                 tasks.add(t);
-                toPrint = "\tadded: " + cmd;
+                toPrint = printTask(t);
+            } else if (cmd.contains("deadline")) {
+                int slashIndex = cmd.indexOf("/") + 4;
+                Task t = new Deadline(cmd.substring(9, slashIndex), cmd.substring(slashIndex));
+                tasks.add(t);
+                toPrint = printTask(t);
+            } else if (cmd.contains("event")) {
+                int slashIndex = cmd.indexOf("/") + 4;
+                Task t = new Event(cmd.substring(6, slashIndex), cmd.substring(slashIndex));
+                tasks.add(t);
+                toPrint = printTask(t);
             }
 
             System.out.println(toPrint);
             System.out.println("\t____________________________________________________________\n");
-
             if (cmd.equals("bye")) break;
         }
+    }
+
+    public static String printTask(Task task) {
+        return "\tGot it. I've added this task: \n\t\t" +
+                task +
+                "\n\tNow you have " + tasks.size() + " tasks in the list.";
     }
 }
