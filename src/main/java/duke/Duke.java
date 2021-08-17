@@ -39,7 +39,7 @@ public class Duke {
                         System.out.println(this.add(currLine));
                 }
             } catch (DukeException e) {
-                System.out.println(e);
+                System.out.println(styleResponse(e.toString()));
             }
         }
         sc.close();
