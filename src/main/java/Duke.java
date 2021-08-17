@@ -60,28 +60,20 @@ public class Duke {
         } else if (check.equalsIgnoreCase("list")) {
             getList();
             return "";
-        } else if (words[0].equalsIgnoreCase("done") || check.toLowerCase().startsWith("done")) {
+        } else if (words[0].equalsIgnoreCase("done")) {
             try {
-                int index = -1;
-                if (words.length == 1 && check.length() == 4) {
+                if (words.length == 1) {
                     throw new IllegalArgumentException("Please input index :)");
                 }
-                if (words.length > 1) {
-                    index = Integer.parseInt(words[1]) - 1;
-                }
-                if (words.length == 1) {
-                    index = Integer.parseInt(check.substring(4));
-                }
+                int index = Integer.parseInt(words[1]) - 1;
                 tasks.get(index).setIsDone();
                 if (index >= tasks.size() || index < 0) {
                     throw new IllegalArgumentException("No such index. Please input correct index, no such index :(");
                 }
             } catch (IndexOutOfBoundsException e) {
-                if (check.length() == 4) {
                     System.out.println("     You must've forgotten, please input index :)");
-                } else {
-                    System.out.println("     Please indicate correct index :)");
-                }
+            } catch (NumberFormatException e) {
+                System.out.println("     Please use a number instead :(");
             } catch (IllegalArgumentException e) {
                 System.out.println("     " + e.getMessage());
             }
