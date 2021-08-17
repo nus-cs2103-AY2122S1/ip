@@ -1,11 +1,26 @@
+package duke;
+
 public class Deadline extends Item {
     private String time;
 
     public Deadline(String[] strings) {
+        super(strings);
         String line = String.join(" ", strings);
         int idx = line.indexOf("/by");
         this.setName(line.substring(9, idx));
         this.time = line.substring(idx + 4, line.length());
+    }
+
+    @Override
+    public void checkInput(String[] strings) {
+        super.checkInput(strings);
+        String line = String.join(" ", strings);
+        int idx = line.indexOf("/by");
+        if (idx == line.length() - 3) {
+            throw new DukeException("by when?");
+        } else if (idx == 10) {
+            throw new DukeException("what is the item?");
+        }
     }
 
     @Override

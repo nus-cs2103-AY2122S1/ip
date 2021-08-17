@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -20,20 +22,24 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String[] currLine;
         scanner: while (true) {
-            currLine = sc.nextLine().split(" ");
-            switch (currLine[0]) {
-                case "bye":
-                    System.out.println(styleResponse(GOODBYE));
-                    break scanner;
-                case "list":
-                    System.out.println(this.list());
-                    break;
-                case "done":
-                    int idx = Integer.valueOf(currLine[1]);
-                    System.out.println(this.markIdxAsDone(idx));
-                    break;
-                default:
-                    System.out.println(this.add(currLine));
+            try {
+                currLine = sc.nextLine().split(" ");
+                switch (currLine[0]) {
+                    case "bye":
+                        System.out.println(styleResponse(GOODBYE));
+                        break scanner;
+                    case "list":
+                        System.out.println(this.list());
+                        break;
+                    case "done":
+                        int idx = Integer.valueOf(currLine[1]);
+                        System.out.println(this.markIdxAsDone(idx));
+                        break;
+                    default:
+                        System.out.println(this.add(currLine));
+                }
+            } catch (DukeException e) {
+                System.out.println(e);
             }
         }
         sc.close();
