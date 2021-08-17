@@ -2,7 +2,7 @@ public class Deadline extends Task {
     private final char TYPE_INDICATOR = 'D';
     private String timeDue;
 
-    public Deadline(String s) throws DukeException {
+    public Deadline(String s) {
         super(s.substring(0, s.indexOf("/by ")));
         this.timeDue = s.substring(s.indexOf("/by ") + 4);
         this.typeIndicator = TYPE_INDICATOR;
