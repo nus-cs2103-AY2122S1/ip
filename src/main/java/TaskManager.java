@@ -17,6 +17,25 @@ public class TaskManager {
                 TASK_LIST.size() + " tasks in the list.");
     }
 
+    public static void addToDoTask(String userInput) {
+        String description = userInput.trim();
+        addToList(new Todo(description));
+    }
+
+    public static void addEventTask(String userInput) {
+        String[] inputParts = userInput.split("/at");
+        String description = inputParts[0].trim();
+        String timing = inputParts[1].trim();
+        addToList(new Event(description, timing));
+    }
+
+    public static void addDeadlineTask(String userInput) {
+        String[] inputParts = userInput.split("/by");
+        String description = inputParts[0].trim();
+        String by = inputParts[1].trim();
+        addToList(new Deadline(description, by));
+    }
+
     public static void markTaskAsDone(int taskNumber) {
         if (TASK_LIST.isEmpty()) {
             Echoer.echo("Task invalid: List is empty.");
@@ -26,7 +45,6 @@ public class TaskManager {
             Echoer.echo("Task invalid: Task does not exist.");
             return;
         }
-
         Task selectedTask = TASK_LIST.get(taskNumber - 1); // shift to 0-indexing
         selectedTask.markAsDone();
         Echoer.echo("Nice! I've marked this task as done:\n\t  " + selectedTask);

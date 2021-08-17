@@ -8,8 +8,6 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static Scanner scanner;
-
     public static void main(String[] args) {
         printLogo();
         greet();
@@ -26,10 +24,10 @@ public class Duke {
     }
 
     public static void run() {
-        scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine().trim();
         while (!userInput.equals("bye")) {
-            checkUserInput(userInput);
+            makeDecision(userInput);
             userInput = scanner.nextLine().trim();
         }
         scanner.close();
@@ -39,7 +37,7 @@ public class Duke {
         Echoer.echo("Bye. Hope to see you again soon!");
     }
 
-    public static void checkUserInput(String userInput) {
+    public static void makeDecision(String userInput) {
         if (userInput.equals("list")) {
             TaskManager.listTasks();
 
@@ -49,20 +47,13 @@ public class Duke {
             TaskManager.markTaskAsDone(taskNumber);
 
         } else if (userInput.startsWith("todo")) {
-            String description = userInput.substring(4).trim();
-            TaskManager.addToList(new Todo(description));
+            TaskManager.addToDoTask(userInput.substring(4));
 
         } else if (userInput.startsWith("event")) {
-            String[] inputParts = userInput.substring(6).split("/at");
-            String description = inputParts[0].trim();
-            String timing = inputParts[1].trim();
-            TaskManager.addToList(new Event(description, timing));
+            TaskManager.addEventTask(userInput.substring(5));
 
         } else if (userInput.startsWith("deadline")) {
-            String[] inputParts = userInput.substring(8).split("/by");
-            String description = inputParts[0].trim();
-            String by = inputParts[1].trim();
-            TaskManager.addToList(new Deadline(description, by));
+            TaskManager.addDeadlineTask(userInput.substring(8));
 
         } else {
             Echoer.echo("Invalid input: Please ensure instruction follows specified format.");
