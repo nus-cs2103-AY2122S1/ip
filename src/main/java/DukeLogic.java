@@ -65,15 +65,16 @@ public class DukeLogic {
     int taskCount = 1;
     StringBuilder result = new StringBuilder();
     for (Task task : tasks) {
-      result.append(String.format("%3d %s\n", taskCount++, task));
+      result.append(String.format("%2d. %s\n", taskCount++, task));
     }
     Duke.renderOutput(result.toString());
   }
 
   private static void addTask(String taskName, Task.Type type) {
     try {
-      tasks.add(Task.createTask(taskName, type));
-      Duke.renderOutput("added: " + taskName.trim());
+      Task task = Task.createTask(taskName.trim(), type);
+      tasks.add(task);
+      Duke.renderOutput("added: " + task);
     } catch (InvalidTaskException err) {
       Duke.renderOutput(err.getMessage());
     }
