@@ -28,6 +28,9 @@ public class Task {
     }
 
     public boolean markAsDone() {
+        if (this.isDone) {
+            return false;
+        }
         this.isDone = true;
         return true;
     }

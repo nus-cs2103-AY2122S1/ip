@@ -1,9 +1,8 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Duke {
-    private static Task[] storage = new Task[100];
+    private static ArrayList<Task> storage = new ArrayList<>();
     private static int storageCount = 0;
 
     public static void main(String[] args) {
@@ -25,7 +24,7 @@ public class Duke {
                     return;
                 case "list":
                     for (int i = 1; i <= storageCount; i++) {
-                        Task task = storage[i - 1];
+                        Task task = storage.get(i - 1);
                         String leadingSpace = " ".repeat((int) Math.log10(storageCount) - (int) Math.log10(i));
                         // For better formatting if numbers exceed 9
                         System.out.printf("%s%d: %s\n", leadingSpace, i, task);
@@ -34,10 +33,10 @@ public class Duke {
                     break;
                 default:
                     String[] splitInput = input.split(" ");
-                    if ((splitInput[0]).equals("done")) {
+                    if (splitInput[0].equals("done") || splitInput[0].equals("delete")) {
                         int taskNumber;
                         if (splitInput.length != 2) {
-                            System.out.println("Please key in done [number].");
+                            System.out.printf("Please key in %s [number].\n", splitInput[0]);
                         } else {
                             try {
                                 taskNumber = Integer.parseInt(splitInput[1]);
@@ -49,10 +48,21 @@ public class Duke {
                                 System.out.println("------------------");
                                 continue;
                             }
-                            if (storage[taskNumber - 1].markAsDone()) {
-                            System.out.println("Nice! I've marked this task as done: ");
-                            System.out.println("    " + storage[taskNumber - 1]);
-                        }}
+                            if (splitInput[0].equals("done")) {
+                                if (storage.get(taskNumber - 1).markAsDone()) {
+                                    System.out.println("Nice! I've marked this task as done: ");
+                                    System.out.println("    " + storage.get(taskNumber - 1));
+                                } else {
+                                    System.out.println("You have already marked this as done.");
+                                }
+                            } else { // first word is delete
+                                Task task = storage.remove(taskNumber - 1);
+                                storageCount--;
+                                System.out.println("Noted. I've removed this task:");
+                                System.out.println("    " + task);
+                                printNumberOfTasks();
+                            }
+                        }
                     } else if (storageCount < 100) {
                         try {
                             addTask(splitInput);
@@ -119,10 +129,14 @@ public class Duke {
             default:
                 throw new DukeException("Only todo, event or deadline allowed.");
         }
-        storage[storageCount++] = newTask;
+        storage.add(storageCount++, newTask);
         System.out.println("Got it. I have added this task:");
         System.out.println("    " + newTask);
+        printNumberOfTasks();
+    }
+
+    private static void printNumberOfTasks() {
         System.out.println("Now you have " + storageCount + " task"
-                + (storageCount == 1 ? " in the list" : "s in the list"));
+                + (storageCount <= 1 ? " in the list" : "s in the list"));
     }
 }

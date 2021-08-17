@@ -11,22 +11,27 @@ Got it. I have added this task:
     [T][ ] Buy Milk
 Now you have 1 task in the list
 ------------------
+Noted. I've removed this task:
+    [T][ ] Buy Milk
+Now you have 0 task in the list
+------------------
+Invalid number
+------------------
 Got it. I have added this task:
     [E][ ] Townhall (at: Friday 2.30pm)
-Now you have 2 tasks in the list
+Now you have 1 task in the list
 ------------------
 Got it. I have added this task:
     [T][ ] Wash laundry
-Now you have 3 tasks in the list
+Now you have 2 tasks in the list
 ------------------
 Got it. I have added this task:
     [D][ ] CS2103T Project (by: 19 August 2359)
-Now you have 4 tasks in the list
+Now you have 3 tasks in the list
 ------------------
-1: [T][ ] Buy Milk
-2: [E][ ] Townhall (at: Friday 2.30pm)
-3: [T][ ] Wash laundry
-4: [D][ ] CS2103T Project (by: 19 August 2359)
+1: [E][ ] Townhall (at: Friday 2.30pm)
+2: [T][ ] Wash laundry
+3: [D][ ] CS2103T Project (by: 19 August 2359)
 ------------------
 ? OOPS!!! Only todo, event or deadline allowed.
 ------------------
@@ -45,53 +50,55 @@ For example: event CS2103T lecture /at 19 August
 ------------------
 Got it. I have added this task:
     [E][ ] Job Interview (at: Tuesday)
-Now you have 5 tasks in the list
+Now you have 4 tasks in the list
 ------------------
 ? OOPS!!! Enter the deadline.
 ------------------
 Got it. I have added this task:
     [D][ ] Prepare presentation (by: 21 August)
-Now you have 6 tasks in the list
+Now you have 5 tasks in the list
 ------------------
 Got it. I have added this task:
     [E][ ] Mum's birthday (at: 2 September 8pm)
-Now you have 7 tasks in the list
+Now you have 6 tasks in the list
 ------------------
 Got it. I have added this task:
     [T][ ] Get a life
-Now you have 8 tasks in the list
+Now you have 7 tasks in the list
 ------------------
 Got it. I have added this task:
     [T][ ] Get a wife
-Now you have 9 tasks in the list
+Now you have 8 tasks in the list
 ------------------
 Got it. I have added this task:
     [T][ ] Get 6 packs
-Now you have 10 tasks in the list
+Now you have 9 tasks in the list
 ------------------
 Got it. I have added this task:
     [E][ ] Sleep (at: 2am)
-Now you have 11 tasks in the list
+Now you have 10 tasks in the list
 ------------------
 Nice! I've marked this task as done: 
-    [E][X] Townhall (at: Friday 2.30pm)
+    [T][X] Wash laundry
+------------------
+You have already marked this as done.
 ------------------
 Nice! I've marked this task as done: 
-    [T][X] Buy Milk
+    [E][X] Sleep (at: 2am)
 ------------------
-Nice! I've marked this task as done: 
-    [T][X] Get 6 packs
+Please key in done [number].
 ------------------
- 1: [T][X] Buy Milk
- 2: [E][X] Townhall (at: Friday 2.30pm)
- 3: [T][ ] Wash laundry
- 4: [D][ ] CS2103T Project (by: 19 August 2359)
- 5: [E][ ] Job Interview (at: Tuesday)
- 6: [D][ ] Prepare presentation (by: 21 August)
- 7: [E][ ] Mum's birthday (at: 2 September 8pm)
- 8: [T][ ] Get a life
- 9: [T][ ] Get a wife
-10: [T][X] Get 6 packs
-11: [E][ ] Sleep (at: 2am)
+Please key in delete [number].
+------------------
+ 1: [E][ ] Townhall (at: Friday 2.30pm)
+ 2: [T][X] Wash laundry
+ 3: [D][ ] CS2103T Project (by: 19 August 2359)
+ 4: [E][ ] Job Interview (at: Tuesday)
+ 5: [D][ ] Prepare presentation (by: 21 August)
+ 6: [E][ ] Mum's birthday (at: 2 September 8pm)
+ 7: [T][ ] Get a life
+ 8: [T][ ] Get a wife
+ 9: [T][ ] Get 6 packs
+10: [E][X] Sleep (at: 2am)
 ------------------
 Bye. Hope to see you again soon!

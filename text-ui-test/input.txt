@@ -1,4 +1,6 @@
 todo Buy Milk
+delete 1
+delete 1
 event Townhall /at Friday 2.30pm
 todo Wash laundry
 deadline CS2103T Project /by 19 August 2359
@@ -18,7 +20,9 @@ todo Get a wife
 todo Get 6 packs
 event Sleep /at 2am
 done 2
-done 1
+done 2
 done 10
+done
+delete
 list
 bye
