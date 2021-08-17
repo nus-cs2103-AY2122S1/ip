@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,6 +17,8 @@ public class Duke {
                 "What can I do for you?\n" +
                 "____________________________________________________________\n");
 
+        List<String> tasks = new ArrayList<>();
+
         while (true) {
             String cmd = scan.nextLine();
             System.out.println("\t____________________________________________________________\n");
@@ -22,13 +26,22 @@ public class Duke {
 
             switch (cmd) {
                 case "list":
-                    toPrint = "\tlist";
+                    for (int i = 0; i < tasks.size(); i++) {
+                        toPrint += "\t" + (i + 1) + ". " + tasks.get(i);
+                        if (i != tasks.size() - 1)
+                            toPrint += "\n";
+                    }
                     break;
                 case "bye":
                     toPrint = "\tBye. Hope to see you again soon!";
                     break;
-                default:
+                case "blah":
                     toPrint = "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+                    break;
+                default:
+                    tasks.add(cmd);
+                    toPrint = "\tadded: " + cmd;
+                    break;
             }
             System.out.println(toPrint);
             System.out.println("\t____________________________________________________________\n");
