@@ -1,6 +1,17 @@
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    static ArrayList<String> tasks = new ArrayList<>();
+
+    private static void getLstItems() {
+        int counter = 1;
+        for (String task : tasks) {
+            System.out.println(String.valueOf(counter) + ". " + task);
+            counter += 1;
+        }
+    }
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,8 +29,15 @@ public class Duke {
                 System.out.println("See ya! Hope to see you again!" + "\n" + horizontalLines);
                 return;
             }
+            if (userInput.equals("list")) {
+                System.out.println(horizontalLines);
+                getLstItems();
+                System.out.println(horizontalLines);
+                continue;
+            }
             System.out.println(horizontalLines);
-            System.out.println(userInput + "\n" + horizontalLines);
+            tasks.add(userInput);
+            System.out.println("added: " + userInput + "\n" + horizontalLines);
         }
     }
 }
