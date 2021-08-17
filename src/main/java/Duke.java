@@ -57,6 +57,8 @@ public class Duke {
             case "event":
                 toAdd = new Event(inputStrings);
                 break;
+            default:
+                throw new IllegalStateException("bad keyword");
         }
         this.itemList.add(toAdd);
         return styleResponse(printBuffer);

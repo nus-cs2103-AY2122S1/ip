@@ -6,6 +6,10 @@ abstract class Item {
         this.isDone = true;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return (isDone ? "[X] " : "[] ") + this.name;
