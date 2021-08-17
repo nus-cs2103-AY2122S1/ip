@@ -70,8 +70,13 @@ public class Duke {
     }
 
     public static String addList(String input, ArrayList<Task> lst) {
+        ArrayList<String> validType = new ArrayList<>(
+                Arrays.asList("deadline", "event", "todo"));
         String type = input.split(" ", 2)[0];
         String content;
+        if (!validType.contains(type)) {
+            return "I'm sorry, but I don't know what that means :-(";
+        }
         try {
             content = input.split(" ", 2)[1];
         } catch (IndexOutOfBoundsException e) {
@@ -81,11 +86,17 @@ public class Duke {
         if (type.equals("todo")) {
             lst.add(new Todo(content));
         } else if (type.equals("deadline")) {
+            String[] strings = content.split(" /by ");
+            if (strings.length != 2) {
+                return "Please check the format of your deadline.";
+            }
             lst.add(new Deadline(content.split(" /by ")[0], content.split( " /by ")[1]));
         } else if (type.equals("event")) {
+            String[] strings = content.split(" /at ");
+            if (strings.length != 2) {
+                return "Please check the format of your event.";
+            }
             lst.add(new Event(content.split(" /at ")[0], content.split(" /at ")[1]));
-        } else {
-            return "I'm sorry, but I don't know what that means :-(";
         }
 
         String output = "    ____________________________________________________________\n"
