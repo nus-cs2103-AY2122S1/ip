@@ -3,6 +3,30 @@ import java.util.ArrayList;
 
 public class Duke {
 
+    public static class Task {
+        protected String description;
+        protected boolean isDone;
+
+        // constructor for task object
+        public Task(String description) {
+            this.description = description;
+            this.isDone = false;
+        }
+
+        public String getStatus() {
+            return (isDone ? "X" : " ");
+        }
+
+        public void markAsDone() {
+            this.isDone = true;
+        }
+
+        @Override
+        public String toString() {
+            return ("[" + getStatus() + "] " + this.description);
+        }
+    }
+
     public static void main(String[] args) {
 
         String dory = "      _                  \n"
@@ -18,6 +42,8 @@ public class Duke {
                 + "     * type down something and i'll remember  \n"
                 + "     * type 'list' to show everything  \n"
                 + "     * type 'bye' to leave \n"
+                + "     * type 'done' followed by the task number \n"
+                + "       to mark it as done \n"
                 + " ▹";
 
 
@@ -38,7 +64,7 @@ public class Duke {
         Scanner input = new Scanner(System.in);
 
         // arraylist to save the user's tasks
-        ArrayList<String> tasks = new ArrayList<String>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         // returns true if the scanner has another input
         while (input.hasNextLine()) {
@@ -49,24 +75,36 @@ public class Duke {
 
             if (nextInput.equals("bye")) {
                 System.out.println(" ▹ see you! hope to see you again :-) ");
-                System.out.println("────────────────────────────────────");
+                System.out.println("──────────────────────────────────Oo");
                 input.close();
                 break;
+
             } else if (nextInput.equals("list")) {
                 System.out.println(" ▹ here you go! ");
                 // loop through the arraylist to show everything
                 for (int count = 0; count < tasks.size(); count++) {
-                    String eachTask = tasks.get(count);
+                    Task eachTask = tasks.get(count);
                     int countFromOne = count + 1;
-                    System.out.println(countFromOne +  ". " + eachTask);
+                    System.out.println(countFromOne +  ". " + eachTask.toString());
                 }
+                System.out.println("──────────────────────────────────Oo");
 
-                System.out.println("────────────────────────────────────");
+            } else if (nextInput.contains("done")) {
+                // to extract number from the input
+                String taskToBeMarked = nextInput.replaceAll("[^0-9]", "");
+                int numToBeMarked = Integer.parseInt(taskToBeMarked) - 1;
+                tasks.get(numToBeMarked).markAsDone();
+                System.out.println(" ▹ i've marked this as done:");
+                System.out.println("  " + tasks.get(numToBeMarked).toString());
+                System.out.println("──────────────────────────────────Oo");
+
             } else {
                 System.out.println(" ▹ added: " + nextInput);
-                // add the task to the arraylist
-                tasks.add(nextInput);
-                System.out.println("────────────────────────────────────");
+                // add the task to the arraylist of tasks
+                Task newTask = new Task(nextInput);
+                tasks.add(newTask);
+                System.out.println("──────────────────────────────────Oo");
+
             }
         }
     }
