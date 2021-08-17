@@ -159,11 +159,11 @@ public class Duke {
                 }
                 int taskNo = Integer.parseInt(numbers);
                 if (tasks.size() < taskNo) {
-                    System.err.println("hello sir there are only " +tasks.size()+" tasks in the list sir");
+                    System.err.println("hello sir there are only " + tasks.size() + " tasks in the list sir");
                     continue;
                 }
-                if (taskNo<=0) {
-                    System.err.println("HOW CAN I COMPLETE THE TASK AT INDEX " +taskNo+"? IT DOESNT MAKE ANY SENSE");
+                if (taskNo <= 0) {
+                    System.err.println("HOW CAN I COMPLETE THE TASK AT INDEX " + taskNo + "? IT DOESNT MAKE ANY SENSE");
                     continue;
                 }
                 taskNo--;
@@ -171,6 +171,29 @@ public class Duke {
                 toBeDone.makeDone();
                 tasks.set(taskNo, toBeDone);
                 System.out.println(toBeDone.name + " has been marked as done");
+            }else if(command.contains("delete")){
+                String numbers = command.substring(7);
+                try {
+                    int taskNo = Integer.parseInt(numbers);
+                } catch (NumberFormatException notANumber) {
+                    System.err.println(notANumber);
+                    System.err.println("JUST GIVE ME A NUMBER, WHY ARE YOU DOING THIS");
+                    continue;
+                }
+                int taskNo = Integer.parseInt(numbers);
+                if (tasks.size() < taskNo) {
+                    System.err.println("hello sir there are only " + tasks.size() + " tasks in the list sir");
+                    continue;
+                }
+                if (taskNo <= 0) {
+                    System.err.println("HOW CAN I COMPLETE THE TASK AT INDEX " + taskNo + "? IT DOESNT MAKE ANY SENSE");
+                    continue;
+                }
+                taskNo--;
+                Task toBeDeleted=tasks.get(taskNo);
+                tasks.remove(taskNo);
+                System.out.println("task " +toBeDeleted+ " has been deleted.\nThere are "+tasks.size()+" tasks left in the list.");
+
             }else if(command.contains("todo")){
                 String task=command.substring(5);
                 if(task.equals("")){
