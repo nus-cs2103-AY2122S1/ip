@@ -16,13 +16,18 @@ public class Duke {
 
 
     private void checkInput() {
-        String userInput = this.input.nextLine();
-        if (userInput.equals("bye")) {
-            this.exit();
-            return;
+        while (true) {
+            String userInput = this.input.nextLine();
+            if (userInput.equals("bye")) {
+                this.exit();
+                return;
+            }
+            if (userInput.equals("list")) {
+                this.showList();
+                continue;
+            }
+            this.add(userInput);
         }
-        this.add(userInput);
-        this.checkInput();
     }
 
 
@@ -45,6 +50,14 @@ public class Duke {
 
     private void exit() {
         System.out.println("\t" + "Bye, hope to see you again!");
+    }
+
+
+    private void showList() {
+        for (int i = 0; i < this.list.size(); i++) {
+            System.out.println("\t" + i + ". " + this.list.get(i));
+        }
+        System.out.println();
     }
 
 
