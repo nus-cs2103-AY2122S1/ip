@@ -37,9 +37,9 @@ public class Duke {
      * Deletes task and prints updated list of tasks.
      * @param taskNum Task to be deleted.
      * @throws TaskNotFoundException Invalid task number.
-     * @throws InvalidTaskException No task description given.
+     * @throws InvalidTaskException Task has invalid description.
      */
-    private void deleteTask(String taskNum) throws TaskNotFoundException, InvalidTaskException  {
+    private void deleteTask(String taskNum) throws TaskNotFoundException, InvalidTaskException {
         int i = Integer.parseInt(taskNum);
         if (i < 0 || i >= this.tasks.size()) {
             throw new TaskNotFoundException();
@@ -69,7 +69,6 @@ public class Duke {
 
     /**
      * Prints text between two horizontal lines.
-     *
      * @param input the text to be printed.
      */
     public void print(String input) {
@@ -80,6 +79,8 @@ public class Duke {
     /**
      * Marks a task as completed.
      * @param taskNum The task number.
+     * @throws TaskNotFoundException Invalid task number.
+     * @throws InvalidTaskException Task has invalid description.
      */
     private void finishTask(String taskNum) throws TaskNotFoundException, InvalidTaskException {
         int i = Integer.parseInt(taskNum);
@@ -95,6 +96,7 @@ public class Duke {
     /**
      * Adds an event to the list of tasks.
      * @param commands the event with a specific time.
+     * @throws InvalidTaskException Task has invalid description.
      */
     private void addEvent(String[] commands) throws InvalidTaskException {
         if (commands.length < 2) {
@@ -112,6 +114,7 @@ public class Duke {
     /**
      * Adds a deadline to the list of tasks.
      * @param commands the deadline with a specific time.
+     * @throws InvalidTaskException Task has invalid description.
      */
     private void addDeadline(String[] commands) throws InvalidTaskException {
         if (commands.length < 2) {
@@ -184,6 +187,7 @@ public class Duke {
                         break;
                     case "bye":
                         goodbye();
+                        // Close scanner
                         running = false;
                         break;
                     default:
