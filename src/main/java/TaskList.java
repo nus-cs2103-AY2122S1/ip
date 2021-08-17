@@ -20,7 +20,12 @@ public class TaskList {
     public void add(Matcher input, TaskType type) {
         Optional.ofNullable(
                 TaskType.getTask(input, type))
-                    .map(tasks::add);
+                    .map(task -> {
+                        System.out.println(Display.OUTPUT_SPACES + task);
+                        tasks.add(task);
+                        return null;
+                    });
+        this.printSize();
     }
 
     public void toggleDone(int index) {

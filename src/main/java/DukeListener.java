@@ -47,22 +47,19 @@ public class DukeListener {
                 // Add a to-do task to list
                 System.out.println(Display.OUTPUT_DISPLAY + "Got it. I've added a To-do.");
                 taskList.add(checkTodo, TaskType.TODO);
-                taskList.printSize();
 
             } else if (checkDeadline.matches()) {
                 // Add a deadline to list
                 System.out.println(Display.OUTPUT_DISPLAY + "Got it. I've added a Deadline.");
                 taskList.add(checkDeadline, TaskType.DEADLINE);
-                taskList.printSize();
 
             } else if (checkEvent.matches()) {
                 // Add an event to list
                 System.out.println(Display.OUTPUT_DISPLAY + "Got it. I've added an Event. Don't miss it!");
                 taskList.add(checkEvent, TaskType.EVENT);
-                taskList.printSize();
 
             } else {
-                System.out.println(Display.OUTPUT_DISPLAY + "Nothing happened eeeeeee~dameda!!");
+                System.out.println(Display.OUTPUT_DISPLAY + "☹ eeeeeee~dameda!! " + input + " isn't a valid command!");
             }
 
             System.out.println(Display.LINE);
