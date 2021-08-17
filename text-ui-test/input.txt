@@ -15,3 +15,4 @@ done 4
 done 5
 list
 undo 4
+delete 2

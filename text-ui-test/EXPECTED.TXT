@@ -36,3 +36,6 @@ Here are the tasks in your list:
 4. [D][X] Submit proposal (by: 33 May)
 Oh no! I've marked this task as undone:
   [D][ ] Submit proposal (by: 33 May)
+Noted. I've removed this task:
+  [T][X] Feed Cows
+Now you have 3 tasks in the list.
