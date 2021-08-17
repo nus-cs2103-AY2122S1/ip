@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.List;
 
 /**
- * The class for the Duke bot
+ * The class for the Petal bot
  */
 public class Petal {
 
