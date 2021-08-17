@@ -1,8 +1,11 @@
 public class DukeException extends RuntimeException {
-    public DukeException(String errorMessage, Throwable err) {
-        super(errorMessage, err);
+    private final String message;
+    public DukeException(String message) {
+        super(message);
+        this.message = message;
     }
-    public DukeException(String errorMessage) {
-        super(errorMessage);
+    @Override
+    public String toString() {
+        return this.message;
     }
 }
