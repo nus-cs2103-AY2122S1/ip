@@ -1,0 +1,14 @@
+list
+todo borrow book
+todo read book
+deadline discuss book /by 23 Aug
+event team meeting /at Sat 8-9pm
+done 2
+done 2
+list
+deadline final submission /by Sunday
+done 5
+list
+todo discard junk
+bow and arrows
+bye

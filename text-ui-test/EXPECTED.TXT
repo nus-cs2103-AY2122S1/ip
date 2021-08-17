@@ -1,7 +1,52 @@
-Hello from
- ____        _        
+ ____        _
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! What can I do for you?
+
+You have no tasks!
+
+I've added:
+ [T][ ] borrow book
+
+I've added:
+ [T][ ] read book
+
+I've added:
+ [D][ ] discuss book (by: 23 Aug)
+
+I've added:
+ [E][ ] team meeting (at: Sat 8-9pm)
+
+I've marked this task as done:
+  [T][X] read book
+
+Task already done.
+
+Current tasks:
+1.[T][ ] borrow book
+2.[T][X] read book
+3.[D][ ] discuss book (by: 23 Aug)
+4.[E][ ] team meeting (at: Sat 8-9pm)
+
+I've added:
+ [D][ ] final submission (by: Sunday)
+
+I've marked this task as done:
+  [D][X] final submission (by: Sunday)
+
+Current tasks:
+1.[T][ ] borrow book
+2.[T][X] read book
+3.[D][ ] discuss book (by: 23 Aug)
+4.[E][ ] team meeting (at: Sat 8-9pm)
+5.[D][X] final submission (by: Sunday)
+
+I've added:
+ [T][ ] discard junk
+
+Unknown command!
+
+Bye. Hope to see you again soon!
