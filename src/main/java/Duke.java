@@ -2,8 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class represents a Duke instance.
+ * User inputs are added to the task list, and the "list" command lists all the user's tasks.
+ * Users can exit Duke by typing the "bye" command.
+ */
 public class Duke {
-    private final List<String> list = new ArrayList<>();
+    private final List<Task> list = new ArrayList<>();
     private static final String WELCOME = "Hello, I'm Duke\nWhat can I do for you?";
     private static final String BYE = "Bye. Hope to see you again soon!";
 
@@ -26,17 +31,21 @@ public class Duke {
      * @return Boolean that controls whether to continue accepting user input.
      */
     public boolean listen(String input) {
-        switch(input) {
-            case "bye":
-                formatAndPrint(BYE);
-                return false;
-            case "list":
-                displayList();
-                return true;
-            default:
-                addToList(input);
-                return true;
+        if (input.equals("bye")) {
+            formatAndPrint(BYE);
+            return false;
+        } else if (input.equals("list")) {
+            displayList();
+        } else if (input.startsWith("done")) {
+            // Split string into "done" and the value inputted by user.
+            String[] strArray = input.split(" ", 2);
+            // Retrieve value inputted by user and subtract 1 to get the index in the array.
+            int index = Integer.parseInt(strArray[1]) - 1;
+            markAsDone(index);
+        } else {
+            addToList(input);
         }
+        return true;
     }
 
     /**
@@ -44,7 +53,7 @@ public class Duke {
      * @param input String that user inputs.
      */
     public void addToList(String input) {
-        list.add(input);
+        this.list.add(new Task(input));
         formatAndPrint("added: " + input);
     }
 
@@ -52,15 +61,25 @@ public class Duke {
      * Formats the list of tasks for displaying when the user inputs "list".
      */
     public void displayList() {
-        StringBuilder output = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            output.append(String.format("%d. %s", i + 1, list.get(i)));
+        StringBuilder output = new StringBuilder("Here are the tasks in your list: \n");
+        for (int i = 0; i < this.list.size(); i++) {
+            output.append(String.format("%d. %s", i + 1, this.list.get(i)));
             // Append new line for all lines except last line.
-            if (i != list.size() - 1) {
+            if (i != this.list.size() - 1) {
                 output.append("\n");
             }
         }
         formatAndPrint(output.toString());
+    }
+
+    /**
+     * Marks a given task as done.
+     * @param itemNo Index of the task in the ArrayList.
+     */
+    public void markAsDone(int itemNo) {
+        Task task = list.get(itemNo);
+        task.toggleComplete();
+        formatAndPrint("Nice! I've marked this task as done: \n" + task.toString());
     }
 
     /**
