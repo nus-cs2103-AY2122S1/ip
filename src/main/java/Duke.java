@@ -23,24 +23,24 @@ public class Duke {
         while(!input.equals("bye")) {
             segment = input.split(" ", 2);
 
-            if(input.equals("list")) {
-                list.list();
-            } else if (segment[0].equals("done") && segment.length == 2) {
-                list.done(Integer.parseInt(segment[1]));
-            } else if (segment[0].equals("todo")) {
-                try {
+            try {
+                if(input.equals("list")) {
+                    list.list();
+                } else if (segment[0].equals("done") && segment.length == 2) {
+                    list.done(Integer.parseInt(segment[1]));
+                } else if (segment[0].equals("todo")) {
                     list.addTodo(input.split("todo", 2)[1]);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                } else if (segment[0].equals("deadline")) {
+                    list.addDeadlines(input.split("deadline", 2)[1]);
+                } else if (segment[0].equals("event")) {
+                    list.addEvents(input.split("event", 2)[1]);
+                } else {
+                    list.add(input);
                 }
-            } else if (segment[0].equals("deadline")) {
-                list.addDeadlines(input.split("deadline", 2)[1]);
-            } else if (segment[0].equals("event")) {
-                list.addEvents(input.split("event", 2)[1]);
-            } else {
-                list.add(input);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
-            
+
             input = scan.nextLine();
         }
 
