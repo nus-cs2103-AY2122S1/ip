@@ -27,13 +27,10 @@ public class Duke {
 
     public static void printLogo() {
         System.out.println("Hello from\n" + LOGO);
-        System.out.println(LINE_SPLIT);
     }
 
     public static void greet() {
-        System.out.println('\t' + "Hello! I'm Duke");
-        System.out.println('\t' + "What can I do for you?");
-        System.out.println(LINE_SPLIT + '\n');
+        echo("Hello! I'm Duke\n\tWhat can I do for you?");
     }
 
     public static void run() {
@@ -97,7 +94,7 @@ public class Duke {
         }
         TODO_LIST.add(newTask);
         echo("Got it. I've added this task:\n\t  " + newTask + "\n\tNow you have " +
-                TODO_LIST.size() + " tasks in the list");
+                TODO_LIST.size() + " tasks in the list.");
     }
 
     public static void markTaskAsDone(int taskNumber) {
