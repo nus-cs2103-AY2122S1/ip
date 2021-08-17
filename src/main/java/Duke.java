@@ -38,7 +38,7 @@ public class Duke {
                     } else if (date.equals("") && !firstCommand.equals("todo")) {
                         throw new DukeException("☹ OOPS!!! The date of " + aOrAn + " " + firstCommand + " cannot be empty.");
                     } else {
-                        tasks.addTask(taskDesc, firstCommand, date);
+                        tasks.addTask(taskDesc, convertToTaskType(firstCommand), date);
                         System.out.println("Got it. I've added this task: ");
                         System.out.println(tasks.getTask(tasks.getTasksLength()));
                         System.out.println("Now you have " + tasks.getTasksLength() + " tasks in the list.");
@@ -125,6 +125,16 @@ public class Duke {
             }
         }
         return taskDesc.toString();
+    }
+
+    public static Task.TaskType convertToTaskType(String command) {
+        if (command.equals("todo")) {
+            return Task.TaskType.TODO;
+        } else if (command.equals("event")) {
+            return Task.TaskType.EVENT;
+        } else {
+            return Task.TaskType.DEADLINE;
+        }
     }
 
     public static void main(String[] args) {

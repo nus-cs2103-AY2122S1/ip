@@ -37,21 +37,25 @@ public class TaskList {
      * @param type The type of the task to be added.
      * @param time The time associated with the task added.
      */
-    public void addTask(String task, String type, String time) {
+    public void addTask(String task, Task.TaskType type, String time) {
         switch(type) {
-            case "deadline":
+            case DEADLINE:
                 this.tasks.add(new Deadline(task, time));
                 break;
-            case "event":
+            case EVENT:
                 this.tasks.add(new Event(task, time));
                 break;
-            case "todo":
+            case TODO:
                 this.tasks.add(new Todo(task));
                 break;
         }
         this.taskIndex++;
     }
 
+    /**
+     * Deletes a task.
+     * @param taskIndex Index from list to delete task.
+     */
     public void deleteTask(int taskIndex) {
         this.tasks.remove(taskIndex - 1);
         this.taskIndex--;

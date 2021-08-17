@@ -2,6 +2,16 @@
  * This class encapsulates a task.
  */
 public class Task {
+
+    /**
+     * Enumeration for the different task types.
+     */
+    public enum TaskType {
+        TODO,
+        EVENT,
+        DEADLINE
+    }
+
     /**
      * The description of the task.
      */
@@ -12,10 +22,12 @@ public class Task {
      */
     private boolean isDone;
 
+    public TaskType type;
+
     /**
      * Constructor for Task object, takes in taskDescription string.`
      * @param taskDescription Description of the task.
-//     */
+    */
     protected Task(String taskDescription) {
         this.taskDescription = taskDescription;
         this.isDone = false;
@@ -35,6 +47,11 @@ public class Task {
     public String getStatusIcon() {
         return this.isDone ? "[X]" : "[ ]";
     }
+
+    /**
+     * Returns string representation of Task object.
+     * @return String representation of Task.
+     */
     @Override
     public String toString() {
         return this.getStatusIcon() + " " + this.taskDescription;
