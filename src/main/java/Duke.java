@@ -3,9 +3,13 @@ import java.util.Scanner;
 public class Duke {
 
     private static Scanner sc;
+    private static String[] list;
+    private static int index;
 
     public static void main(String[] args) {
         sc = new Scanner(System.in);
+        list = new String[100];
+        index = 0;
 
         // Show the logo
         showLogo();
@@ -36,16 +40,34 @@ public class Duke {
 
     private static void handleInput(String input) {
         if (input.equals("bye")) {
+
             printSingleDivider();
             System.out.println("Output: Goodbye! See you again!");
             printDoubleDivider();
             sc.close();
             return;
-        } else {
+
+        } else if (input.equals("list")) {
+
             printSingleDivider();
-            System.out.println("Output: " + input);
+            System.out.println("Output: This is your current list!\n");
+            for (int i = 0; i < index; i++) {
+                System.out.println(i + 1 + ". " + list[i]);
+            }
             printDoubleDivider();
+
             getInput();
+
+        } else {
+
+            list[index++] = input;
+
+            printSingleDivider();
+            System.out.println("Output: You have added '" + input + "' to the list!");
+            printDoubleDivider();
+
+            getInput();
+
         }
     }
 
