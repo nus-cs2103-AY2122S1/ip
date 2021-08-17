@@ -1,8 +1,13 @@
 import java.util.*;
 public class Duke {
-    enum Command {
+    private String[] taskList;
+    private int numTask;
 
+    public Duke() {
+        taskList = new String[100];
+        numTask = 0;
     }
+
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.greet();
@@ -16,8 +21,10 @@ public class Duke {
     private void messageHandle(String userInput) {
         if (userInput.equals("exit")) {
             this.exit();
+        } else if (userInput.equals("list")) {
+            this.list();
         } else {
-            this.echo(userInput);
+            this.add(userInput);
         }
     }
 
@@ -33,13 +40,40 @@ public class Duke {
     private void echo(String args) {
         String start = "_____________________________________\n";
         String end = "\n_____________________________________";
-        System.out.println(start + args + end);
+        String output = start + args + end;
+        System.out.println(output);
     }
 
     private void exit() {
         String start = "_____________________________________\n";
         String end = "\n_____________________________________";
-        System.out.println(start + "Bye. Hope to see you again soon!" + end);
+        String output = start + "Bye. Hope to see you again soon!" + end;
+        System.out.println(output);
         System.exit(0);
+    }
+
+    private void add(String args) {
+        this.taskList[numTask] = args;
+        numTask = numTask + 1;
+        String start = "_____________________________________\n";
+        String end = "\n_____________________________________";
+        String output = start + "added: " + args + end;
+        System.out.println(output);
+    }
+
+    private void list() {
+        String task;
+        if (numTask == 0) {
+            task = " ";
+        } else {
+            task = "1. " + taskList[0];
+            for(int taskNumber = 2; taskNumber <= numTask; taskNumber++) {
+                task = task + "\n" + taskNumber + ". " + taskList[taskNumber - 1];
+            }
+        }
+        String start = "_____________________________________\n";
+        String end = "\n_____________________________________";
+        String output = start + task + end;
+        System.out.println(output);
     }
 }
