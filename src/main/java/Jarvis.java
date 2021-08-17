@@ -1,3 +1,5 @@
+import jarvis.action.Action;
+import jarvis.action.ActionTypeEnum;
 import jarvis.message.ExitMessage;
 import jarvis.message.GreetingMessage;
 import jarvis.message.OutputMessage;
@@ -13,29 +15,17 @@ public class Jarvis {
         OutputMessage greetingMessage = new GreetingMessage();
         Output.showFormattedOutputMessage(greetingMessage);
 
-        String exitTrigger = "bye";
-        String listTrigger = "list";
-        String doneTrigger = "done";
-        String userInput = scanner.nextLine().trim();
+        String userInput = scanner.nextLine();
         TaskList taskList = new TaskList();
 
-        while(!userInput.equals(exitTrigger)) {
-            String[] action = userInput.split(" ");
-            String actionType = action[0];
-
-            if (actionType.equals(listTrigger)) {
-                OutputMessage taskListMessage = new OutputMessage(taskList.toString());
-                Output.showFormattedOutputMessage(taskListMessage);
-            } else if (actionType.equals(doneTrigger)) {
-                int taskIndex = Integer.parseInt(action[1]) - 1;
-                taskList.markAsDone(taskIndex);
-            } else {
-                taskList.addTask(userInput);
-            }
+        while(ActionTypeEnum.identifyActionType(userInput.trim()) != ActionTypeEnum.EXIT) {
+            Action action2 = Action.createAction(userInput);
+            action2.execute(taskList);
             userInput = scanner.nextLine();
         }
 
         OutputMessage exitMessage = new ExitMessage();
         Output.showFormattedOutputMessage(exitMessage);
+        scanner.close();
     }
 }

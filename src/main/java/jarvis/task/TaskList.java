@@ -1,24 +1,36 @@
 package jarvis.task;
 
-import jarvis.message.OutputMessage;
-import jarvis.output.Output;
-
 import java.util.ArrayList;
 
 public class TaskList {
     private final ArrayList<Task> taskList = new ArrayList<>();
 
-    public void addTask(String task) {
-        taskList.add(new Task(task));
-        OutputMessage taskAddedMessage = new OutputMessage("added: " + task);
-        Output.showFormattedOutputMessage(taskAddedMessage);
+    public Todo addTodo(String todoDescription) {
+        Todo todo = new Todo(todoDescription);
+        taskList.add(todo);
+        return todo;
     }
 
-    public void markAsDone(int index) {
+    public Deadline addTaskWithDeadline(String taskDescription, String deadline) {
+        Deadline taskWithDeadline = new Deadline(taskDescription, deadline);
+        taskList.add(taskWithDeadline);
+        return taskWithDeadline;
+    }
+
+    public Event addEvent(String eventDescription, String eventTime) {
+        Event event = new Event(eventDescription, eventTime);
+        taskList.add(event);
+        return event;
+    }
+
+    public Task markAsDone(int index) {
         Task task = taskList.get(index);
         task.markAsDone();
-        OutputMessage doneMessage = new OutputMessage("Nice! I've marked this task as done: \n\t\t" + task.toString());
-        Output.showFormattedOutputMessage(doneMessage);
+        return task;
+    }
+
+    public String taskListSummary() {
+        return String.format("Now you have %s task(s) in the list.", taskList.size());
     }
 
     @Override
