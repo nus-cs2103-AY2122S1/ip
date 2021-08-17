@@ -7,7 +7,7 @@ public class Duke {
         int taskNum = 0;
         String indentation = "       ";
         String Horizontal_line = "-----------------------------";
-        String greeting = "Hello! I'm Duke \n" + indentation + "What can I do for you?\n";
+        String greeting = "Hello! I'm Duke.\n" + indentation + "What can I do for you?\n";
         final String LIST = "list";
         final String BLAH = "blah";
         final String BYE = "bye";
@@ -66,7 +66,7 @@ public class Duke {
                         Integer num = Integer.valueOf(keyword[1]) - 1;
                         task[num].setDone(true);
                         System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "Nice! I've marked this task as done: ");
+                        System.out.println(indentation + "Nice! I've marked this task as done:");
                         System.out.println(indentation + "  [X] " + task[num].getName());
                         System.out.println(indentation + Horizontal_line);
                     } catch (NullPointerException e) {
@@ -108,9 +108,9 @@ public class Duke {
                                 task[taskNum] = new Deadline(taskname_ddl, false, taskNum, tasktime_ddl);
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
-                                System.out.println(indentation + "Got it. I've added this task: ");
+                                System.out.println(indentation + "Got it. I've added this task:");
                                 System.out.println(indentation + "   [D][ ] "+ taskname_ddl + " ( " + tasktime_ddl + " )");
-                                System.out.format(indentation + "Now you have %d tasks in the list %n", taskNum);
+                                System.out.format(indentation + "Now you have %d tasks in the list%n", taskNum);
                                 System.out.println(indentation + Horizontal_line);
                                 break;
                             case "todo":
@@ -121,9 +121,9 @@ public class Duke {
                                 task[taskNum] = new Todo(taskname_todo, false, taskNum);
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
-                                System.out.println(indentation + "Got it. I've added this task: ");
+                                System.out.println(indentation + "Got it. I've added this task:");
                                 System.out.println(indentation + "   [T][ ] "+ taskname_todo);
-                                System.out.format(indentation + "Now you have %d tasks in the list %n", taskNum);
+                                System.out.format(indentation + "Now you have %d tasks in the list%n", taskNum);
                                 System.out.println(indentation + Horizontal_line);
                                 break;
                             case "event":
@@ -143,9 +143,9 @@ public class Duke {
                                 task[taskNum] = new Event(taskname_event, false, taskNum, tasktime_event);
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
-                                System.out.println(indentation + "Got it. I've added this task: ");
+                                System.out.println(indentation + "Got it. I've added this task:");
                                 System.out.println(indentation + "   [E][ ] "+ taskname_event + " ( " + tasktime_event + " )");
-                                System.out.format(indentation + "Now you have %d tasks in the list %n", taskNum);
+                                System.out.format(indentation + "Now you have %d tasks in the list%n", taskNum);
                                 System.out.println(indentation + Horizontal_line);
                                 break;
                             default:

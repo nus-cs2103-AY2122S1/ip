@@ -1,0 +1,11 @@
+list
+event read book /at Mon 2-4pm
+deadline read notes /by Tue 4pm
+todo run
+list
+done 1
+list
+done 4
+done 0
+test read
+bye

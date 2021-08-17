@@ -5,3 +5,51 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+       -----------------------------
+       Hello! I'm Duke.
+       What can I do for you?
+
+       -----------------------------
+       -----------------------------
+       -----------------------------
+       -----------------------------
+       Got it. I've added this task:
+          [E][ ]  read book ( at:  Mon 2-4pm )
+       Now you have 1 tasks in the list
+       -----------------------------
+       -----------------------------
+       Got it. I've added this task:
+          [D][ ]  read notes ( by:  Tue 4pm )
+       Now you have 2 tasks in the list
+       -----------------------------
+       -----------------------------
+       Got it. I've added this task:
+          [T][ ]  run
+       Now you have 3 tasks in the list
+       -----------------------------
+       -----------------------------
+       1. [E][ ] read book ( at:  Mon 2-4pm )
+       2. [D][ ] read notes ( by:  Tue 4pm )
+       3. [T][ ] run
+       -----------------------------
+       -----------------------------
+       Nice! I've marked this task as done:
+         [X]  read book
+       -----------------------------
+       -----------------------------
+       1. [E][X] read book ( at:  Mon 2-4pm )
+       2. [D][ ] read notes ( by:  Tue 4pm )
+       3. [T][ ] run
+       -----------------------------
+       -----------------------------
+       Sorry, you do not have this task
+       -----------------------------
+       -----------------------------
+       Sorry, please enter a task number bigger than 0
+       -----------------------------
+       -----------------------------
+       please enter a valid type of task or command
+       -----------------------------
+       -----------------------------
+       Bye. Hope to see you again soon!
+       -----------------------------
