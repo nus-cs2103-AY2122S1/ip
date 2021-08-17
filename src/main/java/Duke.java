@@ -19,6 +19,13 @@ public class Duke {
     public static final String USER_LINE = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
 
     /**
+     * Available commands
+     */
+    private enum Commands {
+        list, todo, deadline, event, delete, done, bye
+    }
+
+    /**
      * The main function of Borat
      * @param args The command line arguments
      */
@@ -50,38 +57,38 @@ public class Duke {
 
             try {
                 String[] input = parseInput(rawInput);
-                String command = input[0];
+                Commands command = Commands.valueOf(input[0]);
 
                 switch (command) {
-                    case "bye":
+                    case bye:
                         // Quit program
                         break label;
-                    case "list":
+                    case list:
                         // Displays the tasks in the list
                         output = list.toString();
 
                         break;
-                    case "done":
+                    case done:
                         // Marks a task as done.
                         output = list.markDone(Integer.parseInt(input[1]));
 
                         break;
-                    case "todo":
+                    case todo:
                         // Add a todo task in the list.
                         output = list.addItem(new Todo(input[1]));
 
                         break;
-                    case "deadline":
+                    case deadline:
                         // Add a deadline task in the list.
                         output = list.addItem(new Deadline(input[1], input[2]));
 
                         break;
-                    case "event":
+                    case event:
                         // Add an event task in the list.
                         output = list.addItem(new Event(input[1], input[2]));
 
                         break;
-                    case "delete":
+                    case delete:
                         // Delete an event from the list.
                         output = list.removeItem(Integer.parseInt(input[1]));
                 }
@@ -110,14 +117,20 @@ public class Duke {
         if (input.length < 1) {
             throw new DukeException("What you mean?");
         }
-        switch (input[0]) {
-            case "list":
+        Commands command;
+        try {
+            command = Commands.valueOf(input[0]);
+        } catch (Exception e) {
+            throw new DukeException("What you mean?");
+        }
+        switch (command) {
+            case list:
                 if (input.length != 1) {
                     throw new DukeException("Do you mean `list`?");
                 }
                 return new String[] {input[0]};
 
-            case "done":
+            case done:
                 if (input.length != 2) {
                     throw new DukeException("'done' command needs exactly 1 argument. (example: 'done 5')");
                 }
@@ -129,14 +142,14 @@ public class Duke {
                 }
                 return new String[] {input[0], input[1]};
 
-            case "todo":
+            case todo:
                 if (input.length < 2) {
                     throw new DukeException("'todo' command needs a description. (example: 'todo watch Borat')");
                 }
                 String description = combineStringArray(input, 1, input.length);
                 return new String[] {input[0], description};
 
-            case "deadline":
+            case deadline:
                 if (input.length < 2) {
                     throw new DukeException("'deadline' command needs a description. (example: 'deadline watch Borat /by tonight')");
                 }
@@ -149,7 +162,7 @@ public class Duke {
                 }
                 return new String[] {input[0], divided[0], divided[1]};
 
-            case "event":
+            case event:
                 if (input.length < 2) {
                     throw new DukeException("'event' command needs a description. (example: 'event Borat concert /at Aug 6th 2-4pm')");
                 }
@@ -162,13 +175,13 @@ public class Duke {
                 }
                 return new String[] {input[0], div[0], div[1]};
 
-            case "bye":
+            case bye:
                 if (input.length != 1) {
                     throw new DukeException("Do you mean `bye`?");
                 }
                 return new String[] {input[0]};
 
-            case "delete":
+            case delete:
                 if (input.length != 2) {
                     throw new DukeException("'delete' command needs exactly 1 argument. (example: 'delete 5')");
                 }
