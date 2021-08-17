@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.function.Function;
+import tasks.InvalidTaskException;
 import tasks.Task;
 
 /**
@@ -24,14 +25,22 @@ public class DukeLogic {
     } else if (matches("").apply(input)) {
       return true;
     } else if (matches("list").apply(input)) {
-      Duke.renderOutput(listTasks());
+      listTasks();
       return true;
     } else if (startsWithOrEquals("done ").apply(input)) {
       markDone(getArgs(input, "done "));
       return true;
+    } else if (startsWithOrEquals("todo ").apply(input)) {
+      addTask(getArgs(input, "todo "), Task.Type.TODO);
+      return true;
+    } else if (startsWithOrEquals("deadline ").apply(input)) {
+      addTask(getArgs(input, "deadline "), Task.Type.DEADLINE);
+      return true;
+    } else if (startsWithOrEquals("event ").apply(input)) {
+      addTask(getArgs(input, "event "), Task.Type.EVENT);
+      return true;
     } else {
-      addTask(input.trim());
-      Duke.renderOutput("added: " + input.trim());
+      Duke.renderOutput("I did not understand, sorry!");
       return true;
     }
   }
@@ -52,17 +61,22 @@ public class DukeLogic {
     return input.substring(input.toLowerCase().indexOf(command) + command.length()).trim();
   }
 
-  private static String listTasks() {
+  private static void listTasks() {
     int taskCount = 1;
     StringBuilder result = new StringBuilder();
     for (Task task : tasks) {
       result.append(String.format("%3d %s\n", taskCount++, task));
     }
-    return result.toString();
+    Duke.renderOutput(result.toString());
   }
 
-  private static void addTask(String taskName) {
-    tasks.add(Task.createTask(taskName, Task.Type.TODO));
+  private static void addTask(String taskName, Task.Type type) {
+    try {
+      tasks.add(Task.createTask(taskName, type));
+      Duke.renderOutput("added: " + taskName.trim());
+    } catch (InvalidTaskException err) {
+      Duke.renderOutput(err.getMessage());
+    }
   }
 
   private static void markDone(String taskNumStr) {

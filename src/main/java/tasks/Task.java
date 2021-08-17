@@ -35,17 +35,17 @@ public class Task {
       case EVENT:
         args = inputString.split("/at");
         if (args.length != 2) {
-          throw new IllegalArgumentException("Expected '{title} /at {date}' for event tasks");
+          throw new InvalidTaskException("Expected '{title} /at {date}' for event tasks");
         }
         return new EventTask(args[0], args[1]);
       case DEADLINE:
         args = inputString.split("/by");
         if (args.length != 2) {
-          throw new IllegalArgumentException("Expected '{title} /by {dates}' for deadline tasks");
+          throw new InvalidTaskException("Expected '{title} /by {dates}' for deadline tasks");
         }
         return new DeadlineTask(args[0], args[1]);
       default:
-        throw new IllegalArgumentException("Task type not expected.");
+        throw new InvalidTaskException("Task type not expected.");
     }
   }
 
