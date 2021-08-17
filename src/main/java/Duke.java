@@ -11,17 +11,40 @@ public class Duke {
         Scanner myObj = new Scanner(System.in);
         String command;
         TaskList tasks = TaskList.createTaskList();
+
         while (true) {
             command = myObj.nextLine();
+            String[] commandSplit = command.split(" ", 2);
             if (command.equals("bye")) {
                 System.out.println("Goodbye!");
                 break;
+            } else if (commandSplit[0].equals("done") && Duke.isInteger(commandSplit[1])) {
+                int taskIndex = Integer.parseInt(commandSplit[1]);
+                tasks.markTaskDone(taskIndex);
+                String taskDescription = tasks.getTask(taskIndex);
+                String taskStatus = tasks.getTaskStatus(taskIndex);
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println(taskStatus + " " + taskDescription);
             } else if (command.equals("list")) {
                 tasks.listTasks();
             } else {
                 tasks.addTask(command);
                 System.out.println("added: " + command);
             }
+        }
+    }
+
+    /**
+     * Checks if the string is an integer.
+     * @param input String to check.
+     * @return Whether string is an integer.
+     */
+    private static boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e){
+            return false;
         }
     }
 
