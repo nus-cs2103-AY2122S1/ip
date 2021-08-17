@@ -11,7 +11,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        dukeWithErrorHandling();
+        level6DukeBot();
     }
 
     /**
@@ -19,7 +19,7 @@ public class Duke {
      * Any errors are now handled by Duke also.
      * Inputs are taken by a scanner from the user's keyboard.
      */
-    public static void dukeWithErrorHandling() {
+    public static void level6DukeBot() {
 
         ArrayList<Task> taskList = new ArrayList<>();
 
@@ -43,7 +43,11 @@ public class Duke {
             } else if (command.equals("list")) {
                 getList(taskList);
             } else if (inputValue[0].equals("done") && inputValue.length == 2) {
-               done(taskList, inputValue);
+                //treat as unknown command if there is more than 1 number after "done".
+                done(taskList, inputValue);
+            } else if (inputValue[0].equals("delete") && inputValue.length == 2) {
+                //treat as unknown command if there is more than 1 number after "delete".
+                delete(taskList, inputValue);
             } else if (inputValue[0].equals("deadline")) {
                 deadline(taskList, inputValue, command);
             } else if (inputValue[0].equals("event")) {
@@ -95,7 +99,35 @@ public class Duke {
         } catch (NumberFormatException e) {
             System.out.println("     OOPS!!! Please ensure a number is entered after done (eg: done 2)");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("     OOPS!!! You do not have " + inputValue[1] + " tasks in the list");
+           if (Integer.parseInt(inputValue[1]) <= 1) {
+                System.out.println("     OOPS!!! You do not have any task in the list");
+            } else {
+               System.out.println("     OOPS!!! You do not have " + inputValue[1] + " tasks in the list");
+            }
+        }
+    }
+
+    /**
+     * This method gives Duke the ability to delete tasks.
+     * @param taskList An ArrayList of type Task used to contain the user's tasks.
+     * @param inputValue A String[] formed when the user gives an input to Duke.
+     */
+    public static void delete(ArrayList<Task> taskList, String[] inputValue) {
+        try {
+            int idx = Integer.parseInt(inputValue[1]);
+            Task taskToDelete = taskList.remove(idx -1);
+            System.out.println("     Noted. I've removed this task:");
+            System.out.println("       " + taskToDelete.toString());
+            System.out.println("     Now you have " + taskList.size()
+                    + (taskList.size() == 1 ? " task" : " tasks") + " in the list.");
+        } catch (NumberFormatException e) {
+            System.out.println("     OOPS!!! Please ensure a number is entered after delete (eg: delete 2)");
+        } catch (IndexOutOfBoundsException e) {
+            if (Integer.parseInt(inputValue[1]) <= 1) {
+                System.out.println("     OOPS!!! You do not have any task in the list");
+            } else {
+                System.out.println("     OOPS!!! You do not have " + inputValue[1] + " tasks in the list");
+            }
         }
     }
 
@@ -124,7 +156,8 @@ public class Duke {
                 taskList.add(deadline);
                 System.out.println("     Got it. I have added this task:");
                 System.out.println("       " + deadline.toString());
-                System.out.println("     Now you have " + taskList.size() + " tasks in the list");
+                System.out.println("     Now you have " + taskList.size()
+                        + (taskList.size() == 1 ? " task" : " tasks") + " in the list.");
             }
         }
     }
@@ -154,7 +187,8 @@ public class Duke {
                 taskList.add(event);
                 System.out.println("     Got it. I have added this task:");
                 System.out.println("       " + event.toString());
-                System.out.println("     Now you have " + taskList.size() + " tasks in the list");
+                System.out.println("     Now you have " + taskList.size()
+                        + (taskList.size() == 1 ? " task" : " tasks") + " in the list.");
             }
         }
     }
@@ -174,7 +208,8 @@ public class Duke {
             taskList.add(toDo);
             System.out.println("     Got it. I have added this task:");
             System.out.println("       " + toDo.toString());
-            System.out.println("     Now you have " + taskList.size() + " tasks in the list");
+            System.out.println("     Now you have " + taskList.size()
+                    + (taskList.size() == 1 ? " task" : " tasks") + " in the list.");
         }
     }
 }
