@@ -16,5 +16,6 @@ public class Duke {
         while (inputs.hasNext()) {
             System.out.println(response.output(inputs.nextLine()));
         }
+        inputs.close();
     }
 }
