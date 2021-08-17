@@ -12,4 +12,9 @@ done 2
 list
 done 3
 list
+todo
+event
+event SomeEvent
+deadline
+deadline SomeDeadline
 bye
