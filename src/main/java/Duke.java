@@ -26,7 +26,7 @@ public class Duke {
                 for (int i = 0; i < taskList.size(); i += 1) {
                     System.out.println((i + 1) + "." + taskList.get(i));
                 }
-            } else if (userInput.startsWith("done ") && Duke.isInteger(userInput.substring(5))) {
+            } else if (userInput.startsWith("done ") && Util.isInteger(userInput.substring(5))) {
                 //Extract id of task
                 int index = Integer.parseInt(userInput.substring(5)) - 1;
                 //Mark the task as done
@@ -43,16 +43,5 @@ public class Duke {
             }
         }
         sc.close();
-    }
-
-    public static boolean isInteger(String s) {
-        try {
-            Integer.parseInt(s);
-        } catch(NumberFormatException e) {
-            return false;
-        } catch(NullPointerException e) {
-            return false;
-        }
-        return true;
     }
 }
