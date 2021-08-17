@@ -1,17 +1,27 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         greeting();
         String cmd = sc.nextLine();
         while (!cmd.equals("bye")) {
+            Pattern p = Pattern.compile("done \\d+");
+            Matcher m = p.matcher(cmd);
             if (cmd.equals("list")) {
                 iterList(list);
+            } else if (m.matches()) {
+                String[] tokens = cmd.split(" ");
+                int index = Integer.parseInt(tokens[1]) - 1;
+                Task task = list.get(index);
+                task.completeTask();
+                System.out.println("Nice! I've marked this task as done:\n  " + task.getStatusIcon() + " " + task);
             } else {
-                addToList(list, cmd);
+                addToList(list, new Task(cmd));
             }
             cmd = sc.nextLine();
         }
@@ -23,15 +33,16 @@ public class Duke {
         System.out.println("Aloha! I'm Sophia\nWhat can I do for you?\n");
     }
 
-    private static void iterList(ArrayList<String> ls) {
+    private static void iterList(ArrayList<Task> ls) {
+        System.out.println("Here are the tasks in your list:\n");
         int i = 1;
-        for (String s : ls) {
-            System.out.println(i + ". " + s);
+        for (Task s : ls) {
+            System.out.println(i + "." + s.getStatusIcon() + " " + s);
             i++;
         }
     }
 
-    private static void addToList(ArrayList<String> ls, String text) {
+    private static void addToList(ArrayList<Task> ls, Task text) {
         ls.add(text);
         System.out.println("added: " + text);
     }
