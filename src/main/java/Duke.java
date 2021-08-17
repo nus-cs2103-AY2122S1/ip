@@ -35,15 +35,51 @@ public class Duke {
 //        }
 
         // Level-2
-        String[] arr = new String[100];
+//        String[] arr = new String[101];
+//        int i = 1;
+//        while (true) {
+//            String input = sc.nextLine();
+//
+//            if (input.equals("list")) {
+//                System.out.println(tab + line);
+//                for (int j = 1; j < i; j++) {
+//                    System.out.println(tab + " " + j + ". " + arr[j]);
+//                }
+//                System.out.println(tab + line);
+//            } else if (input.equals("bye")) {
+//                System.out.println(tab + line);
+//                System.out.println(tab + " " + "Farewell, may we never meet again.");
+//                System.out.println(tab + line);
+//                break;
+//            } else {
+//                System.out.println(tab + line);
+//                System.out.println(tab + " added: " + input);
+//                System.out.println(tab + line);
+//                arr[i] = input;
+//                i++;
+//            }
+//        }
+
+        // Level 3
+        Task[] tasks = new Task[101];
         int i = 1;
         while (true) {
             String input = sc.nextLine();
 
-            if (input.equals("list")) {
+            if (input.contains("done ")) {
+                int taskNumber = input.charAt(input.length() - 1) - 48;
+                if (taskNumber < i) {
+                    tasks[taskNumber].complete();
+                    System.out.println(tab + "Wow. Congratulations. You have completed the following task:");
+                    System.out.println(tab + " " + tasks[taskNumber].status);
+                    System.out.println(tab + "Are you happy now?");
+                } else {
+                    System.out.println("You have entered an invalid task number. Fool.");
+                }
+            } else if (input.equals("list")) {
                 System.out.println(tab + line);
                 for (int j = 1; j < i; j++) {
-                    System.out.println(tab + " " + j + ". " + arr[j]);
+                    System.out.println(tab + " " + j + ". " + tasks[j].status);
                 }
                 System.out.println(tab + line);
             } else if (input.equals("bye")) {
@@ -55,7 +91,7 @@ public class Duke {
                 System.out.println(tab + line);
                 System.out.println(tab + " added: " + input);
                 System.out.println(tab + line);
-                arr[i] = input;
+                tasks[i] = new Task(input);
                 i++;
             }
         }
