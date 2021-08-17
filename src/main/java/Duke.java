@@ -1,9 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
 
     static String line = "____________________________________________________________\n";
+
+    static List<String> list = new ArrayList<String>();
 
     public static void HelloMessage() {
         String Hello_message = "Hello! I'm Duke\n" +
@@ -12,6 +16,15 @@ public class Duke {
         System.out.println(line + Hello_message + line);
     }
 
+    public static void PrintList() {
+        int index = 0;
+        System.out.println(line);
+        for (int i = 0; i < list.size(); i++) {
+            index++;
+            System.out.println(index + "." + list.get(i));
+        }
+        System.out.println(line);
+    }
 
     public static void PrintMessage(){
         Scanner scanner = new Scanner(System.in);
@@ -24,9 +37,12 @@ public class Duke {
             if (Echo.equals("bye")) {
                 System.out.println(line + Goodbye_message + line);
                 break;
+            } else if (Echo.equals("list")){
+                PrintList();
             }
             else {
-                System.out.println(line + Echo + "\n" + line);
+                System.out.println(line + "added: " + Echo + "\n" + line);
+                list.add(Echo);
             }
         }
     }
