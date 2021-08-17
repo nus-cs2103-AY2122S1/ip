@@ -24,6 +24,6 @@ public class Echoer {
     }
 
     public static void error(String errorMessage) {
-        info("☹ OOPS!!! " + errorMessage);
+        info("☹ Error: " + errorMessage);
     }
 }
