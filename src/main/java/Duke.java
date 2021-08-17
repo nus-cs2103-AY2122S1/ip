@@ -18,19 +18,47 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
+        // Level-1
+//        while (true) {
+//            String input = sc.nextLine();
+//
+//            if (input.equals("bye")) {
+//                System.out.println(tab + line);
+//                System.out.println(tab + " " + "Farewell, may we never meet again.");
+//                System.out.println(tab + line);
+//                break;
+//            } else {
+//                System.out.println(tab + line);
+//                System.out.println(tab + " " + input);
+//                System.out.println(tab + line);
+//            }
+//        }
+
+        // Level-2
+        String[] arr = new String[100];
+        int i = 1;
         while (true) {
             String input = sc.nextLine();
 
-            if (input.equals("bye")) {
+            if (input.equals("list")) {
+                System.out.println(tab + line);
+                for (int j = 1; j < i; j++) {
+                    System.out.println(tab + " " + j + ". " + arr[j]);
+                }
+                System.out.println(tab + line);
+            } else if (input.equals("bye")) {
                 System.out.println(tab + line);
                 System.out.println(tab + " " + "Farewell, may we never meet again.");
                 System.out.println(tab + line);
                 break;
             } else {
                 System.out.println(tab + line);
-                System.out.println(tab + " " + input);
+                System.out.println(tab + " added: " + input);
                 System.out.println(tab + line);
+                arr[i] = input;
+                i++;
             }
         }
+
     }
 }
