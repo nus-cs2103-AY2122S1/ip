@@ -1,12 +1,10 @@
 public class Task {
     private boolean done;
     private String title;
-    private int indexNumber;
-
-    public Task(String title, int indexNumber) {
+    public Task(String title) {
         this.title = title;
         this.done = false;
-        this.indexNumber = indexNumber;
+
     }
 
     public void setDone(boolean status) {
@@ -22,9 +20,7 @@ public class Task {
         return this.title;
     }
 
-    public int getIndexNumber() {
-        return this.indexNumber;
-    }
+
 
     public String getInfo() {
         return "[ ] " + this.title;
@@ -33,9 +29,9 @@ public class Task {
     @Override
     public String toString() {
         if (!done) {
-            return this.indexNumber + ".[ ] " + this.title;
+            return "[ ] " + this.title;
         } else {
-            return this.indexNumber + ".[X] " + this.title;
+            return "[X] " + this.title;
         }
 
     }

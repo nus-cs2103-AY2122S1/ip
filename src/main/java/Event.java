@@ -1,8 +1,8 @@
 public class Event extends Task {
     private String date;
 
-    public Event(String title, int indexNumber, String date) {
-        super(title, indexNumber);
+    public Event(String title, String date) {
+        super(title);
         this.date = date;
     }
 
@@ -14,9 +14,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (!this.getDone()) {
-            return String.format(this.getIndexNumber() + ".[E][ ]" + this.getTitle() + "(at: " + this.date + ")");
+            return String.format("[E][ ]" + this.getTitle() + "(at: " + this.date + ")");
         } else {
-            return String.format(this.getIndexNumber() + ".[E][X]" + this.getTitle() + "(at: " + this.date + ")");
+            return String.format("[E][X]" + this.getTitle() + "(at: " + this.date + ")");
         }
 
     }
