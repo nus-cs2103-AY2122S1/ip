@@ -9,11 +9,11 @@ public class TaskManager {
 
     public static void addToList(Task newTask) {
         if (TASK_LIST.size() == MAX_STORAGE) {
-            Echoer.echo("Unable to add task: Task list is full.");
+            Echoer.error("Unable to add task as list is full.");
             return;
         }
         TASK_LIST.add(newTask);
-        Echoer.echo("Got it. I've added this task:\n\t  " + newTask + "\n\tNow you have " +
+        Echoer.info("Got it. I've added this task:\n\t  " + newTask + "\n\tNow you have " +
                 TASK_LIST.size() + " tasks in the list.");
     }
 
@@ -38,21 +38,21 @@ public class TaskManager {
 
     public static void markTaskAsDone(int taskNumber) {
         if (TASK_LIST.isEmpty()) {
-            Echoer.echo("Task invalid: List is empty.");
+            Echoer.error("List is empty.");
             return;
         }
         if (taskNumber < 0 || TASK_LIST.size() < taskNumber) {
-            Echoer.echo("Task invalid: Task does not exist.");
+            Echoer.error("Task does not exist.");
             return;
         }
         Task selectedTask = TASK_LIST.get(taskNumber - 1); // shift to 0-indexing
         selectedTask.markAsDone();
-        Echoer.echo("Nice! I've marked this task as done:\n\t  " + selectedTask);
+        Echoer.info("Nice! I've marked this task as done:\n\t  " + selectedTask);
     }
 
     public static void listTasks() {
         if (TASK_LIST.isEmpty()) {
-            Echoer.echo("List is empty: Start adding tasks to view list.");
+            Echoer.info("List is empty.");
             return;
         }
         List<String> taskManagerStringList = new ArrayList<>();
@@ -62,6 +62,6 @@ public class TaskManager {
             int taskNumber = idx + 1; // shift to 1-indexing
             taskManagerStringList.add(String.format("%d. %s", taskNumber, task));
         }
-        Echoer.echo(taskManagerStringList);
+        Echoer.list(taskManagerStringList);
     }
 }

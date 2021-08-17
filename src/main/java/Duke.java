@@ -20,7 +20,7 @@ public class Duke {
     }
 
     public static void greet() {
-        Echoer.echo("Hello! I'm Duke.\n\tWhat can I do for you?");
+        Echoer.info("Hello! I'm Duke.\n\tWhat can I do for you?");
     }
 
     public static void run() {
@@ -34,7 +34,7 @@ public class Duke {
     }
 
     public static void exit() {
-        Echoer.echo("Bye. Hope to see you again soon!");
+        Echoer.info("Bye. Hope to see you again soon!");
     }
 
     public static void makeDecision(String userInput) {
@@ -56,7 +56,7 @@ public class Duke {
             TaskManager.addDeadlineTask(userInput.substring(8));
 
         } else {
-            Echoer.echo("Invalid input: Please ensure instruction follows specified format.");
+            Echoer.error("Please ensure instruction follows specified format.");
         }
     }
 }
