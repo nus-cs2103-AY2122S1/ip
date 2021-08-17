@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -7,54 +8,34 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String greetingMessage = "Henlo, this is Duke.\nHow may I help?";
         System.out.println(greetingMessage);
+        String listCommand = "list";
         String byeString = "bye";
-        Random rand = new Random();
-        int impatienceCount = 0;
 
-        String[] impatientEchoSmall = new String[] {
-                "%s?? What does that even mean???\n",
-                "Umm.. What do you want me to say to '%s'?\n",
-                "...? %s and...?\n",
-                "Sorry, but what does '%s' mean?\n"
-        };
-
-        String[] impatientEchoBig = new String[] {
-                "You really want me to repeat what you said AGAIN?\n%s\nHAPPY NOW?\n",
-                "When will this stop.... %s.........\n",
-                "I'm sorry please leave me alone.... %s right..?\n",
-                "OKAY %s OKAY I GET IT PLEASE STOP :(\n"
-        };
-
-        String nonimpatientBye = "Bye~! Teehee~~";
-        String impatientByeSmall = "Bye...";
-        String impatientByeBig = "Goodbye and Good Riddance!!!!!!";
-
+        String[] userItemList = new String[100];
+        int currentCapacity = 0;
 
         while (true) {
             String response = sc.next();
-            if (response.equals(byeString)) {
-                if (impatienceCount < 3) {
-                    System.out.println(nonimpatientBye);
-                    break;
-                } else if (impatienceCount < 6) {
-                    System.out.println(impatientByeSmall);
-                    break;
-                } else {
-                    System.out.println(impatientByeBig);
-                    break;
-                }
 
-            } else {
-                impatienceCount += 1;
-                if (impatienceCount < 3) {
-                    System.out.println(response);
-                } else if (impatienceCount < 6) {
-                    int strPos = rand.nextInt(impatientEchoSmall.length - 1);
-                    System.out.printf(impatientEchoSmall[strPos], response);
+            if (response.equals(byeString)) {
+                System.out.println("Byebye!! Hehe..");
+                break;
+            }
+
+            if (!response.equals(listCommand)) {
+                if (currentCapacity < 100) {
+                    userItemList[currentCapacity] = response;
+                    currentCapacity += 1;
+                    System.out.printf("added: %s\n", response);
                 } else {
-                    int strPos = rand.nextInt(impatientEchoBig.length - 1);
-                    System.out.printf(impatientEchoBig[strPos], response);
+                    System.out.println("Your current list is full! Unable to add any more items!");
                 }
+            } else {
+                String toPrint = "";
+                for (int i = 0; i < currentCapacity; i++) {
+                    toPrint += String.format("%d. %s\n", i + 1, userItemList[i]);
+                }
+                System.out.print(toPrint);
             }
         }
 
