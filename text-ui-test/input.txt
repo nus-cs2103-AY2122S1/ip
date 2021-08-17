@@ -1,0 +1,7 @@
+todo walk
+deadline cry /by now
+event eat ice cream /at 23 aug
+list
+done 2
+list
+bye
