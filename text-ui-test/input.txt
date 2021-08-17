@@ -1,3 +1,9 @@
 todo borrow book
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+list
+done 2
+event dinner party /at Tues 4-6pm
+done 3
 list
 bye
