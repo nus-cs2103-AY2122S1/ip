@@ -1,13 +1,13 @@
 public class Task {
     private String description;
     private boolean status;
-    private int number;
+    private int itemId;
     private static int itemCounter = 1;
 
     public Task(String description) {
         this.description = description;
         this.status = false;
-        this.number = itemCounter;
+        this.itemId = itemCounter;
         itemCounter++;
     }
 
@@ -28,7 +28,12 @@ public class Task {
     }
 
     public int getNumber() {
-        return number;
+        return itemId;
+    }
+
+    @Override
+    public String toString() {
+        return this.getStatusIcon() + " " + this.description;
     }
 
 }
