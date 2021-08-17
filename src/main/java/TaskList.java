@@ -20,6 +20,12 @@ public class TaskList {
     }
 
     public String markIndexCompleted(int index) {
-        return this.taskList.get(index).markCompleted();
+        Task selectedTask = this.taskList.get(index);
+        selectedTask.markCompleted();
+        return "Wow you finally did something productive!\n" + selectedTask.printTask() + "\n";
+    }
+
+    public String noOfTasks() {
+        return Integer.toString(this.taskList.size());
     }
 }

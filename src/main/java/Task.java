@@ -11,9 +11,8 @@ public class Task {
         return (completed ? "X" : " "); // mark done task with X
     }
 
-    public String markCompleted() {
+    public void markCompleted() {
         this.completed = true;
-        return "Wow you finally did something productive!\n" + this.printTask() + "\n";
     }
 
     public String printTask() {
