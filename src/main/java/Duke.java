@@ -32,6 +32,8 @@ public class Duke {
                     printList(taskList);
                 } else if (userInput.split("\\s")[0].equalsIgnoreCase("done")) {
                     completeTask(userInput);
+                } else if (userInput.split("\\s")[0].equalsIgnoreCase("delete")) {
+                    deleteTask(userInput);
                 } else {
                     categoriseTask(userInput);
                 }
@@ -152,8 +154,21 @@ public class Duke {
                     System.out.println(currTask.toString() + "\n" + LINE);
                 }
             } catch (NumberFormatException | IndexOutOfBoundsException ex) {
-                throw new InvalidDoneException();
+                throw new InvalidNumberInputException();
             }
+    }
+
+    public void deleteTask(String input) {
+        try {
+            String indexOfTask = input.substring(6).trim();
+            int index = Integer.parseInt(indexOfTask);
+            Task currTask = taskList.remove((index - 1));
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(currTask.toString());
+            printRemainingTasks();
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                throw new InvalidNumberInputException();
+        }
     }
 
     public void printRemainingTasks() {
@@ -196,5 +211,4 @@ public class Duke {
             taskList.add(task);
         }
     }
-
 }
