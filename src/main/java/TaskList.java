@@ -31,6 +31,18 @@ public class TaskList {
         list.add(item);
         System.out.println("Noted! I've added the following task:");
         System.out.printf("    %s%n", item.toString());
+        printSize();
+    }
+
+    Task delete(int index) {
+        Task removedItem = list.remove(index - 1);
+        System.out.println("Got it. I've removed the following task:");
+        System.out.printf("    %s%n", removedItem.toString());
+        printSize();
+        return removedItem;
+    }
+
+    void printSize() {
         System.out.printf("Total tasks: %d%n", list.size());
     }
 

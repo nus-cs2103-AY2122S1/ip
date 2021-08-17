@@ -15,4 +15,8 @@ deadline borrow book
 event
 event borrow book
 list
+delete 3
+list
+done
+delete
 bye
