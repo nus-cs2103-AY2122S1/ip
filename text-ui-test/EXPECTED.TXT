@@ -6,6 +6,8 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What can I do for you?
+OOPS!!! I'm sorry, but I don't know what that means :-(
+OOPS!!! The description of a todo cannot be empty.
 Got it. I've added this task:
 [T][ ] wash car
 Now you have 1 tasks in the list.

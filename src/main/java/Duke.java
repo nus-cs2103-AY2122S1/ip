@@ -29,7 +29,7 @@ public class Duke {
             } else {
                 try {
                     Add.of(this.tasks, input).exec();
-                } catch (IllegalArgumentException e) {
+                } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
             }
