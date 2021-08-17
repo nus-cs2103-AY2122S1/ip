@@ -1,31 +1,31 @@
 public class Deadline extends Task {
 
-    private String deadline;
+    private String by;
 
-    public Deadline(String description, boolean isDone, String deadline) {
+    public Deadline(String description, boolean isDone, String by) {
         super(description, isDone);
-        this.deadline = deadline;
+        this.by = by;
     }
 
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, String by) {
         super(description);
-        this.deadline = deadline;
+        this.by = by;
     }
 
-    public String getDeadline() {
-        return deadline;
+    public String getBy() {
+        return by;
     }
 
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
+    public void setBy(String by) {
+        this.by = by;
     }
 
-    public String getFormattedDeadline() {
-        return "( by: " + deadline + ")";
+    public String getFormattedBy() {
+        return "( by: " + by + ")";
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " " + getFormattedDeadline();
+        return "[D]" + super.toString() + " " + getFormattedBy();
     }
 }
