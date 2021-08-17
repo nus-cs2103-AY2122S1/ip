@@ -9,7 +9,9 @@ public class TaskList {
 
     public String add(Task item) {
         this.taskList.add(item);
-        return "added: " + item;
+        String front = "Got it meow! I've added this task:";
+        String back = String.format("Now you have %d tasks in the list.", taskList.size());
+        return String.format("%s\n      %s\n    %s", front, item, back);
     }
 
     public String display() {

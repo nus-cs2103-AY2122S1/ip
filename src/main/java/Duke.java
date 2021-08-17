@@ -12,18 +12,36 @@ public class Duke {
         TaskList taskGroup = new TaskList();
 
         // takes input from the keyboard
-        String command = sc.next();
+        String request = sc.nextLine();
+        String command = request.split(" ")[0];
         while (!command.equals("bye")) {
             // prints the response
             if (command.equals("list")) {
                 respond(taskGroup.display());
+
             } else if (command.equals("done")) {
-                int index = Integer.parseInt(sc.next());
+                int index = Integer.parseInt(request.substring(request.indexOf(" ") + 1));
                 respond(taskGroup.completeTask(index));
+
+            } else if (command.equals("todo")) {
+                String description = request.substring(request.indexOf(" ") + 1);
+                respond(taskGroup.add(new Todo(description)));
+
+            } else if (command.equals("deadline")) {
+                String description = request.substring(request.indexOf(" ") + 1, request.indexOf("/by") - 1);
+                String date = request.substring(request.indexOf("/by") + 4);
+                respond(taskGroup.add(new Deadline(description, date)));
+
+            } else if (command.equals("event")) {
+                String description = request.substring(request.indexOf(" ") + 1, request.indexOf("/at") - 1);
+                String date = request.substring(request.indexOf("/at") + 4);
+                respond(taskGroup.add(new Event(description, date)));
+
             } else {
                 respond(taskGroup.add(new Task(command)));
             }
-            command = sc.next();
+            request = sc.nextLine();
+            command = request.split(" ")[0];
         }
 
         respond(byeMessage);
