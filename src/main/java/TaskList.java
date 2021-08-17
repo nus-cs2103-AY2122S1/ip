@@ -1,26 +1,13 @@
+import java.util.ArrayList;
+
 public class TaskList {
-    private Task[] tasks;
-    private static final int MAX_TASKS = 200;
-    private int counter;
+    private ArrayList<Task> tasks;
 
     /**
      * A constructor for a TaskList which contains Tasks.
      */
     public TaskList() {
-        this.counter = 0;
-        this.tasks = new Task[MAX_TASKS];
-    }
-
-    /**
-     * Given a string, creates a Task from that string and adds it to the list of task
-     * @param taskTitle a String of the title of the task to be added.
-     * @return the newly created Task.
-     */
-    public Task addTask(String taskTitle) {
-        Task task = new Task(taskTitle);
-        this.tasks[counter] = task;
-        counter ++;
-        return task;
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -30,8 +17,7 @@ public class TaskList {
      */
     public Task addTodo(String taskTitle) {
         Todo task = new Todo(taskTitle);
-        this.tasks[counter] = task;
-        counter ++;
+        this.tasks.add(task);
         return task;
     }
 
@@ -42,8 +28,7 @@ public class TaskList {
      */
     public Task addDeadline(String taskTitle) {
         Deadline task = new Deadline(taskTitle);
-        this.tasks[counter] = task;
-        counter ++;
+        this.tasks.add(task);
         return task;
     }
 
@@ -54,8 +39,7 @@ public class TaskList {
      */
     public Task addEvent(String taskTitle) {
         Event task = new Event(taskTitle);
-        this.tasks[counter] = task;
-        counter ++;
+        this.tasks.add(task);
         return task;
     }
 
@@ -66,7 +50,7 @@ public class TaskList {
      * @return the String representation of the completed task
      */
     public String completeTask(int taskIndex) {
-        Task task = this.tasks[taskIndex];
+        Task task = this.tasks.get(taskIndex);
         // Assumes that the task exists.
         task.completeTask();
         return task.toString();
@@ -78,7 +62,7 @@ public class TaskList {
      * @return A string that contains the number of tasks in the list.
      */
     public String countTasks() {
-        return String.format("\nNow you have %d tasks in the list.", counter);
+        return String.format("\nNow you have %d tasks in the list.", this.tasks.size());
     }
 
     /**
@@ -89,9 +73,9 @@ public class TaskList {
     @Override
     public String toString() {
         String output = "Here are the tasks in your list:";
-        for (int i = 0; i < counter; i++) {
+        for (int i = 0; i < this.tasks.size(); i++) {
             int index = i + 1;
-            output += "\n" + index + "." + this.tasks[i].toString();
+            output += "\n" + index + "." + this.tasks.get(i).toString();
         }
         return output;
     }

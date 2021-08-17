@@ -5,4 +5,10 @@ list
 done 1
 done 3
 list
+invalidcommand
+todo
+deadline /by EMPTY DESCRIPTION
+event /at EMPTY DESCRIPTION
+todo return book
+list
 bye
