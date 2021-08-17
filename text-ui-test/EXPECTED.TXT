@@ -1,2 +1,26 @@
 Welcome. I am your virtual assistant Duke. Sparkle up your day (TM).
-
+todo [T][ ] eat lunch added
+the list has 1 tasks now
+todo [T][ ] homework added
+the list has 2 tasks now
+homework is already in the list sir
+event [E][ ] class (at: 4pm) added
+the list has 3 tasks now
+deadline [D][ ] assignment (by: july 31st) added
+the list has 4 tasks now
+1. [T][ ] eat lunch
+2. [T][ ] homework
+3. [E][ ] class (at: 4pm)
+4. [D][ ] assignment (by: july 31st)
+eat lunch has been marked as done
+(WHAT IS THIS PERSON TRYING TO SAY WHY IS HE TYPING GIBBERISH I'M JUST TRYING TO SURVIVE)
+1. [T][X] eat lunch
+2. [T][ ] homework
+3. [E][ ] class (at: 4pm)
+4. [D][ ] assignment (by: july 31st)
+task [T][ ] homework has been deleted.
+There are 3 tasks left in the list.
+1. [T][X] eat lunch
+2. [E][ ] class (at: 4pm)
+3. [D][ ] assignment (by: july 31st)
+Have a SPARKULAR day.

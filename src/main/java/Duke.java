@@ -135,11 +135,13 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Welcome. I am your virtual assistant Duke. Sparkle up your day (TM).");
+        Scanner sc = new Scanner(System.in);
 
         while(true){
-            Scanner sc = new Scanner(System.in);
             String command = sc.nextLine();
+            //System.out.println(command);
             if(command.equals("bye")) {
+                sc.close();
                 System.out.println("Have a SPARKULAR day.");
                 break;
             }else if(command.equals("list")) {

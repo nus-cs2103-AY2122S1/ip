@@ -1,2 +1,12 @@
-hi
+todo eat lunch
+todo homework
+todo homework
+event class /at 4pm
+deadline assignment /by july 31st
+list
+done 1
+1
+list
+delete 2
+list
 bye
