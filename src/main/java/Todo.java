@@ -13,7 +13,7 @@ public class Todo extends Task {
      * @return The todo task.
      */
     public static Todo newTodoTask(String taskName) {
-        return new Todo(taskName);
+        return new Todo(taskName.trim());
     }
 
     @Override

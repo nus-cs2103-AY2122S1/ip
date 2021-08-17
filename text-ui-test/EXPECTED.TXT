@@ -45,4 +45,99 @@ This entry does not exist.
 
 Invalid input. Please try again.
 
+Invalid argument to the "done" function.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Got it! This task has been added:
+[D][] Hw (by: mon)
+You currently have 3 uncompleted tasks remaining.
+
+Got it! This task has been added:
+[E][] lunch (at: tmrw)
+You currently have 4 uncompleted tasks remaining.
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Invalid format. Please enter the deadline format as below:
+deadline {Deadline name} -by {Date to be completed by}
+
+Invalid format. Please enter the event format as below:
+event {Event name} -at {Date of event}
+
+Invalid format. Please enter the todo format as below:
+todo {todo name}
+
+Got it! This task has been added:
+[T][] Test
+You currently have 5 uncompleted tasks remaining.
+
 Bye!! Hope to see you again!!

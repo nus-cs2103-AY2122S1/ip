@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * A class to abstract a deadline which is a type of task with a date
  * to be completed by.
@@ -18,8 +20,9 @@ public class Deadline extends Task {
      * @return The newly created task deadline
      */
     public static Deadline newDeadlineTask(String input) {
-        String taskName = input.split(" -by ")[0];
-        String completedBy = input.split(" -by ")[1];
+        String[] inputArr = input.split("-by");
+        String taskName = inputArr[0].trim();
+        String completedBy = inputArr[1].trim();
         return new Deadline(taskName, completedBy);
     }
 

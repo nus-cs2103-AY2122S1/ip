@@ -18,8 +18,9 @@ public class Event extends Task {
      * @return The newly created event task.
      */
     public static Event newEventTask(String input) {
-        String name = input.split(" -at ")[0];
-        String time = input.split(" -at ")[1];
+        String[] inputArr = input.split("-at");
+        String name = inputArr[0].trim();
+        String time = inputArr[1].trim();
         return new Event(name, time);
     }
 

@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -6,7 +5,7 @@ import java.util.Scanner;
  */
 public class UserInputs {
 
-    private TaskList taskList;
+    private final TaskList taskList;
 
     public UserInputs() {
         taskList = new TaskList();
@@ -37,23 +36,36 @@ public class UserInputs {
             return true;
         } else if (input.toLowerCase().startsWith("done")) {
             // Sets a task as done
-            int index = Integer.parseInt(input.split(" ")[1]);
-            this.taskList.markTaskAsCompleted(index);
+            try {
+                int index = Integer.parseInt(input.split(" ")[1]);
+                this.taskList.markTaskAsCompleted(index);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid argument to the \"done\" function.\n");
+            }
             return true;
         } else if (input.toLowerCase().startsWith("todo")) {
             // Creates a todo task
-            Task task = Todo.newTodoTask(UserInputs.removeFirstWordFromString(input));
-            this.taskList.addTask(task);
+            String details = UserInputs.removeFirstWordFromString(input, Task.Type.TODO);
+            if (details != null && details.trim().length() > 0) {
+                Task task = Todo.newTodoTask(details);
+                this.taskList.addTask(task);
+            }
             return true;
         } else if (input.toLowerCase().startsWith("deadline")) {
             //Creates a deadline task
-            Task task = Deadline.newDeadlineTask(UserInputs.removeFirstWordFromString(input));
-            this.taskList.addTask(task);
+            String details = UserInputs.removeFirstWordFromString(input, Task.Type.DEADLINE);
+            if (details != null && this.verifyDeadlineInput(details.trim())) {
+                Task task = Deadline.newDeadlineTask(details);
+                this.taskList.addTask(task);
+            }
             return true;
         } else if (input.toLowerCase().startsWith("event")) {
             // Creates an event task
-            Task task = Event.newEventTask(UserInputs.removeFirstWordFromString(input));
-            this.taskList.addTask(task);
+            String details = UserInputs.removeFirstWordFromString(input, Task.Type.EVENT);
+            if (details != null && this.verifyEventInput(details.trim())) {
+                Task task = Event.newEventTask(details);
+                this.taskList.addTask(task);
+            }
             return true;
         }
         // Unrecognised input
@@ -61,7 +73,70 @@ public class UserInputs {
         return true;
     }
 
-    private static String removeFirstWordFromString(String string) {
-        return string.split(" ", 2)[1];
+    /**
+     * Verifies that the deadline task details are correct. It checks that the user has used the
+     * command "-by" and that a non-empty date and time is specified. If it is not correct, it
+     * prints an error message.
+     * @param input The deadline details.
+     * @return True if the deadline details inputted by the user is correct. Otherwise, false.
+     */
+    public boolean verifyDeadlineInput(String input) {
+        if (!input.contains("-by")) {
+            UserInputs.printErrorMessage(Task.Type.DEADLINE);
+            return false;
+        }
+        String[] inputParts = input.split(" -by ");
+        if (inputParts.length != 2) {
+            UserInputs.printErrorMessage(Task.Type.DEADLINE);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Verifies the event task details is correct. It checks that the user has used the command
+     * "-at" and that a non-empty date and time is specified. If is not correct, it prints
+     * an error message.
+     * @param input The event details.
+     * @return True if the event details inputted by the user is correct. Otherwise, false.
+     */
+    public boolean verifyEventInput(String input) {
+        if (!input.contains("-at")) {
+            UserInputs.printErrorMessage(Task.Type.EVENT);
+            return false;
+        }
+        String[] inputParts = input.split(" -at ");
+        if (inputParts.length != 2 || inputParts[0].trim().length() == 0 || inputParts[1].trim().length() == 0) {
+            UserInputs.printErrorMessage(Task.Type.EVENT);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Prints an error message when the user inputs the task but in the wrong message. The message
+     * tells the user that an error has occurred and how to correctly the input the respective task.
+     * @param type The type of task inputted by the user.
+     */
+    public static void printErrorMessage(Task.Type type) {
+        if (type == Task.Type.TODO) {
+            System.out.println("Invalid format. Please enter the todo format as below:");
+            System.out.println(Duke.TODO_FORMAT + "\n");
+        } else if (type == Task.Type.DEADLINE) {
+            System.out.println("Invalid format. Please enter the deadline format as below:");
+            System.out.println(Duke.DEADLINE_FORMAT + "\n");
+        } else {
+            System.out.println("Invalid format. Please enter the event format as below:");
+            System.out.println(Duke.EVENT_FORMAT + "\n");
+        }
+    }
+
+    private static String removeFirstWordFromString(String string, Task.Type type) {
+        try {
+            return string.split(" ", 2)[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            UserInputs.printErrorMessage(type);
+            return null;
+        }
     }
 }

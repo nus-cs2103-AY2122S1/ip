@@ -8,4 +8,35 @@ done 1
 list
 done 7
 blah
+done t
+deadline blah
+event blah
+deadline blah -b blah
+event blah - at daaa
+deadline blah -at blah
+event blah -by blah
+deadline -by da
+event -at da
+deadline ta -by
+event add -at
+deadline dad -by
+event dada -at
+deadline     -by da
+event     -at  dat
+deadline    -by
+event    -at
+deadline   Hw    -by    mon
+event   lunch   -at  tmrw
+deadlinedasd -by da
+eventdad -at dada
+deadline da -bybkad
+event adad -atdads
+deadline returnmoney-bymonday
+event run-atmonday
+deadlinedaddasd-bydasdsad
+eventdadsa-atdads
+deadline
+event
+todo
+todo   Test
 bye

@@ -3,6 +3,10 @@
  */
 public abstract class Task {
 
+    /**
+     * Get a description of the task filled with its details.
+     * @return The description of the task.
+     */
     public abstract String taskDescription();
 
     // The type of task
@@ -29,15 +33,29 @@ public abstract class Task {
     }
 
     /**
+     * Prints the string representation of the type of task.
+     * @return The required string representation.
+     */
+    public String eventTypeToString() {
+        if (this.type.equals(Type.TODO)) {
+            return "[T]";
+        } else if (this.type.equals(Type.EVENT)) {
+            return "[E]";
+        } else {
+            return "[D]";
+        }
+    }
+
+    /**
      * A string representation of the task with its task name and its completion status.
      * @return The string representation of the task.
      */
     @Override
     public String toString() {
         if (this.isDone) {
-            return typeString() +  "[X] " + this.taskDescription();
+            return eventTypeToString() +  "[X] " + this.taskDescription();
         }
-        return typeString() + "[] " + this.taskDescription();
+        return eventTypeToString() + "[] " + this.taskDescription();
     }
 
     public String getTaskName() {
@@ -46,19 +64,5 @@ public abstract class Task {
 
     public boolean isDone() {
         return isDone;
-    }
-
-    /**
-     * Prints the string representation of the type of task.
-     * @return The required string representation.
-     */
-    public String typeString() {
-        if (this.type.equals(Type.TODO)) {
-            return "[T]";
-        } else if (this.type.equals(Type.EVENT)) {
-            return "[E]";
-        } else {
-            return "[D]";
-        }
     }
 }

@@ -9,6 +9,10 @@ import java.util.Scanner;
  */
 public class Duke {
 
+    public static final String DEADLINE_FORMAT = "deadline {Deadline name} -by {Date to be completed by}";
+    public static final String EVENT_FORMAT = "event {Event name} -at {Date of event}";
+    public static final String TODO_FORMAT = "todo {todo name}";
+
     /**
      * When run, opens a chat bot that greets the user and echos any user's input. If the input
      * is bye the chat bot is closed.
