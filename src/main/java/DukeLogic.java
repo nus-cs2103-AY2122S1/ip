@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.function.Function;
+import tasks.Task;
 
 /**
  * Handles matching input to behaviour and execution action.
@@ -61,7 +62,7 @@ public class DukeLogic {
   }
 
   private static void addTask(String taskName) {
-    tasks.add(new Task(taskName));
+    tasks.add(Task.createTask(taskName, Task.Type.TODO));
   }
 
   private static void markDone(String taskNumStr) {
