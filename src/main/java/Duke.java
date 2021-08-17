@@ -36,20 +36,14 @@ public class Duke {
                     break;
             }
             if (breakWhile) break;
-            Duke.usersTurn();
         }
     }
 
     private void greet() {
         System.out.println("Duke: Hello! I'm Duke\nWhat can I do for you?");
-        Duke.usersTurn();
     }
 
     private void exit() {
-        System.out.print("\nDuke: Bye. Hope to see you again soon!");
-    }
-
-    private static void usersTurn() {
-        System.out.print("\nYou: ");
+        System.out.println("\nDuke: Bye. Hope to see you again soon!");
     }
 }
