@@ -18,5 +18,13 @@ list
 done hi
 done 4
 done 4
+done -1
+delete 2
+delete 2
+delete 2
+delete 2
+delete 1
+delete 10
+delete -1
 bye
 list

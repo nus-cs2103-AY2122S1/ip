@@ -40,6 +40,9 @@ public class Duke {
                 case "bye":
                     handleBye();
                     break;
+                case "delete":
+                    handleDelete(action);
+                    break;
                 default :
                     throw new InvalidInputException("This is an unknown command.");
             }
@@ -49,6 +52,25 @@ public class Duke {
             waitResponse();
         }
     }
+
+    private static void handleDelete(String action) throws TaskNotFoundException, InvalidInputException{
+        try {
+            int taskNumber = Integer.parseInt(action);
+            if (taskNumber <= tasks.size() && taskNumber > 0) {
+                Task taskToDelete = tasks.get(taskNumber - 1);
+                tasks.remove(taskNumber - 1);
+                System.out.println(String.format("Noted. I've removed this task:\n  %s\nNow you have %d task in the list.",
+                        taskToDelete, tasks.size()));
+            } else {
+                throw new TaskNotFoundException("the task chosen does not exist. Use 'list' to see all your tasks.");
+            }
+            waitResponse();
+        } catch (NumberFormatException e){
+            System.out.println(e);
+            throw new InvalidInputException("command 'delete' require an integer as the second parameter");
+        }
+    }
+
     private static void handleTodo(String action) throws NoActionException{
         if (action.length() == 0) {
             throw new NoActionException("Command 'todo' requires a task action");
@@ -111,7 +133,7 @@ public class Duke {
     private static void handleDone(String action) throws InvalidInputException, TaskNotFoundException{
         try {
             int taskNumber = Integer.parseInt(action);
-            if (taskNumber <= tasks.size()) {
+            if (taskNumber <= tasks.size() && taskNumber > 0) {
                 Task taskToComplete = tasks.get(taskNumber - 1);
                 if (!taskToComplete.isComplete()) {
                     taskToComplete.complete();

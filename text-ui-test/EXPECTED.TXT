@@ -48,4 +48,24 @@ Please try again
 Nice! I've marked this task as done:
 [T][X] Error Handling
 This task is already completed.
+Task Not Found: the task chosen does not exist. Use 'list' to see all your tasks.
+Please try again
+Noted. I've removed this task:
+  [D][X] return The Fault in my Stars (by: 20 Aug 2021)
+Now you have 3 task in the list.
+Noted. I've removed this task:
+  [E][X] John's Birthday Party (at: Next Sunday)
+Now you have 2 task in the list.
+Noted. I've removed this task:
+  [T][X] Error Handling
+Now you have 1 task in the list.
+Task Not Found: the task chosen does not exist. Use 'list' to see all your tasks.
+Please try again
+Noted. I've removed this task:
+  [T][X] borrow The Fault in my Stars
+Now you have 0 task in the list.
+Task Not Found: the task chosen does not exist. Use 'list' to see all your tasks.
+Please try again
+Task Not Found: the task chosen does not exist. Use 'list' to see all your tasks.
+Please try again
 Bye. Hope to see you again!
