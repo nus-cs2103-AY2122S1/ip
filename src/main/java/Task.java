@@ -6,15 +6,17 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected TypeOfTasks type;
 
     /**
      * Constructor for the Task class,
      * initially the task is not done.
      * @param description the name of the task
      */
-    public Task(String description) {
+    public Task(String description, TypeOfTasks type) {
         this.description = description.trim();
         this.isDone = false;
+        this.type = type;
     }
 
     /**
@@ -34,6 +36,12 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
+        String base = "[" + getStatusIcon() + "] " + this.description;
+        switch (type) {
+            case TODO :
+                return "[T]" + base;
+            default:
+                return base;
+        }
     }
 }

@@ -11,7 +11,7 @@ public class DeadLine extends Task {
      * @param by when is the dateline of the task
      */
     public DeadLine(String description, String by) {
-        super(description);
+        super(description, TypeOfTasks.DEADLINE);
         this.by = by;
     }
 

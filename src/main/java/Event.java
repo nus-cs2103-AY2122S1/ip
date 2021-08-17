@@ -11,7 +11,7 @@ public class Event extends Task {
      * @param start the time which the event starts
      */
     public Event(String description, String start) {
-        super(description);
+        super(description, TypeOfTasks.EVENT);
         this.start = start;
     }
 
