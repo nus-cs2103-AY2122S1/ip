@@ -1,9 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
     private static final String LINE = "----------------------------------------------";
-    private Task[] taskList = new Task[100];
+//    private Task[] taskList = new Task[100];
+    private ArrayList<Task> taskList = new ArrayList<>();
     private int size = 0;
 
     public void greeting() {
@@ -34,29 +36,29 @@ public class Duke {
             System.exit(0);
         } else if (input.startsWith("done")) {
             int index = input.charAt(5) - 49;
-            taskList[index].markAsDone();
+            taskList.get(index).markAsDone();
             System.out.println("You have swallowed that pesky fly! RIBBIT!");
-            System.out.println("  " + taskList[index].toString());
+            System.out.println("  " + taskList.get(index).toString());
         } else if (input.equals("list")) {
             System.out.println("Here is your menu for today:");
             for (int i = 0; i < size; i++) {
-                System.out.println(i + 1 + "." + taskList[i].toString());
+                System.out.println(i + 1 + "." + taskList.get(i).toString());
             }
         } else {
             if (input.startsWith("todo")) {
-                taskList[size] = new ToDo(input.substring(5));
+                taskList.add(new ToDo(input.substring(5)));
             } else if (input.startsWith("deadline")) {
                 int index = input.indexOf("/by");
-                taskList[size] = new Deadline(input.substring(9, index),
-                        input.substring(index + 4));
+                taskList.add(new Deadline(input.substring(9, index),
+                        input.substring(index + 4)));
             } else { // is an Event
                 int index = input.indexOf("/at");
-                taskList[size] = new Event(input.substring(6, index),
-                        input.substring(index + 4));
+                taskList.add(new Event(input.substring(6, index),
+                        input.substring(index + 4)));
             }
 
             System.out.println("A fly has been added to the menu:");
-            System.out.println("  " + taskList[size].toString());
+            System.out.println("  " + taskList.get(size).toString());
             size++;
             System.out.println("Now you have " + size + " flies to eat! RIBBIT!");
         }
