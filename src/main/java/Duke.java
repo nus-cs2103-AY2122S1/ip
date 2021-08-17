@@ -8,6 +8,7 @@ public class Duke {
     private static String div = ind + "____________________________________________________________";
     private static String END = "bye";
     private static String LIST = "list";
+    private static String DONE = "done";
     public static void main(String[] args) {
         greeting();
         Scanner sc = new Scanner(System.in);
@@ -19,9 +20,19 @@ public class Duke {
                 break;
             } else if (next.equals(LIST)) {
                 myTasks.printTasks();
+            } else if (next.length() > 3 && next.substring(0, 4).equals(DONE)) {
+                if (next.length() > 5) {
+                    String emp = next.substring(4, 5);
+                    String index = next.substring(5);
+                    int position = Integer.parseInt(index);
+                    myTasks.complete(position);
+                }
+
             } else {
+
                 myTasks.addTask(next);
             }
+
             }
     }
 
