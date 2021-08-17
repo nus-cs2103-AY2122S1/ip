@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,9 +11,9 @@ public class Duke {
 
     private static final String DIVIDER = "____________________________________________________________\n";
 
-    private static Task[] taskList;
+    private static ArrayList<Task> taskList;
 
-    private static int currentIndex;
+    private static int numberOfTasks;
 
     private static void printStartMessage() {
         System.out.println(DIVIDER
@@ -33,8 +34,8 @@ public class Duke {
     private static void printTaskList() {
         System.out.print(DIVIDER);
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < currentIndex; i++) {
-            System.out.println(String.format("%d.%s", i + 1, taskList[i]));
+        for (int i = 0; i < numberOfTasks; i++) {
+            System.out.println(String.format("%d.%s", i + 1, taskList.get(i)));
         }
         System.out.println(DIVIDER);
     }
@@ -42,13 +43,13 @@ public class Duke {
     private static void finishTask(String[] commandAndArgument) throws DukeException {
         try {
             int taskIndex = Integer.parseInt(commandAndArgument[1]) - 1;
-            if (taskIndex >= currentIndex) {
+            if (taskIndex >= numberOfTasks) {
                 throw new DukeException("Please enter a valid task number.");
             } else {
-                taskList[taskIndex].markAsDone();
+                taskList.get(taskIndex).markAsDone();
                 System.out.println(DIVIDER
                         + "Nice! I've marked this task as done:\n"
-                        + taskList[taskIndex].toString() + '\n'
+                        + taskList.get(taskIndex).toString() + '\n'
                         + DIVIDER
                 );
             }
@@ -95,12 +96,12 @@ public class Duke {
             throw new DukeException("Invalid command. List of valid commands include:\n"
                     + "list|todo|deadline|event|done|bye");
         }
-        taskList[currentIndex] = newTask;
-        currentIndex++;
+        taskList.add(newTask);
+        numberOfTasks++;
         System.out.println(DIVIDER
                 + "Got it. I've added this task:\n"
                 + newTask + '\n'
-                + "Now you have " + currentIndex + (currentIndex == 1 ? " task" : " tasks") + " in the list.\n"
+                + "Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + " in the list.\n"
                 + DIVIDER
         );
     }
@@ -109,8 +110,8 @@ public class Duke {
         printStartMessage();
 
         Scanner sc = new Scanner(System.in);
-        taskList = new Task[100];
-        currentIndex = 0;
+        taskList = new ArrayList<>();
+        numberOfTasks = 0;
 
         while (true) {
             try {
