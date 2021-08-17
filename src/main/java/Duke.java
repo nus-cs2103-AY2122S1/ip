@@ -30,13 +30,15 @@ public class Duke {
         System.out.println("The name is\n" + logo);
         System.out.print(reply("This Pepper Jack, wassup!"));
 
-        ArrayList<String> lst = new ArrayList<>();
+        ArrayList<Task> lst = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
         while(true) {
             // Get user input
             System.out.print("[YOU] ");
             String user_input = sc.nextLine();
+            String[] user_input_split = user_input.split(" ", 2);
+            String command = user_input_split[0];
 
             if (user_input.equals("bye")){
                 // End conversation
@@ -52,9 +54,16 @@ public class Duke {
                 }
                 System.out.print(reply(lst_display));
             }
+            else if (command.equals("done")) {
+                // Mark task as done
+                int index = Integer.parseInt(user_input_split[1]) - 1;
+                Task t = lst.get(index);
+                t.setDone();
+                System.out.print(reply("Noice! Pepper Jack marked this task as done:\n\t" + t));
+            }
             else {
                 // Add user input
-                lst.add(user_input);
+                lst.add(new Task(user_input));
                 System.out.print(reply("added: " + user_input));
             }
         }
