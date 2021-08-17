@@ -15,10 +15,10 @@ import static util.Display.printSentence;
  * if the command is invalid
  */
 public class CommandProcessorImpl implements CommandProcessor {
-	private final CommandLogicUnit commandProcessor;
+	private final CommandLogicUnit commandLogicUnit;
 	
 	public CommandProcessorImpl(CommandLogicUnit commandProcessor) {
-		this.commandProcessor = commandProcessor;
+		this.commandLogicUnit = commandProcessor;
 	}
 	
 	@Override
@@ -31,14 +31,14 @@ public class CommandProcessorImpl implements CommandProcessor {
 	private void processInputHelper(List<String> parsedCommands) {
 		switch (parsedCommands.get(0)) {
 			case "bye":
-				commandProcessor.processCommand(Command.BYE, Map.of());
+				commandLogicUnit.processCommand(Command.BYE, Map.of());
 				break;
 			case "list":
-				commandProcessor.processCommand(Command.LIST, Map.of());
+				commandLogicUnit.processCommand(Command.LIST, Map.of());
 				break;
 			case "done":
 				try {
-					commandProcessor.processCommand(Command.DONE, Map.of(
+					commandLogicUnit.processCommand(Command.DONE, Map.of(
 							"index", parsedCommands.get(1)
 					));
 				} catch (Exception e) {
@@ -57,7 +57,7 @@ public class CommandProcessorImpl implements CommandProcessor {
 					String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
 					if (timing.isBlank()) throw new IllegalArgumentException("deadline timing cannot be empty");
 					
-					commandProcessor.processCommand(Command.DEADLINE, Map.of(
+					commandLogicUnit.processCommand(Command.DEADLINE, Map.of(
 							"description", desc,
 							"timing", timing
 					));
@@ -73,7 +73,7 @@ public class CommandProcessorImpl implements CommandProcessor {
 					
 					if (desc.isBlank()) throw new IllegalArgumentException("todo desc cannot be empty");
 					
-					commandProcessor.processCommand(Command.TODOS, Map.of(
+					commandLogicUnit.processCommand(Command.TODOS, Map.of(
 							"description", desc
 					));
 				} catch (Exception e) {
@@ -92,7 +92,7 @@ public class CommandProcessorImpl implements CommandProcessor {
 					String timing = String.join(" ", parsedCommands.subList(byIndex + 1, parsedCommands.size()));
 					if (timing.isBlank()) throw new IllegalArgumentException("event timing cannot be empty");
 					
-					commandProcessor.processCommand(Command.EVENT, Map.of(
+					commandLogicUnit.processCommand(Command.EVENT, Map.of(
 							"description", desc,
 							"timing", timing
 					));
@@ -104,7 +104,7 @@ public class CommandProcessorImpl implements CommandProcessor {
 			}
 			case "delete":
 				try {
-					commandProcessor.processCommand(Command.DELETE, Map.of(
+					commandLogicUnit.processCommand(Command.DELETE, Map.of(
 							"index", parsedCommands.get(1)
 					));
 				} catch (Exception e) {
