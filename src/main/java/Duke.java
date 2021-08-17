@@ -40,10 +40,35 @@ public class Duke {
         divider();
     }
 
+    private static void handleInvalidInputs(String input) {
+        switch (input) {
+            case "todo":
+            case "deadline":
+            case "event": {
+                System.out.println(
+                        String.format(
+                                "%4s☹ OOPS!!! The description of a %s cannot be empty.",
+                                " ", input)
+                );
+                break;
+            }
+            default:
+                System.out.println(
+                        String.format(
+                                "%4s☹ OOPS!!! I'm sorry, but I don't know what that means :-(",
+                                " ")
+                );
+        }
+        return;
+    }
+
     private static void updateTaskList(String command) {
         // The type of the task indicated before the first space.
         int indexOfFirstSpace = command.indexOf(" ");
+
+        // Only got one word or no description entered.
         if (indexOfFirstSpace == -1) {
+            handleInvalidInputs(command);
             return;
         }
         String taskType = command.substring(0, indexOfFirstSpace);
