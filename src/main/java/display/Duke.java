@@ -1,5 +1,6 @@
 package display;
 
+import error.DukeException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Simulates the Duke Chatbot.
+ * Simulates the Duke chatbot.
  */
 public class Duke {
     private static final String line = "\n\t_______________________________________________________________";
@@ -41,66 +42,100 @@ public class Duke {
         }
     }
 
+    /**
+     * Primary response function of the chatbot
+     */
     private static void analyzeLog() {
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
-        String input;
         String[] words;
         StringBuilder log;
 
         logging:
         while (true) {
             log = new StringBuilder();
-            input = sc.nextLine().trim();
-            words = input.split(" ", 2);
-            switch (words[0]) {
-            case "bye":
-                System.out.println(line + "\n\t Peace out!" + line);
-                break logging;
-            case "list":
-                log.append("\n\t Here are the tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    log.append("\n\t ").append(i + 1).append(". ").append(tasks.get(i));
+            words = sc.nextLine().trim().split(" ", 2);
+            try {
+                checkInput(words);
+                switch (words[0]) {
+                case "bye":
+                    System.out.println(line + "\n\t Peace out!" + line);
+                    break logging;
+                case "list":
+                    log.append("\n\t Here are the tasks in your list:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        log.append("\n\t ").append(i + 1).append(". ").append(tasks.get(i));
+                    }
+                    break;
+                case "done":
+                    int idx = Integer.parseInt(words[1]);
+                    Task task = tasks.get(idx - 1);
+                    if (task.getStatusIcon().equals("X")) {
+                        log.append("\t This task has been marked as done");
+                    } else {
+                        task.markAsDone();
+                        log.append("\n\t Nice! I've marked this task as done:\n\t\t").append(task);
+                    }
+                    break;
+                case "todo":
+                    ToDo newTask = new ToDo(words[1]);
+                    tasks.add(newTask);
+                    log.append("\n\t Got it. I've added this task:\n\t\t").append(newTask).append("\n\t Now you have ")
+                            .append(tasks.size()).append(" tasks in the list.");
+                    break;
+                case "deadline":
+                    String[] details = words[1].split(" /by ", 2);
+                    Deadline deadline = new Deadline(details[0], details[1]);
+                    tasks.add(deadline);
+                    log.append("\n\t Got it. I've added this task:\n\t\t").append(deadline)
+                            .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
+                    break;
+                case "event":
+                    details = words[1].split(" /at ", 2);
+                    Event event = new Event(details[0], details[1]);
+                    tasks.add(event);
+                    log.append("\n\t Got it. I've added this task:\n\t\t").append(event)
+                            .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
+                    break;
+                default:
+                    throw new DukeException(
+                            "\n\t ☹ My dictionary does not contain this sophisticated language.\n\t Maybe someday :)");
                 }
-                break;
-            case "done":
-                int idx = Integer.parseInt(words[1]);
-                Task task = tasks.get(idx - 1);
-                if (task.getStatusIcon().equals("X")) {
-                    log.append("\t This task has been marked as done");
-                } else {
-                    task.markAsDone();
-                    log.append("\n\t Nice! I've marked this task as done:\n").append("\t   ").append(task);
-                }
-                break;
-            case "todo":
-                ToDo newTask = new ToDo(words[1]);
-                tasks.add(newTask);
-                log.append("\n\t Got it. I've added this task:\n\t\t").append(newTask).append("\n\t Now you have ")
-                        .append(tasks.size()).append(" tasks in the list.");
-                break;
-            case "deadline":
-                String[] details = words[1].split(" /by ", 2);
-                Deadline deadline = new Deadline(details[0], details[1]);
-                tasks.add(deadline);
-                log.append("\n\t Got it. I've added this task:\n\t\t").append(deadline).append("\n\t Now you have ")
-                        .append(tasks.size()).append(" tasks in the list.");
-                break;
-            case "event":
-                details = words[1].split(" /at ", 2);
-                Event event = new Event(details[0], details[1]);
-                tasks.add(event);
-                log.append("\n\t Got it. I've added this task:\n\t\t").append(event).append("\n\t Now you have ")
-                        .append(tasks.size()).append(" tasks in the list.");
-                break;
-            default:
-                tasks.add(new Task(input));
-                log.append("\n\t added: ").append(input);
-                break;
+            } catch (DukeException e) {
+                log.append(e.getMessage());
             }
             System.out.println(line + log + line);
         }
 
         sc.close();
+    }
+
+    /**
+     * Handles DukeExceptions for the chatbot
+     * @param log The separate words in a given line
+     */
+    private static void checkInput(String[] log) throws DukeException{
+        if (log.length == 1) {
+            switch (log[0]) {
+            case "todo":
+                throw new DukeException("\n\t ☹ Oh dearie!. The description of a todo cannot be empty!");
+            case "deadline":
+                throw new DukeException("\n\t ☹ Oh lord!. I need some description and a time limit!");
+            case "event":
+                throw new DukeException("\n\t ☹ By the heavens!. I need some description and a timing!");
+            }
+        } else if (log.length == 2) {
+            switch (log[0]) {
+            case "deadline":
+                if (log[1].split(" /by ", 2).length != 2) {
+                    throw new DukeException("\n\t ☹ Blimey! Did you forget to type \"/by\" or a time limit?");
+                }
+                break;
+            case "event":
+                if (log[1].split(" /at ", 2).length != 2) {
+                    throw new DukeException("\n\t ☹ Wait! Did you forget to type \"/at\" or a timing?");
+                }
+            }
+        }
     }
 }
