@@ -122,10 +122,11 @@ public class Processor {
 
     private static void printTasks() {
         if (tasks.size() == 0) {
-            printString("No current task available");
+            printString("No current task available.");
         } else {
-            String out = "1." + tasks.get(0) + "\n";
-            for (int i = 1; i < tasks.size(); i++) {
+            // String out = "1." + tasks.get(0) + "\n";
+            String out = "Here are the tasks in your list:\n";
+            for (int i = 0; i < tasks.size(); i++) {
                 int index = i + 1;
                 out = out + spaceString + index + "." + tasks.get(i) + "\n";
             }
