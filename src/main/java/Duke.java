@@ -12,11 +12,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if (input.equals("bye")) {
-                formatOutput("Bye. Hope to see you again soon!");
-                break;
-            }
-            formatOutput(input);
+            Logic.takeInput(input);
+            if (Logic.endChat()) break;
         }
     }
 
