@@ -30,7 +30,7 @@ public class Duke {
                 System.out.println("    ______________________________________");
                 System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < pointer - 1; i++) {
-                    System.out.printf("     %d.%s \n", i + 1, store[i].toString());
+                    System.out.printf("     %d.%s\n", i + 1, store[i].toString());
                 }
                 System.out.println("    ______________________________________");
             } else if (command.length() >= 6 && command.startsWith("done")) {
