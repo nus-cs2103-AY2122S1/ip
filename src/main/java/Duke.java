@@ -6,14 +6,14 @@ import java.util.Scanner;
  * A chatbot based on Project Duke
  *
  * @author KelvinSoo
- * @version Level-2
+ * @version Level-3
  *
  */
 public class Duke {
 
     private String chatbotName;
     private Scanner sc = new Scanner(System.in);
-    private List<String> list = new ArrayList<String>();
+    private List<Task> taskList = new ArrayList<>();
 
     /**
      * A private constructor to initialize the name of the chatbot.
@@ -36,7 +36,6 @@ public class Duke {
             if (maxLength < s.length())
                 maxLength = s.length();
         }
-
         String lineStart =  "    ╔" + "═".repeat(maxLength + 2) + "╗";
         String lineEnd =    "    ╚" + "═".repeat(maxLength + 2) + "╝";
 
@@ -59,21 +58,20 @@ public class Duke {
      */
     private void terminateUser() {
         printReply("Bye. Hope to see you again soon!");
-        sc.close();
     }
 
     /**
      * Print a list of text.
      * @param list List of text.
      */
-    private void printList(List<String> list) {
+    private void printList(List<Task> list) {
         if (list.isEmpty()) {
             printReply("It seems that your list is empty. Try adding something first.");
         } else {
             StringBuilder sb = new StringBuilder();
             sb.append("Here is your list:\n");
-            for (int i = 0; i < list.size(); i++) {
-                sb.append(i + 1).append(". ").append(list.get(i)).append("\n");
+            for (Task task : list) {
+                sb.append(String.format("%s. %s %s \n", task.getID(), task.getStatusIcon(), task.getDescription()));
             }
             printReply(sb.toString());
         }
@@ -84,18 +82,35 @@ public class Duke {
      * @param text The user input.
      */
     private void processReply(String text) {
-        switch (text) {
-            case "bye":
-                terminateUser();
-                break;
-            case "list":
-                printList(list);
-                processReply(sc.nextLine());
-                break;
-            default:
-                list.add(text);
-                printReply(String.format("\"%s\" has been added to your list", text));
-                processReply(sc.nextLine());
+        if (text.equals("bye")) {
+            terminateUser();
+        } else if (text.equals("list")) {
+            printList(taskList);
+            processReply(sc.nextLine());
+        } else if (text.startsWith("done ") || (text.equals("done"))) {
+            String[] splitText = text.split(" ");
+
+            // check if the character after done is a valid number
+            if (splitText.length > 1 && splitText[1].matches("\\d")) {
+                int taskID = Integer.parseInt(splitText[1]);
+
+                // check if the task exist
+                if (taskID <= taskList.size() && taskID > 0) {
+                    Task task = taskList.get(taskID - 1);
+                    task.markASDone();
+                    printReply(String.format("Nice! I've marked this task as done: \n  %s %s",
+                            task.getStatusIcon(), task.getDescription()));
+                } else {
+                    printReply(String.format("Task %d does not exist", taskID));
+                }
+            } else {
+                printReply("Please enter a valid number.");
+            }
+            processReply(sc.nextLine());
+        } else {
+            taskList.add(new Task(text));
+            printReply(String.format("\"%s\" has been added to your list", text));
+            processReply(sc.nextLine());
         }
     }
 
