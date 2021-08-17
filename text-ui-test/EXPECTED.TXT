@@ -31,4 +31,9 @@ Here are the tasks in your list:
 1.[T][ ] borrow book
 2.[D][X] return book (by: Sunday)
 3.[E][X] project meeting (at: 2-4pm)
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Here are the tasks in your list:
+1.[T][ ] borrow book
+2.[D][X] return book (by: Sunday)
+3.[E][X] project meeting (at: 2-4pm)
 Bye. Hope to see you again soon!
