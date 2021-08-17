@@ -23,7 +23,7 @@ public class Duke {
 
     private static void add(Task task) {
         tasks.add(task);
-        String addMessage = "Got it. I've added this task:\n\t" + task
+        String addMessage = "Got it. I've added this task:\n  " + task
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
         printReply(addMessage);
     }
@@ -43,14 +43,14 @@ public class Duke {
         printReply(tasksBuilder.toString());
     }
 
-    public static void done(int counter) {
+    private static void done(int counter) {
         if (counter <= 0 || counter > tasks.size()) {
             printReply("Sorry, no such task found.");
             return;
         }
         Task doneTask = tasks.get(counter - 1);
         doneTask.markAsDone();
-        printReply("Nice! I've marked this task as done:\n\t" + doneTask);
+        printReply("Nice! I've marked this task as done:\n  " + doneTask);
     }
 
     public static void main(String[] args) {
@@ -91,6 +91,7 @@ public class Duke {
                 printReply("ERROR: " + e.getMessage());
             }
         }
+
         printReply("Bye. Hope to see you again soon!");
     }
 }
