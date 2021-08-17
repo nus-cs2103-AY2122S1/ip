@@ -9,4 +9,5 @@ public class STATICS {
     public static String INTRODUCTION = "Hello! I'm Duke\n" + STATICS.INDENT + "What can I do for you?";
     public static String BYE_MESSAGE = "Bye. Hope to see you again soon!";
     public static String DONE_MESSAGE = "Nice! I've marked this task as done:";
+    public static String LIST_MESSAGE = STATICS.INDENT + "Here are the tasks in your list:";
 }

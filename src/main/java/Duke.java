@@ -24,8 +24,8 @@ public class Duke {
     }
 
     private void printList() {
-        System.out.println(STATICS.INDENT + "Here are the tasks in your list:");
         System.out.println(STATICS.INDENTED_HORIZONTAL_LINE);
+        System.out.println(STATICS.LIST_MESSAGE);
         for (int i = 0; i < arrList.size(); i++) {
             System.out.println(STATICS.INDENT + (i + 1) + ". " + arrList.get(i).toString());
         }
@@ -38,15 +38,13 @@ public class Duke {
         this.arrList.set(index, curr.markAsDone());
         curr = arrList.get(index);
 
-        printMessage(STATICS.DONE_MESSAGE + "\n" + STATICS.INDENT + "  " + curr.toString());
+        this.printMessage(STATICS.DONE_MESSAGE + "\n" + STATICS.INDENT + "  " + curr.toString());
     }
 
-    private void printAddedTask(Task task) {
-        System.out.println(STATICS.INDENTED_HORIZONTAL_LINE);
-        System.out.println(STATICS.INDENT + "Got it. I've added this task:");
-        System.out.println(STATICS.INDENT + "  " + task.toString());
-        System.out.println(STATICS.INDENT + "Now you have " + this.arrList.size() + " tasks in the list.");
-        System.out.println(STATICS.INDENTED_HORIZONTAL_LINE + "\n");
+    private void addTask(Task task) {
+        arrList.add(task);
+        this.printMessage("Got it. I've added this task:\n" + STATICS.INDENT + "  " + task.toString() + "\n"
+                + STATICS.INDENT + "Now you have " + this.arrList.size() + " tasks in the list.");
     }
 
     public void start() {
@@ -60,7 +58,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         this.printIntro();
-
         while (true) {
             userInput = sc.nextLine();
 
@@ -70,52 +67,54 @@ public class Duke {
                 this.doneItem(userInput.split(" ")[1]);
                 continue;
             }
+            try {
+                action = userInput.split(" ")[0];
+                switch (action) {
+                    case "bye":
+                        this.printBye();
+                        sc.close();
+                        return;
 
-            action = userInput.split(" ")[0];
-            switch (action) {
-                case "bye":
-                    this.printBye();
-                    sc.close();
-                    return;
+                    case "list":
+                        this.printList();
+                        break;
 
-                case "list":
-                    this.printList();
-                    break;
+                    case "done":
+                        this.doneItem(userInput.split(" ")[1]);
+                        break;
 
-                case "done":
-                    this.doneItem(userInput.split(" ")[1]);
-                    break;
+                    case "todo":
+                        descriptions = actionDescription[1];
+                        ToDos todos = new ToDos(descriptions);
+                        addTask(todos);
+                        break;
 
-                case "todo":
-                    descriptions = actionDescription[1];
-                    ToDos todos = new ToDos(descriptions);
-                    arrList.add(todos);
-                    this.printAddedTask(todos);
-                    break;
+                    case "deadline":
+                        descriptions = actionDescription[1];
+                        onlyDescription = descriptions.split("/")[0];
+                        by = descriptions.split("/by")[1];
+                        Deadline deadline = new Deadline(onlyDescription, by);
+                        this.addTask(deadline);
+                        break;
 
-                case "deadline":
-                    descriptions = actionDescription[1];
-                    onlyDescription = descriptions.split("/")[0];
-                    by = descriptions.split("/by")[1];
-                    Deadline deadline = new Deadline(onlyDescription, by);
-                    arrList.add(deadline);
-                    this.printAddedTask(deadline);
-                    break;
+                    case "event":
+                        descriptions = actionDescription[1];
+                        onlyDescription = descriptions.split("/")[0];
+                        dayTime = descriptions.split("/at")[1];
+                        Events event = new Events(onlyDescription, dayTime);
+                        arrList.add(event);
+                        this.addTask(event);
+                        break;
 
-                case "event":
-                    descriptions = actionDescription[1];
-                    onlyDescription = descriptions.split("/")[0];
-                    dayTime = descriptions.split("/at")[1];
-                    Events event = new Events(onlyDescription, dayTime);
-                    arrList.add(event);
-                    this.printAddedTask(event);
-                    break;
+                    case "":
+                        break;
 
-                case "":
-                    break;
-
-                default:
-                    break;
+                    default:
+                        break;
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please follow this format <action> <description>");
+                continue;
             }
 
         }
