@@ -109,10 +109,11 @@ public class Duke {
                         break;
 
                     default:
+                        this.printMessage(STATICS.ERROR_MSG_UNKOWN_MSG);
                         break;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please follow this format <action> <description>");
+                this.printMessage(STATICS.ERROR_MSG_EMPTY_DESCRIPTION);
                 continue;
             }
 

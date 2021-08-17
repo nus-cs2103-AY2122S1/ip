@@ -1,13 +1,15 @@
 public class STATICS {
-    public static String logo = " ____        _        \n"
+    public final static String logo = " ____        _        \n"
                               + "|  _ \\ _   _| | _____ \n"
                               + "| | | | | | | |/ / _ \\\n"
                               + "| |_| | |_| |   <  __/\n"
                               + "|____/ \\__,_|_|\\_\\___|\n";
-    public static String INDENTED_HORIZONTAL_LINE = "    ____________________________________________________________";
-    public static String INDENT = "     ";
-    public static String INTRODUCTION = "Hello! I'm Ricky\n" + STATICS.INDENT + "What can I do for you?";
-    public static String BYE_MESSAGE = "Bye. Hope to see you again soon!";
-    public static String DONE_MESSAGE = "Nice! I've marked this task as done:";
-    public static String LIST_MESSAGE = STATICS.INDENT + "Here are the tasks in your list:";
+    public final static String INDENTED_HORIZONTAL_LINE = "    ____________________________________________________________";
+    public final static String INDENT = "     ";
+    public final static String INTRODUCTION = "Hello! I'm Ricky\n" + STATICS.INDENT + "What can I do for you?";
+    public final static String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+    public final static String DONE_MESSAGE = "Nice! I've marked this task as done:";
+    public final static String LIST_MESSAGE = STATICS.INDENT + "Here are the tasks in your list:";
+    public final static String ERROR_MSG_UNKOWN_MSG = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public final static String ERROR_MSG_EMPTY_DESCRIPTION = "☹ OOPS!!! The description of a todo cannot be empty.";
 }
