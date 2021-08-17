@@ -13,5 +13,9 @@ done abc
 done 123
 done 99
 done 3
+delete
+delete abc
+delete 123
+delete 2
 list
 bye
