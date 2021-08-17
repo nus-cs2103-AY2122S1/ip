@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static String[] tasksList = new String[100];
+    private static String[] tasksList = new String[100];
 
     public static void addTask(String task, int index) {
         tasksList[index] = task;
@@ -14,6 +14,8 @@ public class Duke {
             System.out.println(i + ". " +tasksList[i]);
         }
     }
+
+
     public static void main(String[] args) {
         // String logo = " ____        _        \n"
         //         + "|  _ \\ _   _| | _____ \n"
