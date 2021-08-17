@@ -59,7 +59,7 @@ public class Duke {
         }
         this.tl.addTask(newTask);
         System.out.println("-----------------------------------------\n" +
-                "Got it. I've added this task: \n" +
+                "Got it. I've added this task:\n" +
                 newTask.toString() +
                 String.format("Now you have %s tasks in the list.\n", this.tl.getLength()) +
                 "-----------------------------------------\n");
@@ -77,15 +77,20 @@ public class Duke {
                 "-----------------------------------------\n");
     }
 
-    private void deleteTask(int itemNum) {
-        Task toBeDeleted = this.getTaskByIndex(itemNum - 1);
-        String taskName = toBeDeleted.toString();
-        this.tl.deleteTask(itemNum - 1);
-        System.out.println("-----------------------------------------\n" +
-                "Noted. I've removed this task: \n" +
-                taskName +
-                String.format("Now you have %s tasks in the list.\n", this.tl.getLength()) +
-                "-----------------------------------------\n");
+    private void deleteTask(String[] items) throws DukeException {
+        if (items[1].equals("")) {
+            throw new DukeException("☹ OOPS!!! The task's number cannot be empty");
+        } else {
+            int itemNum = Integer.parseInt(items[1]);
+            Task toBeDeleted = this.getTaskByIndex(itemNum - 1);
+            String taskName = toBeDeleted.toString();
+            this.tl.deleteTask(itemNum - 1);
+            System.out.println("-----------------------------------------\n" +
+                    "Noted. I've removed this task:\n" +
+                    taskName +
+                    String.format("Now you have %s tasks in the list.\n", this.tl.getLength()) +
+                    "-----------------------------------------\n");
+        }
     }
 
     private void run() {
@@ -114,7 +119,7 @@ public class Duke {
                         this.add(items);
                         break;
                     case "delete":
-                        this.deleteTask(Integer.parseInt(items[1]));
+                        this.deleteTask(items);
                         break;
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
