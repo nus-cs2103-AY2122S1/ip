@@ -1,117 +1,142 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = "____________________________________________________________\n"
-                + " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n"
+    private static final String LOGO =
+              " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private static final String DIVIDER = "____________________________________________________________\n";
+
+    private static Task[] taskList;
+
+    private static int currentIndex;
+
+    private static void printStartMessage() {
+        System.out.println(DIVIDER
+                + LOGO
                 + "Hello! I'm Duke\n"
                 + "What can I do for you?\n"
-                + "____________________________________________________________";
-        System.out.println(logo);
+                + DIVIDER
+        );
+    }
+
+    private static void printGoodbyeMessage() {
+        System.out.println(DIVIDER
+                + "Bye. Hope to see you again soon!\n"
+                + DIVIDER
+        );
+    }
+
+    private static void printTaskList() {
+        System.out.print(DIVIDER);
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < currentIndex; i++) {
+            System.out.println(String.format("%d.%s", i + 1, taskList[i]));
+        }
+        System.out.println(DIVIDER);
+    }
+
+    private static void finishTask(String[] commandAndArgument) throws DukeException {
+        try {
+            int taskIndex = Integer.parseInt(commandAndArgument[1]) - 1;
+            if (taskIndex >= currentIndex) {
+                throw new DukeException("Please enter a valid task number.");
+            } else {
+                taskList[taskIndex].markAsDone();
+                System.out.println(DIVIDER
+                        + "Nice! I've marked this task as done:\n"
+                        + taskList[taskIndex].toString() + '\n'
+                        + DIVIDER
+                );
+            }
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException("Please enter a valid task number.");
+        }
+    }
+
+    private static void addTask(String[] taskTypeAndDetails) throws DukeException {
+        if (taskTypeAndDetails.length < 2) {
+            throw new DukeException("The description of a task cannot be empty.\n"
+                    + "Please input your task in the following manner:\n"
+                    + "todo|deadline|event <task_description>");
+        }
+
+        Task newTask;
+        if (taskTypeAndDetails[0].equals("todo")) {
+            newTask = new ToDo(taskTypeAndDetails[1]);
+        } else if (taskTypeAndDetails[0].equals("deadline")) {
+            String taskDetails = taskTypeAndDetails[1];
+            String[] descriptionAndDateTime = taskDetails.split(" /by ", 2);
+            if (descriptionAndDateTime.length < 2
+                    || descriptionAndDateTime[0].strip().equals("")
+                    || descriptionAndDateTime[1].strip().equals("")) {
+                throw new DukeException("Invalid format for a deadline task.\n"
+                        + "Please input your deadline task in the following manner:\n"
+                        + "deadline <task_description> /by <task_deadline>");
+            } else {
+                newTask = new Deadline(descriptionAndDateTime[0], descriptionAndDateTime[1]);
+            }
+        } else if (taskTypeAndDetails[0].equals("event")) {
+            String taskDetails = taskTypeAndDetails[1];
+            String[] descriptionAndDateTime = taskDetails.split(" /at ", 2);
+            if (descriptionAndDateTime.length < 2
+                    || descriptionAndDateTime[0].strip().equals("")
+                    || descriptionAndDateTime[1].strip().equals("")) {
+                throw new DukeException("Invalid format for an event.\n"
+                        + "Please input your event in the following manner:\n"
+                        + "event <event_description> /at <event_date_or_time>");
+            } else {
+                newTask = new Event(descriptionAndDateTime[0], descriptionAndDateTime[1]);
+            }
+        } else {
+            throw new DukeException("Invalid command. List of valid commands include:\n"
+                    + "list|todo|deadline|event|done|bye");
+        }
+        taskList[currentIndex] = newTask;
+        currentIndex++;
+        System.out.println(DIVIDER
+                + "Got it. I've added this task:\n"
+                + newTask + '\n'
+                + "Now you have " + currentIndex + (currentIndex == 1 ? " task" : " tasks") + " in the list.\n"
+                + DIVIDER
+        );
+    }
+
+    public static void main(String[] args) {
+        printStartMessage();
 
         Scanner sc = new Scanner(System.in);
-        Task[] taskList = new Task[100];
-        int currentIndex = 0;
+        taskList = new Task[100];
+        currentIndex = 0;
 
         while (true) {
-            String userInput = sc.nextLine();
-            String[] commandAndArgument = userInput.split(" ", 2);
-            String command = commandAndArgument[0];
+            try {
+                String userInput = sc.nextLine();
+                String[] commandAndArgument = userInput.split(" ", 2);
+                String command = commandAndArgument[0];
 
-            if (command.equals("bye")) {
-                String exitText = "____________________________________________________________\n"
-                        + "Bye. Hope to see you again soon!\n"
-                        + "____________________________________________________________";
-                System.out.println(exitText);
-                sc.close();
-                break;
-            } else if (command.equals("list")) {
-                System.out.println("____________________________________________________________");
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < currentIndex; i++) {
-                    System.out.println(String.format("%d.%s", i + 1, taskList[i]));
-                }
-                System.out.println("____________________________________________________________");
-            } else if (command.equals("done")) {
-                try {
-                    int taskIndex = Integer.parseInt(commandAndArgument[1]) - 1;
-                    if (taskIndex >= currentIndex) {
-                        System.out.println("____________________________________________________________\n"
-                                + "Please enter a valid task number\n"
-                                + "____________________________________________________________");
-                    } else {
-                        taskList[taskIndex].markAsDone();
-                        String markedAsDoneText = String.format(
-                                "____________________________________________________________\n"
-                                        + "Nice! I've marked this task as done:\n"
-                                        + "%s\n"
-                                        + "____________________________________________________________",
-                                taskList[taskIndex]);
-                        System.out.println(markedAsDoneText);
-                    }
-                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-                    System.out.println("____________________________________________________________\n"
-                            + "Please enter a valid task number\n"
-                            + "____________________________________________________________");
-                }
-            } else {
-                Task newTask;
-                if (command.equals("todo")) {
-                    try {
-                        newTask = new ToDo(commandAndArgument[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("____________________________________________________________\n"
-                                + "Sorry, the description of a todo task cannot be empty.\n"
-                                + "Please input your todo task in the following manner:\n"
-                                + "todo <task_description>\n"
-                                + "____________________________________________________________");
-                        continue;
-                    }
-                } else if (command.equals("deadline")) {
-                    try {
-                        String taskDetails = commandAndArgument[1];
-                        String[] descriptionAndDateTime = taskDetails.split(" /by ", 2);
-                        newTask = new Deadline(descriptionAndDateTime[0], descriptionAndDateTime[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("____________________________________________________________\n"
-                                + "Invalid format for a deadline task.\n"
-                                + "Please input your deadline task in the following manner:\n"
-                                + "deadline <task_description> /by <task_deadline>\n"
-                                + "____________________________________________________________");
-                        continue;
-                    }
-                } else if (command.equals("event")) {
-                    try {
-                        String taskDetails = commandAndArgument[1];
-                        String[] descriptionAndDateTime = taskDetails.split(" /at ", 2);
-                        newTask = new Event(descriptionAndDateTime[0], descriptionAndDateTime[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("____________________________________________________________\n"
-                                + "Invalid format for an event.\n"
-                                + "Please input your event in the following manner:\n"
-                                + "event <event_description> /at <event_date_or_time>\n"
-                                + "____________________________________________________________");
-                        continue;
-                    }
+                if (command.equals("bye")) {
+                    printGoodbyeMessage();
+                    sc.close();
+                    break;
+                } else if (command.equals("list")) {
+                    printTaskList();
+                } else if (command.equals("done")) {
+                    finishTask(commandAndArgument);
+                } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+                    addTask(commandAndArgument);
                 } else {
-                    System.out.println("____________________________________________________________\n"
-                            + "Invalid command. List of valid commands include:\n"
-                            + "list|todo|deadline|event|done|bye\n"
-                            + "____________________________________________________________");
-                    continue;
+                    throw new DukeException("Invalid command. List of valid commands include:\n"
+                            + "list|todo|deadline|event|done|bye");
                 }
-                taskList[currentIndex] = newTask;
-                currentIndex++;
-                String addTaskText = "____________________________________________________________\n"
-                        + "Got it. I've added this task:\n"
-                        + newTask + '\n'
-                        + "Now you have " + currentIndex + (currentIndex == 1 ? " task" : " tasks") + " in the list.\n"
-                        + "____________________________________________________________";
-                System.out.println(addTaskText);
+            } catch (DukeException e) {
+                System.out.println(DIVIDER
+                        + e + '\n'
+                        + DIVIDER
+                );
             }
         }
     }
