@@ -64,7 +64,7 @@ public class Duke {
                 toAdd = new Event(inputStrings);
                 break;
             default:
-                throw new IllegalStateException("bad keyword");
+                throw new DukeException("I'm sorry I don't know what that means.");
         }
         this.itemList.add(toAdd);
         printBuffer.add("  " + toAdd.toString());
