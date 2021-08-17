@@ -13,5 +13,11 @@ done -X
 done 10000
 done 2
 list
+delete
+delete -1
+delete -X
+delete 10000
+delete 2
+list
 wrong input
 bye

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.lang.String;
 /**
  * The Duke class encapsulates the Duke project's chat-bot for CS2103T individual project 1.
@@ -6,18 +7,7 @@ import java.lang.String;
  * @author Chesterwongz
  */
 public class Duke {
-    private final static int MAX_LIST_LENGTH = 100;
-    private static final Task[] taskList = new Task[MAX_LIST_LENGTH];
-    private static int listIndex = 0;
-    private static boolean isInputBye(String input) {
-        return input.compareToIgnoreCase("bye") == 0;
-    }
-    private static boolean isInputList(String input) {
-        return input.compareToIgnoreCase("list") == 0;
-    }
-    private static boolean isInputDone(String input) {
-        return input.startsWith("done ");
-    }
+    private static final ArrayList<Task> taskList = new ArrayList<>();
 
     /**
      * Prints the Duke logo.
@@ -50,15 +40,18 @@ public class Duke {
 
     /**
      * Adds a task to the taskList.
+     *
      * @param task
      */
     private static void addToList(Task task) {
-        taskList[listIndex++] = task;
-        echo("Got it. I've added this task:\n  " + task + "\nNow you have " + listIndex + " tasks in the list.");
+        taskList.add(task);
+        echo("Got it. I've added this task:\n  "
+                + task + "\nNow you have " + taskList.size() + " tasks in the list.");
     }
 
     /**
      * Adds a To-do task to the taskList.
+     *
      * @param input The String array containing the to-do description at index 1.
      * @throws DukeException
      */
@@ -69,8 +62,10 @@ public class Duke {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty ☹");
         }
     }
+
     /**
      * Adds a deadline task to the taskList.
+     *
      * @param input The String array containing the deadline description at index 1.
      * @throws DukeException
      */
@@ -86,8 +81,10 @@ public class Duke {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty ☹");
         }
     }
+
     /**
      * Adds a event task to the taskList.
+     *
      * @param input The String array containing the event description at index 1.
      * @throws DukeException
      */
@@ -103,34 +100,55 @@ public class Duke {
             throw new DukeException("OOPS!!! The description of a event cannot be empty ☹");
         }
     }
+
     /**
      * Marks task as done in taskList.
-     * @param input The input string.
+     *
+     * @param input The String array with the index of the task to be done in input[1], if it is there.
      * @throws DukeException
      */
     private static void doTask(String[] input) throws DukeException {
         if (input.length < 2) {
-            throw new DukeException("OOPS!!! Please input the task number to be marked as done!");
+            throw new DukeException("OOPS!!! Please input the task number to be marked as done ☹");
         }
         try {
-            int taskID = Integer.parseInt(input[1]);
-            if (taskID < 1 || taskID > listIndex) {
-                throw new DukeException("OOPS!!! Please enter a valid task number!");
-            }
-            String msg;
-            int taskIndex = taskID - 1;
-            if (taskList[taskIndex] != null) {
-                taskList[taskIndex].markAsDone();
-                msg = "Nice! I've marked this task as done:\n  "
-                        + taskList[taskIndex].toString();
+            int taskID = Integer.parseInt(input[1]) - 1;
+            if (0 <= taskID && taskID < taskList.size()) {
+                taskList.get(taskID).markAsDone();
+                echo("Nice! I've marked this task as done:\n  "
+                        + taskList.get(taskID).toString());
             } else {
-                msg = "OOPS!!! Task " + taskID + " doesn't exist!";
+                throw new DukeException("OOPS!!! Please enter a valid task number ☹");
+
             }
-            echo(msg);
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please enter a valid task number!");
+            throw new DukeException("OOPS!!! Please enter a valid task number ☹");
         }
     }
+
+    /**
+     * Removes a task from the task list.
+     *
+     * @param input The String array with the index of the task to be removed in input[1], if it is there.
+     * @throws DukeException
+     */
+    private static void deleteTask(String[] input) throws DukeException {
+        if (input.length < 2) {
+            throw new DukeException("OOPS!!! Please input the task number to be removed ☹");
+        }
+        try {
+            int index = Integer.parseInt(input[1]) - 1;
+            if (0 <= index && index < taskList.size()) {
+                echo("Got it. I've removed this task:\n  "
+                        + taskList.remove(index) + "\nNow you have " + taskList.size() + " tasks in the list.");
+            } else {
+                throw new DukeException("OOPS!!! Please enter a valid task number ☹");
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! Please enter a valid task number ☹");
+        }
+    }
+
     /**
      * Frames the message with underscore lines and prints it.
      *
@@ -151,8 +169,9 @@ public class Duke {
         String line = "__________________________________________________________";
         System.out.println(line);
         System.out.println("Here are the tasks in your list:");
-        for (int index = 0; index < listIndex; index++) {
-            System.out.println((index + 1) + "." + taskList[index]);
+        int index = 1;
+        for (Task task : taskList) {
+            System.out.println((index++) + "." + task);
         }
         System.out.println(line);
         System.out.println();
@@ -189,6 +208,9 @@ public class Duke {
                                 break;
                             case "event":
                                 addEvent(split);
+                                break;
+                            case "delete":
+                                deleteTask(split);
                                 break;
                             default:
                                 echo("OOPS!!! I'm sorry, but I don't know what that means ☹ ");
