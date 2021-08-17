@@ -47,6 +47,14 @@ public class Duke {
                 + STATICS.INDENT + "Now you have " + this.arrList.size() + " tasks in the list.");
     }
 
+    private void deleteItem(String number) {
+        int index = Integer.parseInt(number) - 1;
+        Task task = arrList.get(index);
+        this.arrList.remove(index);
+        this.printMessage("Noted. I've removed this task:\n" + STATICS.INDENT + "  " + task.toString() + "\n"
+                + STATICS.INDENT + "Now you have " + this.arrList.size() + " tasks in the list.");
+    }
+
     public void start() {
         String userInput = "";
         String action = "";
@@ -103,6 +111,10 @@ public class Duke {
                         dayTime = descriptions.split("/at")[1];
                         Events event = new Events(onlyDescription, dayTime);
                         this.addTask(event);
+                        break;
+
+                    case "delete":
+                        this.deleteItem(userInput.split(" ")[1]);
                         break;
 
                     case "":
