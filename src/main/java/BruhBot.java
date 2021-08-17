@@ -64,36 +64,40 @@ public class BruhBot {
             try {
                 switch (keyword) {
                     case "done": {
-                        checkArguments(sections, "Please specify an index.\n");
+                        checkMissingArguments(sections, "Please specify a task number to mark as done.\n");
                         int index = Integer.parseInt(sections[1]) - 1;
                         tasks.get(index).markAsDone();
                         return String.format("Nice! I've marked this task as done:\n  %s\n",
                                 tasks.get(index).toString());
                     }
                     case "delete": {
-                        checkArguments(sections, "Please specify an index.\n");
+                        checkMissingArguments(sections, "Please specify a task number for deletion.\n");
                         int index = Integer.parseInt(sections[1]) - 1;
                         return generateRemoveTaskResponse(tasks.remove(index));
                     }
                     case "todo": {
-                        checkArguments(sections, String.format("The description of a %s cannot be empty.\n", keyword));
+                        checkMissingArguments(sections,
+                                String.format("The description of a %s cannot be empty.\n", keyword));
                         Todo newTask = new Todo(sections[1]);
                         tasks.add(newTask);
                         return generateAddTaskResponse(newTask);
                     }
                     case "deadline": {
-                        checkArguments(sections, String.format("The description of a %s cannot be empty.\n", keyword));
+                        checkMissingArguments(sections,
+                                String.format("The description of a %s cannot be empty.\n", keyword));
                         sections = sections[1].split(" /by ", 2);
-                        checkArguments(sections,
+                        checkMissingArguments(sections,
                                 String.format("Please specify the date/time of your deadline.\n", keyword));
                         Deadline newTask = new Deadline(sections[0], sections[1]);
                         tasks.add(newTask);
                         return generateAddTaskResponse(newTask);
                     }
                     case "event": {
-                        checkArguments(sections, String.format("The description of a %s cannot be empty.\n", keyword));
+                        checkMissingArguments(sections,
+                                String.format("The description of a %s cannot be empty.\n", keyword));
                         sections = sections[1].split(" /at ", 2);
-                        checkArguments(sections, String.format("Please specify a time for your event.\n", keyword));
+                        checkMissingArguments(sections,
+                                String.format("Please specify a time for your event.\n", keyword));
                         Event newTask = new Event(sections[0], sections[1]);
                         tasks.add(newTask);
                         return generateAddTaskResponse(newTask);
@@ -104,14 +108,14 @@ public class BruhBot {
             } catch (InvalidArgumentException | MissingArgumentException e) {
                 return e.getMessage();
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                return "Please specify a valid index.\n";
+                return "Please specify a valid task number (use 'list' to view your tasks).\n";
             } catch (DukeException e) {
                 return GENERIC_ERROR_MESSAGE;
             }
         }
     }
 
-    private void checkArguments(String[] sections, String errorMessage) throws DukeException {
+    private void checkMissingArguments(String[] sections, String errorMessage) throws DukeException {
         // Sections is guaranteed to have 1 or 2 elements. 2nd element might be empty.
         if (sections.length != 2 || sections[1].isEmpty()) {
             throw new MissingArgumentException(errorMessage);
@@ -142,7 +146,7 @@ public class BruhBot {
 
     private String formatResponse(String content) {
         final String divider = "____________________________________________________________\n";
-        String out = divider + content.replaceAll("(?m)^", " ") + divider;
-        return out.replaceAll("(?m)^", "    ");
+        content = divider + content.replaceAll("(?m)^", " ") + divider;
+        return content.replaceAll("(?m)^", "    ");
     }
 }

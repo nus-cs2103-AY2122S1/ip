@@ -12,11 +12,13 @@ event project meeting /at
 event project meeting /at Mon 2-4pm
 list
 done
+done asdf
 done -500
 done 42
 done 2
 list
 delete
+delete asdf
 delete -420
 delete 57
 delete 1
