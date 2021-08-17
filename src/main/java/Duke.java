@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.String;
 
 public class Duke {
     private static List<Task> tasks = new ArrayList<Task>();
@@ -56,12 +57,31 @@ public class Duke {
             if(command.equals("bye")) {
                 System.out.println("Bye have a good time");
                 break;
-            }else if(command.equals("list")){
+            }else if(command.equals("list")) {
                 int c = 1;
-                for(Task task:tasks){
-                    System.out.println(c+". "+task);
+                for (Task task : tasks) {
+                    System.out.println(c + ". " + task);
                     c++;
                 }
+            }else if(command.contains("done")){
+                String numbers = command.substring(5);
+                try {
+                    int taskNo = Integer.parseInt(numbers);
+                }catch(NumberFormatException notANumber){
+                    System.err.println(notANumber);
+                    System.out.println("Uh oh! Stinky!");
+                    continue;
+                }
+                int taskNo = Integer.parseInt(numbers);
+                if(tasks.size()<taskNo){
+                    System.err.println("too big");
+                    continue;
+                }
+                taskNo--;
+                Task toBeDone=tasks.get(taskNo);
+                toBeDone.makeDone();
+                tasks.set(taskNo,toBeDone);
+                System.out.println(toBeDone.name + " has been marked as done");
             }else{
                 Task commandTask = new Task(command);
                 if(!tasks.contains(commandTask)) {
