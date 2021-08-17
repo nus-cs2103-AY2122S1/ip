@@ -1,23 +1,33 @@
 import java.util.Scanner;
 
 public class Responses {
-    
-    protected static String[] list = new String[100];
-    protected static int listLength = 0;
+
+    protected static Task[] list = new Task[100];
+    protected static int currLength = 0; 
 
     protected static void displayDukeResponse(String dResponse) {
-        String str = String.format("\t____________________________________________________________\n%s\t____________________________________________________________", dResponse);
-        System.out.println(str);
+        System.out.println(String.format("\t____________________________________________________________\n%s\t____________________________________________________________", dResponse));
     }
 
     protected static String getUserResponse() {
         Scanner sc = new Scanner(System.in);
-        String uResponse = sc.nextLine();
-        return uResponse;
+        return sc.nextLine();
     }
 
-    protected static String interact(String dResponse) {
+    protected static void interact(String dResponse) {
         displayDukeResponse(dResponse);
-        return getUserResponse();
+        next(getUserResponse());
     }
+
+    protected static void next(String uResponse) {
+        if (uResponse.equals ("bye")) {
+            Exit.chat();
+        } else if (uResponse.equals("list")) {
+            List.chat();
+        } else if (uResponse.startsWith("done")) {
+            Done.chat(uResponse);
+        } else {
+            Echo.chat(uResponse);
+        }
+    } 
 }
