@@ -10,9 +10,11 @@ public class Duke {
 //        System.out.println("Hello from\n" + logo);
         greet();
         Scanner sc = new Scanner(System.in);
+        ToDoList lst = new ToDoList();
+
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if (respond(input)) break;
+            if (respond(input, lst)) break;
         }
     }
 
@@ -21,13 +23,17 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    public static boolean respond(String command) {
-        if (! command.equals("bye")) {
-            System.out.println(command);
-            return false;
-        } else {
+    public static boolean respond(String input, ToDoList lst) {
+        if (input.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
             return true;
+        } else if (input.equals("list")){
+            lst.showList();
+            return false;
+        } else {
+            lst.addItem(input);
+//            System.out.println(input); Level 1
+            return false;
         }
     }
 }
