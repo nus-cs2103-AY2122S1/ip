@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class ChatBot {
 
     static Scanner userInput = new Scanner(System.in);
-    private String[] list = new String[100];
+    private Task[] list = new Task[100];
     private int lastIndex = 0;
 
 
@@ -21,8 +21,8 @@ public class ChatBot {
 
     private boolean listEmpty() {
         boolean empty = true;
-        for (String str : list) {
-            if (str != null) {
+        for (Task task : list) {
+            if (task != null) {
                 empty = false;
                 break;
             }
@@ -30,25 +30,42 @@ public class ChatBot {
         return empty;
     }
 
+    private void printList(){
+        for (int i = 0; i <= lastIndex; i++) {
+            if (list[i] != null) {
+                System.out.println(i + 1 + "." + this.list[i].printTask());
+            }
+        }
+    }
+
+    private boolean checkDone(String str) {
+        return str.equals("done");
+    }
+
     private void startInput() {
         String input = userInput.nextLine();
+        boolean doneInput = false;
 
-        if (input.equals("bye")) {
+        if (input.length() > 3) {
+            doneInput = checkDone(input.substring(0,4));
+        }
+
+        if (input.equals("bye") || input.equals("bye ")) {                   //bye input
             System.out.println("See ya again later!");
             return;
-        }
-        if (input.equals("list")) {
-            if (this.listEmpty()) {
+        } else if (input.equals("list")) {                                   //list input
+            if (this.listEmpty()) {                                          //empty list check
                 System.out.println("You haven't added anything yet!");
-            } else {
-                for (int i = 0; i < list.length; i++) {
-                    if (list[i] != null) {
-                        System.out.println(i + 1 + ". " + list[i]);
-                    }
-                }
+            } else {                                                         //non-empty list
+                printList();
             }
-        } else {
-            list[lastIndex] = input;
+        } else if (doneInput) {                                              //done input
+            System.out.println("Good job for this thing done man:");
+            int indexNum = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+            list[indexNum - 1].setComplete();
+            System.out.println("   " + list[indexNum - 1].printTask());
+        } else {                                                             //all other inputs
+            list[lastIndex] = new Task(input);
             lastIndex++;
             System.out.println("added: " + input);
         }
