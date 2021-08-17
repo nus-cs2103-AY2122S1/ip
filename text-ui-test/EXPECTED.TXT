@@ -43,4 +43,17 @@ Nice! I've marked this task as done:
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ☹ OOPS!!! The number you gave is out of range!
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+1.[T][X] read book 
+2.[D][X] return book (by: June 6th)
+3.[E][X] project meeting (at: Aug 6th 2-4pm)
+4.[T][X] join sports club 
+5.[T][ ] borrow book 
+Noted. I've removed this task: 
+Now you have 4 tasks in the list.
+1.[D][X] return book (by: June 6th)
+2.[E][X] project meeting (at: Aug 6th 2-4pm)
+3.[T][X] join sports club 
+4.[T][ ] borrow book 
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 Goodbye!

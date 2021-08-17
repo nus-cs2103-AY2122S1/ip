@@ -21,4 +21,9 @@ blah
 random
 hello
 done 99
+done blah
+list
+delete 1
+list
+delete blah
 bye

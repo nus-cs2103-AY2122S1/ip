@@ -43,6 +43,15 @@ public class Duke {
                         System.out.println(tasks.getTask(tasks.getTasksLength()));
                         System.out.println("Now you have " + tasks.getTasksLength() + " tasks in the list.");
                     }
+                } else if (firstCommand.equals("delete") && Duke.isInteger(commandSplit[1])) {
+                    try {
+                        tasks.deleteTask(Integer.parseInt(commandSplit[1]));
+                        System.out.println("Noted. I've removed this task: ");
+                        System.out.println("Now you have " + tasks.getTasksLength() + " tasks in the list.");
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("☹ OOPS!!! Index out of range!");
+                    }
+
                 } else if (command.equals("list")) {
                     tasks.listTasks();
                 } else {

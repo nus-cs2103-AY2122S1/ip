@@ -52,6 +52,11 @@ public class TaskList {
         this.taskIndex++;
     }
 
+    public void deleteTask(int taskIndex) {
+        this.tasks.remove(taskIndex - 1);
+        this.taskIndex--;
+    }
+
     /**
      * Lists out the tasks inside the list (if any).
      */
