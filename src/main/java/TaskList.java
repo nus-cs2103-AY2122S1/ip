@@ -14,11 +14,49 @@ public class TaskList {
     /**
      * Given a string, creates a Task from that string and adds it to the list of task
      * @param taskTitle a String of the title of the task to be added.
+     * @return the newly created Task.
      */
-    public void addTask(String taskTitle) {
+    public Task addTask(String taskTitle) {
         Task task = new Task(taskTitle);
         this.tasks[counter] = task;
         counter ++;
+        return task;
+    }
+
+    /**
+     * Given a string, creates a To-do from that string and adds it to the list of task
+     * @param taskTitle a String of the title of the To-do to be added.
+     * @return the newly created Todo.
+     */
+    public Task addTodo(String taskTitle) {
+        Todo task = new Todo(taskTitle);
+        this.tasks[counter] = task;
+        counter ++;
+        return task;
+    }
+
+    /**
+     * Given a string, creates a Deadline from that string and adds it to the list of task
+     * @param taskTitle a String of the title of the Deadline to be added.
+     * @return the newly created Deadline.
+     */
+    public Task addDeadline(String taskTitle) {
+        Deadline task = new Deadline(taskTitle);
+        this.tasks[counter] = task;
+        counter ++;
+        return task;
+    }
+
+    /**
+     * Given a string, creates a Deadline from that string and adds it to the list of task
+     * @param taskTitle a String of the title of the Deadline to be added.
+     * @return the newly created Deadline.
+     */
+    public Task addEvent(String taskTitle) {
+        Event task = new Event(taskTitle);
+        this.tasks[counter] = task;
+        counter ++;
+        return task;
     }
 
     /**
@@ -32,6 +70,15 @@ public class TaskList {
         // Assumes that the task exists.
         task.completeTask();
         return task.toString();
+    }
+
+    /**
+     * Tells the user how many tasks there are in the list.
+     *
+     * @return A string that contains the number of tasks in the list.
+     */
+    public String countTasks() {
+        return String.format("\nNow you have %d tasks in the list.", counter);
     }
 
     /**

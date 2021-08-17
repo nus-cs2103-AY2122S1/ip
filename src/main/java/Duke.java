@@ -52,7 +52,7 @@ public class Duke extends Chatbot {
     }
 
     /**
-     * Manages a user's tasks.
+     * Handles the logic for managing a user's tasks.
      */
     public void taskMode() {
         String message = Chatbot.acceptUserInput();
@@ -61,15 +61,28 @@ public class Duke extends Chatbot {
             return;
         }
         if (message.equals("list")) {
+            // List the tasks
             String listedTasks = this.taskList.toString();
             Chatbot.printMessage(listedTasks);
         } else if (message.startsWith("done ")) {
+            // Mark a task as done
             int indexNumber = Integer.parseInt(message.substring(5)) - 1;
             String completedTask = this.taskList.completeTask(indexNumber);
             Chatbot.printMessage("Nice! I've marked this task as done: \n" + completedTask);
         } else {
-            this.taskList.addTask(message);
-            Chatbot.printMessage("added: " + message);
+            // Add a task to the list
+            Task task;
+            if (message.startsWith("todo ")) {
+                task = this.taskList.addTodo(message.substring(5));
+            } else if (message.startsWith("event ")) {
+                task = this.taskList.addEvent(message.substring(9));
+            } else if (message.startsWith("deadline ")) {
+                task = this.taskList.addDeadline(message.substring(6));
+            } else {
+                Chatbot.printMessage("Invalid command.");
+                return;
+            }
+            Chatbot.printMessage("Got it. I've added this task: \n\t" + task.toString() + this.taskList.countTasks());
         }
         taskMode();
     }

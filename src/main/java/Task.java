@@ -1,7 +1,13 @@
 public class Task {
-    private String title;
-    private boolean done;
+    protected String title;
+    protected boolean done;
+    protected char typeIndicator;
 
+    /**
+     * A constructor for a Task.
+     *
+     * @param title a String representing the user-input title of the task.
+     */
     public Task(String title) {
         this.title = title;
         this.done = false;
@@ -22,6 +28,6 @@ public class Task {
     @Override
     public String toString() {
         String doneIndicator = this.done ? "x" : " ";
-        return "[" + doneIndicator + "] " + this.title;
+        return String.format("[%s][%s] %s", typeIndicator, doneIndicator, this.title);
     }
 }
