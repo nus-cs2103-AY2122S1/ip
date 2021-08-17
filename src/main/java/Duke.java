@@ -27,8 +27,8 @@ public class Duke {
      * Greeting message of Duke.
      */
     static void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
@@ -82,12 +82,17 @@ public class Duke {
                             }
                         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
                             // command done is not followed by a number
-                            printMessage("Invalid input. Please check your done command format.");
+                            printMessage("☹ OOPS!!! The index of a task done must be an integer.");
                         }
                         break;
                     case "todo":
                         StringBuilder todoDescription = new StringBuilder();
-                        todoDescription.append(actions[1]);
+                        try {
+                            todoDescription.append(actions[1]);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            printMessage("☹ OOPS!!! The description of a todo cannot be empty.");
+                            break;
+                        }
                         for (int i = 2; i < actions.length; i++) {
                             todoDescription.append(" ").append(actions[i]);
                         }
@@ -103,10 +108,17 @@ public class Duke {
                             at = eventSplit[1];
                         } catch (ArrayIndexOutOfBoundsException e) {
                             // no /at found in command
-                            printMessage("Invalid input. Please check your task format.");
+                            printMessage("☹ OOPS!!! The time of an event cannot be empty.");
                             break;
                         }
-                        String eventDescription = eventSplit[0].split("event ")[1];
+                        String eventDescription = "";
+                        try {
+                            eventDescription = eventSplit[0].split("event ")[1];
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            // no event description
+                            printMessage("☹ OOPS!!! The description of an event cannot be empty.");
+                            break;
+                        }
                         Event event = new Event(eventDescription, at);
                         list[index] = event;
                         index++;
@@ -119,21 +131,25 @@ public class Duke {
                             by = ddlSplit[1];
                         } catch (ArrayIndexOutOfBoundsException e) {
                             // no /by found in command
-                            printMessage("Invalid input. Please check your task format.");
+                            printMessage("☹ OOPS!!! The time of a deadline cannot be empty.");
                             break;
                         }
-                        String ddlDescription = ddlSplit[0].split("deadline ")[1];
+                        String ddlDescription = "";
+                        try {
+                            ddlDescription = ddlSplit[0].split("deadline ")[1];
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            // no deadline description
+                            printMessage("☹ OOPS!!! The description of a deadline cannot be empty.");
+                            break;
+                        }
                         Deadline deadline = new Deadline(ddlDescription, by);
                         list[index] = deadline;
                         index++;
                         printMessage("Got it. I've added this task:\n\t" + deadline + "\nNow you have " + index + " tasks in the list.");
                         break;
                     default:
-                        // any other command creates a task by default
-                        Task task = new Task(command);
-                        list[index] = task;
-                        index++;
-                        printMessage("Got it. I've added this task:\n\t" + task + "\nNow you have " + index + " tasks in the list.");
+                        // Message for unrecognised task type
+                        printMessage("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         break;
                 }
             }
