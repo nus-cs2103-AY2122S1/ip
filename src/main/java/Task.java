@@ -1,20 +1,31 @@
 public class Task {
-    private String name;
-    private boolean hasDone = false;
+    protected String name;
+    protected boolean hasDone;
+    protected String prefix;
 
     public Task(String name) {
         this.name = name;
+        this.hasDone = false;
+        this.prefix = "";
     }
 
     public void markAsDone() {
         this.hasDone = true;
     }
 
-    public String getName() {
-        return this.name;
+    public String showStatus() {
+        if (hasDone) {
+            return "[X] ";
+        } else {
+            return "[ ] ";
+        }
     }
 
-    public boolean getStatus() {
-        return this.hasDone;
+    public String showPrefix() {
+        return this.prefix;
+    }
+
+    public void addThisTask() {
+        System.out.println("Got it. I've added this task: \n" + this.prefix + showStatus() + this.name);
     }
 }
