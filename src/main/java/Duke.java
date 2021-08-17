@@ -51,110 +51,35 @@ public class Duke {
      * Add and store tasks entered and display them back with complete status when requested.
      */
     static void add() {
-        String command = "";
-        ArrayList<Task> list = new ArrayList<Task>();
+        String command;
+        ArrayList<Task> list = new ArrayList<>();
         while (true) {
             command = scanner.nextLine();
             if (command.equals("bye")) {
                 // end bot
                 break;
-            } else if (command.equals("list")) {
-                // view list
-                printMessage(listToString(list));
             } else {
                 // split command to check for actions
-                String[] actions = command.split(" ");
-
+                String[] actions = command.split(" ", 2);
                 switch (actions[0]) {
+                    case "list":
+                        // view list
+                        printMessage(listToString(list));
+                        break;
                     case "done":
-                        try {
-                            int doneIndex = Integer.parseInt(command.substring(5));
-                            try {
-                                list.get(doneIndex - 1).markAsDone();
-                                printMessage("Nice! I've marked this task as done:\n\t" + list.get(doneIndex - 1));
-                            } catch (IndexOutOfBoundsException e) {
-                                // Task at doneIndex does not exist
-                                printMessage("Task " + doneIndex + " does not exist. Please check your task list!");
-
-                            }
-                        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
-                            // command done is not followed by a number
-                            printMessage("☹ OOPS!!! The index of a task done must be an integer.");
-                        }
+                        done(command, list);
                         break;
                     case "todo":
-                        StringBuilder todoDescription = new StringBuilder();
-                        try {
-                            todoDescription.append(actions[1]);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            printMessage("☹ OOPS!!! The description of a todo cannot be empty.");
-                            break;
-                        }
-                        for (int i = 2; i < actions.length; i++) {
-                            todoDescription.append(" ").append(actions[i]);
-                        }
-                        Todo todo = new Todo(todoDescription.toString());
-                        list.add(todo);
-                        printMessage("Got it. I've added this task:\n\t" + todo + "\nNow you have " + list.size() + " tasks in the list.");
+                        todo(command, list);
                         break;
                     case "event":
-                        String[] eventSplit = command.split(" /at ");
-                        String at = "";
-                        try {
-                            at = eventSplit[1];
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            // no /at found in command
-                            printMessage("☹ OOPS!!! The time of an event cannot be empty.");
-                            break;
-                        }
-                        String eventDescription = "";
-                        try {
-                            eventDescription = eventSplit[0].split("event ")[1];
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            // no event description
-                            printMessage("☹ OOPS!!! The description of an event cannot be empty.");
-                            break;
-                        }
-                        Event event = new Event(eventDescription, at);
-                        list.add(event);
-                        printMessage("Got it. I've added this task:\n\t" + event + "\nNow you have " + list.size() + " tasks in the list.");
+                        event(command, list);
                         break;
                     case "deadline":
-                        String[] ddlSplit = command.split(" /by ");
-                        String by = "";
-                        try {
-                            by = ddlSplit[1];
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            // no /by found in command
-                            printMessage("☹ OOPS!!! The time of a deadline cannot be empty.");
-                            break;
-                        }
-                        String ddlDescription = "";
-                        try {
-                            ddlDescription = ddlSplit[0].split("deadline ")[1];
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            // no deadline description
-                            printMessage("☹ OOPS!!! The description of a deadline cannot be empty.");
-                            break;
-                        }
-                        Deadline deadline = new Deadline(ddlDescription, by);
-                        list.add(deadline);
-                        printMessage("Got it. I've added this task:\n\t" + deadline + "\nNow you have " + list.size() + " tasks in the list.");
+                        deadline(command, list);
                         break;
                     case "delete":
-                        try {
-                            int deleteIndex = Integer.parseInt(command.substring(7));
-                            try {
-                                Task removed = list.remove(deleteIndex - 1);
-                                printMessage("Noted. I've removed this task:\n\t" + removed);
-                            } catch (IndexOutOfBoundsException e) {
-                                // Task at deleteIndex does not exist
-                                printMessage("Task " + deleteIndex + " does not exist. Please check your task list!");
-                            }
-                        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
-                            // command delete is not followed by a number
-                            printMessage("☹ OOPS!!! The index of a task to be deleted must be an integer.");
-                        }
+                        delete(command, list);
                         break;
                     default:
                         // Message for unrecognised task type
@@ -184,5 +109,125 @@ public class Duke {
             result.append("There is not task yet. Try to add a task first.");
         }
         return result.toString();
+    }
+
+    /**
+     * Duke response message for done command
+     * @param command command entered to console
+     * @param list current list of tasks
+     */
+    private static void done(String command, ArrayList<Task> list) {
+        try {
+            int doneIndex = Integer.parseInt(command.substring(5));
+            try {
+                list.get(doneIndex - 1).markAsDone();
+                printMessage("Nice! I've marked this task as done:\n\t" + list.get(doneIndex - 1));
+            } catch (IndexOutOfBoundsException e) {
+                // Task at doneIndex does not exist
+                printMessage("Task " + doneIndex + " does not exist. Please check your task list!");
+
+            }
+        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+            // command done is not followed by a number
+            printMessage("☹ OOPS!!! The index of a task done must be an integer.");
+        }
+    }
+
+    /**
+     * Duke response message for todo command
+     * @param command command entered to console
+     * @param list current list of tasks
+     */
+    private static void todo(String command, ArrayList<Task> list) {
+        String[] todoSplit = command.split(" ", 2);
+        String todoDescription;
+        try {
+            todoDescription = todoSplit[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // no description
+            printMessage("☹ OOPS!!! The description of a todo cannot be empty.");
+            return;
+        }
+
+        Todo todo = new Todo(todoDescription);
+        list.add(todo);
+        printMessage("Got it. I've added this task:\n\t" + todo + "\nNow you have " + list.size() + " tasks in the list.");
+    }
+
+    /**
+     * Duke response message for event command
+     * @param command command entered to console
+     * @param list current list of tasks
+     */
+    private static void event(String command, ArrayList<Task> list) {
+        String[] eventSplit = command.split(" /at ");
+        String at;
+        try {
+            at = eventSplit[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // no /at found in command
+            printMessage("☹ OOPS!!! The time of an event cannot be empty.");
+            return;
+        }
+        String eventDescription;
+        try {
+            eventDescription = eventSplit[0].split("event ")[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // no event description
+            printMessage("☹ OOPS!!! The description of an event cannot be empty.");
+            return;
+        }
+        Event event = new Event(eventDescription, at);
+        list.add(event);
+        printMessage("Got it. I've added this task:\n\t" + event + "\nNow you have " + list.size() + " tasks in the list.");
+    }
+
+    /**
+     * Duke response message for deadline command
+     * @param command command entered to console
+     * @param list current list of tasks
+     */
+    private static void deadline(String command, ArrayList<Task> list) {
+        String[] ddlSplit = command.split(" /by ");
+        String by;
+        try {
+            by = ddlSplit[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // no /by found in command
+            printMessage("☹ OOPS!!! The time of a deadline cannot be empty.");
+            return;
+        }
+        String ddlDescription;
+        try {
+            ddlDescription = ddlSplit[0].split("deadline ")[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // no deadline description
+            printMessage("☹ OOPS!!! The description of a deadline cannot be empty.");
+            return;
+        }
+        Deadline deadline = new Deadline(ddlDescription, by);
+        list.add(deadline);
+        printMessage("Got it. I've added this task:\n\t" + deadline + "\nNow you have " + list.size() + " tasks in the list.");
+    }
+
+    /**
+     * Duke response message for delete command
+     * @param command command entered to console
+     * @param list current list of tasks
+     */
+    private static void delete(String command, ArrayList<Task> list) {
+        try {
+            int deleteIndex = Integer.parseInt(command.substring(7));
+            try {
+                Task removed = list.remove(deleteIndex - 1);
+                printMessage("Noted. I've removed this task:\n\t" + removed);
+            } catch (IndexOutOfBoundsException e) {
+                // Task at deleteIndex does not exist
+                printMessage("Task " + deleteIndex + " does not exist. Please check your task list!");
+            }
+        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+            // command delete is not followed by a number
+            printMessage("☹ OOPS!!! The index of a task to be deleted must be an integer.");
+        }
     }
 }
