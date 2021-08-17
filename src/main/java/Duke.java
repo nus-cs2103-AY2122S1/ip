@@ -20,21 +20,35 @@ public class Duke {
         String command = scanner.nextLine();
 
         // Checks if user commands for specific commands
-        if (command.toLowerCase().equals("bye")) {
-            sayBye();
-        } else if (command.toLowerCase().equals("list")) {
-            showList();
-        } else if(command.toLowerCase().contains("done")) {
-            int taskDone = Character.getNumericValue(command.charAt(command.length() - 1)) - 1;
-            finishTask(taskDone);
-        } else if (command.toLowerCase().contains("todo")) {
-            addTodo(command);
-        } else if (command.toLowerCase().contains("deadline")) {
-            addDeadline(command);
-        } else if (command.toLowerCase().contains("event")) {
-            addEvent(command);
-        } else {
-            otherCommand(command);
+        try {
+            if (command.toLowerCase().equals("bye")) {
+                sayBye();
+            } else if (command.toLowerCase().equals("list")) {
+                showList();
+            } else if (command.toLowerCase().contains("done")) {
+                int taskDone = Character.getNumericValue(command.charAt(command.length() - 1)) - 1;
+                finishTask(taskDone);
+            } else if (command.toLowerCase().contains("todo")) {
+                addTodo(command);
+            } else if (command.toLowerCase().contains("deadline")) {
+                addDeadline(command);
+            } else if (command.toLowerCase().contains("event")) {
+                addEvent(command);
+            } else {
+                String errorMessage = "Sorry I do not understand this command \n";
+                errorMessage += "Please use one of the following commands: \n";
+                errorMessage += "\t list - To list the added tasks so far\n";
+                errorMessage += "\t todo {description} - To add a ToDo task\n";
+                errorMessage += "\t deadline {description} /by {time} - To add a Deadline task\n";
+                errorMessage += "\t event {description} /at {time} - To add an Event task\n";
+                errorMessage += "\t done {number} - To mark the indicated task as done\n";
+                errorMessage += "\t bye (To exit programme)\n";
+                throw new DukeException(errorMessage);
+                //otherCommand(command);
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            getCommand();
         }
     }
 
