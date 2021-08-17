@@ -1,12 +1,14 @@
+import java.util.ArrayList;
+
 /**
  * Response class contains the logic for processing the commands from Duke.
  * It supports (i) the list command, (ii) the bye command,
- * (iii) adding different types of tasks to the list, (iv) and marking the tasks as done
+ * (iii) adding different types of tasks to the list, (iv) and marking the tasks as done,
+ * (v) removing tasks
  */
 
 public class Response {
-    private Task[] lstOfTasks = new Task[100];
-    private int itemCount = 0;
+    private ArrayList<Task> lstOfTasks = new ArrayList<Task>();
 
     /**
      * Returns a farewell statement to the user.
@@ -22,9 +24,9 @@ public class Response {
      */
     String list() {
         String res = "";
-        for (int i = 0; i < itemCount; i++) {
+        for (int i = 0; i < lstOfTasks.size(); i++) {
             res += (i + 1) + ". " +
-                    lstOfTasks[i].toString() + "\n";
+                lstOfTasks.get(i).toString() + "\n";
         }
         return "Here are the tasks in your list:\n" + res;
     }
@@ -36,7 +38,7 @@ public class Response {
      */
     String done(int taskNumber) {
         String res = "Nice! I've marked this task as done:\n";
-        Task currTask = lstOfTasks[taskNumber];
+        Task currTask = lstOfTasks.get(taskNumber);
         currTask.markAsDone();
         res += " [" + currTask.getStatusIcon() + "] " + currTask.description;
         return res;
@@ -53,10 +55,9 @@ public class Response {
             return "OOPS!!! The description of a todo cannot be empty.\n";
         }
         Todo taskToDo = new Todo(task);
-        lstOfTasks[itemCount] = taskToDo;
-        itemCount++;
+        lstOfTasks.add(taskToDo);
         return "Got it. I've added this task:\n" + taskToDo.toString() + "\n"
-                + "Now you have " + itemCount + " tasks in the list\n";
+            + "Now you have " + lstOfTasks.size() + " tasks in the list\n";
     }
 
     /**
@@ -88,10 +89,9 @@ public class Response {
             index++;
         }
         DeadLine deadLine = new DeadLine(taskWithDeadLine, by);
-        lstOfTasks[itemCount] = deadLine;
-        itemCount++;
+        lstOfTasks.add(deadLine);
         return "Got it. I've added this task:\n" + deadLine.toString() + "\n"
-                + "Now you have " + itemCount + " tasks in the list\n";
+            + "Now you have " + lstOfTasks.size() + " tasks in the list\n";
     }
 
     /**
@@ -123,10 +123,20 @@ public class Response {
             index++;
         }
         Event event = new Event(eventTask, by);
-        lstOfTasks[itemCount] = event;
-        itemCount++;
+        lstOfTasks.add(event);
         return "Got it. I've added this task:\n" + event.toString() + "\n"
-                + "Now you have " + itemCount + " tasks in the list\n";
+            + "Now you have " + lstOfTasks.size() + " tasks in the list\n";
+    }
+
+    /**
+     * Returns a string notifying the user that a task has been deleted.
+     * @param taskNum the task number to be removed
+     * @return a string notifying the user that a task has been removed
+     */
+
+    String delete(int taskNum) {
+        return "Noted. I've removed this task:\n" + lstOfTasks.remove(taskNum).toString() + "\n"
+                + "Now you have " + lstOfTasks.size() + " in the list.";
     }
 
     /**
@@ -138,35 +148,39 @@ public class Response {
     String output(String string) {
         if (string.equals("list")) {
             return list();
+
         } else if (string.equals("bye")) {
             return bye();
+
+        } else if (string.contains("todo")) {
+            int startIndex = "todo".length();
+            int endIndex = string.length();
+            String task = string.substring(startIndex, endIndex);
+            return todo(task);
+
+        } else if (string.contains("deadline")) {
+            int startIndex = "deadline".length();
+            int endIndex = string.length();
+            String task = string.substring(startIndex, endIndex);
+            return deadline(task);
+
+        } else if (string.contains("event")) {
+            int startIndex = "event".length();
+            int endIndex = string.length();
+            String task = string.substring(startIndex, endIndex);
+            return event(task);
+
         } else if (string.contains("done")) {
-            // getting the task number
-            int taskNum = Integer.parseInt(
-                    String.valueOf(
-                            string.toCharArray()[string.length() - 1])) - 1;
-            return done(taskNum);
-        } else {
-            if (string.contains("todo")) {
-                int startIndex = "todo".length();
-                int endIndex = string.length();
-                String task = string.substring(startIndex, endIndex);
-                return todo(task);
-
-            } else if (string.contains("deadline")) {
-                int startIndex = "deadline".length();
-                int endIndex = string.length();
-                String task = string.substring(startIndex, endIndex);
-                return deadline(task);
-
-            } else if (string.contains("event")) {
-                int startIndex = "event".length();
-                int endIndex = string.length();
-                String task = string.substring(startIndex, endIndex);
-                return event(task);
-
-            }
-            return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+            int i = Integer.parseInt(
+                        String.valueOf(
+                                string.toCharArray()[string.length() - 1])) - 1;
+            return done(i);
+        } else if (string.contains("delete")) {
+            int i = Integer.parseInt(
+                        String.valueOf(
+                                string.toCharArray()[string.length() - 1])) - 1;
+            return delete(i);
         }
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
     }
 }
