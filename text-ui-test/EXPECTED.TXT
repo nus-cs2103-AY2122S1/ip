@@ -1,7 +1,29 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello I'm Duke
+What can I do for you?
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Oops! Looks like you have no tasks in your list!
+☹ Oops! Looks like you are missing the description and the deadline date! Try again :-)
+☹ Oops! Looks like you are missing the deadline date! Try again :-)
+☹ Oops! Looks like you are missing the deadline date! Try again :-)
+Got it. I've added this task:
+[D][ ]  task  (by: date)
+Now you have 1 tasks in the list
+☹ Oops! Looks like you are missing the description and the event location! Try again :-)
+☹ Oops! Looks like you are missing the event location! Try again :-)
+☹ Oops! Looks like you are missing the event location! Try again :-)
+Got it. I've added this task:
+[E][ ]  activity  (at: place)
+Now you have 2 tasks in the list
+☹ Oops! Looks like you are missing the description! Try again :-)
+Got it. I've added this task:
+[T][ ]  this
+Now you have 3 tasks in the list
+Nice! I've marked this task as done:
+ [D][X]  task  (by: date)
+Nice! I've marked this task as done:
+ [E][X]  activity  (at: place)
+Here are the tasks in your list:
+1.[D][X]  task  (by: date)
+2.[E][X]  activity  (at: place)
+3.[T][ ]  this
+Bye. Hope to see you again soon!

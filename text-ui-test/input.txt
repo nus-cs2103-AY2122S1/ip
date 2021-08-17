@@ -1,0 +1,16 @@
+blah
+list
+deadline
+deadline task
+deadline  task
+deadline task /by date
+event
+event activity
+event  activity
+event activity /at place
+todo
+todo this
+done 1
+done 2
+list
+bye
