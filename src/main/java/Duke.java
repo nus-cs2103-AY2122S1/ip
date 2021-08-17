@@ -6,7 +6,7 @@ import java.util.Scanner;
 //most obvious uncaught exceptions are incorrect delete/done commands. fix in the future.
 public class Duke {
     private static TaskList tasklist = new TaskList();
-    private static Ui ui = new Ui(tasklist);
+    private static Ui ui = new Ui();
     private Storage storage;
 
     //subroutine for adding tasks to the collection of tasks
@@ -35,7 +35,7 @@ public class Duke {
             throw new DukeException();
         }
 
-        ui.notifySuccessfulAdd();
+        ui.notifySuccessfulAdd(tasklist);
     }
 
     public static void main(String[] args) {
@@ -43,11 +43,11 @@ public class Duke {
         Storage storage = new Storage("frosty.txt");
         storage.load(tasklist);
 
-        Scanner sc = new Scanner(System.in);
-        String in = sc.nextLine();
+        String in = ui.readCommand();
+
         while(!in.equals("bye")) {
             if (in.equals("list")) {
-                ui.displayList();
+                ui.displayList(tasklist);
             } else if (in.startsWith("done")) {
                 try {
                     String[] temp = in.split(" ");
@@ -80,7 +80,7 @@ public class Duke {
             } else {
                 System.out.println("Sorry! I don't know what your request means. Please try again?");
             }
-            in = sc.nextLine();
+            in = ui.readCommand();
         }
 
         //after user keys in bye, save should happen here
