@@ -15,7 +15,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you today? ");
+        System.out.println("What can I do for you today?");
 
         String userCommand;
         String userInput;
@@ -47,7 +47,7 @@ public class Duke {
                     Task doneTask = taskList[done];
                     doneTask.markAsDone();
 
-                    System.out.printf("I've marked this task as done: \n" +
+                    System.out.printf("I've marked this task as done:\n" +
                             "%s\n", doneTask.toString());
 
                     break;
