@@ -15,7 +15,7 @@ public class Duke {
     public void run() {
         Welcome.of().exec();
         Scanner scanner = new Scanner(System.in);
-        String input = "";
+        String input;
         System.out.println("What can I do for you?");
         while (true) {
             input = scanner.nextLine();
@@ -26,6 +26,9 @@ public class Duke {
             } else if (input.startsWith("done")) {
                 int value = Character.getNumericValue(input.charAt(5));
                 Done.of(tasks, value).exec();
+            }  else if (input.startsWith("delete")) {
+                int value = Character.getNumericValue(input.charAt(7));
+                Delete.of(tasks, value).exec();
             } else {
                 try {
                     Add.of(this.tasks, input).exec();

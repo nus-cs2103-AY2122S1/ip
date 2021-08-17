@@ -5,4 +5,6 @@ deadline project submission /by Sunday
 event project meeting /at Monday 2-4pm
 done 2
 list
+delete 2
+list
 bye
