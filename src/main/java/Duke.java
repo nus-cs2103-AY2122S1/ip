@@ -24,6 +24,10 @@ public class Duke {
     }
 
     private void printList() {
+        if (arrList.size() == 0) {
+            printMessage(STATICS.NO_TASK_MESSAGE);
+            return;
+        }
         System.out.println(STATICS.INDENTED_HORIZONTAL_LINE);
         System.out.println(STATICS.LIST_MESSAGE);
         for (int i = 0; i < arrList.size(); i++) {

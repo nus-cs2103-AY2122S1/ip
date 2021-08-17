@@ -12,4 +12,5 @@ public class STATICS {
     public final static String LIST_MESSAGE = STATICS.INDENT + "Here are the tasks in your list:";
     public final static String ERROR_MSG_UNKOWN_MSG = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     public final static String ERROR_MSG_EMPTY_DESCRIPTION = "☹ OOPS!!! The description of a todo cannot be empty.";
+    public final static String NO_TASK_MESSAGE = "Good day! You have no task in hand right now.";
 }
