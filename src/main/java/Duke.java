@@ -40,20 +40,28 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
-    private static void finishTask(String[] commandAndArgument) throws DukeException {
+    private static void editTask(String[] commandAndArgument) throws DukeException {
         try {
             int taskIndex = Integer.parseInt(commandAndArgument[1]) - 1;
-            if (taskIndex >= numberOfTasks) {
-                throw new DukeException("Please enter a valid task number.");
-            } else {
+            if (commandAndArgument[0].equals("done")) {
                 taskList.get(taskIndex).markAsDone();
                 System.out.println(DIVIDER
                         + "Nice! I've marked this task as done:\n"
                         + taskList.get(taskIndex).toString() + '\n'
                         + DIVIDER
                 );
+            } else {
+                Task removedTask = taskList.remove(taskIndex);
+                numberOfTasks--;
+                System.out.println(DIVIDER
+                        + "Got it! I've removed this task from the list:\n"
+                        + removedTask.toString() + '\n'
+                        + "Now you have "
+                        + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + " in the list.\n"
+                        + DIVIDER
+                );
             }
-        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("Please enter a valid task number.");
         }
     }
@@ -125,8 +133,8 @@ public class Duke {
                     break;
                 } else if (command.equals("list")) {
                     printTaskList();
-                } else if (command.equals("done")) {
-                    finishTask(commandAndArgument);
+                } else if (command.equals("done") || command.equals("delete")) {
+                    editTask(commandAndArgument);
                 } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                     addTask(commandAndArgument);
                 } else {
