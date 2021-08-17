@@ -39,6 +39,7 @@ public class Kermit {
 
         final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
         final String listText = "Here are the tasks in your list:";
+        final String invalidCommandText = "☹ BURP-ribbit ribbit. I'm sorry, but I don't know what that means :-(";
         final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
         final String goodbyeText = "Bye. Hope to see you again soon!";
 
@@ -115,7 +116,7 @@ public class Kermit {
                     System.out.println(formatText(printAddTask(newEvent, list)));
                     break;
                 default:
-                    System.out.println(formatText("This is an invalid command"));
+                    System.out.println(formatText(invalidCommandText));
             }
         }
     }
