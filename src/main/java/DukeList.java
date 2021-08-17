@@ -9,7 +9,7 @@ public class DukeList {
 
     private void displayTask(Task task) {
         String response = "Got it. I've added this task:\n";
-        String taskCount = "\nNow you have " + list.size() + " tasks in the list";
+        String taskCount = "\nNow you have " + list.size() + " tasks in the list.";
         System.out.println(response + task.toString() + taskCount);
     }
 
@@ -84,7 +84,7 @@ public class DukeList {
         list.remove(item - 1);
 
         String response = "Noted. I've removed this task:\n";
-        String taskCount = "\nNow you have " + list.size() + " tasks in the list";
+        String taskCount = "\nNow you have " + list.size() + " tasks in the list.";
         System.out.println(response + task.toString() + taskCount);
     }
 
