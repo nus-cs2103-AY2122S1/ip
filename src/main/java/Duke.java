@@ -13,7 +13,7 @@ public class Duke {
 
         String s = in.nextLine();
 
-        while (!s.equals("Bye")) {
+        while (!s.equals("bye")) {
             System.out.println("---------");
             System.out.println(s);
             System.out.println("---------");
