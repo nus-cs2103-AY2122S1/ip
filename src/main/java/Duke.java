@@ -59,18 +59,20 @@ public class Duke {
     // Function for when user inputs "done"
     private static void finishTask(int taskDone) {
         taskList[taskDone].markAsDone();
-        System.out.println("Good job! This task has been completed:\n");
-        System.out.println(taskList[taskDone].toString());
+        System.out.println("\t Good job! This task has been completed:");
+        System.out.println("\t \t" + taskList[taskDone].toString());
         getCommand();
     }
 
     private static void addTodo(String command) {
         // Take the substring containing the task description of the command
         String description = command.substring(5);
-        System.out.println("\t added: " + description);
         ToDo t = new ToDo(description);
+
+        System.out.println("\t I have added to the list: \n\t \t" + t.toString());
         taskList[counter] = t;
         counter++;
+        System.out.println("\t There are " + counter + " items in the list");
         getCommand();
     }
 
@@ -81,12 +83,14 @@ public class Duke {
 
         // Find substring containing task description
         String description = command.substring(9, endOfDescription);
-        System.out.println("\t added: " + description);
 
-        String byWhen = command.substring(endOfDescription);
+        String byWhen = command.substring(endOfDescription + 1);
         Deadline t = new Deadline(description, byWhen);
+
+        System.out.println("\t I have added to the list: \n\t \t" + t.toString());
         taskList[counter] = t;
         counter++;
+        System.out.println("\t There are " + counter + " items in the list");
         getCommand();
     }
 
@@ -97,12 +101,14 @@ public class Duke {
 
         // Find substring containing task description
         String description = command.substring(6, endOfDescription);
-        System.out.println("\t added: " + description);
 
-        String startTime = command.substring(endOfDescription);
+        String startTime = command.substring(endOfDescription + 1);
         Event t = new Event(description, startTime);
+
+        System.out.println("\t I have added to the list: \n\t \t" + t.toString());
         taskList[counter] = t;
         counter++;
+        System.out.println("\t There are " + counter + " items in the list");
         getCommand();
     }
 
