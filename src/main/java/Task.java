@@ -1,10 +1,8 @@
 public class Task {
     private String taskName;
-    private int taskNumber;
     private boolean isDone;
 
-    public Task(int taskNumber, String taskName) {
-        this.taskNumber = taskNumber;
+    public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
     }
@@ -17,16 +15,16 @@ public class Task {
         return this.taskName;
     }
 
-    public String getCheckMark() {
+    public String getCheckBox() {
         if (isDone) {
-            return "X";
+            return "[X]";
         }
-        return " ";
+        return "[ ]";
     }
 
     @Override
     public String toString() {
-        String result = String.format("%d.[%s] %s", taskNumber, this.getCheckMark(), taskName);
+        String result = this.getCheckBox() + " " + this.taskName;
         return result;
     }
 }
