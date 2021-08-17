@@ -27,7 +27,7 @@ public class Task {
     /**
      * Returns the Task's String.
      *
-     * @return String form of Task
+     * @return String form of Task.
      */
     @Override
     public String toString() {

@@ -7,9 +7,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns To do's String form
+     * Returns To do's String form.
      *
-     * @return String
+     * @return String.
      */
     @Override
     public String toString() {

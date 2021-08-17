@@ -13,7 +13,7 @@ public class Deadline extends Task {
     /**
      * Returns the Deadline's string.
      *
-     * @return String
+     * @return String.
      */
     @Override
     public String toString() {

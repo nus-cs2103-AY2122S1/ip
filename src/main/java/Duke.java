@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Duke {
     private static Scanner scanner;
     private static ArrayList<Task> savedInputs;
+    private enum Command {LIST, DONE, DELETE, TODO, DEADLINE, EVENT, INVALID}
 
     public static void main(String[] args) throws DukeException {
         scanner = new Scanner(System.in);
@@ -28,11 +29,10 @@ public class Duke {
             }
 
             try {
-                int caseId = findCase(input);
+                Command caseId = findCase(input);
 
                 switch (caseId) {
-                    // list
-                    case 1:
+                    case LIST:
                         StringBuilder outputList = new StringBuilder();
                         outputList.append("Here are the tasks in your list:\n");
                         for (int i = 1; i <= savedInputs.size(); i++) {
@@ -41,8 +41,7 @@ public class Duke {
                         System.out.println(outputList);
                         break;
 
-                    // done
-                    case 2:
+                    case DONE:
                         // handles any characters after 'done' that are not white space
                         if (!input.startsWith("done ")) {
                             throw new DukeException("Oops! Improper formatting for done. " +
@@ -61,8 +60,7 @@ public class Duke {
                         savedInputs.get(donePos - 1).markAsDone();
                         break;
 
-                    // delete
-                    case 3:
+                    case DELETE:
                         if (!input.startsWith("delete ")) {
                             throw new DukeException("Oops! Improper formatting for delete. " +
                                     "Please use: delete <task number>");
@@ -82,8 +80,7 @@ public class Duke {
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
                         break;
 
-                    // todo
-                    case 4:
+                    case TODO:
                         // handles any characters after 'todo' that are not white space
                         if (!input.startsWith("todo ")) {
                             throw new DukeException("Oops! Improper formatting for todo. " +
@@ -99,8 +96,7 @@ public class Duke {
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
                         break;
 
-                    // deadline
-                    case 5:
+                    case DEADLINE:
                         // handles any characters after 'deadline' that are not white space
                         if (!input.startsWith("deadline ")) {
                             throw new DukeException("Oops! Improper formatting for deadline. " +
@@ -127,8 +123,7 @@ public class Duke {
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
                         break;
 
-                    // event
-                    case 6:
+                    case EVENT:
                         // handles any characters after 'event' that are not white space
                         if (!input.startsWith("event ")) {
                             throw new DukeException("Oops! Improper formatting for event. " +
@@ -165,24 +160,24 @@ public class Duke {
     /**
      * Returns the identifier of each case (for switch in chat method).
      *
-     * @param input User entered into Command Line
-     * @return CaseId
+     * @param input User entered into Command Line.
+     * @return CaseId of type Command (Enum).
      */
-    private static int findCase(String input) {
+    private static Command findCase(String input) {
         if (input.equals("list")) {
-            return 1;
+            return Command.LIST;
         } else if (input.startsWith("done")) {
-            return 2;
+            return Command.DONE;
         } else if (input.startsWith("delete")) {
-            return 3;
+            return Command.DELETE;
         } else if (input.startsWith("todo")) {
-            return 4;
+            return Command.TODO;
         } else if (input.startsWith("deadline")) {
-            return 5;
+            return Command.DEADLINE;
         } else if (input.startsWith("event")) {
-            return 6;
+            return Command.EVENT;
         } else {
-            return 7;
+            return Command.INVALID;
         }
     }
 }
