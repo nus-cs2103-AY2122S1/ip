@@ -88,6 +88,10 @@ public class Duke {
     }
 
     private static void markItemDoneInTDL(String command) {
+        String taskNumberStr = command.substring(5);
+        int taskNo = Integer.parseInt(taskNumberStr);
+        String dukeOutput = currTDL.markTaskAsDone(taskNo);
+        dukeSays(dukeOutput);
     }
 
 

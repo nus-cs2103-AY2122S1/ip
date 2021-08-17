@@ -22,6 +22,23 @@ public class TDList {
         Duke.dukeSays("added: " + str);
     }
 
+    /**
+     * Used to mark the corresponding task as done.
+     *
+     * @param taskNo The task number in the list.
+     *
+     * @return Duke's output from this command
+     */
+    public String markTaskAsDone(int taskNo) {
+        if (taskNo >= 0 && taskNo < toDoList.size()) {
+            TDLTask currTask = toDoList.get(taskNo);
+            currTask.setAsDone();
+
+            return "Nice! I've marked this task as done:\n" + currTask.getLineOfTaskInfo();
+        } else {
+            return "Invalid Task Specified";
+        }
+    }
 
 
     /**
