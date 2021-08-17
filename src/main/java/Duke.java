@@ -149,5 +149,6 @@ public class Duke {
 
     // Exit
     System.out.println(exitResponse);
+    scanner.close();
   }
 }
