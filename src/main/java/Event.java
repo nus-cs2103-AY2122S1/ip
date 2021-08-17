@@ -10,15 +10,11 @@ public class Event extends Task{
      * Takes in a string and splits msg into based on /at pattern. Set the eventType and time of the instance
      * @param input string from the user
      */
-    public Event(String input){
+    public Event(String input) throws IndexOutOfBoundsException {
         super();
         List<String> results = Pattern.compile("/at").splitAsStream(input).map(x->x.trim()).collect(Collectors.toList());
         String key = results.get(0);
-        String time = "";
-        if (results.size() == 2) {  // Allows event to not have a n at ** UNLESS  ITS AN ERROR
-            time = "(at: " + results.get(1) + ")";
-        }
-
+        String time = "(at: " + results.get(1) + ")";
         super.setDescription(key);
         this.eventType = "[E]";
         this.time = time;

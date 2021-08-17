@@ -24,11 +24,16 @@ public class Speech {
         speak(dukeWelcome);
     }
 
+    public void listMsg(String[] msg, Storage storage) {
+        currentBubbleLimit = storage.listMaxLen();
+        speak(msg);
+    }
+
     /**
      * Takes in a msg and formats it to the "done" success string
      * @param msg string that contains details of the task
      */
-    public void done_msg(String msg) {
+    public void doneMsg(String msg) {
         String[] dukeAdded = {"Nice! I've marked this task as done:", msg};
         currentBubbleLimit = msg.length();
         speak(dukeAdded);
@@ -37,9 +42,10 @@ public class Speech {
     /**
      * Takes in a String and task and formats it to the task_added success msg
      * @param msg string that contains details of the task
-     * @param task_left integer that contains the number of task in the list
+     * @param storage takes in storage instance to check how many task left
      */
-    public void task_added(String msg, int task_left) {
+    public void taskAdded(String msg, Storage storage) {
+        int task_left = storage.task_left();
         String[] dukeAddedTask = {"Got it. I've added this task:", "  " + msg, "Now you have " + task_left + " tasks in the list."};
         currentBubbleLimit = msg.length() + 2;
         speak(dukeAddedTask);
@@ -61,7 +67,6 @@ public class Speech {
     public void goodbye() {
         currentBubbleLimit = baseBubbleLimit;
         speak("Bye. Hope to see you again soon!");
-
     }
 
 
@@ -70,7 +75,7 @@ public class Speech {
      * @param in takes in a string array and cycle through and printing msg
      */
     public void speak(String[] in) {
-        if (!testing){
+//        if (!testing){
             int limit = baseBubbleLimit;
             String base = baseTemplate;
             if (baseBubbleLimit < currentBubbleLimit) {
@@ -78,7 +83,7 @@ public class Speech {
                 base = String.format("%" + (limit + 1) + "s", " ").replace(' ', '_');
             }
             String space = "          ";
-            String topBorder = space + " " + base +"\n";
+            String topBorder = "\n" + space + " " + base + "\n";
             String botBorder = space + "|" + base + "|\n" + space + "|/\n";
             String emoticon = emoticonRand();
             StringBuilder msges = new StringBuilder();
@@ -86,11 +91,11 @@ public class Speech {
                 msges.append(message_format(x, limit));
             }
             System.out.println( topBorder + msges + botBorder + emoticon);
-        } else {
-            for(String x : in){
-                System.out.println(x);
-            }
-        }
+//        } else {
+//            for(String x : in){
+//                System.out.println(x);
+//            }
+//        }
 
     }
 
@@ -100,6 +105,7 @@ public class Speech {
      */
     public void speak(String in) {
         String[] temp = {in};
+        currentBubbleLimit = in.length();
         speak(temp);
     }
 
@@ -119,7 +125,7 @@ public class Speech {
      * @return String containing the emoticon
      */
     private String emoticonRand() {
-        String[] emoticon = {"(ﾍﾟ◇ﾟ)」" ,"( ＾◡＾)っ", "(*°▽°)ノ", "(o^ω^)" , "(✿˘▽˘)"};
+        String[] emoticon = {"( ﾟ◇ﾟ)/" ,"( ＾◡＾)ノ", "(*°▽°)ノ", "(o^ω^)" , "(✿˘▽˘)"};
         int state = emoticonState;
         emoticonState = (emoticonState+1) % emoticon.length;
         return emoticon[state];

@@ -1,0 +1,26 @@
+list
+done 1
+ 
+done one
+done
+event
+to do
+todo task 1
+todo task 2
+todo task 3
+list
+todo 123456789123456789123456789123456789123456789123456789123456789
+list
+done 1
+done 3
+list
+event event at /at tonight
+event event by /by tonight
+list
+deadline dead at /at tonight
+deadline dead by /by tonight
+list
+done 5
+done 6
+list
+bye

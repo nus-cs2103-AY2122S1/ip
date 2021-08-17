@@ -8,7 +8,7 @@ public class Duke {
 
     public Duke() {
         storage = new Storage();
-        speech = new Speech(false, 48);
+        speech = new Speech(true, 48);
         brain = new Brain(storage, speech);
     }
 

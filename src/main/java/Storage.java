@@ -6,12 +6,14 @@ import java.util.LinkedHashMap;
 public class Storage {
 
     private final LinkedHashMap<String, Task> mapper;
+    private int listLen;
 
     /**
      * Basic constructor
      */
     public Storage() {
         mapper = new LinkedHashMap<>();
+        listLen = 0;
     }
 
     /**
@@ -65,7 +67,7 @@ public class Storage {
      * @param input tajes in the input from user
      * @return String that contains the success msg
      */
-    public String event (String input) {
+    public String event (String input) throws IndexOutOfBoundsException {
         Event event = new Event(input);
         mapper.put(event.getDescription(), event);
         return event.toString();
@@ -84,6 +86,10 @@ public class Storage {
      * @return String that contains the details of task in list
      */
     public String[] getStorage() {
+        if (mapper.size() == 0) {
+            return new String[]{"Empty List"};
+        }
+        int maxLen = 0;
         Collection<Task> values = mapper.values();
         Iterator<Task> look = values.iterator();
         String[] check = new String[mapper.size()];;
@@ -91,9 +97,15 @@ public class Storage {
         while (look.hasNext()){
             String p_pos = (iter_pos + 1) + ". ";
             check[iter_pos] = p_pos + look.next().toString();
+            maxLen = Math.max(maxLen, check[iter_pos].length());
             iter_pos++;
         }
+        listLen = maxLen;
         return check;
+    }
+
+    public int listMaxLen(){
+        return listLen;
     }
 
 }

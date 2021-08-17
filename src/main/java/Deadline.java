@@ -10,15 +10,11 @@ public class Deadline extends Task{
      * Takes in a string and splits msg into based on /by pattern. Set the eventType and time of the instance
      * @param input string from the user
      */
-    public Deadline(String input){
+    public Deadline(String input) throws IndexOutOfBoundsException {
         super();
         List<String> results = Pattern.compile("/by").splitAsStream(input).map(x->x.trim()).collect(Collectors.toList());
         String key = results.get(0);
-
-        String time = "";
-        if (results.size() == 2) {  // Allows deadline to not have a by ** UNLESS  ITS AN ERROR
-            time = "(by: " + results.get(1) + ")";
-        }
+        String time = "(by: " + results.get(1) + ")";
         super.setDescription(key);
         this.eventType = "[D]";
         this.time = time;

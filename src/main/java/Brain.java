@@ -15,8 +15,9 @@ public class Brain {
      * @return boolean value to indicate whether to continue running the program
      */
     public boolean decide(String input) {
-        String[] parsedInput = input.split(" ", 2);
+        String[] parsedInput = input.trim().split(" ", 2);
         boolean cont = true;
+        String userReq ="";
         try {
             switch (parsedInput[0]) {
                 case "bye":
@@ -25,34 +26,49 @@ public class Brain {
                     break;
                 case "list":
                     String[] listOutput = storage.getStorage();
-                    speech.speak(listOutput);
+                    speech.listMsg(listOutput, storage);
                     break;
                 case "done":
-                    String outputMsg = storage.done(parsedInput[1]);
-                    speech.done_msg(outputMsg);
+                    userReq = parsedInput[1];
+                    try {
+                        String outputMsg = storage.done(userReq);
+                        speech.doneMsg(outputMsg);
+                    } catch (NullPointerException e){
+                        speech.error("input an invalid done value.");
+                    } catch (NumberFormatException e) {
+                        speech.error("did not input an integer after done.");
+                    }
                     break;
                 case "deadline":
-                    String deadlineSuccess = storage.deadline(parsedInput[1]);
-                    speech.task_added(deadlineSuccess, storage.task_left());
+                    userReq = parsedInput[1];
+                    try{
+                        String deadlineSuccess = storage.deadline(userReq);
+                        speech.taskAdded(deadlineSuccess, storage);
+                    } catch (IndexOutOfBoundsException e) {
+                        speech.error("did not input /by for timeStamp");
+                    }
                     break;
                 case "todo":
-                    String todoSucess = storage.todo(parsedInput[1]);
-                    speech.task_added(todoSucess, storage.task_left());
+                    userReq = parsedInput[1];
+                    String todoSucess = storage.todo(userReq);
+                    speech.taskAdded(todoSucess, storage);
                     break;
                 case "event":
-                    String eventSucess = storage.event(parsedInput[1]);
-                    speech.task_added(eventSucess, storage.task_left());
+                    userReq = parsedInput[1];
+                    try{
+                        String eventSucess = storage.event(userReq);
+                        speech.taskAdded(eventSucess, storage);
+                    } catch (IndexOutOfBoundsException e) {
+                        speech.error("did not input /at for timeStamp");
+                    }
+                    break;
                 default:
                     throw new IllegalArgumentException();
             }
-        } catch (NumberFormatException e) {
-            speech.error("did not input an integer.");
-        } catch (NullPointerException e){
-            speech.error("input an invalid done value.");
         } catch (IllegalArgumentException e) {
             speech.error("input an invalid action.");
         } catch (ArrayIndexOutOfBoundsException e) {
-            speech.error("made an invalid input");
+            speech.error("are missing info after action");
         }
         return cont;
 
