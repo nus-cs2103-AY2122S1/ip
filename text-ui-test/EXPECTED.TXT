@@ -25,4 +25,27 @@ Here are the tasks in your list:
 1. [T][X] borrow The Fault in my Stars
 2. [D][X] return The Fault in my Stars (by: 20 Aug 2021)
 3. [E][X] John's Birthday Party (at: Next Sunday)
+No Action Provided: Command 'todo' requires a task action
+Please try again
+No Action Provided: Command 'event' requires a task action
+Please try again
+No Action Provided: Command 'deadline' requires a task action
+Please try again
+No Time Provided: Command 'event' requires a time to be specified. Use /at to specify a time.
+Please try again
+No Time Provided: Command 'deadline' requires a deadline to be specified. Use /by to specify a deadline.
+Please try again
+Got it. I've added this task: 
+	 [T][ ] Error Handling 
+Now you have 4 task in the list.
+Here are the tasks in your list:
+1. [T][X] borrow The Fault in my Stars
+2. [D][X] return The Fault in my Stars (by: 20 Aug 2021)
+3. [E][X] John's Birthday Party (at: Next Sunday)
+4. [T][ ] Error Handling
+Invalid Input: command 'done' require an integer as the second parameter
+Please try again
+Nice! I've marked this task as done:
+[T][X] Error Handling
+This task is already completed.
 Bye. Hope to see you again!

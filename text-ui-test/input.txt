@@ -8,5 +8,15 @@ done 1
 done 2
 done 3
 list
+todo
+event
+deadline
+event Dance Lesson
+deadline Submit iP
+todo Error Handling
+list
+done hi
+done 4
+done 4
 bye
 list
