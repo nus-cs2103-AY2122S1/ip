@@ -69,8 +69,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-
+    public static void showIntro() {
         String dory = "      _\n"
                 + "     | |\n"
                 + "   __| |   ___    _ __   _   _\n"
@@ -94,7 +93,6 @@ public class Duke {
                 + "       to mark it as done\n"
                 + " >";
 
-
         String fish = "                              ....\n"
                 + "                             /.... \\\n"
                 + "   hi my name is dory    .-`\\ \\   `...')\n"
@@ -103,10 +101,11 @@ public class Duke {
                 + "                             `\\___\\";
 
         // introduction to chat bot
-
         System.out.println(fish);
         System.out.println(dory);
+    }
 
+    public static void startChatBot() throws DukeException {
         // creates a new Scanner instance
         // System.in is the keyboard input
         Scanner input = new Scanner(System.in);
@@ -114,7 +113,6 @@ public class Duke {
         // arraylist to save the user's tasks
         ArrayList<Task> tasks = new ArrayList<>();
 
-        // returns true if the scanner has another input
         while (input.hasNextLine()) {
             // reads user input and modifies it to lower case
             String beforeEdit = input.nextLine();
@@ -153,32 +151,48 @@ public class Duke {
 
             } else {
                 // add the task to the arraylist of tasks
-
                 if (nextInput.contains("todo")) {
-                    String updatedTask = nextInput.replace("todo ", "");
+                    String updatedTask = nextInput.replace("todo", "").trim();
+                    if (updatedTask.isBlank()) {
+                        throw new ToDoException("please add a description to your todo task");
+                    }
+                    System.out.println("adding " + nextInput + " final : " + updatedTask);
                     ToDos toDoTask = new ToDos(updatedTask);
                     tasks.add(toDoTask);
                     System.out.println(" > added:");
                     System.out.println("    " + toDoTask.toString());
 
                 } else if (nextInput.contains("deadline")) {
-                    String updatedTask = nextInput.replace("deadline ", "");
+                    String updatedTask = nextInput.replace("deadline", "").trim();
+                    if (updatedTask.isBlank()) {
+                        throw new DeadLineException("please add a description to your deadline task");
+                    }
+
                     String deadlineToAdd = updatedTask.split("/by ")[0].trim();
                     String finishBy = updatedTask.split("/by ")[1].trim();
+
                     Deadlines deadlineTask = new Deadlines(deadlineToAdd, finishBy);
                     tasks.add(deadlineTask);
                     System.out.println(" > added:");
                     System.out.println("    " + deadlineTask.toString());
 
                 } else if (nextInput.contains("event")) {
-                    String updatedTask = nextInput.replace("event ", "");
+                    String updatedTask = nextInput.replace("event ", "").trim();
+                    if (updatedTask.isBlank()) {
+                        throw new EventException("please add a description to your event");
+                    }
+
                     String eventToAdd = updatedTask.split("/at ")[0].trim();
                     String dateOfEvent = updatedTask.split("/at ")[1].trim();
+
                     Events eventTask = new Events(eventToAdd, dateOfEvent);
                     tasks.add(eventTask);
                     System.out.println(" > added:");
                     System.out.println("    " + eventTask.toString());
 
+                } else {
+                    throw new DukeException("i'm not sure i know what you mean :-( try typing something " +
+                            "using 'todo', 'deadline' or 'event'");
                 }
 
                 if (tasks.size() == 1) {
@@ -193,4 +207,14 @@ public class Duke {
             }
         }
     }
+
+    public static void main(String[] args) throws DukeException {
+        // displays logo and instructions
+        showIntro();
+
+        // starts scanner and listens for input
+        startChatBot();
+    }
+
 }
+
