@@ -56,6 +56,8 @@ public class Duke {
         return s.toString();
     }
 
+
+
     public static String printList(ArrayList<Task> lst) {
         StringBuilder s = new StringBuilder();
         s.append("    ____________________________________________________________\n");
@@ -68,12 +70,29 @@ public class Duke {
     }
 
     public static String addList(String input, ArrayList<Task> lst) {
+        String type = input.split(" ", 2)[0];
+        String content;
+        try {
+            content = input.split(" ", 2)[1];
+        } catch (IndexOutOfBoundsException e) {
+            return "The description of a todo cannot be empty.";
+        }
+
+        if (type.equals("todo")) {
+            lst.add(new Todo(content));
+        } else if (type.equals("deadline")) {
+            lst.add(new Deadline(content.split(" /by ")[0], content.split( " /by ")[1]));
+        } else if (type.equals("event")) {
+            lst.add(new Event(content.split(" /at ")[0], content.split(" /at ")[1]));
+        } else {
+            return "I'm sorry, but I don't know what that means :-(";
+        }
+
         String output = "    ____________________________________________________________\n"
-                + "     added:" + input +"\n"
-
+                + "     Got it. I've added this task: \n"
+                + "      " + lst.get(lst.size() - 1).toString() + "\n"
+                + "     Now you have " + lst.size() +" tasks in the list. \n"
                 + "    ____________________________________________________________\n";
-        lst.add(new Task(input));
-
         return output;
     }
 
@@ -83,6 +102,4 @@ public class Duke {
                 + "    ____________________________________________________________\n";
         return output;
     }
-
-
 }
