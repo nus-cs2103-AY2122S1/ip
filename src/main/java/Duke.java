@@ -5,30 +5,39 @@ public class Duke {
     private static final Scanner sc = new Scanner(System.in);
     private static final TaskList list = new TaskList();
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         greet();
         while (true) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) break;
-            else if (input.equals("list")) echo(list.toString());
-            else if (input.contains("done")) {
-                input = input.substring(5);
-                int index = Integer.parseInt(input);
-                done(index);
+            try {
+                String input = sc.nextLine();
+                if (input.equals("bye")) break;
+                else if (input.equals("list")) echo(list.toString());
+                else if (input.contains("done")) {
+                    String[] parseInput = input.split(" ");
+                    if (parseInput.length <= 1) throw new DukeException("OOPS!!! You need to indicate a task for me to mark as done.");
+                    int index = Integer.parseInt(parseInput[1]);
+                    if (index <= 0 || index > list.size()) throw new DukeException("OOPS!!! Looks like there is no such task to be marked as done");
+                    done(index);
+                } else if (input.contains("todo")) {
+                    if (input.length() <= 4) throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    input = input.substring(5);
+                    add(new ToDo(input));
+                } else if (input.contains("deadline")) {
+                    if (input.length() <= 8) throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                    input = input.substring(9);
+                    String[] parsedInput = input.split(" /by ");
+                    if (parsedInput.length <= 1) throw new DukeException("OOPS!!! You need to provide a /by date");
+                    add(new Deadline(parsedInput[0], parsedInput[1]));
+                } else if (input.contains("event")) {
+                    if (input.length() <= 5) throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+                    input = input.substring(6);
+                    String[] parsedInput = input.split(" /at ");
+                    if (parsedInput.length <= 1) throw new DukeException("OOPS!!! you need to provide a /at date");
+                    add(new Event(parsedInput[0], parsedInput[1]));
+                } else throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (DukeException ex) {
+                echo(ex.getMessage());
             }
-            else if (input.contains("todo")) {
-                input = input.substring(5);
-                add(new ToDo(input));
-            } else if (input.contains("deadline")) {
-                input = input.substring(9);
-                String[] parsedInput = input.split(" /by ");
-                add(new Deadline(parsedInput[0], parsedInput[1]));
-            } else if (input.contains("event")) {
-                input = input.substring(6);
-                String[] parsedInput = input.split(" /at ");
-                add(new Event(parsedInput[0], parsedInput[1]));
-            }
-            else throw new Exception();
         }
         exit();
     }
@@ -62,10 +71,11 @@ public class Duke {
 
     private static void add(Task task) {
         list.addTask(task);
-        int len = list.getLen();
-        String message = len <= 1 ?
-                String.format("Got it. I've added this task:\n  %s\nNow you have %d task in the list.", task.toString(), len) :
-                String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task.toString(), len);
+        int len = list.size();
+        String message = String.format("Got it. I've added this task:\n  %s\nNow you have %d %s in the list.",
+                task.toString(),
+                len,
+                len <= 1 ? "task" : "tasks");
         echo(message);
     }
 

@@ -12,7 +12,7 @@ public class TaskList {
         return list.get(index - 1).markAsDone();
     }
 
-    public int getLen() {
+    public int size() {
         return list.size();
     }
 
