@@ -1,10 +1,27 @@
-hi
-go
-add
-byedoajd
-bye duke
-bye.
 list
-blah
-Bye
-hi again
+todo read book
+deadline return book /by June 6th
+Event project meeting /at Aug 6th 2-4pm
+todo join sports club
+tod test run
+done 1
+done 4
+todo borrow book
+list
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+list
+event typing code /at 
+deadline what ds /by
+todo
+done
+deadline
+event
+done 11
+done1
+done 1
+huh
+what
+blahh
+list
+done wh

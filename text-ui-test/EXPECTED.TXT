@@ -9,39 +9,154 @@ Hello from
      Hi! I am Duke!
      What can I do for you?
      _______________________________________________________
-hi
+list
      _______________________________________________________
-     hi
+     The current list has these items:
+     There are no items in your list, keep adding them!
      _______________________________________________________
-go
+todo read book
      _______________________________________________________
-     go
+     Successfully added:
+     [T][ ] read book 
      _______________________________________________________
-add
+deadline return book /by June 6th
      _______________________________________________________
-     add
+     Successfully added:
+     [D][ ] return book (by: June 6th)
      _______________________________________________________
-byedoajd
+Event project meeting /at Aug 6th 2-4pm
      _______________________________________________________
-     byedoajd
+     Successfully added:
+     [E][ ] project meeting (at: Aug 6th 2-4pm)
      _______________________________________________________
-bye duke
+todo join sports club
      _______________________________________________________
-     bye duke
+     Successfully added:
+     [T][ ] join sports club 
      _______________________________________________________
-bye.
+tod test run
      _______________________________________________________
-     bye.
+     Invalid input :(
+     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     _______________________________________________________
+done 1
+     _______________________________________________________
+     Well done! The task is completed!
+       [X] read book 
+     _______________________________________________________
+done 4
+     _______________________________________________________
+     Well done! The task is completed!
+       [X] join sports club 
+     _______________________________________________________
+todo borrow book
+     _______________________________________________________
+     Successfully added:
+     [T][ ] borrow book 
      _______________________________________________________
 list
      _______________________________________________________
-     list
+     The current list has these items:
+     1.[T][X] read book 
+     2.[D][ ] return book (by: June 6th)
+     3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+     4.[T][X] join sports club 
+     5.[T][ ] borrow book 
+     There are 5 tasks now, keep up!
      _______________________________________________________
-blah
+deadline return book /by Sunday
      _______________________________________________________
-     blah
+     Successfully added:
+     [D][ ] return book (by: Sunday)
      _______________________________________________________
-bye
+event project meeting /at Mon 2-4pm
      _______________________________________________________
-     Bye. Hope to see you again soon!
+     Successfully added:
+     [E][ ] project meeting (at: Mon 2-4pm)
+     _______________________________________________________
+list
+     _______________________________________________________
+     The current list has these items:
+     1.[T][X] read book 
+     2.[D][ ] return book (by: June 6th)
+     3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+     4.[T][X] join sports club 
+     5.[T][ ] borrow book 
+     6.[D][ ] return book (by: Sunday)
+     7.[E][ ] project meeting (at: Mon 2-4pm)
+     There are 7 tasks now, keep up!
+     _______________________________________________________
+event typing code /at 
+     _______________________________________________________
+     Oh no, date is missing :(
+     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     _______________________________________________________
+deadline what ds /by
+     _______________________________________________________
+     Uh oh, deadline is missing :(
+     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     _______________________________________________________
+todo
+     _______________________________________________________
+     Oops, you have left out the task description!
+     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     _______________________________________________________
+done
+     _______________________________________________________
+     Please input index :)
+     _______________________________________________________
+deadline
+     _______________________________________________________
+     Oops, you have left out the task description!
+     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     _______________________________________________________
+event
+     _______________________________________________________
+     Oops, you have left out the task description!
+     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     _______________________________________________________
+done 11
+     _______________________________________________________
+     You must've forgotten, please input index :)
+     _______________________________________________________
+done1
+     _______________________________________________________
+     Invalid input :(
+     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     _______________________________________________________
+done 1
+     _______________________________________________________
+     You have already completed this task before!
+       [X] read book 
+     _______________________________________________________
+huh
+     _______________________________________________________
+     Invalid input :(
+     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     _______________________________________________________
+what
+     _______________________________________________________
+     Invalid input :(
+     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     _______________________________________________________
+blahh
+     _______________________________________________________
+     Invalid input :(
+     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     _______________________________________________________
+list
+     _______________________________________________________
+     The current list has these items:
+     1.[T][X] read book 
+     2.[D][ ] return book (by: June 6th)
+     3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+     4.[T][X] join sports club 
+     5.[T][ ] borrow book 
+     6.[D][ ] return book (by: Sunday)
+     7.[E][ ] project meeting (at: Mon 2-4pm)
+     There are 7 tasks now, keep up!
+     _______________________________________________________
+done wh
+     _______________________________________________________
+     Please use a number instead :(
      _______________________________________________________
