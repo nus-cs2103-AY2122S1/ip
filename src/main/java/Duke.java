@@ -1,10 +1,35 @@
 import java.util.*;
 
 public class Duke {
+
+    // This class represents the tasks added by the user
+    public class Task {
+        protected String description;
+        protected boolean isDone;
+
+        public Task(String description) {
+            this.description = description;
+            this.isDone = false;
+        }
+
+        public String getStatusIcon() {
+            return (isDone ? "X" : " "); // mark done task with X
+        }
+
+        public void markAsDone() {
+            this.isDone = true;
+        }
+
+        public String toString() {
+            return this.description;
+        }
+    }
+
+
     public static void main(String[] args) {
         String linebreak = "~~~~~~~~~~";
         String command; // this is the container for the command received from the user
-        String[] todoList = new String[100]; // this array stores previous commands
+        Task[] todoList = new Task[100]; // this array stores previous commands
         int pointer = 0; // this tracks the newest position to add an item in todoList
 
         // The chat bot name is Notaro bc it's Not-a-ro-bot :>
