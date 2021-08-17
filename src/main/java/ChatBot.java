@@ -60,7 +60,10 @@ public class ChatBot {
         return isToDo;
     }
 
-    private void todoSeq(String str) {
+    private void todoSeq(String str) throws InputError {
+        if (str.length() == 4 ) {
+            throw new InputError("Description Please!");
+        }
         System.out.println("Alrighty! I have added this task:");
         list[lastIndex] = new ToDo(str.substring(5));
         System.out.println("   " + list[lastIndex].printTask());
@@ -76,7 +79,10 @@ public class ChatBot {
         return isDeadLine;
     }
 
-    private void deadlineSeq(String str) {
+    private void deadlineSeq(String str) throws InputError {
+        if (str.length() == 8 ) {
+            throw new InputError("Description Please!");
+        }
         System.out.println("Alrighty! I have added this task:");
         list[lastIndex] = new Deadline(str.substring(9, str.indexOf("/")), str.substring(str.indexOf("/") + 4));
         System.out.println("   " + list[lastIndex].printTask());
@@ -92,16 +98,20 @@ public class ChatBot {
         return isEvent;
     }
 
-    private void eventSeq(String str) {
-        System.out.println("Alrighty! I have added this task:");
-        list[lastIndex] = new Event(str.substring(6, str.indexOf("/")), str.substring(str.indexOf("/") + 4));
-        System.out.println("   " + list[lastIndex].printTask());
-        lastIndex++;
-        System.out.println("Now you have " + lastIndex + " task(s) in total!");
+    private void eventSeq(String str) throws InputError {
+        if (str.length() == 5 ) {
+            throw new InputError("Description Please!");
+        } else {
+            System.out.println("Alrighty! I have added this task:");
+            list[lastIndex] = new Event(str.substring(6, str.indexOf("/")), str.substring(str.indexOf("/") + 4));
+            System.out.println("   " + list[lastIndex].printTask());
+            lastIndex++;
+            System.out.println("Now you have " + lastIndex + " task(s) in total!");
+        }
     }
 
 
-    private void startInput() {
+    private void startInput() throws InputError {
         Scanner userInput = new Scanner(System.in);
         String input = userInput.nextLine();
         boolean doneInput = checkDone(input);
@@ -121,21 +131,38 @@ public class ChatBot {
             }
         } else if (doneInput) {                                              //done input
             doneSeq(input);
-        } else if (todoInput){
-            todoSeq(input);
+        } else if (todoInput) {
+            try {
+                todoSeq(input);
+            } catch (InputError e) {
+                System.out.println("Here is the error boss. " + e);
+            }
         } else if (deadlineInput) {
-            deadlineSeq(input);
+            try {
+                deadlineSeq(input);
+            } catch (InputError e) {
+                System.out.println("Here is the error boss. " + e);
+            }
         } else if (eventInput) {
-            eventSeq(input);
+            try {
+                eventSeq(input);
+            } catch (InputError e) {
+                System.out.println("Here is the error boss. " + e);
+            }
         } else {
-            System.out.println("I'm not too sure what you meant.");
-            System.out.println("Try again with these keywords.");
-            System.out.println("todo deadline event");
+            try {
+                throw new InputError("Invalid Input");
+            } catch (InputError e) {
+                System.out.println("Here is the error boss. " + e);
+                System.out.println("I'm not too sure what you meant.");
+                System.out.println("Try again with these keywords.");
+                System.out.println("todo deadline event");
+            }
         }
         startInput();
     }
 
-    void welcomeSeq() {
+    void welcomeSeq() throws InputError {
         System.out.println(this.welcomeMessage());
         startInput();
     }
