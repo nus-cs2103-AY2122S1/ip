@@ -10,20 +10,19 @@ Got it. I've added this task:
   [D][ ] return The Fault in my Stars (by: 20 Aug 2021) 
 Now you have 2 task in the list.
 Got it. I've added this task:
-	 [E][ ] John's Birthday Party  (at:  Next Sunday)
+	 [E][ ] John's Birthday Party (at: Next Sunday)
 Now you have 3 task in the list.
 Here are the tasks in your list:
 1. [T][X] borrow The Fault in my Stars
 2. [D][ ] return The Fault in my Stars (by: 20 Aug 2021)
-3. [E][ ] John's Birthday Party  (at:  Next Sunday)
-Nice! I've marked this task as done:
-[T][X] borrow The Fault in my Stars
+3. [E][ ] John's Birthday Party (at: Next Sunday)
+This task is already completed.
 Nice! I've marked this task as done:
 [D][X] return The Fault in my Stars (by: 20 Aug 2021)
 Nice! I've marked this task as done:
-[E][X] John's Birthday Party  (at:  Next Sunday)
+[E][X] John's Birthday Party (at: Next Sunday)
 Here are the tasks in your list:
 1. [T][X] borrow The Fault in my Stars
 2. [D][X] return The Fault in my Stars (by: 20 Aug 2021)
-3. [E][X] John's Birthday Party  (at:  Next Sunday)
+3. [E][X] John's Birthday Party (at: Next Sunday)
 Bye. Hope to see you again!

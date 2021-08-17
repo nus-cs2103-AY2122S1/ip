@@ -7,6 +7,10 @@ public class Task {
         this.isCompleted = false;
     }
 
+    public boolean isComplete() {
+        return this.isCompleted;
+    }
+
     public void complete() {
         this.isCompleted = true;
     }
