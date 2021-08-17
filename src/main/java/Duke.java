@@ -14,14 +14,23 @@ public class Duke {
         }
         System.out.println();
 
+        String[] listOfInput = new String[100];
+        int count = 0;
+
         Scanner in = new Scanner(System.in);
         while (in.hasNext()) {
             String input = in.nextLine();
-            if (!input.equals("bye")) {
-                System.out.println(input);
-            } else {
+            if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
+            } else if (input.equals("list")) {
+                for (int i = 0; i < count; i++) {
+                    System.out.println((i + 1) + ". " + listOfInput[i]);
+                }
+            } else {
+                System.out.println("added: " + input);
+                listOfInput[count] = input;
+                count++;
             }
         }
         in.close();
