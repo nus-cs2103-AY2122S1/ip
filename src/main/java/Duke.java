@@ -1,7 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+
 public class Duke {
-    public static ArrayList<String> list = new ArrayList<String> ();
+    public static ArrayList<Task> list = new ArrayList<Task> ();
 
     public static void main(String[] args) {
         echo();
@@ -17,14 +18,22 @@ public class Duke {
             if (s.equals("list")) {
                 int index = 1;
                 System.out.println("---------");
-                for (String item : list) {
-                    System.out.println(index + ". " + item);
+                for (Task item : list) {
+                    System.out.println(index + ". " + item.toString());
                     index++;
                 }
                 System.out.println("---------");
+            } else if (s.contains("done")) {
+                int index = Integer.parseInt(s.split(" ")[1]) - 1;
+                list.get(index).setStatus(true);
+
+                System.out.println("---------");
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println(list.get(index));
+                System.out.println("---------");
             } else {
                 System.out.println("---------");
-                list.add(s);
+                list.add(new Task(s));
                 System.out.println("added: " + s);
                 System.out.println("---------");
             }
