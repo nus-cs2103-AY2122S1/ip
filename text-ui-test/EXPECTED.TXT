@@ -8,20 +8,25 @@ Hello from
      --------------------
      Got it. I've added this task:
        [T][] make personal website
+     Now you have 1 tasks in the list.
      --------------------
      --------------------
      Got it. I've added this task:
        [D][] ip stuff (by: 19 aug or something)
+     Now you have 2 tasks in the list.
      --------------------
      --------------------
      Got it. I've added this task:
        [T][] collect merch
+     Now you have 3 tasks in the list.
      --------------------
      --------------------
      Got it. I've added this task:
        [E][] birthday (at: secret)
+     Now you have 4 tasks in the list.
      --------------------
      --------------------
+     Here are the tasks in your list:
      1. [T][] make personal website
      2. [D][] ip stuff (by: 19 aug or something)
      3. [T][] collect merch
@@ -32,6 +37,7 @@ Hello from
        [E][X] birthday (at: secret)
      --------------------
      --------------------
+     Here are the tasks in your list:
      1. [T][] make personal website
      2. [D][] ip stuff (by: 19 aug or something)
      3. [T][] collect merch
