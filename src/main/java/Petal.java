@@ -8,13 +8,13 @@ import java.util.List;
  */
 public class Petal {
 
-    //True if user has said bye, false if otherwise
+    //The line used to display on the output
+    public static final String LINE = "---------------------------------------"
+                                      + "-------------------------------------"
+                                      + "-------------------------------------";
+    //Boolean representing if the user has said bye
     private boolean bye;
-    //The protected constant for displaying the lines between messages
-    protected static final String indentation = "---------------------------------------"
-                                                + "-------------------------------------"
-                                                + "-------------------------------------";
-    //The list which stores the user's message
+    //List of user inputted tasks
     private final List<Task> tasks;
 
     /**
@@ -28,14 +28,14 @@ public class Petal {
     /**
      * Method to give the start message
      */
-    public void start() {
+    public void run() {
         Scanner scanner = new Scanner(System.in);
-        String logo = "\nWelcome to Petal (•◡•)/ ";
-        String logo2 = "\nI am the best chat bot you'll meet! Don't be shy, say something! :P\n";
-        System.out.println(indentation + logo + logo2 + indentation);
+        String logo = "Welcome to Petal (•◡•)/ ";
+        String logo2 = "\nI am the best chat bot you'll meet! Don't be shy, say something! :P";
+        printMessage(logo + logo2);
         while (!bye) {
             String message = scanner.nextLine();
-            formatMessage(message.trim().toLowerCase());
+            handleInput(message.trim().toLowerCase());
         }
         scanner.close();
     }
@@ -44,11 +44,12 @@ public class Petal {
      * Method that formats the message to be displayed
      * @param message User input
      */
-    public void formatMessage(String message) {
-        //Allows user to type in upper case and removes leading/trailing whitespaces
-        String[] msg = message.split(" ");
+    public void handleInput(String message) {
+        message += " "; //So blank inputs can be handled
+        String command = message.substring(0, message.indexOf(" "));
+        String formatted = message.substring(message.indexOf(' ') + 1).trim();
         try {
-            switch (msg[0]) { //Checks first word in string
+            switch (command) { //Checks first word in string
                 case "list":
                     printList();
                     break;
@@ -56,33 +57,27 @@ public class Petal {
                     goodBye();
                     break;
                 case "done":
-                    markTaskAsDone(message.substring(message.indexOf(' ') + 1).trim());
+                    markTaskAsDone(formatted);
                     break;
                 case "delete":
-                    deleteTask(message.substring(message.indexOf(' ') + 1).trim());
+                    deleteTask(formatted);
                     break;
                 case "todo":
-                    message += " "; //To allow empty desc to be taken as substring
-                    handleTasks("todo", message.substring(message.indexOf(' ') + 1).trim());
+                    handleTasks("todo", formatted);
                     break;
                 case "deadline":
-                    handleTasks("deadline", message.substring(message.indexOf(' ') + 1).trim());
+                    handleTasks("deadline", formatted);
                     break;
                 case "event":
-                    handleTasks("event", message.substring(message.indexOf(' ') + 1).trim());
+                    handleTasks("event", formatted);
                     break;
                 default: //All messages here do not meet the required format or are unintelligible
-                    wrongFormat();
-                    break;
+                    throw new InvalidInputException("I do not understand what you mean :(");
             }
         } catch (PetalException e) {
-            System.out.println(indentation + "\n" + e.getMessage());
+            printMessage(e.getMessage());
             requiredFormat();
         }
-    }
-
-    public void wrongFormat() throws InvalidInputException {
-        throw new InvalidInputException("I do not understand what you mean :(\n");
     }
 
     /**
@@ -93,10 +88,10 @@ public class Petal {
         String deadline = "\nUse 'deadline <insert activity> /by <insert deadline>' "
                           + "to create an activity with a deadline!";
         String event = "\nUse 'event <insert activity> /at <insert start/end time>' "
-                          + "to create an activity with a start/end time!";
+                       + "to create an activity with a start/end time!";
         String delete = "\nUse 'delete <insert task number> to delete a task!";
-        String done = "\nUse 'done <insert task number>' to mark task as done!\n";
-        System.out.println(todo + deadline + event + delete + done + indentation);
+        String done = "\nUse 'done <insert task number>' to mark task as done!";
+        printMessage(todo + deadline + event + delete + done);
     }
 
     /**
@@ -111,11 +106,11 @@ public class Petal {
         String[] deadlineEvent = type.equals("deadline") ? message.split("/by")
                                                          : message.split("/at");
         if (message.isBlank() || deadlineEvent[0].isBlank()) {
-            throw new EmptyDescException("The description cannot be empty! Enter a valid one! :(\n");
+            throw new EmptyDescException("The description cannot be empty! Enter a valid one! :(");
         }
         //No time given or the command /by or /at wasn't given by the user
         if ((type.equals("deadline") || type.equals("event")) && deadlineEvent.length < 2) {
-            throw new InvalidInputException("The format used was wrong! Try again :(\n");
+            throw new InvalidInputException("The format used was wrong! Try again :(");
         }
         switch (type) {
             case "todo":
@@ -137,10 +132,9 @@ public class Petal {
      */
     public void addTask(Task task) {
         tasks.add(task);
-        System.out.println(indentation + "\nOkay. I've added this task:\n"
-                                       + task
-                                       + "\nYou now have " + tasks.size() + " task(s)!\n"
-                                       + indentation);
+        printMessage("Okay. I've added this task:\n"
+                          + task
+                          +"\nYou now have " + tasks.size() + " task(s)!");
     }
 
     /**
@@ -155,14 +149,13 @@ public class Petal {
             int indexOfTask = Integer.parseInt(index) - 1;
             Task toBeDeleted = tasks.get(indexOfTask);
             tasks.remove(indexOfTask);
-            System.out.println(indentation + "\nOkay. I've deleted this task:\n"
-                                           + toBeDeleted
-                                           + "\nYou now have " + tasks.size() + " task(s)!\n"
-                                           + indentation);
+            printMessage("Okay. I've deleted this task:\n"
+                                + toBeDeleted
+                                + "\nYou now have " + tasks.size() + " task(s)!");
         } catch (ArrayIndexOutOfBoundsException e) { //No task number given
-            throw new EmptyDescException("No task number given! Please enter a valid index!\n", e);
+            throw new EmptyDescException("No task number given! Please enter a valid index!", e);
         } catch (NumberFormatException | IndexOutOfBoundsException e) { //Invalid task number
-            throw new InvalidInputException("Invalid task number given! Please enter another value!\n", e);
+            throw new InvalidInputException("Invalid task number given! Please enter another value!", e);
         }
     }
 
@@ -171,8 +164,7 @@ public class Petal {
      */
     public void goodBye() {
         bye = true;
-        System.out.println(indentation + "\nYou're leaving :( I hope you return soon!\n"
-                + indentation);
+        printMessage("You're leaving :( I hope you return soon!");
     }
 
     /**
@@ -181,13 +173,13 @@ public class Petal {
      */
     public void printList() throws InvalidInputException {
         if (tasks.size() == 0)
-            throw new InvalidInputException("No items in list yet!\n");
+            throw new InvalidInputException("No items in list yet!");
         int count = 1;
-        System.out.println(indentation);
+        String list = "Here you are :D";
         for (Task m : tasks) {
-            System.out.println(count++ + ". " + m);
+            list += "\n" + count++ + ". " + m ;
         }
-        System.out.println(indentation);
+        printMessage(list);
     }
 
     /**
@@ -202,13 +194,21 @@ public class Petal {
             taskToBeCompleted.taskDone();
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             //Parsed string is not within size of history or no index given
-            throw new InvalidInputException("That was an invalid index! Please try again!\n", e);
+            throw new InvalidInputException("That was an invalid index! Please try again!", e);
         }
+    }
+
+    /**
+     * Method to add the indentation to the message
+     * @param message Message to be printed
+     */
+    public void printMessage(String message) {
+        System.out.println(LINE + "\n" + message + "\n" + LINE);
     }
 
     public static void main(String[] args) {
         Petal petal = new Petal();
-        petal.start();
+        petal.run();
     }
 }
 

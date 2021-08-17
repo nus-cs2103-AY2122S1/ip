@@ -24,7 +24,8 @@ You now have 4 task(s)!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 The description cannot be empty! Enter a valid one! :(
-
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 Use 'todo <insert activity>' to create a to-do!
 Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
 Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
@@ -33,7 +34,8 @@ Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 The format used was wrong! Try again :(
-
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 Use 'todo <insert activity>' to create a to-do!
 Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
 Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
@@ -42,7 +44,8 @@ Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 The format used was wrong! Try again :(
-
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 Use 'todo <insert activity>' to create a to-do!
 Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
 Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
@@ -50,8 +53,9 @@ Use 'delete <insert task number> to delete a task!
 Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-The format used was wrong! Try again :(
-
+The description cannot be empty! Enter a valid one! :(
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 Use 'todo <insert activity>' to create a to-do!
 Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
 Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
@@ -59,8 +63,9 @@ Use 'delete <insert task number> to delete a task!
 Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
-The format used was wrong! Try again :(
-
+The description cannot be empty! Enter a valid one! :(
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 Use 'todo <insert activity>' to create a to-do!
 Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
 Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
@@ -84,6 +89,7 @@ You have completed the task: 'Listening to music'!
 I am so happy for you!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
+Here you are :D
 1. [D][X] Go for a jog (by: 8pm today)
 2. [D][X] Use a computer (by: 7pm tomorrow)
 3. [E][X] Using a pc (at: 8pm tonight till 7pm tomorrow)
@@ -106,7 +112,8 @@ You now have 7 task(s)!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 The format used was wrong! Try again :(
-
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 Use 'todo <insert activity>' to create a to-do!
 Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
 Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
@@ -115,7 +122,8 @@ Use 'done <insert task number>' to mark task as done!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 The format used was wrong! Try again :(
-
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 Use 'todo <insert activity>' to create a to-do!
 Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
 Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!

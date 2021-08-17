@@ -3,7 +3,7 @@
  * by the user to track a certain activity and may have
  * start/end timings.
  */
-public class Task {
+public abstract class Task {
 
     //The description of the task
     protected String description;
@@ -28,13 +28,13 @@ public class Task {
     }
 
     /**
-     * A method to sets a task as done
+     * Method to set a task as done
      */
     public void taskDone() {
-        System.out.println(Petal.indentation + "\nYou have completed the task: " + "'"
-                                             + this.description + "'!"
-                                             + "\nI am so happy for you!\n"
-                                             + Petal.indentation);
+        System.out.println(Petal.LINE + "\nYou have completed the task: " + "'"
+                                      + this.description + "'!"
+                                      + "\nI am so happy for you!\n"
+                                      + Petal.LINE);
         this.isDone = true;
     }
 
