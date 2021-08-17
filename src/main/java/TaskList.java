@@ -27,6 +27,7 @@ public class TaskList {
         this.printSize();
     }
 
+
     public void toggleDone(int index) {
         try {
             boolean result = tasks.get(index - 1).toggleDone();
@@ -35,7 +36,18 @@ public class TaskList {
                     : Display.OUTPUT_DISPLAY + "Duke-san marked this task as not done!");
             System.out.println(Display.OUTPUT_SPACES + tasks.get(index - 1));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("There's no task at index " + (index - 1) + "!!");
+            System.out.println("There's no task at index " + index + "!!");
+        }
+    }
+
+    public void delete(int index) {
+        try {
+            Task removed = tasks.remove(index - 1);
+            System.out.println(Display.OUTPUT_DISPLAY + "Noted. I've removed this task:");
+            System.out.println(Display.OUTPUT_SPACES + removed);
+            this.printSize();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("There's no task at index " + index + "!!");
         }
     }
 
