@@ -50,13 +50,21 @@ public class Duke {
         taskList.add(new Event(item, at));
     }
 
-    private static void done(int index) {
+    private static void validateTaskIndex(int index) throws IrisException {
+        if (index <= 0) throw new IrisException("Please enter a valid task index.");
+        int count = taskList.size();
+        if (index > count) throw new IrisException(String.format("Your task list only has %d items", count));
+    }
+
+    private static void done(int index) throws IrisException {
+        validateTaskIndex(index);
         Task task = taskList.get(index - 1);
         task.markComplete();
         say(String.format("Good job! I've marked this task as done: %s", task));
     }
 
-    private static void delete(int index) {
+    private static void delete(int index) throws IrisException {
+        validateTaskIndex(index);
         Task task = taskList.get(index - 1);
         taskList.remove(index - 1);
         int count = taskList.size();
@@ -64,7 +72,6 @@ public class Duke {
         say(task.toString(), false);
         say(String.format("Now you have %d %s in the list.",
                 count, count == 1 ? "task" : "tasks"), false);
-
     }
 
     private static void listTasks() {
@@ -76,9 +83,18 @@ public class Duke {
     private static String getMetadata(String command) throws IrisException {
         String[] splitted = command.split(" ", 2);
         if (splitted.length == 1 || splitted[1].equals("")) {
+            // TODO: make this error message more specific?
             throw new IrisException("The description cannot be empty");
         } else {
             return splitted[1];
+        }
+    }
+
+    private static int parseInt(String text) throws IrisException {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException exception) {
+            throw new IrisException("Please enter a valid integer");
         }
     }
 
@@ -86,18 +102,20 @@ public class Duke {
         if (command.equals("list")) {
             listTasks();
         } else if (command.startsWith("done")) {
-            done(Integer.parseInt(getMetadata(command)));
+            done(parseInt(getMetadata(command)));
         } else if (command.startsWith("delete")) {
-            delete(Integer.parseInt(getMetadata(command)));
+            delete(parseInt(getMetadata(command)));
         } else if (command.startsWith("todo")) {
             addTodo(getMetadata(command));
             sayTaskAdded();
         } else if (command.startsWith("deadline")) {
             String[] splitted = getMetadata(command).split(" /by ");
+            if (splitted.length != 2) throw new IrisException("deadline should have 2 arguments: a name and a time");
             addDeadline(splitted[0], splitted[1]);
             sayTaskAdded();
         } else if (command.startsWith("event")) {
             String[] splitted = getMetadata(command).split(" /at ");
+            if (splitted.length != 2) throw new IrisException("event should have 2 arguments: a name and a time");
             addEvent(splitted[0], splitted[1]);
             sayTaskAdded();
         } else {
