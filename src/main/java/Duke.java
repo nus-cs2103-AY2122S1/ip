@@ -43,9 +43,11 @@ public class Duke {
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 displayList();
+
             } else if (userInput.startsWith("done")) {
                 String taskId = userInput.substring(4).trim();
                 markTaskAsDone(taskId);
+
             } else {
                 addToList(userInput);
             }
@@ -61,13 +63,13 @@ public class Duke {
         System.out.println(LINE_SPLIT + '\n');
     }
 
-    public static void addToList(String action) {
+    public static void addToList(String description) {
         if (TODO_LIST.size() == MAX_STORAGE) {
             echo("unable to add: max storage in your list");
             return;
         }
 
-        Task newTask = new Task(action);
+        Task newTask = new Task(description);
         TODO_LIST.add(newTask);
         echo("added: ".concat(newTask.getDescription()));
     }
@@ -111,6 +113,7 @@ public class Duke {
 
     public static void exit() {
         TODO_LIST.clear();
+        SCANNER.close();
         echo("Bye. Hope to see you again soon!");
     }
 }
