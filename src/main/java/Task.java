@@ -30,7 +30,7 @@ public class Task {
         this.done = done;
     }
 
-    public void setCompleted() {
+    public void markAsDone() {
         this.setDone(true);
     }
 
