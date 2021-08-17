@@ -38,9 +38,28 @@ public class Duke {
                 } else {
                     System.out.println("Invalid task number to mark as done");
                 }
+            } else if (input.startsWith("todo")) {
+                Todo todo = new Todo(input);
+                System.out.println("Got it. I've added this task:\n  " + todo.toString());
+                savedInputs.add(todo);
+                System.out.println("Now you have " + savedInputs.size() + " tasks tin the list.");
+            } else if (input.startsWith("deadline")) {
+                String by = input.split(" /by ")[1];
+                String description = input.split(" /by ")[0].substring(9);
+
+                Deadline deadline = new Deadline(description, by);
+                System.out.println("Got it. I've added this task:\n  " + deadline.toString());
+                savedInputs.add(deadline);
+                System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
+            } else if (input.startsWith("event")) {
+                String at = input.split(" /at ")[1];
+                String description = input.split(" /at ")[0].substring(6);
+
+                Event event = new Event(description, at);
+                System.out.println("Got it. I've added this task:\n  " + event.toString());
+                savedInputs.add(event);
+                System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
             } else {
-                System.out.println(input);
-                savedInputs.add(new Task(input));
             }
         }
     }
