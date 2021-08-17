@@ -1,7 +1,12 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String taskType;
 
+    protected Task() {
+        this.description = "NONE";
+        this.isDone = false;
+    }
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -21,6 +26,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return description;
+        return String.format("[%s][%s] %s", this.taskType, this.getStatusIcon(), this.description);
     }
 }
