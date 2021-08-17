@@ -14,6 +14,7 @@ public class CommandManager {
         addSpace();
         System.out.println("Program exiting... \nBye. Hope to see you again soon!\n");
     }
+
     /**
      * Print all available tasks on the array list
      * @param taskList: List of tasks
@@ -27,6 +28,12 @@ public class CommandManager {
         addSpace();
         enterCommand();
     }
+
+    /**
+     *
+     * @param command
+     * @param taskList
+     */
     public void respondDone(String command, List<Task> taskList) {
         command = command.substring(4).replaceAll("\\s+", "");
         int position = Integer.parseInt(command) - 1;
@@ -36,32 +43,66 @@ public class CommandManager {
         respondWith("Nice! I've marked this task as done: \n" + calledTask);
         enterCommand();
     }
+
+    /**
+     *
+     * @param command
+     * @param taskList
+     */
     public void respondTodo(String command, List<Task> taskList) {
         command = command.substring(4).trim();
-        respondWith("Added: " + command);
-        taskList.add(new Todo(command));
+        Task newTask = new Todo(command);
+        taskList.add(newTask);
+        respondWith("Got it! I've added this task:\n" + newTask +
+                "\nNow you have " + taskList.size() + " tasks in the list");
         enterCommand();
     }
+
+    /**
+     *
+     * @param command
+     * @param taskList
+     */
     public void respondDeadline(String command, List<Task> taskList) {
-        command = command.substring(8).trim();
-        respondWith("Added: " + command);
-        taskList.add(new Deadline(command));
+        int time = command.lastIndexOf("/by");
+        String taskName = command.substring(8, time).trim();
+        String taskTime = command.substring(time + 3).trim();
+        Task newTask = new Deadline(taskName, taskTime);
+        taskList.add(newTask);
+        respondWith("Got it! I've added this task:\n" + newTask +
+                "\nNow you have " + taskList.size() + " tasks in the list");
         enterCommand();
     }
+
+    /**
+     *
+     * @param command
+     * @param taskList
+     */
     public void respondEvent(String command, List<Task> taskList) {
-        command = command.substring(5).trim();
-        respondWith("Added: " + command);
-        taskList.add(new Event(command));
+        int time = command.lastIndexOf("/at");
+        String taskName = command.substring(5, time).trim();
+        String taskTime = command.substring(time + 3).trim();
+        Task newTask = new Event(taskName, taskTime);
+        taskList.add(newTask);
+        respondWith("Got it! I've added this task:\n" + newTask +
+                "\nNow you have " + taskList.size() + " tasks in the list");
         enterCommand();
     }
+
+    /**
+     *
+     */
     public void defaultResponse() {
         respondWith("OOPS!!! I'm sorry, but I don't know what that means :-(");
         enterCommand();
     }
+
+
     /**
      * Add a horizontal dash line in spaces between commands
      */
-    protected void addSpace() {
+    private void addSpace() {
         for (int i = 0; i < 30; i++) {
             System.out.print("-");
         }
@@ -72,7 +113,7 @@ public class CommandManager {
      * Respond something after a command is entered
      * @param input: Entered command on terminal
      */
-    protected void respondWith(String input) {
+    private void respondWith(String input) {
         addSpace();
         System.out.println(input);
         addSpace();
@@ -81,7 +122,7 @@ public class CommandManager {
     /**
      * Buffer introduction before each command entered
      */
-    protected void enterCommand() {
+    private void enterCommand() {
         System.out.print("Enter command: ");
     }
 }

@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String taskName;
     private boolean status;
 
@@ -10,13 +10,6 @@ public class Task {
     protected void markAsCompleted() {
         this.status = true;
     }
-//
-//    protected boolean getStatus() {
-//        return this.status;
-//    }
-//    protected String getTaskName() {
-//        return this.taskName;
-//    }
 
     @Override
     public String toString() {
