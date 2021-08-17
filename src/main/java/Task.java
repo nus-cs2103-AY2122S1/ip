@@ -22,15 +22,6 @@ public class Task {
     }
 
     /**
-     * Factory method to create a new task.
-     * @param taskDescription The description of the task.
-     * @return A new task with the given task description
-     */
-    public static Task createTask(String taskDescription) {
-        return new Task(taskDescription);
-    }
-
-    /**
      * Marks a task as done.
      */
     public void markAsDone() {

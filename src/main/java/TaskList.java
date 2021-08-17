@@ -31,12 +31,23 @@ public class TaskList {
     }
 
     /**
-     * Adds a new task to the list.
+     * Adds a new task to the list
      * @param task The task description to be added.
+     * @param type The type of the task to be added.
+     * @param time The time associated with the task added.
      */
-    public void addTask(String task) {
-        Task newTask = Task.createTask(task);
-        this.tasks[taskIndex] = newTask;
+    public void addTask(String task, String type, String time) {
+        switch(type) {
+            case "deadline":
+                this.tasks[taskIndex] = new Deadline(task, time);
+                break;
+            case "event":
+                this.tasks[taskIndex] = new Event(task, time);
+                break;
+            case "todo":
+                this.tasks[taskIndex] = new Todo(task);
+                break;
+        }
         this.taskIndex++;
     }
 
@@ -47,8 +58,8 @@ public class TaskList {
         if (this.taskIndex == 0) {
             System.out.println("No tasks added yet!");
         } else {
-            for (int i = 0; i < this.taskIndex; i++) {
-                System.out.println((i + 1) + ". " + this.tasks[i]);
+            for (int i = 0; i < this.getTasksLength(); i++) {
+                System.out.println((i + 1) + "." + this.tasks[i]);
             }
         }
     }
@@ -70,5 +81,13 @@ public class TaskList {
     public String getTask(int index) {
         Task currentTask = tasks[index - 1];
         return currentTask.toString();
+    }
+
+    /**
+     * Returns the length of the current task list.
+     * @return Length of tasks.
+     */
+    public int getTasksLength() {
+        return this.taskIndex;
     }
 }
