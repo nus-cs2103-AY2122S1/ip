@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 
+/**
+ * This class encapsulates the list element that Duke uses to store tasks.
+ */
 public class TDList {
 
-    private ArrayList<String> toDoList = new ArrayList<>();
+    private ArrayList<TDLTask> toDoList = new ArrayList<>();
 
     public TDList() {
 
@@ -14,7 +17,8 @@ public class TDList {
      * @param str   Thing to add to the list.
      */
     public void tdlAdd(String str) {
-        toDoList.add(str);
+        TDLTask createdTask = new TDLTask(str);
+        toDoList.add(createdTask);
         Duke.dukeSays("added: " + str);
     }
 
@@ -28,19 +32,19 @@ public class TDList {
         String nextLine = "\n";
 
         int serialNo = 1;
-        for (String ele : toDoList) {
+        for (TDLTask ele : toDoList) {
             String endOfCurrLine = nextLine;
             if (serialNo == toDoList.size()) {
                 endOfCurrLine = "";
             }
 
-            String currLine = serialNo + ". " + ele + endOfCurrLine;
+            String currLine = serialNo + ". " + ele.getLineOfTaskInfo() + endOfCurrLine;
             printThis = printThis + currLine;
 
             serialNo++;
         }
 
-        Duke.dukeSays(printThis);
+        Duke.dukeSays("Here are your current tasks: \n" + printThis);
     }
 
 
