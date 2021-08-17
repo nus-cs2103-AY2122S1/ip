@@ -11,38 +11,42 @@ public class TaskManager {
 
     private final static int MAX_STORAGE = 100;
 
-    private final static List<Task> TASK_LIST = new ArrayList<>();
+    private final List<Task> TASK_LIST = new ArrayList<>();
 
-    public static void addToList(Task newTask) throws TaskManagerException {
+    public int getTaskListSize() {
+        return TASK_LIST.size();
+    }
+
+    public Task addTask(Task newTask) throws TaskManagerException {
         if (TASK_LIST.size() == MAX_STORAGE) {
             throw new TaskManagerException("Unable to add task as list is full.");
         }
         TASK_LIST.add(newTask);
-        Echoer.info("Got it. I've added this task:\n\t  " + newTask + "\n\tNow you have " +
-                TASK_LIST.size() + " tasks in the list.");
+        return newTask;
     }
 
-    public static void addToDoTask(String userInput) throws TaskManagerException {
-        if (userInput.isEmpty()) {
+    public Task addToDoTask(String userInput) throws TaskManagerException {
+        String description = userInput.trim();
+        if (description.isEmpty()) {
             throw new TaskManagerException("Task description cannot be empty.");
         }
-        String description = userInput.trim();
-        addToList(new Todo(description));
+        Task todo = new Todo(description);
+        return addTask(todo);
     }
 
-    public static void addEventTask(String userInput) throws TaskManagerException {
+    public Task addEventTask(String userInput) throws TaskManagerException {
         String[] parameterArray = splitUserInput("/at", userInput);
-        Task event= new Event(parameterArray[0], parameterArray[1]); // desc, timing
-        addToList(event);
+        Task event = new Event(parameterArray[0], parameterArray[1]); // desc, timing
+        return addTask(event);
     }
 
-    public static void addDeadlineTask(String userInput) throws TaskManagerException {
+    public Task addDeadlineTask(String userInput) throws TaskManagerException {
         String[] parameterArray = splitUserInput("/by", userInput);
         Task deadline = new Deadline(parameterArray[0], parameterArray[1]);// desc, by
-        addToList(deadline);
+        return addTask(deadline);
     }
 
-    public static String[] splitUserInput(String splitKey, String userInput)
+    public String[] splitUserInput(String splitKey, String userInput)
             throws TaskManagerException {
 
         if (!userInput.contains(splitKey)) {
@@ -66,19 +70,30 @@ public class TaskManager {
         return new String[] {description, split};
     }
 
-    public static void markTaskAsDone(int taskNumber) throws TaskManagerException {
+    public Task markTaskAsDone(String taskNumberAsString) throws TaskManagerException {
         if (TASK_LIST.isEmpty()) {
             throw new TaskManagerException("List is empty.");
         }
-        if (taskNumber < 0 || TASK_LIST.size() < taskNumber) {
-            throw new TaskManagerException("Task numbered '" + taskNumber + "' does not exist.");
+
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(taskNumberAsString);
+            if (taskNumber < 0 || TASK_LIST.size() < taskNumber) {
+                throw new IllegalArgumentException();
+            }
+        } catch (NumberFormatException exception) {
+            throw new TaskManagerException("'" + taskNumberAsString + "' is not an integer.");
+
+        } catch (IllegalArgumentException exception) {
+            throw new TaskManagerException("Task number '" + taskNumberAsString + "' doesn't exist.");
         }
+
         Task selectedTask = TASK_LIST.get(taskNumber - 1); // shift to 0-indexing
         selectedTask.markAsDone();
-        Echoer.info("Nice! I've marked this task as done:\n\t  " + selectedTask);
+        return selectedTask;
     }
 
-    public static void listTasks() throws TaskManagerException {
+    public List<String> listTasks() throws TaskManagerException {
         if (TASK_LIST.isEmpty()) {
             throw new TaskManagerException("List is empty, add some tasks first.");
         }
@@ -89,6 +104,6 @@ public class TaskManager {
             int taskNumber = idx + 1; // shift to 1-indexing
             taskManagerStringList.add(String.format("%d. %s", taskNumber, task));
         }
-        Echoer.list(taskManagerStringList);
+        return taskManagerStringList;
     }
 }

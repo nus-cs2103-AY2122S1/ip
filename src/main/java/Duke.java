@@ -1,4 +1,5 @@
 import exception.TaskManagerException;
+import task.Task;
 
 import java.util.Scanner;
 
@@ -9,6 +10,8 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private final static TaskManager TASK_MANAGER = new TaskManager();
 
     public static void main(String[] args) {
         printLogo();
@@ -42,21 +45,21 @@ public class Duke {
     public static void makeDecision(String userInput) {
         try {
             if (userInput.equals("list")) {
-                TaskManager.listTasks();
+                Echoer.list(TASK_MANAGER.listTasks());
 
             } else if (userInput.startsWith("done")) {
                 String taskNumberString = userInput.substring(4).trim();
-                int taskNumber = Integer.parseInt(taskNumberString);
-                TaskManager.markTaskAsDone(taskNumber);
+                Task completedTask = TASK_MANAGER.markTaskAsDone(taskNumberString);
+                Echoer.info("Nice! I've marked this task as done:\n\t  " + completedTask);
 
             } else if (userInput.startsWith("todo")) {
-                TaskManager.addToDoTask(userInput.substring(4));
+                echoTaskCreation(TASK_MANAGER.addToDoTask(userInput.substring(4)));
 
             } else if (userInput.startsWith("event")) {
-                TaskManager.addEventTask(userInput.substring(5));
+                echoTaskCreation(TASK_MANAGER.addEventTask(userInput.substring(5)));
 
             } else if (userInput.startsWith("deadline")) {
-                TaskManager.addDeadlineTask(userInput.substring(8));
+                echoTaskCreation(TASK_MANAGER.addDeadlineTask(userInput.substring(8)));
 
             } else {
                 Echoer.error("Please ensure instruction follows specified format.");
@@ -65,5 +68,10 @@ public class Duke {
         } catch (TaskManagerException exception) {
             Echoer.error(exception.getLocalizedMessage());
         }
+    }
+
+    public static void echoTaskCreation(Task task) {
+        Echoer.info("Got it. I've added this task:\n\t  " + task + "\n\tNow you have " +
+                TASK_MANAGER.getTaskListSize() + " tasks in the list.");
     }
 }
