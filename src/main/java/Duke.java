@@ -13,10 +13,11 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         String border = "____________________________________________________________";
+        String added = "added: ";
         Printer printer = new Printer(border);
 
         while (!input.equals("bye")) {
-            printer.PrintMessage(input);
+            printer.PrintMessage(added);
             input = sc.nextLine();
         }
         printer.PrintMessage("Bye. Hope to see you again soon!");
