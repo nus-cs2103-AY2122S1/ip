@@ -1,9 +1,12 @@
+package view;
+
 import exception.CommandArityException;
 import exception.InvalidCommandException;
-import memory.Storage;
-import memory.Task;
+import model.Storage;
+import model.task.Task;
+import parser.ReplyParser;
 
-// This class defines the logic of the chatbot
+// This class defines how information is presented to the user
 public class Response {
     private static void hLine() {
         System.out.println("\t----------------------------------------------");

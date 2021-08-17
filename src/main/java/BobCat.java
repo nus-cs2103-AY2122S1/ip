@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-import memory.Storage;
+import model.Storage;
+import view.Response;
 
 public class BobCat {
     public static void main(String[] args) {

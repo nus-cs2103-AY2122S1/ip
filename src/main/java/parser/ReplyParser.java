@@ -1,3 +1,5 @@
+package parser;
+
 import exception.CommandArityException;
 import exception.InvalidCommandException;
 

@@ -1,10 +1,12 @@
-package memory;
+package model;
 
 import exception.InvalidCommandException;
+import model.task.Deadline;
+import model.task.Event;
+import model.task.Task;
+import model.task.ToDo;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class Storage {
     private final ArrayList<Task> storage;

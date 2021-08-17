@@ -1,4 +1,4 @@
-package memory;
+package model.task;
 
 public class Deadline extends Task {
     protected String dueDate;

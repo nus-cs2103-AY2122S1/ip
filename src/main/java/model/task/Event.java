@@ -1,4 +1,4 @@
-package memory;
+package model.task;
 
 public class Event extends Task {
     protected String startTime;

@@ -1,4 +1,4 @@
-package memory;
+package model.task;
 
 public class ToDo extends Task {
     public ToDo(String entry) {
