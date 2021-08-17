@@ -9,7 +9,7 @@ public class Kermit {
      * @return Formatted version of text.
      */
     private static String formatText(String text) {
-        String horizontalDivider = "____________________________________________________________";
+        String horizontalDivider = "____________________________________________________________________________";
         return horizontalDivider + "\n" + text + "\n" + horizontalDivider;
     }
 
@@ -135,7 +135,7 @@ public class Kermit {
                         }
                         // Empty flag arguments for tasks error
                         if (flagArguments.equals("")) {
-                            throw new KermitException("Events should be formatted as:\nevent <description> /at <time of event>");
+                            throw new KermitException("Events should be formatted as:\naevent <description> /at <time of event>");
                         }
                         Task newEvent = new Event(description, flagArguments);
                         list.add(newEvent);
