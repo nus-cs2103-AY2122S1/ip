@@ -1,12 +1,19 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The main class for the bot
+ * Contains the methods 'to do', 'deadline', 'event', 'list',
+ * 'delete' and 'bye'
+ */
 public class Duke {
 
     public static void main(String[] args) {
         start();
     }
 
+    /**
+     * Method to start the bot and waits for the user's input.
+     */
     public static void start() {
         MyList l = new MyList();
 
