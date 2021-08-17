@@ -1,7 +1,37 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][ ] walk the dog
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+  [D][ ] submit homework (by: Wednesday)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+  [E][ ] Zoukout (at: 25 July 12am to 4 am)
+Now you have 3 tasks in the list.
+Got it. I've added this task:
+  [T][ ] bathe
+Now you have 4 tasks in the list.
+Got it. I've added this task:
+  [T][ ] clean my room
+Now you have 5 tasks in the list.
+Got it. I've added this task:
+  [D][ ] do UI testing (by: 11pm tonight)
+Now you have 6 tasks in the list.
+Here are the tasks in your list:
+1.[T][ ] walk the dog
+2.[D][ ] submit homework (by: Wednesday)
+3.[E][ ] Zoukout (at: 25 July 12am to 4 am)
+4.[T][ ] bathe
+5.[T][ ] clean my room
+6.[D][ ] do UI testing (by: 11pm tonight)
+Nice! I've marked this task as done:
+  [T][X] bathe
+Here are the tasks in your list:
+1.[T][ ] walk the dog
+2.[D][ ] submit homework (by: Wednesday)
+3.[E][ ] Zoukout (at: 25 July 12am to 4 am)
+4.[T][X] bathe
+5.[T][ ] clean my room
+6.[D][ ] do UI testing (by: 11pm tonight)
+Bye. Hope to see you again soon!

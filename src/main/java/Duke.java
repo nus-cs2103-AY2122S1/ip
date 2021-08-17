@@ -1,14 +1,9 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static class Task {
+    private static abstract class Task {
         private String task;
         private boolean isDone;
-
-        public Task(String task) {
-            this.task = task;
-            this.isDone = false;
-        }
 
         private String isDone() {
             return (this.isDone ? "X" : " ");
@@ -27,7 +22,7 @@ public class Duke {
 
     private static class Todo extends Task{
         public Todo(String task) {
-            super(task);
+            super.task = task;
         }
 
         @Override
@@ -40,7 +35,7 @@ public class Duke {
         private String by;
 
         public Deadline(String task, String by) {
-            super(task);
+            super.task = task;
             this.by = by;
         }
 
@@ -54,7 +49,7 @@ public class Duke {
         private String at;
 
         public Event(String task, String at) {
-            super(task);
+            super.task = task;
             this.at = at;
         }
 
@@ -76,7 +71,7 @@ public class Duke {
 
         public void open() {
             this.open = true;
-            System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+            System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         }
 
         public void exit() {
@@ -105,8 +100,7 @@ public class Duke {
 
         public void markAsDone(int index) {
             list[index - 1].markAsDone();
-            System.out.println(String.format("Nice! I've marked this task as done:\n  %s",
-                    list[index - 1]));
+            System.out.println("Nice! I've marked this task as done:\n  " + list[index - 1]);
         }
     }
     public static void main(String[] args) {

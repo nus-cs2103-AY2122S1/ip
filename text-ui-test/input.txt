@@ -1,0 +1,10 @@
+todo walk the dog
+deadline submit homework /by Wednesday
+event Zoukout /at 25 July 12am to 4 am
+todo bathe
+todo clean my room
+deadline do UI testing /by 11pm tonight
+list
+done 4
+list
+bye
