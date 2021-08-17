@@ -5,6 +5,9 @@
  * @version CS2103 AY21/22 Sem 1
  */
 public class Duke extends Chatbot {
+    private static String GREETING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
+    private static String FAREWELL_MESSAGE = "See you soon! :)";
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -12,24 +15,25 @@ public class Duke extends Chatbot {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        greet();
-        echo();
+        Duke duke = new Duke();
+        duke.greet();
+        duke.echo();
     }
 
     /**
      * Prints a greeting to the user.
      */
-    public static void greet() {
-        Chatbot.printMessage("Hello! I'm Duke\nWhat can I do for you?");
+    public void greet() {
+        Chatbot.printMessage(GREETING_MESSAGE);
     }
 
     /**
      * Echoes the user's input, until the user says "bye".
      */
-    public static void echo() {
+    public void echo() {
         String message = Chatbot.acceptUserInput();
         if (message.equals("bye")) {
-            Chatbot.printMessage("See you soon! :)");
+            Chatbot.printMessage(FAREWELL_MESSAGE);
         } else {
             Chatbot.printMessage(message);
             echo();
