@@ -43,6 +43,52 @@ public class Duke {
 
     }
 
+    private static class ToDo extends Task{
+        public ToDo(String name) {
+            super(name);
+        }
+        @Override
+        public String toString(){
+            if(done==true){
+                return "[T][X] "+name;
+            }else{
+                return "[T][ ] "+name;
+            }
+        }
+    }
+
+    private static class Deadline extends Task{
+        private String date;
+        public Deadline(String name, String date) {
+            super(name);
+            this.date=date;
+        }
+        @Override
+        public String toString(){
+            if(done==true){
+                return "[D][X] "+name+ "(by: "+date+")";
+            }else{
+                return "[D][ ] "+name+ "(by: "+date+")";
+            }
+        }
+    }
+
+    private static class Event extends Task{
+        private String date;
+        public Event(String name, String date) {
+            super(name);
+            this.date=date;
+        }
+        @Override
+        public String toString(){
+            if(done==true){
+                return "[E][X] "+name+ "(at: "+date+")";
+            }else{
+                return "[E][ ] "+name+ "(at: "+date+")";
+            }
+        }
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
