@@ -20,7 +20,7 @@ public class Presentation {
      * Respond something after a command is entered
      * @param input: Entered command on terminal
      */
-    protected void respond(String input) {
+    protected void respondWith(String input) {
         addSpace();
         System.out.println(input);
         addSpace();
@@ -37,9 +37,9 @@ public class Presentation {
      * Print all available tasks on the array list
      * @param taskList: List of tasks
      */
-    protected void printTaskList(List<String> taskList) {
+    protected void printTaskList(List<Task> taskList) {
         addSpace();
-        System.out.println("Here is the list of all added tasks: ");
+        System.out.println("Here is the list of all tasks: ");
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println((i + 1) + ". " + taskList.get(i));
         }
