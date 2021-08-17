@@ -21,10 +21,14 @@ public class Duke {
                     break;
                 } else if (commandSplit[0].equals("done") && Duke.isInteger(commandSplit[1])) {
                     int taskIndex = Integer.parseInt(commandSplit[1]);
-                    tasks.markTaskDone(taskIndex);
-                    String task = tasks.getTask(taskIndex);
-                    System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(task);
+                    try {
+                        tasks.markTaskDone(taskIndex);
+                        String task = tasks.getTask(taskIndex);
+                        System.out.println("Nice! I've marked this task as done: ");
+                        System.out.println(task);
+                    } catch (NullPointerException e) {
+                        throw new DukeException("☹ OOPS!!! The number you gave is out of range!");
+                    }
                 } else if (firstCommand.equals("deadline") || firstCommand.equals("todo") || firstCommand.equals("event") ) {
                     String date = Duke.findDateInCommand(commandSplit, firstCommand);
                     String taskDesc = Duke.findTaskDescription(commandSplit);

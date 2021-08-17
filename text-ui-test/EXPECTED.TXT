@@ -42,4 +42,5 @@ Nice! I've marked this task as done:
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+☹ OOPS!!! The number you gave is out of range!
 Goodbye!
