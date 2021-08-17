@@ -28,7 +28,11 @@ public class Duke {
             } else if (segment[0].equals("done") && segment.length == 2) {
                 list.done(Integer.parseInt(segment[1]));
             } else if (segment[0].equals("todo")) {
+                try {
                     list.addTodo(input.split("todo", 2)[1]);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             } else if (segment[0].equals("deadline")) {
                 list.addDeadlines(input.split("deadline", 2)[1]);
             } else if (segment[0].equals("event")) {
