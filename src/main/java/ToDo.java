@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * ToDo list stores items
  */
-public class ToDo<E> extends ArrayList<E> {
+public class ToDo extends ArrayList<Task> {
 
     /**
      * ToDo constructor
