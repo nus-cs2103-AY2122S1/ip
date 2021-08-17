@@ -16,11 +16,11 @@ public class Deadline extends Task {
     }
 
     public String getFormattedBy() {
-        return "( by: " + by + ")";
+        return " (by: " + by + ")";
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " " + getFormattedBy();
+        return "[D]" + super.toString() + getFormattedBy();
     }
 }

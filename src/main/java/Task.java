@@ -26,7 +26,7 @@ public class Task {
     }
 
     public void markAsDone() {
-        this.setDone(true);
+        setDone(true);
     }
 
     public String getStatusIcon() {

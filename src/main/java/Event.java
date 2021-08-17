@@ -16,11 +16,11 @@ public class Event extends Task {
     }
 
     public String getFormattedTiming() {
-        return "( at: " + timing + ")";
+        return " (at: " + timing + ")";
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " " + getFormattedTiming();
+        return "[E]" + super.toString() + getFormattedTiming();
     }
 }
