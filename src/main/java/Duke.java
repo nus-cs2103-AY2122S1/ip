@@ -2,6 +2,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    public enum Type {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
+
     public static void main(String[] args) {
         Scanner myObj = new Scanner(System.in);
 
@@ -52,7 +58,16 @@ public class Duke {
             } else {
                 System.out.println("____________________________________________________________");
                 try {
-                    parseInput(userInput, tasks);
+                    if (userInput.startsWith("todo")) {
+                        parseInput(userInput, tasks, Type.TODO);
+                    } else if (userInput.startsWith("deadline")) {
+                        parseInput(userInput, tasks, Type.DEADLINE);
+                    } else if (userInput.startsWith("event")) {
+                        parseInput(userInput, tasks, Type.EVENT);
+                    } else {
+                        throw new IllegalArgumentException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
@@ -97,8 +112,8 @@ public class Duke {
         return true;
     }
 
-    public static void parseInput(String userInput, ArrayList<Task> tasks) throws IllegalArgumentException {
-        if (userInput.startsWith("todo")) {
+    public static void parseInput(String userInput, ArrayList<Task> tasks, Type type) throws IllegalArgumentException {
+        if (type == Type.TODO) {
             if (userInput.substring(4).trim().isEmpty()) {
                 throw new IllegalArgumentException(" ☹ OOPS!!! The description of a todo cannot be empty.");
             }
@@ -106,7 +121,7 @@ public class Duke {
             System.out.println("Got it. I've added this task:");
             System.out.println("  " + tasks.get(tasks.size() - 1).getTask());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        } else if (userInput.startsWith("deadline")) {
+        } else if (type == Type.DEADLINE) {
             if (userInput.substring(8).trim().isEmpty()) {
                 throw new IllegalArgumentException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
             }
@@ -118,7 +133,7 @@ public class Duke {
             System.out.println("Got it. I've added this task:");
             System.out.println("  " + tasks.get(tasks.size() - 1).getTask());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        } else if (userInput.startsWith("event")) {
+        } else {
             if (userInput.substring(5).trim().isEmpty()) {
                 throw new IllegalArgumentException(" ☹ OOPS!!! The description of an event cannot be empty.");
             }
@@ -130,8 +145,6 @@ public class Duke {
             System.out.println("Got it. I've added this task:");
             System.out.println("  " + tasks.get(tasks.size() - 1).getTask());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        } else {
-            throw new IllegalArgumentException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
