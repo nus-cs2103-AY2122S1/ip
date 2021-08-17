@@ -44,7 +44,7 @@ public class Retriever {
     }
 
     /**
-     * To print the user inputs that have been stored.
+     * To print the tasks stored in the list.
      */
     public void printList() {
         // If the list is empty
@@ -59,17 +59,13 @@ public class Retriever {
     }
 
     /**
-     * Adds a task with the given description to the list.
+     * To print the task added in a formatted style.
      *
-     * @param description The description of the task to be added.
+     * @param task The task to be printed.
      */
-    public void addTask(String description) {
-
-        // Creating a new Task with the description.
-        Task task = new Task(description);
-        userTaskList.add(task);
-
-        System.out.println("-> Added: " + description);
+    public void printTask(Task task) {
+        System.out.println("-> Where's My Treat? I Added: \n\t" + task);
+        System.out.println("\nYou Owe Me " + userTaskList.size() + " Treat(s), Master!");
     }
 
     /**
@@ -100,6 +96,72 @@ public class Retriever {
     }
 
     /**
+     * To parse and add a deadline type task to the task list.
+     *
+     * @param userInput The task details input by the user.
+     */
+    public void addDeadline(String userInput) {
+        // Parsing the user input to obtain the information about the task.
+        String[] userInputArray = userInput.substring(9).split(" /by ");
+        Task deadlineTask = new Deadline(userInputArray[0], userInputArray[1]);
+        userTaskList.add(deadlineTask);
+
+       printTask(deadlineTask);
+    }
+
+    /**
+     * To parse and add an event type task to the task list.
+     *
+     * @param userInput The task details input by the user.
+     */
+    public void addEvent(String userInput) {
+        // Parsing the user input to obtain the information about the task.
+        String[] userInputArray = userInput.substring(6).split(" /at ");
+        Task eventTask = new Event(userInputArray[0], userInputArray[1]);
+        userTaskList.add(eventTask);
+
+        printTask(eventTask);
+    }
+
+    /**
+     * To parse and add a tdod type task to the task list.
+     * @param userInput The task details input by the user.
+     */
+    public void addTodo(String userInput) {
+        // Parsing the user input to obtain the information about the task.
+        String userInputTodo = userInput.substring(5);
+        Task todoTask = new Todo(userInputTodo);
+        userTaskList.add(todoTask);
+
+        printTask(todoTask);
+    }
+
+    /**
+     * Parsing the user input to find out which type of
+     * task does the user want to make the entry for.
+     *
+     * @param userInput The details input by the user.
+     */
+    public void parseUserInput(String userInput) {
+        String[] userInputArray = userInput.split(" ");
+        String command = userInputArray[0].toLowerCase();
+
+        switch (command) {
+            case "deadline":
+                addDeadline(userInput);
+                break;
+            case "event":
+                addEvent(userInput);
+                break;
+            case "todo":
+                addTodo(userInput);
+                break;
+            default:
+                System.out.println("Woof! Command Not Found! Can I Sleep?");
+        }
+    }
+
+    /**
      * Main body of the Retriever Chatbot.
      */
     public void run() {
@@ -122,8 +184,8 @@ public class Retriever {
                 // Calling the method to mark a particular task as done.
                 taskDone(userInput);
             } else if(!isItBye(userInput)) {
-                // Adding the user input to the task list.
-                addTask(userInput);
+                // Here, we need to check if it is an event or a deadline or a todo type of task.
+                parseUserInput(userInput);
             }
 
             System.out.println("________________________________________");
