@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) {
-        String[] task = new String[100];
+        Task[] task = new Task[100];
         int taskNum = 0;
         String indentation = "       ";
         String Horizontal_line = "-----------------------------";
@@ -11,6 +11,7 @@ public class Duke {
         final String LIST = "list";
         final String BLAH = "blah";
         final String BYE = "bye";
+        final String DONE = "done";
         boolean isEnd = false;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,12 +26,16 @@ public class Duke {
 
 
         while (!isEnd) {
-            String keyword = scanner.nextLine();
+            String keyword = scanner.next();
             switch(keyword) {
                 case LIST:
                     System.out.println(indentation + Horizontal_line);
                     for (int i = 0; i < taskNum; i++) {
-                        System.out.println(indentation + (i + 1) + "." + "  " + task[i]);
+                        if (task[i].isDone() == false) {
+                            System.out.println(indentation + (task[i].getIndex() + 1) + "." + " [ ] " + task[i].getName());
+                        } else {
+                            System.out.println(indentation + (task[i].getIndex() + 1) + "." + " [X] " + task[i].getName());
+                        }
                     }
                     System.out.println(indentation + Horizontal_line);
                     break;
@@ -38,6 +43,25 @@ public class Duke {
                     System.out.println(indentation + Horizontal_line);
                     System.out.println("blah");
                     System.out.println(indentation + Horizontal_line);
+                    break;
+                case DONE:
+                    int num = scanner.nextInt();
+                    try {
+                        task[num - 1].setDone(true);
+                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(indentation + "Nice! I've marked this task as done: ");
+                        System.out.println(indentation + "  [X] " + task[num - 1].getName());
+                        System.out.println(indentation + Horizontal_line);
+                    } catch (NullPointerException e) {
+                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(indentation + "Sorry, you do not have task " + num);
+                        System.out.println(indentation + Horizontal_line);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(indentation + "Sorry, please enter a task number bigger than 0");
+                        System.out.println(indentation + Horizontal_line);
+                    }
+
                     break;
                 case BYE:
                     System.out.println(indentation + Horizontal_line);
@@ -47,7 +71,7 @@ public class Duke {
                     isEnd = true;
                     break;
                 default:
-                    task[taskNum] = keyword;
+                    task[taskNum] = new Task(keyword, false, taskNum);
                     taskNum++;
                     System.out.println(indentation + Horizontal_line);
                     System.out.println(indentation + "Added: "+ keyword);
