@@ -17,7 +17,7 @@ public class Duke {
     private static final String doubleDivider = "══════════════════════════════════════════════════════════\n";
 
     public static Scanner scanner = new Scanner(System.in);
-    public static ArrayList<String> taskList = new ArrayList<>();
+    public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void greetUser() {
         System.out.println(doubleDivider + greeting + doubleDivider);
@@ -30,28 +30,44 @@ public class Duke {
     }
 
     public static void printList() {
-        System.out.print(divider);
+        System.out.println(divider + "Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
-            System.out.println(i + ". " + taskList.get(i - 1));
+            Task task = taskList.get(i - 1);
+            System.out.println(i + ". [" + task.getStatusIcon() + "] " +  task.getDescription());
         }
         System.out.print(divider);
     }
 
-    public static void main(String[] args) {
+    public static void markTaskAsDone(String taskNum) {
+        int taskIdx = Integer.valueOf(taskNum) - 1;
+        Task task = taskList.get(taskIdx);
+        task.markAsDone();
+        System.out.print(divider + "Great! I've marked this task as done:\n["
+                + task.getStatusIcon() + "] " +  task.getDescription() + "\n" + divider);
+    }
 
-        greetUser();
-
+    public static void getInputs() {
         while (true) {
-            String task = scanner.nextLine();
-            if (task.equals("bye") || task.equals("Bye")) {
+            String input = scanner.nextLine();
+            if (input.equals("bye")) {
                 byeUser();
                 break;
-            } else if (task.equals("list") || task.equals("List")) {
+            } else if (input.equals("list")) {
                 printList();
             } else {
-                taskList.add(task);
-                System.out.println(divider + "added: " + task + "\n" + divider);
+                String[] inputs = input.split(" ");
+                if (inputs[0].equals("done") && inputs.length > 1) {
+                    markTaskAsDone(inputs[1]);
+                } else {
+                    taskList.add(new Task(input));
+                    System.out.println(divider + "added: " + input + "\n" + divider);
+                }
             }
         }
+    }
+
+    public static void main(String[] args) {
+        greetUser();
+        getInputs();
     }
 }
