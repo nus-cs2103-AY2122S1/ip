@@ -30,6 +30,85 @@
     * * * * * * * * * * * * * * * * * * * *
 
     * * * * * * * * * * * * * * * * * * * *
+    Got it. I've added this task: 
+      [T][ ] do tutorial
+    Now you have 4 tasks in the list.
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Nice! This task is marked as done: 
+      [D][X] return laptop (by: Friday)
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Nice! This task is marked as done: 
+      [E][X] interview meeting (at: Tues 8-10pm)
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    This task does not exist! Please try again.
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Here are the tasks in your list: 
+    1.[D][X] return laptop (by: Friday)
+    2.[T][ ] buy battery
+    3.[E][X] interview meeting (at: Tues 8-10pm)
+    4.[T][ ] do tutorial
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Got it. I've added this task: 
+      [D][ ] assignment (by: Monday)
+    Now you have 5 tasks in the list.
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Got it. I've added this task: 
+      [D][ ] project presentation (by: Monday)
+    Now you have 6 tasks in the list.
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Here are the tasks in your list: 
+    1.[D][X] return laptop (by: Friday)
+    2.[T][ ] buy battery
+    3.[E][X] interview meeting (at: Tues 8-10pm)
+    4.[T][ ] do tutorial
+    5.[D][ ] assignment (by: Monday)
+    6.[D][ ] project presentation (by: Monday)
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Gotchu mate. I've removed this task: 
+      [D][X] return laptop (by: Friday)
+    Now you have 5 tasks in the list.
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Here are the tasks in your list: 
+    1.[T][ ] buy battery
+    2.[E][X] interview meeting (at: Tues 8-10pm)
+    3.[T][ ] do tutorial
+    4.[D][ ] assignment (by: Monday)
+    5.[D][ ] project presentation (by: Monday)
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Gotchu mate. I've removed this task: 
+      [E][X] interview meeting (at: Tues 8-10pm)
+    Now you have 4 tasks in the list.
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
+    Here are the tasks in your list: 
+    1.[T][ ] buy battery
+    2.[T][ ] do tutorial
+    3.[D][ ] assignment (by: Monday)
+    4.[D][ ] project presentation (by: Monday)
+    * * * * * * * * * * * * * * * * * * * *
+
+    * * * * * * * * * * * * * * * * * * * *
     Goodbye. See you again soon!
     * * * * * * * * * * * * * * * * * * * *
 

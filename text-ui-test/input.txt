@@ -2,4 +2,16 @@ deadline return laptop /by Friday
 todo buy battery
 event interview meeting /at Tues 8-10pm
 list
+todo do tutorial
+done 1
+done 3
+done 100
+list
+deadline assignment /by Monday
+deadline project presentation /by Monday
+list
+delete 1
+list
+delete 2
+list
 bye
