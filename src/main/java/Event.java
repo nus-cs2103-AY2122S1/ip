@@ -3,6 +3,10 @@ public class Event extends Task{
         super(label);
     }
 
+    public String getType() {
+        return "E";
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString();

@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private boolean flag;
     private String label;
 
@@ -10,6 +10,16 @@ public class Task {
     public void setFlag(boolean flag) {
         this.flag = flag;
     }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public abstract String getType();
 
     @Override
     public String toString() {
