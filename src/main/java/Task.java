@@ -3,9 +3,13 @@ public class Task {
     private static String breakline = "____________________________________________________________";
     private boolean done;
 
-    Task(String name) {
+    Task(String name, boolean done) {
         this.name = name;
-        this.done = false;
+        this.done = done;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public boolean isDone() {
@@ -15,7 +19,7 @@ public class Task {
     public void setStatus(boolean status) {
         this.done = status;
         System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("\t [X] %s\n", this.name);
+        System.out.println(this);
         System.out.println(breakline);
     }
 
