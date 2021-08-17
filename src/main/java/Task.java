@@ -67,20 +67,55 @@ public class Task {
     }
 
     public void add(String input) {
+        input = input.trim();
+        String emptyDescriptionError = null;
+        String emptyTimelineError = null;
         String[] splitTask = input.split(" ", 2);
 
         switch (splitTask[0]) {
             case "todo":
+                if (splitTask.length == 1) {
+                    emptyDescriptionError = "todo";
+                    break;
+                }
                 new Todo(splitTask[1]);
                 break;
             case "deadline":
+                if (splitTask.length == 1) {
+                    emptyDescriptionError = "deadline";
+                    break;
+                }
+
                 String[] splitTime = splitTask[1].split("/", 2);
+                if (splitTime.length == 1) {
+                    emptyTimelineError = "deadline";
+                    break;
+                }
+
                 new Deadline(splitTime[0], splitTime[1]);
                 break;
             case "event":
+                if (splitTask.length == 1) {
+                    emptyDescriptionError = "event";
+                    break;
+                }
+
                 String[] splitTimeEvent = splitTask[1].split("/", 2);
+                if (splitTimeEvent.length == 1) {
+                    emptyTimelineError = "event";
+                    break;
+                }
+
                 new Event(splitTimeEvent[0], splitTimeEvent[1]);
                 break;
+            default:
+                throw new DukeException.InvalidCommandException(input);
+        }
+
+        if (emptyDescriptionError != null) {
+            throw new DukeException.EmptyDescriptionException(emptyDescriptionError);
+        } else if (emptyTimelineError != null) {
+            throw new DukeException.EmptyTimelineDescription(emptyTimelineError);
         }
     }
 

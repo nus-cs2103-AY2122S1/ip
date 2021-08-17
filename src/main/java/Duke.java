@@ -29,11 +29,15 @@ public class Duke {
                 default:
                     String remaining = firstWord.concat(" " + scanner.nextLine());
                     int lengthBefore = Task.listLength();
-                    task.add(remaining);
-                    System.out.println("\nDuke: Got it. I have added this task:\n" +
-                            Task.retrieveTask(lengthBefore) + "\nNow you have " +
-                            Task.listLength() + " tasks in the list.");
-                    break;
+                    try {
+                        task.add(remaining);
+                        System.out.println("\nDuke: Got it. I have added this task:\n" +
+                                Task.retrieveTask(lengthBefore) + "\nNow you have " +
+                                Task.listLength() + " tasks in the list.");
+                        break;
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                    }
             }
             if (breakWhile) break;
         }
