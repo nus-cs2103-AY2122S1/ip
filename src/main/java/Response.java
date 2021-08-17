@@ -1,6 +1,6 @@
 /**
  * Response class contains the logic for processing the commands from Duke.
- * At level-4, it supports (i) the list command, (ii) the bye command,
+ * It supports (i) the list command, (ii) the bye command,
  * (iii) adding different types of tasks to the list, (iv) and marking the tasks as done
  */
 
@@ -44,10 +44,14 @@ public class Response {
 
     /**
      * Returns a string that show the ToDo task has been added.
+     * Unless no description is provided, then an error message is displayed
      * @param task String representation of the task
      * @return A string that shows the ToDo task has been added
      */
     String todo(String task) {
+        if (task.length() == 0) {
+            return "OOPS!!! The description of a todo cannot be empty.\n";
+        }
         Todo taskToDo = new Todo(task);
         lstOfTasks[itemCount] = taskToDo;
         itemCount++;
@@ -57,10 +61,14 @@ public class Response {
 
     /**
      * Returns a string that show the Deadline task has been added.
+     * Unless no description is provided, then an error message is displayed
      * @param task String representation of the task
      * @return A string that shows the Deadline task has been added
      */
     String deadline(String task) {
+        if (task.length() == 0) {
+            return "OOPS!!! The description of a deadline cannot be empty.\n";
+        }
         char[] data = task.toCharArray();
         String taskWithDeadLine = "";
         String by = "";
@@ -88,10 +96,14 @@ public class Response {
 
     /**
      * Returns a string that show the Event task has been added.
+     * Unless no description is provided, then an error message is displayed
      * @param task String representation of the task
      * @return A string that shows the Event task has been added
      */
     String event(String task) {
+        if (task.length() == 0) {
+            return "OOPS!!! The description of an event cannot be empty.\n";
+        }
         char[] data = task.toCharArray();
         String eventTask = "";
         String by = "";
@@ -119,6 +131,7 @@ public class Response {
 
     /**
      * Handles the input commands from Duke.
+     * Unless an invalid command is provided, then an error message is displayed
      * @param string the command input from Duke
      * @return a numbered list, a farewell, or an added message 
      */
@@ -153,9 +166,7 @@ public class Response {
                 return event(task);
 
             }
-            lstOfTasks[itemCount] = new Task(string);
-            itemCount++;
-            return "added: " + string;
+            return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }
     }
 }

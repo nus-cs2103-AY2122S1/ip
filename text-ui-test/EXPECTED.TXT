@@ -50,4 +50,8 @@ Got it. I've added this task:
 [D][ ] do homework (by: no idea :-p)
 Now you have 8 tasks in the list
 
+OOPS!!! I'm sorry, but I don't know what that means :-(
+
+OOPS!!! The description of a todo cannot be empty.
+
 Bye. Hope to see you again soon!

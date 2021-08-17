@@ -1,6 +1,6 @@
 /**
  * Task class to represent the tasks in the list.
- * At level-4, it supports (i) getting status icon
+ * It supports (i) getting status icon
  * and (ii) marking a task as done
  */
 public class Task {

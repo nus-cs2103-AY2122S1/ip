@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Duke class for level-2 contains the main method that takes
+ * Duke class contains the main method that takes
  * in inputs.
  */
 public class Duke {
