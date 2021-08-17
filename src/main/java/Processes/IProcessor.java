@@ -9,5 +9,6 @@ public interface IProcessor {
     void processBye();
     void processList();
     void processDone(String index);
+    void processDelete(String index);
     void processDefault(List<String> arguments);
 }

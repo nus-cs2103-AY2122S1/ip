@@ -3,6 +3,8 @@ package Processes;
 import java.util.List;
 import java.util.ArrayList;
 
+import Exception.DukeException;
+
 public class TaskList {
 
     private final List<Task> list;
@@ -15,8 +17,12 @@ public class TaskList {
         this.list.add(task);
     }
 
-    public void setDone(int index) {
-        this.list.get(index).setDone();
+    public void setDone(int index) throws DukeException {
+        try {
+            this.list.get(index).setDone();
+        } catch(IndexOutOfBoundsException e) {
+            throw new DukeException("There is no task with number " + (index + 1) + " in the list");
+        }
     }
 
     public Task getTask(int index) {
@@ -29,6 +35,14 @@ public class TaskList {
 
     public int getSize() {
         return this.list.size();
+    }
+
+    public String deleteTask(int index) throws DukeException{
+        try {
+            return this.list.remove(index).toString();
+        } catch(IndexOutOfBoundsException e) {
+            throw new DukeException("There is no task with number " + (index + 1) + " in the list");
+        }
     }
 
     @Override

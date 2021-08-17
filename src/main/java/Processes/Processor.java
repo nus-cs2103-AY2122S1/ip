@@ -22,6 +22,9 @@ public class Processor implements IProcessor {
             case DONE:
                 processDone(arguments.get(1));
                 break;
+            case DELETE:
+                processDelete(arguments.get(1));
+                break;
             default:
                 processDefault(arguments);
         }
@@ -62,7 +65,7 @@ public class Processor implements IProcessor {
             } else {
                 throw new DukeException("I don't understand:(");
             }
-            Output.print("Got it. I've added this task:\n   " + this.list.getLastTask() + "\nNow you have " + this.list.getSize() + " in the list.");
+            Output.print("Got it. I've added this task:\n   " + this.list.getLastTask() + "\nNow you have " + this.list.getSize() + " tasks in the list.");
         } catch (DukeException e) {
             Output.print(e.getMessage());
         }
@@ -75,9 +78,24 @@ public class Processor implements IProcessor {
 
     @Override
     public void processDone(String index) {
-        int i = Integer.parseInt(index);
-        this.list.setDone(i - 1);
-        Output.print("Nice! I've marked this task as done:\n   " + this.list.getTask(i - 1));
+        try {
+            int i = Integer.parseInt(index);
+            this.list.setDone(i - 1);
+            Output.print("Nice! I've marked this task as done:\n   " + this.list.getTask(i - 1));
+        } catch(DukeException e) {
+            Output.print(e.getMessage());
+        }
+    }
+
+    @Override
+    public void processDelete(String index) {
+        try {
+            int i = Integer.parseInt(index);
+            String result = this.list.deleteTask(i - 1);
+            Output.print("Got it! I've removed this task:\n   " + result + "\nNow you have " + this.list.getSize() + " tasks in the list.");
+        } catch (DukeException e) {
+            Output.print(e.getMessage());
+        }
     }
 
     @Override
