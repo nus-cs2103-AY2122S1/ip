@@ -1,0 +1,9 @@
+first
+potato
+todo fight
+deadline fightmaster /by endOfTime
+event fight club /at kungfuPanda
+list
+done 3
+list
+bye

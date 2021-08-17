@@ -5,3 +5,45 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Im Duke
+What can I do for you?
+____________________________________________________________
+added: first
+____________________________________________________________
+____________________________________________________________
+added: potato
+____________________________________________________________
+____________________________________________________________
+Got it, I've added this task:
+  [T][ ] fight
+Now you have a total of 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it, I've added this task:
+  [D][ ] fightmaster  (by:  endOfTime)
+Now you have a total of 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it, I've added this task:
+  [E][ ] fight club  (at:  kungfuPanda)
+Now you have a total of 5 tasks in the list.
+____________________________________________________________
+Here are the tasks in your list:
+1. [ ] first
+2. [ ] potato
+3. [T][ ] fight
+4. [D][ ] fightmaster  (by:  endOfTime)
+5. [E][ ] fight club  (at:  kungfuPanda)
+____________________________________________________________
+Nice! I've marked this task as done:
+  [X] fight
+____________________________________________________________
+Here are the tasks in your list:
+1. [ ] first
+2. [ ] potato
+3. [T][X] fight
+4. [D][ ] fightmaster  (by:  endOfTime)
+5. [E][ ] fight club  (at:  kungfuPanda)
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________
