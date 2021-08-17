@@ -1,6 +1,12 @@
 public abstract class Task {
     private boolean flag;
-    private String label;
+    protected String label;
+
+    //necessary default constructor
+    public Task() {
+        label = "";
+        flag = false;
+    }
 
     public Task(String label) {
         this.label = label;
