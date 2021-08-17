@@ -68,7 +68,7 @@ public class Duke extends Chatbot {
             // Mark a task as done
             int indexNumber = Integer.parseInt(message.substring(5)) - 1;
             String completedTask = this.taskList.completeTask(indexNumber);
-            Chatbot.printMessage("Nice! I've marked this task as done: \n" + completedTask);
+            Chatbot.printMessage("Nice! I've marked this task as done:\n\t" + completedTask);
         } else {
             // Add a task to the list
             Task task;
@@ -82,7 +82,7 @@ public class Duke extends Chatbot {
                 Chatbot.printMessage("Invalid command.");
                 return;
             }
-            Chatbot.printMessage("Got it. I've added this task: \n\t" + task.toString() + this.taskList.countTasks());
+            Chatbot.printMessage("Got it. I've added this task:\n\t" + task.toString() + this.taskList.countTasks());
         }
         taskMode();
     }
