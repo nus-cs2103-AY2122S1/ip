@@ -32,6 +32,12 @@ public class Duke {
                 System.out.println((i + 1) + ". " + taskList[i]);
             }
             getCommand();
+        } else if(command.toLowerCase().contains("done ")) {
+            int taskDone = Character.getNumericValue(command.charAt(command.length() - 1)) - 1;
+            taskList[taskDone].markAsDone();
+            System.out.println("Good job! This task has been completed:\n");
+            System.out.println(taskList[taskDone].toString());
+            getCommand();
         } else {
             // User command is something else, add command to command list and continue asking for commands
             System.out.println("\t added: " + command);

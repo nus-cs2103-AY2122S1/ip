@@ -11,7 +11,7 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    private void markAsDone() {
+    protected void markAsDone() {
         this.isDone = true;
     }
 
