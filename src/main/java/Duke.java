@@ -19,7 +19,8 @@ public class Duke {
         // Execute based on command (user input)
         // Exit when user commands "bye"
         while (!input.equals("bye")) {
-            String[] command = input.split(" ");
+            String[] command = input.split(" ", 2);
+            String[] taskDetail = command[1].split(" /[\\w]{2} ");
             switch (command[0]) {
                 case "list":
                     Printer.prettyPrint("Here are the tasks in your list:\n" +
@@ -27,6 +28,30 @@ public class Duke {
                     break;
                 case "done":
                     tasks[Integer.parseInt(command[1]) - 1].markAsDone();
+                    break;
+                case "todo":
+                    tasks[numOfTask++] = new Todo(taskDetail[0]);
+                    Printer.prettyPrint("Got it. I've added this task:\n\t " +
+                             tasks[numOfTask - 1].toString() +
+                            "\n\tNow you have " +
+                            numOfTask +
+                            " tasks in the list.");
+                    break;
+                case "event":
+                    tasks[numOfTask++] = new Event(taskDetail[0], taskDetail[1]);
+                    Printer.prettyPrint("Got it. I've added this task:\n\t " +
+                            tasks[numOfTask - 1].toString() +
+                            "\n\tNow you have " +
+                            numOfTask +
+                            " tasks in the list.");
+                    break;
+                case "deadline":
+                    tasks[numOfTask++] = new Deadline(taskDetail[0], taskDetail[1]);
+                    Printer.prettyPrint("Got it. I've added this task:\n\t " +
+                            tasks[numOfTask - 1].toString() +
+                            "\n\tNow you have " +
+                            numOfTask +
+                            " tasks in the list.");
                     break;
                 default:
                     tasks[numOfTask++] = new Task(input);
