@@ -150,7 +150,8 @@ public class Duke {
      * Gets a user input and matches it to the respective cases.
      */
     private void waitInput() {
-        while (true) {
+        boolean running = true;
+        while (running) {
             try {
                 // User input
                 String input = sc.nextLine();
@@ -183,6 +184,7 @@ public class Duke {
                         break;
                     case "bye":
                         goodbye();
+                        running = false;
                         break;
                     default:
                         throw new UnknownCommandException();
