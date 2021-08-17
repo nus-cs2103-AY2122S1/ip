@@ -47,7 +47,7 @@ public class Duke {
         }
     }
     public static boolean todoCheck(String response) {
-        if (response.startsWith("todo ") && response.length() > 5) {
+        if (response.startsWith("todo")) {
             return true;
         } else {
             return false;
@@ -140,7 +140,15 @@ public class Duke {
                 } else {
                     System.out.println("You have no tasks!");
                 }
-            } else if (todoCheck(response)) {
+            } else if (response.startsWith("todo")) {
+                if (response.strip().length() == 4) {
+                    System.out.println("The description of a todo cannot be empty.");
+                    continue;
+                }
+                if (!response.startsWith("todo ")) {
+                    System.out.println("Did you mean to use the 'todo' command?");
+                    continue;
+                }
                 if (currentCapacity < 100) {
                     userTaskList[currentCapacity] = new ToDo(responseToTodo(response));
                     System.out.printf(taskAddedMessage, userTaskList[currentCapacity], currentCapacity + 1, pluralOrNo(currentCapacity + 1));
@@ -148,7 +156,24 @@ public class Duke {
                 } else {
                     System.out.println(listFullMessage);
                 }
-            } else if (eventCheck(response)) {
+            } else if (response.startsWith("event")) {
+                if (response.split("/at")[0].strip().length() == 5) {
+                    System.out.println("The description of an event cannot be empty.");
+                    continue;
+                }
+                if (!response.startsWith("event ")) {
+                    System.out.println("Did you mean to use the 'event' command?");
+                    continue;
+                }
+
+                if (!response.contains("/at")) {
+                    System.out.println("Please specify the date of the event with '/at'.");
+                    continue;
+                }
+                if (response.split("/at").length < 2 || response.split("/at")[1].strip().length() < 1) {
+                    System.out.println("The date of an event cannot be empty.");
+                    continue;
+                }
                 if (currentCapacity < 100) {
                     String[] eventSplit = response.split("/at");
                     String description = eventSplit[0].strip().substring(6);
@@ -159,10 +184,31 @@ public class Duke {
                 } else {
                     System.out.println(listFullMessage);
                 }
-            } else if (deadlineCheck(response)) {
+            } else if (response.startsWith("deadline")) {
+                if (response.split("/by")[0].strip().length() == 8) {
+                    System.out.println("The description of a deadline cannot be empty.");
+                    continue;
+                }
+                if (!response.startsWith("deadline ")) {
+                    System.out.println("Did you mean to use the 'deadline' command?");
+                    continue;
+                }
+
+                if (!response.contains("/by")) {
+                    System.out.println("Please specify the date of the deadline with '/by'.");
+                    continue;
+                }
+                if (response.split("/by").length < 2 || response.split("/by")[1].strip().length() < 1) {
+                    System.out.println("The date of a deadline cannot be empty.");
+                    continue;
+                }
                 if (currentCapacity < 100) {
                     String[] deadlineSplit = response.split("/by");
                     String description = deadlineSplit[0].strip().substring(9);
+                    if (description.length() < 1) {
+                        System.out.println("The description of a deadline cannot be empty.");
+                        continue;
+                    }
                     String date = deadlineSplit[1].strip();
                     userTaskList[currentCapacity] = new Deadline(description, date);
                     System.out.printf(taskAddedMessage, userTaskList[currentCapacity], currentCapacity + 1, pluralOrNo(currentCapacity + 1));
@@ -173,7 +219,6 @@ public class Duke {
             } else {
                 System.out.printf("I don't quite understand the command '%s'. Please try again!\n", response);
             }
-
         }
     }
 }
