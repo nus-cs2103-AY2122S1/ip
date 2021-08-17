@@ -19,6 +19,12 @@ public class Duke {
                 + "\t" + border;
     }
 
+    private static String addTaskMessage(TaskArrayList taskList, Task toAdd){
+        taskList.add(toAdd);
+        String reply = toAdd.addMsg();
+        return reply + "\n" + taskList.newLength();
+    }
+
     public static void main(String[] args) {
         TaskArrayList taskList = new TaskArrayList();
 
@@ -41,49 +47,65 @@ public class Duke {
 
         while (true){
             String userInput = userScanner.nextLine();
-
-            if (userInput.equals("bye")){
-                System.out.println(formatReply("BYEEEEEE!\nHope to see you again soon :)"));
-                System.exit(0);
-            }
-
-            if (userInput.equals("list")) {
-                System.out.println(formatReply(taskList.enumerate()));
-                continue;
-            }
-
-            if (userInput.matches("(^done )[0-9]+")){
-                String splitNum = userInput.split(" ")[1];
-                String reply = taskList.markDone(Integer.parseInt(splitNum));
-                System.out.println(formatReply(reply));
-                continue;
-            }
-
-            // add tasks section
+            // cmd_args splits the command from arguments
+            // if no arguments, length will be 1
+            // if arguments, length will be 2
+            String[] cmd_args = userInput.split(" ",2);
             Task toAdd = null;
-            if (userInput.matches("^(todo ).+")){
-                String splitName = userInput.split(" ",2)[1];
-                toAdd = new Todo(splitName);
-            }
-            if (userInput.matches("^(deadline ).+")){
-                String splitName = userInput.split(" ",2)[1];
-                String[] name_by = splitName.split("/by");
-                toAdd = new Deadline(name_by[0],name_by[1]);
-            }
-            if (userInput.matches("^(event ).+")){
-                String splitName = userInput.split(" ",2)[1];
-                String[] name_at = splitName.split("/at");
-                toAdd = new Event(name_at[0],name_at[1]);
-            }
-            if (toAdd != null){
-                taskList.add(toAdd);
-                String reply = toAdd.addMsg();
-                reply = reply + "\n" + taskList.newLength();
-                System.out.println(formatReply(reply));
-                continue;
-            }
 
-            // ignore invalid inputs
+            // switch case to split by command
+            switch (cmd_args[0]) {
+                case ("bye"):
+                    if (cmd_args.length > 1){
+                        System.out.println(formatReply("☹ OOPS!!! bye can't take arguments."));
+                        break;
+                    }
+                    System.out.println(formatReply("BYEEEEEE!\nHope to see you again soon :)"));
+                    System.exit(0);
+                    break;
+
+                case ("list"):
+                    if (cmd_args.length > 1){
+                        System.out.println(formatReply("☹ OOPS!!! list can't take arguments."));
+                        break;
+                    }
+                    System.out.println(formatReply(taskList.enumerate()));
+                    break;
+
+                case ("done"):
+                    if (cmd_args.length != 2){
+                        System.out.println(formatReply("☹ OOPS!!! done takes exactly one argument."));
+                        break;
+                    }
+                    if (!cmd_args[1].matches("[0-9]+")){
+                        System.out.println(formatReply("☹ OOPS!!! argument for done must be exactly one integer."));
+                        break;
+                    }
+                    String reply = taskList.markDone(Integer.parseInt(cmd_args[1]));
+                    System.out.println(formatReply(reply));
+                    break;
+
+                case ("todo"):
+                    toAdd = new Todo(cmd_args[1]);
+                    System.out.println(formatReply(addTaskMessage(taskList, toAdd)));
+                    break;
+
+                case ("deadline"):
+                    String[] name_by = cmd_args[1].split("/by");
+                    toAdd = new Deadline(name_by[0],name_by[1]);
+                    System.out.println(formatReply(addTaskMessage(taskList, toAdd)));
+                    break;
+
+                case ("event"):
+                    String[] name_at = cmd_args[1].split("/at");
+                    toAdd = new Event(name_at[0],name_at[1]);
+                    System.out.println(formatReply(addTaskMessage(taskList, toAdd)));
+                    break;
+
+                default:
+                    // unrecognised command
+                    System.out.println(formatReply("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+            }
         }
     }
 }
