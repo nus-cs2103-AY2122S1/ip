@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class Duke {
+    // TODO: handle more errors
     public static void main(String[] args) {
         List<Task> list = new ArrayList<>();
         String divider = "____________________________________________________________";
@@ -16,8 +17,7 @@ public class Duke {
         System.out.println(logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         System.out.println(divider);
-        Scanner sc = new Scanner(System.in);
-        try {
+        try (Scanner sc = new Scanner(System.in)) {
             String input = sc.next();
             while (!input.equals("bye")) {
                 try {
@@ -34,8 +34,10 @@ public class Duke {
                         case "done": {
                             int index = sc.nextInt();
                             if (index < 1 || index > list.toArray().length) {
-                                // TODO: handle error here
-                                System.out.println("OOPS!!! I'm sorry, index is out of range!");
+                                System.out.println(list.toArray().length > 0
+                                        ? "OOPS!!! I'm sorry, index is out of range! " +
+                                        "Please try with a number from 1 to " + list.toArray().length
+                                        : "OOPS!!! I'm sorry, there is nothing in the list yet.");
                             } else {
                                 Task task = list.get(index - 1);
                                 task.markAsDone();
@@ -55,6 +57,12 @@ public class Duke {
                         case "deadline": {
                             String input2 = sc.nextLine();
                             String[] line = input2.split(" /by ");
+                            if (line.length != 2) {
+                                throw new DukeException(
+                                        "☹ OOPS!!! Seems like you have entered a wrong format for a deadline task. " +
+                                                "Try this instead: deadline <description> /by <date>"
+                                );
+                            }
                             Task task = new Deadline(line[0], line[1]);
                             list.add(task);
                             System.out.println("Got it. I've added this task:\n  " +
@@ -65,6 +73,12 @@ public class Duke {
                         case "event": {
                             String input2 = sc.nextLine();
                             String[] line = input2.split(" /at ");
+                            if (line.length != 2) {
+                                throw new DukeException(
+                                        "☹ OOPS!!! Seems like you have entered a wrong format for an event task. " +
+                                                "Try this instead: event <description> /at <date>"
+                                );
+                            }
                             Task task = new Event(line[0], line[1]);
                             list.add(task);
                             System.out.println("Got it. I've added this task:\n  " +
@@ -76,18 +90,17 @@ public class Duke {
                             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
                     }
-                    System.out.println(divider);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 } finally {
+                    System.out.println(divider);
+                    // TODO: clear scanner buffer
                     input = sc.next();
                 }
             }
             System.out.println(divider + "\n" + "Bye. Hope to see you again soon!" + "\n" + divider);
         } catch (NoSuchElementException e) {
             // happens in unit test
-        } finally {
-            sc.close();
         }
     }
 }

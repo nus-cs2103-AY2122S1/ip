@@ -3,6 +3,9 @@ public class Event extends Task {
 
     public Event(String description, String at) throws DukeException {
         super(description);
+        if (at.isEmpty()) {
+            throw new DukeException("☹ OOPS!!! The date of an event cannot be empty.");
+        }
         this.at = at;
     }
 

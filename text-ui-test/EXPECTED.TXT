@@ -14,9 +14,6 @@ Got it. I've added this task:
 Now you have 1 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
-1. [T][ ]  borrow book
-____________________________________________________________
-____________________________________________________________
 Got it. I've added this task:
   [D][ ]  return book (by:Sunday)
 Now you have 2 task(s) in the list.
@@ -25,4 +22,22 @@ ____________________________________________________________
 Got it. I've added this task:
   [E][ ]  project meeting (at:Mon 2-4pm)
 Now you have 3 task(s) in the list.
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! Seems like you have entered a wrong format for a deadline task. Try this instead: deadline <description> /by <date>
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! Seems like you have entered a wrong format for an event task. Try this instead: event <description> /at <date>
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done:
+  [D][X]  return book (by:Sunday)
+____________________________________________________________
+____________________________________________________________
+OOPS!!! I'm sorry, index is out of range! Please try with a number from 1 to 3
+____________________________________________________________
+____________________________________________________________
+1. [T][ ]  borrow book
+2. [D][X]  return book (by:Sunday)
+3. [E][ ]  project meeting (at:Mon 2-4pm)
 ____________________________________________________________
