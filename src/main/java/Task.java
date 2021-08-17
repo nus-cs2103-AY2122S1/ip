@@ -9,6 +9,8 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+        System.out.println("Good job! I've marked this task as done:");
+        System.out.println(this.toString());
     }
 
     @Override
