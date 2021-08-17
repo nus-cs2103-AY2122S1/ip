@@ -1,10 +1,12 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.regex.*;
 
 public class Duke {
 
     public static final String HORIZONTAL_LINE = "____________________________________________________________ \n";
-    public static ArrayList<String> list = new ArrayList<>();
+    public static ArrayList<Task> taskList = new ArrayList<>();
+    public static boolean terminate = false;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -21,31 +23,42 @@ public class Duke {
 
         String goodbye = "Bye. Hope to see you again soon!\n";
 
-        System.out.print(reply(greeting));
+        reply(greeting);
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 
         while(true) {
             String userInput = myObj.nextLine();
-            if(userInput.equals("bye")) {
+            String output;
+
+            if(userInput.matches("bye")) {
                 break;
-            } else if (userInput.equals("list")) {
+            } else if (userInput.matches("list")) {
                 StringBuilder result = new StringBuilder();
                 int index = 1;
-                for (String items : list) {
-                    result.append(String.valueOf(index) + ". " + items +'\n');
+                for (Task task : taskList) {
+                    result.append(String.valueOf(index) + ". " + task.toString() + '\n');
                     index++;
                 }
-                System.out.print(reply(result.toString()));
+                reply(result.toString());
+            } else if (userInput.matches("done [\\d]+")) {
+                Matcher m = Pattern.compile("[\\d]+").matcher(userInput);
+                m.find();
+                int taskIndex = Integer.parseInt(m.group(0)) - 1;
+                Task task = taskList.get(taskIndex);
+                task.markFinished();
+                output = "Well done! I marked the following task as finished: \n"
+                        + "    " + task.toString() + '\n';
+                reply(output);
             } else {
-                list.add(userInput);
-                System.out.print(reply("added: " + userInput + '\n'));
+                    taskList.add(new Task(userInput));
+                    output = "Added: " + userInput + '\n';
+                    reply(output);
             }
         }
-
-        System.out.print(reply(goodbye));
+        reply(goodbye);
     }
 
-    public static String reply(String output) {
-        return (HORIZONTAL_LINE + output + HORIZONTAL_LINE);
+    public static void reply(String output) {
+        System.out.print(HORIZONTAL_LINE + output + HORIZONTAL_LINE);
     }
 }
