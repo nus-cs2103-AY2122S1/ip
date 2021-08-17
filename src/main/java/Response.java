@@ -31,6 +31,19 @@ public class Response {
         return response;
     }
 
+    public static Response removed(Tasklist tasklist, Task task) {
+        String msg = "Noted. I've removed this task:\n\t" 
+            + task.toString() 
+            + "\nNow you have " 
+            + tasklist.getTotalTasks()
+            + (tasklist.getTotalTasks() == 1 ? " task" : " tasks")
+            + " in the list.";
+
+        Response response = new Response(msg);
+        System.out.println(response);
+        return response;
+    }
+
     public static Response listAllItems(Tasklist tasklist) {
         Response response = new Response("Here are the tasks in your list:\n" 
             + tasklist.toString());

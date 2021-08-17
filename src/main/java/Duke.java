@@ -22,14 +22,48 @@ public class Duke {
                 Response.listAllItems(store);
             }
 
+            // Check if input starts with "delete"
+            else if (firstToken.equals("delete")) {
+                try {
+                    // Check that delete is used correctly
+                    if (input.split(" ").length <= 1) {
+                        throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
+                    }
+                    
+                    // Determine index of task to delete
+                    int index = Integer.parseInt(input.split(" ")[1]);
+
+                    // Check for valid task number provided
+                    if (index < 1 || index > store.getTotalTasks()) {
+                        throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
+                    }
+
+                    // Remove item
+                    Task removed = store.deleteTask(index);
+                    Response.removed(store, removed);
+
+                } catch (DukeException e) {
+                    Response.error(e.getMessage());
+
+                } catch (NumberFormatException e) {
+                    Response.error("☹ OOPS!!! Please provide a valid task number.");
+                }
+            }
+
             // Check if input starts with "done"
             else if (firstToken.equals("done")) {
                 try {
+                    // Check that delete is used correctly
+                    if (input.split(" ").length <= 1) {
+                        throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
+                    }
+
                     // Determine index of task to mark as done
                     int index = Integer.parseInt(input.split(" ")[1]);
 
+                    // Check for valid task number provided
                     if (index > store.getTotalTasks() || index < 1) {
-                        throw new DukeException("Please provide a valid task number.");
+                        throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
                     }
 
                     // Mark item as done
@@ -40,7 +74,7 @@ public class Duke {
                     Response.error(e.getMessage());
 
                 } catch (NumberFormatException e) {
-                    Response.error("Please provide a valid task number.");
+                    Response.error("☹ OOPS!!! Please provide a valid task number.");
                 }
                 
             }
@@ -123,7 +157,7 @@ public class Duke {
             else {
                 try {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    
+
                 } catch (DukeException e) {
                     Response.error(e.getMessage());
                 }
