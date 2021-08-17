@@ -48,22 +48,40 @@ public class Duke {
          */
         String[] input = getInput(sc).split("\\s+");
         String output = "";
-        while (!input[0].equals("bye")) {
+        String command = input[0];
+        while (!command.equals("bye")) {
 
-            if (input[0].equals("list")) {
+            if (command.equals("list")) {
+                // Displays the tasks in the list
                 output = list.toString();
-            } else if (input[0].equals("done")){
+
+            } else if (command.equals("done")) {
+                // Marks a task as done.
                 output = list.markDone(Integer.parseInt(input[1]));
-            } else {
-                String tmp = input[0];
-                for (int i = 1; i < input.length; ++i) {
-                    tmp += " " + input[i];
-                }
-                output = list.addItem(tmp);
+
+            } else if (command.equals("todo")) {
+                // Add a todo task in the list.
+                Todo todo = new Todo(combineStringArray(input, 1, input.length));
+                output = list.addItem(todo);
+
+            } else if (command.equals("deadline")) {
+                // Add a deadline task in the list.
+                String arguments = combineStringArray(input, 1, input.length);
+                String[] divided = arguments.split(" \\/by ");
+                Deadline dl = new Deadline(divided[0], divided[1]);
+                output = list.addItem(dl);
+
+            } else if (command.equals("event")) {
+                // Add an event task in the list.
+                String arguments = combineStringArray(input, 1, input.length);
+                String[] divided = arguments.split(" \\/at ");
+                Event event = new Event(divided[0], divided[1]);
+                output = list.addItem(event);
             }
 
             showMessage(output);
             input = getInput(sc).split("\\s+");
+            command = input[0];
         }
 
         /**
@@ -91,5 +109,27 @@ public class Duke {
         System.out.println(message);
         System.out.println("");
         System.out.println(SPACE + BOT_LINE);
+    }
+
+    /**
+     * Combine an array of strings into a space separated sentence.
+     * @param arr The string array
+     * @param start The starting index to be combined (inclusive)
+     * @param exclusiveEnd The ending index (exclusive)
+     * @return The sentence.
+     */
+    private static String combineStringArray(String[] arr, int start, int exclusiveEnd) {
+        String tmp = "";
+        if (exclusiveEnd > arr.length) {
+            exclusiveEnd = arr.length;
+        }
+        for (int i = start; i < exclusiveEnd; ++i) {
+            if (i + 1 >= exclusiveEnd) {
+                tmp += arr[i];
+            } else {
+                tmp += arr[i] + " ";
+            }
+        }
+        return tmp;
     }
 }

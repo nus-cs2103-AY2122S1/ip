@@ -22,13 +22,14 @@ public class Items {
 
     /**
      * Add an item to the list.
-     * @param item A string to represent the item added
+     * @param task A Task to be added to the list
      * @return A status message to be displayed
      */
-    public String addItem(String item) {
-        Task task = new Task(item);
+    public String addItem(Task task) {
         list[len++] = task;
-        return "added: " + item;
+        String res = "Got it. I've added this task: \n" + "  " + task.toString() + "\n";
+        res += ("Now you have " + len + " tasks in the list");
+        return res;
     }
 
     /**
@@ -39,7 +40,7 @@ public class Items {
     public String markDone(int index) {
         Task task = list[index-1];
         task.markDone();
-        return "Great success! Task Complete: \n[" + task.getStatusIcon() + "] " + task.toString();
+        return "Great success! Task Complete: \n" + "  " + task.toString();
 
     }
 
@@ -50,8 +51,8 @@ public class Items {
     public String toString() {
         String str = "This your task in list:\n";
         for (int i = 0; i < len; ++i) {
-            str += " " + (i + 1) + ". [" + list[i].getStatusIcon() + "] " + list[i].toString() + "\n";
+            str += " " + (i + 1) + ". " + list[i].toString() + "\n";
         }
-        return len == 0 ? "" : str.substring(0, str.length() - 1);
+        return len == 0 ? "You currently have nothing in your list" : str.substring(0, str.length() - 1);
     }
 }
