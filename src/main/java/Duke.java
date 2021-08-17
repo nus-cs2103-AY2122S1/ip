@@ -1,8 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
     public static final String HORIZONTAL_LINE = "____________________________________________________________ \n";
+    public static ArrayList<String> list = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -15,9 +17,9 @@ public class Duke {
         String greeting = "Hello! I am \n"
                     + logo
                     + "The awesome bot helper! \n"
-                    + "How can I help you today?";
+                    + "How can I help you today?\n";
 
-        String goodbye = "Bye. Hope to see you again soon!";
+        String goodbye = "Bye. Hope to see you again soon!\n";
 
         System.out.print(reply(greeting));
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
@@ -26,8 +28,17 @@ public class Duke {
             String userInput = myObj.nextLine();
             if(userInput.equals("bye")) {
                 break;
+            } else if (userInput.equals("list")) {
+                StringBuilder result = new StringBuilder();
+                int index = 1;
+                for (String items : list) {
+                    result.append(String.valueOf(index) + ". " + items +'\n');
+                    index++;
+                }
+                System.out.print(reply(result.toString()));
             } else {
-                System.out.print(reply(userInput));
+                list.add(userInput);
+                System.out.print(reply("added: " + userInput + '\n'));
             }
         }
 
@@ -35,6 +46,6 @@ public class Duke {
     }
 
     public static String reply(String output) {
-        return (HORIZONTAL_LINE + output + '\n' + HORIZONTAL_LINE);
+        return (HORIZONTAL_LINE + output + HORIZONTAL_LINE);
     }
 }
