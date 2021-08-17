@@ -20,6 +20,7 @@ public class Duke {
         printLogo();
         greet();
         run();
+        exit();
     }
 
     public static void printLogo() {
@@ -39,7 +40,6 @@ public class Duke {
             userInput = SCANNER.nextLine();
             userInput = userInput.trim();
         }
-        exit();
     }
 
     public static void exit() {
