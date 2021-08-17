@@ -8,6 +8,11 @@ public class TaskArrayList extends ArrayList<Task> {
         super();
     }
 
+    public String addTask(Task task){
+        this.add(task);
+        String reply = task.addMsg();
+        return reply + "\n" + this.newLength();
+    }
 
     public String newLength(){
         return String.format("Now you have %d tasks in the list.",this.size());

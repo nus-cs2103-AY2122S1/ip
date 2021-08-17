@@ -19,12 +19,6 @@ public class Duke {
                 + "\t" + border;
     }
 
-    private static String addTaskMessage(TaskArrayList taskList, Task toAdd){
-        taskList.add(toAdd);
-        String reply = toAdd.addMsg();
-        return reply + "\n" + taskList.newLength();
-    }
-
     public static void main(String[] args) {
         TaskArrayList taskList = new TaskArrayList();
 
@@ -84,7 +78,7 @@ public class Duke {
                 case ("todo"):
                     try {
                         toAdd = Todo.fromCmd(cmd_args);
-                        System.out.println(formatReply(addTaskMessage(taskList, toAdd)));
+                        System.out.println(formatReply(taskList.addTask(toAdd)));
                     } catch (DukeException e){
                         System.out.println(formatReply(e.toString()));
                     }
@@ -93,7 +87,7 @@ public class Duke {
                 case ("deadline"):
                     try{
                         toAdd = Deadline.fromCmd(cmd_args);
-                        System.out.println(formatReply(addTaskMessage(taskList, toAdd)));
+                        System.out.println(formatReply(taskList.addTask(toAdd)));
                     } catch (DukeException e){
                         System.out.println(formatReply(e.toString()));
                     }
@@ -102,7 +96,7 @@ public class Duke {
                 case ("event"):
                     try{
                         toAdd = Event.fromCmd(cmd_args);
-                        System.out.println(formatReply(addTaskMessage(taskList, toAdd)));
+                        System.out.println(formatReply(taskList.addTask(toAdd)));
                     } catch (DukeException e) {
                         System.out.println(formatReply(e.toString()));
                     }
