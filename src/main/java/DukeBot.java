@@ -23,22 +23,27 @@ class DukeBot {
         return taskList.toString();
     }
 
-    private String handleDone(String[] inputs) throws InvalidCommandException {
-        if (inputs.length < 2) {
-            throw new InvalidCommandException("Which task would you like to mark as done?");
-        }
-        int taskNo;
+    private int parseTaskNumber(String str) throws InvalidCommandException {
+        int num;
         try {
-            taskNo = Integer.parseInt(inputs[1]);
+            num = Integer.parseInt(str);
         } catch (NumberFormatException e) {
             throw new InvalidCommandException("I don't see a task number! >.<");
         }
-        if (taskNo > taskList.size() || taskNo <= 0) {
+        if (num > taskList.size() || num <= 0) {
             String msg = taskList.size() == 0
                     ? "You don't have any tasks!"
                     : "Invalid take number! Must be between 1 and " + taskList.size();
             throw new InvalidCommandException(msg);
         }
+        return num;
+    }
+
+    private String handleDone(String[] inputs) throws InvalidCommandException {
+        if (inputs.length < 2) {
+            throw new InvalidCommandException("Which task would you like to mark as done?");
+        }
+        int taskNo = parseTaskNumber(inputs[1]);
         return taskList.markAsDone(taskNo)
                 ? "I've marked this task as done:\n  " + taskList.get(taskNo)
                 : "Task already done.";
@@ -48,18 +53,7 @@ class DukeBot {
         if (inputs.length < 2) {
             throw new InvalidCommandException("Which task would you like to delete?");
         }
-        int taskNo;
-        try {
-            taskNo = Integer.parseInt(inputs[1]);
-        } catch (NumberFormatException e) {
-            throw new InvalidCommandException("I don't see a task number! >.<");
-        }
-        if (taskNo > taskList.size() || taskNo <= 0) {
-            String msg = taskList.size() == 0
-                    ? "You don't have any tasks!"
-                    : "Invalid take number! Must be between 1 and " + taskList.size();
-            throw new InvalidCommandException(msg);
-        }
+        int taskNo = parseTaskNumber(inputs[1]);
         return "Noted. I've deleted this task:\n  " + taskList.delete(taskNo);
     }
 
