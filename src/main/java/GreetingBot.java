@@ -21,31 +21,37 @@ public class GreetingBot {
 
     private void store() {
         Scanner inputScanner = new Scanner(System.in);
-        LinkedList<String> myList = new LinkedList<>();
+        LinkedList<Task> myList = new LinkedList<>();
+        int counter = 1;
         while (true) {
             String nextLine = inputScanner.nextLine();
             if (nextLine.equals("list")) {
                 list(myList);
             } else if  (nextLine.equals("bye")) {
                 break;
+            } else if (nextLine.startsWith("done")) {
+                String[] splitWords = nextLine.split(" ");
+                int taskIndex = Integer.parseInt(splitWords[1]);
+                myList.get(taskIndex - 1).setDone(true);
             } else {
-                myList.add(nextLine);
+                Task nextTask = new Task(nextLine, counter);
+                myList.add(nextTask);
+                counter += 1;
                 System.out.println("added: " + nextLine);
             }
         }
     }
 
-    private void list(LinkedList<String> myList) {
+    private void list(LinkedList<Task> myList) {
+        System.out.println("Here are the tasks in your list:");
         int counter = 0;
         while(counter < myList.size()) {
-            System.out.println((counter + 1) + ". " + myList.get(counter));
-
+            System.out.println(myList.get(counter).toString());
             counter += 1;
         }
-
-
-
     }
+
+
 
 
     private void echo() {
