@@ -1,39 +1,67 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    List<String> itemList;
+
+    public Duke() {
+        itemList = new ArrayList<>(100);
+    }
 
     void startConversation() {
         Scanner sc = new Scanner(System.in);
 
         greeting("Alex");
-        while(true) {
+        while (true) {
             // conversation loop
-            String input = sc.next();
-            if(!input.equals("bye")) {
-                printHorizLine();
-                System.out.println("\t" + input);
-                printHorizLine();
-            } else {
+            String input = sc.nextLine();
+            if (input.equals("bye")) {
                 break;
+            }
+
+            switch (input) {
+            case "":
+                break;
+            case "list":
+                listItem();
+                break;
+            default:
+                addItem(input);
             }
         }
         sayBye("Alex");
     }
 
-    void greeting(String name) {
+    private void addItem(String item) {
+        this.itemList.add(item);
+        printHorizLine();
+        System.out.println("\tadded " + item);
+        printHorizLine();
+    }
+
+    private void listItem() {
+        printHorizLine();
+        for (int i = 1; i <= this.itemList.size(); i++) {
+            System.out.format("\t%d. %s\n", i, itemList.get(i-1));
+        }
+        printHorizLine();
+    }
+
+    private void greeting(String name) {
         printHorizLine();
         System.out.println("\tHello " + name + "!");
         System.out.println("\tI'm Duke");
         printHorizLine();
     }
 
-    void sayBye(String name) {
+    private void sayBye(String name) {
         printHorizLine();
         System.out.println("\tBye " + name + ", hope to see you soon!");
         printHorizLine();
     }
 
-    void printHorizLine() {
+    private void printHorizLine() {
         System.out.println("\t————————————————————————————————————————");
     }
 
