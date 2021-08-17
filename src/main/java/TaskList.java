@@ -41,10 +41,10 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        String output = "";
+        String output = "Here are the tasks in your list:";
         for (int i = 0; i < counter; i++) {
             int index = i + 1;
-            output += index + ". " + this.tasks[i].toString() + "\n";
+            output += "\n" + index + "." + this.tasks[i].toString();
         }
         return output;
     }
