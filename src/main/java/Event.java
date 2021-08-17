@@ -3,12 +3,12 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Event extends Task{
-    private String eventType;
-    private String time;
+    private final String eventType;
+    private final String time;
 
     /**
      * Takes in a string and splits msg into based on /at pattern. Set the eventType and time of the instance
-     * @param input
+     * @param input string from the user
      */
     public Event(String input){
         super();
@@ -25,7 +25,7 @@ public class Event extends Task{
     }
     /**
      * Returns a string that describes the instance
-     * @return String
+     * @return String containing details of the task
      */
     @Override
     public String toString(){

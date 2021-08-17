@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 
 public class Storage {
 
-    private LinkedHashMap<String, Task> mapper;
+    private final LinkedHashMap<String, Task> mapper;
 
     /**
      * Basic constructor
@@ -17,67 +17,73 @@ public class Storage {
     /**
      * Prints a basic "Added ____"
      * @param action the string that describes the task
+     * @return String that contains the message output of adding task
      */
-    public void basicAdd(String action) {
+    public String basicAdd(String action) {
         mapper.put(action, new Task(action));
-        Speech.speak("added: " + action);
+        return "added: " + action;
     }
 
     /**
      * Identify, Search and Modify the isDone status of task based on the getStorage printed msg
-     * @param input
+     * @param input tajes in the input from user
+     * @return String that contains the done success msg
      * @throws NumberFormatException if character after "done" is not an integer
      * @throws NullPointerException if the number provided by user is not found in the getStorage printed msg
      */
-    public void done (String input) throws NumberFormatException, NullPointerException {
+    public String done (String input) throws NumberFormatException, NullPointerException {
         int list_no = Integer.parseInt(input.trim()); //possible NumberFormatException
         Collection<Task> values = mapper.values();
         Task second = values.stream().skip(list_no-1).findFirst().orElse(null); // possible for task to be null
         String key = second.getDescription();
         mapper.put(key, mapper.get(key).setDone());
-        Speech.done_msg(mapper.get(key).toString());
+        return mapper.get(key).toString();
     }
 
     /**
      * Creates a task instance, adds to storage and prints a success msg
-     * @param input
+     * @param input tajes in the input from user
+     * @return String that contains the success msg
      */
-    public void todo (String input) {
+    public String todo (String input) {
         Todo todo = new Todo(input);
         mapper.put(todo.getDescription(), todo);
-        Speech.task_added(todo.toString(), task_left());
+        return todo.toString();
     }
     /**
      * Creates a task instance, adds to storage and prints a success msg
-     * @param input
+     * @param input tajes in the input from user
+     * @return String that contains the success msg
      */
-    public void deadline (String input) {
+    public String deadline (String input) {
         Deadline deadline = new Deadline(input);
         mapper.put(deadline.getDescription(), deadline);
-        Speech.task_added( deadline.toString(), task_left());
+        return deadline.toString();
     }
     /**
      * Creates a task instance, adds to storage and prints a success msg
-     * @param input
+     * @param input tajes in the input from user
+     * @return String that contains the success msg
      */
-    public void event (String input) {
+    public String event (String input) {
         Event event = new Event(input);
         mapper.put(event.getDescription(), event);
-        Speech.task_added(event.toString(), task_left());
+        return event.toString();
     }
 
     /**
      * Returns the number of task in the list ( does not matter if its done or not )
-     * @return int
+     * @return int returns the current list size
      */
-    private int task_left() {
+    public int task_left() {
         return mapper.size();
     }
 
     /**
-     * Prints the list in insertion order
+     * Details of the task and list them in insertion order
+     * @return String that contains the details of task in list
      */
-    public void getStorage() {
+    public String[] getStorage() {
         Collection<Task> values = mapper.values();
         Iterator<Task> look = values.iterator();
         String[] check = new String[mapper.size()];;
@@ -87,7 +93,7 @@ public class Storage {
             check[iter_pos] = p_pos + look.next().toString();
             iter_pos++;
         }
-        Speech.speak(check);
+        return check;
     }
 
 }

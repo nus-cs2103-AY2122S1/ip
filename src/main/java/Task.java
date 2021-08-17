@@ -11,7 +11,7 @@ public class Task {
 
     /**
      * Basic constructor for task, takes in a string that describes the task
-     * @param description
+     * @param description contains details of the task description
      */
     public Task(String description){
         setNotDone();
@@ -28,10 +28,10 @@ public class Task {
 
     /**
      * Sets the description of the task
-     * @param in
+     * @param input set task description
      */
-    protected void setDescription(String in){
-        this.description = in;
+    protected void setDescription(String input){
+        this.description = input;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Task {
 
     /**
      * Returns a string that describes the instance
-     * @return String
+     * @return String containing details of the task
      */
     @Override
     public String toString(){

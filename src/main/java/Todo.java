@@ -1,5 +1,5 @@
 public class Todo extends Task{
-    private String eventType;
+    private final String eventType;
 
     /**
      * Takes in a string Set the eventType and description of the instance

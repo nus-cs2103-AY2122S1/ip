@@ -3,12 +3,12 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Deadline extends Task{
-    private String eventType;
-    private String time;
+    private final String eventType;
+    private final String time;
 
     /**
      * Takes in a string and splits msg into based on /by pattern. Set the eventType and time of the instance
-     * @param input
+     * @param input string from the user
      */
     public Deadline(String input){
         super();
@@ -26,7 +26,7 @@ public class Deadline extends Task{
 
     /**
      * Returns a string that describes the instance
-     * @return String
+     * @return String containing details of the task
      */
     @Override
     public String toString(){
