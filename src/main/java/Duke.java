@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;  // Import the Scanner class
 
 public class Duke {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
@@ -11,7 +12,6 @@ public class Duke {
         String command = scanner.nextLine();
         while (!command.equals("bye")) {
             if (command.equals("list")) {
-
                 System.out.println(line);
                 for (int i = 0; i < list.size(); i++) {
                     Task task = list.get(i);
@@ -38,7 +38,7 @@ public class Duke {
                         System.out.println((index) + ". " + list.get(index - 1)); //actual index is index - 1
                         System.out.println(line);
                     } catch (DukeException e) {
-                        System.out.println("***WARNING*** An error has occured Master Wayne: " + e.getMessage());
+                        System.out.println("***WARNING*** An error has occurred Master Wayne: " + e.getMessage());
                     }
 
                     command = scanner.nextLine();
@@ -63,7 +63,7 @@ public class Duke {
                         System.out.println(line);
 
                     } catch (DukeException e) {
-                        System.out.println("***WARNING*** An error has occured Master Wayne: " + e.getMessage());
+                        System.out.println("***WARNING*** An error has occurred Master Wayne: " + e.getMessage());
                     }
 
                     command = scanner.nextLine();
@@ -91,7 +91,7 @@ public class Duke {
                             System.out.println("Now you have " + list.size() + " tasks in the list.");
                         }
                     } catch (DukeException e) {
-                        System.out.println("***WARNING*** An error has occured Master Wayne: " + e.getMessage());
+                        System.out.println("***WARNING*** An error has occurred Master Wayne: " + e.getMessage());
                     }
 
                     command = scanner.nextLine();
@@ -103,7 +103,7 @@ public class Duke {
 
                     for (int i = 1; i < split.length; i++) {
                         if (byfound) {
-                            if (by == "") {
+                            if (by.equals("")) {
                                 by = split[i];
                             } else {
                                 by = by + " " + split[i];
@@ -133,7 +133,7 @@ public class Duke {
                         }
 
                     } catch (DukeException e) {
-                        System.out.println("***WARNING*** An error has occured Master Wayne: " + e.getMessage());
+                        System.out.println("***WARNING*** An error has occurred Master Wayne: " + e.getMessage());
                     }
 
                     command = scanner.nextLine();
@@ -145,7 +145,7 @@ public class Duke {
 
                     for (int i = 1; i < split.length; i++) {
                         if (atFound) {
-                            if (at == "") {
+                            if (at.equals("")) {
                                 at = split[i];
                             } else {
                                 at = at + " " + split[i];
@@ -175,7 +175,7 @@ public class Duke {
                             System.out.println("Now you have " + list.size() + " tasks in the list.");
                         }
                     } catch (DukeException e) {
-                        System.out.println("***WARNING*** An error has occured Master Wayne: " + e.getMessage());
+                        System.out.println("***WARNING*** An error has occurred Master Wayne: " + e.getMessage());
                     }
 
                     command = scanner.nextLine();
@@ -185,10 +185,10 @@ public class Duke {
                     command = scanner.nextLine();
                 }
             }
-            ;
         }
         System.out.println("Have a pleasant day, Master Wayne.\n");
     }
+
 
     public static void checkDesc(String test) throws DukeException {
         if (test.equals("")) {
