@@ -79,4 +79,14 @@ public class DukeList {
     }
 
 
+    public void delete(int item) {
+        Task task = list.get(item - 1);
+        list.remove(item - 1);
+
+        String response = "Noted. I've removed this task:\n";
+        String taskCount = "\nNow you have " + list.size() + " tasks in the list";
+        System.out.println(response + task.toString() + taskCount);
+    }
+
+
 }
