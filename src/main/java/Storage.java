@@ -13,9 +13,7 @@ public class Storage {
 
     public Storage (String filename) {
         try {
-            //this way of doing it, writer always creates a new blank file. I want to open OR write.
             path = FileSystems.getDefault().getPath("data", filename);
-
             reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
         } catch (IOException e) {
             System.out.println("Temp. IO Exception occurred while initialising Storage.");
