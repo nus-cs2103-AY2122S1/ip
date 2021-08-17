@@ -21,7 +21,7 @@ public class TaskStorage {
     // Marks a task as done, and returns a confirmation message
     public String markDone(int ind) {
         if (ind < 0 || ind >= storage.size()){ 
-            throw new IllegalArgumentException("Bad index entered by user. >:(");
+            throw new IllegalArgumentException("☹ OOPS!!! Index entered is not valid. Please use 'list' and check for the appropriate index for task(s).");
         }
         storage.get(ind).markDone();
 
@@ -31,14 +31,14 @@ public class TaskStorage {
     // Gets a task from the storage
     public Task get(int ind) {
         if (ind < 0 || ind >= storage.size()){ 
-            throw new IllegalArgumentException("Bad index entered by user. >:(");
+            throw new IllegalArgumentException("☹ OOPS!!! Index entered is not valid. Please use 'list' and check for the appropriate index for task(s).");
         }
         return storage.get(ind);
     }
 
     public String delete(int ind) {
         if (ind < 0 || ind >= storage.size()){ 
-            throw new IllegalArgumentException("Bad index entered by user. >:(");
+            throw new IllegalArgumentException("☹ OOPS!!! Index entered is not valid. Please use 'list' and check for the appropriate index for task(s).");
         }
         String result = "Noted. I've removed this task:\n  " + storage.get(ind).toString() + "\n";
         storage.remove(ind);
