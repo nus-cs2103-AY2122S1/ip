@@ -1,0 +1,12 @@
+test 1
+todo todo test 2
+event test 3
+event test 3 /at 5min later
+list
+deadline test 4 /at afternoon
+deadline test 4 /by afternoon
+done 24
+done 101
+done 4
+list
+bye
