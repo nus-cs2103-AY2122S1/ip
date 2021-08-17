@@ -78,16 +78,42 @@ public class Duke {
                 System.out.println("     " + e.getMessage());
             }
             return "";
+        } else if (words[0].equalsIgnoreCase("delete")) {
+            if (words.length == 1) {
+                System.out.println("     Unable to delete task without an index. Please input index :)");
+                System.out.println("     Please input in the form: delete <task index>.");
+                System.out.println("     Note: list can be used to see the current tasks.");
+            } else {
+                if (tasks.isEmpty() || tasks == null) {
+                    System.out.println("     List is empty, no tasks to delete, looking good!");
+                } else {
+                    try {
+                        int index = Integer.parseInt(words[1]) - 1;
+                        deleteTask(index);
+                    } catch (NumberFormatException e) {
+                        System.out.println("     Please use a number instead :(");
+                    }
+
+                }
+            }
+            return "";
         } else {
             try {
                 createTask(words);
             } catch (IllegalArgumentException e) {
                 System.out.println("     " + e.getMessage());
-                System.out.println("     Please input in the form: <Type of Task> <Name of Task>" +
-                        " and include keyword '/at' OR '/by' with date if relevant.");
+                helperMessage();
             }
             return "";
         }
+    }
+
+    public static void deleteTask(int ind) {
+        //because of how this method is called, ind will be valid
+        Task t = tasks.remove(ind);
+        System.out.println("     Noted, the following task has been deleted: ");
+        System.out.println("       " + t.getType() + "[" + t.getStatus() + "] " + t.getTask());
+        System.out.println("     Nice! there are " + tasks.size() + " tasks left." );
     }
 
     /**
@@ -112,8 +138,8 @@ public class Duke {
                     System.out.println("     I can't add an event without a date!");
                 }
             }
-            System.out.println("     Please input in the form: <Type of Task> <Name of Task>" +
-                    " and include keyword '/at' OR '/by' with date if relevant.");
+            helperMessage();
+
         } else if (args[0].equalsIgnoreCase("todo")) {
             ToDo t = new ToDo(filterInfo(args));
             addTask(t);
@@ -125,9 +151,20 @@ public class Duke {
             addTask(d);
         } else {
             System.out.println("     Invalid input :(");
-            System.out.println("     Please input in the form: <Type of Task> <Name of Task>" +
-                    " and include keyword '/at' OR '/by' with date if relevant.");
+            helperMessage();
         }
+    }
+
+    public static void helperMessage() {
+        System.out.println("     If you wish to add a task: " +
+                " Please input in the form: <Type of Task> <Name of Task>" +
+                " and include keyword '/at' OR '/by' with date if relevant.");
+        System.out.println("     Types of tasks: todo, date, event");
+        System.out.println("     If you wish to delete a task:"
+                + " Please input in the form: delete <task index>.");
+        System.out.println("     If you wish to see the current tasks, please input 'list'.");
+        System.out.println("     If you wish to mark a task as done, please input 'done <task index>.'");
+        System.out.println("     If you wish to terminate the program, please input 'bye'.");
     }
 
     /**
