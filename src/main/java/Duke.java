@@ -27,24 +27,89 @@ public class Duke {
      * @param command input command from the user
      */
     public static void handleInput(String command) {
+        // first element is the instruction, second element is the rest of the command
         String[] inputWords = command.split(" ", 2);
         switch (inputWords[0]) {
             case "bye":
                 break;
             case "list":
-                for (int i = 0; i < arr.size(); i++) {
-                    System.out.println(i + 1 + ": " + arr.get(i));;
-                }
+                printTasks();
                 break;
             case "done":
-                int taskId = Integer.parseInt(inputWords[1]);
-                arr.get(taskId - 1).setIsDone(true);
-                System.out.println("Nice! I've marked this task as done.");
-                System.out.println("   " + arr.get(taskId - 1));
+                markTaskAsDone(Integer.parseInt(inputWords[1]));
                 break;
+            case "todo":
+                addTodo(inputWords[1]);
+                break;
+            case "deadline": {
+                addDeadline(inputWords[1]);
+                break;
+            }
+            case "event": {
+                addEvent(inputWords[1]);
+                break;
+            }
             default:
-                arr.add(new Task(command));
-                System.out.println("Added " + command);
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    /**
+     * Lists out all the tasks.
+     */
+    public static void printTasks() {
+        for (int i = 0; i < arr.size(); i++) {
+            System.out.println(i + 1 + ": " + arr.get(i));;
+        }
+    }
+
+    /**
+     * Mark a task as done.
+     * @param TaskId ID of the task we are marking as done.
+     */
+    public static void markTaskAsDone(int TaskId) {
+        arr.get(TaskId - 1).setIsDone(true);
+        System.out.println("Nice! I've marked this task as done.");
+        System.out.println("   " + arr.get(TaskId - 1));
+    }
+
+    /**
+     * Adds a Todo task.
+     * @param description Description of the Todo.
+     */
+    public static void addTodo(String description) {
+        arr.add(new Todo(description));
+        printAfterAdding();
+    }
+
+    /**
+     * Adds a Deadline task.
+     * @param fullDescription String that contains the description and deadline of the task.
+     */
+    public static void addDeadline(String fullDescription) {
+        String description = fullDescription.substring(0, fullDescription.indexOf("/by"));
+        String deadline = fullDescription.substring(fullDescription.indexOf("/by") + 4);
+        arr.add(new Deadline(description, deadline));
+        printAfterAdding();
+    }
+
+    /**
+     * Adds an Event task.
+     * @param fullDescription String that contains the description and time of the task.
+     */
+    public static void addEvent(String fullDescription) {
+        String description = fullDescription.substring(0, fullDescription.indexOf("/at"));
+        String time = fullDescription.substring(fullDescription.indexOf("/at") + 4);
+        arr.add(new Event(description, time));
+        printAfterAdding();
+    }
+
+    /**
+     * Prints information about the latest element that was just added.
+     */
+    public static void printAfterAdding() {
+        System.out.println("Got it. I've added this task:");
+        System.out.println("   " + arr.get(arr.size() - 1));
+        System.out.println("Now you have " + arr.size() + " task(s) in the list.");
     }
 }

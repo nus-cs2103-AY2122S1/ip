@@ -2,7 +2,7 @@
  * This class represents a Task object, which has a description for the current task and also a boolean value which
  * indicates if the task is done or not.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -27,9 +27,7 @@ public class Task {
      * Provides a String representation for each Task object.
      * @return A String that describes the current Task object.
      */
-    public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
-    }
+    public abstract String toString();
 
     /**
      * Sets whether the current Task is done or not.
