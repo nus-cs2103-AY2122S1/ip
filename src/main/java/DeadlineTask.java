@@ -22,4 +22,24 @@ public class DeadlineTask extends TDLTask {
     public TaskType getTaskType() {
         return TaskType.DEADLINE;
     }
+
+    /**
+     * Returns a string containing the letter representing the task type in square brackets.
+     *
+     * @return a string containing [X] where X is the letter representing the task type.
+     */
+    @Override
+    public String getTaskTypeStringHeader() {
+        return "[D]";
+    }
+
+    /**
+     * Returns a string containing the task's name and additional descriptions if applicable.
+     *
+     * @return the string describing the task.
+     */
+    @Override
+    public String getTaskDescription() {
+        return this.getTaskName() + "(by: " + this.byWhen + ")";
+    }
 }

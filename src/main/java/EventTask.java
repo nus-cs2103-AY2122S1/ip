@@ -22,4 +22,24 @@ public class EventTask extends TDLTask {
         return TaskType.EVENT;
     }
 
+    /**
+     * Returns a string containing the letter representing the task type in square brackets.
+     *
+     * @return a string containing [X] where X is the letter representing the task type.
+     */
+    @Override
+    public String getTaskTypeStringHeader() {
+        return "[E]";
+    }
+
+    /**
+     * Returns a string containing the task's name and additional descriptions if applicable.
+     *
+     * @return the string describing the task.
+     */
+    @Override
+    public String getTaskDescription() {
+        return this.getTaskName() + "(at: " + this.atContents + ")";
+    }
+
 }

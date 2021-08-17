@@ -20,6 +20,16 @@ public class ToDosTask extends TDLTask {
         return TaskType.TODO;
     }
 
+    /**
+     * Returns a string containing the letter representing the task type in square brackets.
+     *
+     * @return a string containing [X] where X is the letter representing the task type.
+     */
+    @Override
+    public String getTaskTypeStringHeader() {
+        return "[T]";
+    }
+
 }
 
 
