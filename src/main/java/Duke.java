@@ -58,7 +58,7 @@ public class Duke {
     }
 
     /* added the information that was inputted,
-       prints out all the information when list is inputted,
+     * prints out all the information when list is inputted,
      *  and displays the bye message and terminates when the
      *  user inputs bye
      */
