@@ -27,7 +27,11 @@ public class Duke {
                 int value = Character.getNumericValue(input.charAt(5));
                 Done.of(tasks, value).exec();
             } else {
-                Add.of(this.tasks, input).exec();
+                try {
+                    Add.of(this.tasks, input).exec();
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
         Exit.of().exec();
