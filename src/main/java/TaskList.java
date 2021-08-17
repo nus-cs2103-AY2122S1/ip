@@ -7,13 +7,11 @@ public class TaskList {
         this.length = 0;
     }
 
-    public void add(String newItem) {
-        if (!newItem.equals("")) {
-            Task newTask = new Task(newItem);
-            taskList[this.length] = newTask;
-            System.out.println("added: " + newItem);
-            this.length++;
-        }
+    public void add(Task newTask) {
+        taskList[this.length] = newTask;
+        System.out.println("Just added:\n" + newTask.toString());
+        this.length++;
+        System.out.println("You currently have " + length + " tasks in the list.");
     }
 
     public void done(String strNum) {
