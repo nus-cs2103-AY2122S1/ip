@@ -6,7 +6,7 @@ public class Duke {
 
         // This class represents the tasks added by the user
         class Task {
-            protected String description;
+            protected final String description;
             protected boolean isDone;
 
             public Task(String description) {
@@ -22,10 +22,53 @@ public class Duke {
                 this.isDone = true;
             }
 
+//            public String toString() {
+//                return "[" + this.getStatusIcon() + "] " + this.description;
+//            }
+        }
+
+        class Deadline extends Task {
+            protected final String dateBy;
+
+            public Deadline(String description, String dateBy) {
+                super(description);
+                this.dateBy = dateBy;
+            }
+
+            @Override
             public String toString() {
-                return "[" + this.getStatusIcon() + "] " + this.description;
+                return "[D]" + super.toString() + " (by: " + dateBy + ")";
             }
         }
+
+        class Event extends Task {
+            protected final String eventDetails;
+
+            public Event(String description, String eventDetails) {
+                super(description);
+                this.eventDetails = eventDetails;
+            }
+
+            @Override
+            public String toString() {
+                return "[E]" + super.toString() + " (at: " + eventDetails + ")";
+            }
+        }
+
+        class Todo extends Task {
+            protected final String todoItem;
+
+            public Todo(String description, String todoItem) {
+                super(description);
+                this.todoItem = todoItem;
+            }
+
+            @Override
+            public String toString() {
+                return "[D]" + super.toString() + " (dateBy: " + todoItem + ")";
+            }
+        }
+
 
         String linebreak = "~~~~~~~~~~";
         String command; // this is the container for the command received from the user
@@ -35,6 +78,7 @@ public class Duke {
         // The chat bot name is Notaro bc it's Not-a-ro-bot :>
         // This is the introduction of the chat bot, and includes a list of the commands for the user
         System.out.println("Hi! I'm Taro, short for Notaro because I'm Not-a-ro-bot!!");
+        System.out.println("There are three special tasks you can add: Deadline, Event and Todo");
         System.out.println("Here are some special keywords! :");
         System.out.println("bye : End our conversation :(");
         System.out.println("list : Adds stuff into your todo list!");
@@ -70,7 +114,8 @@ public class Duke {
                 System.out.println(linebreak);
 
 
-            } else { // an item is added
+            // Else, assume that an item is added to the chat bot
+            } else {
                 System.out.println("added: " + command);
                 System.out.println(linebreak);
                 todoList[pointer] = new Task(command);
