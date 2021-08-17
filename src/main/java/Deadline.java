@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 /**
  * A class to create task with the type of Deadline.
+ *
+ * @author Felissa Faustine
  */
 public class Deadline extends Task {
     public String time;
@@ -33,6 +35,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return getSymbol() + " " + super.toString() + "(by:" + this.time + ")";
+        return getSymbol() + super.toString() + "(by:" + this.time + ")";
     }
 }

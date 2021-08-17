@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 /**
  * A class to create task with the type of todo.
+ *
+ * @author Felissa Faustine
  */
 public class Todo extends Task {
 
@@ -30,6 +32,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return getSymbol() + " " + super.toString();
+        return getSymbol() + super.toString();
     }
 }

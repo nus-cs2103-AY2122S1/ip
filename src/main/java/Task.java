@@ -1,5 +1,7 @@
 /**
  * An abstract class for tasks.
+ *
+ * @author Felissa Faustine
  */
 public abstract class Task {
     public String taskName;

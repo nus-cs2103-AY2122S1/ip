@@ -1,5 +1,7 @@
 /**
  * A class to create invalid task number exceptions.
+ *
+ * @author Felissa Faustine
  */
 public class InvalidTaskNumberException extends RuntimeException {
 

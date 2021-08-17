@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 /**
  * A class to create tasks with the type of event.
+ *
+ * @author Felissa Faustine
  */
 public class Event extends Task {
     public String time;
@@ -33,6 +35,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return getSymbol() + " " + super.toString() + "(at:" + this.time + ")";
+        return getSymbol() + super.toString() + "(at:" + this.time + ")";
     }
 }

@@ -1,5 +1,7 @@
 /**
  * A class to create invalid type exceptions.
+ *
+ * @author Felissa Faustine
  */
 public class InvalidTypeException extends RuntimeException {
 

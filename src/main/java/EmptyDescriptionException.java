@@ -1,5 +1,7 @@
 /**
  * A class to create empty description exceptions.
+ *
+ * @author Felissa Faustine
  */
 public class EmptyDescriptionException extends RuntimeException {
 
