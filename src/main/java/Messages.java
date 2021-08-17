@@ -1,15 +1,14 @@
-import javax.lang.model.type.ArrayType;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UI {
+public class Messages {
 
     private static final String GREET = "Hi there! My name's Duke, how can I help you today?";
     private static final String EXIT = "Bye! See you next time!";
 
     private Scanner sc;
 
-    public UI () {
+    public Messages () {
         this.sc = new Scanner(System.in);
     }
 
@@ -34,23 +33,17 @@ public class UI {
             for (Task task : list) {
                 userList =  userList + (list.indexOf(task) + 1) + ". " + task.toString() + "\n";
             }
-            return userList;
+            return "Here are the tasks in your list: \n" + userList;
         }
     }
 
-    public String addedTask(String task) {
-        return String.format("added: %s", task);
+    public String addedTask(Task task) {
+        return String.format("Got it. I've added this task: \n %s \nNow you have %d tasks in the list.",
+                task.toString(), ToDoList.getTodoList().size());
     }
 
     public String doneTask (Task task) {
         return String.format("Nice! I've marked this task as done: \n %s", task.toString());
     }
-
-    /**
-     public String formattedEchoCommand () {
-     return String.format("...............\n %s \n...............", echoCommand());
-     }
-     */
-
 
 }
