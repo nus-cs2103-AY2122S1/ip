@@ -16,28 +16,26 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        // Add task based on user input
-        // and exit when the input is "bye"
-        while (true) {
-            if (input.equals("bye")) {
-                Printer.prettyPrint("Bye (*´▽｀)ノシ. Have a good day!\n");
-                break;
-            } else if (input.startsWith("done")) {
-                tasks[Integer.parseInt(input.split(" ")[1]) - 1].markAsDone();
-            } else {
-                switch (input) {
-                    case "list":
-                        Printer.prettyPrint("Here are the tasks in your list:\n" +
-                                Printer.listTask(tasks));
-                        break;
-                    default:
-                        tasks[numOfTask++] = new Task(input);
-                        Printer.prettyPrint("added: " +
-                                input + "\n");
-                }
+        // Execute based on command (user input)
+        // Exit when user commands "bye"
+        while (!input.equals("bye")) {
+            String[] command = input.split(" ");
+            switch (command[0]) {
+                case "list":
+                    Printer.prettyPrint("Here are the tasks in your list:\n" +
+                            Printer.listTask(tasks));
+                    break;
+                case "done":
+                    tasks[Integer.parseInt(command[1]) - 1].markAsDone();
+                    break;
+                default:
+                    tasks[numOfTask++] = new Task(input);
+                    Printer.prettyPrint("added: " +
+                            input + "\n");
             }
             input = scanner.nextLine();
         }
+        Printer.prettyPrint("Bye (*´▽｀)ノシ. Have a good day!\n");
     }
 }
 
