@@ -102,7 +102,6 @@ public class Duke {
                         onlyDescription = descriptions.split("/")[0];
                         dayTime = descriptions.split("/at")[1];
                         Events event = new Events(onlyDescription, dayTime);
-                        arrList.add(event);
                         this.addTask(event);
                         break;
 
