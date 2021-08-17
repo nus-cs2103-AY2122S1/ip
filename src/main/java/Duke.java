@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -141,6 +140,21 @@ public class Duke {
                         Deadline deadline = new Deadline(ddlDescription, by);
                         list.add(deadline);
                         printMessage("Got it. I've added this task:\n\t" + deadline + "\nNow you have " + list.size() + " tasks in the list.");
+                        break;
+                    case "delete":
+                        try {
+                            int deleteIndex = Integer.parseInt(command.substring(7));
+                            try {
+                                Task removed = list.remove(deleteIndex - 1);
+                                printMessage("Noted. I've removed this task:\n\t" + removed);
+                            } catch (IndexOutOfBoundsException e) {
+                                // Task at deleteIndex does not exist
+                                printMessage("Task " + deleteIndex + " does not exist. Please check your task list!");
+                            }
+                        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+                            // command delete is not followed by a number
+                            printMessage("☹ OOPS!!! The index of a task to be deleted must be an integer.");
+                        }
                         break;
                     default:
                         // Message for unrecognised task type
