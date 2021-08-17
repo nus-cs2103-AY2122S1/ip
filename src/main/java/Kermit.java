@@ -14,7 +14,7 @@ public class Kermit {
         Scanner sc = new Scanner(System.in);
         String command = "";
 
-        ToDo<String> list = new ToDo<>();
+        ToDo<Task> list = new ToDo<>();
 
         final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
         final String goodbyeText = "Bye. Hope to see you again soon!";
@@ -32,7 +32,8 @@ public class Kermit {
                 System.out.println(formatText(list.toString()));
             // Add objects to list
             } else {
-                list.add(command);
+                Task newTask = new Task(command);
+                list.add(newTask);
                 System.out.println(formatText("Added: " + command));
             }
         }
