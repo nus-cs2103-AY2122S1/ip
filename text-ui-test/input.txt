@@ -1,0 +1,7 @@
+todo task1
+deadline task2 /by today
+event task3 /at home
+done 2
+list
+wrong input
+bye
