@@ -85,6 +85,31 @@ public class Duke {
                         System.out.println(e.getMessage());
                         continue;
                     }
+                } else if (spaceSplitInput[0].equals("delete")) {
+                    // delete task
+                    try {
+                        if (spaceSplitInput.length < 2) {
+                            // No task number entered
+                            throw new MissingTaskNoException(LINE + INDENT + "Delete task number is missing!\n" + LINE);
+                        }
+                        int deleteTaskNo = Integer.parseInt(spaceSplitInput[1]); // Throws NumberFormatException if string cannot be parsed into valid int
+                        if (deleteTaskNo < 1 || deleteTaskNo > taskList.size()) {
+                            // Task No entered out of range
+                            throw new TaskNoOutOfRangeException(LINE + INDENT + "Task number entered out of range!\n" + LINE);
+                        }
+                        Task deleteTask = taskList.get(deleteTaskNo - 1);
+                        taskList.remove(deleteTaskNo - 1);
+                        System.out.println(LINE + INDENT + "Noted. I've removed this task:\n"
+                            + INDENT + INDENT + deleteTask.toString() + "\n"
+                            + INDENT + String.format("Now you have %d tasks in the list.\n", taskList.size())
+                            + LINE);
+                    } catch (NumberFormatException e) {
+                        System.out.println(LINE + INDENT + "Please enter a valid integer for task number!\n" + LINE);
+                        continue;
+                    } catch (TaskNoOutOfRangeException | MissingTaskNoException e) {
+                        System.out.println(e.getMessage());
+                        continue;
+                    }
                 } else if (spaceSplitInput[0].equals("todo")) {
                     addTask(spaceSplitInput, slashSplitInput, taskList, taskKind.TODOS);
                 } else if (spaceSplitInput[0].equals("deadline")) {

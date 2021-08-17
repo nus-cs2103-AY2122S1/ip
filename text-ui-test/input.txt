@@ -16,5 +16,9 @@ done
 done 5
 done -10
 list
+delete
+delete 2
+delete 2A
+list
 blah blah blah
 bye

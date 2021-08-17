@@ -98,6 +98,26 @@ Hello from
      ________________________________________
 
      ________________________________________
+     Delete task number is missing!
+     ________________________________________
+
+     ________________________________________
+     Noted. I've removed this task:
+          [D] [X] return book (by: Sunday)
+     Now you have 2 tasks in the list.
+     ________________________________________
+
+     ________________________________________
+     Please enter a valid integer for task number!
+     ________________________________________
+
+     ________________________________________
+     Here are the tasks in your list:
+     1.[T] [X] borrow book
+     2.[E] [X] project meeting (at: Monday 2-4pm)
+     ________________________________________
+
+     ________________________________________
      My intelligence has not evolved to understand this command :(
      ________________________________________
 
