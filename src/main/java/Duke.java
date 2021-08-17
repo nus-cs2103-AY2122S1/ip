@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import static java.lang.Integer.parseInt;
 
 public class Duke {
 
@@ -9,6 +10,7 @@ public class Duke {
         list,
         bye,
         add,
+        done,
     }
 
     //Logo
@@ -41,29 +43,60 @@ public class Duke {
 
     //Prints list of task
     //Input: List
-    static void printList(List lst) {
+    static void printList(List<Task> lst) {
+        System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < lst.size(); i++) {
-            System.out.println((i+1) + ": " + lst.get(i));
+            Task task = lst.get(i);
+            System.out.println((i+1) + ".[" + task.getStatusIcon() + "] " + task.getDescription());
         }
         printDivider();
     }
 
+    //Marks task as Done
+    //Input: Task
+    static void markTask(Task task) {
+        printDivider();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("\t" + "[" + task.getStatusIcon() + "] " + task.getDescription());
+        printDivider();
+    }
+
+    //Checks if String is an int
+    //Input: String
+    static boolean checkForInt(String str) {
+        try {
+            int test = parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
 
     public static void main(String[] args) {
-        List<String> list = new ArrayList<String>();
+        List<Task> list = new ArrayList<Task>();
         greetings();
         Scanner userInput = new Scanner(System.in);
 
         //Waits for userInput
         while (true) {
             String input = userInput.nextLine();
+            String[] words = input.split(" ");
             Keywords key = Keywords.add;
+            int index = 0;
 
             //Looks for keywords
             if (input.equals("bye")) {
                 key = Keywords.bye;
             } else if (input.equals("list")) {
                 key = Keywords.list;
+            } else if (words.length > 1) {
+                if (words[0].equals("done")) {
+                    if (checkForInt(words[1])) {
+                        index = parseInt(words[1]) - 1;
+                        key = Keywords.done;
+                    }
+                }
             }
 
             //Performs the Appropriate Action
@@ -76,10 +109,14 @@ public class Duke {
                     printList(list);
                     break;
                 case add:
-                    list.add(input);
+                    list.add(new Task(input));
                     printDivider();
                     System.out.println("added: " + input);
                     printDivider();
+                    break;
+                case done:
+                    list.get(index).markAsDone();
+                    markTask(list.get(index));
                     break;
             }
         }
