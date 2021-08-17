@@ -23,12 +23,21 @@ public class Saber {
     protected static String goodbye = lineBreak + "      Am I ... no longer needed, Master?\n" +
             "      I understand. I shall excuse myself.\n" + lineBreak;
 
+    protected static String listMessage = "      Would you like to know what you \n" +
+            "      told me to remember?\n" + "\n" +
+            "      I'll list them for you, Master.\n";
+
+    protected static String[] taskArray = new String[100];
+
     enum Command {
         bye,
+        list,
     }
 
     public static void main(String[] args) {
         boolean end = false;
+        int totalTask = 0;
+        int newTaskIndex = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("\n" + logo);
         System.out.println(greeting);
@@ -36,8 +45,19 @@ public class Saber {
             String inputCommand = sc.nextLine();
             if (inputCommand.equals(Command.bye.name())) {
                 end = true;
+            } else if (inputCommand.equals(Command.list.name())) {
+                System.out.println(lineBreak);
+                System.out.println(listMessage);
+                for (int i = 0; i < totalTask; i++) {
+                    String task = taskArray[i];
+                    System.out.println("      " + (i + 1) + ". " + task + "\n");
+                }
+                System.out.println(lineBreak);
             } else {
-                System.out.println(lineBreak + "      "  + inputCommand + "\n" + lineBreak);
+                taskArray[newTaskIndex] = inputCommand;
+                System.out.println(lineBreak + "      I have added: "  + inputCommand + "\n" + lineBreak);
+                totalTask++;
+                newTaskIndex++;
             }
         }
         System.out.println(goodbye);
