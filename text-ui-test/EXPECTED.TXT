@@ -37,7 +37,14 @@ ____________________________________________________________
 OOPS!!! I'm sorry, index is out of range! Please try with a number from 1 to 3
 ____________________________________________________________
 ____________________________________________________________
-1. [T][ ]  borrow book
-2. [D][X]  return book (by:Sunday)
-3. [E][ ]  project meeting (at:Mon 2-4pm)
+Noted. I've removed this task:
+  [T][ ]  borrow book
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+OOPS!!! I'm sorry, index is out of range! Please try with a number from 1 to 2
+____________________________________________________________
+____________________________________________________________
+1. [D][X]  return book (by:Sunday)
+2. [E][ ]  project meeting (at:Mon 2-4pm)
 ____________________________________________________________

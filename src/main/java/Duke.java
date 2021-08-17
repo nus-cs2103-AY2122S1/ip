@@ -45,6 +45,21 @@ public class Duke {
                             }
                             break;
                         }
+                        case "remove": {
+                            int index = sc.nextInt();
+                            if (index < 1 || index > list.toArray().length) {
+                                System.out.println(list.toArray().length > 0
+                                        ? "OOPS!!! I'm sorry, index is out of range! " +
+                                        "Please try with a number from 1 to " + list.toArray().length
+                                        : "OOPS!!! I'm sorry, there is nothing in the list yet.");
+                            } else {
+                                Task task = list.remove(index - 1);
+                                System.out.println("Noted. I've removed this task:\n  " +
+                                        task +
+                                        "\nNow you have " + list.toArray().length + " tasks in the list.");
+                            }
+                            break;
+                        }
                         case "todo": {
                             String description = sc.nextLine();
                             Task task = new Todo(description);
