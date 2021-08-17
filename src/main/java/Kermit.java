@@ -4,6 +4,7 @@ import java.lang.StringBuilder;
 public class Kermit {
     /**
      * Adds a top and bottom horizontal line to text
+     *
      * @param text Text to be formatted.
      * @return Formatted version of text.
      */
@@ -11,6 +12,19 @@ public class Kermit {
         String horizontalDivider = "____________________________________________________________";
         return horizontalDivider + "\n" + text + "\n" + horizontalDivider;
     }
+
+    /**
+     * Pretty format text when task is added
+     *
+     * @param task Task that is added to list
+     * @param list List that task was added to
+     * @return String stating task was successfully added
+     */
+    private static String printAddTask(Task task, ToDo list) {
+        return "Got it. I've added this task:\n"
+                + task +"\nNow you have " + list.size() + " tasks in the list.";
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String command = "";
@@ -31,6 +45,7 @@ public class Kermit {
         System.out.println(formatText(introductionText));
 
         while (true) {
+            // Task description and flag should be separated by some /command
             String[] userInput = sc.nextLine().split("/");
             String commandString = userInput[0];
             String flagString = userInput.length > 1 ? userInput[1]: "";
@@ -46,7 +61,7 @@ public class Kermit {
             descriptionBuilder.setLength(0);
             flagBuilder.setLength(0);
 
-
+            // Get description of task
             for (int i = 1; i < commandArr.length; i++) {
                 word = commandArr[i];
                     if (i != 1) {
@@ -55,6 +70,7 @@ public class Kermit {
                     descriptionBuilder.append(word);
             }
 
+            // Get the flags provided for task
             for (int i = 1; i < flagArr.length; i++) {
                 word = flagArr[i];
                 if (i != 1) {
@@ -83,17 +99,20 @@ public class Kermit {
                 case "todo":
                     Task newToDo = new ToDos(descriptionBuilder.toString());
                     list.add(newToDo);
-                    System.out.println(formatText(
-                            "Got it. I've added this task:\n"
-                                    + newToDo +"\nNow you have " + list.size() + " tasks in the list."));
+                    System.out.println(formatText(printAddTask(newToDo, list)));
                     break;
                 // Add new deadline task
                 case "deadline":
                     Task newDeadline = new Deadline(descriptionBuilder.toString(), flagBuilder.toString());
                     list.add(newDeadline);
-                    System.out.println(formatText(
-                            "Got it. I've added this task:\n"
-                                    + newDeadline +"\nNow you have " + list.size() + " tasks in the list."));
+                    System.out.println(formatText(printAddTask(newDeadline, list)));
+                    break;
+
+                // Add new event task
+                case "event":
+                    Task newEvent = new Event(descriptionBuilder.toString(), flagBuilder.toString());
+                    list.add(newEvent);
+                    System.out.println(formatText(printAddTask(newEvent, list)));
                     break;
                 default:
                     System.out.println(formatText("This is an invalid command"));
