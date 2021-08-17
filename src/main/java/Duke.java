@@ -75,6 +75,15 @@ public class Duke {
                     }
                     break;
 
+                case ("delete"):
+                    try{
+                        String reply = taskList.deleteTask(cmd_args);
+                        System.out.println(formatReply(reply));
+                    } catch (DukeException e){
+                        System.out.println(formatReply(e.toString()));
+                    }
+                    break;
+
                 case ("todo"):
                     try {
                         toAdd = Todo.fromCmd(cmd_args);

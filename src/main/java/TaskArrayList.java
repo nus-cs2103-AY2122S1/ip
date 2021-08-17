@@ -14,6 +14,26 @@ public class TaskArrayList extends ArrayList<Task> {
         return reply + "\n" + this.newLength();
     }
 
+    public String deleteTask(String[] cmd_args) throws DukeException{
+        if (cmd_args.length != 2){
+            throw new DukeException("Usage: delete <task number>");
+        }
+        if (!cmd_args[1].matches("[0-9]+")){
+            throw new DukeException("delete argument must be an integer");
+        }
+        return this.deleteTask(Integer.parseInt(cmd_args[1]));
+    }
+
+    public String deleteTask(int taskNo) throws DukeException{
+        if (taskNo > this.size()){
+            throw new DukeException(String.format("task %d not found",taskNo));
+        }
+        Task toDel = this.get(taskNo-1);
+        this.remove(taskNo-1);
+        return "removed : " + toDel.toString()+ "\n" + this.newLength();
+    }
+
+
     public String newLength(){
         return String.format("Now you have %d tasks in the list.",this.size());
     }
