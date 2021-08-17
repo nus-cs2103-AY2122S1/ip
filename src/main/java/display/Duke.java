@@ -1,7 +1,9 @@
 package display;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -36,14 +38,26 @@ public class Duke {
 
     private static void analyzeLog() {
         Scanner sc = new Scanner(System.in);
+        List<String> texts = new ArrayList<>();
+        String input;
+        StringBuilder log;
 
         while (true) {
-            String log = sc.nextLine();
-            if (log.equals("bye")) {
+            input = sc.nextLine();
+            if (input.equals("bye")) {
                 System.out.println(line + "\n\t Peace out!" + line);
                 break;
+            } else if (input.equals("list")){
+                log = new StringBuilder();
+                for (int i = 0; i < texts.size(); i++) {
+                    log.append("\n\t ").append(i + 1).append(". ").append(texts.get(i));
+                }
+            } else {
+                texts.add(input);
+                log = new StringBuilder();
+                log.append("\n\t added: ").append(input);
             }
-            System.out.println(line + "\n\t " + log + line);
+            System.out.println(line + log + line);
         }
 
         sc.close();
