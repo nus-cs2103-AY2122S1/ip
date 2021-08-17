@@ -14,17 +14,16 @@ public class Duke {
 
         while (true) {
             command = myObj.nextLine();
-            String[] commandSplit = command.split(" ", 2);
+            String[] commandSplit = command.split(" ");
             if (command.equals("bye")) {
                 System.out.println("Goodbye!");
                 break;
             } else if (commandSplit[0].equals("done") && Duke.isInteger(commandSplit[1])) {
                 int taskIndex = Integer.parseInt(commandSplit[1]);
                 tasks.markTaskDone(taskIndex);
-                String taskDescription = tasks.getTask(taskIndex);
-                String taskStatus = tasks.getTaskStatus(taskIndex);
+                String task = tasks.getTask(taskIndex);
                 System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(taskStatus + " " + taskDescription);
+                System.out.println(task);
             } else if (command.equals("list")) {
                 tasks.listTasks();
             } else {

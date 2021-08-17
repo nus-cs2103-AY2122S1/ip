@@ -48,7 +48,7 @@ public class TaskList {
             System.out.println("No tasks added yet!");
         } else {
             for (int i = 0; i < this.taskIndex; i++) {
-                System.out.println((i + 1) + ". " + this.tasks[i].getStatusIcon() + " " + this.tasks[i].getTaskDescription());
+                System.out.println((i + 1) + ". " + this.tasks[i]);
             }
         }
     }
@@ -69,16 +69,6 @@ public class TaskList {
      */
     public String getTask(int index) {
         Task currentTask = tasks[index - 1];
-        return currentTask.getTaskDescription();
-    }
-
-    /**
-     * Returns string indicating task status from list using index.
-     * @param index Index of the task on the list.
-     * @return Returns task status.
-     */
-    public String getTaskStatus(int index) {
-        Task currentTask = tasks[index - 1];
-        return currentTask.getStatusIcon();
+        return currentTask.toString();
     }
 }

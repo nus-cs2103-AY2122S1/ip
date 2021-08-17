@@ -31,14 +31,6 @@ public class Task {
     }
 
     /**
-     * Returns the description of the task.
-     * @return Description of the task.
-     */
-    public String getTaskDescription() {
-        return this.taskDescription;
-    }
-
-    /**
      * Marks a task as done.
      */
     public void markAsDone() {
@@ -51,5 +43,9 @@ public class Task {
      */
     public String getStatusIcon() {
         return this.isDone ? "[X]" : "[ ]";
+    }
+    @Override
+    public String toString() {
+        return this.getStatusIcon() + " " + this.taskDescription;
     }
 }
