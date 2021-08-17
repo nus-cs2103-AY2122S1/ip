@@ -55,6 +55,19 @@ public class Duke {
                 return "[T][ ] "+name;
             }
         }
+        @Override
+        public boolean equals(Object obj){
+            if(!(obj instanceof ToDo)){
+                return false;
+            }else{
+                ToDo objTask = (ToDo) obj;
+                if(objTask.name.equals(this.name)){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
     }
 
     private static class Deadline extends Task{
@@ -66,9 +79,22 @@ public class Duke {
         @Override
         public String toString(){
             if(done==true){
-                return "[D][X] "+name+ "(by: "+date+")";
+                return "[D][X] "+name+ " (by: "+date+")";
             }else{
-                return "[D][ ] "+name+ "(by: "+date+")";
+                return "[D][ ] "+name+ " (by: "+date+")";
+            }
+        }
+        @Override
+        public boolean equals(Object obj){
+            if(!(obj instanceof Deadline)){
+                return false;
+            }else{
+                Deadline objTask = (Deadline) obj;
+                if(objTask.name.equals(this.name)&&objTask.date.equals(this.date)){
+                    return true;
+                }else{
+                    return false;
+                }
             }
         }
     }
@@ -82,9 +108,22 @@ public class Duke {
         @Override
         public String toString(){
             if(done==true){
-                return "[E][X] "+name+ "(at: "+date+")";
+                return "[E][X] "+name+ " (at: "+date+")";
             }else{
-                return "[E][ ] "+name+ "(at: "+date+")";
+                return "[E][ ] "+name+ " (at: "+date+")";
+            }
+        }
+        @Override
+        public boolean equals(Object obj){
+            if(!(obj instanceof Event)){
+                return false;
+            }else{
+                Event objTask = (Event) obj;
+                if(objTask.name.equals(this.name)&&objTask.date.equals(this.date)){
+                    return true;
+                }else{
+                    return false;
+                }
             }
         }
     }
@@ -95,13 +134,13 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hi how are ya");
+        System.out.println("Welcome. I am your virtual assistant Duke. Sparkle up your day (TM).");
 
         while(true){
             Scanner sc = new Scanner(System.in);
             String command = sc.nextLine();
             if(command.equals("bye")) {
-                System.out.println("Bye have a good time");
+                System.out.println("Have a SPARKULAR day.");
                 break;
             }else if(command.equals("list")) {
                 int c = 1;
@@ -109,26 +148,69 @@ public class Duke {
                     System.out.println(c + ". " + task);
                     c++;
                 }
-            }else if(command.contains("done")){
+            }else if(command.contains("done")) {
                 String numbers = command.substring(5);
                 try {
                     int taskNo = Integer.parseInt(numbers);
-                }catch(NumberFormatException notANumber){
+                } catch (NumberFormatException notANumber) {
                     System.err.println(notANumber);
-                    System.out.println("Uh oh! Stinky!");
+                    System.err.println("JUST GIVE ME A NUMBER, WHY ARE YOU DOING THIS");
                     continue;
                 }
                 int taskNo = Integer.parseInt(numbers);
-                if(tasks.size()<taskNo){
-                    System.err.println("too big");
+                if (tasks.size() < taskNo) {
+                    System.err.println("hello sir there are only " +tasks.size()+" tasks in the list sir");
+                    continue;
+                }
+                if (taskNo<=0) {
+                    System.err.println("HOW CAN I REMOVE THE TASK AT INDEX " +taskNo+"? IT DOESNT MAKE ANY SENSE");
                     continue;
                 }
                 taskNo--;
-                Task toBeDone=tasks.get(taskNo);
+                Task toBeDone = tasks.get(taskNo);
                 toBeDone.makeDone();
-                tasks.set(taskNo,toBeDone);
+                tasks.set(taskNo, toBeDone);
                 System.out.println(toBeDone.name + " has been marked as done");
+            }else if(command.contains("todo")){
+                String task=command.substring(5);
+                ToDo toBeAdded=new ToDo(task);
+                if(!(tasks.contains(toBeAdded))){
+                    tasks.add(toBeAdded);
+                    System.out.println("todo " +toBeAdded + " added");
+                    System.out.println("the list has "+tasks.size()+" tasks now");
+                }else{
+                    System.out.println(task + " is already in the list sir");
+                }
+
+            }else if(command.contains("deadline")){
+                String taskNDate=command.substring(9);
+                int splitIndex=taskNDate.indexOf("/by");
+                String task =taskNDate.substring(0,splitIndex-1);
+                String date =taskNDate.substring(splitIndex+4);
+                Deadline toBeAdded = new Deadline(task,date);
+                if(!(tasks.contains(toBeAdded))){
+                    tasks.add(toBeAdded);
+                    System.out.println("deadline " +toBeAdded + " added");
+                    System.out.println("the list has "+tasks.size()+" tasks now");
+                }else{
+                    System.out.println(task + " is already in the list sir");
+                }
+
+            }else if(command.contains("event")){
+                String taskNDate=command.substring(6);
+                int splitIndex=taskNDate.indexOf("/at");
+                String task =taskNDate.substring(0,splitIndex-1);
+                String date =taskNDate.substring(splitIndex+4);
+                Event toBeAdded = new Event(task,date);
+                if(!(tasks.contains(toBeAdded))){
+                    tasks.add(toBeAdded);
+                    System.out.println("event " +toBeAdded + " added");
+                    System.out.println("the list has "+tasks.size()+" tasks now");
+                }else{
+                    System.out.println(task + " is already in the list sir");
+                }
             }else{
+                /*
                 Task commandTask = new Task(command);
                 if(!tasks.contains(commandTask)) {
                     System.out.println("added: " + command);
@@ -136,6 +218,9 @@ public class Duke {
                 }else{
                     System.out.println(command + " is already in the list sir");
                 }
+
+                 */
+                System.out.println("(WHAT IS THIS PERSON TRYING TO SAY WHY IS HE TYPING GIBBERISH I'M JUST TRYING TO SURVIVE)");
             }
         }
     }
