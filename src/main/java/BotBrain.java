@@ -43,10 +43,13 @@ public class BotBrain {
     private String outputAllTask() {
         StringBuilder formattedTask = new StringBuilder();
         formattedTask.append(botMemory.MESSAGE_TASK_REPORT + "\n\t");
+        /*
         for (int i = 0; i < taskTracker.size(); i++) {
             String eachLine = (i + 1) + ". " + taskTracker.get(i).toString() + "\n\t";
             formattedTask.append(eachLine);
         }
+         */
+        taskTracker.stream().forEach(x -> formattedTask.append((taskTracker.indexOf(x) + 1) + ". " + x.toString() + "\n\t"));
         formattedTask.append("(end)");
         return formattedTask.toString();
     }
