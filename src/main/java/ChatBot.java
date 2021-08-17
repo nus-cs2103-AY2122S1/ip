@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class ChatBot {
 
-    static Scanner userInput = new Scanner(System.in);
     private Task[] list = new Task[100];
     private int lastIndex = 0;
 
@@ -16,7 +15,7 @@ public class ChatBot {
 
         String greeting = "Why hello there! It's Duke here!\n" + "How can I help you today master?";
 
-        return logo + greeting;
+        return greeting;
     }
 
     private boolean listEmpty() {
@@ -30,7 +29,7 @@ public class ChatBot {
         return empty;
     }
 
-    private void printList(){
+    private void printList() {
         for (int i = 0; i <= lastIndex; i++) {
             if (list[i] != null) {
                 System.out.println(i + 1 + "." + this.list[i].printTask());
@@ -103,6 +102,7 @@ public class ChatBot {
 
 
     private void startInput() {
+        Scanner userInput = new Scanner(System.in);
         String input = userInput.nextLine();
         boolean doneInput = checkDone(input);
         boolean todoInput = checkToDo(input);
@@ -111,6 +111,7 @@ public class ChatBot {
 
         if (input.equals("bye")) {                                          //bye input
             System.out.println("See ya again later!");
+            userInput.close();
             return;
         } else if (input.equals("list")) {                                   //list input
             if (this.listEmpty()) {                                          //empty list check
@@ -126,6 +127,10 @@ public class ChatBot {
             deadlineSeq(input);
         } else if (eventInput) {
             eventSeq(input);
+        } else {
+            System.out.println("I'm not too sure what you meant.");
+            System.out.println("Try again with these keywords.");
+            System.out.println("todo deadline event");
         }
         startInput();
     }
