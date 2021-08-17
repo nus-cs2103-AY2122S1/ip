@@ -32,7 +32,7 @@ public class Duke {
         for (int i = 0; i < tasks.size(); ++i) {
             String counter = String.valueOf(i + 1);
             Task currentTask = tasks.get(i);
-            tasksBuilder.append(counter).append(".[").append(currentTask.getStatusIcon()).append("] ").append(currentTask);
+            tasksBuilder.append(counter).append(".").append(currentTask);
             if (i < tasks.size() - 1) {
                 // Append newline for all tasks before last task
                 tasksBuilder.append("\n");
@@ -48,7 +48,7 @@ public class Duke {
         }
         Task doneTask = tasks.get(counter - 1);
         doneTask.markAsDone();
-        printReply("Nice! I've marked this task as done:\n\t[" + doneTask.getStatusIcon() + "] " + doneTask);
+        printReply("Nice! I've marked this task as done:\n\t" + doneTask);
     }
 
     public static void main(String[] args) {
