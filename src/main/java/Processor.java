@@ -17,7 +17,11 @@ public class Processor {
      */
     public void process() {
         this.command = this.input.nextLine();
-        this.message = this.command;
+        if (this.command.equals("bye")) {
+            this.message = Duke.EXITING_MESSAGE;
+        } else {
+            this.message = this.command;
+        }
     }
 
     /**
