@@ -1,6 +1,9 @@
 package display;
 
+import tasks.Deadline;
+import tasks.Event;
 import tasks.Task;
+import tasks.ToDo;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,6 +58,7 @@ public class Duke {
                 System.out.println(line + "\n\t Peace out!" + line);
                 break logging;
             case "list":
+                log.append("\n\t Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
                     log.append("\n\t ").append(i + 1).append(". ").append(tasks.get(i));
                 }
@@ -66,8 +70,28 @@ public class Duke {
                     log.append("\t This task has been marked as done");
                 } else {
                     task.markAsDone();
-                    log.append("\n\t Nice! I've marked this task as done:\n\t\t").append(task);
+                    log.append("\n\t Nice! I've marked this task as done:\n").append("\t   ").append(task);
                 }
+                break;
+            case "todo":
+                ToDo newTask = new ToDo(words[1]);
+                tasks.add(newTask);
+                log.append("\n\t Got it. I've added this task:\n\t\t").append(newTask).append("\n\t Now you have ")
+                        .append(tasks.size()).append(" tasks in the list.");
+                break;
+            case "deadline":
+                String[] details = words[1].split(" /by ", 2);
+                Deadline deadline = new Deadline(details[0], details[1]);
+                tasks.add(deadline);
+                log.append("\n\t Got it. I've added this task:\n\t\t").append(deadline).append("\n\t Now you have ")
+                        .append(tasks.size()).append(" tasks in the list.");
+                break;
+            case "event":
+                details = words[1].split(" /at ", 2);
+                Event event = new Event(details[0], details[1]);
+                tasks.add(event);
+                log.append("\n\t Got it. I've added this task:\n\t\t").append(event).append("\n\t Now you have ")
+                        .append(tasks.size()).append(" tasks in the list.");
                 break;
             default:
                 tasks.add(new Task(input));
