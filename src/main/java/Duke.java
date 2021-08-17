@@ -25,7 +25,9 @@ public class Duke {
             String message = sc.nextLine();
             message.trim();
 
-            if (message.equals("bye")) {
+            if (message.isEmpty()) {
+
+            } else if (message.equals("bye")) {
                 status = false;
                 closeBot();
             } else if (message.equals("list")) {
@@ -157,7 +159,7 @@ public class Duke {
         } else {
             Task taskMarked = tasks.get(taskPosition);
             taskMarked.markAsDone();
-            String displayedMessage = "Nice! I've marked this task as done: \n"
+            String displayedMessage = "Nice! I've marked this task as done:\n"
                     + "  "
                     + taskMarked.toString();
             System.out.println(displayedMessage);
@@ -191,7 +193,7 @@ public class Duke {
     }
 
     private static void initialiseBot() {
-        String message = "Hello! I'm Duke \n"
+        String message = "Hello! I'm Duke\n"
                 + "What can I do for you?";
         System.out.println(message);
     }
