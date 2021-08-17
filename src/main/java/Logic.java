@@ -1,28 +1,10 @@
 public class Logic {
     final private static String LINE = "     ____________________________________________________________\n";
-//    final private static String INDENT = "      ";
+    final private static String INDENT = "      ";
 
     private static int numOfTasks = 0;
     private static Task[] taskList = new Task[100];
     private static boolean continueChat = true;
-
-    public static void takeInput(String input) {
-        if (input.equals("bye")) {
-            formatOutput("Bye. Hope to see you again soon!");
-            continueChat = false;
-        } else if (input.equals("list")) {
-            renderList();
-        } else if (getFirstWord(input).equals("done")) {
-            markTaskComplete(input);
-        } else {
-            addTask(input);
-
-        }
-    }
-
-    public static boolean endChat() {
-        return !continueChat;
-    }
 
     private static String getFirstWord(String text) {
         int index = text.indexOf(' ');
@@ -31,6 +13,46 @@ public class Logic {
         } else {
             return text; // Text is the first word itself.
         }
+    }
+
+    public static void takeInput(String input) {
+        String command = getFirstWord(input);
+        if (input.split(" ").length == 1) {
+            if (input.equals("bye")) {
+                renderOutput("Bye. Hope to see you again soon!");
+                continueChat = false;
+            } else if (input.equals("list")) {
+                renderList();
+            }  else {
+                renderOutput("Invalid input. Please try again!");
+            }
+        } else {
+            String desc = input.split(" ", 2)[1];
+            if (command.equals("done")) {
+                markTaskComplete(input);
+            } else if (command.equals("todo")) {
+                addTodoTask(desc);
+            } else if (command.equals("deadline")) {
+                addDeadlineTask(desc);
+            } else if (command.equals("event")) {
+                addEventTask(desc);
+            } else {
+                renderOutput("Invalid input. Please try again!");
+            }
+        }
+
+    }
+
+    private static void renderList() {
+        String op = "";
+        for (int i = 0; i < numOfTasks; i++) {
+            op = op + (i + 1) + ". " + taskList[i].toString() + "\n";
+        }
+        renderOutput("Here are the tasks in your list:\n" + op);
+    }
+
+    public static boolean endChat() {
+        return !continueChat;
     }
 
     private static int getTaskNumber(String cmd) {
@@ -44,29 +66,54 @@ public class Logic {
     private static void markTaskComplete(String cmd) {
         int index = getTaskNumber(cmd) - 1;
         if (index < 0 || index > numOfTasks - 1) {
-            formatOutput("Input is invalid!");
+            renderOutput("Input is invalid!");
             return;
         }
+
         Task task = taskList[index];
-        task.markDone();
-        formatOutput("Nice! I've marked this task as done: \n" + task.toString());
-    }
-
-    private static void addTask(String task) {
-        taskList[numOfTasks] = new Task(task);
-        numOfTasks++;
-        formatOutput("added: " + task);
-    }
-
-    private static void renderList() {
-        String op = "";
-        for (int i = 0; i < numOfTasks; i++) {
-            op = op + (i + 1) + ". " + taskList[i].toString() + "\n";
+        if (task.isDone()) {
+            renderOutput("Great! But you have already completed this task!");
+        } else {
+            task.markDone();
+            renderOutput("Nice! I've marked this task as done: \n" + task.toString());
         }
-        formatOutput("Here are the tasks in your list:\n" + op);
     }
 
-    private static void formatOutput(String op) {
+    private static void addTodoTask(String desc) {
+        taskList[numOfTasks] = new Todo(desc);
+        addTaskOutput(taskList[numOfTasks]);
+        numOfTasks++;
+    }
+
+    private static String[] separateDetails(String str, String key) {
+        //add error handling here for key
+        return str.split(key);
+    }
+
+    private static void addDeadlineTask(String desc) {
+        String[] details = separateDetails(desc, "/by");
+        taskList[numOfTasks] = new Deadline(details[0], details[1]);
+        addTaskOutput(taskList[numOfTasks]);
+        numOfTasks++;
+    }
+
+    private static void addEventTask(String desc) {
+        String[] details = separateDetails(desc, "/at");
+        taskList[numOfTasks] = new Event(details[0], details[1]);
+        addTaskOutput(taskList[numOfTasks]);
+        numOfTasks++;
+    }
+
+    private static void addTaskOutput(Task task) {
+        String output = "Got it. I've added this task:\n"
+                        + INDENT + task.toString()
+                        + "\nNow you have "
+                        + (numOfTasks + 1)
+                        + " tasks in the list.";
+        renderOutput(output);
+    }
+
+    private static void renderOutput(String op) {
         String output = op;
         System.out.println(LINE);
         output.lines().forEach(line -> System.out.println("      " + line));
