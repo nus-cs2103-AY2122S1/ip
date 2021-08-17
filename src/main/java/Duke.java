@@ -26,7 +26,9 @@ public class Duke {
                 case "list":
                     for (int i = 1; i <= storageCount; i++) {
                         Task task = storage[i - 1];
-                        System.out.printf("%d: %s\n", i, task);
+                        String leadingSpace = " ".repeat((int) Math.log10(storageCount) - (int) Math.log10(i));
+                        // For better formatting if numbers exceed 9
+                        System.out.printf("%s%d: %s\n", leadingSpace, i, task);
                     }
                     System.out.println("------------------");
                     break;
