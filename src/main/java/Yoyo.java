@@ -1,6 +1,15 @@
 import java.util.Scanner;
 
 public class Yoyo {
+    private static Task[] tasks = new Task[100];
+    private static int numTasks = 0;
+
+
+    private enum TaskType {
+        TODO,
+        EVENT,
+        DEADLINE
+    }
 
     /**
      * Prints a decoration line for output.
@@ -14,12 +23,10 @@ public class Yoyo {
                 + "What can I do for you?\n";
         System.out.println(greetings);
         Scanner scanner = new Scanner(System.in);
-        Task[] tasks = new Task[100];
-        int numTasks = 0;
 
         while (true) {
             String input = scanner.nextLine();
-            String[] inputWords = input.split(" ");
+            String[] inputWords = input.split(" ", 2);
             String command = inputWords[0];
             if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!\n");
@@ -32,7 +39,6 @@ public class Yoyo {
                 printLineDecoration();
                 System.out.println("\n");
             } else if (command.equals("done")) {
-                System.out.println("inside done\n");
                 try {
                     int taskIndex = Integer.parseInt(inputWords[1]) - 1;
                     tasks[taskIndex].toggleDone();
@@ -46,15 +52,51 @@ public class Yoyo {
                     System.out.println("Please enter a valid index!\n");
                 }
             } else {
-                printLineDecoration();
-                tasks[numTasks] = new Task(input);
-                numTasks++;
-                System.out.println("added: " + input);
-                printLineDecoration();
-                System.out.println("\n");
+                if (command.equals("todo")) {
+                    Task newTask = new Todo(inputWords[1]);
+                    tasks[numTasks] = newTask;
+                    numTasks++;
+                    printAddMessage(newTask);
+                } else if (command.equals("event")) {
+                    String[] taskInfo = inputWords[1].split(" /");
+                    if (taskInfo.length < 2) {
+                        System.out.println("Please add a timing for the event!\n");
+                    } else {
+                        Task newTask = new Event(taskInfo[0], taskInfo[1]);
+                        tasks[numTasks] = newTask;
+                        numTasks++;
+                        printAddMessage(newTask);
+                    }
+                } else if (command.equals("deadline")) {
+                    String[] taskInfo = inputWords[1].split(" /");
+                    if (taskInfo.length < 2 ) {
+                        System.out.println("Please add a timing for the event!\n");
+                    } else {
+                        Task newTask = new Deadline(taskInfo[0], taskInfo[1]);
+                        tasks[numTasks] = newTask;
+                        numTasks++;
+                        printAddMessage(newTask);
+                    }
+                } else {
+                    System.out.println("Invalid Command\n");
+                }
             }
         }
+    }
 
-
+    /**
+     * prints success message for adding task.
+     *
+     * @param newTask The task that has been created.
+     */
+    private static void printAddMessage(Task newTask) {
+        printLineDecoration();
+        System.out.print("Got it. I've added this task:\n   "
+                + newTask.showStatus()
+                + "\nNow you have "
+                + numTasks
+                + " tasks in the list.\n");
+        printLineDecoration();
+        System.out.println();
     }
 }

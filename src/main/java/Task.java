@@ -1,6 +1,6 @@
-public class Task {
-    private boolean isDone = false;
-    private String name;
+public abstract class Task {
+    protected boolean isDone = false;
+    protected String name;
 
     Task(String name) {
         this.name = name;
@@ -11,13 +11,20 @@ public class Task {
      *
      * @return A status string for the task.
      */
-    public String getCross() {
+    public String printCompletionStatus() {
         if (isDone) {
             return "[X]";
         } else {
             return "[]";
         }
     }
+
+    /**
+     * Returns a status string indicating type of task.
+     *
+     * @return An indicator string for the type of task.
+     */
+    public abstract String printType();
 
     /**
      * Toggles completion status.
@@ -27,13 +34,13 @@ public class Task {
     }
 
     /**
-     * Shows completion status appended with name.
+     * Shows all statuses appended with name.
      *
      * @return A status string containing name.
      */
-    public String showStatus() {
-        return this.getCross() + " " + this.name;
-    }
+     public String showStatus() {
+        return this.printType() + this.printCompletionStatus() + " " + this.name;
+     }
 
     @Override
     public String toString() {
