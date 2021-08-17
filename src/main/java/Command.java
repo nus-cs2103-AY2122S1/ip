@@ -1,5 +1,9 @@
+import java.util.Arrays;
+
 public class Command {
     private String name;
+    private String[] records = new String[100];
+    private int count = 0;
 
     public Command(String name) {
         this.name = name;
@@ -21,6 +25,34 @@ public class Command {
      */
     public String echo(String input) {
         return input;
+    }
+
+    /**
+     * Returns added message for add command.
+     *
+     * @param input String to be added.
+     * @return successfully added message.
+     */
+    public String add(String input) {
+        records[count] = input;
+        count += 1;
+        return String.format("added: %1$s", input);
+    }
+
+    /**
+     * Returns message representing list of all items user added.
+     *
+     * @return formatted string representing elements in records array.
+     */
+    public String list() {
+        String result = "";
+        for (int i = 0; i < count; i++) {
+            result += String.format("%1$d. %2$s \n\t", i + 1, records[i]);
+            if (i == count - 1) {
+                result += "End of List yayyyy!!";
+            }
+        }
+        return result;
     }
 
     /**

@@ -4,6 +4,11 @@ public class Duke {
     final private String name;
     private Command commands;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param name name of bot.
+     */
     public Duke(String name) {
         this.name = name;
         commands = new Command(name);
@@ -29,7 +34,11 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input = "";
         while(!((input = scanner.nextLine().toLowerCase()).equals("bye"))) {
-            System.out.println(format(commands.echo(input)));
+            if (input.equals("list")) {
+                System.out.println(format(commands.list()));
+            } else {
+                System.out.println(format(commands.add(input)));
+            }
         }
         scanner.close();
         System.out.println(format(commands.end()));
