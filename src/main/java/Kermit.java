@@ -14,15 +14,17 @@ public class Kermit {
         Scanner sc = new Scanner(System.in);
         String command = "";
 
-        ToDo<Task> list = new ToDo<>();
+        ToDo list = new ToDo();
 
         final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
+        final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete: ";
         final String goodbyeText = "Bye. Hope to see you again soon!";
 
         System.out.println(formatText(introductionText));
 
         while (true) {
             command = sc.nextLine();
+            String[] commandArr = command.split(" ");
             // Quit program
             if (command.equals("bye")) {
                 System.out.println(formatText(goodbyeText));
@@ -31,6 +33,12 @@ public class Kermit {
             } else if (command.equals("list")){
                 System.out.println(formatText(list.toString()));
             // Add objects to list
+            } else if (commandArr[0].equals("done")){
+                int index = Integer.parseInt(commandArr[1]) - 1;
+                // Get task name
+                String taskText = list.completeTask(index);
+                System.out.println(formatText(completeTaskText + "\n" + taskText));
+            // Add new item to list
             } else {
                 Task newTask = new Task(command);
                 list.add(newTask);
