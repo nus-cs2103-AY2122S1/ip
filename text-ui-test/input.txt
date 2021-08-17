@@ -6,4 +6,7 @@ done 2
 event dinner party /at Tues 4-6pm
 done 3
 list
+delete 2
+list
+event have dinner /at 2am
 bye

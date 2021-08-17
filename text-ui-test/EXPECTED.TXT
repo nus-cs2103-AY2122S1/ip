@@ -25,4 +25,13 @@ Here are the tasks in your list:
 2.[D][X] return book (by: Sunday)
 3.[D][X]  project meeting (by: Mon 2-4pm)
 4.[D][ ]  dinner party (by: Tues 4-6pm)
-Bye. Hope to see you again soon!
+Noted. I've removed this task:
+[D][X] return book (by: Sunday)
+Now you have 3 tasks in the list
+Here are the tasks in your list:
+1.[T][ ] borrow book
+2.[D][X]  project meeting (by: Mon 2-4pm)
+3.[D][ ]  dinner party (by: Tues 4-6pm)
+Got it. I've added this task:
+[D][ ]  have dinner (by: 2am)
+Now you have 4 tasks in this list.
