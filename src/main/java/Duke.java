@@ -96,6 +96,13 @@ public class Duke {
         }
     }
 
+    // TODO it shows 1 to 0 if "done" is entered before any items are appended to the list
+    protected static class DeletionException extends DukeExceptions {
+        public DeletionException(String start, String end) {
+            super("Please input an integer in the range of " + start + " to " + end + "!");
+        }
+    }
+
     public static void main(String[] args) throws DukeExceptions {
 
         String linebreak = "~~~~~~~~~~";
@@ -110,7 +117,9 @@ public class Duke {
         System.out.println("There are three special tasks you can add: Deadline, Event and Todo");
         System.out.println("Here are some special keywords! :");
         System.out.println("bye : End our conversation :(");
-        System.out.println("list : Adds stuff into your todo list!");
+        System.out.println("list : Adds stuff into your todo list :(");
+        System.out.println("done [number] : Marks the item corresponding the number in the todo list as complete!");
+        System.out.println("delete [number] : Deletes the item corresponding the number in the todo list");
         System.out.println("\nWhat can I do for you today? :>");
         System.out.println(linebreak);
 
@@ -125,6 +134,7 @@ public class Duke {
                 System.out.println(linebreak);
                 break;
 
+
             } else if (command.toLowerCase().equals("list")) {
                 if (pointer == 0) {
                     System.out.println("Yay! Nothing on your list right now :>");
@@ -137,10 +147,11 @@ public class Duke {
                 }
                 System.out.println(linebreak);
 
+
             } else if (command.toLowerCase().split(" ")[0].equals("done")) {
 
-                if (command.split(" ").length == 1 || Integer.parseInt(command.split(" ")[1]) < 1
-                        || Integer.parseInt(command.split(" ")[1])> todoList.size()) {
+                if (command.toLowerCase().split(" ").length == 1 || Integer.parseInt(command.split(" ")[1]) < 1
+                        || Integer.parseInt(command.split(" ")[1]) > todoList.size()) {
                     throw new NotDoneRightException("1", String.valueOf(todoList.size()));
                 }
 
@@ -148,6 +159,20 @@ public class Duke {
                 todoList.get(ref).markAsDone();
                 System.out.println("Yay good job!!");
                 System.out.println(todoList.get(ref));
+                System.out.println(linebreak);
+
+
+            } else if (command.toLowerCase().split(" ")[0].equals("delete")) {
+
+                if (command.toLowerCase().split(" ").length == 1 || Integer.parseInt(command.split(" ")[1]) < 1
+                        || Integer.parseInt(command.split(" ")[1]) > todoList.size()) {
+                    throw new DeletionException("1", String.valueOf(todoList.size()));
+                }
+
+                int ref = Integer.parseInt(command.split(" ")[1]) - 1;
+                System.out.println("Oki! I have removed this task:");
+                System.out.println(todoList.remove(ref));
+                System.out.println(todoList.size() + " more tasks to go!");
                 System.out.println(linebreak);
 
 
