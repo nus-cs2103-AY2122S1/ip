@@ -47,6 +47,8 @@ public class Duke {
                 break;
             } else if (lastInput.equals("list")) {
                 listOutTDL();
+            } else if (lastInput.substring(0, 4).equals("done")) {
+                markItemDoneInTDL(lastInput);
             } else {
                 addToTDL(lastInput);
             }
@@ -83,6 +85,10 @@ public class Duke {
 
     private static void listOutTDL() {
         currTDL.printOutTDL();
+    }
+
+    private static void markItemDoneInTDL(String command) {
+
     }
 
 
