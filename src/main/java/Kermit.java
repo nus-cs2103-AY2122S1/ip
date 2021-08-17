@@ -121,7 +121,7 @@ public class Kermit {
 
                         // Empty flag arguments for tasks error
                         if (flagArguments.equals("")) {
-                            throw new KermitException("Deadlines should be formatted as\n deadline <description> /by <deadline>");
+                            throw new KermitException("Deadlines should be formatted as:\ndeadline <description> /by <deadline>");
                         }
                         Task newDeadline = new Deadline(description, flagArguments);
                         list.add(newDeadline);
@@ -135,7 +135,7 @@ public class Kermit {
                         }
                         // Empty flag arguments for tasks error
                         if (flagArguments.equals("")) {
-                            throw new KermitException("Events should be formatted as\n event <description> /at <deadline>");
+                            throw new KermitException("Events should be formatted as:\nevent <description> /at <time of event>");
                         }
                         Task newEvent = new Event(description, flagArguments);
                         list.add(newEvent);
