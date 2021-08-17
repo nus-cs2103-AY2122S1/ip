@@ -5,7 +5,7 @@ public class Event extends Task {
     public Event(String description, String date) {
         super(description);
         this.date = date;
-        this.taskType = "E";
+        this.taskType = TaskType.E;
     }
 
     @Override

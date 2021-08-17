@@ -1,7 +1,12 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected String taskType;
+    protected TaskType taskType;
+    enum TaskType {
+        D,
+        E,
+        T
+    }
 
     protected Task() {
         this.description = "NONE";
