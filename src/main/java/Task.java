@@ -1,25 +1,25 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String taskType;
 
-    public Task(String description) {
+    public Task(String description, String taskType) throws DukeException {
+        if (description.length() == 0) {
+            throw new NoDescriptionException(taskType);
+        }
         this.description = description;
         this.isDone = false;
+        this.taskType = taskType;
     }
 
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
-    public void setDone(){
+    public void setDone() {
         this.isDone = true;
-    }
-
-    public void addToList(Task[] taskList, int counter) {
-        taskList[counter] = this;
-        System.out.printf("added: " + this.toString()
-                  + "\nNow you have %s tasks in your list\n" +
-                "----------------------------------------------------\n", counter + 1);
+        System.out.println("Nice! I've marked this task as done:\n"
+                + this.toString());
     }
 
     @Override

@@ -4,13 +4,9 @@ public class Deadline extends Task {
 
     protected String by;
 
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(String description, String by) throws DukeException {
+        super(description, "deadline");
         this.by = by;
-    }
-
-    public static String[] getDeadlineTaskAndTime(Scanner scanner) {
-        return scanner.nextLine().split("\\s/by\\s");
     }
 
     @Override
