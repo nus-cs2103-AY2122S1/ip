@@ -27,7 +27,60 @@ public class Duke {
         }
     }
 
-    public static void PrintMessage(){
+    public static void HandleTask(String Message) throws DukeException{
+        String task = "";
+        String deadline = "";
+
+        //If the task type does not belong to the three types, throw an error.
+        if (!(Message.startsWith("todo") || Message.startsWith("event") || Message.startsWith("deadline"))){
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+        //Get Task description and time if it has it.
+        if (Message.indexOf("/") != -1) {
+            task = Message.substring(Message.indexOf(" ") + 1, Message.indexOf("/") - 1);
+
+            if (Message.indexOf("/by") != -1) {
+                deadline = Message.substring(Message.indexOf("/by") + 3);
+            } else if (Message.indexOf("/at") != -1){
+                deadline = Message.substring(Message.indexOf("/at") + 3);
+            }
+        }
+        else {
+            if (Message.indexOf(" ") == -1) {
+                throw new DukeException("☹ OOPS!!! The description of a " + Message +" cannot be empty.");
+            }else {
+                task = Message.substring(Message.indexOf(" ") + 1);
+
+                deadline = "";
+            }
+        }
+
+        if ((Message.startsWith("event") || Message.startsWith("deadline")) && deadline.equals("")) {
+            throw new DukeException("☹ OOPS!!! The time of a " + Message.substring(0, Message.indexOf(" ")) +" cannot be empty.");
+        }
+
+
+        System.out.println("Got it. I've added this task: ");
+        if (Message.startsWith("todo")) {
+                Task newTask = new ToDos(false, task);
+                System.out.println(" " + newTask.PrintTaskInfo());
+                list.add(newTask);
+        } else if (Message.startsWith("event")) {
+                Task newTask = new Events(false, task, deadline);
+                System.out.println(" " + newTask.PrintTaskInfo());
+                list.add(newTask);
+        } else if (Message.startsWith("deadline")){
+                Task newTask = new Deadlines(false, task, deadline);
+                System.out.println(" " + newTask.PrintTaskInfo());
+                list.add(newTask);
+        }
+
+        System.out.println("Now you have " + list.size() + "" +
+                " tasks in the list.");
+    }
+
+    public static void PrintMessage() {
         Scanner scanner = new Scanner(System.in);
         String Message = "";
         String Goodbye_message = "Bye. Hope to see you again soon!";
@@ -52,47 +105,13 @@ public class Duke {
                 System.out.println(" " + list.get(index).PrintTaskInfo());
 
             }
-            else if (Message.startsWith("todo") || Message.startsWith("event") || Message.startsWith("deadline")) {
-                String task = "";
-                String deadline = "";
-                if (Message.indexOf("/") != -1) {
-                    task = Message.substring(Message.indexOf(" ") + 1, Message.indexOf("/") - 1);
-
-                    if (Message.indexOf("/by") != -1) {
-                        deadline = Message.substring(Message.indexOf("/by") + 3);
-                    } else if (Message.indexOf("/at") != -1){
-                        deadline = Message.substring(Message.indexOf("/at") + 3);
-                    }
+            else  {
+                try {
+                    HandleTask(Message);
+                } catch (DukeException e)
+                {
+                    e.PrintErrorMessage();
                 }
-                else {
-                    task = Message.substring(Message.indexOf(" ") + 1);
-
-                    deadline = "";
-                }
-
-
-                System.out.println("Got it. I've added this task: ");
-                if (Message.startsWith("todo")) {
-                    Task newTask = new ToDos(false, task);
-                    System.out.println(" " + newTask.PrintTaskInfo());
-                    list.add(newTask);
-                } else if (Message.startsWith("event")) {
-                    Task newTask = new Events(false, task, deadline);
-                    System.out.println(" " + newTask.PrintTaskInfo());
-                    list.add(newTask);
-                } else {
-                    Task newTask = new Deadlines(false, task, deadline);
-                    System.out.println(" " + newTask.PrintTaskInfo());
-                    list.add(newTask);
-                }
-
-                System.out.println("Now you have " + list.size() + "" +
-                        " tasks in the list.");
-            }
-            else {
-                Task newTask = new Task(false, Message);
-                System.out.println("added: " + newTask.PrintTaskInfo());
-                list.add(newTask);
             }
 
             System.out.println(line + "\n");

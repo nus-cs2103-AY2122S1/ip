@@ -4,4 +4,7 @@ event project meeting /at Mon 2-4pm
 deadline return book /by June 6th
 todo join sports club
 done 3
+todo
+deadline s
+abc
 bye
