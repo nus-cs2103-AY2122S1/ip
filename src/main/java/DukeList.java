@@ -22,7 +22,9 @@ public class DukeList {
 
 
     public void addTodo(String text) {
-        ToDos input = new ToDos(text);
+        String message = text.trim();
+
+        ToDos input = new ToDos(message);
         list[count] = input;
         count += 1;
 
@@ -35,7 +37,7 @@ public class DukeList {
 
         String limit = strings.length == 1 ? "" : strings[1];
 
-        Deadlines input = new Deadlines(strings[0], limit);
+        Deadlines input = new Deadlines(strings[0].trim(), limit);
         list[count] = input;
         count += 1;
 
@@ -48,7 +50,7 @@ public class DukeList {
 
         String limit = strings.length == 1 ? "" : strings[1];
 
-        Events input = new Events(strings[0], limit);
+        Events input = new Events(strings[0].trim(), limit);
         list[count] = input;
         count += 1;
 
