@@ -1,0 +1,9 @@
+event tp meeting /at Mon 2-4pm
+deadline do homework /by no idea :-p
+todo get coffee
+list
+done 1
+done 2
+hello
+event tp meeting /at Sun 2-4pm
+bye

@@ -5,9 +5,9 @@ public class Duke {
     private final String BORDER = "\t_________________________________________________\n";
     private final String MESSAGE_GREET =  "Hi, my name is Nee ´･ᴗ･`. How can I help you?";
     private final String MESSAGE_EXIT = "Goodbye!~";
-    private final String MESSAGE_DONE = "Nice! (ᵔ.ᵔ) Task done: ";
+    private final String MESSAGE_DONE = "Nice! (ᵔ.ᵔ) Task done:";
     private final String MESSAGE_LIST = "Here's your tasks!";
-    private final String MESSAGE_ADD = "Nee added this task: ";
+    private final String MESSAGE_ADD = "Nee added this task:";
 
     private final Scanner sc;
     private final ArrayList<Task> tasks;
@@ -40,7 +40,7 @@ public class Duke {
         for (int i = 0; i < this.tasks.size(); i++) {
             System.out.println("\t" + (i + 1) + ".\t" + this.tasks.get(i));
         }
-        System.out.println(BORDER);
+        System.out.printf(BORDER);
         waitInput();
     }
 
@@ -65,7 +65,7 @@ public class Duke {
         }
         Task task = this.tasks.get(i - 1);
         task.markAsDone();
-        print(MESSAGE_DONE + "\n" + task);
+        print(MESSAGE_DONE + "\n" + "  " + task);
         waitInput();
     }
 
