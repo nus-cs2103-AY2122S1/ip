@@ -12,7 +12,11 @@ abstract public class Task {
     }
 
     public void toggle() {
-        this.isDone = !this.isDone;
+        this.toggle(!this.isDone);
+    }
+
+    public void toggle(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public String getDescription() {

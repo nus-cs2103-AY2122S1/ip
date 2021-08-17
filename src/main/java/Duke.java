@@ -34,7 +34,7 @@ public class Duke {
             } else if (parameters[0].equals("done") && parameters.length == 2) {
                 int i = Integer.parseInt(parameters[1]) - 1;
                 var task = tasks.get(i);
-                task.toggle();
+                task.toggle(true);
 
                 printBanner(new String[] {
                     "Nice! I've marked this task as done:",
