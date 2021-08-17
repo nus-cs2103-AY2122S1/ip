@@ -4,6 +4,5 @@ todo get coffee
 list
 done 1
 done 2
-hello
 event tp meeting /at Sun 2-4pm
 bye

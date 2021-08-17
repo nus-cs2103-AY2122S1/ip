@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     private final String BORDER = "\t_________________________________________________\n";
-    private final String MESSAGE_GREET =  "Hi, my name is Nee ´･ᴗ･`. How can I help you?";
+    private final String MESSAGE_GREET = "Hi, my name is Nee ´･ᴗ･`. How can I help you?";
     private final String MESSAGE_EXIT = "Goodbye!~";
     private final String MESSAGE_DONE = "Nice! (ᵔ.ᵔ) Task done:";
     private final String MESSAGE_LIST = "Here's your tasks!";
@@ -21,8 +21,14 @@ public class Duke {
         this.tasks = new ArrayList<>(100);
     }
 
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+    }
+
     /**
      * Adds a task to the list of tasks
+     *
      * @param task the new task to be added.
      */
     private void addTask(Task task) {
@@ -35,9 +41,10 @@ public class Duke {
 
     /**
      * Deletes task and prints updated list of tasks.
+     *
      * @param taskNum Task to be deleted.
      * @throws TaskNotFoundException Invalid task number.
-     * @throws InvalidTaskException Task has invalid description.
+     * @throws InvalidTaskException  Task has invalid description.
      */
     private void deleteTask(String taskNum) throws TaskNotFoundException, InvalidTaskException {
         int i = Integer.parseInt(taskNum);
@@ -53,6 +60,7 @@ public class Duke {
 
     /**
      * Prints the list of tasks.
+     *
      * @throws EmptyListException List has no tasks.
      */
     private void printTasks() throws EmptyListException {
@@ -69,6 +77,7 @@ public class Duke {
 
     /**
      * Prints text between two horizontal lines.
+     *
      * @param input the text to be printed.
      */
     public void print(String input) {
@@ -78,9 +87,10 @@ public class Duke {
 
     /**
      * Marks a task as completed.
+     *
      * @param taskNum The task number.
      * @throws TaskNotFoundException Invalid task number.
-     * @throws InvalidTaskException Task has invalid description.
+     * @throws InvalidTaskException  Task has invalid description.
      */
     private void finishTask(String taskNum) throws TaskNotFoundException, InvalidTaskException {
         int i = Integer.parseInt(taskNum);
@@ -95,6 +105,7 @@ public class Duke {
 
     /**
      * Adds an event to the list of tasks.
+     *
      * @param commands the event with a specific time.
      * @throws InvalidTaskException Task has invalid description.
      */
@@ -113,6 +124,7 @@ public class Duke {
 
     /**
      * Adds a deadline to the list of tasks.
+     *
      * @param commands the deadline with a specific time.
      * @throws InvalidTaskException Task has invalid description.
      */
@@ -131,6 +143,7 @@ public class Duke {
 
     /**
      * Adds a todo to the list of tasks.
+     *
      * @param commands the todo with a specific time.
      */
     private void addTodo(String[] commands) throws InvalidTaskException {
@@ -199,16 +212,10 @@ public class Duke {
         }
     }
 
-
     public void run() {
         // Greet user
         print(MESSAGE_GREET);
         // Get next input
         waitInput();
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 }
