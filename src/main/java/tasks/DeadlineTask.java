@@ -9,11 +9,11 @@ public class DeadlineTask extends Task {
 
   public DeadlineTask(String title, String date) {
     super(title, Type.DEADLINE);
-    this.date = date;
+    this.date = date.trim();
   }
 
   @Override
   public String toString() {
-    return "[D] " + super.toString() + String.format(" (at: %s)", this.date);
+    return "[D] " + super.toString() + String.format(" (by: %s)", this.date);
   }
 }

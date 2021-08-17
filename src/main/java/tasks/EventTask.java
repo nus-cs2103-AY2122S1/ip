@@ -9,7 +9,7 @@ public class EventTask extends Task {
 
   public EventTask(String title, String dates) {
     super(title, Type.EVENT);
-    this.dates = dates;
+    this.dates = dates.trim();
   }
 
   @Override

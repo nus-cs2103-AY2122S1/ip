@@ -18,3 +18,10 @@ done 2
 list
 done 1
 list
+todo
+deadline /by
+event /at
+deadline foo /by
+event foo /at
+deadline /by bar
+event /at bar

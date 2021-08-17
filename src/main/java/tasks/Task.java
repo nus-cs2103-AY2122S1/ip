@@ -28,18 +28,19 @@ public class Task {
    * @return instance of a subclass of Task.
    */
   public static Task createTask(String inputString, Type type) {
+    inputString = inputString.trim();
     String[] args;
     switch (type) {
       case TODO:
         return new TodoTask(inputString);
       case EVENT:
-        args = inputString.split("/at");
+        args = inputString.split(" /at ");
         if (args.length != 2) {
           throw new InvalidTaskException("Expected '{title} /at {date}' for event tasks");
         }
         return new EventTask(args[0], args[1]);
       case DEADLINE:
-        args = inputString.split("/by");
+        args = inputString.split(" /by ");
         if (args.length != 2) {
           throw new InvalidTaskException("Expected '{title} /by {dates}' for deadline tasks");
         }
@@ -50,6 +51,8 @@ public class Task {
   }
 
   protected Task(String title, Type type) {
+    title = title.trim();
+    if (title.length() == 0) throw new InvalidTaskException("Task description cannot be empty");
     this.title = title;
     this.type = type;
   }
