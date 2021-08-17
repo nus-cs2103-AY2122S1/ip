@@ -30,7 +30,7 @@ public class Duke {
                     break;
                 case "done":
                     int idx = Integer.valueOf(currLine[1]);
-                    this.markIdxAsDone(idx);
+                    System.out.println(this.markIdxAsDone(idx));
                     break;
                 default:
                     System.out.println(this.add(currLine));
@@ -61,6 +61,8 @@ public class Duke {
                 throw new IllegalStateException("bad keyword");
         }
         this.itemList.add(toAdd);
+        printBuffer.add("  " + toAdd.toString());
+        printBuffer.add(String.format("Now you have %d tasks in the list.", this.itemList.size()));
         return styleResponse(printBuffer);
     }
     /**
@@ -72,13 +74,14 @@ public class Duke {
         if (!iterator.hasNext()) {
             return "Empty!";
         } else {
-            ArrayList<String> returnBuffer = new ArrayList<>();
+            ArrayList<String> printBuffer = new ArrayList<>();
+            printBuffer.add("Here are the tasks in your list:");
             Integer currIdx = 1;
             while (iterator.hasNext()) {
-                returnBuffer.add(currIdx.toString() + ". " + iterator.next().toString());
+                printBuffer.add(currIdx.toString() + ". " + iterator.next().toString());
                 currIdx++;
             }
-            return styleResponse(returnBuffer);
+            return styleResponse(printBuffer);
         }
     }
 
@@ -86,8 +89,13 @@ public class Duke {
      * Marks to-do list at index i (0-count).
      * @param i 0 is the first item in the list.
      */
-    public void markIdxAsDone(int i) {
-        this.itemList.get(i - 1).markAsDone();
+    public String markIdxAsDone(int i) {
+        Item x = this.itemList.get(i - 1);
+        ArrayList<String> printBuffer = new ArrayList<>();
+        printBuffer.add("Nice! I've marked this task as done:");
+        x.markAsDone();
+        printBuffer.add("  " + x.toString());
+        return styleResponse(printBuffer);
     }
 
     public static String echo(String inputString) {

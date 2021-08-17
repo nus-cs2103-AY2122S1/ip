@@ -5,3 +5,38 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+     --------------------
+     Got it. I've added this task:
+       [T][] make personal website
+     --------------------
+     --------------------
+     Got it. I've added this task:
+       [D][] ip stuff (by: 19 aug or something)
+     --------------------
+     --------------------
+     Got it. I've added this task:
+       [T][] collect merch
+     --------------------
+     --------------------
+     Got it. I've added this task:
+       [E][] birthday (at: secret)
+     --------------------
+     --------------------
+     1. [T][] make personal website
+     2. [D][] ip stuff (by: 19 aug or something)
+     3. [T][] collect merch
+     4. [E][] birthday (at: secret)
+     --------------------
+     --------------------
+     Nice! I've marked this task as done:
+       [E][X] birthday (at: secret)
+     --------------------
+     --------------------
+     1. [T][] make personal website
+     2. [D][] ip stuff (by: 19 aug or something)
+     3. [T][] collect merch
+     4. [E][X] birthday (at: secret)
+     --------------------
+     --------------------
+     Bye. Hope to see you again soon!
+     --------------------
