@@ -4,6 +4,7 @@ import java.util.List;
 
 import Enum.Command;
 import Util.Output;
+import Exception.DukeException;
 
 public class Processor implements IProcessor {
 
@@ -28,33 +29,43 @@ public class Processor implements IProcessor {
 
     @Override
     public void processDefault(List<String> arguments) {
-        String type = arguments.get(0);
-        if(type.equals("todo")) {
-            arguments.remove(0);
-            this.list.addTask(new Todo(String.join(" ", arguments)));
-        } else if(type.equals("deadline")) {
-            arguments.remove(0);
-            String line = String.join(" ", arguments);
-            String[] input = line.split(" /by ");
-            if (input.length == 1) {
-                Output.print("Invalid command!");
-                return;
+        try {
+            String type = arguments.get(0);
+            if (type.equals("todo")) {
+                arguments.remove(0);
+                if (arguments.size() == 0) {
+                    throw new DukeException("Todo description cannot be empty");
+                }
+                this.list.addTask(new Todo(String.join(" ", arguments)));
+            } else if (type.equals("deadline")) {
+                arguments.remove(0);
+                if (arguments.size() == 0) {
+                    throw new DukeException("Deadline description cannot be empty");
+                }
+                String line = String.join(" ", arguments);
+                String[] input = line.split(" /by ");
+                if (input.length == 1) {
+                    throw new DukeException("Deadline command must have /by specified");
+                }
+                this.list.addTask(new Deadline(input[0], input[1]));
+            } else if (type.equals("event")) {
+                arguments.remove(0);
+                if (arguments.size() == 0) {
+                    throw new DukeException("Event description cannot be empty");
+                }
+                String line = String.join(" ", arguments);
+                String[] input = line.split(" /at ");
+                if (input.length == 1) {
+                    throw new DukeException("Event command must have /at specified");
+                }
+                this.list.addTask(new Event(input[0], input[1]));
+            } else {
+                throw new DukeException("I don't understand:(");
             }
-            this.list.addTask(new Deadline(input[0], input[1]));
-        } else if(type.equals("event")) {
-            arguments.remove(0);
-            String line = String.join(" ", arguments);
-            String[] input = line.split(" /at ");
-            if (input.length == 1) {
-                Output.print("Invalid command!");
-                return;
-            }
-            this.list.addTask(new Event(input[0], input[1]));
-        } else {
-            Output.print("Invalid command!");
-            return;
+            Output.print("Got it. I've added this task:\n   " + this.list.getLastTask() + "\nNow you have " + this.list.getSize() + " in the list.");
+        } catch (DukeException e) {
+            Output.print(e.getMessage());
         }
-        Output.print("Got it. I've added this task:\n   " + this.list.getLastTask() + "\nNow you have " + this.list.getSize() + " in the list.");
     }
 
     @Override
