@@ -13,12 +13,12 @@ public class Task {
 
     @Override
     public String toString() {
-        return description;
+        String s = "[" + getStatusIcon() + "] " + this.description;
+        return s;
     }
 
     public String finished() {
         this.isDone = true;
-        String finishSentence = "[" + getStatusIcon() + "] " + this.description;
-        return finishSentence;
+        return this.toString();
     }
 }

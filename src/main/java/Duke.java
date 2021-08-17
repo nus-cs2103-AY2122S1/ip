@@ -29,10 +29,8 @@ public class Duke {
                 }
 
             } else {
-
                 myTasks.addTask(next);
             }
-
             }
     }
 
@@ -45,4 +43,6 @@ public class Duke {
     private static void myPrint(String s) {
         System.out.println(div + "\n" + ind2 + s + "\n" + div);
     }
+
+
 }
