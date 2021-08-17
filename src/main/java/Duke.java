@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,13 +12,17 @@ public class Duke {
         System.out.println("Im Duke\nWhat can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
         String border = "____________________________________________________________";
-        String added = "added: ";
         Printer printer = new Printer(border);
+        ArrayList items = new ArrayList<String>();
+        int counter = 0;
 
-        while (!input.equals("bye")) {
-            printer.PrintMessage(added);
+        String input = sc.nextLine();
+        while (!input.equals("bye") && !input.equals("list")) {
+            counter++;
+            items.add(input);
+            String newString = String.format("added: %s", input);
+            printer.PrintMessage(newString);
             input = sc.nextLine();
         }
         printer.PrintMessage("Bye. Hope to see you again soon!");
