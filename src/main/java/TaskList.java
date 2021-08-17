@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final List<Task> list = new ArrayList<>(List.of(new Task("read book"), new Task("return book"), new Task("buy bread")));
+    private final List<Task> list = new ArrayList<>();
 
     public void addTask(Task task) {
         list.add(task);
@@ -10,6 +10,10 @@ public class TaskList {
 
     public Task markTaskAsDone(int index) {
         return list.get(index - 1).markAsDone();
+    }
+
+    public int getLen() {
+        return list.size();
     }
 
     @Override

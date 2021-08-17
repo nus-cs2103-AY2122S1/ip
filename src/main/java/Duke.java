@@ -5,7 +5,7 @@ public class Duke {
     private static final Scanner sc = new Scanner(System.in);
     private static final TaskList list = new TaskList();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         greet();
         while (true) {
             String input = sc.nextLine();
@@ -14,9 +14,21 @@ public class Duke {
             else if (input.contains("done")) {
                 input = input.substring(5);
                 int index = Integer.parseInt(input);
-                markTaskAsDone(index);
+                done(index);
             }
-            else addTask(input);
+            else if (input.contains("todo")) {
+                input = input.substring(5);
+                add(new ToDo(input));
+            } else if (input.contains("deadline")) {
+                input = input.substring(9);
+                String[] parsedInput = input.split(" /by ");
+                add(new Deadline(parsedInput[0], parsedInput[1]));
+            } else if (input.contains("event")) {
+                input = input.substring(6);
+                String[] parsedInput = input.split(" /at ");
+                add(new Event(parsedInput[0], parsedInput[1]));
+            }
+            else throw new Exception();
         }
         exit();
     }
@@ -48,15 +60,18 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    private static void addTask(String task) {
-        list.addTask(new Task(task));
-        String message = String.format("added: %s", task);
+    private static void add(Task task) {
+        list.addTask(task);
+        int len = list.getLen();
+        String message = len <= 1 ?
+                String.format("Got it. I've added this task:\n  %s\nNow you have %d task in the list.", task.toString(), len) :
+                String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task.toString(), len);
         echo(message);
     }
 
-    private static void markTaskAsDone(int index) {
+    private static void done(int index) {
         Task task = list.markTaskAsDone(index);
-        String message = String.format("Nice! I've marked this task as done:\n   %s", task);
+        String message = String.format("Nice! I've marked this task as done:\n  %s", task);
         echo(message);
     }
 }
