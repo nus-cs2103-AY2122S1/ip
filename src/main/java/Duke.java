@@ -24,28 +24,48 @@ public class Duke {
     public static void handleInput(String command) {
         // first element is the instruction, second element is the rest of the command
         String[] inputWords = command.split(" ", 2);
-        switch (inputWords[0]) {
-            case "bye":
-                break;
-            case "list":
-                printTasks();
-                break;
-            case "done":
-                markTaskAsDone(Integer.parseInt(inputWords[1]));
-                break;
-            case "todo":
-                addTodo(inputWords[1]);
-                break;
-            case "deadline": {
-                addDeadline(inputWords[1]);
-                break;
+        try {
+            switch (inputWords[0]) {
+                case "bye":
+                    break;
+                case "list":
+                    printTasks();
+                    break;
+                case "done":
+                    if (inputWords.length == 1) {
+                        throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
+                    }
+                    int taskId = Integer.parseInt(inputWords[1]);
+                    if (taskId < 1 || taskId > arr.size()) {
+                        throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
+                    }
+                    markTaskAsDone(taskId);
+                    break;
+                case "todo":
+                    if (inputWords.length == 1) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    addTodo(inputWords[1]);
+                    break;
+                case "deadline": {
+                    if (inputWords.length == 1) {
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
+                    addDeadline(inputWords[1]);
+                    break;
+                }
+                case "event": {
+                    if (inputWords.length == 1) {
+                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                    }
+                    addEvent(inputWords[1]);
+                    break;
+                }
+                default:
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            case "event": {
-                addEvent(inputWords[1]);
-                break;
-            }
-            default:
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -60,12 +80,12 @@ public class Duke {
 
     /**
      * Mark a task as done.
-     * @param TaskId ID of the task we are marking as done.
+     * @param taskId ID of the task we are marking as done.
      */
-    public static void markTaskAsDone(int TaskId) {
-        arr.get(TaskId - 1).setIsDone(true);
+    public static void markTaskAsDone(int taskId) {
+        arr.get(taskId - 1).setIsDone(true);
         System.out.println("Nice! I've marked this task as done.");
-        System.out.println("   " + arr.get(TaskId - 1));
+        System.out.println("   " + arr.get(taskId - 1));
     }
 
     /**
@@ -81,9 +101,14 @@ public class Duke {
      * Adds a Deadline task.
      * @param fullDescription String that contains the description and deadline of the task.
      */
-    public static void addDeadline(String fullDescription) {
-        String description = fullDescription.substring(0, fullDescription.indexOf("/by"));
-        String deadline = fullDescription.substring(fullDescription.indexOf("/by") + 4);
+    public static void addDeadline(String fullDescription) throws DukeException {
+        int sepIndex = fullDescription.indexOf("/by");
+        if (fullDescription.charAt(sepIndex + 3) != ' ' || sepIndex == -1) {
+            throw new DukeException("☹ OOPS!!! Please input with the correct format e.g. deadline return books" +
+                    " /by Sunday");
+        }
+        String description = fullDescription.substring(0, sepIndex);
+        String deadline = fullDescription.substring(sepIndex + 4);
         arr.add(new Deadline(description, deadline));
         printAfterAdding();
     }
@@ -92,9 +117,14 @@ public class Duke {
      * Adds an Event task.
      * @param fullDescription String that contains the description and time of the task.
      */
-    public static void addEvent(String fullDescription) {
-        String description = fullDescription.substring(0, fullDescription.indexOf("/at"));
-        String time = fullDescription.substring(fullDescription.indexOf("/at") + 4);
+    public static void addEvent(String fullDescription) throws DukeException {
+        int sepIndex = fullDescription.indexOf("/at");
+        if (fullDescription.charAt(sepIndex + 3) != ' ' || sepIndex == -1) {
+            throw new DukeException("☹ OOPS!!! Please input with the correct format e.g. event read books" +
+                    " /at Saturday 9am");
+        }
+        String description = fullDescription.substring(0, sepIndex);
+        String time = fullDescription.substring(sepIndex + 4);
         arr.add(new Event(description, time));
         printAfterAdding();
     }
