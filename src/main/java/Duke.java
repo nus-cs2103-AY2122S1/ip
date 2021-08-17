@@ -17,12 +17,18 @@ public class Duke {
                 int index = Integer.parseInt(splitInput[1]) - 1;
                 String returnString = tasks.get(index).markDone();
                 printer.PrintMessage(returnString);
-
             } else if (input.equals("list")) {
                 printer.PrintList(tasks);
             } else if (splitInput[0].equals("todo")) {
-                tasks.add(new Todo(splitInput[1]));
-                printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
+                try {
+                    if (splitInput.length < 2 || splitInput[1].equals("")) {
+                        throw new DukeException("The description of a todo cannot be empty.");
+                    }
+                    tasks.add(new Todo(splitInput[1]));
+                    printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
+                } catch (DukeException e) {
+                    printer.PrintMessage(e.getMessage());
+                }
             } else if (splitInput[0].equals("deadline")) {
                 String[] furtherSplits = splitInput[1].split("/by");
                 tasks.add(new Deadline(furtherSplits[0], furtherSplits[1]));
