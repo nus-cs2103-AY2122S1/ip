@@ -2,11 +2,6 @@ public class Event extends Task {
 
     private String timing;
 
-    public Event(String description, boolean isDone, String timing) {
-        super(description, isDone);
-        this.timing = timing;
-    }
-
     public Event(String description, String timing) {
         super(description);
         this.timing = timing;
