@@ -1,5 +1,6 @@
-import java.util.HashMap;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Duke {
 
@@ -8,13 +9,21 @@ public class Duke {
     private int count = 0;
 
     private void serve() {
-        System.out.println("Good Day Sir/Mdm, I am Duke\nWhat can I do for you?\n");
+        System.out.println("Good Day Sir/Mdm, I am Duke.\nWhat can I do for you?\n");
+
+        Scanner sc = new Scanner(System.in);
 
         while (true) {
-            Scanner sc = new Scanner(System.in);
+
+            if (!sc.hasNextLine()) {
+                sc.close();
+                break;
+            }
             String input = sc.nextLine();
+
             if (input.equals("bye")) {
                 System.out.println("Goodbye Sir/Mdm. Hope to serve you again soon!\n");
+                sc.close();
                 break;
             } else if (input.equals("list")) {
                 System.out.println("Here are your tasks Sir/Mdm:");
@@ -46,12 +55,40 @@ public class Duke {
                 }
 
                 tasks[taskToMark].markAsDone();
-                System.out.println("Good job Sir/Mdm! I shall mark this task as complete:\n" +
+                System.out.println("Good job Sir/Mdm! I shall mark this task as complete:\n   " +
                         tasks[taskToMark] + "\n");
             } else {
-                Task newTask = new Task(input);
-                this.add(newTask);
-                System.out.println("added: " + newTask + "\n");
+
+                Pattern todoPattern = Pattern.compile("(^(todo ))");
+                Pattern deadlinePattern = Pattern.compile("(^(deadline ))");
+                Pattern eventPattern = Pattern.compile("(^(event ))");
+
+
+                if (todoPattern.matcher(input).find()) {
+                    Task newTask = new Todo(input.substring(5, input.length()));
+                    this.add(newTask);
+                    System.out.println("Understood Sir/Mdm, I have added the indicated task: " + "\n   " + newTask);
+                    System.out.println("Now you have " + count + (count == 1 ? " task." : " tasks.")  + "\n");
+
+                } else if (deadlinePattern.matcher(input).find()) {
+                    int index = input.indexOf('/');
+                    String description = input.substring(9, index).trim();
+                    String date = input.substring(index + 1, input.length());
+                    Task newTask = new Deadline(description, date);
+                    this.add(newTask);
+                    System.out.println("Understood Sir/Mdm, I have added the indicated task: " + "\n   " + newTask);
+                    System.out.println("Now you have " + count + (count == 1 ? " task." : " tasks.")  + "\n");
+
+                } else if (eventPattern.matcher(input).find()) {
+                    int index = input.indexOf('/');
+                    String description = input.substring(6, index).trim();
+                    String date = input.substring(index + 1, input.length());
+                    Task newTask = new Event(description, date);
+                    this.add(newTask);
+                    System.out.println("Understood Sir/Mdm, I have added the indicated task: " + "\n   " + newTask);
+                    System.out.println("Now you have " + count + (count == 1 ? " task." : " tasks.")  + "\n");
+
+                }
             }
         }
     }
