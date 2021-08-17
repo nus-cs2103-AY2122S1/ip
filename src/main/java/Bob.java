@@ -1,3 +1,9 @@
+import Exceptions.*;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.Todo;
+
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -22,6 +28,10 @@ public class Bob {
                     String[] splitResponse = response.split(" ", 2);
                     System.out.println(taskList.markIndexCompleted(Integer.parseInt(splitResponse[1]) - 1));
                     response = scanner.nextLine();
+                } else if (response.matches("delete(.*)")) {
+                    String[] splitResponse = response.split(" ", 2);
+                    System.out.println(taskList.deleteIndex(Integer.parseInt(splitResponse[1]) - 1));
+                    response = scanner.nextLine();
                 } else if (response.matches("todo(.*)") || response.matches("deadline(.*)") //add a new task
                         || response.matches("event(.*)")) {
                     String[] splitResponse = response.split(" ", 2);
@@ -37,10 +47,7 @@ public class Bob {
                         newTask = new Event(splitAgain[0], splitAgain[1]);
                     }
 
-                    taskList.addTask(newTask); //add a task
-                    System.out.println("Okay okay I've added the task:");
-                    System.out.println(newTask.printTask());
-                    System.out.println("Yay " + taskList.noOfTasks() + " tasks!\n");
+                    System.out.println(taskList.addTask(newTask)); //add a task
                     response = scanner.nextLine();
                 }
             } catch (InvalidInputException e) {
@@ -68,7 +75,7 @@ public class Bob {
             NoDeadlineException, NoEventTimingException, OutOfBoundsException{
         if (Objects.equals(response, "list")) {
             //correct input checker, do nothing
-        } else if (response.matches("done(.*)")) {
+        } else if (response.matches("done(.*)") || response.matches("delete(.*)")) {
             String[] splitResponse = response.split(" ", 2);
             if (Integer.parseInt(splitResponse[1]) <= 0
                     || Integer.parseInt(splitResponse[1]) > Integer.parseInt(tasklist.noOfTasks())) {

@@ -16,4 +16,7 @@ event
 event have fun /at 7am
 event have fun
 list
+delete 5
+list
+delete 5
 bye

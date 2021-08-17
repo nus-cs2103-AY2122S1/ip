@@ -61,4 +61,16 @@ Here's your tasks! Wow I'm so helpful!
 4.[D] [X] buy more bread (by: tonight)
 5.[E] [ ] have fun (at: 7am)
 
+Okay task yeeted away :D
+[E] [ ] have fun (at: 7am)
+Yay 4 tasks!
+
+Here's your tasks! Wow I'm so helpful!
+1.[D] [X] buy bread (by: Friday)
+2.[E] [ ] eat bread (at: Friday night 8pm)
+3.[T] [ ] bake bread
+4.[D] [X] buy more bread (by: tonight)
+
+Huh what task is that :/
+
 Bye! Shoo!

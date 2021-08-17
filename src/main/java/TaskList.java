@@ -1,3 +1,5 @@
+import Tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -7,8 +9,10 @@ public class TaskList {
         this.taskList = new ArrayList<Task>();
     }
 
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.taskList.add(task);
+        return "Okay okay I've added the task:\n" + task.printTask() + "\n"
+                + "Yay " + this.taskList.size() + " tasks!\n";
     }
 
     public String getList() {
@@ -23,6 +27,13 @@ public class TaskList {
         Task selectedTask = this.taskList.get(index);
         selectedTask.markCompleted();
         return "Wow you finally did something productive!\n" + selectedTask.printTask() + "\n";
+    }
+
+    public String deleteIndex(int index) {
+        Task selectedTask = this.taskList.get(index);
+        this.taskList.remove(index);
+        return "Okay task yeeted away :D\n" + selectedTask.printTask() + "\n"
+                + "Yay " + this.taskList.size() + " tasks!\n";
     }
 
     public String noOfTasks() {
