@@ -38,7 +38,7 @@ public class Duke {
                         for (int i = 1; i <= savedInputs.size(); i++) {
                             outputList.append(i + "." + savedInputs.get(i - 1).toString() + "\n");
                         }
-                        System.out.println(outputList.toString());
+                        System.out.println(outputList);
                         break;
 
                     // done
@@ -51,18 +51,39 @@ public class Duke {
                         if (input.length() == 5) {
                             throw new DukeException("Oops! The number following 'done' cannot be empty.");
                         }
-                        int pos = Integer.valueOf(input.substring(5));
+                        int donePos = Integer.valueOf(input.substring(5));
 
                         //checks if the task to be marked as done is within the range of the list
-                        if (pos <= 0 || pos > savedInputs.size()) {
+                        if (donePos <= 0 || donePos > savedInputs.size()) {
                             throw new DukeException("Oops! " +
                                 "The task to mark as done is not within the range of the list.");
                         }
-                        savedInputs.get(pos - 1).markAsDone();
+                        savedInputs.get(donePos - 1).markAsDone();
+                        break;
+
+                    // delete
+                    case 3:
+                        if (!input.startsWith("delete ")) {
+                            throw new DukeException("Oops! Improper formatting for delete. " +
+                                    "Please use: delete <task number>");
+                        }
+                        if (input.length() == 7) {
+                            throw new DukeException("Oops! The number following 'delete' cannot be empty.");
+                        }
+                        int deletePos = Integer.valueOf(input.substring(7));
+                        if (deletePos <= 0 || deletePos > savedInputs.size()) {
+                            throw new DukeException("Oops! " +
+                                    "The task to delete is not within the range of the list.");
+                        }
+
+                        System.out.println("Noted. I've removed this task:\n  " +
+                            savedInputs.get(deletePos - 1).toString());
+                        savedInputs.remove(deletePos - 1);
+                        System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
                         break;
 
                     // todo
-                    case 3:
+                    case 4:
                         // handles any characters after 'todo' that are not white space
                         if (!input.startsWith("todo ")) {
                             throw new DukeException("Oops! Improper formatting for todo. " +
@@ -73,13 +94,13 @@ public class Duke {
                         }
 
                         Todo todo = new Todo(input.substring(5));
-                        System.out.println("Got it. I've added this task:\n  " + todo.toString());
+                        System.out.println("Got it. I've added this task:\n  " + todo);
                         savedInputs.add(todo);
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
                         break;
 
                     // deadline
-                    case 4:
+                    case 5:
                         // handles any characters after 'deadline' that are not white space
                         if (!input.startsWith("deadline ")) {
                             throw new DukeException("Oops! Improper formatting for deadline. " +
@@ -101,13 +122,13 @@ public class Duke {
                         String deadlineDescription = input.split(" /by ")[0].substring(9);
 
                         Deadline deadline = new Deadline(deadlineDescription, by);
-                        System.out.println("Got it. I've added this task:\n  " + deadline.toString());
+                        System.out.println("Got it. I've added this task:\n  " + deadline);
                         savedInputs.add(deadline);
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
                         break;
 
                     // event
-                    case 5:
+                    case 6:
                         // handles any characters after 'event' that are not white space
                         if (!input.startsWith("event ")) {
                             throw new DukeException("Oops! Improper formatting for event. " +
@@ -127,7 +148,7 @@ public class Duke {
                         String eventDescription = input.split(" /at ")[0].substring(6);
 
                         Event event = new Event(eventDescription, at);
-                        System.out.println("Got it. I've added this task:\n  " + event.toString());
+                        System.out.println("Got it. I've added this task:\n  " + event);
                         savedInputs.add(event);
                         System.out.println("Now you have " + savedInputs.size() + " tasks in the list.");
                         break;
@@ -145,21 +166,23 @@ public class Duke {
      * Returns the identifier of each case (for switch in chat method).
      *
      * @param input User entered into Command Line
-     * @return caseId
+     * @return CaseId
      */
     private static int findCase(String input) {
         if (input.equals("list")) {
             return 1;
         } else if (input.startsWith("done")) {
             return 2;
-        } else if (input.startsWith("todo")) {
+        } else if (input.startsWith("delete")) {
             return 3;
-        } else if (input.startsWith("deadline")) {
+        } else if (input.startsWith("todo")) {
             return 4;
-        } else if (input.startsWith("event")) {
+        } else if (input.startsWith("deadline")) {
             return 5;
-        } else {
+        } else if (input.startsWith("event")) {
             return 6;
+        } else {
+            return 7;
         }
     }
 }
