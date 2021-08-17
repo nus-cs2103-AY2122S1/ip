@@ -10,22 +10,32 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello, I am Duke!(≧◡≦)\n" + "How may I help you?");
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> inputs = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
+        String input = sc.nextLine();
 
-        while (true) {
-            String input = sc.nextLine();
+        while (!input.equals("bye")) {
+            String[] parts = input.split(" ");
 
-            if (input.equals("bye")) {
-                System.out.println("Bye! Feel free to ask me for help again anytime! (≧▽≦)/");
-                break;
-            } else if (input.equals("list")) {
-                for (int i = 0; i < inputs.size(); i++) {
-                    System.out.printf("%d. %s%n", i + 1, inputs.get(i));
+            switch (parts[0]) {
+            case "list":
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.printf("%d. %s%n", i + 1, tasks.get(i));
                 }
-            } else {
-                inputs.add(input);
-                System.out.println("Added: " + input);
+                break;
+            case "done":
+                int taskIndex = Integer.parseInt(parts[1]) - 1;
+                Task doneTask = tasks.get(taskIndex);
+                doneTask.markAsDone();
+                System.out.printf("Good job! d(≧◡≦)b I have marked the following task as done:%n %s%n", doneTask);
+                break;
+            default:
+                tasks.add(new Task(input));
+                System.out.println("Added task: " + input);
+                break;
             }
+            input = sc.nextLine();
         }
+        System.out.println("Bye! Feel free to ask me for help again anytime! (≧▽≦)/");
+        sc.close();
     }
 }
