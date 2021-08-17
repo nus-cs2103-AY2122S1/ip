@@ -8,4 +8,11 @@ done 1
 done 2
 done 3
 list
+blablabla
+todo
+deadline
+deadline borrow book
+event
+event borrow book
+list
 bye
