@@ -1,0 +1,15 @@
+invalid test
+ invalid test
+ list
+list
+todo
+todo Water Plants
+todo Feed Cows
+event Kay's Birthday /at 32 May
+deadline Submit proposal /by 33 May
+list
+done 2
+done 4
+done 5
+list
+undo 4

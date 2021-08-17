@@ -1,2 +1,36 @@
 Henlo, this is Duke.
 How may I help?
+I don't quite understand the command 'invalid test'. Please try again!
+I don't quite understand the command ' invalid test'. Please try again!
+I don't quite understand the command ' list'. Please try again!
+You have no tasks!
+I don't quite understand the command 'todo'. Please try again!
+Got it. I've added this task:
+  [T][ ] Water Plants
+Now you have 1 task in the list
+Got it. I've added this task:
+  [T][ ] Feed Cows
+Now you have 2 tasks in the list
+Got it. I've added this task:
+  [E][ ] Kay's Birthday (at: 32 May)
+Now you have 3 tasks in the list
+Got it. I've added this task:
+  [D][ ] Submit proposal (by: 33 May)
+Now you have 4 tasks in the list
+Here are the tasks in your list:
+1. [T][ ] Water Plants
+2. [T][ ] Feed Cows
+3. [E][ ] Kay's Birthday (at: 32 May)
+4. [D][ ] Submit proposal (by: 33 May)
+Nice! I've marked this task as done:
+  [T][X] Feed Cows
+Nice! I've marked this task as done:
+  [D][X] Submit proposal (by: 33 May)
+No such task exists! Please try again!
+Here are the tasks in your list:
+1. [T][ ] Water Plants
+2. [T][X] Feed Cows
+3. [E][ ] Kay's Birthday (at: 32 May)
+4. [D][X] Submit proposal (by: 33 May)
+Oh no! I've marked this task as undone:
+  [D][ ] Submit proposal (by: 33 May)

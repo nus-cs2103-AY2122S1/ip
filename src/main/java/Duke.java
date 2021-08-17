@@ -46,6 +46,13 @@ public class Duke {
             return false;
         }
     }
+    public static boolean todoCheck(String response) {
+        if (response.startsWith("todo ") && response.length() > 5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public static int undoCheck(String response, int currentCapacity) {
         String strippedResponse = response.strip();
@@ -103,7 +110,7 @@ public class Duke {
                     int positionToMarkDone = doneCheck(response, currentCapacity);
                     userTaskList[positionToMarkDone - 1].markDone();
                     String replyString = "Nice! I've marked this task as done:\n";
-                    replyString += String.format("  %s", userTaskList[positionToMarkDone - 1].toString());
+                    replyString += String.format("  %s", userTaskList[positionToMarkDone - 1]);
                     System.out.println(replyString);
                     continue;
                 } else if (doneCheck(response, currentCapacity) == -1) {
@@ -115,7 +122,7 @@ public class Duke {
                     int positionToMarkUndone = undoCheck(response, currentCapacity);
                     userTaskList[positionToMarkUndone - 1].markUndone();
                     String replyString = "Oh no! I've marked this task as undone:\n";
-                    replyString += String.format("  %s", userTaskList[positionToMarkUndone - 1].toString());
+                    replyString += String.format("  %s", userTaskList[positionToMarkUndone - 1]);
                     System.out.println(replyString);
                     continue;
                 } else if (doneCheck(response, currentCapacity) == -1) {
@@ -133,7 +140,7 @@ public class Duke {
                 } else {
                     System.out.println("You have no tasks!");
                 }
-            } else if (response.startsWith("todo ")) {
+            } else if (todoCheck(response)) {
                 if (currentCapacity < 100) {
                     userTaskList[currentCapacity] = new ToDo(responseToTodo(response));
                     System.out.printf(taskAddedMessage, userTaskList[currentCapacity], currentCapacity + 1, pluralOrNo(currentCapacity + 1));
