@@ -1,5 +1,7 @@
 package display;
 
+import tasks.Task;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,24 +40,39 @@ public class Duke {
 
     private static void analyzeLog() {
         Scanner sc = new Scanner(System.in);
-        List<String> texts = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         String input;
+        String[] words;
         StringBuilder log;
 
+        logging:
         while (true) {
-            input = sc.nextLine();
-            if (input.equals("bye")) {
+            log = new StringBuilder();
+            input = sc.nextLine().trim();
+            words = input.split(" ", 2);
+            switch (words[0]) {
+            case "bye":
                 System.out.println(line + "\n\t Peace out!" + line);
-                break;
-            } else if (input.equals("list")){
-                log = new StringBuilder();
-                for (int i = 0; i < texts.size(); i++) {
-                    log.append("\n\t ").append(i + 1).append(". ").append(texts.get(i));
+                break logging;
+            case "list":
+                for (int i = 0; i < tasks.size(); i++) {
+                    log.append("\n\t ").append(i + 1).append(". ").append(tasks.get(i));
                 }
-            } else {
-                texts.add(input);
-                log = new StringBuilder();
+                break;
+            case "done":
+                int idx = Integer.parseInt(words[1]);
+                Task task = tasks.get(idx - 1);
+                if (task.getStatusIcon().equals("X")) {
+                    log.append("\t This task has been marked as done");
+                } else {
+                    task.markAsDone();
+                    log.append("\n\t Nice! I've marked this task as done:\n\t\t").append(task);
+                }
+                break;
+            default:
+                tasks.add(new Task(input));
                 log.append("\n\t added: ").append(input);
+                break;
             }
             System.out.println(line + log + line);
         }
