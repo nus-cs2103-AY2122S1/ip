@@ -9,43 +9,107 @@ class DukeBot {
         this.taskList = new TaskList();
     }
 
+    private String handleBye(String[] inputs) throws InvalidCommandException {
+        if (inputs.length > 1) {
+            throw new InvalidCommandException("Unknown command!");
+        }
+        return "Bye. Hope to see you again soon!";
+    }
+
+    private String handleList(String[] inputs) throws InvalidCommandException {
+        if (inputs.length > 1) {
+            throw new InvalidCommandException("Unknown command!");
+        }
+        return taskList.toString();
+    }
+
+    private String handleDone(String[] inputs) throws InvalidCommandException {
+        if (inputs.length < 2) {
+            throw new InvalidCommandException("Which task would you like to mark as done?");
+        }
+        try {
+            int taskNo = Integer.parseInt(inputs[1]);
+            return taskList.markAsDone(taskNo)
+                    ? "I've marked this task as done:\n  " + taskList.get(taskNo)
+                    : "Task already done.";
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException("Give me a task number! >.<");
+        }
+    }
+
+    private String handleToDo(String[] inputs) throws InvalidCommandException {
+        if (inputs.length < 2) {
+            throw new InvalidCommandException("The description of a todo cannot be empty.");
+        }
+        Task toDo = new ToDo(inputs[1]);
+        taskList.add(toDo);
+        return "I've added:\n  " + toDo;
+    }
+
+    private String handleDeadline(String[] inputs) throws InvalidCommandException {
+        if (inputs.length < 2) {
+            throw new InvalidCommandException("The description of a deadline cannot be empty.");
+        }
+        String[] tokens = inputs[1].split(" /by ");
+        if (tokens.length != 2) {
+            throw new InvalidCommandException("Wrong deadline format! Requires <task name> /by <time>");
+        }
+        Task deadline = new Deadline(tokens[0], tokens[1]);
+        taskList.add(deadline);
+        return "I've added:\n  " + deadline;
+    }
+
+    private String handleEvent(String[] inputs) throws InvalidCommandException {
+        if (inputs.length < 2) {
+            throw new InvalidCommandException("The description of an event cannot be empty.");
+        }
+        String[] tokens = inputs[1].split(" /at ");
+        if (tokens.length != 2) {
+            throw new InvalidCommandException("Wrong event format! Requires <task name> /at <time>");
+        }
+        Task event = new Event(tokens[0], tokens[1]);
+        taskList.add(event);
+        return "I've added:\n  " + event;
+    }
+
+    private String getResponseToCommand(String[] inputs) throws InvalidCommandException {
+        switch (inputs[0]) {
+        case "bye":
+            return handleBye(inputs);
+        case "list":
+            return handleList(inputs);
+        case "done":
+            return handleDone(inputs);
+        case "todo":
+            return handleToDo(inputs);
+        case "deadline":
+            return handleDeadline(inputs);
+        case "event":
+            return handleEvent(inputs);
+        default:
+            throw new InvalidCommandException("Unknown command!");
+        }
+    }
+
     public void start() {
         String greetings = "Hello! What can I do for you?\n";
         System.out.println(greetings);
 
-        String cmd;
         while (true) {
-            cmd = sc.next();
-            if (cmd.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (cmd.equals("list")) {
-                System.out.print(taskList);
-            } else if (cmd.equals("done")) {
-                int taskNo = Integer.parseInt(sc.nextLine().trim());
-                String response = taskList.markAsDone(taskNo)
-                        ? "I've marked this task as done:\n  " + taskList.get(taskNo)
-                        : "Task already done.";
-                System.out.println(response);
-            } else if (cmd.equals("todo")) {
-                Task toDo = new ToDo(sc.nextLine().trim());
-                taskList.add(toDo);
-                System.out.println("I've added:\n " + toDo);
-            } else if (cmd.equals("deadline")) {
-                String[] parse = sc.nextLine().trim().split(" /by ");
-                Task deadline = new Deadline(parse[0], parse[1]);
-                taskList.add(deadline);
-                System.out.println("I've added:\n " + deadline);
-            } else if (cmd.equals("event")) {
-                String[] parse = sc.nextLine().trim().split(" /at ");
-                Task event = new Event(parse[0], parse[1]);
-                taskList.add(event);
-                System.out.println("I've added:\n " + event);
-            } else {
-                System.out.println("Unknown command!");
-                sc.nextLine();
+            // split at the first white space
+            String[] inputs = sc.nextLine().split(" ", 2);
+
+            String response;
+            try {
+                response = getResponseToCommand(inputs);
+            } catch (InvalidCommandException e) {
+                response = e.getMessage();
             }
-            System.out.println();
+            System.out.println(response + "\n");
+
+            if (inputs[0].equals("bye")) {
+                break;
+            }
         }
     }
 }
