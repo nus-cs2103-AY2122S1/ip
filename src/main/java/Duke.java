@@ -10,9 +10,6 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private final static String LINE_SPLIT =
-            "___________________________________________________________________________";
-
     private final static int MAX_STORAGE = 100;
 
     private final static List<Task> TODO_LIST = new ArrayList<>();
@@ -26,11 +23,11 @@ public class Duke {
     }
 
     public static void printLogo() {
-        System.out.println("Hello from\n" + LOGO);
+        Echoer.print("Hello from\n" + LOGO);
     }
 
     public static void greet() {
-        echo("Hello! I'm Duke\n\tWhat can I do for you?");
+        Echoer.echo("Hello! I'm Duke\n\tWhat can I do for you?");
     }
 
     public static void run() {
@@ -48,13 +45,7 @@ public class Duke {
     public static void exit() {
         TODO_LIST.clear();
         SCANNER.close();
-        echo("Bye. Hope to see you again soon!");
-    }
-
-    public static void echo(String command) {
-        System.out.println(LINE_SPLIT);
-        System.out.println('\t' + command);
-        System.out.println(LINE_SPLIT + '\n');
+        Echoer.echo("Bye. Hope to see you again soon!");
     }
 
     public static void checkUserInput(String userInput) {
@@ -83,38 +74,38 @@ public class Duke {
             addToList(new Deadline(description, by));
 
         } else {
-            echo("Invalid input: Please ensure instruction follows specified format");
+            Echoer.echo("Invalid input: Please ensure instruction follows specified format");
         }
     }
 
     public static void addToList(Task newTask) {
         if (TODO_LIST.size() == MAX_STORAGE) {
-            echo("Unable to add task: Task List is full");
+            Echoer.echo("Unable to add task: Task List is full");
             return;
         }
         TODO_LIST.add(newTask);
-        echo("Got it. I've added this task:\n\t  " + newTask + "\n\tNow you have " +
+        Echoer.echo("Got it. I've added this task:\n\t  " + newTask + "\n\tNow you have " +
                 TODO_LIST.size() + " tasks in the list.");
     }
 
     public static void markTaskAsDone(int taskNumber) {
         if (TODO_LIST.isEmpty()) {
-            echo("Task invalid: List is empty");
+            Echoer.echo("Task invalid: List is empty");
             return;
         }
         if (taskNumber < 0 || TODO_LIST.size() < taskNumber) {
-            echo("Task invalid: Task does not exist");
+            Echoer.echo("Task invalid: Task does not exist");
             return;
         }
 
         Task selectedTask = TODO_LIST.get(taskNumber - 1); // shift to 0-indexing
         selectedTask.markAsDone();
-        echo("Nice! I've marked this task as done:\n\t  " + selectedTask);
+        Echoer.echo("Nice! I've marked this task as done:\n\t  " + selectedTask);
     }
 
     public static void displayList() {
         if (TODO_LIST.isEmpty()) {
-            echo("List is empty: Start adding tasks");
+            Echoer.echo("List is empty: Start adding tasks");
             return;
         }
         String newline = "\n\t";
@@ -131,6 +122,6 @@ public class Duke {
 
         // clear final newline characters
         listStringBuilder.setLength(listStringBuilder.length() - newline.length());
-        echo(listStringBuilder.toString());
+        Echoer.echo(listStringBuilder.toString());
     }
 }
