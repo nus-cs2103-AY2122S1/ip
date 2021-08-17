@@ -75,9 +75,9 @@ public class Duke extends Chatbot {
             if (message.startsWith("todo ")) {
                 task = this.taskList.addTodo(message.substring(5));
             } else if (message.startsWith("event ")) {
-                task = this.taskList.addEvent(message.substring(9));
+                task = this.taskList.addEvent(message.substring(6));
             } else if (message.startsWith("deadline ")) {
-                task = this.taskList.addDeadline(message.substring(6));
+                task = this.taskList.addDeadline(message.substring(9));
             } else {
                 Chatbot.printMessage("Invalid command.");
                 return;
