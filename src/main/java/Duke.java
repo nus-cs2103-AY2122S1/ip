@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private ArrayList<String> tasks;
+    private ArrayList<Task> tasks;
 
     Duke() {
         this.tasks = new ArrayList<>();
@@ -23,7 +23,7 @@ public class Duke {
         duke.run();
     }
 
-    void run() {
+    private void run() {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String input = sc.nextLine();
@@ -34,6 +34,8 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 this.list();
+            } else if (input.split(" ")[0].equals("done")) {
+                this.markDone(input.split(" ")[1]);
             } else {
                 this.addTask(input);
             }
@@ -41,19 +43,30 @@ public class Duke {
         }
     }
 
-    void addTask(String task) {
-        this.tasks.add(task);
+    private void addTask(String task) {
+        this.tasks.add(new Task(task));
         System.out.println("\tadded: " + task);
     }
 
-    void list() {
+    private void list() {
         for (int i = 0; i < this.tasks.size(); i++) {
-            System.out.println("\t" + (i + 1) + ". " + this.tasks.get(i));
+            System.out.println("\t" + (i + 1) + ". " + this.tasks.get(i).toString());
         }
     }
 
-    void exit() {
+    private void exit() {
         System.out.println("\tBye. Hope to see you again soon!");
         System.out.println("\t____________________________");
+    }
+
+    private void markDone(String i) {
+        try {
+            int index = Integer.parseInt(i);
+            this.tasks.get(index - 1).markAsDone();
+            System.out.println("\tNice! I\'ve marked this task as done:");
+            System.out.println(" \t" + this.tasks.get(index - 1).toString());
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            System.out.println("\tPlease input the index of the task");
+        }
     }
 }
