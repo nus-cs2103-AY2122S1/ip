@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static String command;
-    private static ArrayList<String> arr = new ArrayList<>();
+    private static ArrayList<Task> arr = new ArrayList<>();
     private static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -15,7 +15,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         do {
             System.out.print(">> ");
-            command = in.next();
+            command = in.nextLine();
             handleInput(command);
         }
         while(!command.equals("bye"));
@@ -27,7 +27,8 @@ public class Duke {
      * @param command input command from the user
      */
     public static void handleInput(String command) {
-        switch (command) {
+        String[] inputWords = command.split(" ", 2);
+        switch (inputWords[0]) {
             case "bye":
                 break;
             case "list":
@@ -35,8 +36,14 @@ public class Duke {
                     System.out.println(i + 1 + ": " + arr.get(i));;
                 }
                 break;
+            case "done":
+                int taskId = Integer.parseInt(inputWords[1]);
+                arr.get(taskId - 1).setIsDone(true);
+                System.out.println("Nice! I've marked this task as done.");
+                System.out.println("   " + arr.get(taskId - 1));
+                break;
             default:
-                arr.add(command);
+                arr.add(new Task(command));
                 System.out.println("Added " + command);
         }
     }
