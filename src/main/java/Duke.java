@@ -55,6 +55,15 @@ public class Duke {
         printReply("Nice! I've marked this task as done:\n  " + doneTask);
     }
 
+    private static void delete(int counter) throws DukeException {
+        if (counter <= 0 || counter > tasks.size()) {
+            throw new DukeException("Sorry, no such task of index " + counter + ".");
+        }
+        Task taskToRemove = tasks.remove(counter - 1);
+        printReply("Noted. I've removed this task:\n  " + taskToRemove
+                + "\nNow you have " + tasks.size() + " tasks in the list.");
+    }
+
     public static void main(String[] args) {
         greet();
         String readIn;
@@ -75,13 +84,14 @@ public class Duke {
                         arguments = commandArguments[1];
                     }
                     switch (command) {
-                        case "done":
+                        case "done": {
                             if (commandArguments.length < 2) {
                                 throw new DukeException("☹ OOPS!!! The index of '" + command + "' cannot be empty.");
                             }
                             int counter = Integer.parseInt(arguments);
                             done(counter);
                             break;
+                        }
                         case "deadline": {
                             if (commandArguments.length < 2) {
                                 throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
@@ -108,12 +118,21 @@ public class Duke {
                             add(new Event(description, at));
                             break;
                         }
-                        case "todo":
+                        case "todo": {
                             if (commandArguments.length < 2) {
                                 throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
                             }
                             add(new Todo(arguments));
                             break;
+                        }
+                        case "delete": {
+                            if (commandArguments.length < 2) {
+                                throw new DukeException("☹ OOPS!!! The index of '" + command + "' cannot be empty.");
+                            }
+                            int counter = Integer.parseInt(arguments);
+                            delete(counter);
+                            break;
+                        }
                         default:
                             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }

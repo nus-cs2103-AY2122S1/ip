@@ -12,9 +12,12 @@ deadline return more books /by Sunday
 event project discussion /at Mon 2-4pm
 done 3
 list
+delete 5
+delete 10
 todo
 blah
 done
+delete
 deadline submit code
 event meet friends
 bye
