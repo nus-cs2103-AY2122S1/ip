@@ -68,7 +68,13 @@ public class Duke {
 		// Throw exception if user gives empty or invalid task number
 		validateCommand(command, "^delete [0-9]+", "delete [task number]");
 		
-		int taskNumber = Integer.parseInt(command.substring(7)) - 1;
+		int taskNumber;
+		
+		try {
+			taskNumber = Integer.parseInt(command.substring(7)) - 1;
+		} catch (NumberFormatException e) {
+			throw new TaskNotFoundException();
+		}
 		
 		// Throw exception if taskNumber is invalid
 		if (taskNumber < 0 || taskNumber >= listTasks.size()) {
@@ -95,7 +101,13 @@ public class Duke {
 		// Throw exception if user gives empty or invalid task number
 		validateCommand(command, "^done [0-9]+", "done [task number]");
 		
-		int taskNumber = Integer.parseInt(command.substring(5)) - 1;
+		int taskNumber;
+		
+		try {
+			taskNumber = Integer.parseInt(command.substring(5)) - 1;
+		} catch (NumberFormatException e) {
+			throw new TaskNotFoundException();
+		}
 		
 		// Throw exception if taskNumber is invalid
 		if (taskNumber < 0 || taskNumber >= listTasks.size()) {
