@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class TaskStorage {
-    ArrayList<Task> storage;
+    private ArrayList<Task> storage;
     private static TaskStorage instance = null;
 
     private TaskStorage() {
@@ -10,7 +10,8 @@ public class TaskStorage {
 
     public static TaskStorage getInstance() {
         if (instance == null) {
-            return new TaskStorage();
+            instance = new TaskStorage();
+            return instance;
         }
         return instance;
     }
@@ -19,7 +20,7 @@ public class TaskStorage {
         return storage;
     }
 
-    public Task get(int index) {
+    public Task get(int index) throws IndexOutOfBoundsException {
         return storage.get(index);
     }
 
@@ -31,7 +32,7 @@ public class TaskStorage {
         return storage.add(task);
     }
 
-    public Task delete(int index) {
+    public Task delete(int index) throws IndexOutOfBoundsException {
         return storage.remove(index);
     }
 }

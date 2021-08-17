@@ -10,6 +10,8 @@ public class CommandParser {
             return parseDeadlineCommand(commandString);
         } else if (commandString.startsWith("event")) {
             return parseEventCommand(commandString);
+        } else if (commandString.startsWith("delete")) {
+            return parseDeleteCommand(commandString);
         } else {
             throw new DukeException("Sorry, I don't understand that command...");
         }
@@ -73,5 +75,23 @@ public class CommandParser {
             throw new DukeException("Please indicate the event date!");
         }
         return new AddCommand(new DeadlineTask(eventContent, false, eventDate));
+    }
+
+    private static Command parseDeleteCommand(String commandString) throws DukeException {
+        String[] tokens = commandString.split(" ");
+        if (tokens.length <= 1) {
+            throw new DukeException("Please indicate a task number to delete!");
+        } else {
+            try {
+                int taskIndex = Integer.parseInt(tokens[1]) - 1;
+                if (taskIndex >= 0 && taskIndex < TaskStorage.getInstance().getSize()) {
+                    return new DeleteCommand(taskIndex);
+                } else {
+                    throw new DukeException("404 Task not found");
+                }
+            } catch (NumberFormatException e) {
+                throw new DukeException("Please indicate a valid task number to delete!");
+            }
+        }
     }
 }
