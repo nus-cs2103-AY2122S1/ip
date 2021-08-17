@@ -1,10 +1,24 @@
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    static final String divider = "\t____________________________________________________________\n";
+
+    Duke() {
+    }
+
+    public void greet() {
+        System.out.println(divider +
+                "\tHello! I'm Duke\n" +
+                "\tWhat can I do for you?\n" +
+                divider);
+    }
+
+    public boolean echo(String echo) {
+        if (echo.equals("bye")) {
+            System.out.println(divider + "\tBye. Hope to see you again soon!\n" + divider);
+            return false;
+        } else {
+            System.out.println(divider +"\t"+ echo+"\n" + divider);
+            return true;
+        }
+
     }
 }
