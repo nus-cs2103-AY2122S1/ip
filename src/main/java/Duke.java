@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     public static void main(String[] args) {
-        Task[] task = new Task[100];
+        ArrayList<Task> task = new ArrayList<>();
         int taskNum = 0;
         String indentation = "       ";
         String Horizontal_line = "---------------------------------------------------------------";
@@ -12,6 +13,7 @@ public class Duke {
         final String BLAH = "blah";
         final String BYE = "bye";
         final String DONE = "done";
+        final String DELETE = "delete";
         boolean isEnd = false;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -31,49 +33,112 @@ public class Duke {
             switch(keyword[0]) {
                 case LIST:
                     System.out.println(indentation + Horizontal_line);
-                    for (int i = 0; i < taskNum; i++) {
+                    try {
+
+                        for (int i = 0; i < taskNum; i++) {
+                            String s = indentation;
+                            String s2 = "";
+
+                            if (task.get(i) instanceof Todo) {
+                                s += (task.get(i).getIndex() + 1) + "." + " [T]";
+                                s2 = task.get(i).getName();
+                            } else if (task.get(i) instanceof Deadline) {
+                                s += (task.get(i).getIndex() + 1) + "." + " [D]";
+                                s2 = task.get(i).getName() +  " ( " + ((Deadline) task.get(i)).getTime() + " )";
+                            } else if (task.get(i) instanceof Event){
+                                s += (task.get(i).getIndex() + 1) + "." + " [E]";
+                                s2 = task.get(i).getName() +  " ( " + ((Event) task.get(i)).getTime() + " )";
+                            }
+                            if (task.get(i).isDone() == false) {
+                                s += "[ ]" + s2;
+                                System.out.println(s);
+                            } else {
+                                s += "[X]" + s2;
+                                System.out.println(s);
+                            }
+                        }
+
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(indentation + "Currently you have no task to do");
+                    }
+                    System.out.println(indentation + Horizontal_line);
+
+                    break;
+                case DONE:
+
+                    try {
+                        Integer num = Integer.valueOf(keyword[1]) - 1;
+                        task.get(num).setDone(true);
+                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(indentation + "Nice! I've marked this task as done:");
                         String s = indentation;
                         String s2 = "";
-
-                        if (task[i] instanceof Todo) {
-                            s += (task[i].getIndex() + 1) + "." + " [T]";
-                            s2 = task[i].getName();
-                        } else if (task[i] instanceof Deadline) {
-                            s += (task[i].getIndex() + 1) + "." + " [D]";
-                            s2 = task[i].getName() +  " ( " + ((Deadline) task[i]).getTime() + " )";
-                        } else if (task[i] instanceof Event){
-                            s += (task[i].getIndex() + 1) + "." + " [E]";
-                            s2 = task[i].getName() +  " ( " + ((Event) task[i]).getTime() + " )";
+                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(indentation + "Noted. I've removed this task:");
+                        if (task.get(num) instanceof Todo) {
+                            s += (task.get(num).getIndex() + 1) + "." + " [T]";
+                            s2 = task.get(num).getName();
+                        } else if (task.get(num) instanceof Deadline) {
+                            s += (task.get(num).getIndex() + 1) + "." + " [D]";
+                            s2 = task.get(num).getName() +  " ( " + ((Deadline) task.get(num)).getTime() + " )";
+                        } else if (task.get(num) instanceof Event){
+                            s += (task.get(num).getIndex() + 1) + "." + " [E]";
+                            s2 = task.get(num).getName() +  " ( " + ((Event) task.get(num)).getTime() + " )";
                         }
-                        if (task[i].isDone() == false) {
+
+                        s += "[X]" + s2;
+                        System.out.println(s);
+
+                        System.out.println(indentation + Horizontal_line);
+                    } catch (NullPointerException e) {
+                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(indentation + "Sorry, you do not have this task");
+                        System.out.println(indentation + Horizontal_line);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(indentation + "Sorry, please enter a task number bigger than 0");
+                        System.out.println(indentation + Horizontal_line);
+                    }
+
+                    break;
+                case DELETE:
+                    try {
+                        Integer num = Integer.valueOf(keyword[1]) - 1;
+
+                        String s = indentation + "     ";
+                        String s2 = "";
+
+                        if (task.get(num) instanceof Todo) {
+                            s += (task.get(num).getIndex() + 1) + "." + " [T]";
+                            s2 = task.get(num).getName();
+                        } else if (task.get(num) instanceof Deadline) {
+                            s += (task.get(num).getIndex() + 1) + "." + " [D]";
+                            s2 = task.get(num).getName() +  " ( " + ((Deadline) task.get(num)).getTime() + " )";
+                        } else if (task.get(num) instanceof Event){
+                            s += (task.get(num).getIndex() + 1) + "." + " [E]";
+                            s2 = task.get(num).getName() +  " ( " + ((Event) task.get(num)).getTime() + " )";
+                        }
+                        System.out.println(indentation + Horizontal_line);
+                        System.out.println(indentation + "Noted. I've removed this task:");
+                        if (task.get(num).isDone() == false) {
                             s += "[ ]" + s2;
                             System.out.println(s);
                         } else {
                             s += "[X]" + s2;
                             System.out.println(s);
                         }
-                    }
-                    System.out.println(indentation + Horizontal_line);
-                    break;
-                case DONE:
-
-                    try {
-                        Integer num = Integer.valueOf(keyword[1]) - 1;
-                        task[num].setDone(true);
-                        System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "Nice! I've marked this task as done:");
-                        System.out.println(indentation + "  [X] " + task[num].getName());
+                        task.remove(num.intValue());
+                        System.out.format(indentation + "Now you have %d tasks in the list.%n", task.size());
                         System.out.println(indentation + Horizontal_line);
                     } catch (NullPointerException e) {
                         System.out.println(indentation + Horizontal_line);
                         System.out.println(indentation + "Sorry, you do not have this task");
                         System.out.println(indentation + Horizontal_line);
-                    } catch (ArrayIndexOutOfBoundsException e) {
+                    } catch (IndexOutOfBoundsException e) {
                         System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "Sorry, please enter a task number bigger than 0");
+                        System.out.println(indentation + "Sorry, you do not have this task");
                         System.out.println(indentation + Horizontal_line);
                     }
-
                     break;
                 case BYE:
                     System.out.println(indentation + Horizontal_line);
@@ -112,7 +177,7 @@ public class Duke {
                                     System.out.println(indentation + Horizontal_line);
                                     break;
                                 }
-                                task[taskNum] = new Deadline(taskname_ddl, false, taskNum, tasktime_ddl);
+                                task.add(new Deadline(taskname_ddl, false, taskNum, tasktime_ddl));
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
                                 System.out.println(indentation + "Got it. I've added this task:");
@@ -131,7 +196,7 @@ public class Duke {
                                 for (int i = 1; i < keyword.length; i++) {
                                     taskname_todo += " " + keyword[i];
                                 }
-                                task[taskNum] = new Todo(taskname_todo, false, taskNum);
+                                task.add(new Todo(taskname_todo, false, taskNum));
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
                                 System.out.println(indentation + "Got it. I've added this task:");
@@ -166,7 +231,7 @@ public class Duke {
                                     System.out.println(indentation + Horizontal_line);
                                     break;
                                 }
-                                task[taskNum] = new Event(taskname_event, false, taskNum, tasktime_event);
+                                task.add(new Event(taskname_event, false, taskNum, tasktime_event));
                                 taskNum++;
                                 System.out.println(indentation + Horizontal_line);
                                 System.out.println(indentation + "Got it. I've added this task:");
