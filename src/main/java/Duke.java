@@ -22,7 +22,7 @@ public class Duke {
         TaskManager taskManager = new TaskManager();
         while (scanner.hasNextLine()) {
             String inputLine = scanner.nextLine().trim();
-            String firstWord = inputLine.split(" ")[0];
+            String firstWord = inputLine.split("\\s+")[0];
             try {
                 Command command;
                 try {
@@ -42,14 +42,14 @@ public class Duke {
                     prettifier.print(taskManager.addTask(toDo));
                     break;
                 case DEADLINE:
-                    String[] deadlineDetails = inputLineWithoutCommand.split(" /by ");
+                    String[] deadlineDetails = inputLineWithoutCommand.split("\\s+/by\\s+", 2);
                     String deadlineName = deadlineDetails[0];
                     String deadlineDueDate = deadlineDetails[1];
                     Deadline deadline = new Deadline(deadlineName, deadlineDueDate);
                     prettifier.print(taskManager.addTask(deadline));
                     break;
                 case EVENT:
-                    String[] eventDetails = inputLineWithoutCommand.split(" /at ");
+                    String[] eventDetails = inputLineWithoutCommand.split("\\s+/at\\s+", 2);
                     String eventName = eventDetails[0];
                     String eventTimestamp = eventDetails[1];
                     Event event = new Event(eventName, eventTimestamp);

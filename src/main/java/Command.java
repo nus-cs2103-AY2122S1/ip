@@ -14,7 +14,7 @@ public enum Command {
     DEADLINE {
         @Override
         public void validateArguments(String arguments) throws DukeException {
-            String[] deadlineDetails = arguments.split(" /by ");
+            String[] deadlineDetails = arguments.split("\\s+/by\\s+", 2);
             if (deadlineDetails.length < 2) {
                 throw new DukeException("Invalid use of the 'deadline' command.\n\n" +
                         "To add a new deadline, use 'deadline <name> /by <due-date>'.");
@@ -24,7 +24,7 @@ public enum Command {
     EVENT {
         @Override
         public void validateArguments(String arguments) throws DukeException {
-            String[] eventDetails = arguments.split(" /at ");
+            String[] eventDetails = arguments.split("\\s+/at\\s+", 2);
             if (eventDetails.length < 2) {
                 throw new DukeException("Invalid use of the 'event' command.\n\n" +
                         "To add a new event, use 'event <name> /at <event-timestamp>'.");
