@@ -1,7 +1,12 @@
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Duke {
+
+    private void addTask(String taskName) {
+
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -11,31 +16,30 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         Scanner scanner = new Scanner(System.in);
-        String toAdd = scanner.nextLine();
+        String taskName = scanner.nextLine();
 
-        String[] tasks = new String[100];
-        int index = 0;
+        Tasks tasks = new Tasks();
 
-        while (!toAdd.equals("bye")) {
-            if (toAdd.equals("list")) {
-                displayTasks(tasks);
+        while (!taskName.equals("bye")) {
+            if (taskName.equals("list")) {
+                System.out.println(tasks);
             } else {
-                tasks[index] = toAdd;
-                System.out.println("\t added: " + toAdd + "\n");
-                index++;
+                if (taskName.matches("done (\\d+)$")) {
+                    Integer taskNum = Integer.valueOf(taskName.split(" ")[1]);
+                    Task toMark = tasks.getTask(taskNum);
+                    if (toMark == null) {
+                        tasks.addTask(taskName);
+                    } else {
+                        toMark.markAsDone();
+                    }
+                } else {
+                    tasks.addTask(taskName);
+                }
             }
-            toAdd = scanner.nextLine();
+            taskName = scanner.nextLine();
         }
 
         scanner.close();
-    }
-
-    private static void displayTasks(String[] tasks) {
-        for(int i = 0; i < tasks.length && tasks[i] != null; i++) {
-            int index = i + 1;
-            System.out.println("\t " + index + ". " + tasks[i]);
-        }
-        System.out.println();
     }
 
 }
