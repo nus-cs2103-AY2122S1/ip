@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,8 +10,7 @@ public class Duke {
         System.out.println(logo);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> taskList = new ArrayList<>();
-        DukeBot bot = new DukeBot(sc, taskList);
+        DukeBot bot = new DukeBot(sc);
         bot.start();
     }
 }
