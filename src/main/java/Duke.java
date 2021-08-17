@@ -12,7 +12,7 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
@@ -22,16 +22,37 @@ public class Duke {
                 break;
             } else if (userInput.equals("list")) {
                 //Print the list here
+                System.out.println("Here are the tasks in your list");
                 for (int i = 0; i < taskList.size(); i += 1) {
-                    System.out.println((i + 1) + ". " + taskList.get(i));
+                    System.out.println((i + 1) + "." + taskList.get(i));
                 }
+            } else if (userInput.startsWith("done ") && Duke.isInteger(userInput.substring(5))) {
+                //Extract id of task
+                int index = Integer.parseInt(userInput.substring(5)) - 1;
+                //Mark the task as done
+                taskList.get(index).markAsDone();
+                //Print out confirmation message
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(taskList.get(index));
             } else {
                 //Add userInput to taskList
-                taskList.add(userInput);
+                Task newTask = new Task(userInput);
+                taskList.add(newTask);
                 //Print out confirmation message
-                System.out.println("added: " + userInput);
+                System.out.println("added: " + newTask.getDescription());
             }
         }
         sc.close();
+    }
+
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        } catch(NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 }
