@@ -3,14 +3,24 @@
  */
 public class Task {
 
-  final String title;
+  private final String title;
+  private boolean isComplete = false;
 
   Task(String title) {
     this.title = title;
   }
 
+  /**
+   * Set a task to be completed.
+   *
+   * @param isComplete new completion status
+   */
+  public void markComplete(boolean isComplete) {
+    this.isComplete = isComplete;
+  }
+
   @Override
   public String toString() {
-    return this.title;
+    return isComplete ? "[x]" : "[ ] " + this.title;
   }
 }

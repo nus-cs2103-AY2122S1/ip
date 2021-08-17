@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 /**
  * Handles matching input to behaviour and execution action.
@@ -26,6 +25,9 @@ public class DukeLogic {
     } else if (matches("list").apply(input)) {
       Duke.renderOutput(listTasks());
       return true;
+    } else if (startsWithOrEquals("done ").apply(input)) {
+      markDone(getArgs(input, "done "));
+      return true;
     } else {
       addTask(input.trim());
       Duke.renderOutput("added: " + input.trim());
@@ -37,20 +39,46 @@ public class DukeLogic {
     return x -> x.trim().equalsIgnoreCase(phrase);
   }
 
+  private static Function<String, Boolean> startsWithOrEquals(String phrase) {
+    return x -> x.trim().startsWith(phrase) || x.trim().equalsIgnoreCase(phrase.trim());
+  }
+
   private static Function<String, Boolean> contains(String phrase) {
     return x -> x.trim().contains(phrase);
+  }
+
+  private static String getArgs(String input, String command) {
+    return input.substring(input.toLowerCase().indexOf(command) + command.length()).trim();
   }
 
   private static String listTasks() {
     int taskCount = 1;
     StringBuilder result = new StringBuilder();
     for (Task task : tasks) {
-      result.append(String.format("%d %s\n", taskCount++, task));
+      result.append(String.format("%3d %s\n", taskCount++, task));
     }
     return result.toString();
   }
 
   private static void addTask(String taskName) {
     tasks.add(new Task(taskName));
+  }
+
+  private static void markDone(String taskNumStr) {
+    try {
+      int taskNum = Integer.parseInt(taskNumStr);
+      Task task = tasks.get(taskNum - 1);
+      task.markComplete(true);
+      Duke.renderOutput("Great! I've marked this task as done:\n    " + task);
+    } catch (NumberFormatException err) {
+      Duke.renderOutput(
+        "Which task would you like to mark done?\n" +
+        "USAGE:\ndone {task number}\n\n" +
+        "Example: done 4\n" +
+        "Try the `list` command to see the list of tasks"
+      );
+    } catch (IndexOutOfBoundsException err) {
+      Duke.renderOutput("There is no task at that index.");
+    }
   }
 }
