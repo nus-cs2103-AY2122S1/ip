@@ -75,7 +75,7 @@ public class TaskList {
     public String deleteTask(int taskNumber) {
         int taskIndex = taskNumber - 1;
         // Assumes that the task exists.
-        return "Noted. I've removed this task:\n\t" + this.tasks.remove(taskIndex).toString();
+        return "Noted. I've removed this task:\n\t" + this.tasks.remove(taskIndex).toString() + this.countTasks();
     }
 
     /**
