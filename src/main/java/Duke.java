@@ -61,18 +61,47 @@ public class Duke {
             } else {
                 Task newTask;
                 if (command.equals("todo")) {
-                    newTask = new ToDo(commandAndArgument[1]);
+                    try {
+                        newTask = new ToDo(commandAndArgument[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("____________________________________________________________\n"
+                                + "Sorry, the description of a todo task cannot be empty.\n"
+                                + "Please input your todo task in the following manner:\n"
+                                + "todo <task_description>\n"
+                                + "____________________________________________________________");
+                        continue;
+                    }
                 } else if (command.equals("deadline")) {
-                    String taskDetails = commandAndArgument[1];
-                    String[] descriptionAndDateTime = taskDetails.split(" /by ", 2);
-                    newTask = new Deadline(descriptionAndDateTime[0], descriptionAndDateTime[1]);
+                    try {
+                        String taskDetails = commandAndArgument[1];
+                        String[] descriptionAndDateTime = taskDetails.split(" /by ", 2);
+                        newTask = new Deadline(descriptionAndDateTime[0], descriptionAndDateTime[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("____________________________________________________________\n"
+                                + "Invalid format for a deadline task.\n"
+                                + "Please input your deadline task in the following manner:\n"
+                                + "deadline <task_description> /by <task_deadline>\n"
+                                + "____________________________________________________________");
+                        continue;
+                    }
                 } else if (command.equals("event")) {
-                    String taskDetails = commandAndArgument[1];
-                    String[] descriptionAndDateTime = taskDetails.split(" /at ", 2);
-                    newTask = new Event(descriptionAndDateTime[0], descriptionAndDateTime[1]);
+                    try {
+                        String taskDetails = commandAndArgument[1];
+                        String[] descriptionAndDateTime = taskDetails.split(" /at ", 2);
+                        newTask = new Event(descriptionAndDateTime[0], descriptionAndDateTime[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("____________________________________________________________\n"
+                                + "Invalid format for an event.\n"
+                                + "Please input your event in the following manner:\n"
+                                + "event <event_description> /at <event_date_or_time>\n"
+                                + "____________________________________________________________");
+                        continue;
+                    }
                 } else {
-                    System.out.println("Invalid command. List of valid commands include: "
-                            + "list|todo|deadline|event|done|bye");
+                    System.out.println("____________________________________________________________\n"
+                            + "Invalid command. List of valid commands include:\n"
+                            + "list|todo|deadline|event|done|bye\n"
+                            + "____________________________________________________________");
                     continue;
                 }
                 taskList[currentIndex] = newTask;
