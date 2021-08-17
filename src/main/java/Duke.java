@@ -28,7 +28,10 @@ public class Duke {
         printReply(addMessage);
     }
 
-    private static void list() {
+    private static void list() throws DukeException {
+        if (tasks.size() == 0) {
+            throw new DukeException("There are currently no tasks in your list.");
+        }
         StringBuilder tasksBuilder = new StringBuilder();
         tasksBuilder.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); ++i) {
@@ -43,10 +46,9 @@ public class Duke {
         printReply(tasksBuilder.toString());
     }
 
-    private static void done(int counter) {
+    private static void done(int counter) throws DukeException {
         if (counter <= 0 || counter > tasks.size()) {
-            printReply("Sorry, no such task found.");
-            return;
+            throw new DukeException("Sorry, no such task of index " + counter + ".");
         }
         Task doneTask = tasks.get(counter - 1);
         doneTask.markAsDone();
@@ -65,30 +67,59 @@ public class Duke {
                     break;
                 } else if (readIn.equals(LIST_COMMAND)) {
                     list();
-                } else if (readIn.startsWith("done")) {
-                    String[] splitCommand = readIn.split(" ");
-                    int counter = Integer.parseInt(splitCommand[1]);
-                    done(counter);
-                } else if (readIn.startsWith("deadline")) {
-                    String fullTask = readIn.substring(readIn.indexOf(' ') + 1);
-                    String[] splitTask = fullTask.split(" /by ");
-                    String description = splitTask[0];
-                    String by = splitTask[1];
-                    add(new Deadline(description, by));
-                } else if (readIn.startsWith("event")) {
-                    String fullTask = readIn.substring(readIn.indexOf(' ') + 1);
-                    String[] splitTask = fullTask.split(" /at ");
-                    String description = splitTask[0];
-                    String at = splitTask[1];
-                    add(new Event(description, at));
-                } else if (readIn.startsWith("todo")) {
-                    String description = readIn.substring(readIn.indexOf(' ') + 1);
-                    add(new Todo(description));
                 } else {
-                    printReply("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    String[] commandArguments = readIn.split(" ", 2);
+                    String command = commandArguments[0];
+                    String arguments = "";
+                    if (commandArguments.length == 2) {
+                        arguments = commandArguments[1];
+                    }
+                    switch (command) {
+                        case "done":
+                            if (commandArguments.length < 2) {
+                                throw new DukeException("☹ OOPS!!! The index of '" + command + "' cannot be empty.");
+                            }
+                            int counter = Integer.parseInt(arguments);
+                            done(counter);
+                            break;
+                        case "deadline": {
+                            if (commandArguments.length < 2) {
+                                throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
+                            }
+                            String[] splitTask = arguments.split(" /by ");
+                            if (splitTask.length < 2) {
+                                throw new DukeException("Please indicate a deadline using '/by'.");
+                            }
+                            String description = splitTask[0];
+                            String by = splitTask[1];
+                            add(new Deadline(description, by));
+                            break;
+                        }
+                        case "event": {
+                            if (commandArguments.length < 2) {
+                                throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
+                            }
+                            String[] splitTask = arguments.split(" /at ");
+                            if (splitTask.length < 2) {
+                                throw new DukeException("Please indicate the event time frame using '/at'.");
+                            }
+                            String description = splitTask[0];
+                            String at = splitTask[1];
+                            add(new Event(description, at));
+                            break;
+                        }
+                        case "todo":
+                            if (commandArguments.length < 2) {
+                                throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
+                            }
+                            add(new Todo(arguments));
+                            break;
+                        default:
+                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
                 }
-            } catch (Exception e) {
-                printReply("ERROR: " + e.getMessage());
+            } catch (DukeException e) {
+                printReply(e.getMessage());
             }
         }
 
