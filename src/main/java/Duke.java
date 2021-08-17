@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Duke {
-    private static Task[] list = new Task[100];
+    private static ArrayList<Task> list = new ArrayList<>(100);
     private static int listIndex = 0;
 
     public static void greet() {
@@ -47,7 +47,7 @@ public class Duke {
                 throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
-        list[listIndex] = newTask;
+        list.add(listIndex, newTask);
         String word;
         if (listIndex == 0) {
             word = "task";
@@ -63,20 +63,38 @@ public class Duke {
     }
 
     public static void complete(int completedTask) {
-        Task currentTask = list[completedTask - 1];
+        Task currentTask = list.get(completedTask - 1);
         if (!currentTask.isDone) {
             currentTask.markDone();
         }
 
         System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("[%s][X] %s", currentTask.getType(), currentTask.getDescription());
+        System.out.printf("[%s][X] %s\n", currentTask.getType(), currentTask.getDescription());
+    }
+
+    public static void delete(int deleteTask) {
+        Task delTask = list.remove(deleteTask - 1);
+        listIndex--;
+        System.out.println("Noted. I've removed this task:");
+        System.out.printf("[%s][%s] %s\n", delTask.getType(), delTask.getStatusIcon(), delTask.getDescription());
+
+        String word;
+        if (listIndex == 1) {
+            word = "task";
+        } else {
+            word = "tasks";
+        }
+
+        System.out.printf("Now you have %d %s in the list.%n", listIndex, word);
     }
 
     public static void getList() {
         int i = 0;
+        System.out.println("Here are the tasks in your list:");
         while (i < listIndex) {
             int num = i+1;
-            System.out.printf("%d. [%s][%s] %s\n", num, list[i].getType(), list[i].getStatusIcon(), list[i].getDescription());
+            Task curr = list.get(i);
+            System.out.printf("%d. [%s][%s] %s\n", num, curr.getType(), curr.getStatusIcon(), curr.getDescription());
             i++;
         }
     }
@@ -105,8 +123,10 @@ public class Duke {
                     Duke.getList();
                 } else if (str.contains("done")) {
                     Duke.complete(Character.getNumericValue(str.charAt(5)));
+                } else if (str.contains("delete")) {
+                    Duke.delete(Character.getNumericValue(str.charAt(7)));
                 } else {
-                    Duke.add(str);
+                        Duke.add(str);
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());

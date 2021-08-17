@@ -19,6 +19,6 @@ public class Event extends Task {
     }
 
     public String getDescription() {
-        return String.format("%s (by: %s)", this.description, this.date);
+        return String.format("%s (at: %s)", this.description, this.date);
     }
 }
