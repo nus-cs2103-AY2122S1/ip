@@ -3,11 +3,13 @@ import java.util.Scanner;
 
 public class Duke {
     public Duke() {}
+    private static int listCount = 0;
+    private static Task[] dukeList = new Task[100];
     private static String greetText = "Hello I'm Duke\nWhat can I do for you?\n";
     private static String exitText = "Bye. Hope to see you again soon!";
-    private static String addedText = "Got it. I've addd this task:\n";
-    private static Task[] dukeList = new Task[100];
-    private static int listCount = 0;
+    private static String addedText = "Got it. I've added this task:\n";
+
+
     private static String listLengthText = "\nNow you have " + listCount + " tasks in the list";
     public void greet() {
         System.out.print(greetText);
