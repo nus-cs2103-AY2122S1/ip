@@ -31,7 +31,7 @@ public class Duke {
                 } else if (segment[0].equals("delete") && segment.length == 2) {
                     list.delete(Integer.parseInt(segment[1]));
                 } else if (segment[0].equals("todo")) {
-                    list.addTodo(input.split("todo", 2)[1]);
+                    list.addToDo(input.split("todo", 2)[1]);
                 } else if (segment[0].equals("deadline")) {
                     list.addDeadlines(input.split("deadline", 2)[1]);
                 } else if (segment[0].equals("event")) {
