@@ -87,13 +87,14 @@ public class Duke {
                         break;
                     case "todo":
                         StringBuilder todoDescription = new StringBuilder();
-                        for (int i = 1; i < actions.length; i++) {
-                            todoDescription.append(actions[i]).append(" ");
+                        todoDescription.append(actions[1]);
+                        for (int i = 2; i < actions.length; i++) {
+                            todoDescription.append(" ").append(actions[i]);
                         }
                         Todo todo = new Todo(todoDescription.toString());
                         list[index] = todo;
                         index++;
-                        printMessage("Got it. I've added this task: \n\t" + todo + "\nNow you have " + index + " tasks in the list.");
+                        printMessage("Got it. I've added this task:\n\t" + todo + "\nNow you have " + index + " tasks in the list.");
                         break;
                     case "event":
                         String[] eventSplit = command.split(" /at ");
@@ -109,7 +110,7 @@ public class Duke {
                         Event event = new Event(eventDescription, at);
                         list[index] = event;
                         index++;
-                        printMessage("Got it. I've added this task: \n\t" + event + "\nNow you have " + index + " tasks in the list.");
+                        printMessage("Got it. I've added this task:\n\t" + event + "\nNow you have " + index + " tasks in the list.");
                         break;
                     case "deadline":
                         String[] ddlSplit = command.split(" /by ");
@@ -125,14 +126,14 @@ public class Duke {
                         Deadline deadline = new Deadline(ddlDescription, by);
                         list[index] = deadline;
                         index++;
-                        printMessage("Got it. I've added this task: \n\t" + deadline + "\nNow you have " + index + " tasks in the list.");
+                        printMessage("Got it. I've added this task:\n\t" + deadline + "\nNow you have " + index + " tasks in the list.");
                         break;
                     default:
                         // any other command creates a task by default
                         Task task = new Task(command);
                         list[index] = task;
                         index++;
-                        printMessage("Got it. I've added this task: \n\t" + task + "\nNow you have " + index + " tasks in the list.");
+                        printMessage("Got it. I've added this task:\n\t" + task + "\nNow you have " + index + " tasks in the list.");
                         break;
                 }
             }
