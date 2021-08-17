@@ -26,8 +26,7 @@ public class Duke {
             } else if (command.toLowerCase().equals("list")) {
                 showList();
             } else if (command.toLowerCase().contains("done")) {
-                int taskDone = Character.getNumericValue(command.charAt(command.length() - 1)) - 1;
-                finishTask(taskDone);
+                finishTask(command);
             } else if (command.toLowerCase().contains("todo")) {
                 addTodo(command);
             } else if (command.toLowerCase().contains("deadline")) {
@@ -35,14 +34,14 @@ public class Duke {
             } else if (command.toLowerCase().contains("event")) {
                 addEvent(command);
             } else {
-                String errorMessage = "Sorry I do not understand this command \n";
-                errorMessage += "Please use one of the following commands: \n";
-                errorMessage += "\t list - To list the added tasks so far\n";
-                errorMessage += "\t todo {description} - To add a ToDo task\n";
-                errorMessage += "\t deadline {description} /by {time} - To add a Deadline task\n";
-                errorMessage += "\t event {description} /at {time} - To add an Event task\n";
-                errorMessage += "\t done {number} - To mark the indicated task as done\n";
-                errorMessage += "\t bye (To exit programme)\n";
+                String errorMessage = "\t Sorry I do not understand this command \n";
+                errorMessage += "\t Please use one of the following commands: \n";
+                errorMessage += "\t \t list - To list the added tasks so far\n";
+                errorMessage += "\t \t todo {description} - To add a ToDo task\n";
+                errorMessage += "\t \t deadline {description} /by {time} - To add a Deadline task\n";
+                errorMessage += "\t \t event {description} /at {time} - To add an Event task\n";
+                errorMessage += "\t \t done {number} - To mark the indicated task as done\n";
+                errorMessage += "\t \t bye (To exit programme)\n";
                 throw new DukeException(errorMessage);
                 //otherCommand(command);
             }
@@ -71,7 +70,19 @@ public class Duke {
     }
 
     // Function for when user inputs "done"
-    private static void finishTask(int taskDone) {
+    private static void finishTask(String command) throws DukeException {
+        if (command.length() < 5) {
+            String errorMessage = "\t Invalid command, please key in number of task to be done as follows:\n";
+            errorMessage += "\t \t done {number}";
+            throw new DukeException(errorMessage);
+        }
+
+        int taskDone = Integer.parseInt(command.substring(5)) - 1;
+        if (taskDone < 0 || taskDone > counter - 1) {
+            String errorMessage = "\t List number out of range, please enter a valid number\n";
+            throw new DukeException(errorMessage);
+        }
+
         taskList[taskDone].markAsDone();
         System.out.println("\t Good job! This task has been completed:");
         System.out.println("\t \t" + taskList[taskDone].toString());
