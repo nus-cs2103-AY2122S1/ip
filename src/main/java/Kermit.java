@@ -17,6 +17,7 @@ public class Kermit {
         ToDo list = new ToDo();
 
         final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
+        final String listText = "Here are the tasks in your list:";
         final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete: ";
         final String goodbyeText = "Bye. Hope to see you again soon!";
 
@@ -31,7 +32,7 @@ public class Kermit {
                 break;
             // List out all objects that user added to list
             } else if (command.equals("list")){
-                System.out.println(formatText(list.toString()));
+                System.out.println(formatText(listText + "\n" + list.toString()));
             // Add objects to list
             } else if (commandArr[0].equals("done")){
                 int index = Integer.parseInt(commandArr[1]) - 1;
