@@ -28,16 +28,16 @@ class DukeBot {
                         : "Task already done.";
                 System.out.println(response);
             } else if (cmd.equals("todo")) {
-                Task toDo = new ToDo(sc.nextLine());
+                Task toDo = new ToDo(sc.nextLine().trim());
                 taskList.add(toDo);
                 System.out.println("I've added:\n " + toDo);
             } else if (cmd.equals("deadline")) {
-                String[] parse = sc.nextLine().split(" /by ");
+                String[] parse = sc.nextLine().trim().split(" /by ");
                 Task deadline = new Deadline(parse[0], parse[1]);
                 taskList.add(deadline);
                 System.out.println("I've added:\n " + deadline);
             } else if (cmd.equals("event")) {
-                String[] parse = sc.nextLine().split(" /at ");
+                String[] parse = sc.nextLine().trim().split(" /at ");
                 Task event = new Event(parse[0], parse[1]);
                 taskList.add(event);
                 System.out.println("I've added:\n " + event);
