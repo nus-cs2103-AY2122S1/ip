@@ -32,6 +32,13 @@ public class Duke {
         return output;
     }
 
+    /**
+     * Returns the message that shows which task is marked as completed.
+     * Mark the task indicated by index as completed.
+     * @param index the index of task to be marked
+     * @param lst the list containing all tasks
+     * @return the messages
+     */
     public static String doTask(String index, ArrayList<Task> lst) {
         int idx;
         try {
@@ -56,8 +63,11 @@ public class Duke {
         return s.toString();
     }
 
-
-
+    /**
+     * Returns a string that contains all the elements in the list.
+     * @param lst the list to be printed
+     * @return the string
+     */
     public static String printList(ArrayList<Task> lst) {
         StringBuilder s = new StringBuilder();
         s.append("    ____________________________________________________________\n");
@@ -68,6 +78,15 @@ public class Duke {
 
         return s.toString();
     }
+
+    /**
+     * Returns error messages or a string showing the added task.
+     * The input string must follow input format, otherwise error messages will be return.
+     * The new task will be created and added to lst.
+     * @param input input message
+     * @param lst the list containing all tasks
+     * @return a string showing the added task and number of tasks
+     */
 
     public static String addList(String input, ArrayList<Task> lst) {
         ArrayList<String> validType = new ArrayList<>(
@@ -107,6 +126,10 @@ public class Duke {
         return output;
     }
 
+    /**
+     * return the goodbye message
+     * @return a string containing the goodbye message
+     */
     public static String exit() {
         String output = "    ____________________________________________________________\n"
                 + "     Bye. Hope to see you again soon!\n"
