@@ -18,7 +18,7 @@ public class Duke {
         System.out.println(displayLabel(welcomeLabel));
         //Level1(new Scanner(System.in));
         //Level2(new Scanner(System.in));
-        Level3(new Scanner(System.in));
+        //Level3(new Scanner(System.in));
         System.out.println(displayLabel(byeLabel));
     }
 
@@ -84,52 +84,6 @@ public class Duke {
             }
             input = userInput.nextLine();
         }
-    }
-
-    // Adding onto Level 2, marks tasks as done.
-    public static void Level3(Scanner userInput) {
-        String input = userInput.nextLine();
-        ArrayList<Task> tasks = new ArrayList<>();
-        while (!input.equals("bye")) {
-            if (input.contains("done")) {
-                int index = Integer.parseInt(input.substring(5, 6)) - 1;
-                tasks.get(index).setIsDone();
-                System.out.println(displayLabel("Nice! I've marked this task as done: \n" +
-                        "       " + tasks.get(index).toString()));
-            } else if (!input.equals("list")) {
-                tasks.add(new Task(input));
-                System.out.println(displayLabel("added: " + input));
-            }  else {
-                String itemCollection = getItems(tasks);
-                System.out.println(displayLabel("Here are the tasks in your list: \n"
-                        + "     " + itemCollection));
-            }
-            input = userInput.nextLine();
-        }
-    }
-
-}
-
-class Task {
-
-    private String newTask;
-    private boolean isDone;
-
-    public Task(String newTask) {
-        this.newTask = newTask;
-    }
-
-    public String getIsDone() {
-        return isDone ? "[X]" : "[ ]";
-    }
-
-    public void setIsDone() {
-        isDone = true;
-    }
-
-    @Override
-    public String toString() {
-        return getIsDone() + " " + newTask;
     }
 
 }
