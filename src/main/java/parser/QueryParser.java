@@ -1,47 +1,26 @@
 package parser;
 
-import exception.CommandArityException;
 import exception.InvalidCommandException;
-
-import java.util.Arrays;
 import java.util.Set;
 
-public class ReplyParser {
+public class QueryParser {
     private static final Set<String> taskCreation = Set.of("todo", "event", "deadline");
     private static final Set<String> taskMarking = Set.of("done", "delete");
-    private static final Set<String> basicCommand = Set.of("list", "bye"); //basicCommands don't need argument
+    private static final Set<String> basicCommand = Set.of("list", "bye");
 
-    public static String[] parse(String query) {
+    BasicCommandParser basicCommandParser = new BasicCommandParser();
+    CreationCommandParser taskCreationParser = new CreationCommandParser();
+    MutationCommandParser taskMarkingParser = new MutationCommandParser();
+
+    public String[] parse(String query) {
         String[] queryArr = query.split("\\s");
         String command = queryArr[0];
         if (basicCommand.contains(command)) {
-            return new String[]{command};
+            return basicCommandParser.parse(command, new String[0]);
         } else if (taskMarking.contains(command)){
-            if (queryArr.length != 2) {
-                throw new CommandArityException(queryArr.length > 1
-                        ? "☹ OOPS!!! You've entered too many indices. Multiple " + command + " is unsupported right now!"
-                        : "☹ OOPS!!! Index needs to be specified!");
-            }
-            return new String[]{command, String.valueOf(Integer.parseInt(queryArr[1]) - 1)};
+            return taskMarkingParser.parse(command, queryArr);
         } else if (taskCreation.contains(command)) {
-            if (command.equals("todo")) {
-                String commandArg = String.join(" ",
-                                                Arrays.copyOfRange(queryArr, 1, queryArr.length));
-                if (commandArg.length() <= 0) {
-                    throw new CommandArityException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
-                }
-                return new String[]{command, commandArg};
-            } else {
-                String args = String.join(" ",
-                        Arrays.copyOfRange(queryArr, 1, queryArr.length));
-                String[] argArr = args.split("\\s(/by|/at)");
-                if (argArr[0].trim().length() <= 0) {
-                    throw new CommandArityException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
-                } else if (argArr.length == 1) {
-                    throw new CommandArityException("☹ OOPS!!! The date of a " + command + " cannot be empty.");
-                }
-                return new String[]{command, argArr[0].trim(), argArr[1].trim()};
-            }
+            return taskCreationParser.parse(command, queryArr);
         }
         throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }

@@ -8,6 +8,7 @@ public class BobCat {
         Scanner scanObj = new Scanner(System.in);
 
         boolean toTerminate = false;
+        Response response = new Response();
         Storage storage = new Storage();
 
         Response.respond(new String[]{"Hello! I'm BobCat!", "What can I do for you?"});
@@ -16,7 +17,7 @@ public class BobCat {
             if (inp.equals("bye")) {
                 toTerminate = true;
             }
-            Response.respond(inp, storage);
+            response.respond(inp, storage);
         }
         scanObj.close();
     }

@@ -4,7 +4,7 @@ import exception.CommandArityException;
 import exception.InvalidCommandException;
 import model.Storage;
 import model.task.Task;
-import parser.ReplyParser;
+import parser.QueryParser;
 
 // This class defines how information is presented to the user
 public class Response {
@@ -13,6 +13,7 @@ public class Response {
     }
     private static void display(String arg) { System.out.println("\t" + arg);}
     private static void display(Task arg) { System.out.println("\t  " + arg);}
+    private QueryParser parser = new QueryParser();
 
     public static void respond(String reply) {
         hLine();
@@ -29,11 +30,11 @@ public class Response {
         hLine();
     }
 
-    public static void respond(String query, Storage storage) {
+    public void respond(String query, Storage storage) {
         hLine();
         String[] queryArr;
         try {
-            queryArr = ReplyParser.parse(query);
+            queryArr = parser.parse(query);
         } catch (InvalidCommandException | CommandArityException e){
             display(e.getMessage());
             return;
@@ -68,13 +69,12 @@ public class Response {
                 Task deletedTask;
                 try {
                     deletedTask = storage.deleteTaskByIdx(Integer.parseInt(queryArr[1]));
+                    display("Noted. I've removed this task:");
+                    display(deletedTask);
+                    display("Now you have " + storage.numTasks() + " tasks in the list");
                 } catch (InvalidCommandException e) {
                     display(e.getMessage());
-                    break;
                 }
-                display("Noted. I've removed this task:");
-                display(deletedTask);
-                display("Now you have " + storage.numTasks() + " tasks in the list");
                 break;
             default:
                 Task addedTask = storage.push(queryArr);
