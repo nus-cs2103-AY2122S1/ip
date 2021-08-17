@@ -1,0 +1,20 @@
+foo
+list
+
+todo find a book
+list
+deadline learn magic
+list
+deadline learn magic /by tomorrow
+event visiting koi /by today
+event visiting koi /at 23 Apr 2998 4 pm
+list
+done 2
+list
+done 4
+list
+done 3
+done 2
+list
+done 1
+list
