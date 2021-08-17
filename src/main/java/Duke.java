@@ -82,12 +82,13 @@ public class Duke {
         String newline = "\n\t";
         for (int idx = 0; idx < TODO_LIST.size(); idx ++) {
             Task task = TODO_LIST.get(idx);
-            listStringBuilder.append(idx + 1);
+            listStringBuilder.append(idx + 1); // shift to 1-indexing
             listStringBuilder.append(". ");
             listStringBuilder.append(task.toString());
             listStringBuilder.append(newline);
         }
 
+        // clear final newline characters
         listStringBuilder.setLength(listStringBuilder.length() - newline.length());
         echo(listStringBuilder.toString());
     }
@@ -103,7 +104,7 @@ public class Duke {
             echo("task invalid: task does not exist");
             return;
         }
-        Task selectedTask = TODO_LIST.get(taskNumber - 1);
+        Task selectedTask = TODO_LIST.get(taskNumber - 1); // shift to 0-indexing
         selectedTask.markAsDone();
         echo("Nice! I've marked this task as done:\n\t  " + selectedTask);
     }
