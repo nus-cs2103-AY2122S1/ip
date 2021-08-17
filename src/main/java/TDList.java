@@ -17,6 +17,56 @@ public class TDList {
      * @param str   Thing to add to the list.
      */
     public void tdlAdd(String str) {
+        TDLTask.TaskType currTaskType = checkTaskType(str);
+        TDLTask createdTask;
+
+        int indexOfSlash = -1;
+
+        switch (currTaskType) {
+        case TODO:
+            createdTask = new ToDosTask(str);
+            break;
+        case EVENT:
+            indexOfSlash = str.indexOf("/at");
+            if (indexOfSlash == -1) {
+                Duke.dukeSays("Something is wrong with your Event task.");
+                return;
+            }
+
+            String eventTaskName = str.substring(6, indexOfSlash);
+            String eventAtWhere = "";
+            try {
+                eventAtWhere = str.substring(indexOfSlash + 4);
+            } catch (StringIndexOutOfBoundsException e) {
+                Duke.dukeSays("Adding a event description is required.");
+                return;
+            }
+
+            createdTask = new EventTask(eventTaskName, eventAtWhere);
+            break;
+        case DEADLINE:
+            indexOfSlash = str.indexOf("/by");
+            if (indexOfSlash == -1) {
+                Duke.dukeSays("Something is wrong with your Deadline task.");
+                return;
+            }
+
+            String deadlineTaskName = str.substring(9, indexOfSlash);
+            String deadlineByWhen;
+
+            try {
+                deadlineByWhen = str.substring(indexOfSlash + 4);
+            } catch (StringIndexOutOfBoundsException e) {
+                Duke.dukeSays("Adding a deadline description is required");
+                return;
+            }
+
+            createdTask = new DeadlineTask(deadlineTaskName, deadlineByWhen);
+            break;
+        default:
+            createdTask = new TDLTask(str);
+        }
+
         toDoList.add(createdTask);
 
 
