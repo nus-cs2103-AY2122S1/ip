@@ -117,7 +117,7 @@ public class Duke {
 
     public static void displayList() {
         if (TODO_LIST.isEmpty()) {
-            echo("list is empty: start adding tasks");
+            echo("List is empty: Start adding tasks");
             return;
         }
 
