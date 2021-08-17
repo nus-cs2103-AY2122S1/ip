@@ -8,7 +8,7 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private final String lineBreak = "\n____________________________________________________________\n";
-    private ArrayList<String> list = new ArrayList<>();
+    private ArrayList<Task> list = new ArrayList<>();
 
     public Duke() {}
 
@@ -38,13 +38,13 @@ public class Duke {
     }
 
     /**
-     * Adds the given input into list
+     * Adds the given task into list
      * @param input the given text
      * @return message indicating successful addition to list
      */
     public String add(String input) {
-        this.list.add(input);
-        return wrapText("added: " + input);
+        this.list.add(new Task(input));
+        return wrapText("added:" + input);
     }
 
     /**
@@ -52,13 +52,24 @@ public class Duke {
      * @return list of items
      */
     public String showList () {
-        String[] lst = list.toArray(new String[0]);
-        String output = "";
+        Task[] lst = list.toArray(new Task[0]);
+        String output = "Here are the tasks in your list:\n";
         int index = 1;
-        for (String s : lst) {
-            output += String.format("\n%d. %s", index++, s);
+        for (Task t : lst) {
+            output += String.format("\n%d.%s", index++, t.toString());
         }
         return wrapText(output);
+    }
+
+    /**
+     * Marks task at given index as done
+     * @param index index of task to be marked done
+     * @return message indicating success
+     */
+    public String markDone(int index) {
+        Task t = this.list.get(index - 1);
+        t.setDone();
+        return wrapText(String.format("Nice! I've marked this task as done: \n %s", t.toString()));
     }
 
     /**
@@ -76,14 +87,16 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
+            String command = sc.next();
+            if (command.equals("bye")) {
                 System.out.println(bot.goodbye());
                 break;
-            } else if (input.equals("list")) {
+            } else if (command.equals("list")) {
                 System.out.println(bot.showList());
-            } else {
-                System.out.println(bot.add(input));
+            } else if (command.equals("add")){
+                System.out.println(bot.add(sc.nextLine()));
+            } else if (command.equals("done")) {
+                System.out.println(bot.markDone(sc.nextInt()));
             }
         }
 
