@@ -39,6 +39,13 @@ public class Duke {
             taskList.get(index).markAsDone();
             System.out.println("You have swallowed that pesky fly! RIBBIT!");
             System.out.println("  " + taskList.get(index).toString());
+        } else if (input.startsWith("delete")) {
+            int index = input.charAt(7) - 49;
+            System.out.println("Rotten flies deserve to die!");
+            System.out.println("  " + taskList.get(index).toString());
+            taskList.remove(index);
+            size--;
+            System.out.println("Now you have " + size + " flies to eat! RIBBIT!");
         } else if (input.equals("list")) {
             System.out.println("Here is your menu for today:");
             for (int i = 0; i < size; i++) {
