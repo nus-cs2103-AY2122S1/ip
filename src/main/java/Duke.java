@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -36,12 +37,16 @@ public class Duke {
             "\t                                                  |  $$$$$$/                    \n" +
             "\t                                                   \\______/                     \n";
 
+    // The Global Variables used by the ChatBot
+    private static final Scanner cmdReader = new Scanner(System.in);
+    private static final ArrayList<String> LIST = new ArrayList<>();
+
     // Method to Print Greeting
     public static void greeting() {
         System.out.println(COLOR_CYAN + line + COLOR_REST);
         System.out.println(COLOR_BLUE + logo + COLOR_REST);
         System.out.println(COLOR_CYAN + line + COLOR_REST);
-        System.out.println("Hello! I'm the WhoBot\n" +
+        System.out.println("Hello! I'm the WhoBot.\n" +
                 "What can I do for you?");
         System.out.println(COLOR_CYAN + line + COLOR_REST);
     }
@@ -61,12 +66,34 @@ public class Duke {
         System.out.println(COLOR_CYAN + line + COLOR_REST);
     }
 
+    //Method to Add to List
+    public static void addToList(String item) {
+        if (LIST.add(item)) {
+            echo("I have added this Item to List: \"" + item + "\"");
+        } else {
+            echo("I am sorry. The item couldn't be added, please try again.");
+        }
+    }
+
+    //Method to Print List
+    public static void printList() {
+        if (LIST.isEmpty()) {
+            echo("The list is empty.");
+            return;
+        }
+        String listString = "The items in your list are: \n";
+        int i;
+        for (i = 0; i < LIST.size() - 1; i++) {
+            listString = listString.concat("\t\t\t" + (i + 1) + ". " + LIST.get(i) + "\n");
+        }
+        listString = listString.concat("\t\t\t" + (i + 1) + ". " + LIST.get(i));
+        echo(listString);
+    }
+
     //Main Method
     public static void main(String[] args) {
 
         greeting();
-
-        Scanner cmdReader = new Scanner(System.in);
 
         while (true) {
             // Take in the input
@@ -74,13 +101,17 @@ public class Duke {
             System.out.print(COLOR_PURPLE + "> " + COLOR_REST);
             command = cmdReader.nextLine().trim();
 
-            //Quits if the input is bye or goodbye (case-insensitive)
+            //All commands are taken as case-insensitive
             if (command.toLowerCase(Locale.ROOT).equals("bye") || command.toLowerCase(Locale.ROOT).equals("goodbye")) {
+                // If input is bye or goodbye, quits program
                 goodbye();
                 break;
+            } else if (command.toLowerCase(Locale.ROOT).equals("list")) {
+                // If input is list, prints list
+                printList();
             } else {
-                //Else echoes the input line
-                echo(command);
+                // Else adds the input line to list
+                addToList(command);
             }
         }
     }
