@@ -77,39 +77,43 @@ public class Duke {
         String lineBreak = "========================================================================";
 
         Scanner in = new Scanner(System.in);
-        input = in.nextLine();
         System.out.println(lineBreak);
 
-        if (input.equals("bye")) {
-            itemList.clear();
-            System.out.println("Bye. Hope to see you again soon!");
-        } else if (input.equals("list")) {
-            printItemList();
-        }
-        else {
-            String check = getFirstWord(input);
+        while (in.hasNextLine()) {
+          input = in.nextLine();
 
-            if (check.equals("done")) {
-                markTaskDone(input);
-            } else if (check.equals("todo")) {
-                String description = input.substring(5);
-                addToDo(description);
-            } else if (check.equals("deadline")) {
-                String[] arr = input.split("/");
-                String description = getSecondWord(arr[0]);
-                String time = getSecondWord(arr[1]);
-                addDeadline(description, time);
-            } else if (check.equals("event")) {
-                String[] arr = input.split("/");
-                String description = getSecondWord(arr[0]);
-                String time = getSecondWord(arr[1]);
-                addEvent(description, time);
+            if (input.equals("bye")) {
+                itemList.clear();
+                System.out.println("Bye. Hope to see you again soon!");
+                return;
+            } else if (input.equals("list")) {
+                printItemList();
+                System.out.println(lineBreak);
             } else {
-                addToDo(input);
+                String check = getFirstWord(input);
+
+                if (check.equals("done")) {
+                    markTaskDone(input);
+                } else if (check.equals("todo")) {
+                    String description = input.substring(5);
+                    addToDo(description);
+                } else if (check.equals("deadline")) {
+                    String[] arr = input.split("/");
+                    String description = getSecondWord(arr[0]);
+                    String time = getSecondWord(arr[1]);
+                    addDeadline(description, time);
+                } else if (check.equals("event")) {
+                    String[] arr = input.split("/");
+                    String description = getSecondWord(arr[0]);
+                    String time = getSecondWord(arr[1]);
+                    addEvent(description, time);
+                } else {
+                    addToDo(input);
+                }
+                System.out.println(lineBreak);
             }
         }
-        System.out.println(lineBreak);
-        start();
+        return;
     }
 
     public static void main(String[] args) {
