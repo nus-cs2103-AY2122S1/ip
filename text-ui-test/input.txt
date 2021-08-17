@@ -7,8 +7,14 @@ done 1
 evenT Sun Down Marathon /at 4 April 6pm
 todo return borrowed books from the library
 list
+deadline copy homework /by 5 minutes later
+delete
+delete 1
 done 8
+todo fly in the sky
 done
 done 4
+list
+delete 4
 list
 ByE

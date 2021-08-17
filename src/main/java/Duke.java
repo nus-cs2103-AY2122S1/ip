@@ -1,4 +1,4 @@
-import java.util.Locale;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -25,7 +25,7 @@ public class Duke {
         public Todo(String input) throws DukeIllegalInputException {
             String[] inputs = input.split(" ");
             if (inputs.length == 1) {
-                throw new DukeIllegalInputException("Insufficient input received! Please add in description of the task.");
+                throw new DukeIllegalInputException("Insufficient input received! Please add in description of the Todo task.");
             }
             int tFirst = input.indexOf(" ");
             String tTask = input.substring(tFirst + 1);
@@ -42,12 +42,12 @@ public class Duke {
         private String by;
 
         public Deadline(String input) throws DukeIllegalInputException {
-            if (!input.contains("/by")) {
-                throw new DukeIllegalInputException("Invalid input! Please add in the deadline for the task.");
-            }
             String[] inputs = input.split(" ");
             if (inputs.length == 1) {
-                throw new DukeIllegalInputException("Insufficient input received! Please add in description of the task.");
+                throw new DukeIllegalInputException("Insufficient input received! Please add in description of the Deadline task.");
+            }
+            if (!input.contains("/by")) {
+                throw new DukeIllegalInputException("Invalid input! Please add in the deadline for the task.");
             }
             int dFirst = input.indexOf(" ");
             int dSecond = input.indexOf("/");
@@ -67,12 +67,12 @@ public class Duke {
         private String at;
 
         public Event(String input) throws DukeIllegalInputException {
-            if (!input.contains("/at")) {
-                throw new DukeIllegalInputException("Invalid input! Please add in information about the event.");
-            }
             String[] inputs = input.split(" ");
             if (inputs.length == 1) {
-                throw new DukeIllegalInputException("Insufficient input received! Please add in description of the task.");
+                throw new DukeIllegalInputException("Insufficient input received! Please add in description of the Event task.");
+            }
+            if (!input.contains("/at")) {
+                throw new DukeIllegalInputException("Invalid input! Please add in information about the event.");
             }
             int eFirst = input.indexOf(" ");
             int eSecond = input.indexOf("/");
@@ -101,13 +101,11 @@ public class Duke {
     }
 
     private static class ToDoList {
-        private Task[] list;
-        private int index;
+        private ArrayList<Task> list;
         private boolean open;
 
         public ToDoList() {
-            this.list = new Task[100];
-            this.index = 0;
+            this.list = new ArrayList<>();
         }
 
         public void open() {
@@ -140,10 +138,9 @@ public class Duke {
                     default:
                         throw new DukeIllegalInputException("Not a valid Task!!");
                 }
-                list[index] = task;
-                index++;
+                list.add(task);
                 System.out.println("Got it. I've added this task:\n" + "  " + task + "\n" +
-                        "Now you have " + index + " tasks in the list.");
+                        "Now you have " + list.size() + " tasks in the list.");
             } catch (DukeIllegalInputException e) {
                 System.out.println(e.getMessage());
             }
@@ -151,8 +148,8 @@ public class Duke {
 
         public void showList() {
             System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < index; i++) {
-                String s = String.format("%d.%s", i + 1, list[i]);
+            for (int i = 0; i < list.size(); i++) {
+                String s = String.format("%d.%s", i + 1, list.get(i));
                 System.out.println(s);
             }
         }
@@ -164,14 +161,28 @@ public class Duke {
             }
             try {
                 int index = Integer.parseInt(inputs[1]);
-                if (list[index - 1] == null) {
-                    throw new DukeIllegalInputException("Invalid task number! The given task number:" + index +
-                            " does not exist, please enter a valid task number.");
-                }
-                list[index - 1].markAsDone();
-                System.out.println("Nice! I've marked this task as done:\n  " + list[index - 1]);
+                list.get(index - 1).markAsDone();
+                System.out.println("Nice! I've marked this task as done:\n  " + list.get(index - 1));
             } catch (NumberFormatException e) {
                 throw new DukeIllegalInputException("Invalid input! Please enter the task number after 'done'.");
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeIllegalInputException("Invalid task number! The given task number does not exist, please enter a valid task number.");
+            }
+        }
+
+        public void delete(String input) throws DukeIllegalInputException {
+            String[] inputs = input.split(" ");
+            if (inputs.length == 1) {
+                throw new DukeIllegalInputException("Insufficient input received! Please indicate the task number of the task you wish to delete.");
+            }
+            try {
+                int index = Integer.parseInt(inputs[1]);
+                Task removed = list.remove(index - 1);
+                System.out.println("Noted. I've removed this task:\n  " + removed + "\nNow you have " + list.size() + " tasks in the list.");
+            } catch (NumberFormatException e) {
+                throw new DukeIllegalInputException("Invalid input! Please enter the task number after 'delete'.");
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeIllegalInputException("Invalid task number! The given task number does not exist, please enter a valid task number.");
             }
         }
     }
@@ -193,6 +204,13 @@ public class Duke {
                 case "done":
                     try {
                         tdl.markAsDone(input);
+                    } catch (DukeIllegalInputException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case "delete":
+                    try {
+                        tdl.delete(input);
                     } catch (DukeIllegalInputException e) {
                         System.out.println(e.getMessage());
                     }

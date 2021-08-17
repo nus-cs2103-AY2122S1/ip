@@ -1,6 +1,6 @@
 Hello! I'm Duke
 What can I do for you?
-Insufficient input received! Please add in description of the task.
+Insufficient input received! Please add in description of the Todo task.
 Got it. I've added this task:
   [D][ ] submit homework (by: Wednesday)
 Now you have 1 tasks in the list.
@@ -24,13 +24,32 @@ Here are the tasks in your list:
 2.[T][ ] make supper
 3.[E][ ] Sun Down Marathon (at: 4 April 6pm)
 4.[T][ ] return borrowed books from the library
-Invalid task number! The given task number:8 does not exist, please enter a valid task number.
+Got it. I've added this task:
+  [D][ ] copy homework (by: 5 minutes later)
+Now you have 5 tasks in the list.
+Insufficient input received! Please indicate the task number of the task you wish to delete.
+Noted. I've removed this task:
+  [D][X] submit homework (by: Wednesday)
+Now you have 4 tasks in the list.
+Invalid task number! The given task number does not exist, please enter a valid task number.
+Got it. I've added this task:
+  [T][ ] fly in the sky
+Now you have 5 tasks in the list.
 Insufficient input received! Please indicate the task number of the completed task.
 Nice! I've marked this task as done:
-  [T][X] return borrowed books from the library
+  [D][X] copy homework (by: 5 minutes later)
 Here are the tasks in your list:
-1.[D][X] submit homework (by: Wednesday)
-2.[T][ ] make supper
-3.[E][ ] Sun Down Marathon (at: 4 April 6pm)
-4.[T][X] return borrowed books from the library
+1.[T][ ] make supper
+2.[E][ ] Sun Down Marathon (at: 4 April 6pm)
+3.[T][ ] return borrowed books from the library
+4.[D][X] copy homework (by: 5 minutes later)
+5.[T][ ] fly in the sky
+Noted. I've removed this task:
+  [D][X] copy homework (by: 5 minutes later)
+Now you have 4 tasks in the list.
+Here are the tasks in your list:
+1.[T][ ] make supper
+2.[E][ ] Sun Down Marathon (at: 4 April 6pm)
+3.[T][ ] return borrowed books from the library
+4.[T][ ] fly in the sky
 Bye. Hope to see you again soon!
