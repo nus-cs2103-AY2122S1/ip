@@ -11,28 +11,49 @@ Hello from
 -----------------------------------------
 
     -----------------------------------------
+     OOPS!!! The description of a todo cannot be empty.
+    -----------------------------------------
+
+    -----------------------------------------
+    There are no tasks in your list
+    -----------------------------------------
+
+    -----------------------------------------
+     OOPS!!! The description and date/time of a deadline cannot be empty.
+    -----------------------------------------
+
+    -----------------------------------------
+     OOPS!!! The description and date/time of an event cannot be empty.
+    -----------------------------------------
+
+    -----------------------------------------
+     Invalid deadline format! Please ensure you specify your date and time after a /by Eg: deadline Submit Assignment /by Thursday 2359
+    -----------------------------------------
+
+    -----------------------------------------
+     Invalid event format! Please ensure you specify your date and time after a /at Eg: event Attend physical lessons /at NUS Monday 0800
+    -----------------------------------------
+
+    -----------------------------------------
+     OOPS!!! The description and date/time of a deadline cannot be empty.
+    -----------------------------------------
+
+    -----------------------------------------
+     Invalid deadline format! Please ensure you specify your date and time after a /by Eg: deadline Submit Assignment /by Thursday 2359
+    -----------------------------------------
+
+    -----------------------------------------
+     Invalid event format! Please ensure you specify your date and time after a /at Eg: event Attend physical lessons /at NUS Monday 0800
+    -----------------------------------------
+
+    -----------------------------------------
+     OOPS!!! The description and date/time of a deadline cannot be empty.
+    -----------------------------------------
+
+    -----------------------------------------
      Got it. I have added this task:
        [T][ ] read book
      Now you have 1 tasks in the list
-    -----------------------------------------
-
-    -----------------------------------------
-     Got it. I have added this task:
-       [D][ ] return book (by: Tuesday 17th August)
-     Now you have 2 tasks in the list
-    -----------------------------------------
-
-    -----------------------------------------
-     Got it. I have added this task:
-       [E][ ] borrow book again (at: Monday 23rd August)
-     Now you have 3 tasks in the list
-    -----------------------------------------
-
-    -----------------------------------------
-    Here are the tasks in your list:
-     1. [T][ ] read book
-     2. [D][ ] return book (by: Tuesday 17th August)
-     3. [E][ ] borrow book again (at: Monday 23rd August)
     -----------------------------------------
 
     -----------------------------------------
@@ -41,34 +62,24 @@ Hello from
     -----------------------------------------
 
     -----------------------------------------
-    Here are the tasks in your list:
-     1. [T][X] read book
-     2. [D][ ] return book (by: Tuesday 17th August)
-     3. [E][ ] borrow book again (at: Monday 23rd August)
-    -----------------------------------------
-
-    -----------------------------------------
-     Nice! I've marked this task as done:
-       [D][X] return book (by: Tuesday 17th August)
+     I have already marked this task as completed!
     -----------------------------------------
 
     -----------------------------------------
     Here are the tasks in your list:
      1. [T][X] read book
-     2. [D][X] return book (by: Tuesday 17th August)
-     3. [E][ ] borrow book again (at: Monday 23rd August)
     -----------------------------------------
 
     -----------------------------------------
-     Nice! I've marked this task as done:
-       [E][X] borrow book again (at: Monday 23rd August)
+     OOPS!!! You do not have 2 tasks in the list
     -----------------------------------------
 
     -----------------------------------------
-    Here are the tasks in your list:
-     1. [T][X] read book
-     2. [D][X] return book (by: Tuesday 17th August)
-     3. [E][X] borrow book again (at: Monday 23rd August)
+     OOPS!!! Please ensure a number is entered after done (eg: done 2)
+    -----------------------------------------
+
+    -----------------------------------------
+     OOPS!!! I'm sorry, but I don't know what that means :-(
     -----------------------------------------
 
     -----------------------------------------

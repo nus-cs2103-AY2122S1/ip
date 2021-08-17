@@ -1,11 +1,18 @@
-todo read book
-deadline return book /by Tuesday 17th August
-event borrow book again /at Monday 23rd August
+todo
 list
+deadline
+event
+deadline /
+event /
+deadline /by
+deadline /at
+event /by
+event /at
+todo read book
+done 1
 done 1
 list
 done 2
-list
-done 3
-list
+done y
+done 2 deadline
 bye
