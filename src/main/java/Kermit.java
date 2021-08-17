@@ -14,7 +14,12 @@ public class Kermit {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String command = "";
-        StringBuilder strBuilder = new StringBuilder();
+        String flag = "";
+        String word = "";
+        
+        StringBuilder descriptionBuilder = new StringBuilder();
+        StringBuilder flagBuilder = new StringBuilder();
+
 
         ToDo list = new ToDo();
 
@@ -26,18 +31,36 @@ public class Kermit {
         System.out.println(formatText(introductionText));
 
         while (true) {
-            String[] commandArr = sc.nextLine().split(" ");
+            String[] userInput = sc.nextLine().split("/");
+            String commandString = userInput[0];
+            String flagString = userInput.length > 1 ? userInput[1]: "";
+
+            String[] commandArr = commandString.split(" ");
+            String[] flagArr = flagString.split(" ");
+
             // first item is command
             command = commandArr[0];
+            flag = flagArr[0];
 
-            // Clear contents of stringBuilder
-            strBuilder.setLength(0);
+            // Clear contents of string builders
+            descriptionBuilder.setLength(0);
+            flagBuilder.setLength(0);
+
 
             for (int i = 1; i < commandArr.length; i++) {
+                word = commandArr[i];
+                    if (i != 1) {
+                        descriptionBuilder.append(" ");
+                    }
+                    descriptionBuilder.append(word);
+            }
+
+            for (int i = 1; i < flagArr.length; i++) {
+                word = flagArr[i];
                 if (i != 1) {
-                    strBuilder.append(" ");
+                    flagBuilder.append(" ");
                 }
-                strBuilder.append(commandArr[i]);
+                flagBuilder.append(word);
             }
 
             // Quit program
@@ -51,18 +74,26 @@ public class Kermit {
                     break;
                 // Add objects to list
                 case "done":
-                    int index = Integer.parseInt(strBuilder.toString()) - 1;
+                    int index = Integer.parseInt(descriptionBuilder.toString()) - 1;
                     // Get task name
                     String taskText = list.completeTask(index);
                     System.out.println(formatText(completeTaskText + "\n" + taskText));
                     break;
-                // Add new todo task item
+                // Add new todo task
                 case "todo":
-                    Task newTask = new ToDos(strBuilder.toString());
-                    list.add(newTask);
+                    Task newToDo = new ToDos(descriptionBuilder.toString());
+                    list.add(newToDo);
                     System.out.println(formatText(
                             "Got it. I've added this task:\n"
-                                    + newTask +"\nNow you have " + list.size() + " tasks in the list."));
+                                    + newToDo +"\nNow you have " + list.size() + " tasks in the list."));
+                    break;
+                // Add new deadline task
+                case "deadline":
+                    Task newDeadline = new Deadline(descriptionBuilder.toString(), flagBuilder.toString());
+                    list.add(newDeadline);
+                    System.out.println(formatText(
+                            "Got it. I've added this task:\n"
+                                    + newDeadline +"\nNow you have " + list.size() + " tasks in the list."));
                     break;
                 default:
                     System.out.println(formatText("This is an invalid command"));
