@@ -11,14 +11,15 @@ public class Duke {
         System.out.println(logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
-        String input = "";
-        while (!input.equals("bye")) {
-            if (input.equals("list")) {
+        while (true) {
+            String input = sc.nextLine();
+            if (input.equals("bye")) {
+                break;
+            } else if (input.equals("list")) {
                 System.out.println(list.toString());
             } else {
                 list.add(input);
             }
-            input = sc.nextLine();
         }
         sc.close();
         System.out.println("Byebye");
