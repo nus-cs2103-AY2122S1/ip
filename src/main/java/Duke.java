@@ -7,7 +7,7 @@ public class Duke {
         Printer printer = new Printer(border);
         printer.PrintIntro();
 
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -17,16 +17,20 @@ public class Duke {
                 int index = Integer.parseInt(splitInput[1]) - 1;
                 String returnString = tasks.get(index).markDone();
                 printer.PrintMessage(returnString);
+
             } else if (input.equals("list")) {
                 printer.PrintList(tasks);
             } else if (splitInput[0].equals("todo")) {
                 tasks.add(new Todo(splitInput[1]));
+                printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
             } else if (splitInput[0].equals("deadline")) {
                 String[] furtherSplits = splitInput[1].split("/by");
                 tasks.add(new Deadline(furtherSplits[0], furtherSplits[1]));
+                printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
             } else if (splitInput[0].equals("event")) {
                 String[] furtherSplits = splitInput[1].split("/at");
                 tasks.add(new Event(furtherSplits[0], furtherSplits[1]));
+                printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
             } else {
                 tasks.add(new Task(input));
                 printer.PrintMessage(String.format("added: %s", input));

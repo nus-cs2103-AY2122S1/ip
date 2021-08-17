@@ -30,4 +30,11 @@ public class Printer {
             System.out.println(toPrint);
         }
     }
+
+    public void PrintSpecialTasks(String message, int total) {
+        String newMsg = String.
+                format("Got it, I've added this task:\n  %s\nNow you have a total of %d tasks in the list.",
+                message, total);
+        PrintMessage(newMsg);
+    }
 }
