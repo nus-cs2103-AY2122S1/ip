@@ -1,4 +1,3 @@
-blah
 list
 todo sweep floor
 event computing day /at 3pm Monday
@@ -7,4 +6,13 @@ list
 done 2
 done 3
 list
+todo
+event
+event eventName /at
+deadline
+deadline deadlineName /by
+blahhh
+Uvuvwevwevwe
+done -32
+done 999
 bye

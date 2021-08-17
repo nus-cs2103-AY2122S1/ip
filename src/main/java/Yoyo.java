@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Yoyo {
@@ -8,6 +9,18 @@ public class Yoyo {
         TODO,
         EVENT,
         DEADLINE
+    }
+
+    private static class YoyoIncompleteCommandException extends IOException {
+        YoyoIncompleteCommandException(String message) {
+            super(message);
+        }
+    }
+
+    private static class YoyoCommandNotFoundException extends IOException {
+        YoyoCommandNotFoundException(String message) {
+            super(message);
+        }
     }
 
     /**
@@ -29,69 +42,75 @@ public class Yoyo {
             String input = scanner.nextLine();
             String[] inputWords = input.split(" ", 2);
             String command = inputWords[0];
-            if (command.equals("bye")) {
-                outputWrapper();
-                System.out.println("Bye. Hope to see you again soon!");
-                outputWrapper();
-                break;
-            } else if (command.equals("list")) {
-                outputWrapper();
-                if (numTasks == 0) {
-                    System.out.println("You have no task at the moment.");
-                } else {
-                    for (int i = 0; i < numTasks; i++) {
-                        System.out.println(i + 1 + "." + tasks[i].showStatus());
-                    }
-                }
-                outputWrapper();
-            } else if (command.equals("done")) {
-                try {
-                    int taskIndex = Integer.parseInt(inputWords[1]) - 1;
-                    tasks[taskIndex].toggleDone();
+            try {
+                if (command.equals("bye")) {
                     outputWrapper();
-                    System.out.println("Nice! I've marked this task as done:\n"
-                            + tasks[taskIndex].showStatus());
+                    System.out.println("Bye. Hope to see you again soon!");
                     outputWrapper();
-                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    break;
+                } else if (command.equals("list")) {
                     outputWrapper();
-                    System.out.println("Please enter a valid index!\n");
-                    outputWrapper();
-                }
-            } else {
-                if (command.equals("todo")) {
-                    Task newTask = new Todo(inputWords[1]);
-                    tasks[numTasks] = newTask;
-                    numTasks++;
-                    printAddMessage(newTask);
-                } else if (command.equals("event")) {
-                    String[] taskInfo = inputWords[1].split(" /");
-                    if (taskInfo.length < 2) {
-                        outputWrapper();
-                        System.out.println("Please add a timing for the event!");
-                        outputWrapper();
+                    if (numTasks == 0) {
+                        System.out.println("You have no task at the moment.");
                     } else {
-                        Task newTask = new Event(taskInfo[0], taskInfo[1]);
+                        for (int i = 0; i < numTasks; i++) {
+                            System.out.println(i + 1 + "." + tasks[i].showStatus());
+                        }
+                    }
+                    outputWrapper();
+                } else if (command.equals("done")) {
+                    try {
+                        int taskIndex = Integer.parseInt(inputWords[1]) - 1;
+                        tasks[taskIndex].toggleDone();
+                        outputWrapper();
+                        System.out.println("Nice! I've marked this task as done:\n"
+                                + tasks[taskIndex].showStatus());
+                        outputWrapper();
+                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException | NullPointerException e) {
+                        outputWrapper();
+                        System.out.println("Please enter a valid index!");
+                        outputWrapper();
+                    }
+                } else {
+
+                    if (command.equals("todo")) {
+                        checkCompleteCommand(inputWords);
+                        Task newTask = new Todo(inputWords[1]);
                         tasks[numTasks] = newTask;
                         numTasks++;
                         printAddMessage(newTask);
-                    }
-                } else if (command.equals("deadline")) {
-                    String[] taskInfo = inputWords[1].split(" /");
-                    if (taskInfo.length < 2 ) {
-                        outputWrapper();
-                        System.out.println("Please add a timing for the event!");
-                        outputWrapper();
+                    } else if (command.equals("event")) {
+                        checkCompleteCommand(inputWords);
+                        String[] taskInfo = inputWords[1].split(" /at ");
+                        if (taskInfo.length < 2 ) {
+                            throw new YoyoIncompleteCommandException("You have not entered enough information for"
+                                    + " your command.");
+                        } else {
+                            Task newTask = new Event(taskInfo[0], taskInfo[1]);
+                            tasks[numTasks] = newTask;
+                            numTasks++;
+                            printAddMessage(newTask);
+                        }
+                    } else if (command.equals("deadline")) {
+                        checkCompleteCommand(inputWords);
+                        String[] taskInfo = inputWords[1].split(" /by ");
+                        if (taskInfo.length < 2) {
+                            throw new YoyoIncompleteCommandException("You have not entered enough information for"
+                                    + " your command.");
+                        } else {
+                            Task newTask = new Deadline(taskInfo[0], taskInfo[1]);
+                            tasks[numTasks] = newTask;
+                            numTasks++;
+                            printAddMessage(newTask);
+                        }
                     } else {
-                        Task newTask = new Deadline(taskInfo[0], taskInfo[1]);
-                        tasks[numTasks] = newTask;
-                        numTasks++;
-                        printAddMessage(newTask);
+                        throw new YoyoCommandNotFoundException("Yoyo doesn't understand what you mean :-(");
                     }
-                } else {
-                    outputWrapper();
-                    System.out.println("Invalid Command");
-                    outputWrapper();
                 }
+            } catch (YoyoCommandNotFoundException | YoyoIncompleteCommandException e) {
+                outputWrapper();
+                System.out.println(e.getMessage());
+                outputWrapper();
             }
         }
     }
@@ -109,5 +128,17 @@ public class Yoyo {
                 + numTasks
                 + " tasks in the list.\n");
         outputWrapper();
+    }
+
+    /**
+     * Checks user input for incomplete commands.
+     *
+     * @param strArr String array from user input.
+     * @throws YoyoIncompleteCommandException Thrown if command is incomplete.
+     */
+    private static void checkCompleteCommand(String[] strArr) throws YoyoIncompleteCommandException {
+        if (strArr.length < 2 || strArr[1].trim().length() == 0) {
+            throw new YoyoIncompleteCommandException("You have not entered enough information for your command.");
+        }
     }
 }

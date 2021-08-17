@@ -12,8 +12,8 @@ public class Deadline extends Task {
     @Override
     public String showStatus() {
         String status =  super.showStatus();
-        String[] timeInfoList = this.timeInfo.split(" ", 2);
-        return status + " (" + timeInfoList[0] + ": " + timeInfoList[1] + ")";
+        return status + " (by: " + timeInfo + ")";
+
     }
 
     @Override
