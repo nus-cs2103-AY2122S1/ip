@@ -32,20 +32,45 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input;
         while(!((input = scanner.next().toLowerCase()).equals("bye"))) {
+            try {
+                commands.checkCommand(input);
+            } catch (DukeException e){
+                System.out.println(format(e.toString()));
+            }
             if (input.equals("list")) {
                 System.out.println(format(commands.list()));
             } else if (input.equals("done")) {
-                System.out.println(format(commands.done((scanner.nextInt()) - 1)));
+                try {
+                    System.out.println(format(commands.done((scanner.nextInt()) - 1)));
+                } catch (DukeException e) {
+                    System.out.println(format(e.toString()));
+                }
             } else if (input.equals("todo")) {
-                System.out.println(format(commands.todo(scanner.nextLine().trim())));
+                try {
+                    System.out.println(format(commands.todo(scanner.nextLine().trim())));
+                } catch (DukeException e) {
+                    System.out.println(format(e.toString()));
+                }
             } else if (input.equals("deadline")) {
                 String[] text = scanner.nextLine().split("/by ");
-                System.out.println(format(commands.deadline(text[0].trim(), text[1])));
+                try {
+                    System.out.println(format(commands.deadline(text[0].trim(), text[1])));
+                } catch (DukeException e) {
+                    System.out.println(format(e.toString()));
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(format("OOPS!!! No date for deadline! " +
+                            "Use format of deadline description /by date \n\t"));
+                }
             } else if(input.equals("event")) {
                 String[] text = scanner.nextLine().split("/at ");
-                System.out.println(format(commands.event(text[0].trim(), text[1])));
-            } else {
-                System.out.println(format(commands.add(input + scanner.nextLine())));
+                try {
+                    System.out.println(format(commands.event(text[0].trim(), text[1])));
+                } catch (DukeException e) {
+                    System.out.println(format(e.toString()));
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(format("OOPS!!! No date for event! " +
+                            "Use format of event description /at date \n\t"));
+                }
             }
         }
         scanner.close();
