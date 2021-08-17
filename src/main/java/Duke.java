@@ -82,8 +82,12 @@ public class Duke {
                     break;
 
                 case ("todo"):
-                    toAdd = new Todo(cmd_args[1]);
-                    System.out.println(formatReply(addTaskMessage(taskList, toAdd)));
+                    try {
+                        toAdd = Todo.fromCmd(cmd_args);
+                        System.out.println(formatReply(addTaskMessage(taskList, toAdd)));
+                    } catch (DukeException e){
+                        System.out.println(formatReply(e.toString()));
+                    }
                     break;
 
                 case ("deadline"):
