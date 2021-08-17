@@ -1,7 +1,7 @@
-import jdk.jfr.Event;
+import java.util.ArrayList;
 
 public class DukeList {
-    private Task[] list = new Task[100];
+    private ArrayList<Task> list = new ArrayList<>();
     private int count = 0;
 
     public DukeList() {}
@@ -9,13 +9,13 @@ public class DukeList {
 
     private void displayTask(Task task) {
         String response = "Got it. I've added this task:\n";
-        String taskCount = "\nNow you have " + this.count + " tasks in the list";
+        String taskCount = "\nNow you have " + list.size() + " tasks in the list";
         System.out.println(response + task.toString() + taskCount);
     }
 
 
     public void add(String text) {
-        list[count] = new Task(text);
+        list.add(new Task(text));
         count += 1;
         System.out.println("added: " + text);
     }
@@ -29,7 +29,7 @@ public class DukeList {
         }
 
         ToDos input = new ToDos(message);
-        list[count] = input;
+        list.add(input);
         count += 1;
 
         displayTask(input);
@@ -42,7 +42,7 @@ public class DukeList {
         String limit = strings.length == 1 ? "" : strings[1];
 
         Deadlines input = new Deadlines(strings[0].trim(), limit);
-        list[count] = input;
+        list.add(input);
         count += 1;
 
         displayTask(input);
@@ -55,7 +55,7 @@ public class DukeList {
         String limit = strings.length == 1 ? "" : strings[1];
 
         Events input = new Events(strings[0].trim(), limit);
-        list[count] = input;
+        list.add(input);
         count += 1;
 
         displayTask(input);
@@ -64,14 +64,14 @@ public class DukeList {
 
     public void list() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < count; i++) {
-            System.out.println((i + 1) + "." + list[i].toString());
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println((i + 1) + "." + list.get(i).toString());
         }
     }
 
 
     public void done(int item) {
-        Task task = list[item - 1];
+        Task task = list.get(item - 1);
         task.done();
 
         String response = "Nice! I've marked this task as done:\n";
