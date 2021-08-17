@@ -8,6 +8,7 @@ public class Duke {
     private static TaskList store = new TaskList();
 
     //subroutine for adding tasks to the collection of tasks
+    //shift this to TaskList.java in the future, KIV. I forgot when i initially created the class.
     public static void addTask(String descriptor) throws DukeException {
         if (descriptor.startsWith("todo")) {
             descriptor = descriptor.replaceFirst("todo", "");
@@ -49,6 +50,8 @@ public class Duke {
                 "░░░░░█────▀────█░░░░░\n" +
                 "░░░░░█────▀────█░░░░░\n");
         System.out.println("I'm Frosty, your personal task manager! How can I help?");
+        Storage storage = new Storage("frosty.txt");
+        storage.load(store);
 
         Scanner sc = new Scanner(System.in);
         String in = sc.nextLine();
@@ -93,7 +96,8 @@ public class Duke {
             in = sc.nextLine();
         }
 
-        //after executing "bye", we reach this point where we should save.
+        //after user keys in bye, save should happen here
+        storage.save(store);
         System.out.println("Have a Merry Christmas and a Happy New Year!");
     }
 }
