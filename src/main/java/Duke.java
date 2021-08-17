@@ -8,6 +8,7 @@ public class Duke {
     private final String MESSAGE_DONE = "Nice! (ᵔ.ᵔ) Task done:";
     private final String MESSAGE_LIST = "Here's your tasks!";
     private final String MESSAGE_ADD = "Nee added this task:";
+    private final String MESSAGE_DELETE = "Nee has deleted this task:";
 
     private final Scanner sc;
     private final ArrayList<Task> tasks;
@@ -33,13 +34,31 @@ public class Duke {
     }
 
     /**
+     * Deletes task and prints updated list of tasks.
+     * @param taskNum Task to be deleted.
+     * @throws TaskNotFoundException Invalid task number.
+     * @throws InvalidTaskException No task description given.
+     */
+    private void deleteTask(String taskNum) throws TaskNotFoundException, InvalidTaskException  {
+        int i = Integer.parseInt(taskNum);
+        if (i < 0 || i >= this.tasks.size()) {
+            throw new TaskNotFoundException();
+        }
+        Task task = this.tasks.get(i - 1);
+        this.tasks.remove(i - 1);
+        // Show number of tasks in list
+        String str = (tasks.size() > 1) ? " tasks in the list." : " task in the list.";
+        print(MESSAGE_DELETE + "\n  " + task + "\n" + "Nee has " + tasks.size() + str);
+    }
+
+    /**
      * Prints the list of tasks.
+     * @throws EmptyListException List has no tasks.
      */
     private void printTasks() throws EmptyListException {
         if (tasks.size() == 0) {
             throw new EmptyListException();
         }
-
         System.out.printf(BORDER + "\t" + MESSAGE_LIST + "\n");
         for (int i = 0; i < this.tasks.size(); i++) {
             System.out.println("\t" + (i + 1) + ".\t" + this.tasks.get(i));
@@ -64,7 +83,7 @@ public class Duke {
      */
     private void finishTask(String taskNum) throws TaskNotFoundException, InvalidTaskException {
         int i = Integer.parseInt(taskNum);
-        if (i < 0 || i > this.tasks.size()) {
+        if (i < 0 || i >= this.tasks.size()) {
             throw new TaskNotFoundException();
         }
         Task task = this.tasks.get(i - 1);
@@ -83,6 +102,9 @@ public class Duke {
         }
 
         String[] taskCommands = commands[1].split("/at");
+        if (taskCommands.length < 2) {
+            throw new InvalidTaskException();
+        }
         Task newTask = new Event(taskCommands[0].trim(), taskCommands[1].trim());
         addTask(newTask);
     }
@@ -97,6 +119,9 @@ public class Duke {
         }
 
         String[] taskCommands = commands[1].split("/by");
+        if (taskCommands.length < 2) {
+            throw new InvalidTaskException();
+        }
         Task newTask = new Deadline(taskCommands[0].trim(), taskCommands[1].trim());
         addTask(newTask);
     }
@@ -150,13 +175,19 @@ public class Duke {
                     case "todo":
                         addTodo(commands);
                         break;
+                    case "delete":
+                        if (commands.length < 2) {
+                            throw new InvalidTaskException();
+                        }
+                        deleteTask(commands[1]);
+                        break;
                     case "bye":
                         goodbye();
                         break;
                     default:
                         throw new UnknownCommandException();
                 }
-            } catch (UnknownCommandException | InvalidTaskException | TaskNotFoundException | EmptyListException e) {
+            } catch (DukeException e) {
                 print(e.getMessage());
             }
         }
