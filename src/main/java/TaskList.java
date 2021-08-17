@@ -14,6 +14,7 @@ public class TaskList {
 
     /**
      * Adds an item to the TaskList
+     * This method is for Level-3, and is not longer used w.e.f Level-4
      *
      * @param input the item to be added to the TaskList
      */
@@ -21,6 +22,43 @@ public class TaskList {
         Task task = new Task(input);
         this.list.add(task);
         System.out.println("    " + "added: " + input);
+    }
+
+    /**
+     * Adds an Event to the TaskList
+     *
+     * @param event event to be added to the TaskList
+     */
+    public void add(Event event) {
+        this.list.add(event);
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("       " + event);
+        System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+    }
+
+
+    /**
+     * Adds a deadline to the TaskList
+     *
+     * @param deadline deadline to be added to the TaskList
+     */
+    public void add(Deadline deadline) {
+        this.list.add(deadline);
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("       " + deadline);
+        System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+    }
+
+    /**
+     * Adds a toDo to the TaskList
+     *
+     * @param toDo deadline to be added to the TaskList
+     */
+    public void add(ToDo toDo) {
+        this.list.add(toDo);
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("       " + toDo);
+        System.out.printf("     Now you have %d tasks in the list.%n", list.size());
     }
 
     /**
@@ -37,9 +75,14 @@ public class TaskList {
      * Lists out the current items in the TaskList
      */
     public void listOut() {
-        System.out.println("     Here are the tasks in your list:");
-        for (int i = 0; i < this.list.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + this.list.get(i));
+        if (this.list.size() == 0) {
+            System.out.println("     You have no tasks in your list!");
+            System.out.println("     Try adding some tasks with todo, event or deadline");
+        } else {
+            System.out.println("     Here are the tasks in your list:");
+            for (int i = 0; i < this.list.size(); i++) {
+                System.out.println("     " + (i + 1) + "." + this.list.get(i));
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ public class Duke {
         end = true;
         while (end) {
             String text = scanner.nextLine();
-            String[] splitText = text.trim().split("\\s+");
+            String[] splitText = text.trim().split("\\s+", 2);
             System.out.println("    ____________________________________________________________\n");
             switch (splitText[0]) {
                 case "list":
@@ -31,12 +31,33 @@ public class Duke {
                         int index = Integer.parseInt(splitText[1]);
                         taskList.finishTask(index);
                     } catch (Exception e) {
-                        System.out.println("Error: The value you inputted is not valid!");
+                        System.out.println("    Error: The value you inputted is not valid!");
+                    }
+                    break;
+                case "todo":
+                    ToDo item = new ToDo(splitText[1]);
+                    taskList.add(item);
+                    break;
+                case "deadline":
+                    try {
+                        String[] furtherSplitDeadline = splitText[1].trim().split("/by");
+                        Deadline deadline = new Deadline(furtherSplitDeadline[0], furtherSplitDeadline[1]);
+                        taskList.add(deadline);
+                    } catch (Exception e) {
+                        System.out.println("    Error: Use /by to add a deadline!");
+                    }
+                    break;
+                case "event":
+                    try {
+                        String[] furtherSplitEvent = splitText[1].trim().split("/at");
+                        Event event = new Event(furtherSplitEvent[0], furtherSplitEvent[1]);
+                        taskList.add(event);
+                    } catch (Exception e) {
+                        System.out.println("    Error: Use /at to add a timing for the event!");
                     }
                     break;
                 default:
-                    taskList.add(text);
-                    break;
+                    System.out.println("    Error: use a valid command!");
             }
             System.out.println("    ____________________________________________________________\n");
         }
