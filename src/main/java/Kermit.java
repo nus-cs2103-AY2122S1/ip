@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.StringBuilder;
 
 public class Kermit {
     /**
@@ -13,6 +14,7 @@ public class Kermit {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String command = "";
+        StringBuilder strBuilder = new StringBuilder();
 
         ToDo list = new ToDo();
 
@@ -24,8 +26,16 @@ public class Kermit {
         System.out.println(formatText(introductionText));
 
         while (true) {
-            command = sc.nextLine();
-            String[] commandArr = command.split(" ");
+            String[] commandArr = sc.nextLine().split(" ");
+            // first item is command
+            command = commandArr[0];
+
+            // Clear contents of stringBuilder
+            strBuilder.setLength(0);
+            for (int i = 1; i < commandArr.length; i++) {
+                strBuilder.append(commandArr[i]);
+            }
+
             // Quit program
             if (command.equals("bye")) {
                 System.out.println(formatText(goodbyeText));
@@ -35,7 +45,7 @@ public class Kermit {
                 System.out.println(formatText(listText + "\n" + list.toString()));
             // Add objects to list
             } else if (commandArr[0].equals("done")){
-                int index = Integer.parseInt(commandArr[1]) - 1;
+                int index = Integer.parseInt(strBuilder.toString()) - 1;
                 // Get task name
                 String taskText = list.completeTask(index);
                 System.out.println(formatText(completeTaskText + "\n" + taskText));
