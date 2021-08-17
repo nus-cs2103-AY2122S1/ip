@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String LINE = "-------------------------------------------------------";
-    private static final String[] tasks = new String[100];
+    private static final Task[] tasks = new Task[100];
     private static int nextIndex = 0;
 
     public static void main(String[] args) {
@@ -28,21 +28,31 @@ public class Duke {
     }
 
     private static void processInput(String msg) {
-        if (msg.equals("list")) {
-            StringBuilder listOfTasks = new StringBuilder();
-            if (nextIndex == 0) {
-                listOfTasks = new StringBuilder("There are no tasks currently.");
-            } else {
-                for (int i = 0; i < nextIndex; i++) {
-                    String newTask = i + 1 + ". " + tasks[i] + "\n";
-                    listOfTasks.append(newTask);
+        String[] commands = msg.split(" ");
+
+        switch (commands[0]) {
+            case "list":
+                StringBuilder listOfTasks = new StringBuilder();
+                if (nextIndex == 0) {
+                    listOfTasks = new StringBuilder("There are no tasks currently.");
+                } else {
+                    for (int i = 0; i < nextIndex; i++) {
+                        String newTask = (i + 1) + ". " + tasks[i] + "\n";
+                        listOfTasks.append(newTask);
+                    }
                 }
-            }
-            printWithLines(listOfTasks.toString());
-        } else {
-            tasks[nextIndex] = msg;
-            nextIndex++;
-            printWithLines("added: " + msg);
+                printWithLines(listOfTasks.toString());
+                break;
+            case "done":
+                int index = Integer.parseInt(commands[1]) - 1;
+                tasks[index].markAsDone();
+                printWithLines("Great job on completing this task!\n" + tasks[index].toString());
+                break;
+            default:
+                tasks[nextIndex] = new Task(msg);
+                nextIndex++;
+                printWithLines("added: " + msg);
+                break;
         }
     }
 }
