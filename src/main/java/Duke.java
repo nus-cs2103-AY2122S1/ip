@@ -14,9 +14,21 @@ public class Duke {
         String s = in.nextLine();
 
         while (!s.equals("bye")) {
-            System.out.println("---------");
-            System.out.println(s);
-            System.out.println("---------");
+            if (s.equals("list")) {
+                int index = 1;
+                System.out.println("---------");
+                for (String item : list) {
+                    System.out.println(index + ". " + item);
+                    index++;
+                }
+                System.out.println("---------");
+            } else {
+                System.out.println("---------");
+                list.add(s);
+                System.out.println("added: " + s);
+                System.out.println("---------");
+            }
+
             s = in.nextLine();
         }
 
