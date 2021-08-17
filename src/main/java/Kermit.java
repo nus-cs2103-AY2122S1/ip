@@ -60,7 +60,9 @@ public class Kermit {
                 case "todo":
                     Task newTask = new ToDos(strBuilder.toString());
                     list.add(newTask);
-                    System.out.println(formatText("Got it. I've added this task:\n" + newTask +"\nNow you have " + list.size() + " tasks in the list."));
+                    System.out.println(formatText(
+                            "Got it. I've added this task:\n"
+                                    + newTask +"\nNow you have " + list.size() + " tasks in the list."));
                     break;
                 default:
                     System.out.println(formatText("This is an invalid command"));
