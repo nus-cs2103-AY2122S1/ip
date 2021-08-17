@@ -10,4 +10,13 @@ public class Printer {
     public static void prettyPrint(String content) {
         System.out.printf("\t%s\n\t%s\n\t%s\n%n", divider, content, divider);
     }
+
+    public static String listTask(String[] tasks) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < tasks.length - 1; i++) {
+            if (tasks[i] != null)
+                result.append("\t ").append(i + 1).append(".").append(tasks[i]).append("\n");
+        }
+        return result.toString();
+    }
 }
