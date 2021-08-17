@@ -15,7 +15,7 @@ public class Duke {
 
     private final static int MAX_STORAGE = 100;
 
-    private final static List<String> TODO_LIST = new ArrayList<>();
+    private final static List<Task> TODO_LIST = new ArrayList<>();
 
     private final static Scanner SCANNER = new Scanner(System.in);
 
@@ -64,8 +64,9 @@ public class Duke {
             return;
         }
 
-        TODO_LIST.add(action);
-        echo("added: ".concat(action));
+        Task newTask = new Task(action);
+        TODO_LIST.add(newTask);
+        echo("added: ".concat(newTask.getAction()));
     }
 
     public static void displayList() {
@@ -77,10 +78,10 @@ public class Duke {
         StringBuilder listStringBuilder = new StringBuilder();
         String newline = "\n\t";
         for (int idx = 0; idx < TODO_LIST.size(); idx ++) {
-            String action = TODO_LIST.get(idx);
+            Task task = TODO_LIST.get(idx);
             listStringBuilder.append(idx);
             listStringBuilder.append(". ");
-            listStringBuilder.append(action);
+            listStringBuilder.append(task.toString());
             listStringBuilder.append(newline);
         }
 
