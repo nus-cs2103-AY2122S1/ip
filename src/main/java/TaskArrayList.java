@@ -26,9 +26,17 @@ public class TaskArrayList extends ArrayList<Task> {
         }
         return out;
     }
-    public String markDone(int index){
+
+    public String markDone(String[] cmd_args) throws DukeException{
+        if (cmd_args.length != 2 || !cmd_args[1].matches("[0-9]+")){
+            throw new DukeException("done takes exactly one integer as argument.");
+        }
+        return markDone(Integer.parseInt(cmd_args[1]));
+    }
+
+    public String markDone(int index) throws DukeException{
         if (index > this.size()){
-            return String.format("task %d not found",index);
+            throw new DukeException(String.format("task %d not found",index));
         }
         this.get(index-1).markDone();
         return "Nice! I've marked this task as done:\n"+

@@ -51,7 +51,7 @@ public class Duke {
             // if no arguments, length will be 1
             // if arguments, length will be 2
             String[] cmd_args = userInput.split(" ",2);
-            Task toAdd = null;
+            Task toAdd;
 
             // switch case to split by command
             switch (cmd_args[0]) {
@@ -73,16 +73,12 @@ public class Duke {
                     break;
 
                 case ("done"):
-                    if (cmd_args.length != 2){
-                        System.out.println(formatReply("☹ OOPS!!! done takes exactly one argument."));
-                        break;
+                    try {
+                        String reply = taskList.markDone(cmd_args);
+                        System.out.println(formatReply(reply));
+                    } catch (DukeException e) {
+                        System.out.println(formatReply(e.toString()));
                     }
-                    if (!cmd_args[1].matches("[0-9]+")){
-                        System.out.println(formatReply("☹ OOPS!!! argument for done must be exactly one integer."));
-                        break;
-                    }
-                    String reply = taskList.markDone(Integer.parseInt(cmd_args[1]));
-                    System.out.println(formatReply(reply));
                     break;
 
                 case ("todo"):
