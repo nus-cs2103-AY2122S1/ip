@@ -1,13 +1,11 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 //automated testing script closes super fast; still have to manually run the final FC command in terminal
 //managed to fix the issue with FC not being found however. Git push issues also fixed.
 
 //most obvious uncaught exceptions are incorrect delete/done commands. fix in the future.
 public class Duke {
-    private static ArrayList<Task> store = new ArrayList<>();
-    private static int index = 0;
+    private static TaskList store = new TaskList();
 
     //subroutine for adding tasks to the collection of tasks
     public static void addTask(String descriptor) throws DukeException {
@@ -50,7 +48,7 @@ public class Duke {
                 "░░░░▀▄▒▒▒▒▒▒▒▒▒▄▀░░░░\n" +
                 "░░░░░█────▀────█░░░░░\n" +
                 "░░░░░█────▀────█░░░░░\n");
-        System.out.println("I'm Frosty! How can I help?");
+        System.out.println("I'm Frosty, your personal task manager! How can I help?");
 
         Scanner sc = new Scanner(System.in);
         String in = sc.nextLine();
@@ -90,11 +88,12 @@ public class Duke {
                     System.out.println("Sorry! I can't understand the index for your delete command");
                 }
             } else {
-                System.out.println("Sorry! I don't know what your request means...");
+                System.out.println("Sorry! I don't know what your request means. Please try again?");
             }
             in = sc.nextLine();
         }
 
+        //after executing "bye", we reach this point where we should save.
         System.out.println("Have a Merry Christmas and a Happy New Year!");
     }
 }
