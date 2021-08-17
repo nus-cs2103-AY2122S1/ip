@@ -3,4 +3,6 @@ list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
+delete 3
+list
 bye

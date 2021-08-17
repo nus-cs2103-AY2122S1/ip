@@ -14,6 +14,9 @@ public class Duke {
             } else if (input.substring(0,Math.min(input.length(),5)).equals("done ")) {
                 String index = input.split(" ", 2)[1];
                 System.out.println(doTask(index, lst));
+            } else if (input.substring(0,Math.min(input.length(),7)).equals("delete ")) {
+                String index = input.split(" ", 2)[1];
+                System.out.println(deleteTask(index, lst));
             } else {
                 System.out.println(addList(input, lst));
             }
@@ -87,7 +90,6 @@ public class Duke {
      * @param lst the list containing all tasks
      * @return a string showing the added task and number of tasks
      */
-
     public static String addList(String input, ArrayList<Task> lst) {
         ArrayList<String> validType = new ArrayList<>(
                 Arrays.asList("deadline", "event", "todo"));
@@ -126,6 +128,28 @@ public class Duke {
         return output;
     }
 
+
+    public static String deleteTask(String index, ArrayList<Task> lst) {
+        int idx;
+        try {
+            idx = Integer.parseInt(index);
+            lst.get(idx - 1);
+        } catch (NumberFormatException nfe) {
+            return "Please check the format of the index.";
+        } catch (IndexOutOfBoundsException e) {
+            return "The task does not exist in task list.";
+        }
+
+        Task currTask = lst.get(idx - 1);
+        lst.remove(currTask);
+
+        String output = "    ____________________________________________________________\n"
+                + "     Noted. I've removed this task: \n"
+                + "      " + currTask.toString() + "\n"
+                + "     Now you have " + lst.size() +" tasks in the list. \n"
+                + "    ____________________________________________________________\n";
+        return output;
+    }
     /**
      * return the goodbye message
      * @return a string containing the goodbye message
