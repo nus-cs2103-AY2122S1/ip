@@ -54,7 +54,11 @@ public class Duke {
                             System.out.println("    " + storage[taskNumber - 1]);
                         }}
                     } else if (storageCount < 100) {
-                        addTask(splitInput);
+                        try {
+                            addTask(splitInput);
+                        } catch (DukeException e) {
+                            System.out.println(e.getMessage());
+                        }
                     } else {
                         System.out.println("Maximum storage size reached.");
                     }
@@ -71,21 +75,25 @@ public class Duke {
         String preposition = null; // eg. at, by, etc
         StringBuilder dateBuilder = new StringBuilder();
         if (splitInput == null || splitInput.length < 2) {
-            System.out.println("Invalid input. Please enter the action, followed by \"/at\" or \"/by\".");
-            System.out.println("For example: todo Buy a gift for mum");
-            System.out.println("For example: deadline CS2103T individual project /by 19 August");
-            System.out.println("For example: event CS2103T lecture /at 19 August");
-            return;
+            throw new DukeException("Invalid input. Please enter the action, followed by \"/at\" or \"/by\".\n" +
+                    "For example: todo Buy a gift for mum\n" +
+                    "For example: deadline CS2103T individual project /by 19 August\n" +
+                    "For example: event CS2103T lecture /at 19 August");
         }
         action = splitInput[0];
         for (int i = 1; i < splitInput.length; i++) {
-            if (splitInput[i].contains("/")) {
-                preposition = splitInput[i].substring(1);
-            } else if (preposition == null) { // Left part of the message
-                descriptionBuilder.append(splitInput[i]).append(" ");
+            if (preposition == null) {
+                if (splitInput[i].contains("/")) {
+                    preposition = splitInput[i].substring(1);
+                } else {
+                    descriptionBuilder.append(splitInput[i]).append(" ");
+                }
             } else {
                 dateBuilder.append(splitInput[i]).append(" ");
             }
+        }
+        if (descriptionBuilder.length() == 0) {
+            throw new DukeException("Missing task description.");
         }
         Task newTask;
         switch (action) {
@@ -94,27 +102,22 @@ public class Duke {
                 break;
             case "event":
                 if (preposition == null || !preposition.equals("at")) {
-                    System.out.println("Use the preposition \"at\".");
-                    return;
+                    throw new DukeException("Use the preposition \"at\".");
                 } else if (dateBuilder.length() == 0) {
-                    System.out.println("Enter the date of the event.");
-                    return;
+                    throw new DukeException("Enter the date of the event.");
                 }
                 newTask = new Event(descriptionBuilder.toString().trim(), dateBuilder.toString().trim());
                 break;
             case "deadline":
                 if (preposition == null || !preposition.equals("by")) {
-                    System.out.println("Use the preposition \"by\".");
-                    return;
+                    throw new DukeException("Use the preposition \"by\".");
                 } else if (dateBuilder.length() == 0) {
-                    System.out.println("Enter the deadline.");
-                    return;
+                    throw new DukeException("Enter the deadline.");
                 }
                 newTask = new Deadline(descriptionBuilder.toString().trim(), dateBuilder.toString().trim());
                 break;
             default:
-                System.out.println("Only todo, event or deadline allowed.");
-                return;
+                throw new DukeException("Only todo, event or deadline allowed.");
         }
         storage[storageCount++] = newTask;
         System.out.println("Got it. I have added this task:");

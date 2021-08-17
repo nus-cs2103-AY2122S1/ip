@@ -28,24 +28,26 @@ Now you have 4 tasks in the list
 3: [T][ ] Wash laundry
 4: [D][ ] CS2103T Project (by: 19 August 2359)
 ------------------
-Only todo, event or deadline allowed.
+? OOPS!!! Only todo, event or deadline allowed.
 ------------------
-Invalid input. Please enter the action, followed by "/at" or "/by".
+? OOPS!!! Invalid input. Please enter the action, followed by "/at" or "/by".
 For example: todo Buy a gift for mum
 For example: deadline CS2103T individual project /by 19 August
 For example: event CS2103T lecture /at 19 August
 ------------------
-Use the preposition "by".
+? OOPS!!! Use the preposition "by".
 ------------------
-Use the preposition "at".
+? OOPS!!! Missing task description.
 ------------------
-Use the preposition "by".
+? OOPS!!! Use the preposition "at".
+------------------
+? OOPS!!! Use the preposition "by".
 ------------------
 Got it. I have added this task:
     [E][ ] Job Interview (at: Tuesday)
 Now you have 5 tasks in the list
 ------------------
-Enter the deadline.
+? OOPS!!! Enter the deadline.
 ------------------
 Got it. I have added this task:
     [D][ ] Prepare presentation (by: 21 August)

@@ -6,6 +6,7 @@ list
 do this thing
 todo
 deadline Art Project
+deadline /by 20 October
 event Concert /by 19 August
 deadline hello
 event Job Interview /at Tuesday
