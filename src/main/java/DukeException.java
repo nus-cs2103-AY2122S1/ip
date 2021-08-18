@@ -1,5 +1,5 @@
 /**
- * DukeException is a runtime exception for exceptions generated during adding tasks.
+ * DukeException is a runtime exception for exceptions generated due to invalid inputs or problems adding tasks.
  */
 public class DukeException extends RuntimeException{
     public DukeException(String message) {
@@ -8,6 +8,6 @@ public class DukeException extends RuntimeException{
 
     @Override
     public String getMessage() {
-        return "☹ OOPS!!! " + super.getMessage();
+        return ":'( OOPS!!! " + super.getMessage();
     }
 }

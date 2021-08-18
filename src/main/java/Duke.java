@@ -5,80 +5,6 @@ public class Duke {
     private static ArrayList<Task> storage = new ArrayList<>();
     private static int storageCount = 0;
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello, I am\n" + logo);
-        System.out.println("What can I do for you today?");
-        System.out.println("------------------");
-        String input;
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()) {
-            input = sc.nextLine();
-            switch (input) {
-                case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
-                    return;
-                case "list":
-                    for (int i = 1; i <= storageCount; i++) {
-                        Task task = storage.get(i - 1);
-                        String leadingSpace = " ".repeat((int) Math.log10(storageCount) - (int) Math.log10(i));
-                        // For better formatting if numbers exceed 9
-                        System.out.printf("%s%d: %s\n", leadingSpace, i, task);
-                    }
-                    System.out.println("------------------");
-                    break;
-                default:
-                    String[] splitInput = input.split(" ");
-                    if (splitInput[0].equals("done") || splitInput[0].equals("delete")) {
-                        int taskNumber;
-                        if (splitInput.length != 2) {
-                            System.out.printf("Please key in %s [number].\n", splitInput[0]);
-                        } else {
-                            try {
-                                taskNumber = Integer.parseInt(splitInput[1]);
-                                if (taskNumber < 1 || taskNumber > storageCount) {
-                                    throw new NumberFormatException();
-                                }
-                            } catch (NumberFormatException e) {
-                                System.out.println("Invalid number");
-                                System.out.println("------------------");
-                                continue;
-                            }
-                            if (splitInput[0].equals("done")) {
-                                if (storage.get(taskNumber - 1).markAsDone()) {
-                                    System.out.println("Nice! I've marked this task as done: ");
-                                    System.out.println("    " + storage.get(taskNumber - 1));
-                                } else {
-                                    System.out.println("You have already marked this as done.");
-                                }
-                            } else { // first word is delete
-                                Task task = storage.remove(taskNumber - 1);
-                                storageCount--;
-                                System.out.println("Noted. I've removed this task:");
-                                System.out.println("    " + task);
-                                printNumberOfTasks();
-                            }
-                        }
-                    } else if (storageCount < 100) {
-                        try {
-                            addTask(splitInput);
-                        } catch (DukeException e) {
-                            System.out.println(e.getMessage());
-                        }
-                    } else {
-                        System.out.println("Maximum storage size reached.");
-                    }
-                    System.out.println("------------------");
-            }
-        }
-
-        sc.close();
-    }
-
     private static void addTask(String[] splitInput) {
         String action;
         StringBuilder descriptionBuilder = new StringBuilder();
@@ -139,4 +65,94 @@ public class Duke {
         System.out.println("Now you have " + storageCount + " task"
                 + (storageCount <= 1 ? " in the list" : "s in the list"));
     }
+
+    /**
+     * Processes the input and prints the responses, or throw a DukeException if input is wrong.
+     *
+     * @param input The input from the user
+     * @return true only if a command ("bye") to shut down the chat is given
+     */
+    private static boolean processInput(String input) {
+        switch (input) {
+            case "bye":
+                System.out.println("Bye. Hope to see you again soon!");
+                return true;
+            case "list":
+                for (int i = 1; i <= storageCount; i++) {
+                    Task task = storage.get(i - 1);
+                    String leadingSpace = " ".repeat((int) Math.log10(storageCount) - (int) Math.log10(i));
+                    // For better formatting if numbers exceed 9
+                    System.out.printf("%s%d: %s\n", leadingSpace, i, task);
+                }
+                break;
+            default:
+                String[] splitInput = input.split(" ");
+                if (splitInput[0].equals("done") || splitInput[0].equals("delete")) {
+                    int taskNumber;
+                    if (splitInput.length != 2) {
+                        System.out.printf("Please key in %s [number].\n", splitInput[0]);
+                    } else {
+                        try {
+                            taskNumber = Integer.parseInt(splitInput[1]);
+                            if (taskNumber < 1 || taskNumber > storageCount) {
+                                throw new DukeException(storageCount > 1
+                                        ? "Please input a value between 1 and " + storageCount
+                                        : storageCount == 1
+                                        ? "You can only input the value 1"
+                                        : "There are no tasks so far");
+                            }
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("Please enter a number after " + splitInput[0]);
+                        }
+                        if (splitInput[0].equals("done")) {
+                            if (storage.get(taskNumber - 1).markAsDone()) {
+                                System.out.println("Nice! I've marked this task as done: ");
+                                System.out.println("    " + storage.get(taskNumber - 1));
+                            } else {
+                                throw new DukeException("You have already marked this as done");
+                            }
+                        } else { // first word is delete
+                            Task task = storage.remove(taskNumber - 1);
+                            storageCount--;
+                            System.out.println("Noted. I've removed this task:");
+                            System.out.println("    " + task);
+                            printNumberOfTasks();
+                        }
+                    }
+                } else if (storageCount < 100) {
+                    addTask(splitInput);
+                } else {
+                    throw new DukeException("Maximum storage size reached.");
+                }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello, I am\n" + logo);
+        System.out.println("What can I do for you today?");
+        System.out.println("------------------");
+        String input;
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            input = sc.nextLine();
+            try {
+                if (processInput(input)) {
+                    return;
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
+            System.out.println("------------------");
+        }
+
+        sc.close();
+    }
+
+
 }

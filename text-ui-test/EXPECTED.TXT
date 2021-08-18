@@ -15,7 +15,7 @@ Noted. I've removed this task:
     [T][ ] Buy Milk
 Now you have 0 task in the list
 ------------------
-Invalid number
+:'( OOPS!!! There are no tasks so far
 ------------------
 Got it. I have added this task:
     [E][ ] Townhall (at: Friday 2.30pm)
@@ -33,26 +33,26 @@ Now you have 3 tasks in the list
 2: [T][ ] Wash laundry
 3: [D][ ] CS2103T Project (by: 19 August 2359)
 ------------------
-? OOPS!!! Only todo, event or deadline allowed.
+:'( OOPS!!! Only todo, event or deadline allowed.
 ------------------
-? OOPS!!! Invalid input. Please enter the action, followed by "/at" or "/by".
+:'( OOPS!!! Invalid input. Please enter the action, followed by "/at" or "/by".
 For example: todo Buy a gift for mum
 For example: deadline CS2103T individual project /by 19 August
 For example: event CS2103T lecture /at 19 August
 ------------------
-? OOPS!!! Use the preposition "by".
+:'( OOPS!!! Use the preposition "by".
 ------------------
-? OOPS!!! Missing task description.
+:'( OOPS!!! Missing task description.
 ------------------
-? OOPS!!! Use the preposition "at".
+:'( OOPS!!! Use the preposition "at".
 ------------------
-? OOPS!!! Use the preposition "by".
+:'( OOPS!!! Use the preposition "by".
 ------------------
 Got it. I have added this task:
     [E][ ] Job Interview (at: Tuesday)
 Now you have 4 tasks in the list
 ------------------
-? OOPS!!! Enter the deadline.
+:'( OOPS!!! Enter the deadline.
 ------------------
 Got it. I have added this task:
     [D][ ] Prepare presentation (by: 21 August)
@@ -81,7 +81,7 @@ Now you have 10 tasks in the list
 Nice! I've marked this task as done: 
     [T][X] Wash laundry
 ------------------
-You have already marked this as done.
+:'( OOPS!!! You have already marked this as done
 ------------------
 Nice! I've marked this task as done: 
     [E][X] Sleep (at: 2am)
