@@ -40,17 +40,28 @@ Here are the tasks in your list:
 
 -------------------------------------------------------
 -------------------------------------------------------
-Got it. I've added this task:
-  [ ] play games
-Now you have 4 tasks in the list.
+OOPS!!! The description of a todo cannot be empty.
 -------------------------------------------------------
 -------------------------------------------------------
-Here are the tasks in your list:
-1. [T][X] borrow book
-2. [D][X] return book (by: Sunday)
-3. [E][ ] project meeting (at: Mon 2-4pm)
-4. [ ] play games
-
+OOPS!!! Please enter your deadline in this format:
+deadline <description> /by <date/time>
+-------------------------------------------------------
+-------------------------------------------------------
+OOPS!!! Please enter your event in this format:
+event <description> /at <date/time>
+-------------------------------------------------------
+-------------------------------------------------------
+OOPS!!! Please remove words after "list"
+-------------------------------------------------------
+-------------------------------------------------------
+OOPS!!! Please enter in this format:
+done <integer>
+-------------------------------------------------------
+-------------------------------------------------------
+OOPS!!! Task 101 does not exist.
+-------------------------------------------------------
+-------------------------------------------------------
+OOPS!!! I'm sorry, but I don't know what that means :(
 -------------------------------------------------------
 -------------------------------------------------------
 Bye. Hope to see you again soon!

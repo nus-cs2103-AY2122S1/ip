@@ -5,6 +5,11 @@ list
 done 2
 done 1
 list
-play games
-list
+todo
+deadline
+event
+list blah
+done
+done 101
+blah
 bye
