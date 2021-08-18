@@ -10,6 +10,7 @@ class Duke {
     private static final String CMD_TODO = "todo";
     private static final String CMD_DDL = "deadline";
     private static final String CMD_EVENT = "event";
+    private static final String CMD_DEL = "delete";
 
     // static fields
     private static List<Task> tasks = new ArrayList<>();
@@ -43,7 +44,7 @@ class Duke {
     }
 
     private static void markAsDone(int id) throws IndexOutOfBoundsException {
-        if (id >= tasks.size()) {
+        if (id > tasks.size()) {
             throw new IndexOutOfBoundsException("Do not have such a task in the list.");
         }
 
@@ -51,6 +52,18 @@ class Duke {
 
         System.out.println("\tNice! I've marked this task as done: ");
         System.out.println("\t  " + tasks.get(id-1));
+    }
+
+    private static void deleteTask(int id) throws IndexOutOfBoundsException {
+        if (id > tasks.size()) {
+            throw new IndexOutOfBoundsException("Do not have such a task in the list.");
+        }
+
+        Task currTask = tasks.remove(id-1);
+
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t  " + currTask);
+        System.out.println(String.format("\tNow you have %d tasks in the list.", tasks.size()));
     }
 
     public static void main(String[] args) {
@@ -71,6 +84,10 @@ class Duke {
                 case CMD_DONE:
                     int doneId = Integer.parseInt(currLine.split(" ")[1]);
                     markAsDone(doneId);
+                    break;
+                case CMD_DEL:
+                    int delId = Integer.parseInt(currLine.split(" ")[1]);
+                    deleteTask(delId);
                     break;
                 case CMD_TODO:
                     if (currLine.length() <= 4 || currLine.substring(5).strip().equals("")) {
