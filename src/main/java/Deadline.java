@@ -3,8 +3,8 @@ public class Deadline extends Task{
     private String deadline;
 
     public Deadline(String task) {
-        super(task.split(" /")[0]);
-        this.deadline = task .split(" /")[1].substring(3);
+        super(task.split(" /by ")[0]);
+        this.deadline = task .split(" /by ")[1];
     }
 
     @Override

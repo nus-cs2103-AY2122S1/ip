@@ -16,6 +16,17 @@
 [34mWhoBot > [0mWhat can I do for you?
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
+[34mWhoBot > [0mThese are the list of commands you can give me:
+			 1. list -> Prints out the List of Tasks.
+			 2. todo [#description] -> Adds a ToDo Task to the List
+			 3. event #description /at #timing -> Adds an Event Task to the List
+			 4. deadline #description /by #deadline -> Adds a Deadline Task to the List
+			 5. delete #index -> Delete Task at #index in the List
+			 6. done #index -> Marks Task at #index in the List as completed
+			 7. undo #index -> Marks Task at #index in the List as incomplete
+			 8. bye/goodbye -> Quits the ChatBot
+[36m________________________________________________________________________________________________________________[0m
+[35m> [0m[36m________________________________________________________________________________________________________________[0m
 [34mWhoBot > [0mI have added this Deadline Task to the list: "[D] Return Books to Library (by: Sunday)"
 [34mWhoBot > [0mYou now have 1 task(s) in the list.
 [36m________________________________________________________________________________________________________________[0m
@@ -58,21 +69,22 @@
 			3. [E] [X] Team Meeting (at: Saturday 2-4pm)
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
-[34mWhoBot > [0mAre you sure you want to remove this task: "[T] Get New Books" ? (Yes/No)
+[34mWhoBot > [31mOops, That's an invalid command. Type in help to get list of possible commands.[0m
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
-[34mWhoBot > [0mI have removed this task from the list: "[T] Get New Books"
-[34mWhoBot > [0mYou now have 2 task(s) in the list.
+[34mWhoBot > [31mOops, That's an invalid command. Type in help to get list of possible commands.[0m
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
-[34mWhoBot > [0mAre you sure you want to remove this task: "[D] Return Books to Library (by: Sunday)" ? (Yes/No)
+[34mWhoBot > [31mOops, That's an invalid command. Type in help to get list of possible commands.[0m
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
-[34mWhoBot > [0mThe deletion has been cancelled.
+[34mWhoBot > [31mOops, That's an invalid command. Type in help to get list of possible commands.[0m
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
 [34mWhoBot > [0mThe tasks in your list are:
-			1. [E] [X] Team Meeting (at: Saturday 2-4pm)
+			1. [D] [ ] Return Books to Library (by: Sunday)
+			2. [T] [ ] Get New Books
+			3. [E] [X] Team Meeting (at: Saturday 2-4pm)
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
 [36m________________________________________________________________________________________________________________[0m

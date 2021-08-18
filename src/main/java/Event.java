@@ -3,8 +3,8 @@ public class Event extends Task {
     private final String timing;
 
     public Event(String task) {
-        super(task.split(" /")[0]);
-        this.timing = task .split(" /")[1].substring(3);
+        super(task.split(" /at ")[0]);
+        this.timing = task .split(" /at ")[1];
     }
 
     @Override

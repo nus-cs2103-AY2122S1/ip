@@ -1,3 +1,4 @@
+help
 deadline Return Books to Library /by Sunday
 list
 todo Get New Books
