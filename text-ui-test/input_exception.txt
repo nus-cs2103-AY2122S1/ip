@@ -1,0 +1,15 @@
+junk
+blegh
+done 2
+list
+todo create errors
+done 4
+done -3
+event test /at 3
+event
+event test /at
+event /at run
+deadline
+deadline test /by
+deadline /by 4
+bye
