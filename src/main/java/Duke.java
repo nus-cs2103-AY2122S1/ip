@@ -61,8 +61,11 @@ public class Duke {
         displayAddedTask(newEvent);
     }
 
-    private static void addTodo(String userInput) {
+    private static void addTodo(String userInput) throws DukeException {
         List<String>  inputArray = Arrays.asList(userInput.split(" "));
+        if (inputArray.size() <= 1) {
+            throw new DukeException("todo");
+        }
         ArrayList<String> descriptionArray =  new ArrayList<String>(inputArray);
         descriptionArray.remove(0);
         String description = String.join(" ",descriptionArray);
@@ -80,37 +83,45 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         while (true) {
-            String userInput = sc.nextLine();
-            if (userInput.equals("bye")) {
+            try {
+                String userInput = sc.nextLine();
+                if (userInput.equals("bye")) {
+                    lineSpacing();
+                    System.out.println("Bye. Hope to see you again soon!");
+                    lineSpacing();
+                    break;
+                }
+
+                if (userInput.equals("list")) {
+                    printList();
+                    continue;
+                }
+
+                if (userInput.startsWith("done")) {
+                    doneTask(userInput);
+                    continue;
+                }
+
+                if (userInput.startsWith("deadline")) {
+                    addDeadline(userInput);
+                    continue;
+                }
+
+                if (userInput.startsWith("event")) {
+                    addEvent(userInput);
+                    continue;
+                }
+
+                if (userInput.startsWith(("todo"))) {
+                    addTodo(userInput);
+                    continue;
+                }
+
+                throw new DukeException("unknown command");
+            } catch (DukeException e) {
                 lineSpacing();
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println(e);
                 lineSpacing();
-                break;
-            }
-
-           if (userInput.equals("list")) {
-                printList();
-                continue;
-            }
-
-           if (userInput.startsWith("done ")) {
-               doneTask(userInput);
-               continue;
-           }
-
-           if (userInput.startsWith("deadline ")) {
-               addDeadline(userInput);
-               continue;
-           }
-
-            if (userInput.startsWith("event ")) {
-                addEvent(userInput);
-                continue;
-            }
-
-            if (userInput.startsWith(("todo "))) {
-                addTodo(userInput);
-                continue;
             }
         }
     }
