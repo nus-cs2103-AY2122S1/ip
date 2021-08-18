@@ -35,6 +35,10 @@ public class Duke {
         return str.startsWith("todo") || str.startsWith("deadline") || str.startsWith("event");
     }
 
+    private static boolean isEditingTask(String str) {
+        return str.startsWith("delete") || str.startsWith("done");
+    }
+
     private static void addTask(String command, String[] args) {
         switch (command) {
             case "todo":
@@ -71,10 +75,10 @@ public class Duke {
             } else if (input.equals("list")) {
                 //print list of tasks
                 System.out.println(list.toString());
-            } else if (input.startsWith("done")) {
+            } else if (isEditingTask(input)) {
                 //mark task as done
                 try {
-                    list.done(split);
+                    list.editTask(split);
                 } catch (DukeException e) {
                     e.print();
                 }
