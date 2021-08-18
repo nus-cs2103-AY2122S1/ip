@@ -12,8 +12,12 @@ public class Duke {
     private static final String TODO_NO_DESC = "OOPS!!! The description of a todo cannot be empty.";
     private static final String DEADLINE_NO_INFO = "OOPS!!! A deadline must have a description and datetime.";
     private static final String UNRECOG = "OOPS!!! I'm sorry, this is an unrecognised command.";
+
+    private ArrayList<Task> dataStore;
     
-    public Duke() {}
+    public Duke() {
+        dataStore = new ArrayList<Task>();
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -25,8 +29,6 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-
-        ArrayList<Task> dataStore = new ArrayList<Task>();
 
         Duke duke = new Duke();
         
@@ -41,13 +43,19 @@ public class Duke {
             }
 
             try {
-                duke.mainLogic(input, dataStore);
+                duke.mainLogic(input);
             } catch (BotException err) {
                 System.out.println(err);
             }
         }
     }
 
+    /**
+     * Throws exceptions when unexpected inputs are passed in to the chatbot.
+     * 
+     * @param input the user query from Scanner
+     * @throws BotException
+     */
     public void errorHandler(String input) throws BotException {
         if (input.equals("todo")) {
             throw new BotException(TODO_NO_DESC);
@@ -56,9 +64,15 @@ public class Duke {
         } 
     }
 
-    public void mainLogic(String input, ArrayList<Task> dataStore) throws BotException {
+    /**
+     * Handles the main business logic of the chatbot. 
+     * 
+     * @param input the user query from Scanner
+     * @throws BotException
+     */
+    public void mainLogic(String input) throws BotException {
         errorHandler(input);
-        
+
         if (input.contains("todo")) {
             ToDo todo = new ToDo(input);
             dataStore.add(todo);
