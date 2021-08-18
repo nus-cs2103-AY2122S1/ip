@@ -1,18 +1,19 @@
+import java.util.ArrayList;
+
 /**
  * The TaskList class encapsulates a List of Tasks.
  */
 public class TaskList {
     /** An array of Tasks to note all the Tasks stored in the TaskList. */
-    private Task[] allTasks;
+    private ArrayList<Task> allTasks;
     /** Pointer to indicate the next position to store the task in the array. */
     private int nextSpaceToStore;
 
     /**
      * Constructor to initialise a TaskList.
-     * @param totalTasks The total number of tasks a TaskList can have.
      */
-    public TaskList(int totalTasks) {
-        this.allTasks = new Task[totalTasks];
+    public TaskList() {
+        this.allTasks = new ArrayList<>();
         this.nextSpaceToStore = 0;
     }
 
@@ -21,7 +22,7 @@ public class TaskList {
      * @param toStore The task to store into the TaskList.
      */
     public void store(Task toStore) {
-        this.allTasks[nextSpaceToStore] = toStore;
+        this.allTasks.add(toStore);
         this.nextSpaceToStore = this.nextSpaceToStore + 1;
     }
 
@@ -31,7 +32,7 @@ public class TaskList {
     public void list() {
         for (int i = 0; i < this.nextSpaceToStore; i++) {
             int currTask = i + 1;
-            System.out.println(currTask + "." + allTasks[i].toString());
+            System.out.println(currTask + "." + allTasks.get(i).toString());
         }
     }
 
@@ -40,7 +41,7 @@ public class TaskList {
      * @param taskNo The task that is completed.
      */
     public void done(int taskNo) {
-        Task doneTask = allTasks[taskNo - 1];
+        Task doneTask = allTasks.get(taskNo - 1);
         doneTask.taskCompleted();
         System.out.println("  " + doneTask.toString());
     }

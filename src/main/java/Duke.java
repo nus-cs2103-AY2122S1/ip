@@ -11,7 +11,7 @@ public class Duke {
      * Constructor to initialise the Duke chatbot.
      */
     private Duke() {
-        this.taskList = new TaskList(100);
+        this.taskList = new TaskList();
     }
 
     /**
