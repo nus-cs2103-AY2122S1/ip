@@ -7,15 +7,44 @@ public class Duke {
     private static void getLstItems() {
         int counter = 1;
         for (Task task : tasks) {
-            System.out.println(String.valueOf(counter) + "." + task.toString());
+            System.out.println(counter + "." + task.toString());
             counter += 1;
         }
     }
-
     private static void addTask(Task newTask) {
         tasks.add(newTask);
-        System.out.println(String.format("Great, I've added this task:\n  %s", newTask.toString()));
-        System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+        System.out.printf("Great, I've added this task:\n  %s%n", newTask.toString());
+        System.out.printf("Now you have %d tasks in the list.%n", tasks.size());
+    }
+    private static void handleToDo(String userInput) throws EmptyTaskDescriptionException {
+        try {
+            ToDos newToDo = new ToDos(userInput.substring(5));
+            addTask(newToDo);
+        } catch (StringIndexOutOfBoundsException strE) {
+            throw new EmptyTaskDescriptionException("todo");
+        }
+    }
+    private static void handleDeadline(String userInput) throws EmptyTaskDescriptionException {
+        try {
+            int sep = userInput.indexOf('/', 9);
+            String descPart = userInput.substring(9, sep);
+            String byPart = userInput.substring(sep+1);
+            Deadlines newDeadline = new Deadlines(descPart, byPart);
+            addTask(newDeadline);
+        } catch (StringIndexOutOfBoundsException strE) {
+            throw new EmptyTaskDescriptionException("deadline");
+        }
+    }
+    private static void handleEvent(String userInput) throws EmptyTaskDescriptionException {
+        try {
+            int sep = userInput.indexOf('/', 6);
+            String descPart = userInput.substring(6, sep);
+            String atPart = userInput.substring(sep+1);
+            Events newEvent = new Events(descPart, atPart);
+            addTask(newEvent);
+        } catch (StringIndexOutOfBoundsException strE) {
+            throw new EmptyTaskDescriptionException("event");
+        }
     }
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -39,42 +68,51 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 getLstItems();
                 System.out.println(horizontalLines);
-            } else if (userInput.substring(0, 5).equals("done ")) {
+            } else if (userInput.startsWith("done")) {
                 System.out.println(horizontalLines);
-                int taskNum = Integer.valueOf(userInput.substring(5)) - 1;
+                int taskNum = Integer.parseInt(userInput.substring(5)) - 1;
                 Task currTask = tasks.get(taskNum);
                 currTask.markAsDone();
                 System.out.println(horizontalLines);
-            } else if (userInput.substring(0, 5).equals("todo ")) {
+            } else if (userInput.startsWith("todo")) {
                 System.out.println(horizontalLines);
-                ToDos newToDo = new ToDos(userInput.substring(5));
-                addTask(newToDo);
+                try {
+                    handleToDo(userInput);
+                } catch (EmptyTaskDescriptionException e) {
+                    System.out.println(e.getMessage());
+                } finally {
+                    System.out.println(horizontalLines);
+                }
+            } else if (userInput.startsWith("deadline")) {
                 System.out.println(horizontalLines);
-            } else if (userInput.substring(0, 9).equals("deadline ")) {
+                try {
+                    handleDeadline(userInput);
+                } catch (EmptyTaskDescriptionException e) {
+                    System.out.println(e.getMessage());
+                } finally {
+                    System.out.println(horizontalLines);
+                }
+            } else if (userInput.startsWith("event")) {
                 System.out.println(horizontalLines);
-                int sep = userInput.indexOf('/', 9);
-                String descPart = userInput.substring(9, sep);
-                String byPart = userInput.substring(sep+1);
-                Deadlines newDeadline = new Deadlines(descPart, byPart);
-                addTask(newDeadline);
-                System.out.println(horizontalLines);
-            } else if (userInput.substring(0, 6).equals("event ")) {
-                System.out.println(horizontalLines);
-                int sep = userInput.indexOf('/', 6);
-                String descPart = userInput.substring(6, sep);
-                String atPart = userInput.substring(sep+1);
-                Events newEvent = new Events(descPart, atPart);
-                addTask(newEvent);
-                System.out.println(horizontalLines);
+                try {
+                    handleEvent(userInput);
+                } catch (EmptyTaskDescriptionException e) {
+                    System.out.println(e.getMessage());
+                } finally {
+                    System.out.println(horizontalLines);
+                }
             } else {
-                // All other cases add it to tasks
+                // All other cases means input error
                 System.out.println(horizontalLines);
-                Task newTask = new Task(userInput);
-                tasks.add(newTask);
-                System.out.println("added: " + userInput + "\n" + horizontalLines);
+                UnknownInputException e = new UnknownInputException();
+                try {
+                    throw e;
+                } catch (UnknownInputException e1) {
+                    System.out.println(e1.getMessage());
+                } finally {
+                    System.out.println(horizontalLines);
+                }
             }
         }
-
     }
-
 }
