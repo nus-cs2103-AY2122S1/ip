@@ -10,36 +10,45 @@ What would you like to do today?
 added: [T][ ] read book to your to-do list!
 Now you have 1 tasks in the list.
 (*^_^*) Friend says: 
-added: [D][ ] do groceries (by: Saturday 3pm) to your to-do list!
+added: [D][ ] do groceries  (by: Saturday 3pm) to your to-do list!
 Now you have 2 tasks in the list.
 (*^_^*) Friend says: 
 Your to-do list has the following tasks: 
 
 1.[T][ ] read book
-2.[D][ ] do groceries (by: Saturday 3pm)
+2.[D][ ] do groceries  (by: Saturday 3pm)
 
 (*^_^*) Friend says: 
-added: [E][ ] Barbeque (at: Friday 8pm) to your to-do list!
+Your to-do list has the following tasks: 
+
+1.[T][ ] read book
+2.[D][ ] do groceries  (by: Saturday 3pm)
+
+(*^_^*) Friend says: 
+added: [E][ ] Barbeque  (at: Friday 8pm) to your to-do list!
 Now you have 3 tasks in the list.
 (*^_^*) Friend says: 
 Hooray! You've completed task 
 [X] read book
 (*^_^*) Friend says: 
-Your to-do list has the following tasks: 
-
-1.[T][X] read book
-2.[D][ ] do groceries (by: Saturday 3pm)
-3.[E][ ] Barbeque (at: Friday 8pm)
-
-(*^_^*) Friend says: 
 Hooray! You've completed task 
-[X] do groceries
+[X] do groceries 
+Oops :( Please key in a valid description!
+Oops :( Please key in a valid description!
+Oops :( Please key in a valid description!
+Oops :( Please key in a valid description!
+Oops :( Please key in a valid description!
+Oops :( Please key in a valid description!
+Oops :( Friend does not recognise this command! Did you spell your command correctly?
+Oops :( Friend does not recognise this command! Did you spell your command correctly?
+Oops :( Please key in a valid description!
+Oops :( Friend does not recognise this command! Did you spell your command correctly?
+Oops :( Please key in a valid time to proceed
+Oops :( Please key in a valid description!
+Oops :( Friend does not recognise this command! Did you spell your command correctly?
+Oops :( Please key in a valid description!
 (*^_^*) Friend says: 
-Your to-do list has the following tasks: 
-
-1.[T][X] read book
-2.[D][X] do groceries (by: Saturday 3pm)
-3.[E][ ] Barbeque (at: Friday 8pm)
-
+added: [E][ ] flight  (at: 3.45pm) to your to-do list!
+Now you have 4 tasks in the list.
 (*^_^*) Friend says: 
-See you again my friend!
+See you again, my friend!

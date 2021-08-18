@@ -1,9 +1,23 @@
 todo read book
 deadline do groceries /by Saturday 3pm
 list
+list
 event Barbeque /at Friday 8pm
 done 1
-list
 done 2
-list
+todo
+deadline
+event
+todo
+deadline
+event
+.todo
+ssiudhtodo
+deadline /by
+deadline .by
+event /by
+event /at
+event wedding/at 6pm
+event eat /at6pm
+event flight /at 3.45pm
 bye
