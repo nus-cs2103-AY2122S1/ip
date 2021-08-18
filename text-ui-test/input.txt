@@ -1,0 +1,10 @@
+test
+todo big test
+event triton /by thursday
+deadline tomorrow /by tomorrow
+list
+deadline lmao
+event lol
+done 2
+list
+bye
