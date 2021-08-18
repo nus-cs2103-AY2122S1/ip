@@ -12,5 +12,7 @@ done 4
 done asd
 done 2
 list
+delete 3
+list
 asd
 bye

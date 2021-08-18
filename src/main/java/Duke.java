@@ -14,8 +14,10 @@ public class Duke {
     public static String taskAddedMessage(Task t) {
         return formatMessage(
                 "Got it, I've added this task:\n        " + t +
-                "\n     Now you have " + list.size() + " task" + (list.size() != 1 ? "s" : "") +
-                " in the list");
+                "\n     " + numOfTasks());
+    }
+    public static String numOfTasks() {
+        return "Now you have " + list.size() + " task" + (list.size() != 1 ? "s" : "") + " in the list";
     }
     public static String printList() {
         StringBuilder res = new StringBuilder();
@@ -35,6 +37,7 @@ public class Duke {
             String input = scanner.nextLine();
             String[] params = input.split(" ", 2);
             String[] parts;
+            String arg;
             if(params[0].equals("bye")) {
                 break;
             }
@@ -47,7 +50,7 @@ public class Duke {
                         System.out.println(formatMessage("Please enter a number after done"));
                         break;
                     }
-                    String arg = params[1];
+                    arg = params[1];
                     try {
                         int index = Integer.parseInt(arg);
                         if (index > list.size()) {
@@ -59,7 +62,36 @@ public class Duke {
                         }
                         Task t = list.get(index-1);
                         t.completeTask();
-                        System.out.println(formatMessage("Nice! I've marked this task as done\n       " + t));
+                        System.out.println(formatMessage(
+                                "Nice! I've marked this task as done:\n       " + t + "\n     " +
+                                    numOfTasks()
+                        ));
+
+                    } catch (NumberFormatException e) {
+                        System.out.println(formatMessage("Please enter a number after done"));
+                    }
+                    break;
+                case "delete":
+                    if (params.length == 1) {
+                        System.out.println(formatMessage("Please enter a number after delete"));
+                        break;
+                    }
+                    arg = params[1];
+                    try {
+                        int index = Integer.parseInt(arg);
+                        if (index > list.size()) {
+                            System.out.println(formatMessage("There are only " + list.size() + " tasks"));
+                            break;
+                        } else if (index == 0) {
+                            System.out.println(formatMessage("There is no task 0"));
+                            break;
+                        }
+                        Task t = list.get(index-1);
+                        list.remove(index-1);
+                        System.out.println(formatMessage(
+                                "Noted. I've removed this task:\n       " + t + "\n     " +
+                                    numOfTasks()
+                        ));
 
                     } catch (NumberFormatException e) {
                         System.out.println(formatMessage("Please enter a number after done"));
