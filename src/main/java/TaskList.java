@@ -12,7 +12,7 @@ public class TaskList {
     }
 
     public void showList() {
-        System.out.println("   _____________________________________\n"
+        System.out.println("    ____________________________________________________________\n"
                         + "     " + "Here are the tasks in your list:");
         for (int i = 0; i < list.length; i++) {
             if (list[i] != null) {
@@ -20,7 +20,7 @@ public class TaskList {
                 System.out.println(taskItem);
             }
         }
-        System.out.println("   _____________________________________\n");
+        System.out.println("    ____________________________________________________________");
     }
 
     public Task extractTask(int index) {

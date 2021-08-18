@@ -13,10 +13,10 @@ public abstract class Task {
     }
 
     public String taskDone() {
-        String taskDoneMessage = "   _____________________________________\n"
+        String taskDoneMessage = "    ____________________________________________________________\n"
                 + "     Nice! I've marked this task as done:\n"
                 + "       " + this.showType() + this.checkDone() + " " + this.showTask() + "\n"
-                + "   _____________________________________\n";
+                + "    ____________________________________________________________";
         return taskDoneMessage;
     }
 }
