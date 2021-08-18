@@ -1,10 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private boolean active;
+    private List<String> list;
 
     public Duke() {
         this.active = true;
+        this.list = new ArrayList<String>();
     }
 
     public void executeCommand(String command) {
@@ -12,8 +16,11 @@ public class Duke {
             case "bye":
                 this.terminate();
                 break;
+            case "list":
+                this.listItems();
+                break;
             default:
-                this.echo(command);
+                this.addItem(command);
         }
     }
 
@@ -26,6 +33,23 @@ public class Duke {
         System.out.println(message);
     }
 
+    public void listItems() {
+        System.out.println("____________________________________________________________\n");
+        for (int i = 0; i < this.list.size(); i++) {
+            System.out.println(String.format("%d: %s", i + 1, this.list.get(i)));
+        }
+        System.out.println("____________________________________________________________\n");
+    }
+
+    public void addItem(String input) {
+        this.list.add(input);
+        String message =
+                "____________________________________________________________\n" +
+                " added: " + input + "\n" +
+                "____________________________________________________________\n";
+        System.out.println(message);
+    }
+
     public void echo(String input) {
         String message =
                 "____________________________________________________________\n" +
@@ -34,9 +58,7 @@ public class Duke {
         System.out.println(message);
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        Scanner sc = new Scanner(System.in);
+    public void run(Scanner sc) {
         String message =
                 "____________________________________________________________\n" +
                 " Hello! I'm Duke\n" +
@@ -44,10 +66,16 @@ public class Duke {
                 "____________________________________________________________\n";
 
         System.out.println(message);
-        while (duke.active) {
+        while (this.active) {
             String input = sc.nextLine();
-            duke.executeCommand(input);
+            this.executeCommand(input);
         }
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        Scanner sc = new Scanner(System.in);
+        duke.run(sc);
     }
 }
 
