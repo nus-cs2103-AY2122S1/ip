@@ -2,7 +2,7 @@
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 6. Delete
+ * Current Progress: A-Enums
  *
  * Description:
  * Encapsulates the Task Class which contains a task description

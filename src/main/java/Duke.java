@@ -4,7 +4,7 @@ import java.util.Scanner;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 6. Delete
+ * Current Progress: A-Enums
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.
@@ -101,30 +101,31 @@ public class Duke {
         printMessage(greeting);
         Scanner commandScanner = new Scanner(System.in);
         String currentCommand = commandScanner.nextLine();
+        String[] checkCommand = currentCommand.split(" ", 2);
+        Command thisCommand = Command.changeToCommand(checkCommand[0]);
         taskList = new Tasklist();
         //awaits text
-        while (!currentCommand.equals("bye")) {
-            String[] checkCommand = currentCommand.split(" ", 2);
+        while (!thisCommand.equals(Command.BYE)) {
             try {
-                switch(checkCommand[0]) {
-                    case "list":
+                switch(thisCommand) {
+                    case LIST:
                         printMessage(taskList.toString());
                         break;
-                    case "done":
+                    case DONE:
                         int taskNumber = checkInteger(checkCommand, "marking of task");
                         String message = taskList.markTask(taskNumber);
                         printMessage(message);
                         break;
-                    case "deadline":
-                        printMessage(taskList.addTask(checkDescription(checkCommand, "deadline"), "deadline"));
+                    case DEADLINE:
+                        printMessage(taskList.addTask(checkDescription(checkCommand, "deadline"), thisCommand));
                         break;
-                    case "event":
-                        printMessage(taskList.addTask(checkDescription(checkCommand, "event"), "event"));
+                    case EVENT:
+                        printMessage(taskList.addTask(checkDescription(checkCommand, "event"), thisCommand));
                         break;
-                    case "todo":
-                        printMessage(taskList.addTask(checkDescription(checkCommand, "todo"), "todo"));
+                    case TODO:
+                        printMessage(taskList.addTask(checkDescription(checkCommand, "todo"), thisCommand));
                         break;
-                    case "delete":
+                    case DELETE:
                         int taskDeletedNumber = checkInteger(checkCommand, "delete");
                         String deleteMessage = taskList.deleteTask(taskDeletedNumber);
                         printMessage(deleteMessage);
@@ -136,6 +137,8 @@ public class Duke {
                 printMessage(e.toString());
             } finally {
                 currentCommand = commandScanner.nextLine();
+                checkCommand = currentCommand.split(" ", 2);
+                thisCommand = Command.changeToCommand(checkCommand[0]);
             }
         }
         String byeString = "Bye. Hope to see you again soon!";

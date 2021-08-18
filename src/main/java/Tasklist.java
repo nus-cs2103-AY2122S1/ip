@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 6. Delete
+ * Current Progress: A-Enums
  *
  * Description:
  * Encapsulates the TaskList which contains a list of tasks
@@ -43,13 +43,14 @@ public class Tasklist {
      * Adds the task to the list
      *
      * @param description String containing the description and time of the task
-     * @param taskType String stating the type of task to be added
+     * @param task Command stating the type of task to be added
      * @return String Returns the success message of added the task to the list
      * @throws DukeException throws a duke exception depending on the error found
      */
-    public String addTask(String description, String taskType) throws DukeException {
+    public String addTask(String description, Command task) throws DukeException {
 
         Task newTask;
+        String taskType = Command.changeToString(task);
         switch(taskType) {
             case "todo":
                 newTask = new ToDo(description);
