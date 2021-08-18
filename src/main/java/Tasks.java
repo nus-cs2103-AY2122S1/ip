@@ -24,7 +24,7 @@ public class Tasks {
                     this.tasks.add(todo);
                     noteAdded(todo);
                 } else {
-                    throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
                 break;
             case("deadline"):
@@ -35,7 +35,7 @@ public class Tasks {
                     this.tasks.add(ddl);
                     noteAdded(ddl);
                 } else {
-                    throw new DukeException(" ☹ OOPS!!! The description and time of a deadline cannot be empty.");
+                    throw new DukeException("☹ OOPS!!! The description and time of a deadline cannot be empty.");
                 }
                 break;
             case("event"):
@@ -46,7 +46,7 @@ public class Tasks {
                     this.tasks.add(e);
                     noteAdded(e);
                 } else {
-                    throw new DukeException(" ☹ OOPS!!! The description and time of an event cannot be empty.");
+                    throw new DukeException("☹ OOPS!!! The description and time of an event cannot be empty.");
                 }
                 break;
             default:
@@ -84,11 +84,32 @@ public class Tasks {
         System.out.println(div);
     }
 
-    public void complete(int pos) throws DukeException{
+    public void complete(int pos) throws DukeException {
         if (this.tasks.size()>pos-1 && pos != 0) {
             String p = this.tasks.get(pos-1).finished();
             System.out.println(div + "\n" + ind2 + "Nice! I've marked this task as done: " + "\n" +
                     ind2 + ind2 + p + "\n" + div);
+        } else {
+            throw new DukeException("☹ OOPS!!! There isn't a task with index " + pos + " in your list.");
+        }
+    }
+
+    public void delete(int pos) throws DukeException {
+        if (this.tasks.size()>pos-1 && pos != 0) {
+            Task deleted = this.tasks.get(pos-1);
+            int total = tasks.size();
+            String sOrNot = "";
+            if (total <= 1) {
+                sOrNot = "task";
+            } else {
+                sOrNot = "tasks";
+            }
+            this.tasks.remove(deleted);
+            System.out.println(div);
+            System.out.println(ind2 + "Noted. I've removed this task: ");
+            System.out.println(ind2 +" "+ deleted);
+            System.out.println(ind2 + "Now you have " +total + " " + sOrNot + " in the list.");
+            System.out.println(div);
         } else {
             throw new DukeException("☹ OOPS!!! There isn't a task with index " + pos + " in your list.");
         }

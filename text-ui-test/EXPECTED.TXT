@@ -21,7 +21,7 @@
      Now you have 3 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
-      ☹ OOPS!!! The description and time of a deadline cannot be empty.
+     ☹ OOPS!!! The description and time of a deadline cannot be empty.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
@@ -29,10 +29,10 @@
      Now you have 4 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
-      ☹ OOPS!!! The description of a todo cannot be empty.
+     ☹ OOPS!!! The description of a todo cannot be empty.
     ____________________________________________________________
     ____________________________________________________________
-      ☹ OOPS!!! The description and time of an event cannot be empty.
+     ☹ OOPS!!! The description and time of an event cannot be empty.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
@@ -63,7 +63,15 @@
      ☹ OOPS!!! There isn't a task with index 7 in your list.
     ____________________________________________________________
     ____________________________________________________________
-     ☹ OOPS!!! There isn't a task with index 0 in your list.
+     ☹ OOPS!!! Please enter a valid number, such as done 3
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! The description and time of a deadline cannot be empty.
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task: 
+      [D][ ] math lecture (by: tmr 4pm)
+     Now you have 6 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
@@ -72,11 +80,35 @@
      3. [D][X] finish homework (by: tomorrow 3pm)
      4. [D][ ] bio exam (by: tues 5am)
      5. [E][ ] KTV (at: Mon 2-4 pm)
+     6. [D][ ] math lecture (by: tmr 4pm)
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! Please enter a valid number, such as delete 3
+    ____________________________________________________________
+    ____________________________________________________________
+     Noted. I've removed this task: 
+      [D][X] finish homework (by: tomorrow 3pm)
+     Now you have 6 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! There isn't a task with index 90 in your list.
+    ____________________________________________________________
+    ____________________________________________________________
+     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
       [T][ ] read another book
      Now you have 6 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1. [T][X] read book
+     2. [T][X] cut hair
+     3. [D][ ] bio exam (by: tues 5am)
+     4. [E][ ] KTV (at: Mon 2-4 pm)
+     5. [D][ ] math lecture (by: tmr 4pm)
+     6. [T][ ] read another book
     ____________________________________________________________
     ____________________________________________________________
      Bye. Hope to see you again soon!

@@ -12,7 +12,14 @@ done 2
 done 3
 done 1
 done 7
-done 0
+done0
+deadline math lecture /at 2pm
+deadline math lecture /by tmr 4pm
 list
+deleteee
+delete 3
+delete 90
+dletre
 todo read another book
+list
 bye
