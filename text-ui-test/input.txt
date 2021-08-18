@@ -4,7 +4,7 @@ list
 list
 event Barbeque /at Friday 8pm
 done 1
-done 2
+done    2
 todo
 deadline
 event
@@ -20,4 +20,16 @@ event /at
 event wedding/at 6pm
 event eat /at6pm
 event flight /at 3.45pm
+deadline assignment /by 1pm tomorrow
+deadline       project     /by        noon
+event    exam        /at  9.30am in 6 days
+delete
+delete
+delete 31
+delete31
+delete 0
+delete 1
+delete 1
+delete 2
+delete          1
 bye

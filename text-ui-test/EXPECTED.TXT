@@ -10,29 +10,29 @@ What would you like to do today?
 added: [T][ ] read book to your to-do list!
 Now you have 1 tasks in the list.
 (*^_^*) Friend says: 
-added: [D][ ] do groceries  (by: Saturday 3pm) to your to-do list!
+added: [D][ ] do groceries (by: Saturday 3pm) to your to-do list!
 Now you have 2 tasks in the list.
 (*^_^*) Friend says: 
 Your to-do list has the following tasks: 
 
 1.[T][ ] read book
-2.[D][ ] do groceries  (by: Saturday 3pm)
+2.[D][ ] do groceries (by: Saturday 3pm)
 
 (*^_^*) Friend says: 
 Your to-do list has the following tasks: 
 
 1.[T][ ] read book
-2.[D][ ] do groceries  (by: Saturday 3pm)
+2.[D][ ] do groceries (by: Saturday 3pm)
 
 (*^_^*) Friend says: 
-added: [E][ ] Barbeque  (at: Friday 8pm) to your to-do list!
+added: [E][ ] Barbeque (at: Friday 8pm) to your to-do list!
 Now you have 3 tasks in the list.
 (*^_^*) Friend says: 
 Hooray! You've completed task 
 [X] read book
 (*^_^*) Friend says: 
 Hooray! You've completed task 
-[X] do groceries 
+[X] do groceries
 Oops :( Please key in a valid description!
 Oops :( Please key in a valid description!
 Oops :( Please key in a valid description!
@@ -48,7 +48,37 @@ Oops :( Please key in a valid description!
 Oops :( Friend does not recognise this command! Did you spell your command correctly?
 Oops :( Please key in a valid description!
 (*^_^*) Friend says: 
-added: [E][ ] flight  (at: 3.45pm) to your to-do list!
+added: [E][ ] flight (at: 3.45pm) to your to-do list!
 Now you have 4 tasks in the list.
+(*^_^*) Friend says: 
+added: [D][ ] assignment (by: 1pm tomorrow) to your to-do list!
+Now you have 5 tasks in the list.
+(*^_^*) Friend says: 
+added: [D][ ] project (by: noon) to your to-do list!
+Now you have 6 tasks in the list.
+(*^_^*) Friend says: 
+added: [E][ ] exam (at: 9.30am in 6 days) to your to-do list!
+Now you have 7 tasks in the list.
+Sorry, I am not sure what the task number is :(
+Sorry, I am not sure what the task number is :(
+Sorry, this task number cannot be found :(
+Sorry, I am not sure what the task number is :(
+Sorry, this task number cannot be found :(
+(*^_^*) Friend says: 
+removed the following task from your to-do list: 
+[T][X] read book
+Now you have 6 tasks in the list.
+(*^_^*) Friend says: 
+removed the following task from your to-do list: 
+[D][X] do groceries (by: Saturday 3pm)
+Now you have 5 tasks in the list.
+(*^_^*) Friend says: 
+removed the following task from your to-do list: 
+[E][ ] flight (at: 3.45pm)
+Now you have 4 tasks in the list.
+(*^_^*) Friend says: 
+removed the following task from your to-do list: 
+[E][ ] Barbeque (at: Friday 8pm)
+Now you have 3 tasks in the list.
 (*^_^*) Friend says: 
 See you again, my friend!

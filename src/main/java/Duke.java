@@ -44,13 +44,34 @@ public class Duke {
             }
 
             try {
+                // List tasks
                 if (message.trim().equals("list")) {
                     System.out.println(friendGreeting + "Your to-do list has the following tasks: \n");
                     System.out.println(printList());
                 }
+                // Delete tasks
+                else if (message.startsWith("delete")) {
+                    if (message.length() > 7 && message.substring(6,7).equals(" ")
+                            && message.substring(7).trim().chars().allMatch(Character::isDigit)) {
+                        int taskIndex = Integer.parseInt(message.substring(7).trim()) - 1;
+                        if (0 <= taskIndex && taskIndex < list.size()) {
+                            String removed = list.get(taskIndex).toString();
+                            list.remove(taskIndex);
+
+                            System.out.println(friendGreeting + "removed the following task from your to-do list: \n" + removed);
+                            System.out.println("Now you have " + list.size() + " tasks in the list.");
+                        } else {
+                            throw new DukeException.DukeTaskNotFoundException();
+                        }
+                    } else {
+                        throw new DukeException.DukeTaskFailException();
+                    }
+                }
+                // Mark tasks as done
                 else if (message.startsWith("done")) {
-                    if (message.length() > 5 && message.substring(5).chars().allMatch(Character::isDigit)) {
-                        int taskIndex = Integer.parseInt(message.substring(5)) - 1;
+                    if (message.length() > 5 && message.substring(4,5).equals(" ")
+                            && message.substring(5).trim().chars().allMatch(Character::isDigit)) {
+                        int taskIndex = Integer.parseInt(message.substring(5).trim()) - 1;
                         if (0 <= taskIndex && taskIndex < list.size()) {
                             Task task = list.get(taskIndex);
                             String description = task.description;
@@ -70,7 +91,7 @@ public class Duke {
                 // To Do
                 else if (message.startsWith("todo ") || message.equals("todo")) {
                     if (message.length() > 5 && !message.substring(5).isBlank()) {
-                        String description = message.substring(5);
+                        String description = message.substring(5).trim();
                         list.add(new ToDo(description));
 
                         System.out.println(friendGreeting + "added: " + list.get(list.size() - 1).toString() + " to your to-do list!");
@@ -82,9 +103,9 @@ public class Duke {
                 // deadline
                 else if (message.startsWith("deadline ") || message.equals("deadline")) {
                     if (message.contains(" /by ")) {
-                        String description = message.substring(9, message.indexOf("/by"));
+                        String description = message.substring(9, message.indexOf("/by")).trim();
                         if (message.length() > message.indexOf("/by") + 3) {
-                            String by = message.substring(message.indexOf("/by") + 4);
+                            String by = message.substring(message.indexOf("/by") + 4).trim();
                             if (description.isBlank()) {
                                 // blank description
                                 throw new DukeException.DukeNoDescriptionException();
@@ -115,9 +136,9 @@ public class Duke {
                 // event
                 else if (message.startsWith("event ") || message.equals("event")) {
                     if (message.contains(" /at ")) {
-                        String description = message.substring(6, message.indexOf("/at"));
+                        String description = message.substring(6, message.indexOf("/at")).trim();
                         if (message.length() > message.indexOf("/at") + 3) {
-                            String at = message.substring(message.indexOf("/at") + 4);
+                            String at = message.substring(message.indexOf("/at") + 4).trim();
                             if (description.isBlank()) {
                                 // blank description
                                 throw new DukeException.DukeNoDescriptionException();
