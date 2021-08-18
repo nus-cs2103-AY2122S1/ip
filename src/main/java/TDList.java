@@ -72,17 +72,11 @@ public class TDList {
 
         Duke.dukeSays("Ok, I have added this task: \n" + createdTask.getLineOfTaskInfo()
             + "\nCurrent total amount of tasks in list: " + toDoList.size());
+
+
     }
 
-    private TDLTask.TaskType checkTaskType(String command) {
-        if (command.startsWith("deadline")) {
-            return TDLTask.TaskType.DEADLINE;
-        } else if (command.startsWith("event")) {
-            return  TDLTask.TaskType.EVENT;
-        } else {
-            return TDLTask.TaskType.TODO;
-        }
-    }
+
 
     /**
      * Used to mark the corresponding task as done.

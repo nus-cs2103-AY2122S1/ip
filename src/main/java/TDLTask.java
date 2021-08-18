@@ -97,4 +97,21 @@ public class TDLTask {
     }
 
 
+    /**
+     * Check the type of task represented by the current command.
+     * @param command The command inputted by the user.
+     * @return the task type. Returns NONE if it is not a task.
+     */
+    public static TDLTask.TaskType checkTaskType(String command) {
+        if (command.startsWith("deadline")) {
+            return TDLTask.TaskType.DEADLINE;
+        } else if (command.startsWith("event")) {
+            return TDLTask.TaskType.EVENT;
+        } else if (command.startsWith("todo")) {
+            return TDLTask.TaskType.TODO;
+        } else {
+            return TDLTask.TaskType.NONE;
+        }
+    }
+
 }
