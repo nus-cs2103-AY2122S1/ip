@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -5,19 +6,18 @@ public class Duke {
     private static String outroString = "That was an excellent chat - I look forward to seeing you again soon!";
 
     private static Scanner sc = new Scanner(System.in);
-    private static Task[] taskList = new Task[100];
-    private static int taskIndex = 0;
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static String taskListString() {
         String output = "";
-        for (int i = 0; i < taskIndex; i++) {
-            output += String.format("%d. %s\n", i + 1, taskList[i]);
+        for (int i = 0; i < taskList.size(); i++) {
+            output += String.format("%d. %s\n", i + 1, taskList.get(i));
         }
         return output;
     }
 
     public static String addedString(Task task) {
-        return String.format("Alright, I've added this task: \n\t%s\nNow, you have %d tasks in the list.\n", task, taskIndex);
+        return String.format("Alright, I've added this task: \n\t%s\nNow, you have %d tasks in the list.\n", task, taskList.size());
     }
 
     public static String doneString(Task task) {
@@ -98,26 +98,23 @@ public class Duke {
                     print(taskListString());
                     break;
                 case "done":
-                    task = taskList[command.getIndex() - 1];
+                    task = taskList.get(command.getIndex() - 1);
                     task.setDone(true);
                     print(doneString(task));
                     break;
                 case "todo":
                     task = new ToDo(command.getDescription());
-                    taskList[taskIndex] = task;
-                    taskIndex++;
+                    taskList.add(task);
                     print(addedString(task));
                     break;
                 case "deadline":
                     task = new Deadline(command.getDescription(), command.getTime());
-                    taskList[taskIndex] = task;
-                    taskIndex++;
+                    taskList.add(task);
                     print(addedString(task));
                     break;
                 case "event":
                     task = new Event(command.getDescription(), command.getTime());
-                    taskList[taskIndex] = task;
-                    taskIndex++;
+                    taskList.add(task);
                     print(addedString(task));
                     break;
             }
