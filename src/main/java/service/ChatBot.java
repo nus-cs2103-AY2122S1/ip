@@ -1,7 +1,5 @@
 package service;
 
-import java.util.List;
-
 /**
  * DukeChatBot class.
  *
@@ -9,8 +7,29 @@ import java.util.List;
  */
 public class ChatBot {
 
+    private final static String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
     private final static String LINE_SPLIT =
             "___________________________________________________________________________";
+
+    /**
+     * Prints a greeting when program is first booted up.
+     */
+    public void greet() {
+        print("Hello from\n" + LOGO);
+        info("Hello! I'm Duke.\nWhat can I do for you?");
+    }
+
+    /**
+     * Prints a closing statement before program terminates.
+     */
+    public void exit() {
+        info("Bye. Hope to see you again soon!");
+    }
 
     /**
      * Displays the messaged wrapped with LINE_SPLIT.
@@ -19,20 +38,7 @@ public class ChatBot {
      */
     public void info(String message) {
         System.out.println(LINE_SPLIT);
-        System.out.println('\t' + message);
-        System.out.println(LINE_SPLIT + '\n');
-    }
-
-    /**
-     * Displays the strings in the input list all within one wrapping of LINE_SPLIT.
-     *
-     * @param messageList list of string messages to display
-     */
-    public void list(List<String> messageList) {
-        System.out.println(LINE_SPLIT);
-        for (String message: messageList) {
-            System.out.println('\t' + message);
-        }
+        System.out.println(message);
         System.out.println(LINE_SPLIT + '\n');
     }
 

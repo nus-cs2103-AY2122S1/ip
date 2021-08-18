@@ -7,7 +7,7 @@ package task;
  */
 public class Deadline extends Task {
 
-    public final static String SPLITTER = "/by";
+    public final static String SPLIT_WORD = "by";
 
     private String by;
 
@@ -30,7 +30,7 @@ public class Deadline extends Task {
      * @return formatted String for field 'by'
      */
     public String getFormattedBy() {
-        return " (" + SPLITTER.substring(1)  + ": " + by + ")";
+        return " (" + SPLIT_WORD  + ": " + by + ")";
     }
 
     @Override

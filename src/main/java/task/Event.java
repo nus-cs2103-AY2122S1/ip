@@ -7,7 +7,7 @@ package task;
  */
 public class Event extends Task {
 
-    public final static String SPLITTER = "/at";
+    public final static String SPLIT_WORD = "at";
 
     private String at;
 
@@ -30,7 +30,7 @@ public class Event extends Task {
      * @return formatted String for field 'at'
      */
     public String getFormattedAt() {
-        return " (" + SPLITTER.substring(1) + ": " + at + ")";
+        return " (" + SPLIT_WORD + ": " + at + ")";
     }
 
     @Override
