@@ -1,0 +1,9 @@
+todo Go to the Bookstore
+todo Rent The Da Vinci Code
+deadline Return The Da Vinci Code /by Sunday
+event Abhishek's Wedding /at Udaipur on Saturday 4-10 PM
+list
+done 1
+done 2
+list
+bye
