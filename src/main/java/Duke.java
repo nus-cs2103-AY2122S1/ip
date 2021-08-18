@@ -64,11 +64,33 @@ public class Duke {
     }
 
 
-    public static void markTaskAsDone(String taskNum) {
-        int taskIdx = Integer.valueOf(taskNum) - 1;
-        Task task = taskList.get(taskIdx);
-        task.markAsDone();
-        System.out.print(DIVIDER + "Great! I've marked this task as done:\n" + task + "\n" + DIVIDER);
+    public static void markTaskAsDone(String taskNum) throws DukeException {
+        try {
+            int taskIdx = Integer.valueOf(taskNum) - 1;
+            if (taskIdx >= taskList.size()) {
+                throw new DukeException("Invalid task number entered.");
+            }
+            Task task = taskList.get(taskIdx);
+            task.markAsDone();
+            System.out.print(DIVIDER + "Great! I've marked this task as done:\n" + task + "\n" + DIVIDER);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid Command. 'done' must be followed by the task number");
+        }
+    }
+
+    public static void deleteTask(String taskNum) throws DukeException {
+        try {
+            int taskIdx = Integer.valueOf(taskNum) - 1;
+            if (taskIdx >= taskList.size()) {
+                throw new DukeException("Invalid task number entered.");
+            }
+            Task task = taskList.get(taskIdx);
+            taskList.remove(taskIdx);
+            System.out.println(DIVIDER + "Noted. I have removed this task:\n  " + task +
+                    "\n Now you have " + taskList.size() + " tasks in the list.\n" + DIVIDER);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid Command. 'delete' must be followed by the task number");
+        }
     }
 
     public static void getInputs() {
@@ -94,6 +116,9 @@ public class Duke {
                         break;
                     case "done":
                         markTaskAsDone(taskDesc);
+                        break;
+                    case "delete":
+                        deleteTask(taskDesc);
                         break;
                     default:
                         addTask(taskType, taskDesc);
