@@ -14,6 +14,8 @@ public class Duke {
   private static final List<String> GREETING = List.of("Hello! I'm Fergus' Chatbot", "What can I do for you?");
   private static final String FAREWELL = "Bye. Hope to see you again soon!";
   private static final String LIST = "Here are the tasks in your list:";
+  private static final String ERROR_TODO_MISSING_DESCRIPTION = "☹ OOPS!!! The description of a todo cannot be empty.";
+  private static final String ERROR_UNKNOWN_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
   private static List<String> addTaskString(String task, String totalTasks) {
     return List.of(
@@ -81,7 +83,12 @@ public class Duke {
   }
 
   public static void handleAddToDo(List<Task> taskList, String[] command) {
-    Todo newTask = new Todo(getTaskName(command));
+    String newTaskDescription = getTaskName(command);
+    if (newTaskDescription.equals("")) {
+      print(ERROR_TODO_MISSING_DESCRIPTION);
+      return;
+    }
+    Todo newTask = new Todo(newTaskDescription);
     handleAddHelper(taskList, newTask);
   }
 
@@ -153,7 +160,7 @@ public class Duke {
           }
         default:
           {
-            System.out.println("There should not be a default case! Placeholder for error handling");
+            print(ERROR_UNKNOWN_COMMAND);
           }
       }
     }
