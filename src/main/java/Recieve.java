@@ -1,9 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Recieve {
-    private static int index = 1;
     private String input;
-    private static Task[] inputs = new Task[100];
+    private static ArrayList<Task> inputs = new ArrayList<>();
 
 
     public Recieve() {
@@ -20,13 +20,13 @@ public class Recieve {
                 break;
             }
             else if (input.startsWith("done ") && input.length() >= 6 && Character.isDigit(input.charAt(5))) {
-                //check 1x ? done x? done 2x?
+                //check 1x ? done x? done 2x? done 0
                 int pos = Integer.parseInt(input.substring(5)) - 1;
 
-                if (pos < index - 1) {
-                    inputs[pos].markAsDone();
+                if (pos < inputs.size()) {
+                    inputs.get(pos).markAsDone();
                     System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(inputs[pos].toString());
+                    System.out.println(inputs.get(pos).toString());
                 }
                 else {
                     System.out.println("There are only " + pos + " tasks!");
@@ -34,45 +34,77 @@ public class Recieve {
             }
             else if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
-                for(int i = 1; i < index; i++) {
-                    System.out.println(i + "." + inputs[i-1].toString());
+                for(int i = 1; i < inputs.size() + 1; i++) {
+                    System.out.println(i + "." + inputs.get(i - 1).toString());
                 }
             }
             else {
-                if (input.startsWith("todo ") && input.length() >= 6) {
-                    Todo task = new Todo(input.substring(5));
-                    inputs[index - 1] = task;
-                    index++;
+                if (input.startsWith("todo ") || input.equals("todo")) {
+                    if (input.length() > 5 ) {
+                        Todo task = new Todo(input.substring(5));
+                        inputs.add(task);
 
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(task.toString());
-                    System.out.println("Now you have " + (index - 1) + " tasks in the list.");
-
-                }
-                else if (input.startsWith("deadline ") && input.length() >= 10) {
-                    String[] spl = input.substring(9).split("/");
-                    Deadline task = new Deadline(spl[0], spl[1].substring(3));
-                    inputs[index - 1] = task;
-                    index++;
-
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(task.toString());
-                    System.out.println("Now you have " + (index - 1) + " tasks in the list.");
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(task.toString());
+                        System.out.println("Now you have " + inputs.size() + " tasks in the list.");
+                    }
+                    else {
+                        try {
+                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        catch(DukeException ex) {
+                            System.out.println(ex.toString());
+                        }
+                    }
 
                 }
-                else if (input.startsWith("event ") && input.length() >= 7) {
-                    String[] spl = input.substring(6).split("/");
-                    Event task = new Event(spl[0], spl[1].substring(3));
-                    inputs[index - 1] = task;
-                    index++;
+                else if (input.startsWith("deadline ") || input.equals("deadline")) {
+                    if (input.length() > 12 && input.contains("/by")) {
+                        String[] spl = input.substring(9).split("/");
+                        Deadline task = new Deadline(spl[0], spl[1].substring(3));
+                        inputs.add(task);
 
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(task.toString());
-                    System.out.println("Now you have " + (index - 1) + " tasks in the list.");
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(task.toString());
+                        System.out.println("Now you have " + inputs.size() + " tasks in the list.");
+                    }
+                    else {
+                        try {
+                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        }
+                        catch(DukeException ex) {
+                            System.out.println(ex.toString());
+                        }
+                    }
+
+                }
+                else if (input.startsWith("event ") || input.equals("event") ) {
+                    if (input.length() > 9 && input.contains("/at")) {
+                        String[] spl = input.substring(6).split("/");
+                        Event task = new Event(spl[0], spl[1].substring(3));
+                        inputs.add(task);
+
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(task.toString());
+                        System.out.println("Now you have " + inputs.size() + " tasks in the list.");
+                    }
+                    else {
+                        try {
+                            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                        }
+                        catch(DukeException ex) {
+                            System.out.println(ex.toString());
+                        }
+                    }
 
                 }
                 else {
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    try {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                    catch(DukeException ex) {
+                        System.out.println(ex.toString());
+                    }
                 }
             }
         }
