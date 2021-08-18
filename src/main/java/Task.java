@@ -22,6 +22,14 @@ public class Task {
     }
 
     /**
+     * The output message when the task is deleted.
+     */
+    public void deleteMessage() {
+        System.out.println("Noted. I've removed this task: \n"
+                + this);
+    }
+
+    /**
      * Gets the task name.
      * @return Task name.
      */

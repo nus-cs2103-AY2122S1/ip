@@ -15,6 +15,13 @@ done 3
 done 4
 done 10
 done -1
+delete
+delete LOL THIS AIN'T NO INTEGER
+delete 1.5
+delete -10
+delete 2
+delete 4
+delete 3
 list
 bye
 Check if already Exit.

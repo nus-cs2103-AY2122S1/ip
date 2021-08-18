@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class TaskList {
     /**
      * This is the array that Virushade keeps the tasks in.
      */
-    private static final Task[] taskList = new Task[100];
+    private static final ArrayList<Task> taskList = new ArrayList<>();
 
     /**
      * listCount keeps track of the size of the TaskList.
@@ -81,7 +83,7 @@ public class TaskList {
                     addedTask = new Task(addedTaskDescription);
             }
 
-            taskList[listCount] = addedTask;
+            taskList.add(addedTask);
             listCount++;
             System.out.println("Added: " + addedTask.getTaskDescription());
             System.out.printf("Now you have %d tasks in the list.\n", listCount);
@@ -91,20 +93,28 @@ public class TaskList {
     }
 
     /**
-     * Display the stored values in taskList for the user.
+     * Deletes the specified task.
+     * @param str Input string, determines which task to delete.
      */
-    public static void list() {
-        int index = 0;
+    public static void delete(String str) {
+        try {
+            // If what comes after "delete " is not an integer, this will throw a NumberFormatException.
+            int index = Integer.parseInt(str);
 
-        if (listCount == 0) {
-            System.out.println("Nothing in the list as of now.");
-            return;
-        }
+            if (index <= 0) {
+                System.out.println("Please enter an integer greater than 0.");
+            } else if (index <= listCount) {
+                Task deletedTask = taskList.get(index - 1);
+                deletedTask.deleteMessage();
+                listCount--;
+                System.out.printf("You have %d tasks in the list.\n", listCount);
+            } else {
+                System.out.println("Please check that you have entered the correct number!");
+            }
+        } catch (NumberFormatException e) {
 
-        System.out.println("Here are the tasks in your list:");
-        while (index < listCount) {
-            System.out.println((index + 1) + "." + taskList[index].toString());
-            index++;
+            // Tells the user that he did not enter a number.
+            System.out.println("Please enter an integer after 'done ' instead.\n" + e);
         }
     }
 
@@ -121,7 +131,7 @@ public class TaskList {
             if (index <= 0) {
                 System.out.println("Please enter an integer greater than 0.");
             } else if (index <= listCount) {
-                Task doneTask = taskList[index - 1];
+                Task doneTask = taskList.get(index - 1);
                 doneTask.completeTask();
             } else {
                 System.out.println("Please check that you have entered the correct number!");
@@ -130,6 +140,24 @@ public class TaskList {
 
             // Tells the user that he did not enter a number.
             System.out.println("Please enter an integer after 'done ' instead.\n" + e);
+        }
+    }
+
+    /**
+     * Display the stored values in taskList for the user.
+     */
+    public static void list() {
+        int index = 0;
+
+        if (listCount == 0) {
+            System.out.println("Nothing in the list as of now.");
+            return;
+        }
+
+        System.out.println("Here are the tasks in your list:");
+        while (index < listCount) {
+            System.out.println((index + 1) + "." + taskList.get(index).toString());
+            index++;
         }
     }
 }

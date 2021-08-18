@@ -72,11 +72,36 @@ _____________________________________________________
 Please enter an integer greater than 0.
 _____________________________________________________
 
+OOPS!!! Please enter an integer after 'delete'.
+_____________________________________________________
+
+Please enter an integer after 'done ' instead.
+java.lang.NumberFormatException: For input string: "LOL THIS AIN'T NO INTEGER"
+_____________________________________________________
+
+Please enter an integer after 'done ' instead.
+java.lang.NumberFormatException: For input string: "1.5"
+_____________________________________________________
+
+Please enter an integer greater than 0.
+_____________________________________________________
+
+Noted. I've removed this task: 
+[D][x] Test add deadline task (by: now)
+You have 3 tasks in the list.
+_____________________________________________________
+
+Please check that you have entered the correct number!
+_____________________________________________________
+
+Noted. I've removed this task: 
+[E][x] Test add event task (at: now)
+You have 2 tasks in the list.
+_____________________________________________________
+
 Here are the tasks in your list:
 1.[T][ ] Test add todo task
 2.[D][x] Test add deadline task (by: now)
-3.[E][x] Test add event task (at: now)
-4.[D][x] Test slashPartition without space (by: now)
 _____________________________________________________
 
 Bye. Hope to see you again soon!

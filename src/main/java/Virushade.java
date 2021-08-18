@@ -52,6 +52,8 @@ public class Virushade {
             System.out.println("OOPS!!! The description of an event task cannot be empty.");
         } else if (str.startsWith("done")) {
             System.out.println("OOPS!!! Please enter an integer after 'done'.");
+        } else if (str.startsWith("delete")) {
+            System.out.println("OOPS!!! Please enter an integer after 'delete'.");
         } else {
             System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -74,6 +76,8 @@ public class Virushade {
             TaskList.add(str.substring(9), "DEADLINE");
         } else if (str.startsWith("event ")) {
             TaskList.add(str.substring(6), "EVENT");
+        } else if (str.startsWith("delete ")) {
+            TaskList.delete(str.substring(7));
         } else {
             handle(str);
         }
