@@ -1,6 +1,8 @@
 public class Duke {
 
-    // Function starts the process of the dukebot, closes when the "Bye command is issued"
+    /**
+     * Function starts the process of the dukebot, closes when the "Bye command is issued"
+     */
     private static void start() {
         while (true) {
             String command = Presentation.scan();
@@ -19,6 +21,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starting point of the dukeBot
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

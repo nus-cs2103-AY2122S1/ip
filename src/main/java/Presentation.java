@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 public class Presentation {
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+    /**
+     * Used to scan and parse the commands entered by the user
+     * @return the command as one string
+     */
     public static String scan() {
         String command = new String();
         try {

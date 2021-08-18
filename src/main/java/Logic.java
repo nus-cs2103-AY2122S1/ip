@@ -1,4 +1,10 @@
 public class Logic {
+
+    /**
+     * The process is the main function to process the parsed string from presentation.
+     * @param command refers to the parsed string. See presentation for parsing
+     * @throws InvalidCommandException is throwed when there is an invalid command in the form of a string
+     */
     public static void process(String command) throws InvalidCommandException{
         System.out.println("Process logic called");
 
