@@ -1,0 +1,11 @@
+todo study
+event dating /at tonight 10pm
+done 1
+list
+deadline CS2103T IP /by Thu night
+done 4
+done 2
+list
+done 3
+list
+bye

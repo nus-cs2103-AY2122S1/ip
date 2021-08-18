@@ -1,7 +1,31 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm dino, your cute dinosaur bot.
+Anything I can do for you?
+Got it. I've added this task:
+  [T][] study
+Now you have 1 task in the list.
+Got it. I've added this task:
+  [E][] dating (at: tonight 10pm)
+Now you have 2 tasks in the list.
+Nice! I've marked this task as done:
+[T][X] study
+Here are the tasks in your list:
+1. [T][X] study
+2. [E][] dating (at: tonight 10pm)
+Got it. I've added this task:
+  [D][] CS2103T IP (by: Thu night)
+Now you have 3 tasks in the list.
+Wait...you don't even have this task in your list!
+Nice! I've marked this task as done:
+[E][X] dating (at: tonight 10pm)
+Here are the tasks in your list:
+1. [T][X] study
+2. [E][X] dating (at: tonight 10pm)
+3. [D][] CS2103T IP (by: Thu night)
+Nice! I've marked this task as done:
+[D][X] CS2103T IP (by: Thu night)
+Here are the tasks in your list:
+1. [T][X] study
+2. [E][X] dating (at: tonight 10pm)
+3. [D][X] CS2103T IP (by: Thu night)
+Goodbye~
+Your cute Dino is always around you :D
