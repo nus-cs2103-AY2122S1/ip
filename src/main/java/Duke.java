@@ -49,6 +49,8 @@ public class Duke {
                     addTask(deadlineCmd, description);
                 } else if (cmd.equals(eventCmd)) {
                     addTask(eventCmd, description);
+                } else {
+                    throw new DukeException("Sorry, I don't know what that means.");
                 }
             } catch (DukeException e) {
                 System.out.println(e.toString());
