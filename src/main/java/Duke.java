@@ -2,18 +2,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private final static String GREETING_MSG = "Hello! I'm Duke\nWhat can I do for you?";
-    private final static String GOODBYE_MSG = "Bye. Hope to see you again soon!";
-    private final static String LIST_TASK_MSG = "Here are the tasks in your list:";
-    private final static String ADD_TASK_MSG_TEMPLATE = "Got it. I've added this task:\n"
+    private static final String GREETING_MSG = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String GOODBYE_MSG = "Bye. Hope to see you again soon!";
+    private static final String LIST_TASK_MSG = "Here are the tasks in your list:";
+    private static final String ADD_TASK_MSG_TEMPLATE = "Got it. I've added this task:\n"
                                                         + "  %s\n"
                                                         + "Now you have %d %s in the list.\n";
-    private final static String DELETE_TASK_MSG_TEMPLATE = "Noted. I've removed this task:\n"
+    private static final String DELETE_TASK_MSG_TEMPLATE = "Noted. I've removed this task:\n"
                                                         + "  %s\n"
                                                         + "Now you have %d %s in the list.\n";
-    private final static String MARK_DONE_MSG_TEMPLATE = "Nice! I've marked this task as done:\n  %s\n";
-    private final static Scanner SCANNER = new Scanner(System.in);
-    private final static ArrayList<Task> tasks = new ArrayList<>();
+    private static final String MARK_DONE_MSG_TEMPLATE = "Nice! I've marked this task as done:\n  %s\n";
+    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     private static void greet() {
         System.out.println(GREETING_MSG);
