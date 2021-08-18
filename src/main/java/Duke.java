@@ -24,26 +24,35 @@ public class Duke {
         System.out.println(formatDukeResponse(exitMessage));
     }
 
-    private static void addTask(String description) {
+    private static void addTask(String description) throws DukeException {
+        if (description == null || description.equals("")) {
+            throw new DukeException("Oops!!! The description of a todo cannot be empty.");
+        }
+
         Task task = new Todo(description);
         tasks[taskCount] = task;
         taskCount++;
         printAddTaskMessage(task);
     }
 
-    private static void addTask(String descriptionAndTime, String command) {
+    private static void addTask(String descriptionAndTime, String command) throws DukeException {
         String[] splitDescriptionAndTime;
         Task task;
 
-        if (command.equals("deadline")) {
-            splitDescriptionAndTime = descriptionAndTime.split(" /by ");
-            task = new Deadline(splitDescriptionAndTime[0], splitDescriptionAndTime[1]);
-        } else if (command.equals("event")) {
-            splitDescriptionAndTime = descriptionAndTime.split(" /at ");
-            task = new Event(splitDescriptionAndTime[0], splitDescriptionAndTime[1]);
-        } else {
-            printInvalidCommandMessage();
-            return;
+        try {
+            if (command.equals("deadline")) {
+                splitDescriptionAndTime = descriptionAndTime.split(" /by ");
+                task = new Deadline(splitDescriptionAndTime[0].trim(), splitDescriptionAndTime[1].trim());
+            } else if (command.equals("event")) {
+                splitDescriptionAndTime = descriptionAndTime.split(" /at ");
+                task = new Event(splitDescriptionAndTime[0].trim(), splitDescriptionAndTime[1].trim());
+            } else {
+                printInvalidCommandMessage();
+                return;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Oops!!! Deadlines or events should contain a description, followed by " +
+                    "a /by or /at respectively, followed by a date or a time.");
         }
 
         tasks[taskCount] = task;
@@ -51,8 +60,18 @@ public class Duke {
         printAddTaskMessage(task);
     }
 
-    private static void markTask(int taskNumber) {
-        // to handle ArrayIndexOutOfBoundsException
+    private static void markTask(String taskNumberString) throws DukeException {
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(taskNumberString);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Oops!!! The done command should be followed by an integer.");
+        }
+
+        if (taskNumber < 1 || taskNumber > taskCount) {
+            throw new DukeException("Oops!!! The task number provided is not valid.");
+        }
+
         Task task = tasks[taskNumber - 1];
         task.markAsDone();
         printMarkTaskDoneMessage(task);
@@ -83,39 +102,45 @@ public class Duke {
         System.out.println(formatDukeResponse("Oops!!! I'm sorry, but I don't know what that means."));
     }
 
+    private static void printDukeExceptionMessage(DukeException e) {
+        System.out.println(formatDukeResponse(e.getMessage()));
+    }
+
     public static void main(String[] args) {
         printWelcomeMessage();
 
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String[] userInput = sc.nextLine().split(" ", 2);
+            String[] userInput = sc.nextLine().trim().split(" ", 2);
             String command = userInput[0];
-            String action = userInput.length == 2 ? userInput[1] : "";
+            String action = userInput.length == 2 ? userInput[1].trim() : "";
 
             if (command.equals("bye")) {
                 sc.close();
                 break;
             }
 
-            switch (command) {
-            case "list":
-                printTasksMessage();
-                break;
-            case "done":
-                // to handle NumberFormatException
-                int taskNumber = Integer.parseInt(userInput[1]);
-                markTask(taskNumber);
-                break;
-            case "todo":
-                addTask(action);
-                break;
-            case "deadline":
-            case "event":
-                addTask(action, command);
-                break;
-            default:
-                printInvalidCommandMessage();
-                break;
+            try {
+                switch (command) {
+                case "list":
+                    printTasksMessage();
+                    break;
+                case "done":
+                    markTask(action);
+                    break;
+                case "todo":
+                    addTask(action);
+                    break;
+                case "deadline":
+                case "event":
+                    addTask(action, command);
+                    break;
+                default:
+                    printInvalidCommandMessage();
+                    break;
+                }
+            } catch (DukeException e) {
+                printDukeExceptionMessage(e);
             }
         }
 
