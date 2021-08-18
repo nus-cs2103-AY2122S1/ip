@@ -49,7 +49,8 @@ public class Duke {
                 System.out.println("  ---------------------------------------------");
                 System.out.println("    Got it. I've added this task:");
                 if(splitTask.length == 1) {
-                    Todo todo = new Todo(input);
+                    String[] todoInput = input.split("todo ");
+                    Todo todo = new Todo(todoInput[1]);
                     userInput[counter] = todo;
                 } else if(splitTask.length == 2) {
                     if(input.contains("at")) {
