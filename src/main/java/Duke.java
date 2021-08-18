@@ -2,23 +2,32 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
         boolean end = false;
+        String[] taskList = new String[100];
+        int itemCount = 0;
 
+        System.out.println("Hello I'm Duke\n What can I do for you?");
+
+        //while not ended, continue to wait for user's task inputs
         while(!end) {
             Scanner sc = new Scanner(System.in);
-            String command = sc.nextLine();
+            String task = sc.nextLine();
 
-            if (command.equalsIgnoreCase("bye")) {
+            //if user enters "bye", end the loop
+            if (task.equalsIgnoreCase("bye")) {
                 end = !end;
                 System.out.println("Bye. Hope to see you again soon!");
+
+            // if user enters "list", list out all the tasks in the task list
+            } else if (task.equalsIgnoreCase("list")) {
+                for (int i = 0; i < itemCount; i++) {
+                    System.out.println(i + 1 + ". " + taskList[i]);
+                }
+            // else display the added task back to the user
             } else {
-                System.out.println(command);
+                taskList[itemCount] = task;
+                System.out.println("added: " + task);
+                itemCount++;
             }
         }
 
