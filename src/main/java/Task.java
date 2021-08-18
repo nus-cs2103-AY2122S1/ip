@@ -7,8 +7,8 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getTask() {
-        return taskstr;
+    public String toString() {
+        return "[" + (isDone ? "X" : " ") + "] " + taskstr;
     }
 
     public String getTaskStatus() {
