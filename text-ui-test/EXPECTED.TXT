@@ -130,8 +130,8 @@ Here are the tasks in your list:
 8. [D][ ] complete CS Project (by: 2359HRs)
 _____________________________________________________________________________________________________________
 _____________________________________________________________________________________________________________
-Too many arguments being provided to "done" 
-Please refer to proper usage of commands with "allCmd"
+done 7, 3 is not a recognised command
+Please refer to the available commands using the "allCmd" command
 _____________________________________________________________________________________________________________
 _____________________________________________________________________________________________________________
 I see that you have completed a task. Keep up the good work!
@@ -140,8 +140,8 @@ This task has now been marked as completed
 [X] zoom meeting with Teo
 _____________________________________________________________________________________________________________
 _____________________________________________________________________________________________________________
-Too many arguments being provided to "done" 
-Please refer to proper usage of commands with "allCmd"
+delete 1, 2 is not a recognised command
+Please refer to the available commands using the "allCmd" command
 _____________________________________________________________________________________________________________
 _____________________________________________________________________________________________________________
 Successfully removed task 1

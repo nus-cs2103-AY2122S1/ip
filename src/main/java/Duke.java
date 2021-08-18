@@ -169,7 +169,7 @@ public class Duke {
         if (num <= 0 || num > taskList.size()) {
             throw new DukeException("The input number is not a valid task number \nPlease refer to the task list using the \"list\" command");
         } else if (this.countSpaces(des) > 1) {
-            throw new DukeException("Too many arguments being provided to \"done\" \nPlease refer to proper usage of commands with \"allCmd\"");
+            throw new DukeException("Too many arguments being provided to \"delete\" \nPlease refer to proper usage of commands with \"allCmd\"");
         } else {
             taskList.remove(num - 1);
             System.out.println("Successfully removed task " + num);
@@ -259,31 +259,35 @@ public class Duke {
      * command should be called.
      */
     private String checkForKeyword(String des) {
-        for (Keywords keyword : Keywords.values()) {
-            if (keyword.name().equals("allCmd") && des.equals(keyword.name())) {
+            if (des.equals("allCmd")) {
                 return "allCmd";
-            } else if (keyword.name().equals("bye") && des.equals(keyword.name())) {
+            } else if (des.equals("bye")) {
                 return "bye";
-            } else if (keyword.name().equals("list") && des.equals(keyword.name())) {
+            } else if (des.equals("list")) {
                 return "list";
-            } else if (keyword.name().equals("done") && des.contains("done") && des.startsWith("done")) {
+            } else if (des.contains("done") && des.startsWith("done")) {
                 try {
-                    String sNum = des.substring(des.lastIndexOf(' ') + 1);
+                    String sNum = des.substring(des.indexOf(' ') + 1);
                     Integer.parseInt(sNum);
                     return "done";
                 } catch (NumberFormatException e) {
                     return null;
                 }
-            } else if (keyword.name().equals("delete") && des.contains("delete") && des.startsWith("delete")) {
-                return "delete";
-            } else if (keyword.name().equals("deadline") && des.contains("deadline") && des.startsWith("deadline")) {
+            } else if (des.contains("delete") && des.startsWith("delete")) {
+                try {
+                    String sNum = des.substring(des.indexOf(' ') + 1);
+                    Integer.parseInt(sNum);
+                    return "delete";
+                } catch (NumberFormatException e) {
+                    return null;
+                }
+            } else if (des.contains("deadline") && des.startsWith("deadline")) {
                 return "deadline";
-            } else if (keyword.name().equals("event") && des.contains("event") && des.startsWith("event")) {
+            } else if (des.contains("event") && des.startsWith("event")) {
                 return "event";
-            } else if (keyword.name().equals("todo") && des.contains("todo") && des.startsWith("todo")) {
+            } else if (des.contains("todo") && des.startsWith("todo")) {
                 return "todo";
             }
-        }
         return null;
     }
 
