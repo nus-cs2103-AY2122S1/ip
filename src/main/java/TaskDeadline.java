@@ -6,6 +6,11 @@ public class TaskDeadline extends Task {
         this.by = by;
     }
 
+    /**
+     * String representation of Deadline
+     *
+     * @return deadline display
+     */
     @Override
     public String toString() {
         String checkBox = done

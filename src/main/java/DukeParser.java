@@ -3,17 +3,32 @@ import java.util.regex.Pattern;
 
 public class DukeParser {
 
+    /**
+     * Task list that this Parser object edits
+     */
     final TaskList taskList;
+
+    /**
+     * Patterns for the Parser to look out for in the input
+     */
     Pattern donePattern = Pattern.compile("done (\\d+)", Pattern.CASE_INSENSITIVE);
     Pattern deletePattern = Pattern.compile("delete (\\d+)", Pattern.CASE_INSENSITIVE);
     Pattern todoPattern = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
     Pattern deadlinePattern = Pattern.compile("deadline (.+) /by (.+)", Pattern.CASE_INSENSITIVE);
     Pattern eventPattern = Pattern.compile("event (.+) /at (.+)", Pattern.CASE_INSENSITIVE);
 
+    /**Constructor
+     *
+     * @param tasks Task List to edit using this Parser object
+     */
     public DukeParser(TaskList tasks) {
         this.taskList = tasks;
     }
 
+    /** Checks an input passed in and matches the input with any valid command
+     *
+     * @param input String input from the Listener given by the User
+     */
     public void parseInput(String input) {
         Matcher checkDone = donePattern.matcher(input);
         Matcher checkDelete = deletePattern.matcher(input);

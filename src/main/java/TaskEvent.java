@@ -6,6 +6,11 @@ public class TaskEvent extends Task {
         this.at = at;
     }
 
+    /**
+     * String representation of Event
+     *
+     * @return event display
+     */
     @Override
     public String toString() {
         String checkBox = done

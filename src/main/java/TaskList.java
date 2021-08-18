@@ -9,6 +9,9 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Prints the number of tasks in the list
+     */
     public void printSize() {
         System.out.println( Ui.OUTPUT_DISPLAY +
                 (tasks.size() == 1
@@ -16,6 +19,14 @@ public class TaskList {
                     : "There are " + tasks.size() + " tasks in your list"));
     }
 
+    /**
+     * Adds a task into the task list
+     *
+     * @param input A matcher object with the groups of information
+     *              required to create a task with the corresponding
+     *              task type
+     * @param type The TaskType of task to add
+     */
     public void add(Matcher input, TaskType type) {
         Optional.ofNullable(
                 TaskType.getTask(input, type))
@@ -28,6 +39,12 @@ public class TaskList {
     }
 
 
+    /**
+     * Marks the task as complete (or incomplete if it is already complete)
+     *
+     * @param index Index of the task displayed by the list command
+     *              Actual index is (index - 1)
+     */
     public void toggleDone(int index) {
         try {
             boolean result = tasks.get(index - 1).toggleDone();
@@ -40,6 +57,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task from the task list
+     *
+     * @param index Index of the task displayed by the list command
+     *              Actual index is (index - 1)
+     */
     public void delete(int index) {
         try {
             Task removed = tasks.remove(index - 1);
@@ -51,6 +74,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Displays the list of tasks
+     */
     public void displayList() {
         if (tasks.size() == 0) {
             System.out.println(Ui.OUTPUT_DISPLAY + "There is nothing to display! :angery:");

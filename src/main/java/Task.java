@@ -12,6 +12,11 @@ public abstract class Task {
         return done;
     }
 
+    /**
+     * String representation of Task
+     *
+     * @return task display
+     */
     @Override
     public String toString() {
         String checkBox = done

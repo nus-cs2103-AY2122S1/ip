@@ -3,6 +3,9 @@ public class Ui {
     public static final String OUTPUT_DISPLAY = "  →   ";
     public static final String OUTPUT_SPACES =  "      ";
 
+    /**
+     * Welcome text to display when Duke starts up
+     */
     public static void intro() {
         String welcomeText = "When the Duke is sus";
 

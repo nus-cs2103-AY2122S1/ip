@@ -3,6 +3,11 @@ public class TaskTodo extends Task {
         super(input);
     }
 
+    /**
+     * String representation of to-do
+     *
+     * @return to-do display
+     */
     @Override
     public String toString() {
         String checkBox = done
