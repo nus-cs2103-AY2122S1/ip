@@ -39,6 +39,9 @@ public class Duke {
                         System.out.println(e.getMessage() + "\n");
                     }
                     break;
+                case "delete":
+                    taskList.delete(Integer.parseInt(input) - 1);
+                    break;
                 default:
                     try {
                         taskList.add(Task.createTask(command, input));

@@ -35,12 +35,20 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the tasks list and prints a success message.
+     * Adds a task to the taskList and prints a success message.
      * @param task The task to be added.
      */
     public void add(Task task) {
         taskList.add(task);
         System.out.println("Alright, I've added the following task:\n");
         System.out.println(taskList.get(taskList.size() - 1) + "\nNow you have " + taskList.size() + " tasks in the list.\n");
+    }
+
+    /**
+     * Removes a task from the taskList.
+     * @param task The task to be removed.
+     */
+    public void delete(int taskIndex) {
+        taskList.remove(taskIndex);
     }
 }
