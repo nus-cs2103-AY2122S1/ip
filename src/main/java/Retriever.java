@@ -12,17 +12,6 @@ public class Retriever {
 
     /**
      * Returns a boolean suggesting whether the entered String
-     * is the word "list" or not.
-     *
-     * @param userInput The input entered by the user.
-     * @return a boolean according to the condition.
-     */
-    public boolean isItList(String userInput) {
-        return userInput.toLowerCase().compareTo("list") == 0;
-    }
-
-    /**
-     * Returns a boolean suggesting whether the entered String
      * is the word "bye" or not.
      *
      * @param userInput The input entered by the user.
@@ -34,6 +23,17 @@ public class Retriever {
 
     /**
      * Returns a boolean suggesting whether the entered String
+     * contains the word "delete" or not.
+     *
+     * @param userInput The input entered by the user.
+     * @return a boolean according to the condition.
+     */
+    public boolean isItDelete(String userInput) {
+        return userInput.toLowerCase().contains("delete");
+    }
+
+    /**
+     * Returns a boolean suggesting whether the entered String
      * contains the word "done" or not.
      *
      * @param userInput The input entered by the user.
@@ -41,6 +41,17 @@ public class Retriever {
      */
     public boolean isItDone(String userInput) {
         return userInput.toLowerCase().contains("done");
+    }
+
+    /**
+     * Returns a boolean suggesting whether the entered String
+     * is the word "list" or not.
+     *
+     * @param userInput The input entered by the user.
+     * @return a boolean according to the condition.
+     */
+    public boolean isItList(String userInput) {
+        return userInput.toLowerCase().compareTo("list") == 0;
     }
 
     /**
@@ -63,23 +74,23 @@ public class Retriever {
      *
      * @param task The task to be printed.
      */
-    public void printTask(Task task) {
+    public void printAddedTask(Task task) {
         System.out.println("-> Where's My Treat? I Added: \n\t" + task);
         System.out.println("\nYou Owe Me " + userTaskList.size() + " Treat(s), Master!");
     }
 
     /**
-     * To mark a particular task as done in the task list.
+     * Marks a particular task as done in the task list.
      *
      * @param userInput The command entered by the user with the "done" keyword.
      * @throws TaskNotFoundException If the entered task number does not exist.
-     * @throws IllegalTaskNumberException If the task number entered is not a number.
+     * @throws IllegalTaskNumberException If the task number entered is not a number or does not exist.
      */
-    public void taskDone(String userInput) throws TaskNotFoundException, IllegalTaskNumberException {
-
+    public void markTaskDone(String userInput) throws TaskNotFoundException, IllegalTaskNumberException {
         // Parsing the user input.
         String[] holder = userInput.split(" ");
 
+        // Checking if a task number is entered and is an integer.
         if(holder.length <= 1 || holder[1].compareTo("") == 0
                 || !Character.isDigit(holder[1].charAt(0))) {
             throw new IllegalTaskNumberException("Please Enter An Integer Value For Task Number");
@@ -89,7 +100,7 @@ public class Retriever {
         int taskNumber = (Integer.parseInt(holder[1])) - 1;
 
         // Making sure the task number exists in the list.
-        if (taskNumber <= (userTaskList.size() - 1)) {
+        if (taskNumber <= (userTaskList.size() - 1) && taskNumber >= 0) {
             Task task = userTaskList.get(taskNumber);
             task.markAsDone();
 
@@ -103,12 +114,47 @@ public class Retriever {
     }
 
     /**
+     * Deletes a particular task from the task list.
+     *
+     * @param userInput The command entered by the user with the "delete" keyword.
+     * @throws TaskNotFoundException If the entered task number does not exist.
+     * @throws IllegalTaskNumberException If the task number entered is not a number or does not exist.
+     */
+    public void deleteTask(String userInput) throws TaskNotFoundException, IllegalTaskNumberException {
+        // Parsing the user input.
+        String[] holder = userInput.split(" ");
+
+        // Checking if a task number is entered and is an integer.
+        if(holder.length <= 1 || holder[1].compareTo("") == 0
+                || !Character.isDigit(holder[1].charAt(0))) {
+            throw new IllegalTaskNumberException("Please Enter An Integer Value For Task Number");
+        }
+
+        // Obtaining the task number to be deleted.
+        int taskNumber = (Integer.parseInt(holder[1])) - 1;
+
+        // Making sure the task number exists in the list.
+        if (taskNumber <= (userTaskList.size() - 1) && taskNumber >= 0) {
+            Task task = userTaskList.get(taskNumber);
+            userTaskList.remove(taskNumber);
+
+            System.out.println("Woof! Whose a Bad Boy?\n"
+                    + "Task Deleted!\n"
+                    + "\t" + task
+                    + "\nYou Owe Me " + userTaskList.size() + " Treat(s), Master!");
+        } else {
+            throw new TaskNotFoundException("Sorry! The Task Number Entered Does Not Exist!");
+        }
+    }
+
+    /**
      * To parse and add a deadline type task to the task list.
      *
      * @param userInput The task details input by the user.
      * @throws IllegalDeadlineFormatException If the format for adding a deadline task is not followed.
      */
     public void addDeadline(String userInput) throws IllegalDeadlineFormatException {
+        // Making sure that a properly formatted deadline task is entered.
         if(!userInput.toLowerCase().contains("/by")
                 || userInput.split(" ").length < 4
                 || userInput.substring(9).split(" /by ").length < 2) {
@@ -121,7 +167,7 @@ public class Retriever {
         Task deadlineTask = new Deadline(userInputArray[0], userInputArray[1]);
         userTaskList.add(deadlineTask);
 
-       printTask(deadlineTask);
+        printAddedTask(deadlineTask);
     }
 
     /**
@@ -131,6 +177,7 @@ public class Retriever {
      * @throws IllegalEventFormatException If the format for adding an event task is not followed.
      */
     public void addEvent(String userInput) throws IllegalEventFormatException {
+        // Making sure that a properly formatted event task is entered.
         if(!userInput.toLowerCase().contains("/at")
                 || userInput.split(" ").length < 4
                 || userInput.substring(5).split(" /at ").length < 2) {
@@ -143,7 +190,7 @@ public class Retriever {
         Task eventTask = new Event(userInputArray[0], userInputArray[1]);
         userTaskList.add(eventTask);
 
-        printTask(eventTask);
+        printAddedTask(eventTask);
     }
 
     /**
@@ -153,6 +200,7 @@ public class Retriever {
      * @throws IllegalTodoFormatException If the format for adding a todo task is not followed.
      */
     public void addTodo(String userInput) throws IllegalTodoFormatException {
+        // Making sure that a properly formatted todo task is entered.
         if(userInput.split(" ").length < 2
                 || userInput.substring(5).compareTo("") == 0) {
             throw new IllegalTodoFormatException("Please Follow The Format For Adding A Todo Task: \n"
@@ -164,12 +212,12 @@ public class Retriever {
         Task todoTask = new Todo(userInputTodo);
         userTaskList.add(todoTask);
 
-        printTask(todoTask);
+        printAddedTask(todoTask);
     }
 
     /**
      * Parsing the user input to find out which type of
-     * task does the user want to make the entry for.
+     * task does the user want to make an entry for.
      *
      * @param userInput The details input by the user.
      * @throws IllegalCommandException If the command entered by the user does not make sense.
@@ -214,13 +262,16 @@ public class Retriever {
             userInput = sc.nextLine();
 
             try {
-                // Checking if the input is either "list" or "done" or not "bye".
+                // Checking if the input is either "list" or "done" or "delete" or not "bye".
                 if (isItList(userInput)) {
                     // Calling the method to print the list.
                     printList();
                 } else if (isItDone(userInput)) {
                     // Calling the method to mark a particular task as done.
-                    taskDone(userInput);
+                    markTaskDone(userInput);
+                }  else if(isItDelete(userInput)) {
+                    // Calling the method to delete a particular task.
+                    deleteTask(userInput);
                 } else if (!isItBye(userInput)) {
                     // Here, we need to check if it is an event or a deadline or a todo type of task.
                     parseUserInput(userInput);
@@ -228,6 +279,7 @@ public class Retriever {
             } catch (TaskNotFoundException | IllegalDeadlineFormatException
                     | IllegalEventFormatException | IllegalTodoFormatException
                     | IllegalCommandException | IllegalTaskNumberException e) {
+                // Catching various exceptions and alerting the user.
                 System.out.println(e.getMessage());
             }
             System.out.println("________________________________________");

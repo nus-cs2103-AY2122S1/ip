@@ -81,6 +81,25 @@ Woof! Whose a Good Boy?
 Task Done!
 	[T][X] code
 ________________________________________
+-> Where's My Treat? I Added: 
+	[T][ ] clean room
+
+You Owe Me 7 Treat(s), Master!
+________________________________________
+-> Where's My Treat? I Added: 
+	[E][ ] Watch Netflix (at: 12AM)
+
+You Owe Me 8 Treat(s), Master!
+________________________________________
+Woof! Whose a Bad Boy?
+Task Deleted!
+	[E][ ] Watch Netflix (at: 12AM)
+You Owe Me 7 Treat(s), Master!
+________________________________________
+Woof! Whose a Good Boy?
+Task Done!
+	[T][X] clean room
+________________________________________
 ________________________________________
 -> Sad To See You Go!
 ________________________________________

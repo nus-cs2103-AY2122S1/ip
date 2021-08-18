@@ -16,4 +16,8 @@ deadline /at
 todo
 done
 done 6
+todo clean room
+event Watch Netflix /at 12AM
+delete 8
+done 7
 bye
