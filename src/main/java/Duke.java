@@ -6,7 +6,7 @@ import java.util.Scanner;
  * A chatbot based on Project Duke
  *
  * @author KelvinSoo
- * @version Level-3
+ * @version Level-5
  *
  */
 public class Duke {
@@ -30,24 +30,20 @@ public class Duke {
      */
     private void printReply(String text) {
         int maxLength = 0;
-        String[] line = text.split("\n");
-        for (String s : line) {
+        String[] textLine = text.split("\n");
+        for (String s : textLine) {
             if (maxLength < s.length())
                 maxLength = s.length();
         }
-
         // unicode does not work with test script
         //String lineStart =  "    \u2554" + "\u2550".repeat(maxLength + 2) + "\u2557";
         //String lineEnd =  "    \u255A" + "\u2550".repeat(maxLength + 2) + "\u255D";
-
-        String lineStart =  "     " + "=".repeat(maxLength + 2);
-        String lineEnd =  "     " + "=".repeat(maxLength + 2);
-
-        System.out.println(lineStart);
-        for (String s : line) {
+        String lineBoarder =  "     " + "=".repeat(maxLength + 2);
+        System.out.println(lineBoarder);
+        for (String s : textLine) {
             System.out.println("    | " + s + " ".repeat(maxLength - s.length()) + " |");
         }
-        System.out.println(lineEnd);
+        System.out.println(lineBoarder);
     }
 
     /**
@@ -65,30 +61,105 @@ public class Duke {
     }
 
     /**
-     * Print a list of text.
-     * @param list List of text.
+     * Print a list of task.
+     * @param list task list.
      */
-    private void printList(List<Task> list) {
+    private void printListCommand(List<Task> list) throws DukeException{
         if (list.isEmpty()) {
-            printReply("It seems that your list is empty.\n" +
-                "Try adding some task using \"todo\", \"deadline\" or \"event\"");
-        } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Here is your list:\n");
-            for (Task task : list) {
-                sb.append(String.format("%s. %s %s \n", task.getID(), task.getStatusIcon(), task.getDescription()));
-            }
-            printReply(sb.toString());
+            throw new DukeException("It seems that your list is empty.\n" +
+                    "Try adding some task using \"todo\", \"deadline\" or \"event\"");
         }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here is your list:\n");
+        for (Task task : list) {
+            sb.append(String.format("%s. %s %s \n", task.getID(), task.getStatusIcon(), task.getDescription()));
+        }
+        printReply(sb.toString());
+        processReply(sc.nextLine());
     }
 
     /**
-     * Print task added message
+     * Add a Task to the task list
      * @param task the task.
      */
-    private void printAddedTask(Task task) {
+    private void addTask(Task task) {
+        taskList.add(task);
         printReply(String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list.",
             task.getStatusIcon(), task.getDescription(), taskList.size()));
+        processReply(sc.nextLine());
+    }
+
+    /**
+     * Evaluate a todo command.
+     * And add a todo task to the task list.
+     *
+     * @param command the user command.
+     */
+    private void addTodoCommand(String command) throws DukeException{
+        if (command.length() <= 5) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        }
+        addTask(new ToDo(command.substring(5)));
+    }
+
+    /**
+     * Evaluate a deadline command.
+     * And add a deadline task to the task list.
+     *
+     * @param command the user command.
+     */
+    private void addDeadlineCommand(String command) throws DukeException{
+        if (command.length() <= 9 || !command.contains("/by")) {
+            throw new DukeException("OOPS!!! The format of the deadline is incorrect.\n" +
+                    "eg. deadline read book /by Friday");
+        }
+        String parameter = command.substring(9);
+        String[] details = parameter.split("/by");
+        addTask(new Deadline(details[0], details[1]));
+    }
+
+    /**
+     * Evaluate an event command.
+     * And add a event task to the task list.
+     *
+     * @param command the user command.
+     */
+    private void addEventCommand(String command) throws DukeException{
+        if (command.length() <= 6 || !command.contains("/at")) {
+            throw new DukeException("OOPS!!! The format of the event is incorrect.\n" +
+                    "eg. event CS2103T lecture /at Thursday, 1600hr");
+        }
+        String parameter = command.substring(6);
+        String[] details = parameter.split("/at");
+        addTask(new Event(details[0], details[1]));
+    }
+
+    /**
+     * Evaluate a done command.
+     * Mark a given task as done.
+     *
+     * @param command the user command.
+     */
+    private void doneCommand(String command) throws DukeException{
+        String[] details = command.split(" ");
+        if (details.length < 2) {
+            //missing parameter
+            throw new DukeException("OOPS!!! Did you forget the task number?");
+        }
+        if (!details[1].matches("\\d+")) {
+            //invalid parameter
+            throw new DukeException("OOPS!!! Invalid task number.");
+        }
+        int taskID = Integer.parseInt(details[1]);
+        if (taskID > taskList.size()) {
+            //task does not exist
+            throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskID));
+        }
+        Task task = taskList.get(taskID - 1);
+        task.markASDone();
+        printReply(String.format("Nice! I've marked this task as done: \n  %s %s",
+                task.getStatusIcon(), task.getDescription()));
+        processReply(sc.nextLine());
     }
 
     /**
@@ -96,64 +167,32 @@ public class Duke {
      * @param text The user input.
      */
     private void processReply(String text) {
-        if (text.equals("bye")) {
-            terminateUser();
-        } else if (text.equals("list")) {
-            printList(taskList);
-            processReply(sc.nextLine());
-        } else if (text.startsWith("todo ") || (text.equals("todo"))) {
-            if (text.length() <= 5) {
-                printReply("oops");
-            } else {
-                String parameter = text.substring(5);
-                Task todo = new ToDo(parameter);
-                taskList.add(todo);
-                printAddedTask(todo);
-                processReply(sc.nextLine());
+        String[] details = text.split(" ");
+        try {
+            switch (details[0]) {
+                case "bye":
+                    terminateUser();
+                    break;
+                case "list":
+                    printListCommand(taskList);
+                    break;
+                case "todo":
+                    addTodoCommand(text);
+                    break;
+                case "deadline":
+                    addDeadlineCommand(text);
+                    break;
+                case "event":
+                    addEventCommand(text);
+                    break;
+                case "done":
+                    doneCommand(text);
+                    break;
+                default:
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-        } else if (text.startsWith("deadline ") || (text.equals("deadline"))) {
-            if (text.length() <= 9 || !text.contains("/by")) {
-                printReply("oops");
-            } else {
-                String parameter = text.substring(9);
-                String[] details = parameter.split("/by");
-                Task deadline = new Deadline(details[0], details[1]);
-                taskList.add(deadline);
-                printAddedTask(deadline);
-            }
-            processReply(sc.nextLine());
-        } else if (text.startsWith("event ") || (text.equals("event"))) {
-            if (text.length() <= 6 || !text.contains("/at")) {
-                printReply("oops");
-            } else {
-                String parameter = text.substring(6);
-                String[] details = parameter.split("/at");
-                Task event = new Event(details[0], details[1]);
-                taskList.add(event);
-                printAddedTask(event);
-            }
-            processReply(sc.nextLine());
-        } else if (text.startsWith("done ") || (text.equals("done"))) {
-            String[] splitText = text.split(" ");
-            // check if the character after done is a valid number
-            // possible to add commands such as "done 1 2 3 4" in the future
-            if (splitText.length > 1 && splitText[1].matches("\\d+")) {
-                int taskID = Integer.parseInt(splitText[1]);
-                // check if the task exist
-                if (taskID <= taskList.size() && taskID > 0) {
-                    Task task = taskList.get(taskID - 1);
-                    task.markASDone();
-                    printReply(String.format("Nice! I've marked this task as done: \n  %s %s",
-                        task.getStatusIcon(), task.getDescription()));
-                } else {
-                    printReply(String.format("Task %d does not exist.", taskID));
-                }
-            } else {
-                printReply("Please enter a valid number.");
-            }
-            processReply(sc.nextLine());
-        } else {
-            printReply(String.format("You said \"%s\"", text));
+        } catch (DukeException e) {
+            printReply(e.getMessage());
             processReply(sc.nextLine());
         }
     }
