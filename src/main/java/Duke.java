@@ -44,7 +44,7 @@ public class Duke {
         arr.get(taskNumber(input) - 1).markAsDone();
         System.out.println("---------------------------------------------");
     }
-    
+
     private static void addTask(Task newTask, ArrayList<Task> arr) {
         arr.add(newTask);
         System.out.println("---------------------------------------------\n"
@@ -100,8 +100,9 @@ public class Duke {
         System.out.println("Hello! I'm Duke!\n" + "What can I do for you?");
         System.out.println("---------------------------------------------");
 
+        Scanner input = new Scanner (System.in);
         while (true) {
-            Scanner input = new Scanner (System.in);
+//            Scanner input = new Scanner (System.in);
             String action = input.nextLine();
 
             if (getCommand(action).equals("done")) { //mark task as done
