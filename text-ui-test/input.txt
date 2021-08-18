@@ -6,5 +6,10 @@ event fight club /at kungfuPanda
 list
 done 3
 list
-deadline
+todo
+blah
+event fighting /at
+event /at
+deadline grandmaster /by
+deadline /by
 bye

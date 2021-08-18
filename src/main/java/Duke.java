@@ -56,7 +56,7 @@ public class Duke {
                         throw new DukeException("The description of a event cannot be empty.\n" +
                                 "Don't forget to use /at to indicate the event time.");
                     } else if (furtherSplits[1].equals("") || furtherSplits[1].equals(" ")) {
-                        throw new DukeException("event must come with a event date/time.");
+                        throw new DukeException("Event must come with a event date/time.");
                     }
                     tasks.add(new Event(furtherSplits[0], furtherSplits[1]));
                     printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
