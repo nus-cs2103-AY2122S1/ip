@@ -71,7 +71,9 @@ public class Recieve {
                     System.out.println("Now you have " + (index - 1) + " tasks in the list.");
 
                 }
-                else {}
+                else {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
             }
         }
         sc.close();
