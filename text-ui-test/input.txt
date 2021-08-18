@@ -6,6 +6,8 @@ done 1
 done 4
 todo borrow book
 list
+delete 3
+list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
