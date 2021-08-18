@@ -9,12 +9,18 @@ public class Duke {
         ArrayList<Task> taskArr = new ArrayList<Task>();
         String command = sc.nextLine();
         while (! command.equals("bye")) {
-            addTask(command, taskArr);
-            command = sc.nextLine();
+            try {
+                addTask(command, taskArr);
+                
+            } catch (DukeException e) {
+                System.out.println(e);
+            } finally {
+                command = sc.nextLine();
+            }
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
-    public static void addTask(String command, ArrayList<Task> taskArr) {
+    public static void addTask(String command, ArrayList<Task> taskArr) throws DukeException{
         String[] commandArr = command.split(" ");
         if (command.equals("list")) {
             System.out.println("Here are the tasks in your list:");
@@ -28,30 +34,46 @@ public class Duke {
             taskRef.taskDone();
             System.out.println("Nice! I've marked this task as done:\n"+ taskRef);
         } else {
-            System.out.println("Got it. I've added this task: ");
+            
+            
+            boolean commandArrayLength = commandArr.length <= 1;
+            String taskAdded = "Got it. I've added this task: ";
             if (commandArr[0].equals("todo")) {
-                Task t = new Todo(command);
-                taskArr.add(t);
-                System.out.println(t);
+                if (commandArrayLength) {
+                    throw new DukeException("The description of a todo cannot be empty!");
+                } else {
+                    System.out.println(taskAdded);
+                    Task t = new Todo(command);
+                    taskArr.add(t);
+                    System.out.println(t);
+                }
 
             } else if (commandArr[0].equals("deadline")) {
-                int spaceIndex = command.indexOf(" ");
-                int slashIndex = command.indexOf("/");
-                Task t = new Deadline(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4, command.length()));
-                taskArr.add(t);
-                System.out.println(t);
+                if (commandArrayLength) {
+                    throw new DukeException("The description of a deadline cannot be empty!");
+                } else {
+                    System.out.println(taskAdded);
+                    int spaceIndex = command.indexOf(" ");
+                    int slashIndex = command.indexOf("/");
+                    Task t = new Deadline(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
+                    taskArr.add(t);
+                    System.out.println(t);
+                }
 
             } else if (commandArr[0].equals("event")) {
-                int spaceIndex = command.indexOf(" ");
-                int slashIndex = command.indexOf("/");
-                Task t = new Event(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4, command.length()));
-                taskArr.add(t);
-                System.out.println(t);
+                if (commandArrayLength) {
+                    throw new DukeException("The description of an event cannot be empty!");
+                } else {
+                    System.out.println(taskAdded);
+                    int spaceIndex = command.indexOf(" ");
+                    int slashIndex = command.indexOf("/");
+                    Task t = new Event(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
+                    taskArr.add(t);
+                    System.out.println(t);
+                }
 
             } else {
-                Task t = new Task(command);
-                taskArr.add(t);
-                System.out.println("added: " + command);
+                throw new DukeException("I'm sorry, but I don't know what that means!");
             }
             System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
 
