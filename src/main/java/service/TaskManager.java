@@ -1,3 +1,5 @@
+package service;
+
 import exception.TaskManagerException;
 import task.Deadline;
 import task.Event;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskManager class.
+ * service.TaskManager class.
  *
  * This class acts as the manager of tasks held by the Duke.
  */
