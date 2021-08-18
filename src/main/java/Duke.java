@@ -62,9 +62,15 @@ public class Duke {
                     System.out.println(deadlineTask(str));
                 }
 
+                //command event
                 else if (str.contains("event")) {
                     System.out.println(horizontalLines);
                     System.out.println(eventsTask(str));
+                }
+
+                else if (str.contains("delete")) {
+                    System.out.println(horizontalLines);
+                    System.out.println(deleteTask(str));
                 }
 
                 else {
@@ -132,6 +138,15 @@ public class Duke {
         } catch (StringIndexOutOfBoundsException e) {
             return "☹ OOPS!!! The description of a todo cannot be empty.";
         }
+    }
+
+    public static String deleteTask(String str) {
+        int index = Integer.parseInt(str.substring(7)) - 1;
+        Task t = tasks.get(index);
+        tasks.remove(index);
+        return "Got it. I've added this task: \n"
+                + t
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }
 
