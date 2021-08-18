@@ -1,15 +1,16 @@
 public class Task {
     private String taskName;
+    private String taskType;
     private boolean isDone;
 
-    public Task(String taskName, boolean isDone) {
+    public Task(String taskName, String taskType, boolean isDone) {
         this.taskName = taskName;
+        this.taskType = taskType;
         this.isDone = isDone;
     }
 
-    public Task(String taskName) {
-        this.taskName = taskName;
-        this.isDone = false;
+    public Task(String taskName, String taskType) {
+        this(taskName, taskType, false);
     }
 
     public String getTaskName() {

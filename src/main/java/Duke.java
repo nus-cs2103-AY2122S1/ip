@@ -3,6 +3,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) {
 
         String duke = "\nDuke: ";
@@ -34,12 +35,9 @@ public class Duke {
 
                 case "list":
                     System.out.println(duke + "\n\tTasks:");
-                    if (tasks.size() == 0)
-                        System.out.println("\t\tNothing in list");
-                    else
-                        for (int i = 0; i < tasks.size(); i++) {
-                            System.out.printf("\t\t%d.%s\n", i + 1, tasks.get(i));
-                        }
+                    for (int i = 0; i < tasks.size(); i++)
+                        System.out.printf("\t\t%d.%s\n", i + 1, tasks.get(i));
+                    System.out.println("\t\tNow you have " + tasks.size() + " tasks in the list.");
                     break;
 
                 case "done":
@@ -49,10 +47,32 @@ public class Duke {
                     System.out.printf("\t\t%s\n", tasks.get(taskNum - 1));
                     break;
 
-                default:
-                    tasks.add(new Task(userInput));
-                    System.out.println(duke + "\n\tAdded: " + userInput);
+                case "todo": {
+                    Task newTask = new ToDo(userInputScanner.nextLine());
+                    tasks.add(newTask);
+                    System.out.println(duke + "\n\tAdded:\n\t\t" + newTask);
+                    System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
                     break;
+                }
+
+                case "deadline": {
+                    userInputScanner.useDelimiter(" /by ");
+                    Task newTask = new Deadline(userInputScanner.next(), userInputScanner.next());
+                    tasks.add(newTask);
+                    System.out.println(duke + "\n\tAdded:\n\t\t" + newTask);
+                    System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+                    break;
+                }
+
+                case "event": {
+                    userInputScanner.useDelimiter(" /at ");
+                    Task newTask = new Event(userInputScanner.next(), userInputScanner.next());
+                    tasks.add(newTask);
+                    System.out.println(duke + "\n\tAdded:\n\t\t" + newTask);
+                    System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+                    break;
+                }
+
             }
         } while (!exiting);
 
