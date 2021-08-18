@@ -37,10 +37,19 @@ public class Duke {
                     }
                 }
             }
-            else {
-                System.out.println("----------------------");
-                tasks.add(new Task(command));
-                System.out.println("----------------------");
+            else if (command.startsWith("todo ")) {
+                String name = command.substring(5);
+                tasks.add(new ToDo(name));
+            }
+            else if (command.startsWith("deadline ")){
+                String name = command.split(" /by ", 2)[0].substring(9);
+                String time = command.split(" /by ", 2)[1];
+                tasks.add(new Deadline(name, time));
+            }
+            else if (command.startsWith("event ")){
+                String name = command.split(" /at ", 2)[0].substring(6);
+                String time = command.split(" /at ", 2)[1];
+                tasks.add(new Event(name, time));
             }
         }
 
