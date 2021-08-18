@@ -9,10 +9,12 @@ public class Duke {
 
     private String HORIZONTAL_LINE = "____________________________________________________________";
     private String INDENTATION = "    ";
-    private ArrayList<String> tasks;
+    private ArrayList<String> taskList;
+    private boolean isActive;
 
     private Duke(){
-        tasks = new ArrayList<>();
+        this.taskList = new ArrayList<>();
+        this.isActive = true;
     }
 
     private void greet(){
@@ -30,20 +32,44 @@ public class Duke {
     private void exit(){
         String msg = "Bye. Hope to see you again soon!";
         printMessageWithFormat(msg);
+        this.isActive = false;
+    }
+
+    private void addTask(String task){
+        this.taskList.add(task);
+        String msg = "added: " + task;
+        printMessageWithFormat(msg);
     }
 
     private void start(){
         greet();
         getCommand();
     }
+
+    private void listTasks(){
+        String msg = String.format("1. %s", taskList.get(0));
+        for (int i = 2; i <= taskList.size(); i++){
+            msg += String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i-1));
+        }
+        printMessageWithFormat(msg);
+    }
+
     private void getCommand(){;
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
-        while (!command.equals("bye")){
-            printMessageWithFormat(command);
+        while (this.isActive){
+            switch(command){
+                case "bye":
+                    exit();
+                    break;
+                case "list":
+                    listTasks();
+                    break;
+                default:
+                    addTask(command);
+            }
             command = sc.nextLine();
         }
-        exit();
     }
 
     public static void main(String[] args) {
