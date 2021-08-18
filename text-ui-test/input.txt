@@ -4,4 +4,13 @@ event project meeting /at Mon 2-4pm
 list
 done 2
 list
+delete 2
+list
+invalid inputs
+deadline missing by
+event missing at
+done
+done 9001
+delete
+delete 420
 bye

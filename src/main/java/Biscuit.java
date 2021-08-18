@@ -50,6 +50,9 @@ public class Biscuit {
                     case "done":
                         doneTask(processedInput);
                         break;
+                    case "delete":
+                        deleteTask(processedInput);
+                        break;
                     case "list":
                         for (int i = 0; i < list.size(); i++) {
                             System.out.println(i + 1 + ". " + list.get(i));
@@ -88,7 +91,7 @@ public class Biscuit {
                         task = new Deadline(deadlineData[0], deadlineData[1]);
                     } else {
                         throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The date/time for deadline cannot be empty.\n" +
-                                "If you do not wish to add a date, use todo instead ");
+                                "If you do not wish to add a date, use todo instead.");
                     }
                     break;
                 case "event":
@@ -97,7 +100,7 @@ public class Biscuit {
                             task = new Event(eventData[0], eventData[1]);
                         } else {
                             throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The date/time for event cannot be empty.\n" +
-                                    "If you do not wish to add a date, use todo instead ");
+                                    "If you do not wish to add a date, use todo instead.");
                         }
                     break;
                 default: // todo task
@@ -105,8 +108,8 @@ public class Biscuit {
                     break;
             }
             list.add(task);
-            System.out.println("Got it. I've added this task:\n\t" + task);
-            System.out.println("Now you have " + list.size() + " tasks in the list.");
+            System.out.println("Got it. I've added this task:\n\t" + task
+                    + "\nNow you have " + list.size() + " tasks in the list.");
         } else {
             throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The description of " + userInput[0] + " cannot be empty.");
         }
@@ -129,6 +132,28 @@ public class Biscuit {
             }
         } else {
             throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The done task number cannot be empty.");
+        }
+    }
+
+    /**
+     * Delete specified task
+     * @param userInput task user wants to delete
+     * @throws BiscuitException invalid input by user
+     */
+    public static void deleteTask(String[] userInput) throws BiscuitException {
+        if (userInput.length == 2) {
+            try {
+                int index = Integer.parseInt(userInput[1]) - 1;
+                Task toDelete = list.get(index);
+                list.remove(index);
+                System.out.println("Noted. I've removed the following task:\n\t" + toDelete);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! Please enter a valid number" +
+                        (list.size() == 1 ? " of 1" : " from 1 to " + list.size()) + ".");
+            }
+        } else {
+            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The delete task number cannot be empty.");
         }
     }
 }
