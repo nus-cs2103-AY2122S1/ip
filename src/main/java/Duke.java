@@ -8,7 +8,6 @@ public class Duke {
         Scanner userSc = new Scanner(System.in);
         String name = "JARVIS";
         System.out.println("Hello I am " + name +".\nIs there anything I can do for you Sir?\n");
-
         String userInput = userSc.nextLine();
         while(!userInput.equals("bye")){
             if(userInput.equals("list")){
@@ -108,7 +107,6 @@ public class Duke {
     public static void deleteTask(int number){
         Task t = items.remove(number);
         echo(t.toString(), "removed");
-
     }
 
 }
