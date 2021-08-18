@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
+       /* String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + logo);*/
         startBot();
 
         //level 4
@@ -118,7 +118,7 @@ public class Duke {
 
     public static void displayCheckedTask(Task item) {
         item.checkOffTask();
-        String display = "Nice! I've marked this task as done: \n  " + item.displayTask();
+        String display = "Nice! I've marked this task as done:\n  " + item.displayTask();
         System.out.println(display);
     }
 
