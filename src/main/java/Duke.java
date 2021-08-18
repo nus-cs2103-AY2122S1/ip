@@ -1,7 +1,17 @@
+import java.sql.PseudoColumnUsage;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    enum SPECIALTASK {
+        bye,
+        done,
+        list,
+        todo,
+        deadline,
+        event,
+        delete
+    }
     public static void main(String[] args) throws DukeException {
         String border = "____________________________________________________________";
         Printer printer = new Printer(border);
@@ -11,15 +21,15 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        while (!input.equals("bye")) {
+        while (!input.equals(SPECIALTASK.bye.name())) {
             String[] splitInput = input.split(" ", 2);
-            if (splitInput[0].equals("done")) {
+            if (splitInput[0].equals(SPECIALTASK.done.name())) {
                 int index = Integer.parseInt(splitInput[1]) - 1;
                 String returnString = tasks.get(index).markDone();
                 printer.PrintMessage(returnString);
-            } else if (input.equals("list")) {
+            } else if (input.equals(SPECIALTASK.list.name())) {
                 printer.PrintList(tasks);
-            } else if (splitInput[0].equals("todo")) {
+            } else if (splitInput[0].equals(SPECIALTASK.todo.name())) {
                 try {
                     if (splitInput.length < 2 || splitInput[1].equals("") || splitInput[1].equals(" ")) {
                         throw new DukeException("The description of a todo cannot be empty.");
@@ -29,7 +39,7 @@ public class Duke {
                 } catch (DukeException e) {
                     printer.PrintMessage(e.getMessage());
                 }
-            } else if (splitInput[0].equals("deadline")) {
+            } else if (splitInput[0].equals(SPECIALTASK.deadline.name())) {
                 try {
                     if (splitInput.length < 2) {
                         throw new DukeException("The description of a deadline cannot be empty.");
@@ -46,7 +56,7 @@ public class Duke {
                 } catch (DukeException e) {
                     printer.PrintMessage(e.getMessage());
                 }
-            } else if (splitInput[0].equals("event")) {
+            } else if (splitInput[0].equals(SPECIALTASK.event.name())) {
                 try {
                     if (splitInput.length < 2) {
                         throw new DukeException("The description of a event cannot be empty.");
@@ -63,7 +73,7 @@ public class Duke {
                 } catch (DukeException e) {
                     printer.PrintMessage(e.getMessage());
                 }
-            } else if (splitInput[0].equals("delete")) {
+            } else if (splitInput[0].equals(SPECIALTASK.delete.name())) {
                 try {
                     if (splitInput.length < 2) {
                         throw new DukeException("We don't know what to delete!");
