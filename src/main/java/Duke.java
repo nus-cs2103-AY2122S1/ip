@@ -11,11 +11,15 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String LIST_MESSAGE = "Here are the tasks in your list:\n%s";
+    private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n %s";
+    private static final String MISSING_DONE_NUMBER_MESSAGE = "Please input a number after the done command";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     // Commands
     private static final String EXIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
+    private static final String DONE_COMMAND = "done";
 
     // Message methods
     public static void horizontal_line() {
@@ -41,12 +45,23 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         for (String input = sc.nextLine(); canContinue(input); input = sc.nextLine()) {
-            switch (input) {
+            String[] inputArr = input.split(" ");
+            String firstCommand = inputArr[0];
+            switch (firstCommand) {
                 case LIST_COMMAND:
-                    display_message(todoList.toString());
+                    display_message(String.format(LIST_MESSAGE, todoList.toString()));
+                    break;
+                case DONE_COMMAND:
+                    if (inputArr.length < 2) {
+                        display_message(MISSING_DONE_NUMBER_MESSAGE);
+                    } else {
+                        String secondCommand = inputArr[1];
+                        int todoIndex = Integer.parseInt(secondCommand);
+                        display_message(String.format(DONE_MESSAGE, todoList.markTodoAsDone(todoIndex)));
+                    }
                     break;
                 default:
-                    display_message(todoList.addTodo(new Todo(input)));
+                    display_message(todoList.addTodo(input));
             }
         }
         sc.close();
