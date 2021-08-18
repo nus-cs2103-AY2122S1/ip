@@ -13,7 +13,11 @@ public class Duke {
         response.greet();
         String text = sc.nextLine();
         while (!text.equals("bye")) {
-            response.echo(text);
+            if (text.equals("list")) {
+                response.display();
+            } else {
+                response.echo(text);
+            }
             text = sc.nextLine();
         }
         response.exit();
