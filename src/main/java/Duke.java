@@ -31,7 +31,11 @@ public class Duke {
                     System.out.println(line + "Nice! I've marked this task as done:\n" + arr[num]);
                     break;
                 case "todo":
-                    Task todo = new Todo(sc.nextLine().trim(),count);
+                    String x = sc.nextLine().trim();
+                    if(x.isEmpty()){
+                        throw new IllegalArgumentException("\n"+line+"\n☹ OOPS!!! The description of a todo cannot be empty.\n"+line);
+                    }
+                    Task todo = new Todo(x,count);
                     arr[index] = todo;
                     System.out.println(line + "Got it. I've added this task:\n" + todo +
                             "\nNow you have " + count +" tasks in the list.\n" + line);
@@ -57,12 +61,18 @@ public class Duke {
                     count++;
                     break;
                 default:
+                    throw new IllegalArgumentException("\n"+line+"\n☹ OOPS!!! I'm sorry, but I don't know what " +
+                            "that means :-(\n" + line);
+
+                    /*
                     Task t = new Task(command + " " + sc.nextLine().trim(),count);
                     arr[index] = t;
                     System.out.println(line + "added: " + t.description + "\n" + line);
                     index++;
                     count++;
                     break;
+
+                     */
             }
             if(exit){
                 break;
