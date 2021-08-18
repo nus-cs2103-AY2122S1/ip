@@ -1,12 +1,7 @@
-import exception.DukeExtractCommandException;
-import exception.DukeIOException;
-import exception.DukeTaskNumberOutOfBoundsException;
-import exception.DukeUnknownException;
-import task.*;
-import utils.CommandUtils;
-
-import java.time.LocalDateTime;
-import java.util.Scanner;
+import storage.Storage;
+import listener.Message;
+import task.Operation;
+import ui.Ui;
 
 /**
  * The project aims to build a product named Duke,
@@ -23,169 +18,48 @@ import java.util.Scanner;
  * to be executed at run-time.
  */
 
-public class Duke {
-    private static final String HORIZONTAL_LINE = "    ____________________________________________________________";
-    private static final String INDENTATION = "     ";
+public class Duke implements Message {
+    private final Ui ui;
+    private final Storage storage;
 
-    private static void greet() {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println(INDENTATION + "Hello! I'm Duke");
-        System.out.println(INDENTATION + "What can I do for you?");
-        System.out.println(HORIZONTAL_LINE);
+    /**
+     * This is constructor method of Duke.
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage(this);
     }
 
-    private static void loadTasks(TaskManager taskManager) {
-        try {
-            taskManager.loadTasksFromFile();
-        } catch (DukeIOException e) {
-            System.out.println(HORIZONTAL_LINE);
-            System.out.println(e.getMessage());
-            System.out.println(HORIZONTAL_LINE);
-        }
-    }
-
-    private static void echo(String command) {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println(INDENTATION + command);
-        System.out.println(HORIZONTAL_LINE);
-    }
-
-    private static Operation getOperation(String command) {
-        try {
-            return CommandUtils.extractOperation(command);
-        } catch (DukeExtractCommandException | DukeUnknownException e) {
-            System.out.println(HORIZONTAL_LINE);
-            System.out.println(e.getMessage());
-            System.out.println(HORIZONTAL_LINE);
-        }
-        return null;
-    }
-
-    private static int getTaskNumber(String command) {
-        int number = 0;
-        try {
-            number = CommandUtils.extractTaskNumber(command);
-        } catch (DukeExtractCommandException | NumberFormatException | DukeTaskNumberOutOfBoundsException e) {
-            System.out.println(HORIZONTAL_LINE);
-            System.out.println(e.getMessage());
-            System.out.println(HORIZONTAL_LINE);
-        }
-        return number;
-    }
-
-    private static String getTaskDescription(String command) {
-        String description = "";
-        try {
-            description = CommandUtils.extractTaskDescription(command);
-        } catch (DukeExtractCommandException e) {
-            System.out.println(HORIZONTAL_LINE);
-            System.out.println(e.getMessage());
-            System.out.println(HORIZONTAL_LINE);
-        }
-        return description;
-    }
-
-    private static void addTask(TaskManager taskManager, Operation operation, String description) {
-        System.out.println(HORIZONTAL_LINE);
-        switch (operation) {
-            case TODO:
-                Todo todo = new Todo(description);
-                taskManager.addTask(todo);
-                System.out.println(INDENTATION + "Got it. I've added this task:");
-                System.out.println(INDENTATION + "  " + todo.toString());
-                System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
-                        (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
+    /**
+     * Run Duke program.
+     */
+    public void run() {
+        storage.loadTasks();
+        ui.logo();
+        ui.greet();
+        String command = ui.readCommand();
+        Operation operation = storage.getOperation(command);
+        while (true) {
+            if (operation == Operation.BYE) {
+                ui.bye();
                 break;
-            case DEADLINE:
-                try {
-                    String[] taskDetails = CommandUtils.extractTaskDetails(description, " /by ");
-                    String taskName = taskDetails[0];
-                    LocalDateTime byDateTime = CommandUtils.extractDeadlineDateTime(taskDetails[1]);
-                    Deadline deadline = new Deadline(taskName, byDateTime);
-                    taskManager.addTask(deadline);
-                    System.out.println(INDENTATION + "Got it. I've added this task:");
-                    System.out.println(INDENTATION + "  " + deadline.toString());
-                    System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
-                            (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
-                } catch (DukeExtractCommandException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            case EVENT:
-                try {
-                    String[] taskDetails = CommandUtils.extractTaskDetails(description, " /at ");
-                    String taskName = taskDetails[0];
-                    EventDateTime eventDateTime = CommandUtils.extractEventDatetime(taskDetails[1], " ");
-                    Event event = new Event(taskName, eventDateTime);
-                    taskManager.addTask(event);
-                    System.out.println(INDENTATION + "Got it. I've added this task:");
-                    System.out.println(INDENTATION + "  " + event.toString());
-                    System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
-                            (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
-                } catch (DukeExtractCommandException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
+            } else if (operation == Operation.LIST) {
+                storage.listTasks();
+            } else if (operation == Operation.DONE) {
+                storage.completeTask(command);
+            } else if (operation == Operation.DELETE) {
+                storage.deleteTask(command);
+            } else if (operation == Operation.CLEAR) {
+                storage.clearTasks();
+            } else if (operation == Operation.TODO ||
+                operation == Operation.DEADLINE ||
+                operation == Operation.EVENT) {
+                storage.addTask(command);
+            }
+            storage.saveTasksToFile();
+            command = ui.readCommand();
+            operation = storage.getOperation(command);
         }
-        System.out.println(HORIZONTAL_LINE);
-    }
-
-    private static void completeTask(TaskManager taskManager, int number) {
-        try {
-            System.out.println(HORIZONTAL_LINE);
-            taskManager.completeTask(number);
-            System.out.println(INDENTATION + "Nice! I've marked this task as done:");
-            System.out.println(INDENTATION + "  " + taskManager.findTaskByNumber(number).toString());
-        } catch (DukeTaskNumberOutOfBoundsException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            System.out.println(HORIZONTAL_LINE);
-        }
-    }
-
-    private static void deleteTask(TaskManager taskManager, int number) {
-        try {
-            System.out.println(HORIZONTAL_LINE);
-            Task task = taskManager.deleteTask(number);
-            System.out.println(INDENTATION + "Noted. I've removed this task:");
-            System.out.println(INDENTATION + "  " + task.toString());
-            System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
-                    (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
-        } catch (DukeTaskNumberOutOfBoundsException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            System.out.println(HORIZONTAL_LINE);
-        }
-    }
-
-    private static void clearTasks(TaskManager taskManager) {
-        taskManager.clearTasks();
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println(INDENTATION + "All tasks are cleared.");
-        System.out.println(HORIZONTAL_LINE);
-    }
-
-    private static void listTasks(TaskManager taskManager) {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println(INDENTATION + "Here are the tasks in your list:");
-        taskManager.printTasks();
-        System.out.println(HORIZONTAL_LINE);
-    }
-
-    private static void saveTasksToFile(TaskManager taskManager) {
-        try {
-            taskManager.saveTasksToFile();
-        } catch (DukeIOException e) {
-            System.out.println(HORIZONTAL_LINE);
-            System.out.println(e.getMessage());
-            System.out.println(HORIZONTAL_LINE);
-        }
-    }
-
-    private static void bye() {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
-        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -194,47 +68,14 @@ public class Duke {
      * @param args an array of command-line arguments for the application
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        TaskManager taskManager = new TaskManager();
-        Scanner scanner = new Scanner(System.in);
-        greet();
-        loadTasks(taskManager);
-        String command = scanner.nextLine();
-        Operation operation = getOperation(command);
-        while (true) {
-            if (operation == Operation.BYE) {
-                bye();
-                break;
-            } else if (operation == Operation.LIST) {
-                listTasks(taskManager);
-            } else if (operation == Operation.DONE) {
-                int number = getTaskNumber(command);
-                if (number > 0) {
-                    completeTask(taskManager, number);
-                }
-            } else if (operation == Operation.DELETE) {
-                int number = getTaskNumber(command);
-                if (number > 0) {
-                    deleteTask(taskManager, number);
-                }
-            } else if (operation == Operation.CLEAR) {
-                clearTasks(taskManager);
-            } else if (operation == Operation.TODO ||
-                    operation == Operation.DEADLINE ||
-                    operation == Operation.EVENT) {
-                String description = getTaskDescription(command);
-                if (!description.equals("")) {
-                    addTask(taskManager, operation, description);
-                }
-            }
-            saveTasksToFile(taskManager);
-            command = scanner.nextLine();
-            operation = getOperation(command);
-        }
+        new Duke().run();
+    }
+
+    /**
+     * Display messages.
+     */
+    @Override
+    public void show(String... messages) {
+        ui.show(messages);
     }
 }

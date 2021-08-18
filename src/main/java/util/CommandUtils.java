@@ -1,4 +1,4 @@
-package utils;
+package util;
 
 import exception.DukeExtractCommandException;
 import exception.DukeTaskNumberOutOfBoundsException;
@@ -18,7 +18,6 @@ import java.time.format.DateTimeParseException;
  */
 
 public class CommandUtils {
-    private static final String INDENTATION = "     ";
 
     /**
      * Extract operation from command.
@@ -30,11 +29,11 @@ public class CommandUtils {
     public static Operation extractOperation(String command) throws DukeExtractCommandException, DukeUnknownException {
         String[] contents = command.split(" ");
         if (contents.length == 0) {
-            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The operation cannot be extracted properly.");
+            throw new DukeExtractCommandException("☹ OOPS!!! The operation cannot be extracted properly.");
         }
         String operation = contents[0];
         if (operation.equals("")) {
-            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The operation cannot be empty.");
+            throw new DukeExtractCommandException("☹ OOPS!!! The operation cannot be empty.");
         } else {
             if (operation.equals(Operation.TODO.getValue())) {
                 return Operation.TODO;
@@ -53,7 +52,7 @@ public class CommandUtils {
             } else if (operation.equals(Operation.BYE.getValue())) {
                 return Operation.BYE;
             } else {
-                throw new DukeUnknownException(INDENTATION + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeUnknownException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
@@ -70,16 +69,16 @@ public class CommandUtils {
     public static int extractTaskNumber(String command) throws DukeExtractCommandException, NumberFormatException, DukeTaskNumberOutOfBoundsException {
         String[] contents = command.split(" ", 2);
         if (contents.length != 2) {
-            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The task number cannot be extracted properly.");
+            throw new DukeExtractCommandException("☹ OOPS!!! The task number cannot be extracted properly.");
         }
         int number = 0;
         try {
             number = Integer.parseInt(contents[1]);
         } catch (Exception e) {
-            throw new NumberFormatException(INDENTATION + "☹ OOPS!!! The task number is not an integer.");
+            throw new NumberFormatException("☹ OOPS!!! The task number is not an integer.");
         }
         if (number < 1) {
-            throw new DukeTaskNumberOutOfBoundsException(INDENTATION + "☹ OOPS!!! The task number is not a positive integer.");
+            throw new DukeTaskNumberOutOfBoundsException("☹ OOPS!!! The task number is not a positive integer.");
         }
         return number;
     }
@@ -95,11 +94,11 @@ public class CommandUtils {
         String[] contents = command.split(" ", 2);
         String operation = contents[0];
         if (contents.length != 2) {
-            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The description of a " + operation + " cannot be extracted properly.");
+            throw new DukeExtractCommandException("☹ OOPS!!! The description of a " + operation + " cannot be extracted properly.");
         }
         String description = contents[1];
         if (description.equals("")) {
-            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The description of a " + operation + " cannot be empty.");
+            throw new DukeExtractCommandException("☹ OOPS!!! The description of a " + operation + " cannot be empty.");
         }
         return description;
     }
@@ -116,11 +115,11 @@ public class CommandUtils {
     public static String[] extractTaskDetails(String description, String regex) throws DukeExtractCommandException {
         String[] details = description.split(regex, 2);
         if (details.length != 2) {
-            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The task details cannot be extracted properly.");
+            throw new DukeExtractCommandException("☹ OOPS!!! The task details cannot be extracted properly.");
         }
         for (String detail: details) {
             if (detail.equals("")) {
-                throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The task details cannot be empty.");
+                throw new DukeExtractCommandException("☹ OOPS!!! The task details cannot be empty.");
             }
         }
         return details;
@@ -138,7 +137,7 @@ public class CommandUtils {
     public static EventDateTime extractEventDatetime(String dateTime, String regex) throws DukeExtractCommandException {
         String[] dateAndTimes = dateTime.split(regex, 3);
         if (dateAndTimes.length != 3) {
-            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The event date and time cannot be extracted properly.");
+            throw new DukeExtractCommandException("☹ OOPS!!! The event date and time cannot be extracted properly.");
         }
         String atDate = dateAndTimes[0];
         String startTime = dateAndTimes[1];
@@ -146,7 +145,7 @@ public class CommandUtils {
         try {
             return new EventDateTime(DateTimeUtils.parseDate(atDate), DateTimeUtils.parseTime(startTime), DateTimeUtils.parseTime(endTime));
         } catch (DateTimeParseException e) {
-            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The event date and time cannot be extracted properly.");
+            throw new DukeExtractCommandException("☹ OOPS!!! The event date and time cannot be extracted properly.");
         }
     }
 
@@ -161,7 +160,7 @@ public class CommandUtils {
         try {
             return DateTimeUtils.parseDateTime(dateTime);
         } catch (DateTimeParseException e) {
-            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The deadline date and time cannot be extracted properly.");
+            throw new DukeExtractCommandException("☹ OOPS!!! The deadline date and time cannot be extracted properly.");
         }
     }
 }

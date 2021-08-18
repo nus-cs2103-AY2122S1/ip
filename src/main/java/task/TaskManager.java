@@ -2,12 +2,13 @@ package task;
 
 import exception.DukeIOException;
 import exception.DukeTaskNumberOutOfBoundsException;
-import utils.DateTimeUtils;
-import utils.FileUtils;
+import util.DateTimeUtils;
+import util.FileUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * The is the TaskManager class that that
@@ -19,7 +20,6 @@ import java.util.stream.Collectors;
  */
 
 public class TaskManager {
-    private static final String INDENTATION = "     ";
     private static final String DIR_NAME = "data";
     private static final String FILE_NAME = "duke.txt";
     private final List<Task> tasks;
@@ -70,7 +70,7 @@ public class TaskManager {
     public void completeTask(int number) throws DukeTaskNumberOutOfBoundsException {
         int index = number - 1;
         if (index < 0 || index >= tasks.size()) {
-            throw new DukeTaskNumberOutOfBoundsException(INDENTATION + "☹ OOPS!!! Task number is out of bounds.");
+            throw new DukeTaskNumberOutOfBoundsException("☹ OOPS!!! Task number is out of bounds.");
         }
         tasks.set(index, tasks.get(index).markAsDone());
     }
@@ -84,7 +84,7 @@ public class TaskManager {
     public Task deleteTask(int number) throws DukeTaskNumberOutOfBoundsException {
         int index = number - 1;
         if (index < 0 || index >= tasks.size()) {
-            throw new DukeTaskNumberOutOfBoundsException(INDENTATION + "☹ OOPS!!! Task number is out of bounds.");
+            throw new DukeTaskNumberOutOfBoundsException("☹ OOPS!!! Task number is out of bounds.");
         }
         return tasks.remove(index);
     }
@@ -102,16 +102,14 @@ public class TaskManager {
      *      2. Task2
      *      ...
      */
-    public void printTasks() {
-        for(int i = 0; i < tasks.size(); i++) {
-            String task = INDENTATION + (i + 1) + ". " + tasks.get(i).toString();
-            System.out.println(task);
-        }
+    public String[] printTasks() {
+        return IntStream.range(0, tasks.size())
+            .mapToObj(i -> (i + 1) + ". " + tasks.get(i).toString())
+            .collect(Collectors.toList()).toArray(String[]::new);
     }
 
     /**
      * Load tasks from file with path: src/data/duke.txt.
-     *
      */
     public void loadTasksFromFile() throws DukeIOException {
         List<String> formattedTasks = FileUtils.loadFile(DIR_NAME, FILE_NAME);
@@ -145,23 +143,20 @@ public class TaskManager {
                 }
             }
         } catch (Exception e) {
-            throw new DukeIOException(INDENTATION + "☹ OOPS!!! Load tasks from file error.");
+            throw new DukeIOException("☹ OOPS!!! Load tasks from file error.");
         }
     }
 
     /**
      * Save tasks to file with path: src/data/duke.txt.
-     *
-     * @return whether tasks are saved to file successfully
      */
-    public boolean saveTasksToFile() throws DukeIOException {
+    public void saveTasksToFile() throws DukeIOException {
         List<String> formattedTasks = tasks.stream()
                 .map(task -> String.join(" | ", task.formatTask()))
                 .collect(Collectors.toList());
         boolean saved = FileUtils.saveFile(DIR_NAME, FILE_NAME, formattedTasks);
         if (!saved) {
-            throw new DukeIOException(INDENTATION + "☹ OOPS!!! Save tasks to file error.");
+            throw new DukeIOException("☹ OOPS!!! Save tasks to file error.");
         }
-        return true;
     }
 }
