@@ -90,6 +90,7 @@ public class Duke {
                 task.markAsDone();
                 return doneMessage + task.toString();
             }
+            // Error: task done out of list index.
             return doneOutsideOfList;
         }
 
@@ -98,6 +99,7 @@ public class Duke {
         switch (split[0]) {
             case (todoString):
                 if (split.length == 1 || split[1].equals("")) {
+                    // Error: Todo no description.
                     return todoNoDescError;
                 }
                 Todo todo = new Todo(split[1]);
@@ -105,10 +107,12 @@ public class Duke {
                 return formatAddTaskMessage(todo);
             case (deadlineString):
                 if (split.length == 1 || split[1].equals("")) {
+                    // Error: Deadline no description.
                     return deadlineNoDescError;
                 }
                 String[] deadlineSplit = split[1].split(deadlineDelimiter, 2);
                 if (deadlineSplit.length == 1 || deadlineSplit[1].equals("")) {
+                    // Error: Deadline no date.
                     return deadlineNoDateError;
                 }
                 Deadline deadline = new Deadline(deadlineSplit[0], deadlineSplit[1]);
@@ -116,16 +120,19 @@ public class Duke {
                 return formatAddTaskMessage(deadline);
             case (eventString):
                 if (split.length == 1 || split[1].equals("")) {
+                    // Error: Event no description.
                     return eventNoDescError;
                 }
                 String[] eventSplit = split[1].split(eventDelimiter, 2);
                 if (eventSplit.length == 1 || eventSplit[1].equals("")) {
+                    // Error: Event no date.
                     return eventNoDateError;
                 }
                 Event event = new Event(eventSplit[0], eventSplit[1]);
                 tasks.add(event);
                 return formatAddTaskMessage(event);
             default:
+                // Error: Unrecognized command.
                 return unrecognizedCommand;
         }
     }
