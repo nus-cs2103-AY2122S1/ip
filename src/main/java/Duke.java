@@ -34,6 +34,10 @@ public class Duke {
     final String doneCommand = "done";
     int doneTask = -1;
 
+    // Delete command
+    final String deleteCommand = "delete";
+    int deleteTask = -1;
+
     // Todo command
     final String todoCommand = "todo";
 
@@ -68,6 +72,12 @@ public class Duke {
             list.get(doneTask).markAsDone();
             responseContent = "Nice! I've marked this task as done:\n" +
                 "       " + list.get(doneTask);
+            break;
+          case deleteCommand:
+            responseContent = "Noted. I've removed this task:\n"
+                + "       " + list.get(deleteTask) + "\n"
+                + "     Now you have " + (list.size() - 1) + (list.size() - 1 > 1 ? " tasks" : " task") + " in the list.";
+            list.remove(deleteTask);
             break;
           case todoCommand:
             Todo newTodo = new Todo(description);
@@ -119,6 +129,19 @@ public class Duke {
               if (doneTask < 0) {
                 throw new InvalidArgumentException(doneTask);
               } else if (doneTask >= list.size()) {
+                throw new InvalidArgumentException(list.size());
+              }
+            }
+            break;
+          case deleteCommand:
+            if (commandLine.split(" ").length == 1) {
+              throw new MissingArgumentException("Delete", "task");
+            } else {
+              rest = commandLine.split(" ")[1];
+              deleteTask = Integer.parseInt(rest) - 1;
+              if (deleteTask < 0) {
+                throw new InvalidArgumentException(deleteTask);
+              } else if (deleteTask >= list.size()) {
                 throw new InvalidArgumentException(list.size());
               }
             }
