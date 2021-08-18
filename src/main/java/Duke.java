@@ -49,10 +49,14 @@ public class Duke {
                     description = description + strArray[i] + " ";
                 }
 
-                tasks[counter] = new Deadline(description, date);
-                System.out.println("Got it. I've added this task:\n" + "\t" + tasks[counter].toString());
-                counter++;
-                System.out.println("Now you have " + counter + " tasks in your list.");
+                if (date.equals("")) {
+                    System.out.println("Invalid input. Please try again.");
+                } else {
+                    tasks[counter] = new Deadline(description, date);
+                    System.out.println("Got it. I've added this task:\n" + "\t" + tasks[counter].toString());
+                    counter++;
+                    System.out.println("Now you have " + counter + " tasks in your list.");
+                }
             } else if (strArray[0].equals("event")) {
                 String description = new String();
                 String date = new String();
@@ -68,10 +72,14 @@ public class Duke {
                     description = description + strArray[i] + " ";
                 }
 
-                tasks[counter] = new Event(description, date);
-                System.out.println("Got it. I've added this task:\n" + "\t" + tasks[counter].toString());
-                counter++;
-                System.out.println("Now you have " + counter + " tasks in your list.");
+                if (date.equals("")) {
+                    System.out.println("Invalid input. Please try again.");
+                } else {
+                    tasks[counter] = new Event(description, date);
+                    System.out.println("Got it. I've added this task:\n" + "\t" + tasks[counter].toString());
+                    counter++;
+                    System.out.println("Now you have " + counter + " tasks in your list.");
+                }
             } else {
                 System.out.println("Invalid input. Please try again.");
             }
