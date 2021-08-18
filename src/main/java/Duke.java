@@ -31,12 +31,18 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     taskList.done(Integer.parseInt(taskNo));
                 } else if (description.startsWith("todo")) {
+                    if (description.equals("todo")) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
                     System.out.println("Got it boss! I've added this task:");
                     String des = description.substring(5);
                     Todo ttask = new Todo(des);
                     taskList.store(ttask);
                     System.out.println("  " + ttask.toString() + "\n" + taskList.toString());
                 } else if (description.startsWith("deadline")) {
+                    if (description.equals("deadline")) {
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
                     System.out.println("Got it boss! I've added this task:");
                     int pos = description.indexOf("/");
                     String des = description.substring(9, pos - 1);
@@ -45,6 +51,9 @@ public class Duke {
                     taskList.store(dtask);
                     System.out.println("  " + dtask.toString() + "\n" + taskList.toString());
                 } else if (description.startsWith("event")) {
+                    if (description.equals("event")) {
+                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                    }
                     System.out.println("Got it boss! I've added this task:");
                     int pos = description.indexOf("/");
                     String des = description.substring(6, pos - 1);
