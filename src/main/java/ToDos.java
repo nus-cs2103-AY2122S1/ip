@@ -1,9 +1,7 @@
 public class ToDos extends Task {
-    private boolean isDone;
 
     public ToDos(String description) {
         super(description);
-        this.isDone = false;
     }
 
     @Override
@@ -23,6 +21,6 @@ public class ToDos extends Task {
 
     @Override
     public String printTask() {
-        return super.printTask();
+        return this.getStatusIcon() + " " + this.getDescription();
     }
 }

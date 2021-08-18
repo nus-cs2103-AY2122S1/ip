@@ -1,9 +1,7 @@
 public class Event extends Task {
-    private boolean isDone;
 
     public Event(String description) {
         super(description);
-        this.isDone = false;
     }
 
     @Override
@@ -26,6 +24,6 @@ public class Event extends Task {
 
     @Override
     public String printTask() {
-        return super.printTask();
+        return this.getStatusIcon() + " " + this.getDescription();
     }
 }

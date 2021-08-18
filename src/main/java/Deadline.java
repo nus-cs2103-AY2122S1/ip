@@ -1,9 +1,7 @@
 public class Deadline extends Task {
-    private boolean isDone;
 
     public Deadline(String description) {
         super(description);
-        this.isDone = false;
     }
 
     @Override
@@ -26,6 +24,6 @@ public class Deadline extends Task {
 
     @Override
     public String printTask() {
-        return this.getStatusIcon() + super.printTask();
+        return this.getStatusIcon() + " " + this.getDescription();
     }
 }
