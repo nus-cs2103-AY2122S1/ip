@@ -27,6 +27,7 @@ public class Duke {
                     try {
                         System.out.println("Checking your todo list...");
                         taskList.printList();
+                        System.out.println();
                     } catch (EmptyTaskListException e) {
                         System.out.println(e.getMessage() + "\n");
                     }

@@ -40,7 +40,7 @@ public class TaskList {
      */
     public void add(Task task) {
         taskList.add(task);
-        System.out.println("Alright, I've added the following task:\n");
+        System.out.println("Alright, I've added the following task:");
         System.out.println(taskList.get(taskList.size() - 1) + "\nNow you have " + taskList.size() + " tasks in the list.\n");
     }
 
@@ -49,6 +49,8 @@ public class TaskList {
      * @param task The task to be removed.
      */
     public void delete(int taskIndex) {
+        System.out.println("Alright, I've removed the following task:");
+        System.out.println(taskList.get(taskIndex) + "\nNow you have " + (taskList.size() - 1) + " tasks in the list.\n");
         taskList.remove(taskIndex);
     }
 }
