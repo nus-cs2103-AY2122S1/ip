@@ -26,6 +26,7 @@ public class Duke {
             String str = in.nextLine();
             String[] strparse = str.split(" ");
             // split it later to parse for 'done' and 'integer afterwards'
+
             if (str.equalsIgnoreCase("bye")) {
                 // breaks loop
                 continueloop = false;
@@ -56,7 +57,10 @@ public class Duke {
 
                 System.out.println(linebreak);
                 System.out.println("Uwu! Addewd yourw taskws: \n");
-                System.out.println(taskarr[arrcounter - 1].toString());
+                System.out.println("   " + taskarr[arrcounter - 1].toString());
+                System.out.println("\nYouw noww havew "
+                        + (arrcounter)
+                        + " taskw(s) inw thew wist! uwu \n");
                 System.out.println(linebreak);
             } else if (strparse[0].equalsIgnoreCase("deadline")) {
                 // adds a deadline task to the list. now with no deadline assumption
@@ -84,12 +88,42 @@ public class Duke {
 
                 System.out.println(linebreak);
                 System.out.println("Uwu! Addewd yourw taskws: \n");
-                System.out.println(taskarr[arrcounter - 1].toString());
+                System.out.println("   " + taskarr[arrcounter - 1].toString());
+                System.out.println("\nYouw noww havew "
+                        + (arrcounter)
+                        + " taskw(s) inw thew wist! uwu \n");
                 System.out.println(linebreak);
-
             } else if (strparse[0].equalsIgnoreCase("event")) {
+                // adds an event to the list. pretty much like deadline.
+                StringBuilder taskb = new StringBuilder();
+                StringBuilder atb = new StringBuilder();
+                int i = 1;
+                while (i < strparse.length
+                        && !strparse[i].equalsIgnoreCase("/at")) {
+                    taskb.append(strparse[i]);
+                    if (i != strparse.length - 1) {
+                        taskb.append(" ");
+                    }
+                    i++;
+                }
+                i++;
+                while (i < strparse.length) {
+                    atb.append(strparse[i]);
+                    if (i != strparse.length - 1) {
+                        atb.append(" ");
+                    }
+                    i++;
+                }
+                taskarr[arrcounter] = new Event(taskb.toString(), atb.toString());
+                arrcounter++;
 
-
+                System.out.println(linebreak);
+                System.out.println("Uwu! Addewd yourw taskws: \n");
+                System.out.println("   " + taskarr[arrcounter - 1].toString());
+                System.out.println("\nYouw noww havew "
+                        + (arrcounter)
+                        + " taskw(s) inw thew wist! uwu \n");
+                System.out.println(linebreak);
             } else if (strparse.length == 2 && strparse[0].equalsIgnoreCase("done")) {
                 // checks for 'done' and integer keywords
                 // checks corresponding task as done
@@ -128,8 +162,7 @@ public class Duke {
             } else {
                 System.out.println(linebreak
                         +  '\n'
-                        + "Sowwy, thiws commandw iswn't supporwted TwT "
-                        + '\n'
+                        + "Sowwy, thiws commandw iswn't supporwted TwT\n"
                         + '\n'
                         + linebreak);
             }
