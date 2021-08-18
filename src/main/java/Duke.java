@@ -34,31 +34,32 @@ public class Duke {
 
         while (true) {
             String userInput = scanner.nextLine().strip();
-
-            if (userInput.equals("bye")) {
-                // Check if user is attempting to exit.
-                say("Bye bye, see you next time.");
-                break;
-            } else if (userInput.equals("list")) {
-                // Check if user is requesting to print list.
-                list();
-            } else if (DONE_PATTERN.matcher(userInput).matches()) {
-                // Check if user is attempting to mark a task as done.
-                Matcher matcher =  DONE_PATTERN.matcher(userInput);
-                matcher.find();
-                String taskPositionString = matcher.group(1);
-
-                int taskPosition = Integer.parseInt(taskPositionString);
-                markAsDone(taskPosition);
-            } else if (TODO_PATTERN.matcher(userInput).matches()) {
-                // User is attempting to add a to-do
-                addToDo(userInput);
-            } else if (DEADLINE_PATTERN.matcher(userInput).matches()) {
-                // User is attempting to add a deadline
-                addDeadline(userInput);
-            } else if (EVENT_PATTERN.matcher(userInput).matches()) {
-                // User is attempting to add an event
-                addEvent(userInput);
+            try {
+                if (userInput.equals("bye")) {
+                    // Check if user is attempting to exit.
+                    say("Bye bye, see you next time.");
+                    break;
+                } else if (userInput.equals("list")) {
+                    // Check if user is requesting to print list.
+                    list();
+                } else if (userInput.startsWith("done")) {
+                    markAsDone(userInput);
+                } else if (userInput.startsWith("todo")) {
+                    // User is attempting to add a to-do
+                    addToDo(userInput);
+                } else if (userInput.startsWith("deadline")) {
+                    // User is attempting to add a deadline
+                    addDeadline(userInput);
+                } else if (userInput.startsWith("event")) {
+                    // User is attempting to add an event
+                    addEvent(userInput);
+                } else {
+                    // Invalid command
+                    throw new DukeException("Sorry, I didn't understand what you meant by that");
+                }
+            } catch (DukeException e) {
+                // Get Duke to say out the error
+                say(e.getMessage());
             }
         }
     }
@@ -98,26 +99,22 @@ public class Duke {
     }
 
     /**
-     * Adds a new task to the store and informs the user.
-     * @param taskDescription description of the new task
-     */
-    private static void addToStore(String taskDescription) {
-        Task task = new Task(taskDescription, false);
-
-        store[count] = task;
-        count++;
-
-        say("Added:", String.format("%d. %s", count, task));
-    }
-
-    /**
      * Marks a task at taskPosition as done.
-     * @param taskPosition Position of the task to be marked
+     * @param userInput User input to be split by regex pattern matching
      */
-    private static void markAsDone(int taskPosition) {
+    private static void markAsDone(String userInput) {
+
+        // Check if user is attempting to mark a task as done.
+        Matcher matcher =  DONE_PATTERN.matcher(userInput);
+        if (!matcher.find()) {
+            throw new DukeException("Mark a task as done like this: done <task number>");
+        }
+
+        String taskPositionString = matcher.group(1);
+        int taskPosition = Integer.parseInt(taskPositionString);
+
         if (taskPosition < 0 || taskPosition > count) {
-            say(String.format("There is no task number %d!", taskPosition));
-            return;
+            throw new DukeException(String.format("There is no task number %d!", taskPosition));
         }
 
         Task task = store[taskPosition - 1];
@@ -135,7 +132,7 @@ public class Duke {
     private static void addToDo(String userInput) {
         Matcher matcher = TODO_PATTERN.matcher(userInput);
         if (!matcher.find()) {
-            return;
+            throw new DukeException("Give me a description of the todo to add it as a task");
         }
         String description = matcher.group(1);
 
@@ -156,7 +153,7 @@ public class Duke {
     private static void addDeadline(String userInput) {
         Matcher matcher = DEADLINE_PATTERN.matcher(userInput);
         if (!matcher.find()) {
-            return;
+            throw new DukeException("Give me a deadline like this: deadline <task> /by <date/time>");
         }
         String description = matcher.group(1);
         String endDateTime = matcher.group(2);
@@ -178,7 +175,7 @@ public class Duke {
     private static void addEvent(String userInput) {
         Matcher matcher = EVENT_PATTERN.matcher(userInput);
         if (!matcher.find()) {
-            return;
+            throw new DukeException("Tell me an event like this: event <task> /at <date/time>");
         }
         String description = matcher.group(1);
         String eventDateTime = matcher.group(2);
