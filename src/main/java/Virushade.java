@@ -42,8 +42,10 @@ public class Virushade {
             String str = sc.nextLine();
             if (str.equals("bye")) {
                 break;
+            } else if (str.equals("list")) {
+                Memory.list();
             } else {
-                echo(str);
+                Memory.add(str);
             }
         }
 
