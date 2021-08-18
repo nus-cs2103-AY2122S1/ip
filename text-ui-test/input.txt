@@ -12,5 +12,10 @@ todo
 deadline 
 event     
 deadline return book
-event project meeting /at 2-4pm /at Monday              
+event project meeting /at 2-4pm /at Monday         
+delete 
+delete adawdaw    
+delete -1
+delete 10
+delete 3
 bye

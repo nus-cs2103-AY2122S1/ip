@@ -80,8 +80,8 @@ Output: This is your current list!
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Output: Please specify which task you want to mark 
-as complete by adding a single number after 'done'!
+Output: Please specify which task you would like to
+mark as done by adding a single number after 'done'!
 i.e. done 1
 
 =================================================
@@ -89,8 +89,8 @@ i.e. done 1
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Output: Please specify which task you want to mark 
-as complete by adding a single number after 'done'!
+Output: Please specify which task you would like to
+mark as done by adding a single number after 'done'!
 i.e. done 1
 
 =================================================
@@ -119,37 +119,84 @@ Output: That is not a valid input!
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Output: A description of the task is required!
+Output: A description of the todo is required!
 
 =================================================
 
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Output: A description of the task is required!
+Output: A description of the deadline is required!
 
 =================================================
 
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Output: A description of the task is required!
+Output: A description of the event is required!
 
 =================================================
 
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Output: Please include the deadline of the task after a '/by' (only once).
-i.e deadline return book /by Monday
+Output: Please include the deadline of the task after
+a task description using a '/by' (only once).
+i.e. deadline return book /by Monday
 
 =================================================
 
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Output: Please include the time of the event after an '/at' (only once).
-i.e event project meeting /at Aug 6th 2-4pm
+Output: Please include the time of the event after
+a task description using an '/at' (only once).
+i.e. event project meeting /at Aug 6th 2-4pm
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output: Please specify which task you would like to
+delete by adding a single number after 'delete'!
+i.e. delete 1
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output: Please specify which task you would like to
+delete by adding a single number after 'delete'!
+i.e. delete 1
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output: There is no task under that number!
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output: There is no task under that number!
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output:
+
+You have successfully deleted this task:
+
+    [E][ ] project meeting (at: Mon 2-4pm)
+
+You now have 2 tasks in your list!
 
 =================================================
 
