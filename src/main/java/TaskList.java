@@ -31,7 +31,18 @@ public class TaskList {
     public void list() {
         for (int i = 0; i < this.nextSpaceToStore; i++) {
             int currTask = i + 1;
-            System.out.println(currTask+ ". " + this.allTasks[i]);
+            System.out.println(currTask+ ". [" + allTasks[i].getStatusIcon()
+                    + "] " + allTasks[i].getTaskDescription());
         }
+    }
+
+    /**
+     * Method to indicate the indicated task is done in the TaskList.
+     * @param taskNo The task that is completed.
+     */
+    public void done(int taskNo) {
+        Task doneTask = allTasks[taskNo - 1];
+        doneTask.taskCompleted();
+        System.out.println("  [" + doneTask.getStatusIcon() + "] " + doneTask.getTaskDescription());
     }
 }

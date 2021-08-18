@@ -18,8 +18,7 @@ public class Duke {
     }
 
     /**
-     * Method to add the task entered by the user to the toDoList, list out the current
-     * tasks when the command is "list" and exits when the command is "bye".
+     * Method to carry out the command entered by the user to the toDoList.
      */
     public void commanding() {
         Scanner scan = new Scanner(System.in);
@@ -30,18 +29,20 @@ public class Duke {
             System.out.println("-------------------------------------------------------------------");
         } else {
             Task currTask = new Task(description);
+            System.out.println("-------------------------------------------------------------------");
             if (description.equals("list")) {
-                System.out.println("-------------------------------------------------------------------");
+                System.out.println("Here are the tasks in your list:");
                 toDoList.list();
-                System.out.println("-------------------------------------------------------------------");
-                commanding();
+            } else if (description.startsWith("done")) {
+                String taskNo = description.substring(5);
+                System.out.println("Nice! I've marked this task as done:");
+                toDoList.done(Integer.parseInt(taskNo));
             } else {
                 toDoList.store(currTask);
-                System.out.println("-------------------------------------------------------------------");
                 System.out.println("added: " + description);
-                System.out.println("-------------------------------------------------------------------");
-                commanding();
             }
+            System.out.println("-------------------------------------------------------------------");
+            commanding();
         }
         scan.close();
     }

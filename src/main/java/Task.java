@@ -17,6 +17,14 @@ public class Task {
     }
 
     /**
+     * Method to return the task description.
+     * @return Description of the task to do.
+     */
+    public String getTaskDescription() {
+        return this.description;
+    }
+
+    /**
      * Method to check and return the status of a task in the form of "X" or " ".
      * @return If the task is done "X" will be returned, else " " will be returned.
      */
@@ -26,5 +34,12 @@ public class Task {
         } else {
             return " ";
         }
+    }
+
+    /**
+     * Method to indicate that the Task is done.
+     */
+    public void taskCompleted() {
+        isDone = true;
     }
 }
