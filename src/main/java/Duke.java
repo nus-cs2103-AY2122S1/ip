@@ -17,7 +17,8 @@ public class Duke {
                 System.out.println("\n_________________________\n" + "Bye. Hope to see you again soon!" + "\n_________________________\n");
                 return;
             } else if (str.equalsIgnoreCase("list")){
-                System.out.println("\n_________________________\n");
+                System.out.println("\n_________________________\n + Here are the tasks in your list:");
+
                 for(int i = 0 ; i < listIndex; i++){
                     System.out.println((i + 1) + ". " + list[i].toString());
                 }
@@ -27,9 +28,11 @@ public class Duke {
                 list[index].markAsDone();
                 System.out.println("Nice! I've marked this task as done:\n" + list[index].toString());
             } else {
-                list[listIndex] = new Task(str);
+                //split description into task type and description
+                Task newTask = new Task(str.split(" ",2)[0], str.split(" ",2)[1] );
+                list[listIndex] = newTask;
                 listIndex++;
-                System.out.println("\n_________________________\n" + "added: " + str + "\n_________________________\n");
+                System.out.println("\n_________________________\n" + "Got it. I've added this task:\n" + newTask + "Now you have " + listIndex + " tasks in the list." + "\n_________________________\n");
             }
         }
     }
