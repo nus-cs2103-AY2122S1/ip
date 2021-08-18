@@ -43,23 +43,37 @@ public class Duke {
             System.out.println("");
             lastInput = currScanner.nextLine();
 
-            TDLTask.TaskType currTaskType = TDLTask.checkTaskType(lastInput);
-
-
-            if (lastInput.equals("bye")) {
-                break;
-            } else if (lastInput.equals("list")) {
-                listOutTDL();
-            } else if (lastInput.length() >= 6 && lastInput.substring(0, 4).equals("done")) {
-                markItemDoneInTDL(lastInput);
-            } else if (currTaskType != TDLTask.TaskType.NONE) {
-                tryAddToTDL(lastInput, currTaskType);
-
-            } else {
+            try {
+                processCmdInput(lastInput);
+            } catch (DukeExceptionBase dukeE) {
+                dukeE.dukeSayErrorMsg();
             }
         }
 
-        dukeExiter();
+
+    }
+
+    /**
+     * Runs to process the command input.
+     *
+     * @param lastInput   The command to process.
+     */
+    private static void processCmdInput(String lastInput) throws DukeExceptionBase {
+        TDLTask.TaskType currTaskType = TDLTask.checkTaskType(lastInput);
+
+
+        if (lastInput.equals("bye")) {
+            dukeExiter();
+        } else if (lastInput.equals("list")) {
+            listOutTDL();
+        } else if (lastInput.length() >= 4 && lastInput.substring(0, 4).equals("done")) {
+            markItemDoneInTDL(lastInput);
+        } else if (currTaskType != TDLTask.TaskType.NONE) {
+            addToTDL(lastInput, currTaskType);
+
+        } else {
+            unknownCommandEntered();
+        }
     }
 
     /**
