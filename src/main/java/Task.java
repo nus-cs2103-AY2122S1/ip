@@ -1,6 +1,8 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
+
+    public abstract String getTypeIndicator();
 
     public Task(String description) {
         this.description = description;
@@ -15,7 +17,8 @@ public class Task {
         isDone = true;
     }
 
-    public String formatTask() {
-        return "[" + getStatusIcon() + "] " + description;
+    @Override
+    public String toString() {
+        return getTypeIndicator() + " [" + getStatusIcon() + "] " + description;
     }
 }
