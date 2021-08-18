@@ -21,7 +21,7 @@ public class Duke {
             System.out.println("_______________________");
 
             if (task.equals("list")) {
-                System.out.println("Here's your to do list: ");
+                System.out.println("Here's your to do list:");
                 for (int j = 0; j < i; j++) {
                     System.out.printf("%d. %s%n", j + 1, tasks[j]);
                 }

@@ -5,3 +5,35 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What do you need to do today?
+_______________________
+_______________________
+added: [T][ ] borrow book
+Now you have 1 tasks in your list.
+_______________________
+_______________________
+added: [D][ ] return book (by: Monday)
+Now you have 2 tasks in your list.
+_______________________
+_______________________
+Here's your to do list:
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Monday)
+_______________________
+_______________________
+Good job! I've marked this task as done:
+[D][X] return book (by: Monday)
+_______________________
+_______________________
+added: [E][ ] meeting (at: Friday 5pm)
+Now you have 3 tasks in your list.
+_______________________
+_______________________
+Here's your to do list:
+1. [T][ ] borrow book
+2. [D][X] return book (by: Monday)
+3. [E][ ] meeting (at: Friday 5pm)
+_______________________
+_______________________
+See you! Have a nice day!
+_______________________
