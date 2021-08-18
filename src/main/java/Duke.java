@@ -14,14 +14,33 @@ public class Duke {
     private static void listTasks() {
         System.out.println("Here is your to-do list!");
         for (int i = 0; i < myListLength; i++) {
-            System.out.println(i + 1 + ". [" + myList[i].getStatusIcon() + "] " + myList[i].description);
+            System.out.println(i + 1 + ". " + myList[i].toString());
         }
     }
 
     private static void addTask(String input) {
-        myList[myListLength] = new Task(input);
-        myListLength++;
-        System.out.println("added: " + input);
+        try {
+            if (input.startsWith("todo")) {
+                myList[myListLength] = new ToDo(input.substring(5));
+            } else if (input.startsWith("deadline")) {
+                String remaining = input.substring(9);
+                String[] segments = remaining.split(" /");
+                myList[myListLength] = new Deadline(segments[0], segments[1]);
+            } else if (input.startsWith("event")) {
+                String remaining = input.substring(6);
+                String[] segments = remaining.split(" /");
+                myList[myListLength] = new Event(segments[0], segments[1]);
+            } else {
+                System.out.println("Invalid task.");
+                return;
+            }
+            System.out.println("I've added this task:");
+            System.out.println(myList[myListLength]);
+            myListLength++;
+            System.out.println("Now you have " + myListLength + " tasks.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid format.");
+        }
     }
 
 
