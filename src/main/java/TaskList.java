@@ -1,17 +1,16 @@
+import java.util.ArrayList;
+
 public class TaskList {
-    private Task[] taskList;
-    private int length;
+    private ArrayList<Task> taskList;
 
     public TaskList() {
-        this.taskList = new Task[100];
-        this.length = 0;
+        this.taskList = new ArrayList<Task>();
     }
 
     public void add(Task newTask) {
-        taskList[this.length] = newTask;
+        taskList.add(newTask);
         System.out.println("Just added:\n" + newTask.toString());
-        this.length++;
-        System.out.println("You currently have " + length + " tasks in the list.");
+        System.out.println("You currently have " + taskList.size() + " tasks in the list.");
     }
 
     public void done(String[] input) throws DukeException {
@@ -20,22 +19,22 @@ public class TaskList {
         }
         String num = input[1];
         int index = Integer.parseInt(num) - 1;
-        if (index >= this.length) {
+        if (index >= taskList.size()) {
             throw new DukeException("There is no such task in your list D:");
         } else {
-            Task toMark = taskList[index];
+            Task toMark = taskList.get(index);
             toMark.markAsDone();
         }
     }
 
     @Override
     public String toString() {
-        if (length == 0) {
+        if (taskList.isEmpty()) {
             return "Your list is empty :(";
         }
         String result = "Here's your list!";
-        for (int i = 0; i < length; i++) {
-            String curr = this.taskList[i].toString();
+        for (int i = 0; i < taskList.size(); i++) {
+            String curr = taskList.get(i).toString();
             result += String.format("\n %s. %s", i + 1, curr);
         }
         return result;
