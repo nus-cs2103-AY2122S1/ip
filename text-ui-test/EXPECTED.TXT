@@ -7,6 +7,11 @@ Please specify a valid task number.
 Please specify a valid task number.
 Please specify a valid task number.
 Please specify a valid task number.
+Please specify a task number.
+Please specify a valid task number.
+Please specify a valid task number.
+Please specify a valid task number.
+Please specify a valid task number.
 Please specify the task info.
 Please enter a valid deadline format.
 Got it. I've added this task:
@@ -29,6 +34,13 @@ Here are the tasks in your list:
 1. [D][ ] ip (by: Friday)
 2. [E][X] Dinner (at: Thursday 1900-2000)
 3. [T][ ] study
+Please specify a valid task number.
+Noted. I've removed this task:
+  [D][ ] ip (by: Friday)
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1. [E][X] Dinner (at: Thursday 1900-2000)
+2. [T][ ] study
 Sorry, I don't know what that means.
 Sorry, I don't know what that means.
 Bye. Hope to see you again soon!

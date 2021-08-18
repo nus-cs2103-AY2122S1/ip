@@ -5,6 +5,11 @@ done 0
 done 1
 done 999
 done asdf
+delete
+delete 0
+delete 1
+delete 999
+delete asdf
 deadline
 deadline ip
 deadline ip /by Friday
@@ -16,6 +21,9 @@ todo study
 list
 done 4
 done 2
+list
+delete 4
+delete 1
 list
 asdf
 bye asdf
