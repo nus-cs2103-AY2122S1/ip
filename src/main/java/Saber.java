@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Saber {
@@ -27,49 +28,61 @@ public class Saber {
             "      told me to remember?\n" + "\n" +
             "      I'll list them for you, Master.\n";
 
-    protected static Task[] taskArray = new Task[100];
-
-    protected static int totalTask = 0;
-
-    protected static int newTaskIndex = 0;
+    protected static ArrayList<Task> taskList = new ArrayList<>();
 
     enum InputCommand {
         add,
         bye,
         done,
         deadline,
+        delete,
         event,
         todo,
         list,
-        INVALID_INPUT,
     }
 
     public static void handleAddTask(String task) {
-        taskArray[newTaskIndex] = new Task(task);
+        Task newTask = new Task(task);
+        taskList.add(newTask);
         System.out.println(lineBreak + "\n      I have added: "  + task + "\n\n" + lineBreak);
-        totalTask++;
-        newTaskIndex++;
     }
 
     public static void handleDeadlineTask(String task, String time) {
         Task deadline = new Deadline(task, time);
-        taskArray[newTaskIndex] = deadline;
+        taskList.add(deadline);
+        int totalTask = taskList.size();
         System.out.println(lineBreak + "\n      Right, Master.\n"
                 +  "      I'll ensure that you will \n      do this task before the deadline: \n"
                 + "\n        " + deadline);
-        totalTask++;
-        newTaskIndex++;
         String taskPlural = totalTask <= 1 ? "has " + totalTask + " task "
                 : "have " + totalTask + " tasks ";
         System.out.println("\n      Currently, Master " + taskPlural +
                 "\n      in the list." + "\n\n" + lineBreak);
     }
 
-    public static void handleDoneTask(int taskIndex) throws TaskNotFoundException {
+    public static void handleDeleteTask(int taskIndex) throws TaskNotFoundException {
+        int totalTask = taskList.size();
         if (taskIndex >= totalTask || taskIndex < 0) {
             throw new TaskNotFoundException("Task not found");
         }
-        Task task = taskArray[taskIndex];
+        Task task = taskList.get(taskIndex);
+        taskList.remove(taskIndex);
+        totalTask--;
+        System.out.println(lineBreak + "\n      Understand, Master.\n"
+                + "      I have deleted this task.\n"
+                + "\n        " + task + "\n");
+        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task "
+                : "have " + totalTask + " tasks ";
+        System.out.println("      Currently, Master " + taskPlural +
+                "\n      in the list." + "\n\n" + lineBreak);
+    }
+
+    public static void handleDoneTask(int taskIndex) throws TaskNotFoundException {
+        int totalTask = taskList.size();
+        if (taskIndex >= totalTask || taskIndex < 0) {
+            throw new TaskNotFoundException("Task not found");
+        }
+        Task task = taskList.get(taskIndex);
         task.markAsDone();
         System.out.println(lineBreak + "\n      Understand, Master.\n" + "      I'll mark this done right away.\n"
                 + "\n        " + task + "\n\n" + lineBreak);
@@ -77,12 +90,11 @@ public class Saber {
 
     public static void handleEventTask(String task, String time) {
         Task event = new Event(task, time);
-        taskArray[newTaskIndex] = event;
+        taskList.add(event);
+        int totalTask = taskList.size();
         System.out.println(lineBreak + "\n      Right, Master.\n"
                 +  "      I'll make sure you remember \n      to come to this event: \n"
                 + "\n        " + event);
-        totalTask++;
-        newTaskIndex++;
         String taskPlural = totalTask <= 1 ? "has " + totalTask + " task "
                 : "have " + totalTask + " tasks ";
         System.out.println("\n      Currently, Master " + taskPlural +
@@ -91,8 +103,9 @@ public class Saber {
 
     public static void handleListTask() {
         System.out.println(lineBreak + "\n" + listMessage);
+        int totalTask = taskList.size();
         for (int i = 0; i < totalTask; i++) {
-            Task task = taskArray[i];
+            Task task = taskList.get(i);
             System.out.println("      " + (i + 1) + ". " + task + "\n");
         }
         if (totalTask == 0) {
@@ -103,12 +116,11 @@ public class Saber {
 
     public static void handleTodoTask(String task) {
         Task todo = new ToDo(task);
-        taskArray[newTaskIndex] = todo;
+        taskList.add(todo);
+        int totalTask = taskList.size();
         System.out.println(lineBreak + "\n      Yes, Master.\n"
                 +  "      I'll add the following to your Todo list: \n"
                 + "\n        " + todo);
-        totalTask++;
-        newTaskIndex++;
         String taskPlural = totalTask <= 1 ? "has " + totalTask + " task "
                 : "have " + totalTask + " tasks ";
         System.out.println("\n      Currently, Master " + taskPlural +
@@ -174,6 +186,23 @@ public class Saber {
                                     + "      I won't be able to ensure that you\n"
                                     + "      do the task on time without \n"
                                     + "      knowing the deadline...\n"
+                                    + lineBreak);
+                        }
+                        break;
+
+                    case delete:
+                        try {
+                            int taskIndex = Integer.parseInt(command.getArgument());
+                            handleDeleteTask(taskIndex - 1);
+                        } catch (MissingArgumentException | NumberFormatException e) {
+                            System.out.println(lineBreak + "      I'm really sorry, Master.\n"
+                                    + "      I'm ... not sure which task you want\n"
+                                    + "      to delete...\n"
+                                    + lineBreak);
+                        } catch (TaskNotFoundException e) {
+                            System.out.println(lineBreak + "      I'm really sorry, Master.\n"
+                                    + "      I'm unable to find the task that\n"
+                                    + "      you want to delete...\n"
                                     + lineBreak);
                         }
                         break;
