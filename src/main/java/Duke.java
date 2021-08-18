@@ -69,6 +69,15 @@ public class Duke {
                 Deadline d = new Deadline(parts[0].substring(9), parts[1]);
                 addToList(d);
                 System.out.println(taskAddedMessage(d));
+            } else if (input.startsWith("event")) {
+                if (!input.contains("/at")) {
+                    System.out.println(formatMessage("Please enter the start date of the task after /at"));
+                    continue;
+                }
+                String[] parts = input.split(" /at ");
+                Event e = new Event(parts[0].substring(6), parts[1]);
+                addToList(e);
+                System.out.println(taskAddedMessage(e));
             } else {
                 System.out.println(formatMessage("That is not a recognised command"));
             }
