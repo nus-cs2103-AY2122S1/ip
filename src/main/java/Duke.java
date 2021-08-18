@@ -109,6 +109,7 @@ public class Duke {
         String command; // this is the container for the command received from the user
         ArrayList<Task> todoList = new ArrayList<Task>(); // this array stores previous commands
         int pointer = 0; // this tracks the newest position to add an item in todoList
+        //enum Commands {bye, list, done, delete, deadline, event, todo}; TODO
         Duke duke = new Duke();
 
         // The chat bot name is Notaro bc it's Not-a-ro-bot :>
@@ -122,16 +123,17 @@ public class Duke {
         System.out.println("delete [number] : Deletes the item corresponding the number in the todo list");
         System.out.println("\nWhat can I do for you today? :>");
         System.out.println(linebreak);
+        Scanner sc = new Scanner(System.in);
 
 
-        // This part listens for user input and repeats
+        // This part listens for user input and repeats until the command "bye" is identified
         while (true) {
-            Scanner sc = new Scanner(System.in);
             command = sc.nextLine();
 
             if (command.toLowerCase().equals("bye")) {
                 System.out.println("Bye bye!! It was nice meeting you!");
                 System.out.println(linebreak);
+                sc.close();
                 break;
 
 
