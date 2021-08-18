@@ -69,7 +69,7 @@ public class Duke {
         helpString += "\t\t\t 2. todo [#description] -> Adds a ToDo Task to the List\n";
         helpString += "\t\t\t 3. event #description /at #timing -> Adds an Event Task to the List\n";
         helpString += "\t\t\t 4. deadline #description /by #deadline -> Adds a Deadline Task to the List\n";
-        helpString += "\t\t\t 5. remove #index -> remove Task at #index in the List\n";
+        helpString += "\t\t\t 5. delete #index -> Delete Task at #index in the List\n";
         helpString += "\t\t\t 6. done #index -> Marks Task at #index in the List as completed\n";
         helpString += "\t\t\t 7. undo #index -> Marks Task at #index in the List as incomplete\n";
         helpString += "\t\t\t 8. bye/goodbye -> Quits the ChatBot";
@@ -142,20 +142,20 @@ public class Duke {
         }
     }
 
-    // Method to Remove Task from List
-    public static void removeFromList(String ind) throws DukeException {
+    // Method to Delete Task from List
+    public static void deleteFromList(String ind) throws DukeException {
         try {
             int index = Integer.parseInt(ind) - 1;
             if (index < LIST.size()) {
                 Task temp = LIST.get(index);
 
                 //Check for confirmation before deleting
-                echo("Are you sure you want to remove this task: \"" + temp.getDescription() + "\" ? (Yes/No)", TYPE.COMPLETE);
+                echo("Are you sure you want to delete this task: \"" + temp.getDescription() + "\" ? (Yes/No)", TYPE.COMPLETE);
                 System.out.print(COLOR_PURPLE + "> " + COLOR_RESET);
                 String confirm = cmdReader.nextLine().trim();
                 if (confirm.toLowerCase(Locale.ROOT).equals("yes")) {
                     LIST.remove(index);
-                    echo("I have removed this task from the list: \"" + temp.getDescription() + "\"", TYPE.START);
+                    echo("I have deleted this task from the list: \"" + temp.getDescription() + "\"", TYPE.START);
                     echo("You now have " + LIST.size() + " task(s) in the list.", TYPE.END);
                 } else {
                     echo("The deletion has been cancelled.", TYPE.COMPLETE);
@@ -165,7 +165,7 @@ public class Duke {
                 throw new DukeException("Oops, The index you gave is out of bound. There are only " + LIST.size() + " tasks");
             }
         } catch (NumberFormatException  ex) {
-            throw new DukeException("I didn't get what you meant. Ensure that the command is of the form \"remove #index\"");
+            throw new DukeException("I didn't get what you meant. Ensure that the command is of the form \"delete #index\"");
         }
     }
 
@@ -254,9 +254,9 @@ public class Duke {
                 } else if (commandList.length == 2 && commandList[0].equals("undo")) {
                     //If input starts with undo, mark the specific item in list as not done
                     markAsUndone(commandList[1]);
-                } else if (commandList.length == 2 && commandList[0].equals("remove")) {
-                    //If input starts with remove, remove the specific item in list
-                    removeFromList(commandList[1]);
+                } else if (commandList.length == 2 && commandList[0].equals("delete")) {
+                    //If input starts with delete, delete the specific item in list
+                    deleteFromList(commandList[1]);
                 } else if (commandList[0].equals("todo")) {
                     //If input starts with todos, add that to list
                     addTODO(command);
