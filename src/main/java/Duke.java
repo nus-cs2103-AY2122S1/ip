@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Duke {
     List<Task> taskList;
 
@@ -57,7 +58,7 @@ public class Duke {
                     throw new DukeException("Invalid command");
                 }
             } catch (DukeException ex) {
-                System.out.println(ex);
+                System.err.println(ex);
             }
         }
         sayBye("Alex");
@@ -94,7 +95,6 @@ public class Duke {
     }
 
     private void markTaskDone(int idx) {
-
         try {
             Task curr = this.taskList.get(idx - 1);
             curr.markDone();
@@ -103,7 +103,7 @@ public class Duke {
             System.out.println("\t" + curr);
             printHorizLine();
         } catch(IndexOutOfBoundsException e) {
-            System.out.println("The task index is invalid!");
+            System.err.println("The task index is invalid!");
         }
     }
 
