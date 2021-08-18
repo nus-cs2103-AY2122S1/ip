@@ -20,28 +20,65 @@ public class Duke {
                 if(task > 0 && task <= items.size()){
                     markDone(task - 1);
                     System.out.println("One task down sir. Here is the task I checked off:");
-                    System.out.println(task + ". [" +  items.get(task - 1).getStatusIcon() + "] " + items.get(task - 1).getDescription() + "\n");
+                    System.out.println("    " + items.get(task - 1).toString() + "\n");
                 } else {
                     System.out.println("You have entered an invalid task number Sir, please input again.\n");
                 }
 
-            } else {
-                echo(userInput);
+            } else if(userInput.length() > 8 && userInput.substring(0, 8).equals("deadline")  && userInput.contains("/by")){
+
+                if(userInput.indexOf("/by")  < 11 ){
+                    System.out.println("Enter a valid deadline activity description\n");
+                } else if(userInput.length() <= userInput.indexOf("/by") +  4){
+                    System.out.println("Enter a valid deadline time\n");
+                } else {
+                    String description = userInput.substring(9, userInput.indexOf("/by") - 1);
+                    String by = userInput.substring(userInput.indexOf("/by") + 4);
+                    Task t =  new Deadline(description, by);
+                    items.add(t);
+                    echo(t.toString());
+                }
+            } else if(userInput.length() > 5 && userInput.substring(0, 5).equals("event")  && userInput.contains("/at")){
+                if(userInput.indexOf("/at")  < 8 ){
+                    System.out.println("Enter a valid event activity description\n");
+                } else if(userInput.length() <= userInput.indexOf("/at") +  4){
+                    System.out.println("Enter a valid event time\n");
+                } else {
+                    String description = userInput.substring(6, userInput.indexOf("/at") - 1);
+                    String at = userInput.substring(userInput.indexOf("/at") + 4);
+                    Task t =  new Event(description, at);
+                    items.add(t);
+                    echo(t.toString());
+                }
+
+            } else if(userInput.length() > 3 && userInput.substring(0, 4).equals("todo")){
+                if(userInput.length() < 6){
+                    System.out.println("Enter a valid todo activity\n");
+                } else {
+                    String description = userInput.substring(5);
+                    Task t = new ToDo(description);
+                    items.add(t);
+                    echo(t.toString());
+                }
+
+            }
+            else {
+                System.out.println("That is a rather unusual looking request sir.\nPerhaps you might want to specify the kind of task you would like to add.\n");
             }
             userInput = userSc.nextLine();
         }
 
-        System.out.println("Goodbye Sir! Will take good care of your plants in the meantime.");
+        System.out.println("Goodbye Sir! Will take good care of your garden in the meantime.");
     }
 
     public static void echo(String userInput){
-        items.add(new Task(userInput));
-        System.out.println("added: " + userInput + "\n");
+        System.out.println("Got it sir, I have added this task: \n " + userInput + "\nNow you have " + items.size() + " tasks in the list.\n");
     }
 
     public static void list(){
         for(int i = 1; i <= items.size(); i++){
-            System.out.println(i + ". [" +  items.get(i - 1).getStatusIcon() + "] " + items.get(i - 1).getDescription());
+            //System.out.println(i + ". [" +  items.get(i - 1).getStatusIcon() + "] " + items.get(i - 1).getDescription());
+            System.out.println(i + ". " + items.get(i-1).toString());
         }
         System.out.println("");
     }
@@ -49,7 +86,5 @@ public class Duke {
     public static void markDone(int n){
         items.get(n).markAsDone();
     }
-
-
 
 }
