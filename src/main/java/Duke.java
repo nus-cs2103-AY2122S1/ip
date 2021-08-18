@@ -41,8 +41,8 @@ public class Duke {
                 numTasks = addEvent(input, numTasks);
             // If user enters an unspecified request.
             } else {
-                System.out.println("I don't quite understand what that means.");
-                System.out.println("Could you please rephrase it?");
+                System.out.printf("%s\nI don't quite understand what that means.\n", LINE_HORIZONTAL);
+                System.out.printf("Could you please rephrase it?\n%s\n", LINE_HORIZONTAL);
             }
         }
 

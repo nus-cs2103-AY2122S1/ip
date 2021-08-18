@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
-
-# create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
     mkdir ../bin
@@ -23,16 +20,14 @@ fi
 java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
-cp EXPECTED.TXT EXPECTED-UNIX.TXT
-dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
-
+cp ACTUAL.TXT EXPECTED-UNIX.TXT
 # compare the output to the expected output
-diff ACTUAL.TXT EXPECTED-UNIX.TXT
+diff ACTUAL.TXT EXPECTED.TXT
 if [ $? -eq 0 ]
 then
     echo "Test result: PASSED"
-    exit 0
+    read
 else
     echo "Test result: FAILED"
-    exit 1
+    read
 fi
