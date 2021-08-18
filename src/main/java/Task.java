@@ -7,10 +7,11 @@ public class Task {
         this.completed = false;
     }
 
-    public void completeItem() {
+    public String completeItem() {
         this.completed = true;
-        System.out.println("Nice I've marked this task as done!\n" + this.toString());
+        return "Nice I've marked this task as done!\n" + this.toString();
     }
+
 
     @Override
     public String toString() {

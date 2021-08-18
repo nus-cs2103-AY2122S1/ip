@@ -26,21 +26,67 @@ public class Duke {
         while (true) {
             input = scanner.nextLine();
             String[] commands = input.split(" ");
-            if (commands[0].equals("bye")){
-                break;
-            } else if (commands[0].equals("list")) {
-                printOutput(l.toString());
-            } else if (commands[0].equals("done") ) {
-                if (commands.length > 1) {
-                    Task item = l.getItem(Integer.parseInt(commands[1]) - 1);
-                    if (item != null) {
-                        item.completeItem();
-                    }
-                }
-            } else {
-                l.addToList(input);
-                printOutput("added: " + input);
+            String first = commands[0];
+            String rest = "";
+            if (commands.length > 1) {
+                rest = input.substring(first.length() + 1);
             }
+            if (first.equals("bye")){
+                break;
+            }
+            switch (first) {
+                case "list": {
+                    printOutput(l.toString());
+                    break;
+                }
+                case "done": {
+                    if (commands.length > 1) {
+                        Task item = l.getItem(Integer.parseInt(rest) - 1);
+                        if (item != null) {
+                            printOutput(item.completeItem());
+                        }
+                    }
+                    break;
+                }
+                case "deadline": {
+                    String[] details = rest.split("/by ");
+                    Deadline deadline = new Deadline(details[0], details[1]);
+                    l.addToList(deadline);
+                    printOutput("Got it. I've added this task:\n" + deadline + "\nNow you have " + l.getLength()+ " tasks in the list.");
+                    break;
+                }
+                case "todo": {
+                    ToDo td = new ToDo(rest);
+                    l.addToList(td);
+                    printOutput("Got it. I've added this task:\n" + td + "\nNow you have " + l.getLength()+ " tasks in the list.");
+                    break;
+                }
+                case "event": {
+                    String[] details = rest.split("/at ");
+                    Event event = new Event(details[0], details[1]);
+                    l.addToList(event);
+                    printOutput("Got it. I've added this task:\n" + event + "\nNow you have " + l.getLength()+ " tasks in the list.");
+                    break;
+                }
+                default: {
+                    l.addToList(new Task(input));
+                    printOutput("added: " + input);
+                }
+            }
+//            if (first.equals("bye")){
+//                break;
+//            } else if (first.equals("list")) {
+//                printOutput(l.toString());
+//            } else if (commands[0].equals("done") ) {
+//                if (commands.length > 1) {
+//                    Task item = l.getItem(Integer.parseInt(commands[1]) - 1);
+//                    if (item != null) {
+//                        item.completeItem();
+//                    }
+//                }
+//            } else {
+//
+//            }
         }
     }
 

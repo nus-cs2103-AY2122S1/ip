@@ -7,8 +7,8 @@ public class TaskList {
        this.list = new ArrayList<>();
     }
 
-    public void addToList(String input) {
-        list.add(new Task(input));
+    public void addToList(Task input) {
+        list.add(input);
     }
 
     public Task getItem(int index) {
@@ -18,11 +18,14 @@ public class TaskList {
         return this.list.get(index);
     }
 
+    public int getLength() {
+        return this.list.size();
+    }
     @Override
     public String toString() {
-        String l = "Here are the tasks on your list:\n";
+        String l = "Here are the tasks on your list:";
         for (Task s : list) {
-            l += (list.indexOf(s) + 1) + ". " + s + "\n";
+            l += "\n" + (list.indexOf(s) + 1) + ". " + s;
         }
         return l;
     }
