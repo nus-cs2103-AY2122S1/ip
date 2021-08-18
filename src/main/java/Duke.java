@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -5,11 +7,13 @@ import java.util.regex.Pattern;
 public class Duke {
 
     // Array for storing user inputs
-    private static final Task[] store = new Task[100];
-    private static int count = 0;
+    private static final List<Task> store = new ArrayList<>();
 
     // Regex pattern for finding done commands
     private static final Pattern DONE_PATTERN = Pattern.compile("^done (\\d*)$");
+
+    // Regex pattern for finding done commands
+    private static final Pattern DELETE_PATTERN = Pattern.compile("^delete (\\d*)$");
 
     // Regex pattern for finding done commands
     private static final Pattern TODO_PATTERN = Pattern.compile("^todo (.*)$");
@@ -44,6 +48,8 @@ public class Duke {
                     list();
                 } else if (userInput.startsWith("done")) {
                     markAsDone(userInput);
+                } else if (userInput.startsWith("delete")) {
+                    delete(userInput);
                 } else if (userInput.startsWith("todo")) {
                     // User is attempting to add a to-do
                     addToDo(userInput);
@@ -83,16 +89,16 @@ public class Duke {
      */
     static void list() {
 
-        if (count == 0) {
+        if (store.size() == 0) {
             // Inform user if nothing has been stored.
             say("The list is empty!");
             return;
         }
 
-        String[] listItems = new String[count];
+        String[] listItems = new String[store.size()];
 
-        for (int i = 0; i < count; ++i) {
-            listItems[i] = String.format("%d. %s", i + 1, store[i]);
+        for (int i = 0; i < store.size(); ++i) {
+            listItems[i] = String.format("%d. %s", i + 1, store.get(i));
         }
 
         say(listItems);
@@ -113,16 +119,45 @@ public class Duke {
         String taskPositionString = matcher.group(1);
         int taskPosition = Integer.parseInt(taskPositionString);
 
-        if (taskPosition < 0 || taskPosition > count) {
+        if (taskPosition <= 0 || taskPosition > store.size()) {
             throw new DukeException(String.format("There is no task number %d!", taskPosition));
         }
 
-        Task task = store[taskPosition - 1];
+        Task task = store.get(taskPosition - 1);
 
         // Mark task as completed
         task.complete();
 
         say("I have marked the task as done!", String.format("%d. %s", taskPosition, task));
+    }
+
+    /**
+     * Deletes a task from the store.
+     * @param userInput User input to be split by regex pattern matching
+     */
+    private static void delete(String userInput) {
+
+        // Check if user is attempting to mark a task as done.
+        Matcher matcher =  DELETE_PATTERN.matcher(userInput);
+        if (!matcher.find()) {
+            throw new DukeException("Delete a task like this: delete <task number>");
+        }
+
+        String taskPositionString = matcher.group(1);
+        int taskPosition = Integer.parseInt(taskPositionString);
+
+        if (taskPosition <= 0 || taskPosition > store.size()) {
+            throw new DukeException(String.format("There is no task number %d!", taskPosition));
+        }
+
+        Task task = store.get(taskPosition - 1);
+
+        // Remove the task from the store.
+        store.remove(taskPosition - 1);
+
+        say("I have removed this task!",
+                String.format("   %s", task),
+                String.format("You have %d task%s left.", store.size(), store.size() == 1 ? "" : "s"));
     }
 
     /**
@@ -139,11 +174,10 @@ public class Duke {
         ToDo todo = new ToDo(description, false);
 
         // Add to store
-        store[count] = todo;
-        count++;
+        store.add(todo);
 
         // Inform user
-        say("I have added a ToDo!", String.format("%d. %s", count, todo));
+        say("I have added a ToDo!", String.format("%d. %s", store.size(), todo));
     }
 
     /**
@@ -161,11 +195,10 @@ public class Duke {
         Deadline deadline = new Deadline(description, false, endDateTime);
 
         // Add to store
-        store[count] = deadline;
-        count++;
+        store.add(deadline);
 
         // Inform user
-        say("I have added a new deadline!", String.format("%d. %s", count, deadline));
+        say("I have added a new deadline!", String.format("%d. %s", store.size(), deadline));
     }
 
     /**
@@ -183,10 +216,9 @@ public class Duke {
         Event event = new Event(description, false, eventDateTime);
 
         // Add to store
-        store[count] =  event;
-        count++;
+        store.add(event);
 
         // Inform user
-        say("I have added a new event!", String.format("%d. %s", count, event));
+        say("I have added a new event!", String.format("%d. %s", store.size(), event));
     }
 }

@@ -1,9 +1,18 @@
 list
+todo
 todo do homework
+delete 2
+deadline
 deadline study /by sunday 6pm
+event
 event lessons /at monday 8am-6pm
 list
+done 4
 done 2
+delete 0
 done 3
+delete 1
+delete 2
+delete 1
 list
 bye
