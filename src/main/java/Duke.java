@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Duke {
     private static final String FORMAT = "\t%s\n";
     private static final String LINE = "______________________________________________________";
-    
+
     public static void main(String[] args) {
         String logo = "\t ____        _        \n"
                 + "\t|  _ \\ _   _| | _____ \n"
@@ -25,30 +25,37 @@ public class Duke {
         while (true) {
             try {
                 String input = sc.nextLine().trim();
-                String command = input.split(" ")[0];
-                if (input.equals("bye")) {
-                    // Exit chat bot
-                    System.out.printf(FORMAT, LINE);
-                    System.out.printf(FORMAT, "Goodbye. Have a nice day!");
-                    System.out.printf(FORMAT, LINE);
-                    break;
-                } else if (input.equals("list")) {
-                    // List all added tasks
-                    runListCommand(tasks);
-                } else if (command.equals("done")) {
-                    // Set a task as done
-                    runDoneCommand(input, tasks);
-                } else if (command.equals("todo")
-                        || command.equals("deadline")
-                        || command.equals("event")) {
-                    // Add a Todo, Deadline or Event task
-                    runAddTaskCommand(input, command, tasks);
-                } else if (command.equals("delete")) {
-                    runDeleteCommand(input, tasks);
-                } else {
-                    // Invalid command
-                    throw new DukeException("You have entered an invalid command.");
+                // Convert string command to enum value
+                Command command = Command.valueOf(input.split(" ")[0].toUpperCase());
+                switch(command) {
+                    case BYE:
+                        // Exit chat bot
+                        System.out.printf(FORMAT, LINE);
+                        System.out.printf(FORMAT, "Goodbye. Have a nice day!");
+                        System.out.printf(FORMAT, LINE);
+                        return; // To terminate function
+                    case LIST:
+                        runListCommand(tasks);
+                        break;
+                    case DONE:
+                        runDoneCommand(input, tasks);
+                        break;
+                    case TODO:
+                    case DEADLINE:
+                    case EVENT:
+                        runAddTaskCommand(input, command, tasks);
+                        break;
+                    case DELETE:
+                        runDeleteCommand(input, tasks);
+                        break;
+                    default:
+                        throw new DukeException("You have entered an invalid command.");
                 }
+            } catch (IllegalArgumentException e) {
+                // When invalid command is given, it is unable to be parsed into the enum
+                System.out.printf(FORMAT, LINE);
+                System.out.printf("\tUh-oh! %s\n", "You have entered an invalid command.");
+                System.out.printf(FORMAT, LINE);
             } catch (Exception e) {
                 System.out.printf(FORMAT, LINE);
                 System.out.printf("\tUh-oh! %s\n", e.getMessage());
@@ -101,26 +108,29 @@ public class Duke {
     }
 
     // Abstraction to make main function neater
-    private static void runAddTaskCommand(String input, String command, List<Task> tasks) throws DukeException {
+    private static void runAddTaskCommand(String input, Command command, List<Task> tasks) throws DukeException {
         Task task;
-        if (command.equals("todo")) {
-            // Add Todo task
-            if (input.length() <= 5) {
-                throw new DukeException("The description of a todo cannot be empty.");
-            }
-            task = new Todo(input.substring(5));
-        } else if (command.equals("deadline")) {
-            // Add Deadline task
-            String[] splitInput = splitWith(input, 9, " /by ");
-            String taskName = splitInput[0];
-            String date = splitInput[1];
-            task = new Deadline(taskName, date);
-        } else {
-            // Add Event task
-            String[] splitInput = splitWith(input, 6, " /at ");
-            String taskName = splitInput[0];
-            String date = splitInput[1];
-            task = new Event(taskName, date);
+        switch(command) {
+            case TODO:
+                // Add Todo task
+                if (input.length() <= 5) {
+                    throw new DukeException("The description of a todo cannot be empty.");
+                }
+                task = new Todo(input.substring(5));
+                break;
+            case DEADLINE:
+                String[] splitInput = splitWith(input, 9, " /by ");
+                String taskName = splitInput[0];
+                String date = splitInput[1];
+                task = new Deadline(taskName, date);
+                break;
+            default: // default is guaranteed to be event task due to use of enum + outer control flow
+                // Add Event task
+                splitInput = splitWith(input, 6, " /at ");
+                taskName = splitInput[0];
+                date = splitInput[1];
+                task = new Event(taskName, date);
+                break;
         }
 
         // Common functionality: add task to list, print task and list size
