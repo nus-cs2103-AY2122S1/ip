@@ -71,9 +71,9 @@ public class Duke {
         if (numTask == 0) {
             task = " ";
         } else {
-            task = "1. " + taskList.get(0).getFullDescription();
+            task = "1. " + taskList.get(0).toString();
             for(int taskNumber = 2; taskNumber <= numTask; taskNumber++) {
-                task = task + "\n" + taskNumber + ". " + taskList.get(taskNumber - 1).getFullDescription();
+                task = task + "\n" + taskNumber + ". " + taskList.get(taskNumber - 1).toString();
             }
         }
         String start = "_____________________________________\n";
@@ -90,7 +90,7 @@ public class Duke {
         String start = "_____________________________________\n";
         String end = "\n_____________________________________";
         String markDone = "Nice! I've marked this task as done:\n";
-        String taskStatus = currentTask.getFullDescription();
+        String taskStatus = currentTask.toString();
         String output = start + markDone + taskStatus + end;
         System.out.println(output);
     }
