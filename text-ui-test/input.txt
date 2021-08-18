@@ -1,0 +1,8 @@
+todo test1
+deadline test2 /by Mon
+list
+done 2
+event test3 /at August 2021
+list
+done 1
+bye

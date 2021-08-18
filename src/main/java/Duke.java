@@ -1,3 +1,4 @@
+import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,6 +8,7 @@ public class Duke {
         // Initial values
         String sepLine = "____________________________________________________________";
         boolean isRunning = true;
+
         Scanner sc = new Scanner(System.in);
 
         String start = "Hello! I'm Duke. \n"
