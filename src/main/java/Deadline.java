@@ -1,14 +1,39 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate date;
+    protected LocalTime time;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws CommandParamException {
         super(description);
-        this.by = by;
+        String[] dateTime = by.trim().split(" ");
+        //index 0 is date, 1 is time
+        //date should be yyyy-mm-dd, time should be 2359...
+        if (dateTime.length <= 1 || dateTime.length > 2) {
+            throw new CommandParamException("Deadline");
+        }
+        try {
+            String timeReformatted = dateTime[1].substring(0, 2) + ":" + dateTime[1].substring(2, 4);
+            LocalDate date = LocalDate.parse(dateTime[0].trim());
+            LocalTime time = LocalTime.parse(timeReformatted);
+            this.date = date;
+            this.time = time;
+        } catch (DateTimeParseException e) {
+            throw new CommandParamException("Deadline");
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + " "
+                + this.time.format(DateTimeFormatter.ofPattern(
+                        (time.getHour() % 12 > 9 ? "hh:mma" : "h:mma")))
+                + ")";
     }
 }
