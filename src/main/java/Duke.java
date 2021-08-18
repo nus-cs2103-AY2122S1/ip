@@ -89,6 +89,8 @@ public class Duke {
                 printTasks(tasks);
             } else if (message.startsWith("done")) {
                 markTaskAsDone(message, tasks);
+            } else if (message.startsWith("delete")) {
+                deleteTask(message, tasks);
             } else if (message.startsWith("todo")) {
                 Task todo = null;
                 try {
@@ -134,19 +136,40 @@ public class Duke {
         sc.close();
     }
 
+    private static void deleteTask(String message, List<Task> tasks) {
+        try {
+            int taskPosition = getTaskNumber(message) - 1;
+            if (taskPosition >= tasks.size()) {
+                throw new InvalidInputException("invalid task number entered");
+            } else {
+                Task removedTask = tasks.get(taskPosition);
+                tasks.remove(taskPosition);
+                String displayedMessage = "Noted. I've removed this task:\n"
+                        + "  " + removedTask.toString() + "\n"
+                        + getTotalTaskString(tasks);
+                System.out.println(displayedMessage);
+            }
+        } catch (DukeException e) {
+            e.printErrorMessage();
+        }
+    }
+
     private static void addTask(Task task, List<Task> tasks) {
         tasks.add(task);
         String displayedMessage = getAddedSuccessMessage(task, tasks);
         System.out.println(displayedMessage);
     }
 
+    private static String getTotalTaskString(List<Task> tasks) {
+        return String.format("Now you have %d tasks in the list.", getTotalTaskNumber(tasks));
+    }
+
     private static String getAddedSuccessMessage(Task task, List<Task> tasks) {
         String successMessage = "Got it. I've added this task:";
         String taskString = task.toString();
-        String totalTaskString = String.format("Now you have %d tasks in the list.", getTotalTaskNumber(tasks));
         String result = successMessage + "\n"
                 + "  " + taskString + "\n"
-                + totalTaskString;
+                + getTotalTaskString(tasks);
         return result;
     }
 
@@ -212,8 +235,8 @@ public class Duke {
     private static void markTaskAsDone(String message, List<Task> tasks) {
         try {
             int taskPosition = getTaskNumber(message) - 1;
-            if (taskPosition < 0) {
-                System.out.println("error");
+            if (taskPosition >= tasks.size()) {
+                throw new InvalidInputException("invalid task number entered");
             } else {
                 Task taskMarked = tasks.get(taskPosition);
                 taskMarked.markAsDone();
@@ -225,7 +248,6 @@ public class Duke {
         } catch (DukeException e) {
             e.printErrorMessage();
         }
-
     }
 
     private static void printTasks(List<Task> tasks) {
