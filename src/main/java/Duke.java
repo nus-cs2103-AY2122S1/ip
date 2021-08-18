@@ -44,8 +44,7 @@ public class Duke {
                 for (int i = 0; i < numOfTasks; i++) {
                     Task curr = tasks[i];
                     int taskNum = i + 1;
-                    System.out.println(taskNum + ". [" + curr.getStatusIcon() + "] "
-                            + curr.getDescription());
+                    System.out.println(taskNum + "." + curr.toString());
                 }
             } else if (userInput.length() > 5
                     && userInput.substring(0, 4).equals("done")
@@ -57,8 +56,8 @@ public class Duke {
                 } else {
                     Task curr = tasks[taskNum - 1];
                     curr.markAsDone();
-                    System.out.println("Nice! I've marked this task as done:\n  ["
-                            + curr.getStatusIcon() + "] " + curr.getDescription());
+                    System.out.println("Nice! I've marked this task as done:\n  "
+                            + curr.toString());
                 }
             } else { // any other input from user
                 tasks[numOfTasks] = new Task(userInput);
