@@ -1,6 +1,7 @@
 /**
  * The Deadline class encapsulates all the details of each deadline.
  */
+
 public class Deadline extends Task {
     private final String endTime;
 

@@ -21,7 +21,7 @@ public class Duke {
             command = sc.next();
             input = sc.nextLine().trim();
             System.out.print("Duke: ");
-            switch(command) {
+            switch (command) {
                 case "bye":
                     System.out.println("Nice talking to you, goodbye!");
                     return;
@@ -29,26 +29,15 @@ public class Duke {
                     printList();
                     break;
                 case "done":
-                    doTask(Integer.parseInt(input)- 1);
+                    doTask(Integer.parseInt(input) - 1);
                     printList();
                     break;
-                case "todo":
-                    ToDo newToDo = new ToDo(input);
-                    add(newToDo);
-                    break;
-                case "event":
-                    String[] message_and_timePeriod = input.split("/at ");
-                    Event newEvent = new Event(message_and_timePeriod[0], message_and_timePeriod[1]);
-                    add(newEvent);
-                    break;
-                case "deadline":
-                    String[] message_and_endTime = input.split("/by ");
-                    Deadline newDeadline = new Deadline(message_and_endTime[0], message_and_endTime[1]);
-                    add(newDeadline);
-                    break;
                 default:
-                    tasks.add(new Task(command));
-                    System.out.println("\"" + command + "\" has been added to your todo list.\n");
+                    try {
+                        add(Task.createTask(command, input));
+                    } catch (NoSuchCommandException e) {
+                        System.out.println(e.getMessage());
+                    }
             }
         }
     }
