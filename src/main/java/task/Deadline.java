@@ -1,5 +1,10 @@
 package task;
 
+/**
+ * Deadline class.
+ *
+ * This class is a Task that has a 'by' datetime String.
+ */
 public class Deadline extends Task {
 
     public final static String SPLITTER = "/by";
@@ -19,6 +24,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Provides a formatted String of the 'by' field.
+     *
+     * @return formatted String for field 'by'
+     */
     public String getFormattedBy() {
         return " (" + SPLITTER.substring(1)  + ": " + by + ")";
     }

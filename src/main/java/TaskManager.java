@@ -7,16 +7,33 @@ import task.Todo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TaskManager class.
+ *
+ * This class acts as the manager of tasks held by the Duke.
+ */
 public class TaskManager {
 
     private final static int MAX_STORAGE = 100;
 
     private final List<Task> TASK_LIST = new ArrayList<>();
 
+    /**
+     * Gets the current number of tasks stored.
+     *
+     * @return number of tasks stored currently
+     */
     public int getTaskListSize() {
         return TASK_LIST.size();
     }
 
+    /**
+     * Adds a task to the task list.
+     *
+     * @param newTask task to save
+     * @return saved task
+     * @throws TaskManagerException if task cannot be saved, due to full capacity of task list
+     */
     public Task addTask(Task newTask) throws TaskManagerException {
         if (TASK_LIST.size() == MAX_STORAGE) {
             throw new TaskManagerException("Unable to add task as list is full.");
@@ -25,6 +42,14 @@ public class TaskManager {
         return newTask;
     }
 
+    /**
+     * Adds a Todo Task.
+     *
+     * @param userInput user input with parameters for a Deadline
+     * @return Todo Task saved
+     * @throws TaskManagerException if parsing is incorrect, task is not present,
+     * or task list is full
+     */
     public Task addToDoTask(String userInput) throws TaskManagerException {
         String description = userInput.trim();
         if (description.isEmpty()) {
@@ -34,18 +59,43 @@ public class TaskManager {
         return addTask(todo);
     }
 
+    /**
+     * Adds an Event Task.
+     *
+     * @param userInput user input with parameters for a Deadline
+     * @return Event Task saved
+     * @throws TaskManagerException if parsing is incorrect, task is not present,
+     * or task list is full
+     */
     public Task addEventTask(String userInput) throws TaskManagerException {
         String[] parameterArray = splitUserInput(Event.SPLITTER, userInput);
         Event event = new Event(parameterArray[0], parameterArray[1]); // desc, timing
         return addTask(event);
     }
 
+    /**
+     * Adds a Deadline Task.
+     *
+     * @param userInput user input with parameters for a Deadline
+     * @return Deadline Task saved
+     * @throws TaskManagerException if parsing is incorrect, task is not present,
+     * or task list is full
+     */
     public Task addDeadlineTask(String userInput) throws TaskManagerException {
         String[] parameterArray = splitUserInput(Deadline.SPLITTER, userInput);
         Deadline deadline = new Deadline(parameterArray[0], parameterArray[1]); // desc, by
         return addTask(deadline);
     }
 
+    /**
+     * Splits the user input based on the splitKey into a String array.
+     *
+     * @param splitKey key String to split userInput with
+     * @param userInput user input to parse into the relevant parameters
+     * @return String array containing description of Task as well as other parameters
+     * @throws TaskManagerException if splitKey is not present in userInput,
+     * or if either parameter is empty
+     */
     public String[] splitUserInput(String splitKey, String userInput)
             throws TaskManagerException {
 
@@ -70,18 +120,42 @@ public class TaskManager {
         return new String[] {description, split};
     }
 
+    /**
+     * Marks a Task completed based on the input Task number fed as a String.
+     *
+     * @param taskNumberString String format of the Task number to delete
+     * @return completed Task
+     * @throws TaskManagerException if String cannot be parsed into an integer or
+     * the Task number is not valid
+     */
     public Task markTaskAsDone(String taskNumberString) throws TaskManagerException {
         Task selectedTask = getTaskFromNumberString(taskNumberString);
         selectedTask.markAsDone();
         return selectedTask;
     }
 
+    /**
+     * Deletes a Task based on the input Task number fed as a String.
+     *
+     * @param taskNumberString String format of the Task number to delete
+     * @return Task to delete
+     * @throws TaskManagerException if String cannot be parsed into an integer or
+     * the Task number is not valid
+     */
     public Task deleteTask(String taskNumberString) throws TaskManagerException {
         Task selectedTask = getTaskFromNumberString(taskNumberString);
         TASK_LIST.remove(selectedTask); // remove shifts tasks to the right backwards
         return selectedTask;
     }
 
+    /**
+     * Gets the Task based on the input Task number fed as a String.
+     *
+     * @param taskNumberString String format of the Task number to obtain
+     * @return associated Task
+     * @throws TaskManagerException if String cannot be parsed into an integer or
+     * the Task number is not valid
+     */
     public Task getTaskFromNumberString(String taskNumberString) throws TaskManagerException {
         if (TASK_LIST.isEmpty()) {
             throw new TaskManagerException("Unable to perform action as list is empty.");
@@ -103,6 +177,11 @@ public class TaskManager {
         return TASK_LIST.get(taskNumber - 1); // shift to 0-indexing
     }
 
+    /**
+     * Provides the Tasks in a formatted List of Strings, to be fed to a text printer.
+     *
+     * @return formatted tasks in a list of strings
+     */
     public List<String> listTasks() {
         List<String> taskManagerStringList = new ArrayList<>();
         taskManagerStringList.add("Here are the tasks in your list:");

@@ -3,6 +3,13 @@ import task.Task;
 
 import java.util.Scanner;
 
+/**
+ * Duke class.
+ *
+ * This class holds the main logic for Duke project (CS2103T's iP).
+ * Duke is a task manager for users that love the command line interface.
+ * @author muhammad-khair, damithc
+ */
 public class Duke {
 
     private final static String LOGO = " ____        _        \n"
@@ -17,11 +24,19 @@ public class Duke {
 
     private final TaskManager taskManager = new TaskManager();
 
+    /**
+     * Driver function for main logic.
+     *
+     * @param args command line arguments fed
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
     }
 
+    /**
+     * Runs the whole duke process.
+     */
     public void run() {
         dukeChatBot.print("Hello from\n" + LOGO);
         dukeChatBot.info("Hello! I'm Duke.\n\tWhat can I do for you?");
@@ -37,6 +52,12 @@ public class Duke {
         dukeChatBot.info("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Makes a decision based on the user's input, and acts on it.
+     * Some actions are listing tasks, marking them as done, creating and deleting tasks.
+     *
+     * @param userInput user input to process as commands for Duke
+     */
     public void makeDecision(String userInput) {
         try {
             if (userInput.equals("list")) {
@@ -72,6 +93,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Helper function that echos out completed task creation.
+     *
+     * @param task task which was just created
+     */
     public void echoTaskCreation(Task task) {
         dukeChatBot.info("Got it. I've added this task:\n\t  " + task + "\n\tNow you have " +
                 taskManager.getTaskListSize() + " tasks in the list.");
