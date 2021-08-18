@@ -60,10 +60,7 @@ public class Duke {
     private static void sayBye() {
         System.out.println("Don't wake me up again");
     }
-
-//    private static void echo(String input) {
-//        System.out.println(input);
-//    }
+    
     private void removeTask(int index) {
         Task removedTask = this.tasks.get(index);
         this.tasks.remove(index);
