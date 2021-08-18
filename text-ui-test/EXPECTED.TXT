@@ -29,21 +29,25 @@ Got it, I've added this task:
 Now you have a total of 5 tasks in the list.
 ____________________________________________________________
 Here are the tasks in your list:
+____________________________________________________________
 1. [ ] first
 2. [ ] potato
 3. [T][ ] fight
 4. [D][ ] fightmaster  (by:  endOfTime)
 5. [E][ ] fight club  (at:  kungfuPanda)
 ____________________________________________________________
+____________________________________________________________
 Nice! I've marked this task as done:
   [X] fight
 ____________________________________________________________
 Here are the tasks in your list:
+____________________________________________________________
 1. [ ] first
 2. [ ] potato
 3. [T][X] fight
 4. [D][ ] fightmaster  (by:  endOfTime)
 5. [E][ ] fight club  (at:  kungfuPanda)
+____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
 ____________________________________________________________
