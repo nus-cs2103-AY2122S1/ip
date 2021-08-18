@@ -17,16 +17,18 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (isActive) {
+            String[] inputs = sc.nextLine().split("\\s+", 2);
+            String eventType = inputs[0];
+            String remainder = inputs.length == 1 ? null : inputs[1];
 
-            String input = sc.nextLine();
-            if (input.equals("bye")) { // Exit routine
+            if (eventType.equals("bye")) { // Exit routine
                 isActive = false;
-            } else if (input.equals("list")) {
+            } else if (eventType.equals("list")) {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 System.out.println(arrayToString(list));
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            } else if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
-                int index = Integer.parseInt(input.substring(5)) - 1;
+            } else if (eventType.equals("done")) {
+                int index = Integer.parseInt(remainder) - 1;
                 if (index < 0 || index > list.size() - 1) {
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     System.out.println("Something went wrong.. to mark as done,\n" +
@@ -40,10 +42,31 @@ public class Duke {
                             list.get(index).toString());
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 }
-            } else {
+            } else if (eventType.equals("todo")) {
+                Todo event = new Todo(remainder);
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                System.out.println("added: " + input + "\n");
-                list.add(new Task(input));
+                System.out.println("Alright! I added this task: \n" + event.toString() + "\n");
+                list.add(event);
+                System.out.println(String.format("You have %d task(s) at the moment!\n", list.size()));
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            } else if (eventType.equals("deadline")) {
+                String[] tokens = remainder.split(" /by ", 2);
+                Deadline event = new Deadline(tokens[0], tokens[1]);
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println("Alright! I added this task: \n" + event.toString() + "\n");
+                list.add(event);
+                System.out.println(String.format("You have %d task(s) at the moment!\n", list.size()));
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            } else if (eventType.equals("event")) {
+                String[] tokens = remainder.split(" /at ", 2);
+                Event event = new Event(tokens[0], tokens[1]);
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println("Alright! I added this task: \n" + event.toString() + "\n");
+                list.add(event);
+                System.out.println(String.format("You have %d task(s) at the moment!\n", list.size()));
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            } else {
+                System.out.println("Input not understood. Try again.\n");
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
         }
