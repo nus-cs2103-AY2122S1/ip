@@ -41,7 +41,7 @@ public class Duke {
     // The Global Variables used by the ChatBot
     private static final Scanner cmdReader = new Scanner(System.in);
     private static final ArrayList<Task> LIST = new ArrayList<>();
-    private enum LEVEL {START, MIDDLE, END, COMPLETE, ERROR}
+    private enum TYPE {START, MIDDLE, END, COMPLETE, ERROR}
 
     // Method to Print Greeting
     public static void greeting() {
@@ -49,8 +49,8 @@ public class Duke {
         System.out.println(COLOR_CYAN + line + COLOR_RESET);
         System.out.println(COLOR_BLUE + logo + COLOR_RESET);
         System.out.println(COLOR_CYAN + line + COLOR_RESET);
-        echo("Hello! I'm the WhoBot.", LEVEL.START);
-        echo("What can I do for you?", LEVEL.END);
+        echo("Hello! I'm the WhoBot.", TYPE.START);
+        echo("What can I do for you?", TYPE.END);
     }
 
     // Method to Print GoodBye Message
@@ -58,7 +58,7 @@ public class Duke {
         System.out.println(COLOR_CYAN + line + COLOR_RESET);
         System.out.println(COLOR_CYAN + line + COLOR_RESET);
         System.out.println(COLOR_BLUE + bye + COLOR_RESET);
-        echo("I hope to see you again soon :)", LEVEL.MIDDLE);
+        echo("I hope to see you again soon :)", TYPE.MIDDLE);
         System.out.println(COLOR_CYAN + line + COLOR_RESET);
         System.out.println(COLOR_CYAN + line + COLOR_RESET);
     }
@@ -73,24 +73,24 @@ public class Duke {
         helpString += "\t\t\t 6. done #index -> Marks Task at #index in the List as completed\n";
         helpString += "\t\t\t 7. undo #index -> Marks Task at #index in the List as incomplete\n";
         helpString += "\t\t\t 8. bye/goodbye -> Quits the ChatBot";
-        echo(helpString, LEVEL.COMPLETE);
+        echo(helpString, TYPE.COMPLETE);
     }
 
     //Method to Echo the Given Word
-    public static void echo(String answer, LEVEL level) {
-        if (level == LEVEL.COMPLETE) {
+    public static void echo(String answer, TYPE type) {
+        if (type == TYPE.COMPLETE) {
             System.out.println(COLOR_CYAN + line + COLOR_RESET);
             System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
             System.out.println(COLOR_CYAN + line + COLOR_RESET);
-        } else if (level == LEVEL.START) {
+        } else if (type == TYPE.START) {
             System.out.println(COLOR_CYAN + line + COLOR_RESET);
             System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
-        } else if (level == LEVEL.END) {
+        } else if (type == TYPE.END) {
             System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
             System.out.println(COLOR_CYAN + line + COLOR_RESET);
-        } else if (level == LEVEL.MIDDLE) {
+        } else if (type == TYPE.MIDDLE) {
             System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
-        } else if (level == LEVEL.ERROR) {
+        } else if (type == TYPE.ERROR) {
             System.out.println(COLOR_CYAN + line + COLOR_RESET);
             System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RED + answer + COLOR_RESET);
             System.out.println(COLOR_CYAN + line + COLOR_RESET);
@@ -100,7 +100,7 @@ public class Duke {
     //Method to Print List
     public static void printList() {
         if (LIST.isEmpty()) {
-            echo("There are currently no tasks in your list.", LEVEL.COMPLETE);
+            echo("There are currently no tasks in your list.", TYPE.COMPLETE);
             return;
         }
         String listString = "The tasks in your list are:\n";
@@ -109,7 +109,7 @@ public class Duke {
             listString = listString.concat("\t\t\t" + (i + 1) + ". " + LIST.get(i) + "\n");
         }
         listString = listString.concat("\t\t\t" + (i + 1) + ". " + LIST.get(i));
-        echo(listString, LEVEL.COMPLETE);
+        echo(listString, TYPE.COMPLETE);
     }
 
     // Method to Mark Task as Done
@@ -118,7 +118,7 @@ public class Duke {
             int index = Integer.parseInt(ind) - 1;
             if (index < LIST.size()) {
                 LIST.get(index).markAsDone();
-                echo("Congrats! I have marked this task complete: \"" + LIST.get(index).getDescription() + "\"", LEVEL.COMPLETE);
+                echo("Congrats! I have marked this task complete: \"" + LIST.get(index).getDescription() + "\"", TYPE.COMPLETE);
             } else {
                 throw new DukeException("Oops, The index you gave is out of bound. There are only " + LIST.size() + " tasks");
             }
@@ -133,7 +133,7 @@ public class Duke {
             int index = Integer.parseInt(ind) - 1;
             if (index < LIST.size()) {
                 LIST.get(index).markAsUndone();
-                echo("I have marked this task incomplete: \"" + LIST.get(index).getDescription() + "\"", LEVEL.COMPLETE);
+                echo("I have marked this task incomplete: \"" + LIST.get(index).getDescription() + "\"", TYPE.COMPLETE);
             } else {
                 throw new DukeException("Oops, The index you gave is out of bound. There are only " + LIST.size() + " tasks");
             }
@@ -150,15 +150,15 @@ public class Duke {
                 Task temp = LIST.get(index);
 
                 //Check for confirmation before deleting
-                echo("Are you sure you want to delete this task: \"" + temp.getDescription() + "\" ? (Yes/No)", LEVEL.COMPLETE);
+                echo("Are you sure you want to delete this task: \"" + temp.getDescription() + "\" ? (Yes/No)", TYPE.COMPLETE);
                 System.out.print(COLOR_PURPLE + "> " + COLOR_RESET);
                 String confirm = cmdReader.nextLine().trim();
                 if (confirm.toLowerCase(Locale.ROOT).equals("yes")) {
                     LIST.remove(index);
-                    echo("I have removed this task from the list: \"" + temp.getDescription() + "\"", LEVEL.START);
-                    echo("You now have " + LIST.size() + " task(s) in the list.", LEVEL.END);
+                    echo("I have removed this task from the list: \"" + temp.getDescription() + "\"", TYPE.START);
+                    echo("You now have " + LIST.size() + " task(s) in the list.", TYPE.END);
                 } else {
-                    echo("The deletion has been cancelled.", LEVEL.COMPLETE);
+                    echo("The deletion has been cancelled.", TYPE.COMPLETE);
                 }
 
             } else {
@@ -174,8 +174,8 @@ public class Duke {
         try {
             Todo task = new Todo(command.substring(5));
             if (LIST.add(task)) {
-                echo("I have added this ToDo Task to the list: \"" + task.getDescription() + "\"", LEVEL.START);
-                echo("You now have " + LIST.size() + " task(s) in the list.", LEVEL.END);
+                echo("I have added this ToDo Task to the list: \"" + task.getDescription() + "\"", TYPE.START);
+                echo("You now have " + LIST.size() + " task(s) in the list.", TYPE.END);
             } else {
                 throw new DukeException("I am sorry. The task couldn't be added, please try again.");
             }
@@ -192,8 +192,8 @@ public class Duke {
             }
             Event task = new Event(command.substring(6));
             if (LIST.add(task)) {
-                echo("I have added this Event Task to the list: \"" + task.getDescription() + "\"", LEVEL.START);
-                echo("You now have " + LIST.size() + " task(s) in the list.", LEVEL.END);
+                echo("I have added this Event Task to the list: \"" + task.getDescription() + "\"", TYPE.START);
+                echo("You now have " + LIST.size() + " task(s) in the list.", TYPE.END);
             } else {
                 throw new DukeException("I am sorry. The task couldn't be added, please try again.");
             }
@@ -210,8 +210,8 @@ public class Duke {
             }
             Deadline task = new Deadline(command.substring(9));
             if (LIST.add(task)) {
-                echo("I have added this Deadline Task to the list: \"" + task.getDescription() + "\"", LEVEL.START);
-                echo("You now have " + LIST.size() + " task(s) in the list.", LEVEL.END);
+                echo("I have added this Deadline Task to the list: \"" + task.getDescription() + "\"", TYPE.START);
+                echo("You now have " + LIST.size() + " task(s) in the list.", TYPE.END);
             } else {
                 throw new DukeException("I am sorry. The task couldn't be added, please try again.");
             }
@@ -227,10 +227,11 @@ public class Duke {
 
         while (true) {
             // Take in the input
+            try {
             String command;
             System.out.print(COLOR_PURPLE + "> " + COLOR_RESET);
             command = cmdReader.nextLine().trim();
-            try {
+
                 if (command.isBlank()) {
                     throw new DukeException("The input is blank. Please enter something.");
                 }
@@ -270,7 +271,7 @@ public class Duke {
                     throw new DukeException("Oops, That's an invalid command. Type in help to get list of possible commands.");
                 }
             } catch (DukeException ex) {
-                echo(ex.getMessage(), LEVEL.ERROR);
+                echo(ex.getMessage(), TYPE.ERROR);
             }
         }
     }
