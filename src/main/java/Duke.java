@@ -26,10 +26,8 @@ public class Duke {
                     break;
                 case ("list"):  // "list" is typed as the first word
                     // list all the tasks only if "list" is the only word in the input
-                    if (wordArray.length > 1) { // add a task as usual
-                        storage[index] = new Task(tempString);
-                        index++;
-                        System.out.println("added: " + tempString);
+                    if (wordArray.length > 1) { // if "list" is followed by any word, show a warning
+                        System.out.println("Command 'list' should not take any input!");
                     } else {    // list all the tasks
                         for (int i = 0; i < storage.length; i++) {
                             if (storage[i] == null) break;
@@ -43,10 +41,8 @@ public class Duke {
                     }
                     break;
                 case ("done"):  // "done" is the first word in the input
-                    if (wordArray.length != 2) {    // if there are not exactly 2 words in the input, add new task
-                        storage[index] = new Task(tempString);
-                        index++;
-                        System.out.println("added: " + tempString);
+                    if (wordArray.length != 2) {    // if there are not exactly 2 words in the input, show a warning
+                        System.out.println("Please follow command 'done' with an integer!");
                     } else {    // if there are exactly 2 words in the input...
                         try {   // if the second word is an integer, mark the corresponding task as done
                             int tempIndex = Integer.parseInt(wordArray[1]) - 1;
@@ -59,10 +55,8 @@ public class Duke {
                                         + "  "
                                         + tempTask.toString());
                             }
-                        } catch (NumberFormatException nfe) {   // if 2nd word is not integer, add new task
-                            storage[index] = new Task(tempString);
-                            index++;
-                            System.out.println("added: " + tempString);
+                        } catch (NumberFormatException nfe) {   // if 2nd word is not integer, show a warning
+                            System.out.println("Please follow command 'done' with an integer!");
                         }
                     }
                     break;
