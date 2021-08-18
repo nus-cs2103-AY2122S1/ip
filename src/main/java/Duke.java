@@ -18,6 +18,7 @@ public class Duke {
     private void checkInput() {
         while (true) {
             String userInput = this.input.nextLine();
+
             if (userInput.equals("bye")) {
                 this.exit();
                 break;
@@ -26,16 +27,30 @@ public class Duke {
                 this.showList();
                 continue;
             }
-            if (userInput.length() >= 6 && userInput.substring(0, 5).equals("done ")) {
-                try {
-                    int taskNum = Integer.parseInt(userInput.substring(5));
-                    this.completeTask(taskNum);
-                    continue;
-                } catch (NumberFormatException e) {
-                    System.out.println("NOT AN INTEGER!");
-                }
+
+            int index = userInput.indexOf(" ");
+            String command = userInput.substring(0, index);
+            String arg = userInput.substring(index + 1);
+
+            if (command.equals("todo")) {
+                this.addTodo(arg);
+                continue;
             }
-            this.addTodo(userInput);
+            if (command.equals("event")) {
+                String[] splits = arg.split(" /at ");
+                this.addEvent(splits[0], splits[1]);
+                continue;
+            }
+            if (command.equals("deadline")) {
+                String[] splits = arg.split(" /by ");
+                this.addDeadline(splits[0], splits[1]);
+                continue;
+            }
+            if (command.equals("done")) {
+                int taskNum = Integer.parseInt(userInput.substring(5));
+                this.completeTask(taskNum);
+                continue;
+            }
         }
     }
 
@@ -46,14 +61,24 @@ public class Duke {
     }
 
 
-    private void echo(String userInput) {
-        System.out.println("\t" + userInput + "\n");
+    private void addTodo(String description) {
+        this.list.add(new Todo(description));
+        System.out.println("\tadded todo: " + description);
+        System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
     }
 
 
-    private void addTodo(String userInput) {
-        this.list.add(new Todo(userInput));
-        System.out.println("\tadded: " + userInput + "\n");
+    private void addDeadline(String description, String time) {
+        this.list.add(new Deadline(description, time));
+        System.out.println("\tadded deadline: " + description);
+        System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
+    }
+
+
+    private void addEvent(String description, String duration) {
+        this.list.add(new Event(description, duration));
+        System.out.println("\tadded event: " + description);
+        System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
     }
 
 
@@ -65,7 +90,7 @@ public class Duke {
     private void completeTask(int taskNum) {
         this.list.get(taskNum - 1).markAsDone();
         System.out.println("\tI've marked this task as done!");
-        System.out.println("\t" + this.list.get(taskNum - 1) + "\n");
+        System.out.printf("\t\t%s\n\n", this.list.get(taskNum - 1));
     }
 
 
