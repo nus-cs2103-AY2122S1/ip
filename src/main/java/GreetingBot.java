@@ -1,13 +1,29 @@
+/**
+ * Code for the main skeleton of the Bot. When Duke is run, An instance of this class is created and used to run it.
+ *
+ */
+
+
 import java.util.Scanner;
 import java.util.LinkedList;
 public class GreetingBot {
 
+    /**
+     * The list of tasks that belongs to the bot.
+     */
     private LinkedList<Task> myList = new LinkedList<>();
 
+    /**
+     * Constructor that takes in nothing.
+     */
     public GreetingBot() {
 
     }
 
+    /**
+     * Method that runs the main functions of the bot.
+     *
+     */
     public void startBot() {
         greet();
         store();
@@ -16,12 +32,19 @@ public class GreetingBot {
     }
 
 
+    /**
+     * Method that greets the user when bot is first run.
+     *
+     */
     private void greet() {
         String greetingMessage = "What's up! I'm Duke! What can I help you with?";
         System.out.println(greetingMessage);
 
     }
 
+    /**
+     * Method that reads input and decides what method to call to deal with the input.
+     */
     private void store() {
         Scanner inputScanner = new Scanner(System.in);
         while (true) {
@@ -32,13 +55,9 @@ public class GreetingBot {
                 } else if (nextLine.equals("bye")) {
                     break;
                 } else if (nextLine.startsWith("done")) {
-                    String[] splitWords = nextLine.split(" ");
-                    int taskIndex = Integer.parseInt(splitWords[1]);
-                    setDone(taskIndex);
+                    setDone(nextLine);
                 } else if (nextLine.startsWith("delete")) {
-                    String[] splitWords = nextLine.split(" ");
-                    int taskIndex = Integer.parseInt(splitWords[1]);
-                    deleteTask(taskIndex);
+                    deleteTask(nextLine);
                 } else {
                     newTask(nextLine);
                 }
@@ -52,27 +71,66 @@ public class GreetingBot {
         }
     }
 
-    private void setDone(int taskNumber) throws DukeException {
-        if (myList.size() > taskNumber) {
-            throw new DukeException("Dude I don't think you have a list THAT long!");
-        } else if (myList.get(taskNumber - 1).getDone()) {
-            throw new DukeException("This task is already done man!");
-        } else {
-            myList.get(taskNumber - 1).setDone(true);
+    /**
+     * Method that is called to set a task to done.
+     * @param nextLine
+     * @throws DukeException
+     */
+    private void setDone(String nextLine) throws DukeException {
+        String[] splitWords = nextLine.split(" ");
+        if (splitWords.length == 1 && splitWords[0].equals("done")) {
+            throw new DukeException("Dude I don't think you told me which task you're talking about!");
+        } else if (!splitWords[0].equals("done")) {
+            throw new DukeException("Dude, I don't understand your instructions!");
+        }
+        try {
+            int taskNumber = Integer.parseInt(splitWords[1]);
+            if (taskNumber > myList.size()) {
+                throw new DukeException("Dude I don't think you have a list THAT long!");
+            } else if (myList.get(taskNumber - 1).getDone()) {
+                throw new DukeException("This task is already done man!");
+            } else {
+                myList.get(taskNumber - 1).setDone(true);
+            }
+        }
+        catch (NumberFormatException ex) {
+            throw new DukeException("Woah, enter the task number properly..");
         }
     }
 
-    private void deleteTask(int taskNumber) throws DukeException {
-        if (myList.size() > taskNumber) {
-            throw new DukeException("Dude I don't think you have a list THAT long!");
-        } else {
-            String infoOfTask = myList.get(taskNumber - 1).toString();
-            myList.remove(taskNumber - 1);
-            System.out.println("Noted. I've removed this task:\n" + infoOfTask);
+    /**
+     * Method that is called to delete a task from the list.
+     * @param nextLine
+     * @throws DukeException
+     */
+    private void deleteTask(String nextLine) throws DukeException {
+        String[] splitWords = nextLine.split(" ");
+        if (splitWords.length == 1 && splitWords[0].equals("delete")) {
+            throw new DukeException("Dude I don't think you told me which task you're talking about!");
+        } else if (!splitWords[0].equals("delete")) {
+            throw new DukeException("Dude, I don't understand your instructions!");
+        }
+        try {
+            int taskNumber = Integer.parseInt(splitWords[1]);
+            if (taskNumber > myList.size()) {
+                throw new DukeException("Dude I don't think you have a list THAT long!");
+            } else {
+                String infoOfTask = myList.get(taskNumber - 1).toString();
+                myList.remove(taskNumber - 1);
+                System.out.println("Noted. I've removed this task:\n" + infoOfTask);
+            }
+        }
+        catch (NumberFormatException ex) {
+            throw new DukeException("Woah, enter the task number properly..");
         }
     }
 
 
+    /**
+     * method that is called to create a new Task.
+     * @param nextLine
+     * @throws DukeException
+     */
     private void newTask(String nextLine) throws DukeException {
         if (nextLine.startsWith("todo")) {
             if (nextLine.replaceAll("\\s", "").length() == 4) {
@@ -114,6 +172,11 @@ public class GreetingBot {
         }
     }
 
+    /**
+     * Method that is called to display the list.
+     * @param myList
+     * @throws DukeException
+     */
     private void list(LinkedList<Task> myList) throws DukeException{
         if (myList.isEmpty()) {
             throw new DukeException("Yo! Your list looks empty to me!");
@@ -127,8 +190,9 @@ public class GreetingBot {
     }
 
 
-
-
+    /**
+     * Method to echo the input by the user.
+     */
     private void echo() {
         Scanner inputScanner = new Scanner(System.in);
         while (true) {
@@ -141,6 +205,9 @@ public class GreetingBot {
         }
     }
 
+    /**
+     * Method to print the exit message and stop the program.
+     */
     private void exit() {
         String exitMessage = "Leaving just like that? Fine. See you soon I guess.";
         System.out.println(exitMessage);
