@@ -78,43 +78,46 @@ public class Duke {
                 }
 
                 //mark as done & enter done xxx
-                else if (cmd.split(" ")[0].equals(DONE) &&
-                        isInteger(cmd.split(" ")[1]) &&
-                        Integer.parseInt(cmd.split(" ")[1]) <= order ) {
+                else if (cmd != null) {
 
-                    int num = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                    System.out.println(INDENTATION + "Nice! I've marked this task as done:");
-                    task[num] = task[num].markDone();
-                    System.out.println(INDENTATION + " " + task[num]);
-                }
+                    if (cmd.split(" ")[0].equals(DONE) &&
+                            isInteger(cmd.split(" ")[1]) &&
+                            Integer.parseInt(cmd.split(" ")[1]) <= order) {
 
-                //print the task
-                else {
-                    intruction = cmd.split(" ")[0];
-                    switch (intruction) {
-                        case TODO:
-                            Todo todo = new Todo(cmd.substring(5));
-                            task[order] = todo;
-                            break;
-                        case DEADLINE:
-                            String subString_deadline = cmd.substring(9);
-                            Deadline deadline = new Deadline(subString_deadline.split(" /by ")[0],
-                                    subString_deadline.split(" /by ")[1]);
-                            task[order] = deadline;
-                            break;
-                        case EVENT:
-                            String subString_event = cmd.substring(6);
-                            Event event = new Event(subString_event.split(" /at ")[0],
-                                    subString_event.split(" /at ")[1]);
-                            task[order] = event;
-                            break;
+                        int num = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                        task[num] = task[num].markDone();
+                        System.out.println(INDENTATION + "Nice! I've marked this task as done:");
+                        System.out.println(INDENTATION + " " + task[num]);
                     }
 
-                    System.out.println(INDENTATION + "Got it. I've added this task:");
-                    System.out.println(INDENTATION + INDENTATION + task[order]); //toString in Deadline or Event
-                    System.out.println(INDENTATION + "Now you have " + order + " tasks in the list.");
-                    cmdList[order] = cmd;
-                    order ++;
+                    //print the task
+                    else {
+                        intruction = cmd.split(" ")[0];
+                        switch (intruction) {
+                            case TODO:
+                                Todo todo = new Todo(cmd.substring(5));
+                                task[order] = todo;
+                                break;
+                            case DEADLINE:
+                                String subString_deadline = cmd.substring(9);
+                                Deadline deadline = new Deadline(subString_deadline.split(" /by ")[0],
+                                        subString_deadline.split(" /by ")[1]);
+                                task[order] = deadline;
+                                break;
+                            case EVENT:
+                                String subString_event = cmd.substring(6);
+                                Event event = new Event(subString_event.split(" /at ")[0],
+                                        subString_event.split(" /at ")[1]);
+                                task[order] = event;
+                                break;
+                        }
+
+                        System.out.println(INDENTATION + "Got it. I've added this task:");
+                        System.out.println(INDENTATION + INDENTATION + task[order]); //toString in Deadline or Event
+                        System.out.println(INDENTATION + "Now you have " + order + " tasks in the list.");
+                        cmdList[order] = cmd;
+                        order++;
+                    }
                 }
 
 

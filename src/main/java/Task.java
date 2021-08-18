@@ -12,9 +12,9 @@ public class Task {
     }
 
     public Task markDone() {
-        Task task = new Task(this.description);
-        task.isDone = true;
+        this.isDone = true;
         return this;
+
     }
 
     @Override
