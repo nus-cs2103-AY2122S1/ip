@@ -1,9 +1,6 @@
 import jarvis.action.Action;
 import jarvis.action.ActionTypeEnum;
 import jarvis.exception.JarvisException;
-import jarvis.message.ExitMessage;
-import jarvis.message.GreetingMessage;
-import jarvis.message.OutputMessage;
 import jarvis.output.Output;
 import jarvis.task.TaskList;
 
@@ -13,8 +10,7 @@ public class Jarvis {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        OutputMessage greetingMessage = new GreetingMessage();
-        Output.showFormattedOutputMessage(greetingMessage);
+        Output.showGreetingMessage();
 
         String userInput = scanner.nextLine();
         TaskList taskList = new TaskList();
@@ -36,8 +32,7 @@ public class Jarvis {
             userInput = scanner.nextLine();
         }
 
-        OutputMessage exitMessage = new ExitMessage();
-        Output.showFormattedOutputMessage(exitMessage);
+        Output.showExitMessage();
         scanner.close();
     }
 }

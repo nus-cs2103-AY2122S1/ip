@@ -19,11 +19,6 @@ public class TodoAction extends Action {
     @Override
     public void execute(TaskList taskList) {
         Todo newTodo = taskList.addTodo(todoDescription);
-        OutputMessage todoAddedMessage = new OutputMessage("Got it. I have added this task:\n\t\t"
-                + newTodo.toString()
-                + "\n\t"
-                + taskList.taskListSummary()
-        );
-        Output.showFormattedOutputMessage(todoAddedMessage);
+        Output.showTaskAddedMessage(newTodo, taskList);
     }
 }

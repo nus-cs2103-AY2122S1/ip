@@ -26,7 +26,6 @@ public class MarkAsDoneAction extends Action {
             throw new JarvisException("Please enter a valid task number!");
         }
         Task task = taskList.markAsDone(taskIndex);
-        OutputMessage doneMessage = new OutputMessage("Nice! I've marked this task as done: \n\t\t" + task.toString());
-        Output.showFormattedOutputMessage(doneMessage);
+        Output.showTaskDoneMessage(task);
     }
 }

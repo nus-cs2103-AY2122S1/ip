@@ -25,11 +25,6 @@ public class EventAction extends Action {
     @Override
     public void execute(TaskList taskList) {
         Event newEvent = taskList.addEvent(eventDescription, eventTime);
-        OutputMessage eventTaskAddedMessage = new OutputMessage("Got it. I have added this task:\n\t\t"
-                + newEvent.toString()
-                + "\n\t"
-                + taskList.taskListSummary()
-        );
-        Output.showFormattedOutputMessage(eventTaskAddedMessage);
+        Output.showTaskAddedMessage(newEvent, taskList);
     }
 }

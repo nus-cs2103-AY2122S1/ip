@@ -1,10 +1,11 @@
 package jarvis.message;
 
 public class GreetingMessage extends OutputMessage{
-    private static final String defaultGreetingMessage = "Hello! I'm JARVIS"
-            + OutputMessage.NEW_LINE
-            + OutputMessage.TAB
-            + "What can I do for you?";
+    private static final String defaultGreetingMessage = String.format(
+            "%s\n%s",
+            "Hello! I'm Jarvis!",
+            "What can I do for you?"
+    );
 
     public GreetingMessage() {
         super(GreetingMessage.defaultGreetingMessage);

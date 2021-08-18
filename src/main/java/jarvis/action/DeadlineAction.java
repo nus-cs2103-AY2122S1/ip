@@ -25,11 +25,6 @@ public class DeadlineAction extends Action {
     @Override
     public void execute(TaskList taskList) {
         Deadline newDeadlineTask = taskList.addTaskWithDeadline(taskDescription, deadline);
-        OutputMessage deadlineTaskAddedMessage = new OutputMessage("Got it. I have added this task:\n\t\t"
-                + newDeadlineTask.toString()
-                + "\n\t"
-                + taskList.taskListSummary()
-        );
-        Output.showFormattedOutputMessage(deadlineTaskAddedMessage);
+        Output.showTaskAddedMessage(newDeadlineTask, taskList);
     }
 }
