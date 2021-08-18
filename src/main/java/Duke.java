@@ -3,7 +3,10 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 public class Duke {
+
+
     public static void main(String[] args) {
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -41,20 +44,20 @@ public class Duke {
                     System.out.println("Invalid Input for done command");
                     continue;
                 }
-                System.out.println(taskDone);
+                //System.out.println(taskDone);
                 if (storedInfo[taskDone-1] == null) {
                     System.out.println("Invalid Input for done command");
                     continue;
                 }
-                System.out.println("Nice! I've marked this task as done:");
-                storedInfo[taskDone-1].markAsDone();
-                System.out.println(storedInfo[taskDone-1]);
-                //int i = parseInt(in);
-                /*if (in.charAt(4).equals(e)) {
-                    System.out.println("Invalid Input for done");
-                    break;
-                }*/
-                continue;
+                if (!storedInfo[taskDone-1].isDone) {
+                    System.out.println("Nice! I've marked this task as done:");
+                    storedInfo[taskDone - 1].markAsDone();
+                    System.out.println(storedInfo[taskDone - 1]);
+                    continue;
+                } else {
+                    System.out.println("This task is already marked as done");
+                    continue;
+                }
 
             }
             if (in.length() > 3 && in.substring(0,4).equals("todo") ) {
@@ -72,9 +75,13 @@ public class Duke {
                     System.out.println("Now you have " + count + " tasks in the list.");
                 }
             } else if (in.length() > 4 && in.substring(0,5).equals("event")) {
+                int i = in.indexOf("/");
+                if (i < 0) {
+                    System.out.println("Time not detected. Please try again");
+                    continue;
+                }
                 System.out.println("Got it. I've added this task:");
-                int timeLocator = in.indexOf("/");
-                storedInfo[count] = new EventTask(in.substring(6, timeLocator), in.substring(timeLocator+1));
+                storedInfo[count] = new EventTask(in.substring(6, i), in.substring(i+1));
                 System.out.println(storedInfo[count]);
                 count++;
                 if (count == 1) {
@@ -83,9 +90,13 @@ public class Duke {
                     System.out.println("Now you have " + count + " tasks in the list.");
                 }
             } else if (in.length() > 7 && in.substring(0,8).equals("deadline")) {
+                int i = in.indexOf("/");
+                if (i < 0) {
+                    System.out.println("Time not detected. Please try again");
+                    continue;
+                }
                 System.out.println("Got it. I've added this task:");
-                int timeLocator = in.indexOf("/");
-                storedInfo[count] = new DeadlineTask(in.substring(9, timeLocator), in.substring(timeLocator+1));
+                storedInfo[count] = new DeadlineTask(in.substring(9, i), in.substring(i+1));
                 System.out.println(storedInfo[count]);
                 count++;
                 if (count == 1) {
