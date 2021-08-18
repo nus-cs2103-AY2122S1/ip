@@ -61,11 +61,11 @@ public class Duke {
                 addToList(t);
                 System.out.println(taskAddedMessage(t));
             } else if (input.startsWith("deadline")) {
-                if (!input.contains("/")) {
-                    System.out.println(formatMessage("Please enter the deadline of the task after a /"));
+                if (!input.contains("/by")) {
+                    System.out.println(formatMessage("Please enter the deadline of the task after /by"));
                     continue;
                 }
-                String[] parts = input.split(" /");
+                String[] parts = input.split(" /by ");
                 Deadline d = new Deadline(parts[0].substring(9), parts[1]);
                 addToList(d);
                 System.out.println(taskAddedMessage(d));
