@@ -12,14 +12,15 @@ import utils.Command;
  */
 public class Parser {
 
-    /** Error messages. */
-
-    private static final String EMPTY_COMMAND_MESSAGE = "Command cannot be empty.";
-    private static final String UNKNOWN_COMMAND_MESSAGE =
+    // Error message formats.
+    private static final String EMPTY_COMMAND_ERROR_MESSAGE = "Instruction cannot be empty.";
+    private static final String NOT_AN_INTEGER_ERROR_MESSAGE = "'%s' is not an integer.";
+    private static final String UNKNOWN_COMMAND_ERROR_MESSAGE =
             "Instruction does not follows specified format.";
-    private static final String EMPTY_PARAM_TO_COMMAND_MESSAGE =
-            "User parameter(s) to command '%s' cannot be empty.";
-    private static final String NOT_AN_INTEGER_MESSAGE = "'%s' is not an integer.";
+    private static final String EMPTY_PARAM_TO_COMMAND_ERROR_MESSAGE =
+            "Command '%s' requires parameters to execute.";
+    private static final String IMPROPER_FORMATTED_ERROR_MESSAGE =
+            "Command '%s' is not formatted properly with key '%s'";
 
     /**
      * This method parses the inputs according to the command specified,
@@ -29,7 +30,7 @@ public class Parser {
      * @param command command order to execute
      * @param userInput user input to parse for execution
      * @param taskManager executor of tasks based on commands and parameters
-     * @return output message from taskManager after execution
+     * @return output String message from taskManager after execution
      * @throws DukeException if userInput is of invalid format,
      * or taskManager is unable to execute command
      */
@@ -37,127 +38,103 @@ public class Parser {
             throws DukeException {
 
         assert (!command.equals(Command.BYE));
-        String output;
-
-        // intermediates to parse
-        int singleNumber;
-        String singleString;
-        String[] multipleStrings;
 
         switch (command) {
             case LIST:
-                if (!userInput.equals(command.toString())) {
-                    throw new DukeException(UNKNOWN_COMMAND_MESSAGE); // proper 'list' command
-                }
-                output = taskManager.getTaskList();
-                break;
+                return taskManager.getTaskList();
             case DONE:
-                singleNumber = parseParameterToNumber(userInput, Command.DONE);
-                output = taskManager.markTaskAsDone(singleNumber);
-                break;
+                return taskManager.updateTaskAsDone(parseToNumber(userInput, command));
             case DELETE:
-                singleNumber = parseParameterToNumber(userInput, Command.DELETE);
-                output = taskManager.deleteTask(singleNumber);
-                break;
+                return taskManager.deleteTask(parseToNumber(userInput, command));
             case TODO:
-                singleString = parseParameterToString(userInput, Command.TODO);
-                output = taskManager.addToDoTask(singleString);
-                break;
+                return taskManager.addToDoTask(parseToString(userInput, command));
             case EVENT:
-                multipleStrings = parseParameterToStringArray(userInput, Command.EVENT);
-                output = taskManager.addEventTask(multipleStrings);
-                break;
+                return taskManager.addEventTask(parseToStringArray(userInput, command));
             case DEADLINE:
-                multipleStrings = parseParameterToStringArray(userInput, Command.DEADLINE);
-                output = taskManager.addDeadlineTask(multipleStrings);
-                break;
+                return taskManager.addDeadlineTask(parseToStringArray(userInput, command));
+            case EMPTY:
+                throw new DukeException(EMPTY_COMMAND_ERROR_MESSAGE);
             default: // INVALID
-                if (userInput.isBlank()) {
-                    throw new DukeException(EMPTY_COMMAND_MESSAGE);
-                }
-                throw new DukeException(UNKNOWN_COMMAND_MESSAGE);
+                throw new DukeException(UNKNOWN_COMMAND_ERROR_MESSAGE);
         }
-        return output;
+    }
+
+    /**
+     * Returns the parameters of a user input based on command.
+     *
+     * @param userInput user input
+     * @param command command to be executed with specified arrangement of parameters
+     * @return parameter String
+     * @throws DukeException if there are no parameters for the command
+     */
+    public String extractParameter(String userInput, Command command) throws DukeException {
+        try {
+            String[] parameters = userInput.trim().split(" ", 2); // split on first occurrence
+            return parameters[1]; // grab second word onwards
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            throw new DukeException(String.format(EMPTY_PARAM_TO_COMMAND_ERROR_MESSAGE, command));
+        }
     }
 
     /**
      * Parses the user's input to return a String parameter for the command.
      *
-     * @param userInput user input to extract and parse parameter
+     * @param userInput user input
      * @param command command to be executed with specified arrangement of parameters
      * @return a String parameter
      * @throws DukeException if userInput is of invalid format
      */
-    public String parseParameterToString(String userInput, Command command) throws DukeException {
-        int size = 2;
-        String[] userParams = userInput.split(" ", size);
-        if (userParams.length < size || userParams[1].isBlank()) {
-            throw new DukeException(String.format(EMPTY_PARAM_TO_COMMAND_MESSAGE, command));
-        }
+    public String parseToString(String userInput, Command command) throws DukeException {
+        String userParam = extractParameter(userInput, command);
 
-        // $ command (WORD-1)
-        return userParams[1].trim();
+        if (userParam.isBlank()) {
+            throw new DukeException(String.format(EMPTY_PARAM_TO_COMMAND_ERROR_MESSAGE, command));
+        }
+        return userParam.trim();
     }
 
     /**
      * Parses the user's input to return a String array for the command.
      *
-     * @param userInput user input to extract and parse parameters
+     * @param userInput user input
      * @param command command to be executed with specified arrangement of parameters
      * @return a String array of parameters
      * @throws DukeException if userInput is of invalid format
      */
-    public String[] parseParameterToStringArray(String userInput, Command command)
-            throws DukeException {
+    public String[] parseToStringArray(String userInput, Command command) throws DukeException {
+        String userParams = extractParameter(userInput, command);
 
-        int size = 2;
-        String[] parameters = userInput.split(" ", size);
-        // $ (command) (WORD-1 /SPLIT WORD-2)
-        if (parameters.length < size) {
-            throw new DukeException(String.format(EMPTY_PARAM_TO_COMMAND_MESSAGE, command));
-        }
-
-        String split = " /";
+        String key = "/";
         if (command.equals(Command.EVENT)) {
-            split += Event.SPLIT_WORD;
+            key += Event.SPLIT_WORD;
         } else if (command.equals(Command.DEADLINE)) {
-            split += Deadline.SPLIT_WORD;
-        }
-        split += ' '; // to ensure proper split
-
-        String[] userParams = parameters[1].split(split, size);
-        // $ ... (WORD-1) /SPLIT (WORD-2)
-        if (userParams.length < size || userParams[0].isBlank() || userParams[1].isBlank()) {
-            throw new DukeException(String.format(EMPTY_PARAM_TO_COMMAND_MESSAGE, command));
+            key += Deadline.SPLIT_WORD;
         }
 
-        // $ ... (WORD-1) ... (WORD-2)
-        String desc = userParams[0].trim();
-        String detail = userParams[1].trim();
-        return new String[] {desc, detail};
+        String[] parameters = userParams.split(key, 0); // pattern applied many times as possible
+        if (parameters.length != 2) {
+            throw new DukeException(String.format(IMPROPER_FORMATTED_ERROR_MESSAGE, command, key));
+        } else if (parameters[0].isBlank() || parameters[1].isBlank()) {
+            throw new DukeException(String.format(EMPTY_PARAM_TO_COMMAND_ERROR_MESSAGE, command));
+        }
+        return new String[] {parameters[0].trim(), parameters[1].trim()}; // desc, detail
     }
 
     /**
      * Parses the user's input to return a String array for the command.
      *
-     * @param userInput user input to extract and parse parameter
+     * @param userInput user input
      * @param command command to be executed with specified arrangement of parameters
      * @return an integer parameter
      * @throws DukeException if userInput is of invalid format
      */
-    public int parseParameterToNumber(String userInput, Command command) throws DukeException {
-        int size = 2;
-        String[] userParams = userInput.split(" ", size);
-        if (userParams.length < size || userParams[0].isBlank()) {
-            throw new DukeException(String.format(EMPTY_PARAM_TO_COMMAND_MESSAGE, command));
-        }
+    public int parseToNumber(String userInput, Command command) throws DukeException {
+        String userParam = extractParameter(userInput, command);
 
-        // $ command (NUM-1)
-        String param = userParams[1].trim();
         try {
-            return Integer.parseInt(param);
+            return Integer.parseInt(userParam);
         } catch (NumberFormatException exception) {
-            throw new DukeException(String.format(NOT_AN_INTEGER_MESSAGE, param));
+            throw new DukeException(String.format(NOT_AN_INTEGER_ERROR_MESSAGE, userParam));
         }
     }
 }
