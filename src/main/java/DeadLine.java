@@ -13,6 +13,6 @@ public class DeadLine extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (Due: " + this.dueDate + ")";
+        return "[D] " + super.toString() + " (Due: " + this.dueDate + ")";
     }
 }
