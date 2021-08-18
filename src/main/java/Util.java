@@ -9,4 +9,15 @@ public class Util {
         }
         return true;
     }
+
+    //Print confirmation after the task is added
+    public static void taskAddConfirmatio(Task task, int numTasks) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        if (numTasks == 1) {
+            System.out.println("Now you have " + numTasks + " task in the list.");
+        } else if (numTasks > 1) {
+            System.out.println("Now you have " + numTasks + " tasks in the list.");
+        }
+    }
 }
