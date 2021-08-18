@@ -1,5 +1,12 @@
+done
+done 1
+todo   
 todo Buy bread
+deadline   
+deadline Presentation Slides Due/byFri 5pm
 deadline Presentation Slides Due /by Fri 5pm
+event
+event Project Meeting/atMon 2-4pm
 event Project Meeting /at Mon 2-4pm
 list
 done 2
