@@ -41,7 +41,7 @@ public class Duke {
         System.out.println(LOGO);
         display_message(WELCOME_MESSAGE);
 
-        TodoList todoList = new TodoList();
+        TaskList taskList = new TaskList();
 
         Scanner sc = new Scanner(System.in);
         for (String input = sc.nextLine(); canContinue(input); input = sc.nextLine()) {
@@ -49,19 +49,19 @@ public class Duke {
             String firstCommand = inputArr[0];
             switch (firstCommand) {
                 case LIST_COMMAND:
-                    display_message(String.format(LIST_MESSAGE, todoList.toString()));
+                    display_message(String.format(LIST_MESSAGE, taskList.toString()));
                     break;
                 case DONE_COMMAND:
                     if (inputArr.length < 2) {
                         display_message(MISSING_DONE_NUMBER_MESSAGE);
                     } else {
                         String secondCommand = inputArr[1];
-                        int todoIndex = Integer.parseInt(secondCommand);
-                        display_message(String.format(DONE_MESSAGE, todoList.markTodoAsDone(todoIndex)));
+                        int taskIndex = Integer.parseInt(secondCommand);
+                        display_message(String.format(DONE_MESSAGE, taskList.markTaskAsDone(taskIndex)));
                     }
                     break;
                 default:
-                    display_message(todoList.addTodo(input));
+                    display_message(taskList.addTask(input));
             }
         }
         sc.close();

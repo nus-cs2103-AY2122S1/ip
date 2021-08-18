@@ -1,13 +1,13 @@
-public class Todo {
+public class Task {
     private final String text;
     private boolean isDone;
 
-    public Todo(String text) {
+    public Task(String text) {
         this.text = text;
         this.isDone = false;
     }
 
-    public Todo markDone() {
+    public Task markDone() {
         this.isDone = true;
         return this;
     }
