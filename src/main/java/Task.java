@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+
 public class Task  {
-    private static Task[] taskList = new Task[100];
+    private static ArrayList<Task> taskList = new ArrayList<Task>(100);
     private static int counter = 0;
 
     protected String description;
@@ -11,7 +13,7 @@ public class Task  {
     }
 
     public void addTask() {
-        Task.taskList[counter] = this;
+        Task.taskList.add(this);
         counter++;
     }
 
@@ -23,12 +25,17 @@ public class Task  {
         this.isDone = true;
     }
 
-    public static Task[] getTaskList() {
+    public static ArrayList<Task> getTaskList() {
         return Task.taskList;
     }
 
     public static int getCounter() {
         return Task.counter;
+    }
+
+    public void deleteTask() {
+        Task.taskList.remove(this);
+        counter--;
     }
 
     @Override
