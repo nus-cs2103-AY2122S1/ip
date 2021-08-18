@@ -17,8 +17,7 @@ public class Duke {
                 System.out.println("\n_________________________\n" + "Bye. Hope to see you again soon!" + "\n_________________________\n");
                 return;
             } else if (str.equalsIgnoreCase("list")){
-                System.out.println("\n_________________________\n + Here are the tasks in your list:");
-
+                System.out.println("\n_________________________\n Here are the tasks in your list:");
                 for(int i = 0 ; i < listIndex; i++){
                     System.out.println((i + 1) + ". " + list[i].toString());
                 }
@@ -27,12 +26,22 @@ public class Duke {
                 int index = Integer.parseInt(str.split(" ")[1]) - 1;
                 list[index].markAsDone();
                 System.out.println("Nice! I've marked this task as done:\n" + list[index].toString());
-            } else {
-                //split description into task type and description
-                Task newTask = new Task(str.split(" ",2)[0], str.split(" ",2)[1] );
+            } else if (str.contains("todo") || str.contains("deadline") || str.contains("event")){
+                Task newTask = new Task("null");
+                if(str.contains("todo")){
+                    newTask = new Todo(str.split(" ",2)[1]);
+                }
+                if(str.contains("deadline")) {
+                    newTask = new Deadline(str.split("/by")[0].split(" ",2)[1],str.split("/by")[1]);
+                }
+                if (str.contains("event")) {
+                    newTask = new Event(str.split("/at")[0].split(" ",2)[1],str.split("/at")[1]);
+                }
                 list[listIndex] = newTask;
                 listIndex++;
-                System.out.println("\n_________________________\n" + "Got it. I've added this task:\n" + newTask + "Now you have " + listIndex + " tasks in the list." + "\n_________________________\n");
+                System.out.println("\n_________________________\n" + "Got it. I've added this task:\n" + newTask + "\nNow you have " + listIndex + " tasks in the list." + "\n_________________________\n");
+            } else {
+                System.out.println("\n_________________________\n" + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n_________________________\n");
             }
         }
     }
