@@ -1,5 +1,9 @@
 public class Task {
 
+    public enum Type {
+        TODO, DEADLINE, EVENT
+    }
+
     private String description;
     private boolean isDone;
 
@@ -14,7 +18,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + (isDone ? "X" : "") + "] "
+        return "[" + (isDone ? "X" : "") + "]"
                 + description;
     }
 }
