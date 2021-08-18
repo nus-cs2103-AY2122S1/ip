@@ -59,20 +59,32 @@ public class Duke {
     }
 
     private static void markTask(String taskNumberString) throws DukeException {
+        int taskNumber = retrieveTaskNumber(taskNumberString);
+
+        Task task = tasks.get(taskNumber - 1);
+        task.markAsDone();
+        printMarkTaskDoneMessage(task);
+    }
+
+    private static void deleteTask(String taskNumberString) throws DukeException {
+        int taskNumber = retrieveTaskNumber(taskNumberString);
+
+        Task removedTask = tasks.remove(taskNumber - 1);
+        printDeleteTaskMessage(removedTask);
+    }
+
+    private static int retrieveTaskNumber(String taskNumberString) throws DukeException {
         int taskNumber;
         try {
             taskNumber = Integer.parseInt(taskNumberString);
         } catch (NumberFormatException e) {
-            throw new DukeException("Oops!!! The done command should be followed by an integer.");
+            throw new DukeException("Oops!!! The done or delete command should be followed by an integer.");
         }
 
         if (taskNumber < 1 || taskNumber > tasks.size()) {
             throw new DukeException("Oops!!! The task number provided is not valid.");
         }
-
-        Task task = tasks.get(taskNumber - 1);
-        task.markAsDone();
-        printMarkTaskDoneMessage(task);
+        return taskNumber;
     }
 
     private static void printAddTaskMessage(Task task) {
@@ -94,6 +106,12 @@ public class Duke {
 
     private static void printMarkTaskDoneMessage(Task task) {
         System.out.println(formatDukeResponse("Nice! I've marked this task as done:\n" + task));
+    }
+
+    private static void printDeleteTaskMessage(Task task) {
+        System.out.println(formatDukeResponse("Noted. I've removed this task:\n" + task
+                + "\nNow you have " + tasks.size()
+                + (tasks.size() == 1 ? " task " : " tasks ") + "in the list."));
     }
 
     private static void printInvalidCommandMessage() {
@@ -125,6 +143,9 @@ public class Duke {
                     break;
                 case "done":
                     markTask(action);
+                    break;
+                case "delete":
+                    deleteTask(action);
                     break;
                 case "todo":
                     addTask(action);

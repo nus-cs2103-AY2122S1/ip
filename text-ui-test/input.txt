@@ -13,4 +13,8 @@ deadline /by 3pm
 event meet friends /at
 deadline
 blah
+delete 1
+delete -5
+delete
+list
 bye
