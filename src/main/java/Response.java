@@ -68,9 +68,8 @@ public class Response {
     public void markDone(int pos) {
         Task task = lst.get(pos);
         task.mark();
-        String format = String.format("[%s] ", task.getStatusIcon());
         System.out.println(horizontalLine + "    Nice! I've marked this task as done:\n" +
-                "    " + format + task.getName() +
+                task.toString() +
                 "\n" + horizontalLine);
     }
 }

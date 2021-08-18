@@ -40,4 +40,10 @@ public class Task {
     public String getName() {
         return this.name;
     }
+
+    @Override
+    public String toString() {
+        String format = String.format("[%s] ", this.getStatusIcon());
+        return "    " + format + this.name;
+    }
 }
