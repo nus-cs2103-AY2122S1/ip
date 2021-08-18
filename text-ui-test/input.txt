@@ -12,4 +12,8 @@ event fighting /at
 event /at
 deadline grandmaster /by
 deadline /by
+delete
+delete -1
+delete 2
+list
 bye
