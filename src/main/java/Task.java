@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
 
     // The name of the task.
     protected String taskName;
@@ -7,6 +7,7 @@ public class Task {
 
     /***
      * Constructor to create a task.
+     *
      * @param taskName The name of the task.
      */
     public Task(String taskName) {
@@ -23,6 +24,7 @@ public class Task {
 
     /***
      * Returns the string representation of the task.
+     *
      * @return The name of the task.
      */
     @Override
