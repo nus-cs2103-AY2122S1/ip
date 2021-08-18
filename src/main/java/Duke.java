@@ -73,22 +73,43 @@ public class Duke {
     }
 
     private void markDone(String input) {
-        int index = Integer.parseInt(input);
-        Task currentTask = tasks.get(index - 1);
-        if (currentTask.getIsDone()) {
-            print("YOU ALREADY DID THIS YOU FOOL.");
+        if (tasks.isEmpty()) {
+            new DukeException("YOU HAVE NO TASKS YOU FOOL.");
+            return;
         }
-        currentTask.setIsDone(true);
-        print("YOU SAY YOU'VE COMPLETED THIS TASK:\n " + currentTask);
+        try {
+            int index = Integer.parseInt(input);
+            if (index < 0 || index > tasks.size() - 1) {
+                new DukeException("INVALID TASK NUMBER YOU FOOL.");
+                return;
+            }
+            Task currentTask = tasks.get(index - 1);
+            if (currentTask.getIsDone()) {
+                print("YOU ALREADY DID THIS YOU FOOL.");
+                return;
+            }
+            currentTask.setIsDone(true);
+            print("YOU SAY YOU'VE COMPLETED THIS TASK:\n " + currentTask);
+        } catch (NumberFormatException e) {
+            new DukeException("DO YOU NOT KNOW WHAT A NUMBER IS, FOOLISH HUMAN?");
+        }
     }
 
     private void addToDo(String taskName) {
+        if (taskName.equals("")) {
+            new DukeException("NAME YOUR TASK. DON'T WASTE MY TIME.");
+            return;
+        }
         Task newTask = new ToDo(taskName);
         tasks.add(newTask);
         print(" MORTAL, YOU'VE ADDED THIS TASK: " + newTask);
     }
 
     private void addEvent(String input) {
+        if (input.equals("") || !input.contains(" /at")) {
+            new DukeException("FORMAT YOUR EVENT PROPERLY. DON'T WASTE MY TIME.");
+            return;
+        }
         String[] args = input.split("/at", 2);
         Task newEvent = new Event(args[0].trim(), args[1].trim());
         tasks.add(newEvent);
@@ -96,6 +117,10 @@ public class Duke {
     }
 
     private void addDeadline(String input) {
+        if (input.equals("") || !input.contains(" /by")) {
+            new DukeException("FORMAT YOUR DEADLINE PROPERLY. DON'T WASTE MY TIME.");
+            return;
+        }
         String[] args = input.split("/by", 2);
         Task newEvent = new Deadline(args[0].trim(), args[1].trim());
         tasks.add(newEvent);
@@ -115,7 +140,10 @@ public class Duke {
                 print(" LIVE OUT YOUR PATHETIC LIFE, WEAKLING.");
                 break;
             } else {
-                FUNCTIONS.getOrDefault(cmd[0], (task) -> addToDo(inputString)).accept(cmd.length > 1 ? cmd[1] : "");
+                FUNCTIONS
+                        .getOrDefault(cmd[0],
+                                (task) -> print("FOOLISH MORTAL, I CAN'T EXECUTE THAT COMMAND. TRY AGAIN:"))
+                        .accept(cmd.length > 1 ? cmd[1] : "");
             }
             System.out.print("WHAT ELSE DO YOU WANT, INSECT?\n ");
         }
