@@ -7,8 +7,9 @@ public class Task {
         this.taskName = taskName;
     }
 
+    @Override
     public String toString() {
-        return String.format("[%s] %s", isDone ? "X" : "", taskName);
+        return String.format("[%s] %s", isDone ? "X" : " ", taskName);
     }
 
     public void markDone() {
