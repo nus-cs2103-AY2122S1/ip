@@ -69,40 +69,57 @@ public class Duke {
     /**
      * Based on the command received, either quit the program or process an event.
      */
-    private void readCommand() {
-        // Read the command.
+    private void readCommand() throws DukeException {
+        // read the command and extract out the first word to determine the type of command.
         String command = this.input.nextLine().trim();
+        String[] splitted = command.split(" ", 2);
+
         if (command.equals("bye")) {
-            // Print exiting message and end the program.
             System.out.println(Duke.EXITING_MESSAGE);
             this.isRunning = false;
         } else if (command.equals("list")) {
-            // List all added tasks.
             processCommand(new GetListProcessor());
-        } else {
-            String[] splitted = command.split(" ", 2);
-            if (splitted[0].equals("done")) {
-                // Detect a done command.
-                try {
-                    // Finish a task, mark it as done.
-                    int index = Integer.parseInt(splitted[1]) - 1;
-                    processCommand(new TaskDoneProcessor(Duke.tasks[index]));
-                } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException e) {
-                    // Add the task to list and print the action.
-                    processCommand(new AddATaskProcessor(command, new ToDo(command)));
-                }
-            } else if (splitted[0].equals("deadline")) {
-                // Detect a deadline command.
-                String[] information = splitted[1].split("/by", 2);
-                processCommand(new AddATaskProcessor(command, new Deadline(information[0], information[1])));
-            } else if (splitted[0].equals("event")) {
-                // Detect an event command.
-                String[] information = splitted[1].split("/at", 2);
-                processCommand(new AddATaskProcessor(command, new Event(information[0], information[1])));
-            } else {
-                // Detect a todo command.
-                processCommand(new AddATaskProcessor(command, new ToDo(splitted[1])));
+        } else if (splitted[0].equals("done")) {
+            try {
+                int index = Integer.parseInt(splitted[1]) - 1;
+                processCommand(new TaskDoneProcessor(Duke.tasks[index]));
+            } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("☹ OOPS!!! The task number is invalid.");
             }
+        } else if (splitted[0].equals("todo")) {
+            if (splitted.length >= 2) {
+                processCommand(new AddATaskProcessor(command, new ToDo(splitted[1])));
+            } else {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+        } else if (splitted[0].equals("deadline")) {
+            if (splitted.length >= 2) {
+                String[] information = splitted[1].split("/by");
+                if (information.length == 2) {
+                    processCommand(new AddATaskProcessor(command, new Deadline(information[0], information[1])));
+                } else if (information.length < 2) {
+                    throw new DukeException("☹ OOPS!!! The time of a deadline cannot be empty.");
+                } else {
+                    throw new DukeException("☹ OOPS!!! A deadline cannot occupy multiple time slots.");
+                }
+            } else {
+                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            }
+        } else if (splitted[0].equals("event")) {
+            if (splitted.length >= 2) {
+                String[] information = splitted[1].split("/at");
+                if (information.length == 2) {
+                    processCommand(new AddATaskProcessor(command, new Event(information[0], information[1])));
+                } else if (information.length < 2) {
+                    throw new DukeException("☹ OOPS!!! The time of an event cannot be empty.");
+                } else {
+                    throw new DukeException("☹ OOPS!!! An event cannot occupy multiple time slots.");
+                }
+            } else {
+                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+            }
+        } else {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -110,7 +127,12 @@ public class Duke {
         Duke duke = new Duke();
         // Process the commands received.
         while (duke.isRunning) {
-            duke.readCommand();
+            try {
+                duke.readCommand();
+            } catch (DukeException e) {
+                System.out.println(e);
+                continue;
+            }
         }
     }
 }
