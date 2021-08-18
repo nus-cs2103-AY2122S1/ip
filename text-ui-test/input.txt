@@ -1,0 +1,7 @@
+do A
+do B
+do C by 4:30
+D at 6
+done 3
+list
+bye
