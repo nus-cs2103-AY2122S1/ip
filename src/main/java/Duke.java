@@ -32,6 +32,19 @@ public class Duke {
     }
 
     /**
+     * Pretty print the message with the horizontal lines and the param message.
+     *
+     * @param message A String to be printed
+     */
+    public void printAddMessage(String message, String taskTitle) {
+        printLine();
+        printWithTabIndent(message);
+        printWithTabIndent("  " + taskTitle);
+        printWithTabIndent(String.format("Now you have %d tasks in the list.", count));
+        printLine();
+    }
+
+    /**
      * Pretty print the tasks list with the horizontal lines.
      */
     public void printTasks() {
@@ -46,6 +59,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Marks the corresponding task as done.
+     * If message does not contain a number, this method will print an error message.
+     *
+     * @param message String user input
+     */
     public void markTaskDone(String message) {
         if (message.equals("done")) {
             printMessage("Please enter the task number.");
@@ -82,10 +101,54 @@ public class Duke {
         }
     }
 
-    public void addTask(String message) {
-        printMessage("added: " + message);
-        tasks[count] = new Task(message);
+    /**
+     * Add a Todo task to tasks.
+     *
+     * @param message String user input. Should start with "todo"
+     */
+    public void addTodoTask(String message) {
+        tasks[count] = new Todo(message.replace("todo ", ""));
         count++;
+        printAddMessage("Got it. I've  added this task:", tasks[count - 1].toString());
+    }
+
+    /**
+     * Add a Deadline task to tasks.
+     *
+     * @param message String user input. Should start with "deadline"
+     */
+    public void addDeadlineTask(String message) {
+        String taskDescription =
+                message.replace("deadline ", "").replaceAll("/by.*", "");
+        String endDate = message.replaceAll(".*/by ", "");
+        tasks[count] = new Deadline(taskDescription, endDate);
+        count++;
+        printAddMessage("Got it. I've  added this task:", tasks[count - 1].toString());
+    }
+
+    /**
+     * Add an Event task to tasks.
+     *
+     * @param message String user input. Should start with "event"
+     */
+    public void addEventTask(String message) {
+        String taskDescription =
+                message.replace("event ", "").replaceAll("/at.*", "");
+        String deadline = message.replaceAll(".*/at ", "");
+        tasks[count] = new Event(taskDescription, deadline);
+        count++;
+        printAddMessage("Got it. I've  added this task:", tasks[count - 1].toString());
+    }
+
+    /**
+     * Add a Task task to tasks.
+     *
+     * @param taskTitle String user input
+     */
+    public void addTask(String taskTitle) {
+        tasks[count] = new Task(taskTitle);
+        count++;
+        printAddMessage("added: ", taskTitle);
     }
 
     public static void main(String[] args) {
@@ -107,6 +170,12 @@ public class Duke {
                 duke.printTasks();
             } else if (message.matches("^done.*")) {
                 duke.markTaskDone(message);
+            } else if (message.matches("^todo.*")) {
+                duke.addTodoTask(message);
+            } else if (message.matches("^deadline.*")) {
+                duke.addDeadlineTask(message);
+            } else if (message.matches("^event.*")) {
+                duke.addEventTask(message);
             } else if (!message.equals("")) {
                 duke.addTask(message);
             }
