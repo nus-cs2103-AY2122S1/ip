@@ -11,4 +11,7 @@ deadline
 deadline return book
 event watch lecture
 done
+delete
+delete 2
+list
 bye

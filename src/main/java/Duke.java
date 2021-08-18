@@ -46,7 +46,7 @@ public class Duke {
         case "list":
             displayList();
             break;
-        case "done":
+        case "done": {
             // Error handling: number not provided.
             if (splitCommand.length == 1) {
                 throw new DukeException("Please provide a number to mark as done.");
@@ -59,6 +59,21 @@ public class Duke {
             }
             markAsDone(index);
             break;
+        }
+        case "delete": {
+            // Error handling: number not provided.
+            if (splitCommand.length == 1) {
+                throw new DukeException("Please provide a number to delete.");
+            }
+            // Retrieve value inputted by user and subtract 1 to get the index in the array.
+            int index = Integer.parseInt(splitCommand[1]) - 1;
+            // Error handling: negative number or number more than list length.
+            if (index < 0 || index >= list.size()) {
+                throw new DukeException("Invalid number.");
+            }
+            delete(index);
+            break;
+        }
         case "todo":
             // Error handling: no task name.
             if (splitCommand.length == 1) {
@@ -137,6 +152,19 @@ public class Duke {
         Task task = list.get(itemNo);
         task.toggleComplete();
         formatAndPrint("Nice! I've marked this task as done:\n" + task);
+    }
+
+    /**
+     * Deletes a given task
+     *
+     * @param itemNo Index of the task in the ArrayList.
+     */
+    public void delete(int itemNo) {
+        Task task = list.remove(itemNo);
+        formatAndPrint(String.format("Noted. I've removed this task:\n%s\nNow you have %d %s in your list.",
+                task,
+                list.size(),
+                list.size() == 1 ? "task" : "tasks"));
     }
 
     /**
