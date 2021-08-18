@@ -8,6 +8,9 @@ event project meeting /at Mon 2-4pm
 done 1
 done 4
 list
+delete 2
+list
+delete
 todo
 blah
 bye

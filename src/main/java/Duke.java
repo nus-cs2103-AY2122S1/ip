@@ -24,6 +24,10 @@ public class Duke {
         return String.format("Certainly, I've marked this task as done: \n\t%s\n", task);
     }
 
+    public static String deletedString(Task task) {
+        return String.format("Certainly, I've deleted this task: \n\t%s\nNow, you have %d tasks in the list.\n", task, taskList.size());
+    }
+
     public static void print(String str) {
         String horizontalLine = "________________________________________________________________________________";
         System.out.println(horizontalLine);
@@ -72,6 +76,16 @@ public class Duke {
                     throw new DukeException("The timing of an event cannot be empty.");
                 }
                 return new Command(strings[0], descriptionAndAt[0], descriptionAndAt[1]);
+            case "delete":
+                if (strings.length == 1) {
+                    throw new DukeException("You need to indicate which task number should be deleted.");
+                }
+                try {
+                    int delTaskNum = Integer.parseInt(strings[1]);
+                    return new Command(strings[0], delTaskNum);
+                } catch (NumberFormatException e) {
+                    throw new DukeException("The task to be deleted should be indicated its list index.");
+                }
             default:
                 throw new DukeException("Sorry, I do not understand this command.");
         }
@@ -116,6 +130,11 @@ public class Duke {
                     task = new Event(command.getDescription(), command.getTime());
                     taskList.add(task);
                     print(addedString(task));
+                    break;
+                case "delete":
+                    task = taskList.get(command.getIndex() - 1);
+                    taskList.remove(command.getIndex() - 1);
+                    print(deletedString(task));
                     break;
             }
         }
