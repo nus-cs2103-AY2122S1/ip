@@ -104,7 +104,7 @@ public class Duke {
             System.out.println("\t" + curr);
             printHorizLine();
         } catch(IndexOutOfBoundsException e) {
-            System.err.println("The task index is invalid!");
+            System.out.println("The task index is invalid!");
         }
     }
 
