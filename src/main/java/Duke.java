@@ -27,6 +27,12 @@ public class Duke {
         }
     }
 
+    public static void MarkDone(int index) {
+        System.out.println("Nice! I've marked this task as done:");
+        list.get(index).MarkDone();
+        System.out.println(" " + list.get(index).PrintTaskInfo());
+    }
+
     public static void PrintMessage(){
         Scanner scanner = new Scanner(System.in);
         String Message = "";
@@ -45,12 +51,9 @@ public class Duke {
                 PrintList();
             }
             else if (Message.startsWith("done")) {
-                int index = Message.charAt(Message.length() - 1) - 49;
+                int index = Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1;
 
-                System.out.println("Nice! I've marked this task as done:");
-                list.get(index).MarkDone();
-                System.out.println(" " + list.get(index).PrintTaskInfo());
-
+                MarkDone(index);
             }
             else if (Message.startsWith("todo") || Message.startsWith("event") || Message.startsWith("deadline")) {
                 String task = "";
