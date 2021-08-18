@@ -7,13 +7,20 @@ public class Task {
     private boolean completed;
 
     /**
-     * Add a task.
+     * Add a task to the task list
      *
-     * @param description Task description as string.
+     * @param t Task to be added
+     * @return String notifying the task added.
      */
-    public static String addTask(String description) {
-        taskList.add(new Task(description));
-        return "added: " + description;
+    public static String[] addTask(Task t) {
+        taskList.add(t);
+        return new String[] {
+                "Got it. I've added this task:",
+                t.toString(),
+                "Now you have "
+                        + taskList.size()
+                        + " tasks in the list."
+        };
     }
 
     /**
@@ -50,7 +57,7 @@ public class Task {
      *
      * @param description String description of task.
      */
-    private Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.completed = false;
     }

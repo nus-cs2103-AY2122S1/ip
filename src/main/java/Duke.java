@@ -25,8 +25,22 @@ public class Duke {
                 printTasks();
             } else if (nextInput.startsWith("done")) {
                 printMsg(Task.markTask(Integer.parseInt(nextInput.substring(5)) - 1));
+            } else if (nextInput.startsWith("todo")) {
+                printMsg(Task.addTask(new Todo(nextInput.substring(5))));
+            } else if (nextInput.startsWith("deadline")) {
+                int byIndex = nextInput.indexOf("/by");
+                printMsg(Task.addTask(new Deadline(
+                        nextInput.substring(9, byIndex - 1),
+                        nextInput.substring(byIndex + 4)
+                )));
+            } else if (nextInput.startsWith("event")) {
+                int atIndex = nextInput.indexOf("/at");
+                printMsg(Task.addTask(new Event(
+                        nextInput.substring(6, atIndex - 1),
+                        nextInput.substring(atIndex + 4)
+                )));
             } else {
-                printMsg(Task.addTask(nextInput));
+                printMsg(Task.addTask(new Task(nextInput)));
             }
         }
     }
