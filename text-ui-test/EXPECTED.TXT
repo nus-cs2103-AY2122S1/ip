@@ -5,3 +5,23 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you today?
+Ok can, sure. I have added this task as you wanted.
+[D] [ ] eat food  (by: 08-02-11)
+Now you have only 1 tasks in the list. Try being more hardworking!
+Whoops, I could not understand your input. Please try again!
+Ok can, sure. I have added this task as you wanted.
+[T] [ ] eat more food 
+Now you have only 2 tasks in the list. Try being more hardworking!
+Ok can, sure. I have added this task as you wanted.
+[E] [ ] eat most food  (at: 08-03-90)
+Now you have only 3 tasks in the list. Try being more hardworking!
+1. [D] [ ] eat food  (by: 08-02-11)
+2. [T] [ ] eat more food 
+3. [E] [ ] eat most food  (at: 08-03-90)
+Ok, very nice. I have set the following task as completed.
+[T] [X] eat more food 
+1. [D] [ ] eat food  (by: 08-02-11)
+2. [T] [X] eat more food 
+3. [E] [ ] eat most food  (at: 08-03-90)
+See you again next time!
