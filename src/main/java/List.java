@@ -6,23 +6,36 @@ import java.util.ArrayList;
  * and printing of the entire current list.
  */
 public class List {
-    private ArrayList<String> list;
+    private ArrayList<Task> list;
 
     /**
      * Constructor for List class.
      */
     public List() {
-        this.list = new ArrayList<String>();
+        this.list = new ArrayList<Task>();
     }
 
     /**
      * Adds an item to the list.
      *
-     * @param message The message to be added to the list
+     * @param description The description of the task to be added
      */
-    public void addItem(String message) {
-        this.list.add(message);
-        System.out.println("added: " + message);
+    public void addItem(String description) {
+        Task task = new Task(description);
+        this.list.add(task);
+        System.out.println("added: " + description);
+    }
+
+    /**
+     * Changes the status for the task indicated by the user.
+     *
+     * @param taskNumber The index(plus 1) of the task to be marked as done
+     * @return The string representation of the task after it is marked as done
+     */
+    public String changeTaskStatus(int taskNumber) {
+        Task task = list.get(taskNumber - 1);
+        task.doneTask();
+        return task.toString();
     }
 
     /**
