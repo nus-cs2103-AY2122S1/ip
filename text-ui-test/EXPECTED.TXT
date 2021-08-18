@@ -1,6 +1,17 @@
 Hello! I'm Duke
 What can I do for you?
 
+-----------------------------------------------------------------------------
+|	Please enter one of the following commands:                             |
+|	1. todo <description> (eg. todo paint)                                  |
+|	2. deadline <description> /by <time> (e.g deadline submit hw /by 6pm)   |
+|	3. event <description> /at <time> (e.g event party /at 8pm)             |
+|	4. list - see list of tasks added                                       |
+|	5. delete <task number> (e.g delete 1) - delete a task from list        |
+|	6. done <task number> (e.g done 1) - mark a task in list as done        |
+|	7. bye - exit duke                                                      |
+-----------------------------------------------------------------------------
+
 ----------------------------------------------------
 added: [T][ ] borrow book
 Now you have 1 tasks in your list
@@ -39,5 +50,36 @@ Here are the tasks in your list:
 	2.[E][X] Funfair (at: Monday 6pm)
 	3.[D][ ] CS quiz (by: Fri)
 	4.[T][ ] run
+----------------------------------------------------
+----------------------------------------------------
+OOPS! The description & time of deadline cannot
+be empty.
+----------------------------------------------------
+----------------------------------------------------
+OOPS! The time of deadline cannot be empty.
+----------------------------------------------------
+----------------------------------------------------
+OOPS! The description of deadline cannot be empty.
+----------------------------------------------------
+----------------------------------------------------
+OOPS! The description of todo cannot be empty.
+----------------------------------------------------
+----------------------------------------------------
+OOPS! The description & time of event cannot
+be empty.
+----------------------------------------------------
+----------------------------------------------------
+OOPS! The time of event cannot be empty.
+----------------------------------------------------
+----------------------------------------------------
+OOPS! The description of event cannot be empty.
+----------------------------------------------------
+----------------------------------------------------
+Noted. I've removed this task:
+[E][X] Funfair (at: Monday 6pm)
+Now you have 3 tasks in your list
+----------------------------------------------------
+----------------------------------------------------
+OOPS! You are trying to delete a non-existent task!
 ----------------------------------------------------
 Bye. Hope to see you again soon!

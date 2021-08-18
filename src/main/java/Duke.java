@@ -1,24 +1,32 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final String LINE = "----------------------------------------------------";
-    private static Task[] taskList = new Task[100];
-    private static int counter = 0;
+    private static final String COMMANDS = LINE + "-------------------------\n" +
+            "|\tPlease enter one of the following commands:                             |\n" +
+            "|\t1. todo <description> (eg. todo paint)                                  |\n" +
+            "|\t2. deadline <description> /by <time> (e.g deadline submit hw /by 6pm)   |\n" +
+            "|\t3. event <description> /at <time> (e.g event party /at 8pm)             |\n" +
+            "|\t4. list - see list of tasks added                                       |\n" +
+            "|\t5. delete <task number> (e.g delete 1) - delete a task from list        |\n" +
+            "|\t6. done <task number> (e.g done 1) - mark a task in list as done        |\n" +
+            "|\t7. bye - exit duke                                                      |\n" +
+            LINE + "-------------------------\n";
+    private static ArrayList<Task> taskList = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
     public Duke(){}
 
     public static void addTaskToList(Task task) {
-        taskList[counter] = task;
+        taskList.add(task);
         System.out.printf("added: " + task.toString()
-                + "\nNow you have %s tasks in your list\n" , counter + 1);
-        counter++;
+                + "\nNow you have %s tasks in your list\n" , taskList.size());
     }
 
     public static void printTasksInList() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.length; i++) {
-            if (taskList[i] == null) break;
-            System.out.printf("\t%s." + taskList[i].toString() + "%n", i + 1);
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.printf("\t%s."+ taskList.get(i).toString() + "%n", i + 1);
         }
     }
 
@@ -52,6 +60,18 @@ public class Duke {
         addTaskToList(todo);
     }
 
+    public static void deleteFromList() throws DukeException {
+        int deleteNumber = Integer.parseInt(scanner.next()) - 1;
+        if (deleteNumber < 0 || deleteNumber > taskList.size()-1) {
+            throw new InvalidTaskDeletion();
+        }
+        Task task = taskList.get(deleteNumber);
+        taskList.remove(deleteNumber);
+        System.out.printf("Noted. I've removed this task:\n" + task.toString()
+                + "\nNow you have %s tasks in your list\n" , taskList.size());
+    }
+
+
     public static void dukeAction() {
         String inp = scanner.next();
         while(!inp.equals("bye")) {
@@ -64,7 +84,7 @@ public class Duke {
 
                     case "done":
                         int doneNumber = Integer.parseInt(scanner.next()) - 1;
-                        taskList[doneNumber].setDone();
+                        taskList.get(doneNumber).setDone();
                         break;
 
                     case "todo":
@@ -77,6 +97,10 @@ public class Duke {
 
                     case "event":
                         addEventToList();
+                        break;
+
+                    case "delete":
+                        deleteFromList();
                         break;
 
                     default:
@@ -94,7 +118,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n\n"
+                + COMMANDS);
         dukeAction();
     }
 }

@@ -28,3 +28,9 @@ class NoCommandException extends DukeException {
     }
 }
 
+class InvalidTaskDeletion extends DukeException {
+    public InvalidTaskDeletion() {
+        super("OOPS! You are trying to delete a non-existent task!");
+    }
+}
+
