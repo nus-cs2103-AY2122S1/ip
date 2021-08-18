@@ -1,9 +1,10 @@
+import java.util.ArrayList;
+
 public class Logic {
     final private static String LINE = "     ____________________________________________________________\n";
     final private static String INDENT = "      ";
 
-    private static int numOfTasks = 0;
-    private static Task[] taskList = new Task[100];
+    final private static ArrayList<Task> taskList = new ArrayList<>();
     private static boolean continueChat = true;
 
     private static String getFirstWord(String text) {
@@ -25,12 +26,14 @@ public class Logic {
                 renderList();
             } else if (command.equals("done")) {
                 markTaskComplete(input);
-            } else if (command.equals("todo")) {
+             } else if (command.equals("todo")) {
                 addTodoTask(input);
             } else if (command.equals("deadline")) {
                 addDeadlineTask(input);
             } else if (command.equals("event")) {
                 addEventTask(input);
+            } else if (command.equals("delete")) {
+                deleteTask(input);
             } else {
                 throw new InvalidInputException();
             }
@@ -43,6 +46,13 @@ public class Logic {
         return input.split(" ", 2)[1];
     }
 
+    //check for incomplete input
+    private static void checkDescExist(String input) throws NoDescriptionException {
+        if (input.split(" ").length == 1) {
+            throw new NoDescriptionException("Oops! Please add description for your command.");
+        }
+    }
+    
     public static boolean endChat() {
         return !continueChat;
     }
@@ -56,25 +66,29 @@ public class Logic {
     }
 
     private static void renderList() {
-        String op = "";
-        for (int i = 0; i < numOfTasks; i++) {
-            op = op + (i + 1) + ". " + taskList[i].toString() + "\n";
+        StringBuilder op = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            op.append(i + 1).append(". ").append(taskList.get(i).toString()).append("\n");
         }
         renderOutput("Here are the tasks in your list:\n" + op);
+    }
+    
+    private static void checkIndexRange(int index) throws ExceedListSizeException {
+        if (index < 0) {
+            throw new ExceedListSizeException("Invalid task reference!\nIndex should be more than 0.");
+        }
+
+        if (index > taskList.size() - 1) {
+            throw new ExceedListSizeException("Invalid task reference!\nYou currently have " + taskList.size() + " tasks.");
+        }
     }
     
     private static void markTaskComplete(String cmd) throws UserInputError {
         checkDescExist(cmd);
         int index = getTaskNumber(cmd) - 1;
-        if (index < 0) {
-            throw new ExceedListSizeException("Invalid task reference!\nIndex should be more than 0.");
-        }
+        checkIndexRange(index);
         
-        if (index > numOfTasks - 1) {
-            throw new ExceedListSizeException("Invalid task reference!\nYou currently have " + numOfTasks + " tasks.");
-        }
-
-        Task task = taskList[index];
+        Task task = taskList.get(index);
         if (task.isDone()) {
             renderOutput("Great! But you have already completed this task!");
         } else {
@@ -85,9 +99,9 @@ public class Logic {
 
     private static void addTodoTask(String input) throws UserInputError {
         checkDescExist(input);
-        taskList[numOfTasks] = new Todo(getDesc(input));
-        addTaskOutput(taskList[numOfTasks]);
-        numOfTasks++;
+        Task newTask = new Todo(getDesc(input));
+        taskList.add(newTask);
+        addTaskOutput(newTask);
     }
 
     private static String[] separateDetails(String str, String key) throws NoDescriptionException {
@@ -100,25 +114,44 @@ public class Logic {
     private static void addDeadlineTask(String input) throws UserInputError {
         checkDescExist(input);
         String[] details = separateDetails(getDesc(input), "/by");
-        taskList[numOfTasks] = new Deadline(details[0], details[1]);
-        addTaskOutput(taskList[numOfTasks]);
-        numOfTasks++;
+        Task newTask = new Deadline(details[0], details[1]);
+        taskList.add(newTask);
+        addTaskOutput(newTask);
     }
 
     private static void addEventTask(String input) throws UserInputError {
         checkDescExist(input);
         String[] details = separateDetails(getDesc(input), "/at");
-        taskList[numOfTasks] = new Event(details[0], details[1]);
-        addTaskOutput(taskList[numOfTasks]);
-        numOfTasks++;
+        Task newTask = new Event(details[0], details[1]);
+        taskList.add(newTask);
+        addTaskOutput(newTask);
     }
 
     private static void addTaskOutput(Task task) {
         String output = "Got it. I've added this task:\n"
                         + INDENT + task.toString()
                         + "\nNow you have "
-                        + (numOfTasks + 1)
+                        + taskList.size()
                         + " tasks in the list.";
+        renderOutput(output);
+    }
+    
+    private static void deleteTask(String input) throws UserInputError {
+        checkDescExist(input);
+        int index = getTaskNumber(input) - 1;
+        checkIndexRange(index);
+        
+        Task deleted = taskList.get(index);
+        taskList.remove(index);
+        deleteTaskOutput(deleted);
+    }
+
+    private static void deleteTaskOutput(Task task) {
+        String output = "Noted. I've removed this task:\n"
+                + INDENT + task.toString()
+                + "\nNow you have "
+                + taskList.size()
+                + " tasks in the list.";
         renderOutput(output);
     }
     
@@ -126,12 +159,5 @@ public class Logic {
         System.out.println(LINE);
         op.lines().forEach(line -> System.out.println("      " + line));
         System.out.println(LINE);
-    }
-    
-    //check for incomplete input
-    private static void checkDescExist(String input) throws NoDescriptionException {
-        if (input.split(" ").length == 1) {
-            throw new NoDescriptionException("Oops! Please add description for your command.");
-        }
     }
 }
