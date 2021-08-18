@@ -1,23 +1,18 @@
 list
 todo read book
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
+deadline return book /by 06/06/21 1712
+event project meeting /at 06/08/21 /from 1400 /to 1800
 todo join sports club
 done 1
 done 4
 todo borrow book
 list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
 blah
 done 0
 done 1000
 done abc
 todo
   todo
-deadline test1 /byy now
-deadline test2 /by
-event test3 /by idk when also
 list
 delete 3
 list
@@ -27,5 +22,20 @@ delete 0
 delete 1000
 delete abc
 deletea1
+deadline test /by 06/06/21 512 PM
+deadline test1 /by 06/06/21 512
+deadline test /by 06/06/21
+deadline test2 /by 6/6/21 1712
+deadline test /by 1712
+deadline test /byy now
+deadline test /by
+event test /at 06/08/21 /from 1400 /to
+event test /at 06/08/21 /from  /to 1800
+event test /at  /from 1400 /to 1800
+event test /at 06/08/21 /from 1400 /to now
+event test /at 06/08/21 /from earlier /to 1800
+event test /at sunday /from 1400 /toa 1800
+event test /at 06/08/21 /froma 1400 /to 1800
+event test /ata 06/08/21 /from 1400 /to 1800
 list
 bye

@@ -1,5 +1,12 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     private final String HORIZONTAL_LINE = "\t____________________________________________________________\n";
@@ -127,12 +134,30 @@ public class Duke {
      * @throws IllegalFormatException if user inputs an invalid command
      */
     private void addEvent(String command) throws IllegalFormatException {
+        String correctFormat = "event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm]";
+        
         // Throw exception if command does not follow format
-        validateCommand(command, "^event .* /at .*", "event [description] /at [time]");
+        validateCommand(command, "^event .* /at .* /from .* /to .*", correctFormat);
+        
+        // Separate info and trim each of them
+        String[] info = command.substring(6).split("/at|/from|/to");
+        info = Arrays.stream(info).map(String::trim).toArray(String[]::new);
+        
+        LocalDate date;
+        LocalTime startTime, endTime;
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("Hmm");
+        
+        // Throw exception if command does not follow format
+        try {
+            date = LocalDate.parse(info[1], DateTimeFormatter.ofPattern("d/M/yy"));
+            startTime = LocalTime.parse(info[2], timeFormatter);
+            endTime = LocalTime.parse(info[3], timeFormatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalFormatException(correctFormat);
+        }
         
         // Add new event
-        String[] info = command.substring(6).split("/at");
-        Task newTask = new Event(info[0].trim(), info[1].trim());
+        Task newTask = new Event(info[0], date, startTime, endTime);
         addTask(newTask);
     }
     
@@ -143,12 +168,26 @@ public class Duke {
      * @throws IllegalFormatException if user inputs an invalid command
      */
     private void addDeadline(String command) throws IllegalFormatException {
+        String correctFormat = "deadline [description] /by [dd/MM/yy] [HHmm]";
+        
         // Throw exception if command does not follow format
-        validateCommand(command, "^deadline .* /by .*", "deadline [description] /by [time]");
+        validateCommand(command, "^deadline .* /by .*", correctFormat);
+        
+        // Separate info and trim each of them
+        String[] info = command.substring(9).split("/by");
+        info = Arrays.stream(info).map(String::trim).toArray(String[]::new);
+        
+        LocalDateTime dateTime;
+        
+        // Throw exception if command does not follow format
+        try {
+            dateTime = LocalDateTime.parse(info[1], DateTimeFormatter.ofPattern("d/M/yy Hmm"));
+        } catch (DateTimeParseException e) {
+            throw new IllegalFormatException(correctFormat);
+        }
         
         // Add new deadline
-        String[] info = command.substring(9).split("/by");
-        Task newTask = new Deadline(info[0].trim(), info[1].trim());
+        Task newTask = new Deadline(info[0], dateTime);
         addTask(newTask);
     }
     
