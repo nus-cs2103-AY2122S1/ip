@@ -3,13 +3,13 @@ import java.util.Scanner;
  * This class represents the chat bot, Duke.
  */
 public class Duke {
+    private static TaskList tasks = TaskList.createTaskList();
     /**
      * The static method that runs in Main to reply to the user.
      */
     public static void reply() {
         Scanner myObj = new Scanner(System.in);
         String command;
-        TaskList tasks = TaskList.createTaskList();
         boolean running = true;
         while (running) {
             command = myObj.nextLine();
@@ -22,48 +22,18 @@ public class Duke {
                         running = false;
                         break;
                     case "done":
-                        try {
-                            int taskIndex = Integer.parseInt(commandSplit[1]);
-                            tasks.markTaskDone(taskIndex);
-                            String task = tasks.getTask(taskIndex);
-                            System.out.println("Nice! I've marked this task as done: ");
-                            System.out.println(task);
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("☹ OOPS!!! The number you gave is out of range!");
-                        } catch (NumberFormatException e) {
-                            throw new DukeException("☹ OOPS!!! Put a number after 'done'!");
-                        }
+                        markDone(commandSplit);
                         break;
                     case "deadline":
                     case "todo":
                     case "event":
-                        String date = Duke.findDateInCommand(commandSplit, firstCommand);
-                        String taskDesc = Duke.findTaskDescription(commandSplit);
-                        String aOrAn = firstCommand.equals("event") ? "an" : "a";
-                        if (taskDesc.equals("")) {
-                            throw new DukeException("☹ OOPS!!! The description of " + aOrAn + " " + firstCommand + " cannot be empty.");
-                        } else if (date.equals("") && !firstCommand.equals("todo")) {
-                            throw new DukeException("☹ OOPS!!! The date of " + aOrAn + " " + firstCommand + " cannot be empty.");
-                        } else {
-                            tasks.addTask(taskDesc, convertToTaskType(firstCommand), date);
-                            System.out.println("Got it. I've added this task: ");
-                            System.out.println(tasks.getTask(tasks.getTasksLength()));
-                            System.out.println("Now you have " + tasks.getTasksLength() + " tasks in the list.");
-                        }
+                        addTask(commandSplit);
                         break;
                     case "delete":
-                        try {
-                            tasks.deleteTask(Integer.parseInt(commandSplit[1]));
-                            System.out.println("Noted. I've removed this task: ");
-                            System.out.println("Now you have " + tasks.getTasksLength() + " tasks in the list.");
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("☹ OOPS!!! Index out of range!");
-                        } catch (NumberFormatException e) {
-                            throw new DukeException("☹ OOPS!!! Put a number after 'delete'!");
-                        }
+                        deleteTask(commandSplit);
                         break;
                     case "list":
-                        tasks.listTasks();
+                        Duke.tasks.listTasks();
                         break;
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -71,7 +41,64 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
+        }
+    }
 
+    /**
+     * Method to delete task.
+     * @param commandSplit The array of space-separated words/numbers in the command.
+     * @throws DukeException
+     */
+    public static void deleteTask(String[] commandSplit) throws DukeException {
+        try {
+            Duke.tasks.deleteTask(Integer.parseInt(commandSplit[1]));
+            System.out.println("Noted. I've removed this task: ");
+            System.out.println("Now you have " + Duke.tasks.getTasksLength() + " tasks in the list.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! Index out of range!");
+        } catch (NumberFormatException e) {
+            throw new DukeException("☹ OOPS!!! Put a number after 'delete'!");
+        }
+    }
+
+    /**
+     * Method to add task to Duke.
+     * @param commandSplit The array of space-separated words/numbers in the command.
+     * @throws DukeException
+     */
+    public static void addTask(String[] commandSplit) throws DukeException {
+        String firstCommand = commandSplit[0];
+        String date = Duke.findDateInCommand(commandSplit, firstCommand);
+        String taskDesc = Duke.findTaskDescription(commandSplit);
+        String aOrAn = firstCommand.equals("event") ? "an" : "a";
+        if (taskDesc.equals("")) {
+            throw new DukeException("☹ OOPS!!! The description of " + aOrAn + " " + firstCommand + " cannot be empty.");
+        } else if (date.equals("") && !firstCommand.equals("todo")) {
+            throw new DukeException("☹ OOPS!!! The date of " + aOrAn + " " + firstCommand + " cannot be empty.");
+        } else {
+            Duke.tasks.addTask(taskDesc, convertToTaskType(firstCommand), date);
+            System.out.println("Got it. I've added this task: ");
+            System.out.println(Duke.tasks.getTask(Duke.tasks.getTasksLength()));
+            System.out.println("Now you have " + Duke.tasks.getTasksLength() + " tasks in the list.");
+        }
+    }
+
+    /**
+     * Method for Duke to mark a task done.
+     * @param commandSplit The array of space-separated words/numbers in the command.
+     * @throws DukeException
+     */
+    private static void markDone(String[] commandSplit) throws DukeException {
+        try {
+            int taskIndex = Integer.parseInt(commandSplit[1]);
+            Duke.tasks.markTaskDone(taskIndex);
+            String task = Duke.tasks.getTask(taskIndex);
+            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println(task);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! The number you gave is out of range!");
+        } catch (NumberFormatException e) {
+            throw new DukeException("☹ OOPS!!! Put a number after 'done'!");
         }
     }
 
