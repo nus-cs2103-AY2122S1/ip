@@ -1,0 +1,9 @@
+todo feed cat
+deadline write an essay on cats /by Sunday
+event cat appreciation club /at Mon 2-4pm
+list
+done 1
+done 2
+done 3
+list
+bye
