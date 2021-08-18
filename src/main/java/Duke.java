@@ -1,11 +1,14 @@
 import java.util.Scanner;
 
 public class Duke {
-    
+
+    private enum Tasks {DEADLINE, EVENT, TODO};
+
+    private static Task[] taskArray = new Task[100];
+    private static int listIndex = 0;
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        Task[] taskArray = new Task[100];
-        int listIndex = 0;
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -65,77 +68,17 @@ public class Duke {
             }
 
             if (firstString.equals("todo")) {
-                //initialise new StringBuilder instance to construct the remaining string
-                StringBuilder str = new StringBuilder();
-                for (int i = 1; i < inputArray.length; i++) {
-                    str.append(inputArray[i]).append(" ");
-                }
-
-                Todos tempTask = new Todos(str.toString());
-                taskArray[listIndex] = tempTask;
-                listIndex += 1;
-
-                System.out.println("Ok can, sure. I have added this task as you wanted.");
-                System.out.println(tempTask.toString());
-                System.out.println("Now you have only " + listIndex + " tasks in the list. Try being more hardworking!");
+                createTask(Tasks.TODO, inputArray);
                 continue;
             }
 
             if (firstString.equals("deadline")) {
-                //initialise new StringBuilder instance to construct the remaining string
-                StringBuilder str = new StringBuilder();
-                String time = "";
-                boolean stringEnded = false;
-
-                for (int i = 1; i < inputArray.length; i++) {
-                    String currentArrayElement = inputArray[i];
-                    if (stringEnded) {
-                        time = currentArrayElement;
-                        break;
-                    }
-                    if (currentArrayElement.equals("/by")) {
-                        stringEnded = true;
-                        continue;
-                    }
-                    str.append(currentArrayElement).append(" ");
-                }
-
-                Deadlines tempTask = new Deadlines(str.toString(), time);
-                taskArray[listIndex] = tempTask;
-                listIndex += 1;
-
-                System.out.println("Ok can, sure. I have added this task as you wanted.");
-                System.out.println(tempTask.toString());
-                System.out.println("Now you have only " + listIndex + " tasks in the list. Try being more hardworking!");
+                createTask(Tasks.DEADLINE, inputArray);
                 continue;
             }
 
             if (firstString.equals("event")) {
-                //initialise new StringBuilder instance to construct the remaining string
-                StringBuilder str = new StringBuilder();
-                String time = "";
-                boolean stringEnded = false;
-
-                for (int i = 1; i < inputArray.length; i++) {
-                    String currentArrayElement = inputArray[i];
-                    if (stringEnded) {
-                        time = currentArrayElement;
-                        break;
-                    }
-                    if (currentArrayElement.equals("/at")) {
-                        stringEnded = true;
-                        continue;
-                    }
-                    str.append(currentArrayElement).append(" ");
-                }
-
-                Events tempTask = new Events(str.toString(), time);
-                taskArray[listIndex] = tempTask;
-                listIndex += 1;
-
-                System.out.println("Ok can, sure. I have added this task as you wanted.");
-                System.out.println(tempTask.toString());
-                System.out.println("Now you have only " + listIndex + " tasks in the list. Try being more hardworking!");
+                createTask(Tasks.EVENT, inputArray);
                 continue;
             }
 
@@ -145,4 +88,70 @@ public class Duke {
         scan.close();
         System.out.println("See you again next time!");
     }
+
+    private static void createTask(Tasks taskType, String[] array) {
+        StringBuilder str = new StringBuilder();
+        Task tempTask = null;
+        switch (taskType) {
+        case TODO: {
+            for (int i = 1; i < array.length; i++) {
+                str.append(array[i]).append(" ");
+            }
+
+            tempTask = new Todos(str.toString());
+            break;
+        }
+
+        case DEADLINE:
+            String time = "";
+            boolean stringHasEnded = false;
+
+            for (int i = 1; i < array.length; i++) {
+                String currentArrayElement = array[i];
+                if (stringHasEnded) {
+                    time = currentArrayElement;
+                    break;
+                }
+                if (currentArrayElement.equals("/by")) {
+                    stringHasEnded = true;
+                    continue;
+                }
+                str.append(currentArrayElement).append(" ");
+            }
+
+            tempTask = new Deadlines(str.toString(), time);
+            break;
+
+
+        case EVENT:
+            String eventTime = "";
+            boolean stringHasTerminated = false;
+
+            for (int i = 1; i < array.length; i++) {
+                String currentArrayElement = array[i];
+                if (stringHasTerminated) {
+                    time = currentArrayElement;
+                    break;
+                }
+                if (currentArrayElement.equals("/at")) {
+                    stringHasTerminated = true;
+                    continue;
+                }
+                str.append(currentArrayElement).append(" ");
+            }
+
+            tempTask = new Events(str.toString(), eventTime);
+            break;
+
+        }
+
+        taskArray[listIndex] = tempTask;
+        listIndex += 1;
+
+        System.out.println("Ok can, sure. I have added this task as you wanted.");
+        System.out.println(tempTask.toString());
+        System.out.println("Now you have only " + listIndex + " tasks in the list. Try being more hardworking!");
+
+    }
+
 }
