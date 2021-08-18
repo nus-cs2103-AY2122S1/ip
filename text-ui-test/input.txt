@@ -2,9 +2,9 @@ deadline reading /by 530
 event marathon /at Saturday 2-5
 todo send email to mom
 list
-done 1 
 done 1
-done 2 
+done 1
+done 2
 done 2
 list
 deadline /by 530

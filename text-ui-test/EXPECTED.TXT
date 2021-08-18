@@ -1,8 +1,15 @@
-Got it sir, I have added this task: 
+Hello I am JARVIS.
+Is there anything I can do for you Sir?
+
+Got it sir, I have added this task:
+ [D][ ] reading (by: 530)
+Now you have 1 tasks in the list.
+
+Got it sir, I have added this task:
  [E][ ] marathon (at: Saturday 2-5)
 Now you have 2 tasks in the list.
 
-Got it sir, I have added this task: 
+Got it sir, I have added this task:
  [T][ ] send email to mom
 Now you have 3 tasks in the list.
 
@@ -10,12 +17,14 @@ Now you have 3 tasks in the list.
 2. [E][ ] marathon (at: Saturday 2-5)
 3. [T][ ] send email to mom
 
-Task number formatted incorrectly. Try again
+One task down sir. Here is the task I checked off:
+    [D][X] reading (by: 530)
 
 One task down sir. Here is the task I checked off:
     [D][X] reading (by: 530)
 
-Task number formatted incorrectly. Try again
+One task down sir. Here is the task I checked off:
+    [E][X] marathon (at: Saturday 2-5)
 
 One task down sir. Here is the task I checked off:
     [E][X] marathon (at: Saturday 2-5)
@@ -34,7 +43,7 @@ Enter a valid deadline time
 
 Enter a valid event time
 
-Got it sir, I have removed this task: 
+Got it sir, I have removed this task:
  [D][X] reading (by: 530)
 Now you have 2 tasks in the list.
 

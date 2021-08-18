@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static List<Task> items = new ArrayList<Task>(100);
+    private final static List<Task> items = new ArrayList<Task>(100);
     public static void main(String[] args) {
         Scanner userSc = new Scanner(System.in);
         String name = "JARVIS";
@@ -85,12 +85,11 @@ public class Duke {
     }
 
     public static void echo(String userInput, String actionType){
-        System.out.println("Got it sir, I have "+ actionType + " this task: \n " + userInput + "\nNow you have " + items.size() + " tasks in the list.\n");
+        System.out.println("Got it sir, I have "+ actionType + " this task:\n " + userInput + "\nNow you have " + items.size() + " tasks in the list.\n");
     }
 
     public static void list(){
         for(int i = 1; i <= items.size(); i++){
-            //System.out.println(i + ". [" +  items.get(i - 1).getStatusIcon() + "] " + items.get(i - 1).getDescription());
             System.out.println(i + ". " + items.get(i-1).toString());
         }
         System.out.println("");
