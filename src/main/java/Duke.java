@@ -12,16 +12,16 @@ public class Duke {
     // Regex pattern for finding done commands
     private static final Pattern DONE_PATTERN = Pattern.compile("^done (\\d*)$");
 
-    // Regex pattern for finding done commands
+    // Regex pattern for finding delete commands
     private static final Pattern DELETE_PATTERN = Pattern.compile("^delete (\\d*)$");
 
-    // Regex pattern for finding done commands
+    // Regex pattern for finding todo commands
     private static final Pattern TODO_PATTERN = Pattern.compile("^todo (.*)$");
 
-    // Regex pattern for finding done commands
+    // Regex pattern for finding deadline commands
     private static final Pattern DEADLINE_PATTERN = Pattern.compile("^deadline (.*) /by (.*)$");
 
-    // Regex pattern for finding done commands
+    // Regex pattern for finding event commands
     private static final Pattern EVENT_PATTERN = Pattern.compile("^event (.*) /at (.*)$");
 
     public static void main(String[] args) {
