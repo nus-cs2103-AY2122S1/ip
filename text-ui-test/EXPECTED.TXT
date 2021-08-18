@@ -173,6 +173,10 @@
 	  event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm]
 	____________________________________________________________
 	____________________________________________________________
+	Please follow this format:
+	  event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm]
+	____________________________________________________________
+	____________________________________________________________
 	Here are the tasks in your list:
 	1. [T][X] read book
 	2. [D][ ] return book (by: Jun 6 2021, 5:12 PM)

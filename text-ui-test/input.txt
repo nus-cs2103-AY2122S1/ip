@@ -37,5 +37,6 @@ event test /at 06/08/21 /from earlier /to 1800
 event test /at sunday /from 1400 /toa 1800
 event test /at 06/08/21 /froma 1400 /to 1800
 event test /ata 06/08/21 /from 1400 /to 1800
+event test /ata 06/08/21 /from 1800 /to 1123
 list
 bye

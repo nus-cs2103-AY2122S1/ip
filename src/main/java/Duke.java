@@ -156,6 +156,11 @@ public class Duke {
             throw new IllegalFormatException(correctFormat);
         }
         
+        // Throw exception if start time is later than end time
+        if (startTime.isAfter(endTime)) {
+            throw new IllegalFormatException(correctFormat);
+        }
+        
         // Add new event
         Task newTask = new Event(info[0], date, startTime, endTime);
         addTask(newTask);
