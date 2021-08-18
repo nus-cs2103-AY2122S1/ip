@@ -71,8 +71,20 @@ public class TaskManager {
     }
 
     public Task markTaskAsDone(String taskNumberString) throws TaskManagerException {
+        Task selectedTask = getTaskFromNumberString(taskNumberString);
+        selectedTask.markAsDone();
+        return selectedTask;
+    }
+
+    public Task deleteTask(String taskNumberString) throws TaskManagerException {
+        Task selectedTask = getTaskFromNumberString(taskNumberString);
+        TASK_LIST.remove(selectedTask);
+        return selectedTask;
+    }
+
+    public Task getTaskFromNumberString(String taskNumberString) throws TaskManagerException {
         if (TASK_LIST.isEmpty()) {
-            throw new TaskManagerException("List is empty.");
+            throw new TaskManagerException("Unable to perform action as list is empty.");
         }
 
         int taskNumber;
@@ -88,9 +100,7 @@ public class TaskManager {
             throw new TaskManagerException("Task number '" + taskNumberString + "' is invalid.");
         }
 
-        Task selectedTask = TASK_LIST.get(taskNumber - 1); // shift to 0-indexing
-        selectedTask.markAsDone();
-        return selectedTask;
+        return TASK_LIST.get(taskNumber - 1); // shift to 0-indexing
     }
 
     public List<String> listTasks() throws TaskManagerException {

@@ -48,7 +48,14 @@ public class Duke {
                 Task completedTask = TASK_MANAGER.markTaskAsDone(taskNumberString);
                 Echoer.info("Nice! I've marked this task as done:\n\t  " + completedTask);
 
-            } else if (userInput.startsWith("todo")) {
+            } else if (userInput.startsWith("delete")) {
+                String taskNumberString = userInput.substring(6).trim();
+                Task deletedTask = TASK_MANAGER.deleteTask(taskNumberString);
+                Echoer.info("Noted. I've removed this task:\n\t  " + deletedTask +
+                        "\n\tNow you have " + TASK_MANAGER.getTaskListSize() +
+                        " tasks in the list.");
+
+            }else if (userInput.startsWith("todo")) {
                 echoTaskCreation(TASK_MANAGER.addToDoTask(userInput.substring(4)));
 
             } else if (userInput.startsWith("event")) {
