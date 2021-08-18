@@ -148,7 +148,9 @@ public class FeatureMain {
             if (command.length() == 6)  {
                 throw new DukeException("The Delete command must be followed by a number!");
             } else {
-                if (isNumeric(command.substring(7))) {
+                  if (command.charAt(6) != ' ') {
+                      throw new DukeException("The Delete command requires a number, separated by whitespace!");
+                } else if (isNumeric(command.substring(7))) {
                     taskNumber = Integer.parseInt(command.substring(7));
                     return true;
                 } else {

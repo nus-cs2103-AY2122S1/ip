@@ -65,4 +65,6 @@ The Delete command requires a number, separated by whitespace!
 
 Unable to Delete: Task does not exist
 
+The Delete command requires a number, separated by whitespace!
+
 Bye. Hope to see you again soon!
