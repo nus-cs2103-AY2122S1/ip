@@ -11,7 +11,6 @@ public class Duke {
             "____________________________________________________________";
     // List of tasks.
     private static ArrayList<Task> tasks = new ArrayList<>();
-//    private static int numOfTasks = 0;
     private boolean isRunning;
     private Scanner input;
 
@@ -32,7 +31,15 @@ public class Duke {
      */
     public static void addToList(Task task) {
         Duke.tasks.add(task);
-//        Duke.numOfTasks++;
+    }
+
+    /**
+     * Removes a task from the task list.
+     *
+     * @param task The task to be removed.
+     */
+    public static void removeFromList(Task task) {
+        Duke.tasks.remove(task);
     }
 
     /**
@@ -85,6 +92,13 @@ public class Duke {
             try {
                 int index = Integer.parseInt(splitted[1]) - 1;
                 processCommand(new TaskDoneProcessor(Duke.tasks.get(index)));
+            } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
+                throw new DukeException("☹ OOPS!!! The task number is invalid.");
+            }
+        } else if (splitted[0].equals("delete")) {
+            try {
+                int index = Integer.parseInt(splitted[1]) - 1;
+                processCommand(new DeleteATaskProcessor(Duke.tasks.get(index)));
             } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
                 throw new DukeException("☹ OOPS!!! The task number is invalid.");
             }

@@ -14,6 +14,7 @@ public class DeleteATaskProcessor extends Processor {
      */
     @Override
     public void process() {
+        Duke.removeFromList(this.task);
         this.message = String.format(
                 "Noted. I've removed this task:\n  %s\n" +
                         "Now you have %o tasks in the list.\n", this.task, Duke.getNumOfTasks());
