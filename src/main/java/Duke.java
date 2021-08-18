@@ -1,6 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Chatbot that helps you form a task list
+ */
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -96,7 +100,6 @@ public class Duke {
                 System.out.println(e.toString().split(" ", 2)[1]);
             }
         }
-
 
         System.out.println("Bye bye. Duke going to sleep now.");
     }
