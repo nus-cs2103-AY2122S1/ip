@@ -22,11 +22,5 @@ public class Skeltal {
                 Display.response(userReply);
             }
         }
-
     }
-
-    public static void echo(String userReply) {
-        System.out.println(userReply);
-    }
-
 }

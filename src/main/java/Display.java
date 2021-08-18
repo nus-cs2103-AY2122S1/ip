@@ -10,17 +10,28 @@ public class Display {
     }
 
     public static void response(String userReply) {
+        String[] arrReply = processReply(userReply);
+
         System.out.println(line);
-        switch(userReply) {
+        System.out.println(arrReply[0]);
+        switch(arrReply[0]) {
             case "list":
-                Storage.listReply();
+                Task.listReply();
+                break;
+            case "done":
+                Task.done(arrReply[1]);
                 break;
 
             default:
-                Storage.addReply(userReply);
+                Task.addReply(userReply);
                 System.out.println("added: " + userReply);
         }
         System.out.println(line);
 
+    }
+
+    private static String[] processReply(String userReply) {
+        String[] strArr = userReply.split(" ", 2);
+        return strArr;
     }
 }
