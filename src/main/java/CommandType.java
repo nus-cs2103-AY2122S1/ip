@@ -5,7 +5,8 @@ public enum CommandType {
 
   BYE("bye", new ByeCommand()), LIST("list", new ListCommand()),
   DONE("done", new DoneCommand()), DEADLINE("deadline", new DeadlineCommand()),
-  TODO("todo", new TodoCommand()), EVENT("event", new EventCommand());
+  TODO("todo", new TodoCommand()), EVENT("event", new EventCommand()),
+  DELETE("delete", new DeleteCommand()),;
 
   private final Command command;
   private final String name;

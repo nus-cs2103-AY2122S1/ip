@@ -80,7 +80,13 @@ public class Bot {
     if (index < 0 || index >= taskList.size()) {
       return false;
     }
+    Task task = getTaskAt(index);
     this.taskList.remove(index);
+    printOutput(new String[] { 
+      "Noted. I've removed this task:",
+      OutputManager.TEXT_BLOCK_MARGIN + task.toString(),
+      String.format("Now you have %d task(s) in the list", taskList.size())
+    });
     return true;
   }
 
