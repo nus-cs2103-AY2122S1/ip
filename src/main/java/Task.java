@@ -1,16 +1,20 @@
 public class Task {
     private String description;
     private boolean status;
-    private int itemId;
-    private static int itemCounter = 1;
 
+    /**
+     * Constructor
+     * @param description The string that describes the Task.
+     */
     public Task(String description) {
         this.description = description;
         this.status = false;
-        this.itemId = itemCounter;
-        itemCounter++;
     }
 
+    /**
+     * Correctly assigns the task a string that indicates if it has been marked as done or not.
+     * @return String that hows the correct icon.
+     */
     public String getStatusIcon() {
         if (!status) {
             return "[ ] ";
@@ -19,17 +23,6 @@ public class Task {
         }
     }
 
-    public void markAsDone() {
-        this.status = true;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getNumber() {
-        return itemId;
-    }
 
     @Override
     public String toString() {

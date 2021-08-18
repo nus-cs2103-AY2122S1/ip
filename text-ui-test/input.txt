@@ -1,4 +1,6 @@
 blah
+done
+done 1
 list
 deadline
 deadline task
@@ -12,5 +14,9 @@ todo
 todo this
 done 1
 done 2
+delete
+delete
+delete this
+delete 1
 list
 bye
