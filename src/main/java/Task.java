@@ -5,11 +5,11 @@
  * @version CS2103T AY21/22 Semester 1
  */
 
-public class Task {
+public abstract class Task {
     /** The boolean to mark whether a task is completed.*/
-    private boolean isDone;
+    protected boolean isDone;
     /** The name of the task */
-    private String name;
+    protected String name;
 
     /**
      * Constructor of the task
@@ -18,14 +18,14 @@ public class Task {
     public Task(String name)
     {
         this.name = name;
-        SetDone(false);
+        setDone(false);
     }
 
     /**
      * Setter method to set a task as done or undone
      * @param doneOrNot the boolean to set the task as
      */
-    public void SetDone(boolean doneOrNot)
+    public void setDone(boolean doneOrNot)
     {
         isDone = doneOrNot;
     }

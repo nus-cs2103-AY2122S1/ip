@@ -24,16 +24,16 @@ public class DukeList {
      * Adds a string to the back of the DukeList array
      * @param input the string to be added
      */
-    public void Add(String input)
+    public void add(Task input)
     {
-        itemList[size++] = new Task(input);
+        itemList[size++] = input;
     }
 
     /**
      * Prints the items in the DukeList in order
      * @return string of printed items in a list
      */
-    public String PrintList()
+    public String printList()
     {
         String printed = "";
         for (int i = 0; i < size; i++)
@@ -48,7 +48,7 @@ public class DukeList {
      * @param listNumber the item number (not array index) to be checked
      * @return boolean of whether the number is within the list's range
      */
-    public boolean WithinRange(int listNumber)
+    public boolean checkWithinRange(int listNumber)
     {
         return 0 < listNumber && listNumber <= size;
     }
@@ -59,11 +59,15 @@ public class DukeList {
      * @return the item at the list number
      * @throws IllegalArgumentException only accepts integers whose values are within range of the array
      */
-    public Task GetTask(int listNumber) throws IllegalArgumentException
+    public Task getTask(int listNumber) throws IllegalArgumentException
     {
-        if (WithinRange(listNumber))
+        if (checkWithinRange(listNumber))
             return itemList[listNumber - 1]; // -1 due to difference between item list number and array indexes
         else
             throw new IllegalArgumentException("Task index is not within range."); // Not within range
+    }
+
+    public int getSize() {
+        return this.size;
     }
 }
