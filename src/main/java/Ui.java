@@ -28,7 +28,7 @@ public class Ui {
         System.out.println("____________________________________________________________");
     }
 
-    public String readCommand() {
+    public String readInput() {
         return sc.nextLine();
     }
 
