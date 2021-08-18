@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke{
+public class Duke {
     public static void main(String[] args) {
         String welcomeString = "____________________________________________________________\n"
                 + "Yo! Duke here...on behalf of Yang Yuzhao.\n"
@@ -22,16 +22,7 @@ public class Duke{
         while (!nextLine.equals("bye")) {
             // check list
             if (nextLine.equals("list")) {
-                System.out.println("____________________________________________________________\n"
-                        + "Here are the tasks in your list:");
-                int counter = 1;
-                for (Task taskForLoop : storeRoom) {
-                    System.out.println(counter
-                            + "."
-                            + taskForLoop);
-                    counter++;
-                }
-                System.out.println("____________________________________________________________\n");
+                Task.printList(storeRoom);
                 nextLine = in.nextLine();
                 continue;
             }
@@ -42,14 +33,13 @@ public class Duke{
                 Task doneTask = storeRoom.get(intValue - 1);
                 doneTask.doneTask();
                 storeRoom.set(intValue - 1, doneTask);
-                System.out.println("____________________________________________________________\n"
-                        + "Nice! I've marked this task as done:\n  "
-                        + doneTask
-                        + "\n"
-                        + "____________________________________________________________\n");
+                doneTask.printDoneTask();
                 nextLine = in.nextLine();
                 continue;
             }
+
+            // delete task
+//            if (nextLine.startsWith("delete"))
 
             // add task
             try {
@@ -73,33 +63,12 @@ public class Duke{
                     task = Event.splitEvent(nextLine);
                 }
                 storeRoom.add(task);
-                System.out.println("____________________________________________________________\n"
-                        + "Got it. I've added this task:\n  "
-                        + task
-                        + "\n"
-                        + "Now you have "
-                        + storeRoom.size()
-                        + " tasks in the list."
-                        + "\n"
-                        + "____________________________________________________________\n");
+                task.addTask(storeRoom);
                 nextLine = in.nextLine();
-            } catch (DukeException dukeException){
-                if (dukeException.errorType.equals(DukeException.ErrorType.EMPTY_DESCRIPTION)){
-                    System.out.println("____________________________________________________________\n"
-                            + "OOPS!!! The description of a "
-                            + dukeException.getMessage()
-                            + " cannot be empty.\n"
-                            + "____________________________________________________________\n");
-                    nextLine = in.nextLine();
-                    continue;
-                }
-                if (dukeException.errorType.equals(DukeException.ErrorType.INVALID_INPUT)){
-                    System.out.println("____________________________________________________________\n"
-                            + "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                            + "____________________________________________________________\n");
-                    nextLine = in.nextLine();
-                    continue;
-                }
+            } catch (DukeException dukeException) {
+                System.out.println(dukeException);
+                nextLine = in.nextLine();
+                continue;
             }
         }
 
@@ -108,3 +77,4 @@ public class Duke{
         in.close();
     }
 }
+
