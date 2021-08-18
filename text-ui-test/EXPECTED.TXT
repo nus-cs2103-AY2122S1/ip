@@ -21,9 +21,9 @@
 			 2. todo [#description] -> Adds a ToDo Task to the List
 			 3. event #description /at #timing -> Adds an Event Task to the List
 			 4. deadline #description /by #deadline -> Adds a Deadline Task to the List
-			 5. delete #index -> Delete Task at #index in the List
-			 6. done #index -> Marks Task at #index in the List as completed
-			 7. undo #index -> Marks Task at #index in the List as incomplete
+			 5. done #index -> Marks Task at #index in the List as completed
+			 6. undo #index -> Marks Task at #index in the List as incomplete
+			 7. delete #index -> Delete Task at #index in the List
 			 8. bye/goodbye -> Quits the ChatBot
 [36m________________________________________________________________________________________________________________[0m
 [35m> [0m[36m________________________________________________________________________________________________________________[0m
