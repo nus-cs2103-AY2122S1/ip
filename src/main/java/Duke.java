@@ -1,12 +1,16 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    private ArrayList<Task> tasks;
 
-        Task[] tasks = new Task[100];
-        int taskCount = 0;
+    public Duke() {
+        this.tasks = new ArrayList(100);
+    }
+
+    private void start() {
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
@@ -16,15 +20,7 @@ public class Duke {
             String[] inputStringArray = userInput.split(" ", 2);
             switch (inputStringArray[0]) {
                 case "list":
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < 100; i++) {
-                        Task task = tasks[i];
-                        if (task == null) {
-                            break;
-                        } else {
-                            System.out.println((i + 1) + ". " + task.toString());
-                        }
-                    }
+                    this.printTasks();
                     break;
                 case "done":
                     if (inputStringArray.length < 2) {
@@ -33,18 +29,14 @@ public class Duke {
                     }
                     try {
                         int taskIndex = Integer.parseInt(inputStringArray[1]) - 1;
-                        if (taskIndex < 0 || taskIndex > 99) {
-                            System.out.println("Error: Please enter a valid task number (1 to 100)");
-                            break;
-                        }
-                        Task doneTask = tasks[taskIndex];
+                        Task doneTask = tasks.get(taskIndex);
                         if (doneTask == null) {
                             System.out.println("Error: Task does not exist");
                             break;
                         }
                         doneTask.setDone();
                         System.out.println("Nice! I've marked this task as done:\n" + doneTask.toString());
-                    } catch (NumberFormatException e) {
+                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
                         System.out.println("Error: Invalid task number");
                     }
                     break;
@@ -59,8 +51,7 @@ public class Duke {
                         break;
                     }
                     Task newDeadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-                    tasks[taskCount] = newDeadline;
-                    taskCount++;
+                    tasks.add(newDeadline);
                     System.out.println("Got it. I've added this task:\n" + "  " + newDeadline.toString());
                     break;
                 case "event":
@@ -74,8 +65,7 @@ public class Duke {
                         break;
                     }
                     Task newEvent = new Event(eventInfo[0], eventInfo[1]);
-                    tasks[taskCount] = newEvent;
-                    taskCount++;
+                    tasks.add(newEvent);
                     System.out.println("Got it. I've added this task:\n" + "  " + newEvent.toString());
                     break;
                 case "todo":
@@ -84,8 +74,7 @@ public class Duke {
                         break;
                     }
                     Task newToDo = new ToDo(inputStringArray[1]);
-                    tasks[taskCount] = newToDo;
-                    taskCount++;
+                    tasks.add(newToDo);
                     System.out.println("Got it. I've added this task:\n" + "  " + newToDo.toString());
                     break;
                 default:
@@ -95,6 +84,19 @@ public class Duke {
         }
 
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private void printTasks() {
+        System.out.println("Here are the tasks in your list:");
+        int taskCount = tasks.size();
+        for (int i = 0; i < taskCount; i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i).toString());
+        }
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.start();
     }
 
 }
