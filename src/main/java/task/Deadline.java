@@ -10,6 +10,7 @@ package task;
  */
 
 public class Deadline extends Task {
+    public static final String ID = "D";
     private final String byTime;
 
     /**
@@ -45,6 +46,23 @@ public class Deadline extends Task {
     }
 
     /**
+     * Format Task to String array:
+     * If task is done, [D, 0, Task1, DateTime]; else, [D, 1, Task1, DateTime]
+     *
+     * @return Task in String array
+     */
+    @Override
+    public String[] formatTask() {
+        String done;
+        if (isDone()) {
+            done = "0";
+        } else {
+            done = "1";
+        }
+        return new String[]{ID, done, super.getName(), getByTime()};
+    }
+
+    /**
      * Mark task status as done.
      *
      * @return task with done status
@@ -60,6 +78,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + byTime + ")";
+        return "[" + ID + "]" + super.toString() + " (by: " + byTime + ")";
     }
 }

@@ -44,6 +44,8 @@ public class CommandUtils {
                 return Operation.DONE;
             } else if (operation.equals(Operation.DELETE.getValue())) {
                 return Operation.DELETE;
+            } else if (operation.equals(Operation.CLEAR.getValue())) {
+                return Operation.CLEAR;
             } else if (operation.equals(Operation.BYE.getValue())) {
                 return Operation.BYE;
             } else {

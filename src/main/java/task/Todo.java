@@ -10,6 +10,7 @@ package task;
  */
 
 public class Todo extends Task {
+    public static final String ID = "T";
 
     /**
      * This is constructor method of Todo.
@@ -31,6 +32,23 @@ public class Todo extends Task {
     }
 
     /**
+     * Format Task to String array:
+     * If task is done, [T, 0, Task1]; else, [T, 1, Task1]
+     *
+     * @return Task in String array
+     */
+    @Override
+    public String[] formatTask() {
+        String done;
+        if (isDone()) {
+            done = "0";
+        } else {
+            done = "1";
+        }
+        return new String[]{ID, done, super.getName()};
+    }
+
+    /**
      * Mark task status as done.
      *
      * @return task with done status
@@ -46,6 +64,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[" + ID + "]" + super.toString();
     }
 }

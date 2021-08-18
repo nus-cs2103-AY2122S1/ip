@@ -16,6 +16,7 @@ public enum Operation {
     LIST("list"),
     DONE("done"),
     DELETE("delete"),
+    CLEAR("clear"),
     BYE("bye");
 
     private final String value;

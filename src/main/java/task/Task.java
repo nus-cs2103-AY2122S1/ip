@@ -59,6 +59,13 @@ public abstract class Task {
         return name;
     }
 
+    /**
+     * Format Task to String array.
+     *
+     * @return Task in String array
+     */
+    public abstract String[] formatTask();
+
     private String getStatusIcon() {
         return isDone ? "X" : " ";
     }
