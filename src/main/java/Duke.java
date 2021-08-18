@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
     private Scanner input = new Scanner(System.in);
-    private ArrayList<String> list = new ArrayList<>();
+    private ArrayList<Task> list = new ArrayList<>();
 
     private void printLogo() {
         String logo = " ____        _        \n"
@@ -20,11 +20,20 @@ public class Duke {
             String userInput = this.input.nextLine();
             if (userInput.equals("bye")) {
                 this.exit();
-                return;
+                break;
             }
             if (userInput.equals("list")) {
                 this.showList();
                 continue;
+            }
+            if (userInput.length() >= 6 && userInput.substring(0, 5).equals("done ")) {
+                try {
+                    int taskNum = Integer.parseInt(userInput.substring(5));
+                    this.completeTask(taskNum);
+                    continue;
+                } catch (NumberFormatException e) {
+                    System.out.println("NOT AN INTEGER!");
+                }
             }
             this.add(userInput);
         }
@@ -43,19 +52,27 @@ public class Duke {
 
 
     private void add(String userInput) {
-        this.list.add(userInput);
+        this.list.add(new Task(userInput));
         System.out.println("\tadded: " + userInput + "\n");
     }
 
 
     private void exit() {
-        System.out.println("\t" + "Bye, hope to see you again!");
+        System.out.println("\tBye, hope to see you again!");
+    }
+
+
+    private void completeTask(int taskNum) {
+        this.list.get(taskNum - 1).markAsDone();
+        System.out.println("\tI've marked this task as done!");
+        System.out.println("\t" + this.list.get(taskNum - 1) + "\n");
     }
 
 
     private void showList() {
-        for (int i = 0; i < this.list.size(); i++) {
-            System.out.println("\t" + i + ". " + this.list.get(i));
+        System.out.println("\tHere are the tasks in your list:");
+        for (int i = 1; i <= this.list.size(); i++) {
+            System.out.println("\t" + i + ". " + this.list.get(i - 1));
         }
         System.out.println();
     }
