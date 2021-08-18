@@ -6,7 +6,9 @@ import java.util.List;
 
 public class Duke {
 
-    private static List<Task> tasks = new ArrayList<>();
+    private static Task[] tasks = new Task[100];
+    private static int noOfTasks = 0;
+
 
     public static void main(String[] args) {
 
@@ -19,20 +21,32 @@ public class Duke {
         while(!command.equals("bye")) {
             if(command.equals("list")) { //if the user requests to view task list
                 printList();
-            } else if(!command.contains("done") || command.length() < 6) { //if the user wants to add a task
-                tasks.add(new Task(command));
-                printFormatted("added: " + command);
-            } else { //if the user wants to mark a task as done
+            } else if(command.contains("done")) {
                 int index = getCompletedTask(command);
                 if(index >= 0) { //valid task number to mark as completed
-                    Task finished = tasks.get(index);
-                    tasks.get(index).markAsDone();
-                    printFormatted("Nice! I've marked this task as done:\n" + "\t\t[" +
-                            finished.getStatusIcon() +"] " + finished.description);
+                    Task finished = tasks[index];
+                    finished.markAsDone();
+                    printFormatted("Nice! I've marked this task as done:\n" + "\t\t" +
+                            finished);
                 } else { //invalid task number, cannot mark this task as completed
                     printFormatted("Invalid task number!");
                 }
 
+            } else {
+                Task current = new Task("");
+                if(command.contains("todo")) {
+                    current = new Todo(command.substring(5));
+                } else if(command.contains("deadline")) {
+                    current = new Deadline(command.substring(9, command.indexOf('/') - 1),
+                            command.substring(command.indexOf('/') + 4));
+                } else if(command.contains("event")){
+                    current = new Event(command.substring(6, command.indexOf('/') - 1),
+                            command.substring(command.indexOf('/') + 4, command.indexOf('-')),
+                            command.substring(command.indexOf('-') + 1));
+                }
+                tasks[noOfTasks++] = current;
+                printFormatted("Got it. I've added this task:" + "\n\t\t" + current + "\n\tNow you have " +
+                        noOfTasks + " tasks in the list.");
             }
             command = scanner.nextLine();
         }
@@ -60,17 +74,14 @@ public class Duke {
     /*To print list of tasks between horizontal lines */
     public static void printList() {
         printLine();
-        if(tasks.size() > 0) {
-            System.out.println("\tHere are the tasks in your list:");
-            int ctr = 1;
-            for(Task task: tasks) {
-                System.out.println("\t" + ctr + "." + "[" + task.getStatusIcon() + "] " + task.description);
-                ctr++;
+        System.out.println("\tHere are the tasks in your list:");
+        if(noOfTasks > 0) {
+            for(int i = 0; i < noOfTasks; i++) {
+                System.out.println("\t" + (i + 1) + "." + tasks[i]);
             }
         } else {
             System.out.println("\tNo items added to list yet!");
         }
-
         printLine();
     }
 
@@ -80,7 +91,7 @@ public class Duke {
         for(int i = task.length() - 1; i > 4; i--) {
             idx+= (task.charAt(i) - 48) * Math.pow(10, task.length() - 1 - i);
         }
-        return idx <= tasks.size()? idx - 1: -1;
+        return idx <= noOfTasks? idx - 1: -1;
     }
 
 }
