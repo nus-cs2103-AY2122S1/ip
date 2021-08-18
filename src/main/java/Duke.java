@@ -40,6 +40,9 @@ public class Duke {
         } else if (input.equals("list")) {
             printTasks();
             respondTo(sc);
+        } else if (taskComplete(input)) {
+            completeTask(input);
+            respondTo(sc);
         } else {
             insertTask(input);
             respondTo(sc);
@@ -54,5 +57,25 @@ public class Duke {
 
     public static void printTasks() {
         formatMessages(todolist.getList());
+    }
+
+    public static void completeTask(String input) {
+        String first = input.split(" ")[0];
+        String second = input.split(" ")[1];
+
+        try {
+            int value = Integer.parseInt(second);
+            Task task = todolist.complete(value-1);
+            String completedTask = "Swee la! You good la sia, finished this task:\n        " + "[X] " + task.getName() ;
+            formatMessages(completedTask);
+
+        } catch (NumberFormatException e) {
+            System.out.println("Aiyo, you say done a task but you never tell me which one leh.");
+        }
+    }
+
+    public static boolean taskComplete(String input) {
+        String first = input.split(" ")[0];
+        return first.equalsIgnoreCase("done");
     }
 }

@@ -1,18 +1,19 @@
 import java.util.ArrayList;
 
 public class TodoList {
-    private ArrayList<String> list;
+    private ArrayList<Task> list;
 
     public TodoList() {
-        this.list = new ArrayList<String>();
+        this.list = new ArrayList<Task>();
     }
 
     public String getList() {
-        ArrayList<String> currentList = this.list;
-        StringBuilder output = new StringBuilder();
+        ArrayList<Task> currentList = this.list;
+        StringBuilder output = new StringBuilder("Wahseh, these are all the tasks you haven't do ley! \n      ");
         int i = 1;
-        for (String task : currentList) {
-            output.append(i).append(". ").append(task).append("\n      ");
+        for (Task task : currentList) {
+            String checkBox = " [" + task.getStatus() + "] ";
+            output.append(i).append(". ").append(checkBox).append(task.name).append("\n      ");
             i += 1;
         }
 
@@ -20,6 +21,12 @@ public class TodoList {
     }
 
     public void insertTask(String input) {
-        list.add(input);
+        Task task = new Task(input);
+        list.add(task);
     }
+
+    public Task complete(int index) {
+        return list.get(index).completeTask();
+    }
+
 }
