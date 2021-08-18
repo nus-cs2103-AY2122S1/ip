@@ -4,58 +4,59 @@ import java.util.Scanner;
  * The Duke class encapsulates the action of the chatbot Duke.
  */
 public class Duke {
-    /** Array to represent the tasklist. */
+    /** The tasklist for Duke to store all the tasks. */
     private TaskList taskList;
-    /** Pointer to indicate the next position to store the task in the array. */
-    private int nextSpaceToStore;
 
     /**
      * Constructor to initialise the Duke chatbot.
      */
     private Duke() {
         this.taskList = new TaskList(100);
-        this.nextSpaceToStore = 0;
     }
 
     /**
      * Method to carry out the command entered by the user to the toDoList.
      */
-    public void commanding() {
+    public void commanding() throws DukeException {
         Scanner scan = new Scanner(System.in);
         String description = scan.nextLine();
         while (!description.equals("bye")) {
             System.out.println("-------------------------------------------------------------------");
-            if (description.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                taskList.list();
-            } else if (description.startsWith("done")) {
-                String taskNo = description.substring(5);
-                System.out.println("Nice! I've marked this task as done:");
-                taskList.done(Integer.parseInt(taskNo));
-            } else if (description.startsWith("todo")) {
-                System.out.println("Got it boss! I've added this task:");
-                String des = description.substring(5);
-                Todo ttask = new Todo(des);
-                taskList.store(ttask);
-                System.out.println("  " + ttask.toString() + "\n" + taskList.toString());
-            } else if (description.startsWith("deadline")) {
-                System.out.println("Got it boss! I've added this task:");
-                int pos = description.indexOf("/");
-                String des = description.substring(9, pos - 1);
-                String by = description.substring(pos + 4);
-                Deadline dtask = new Deadline(des, by);
-                taskList.store(dtask);
-                System.out.println("  " + dtask.toString() + "\n" + taskList.toString());
-            } else if (description.startsWith("event")) {
-                System.out.println("Got it boss! I've added this task:");
-                int pos = description.indexOf("/");
-                String des = description.substring(6, pos - 1);
-                String at = description.substring(pos + 4);
-                Event etask = new Event(des, at);
-                taskList.store(etask);
-                System.out.println("  " + etask.toString() + "\n" + taskList.toString());
-            } else {
-                System.out.println("I'm sorry! I'm not quite sure what you need me to do!");
+            try {
+                if (description.equals("list")) {
+                    System.out.println("Here are the tasks in your list:");
+                    taskList.list();
+                } else if (description.startsWith("done")) {
+                    String taskNo = description.substring(5);
+                    System.out.println("Nice! I've marked this task as done:");
+                    taskList.done(Integer.parseInt(taskNo));
+                } else if (description.startsWith("todo")) {
+                    System.out.println("Got it boss! I've added this task:");
+                    String des = description.substring(5);
+                    Todo ttask = new Todo(des);
+                    taskList.store(ttask);
+                    System.out.println("  " + ttask.toString() + "\n" + taskList.toString());
+                } else if (description.startsWith("deadline")) {
+                    System.out.println("Got it boss! I've added this task:");
+                    int pos = description.indexOf("/");
+                    String des = description.substring(9, pos - 1);
+                    String by = description.substring(pos + 4);
+                    Deadline dtask = new Deadline(des, by);
+                    taskList.store(dtask);
+                    System.out.println("  " + dtask.toString() + "\n" + taskList.toString());
+                } else if (description.startsWith("event")) {
+                    System.out.println("Got it boss! I've added this task:");
+                    int pos = description.indexOf("/");
+                    String des = description.substring(6, pos - 1);
+                    String at = description.substring(pos + 4);
+                    Event etask = new Event(des, at);
+                    taskList.store(etask);
+                    System.out.println("  " + etask.toString() + "\n" + taskList.toString());
+                } else {
+                    throw new DukeException("☹ I'm sorry! I'm not quite sure what you need me to do!");
+                }
+            } catch (DukeException e) {
+                System.out.println(e.toString());
             }
             System.out.println("-------------------------------------------------------------------");
             description = scan.nextLine();
@@ -76,7 +77,7 @@ public class Duke {
         System.out.println("Hello I'm\n" + logo + "How may I help you today master?\n");
         System.out.println("-------------------------------------------------------------------");
 
-        Duke chatbot = new Duke();
-        chatbot.commanding();
+            Duke chatbot = new Duke();
+            chatbot.commanding();
     }
 }
