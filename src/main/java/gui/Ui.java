@@ -3,34 +3,34 @@ package gui;
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner sc;
+    private static Scanner sc = new Scanner(System.in);
 
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
+//    public Ui() {
+//        sc = new Scanner(System.in);
+//    }
 
-    public void greet() {
+    public static void greet() {
         System.out.println("Hello! I'm core.Duke\n" + "What can I do for you?");
-        displayLine();
+        Ui.displayLine();
     }
 
-    public void sayBye() {
+    public static void sayBye() {
         displayLine();
         System.out.println("Bye. Hope to see you again soon!");
         displayLine();
     }
 
-    public void echo(String str) {
-        displayLine();
-        System.out.println(str);
-        displayLine();
-    }
+//    public void echo(String str) {
+//        displayLine();
+//        System.out.println(str);
+//        displayLine();
+//    }
 
-    public void displayLine() {
+    public static void displayLine() {
         System.out.println("____________________________________________________________");
     }
 
-    public String readInput() {
+    public static String readInput() {
         return sc.nextLine();
     }
 

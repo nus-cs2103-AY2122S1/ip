@@ -4,20 +4,18 @@ import commands.Command;
 import gui.Ui;
 
 public class Duke {
-    private Ui ui;
     private TaskList taskList;
 
     public Duke() {
-        ui = new Ui();
         taskList = new TaskList();
     }
 
     private void run() {
         boolean shouldExit = false;
 
-        ui.greet();
+        Ui.greet();
         while (!shouldExit) {
-            String input = ui.readInput();
+            String input = Ui.readInput();
             Command command = Parser.parse(input);
             command.execute(taskList);
             shouldExit = command.shouldExit();

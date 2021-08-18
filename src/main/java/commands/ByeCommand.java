@@ -4,15 +4,12 @@ import core.TaskList;
 import gui.Ui;
 
 public class ByeCommand extends Command {
-    private Ui ui;
 
-    public ByeCommand() {
-        ui = new Ui();
-    }
+    public ByeCommand() {}
 
     @Override
     public void execute(TaskList taskList) {
-        ui.sayBye();
+        Ui.sayBye();
     }
 
     @Override
