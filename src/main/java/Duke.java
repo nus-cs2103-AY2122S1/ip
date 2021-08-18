@@ -10,32 +10,35 @@ public class Duke {
         greet();
 
         while (sc.hasNextLine()) {
-            String msg = sc.nextLine();
-            if (msg.equals("bye")) {
-                exit();
-            } else if (msg.equals("list")) {
-                printMessage(taskList.toString());
-            } else {
-                String[] words = msg.split(" ");
+            try {
+                String msg = sc.nextLine();
+                if (msg.equals("bye")) {
+                    exit();
+                } else if (msg.equals("list")) {
+                    printMessage(taskList.toString());
+                } else {
+                    String[] words = msg.split(" ");
 
-                // switch statement for the first word
-                switch (words[0]) {
-                    case "done":
-                        taskList.doTask(words[1]);
-                        break;
-                    case "todo":
-                        taskList.addToDo(msg);
-                        break;
-                    case "deadline":
-                        taskList.addDeadline(msg);
-                        break;
-                    case "event":
-                        taskList.addEvent(msg);
-                        break;
-                    default:
-                        Duke.printMessage("Unsupported operation.");
-                        break;
+                    // switch statement for the first word
+                    switch (words[0]) {
+                        case "done":
+                            taskList.doTask(words[1]);
+                            break;
+                        case "todo":
+                            taskList.addToDo(msg);
+                            break;
+                        case "deadline":
+                            taskList.addDeadline(msg);
+                            break;
+                        case "event":
+                            taskList.addEvent(msg);
+                            break;
+                        default:
+                            throw new DukeException("Unsupported operation");
+                    }
                 }
+            } catch (DukeException dukeException) {
+                dukeException.displayError();
             }
         }
     }
