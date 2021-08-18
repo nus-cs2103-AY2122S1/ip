@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -7,6 +9,8 @@ import java.util.Scanner;
  */
 public class Duke {
     private String name;
+    private List<String> list;
+    private String greetMsg = "What can I do for you?";
     private String exitMsg = "Bye. Hope to see you again soon!";
 
     /**
@@ -16,6 +20,7 @@ public class Duke {
      */
     public Duke(String name) {
         this.name = name;
+        this.list = new ArrayList<>();
     }
 
     /**
@@ -24,7 +29,16 @@ public class Duke {
     private void greet() {
         System.out.println("    ____________________________________________________________");
         System.out.println("    Hello! I'm " + this.name);
-        System.out.println("    What can I do for you?");
+        System.out.println("    " + this.greetMsg);
+        System.out.println("    ____________________________________________________________");
+    }
+
+    /**
+     * Print the goodbye message of the Chatbot.
+     */
+    private void exit() {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    " + this.exitMsg);
         System.out.println("    ____________________________________________________________");
     }
 
@@ -34,8 +48,23 @@ public class Duke {
      * @param input The message to be printed on console.
      */
     private void echo(String input) {
+        this.list.add(input);
         System.out.println("    ____________________________________________________________");
-        System.out.println("    " + input);
+        System.out.println("    added: " + input);
+        System.out.println("    ____________________________________________________________");
+    }
+
+    /**
+     * Prints the formatted list of content in <code>list</code>.
+     */
+    private void printList() {
+        int listSize = this.list.size();
+        System.out.println("    ____________________________________________________________");
+        for (int i = 0; i < listSize; i++) {
+            int index = i + 1;
+            String content = this.list.get(i);
+            System.out.println("    " + index + ". " + content);
+        }
         System.out.println("    ____________________________________________________________");
     }
 
@@ -51,8 +80,11 @@ public class Duke {
             String input = sc.nextLine();
             switch (input) {
                 case "bye":
-                    this.echo(this.exitMsg);
+                    this.exit();
                     return;
+                case "list":
+                    this.printList();
+                    break;
                 default:
                     this.echo(input);
             }
