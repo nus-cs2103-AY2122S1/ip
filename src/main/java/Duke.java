@@ -19,21 +19,16 @@ public class Duke {
 
             switch (command) {
                 case "bye":
-                    System.out.println(dukeSays("¡Adiós! See you soon!"));
+                    System.out.println("¡Adiós! See you soon!");
                     running = false;
                     break;
                 case "list":
                     tm.list();
                     break;
                 default:
-                    tm.add(new Task(command));
-                    System.out.println(dukeSays("added: " + command));
+                    tm.handle(command);
             }
         }
-    }
-
-    private static String dukeSays(String str) {
-        return "Duke says >> " + str + "\n";
     }
 }
 
