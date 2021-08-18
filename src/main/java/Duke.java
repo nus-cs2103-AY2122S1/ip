@@ -1,6 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
+    private static ArrayList<String> todoList;
+
     public static void main(String[] args) {
         String separator = "------------------------------------------------------------------";
 
@@ -14,8 +17,11 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println(separator);
 
+        todoList = new ArrayList<>();
+
         boolean end = false;
         String endCmd = "bye";
+        String listCmd = "list";
         Scanner sc = new Scanner(System.in);
 
         while (!end) {
@@ -25,11 +31,24 @@ public class Duke {
             if (cmd.equals(endCmd)) {
                 System.out.println("Bye bye! See you again soon!");
                 end = true;
+            } else if (cmd.equals(listCmd)) {
+                displayList();
             } else {
-                System.out.println(cmd);
+                addItem(cmd);
             }
-
             System.out.println(separator);
         }
+    }
+
+    private static void displayList() {
+        for (int i = 0; i < todoList.size(); i ++) {
+            int num = i+1;
+            System.out.println(num + ". " + todoList.get(i));
+        }
+    }
+
+    private static void addItem(String item) {
+        todoList.add(item);
+        System.out.println("added: " + item);
     }
 }
