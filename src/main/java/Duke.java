@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -24,7 +25,7 @@ public class Duke {
                 "\thow may I serve you?\n");
 
         // Initialize string array to store the list
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<>();
         int numOfTask = 0;
 
         // Initialize scanner to get user input
@@ -40,16 +41,16 @@ public class Duke {
                 switch (command[0]) {
                     case "list":
                         Printer.prettyPrint("Here are the tasks in your list:\n" +
-                                Printer.listTask(tasks));
+                                Printer.listTask(tasks, numOfTask));
                         break;
                     case "done":
-                        tasks[Integer.parseInt(command[1]) - 1].markAsDone();
+                        tasks.get(Integer.parseInt(command[1]) - 1).markAsDone();
                         break;
                     case "todo":
                         try {
                             taskDetail = extractCommand(command);
-                            tasks[numOfTask++] = new Todo(taskDetail[0]);
-                            printAdded(tasks[numOfTask - 1], numOfTask);
+                            tasks.add(new Todo(taskDetail[0]));
+                            printAdded(tasks.get(numOfTask), ++numOfTask);
                         } catch (EmptyDescriptionException e) {
                             Printer.prettyPrint(e.toString());
                         }
@@ -57,8 +58,8 @@ public class Duke {
                     case "event":
                         try {
                             taskDetail = extractCommand(command);
-                            tasks[numOfTask++] = new Event(taskDetail[0], taskDetail[1]);
-                            printAdded(tasks[numOfTask - 1], numOfTask);
+                            tasks.add(new Event(taskDetail[0], taskDetail[1]));
+                            printAdded(tasks.get(numOfTask), ++numOfTask);
                         } catch (EmptyDescriptionException e) {
                             Printer.prettyPrint(e.toString());
                         }
@@ -66,8 +67,8 @@ public class Duke {
                     case "deadline":
                         try {
                             taskDetail = extractCommand(command);
-                            tasks[numOfTask++] = new Deadline(taskDetail[0], taskDetail[1]);
-                            printAdded(tasks[numOfTask - 1], numOfTask);
+                            tasks.add(new Deadline(taskDetail[0], taskDetail[1]));
+                            printAdded(tasks.get(numOfTask), ++numOfTask);
                         } catch (EmptyDescriptionException e) {
                             Printer.prettyPrint(e.toString());
                         }

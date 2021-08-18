@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Printer {
     protected static final String logo = "\t ____        _        \n"
             + "\t|  _ \\ _   _| | _____ \n"
@@ -11,15 +13,17 @@ public class Printer {
         System.out.printf("\t%s\n\t%s\n\t%s\n%n", divider, content, divider);
     }
 
-    public static String listTask(Task[] tasks) {
+    public static String listTask(ArrayList<Task> tasks, int numOfTask) {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < tasks.length - 1; i++) {
-            if (tasks[i] != null)
+        int currentIndex = 1;
+        for (Task task : tasks) {
+            if (task != null)
                 result.append("\t ")
-                        .append(i + 1)
+                        .append(currentIndex)
                         .append(".")
-                        .append(tasks[i].toString())
+                        .append(task.toString())
                         .append("\n");
+            currentIndex ++;
         }
         return result.toString();
     }
