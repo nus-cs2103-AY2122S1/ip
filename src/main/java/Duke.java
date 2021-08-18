@@ -35,6 +35,10 @@ public class Duke {
                 String taskNum = command.replaceAll("\\D+", "");
                 int index = Integer.parseInt(taskNum) - 1;
                 this.markTask(index);
+            } else if (command.matches("delete \\d+")) {
+                String taskNum = command.replaceAll("\\D+", "");
+                int index = Integer.parseInt(taskNum) - 1;
+                this.deleteTask(index);
             } else {
                 addTask(command);
             }
@@ -105,6 +109,17 @@ public class Duke {
         printMessage(String.format("Got it. I've added this task:"
                 + "\n\t%s"
                 + "\nNow you have %d tasks in the list.", task, this.tasks.size()));
+    }
+
+    public void deleteTask(int index) {
+        try {
+            Task task = this.tasks.get(index);
+            this.tasks.remove(index);
+            printMessage(String.format("Noted. I've removed this task: \n\t%s\n" +
+                    "Now you have %d tasks in the list.", task, tasks.size()));
+        } catch (IndexOutOfBoundsException e) {
+            printMessage("There is no such task to delete!");
+        }
     }
 
     public static void main(String[] args) {
