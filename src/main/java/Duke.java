@@ -43,14 +43,19 @@ public class Duke {
             System.out.println("");
             lastInput = currScanner.nextLine();
 
+            TDLTask.TaskType currTaskType = TDLTask.checkTaskType(lastInput);
+
+
             if (lastInput.equals("bye")) {
                 break;
             } else if (lastInput.equals("list")) {
                 listOutTDL();
             } else if (lastInput.length() >= 6 && lastInput.substring(0, 4).equals("done")) {
                 markItemDoneInTDL(lastInput);
+            } else if (currTaskType != TDLTask.TaskType.NONE) {
+                tryAddToTDL(lastInput, currTaskType);
+
             } else {
-                addToTDL(lastInput);
             }
         }
 
@@ -78,8 +83,8 @@ public class Duke {
     }
 
 
-    private static void addToTDL(String str) {
-        currTDL.tdlAdd(str);
+    private static void tryAddToTDL(String str, TDLTask.TaskType currTaskType) {
+        currTDL.tdlAdd(str, currTaskType);
     }
 
 
