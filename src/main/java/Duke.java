@@ -1,9 +1,14 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
 
+    // shows the if the Duke chatbot has been activated
     private boolean activated;
+    // Line Separator
     private final String SEP_LINE = "____________________________________________________________\n";
+    // Standard boot response
     private final String bootMessage =
             SEP_LINE
             + " ____        _        \n"
@@ -16,23 +21,30 @@ public class Duke {
             + "Hello! I'm Duke\n"
             + "What can I do for you?\n"
             + SEP_LINE;
+    // Text Storage
+    private final List<String> history = new ArrayList<String>();
 
+    // Duke Constructor
     public Duke() {
         this.activated = true;
     }
 
+    // Checks if Duke Chatbot has been activated
     public boolean isActive() {
         return this.activated;
     }
 
-    public void boot() {
+    // Level-1: Greets user when Duke is initialised
+    public void greet() {
         System.out.println(this.bootMessage);
     }
 
+    // Level-1: Echoes Message input from user
     public String echo(String text) {
         return text;
     }
 
+    // Level-1: Exit Message triggered by "bye"
     public String exit() {
         this.activated = false;
         return " Bye. Hope to see you again soon!";
@@ -55,7 +67,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scannerObj = new Scanner(System.in);
         Duke chatBotObj = new Duke();
-        chatBotObj.boot();
+        chatBotObj.greet();
         while (chatBotObj.isActive()) {
             String userInput = scannerObj.nextLine();
             String output = chatBotObj.decoder(userInput);
