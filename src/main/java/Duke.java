@@ -4,9 +4,10 @@ import java.util.ArrayList;
 public class Duke {
     private static ArrayList<Task> list = new ArrayList<Task>();
     private static void printList() {
+        System.out.println("Here are the tasks in your list: \n");
         for(int i = 0; i < list.size(); i++) {
             int index = i + 1;
-            System.out.println( index + ": " + list.get(i));
+            System.out.println( index + ". [" + list.get(i).getStatus() + "] " + list.get(i));
         }
     }
 
@@ -27,6 +28,15 @@ public class Duke {
             }
             if (command.equals("list")) {
                 printList();
+                continue;
+            }
+            String[] commandSplit = command.split("\\s");
+
+            if (commandSplit[0].equals("done")) {
+                int index = Integer.valueOf(commandSplit[1]) - 1;
+                list.get(index).setDone();
+                System.out.println("I've marked this task as done: \n");
+                System.out.println("[X] " + list.get(index));
                 continue;
             }
             Task newTask = new Task(command);
