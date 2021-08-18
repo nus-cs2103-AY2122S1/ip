@@ -1,6 +1,6 @@
 package service;
 
-import exception.TaskManagerException;
+import exception.DukeException;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -34,11 +34,11 @@ public class TaskManager {
      *
      * @param newTask task to save
      * @return saved task
-     * @throws TaskManagerException if task cannot be saved, due to full capacity of task list
+     * @throws DukeException if task cannot be saved, due to full capacity of task list
      */
-    public Task addTask(Task newTask) throws TaskManagerException {
+    public Task addTask(Task newTask) throws DukeException {
         if (TASK_LIST.size() == MAX_STORAGE) {
-            throw new TaskManagerException("Unable to add task as list is full.");
+            throw new DukeException("Unable to add task as list is full.");
         }
         TASK_LIST.add(newTask);
         return newTask;
@@ -49,13 +49,13 @@ public class TaskManager {
      *
      * @param userInput user input with parameters for a Deadline
      * @return Todo Task saved
-     * @throws TaskManagerException if parsing is incorrect, task is not present,
+     * @throws DukeException if parsing is incorrect, task is not present,
      * or task list is full
      */
-    public Task addToDoTask(String userInput) throws TaskManagerException {
+    public Task addToDoTask(String userInput) throws DukeException {
         String description = userInput.trim();
         if (description.isEmpty()) {
-            throw new TaskManagerException("Task description cannot be empty.");
+            throw new DukeException("Task description cannot be empty.");
         }
         Todo todo = new Todo(description);
         return addTask(todo);
@@ -66,10 +66,10 @@ public class TaskManager {
      *
      * @param userInput user input with parameters for a Deadline
      * @return Event Task saved
-     * @throws TaskManagerException if parsing is incorrect, task is not present,
+     * @throws DukeException if parsing is incorrect, task is not present,
      * or task list is full
      */
-    public Task addEventTask(String userInput) throws TaskManagerException {
+    public Task addEventTask(String userInput) throws DukeException {
         String[] parameterArray = splitUserInput(Event.SPLITTER, userInput);
         Event event = new Event(parameterArray[0], parameterArray[1]); // desc, timing
         return addTask(event);
@@ -80,10 +80,10 @@ public class TaskManager {
      *
      * @param userInput user input with parameters for a Deadline
      * @return Deadline Task saved
-     * @throws TaskManagerException if parsing is incorrect, task is not present,
+     * @throws DukeException if parsing is incorrect, task is not present,
      * or task list is full
      */
-    public Task addDeadlineTask(String userInput) throws TaskManagerException {
+    public Task addDeadlineTask(String userInput) throws DukeException {
         String[] parameterArray = splitUserInput(Deadline.SPLITTER, userInput);
         Deadline deadline = new Deadline(parameterArray[0], parameterArray[1]); // desc, by
         return addTask(deadline);
@@ -95,29 +95,29 @@ public class TaskManager {
      * @param splitKey key String to split userInput with
      * @param userInput user input to parse into the relevant parameters
      * @return String array containing description of Task as well as other parameters
-     * @throws TaskManagerException if splitKey is not present in userInput,
+     * @throws DukeException if splitKey is not present in userInput,
      * or if either parameter is empty
      */
     public String[] splitUserInput(String splitKey, String userInput)
-            throws TaskManagerException {
+            throws DukeException {
 
         if (!userInput.contains(splitKey)) {
-            throw new TaskManagerException("Missing key '" + splitKey + "' in command.");
+            throw new DukeException("Missing key '" + splitKey + "' in command.");
         }
 
         String[] inputParts = userInput.split(splitKey);
         if (inputParts.length != 2) {
-            throw new TaskManagerException("Ensure input has both parameters for task.");
+            throw new DukeException("Ensure input has both parameters for task.");
         }
 
         String description = inputParts[0].trim();
         if (description.isEmpty()) {
-            throw new TaskManagerException("Task description cannot be empty.");
+            throw new DukeException("Task description cannot be empty.");
         }
 
         String split = inputParts[1].trim();
         if (split.isEmpty()) {
-            throw new TaskManagerException("Parameter after '" + splitKey + "' cannot be empty.");
+            throw new DukeException("Parameter after '" + splitKey + "' cannot be empty.");
         }
         return new String[] {description, split};
     }
@@ -127,10 +127,10 @@ public class TaskManager {
      *
      * @param taskNumberString String format of the Task number to delete
      * @return completed Task
-     * @throws TaskManagerException if String cannot be parsed into an integer or
+     * @throws DukeException if String cannot be parsed into an integer or
      * the Task number is not valid
      */
-    public Task markTaskAsDone(String taskNumberString) throws TaskManagerException {
+    public Task markTaskAsDone(String taskNumberString) throws DukeException {
         Task selectedTask = getTaskFromNumberString(taskNumberString);
         selectedTask.markAsDone();
         return selectedTask;
@@ -141,10 +141,10 @@ public class TaskManager {
      *
      * @param taskNumberString String format of the Task number to delete
      * @return Task to delete
-     * @throws TaskManagerException if String cannot be parsed into an integer or
+     * @throws DukeException if String cannot be parsed into an integer or
      * the Task number is not valid
      */
-    public Task deleteTask(String taskNumberString) throws TaskManagerException {
+    public Task deleteTask(String taskNumberString) throws DukeException {
         Task selectedTask = getTaskFromNumberString(taskNumberString);
         TASK_LIST.remove(selectedTask); // remove shifts tasks to the right backwards
         return selectedTask;
@@ -155,12 +155,12 @@ public class TaskManager {
      *
      * @param taskNumberString String format of the Task number to obtain
      * @return associated Task
-     * @throws TaskManagerException if String cannot be parsed into an integer or
+     * @throws DukeException if String cannot be parsed into an integer or
      * the Task number is not valid
      */
-    public Task getTaskFromNumberString(String taskNumberString) throws TaskManagerException {
+    public Task getTaskFromNumberString(String taskNumberString) throws DukeException {
         if (TASK_LIST.isEmpty()) {
-            throw new TaskManagerException("Unable to perform action as list is empty.");
+            throw new DukeException("Unable to perform action as list is empty.");
         }
 
         int taskNumber;
@@ -170,10 +170,10 @@ public class TaskManager {
                 throw new IllegalArgumentException();
             }
         } catch (NumberFormatException exception) {
-            throw new TaskManagerException("'" + taskNumberString + "' is not an integer.");
+            throw new DukeException("'" + taskNumberString + "' is not an integer.");
 
         } catch (IllegalArgumentException exception) {
-            throw new TaskManagerException("Task number '" + taskNumberString + "' is invalid.");
+            throw new DukeException("Task number '" + taskNumberString + "' is invalid.");
         }
 
         return TASK_LIST.get(taskNumber - 1); // shift to 0-indexing

@@ -1,4 +1,4 @@
-import exception.TaskManagerException;
+import exception.DukeException;
 import service.ChatBot;
 import service.TaskManager;
 import task.Task;
@@ -90,7 +90,7 @@ public class Duke {
                 chatBot.error("Please ensure instruction follows specified format.");
             }
 
-        } catch (TaskManagerException exception) {
+        } catch (DukeException exception) {
             chatBot.error(exception.getLocalizedMessage());
         }
     }
