@@ -25,3 +25,11 @@ what
 blahh
 list
 done wh
+delete 3
+delete 2
+delete
+delete2
+delteeda
+deleted
+event example
+deadline submission

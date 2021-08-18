@@ -11,7 +11,6 @@ Hello from
      _______________________________________________________
 list
      _______________________________________________________
-     The current list has these items:
      There are no items in your list, keep adding them!
      _______________________________________________________
 todo read book
@@ -36,8 +35,12 @@ todo join sports club
      _______________________________________________________
 tod test run
      _______________________________________________________
-     Invalid input :(
-     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
      _______________________________________________________
 done 1
      _______________________________________________________
@@ -89,40 +92,72 @@ list
 event typing code /at 
      _______________________________________________________
      Oh no, date is missing :(
-     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
      _______________________________________________________
 deadline what ds /by
      _______________________________________________________
-     Uh oh, deadline is missing :(
-     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     Uh oh, due-date is missing :(
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
      _______________________________________________________
 todo
      _______________________________________________________
-     Oops, you have left out the task description!
-     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     Oops, you have left out the task description for todo!
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
      _______________________________________________________
 done
      _______________________________________________________
+     Note: 'list' can be used to see the current tasks.
      Please input index :)
      _______________________________________________________
 deadline
      _______________________________________________________
-     Oops, you have left out the task description!
-     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     Hey, no deadline recorded does not mean no deadline >:(
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
      _______________________________________________________
 event
      _______________________________________________________
-     Oops, you have left out the task description!
-     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     I can't add an event without a date!
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
      _______________________________________________________
 done 11
      _______________________________________________________
-     You must've forgotten, please input index :)
+     Please input a valid index :)
+     Note: 'list' can be used to see the current tasks.
      _______________________________________________________
 done1
      _______________________________________________________
      Invalid input :(
-     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
      _______________________________________________________
 done 1
      _______________________________________________________
@@ -132,17 +167,32 @@ done 1
 huh
      _______________________________________________________
      Invalid input :(
-     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
      _______________________________________________________
 what
      _______________________________________________________
      Invalid input :(
-     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
      _______________________________________________________
 blahh
      _______________________________________________________
      Invalid input :(
-     Please input in the form: <Type of Task> <Name of Task> and include keyword '/at' OR '/by' with date if relevant.
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
      _______________________________________________________
 list
      _______________________________________________________
@@ -159,4 +209,62 @@ list
 done wh
      _______________________________________________________
      Please use a number instead :(
+     _______________________________________________________
+delete 3
+     _______________________________________________________
+     Noted, the following task has been deleted: 
+       [E][ ] project meeting (at: Aug 6th 2-4pm)
+     Nice! there are 6 tasks left.
+     _______________________________________________________
+delete 2
+     _______________________________________________________
+     Noted, the following task has been deleted: 
+       [D][ ] return book (by: June 6th)
+     Nice! there are 5 tasks left.
+     _______________________________________________________
+delete
+     _______________________________________________________
+     Unable to delete task without an index. Please input index :)
+     Please input in the form: 'delete <task index>'.
+     Note: 'list' can be used to see the current tasks.
+     _______________________________________________________
+delete2
+     _______________________________________________________
+     Invalid input :(
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
+     _______________________________________________________
+delteeda
+     _______________________________________________________
+     Invalid input :(
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
+     _______________________________________________________
+deleted
+     _______________________________________________________
+     Invalid input :(
+     Types of tasks: 'todo', 'deadline', 'event'.
+     If you wish to add a task:  Please input in the form: '<Type of Task> <Name of Task>' and include keyword '/at' OR '/by' followed by <Date> if relevant.
+     If you wish to delete a task: Please input in the form: 'delete <task index>'.
+     If you wish to see the current tasks, please input 'list'.
+     If you wish to mark a task as done, please input 'done <task index>.'
+     If you wish to terminate the program, please input 'bye'.
+     _______________________________________________________
+event example
+     _______________________________________________________
+     Invalid input :(
+     Please input in the form: 'event <Name> /at <Date>'.
+     _______________________________________________________
+deadline submission
+     _______________________________________________________
+     Invalid input :(
+     Please input in the form: 'deadline <Name> /by <Date>'.
      _______________________________________________________

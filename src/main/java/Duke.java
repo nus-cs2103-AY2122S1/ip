@@ -63,6 +63,7 @@ public class Duke {
         } else if (words[0].equalsIgnoreCase("done")) {
             try {
                 if (words.length == 1) {
+                    System.out.println("     Note: 'list' can be used to see the current tasks.");
                     throw new IllegalArgumentException("Please input index :)");
                 }
                 int index = Integer.parseInt(words[1]) - 1;
@@ -71,7 +72,8 @@ public class Duke {
                     throw new IllegalArgumentException("No such index. Please input correct index, no such index :(");
                 }
             } catch (IndexOutOfBoundsException e) {
-                    System.out.println("     You must've forgotten, please input index :)");
+                    System.out.println("     Please input a valid index :)");
+                    System.out.println("     Note: 'list' can be used to see the current tasks.");
             } catch (NumberFormatException e) {
                 System.out.println("     Please use a number instead :(");
             } catch (IllegalArgumentException e) {
@@ -81,8 +83,8 @@ public class Duke {
         } else if (words[0].equalsIgnoreCase("delete")) {
             if (words.length == 1) {
                 System.out.println("     Unable to delete task without an index. Please input index :)");
-                System.out.println("     Please input in the form: delete <task index>.");
-                System.out.println("     Note: list can be used to see the current tasks.");
+                System.out.println("     Please input in the form: 'delete <task index>'.");
+                System.out.println("     Note: 'list' can be used to see the current tasks.");
             } else {
                 if (tasks.isEmpty() || tasks == null) {
                     System.out.println("     List is empty, no tasks to delete, looking good!");
@@ -101,8 +103,16 @@ public class Duke {
             try {
                 createTask(words);
             } catch (IllegalArgumentException e) {
-                System.out.println("     " + e.getMessage());
-                helperMessage();
+                if (e.getMessage().equals("deadline")) {
+                    System.out.println("     Invalid input :(");
+                    System.out.println("     Please input in the form: 'deadline <Name> /by <Date>'.");
+                } else if (e.getMessage().equals("event")) {
+                    System.out.println("     Invalid input :(");
+                    System.out.println("     Please input in the form: 'event <Name> /at <Date>'.");
+                } else {
+                    System.out.println("     " + e.getMessage());
+                    helperMessage();
+                }
             }
             return "";
         }
@@ -155,7 +165,6 @@ public class Duke {
             Event d = new Event(filterInfo(args), searchForEventDay(args));
             addTask(d);
         } else {
-            System.out.println("     Invalid input :(");
             helperMessage();
         }
     }
@@ -164,12 +173,12 @@ public class Duke {
      * To display commands to help user with input as much as possible
      */
     public static void helperMessage() {
+        System.out.println("     Types of tasks: 'todo', 'deadline', 'event'.");
         System.out.println("     If you wish to add a task: " +
-                " Please input in the form: <Type of Task> <Name of Task>" +
-                " and include keyword '/at' OR '/by' with date if relevant.");
-        System.out.println("     Types of tasks: todo, date, event");
+                " Please input in the form: '<Type of Task> <Name of Task>'" +
+                " and include keyword '/at' OR '/by' followed by <Date> if relevant.");
         System.out.println("     If you wish to delete a task:"
-                + " Please input in the form: delete <task index>.");
+                + " Please input in the form: 'delete <task index>'.");
         System.out.println("     If you wish to see the current tasks, please input 'list'.");
         System.out.println("     If you wish to mark a task as done, please input 'done <task index>.'");
         System.out.println("     If you wish to terminate the program, please input 'bye'.");
@@ -213,7 +222,7 @@ public class Duke {
                 }
             }
         }
-        throw new IllegalArgumentException("Please input in the form: <Event> <Name> /at <Date>.");
+        throw new IllegalArgumentException("event");
     }
 
     /**
@@ -230,13 +239,13 @@ public class Duke {
         for (int i = 1; i < arg.length; i++) {
             if (arg[i].equals("/by")) {
                 if  (i + 1 >= arg.length) {
-                    throw new IllegalArgumentException("Uh oh, deadline is missing :(");
+                    throw new IllegalArgumentException("Uh oh, due-date is missing :(");
                 } else {
                     return getDate(arg, i + 1);
                 }
             }
         }
-        throw new IllegalArgumentException("Please input in the form: <Deadline> <Name> /by <Date>.");
+        throw new IllegalArgumentException("deadline");
     }
 
     /**
