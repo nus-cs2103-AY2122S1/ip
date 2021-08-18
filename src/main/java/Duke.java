@@ -40,10 +40,22 @@ public class Duke {
         if (Message.indexOf("/") != -1) {
             task = Message.substring(Message.indexOf(" ") + 1, Message.indexOf("/") - 1);
 
-            if (Message.indexOf("/by") != -1) {
-                deadline = Message.substring(Message.indexOf("/by") + 3);
-            } else if (Message.indexOf("/at") != -1){
-                deadline = Message.substring(Message.indexOf("/at") + 3);
+            //throw exceptions for deadline or events' format.
+
+            if (Message.startsWith("deadline")) {
+                if (Message.indexOf("/by") != -1) {
+                    deadline = Message.substring(Message.indexOf("/by") + 3);
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but the format of deadline is wrong :-(");
+                }
+            } else if (Message.startsWith("event")) {
+                if (Message.indexOf("/at") != -1) {
+                    deadline = Message.substring(Message.indexOf("/at") + 3);
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but the format of event is wrong :-(");
+                }
+            } else {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but the format of todo is wrong :-(");
             }
         }
         else {
@@ -56,6 +68,7 @@ public class Duke {
             }
         }
 
+        //Time for deadlines or event cannot be empty.
         if ((Message.startsWith("event") || Message.startsWith("deadline")) && deadline.equals("")) {
             throw new DukeException("☹ OOPS!!! The time of a " + Message.substring(0, Message.indexOf(" ")) +" cannot be empty.");
         }
