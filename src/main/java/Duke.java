@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -6,9 +7,14 @@ public class Duke {
     private static final String LIndent = "    ";
     private static String nameOfRobot = "Duke";
     private static final String ExitWord = "bye";
+    private static final String ListWord = "list";
+
+
+    private static ArrayList<String> dukeList;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        dukeList = new ArrayList<String>();
 
         // print logo
         String logo = " ____        _        \n"
@@ -27,14 +33,24 @@ public class Duke {
         // Echo loop till exit word is entered
         for (;;) {
             String userInput = sc.nextLine();
+
+            // Check user input
             if (userInput.equals(ExitWord)) {
+                // Exit the robot
                 PrintWithIndent(HorizontalLine);
                 PrintWithIndent("Bye. Hope to see you again soon!");
                 PrintWithIndent(HorizontalLine);
                 break;
-            } else {
+            } else if (userInput.equals(ListWord)) {
+                // Print the list
                 PrintWithIndent(HorizontalLine);
-                PrintWithIndent(userInput);
+                PrintList();
+                PrintWithIndent(HorizontalLine);
+            } else{
+                // Echos and add user input to the list
+                PrintWithIndent(HorizontalLine);
+                dukeList.add(userInput);
+                PrintWithIndent("added: " + userInput);
                 PrintWithIndent(HorizontalLine);
             }
         }
@@ -42,5 +58,10 @@ public class Duke {
 
     public static void PrintWithIndent(String s) {
         System.out.println(LIndent + s);
+    }
+
+    public static void PrintList() {
+        for (int i = 0; i < dukeList.size(); i++)
+            PrintWithIndent(i + ". " + dukeList.get(i));
     }
 }
