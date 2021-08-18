@@ -42,4 +42,12 @@ public class Task {
     public void taskCompleted() {
         isDone = true;
     }
+
+    /**
+     * Returns the string representation of the Task.
+     * @return String representation of the Task.
+     */
+    public String toString() {
+        return "[" + this.getStatusIcon() + "]" + this.description;
+    }
 }

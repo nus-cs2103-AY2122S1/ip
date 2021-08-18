@@ -4,8 +4,8 @@ import java.util.Scanner;
  * The Duke class encapsulates the action of the chatbot Duke.
  */
 public class Duke {
-    /** Array to represent the to-do list. */
-    private TaskList toDoList;
+    /** Array to represent the tasklist. */
+    private TaskList taskList;
     /** Pointer to indicate the next position to store the task in the array. */
     private int nextSpaceToStore;
 
@@ -13,7 +13,7 @@ public class Duke {
      * Constructor to initialise the Duke chatbot.
      */
     private Duke() {
-        this.toDoList = new TaskList(100);
+        this.taskList = new TaskList(100);
         this.nextSpaceToStore = 0;
     }
 
@@ -32,13 +32,13 @@ public class Duke {
             System.out.println("-------------------------------------------------------------------");
             if (description.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
-                toDoList.list();
+                taskList.list();
             } else if (description.startsWith("done")) {
                 String taskNo = description.substring(5);
                 System.out.println("Nice! I've marked this task as done:");
-                toDoList.done(Integer.parseInt(taskNo));
+                taskList.done(Integer.parseInt(taskNo));
             } else {
-                toDoList.store(currTask);
+                taskList.store(currTask);
                 System.out.println("added: " + description);
             }
             System.out.println("-------------------------------------------------------------------");
