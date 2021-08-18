@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class DukeCore {
@@ -48,8 +50,8 @@ public class DukeCore {
             listTasks();
         } else if (input.startsWith("todo")) {
             try {
-                String description = parseTodo(input);
-                addTask(new Todo(description));
+                Task t = parseTodo(input);
+                addTask(t);
             } catch (DukeException e) {
                 String errorMessage = e.getMessage();
                 if (errorMessage.equals("wrong input format")) {
@@ -60,8 +62,8 @@ public class DukeCore {
             }
         } else if (input.startsWith("deadline")) {
             try {
-                String[] taskDetails = parseDeadline(input);
-                addTask(new Deadline(taskDetails[0], taskDetails[1]));
+                Task t = parseDeadline(input);
+                addTask(t);
             } catch (DukeException e) {
                 String errorMessage = e.getMessage();
                 switch (errorMessage) {
@@ -74,12 +76,15 @@ public class DukeCore {
                 case "empty deadline by":
                     displayText(space + "☹ OOPS!!! The deadline of a deadline cannot be empty.");
                     break;
+                case "wrong deadline format":
+                    displayText(space + "☹ OOPS!!! The deadline is in the wrong format.");
+                    break;
                 }
             }
         } else if (input.startsWith("event")) {
             try {
-                String[] taskDetails = parseEvent(input);
-                addTask(new Event(taskDetails[0], taskDetails[1]));
+                Task t = parseEvent(input);
+                addTask(t);
             } catch (DukeException e) {
                 String errorMessage = e.getMessage();
                 switch (errorMessage) {
@@ -121,7 +126,7 @@ public class DukeCore {
         return true;
     }
 
-    public String parseTodo(String s) throws DukeException {
+    public Todo parseTodo(String s) throws DukeException {
         String temp;
         try {
             if (s.charAt(4) != ' ') {
@@ -135,13 +140,14 @@ public class DukeCore {
         if (temp.equals("")) {
             throw new DukeException("empty todo description");
         }
-        return temp;
+        return new Todo(temp);
     }
 
-    public String[] parseDeadline(String s) throws DukeException {
+    public Deadline parseDeadline(String s) throws DukeException {
         String temp;
         String description;
         String by;
+        LocalDate deadline;
 
         try {
             if (s.charAt(8) != ' ') {
@@ -176,11 +182,17 @@ public class DukeCore {
             if (by.equals("")) {
                 throw new DukeException("empty deadline by");
             }
+
+            try {
+                deadline = LocalDate.parse(by);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("wrong deadline format");
+            }
         }
-        return new String[]{description, by};
+        return new Deadline(description, deadline);
     }
 
-    public String[] parseEvent(String s) {
+    public Event parseEvent(String s) {
         String temp;
         String description;
         String at;
@@ -219,7 +231,7 @@ public class DukeCore {
                 throw new DukeException("empty event at");
             }
         }
-        return new String[]{description, at};
+        return new Event(description, at);
     }
 
     public void addTask(Task t) {
