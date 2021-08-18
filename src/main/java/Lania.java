@@ -27,7 +27,7 @@ public class Lania {
     public static void list() {
         System.out.println("You have the following task(s):");
         for (int i = 0; i < count; i++) {
-            System.out.println(i + 1 + ".[" + taskArray[i].getStatusIcon() + "] " + taskArray[i].description);
+            System.out.println(i + 1 + "." + taskArray[i]);
         }
     }
 
@@ -40,7 +40,7 @@ public class Lania {
         i--;
         taskArray[i].markAsDone();
         System.out.println("Good job! Lania has marked this task as done:");
-        System.out.println("[" + taskArray[i].getStatusIcon() + "] " + taskArray[i].description);
+        System.out.println(taskArray[i]);
     }
 
     /**
@@ -66,16 +66,14 @@ public class Lania {
             String[] split = input.split(" ");
             if (split[0].equals("done")) {
                 complete(Integer.parseInt(split[1]));
-                input = s.nextLine();
             } else {
                 if (input.equals("list")) {
                     list();
-                    input = s.nextLine();
                 } else {
                     update(input);
-                    input = s.nextLine();
                 }
             }
+            input = s.nextLine();
         }
         System.out.println("Bye. Lania looks forward to seeing you again!");
     }
