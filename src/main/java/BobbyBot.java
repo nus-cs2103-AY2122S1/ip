@@ -7,7 +7,7 @@ public class BobbyBot {
     private static final List<Task> tasks = new ArrayList<Task>();
     private static final String div = "____________________________________________________________\n";
     private static int totalTasks = 0;
-    private static final String[] acceptedCommands = {"bye", "list", "done", "deadline", "todo", "event"};
+    private static final String[] acceptedCommands = {"bye", "list", "done", "deadline", "todo", "event", "delete"};
 
     public BobbyBot() {
         System.out.println(div + "Hello! I'm Bobby\nWhat can I do for you?\n" + div);
@@ -39,6 +39,13 @@ public class BobbyBot {
             break;
         case "done":
             markAsDone(Integer.parseInt(userInputList.get(1)));
+            break;
+        case "delete":
+            // check delete argument
+            if (!isNumeric(userInputList.get(1))) {
+                throw new InvalidArgumentException("Delete argument is not numeric");
+            }
+            deleteTask(Integer.parseInt(userInputList.get(1)));
             break;
         case "todo":
             userInputList.remove(0);
@@ -131,8 +138,21 @@ public class BobbyBot {
         System.out.println("  " + taskCompleted + "\n" + div);
     }
 
+    /**
+     * Delete a task
+     * @param taskNo Task Number (starting from index 1)
+     */
     private void deleteTask(int taskNo) {
-        tasks.remove(taskNo-1);
+        if (taskNo > tasks.size() || taskNo < 1) {
+            System.out.println("Cannot find task! Use list command to see available tasks");
+            return;
+        }
+        Task taskToDelete = tasks.get(taskNo - 1);
+        System.out.println(div + "Noted. I've removed this task:");
+        System.out.println("  " + taskToDelete);
+        tasks.remove(taskToDelete);
+        totalTasks--;
+        System.out.println("Now you have " + totalTasks + " tasks in the list.\n" + div);
     }
     /**
      * Creates a todo task
@@ -167,5 +187,14 @@ public class BobbyBot {
         totalTasks++;
         System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
                 + "Now you have " + totalTasks + " tasks in the list.\n" + div);
+    }
+
+    /**
+     * Helper function to check if string is numeric
+     * @param str string to test if numeric
+     * @return boolean
+     */
+    public static boolean isNumeric(String str) {
+        return str.matches("-?\\d+(\\.\\d+)?");
     }
 }
