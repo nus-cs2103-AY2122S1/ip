@@ -9,7 +9,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Scanner input = new Scanner(System.in);
-        String[] storedInfo = new String[100];
+        Task[] storedInfo = new Task[100];
         int count = 0;
         while (input.hasNextLine()) {
             String in = input.nextLine();
@@ -17,15 +17,19 @@ public class Duke {
                 break;
             }
             if (in.equals("list") || in.equals("List")) {
-                for (String item: storedInfo) {
+                int counter = 1;
+                for (Task item: storedInfo) {
+
                     if(item != null) {
-                        System.out.println(item);
+                        System.out.println(counter + ". " + item.toString());
+                        counter++;
                     }
+
                 }
                 continue;
             }
                 System.out.println("added: " + in);
-                storedInfo[count] = in;
+                storedInfo[count] = new Task(in);
                 count++;
 
             }
