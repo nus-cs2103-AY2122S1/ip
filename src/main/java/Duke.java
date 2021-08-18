@@ -31,11 +31,11 @@ public class Duke {
                     
                 } else if (text.split(" ")[0].equals("done")) { // done function: sets a task to done
                     if (text.split(" ").length == 1) {
-                        throw new DukeException("invalidDone");
+                        throw new DukeException(DukeExceptionType.INVALIDDONE);
                     } else {
                         int toSet = Integer.parseInt(text.split(" ")[1]);
                         if (toSet > listLength || toSet < 1) {
-                            throw new DukeException("invalidDone");
+                            throw new DukeException(DukeExceptionType.INVALIDDONE);
                         } else {
                             taskList.get(toSet - 1).setDone();
                             System.out.print("  Nice! I've marked this task as done:\n    " + 
@@ -45,11 +45,11 @@ public class Duke {
 
                 } else if (text.split(" ")[0].equals("delete")) { // delete function: delete a task
                     if (text.split(" ").length == 1) {
-                        throw new DukeException("invalidDelete");
+                        throw new DukeException(DukeExceptionType.INVALIDDELETE);
                     } else {
                         int toDelete = Integer.parseInt(text.split(" ")[1]);
                         if (toDelete > listLength || toDelete < 1) {
-                            throw new DukeException("invalidDelete");
+                            throw new DukeException(DukeExceptionType.INVALIDDELETE);
                         } else {
                             Task deleted = taskList.remove(toDelete - 1);
                             System.out.print("  Noted. I've removed this task:\n    " + deleted.listEntry() +
@@ -61,16 +61,16 @@ public class Duke {
                     if (text.split(" ").length == 1) { // task details not given or not valid task
                         switch (text) {
                             case "deadline":
-                                throw new DukeException("deadlineDesc");
+                                throw new DukeException(DukeExceptionType.DEADLINEDESC);
 
                             case "event":
-                                throw new DukeException("eventDesc");
+                                throw new DukeException(DukeExceptionType.EVENTDESC);
 
                             case "todo":
-                                throw new DukeException("todoDesc");
+                                throw new DukeException(DukeExceptionType.TODODESC);
 
                             default:
-                                throw new DukeException("invalidInput");
+                                throw new DukeException(DukeExceptionType.INVALIDINPUT);
                         }
 
                     } else {
@@ -87,7 +87,7 @@ public class Duke {
                                 String[] details = taskDetails.split(" /by ");
                                 
                                 if (details.length == 1) { // time of deadline not given
-                                    throw new DukeException("deadlineTime");
+                                    throw new DukeException(DukeExceptionType.DEADLINETIME);
                                 } else {
                                     newTask = new Deadline(details[0], details[1]);
                                 }
@@ -98,7 +98,7 @@ public class Duke {
                                 String[] details = taskDetails.split(" /at ");
                                 
                                 if (details.length == 1) { // period of event not given
-                                    throw new DukeException("eventPeriod");
+                                    throw new DukeException(DukeExceptionType.EVENTPERIOD);
                                 } else {
                                     newTask = new Event(details[0], details[1]);
                                 }
@@ -110,7 +110,7 @@ public class Duke {
                                 break;
                                 
                             default:  // taskName is invalid
-                                throw new DukeException("invalidInput");
+                                throw new DukeException(DukeExceptionType.INVALIDINPUT);
                         }
                         // add task to taskList
                         taskList.add(listLength++, newTask);
@@ -123,7 +123,7 @@ public class Duke {
                 System.out.println(e.getMessage());
 
             } catch (NumberFormatException e) { // NFE throws if the index given in the done function is not an integer
-                System.out.println(new DukeException("invalidDone").getMessage());
+                System.out.println(new DukeException(DukeExceptionType.INVALIDDONE).getMessage());
                 
             } finally {
                 System.out.println("  ____________________________________________________________\n");
