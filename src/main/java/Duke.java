@@ -6,29 +6,43 @@ public class Duke {
     //for sentences
     private static String ind2 = "     ";
     private static String div = ind + "____________________________________________________________";
-    private static String END = "bye";
-    private static String LIST = "list";
-    private static String DONE = "done";
-    private static String DELETE = "delete";
+
+    private enum KeyWord {
+        END("bye"),
+        DELETE("delete"),
+        LIST("list"),
+        DONE("done");
+
+        private final String k;
+
+        KeyWord(String k) {
+            this.k = k;
+        }
+
+        public String getK() {
+            return k;
+        }
+    }
+
     public static void main(String[] args) {
         greeting();
         Scanner sc = new Scanner(System.in);
         Tasks myTasks = new Tasks();
         while (sc.hasNext()) {
             String next = sc.nextLine();
-            if (next.equals(END)) {
+            if (next.equals(KeyWord.END.getK())) {
                 myPrint("Bye. Hope to see you again soon!");
                 break;
-            } else if (next.equals(LIST)) {
+            } else if (next.equals(KeyWord.LIST.getK())) {
                 myTasks.printTasks();
-            } else if (next.length() > 3 && next.substring(0, 4).equals(DONE)) {
+            } else if (next.length() > 3 && next.substring(0, 4).equals(KeyWord.DONE.getK())) {
                 if (next.length() > 5) {
                    mainDone(next, myTasks);
                 } else {
                     System.out.println(div + "\n" + ind2 + "☹ OOPS!!! Please enter a valid number, such as done 3" + "\n" + div);
                 }
 
-            } else if (next.length() > 5 && next.substring(0, 6).equals(DELETE)) {
+            } else if (next.length() > 5 && next.substring(0, 6).equals(KeyWord.DELETE.getK())) {
                 if (next.length() > 7) {
                     mainDelete(next, myTasks);
                 } else {
