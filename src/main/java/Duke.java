@@ -40,28 +40,33 @@ public class Duke {
                 int idx = Integer.parseInt(scanner.next()) - 1;
                 tasklist.getTask(idx).setStatus(true);
             } else if (cmd.equals("todo")) {
+
                 String input = scanner.nextLine();
-                Todo task = new Todo(input, false);
+                Task task = Task.parseStringIntoTask(input, "", "TODO");
                 tasklist.add(task);
             } else if (cmd.equals("deadline")) {
+
                 String input = scanner.nextLine();
-                String[] nameNTime = input.split("/by ");
-                String name = nameNTime[0];
-                String deadline = nameNTime[1];
-                Deadline task = new Deadline(name, false, deadline);
+                Task task = Task.parseStringIntoTask(input, "/by ", "DEADLINE");
                 tasklist.add(task);
             } else if (cmd.equals("event")) {
+
                 String input = scanner.nextLine();
-                String[] nameNTime = input.split("/at ");
-                String name = nameNTime[0];
-                String event = nameNTime[1];
-                Event task = new Event(name, false, event);
+                Task task = Task.parseStringIntoTask(input, "/at ", "EVENT");
                 tasklist.add(task);
+
+            } else if (cmd.equals("delete")) {
+                int removedIdx = Integer.parseInt(scanner.nextLine().trim());
+                tasklist.delete(removedIdx);
             } else {
-                System.out.println("Wrong input.");
-                System.out.println(breakline);
-            }
-        } while (!cmd.equals(exitCmd));
+                    try {
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means");
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println(breakline);
+                    }
+                }
+            } while (!cmd.equals(exitCmd));
     }
 }
 
