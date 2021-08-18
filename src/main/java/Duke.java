@@ -74,6 +74,18 @@ public class Duke {
         displayAddedTask(newTodo);
     }
 
+    private static void deleteTask(String userInput) {
+        String[] inputArray = userInput.split(" ");
+        Task removedTask = taskList.remove(Integer.parseInt(inputArray[1]) - 1);
+        lineSpacing();
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(removedTask);
+        System.out.println(String.format("Now you have %d tasks in the list.", taskList.size()));
+        lineSpacing();
+    }
+
+
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -114,6 +126,11 @@ public class Duke {
 
                 if (userInput.startsWith(("todo"))) {
                     addTodo(userInput);
+                    continue;
+                }
+
+                if (userInput.startsWith("delete")) {
+                    deleteTask(userInput);
                     continue;
                 }
 
