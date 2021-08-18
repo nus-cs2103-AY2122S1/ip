@@ -109,6 +109,29 @@ public class TDList {
         }
     }
 
+    /**
+     * Used to delete tasks from the list.
+     *
+     * @param taskNo The task number to delete.
+     *
+     * @return Duke's output from this command
+     *
+     * @throws DukeExceptionBase when an invalid task is specified.
+     */
+    public String deleteTask(int taskNo) throws DukeExceptionBase {
+        int taskIndex = taskNo - 1;
+
+        if (taskIndex >= 0 && taskIndex < toDoList.size()) {
+            TDLTask currTask = toDoList.get(taskIndex);
+
+            toDoList.remove(taskIndex);
+            return "Ok, this task has been removed:\n" + currTask.getLineOfTaskInfo()
+                    + "\nCurrent total amount of tasks in list: " + toDoList.size();
+        } else {
+            throw new DukeExceptionBase("Invalid Task Specified");
+        }
+    }
+
 
     /**
      * Used to print out contents of the list nicely.
