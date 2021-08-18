@@ -36,7 +36,6 @@ public class Duke {
             return false;
         } else {
             lst.addItem(input);
-//            System.out.println(input); Level 1
             return false;
         }
     }
