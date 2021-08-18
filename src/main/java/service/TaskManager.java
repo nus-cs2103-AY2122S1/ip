@@ -16,14 +16,12 @@ import java.util.List;
  */
 public class TaskManager {
 
-    /** Error messages. */
-
+    // Error message formats.
     private static final String INVALID_TASK_ERROR_MESSAGE = "Task number '%d' is invalid.";
     private static final String FULL_CAPACITY_ERROR_MESSAGE = "Unable to execute as list is full.";
     private static final String EMPTY_LIST_ERROR_MESSAGE = "Unable to execute as list is empty.";
 
-    /** Output messages for tasks. */
-
+    // Output message formats.
     private static final String EMPTY_LIST_MESSAGE = "List is empty, try adding some tasks first.";
     private static final String TASK_DONE_MESSAGE = "Nice! I've marked this task as done:\n\t%s";
     private static final String TASK_LIST_CONTENTS = "Here are the task(s) in your list:";
@@ -35,7 +33,6 @@ public class TaskManager {
             "Got it. I've added this EVENT task:\n\t%s\nNow you have %d task(s) in the list.";
     private static final String CREATE_DEADLINE_MESSAGE =
             "Got it. I've added this DEADLINE task:\n\t%s\nNow you have %d task(s) in the list.";
-
 
     private final static int MAX_STORAGE = 100;
 
@@ -73,6 +70,8 @@ public class TaskManager {
      * @throws DukeException if task list is full
      */
     public String addToDoTask(String userParams) throws DukeException {
+        assert (!userParams.isBlank());
+
         Todo todo = new Todo(userParams); // desc
         Task task = addTask(todo);
         return String.format(CREATE_TODO_MESSAGE, task, getTaskListSize());
@@ -86,6 +85,8 @@ public class TaskManager {
      * @throws DukeException if task list is full
      */
     public String addEventTask(String[] userParams) throws DukeException {
+        assert (userParams.length == 2);
+
         Event event = new Event(userParams[0], userParams[1]); // desc, timing
         Task task = addTask(event);
         return String.format(CREATE_EVENT_MESSAGE, task, getTaskListSize());
@@ -99,20 +100,22 @@ public class TaskManager {
      * @throws DukeException if task list is full
      */
     public String addDeadlineTask(String[] userParams) throws DukeException {
+        assert (userParams.length == 2);
+
         Deadline deadline = new Deadline(userParams[0], userParams[1]); // desc, by
         Task task = addTask(deadline);
         return String.format(CREATE_DEADLINE_MESSAGE, task, getTaskListSize());
     }
 
     /**
-     * Marks a Task completed based on the input Task number fed as a String.
+     * Update a Task completed based on the input Task number fed as a String.
      * Provides an output message on return.
      *
      * @param taskNumber String format of the Task number to delete
      * @return String message of successful completion marking of Task
      * @throws DukeException if the Task number is not valid
      */
-    public String markTaskAsDone(int taskNumber) throws DukeException {
+    public String updateTaskAsDone(int taskNumber) throws DukeException {
         Task selectedTask = getTaskFromNumberString(taskNumber);
         selectedTask.markAsDone();
         return String.format(TASK_DONE_MESSAGE, selectedTask);
@@ -143,7 +146,7 @@ public class TaskManager {
         if (TASK_LIST.isEmpty()) {
             throw new DukeException(EMPTY_LIST_ERROR_MESSAGE);
         }
-        if (taskNumber < 0 || TASK_LIST.size() < taskNumber) {
+        if (taskNumber <= 0 || TASK_LIST.size() < taskNumber) {
             throw new DukeException(String.format(INVALID_TASK_ERROR_MESSAGE, taskNumber));
         }
         return TASK_LIST.get(taskNumber - 1); // shift to 0-indexing
@@ -158,14 +161,10 @@ public class TaskManager {
         if (TASK_LIST.isEmpty()) {
             return EMPTY_LIST_MESSAGE;
         }
-        StringBuilder taskManagerStringList = new StringBuilder();
-        taskManagerStringList.append(TASK_LIST_CONTENTS);
-
+        StringBuilder tasksAsString = new StringBuilder(TASK_LIST_CONTENTS);
         for (int idx = 0; idx < TASK_LIST.size(); idx ++) {
-            Task task = TASK_LIST.get(idx);
-            int taskNumber = idx + 1; // shift to 1-indexing
-            taskManagerStringList.append(String.format("\n\t%d. %s", taskNumber, task));
+            tasksAsString.append(String.format("\n\t%d. %s", idx + 1, TASK_LIST.get(idx)));
         }
-        return taskManagerStringList.toString();
+        return tasksAsString.toString();
     }
 }
