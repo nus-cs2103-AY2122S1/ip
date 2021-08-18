@@ -23,8 +23,6 @@ public class Virushade {
         lineBreak();
     }
 
-
-
     /**
      * The echo function that Virushade uses. Echoes whatever words that Virushade is given.
      * @param wordToEcho The word provided by the user for Virushade to echo.
@@ -43,21 +41,6 @@ public class Virushade {
     }
 
     /**
-     * @return The first word of a given string.
-     */
-    private static String firstWord(String str) {
-        int index = str.indexOf(' ');
-
-        if (index > -1) {
-            // If there exists ' ' in the string, take out the first word only.
-            return str.substring(0, index).trim();
-        } else {
-            // If there exists no ' ' in the string, return the entire string.
-            return str;
-        }
-    }
-
-    /**
      * The running sequence for Virushade.
      */
     public static void run() {
@@ -67,20 +50,27 @@ public class Virushade {
 
         while(sc.hasNextLine()) {
             String str = sc.nextLine();
+
             if (str.equals("bye")) {
                 break;
             } else if (str.equals("list")) {
                 TaskList.list();
-            } else if (firstWord(str).equals("done")) {
-                TaskList.completeTask(str);
+            } else if (str.startsWith("done ")) {
+                TaskList.completeTask(str.substring(5));
+            } else if (str.startsWith("todo ")) {
+                TaskList.add(str.substring(5), "TODO");
+            } else if (str.startsWith("deadline ")) {
+                TaskList.add(str.substring(9), "DEADLINE");
+            } else if (str.startsWith("event ")) {
+                TaskList.add(str.substring(6), "EVENT");
             } else {
-                TaskList.add(str);
+                TaskList.add(str, "");
             }
+
             lineBreak();
         }
 
         sc.close();
-
         exit();
     }
 

@@ -1,7 +1,7 @@
 public class Task {
 
     private boolean isDone;
-    private String taskDescription;
+    private final String taskDescription;
 
     /**
      * Constructor for a task.
@@ -30,12 +30,10 @@ public class Task {
     }
 
     /**
-     * A string representation of the task,
-     * the status of completion and task name are provided in here.
-     *
      * @return The string representation for the task.
      */
+    @Override
     public String toString() {
-        return isDone ? "[x] " + taskDescription : "[ ] " + taskDescription;
+        return "[" + (isDone ? "x" : " ") + "] " + taskDescription;
     }
 }
