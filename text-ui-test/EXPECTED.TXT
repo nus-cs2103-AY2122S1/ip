@@ -1,19 +1,37 @@
 Ailurus: Hello! I'm Ailurus. What can I do for you?
-You: Ailurus: added: Go grocery shopping
+You: Ailurus: ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+You: Ailurus: ☹ OOPS!!! No items in list!
+You: Ailurus: ☹ OOPS!!! Not a number.
+You: Ailurus: ☹ OOPS!!! Not a number.
+You: Ailurus: ☹ OOPS!!! Invalid number used.
+You: Ailurus: ☹ OOPS!!! Invalid number used.
+You: Ailurus: ☹ OOPS!!! Invalid number used.
+You: Ailurus: ☹ OOPS!!! The description of a todo cannot be empty.
 You: Ailurus: Got it. I've added this task:
-	[T][ ]CS1101S studio worksheet
-Now you have 2 tasks in the list.
+	[T][ ]Go grocery shopping
+Now you have 1 tasks in the list.
+You: Ailurus: ☹ OOPS!!! The description of a deadline cannot be empty.
+You: Ailurus: ☹ OOPS!!! The description of a deadline cannot be empty.
+You: Ailurus: ☹ OOPS!!! The description of /by cannot be empty.
+You: Ailurus: ☹ OOPS!!! The description of a deadline cannot be empty.
 You: Ailurus: Got it. I've added this task:
 	[D][ ]CS2103T ip week 2 (by: 19/08/2021)
-Now you have 3 tasks in the list.
+Now you have 2 tasks in the list.
+You: Ailurus: ☹ OOPS!!! The description of an event cannot be empty.
+You: Ailurus: ☹ OOPS!!! The description of an event cannot be empty.
+You: Ailurus: ☹ OOPS!!! The description of /at cannot be empty.
+You: Ailurus: ☹ OOPS!!! The description of an event cannot be empty.
 You: Ailurus: Got it. I've added this task:
 	[E][ ]CS2103T lecture (at: Friday 4-6pm)
-Now you have 4 tasks in the list.
-You: Ailurus: Nice! I've marked this task as done:
-	[T][X]CS1101S studio worksheet
+Now you have 3 tasks in the list.
 You: Ailurus: 
-1.[ ]Go grocery shopping
-2.[T][X]CS1101S studio worksheet
-3.[D][ ]CS2103T ip week 2 (by: 19/08/2021)
-4.[E][ ]CS2103T lecture (at: Friday 4-6pm)
+1.[T][ ]Go grocery shopping
+2.[D][ ]CS2103T ip week 2 (by: 19/08/2021)
+3.[E][ ]CS2103T lecture (at: Friday 4-6pm)
+You: Ailurus: Nice! I've marked this task as done:
+	[D][X]CS2103T ip week 2 (by: 19/08/2021)
+You: Ailurus: 
+1.[T][ ]Go grocery shopping
+2.[D][X]CS2103T ip week 2 (by: 19/08/2021)
+3.[E][ ]CS2103T lecture (at: Friday 4-6pm)
 You: Ailurus: Bye. Hope to see you again soon!

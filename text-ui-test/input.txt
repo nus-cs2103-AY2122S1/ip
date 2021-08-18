@@ -1,7 +1,23 @@
 Go grocery shopping
-todo CS1101S studio worksheet
+list
+done
+done one
+done 1
+done 0
+done -99
+todo
+todo Go grocery shopping
+deadline
+deadline /by
+deadline CS2103T ip week 2 /by
+deadline /by 19/08/2021
 deadline CS2103T ip week 2 /by 19/08/2021
+event
+event /at
+event CS2103T lecture /at
+event /at Friday 4-6pm
 event CS2103T lecture /at Friday 4-6pm
+list
 done 2
 list
 bye
