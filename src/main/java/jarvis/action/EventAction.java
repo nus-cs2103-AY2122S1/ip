@@ -7,8 +7,8 @@ import jarvis.task.Event;
 import jarvis.task.TaskList;
 
 public class EventAction extends Action {
-    private final String eventDescription;
-    private final String eventTime;
+    private String eventDescription;
+    private String eventTime;
 
     public EventAction(String userInputWithoutActionTrigger) throws TaskDetailsEmptyException {
         String[] splitStrings = userInputWithoutActionTrigger.split("/at", 2);

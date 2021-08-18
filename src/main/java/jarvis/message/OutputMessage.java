@@ -1,7 +1,7 @@
 package jarvis.message;
 
 public class OutputMessage {
-    private final String message;
+    private String message;
 
     public OutputMessage(String message) {
         this.message = message;

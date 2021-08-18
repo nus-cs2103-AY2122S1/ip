@@ -7,7 +7,7 @@ import jarvis.task.TaskList;
 import jarvis.task.Todo;
 
 public class TodoAction extends Action {
-    private final String todoDescription;
+    private String todoDescription;
 
     public TodoAction(String todoDescription) throws TaskDetailsEmptyException {
         if (todoDescription.equals("")) {

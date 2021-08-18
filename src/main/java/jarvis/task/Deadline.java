@@ -1,7 +1,7 @@
 package jarvis.task;
 
 public class Deadline extends Task {
-    private final String deadline;
+    private String deadline;
 
     public Deadline(String description, String deadline) {
         super(description);

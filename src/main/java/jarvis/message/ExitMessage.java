@@ -1,10 +1,10 @@
 package jarvis.message;
 
 public class ExitMessage extends OutputMessage{
-    private static final String defaultExitMessage = "Bye Bye! I am always ready when you need me!";
+    private static final String DEFAULT_EXIT_MESSAGE = "Bye Bye! I am always ready when you need me!";
 
     public ExitMessage() {
-        super(ExitMessage.defaultExitMessage);
+        super(ExitMessage.DEFAULT_EXIT_MESSAGE);
     }
 
     public ExitMessage(String message) {

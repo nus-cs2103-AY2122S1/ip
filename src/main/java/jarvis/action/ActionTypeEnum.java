@@ -10,7 +10,7 @@ public enum ActionTypeEnum {
     LIST("list"),
     TODO("todo");
 
-    private final String actionTrigger;
+    private String actionTrigger;
 
     ActionTypeEnum(String actionTrigger) {
         this.actionTrigger = actionTrigger;

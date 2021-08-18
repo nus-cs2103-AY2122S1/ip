@@ -7,7 +7,7 @@ import jarvis.task.Task;
 import jarvis.task.TaskList;
 
 public class MarkAsDoneAction extends Action {
-    private final int taskIndex;
+    private int taskIndex;
 
     public MarkAsDoneAction(String userInputWithoutActionTrigger) throws JarvisException {
        try {

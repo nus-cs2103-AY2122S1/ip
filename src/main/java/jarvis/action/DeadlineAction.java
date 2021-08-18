@@ -7,8 +7,8 @@ import jarvis.task.Deadline;
 import jarvis.task.TaskList;
 
 public class DeadlineAction extends Action {
-    private final String taskDescription;
-    private final String deadline;
+    private String taskDescription;
+    private String deadline;
 
     public DeadlineAction(String userInputWithoutActionTrigger) throws TaskDetailsEmptyException {
         String[] splitStrings = userInputWithoutActionTrigger.split("/by", 2);

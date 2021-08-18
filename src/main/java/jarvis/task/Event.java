@@ -1,7 +1,7 @@
 package jarvis.task;
 
 public class Event extends Task {
-    private final String eventTime;
+    private String eventTime;
 
     public Event(String description, String eventTime) {
         super(description);
