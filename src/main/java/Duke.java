@@ -51,6 +51,16 @@ public class Duke {
                 "Nice! I've marked this task as done:",
                 "  " + renderTask(task)
             });
+        } else if (parameters[0].equals("delete") && parameters.length == 2) {
+            int i = Integer.parseInt(parameters[1]) - 1;
+            var task = tasks.get(i);
+            tasks.remove(i);
+
+            printBanner(new String[] {
+                "Noted. I've removed this task:",
+                "  " + renderTask(task),
+                String.format("Now you have %d tasks in the list.", tasks.size()),
+            });
         } else if (parameters[0].equals("todo")) {
             if (parameters.length == 1) {
                 throw new Exception("The description of a todo cannot be empty.");
