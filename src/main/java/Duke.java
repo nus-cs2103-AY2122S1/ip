@@ -23,35 +23,62 @@ public class Duke {
                 for (int i = 0; i < taskList.size(); i++) {
                     int currIndex = i + 1;
                     Task currTask = taskList.get(i);
-                    System.out.println(indent + currIndex + ". [" + currTask.getStatusIcon() + "] "
-                            + currTask.description);
+                    System.out.println(indent + currIndex + "." + currTask.toString());
                 }
                 System.out.println(divider);
             }
             //mark numbered task as done
-            else if (str.toLowerCase().contains("done")) {
-                int taskNo = Integer.parseInt(str.substring(5)) - 1;
+            if (str.toLowerCase().contains("done")) {
+                int taskNo = Integer.parseInt(str.substring(4).trim()) - 1;
                 //check if taskNo exists:
                 if (taskNo < taskList.size()) {
                     Task currTask = taskList.get(taskNo);
                     currTask.isDone = true;
                     System.out.println(indent + "Good job on completing your task!");
                     System.out.println(indent + "I've marked this task as done:");
-                    System.out.println(indent + "[" + currTask.getStatusIcon() + "] " + currTask.description);
+                    System.out.println(indent + currTask.toString());
                 }
                 else {
                     System.out.println(indent + "Sorry, this task does not exist. :(");
                 }
                 System.out.println(divider);
-
             }
-            else {
-                Task newTask = new Task(str);
-                taskList.add(newTask);
-                System.out.println(indent + "added: " + str);
+            //for todos:
+            if (str.toLowerCase().contains("todo")) {
+                String desc = str.substring(4).trim();
+                Todos addTodo = new Todos(desc);
+                taskList.add(addTodo);
+                //print out msg:
+                System.out.println(indent + "Ok! I have added this task to your list: ");
+                System.out.println(indent + "[T][ ] " + desc);
+                System.out.println("Now you have a total of " + taskList.size() + " task(s)!");
                 System.out.println(divider);
             }
-
+            //for deadline:
+            if (str.toLowerCase().contains("deadline")) {
+                String desc = str.substring(8).trim();
+                String[] stringParts = desc.split("/");
+                Deadlines addDeadline = new Deadlines(stringParts[0].trim(), stringParts[1].trim().substring(2).trim());
+                taskList.add(addDeadline);
+                //print out msg:
+                System.out.println(indent + "Oh no! A new deadline?! It's okay, you got this!");
+                System.out.println(indent + "I have added this deadline to your list: ");
+                System.out.println(indent + addDeadline);
+                System.out.println("Now you have a total of " + taskList.size() + " task(s)!");
+                System.out.println(divider);
+            }
+            //for events:
+            if (str.toLowerCase().contains("events")) {
+                String desc = str.substring(6).trim();
+                String[] stringParts = desc.split("/");
+                Events addEvent = new Events(stringParts[0].trim(), stringParts[1].trim().substring(2).trim());
+                taskList.add(addEvent);
+                //print out msg:
+                System.out.println(indent + "Ok! I have added this event to your list: ");
+                System.out.println(indent + addEvent);
+                System.out.println("Now you have a total of " + taskList.size() + " task(s)!");
+                System.out.println(divider);
+            }
             str = sc.nextLine();
         }
 
