@@ -1,3 +1,5 @@
+import javax.swing.plaf.synth.SynthTextAreaUI;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -21,11 +23,28 @@ public class Duke {
         // ask for user input
         Scanner in = new Scanner(System.in);
         String nextLine = in.nextLine();
+        ArrayList<String> storeRoom = new ArrayList<>();
+
         while (!nextLine.equals("bye")) {
+            if (nextLine.equals("list")) {
+                System.out.print("____________________________________________________________\n");
+                int counter = 1;
+                for (String item : storeRoom) {
+                    System.out.println(counter
+                            + ". "
+                            + item);
+                    counter ++;
+                }
+                System.out.println("____________________________________________________________\n");
+                nextLine = in.nextLine();
+                continue;
+            }
             String nextToPrint = "____________________________________________________________\n"
+                    + "added: "
                     + nextLine;
             System.out.println(nextToPrint);
             System.out.println("____________________________________________________________\n");
+            storeRoom.add(nextLine);
             nextLine = in.nextLine();
         }
 
