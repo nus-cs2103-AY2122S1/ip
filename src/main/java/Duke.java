@@ -44,49 +44,32 @@ public class Duke {
         public static void addCommand(String inputString) {
             String[] word = inputString.split(" ", 2);
             String command = word[0];
-            if (word.length < 2) {
-                switch (command) {
-                    case "todo": {
-                        System.out.println(noCommand1);
-                        break;
-                    }
-                    case "deadline": {
-                        System.out.println(noCommand2);
-                        break;
-                    }
-                    case "event": {
-                        System.out.println(noCommand3);
-                        break;
-                    }
-                    default:
-                        System.out.println("____________________________________________________________");
-                        System.out.println("There is no task command starting with : '" + command + "'!");
-                        System.out.println("The commands for setting tasks are : 'todo', 'deadline', and 'event'.");
-                        System.out.println("____________________________________________________________");
-                        break;
-                }
+            if(!command.equals("todo") && !command.equals("deadline") && !command.equals("event")) {
+                System.out.println("____________________________________________________________");
+                System.out.println("There is no task command starting with : '" + command + "'!");
+                System.out.println("The commands for setting tasks are : 'todo', 'deadline', and 'event'.");
+                System.out.println("____________________________________________________________");
             } else {
-                String desc = word[1];
-                switch (command) {
-                    case "todo": {
-                        ToDo task = new ToDo(desc);
-                        System.out.println("____________________________________________________________\n" +
-                                "Got it. I've added this task:");
-                        System.out.println(task.toString());
-                        arrayList.add(task);
-                        System.out.println("Now you have " + arrayList.size() + " task(s) in the list.");
-                        System.out.println("____________________________________________________________");
-                        break;
-                    }
-                    case "deadline": {
-                        String[] descriptions = desc.split("/", 2);
-                        String description = descriptions[0];
-                        if (descriptions.length < 2) {
-                            System.out.println(wrongCommand1);
+                if (word.length < 2) {
+                    switch (command) {
+                        case "todo": {
+                            System.out.println(noCommand1);
                             break;
-                        } else {
-                            String timeline = descriptions[1];
-                            Deadline task = new Deadline(description, timeline);
+                        }
+                        case "deadline": {
+                            System.out.println(noCommand2);
+                            break;
+                        }
+                        case "event": {
+                            System.out.println(noCommand3);
+                            break;
+                        }
+                    }
+                } else {
+                    String desc = word[1];
+                    switch (command) {
+                        case "todo": {
+                            ToDo task = new ToDo(desc);
                             System.out.println("____________________________________________________________\n" +
                                     "Got it. I've added this task:");
                             System.out.println(task.toString());
@@ -95,22 +78,38 @@ public class Duke {
                             System.out.println("____________________________________________________________");
                             break;
                         }
-                    }
-                    case "event": {
-                        String[] descriptions = desc.split("/", 2);
-                        String description = descriptions[0];
-                        if (descriptions.length < 2) {
-                            System.out.println(wrongCommand2);
+                        case "deadline": {
+                            String[] descriptions = desc.split("/", 2);
+                            String description = descriptions[0];
+                            if (descriptions.length < 2) {
+                                System.out.println(wrongCommand1);
+                            } else {
+                                String timeline = descriptions[1];
+                                Deadline task = new Deadline(description, timeline);
+                                System.out.println("____________________________________________________________\n" +
+                                        "Got it. I've added this task:");
+                                System.out.println(task.toString());
+                                arrayList.add(task);
+                                System.out.println("Now you have " + arrayList.size() + " task(s) in the list.");
+                                System.out.println("____________________________________________________________");
+                            }
                             break;
-                        } else {
-                            String timeline = descriptions[1];
-                            Event task = new Event(description, timeline);
-                            System.out.println("____________________________________________________________\n" +
-                                    "Got it. I've added this task:");
-                            System.out.println(task.toString());
-                            arrayList.add(task);
-                            System.out.println("Now you have " + arrayList.size() + " task(s) in the list.");
-                            System.out.println("____________________________________________________________");
+                        }
+                        case "event": {
+                            String[] descriptions = desc.split("/", 2);
+                            String description = descriptions[0];
+                            if (descriptions.length < 2) {
+                                System.out.println(wrongCommand2);
+                            } else {
+                                String timeline = descriptions[1];
+                                Event task = new Event(description, timeline);
+                                System.out.println("____________________________________________________________\n" +
+                                        "Got it. I've added this task:");
+                                System.out.println(task.toString());
+                                arrayList.add(task);
+                                System.out.println("Now you have " + arrayList.size() + " task(s) in the list.");
+                                System.out.println("____________________________________________________________");
+                            }
                             break;
                         }
                     }
@@ -129,16 +128,17 @@ public class Duke {
         }
 
         public static void removeCommand(int i) {
-            //I am not aware of this being increment 6,
-            // I just put it up thinking it would be a cool feature. My bad!
             if (arrayList.size() < i) {
                 System.out.println("____________________________________________________________");
                 System.out.println("Sorry! There are no tasks with index number " + i + "! :(");
                 System.out.println("____________________________________________________________");
             } else {
                 Task iTask = arrayList.get(i - 1);
+                int removedSize = arrayList.size() - 1;
                 System.out.println("____________________________________________________________");
-                System.out.println("You have removed task : " + i + ". " + iTask.getDescription() + ".");
+                System.out.println("Noted. I've removed this task: ");
+                System.out.println(iTask.toString());
+                System.out.println("Now you have " + removedSize + " task(s) in the list.");
                 System.out.println("____________________________________________________________");
                 arrayList.remove(i - 1);
             }
@@ -169,7 +169,7 @@ public class Duke {
             int secondWord = Integer.parseInt(word[1]);
             Commands.doneCommand(secondWord);
             printString();
-        } else if (command.equals("remove")) {
+        } else if (command.equals("delete")) {
             int secondWord = Integer.parseInt(word[1]);
             Commands.removeCommand(secondWord);
             printString();

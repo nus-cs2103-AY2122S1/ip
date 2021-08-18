@@ -1,0 +1,12 @@
+hello
+todo borrow book
+deadline return book/7th August
+todo study
+event uncle's birthday/8th August 8-12PM
+list
+done 1
+done 3
+done 2
+done 4
+list
+bye
