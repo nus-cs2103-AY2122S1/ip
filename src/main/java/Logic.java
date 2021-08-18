@@ -21,6 +21,9 @@ public class Logic {
             throw new EmptyCommandException();
         } else if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
             Persistence.printLog();
+        } else if (listOfCommandInputs.contains("delete")) {
+            int position = Integer.parseInt(listOfCommandInputs.get(listOfCommandInputs.indexOf("delete") + 1));
+            Persistence.delete(position);
         } else if (listOfCommandInputs.contains("done")) {
             int pos = Integer.parseInt(listOfCommandInputs.get(1));
             if (pos > Task.getNumberOfTask()) {

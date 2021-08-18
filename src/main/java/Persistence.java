@@ -33,6 +33,8 @@ public class Persistence {
      * Prints log of tasks. No parameters needed. To change task representation, see Task.
      */
     public static void printLog() {
+        System.out.println("Here are your tasks summoner. Please do complete them as fast as possible. I have" +
+                "been waiting for so many others for countless of centuries. Perhaps I am just an npc");
         for (int i = 0; i < log.size(); i++) {
             Task currentTask = log.get(i);
             int taskNumber = i + 1;
@@ -51,5 +53,9 @@ public class Persistence {
                 taskNumber ++;
             }
         }
+    }
+
+    public static void delete(int position) {
+        log.remove(position - 1);
     }
 }

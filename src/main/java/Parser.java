@@ -6,12 +6,12 @@ public class Parser {
         //Remove TaskType from the command first
         Task.TaskType taskType = Task.TaskType.NOTAPPLICABLE;
         String stringTaskType = new String();
-        if (command.contains("todo")) {
+        if (command.contains("todo ")) {
             taskType = Task.TaskType.TODO;
             stringTaskType = "todo";
-        } else if (command.contains("deadline")) {
+        } else if (command.contains("deadline ")) {
             taskType = Task.TaskType.DEADLINE;
-            stringTaskType = "deadline";
+            stringTaskType = "deadline ";
         } else if (command.contains("event")) {
             taskType = Task.TaskType.EVENT;
             stringTaskType = "event";
