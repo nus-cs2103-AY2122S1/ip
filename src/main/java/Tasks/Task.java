@@ -1,3 +1,5 @@
+package Tasks;
+
 public class Task {
     private String description;
     private boolean isDone;
@@ -6,9 +8,9 @@ public class Task {
      * @param description
      */
     public Task(String description) {
-        this.description = description;
+        this.description = description.trim();
         isDone = false;
-        System.out.println("Added: " + description + "\n");
+        System.out.println("Added: " + this.description);
     }
 
     @Override

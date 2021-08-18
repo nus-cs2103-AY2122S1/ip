@@ -1,0 +1,14 @@
+list
+done
+todo read book
+list
+deadline homework /by wednesday 2359
+list
+event party /at sunday 2-4pm
+list
+done 1
+list
+done 2
+done 2
+unknown command
+bye

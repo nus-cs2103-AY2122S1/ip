@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import Tasks.Task;
+import Tasks.Todo;
+import Tasks.Deadline;
+import Tasks.Event;
 
 public class Pib {
     public static String DIVIDER = "____________________________________________________________\n";
@@ -68,6 +72,7 @@ public class Pib {
 
     private void endPib() {
         System.out.println("Bye! See you next time!\n");
+        System.out.println(DIVIDER);
         sc.close();
     }
 
@@ -83,7 +88,7 @@ public class Pib {
             list.add(new Event(taskDetails.substring(0, dateDividerIndex),
                     taskDetails.substring(dateDividerIndex + 4)));
         }
-        System.out.println("Now you have " + list.size() + " task(s) in your list.");
+        System.out.println("Now you have " + list.size() + " task(s) in your list.\n");
     }
 
     private void displayList() {
