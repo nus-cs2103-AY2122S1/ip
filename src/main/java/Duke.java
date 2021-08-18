@@ -1,4 +1,7 @@
 import java.util.Scanner;
+
+import static java.lang.Integer.parseInt;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -18,6 +21,7 @@ public class Duke {
             }
             if (in.equals("list") || in.equals("List")) {
                 int counter = 1;
+                System.out.println(" Here are the tasks in your list:");
                 for (Task item: storedInfo) {
 
                     if(item != null) {
@@ -27,6 +31,32 @@ public class Duke {
 
                 }
                 continue;
+            }
+            if (in.length() > 3 && in.substring(0,4).equals("done") ) {
+                /*if (in.substring(4,5) != " ") {
+                    System.out.println("Invalid input for done command");
+                };*/
+                int taskDone = parseInt(in.substring(5));
+                if (taskDone > 100) {
+                    System.out.println("Invalid Input for done command");
+                    continue;
+                }
+                System.out.println(taskDone);
+                if (storedInfo[taskDone-1] == null) {
+                    System.out.println("Invalid Input for done command");
+                    continue;
+                }
+                System.out.println("Nice! I've marked this task as done:");
+                storedInfo[taskDone-1].markAsDone();
+                System.out.println(storedInfo[taskDone-1]);
+                //int i = parseInt(in);
+                /*if (in.charAt(4).equals(e)) {
+                    System.out.println("Invalid Input for done");
+                    break;
+                }*/
+                System.out.println("in");
+                continue;
+
             }
                 System.out.println("added: " + in);
                 storedInfo[count] = new Task(in);
