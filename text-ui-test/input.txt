@@ -6,5 +6,8 @@ list
 random
 done 1
 done 3
+todo find cats
+deadline feed cats /by the time you buy them
+event cat party /at the day you get the cats
 list
 bye
