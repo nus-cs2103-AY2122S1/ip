@@ -44,6 +44,13 @@ public class Duke {
                     System.out.println("Alright, I've added the following task:");
                     System.out.println(newEvent.toString() + "\n");
                     break;
+                case "deadline":
+                    String[] message_and_endTime = input.split("/");
+                    Deadline newDeadline = new Deadline(message_and_endTime[0], message_and_endTime[1]);
+                    tasks.add(newDeadline);
+                    System.out.println("Alright, I've added the following task:");
+                    System.out.println(newDeadline.toString() + "\n");
+                    break;
                 default:
                     tasks.add(new Task(command));
                     System.out.println("\"" + command + "\" has been added to your todo list.\n");
