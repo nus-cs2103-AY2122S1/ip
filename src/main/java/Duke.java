@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -6,10 +7,12 @@ public class Duke {
         EXIT, ADD, LIST
     }
 
-    String HORIZONTAL_LINE = "____________________________________________________________";
-    String INDENTATION = "    ";
+    private String HORIZONTAL_LINE = "____________________________________________________________";
+    private String INDENTATION = "    ";
+    private ArrayList<String> tasks;
 
     private Duke(){
+        tasks = new ArrayList<>();
     }
 
     private void greet(){
