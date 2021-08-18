@@ -36,13 +36,13 @@ public class Botto {
                     botto.markAsDone(Integer.parseInt(integer) - 1);
                     break;
                 case "todo":
-                    botto.add(TaskType.TODO, next.substring(command.length() + 1));
+                    botto.add(TaskType.TODO, next.split(" ", 2)[1]);
                     break;
                 case "deadline":
-                    botto.add(TaskType.DEADLINE, next.substring(command.length() + 1));
+                    botto.add(TaskType.DEADLINE, next.split(" ", 2)[1]);
                     break;
                 case "event":
-                    botto.add(TaskType.EVENT, next.substring(command.length() + 1));
+                    botto.add(TaskType.EVENT, next.split(" ", 2)[1]);
                     break;
             }
 
@@ -69,7 +69,7 @@ public class Botto {
     }
 
     private void greet() {
-        String greet = "Hello! I'm " + bot + "\n"
+        String greet = "Hello! I'm " + bot + ".\n"
                 + indentation + "What can I do for you?";
 
         System.out.println(indentation + greet);
@@ -84,11 +84,11 @@ public class Botto {
     }
 
     private void add(TaskType type, String description) {
-        int index = description.indexOf("/");
+        String[] array = description.split("/", 2);
 
         Task task = type == TaskType.TODO ? new Todo(description)
-                : type == TaskType.DEADLINE ? new Deadline(description.substring(0, index - 1), description.substring(index + 4))
-                : new Event(description.substring(0, index - 1), description.substring(index + 4));
+                : type == TaskType.DEADLINE ? new Deadline(array[0].substring(0,array[0].length()-1), array[1].substring(3))
+                : new Event(array[0].substring(0,array[0].length()-1), array[1].substring(3));
 
         this.list.add(task);
         System.out.println(indentation + "Got it! I've added this task:\n"
@@ -99,7 +99,7 @@ public class Botto {
     private void markAsDone(int index) {
         Task subject = this.list.get(index);
         subject.markAsDone();
-        System.out.println(indentation + "Nice! I've marked this task as done: ");
+        System.out.println(indentation + "Nice! I've marked this task as done:");
         System.out.println(indentation + "  " + subject);
     }
 
