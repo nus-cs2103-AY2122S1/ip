@@ -41,7 +41,7 @@ public class Duke {
                     .append("]")
                     .append("[")
                     .append(taskArrayList.get(i).getStatusIcon())
-                    .append("] ")
+                    .append("]")
                     .append(taskArrayList.get(i).description);
             if (i < taskArrayList.size() - 1) { // new line except for last item
                 listBeautified.append("\n");
@@ -66,7 +66,7 @@ public class Duke {
                 .append("]")
                 .append("[")
                 .append(task.getStatusIcon())
-                .append("] ")
+                .append("]")
                 .append(taskArrayList.get(index - 1).description);
         System.out.println("tB finish");
         return taskBeautified.toString();
@@ -119,8 +119,8 @@ public class Duke {
                 } else {
                     switch (userInput) {
                         case "todo":
-                            String taskName = scanner.next();
-                            Task newest = new Task(taskName, "todo");
+                            String todoName = scanner.nextLine();
+                            Task newest = new Task(todoName, "todo");
                             taskArrayList.add(newest);
                             System.out.println(sandwich("New task added: \n"
                                     + taskBeautify(newest, taskArrayList.size())
@@ -129,6 +129,8 @@ public class Duke {
                                     + " items in your task list."));
                             break;
                         case "deadline":
+                            scanner.useDelimiter("\\s*/by\\s*");
+                            String deadlineName = scanner.next();
 
                             break;
                         case "event":
