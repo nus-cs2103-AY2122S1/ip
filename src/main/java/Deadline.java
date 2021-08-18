@@ -2,11 +2,20 @@ public class Deadline extends Task{
 
     private String deadline;
 
-    Deadline(String name, boolean done, String deadline) {
-        super(name, done);
+    /**
+     *  Constructor to create an DEADLINE task
+     * @param name Name of task
+     * @param deadline Deadline of task
+     */
+    Deadline(String name, String deadline) {
+        super(name);
         this.deadline = deadline;
     }
 
+    /**
+     * Returns the name of the task in a format that shows type of task and its completion status
+     * @return Task as a formatted string
+     */
     @Override
     public String toString() {
         if(this.isDone()) {

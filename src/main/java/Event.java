@@ -1,11 +1,21 @@
 public class Event extends Task{
+
     private String event;
 
-    Event(String name, boolean done, String event) {
-        super(name, done);
-        this.event = event;
+    /**
+     *  Constructor to create an EVENT task
+     * @param name Name of task
+     * @param eventDetails Location or time of event
+     */
+    Event(String name, String eventDetails) {
+        super(name);
+        this.event = eventDetails;
     }
 
+    /**
+     * Returns the name of the task in a format that shows type of task and its completion status
+     * @return Task as a formatted string
+     */
     @Override
     public String toString() {
         if(this.isDone()) {
