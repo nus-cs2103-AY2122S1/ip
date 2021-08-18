@@ -11,8 +11,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         while (check) {
             String s = sc.nextLine();
-            String numberOnly = s.replaceAll("[^0-9]", "");
-            String letterOnly = s.replaceAll("[0-9]", "");
+            String[] strArray = s.split(" ");
 
             if (s.equals("bye")) {
                 check = false;
@@ -21,8 +20,8 @@ public class Duke {
                 for (int i = 0; i < counter; i++) {
                     System.out.println((i + 1) + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].toString());
                 }
-            } else if (letterOnly.equals("done ") && !(numberOnly.equals(""))) {
-                int idx = Integer.parseInt(numberOnly) - 1;
+            } else if (strArray[0].equals("done")) {
+                int idx = Integer.parseInt(strArray[1]) - 1;
                 tasks[idx].setDone();
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println("[" + tasks[idx].getStatusIcon() + "] " + tasks[idx].toString());
