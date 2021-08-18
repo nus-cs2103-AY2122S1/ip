@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Katheryne {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws KatheryneExceptions {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
 //                + "| | | | | | | |/ / _ \\\n"
@@ -20,10 +20,22 @@ public class Katheryne {
                     System.out.println("Ad Astra Abyssoque, Traveller!");
                     break;
                 } else if (keywordInput[0].equalsIgnoreCase("done") || keywordInput[0].equalsIgnoreCase("complete")) {
+                    if (keywordInput.length == 1) {
+                        throw new KatheryneExceptions("Traveller, please specify by index which task you completed.");
+                    }
                     int i = Integer.parseInt(keywordInput[1]);
                     if (i < lst.size()) {
                         lst.get(i - 1).markAsDone();
                         System.out.println(lst.get(i - 1));
+                    }
+                } else if (keywordInput[0].equalsIgnoreCase("delete")) {
+                    if (keywordInput.length == 1) {
+                        throw new KatheryneExceptions("Traveller, please specify by index what I should delete.");
+                    }
+                    int i = Integer.parseInt(keywordInput[1]);
+                    System.out.println("Okay, I'll delete the following item:");
+                    if (i <= lst.size()) {
+                        System.out.println(lst.remove(i - 1));
                     }
                 } else if (userInput.equalsIgnoreCase("list")) {
                     System.out.println("Here's the list I've stored for you:");
@@ -69,6 +81,9 @@ public class Katheryne {
                 System.out.println(e.getMessage());
             } catch (KatheryneExceptions e) {
                 System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("You need to specify a number in the correct format. ERROR: " 
+                        + e.getMessage());
             }
 
     }
