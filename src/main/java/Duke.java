@@ -10,8 +10,10 @@ public class Duke {
                 " tasks in the list.");
     }
 
-    public static String[] extractCommand(String command) {
-            return command.split(" /by | /at ", 2);
+    public static String[] extractCommand(String[] command) throws EmptyDescriptionException {
+        if (command.length < 2 || command[1].equals("") || command[1].trim().isEmpty())
+            throw new EmptyDescriptionException("The description of a todo cannot be empty.");
+        return command[1].split(" /by | /at ", 2);
     }
 
     public static void main(String[] args) {
@@ -33,6 +35,7 @@ public class Duke {
         // Exit when user commands "bye"
         while (!input.equals("bye")) {
             String[] command = input.split(" ", 2);
+            String[] taskDetail;
             switch (command[0]) {
                 case "list":
                     Printer.prettyPrint("Here are the tasks in your list:\n" +
@@ -42,19 +45,31 @@ public class Duke {
                     tasks[Integer.parseInt(command[1]) - 1].markAsDone();
                     break;
                 case "todo":
-                    String[] taskDetail = extractCommand(command[1]);
-                    tasks[numOfTask++] = new Todo(taskDetail[0]);
-                    printAdded(tasks[numOfTask - 1], numOfTask);
+                    try {
+                        taskDetail = extractCommand(command);
+                        tasks[numOfTask++] = new Todo(taskDetail[0]);
+                        printAdded(tasks[numOfTask - 1], numOfTask);
+                    } catch (EmptyDescriptionException e) {
+                        Printer.prettyPrint(e.toString());
+                    }
                     break;
                 case "event":
-                    taskDetail = extractCommand(command[1]);
-                    tasks[numOfTask++] = new Event(taskDetail[0], taskDetail[1]);
-                    printAdded(tasks[numOfTask - 1], numOfTask);
+                    try {
+                        taskDetail = extractCommand(command);
+                        tasks[numOfTask++] = new Event(taskDetail[0], taskDetail[1]);
+                        printAdded(tasks[numOfTask - 1], numOfTask);
+                    } catch (EmptyDescriptionException e) {
+                        Printer.prettyPrint(e.toString());
+                    }
                     break;
                 case "deadline":
-                    taskDetail = extractCommand(command[1]);
-                    tasks[numOfTask++] = new Deadline(taskDetail[0], taskDetail[1]);
-                    printAdded(tasks[numOfTask - 1], numOfTask);
+                    try {
+                        taskDetail = extractCommand(command);
+                        tasks[numOfTask++] = new Deadline(taskDetail[0], taskDetail[1]);
+                        printAdded(tasks[numOfTask - 1], numOfTask);
+                    } catch (EmptyDescriptionException e) {
+                        Printer.prettyPrint(e.toString());
+                    }
                     break;
                 default:
                     tasks[numOfTask++] = new Task(input);
@@ -66,4 +81,3 @@ public class Duke {
         Printer.prettyPrint("Bye (*´▽｀)ノシ. Have a good day!\n");
     }
 }
-
