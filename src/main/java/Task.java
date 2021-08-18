@@ -1,3 +1,6 @@
+/**
+ * Represents a task that can be completed.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -15,6 +18,9 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * @return String representation of a Task.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;

@@ -1,3 +1,6 @@
+/**
+ * Represents an event with a date/time.
+ */
 public class Event extends Task {
 
     protected String at;
@@ -7,6 +10,9 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * @return String representation of an Event.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
