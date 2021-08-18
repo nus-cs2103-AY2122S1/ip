@@ -19,10 +19,14 @@ public class Duke {
                 numOfTask));
     }
 
-    public static String[] extractCommand(String[] command) throws EmptyDescriptionException {
+    public static String[] extractCommand(String[] command) throws EmptyDescriptionException, IncompleteDescriptionException {
         if (command.length < 2 || command[1].equals("") || command[1].trim().isEmpty())
             throw new EmptyDescriptionException(String.format("The description of a %s cannot be empty.", command[0]));
-        return command[1].split(" /by | /at ", 2);
+        String[] description = command[1].split(" /by | /at ", 2);
+        if (!command[0].equals("todo") &&
+                (description.length < 2 || description[0].trim().isEmpty() || description[1].trim().isEmpty()))
+            throw new IncompleteDescriptionException(String.format("The description of a %s is incomplete.", command[0]));
+        return description;
     }
 
     public static void addThenPrint(String[] command, ArrayList<Task> tasks, int numOfTask) {
@@ -44,7 +48,7 @@ public class Duke {
                 tasks.add(task);
                 printAddOrDelete(true, task, ++numOfTask);
             }
-        } catch (EmptyDescriptionException e) {
+        } catch (EmptyDescriptionException | IncompleteDescriptionException e) {
             Printer.prettyPrint(e.toString());
         }
     }
