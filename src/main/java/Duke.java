@@ -66,13 +66,14 @@ public class Duke {
      */
     private void printListCommand(List<Task> list) throws DukeException{
         if (list.isEmpty()) {
-            throw new DukeException("It seems that your list is empty.\n" +
+            throw new DukeException("It seems that your task list is empty.\n" +
                     "Try adding some task using \"todo\", \"deadline\" or \"event\"");
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("Here is your list:\n");
-        for (Task task : list) {
-            sb.append(String.format("%s. %s %s \n", task.getID(), task.getStatusIcon(), task.getDescription()));
+        sb.append("Here is your task list:\n");
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            sb.append(String.format("%s. %s %s \n", i+1, task.getStatusIcon(), task.getDescription()));
         }
         printReply(sb.toString());
         processReply(sc.nextLine());
@@ -156,9 +157,31 @@ public class Duke {
             throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskID));
         }
         Task task = taskList.get(taskID - 1);
-        task.markASDone();
+        task.markAsDone();
         printReply(String.format("Nice! I've marked this task as done: \n  %s %s",
                 task.getStatusIcon(), task.getDescription()));
+        processReply(sc.nextLine());
+    }
+
+    private void deleteCommand(String command) throws DukeException{
+        String[] details = command.split(" ");
+        if (details.length < 2) {
+            //missing parameter
+            throw new DukeException("OOPS!!! Did you forget the task number?");
+        }
+        if (!details[1].matches("\\d+")) {
+            //invalid parameter
+            throw new DukeException("OOPS!!! Invalid task number.");
+        }
+        int taskID = Integer.parseInt(details[1]);
+        if (taskID > taskList.size()) {
+            //task does not exist
+            throw new DukeException(String.format("Task %d does not exist.\nUse \"list\" to see all tasks.", taskID));
+        }
+        Task task = taskList.get(taskID - 1);
+        taskList.remove(task);
+        printReply(String.format("Noted. I've removed this task:\n  %s %s\nNow you have %d tasks in the list.",
+                task.getStatusIcon(), task.getDescription(), taskList.size()));
         processReply(sc.nextLine());
     }
 
@@ -187,6 +210,9 @@ public class Duke {
                     break;
                 case "done":
                     doneCommand(text);
+                    break;
+                case "delete":
+                    deleteCommand(text);
                     break;
                 default:
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -6,18 +6,10 @@
 public class Task {
     private boolean isDone;
     private final String description;
-    private static int totalTask;
-    private final int taskID;
 
     public Task(String description) {
         this.description = description;
         isDone = false;
-        totalTask++;
-        taskID = totalTask;
-    }
-
-    public int getID() {
-        return taskID;
     }
 
     public String getStatusIcon() {
@@ -28,7 +20,7 @@ public class Task {
         return description;
     }
 
-    public void markASDone() {
+    public void markAsDone() {
         isDone = true;
     }
 }
