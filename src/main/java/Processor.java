@@ -26,7 +26,7 @@ public class Processor {
     @Override
     public String toString() {
         return "____________________________________________________________\n" +
-                this.message + "\n" +
+                this.message +
                 "____________________________________________________________\n";
     }
 }
