@@ -24,6 +24,9 @@ public class Duke {
                         case "done":
                             taskList.doTask(words[1]);
                             break;
+                        case "delete":
+                            taskList.deleteTask(words[1]);
+                            break;
                         case "todo":
                             taskList.addToDo(msg);
                             break;

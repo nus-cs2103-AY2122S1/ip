@@ -7,9 +7,7 @@ public class TaskList {
         taskList.add(task);
 
         Duke.printMessage("Got it. I've added this task:\n  "
-                + task.toString()
-                + "\nNow you have " + taskList.size()
-                + (taskList.size() != 1 ? " tasks" : " task") + " in the list.");
+                + task.toString() + "\n" + taskLengthReport());
     }
 
     public void addToDo(String input) throws DukeException {
@@ -65,21 +63,21 @@ public class TaskList {
     }
 
     public void doTask(String taskNum) throws DukeException {
-        int idx;
+        int idx = getTaskIndexFromString(taskNum);
 
-        try {
-            idx = Integer.parseInt(taskNum);
-        } catch (NumberFormatException numberFormatException) {
-            throw new DukeException("Please input a number.");
-        }
-
-        if (idx <= 0 || idx > taskList.size()) {
-            throw new DukeException("Please input the ID of a task!");
-        }
-
-        Task task = getTask(idx);
+        Task task = taskList.get(idx);
         task.doTask();
         Duke.printMessage("Nice! I've marked this task as done:\n  " + task.toString());
+    }
+
+    public void deleteTask(String taskNum) throws DukeException {
+        int idx = getTaskIndexFromString(taskNum);
+
+        Task task = taskList.get(idx);
+        taskList.remove(idx);
+
+        Duke.printMessage("Noted! I've removed this task:\n  " +
+                task.toString() + "\n" + taskLengthReport());
     }
 
     // Returns a nicely formatted string representation of all tasks in the list
@@ -92,10 +90,10 @@ public class TaskList {
             return "No tasks yet!";
         }
 
-        for (int i = 1; i <= size; i++) {
-            stringBuilder.append(i);
+        for (int i = 0; i < size; i++) {
+            stringBuilder.append(i + 1);
             stringBuilder.append(". ");
-            stringBuilder.append(getTask(i).toString());
+            stringBuilder.append(taskList.get(i).toString());
             stringBuilder.append("\n");
         }
 
@@ -105,8 +103,26 @@ public class TaskList {
         return stringBuilder.toString();
     }
 
-    // taskList represents its tasks 1-indexed
-    private Task getTask(int idx) {
-        return taskList.get(idx - 1);
+    // parses the user's input and returns the index of the task in question
+    private int getTaskIndexFromString(String taskNum) throws DukeException {
+        int idx;
+        try {
+            idx = Integer.parseInt(taskNum);
+        } catch (NumberFormatException numberFormatException) {
+            throw new DukeException("Please input a number.");
+        }
+
+        if (idx <= 0 || idx > taskList.size()) {
+            throw new DukeException("Please input the ID of a task!");
+        }
+
+        // tasks are 1-indexed to the user, but 0-indexed by implementation
+        return idx - 1;
+    }
+
+    // returns a string telling the user how many tasks are in the list
+    private String taskLengthReport() {
+        return "Now you have " + taskList.size()
+                + (taskList.size() != 1 ? " tasks" : " task") + " in the list.";
     }
 }

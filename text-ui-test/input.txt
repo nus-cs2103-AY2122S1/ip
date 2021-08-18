@@ -8,7 +8,9 @@ done 1
 list
 done 2
 list
-done 3
+delete 2
+list
+done 2
 list
 goodbye
 bye
