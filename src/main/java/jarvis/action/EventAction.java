@@ -1,5 +1,6 @@
 package jarvis.action;
 
+import jarvis.exception.TaskDetailsEmptyException;
 import jarvis.message.OutputMessage;
 import jarvis.output.Output;
 import jarvis.task.Event;
@@ -9,9 +10,15 @@ public class EventAction extends Action {
     private final String eventDescription;
     private final String eventTime;
 
-    public EventAction(String userInputWithoutActionTrigger) {
+    public EventAction(String userInputWithoutActionTrigger) throws TaskDetailsEmptyException {
         String[] splitStrings = userInputWithoutActionTrigger.split("/at", 2);
         this.eventDescription = splitStrings[0].trim();
+        if (eventDescription.equals("")) {
+            throw new TaskDetailsEmptyException("description");
+        }
+        if (splitStrings.length < 2) {
+            throw new TaskDetailsEmptyException("event time");
+        }
         this.eventTime = splitStrings[1].trim();
     }
 

@@ -29,6 +29,10 @@ public class TaskList {
         return task;
     }
 
+    public int getTaskListSize() {
+        return taskList.size();
+    }
+
     public String taskListSummary() {
         return String.format("Now you have %s task(s) in the list.", taskList.size());
     }

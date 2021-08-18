@@ -1,5 +1,6 @@
 package jarvis.output;
 
+import jarvis.exception.JarvisException;
 import jarvis.message.OutputMessage;
 import jarvis.task.TaskList;
 
@@ -15,5 +16,10 @@ public class Output {
     public static void showTaskList(TaskList taskList) {
         OutputMessage taskListMessage = new OutputMessage(taskList.toString());
         Output.showFormattedOutputMessage(taskListMessage);
+    }
+
+    public static void showError(JarvisException e) {
+        OutputMessage errorMessage = new OutputMessage(e.getMessage());
+        Output.showFormattedOutputMessage(errorMessage);
     }
 }

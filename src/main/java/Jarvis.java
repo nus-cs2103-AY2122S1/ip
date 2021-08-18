@@ -1,5 +1,6 @@
 import jarvis.action.Action;
 import jarvis.action.ActionTypeEnum;
+import jarvis.exception.JarvisException;
 import jarvis.message.ExitMessage;
 import jarvis.message.GreetingMessage;
 import jarvis.message.OutputMessage;
@@ -18,9 +19,20 @@ public class Jarvis {
         String userInput = scanner.nextLine();
         TaskList taskList = new TaskList();
 
-        while(ActionTypeEnum.identifyActionType(userInput.trim()) != ActionTypeEnum.EXIT) {
-            Action action2 = Action.createAction(userInput);
-            action2.execute(taskList);
+        while(true) {
+            try {
+                if (userInput.equals("")) {
+                    userInput = scanner.nextLine();
+                    continue;
+                }
+                if (ActionTypeEnum.identifyActionType(userInput.trim()) == ActionTypeEnum.EXIT) {
+                    break;
+                }
+                Action action2 = Action.createAction(userInput);
+                action2.execute(taskList);
+            } catch (JarvisException e) {
+                Output.showError(e);
+            }
             userInput = scanner.nextLine();
         }
 

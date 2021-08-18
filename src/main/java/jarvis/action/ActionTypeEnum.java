@@ -1,5 +1,7 @@
 package jarvis.action;
 
+import jarvis.exception.UnknownActionException;
+
 public enum ActionTypeEnum {
     DEADLINE("deadline"),
     DONE("done"),
@@ -18,7 +20,7 @@ public enum ActionTypeEnum {
         return actionTrigger.length();
     }
 
-    public static ActionTypeEnum identifyActionType(String userInput) {
+    public static ActionTypeEnum identifyActionType(String userInput) throws UnknownActionException {
         String actionTrigger = userInput.split(" ", 2)[0];
 
         for (ActionTypeEnum actionTypeEnum: ActionTypeEnum.values()) {
@@ -27,6 +29,6 @@ public enum ActionTypeEnum {
             }
         }
 
-        return ActionTypeEnum.EXIT;
+        throw new UnknownActionException(actionTrigger);
     }
 }

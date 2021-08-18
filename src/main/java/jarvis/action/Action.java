@@ -1,28 +1,28 @@
 package jarvis.action;
 
+import jarvis.exception.JarvisException;
 import jarvis.task.TaskList;
 
 public abstract class Action {
-    public static Action createAction(String userInput) {
+    public static Action createAction(String userInput) throws JarvisException {
         String trimmedUserInput = userInput.trim();
         ActionTypeEnum actionType = ActionTypeEnum.identifyActionType(trimmedUserInput);
         String userInputWithoutActionPrefix = trimmedUserInput.substring(actionType.getActionTypeStringLength());
 
-        if (actionType == ActionTypeEnum.LIST) {
-            return new ListAction();
-        } else if (actionType == ActionTypeEnum.TODO) {
-            return new TodoAction(userInputWithoutActionPrefix);
-        } else if (actionType == ActionTypeEnum.DEADLINE) {
-            return new DeadlineAction(userInputWithoutActionPrefix);
-        } else if (actionType == ActionTypeEnum.DONE) {
-            return new MarkAsDoneAction(userInputWithoutActionPrefix);
-        } else if (actionType == ActionTypeEnum.EVENT) {
-            return new EventAction(userInputWithoutActionPrefix);
+        switch (actionType) {
+            case TODO:
+                return new TodoAction(userInputWithoutActionPrefix);
+            case DEADLINE:
+                return new DeadlineAction(userInputWithoutActionPrefix);
+            case DONE:
+                return new MarkAsDoneAction(userInputWithoutActionPrefix);
+            case EVENT:
+                return new EventAction(userInputWithoutActionPrefix);
+            default:
+                // When action does not match the other actions above, then it must be list action
+                return new ListAction();
         }
-
-        return new ListAction();
-
     }
 
-    public abstract void execute(TaskList taskList);
+    public abstract void execute(TaskList taskList) throws JarvisException;
 }
