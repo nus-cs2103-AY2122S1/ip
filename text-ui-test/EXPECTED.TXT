@@ -18,7 +18,7 @@ Duke:
 User:
 Duke:
 	Added:
-		[D][ ]  return book (by: Sunday)
+		[E][ ]  return book (at: Sunday)
 	Now you have 2 tasks in the list.
 
 User:
@@ -31,9 +31,30 @@ User:
 Duke:
 	Tasks:
 		1.[T][ ]  borrow book
-		2.[D][ ]  return book (by: Sunday)
+		2.[E][ ]  return book (at: Sunday)
 		3.[E][ ]  project meeting (at: Mon 2-4pm)
 	Now you have 3 tasks in the list.
+
+User:
+Duke:
+	Error: Missing input for this operation.
+
+User:
+Duke:
+	Error: No such operation supported.
+
+User:
+Duke:
+	Removing task:
+		[E][ ]  return book (at: Sunday)
+	Now you have 2 tasks in the list.
+
+User:
+Duke:
+	Tasks:
+		1.[T][ ]  borrow book
+		2.[E][ ]  project meeting (at: Mon 2-4pm)
+	Now you have 2 tasks in the list.
 
 User:
 Duke:Bye. Have a nice day.

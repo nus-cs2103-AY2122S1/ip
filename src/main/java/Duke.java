@@ -54,6 +54,10 @@ public class Duke {
                         createNewTask(userInputScanner, "Event");
                         break;
 
+                    case "delete":
+                        deleteTask(userInputScanner.nextInt());
+                        break;
+
                     default:
                         throw new UnsupportedOperationException();
                 }
@@ -106,5 +110,12 @@ public class Duke {
     private static void printErrorMessage(String message) {
         System.out.println(DUKE);
         System.out.println("\tError: " + message + ".");
+    }
+
+    private static void deleteTask(int taskNum) {
+        Task deletedTask = tasks.remove(taskNum - 1);
+        System.out.println(DUKE + "\n\tRemoving task:");
+        System.out.printf("\t\t%s\n", deletedTask);
+        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
     }
 }
