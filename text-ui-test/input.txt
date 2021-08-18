@@ -7,3 +7,8 @@ done 2
 list
 done 1
 list
+delete 1
+list
+todo
+deadline
+event

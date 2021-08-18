@@ -41,3 +41,21 @@ Nice! I've marked this task as done:
 2. [D][x]  (by: 2 june)
 3. [E][x]  (at: 3 june)
 ---------
+---------
+Noted. I've removed this task:
+[T][x] 1
+Now you have 2 task in the list
+---------
+---------
+1. [D][x]  (by: 2 june)
+2. [E][x]  (at: 3 june)
+---------
+---------
+DukeException: ToDos need to have a description
+---------
+---------
+DukeException: deadlines require a /by
+---------
+---------
+DukeException: events require an /at
+---------

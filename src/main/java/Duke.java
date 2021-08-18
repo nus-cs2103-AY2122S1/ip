@@ -33,6 +33,16 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(list.get(index));
                     System.out.println("---------");
+                } else if (s.startsWith("delete")) {
+                    int index = Integer.parseInt(s.replace("delete", "").trim()) - 1;
+
+                    System.out.println("---------");
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(list.get(index));
+                    list.remove(index);
+                    System.out.println("Now you have " + list.size() + " task in the list");
+                    System.out.println("---------");
+
                 } else {
                     // Adding tasks
 
