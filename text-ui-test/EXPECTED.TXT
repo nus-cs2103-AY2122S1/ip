@@ -1,7 +1,61 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+________________________________________
+Hello, I am Retriever
+How Can I Help You Today?
+  __      ^
+o'')}____//
+ `_'      )
+(_(_/-(_/
 
+________________________________________
+Woof! Command Not Found! Can I Sleep?
+________________________________________
+-> Where's My Treat? I Added: 
+	[T][ ] fix bugs
+
+You Owe Me 1 Treat(s), Master!
+________________________________________
+-> Where's My Treat? I Added: 
+	[D][ ] CS2103T week 1 ip (by: 19th Aug)
+
+You Owe Me 2 Treat(s), Master!
+________________________________________
+-> Where's My Treat? I Added: 
+	[E][ ] Apple WWDC 2021 (at: 11PM)
+
+You Owe Me 3 Treat(s), Master!
+________________________________________
+-> Your Tasks, My Master:
+	1. [T][ ] fix bugs
+	2. [D][ ] CS2103T week 1 ip (by: 19th Aug)
+	3. [E][ ] Apple WWDC 2021 (at: 11PM)
+________________________________________
+Woof! Whose a Good Boy?
+Task Done!
+	[T][X] fix bugs
+________________________________________
+Woof! Whose a Good Boy?
+Task Done!
+	[E][X] Apple WWDC 2021 (at: 11PM)
+________________________________________
+-> Where's My Treat? I Added: 
+	[E][ ] attend CS2100 lecture (at: 4PM)
+
+You Owe Me 4 Treat(s), Master!
+________________________________________
+Woof! Whose a Good Boy?
+Task Done!
+	[E][X] attend CS2100 lecture (at: 4PM)
+________________________________________
+-> Your Tasks, My Master:
+	1. [T][X] fix bugs
+	2. [D][ ] CS2103T week 1 ip (by: 19th Aug)
+	3. [E][X] Apple WWDC 2021 (at: 11PM)
+	4. [E][X] attend CS2100 lecture (at: 4PM)
+________________________________________
+Woof! Whose a Good Boy?
+Task Done!
+	[D][X] CS2103T week 1 ip (by: 19th Aug)
+________________________________________
+________________________________________
+-> Sad To See You Go!
+________________________________________

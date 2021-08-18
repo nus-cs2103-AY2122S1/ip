@@ -1,0 +1,12 @@
+Hi
+todo fix bugs
+deadline CS2103T week 1 ip /by 19th Aug
+event Apple WWDC 2021 /at 11PM
+list
+done 1
+done 3
+event attend CS2100 lecture /at 4PM
+done 4
+list
+done 2
+bye
