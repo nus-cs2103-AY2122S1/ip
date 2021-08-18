@@ -55,6 +55,8 @@ public class Duke {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
             }
             add(command.substring(6), "event");
+        } else if (command.startsWith("delete")) {
+            delete(command.substring(7));
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -94,11 +96,9 @@ public class Duke {
                 System.out.println(task);
             }
 
-            if (toDoList.size() > 1) {
-                System.out.printf("Now you have %d tasks in the list.%n", toDoList.size());
-            } else {
-                System.out.println("Now you have 1 task in the list.");
-            }
+            printNowSize();
+
+
         }
 
     }
@@ -109,6 +109,24 @@ public class Duke {
         for (Task task: toDoList) {
             System.out.printf("%d.%s%n", num, task);
             num++;
+        }
+    }
+
+    public void printNowSize() {
+        if (toDoList.size() == 1) {
+            System.out.println("Now you have 1 task in the list.");
+        } else {
+            System.out.printf("Now you have %d tasks in the list.%n", toDoList.size());
+        }
+    }
+
+    public void delete(String num) {
+        int listNum = Integer.parseInt(num);
+        if (listNum <= toDoList.size()) {
+            Task deletedTask = toDoList.remove(listNum - 1);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(deletedTask);
+            printNowSize();
         }
     }
 
