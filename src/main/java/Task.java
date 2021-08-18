@@ -7,6 +7,12 @@ public class Task {
     private int taskNumber;
     private static int numberOfTask = 0;
 
+    public enum TaskType {
+        TODO,
+        DEADLINE,
+        EVENT,
+        NOTAPPLICABLE
+    }
 
     public Task(String name) {
         this.name = name;

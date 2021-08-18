@@ -1,6 +1,8 @@
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class Logic {
+
 
     /**
      * The process is the main function to process the parsed string from presentation.
@@ -14,13 +16,18 @@ public class Logic {
         if (command.equals("")) {
             throw new EmptyCommandException();
         } else {
-            String[] listOfCommandInputs = command.split(" ");
-            String actionCommand = listOfCommandInputs[0].toLowerCase();
+            //Use Parser to package command into a packaged command
+            Command packagedCommand = Parser.parse(command);
+            ArrayList<String> listOfCommandInputs = packagedCommand.getListOfCommandInputs();
+            String loggedCommand = packagedCommand.getLog();
+
             System.out.println("Passed on to persistence stage");
-            if (actionCommand.equals("list")) {
+            System.out.println(listOfCommandInputs);
+            if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
                 Persistence.printLog();
-            } else if (actionCommand.equals("done")) {
-                int pos = Integer.parseInt(listOfCommandInputs[1]);
+            } else if (listOfCommandInputs.contains("done")) {
+                System.out.println("Done called");
+                int pos = Integer.parseInt(listOfCommandInputs.get(1));
                 if (pos > Task.getNumberOfTask()) {
                     throw new InvalidCommandException();
                 }
@@ -28,7 +35,19 @@ public class Logic {
                 currentTask.completeTask();
                 System.out.println("Ohhhh myyyy. I have been waiting for this quest to complete for ages.");
             } else {
-                Persistence.addToLog(new Task(command));
+                switch (packagedCommand.getTaskType()) {
+                    case TODO:
+                        Persistence.addToLog(new Todo(loggedCommand));
+                        break;
+                    case DEADLINE:
+                        Persistence.addToLog(new Deadline(loggedCommand));
+                        break;
+                    case EVENT:
+                        Persistence.addToLog(new Event(loggedCommand));
+                        break;
+                    case NOTAPPLICABLE:
+                        System.out.println(loggedCommand);
+                }
             }
         }
     }

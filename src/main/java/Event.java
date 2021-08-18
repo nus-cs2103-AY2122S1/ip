@@ -4,5 +4,7 @@ public class Event extends Task{
         super(name);
     }
 
-
+    public String toString() {
+        return "[E]" + super.toString();
+    }
 }
