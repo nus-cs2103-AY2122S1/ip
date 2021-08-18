@@ -1,3 +1,5 @@
+package utils;
+
 /**
  * The Task class encapsulates a task.
  */
@@ -6,7 +8,7 @@ public class Task {
     private boolean isDone;
 
     /**
-     * Constructor to create a new Task object.
+     * Constructor to create a new components.Task object.
      * By default created tasks are not done.
      * @param description
      */
