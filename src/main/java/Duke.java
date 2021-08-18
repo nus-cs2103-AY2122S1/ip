@@ -37,6 +37,23 @@ public class Duke {
                     System.out.printf("\t%d.%s\n", i + 1, tasks.get(i));
                 }
                 System.out.printf(format, horizontalLine);
+            } else if (input.startsWith("done")) {
+                // Set a task as done
+                String taskNumberString = input.substring(5);
+                System.out.printf(format, horizontalLine);
+                if (taskNumberString.matches("\\d+")
+                        && (Integer.parseInt(taskNumberString) - 1 < tasks.size()
+                        && Integer.parseInt(taskNumberString) - 1 >= 0)) {
+                    int taskIndex = Integer.parseInt(taskNumberString) - 1;
+                    Task doneTask = tasks.get(taskIndex);
+                    doneTask.markAsDone();
+                    System.out.printf(format, "Good work! This task is now marked as done:");
+                    System.out.printf("\t\t%s\n", doneTask.toString());
+                } else {
+                    // Invalid input (not a number or invalid number)
+                    System.out.printf(format, "Please type in a valid task number.");
+                }
+                System.out.printf(format, horizontalLine);
             } else {
                 // Create task object and add it to the list
                 Task task = new Task(input);
