@@ -6,7 +6,7 @@ ____________________________________________________________
 
 
 ____________________________________________________________
-Apologies, I didn't catch that.
+The description of todo cannot be empty.
 ____________________________________________________________
 
 
@@ -23,12 +23,12 @@ ____________________________________________________________
 
 
 ____________________________________________________________
-Apologies, I didn't catch that.
+The description of deadline cannot be empty.
 ____________________________________________________________
 
 
 ____________________________________________________________
-The command "deadline" should be followed by a task and a deadline, e.g (read book /by Sunday)
+The command "deadline" should be followed by a task and a deadline, e.g (read book /by Sunday).
 ____________________________________________________________
 
 
@@ -46,12 +46,12 @@ ____________________________________________________________
 
 
 ____________________________________________________________
-Apologies, I didn't catch that.
+The description of event cannot be empty.
 ____________________________________________________________
 
 
 ____________________________________________________________
-The command "event" should be followed by a task and a duration, e.g (meeting /at Mon 2-4pm)
+The command "event" should be followed by a task and a duration, e.g (meeting /at Mon 2-4pm).
 ____________________________________________________________
 
 
@@ -70,18 +70,18 @@ ____________________________________________________________
 
 
 ____________________________________________________________
-Apologies, I didn't catch that.
+The description of done cannot be empty.
 ____________________________________________________________
 
 
 ____________________________________________________________
-Nice! I've marked this task as done:   
+Brilliant! I've marked this task as done:   
   [D][X] return book (by: Sunday)
 ____________________________________________________________
 
 
 ____________________________________________________________
-Nice! I've marked this task as done:   
+Brilliant! I've marked this task as done:   
   [T][X] borrow book
 ____________________________________________________________
 
@@ -92,14 +92,13 @@ ____________________________________________________________
 
 
 ____________________________________________________________
-Nice! I've marked this task as done:   
+Brilliant! I've marked this task as done:   
   [E][X] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 
 
 ____________________________________________________________
-Nice! I've marked this task as done:   
-  [E][X] project meeting (at: Mon 2-4pm)
+Oops... This task is already done.
 ____________________________________________________________
 
 
