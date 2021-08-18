@@ -1,21 +1,21 @@
 public class Processor {
-    private String command;
-    private String message;
+    public String command;
+    public String message;
 
     /**
      * Constructor of the class `Processor`.
+     *
+     * @param command The command received.
      */
     public Processor(String command) {
         this.command = command;
     }
 
     /**
-     * Reads and processes a command, updates the message to be printed.
-     * Prints the result of processing.
+     * Updates the message to be printed.
      */
     public void process() {
         this.message = this.command;
-        System.out.println(this);
     }
 
     /**
