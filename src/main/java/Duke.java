@@ -36,6 +36,22 @@ public class Duke {
                         System.out.println("     Nice! I've marked this task as done:");
                         System.out.println(String.format("       %s", item.toString()));
                     }
+                } else if (input.length() > 5 && inputLower.substring(0, 6).equals("delete")) {
+                    if (input.replaceAll("\\s", "").length() == 6) {
+                        throw new DukeException("     ☹ OOPS!!! You haven't specified the task you want to delete.");
+                    } else {
+                        String modInput = input.replaceAll("\\s", "");
+                        int index = Integer.parseInt(modInput.substring(modInput.length() - 1)) - 1;
+                        if (list.size() <= index) {
+                            throw new DukeException("     ☹ OOPS!!! The task number you have specified is invalid.");
+                        } else {
+                            Task item = list.remove(index);
+                            System.out.println("    ____________________________________________________________");
+                            System.out.println("     Noted. I've removed this task:");
+                            System.out.println(String.format("       %s", item.toString()));
+                            System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
+                        }
+                    }
                 } else if (input.length() >= 4 && inputLower.substring(0, 4).equals("todo")) {
                     if (input.replaceAll("\\s", "").length() == 4) {
                         throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
