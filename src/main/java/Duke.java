@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -26,8 +28,7 @@ public class Duke {
 
     // List command
     final String listCommand = "list";
-    Task[] list = new Task[100];
-    int index = 0;
+    List<Task> list = new ArrayList<>();
 
     // Done command
     final String doneCommand = "done";
@@ -50,62 +51,44 @@ public class Duke {
         // Draft response content based on command
         switch (command) {
           case listCommand:
-            if (index == 0) {
+            if (list.size() == 0) {
               responseContent = "You do not have any tasks.";
             } else {
               responseContent = "Here are the tasks in your list:\n";
-              for (int i = 0; i < index; i++) {
-                if (i != index - 1) {
-                  responseContent = responseContent + "     " + (i + 1) + "." + list[i] + "\n";
+              for (int i = 0; i < list.size(); i++) {
+                if (i != list.size() - 1) {
+                  responseContent = responseContent + "     " + (i + 1) + "." + list.get(i) + "\n";
                 } else {
-                  responseContent = responseContent + "     " + (i + 1) + "." + list[i];
+                  responseContent = responseContent + "     " + (i + 1) + "." + list.get(i);
                 }
               }
             }
             break;
           case doneCommand:
-            list[doneTask].markAsDone();
+            list.get(doneTask).markAsDone();
             responseContent = "Nice! I've marked this task as done:\n" +
-                "       " + list[doneTask];
+                "       " + list.get(doneTask);
             break;
           case todoCommand:
-            list[index] = new Todo(description);
-            index++;
-            if (index == 1) {
-              responseContent = "Got it. I've added this task:\n"
-                  + "       " + list[index - 1] + "\n"
-                  + "     Now you have " + index + " task in the list.";
-            } else {
-              responseContent = "Got it. I've added this task:\n"
-                  + "       " + list[index - 1] + "\n"
-                  + "     Now you have " + index + " tasks in the list.";
-            }
+            Todo newTodo = new Todo(description);
+            list.add(newTodo);
+            responseContent = "Got it. I've added this task:\n"
+                + "       " + newTodo + "\n"
+                + "     Now you have " + list.size() + (list.size() > 1 ? " tasks" : " task") + " in the list.";
             break;
           case deadlineCommand:
-            list[index] = new Deadline(description, by);
-            index++;
-            if (index == 1) {
-              responseContent = "Got it. I've added this task:\n"
-                  + "       " + list[index - 1] + "\n"
-                  + "     Now you have " + index + " task in the list.";
-            } else {
-              responseContent = "Got it. I've added this task:\n"
-                  + "       " + list[index - 1] + "\n"
-                  + "     Now you have " + index + " tasks in the list.";
-            }
+            Deadline newDeadline = new Deadline(description, by);
+            list.add(newDeadline);
+            responseContent = "Got it. I've added this task:\n"
+                + "       " + newDeadline + "\n"
+                + "     Now you have " + list.size() + (list.size() > 1 ? " tasks" : " task") + " in the list.";
             break;
           case eventCommand:
-            list[index] = new Event(description, at);
-            index++;
-            if (index == 1) {
-              responseContent = "Got it. I've added this task:\n"
-                  + "       " + list[index - 1] + "\n"
-                  + "     Now you have " + index + " task in the list.";
-            } else {
-              responseContent = "Got it. I've added this task:\n"
-                  + "       " + list[index - 1] + "\n"
-                  + "     Now you have " + index + " tasks in the list.";
-            }
+            Event newEvent = new Event(description, at);
+            list.add(newEvent);
+            responseContent = "Got it. I've added this task:\n"
+                + "       " + newEvent + "\n"
+                + "     Now you have " + list.size() + (list.size() > 1 ? " tasks" : " task") + " in the list.";
             break;
           default:
             break;
@@ -135,8 +118,8 @@ public class Duke {
               doneTask = Integer.parseInt(rest) - 1;
               if (doneTask < 0) {
                 throw new InvalidArgumentException(doneTask);
-              } else if (doneTask >= index) {
-                throw new InvalidArgumentException(index);
+              } else if (doneTask >= list.size()) {
+                throw new InvalidArgumentException(list.size());
               }
             }
             break;
