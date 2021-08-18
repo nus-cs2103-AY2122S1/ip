@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+//  BotMemory imitates a bot's memory unit that stores the commonly used messages
+//  and tracks the tasks added
 public class BotMemory {
 
     final String LOGO =
@@ -38,7 +40,12 @@ public class BotMemory {
     final String ERROR_MESSAGE_EMPTY_TASKLIST = "HEY! You have no task at hand! Get your life together!";
     final String ERROR_MESSAGE_TASK_OUT_OF_RANGE = "HEY! You don't have that many tasks!";
     final String ERROR_MESSAGE_INVALID_TASK_INDEX = "HOLD ON! The index you entered is not an Integer!";
+
+    //  A list to track the tasks added
     List<Task> taskTracker = new ArrayList<Task>();
 
+    /**
+     * Constructor
+     */
     public BotMemory(){}
 }
