@@ -25,11 +25,19 @@ public class Duke {
                     String emp = next.substring(4, 5);
                     String index = next.substring(5);
                     int position = Integer.parseInt(index);
-                    myTasks.complete(position);
+                    try {
+                        myTasks.complete(position);
+                    } catch (DukeException dukeException) {
+                        System.out.println(dukeException);
+                    }
                 }
 
             } else {
-                myTasks.addTask(next);
+                try {
+                    myTasks.addTask(next);
+                } catch (DukeException dukeException) {
+                    System.out.println(dukeException);
+                }
             }
             }
     }

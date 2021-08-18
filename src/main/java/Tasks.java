@@ -8,7 +8,7 @@ public class Tasks {
     private static String ind2 = "     ";
     private static String div = ind + "____________________________________________________________";
 
-    public void addTask(String t) {
+    public void addTask(String t) throws DukeException{
         String[] ss = t.split(" ");
         switch (ss[0]) {
             case("todo"):
@@ -23,28 +23,34 @@ public class Tasks {
                     Todo todo = new Todo(i);
                     this.tasks.add(todo);
                     noteAdded(todo);
+                } else {
+                    throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
                 }
                 break;
             case("deadline"):
                 int j = findTime("/by", ss);
                 String[] info = getInfo(j, ss);
-                if (info[0] != null && info[1] != null) {
+                if (info[0] != "" && info[1] != "") {
                     Deadline ddl = new Deadline(info[0], info[1]);
                     this.tasks.add(ddl);
                     noteAdded(ddl);
+                } else {
+                    throw new DukeException(" ☹ OOPS!!! The description and time of a deadline cannot be empty.");
                 }
                 break;
             case("event"):
                 int k = findTime("/at", ss);
                 String[] info2 = getInfo(k, ss);
-                if (info2[0] != null && info2[1] != null) {
+                if (info2[0] != "" && info2[1] != "") {
                     Event e = new Event(info2[0], info2[1]);
                     this.tasks.add(e);
                     noteAdded(e);
+                } else {
+                    throw new DukeException(" ☹ OOPS!!! The description and time of an event cannot be empty.");
                 }
                 break;
             default:
-                break;
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -78,11 +84,13 @@ public class Tasks {
         System.out.println(div);
     }
 
-    public void complete(int pos) {
+    public void complete(int pos) throws DukeException{
         if (this.tasks.size()>pos-1 && pos != 0) {
             String p = this.tasks.get(pos-1).finished();
             System.out.println(div + "\n" + ind2 + "Nice! I've marked this task as done: " + "\n" +
                     ind2 + ind2 + p + "\n" + div);
+        } else {
+            throw new DukeException("☹ OOPS!!! There isn't a task with index " + pos + " in your list.");
         }
     }
 
@@ -97,9 +105,9 @@ public class Tasks {
 
     private static String[] getInfo(int j, String[] ss) {
         String[] result = new String[2];
+        String name = "";
+        String time = "";
         if (j != 0) {
-            String name = "";
-            String time = "";
             int counter = 1;
             while (counter < j) {
                 name += ss[counter];
@@ -116,13 +124,9 @@ public class Tasks {
                 }
                 counter ++;
             }
+        }
             result[0] = name;
             result[1] = time;
-
             return result;
-
-        } else {
-            return result;
-        }
     }
 }
