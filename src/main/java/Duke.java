@@ -53,67 +53,70 @@ public class Duke {
                 case "todo":
                     String tdLabel = scanner.nextLine();
                     System.out.println("──────────────────────────────────────────");
-                    Todo todo = new Todo(tdLabel);
-                    list[pointer] = todo;
-                    pointer++;
-                    System.out.println("added: " + todo);
-                    System.out.println("Now you have " + pointer + " tasks in the list");
-                    System.out.println("──────────────────────────────────────────");
-                    input = scanner.next();
-                    break;
+                    try {
+                        Todo todo = new Todo(tdLabel);
+                        list[pointer] = todo;
+                        pointer++;
+                        System.out.println("added: " + todo);
+                        System.out.println("Now you have " + pointer + " tasks in the list");
+                        System.out.println("──────────────────────────────────────────");
+                        input = scanner.next();
+                        break;
+                    } catch (DukeException e) {
+                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                        System.out.println("──────────────────────────────────────────");
+                        input = scanner.next();
+                        break;
+                    }
 
                 case "deadline":
-                    String dlLabel = scanner.nextLine();
-                    System.out.println("──────────────────────────────────────────");
-                    int dlSep = dlLabel.indexOf("by");
-                    if (dlSep == -1) {
+                    try {
+                        String dlLabel = scanner.nextLine();
                         System.out.println("──────────────────────────────────────────");
-                        System.out.println("No date/time provided!");
+                        int dlSep = Checker.check(dlLabel, "by ");
+                        String dl1 = dlLabel.substring(0, dlSep - 1);
+                        String dl2 = dlLabel.substring(dlSep + 3);
+                        Deadline deadline = new Deadline(dl1, dl2);
+                        list[pointer] = deadline;
+                        pointer++;
+                        System.out.println("added: " + deadline);
+                        System.out.println("Now you have " + pointer + " tasks in the list");
+                        System.out.println("──────────────────────────────────────────");
+                        input = scanner.next();
+                        break;
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
                         System.out.println("──────────────────────────────────────────");
                         input = scanner.next();
                         break;
                     }
-                    String dl1 = dlLabel.substring(0, dlSep - 1);
-                    String dl2 = dlLabel.substring(dlSep + 3);
-                    Deadline deadline = new Deadline(dl1, dl2);
-                    list[pointer] = deadline;
-                    pointer++;
-                    System.out.println("added: " + deadline);
-                    System.out.println("Now you have " + pointer + " tasks in the list");
-                    System.out.println("──────────────────────────────────────────");
-                    input = scanner.next();
-                    break;
 
                 case "event":
-                    String eLabel = scanner.nextLine();
-                    System.out.println("──────────────────────────────────────────");
-                    int eSep = eLabel.indexOf("at");
-                    if (eSep == -1) {
+                    try {
+                        String eLabel = scanner.nextLine();
                         System.out.println("──────────────────────────────────────────");
-                        System.out.println("No date/time provided!");
+                        int eSep = Checker.check(eLabel, "at ");
+                        String e1 = eLabel.substring(0, eSep - 1);
+                        String e2 = eLabel.substring(eSep + 3);
+                        Event event = new Event(e1, e2);
+                        list[pointer] = event;
+                        pointer++;
+                        System.out.println("added: " + event);
+                        System.out.println("Now you have " + pointer + " tasks in the list");
+                        System.out.println("──────────────────────────────────────────");
+                        input = scanner.next();
+                        break;
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
                         System.out.println("──────────────────────────────────────────");
                         input = scanner.next();
                         break;
                     }
-                    String e1 = eLabel.substring(0, eSep - 1);
-                    String e2 = eLabel.substring(eSep + 3);
-                    Event event = new Event(e1, e2);
-                    list[pointer] = event;
-                    pointer++;
-                    System.out.println("added: " + event);
-                    System.out.println("Now you have " + pointer + " tasks in the list");
-                    System.out.println("──────────────────────────────────────────");
-                    input = scanner.next();
-                    break;
 
                 default:
-                    String label = input + scanner.nextLine();
+                    scanner.nextLine();
                     System.out.println("──────────────────────────────────────────");
-                    Task task = new Task(label);
-                    list[pointer] = task;
-                    pointer++;
-                    System.out.println("added: " + task);
-                    System.out.println("Now you have " + pointer + " tasks in the list");
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println("──────────────────────────────────────────");
                     input = scanner.next();
                     break;

@@ -1,6 +1,6 @@
 public class Deadline extends Task {
-    protected String when;
-    public Deadline(String str1, String str2) {
+    private String when;
+    public Deadline(String str1, String str2) throws DukeException {
         super(str1);
         this.when = str2;
     }

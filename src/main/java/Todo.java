@@ -1,5 +1,5 @@
 public class Todo extends Task {
-    public Todo(String str) {
+    public Todo(String str) throws DukeException {
         super(str);
     }
 
