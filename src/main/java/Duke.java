@@ -5,7 +5,6 @@ import java.util.StringJoiner;
 public class Duke {
 
     private static final ArrayList<Task> taskList = new ArrayList<>();
-    private static int tasks = 0;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -29,10 +28,10 @@ public class Duke {
 
                 switch (userCommand) {
                     case "list":
-                        if (tasks == 0) {
+                        if (taskList.isEmpty()) {
                             System.out.println("Currently no tasks!");
                         }
-                        for (int i = 0; i < tasks; i++) {
+                        for (int i = 0; i < taskList.size(); i++) {
                             System.out.printf("%d. %s%n", i + 1, taskList.get(i));
                         }
                         break;
@@ -42,7 +41,7 @@ public class Duke {
                     case "done":
                         int done = getInputNumber(userInput);
 
-                        if (done >= tasks || done < 0) {
+                        if (done >= taskList.size() || done < 0) {
                             System.out.println("Task does not exist!");
                             continue;
                         }
@@ -70,8 +69,9 @@ public class Duke {
                             String[] eventInfo = splitBetween(userInput, "/at");
                             taskList.add(new Event(buildDescription(eventInfo, "at")));
                         }
-                        addTask(taskList.get(tasks));
+                        addTask(taskList.get(taskList.size() - 1));
                         break;
+                    case("delete"):
                     default:
                         throw new DukeException("Sorry I do not understand this directive.");
                 }}
@@ -82,9 +82,8 @@ public class Duke {
     }
 
     private static void addTask(Task newTask) {
-        tasks += 1;
         System.out.printf("Got it, I've added this task:\n %s\n", newTask.toString());
-        System.out.printf("Now you have %d tasks in your list.\n", tasks);
+        System.out.printf("Now you have %d tasks in your list.\n", taskList.size());
     }
 
     private static String[] splitBetween(String str, String separator) throws DukeException {
