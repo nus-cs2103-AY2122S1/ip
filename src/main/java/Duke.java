@@ -21,11 +21,54 @@ public class Duke {
         public void markAsDone() {
             this.isDone = true;
         }
+
+        @Override
+        public String toString() {
+            return "[" + this.getStatusIcon() + "] " + this.description;
+        }
         //...
     }
 
-    public Task newTask(String intro) {
-        return new Task(intro);
+    public static class Deadline extends Task {
+
+        protected String by;
+
+        public Deadline(String description, String by) {
+            super(description);
+            this.by = by;
+        }
+
+        @Override
+        public String toString() {
+            return "[D]" + super.toString() + " (by: " + by + ")";
+        }
+    }
+
+    public static class ToDo extends Task {
+
+        public ToDo(String description) {
+            super(description);
+        }
+
+        @Override
+        public String toString() {
+            return "[T]" + super.toString();
+        }
+    }
+
+    public static class Event extends Task {
+
+        protected String at;
+
+        public Event(String description, String at) {
+            super(description);
+            this.at = at;
+        }
+
+        @Override
+        public String toString() {
+            return "[E]" + super.toString() + " (at: " + at + ")";
+        }
     }
 
     public static void main(String[] args) {
@@ -47,7 +90,7 @@ public class Duke {
                 System.out.println(("\t Here are the tasks in your list:"));
                 for(Task s:tasks) {
                     if(s != null) {
-                        System.out.println(("\t" + s.order.toString() + ".[" + s.getStatusIcon() + "] " + s.description));
+                        System.out.println("\t" + Integer.toString(s.order) + "." + s.toString());
                     }
                 }
                 input = scanner.nextLine();
@@ -57,21 +100,36 @@ public class Duke {
                 System.out.println("\t Nice! I've marked this task as done: \n \t \t" +
                         " [" + tasks[count - 1].getStatusIcon() + "] " + tasks[count - 1].description);
                 input = scanner.nextLine();
-            }
-            else {
+            } else if(input.split(" ")[0].equals("todo")) {
                 counter = counter + 1;
-                Task Task1 = new Task(input);
-                Task1.order = counter;
-                tasks[counter - 1] = Task1;
+                ToDo todo = new ToDo(input.split(" ", 2)[1]);
+                todo.order = counter;
+                tasks[counter - 1] = todo;
+                System.out.println("\t" + "Got it. I've added this task: " + "\n \t \t" + todo.toString() +
+                        "\n \t Now you have " + Integer.toString(counter) + " tasks in the list.");
+                input = scanner.nextLine();
+            } else if(input.split(" ")[0].equals("deadline")) {
+                counter = counter + 1;
+                Deadline deadline = new Deadline(input.split(" ", 2)[1].split(" /")[0], input.split("/by ")[1]);
+                deadline.order = counter;
+                tasks[counter - 1] = deadline;
+                System.out.println("\t" + "Got it. I've added this task: " + "\n \t \t" + deadline.toString() +
+                        "\n \t Now you have " + Integer.toString(counter) + " tasks in the list.");
+                input = scanner.nextLine();
+            } else {
+                counter = counter + 1;
+                Event event = new Event(input.split(" ", 2)[1].split(" /")[0], input.split("/at ")[1]);
+                event.order = counter;
+                tasks[counter - 1] = event;
                 //tasks[counter - 1] = Integer.toString(counter) + ". " + input;
-                System.out.println("\t" + "added: " + input);
+                System.out.println("\t" + "Got it. I've added this task: " + "\n \t \t" + event.toString() +
+                        "\n \t Now you have " + Integer.toString(counter) + " tasks in the list.");
                 input = scanner.nextLine();
             }
         }
         String ending = "Bye. Hope to see you again soon!";
 
         System.out.println("\t" + ending);
-
 
     }
 }
