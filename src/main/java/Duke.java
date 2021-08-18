@@ -12,7 +12,7 @@ public class Duke {
         currentIndex = 0;
     }
 
-    private void addList() {
+    private void start() {
         System.out.println("Hello, what can I do for you.\n");
         Scanner sc = new Scanner(System.in);
         String[] strArr;
@@ -20,22 +20,29 @@ public class Duke {
         String inputFirst = strArr[0];
 
         while(!inputFirst.equals(Duke.endWord)) {
-            switch(inputFirst) {
-                case "list":
-                    printList();
-                    break;
-                case "done":
-                    markDone(getArgs(strArr));
-                    break;
-                case "todo":
-                    addTodo(getArgs(strArr));
-                    break;
-                case "deadline":
-                    addDeadline(getArgs(strArr));
-                    break;
-                case "event":
-                    addEvent(getArgs(strArr));
-                    break;
+            try {
+                switch(inputFirst) {
+                    case "list":
+                        printList();
+                        break;
+                    case "done":
+                        markDone(getArgs(strArr));
+                        break;
+                    case "todo":
+                        addTodo(getArgs(strArr));
+                        break;
+                    case "deadline":
+                        addDeadline(getArgs(strArr));
+                        break;
+                    case "event":
+                        addEvent(getArgs(strArr));
+                        break;
+                    default:
+                        throw new InvalidCommandDukeException();
+                }
+            } catch (DukeException e) {
+                System.out.println("Error for command: \"" + inputFirst + "\"");
+                System.out.println(e.getMessage());
             }
             strArr = sc.nextLine().split(" ", 2);
             inputFirst = strArr[0];
@@ -45,17 +52,26 @@ public class Duke {
 
     private void addTodo(String args) {
         addTask(new Todo(args));
-
     }
 
-    private void addDeadline(String args) {
+    private void addDeadline(String args) throws WrongArgumentDukeException {
         String[] strArr = args.split(" /by ", 2);
-        addTask(new Deadline(strArr[0], strArr[1]));
+        if (strArr.length >= 2) {
+            addTask(new Deadline(strArr[0], strArr[1]));
+        } else {
+            throw new WrongArgumentDukeException();
+        }
+
     }
 
-    private void addEvent(String args) {
+    private void addEvent(String args) throws WrongArgumentDukeException {
         String[] strArr = args.split(" /at ", 2);
-        addTask(new Event(strArr[0], strArr[1]));
+        if (strArr.length >= 2) {
+            addTask(new Event(strArr[0], strArr[1]));
+        } else {
+            throw new WrongArgumentDukeException();
+        }
+
     }
 
     private void addTask(Task task) {
@@ -72,8 +88,12 @@ public class Duke {
         System.out.println("\n");
     }
 
-    private String getArgs(String[] arr) {
-        return arr[1];
+    private String getArgs(String[] arr) throws NoArgumentDukeException {
+        if (arr.length >= 2) {
+            return arr[1];
+        } else {
+            throw new NoArgumentDukeException();
+        }
     }
 
     private void markDone(String indexStr) {
@@ -93,7 +113,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Duke duke = new Duke();
-        duke.addList();
+        duke.start();
     }
 
 }

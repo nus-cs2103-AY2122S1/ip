@@ -7,8 +7,14 @@ Hello from
 
 Hello, what can I do for you.
 
+Error for command: "hello"
+Error: Command not recognized
+
 added: [T][ ] borrow book
 Now you have 1 tasks
+
+Error for command: "todo"
+Error: Arguments required for this command.
 
 1.[T][ ] borrow book
 
@@ -19,9 +25,21 @@ Now you have 2 tasks
 Task 1 is done
 [T][X] borrow book
 
+Error for command: "deadline"
+Error: The argument is wrong, did you use the required format?.
+
+Error for command: "deadline"
+Error: Arguments required for this command.
+
 1.[T][X] borrow book
 2.[D][ ] return book (by: Sunday)
 
+
+Error for command: "event"
+Error: The argument is wrong, did you use the required format?.
+
+Error for command: "event"
+Error: Arguments required for this command.
 
 added: [E][ ] project meeting (at: Mon 2-4pm)
 Now you have 3 tasks
