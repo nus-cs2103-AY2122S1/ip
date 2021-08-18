@@ -33,28 +33,32 @@ public class Storage {
             //either, todo, deadline, delete, event, done
             Scanner lineSplitter = new Scanner(fullLineOfCommand);
             String command = lineSplitter.next().trim();
-            if (command.equals("todo")) {
-                String description = lineSplitter.nextLine();
-                taskList.add(new ToDo(description.trim()));
+            try {
+                if (command.equals("todo")) {
+                    String description = lineSplitter.nextLine();
+                    taskList.add(new ToDo(description.trim()));
 
-            } else if (command.equals("deadline")) {
-                String description = lineSplitter.nextLine();
-                String[] parts = description.split("/by");
-                taskList.add(new Deadline(parts[0].trim(), parts[1].trim()));
+                } else if (command.equals("deadline")) {
+                    String description = lineSplitter.nextLine();
+                    String[] parts = description.split("/by");
+                    taskList.add(new Deadline(parts[0].trim(), parts[1].trim()));
 
-            } else if (command.equals("event")) {
-                String description = lineSplitter.nextLine();
-                String[] parts = description.split("/at");
-                taskList.add(new Event(parts[0].trim(), parts[1].trim()));
+                } else if (command.equals("event")) {
+                    String description = lineSplitter.nextLine();
+                    String[] parts = description.split("/at");
+                    taskList.add(new Event(parts[0].trim(), parts[1].trim()));
 
-            } else if (command.equals("done")) {
-                int indexToMark = lineSplitter.nextInt();
-                taskList.get(indexToMark - 1).markAsDone();
+                } else if (command.equals("done")) {
+                    int indexToMark = lineSplitter.nextInt();
+                    taskList.get(indexToMark - 1).markAsDone();
 
-            } else if (command.equals("delete")) {
-                int indexToDelete = lineSplitter.nextInt();
-                taskList.remove(indexToDelete - 1);
+                } else if (command.equals("delete")) {
+                    int indexToDelete = lineSplitter.nextInt();
+                    taskList.remove(indexToDelete - 1);
 
+                }
+            } catch (CommandParamException e) {
+                System.out.println("\tError initiating database.");
             }
         }
         return taskList;
