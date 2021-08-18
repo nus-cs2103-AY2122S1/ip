@@ -112,7 +112,6 @@ public class Duke {
         task.markAsDone();
         System.out.println("Good work! I've marked this task as done:");
         System.out.println(task.toString());
-        System.out.println("Now you have " + todoList.size() + " tasks in the list.");
     }
 
     private static void deleteTask(Integer taskNum) throws DukeException {
