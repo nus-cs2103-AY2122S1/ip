@@ -72,23 +72,24 @@ public class Duke {
         }
         System.out.println("---------------------------------------------");
     }
-
+    
     private static Task identifyType(String input) throws Exception {
         String command = getCommand(input);
         String description = getDescription(input);
-        if (command.equals("todo")) {
-            Todo todo = new Todo(description);
-            return todo;
-        } else if (command.equals("deadline")) {
-            String deadlineDescription = Deadline.getDeadlineDescription(description);
-            Deadline deadline = new Deadline(deadlineDescription, Deadline.getDueDate(input));
-            return deadline;
-        } else if (command.equals("event")) {
-            String eventDescription = Event.getEventDescription(description);
-            Event event = new Event(eventDescription, Event.getEventDetails(input));
-            return event;
-        } else {
-            return new Task("NA");
+
+        switch (command) {
+            case "todo":
+                return new Todo(description);
+            case "deadline":
+                String deadlineDescription = Deadline.getDeadlineDescription(description);
+                Deadline deadline = new Deadline(deadlineDescription, Deadline.getDueDate(input));
+                return deadline;
+            case "event":
+                String eventDescription = Event.getEventDescription(description);
+                Event event = new Event(eventDescription, Event.getEventDetails(input));
+                return event;
+            default:
+                return new Task("NA");
         }
     }
 
