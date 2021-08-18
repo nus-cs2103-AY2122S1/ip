@@ -29,7 +29,7 @@ public class TaskList {
                     toMark.markAsDone();
                     break;
                 case "delete":
-                    System.out.println("Poof!\n" + taskList.get(index).toString() + " \nis gone");
+                    System.out.println("Poof!\n" + taskList.get(index).toString() + "\nis gone");
                     taskList.remove(index);
                     System.out.println("Now you have " + taskList.size() + " tasks in the list");
                     break;

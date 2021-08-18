@@ -27,4 +27,8 @@ Here's your list!
  2. [T][ ] sleep
  3. [D][X] return book ( by: Sunday )
  4. [E][ ] project meeting  ( at: Mon 2-4pm )
+Poof!
+[T][ ] sleep
+is gone
+Now you have 3 tasks in the list
 Byebye

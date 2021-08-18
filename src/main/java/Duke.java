@@ -6,7 +6,6 @@ public class Duke {
     private static final TaskList list = new TaskList();
 
     private static String[] parseInput(String[] arr) throws DukeException {
-        System.out.println(Arrays.toString(arr));
         String command = arr[0];
         if (arr.length == 1) {
             //user did not specify desc
