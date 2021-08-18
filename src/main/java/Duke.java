@@ -3,6 +3,11 @@ import java.util.Scanner;
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<Task>();
 
+    /**
+     * Prints out each task in the taskList with format.
+     *
+     * @return Nothing.
+     */
     public static void printTasks() {
         if (taskList.size() == 0) {
             System.out.println("You have no tasks!\n");
@@ -16,6 +21,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Adds a Todo task to the taskList.
+     * Todos are tasks without any date/time attached to them.
+     *
+     * @param input User input.
+     * @throws DukeException If input does not have a description.
+     */
     public static void addTodo(String input) throws DukeException {
         try {
             String task = input.substring(5);
@@ -28,6 +40,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Adds a Deadline task to the taskList.
+     * Deadlines are tasks that need to be done before a specific date/time.
+     *
+     * @param input User input.
+     * @throws DukeException If input format for deadline is invalid.
+     */
     public static void addDeadline(String input) throws DukeException {
         try {
             String task = input.substring(9);
@@ -43,6 +62,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Adds an Event task to the taskList.
+     * Events are tasks that start and end at a specific time.
+     *
+     * @param input User input.
+     * @throws DukeException If input format for Event is invalid.
+     */
     public static void addEvent(String input) throws DukeException {
         try {
             String task = input.substring(6);
@@ -58,6 +84,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Marks a task in the taskList as done.
+     *
+     * @param input User input.
+     * @throws DukeException If task number is outside the range of taskList.
+     */
     public static void markTask(String input) throws DukeException {
         try {
             int index = Integer.parseInt(input.substring(5));
@@ -70,6 +102,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Removes a task from the taskList.
+     *
+     * @param input User input.
+     * @throws DukeException If task number is outside the range of tasklist.
+     */
     public static void deleteTask(String input) throws DukeException {
         try {
             int index = Integer.parseInt(input.substring(7));
@@ -82,6 +120,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Handles the input commands of the user and calls the appropriate method.
+     *
+     * @throws DukeException If input command is not recognized.
+     */
     public static void handleInput() {
         Scanner scanner = new Scanner(System.in);
         String input;
@@ -113,7 +156,12 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) throws DukeException {
+    /**
+     * This is the main method.
+     *
+     * @param args Unused.
+     */
+    public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
