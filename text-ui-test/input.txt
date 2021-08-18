@@ -1,0 +1,9 @@
+todo say hello
+deadline eat dinner /by 7pm tonight
+event play basketball /at tmr 2-7pm
+list
+done 0
+done 1
+done 2
+list
+bye
