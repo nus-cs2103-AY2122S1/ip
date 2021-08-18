@@ -34,6 +34,12 @@ public class Duke {
                     String[] parsedInput = input.split(" /at ");
                     if (parsedInput.length <= 1) throw new DukeException("OOPS!!! you need to provide a /at date");
                     add(new Event(parsedInput[0], parsedInput[1]));
+                } else if (input.contains("delete")) {
+                    String[] parseInput = input.split(" ");
+                    if (parseInput.length <= 1) throw new DukeException("OOPS!!! You need to indicate a task for me to delete.");
+                    int index = Integer.parseInt(parseInput[1]);
+                    if (index <= 0 || index > list.size()) throw new DukeException("OOPS!!! Looks like there is no such task to be deleted");
+                    delete(index);
                 } else throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (DukeException ex) {
                 echo(ex.getMessage());
@@ -82,6 +88,16 @@ public class Duke {
     private static void done(int index) {
         Task task = list.markTaskAsDone(index);
         String message = String.format("Nice! I've marked this task as done:\n  %s", task);
+        echo(message);
+    }
+
+    private static void delete(int index) {
+        Task task = list.deleteTask(index);
+        int len = list.size();
+        String message = String.format("Noted. I've removed this task:\n  %s\nNow you have %d %s in the list.",
+                task.toString(),
+                len,
+                len <= 1 ? "task" : "tasks");
         echo(message);
     }
 }

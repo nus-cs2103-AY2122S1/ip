@@ -16,9 +16,14 @@ public class TaskList {
         return list.size();
     }
 
+    public Task deleteTask(int index) {
+        return list.remove(index - 1);
+    }
+
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder("Here are the tasks in your list:\n");
+        String str = String.format("Here are the %s in your list:\n", list.size() <= 1 ? "task" : "tasks");
+        StringBuilder result = new StringBuilder(str);
         int len = list.size();
         if (len == 0) return result.toString();
         for (int i = 1; i < len; i++) {
