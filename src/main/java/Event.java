@@ -2,8 +2,11 @@
  * The Event class encapsulates all the details of each event.
  */
 public class Event extends Task {
-    public Event(String message) {
+    private final String timePeriod;
+
+    public Event(String message, String timePeriod) {
         super(message);
+        this.timePeriod = timePeriod;
     }
 
     /**
@@ -12,6 +15,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E] " + super.toString();
+        return "[E]" + super.toString() + " (at: " + timePeriod + ")";
     }
 }

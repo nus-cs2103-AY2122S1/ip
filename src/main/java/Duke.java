@@ -18,7 +18,7 @@ public class Duke {
         while(true) {
             System.out.print("You: ");
             command = sc.next();
-            input = sc.nextLine();
+            input = sc.nextLine().trim();
             System.out.print("Duke: ");
             switch(command) {
                 case "bye":
@@ -28,12 +28,21 @@ public class Duke {
                     printList(tasks);
                     break;
                 case "done":
-                    doTask(Integer.parseInt(input.trim())- 1, tasks);
+                    doTask(Integer.parseInt(input)- 1, tasks);
                     printList(tasks);
                     break;
                 case "todo":
-                    tasks.add(new ToDo(command));
-                    System.out.println("\"" + command + "\" has been added to your todo list.\n");
+                    ToDo newToDo = new ToDo(input);
+                    tasks.add(newToDo);
+                    System.out.println("Alright, I've added the following task:");
+                    System.out.println(newToDo.toString() + "\n");
+                    break;
+                case "event":
+                    String[] message_and_timePeriod = input.split("/");
+                    Event newEvent = new Event(message_and_timePeriod[0], message_and_timePeriod[1]);
+                    tasks.add(newEvent);
+                    System.out.println("Alright, I've added the following task:");
+                    System.out.println(newEvent.toString() + "\n");
                     break;
                 default:
                     tasks.add(new Task(command));
