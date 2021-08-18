@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 import java.lang.*;
 
 public class Duke {
@@ -19,7 +19,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         // adds array for 'list' command
-        String[] strarr = new String[100];
+        Task[] taskarr = new Task[100];
         int arrcounter = 0;
 
         // checks loop
@@ -27,24 +27,62 @@ public class Duke {
 
         while (continueloop) {
             String str = in.nextLine();
+            // split it later to parse for 'done' and 'integer afterwards'
+            String[] strparse = str.split(" ");
 
             if (str.equalsIgnoreCase("bye")) {
                 // breaks loop
                 continueloop = false;
             } else if (str.equalsIgnoreCase("list")) {
-                // lists history of commands
+                // checks for list keyword
+                // lists history of past tasks
                 System.out.println(linebreak);
+                System.out.println("Uwu! Herw arw yourw taskws: \n");
                 int counter = 0;
-                while (strarr[counter] != null || counter >= 100) {
-                    System.out.println(counter + ". " + strarr[counter] + '\n');
+                while (taskarr[counter] != null || counter >= 100) {
+                    System.out.println(counter
+                            + ". ["
+                            + taskarr[counter].getTaskStatus()
+                            + "] "
+                            + taskarr[counter].getTask()
+                            + '\n');
                     counter++;
                 }
                 System.out.println(linebreak);
-
-                strarr[arrcounter] = str;
+                taskarr[arrcounter] = new Task(str);
                 arrcounter++;
+            } else if (strparse.length == 2 && strparse[0].equals("done")) {
+                // checks for 'done' and integer keywords
+                // checks corresponding task as done
+                try {
+                    int i = Integer.parseInt(strparse[1]);
+                    taskarr[i].markAsDone();
+                    System.out.println(linebreak);
+                    System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe: \n"
+                            + i
+                            + ". ["
+                            + taskarr[i].getTaskStatus()
+                            + "] "
+                            + taskarr[i].getTask()
+                            + '\n');
+                    System.out.println(linebreak);
+                    taskarr[arrcounter] = new Task(str);
+                    arrcounter++;
+
+                } catch (NumberFormatException nfe) {
+                    // not a 'done' task
+                    taskarr[arrcounter] = new Task(str);
+                    arrcounter++;
+                    System.out.println(linebreak
+                            +  '\n'
+                            + "Addwed!: "
+                            + str
+                            + '\n'
+                            + '\n'
+                            + linebreak);
+                }
             } else {
-                strarr[arrcounter] = str;
+                taskarr[arrcounter] = new Task(str);
                 arrcounter++;
                 System.out.println(linebreak
                         +  '\n'
