@@ -69,8 +69,13 @@ public class Duke {
         if (terms.get(0).startsWith("/")) {
             terms.remove(0);
             StringBuilder timing = new StringBuilder();
-            for (String term: terms) {
-                timing.append(term);
+            int len = terms.size();
+            for (int i = 0; i < len; i++) {
+                if (i != len - 1){
+                    timing.append(terms.get(i)).append(" ");
+                } else {
+                    timing.append(terms.get(i));
+                }
             }
             return timing.toString();
         } else {

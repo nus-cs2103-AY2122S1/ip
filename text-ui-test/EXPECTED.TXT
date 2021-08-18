@@ -5,3 +5,17 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+I can't process this! Try another command
+Awesome, Duke remembers this event:[T][ ] hello
+We now have 1 task in our plan!
+Awesome, Duke remembers this event:[D][ ] study(by: sunday)
+We now have 2 tasks in our plan!
+Awesome, Duke remembers this event:[E][ ] exam(at: end of sem)
+We now have 3 tasks in our plan!
+1.[T][ ] hello
+2.[D][ ] study(by: sunday)
+3.[E][ ] exam(at: end of sem)
+Nice! I've marked this entry as done:
+	[D][X] study(by: sunday)
+Invalid Entry Number

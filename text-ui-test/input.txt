@@ -1,0 +1,7 @@
+hello
+todo hello
+deadline study /by sunday
+event exam /at end of sem
+list
+done 2
+done 4
