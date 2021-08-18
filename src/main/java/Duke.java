@@ -19,10 +19,15 @@ public class Duke {
                 }
                 input = scanner.nextLine();
             }else {
-                System.out.println("added: " + input);
-                list[counter] = input;
-                counter++;
-                input = scanner.nextLine();
+                if(counter == 100){
+                    System.out.println("Max limit of list hit");
+
+                }else {
+                    System.out.println("added: " + input);
+                    list[counter] = input;
+                    counter++;
+                    input = scanner.nextLine();
+                }
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
