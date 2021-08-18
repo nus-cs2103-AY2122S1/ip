@@ -7,6 +7,10 @@ public class Duke {
         LIST, DONE, TODO, EVENT, DEADLINE, DELETE
     }
 
+    enum TaskType {
+        TODO, EVENT, DEADLINE
+    }
+
     public static void printAddOrDelete(boolean isAdd, Task task, int numOfTask) {
         Printer.prettyPrint(String.format("%s. I've %s this task:\n\t %s\n\tNow you have %d tasks in the list.",
                 isAdd ? "Got it" : "Noted",
@@ -25,14 +29,14 @@ public class Duke {
         try {
             String[] descriptions = extractCommand(command);
             Task task = null;
-            switch (command[0]) {
-                case "todo":
+            switch (TaskType.valueOf(command[0].toUpperCase())) {
+                case TODO:
                     task = new Todo(descriptions[0]);
                     break;
-                case "event":
+                case EVENT:
                     task = new Event(descriptions[0], descriptions[1]);
                     break;
-                case "deadline":
+                case DEADLINE:
                     task = new Deadline(descriptions[0], descriptions[1]);
                     break;
             }
