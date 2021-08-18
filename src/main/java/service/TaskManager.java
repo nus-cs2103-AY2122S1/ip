@@ -27,14 +27,14 @@ public class TaskManager {
     private static final String EMPTY_LIST_MESSAGE = "List is empty, try adding some tasks first.";
     private static final String TASK_DONE_MESSAGE = "Nice! I've marked this task as done:\n\t%s";
     private static final String TASK_LIST_CONTENTS = "Here are the task(s) in your list:";
-    private static final String TASK_DELETED_MESSAGE = "Noted. I've removed this task:\n\t%s" +
-            "\nNow you have %d task(s) in the list.";
-    private static final String CREATE_TODO_MESSAGE = "Got it. I've added this TODO task:\n\t%s" +
-            "\nNow you have %d task(s) in the list.";
-    private static final String CREATE_EVENT_MESSAGE = "Got it. I've added this EVENT task:\n\t%s" +
-            "\nNow you have %d task(s) in the list.";
-    private static final String CREATE_DEADLINE_MESSAGE = "Got it. I've added this DEADLINE task:\n\t%s" +
-            "\nNow you have %d task(s) in the list.";
+    private static final String TASK_DELETED_MESSAGE =
+            "Noted. I've removed this task:\n\t%s\nNow you have %d task(s) in the list.";
+    private static final String CREATE_TODO_MESSAGE =
+            "Got it. I've added this TODO task:\n\t%s\nNow you have %d task(s) in the list.";
+    private static final String CREATE_EVENT_MESSAGE =
+            "Got it. I've added this EVENT task:\n\t%s\nNow you have %d task(s) in the list.";
+    private static final String CREATE_DEADLINE_MESSAGE =
+            "Got it. I've added this DEADLINE task:\n\t%s\nNow you have %d task(s) in the list.";
 
 
     private final static int MAX_STORAGE = 100;

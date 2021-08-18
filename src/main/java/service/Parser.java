@@ -15,8 +15,10 @@ public class Parser {
     /** Error messages. */
 
     private static final String EMPTY_COMMAND_MESSAGE = "Command cannot be empty.";
-    private static final String UNKNOWN_COMMAND_MESSAGE = "Instruction does not follows specified format.";
-    private static final String EMPTY_PARAM_TO_COMMAND_MESSAGE = "User parameter(s) to command '%s' cannot be empty.";
+    private static final String UNKNOWN_COMMAND_MESSAGE =
+            "Instruction does not follows specified format.";
+    private static final String EMPTY_PARAM_TO_COMMAND_MESSAGE =
+            "User parameter(s) to command '%s' cannot be empty.";
     private static final String NOT_AN_INTEGER_MESSAGE = "'%s' is not an integer.";
 
     /**

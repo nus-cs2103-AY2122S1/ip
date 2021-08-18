@@ -32,7 +32,9 @@ public class Duke {
     }
 
     /**
-     * Runs the whole Duke process.
+     * Runs the whole Duke process. Consists of (1) scanning input and parsing it to a
+     * Command, (2) parsing the inputs in the format required by the Command and (3)
+     * executing the Commanding and returning a String output to be printed to console.
      */
     public void run() {
         chatBot.greet();
