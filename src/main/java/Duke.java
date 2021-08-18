@@ -3,37 +3,29 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private final int MAX_TASKS = 100;
+    private static final int MAX_TASKS = 100;
+    private static final String BORDER = "____________________________________________________________\n";
     private static List<Task> taskList = new ArrayList<>();
-
-    private static String addTask(String taskName) {
-        if (taskList.size() < 100) {
-            taskList.add(new Task(taskName));
-            return "added: " + taskName;
-        } else {
-            return "Sorry! You have max number of tasks stored already.";
-        }
-    }
 
     private static String printTaskList() {
         int listLen = taskList.size();
-        String msg = "Here are the tasks in your list:";
+        StringBuilder msg = new StringBuilder("Here are the tasks in your list:");
         for (int i = 0; i < listLen; i++) {
             int currTaskNum = i + 1;
-            msg = msg + "\n" + currTaskNum + ". " + taskList.get(i).toString();
+            msg.append("\n").append(currTaskNum).append(". ").append(taskList.get(i).toString());
         }
-        return msg;
+        return msg.toString();
     }
 
     private static String markTaskDone(int taskNum) {
         Task taskToMark = taskList.get(taskNum);
         taskToMark.markDone();
-        return "Nice! I've marked this task as done: " + "\n  " + taskToMark.toString();
+        return "Nice! I've marked this task as done:" + "\n  " + taskToMark.toString();
     }
 
     private static String addTodo(String taskName) {
         int taskListLen = taskList.size();
-        if (taskListLen < 100) {
+        if (taskListLen < MAX_TASKS) {
             ToDo newTodo = new ToDo(taskName);
             taskList.add(newTodo);
             taskListLen += 1;
@@ -67,6 +59,18 @@ public class Duke {
                     newEvent.toString(), taskListLen);
         } else {
             return "Sorry! You have max number of tasks stored already.";
+        }
+    }
+
+    private static String deleteTask(int taskNum) {
+        int taskListLen = taskList.size();
+        if (taskNum + 1 <= taskListLen) {
+            Task removedTask = taskList.remove(taskNum);
+            taskListLen -= 1;
+            return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.",
+                    removedTask.toString(), taskListLen);
+        } else {
+            return "There is no task at the specified index.";
         }
     }
 
@@ -126,6 +130,13 @@ public class Duke {
                     String strTaskNum = input_split[1].split(" ")[0];
                     int taskNum = Integer.parseInt(strTaskNum) - 1;
                     System.out.println(markTaskDone(taskNum));
+                } else if (command.equals("delete")) {
+                    if (input_split.length < 2) {
+                        throw new DukeException("☹ OOPS!!! Please indicate which task you want to delete.");
+                    }
+                    String strTaskNum = input_split[1].split(" ")[0];
+                    int taskNum = Integer.parseInt(strTaskNum) - 1;
+                    System.out.println(deleteTask(taskNum));
                 } else {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
