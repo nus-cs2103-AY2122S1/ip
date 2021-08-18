@@ -21,55 +21,6 @@ public class Catobot {
             while (command != RequestType.CLOSE) {
                 try {
                     decideResponse(taskGroup, command, request);
-//                    // prints the response
-//                    if (request.matches("^list")) {
-//                        respond(taskGroup.display());
-//
-//                    } else if (request.matches("^done.*")) {
-//                        try {
-//                            int index = Integer.parseInt(request.substring("done".length()).trim());
-//                            respond(taskGroup.completeTask(index));
-//                        } catch(NumberFormatException e) {
-//                            throw new InvalidCommandException();
-//                        }
-//                    } else if (request.matches("^delete.*")) {
-//                        try {
-//                            int index = Integer.parseInt(request.substring("delete".length()).trim());
-//                            respond(taskGroup.deleteTask(index));
-//                        } catch(NumberFormatException e) {
-//                            throw new InvalidCommandException();
-//                        }
-//                    } else if (request.matches("^todo.*")) {
-//                        String description = request.substring("todo".length()).trim();
-//                        respond(taskGroup.add(Todo.of(description)));
-//
-//                    } else if (request.matches("^deadline.*")) {
-//                        if (!request.contains("/by")) {
-//                            throw new InvalidCommandException("Don't cheat me, give me a due time so I can watch you >.<");
-//                        }
-//                        String[] inputs = request.split("deadline")[1].trim().split(" /by ");
-//                        if (inputs.length == 1) {
-//                            throw new EmptyCommandException("deadline");
-//                        }
-//                        String description = inputs[0].trim();
-//                        String date = inputs[1];
-//                        respond(taskGroup.add(Deadline.of(description, date)));
-//
-//                    } else if (request.matches("^event.*")) {
-//                        if (!request.contains("/at")) {
-//                            throw new InvalidCommandException("Oh no, I am not sure when this is happening >.<");
-//                        }
-//                        String[] inputs = request.split("event")[1].trim().split(" /at ");
-//                        if (inputs.length == 1) {
-//                            throw new EmptyCommandException("event");
-//                        }
-//                        String description = inputs[0].trim();
-//                        String date = inputs[1];
-//                        respond(taskGroup.add(Event.of(description, date)));
-//
-//                    } else {
-//                        throw new InvalidCommandException();
-//                    }
                 } catch (BotException e) {
                     respond(e.getMessage());
                 } finally {
