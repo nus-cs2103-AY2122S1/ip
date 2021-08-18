@@ -13,5 +13,6 @@ public class MarkDoneCommand extends Command{
     public void execute(TaskList tasklist, Ui ui, Storage store) {
         tasklist.get(index).setFlag(true);
         ui.notifySuccessfulMarkDone(tasklist, index);
+        return;
     }
 }

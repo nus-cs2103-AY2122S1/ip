@@ -36,7 +36,7 @@ public class Ui {
 
     public void notifySuccessfulMarkDone(TaskList tasklist, int index) {
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + tasklist.get(index);
+        System.out.println("  " + tasklist.get(index));
     }
 
     public void notifySuccessfulDelete(TaskList tasklist, Task removed) {
@@ -47,5 +47,9 @@ public class Ui {
 
     public void notifyBadCommand() {
         System.out.println("Sorry! I don't know what your request means. Please try again?");
+    }
+
+    public void showLoadingError() {
+        System.out.println("An error occurred while loading in the saved data...");
     }
 }

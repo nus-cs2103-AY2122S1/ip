@@ -4,5 +4,6 @@ public class InvalidCommand extends Command {
     @Override
     public void execute(TaskList tasklist, Ui ui, Storage store) {
         ui.notifyBadCommand();
+        return;
     }
 }

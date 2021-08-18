@@ -9,6 +9,6 @@ public class DeleteCommand extends Command{
     public void execute(TaskList tasklist, Ui ui, Storage store) {
         Task removed = tasklist.delete(index);
         ui.notifySuccessfulDelete(tasklist, removed);
-        ui.readCommand();
+        return;
     }
 }

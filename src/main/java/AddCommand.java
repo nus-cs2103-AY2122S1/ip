@@ -19,6 +19,6 @@ public class AddCommand extends Command{
             tasklist.add(new Event(label));
         }
         ui.notifySuccessfulAdd(tasklist);
-        ui.readCommand();
+        return;
     }
 }

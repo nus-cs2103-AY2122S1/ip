@@ -4,4 +4,8 @@ public abstract class Command {
     public void execute(TaskList tasklist, Ui ui, Storage store) {
 
     }
+
+    public boolean isExit() {
+        return isDone;
+    }
 }
