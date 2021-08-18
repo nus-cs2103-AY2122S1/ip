@@ -43,8 +43,7 @@ public class Duke {
                         String description = getDescription("todo");
                         ToDo task = new ToDo(description.trim());
                         taskList.add(task);
-                        String message = "Alright! New task added:\n" + task +
-                                String.format("\nThere are now %d tasks in your list\n", taskList.size());
+                        String message = "Alright! New task added:\n" + task + getTaskListStatus();
                         System.out.println(outputTemplate(message));
                         break;
                     }
@@ -53,8 +52,7 @@ public class Duke {
                         String[] parameters = description.split(" /by ");
                         Deadline task = new Deadline(parameters[0].trim(), parameters[1]);
                         taskList.add(task);
-                        String message = "Alright! New task added:\n" + task +
-                                String.format("\nThere are now %d tasks in your list\n", taskList.size());
+                        String message = "Alright! New task added:\n" + task + getTaskListStatus();
                         System.out.println(outputTemplate(message));
                         break;
                     }
@@ -63,8 +61,14 @@ public class Duke {
                         String[] parameters = description.split(" /at ");
                         Event task = new Event(parameters[0], parameters[1]);
                         taskList.add(task);
-                        String message = "Alright! New task added:\n" + task +
-                                String.format("\nThere are now %d tasks in your list\n", taskList.size());
+                        String message = "Alright! New task added:\n" + task + getTaskListStatus();
+                        System.out.println(outputTemplate(message));
+                        break;
+                    }
+                    case "delete": {
+                        int taskNumber = getTaskNumber();
+                        Task deletedTask = taskList.remove(taskNumber - 1);
+                        String message = "Alright! I've deleted this task:\n" + deletedTask + getTaskListStatus();
                         System.out.println(outputTemplate(message));
                         break;
                     }
@@ -103,6 +107,16 @@ public class Duke {
             throw new DukeException("I cannot find this task number!");
         } else {
             return taskNumber;
+        }
+    }
+
+    private String getTaskListStatus() {
+        if (taskList.size() == 0) {
+            return "There are no tasks in the list\n";
+        } else if (taskList.size() == 1) {
+            return "\nThere is currently 1 task in your list\n";
+        } else {
+            return String.format("\nThere are currently %d tasks in your list\n", taskList.size());
         }
     }
 }
