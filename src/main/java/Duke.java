@@ -20,14 +20,6 @@ public class Duke {
         System.out.println(LINE + "\t" + message + LINE);
     }
 
-    /**
-     * Prompt user for next command after printing a formatted message.
-     */
-    private static String promptNextCommand(String message, Scanner sc) {
-        printFormattedMessage(message);
-        return sc.nextLine();
-    }
-
     private static void addTask(Task t) {
         tasks.add(t);
         printFormattedMessage("Got it. I've added this task:\n\t" 
@@ -50,9 +42,15 @@ public class Duke {
         printFormattedMessage("Good job! I've marked this task as done:\n\n\t" + t + "\n");  
     }
 
-    private static String[] parseTaskWithTime(String command, String type) {
+    private static String[] parseTaskWithTime(String command, String type) throws DukeException {
         String splitWord = type == "deadline" ? "/by " : "/at ";
         String[] commandSplit = command.split(splitWord);
+        String missingInfo = type == "deadline" ? "a deadline!" : "an event time!";
+
+        if (commandSplit.length <= 1) {
+            throw new DukeException("You need to provide " + missingInfo + "\n");
+        }
+        
         String task = commandSplit[0].split(type)[1];
         String time = commandSplit[1];
 
@@ -68,45 +66,38 @@ public class Duke {
         String command = sc.nextLine();
 
         while (!command.equals("bye")) {
-            // * Print list of tasks if command is "list"
-            String[] splitCommand = command.split(" ");
-            String action = splitCommand[0];
-
-            switch(action) {
-                case "list":
+            try {
+                if (command.equals("list")) {
                     printTasks();
-                    break;
-                case "done":
-                    if (splitCommand.length <= 1) {
-                        command = promptNextCommand("You need to specify which task you've done!\n", sc);
-                        continue;
+                } else if (command.startsWith("done")) {
+                    if (command.equals("done")) {
+                        throw new DukeException("You need to specify which task you've done!\n");
                     }
 
-                    int taskIdx = Integer.parseInt(splitCommand[1]) - 1;
-                    if (taskIdx >= tasks.size() || taskIdx < 0) {
-                        command = promptNextCommand("I'm sorry, but that task number is out of range.\n", sc);
-                        continue;
+                    try {
+                        int taskIdx = Integer.parseInt(command.split(" ")[1]) - 1;
+                        completeTask(tasks.get(taskIdx));
+                    } catch (NumberFormatException err) {
+                        throw new DukeException("Please use the task number instead of task name!\n");
+                    } catch (IndexOutOfBoundsException err) {
+                        throw new DukeException("I'm sorry, but that task number is out of range.\n");
                     }
-                    
-                    completeTask(tasks.get(taskIdx));
-                    break;
-                case "todo":
+                } else if (command.startsWith("todo")) {
+                    if (command.equals("todo")) {
+                        throw new DukeException("You need to specify which task you want to add!\n");
+                    }
+
                     String todo = command.split("todo")[1];
                     addTask(new ToDo(todo));
-                    break;
-                case "deadline":
-                    String[] deadlineTask = parseTaskWithTime(command, "deadline");
-                    addTask(new Deadline(deadlineTask[0], deadlineTask[1]));
-                    break;
-                case "event":
-                    String[] eventTask = parseTaskWithTime(command, "event");
-                    addTask(new Event(eventTask[0], eventTask[1]));
-                    break;
-                default:
-                    // * For any other text input, add a task to the list if it is not empty
-                    if (command.length() > 0) {
-                        addTask(new Task(command));
-                    } 
+                } else if (command.startsWith("deadline") || command.startsWith("event")) {
+                    String taskType = command.split(" ")[0];
+                    String[] timeTask = parseTaskWithTime(command, taskType);
+                    addTask(new Deadline(timeTask[0], timeTask[1]));
+                } else {
+                    throw new DukeException("I don't understand that command!\n");
+                }
+            } catch (DukeException e) {
+                printFormattedMessage(e.getMessage());
             }
             
             // * Ask user for next command
