@@ -103,7 +103,7 @@ public class TaskManager {
         return TASK_LIST.get(taskNumber - 1); // shift to 0-indexing
     }
 
-    public List<String> listTasks() throws TaskManagerException {
+    public List<String> listTasks() {
         List<String> taskManagerStringList = new ArrayList<>();
         taskManagerStringList.add("Here are the tasks in your list:");
         for (int idx = 0; idx < TASK_LIST.size(); idx ++) {
