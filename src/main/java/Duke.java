@@ -30,7 +30,9 @@ public class Duke {
 
     private static void addTask(Task t) {
         tasks.add(t);
-        printFormattedMessage("added: " + t.getName() + "\n"); 
+        printFormattedMessage("Got it. I've added this task:\n\t" 
+                                + t.toString() 
+                                + "\n\tNow you have " + tasks.size() + " tasks in the list.\n"); 
     } 
 
     private static void printTasks() {
@@ -46,6 +48,18 @@ public class Duke {
     private static void completeTask(Task t) {
         t.setDone(true);
         printFormattedMessage("Good job! I've marked this task as done:\n\n\t" + t + "\n");  
+    }
+
+    private static String[] parseTaskWithTime(String command, String type) {
+        String splitWord = type == "deadline" ? "/by " : "/at ";
+        String[] commandSplit = command.split(splitWord);
+        String task = commandSplit[0].split(type)[1];
+        String time = commandSplit[1];
+
+        String[] result = new String[2];
+        result[0] = task;
+        result[1] = time;
+        return result;
     }
 
     public static void main(String[] args) {
@@ -75,6 +89,18 @@ public class Duke {
                     }
                     
                     completeTask(tasks.get(taskIdx));
+                    break;
+                case "todo":
+                    String todo = command.split("todo")[1];
+                    addTask(new ToDo(todo));
+                    break;
+                case "deadline":
+                    String[] deadlineTask = parseTaskWithTime(command, "deadline");
+                    addTask(new Deadline(deadlineTask[0], deadlineTask[1]));
+                    break;
+                case "event":
+                    String[] eventTask = parseTaskWithTime(command, "event");
+                    addTask(new Event(eventTask[0], eventTask[1]));
                     break;
                 default:
                     // * For any other text input, add a task to the list if it is not empty
