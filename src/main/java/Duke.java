@@ -6,7 +6,7 @@ public class Duke {
     protected ArrayList<Task> toDoList;
 
     public Duke() {
-        this.toDoList = new ArrayList<Task>(100);
+        this.toDoList = new ArrayList<>(100);
     }
 
     public static void main(String[] args) {
@@ -19,21 +19,44 @@ public class Duke {
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine().trim();
             if (command.equals("bye")) {
+                scanner.close();
                 duke.bye();
                 break;
-            } else if (command.equals("list")) {
-                duke.list();
-            } else if (command.startsWith("done")) {
-                duke.done(command.substring(5));
-            } else if (command.startsWith("todo")) {
-                duke.add(command.substring(5), "todo");
-            } else if (command.startsWith("deadline")) {
-                duke.add(command.substring(9), "deadline");
-            } else if (command.startsWith("event")) {
-                duke.add(command.substring(6), "event");
-            } else {
-                break;
             }
+
+            try {
+                duke.runCommand(command);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        scanner.close();
+
+    }
+
+    public void runCommand(String command) throws DukeException {
+        if (command.equals("list")) {
+            list();
+        } else if (command.startsWith("done")) {
+            done(command.substring(5));
+        } else if (command.startsWith("todo")) {
+            if (command.equals("todo")) {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+            add(command.substring(5), "todo");
+        } else if (command.startsWith("deadline")) {
+            if (command.equals("deadline")) {
+                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            }
+            add(command.substring(9), "deadline");
+        } else if (command.startsWith("event")) {
+            if (command.equals("event")) {
+                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+            }
+            add(command.substring(6), "event");
+        } else {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
     }
@@ -51,12 +74,12 @@ public class Duke {
 
             System.out.println("Got it. I've added this task:");
 
-            if (taskType == "todo") {
+            if (taskType.equals("todo")) {
                 Task task = new Todo(description);
                 toDoList.add(task);
                 System.out.println(task);
 
-            } else if (taskType == "deadline") {
+            } else if (taskType.equals("deadline")) {
                 String newDescription = description.substring(0, description.indexOf(" /by "));
                 String by = description.substring(description.indexOf("/by ") + 4);
                 Task task = new Deadline(newDescription, by);
@@ -72,9 +95,9 @@ public class Duke {
             }
 
             if (toDoList.size() > 1) {
-                System.out.println(String.format("Now you have %d tasks in the list.", toDoList.size()));
+                System.out.printf("Now you have %d tasks in the list.%n", toDoList.size());
             } else {
-                System.out.println(String.format("Now you have 1 task in the list."));
+                System.out.println("Now you have 1 task in the list.");
             }
         }
 
@@ -84,7 +107,7 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         int num = 1;
         for (Task task: toDoList) {
-            System.out.println(String.format("%d.%s", num, task));
+            System.out.printf("%d.%s%n", num, task);
             num++;
         }
     }
