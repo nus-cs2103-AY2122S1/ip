@@ -22,6 +22,9 @@ public class Duke {
         String endCmd = "bye";
         String listCmd = "list";
         String doneCmd = "done";
+        String todoCmd = "todo";
+        String deadlineCmd = "deadline";
+        String eventCmd = "event";
 
         Scanner sc = new Scanner(System.in);
         boolean end = false;
@@ -29,6 +32,7 @@ public class Duke {
             String input = sc.nextLine();
             String[] inputs = input.split(" ", 2);
             String cmd = inputs[0];
+            String description = inputs.length > 1 ? inputs[1] : "";
             System.out.println(separator);
 
             if (cmd.equals(endCmd)) {
@@ -37,10 +41,13 @@ public class Duke {
             } else if (cmd.equals(listCmd)) {
                 displayList();
             } else if (cmd.equals(doneCmd)) {
-                Integer taskNum = Integer.parseInt(inputs[1]);
-                markTaskDone(taskNum);
-            } else {
-                addTask(input);
+                markTaskDone(Integer.parseInt(description));
+            } else if (cmd.equals(todoCmd)) {
+                addTask(todoCmd, description);
+            } else if (cmd.equals(deadlineCmd)) {
+                addTask(deadlineCmd, description);
+            } else if (cmd.equals(eventCmd)) {
+                addTask(eventCmd, description);
             }
             System.out.println(separator);
         }
@@ -55,9 +62,23 @@ public class Duke {
         }
     }
 
-    private static void addTask(String description) {
-        todoList.add(new Task(description));
-        System.out.println("added: " + description);
+    private static void addTask(String taskType, String description) {
+        Task task;
+        if (taskType == "todo") {
+            task = new ToDo(description);
+        } else if (taskType == "deadline") {
+            String[] inputs = description.split(" /by ", 2);
+            task = new Deadline(inputs[0], inputs[1]);
+        } else if (taskType == "event") {
+            String[] inputs = description.split(" /at ", 2);
+            task = new Event(inputs[0], inputs[1]);
+        } else {
+            return;
+        }
+        todoList.add(task);
+        System.out.println("I've added this task:");
+        System.out.println(task.toString());
+        System.out.println("Now you have " + todoList.size() + " tasks in the list.");
     }
 
     private static void markTaskDone(Integer taskNum) {
