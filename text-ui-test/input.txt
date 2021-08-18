@@ -1,0 +1,15 @@
+todo read book
+todo return book
+list
+event project meeting /at Mon 2-4pm
+deadline return book /by Sunday
+event watch movie /at Sat 9-11.30pm
+list
+todo buy groceries
+done 3
+list
+done 1
+deadline go fishing /by Friday
+done 2
+list
+bye
