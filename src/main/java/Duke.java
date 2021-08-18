@@ -69,9 +69,9 @@ public class Duke {
         helpString += "\t\t\t 2. todo [#description] -> Adds a ToDo Task to the List\n";
         helpString += "\t\t\t 3. event #description /at #timing -> Adds an Event Task to the List\n";
         helpString += "\t\t\t 4. deadline #description /by #deadline -> Adds a Deadline Task to the List\n";
-        helpString += "\t\t\t 5. delete #index -> Delete Task at #index in the List\n";
-        helpString += "\t\t\t 6. done #index -> Marks Task at #index in the List as completed\n";
-        helpString += "\t\t\t 7. undo #index -> Marks Task at #index in the List as incomplete\n";
+        helpString += "\t\t\t 5. done #index -> Marks Task at #index in the List as completed\n";
+        helpString += "\t\t\t 6. undo #index -> Marks Task at #index in the List as incomplete\n";
+        helpString += "\t\t\t 7. delete #index -> Delete Task at #index in the List\n";
         helpString += "\t\t\t 8. bye/goodbye -> Quits the ChatBot";
         echo(helpString, TYPE.COMPLETE);
     }
