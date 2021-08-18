@@ -14,13 +14,8 @@ public class Duke {
 
     // Starts Dean bot.
     private static void startDeanBot() {
-        String logo = "   ____                       \n"
-                +     "  |  _ \\  ___  __ _ _ ___    \n"
-                +     "  | | | |/ _ \\/ _` | '_  \\  \n"
-                +     "  | |_| |  __| (_| | | | |    \n"
-                +     "  |____/ \\___|\\__,_|_| |_|  \n";
         printDoubleLineBorder();
-        System.out.println("Hello! I'm\n" + logo + "\nHow may I help you?");
+        System.out.println("Hi there! I'm Dean" + "\nHow may I help you?");
         printDoubleLineBorder();
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
