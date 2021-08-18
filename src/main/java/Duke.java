@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -53,8 +52,11 @@ public class Duke {
                             System.out.println("Invalid Task Number");
                         }
                     } else {
-                        addTask(input);
-
+                        try {
+                            addTask(input);
+                        } catch (DukeException e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
                     printSingleLineBorder();
             }
@@ -62,7 +64,7 @@ public class Duke {
     }
 
     // Add task to list.
-    private static void addTask(String input) {
+    private static void addTask(String input) throws DukeException {
         Task task;
         String[] splitInput = input.split(" ");
         String taskType = splitInput[0];
@@ -76,22 +78,35 @@ public class Duke {
                 taskDescription += splitInput[i] + " ";
             } else {
                 taskDescription += splitInput[i];
+                if (taskHasTimestamp) {
+                    taskDescription += ")";
+                }
             }
         }
-        if (taskHasTimestamp) {
-            taskDescription += ")";
+        if (taskDescription.length() == 0) {
+            throw new DukeException("The description of a task cannot be empty.");
         }
         if (taskType.equals("todo")) {
             task = new ToDo(taskDescription);
             list.add(task);
         } else if (taskType.equals("deadline")) {
+            if (!input.contains("by")) {
+                throw new DukeException("Invalid deadline task.\n" +
+                        "Please enter task followed by /by and then the date/time it is due,\n" +
+                        "e.g. CS2103T Individual Project /by Week 6");
+            }
             task = new Deadline(taskDescription);
             list.add(task);
         } else if (taskType.equals("event")) {
+            if (!input.contains("at")) {
+                throw new DukeException("Invalid event task.\n" +
+                        "Please enter task followed by /at and then the date it is due,\n" +
+                        "e.g. CS2103T Test /at Friday 4-6pm");
+            }
             task = new Event(taskDescription);
             list.add(task);
         } else {
-            throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("Invalid type of task. Only todo, deadline or event is allowed.");
         }
         numberOfTasks++;
         System.out.println("Got it. I've added this task:\n" + task);
