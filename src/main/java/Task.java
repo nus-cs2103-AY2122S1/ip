@@ -1,7 +1,7 @@
 public class Task {
     private static final String DONE_MSG = "Well done.";
-    private static final String NEW_TASK_MSG = "New Task Added";
-
+    private static final String NEW_TASK_MSG = "New task added:";
+    private static final String DELETE_MSG = "The following have been deleted:";
 
     private String type;
     private String description;
@@ -19,6 +19,10 @@ public class Task {
         this.isDone = true;
         this.status = "[X]";
         return DONE_MSG + "\n" + this.toString();
+    }
+
+    public String delete() {
+        return DELETE_MSG + "\n" + this.toString();
     }
 
     public String actionString() {

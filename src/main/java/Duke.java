@@ -14,8 +14,7 @@ public class Duke {
 
         Scanner sc  = new Scanner(System.in);
         String input = sc.next();
-        String description = sc.nextLine();
-
+        String description = sc.nextLine().trim();
 
         while (!input.equals("bye")) {
             try {
@@ -27,16 +26,18 @@ public class Duke {
             description = sc.nextLine().trim();
         }
 
-
         System.out.println(formatString(EXIT_MSG));
     }
 
-    private static void action(String action, String description) throws InvalidInputException{
+    private static void action(String action, String description) throws InvalidInputException {
         if (action.equals("list")) {
             System.out.print(formatString(getTaskString()));
-        } else if (action.equals("done")){
-            Integer index = Integer.valueOf(description) - 1;
-            System.out.println(formatString(tasks.get(index).markAsDone()));
+        } else if (action.equals("done")) {
+            int index = Integer.valueOf(description) - 1;
+            System.out.println(formatString(tasks.get(index).markAsDone() + "\n" + getTaskCountString()));
+        } else if (action.equals("delete")) {
+            int index = Integer.valueOf(description) - 1;
+            System.out.println(formatString(tasks.remove(index).delete() + "\n" + getTaskCountString()));
         } else if (action.equals("todo")){
             if (description.isBlank()) {
                 throw new InvalidInputException("todo's description cannot be empty!");
