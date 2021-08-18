@@ -10,6 +10,11 @@ public class Duke {
                 taskList.addToList(task), taskList.taskCount());
     }
 
+    private static String deleteTask(TaskList taskList, int index) {
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
+                taskList.deleteFromList(index), taskList.taskCount());
+    }
+
     public static void runDuke(TaskList taskList) throws DukeException{
         boolean descriptionEmpty = false;
         Scanner input = new Scanner(System.in);
@@ -37,6 +42,9 @@ public class Duke {
                     break;
                 case "done":
                     System.out.println("Nice! I've marked this task as done:\n" + taskList.taskDone(Integer.parseInt(restOfInput)));
+                    break;
+                case "delete":
+                    System.out.println(deleteTask(taskList, Integer.parseInt(restOfInput)));
                     break;
                 case "todo":
                     Task currToDo = new ToDo(restOfInput, descriptionEmpty);

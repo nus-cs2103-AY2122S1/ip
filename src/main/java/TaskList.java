@@ -14,8 +14,14 @@ public class TaskList {
         return newTask.toString();
     }
 
-    public String taskDone(int id) {
-        Task curr = tasks.get(id - 1);
+    public String deleteFromList(int index) {
+        Task curr = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        return curr.toString();
+    }
+
+    public String taskDone(int index) {
+        Task curr = tasks.get(index - 1);
         curr.markAsDone();
         return curr.toString();
     }
