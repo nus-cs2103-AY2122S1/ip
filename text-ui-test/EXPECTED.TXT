@@ -5,3 +5,51 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+__________________________________
+Howdy! I'm Duke
+How may I assist you?
+__________________________________
+__________________________________
+Got it. I've added this task:
+[T][ ] eat lunch
+Now you have 1 task(s) in the list.
+__________________________________
+__________________________________
+Got it. I've added this task:
+[T][ ] borrow book
+Now you have 2 task(s) in the list.
+__________________________________
+__________________________________
+Got it. I've added this task:
+[D][ ] return book (by: 2pm)
+Now you have 3 task(s) in the list.
+__________________________________
+__________________________________
+Got it. I've added this task:
+[E][ ] project meeting (at: Sun 12am)
+Now you have 4 task(s) in the list.
+__________________________________
+__________________________________
+Nice! I've marked this task as done:
+[T][X] borrow book
+__________________________________
+__________________________________
+Nice! I've marked this task as done:
+[T][X] eat lunch
+__________________________________
+__________________________________
+Got it. I've added this task:
+[D][ ] complete assignment (by: 2pm)
+Now you have 5 task(s) in the list.
+__________________________________
+__________________________________
+Here are the tasks in your list:
+1.[T][X] eat lunch
+2.[T][X] borrow book
+3.[D][ ] return book (by: 2pm)
+4.[E][ ] project meeting (at: Sun 12am)
+5.[D][ ] complete assignment (by: 2pm)
+__________________________________
+__________________________________
+Bye. Hope to see you again soon!
+__________________________________

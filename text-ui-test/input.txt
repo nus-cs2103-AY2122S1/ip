@@ -1,0 +1,9 @@
+todo eat lunch
+todo borrow book
+deadline return book /by 2pm
+event project meeting /at Sun 12am
+done 2
+done 1
+deadline complete assignment /by 2pm
+list
+bye
