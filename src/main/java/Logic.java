@@ -40,10 +40,23 @@ public class Logic {
                         Persistence.addToLog(new Todo(loggedCommand));
                         break;
                     case DEADLINE:
-                        Persistence.addToLog(new Deadline(loggedCommand));
+                        int indicatorDeadline = listOfCommandInputs.indexOf("/by");
+                        String tempDeadline = new String();
+                        String deadline = listOfCommandInputs.get(indicatorDeadline + 1);
+                        for (int i = 0; i < indicatorDeadline; i++) {
+                            tempDeadline = tempDeadline + listOfCommandInputs.get(i);
+                        }
+                        Persistence.addToLog(new Deadline(tempDeadline, deadline));
                         break;
                     case EVENT:
-                        Persistence.addToLog(new Event(loggedCommand));
+                        int indicatorEvent = listOfCommandInputs.indexOf("/at");
+                        String date = listOfCommandInputs.get(indicatorEvent + 1);
+                        String time = listOfCommandInputs.get(indicatorEvent + 2);
+                        String temp = new String();
+                        for (int i = 0; i < indicatorEvent; i++) {
+                            temp = temp + listOfCommandInputs.get(i);
+                        }
+                        Persistence.addToLog(new Event(temp, date, time));
                         break;
                     case NOTAPPLICABLE:
                         System.out.println(loggedCommand);
