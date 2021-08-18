@@ -21,6 +21,7 @@ public class Task {
         this.done = false;
     }
 
+    @Override
     public String toString() {
         String doneSymbol = this.done ? "[X]" : "[ ]";
 

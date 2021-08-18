@@ -1,5 +1,4 @@
-import task.Task;
-import task.TaskList;
+import task.*;
 
 import java.util.Scanner;
 
@@ -10,10 +9,28 @@ public class Duke {
         taskList = new TaskList();
     }
 
+    public void informTaskAdded(Task task) {
+        this.echo("I've added the following task:\n"
+                + "    " + task + "\n"
+                + "You have " + this.taskList.size() + " task(s) in the list.\n");
+    }
+
     public void addTodo(String description) {
-        Task task = new Task(description);
+        Task task = new Todo(description);
         this.taskList.addTask(task);
-        this.echo("Added -- " + description + " -- to task list.");
+        this.informTaskAdded(task);
+    }
+
+    public void addDeadline(String description, String by) {
+        Task task = new Deadline(description, by);
+        this.taskList.addTask(task);
+        this.informTaskAdded(task);
+    }
+
+    public void addEvent(String description, String at) {
+        Task task = new Event(description, at);
+        this.taskList.addTask(task);
+        this.informTaskAdded(task);
     }
 
     public void printList() {
@@ -61,6 +78,19 @@ public class Duke {
             } else if (response.startsWith("done ")) {
                 int index = Integer.parseInt(response.substring(5));
                 this.markDone(index);
+            } else if (response.startsWith("todo ")) {
+                String description = response.substring(5);
+                this.addTodo(description);
+            } else if (response.startsWith("deadline ")) {
+                String[] params = response.substring(9).split(" /by ");
+                String description = params[0];
+                String by = params[1];
+                this.addDeadline(description, by);
+            } else if (response.startsWith("event ")) {
+                String[] params = response.substring(6).split(" /at ");
+                String description = params[0];
+                String at = params[1];
+                this.addEvent(description, at);
             } else {
                 this.addTodo(response);
             }

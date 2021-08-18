@@ -13,6 +13,10 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    public int size() {
+        return this.taskList.size();
+    }
+
     public void markDone(int index) {
         this.taskList.get(index).markAsDone();
     }
@@ -21,6 +25,7 @@ public class TaskList {
         this.taskList.get(index).markAsNotDone();
     }
 
+    @Override
     public String toString() {
         String s = "";
 
