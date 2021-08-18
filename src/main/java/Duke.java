@@ -17,6 +17,8 @@ public class Duke {
     public Duke() {
         items = new Items();
     }
+
+
     /**
      * method to greet the user
      */
@@ -39,7 +41,10 @@ public class Duke {
             String output = "";
             input = getInput(sc).split("\\s+");
             String command = input[0];
-
+            String[] task = compileInput(input);
+            if (task[0].equals("error")) {
+                continue;
+            }
             switch (command) {
                 case "list":
                     printMessage(items.printList());
@@ -54,9 +59,18 @@ public class Duke {
                 case "bye":
                     flag = false;
                     break;
+                case "todo":
+                    printMessage(items.addItem(new Todo(task[0])));
+                    break;
+                case "event":
+                    printMessage(items.addItem(new Event(task[0], task[1])));
+                    break;
+                case "deadline":
+                    printMessage(items.addItem(new Deadline(task[0], task[1])));
+                    break;
                 default:
-                    String item = combineInputArray(input).toString();
-                    printMessage(items.addItem(item));
+                    printMessage("I don't recognise this command\n" +
+                            "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'");
                     break;
             }
         }
@@ -98,6 +112,77 @@ public class Duke {
         System.out.println(LINE);
         System.out.println(message);
         System.out.println(END_LINE);
+    }
+
+
+    /**
+     * Convert the user input string into meaningful commands.
+     * @param input the user input string.
+     * @return the meaningful commands.
+     */
+    private String[] compileInput(String[] input) {
+        StringBuilder result = combineInputArray(input);
+        switch (input[0]) {
+            case "deadline":
+                String[] output = result.toString().split(" /by ");
+                if (output.length < 2) {
+                    printMessage("Please provide both description and time. Use '/by'. (eg. deadline fix hair /by 1pm tomorrow)");
+                } else {
+                    return output;
+                }
+                break;
+            case "event":
+                String[] output1 = result.toString().split(" /at ");
+                if (output1.length < 2) {
+                    printMessage("Please provide both description and time. Use '/at'. (eg. event fix hair /at 1pm tomorrow)");
+                } else {
+                    return output1;
+                }
+                break;
+            case "todo":
+                if (input.length < 2) {
+                    printMessage("Please specify the task you want to do");
+                } else {
+                    return new String[] {result.toString()};
+                }
+                break;
+            case "done":
+                if (input.length < 2) {
+                    printMessage("Please specify which task you have done");
+                    break;
+                } else if (input.length != 2) {
+                    printMessage("'done' command requires exactly 1 argument. (eg. done 12)");
+                    break;
+                }
+
+                try {
+                    Integer.parseInt(input[1]);
+                } catch (Exception e) {
+                    printMessage("'done' command requires an integer as number. (eg. done 12)");
+                    break;
+                }
+
+                return new String[] {input[1]};
+            case "list":
+                if (input.length != 1) {
+                    printMessage("'list' command doesn't require any arguments.");
+                } else {
+                    return new String[] {input[0]};
+                }
+                break;
+            case "bye":
+                if (input.length != 1) {
+                    printMessage("'bye' command doesn't require any arguments.");
+                    break;
+                } else {
+                    return new String[] {input[0]};
+                }
+            default:
+                printMessage("I don't recognise this command\n" +
+                        "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'");
+                break;
+        }
+        return new String[] {"error"};
     }
 
 

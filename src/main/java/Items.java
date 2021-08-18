@@ -21,13 +21,14 @@ public class Items {
 
     /**
      * Add an item to the list.
-     * @param item A string to represent the item added
+     * @param task A task to represent the item added
      * @return A status message to be displayed
      */
-    public String addItem(String item) {
-        Task task = new Task(item);
+    public String addItem(Task task) {
         list[len++] = task;
-        return "added " + item;
+        String output = "Got it, I've added this task:\n" + task.toString();
+        output += "\nNow you have " + len + " tasks in the list.";
+        return output;
     }
 
     /**
