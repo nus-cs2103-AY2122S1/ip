@@ -1,10 +1,7 @@
 /**
  * Represents a Deadline object.
  */
-public class Deadline extends Task {
-    /** The date to complete the task by */
-    private String by;
-
+public class Deadline extends DatedTask {
     /**
      * Deadline constructor.
      *
@@ -22,8 +19,7 @@ public class Deadline extends Task {
      * @param by the date to complete the task by
      */
     private Deadline(String description, String by) {
-        super(description);
-        this.by = by;
+        super(description, by);
     }
 
     /**
@@ -53,6 +49,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s %s (by: %s)", isDone ? "[X]" : "[ ]", description, by);
+        return String.format("[D]%s %s (by: %s)", isDone ? "[X]" : "[ ]", description, date);
     }
 }
