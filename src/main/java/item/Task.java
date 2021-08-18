@@ -1,8 +1,16 @@
+package item;
+
+import exception.BotException;
+import exception.EmptyCommandException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description) throws BotException {
+        if (description.isEmpty()) {
+            throw new EmptyCommandException("task");
+        }
         this.description = description;
         this.isDone = false;
     }
