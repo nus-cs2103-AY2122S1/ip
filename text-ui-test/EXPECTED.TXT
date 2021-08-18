@@ -17,4 +17,7 @@ Nice! I've marked this task as done:
 [D][X] return book (by:Sunday)
 OOPS!!! The description of a deadline cannot be empty.
 OOPS!!! I'm sorry, but I don't know what that means :-(
+Noted. I've removed this task:
+[T][ ] borrow book
+Now you have 3 tasks in the list
 Bye. Hope to see you again soon!
