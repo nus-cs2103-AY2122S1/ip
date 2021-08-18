@@ -8,13 +8,14 @@ public class Duke {
     private static String nameOfRobot = "Duke";
     private static final String ExitWord = "bye";
     private static final String ListWord = "list";
+    private static final String MarkWord = "done ";
 
 
-    private static ArrayList<String> dukeList;
+    private static ArrayList<Task> taskList;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        dukeList = new ArrayList<String>();
+        taskList = new ArrayList<Task>();
 
         // print logo
         String logo = " ____        _        \n"
@@ -33,35 +34,51 @@ public class Duke {
         // Echo loop till exit word is entered
         for (;;) {
             String userInput = sc.nextLine();
-
+            PrintWithIndent(HorizontalLine);
             // Check user input
             if (userInput.equals(ExitWord)) {
-                // Exit the robot
-                PrintWithIndent(HorizontalLine);
                 PrintWithIndent("Bye. Hope to see you again soon!");
-                PrintWithIndent(HorizontalLine);
-                break;
             } else if (userInput.equals(ListWord)) {
                 // Print the list
-                PrintWithIndent(HorizontalLine);
                 PrintList();
-                PrintWithIndent(HorizontalLine);
-            } else{
-                // Echos and add user input to the list
-                PrintWithIndent(HorizontalLine);
-                dukeList.add(userInput);
+            } else if (IsValidMark(userInput)) {
+                Task t = taskList.get(Integer.parseInt(userInput.substring(MarkWord.length())) - 1);
+                t.isDone = true;
+                PrintWithIndent("Nice! I've marked this task as done: ");
+                PrintWithIndent("  " + t);
+            }
+            else{
+                // Echos and add new task to the list
+                taskList.add(new Task(userInput));
                 PrintWithIndent("added: " + userInput);
-                PrintWithIndent(HorizontalLine);
+            }
+            PrintWithIndent(HorizontalLine);
+
+            if (userInput.equals(ExitWord)) {
+                // Exit the loop
+                break;
             }
         }
     }
 
-    public static void PrintWithIndent(String s) {
+    private static void PrintWithIndent(String s) {
         System.out.println(LIndent + s);
     }
 
-    public static void PrintList() {
-        for (int i = 0; i < dukeList.size(); i++)
-            PrintWithIndent(i + ". " + dukeList.get(i));
+    private static void PrintList() {
+        for (int i = 0; i < taskList.size(); i++)
+            PrintWithIndent((i+1) + ". " + taskList.get(i));
+    }
+
+    private static boolean IsValidMark(String s) {
+        if (s.length() > MarkWord.length() && s.substring(0, MarkWord.length()).equals(MarkWord)) {
+            try {
+                int taskIndex = Integer.parseInt(s.substring(MarkWord.length()));
+                return taskIndex >= 1 && taskIndex <= taskList.size();
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+        return false;
     }
 }
