@@ -34,7 +34,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < counter; i++) {
                     Task currTask = tasks[i];
-                    System.out.println(i+1 + ".[" + currTask.getStatusIcon() + "] " + currTask.getDescription());
+                    System.out.println(i+1 + "." + currTask.toString());
                 }
                 System.out.println(dash);
 
@@ -45,7 +45,7 @@ public class Duke {
 
                 System.out.println(dash);
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(" [" + currTask.getStatusIcon()+ "] " + currTask.getDescription());
+                System.out.println(currTask.toString());
                 System.out.println(dash);
 
             } else  {
