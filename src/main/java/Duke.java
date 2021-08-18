@@ -87,6 +87,14 @@ public class Duke {
                 display("Got it. I've added this task: \n\t\t "
                         + t
                         + "\n\t Now you have " + duke.tasks.size() + " tasks in the list.");
+            } else if (command.equals("delete")) {
+                // Delete task
+                int index = Integer.parseInt(data);
+                Task t = duke.tasks.get(index - 1);
+                duke.tasks.remove(index - 1);
+                display("Noted. I've removed this task: \n\t\t "
+                        + t
+                        + "\n\t Now you have " + duke.tasks.size() + " tasks in the list.");
             } else {
                 display("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
