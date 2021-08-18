@@ -1,0 +1,9 @@
+list
+todo do homework
+deadline study /by sunday 6pm
+event lessons /at monday 8am-6pm
+list
+done 2
+done 3
+list
+bye
