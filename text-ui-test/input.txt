@@ -1,4 +1,6 @@
 todo
+deadline
+event
 todo eat
 todo sleep
 deadline return book /by Sunday
@@ -7,4 +9,6 @@ blah
 done 3
 list
 delete 2
+delete 2
+list
 bye

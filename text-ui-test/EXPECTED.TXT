@@ -7,6 +7,8 @@
 Hello! I'm Duke
 What can I do for you?
 OOPS!! The description of a todo cannot be empty :(
+OOPS!! The description of a deadline cannot be empty :(
+OOPS!! The description of a event cannot be empty :(
 Just added:
 [T][ ] eat
 You currently have 1 tasks in the list.
@@ -14,21 +16,28 @@ Just added:
 [T][ ] sleep
 You currently have 2 tasks in the list.
 Just added:
-[D][ ] return book ( by: Sunday )
+[D][ ] return book (by: Sunday)
 You currently have 3 tasks in the list.
 Just added:
-[E][ ] project meeting  ( at: Mon 2-4pm )
+[E][ ] project meeting (at: Mon 2-4pm)
 You currently have 4 tasks in the list.
 OOPS!!! I'm sorry, but I don't know what that means :(
 Nice! I've marked this task as done:
-[D][X] return book ( by: Sunday )
+[D][X] return book (by: Sunday)
 Here's your list!
  1. [T][ ] eat
  2. [T][ ] sleep
- 3. [D][X] return book ( by: Sunday )
- 4. [E][ ] project meeting  ( at: Mon 2-4pm )
+ 3. [D][X] return book (by: Sunday)
+ 4. [E][ ] project meeting (at: Mon 2-4pm)
 Poof!
 [T][ ] sleep
 is gone
 Now you have 3 tasks in the list
+Poof!
+[D][X] return book (by: Sunday)
+is gone
+Now you have 2 tasks in the list
+Here's your list!
+ 1. [T][ ] eat
+ 2. [E][ ] project meeting (at: Mon 2-4pm)
 Byebye

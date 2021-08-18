@@ -28,9 +28,9 @@ public class Duke {
             }
         }
         if (slash) {
-            return new String[] {desc, time};
+            return new String[] {desc.strip(), time.strip()};
         } else {
-            return new String[] {desc};
+            return new String[] {desc.strip()};
         }
     }
 
@@ -59,8 +59,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
