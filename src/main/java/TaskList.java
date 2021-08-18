@@ -5,14 +5,18 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
+    /** An arraylist that contains the tasks set by the user. */
     private final ArrayList<Task> taskList = new ArrayList<>();
+    /** The number of uncompleted tasks in the task list */
     private int uncompletedTasks = 0;
+    /** The total number of tasks in the task list. */
     private int totalTasks = 0;
 
     public TaskList() {}
 
     /**
      * Add a task to the task list.
+     *
      * @param task The task to be added to the task list.
      */
     public void addTask(Task task) {

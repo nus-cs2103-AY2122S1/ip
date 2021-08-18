@@ -9,6 +9,7 @@ public class Todo extends Task {
 
     /**
      * Creates a new task that is to be done.
+     *
      * @param taskName The name of the task.
      * @return The todo task.
      */

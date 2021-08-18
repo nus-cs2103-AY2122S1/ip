@@ -5,6 +5,7 @@
  */
 public class Deadline extends Task {
 
+    /** The deadline that this task should be completed by. */
     private final String deadline;
 
     private Deadline(String taskName, String deadline) {
@@ -14,6 +15,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a new deadline task based on the input by a user.
+     *
      * @param input An input in the form of a task name followed by the keyword "-by"
      *              then followed by the task deadline.
      * @return The newly created task deadline

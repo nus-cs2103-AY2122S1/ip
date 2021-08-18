@@ -5,6 +5,7 @@ public abstract class Task {
 
     /**
      * Get a description of the task filled with its details.
+     *
      * @return The description of the task.
      */
     public abstract String taskDescription();
@@ -16,8 +17,11 @@ public abstract class Task {
         EVENT
     }
 
+    /** Whether the task had been completed or not */
     private boolean isDone = false;
+    /** The name of a task as given by the user */
     private final String taskName;
+    /** The type of the task */
     private final Type type;
 
     public Task(String taskName, Type type) {
@@ -34,6 +38,7 @@ public abstract class Task {
 
     /**
      * Prints the string representation of the type of task.
+     *
      * @return The required string representation.
      */
     public String eventTypeToString() {
@@ -48,6 +53,7 @@ public abstract class Task {
 
     /**
      * A string representation of the task with its task name and its completion status.
+     *
      * @return The string representation of the task.
      */
     @Override

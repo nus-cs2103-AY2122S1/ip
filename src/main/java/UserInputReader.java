@@ -5,6 +5,7 @@ import java.util.Scanner;
  */
 public class UserInputReader {
 
+    /** User input keywords */
     private final static String KEYWORD_DONE = "done";
     private final static String KEYWORD_LIST = "list";
     private final static String KEYWORD_BYE = "bye";
@@ -13,7 +14,9 @@ public class UserInputReader {
     private final static String KEYWORD_EVENT = "event";
     private final static String KEYWORD_DELETE = "delete";
 
+    /** A list of the tasks entered by the user */
     private final TaskList taskList;
+    /** A scanner to scan for user inputs */
     private final Scanner scanner;
 
     public UserInputReader(Scanner scanner) {
@@ -23,6 +26,7 @@ public class UserInputReader {
 
     /**
      * Takes the user input to the chat bot and evaluates it.
+     *
      * @return The user input as a String.
      */
     public String getUserInput() {
@@ -31,6 +35,7 @@ public class UserInputReader {
 
     /**
      * Evaluates a user's input to the chat bot and carries out the appropriate functions.
+     *
      * @param input The user's input.
      * @return False if the user's input is supposed to close the chat bot. Else, the chat bot continues
      * and wait for the user to input another word.
@@ -85,6 +90,7 @@ public class UserInputReader {
      * Verifies that the deadline task details are correct. It checks that the user has used the
      * command "-by" and that a non-empty date and time is specified. If it is not correct, it
      * prints an error message.
+     *
      * @param input The deadline details.
      * @return True if the deadline details inputted by the user is correct. Otherwise, false.
      */
@@ -105,6 +111,7 @@ public class UserInputReader {
      * Verifies the event task details is correct. It checks that the user has used the command
      * "-at" and that a non-empty date and time is specified. If is not correct, it prints
      * an error message.
+     *
      * @param input The event details.
      * @return True if the event details inputted by the user is correct. Otherwise, false.
      */
@@ -123,37 +130,36 @@ public class UserInputReader {
 
     /**
      * Marks a task as done based on the user's input after verifying that the user input is valid.
+     *
      * @param input The user's input.
      */
     public void markTaskAsDone(String input) {
         try {
             int index = Integer.parseInt(input.split(" ", 2)[1].trim());
             this.taskList.markTaskAsCompleted(index);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             System.out.println("Invalid argument to the \"done\" function.\n");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("No argument supplied to the \"done\" function.\n");
         }
     }
 
     /**
-     * Removes a task based on the user's input after verifying that the user input is valid..
+     * Removes a task based on the user's input after verifying that the user input is valid.
+     *
      * @param input The user's input.
      */
     public void deleteATask(String input) {
         try {
             int index = Integer.parseInt(input.split(" ", 2)[1].trim());
             this.taskList.removeTask(index);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             System.out.println("Invalid argument to the \"delete\" function.\n");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("No argument supplied to the \"delete\" function.\n");
         }
     }
 
     /**
      * Prints an error message when the user inputs the task but in the wrong message. The message
      * tells the user that an error has occurred and how to correctly the input the respective task.
+     *
      * @param type The type of task inputted by the user.
      */
     public static void printErrorMessage(Task.Type type) {
