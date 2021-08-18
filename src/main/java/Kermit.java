@@ -27,6 +27,11 @@ public class Kermit {
                 + task +"\nNow you have " + list.size() + " tasks in the list.";
     }
 
+    private static String printDeleteTask(Task task, ToDo list) {
+        return "Noted. I've removed this task:\n"
+                + task +"\nNow you have " + list.size() + " tasks in the list.";
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String command = "";
@@ -37,7 +42,7 @@ public class Kermit {
         StringBuilder flagBuilder = new StringBuilder();
 
         // ArrayList of all valid commands and tasks
-        String[] strCommands = {"bye", "list", "done", "deadline", "todo", "event"};
+        String[] strCommands = {"bye", "list", "done", "deadline", "todo", "event", "delete"};
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(strCommands));
         String[] strTasks = {"deadline", "todo", "event"};
         ArrayList<String> tasks = new ArrayList<>(Arrays.asList(strTasks));
@@ -110,6 +115,7 @@ public class Kermit {
                     }
                 }
 
+                int index;
                 // Quit program
                 switch (command) {
                     case "bye":
@@ -121,7 +127,7 @@ public class Kermit {
                         break;
                     // Add objects to list
                     case "done":
-                        int index = Integer.parseInt(description) - 1;
+                        index = Integer.parseInt(description) - 1;
                         // Get task name
                         String taskText = list.completeTask(index);
                         System.out.println(formatText(completeTaskText + "\n" + taskText));
@@ -145,6 +151,11 @@ public class Kermit {
                         list.add(newEvent);
                         System.out.println(formatText(printAddTask(newEvent, list)));
                         break;
+                    // Delete task
+                    case "delete":
+                        index = Integer.parseInt(description) - 1;
+                        Task deletedTask = list.deleteTask(index);
+                        System.out.println(formatText(printDeleteTask(deletedTask, list)));
                 }
             } catch (KermitException e) {
                 System.out.println(formatText(e.getMessage()));
