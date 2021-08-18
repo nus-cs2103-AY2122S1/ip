@@ -1,26 +1,27 @@
 public class Task {
-    private String description;
-    private boolean done;
 
-    public Task(String description) {
-        this.description = description;
-        this.done = false;
-    }
+  private String description;
+  private boolean done;
 
-    private String getStatusIcon() {
-        return (done ? "[X]" : "[ ]"); // mark done task with X
-    }
+  public Task(String description) {
+    this.description = description;
+    this.done = false;
+  }
 
-    protected void markDone() {
-        done = true;
-    }
+  private String getStatusIcon() {
+    return (done ? "[X]" : "[ ]"); // mark done task with X
+  }
 
-    protected boolean isDone() {
-        return done;
-    }
+  protected void markDone() {
+    done = true;
+  }
 
-    @Override
-    public String toString() {
-        return getStatusIcon() + " " + description;
-    }
+  protected boolean isDone() {
+    return done;
+  }
+
+  @Override
+  public String toString() {
+    return getStatusIcon() + " " + description;
+  }
 }
