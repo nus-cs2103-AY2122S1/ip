@@ -1,7 +1,10 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class DukeDataHandler {
@@ -59,7 +62,8 @@ public class DukeDataHandler {
             m = task.lastIndexOf(" (by: ");
             String description = task.substring(0, m);
             String by = task.substring(m + 6, task.length() - 1);
-            Task t = new Deadline(description, by);
+            LocalDate deadline = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH));
+            Task t = new Deadline(description, deadline);
             if (isDone) {
                 t.markAsDone();
             }
