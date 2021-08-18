@@ -5,7 +5,8 @@ public class Duke {
     private static ArrayList<Task> tasksList = new ArrayList<>();
 
     public void addTask(Task task) {
-        task.addThisTask();
+        System.out.println("Got it. I've added this task: ");
+        task.showThisTask();
         tasksList.add(task);
         
         String taskform;
@@ -39,6 +40,18 @@ public class Duke {
         }
     }
 
+    public void deleteTask(Task task) {
+        tasksList.remove(task);
+        System.out.println("Noted. I've removed this task: ");
+        task.showThisTask();
+        String taskform;
+        if (tasksList.size() == 1 || tasksList.size() == 0) {
+            taskform = " task";
+        } else {
+            taskform = " tasks";
+        }
+        System.out.println("Now you have " + tasksList.size() + taskform + " in the list.");
+    }
 
     public static void main(String[] args) throws DukeException{
         // String logo = " ____        _        \n"
@@ -70,6 +83,13 @@ public class Duke {
                     }
                     
                     
+                } else if (userInput.length() >= 8 && userInput.substring(0, 7).equals("delete ")) {
+                    int taskNum = Integer.parseInt(userInput.substring(7));
+                    if (tasksList.size() > taskNum) {
+                        throw new DukeException("You cannot delete a task that does not exist!");
+                    } else {
+                        neko.deleteTask(tasksList.get(taskNum - 1));
+                    }
                 } else {
                     
                     if (userInput.length() >= 4 && userInput.substring(0, 4).equals("todo")){

@@ -26,8 +26,8 @@ public class Task {
         return this.prefix;
     }
 
-    public void addThisTask() {
-        System.out.println("Got it. I've added this task: \n" + this.prefix + showStatus() + this.name);
+    public void showThisTask() {
+        System.out.println(this.prefix + showStatus() + this.name);
     }
 
     public void showThisTask(int num) {
