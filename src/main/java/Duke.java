@@ -7,11 +7,12 @@ import java.util.function.Consumer;
 
 public class Duke {
     private static final String LINEBREAK = "____________________________________________________________";
-    List<String> commands = new ArrayList<String>();
+    List<Task> tasks = new ArrayList<Task>();
 
     private final Map<String, Consumer<String>> FUNCTIONS = new HashMap<>() {
         {
             put("list", (input) -> list());
+            put("done", (input) -> markDone(input));
         }
     };
 
@@ -62,15 +63,25 @@ public class Duke {
     private void list() {
         System.out.println(LINEBREAK);
         System.out.println("YOU WISH FOR THESE FOOLISH THINGS:");
-        for (int i = 0; i < commands.size(); i++) {
-            System.out.printf(" %s. %s\n", i + 1, commands.get(i));
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf(" %s. %s\n", i + 1, tasks.get(i));
         }
         System.out.println(LINEBREAK);
     }
 
-    private void addTask(String task) {
-        print(" SO YOU WANT TO: " + task);
-        commands.add(task);
+    private void addTask(String taskName) {
+        print(" SO YOU WANT TO: " + taskName);
+        tasks.add(new Task(taskName));
+    }
+
+    private void markDone(String input) {
+        int index = Integer.parseInt(input);
+        Task currentTask = tasks.get(index - 1);
+        if (currentTask.getIsDone()) {
+            print("YOU ALREADY DID THIS YOU FOOL.");
+        }
+        currentTask.setIsDone(true);
+        print("YOU SAY YOU'VE COMPLETED THIS TASK:\n " + currentTask);
     }
 
     private void run() {
@@ -78,13 +89,15 @@ public class Duke {
         Scanner input = new Scanner(System.in);
 
         while (true) {
+            // Extract first word as command
             String inputString = input.nextLine().trim();
+            String[] cmd = inputString.split(" ", 2);
 
             if (inputString.equals("bye")) {
                 print(" LIVE OUT YOUR PATHETIC LIFE, WEAKLING.");
                 break;
             } else {
-                FUNCTIONS.getOrDefault(inputString, (task) -> addTask(task)).accept(inputString);
+                FUNCTIONS.getOrDefault(cmd[0], (task) -> addTask(inputString)).accept(cmd.length > 1 ? cmd[1] : "");
             }
             System.out.print("WHAT ELSE DO YOU WANT, INSECT?\n ");
         }
