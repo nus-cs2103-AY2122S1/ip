@@ -1,9 +1,7 @@
 public class Task {
 
     // The name of the task.
-    protected String taskName;
-    // To track if the task is done.
-    protected boolean isDone;
+    private String taskName;
 
     /***
      * Constructor to create a task.
@@ -11,14 +9,6 @@ public class Task {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        this.isDone = false;
-    }
-
-    /***
-     * To mark a task as done.
-     */
-    public void markAsDone() {
-        this.isDone = true;
     }
 
     /***
@@ -27,6 +17,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return (isDone ? "[X] " : "[ ] ") + taskName;
+        return taskName;
     }
 }
