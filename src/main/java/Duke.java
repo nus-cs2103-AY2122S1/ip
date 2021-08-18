@@ -18,6 +18,10 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
 
+        // adds array for 'list' command
+        String[] strarr = new String[100];
+        int arrcounter = 0;
+
         // checks loop
         boolean continueloop = true;
 
@@ -27,15 +31,31 @@ public class Duke {
             if (str.equalsIgnoreCase("bye")) {
                 // breaks loop
                 continueloop = false;
+            } else if (str.equalsIgnoreCase("list")) {
+                // lists history of commands
+                System.out.println(linebreak);
+                int counter = 0;
+                while (strarr[counter] != null || counter >= 100) {
+                    System.out.println(counter + ". " + strarr[counter] + '\n');
+                    counter++;
+                }
+                System.out.println(linebreak);
+
+                strarr[arrcounter] = str;
+                arrcounter++;
             } else {
+                strarr[arrcounter] = str;
+                arrcounter++;
                 System.out.println(linebreak
                         +  '\n'
+                        + "Addwed!: "
                         + str
                         + '\n'
                         + '\n'
                         + linebreak);
             }
         }
+
 
         // closing lines
         System.out.println(linebreak
