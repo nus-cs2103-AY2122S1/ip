@@ -24,6 +24,7 @@ public class Side {
             "Please do less...\n" + LINEBREAK;
     private static final String GOODBYE = LINEBREAK + "\nOh, you have to go? What a pity...\n"
             + LINEBREAK;
+    private enum COMMAND { TODO, DEADLINE, EVENT, LIST, DONE, DELETE, INVALID }
 
     private static void printLogo() {
         String logo = " ___  _____  _____   _____  \n"
@@ -191,6 +192,31 @@ public class Side {
         }
     }
 
+    /**
+     * Helper to convert parsed command to COMMAND constant.
+     *
+     * @param command String representing command input.
+     * @return COMMAND corresponding to String input.
+     */
+    private static COMMAND toCommand(String command) {
+        switch (command) {
+            case "todo":
+                return COMMAND.TODO;
+            case "deadline":
+                return COMMAND.DEADLINE;
+            case "event":
+                return COMMAND.EVENT;
+            case "list":
+                return COMMAND.LIST;
+            case "done":
+                return COMMAND.DONE;
+            case "delete":
+                return COMMAND.DELETE;
+            default:
+                return COMMAND.INVALID;
+        }
+    }
+
     public static void main(String[] args) {
         printLogo();
         System.out.println(GREETING);
@@ -199,26 +225,26 @@ public class Side {
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
         while (!userInput.equalsIgnoreCase("bye")) {
-            String command = userInput.split("\\s+")[0];
+            COMMAND command = toCommand(userInput.split("\\s+")[0]);
 
             try {
                 switch (command) {
-                    case "todo":
+                    case TODO:
                         addTask(userInput, tasks);
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         addDeadline(userInput, tasks);
                         break;
-                    case "event":
+                    case EVENT:
                         addEvent(userInput, tasks);
                         break;
-                    case "list":
+                    case LIST:
                         printResponse(tasks.toString());
                         break;
-                    case "done":
+                    case DONE:
                         handleDone(userInput, tasks);
                         break;
-                    case "delete":
+                    case DELETE:
                         handleDelete(userInput, tasks);
                         break;
                     default:
