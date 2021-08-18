@@ -6,14 +6,18 @@ import java.util.Scanner;
  */
 public class Duke {
 
+    // To represent line separators in the chat.
     private static final String LINE_HORIZONTAL =
             "___________________________________________________________";
     // To store the tasks to be done.
     private static ArrayList<Task> taskList = new ArrayList<>();
-
+    // The possible commands for the bot.
+    private enum Command {
+        TODO, DEADLINE, EVENT, LIST, MARK, DELETE, BYE
+    }
 
     /***
-     * Initializes the bot.
+     * Initializes the chatbot.
      */
     public static void main(String[] args) {
 
@@ -34,35 +38,32 @@ public class Duke {
         while(!(exit)) {
             input = scanner.nextLine().trim();
             try {
-                // If user asks for list of tasks.
-                if (input.equalsIgnoreCase("list")) {
-                    printList();
-                // If user wants to mark a task as done.
-                } else if (input.toLowerCase().indexOf("done") != -1) {
-                    int toMark = Integer.parseInt(input.substring(5));
-                    markTaskAsDone(toMark);
-                // If user wants to delete a task.
-                } else if (input.toLowerCase().indexOf("delete") != -1) {
-                    int toDelete = Integer.parseInt(input.substring(7));
-                    deleteTask(toDelete);
-                // If user wants to create a to do.
-                } else if (input.toLowerCase().indexOf("todo") != -1) {
-                    addToDo(input);
-                // If user wants to create a deadline.
-                } else if (input.toLowerCase().indexOf("deadline") != -1) {
-                    addDeadline(input);
-                // If user wants to create an event.
-                } else if (input.toLowerCase().indexOf("event") != -1) {
-                    addEvent(input);
-                // Bids farewell to user upon "bye" input.
-                } else if (input.toLowerCase().equals("bye")) {
-                    System.out.printf("%s\n" +
-                            "Goodbye. Hope to see you again soon!\n",
-                            LINE_HORIZONTAL);
-                    exit = true;
-                // If user enters an unspecified request.
-                } else {
-                    handleInvalidCommand();
+                Command commandToExecute = interpretCommand(input);
+                switch (commandToExecute) {
+                    case LIST:
+                        printList();
+                        break;
+                    case MARK:
+                        int toMark = Integer.parseInt(input.substring(5));
+                        markTaskAsDone(toMark);
+                        break;
+                    case DELETE:
+                        int toDelete = Integer.parseInt(input.substring(7));
+                        deleteTask(toDelete);
+                        break;
+                    case TODO:
+                        addToDo(input);
+                        break;
+                    case DEADLINE:
+                        addDeadline(input);
+                        break;
+                    case EVENT:
+                        addEvent(input);
+                        break;
+                    case BYE:
+                        printBye();
+                        exit = true;
+                        break;
                 }
             } catch (InvalidCommandException e) {
                 System.out.printf("%s\n" +
@@ -86,8 +87,33 @@ public class Duke {
                         "%s\n", LINE_HORIZONTAL, taskList.size(), LINE_HORIZONTAL);
             }
         }
-
         scanner.close();
+    }
+
+    /***
+     * Interprets the command entered by user and returns its enum.
+     *
+     * @param input The input entered by user.
+     * @return The command enum in the input.
+     */
+    public static Command interpretCommand(String input) throws InvalidCommandException {
+        if (input.equalsIgnoreCase("list")) {
+            return Command.valueOf("LIST");
+        } else if (input.toLowerCase().indexOf("done") != -1) {
+            return Command.valueOf("MARK");
+        } else if (input.toLowerCase().indexOf("delete") != -1) {
+            return Command.valueOf("DELETE");
+        } else if (input.toLowerCase().indexOf("todo") != -1) {
+            return Command.valueOf("TODO");
+        } else if (input.toLowerCase().indexOf("deadline") != -1) {
+            return Command.valueOf("DEADLINE");
+        } else if (input.toLowerCase().indexOf("event") != -1) {
+            return Command.valueOf("EVENT");
+        } else if (input.toLowerCase().equals("bye")) {
+            return Command.valueOf("BYE");
+        } else {
+            throw new InvalidCommandException("Invalid command!");
+        }
     }
 
     /***
@@ -235,11 +261,11 @@ public class Duke {
     }
 
     /***
-     * Handles an invalid command inputted by user.
-     *
-     * @throws InvalidCommandException If command is unspecified or unknown.
+     * Prints the farewell message for the user.
      */
-    public static void handleInvalidCommand() throws InvalidCommandException {
-        throw new InvalidCommandException("Invalid command!");
+    public static void printBye() {
+        System.out.printf("%s\n" +
+                "Goodbye. Hope to see you again soon!\n",
+                LINE_HORIZONTAL);
     }
 }
