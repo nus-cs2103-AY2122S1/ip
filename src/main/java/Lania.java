@@ -13,7 +13,7 @@ public class Lania {
      * @param s String provided by the user.
      */
     public static void update(String s) {
-        Task t = new Task("");
+        Task t = new Task(s);
         String[] split = s.split(" ", 2);
         if (split[0].equals("todo")) {
             t = new Todo(split[1]);
@@ -28,6 +28,7 @@ public class Lania {
         count++;
         System.out.println("Lania has added: ");
         System.out.println(t);
+        System.out.println("Great! Now you have " + count + (count == 1 ? " task" : " tasks") + " in your list.");
     }
 
     /**
