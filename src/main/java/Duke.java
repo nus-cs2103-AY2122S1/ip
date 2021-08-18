@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    protected static final String HORIZONTAL_LINE = "-----------------------";
+    protected static final String HORIZONTAL_LINE = "  -----------------------";
     protected static final String INDENTATION = "    ";
 
     public static void greet() {
