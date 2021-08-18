@@ -28,10 +28,20 @@ You: Ailurus:
 1.[T][ ]Go grocery shopping
 2.[D][ ]CS2103T ip week 2 (by: 19/08/2021)
 3.[E][ ]CS2103T lecture (at: Friday 4-6pm)
+You: Ailurus: ☹ OOPS!!! Not a number.
+You: Ailurus: ☹ OOPS!!! Not a number.
 You: Ailurus: Nice! I've marked this task as done:
 	[D][X]CS2103T ip week 2 (by: 19/08/2021)
 You: Ailurus: 
 1.[T][ ]Go grocery shopping
 2.[D][X]CS2103T ip week 2 (by: 19/08/2021)
 3.[E][ ]CS2103T lecture (at: Friday 4-6pm)
+You: Ailurus: ☹ OOPS!!! Not a number.
+You: Ailurus: ☹ OOPS!!! Not a number.
+You: Ailurus: Noted. I've removed this task:
+	[D][X]CS2103T ip week 2 (by: 19/08/2021)
+Now you have 2 tasks in the list.
+You: Ailurus: 
+1.[T][ ]Go grocery shopping
+2.[E][ ]CS2103T lecture (at: Friday 4-6pm)
 You: Ailurus: Bye. Hope to see you again soon!
