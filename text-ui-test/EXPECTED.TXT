@@ -1,0 +1,56 @@
+Hello from
+__      __ ( )                ____
+\ \    / /  _   ____  _   _  / __/
+ \ \  / /  | | | ,__|| | | | \ \
+  \ \/ /   | | | |   | |_| | _) \
+   \__/    |_| |_|    \__,_||___/
+What can <<Virushade>> do for you?
+
+_____________________________________________________
+
+Added: Test add regular Task
+Now you have 1 tasks in the list.
+_____________________________________________________
+
+Added: Test add todo task
+Now you have 2 tasks in the list.
+_____________________________________________________
+
+Added: Test add deadline task
+Now you have 3 tasks in the list.
+_____________________________________________________
+
+Added: Test add event task
+Now you have 4 tasks in the list.
+_____________________________________________________
+
+Added: Test slashPartition without space
+Now you have 5 tasks in the list.
+_____________________________________________________
+
+Here are the tasks in your list:
+1.[ ] Test add regular Task
+2.[T][ ] Test add todo task
+3.[D][ ] Test add deadline task (by: now)
+4.[E][ ] Test add event task (at: now)
+5.[D][ ] Test slashPartition without space (by: now)
+_____________________________________________________
+
+Nice! I have marked this task as done: 
+[T][x] Test add todo task
+_____________________________________________________
+
+Nice! I have marked this task as done: 
+[D][x] Test add deadline task (by: now)
+_____________________________________________________
+
+Nice! I have marked this task as done: 
+[E][x] Test add event task (at: now)
+_____________________________________________________
+
+Please enter an integer greater than 0.
+_____________________________________________________
+
+Bye. Hope to see you again soon!
+_____________________________________________________
+

@@ -1,0 +1,12 @@
+Test add regular Task
+todo Test add todo task
+deadline Test add deadline task /by now
+event Test add event task /at now
+deadline Test slashPartition without space/by now
+list
+done 2
+done 3
+done 4
+done -1
+bye
+Check if exit
