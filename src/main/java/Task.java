@@ -15,8 +15,16 @@ public class Task {
         this.isDone = true;
     }
 
+    @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
+    }
+
+    public void addTaskMsg(int size) {
+        System.out.println(
+                "I have added the task!\n  "
+                + this
+                + "\nNow you have " + size + " tasks left!");
     }
 
 
