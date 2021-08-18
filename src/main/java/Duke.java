@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 public class Duke {
@@ -10,6 +11,12 @@ public class Duke {
     }
     public static void addToList(Task t) {
         list.add(t);
+    }
+    public static String taskAddedMessage(Task t) {
+        return formatMessage(
+                "Got it, I've added this task:\n        " + t +
+                "\n     Now you have " + list.size() + " task" + (list.size() != 1 ? "s" : "") +
+                " in the list");
     }
     public static String printList() {
         String res = "";
@@ -52,10 +59,16 @@ public class Duke {
             } else if (input.startsWith("todo")) {
                 Todo t = new Todo(input.substring(5));
                 addToList(t);
-                System.out.println(formatMessage(
-                        "Got it, I've added this task:\n        " + t +
-                        "\n     Now you have " + list.size() + " task" + (list.size() != 1 ? "s" : "") +
-                        " in the list"));
+                System.out.println(taskAddedMessage(t));
+            } else if (input.startsWith("deadline")) {
+                if (!input.contains("/")) {
+                    System.out.println(formatMessage("Please enter the deadline of the task after a /"));
+                    continue;
+                }
+                String[] parts = input.split(" /");
+                Deadline d = new Deadline(parts[0].substring(9), parts[1]);
+                addToList(d);
+                System.out.println(taskAddedMessage(d));
             } else {
                 System.out.println(formatMessage("That is not a recognised command"));
             }
