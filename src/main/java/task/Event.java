@@ -1,5 +1,7 @@
 package task;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * The is the Event class that extends from Task.
  * Event task starts at a specific time and ends at a specific time.
@@ -10,38 +12,47 @@ package task;
  */
 
 public class Event extends Task {
-    private final String atTime;
+    private static final String DATE_PATTERN = "MMM dd yyyy";
+    private static final String TIME_PATTERN = "hh:mm a";
+
+    private final EventDateTime atDateTime;
 
     /**
      * This is constructor method of Event.
      *
-     * @param name   task name
-     * @param atTime a specific time of task start and end
+     * @param name       task name
+     * @param atDateTime a specific date, start time and end time of task
      */
-    public Event(String name, String atTime) {
+    public Event(String name, EventDateTime atDateTime) {
         super(name);
-        this.atTime = atTime;
+        this.atDateTime = atDateTime;
     }
 
     /**
      * This is constructor method of Event.
      *
-     * @param name   task name
-     * @param atTime a specific time of task start and end
-     * @param isDone task status: done or not done
+     * @param name       task name
+     * @param atDateTime a specific date, start time and end time of task
+     * @param isDone     task status: done or not done
      */
-    public Event(String name, String atTime, boolean isDone) {
+    public Event(String name, EventDateTime atDateTime, boolean isDone) {
         super(name, isDone);
-        this.atTime = atTime;
+        this.atDateTime = atDateTime;
     }
 
     /**
-     * Get the specific time of task start and end.
+     * Get the specific date, start time and end time of task.
      *
-     * @return the specific time of task start and end
+     * @return the specific date, start time and end time of task
      */
-    public String getAtTime() {
-        return atTime;
+    public EventDateTime getAtDateTime() {
+        return atDateTime;
+    }
+
+    private String formatDateTime() {
+        return atDateTime.getAtDate().format(DateTimeFormatter.ofPattern(DATE_PATTERN)) + " " +
+                atDateTime.getStartTime().format(DateTimeFormatter.ofPattern(TIME_PATTERN)) + "-" +
+                atDateTime.getEndTime().format(DateTimeFormatter.ofPattern(TIME_PATTERN));
     }
 
     /**
@@ -51,7 +62,7 @@ public class Event extends Task {
      */
     @Override
     public Event markAsDone() {
-        return new Event(super.getName(), getAtTime(), true);
+        return new Event(super.getName(), atDateTime, true);
     }
 
     /**
@@ -60,6 +71,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + atTime + ")";
+        return "[E]" + super.toString() + " (at: " + formatDateTime() + ")";
     }
 }

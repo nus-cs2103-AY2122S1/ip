@@ -1,5 +1,8 @@
 package task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The is the Deadline class that extends from Task.
  * Deadline task needs to be done before a specific time.
@@ -10,38 +13,46 @@ package task;
  */
 
 public class Deadline extends Task {
-    private final String byTime;
+    private static final String DATE_PATTERN = "MMM dd yyyy";
+    private static final String TIME_PATTERN = "hh:mm a";
+
+    private final LocalDateTime byDateTime;
 
     /**
      * This is constructor method of Deadline.
      *
      * @param name   task name
-     * @param byTime a specific time of task that needs to be done before it
+     * @param byDateTime a specific date and time of task that needs to be done before it
      */
-    public Deadline(String name, String byTime) {
+    public Deadline(String name, LocalDateTime byDateTime) {
         super(name);
-        this.byTime = byTime;
+        this.byDateTime = byDateTime;
     }
 
     /**
      * This is constructor method of Deadline.
      *
      * @param name   task name
-     * @param byTime a specific time of task that needs to be done before it
+     * @param byDateTime a specific date and time of task that needs to be done before it
      * @param isDone task status: done or not done
      */
-    public Deadline(String name, String byTime, boolean isDone) {
+    public Deadline(String name, LocalDateTime byDateTime, boolean isDone) {
         super(name, isDone);
-        this.byTime = byTime;
+        this.byDateTime = byDateTime;
     }
 
     /**
-     * Get the specific time of task that needs to be done before it.
+     * Get the specific date and time of task that needs to be done before it.
      *
-     * @return the specific time of task that needs to be done before it
+     * @return the specific date and time of task that needs to be done before it
      */
-    public String getByTime() {
-        return byTime;
+    public LocalDateTime getByDateTime() {
+        return byDateTime;
+    }
+
+    private String formatDateTime() {
+        return byDateTime.format(DateTimeFormatter.ofPattern(DATE_PATTERN)) + " " +
+                byDateTime.format(DateTimeFormatter.ofPattern(TIME_PATTERN));
     }
 
     /**
@@ -51,7 +62,7 @@ public class Deadline extends Task {
      */
     @Override
     public Deadline markAsDone() {
-        return new Deadline(super.getName(), getByTime(), true);
+        return new Deadline(super.getName(), getByDateTime(), true);
     }
 
     /**
@@ -60,6 +71,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + byTime + ")";
+        return "[D]" + super.toString() + " (by: " + formatDateTime() + ")";
     }
 }
