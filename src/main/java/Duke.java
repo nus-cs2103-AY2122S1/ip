@@ -26,27 +26,27 @@ public class Duke {
                 case "done":  //Marks the task as done when it gets the "done x" prompt and updates the task as well.
                     index = sc.nextInt();
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(listArray[index - 1].done());
+                    System.out.println("  " + listArray[index - 1].done());
                     break;
                 case "todo":  //Inputs a todo task when given the "todo" prompt
                     input = sc.nextLine();
                     listArray[count++] = new Todo(input);
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(listArray[count - 1]);
+                    System.out.println("  " + listArray[count - 1]);
                     System.out.println("Now you have " + count + " in the list.");
                     break;
                 case "deadline": //Inputs a Deadline task when given the "deadline" prompt
                     input = sc.nextLine();
                     listArray[count++] = new Deadline(input.split(" /by ")[0], input.split(" /by ")[1]);
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(listArray[count - 1]);
+                    System.out.println("  " + listArray[count - 1]);
                     System.out.println("Now you have " + count + " in the list.");
                     break;
                 case "event": //Inputs an Event task when given the "event" prompt
                     input = sc.nextLine();
                     listArray[count++] = new Event(input.split(" /at ")[0], input.split(" /at ")[1]);
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(listArray[count - 1]);
+                    System.out.println("  " + listArray[count - 1]);
                     System.out.println("Now you have " + count + " in the list.");
                     break;
                 default:
