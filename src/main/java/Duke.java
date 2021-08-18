@@ -38,7 +38,7 @@ public class Duke {
                 }
                 System.out.println(dash);
 
-            } else if (userInput.contains("done")){
+            } else if (userInput.substring(0, 4).matches("done")){
                 Integer index = Integer.parseInt(userInput.substring(5));
                 Task currTask = tasks[index - 1];
                 currTask.completeTask();
@@ -48,12 +48,17 @@ public class Duke {
                 System.out.println(currTask.toString());
                 System.out.println(dash);
 
-            } else  {
-                tasks[counter] = new Task(userInput);
+            } else if (userInput.substring(0, 4).matches("todo")) {
+                tasks[counter] = new ToDo(userInput.substring(5));
+
+                System.out.println(dash);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(tasks[counter].toString());
                 counter += 1;
+
+                System.out.println("Now you have " + counter + " task(s) in the list.");
                 System.out.println(dash);
-                System.out.println("added: " + userInput);
-                System.out.println(dash);
+
 
             }
         }
