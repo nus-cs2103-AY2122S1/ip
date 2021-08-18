@@ -9,6 +9,10 @@ public class Task {
         this.taskName = taskName;
     }
 
+    public void setCompleted() {
+        completed = true;
+    }
+
     @Override
     public String toString() {
         String statusIcon = completed ? "X" : " ";

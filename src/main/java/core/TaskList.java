@@ -30,4 +30,13 @@ public class TaskList {
         }
         ui.displayLine();
     }
+
+    public void markAsDone(int index) {
+        Task taskToMark = taskList.get(index - 1);
+        taskToMark.setCompleted();
+        ui.displayLine();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(taskToMark);
+        ui.displayLine();
+    }
 }
