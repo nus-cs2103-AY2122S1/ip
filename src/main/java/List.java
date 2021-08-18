@@ -16,14 +16,34 @@ public class List {
     }
 
     /**
-     * Adds an item to the list.
+     * Adds a ToDo to the list.
      *
      * @param description The description of the task to be added
      */
-    public void addItem(String description) {
-        Task task = new Task(description);
+    public void addTask(String description) {
+        Task task = new ToDo(description);
         this.list.add(task);
-        System.out.println("added: " + description);
+        System.out.println("Task added successfully: \n" + task);
+        System.out.println("Number of tasks in list: " + list.size());
+    }
+
+    /**
+     * Adds an Event or Deadline to the list.
+     *
+     * @param description
+     * @param dateTime
+     * @param type
+     */
+    public void addTask(String description, String dateTime, String type) {
+        Task task;
+        if (type.equals("deadline")) {
+            task = new Deadline(description, dateTime);
+        } else {
+            task = new Event(description, dateTime);
+        }
+        this.list.add(task);
+        System.out.println("Task added successfully: \n" + task);
+        System.out.println("Number of tasks in list: " + list.size());
     }
 
     /**
