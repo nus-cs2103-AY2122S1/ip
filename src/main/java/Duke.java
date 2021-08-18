@@ -72,6 +72,18 @@ public class Duke {
                         addTask(taskList.get(taskList.size() - 1));
                         break;
                     case("delete"):
+                        int delete = getInputNumber(userInput);
+                        if (delete >= taskList.size() || delete < 0) {
+                            System.out.println("Task does not exist!");
+                            continue;
+                        }
+
+                        Task removedTask = taskList.get(delete);
+                        taskList.remove(delete);
+
+                        System.out.printf("I've removed this task:\n%s\n", removedTask.toString());
+                        System.out.printf("Now you have %d tasks in your list.\n", taskList.size());
+                        break;
                     default:
                         throw new DukeException("Sorry I do not understand this directive.");
                 }}
@@ -126,7 +138,7 @@ public class Duke {
         try {
            return Integer.parseInt(userInput) - 1;
         } catch (NumberFormatException exception) {
-            throw new DukeException("Please enter a number after the done command.");
+            throw new DukeException("Please enter a number after the command.");
         }
     }
 }
