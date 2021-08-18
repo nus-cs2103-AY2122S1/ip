@@ -31,14 +31,12 @@ public class Duke {
     private void printReply(String text) {
         int maxLength = 0;
         String[] line = text.split("\n");
-
         for (String s : line) {
             if (maxLength < s.length())
                 maxLength = s.length();
         }
         String lineStart =  "    ╔" + "═".repeat(maxLength + 2) + "╗";
         String lineEnd =    "    ╚" + "═".repeat(maxLength + 2) + "╝";
-
         System.out.println(lineStart);
         for (String s : line) {
             System.out.println("    ║ " + s + " ".repeat(maxLength - s.length()) + " ║");
@@ -66,7 +64,8 @@ public class Duke {
      */
     private void printList(List<Task> list) {
         if (list.isEmpty()) {
-            printReply("It seems that your list is empty. Try adding something first.");
+            printReply("It seems that your list is empty.\n" +
+                "Try adding some task using \"todo\", \"deadline\" or \"event\"");
         } else {
             StringBuilder sb = new StringBuilder();
             sb.append("Here is your list:\n");
@@ -75,6 +74,15 @@ public class Duke {
             }
             printReply(sb.toString());
         }
+    }
+
+    /**
+     * Print task added message
+     * @param task the task.
+     */
+    private void printAddedTask(Task task) {
+        printReply(String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list.",
+            task.getStatusIcon(), task.getDescription(), taskList.size()));
     }
 
     /**
@@ -87,29 +95,59 @@ public class Duke {
         } else if (text.equals("list")) {
             printList(taskList);
             processReply(sc.nextLine());
+        } else if (text.startsWith("todo ") || (text.equals("todo"))) {
+            if (text.length() <= 5) {
+                printReply("oops");
+            } else {
+                String parameter = text.substring(5);
+                Task todo = new ToDo(parameter);
+                taskList.add(todo);
+                printAddedTask(todo);
+                processReply(sc.nextLine());
+            }
+        } else if (text.startsWith("deadline ") || (text.equals("deadline"))) {
+            if (text.length() <= 9 || !text.contains("/by")) {
+                printReply("oops");
+            } else {
+                String parameter = text.substring(9);
+                String[] details = parameter.split("/by");
+                Task deadline = new Deadline(details[0], details[1]);
+                taskList.add(deadline);
+                printAddedTask(deadline);
+            }
+            processReply(sc.nextLine());
+        } else if (text.startsWith("event ") || (text.equals("event"))) {
+            if (text.length() <= 6 || !text.contains("/at")) {
+                printReply("oops");
+            } else {
+                String parameter = text.substring(6);
+                String[] details = parameter.split("/at");
+                Task event = new Event(details[0], details[1]);
+                taskList.add(event);
+                printAddedTask(event);
+            }
+            processReply(sc.nextLine());
         } else if (text.startsWith("done ") || (text.equals("done"))) {
             String[] splitText = text.split(" ");
-
             // check if the character after done is a valid number
-            if (splitText.length > 1 && splitText[1].matches("\\d")) {
+            // possible to add commands such as "done 1 2 3 4" in the future
+            if (splitText.length > 1 && splitText[1].matches("\\d+")) {
                 int taskID = Integer.parseInt(splitText[1]);
-
                 // check if the task exist
                 if (taskID <= taskList.size() && taskID > 0) {
                     Task task = taskList.get(taskID - 1);
                     task.markASDone();
                     printReply(String.format("Nice! I've marked this task as done: \n  %s %s",
-                            task.getStatusIcon(), task.getDescription()));
+                        task.getStatusIcon(), task.getDescription()));
                 } else {
-                    printReply(String.format("Task %d does not exist", taskID));
+                    printReply(String.format("Task %d does not exist.", taskID));
                 }
             } else {
                 printReply("Please enter a valid number.");
             }
             processReply(sc.nextLine());
         } else {
-            taskList.add(new Task(text));
-            printReply(String.format("\"%s\" has been added to your list", text));
+            printReply(String.format("You said \"%s\"", text));
             processReply(sc.nextLine());
         }
     }
