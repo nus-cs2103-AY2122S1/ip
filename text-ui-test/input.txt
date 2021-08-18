@@ -1,0 +1,8 @@
+list
+todo sweep floor
+deadline Individual Project /by 19 Aug 2359hr
+event CS2103T lecture /at 19 Aug 1600hr
+list
+done 1
+list
+bye

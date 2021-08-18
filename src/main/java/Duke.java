@@ -35,11 +35,17 @@ public class Duke {
             if (maxLength < s.length())
                 maxLength = s.length();
         }
-        String lineStart =  "    ╔" + "═".repeat(maxLength + 2) + "╗";
-        String lineEnd =    "    ╚" + "═".repeat(maxLength + 2) + "╝";
+
+        // unicode does not work with test script
+        //String lineStart =  "    \u2554" + "\u2550".repeat(maxLength + 2) + "\u2557";
+        //String lineEnd =  "    \u255A" + "\u2550".repeat(maxLength + 2) + "\u255D";
+
+        String lineStart =  "     " + "=".repeat(maxLength + 2);
+        String lineEnd =  "     " + "=".repeat(maxLength + 2);
+
         System.out.println(lineStart);
         for (String s : line) {
-            System.out.println("    ║ " + s + " ".repeat(maxLength - s.length()) + " ║");
+            System.out.println("    | " + s + " ".repeat(maxLength - s.length()) + " |");
         }
         System.out.println(lineEnd);
     }
@@ -163,10 +169,10 @@ public class Duke {
     public static void main(String[] args) {
         String logo = " ____          _____  _______     __\n"
             + "|  _ \\   /\\   |  __ \\|  __ \\ \\   / /\n"
-            + "| |_) | /  \\  | |__) | |__) \\ \\_/ / \n"
-            + "|  _ < / /\\ \\ |  _  /|  _  / \\   /  \n"
-            + "| |_) / ____ \\| | \\ \\| | \\ \\  | |   \n"
-            + "|____/_/    \\_\\_|  \\_\\_|  \\_\\ |_|   ";
+            + "| |_) | /  \\  | |__) | |__) \\ \\_/ /\n"
+            + "|  _ < / /\\ \\ |  _  /|  _  / \\   /\n"
+            + "| |_) / ____ \\| | \\ \\| | \\ \\  | |\n"
+            + "|____/_/    \\_\\_|  \\_\\_|  \\_\\ |_|";
         System.out.println(logo);
         Duke barry = new Duke("Barry");
         barry.run();
