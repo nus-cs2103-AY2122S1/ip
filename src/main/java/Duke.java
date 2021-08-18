@@ -12,8 +12,7 @@ public class Duke {
         int index;
         Scanner sc = new Scanner(System.in);
         do {
-            input = sc.nextLine();
-            System.out.println(input);
+            input = sc.nextLine(); //Reads the next input
             if (input.equals("bye")) { //Shuts down the bot when it gets a "bye" prompt
                 isRunning = false;
                 System.out.println(goodbyeLine);
