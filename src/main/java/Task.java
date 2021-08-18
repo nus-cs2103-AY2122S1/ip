@@ -7,16 +7,13 @@ public class Task {
         this.isDone = false;
     }
 
-    public void setDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
     @Override
     public String toString() {
-        String statusString = " ";
-        if (isDone) {
-            statusString = "X";
-        }
+        String statusString = this.isDone ? "X" : " ";
         return String.format("[%s] %s", statusString, this.taskName);
     }
 }
