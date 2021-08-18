@@ -73,7 +73,7 @@ ____________________________________________________________________________
 ☹ BURP-ribbit ribbit. The description of a todo cannot be empty
 ____________________________________________________________________________
 ____________________________________________________________________________
-☹ BURP-ribbit ribbit. he description of a event cannot be empty
+☹ BURP-ribbit ribbit. The description of a event cannot be empty
 ____________________________________________________________________________
 ____________________________________________________________________________
 ☹ BURP-ribbit ribbit. Events should be formatted as:
