@@ -1,6 +1,26 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private ArrayList<String> taskList;
+
+    public Duke() {
+        taskList = new ArrayList<>();
+    }
+
+    public void addTodo(String task) {
+        this.taskList.add(task);
+        this.echo("Added -- " + task + " -- to task list.");
+    }
+
+    public void printList() {
+        this.echo("Your current task(s):");
+
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println((i + 1) + ". " + taskList.get(i));
+        }
+    }
+
     public void echo(String s) {
         System.out.println("Duke: " + s);
     }
@@ -27,11 +47,13 @@ public class Duke {
         while (true) {
             response = this.getResponse();
 
-            if (response.equals("bye")) {
+            if (response.equals("list")) {
+                this.printList();
+            } else if (response.equals("bye")) {
                 break;
+            } else {
+                this.addTodo(response);
             }
-
-            this.echo(response);
         }
     }
 
