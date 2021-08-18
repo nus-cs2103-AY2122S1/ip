@@ -6,6 +6,7 @@ public class AddCommand extends Command {
     }
 
     public String execute(TaskManager taskManager) {
-        return "added: " + taskManager.addTask(this.task);
+        return "Got it. I've added this task:\n\t" + taskManager.addTask(this.task)
+                + "\nNow you have " + taskManager.getNumOfTasks() + " tasks in the list.";
     }
 }
