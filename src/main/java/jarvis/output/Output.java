@@ -27,7 +27,11 @@ public class Output {
     }
 
     public static void showTaskList(TaskList taskList) {
-        OutputMessage taskListMessage = new OutputMessage(taskList.toString());
+        OutputMessage taskListMessage = new OutputMessage(String.format(
+                "%s\n%s",
+                "Here are the tasks in your list:",
+                taskList.toString()
+        ));
         Output.showFormattedOutputMessage(taskListMessage);
     }
 

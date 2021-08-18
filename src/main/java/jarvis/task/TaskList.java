@@ -39,19 +39,21 @@ public class TaskList {
 
     @Override
     public String toString() {
+        if (taskList.size() == 0) {
+            return "";
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("Here are the tasks in your list:\n\t");
-
-        if (taskList.size() == 0) {
-            return stringBuilder.toString();
+        for (int i = 0; i < taskList.size(); i++) {
+            String task = String.format(
+                    "%s. %s%s",
+                    i + 1,
+                    taskList.get(i).toString(),
+                    i < taskList.size() - 1 ? "\n" : ""
+            );
+            stringBuilder.append(task);
         }
-
-        for (int i = 0; i < taskList.size() - 1; i++) {
-            stringBuilder.append(i + 1).append(".").append(taskList.get(i).toString()).append("\n\t");
-        }
-
-        stringBuilder.append(taskList.size()).append(".").append(taskList.get(taskList.size() - 1));
 
         return stringBuilder.toString();
     }
