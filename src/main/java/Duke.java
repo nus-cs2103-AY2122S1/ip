@@ -56,30 +56,61 @@ public class Duke {
             }
 
         } else if (input.startsWith("done")) {
-
-            try {
-                int markDone = Integer.parseInt(input.substring(5)) - 1;
-                list[markDone].markAsDone();
-
-                System.out.println("You have successfully marked this task as done:\n");
-                System.out.println(list[markDone]);
-            } catch (StringIndexOutOfBoundsException | NumberFormatException e1) {
-                System.out.println("Please specify which task you would like to mark \n" +
-                                    "as complete by adding a single number after 'done'!\n" +
-                                    "i.e. done 1");
-            } catch (ArrayIndexOutOfBoundsException | NullPointerException e2) {
-                System.out.println("There is no task under that number!");
-            }
-
+            markTaskDone(input);
+        } else if (input.startsWith("todo")) {
+            addTodo(input.substring(5));
+        } else if (input.startsWith("deadline")) {
+            addDeadline(input.substring(9));
+        } else if (input.startsWith("event")) {
+            addEvent(input.substring(6));
         } else {
-
-            list[index++] = new Task(input);
-            System.out.println("Output: You have added '" + input + "' to the list!");
-
+            System.out.println("Output: That is not a valid input!");
         }
 
         printDoubleDivider();
         getInput();
+    }
+
+    private static void addTask(Task newTask) {
+        list[index++] = newTask;
+        System.out.println("Output:\n\nYou have successfully added the following task:\n\n" +
+                            "    " + newTask);
+        System.out.println("\nYou now have " + index + (index == 1 ? " task " : " tasks ") + "in your list!");
+    }
+
+    private static void addTodo(String input) {
+        Task todo = new Todo(input);
+        addTask(todo);
+    }
+
+    private static void addDeadline(String input) {
+        String[] deadlineParams = input.split(" /by ");
+        Task deadline = new Deadline(deadlineParams[0], deadlineParams[1]);
+        addTask(deadline);
+    }
+
+    private static void addEvent(String input) {
+        String[] deadlineParams = input.split(" /at ");
+        Task event = new Event(deadlineParams[0], deadlineParams[1]);
+        addTask(event);
+    }
+
+    private static void markTaskDone(String input) {
+
+        try {
+            int markDone = Integer.parseInt(input.substring(5)) - 1;
+            list[markDone].markAsDone();
+
+            System.out.println("You have successfully marked this task as done:\n");
+            System.out.println(list[markDone]);
+        } catch (StringIndexOutOfBoundsException | NumberFormatException e1) {
+            System.out.println("Please specify which task you would like to mark \n" +
+                    "as complete by adding a single number after 'done'!\n" +
+                    "i.e. done 1");
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException e2) {
+            System.out.println("There is no task under that number!");
+        }
+
     }
 
     private static void printDoubleDivider() {
