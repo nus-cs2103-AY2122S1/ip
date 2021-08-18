@@ -16,7 +16,12 @@ public class Duke {
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
             String userCommand = manager.getUserCommand(userInput);
-            manager.processUserInput(userInput);
+
+            try {
+                manager.processUserInput(userInput);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
 
             if (userCommand.equals("bye")) {
                 break;

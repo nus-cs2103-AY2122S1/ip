@@ -1,3 +1,6 @@
+import exceptions.EmptyDescriptionException;
+import exceptions.EmptyTimeException;
+import exceptions.InvalidCommandException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
@@ -13,11 +16,10 @@ public class TaskManager {
     }
 
     public String getUserCommand(String userInput) {
-        String userCommand = Arrays.asList(userInput.split(" ")).get(0);
-        return userCommand;
+        return Arrays.asList(userInput.split(" ")).get(0);
     }
 
-    public void processUserInput(String userInput) {
+    public void processUserInput(String userInput) throws EmptyDescriptionException, InvalidCommandException, EmptyTimeException {
         List<String> inputList = Arrays.asList(userInput.split(" "));
         String userCommand = this.getUserCommand(userInput);
 
@@ -38,12 +40,16 @@ public class TaskManager {
                 System.out.println(taskList.getTask(index));
             }
         } else if (userCommand.equals("todo")) {
-            String taskDescription = String.join(" ",
+            String description = String.join(" ",
                     inputList.subList(1, inputList.size()));
 
-            Todo todo = new Todo(taskDescription);
-            taskList.addTask(todo);
-            Util.taskAddConfirmatio(todo, taskList.getNumTask());
+            if (description.equals("")) {
+                throw new EmptyDescriptionException("todo");
+            } else {
+                Todo todo = new Todo(description);
+                taskList.addTask(todo);
+                Util.taskAddConfirmatio(todo, taskList.getNumTask());
+            }
 
         } else if (userCommand.equals("deadline")) {
             //Check if there's /by keyword or not
@@ -53,7 +59,12 @@ public class TaskManager {
                 String time = String.join(" ", inputList.subList(byIndex+1, inputList.size()));
                 //Get description
                 String description = String.join(" ", inputList.subList(1, byIndex));
-                if (!time.equals("") && !description.equals("")) {
+
+                if (description.equals("")) {
+                    throw new EmptyDescriptionException("deadline");
+                } else if (time.equals("")) {
+                    throw new EmptyTimeException("deadline");
+                } else {
                     Deadline deadline = new Deadline(description, time);
                     taskList.addTask(deadline);
                     Util.taskAddConfirmatio(deadline, taskList.getNumTask());
@@ -67,14 +78,19 @@ public class TaskManager {
                 String time = String.join(" ", inputList.subList(byIndex+1, inputList.size()));
                 //Get description
                 String description = String.join(" ", inputList.subList(1, byIndex));
-                if (!time.equals("") && !description.equals("")) {
+
+                if (description.equals("")) {
+                    throw new EmptyDescriptionException("event");
+                } else if (time.equals("")) {
+                    throw new EmptyTimeException("event");
+                } else {
                     Event event = new Event(description, time);
                     taskList.addTask(event);
                     Util.taskAddConfirmatio(event, taskList.getNumTask());
                 }
             }
         } else {
-            System.out.println("Command not found");
+            throw new InvalidCommandException();
         }
     }
 }
