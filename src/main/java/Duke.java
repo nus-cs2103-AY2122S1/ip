@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class Duke {
 
-    private static final Task[] taskList = new Task[100];
+    private static final ArrayList<Task> taskList = new ArrayList<>();
     private static int tasks = 0;
 
     public static void main(String[] args) {
@@ -32,7 +33,7 @@ public class Duke {
                             System.out.println("Currently no tasks!");
                         }
                         for (int i = 0; i < tasks; i++) {
-                            System.out.printf("%d. %s%n", i + 1, taskList[i]);
+                            System.out.printf("%d. %s%n", i + 1, taskList.get(i));
                         }
                         break;
                     case "bye":
@@ -46,7 +47,7 @@ public class Duke {
                             continue;
                         }
 
-                        Task doneTask = taskList[done];
+                        Task doneTask = taskList.get(done);
                         doneTask.markAsDone();
 
                         System.out.printf("I've marked this task as done:\n" +
@@ -61,15 +62,15 @@ public class Duke {
                         }
 
                         if (userCommand.equals("todo")) {
-                            taskList[tasks] = new Todo(userInput);
+                            taskList.add(new Todo(userInput));
                         } else if (userCommand.equals("deadline")) {
                             String[] deadlineInfo = splitBetween(userInput, "/by");
-                            taskList[tasks] = new Deadline(buildDescription(deadlineInfo, "by"));
+                            taskList.add(new Deadline(buildDescription(deadlineInfo, "by")));
                         } else {
                             String[] eventInfo = splitBetween(userInput, "/at");
-                            taskList[tasks] = new Event(buildDescription(eventInfo, "at"));
+                            taskList.add(new Event(buildDescription(eventInfo, "at")));
                         }
-                        addTask(taskList[tasks]);
+                        addTask(taskList.get(tasks));
                         break;
                     default:
                         throw new DukeException("Sorry I do not understand this directive.");
