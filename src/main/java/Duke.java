@@ -32,19 +32,62 @@ public class Duke {
      * interact with the user
      */
     private void interact() {
-        String input = "";
+        String[] input = {""};
         Scanner sc = new Scanner(System.in);
-        while (!input.equals("bye")) {
-            input = sc.nextLine();
-            if (input.equals("list")) {
-                printMessage(items.printList());
-            } else {
-                printMessage(items.addItem(input));
+        boolean flag = true;
+        while(flag) {
+            String output = "";
+            input = getInput(sc).split("\\s+");
+            String command = input[0];
+
+            switch (command) {
+                case "list":
+                    printMessage(items.printList());
+                    break;
+                case "done":
+                    if (input.length < 2) {
+                        printMessage("Enter the task number you have completed");
+                        break;
+                    }
+                    printMessage(items.markDone(Integer.parseInt(input[1])));
+                    break;
+                case "bye":
+                    flag = false;
+                    break;
+                default:
+                    String item = combineInputArray(input).toString();
+                    printMessage(items.addItem(item));
+                    break;
             }
         }
         printMessage("Going so soon? Hope to see you again soon!");
     }
 
+    /**
+     * combine an array of strings into a space seperated sentence.
+     * @param input the string array.
+     * @return the sentence.
+     */
+    private StringBuilder combineInputArray(String[] input) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < input.length; i++) {
+            if (i < input.length - 1) {
+                result.append(input[i]).append(" ");
+            } else {
+                result.append(input[i]);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Get the user input
+     * @param sc The scanner to get the input
+     * @return The string representation of the user input
+     */
+    private static String getInput(Scanner sc) {
+        return sc.nextLine();
+    }
 
     /**
      * print all bot messages in a specific format.

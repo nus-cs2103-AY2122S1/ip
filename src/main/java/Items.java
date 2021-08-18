@@ -7,7 +7,7 @@ public class Items {
     /**
      * items to be stored in the list.
      */
-    private String[] list;
+    private Task[] list;
 
     /**
      * the number of items in the list.
@@ -15,7 +15,7 @@ public class Items {
     private int len;
 
     public Items() {
-        list = new String[100];
+        list = new Task[100];
         len = 0;
     }
 
@@ -25,8 +25,21 @@ public class Items {
      * @return A status message to be displayed
      */
     public String addItem(String item) {
-        list[len++] = item;
+        Task task = new Task(item);
+        list[len++] = task;
         return "added " + item;
+    }
+
+    /**
+     * marks the specified task as done
+     * @param index the index at which the task is.
+     * @return error message if index is greater than the length of list, else completion message.
+     */
+    public String markDone(int index) {
+        if (index > len) {
+            return "you don't have these many tasks!";
+        }
+        return list[index - 1].doneTask();
     }
 
     /**
@@ -35,17 +48,17 @@ public class Items {
      */
     public String printList() {
         if (len == 0) {
-            return "There are no items in your list";
-        } else {
-            StringBuilder str = new StringBuilder("These are your tasks: \n");
-            for (int i = 0; i < len; i++) {
-                if (i < len - 1) {
-                    str.append(" ").append(i + 1).append(". ").append(list[i]).append("\n");
-                } else {
-                    str.append(" ").append(i + 1).append(". ").append(list[i]);
-                }
-            }
-            return str.toString();
+            return "You have 0 items in your list";
         }
+        StringBuilder str = new StringBuilder("These are your tasks: \n");
+
+        for (int i = 0; i < len; i++) {
+            if (i < len - 1) {
+                str.append(" ").append(i + 1).append(".").append(list[i].toString()).append("\n");
+            } else {
+                str.append(" ").append(i + 1).append(".").append(list[i].toString());
+            }
+        }
+        return str.toString();
     }
 }
