@@ -33,7 +33,7 @@ public class Duke {
     /**
      * interact with the user
      */
-    private void interact() {
+    private void interact() throws DukeException {
         String[] input = {""};
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
@@ -41,37 +41,38 @@ public class Duke {
             String output = "";
             input = getInput(sc).split("\\s+");
             String command = input[0];
-            String[] task = compileInput(input);
-            if (task[0].equals("error")) {
-                continue;
-            }
-            switch (command) {
-                case "list":
-                    printMessage(items.printList());
-                    break;
-                case "done":
-                    if (input.length < 2) {
-                        printMessage("Enter the task number you have completed");
+            try {
+                String[] task = compileInput(input);
+                switch (command) {
+                    case "list":
+                        printMessage(items.printList());
                         break;
-                    }
-                    printMessage(items.markDone(Integer.parseInt(input[1])));
-                    break;
-                case "bye":
-                    flag = false;
-                    break;
-                case "todo":
-                    printMessage(items.addItem(new Todo(task[0])));
-                    break;
-                case "event":
-                    printMessage(items.addItem(new Event(task[0], task[1])));
-                    break;
-                case "deadline":
-                    printMessage(items.addItem(new Deadline(task[0], task[1])));
-                    break;
-                default:
-                    printMessage("I don't recognise this command\n" +
-                            "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'");
-                    break;
+                    case "done":
+                        if (input.length < 2) {
+                            printMessage("Enter the task number you have completed");
+                            break;
+                        }
+                        printMessage(items.markDone(Integer.parseInt(input[1])));
+                        break;
+                    case "bye":
+                        flag = false;
+                        break;
+                    case "todo":
+                        printMessage(items.addItem(new Todo(task[0])));
+                        break;
+                    case "event":
+                        printMessage(items.addItem(new Event(task[0], task[1])));
+                        break;
+                    case "deadline":
+                        printMessage(items.addItem(new Deadline(task[0], task[1])));
+                        break;
+                    default:
+                        printMessage("I don't recognise this command\n" +
+                                "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'");
+                        break;
+                }
+            } catch (DukeException dukeException) {
+                printMessage(dukeException.getMessage());
             }
         }
         printMessage("Going so soon? Hope to see you again soon!");
@@ -120,69 +121,59 @@ public class Duke {
      * @param input the user input string.
      * @return the meaningful commands.
      */
-    private String[] compileInput(String[] input) {
+    private String[] compileInput(String[] input) throws DukeException {
         StringBuilder result = combineInputArray(input);
         switch (input[0]) {
             case "deadline":
                 String[] output = result.toString().split(" /by ");
                 if (output.length < 2) {
-                    printMessage("Please provide both description and time. Use '/by'. (eg. deadline fix hair /by 1pm tomorrow)");
+                    throw new DukeException("Please provide both description and time. Use '/by'. (eg. deadline fix hair /by 1pm tomorrow)");
                 } else {
                     return output;
                 }
-                break;
             case "event":
                 String[] output1 = result.toString().split(" /at ");
                 if (output1.length < 2) {
-                    printMessage("Please provide both description and time. Use '/at'. (eg. event fix hair /at 1pm tomorrow)");
+                    throw new DukeException("Please provide both description and time. Use '/at'. (eg. event fix hair /at 1pm tomorrow)");
                 } else {
                     return output1;
                 }
-                break;
             case "todo":
                 if (input.length < 2) {
-                    printMessage("Please specify the task you want to do");
+                    throw new DukeException("Please specify the task you want to do");
                 } else {
                     return new String[] {result.toString()};
                 }
-                break;
             case "done":
                 if (input.length < 2) {
-                    printMessage("Please specify which task you have done");
-                    break;
+                    throw new DukeException("Please specify which task you have done");
                 } else if (input.length != 2) {
-                    printMessage("'done' command requires exactly 1 argument. (eg. done 12)");
-                    break;
+                    throw new DukeException("'done' command requires exactly 1 argument. (eg. done 12)");
                 }
 
                 try {
                     Integer.parseInt(input[1]);
                 } catch (Exception e) {
-                    printMessage("'done' command requires an integer as number. (eg. done 12)");
-                    break;
+                    throw new DukeException("'done' command requires an integer as number. (eg. done 12)");
                 }
 
                 return new String[] {input[1]};
             case "list":
                 if (input.length != 1) {
-                    printMessage("'list' command doesn't require any arguments.");
+                    throw new DukeException("'list' command doesn't require any arguments.");
                 } else {
                     return new String[] {input[0]};
                 }
-                break;
             case "bye":
                 if (input.length != 1) {
-                    printMessage("'bye' command doesn't require any arguments.");
-                    break;
+                    throw new DukeException("'bye' command doesn't require any arguments.");
                 } else {
                     return new String[] {input[0]};
                 }
             default:
-                printMessage("I don't recognise this command\n" +
+                throw new DukeException("I don't recognise this command\n" +
                         "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'");
-                break;
         }
-        return new String[] {"error"};
     }
 
 
@@ -190,7 +181,7 @@ public class Duke {
      * The main function of Bhutu
      * @param args The command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = "\n" +
                 "███████████████████████████████\n" +
                 "█▄─▄─▀█─█─█▄─██─▄█─▄─▄─█▄─██─▄█\n" +
