@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Duke {
     /** Array to represent the to-do list. */
     private String[] toDoList;
@@ -14,7 +15,8 @@ public class Duke {
     }
 
     /**
-     * Method to echo the commands entered by the user, and exits when the command is "bye".
+     * Method to add the task entered by the user to the toDoList, list out the current
+     * tasks when the command is "list" and exits when the command is "bye".
      */
     public void commanding() {
         Scanner scan = new Scanner(System.in);
@@ -23,9 +25,15 @@ public class Duke {
             System.out.println("-------------------------------------------------------------------");
             System.out.println("Okay then! I hope to see you again soon master!");
             System.out.println("-------------------------------------------------------------------");
+        } else if (s.equals("list")) {
+            System.out.println("-------------------------------------------------------------------");
+            list();
+            System.out.println("-------------------------------------------------------------------");
+            commanding();
         } else {
             System.out.println("-------------------------------------------------------------------");
-            System.out.println(s);
+            store(s);
+            System.out.println("added: " + s);
             System.out.println("-------------------------------------------------------------------");
             commanding();
         }
@@ -41,6 +49,16 @@ public class Duke {
         this.nextSpaceToStore = this.nextSpaceToStore + 1;
     }
 
+    /**
+     * Method to list out the current tasks in the toDoList.
+     */
+    public void list() {
+        for (int i = 0; i < this.nextSpaceToStore; i++) {
+            int currTask = i + 1;
+            System.out.println(currTask+ ". " + this.toDoList[i]);
+        }
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -48,7 +66,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("-------------------------------------------------------------------");
-        System.out.println("Hello from\n" + logo + "How may I help you today master?\n");
+        System.out.println("Hello I'm\n" + logo + "How may I help you today master?\n");
         System.out.println("-------------------------------------------------------------------");
 
         Duke chatbot = new Duke();
