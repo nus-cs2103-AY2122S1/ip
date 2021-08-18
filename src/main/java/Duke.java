@@ -3,23 +3,81 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<String> itemList = new ArrayList<>();
+    private static ArrayList<Task> itemList = new ArrayList<>();
 
     /**
-     * Adds item to itemList.
-     * @param item Item to add to itemList.
+     * Parses the user input string.
+     * @param input
+     * @return true if user enters the exit command, false otherwise.
+     */
+    private static boolean parseInput(String input) {
+
+        String[] splitInput = input.split(" ");
+
+        switch (splitInput[0]) {
+            case "bye":
+                System.out.println("Seeya!");
+                return true;
+            case "list":
+                readList();
+                break;
+            case "done":
+                setTaskDone(splitInput);
+                break;
+            default:
+                add(input);
+                break;
+        }
+
+        return false;
+    }
+
+    /**
+     * Sets a task in itemList as 'done'.
+     * @param input String array of split user input.
+     */
+    private static void setTaskDone(String[] input) {
+
+        if (itemList.isEmpty()) {
+            System.out.println("No tasks in list!");
+        } else {
+            try {
+                int index = Integer.parseInt(input[1]) - 1;
+
+                if (index < 0 || index >= itemList.size()) {
+                    System.out.println("Invalid input, please enter a number from 1 to " + itemList.size());
+                } else {
+                    Task t = itemList.get(index);
+                    t.markAsDone();
+                    System.out.println("Alrighty, marking this task as done:\n" + t);
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input, please enter a number from 1 to " + itemList.size());
+            }
+        }
+
+    }
+
+    /**
+     * Creates a new Task and adds it to itemList.
+     * @param item name of Task to add to itemList.
      */
     private static void add(String item) {
-        itemList.add(item);
-        System.out.println("added: " + item);
+        itemList.add(new Task(item));
+        System.out.println("added:\n" + item);
     }
 
     /**
      * Prints out itemList.
      */
     private static void readList() {
-        for (int i = 0; i < itemList.size(); i++) {
-            System.out.println((i + 1) + ". " + itemList.get(i));
+        if (itemList.isEmpty()) {
+            System.out.println("No tasks in list!");
+        } else {
+            for (int i = 0; i < itemList.size(); i++) {
+                System.out.println((i + 1) + ". " + itemList.get(i));
+            }
         }
     }
 
@@ -46,27 +104,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
 
-        while (!exit) {
-
-            String input = sc.next();
-
-            System.out.println("____________________________________________________________");
-
-            switch (input) {
-                case "bye":
-                    System.out.println("Seeya!");
-                    exit = true;
-                    break;
-                case "list":
-                    readList();
-                    break;
-                default:
-                    add(input);
-                    break;
-            }
-
-            System.out.println("____________________________________________________________");
-
+        while (!parseInput(sc.nextLine())) {
+            continue;
         }
 
         sc.close();
