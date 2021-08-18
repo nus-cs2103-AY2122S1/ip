@@ -13,33 +13,45 @@ public class Duke {
     private final static String UNDERLINE = "_________________________________";
     private final static String INDENTATION ="  ";
     private final static String EXIT = "bye";
+    private final static String LIST = "list";
+    private final static String GIVEN_ADDED = "added: ";
+    private static String[] cmdList = new String[100];
+    private static int order = 0;
 
+    /**
+     * the method of greeting at starting of program.
+     */
+    public static void greeting(){
+
+        System.out.println(INDENTATION + UNDERLINE);
+        System.out.println(INDENTATION + "Hello! I'm Duke \n" +
+                           INDENTATION + "What can I do for you?");
+        System.out.println(INDENTATION + UNDERLINE);
+    }
 
     /**
      * This is Main method
      * @param args
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
-        System.out.println(INDENTATION + UNDERLINE);
-        System.out.println( "   Hello! I'm Duke \n" +
-                            "   What can I do for you?");
-        System.out.println(INDENTATION + UNDERLINE);
-
-
+        greeting();
         while(true) {
             String cmd = sc.nextLine();
-            if (!cmd.equals(EXIT)){
+            if (!cmd.equals(EXIT)) {
                 System.out.println(INDENTATION + UNDERLINE);
-                System.out.println(INDENTATION + cmd);
+                if (cmd.equals(LIST)) {
+                    for (int i = 0; i < order; i ++) {
+                        System.out.println(INDENTATION + (i + 1) + "." + INDENTATION + cmdList[i] );
+                    }
+                } else {
+                    System.out.println(INDENTATION  + GIVEN_ADDED + cmd);
+                    cmdList[order] = cmd;
+                    order ++;
+                }
                 System.out.println(INDENTATION + UNDERLINE);
+
             } else {
                 System.out.println(INDENTATION + UNDERLINE);
                 System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
