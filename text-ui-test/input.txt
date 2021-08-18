@@ -17,4 +17,6 @@ event
 event SomeEvent
 deadline
 deadline SomeDeadline
+delete 1
+list
 bye
