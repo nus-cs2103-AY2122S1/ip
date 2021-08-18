@@ -38,7 +38,7 @@ public class Duke {
     public static boolean menu(String command) throws Exception {
         var parameters = command.split(" ");
         if (command.equals("list")) {
-            printBanner(retrieveTaskList());
+            printBanner(renderTaskList());
         } else if (command.equals("bye")) {
             printBanner(BYE_MSG.split("\n"));
             return true;
@@ -68,7 +68,7 @@ public class Duke {
             String description = command.replace("todo ", "");
             var task = new Todo(description);
             tasks.add(task);
-            printBanner(renderNewTaskList(task));
+            printBanner(renderNewTask(task));
         } else if (
             parameters[0].equals("deadline")
             && parameters.length > 1
@@ -77,7 +77,7 @@ public class Duke {
             String[] parts = command.replace("deadline ", "").split(" /by ");
             var task = new Deadline(parts[0], parts[1]);
             tasks.add(task);
-            printBanner(renderNewTaskList(task));
+            printBanner(renderNewTask(task));
         } else if (
             parameters[0].equals("event")
             && parameters.length > 1
@@ -86,7 +86,7 @@ public class Duke {
             String[] parts = command.replace("event ", "").split(" /at ");
             var task = new Event(parts[0], parts[1]);
             tasks.add(task);
-            printBanner(renderNewTaskList(task));
+            printBanner(renderNewTask(task));
         } else {
             throw new Exception("I'm sorry, but I don't know what that means :-(");
         }
@@ -100,7 +100,7 @@ public class Duke {
         return String.format("[%s][%s] %s", taskIcon, statusIcon, description);
     }
 
-    public static String[] renderNewTaskList(Task task) {
+    public static String[] renderNewTask(Task task) {
         return new String[] {
             "Got it. I've added this task:",
             "  " + renderTask(task),
@@ -108,7 +108,7 @@ public class Duke {
         };
     }
 
-    public static String[] retrieveTaskList() {
+    public static String[] renderTaskList() {
         return Stream.concat(
             Stream.of("Here are the tasks in your list:"),
             IntStream.range(0, tasks.size())
