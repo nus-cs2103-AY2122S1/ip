@@ -36,7 +36,9 @@
 ____________________________________________________________
 SO WHAT DO YOU WANT DO, INSECT?
  ____________________________________________________________
- MORTAL, YOU'VE ADDED THIS TASK: [T][ ] Pray to lord Squirtle
+ MORTAL, YOU'VE ADDED THIS TASK:
+ [T][ ] Pray to lord Squirtle
+ YOU HAVE 1 TASKS LEFT.
 ____________________________________________________________
 WHAT ELSE DO YOU WANT, INSECT?
  ____________________________________________________________
@@ -45,7 +47,9 @@ YOU WISH FOR THESE FOOLISH THINGS:
 ____________________________________________________________
 WHAT ELSE DO YOU WANT, INSECT?
  ____________________________________________________________
- MORTAL, YOU'VE ADDED THIS DEADLINE: [D][ ] Prepare an offering (by: 10pm Tonight)
+ MORTAL, YOU'VE ADDED THIS DEADLINE:
+ [D][ ] Prepare an offering (by: 10pm Tonight)
+ YOU NOW HAVE 2 TASKS.
 ____________________________________________________________
 WHAT ELSE DO YOU WANT, INSECT?
  ____________________________________________________________
@@ -55,7 +59,9 @@ YOU WISH FOR THESE FOOLISH THINGS:
 ____________________________________________________________
 WHAT ELSE DO YOU WANT, INSECT?
  ____________________________________________________________
- MORTAL, YOU'VE ADDED THIS EVENT: [E][ ] Beg for forgiveness (at: 10pm-11pm)
+ MORTAL, YOU'VE ADDED THIS EVENT:
+ [E][ ] Beg for forgiveness (at: 10pm-11pm)
+ YOU HAVE 3 TASKS LEFT.
 ____________________________________________________________
 WHAT ELSE DO YOU WANT, INSECT?
  ____________________________________________________________
@@ -90,15 +96,15 @@ YOU WISH FOR THESE FOOLISH THINGS:
 ____________________________________________________________
 WHAT ELSE DO YOU WANT, INSECT?
  ____________________________________________________________
-YOU SAY YOU'VE COMPLETED THIS TASK:
- [E][X] Beg for forgiveness (at: 10pm-11pm)
+YOU'VE CHOSEN TO ABANDON THIS TASK:
+ [E][ ] Beg for forgiveness (at: 10pm-11pm)
+ YOU HAVE 2 TASKS LEFT.
 ____________________________________________________________
 WHAT ELSE DO YOU WANT, INSECT?
  ____________________________________________________________
 YOU WISH FOR THESE FOOLISH THINGS:
  1. [T][X] Pray to lord Squirtle
  2. [D][X] Prepare an offering (by: 10pm Tonight)
- 3. [E][X] Beg for forgiveness (at: 10pm-11pm)
 ____________________________________________________________
 WHAT ELSE DO YOU WANT, INSECT?
  ____________________________________________________________
