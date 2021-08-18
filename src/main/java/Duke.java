@@ -27,23 +27,28 @@ public class Duke {
                     }
                 } else if (input.length() > 3 && inputLower.substring(0, 4).equals("done")) {
                     if (input.replaceAll("\\s", "").length() == 4) {
-                        throw new DukeException("     ☹ OOPS!!! You haven't specified the task you have completed.");
-                    } else {
-                        String modInput = input.replaceAll("\\s", "");
-                        Task item = list.get(Integer.parseInt(modInput.substring(modInput.length() - 1)) - 1);
-                        item.markAsDone();
-                        System.out.println("    ____________________________________________________________");
-                        System.out.println("     Nice! I've marked this task as done:");
-                        System.out.println(String.format("       %s", item.toString()));
-                    }
-                } else if (input.length() > 5 && inputLower.substring(0, 6).equals("delete")) {
-                    if (input.replaceAll("\\s", "").length() == 6) {
-                        throw new DukeException("     ☹ OOPS!!! You haven't specified the task you want to delete.");
+                        throw new DukeException(DukeException.Type.EmptyDone);
                     } else {
                         String modInput = input.replaceAll("\\s", "");
                         int index = Integer.parseInt(modInput.substring(modInput.length() - 1)) - 1;
                         if (list.size() <= index) {
-                            throw new DukeException("     ☹ OOPS!!! The task number you have specified is invalid.");
+                            throw new DukeException(DukeException.Type.InvalidTaskNumber);
+                        } else {
+                            Task item = list.get(index);
+                            item.markAsDone();
+                            System.out.println("    ____________________________________________________________");
+                            System.out.println("     Nice! I've marked this task as done:");
+                            System.out.println(String.format("       %s", item.toString()));
+                        }
+                    }
+                } else if (input.length() > 5 && inputLower.substring(0, 6).equals("delete")) {
+                    if (input.replaceAll("\\s", "").length() == 6) {
+                        throw new DukeException(DukeException.Type.EmptyDelete);
+                    } else {
+                        String modInput = input.replaceAll("\\s", "");
+                        int index = Integer.parseInt(modInput.substring(modInput.length() - 1)) - 1;
+                        if (list.size() <= index) {
+                            throw new DukeException(DukeException.Type.InvalidTaskNumber);
                         } else {
                             Task item = list.remove(index);
                             System.out.println("    ____________________________________________________________");
@@ -54,7 +59,7 @@ public class Duke {
                     }
                 } else if (input.length() >= 4 && inputLower.substring(0, 4).equals("todo")) {
                     if (input.replaceAll("\\s", "").length() == 4) {
-                        throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
+                        throw new DukeException(DukeException.Type.EmptyTodo);
                     } else {
                         Todo t = new Todo(input.substring(5));
                         list.add(t);
@@ -65,7 +70,7 @@ public class Duke {
                     }
                 } else if (input.length() >= 5 && inputLower.substring(0, 5).equals("event")) {
                     if (input.replaceAll("\\s", "").length() == 5) {
-                        throw new DukeException("     ☹ OOPS!!! The description of an event cannot be empty.");
+                        throw new DukeException(DukeException.Type.EmptyEvent);
                     } else {
                         String[] splitString = input.substring(6).split(" /at ", 2);
                         Event e = new Event(splitString[0], splitString[1]);
@@ -77,7 +82,7 @@ public class Duke {
                     }
                 } else if (input.length() >= 8 && inputLower.substring(0, 8).equals("deadline")) {
                     if (input.replaceAll("\\s", "").length() == 8) {
-                        throw new DukeException("     ☹ OOPS!!! The description of a deadline cannot be empty.");
+                        throw new DukeException(DukeException.Type.EmptyDeadline);
                     } else {
                         String[] splitString = input.substring(9).split(" /by ", 2);
                         Deadline d = new Deadline(splitString[0], splitString[1]);
@@ -88,7 +93,7 @@ public class Duke {
                         System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
                     }
                 } else {
-                    throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException(DukeException.Type.InvalidCommand);
                 }
                 System.out.println("    ____________________________________________________________");
                 input = in.nextLine();
