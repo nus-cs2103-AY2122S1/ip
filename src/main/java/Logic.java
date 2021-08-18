@@ -10,7 +10,6 @@ public class Logic {
      * @throws InvalidCommandException is throwed when there is an invalid command in the form of a string
      */
     public static void process(String command) throws InvalidCommandException{
-        System.out.println("Process logic called");
 
         //Logic to check each individual commands, checks for special commands first, then checks for other input
         if (command.equals("")) {
@@ -21,12 +20,9 @@ public class Logic {
             ArrayList<String> listOfCommandInputs = packagedCommand.getListOfCommandInputs();
             String loggedCommand = packagedCommand.getLog();
 
-            System.out.println("Passed on to persistence stage");
-            System.out.println(listOfCommandInputs);
             if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
                 Persistence.printLog();
             } else if (listOfCommandInputs.contains("done")) {
-                System.out.println("Done called");
                 int pos = Integer.parseInt(listOfCommandInputs.get(1));
                 if (pos > Task.getNumberOfTask()) {
                     throw new InvalidCommandException();
@@ -59,6 +55,7 @@ public class Logic {
                         Persistence.addToLog(new Event(temp, date, time));
                         break;
                     case NOTAPPLICABLE:
+                        //For echoing commands
                         System.out.println(loggedCommand);
                 }
             }

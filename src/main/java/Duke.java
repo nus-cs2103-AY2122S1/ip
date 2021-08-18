@@ -11,7 +11,6 @@ public class Duke {
                 System.out.println("See ya");
                 break;
             } else {
-                System.out.println("Pass on to logic stage");
                 try {
                     Logic.process(command);
                 } catch (InvalidCommandException exception) {

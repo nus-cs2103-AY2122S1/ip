@@ -22,7 +22,6 @@ public class Parser {
         Command packagedCommand;
         ArrayList<String> listOfCommandInputs = new ArrayList<>();
         Collections.addAll(listOfCommandInputs,command.split(" "));
-        String actionCommand = listOfCommandInputs.get(0).toLowerCase();
         packagedCommand = new Command(taskType, listOfCommandInputs, command);
         return packagedCommand;
     }
