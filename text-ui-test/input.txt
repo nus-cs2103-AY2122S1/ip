@@ -9,6 +9,9 @@ todo buy groceries
 done 3
 list
 done 1
+delete 1
+done 1
+delete 1
 deadline go fishing /by Friday
 done 2
 list
