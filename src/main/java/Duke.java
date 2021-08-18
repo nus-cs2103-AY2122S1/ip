@@ -7,7 +7,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String bearPicStart = "┏ʕ •ᴥ•ʔ┛";
         String bearPicEnd = " ＼ʕ •ᴥ•ʔ／";
-        List<String> inputs = new ArrayList<String>();
+        List<Task> inputs = new ArrayList<Task>();
 
         System.out.println("Hi, I'm Duke the Bear! \n");
         System.out.println(bearPicStart + "\n");
@@ -25,7 +25,8 @@ public class Duke {
                     System.out.println( (i+1) + ": " + inputs.get(i));
                 }
             } else {
-                inputs.add(input);
+                Task task = new Task(input);
+                inputs.add(task);
                 System.out.println(input + " has been added to the list!");
             }
 
