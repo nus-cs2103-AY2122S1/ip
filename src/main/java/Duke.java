@@ -11,7 +11,7 @@ public class Duke {
     }
 
     public static String[] extractCommand(String command) {
-            return command.split(" /[\\w]{2} ", 2);
+            return command.split(" /by | /at ", 2);
     }
 
     public static void main(String[] args) {
