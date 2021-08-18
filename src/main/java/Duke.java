@@ -28,29 +28,63 @@ public class Duke {
         // Read and handle inputs from the user
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
+            // Separate user input into command (first word) and data (rest of string)
             String input = scanner.nextLine();
-            if (input.equals("bye")) {
-                // Exit when the user types bye
+            String command = "";
+            String data = "";
+            if (input.contains(" ")) {
+                String[] splitInput = input.split(" ", 2);
+                command = splitInput[0];
+                data = splitInput[1];
+            } else {
+                command = input;
+            }
+
+            // Handle user input
+            if (command.equals("bye")) {
+                // Exit
                 display("Bye. Hope to see you again soon!");
                 break;
-            } else if (input.equals("list")) {
-                // Display list of tasks when the user types list
+            } else if (command.equals("list")) {
+                // Display list of tasks
                 String output = "";
                 for (int i = 0; i < duke.tasks.size(); i++) {
                     output += String.valueOf(i + 1) + ". " + duke.tasks.get(i) + "\n\t ";
                 }
                 display(output);
-            } else if (input.substring(0, 4).equals("done")) {
-                // Mark task as done when the user types "done x" where x is an integer
-                int index = Integer.parseInt(input.substring(5, 6));
+            } else if (command.equals("done")) {
+                // Mark task as done
+                int index = Integer.parseInt(data);
                 Task t = duke.tasks.get(index - 1);
                 t.markAsDone();
                 display("Nice! I've marked this task as done: \n\t\t " + t);
-            } else {
-                // Otherwise, store task into list
-                Task t = new Task(input);
+            } else if (command.equals("todo")) {
+                // Store task as Todo
+                Task t = new Todo(data);
                 duke.tasks.add(t);
-                display("added: " + input);
+                display("Got it. I've added this task: \n\t\t "
+                        + t
+                        + "\n\t Now you have " + duke.tasks.size() + " tasks in the list.");
+            } else if (command.equals("deadline")) {
+                // Store task as Deadline
+                String description = data.split(" /by")[0];
+                String by = data.split("/by ")[1];
+                Task t = new Deadline(description, by);
+                duke.tasks.add(t);
+                display("Got it. I've added this task: \n\t\t "
+                        + t
+                        + "\n\t Now you have " + duke.tasks.size() + " tasks in the list.");
+            } else if (command.equals("event")) {
+                // Store task as Event
+                String description = data.split(" /at")[0];
+                String at = data.split("/at ")[1];
+                Task t = new Event(description, at);
+                duke.tasks.add(t);
+                display("Got it. I've added this task: \n\t\t "
+                        + t
+                        + "\n\t Now you have " + duke.tasks.size() + " tasks in the list.");
+            } else {
+                display("Please enter a valid input.");
             }
         }
         scanner.close();
