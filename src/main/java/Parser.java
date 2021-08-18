@@ -1,8 +1,16 @@
+/**
+ * Class for parsing input of user for Duke.
+ * @author Liew Jian Hong
+ */
+
 public class Parser {
-    public Parser() {
 
-    };
-
+    /**
+     * Returns the result of parsing the user input in an array of string where index 0 is command, index 1 is
+     * task description and index 2 is by/at date and time.
+     * @param item User's input.
+     * @return String array of parsed item.
+     */
     public String[] parse(String item) {
         String[] result = new String[]{"", "", ""};
         String[] split = item.split(" ");
@@ -26,10 +34,5 @@ public class Parser {
             result[2] = remainder.substring(separator + 4);
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        Parser p = new Parser();
-        p.parse("done");
     }
 }

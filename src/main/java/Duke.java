@@ -1,13 +1,25 @@
 import java.util.Scanner;
 
+/**
+ * Class to keep track of Tasks.
+ */
 public class Duke {
 
+    /**
+     * TaskList containing Tasks.
+     */
     private TaskList tl;
 
+    /**
+     * Constructor for a Duke.
+     */
     public Duke() {
         this.tl = new TaskList();
     }
 
+    /**
+     * Greeting from Duke.
+     */
     private void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -17,12 +29,19 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
     }
 
+    /**
+     * Duke echoes the given command.
+     * @param t User's command.
+     */
     private void echo(String t) {
         System.out.println("-----------------------------------------\n" +
                 String.format("%s\n", t) +
                 "-----------------------------------------\n");
     }
 
+    /**
+     * Exit the Duke program.
+     */
     private void exit() {
         String exitMessage =
                 "-----------------------------------------\n" +
@@ -32,6 +51,11 @@ public class Duke {
         System.exit(0);
     }
 
+    /**
+     * Adds a task for Duke to track given a parsed command.
+     * @param t String array of parsed user input.
+     * @throws DukeException Exception for wrong user inputs.
+     */
     private void add(String[] t) throws DukeException {
         Task newTask = null;
         switch (t[0]) {
@@ -65,10 +89,19 @@ public class Duke {
                 "-----------------------------------------\n");
     }
 
+    /**
+     * Get the task from duke given an index.
+     * @param index Index of Task.
+     * @return Task of the given index.
+     */
     private Task getTaskByIndex(int index) {
         return this.tl.getTaskByIndex(index);
     }
 
+    /**
+     * Mark a task as done given its position in the list.
+     * @param itemNum Position of Task in the list.
+     */
     private void markDone(int itemNum) {
         this.tl.markDone(itemNum);
         System.out.println("-----------------------------------------\n" +
@@ -77,6 +110,11 @@ public class Duke {
                 "-----------------------------------------\n");
     }
 
+    /**
+     * Delete a task from the list.
+     * @param items Parsed delete command from user.
+     * @throws DukeException Exception for wrong user inputs.
+     */
     private void deleteTask(String[] items) throws DukeException {
         if (items[1].equals("")) {
             throw new DukeException("☹ OOPS!!! The task's number cannot be empty");
@@ -93,6 +131,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Start Duke to allow for inputs.
+     */
     private void run() {
         this.greet();
         Scanner sc = new Scanner(System.in);
