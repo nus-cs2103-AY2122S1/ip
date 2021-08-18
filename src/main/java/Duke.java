@@ -23,9 +23,10 @@ public class Duke {
                 exit = true;
             } else if (nextInput.equals("list")){
                 printTasks();
+            } else if (nextInput.startsWith("done")) {
+                printMsg(Task.markTask(Integer.parseInt(nextInput.substring(5)) - 1));
             } else {
-                Task.addTask(nextInput);
-                printMsg("added: " + nextInput);
+                printMsg(Task.addTask(nextInput));
             }
         }
     }
