@@ -103,7 +103,7 @@ public class Duke {
         throw new DukeExceptionBase("Please enter something valid!");
     }
 
-    private static void tryAddToTDL(String str, TDLTask.TaskType currTaskType) {
+    private static void addToTDL(String str, TDLTask.TaskType currTaskType) throws DukeExceptionBase {
         currTDL.tdlAdd(str, currTaskType);
     }
 
@@ -112,14 +112,18 @@ public class Duke {
         currTDL.printOutTDL();
     }
 
-    private static void markItemDoneInTDL(String command) {
+    private static void markItemDoneInTDL(String command) throws DukeExceptionBase {
+        if (command.length() < 6) {
+            throw new DukeExceptionBase("You need to specify a task to set as done.");
+        }
+
         String taskNumberStr = command.substring(5);
         int taskNo = -1;
         try {
             taskNo = Integer.parseInt(taskNumberStr);
         } catch (NumberFormatException e) {
-            dukeSays("Please enter an integer.");
-            return;
+            throw new DukeExceptionBase("Please enter an integer.");
+
         }
         String dukeOutput = currTDL.markTaskAsDone(taskNo);
         dukeSays(dukeOutput);
