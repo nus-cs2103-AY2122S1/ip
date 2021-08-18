@@ -31,10 +31,20 @@ public class Duke {
         } else if (action.equals("done")){
             Integer index = Integer.valueOf(description) - 1;
             System.out.println(formatString(tasks.get(index).markAsDone()));
-        } else {
-            Task newTask = new Task(action);
+        } else if (action.equals("todo")){
+            Task newTask = new ToDo(description);
             tasks.add(newTask);
-            System.out.println(formatString("added: " + action));
+            System.out.println(formatString(newTask.actionString() + "\n" + getTaskCountString()));
+        } else if (action.equals("deadline")){
+            String[] split = description.split("/by");
+            Task newTask = new Deadline(split[0].trim(), split[1].trim());
+            tasks.add(newTask);
+            System.out.println(formatString(newTask.actionString() + "\n" + getTaskCountString()));
+        } else if (action.equals("event")){
+            String[] split = description.split("/at");
+            Task newTask = new Event(split[0].trim(), split[1].trim());
+            tasks.add(newTask);
+            System.out.println(formatString(newTask.actionString() + "\n" + getTaskCountString()));
         }
     }
 
@@ -49,6 +59,10 @@ public class Duke {
         taskString.append(len + ". " + tasks.get(len - 1).toString());
 
         return taskString.toString();
+    }
+
+    private static String getTaskCountString() {
+        return String.format("You have %d tasks", tasks.size());
     }
 
     private static String formatString(String message) {

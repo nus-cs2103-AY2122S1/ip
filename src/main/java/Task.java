@@ -1,14 +1,18 @@
 public class Task {
     private static final String DONE_MSG = "Well done.";
+    private static final String NEW_TASK_MSG = "New Task Added";
 
-    private boolean isDone;
+
+    private String type;
     private String description;
+    private boolean isDone;
     private String status;
 
-    public Task(String description) {
+    public Task(String description, String type) {
         this.description = description;
         this.isDone = false;
         this.status = "[ ]";
+        this.type = type;
     }
 
     public String markAsDone() {
@@ -18,12 +22,13 @@ public class Task {
     }
 
     public String actionString() {
-        return this.status + " " + this.description;
+        return NEW_TASK_MSG + "\n"
+            + this.toString();
     }
 
     @Override
     public String toString() {
-        return this.status + " " + this.description;
+        return this.type + this.status + " " + this.description;
     }
 }
 
