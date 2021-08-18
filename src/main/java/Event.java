@@ -1,9 +1,14 @@
 public class Event extends Task {
-    private String eventPeriod;
+    private final String eventPeriod;
 
     public Event(String description, String eventPeriod) throws AisuException {
         super(description);
         this.eventPeriod = eventPeriod;
+    }
+
+    @Override
+    public String ParseData() {
+        return "E;;" + (this.isDone ? "1" : "0") + ";;" + this.description + ";;" + this.eventPeriod;
     }
 
     @Override

@@ -1,9 +1,14 @@
 public class Deadline extends Task {
-    private String deadline;
+    private final String deadline;
 
     public Deadline(String description, String deadline) throws AisuException {
         super(description);
         this.deadline = deadline;
+    }
+
+    @Override
+    public String ParseData() {
+        return "D;;" + (this.isDone ? "1" : "0") + ";;" + this.description + ";;" + this.deadline;
     }
 
     @Override
