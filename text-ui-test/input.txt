@@ -1,0 +1,7 @@
+Go grocery shopping
+todo CS1101S studio worksheet
+deadline CS2103T ip week 2 /by 19/08/2021
+event CS2103T lecture /at Friday 4-6pm
+done 2
+list
+bye
