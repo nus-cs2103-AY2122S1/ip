@@ -4,14 +4,14 @@ import java.util.Scanner;
 public class Duke {
     private static final String GREETING_MSG = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String GOODBYE_MSG = "Bye. Hope to see you again soon!";
-    private static final String LIST_TASK_MSG = "Here are the tasks in your list:";
-    private static final String ADD_TASK_MSG_TEMPLATE = "Got it. I've added this task:\n"
+    private static final String LIST_TASK_MSG = "Here are the tasks in your list: ";
+    private static final String ADD_TASK_MSG_TEMPLATE = "Got it. I've added this task: \n"
                                                         + "  %s\n"
                                                         + "Now you have %d %s in the list.\n";
-    private static final String DELETE_TASK_MSG_TEMPLATE = "Noted. I've removed this task:\n"
+    private static final String DELETE_TASK_MSG_TEMPLATE = "Noted. I've removed this task: \n"
                                                         + "  %s\n"
                                                         + "Now you have %d %s in the list.\n";
-    private static final String MARK_DONE_MSG_TEMPLATE = "Nice! I've marked this task as done:\n  %s\n";
+    private static final String MARK_DONE_MSG_TEMPLATE = "Nice! I've marked this task as done: \n  %s\n";
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
@@ -76,13 +76,13 @@ public class Duke {
             addEvent(atSplit[0].split("^event[ \\t]+")[1], atSplit[1]);
         } else if (cmd.matches("^list[ \\t]*$")) {
             listTasks();
-        } else if (cmd.matches("^done[ \\t]+[0-9]+")) {
+        } else if (cmd.matches("^done[ \\t]+[0-9]+$")) {
             int i = Integer.parseInt(cmd.split("^done[ \\t]+")[1]) - 1;
             if (i < 0 || i >= tasks.size()) {
                 throw new DukeException(String.format("☹ OOPS!!! I'm sorry, but no task numbered %d", i + 1));
             }
             doneTask(i);
-        } else if (cmd.matches("^delete[ \\t]+[0-9]+")) {
+        } else if (cmd.matches("^delete[ \\t]+[0-9]+$")) {
             int i = Integer.parseInt(cmd.split("^delete[ \\t]+")[1]) - 1;
             if (i < 0 || i >= tasks.size()) {
                 throw new DukeException(String.format("☹ OOPS!!! I'm sorry, but no task numbered %d", i + 1));
