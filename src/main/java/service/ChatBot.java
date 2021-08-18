@@ -7,7 +7,8 @@ package service;
  */
 public class ChatBot {
 
-    private final static String LOGO = " /$$   /$$  /$$$$$$  /$$     /$$ /$$   /$$\n" +
+    private final static String LOGO = "\n" +
+            " /$$   /$$  /$$$$$$  /$$     /$$ /$$   /$$\n" +
             "| $$  /$$/ /$$__  $$|  $$   /$$/| $$  | $$\n" +
             "| $$ /$$/ | $$  \\ $$ \\  $$ /$$/ | $$  | $$\n" +
             "| $$$$$/  | $$$$$$$$  \\  $$$$/  | $$  | $$\n" +
@@ -19,20 +20,25 @@ public class ChatBot {
     private final static String LINE_SPLIT =
             "___________________________________________________________________________";
 
+    private final static String GREETING = "Hello!\n" +
+            "I'm Kayu, your alternative personal task management to Duke!\n" +
+            "What can I do for you?";
+
+    private final static String BYE = "Bye. Hope to see you again soon!";
+
     /**
      * Prints a greeting when program is first booted up.
      */
     public void greet() {
-        print("Hello from\n" + LOGO);
-        info("Hello! I'm Kayu, your alternative personal task management to Duke!\n" +
-                "What can I do for you?");
+        print(LOGO);
+        info(GREETING);
     }
 
     /**
      * Prints a closing statement before program terminates.
      */
     public void exit() {
-        info("Bye. Hope to see you again soon!");
+        info(BYE);
     }
 
     /**
@@ -41,9 +47,7 @@ public class ChatBot {
      * @param message message to display within LINE_SPLIT
      */
     public void info(String message) {
-        System.out.println(LINE_SPLIT);
-        System.out.println(message);
-        System.out.println(LINE_SPLIT + '\n');
+        print(LINE_SPLIT + '\n' + message + '\n' + LINE_SPLIT + '\n');
     }
 
     /**
