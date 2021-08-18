@@ -2,33 +2,33 @@ Hello! I'm Duke
 What can I do for you?
 Here are the tasks in your list:
 Here are the tasks in your list:
-Error: Task number not specified
-Error: Invalid task number
-Error: Invalid task number
-Error: Invalid task number
-Error: Invalid task number
-Error: Task info not specified
-Error: Invalid deadline task format
+Please specify a task number.
+Please specify a valid task number.
+Please specify a valid task number.
+Please specify a valid task number.
+Please specify a valid task number.
+Please specify the task info.
+Please enter a valid deadline format.
 Got it. I've added this task:
   [D][ ] ip (by: Friday)
-Error: Task info not specified
-Error: Invalid event task format
+Please specify the task info.
+Please enter a valid event format.
 Got it. I've added this task:
   [E][ ] Dinner (at: Thursday 1900-2000)
-Error: Task info not specified
+Please specify the task info.
 Got it. I've added this task:
   [T][ ] study
 Here are the tasks in your list:
 1. [D][ ] ip (by: Friday)
 2. [E][ ] Dinner (at: Thursday 1900-2000)
 3. [T][ ] study
-Error: Invalid task number
+Please specify a valid task number.
 Nice! I've marked this task as done:
   [E][X] Dinner (at: Thursday 1900-2000)
 Here are the tasks in your list:
 1. [D][ ] ip (by: Friday)
 2. [E][X] Dinner (at: Thursday 1900-2000)
 3. [T][ ] study
-Error: Unknown command
-Error: Unknown command
+Sorry, I don't know what that means.
+Sorry, I don't know what that means.
 Bye. Hope to see you again soon!
