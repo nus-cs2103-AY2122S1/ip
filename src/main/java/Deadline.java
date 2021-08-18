@@ -2,7 +2,7 @@
  * The Deadline class encapsulates all the details of each deadline.
  */
 public class Deadline extends Task {
-    private String endTime;
+    private final String endTime;
 
     public Deadline(String message, String endTime) {
         super(message);

@@ -3,11 +3,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private static final List<Task> tasks = new ArrayList<>();
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String command;
         String input;
-        List<Task> tasks = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -25,31 +26,25 @@ public class Duke {
                     System.out.println("Nice talking to you, goodbye!");
                     return;
                 case "list":
-                    printList(tasks);
+                    printList();
                     break;
                 case "done":
-                    doTask(Integer.parseInt(input)- 1, tasks);
-                    printList(tasks);
+                    doTask(Integer.parseInt(input)- 1);
+                    printList();
                     break;
                 case "todo":
                     ToDo newToDo = new ToDo(input);
-                    tasks.add(newToDo);
-                    System.out.println("Alright, I've added the following task:");
-                    System.out.println(newToDo.toString() + "\n");
+                    add(newToDo);
                     break;
                 case "event":
-                    String[] message_and_timePeriod = input.split("/");
+                    String[] message_and_timePeriod = input.split("/at ");
                     Event newEvent = new Event(message_and_timePeriod[0], message_and_timePeriod[1]);
-                    tasks.add(newEvent);
-                    System.out.println("Alright, I've added the following task:");
-                    System.out.println(newEvent.toString() + "\n");
+                    add(newEvent);
                     break;
                 case "deadline":
-                    String[] message_and_endTime = input.split("/");
+                    String[] message_and_endTime = input.split("/by ");
                     Deadline newDeadline = new Deadline(message_and_endTime[0], message_and_endTime[1]);
-                    tasks.add(newDeadline);
-                    System.out.println("Alright, I've added the following task:");
-                    System.out.println(newDeadline.toString() + "\n");
+                    add(newDeadline);
                     break;
                 default:
                     tasks.add(new Task(command));
@@ -60,9 +55,8 @@ public class Duke {
 
     /**
      * Prints out the todo list to the console
-     * @param tasks The list of tasks.
      */
-    private static void printList(List<Task> tasks) {
+    private static void printList() {
         System.out.println("Here's your todo list!");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i).toString());
@@ -73,9 +67,18 @@ public class Duke {
     /**
      * Marks the taskNum-th item in the tasks list as completed.
      * @param taskNum The index of the task to be marked.
-     * @param tasks The list of tasks.
      */
-    private static void doTask(int taskNum, List<Task> tasks) {
+    private static void doTask(int taskNum) {
         tasks.get(taskNum).doTask();
+    }
+
+    /**
+     * Adds a task to the tasks list and prints a success message.
+     * @param task The task to be added.
+     */
+    private static void add(Task task) {
+        tasks.add(task);
+        System.out.println("Alright, I've added the following task:");
+        System.out.println(tasks.get(tasks.size() - 1) + "\n");
     }
 }

@@ -2,7 +2,7 @@
  * The Task class encapsulates all the details of each task.
  */
 public class Task {
-    private String message;
+    private final String message;
     private Boolean completed;
 
     public Task(String message) {
