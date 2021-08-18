@@ -1,0 +1,14 @@
+todo find keys
+deadline project /by Mon
+deadline essay
+todo
+deadline
+event
+done
+event hello
+event party /at 2 Sept 4-10pm
+list done 0
+done 5
+done 1
+list blah
+bye
