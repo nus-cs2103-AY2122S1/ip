@@ -20,7 +20,7 @@ public class Duke {
 
     private final static String EXIT_KEY = "bye";
 
-    private final DukeChatBot dukeChatBot = new DukeChatBot();
+    private final ChatBot chatBot = new ChatBot();
 
     private final TaskManager taskManager = new TaskManager();
 
@@ -38,8 +38,8 @@ public class Duke {
      * Runs the whole duke process.
      */
     public void run() {
-        dukeChatBot.print("Hello from\n" + LOGO);
-        dukeChatBot.info("Hello! I'm Duke.\n\tWhat can I do for you?");
+        chatBot.print("Hello from\n" + LOGO);
+        chatBot.info("Hello! I'm Duke.\n\tWhat can I do for you?");
 
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine().trim();
@@ -49,7 +49,7 @@ public class Duke {
         }
         scanner.close();
 
-        dukeChatBot.info("Bye. Hope to see you again soon!");
+        chatBot.info("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -61,17 +61,17 @@ public class Duke {
     public void makeDecision(String userInput) {
         try {
             if (userInput.equals("list")) {
-                dukeChatBot.list(taskManager.listTasks());
+                chatBot.list(taskManager.listTasks());
 
             } else if (userInput.startsWith("done")) {
                 String taskNumberString = userInput.substring(4).trim();
                 Task completedTask = taskManager.markTaskAsDone(taskNumberString);
-                dukeChatBot.info("Nice! I've marked this task as done:\n\t  " + completedTask);
+                chatBot.info("Nice! I've marked this task as done:\n\t  " + completedTask);
 
             } else if (userInput.startsWith("delete")) {
                 String taskNumberString = userInput.substring(6).trim();
                 Task deletedTask = taskManager.deleteTask(taskNumberString);
-                dukeChatBot.info("Noted. I've removed this task:\n\t  " + deletedTask +
+                chatBot.info("Noted. I've removed this task:\n\t  " + deletedTask +
                         "\n\tNow you have " + taskManager.getTaskListSize() +
                         " tasks in the list.");
 
@@ -85,11 +85,11 @@ public class Duke {
                 echoTaskCreation(taskManager.addDeadlineTask(userInput.substring(8)));
 
             } else {
-                dukeChatBot.error("Please ensure instruction follows specified format.");
+                chatBot.error("Please ensure instruction follows specified format.");
             }
 
         } catch (TaskManagerException exception) {
-            dukeChatBot.error(exception.getLocalizedMessage());
+            chatBot.error(exception.getLocalizedMessage());
         }
     }
 
@@ -99,7 +99,7 @@ public class Duke {
      * @param task task which was just created
      */
     public void echoTaskCreation(Task task) {
-        dukeChatBot.info("Got it. I've added this task:\n\t  " + task + "\n\tNow you have " +
+        chatBot.info("Got it. I've added this task:\n\t  " + task + "\n\tNow you have " +
                 taskManager.getTaskListSize() + " tasks in the list.");
     }
 }

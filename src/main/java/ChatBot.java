@@ -5,7 +5,7 @@ import java.util.List;
  *
  * This class acts as a communicator to the user on the command line.
  */
-public class DukeChatBot {
+public class ChatBot {
 
     private final static String LINE_SPLIT =
             "___________________________________________________________________________";
