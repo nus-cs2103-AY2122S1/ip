@@ -2,7 +2,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public void Run() {
         Scanner scanner = new Scanner(System.in);
         Task[] list = new Task[100];
         int pointer = 0;
@@ -121,63 +121,5 @@ public class Duke {
         }
         System.out.println("──────────────────────────────────────────");
         System.out.println("Bye, hope to see you again soon!");
-    }
-
-    private static class Task {
-        protected boolean done = false;
-        protected String name;
-
-        public Task(String name) {
-            this.name = name;
-        }
-
-        public void Done() {
-            this.done = true;
-        }
-
-        @Override
-        public String toString() {
-            if (done) {
-                return "[X] " + name;
-            } else {
-                return "[ ] " + name;
-            }
-        }
-    }
-
-    private static class Todo extends Task {
-        public Todo(String str) {
-            super(str);
-        }
-
-        @Override
-        public String toString() {
-            return "[T]" + super.toString();
-        }
-    }
-
-    private static class Deadline extends Task {
-        protected String when;
-        public Deadline(String str1, String str2) {
-            super(str1);
-            this.when = str2;
-        }
-
-        @Override
-        public String toString() {
-            return "[D]" + super.toString() + " (by: " + when + ")";
-        }
-    }
-
-    private static class Event extends Task {
-        protected String when;
-        public Event(String str1, String str2) {
-            super(str1);
-            this.when = str2;
-        }
-        @Override
-        public String toString() {
-            return "[E]" + super.toString() + " (at: " + when + ")";
-        }
     }
 }
