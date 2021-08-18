@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Candice {
 
     private static final String PARTITION = "______________________";
-    private static String[] tasks;
+    private static Task[] tasks;
     private static int noOfTasks;
 
     private static boolean response(String command) {
@@ -15,6 +15,11 @@ public class Candice {
             return true;
         } else if (command.equalsIgnoreCase("list")) {
             list();
+            return false;
+        } else if (command
+                .substring(0, 5)
+                .equalsIgnoreCase("done ")) {
+            markTaskDone(Character.getNumericValue(command.charAt(5)) - 1);
             return false;
         } else {
             addTask(command);
@@ -31,12 +36,17 @@ public class Candice {
     }
 
     private static void addTask(String command) {
-        tasks[noOfTasks] = command;
+        tasks[noOfTasks] = new Task(command);
         noOfTasks++;
         System.out.println(PARTITION + "\n added: "
                 + command + "\n" + PARTITION);
     }
 
+    private static void markTaskDone(int taskNo) {
+        tasks[taskNo].markAsDone();
+        System.out.println(PARTITION + "\n Successfully marked as done: \n"
+                + tasks[taskNo] + "\n" + PARTITION);
+    }
 
     public static void main(String[] args) {
         System.out.println(PARTITION
@@ -45,7 +55,7 @@ public class Candice {
                 "but you can call me your MeowWoof."
                 + "\n What can I do for you? \n" + PARTITION + "\n");
 
-        tasks = new String[100];
+        tasks = new Task[100];
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
