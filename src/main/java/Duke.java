@@ -1,9 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static final List<Task> tasks = new ArrayList<>();
+    private static final TaskList taskList = new TaskList();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -26,48 +24,20 @@ public class Duke {
                     System.out.println("Nice talking to you, goodbye!");
                     return;
                 case "list":
-                    printList();
+                    System.out.println("Here's your todo list!");
+                    taskList.printList();
                     break;
                 case "done":
-                    doTask(Integer.parseInt(input) - 1);
-                    printList();
+                    taskList.doTask(Integer.parseInt(input) - 1);
+                    taskList.printList();
                     break;
                 default:
                     try {
-                        add(Task.createTask(command, input));
+                        taskList.add(Task.createTask(command, input));
                     } catch (NoSuchCommandException e) {
                         System.out.println(e.getMessage());
                     }
             }
         }
-    }
-
-    /**
-     * Prints out the todo list to the console
-     */
-    private static void printList() {
-        System.out.println("Here's your todo list!");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i).toString());
-        }
-        System.out.println();
-    }
-
-    /**
-     * Marks the taskNum-th item in the tasks list as completed.
-     * @param taskNum The index of the task to be marked.
-     */
-    private static void doTask(int taskNum) {
-        tasks.get(taskNum).doTask();
-    }
-
-    /**
-     * Adds a task to the tasks list and prints a success message.
-     * @param task The task to be added.
-     */
-    private static void add(Task task) {
-        tasks.add(task);
-        System.out.println("Alright, I've added the following task:\n");
-        System.out.println(tasks.get(tasks.size() - 1) + "\nNow you have " + tasks.size() + " tasks in the list.\n");
     }
 }
