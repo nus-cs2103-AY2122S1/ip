@@ -1,4 +1,4 @@
-public enum RequestType {
+public enum Command {
 
     LIST    ("list"),
     DONE    ("done"),
@@ -10,12 +10,18 @@ public enum RequestType {
     INVALID ("");
 
     private final String command;
-    RequestType(String command) {
+    Command(String command) {
         this.command = command;
     }
 
-    public static RequestType find(String command) {
-        for(RequestType req : RequestType.values()) {
+    /**
+     * Find the matching Command of a request.
+     * @param request The request from raw input line.
+     * @return The corresponding Command to a request.
+     */
+    public static Command find(String request) {
+        String command = request.split(" ")[0];
+        for(Command req : Command.values()) {
             if (command.equals(req.command)) {
                 return req;
             }
