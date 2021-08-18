@@ -1,19 +1,20 @@
 public class Duke {
-    private static final Presentation presentation_layer = new Presentation();
-
 
     // Function starts the process of the dukebot, closes when the "Bye command is issued"
     private static void start() {
         while (true) {
-            String command = presentation_layer.scan();
+            String command = Presentation.scan();
             // Check if player has entered a command, returns the command if command is not null or bye
-            if (command.equals("")) {
-                System.out.println("Please enter a command");
-            } else if (command.equals("bye")) {
+            if (command.equals("bye")) {
                 System.out.println("See ya");
                 break;
             } else {
-                System.out.println(command);
+                System.out.println("Pass on to logic stage");
+                try {
+                    Logic.process(command);
+                } catch (InvalidCommandException exception) {
+                    System.out.println(exception.getMessage());
+                }
             }
         }
     }

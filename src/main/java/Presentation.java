@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Presentation {
-    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public String scan() {
+    public static String scan() {
         String command = new String();
         try {
             command = reader.readLine();
