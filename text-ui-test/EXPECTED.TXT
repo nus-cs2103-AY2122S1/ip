@@ -56,6 +56,31 @@ Woof! Whose a Good Boy?
 Task Done!
 	[D][X] CS2103T week 1 ip (by: 19th Aug)
 ________________________________________
+-> Where's My Treat? I Added: 
+	[E][ ] ST2334 tut (at: 1PM)
+
+You Owe Me 5 Treat(s), Master!
+________________________________________
+Please Follow The Format For Adding An Event Task: 
+	event task_description /at time
+________________________________________
+-> Where's My Treat? I Added: 
+	[T][ ] code
+
+You Owe Me 6 Treat(s), Master!
+________________________________________
+Please Follow The Format For Adding A Deadline Task: 
+	deadline task_description /by date
+________________________________________
+Please Follow The Format For Adding A Todo Task: 
+	todo task_description
+________________________________________
+Please Enter An Integer Value For Task Number
+________________________________________
+Woof! Whose a Good Boy?
+Task Done!
+	[T][X] code
+________________________________________
 ________________________________________
 -> Sad To See You Go!
 ________________________________________

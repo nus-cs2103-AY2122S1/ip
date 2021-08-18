@@ -9,4 +9,11 @@ event attend CS2100 lecture /at 4PM
 done 4
 list
 done 2
+event ST2334 tut /at 1PM
+event /at
+todo code
+deadline /at
+todo
+done
+done 6
 bye
