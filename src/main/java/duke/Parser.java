@@ -22,6 +22,7 @@ public abstract class Parser {
             if (in.startsWith("todo")) {
                 in = in.replaceFirst("todo", "");
                 type = "todo";
+                in = in.strip();
                 checkDescription(in);
                 return new AddCommand(type, in);
             } else {
@@ -34,7 +35,7 @@ public abstract class Parser {
                 }
                 String[] arr = in.split("/", 2);
                 LocalDate date = LocalDate.parse(arr[1].substring(3));
-                String label = arr[0];
+                String label = arr[0].strip();
                 checkDescription(label);
                 return new AddCommand(type, label, date);
             }
