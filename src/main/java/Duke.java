@@ -24,64 +24,67 @@ public class Duke {
             String command = tokens[0];
             String param = tokens.length == 1 ? null : tokens[1].strip();
 
-            switch (command) {
-                case "todo":
-                    System.out.println(todoMsg);
-                    botList[numItems] = new Todo(param);
-                    System.out.println(botList[numItems]);
-                    numItems++;
-                    System.out.printf("Now you have %d tasks in the list.\n", numItems);
-                    break;
-                case "list":
-                    System.out.println(listMsg);
-                    for (int i = 0; i < numItems; i++) {
-                        System.out.println((i + 1) + "." + botList[i]);
-                    }
-                    break;
-                case "deadline":
-                    System.out.println(todoMsg);
+            try {
+                switch (command) {
+                    case "todo":
+                        if (param == null) {
+                            throw DukeException.emptyDescription();
+                        }
 
-                    String[] taskItems = param.split(" /by ", 2);
-                    String desc = taskItems[0].strip();
-                    String due = taskItems[1].strip();
+                        System.out.println(todoMsg);
+                        botList[numItems] = new Todo(param);
+                        System.out.println(botList[numItems]);
+                        numItems++;
+                        System.out.printf("Now you have %d tasks in the list.\n", numItems);
+                        break;
+                    case "list":
+                        System.out.println(listMsg);
+                        for (int i = 0; i < numItems; i++) {
+                            System.out.println((i + 1) + "." + botList[i]);
+                        }
+                        break;
+                    case "deadline":
+                        System.out.println(todoMsg);
 
-                    botList[numItems] = new Deadline(desc, due);
-                    numItems++;
-                    System.out.printf("Now you have %d tasks in the list.\n", numItems);
-                    break;
-                case "event":
-                    System.out.println(todoMsg);
+                        String[] taskItems = param.split(" /by ", 2);
+                        String desc = taskItems[0].strip();
+                        String due = taskItems[1].strip();
 
-                    taskItems = param.split(" /at ", 2);
-                    desc = taskItems[0].strip();
-                    due = taskItems[1].strip();
+                        botList[numItems] = new Deadline(desc, due);
+                        numItems++;
+                        System.out.printf("Now you have %d tasks in the list.\n", numItems);
+                        break;
+                    case "event":
+                        System.out.println(todoMsg);
 
-                    botList[numItems] = new Event(desc, due);
-                    numItems++;
-                    System.out.printf("Now you have %d tasks in the list.\n", numItems);
-                    break;
-                case "done":
-                    System.out.println(doneMsg);
-                    int intParam = Integer.parseInt(param) - 1;
-                    botList[intParam].markAsDone();
-                    System.out.println(botList[intParam]);
-                    break;
-                case "bye":
-                    System.out.println(byeMsg);
-                    break outerLoop;
-                default: // Adds task
-                    botList[numItems++] = new Task(userInput);
-                    System.out.println("added: " + userInput);
+                        taskItems = param.split(" /at ", 2);
+                        desc = taskItems[0].strip();
+                        due = taskItems[1].strip();
+
+                        botList[numItems] = new Event(desc, due);
+                        numItems++;
+                        System.out.printf("Now you have %d tasks in the list.\n", numItems);
+                        break;
+                    case "done":
+                        System.out.println(doneMsg);
+                        int intParam = Integer.parseInt(param) - 1;
+                        botList[intParam].markAsDone();
+                        System.out.println(botList[intParam]);
+                        break;
+                    case "bye":
+                        System.out.println(byeMsg);
+                        break outerLoop;
+                    default: // Adds task
+                        throw DukeException.invalidInput();
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
 
-    static void run() {
+    public static void main(String[] args) {
         introduce();
         reply();
-    }
-
-    public static void main(String[] args) {
-        run();
     }
 }
