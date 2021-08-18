@@ -29,16 +29,16 @@ public class TaskManagement {
     }
 
     public void showTasks() {
-        System.out.println(Duke.HORIZONTAL_LINE);
-        System.out.println(Duke.INDENTATION + "Here are the tasks in your list:");
+        System.out.println(CommonUtils.HORIZONTAL_LINE);
+        System.out.println(CommonUtils.INDENTATION + "Here are the tasks in your list:");
         if (tasks.isEmpty()) {
-            System.out.println(Duke.INDENTATION + "No tasks");
+            System.out.println(CommonUtils.INDENTATION + "No tasks");
         } else {
             for (int i = 0; i < tasks.size(); ++i) {
-                System.out.println(Duke.INDENTATION + (i + 1) + ". " + tasks.get(i).toString());
+                System.out.println(CommonUtils.INDENTATION + (i + 1) + ". " + tasks.get(i).toString());
             }
         }
-        System.out.println(Duke.HORIZONTAL_LINE);
+        System.out.println(CommonUtils.HORIZONTAL_LINE);
     }
 
     public void markTaskAsDone(int index) {
@@ -48,9 +48,9 @@ public class TaskManagement {
         Task temp = tasks.get(index);
         temp.markAsDone();
         tasks.set(index, temp);
-        System.out.println(Duke.HORIZONTAL_LINE);
-        System.out.println(Duke.INDENTATION + "Nice! I've marked this task as done:");
-        System.out.println(Duke.INDENTATION + temp.toString());
-        System.out.println(Duke.HORIZONTAL_LINE);
+        System.out.println(CommonUtils.HORIZONTAL_LINE);
+        System.out.println(CommonUtils.INDENTATION + "Nice! I've marked this task as done:");
+        System.out.println(CommonUtils.INDENTATION + temp.toString());
+        System.out.println(CommonUtils.HORIZONTAL_LINE);
     }
 }
