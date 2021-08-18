@@ -19,4 +19,9 @@ Good job! I've marked this task as done:
 1. [T][ ] Do 2103 project
 2. [E][ ] project meeting (at: Mon 2-4pm)
 3. [D][X] return book (by: Sunday)
+Noted! I've removed this task:
+[E][ ] project meeting (at: Mon 2-4pm)
+Now you have 2 tasks in the list
+1. [T][ ] Do 2103 project
+2. [D][X] return book (by: Sunday)
 Bye. Hope to see you soon and hope you found my service useful!
