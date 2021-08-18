@@ -33,20 +33,31 @@ public class Duke {
                     if (len > 2) {
                         System.out.println("Too many arguments for this command.");
                         continue;
+                    } else if (len == 1) {
+                        System.out.println("Indicate a task number that you have completed ☻");
                     }
                     taskDone(x, tasks, count);
                 } else if (cmd.equals("todo")) {
-                    addToDo(input, tasks, count);
-                    count++;
+                    if (x.length == 1) { missingTaskName("todo"); }
+                    else {
+                        addToDo(input, tasks, count);
+                        count++;
+                    }
                 } else if (cmd.equals("deadline")) {
-                    addDeadline(input, tasks, count);
-                    count++;
+                    if (x.length == 1) { missingTaskName("deadline"); }
+                    else {
+                        addDeadline(input, tasks, count);
+                        count++;
+                    }
                 } else if (cmd.equals("event")) {
-                    addEvent(input, tasks, count);
-                    count++;
+                    if (x.length == 1) { missingTaskName("event"); }
+                    else {
+                        addEvent(input, tasks, count);
+                        count++;
+                    }
                 } else {
                     // unknown command received
-                    System.out.println("☹︎wut☁︎☻");
+                    System.out.println("☹︎wut☁︎☻ unknown command");
                 }
             }
         }
@@ -98,6 +109,11 @@ public class Duke {
         tasks[count] = e;
         System.out.println("Okay! Task added:\n  " + e.toString());
         System.out.println("You now have " + (count + 1) + " task(s) in the list.");
+    }
+
+    public static void missingTaskName(String cmd) {
+        String str = String.format("☹ OOPS!!! The description of a %s cannot be empty.", cmd);
+        System.out.println(str);
     }
 
 }
