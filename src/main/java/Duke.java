@@ -1,10 +1,26 @@
+import java.util.Objects;
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String intro = "____________________________________________________________ \n"
+                + "Hello! I'm Joker \n"
+                + "What can I do for you? \n"
+                + "____________________________________________________________";
+        System.out.println(intro);
+        String inData = "yo";
+        Scanner scan = new Scanner(System.in);
+        while (!Objects.equals(inData, "bye")) {
+            inData = scan.nextLine();
+            if (!Objects.equals(inData, "bye")) {
+                System.out.println("____________________________________________________________ \n"
+                        + inData
+                        + "\n"
+                        + "____________________________________________________________");
+            }
+        }
+        System.out.println("____________________________________________________________ \n"
+                + "Bye. Hope to see you again soon! \n"
+                + "____________________________________________________________");
     }
 }
