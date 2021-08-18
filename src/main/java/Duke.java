@@ -54,7 +54,18 @@ public class Duke {
             } else if (strparse.length == 2 && strparse[0].equals("done")) {
                 // checks for 'done' and integer keywords
                 // checks corresponding task as done
+                boolean passallcheck = false;
                 try {
+                    int i = Integer.parseInt(strparse[1]);
+                    if (i >= 0 && i <= 100 && taskarr[i] != null) {
+                        passallcheck = true;
+                    } else {
+                        // do nothing
+                    }
+                } catch (NumberFormatException nfe) {
+                    // do nothing
+                }
+                if (passallcheck) {
                     int i = Integer.parseInt(strparse[1]);
                     taskarr[i].markAsDone();
                     System.out.println(linebreak);
@@ -68,9 +79,7 @@ public class Duke {
                     System.out.println(linebreak);
                     taskarr[arrcounter] = new Task(str);
                     arrcounter++;
-
-                } catch (NumberFormatException nfe) {
-                    // not a 'done' task
+                } else {
                     taskarr[arrcounter] = new Task(str);
                     arrcounter++;
                     System.out.println(linebreak
