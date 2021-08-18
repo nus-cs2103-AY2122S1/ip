@@ -2,6 +2,18 @@ import java.util.Scanner;
 
 public class Duke {
 
+    public static void printAdded(Task task, int numOfTask) {
+        Printer.prettyPrint("Got it. I've added this task:\n\t " +
+                task.toString() +
+                "\n\tNow you have " +
+                numOfTask +
+                " tasks in the list.");
+    }
+
+    public static String[] extractCommand(String command) {
+            return command.split(" /[\\w]{2} ", 2);
+    }
+
     public static void main(String[] args) {
         // Greet the user
         Printer.prettyPrint("Welcome to\n" +
@@ -30,31 +42,19 @@ public class Duke {
                     tasks[Integer.parseInt(command[1]) - 1].markAsDone();
                     break;
                 case "todo":
-                    String[] taskDetail = command[1].split(" /[\\w]{2} ");
+                    String[] taskDetail = extractCommand(command[1]);
                     tasks[numOfTask++] = new Todo(taskDetail[0]);
-                    Printer.prettyPrint("Got it. I've added this task:\n\t " +
-                            tasks[numOfTask - 1].toString() +
-                            "\n\tNow you have " +
-                            numOfTask +
-                            " tasks in the list.");
+                    printAdded(tasks[numOfTask - 1], numOfTask);
                     break;
                 case "event":
-                    taskDetail = command[1].split(" /[\\w]{2} ");
+                    taskDetail = extractCommand(command[1]);
                     tasks[numOfTask++] = new Event(taskDetail[0], taskDetail[1]);
-                    Printer.prettyPrint("Got it. I've added this task:\n\t " +
-                            tasks[numOfTask - 1].toString() +
-                            "\n\tNow you have " +
-                            numOfTask +
-                            " tasks in the list.");
+                    printAdded(tasks[numOfTask - 1], numOfTask);
                     break;
                 case "deadline":
-                    taskDetail = command[1].split(" /[\\w]{2} ");
+                    taskDetail = extractCommand(command[1]);
                     tasks[numOfTask++] = new Deadline(taskDetail[0], taskDetail[1]);
-                    Printer.prettyPrint("Got it. I've added this task:\n\t " +
-                            tasks[numOfTask - 1].toString() +
-                            "\n\tNow you have " +
-                            numOfTask +
-                            " tasks in the list.");
+                    printAdded(tasks[numOfTask - 1], numOfTask);
                     break;
                 default:
                     tasks[numOfTask++] = new Task(input);
