@@ -8,12 +8,15 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (this.isDone ? "X" : " ");
     }
 
     public void markAsDone() {
         this.isDone = true;
     }
 
-    //...
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + this.name;
+    }
 }
