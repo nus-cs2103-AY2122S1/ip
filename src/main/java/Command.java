@@ -22,6 +22,7 @@ public class Command {
       case "BYE": exit(); break;
       case "LIST": list(); break;
       case "DONE": done(Integer.parseInt(line[1])); break;
+      case "DELETE": delete(Integer.parseInt(line[1])); break;
       case "TODO": todo(cmd); break;
       case "DEADLINE":
       case "EVENT":
@@ -96,8 +97,8 @@ public class Command {
     Task.tasks.add(d);
     System.out.println(
       "\t Got it. I've added this task:\n" +
-        "\t   " + d + "\n" +
-        "\t Now you have " + Task.tasks.size() + " tasks in the list.");
+      "\t   " + d + "\n" +
+      "\t Now you have " + Task.tasks.size() + " tasks in the list.");
   }
 
   public void event(String desc, String at) {
@@ -105,7 +106,15 @@ public class Command {
     Task.tasks.add(e);
     System.out.println(
       "\t Got it. I've added this task:\n" +
-        "\t   " + e + "\n" +
-        "\t Now you have " + Task.tasks.size() + " tasks in the list.");
+      "\t   " + e + "\n" +
+      "\t Now you have " + Task.tasks.size() + " tasks in the list.");
+  }
+
+  public void delete(int i) {
+    Task t = Task.tasks.remove(i-1);
+    System.out.println(
+      "\t Noted! I've removed this task:\n" +
+      "\t   " + t + "\n" +
+      "\t Now you have " + Task.tasks.size() + " tasks in the list.");
   }
 }
