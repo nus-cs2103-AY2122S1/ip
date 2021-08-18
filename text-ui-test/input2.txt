@@ -1,0 +1,12 @@
+hello
+todo
+deadline
+event
+deadline task1
+event task2
+deadline task3 /by today /by tomorrow
+event task4 /at random time /at 8-9pm /at ???
+done -1
+done 100
+done 1
+bye
