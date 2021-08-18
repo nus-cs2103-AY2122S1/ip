@@ -2,23 +2,28 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private ArrayList<String> taskList;
+    private TaskList taskList;
 
     public Duke() {
-        taskList = new ArrayList<>();
+        taskList = new TaskList();
     }
 
-    public void addTodo(String task) {
-        this.taskList.add(task);
+    public void addTodo(String description) {
+        Task task = new Task(description);
+        this.taskList.addTask(task);
         this.echo("Added -- " + task + " -- to task list.");
     }
 
     public void printList() {
         this.echo("Your current task(s):");
+        System.out.println(taskList);
+    }
 
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println((i + 1) + ". " + taskList.get(i));
-        }
+    public void markDone(int index) {
+        this.echo("Marked task " + index + " to done.");
+
+        // Converting 1-based to 0-based
+        this.taskList.markDone(index - 1);
     }
 
     public void echo(String s) {
@@ -51,6 +56,9 @@ public class Duke {
                 this.printList();
             } else if (response.equals("bye")) {
                 break;
+            } else if (response.startsWith("done ")) {
+                int index = Integer.parseInt(response.substring(5));
+                this.markDone(index);
             } else {
                 this.addTodo(response);
             }

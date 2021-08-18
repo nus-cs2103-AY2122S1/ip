@@ -11,11 +11,11 @@ public class TaskList {
         this.taskList.add(task);
     }
 
-    public void setDone(int index) {
+    public void markDone(int index) {
         this.taskList.get(index).markAsDone();
     }
 
-    public void setNotDone(int index) {
+    public void markNotDone(int index) {
         this.taskList.get(index).markAsNotDone();
     }
 
