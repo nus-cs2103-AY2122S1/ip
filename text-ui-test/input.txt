@@ -1,3 +1,4 @@
+list
 todo read book
 deadline return book
 deadline return book /by June 6th
@@ -13,4 +14,7 @@ deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
 done 14
+delete 3
+list
+delete 34
 bye

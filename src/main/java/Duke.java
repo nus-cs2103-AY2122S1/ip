@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -5,9 +6,11 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private static final String LINE_HORIZONTAL = "__________________________________";
+    private static final String LINE_HORIZONTAL =
+            "___________________________________________________________";
     // To store the tasks to be done.
-    private static Task[] list = new Task[100];
+    private static ArrayList<Task> taskList = new ArrayList<>();
+
 
     /***
      * Initializes the bot.
@@ -16,14 +19,13 @@ public class Duke {
 
         // Prints initial message as prompt.
         System.out.printf("%s\nGreetings! This is Elsa.\n" +
-                "What can I do for you?\n%s\n", LINE_HORIZONTAL, LINE_HORIZONTAL);
+                "What can I do for you?\n" +
+                "%s\n",
+                LINE_HORIZONTAL, LINE_HORIZONTAL);
 
         // Initializes scanner to take input from user.
         Scanner scanner = new Scanner(System.in);
         String input;
-
-        // Tracks the number of tasks added to list.
-        int numTasks = 0;
 
         // Tracks if the user is done with the assistant.
         boolean exit = false;
@@ -34,25 +36,31 @@ public class Duke {
             try {
                 // If user asks for list of tasks.
                 if (input.equalsIgnoreCase("list")) {
-                    printList(numTasks);
-                    // If user wants to mark a task as done.
+                    printList();
+                // If user wants to mark a task as done.
                 } else if (input.toLowerCase().indexOf("done") != -1) {
                     int toMark = Integer.parseInt(input.substring(5));
-                    markTaskAsDone(toMark, numTasks);
-                    // If user wants to create a to do.
+                    markTaskAsDone(toMark);
+                // If user wants to delete a task.
+                } else if (input.toLowerCase().indexOf("delete") != -1) {
+                    int toDelete = Integer.parseInt(input.substring(7));
+                    deleteTask(toDelete);
+                // If user wants to create a to do.
                 } else if (input.toLowerCase().indexOf("todo") != -1) {
-                    numTasks = addToDo(input, numTasks);
-                    // If user wants to create a deadline.
+                    addToDo(input);
+                // If user wants to create a deadline.
                 } else if (input.toLowerCase().indexOf("deadline") != -1) {
-                    numTasks = addDeadline(input, numTasks);
-                    // If user wants to create an event.
+                    addDeadline(input);
+                // If user wants to create an event.
                 } else if (input.toLowerCase().indexOf("event") != -1) {
-                    numTasks = addEvent(input, numTasks);
-                    // Bids farewell to user upon "bye" input.
+                    addEvent(input);
+                // Bids farewell to user upon "bye" input.
                 } else if (input.toLowerCase().equals("bye")) {
-                    System.out.printf("%s\nGoodbye. Hope to see you again!\n", LINE_HORIZONTAL);
+                    System.out.printf("%s\n" +
+                            "Goodbye. Hope to see you again soon!\n",
+                            LINE_HORIZONTAL);
                     exit = true;
-                    // If user enters an unspecified request.
+                // If user enters an unspecified request.
                 } else {
                     handleInvalidCommand();
                 }
@@ -75,7 +83,7 @@ public class Duke {
                 System.out.printf("%s\n" +
                         "You might have mistyped the task number.\n" +
                         "Please ensure task number is between 1 and %d.\n" +
-                        "%s\n", LINE_HORIZONTAL, numTasks, LINE_HORIZONTAL);
+                        "%s\n", LINE_HORIZONTAL, taskList.size(), LINE_HORIZONTAL);
             }
         }
 
@@ -84,19 +92,21 @@ public class Duke {
 
     /***
      * Prints out every task in the list.
-     *
-     * @param numTasks The number of tasks already in the list.
      */
-    public static void printList(int numTasks) {
+    public static void printList() {
         System.out.println(LINE_HORIZONTAL);
-        if (numTasks == 0) {
-            System.out.printf("There are no tasks to be done! Hooray!");
+
+        if (taskList.size() == 0) {
+            System.out.printf("There are no tasks to be done! Hooray!\n");
         } else {
-            for (int i = 0; i < numTasks; i++) {
-                String taskName = list[i].toString();
+            System.out.println("Here is your list of tasks:");
+
+            for (int i = 0; i < taskList.size(); i++) {
+                String taskName = taskList.get(i).toString();
                 System.out.printf("%d.%s\n", i + 1, taskName);
             }
         }
+
         System.out.println(LINE_HORIZONTAL);
     }
 
@@ -104,45 +114,65 @@ public class Duke {
      * Marks the corresponding task as done and prints confirmation.
      *
      * @param toMark The index of the task to be marked.
-     * @param numTasks The number of tasks already in the list.
      */
-    public static void markTaskAsDone(int toMark, int numTasks) throws InvalidTaskException {
-        if (toMark <= 0 || toMark > numTasks) {
+    public static void markTaskAsDone(int toMark) throws InvalidTaskException {
+        if (toMark <= 0 || toMark > taskList.size()) {
             throw new InvalidTaskException("Task is not found");
         }
 
-        list[toMark - 1].markAsDone();
-        System.out.printf("%s\nGreat job!\n" +
-                "The following task is marked as done:\n", LINE_HORIZONTAL);
-        System.out.printf("\t%s\n%s\n", list[toMark - 1].toString(), LINE_HORIZONTAL);
+        taskList.get(toMark - 1).markAsDone();
+
+        System.out.printf("%s\n" +
+                "Great job!\n" +
+                "The following task is marked as done:\n" +
+                "\t%s\n" +
+                "%s\n",
+                LINE_HORIZONTAL, taskList.get(toMark - 1).toString(), LINE_HORIZONTAL);
+    }
+
+    /***
+     * Deletes the corresponding task as done and prints confirmation.
+     *
+     * @param toDelete The index of the task to be deleted.
+     */
+    public static void deleteTask(int toDelete) throws InvalidTaskException {
+        if (toDelete <= 0 || toDelete > taskList.size()) {
+            throw new InvalidTaskException("Task is not found");
+        }
+
+        System.out.printf("%s\n" +
+                "Done!\n" +
+                "The following task has been removed:\n" +
+                "\t%s\n" +
+                "You now have %d tasks left in your list!\n" +
+                "%s\n",
+                LINE_HORIZONTAL, taskList.get(toDelete - 1).toString(), taskList.size() - 1, LINE_HORIZONTAL);
+
+        taskList.remove(toDelete - 1);
     }
 
     /***
      * Adds the to do entered by the user to the list and prints it.
      *
      * @param input The to do inputted by the user.
-     * @param numTasks The number of tasks already in the list.
-     * @return The number of tasks in the list after adding this task.
      */
-    public static int addToDo(String input, int numTasks) throws MissingTaskException {
+    public static void addToDo(String input) throws MissingTaskException {
         if (input.length() < 6) {
             throw new MissingTaskException("Task not found.");
         }
 
         String taskName = input.substring(5);
-        list[numTasks] = new ToDo(taskName);
-        printTaskAdded(taskName, numTasks);
-        return numTasks + 1;
+        taskList.add(new ToDo(taskName));
+        printTaskAdded(taskName);
     }
 
     /***
      * Adds the deadline entered by the user to the list and prints it.
      *
      * @param input The deadline inputted by the user.
-     * @param numTasks The number of tasks already in the list.
-     * @return The number of tasks in the list after adding this task.
      */
-    public static int addDeadline(String input, int numTasks) throws MissingTaskException, MissingTimeException {
+    public static void addDeadline(String input)
+            throws MissingTaskException, MissingTimeException {
         int separation = input.indexOf("/by");
 
         if (separation == -1) {
@@ -157,20 +187,19 @@ public class Duke {
         if (input.substring(separation + 4).length() < 1) {
             throw new MissingTimeException("Time not found");
         }
+
         String time = input.substring(separation + 4);
-        list[numTasks] = new Deadline(taskName, time);
-        printTaskAdded(taskName, numTasks);
-        return numTasks + 1;
+        taskList.add(new Deadline(taskName, time));
+        printTaskAdded(taskName);
     }
 
     /***
      * Adds the event entered by the user to the list and prints it.
      *
      * @param input The event inputted by the user.
-     * @param numTasks The number of tasks already in the list.
-     * @return The number of tasks in the list after adding this task.
      */
-    public static int addEvent(String input, int numTasks) throws MissingTaskException, MissingTimeException {
+    public static void addEvent(String input)
+            throws MissingTaskException, MissingTimeException {
         int separation = input.indexOf("/at");
         if (separation == -1) {
             throw new MissingTimeException("Time not found");
@@ -184,23 +213,25 @@ public class Duke {
         if (input.substring(separation + 4).length() < 1) {
             throw new MissingTimeException("Time not found");
         }
+
         String time = input.substring(separation + 4);
-        list[numTasks] = new Event(taskName, time);
-        printTaskAdded(taskName, numTasks);
-        return numTasks + 1;
+        taskList.add(new Event(taskName, time));
+        printTaskAdded(taskName);
     }
 
     /***
-     * Prints the confirmation of the addition of the task.
+     * Prints the confirmation of the addition of the last task.
      *
-     * @param taskName The name of the task added.
-     * @param numTasks The number of tasks prior to adding this task.
+     * @param taskName The name of the task just added.
      */
-    public static void printTaskAdded(String taskName, int numTasks) {
-        System.out.printf("%s\nGotcha! The following task has been added:\n", LINE_HORIZONTAL);
-        System.out.printf("\t%s\n", taskName);
-        System.out.printf("You now have %d tasks in your list!\n%s\n",
-                numTasks + 1, LINE_HORIZONTAL);
+    public static void printTaskAdded(String taskName) {
+        System.out.printf("%s\n" +
+                "Gotcha! The following task has been added:\n" +
+                "\t%s\n" +
+                "You now have %d tasks in your list!\n" +
+                "%s\n",
+                LINE_HORIZONTAL, taskName,
+                taskList.size(), LINE_HORIZONTAL);
     }
 
     /***
