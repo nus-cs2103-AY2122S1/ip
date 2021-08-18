@@ -9,10 +9,107 @@ public class Duke {
         BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT
     }
 
+    /** Prints out a long line. */
     public static void lineGenerator() {
         System.out.println("____________________________________________________________");
     }
 
+    /** Prints out all user's tasks in numerical order. */
+    public static void taskCommand() {
+        System.out.println("Here are the tasks in your list: ");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println((i + 1) + "." + list.get(i));
+        }
+    }
+
+    /**
+     * Marks a task as done.
+     *
+     * @param input input given by the user starting with "done".
+     */
+    public static void doneCommand(String input) {
+        System.out.println("Nice! I've marked this task as done: ");
+        String[] splitStr = input.split("\\s+");
+        System.out.print("  ");
+        list.get(Integer.parseInt(splitStr[1]) - 1).markTaskDone();
+    }
+
+    /**
+     * Deletes a task from the list.
+     *
+     * @param input input given by the user starting with "delete" and the corresponding task number to delete.
+     */
+    public static void deleteCommand(String input) {
+        System.out.println("Noted! I've removed this task: ");
+        String[] splitStr = input.split("\\s+");
+        System.out.print("  ");
+        System.out.println(list.get(Integer.parseInt(splitStr[1]) - 1));
+        list.remove(Integer.parseInt(splitStr[1]) - 1);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    }
+
+    /**
+     * Returns a Todo object with the corresponding todo item.
+     *
+     * @param input input given by the user starting with "todo" and the corresponding todo item.
+     * @return A Todo object.
+     * @throws DukeException If the description of todo is empty.
+     */
+    public static Todo todoCommand(String input) throws DukeException {
+        String description = input.substring(4).trim();
+        if (description.isEmpty()) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty :-(");
+        }
+        return new Todo(description);
+    }
+
+    /**
+     * Returns a Deadline object with the corresponding deadline item.
+     *
+     * @param input input given by the user starting with "deadline" and the corresponding deadline item.
+     * @return A Deadline object.
+     */
+    public static Deadline deadlineCommand(String input) {
+        int slashPosition = input.indexOf('/');
+        String description = input.substring("deadline".length() + 1, slashPosition);
+        String by = input.substring(slashPosition + 4);
+        return new Deadline(description, by);
+    }
+
+    /**
+     * Returns a Event object with the corresponding event item.
+     *
+     * @param input input given by the user starting with "event" and the corresponding event item.
+     * @return A Event object.
+     */
+    public static Event eventCommand(String input) {
+        int slashPosition = input.indexOf('/');
+        String description = input.substring("event".length() + 1, slashPosition);
+        String at = input.substring(slashPosition + 4);
+        return new Event(description, at);
+    }
+
+    /**
+     * Adds a task to the task list.
+     *
+     * @param t The task to be added.
+     */
+
+    public static void addTask(Task t) {
+        System.out.println("Got it. I've added this task: ");
+        list.add(t);
+        System.out.println("  " + t);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    }
+
+    /** Signals the end of the program */
+    private static void byeCommand() {
+        lineGenerator();
+        System.out.println("Bye. Hope to see you again soon!");
+        lineGenerator();
+    }
+
+    /** Start of the program */
     public static void run() {
         try {
             lineGenerator();
@@ -35,54 +132,28 @@ public class Duke {
                 lineGenerator();
                 Task t;
                 if (input.equals(Commands.LIST.toString().toLowerCase())) {
-                    System.out.println("Here are the tasks in your list: ");
-                    for (int i = 0; i < list.size(); i++) {
-                        System.out.println((i + 1) + "." + list.get(i));
-                    }
+                    taskCommand();
                 } else if (input.startsWith(Commands.DONE.toString().toLowerCase())) {
-                    System.out.println("Nice! I've marked this task as done: ");
-                    String[] splitStr = input.split("\\s+");
-                    System.out.print("  ");
-                    list.get(Integer.parseInt(splitStr[1]) - 1).markTaskDone();
+                    doneCommand(input);
                 } else if (input.startsWith(Commands.DELETE.toString().toLowerCase())) {
-                    System.out.println("Noted! I've removed this task: ");
-                    String[] splitStr = input.split("\\s+");
-                    System.out.print("  ");
-                    System.out.println(list.get(Integer.parseInt(splitStr[1]) - 1));
-                    list.remove(Integer.parseInt(splitStr[1]) - 1);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    deleteCommand(input);
                 } else {
                     if (input.startsWith(Commands.TODO.toString().toLowerCase())) {
-                        String description = input.substring(4).trim();
-                        if (description.isEmpty()) {
-                            throw new DukeException("OOPS!!! The description of a todo cannot be empty :-(");
-                        }
-                        t = new Todo(description);
+                        t = todoCommand(input);
                     } else if (input.startsWith(Commands.DEADLINE.toString().toLowerCase())) {
-                        int slashPosition = input.indexOf('/');
-                        String description = input.substring("deadline".length() + 1, slashPosition);
-                        String by = input.substring(slashPosition + 4);
-                        t = new Deadline(description, by);
+                        t = deadlineCommand(input);
                     } else if (input.startsWith(Commands.EVENT.toString().toLowerCase())) {
-                        int slashPosition = input.indexOf('/');
-                        String description = input.substring("event".length() + 1, slashPosition);
-                        String at = input.substring(slashPosition + 4);
-                        t = new Event(description, at);
+                        t = eventCommand(input);
                     } else {
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
-                    System.out.println("Got it. I've added this task: ");
-                    list.add(t);
-                    System.out.println("  " + t);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    addTask(t);
                 }
                 lineGenerator();
                 System.out.print("\nEnter command: ");
                 input = sc.nextLine();
             }
-            lineGenerator();
-            System.out.println("Bye. Hope to see you again soon!");
-            lineGenerator();
+            byeCommand();
         } catch (DukeException e) {
             System.out.println(e);
             lineGenerator();
