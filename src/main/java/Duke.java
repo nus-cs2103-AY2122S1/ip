@@ -77,6 +77,17 @@ public class Duke extends Chatbot {
     }
 
     /**
+     * Parses a user-input for a number supplied after a given command.
+     * @param command A String command that comes before the desired number. (e.g. "delete")
+     * @param message The String that is the full input by the user. (e.g. "delete 2")
+     * @return an int representing the description of the command. (e.g. "2")
+     * @throws DukeException
+     */
+    public int getIntInputAfterCommand(String command, String message) throws DukeException {
+        return Integer.parseInt(getInputAfterCommand(command, message));
+    }
+
+    /**
      * Handles the logic for managing a user's tasks.
      */
     public void taskMode() {
@@ -88,24 +99,16 @@ public class Duke extends Chatbot {
         try {
             String output;
             if (message.equals(LIST_COMMAND)) {
-                // List the tasks
                 output = this.taskList.toString();
             } else if (message.startsWith(COMPLETE_TASK_COMMAND)) {
-                // Mark a task as done
-                int indexNumber = Integer.parseInt(getInputAfterCommand(COMPLETE_TASK_COMMAND, message));
-                output = this.taskList.completeTask(indexNumber);
+                output = this.taskList.completeTask(getIntInputAfterCommand(COMPLETE_TASK_COMMAND, message));
             } else if (message.startsWith(DELETE_TASK_COMMAND)) {
-                // Delete a task
-                int indexNumber = Integer.parseInt(getInputAfterCommand(DELETE_TASK_COMMAND, message));
-                output = this.taskList.deleteTask(indexNumber);
+                output = this.taskList.deleteTask(getIntInputAfterCommand(DELETE_TASK_COMMAND, message));
             } else if (message.startsWith(CREATE_TODO_COMMAND)) {
-                // Create a todo
                 output = this.taskList.addTodo(getInputAfterCommand(CREATE_TODO_COMMAND, message));
             } else if (message.startsWith(CREATE_EVENT_COMMAND)) {
-                // Create an event
                 output = this.taskList.addEvent(getInputAfterCommand(CREATE_EVENT_COMMAND, message));
             } else if (message.startsWith(CREATE_DEADLINE_COMMAND)) {
-                // Create a deadline
                 output = this.taskList.addDeadline(getInputAfterCommand(CREATE_DEADLINE_COMMAND, message));
             } else {
                 throw new DukeException("I don't know what that command means.\nPlease input a valid command.");
