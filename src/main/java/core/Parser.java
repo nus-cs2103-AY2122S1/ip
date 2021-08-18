@@ -2,8 +2,6 @@ package core;
 
 import commands.*;
 
-import java.util.Scanner;
-
 public class Parser {
     public static Command parse(String input) {
         String[] splittedInput = input.split(" ");
