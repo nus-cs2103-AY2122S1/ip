@@ -23,54 +23,64 @@ public class Duke {
         var sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             var command = sc.nextLine();
-            var parameters = command.split(" ");
-            boolean isEnd = false;
-
-            if (command.equals("list")) {
-                printBanner(retrieveTaskList());
-            } else if (command.equals("bye")) {
-                printBanner(BYE_MSG.split("\n"));
-                isEnd = true;
-            } else if (parameters[0].equals("done") && parameters.length == 2) {
-                int i = Integer.parseInt(parameters[1]) - 1;
-                var task = tasks.get(i);
-                task.toggle(true);
-
-                printBanner(new String[] {
-                    "Nice! I've marked this task as done:",
-                    "  " + renderTask(task)
-                });
-            } else if (parameters[0].equals("todo") && parameters.length > 1) {
-                String description = command.replace("todo ", "");
-                var task = new Todo(description);
-                tasks.add(task);
-                printBanner(renderNewTaskList(task));
-            } else if (
-                parameters[0].equals("deadline")
-                && parameters.length > 1
-                && Arrays.stream(parameters).anyMatch("/by"::equals)
-            ) {
-                String[] parts = command.replace("deadline ", "").split(" /by ");
-                var task = new Deadline(parts[0], parts[1]);
-                tasks.add(task);
-                printBanner(renderNewTaskList(task));
-            } else if (
-                parameters[0].equals("event")
-                && parameters.length > 1
-                && Arrays.stream(parameters).anyMatch("/at"::equals)
-            ) {
-                String[] parts = command.replace("event ", "").split(" /at ");
-                var task = new Event(parts[0], parts[1]);
-                tasks.add(task);
-                printBanner(renderNewTaskList(task));
-            }
-
-            if (isEnd) {
-                break;
+            try {
+                boolean isEnd = menu(command);
+                if (isEnd) {
+                    break;
+                }
+            } catch (Exception e) {
+                printBanner(new String[]{ "☹ OOPS!!! " + e.getMessage() });
             }
         }
-
         sc.close();
+    }
+
+    public static boolean menu(String command) throws Exception {
+        var parameters = command.split(" ");
+        if (command.equals("list")) {
+            printBanner(retrieveTaskList());
+        } else if (command.equals("bye")) {
+            printBanner(BYE_MSG.split("\n"));
+            return true;
+        } else if (parameters[0].equals("done") && parameters.length == 2) {
+            int i = Integer.parseInt(parameters[1]) - 1;
+            var task = tasks.get(i);
+            task.toggle(true);
+
+            printBanner(new String[] {
+                "Nice! I've marked this task as done:",
+                "  " + renderTask(task)
+            });
+        } else if (parameters[0].equals("todo")) {
+            if (parameters.length == 1) {
+                throw new Exception("The description of a todo cannot be empty.");
+            }
+            String description = command.replace("todo ", "");
+            var task = new Todo(description);
+            tasks.add(task);
+            printBanner(renderNewTaskList(task));
+        } else if (
+            parameters[0].equals("deadline")
+            && parameters.length > 1
+            && Arrays.stream(parameters).anyMatch("/by"::equals)
+        ) {
+            String[] parts = command.replace("deadline ", "").split(" /by ");
+            var task = new Deadline(parts[0], parts[1]);
+            tasks.add(task);
+            printBanner(renderNewTaskList(task));
+        } else if (
+            parameters[0].equals("event")
+            && parameters.length > 1
+            && Arrays.stream(parameters).anyMatch("/at"::equals)
+        ) {
+            String[] parts = command.replace("event ", "").split(" /at ");
+            var task = new Event(parts[0], parts[1]);
+            tasks.add(task);
+            printBanner(renderNewTaskList(task));
+        } else {
+            throw new Exception("I'm sorry, but I don't know what that means :-(");
+        }
+        return false;
     }
 
     public static String renderTask(Task task) {
