@@ -59,6 +59,20 @@ public class Duke {
                     }
                     output = result.toString();
 
+                } else if (command.equals("delete")) {
+                    if (desc.isPresent() || time.isPresent()) {
+                        throw new DukeExceptions(
+                                "Oops, the delete command can only have an integer (index) modifier \n"
+                        );
+                    }
+
+                    int taskIndex = modifier.map(Integer::parseInt).orElseThrow(() -> new DukeExceptions(
+                            "Oops, you forgot to tell me which item you want to mark as done! \n"));
+                    task = taskList.get(taskIndex - 1);
+                    output = "Alright! I deleted the following task as finished: \n"
+                            + "    " + task.toString() + '\n';
+                    taskList.remove(taskIndex - 1);
+
                 } else if (command.equals("done")) {
 
                     if (desc.isPresent() || time.isPresent()) {
