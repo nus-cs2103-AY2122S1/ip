@@ -1,7 +1,7 @@
 public class Event extends Task{
     private String when;
 
-    public Event(String description, String when {
+    public Event(String description, String when) {
         super(description);
         this.when = when;
     }
