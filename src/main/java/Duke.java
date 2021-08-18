@@ -78,6 +78,24 @@ public class Duke {
         System.out.println("\nYou now have " + index + (index == 1 ? " task " : " tasks ") + "in your list!");
     }
 
+    private static void markTaskDone(String input) {
+
+        try {
+            int markDone = Integer.parseInt(input.substring(5)) - 1;
+            list[markDone].markAsDone();
+
+            System.out.println("Output:\n\nYou have successfully marked this task as done:\n\n" +
+                    "    " + list[markDone]);
+        } catch (StringIndexOutOfBoundsException | NumberFormatException e1) {
+            System.out.println("Output: Please specify which task you want to mark \n" +
+                    "as complete by adding a single number after 'done'!\n" +
+                    "i.e. done 1");
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException e2) {
+            System.out.println("Output: There is no task under that number!");
+        }
+
+    }
+
     private static void addTodo(String input) {
         Task todo = new Todo(input);
         addTask(todo);
@@ -90,27 +108,9 @@ public class Duke {
     }
 
     private static void addEvent(String input) {
-        String[] deadlineParams = input.split(" /at ");
-        Task event = new Event(deadlineParams[0], deadlineParams[1]);
+        String[] eventParams = input.split(" /at ");
+        Task event = new Event(eventParams[0], eventParams[1]);
         addTask(event);
-    }
-
-    private static void markTaskDone(String input) {
-
-        try {
-            int markDone = Integer.parseInt(input.substring(5)) - 1;
-            list[markDone].markAsDone();
-
-            System.out.println("You have successfully marked this task as done:\n");
-            System.out.println(list[markDone]);
-        } catch (StringIndexOutOfBoundsException | NumberFormatException e1) {
-            System.out.println("Please specify which task you would like to mark \n" +
-                    "as complete by adding a single number after 'done'!\n" +
-                    "i.e. done 1");
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException e2) {
-            System.out.println("There is no task under that number!");
-        }
-
     }
 
     private static void printDoubleDivider() {
