@@ -18,63 +18,61 @@ public class Duke {
         // check userInput
         while (!userInput.equals("bye")) {
             String[] inputStringArray = userInput.split(" ", 2);
-            switch (inputStringArray[0]) {
-                case "list":
-                    this.printTasks();
-                    break;
-                case "done":
-                    if (inputStringArray.length < 2) {
-                        System.out.println("Error: Task number not specified");
+            try {
+                switch (inputStringArray[0]) {
+                    case "list":
+                        this.printTasks();
                         break;
-                    }
-                    try {
-                        int taskIndex = Integer.parseInt(inputStringArray[1]) - 1;
-                        Task doneTask = tasks.get(taskIndex);
-                        doneTask.setDone();
-                        System.out.println("Nice! I've marked this task as done:\n  " + doneTask.toString());
-                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                        System.out.println("Error: Invalid task number");
-                    }
-                    break;
-                case "deadline":
-                    if (inputStringArray.length < 2) {
-                        System.out.println("Error: Task info not specified");
+                    case "done":
+                        if (inputStringArray.length < 2) {
+                            throw new DukeException("Please specify a task number.");
+                        }
+                        try {
+                            int taskIndex = Integer.parseInt(inputStringArray[1]) - 1;
+                            Task doneTask = tasks.get(taskIndex);
+                            doneTask.setDone();
+                            System.out.println("Nice! I've marked this task as done:\n  " + doneTask.toString());
+                            break;
+                        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                            throw new DukeException("Please specify a valid task number.");
+                        }
+                    case "deadline":
+                        if (inputStringArray.length < 2) {
+                            throw new DukeException("Please specify the task info.");
+                        }
+                        String[] deadlineInfo = inputStringArray[1].split(" /by ", 2);
+                        if (deadlineInfo.length < 2) {
+                            throw new DukeException("Please enter a valid deadline format.");
+                        }
+                        Task newDeadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
+                        tasks.add(newDeadline);
+                        System.out.println("Got it. I've added this task:\n  " + newDeadline.toString());
                         break;
-                    }
-                    String[] deadlineInfo = inputStringArray[1].split(" /by ", 2);
-                    if (deadlineInfo.length < 2) {
-                        System.out.println("Error: Invalid deadline task format");
+                    case "event":
+                        if (inputStringArray.length < 2) {
+                            throw new DukeException("Please specify the task info.");
+                        }
+                        String[] eventInfo = inputStringArray[1].split(" /at ", 2);
+                        if (eventInfo.length < 2) {
+                            throw new DukeException("Please enter a valid event format.");
+                        }
+                        Task newEvent = new Event(eventInfo[0], eventInfo[1]);
+                        tasks.add(newEvent);
+                        System.out.println("Got it. I've added this task:\n" + "  " + newEvent.toString());
                         break;
-                    }
-                    Task newDeadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-                    tasks.add(newDeadline);
-                    System.out.println("Got it. I've added this task:\n  " + newDeadline.toString());
-                    break;
-                case "event":
-                    if (inputStringArray.length < 2) {
-                        System.out.println("Error: Task info not specified");
+                    case "todo":
+                        if (inputStringArray.length < 2) {
+                            throw new DukeException("Please specify the task info.");
+                        }
+                        Task newToDo = new ToDo(inputStringArray[1]);
+                        tasks.add(newToDo);
+                        System.out.println("Got it. I've added this task:\n" + "  " + newToDo.toString());
                         break;
-                    }
-                    String[] eventInfo = inputStringArray[1].split(" /at ", 2);
-                    if (eventInfo.length < 2) {
-                        System.out.println("Error: Invalid event task format");
-                        break;
-                    }
-                    Task newEvent = new Event(eventInfo[0], eventInfo[1]);
-                    tasks.add(newEvent);
-                    System.out.println("Got it. I've added this task:\n" + "  " + newEvent.toString());
-                    break;
-                case "todo":
-                    if (inputStringArray.length < 2) {
-                        System.out.println("Error: Task info not specified");
-                        break;
-                    }
-                    Task newToDo = new ToDo(inputStringArray[1]);
-                    tasks.add(newToDo);
-                    System.out.println("Got it. I've added this task:\n" + "  " + newToDo.toString());
-                    break;
-                default:
-                    System.out.println("Error: Unknown command");
+                    default:
+                        throw new DukeException("Sorry, I don't know what that means.");
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
             userInput = sc.nextLine(); // get new userInput
         }
