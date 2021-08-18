@@ -8,6 +8,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    public TaskList(ArrayList<Task> list) {
+        this.tasks = list;
+    }
+
     public boolean addTask(Task task) {
         try {
             tasks.add(task);

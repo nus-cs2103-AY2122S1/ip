@@ -12,11 +12,17 @@ public class DukeCore {
     static String INVALID_INPUT = space + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     private final Scanner scanner;
-    private final TaskList taskList;
+    private TaskList taskList;
+    private final DukeDataHandler dataHandler;
 
     public DukeCore() {
         this.scanner = new Scanner(System.in);
         this.taskList = new TaskList();
+        this.dataHandler = new DukeDataHandler();
+    }
+
+    public void retrieveData() {
+        this.taskList = dataHandler.retrieveTaskList();
     }
 
     public void greet() {
@@ -221,6 +227,7 @@ public class DukeCore {
             displayText(space + "Got it. I've added this task: \n"
                     + space + "  " + t.getDescriptionWithStatus() + "\n"
                     + space + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.");
+            dataHandler.storeTaskList(taskList);
         } else {
             System.exit(1);
         }
@@ -235,6 +242,7 @@ public class DukeCore {
                 t.markAsDone();
                 displayText(space + "Nice! I've marked this task as done: \n"
                         + space + "  " + t.getDescriptionWithStatus());
+                dataHandler.storeTaskList(taskList);
             }
         } catch (IndexOutOfBoundsException ex) {
             displayText(space + "Oops, the task doesn't seem to exist.");
@@ -249,6 +257,7 @@ public class DukeCore {
                 displayText(space + "Noted. I've removed this task: \n"
                         + space + "  " + description + "\n"
                         + space + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.");
+                dataHandler.storeTaskList(taskList);
             } else {
                 System.exit(1);
             }
