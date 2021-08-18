@@ -14,60 +14,35 @@ public class Storage {
     Path path;
 
     public Storage (String filename) {
-        try {
-            path = FileSystems.getDefault().getPath("data", filename);
-            reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            System.out.println("Temp. IO Exception occurred while initialising Storage.");
-            e.printStackTrace();
-        }
+        path = FileSystems.getDefault().getPath("data", filename);
     }
 
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load(Ui ui) throws IOException, DukeException {
         ArrayList<Task> loadedData = new ArrayList<>();
-        try {
-            String data = reader.readLine();
-            if (data != null) {
-                System.out.println("Looks like there's a previous record! Loading the data in...");
-            } else {
-                return loadedData;
-            }
+        reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+        String data = reader.readLine();
+        if (data == null) {
+            return loadedData;
+        } else {
+            ui.notifyLoadingBegin();
             while(data != null) {
                 loadedData.add(formatForLoad(data));
                 data = reader.readLine();
             }
-            System.out.println("Load complete!");
-        } catch (IOException e) { //this is awful, fix it.
-            System.out.println("error occurred in load");
-            throw new DukeException("IOException");
+            ui.notifyLoadingComplete();
         }
         return loadedData;
     }
 
 
-    public void save(TaskList tasklist) {
-        System.out.println("Just a moment, i'm saving your list!");
-        try {
-            writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            System.out.println("Temp. IO Exception occurred while initialising writer");
-            e.printStackTrace();
-        }
+    public void save(TaskList tasklist, Ui ui) throws IOException {
+        ui.notifySavingBegin();
+        writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
         for (int i = 0; i < tasklist.size(); i++) {
-            try {
-                writer.write(formatForSave(tasklist.get(i)));
-                writer.newLine();
-            } catch (IOException e) {
-                System.out.println("Temp. IO Exception occurred while writing");
-                e.printStackTrace();
-            }
+            writer.write(formatForSave(tasklist.get(i)));
+            writer.newLine();
         }
-        try {
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Temp. IO Exception occurred while closing writer.");
-            e.printStackTrace();
-        }
+        writer.close();
     }
 
     //converts a Task into a string to be saved to a txt file.
@@ -83,7 +58,7 @@ public class Storage {
     }
 
     //dual of formatForSave. Converts from saved string back to Task.
-    private Task formatForLoad(String s) {
+    private Task formatForLoad(String s) throws DukeException {
         String[] arr = s.split("[|]");
         Task t;
         if (arr[0].equals("T")) {
@@ -93,8 +68,7 @@ public class Storage {
         } else if (arr[0].equals("E")) {
             t = new Event(arr[2], LocalDate.parse(arr[3]));
         } else {
-            System.out.println("INVALID DATABASE ENTRY");
-            t = new Todo("system error");
+            throw new DukeException("format of saved data is incorrect");
         }
 
         if (Boolean.parseBoolean(arr[1])) {

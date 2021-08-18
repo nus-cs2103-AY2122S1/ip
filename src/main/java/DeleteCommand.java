@@ -6,7 +6,7 @@ public class DeleteCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store) {
+    public void execute(TaskList tasklist, Ui ui, Storage store) throws IndexOutOfBoundsException {
         Task removed = tasklist.delete(index);
         ui.notifySuccessfulDelete(tasklist, removed);
     }

@@ -1,8 +1,6 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-
-//delete OOB index not handled.
-//error handling is a mess
-//ui handover to Ui class is still incomplete
+import java.io.IOException;
 
 public class Duke {
     private static TaskList tasklist;
@@ -13,9 +11,10 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasklist = new TaskList(storage.load());
-        } catch (DukeException e) {
+            tasklist = new TaskList(storage.load(ui));
+        } catch (IOException | DukeException e) {
             ui.notifyLoadingError();
+            e.printStackTrace();
             tasklist = new TaskList();
         }
     }
@@ -30,10 +29,25 @@ public class Duke {
                 c.execute(tasklist, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
+                ui.notifyEmptyDescription();
+                e.printStackTrace();
+            } catch (IndexOutOfBoundsException e) {
+                ui.notifyIndexOutOfBounds();
+                e.printStackTrace();
+            } catch (NumberFormatException e) {
+                ui.notifyImproperIndex();
+                e.printStackTrace();
+            } catch (DateTimeParseException e) {
+                ui.notifyImproperDateTime();
                 e.printStackTrace();
             }
         }
-        storage.save(tasklist);
+        try {
+            storage.save(tasklist, ui);
+        } catch (IOException e) {
+            ui.notifySavingError();
+            e.printStackTrace();
+        }
         ui.closing();
     }
 

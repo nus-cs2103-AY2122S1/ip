@@ -8,18 +8,13 @@ public abstract class Parser {
         }
     }
 
-    public static Command parse(String in) throws DukeException {
+    public static Command parse(String in) throws DukeException,IndexOutOfBoundsException,
+            NumberFormatException, DateTimeParseException {
         if (in.equals("list")) {
             return new ListCommand();
         } else if (in.startsWith("done")) {
-            try {
-                String[] temp = in.split(" ");
-                return new MarkDoneCommand(Integer.parseInt(temp[1]) - 1);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Sorry! Your done command has an invalid index choice");
-            } catch (NumberFormatException e) {
-                System.out.println("Sorry! I can't understand the index for your done command");
-            }
+            String[] temp = in.split(" ");
+            return new MarkDoneCommand(Integer.parseInt(temp[1]) - 1);
         } else if (in.startsWith("todo") || in.startsWith("deadline") || in.startsWith("event")) {
             String type;
             if (in.startsWith("todo")) {
@@ -27,7 +22,6 @@ public abstract class Parser {
                 type = "todo";
                 checkDescription(in);
                 return new AddCommand(type, in);
-
             } else {
                 if (in.startsWith("deadline")) {
                     in = in.replaceFirst("deadline", "");
@@ -36,34 +30,19 @@ public abstract class Parser {
                     in = in.replaceFirst("event", "");
                     type = "event";
                 }
-
-                try {
-                    String[] arr = in.split("/", 2);
-                    LocalDate date = LocalDate.parse(arr[1].substring(3));
-                    String label = arr[0];
-                    checkDescription(label);
-                    return new AddCommand(type, label, date);
-                } catch (IndexOutOfBoundsException e) {
-                    //if '/' doesn't split, command was wrong
-                    throw new DukeException("Command had an invalid format");
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Your date had an invalid format");
-                }
+                String[] arr = in.split("/", 2);
+                LocalDate date = LocalDate.parse(arr[1].substring(3));
+                String label = arr[0];
+                checkDescription(label);
+                return new AddCommand(type, label, date);
             }
         } else if (in.startsWith("delete")) {
-            try {
-                String[] temp = in.split(" ");
-                return new DeleteCommand(Integer.parseInt(temp[1]) - 1);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Sorry! Your delete command has an invalid index choice");
-            } catch (NumberFormatException e) {
-                System.out.println("Sorry! I can't understand the index for your delete command");
-            }
+            String[] temp = in.split(" ");
+            return new DeleteCommand(Integer.parseInt(temp[1]) - 1);
         } else if (in.equals("bye")) {
             return new DoneCommand();
         } else {
             return new InvalidCommand();
         }
-        return new InvalidCommand();
     }
 }

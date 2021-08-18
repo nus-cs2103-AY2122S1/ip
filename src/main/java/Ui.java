@@ -56,4 +56,36 @@ public class Ui {
     public void closing() {
         System.out.println("Have a Merry Christmas and a Happy New Year!");
     }
+
+    public void notifyLoadingBegin() {
+        System.out.println("It look like you have a previous session! Loading your data now...");
+    }
+
+    public void notifyLoadingComplete() {
+        System.out.println("Loading complete!");
+    }
+
+    public void notifySavingBegin() {
+        System.out.println("Just a moment, i'm saving your list!");
+    }
+
+    public void notifySavingError() {
+        System.out.println("Something went wrong and I can't save your list, sorry!");
+    }
+
+    public void notifyIndexOutOfBounds() {
+        System.out.println("Sorry! Your command has an invalid index choice");
+    }
+
+    public void notifyImproperIndex() {
+        System.out.println("Sorry! I can't understand the index for your command");
+    }
+
+    public void notifyEmptyDescription() {
+        System.out.println("Sorry! Your command appears to be missing a description");
+    }
+
+    public void notifyImproperDateTime() {
+        System.out.println("Sorry! I don't recognise the format for the date and time you've entered.");
+    }
 }
