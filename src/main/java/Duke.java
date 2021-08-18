@@ -35,7 +35,7 @@ public class Duke {
                     System.out.println("NOT AN INTEGER!");
                 }
             }
-            this.add(userInput);
+            this.addTodo(userInput);
         }
     }
 
@@ -51,8 +51,8 @@ public class Duke {
     }
 
 
-    private void add(String userInput) {
-        this.list.add(new Task(userInput));
+    private void addTodo(String userInput) {
+        this.list.add(new Todo(userInput));
         System.out.println("\tadded: " + userInput + "\n");
     }
 
