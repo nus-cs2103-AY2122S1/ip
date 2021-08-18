@@ -12,6 +12,8 @@ delete 6
 delete 8
 done 8
 done2
+doneZo
+todos
 done hello
 todo
 deadline

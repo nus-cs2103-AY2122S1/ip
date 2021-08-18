@@ -1,5 +1,6 @@
 import utils.*;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Duke {
@@ -31,12 +32,28 @@ public class Duke {
      * Error Messages.
      */
     private static final String unrecognizedCommand = "Oops! I'm sorry but I don't know what that means.";
-    private static final String todoNoDescError = "Oops! The description of a todo cannot be empty";
-    private static final String deadlineNoDescError = "Oops! The description of a deadline cannot be empty";
-    private static final String eventNoDescError = "Oops! The description of an event cannot be empty";
-    private static final String deadlineNoDateError = "Oops! The date of a deadline cannot be empty";
-    private static final String eventNoDateError = "Oops! The date of an event cannot be empty";
     private static final String taskOutOfList = "Oops! You do not have such a task!";
+    private static final String invalidFormatError = "Oops! The %s of a %s cannot be empty.";
+
+    /**
+     * Declare enums.
+     */
+    enum TaskType { TODO, DEADLINE, EVENT }
+    enum Field { DESCRIPTION, DATETIME }
+
+    /**
+     * Declare mappings from enum types to their respective string representatives.
+     */
+    private static final Map<TaskType, String> taskTypeStringMap = Map.of(
+            TaskType.TODO, "todo",
+            TaskType.DEADLINE, "deadline",
+            TaskType.EVENT, "event"
+    );
+
+    private static final Map<Field, String> fieldStringMap = Map.of(
+            Field.DESCRIPTION, "description",
+            Field.DATETIME, "date"
+    );
 
     /**
      * Declares the ArrayList to hold the list of tasks.
@@ -115,7 +132,7 @@ public class Duke {
             case (todoString):
                 if (split.length == 1 || split[1].equals("")) {
                     // Error: Todo no description.
-                    return todoNoDescError;
+                    return formatTaskErrorMessage(TaskType.TODO, Field.DESCRIPTION);
                 }
                 Todo todo = new Todo(split[1]);
                 tasks.add(todo);
@@ -123,12 +140,12 @@ public class Duke {
             case (deadlineString):
                 if (split.length == 1 || split[1].equals("")) {
                     // Error: Deadline no description.
-                    return deadlineNoDescError;
+                    return formatTaskErrorMessage(TaskType.DEADLINE, Field.DESCRIPTION);
                 }
                 String[] deadlineSplit = split[1].split(deadlineDelimiter, 2);
                 if (deadlineSplit.length == 1 || deadlineSplit[1].equals("")) {
-                    // Error: Deadline no date.
-                    return deadlineNoDateError;
+                    // Error: Deadline no datetime.
+                    return formatTaskErrorMessage(TaskType.DEADLINE, Field.DATETIME);
                 }
                 Deadline deadline = new Deadline(deadlineSplit[0], deadlineSplit[1]);
                 tasks.add(deadline);
@@ -136,12 +153,12 @@ public class Duke {
             case (eventString):
                 if (split.length == 1 || split[1].equals("")) {
                     // Error: Event no description.
-                    return eventNoDescError;
+                    return formatTaskErrorMessage(TaskType.EVENT, Field.DESCRIPTION);
                 }
                 String[] eventSplit = split[1].split(eventDelimiter, 2);
                 if (eventSplit.length == 1 || eventSplit[1].equals("")) {
-                    // Error: Event no date.
-                    return eventNoDateError;
+                    // Error: Event no datetime.
+                    return formatTaskErrorMessage(TaskType.EVENT, Field.DATETIME);
                 }
                 Event event = new Event(eventSplit[0], eventSplit[1]);
                 tasks.add(event);
@@ -153,7 +170,41 @@ public class Duke {
     }
 
     /**
+     * Utility function to format the error message.
+     * @param taskType the input task type.
+     * @param field the input field type.
+     * @return the formatted error message.
+     */
+    private static String formatTaskErrorMessage(TaskType taskType, Field field) {
+        String message = String.format(invalidFormatError, fieldStringMap.get(field), taskTypeStringMap.get(taskType));
+        return message + "\n" + formatUsageMessage(taskType);
+    }
+
+    /**
+     * Utility function to format the usage message based on task type.
+     * @param taskType the input task type.
+     * @return string representing the usage: "Usage: <message>"
+     */
+    private static String formatUsageMessage(TaskType taskType) {
+        String usage = "Usage: ";
+        switch (taskType) {
+            case TODO:
+                usage += String.format("%s <task>", todoString);
+                break;
+            case DEADLINE:
+                usage += String.format("%s <task>%s<datetime>", deadlineString, deadlineDelimiter);
+                break;
+            case EVENT:
+                usage += String.format("%s <task>%s<datetime>", eventString, eventDelimiter);
+                break;
+        }
+        return usage;
+    }
+
+    /**
      * Utility function to format the add task message.
+     * @param message message attached before task.
+     * @param task input task.
      * @return the formatted add task message.
      */
     private static String formatTaskMessage(String message, Task task) {
