@@ -107,15 +107,16 @@ public class Duke {
             System.out.println(divider);
 
             String[] input = s.split("\\s+", 2);
+            String command = input[0];
 
-            if (input.length == 1 && input[0].contentEquals("list")) {
+            if (input.length == 1 && command.contentEquals("list")) {
 
                 // list command
                 for (int i = 0; i < taskList.size(); i++) {
                     System.out.println((i + 1) + ". " + taskList.get(i));
                 }
 
-            } else if (input[0].contentEquals("done")) {
+            } else if (command.contentEquals("done")) {
 
                 // done command
                 if (input.length > 1) {
@@ -135,8 +136,31 @@ public class Duke {
                     System.out.println("Please indicate a task to mark as done");
                 }
 
+            } else if(command.contentEquals("delete")) {
+
+                // delete command
+                if (input.length > 1) {
+                    for (int i = 1; i < input.length; i++) {
+                        try {
+                            int listIndex = Integer.parseInt(input[i]);
+                            if (listIndex <= 0 || listIndex > taskList.size()) {
+                                System.out.println("Invalid Argument: Index " + listIndex + " is out of bounds!");
+                            } else {
+                                Task toDelete = taskList.get(listIndex - 1);
+                                taskList.remove(listIndex - 1);
+                                System.out.println("Noted. I've removed this task:");
+                                System.out.println("  " + toDelete);
+                                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Argument must be an Integer!");
+                        }
+                    }
+                } else {
+                    System.out.println("Please indicate a task to delete");
+                }
+
             } else {
-                String command = input[0];
 
                 Task added = null;
 
