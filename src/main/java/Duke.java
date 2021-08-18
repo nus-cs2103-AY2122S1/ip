@@ -35,9 +35,9 @@ public class Duke {
                     break;
                 } else if (s.equals("list")) {
                     drawLine();
-                    System.out.println("Here are the tasks in your list:");
+                    System.out.println("\tHere are the tasks in your list:");
                     for (int i = 0; i < list.size(); i++) {
-                        System.out.println(i + 1 + ". " + list.get(i).toString());
+                        System.out.println("\t" + (i + 1) + ". " + list.get(i).toString());
                     }
                     drawLine();
                     continue;
@@ -55,14 +55,14 @@ public class Duke {
                     continue;
                 } else if (s.startsWith("todo")) {
                     if (s.length() == 4 || s.length() == 5) {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");
                     }
                     Todo todo = new Todo(s.substring(s.indexOf(" ") + 1));
                     list.add(todo);
                     drawLine();
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("\t" + todo);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    System.out.println("\tGot it. I've added this task:");
+                    System.out.println("\t\t" + todo);
+                    System.out.println("\tNow you have " + list.size() + " tasks in the list.");
                     drawLine();
                 } else if (s.startsWith("deadline")) {
                     Deadline deadline = new Deadline(s.substring(s.indexOf(" ") + 1, s.indexOf(" /by")),
@@ -82,8 +82,20 @@ public class Duke {
                     System.out.println("\t" + event);
                     System.out.println("Now you have " + list.size() + " tasks in the list.");
                     drawLine();
+                } else if (s.startsWith("delete")) {
+                    if (s.length() == 6 || s.length() == 7) {
+                        throw new DukeException("\t☹ OOPS!!! You did not put which task you want me to delete.");
+                    }
+                    drawLine();
+                    System.out.println("\tNoted. I've removed this task:");
+                    taskNumber = Integer.parseInt(s.substring(s.indexOf(" ") + 1)) - 1;
+                    System.out.println("\t\t" + list.get(taskNumber));
+                    list.remove(taskNumber);
+                    System.out.println("\tNow you have " + list.size() + " in the list.");
+                    drawLine();
+                    continue;
                 } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
             catch (DukeException e) {
