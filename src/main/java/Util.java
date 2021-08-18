@@ -20,7 +20,7 @@ public class Util {
     }
 
     public static void informNumTask(int numTasks) {
-        if (numTasks == 1) {
+        if (numTasks == 1 || numTasks == 0) {
             System.out.println("Now you have " + numTasks + " task in the list.");
         } else if (numTasks > 1) {
             System.out.println("Now you have " + numTasks + " tasks in the list.");
