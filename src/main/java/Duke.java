@@ -1,19 +1,23 @@
 import java.util.Scanner;
 public class Duke {
 
-    private static Task[] userInput = new Task[100];
-    private static boolean isBye = false;
+    private static Task[] userInput;
+    private static boolean isBye;
+    private static Scanner scanner;
 
-    public static void setArray()
+    public Duke()
     {
+        scanner = new Scanner(System.in);
+        userInput = new Task[100];
         for(int i = 0; i < 100; i++)
         {
             userInput[i] = null;
         }
+        isBye = false;
     }
 
-    public static void getInput(Scanner scanner, int counter) {
-        while (!isBye) {
+    public static void getInput(int counter) {
+        while (!isBye && scanner.hasNext()) {
             String input = scanner.nextLine();
             String[] splitInput = input.split(" ");
             String[] splitTask = input.split("/");
@@ -26,24 +30,24 @@ public class Duke {
                 scanner.close();
             } else if (input.equals("list") || input == "list") {
                 System.out.println("  ---------------------------------------------\n" +
-                        "  Here are the tasks in your list:");
+                        "    Here are the tasks in your list:");
                 int point = 0;
                 while (userInput[point] != null) {
                     Task temp = userInput[point];
-                    System.out.println("    " + (point + 1) + ". " + temp.toString());
+                    System.out.println("        " + (point + 1) + ". " + temp.toString());
                     point++;
                 }
-                System.out.println("  Now you have " + point + " tasks in the list.\n" +
+                System.out.println("    Now you have " + point + " tasks in the list.\n" +
                        "  ---------------------------------------------");
             } else if(input.contains("done") && splitInput.length == 2) {
                 Task temp = userInput[Integer.valueOf(splitInput[1]) - 1];
                 temp.markAsDone();
-                System.out.println("---------------------------------------------\n" +
-                        "  Nice! I've marked this task as done:\n    " + temp.toString());
+                System.out.println("  ---------------------------------------------\n" +
+                        "    Nice! I've marked this task as done:\n      " + temp.toString());
                 System.out.println("  ---------------------------------------------");
             } else {
                 System.out.println("  ---------------------------------------------");
-                System.out.println("  Got it. I've added this task:");
+                System.out.println("    Got it. I've added this task:");
                 if(splitTask.length == 1) {
                     Todo todo = new Todo(input);
                     userInput[counter] = todo;
@@ -56,9 +60,9 @@ public class Duke {
                         userInput[counter] = deadline;
                     }
                 }
-                System.out.println("    " + userInput[counter].toString());
+                System.out.println("      " + userInput[counter].toString());
                 counter++;
-                System.out.println("  Now you have " + counter + (counter == 1 ?
+                System.out.println("    Now you have " + counter + (counter == 1 ?
                         " task in the list" : " tasks in the list."));
                 System.out.println("  ---------------------------------------------");
             }
@@ -67,15 +71,16 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+
         System.out.println("  ---------------------------------------------");
         System.out.println("    Hello! I'm Duke");
         System.out.println("    What can I do for you?");
         System.out.println("  ---------------------------------------------");
 
-        Scanner scanner = new Scanner(System.in);
+
         int counter = 0;
-        setArray();
-        getInput(scanner, counter);
+        Duke duke = new Duke();
+        getInput(counter);
 
     }
 }
