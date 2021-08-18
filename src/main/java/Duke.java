@@ -21,10 +21,20 @@ public class Duke {
             if (nextInput.equals("bye")) {
                 printMsg("Bye mate!");
                 exit = true;
+            } else if (nextInput.equals("list")){
+                printTasks();
             } else {
-                printMsg(nextInput);
+                Task.addTask(nextInput);
+                printMsg("added: " + nextInput);
             }
         }
+    }
+
+    /**
+     * Print all tasks.
+     */
+    private static void printTasks() {
+        printMsg(Task.getTaskStrings());
     }
 
     /**
@@ -32,9 +42,22 @@ public class Duke {
      *
      * @param msg Message to be printed, as a string.
      */
-    public static void printMsg(String msg) {
+    private static void printMsg(String msg) {
         System.out.println("    ---");
         System.out.println("    " + msg);
+        System.out.println("    ---");
+    }
+
+    /**
+     * Prints out an array of messages.
+     *
+     * @param msgs Messages to be printed, as a string array.
+     */
+    private static void printMsg(String[] msgs) {
+        System.out.println("    ---");
+        for (String msg : msgs) {
+            System.out.println("    " + msg);
+        }
         System.out.println("    ---");
     }
 }
