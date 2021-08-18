@@ -13,47 +13,93 @@ public class Pib {
         readInput();
     }
 
+    private enum TaskType {
+        TODO, DEADLINE, EVENT
+    }
+
     private void readInput() {
         while (sc.hasNextLine()) {
+            System.out.println(DIVIDER);
             String next = sc.nextLine();
 
-            if (next.equalsIgnoreCase("BYE")) {
-                endPib();
-                break;
-            } else if (next.equalsIgnoreCase("list")) {
-                displayList();
-            } else if (next.startsWith("done ")) {
-                if (list.size() > 0) {
-                    markAsDone(next.substring(5));
-                } else {
-                    System.out.println(DIVIDER + "Add an item first!\n" + DIVIDER);
+            if (next.contains(" ")) {
+                int spaceDividerIndex = next.indexOf(" ");
+                String taskType = next.substring(0, spaceDividerIndex).toLowerCase();
+                String taskDetails = next.substring(1 + spaceDividerIndex);
+                switch (taskType) {
+                    case "todo":
+                        addToList(TaskType.TODO, taskDetails);
+                        break;
+                    case "deadline": {
+                        addToList(TaskType.DEADLINE, taskDetails);
+                        break;
+                    }
+                    case "event": {
+                        addToList(TaskType.EVENT, taskDetails);
+                        break;
+                    }
+                    case "done": {
+                        markAsDone(taskDetails);
+                        break;
+                    }
+                    default: {
+                        printUnknownCmd();
+                        break;
+                    }
                 }
             } else {
-                list.add(new Task(next));
+                String action = next.toLowerCase();
+                if (action.equals("list")) {
+                    displayList();
+                } else if (action.equals("bye")) {
+                    endPib();
+                    break;
+                } else {
+                    printUnknownCmd();
+                }
             }
+            System.out.println(DIVIDER);
         }
     }
 
+    private void printUnknownCmd() {
+        System.out.println("Uh oh! I don't know that command :(\n");
+    }
+
     private void endPib() {
-        System.out.println(DIVIDER + "Bye! See you next time!\n" + DIVIDER);
+        System.out.println("Bye! See you next time!\n");
         sc.close();
+    }
+
+    private void addToList(TaskType t, String taskDetails) {
+        if (t.equals(TaskType.TODO)) {
+            list.add(new Todo(taskDetails));
+        } else if (t.equals(TaskType.DEADLINE)) {
+            int dateDividerIndex = taskDetails.indexOf("/by ");
+            list.add(new Deadline(taskDetails.substring(0, dateDividerIndex),
+                    taskDetails.substring(dateDividerIndex + 4)));
+        } else if (t.equals(TaskType.EVENT)) {
+            int dateDividerIndex = taskDetails.indexOf("/at ");
+            list.add(new Event(taskDetails.substring(0, dateDividerIndex),
+                    taskDetails.substring(dateDividerIndex + 4)));
+        }
+        System.out.println("Now you have " + list.size() + " task(s) in your list.");
     }
 
     private void displayList() {
         if (list.size() == 0) {
-            System.out.println(DIVIDER + "Nothing added yet\n" + DIVIDER);
-            return;
+            System.out.println("Nothing added yet\n");
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println((i + 1) + "." + list.get(i).toString());
+            }
+            System.out.println("");
         }
-        System.out.println(DIVIDER);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println((i+1) + list.get(i).displayTask())  ;
-        }
-        System.out.println(DIVIDER);
     }
 
     private void markAsDone(String s) {
         if (s.isBlank()) {
-            System.out.println(DIVIDER + "Tell me which item to mark as complete!\n " + DIVIDER);
+            System.out.println("Tell me which item to mark as complete!\n ");
         } else {
             list.get(Integer.parseInt(s) - 1).markAsDone();
         }

@@ -8,23 +8,21 @@ public class Task {
     public Task(String description) {
         this.description = description;
         isDone = false;
-        System.out.println(Pib.DIVIDER + "Added: " + description + "\n" + Pib.DIVIDER);
+        System.out.println("Added: " + description + "\n");
     }
 
-    public String displayTask() {
-        return ".[" + getStatusIcon() + "] " + description;
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
     }
 
     public void markAsDone() {
         if (this.isDone) {
-            System.out.println(Pib.DIVIDER + "Item is already marked as done!\n" + Pib.DIVIDER);
-            return;
+            System.out.println("Item is already marked as done!\n");
+        } else {
+            this.isDone = true;
+            System.out.println("Nice! I've marked this task as done:\n" + "[X] " + description + "\n");
         }
-        this.isDone = true;
-        System.out.println(Pib.DIVIDER
-                + "Nice! I've marked this task as done:\n"
-                + "[X] " + description + "\n"
-                + Pib.DIVIDER);
     }
 
     /**
