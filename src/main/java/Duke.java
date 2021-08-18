@@ -12,23 +12,36 @@ public class Duke {
 
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
-                int counter = 1;
-                System.out.println("    ***\n" + "    These are your tasks in the list:");
-                for (Task x: contents) {
-                    System.out.println("      " + counter + ". " + x.getStatusIcon() + " " +
-                            x.getDescription());
-                    counter++;
+                if (contents.size() == 0) {
+                    System.out.println("    ***\n" + "    There is currently nothing in the list. \n" +
+                            "    ***\n");
+                } else {
+                    int counter = 1;
+                    System.out.println("    ***\n" + "    These are your tasks in the list:");
+                    for (Task x: contents) {
+                        System.out.println("      " + counter + ". " + x.getStatusIcon() + " " +
+                                x.getDescription());
+                        counter++;
+                    }
+                    System.out.println("    ***\n");
                 }
-                System.out.println("    ***\n");
-
-            } else if (userInput.startsWith("done")) {
+            } else if (userInput.startsWith("done") || userInput.startsWith("delete")) {
                 try {
-                    String index = userInput.substring(5);
-                    int x = Integer.parseInt(index);
-                    Task temp = contents.get(x - 1);
-                    temp.markedDone();
-                    System.out.println("    ***\n" + "    You have successfully done this task:\n" +
-                            "      " + temp.getStatusIcon() + " " + temp.getDescription() + "\n    ***\n");
+                    if (userInput.startsWith("done")) {
+                        String index = userInput.substring(5);
+                        int x = Integer.parseInt(index);
+                        Task temp = contents.get(x - 1);
+                        temp.markedDone();
+                        System.out.println("    ***\n" + "    You have successfully done this task:\n" +
+                                "      " + temp.getStatusIcon() + " " + temp.getDescription() + "\n    ***\n");
+                    } else {
+                        String index = userInput.substring(7);
+                        int x = Integer.parseInt(index);
+                        Task temp = contents.get(x - 1);
+                        contents.remove(temp);
+                        System.out.println("    ***\n" + "    You have successfully removed this task:\n" +
+                                "      " + temp.getStatusIcon() + " " + temp.getDescription() + "\n    ***\n");
+                    }
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println("Invalid input. Requires a number.");
                 } catch (ArrayIndexOutOfBoundsException f) {
