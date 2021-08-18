@@ -4,6 +4,12 @@ import java.util.ArrayList;
 public class Duke {
     private static ArrayList<Task> todoList;
 
+    private enum TaskType {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
+
     public static void main(String[] args) {
         String separator = "------------------------------------------------------------------";
 
@@ -46,11 +52,11 @@ public class Duke {
                     Integer taskNum = validateTaskNumber(description);
                     markTaskDone(taskNum);
                 } else if (cmd.equals(todoCmd)) {
-                    addTask(todoCmd, description);
+                    addTask(TaskType.TODO, description);
                 } else if (cmd.equals(deadlineCmd)) {
-                    addTask(deadlineCmd, description);
+                    addTask(TaskType.DEADLINE, description);
                 } else if (cmd.equals(eventCmd)) {
-                    addTask(eventCmd, description);
+                    addTask(TaskType.EVENT, description);
                 } else if (cmd.equals(deleteCmd)) {
                     Integer taskNum = validateTaskNumber(description);
                     deleteTask(taskNum);
@@ -74,11 +80,11 @@ public class Duke {
         }
     }
 
-    private static void addTask(String taskType, String details) throws DukeException {
+    private static void addTask(TaskType taskType, String details) throws DukeException {
         Task task;
-        if (taskType == "todo") {
+        if (taskType.equals(TaskType.TODO)) {
             task = new ToDo(details);
-        } else if (taskType == "deadline") {
+        } else if (taskType.equals(TaskType.DEADLINE)) {
             int position = details.indexOf("/by");
             String description, by;
             if (position >= 0) {
@@ -88,7 +94,7 @@ public class Duke {
                 throw new DukeException("Please indicate the deadline eg \"/by Sunday\" ");
             }
             task = new Deadline(description.trim(), by.trim());
-        } else if (taskType == "event") {
+        } else if (taskType.equals(TaskType.EVENT)) {
             int position = details.indexOf("/at");
             String description, at;
             if (position >= 0) {
