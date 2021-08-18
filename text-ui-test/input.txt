@@ -1,0 +1,26 @@
+list
+list aaa
+done
+done aaa
+done 5 aaa
+done 1
+deadline
+deadline aaa
+deadline aaa /by
+deadline code /by Sunday 2359
+list
+event
+event aaa
+event aaa /at
+event lunch /at Sunday 1pm-3pm
+todo
+todo exercise
+list
+done 0
+done 1
+list
+done 2
+done 3
+list
+bye bye
+bye
