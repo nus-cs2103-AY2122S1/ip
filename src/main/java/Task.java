@@ -19,18 +19,19 @@ public class Task {
      *
      * @param task String description of the task
      */
-    public static Task createTask(String task) {
+    public static Task createTask(String task) throws IllegalArgumentException  {
         String[] taskArr = task.split(" ", 2);
         String firstWord = taskArr[0];
-
-        if (firstWord.equals("todo")) {
+        if (taskArr.length < 2) {
+            throw new IllegalArgumentException("OOPS! The task cannot be empty");
+        } else if (firstWord.equals("todo")) {
             return new ToDo(taskArr[1]);
         } else if (firstWord.equals("deadline")) {
             return new Deadline(taskArr[1].split("/", 2));
         } else if (firstWord.equals("event")) {
             return new Event(taskArr[1].split("/", 2));
         } else {
-            return new Task(task);
+            throw new IllegalArgumentException("OOPS! This is not a task. ");
         }
 
     }

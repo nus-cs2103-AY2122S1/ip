@@ -75,10 +75,10 @@ public class Duke {
                 } else if (d.getFirstWord(userInput).equals("done")) {
                     int i = d.getSecondNum(userInput);
                     d.listOfTasks.setTaskAsDone(i);
-                    System.out.println(d.chatBotMessage("\tNice! I've marked this task as done: \n" +
+                    System.out.println(d.chatBotMessage("\tNice! I've marked this task as done:\n" +
                             "\t\t" + d.listOfTasks.getTask(i - 1) + "\n"));
                 } else {
-                    System.out.println(d.chatBotMessage("\tGot it. I've added this task: \n" +
+                    System.out.println(d.chatBotMessage("\tGot it. I've added this task:\n" +
                             "\t\t" + d.addTaskToList(userInput) + "\n" +
                             "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n"
                             ));

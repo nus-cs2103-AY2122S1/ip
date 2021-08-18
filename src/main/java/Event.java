@@ -7,7 +7,7 @@
 public class Event extends Task {
     private final String startTime;
 
-    protected Event(String[] arrString) {
+    protected Event(String[] arrString) throws IllegalArgumentException {
         super(arrString[0]);
         if (arrString.length < 2) {
             throw new IllegalArgumentException("To indicate the date, please input \"/at {date}\" ");
