@@ -1,4 +1,6 @@
 read book
 return book
 list
+done 1
+list
 bye
