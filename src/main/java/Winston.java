@@ -27,6 +27,20 @@ public class Winston {
     public void markTask(Integer position) {
         list.get(position - 1).setComplete();
     }
+    
+    public void deleteTask(Integer position) {
+        list.remove(position - 1);
+    }
+    
+    public int size() {
+        int counter = 0;
+        for (Task task : list) {
+            if (task.taskCompletion().equals("[ ]")) {
+                counter += 1;
+            }
+        }
+        return counter;
+    }
 
     /**
      * Transforms the arraylist of tasks into a string for visualisation
@@ -47,13 +61,14 @@ public class Winston {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Hi there! Winston reporting.\nWhat can I do for you?\n" +
-                "Available Commands: done, list, todo, deadline, event, bye");
+                "Available Commands: done, list, todo, deadline, event, bye, delete");
         String cmd = "";
         Winston winston1 = new Winston();
         while (!cmd.equals("bye")) {
             switch (cmd) {
                 case "list":
                     System.out.println(winston1.getList());
+                    System.out.println(winston1.size() + " tasks remaining.");
                     break;
                 case "done":
                     System.out.println(winston1.getList());
@@ -64,8 +79,8 @@ public class Winston {
                         System.out.println("Please give a valid number. Resetting to home menu.");
                         break;
                     }
-                    System.out.println("Don't worry, I've got you. Task Marked!");
-                    System.out.println(winston1.getList());
+                    System.out.println("Don't worry, I've got you. Task Marked!"+ "\n" +
+                            winston1.size() + " tasks remaining.");
                     break;
                 case "todo":
                     System.out.println("What task would you like to add?");
@@ -89,6 +104,19 @@ public class Winston {
                     winston1.addTask(new Event(task, on));
                     System.out.println("Task Added!");
                     break;
+                }
+                case "delete": {
+                    System.out.println(winston1.getList());
+                    System.out.println("What task would you like to delete?");
+                    try{
+                        winston1.deleteTask(scan.nextInt());
+                    } catch(InputMismatchException | IndexOutOfBoundsException e) {
+                        System.out.println("Please give a valid number. Resetting to home menu.");
+                        break;
+                    }
+                    
+                    System.out.println("Don't worry, I've got you. Task Deleted!" + "\n" +
+                            winston1.size() + " tasks remaining.");
                 }
                 case "": {
                     break;
