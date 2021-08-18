@@ -11,7 +11,7 @@ public class Duke {
     private final static String GREETING = "Greetings friend! I am your personal assistant,\n" + 
                                             LOGO + 
                                             "\nWhat can I do for you?\n";
-    private static ArrayList<Task> tasks = new ArrayList<Task>();
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Prints a message with a line of dashes before and after it.
