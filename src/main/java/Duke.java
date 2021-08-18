@@ -13,6 +13,9 @@ public class Duke {
         {
             put("list", (input) -> list());
             put("done", (input) -> markDone(input));
+            put("todo", (input) -> addToDo(input));
+            put("deadline", (input) -> addDeadline(input));
+            put("event", (input) -> addEvent(input));
         }
     };
 
@@ -69,11 +72,6 @@ public class Duke {
         System.out.println(LINEBREAK);
     }
 
-    private void addTask(String taskName) {
-        print(" SO YOU WANT TO: " + taskName);
-        tasks.add(new Task(taskName));
-    }
-
     private void markDone(String input) {
         int index = Integer.parseInt(input);
         Task currentTask = tasks.get(index - 1);
@@ -84,7 +82,27 @@ public class Duke {
         print("YOU SAY YOU'VE COMPLETED THIS TASK:\n " + currentTask);
     }
 
-    private void run() {
+    private void addToDo(String taskName) {
+        Task newTask = new ToDo(taskName);
+        tasks.add(newTask);
+        print(" MORTAL, YOU'VE ADDED THIS TASK: " + newTask);
+    }
+
+    private void addEvent(String input) {
+        String[] args = input.split("/at", 2);
+        Task newEvent = new Event(args[0].trim(), args[1].trim());
+        tasks.add(newEvent);
+        print(" MORTAL, YOU'VE ADDED THIS EVENT: " + newEvent);
+    }
+
+    private void addDeadline(String input) {
+        String[] args = input.split("/by", 2);
+        Task newEvent = new Deadline(args[0].trim(), args[1].trim());
+        tasks.add(newEvent);
+        print(" MORTAL, YOU'VE ADDED THIS DEADLINE: " + newEvent);
+    }
+
+    private void serve() {
         greet();
         Scanner input = new Scanner(System.in);
 
@@ -97,7 +115,7 @@ public class Duke {
                 print(" LIVE OUT YOUR PATHETIC LIFE, WEAKLING.");
                 break;
             } else {
-                FUNCTIONS.getOrDefault(cmd[0], (task) -> addTask(inputString)).accept(cmd.length > 1 ? cmd[1] : "");
+                FUNCTIONS.getOrDefault(cmd[0], (task) -> addToDo(inputString)).accept(cmd.length > 1 ? cmd[1] : "");
             }
             System.out.print("WHAT ELSE DO YOU WANT, INSECT?\n ");
         }
@@ -106,6 +124,6 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke Squirtle = new Duke();
-        Squirtle.run();
+        Squirtle.serve();
     }
 }

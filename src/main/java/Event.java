@@ -1,4 +1,4 @@
-public class Event extends ToDo {
+public class Event extends Task {
     private final String duration;
 
     public Event(String taskName, String duration) {
