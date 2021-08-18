@@ -39,7 +39,7 @@ public class Duke {
             try {
                 String input = sc.nextLine();
                 String[] inputs = input.split(" ", 2);
-                String cmd = inputs[0];
+                String cmd = inputs[0]; // get first word as command
                 String description = inputs.length > 1 ? inputs[1] : "";
                 System.out.println(separator);
 
@@ -71,6 +71,7 @@ public class Duke {
         }
     }
 
+    /** Prints the to-do list in order */
     private static void displayList() {
         System.out.println("Your task list:");
         for (int i = 0; i < todoList.size(); i++) {
@@ -80,6 +81,7 @@ public class Duke {
         }
     }
 
+    /** Add a task to the to-do list */
     private static void addTask(TaskType taskType, String details) throws DukeException {
         Task task;
         if (taskType.equals(TaskType.TODO)) {
@@ -105,6 +107,7 @@ public class Duke {
             }
             task = new Event(description.trim(), at.trim());
         } else {
+            // should not reach here
             return;
         }
         todoList.add(task);
@@ -113,6 +116,7 @@ public class Duke {
         System.out.println("Now you have " + todoList.size() + " tasks in the list.");
     }
 
+    /** Mark a task with given task number as done */
     private static void markTaskDone(Integer taskNum) throws DukeException {
         Task task = todoList.get(taskNum - 1);
         task.markAsDone();
@@ -120,6 +124,7 @@ public class Duke {
         System.out.println(task.toString());
     }
 
+    /** Delete a task with given task number */
     private static void deleteTask(Integer taskNum) throws DukeException {
         Task task = todoList.remove(taskNum - 1);
         System.out.println("Ok, I've deleted this task:");
@@ -127,6 +132,7 @@ public class Duke {
         System.out.println("Now you have " + todoList.size() + " tasks in the list.");
     }
 
+    /** checks if input is a valid task number and returns task number if valid */
     private static Integer validateTaskNumber(String input) throws DukeException {
         Integer taskNum;
         try {
