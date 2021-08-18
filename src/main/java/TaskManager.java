@@ -50,7 +50,7 @@ public class TaskManager {
             throws TaskManagerException {
 
         if (!userInput.contains(splitKey)) {
-            throw new TaskManagerException("Missing key '" + splitKey + "'.");
+            throw new TaskManagerException("Missing key '" + splitKey + "' in command.");
         }
 
         String[] inputParts = userInput.split(splitKey);
