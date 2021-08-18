@@ -14,6 +14,10 @@ public class Task {
         return isDone;
     }
 
+    public void setDone(boolean done) {
+        this.isDone = done;
+    }
+
     @Override
     public String toString() {
         return this.name;
