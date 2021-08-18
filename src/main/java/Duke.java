@@ -138,7 +138,7 @@ public class Duke {
         try {
             tasks.add(t);
             store.appendCommand(t.fullCommand());
-            System.out.println("\tGot it. I've added this task: ");
+            System.out.println("\tGot it. I've added this task:");
             System.out.printf("\t  %s\n", t);
             System.out.printf("\tNow you have %d ", tasks.size());
             System.out.println((tasks.size() <= 1 ? "task" : "tasks") + " in the list.");

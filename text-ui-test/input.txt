@@ -1,12 +1,19 @@
 todo borrow book
-deadline return book /by Sunday
+deadline return book /by 2021-08-18 2359
 done 1
 done 2
 list
-event project meeting /at Mon 2-4pm
-deadline do homework /by no idea :-p
+event project meeting /at 2021-08-18 2359
+deadline do homework /by 2021-08-18 2359
 list
 done 3
 done 4
 list
+deadline gg /by qweqwe
+event try /at pota
+deadline go jogging /by 2021-08-15 1200
+done 5
+delete 1
+delete 1
+delete 1
 bye

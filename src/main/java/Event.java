@@ -33,7 +33,7 @@ public class Event extends Task {
     @Override
     public String fullCommand() {
         return "event " + this.description + " /at "
-                        + this.date.format(DateTimeFormatter.ofPattern("yyyy-mm-dd"))
+                        + this.date.toString()
                         + " "
                         + this.time.format(DateTimeFormatter.ofPattern("kkmm"));
     }
@@ -43,8 +43,7 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + " "
-                + this.time.format(DateTimeFormatter.ofPattern(
-                        (time.getHour() % 12 > 9 ? "hh:mma" : "h:mma")))
+                + this.time.format(DateTimeFormatter.ofPattern("h:mma"))
                 + ")";
     }
 }

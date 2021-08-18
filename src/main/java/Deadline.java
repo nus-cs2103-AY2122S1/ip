@@ -33,7 +33,7 @@ public class Deadline extends Task {
     @Override
     public String fullCommand() {
         return "deadline " + this.description + " /by "
-                           + this.date.format(DateTimeFormatter.ofPattern("yyyy-mm-dd"))
+                           + this.date.toString()
                            + " "
                            + this.time.format(DateTimeFormatter.ofPattern("kkmm"));
     }
@@ -43,8 +43,7 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + " "
-                + this.time.format(DateTimeFormatter.ofPattern(
-                        (time.getHour() % 12 > 9 ? "hh:mma" : "h:mma")))
+                + this.time.format(DateTimeFormatter.ofPattern(("h:mma")))
                 + ")";
     }
 }
