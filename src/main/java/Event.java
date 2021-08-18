@@ -10,7 +10,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         String eventMarker = "[E]";
-        String timestamp = String.format("(%s: %s)", datetime.split(" ", 2)[0], datetime.split(" ", 2)[1]);
+        String timestamp = String.format("(at: %s)", datetime);
+
         if (isDone) {
             return eventMarker + hasCross + " " + item + " " + timestamp;
         } else {

@@ -13,14 +13,14 @@ There are 2 items in the list right now
 ########################
 ########################
 You have successfully added an item:
-[D][] submit assignment  (at: noon)
+[D][] submit assignment  (by: noon)
 to the list.
 There are 3 items in the list right now
 ########################
 ########################
 1. [E][] buy food  (at: 2-4pm)
 2. [T][] get home
-3. [D][] submit assignment  (at: noon)
+3. [D][] submit assignment  (by: noon)
 ########################
 ########################
 You have successfully completed task 2:
@@ -29,7 +29,22 @@ You have successfully completed task 2:
 ########################
 1. [E][] buy food  (at: 2-4pm)
 2. [T][X] get home
-3. [D][] submit assignment  (at: noon)
+3. [D][] submit assignment  (by: noon)
+########################
+########################
+Sorry, you need to describe your event to me in format: event (description)!
+########################
+########################
+Sorry, you need to describe your deadline to me in format: deadline (description)!
+########################
+########################
+Sorry, you need to describe the todo in format: todo (description)!
+########################
+########################
+Sorry, you need to tell me the time in format: (task) /at (time)!
+########################
+########################
+Sorry, you need to tell me the time in format: (task) /by (time)!
 ########################
 ########################
 Thanks for using me. See you again soon!

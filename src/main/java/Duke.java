@@ -66,46 +66,66 @@ public class Duke {
      * Add an item to the list as todo.
      * @param input
      */
-    private static void markAsTodo(String input) {
-        // split input into command + text and date
-        String[] keywords = input.split("/");
+    private static void markAsTodo(String input) throws DukeException {
         // split input into command and text
-        String[] elements = keywords[0].split(" ", 2);
-
-        String command = elements[0];
+        String[] elements = input.split(" ", 2);
+        if (elements.length == 1) {
+            throw new DukeException("you need to describe the todo in format: todo (description)!");
+        }
         String textDescription = elements[1];
         Task todo = new Todo(textDescription);
         listOfItems.add(todo);
         printConfirmation(todo);
     }
 
-    private static void markAsEvent(String input) {
+    private static void markAsEvent(String input) throws DukeException {
         // split input into command + text and date
-        String[] keywords = input.split("/");
+        String[] keywords = input.split(" ", 2);
+        if (keywords.length == 1) {
+            throw new DukeException("you need to describe your event to me in format: event (description)!");
+        }
         // split input into command and text
-        String[] elements = keywords[0].split(" ", 2);
-
-        String time = keywords[1];
-        String command = elements[0];
-        String textDescription = elements[1];
+        String[] elements = keywords[1].split("/at ", 2);
+        if (elements.length == 1) {
+            throw new DukeException("you need to tell me the time in format: (task) /at (time)!");
+        }
+        String time = elements[1];
+        String textDescription = elements[0];
         Task event = new Event(textDescription, time);
         listOfItems.add(event);
         printConfirmation(event);
     }
 
-    private static void markAsDeadline(String input) {
-        // split input into command + text and date
-        String[] keywords = input.split("/");
-        // split input into command and text
-        String[] elements = keywords[0].split(" ", 2);
+    private static void markAsDeadline(String input) throws DukeException {
 
-        String time = keywords[1];
-        String command = elements[0];
-        String textDescription = elements[1];
+        String[] keywords = input.split(" ", 2);
+        if (keywords.length == 1) {
+            throw new DukeException("you need to describe your deadline to me in format: deadline (description)!");
+        }
+        String[] elements = keywords[1].split("/by ", 2);
+        if (elements.length == 1) {
+            throw new DukeException("you need to tell me the time in format: (task) /by (time)!");
+        }
+        String time = elements[1];
+        String textDescription = elements[0];
         Task deadline = new Deadline(textDescription, time);
         listOfItems.add(deadline);
         printConfirmation(deadline);
     }
+
+    /**
+     * Handles invalid commands from the user.
+     *
+     * @throws DukeException
+     */
+    private static void markAsInvalid(String input) throws DukeException {
+        if (input.equals("")) {
+            throw new DukeException("you need to type something!");
+        } else {
+            throw new DukeException("your command is invalid!");
+        }
+    }
+
     /**
      * Handles the user's input and determines which command should be run.
      *
@@ -113,27 +133,31 @@ public class Duke {
      */
     private static void handleInput(String input) {
         String command = input.split(" ")[0];
-        switch(command) {
-            case "items":
-                outputWrapper(listOfItems);
-                break;
-            case "completed":
-                markAsDone(input);
-                break;
-            case "todo":
-                markAsTodo(input);
-                break;
-            case "event":
-                markAsEvent(input);
-                break;
-            case "deadline":
-                markAsDeadline(input);
-                break;
-            default:
-                listOfItems.add(new Task(input));
-                outputWrapper("added \"" + input + "\" to list");
-                break;
+        try {
+            switch(command) {
+                case "items":
+                    outputWrapper(listOfItems);
+                    break;
+                case "completed":
+                    markAsDone(input);
+                    break;
+                case "todo":
+                    markAsTodo(input);
+                    break;
+                case "event":
+                    markAsEvent(input);
+                    break;
+                case "deadline":
+                    markAsDeadline(input);
+                    break;
+                default:
+                    markAsInvalid(input);
+                    break;
+            }
+        } catch (DukeException e) {
+            outputWrapper(e.getMessage());
         }
+
     }
 
     /**

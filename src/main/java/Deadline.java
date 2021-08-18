@@ -10,8 +10,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String eventMarker = "[D]";
-        String timestamp = "(" + datetime.split(" ", 2)[0] + ":"
-                + " " + datetime.split(" ", 2)[1] + ")";
+
+        String timestamp = String.format("(by: %s)", datetime);
+
         if (isDone) {
             return eventMarker + hasCross + " " + item + " " + timestamp;
         } else {
