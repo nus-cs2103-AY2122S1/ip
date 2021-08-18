@@ -29,12 +29,13 @@ public class Duke {
                             System.out.printf("%d. %s\n", i + 1, tasks.get(i));
                         }
                         break;
-                    case "done":
+                    case "done": {
                         int i = Integer.parseInt(commandSplit[1].trim());
                         Task task = taskList.markTaskAsDone(i - 1);
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.printf("%s\n", task);
                         break;
+                    }
                     case "todo": {
                         if (commandSplit.length < 2) {
                             throw new DukeException(String.format("The description of a %s cannot be empty.", commandType));
@@ -78,6 +79,14 @@ public class Duke {
                         taskList.addTask((newTask));
                         System.out.println("Got it. I've added this task: ");
                         System.out.printf("%s\n", newTask);
+                        System.out.printf("Now you have %d tasks in the list.\n", taskList.getSize());
+                        break;
+                    }
+                    case "delete": {
+                        int i = Integer.parseInt(commandSplit[1].trim());
+                        Task task = taskList.removeTask(i - 1);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.printf("%s\n", task);
                         System.out.printf("Now you have %d tasks in the list.\n", taskList.getSize());
                         break;
                     }

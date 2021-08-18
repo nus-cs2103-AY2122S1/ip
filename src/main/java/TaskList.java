@@ -5,6 +5,7 @@ public class TaskList {
     public TaskList() {
         tasks = new ArrayList<>();
     }
+
     public void addTask(Task task) {
         tasks.add(task);
     }
@@ -15,6 +16,15 @@ public class TaskList {
         }
         Task task = tasks.get(i);
         task.markAsDone();
+        return task;
+    }
+
+    public Task removeTask(int i) throws DukeException {
+        if (i < 0 || i >= tasks.size()) {
+            throw new DukeException("removeTask index out of range.");
+        }
+        Task task = tasks.get(i);
+        tasks.remove(i);
         return task;
     }
 
