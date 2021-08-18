@@ -33,17 +33,40 @@ public class Duke {
         System.out.println(divider + "Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.get(i - 1);
-            System.out.println(i + ". [" + task.getStatusIcon() + "] " +  task.getDescription());
+            System.out.println(i + ". " + task);
         }
         System.out.print(divider);
     }
+
+    public static void addTodo(String taskDesc) {
+        Todo todo = new Todo(taskDesc);
+        taskList.add(todo);
+        System.out.println(divider + "Got it. I have added this task:\n  " + todo +
+                "\n Now you have " + taskList.size() + " tasks in the list.\n" + divider);
+    }
+
+    public static void addDeadline(String taskDesc) {
+        String[] deadlineParams = taskDesc.split(" /by ");
+        Deadline deadline = new Deadline(deadlineParams[0], deadlineParams[1]);
+        taskList.add(deadline);
+        System.out.println(divider + "Got it. I have added this task:\n  " + deadline +
+                "\n Now you have " + taskList.size() + " tasks in the list.\n" + divider);
+    }
+
+    public static void addEvent(String taskDesc) {
+        String[] eventParams = taskDesc.split(" /at ");
+        Event event = new Event(eventParams[0], eventParams[1]);
+        taskList.add(event);
+        System.out.println(divider + "Got it. I have added this task:\n  " + event +
+                "\n Now you have " + taskList.size() + " tasks in the list.\n" + divider);
+    }
+
 
     public static void markTaskAsDone(String taskNum) {
         int taskIdx = Integer.valueOf(taskNum) - 1;
         Task task = taskList.get(taskIdx);
         task.markAsDone();
-        System.out.print(divider + "Great! I've marked this task as done:\n["
-                + task.getStatusIcon() + "] " +  task.getDescription() + "\n" + divider);
+        System.out.print(divider + "Great! I've marked this task as done:\n" + task + "\n" + divider);
     }
 
     public static void getInputs() {
@@ -55,12 +78,16 @@ public class Duke {
             } else if (input.equals("list")) {
                 printList();
             } else {
-                String[] inputs = input.split(" ");
-                if (inputs[0].equals("done") && inputs.length > 1) {
-                    markTaskAsDone(inputs[1]);
-                } else {
-                    taskList.add(new Task(input));
-                    System.out.println(divider + "added: " + input + "\n" + divider);
+                String taskType = input.substring(0, input.indexOf(' '));
+                String taskDesc = input.substring(input.indexOf(' ') + 1);
+                if (taskType.equalsIgnoreCase("todo")) {
+                    addTodo(taskDesc);
+                } else if (taskType.equalsIgnoreCase("deadline")) {
+                    addDeadline(taskDesc);
+                } else if (taskType.equalsIgnoreCase("event")) {
+                    addEvent(taskDesc);
+                } else if (taskType.equalsIgnoreCase("done")) {
+                    markTaskAsDone(taskDesc);
                 }
             }
         }
