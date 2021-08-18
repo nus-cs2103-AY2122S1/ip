@@ -79,9 +79,9 @@ public class Duke {
     }
 
     public void addDeadline(String input) {
-        int delimiter = input.indexOf("/by");
-        String task = input.substring(9, delimiter-1);
-        String date = input.substring(delimiter + 4);
+        int delimiter = input.indexOf(" /by ");
+        String task = input.substring(9, delimiter);
+        String date = input.substring(delimiter + 5);
         Deadline newDeadline = new Deadline(task, date);
         this.list.add(newDeadline);
         String message =
@@ -94,9 +94,9 @@ public class Duke {
     }
 
     public void addEvent(String input) {
-        int delimiter = input.indexOf("/at");
-        String task = input.substring(6, delimiter-1);
-        String time = input.substring(delimiter + 4);
+        int delimiter = input.indexOf(" /at ");
+        String task = input.substring(6, delimiter);
+        String time = input.substring(delimiter + 5);
         Event newEvent = new Event(task, time);
         this.list.add(newEvent);
         String message =
