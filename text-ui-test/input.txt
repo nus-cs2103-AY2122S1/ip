@@ -9,4 +9,6 @@ list
 done 3
 done 1
 list
+delete 2
+list
 bye
