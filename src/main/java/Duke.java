@@ -1,8 +1,8 @@
-import duke.commands.Command;
-import duke.exceptions.DukeException;
-import duke.utils.Parser;
-import duke.utils.TaskList;
-import duke.utils.Ui;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.util.Parser;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 import java.io.IOException;
 

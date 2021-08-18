@@ -1,15 +1,15 @@
-package duke.utils;
+package duke.util;
 
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
-import duke.commands.ListCommand;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
 import duke.enums.Commands;
-import duke.exceptions.DukeException;
-import duke.exceptions.EmptyCommandException;
-import duke.exceptions.UnknownCommandException;
+import duke.exception.DukeException;
+import duke.exception.EmptyCommandException;
+import duke.exception.UnknownCommandException;
 
 /** Utility class that handles parsing of strings to other useful data structures. */
 public class Parser {

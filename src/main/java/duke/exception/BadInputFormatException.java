@@ -1,4 +1,4 @@
-package duke.exceptions;
+package duke.exception;
 
 public class BadInputFormatException extends InvalidInputException {
     public BadInputFormatException() {

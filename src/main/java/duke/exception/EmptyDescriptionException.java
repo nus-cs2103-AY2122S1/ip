@@ -1,4 +1,4 @@
-package duke.exceptions;
+package duke.exception;
 
 public class EmptyDescriptionException extends InvalidInputException {
     public EmptyDescriptionException() {

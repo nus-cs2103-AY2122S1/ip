@@ -1,7 +1,7 @@
-package duke.exceptions;
+package duke.exception;
 
 public class UnknownCommandException extends DukeException {
     public UnknownCommandException(String input) {
-        super("duke.commands.Command \"" + input + "\" not found.");
+        super("Command \"" + input + "\" not found.");
     }
 }

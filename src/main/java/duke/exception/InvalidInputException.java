@@ -1,4 +1,4 @@
-package duke.exceptions;
+package duke.exception;
 
 public class InvalidInputException extends DukeException {
     public InvalidInputException() {

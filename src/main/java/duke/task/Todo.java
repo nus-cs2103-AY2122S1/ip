@@ -1,4 +1,4 @@
-package duke.tasks;
+package duke.task;
 
 /**
  * Represents a duke.tasks.Todo object.

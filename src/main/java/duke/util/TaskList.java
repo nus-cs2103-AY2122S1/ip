@@ -1,7 +1,7 @@
-package duke.utils;
+package duke.util;
 
-import duke.exceptions.NoSuchTaskException;
-import duke.tasks.Task;
+import duke.exception.NoSuchTaskException;
+import duke.task.Task;
 
 import java.util.ArrayList;
 

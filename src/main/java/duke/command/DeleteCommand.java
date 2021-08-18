@@ -1,8 +1,8 @@
-package duke.commands;
+package duke.command;
 
-import duke.exceptions.NoSuchTaskException;
-import duke.utils.TaskList;
-import duke.utils.Ui;
+import duke.exception.NoSuchTaskException;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 public class DeleteCommand extends Command {
     private int index;

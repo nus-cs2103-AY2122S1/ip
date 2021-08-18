@@ -1,8 +1,8 @@
-package duke.commands;
+package duke.command;
 
-import duke.exceptions.BadInputFormatException;
-import duke.utils.TaskList;
-import duke.utils.Ui;
+import duke.exception.BadInputFormatException;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 public class ListCommand extends Command {
     public static ListCommand of(String content) throws BadInputFormatException {

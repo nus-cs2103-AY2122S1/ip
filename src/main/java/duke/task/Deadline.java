@@ -1,6 +1,6 @@
-package duke.tasks;
+package duke.task;
 
-import duke.exceptions.BadInputFormatException;
+import duke.exception.BadInputFormatException;
 
 /**
  * Represents a duke.tasks.Deadline object.

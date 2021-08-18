@@ -1,7 +1,7 @@
-package duke.exceptions;
+package duke.exception;
 
 public class NoSuchTaskException extends DukeException {
     public NoSuchTaskException() {
-        super("duke.tasks.Task does not exist!");
+        super("Task does not exist!");
     }
 }
