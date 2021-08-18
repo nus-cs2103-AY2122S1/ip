@@ -70,6 +70,8 @@ public class Duke {
             listOutTDL();
         } else if (lastInput.length() >= 4 && lastInput.substring(0, 4).equals("done")) {
             markItemDoneInTDL(lastInput);
+        } else if (lastInput.length() >= 6 && lastInput.substring(0, 6).equals("delete")) {
+            deleteTaskInTDL(lastInput);
         } else if (currTaskType != TDLTask.TaskType.NONE) {
             addToTDL(lastInput, currTaskType);
 
@@ -126,6 +128,23 @@ public class Duke {
 
         }
         String dukeOutput = currTDL.markTaskAsDone(taskNo);
+        dukeSays(dukeOutput);
+    }
+
+    private static void deleteTaskInTDL(String command) throws DukeExceptionBase {
+        if (command.length() < 8) {
+            throw new DukeExceptionBase("You need to specify a task to delete.");
+        }
+
+        String taskNumberStr = command.substring(7);
+        int taskNo = -1;
+        try {
+            taskNo = Integer.parseInt(taskNumberStr);
+        } catch (NumberFormatException e) {
+            throw new DukeExceptionBase("Please enter an integer.");
+
+        }
+        String dukeOutput = currTDL.deleteTask(taskNo);
         dukeSays(dukeOutput);
     }
 
