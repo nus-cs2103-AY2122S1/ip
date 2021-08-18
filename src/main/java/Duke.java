@@ -30,13 +30,39 @@ public class Duke {
                     printer.PrintMessage(e.getMessage());
                 }
             } else if (splitInput[0].equals("deadline")) {
-                String[] furtherSplits = splitInput[1].split("/by");
-                tasks.add(new Deadline(furtherSplits[0], furtherSplits[1]));
-                printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
+                try {
+                    if (splitInput.length < 2) {
+                        throw new DukeException("The description of a deadline cannot be empty.");
+                    }
+                    String[] furtherSplits = splitInput[1].split("/by", 2);
+                    if (furtherSplits.length < 2 || furtherSplits[0].equals("")) {
+                        throw new DukeException("The description of a deadline cannot be empty.\n" +
+                                "Don't forget to use /by to indicate the deadline.");
+                    } else if (furtherSplits[1].equals("") || furtherSplits[1].equals(" ")) {
+                        throw new DukeException("Deadline must come with a input date/time for the deadline.");
+                    }
+                    tasks.add(new Deadline(furtherSplits[0], furtherSplits[1]));
+                    printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
+                } catch (DukeException e) {
+                    printer.PrintMessage(e.getMessage());
+                }
             } else if (splitInput[0].equals("event")) {
-                String[] furtherSplits = splitInput[1].split("/at");
-                tasks.add(new Event(furtherSplits[0], furtherSplits[1]));
-                printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
+                try {
+                    if (splitInput.length < 2) {
+                        throw new DukeException("The description of a event cannot be empty.");
+                    }
+                    String[] furtherSplits = splitInput[1].split("/at", 2);
+                    if (furtherSplits.length < 2 || furtherSplits[0].equals("")) {
+                        throw new DukeException("The description of a event cannot be empty.\n" +
+                                "Don't forget to use /at to indicate the event time.");
+                    } else if (furtherSplits[1].equals("") || furtherSplits[1].equals(" ")) {
+                        throw new DukeException("event must come with a event date/time.");
+                    }
+                    tasks.add(new Deadline(furtherSplits[0], furtherSplits[1]));
+                    printer.PrintSpecialTasks(tasks.get(tasks.size() - 1).toString(), tasks.size());
+                } catch (DukeException e) {
+                    printer.PrintMessage(e.getMessage());
+                }
             } else {
                 try {
                     if (input.equals("blah")) {
