@@ -11,7 +11,7 @@ public class TaskList {
 
     public static void printTasks(){
         for (int i = 0; i < TaskList.storage.size(); i++) {
-            System.out.println(TaskList.storage.get(i));
+            System.out.println(i + ": " + TaskList.storage.get(i));
         }
     }
 
@@ -21,5 +21,13 @@ public class TaskList {
         }
         Task t = TaskList.storage.get(Id);
         t.markDone();
+    }
+
+    public static void deleteTask(int Id) throws DukeException{
+        if(Id >= TaskList.storage.size()){
+            throw new DukeException("no such task");
+        }
+        TaskList.storage.remove(Id);
+        System.out.println("removed Task " + Id);
     }
 }

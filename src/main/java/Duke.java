@@ -10,18 +10,25 @@ public class Duke {
         String rest = Sc.nextLine();
 
         while(true) {
+            if (first.equals("bye")) {
+                break;
+            }
             try {
-                if (first.equals("bye")) {
-                    break;
-                }else if(first.equals("list")){
-                    TaskList.printTasks();
-                }else if(first.equals("done")){
-                    int taskID = Integer.parseInt(rest.trim());
-                    TaskList.doneTask(taskID);
-                    TaskList.printTasks();
-                }else{
-                    Task newTask = Task.taskFactory(first, rest);
-                    TaskList.addToStorage(newTask);
+                switch (first) {
+                    case "list":
+                        TaskList.printTasks();
+                        break;
+                    case "done":
+                        TaskList.doneTask(Integer.parseInt(rest.trim()));
+                        TaskList.printTasks();
+                        break;
+                    case "delete":
+                        TaskList.deleteTask(Integer.parseInt(rest.trim()));
+                        break;
+                    default:
+                        Task newTask = Task.taskFactory(first, rest);
+                        TaskList.addToStorage(newTask);
+
                 }
             }catch (DukeException e){
                 System.out.println(e);

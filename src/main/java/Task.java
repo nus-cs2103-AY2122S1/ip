@@ -1,6 +1,7 @@
 public abstract class Task {
     private String name;
     private boolean done;
+
     public Task(String name) throws DukeException{
         if(name.equals("")) {
             throw new DukeException("empty name");
