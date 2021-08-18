@@ -1,3 +1,5 @@
+package lifeline;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
