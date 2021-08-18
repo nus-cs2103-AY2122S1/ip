@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static TodoList todolist = new TodoList();
+
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -34,11 +37,22 @@ public class Duke {
         String input = sc.nextLine();
         if(input.equals("bye")) {
             terminateProgramme();
+        } else if (input.equals("list")) {
+            printTasks();
+            respondTo(sc);
         } else {
-            formatMessages(input);
+            insertTask(input);
             respondTo(sc);
         }
     }
 
+    public static void insertTask(String input) {
+        todolist.insertTask(input);
+        String done = "OK uncle added " + input + " for you liao.";
+        formatMessages(done);
+    }
 
+    public static void printTasks() {
+        formatMessages(todolist.getList());
+    }
 }
