@@ -1,0 +1,9 @@
+todo read book
+deadline do groceries /by Saturday 3pm
+list
+event Barbeque /at Friday 8pm
+done 1
+list
+done 2
+list
+bye

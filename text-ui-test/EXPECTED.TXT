@@ -1,7 +1,45 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hi there! Start chatting with your new 
+ _____       _                    _        
+|  ___|  __  _  ___   _,____     | |       
+| |_  |/  _|| |/ _ \ |  __  |____| |       
+| __| | /   | |  __/ | / \  |  __  |       
+|_|   |_|   |_|\____ |_|  |_|______|       
 
+What would you like to do today?
+(*^_^*) Friend says: 
+added: [T][ ] read book to your to-do list!
+Now you have 1 tasks in the list.
+(*^_^*) Friend says: 
+added: [D][ ] do groceries (by: Saturday 3pm) to your to-do list!
+Now you have 2 tasks in the list.
+(*^_^*) Friend says: 
+Your to-do list has the following tasks: 
+
+1.[T][ ] read book
+2.[D][ ] do groceries (by: Saturday 3pm)
+
+(*^_^*) Friend says: 
+added: [E][ ] Barbeque (at: Friday 8pm) to your to-do list!
+Now you have 3 tasks in the list.
+(*^_^*) Friend says: 
+Hooray! You've completed task 
+[X] read book
+(*^_^*) Friend says: 
+Your to-do list has the following tasks: 
+
+1.[T][X] read book
+2.[D][ ] do groceries (by: Saturday 3pm)
+3.[E][ ] Barbeque (at: Friday 8pm)
+
+(*^_^*) Friend says: 
+Hooray! You've completed task 
+[X] do groceries
+(*^_^*) Friend says: 
+Your to-do list has the following tasks: 
+
+1.[T][X] read book
+2.[D][X] do groceries (by: Saturday 3pm)
+3.[E][ ] Barbeque (at: Friday 8pm)
+
+(*^_^*) Friend says: 
+See you again my friend!
