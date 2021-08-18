@@ -55,9 +55,8 @@ public class Saber {
                 + "      I'll ensure that you will\n"
                 + "      do this task before the deadline:\n"
                 + "\n        " + deadline);
-        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task "
-                : "have " + totalTask + " tasks";
-        System.out.println("\n      Currently, Master " + taskPlural +
+        String taskPlural = totalTask <= 1 ? " task" : " tasks";
+        System.out.println("\n      Currently, Master has " + totalTask + taskPlural +
                 "\n      in the list." + "\n\n" + lineBreak);
     }
 
@@ -72,9 +71,8 @@ public class Saber {
         System.out.println(lineBreak + "\n      Understand, Master.\n"
                 + "      I have deleted this task.\n"
                 + "\n        " + task + "\n");
-        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task"
-                : "have " + totalTask + " tasks";
-        System.out.println("      Currently, Master " + taskPlural +
+        String taskPlural = totalTask <= 1 ? " task" : " tasks";
+        System.out.println("      Currently, Master has " + totalTask + taskPlural +
                 "\n      in the list." + "\n\n" + lineBreak);
     }
 
@@ -97,9 +95,8 @@ public class Saber {
                 +  "      I'll make sure you remember\n"
                 + "      to come to this event:\n"
                 + "\n        " + event);
-        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task"
-                : "have " + totalTask + " tasks";
-        System.out.println("\n      Currently, Master " + taskPlural +
+        String taskPlural = totalTask <= 1 ? " task" : " tasks";
+        System.out.println("\n      Currently, Master has " + totalTask + taskPlural +
                 "\n      in the list." + "\n\n" + lineBreak);
     }
 
@@ -123,9 +120,8 @@ public class Saber {
         System.out.println(lineBreak + "\n      Yes, Master.\n"
                 +  "      I'll add the following to your Todo list:\n"
                 + "\n        " + todo);
-        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task"
-                : "have " + totalTask + " tasks";
-        System.out.println("\n      Currently, Master " + taskPlural +
+        String taskPlural = totalTask <= 1 ? " task" : " tasks";
+        System.out.println("\n      Currently, Master has " + totalTask + taskPlural +
                 "\n      in the list." + "\n\n" + lineBreak);
     }
 

@@ -263,7 +263,7 @@
 
         [T][ ] Sleep
 
-      Currently, Master have 2 tasks
+      Currently, Master has 2 tasks
       in the list.
 
       |                                     |
@@ -279,7 +279,7 @@
 
         [T][ ] Watch lectures backlog
 
-      Currently, Master have 3 tasks
+      Currently, Master has 3 tasks
       in the list.
 
       |                                     |
@@ -308,7 +308,7 @@
 
         [D][ ] Assignment 1,2,3 (by: Next Monday)
 
-      Currently, Master have 4 tasks
+      Currently, Master has 4 tasks
       in the list.
 
       |                                     |
