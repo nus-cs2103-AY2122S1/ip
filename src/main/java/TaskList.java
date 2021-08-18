@@ -12,13 +12,18 @@ public class TaskList {
     }
 
     public void showList() {
-        System.out.println("   _____________________________________");
+        System.out.println("   _____________________________________\n"
+                        + "     " + "Here are the tasks in your list:");
         for (int i = 0; i < list.length; i++) {
             if (list[i] != null) {
-                String taskItem = "     " + (i + 1) + ". " + list[i].showTask();
+                String taskItem = "     " + (i + 1) + "." + (list[i].checkDone()) + " " + list[i].showTask();
                 System.out.println(taskItem);
             }
         }
         System.out.println("   _____________________________________\n");
+    }
+
+    public Task extractTask(int index) {
+        return list[index];
     }
 }

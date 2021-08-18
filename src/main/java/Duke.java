@@ -34,6 +34,20 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!(input.equals("bye"))) {
+            String[] doneInstruction = input.split(" ");
+            if (doneInstruction[0].equals("done")) {
+                int taskIndex = Integer.parseInt(doneInstruction[1]);
+                Task taskItem = taskList.extractTask(taskIndex - 1);
+                taskItem.isDone();
+                String taskDoneMessage = "   _____________________________________\n"
+                                    + "     Nice! I've marked this task as done:\n"
+                                    + "       " + taskItem.checkDone() + " " + taskItem.showTask() + "\n"
+                                    + "   _____________________________________\n";
+                System.out.println(taskDoneMessage);
+                input = sc.nextLine();
+                continue;
+            }
+
             if (input.equals("list")) {
                 taskList.showList();
                 input = sc.nextLine();
