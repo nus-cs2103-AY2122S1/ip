@@ -65,7 +65,7 @@ public class TaskManager {
 
         String split = inputParts[1].trim();
         if (split.isEmpty()) {
-            throw new TaskManagerException("Input after '" + splitKey + "' cannot be empty.");
+            throw new TaskManagerException("Parameter after '" + splitKey + "' cannot be empty.");
         }
         return new String[] {description, split};
     }
@@ -78,7 +78,7 @@ public class TaskManager {
 
     public Task deleteTask(String taskNumberString) throws TaskManagerException {
         Task selectedTask = getTaskFromNumberString(taskNumberString);
-        TASK_LIST.remove(selectedTask);
+        TASK_LIST.remove(selectedTask); // remove shifts tasks to the right backwards
         return selectedTask;
     }
 
@@ -104,15 +104,15 @@ public class TaskManager {
     }
 
     public List<String> listTasks() throws TaskManagerException {
-        if (TASK_LIST.isEmpty()) {
-            throw new TaskManagerException("List is empty, add some tasks first.");
-        }
         List<String> taskManagerStringList = new ArrayList<>();
         taskManagerStringList.add("Here are the tasks in your list:");
         for (int idx = 0; idx < TASK_LIST.size(); idx ++) {
             Task task = TASK_LIST.get(idx);
             int taskNumber = idx + 1; // shift to 1-indexing
             taskManagerStringList.add(String.format("%d. %s", taskNumber, task));
+        }
+        if (TASK_LIST.isEmpty()) {
+            taskManagerStringList.add("-- Empty --");
         }
         return taskManagerStringList;
     }
