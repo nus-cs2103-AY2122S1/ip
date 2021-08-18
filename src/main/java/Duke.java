@@ -18,13 +18,22 @@ public class Duke {
                 this.terminate();
                 break;
             case "list":
-                this.listItems();
+                this.listTasks();
                 break;
             case "done":
                 this.done(Integer.parseInt(parsedInput[1]) - 1);
                 break;
+            case "todo":
+                this.addTodo(input);
+                break;
+            case "deadline":
+                this.addDeadline(input);
+                break;
+            case "event":
+                this.addEvent(input);
+                break;
             default:
-                this.addItem(input);
+                this.addTask(input);
         }
     }
 
@@ -37,21 +46,64 @@ public class Duke {
         System.out.println(message);
     }
 
-    public void listItems() {
+    public void listTasks() {
         System.out.println("____________________________________________________________");
         System.out.println(" Here are the tasks in your list:");
         for (int i = 0; i < this.list.size(); i++) {
             Task task = this.list.get(i);
-            System.out.println(String.format(" %d:[%s] %s", i + 1, task.getMarker(), task.getTask()));
+            System.out.println(String.format(" %d.%s", i + 1, task.toString()));
         }
         System.out.println("____________________________________________________________\n");
     }
 
-    public void addItem(String input) {
+    public void addTask(String input) {
         this.list.add(new Task(input));
         String message =
                 "____________________________________________________________\n" +
                 " added: " + input + "\n" +
+                "____________________________________________________________\n";
+        System.out.println(message);
+    }
+
+    public void addTodo(String input) {
+        String toDo = input.substring(5);
+        ToDo newToDo = new ToDo(toDo);
+        this.list.add(newToDo);
+        String message =
+                "____________________________________________________________\n" +
+                " Got it. I've added this task:\n   " +
+                newToDo.toString() +
+                String.format("\n Now you have %d tasks in the list.\n", this.list.size()) +
+                "____________________________________________________________\n";
+        System.out.println(message);
+    }
+
+    public void addDeadline(String input) {
+        int delimiter = input.indexOf("/by");
+        String task = input.substring(9, delimiter-1);
+        String date = input.substring(delimiter + 4);
+        Deadline newDeadline = new Deadline(task, date);
+        this.list.add(newDeadline);
+        String message =
+                "____________________________________________________________\n" +
+                " Got it. I've added this task:\n   " +
+                newDeadline.toString() +
+                String.format("\n Now you have %d tasks in the list.\n", this.list.size()) +
+                "____________________________________________________________\n";
+        System.out.println(message);
+    }
+
+    public void addEvent(String input) {
+        int delimiter = input.indexOf("/at");
+        String task = input.substring(6, delimiter-1);
+        String time = input.substring(delimiter + 4);
+        Event newEvent = new Event(task, time);
+        this.list.add(newEvent);
+        String message =
+                "____________________________________________________________\n" +
+                " Got it. I've added this task:\n   " +
+                newEvent.toString() +
+                String.format("\n Now you have %d tasks in the list.\n", this.list.size()) +
                 "____________________________________________________________\n";
         System.out.println(message);
     }
@@ -62,7 +114,7 @@ public class Duke {
         String message =
                 "____________________________________________________________\n" +
                 " Nice! I've marked this task as done: \n" +
-                String.format("   [%s] %s\n", task.getMarker(), task.getTask()) +
+                String.format("   [%s] %s\n", task.getCompletedMarker(), task.getTask()) +
                 "____________________________________________________________\n";
         System.out.println(message);
     }
