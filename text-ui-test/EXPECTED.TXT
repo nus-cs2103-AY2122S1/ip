@@ -1,7 +1,24 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello, I am Duke!
+How may I help you?
+Added task:
+ [T][ ] read book
+You have 1 task in the list.
+Added task:
+ [D][ ] post-lecture quiz (by: Fri 12pm)
+You have 2 tasks in the list.
+Added task:
+ [E][ ] welcome tea (at: Sun 8-9pm)
+You have 3 tasks in the list.
+Good job! I have marked the following task as done:
+ [T][X] read book
+Here are the tasks in your list:
+ 1. [T][X] read book
+ 2. [D][ ] post-lecture quiz (by: Fri 12pm)
+ 3. [E][ ] welcome tea (at: Sun 8-9pm)
+Please enter one of the following commands:
+ todo <task>
+ deadline <task> /by <deadline>
+ event <event> /at <date time>
+ list
+ bye(to quit)
+Bye! Feel free to ask me for help again anytime!

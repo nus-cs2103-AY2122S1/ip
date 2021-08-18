@@ -22,12 +22,12 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        System.out.println("Hello, I am Duke!(≧◡≦)\nHow may I help you?");
+        System.out.println("Hello, I am Duke!\nHow may I help you?");
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
 
         String command = sc.next();
-
+        
         while (!command.equals("bye")) {
             String taskInput = sc.nextLine().stripLeading();
 
@@ -47,24 +47,25 @@ public class Duke {
                 addTask(tasks, event);
                 break;
             case "list":
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.printf("%d. %s%n", i + 1, tasks.get(i));
+                    System.out.printf(" %d. %s%n", i + 1, tasks.get(i));
                 }
                 break;
             case "done":
                 int taskIndex = Integer.parseInt(taskInput) - 1;
                 Task doneTask = tasks.get(taskIndex);
                 doneTask.markAsDone();
-                System.out.printf("Good job!d(≧◡≦)b I have marked the following task as done:%n %s%n", doneTask);
+                System.out.printf("Good job! I have marked the following task as done:%n %s%n", doneTask);
                 break;
             default:
-                System.out.println("Please enter one of the following commands: \n todo <task>" +
+                System.out.println("Please enter one of the following commands:\n todo <task>" +
                         "\n deadline <task> /by <deadline>\n event <event> /at <date time>\n list\n bye(to quit)");
                 break;
             }
             command = sc.next();
         }
-        System.out.println("Bye! Feel free to ask me for help again anytime! (≧▽≦)/");
+        System.out.println("Bye! Feel free to ask me for help again anytime!");
         sc.close();
     }
 }
