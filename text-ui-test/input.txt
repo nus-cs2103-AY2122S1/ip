@@ -1,0 +1,12 @@
+todo todo 1
+todo todo 2
+deadline ddl 1 /by ddl 1 time
+event event 1 /at event 1 time
+list
+done 1
+done 5
+list
+delete 1
+done 1
+list
+bye

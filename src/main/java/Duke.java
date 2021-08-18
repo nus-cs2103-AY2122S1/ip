@@ -26,24 +26,38 @@ public class Duke {
             String content = parsed[0];
             String time= parsed[1];
 
-            switch (cmd) {
-            case "":
-                break;
-            case "list":
-                listTask();
-                break;
-            case "done":
-                markTaskDone(Integer.parseInt(strArr[1]));
-                break;
-            case "todo":
-                addTask(new Task(content));
-                break;
-            case "deadline":
-                addTask(new Deadline(content, time));
-                break;
-            case "event":
-                addTask(new Event(content, time));
-                break;
+            try {
+                switch (cmd) {
+                case "":
+                    throw new DukeException("Command cannot begin with white space!");
+                case "list":
+                    listTask();
+                    break;
+                case "delete":
+                    deleteTask(Integer.parseInt(strArr[1]));
+                    break;
+                case "done":
+                    markTaskDone(Integer.parseInt(strArr[1]));
+                    break;
+                case "todo":
+                    checkContent(content);
+                    addTask(new Task(content));
+                    break;
+                case "deadline":
+                    checkContent(content);
+                    checkTime(time);
+                    addTask(new Deadline(content, time));
+                    break;
+                case "event":
+                    checkContent(content);
+                    checkTime(time);
+                    addTask(new Event(content, time));
+                    break;
+                default:
+                    throw new DukeException("Invalid command");
+                }
+            } catch (DukeException ex) {
+                System.out.println(ex);
             }
         }
         sayBye("Alex");
@@ -57,6 +71,19 @@ public class Duke {
         printHorizLine();
     }
 
+    private void deleteTask(int idx) {
+        try {
+            Task curr = this.taskList.remove(idx-1);
+            printHorizLine();
+            System.out.println("Noted. I've removed this task:");
+            System.out.println("\t" + curr);
+            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            printHorizLine();
+        } catch(IndexOutOfBoundsException e) {
+            System.out.println("The task index is invalid!");
+        }
+    }
+
     private void listTask() {
         printHorizLine();
         System.out.println("Here are the tasks in your list:");
@@ -67,12 +94,17 @@ public class Duke {
     }
 
     private void markTaskDone(int idx) {
-        printHorizLine();
-        Task curr = this.taskList.get(idx - 1);
-        curr.markDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("\t" + curr);
-        printHorizLine();
+
+        try {
+            Task curr = this.taskList.get(idx - 1);
+            curr.markDone();
+            printHorizLine();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println("\t" + curr);
+            printHorizLine();
+        } catch(IndexOutOfBoundsException e) {
+            System.out.println("The task index is invalid!");
+        }
     }
 
     private String[] parseInput(String[] strArr) {
@@ -94,6 +126,18 @@ public class Duke {
         timeSb.append(strArr[strArr.length-1]);
 
         return new String[]{contentSb.toString(),timeSb.toString()};
+    }
+
+    private void checkContent(String content) throws DukeException {
+        if(content.equals("")) {
+            throw new DukeException("Oops! The description of a todo cannot be empty.");
+        }
+    }
+
+    private void checkTime(String time) throws DukeException {
+        if(time.equals("")) {
+            throw new DukeException("Oops! The time of a todo cannot be empty.");
+        }
     }
 
     private void greeting(String name) {

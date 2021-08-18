@@ -5,3 +5,64 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+————————————————————————————————————————
+Hello Alex!
+I'm Duke
+————————————————————————————————————————
+————————————————————————————————————————
+Got it. I've added this task:
+	[T] [ ] todo 1
+Now you have 1 tasks in the list.
+————————————————————————————————————————
+————————————————————————————————————————
+Got it. I've added this task:
+	[T] [ ] todo 2
+Now you have 2 tasks in the list.
+————————————————————————————————————————
+————————————————————————————————————————
+Got it. I've added this task:
+	[D] [ ] ddl 1  (by: ddl 1 time)
+Now you have 3 tasks in the list.
+————————————————————————————————————————
+————————————————————————————————————————
+Got it. I've added this task:
+	[E] [ ] event 1  (at: event 1 time)
+Now you have 4 tasks in the list.
+————————————————————————————————————————
+————————————————————————————————————————
+Here are the tasks in your list:
+1.[T] [ ] todo 1
+2.[T] [ ] todo 2
+3.[D] [ ] ddl 1  (by: ddl 1 time)
+4.[E] [ ] event 1  (at: event 1 time)
+————————————————————————————————————————
+————————————————————————————————————————
+Nice! I've marked this task as done:
+	[T] [X] todo 1
+————————————————————————————————————————
+The task index is invalid!
+————————————————————————————————————————
+Here are the tasks in your list:
+1.[T] [X] todo 1
+2.[T] [ ] todo 2
+3.[D] [ ] ddl 1  (by: ddl 1 time)
+4.[E] [ ] event 1  (at: event 1 time)
+————————————————————————————————————————
+————————————————————————————————————————
+Noted. I've removed this task:
+	[T] [X] todo 1
+Now you have 3 tasks in the list.
+————————————————————————————————————————
+————————————————————————————————————————
+Nice! I've marked this task as done:
+	[T] [X] todo 2
+————————————————————————————————————————
+————————————————————————————————————————
+Here are the tasks in your list:
+1.[T] [X] todo 2
+2.[D] [ ] ddl 1  (by: ddl 1 time)
+3.[E] [ ] event 1  (at: event 1 time)
+————————————————————————————————————————
+————————————————————————————————————————
+Bye Alex, hope to see you soon!
+————————————————————————————————————————
