@@ -1,3 +1,4 @@
+import java.text.spi.NumberFormatProvider;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -34,9 +35,11 @@ public class Duke {
                         deadline(input);
                     } else if (input.contains("event")) {
                         event(input);
+                    } else if (input.contains("delete")) {
+                        delete(input);
                     } else {
                         reply("Can type properly pls?");
-//                        manageInput();
+                        manageInput();
                     }
                 } catch(DukeException err) {
                     reply(err.getMessage());
@@ -85,6 +88,10 @@ public class Duke {
             manageInput();
         } catch(StringIndexOutOfBoundsException err) {
             throw new DukeException("can type properly? liddis: 'done taskNumber'");
+        } catch(NumberFormatException err) {
+            throw new DukeException("can enter number only pls? dun anyhow");
+        } catch(ArrayIndexOutOfBoundsException err) {
+            throw new DukeException("you where got so many tasks?");
         }
     }
 
@@ -117,6 +124,22 @@ public class Duke {
             manageInput();
         } catch(StringIndexOutOfBoundsException err) {
             throw new DukeException("this one when ah? can do it liddis or not: 'event task /at when'");
+        }
+    }
+
+    private static void delete(String input) throws DukeException {
+        try {
+            int taskNumber = Integer.parseInt(input.substring(7)) - 1;
+            reply("this one no more liao ah :\n" + list.get(taskNumber).toString()
+                + "\nNow you got " + (list.size() - 1) + " thing(s). sian");
+            list.remove(taskNumber);
+            manageInput();
+        } catch(StringIndexOutOfBoundsException err) {
+            throw new DukeException("what u wan delete?");
+        } catch(NumberFormatException err) {
+            throw new DukeException("can enter number only pls? dun anyhow");
+        } catch(ArrayIndexOutOfBoundsException err) {
+            throw new DukeException("you where got so many tasks?");
         }
     }
 }
