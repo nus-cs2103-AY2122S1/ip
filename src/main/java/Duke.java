@@ -227,10 +227,11 @@ public class Duke {
 
         while (true) {
             // Take in the input
-            String command;
-            System.out.print(COLOR_PURPLE + "> " + COLOR_RESET);
-            command = cmdReader.nextLine().trim();
             try {
+                String command;
+                System.out.print(COLOR_PURPLE + "> " + COLOR_RESET);
+                command = cmdReader.nextLine().trim();
+
                 if (command.isBlank()) {
                     throw new DukeException("The input is blank. Please enter something.");
                 }
