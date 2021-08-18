@@ -34,17 +34,51 @@ public class ChatBot {
         currIndex = 1;
     }
 
+    private boolean checkBye(String str) {
+        boolean isBye = false;
+        if (str.length() >= 3) {
+            isBye = str.equals("bye");
+        }
+        return isBye;
+    }
+
+    private void byeSeq() {
+        System.out.println("See ya again later!");
+    }
+
+    private boolean checkList(String str) {
+        boolean isList = false;
+        if (str.length() >= 4) {
+            isList = str.equals("list");
+        }
+        return isList;
+    }
+
+    private void listSeq() throws InputError {
+        if (lastIndex == 0) {
+            throw new InputError("No items in list");
+        }
+        printList();
+    }
+
     private boolean checkDone(String str) {
         boolean isDone = false;
-        if (str.length() > 3) {
+        if (str.length() >= 4) {
             isDone = str.substring(0,4).equals("done");
         }
         return isDone;
     }
 
-    private void doneSeq(String str) {
-        System.out.println("Good job for this thing done man:");
+    private void doneSeq(String str) throws InputError {
+        if (str.length() == 4) {
+            throw new InputError("No task indicated");
+        }
         int indexNum = Integer.parseInt(str.replaceAll("[^0-9]", ""));
+
+        if (indexNum > lastIndex) {
+            throw new InputError("Invalid Number");
+        }
+        System.out.println("Good job for this thing done man:");
         Task currTask = list.get(indexNum - 1);
         currTask.setComplete();
         System.out.println("   " + currTask.printTask());
@@ -135,24 +169,31 @@ public class ChatBot {
     private void startInput() throws InputError {
         Scanner userInput = new Scanner(System.in);
         String input = userInput.nextLine();
+        boolean byeInput = checkBye(input);
+        boolean listInput = checkList(input);
         boolean doneInput = checkDone(input);
         boolean todoInput = checkToDo(input);
         boolean deadlineInput = checkDeadLine(input);
         boolean eventInput = checkEvent(input);
         boolean deleteInput = checkDelete(input);
 
-        if (input.equals("bye")) {                                          //bye input
-            System.out.println("See ya again later!");
+
+        if (byeInput) {                                          //bye input
+            byeSeq();
             userInput.close();
             return;
-        } else if (input.equals("list")) {                                   //list input
-            if (this.listEmpty()) {                                          //empty list check
-                System.out.println("You haven't added anything yet!");
-            } else {                                                         //non-empty list
-                printList();
+        } else if (listInput) {                                   //list input
+            try {
+                listSeq();
+            } catch (InputError e) {
+                System.out.println("Here is the error boss. " + e);
             }
-        } else if (doneInput) {                                              //done input
-            doneSeq(input);
+        } else if (doneInput) { //done input
+            try {
+                doneSeq(input);
+            } catch (InputError e) {
+                System.out.println("Here is the error boss. " + e);
+            }
         } else if (todoInput) {
             try {
                 todoSeq(input);
