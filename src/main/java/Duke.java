@@ -34,6 +34,8 @@ public class Duke {
                     deadline(input);
                 } else if (input.length() >= 6 && input.substring(0, 6).equals("event ")) {
                     event(input);
+                } else if (input.length() >= 6 && input.substring(0, 7).equals("delete ")) {
+                    delete(input);
                 } else {
                     invalidInput();
                 }
@@ -55,8 +57,8 @@ public class Duke {
 
     public static void done(String doneEntry) throws DukeException {
         int taskNumber = Integer.parseInt(doneEntry.substring(5,6));
-        if (taskNumber > (storage.size() - 1)) {
-            throw new DukeException("Sorry ☹, please enter a valid task to delete!");
+        if (taskNumber > storage.size()) {
+            throw new DukeException("Sorry ☹, please enter a valid task to complete!");
         }
         Task doneTask = storage.get(taskNumber - 1);
         doneTask.markAsDone();
@@ -82,7 +84,6 @@ public class Duke {
         if (indexOfSlash == -1) {
             throw new DukeException("Sorry ☹, please enter a deadline!");
         }
-        System.out.println(indexOfSlash);
         String deadlineDate = deadlineEntry.substring(indexOfSlash + 3);
         String deadlineTitle = deadlineEntry.substring(9, indexOfSlash);
         Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
@@ -109,6 +110,16 @@ public class Duke {
 
     public static void invalidInput() throws DukeException {
         throw new DukeException("Sorry ☹, please enter a valid command!");
+    }
+
+    public static void delete(String deleteInput) throws DukeException {
+        int taskNumber = Integer.parseInt(deleteInput.substring(7,8));
+        if (taskNumber > storage.size()) {
+            throw new DukeException("Sorry ☹, please enter a valid task to delete!");
+        }
+        Task deletedTask = storage.remove(taskNumber - 1);
+        print("Okay! I have deleted the task for you.\n  " + deletedTask.toString()
+                + "\nNow there are " + storage.size() + " tasks in the list");
     }
 
 }
