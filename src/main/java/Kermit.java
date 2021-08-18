@@ -36,9 +36,11 @@ public class Kermit {
         StringBuilder descriptionBuilder = new StringBuilder();
         StringBuilder flagBuilder = new StringBuilder();
 
-        // ArrayList of all valid commands
+        // ArrayList of all valid commands and tasks
         String[] strCommands = {"bye", "list", "done", "deadline", "todo", "event"};
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(strCommands));
+        String[] strTasks = {"deadline", "todo", "event"};
+        ArrayList<String> tasks = new ArrayList<>(Arrays.asList(strTasks));
 
         ToDo list = new ToDo();
 
@@ -75,7 +77,7 @@ public class Kermit {
                 descriptionBuilder.setLength(0);
                 flagBuilder.setLength(0);
 
-                // Get description of task
+                // Get description of task and error check
                 for (int i = 1; i < commandArr.length; i++) {
                     word = commandArr[i];
                     if (i != 1) {
@@ -83,8 +85,12 @@ public class Kermit {
                     }
                     descriptionBuilder.append(word);
                 }
+                description = descriptionBuilder.toString();
+                if (description.equals("") && tasks.contains(command)) {
+                    throw new KermitException("The description of a " + command + " cannot be empty");
+                }
 
-                // Get the flags provided for task
+                // Get the flags provided for task and error check
                 for (int i = 1; i < flagArr.length; i++) {
                     word = flagArr[i];
                     if (i != 1) {
@@ -92,9 +98,17 @@ public class Kermit {
                     }
                     flagBuilder.append(word);
                 }
-
-                description = descriptionBuilder.toString();
                 flagArguments = flagBuilder.toString();
+                // flag arguments for these tasks should not be empty
+                if (flagArguments.equals("")) {
+                    switch (command) {
+                        case "event":
+                            throw new KermitException("Events should be formatted as:\nevent <description> /at <time of event>");
+                        case "deadline":
+                            throw new KermitException("Deadlines should be formatted as:\ndeadline <description> /by <deadline>");
+
+                    }
+                }
 
                 // Quit program
                 switch (command) {
@@ -114,24 +128,12 @@ public class Kermit {
                         break;
                     // Add new todo task
                     case "todo":
-                        if (description.equals("")) {
-                            throw new KermitException("The description of a " + command + " cannot be empty");
-                        }
-
                         Task newToDo = new ToDos(description);
                         list.add(newToDo);
                         System.out.println(formatText(printAddTask(newToDo, list)));
                         break;
                     // Add new deadline task
                     case "deadline":
-                        if (description.equals("")) {
-                            throw new KermitException("The description of a " + command + " cannot be empty");
-                        }
-
-                        // Empty flag arguments for tasks error
-                        if (flagArguments.equals("")) {
-                            throw new KermitException("Deadlines should be formatted as:\ndeadline <description> /by <deadline>");
-                        }
                         Task newDeadline = new Deadline(description, flagArguments);
                         list.add(newDeadline);
                         System.out.println(formatText(printAddTask(newDeadline, list)));
@@ -139,13 +141,6 @@ public class Kermit {
 
                     // Add new event task
                     case "event":
-                        if (description.equals("")) {
-                            throw new KermitException("The description of a " + command + " cannot be empty");
-                        }
-                        // Empty flag arguments for tasks error
-                        if (flagArguments.equals("")) {
-                            throw new KermitException("Events should be formatted as:\nevent <description> /at <time of event>");
-                        }
                         Task newEvent = new Event(description, flagArguments);
                         list.add(newEvent);
                         System.out.println(formatText(printAddTask(newEvent, list)));
