@@ -34,9 +34,9 @@ public class Duke {
 
     private void start(){
         greet();
-        echo();
+        getCommand();
     }
-    private void echo(){;
+    private void getCommand(){;
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
         while (!command.equals("bye")){
@@ -45,6 +45,7 @@ public class Duke {
         }
         exit();
     }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
