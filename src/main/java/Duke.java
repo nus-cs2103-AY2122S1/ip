@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        // Credits to https://manytools.org/hacker-tools/convert-images-to-ascii-art/go/ and Mafumafu Line  stickers
-        String logo = "" +
+        // Credits to https://manytools.org/hacker-tools/convert-images-to-ascii-art/go/ and Mafumafu Line stickers
+        String LOGO = "" +
                 //"                              .......                                                               \n" +
                 //"                       .,*#&@@@@@@@@@@@@@@&*                                                        \n" +
                 //"                                  .,/(%&@&&@@@@@@@@@@@@@@@@@%* .,/(%&@@@@@@@@@@@@&.                 \n" +
@@ -35,12 +36,15 @@ public class Duke {
                 //"                            ...,,,,(@%#&@@@@@@@@@*.,//(@@@@@@@@@@&@@/.,.....                        \n" +
                 //"                            ...,,,.@@@@@@@@@@@@@@/&%%(*@@@@@@@@@@@&@%#&*....                        \n" +
                 "\n";
-        String boxA = "____________________________________________________________\n";
-        String boxB = "|  Cat:  ";
-        String GREET = boxA + boxB + "Meow-ning!\n" + boxA;
-        String EXIT = boxA + boxB + "See you again, meow!\n" + boxA;
+        String BOX_LINE = "____________________________________________________________\n";
+        String BOX_MIDDLE = "|  Cat:  ";
+        String GREET = BOX_LINE + BOX_MIDDLE + "Meow-ning!\n" + BOX_LINE;
+        String EXIT = BOX_LINE + BOX_MIDDLE + "See you again, meow!\n" + BOX_LINE;
 
-        System.out.println(logo + GREET);
+        ArrayList<String> inputList = new ArrayList<>();
+
+
+        System.out.println(LOGO + GREET);
 
         Scanner sc = new Scanner(System.in);
 
@@ -48,7 +52,21 @@ public class Duke {
         String toEcho = "";
         toEcho = sc.nextLine();
         while (!toEcho.equalsIgnoreCase("bye")) {
-            System.out.println(boxA + boxB + toEcho + "\n" + boxA);
+            switch (toEcho) {
+
+                case "list":
+                    System.out.println(BOX_LINE);
+                    for (int i = 0; i < inputList.size(); i++) {
+                        System.out.println((i+1) + ". " + inputList.get(i) + "\n");
+                    }
+                    System.out.println(BOX_LINE);
+                    break;
+
+                default:
+                    System.out.println(BOX_LINE + BOX_MIDDLE + "added: " + toEcho + "\n" + BOX_LINE);
+                    inputList.add((toEcho));        // Add to list if not above commands
+                    break;
+            }
             toEcho = sc.nextLine();
         }
 
