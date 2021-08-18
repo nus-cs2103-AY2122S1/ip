@@ -44,6 +44,6 @@ public class Task {
     @Override
     public String toString() {
         String format = String.format("[%s] ", this.getStatusIcon());
-        return "    " + format + this.name;
+        return format + this.name;
     }
 }
