@@ -3,8 +3,9 @@ import java.util.Scanner;
 public class Duke {
     private final static String GREETING_MSG = "Hello! I'm Duke\nWhat can I do for you?";
     private final static String GOODBYE_MSG = "Bye. Hope to see you again soon!";
-    private final static String ADD_TASK_MSG_TEMPLATE = "Got it. I've added this task:\n\t%s"
-                                                        + "\nNow you have %d tasks in the list.\n";
+    private final static String ADD_TASK_MSG_TEMPLATE = "Got it. I've added this task:\n"
+                                                        + "    %s\n"
+                                                        + "Now you have %d tasks in the list.\n";
     private final static Scanner SCANNER = new Scanner(System.in);
     private final static Task[] tasks = new Task[100];
     private static int numTasks = 0;
