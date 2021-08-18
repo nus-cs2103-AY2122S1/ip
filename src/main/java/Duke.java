@@ -99,6 +99,9 @@ public class Duke {
         System.out.println(sepLineClose);
     }
 
+    private static void unknownCommandEntered() throws DukeExceptionBase {
+        throw new DukeExceptionBase("Please enter something valid!");
+    }
 
     private static void tryAddToTDL(String str, TDLTask.TaskType currTaskType) {
         currTDL.tdlAdd(str, currTaskType);
