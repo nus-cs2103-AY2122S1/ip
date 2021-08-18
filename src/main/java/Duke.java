@@ -3,12 +3,26 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String message = "Hello I'm Duke!\nWhat can I do for you?";
+        MyList toDoList = new MyList();
+
+        String welcomeMessage = "Hello I'm Duke!\nWhat can I do for you?";
+        printMessage(welcomeMessage);
+
         boolean run = true;
         while (run) {
-            printMessage(message);
-            message = sc.nextLine();
-            run = ! message.equals("bye");
+            String command = sc.nextLine();
+            // parse command
+            if (command.equals("bye")) {
+                run = false;
+            } else {
+                switch (command) {
+                case "list":
+                    printMessage(toDoList.getAllItems());
+                    break;
+                default:
+                    printMessage(toDoList.addItem(command));
+                }
+            }
         }
         printMessage("Goodbye for now!");
     }
