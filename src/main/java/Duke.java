@@ -10,7 +10,8 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         String input = scanner.nextLine();
-        Scanner checkForKeyword = new Scanner(input);
+        Scanner inputScanner = new Scanner(input);
+        String checkForKeyword = inputScanner.next();
 
         while(!input.equals("bye")){
             if(input.equals("list")){
@@ -19,20 +20,30 @@ public class Duke {
                     if(list[i] == null){
                         break;
                     }else {
-                        String cross = list[i].isComplete()?"X":" ";
                         System.out.println((i + 1) + "." + list[i]);
                     }
                 }
-            }else if(checkForKeyword.next().equals("done")){
+            }else if(checkForKeyword.equals("done")){
                 try {
-                    int taskToComplete = checkForKeyword.nextInt() - 1;
+                    int taskToComplete = inputScanner.nextInt() - 1;
                     list[taskToComplete].markComplete();
                     System.out.println("Nice! I've marked this task as done:\n " + list[taskToComplete]);
 
                 }catch(Exception e){
-                    System.out.println(e);
+                    System.out.println("woops");
                 }
             }
+            else if(checkForKeyword.equals("todo")){
+//                System.out.println(input);
+                //String secondWord = input.substring(input.indexOf(" "));
+                //System.out.println(secondWord);
+            }
+//            else if(checkForKeyword.next().equals("deadline")){
+//
+//            }
+//            else if(checkForKeyword.next().equals("event")){
+//
+//            }
             else{
                 if(counter == 100){
                     System.out.println("Max limit of list hit");
@@ -45,7 +56,8 @@ public class Duke {
                 }
             }
             input = scanner.nextLine();
-            checkForKeyword = new Scanner(input);
+            inputScanner = new Scanner(input);
+            checkForKeyword = inputScanner.next();
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
