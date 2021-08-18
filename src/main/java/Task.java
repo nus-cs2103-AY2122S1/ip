@@ -1,17 +1,17 @@
-public class Task {
+class Task {
     protected String content;
-    protected boolean done;
-    public Task(String content) {
+    protected boolean isDone;
+    Task(String content) {
         this.content = content;
-        this.done = false;
+        this.isDone = false;
     }
 
-    public void finishTask() {
-        this.done = true;
+    public void setDone() {
+        this.isDone = true;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", done ? "X":" ", this.content);
+        return String.format("[%s] %s", isDone ? "X":" ", this.content);
     }
 }

@@ -1,5 +1,6 @@
-import java.util.*;
-
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,10 +12,10 @@ public class Duke {
         while(!input.equals("bye")) {
             if (input.equals("list")) {
                 System.out.println(printList(lst));
-            } else if (input.substring(0,Math.min(input.length(),5)).equals("done ")) {
+            } else if (input.substring(0,Math.min(input.length(), 5)).equals("done ")) {
                 String index = input.split(" ", 2)[1];
                 System.out.println(doTask(index, lst));
-            } else if (input.substring(0,Math.min(input.length(),7)).equals("delete ")) {
+            } else if (input.substring(0,Math.min(input.length(), 7)).equals("delete ")) {
                 String index = input.split(" ", 2)[1];
                 System.out.println(deleteTask(index, lst));
             } else {
@@ -58,7 +59,7 @@ public class Duke {
         s.append("    ____________________________________________________________\n");
         s.append("    Nice! I've marked this task as done: \n");
 
-        lst.get(idx - 1).finishTask();
+        lst.get(idx - 1).setDone();
         s.append("       " + lst.get(idx - 1).toString() + "\n");
 
         s.append("    ____________________________________________________________\n");
