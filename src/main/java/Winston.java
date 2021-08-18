@@ -15,6 +15,11 @@ public class Winston {
         list = new ArrayList<>();
     }
 
+    /**
+     *  Adds a task to the arraylist
+     *  
+     * @param task An Object of type Task to be added to the Arraylist
+     */
     private void addTask(Task task) {
         list.add(task);
     }
@@ -27,11 +32,22 @@ public class Winston {
     public void markTask(Integer position) {
         list.get(position - 1).setComplete();
     }
-    
+
+    /**
+     * Removing a Task from the arraylist based on position
+     * 
+     * @param position the position of the Task to be removed from the arraylist
+     * Note: position will be (index of item in array list + 1)
+     */
     public void deleteTask(Integer position) {
         list.remove(position - 1);
     }
-    
+
+    /**
+     * Number of tasks left to be completed
+     * 
+     * @return the number of tasks left in the list that are not completed
+     */
     public int size() {
         int counter = 0;
         for (Task task : list) {
