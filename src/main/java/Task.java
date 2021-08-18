@@ -9,7 +9,10 @@ public class Task {
     String desc;
     boolean isDone;
 
-    Task(String desc) {
+    Task(String desc) throws EmptyDescException {
+        if (desc.isBlank()) {
+            throw new EmptyDescException();
+        }
         this.desc = desc;
         this.isDone = false;
     }
