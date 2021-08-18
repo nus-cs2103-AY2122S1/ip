@@ -29,7 +29,7 @@ public class Duke {
                 int i = Integer.parseInt(String.valueOf(itemIndex)) - 1;
                 if (i < index) {
                     listOfItems[i].markAsDone();
-                    System.out.println("Nice! I've marked this task as done:\n\t" +
+                    System.out.println("\tNice! I've marked this task as done:\n\t\t" +
                           listOfItems[i].toString());
                 } else {
                     System.out.println("\tNo task found or invalid input!");
@@ -40,15 +40,18 @@ public class Duke {
             }
             else {
                 if (input.contains("todo")) {
-                    listOfItems[index] = new Todo(input);
+                    int firstIndexAfterDeadline = 5;
+                    listOfItems[index] = new Todo(input.substring(firstIndexAfterDeadline));
                 } else if (input.contains("deadline")) {
+                    int firstIndexAfterDeadline = 9;
                     int i = input.indexOf('/');
                     String deadline = input.substring(i + 1, input.length() - 1+1);
-                    listOfItems[index] = new Deadline(input.substring(0, i), deadline);
+                    listOfItems[index] = new Deadline(input.substring(firstIndexAfterDeadline, i), deadline);
                 } else if (input.contains("event")) {
+                    int firstIndexAfterDeadline = 6;
                     int i = input.indexOf('/');
                     String deadline = input.substring(i + 1, input.length() - 1+1);
-                    listOfItems[index] = new Event(input.substring(0, i), deadline);
+                    listOfItems[index] = new Event(input.substring(firstIndexAfterDeadline, i), deadline);
                 } else {
                     listOfItems[index] = new Task(input);
                 }
