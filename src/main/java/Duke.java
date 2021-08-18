@@ -14,7 +14,7 @@ public class Duke {
 
     /**
      * Greets the user as well as reads user's inputs with a scanner
-     * terminates if user has given the correct keyword
+     * calls the 'chat' method to respond accordingly
      *
      * @param args the command-line argument for the program to execute
      */
@@ -34,87 +34,145 @@ public class Duke {
             String currentLine = sc.nextLine();
             System.out.println(currentLine);
             System.out.println(separator);
-            String message = chat(currentLine);
-            if (!message.equals("")) {
-                System.out.println("     " + message);
-            }
+            chat(currentLine);
             System.out.println(separator);
-            if (message.equals("Bye. Hope to see you again soon!")){
-                System.exit(0);
-            }
         }
-        System.exit(0);
+    }
+
+    public enum Command{
+        TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE
     }
 
     /**
      * To determine the appropriate response from input command
+     * by verifying if a valid command has been keyed
      *
-     * @param s input commands that is read by scanner in 'main'
-     * @return the corresponding response message as a String
+     * @param s input words that is read by scanner in 'main'
      */
-    public static String chat(String s) {
+    public static void chat(String s) {
         String check = s.replaceAll(" ", "");
         String[] words = s.split(" ");
         if (check.equalsIgnoreCase("bye")) {
-            return "Bye. Hope to see you again soon!";
+            Command c = Command.BYE;
+            doSomething(c, "");
         } else if (check.equalsIgnoreCase("list")) {
-            getList();
-            return "";
+            Command c = Command.LIST;
+            doSomething(c, "");
         } else if (words[0].equalsIgnoreCase("done")) {
-            try {
-                if (words.length == 1) {
-                    System.out.println("     Note: 'list' can be used to see the current tasks.");
-                    throw new IllegalArgumentException("Please input index :)");
-                }
-                int index = Integer.parseInt(words[1]) - 1;
-                tasks.get(index).setIsDone();
-                if (index >= tasks.size() || index < 0) {
-                    throw new IllegalArgumentException("No such index. Please input correct index, no such index :(");
-                }
-            } catch (IndexOutOfBoundsException e) {
+            Command c = Command.DONE;
+            doSomething(c, s);
+        } else if (words[0].equalsIgnoreCase("delete")) {
+            Command c = Command.DELETE;
+            doSomething(c, s);
+        } else if (words[0].equalsIgnoreCase("todo")) {
+            Command c = Command.TODO;
+            doSomething(c, s);
+        } else if (words[0].equalsIgnoreCase("deadline")) {
+            Command c = Command.DEADLINE;
+            doSomething(c, s);
+        } else if (words[0].equalsIgnoreCase("event")) {
+            Command c = Command.EVENT;
+            doSomething(c, s);
+        } else {
+            System.out.println("     Invalid input :(");
+            helperMessage();
+        }
+    }
+
+    /**
+     * The key method that calls other relevant methods
+     * depending on instructions as per input by user
+     * @param c the command specific to a certain sequence of method calls
+     * @param doWhat the user's input
+     */
+    public static void doSomething(Command c, String doWhat) {
+        switch (c) {
+            case BYE:
+                System.out.println("     Bye. Hope to see you again soon!");
+                System.exit(0);
+                break;
+            case LIST:
+                getList();
+                break;
+            case DONE:
+                String[] words = doWhat.split(" ");
+                try {
+                    if (words.length == 1) {
+                        throw new IllegalArgumentException("Please input index :)");
+                    }
+                    int index = Integer.parseInt(words[1]) - 1;
+                    tasks.get(index).setIsDone();
+                    if (index >= tasks.size() || index < 0) {
+                        throw new IllegalArgumentException("No such index. Please input correct index, no such index :(");
+                    }
+                } catch (IndexOutOfBoundsException e) {
                     System.out.println("     Please input a valid index :)");
                     System.out.println("     Note: 'list' can be used to see the current tasks.");
-            } catch (NumberFormatException e) {
-                System.out.println("     Please use a number instead :(");
-            } catch (IllegalArgumentException e) {
-                System.out.println("     " + e.getMessage());
-            }
-            return "";
-        } else if (words[0].equalsIgnoreCase("delete")) {
-            if (words.length == 1) {
-                System.out.println("     Unable to delete task without an index. Please input index :)");
-                System.out.println("     Please input in the form: 'delete <task index>'.");
-                System.out.println("     Note: 'list' can be used to see the current tasks.");
-            } else {
-                if (tasks.isEmpty() || tasks == null) {
-                    System.out.println("     List is empty, no tasks to delete, looking good!");
-                } else {
-                    try {
-                        int index = Integer.parseInt(words[1]) - 1;
-                        deleteTask(index);
-                    } catch (NumberFormatException e) {
-                        System.out.println("     Please use a number instead :(");
-                    }
-
-                }
-            }
-            return "";
-        } else {
-            try {
-                createTask(words);
-            } catch (IllegalArgumentException e) {
-                if (e.getMessage().equals("deadline")) {
-                    System.out.println("     Invalid input :(");
-                    System.out.println("     Please input in the form: 'deadline <Name> /by <Date>'.");
-                } else if (e.getMessage().equals("event")) {
-                    System.out.println("     Invalid input :(");
-                    System.out.println("     Please input in the form: 'event <Name> /at <Date>'.");
-                } else {
+                } catch (NumberFormatException e) {
+                    System.out.println("     Please use a number instead :(");
+                } catch (IllegalArgumentException e) {
                     System.out.println("     " + e.getMessage());
-                    helperMessage();
                 }
-            }
-            return "";
+                break;
+            case DELETE:
+                String[] which = doWhat.split(" ");
+                if (which.length == 1) {
+                    System.out.println("     Unable to delete task without an index. Please input index :)");
+                    System.out.println("     Please input in the form: 'delete <task index>'.");
+                    System.out.println("     Note: list can be used to see the current tasks.");
+                } else {
+                    if (tasks.isEmpty() || tasks == null) {
+                        System.out.println("     List is empty, no tasks to delete, looking good!");
+                    } else {
+                        try {
+                            int index = Integer.parseInt(which[1]) - 1;
+                            deleteTask(index);
+                        } catch (NumberFormatException e) {
+                            System.out.println("     Please use a number instead :(");
+                        }
+
+                    }
+                }
+                break;
+            case TODO:
+                String[] toDoWhat = doWhat.split(" ");
+                if (toDoWhat.length < 2) {
+                    System.out.println("     Oops, you have left out the task description for todo!");
+                } else {
+                    ToDo t = new ToDo(filterInfo(toDoWhat));
+                    addTask(t);
+                }
+                break;
+            case DEADLINE:
+                String[] deadlineDoWhat = doWhat.split(" ");
+                try {
+                    Deadline d = new Deadline(filterInfo(deadlineDoWhat), lookForDeadline(deadlineDoWhat));
+                    addTask(d);
+                } catch (IllegalArgumentException e) {
+                    if (e.getMessage().equals("deadline")) {
+                        System.out.println("     Invalid input :(");
+                        System.out.println("     Please input in the form: 'deadline <Name> /by <Date>'.");
+                    } else {
+                        System.out.println("     " + e.getMessage());
+                        System.out.println("     Hey, no deadline recorded does not mean no deadline >:(");
+                    }
+                }
+                break;
+            case EVENT:
+                String[] whatEvent = doWhat.split(" ");
+                try {
+                    Event d = new Event(filterInfo(whatEvent), searchForEventDay(whatEvent));
+                    addTask(d);
+                } catch (IllegalArgumentException e) {
+                    if (e.getMessage().equals("event")) {
+                        System.out.println("     Invalid input :(");
+                        System.out.println("     Please input in the form: 'event <Name> /at <Date>'.");
+                    } else {
+                        System.out.println("     " + e.getMessage());
+                        System.out.println("     I can't add an event without a date!");
+                    }
+                }
+                break;
         }
     }
 
@@ -128,57 +186,19 @@ public class Duke {
         Task t = tasks.remove(ind);
         System.out.println("     Noted, the following task has been deleted: ");
         System.out.println("       " + t.getType() + "[" + t.getStatus() + "] " + t.getTask());
-        System.out.println("     Nice! there are " + tasks.size() + " tasks left." );
-    }
-
-    /**
-     * To create a Task object that may be ToDO, Deadline or Event
-     * depending on user's input, before adding it to the list of tasks
-     *
-     * @param args the String array representation of the input by user
-     */
-    public static void createTask(String[] args) {
-        if (args.length < 2) {
-            if (!args[0].equalsIgnoreCase("todo") && !args[0].equalsIgnoreCase("deadline")
-            && !args[0].equalsIgnoreCase("event")) {
-                System.out.println("     Invalid input :(");
-            } else {
-                if (args[0].equalsIgnoreCase("todo")) {
-                    System.out.println("     Oops, you have left out the task description for todo!");
-                }
-                if (args[0].equalsIgnoreCase("deadline")) {
-                    System.out.println("     Hey, no deadline recorded does not mean no deadline >:(");
-                }
-                if (args[0].equalsIgnoreCase("event")) {
-                    System.out.println("     I can't add an event without a date!");
-                }
-            }
-            helperMessage();
-
-        } else if (args[0].equalsIgnoreCase("todo")) {
-            ToDo t = new ToDo(filterInfo(args));
-            addTask(t);
-        } else if (args[0].equalsIgnoreCase("deadline")) {
-            Deadline d = new Deadline(filterInfo(args), lookForDeadline(args));
-            addTask(d);
-        } else if (args[0].equalsIgnoreCase("event")) {
-            Event d = new Event(filterInfo(args), searchForEventDay(args));
-            addTask(d);
-        } else {
-            helperMessage();
-        }
+        System.out.println("     Nice! there are " + tasks.size() + " task(s) left." );
     }
 
     /**
      * To display commands to help user with input as much as possible
      */
     public static void helperMessage() {
-        System.out.println("     Types of tasks: 'todo', 'deadline', 'event'.");
-        System.out.println("     If you wish to add a task: " +
-                " Please input in the form: '<Type of Task> <Name of Task>'" +
+        System.out.println("     Types of tasks: 'todo', 'deadline', 'event'");
+        System.out.println("     If you wish to add a task," +
+                " please input in the form: '<Type of Task> <Name of Task>'" +
                 " and include keyword '/at' OR '/by' followed by <Date> if relevant.");
-        System.out.println("     If you wish to delete a task:"
-                + " Please input in the form: 'delete <task index>'.");
+        System.out.println("     If you wish to delete a task, "
+                + "please input in the form: 'delete <task index>'.");
         System.out.println("     If you wish to see the current tasks, please input 'list'.");
         System.out.println("     If you wish to mark a task as done, please input 'done <task index>.'");
         System.out.println("     If you wish to terminate the program, please input 'bye'.");
@@ -239,7 +259,7 @@ public class Duke {
         for (int i = 1; i < arg.length; i++) {
             if (arg[i].equals("/by")) {
                 if  (i + 1 >= arg.length) {
-                    throw new IllegalArgumentException("Uh oh, due-date is missing :(");
+                    throw new IllegalArgumentException("Uh oh, deadline is missing :(");
                 } else {
                     return getDate(arg, i + 1);
                 }
@@ -291,7 +311,7 @@ public class Duke {
                 System.out.println("     " + (i + 1) + "." + tasks.get(i).getType() + "[" + tasks.get(i).getStatus() + "] "
                         + tasks.get(i).getTask());
             }
-            System.out.println("     There are " + tasks.size() + " tasks now, keep up!");
+            System.out.println("     There are " + tasks.size() + " task(s) now, keep up!");
         } else {
             System.out.println("     There are no items in your list, keep adding them!");
         }
@@ -492,3 +512,4 @@ public class Duke {
         }
     }
 }
+
