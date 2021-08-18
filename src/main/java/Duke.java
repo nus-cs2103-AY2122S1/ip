@@ -69,6 +69,7 @@ public class Duke {
         printHorizLine();
         System.out.println("Got it. I've added this task:");
         System.out.println("\t" + task);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         printHorizLine();
     }
 
