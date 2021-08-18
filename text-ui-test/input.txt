@@ -1,0 +1,16 @@
+test adding a task
+list
+deadline test adding a deadline /by today
+list
+event test adding an event /at 11.15am monday 16/08/21
+list
+todo test adding a todo
+list
+done 1
+list
+done 4
+list
+done 2
+done 3
+list
+bye
