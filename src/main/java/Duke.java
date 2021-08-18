@@ -77,7 +77,7 @@ public class Duke {
 
             if (instruction[0].equals("deadline")) {
                 try {
-                    newToDo(instruction[1], taskList);
+                    newDeadline(instruction[1], taskList);
                 } catch (ArrayIndexOutOfBoundsException a) {
                     System.out.println("    ____________________________________________________________\n"
                             + "     " + "\uD83D\uDE41" + " OOPS!!! The description of a deadline cannot be empty.\n"
@@ -88,7 +88,7 @@ public class Duke {
             }
             if (instruction[0].equals("event")) {
                 try {
-                    newToDo(instruction[1], taskList);
+                    newEvent(instruction[1], taskList);
                 } catch (ArrayIndexOutOfBoundsException a) {
                     System.out.println("    ____________________________________________________________\n"
                             + "     " + "\uD83D\uDE41" + " OOPS!!! The description of an event cannot be empty.\n"
@@ -98,11 +98,30 @@ public class Duke {
                 continue;
             }
 
+            if (instruction[0].equals("delete")) {
+                try{
+                    int deleteIndex = Integer.parseInt(instruction[1]);
+                    taskList.deleteTask(deleteIndex);
+                } catch (IndexOutOfBoundsException i){
+                    System.out.println("    ____________________________________________________________\n"
+                            + "     " + "\uD83D\uDE41" + " OOPS!!! Please enter a valid item number.\n"
+                            + "    ____________________________________________________________");
+                }
+                input = sc.nextLine();
+                continue;
+            }
+
             if (instruction[0].equals("done")) {
-                int taskIndex = Integer.parseInt(instruction[1]);
-                Task taskItem = taskList.extractTask(taskIndex - 1);
-                taskItem.isDone();
-                System.out.println(taskItem.taskDone());
+                try{
+                    int doneIndex = Integer.parseInt(instruction[1]);
+                    Task taskItem = taskList.extractTask(doneIndex - 1);
+                    taskItem.isDone();
+                    System.out.println(taskItem.taskDone());
+                } catch (IndexOutOfBoundsException i){
+                    System.out.println("    ____________________________________________________________\n"
+                            + "     " + "\uD83D\uDE41" + " OOPS!!! Please enter a valid item number.\n"
+                            + "    ____________________________________________________________");
+                }
                 input = sc.nextLine();
                 continue;
             }
