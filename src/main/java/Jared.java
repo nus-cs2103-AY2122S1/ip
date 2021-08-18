@@ -59,12 +59,28 @@ public class Jared {
             taskNum = Integer.valueOf(next.split(" ", 2)[1]);
             currTask = history.get(taskNum-1);
         } catch (Exception e) {
-            throw new DukeException("Invalid task number provided");
+            throw new DukeException("Invalid task number provided.");
         }
         currTask.markDone();
         String res = String.format("Nice! I've marked this task as done:\n%s",
                 currTask.toString());
         System.out.println(res);
+    }
+
+    private static void delete(String next) throws DukeException {
+        int taskNum;
+        Task currTask;
+        int index;
+        try {
+            taskNum = Integer.valueOf(next.split(" ", 2)[1]);
+            index = taskNum - 1;
+            currTask = history.get(index);
+        } catch (Exception e) {
+            throw new DukeException("Invalid task number provided.");
+        }
+        history.remove(index);
+        System.out.println(String.format("Noted. I've removed this task:\n" +
+                "%s\nNow you have %d tasks in the list.", currTask.toString(), history.size()));
     }
 
     /**
@@ -91,6 +107,8 @@ public class Jared {
                     list();
                 } else if (command.equals("done")) {
                     done(next);
+                } else if (command.equals("delete")) {
+                    delete(next);
                 } else {
                     add(command, next);
                 }
