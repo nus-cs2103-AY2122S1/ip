@@ -16,14 +16,16 @@ public class TaskListMessage extends Message {
     }
 
     private String generateListMessageText(List<Task> tasks) {
-        StringBuilder listMessageText = new StringBuilder();
+        StringBuilder listMessageBuilder = new StringBuilder();
+        listMessageBuilder.append(MessageConstants.TASK_LIST_HEADER);
+        listMessageBuilder.append("\n");
         for (int index = 0; index < tasks.size(); index++) {
             if (index != 0) {
-                listMessageText.append("\n");
+                listMessageBuilder.append("\n");
             }
-            listMessageText.append(index + 1).append(".")
+            listMessageBuilder.append(index + 1).append(".")
                     .append(tasks.get(index).toString());
         }
-        return listMessageText.toString();
+        return listMessageBuilder.toString();
     }
 }

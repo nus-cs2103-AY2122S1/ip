@@ -9,6 +9,6 @@ import tasks.Task;
  */
 public class TaskDoneMessage extends Message{
     public TaskDoneMessage(Task task) {
-        super(MessageConstants.TASK_DONE_HEADER + "\n" + task.toString());
+        super(MessageConstants.TASK_DONE_HEADER + "\n\t" + task.toString());
     }
 }

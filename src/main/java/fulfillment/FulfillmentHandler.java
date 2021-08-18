@@ -3,10 +3,12 @@ package fulfillment;
 import io.InputHandler;
 import io.OutputHandler;
 import messages.*;
+import tasks.Deadline;
+import tasks.Event;
 import tasks.Task;
+import tasks.ToDo;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * Handles commands from user.
@@ -44,6 +46,15 @@ public class FulfillmentHandler {
                 case "list":
                     handleTaskList();
                     break;
+                case "todo":
+                    handleTaskAdd(new ToDo(userInputBody));
+                    break;
+                case "deadline":
+                    handleTaskAdd(new Deadline(userInputBody));
+                    break;
+                case "event":
+                    handleTaskAdd(new Event(userInputBody));
+                    break;
                 case "done":
                     handleTaskDone(userInputBody);
                     break;
@@ -51,7 +62,7 @@ public class FulfillmentHandler {
                     handleBye();
                     return;
                 default:
-                    handleTaskAdd(userInput);
+                    handleTaskAdd(new Task(userInput));
             }
         }
     }
@@ -68,9 +79,10 @@ public class FulfillmentHandler {
         outputHandler.writeMessage(new TaskListMessage(Task.getAllTasks()));
     }
 
-    private void handleTaskAdd(String taskText) {
-        Task.addTask(new Task(taskText));
-        outputHandler.writeMessage(new TaskAddMessage(taskText));
+    private void handleTaskAdd(Task task) {
+        Task addedTask = Task.addTask(task);
+        outputHandler.writeMessage(new TaskAddMessage(addedTask.toString(),
+                Task.getNumOfTasks()));
     }
 
     private void handleTaskDone(String userInputBody) {

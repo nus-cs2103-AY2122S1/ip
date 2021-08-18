@@ -6,7 +6,13 @@ package messages;
  * @author kevin9foong
  */
 public class TaskAddMessage extends Message {
-    public TaskAddMessage(String taskText) {
-        super(MessageConstants.TASK_ADD_HEADER + taskText);
+    public TaskAddMessage(String taskText, int numOfTasks) {
+        super(MessageConstants.TASK_ADD_HEADER
+                + "\n\t"
+                + taskText
+                + "\nNow you have "
+                + numOfTasks
+                + (numOfTasks == 1 ? " task " : " tasks ")
+                + "in the list.");
     }
 }

@@ -9,12 +9,14 @@ import java.util.ArrayList;
  * @author kevin9foong
  */
 public class Task {
-    private final String taskText;
+    private String description;
     private boolean isDone = false;
     private static final ArrayList<Task> taskList = new ArrayList<>();
 
-    public Task(String taskText) {
-        this.taskText = taskText;
+    public Task() {}
+
+    public Task(String description) {
+        this.description = description;
     }
 
     /**
@@ -30,8 +32,9 @@ public class Task {
      * Adds a new task to the taskList.
      * @param task task to be added
      */
-    public static void addTask(Task task) {
+    public static Task addTask(Task task) {
         taskList.add(task);
+        return task;
     }
 
     /**
@@ -43,10 +46,25 @@ public class Task {
     }
 
     /**
+     * Gets the number of tasks in the taskList.
+     * @return int representing number of tasks in the taskList
+     */
+    public static int getNumOfTasks() {
+        return taskList.size();
+    }
+
+    /**
      * Marks task as done.
      */
     public void setDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Set description of task.
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     private String getStatusIcon() {
@@ -55,6 +73,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.taskText;
+        return "[" + getStatusIcon() + "] " + this.description;
     }
 }
