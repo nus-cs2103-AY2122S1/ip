@@ -1,4 +1,4 @@
-public class DukeException extends StringIndexOutOfBoundsException{
+public class DukeException extends Exception{
 
     protected enum ErrorType{
         EMPTY_DESCRIPTION,
