@@ -1,38 +1,25 @@
-import java.util.Scanner;
-
 public class Event {
-    private Scanner input;
     private String command;
     private String message;
 
     /**
-     * Constructor of the class `Processor`.
+     * Constructor of the class `Event`.
      */
-    public Event() {
-        this.input = new Scanner(System.in);
+    public Event(String command) {
+        this.command = command;
     }
 
     /**
      * Reads and processes a command, updates the message to be printed.
-     * Returns whether the program should continue to run.
-     *
-     * @return A boolean representing whether the program should continue to run.
      */
-    public boolean process() {
-        this.command = this.input.nextLine();
-        if (this.command.equals("bye")) {
-            this.message = Duke.EXITING_MESSAGE;
-            return false;
-        } else {
-            this.message = this.command;
-            return true;
-        }
+    public void process() {
+        this.message = this.command;
     }
 
     /**
-     * Returns a command's result as a string.
+     * Returns the event's processed result as a string.
      *
-     * @return String representation of the result of processing a command.
+     * @return String representation of the result of processing an event.
      */
     @Override
     public String toString() {
