@@ -12,13 +12,13 @@ public class Duke {
             String words[] = input.split(" ");
             if(input.equals("list")){
                 for(int i = 0; i < store.size(); i++){
-                    System.out.println((i + 1) + "." + "[" + store.get(i).getStatusIcon() + "] "
-                            + store.get(i).getDescription());
+                    System.out.println((i + 1) + "." + store.get(i).toString());
                 }
             } else if(words[0].equals("done")){
                 int textNumber = Integer.parseInt(words[1]);
                 store.get(textNumber - 1).done();
-                System.out.println("Nice! I've marked this task as done:\n" + "[" + store.get(textNumber - 1).getStatusIcon() + "] " + store.get(textNumber - 1).getDescription());
+                System.out.println("Nice! I've marked this task as done:\n"
+                        + store.get(textNumber - 1).toString());
             } else {
                 store.add(new Task(input));
                 System.out.println("added: " + input);
