@@ -19,13 +19,14 @@ public class Recieve {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
-            else if (input.startsWith("done ") && input.length() >= 6) {
+            else if (input.startsWith("done ") && input.length() >= 6 && Character.isDigit(input.charAt(5))) {
+                //check 1x ? done x? done 2x?
                 int pos = Integer.parseInt(input.substring(5)) - 1;
 
                 if (pos < index - 1) {
                     inputs[pos].markAsDone();
                     System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(inputs[pos].getStatusIcon() + inputs[pos].description);
+                    System.out.println(inputs[pos].toString());
                 }
                 else {
                     System.out.println("There are only " + pos + " tasks!");
@@ -34,14 +35,43 @@ public class Recieve {
             else if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for(int i = 1; i < index; i++) {
-                    System.out.println(i + "." + inputs[i - 1].getStatusIcon() + inputs[i - 1].description);
+                    System.out.println(i + "." + inputs[i-1].toString());
                 }
             }
             else {
-                Task task = new Task(input);
-                inputs[index - 1] = task;
-                index++;
-                System.out.println("added: " + this.input);
+                if (input.startsWith("todo ") && input.length() >= 6) {
+                    Todo task = new Todo(input.substring(5));
+                    inputs[index - 1] = task;
+                    index++;
+
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(task.toString());
+                    System.out.println("Now you have " + (index - 1) + " tasks in the list.");
+
+                }
+                else if (input.startsWith("deadline ") && input.length() >= 10) {
+                    String[] spl = input.substring(9).split("/");
+                    Deadline task = new Deadline(spl[0], spl[1].substring(3));
+                    inputs[index - 1] = task;
+                    index++;
+
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(task.toString());
+                    System.out.println("Now you have " + (index - 1) + " tasks in the list.");
+
+                }
+                else if (input.startsWith("event ") && input.length() >= 7) {
+                    String[] spl = input.substring(6).split("/");
+                    Event task = new Event(spl[0], spl[1].substring(3));
+                    inputs[index - 1] = task;
+                    index++;
+
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(task.toString());
+                    System.out.println("Now you have " + (index - 1) + " tasks in the list.");
+
+                }
+                else {}
             }
         }
         sc.close();
