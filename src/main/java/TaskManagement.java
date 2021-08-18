@@ -35,6 +35,9 @@ public class TaskManagement {
     }
 
     public void markTaskAsDone(int index) {
+        if (index < 0 || index >= tasks.size()) {
+            throw new DukeException("Task number: " + (index + 1) + " does not exist.");
+        }
         Task temp = tasks.get(index);
         temp.markAsDone();
         tasks.set(index, temp);

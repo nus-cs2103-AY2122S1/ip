@@ -65,5 +65,20 @@ Hello from
     OOPS!!! I'm sorry, but I don't know what that means :-(
   -----------------------
   -----------------------
+    OOPS!!! A number must be given to specified the task.
+  -----------------------
+  -----------------------
+    OOPS!!! The description of a todo cannot be empty.
+  -----------------------
+  -----------------------
+    OOPS!!! Task number: 7 does not exist.
+  -----------------------
+  -----------------------
+    OOPS!!! /at is needed to specified the time.
+  -----------------------
+  -----------------------
+    OOPS!!! The description of a deadline cannot be empty.
+  -----------------------
+  -----------------------
     Bye. Hope to see you again soon!
   -----------------------
