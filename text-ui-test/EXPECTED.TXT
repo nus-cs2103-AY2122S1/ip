@@ -15,10 +15,12 @@ Here are the tasks in your list:
  1. [T][X] read book
  2. [D][ ] post-lecture quiz (by: Fri 12pm)
  3. [E][ ] welcome tea (at: Sun 8-9pm)
+☹ OOPS!!! I'm sorry, but I don't know what that means (X_X)
 Please enter one of the following commands:
  todo <task>
  deadline <task> /by <deadline>
  event <event> /at <date time>
  list
  bye(to quit)
+☹ OOPS!!! The description of a todo cannot be empty.
 Bye! Feel free to ask me for help again anytime!
