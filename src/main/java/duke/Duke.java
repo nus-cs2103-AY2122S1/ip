@@ -1,11 +1,12 @@
+package duke;
+import duke.command.Command;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 import java.io.IOException;
 
 public class Duke {
     private static TaskList tasklist;
     private static Ui ui;
-    private Storage storage;
+    private static Storage storage;
 
     public Duke(String filePath) {
         ui = new Ui();

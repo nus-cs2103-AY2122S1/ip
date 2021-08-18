@@ -1,6 +1,11 @@
+package duke.command;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.task.*;
 import java.time.LocalDate;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private final String type;
     private final String label;
     private LocalDate date;

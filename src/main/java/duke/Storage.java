@@ -1,3 +1,4 @@
+package duke;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -7,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import duke.task.*;
 
 public class Storage {
     BufferedWriter writer;
