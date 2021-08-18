@@ -62,6 +62,9 @@ public class FulfillmentHandler {
                     case "done":
                         handleTaskDone(userInputBody);
                         break;
+                    case "delete":
+                        handleTaskDelete(userInputBody);
+                        break;
                     case "bye":
                         handleBye();
                         return;
@@ -99,6 +102,17 @@ public class FulfillmentHandler {
             Task doneTask = Task.getTask(index);
             doneTask.setDone();
             outputHandler.writeMessage(new TaskDoneMessage(doneTask));
+        } catch (NumberFormatException nfe) {
+            outputHandler.writeMessage(new Message(MessageConstants.INVALID_INTEGER_MESSAGE));
+        }
+    }
+
+    private void handleTaskDelete(String userInputBody) throws InvalidTaskNumberException {
+        try {
+            // user input is 1 greater than index.
+            int index = Integer.parseInt(userInputBody) - 1;
+            Task deletedTask = Task.deleteTask(index);
+            outputHandler.writeMessage(new TaskDeleteMessage(deletedTask.toString(), Task.getNumOfTasks()));
         } catch (NumberFormatException nfe) {
             outputHandler.writeMessage(new Message(MessageConstants.INVALID_INTEGER_MESSAGE));
         }

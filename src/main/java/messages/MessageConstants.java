@@ -14,6 +14,7 @@ public class MessageConstants {
     public static final String TASK_ADD_HEADER = "Got it. I've added this task:\n\t";
     public static final String TASK_DONE_HEADER = "Nice! I've marked this task as done:";
     public static final String TASK_LIST_HEADER = "Here are the tasks in your list:";
+    public static final String TASK_DELETE_HEADER = "Noted. I've removed this task:\n\t";
 
     public static final String INVALID_COMMAND_MESSAGE =
             "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";

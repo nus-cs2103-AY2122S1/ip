@@ -3,7 +3,7 @@ package io;
 import messages.Message;
 
 /**
- * Class handles writing to output source.
+ * Class handles writing to output destination.
  *
  * @author kevin9foong
  */

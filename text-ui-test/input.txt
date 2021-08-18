@@ -1,3 +1,22 @@
+list
+todo xyz
+list
+delete 0
+list
+delete 1
+list
+deadline x /by z
+list
+event y /at z
+list
+todo 111
+list
+delete 3
+list
+delete 1
+list
+delete 1
+list
 test adding a task
 list
 deadline test adding a deadline /by today

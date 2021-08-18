@@ -43,6 +43,18 @@ public class Task {
     }
 
     /**
+     * Deletes task associated with given index number
+     * @param index index of task to delete
+     * @return deleted task
+     */
+    public static Task deleteTask(int index) throws InvalidTaskNumberException {
+        if (index < 0 || index >= taskList.size()) {
+            throw new InvalidTaskNumberException();
+        }
+        return taskList.remove(index);
+    }
+
+    /**
      * Retrieves a new list containing all tasks in the taskList.
      * @return new list containing copy of all tasks from the taskList
      */
