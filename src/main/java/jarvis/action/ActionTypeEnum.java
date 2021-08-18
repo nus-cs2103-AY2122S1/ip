@@ -4,6 +4,7 @@ import jarvis.exception.UnknownActionException;
 
 public enum ActionTypeEnum {
     DEADLINE("deadline"),
+    DELETE("delete"),
     DONE("done"),
     EVENT("event"),
     EXIT("bye"),

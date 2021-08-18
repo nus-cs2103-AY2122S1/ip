@@ -56,4 +56,13 @@ public class Output {
         ));
         Output.showFormattedOutputMessage(taskDoneMessage);
     }
+
+    public static void showTaskDeletedMessage(Task task, TaskList taskList) {
+        OutputMessage taskDeletedMessage = new OutputMessage(String.format(
+                "Initiated Delete protocol. Delete confirmed for:\n\t%s\n%s",
+                task.toString(),
+                taskList.taskListSummary()
+        ));
+        Output.showFormattedOutputMessage(taskDeletedMessage);
+    }
 }

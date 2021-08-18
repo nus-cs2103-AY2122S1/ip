@@ -10,14 +10,16 @@ public abstract class Action {
         String userInputWithoutActionPrefix = trimmedUserInput.substring(actionType.getActionTypeStringLength());
 
         switch (actionType) {
-            case TODO:
-                return new TodoAction(userInputWithoutActionPrefix);
             case DEADLINE:
                 return new DeadlineAction(userInputWithoutActionPrefix);
+            case DELETE:
+                return new DeleteAction(userInputWithoutActionPrefix);
             case DONE:
                 return new MarkAsDoneAction(userInputWithoutActionPrefix);
             case EVENT:
                 return new EventAction(userInputWithoutActionPrefix);
+            case TODO:
+                return new TodoAction(userInputWithoutActionPrefix);
             default:
                 // When action does not match the other actions above, then it must be list action
                 return new ListAction();

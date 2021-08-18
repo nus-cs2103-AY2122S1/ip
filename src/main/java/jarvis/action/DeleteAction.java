@@ -8,16 +8,16 @@ import jarvis.output.Output;
 import jarvis.task.Task;
 import jarvis.task.TaskList;
 
-public class MarkAsDoneAction extends Action {
+public class DeleteAction extends Action {
     private int taskIndex;
 
-    public MarkAsDoneAction(String userInputWithoutActionTrigger) throws JarvisException {
-       try {
-           this.taskIndex = Integer.parseInt(userInputWithoutActionTrigger.trim()) - 1;
-       } catch (NumberFormatException e) {
-           throw new InvalidInputException("number");
-       }
-    }
+    public DeleteAction(String userInputWithoutActionTrigger) throws InvalidInputException {
+        try {
+            this.taskIndex = Integer.parseInt(userInputWithoutActionTrigger.trim()) - 1;
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("number");
+        }
+     }
 
     @Override
     public void execute(TaskList taskList) throws JarvisException {
@@ -27,7 +27,7 @@ public class MarkAsDoneAction extends Action {
         if (taskIndex < 0 || taskIndex >= taskList.getTaskListSize()) {
             throw new TaskNotFoundException();
         }
-        Task task = taskList.markAsDone(taskIndex);
-        Output.showTaskDoneMessage(task);
+        Task task = taskList.deleteTask(taskIndex);
+        Output.showTaskDeletedMessage(task, taskList);
     }
 }
