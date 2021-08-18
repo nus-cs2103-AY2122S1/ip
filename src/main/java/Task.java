@@ -3,9 +3,11 @@
  */
 public class Task {
     private String message;
+    private Boolean completed;
 
     public Task(String message) {
         this.message = message;
+        this.completed = false;
     }
 
     /**
@@ -14,6 +16,13 @@ public class Task {
      */
     @Override
     public String toString() {
-        return this.message;
+        return "[" + (completed ? "X" : " ")  + "] " + this.message;
+    }
+
+    /**
+     * Sets the task to completed.
+     */
+    public void doTask() {
+        this.completed = true;
     }
 }

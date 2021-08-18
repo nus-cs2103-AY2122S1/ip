@@ -27,6 +27,13 @@ public class Duke {
                     System.out.println((i + 1) + ". " + tasks.get(i).toString());
                 }
                 System.out.println();
+            } else if (command.contains("done")) {
+                tasks.get(command.charAt(command.length() - 1) - '0' - 1).doTask();
+                System.out.println("Here's your todo list!");
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println((i + 1) + ". " + tasks.get(i).toString());
+                }
+                System.out.println();
             } else {
                 tasks.add(new Task(command));
                 System.out.println("\""+ command + "\" has been added to your todo list.\n");
