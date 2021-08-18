@@ -1,10 +1,23 @@
 public class Duke {
+    private Ui ui;
+
+    public Duke() {
+        ui = new Ui();
+    }
+
+    private void run() {
+        boolean shouldExit = false;
+
+        ui.greet();
+        while (!shouldExit) {
+            String commandName = ui.readCommand();
+            // Can possibly add a new class that will assign a Command object based on commandName to save space
+            Command command = new Command(commandName);
+            command.execute();
+            shouldExit = command.shouldExit();
+        }
+    }
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        new Duke().run();
     }
 }
