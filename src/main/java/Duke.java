@@ -7,9 +7,9 @@ public class Duke {
         EXIT, ADD, LIST
     }
 
-    private String HORIZONTAL_LINE = "____________________________________________________________";
-    private String INDENTATION = "    ";
-    private ArrayList<String> taskList;
+    private final String HORIZONTAL_LINE = "____________________________________________________________";
+    private final String INDENTATION = "    ";
+    private ArrayList<Task> taskList;
     private boolean isActive;
 
     private Duke(){
@@ -35,9 +35,9 @@ public class Duke {
         this.isActive = false;
     }
 
-    private void addTask(String task){
+    private void addTask(Task task){
         this.taskList.add(task);
-        String msg = "added: " + task;
+        String msg = "added: " + task.showDescription();
         printMessageWithFormat(msg);
     }
 
@@ -47,14 +47,14 @@ public class Duke {
     }
 
     private void listTasks(){
-        String msg = String.format("1. %s", taskList.get(0));
+        String msg = String.format("1. %s", taskList.get(0).checkStatus());
         for (int i = 2; i <= taskList.size(); i++){
-            msg += String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i-1));
+            msg += String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i-1).checkStatus());
         }
         printMessageWithFormat(msg);
     }
 
-    private void getCommand(){;
+    private void getCommand(){
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
         while (this.isActive){
@@ -66,7 +66,8 @@ public class Duke {
                     listTasks();
                     break;
                 default:
-                    addTask(command);
+                    Task task = new Task(command);
+                    addTask(task);
             }
             command = sc.nextLine();
         }

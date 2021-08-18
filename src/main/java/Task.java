@@ -1,6 +1,6 @@
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     public Task(String description){
         this.description = description;
@@ -11,7 +11,11 @@ public class Task {
         return (isDone ? "[X]" : "[ ]") + " " + this.description;
     }
 
-    public void doTask(){
+    public String showDescription(){
+        return this.description;
+    }
+
+    public void markDone(){
         isDone = true;
     }
 }
