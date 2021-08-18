@@ -11,21 +11,27 @@ public class TaskList {
     }
 
     public void addToDo(String input) throws DukeException {
-        if (input.length() <= 5) {
+        // length of the command + the trailing whitespace
+        int commandLength = Commands.TODO.toString().length() + 1;
+
+        if (input.length() <= commandLength) {
             throw new DukeException("Please input the todo's name!");
         }
 
-        String name = input.substring(5);
+        String name = input.substring(commandLength);
         Task task = new ToDo(name);
         addTask(task);
     }
 
     public void addDeadline(String input) throws DukeException {
-        if (input.length() <= 9) {
+        // length of the command + the trailing whitespace
+        int commandLength = Commands.DEADLINE.toString().length() + 1;
+
+        if (input.length() <= commandLength) {
             throw new DukeException("Please input the deadline's name!");
         }
 
-        String[] inputs = input.substring(9).split(" /by ");
+        String[] inputs = input.substring(commandLength).split(" /by ");
 
         if (inputs.length < 2) {
             // /by not specified
@@ -42,11 +48,14 @@ public class TaskList {
     }
 
     public void addEvent(String input) throws DukeException {
-        if (input.length() <= 6) {
+        // length of the command + the trailing whitespace
+        int commandLength = Commands.EVENT.toString().length() + 1;
+
+        if (input.length() <= commandLength) {
             throw new DukeException("Please input the event's name!");
         }
 
-        String[] inputs = input.substring(6).split(" /at ");
+        String[] inputs = input.substring(commandLength).split(" /at ");
 
         if (inputs.length < 2) {
             // /by not specified

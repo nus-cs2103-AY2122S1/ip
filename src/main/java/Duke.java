@@ -12,32 +12,28 @@ public class Duke {
         while (sc.hasNextLine()) {
             try {
                 String msg = sc.nextLine();
-                if (msg.equals("bye")) {
+
+                // require exact match for these commands
+                if (Commands.EXIT.isCommand(msg)) {
                     exit();
-                } else if (msg.equals("list")) {
+                } else if (Commands.LIST.isCommand(msg)) {
                     printMessage(taskList.toString());
                 } else {
                     String[] words = msg.split(" ");
 
-                    // switch statement for the first word
-                    switch (words[0]) {
-                        case "done":
-                            taskList.doTask(words[1]);
-                            break;
-                        case "delete":
-                            taskList.deleteTask(words[1]);
-                            break;
-                        case "todo":
-                            taskList.addToDo(msg);
-                            break;
-                        case "deadline":
-                            taskList.addDeadline(msg);
-                            break;
-                        case "event":
-                            taskList.addEvent(msg);
-                            break;
-                        default:
-                            throw new DukeException("Unsupported operation");
+                    // check if the first word matches any command
+                    if (Commands.DONE.isCommand(words[0])) {
+                        taskList.doTask(words[1]);
+                    } else if (Commands.DELETE.isCommand(words[0])) {
+                        taskList.deleteTask(words[1]);
+                    } else if (Commands.TODO.isCommand(words[0])) {
+                        taskList.addToDo(msg);
+                    } else if (Commands.DEADLINE.isCommand(words[0])) {
+                        taskList.addDeadline(msg);
+                    } else if (Commands.EVENT.isCommand(words[0])) {
+                        taskList.addEvent(msg);
+                    } else {
+                        throw new DukeException("Unsupported operation");
                     }
                 }
             } catch (DukeException dukeException) {
