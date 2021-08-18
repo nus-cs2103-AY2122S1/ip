@@ -23,4 +23,7 @@ Please enter one of the following commands:
  list
  bye(to quit)
 ☹ OOPS!!! The description of a todo cannot be empty.
+Noted! I have removed the following task:
+ [T][X] read book
+You have 2 tasks in the list.
 Bye! Feel free to ask me for help again anytime!

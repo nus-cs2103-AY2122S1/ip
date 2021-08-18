@@ -73,6 +73,19 @@ public class Duke {
                     doneTask.markAsDone();
                     System.out.printf("Good job! I have marked the following task as done:%n %s%n", doneTask);
                     break;
+                case "delete":
+                    String deleteInput = sc.nextLine().strip();
+                    if (deleteInput.isBlank()) {
+                        throw new DukeException("☹ OOPS!!! Please provide the index of the " +
+                                "task you want to delete.");
+                    }
+                    int deleteTaskIndex = Integer.parseInt(deleteInput) - 1;
+                    Task toBeDeleted = tasks.get(deleteTaskIndex);
+                    tasks.remove(deleteTaskIndex);
+                    System.out.printf("Noted! I have removed the following task:%n %s%n", toBeDeleted);
+                    int taskCount = tasks.size();
+                    System.out.printf("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
+                    break;
                 default:
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means (X_X)\nPlease enter one of the following commands:\n todo <task>" +
                             "\n deadline <task> /by <deadline>\n event <event> /at <date time>\n list\n bye(to quit)");

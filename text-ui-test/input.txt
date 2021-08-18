@@ -5,4 +5,5 @@ done 1
 list
 by
 todo
+delete 1
 bye
