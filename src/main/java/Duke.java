@@ -40,19 +40,21 @@ public class Duke {
         } else if (input.equals("list")) {
             printTasks();
             respondTo(sc);
-        } else if (taskComplete(input)) {
+        } else if (containsDone(input)) {
             completeTask(input);
             respondTo(sc);
-        } else {
+        } else if (isTask(input)) {
             insertTask(input);
+            respondTo(sc);
+        } else {
+//            insertTask(input);
+            formatMessages("Aiyo, please enter a task hor!");
             respondTo(sc);
         }
     }
 
     public static void insertTask(String input) {
-        todolist.insertTask(input);
-        String done = "OK uncle added " + input + " for you liao.";
-        formatMessages(done);
+        formatMessages(todolist.insertTask(input));
     }
 
     public static void printTasks() {
@@ -65,17 +67,24 @@ public class Duke {
 
         try {
             int value = Integer.parseInt(second);
-            Task task = todolist.complete(value-1);
-            String completedTask = "Swee la! You good la sia, finished this task:\n        " + "[X] " + task.getName() ;
-            formatMessages(completedTask);
+//            Task task = todolist.complete(value-1);
+//            String completedTask = "Swee la! You good la sia, finished this task:\n        " + "[X] " + task.getName();
+//            formatMessages(completedTask);
+            formatMessages(todolist.completeTask(value-1));
 
         } catch (NumberFormatException e) {
             System.out.println("Aiyo, you say done a task but you never tell me which one leh.");
         }
     }
 
-    public static boolean taskComplete(String input) {
+    public static boolean containsDone(String input) {
         String first = input.split(" ")[0];
         return first.equalsIgnoreCase("done");
+    }
+
+    public static boolean isTask(String input) {
+        String first = input.split(" ")[0];
+        return first.equalsIgnoreCase("todo")
+                || first.equalsIgnoreCase("event") || first.equalsIgnoreCase("deadline");
     }
 }
