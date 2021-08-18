@@ -3,35 +3,39 @@ import java.util.ArrayList;
 
 public class Duke {
     private final static ArrayList<Task> list = new ArrayList<>();
+    private final static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
         reply("Hello i is Duke\nWhat u want?");
         manageInput();
+        scanner.close();
     }
 
     private static void manageInput() {
-        Scanner obj = new Scanner(System.in);
-        String input = obj.nextLine();
-        if (input.equals("bye")) {
-            exit();
-        } else if (input.equals("list")) {
-            displayList();
-        } else if (input.contains("done")) {
-            done(input);
-        } else if (input.contains("todo")) {
-            todo(input);
-        } else if (input.contains("deadline")) {
-            deadline(input);
-        } else if (input.contains("event")) {
-            event(input);
-        } else {
-            reply("Can type properly pls?");
+        if (scanner.hasNext()) {
+            String input = scanner.nextLine();
+            if (input.equals("bye")) {
+                exit();
+            } else if (input.equals("list")) {
+                displayList();
+            } else if (input.contains("done")) {
+                done(input);
+            } else if (input.contains("todo")) {
+                todo(input);
+            } else if (input.contains("deadline")) {
+                deadline(input);
+            } else if (input.contains("event")) {
+                event(input);
+            } else {
+                reply("Can type properly pls?");
+                manageInput();
+            }
         }
     }
 
@@ -53,7 +57,6 @@ public class Duke {
     private static void add(Task task) {
         list.add(task);
         reply("one more thing: " + task.toString() + "\nNow you got " + list.size() + " thing(s). sian");
-        manageInput();
     }
 
     private static void displayList() {
@@ -87,8 +90,8 @@ public class Duke {
         } else {
             Deadline deadline = new Deadline(input.substring(9, split - 1), input.substring(split + 3));
             add(deadline);
-            manageInput();
         }
+        manageInput();
     }
 
     private static void event(String input) {
@@ -98,7 +101,7 @@ public class Duke {
         } else {
             Event event = new Event(input.substring(6, split - 1), input.substring(split + 3));
             add(event);
-            manageInput();
         }
+        manageInput();
     }
 }
