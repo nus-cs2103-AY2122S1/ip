@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,6 +48,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you today?");
+        readFromFile();
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -154,6 +159,8 @@ public class Duke {
                 System.out.println(atHand.getStatusIcon() + " " + atHand.getDescription());
             }
         }
+        createFile();
+        writeToFile();
     }
 
     /**
@@ -174,6 +181,8 @@ public class Duke {
             taskList.remove(num - 1);
             System.out.println("Successfully removed task " + num);
         }
+        createFile();
+        writeToFile();
     }
 
     /**
@@ -201,7 +210,8 @@ public class Duke {
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("\"deadline\" command not correctly formatted");
         }
-
+        createFile();
+        writeToFile();
     }
 
     /**
@@ -229,7 +239,8 @@ public class Duke {
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("\"event\" command not correctly formatted");
         }
-
+        createFile();
+        writeToFile();
     }
 
     /**
@@ -248,6 +259,9 @@ public class Duke {
         System.out.println("Sure. The following task has been added: ");
         System.out.println(atHand);
         this.numberOfTasks();
+
+        createFile();
+        writeToFile();
     }
 
     /**
@@ -357,5 +371,70 @@ public class Duke {
         System.out.println("               - Deletes the corresponding task");
         System.out.println();
 
+    }
+
+    private void createFile() {
+        File dir = new File("data/");
+        File tasks = new File("data/tasks.txt");
+        try {
+            dir.mkdir();
+            if (tasks.createNewFile()) {
+                System.out.println(tasks.getName() + " created");
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void writeToFile() {
+        try {
+            FileWriter writer = new FileWriter("data/tasks.txt");
+            for (Task t : taskList) {
+                writer.write(t.toString() + System.lineSeparator());
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void readFromFile() {
+        try {
+            File tasks = new File("data/tasks.txt");
+            Scanner sc = new Scanner(tasks);
+            while (sc.hasNextLine()) {
+                String atHand = sc.nextLine();
+                String taskType = atHand.substring(1,2);
+                String done = (atHand.charAt(4)==' ') ? "0" : "1";
+                String des;
+                String time = "NA";
+                Task t;
+
+                if (taskType.equals("T")) {
+                    des = atHand.substring(7);
+                    t = new ToDo(done, des);
+                } else if (taskType.equals("E")) {
+                    int openBracket = atHand.indexOf('(');
+                    int closeBracket = atHand.indexOf(')');
+                    des = atHand.substring(7, openBracket -1);
+                    time = atHand.substring(openBracket + 5, closeBracket);
+                    t = new Event(done, des, time);
+                } else if (taskType.equals("D")) {
+                    int openBracket = atHand.indexOf('(');
+                    int closeBracket = atHand.indexOf(')');
+                    des = atHand.substring(7, openBracket-1);
+                    time = atHand.substring(openBracket + 5, closeBracket);
+                    t = new Deadline(done, des, time);
+                } else {
+                    throw new DukeException("Task Type not recognised. Task not loaded into Duke chat-bot");
+                }
+                taskList.add(t);
+            }
+
+        } catch (FileNotFoundException e) {
+            return ;
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
     }
 }

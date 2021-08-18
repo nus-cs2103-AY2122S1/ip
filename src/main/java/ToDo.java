@@ -9,6 +9,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    public ToDo(String done, String description) {
+        super(description);
+        this.isDone = (done.equals("X")) ? true : false;
+    }
+
     /**
      * Overriding toString method to display the relevant information
      *

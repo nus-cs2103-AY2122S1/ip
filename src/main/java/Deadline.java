@@ -12,6 +12,12 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public Deadline(String done, String description, String date) {
+        super(description);
+        this.date = date;
+        this.isDone = (done.equals("X")) ? true : false;
+    }
+
     /**
      * Overriding toString method to display the relevant information
      *
