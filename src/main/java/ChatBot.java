@@ -1,13 +1,19 @@
 public class ChatBot {
     private final InputHandler inputHandler;
-    private final String WELCOME_MESSAGE = "Hello! I'm Duke. What can I do for you?";
+    private TaskList taskList;
     private final String EXIT_COMMAND = "bye";
+    private final String LIST_COMMAND = "list";
+    private final String WELCOME_MESSAGE = "Hello! I'm Duke. What can I do for you?";
     private final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private final int INDENT = 4;
+    private final String BORDER = "-".repeat(100);
+
     private boolean isRunning;
 
-    public ChatBot(InputHandler inputHandler) {
+    public ChatBot() {
         this.isRunning = true;
-        this.inputHandler = inputHandler;
+        this.inputHandler = new InputHandler();
+        this.taskList = new TaskList();
     }
 
     public void start() {
@@ -22,14 +28,22 @@ public class ChatBot {
         if (userInput.equals(EXIT_COMMAND)) {
             display(EXIT_MESSAGE);
             isRunning = false;
+        } else if (userInput.equals(LIST_COMMAND)) {
+            display(taskList.list());
         } else if (!userInput.equals("")) {
-            display(userInput);
+            display(taskList.add(userInput));
         }
     }
 
-    private void display(String message) {
-        System.out.println("    --------------------------------------------------------------------");
-        System.out.println("    " + message);
-        System.out.println("    --------------------------------------------------------------------");
+    private void display(String... messages) {
+        printWithIndent(BORDER);
+        for(String message : messages){
+            printWithIndent(message);
+        }
+        printWithIndent(BORDER);
+    }
+
+    private void printWithIndent(String string) {
+        System.out.println(" ".repeat(INDENT) + string);
     }
 }
