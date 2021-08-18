@@ -1,7 +1,9 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static String EXIT_COMMAND = "bye";
+    protected static List<Task> todoList;
 
     public static void printLine() {
         System.out.println("--------------------------------------------------");
@@ -22,27 +24,13 @@ public class Duke {
         printLine();
     }
 
-    public static void printExit() {
-        System.out.println("Bye. Hope to see you again soon!");
-        printLine();
-    }
-
     public static void main(String[] args) {
-        Scanner myScanner = new Scanner(System.in);
+        todoList = new ArrayList<>();
 
         printLine();
         printBigIcon();
         printHello();
 
-        while (true) {
-            String userCommand = myScanner.nextLine();  // Read user input
-            printLine();
-            if (userCommand.equals(EXIT_COMMAND)) {
-                printExit();
-                break;
-            }
-            System.out.println(userCommand);
-            printLine();
-        }
+        Command.process();
     }
 }
