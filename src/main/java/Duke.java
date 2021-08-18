@@ -39,7 +39,7 @@ public class Duke {
 
     // The Global Variables used by the ChatBot
     private static final Scanner cmdReader = new Scanner(System.in);
-    private static final ArrayList<String> LIST = new ArrayList<>();
+    private static final ArrayList<Task> LIST = new ArrayList<>();
 
     // Method to Print Greeting
     public static void greeting() {
@@ -68,7 +68,7 @@ public class Duke {
 
     //Method to Add to List
     public static void addToList(String item) {
-        if (LIST.add(item)) {
+        if (LIST.add(new Task(item))) {
             echo("I have added this Item to List: \"" + item + "\"");
         } else {
             echo("I am sorry. The item couldn't be added, please try again.");
