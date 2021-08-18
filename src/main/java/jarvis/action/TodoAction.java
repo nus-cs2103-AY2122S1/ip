@@ -1,7 +1,6 @@
 package jarvis.action;
 
 import jarvis.exception.TaskDetailsEmptyException;
-import jarvis.message.OutputMessage;
 import jarvis.output.Output;
 import jarvis.task.TaskList;
 import jarvis.task.Todo;
@@ -13,7 +12,7 @@ public class TodoAction extends Action {
         if (todoDescription.equals("")) {
             throw new TaskDetailsEmptyException("description");
         }
-        this.todoDescription = todoDescription;
+        this.todoDescription = todoDescription.trim();
     }
 
     @Override

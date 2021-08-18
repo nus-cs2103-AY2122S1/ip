@@ -1,7 +1,6 @@
 package jarvis.action;
 
 import jarvis.exception.JarvisException;
-import jarvis.message.OutputMessage;
 import jarvis.output.Output;
 import jarvis.task.Task;
 import jarvis.task.TaskList;

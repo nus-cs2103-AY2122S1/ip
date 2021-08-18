@@ -1,7 +1,6 @@
 package jarvis.action;
 
 import jarvis.exception.TaskDetailsEmptyException;
-import jarvis.message.OutputMessage;
 import jarvis.output.Output;
 import jarvis.task.Deadline;
 import jarvis.task.TaskList;
