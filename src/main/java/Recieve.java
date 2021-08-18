@@ -19,7 +19,7 @@ public class Recieve {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
-            else if (input.startsWith("done ") && input.length() >= 6 && Character.isDigit(input.charAt(5))) {
+            else if (input.startsWith("done ") && input.length() > 5 && Character.isDigit(input.charAt(5))) {
                 //check 1x ? done x? done 2x? done 0
                 int pos = Integer.parseInt(input.substring(5)) - 1;
 
@@ -37,6 +37,20 @@ public class Recieve {
                 for(int i = 1; i < inputs.size() + 1; i++) {
                     System.out.println(i + "." + inputs.get(i - 1).toString());
                 }
+            }
+            else if (input.startsWith("delete ") && input.length() > 7 && Character.isDigit(input.charAt(7))) {
+                int pos = Integer.parseInt(input.substring(7)) - 1;
+
+                if (pos < inputs.size()) {
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println(inputs.get(pos).toString());
+                    inputs.remove(pos);
+                    System.out.println("Now you have " + inputs.size() + " tasks in the list.");
+                }
+                else {
+                    System.out.println("There are only " + pos + " tasks!");
+                }
+
             }
             else {
                 if (input.startsWith("todo ") || input.equals("todo")) {
