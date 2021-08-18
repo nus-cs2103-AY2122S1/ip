@@ -9,18 +9,30 @@ public class Duke {
     private static String byeLabel = "Bye. Hope to see you again soon!";
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
+        /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + logo);*/
 
         System.out.println(displayLabel(welcomeLabel));
-        //Level1(new Scanner(System.in));
-        //Level2(new Scanner(System.in));
-        //Level3(new Scanner(System.in));
-        System.out.println(displayLabel(byeLabel));
+
+        ArrayList<String> items = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
+        Scanner userInput = new Scanner(System.in);
+        String input = userInput.nextLine();
+
+        try {
+            while (!input.equals("bye")) {
+                Level6(input, tasks);
+                input = userInput.nextLine();
+            }
+            System.out.println(displayLabel(byeLabel));
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     // displays the information keyed in with lines and indentation
@@ -32,16 +44,9 @@ public class Duke {
         return label;
     }
 
-    /* displays the information that was inputted,
-     *  and displays the bye message and terminates when the
-     *  user inputs bye
-     */
-    public static void Level1(Scanner userInput) {
-        String input = userInput.nextLine();
-        while (!input.equals("bye") ) {
-            System.out.println(displayLabel(input));
-            input = userInput.nextLine();
-        }
+    // displays the information that was inputted,
+    public static void Level1(String input) {
+        System.out.println(displayLabel(input));
     }
 
     /* gets the items in the list when the user inputs list
@@ -57,9 +62,9 @@ public class Duke {
             if (items.get(index) instanceof Task) {
                 info = items.get(index).toString();
             } else {
-                info = (String) items.get(index);
+                info = (String) (" " + items.get(index));
             }
-            collection += Integer.toString(index + 1) + ". " + info;
+            collection += Integer.toString(index + 1) + "." + info;
             if (index != items.size() - 1) {
                 collection += "\n";
             }
@@ -67,165 +72,85 @@ public class Duke {
         return collection;
     }
 
-    /* added the information that was inputted,
-     * prints out all the information when list is inputted,
-     * and displays the bye message and terminates when the
-     * user inputs bye
+    /* adds the information that is inputted,
+     * and prints out all the information when list is inputted.
      */
-    public static void Level2(Scanner userInput) {
-        String input = userInput.nextLine();
-        ArrayList<String> items = new ArrayList<>();
-        while (!input.equals("bye")) {
-            if (!input.equals("list")) {
-                items.add(input);
-                System.out.println(displayLabel("added: " + input));
-            } else {
-                String itemCollection = getItems(items);
-                System.out.println(displayLabel(itemCollection));
-            }
-            input = userInput.nextLine();
+    public static void Level2(String input, ArrayList<String> items) {
+        if (!input.equals("list")) {
+            items.add(input);
+            Level1("added: " + input);
+        } else {
+            String itemCollection = (String) getItems(items);
+            Level1(itemCollection);
         }
     }
 
     // Adding onto Level 2, marks tasks as done.
-    public static void Level3(Scanner userInput) {
-        String input = userInput.nextLine();
-        ArrayList<Task> tasks = new ArrayList<>();
-        while (!input.equals("bye")) {
-            if (input.contains("done")) {
-                int index = Integer.parseInt(input.substring(5, 6)) - 1;
-                tasks.get(index).setIsDone();
-                System.out.println(displayLabel("Nice! I've marked this task as done: \n" +
-                        "       " + tasks.get(index).toString()));
-            } else if (!input.equals("list")) {
-                tasks.add(new Task(input));
-                System.out.println(displayLabel("added: " + input));
-            }  else {
-                String itemCollection = getItems(tasks);
-                System.out.println(displayLabel("Here are the tasks in your list: \n"
-                        + "     " + itemCollection));
-            }
-            input = userInput.nextLine();
+    public static void Level3(String input, ArrayList<Task> tasks) {
+        if (input.contains("done")) {
+            int index = Integer.parseInt(input.substring(5, 6)) - 1;
+            tasks.get(index).setIsDone();
+            Level1("Nice! I've marked this task as done: \n" +
+                    "       " + tasks.get(index).toString());
+        } else if (!input.equals("list")) {
+            tasks.add(new Task(input));
+            Level1("added: " + input);
+        }  else {
+            String itemCollection = getItems(tasks);
+            Level1("Here are the tasks in your list: \n"
+                    + "     " + itemCollection);
         }
     }
 
-    // Handles subclasses of Tasks.
-    public static void Level4(Scanner userInput) {
-        String input = userInput.nextLine();
-        ArrayList<Task> tasks = new ArrayList<>();
-        while (!input.equals("bye")) {
-            if (input.contains("done")) {
-                int index = Integer.parseInt(input.substring(5, 6)) - 1;
-                tasks.get(index).setIsDone();
-                System.out.println(displayLabel("Nice! I've marked this task as done: \n" +
-                        "       " + tasks.get(index).toString()));
-            } else if (!input.equals("list")) {
-                if (input.contains("todo")) {
-                    String info = input.substring(5);
-                    tasks.add(new ToDo(info));
-                } else if (input.contains("deadline")) {
-                    String[] info = input.substring(9).split("/by");
-                    tasks.add(new Deadline(info[0], info[1]));
-                } else if (input.contains("event")) {
-                    String[] info = input.substring(6).split("/at");
-                    tasks.add(new Event(info[0], info[1]));
-                } else {
-                    tasks.add(new Task(input));
-                }
-                System.out.println(displayLabel("Got it. I've added this task:  \n" +
-                        "       " + tasks.get(tasks.size() - 1).toString() + "\n     Now you have "
-                        + Integer.toString(tasks.size()) + " tasks in the list."));
-            }  else {
-                String itemCollection = getItems(tasks);
-                System.out.println(displayLabel(itemCollection));
-            }
-            input = userInput.nextLine();
-        }
-    }
-
-    public static void Level5(Scanner userInput) throws DukeException {
-        String input = userInput.nextLine();
-        ArrayList<Task> tasks = new ArrayList<>();
-        while (!input.equals("bye")) {
-            if (input.equals("todo") || input.equals("event") || input.equals("deadline")) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-            } else if (input.equals("blah")) {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            } else if (input.contains("done")) {
-                int index = Integer.parseInt(input.substring(5, 6)) - 1;
-                tasks.get(index).setIsDone();
-                System.out.println(displayLabel("Nice! I've marked this task as done: \n" +
-                        "       " + tasks.get(index).toString()));
-            } else if (!input.equals("list")) {
-                if (input.contains("todo")) {
-                    String info = input.substring(5);
-                    tasks.add(new ToDo(info));
-                } else if (input.contains("deadline")) {
-                    String[] info = input.substring(9).split("/by");
-                    tasks.add(new Deadline(info[0], info[1]));
-                } else if (input.contains("event")) {
-                    String[] info = input.substring(6).split("/at");
-                    tasks.add(new Event(info[0], info[1]));
-                } else {
-                    tasks.add(new Task(input));
-                }
-                System.out.println(displayLabel("Got it. I've added this task:  \n" +
-                        "       " + tasks.get(tasks.size() - 1).toString() + "\n     Now you have "
-                        + Integer.toString(tasks.size()) + " tasks in the list."));
+    // Adding onto Level 3, handles subclasses of Tasks.
+    public static void Level4(String input, ArrayList<Task> tasks) {
+        if (!input.equals("list") && !input.contains("done")) {
+            if (input.contains("todo")) {
+                String info = input.substring(5);
+                tasks.add(new ToDo(info));
+            } else if (input.contains("deadline")) {
+                String[] info = input.substring(9).split("/by");
+                tasks.add(new Deadline(info[0], info[1]));
+            } else if (input.contains("event")) {
+                String[] info = input.substring(6).split("/at");
+                tasks.add(new Event(info[0], info[1]));
             } else {
-                String itemCollection = getItems(tasks);
-                System.out.println(displayLabel(itemCollection));
+                tasks.add(new Task(input));
             }
-            input = userInput.nextLine();
+            Level1("Got it. I've added this task:  \n" +
+                    "       " + tasks.get(tasks.size() - 1).toString() + "\n     Now you have "
+                    + Integer.toString(tasks.size()) + " tasks in the list.");
+        } else {
+            Level3(input, tasks);
         }
-        System.out.println(displayLabel(byeLabel));
     }
 
-    public static void Level6(Scanner userInput) throws DukeException {
-        String input = userInput.nextLine();
-        ArrayList<Task> tasks = new ArrayList<>();
-        while (!input.equals("bye")) {
+    // Adds onto Level 4, throws exceptions for inadequate words.
+    public static void Level5(String input, ArrayList<Task> tasks) throws DukeException {
             if (input.equals("todo") || input.equals("event") || input.equals("deadline")) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             } else if (input.equals("blah")) {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            } else if (input.contains("done")) {
-                int index = Integer.parseInt(input.substring(5, 6)) - 1;
-                tasks.get(index).setIsDone();
-                System.out.println(displayLabel("Nice! I've marked this task as done: \n" +
-                        "       " + tasks.get(index).toString()));
-            } else if (input.contains("delete")) {
+            } else {
+                Level4(input, tasks);
+            }
+    }
+
+    // Adds onto Level 5 by deleting items.
+    public static void Level6(String input, ArrayList<Task> tasks) throws DukeException {
+            if (input.contains("delete")) {
                 int index = Integer.parseInt(input.substring(7, 8)) - 1;
                 Task removedTask = tasks.get(index);
                 tasks.remove(removedTask);
                 System.out.println(displayLabel("Noted. I've removed this task:  \n" +
                         "       " + removedTask.toString() + "\n     Now you have "
                         + Integer.toString(tasks.size()) + " tasks in the list."));
-            } else if (!input.equals("list")) {
-                if (input.contains("todo")) {
-                    String info = input.substring(5);
-                    tasks.add(new ToDo(info));
-                } else if (input.contains("deadline")) {
-                    String[] info = input.substring(9).split("/by");
-                    tasks.add(new Deadline(info[0], info[1]));
-                } else if (input.contains("event")) {
-                    String[] info = input.substring(6).split("/at");
-                    tasks.add(new Event(info[0], info[1]));
-                } else {
-                    tasks.add(new Task(input));
-                }
-                System.out.println(displayLabel("Got it. I've added this task:  \n" +
-                        "       " + tasks.get(tasks.size() - 1).toString() + "\n     Now you have "
-                        + Integer.toString(tasks.size()) + " tasks in the list."));
             } else {
-                String itemCollection = getItems(tasks);
-                System.out.println(displayLabel(itemCollection));
+                Level5(input, tasks);
             }
-            input = userInput.nextLine();
-        }
     }
-
 }
+
 
 class DukeException extends Exception {
 
@@ -293,7 +218,7 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadLine + ")";
+        return "[D]" + super.toString() + "(by:" + deadLine + ")";
     }
 
 }
@@ -310,7 +235,7 @@ class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + timing + ")";
+        return "[E]" + super.toString() + "(at:" + timing + ")";
     }
 
 }
