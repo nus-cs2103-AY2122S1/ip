@@ -51,7 +51,7 @@ public class Output {
 
     public static void showTaskDoneMessage(Task task) {
         OutputMessage taskDoneMessage = new OutputMessage(String.format(
-                "Nice! I've marked this task as done: \n\t%s",
+                "Nice! I've marked this task as done:\n\t%s",
                 task.toString()
         ));
         Output.showFormattedOutputMessage(taskDoneMessage);
