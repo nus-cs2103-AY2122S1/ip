@@ -6,6 +6,7 @@
 
 Hello! I'm Duke
 What can I do for you?
+OOPS!! The description of a todo cannot be empty :(
 Just added:
 [T][ ] eat
 You currently have 1 tasks in the list.
@@ -18,6 +19,7 @@ You currently have 3 tasks in the list.
 Just added:
 [E][ ] project meeting  ( at: Mon 2-4pm )
 You currently have 4 tasks in the list.
+OOPS!!! I'm sorry, but I don't know what that means :(
 Nice! I've marked this task as done:
 [D][X] return book ( by: Sunday )
 Here's your list!

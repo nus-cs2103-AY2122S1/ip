@@ -14,7 +14,6 @@ public class Duke {
         String time = "";
         boolean slash = false;
         for (int i = 1; i < arr.length; i++) {
-            System.out.println("entered loop");
             if (arr[i].charAt(0) == '/') {
                 slash = true;
                 continue;
