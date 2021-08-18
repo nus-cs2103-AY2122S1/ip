@@ -3,10 +3,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    static String myList = "";
+
+    static List<String> toDo = new ArrayList<>();
+
+    static void add(String newItem){
+        int count = toDo.size();
+
+        myList += "     " + count + ". " + newItem + "\n";
 
 
+    }
     public static void main(String[] args) {
-        List<String> toDo = new ArrayList<>();
+
+
         String item;
         String line = "-----------------------------------------";
         Scanner myObj = new Scanner(System.in);
@@ -17,7 +27,7 @@ public class Duke {
 
         while(myObj.hasNext()){
             System.out.println();
-            item = myObj.next();
+            item = myObj.nextLine();
 
             System.out.println(item);//User input typed
             if(item.equals("bye")){
@@ -26,11 +36,17 @@ public class Duke {
                 System.out.println(line);
                 break;
             }
-            System.out.println(line);
-            System.out.println("     " + item);
-            System.out.println(line);
-
+            if(item.equals("list")){
+                System.out.println(line);
+                System.out.println(myList);
+                System.out.println(line);
+                continue;
+            }
             toDo.add(item);
+            add(item);
+            System.out.println(line);
+            System.out.println("     added: " + item);//Added item
+            System.out.println(line);
         }
 //myObj.close();
 
