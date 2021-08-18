@@ -5,11 +5,15 @@ list
 done 2
 done 1
 list
+delete 2
+list
 todo
 deadline
 event
 list blah
 done
 done 101
+delete
+delete 101
 blah
 bye
