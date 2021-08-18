@@ -18,6 +18,7 @@ public class OutputManager {
   public static final String[] END_MESSAGES = {
     "Bye. Hope to see you again!"
   };
+  public static final String ERROR_SIGNATURE = "☹ OOPS!!! ";
 
   public OutputManager() {}
 

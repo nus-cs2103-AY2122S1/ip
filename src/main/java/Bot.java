@@ -26,7 +26,13 @@ public class Bot {
     while (this.running) {
       String[] input = inputManager.getInput().split(" ", 2);
       Command cmd = CommandType.getCommandFromName(input[0]);
-      cmd.run(this, new String[]{ input[input.length >=2 ? 1 : 0] });
+      try {
+        cmd.run(this, new String[]{ input.length >=2 ? input[1] : "" });
+      } catch (InvalidArgumentsException | InvalidTaskException e) {
+        printOutput(new String[] {
+          e.getMessage()
+        });
+      }
     }
     outputManager.printGoodbye();
     inputManager.closeScanner();

@@ -3,6 +3,9 @@ public class DoneCommand implements Command {
   @Override
   public void run(Bot bot, String[] args) {
     int index = Integer.parseInt(args[0]) - 1;
+    if (index < 0 || index >= bot.getTaskList().size()) {
+      throw new InvalidTaskException(OutputManager.ERROR_SIGNATURE + "This task does not exist in the task list!");
+    }
     Task task = bot.getTaskAt(index);
     task.markDone();
     bot.printOutput(new String[] {
