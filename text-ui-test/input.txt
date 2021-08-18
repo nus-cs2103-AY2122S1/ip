@@ -8,4 +8,9 @@ done jedbakdb
 done -1
 done 4
 asasasas
+todo
+deadline 
+event     
+deadline return book
+event project meeting /at 2-4pm /at Monday              
 bye

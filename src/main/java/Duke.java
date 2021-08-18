@@ -56,15 +56,41 @@ public class Duke {
             }
 
         } else if (input.startsWith("done")) {
+
             markTaskDone(input);
-        } else if (input.startsWith("todo")) {
-            addTodo(input.substring(5));
-        } else if (input.startsWith("deadline")) {
-            addDeadline(input.substring(9));
-        } else if (input.startsWith("event")) {
-            addEvent(input.substring(6));
+
         } else {
-            System.out.println("Output: That is not a valid input!");
+
+            Task newTask = null;
+
+            try {
+                if (input.startsWith("todo")) {
+                    // Check if a task description is present
+                    checkDescription(input);
+
+                    // Set the todo
+                    newTask = setTodo(input.substring(5));
+                } else if (input.startsWith("deadline")) {
+                    // Check if a task description is present
+                    checkDescription(input);
+
+                    // Set the deadline
+                    newTask = setDeadline(input.substring(9));
+                } else if (input.startsWith("event")) {
+                    // Check if a task description is present
+                    checkDescription(input);
+
+                    // Set the event
+                    newTask = setEvent(input.substring(6));
+                } else {
+                    System.out.println("Output: That is not a valid input!");
+                }
+            } catch (NoDescriptionException | InvalidParamException e1) {
+                System.out.println("Output: " + e1.getMessage());
+            }
+
+            // If there was no error, then add task. Else, skip this and get input again.
+            if (newTask != null) addTask(newTask);
         }
 
         printDoubleDivider();
@@ -76,6 +102,10 @@ public class Duke {
         System.out.println("Output:\n\nYou have successfully added the following task:\n\n" +
                             "    " + newTask);
         System.out.println("\nYou now have " + index + (index == 1 ? " task " : " tasks ") + "in your list!");
+    }
+
+    private static void checkDescription(String input) throws NoDescriptionException {
+        if (input.split(" ").length == 1) throw new NoDescriptionException();
     }
 
     private static void markTaskDone(String input) {
@@ -96,21 +126,29 @@ public class Duke {
 
     }
 
-    private static void addTodo(String input) {
+    private static Task setTodo(String input) {
         Task todo = new Todo(input);
-        addTask(todo);
+        return todo;
     }
 
-    private static void addDeadline(String input) {
+    private static Task setDeadline(String input) throws InvalidParamException {
         String[] deadlineParams = input.split(" /by ");
+        if (deadlineParams.length != 2) {
+            throw new InvalidParamException("Please include the deadline of the task after a '/by' (only once).\n" +
+                                            "i.e deadline return book /by Monday");
+        }
         Task deadline = new Deadline(deadlineParams[0], deadlineParams[1]);
-        addTask(deadline);
+        return deadline;
     }
 
-    private static void addEvent(String input) {
+    private static Task setEvent(String input) throws InvalidParamException {
         String[] eventParams = input.split(" /at ");
+        if (eventParams.length != 2) {
+            throw new InvalidParamException("Please include the time of the event after an '/at' (only once).\n" +
+                                            "i.e event project meeting /at Aug 6th 2-4pm");
+        }
         Task event = new Event(eventParams[0], eventParams[1]);
-        addTask(event);
+        return event;
     }
 
     private static void printDoubleDivider() {

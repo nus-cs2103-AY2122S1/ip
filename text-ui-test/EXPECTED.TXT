@@ -119,6 +119,43 @@ Output: That is not a valid input!
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
+Output: A description of the task is required!
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output: A description of the task is required!
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output: A description of the task is required!
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output: Please include the deadline of the task after a '/by' (only once).
+i.e deadline return book /by Monday
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output: Please include the time of the event after an '/at' (only once).
+i.e event project meeting /at Aug 6th 2-4pm
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
 Output: Goodbye! See you again!
 
 =================================================
