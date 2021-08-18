@@ -95,7 +95,7 @@ public class Duke {
         ArrayList<Task> taskList = new ArrayList<>();
 
         System.out.println("Hello from\n" + logo +"\n");
-        System.out.println("What can I do for you?");
+        System.out.println("What can I do for you?\n");
         System.out.println(divider);
 
         Scanner in = new Scanner(System.in);
@@ -180,13 +180,16 @@ public class Duke {
                         added = new Event(tmp[0], tmp[1]);
                         break;
                     }
+                    default: {
+                        System.out.println("Invalid input");
+                    }
                 }
 
                 if (added != null) {
                     taskList.add(added);
-                    System.out.println("added: " + added);
-                } else {
-                    System.out.println("Invalid input");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + added);
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                 }
             }
 
