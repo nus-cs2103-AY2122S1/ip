@@ -60,11 +60,15 @@ public class Duke {
                 display("Nice! I've marked this task as done: \n\t\t " + t);
             } else if (command.equals("todo")) {
                 // Store task as Todo
-                Task t = new Todo(data);
-                duke.tasks.add(t);
-                display("Got it. I've added this task: \n\t\t "
-                        + t
-                        + "\n\t Now you have " + duke.tasks.size() + " tasks in the list.");
+                if (data.equals("")) {
+                    display("OOPS!!! The description of a todo cannot be empty.");
+                } else {
+                    Task t = new Todo(data);
+                    duke.tasks.add(t);
+                    display("Got it. I've added this task: \n\t\t "
+                            + t
+                            + "\n\t Now you have " + duke.tasks.size() + " tasks in the list.");
+                }
             } else if (command.equals("deadline")) {
                 // Store task as Deadline
                 String description = data.split(" /by")[0];
@@ -84,7 +88,7 @@ public class Duke {
                         + t
                         + "\n\t Now you have " + duke.tasks.size() + " tasks in the list.");
             } else {
-                display("Please enter a valid input.");
+                display("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
         scanner.close();
