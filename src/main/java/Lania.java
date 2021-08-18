@@ -2,18 +2,19 @@ import java.util.Scanner;
 
 public class Lania {
 
-    /** String array containing user inputs */
-    private static String[] strArray = new String[100];
+    /** Task array containing user tasks */
+    private static Task[] taskArray = new Task[100];
     /** Keep track of number of user inputs */
     private static int count = 0;
 
     /**
-     * Store user input in array and show that it is added.
+     * Store user input in task array and show that it is added.
      *
      * @param s String provided by the user.
      */
     public static void update(String s) {
-        strArray[count] = s;
+        Task t = new Task(s);
+        taskArray[count] = t;
         count++;
         System.out.print("added: ");
         echo(s);
@@ -26,7 +27,7 @@ public class Lania {
     public static void list() {
         System.out.println("You have the following task(s):");
         for (int i = 0; i < count; i++) {
-            System.out.println(i + 1 + ". " + strArray[i]);
+            System.out.println(i + 1 + ".[" + taskArray[i].getStatusIcon() + "] " + taskArray[i].description);
         }
     }
 
