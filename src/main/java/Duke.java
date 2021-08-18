@@ -30,6 +30,10 @@ public class Duke {
         } else if (input.equals("list")){
             lst.showList();
             return false;
+        } else if (input.contains("done")) {
+            int taskNum = Integer.parseInt(input.split(" ")[1]);
+            lst.markAsDone(taskNum - 1);
+            return false;
         } else {
             lst.addItem(input);
 //            System.out.println(input); Level 1
