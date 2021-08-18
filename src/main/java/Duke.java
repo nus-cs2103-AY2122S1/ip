@@ -27,51 +27,50 @@ public class Duke {
       String input = sc.nextLine();
       System.out.println("\t____________________________");
       input = input.toLowerCase().strip();
-      if (input.equals("bye") || input.equals("exit")) {
-        this.exit();
-        break;
-      } else if (input.equals("list")) {
-        this.list();
-      } else if (input.split(" ")[0].equals("done")) {
-        this.markDone(input.split(" ")[1]);
-      } else if (input.split(" ")[0].equals("todo")) {
-        this.addTodo(input.split(" ", 2)[1]);
-      } else if (input.split(" ")[0].equals("deadline")) {
-        this.addDeadline(input.split(" ", 2)[1]);
-      } else if (input.split(" ")[0].equals("event")) {
-        this.addEvent(input.split(" ", 2)[1]);
-      }
+      String[] splitInput = input.split(" ", 2);
+        if (input.equals("bye") || input.equals("exit")) {
+          this.exit();
+          break;
+        } else if (input.equals("list")) {
+          this.list();
+        } else if (splitInput[0].equals("done")) {
+          this.markDone(splitInput[1]);
+        } else if (splitInput[0].equals("todo") || splitInput[0].equals("deadline") || splitInput[0].equals("event")) {
+          try {
+            this.addTask(splitInput);
+          } catch (DukeTaskDetailsException e) {
+            System.out.println("\t" + e.toString());
+          }
+        } else {
+          System.out.println("\tSorry, I do not know this command!");
+        }
       System.out.println("\t____________________________");
     }
   }
 
-  private void addTodo(String task) {
-    Todo todo = new Todo(task);
-    this.tasks.add(todo);
-    this.addTask(todo.toString());
-  }
-
-  private void addDeadline(String task) {
-    String[] taskArray = task.split("/by");
-    String title = taskArray[0];
-    String time = taskArray[1];
-    Deadline deadline = new Deadline(title, time);
-    this.tasks.add(deadline);
-    this.addTask(deadline.toString());
-  }
-
-  private void addEvent(String task) {
-    String[] taskArray = task.split("/at");
-    String title = taskArray[0];
-    String time = taskArray[1];
-    Event event = new Event(title, time);
-    this.tasks.add(event);
-    this.addTask(event.toString());
-  }
-
-  private void addTask(String taskString) {
-    System.out.println("\tGot it. I\'ve added this task:");
-    System.out.println("\t  " + taskString);
+  private void addTask(String[] taskArray) throws DukeTaskDetailsException {
+    Task task;
+    if (taskArray.length < 2) {
+      throw new DukeTaskDetailsException("Please provide task details");
+    }
+    if (taskArray[0].equals("todo")) {
+      task = new Todo(taskArray[1]);
+    } else if (taskArray[0].equals("deadline")) {
+      String[] deadlineDetails = taskArray[1].split("/by");
+      if (deadlineDetails.length != 2) {
+        throw new DukeTaskDetailsException("Please provide both task title and deadline, separated by \"/by\"");
+      }
+      task = new Deadline(deadlineDetails[0], deadlineDetails[1]);
+    } else {
+      String[] eventDetails = taskArray[1].split("/at");
+      if (eventDetails.length != 2) {
+        throw new DukeTaskDetailsException("Please provide both event title and date, separated by \"/at\"");
+      }
+      task = new Event(eventDetails[0], eventDetails[1]);
+    }
+    this.tasks.add(task);
+     System.out.println("\tGot it. I\'ve added this task:");
+    System.out.println("\t  " + task.toString());
     System.out.println("\tNow you have " + this.tasks.size() +
                        " tasks in the list.");
   }
@@ -94,7 +93,7 @@ public class Duke {
       System.out.println("\tNice! I\'ve marked this task as done:");
       System.out.println(" \t" + this.tasks.get(index - 1).toString());
     } catch (NumberFormatException | IndexOutOfBoundsException e) {
-      System.out.println("\tPlease input the index of the task");
+      System.out.println("\tPlease input the index of the task to mark done");
     }
   }
 }
