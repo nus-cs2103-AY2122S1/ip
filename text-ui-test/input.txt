@@ -1,0 +1,10 @@
+todo 111
+todo 222
+deadline 333 /by date1
+event 444 /at date2
+list
+done 1
+done 3
+done 4
+list
+bye
