@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,8 +8,7 @@ public class Duke {
                                                         + "    %s\n"
                                                         + "Now you have %d tasks in the list.\n";
     private final static Scanner SCANNER = new Scanner(System.in);
-    private final static Task[] tasks = new Task[100];
-    private static int numTasks = 0;
+    private final static ArrayList<Task> tasks = new ArrayList<>();
 
     private static void greet() {
         System.out.println(GREETING_MSG);
@@ -21,26 +21,26 @@ public class Duke {
 
     private static void addTodo(String description) {
         Task taskToAdd = new Todo(description);
-        tasks[numTasks++] = taskToAdd;
-        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, numTasks);
+        tasks.add(taskToAdd);
+        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, tasks.size());
     }
 
     private static void addDeadline(String description, String by) {
         Task taskToAdd = new Deadline(description, by);
-        tasks[numTasks++] = taskToAdd;
-        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, numTasks);
+        tasks.add(taskToAdd);
+        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, tasks.size());
     }
 
     private static void addEvent(String description, String at) {
         Task taskToAdd = new Event(description, at);
-        tasks[numTasks++] = taskToAdd;
-        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, numTasks);
+        tasks.add(taskToAdd);
+        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, tasks.size());
     }
 
     private static void listTasks() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; tasks[i] != null; i++) {
-            System.out.printf("%d.%s%n", i + 1, tasks[i]);
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("%d.%s/n", i + 1, tasks.get(i));
         }
     }
 
@@ -62,7 +62,17 @@ public class Duke {
         } else if (cmd.matches("^list[ \\t]*$")) {
             listTasks();
         } else if (cmd.matches("^done[ \\t]+[0-9]+")) {
-            tasks[Integer.parseInt(cmd.split("^done[ \\t]+")[1]) - 1].markAsDone();
+            int i = Integer.parseInt(cmd.split("^done[ \\t]+")[1]) - 1;
+            if (i < 0 || i >= tasks.size()) {
+                throw new DukeException(String.format("☹ OOPS!!! I'm sorry, but no task numbered %d", i + 1));
+            }
+            tasks.get(i).markAsDone();
+        } else if (cmd.matches("^delete[ \\t]+[0-9]+")) {
+            int i = Integer.parseInt(cmd.split("^delete[ \\t]+")[1]) - 1;
+            if (i < 0 || i >= tasks.size()) {
+                throw new DukeException(String.format("☹ OOPS!!! I'm sorry, but no task numbered %d", i + 1));
+            }
+            tasks.remove(i);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
