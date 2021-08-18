@@ -1,5 +1,3 @@
-package inputs;
-
 public class TodoInput extends InputHandler {
 
     public TodoInput(Messages ui, ToDoList toDoList) throws DukeException {

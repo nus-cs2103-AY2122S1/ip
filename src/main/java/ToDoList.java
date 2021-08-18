@@ -19,4 +19,8 @@ public class ToDoList {
         return todoList.get(index - 1);
     }
 
+    public void removeTask (int index) {
+        todoList.remove(index - 1);
+    }
+
 }

@@ -1,5 +1,3 @@
-package inputs;
-
 public class DoneInput extends InputHandler {
 
     public DoneInput(Messages ui, ToDoList toDoList) throws DukeException {
@@ -9,7 +7,7 @@ public class DoneInput extends InputHandler {
     @Override
     public String handle (String input) throws EmptyDescriptionException {
         if (input.length() == 4) {
-            throw new EmptyDescriptionException("error" );
+            throw new EmptyDescriptionException("error");
         }
 
         char taskIndex = input.charAt(5);

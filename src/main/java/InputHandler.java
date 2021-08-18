@@ -1,5 +1,3 @@
-package inputs;
-
 public abstract class InputHandler {
     protected Messages ui;
     protected ToDoList toDoList;

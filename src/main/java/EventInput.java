@@ -1,5 +1,3 @@
-package inputs;
-
 public class EventInput extends InputHandler{
 
 

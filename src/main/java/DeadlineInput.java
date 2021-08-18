@@ -1,5 +1,3 @@
-package inputs;
-
 public class DeadlineInput extends InputHandler {
 
     public DeadlineInput(Messages ui, ToDoList toDoList) throws DukeException {

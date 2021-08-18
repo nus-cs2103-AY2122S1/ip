@@ -33,17 +33,27 @@ public class Messages {
             for (Task task : list) {
                 userList =  userList + (list.indexOf(task) + 1) + ". " + task.toString() + "\n";
             }
-            return "Here are the tasks in your list: \n" + userList;
+            return "Here are the tasks in your list:\n" + userList;
         }
     }
 
     public String addedTask(Task task) {
-        return String.format("Got it. I've added this task: \n %s \nNow you have %d tasks in the list.",
+        return String.format("Got it. I've added this task:\n %s\nNow you have %d tasks in the list.",
                 task.toString(), ToDoList.getTodoList().size());
     }
 
     public String doneTask (Task task) {
-        return String.format("Nice! I've marked this task as done: \n %s", task.toString());
+        return String.format("Nice! I've marked this task as done:\n %s", task.toString());
     }
+
+    public String deletedTask(Task task) {
+        return String.format("Noted. I've removed this task:\n %s\nNow you have %d tasks in the list.",
+                task.toString(), ToDoList.getTodoList().size());
+    }
+
+    public void getError(String e) {
+        System.out.println(e);
+    }
+
 
 }
