@@ -6,6 +6,8 @@ Please add a number after the command 'done'. Try again.
 Please make sure only a number follows the command 'done'. Try again.
 Please make sure only a number follows the command 'done'. Try again.
 Couldn't find that task in the list! Try again.
+Please add a number after the command 'delete'. Try again.
+You haven't added anything to the list yet! Try adding something before deleting.
 Please state the deadline for this task with /by! Try again.
 Please state the deadline for this task with /by! Try again.
 Please ensure that there is a task description and deadline. Try again.
@@ -43,5 +45,11 @@ Here are the tasks in your list:
 1. [D][X] code (by: Sunday 2359)
 2. [E][X] lunch (at: Sunday 1pm-3pm)
 3. [T][X] exercise
+Noted. I've removed this task:
+  [T][X] exercise
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1. [D][X] code (by: Sunday 2359)
+2. [E][X] lunch (at: Sunday 1pm-3pm)
 I didn't quite get what you meant. To add a task, begin with 'deadline', 'event' or 'todo'.
 Bye. Hope to see you again soon!

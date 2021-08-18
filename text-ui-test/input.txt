@@ -4,6 +4,8 @@ done
 done aaa
 done 5 aaa
 done 1
+delete
+delete 1
 deadline
 deadline aaa
 deadline aaa /by
@@ -21,6 +23,8 @@ done 1
 list
 done 2
 done 3
+list
+delete 3
 list
 bye bye
 bye
