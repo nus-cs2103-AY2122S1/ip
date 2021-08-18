@@ -8,7 +8,7 @@ public class Duke {
     public static final String EXITING_MESSAGE = "____________________________________________________________\n" +
             "Bye. Hope to see you again soon!\n" +
             "____________________________________________________________";
-    private Event event;
+    private Processor processor;
     private boolean isRunning;
 
     /**
@@ -33,9 +33,8 @@ public class Duke {
             this.isRunning = false;
         } else {
             // Create a new event and convert it to string.
-            this.event = new Event(command);
-            this.event.process();
-            System.out.println(this.event);
+            this.processor = new Processor(command);
+            this.processor.process();
         }
     }
 
