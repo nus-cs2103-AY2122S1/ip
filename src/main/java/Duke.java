@@ -6,6 +6,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String command;
+        String input;
         List<Task> tasks = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -16,19 +17,27 @@ public class Duke {
 
         while(true) {
             System.out.print("You: ");
-            command = sc.nextLine();
+            command = sc.next();
+            input = sc.nextLine();
             System.out.print("Duke: ");
-            if (command.equals("bye")) {
-                System.out.println("Nice talking to you, goodbye!");
-                break;
-            } else if (command.equals("list")) {
-                printList(tasks);
-            } else if (command.contains("done")) {
-                doTask(command.charAt(command.length() - 1) - '0' - 1, tasks);
-                printList(tasks);
-            } else {
-                tasks.add(new Task(command));
-                System.out.println("\""+ command + "\" has been added to your todo list.\n");
+            switch(command) {
+                case "bye":
+                    System.out.println("Nice talking to you, goodbye!");
+                    return;
+                case "list":
+                    printList(tasks);
+                    break;
+                case "done":
+                    doTask(Integer.parseInt(input.trim())- 1, tasks);
+                    printList(tasks);
+                    break;
+                case "todo":
+                    tasks.add(new ToDo(command));
+                    System.out.println("\"" + command + "\" has been added to your todo list.\n");
+                    break;
+                default:
+                    tasks.add(new Task(command));
+                    System.out.println("\"" + command + "\" has been added to your todo list.\n");
             }
         }
     }
