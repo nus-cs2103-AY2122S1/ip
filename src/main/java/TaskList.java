@@ -1,3 +1,6 @@
+/**
+ * The task list to save all the tasks
+ */
 public class TaskList {
     // Saved tasks
     private final Task[] tasks;
@@ -10,53 +13,29 @@ public class TaskList {
     private int nextTaskIndex = 0;
 
     /**
-     * Print out the separation line between elements of the program
-     */
-    private static void insertSeparateLine() {
-        String separateLine = "____________________________________________________________";
-        System.out.println("\t" + separateLine);
-    }
-
-    /**
-     * Print out the formatted version of any string content
-     *
-     * @param content Content to display.
-     */
-    private static void displayContent(String content) {
-        System.out.println("\t" + " " + content);
-    }
-
-    /**
-     * Print out the formatted version of any string content between two horizontal lines
-     *
-     * @param content Content to display.
-     */
-    private static void displayContentBetweenLines(String content) {
-        insertSeparateLine();
-        System.out.println("\t" + " " + content);
-        insertSeparateLine();
-    }
-
-    /**
      * Add a task to the list
      * @param task The added task.
      */
     public void addTask(Task task) {
         tasks[nextTaskIndex] = task;
         nextTaskIndex++;
-        displayContentBetweenLines("added: " + task.description);
+        PrintUtil.insertSeparateLine();
+        PrintUtil.displayContent("Got it. I've added this task:");
+        PrintUtil.displayContent("  " + task.toString());
+        PrintUtil.displayContent("Now you have " + (nextTaskIndex) + " tasks in the list.");
+        PrintUtil.insertSeparateLine();
     }
 
     /**
      * Display the task list
      */
     public void displayTaskList() {
-        insertSeparateLine();
-        displayContent("Here are the tasks in your list:");
+        PrintUtil.insertSeparateLine();
+        PrintUtil.displayContent("Here are the tasks in your list:");
         for (int i = 0; i < nextTaskIndex; i++) {
-            displayContent((i + 1) + "." + "[" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
+            PrintUtil.displayContent((i + 1) + "." + tasks[i].toString());
         }
-        insertSeparateLine();
+        PrintUtil.insertSeparateLine();
     }
 
     /**
@@ -66,9 +45,9 @@ public class TaskList {
      */
     public void markTaskAsDone(int index) {
         tasks[index - 1].markAsDone();
-        insertSeparateLine();
-        displayContent("Nice! I've marked this task as done:");
-        displayContent("  " + "[" + tasks[index - 1].getStatusIcon() + "] " + tasks[index - 1].getDescription());
-        insertSeparateLine();
+        PrintUtil.insertSeparateLine();
+        PrintUtil.displayContent("Nice! I've marked this task as done:");
+        PrintUtil.displayContent("  " + tasks[index - 1].toString());
+        PrintUtil.insertSeparateLine();
     }
 }

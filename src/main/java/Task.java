@@ -1,3 +1,6 @@
+/**
+ * An individual task
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -29,6 +32,11 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return ("[" + this.getStatusIcon() + "] " + this.getDescription());
     }
 
 }

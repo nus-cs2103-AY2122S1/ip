@@ -1,34 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * Main program with scanner logic
+ */
 public class Duke {
-    /**
-     * Print out the separation line between elements of the program
-     */
-    private static void insertSeparateLine() {
-        String separateLine = "____________________________________________________________";
-        System.out.println("\t" + separateLine);
-    }
-
-    /**
-     * Print out the formatted version of any string content
-     *
-     * @param content Content to display.
-     */
-    private static void displayContent(String content) {
-        System.out.println("\t" + " " + content);
-    }
-
-    /**
-     * Print out the formatted version of any string content between two horizontal lines
-     *
-     * @param content Content to display.
-     */
-    private static void displayContentBetweenLines(String content) {
-        insertSeparateLine();
-        System.out.println("\t" + " " + content);
-        insertSeparateLine();
-    }
-
     /**
      * Print out the greetings to the user
      */
@@ -39,11 +14,11 @@ public class Duke {
                 + "\t | |_| | |_| |   <  __/\n"
                 + "\t |____/ \\__,_|_|\\_\\___|\n";
 
-        insertSeparateLine();
+        PrintUtil.insertSeparateLine();
         System.out.println(logo);
-        displayContent("Hello! I'm Duke");
-        displayContent("What can I do for you?");
-        insertSeparateLine();
+        PrintUtil.displayContent("Hello! I'm Duke");
+        PrintUtil.displayContent("What can I do for you?");
+        PrintUtil.insertSeparateLine();
     }
 
     public static void main(String[] args) {
@@ -51,7 +26,7 @@ public class Duke {
 
         TaskList taskList = new TaskList();
         Scanner sc = new Scanner(System.in);
-        String currentCommand = sc.nextLine();
+        String currentCommand = sc.nextLine().trim();
 
         while (!currentCommand.equals("bye")) {
             if (currentCommand.equals("list")) {
@@ -60,15 +35,53 @@ public class Duke {
                 String[] splitBySpaceCommand = currentCommand.trim().split("\\s+");
                 if (splitBySpaceCommand[0].equals("done")) {
                     taskList.markTaskAsDone(Integer.parseInt(splitBySpaceCommand[1]));
-                } else {
-                    Task newTask = new Task(currentCommand);
-                    taskList.addTask(newTask);
+                } else if (splitBySpaceCommand[0].equals("deadline")) {
+                    String description = "";
+                    String by;
+                    StringBuilder temp = new StringBuilder();
+
+                    for (int i = 1; i < splitBySpaceCommand.length; i++) {
+                        if (splitBySpaceCommand[i].equals("/by")) {
+                            description = temp.toString().trim();
+                            temp = new StringBuilder();
+                        } else {
+                            temp.append(splitBySpaceCommand[i]);
+                            temp.append(" ");
+                        }
+                    }
+                    by = temp.toString().trim();
+                    taskList.addTask(new Deadline(description, by));
+                } else if (splitBySpaceCommand[0].equals("event")) {
+                    String description = "";
+                    String at;
+                    StringBuilder current = new StringBuilder();
+
+                    for (int i = 1; i < splitBySpaceCommand.length; i++) {
+                        if (splitBySpaceCommand[i].equals("/at")) {
+                            description = current.toString().trim();
+                            current = new StringBuilder();
+                        } else {
+                            current.append(splitBySpaceCommand[i]);
+                            current.append(" ");
+                        }
+                    }
+                    at = current.toString().trim();
+                    taskList.addTask(new Event(description, at));
+                } else if (splitBySpaceCommand[0].equals("todo")) {
+                    String description;
+                    StringBuilder current = new StringBuilder();
+                    for (int i = 1; i < splitBySpaceCommand.length; i++) {
+                        current.append(splitBySpaceCommand[i]);
+                        current.append(" ");
+                    }
+                    description = current.toString().trim();
+                    taskList.addTask(new ToDo(description));
                 }
             }
-            currentCommand = sc.nextLine();
+            currentCommand = sc.nextLine().trim();
         }
 
-        displayContentBetweenLines("Bye. Hope to see you again soon!");
+        PrintUtil.displayContentBetweenLines("Bye. Hope to see you again soon!");
         System.exit(0);
     }
 }
