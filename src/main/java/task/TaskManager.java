@@ -73,12 +73,12 @@ public class TaskManager {
      * Delete task by number, start from 1.
      *
      * @param number number of task
-     * @throws DukeException if task number is out of bounds
+     * @throws DukeTaskNumberOutOfBoundsException if task number is out of bounds
      */
-    public Task deleteTask(int number) throws DukeException {
+    public Task deleteTask(int number) throws DukeTaskNumberOutOfBoundsException {
         int index = number - 1;
         if (index < 0 || index >= tasks.size()) {
-            throw new DukeException(INDENTATION + "☹ OOPS!!! Task number is out of bounds.");
+            throw new DukeTaskNumberOutOfBoundsException(INDENTATION + "☹ OOPS!!! Task number is out of bounds.");
         }
         return tasks.remove(index);
     }

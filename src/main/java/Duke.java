@@ -120,27 +120,29 @@ public class Duke {
 
     private static void completeTask(TaskManager taskManager, int number) {
         try {
-            taskManager.completeTask(number);
             System.out.println(HORIZONTAL_LINE);
+            taskManager.completeTask(number);
             System.out.println(INDENTATION + "Nice! I've marked this task as done:");
             System.out.println(INDENTATION + "  " + taskManager.findTaskByNumber(number).toString());
-            System.out.println(HORIZONTAL_LINE);
         } catch (DukeTaskNumberOutOfBoundsException e) {
             System.out.println(e.getMessage());
+        } finally {
+            System.out.println(HORIZONTAL_LINE);
         }
     }
 
     private static void deleteTask(TaskManager taskManager, int number) {
         try {
-            Task task = taskManager.deleteTask(number);
             System.out.println(HORIZONTAL_LINE);
+            Task task = taskManager.deleteTask(number);
             System.out.println(INDENTATION + "Noted. I've removed this task:");
             System.out.println(INDENTATION + "  " + task.toString());
             System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
                     (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
+        } catch (DukeTaskNumberOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        } finally {
             System.out.println(HORIZONTAL_LINE);
-        } catch (DukeException de) {
-            System.out.println(de.getMessage());
         }
     }
 

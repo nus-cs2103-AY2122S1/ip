@@ -19,4 +19,5 @@ done 2
 list
 delete 3
 list
+delete 8
 bye
