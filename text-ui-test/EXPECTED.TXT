@@ -15,4 +15,6 @@ Got it. I've added this task:
 Now you have 4 tasks in the list
 Nice! I've marked this task as done:
 [D][X] return book (by:Sunday)
+OOPS!!! The description of a deadline cannot be empty.
+OOPS!!! I'm sorry, but I don't know what that means :-(
 Bye. Hope to see you again soon!
