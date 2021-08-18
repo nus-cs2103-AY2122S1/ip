@@ -3,12 +3,12 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void printAdded(Task task, int numOfTask) {
-        Printer.prettyPrint("Got it. I've added this task:\n\t " +
-                task.toString() +
-                "\n\tNow you have " +
-                numOfTask +
-                " tasks in the list.");
+    public static void printAddOrDelete(boolean isAdd, Task task, int numOfTask) {
+        Printer.prettyPrint(String.format("%s. I've %s this task:\n\t %s\n\tNow you have %d tasks in the list.",
+                isAdd ? "Got it" : "Noted",
+                isAdd ? "added" : "deleted",
+                task.toString(),
+                numOfTask));
     }
 
     public static String[] extractCommand(String[] command) throws EmptyDescriptionException {
@@ -46,11 +46,16 @@ public class Duke {
                     case "done":
                         tasks.get(Integer.parseInt(command[1]) - 1).markAsDone();
                         break;
+                    case "delete":
+                        printAddOrDelete(false, tasks.get(Integer.parseInt(command[1]) - 1), --numOfTask);
+                        tasks.remove(Integer.parseInt(command[1]) - 1);
+                        break;
                     case "todo":
                         try {
                             taskDetail = extractCommand(command);
-                            tasks.add(new Todo(taskDetail[0]));
-                            printAdded(tasks.get(numOfTask), ++numOfTask);
+                            Todo todo = new Todo(taskDetail[0]);
+                            tasks.add(todo);
+                            printAddOrDelete(true, todo, ++numOfTask);
                         } catch (EmptyDescriptionException e) {
                             Printer.prettyPrint(e.toString());
                         }
@@ -58,8 +63,9 @@ public class Duke {
                     case "event":
                         try {
                             taskDetail = extractCommand(command);
-                            tasks.add(new Event(taskDetail[0], taskDetail[1]));
-                            printAdded(tasks.get(numOfTask), ++numOfTask);
+                            Event event = new Event(taskDetail[0], taskDetail[1]);
+                            tasks.add(event);
+                            printAddOrDelete(true, event, ++numOfTask);
                         } catch (EmptyDescriptionException e) {
                             Printer.prettyPrint(e.toString());
                         }
@@ -67,8 +73,9 @@ public class Duke {
                     case "deadline":
                         try {
                             taskDetail = extractCommand(command);
-                            tasks.add(new Deadline(taskDetail[0], taskDetail[1]));
-                            printAdded(tasks.get(numOfTask), ++numOfTask);
+                            Deadline deadline = new Deadline(taskDetail[0], taskDetail[1]);
+                            tasks.add(deadline);
+                            printAddOrDelete(true, deadline, ++numOfTask);
                         } catch (EmptyDescriptionException e) {
                             Printer.prettyPrint(e.toString());
                         }
