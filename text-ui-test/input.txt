@@ -1,0 +1,7 @@
+todo eat
+deadline homework /by monday
+event shower /at 10pm
+list
+done 2
+list
+bye
