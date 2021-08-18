@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Processor {
+public class Event {
     private Scanner input;
     private String command;
     private String message;
@@ -8,7 +8,7 @@ public class Processor {
     /**
      * Constructor of the class `Processor`.
      */
-    public Processor() {
+    public Event() {
         this.input = new Scanner(System.in);
     }
 
