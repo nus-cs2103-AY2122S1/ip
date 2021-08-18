@@ -77,29 +77,30 @@ public class Duke {
     public void addTask(String command) throws DukeException {
         Task task;
         if (command.startsWith("todo")) {
-            if (command.length() <= "todo ".length()) {
-                throw new EmptyTaskDescriptionException("todo");
+            if (command.matches("todo *[^ ].*")) {
+                String description = command.replaceFirst("todo", "").trim();
+                task = new Todo(description);
             } else {
-                task = new Todo(command.replaceFirst("todo ", ""));
+                throw new IncompleteTaskDescriptionException("todo");
             }
         } else if (command.startsWith("deadline")) {
-            if (command.length() <= "deadline ".length()) {
-                throw new EmptyTaskDescriptionException("deadline");
-            } else {
-                String taskInfo = command.replaceFirst("deadline ", "");
-                int separator = taskInfo.indexOf(" /by ");
-                String description = taskInfo.substring(0, separator);
-                String by = taskInfo.substring(separator + 5);
+            if (command.matches("deadline *[^ ].* /by *[^ ].*")) {
+                String taskInfo = command.replaceFirst("deadline", "").trim();
+                int separator = taskInfo.indexOf("/by");
+                String description = taskInfo.substring(0, separator).trim();
+                String by = taskInfo.substring(separator + 3).trim();
                 task = new Deadline(description, by);
+            } else {
+                throw new IncompleteTaskDescriptionException("deadline");
             }
         } else if (command.startsWith("event")) {
-            if (command.length() <= "event ".length()) {
-                throw new EmptyTaskDescriptionException("event");
+            if (command.matches("event *[^ ].* /by *[^ ].*")) {
+                throw new IncompleteTaskDescriptionException("event");
             } else {
-                String taskInfo = command.replaceFirst("event ", "");
-                int separator = taskInfo.indexOf(" /at ");
-                String description = taskInfo.substring(0, separator);
-                String at = taskInfo.substring(separator + 5);
+                String taskInfo = command.replaceFirst("event", "").trim();
+                int separator = taskInfo.indexOf("/at");
+                String description = taskInfo.substring(0, separator).trim();
+                String at = taskInfo.substring(separator + 3).trim();
                 task = new Event(description, at);
             }
         } else {
