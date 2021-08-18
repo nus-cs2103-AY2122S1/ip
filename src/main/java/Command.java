@@ -1,6 +1,7 @@
 public enum Command {
     LIST,
     BYE,
+    DONE,
     ADDTASK;
 
     public static Command evaluateInput(String input) {
