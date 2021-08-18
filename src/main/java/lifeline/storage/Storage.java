@@ -1,5 +1,6 @@
 package lifeline.storage;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,10 +9,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import lifeline.exception.LifelineException;
 import lifeline.task.Deadline;
@@ -28,15 +26,18 @@ public class Storage {
 
     public Storage(String filepath) {
         this.filepath = filepath;
-        this.gson = new Gson();
+        this.gson = new GsonBuilder().setPrettyPrinting().create();
     }
+
 
     public void save(TaskList tasks) throws LifelineException {
         try {
+            createDirectoryIfMissing();
             FileWriter fileWriter = new FileWriter(filepath);
             fileWriter.write(gson.toJson(tasks.getTaskList(), ArrayList.class));
             fileWriter.close();
         } catch (IOException e) {
+            System.out.println(e.getMessage());
             throw new LifelineException("Unable to save tasks at the moment");
         }
     }
@@ -67,5 +68,11 @@ public class Storage {
         } catch (IOException e) {
             throw new LifelineException("Unable to find your saved tasks!\n");
         }
+    }
+
+    private void createDirectoryIfMissing() {
+        String directoryToSaveTo = filepath.substring(0, filepath.lastIndexOf(File.separator));
+        File directory = new File(directoryToSaveTo);
+        directory.mkdirs();
     }
 }
