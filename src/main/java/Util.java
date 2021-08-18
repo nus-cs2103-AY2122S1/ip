@@ -1,3 +1,5 @@
+import tasks.Task;
+
 public class Util {
     public static boolean isInteger(String s) {
         try {
