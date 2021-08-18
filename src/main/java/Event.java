@@ -15,4 +15,7 @@ public class Event extends Entry{
     public String toString() {
         return "[E]" + super.toString() + "(at: " + event + ")";
     }
+
+    @Override
+    public boolean isEmpty() { return super.isEmpty() || event.length() < 1; }
 }

@@ -27,6 +27,10 @@ public class Entry {
         }
     }
 
+    public boolean isEmpty() {
+        return entry.length() < 1;
+    }
+
     public String getEntryOnly() {
         return this.entry;
     }

@@ -15,4 +15,7 @@ public class Deadline extends Entry {
     public String toString() {
         return "[D]" + super.toString() + "(by: " + deadline + ")";
     }
+
+    @Override
+    public boolean isEmpty() { return super.isEmpty() || deadline.length() < 1; }
 }

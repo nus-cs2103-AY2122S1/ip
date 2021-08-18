@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -23,12 +24,16 @@ public class Duke {
     private static int numberOfEntries;
 
     private static void addEntry(Entry entry) {
-        entries[numberOfEntries++] = entry;
-        System.out.println("Awesome, Duke remembers this event:"+ entry);
-        if (numberOfEntries < 2) {
-            System.out.println("We now have " + numberOfEntries + " task in our plan!");
+        if (!entry.isEmpty()){
+            entries[numberOfEntries++] = entry;
+            System.out.println("Awesome, Duke remembers this event:" + entry);
+            if (numberOfEntries < 2) {
+                System.out.println("We now have " + numberOfEntries + " task in our plan!");
+            } else {
+                System.out.println("We now have " + numberOfEntries + " tasks in our plan!");
+            }
         } else {
-            System.out.println("We now have " + numberOfEntries + " tasks in our plan!");
+            System.out.println("Empty Entry/Timing! :( Try Again");
         }
     }
 
@@ -42,6 +47,8 @@ public class Duke {
             for (int i = 0; i < numberOfEntries; i++) {
                 System.out.println(i + 1 + "." + entries[i]);
             }
+        } else {
+            System.out.println("No tasks added!");
         }
     }
 
@@ -58,69 +65,83 @@ public class Duke {
         }
     }
 
-    private static int parseNumArgument(int startPoint, String input) {
-        return Integer.parseInt(input.substring(startPoint));
-    }
-
-    private static String parseTiming(String timingPrefix, String input) {
-        int delimiterIndex = input.indexOf(timingPrefix);
-        if (delimiterIndex == -1) {
-            return "";
+    private static String parseTiming(ArrayList<String> terms) {
+        if (terms.get(0).startsWith("/")) {
+            terms.remove(0);
+            StringBuilder timing = new StringBuilder();
+            for (String term: terms) {
+                timing.append(term);
+            }
+            return timing.toString();
         } else {
-            int startPoint = delimiterIndex + timingPrefix.length() + 1;
-            return input.substring(startPoint);
+            return "";
         }
     }
 
-    private static String parseEntry(String command, String input) {
-        int startPoint = command.length();
-        int endPoint = input.indexOf("/");
-        endPoint = endPoint == -1 ? input.length() : endPoint;
-        return input.substring(startPoint, endPoint);
+    private static void parseEntry(ArrayList<String> terms) {
+        if (!terms.isEmpty()) {
+            StringBuilder entry = new StringBuilder();
+            //Combine All Strings Until End of List or '/' character is found
+            int count = 0;
+            ArrayList<String> termsCopy = new ArrayList<>(terms);
+            for (String term : termsCopy) {
+                if (term.startsWith("/")) {
+                    terms.add(0, entry.toString());
+                    return;
+                } else {
+                    entry.append(term);
+                    terms.remove(count++);
+                }
+            }
+            terms.add(0, entry.toString());
+        }
     }
 
-    private static void parseAndHandleInput(String input) {
-        int numberArg = 0;
-        String timing = "";
-        String entry = "";
-
-        if (input.startsWith("done ")) {
-            numberArg = parseNumArgument(5, input);
-            input = MARK_ENTRY_DONE_COMMAND;
-        } else if (input.startsWith("deadline ")) {
-            timing = parseTiming("/by", input);
-            if (!timing.equals("")) {
-                entry = parseEntry(DEADLINE_COMMAND, input);
-                input = DEADLINE_COMMAND;
-            } else {
-                input = "";
+    private static void parseString (String input, ArrayList<String> terms) {
+        //Function to store all terms in input as separate Strings (separated by space in the input)
+        int length = input.length();
+        if (length >= 1) {
+            StringBuilder currentWord = new StringBuilder();
+            for (int i = 0; i < length; i++) {
+                char currentChar = input.charAt(i);
+                if (currentChar == ' ') {
+                    terms.add(currentWord.toString());
+                    currentWord.setLength(0);
+                } else {
+                    currentWord.append(currentChar);
+                }
             }
-        } else if (input.startsWith("todo ")) {
-            entry = parseEntry(TODO_COMMAND, input);
-            input = TODO_COMMAND;
-        } else if (input.startsWith("event ")) {
-            timing = parseTiming("/at", input);
-            if (!timing.equals("")) {
-                entry = parseEntry(EVENT_COMMAND, input);
-                input = EVENT_COMMAND;
-            } else {
-                input = "";
-            }
+            terms.add(currentWord.toString());
         }
-        switch (input) {
-            case LIST_ENTRIES_COMMAND: listEntries();
+    }
+
+    private static void processInput (String input) {
+        ArrayList<String> terms = new ArrayList<>();
+        parseString(input, terms);
+        String command = terms.isEmpty() ? "" : terms.remove(0);
+        parseEntry(terms);
+        String entry = terms.isEmpty() ? "" : terms.remove(0);
+        String timing = terms.isEmpty() ? "" : parseTiming(terms);
+        //Process Command
+        switch(command) {
+            case LIST_ENTRIES_COMMAND:
+                listEntries();
                 break;
 
-            case MARK_ENTRY_DONE_COMMAND: markEntryAsDone(numberArg);
+            case MARK_ENTRY_DONE_COMMAND:
+                markEntryAsDone(Integer.parseInt(entry));
                 break;
 
-            case TODO_COMMAND: addEntry(new Todo(entry));
+            case TODO_COMMAND:
+                addEntry(new Todo(entry));
                 break;
 
-            case EVENT_COMMAND: addEntry(new Event(entry, timing));
+            case EVENT_COMMAND:
+                addEntry(new Event(entry, timing));
                 break;
 
-            case DEADLINE_COMMAND: addEntry(new Deadline(entry, timing));
+            case DEADLINE_COMMAND:
+                addEntry(new Deadline(entry, timing));
                 break;
 
             default:
@@ -136,7 +157,7 @@ public class Duke {
         Scanner inputScanner = new Scanner(System.in);
         String input = inputScanner.nextLine();
         while (!(input.equals(TERMINATION_COMMAND))) {
-            parseAndHandleInput(input);
+            processInput(input);
             input = inputScanner.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
