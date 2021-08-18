@@ -18,17 +18,62 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
             } else if (s.equals("list")) {
                 for (int i = 0; i < counter; i++) {
-                    System.out.println((i + 1) + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].toString());
+                    System.out.println((i + 1) + tasks[i].toString());
                 }
             } else if (strArray[0].equals("done")) {
                 int idx = Integer.parseInt(strArray[1]) - 1;
                 tasks[idx].setDone();
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println("[" + tasks[idx].getStatusIcon() + "] " + tasks[idx].toString());
-            } else {
-                tasks[counter] = new Task(s);
+                System.out.println("Nice! I've marked this task as done: \n" + "\t" + tasks[idx].toString());
+            } else if (strArray[0].equals("todo")) {
+                String description = new String();
+                for (int i = 1; i < strArray.length; i++) {
+                    description = description + strArray[i] + " ";
+                }
+
+                tasks[counter] = new Todo(description);
+                System.out.println("Got it. I've added this task:\n" + "\t" + tasks[counter].toString());
                 counter++;
-                System.out.println("added: " + s);
+                System.out.println("Now you have " + counter + " tasks in your list.");
+            } else if (strArray[0].equals("deadline")) {
+                String description = new String();
+                String date = new String();
+                for (int i = 1; i < strArray.length; i++) {
+                    if (strArray[i].equals("/by")) {
+                        i++;
+                        while (i < strArray.length) {
+                            date = " " + date + strArray[i];
+                            i++;
+                        }
+                        break;
+                    }
+                    description = description + strArray[i] + " ";
+                }
+
+                tasks[counter] = new Deadline(description, date);
+                System.out.println("Got it. I've added this task:\n" + "\t" + tasks[counter].toString());
+                counter++;
+                System.out.println("Now you have " + counter + " tasks in your list.");
+            } else if (strArray[0].equals("event")) {
+                String description = new String();
+                String date = new String();
+                for (int i = 1; i < strArray.length; i++) {
+                    if (strArray[i].equals("/at")) {
+                        i++;
+                        while (i < strArray.length) {
+                            date = " " + date + strArray[i];
+                            i++;
+                        }
+                        break;
+                    }
+                    description = description + strArray[i] + " ";
+                }
+
+                tasks[counter] = new Event(description, date);
+                System.out.println("Got it. I've added this task:\n" + "\t" + tasks[counter].toString());
+                counter++;
+                System.out.println("Now you have " + counter + " tasks in your list.");
+            } else {
+                System.out.println("Invalid input. Please try again.");
             }
         }
     }
