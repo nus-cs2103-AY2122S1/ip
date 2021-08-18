@@ -32,17 +32,65 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) {
+    public static Command parseUserInput(String input) throws DukeException {
+        String[] strings = input.split(" ");
+        String operation = strings[0];
+        switch (operation) {
+            case "bye":
+            case "list":
+                return new Command(operation);
+            case "done":
+                if (strings.length == 1) {
+                    throw new DukeException("You need to indicate which task number should be marked as done.");
+                }
+                try {
+                    int doneTaskNum = Integer.parseInt(strings[1]);
+                    return new Command(strings[0], doneTaskNum);
+                } catch (NumberFormatException e) {
+                    throw new DukeException("The task to be marked as done should be indicated its list index.");
+                }
+            case "todo":
+                if (strings.length == 1) {
+                    throw new DukeException("The description of a todo cannot be empty.");
+                }
+                return new Command(strings[0], input.substring(5));
+            case "deadline":
+                if (strings.length == 1) {
+                    throw new DukeException("The description of a deadline cannot be empty.");
+                }
+                String[] descriptionAndBy = input.substring(9).split("/by ");
+                if (descriptionAndBy.length == 1) {
+                    throw new DukeException("The done-by date of a deadline cannot be empty.");
+                }
+                return new Command(strings[0], descriptionAndBy[0], descriptionAndBy[1]);
+            case "event":
+                if (strings.length == 1) {
+                    throw new DukeException("The description of an event cannot be empty.");
+                }
+                String[] descriptionAndAt = input.substring(6).split("/at ");
+                if (descriptionAndAt.length == 1) {
+                    throw new DukeException("The timing of an event cannot be empty.");
+                }
+                return new Command(strings[0], descriptionAndAt[0], descriptionAndAt[1]);
+            default:
+                throw new DukeException("Sorry, I do not understand this command.");
+        }
+    }
+
+    public static void main(String[] args) throws DukeException {
         print(introString);
+        Command command;
         label:
         while (true) {
             String userEntry = sc.nextLine();
-            String[] commands = userEntry.split(" ");
-            String description;
-            String descriptionAndTime;
-            String time;
+            try {
+                command = parseUserInput(userEntry);
+            } catch (DukeException e) {
+                print(e.toString());
+                continue;
+            }
             Task task;
-            switch (commands[0]) {
+            switch (command.getOperation()) {
                 case "bye":
                     print(outroString);
                     break label;
@@ -50,31 +98,24 @@ public class Duke {
                     print(taskListString());
                     break;
                 case "done":
-                    task = taskList[Integer.parseInt(commands[1]) - 1];
+                    task = taskList[command.getIndex() - 1];
                     task.setDone(true);
                     print(doneString(task));
                     break;
                 case "todo":
-                    description = userEntry.substring(5);
-                    task = new ToDo(description);
+                    task = new ToDo(command.getDescription());
                     taskList[taskIndex] = task;
                     taskIndex++;
                     print(addedString(task));
                     break;
                 case "deadline":
-                    descriptionAndTime = userEntry.substring(9);
-                    description = descriptionAndTime.split("/by ")[0];
-                    time = descriptionAndTime.split("/by ")[1];
-                    task = new Deadline(description, time);
+                    task = new Deadline(command.getDescription(), command.getTime());
                     taskList[taskIndex] = task;
                     taskIndex++;
                     print(addedString(task));
                     break;
                 case "event":
-                    descriptionAndTime = userEntry.substring(6);
-                    description = descriptionAndTime.split("/at ")[0];
-                    time = descriptionAndTime.split("/at ")[1];
-                    task = new Event(description, time);
+                    task = new Event(command.getDescription(), command.getTime());
                     taskList[taskIndex] = task;
                     taskIndex++;
                     print(addedString(task));
