@@ -31,48 +31,53 @@ public class Duke {
                     System.out.println(line + "Nice! I've marked this task as done:\n" + arr[num]);
                     break;
                 case "todo":
-                    String x = sc.nextLine().trim();
-                    if(x.isEmpty()){
-                        throw new IllegalArgumentException("\n"+line+"\n☹ OOPS!!! The description of a todo cannot be empty.\n"+line);
+                    try {
+                        Task todo = new Todo(sc.nextLine().trim(), count);
+                        arr[index] = todo;
+                        System.out.println(line + "Got it. I've added this task:\n" + todo +
+                                "\nNow you have " + count + " tasks in the list.\n" + line);
+                        index++;
+                        count++;
+                        break;
+                    } catch (Exception e){
+                        System.out.println("\n" + line +
+                                "\n☹ OOPS!!! The description of a todo cannot be empty.\n" + line);
+                        break;
                     }
-                    Task todo = new Todo(x,count);
-                    arr[index] = todo;
-                    System.out.println(line + "Got it. I've added this task:\n" + todo +
-                            "\nNow you have " + count +" tasks in the list.\n" + line);
-                    index++;
-                    count++;
-                    break;
                 case "deadline":
-                    String[] deadlineArr = sc.nextLine().split("/by");
-                    Task deadline = new Deadline(deadlineArr[0].trim(),deadlineArr[1].trim(),count);
-                    arr[index] = deadline;
-                    System.out.println(line + "Got it. I've added this task:\n" + deadline +
-                            "\nNow you have " + count +" tasks in the list.\n" + line);
-                    index++;
-                    count++;
-                    break;
+                    try {
+                        String[] deadlineArr = sc.nextLine().split("/by");
+                        Task deadline = new Deadline(deadlineArr[0].trim(), deadlineArr[1].trim(), count);
+                        arr[index] = deadline;
+                        System.out.println(line + "Got it. I've added this task:\n" + deadline +
+                                "\nNow you have " + count + " tasks in the list.\n" + line);
+                        index++;
+                        count++;
+                        break;
+                    } catch (Exception e){
+                        System.out.println("\n" + line +
+                                "\n☹ OOPS!!! The description of a deadline cannot be empty.\n" + line);
+                        break;
+                    }
                 case "event":
-                    String[] eventArr = sc.nextLine().split("/at");
-                    Task event = new Event(eventArr[0].trim(),eventArr[1].trim(),count);
-                    arr[index] = event;
-                    System.out.println(line + "Got it. I've added this task:\n" + event +
-                            "\nNow you have " + count +" tasks in the list.\n" + line);
-                    index++;
-                    count++;
-                    break;
+                    try {
+                        String[] eventArr = sc.nextLine().split("/at");
+                        Task event = new Event(eventArr[0].trim(), eventArr[1].trim(), count);
+                        arr[index] = event;
+                        System.out.println(line + "Got it. I've added this task:\n" + event +
+                                "\nNow you have " + count + " tasks in the list.\n" + line);
+                        index++;
+                        count++;
+                        break;
+                    } catch (Exception e){
+                        System.out.println("\n" + line +
+                                "\n☹ OOPS!!! The description of a event cannot be empty.\n" + line);
+                        break;
+                    }
                 default:
-                    throw new IllegalArgumentException("\n"+line+"\n☹ OOPS!!! I'm sorry, but I don't know what " +
-                            "that means :-(\n" + line);
+                    System.out.println("\n" + line +
+                            "\n☹ OOPS!!! I'm sorry, but I don't know what that means :-(.\n" + line);
 
-                    /*
-                    Task t = new Task(command + " " + sc.nextLine().trim(),count);
-                    arr[index] = t;
-                    System.out.println(line + "added: " + t.description + "\n" + line);
-                    index++;
-                    count++;
-                    break;
-
-                     */
             }
             if(exit){
                 break;
