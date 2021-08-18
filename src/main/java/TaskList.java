@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<String> taskList;
+    private ArrayList<Task> taskList;
     private Ui ui;
 
     public TaskList() {
@@ -9,7 +9,7 @@ public class TaskList {
         ui = new Ui();
     }
 
-    public void addTask(String task) {
+    public void addTask(Task task) {
         taskList.add(task);
         ui.displayLine();
         System.out.println("added: " + task);
@@ -19,7 +19,7 @@ public class TaskList {
     public void listTasks() {
         ui.displayLine();
         int index = 1;
-        for (String task : taskList) {
+        for (Task task : taskList) {
             System.out.println(String.format("%s. %s", index, task));
             index++;
         }

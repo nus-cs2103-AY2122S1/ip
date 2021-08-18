@@ -16,7 +16,8 @@ public class Command {
                 taskList.listTasks();
                 break;
             default:
-                taskList.addTask(input);
+                Task newTask = new Task(input);
+                taskList.addTask(newTask);
         }
     }
 
