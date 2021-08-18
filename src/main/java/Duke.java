@@ -55,7 +55,7 @@ public class Duke {
                     if (furtherSplits.length < 2 || furtherSplits[0].equals("")) {
                         throw new DukeException("The description of a event cannot be empty.\n" +
                                 "Don't forget to use /at to indicate the event time.");
-                    } else if (furtherSplits[1].equals("")) {
+                    } else if (furtherSplits[1].equals("") || furtherSplits[1].equals(" ")) {
                         throw new DukeException("event must come with a event date/time.");
                     }
                     tasks.add(new Event(furtherSplits[0], furtherSplits[1]));
