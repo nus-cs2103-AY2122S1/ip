@@ -148,7 +148,7 @@ public class Duke {
     public void addTask(String taskTitle) {
         tasks[count] = new Task(taskTitle);
         count++;
-        printAddMessage("added: ", taskTitle);
+        printAddMessage("added:", taskTitle);
     }
 
     public static void main(String[] args) {
