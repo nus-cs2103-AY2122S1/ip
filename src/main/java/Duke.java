@@ -3,6 +3,16 @@ import java.util.ArrayList;
 
 public class Duke {
 
+//    enum stdInputs {
+//        BYE,
+//        LIST,
+//        DONE,
+//        DELETE,
+//        TODO,
+//        DEADLINE,
+//        EVENT
+//    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
