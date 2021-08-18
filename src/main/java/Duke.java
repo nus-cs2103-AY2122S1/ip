@@ -56,14 +56,20 @@ public class Duke {
         Task task = new Task(input);
         String[] splitType = input.split(" ", 2);
         String type = splitType[0];
-        if (type.equals("todo")) {
+        switch (type) {
+        case "todo":
             task = new Todo(splitType[1]);
-        } else if (type.equals("deadline")) {
+            break;
+        case "deadline": {
             String[] splitMessage = splitType[1].split(" /by ", 2);
             task = new Deadline(splitMessage[0], splitMessage[1]);
-        } else if (type.equals("event")) {
+            break;
+        }
+        case "event": {
             String[] splitMessage = splitType[1].split(" /at ", 2);
             task = new Event(splitMessage[0], splitMessage[1]);
+            break;
+        }
         }
         this.list.add(task);
         formatAndPrint(String.format("Got it. I've added this task:\n%s\nNow you have %d %s in your list.",
@@ -76,7 +82,7 @@ public class Duke {
      * Formats the list of tasks for displaying when the user inputs "list".
      */
     public void displayList() {
-        StringBuilder output = new StringBuilder("Here are the tasks in your list: \n");
+        StringBuilder output = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < this.list.size(); i++) {
             output.append(String.format("%d. %s", i + 1, this.list.get(i)));
             // Append new line for all lines except last line.
@@ -94,7 +100,7 @@ public class Duke {
     public void markAsDone(int itemNo) {
         Task task = list.get(itemNo);
         task.toggleComplete();
-        formatAndPrint("Nice! I've marked this task as done: \n" + task.toString());
+        formatAndPrint("Nice! I've marked this task as done:\n" + task);
     }
 
     /**
