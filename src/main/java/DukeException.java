@@ -1,30 +1,30 @@
 public class DukeException extends Exception {
     private final String customMessage;
     
-    public DukeException(String err) {
+    public DukeException(DukeExceptionType err) {
         switch (err) {
-            case "deadlineDesc":
+            case DEADLINEDESC:
                 this.customMessage = "  OOPS!!! The description of a deadline cannot be empty!";
                 break;
-            case "deadlineTime":
+            case DEADLINETIME:
                 this.customMessage = "  OOPS!!! The time of a deadline cannot be empty!";
                 break;
-            case "eventDesc":
+            case EVENTDESC:
                 this.customMessage = "  OOPS!!! The description of an event cannot be empty!";
                 break;
-            case "eventPeriod":
+            case EVENTPERIOD:
                 this.customMessage = "  OOPS!!! The period of an event cannot be empty!";
                 break;
-            case "todoDesc":
+            case TODODESC:
                 this.customMessage = "  OOPS!!! The description of a todo cannot be empty!";
                 break;
-            case "invalidDone":
+            case INVALIDDONE:
                 this.customMessage = "  OOPS!!! That is not a valid task index for completion!";
                 break;
-            case "invalidDelete":
+            case INVALIDDELETE:
                 this.customMessage = "  OOPS!!! That is not a valid task index for deletion!";
                 break;
-            case "invalidInput":
+            case INVALIDINPUT:
                 this.customMessage = "  OOPS!!! I don't recognise the command you've given me.";
                 break;
             default:
