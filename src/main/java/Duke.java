@@ -16,10 +16,19 @@ public class Duke {
   private static final String LIST = "Here are the tasks in your list:";
   private static final String ERROR_TODO_MISSING_DESCRIPTION = "☹ OOPS!!! The description of a todo cannot be empty.";
   private static final String ERROR_UNKNOWN_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+  private static final String ERROR_DELETE_INVALID_INDEX = "☹ OOPS!!! Please state a valid index to delete!";
 
   private static List<String> addTaskString(String task, String totalTasks) {
     return List.of(
       "Got it. I've added this task: ",
+      INDENTATION_1 + task,
+      String.format("Now you have %s tasks in the list.", totalTasks)
+    );
+  }
+
+  private static List<String> deleteTaskString(String task, String totalTasks) {
+    return List.of(
+      "Noted. I've removed this task: ",
       INDENTATION_1 + task,
       String.format("Now you have %s tasks in the list.", totalTasks)
     );
@@ -72,6 +81,7 @@ public class Duke {
   private static final String TODO_ENUM = "todo";
   private static final String EVENT_ENUM = "event";
   private static final String DEADLINE_ENUM = "deadline";
+  private static final String DELETE_ENUM = "delete";
 
   public static void handleList(List<Task> taskList) {
     List<String> outputList = new ArrayList<>();
@@ -117,6 +127,12 @@ public class Duke {
     print(output);
   }
 
+  public static void handleDelete(List<Task> taskList, int index) {
+    if (index < -1 || index >= taskList.size()) print(ERROR_DELETE_INVALID_INDEX);
+    Task deletedTask = taskList.remove(index - 1);
+    print(deleteTaskString(deletedTask.toString(), Integer.toString(taskList.size())));
+  }
+
   public static void handleCommands() {
     List<Task> taskArray = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
@@ -156,6 +172,11 @@ public class Duke {
         case DONE_ENUM:
           {
             handleDone(taskArray, Integer.parseInt(commands[1]));
+            break;
+          }
+        case DELETE_ENUM:
+          {
+            handleDelete(taskArray, Integer.parseInt(commands[1]));
             break;
           }
         default:
