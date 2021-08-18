@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -33,10 +34,21 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         printStatement("你好! 我是杜克\n能为您做什么吗？\n");
         Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
-        while (!command.equals("bye")) {
-            printStatement(command);
-            command = sc.nextLine();
+        String input = sc.nextLine();
+        ArrayList<String> arrayList = new ArrayList<>(100);
+        while (!input.equals("bye")) {
+            if (input.equals("list")) {
+                int counter = 1;
+                StringBuilder sb = new StringBuilder();
+                for (String item:arrayList) {
+                    sb.append(String.valueOf(counter) + ". " + item + "\n");
+                }
+                printStatement(sb.toString());
+            } else {
+                arrayList.add(input);
+                printStatement("added: " + input);
+            }
+            input = sc.nextLine();
         }
         printStatement("再见，请再光临！");
 
