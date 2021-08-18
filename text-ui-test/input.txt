@@ -1,22 +1,22 @@
-todo one
-todo two
-todo three
+add todo one
+add todo two
+add todo three
 list
 done 1
 done 2
 done 3
 list
-deadline one /by Sunday
-deadline two /by Monday
-deadline three /by Tuesday
+add deadline one /by Sunday
+add deadline two /by Monday
+add deadline three /by Tuesday
 list
 done 4
 done 5
 done 6
 list
-event one /at Mon 2-4pm
-event two /at Tues 2-4pm
-event three /at Wed 2-4pm
+add event one /at Mon 2-4pm
+add event two /at Tues 2-4pm
+add event three /at Wed 2-4pm
 list
 done 7
 done 8
