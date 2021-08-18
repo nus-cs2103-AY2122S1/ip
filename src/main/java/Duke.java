@@ -26,7 +26,7 @@ public class Duke {
                             case ("list"):
                                 int index = 0;
                                 while (index < Task.getCounter()) {
-                                    System.out.println("\t" + (index + 1) + "." + Task.getTaskList()[index].toString());
+                                    System.out.println("\t" + (index + 1) + "." + Task.getTaskList().get(index).toString());
                                     index++;
                                 }
                                 break;
@@ -38,10 +38,23 @@ public class Duke {
                                                 " in my list. Please key in 'list' if you would like to " +
                                                 "view your list of tasks again!");
                                     } else {
-                                        Task.getTaskList()[taskNum].markAsDone();
+                                        Task.getTaskList().get(taskNum).markAsDone();
                                         System.out.println("\tGood job! I have marked this task as done:");
-                                        System.out.println("\t\t" + Task.getTaskList()[taskNum].toString());
+                                        System.out.println("\t\t" + Task.getTaskList().get(taskNum).toString());
                                     }
+                                } else if (instruction.startsWith("delete")) {
+                                        int taskNum = Integer.parseInt(instruction.substring(7)) - 1;
+                                        if (taskNum >= Task.getCounter()) {
+                                            throw new DukeException("Hmm, I do not have task " + (taskNum + 1) +
+                                                    " in my list. Please key in 'list' if you would like to " +
+                                                    "view your list of tasks again!");
+                                        } else {
+                                            System.out.println("\tNoted. I've removed this task:");
+                                            System.out.println("\t\t" + Task.getTaskList().get(taskNum).toString());
+                                            Task.getTaskList().get(taskNum).deleteTask();
+                                            System.out.println("\tNow you have " + Task.getCounter() +
+                                                    " task(s) in the list.");
+                                        }
                                 } else if (instruction.startsWith("todo")) {
                                     if (instruction.length() < 6) {
                                         throw new DukeException("OOPS!!! The description of a todo " +
