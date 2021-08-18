@@ -21,45 +21,44 @@ public class Duke {
 
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            switch(input) {
-                case "bye":
-                    printSingleLineBorder();
-                    System.out.println("Bye. Hope to see you again soon!");
-                    printSingleLineBorder();
-                    break;
-                case "list":
-                    printSingleLineBorder();
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < numberOfTasks; i++) {
-                        System.out.println((i + 1) + "." + list.get(i));
-                    }
-                    printSingleLineBorder();
-                    break;
-                default:
-                    printSingleLineBorder();
-                    String[] splitInput = input.split(" ");
-                    if (splitInput[0].equals("done")) {
-                        try {
-                            int taskIndex = Integer.parseInt(splitInput[1]) - 1;
-                            if (taskIndex < 0 || taskIndex > list.size() - 1) {
-                                throw new NumberFormatException();
-                            }
-                            Task task = list.get(taskIndex);
-                            task.markDone();
-                            System.out.println("Nice! I've marked this task as done:");
-                            System.out.println(task);
-                        } catch (NumberFormatException e) {
-                            System.out.println("Invalid Task Number");
+            printSingleLineBorder();
+            if (input.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+            } else if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 0; i < numberOfTasks; i++) {
+                    System.out.println((i + 1) + "." + list.get(i));
+                }
+            } else {
+                String[] splitInput = input.split(" ");
+                if (splitInput[0].equals("done")) {
+                    try {
+                        int taskIndex = Integer.parseInt(splitInput[1]) - 1;
+                        if (taskIndex < 0 || taskIndex > list.size() - 1) {
+                            throw new NumberFormatException();
                         }
-                    } else {
-                        try {
-                            addTask(input);
-                        } catch (DukeException e) {
-                            System.out.println(e.getMessage());
-                        }
+                        Task task = list.get(taskIndex);
+                        task.markDone();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(task);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid Task Index");
                     }
-                    printSingleLineBorder();
+                } else if (splitInput[0].equals("delete")) {
+                    try {
+                        removeTask(splitInput[1]);
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else {
+                    try {
+                        addTask(input);
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
             }
+            printSingleLineBorder();
         }
     }
 
@@ -114,6 +113,20 @@ public class Duke {
             System.out.println("Now you have " + numberOfTasks + " task in the list");
         } else {
             System.out.println("Now you have " + numberOfTasks + " tasks in the list");
+        }
+    }
+
+    // Remove task from list
+    private static void removeTask(String index) throws DukeException {
+        int taskIndex = Integer.parseInt(index) - 1;
+        if (taskIndex < 0 || taskIndex > numberOfTasks - 1) {
+            throw new DukeException("Invalid Task Index.");
+        } else {
+            Task task = list.get(taskIndex);
+            list.remove(taskIndex);
+            numberOfTasks--;
+            System.out.println("Noted. I've removed the following task:\n" + task +
+                    "\nNow you have " + numberOfTasks + " tasks in the list.");
         }
     }
 
