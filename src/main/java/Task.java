@@ -8,6 +8,10 @@ public class Task {
         this.message = message;
     }
 
+    /**
+     * Overrides toString() method.
+     * @return String representation of the task object.
+     */
     @Override
     public String toString() {
         return this.message;
