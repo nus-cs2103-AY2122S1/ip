@@ -1,1 +1,9 @@
 todo jogging
+done 1
+todo again
+done 2
+deadline cs2103T /by thursday 2369
+event party tonight /at MBS
+done 4
+event dsads /at mbs
+event party tonight /at MBS

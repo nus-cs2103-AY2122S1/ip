@@ -35,7 +35,7 @@ public class Storage {
             } else if (command.equals("event")) {
                 String description = lineSplitter.nextLine();
                 String[] parts = description.split("/at");
-                tasklist.add(new Deadline(parts[0].trim(), parts[1].trim()));
+                tasklist.add(new Event(parts[0].trim(), parts[1].trim()));
             } else if (command.equals("done")) {
                 int indexToMark = lineSplitter.nextInt();
                 tasklist.get(indexToMark - 1).markAsDone();
