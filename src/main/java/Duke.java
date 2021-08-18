@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -51,6 +50,62 @@ public class Duke {
                     input = scanner.next();
                     break;
 
+                case "todo":
+                    String tdLabel = scanner.nextLine();
+                    System.out.println("──────────────────────────────────────────");
+                    Todo todo = new Todo(tdLabel);
+                    list[pointer] = todo;
+                    pointer++;
+                    System.out.println("added: " + todo);
+                    System.out.println("Now you have " + pointer + " tasks in the list");
+                    System.out.println("──────────────────────────────────────────");
+                    input = scanner.next();
+                    break;
+
+                case "deadline":
+                    String dlLabel = scanner.nextLine();
+                    System.out.println("──────────────────────────────────────────");
+                    int dlSep = dlLabel.indexOf("by");
+                    if (dlSep == -1) {
+                        System.out.println("──────────────────────────────────────────");
+                        System.out.println("No date/time provided!");
+                        System.out.println("──────────────────────────────────────────");
+                        input = scanner.next();
+                        break;
+                    }
+                    String dl1 = dlLabel.substring(0, dlSep - 1);
+                    String dl2 = dlLabel.substring(dlSep + 3);
+                    Deadline deadline = new Deadline(dl1, dl2);
+                    list[pointer] = deadline;
+                    pointer++;
+                    System.out.println("added: " + deadline);
+                    System.out.println("Now you have " + pointer + " tasks in the list");
+                    System.out.println("──────────────────────────────────────────");
+                    input = scanner.next();
+                    break;
+
+                case "event":
+                    String eLabel = scanner.nextLine();
+                    System.out.println("──────────────────────────────────────────");
+                    int eSep = eLabel.indexOf("at");
+                    if (eSep == -1) {
+                        System.out.println("──────────────────────────────────────────");
+                        System.out.println("No date/time provided!");
+                        System.out.println("──────────────────────────────────────────");
+                        input = scanner.next();
+                        break;
+                    }
+                    String e1 = eLabel.substring(0, eSep - 1);
+                    String e2 = eLabel.substring(eSep + 3);
+                    Event event = new Event(e1, e2);
+                    list[pointer] = event;
+                    pointer++;
+                    System.out.println("added: " + event);
+                    System.out.println("Now you have " + pointer + " tasks in the list");
+                    System.out.println("──────────────────────────────────────────");
+                    input = scanner.next();
+                    break;
+
                 default:
                     String label = input + scanner.nextLine();
                     System.out.println("──────────────────────────────────────────");
@@ -58,6 +113,7 @@ public class Duke {
                     list[pointer] = task;
                     pointer++;
                     System.out.println("added: " + task);
+                    System.out.println("Now you have " + pointer + " tasks in the list");
                     System.out.println("──────────────────────────────────────────");
                     input = scanner.next();
                     break;
@@ -68,10 +124,10 @@ public class Duke {
     }
 
     private static class Task {
-        private boolean done = false;
-        private String name;
+        protected boolean done = false;
+        protected String name;
 
-        Task(String name) {
+        public Task(String name) {
             this.name = name;
         }
 
@@ -86,6 +142,42 @@ public class Duke {
             } else {
                 return "[ ] " + name;
             }
+        }
+    }
+
+    private static class Todo extends Task {
+        public Todo(String str) {
+            super(str);
+        }
+
+        @Override
+        public String toString() {
+            return "[T]" + super.toString();
+        }
+    }
+
+    private static class Deadline extends Task {
+        protected String when;
+        public Deadline(String str1, String str2) {
+            super(str1);
+            this.when = str2;
+        }
+
+        @Override
+        public String toString() {
+            return "[D]" + super.toString() + " (by: " + when + ")";
+        }
+    }
+
+    private static class Event extends Task {
+        protected String when;
+        public Event(String str1, String str2) {
+            super(str1);
+            this.when = str2;
+        }
+        @Override
+        public String toString() {
+            return "[E]" + super.toString() + " (at: " + when + ")";
         }
     }
 }
