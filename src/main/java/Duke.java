@@ -34,16 +34,27 @@ public class Duke {
                 }
             }
             else if(checkForKeyword.equals("todo")){
-//                System.out.println(input);
-                //String secondWord = input.substring(input.indexOf(" "));
-                //System.out.println(secondWord);
+                String secondWord = inputScanner.nextLine();
+                list[counter] = new Todo(secondWord);
+                counter++;
+                System.out.println("Got it. I've added this task: \n" + list[counter - 1] + "\nNow you have " + counter + " tasks in the list.");
             }
-//            else if(checkForKeyword.next().equals("deadline")){
-//
-//            }
-//            else if(checkForKeyword.next().equals("event")){
-//
-//            }
+            else if(checkForKeyword.equals("deadline")){
+                String[] contentAndDate = inputScanner.nextLine().split("/by",2);
+                String content = contentAndDate[0];
+                String date = contentAndDate[1];
+                list[counter] = new Deadline(content, date);
+                counter++;
+                System.out.println("Got it. I've added this task: \n" + list[counter - 1] + "\nNow you have " + counter + " tasks in the list.");
+            }
+            else if(checkForKeyword.equals("event")){
+                String[] contentAndDate = inputScanner.nextLine().split("/at",2);
+                String content = contentAndDate[0];
+                String date = contentAndDate[1];
+                list[counter] = new Event(content, date);
+                counter++;
+                System.out.println("Got it. I've added this task: \n" + list[counter - 1] + "\nNow you have " + counter + " tasks in the list.");
+            }
             else{
                 if(counter == 100){
                     System.out.println("Max limit of list hit");
