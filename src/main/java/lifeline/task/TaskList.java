@@ -32,7 +32,8 @@ public class TaskList {
     public Task completeTask(int index) throws LifelineException {
         Task taskToMarkAsComplete = taskList.get(index);
         if (taskToMarkAsComplete.isDone()) {
-            throw new LifelineException("lifeline.task.Task is already done!");
+            // wrong output due to refactor
+            throw new LifelineException("Task is already done!");
         }
         taskToMarkAsComplete.setDone(true);
         return taskToMarkAsComplete;
