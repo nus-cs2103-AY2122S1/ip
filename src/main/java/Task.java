@@ -15,6 +15,7 @@ public class Task {
         this.isCompleted = true;
     }
 
+    @Override
     public String toString(){
         String cross = this.isCompleted?"X":" ";
         return "[" + cross + "] " + this.content;

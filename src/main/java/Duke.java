@@ -11,6 +11,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         String input = scanner.nextLine();
         Scanner checkForKeyword = new Scanner(input);
+
         while(!input.equals("bye")){
             if(input.equals("list")){
                 System.out.println("Here are the tasks in your list:");
