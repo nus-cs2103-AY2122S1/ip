@@ -12,5 +12,6 @@ event /at 6
 todo
 deadline cs2103 ip /by
 event tutorial /at
+delete 1
 list
 bye

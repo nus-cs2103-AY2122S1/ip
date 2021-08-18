@@ -1,3 +1,4 @@
+Got it sir, I have added this task: 
  [E][ ] marathon (at: Saturday 2-5)
 Now you have 2 tasks in the list.
 
@@ -33,8 +34,11 @@ Enter a valid deadline time
 
 Enter a valid event time
 
-1. [D][X] reading (by: 530)
-2. [E][X] marathon (at: Saturday 2-5)
-3. [T][ ] send email to mom
+Got it sir, I have removed this task: 
+ [D][X] reading (by: 530)
+Now you have 2 tasks in the list.
+
+1. [E][X] marathon (at: Saturday 2-5)
+2. [T][ ] send email to mom
 
 Goodbye Sir! Will take good care of your garden in the meantime.

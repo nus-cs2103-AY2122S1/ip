@@ -26,6 +26,17 @@ public class Duke {
                 } catch (NumberFormatException e){
                     System.out.println("Task number formatted incorrectly. Try again\n");
                 }
+            } else if(userInput.length() > 5 && userInput.substring(0, 6).equals("delete")){
+                try{
+                    int task = Integer.parseInt(userInput.substring(7));
+                    if(task > 0 && task <= items.size()){
+                        deleteTask(task - 1);
+                    } else {
+                        System.out.println("You have entered an invalid task number Sir, please input again.\n");
+                    }
+                } catch (NumberFormatException e){
+                    System.out.println("Task number formatted incorrectly. Try again\n");
+                }
             } else if(userInput.length() > 8 && userInput.substring(0, 8).equals("deadline")  && userInput.contains("/by")){
 
                 if(userInput.indexOf("/by")  < 11 ){
@@ -37,7 +48,7 @@ public class Duke {
                     String by = userInput.substring(userInput.indexOf("/by") + 4);
                     Task t =  new Deadline(description, by);
                     items.add(t);
-                    echo(t.toString());
+                    echo(t.toString(), "added");
                 }
             } else if(userInput.length() > 5 && userInput.substring(0, 5).equals("event")  && userInput.contains("/at")){
                 if(userInput.indexOf("/at")  < 8 ){
@@ -49,7 +60,7 @@ public class Duke {
                     String at = userInput.substring(userInput.indexOf("/at") + 4);
                     Task t =  new Event(description, at);
                     items.add(t);
-                    echo(t.toString());
+                    echo(t.toString(), "added");
                 }
 
             } else if(userInput.length() > 3 && userInput.substring(0, 4).equals("todo")){
@@ -58,7 +69,7 @@ public class Duke {
                     String description = userInput.substring(5);
                     Task t = new ToDo(description);
                     items.add(t);
-                    echo(t.toString());
+                    echo(t.toString(), "added");
                 } catch (DukeException e){
                     System.out.println(e.getMessage());
                 } catch (StringIndexOutOfBoundsException e){
@@ -73,8 +84,8 @@ public class Duke {
         System.out.println("Goodbye Sir! Will take good care of your garden in the meantime.");
     }
 
-    public static void echo(String userInput){
-        System.out.println("Got it sir, I have added this task: \n " + userInput + "\nNow you have " + items.size() + " tasks in the list.\n");
+    public static void echo(String userInput, String actionType){
+        System.out.println("Got it sir, I have "+ actionType + " this task: \n " + userInput + "\nNow you have " + items.size() + " tasks in the list.\n");
     }
 
     public static void list(){
@@ -93,6 +104,12 @@ public class Duke {
         if(userTask.length() <= 1){
             throw new DukeException("Enter valid " + taskType + " activity\n");
         }
+    }
+
+    public static void deleteTask(int number){
+        Task t = items.remove(number);
+        echo(t.toString(), "removed");
+
     }
 
 }
