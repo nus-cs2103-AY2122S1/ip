@@ -64,18 +64,36 @@ public class Duke {
         while (!(input.equals("bye"))) {
             String[] instruction = input.split(" ", 2);
             if (instruction[0].equals("todo")) {
-                newToDo(instruction[1], taskList);
+                try {
+                    newToDo(instruction[1], taskList);
+                } catch (ArrayIndexOutOfBoundsException a) {
+                    System.out.println("    ____________________________________________________________\n"
+                                    + "     " + "\uD83D\uDE41" + " OOPS!!! The description of a todo cannot be empty.\n"
+                                    + "    ____________________________________________________________");
+                }
                 input = sc.nextLine();
                 continue;
             }
 
             if (instruction[0].equals("deadline")) {
-                newDeadline(instruction[1], taskList);
+                try {
+                    newToDo(instruction[1], taskList);
+                } catch (ArrayIndexOutOfBoundsException a) {
+                    System.out.println("    ____________________________________________________________\n"
+                            + "     " + "\uD83D\uDE41" + " OOPS!!! The description of a deadline cannot be empty.\n"
+                            + "    ____________________________________________________________");
+                }
                 input = sc.nextLine();
                 continue;
             }
             if (instruction[0].equals("event")) {
-                newEvent(instruction[1], taskList);
+                try {
+                    newToDo(instruction[1], taskList);
+                } catch (ArrayIndexOutOfBoundsException a) {
+                    System.out.println("    ____________________________________________________________\n"
+                            + "     " + "\uD83D\uDE41" + " OOPS!!! The description of an event cannot be empty.\n"
+                            + "    ____________________________________________________________");
+                }
                 input = sc.nextLine();
                 continue;
             }
@@ -94,6 +112,11 @@ public class Duke {
                 input = sc.nextLine();
                 continue;
             }
+
+            System.out.println("    ____________________________________________________________\n"
+                    + "     " + "\uD83D\uDE41" + " OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "    ____________________________________________________________");
+            input = sc.nextLine();
         }
 
         System.out.println(ByeMessage);
