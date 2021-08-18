@@ -3,10 +3,10 @@ package Duke.Commands;
 import Duke.Duke;
 
 class ExitCommand extends Command {
-    private static final String KEYWORD = "exit";
+    private static final String KEYWORD = "bye";
 
     @Override
-    public void run(Duke duke, String arg) {
+    public void run(Duke duke, Duke.UserInput input) {
         duke.stop();
     }
 

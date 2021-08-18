@@ -4,8 +4,8 @@ import Duke.Duke;
 
 class UnknownCommand extends Command {
     @Override
-    public void run(Duke duke, String arg) {
-        duke.say(arg);
+    public void run(Duke duke, Duke.UserInput input) {
+        duke.say(input.getRaw());
     }
 
     @Override
