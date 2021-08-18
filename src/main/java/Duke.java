@@ -16,6 +16,7 @@ public class Duke {
             put("todo", (input) -> addToDo(input));
             put("deadline", (input) -> addDeadline(input));
             put("event", (input) -> addEvent(input));
+            put("delete", (input) -> deleteTask(input));
         }
     };
 
@@ -79,7 +80,7 @@ public class Duke {
         }
         try {
             int index = Integer.parseInt(input);
-            if (index < 0 || index > tasks.size() - 1) {
+            if (index < 1 || index > tasks.size()) {
                 new DukeException("INVALID TASK NUMBER YOU FOOL.");
                 return;
             }
@@ -95,6 +96,27 @@ public class Duke {
         }
     }
 
+    private void deleteTask(String input) {
+        if (tasks.isEmpty()) {
+            new DukeException("YOU HAVE NO TASKS YOU FOOL.");
+            return;
+        }
+        try {
+            int index = Integer.parseInt(input);
+            if (index < 1 || index > tasks.size()) {
+                new DukeException("INVALID TASK NUMBER YOU FOOL.");
+                return;
+            }
+            Task currentTask = tasks.get(index - 1);
+            tasks.remove(index - 1);
+            print(String.format("YOU'VE CHOSEN TO ABANDON THIS TASK:\n %s\n YOU HAVE %d TASKS LEFT.", currentTask,
+                    tasks.size()));
+        } catch (NumberFormatException e) {
+            new DukeException("DO YOU NOT KNOW WHAT A NUMBER IS, FOOLISH HUMAN?");
+        }
+
+    }
+
     private void addToDo(String taskName) {
         if (taskName.equals("")) {
             new DukeException("NAME YOUR TASK. DON'T WASTE MY TIME.");
@@ -102,7 +124,7 @@ public class Duke {
         }
         Task newTask = new ToDo(taskName);
         tasks.add(newTask);
-        print(" MORTAL, YOU'VE ADDED THIS TASK: " + newTask);
+        print(String.format(" MORTAL, YOU'VE ADDED THIS TASK:\n %s\n YOU HAVE %d TASKS LEFT.", newTask, tasks.size()));
     }
 
     private void addEvent(String input) {
@@ -113,7 +135,8 @@ public class Duke {
         String[] args = input.split("/at", 2);
         Task newEvent = new Event(args[0].trim(), args[1].trim());
         tasks.add(newEvent);
-        print(" MORTAL, YOU'VE ADDED THIS EVENT: " + newEvent);
+        print(String.format(" MORTAL, YOU'VE ADDED THIS EVENT:\n %s\n YOU HAVE %d TASKS LEFT.", newEvent,
+                tasks.size()));
     }
 
     private void addDeadline(String input) {
@@ -122,9 +145,10 @@ public class Duke {
             return;
         }
         String[] args = input.split("/by", 2);
-        Task newEvent = new Deadline(args[0].trim(), args[1].trim());
-        tasks.add(newEvent);
-        print(" MORTAL, YOU'VE ADDED THIS DEADLINE: " + newEvent);
+        Task newDeadline = new Deadline(args[0].trim(), args[1].trim());
+        tasks.add(newDeadline);
+        print(String.format(" MORTAL, YOU'VE ADDED THIS DEADLINE:\n %s\n YOU NOW HAVE %d TASKS.", newDeadline,
+                tasks.size()));
     }
 
     private void serve() {
