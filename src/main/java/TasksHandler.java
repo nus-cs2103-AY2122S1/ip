@@ -4,37 +4,39 @@ import java.util.ArrayList;
 
 public class TasksHandler {
     private final List<Command> allTasks;
+    private final List<Boolean> isTaskCompleted;
 
     public TasksHandler() {
         this.allTasks = new ArrayList<Command>();
+        this.isTaskCompleted = new ArrayList<Boolean>();
     }
 
+    
+
     protected void storeTasks(Command newCommand) {
-        if (newCommand.isForStoring()) {
-            this.allTasks.add(newCommand);
-            System.out.println("added: " + newCommand);
+        if (!newCommand.isExecutable()) {
+            NonExecutableCommand comm = (NonExecutableCommand) newCommand;
+            if (!comm.isExitCommand()) {
+                boolean TaskCompleted = false;
+                this.allTasks.add(newCommand);
+                this.isTaskCompleted.add(TaskCompleted);
+                System.out.println("added: " + newCommand);
+            }
         }
     }
 
     protected boolean handleTasks(Command newCommand) {
-        if (!newCommand.isForStoring() && !newCommand.isExitCommand()) {
-            displayAllTasks();
+        if (newCommand.isExecutable()) {
+            ExecutableCommand exeCommand = (ExecutableCommand) newCommand;
+            exeCommand.execute(this.allTasks, this.isTaskCompleted);
             return false;
-        } else if (newCommand.isExitCommand()) {
-            System.out.println(newCommand);
-            return true;
         }
-        return false;
-    }
-
-    private void displayAllTasks() {
-        for (int i = 1; i <= this.allTasks.size(); i++) {
-            Command com = this.allTasks.get(i - 1);
-            StringBuilder sb = new StringBuilder("");
-            sb.append(String.valueOf(i) + ".");
-            sb.append(" " + com);
-            System.out.println(sb.toString());
+        NonExecutableCommand nonExeCommand = (NonExecutableCommand) newCommand;
+        boolean exit = nonExeCommand.isExitCommand();
+        if (exit) {
+            System.out.println(nonExeCommand);
         }
+        return exit;
     }
 
 }

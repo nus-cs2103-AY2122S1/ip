@@ -1,9 +1,9 @@
 package commands;
 
-public class ReturnCommand extends Command {
+public class ReturnCommand extends NonExecutableCommand {
     
     public ReturnCommand(String desc) {
-        super(desc, true);
+        super(desc);
     }
 
     @Override

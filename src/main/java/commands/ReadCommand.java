@@ -1,9 +1,9 @@
 package commands;
 
-public class ReadCommand extends Command {
+public class ReadCommand extends NonExecutableCommand {
     
     public ReadCommand(String desc) {
-        super(desc, true);
+        super(desc);
     }
 
     @Override

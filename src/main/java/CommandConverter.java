@@ -1,5 +1,6 @@
 import exceptions.NoSuchCommandException;
 import commands.Command;
+import commands.DoneCommand;
 import commands.ReadCommand;
 import commands.ListCommand;
 import commands.ByeCommand;
@@ -10,6 +11,8 @@ public class CommandConverter {
     private static final String RETURN_COMMAND = "return";
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
+    private static final String DONE_COMMAND = "done";
+
     
     public CommandConverter() {}
 
@@ -26,6 +29,8 @@ public class CommandConverter {
             return new ListCommand(formatted_input);
         } else if (commandInput.equals(BYE_COMMAND)) {
             return new ByeCommand(formatted_input);
+        } else if (commandInput.equals(DONE_COMMAND)) {
+            return new DoneCommand(formatted_input);
         } else {
             String errorMessage = "Command Not Found";
             throw new NoSuchCommandException(errorMessage);

@@ -1,9 +1,9 @@
 package commands;
 
-public class ByeCommand extends Command {
+public class ByeCommand extends NonExecutableCommand {
 
     public ByeCommand(String desc) {
-        super(desc, false);
+        super(desc);
     }
 
     @Override
