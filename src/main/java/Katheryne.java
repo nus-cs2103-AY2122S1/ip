@@ -31,23 +31,44 @@ public class Katheryne {
                         System.out.println(i + ") " + lst.get(i - 1));
                     }
                 } else if (keywordInput[0].equalsIgnoreCase("deadline")) {
+                    if (keywordInput.length == 1) {
+                        throw new KatheryneExceptions("A deadline needs a description and a /by time to complete it");
+                    }
                     String[] parsedDeadline = keywordInput[1].split(" /by ");
-                    lst.add(new Deadline(parsedDeadline[0], parsedDeadline[1]));
-                    System.out.println(parsedDeadline[0] + " added to your list, do by " + parsedDeadline[1]);
+                    if (parsedDeadline.length == 2) {
+                        lst.add(new Deadline(parsedDeadline[0], parsedDeadline[1]));
+                        System.out.println(parsedDeadline[0] + " added to your list, do by " + parsedDeadline[1]);
+                    } else {
+                        throw new KatheryneExceptions("A deadline needs a description and a /by time to complete it");
+                    }
                 } else if (keywordInput[0].equalsIgnoreCase("event")) {
-                    String[] parsedDeadline = keywordInput[1].split(" /at ");
-                    lst.add(new Event(parsedDeadline[0], parsedDeadline[1]));
-                    System.out.println(parsedDeadline[0] + " added to your list, do at " + parsedDeadline[1]);
+                    if (keywordInput.length == 1) {
+                        throw new KatheryneExceptions("An event needs a description and an /at time when it occurs");
+                    }
+                    String[] parsedEvent = keywordInput[1].split(" /at ");
+                    if (parsedEvent.length == 2) {
+                        lst.add(new Event(parsedEvent[0], parsedEvent[1]));
+                        System.out.println(parsedEvent[0] + " added to your list, do at " + parsedEvent[1]);
+                    } else {
+                        throw new KatheryneExceptions("An event needs a description and an /at time when it occurs");
+                    }
                 } else if (keywordInput[0].equalsIgnoreCase("todo")) {
-                    lst.add(new Todo(keywordInput[1]));
-                    System.out.println("Todo item " + keywordInput[1] + " added to your list");
+                    if (keywordInput.length == 1) {
+                        throw new KatheryneExceptions("A todo needs a description ");
+                    } else {
+                        lst.add(new Todo(keywordInput[1]));
+                        System.out.println("Todo item " + keywordInput[1] + " added to your list");
+                    }
                 } else {
-                    lst.add(new Task(userInput));
-                    System.out.println("Okay, I've added '"+ userInput + "' to your list");
+                    throw new UnknownCommandException();
                 }
                 System.out.println("There are currently " + lst.size() + " items in your list.");
             } catch(IOException exc) {
                 System.out.println("I/O Exception: " + exc);
+            } catch(UnknownCommandException e) {
+                System.out.println(e.getMessage());
+            } catch (KatheryneExceptions e) {
+                System.out.println(e.getMessage());
             }
 
     }
