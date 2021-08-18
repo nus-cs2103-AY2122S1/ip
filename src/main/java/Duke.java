@@ -1,10 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        int index = 0,count = 1;
+        int count = 0;
         boolean exit = false;
-        Task[] arr = new Task[100];
+        ArrayList<Task> arrList = new ArrayList<>();
         String line = "____________________________________________________________\n";
         String logo = line + " Hello! I'm Duke\n" + " What can I do for you?\n" + line;
         Scanner sc = new Scanner(System.in);
@@ -19,25 +20,33 @@ public class Duke {
                     break;
                 case "list":
                     String list = "";
-                    for(int i =0;i<index;i++){
-                        Task t = arr[i];
-                        list += t.number + "." + t +"\n";
+                    int listNum = 1;
+                    for(Task x:arrList){
+                        list += listNum + "." + x +"\n";
+                        listNum++;
                     }
                     System.out.println(line + list + line);
                     break;
                 case "done":
-                    int num = sc.nextInt() - 1;
-                    arr[num].markAsDone();
-                    System.out.println(line + "Nice! I've marked this task as done:\n" + arr[num]);
+                    int doneNum = sc.nextInt() - 1;
+                    arrList.get(doneNum).markAsDone();
+                    System.out.println(line + "Nice! I've marked this task as done:\n" + arrList.get(doneNum));
+                    break;
+                case "delete":
+                    int delNum = sc.nextInt()-1;
+                    Task delete = arrList.get(delNum);
+                    count--;
+                    System.out.println(line + "Noted. I've removed this task:\n" + delete +
+                            "\nNow you have " + count + " tasks in the list.\n" + line);
+                    arrList.remove(delNum);
                     break;
                 case "todo":
                     try {
                         Task todo = new Todo(sc.nextLine().trim(), count);
-                        arr[index] = todo;
+                        arrList.add(todo);
+                        count++;
                         System.out.println(line + "Got it. I've added this task:\n" + todo +
                                 "\nNow you have " + count + " tasks in the list.\n" + line);
-                        index++;
-                        count++;
                         break;
                     } catch (Exception e){
                         System.out.println("\n" + line +
@@ -48,11 +57,10 @@ public class Duke {
                     try {
                         String[] deadlineArr = sc.nextLine().split("/by");
                         Task deadline = new Deadline(deadlineArr[0].trim(), deadlineArr[1].trim(), count);
-                        arr[index] = deadline;
+                        arrList.add(deadline);
+                        count++;
                         System.out.println(line + "Got it. I've added this task:\n" + deadline +
                                 "\nNow you have " + count + " tasks in the list.\n" + line);
-                        index++;
-                        count++;
                         break;
                     } catch (Exception e){
                         System.out.println("\n" + line +
@@ -63,11 +71,10 @@ public class Duke {
                     try {
                         String[] eventArr = sc.nextLine().split("/at");
                         Task event = new Event(eventArr[0].trim(), eventArr[1].trim(), count);
-                        arr[index] = event;
+                        arrList.add(event);
+                        count++;
                         System.out.println(line + "Got it. I've added this task:\n" + event +
                                 "\nNow you have " + count + " tasks in the list.\n" + line);
-                        index++;
-                        count++;
                         break;
                     } catch (Exception e){
                         System.out.println("\n" + line +
