@@ -1,7 +1,106 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+               _,........__
+            ,-'            "`-.
+          ,'                   `-.
+        ,'                        \
+      ,'                           .
+      .'\               ,"".       `
+     ._.'|             / |  `       \
+     |   |            `-.'  ||       `.
+     |   |            '-._,'||       | \
+     .`.,'             `..,'.'       , |`-.
+     l                       .'`.  _/  |   `.
+     `-.._'-   ,          _ _'   -" \  .     `
+`."""""'-.`-...,---------','         `. `....__.
+.'        `"-..___      __,'\          \  \     \
+\_ .          |   `""""'    `.           . \     \
+  `.          |              `.          |  .     L
+    `.        |`--...________.'.        j   |     |
+      `._    .'      |          `.     .|   ,     |
+         `--,\       .            `7""' |  ,      |
+            ` `      `            /     |  |      |    _,-'"""`-.
+             \ `.     .          /      |  '      |  ,'          `.
+              \  v.__  .        '       .   \    /| /              \
+               \/    `""\"""""""`.       \   \  /.''                |
+                `        .        `._ ___,j.  `/ .-       ,---.     |
+                ,`-.      \         ."     `.  |/        j     `    |
+               /    `.     \       /         \ /         |     /    j
+              |       `-.   7-.._ .          |"          '         /
+              |          `./_    `|          |            .     _,'
+              `.           / `----|          |-............`---'
+                \          \      |          |
+               ,'           )     `.         |
+                7____,,..--'      /          |
+                                  `---.__,--.'
+ BOW BEFORE ME, FOR I AM SQUIRTLE, DESTROYER OF MEN, TAKER OF LIVES.
+ THE GODS FEARED MY EXISTENCE, SO THEY BANISHED ME TO YOUR MORTAL REALM TO SAVE YOUR MISERABLE LIFE.
+____________________________________________________________
+SO WHAT DO YOU WANT DO, INSECT?
+ ____________________________________________________________
+ MORTAL, YOU'VE ADDED THIS TASK: [T][ ] Pray to lord Squirtle
+____________________________________________________________
+WHAT ELSE DO YOU WANT, INSECT?
+ ____________________________________________________________
+YOU WISH FOR THESE FOOLISH THINGS:
+ 1. [T][ ] Pray to lord Squirtle
+____________________________________________________________
+WHAT ELSE DO YOU WANT, INSECT?
+ ____________________________________________________________
+ MORTAL, YOU'VE ADDED THIS DEADLINE: [D][ ] Prepare an offering (by: 10pm Tonight)
+____________________________________________________________
+WHAT ELSE DO YOU WANT, INSECT?
+ ____________________________________________________________
+YOU WISH FOR THESE FOOLISH THINGS:
+ 1. [T][ ] Pray to lord Squirtle
+ 2. [D][ ] Prepare an offering (by: 10pm Tonight)
+____________________________________________________________
+WHAT ELSE DO YOU WANT, INSECT?
+ ____________________________________________________________
+ MORTAL, YOU'VE ADDED THIS EVENT: [E][ ] Beg for forgiveness (at: 10pm-11pm)
+____________________________________________________________
+WHAT ELSE DO YOU WANT, INSECT?
+ ____________________________________________________________
+YOU WISH FOR THESE FOOLISH THINGS:
+ 1. [T][ ] Pray to lord Squirtle
+ 2. [D][ ] Prepare an offering (by: 10pm Tonight)
+ 3. [E][ ] Beg for forgiveness (at: 10pm-11pm)
+____________________________________________________________
+WHAT ELSE DO YOU WANT, INSECT?
+ ____________________________________________________________
+YOU SAY YOU'VE COMPLETED THIS TASK:
+ [T][X] Pray to lord Squirtle
+____________________________________________________________
+WHAT ELSE DO YOU WANT, INSECT?
+ ____________________________________________________________
+YOU WISH FOR THESE FOOLISH THINGS:
+ 1. [T][X] Pray to lord Squirtle
+ 2. [D][ ] Prepare an offering (by: 10pm Tonight)
+ 3. [E][ ] Beg for forgiveness (at: 10pm-11pm)
+____________________________________________________________
+WHAT ELSE DO YOU WANT, INSECT?
+ ____________________________________________________________
+YOU SAY YOU'VE COMPLETED THIS TASK:
+ [D][X] Prepare an offering (by: 10pm Tonight)
+____________________________________________________________
+WHAT ELSE DO YOU WANT, INSECT?
+ ____________________________________________________________
+YOU WISH FOR THESE FOOLISH THINGS:
+ 1. [T][X] Pray to lord Squirtle
+ 2. [D][X] Prepare an offering (by: 10pm Tonight)
+ 3. [E][ ] Beg for forgiveness (at: 10pm-11pm)
+____________________________________________________________
+WHAT ELSE DO YOU WANT, INSECT?
+ ____________________________________________________________
+YOU SAY YOU'VE COMPLETED THIS TASK:
+ [E][X] Beg for forgiveness (at: 10pm-11pm)
+____________________________________________________________
+WHAT ELSE DO YOU WANT, INSECT?
+ ____________________________________________________________
+YOU WISH FOR THESE FOOLISH THINGS:
+ 1. [T][X] Pray to lord Squirtle
+ 2. [D][X] Prepare an offering (by: 10pm Tonight)
+ 3. [E][X] Beg for forgiveness (at: 10pm-11pm)
+____________________________________________________________
+WHAT ELSE DO YOU WANT, INSECT?
+ ____________________________________________________________
+ LIVE OUT YOUR PATHETIC LIFE, WEAKLING.
+____________________________________________________________

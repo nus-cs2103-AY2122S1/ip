@@ -1,0 +1,13 @@
+todo Pray to lord Squirtle
+list
+deadline Prepare an offering /by 10pm Tonight
+list
+event Beg for forgiveness /at 10pm-11pm 
+list
+done 1
+list
+done 2
+list
+done 3
+list
+bye
