@@ -4,23 +4,27 @@ import java.util.Scanner;
 
 public class Duke {
     private boolean active;
-    private List<String> list;
+    private final List<Task> list;
 
     public Duke() {
         this.active = true;
-        this.list = new ArrayList<String>();
+        this.list = new ArrayList<Task>();
     }
 
-    public void executeCommand(String command) {
-        switch (command) {
+    public void executeCommand(String input) {
+        String[] parsedInput = input.split(" ");
+        switch (parsedInput[0]) {
             case "bye":
                 this.terminate();
                 break;
             case "list":
                 this.listItems();
                 break;
+            case "done":
+                this.done(Integer.parseInt(parsedInput[1]) - 1);
+                break;
             default:
-                this.addItem(command);
+                this.addItem(input);
         }
     }
 
@@ -34,18 +38,31 @@ public class Duke {
     }
 
     public void listItems() {
-        System.out.println("____________________________________________________________\n");
+        System.out.println("____________________________________________________________");
+        System.out.println(" Here are the tasks in your list:");
         for (int i = 0; i < this.list.size(); i++) {
-            System.out.println(String.format("%d: %s", i + 1, this.list.get(i)));
+            Task task = this.list.get(i);
+            System.out.println(String.format(" %d:[%s] %s", i + 1, task.getMarker(), task.getTask()));
         }
         System.out.println("____________________________________________________________\n");
     }
 
     public void addItem(String input) {
-        this.list.add(input);
+        this.list.add(new Task(input));
         String message =
                 "____________________________________________________________\n" +
                 " added: " + input + "\n" +
+                "____________________________________________________________\n";
+        System.out.println(message);
+    }
+
+    public void done(int index) {
+        Task task = this.list.get(index);
+        task.setCompleted();
+        String message =
+                "____________________________________________________________\n" +
+                " Nice! I've marked this task as done: \n" +
+                String.format("   [%s] %s\n", task.getMarker(), task.getTask()) +
                 "____________________________________________________________\n";
         System.out.println(message);
     }
