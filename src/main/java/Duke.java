@@ -21,7 +21,8 @@ public class Duke {
     private static void addTask(String input) {
         try {
             if (input.startsWith("todo")) {
-                myList[myListLength] = new ToDo(input.substring(5));
+                String remaining = input.substring(5);
+                myList[myListLength] = new ToDo(remaining);
             } else if (input.startsWith("deadline")) {
                 String remaining = input.substring(9);
                 String[] segments = remaining.split(" /");
@@ -31,7 +32,7 @@ public class Duke {
                 String[] segments = remaining.split(" /");
                 myList[myListLength] = new Event(segments[0], segments[1]);
             } else {
-                System.out.println("Invalid task.");
+                System.out.println("Invalid task. Please specify the type of task.");
                 return;
             }
             System.out.println("I've added this task:");
@@ -39,7 +40,9 @@ public class Duke {
             myListLength++;
             System.out.println("Now you have " + myListLength + " tasks.");
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Invalid format.");
+            System.out.println("Invalid format. Please follow this format. <type of task> <description> /<date if necessary>");
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("Invalid input. Please type something after specifying the type of task.");
         }
     }
 
