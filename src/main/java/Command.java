@@ -4,6 +4,9 @@ public abstract class Command {
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
 
     private Command() {}
 
@@ -26,7 +29,8 @@ public abstract class Command {
         @Override
         protected void execute() {
             Duke.todoList.add(t);
-            System.out.println("Added " + t.getTaskName());
+            System.out.println("Got it. I've added this task:\n    " + t);
+            System.out.println("Now you have" + Duke.todoList.size() + "tasks in the list.");
             Duke.printLine();
         };
     }
@@ -35,6 +39,7 @@ public abstract class Command {
         private List() {}
         @Override
         protected void execute() {
+            System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < Duke.todoList.size(); i++) {
                 System.out.println((i + 1) + ". " + Duke.todoList.get(i).toString());
             }
@@ -89,12 +94,24 @@ public abstract class Command {
                     case DONE_COMMAND:
                         done(Integer.parseInt(parts[1])).execute();
                         break;
+                    case TODO_COMMAND:
+                        add(Task.todo(parts[1])).execute();
+                        break;
+                    case DEADLINE_COMMAND:
+                        add(Task.deadline(parts[1])).execute();
+                        break;
+                    case EVENT_COMMAND:
+                        add(Task.event(parts[1])).execute();
+                        break;
                     default:
-                        add(Task.newTask(userCommand)).execute();
+                        throw new IllegalArgumentException("Unexpected argument: " + parts[0]);
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Error: Need to input format \"done <integer>\"");
                 System.out.println(e);
+                Duke.printLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-()");
                 Duke.printLine();
             }
         }
