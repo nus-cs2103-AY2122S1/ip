@@ -7,22 +7,24 @@ public class Duke {
     // shows the if the Duke chatbot has been activated
     private boolean activated;
     // Line Separator
-    private final String SEP_LINE = "____________________________________________________________\n";
+    private static String SEP_LINE = "____________________________________________________________\n";
     // Standard boot response
     private final String bootMessage =
             SEP_LINE
-            + " ____        _        \n"
+            .concat(
+            " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n"
-            + "\nMade by Dr-Octavius\n"
-            + SEP_LINE
-            + "Hello! I'm Duke\n"
-            + "What can I do for you?\n"
-            + SEP_LINE;
+            + "\nMade by Dr-Octavius\n")
+            .concat(SEP_LINE)
+            .concat(
+            "Hello! I'm Duke\n"
+            + "What can I do for you?\n")
+            .concat(SEP_LINE);
     // Text Storage
-    private final List<String> history = new ArrayList<String>();
+    private final List<String> storage = new ArrayList<String>();
 
     // Duke Constructor
     public Duke() {
@@ -41,7 +43,9 @@ public class Duke {
 
     // Level-1: Echoes Message input from user
     public String echo(String text) {
-        return text;
+        // Level-2: adds text to storage
+        this.storage.add(text);
+        return "added: ".concat(text);
     }
 
     // Level-1: Exit Message triggered by "bye"
@@ -50,10 +54,24 @@ public class Duke {
         return " Bye. Hope to see you again soon!";
     }
 
+    // Level-2: Lists all items in storage
+    public String list() {
+        String out = "";
+        for (int i = 0; i < this.storage.size(); i++) {
+            if (i != 0) out = out.concat("\n");
+            out = out.concat((i+1) + ". ");
+            out = out.concat(this.storage.get(i));
+        }
+        return out;
+    }
+
+    // decodes input from user and invokes the relevant method call
     public String decoder(String text) {
         String res;
         if (text.equals("bye")) {
             res = this.exit();
+        } else if (text.equals("list")) {
+            res = this.list();
         } else {
             res = this.echo(text);
         }
@@ -61,7 +79,7 @@ public class Duke {
     }
 
     public String messageWrapper(String text) {
-        return this.SEP_LINE + text + "\n" + SEP_LINE;
+        return this.SEP_LINE.concat(text).concat("\n").concat(SEP_LINE);
     }
 
     public static void main(String[] args) {
