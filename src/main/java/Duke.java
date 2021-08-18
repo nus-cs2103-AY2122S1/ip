@@ -16,6 +16,15 @@ public class Duke {
      */
     private static String cancelWord = "bye";
 
+    /**
+     * Stores the array of todos
+     */
+    private static String[] todos = new String[100];
+
+    /**
+     * Stores the current index that is awaiting to be filled.
+     */
+    private static int index = 0;
 
     /**
      * Prints out the initial greeting message.
@@ -38,15 +47,33 @@ public class Duke {
         // if boolean is false, loop will be ran
         while (!exit) {
             String response = sc.nextLine();
-            if (response.equals(cancelWord)) {
-                System.out.println("\t____________________________________________________________\n\t" +
+
+            switch (response) {
+                case "list":
+                    System.out.println("\t____________________________________________________________");
+                    for (int i = 0; i < todos.length; i++) {
+                        if (todos[i] == null) {
+                            break;
+                        } else {
+                            System.out.println(String.format("\t%d. %s", (i+1), todos[i]));
+                        }
+                    }
+                    System.out.println("\t____________________________________________________________");
+                    break;
+                case "bye":
+                    System.out.println("\t____________________________________________________________\n\t" +
                         "Bye. Hope to see you again soon!" +
                         "\n\t____________________________________________________________");
-                exit = true;
-            } else {
-                System.out.println("\t____________________________________________________________\n\t" +
-                        response +
-                        "\n\t____________________________________________________________");
+                    exit = true;
+                    break;
+                default:
+                    todos[index] = response;
+                    index++;
+
+                    System.out.println("\t____________________________________________________________\n\t" +
+                            String.format("added: %s", response) +
+                            "\n\t____________________________________________________________");
+                    break;
             }
         }
     }
