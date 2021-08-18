@@ -11,7 +11,11 @@ done 1
 list
 event work meeting
 todo
+delete 1
+delete 2
+list
 done a
+delete a
 list
 blahblah
 bye

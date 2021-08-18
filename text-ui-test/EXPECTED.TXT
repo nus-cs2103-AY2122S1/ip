@@ -38,10 +38,17 @@ I've marked this task as done:
 4. [E][ ] volunteer work (at: Fri 3-5pm)
 Incorrect format for command.
 The description of a Task cannot be empty.
-Please enter a number after the done command.
-1. [T][X] borrow book
-2. [D][X] return book (by: Sunday)
-3. [E][X] project meeting (at: Mon 2-4pm)
-4. [E][ ] volunteer work (at: Fri 3-5pm)
+I've removed this task:
+[T][X] borrow book
+Now you have 3 tasks in your list.
+I've removed this task:
+[E][X] project meeting (at: Mon 2-4pm)
+Now you have 2 tasks in your list.
+1. [D][X] return book (by: Sunday)
+2. [E][ ] volunteer work (at: Fri 3-5pm)
+Please enter a number after the command.
+Please enter a number after the command.
+1. [D][X] return book (by: Sunday)
+2. [E][ ] volunteer work (at: Fri 3-5pm)
 Sorry I do not understand this directive.
 Good bye.
