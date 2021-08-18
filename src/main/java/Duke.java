@@ -2,6 +2,7 @@
  * The Bhutu chatbot app
  */
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,6 +15,7 @@ public class Duke {
     private static final String END_LINE = SPACE + "======================================================================\n";
 
     private Items items;
+
     public Duke() {
         items = new Items();
     }
@@ -48,10 +50,6 @@ public class Duke {
                         printMessage(items.printList());
                         break;
                     case "done":
-                        if (input.length < 2) {
-                            printMessage("Enter the task number you have completed");
-                            break;
-                        }
                         printMessage(items.markDone(Integer.parseInt(input[1])));
                         break;
                     case "bye":
@@ -65,6 +63,9 @@ public class Duke {
                         break;
                     case "deadline":
                         printMessage(items.addItem(new Deadline(task[0], task[1])));
+                        break;
+                    case "delete":
+                        printMessage(items.deleteItem(Integer.parseInt(input[1])));
                         break;
                     default:
                         printMessage("I don't recognise this command\n" +
@@ -170,6 +171,20 @@ public class Duke {
                 } else {
                     return new String[] {input[0]};
                 }
+            case "delete":
+                if (input.length < 2) {
+                    throw new DukeException("Please specify which task you want to delete");
+                } else if (input.length != 2) {
+                    throw new DukeException("'delete' command requires exactly 1 argument. (eg. done 12)");
+                }
+                try {
+                    Integer.parseInt(input[1]);
+                } catch (Exception e) {
+                    throw new DukeException("'delete' command requires an integer as number. (eg. done 12)");
+                }
+
+                return new String[] {input[1]};
+
             default:
                 throw new DukeException("I don't recognise this command\n" +
                         "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'");
