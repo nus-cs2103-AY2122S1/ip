@@ -25,6 +25,7 @@ public class Duke {
         String todoCmd = "todo";
         String deadlineCmd = "deadline";
         String eventCmd = "event";
+        String deleteCmd = "delete";
 
         Scanner sc = new Scanner(System.in);
         boolean end = false;
@@ -42,13 +43,17 @@ public class Duke {
                 } else if (cmd.equals(listCmd)) {
                     displayList();
                 } else if (cmd.equals(doneCmd)) {
-                    markTaskDone(description);
+                    Integer taskNum = validateTaskNumber(description);
+                    markTaskDone(taskNum);
                 } else if (cmd.equals(todoCmd)) {
                     addTask(todoCmd, description);
                 } else if (cmd.equals(deadlineCmd)) {
                     addTask(deadlineCmd, description);
                 } else if (cmd.equals(eventCmd)) {
                     addTask(eventCmd, description);
+                } else if (cmd.equals(deleteCmd)) {
+                    Integer taskNum = validateTaskNumber(description);
+                    deleteTask(taskNum);
                 } else {
                     throw new DukeException("Sorry, I don't know what that means.");
                 }
@@ -102,28 +107,36 @@ public class Duke {
         System.out.println("Now you have " + todoList.size() + " tasks in the list.");
     }
 
-    private static void markTaskDone(String details) throws DukeException {
-        int taskNum;
-        try {
-            taskNum = Integer.parseInt(details);
-        } catch (NumberFormatException e) {
-            throw new DukeException("Looks like you forgot to specify the task number to mark as done.");
-        }
-        validateTaskNumber(taskNum);
+    private static void markTaskDone(Integer taskNum) throws DukeException {
         Task task = todoList.get(taskNum - 1);
         task.markAsDone();
         System.out.println("Good work! I've marked this task as done:");
         System.out.println(task.toString());
+        System.out.println("Now you have " + todoList.size() + " tasks in the list.");
     }
 
-    private static void validateTaskNumber(Integer num) throws DukeException {
+    private static void deleteTask(Integer taskNum) throws DukeException {
+        Task task = todoList.remove(taskNum - 1);
+        System.out.println("Ok, I've deleted this task:");
+        System.out.println(task.toString());
+        System.out.println("Now you have " + todoList.size() + " tasks in the list.");
+    }
+
+    private static Integer validateTaskNumber(String input) throws DukeException {
+        Integer taskNum;
+        try {
+            taskNum = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new DukeException("You did not specify the task number.");
+        }
         int listLength = todoList.size();
-        int taskIndex = num - 1;
+        int taskIndex = taskNum - 1;
         if (listLength == 0) {
             throw new DukeException("The operation cannot be performed as you have 0 tasks in your list.");
         }
         if (taskIndex < 0 || taskIndex >= todoList.size()) {
             throw new DukeException("The task number must be from 1 to " + listLength + ".");
         }
+        return taskNum;
     }
 }
