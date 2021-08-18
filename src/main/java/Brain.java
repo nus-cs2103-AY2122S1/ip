@@ -48,15 +48,24 @@ public class Brain {
                     break;
                 case "todo":
                     userReq = parsedInput[1];
-                    String todoSucess = storage.todo(userReq);
-                    speech.taskAdded(todoSucess, storage);
+                    String todoSuccess = storage.todo(userReq);
+                    speech.taskAdded(todoSuccess, storage);
                     break;
                 case "event":
                     userReq = parsedInput[1];
                     try{
-                        String eventSucess = storage.event(userReq);
-                        speech.taskAdded(eventSucess, storage);
+                        String eventSuccess = storage.event(userReq);
+                        speech.taskAdded(eventSuccess, storage);
                     } catch (InvalidEventFormatException e) {
+                        speech.error(e.toString());
+                    }
+                    break;
+                case "delete":
+                    userReq = parsedInput[1];
+                    try {
+                        String deleteSuccess = storage.delete(userReq);
+                        speech.taskDeleted(deleteSuccess, storage);
+                    } catch (InvalidDeleteFormatException e) {
                         speech.error(e.toString());
                     }
                     break;

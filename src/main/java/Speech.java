@@ -50,6 +50,17 @@ public class Speech {
         currentBubbleLimit = msg.length() + 2;
         speak(dukeAddedTask);
     }
+    /**
+     * Takes in a String and task and formats it to the task_deleted success msg
+     * @param msg string that contains details of the task
+     * @param storage takes in storage instance to check how many task left
+     */
+    public void taskDeleted(String msg, Storage storage) {
+        int task_left = storage.task_left();
+        String[] dukeAddedTask = {"Noted. I've removed this task:", "  " + msg, "Now you have " + task_left + " tasks in the list."};
+        currentBubbleLimit = msg.length() + 2;
+        speak(dukeAddedTask);
+    }
 
     /**
      * takes in a string and formats it to the error found msg

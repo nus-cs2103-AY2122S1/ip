@@ -46,8 +46,26 @@ public class Storage {
         } catch (NullPointerException e) {
             throw new InvalidDoneFormatException("Ensure that number inputted can be found in the list");
         }
-
     }
+
+    public String delete(String input) throws InvalidDeleteFormatException{
+        try {
+            int list_no = Integer.parseInt(input.trim());
+            Collection<Task> values = mapper.values();
+            Task second = values.stream().skip(list_no-1).findFirst().orElse(null); // possible for task to be null
+            String key = second.getDescription();
+            mapper.remove(key);
+            return second.toString();
+        } catch (NumberFormatException e) {
+            throw new InvalidDeleteFormatException("Ensure that list position in NUMERICAL form");
+        } catch (NullPointerException e) {
+            throw new InvalidDeleteFormatException("Ensure that number inputted can be found in the list");
+        }
+    }
+
+
+
+
 
     /**
      * Creates a task instance, adds to storage and prints a success msg
