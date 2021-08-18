@@ -24,17 +24,24 @@ public class Duke {
                 exit();
             } else if (input.equals("list")) {
                 displayList();
-            } else if (input.contains("done")) {
-                done(input);
-            } else if (input.contains("todo")) {
-                todo(input);
-            } else if (input.contains("deadline")) {
-                deadline(input);
-            } else if (input.contains("event")) {
-                event(input);
             } else {
-                reply("Can type properly pls?");
-                manageInput();
+                try {
+                    if (input.contains("done")) {
+                        done(input);
+                    } else if (input.contains("todo")) {
+                        todo(input);
+                    } else if (input.contains("deadline")) {
+                        deadline(input);
+                    } else if (input.contains("event")) {
+                        event(input);
+                    } else {
+                        reply("Can type properly pls?");
+//                        manageInput();
+                    }
+                } catch(DukeException err) {
+                    reply(err.getMessage());
+                    manageInput();
+                }
             }
         }
     }
@@ -49,10 +56,10 @@ public class Duke {
         reply("i zao first");
     }
 
-    private static void echo(String input) {
-        reply(input);
-        manageInput();
-    }
+//    private static void echo(String input) {
+//        reply(input);
+//        manageInput();
+//    }
 
     private static void add(Task task) {
         list.add(task);
@@ -69,39 +76,47 @@ public class Duke {
         manageInput();
     }
 
-    private static void done(String input) {
-        int taskNumber = Integer.parseInt(input.substring(5));
-        Task currTask = list.get(taskNumber - 1);
-        currTask.markAsDone();
-        reply("noice this thing done:\n" + currTask);
-        manageInput();
+    private static void done(String input) throws DukeException {
+        try {
+            int taskNumber = Integer.parseInt(input.substring(5));
+            Task currTask = list.get(taskNumber - 1);
+            currTask.markAsDone();
+            reply("noice this thing done:\n" + currTask);
+            manageInput();
+        } catch(StringIndexOutOfBoundsException err) {
+            throw new DukeException("can type properly? liddis: 'done taskNumber'");
+        }
     }
 
-    private static void todo(String input) {
-        Todo todo = new Todo(input.substring(5));
-        add(todo);
-        manageInput();
+    private static void todo(String input) throws DukeException {
+        try {
+            Todo todo = new Todo(input.substring(5));
+            add(todo);
+            manageInput();
+        } catch(StringIndexOutOfBoundsException err) {
+            throw new DukeException("u never say what to do?");
+        }
     }
 
-    private static void deadline(String input) {
-        int split = input.indexOf("/");
-        if (split == -1) {
-            reply("this one by when ah? can do it liddis or not: 'deadline task /by when'");
-        } else {
+    private static void deadline(String input) throws DukeException {
+        try {
+            int split = input.indexOf("/");
             Deadline deadline = new Deadline(input.substring(9, split - 1), input.substring(split + 3));
             add(deadline);
+            manageInput();
+        } catch(StringIndexOutOfBoundsException err) {
+            throw new DukeException("this one by when ah? can do it liddis or not: 'deadline task /by when'");
         }
-        manageInput();
     }
 
-    private static void event(String input) {
-        int split = input.indexOf("/");
-        if (split == -1) {
-            reply("this one when ah? can do it liddis or not: 'event task /at when'");
-        } else {
+    private static void event(String input) throws DukeException {
+        try {
+            int split = input.indexOf("/");
             Event event = new Event(input.substring(6, split - 1), input.substring(split + 3));
             add(event);
+            manageInput();
+        } catch(StringIndexOutOfBoundsException err) {
+            throw new DukeException("this one when ah? can do it liddis or not: 'event task /at when'");
         }
-        manageInput();
     }
 }
