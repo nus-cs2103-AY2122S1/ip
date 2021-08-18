@@ -25,9 +25,9 @@ public class Bot {
     this.running = true;
     while (this.running) {
       System.out.println();
-      String input = inputManager.getInput();
-      Command cmd = CommandType.getCommandFromName(input.split(" ")[0]);
-      cmd.run(this, new String[]{ input });
+      String[] input = inputManager.getInput().split(" ", 2);
+      Command cmd = CommandType.getCommandFromName(input[0]);
+      cmd.run(this, new String[]{ input[input.length >=2 ? 1 : 0] });
     }
     outputManager.printGoodbye();
   }
@@ -62,6 +62,11 @@ public class Bot {
       return false;
     }
     this.taskList.add(newTask);
+    printOutput(new String[] { 
+      "Got it. I've added this task:",
+      OutputManager.TEXT_BLOCK_MARGIN + newTask.toString(),
+      String.format("Now you have %d task(s) in the list", taskList.size())
+    });
     return true;
   }
 

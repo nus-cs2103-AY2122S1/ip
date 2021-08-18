@@ -4,7 +4,8 @@ import java.util.Map;
 public enum CommandType {
 
   BYE("bye", new ByeCommand()), LIST("list", new ListCommand()),
-  DONE("done", new DoneCommand());
+  DONE("done", new DoneCommand()), DEADLINE("deadline", new DeadlineCommand()),
+  TODO("todo", new TodoCommand()), EVENT("event", new EventCommand());
 
   private final Command command;
   private final String name;
@@ -31,7 +32,7 @@ public enum CommandType {
 
   public static Command getCommandFromName(String name) {
     CommandType cmdType = hash.get(name.toLowerCase());
-    return cmdType == null ? new AddTaskCommand() : cmdType.getCommand();
-  }
+    return cmdType == null ? new EmptyCommand() : cmdType.getCommand();
+  } 
 
 }

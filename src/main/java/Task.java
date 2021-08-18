@@ -12,7 +12,7 @@ public abstract class Task {
   @Override
   public String toString() {
     String taskChecked = this.done ? "X" : " ";
-    return String.format("[%s] %s", taskChecked, this.getTaskDesc());
+    return String.format("[%s][%s] %s", this.getTaskSymbol(), taskChecked, this.getTaskDesc());
   } 
 
   abstract String getTaskDesc();
