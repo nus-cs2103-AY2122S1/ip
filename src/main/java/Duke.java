@@ -183,6 +183,6 @@ public class Duke {
     public boolean checkPrefix(String input, String prefix) {
         String[] parts = input.split(" ", 2);
         String front = parts[0];
-        return front.equals(prefix);
+        return front.equals(prefix) && parts.length == 2;
     }
 }

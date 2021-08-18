@@ -1,0 +1,20 @@
+todo
+todo borrow book
+list
+deadline
+deadline asdas
+deadline return book /by Sunday
+list
+event
+event asdas
+event project meeting /at Mon 2-4pm
+list
+done
+done 2
+done 1
+done 100
+done 3
+done 3
+done adsad
+list
+bye
