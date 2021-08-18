@@ -21,7 +21,6 @@ public class Catobot {
             while (!request.matches("^bye")) {
                 try {
                     // prints the response
-                    System.out.println(request);
                     if (request.matches("^list")) {
                         respond(taskGroup.display());
 
@@ -32,13 +31,20 @@ public class Catobot {
                         } catch(NumberFormatException e) {
                             throw new InvalidCommandException();
                         }
+                    } else if (request.matches("^delete.*")) {
+                        try {
+                            int index = Integer.parseInt(request.substring("delete".length()).trim());
+                            respond(taskGroup.deleteTask(index));
+                        } catch(NumberFormatException e) {
+                            throw new InvalidCommandException();
+                        }
                     } else if (request.matches("^todo.*")) {
-                        String description = request.substring("todo".length()).trim(); // one empty space to separate command
+                        String description = request.substring("todo".length()).trim();
                         respond(taskGroup.add(Todo.of(description)));
 
                     } else if (request.matches("^deadline.*")) {
                         if (!request.contains("/by")) {
-                            throw new InvalidCommandException();
+                            throw new InvalidCommandException("Don't cheat me, give me a due time so I can watch you >.<");
                         }
                         String[] inputs = request.split("deadline")[1].trim().split(" /by ");
                         if (inputs.length == 1) {
@@ -50,7 +56,7 @@ public class Catobot {
 
                     } else if (request.matches("^event.*")) {
                         if (!request.contains("/at")) {
-                            throw new InvalidCommandException();
+                            throw new InvalidCommandException("Oh no, I am not sure when this is happening >.<");
                         }
                         String[] inputs = request.split("event")[1].trim().split(" /at ");
                         if (inputs.length == 1) {

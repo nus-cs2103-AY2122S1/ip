@@ -18,20 +18,41 @@
     Now you have 3 tasks in the list.
     (=^^=)(=^^=)(=^^=)(=^^=)
     (=^^=)(=^^=)(=^^=)(=^^=)
-    Here are the tasks in your list:
-    1. [T][ ] Eat, code, and sleep
-    2. [E][ ] project meeting (at: Monday 2-3pm)
-    3. [D][ ] cs2103 ip (by: Thursday 2359)
-    (=^^=)(=^^=)(=^^=)(=^^=)
-    (=^^=)(=^^=)(=^^=)(=^^=)
     Nice! I've marked this task as done:
       [E][X] project meeting (at: Monday 2-3pm)
     (=^^=)(=^^=)(=^^=)(=^^=)
     (=^^=)(=^^=)(=^^=)(=^^=)
+    Noted. I've removed this task:
+      [E][X] project meeting (at: Monday 2-3pm)
+      Now you have 2 tasks in the list.
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    (=^^=)(=^^=)(=^^=)(=^^=)
     Here are the tasks in your list:
     1. [T][ ] Eat, code, and sleep
-    2. [E][X] project meeting (at: Monday 2-3pm)
-    3. [D][ ] cs2103 ip (by: Thursday 2359)
+    2. [D][ ] cs2103 ip (by: Thursday 2359)
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    OOPS!!! The description of a / an todo cannot be empty.
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    Oh no, I am not sure when this is happening >.<
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    Oh no, I am not sure when this is happening >.<
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    Don't cheat me, give me a due time so I can watch you >.<
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    OOPS!!! The expected value is 1 - 2 but you give me 5
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    OOPS!!! The expected value is 1 - 2 but you give me 5
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    (=^^=)(=^^=)(=^^=)(=^^=)
+    Here are the tasks in your list:
+    1. [T][ ] Eat, code, and sleep
+    2. [D][ ] cs2103 ip (by: Thursday 2359)
     (=^^=)(=^^=)(=^^=)(=^^=)
     (=^^=)(=^^=)(=^^=)(=^^=)
     Bye meow! I will always wait here meow(>^^<)
