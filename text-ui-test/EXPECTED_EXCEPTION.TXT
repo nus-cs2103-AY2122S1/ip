@@ -6,90 +6,104 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 ___________________________________________________________________________
-	Hello! I'm Duke.
-	What can I do for you?
+Hello! I'm Duke.
+What can I do for you?
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Please ensure instruction follows specified format.
+☹ Error: Instruction does not follows specified format.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Please ensure instruction follows specified format.
+☹ Error: Command cannot be empty.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Unable to perform action as list is empty.
+☹ Error: Unable to execute as list is empty.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Unable to perform action as list is empty.
+☹ Error: Unable to execute as list is empty.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	Here are the tasks in your list:
-	-- Empty --
+List is empty, try adding some tasks first.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	Got it. I've added this task:
-	  [T][ ] create errors
-	Now you have 1 tasks in the list.
+Got it. I've added this TODO task:
+	[T][ ] create errors
+Now you have 1 task(s) in the list.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Task number '4' is invalid.
+☹ Error: Task number '4' is invalid.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Task number '-3' is invalid.
+☹ Error: Task number '-3' is invalid.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	Got it. I've added this task:
-	  [E][ ] test (at: 3)
-	Now you have 2 tasks in the list.
+Got it. I've added this EVENT task:
+	[E][ ] test (at: 3)
+Now you have 2 task(s) in the list.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Missing key '/at' in command.
+☹ Error: User parameter(s) to command 'event' cannot be empty.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Ensure input has both parameters for task.
+☹ Error: User parameter(s) to command 'event' cannot be empty.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Task description cannot be empty.
+☹ Error: User parameter(s) to command 'event' cannot be empty.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Missing key '/by' in command.
+☹ Error: User parameter(s) to command 'event' cannot be empty.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Ensure input has both parameters for task.
+☹ Error: User parameter(s) to command 'deadline' cannot be empty.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Task description cannot be empty.
+☹ Error: User parameter(s) to command 'deadline' cannot be empty.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	Got it. I've added this task:
-	  [T][ ] make more
-	Now you have 3 tasks in the list.
+☹ Error: User parameter(s) to command 'deadline' cannot be empty.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Task number '-3' is invalid.
+☹ Error: User parameter(s) to command 'deadline' cannot be empty.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	☹ Error: Task number '10' is invalid.
+Got it. I've added this TODO task:
+	[T][ ] make more
+Now you have 3 task(s) in the list.
 ___________________________________________________________________________
 
 ___________________________________________________________________________
-	Bye. Hope to see you again soon!
+☹ Error: Task number '-3' is invalid.
+___________________________________________________________________________
+
+___________________________________________________________________________
+☹ Error: Task number '10' is invalid.
+___________________________________________________________________________
+
+___________________________________________________________________________
+Here are the task(s) in your list:
+	1. [T][ ] create errors
+	2. [E][ ] test (at: 3)
+	3. [T][ ] make more
+___________________________________________________________________________
+
+___________________________________________________________________________
+Bye. Hope to see you again soon!
 ___________________________________________________________________________
 

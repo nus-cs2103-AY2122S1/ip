@@ -1,5 +1,5 @@
 junk
-blegh
+
 done 2
 delete 1
 list
@@ -8,12 +8,15 @@ done 4
 done -3
 event test /at 3
 event
+event /at
 event test /at
 event /at run
 deadline
+deadline /by
 deadline test /by
 deadline /by 4
 todo make more
 delete -3
 delete 10
+list
 bye
