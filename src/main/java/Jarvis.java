@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Duke {
+public class Jarvis {
     public static void main(String[] args) {
             String logo = "\n" +
                     "       __       ___      .______     ____    ____  __       _______.\n" +
@@ -12,7 +12,7 @@ public class Duke {
             System.out.println("Hello from\n" + logo);
 
             System.out.println("----------------------------------");
-            System.out.println("Hello! I am Jarvis :)\n");
+            System.out.println("Hi! I am Jarvis :)\n");
             System.out.println("What can I do for you?");
             System.out.println("----------------------------------\n");
 
@@ -37,7 +37,7 @@ public class Duke {
                                 if (instruction.startsWith("done")) {
                                     int taskNum = Integer.parseInt(instruction.substring(5)) - 1;
                                     if (taskNum >= Task.getCounter()) {
-                                        throw new DukeException("Hmm, I do not have task " + (taskNum + 1) +
+                                        throw new JarvisException("Hmm, I do not have task " + (taskNum + 1) +
                                                 " in my list. Please key in 'list' if you would like to " +
                                                 "view your list of tasks again!");
                                     } else {
@@ -48,7 +48,7 @@ public class Duke {
                                 } else if (instruction.startsWith("delete")) {
                                         int taskNum = Integer.parseInt(instruction.substring(7)) - 1;
                                         if (taskNum >= Task.getCounter()) {
-                                            throw new DukeException("Hmm, I do not have task " + (taskNum + 1) +
+                                            throw new JarvisException("Hmm, I do not have task " + (taskNum + 1) +
                                                     " in my list. Please key in 'list' if you would like to " +
                                                     "view your list of tasks again!");
                                         } else {
@@ -60,7 +60,7 @@ public class Duke {
                                         }
                                 } else if (instruction.startsWith("todo")) {
                                     if (instruction.length() < 5) {
-                                        throw new DukeException("OOPS!!! The description of a todo " +
+                                        throw new JarvisException("OOPS!!! The description of a todo " +
                                                 "cannot be empty.");
                                     } else {
                                         String taskDescription = instruction.substring(4);
@@ -73,7 +73,7 @@ public class Duke {
                                     }
                                 } else if (instruction.startsWith("deadline")) {
                                     if (instruction.length() < 10) {
-                                        throw new DukeException("OOPS!!! The description of a deadline " +
+                                        throw new JarvisException("OOPS!!! The description of a deadline " +
                                                 "cannot be empty.");
                                     } else {
                                         String taskDescription = "";
@@ -85,7 +85,7 @@ public class Duke {
                                         }
                                         if (currIndex == instruction.length() ||
                                                 currIndex + 5 >= instruction.length())  {
-                                                throw new DukeException("I think you forgot to key in your deadline!");
+                                                throw new JarvisException("I think you forgot to key in your deadline!");
                                         } else {
                                             String by = instruction.substring(currIndex + 5);
                                             Task newDeadline = new Deadline(taskDescription, by);
@@ -98,7 +98,7 @@ public class Duke {
                                     }
                                 } else if (instruction.startsWith("event")) {
                                     if (instruction.length() < 7) {
-                                        throw new DukeException("OOPS!!! The description of a event " +
+                                        throw new JarvisException("OOPS!!! The description of a event " +
                                                 "cannot be empty.");
                                     } else {
                                         String taskDescription = "";
@@ -110,7 +110,7 @@ public class Duke {
                                         }
                                         if (currIndex == instruction.length() ||
                                                 currIndex + 5 >= instruction.length()) {
-                                            throw new DukeException("I think you forgot to key in your event timing!");
+                                            throw new JarvisException("I think you forgot to key in your event timing!");
                                         } else {
                                             String by = instruction.substring(currIndex + 5);
                                             Task newEvent = new Event(taskDescription, by);
@@ -122,14 +122,14 @@ public class Duke {
                                         }
                                     }
                                 } else {
-                                    throw new DukeException("OOPS!!! I'm sorry, but I don't " +
+                                    throw new JarvisException("OOPS!!! I'm sorry, but I don't " +
                                             "know what that means :-(");
                                 }
                                 break;
                         }
                         System.out.println("----------------------------------");
                     }
-                } catch (DukeException e) {
+                } catch (JarvisException e) {
                     System.out.println(e);
                     System.out.println("----------------------------------");
                 }
