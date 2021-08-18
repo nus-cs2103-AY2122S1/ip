@@ -30,11 +30,14 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         String input = sc.nextLine();
         while(!(input.equals("bye"))) {
-            list(input);
-            input = sc.nextLine();
+
 
             if(input.equals("list")) {
                 printList();
+                input = sc.nextLine();
+            } else {
+                list(input);
+                input = sc.nextLine();
             }
         }
 
