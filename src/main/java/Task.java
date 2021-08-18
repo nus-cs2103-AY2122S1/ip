@@ -16,7 +16,8 @@ public class Task {
     }
 
     public String toString(){
-        return this.content;
+        String cross = this.isCompleted?"X":" ";
+        return "[" + cross + "] " + this.content;
     }
 
 }

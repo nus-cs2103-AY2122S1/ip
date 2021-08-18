@@ -10,9 +10,7 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         String input = scanner.nextLine();
-        int test = scanner.nextInt();
-        System.out.println(input + test);
-
+        Scanner checkForKeyword = new Scanner(input);
         while(!input.equals("bye")){
             if(input.equals("list")){
                 System.out.println("Here are the tasks in your list:");
@@ -21,12 +19,18 @@ public class Duke {
                         break;
                     }else {
                         String cross = list[i].isComplete()?"X":" ";
-                        System.out.println((i + 1) + ".[" + cross + "] " + list[i]);
+                        System.out.println((i + 1) + "." + list[i]);
                     }
                 }
-                input = scanner.nextLine();
-            }else if(input.equals("done")){
+            }else if(checkForKeyword.next().equals("done")){
+                try {
+                    int taskToComplete = checkForKeyword.nextInt() - 1;
+                    list[taskToComplete].markComplete();
+                    System.out.println("Nice! I've marked this task as done:\n " + list[taskToComplete]);
 
+                }catch(Exception e){
+                    System.out.println(e);
+                }
             }
             else{
                 if(counter == 100){
@@ -37,9 +41,10 @@ public class Duke {
                     System.out.println("added: " + input);
                     list[counter] = new Task(input);
                     counter++;
-                    input = scanner.nextLine();
                 }
             }
+            input = scanner.nextLine();
+            checkForKeyword = new Scanner(input);
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
