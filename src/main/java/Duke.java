@@ -96,6 +96,15 @@ public class Duke {
                         counter++;
                         System.out.println("Now you have " + counter + " tasks in your list.");
                     }
+                } else if (strArray[0].equals("delete")) {
+                    if (strArray[1].equals(null)) {
+                        throw new DukeException("OOPS!!! You haven't specified which task you've done :-(");
+                    } else {
+                        int idx = Integer.parseInt(strArray[1]) - 1;
+                        System.out.println("Noted. I've removed this task: \n" + "\t" + tasks.remove(idx).toString());
+                        counter--;
+                        System.out.println("Now you have " + counter + " tasks in the list");
+                    }
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
