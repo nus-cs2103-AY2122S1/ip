@@ -20,7 +20,7 @@ public class Duke {
             try {
                 manager.processUserInput(userInput);
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
 
             if (userCommand.equals("bye")) {
