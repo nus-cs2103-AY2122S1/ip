@@ -11,6 +11,13 @@ public class Duke {
         TODO, EVENT, DEADLINE
     }
 
+    /**
+     * Print added or deleted message accordingly based on the operation made on the task.
+     *
+     * @param isAdd The task is added.
+     * @param task The task being added/deleted.
+     * @param numOfTask The latest number of task after task is added/deleted.
+     */
     public static void printAddOrDelete(boolean isAdd, Task task, int numOfTask) {
         Printer.prettyPrint(String.format("%s. I've %s this task:\n\t %s\n\tNow you have %d tasks in the list.",
                 isAdd ? "Got it" : "Noted",
@@ -19,6 +26,15 @@ public class Duke {
                 numOfTask));
     }
 
+    /**
+     * If the user command is valid, then return the task description from the command.
+     * Otherwise, throw corresponding exception.
+     *
+     * @param command The command entered by the user which is divided into 2 parts (Type of task and its description).
+     * @return Task description or throw exception.
+     * @throws EmptyDescriptionException An exception where user provide empty task description.
+     * @throws IncompleteDescriptionException An exception where user provide incomplete task description.
+     */
     public static String[] extractCommand(String[] command) throws EmptyDescriptionException, IncompleteDescriptionException {
         if (command.length < 2 || command[1].trim().isEmpty())
             throw new EmptyDescriptionException(String.format("The description of a %s cannot be empty.", command[0]));
@@ -29,6 +45,13 @@ public class Duke {
         return description;
     }
 
+    /**
+     * Add the task into the task list then print success message.
+     *
+     * @param command The command entered by the user which is divided into 2 parts (Type of task and its description).
+     * @param tasks The list consists of all the added tasks.
+     * @param numOfTask The latest number of task after task is added/deleted.
+     */
     public static void addThenPrint(String[] command, ArrayList<Task> tasks, int numOfTask) {
         try {
             String[] descriptions = extractCommand(command);

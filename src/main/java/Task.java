@@ -7,10 +7,18 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * A method that returns the status icon of the task.
+     *
+     * @return The status icon of the task.
+     */
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]"); // mark done task with X
     }
 
+    /**
+     * Mark a task as done, then show a message telling the user that the task has been marked done successfully.
+     */
     public void markAsDone() {
         this.isDone = true;
         Printer.prettyPrint("Nice! I've marked this task as done:\n\t   " +
