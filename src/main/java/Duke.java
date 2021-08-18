@@ -75,7 +75,6 @@ public class Duke {
         int len = myList.size();
         if (len == 0) { System.out.println("The list is empty!"); }
         for (int i = 0; i < len; i++) {
-//            Task curr = myList[i];
             Task curr = (Task) myList.get(i);
             System.out.printf("%s. %s\n", i + 1, curr);
         }
