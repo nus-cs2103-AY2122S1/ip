@@ -13,7 +13,7 @@ public class AddATaskProcessor extends Processor {
      */
     @Override
     public void process() {
-        Duke.updateList(this.command);
+        Duke.updateList(this.task);
         this.message = "added: " + this.command + "\n";
     }
 }

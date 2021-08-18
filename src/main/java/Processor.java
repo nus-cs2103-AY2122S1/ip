@@ -1,6 +1,7 @@
 public class Processor {
-    public String command;
-    public String message;
+    protected String command;
+    protected String message;
+    protected Task task;
 
     /**
      * Constructor of the class `Processor`.
@@ -9,6 +10,7 @@ public class Processor {
      */
     public Processor(String command) {
         this.command = command;
+        this.task = new Task(command);
     }
 
     /**

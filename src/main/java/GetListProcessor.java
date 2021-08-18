@@ -4,7 +4,7 @@ public class GetListProcessor extends Processor {
      */
     public GetListProcessor() {
         super("list");
-        this.message = "";
+        this.message = "Here are the tasks in your list:\n";
     }
 
     /**
@@ -12,13 +12,13 @@ public class GetListProcessor extends Processor {
      */
     @Override
     public void process() {
-        String[] tasks = Duke.getTasks();
+        Task[] tasks = Duke.getTasks();
         int i = 0;
         while (i < 100) {
             if (tasks[i] == null) {
                 break;
             }
-            this.message += String.format("%o. %s\n", i + 1, tasks[i]);
+            this.message += String.format("%o.%s\n", i + 1, tasks[i].toString());
             i++;
         }
     }

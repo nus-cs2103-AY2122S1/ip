@@ -8,7 +8,8 @@ public class Duke {
     public static final String EXITING_MESSAGE = "____________________________________________________________\n" +
             "Bye. Hope to see you again soon!\n" +
             "____________________________________________________________";
-    private static String[] tasks = new String[100];
+    // List of tasks.
+    private static Task[] tasks = new Task[100];
     private static int numOfTasks = 0;
     private Processor processor;
     private boolean isRunning;
@@ -25,9 +26,9 @@ public class Duke {
     /**
      * Updates a new task to the task list.
      *
-     * @param task The new task as a string.
+     * @param task The new task.
      */
-    public static void updateList(String task) {
+    public static void updateList(Task task) {
         Duke.tasks[numOfTasks] = task;
         Duke.numOfTasks++;
     }
@@ -37,8 +38,8 @@ public class Duke {
      *
      * @return A copy of tasks list.
      */
-    public static String[] getTasks() {
-        String[] copy = new String[100];
+    public static Task[] getTasks() {
+        Task[] copy = new Task[100];
         for (int i = 0; i < numOfTasks; i++) {
             copy[i] = Duke.tasks[i];
         }
