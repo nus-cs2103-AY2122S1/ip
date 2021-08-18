@@ -22,8 +22,9 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         drawLine();
 
+        Scanner input = new Scanner(System.in);
+
         while(true) {
-            Scanner input = new Scanner(System.in);
             s = input.nextLine();
 
             if (s.startsWith("bye")) {
@@ -91,5 +92,6 @@ public class Duke {
                 drawLine();
             }
         }
+        input.close();
     }
 }
