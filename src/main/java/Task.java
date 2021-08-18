@@ -10,4 +10,13 @@ public class Task {
     public void finished() {
         this.done = true;
     }
+
+    @Override
+    public String toString() {
+        String finished = " ";
+        if (this.done) {
+            finished = "X";
+        }
+        return "[" + finished + "] " + this.taskName;
+    }
 }
