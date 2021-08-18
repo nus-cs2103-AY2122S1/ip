@@ -32,7 +32,6 @@ public class Duke {
      * @return the beautified string to display
      */
     public static String listBeautify(ArrayList<Task> taskArrayList) {
-        System.out.println("lB reach");
         StringBuilder listBeautified = new StringBuilder();
         for (int i = 0; i < taskArrayList.size(); i++) {
             listBeautified.append(i + 1).append(".")
@@ -58,7 +57,6 @@ public class Duke {
      * @return the beautified string to display
      */
     public static String taskBeautify(Task task, int index) {
-        System.out.println("tB reach");
         StringBuilder taskBeautified = new StringBuilder();
         taskBeautified.append(index).append(".")
                 .append("[")
@@ -68,7 +66,6 @@ public class Duke {
                 .append(task.getStatusIcon())
                 .append("]")
                 .append(taskArrayList.get(index - 1).description);
-        System.out.println("tB finish");
         return taskBeautified.toString();
     }
 
@@ -120,10 +117,10 @@ public class Duke {
                     switch (userInput) {
                         case "todo":
                             String todoName = scanner.nextLine();
-                            Task newest = new Task(todoName, "todo");
-                            taskArrayList.add(newest);
+                            Task newestTodo = new Task(todoName, "todo");
+                            taskArrayList.add(newestTodo);
                             System.out.println(sandwich("New task added: \n"
-                                    + taskBeautify(newest, taskArrayList.size())
+                                    + taskBeautify(newestTodo, taskArrayList.size())
                                     + "\n You now have "
                                     + taskArrayList.size()
                                     + " items in your task list."));
@@ -131,10 +128,27 @@ public class Duke {
                         case "deadline":
                             scanner.useDelimiter("\\s*/by\\s*");
                             String deadlineName = scanner.next();
-
+                            System.out.println("dN: " + deadlineName);
+                            String deadlineReminder = scanner.nextLine();
+                            System.out.println("dR: " + deadlineReminder);
+                            Task newestDeadline = new Task(deadlineName, "deadline");
+                            taskArrayList.add(newestDeadline);
+                            System.out.println(sandwich("New task added: \n"
+                                    + taskBeautify(newestDeadline, taskArrayList.size())
+                                    + "\n You now have "
+                                    + taskArrayList.size()
+                                    + " items in your task list."));
                             break;
                         case "event":
-
+                            scanner.useDelimiter("\\s*/at\\s*");
+                            String eventName = scanner.nextLine();
+                            Task newestEvent = new Task(eventName, "deadline");
+                            taskArrayList.add(newestEvent);
+                            System.out.println(sandwich("New task added: \n"
+                                    + taskBeautify(newestEvent, taskArrayList.size())
+                                    + "\n You now have "
+                                    + taskArrayList.size()
+                                    + " items in your task list."));
                             break;
                     }
                 }
