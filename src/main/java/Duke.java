@@ -24,8 +24,28 @@ public class Duke {
         System.out.println(formatDukeResponse(exitMessage));
     }
 
-    private static void addTask(String taskName) {
-        Task task = new Task(taskName);
+    private static void addTask(String description) {
+        Task task = new Todo(description);
+        tasks[taskCount] = task;
+        taskCount++;
+        printAddTaskMessage(task);
+    }
+
+    private static void addTask(String descriptionAndTime, String command) {
+        String[] splitDescriptionAndTime;
+        Task task;
+
+        if (command.equals("deadline")) {
+            splitDescriptionAndTime = descriptionAndTime.split(" /by ");
+            task = new Deadline(splitDescriptionAndTime[0], splitDescriptionAndTime[1]);
+        } else if (command.equals("event")) {
+            splitDescriptionAndTime = descriptionAndTime.split(" /at ");
+            task = new Event(splitDescriptionAndTime[0], splitDescriptionAndTime[1]);
+        } else {
+            printInvalidCommandMessage();
+            return;
+        }
+
         tasks[taskCount] = task;
         taskCount++;
         printAddTaskMessage(task);
@@ -39,7 +59,9 @@ public class Duke {
     }
 
     private static void printAddTaskMessage(Task task) {
-        System.out.println(formatDukeResponse("Got it. I've added this task:\n" + task));
+        System.out.println(formatDukeResponse("Got it. I've added this task:\n" + task
+                + "\nNow you have " + taskCount
+                + (taskCount == 1 ? " task " : " tasks ") + "in the list."));
     }
 
     private static void printTasksMessage() {
@@ -68,27 +90,32 @@ public class Duke {
         while (true) {
             String[] userInput = sc.nextLine().split(" ", 2);
             String command = userInput[0];
-            String description = userInput.length == 2 ? userInput[1] : "";
+            String action = userInput.length == 2 ? userInput[1] : "";
 
             if (command.equals("bye")) {
                 sc.close();
                 break;
             }
+
             switch (command) {
-                case "list":
-                    printTasksMessage();
-                    break;
-                case "done":
-                    // to handle NumberFormatException
-                    int taskNumber = Integer.parseInt(userInput[1]);
-                    markTask(taskNumber);
-                    break;
-                case "task":
-                    addTask(description);
-                    break;
-                default:
-                    printInvalidCommandMessage();
-                    break;
+            case "list":
+                printTasksMessage();
+                break;
+            case "done":
+                // to handle NumberFormatException
+                int taskNumber = Integer.parseInt(userInput[1]);
+                markTask(taskNumber);
+                break;
+            case "todo":
+                addTask(action);
+                break;
+            case "deadline":
+            case "event":
+                addTask(action, command);
+                break;
+            default:
+                printInvalidCommandMessage();
+                break;
             }
         }
 
