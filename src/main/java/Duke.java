@@ -14,14 +14,12 @@ public class Duke {
     private final static TaskManager TASK_MANAGER = new TaskManager();
 
     public static void main(String[] args) {
-        greet();
-        run();
-        exit();
-    }
-
-    public static void greet() {
         Echoer.print("Hello from\n" + LOGO);
         Echoer.info("Hello! I'm Duke.\n\tWhat can I do for you?");
+
+        run();
+
+        Echoer.info("Bye. Hope to see you again soon!");
     }
 
     public static void run() {
@@ -32,10 +30,6 @@ public class Duke {
             userInput = scanner.nextLine().trim();
         }
         scanner.close();
-    }
-
-    public static void exit() {
-        Echoer.info("Bye. Hope to see you again soon!");
     }
 
     public static void makeDecision(String userInput) {
@@ -55,7 +49,7 @@ public class Duke {
                         "\n\tNow you have " + TASK_MANAGER.getTaskListSize() +
                         " tasks in the list.");
 
-            }else if (userInput.startsWith("todo")) {
+            } else if (userInput.startsWith("todo")) {
                 echoTaskCreation(TASK_MANAGER.addToDoTask(userInput.substring(4)));
 
             } else if (userInput.startsWith("event")) {
