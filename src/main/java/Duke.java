@@ -58,6 +58,10 @@ public class Duke {
 
             }
             if (in.length() > 3 && in.substring(0,4).equals("todo") ) {
+                if (in.length() == 4) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    continue;
+                }
                 System.out.println("Got it. I've added this task:");
                 storedInfo[count] = new ToDoTask(in.substring(4));
                 System.out.println(storedInfo[count]);
@@ -70,7 +74,6 @@ public class Duke {
             } else if (in.length() > 4 && in.substring(0,5).equals("event")) {
                 System.out.println("Got it. I've added this task:");
                 int timeLocator = in.indexOf("/");
-                String timeString = in.substring(timeLocator);
                 storedInfo[count] = new EventTask(in.substring(6, timeLocator), in.substring(timeLocator+1));
                 System.out.println(storedInfo[count]);
                 count++;
@@ -82,7 +85,6 @@ public class Duke {
             } else if (in.length() > 7 && in.substring(0,8).equals("deadline")) {
                 System.out.println("Got it. I've added this task:");
                 int timeLocator = in.indexOf("/");
-                String timeString = in.substring(timeLocator);
                 storedInfo[count] = new DeadlineTask(in.substring(9, timeLocator), in.substring(timeLocator+1));
                 System.out.println(storedInfo[count]);
                 count++;
@@ -92,7 +94,7 @@ public class Duke {
                     System.out.println("Now you have " + count + " tasks in the list.");
                 }
             } else {
-                System.out.println("Invalid task input");
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
             }
