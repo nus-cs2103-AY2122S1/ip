@@ -1,9 +1,9 @@
 import java.util.Scanner;
 public class Duke {
-    private String command;
+    private String[] toDoList;
 
-    private Duke(String command) {
-        this.command = command;
+    private Duke() {
+        this.toDoList = new String[100];
     }
 
     /**
@@ -35,7 +35,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "How may I help you today master?\n");
         System.out.println("-------------------------------------------------------------------");
 
-        Duke chatbot = new Duke("Servant");
+        Duke chatbot = new Duke();
         chatbot.commanding();
     }
 }
