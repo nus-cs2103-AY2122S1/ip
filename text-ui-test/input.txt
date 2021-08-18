@@ -1,8 +1,13 @@
 list
-todo sweep floor
+deadline
 deadline Individual Project /by 19 Aug 2359hr
+event
 event CS2103T lecture /at 19 Aug 1600hr
 list
 done 1
+done
+todo
+todo sweep floor
+done 5
 list
 bye

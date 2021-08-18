@@ -12,36 +12,53 @@
     | It seems that your list is empty.                        |
     | Try adding some task using "todo", "deadline" or "event" |
      ==========================================================
-     ===================================
-    | Got it. I've added this task:     |
-    |   [T][ ] sweep floor              |
-    | Now you have 1 tasks in the list. |
-     ===================================
+     ==================================================
+    | OOPS!!! The format of the deadline is incorrect. |
+    | eg. deadline read book /by Friday                |
+     ==================================================
      =================================================
     | Got it. I've added this task:                   |
     |   [D][ ] Individual Project (by: 19 Aug 2359hr) |
-    | Now you have 2 tasks in the list.               |
+    | Now you have 1 tasks in the list.               |
      =================================================
+     ================================================
+    | OOPS!!! The format of the event is incorrect.  |
+    | eg. event CS2103T lecture /at Thursday, 1600hr |
+     ================================================
      ==============================================
     | Got it. I've added this task:                |
     |   [E][ ] CS2103T lecture (at: 19 Aug 1600hr) |
-    | Now you have 3 tasks in the list.            |
+    | Now you have 2 tasks in the list.            |
      ==============================================
      ===================================================
     | Here is your list:                                |
-    | 1. [T][ ] sweep floor                             |
-    | 2. [D][ ] Individual Project (by: 19 Aug 2359hr)  |
-    | 3. [E][ ] CS2103T lecture (at: 19 Aug 1600hr)     |
+    | 1. [D][ ] Individual Project (by: 19 Aug 2359hr)  |
+    | 2. [E][ ] CS2103T lecture (at: 19 Aug 1600hr)     |
      ===================================================
-     =======================================
-    | Nice! I've marked this task as done:  |
-    |   [T][X] sweep floor                  |
-     =======================================
+     =================================================
+    | Nice! I've marked this task as done:            |
+    |   [D][X] Individual Project (by: 19 Aug 2359hr) |
+     =================================================
+     =========================================
+    | OOPS!!! Did you forget the task number? |
+     =========================================
+     ====================================================
+    | OOPS!!! The description of a todo cannot be empty. |
+     ====================================================
+     ===================================
+    | Got it. I've added this task:     |
+    |   [T][ ] sweep floor              |
+    | Now you have 3 tasks in the list. |
+     ===================================
+     ==============================
+    | Task 5 does not exist.       |
+    | Use "list" to see all tasks. |
+     ==============================
      ===================================================
     | Here is your list:                                |
-    | 1. [T][X] sweep floor                             |
-    | 2. [D][ ] Individual Project (by: 19 Aug 2359hr)  |
-    | 3. [E][ ] CS2103T lecture (at: 19 Aug 1600hr)     |
+    | 1. [D][X] Individual Project (by: 19 Aug 2359hr)  |
+    | 2. [E][ ] CS2103T lecture (at: 19 Aug 1600hr)     |
+    | 3. [T][ ] sweep floor                             |
      ===================================================
      ==================================
     | Bye. Hope to see you again soon! |
