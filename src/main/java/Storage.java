@@ -28,20 +28,25 @@ public class Storage {
             if (command.equals("todo")) {
                 String description = lineSplitter.nextLine();
                 tasklist.add(new ToDo(description.trim()));
+
             } else if (command.equals("deadline")) {
                 String description = lineSplitter.nextLine();
                 String[] parts = description.split("/by");
                 tasklist.add(new Deadline(parts[0].trim(), parts[1].trim()));
+
             } else if (command.equals("event")) {
                 String description = lineSplitter.nextLine();
                 String[] parts = description.split("/at");
                 tasklist.add(new Event(parts[0].trim(), parts[1].trim()));
+
             } else if (command.equals("done")) {
                 int indexToMark = lineSplitter.nextInt();
                 tasklist.get(indexToMark - 1).markAsDone();
+
             } else if (command.equals("delete")) {
                 int indexToDelete = lineSplitter.nextInt();
                 tasklist.remove(indexToDelete - 1);
+
             }
         }
         return tasklist;
