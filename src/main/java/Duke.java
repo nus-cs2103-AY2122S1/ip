@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private enum Commands {
-        EXIT, ADD, LIST
+    private enum CommandTypes {
+        EXIT, ADD, LIST, DONE
     }
 
     private final String HORIZONTAL_LINE = "____________________________________________________________";
@@ -43,7 +43,7 @@ public class Duke {
 
     private void start(){
         greet();
-        getCommand();
+        processCommand();
     }
 
     private void listTasks(){
@@ -54,18 +54,18 @@ public class Duke {
         printMessageWithFormat(msg);
     }
 
-    private void getCommand(){
+    private void processCommand(){
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
         while (this.isActive){
-            switch(command){
-                case "bye":
+            switch(getCommandType(command)){
+                case EXIT:
                     exit();
                     break;
-                case "list":
+                case LIST:
                     listTasks();
                     break;
-                default:
+                case ADD:
                     Task task = new Task(command);
                     addTask(task);
             }
@@ -73,6 +73,19 @@ public class Duke {
         }
     }
 
+    private CommandTypes getCommandType(String command){
+        String commandType = command.split(" ")[0];
+        switch(commandType){
+            case "list":
+                return CommandTypes.LIST;
+
+            case "bye":
+                return CommandTypes.EXIT;
+
+            default:
+                return CommandTypes.ADD;
+        }
+    }
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
