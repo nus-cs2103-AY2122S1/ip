@@ -1,0 +1,50 @@
+Level 1. Greet, Echo, Exit
+Implement a skeletal version of Duke that starts by greeting the user, simply echos commands entered by the user, and exits when the user types bye.
+Example:
+
+    ____________________________________________________________
+     Hello! I'm Duke
+     What can I do for you?
+    ____________________________________________________________
+
+list
+____________________________________________________________
+list
+____________________________________________________________
+
+blah
+____________________________________________________________
+blah
+____________________________________________________________
+
+bye
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________
+
+The indentation and horizontal lines are optional.
+
+You are strongly encouraged to customize the chatbot name, command/display formats, 
+and even the personality of the chatbot to make your chatbot unique.
+
+====
+
+My Chatbot name:
+Gnosis (greek noun for knowledge :) )
+
+
+Tasks to achieve level-1:
+
+1. Greet user
+    a. Create a constant variable storing greet message
+    b. default
+2. echo commands from user input
+    a. can use a switch case following user input
+3. exit command upon user input: "bye"
+    a. upon "bye" command -> output a exit message (stored in a constant variable)
+4. Create a user friendly interface
+    a. Can use '\t' and "====" to create simple line blocks
+
+
+
+
