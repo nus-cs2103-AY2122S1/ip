@@ -48,22 +48,18 @@ public class Duke {
         }
     }
 
-    public void mainLogic(String input, ArrayList<Task> dataStore) throws BotException {
+    public void errorHandler(String input) throws BotException {
         if (input.equals("todo")) {
             throw new BotException(TODO_NO_DESC);
         } else if (input.equals("deadline") || input.equals("deadline") && !input.contains("/by")) {
             throw new BotException(DEADLINE_NO_INFO);
-        } if (input.equals("list")) {
-            for (int i = 0; i < dataStore.size(); i++) {
-                Task task = dataStore.get(i);
+        } 
+    }
 
-                if (task.getStatus()) {
-                    System.out.println(i+1 + ". " + task.toString());
-                } else {
-                    System.out.println(i+1 + ". " + task.toString());
-                }
-            }
-        } else if (input.contains("todo")) {
+    public void mainLogic(String input, ArrayList<Task> dataStore) throws BotException {
+        errorHandler(input);
+        
+        if (input.contains("todo")) {
             ToDo todo = new ToDo(input);
             dataStore.add(todo);
 
