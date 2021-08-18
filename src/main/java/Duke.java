@@ -127,9 +127,8 @@ public class Duke {
                 input = scanner.nextLine();
             }
         }
-        String ending = "Bye. Hope to see you again soon!";
-
-        System.out.println("\t" + ending);
-
+        //String ending = "Bye. Hope to see you again soon!";
+        //System.out.println("\t" + ending);
+        System.out.println("Bye. Hope to see you again soon!");
     }
 }
