@@ -87,7 +87,8 @@ public class Duke {
                     System.out.printf("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
                     break;
                 default:
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means (X_X)\nPlease enter one of the following commands:\n todo <task>" +
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means (X_X)" +
+                            "\nPlease enter one of the following commands:\n todo <task>" +
                             "\n deadline <task> /by <deadline>\n event <event> /at <date time>\n list\n bye(to quit)");
                     break;
                 }
