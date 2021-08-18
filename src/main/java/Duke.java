@@ -13,14 +13,14 @@ public class Duke {
 
     // The General Strings Used by the ChatBot
     private static final String logo = "\n" +
-            "\t\t\t\t\t /$$      /$$ /$$                 /$$$$$$$              /$$    \n" +
-            "\t\t\t\t\t| $$  /$ | $$| $$                | $$__  $$            | $$    \n" +
-            "\t\t\t\t\t| $$ /$$$| $$| $$$$$$$   /$$$$$$ | $$  \\ $$  /$$$$$$  /$$$$$$  \n" +
-            "\t\t\t\t\t| $$/$$ $$ $$| $$__  $$ /$$__  $$| $$$$$$$  /$$__  $$|_  $$_/  \n" +
-            "\t\t\t\t\t| $$$$_  $$$$| $$  \\ $$| $$  \\ $$| $$__  $$| $$  \\ $$  | $$    \n" +
+            "\t\t\t\t\t /$$      /$$ /$$                 /$$$$$$$              /$$\n" +
+            "\t\t\t\t\t| $$  /$ | $$| $$                | $$__  $$            | $$\n" +
+            "\t\t\t\t\t| $$ /$$$| $$| $$$$$$$   /$$$$$$ | $$  \\ $$  /$$$$$$  /$$$$$$\n" +
+            "\t\t\t\t\t| $$/$$ $$ $$| $$__  $$ /$$__  $$| $$$$$$$  /$$__  $$|_  $$_/\n" +
+            "\t\t\t\t\t| $$$$_  $$$$| $$  \\ $$| $$  \\ $$| $$__  $$| $$  \\ $$  | $$\n" +
             "\t\t\t\t\t| $$$/ \\  $$$| $$  | $$| $$  | $$| $$  \\ $$| $$  | $$  | $$ /$$\n" +
             "\t\t\t\t\t| $$/   \\  $$| $$  | $$|  $$$$$$/| $$$$$$$/|  $$$$$$/  |  $$$$/\n" +
-            "\t\t\t\t\t|__/     \\__/|__/  |__/ \\______/ |_______/  \\______/    \\___/  \n";
+            "\t\t\t\t\t|__/     \\__/|__/  |__/ \\______/ |_______/  \\______/    \\___/\n";
 
     private static final String line = "________________________________________________________________________________________________________________";
 
@@ -30,12 +30,12 @@ public class Duke {
             "\t\t\t| $$  \\__/  /$$$$$$   /$$$$$$   /$$$$$$$| $$  \\ $$ /$$   /$$  /$$$$$$       | $$\n" +
             "\t\t\t| $$ /$$$$ /$$__  $$ /$$__  $$ /$$__  $$| $$$$$$$ | $$  | $$ /$$__  $$      | $$\n" +
             "\t\t\t| $$|_  $$| $$  \\ $$| $$  \\ $$| $$  | $$| $$__  $$| $$  | $$| $$$$$$$$      |__/\n" +
-            "\t\t\t| $$  \\ $$| $$  | $$| $$  | $$| $$  | $$| $$  \\ $$| $$  | $$| $$_____/          \n" +
+            "\t\t\t| $$  \\ $$| $$  | $$| $$  | $$| $$  | $$| $$  \\ $$| $$  | $$| $$_____/\n" +
             "\t\t\t|  $$$$$$/|  $$$$$$/|  $$$$$$/|  $$$$$$$| $$$$$$$/|  $$$$$$$|  $$$$$$$       /$$\n" +
             "\t\t\t\\______/  \\______/  \\______/  \\_______/|_______/  \\____  $$ \\_______/      |__/\n" +
-            "\t\t\t                                                   /$$  | $$                    \n" +
-            "\t\t\t                                                  |  $$$$$$/                    \n" +
-            "\t\t\t                                                   \\______/                     \n";
+            "\t\t\t                                                   /$$  | $$\n" +
+            "\t\t\t                                                  |  $$$$$$/\n" +
+            "\t\t\t                                                   \\______/\n";
 
     // The Global Variables used by the ChatBot
     private static final Scanner cmdReader = new Scanner(System.in);
@@ -85,7 +85,7 @@ public class Duke {
             echo("There are currently no tasks in your list.", LEVEL.COMPLETE);
             return;
         }
-        String listString = "The tasks in your list are: \n";
+        String listString = "The tasks in your list are:\n";
         int i;
         for (i = 0; i < LIST.size() - 1; i++) {
             listString = listString.concat("\t\t\t" + (i + 1) + ". " + LIST.get(i) + "\n");
@@ -133,6 +133,7 @@ public class Duke {
 
                 //Check for confirmation before deleting
                 echo("Are you sure you want to remove this task: \"" + temp.getDescription() + "\" ? (Yes/No)", LEVEL.COMPLETE);
+                System.out.print(COLOR_PURPLE + "> " + COLOR_REST);
                 String confirm = cmdReader.nextLine().trim();
                 if (confirm.toLowerCase(Locale.ROOT).equals("yes")) {
                     echo("I have removed this task from the list: \"" + temp.getDescription() + "\"", LEVEL.START);

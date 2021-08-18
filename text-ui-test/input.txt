@@ -1,0 +1,16 @@
+deadline Return Books to Library /by Sunday
+list
+todo Get New Books
+list
+event Team Meeting /at Saturday 2-4pm
+list
+done 3
+done 2
+undo 2
+list
+remove 2
+yes
+remove 1
+no
+list
+bye
