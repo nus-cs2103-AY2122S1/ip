@@ -11,11 +11,11 @@ public class Duke {
      */
     private static String reply(String str) {
         String y_border = "------------------------------------------------------------\n";
-        return y_border + "[PEPPER JACK] " + str + "\n" + y_border;
+        return y_border + "[PEPPER JACK]\n" + str + "\n" + y_border;
     }
 
     private static String addTaskReply(String t, int sum) {
-        return reply("\nPepper Jack added this task: \n\t" + t + "\nYou have " + String.valueOf(sum) +
+        return reply("Pepper Jack added this task:\n\t" + t + "\nYou have " + String.valueOf(sum) +
                 " task(s) now so get off that crack rock!");
     }
 
@@ -52,7 +52,7 @@ public class Duke {
             }
             else if (user_input.equals("list")){
                 // Show list
-                String lst_display = "\n\n";
+                String lst_display = "\n";
 
                 for (int i = 0; i < lst.size(); i++){
                     lst_display = lst_display + String.format("\t%d. %s\n", i + 1, lst.get(i));
@@ -64,7 +64,7 @@ public class Duke {
                 int index = Integer.parseInt(user_input_split[1]) - 1;
                 Task t = lst.get(index);
                 t.setDone();
-                System.out.print(reply("\nNoice! Pepper Jack marked this task as done:\n\t" + t));
+                System.out.print(reply("Noice! Pepper Jack marked this task as done:\n\t" + t));
             }
             else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                 // Add new type of task
