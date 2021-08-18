@@ -8,8 +8,11 @@ public class Deadline extends Task {
     public String getDescription() {
         String temp = super.getDescription();
         temp = temp.replace("deadline ", "");
-        temp = temp.replace("/by", "(by:");
-        return temp + ")";
+        if (temp.contains("/by")) {
+            temp = temp.replace("/by", "(by");
+            return temp + ")";
+        }
+        return "(" + temp + ")";
     }
 
     @Override

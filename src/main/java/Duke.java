@@ -21,23 +21,30 @@ public class Duke {
                 }
                 System.out.println("    ***\n");
 
-            } else if (userInput.contains("done")) {
-                String index = userInput.substring(5, userInput.length());
-                int x = Integer.parseInt(index);
-                Task temp = contents.get(x - 1);
-                temp.markedDone();
-                System.out.println("    ***\n" + "    You have successfully done this task:\n" +
-                        "      " + temp.getStatusIcon() + " " + temp.getDescription() + "\n    ***\n");
+            } else if (userInput.startsWith("done")) {
+                try {
+                    String index = userInput.substring(5);
+                    int x = Integer.parseInt(index);
+                    Task temp = contents.get(x - 1);
+                    temp.markedDone();
+                    System.out.println("    ***\n" + "    You have successfully done this task:\n" +
+                            "      " + temp.getStatusIcon() + " " + temp.getDescription() + "\n    ***\n");
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("Invalid input. Requires a number.");
+                } catch (ArrayIndexOutOfBoundsException f) {
+                    System.out.println("Invalid number given. Number is larger than list count.");
+                }
             } else {
                 Task newTask;
-                if (userInput.startsWith("deadline ")) {
+                if (userInput.startsWith("deadline")) {
                     newTask = new Deadline(userInput);
-                } else if (userInput.startsWith("event ")) {
+                } else if (userInput.startsWith("event")) {
                     newTask = new Event(userInput);
-                } else if (userInput.startsWith("todo ")) {
+                } else if (userInput.startsWith("todo")) {
                     newTask = new ToDos(userInput);
                 } else {
-                    newTask = new Task(userInput);
+                    throw new IllegalArgumentException("Invalid input. \nYou may only use the following inputs: " +
+                            "(bye, list, done, deadline, event, todo) and any text thereafter.");
                 }
                 contents.add(newTask);
                 if (contents.size() == 1) {

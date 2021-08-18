@@ -8,8 +8,11 @@ public class Event extends Task {
     public String getDescription() {
         String temp = super.getDescription();
         temp = temp.replace("event ", "");
-        temp = temp.replace("/at", "(at:");
-        return temp + ")";
+        if (temp.contains("/at")) {
+            temp = temp.replace("/at", "(at:");
+            return temp + ")";
+        }
+        return "(" + temp + ")";
     }
 
     @Override
