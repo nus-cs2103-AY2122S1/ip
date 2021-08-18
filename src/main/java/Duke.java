@@ -42,6 +42,7 @@ public class Duke {
                 StringBuilder sb = new StringBuilder();
                 for (String item:arrayList) {
                     sb.append(String.valueOf(counter) + ". " + item + "\n");
+                    counter++;
                 }
                 printStatement(sb.toString());
             } else {
