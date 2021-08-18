@@ -57,9 +57,12 @@ public class Duke {
                 continue;
 
             }
-                System.out.println("added: " + in);
+                System.out.println("Got it. I've added this task:");
                 storedInfo[count] = new Task(in);
+                System.out.println(storedInfo[count]);
                 count++;
+                System.out.println("Now you have " + count + " tasks in the list.");
+
 
             }
 
