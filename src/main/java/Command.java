@@ -25,32 +25,6 @@ public class Command {
     }
 
     /**
-     * Checks if command is valid.
-     *
-     * @param input command
-     * @return An int to represent command.
-     * @throws DukeException if command is invalid for bot.
-     */
-    public int checkCommand(String input) throws DukeException{
-        switch (input) {
-            case "list":
-                return 1;
-            case "done":
-                return 2;
-            case "todo":
-                return 3;
-            case "deadline":
-                return 4;
-            case "event":
-                return 5;
-            case "delete":
-                return 6;
-            default:
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-    }
-
-    /**
      * Returns added message for command to-do.
      *
      * @param description description of to-do task.
