@@ -1,3 +1,5 @@
+import java.util.Locale;
+
 public class Logic {
 
     /**
@@ -11,13 +13,23 @@ public class Logic {
         //Logic to check each individual commands, checks for special commands first, then checks for other input
         if (command.equals("")) {
             throw new EmptyCommandException();
-        } else if (command.equals("list")) {
-            System.out.println("Passed on to persistence stage");
-            Persistence.print_log();
         } else {
-            System.out.println(command.getClass());
-            System.out.println("Passed on to persistent layer");
-            Persistence.addToLog(command);
+            String[] listOfCommandInputs = command.split(" ");
+            String actionCommand = listOfCommandInputs[0].toLowerCase();
+            System.out.println("Passed on to persistence stage");
+            if (actionCommand.equals("list")) {
+                Persistence.printLog();
+            } else if (actionCommand.equals("done")) {
+                int pos = Integer.parseInt(listOfCommandInputs[1]);
+                if (pos > Task.getNumberOfTask()) {
+                    throw new InvalidCommandException();
+                }
+                Task currentTask = Persistence.getTask(pos - 1 );
+                currentTask.completeTask();
+                System.out.println("Ohhhh myyyy. I have been waiting for this quest to complete for ages.");
+            } else {
+                Persistence.addToLog(new Task(command));
+            }
         }
     }
 }
