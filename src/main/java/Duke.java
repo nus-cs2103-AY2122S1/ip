@@ -27,7 +27,7 @@ public class Duke {
     private final List<Task> storage = new ArrayList<Task>();
 
     // Duke Constructor
-    public Duke(Scanner scannerObj) {
+    public Duke() {
         this.activated = true;
     }
 
@@ -128,7 +128,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scannerObj = new Scanner(System.in);
-        Duke chatBotObj = new Duke(scannerObj);
+        Duke chatBotObj = new Duke();
         chatBotObj.greet();
         while (chatBotObj.isActive()) {
             String nextIn = scannerObj.next();
