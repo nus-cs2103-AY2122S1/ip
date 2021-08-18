@@ -38,21 +38,41 @@ public class Duke {
                     System.out.println(" Nice! I've marked this task as done: \n" + task);
                     break;
                 case "todo":
-                    Task newTask = new Todo(scan.nextLine());
-                    myTasks.add(newTask);
-                    newTask.addTaskMsg(myTasks.size()); // Print confirmation message
-                    break;
+                    try {
+                        Task newTask = new Todo(scan.nextLine());
+                        myTasks.add(newTask);
+                        newTask.addTaskMsg(myTasks.size()); // Print confirmation message
+                        break;
+                    } catch (DukeException e) {
+                        e.printMsg();
+                    } finally {
+                        break;
+                    }
                 case "deadline":
-                    newTask = new Deadline(scan.nextLine());
-                    myTasks.add(newTask);
-                    newTask.addTaskMsg(myTasks.size()); // Print confirmation message
-                    break;
+                    try {
+                        Task newTask = new Deadline(scan.nextLine());
+                        myTasks.add(newTask);
+                        newTask.addTaskMsg(myTasks.size()); // Print confirmation message
+                    } catch (DukeException e) {
+                        e.printMsg();
+                    } finally {
+                        break;
+                    }
+
                 case "event":
-                    newTask = new Event(scan.nextLine());
-                    myTasks.add(newTask);
-                    newTask.addTaskMsg(myTasks.size()); // Print confirmation message
-                    break;
+                    try {
+                        Task newTask = new Event(scan.nextLine());
+                        myTasks.add(newTask);
+                        newTask.addTaskMsg(myTasks.size()); // Print confirmation message
+                    } catch (DukeException e) {
+                        e.printMsg();
+                    } finally {
+                        break;
+                    }
+
                 default:
+                    System.out.println("What are you even typing omg get it right...");
+                    scan.nextLine(); // Remove all other input to the scanner
             }
         }
 
