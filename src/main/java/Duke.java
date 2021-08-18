@@ -22,52 +22,65 @@ public class Duke {
 
         mainLoop:
         while (true) {
-            userCommand = scanner.next();
-            userInput = scanner.nextLine().trim();
+            try {
+                userCommand = scanner.next();
+                userInput = scanner.nextLine().trim();
 
-            switch (userCommand) {
-                case "list":
-                    if (tasks == 0) {
-                        System.out.println("Currently no tasks!");
-                    }
-                    for (int i = 0; i < tasks; i++) {
-                        System.out.printf("%d. %s%n", i + 1, taskList[i]);
-                    }
-                    break;
-                case "bye":
-                    System.out.println("Good bye.");
-                    break mainLoop;
-                case "done":
-                    int done = Integer.parseInt(userInput) - 1;
-                    if (done >= tasks || done < 0) {
-                        System.out.println("Task does not exist!");
-                        continue;
-                    }
+                switch (userCommand) {
+                    case "list":
+                        if (tasks == 0) {
+                            System.out.println("Currently no tasks!");
+                        }
+                        for (int i = 0; i < tasks; i++) {
+                            System.out.printf("%d. %s%n", i + 1, taskList[i]);
+                        }
+                        break;
+                    case "bye":
+                        System.out.println("Good bye.");
+                        break mainLoop;
+                    case "done":
+                        int done;
+                        try {
+                            done = Integer.parseInt(userInput) - 1;
+                        } catch (NumberFormatException exception) {
+                            throw new DukeException("Please enter a number after the done command.");
+                        }
 
-                    Task doneTask = taskList[done];
-                    doneTask.markAsDone();
+                        if (done >= tasks || done < 0) {
+                            System.out.println("Task does not exist!");
+                            continue;
+                        }
 
-                    System.out.printf("I've marked this task as done:\n" +
-                            "%s\n", doneTask.toString());
+                        Task doneTask = taskList[done];
+                        doneTask.markAsDone();
 
-                    break;
-                case ("todo"):
-                    taskList[tasks] = new Todo(userInput);
-                    addTask(taskList[tasks]);
-                    break;
-                case("deadline"):
-                    String[] deadlineInfo = splitBetween(userInput, "/by");
-                    taskList[tasks] = new Deadline(buildDescription(deadlineInfo, "by"));
-                    addTask(taskList[tasks]);
-                    break;
-                case("event"):
-                    String[] eventInfo = splitBetween(userInput, "/at");
-                    taskList[tasks] = new Event(buildDescription(eventInfo, "at"));
-                    addTask(taskList[tasks]);
-                    break;
-                default:
-                    System.out.println("Sorry I do not understand this directive.");
-                    break;
+                        System.out.printf("I've marked this task as done:\n" +
+                                "%s\n", doneTask.toString());
+
+                        break;
+                    case ("todo"):
+                    case("deadline"):
+                    case("event"):
+                        if (userInput.equals("")) {
+                            throw new DukeException("The description of a Task cannot be empty.");
+                        }
+
+                        if (userCommand.equals("todo")) {
+                            taskList[tasks] = new Todo(userInput);
+                        } else if (userCommand.equals("deadline")) {
+                            String[] deadlineInfo = splitBetween(userInput, "/by");
+                            taskList[tasks] = new Deadline(buildDescription(deadlineInfo, "by"));
+                        } else {
+                            String[] eventInfo = splitBetween(userInput, "/at");
+                            taskList[tasks] = new Event(buildDescription(eventInfo, "at"));
+                        }
+                        addTask(taskList[tasks]);
+                        break;
+                    default:
+                        throw new DukeException("Sorry I do not understand this directive.");
+                }}
+            catch (DukeException exception) {
+                System.out.println(exception.getMessage());
             }
         }
     }
@@ -78,7 +91,7 @@ public class Duke {
         System.out.printf("Now you have %d tasks in your list.\n", tasks);
     }
 
-    private static String[] splitBetween(String str, String separator) {
+    private static String[] splitBetween(String str, String separator) throws DukeException {
         StringJoiner start = new StringJoiner(" ");
         StringJoiner end = new StringJoiner(" ");
 
@@ -97,6 +110,14 @@ public class Duke {
                 start.add(currentString);
             }
             i++;
+        }
+
+        if (!after) {
+            throw new DukeException("Incorrect format for command.");
+        }
+
+        if (String.valueOf(end).equals("")) {
+            throw new DukeException("Please specify a time for the task.");
         }
 
         return new String[] {String.valueOf(start), String.valueOf(end)};
