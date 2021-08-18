@@ -1,3 +1,6 @@
+/**
+ * This is an Event class that extends Task.
+ */
 public class Event extends Task {
 
     protected String at;
@@ -5,6 +8,11 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         this.at = at;
+    }
+
+    @Override
+    public String fullCommand() {
+        return "event " + this.description + " /at " + this.at;
     }
 
     @Override

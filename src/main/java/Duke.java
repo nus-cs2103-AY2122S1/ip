@@ -1,10 +1,29 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private final ArrayList<Task> tasks;
+    private Storage store;
     private Boolean end = false;
+
+    private final String lineSeparator = "\t_______________________________";
+
+    /**
+     * This is the Constructor of Duke.
+     */
+    public Duke(String filePath) {
+        ArrayList<Task> tasks1;
+        this.store = new Storage(filePath);
+        try {
+            tasks1 = store.load();
+        } catch (FileNotFoundException e) {
+            tasks1 = new ArrayList<>();
+        }
+        this.tasks = tasks1;
+    }
 
     /**
      * This method marks the task at the specified index and prints out a response
@@ -20,11 +39,19 @@ public class Duke {
             if (t.isDone) {
                 throw new TaskIsCompleteException(indexToMark + 1);
             } else {
-                t.markAsDone();
-                System.out.println("\t_______________________________");
-                System.out.println("\tNice! I've marked this task as done:");
-                System.out.printf("\t%s\n", tasks.get(indexToMark));
-                System.out.println("\t_______________________________");
+
+                System.out.println(lineSeparator);
+                try {
+                    t.markAsDone();
+                    int listInd = indexToMark + 1;
+                    store.appendCommand("done " + listInd);
+                    System.out.println("\tNice! I've marked this task as done:");
+                    System.out.printf("\t%s\n", tasks.get(indexToMark));
+                } catch (IOException e) {
+                    System.out.println("\tError Saving to Database.");
+                } finally {
+                    System.out.println(lineSeparator);
+                }
             }
         } else {
             throw new TaskNotFoundException(indexToMark + 1);
@@ -38,11 +65,11 @@ public class Duke {
      */
     private void listOutTasks() throws EmptyListException {
         if (tasks.size() != 0) {
-            System.out.println("\t_______________________________");
+            System.out.println(lineSeparator);
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.printf("\t%d. %s\n", i + 1, tasks.get(i));
             }
-            System.out.println("\t_______________________________");
+            System.out.println(lineSeparator);
         } else {
             throw new EmptyListException();
         }
@@ -52,9 +79,15 @@ public class Duke {
      * This method prints the bye message upon "bye" command
      */
     private void endDuke() {
-        System.out.println("\t_______________________________");
-        System.out.println("\tBye. Hope to see you again soon!");
-        System.out.println("\t_______________________________");
+        System.out.println(lineSeparator);
+        try {
+            store.safeFile(tasks);
+            System.out.println("\tBye. Hope to see you again soon!");
+        } catch (IOException e) {
+            System.out.println("\tError Saving To Database.");
+        } finally {
+            System.out.println(lineSeparator);
+        }
     }
 
     /**
@@ -102,13 +135,20 @@ public class Duke {
         } else {
             throw new UnknownCommandException();
         }
-        tasks.add(t);
-        System.out.println("\t_______________________________");
-        System.out.println("\tGot it. I've added this task: ");
-        System.out.printf("\t  %s\n", t);
-        System.out.printf("\tNow you have %d ", tasks.size());
-        System.out.println((tasks.size() <= 1 ? "task" : "tasks") + " in the list.");
-        System.out.println("\t_______________________________");
+        System.out.println(lineSeparator);
+        try {
+            tasks.add(t);
+            store.appendCommand(t.fullCommand());
+            System.out.println("\tGot it. I've added this task: ");
+            System.out.printf("\t  %s\n", t);
+            System.out.printf("\tNow you have %d ", tasks.size());
+            System.out.println((tasks.size() <= 1 ? "task" : "tasks") + " in the list.");
+        } catch (IOException e) {
+            System.out.println("\tError Saving To Database.");
+        } finally {
+            System.out.println(lineSeparator);
+        }
+
     }
 
     /**
@@ -119,14 +159,21 @@ public class Duke {
      */
     public void deleteTask(int indexToDelete) throws TaskNotFoundException {
         if (tasks.size() - 1 >= indexToDelete && indexToDelete >= 0) {
-            Task t = this.tasks.get(indexToDelete);
-            this.tasks.remove(indexToDelete);
-            System.out.println("\t_______________________________");
-            System.out.println("\tNoted. I've removed this task:");
-            System.out.printf("\t  %s\n", t);
-            System.out.printf("\tNow you have %d ", tasks.size());
-            System.out.println((tasks.size() <= 1 ? "task" : "tasks") + " in the list.");
-            System.out.println("\t_______________________________");
+            System.out.println(lineSeparator);
+            try {
+                Task t = this.tasks.get(indexToDelete);
+                int listInd = indexToDelete + 1;
+                store.appendCommand("delete " + listInd);
+                this.tasks.remove(indexToDelete);
+                System.out.println("\tNoted. I've removed this task:");
+                System.out.printf("\t  %s\n", t);
+                System.out.printf("\tNow you have %d ", tasks.size());
+                System.out.println((tasks.size() <= 1 ? "task" : "tasks") + " in the list.");
+            } catch (IOException e) {
+                System.out.println("\tError Saving To Database.");
+            } finally {
+                System.out.println(lineSeparator);
+            }
         } else {
             throw new TaskNotFoundException(indexToDelete + 1);
         }
@@ -178,7 +225,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("src/main/java/StoredData.txt").run();
     }
 
 }
