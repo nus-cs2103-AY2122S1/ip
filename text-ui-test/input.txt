@@ -1,0 +1,27 @@
+start
+blah
+list
+add Do Level 1 to Level 6 of CS2103T Software Engineering task
+list
+done I don't know what
+done 0
+done 10
+done 1
+delete I don't know what
+delete 0
+delete 10
+delete 1
+list
+event /at Wednesday 4pm
+event Supper /at Wednesday 1am
+event Host a talk /at
+todo
+todo Sleep
+todo Watch lectures backlog
+deadline /by Today 23.59
+deadline Assignment 1,2,3 /by Next Monday
+deadline Assignment /at
+done 1
+done 3
+list
+bye

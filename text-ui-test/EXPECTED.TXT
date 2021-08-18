@@ -22,3 +22,367 @@
 {o)xxx|===============- * -===============|xxx(o}
       |                                     |
 
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm sorry, Master.
+      I don't ... understand your command.
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm sorry, Master.
+      I don't ... understand your command.
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Would you like to know what you
+      told me to remember?
+
+      I'll list them for you, Master.
+
+      Ah, currently Master has no task.
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I have added: Do Level 1 to Level 6 of CS2103T Software Engineering task
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Would you like to know what you
+      told me to remember?
+
+      I'll list them for you, Master.
+
+      1. [ ] Do Level 1 to Level 6 of CS2103T Software Engineering task
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm really sorry, Master.
+      I'm ... not sure which task you want me
+      to mark as done...
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm really sorry, Master.
+      I'm unable to find the task that
+      you specified...
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm really sorry, Master.
+      I'm unable to find the task that
+      you specified...
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Understand, Master.
+      I'll mark this done right away.
+
+        [X] Do Level 1 to Level 6 of CS2103T Software Engineering task
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm really sorry, Master.
+      I'm ... not sure which task you want
+      to delete...
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm really sorry, Master.
+      I'm unable to find the task that
+      you want to delete...
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm really sorry, Master.
+      I'm unable to find the task that
+      you want to delete...
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Understand, Master.
+      I have deleted this task.
+
+        [X] Do Level 1 to Level 6 of CS2103T Software Engineering task
+
+      Currently, Master has 0 task
+      in the list.
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Would you like to know what you
+      told me to remember?
+
+      I'll list them for you, Master.
+
+      Ah, currently Master has no task.
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm sorry, Master.
+      I'm ... not sure what event you want me
+      to add ...
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Right, Master.
+      I'll make sure you remember
+      to come to this event:
+
+        [E][ ] Supper (at: Wednesday 1am)
+
+      Currently, Master has 1 task
+      in the list.
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm really sorry, Master.
+      I won't be able to remind you
+      to come to this event without
+      knowing the time of the event...
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm sorry, Master.
+      What ... exactly do you want me to add
+      to your Todo list?
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Yes, Master.
+      I'll add the following to your Todo list:
+
+        [T][ ] Sleep
+
+      Currently, Master have 2 tasks
+      in the list.
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Yes, Master.
+      I'll add the following to your Todo list:
+
+        [T][ ] Watch lectures backlog
+
+      Currently, Master have 3 tasks
+      in the list.
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm really sorry, Master.
+      I'm ... not sure what task you want me
+      to add ...
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Right, Master.
+      I'll ensure that you will
+      do this task before the deadline:
+
+        [D][ ] Assignment 1,2,3 (by: Next Monday)
+
+      Currently, Master have 4 tasks
+      in the list.
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I'm sorry, Master.
+      I won't be able to ensure that you
+      do the task on time without
+      knowing the deadline...
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Understand, Master.
+      I'll mark this done right away.
+
+        [E][X] Supper (at: Wednesday 1am)
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Understand, Master.
+      I'll mark this done right away.
+
+        [T][X] Watch lectures backlog
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Would you like to know what you
+      told me to remember?
+
+      I'll list them for you, Master.
+
+      1. [E][X] Supper (at: Wednesday 1am)
+
+      2. [T][ ] Sleep
+
+      3. [T][X] Watch lectures backlog
+
+      4. [D][ ] Assignment 1,2,3 (by: Next Monday)
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      Am I ... no longer needed, Master?
+      I understand. I shall excuse myself.
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
