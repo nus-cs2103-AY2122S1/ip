@@ -7,6 +7,7 @@ public class Botto {
     final static String indentation = "   ";
     final static String[] commands = {"list", "done", "todo", "deadline", "event", "delete", "bye"};
 
+    // used enum here
     enum TaskType {
         TODO, DEADLINE, EVENT
     }
