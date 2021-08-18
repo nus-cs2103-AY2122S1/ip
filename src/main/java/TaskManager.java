@@ -10,8 +10,9 @@ public class TaskManager {
     public void list() {
         System.out.println("Duke says >> ");
         for (int i = 0; i < taskArrayList.size(); i++) {
-            String s = String.format("%d. %s", i + 1, taskArrayList.get(i));
-            System.out.println(s);
+            Task t = taskArrayList.get(i);
+            String isDone = t.isDone() ? "x" : " ";
+            System.out.println(String.format("%d.[%s] %s", i + 1, isDone, t));
         }
         System.out.println("");
     }
