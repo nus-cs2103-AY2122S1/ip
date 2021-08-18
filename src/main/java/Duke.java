@@ -14,6 +14,7 @@ public class Duke {
     private static final String eventString = "event";
     private static final String deadlineDelimiter = " /by ";
     private static final String eventDelimiter = " /at ";
+    private static final String deleteString = "delete";
 
     /**
      * Templated Messages.
@@ -22,18 +23,20 @@ public class Duke {
     private static final String introMessage = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String doneMessage = "Nice! I've marked this task as done:\n";
     private static final String addedMessage = "Got it. I've added this task:\n";
-    private static final String tasksStatusMessage = "Now you have %d task(s) in the list";
+    private static final String tasksListMessage = "Here are the tasks in your list:\n";
+    private static final String tasksStatusMessage = "Now you have %d task%s in the list";
+    private static final String deleteMessage = "Noted. I've removed this task:\n";
 
     /**
      * Error Messages.
      */
     private static final String unrecognizedCommand = "Oops! I'm sorry but I don't know what that means.";
-    private static final String doneOutsideOfList = "Oops! You do not have such a task!";
     private static final String todoNoDescError = "Oops! The description of a todo cannot be empty";
     private static final String deadlineNoDescError = "Oops! The description of a deadline cannot be empty";
     private static final String eventNoDescError = "Oops! The description of an event cannot be empty";
     private static final String deadlineNoDateError = "Oops! The date of a deadline cannot be empty";
     private static final String eventNoDateError = "Oops! The date of an event cannot be empty";
+    private static final String taskOutOfList = "Oops! You do not have such a task!";
 
     /**
      * Declares the ArrayList to hold the list of tasks.
@@ -88,10 +91,22 @@ public class Duke {
             if (index < tasks.size()) {
                 Task task = tasks.get(index);
                 task.markAsDone();
-                return doneMessage + task.toString();
+                return formatTaskMessage(doneMessage, task);
             }
-            // Error: task done out of list index.
-            return doneOutsideOfList;
+            // Error: task out of list.
+            return taskOutOfList;
+        }
+
+        // Checks if the format of the userInput is of "<deleteString> <int>".
+        if (split.length == 2 && split[0].equals(deleteString) && isInteger(split[1])) {
+            int index = Integer.parseInt(split[1]) - 1;
+            if (index < tasks.size()) {
+                Task task = tasks.get(index);
+                tasks.remove(index);
+                return formatTaskMessage(deleteMessage, task);
+            }
+            // Error: task out of list.
+            return taskOutOfList;
         }
 
         // Ensure format of string "<command> <string>"
@@ -104,7 +119,7 @@ public class Duke {
                 }
                 Todo todo = new Todo(split[1]);
                 tasks.add(todo);
-                return formatAddTaskMessage(todo);
+                return formatTaskMessage(addedMessage, todo);
             case (deadlineString):
                 if (split.length == 1 || split[1].equals("")) {
                     // Error: Deadline no description.
@@ -117,7 +132,7 @@ public class Duke {
                 }
                 Deadline deadline = new Deadline(deadlineSplit[0], deadlineSplit[1]);
                 tasks.add(deadline);
-                return formatAddTaskMessage(deadline);
+                return formatTaskMessage(addedMessage, deadline);
             case (eventString):
                 if (split.length == 1 || split[1].equals("")) {
                     // Error: Event no description.
@@ -130,7 +145,7 @@ public class Duke {
                 }
                 Event event = new Event(eventSplit[0], eventSplit[1]);
                 tasks.add(event);
-                return formatAddTaskMessage(event);
+                return formatTaskMessage(addedMessage, event);
             default:
                 // Error: Unrecognized command.
                 return unrecognizedCommand;
@@ -141,8 +156,8 @@ public class Duke {
      * Utility function to format the add task message.
      * @return the formatted add task message.
      */
-    private static String formatAddTaskMessage(Task task) {
-        return addedMessage + task.toString() + "\n" + String.format(tasksStatusMessage, tasks.size());
+    private static String formatTaskMessage(String message, Task task) {
+        return message + task.toString() + "\n" + String.format(tasksStatusMessage, tasks.size(), tasks.size() > 1 ? "s" : "");
     }
 
     /**
@@ -165,6 +180,7 @@ public class Duke {
      */
     private static String getTaskListString() {
         StringBuilder output = new StringBuilder();
+        output.append(tasksListMessage);
         for (int i = 0; i < tasks.size(); i++) {
             output.append(i+1).append(". ").append(tasks.get(i).toString());
             if (i != tasks.size() - 1) {
