@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private enum Tasks {DEADLINE, EVENT, TODO};
+    private enum Tasks {DEADLINE, EVENT, TODO}
 
     private static Task[] taskArray = new Task[100];
     private static int listIndex = 0;
@@ -130,7 +130,7 @@ public class Duke {
             for (int i = 1; i < array.length; i++) {
                 String currentArrayElement = array[i];
                 if (stringHasTerminated) {
-                    time = currentArrayElement;
+                    eventTime = currentArrayElement;
                     break;
                 }
                 if (currentArrayElement.equals("/at")) {
