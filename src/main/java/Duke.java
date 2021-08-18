@@ -27,6 +27,12 @@ public class Duke {
                 list();
             } else if (input.length() >= 5 && input.substring(0, 5).equals("done ")) {
                 done(input);
+            } else if (input.length() >= 5 && input.substring(0, 5).equals("todo ")) {
+                todo(input);
+            } else if (input.length() >= 9 && input.substring(0, 9).equals("deadline ")) {
+                deadline(input);
+            } else if (input.length() >= 6 && input.substring(0, 6).equals("event ")) {
+                event(input);
             } else {
                     storage.add(currentTask);
                     print("added: " + input);
@@ -38,8 +44,8 @@ public class Duke {
         int len = storage.size();
         String sentence = "";
         for (int i = 1; i < len + 1; i++) {
-            sentence = sentence + i + "." + "[" + storage.get(i - 1).getStatusIcon() + "] "
-                    + storage.get(i - 1).getDescription() + "\n";
+            Task currentTask = storage.get(i - 1);
+            sentence = sentence + i + "." + currentTask.toString() + "\n";
         }
         print(sentence);
     }
@@ -50,4 +56,33 @@ public class Duke {
         doneTask.markAsDone();
         print("Congratulations on finishing this task!\n [X] " + doneTask.getDescription());
     }
+
+    public static void todo(String todoEntry) {
+        String todoTitle = todoEntry.substring(5);
+        Todo newToDo = new Todo(todoTitle);
+        storage.add(newToDo);
+        print("Alright. I'm adding this task:\n  " + newToDo.toString() + "\nNow there are " + storage.size()
+                + " tasks in the list" );
+    }
+
+    public static void deadline(String deadlineEntry) {
+        int indexOfSlash = deadlineEntry.indexOf("/");
+        String deadlineDate = deadlineEntry.substring(indexOfSlash + 3);
+        String deadlineTitle = deadlineEntry.substring(9, indexOfSlash);
+        Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
+        storage.add(newDeadline);
+        print("Alright. I'm adding this task:\n  " + newDeadline.toString() + "\nNow there are " + storage.size()
+                + " tasks in the list" );
+    }
+
+    public static void event(String eventEntry) {
+        int indexOfSlash = eventEntry.indexOf("/");
+        String eventDate = eventEntry.substring(indexOfSlash + 3);
+        String eventTitle = eventEntry.substring(6, indexOfSlash);
+        Event newEvent = new Event(eventTitle, eventDate);
+        storage.add(newEvent);
+        print("Alright. I'm adding this task:\n  " + newEvent.toString() + "\nNow there are " + storage.size()
+                + " tasks in the list" );
+    }
+
 }
