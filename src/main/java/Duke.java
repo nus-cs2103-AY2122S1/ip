@@ -1,4 +1,5 @@
 import java.util.Scanner;
+// current assumption is that all input is valid
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,17 +12,20 @@ public class Duke {
         boolean run = true;
         while (run) {
             String command = sc.nextLine();
+            String[] commandTokens = command.split(" ");
             // parse command
-            if (command.equals("bye")) {
-                run = false;
-            } else {
-                switch (command) {
+            switch (commandTokens[0]) {
+                case "bye":
+                    run = false;
+                    break;
+                case "done":
+                    printMessage(toDoList.markAsCompleted(command.substring(5)));
+                    break;
                 case "list":
                     printMessage(toDoList.getAllItems());
                     break;
                 default:
                     printMessage(toDoList.addItem(command));
-                }
             }
         }
         printMessage("Goodbye for now!");

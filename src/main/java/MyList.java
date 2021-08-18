@@ -14,6 +14,23 @@ class MyList {
         return "new entry in list: \n" + item;
     }
 
+    protected String markAsCompleted(String taskName) {
+        //find the task to delete
+        int i = 0;
+        boolean found = false;
+        while (i < this.items.size()) {
+            if (this.items.get(i).getTaskName().equals(taskName)) {
+                Task completedTask = this.items.get(i);
+                this.items.remove(i);
+                this.items.add(i, completedTask.markAsCompleted());
+                return "Task marked as completed: \n" + this.items.get(i).toString();
+            } else {
+                i++;
+            }
+        }
+        return "task is not in list!!";
+    }
+
     protected String getAllItems() {
         StringBuilder sb = new StringBuilder();
         if (this.items.size() == 0) {
