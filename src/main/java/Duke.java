@@ -19,7 +19,7 @@ public class Duke {
                     run = false;
                     break;
                 case "done":
-                    printMessage(toDoList.markAsCompleted(command.substring(5)));
+                    printMessage(toDoList.markAsCompleted(command.substring(5).trim()));
                     break;
                 case "list":
                     printMessage(toDoList.getAllItems());
