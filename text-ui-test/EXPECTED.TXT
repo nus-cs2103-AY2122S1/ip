@@ -8,11 +8,11 @@
 	What can I do for you today?
 	______________________________________________________
 	______________________________________________________
-	Uh-oh! Please type in a task number.
+	Uh-oh! Please type in a task number to mark as done.
 	______________________________________________________
 	______________________________________________________
 	______________________________________________________
-	Uh-oh! Please type in a valid task number.
+	Uh-oh! Please type in a valid task number to mark as done.
 	______________________________________________________
 	______________________________________________________
 	Uh-oh! The description of a todo cannot be empty.
@@ -69,6 +69,23 @@
 	1.[T][ ] Buy bread
 	2.[D][X] Presentation Slides Due (by: Fri 5pm)
 	3.[E][X] Project Meeting (at: Mon 2-4pm)
+	______________________________________________________
+	______________________________________________________
+	Uh-oh! Please type in a task number to delete.
+	______________________________________________________
+	______________________________________________________
+	______________________________________________________
+	Uh-oh! Please type in a valid task number to delete.
+	______________________________________________________
+	______________________________________________________
+	Got it. The following task has been removed:
+		[D][X] Presentation Slides Due (by: Fri 5pm)
+	Now you have 2 tasks in the list.
+	______________________________________________________
+	______________________________________________________
+	Here is your task list:
+	1.[T][ ] Buy bread
+	2.[E][X] Project Meeting (at: Mon 2-4pm)
 	______________________________________________________
 	______________________________________________________
 	Goodbye. Have a nice day!
