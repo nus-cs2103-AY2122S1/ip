@@ -95,6 +95,14 @@ public class Duke {
             System.out.println("Nice! I've marked this task as done: ");
             task.setDone();
             System.out.println("\t" + task.toString());
+        } else if (input.contains("delete")) {
+            int idx = Integer.parseInt(input.split(" ")[1]);
+            Task task = dataStore.get(idx-1);
+            
+            System.out.println("Notes. I've removed this task:");
+            System.out.println("\t" + task.toString());
+            dataStore.remove(idx-1); // actual deletion
+            System.out.println("Now you have " + (dataStore.size()) + " tasks in the list."); 
         } else {
             throw new BotException(UNRECOG);
         }
