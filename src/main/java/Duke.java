@@ -4,7 +4,7 @@ public class Duke {
     private static final String GREETING_MESSAGE = "____________________________________________________________\n" +
             "Hello! I'm Duke\n" +
             "What can I do for you?\n" +
-            "____________________________________________________________";
+            "____________________________________________________________\n";
     public static final String EXITING_MESSAGE = "____________________________________________________________\n" +
             "Bye. Hope to see you again soon!\n" +
             "____________________________________________________________";
@@ -12,6 +12,7 @@ public class Duke {
     private static Task[] tasks = new Task[100];
     private static int numOfTasks = 0;
     private boolean isRunning;
+    private Scanner input;
 
     /**
      * Constructor of the class 'Duke'.
@@ -20,6 +21,7 @@ public class Duke {
         // Start the program and greet the user.
         this.isRunning = true;
         System.out.println(Duke.GREETING_MESSAGE);
+        this.input = new Scanner(System.in);
     }
 
     /**
@@ -69,8 +71,7 @@ public class Duke {
      */
     private void readCommand() {
         // Read the command.
-        Scanner input = new Scanner(System.in);
-        String command = input.nextLine().trim();
+        String command = this.input.nextLine().trim();
         if (command.equals("bye")) {
             // Print exiting message and end the program.
             System.out.println(Duke.EXITING_MESSAGE);
