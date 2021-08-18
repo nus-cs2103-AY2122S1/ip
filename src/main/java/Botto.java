@@ -3,8 +3,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Botto {
-    final String bot = "Botto";
-    final String indentation = "   ";
+    final static String bot = "Botto";
+    final static String indentation = "   ";
+    final static String[] commands = {"list", "done", "todo", "deadline", "event", "bye"};
+
+    enum TaskType {
+        TODO, DEADLINE, EVENT
+    }
 
     private List<Task> list = new LinkedList<>();
 
@@ -20,14 +25,25 @@ public class Botto {
 
         while(!next.equals("bye")) {
             botto.printDivider();
+            String command = findCommand(next);
 
-            if(next.equals("list")) {
-                botto.printList();
-            } else if (next.startsWith("done")) {
-                String integer = next.replaceAll("\\D+", "");
-                botto.markAsDone(Integer.parseInt(integer) - 1);
-            } else {
-                botto.add(next);
+            switch(command) {
+                case "list":
+                    botto.printList();
+                    break;
+                case "done":
+                    String integer = next.replaceAll("\\D+", "");
+                    botto.markAsDone(Integer.parseInt(integer) - 1);
+                    break;
+                case "todo":
+                    botto.add(TaskType.TODO, next.substring(command.length() + 1));
+                    break;
+                case "deadline":
+                    botto.add(TaskType.DEADLINE, next.substring(command.length() + 1));
+                    break;
+                case "event":
+                    botto.add(TaskType.EVENT, next.substring(command.length() + 1));
+                    break;
             }
 
             botto.printDivider();
@@ -37,6 +53,15 @@ public class Botto {
         botto.printDivider();
         botto.bye();
         botto.printDivider();
+    }
+
+    private static String findCommand(String command) {
+        for(String x: commands) {
+            if(command.startsWith(x)) {
+                return x;
+            }
+        }
+        return "";
     }
 
     private void printDivider() {
@@ -54,22 +79,28 @@ public class Botto {
         System.out.println(indentation + "Here are the tasks in your list:");
         for(int i = 0; i < this.list.size(); i ++) {
             Task task = this.list.get(i);
-            System.out.println(indentation + (i + 1) + ". [" + task.getStatusIcon() + "] "
-                    + task.getDescription());
+            System.out.println(indentation + (i + 1) + ". " + task);
         }
     }
 
-    private void add(String description) {
-        Task task = new Task(description);
+    private void add(TaskType type, String description) {
+        int index = description.indexOf("/");
+
+        Task task = type == TaskType.TODO ? new Todo(description)
+                : type == TaskType.DEADLINE ? new Deadline(description.substring(0, index - 1), description.substring(index + 4))
+                : new Event(description.substring(0, index - 1), description.substring(index + 4));
+
         this.list.add(task);
-        System.out.println(indentation + "added: " + description);
+        System.out.println(indentation + "Got it! I've added this task:\n"
+                + indentation + "  " + task + "\n"
+                + indentation + "Now you have " + this.list.size() + " tasks in the list.");
     }
 
     private void markAsDone(int index) {
         Task subject = this.list.get(index);
         subject.markAsDone();
         System.out.println(indentation + "Nice! I've marked this task as done: ");
-        System.out.println(indentation + "  [" + subject.getStatusIcon() + "] " + subject.getDescription());
+        System.out.println(indentation + "  " + subject);
     }
 
     private void bye() {
