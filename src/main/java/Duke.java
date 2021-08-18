@@ -39,12 +39,7 @@ public class Duke {
                         System.out.println("Good bye.");
                         break mainLoop;
                     case "done":
-                        int done;
-                        try {
-                            done = Integer.parseInt(userInput) - 1;
-                        } catch (NumberFormatException exception) {
-                            throw new DukeException("Please enter a number after the done command.");
-                        }
+                        int done = getInputNumber(userInput);
 
                         if (done >= tasks || done < 0) {
                             System.out.println("Task does not exist!");
@@ -125,5 +120,13 @@ public class Duke {
 
     private static String buildDescription(String[] info, String preposition) {
         return String.format("%s (%s: %s)", info[0], preposition, info[1]);
+    }
+
+    private static int getInputNumber(String userInput) throws DukeException {
+        try {
+           return Integer.parseInt(userInput) - 1;
+        } catch (NumberFormatException exception) {
+            throw new DukeException("Please enter a number after the done command.");
+        }
     }
 }
