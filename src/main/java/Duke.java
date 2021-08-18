@@ -3,7 +3,6 @@ import java.util.*;
 public class Duke {
     private static String[] list = new String[100];
     private static int listIndex = 0;
-
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
