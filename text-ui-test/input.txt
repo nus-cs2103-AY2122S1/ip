@@ -10,3 +10,8 @@ list
 todo Cry again
 done 6
 list
+todo
+deadline CS2103T Project
+deadline
+event CS2103T Lecture
+bye
