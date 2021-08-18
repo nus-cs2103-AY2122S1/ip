@@ -1,21 +1,24 @@
-Aloha! I'm Sophia
+Aloha! I'm Sophia.
 What can I do for you?
 Sure thing! I've added this task:
-[T][ ] borrow book
+  [T][ ] borrow book
 Now you have 1 tasks in the list.
 Here are the tasks in your list:
 1.[T][ ] borrow book
 Sure thing! I've added this task:
-[D][ ] return book (by: Sunday)
+  [D][ ] return book (by: Sunday)
 Now you have 2 tasks in the list.
 Here are the tasks in your list:
 1.[T][ ] borrow book
 2.[D][ ] return book (by: Sunday)
 Sure thing! I've added this task:
-[E][ ] project meeting (at: Mon 2-4pm)
+  [E][ ] project meeting (at: Mon 2-4pm)
 Now you have 3 tasks in the list.
-Here are the tasks in your list:
-1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (at: Mon 2-4pm)
+☹ OOPS!!! The description of a todo cannot be empty.
+Noted! I've removed this task:
+[E][ ] project meeting (at: Mon 2-4pm)
+Now you have 2 task in the list.
+Noted! I've removed this task:
+[T][ ] borrow book
+Now you have 1 tasks in the list.
 Bye. Hope to see you again soon!

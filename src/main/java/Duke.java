@@ -99,8 +99,8 @@ public class Duke {
 
     private static void addToList(ArrayList<Task> ls, Task text) {
         ls.add(text);
-        System.out.println("Sure thing! I've added this task: \n" + text);
-        if (ls.size() > 1) {
+        System.out.println("Sure thing! I've added this task:\n  " + text);
+        if (ls.size() < 1) {
             System.out.println(String.format("Now you have %d task in the list.", ls.size()));
         } else {
             System.out.println(String.format("Now you have %d tasks in the list.", ls.size()));
