@@ -14,10 +14,18 @@ public class TaskList {
         System.out.println("You currently have " + length + " tasks in the list.");
     }
 
-    public void done(String strNum) {
-        int index = Integer.parseInt(strNum) - 1;
-        Task toMark = taskList[index];
-        toMark.markAsDone();
+    public void done(String[] input) throws DukeException {
+        if (input.length == 1) {
+            throw new DukeException("Pls specify the task index");
+        }
+        String num = input[1];
+        int index = Integer.parseInt(num) - 1;
+        if (index >= this.length) {
+            throw new DukeException("There is no such task in your list D:");
+        } else {
+            Task toMark = taskList[index];
+            toMark.markAsDone();
+        }
     }
 
     @Override

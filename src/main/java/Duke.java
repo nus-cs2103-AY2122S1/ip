@@ -5,9 +5,10 @@ public class Duke {
     private static final TaskList list = new TaskList();
 
     private static String[] parseInput(String[] arr) throws DukeException {
+        String command = arr[0];
         if (arr.length == 1) {
             //user did not specify desc
-            throw new DukeException("OOPS!! The description of a " + arr[0] + " cannot be empty :(");
+            throw new DukeException("OOPS!! The description of a " + command + " cannot be empty :(");
         }
         String desc = "";
         String time = "";
@@ -26,8 +27,9 @@ public class Duke {
         }
         if (slash) {
             return new String[] {desc, time};
+        } else {
+            return new String[] {desc};
         }
-        return new String[] {desc};
     }
 
     private static boolean isAddingNewTask(String str) {
@@ -72,7 +74,11 @@ public class Duke {
                 System.out.println(list.toString());
             } else if (input.startsWith("done")) {
                 //mark task as done
-                list.done(split[1]);
+                try {
+                    list.done(split);
+                } catch (DukeException e) {
+                    e.print();
+                }
             } else if (isAddingNewTask(input)) {
                 //user is adding a new task
                 try {
