@@ -33,8 +33,14 @@ public class Duke {
             Task taskRef = taskArr.get(taskArrRef);
             taskRef.taskDone();
             System.out.println("Nice! I've marked this task as done:\n"+ taskRef);
-        } else {
+        } else if (commandArr[0].equals("delete")) {
+            int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
+            Task taskRef = taskArr.get(taskArrRef);
+            taskArr.remove(taskArrRef);
+            System.out.println("Noted. I've removed this task:\n"+ taskRef);
+            System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
             
+        } else {
             
             boolean commandArrayLength = commandArr.length <= 1;
             String taskAdded = "Got it. I've added this task: ";
