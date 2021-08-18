@@ -1,11 +1,14 @@
 import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
-            String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
+            String logo = "\n" +
+                    "       __       ___      .______     ____    ____  __       _______.\n" +
+                    "      |  |     /   \\     |   _  \\    \\   \\  /   / |  |     /       |\n" +
+                    "      |  |    /  ^  \\    |  |_)  |    \\   \\/   /  |  |    |   (----`\n" +
+                    ".--.  |  |   /  /_\\  \\   |      /      \\      /   |  |     \\   \\    \n" +
+                    "|  `--'  |  /  _____  \\  |  |\\  \\----.  \\    /    |  | .----)   |   \n" +
+                    " \\______/  /__/     \\__\\ | _| `._____|   \\__/     |__| |_______/    \n" +
+                    "                                                                    \n";
             System.out.println("Hello from\n" + logo);
 
             System.out.println("----------------------------------");
@@ -56,11 +59,11 @@ public class Duke {
                                                     " task(s) in the list.");
                                         }
                                 } else if (instruction.startsWith("todo")) {
-                                    if (instruction.length() < 6) {
+                                    if (instruction.length() < 5) {
                                         throw new DukeException("OOPS!!! The description of a todo " +
                                                 "cannot be empty.");
                                     } else {
-                                        String taskDescription = instruction.substring(5);
+                                        String taskDescription = instruction.substring(4);
                                         Todo newTodo = new Todo(taskDescription);
                                         newTodo.addTask();
                                         System.out.println("\tGot it! I've added this task:");
@@ -119,7 +122,7 @@ public class Duke {
                                         }
                                     }
                                 } else {
-                                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't " +
+                                    throw new DukeException("OOPS!!! I'm sorry, but I don't " +
                                             "know what that means :-(");
                                 }
                                 break;
