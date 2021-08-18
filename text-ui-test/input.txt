@@ -7,4 +7,5 @@ done 3
 list
 blah
 deadline
+delete 2
 bye
