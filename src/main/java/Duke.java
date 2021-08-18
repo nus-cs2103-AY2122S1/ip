@@ -13,7 +13,10 @@ public class Duke {
     private static final String LINE = SPACE + "______________________________________________________________________";
     private static final String END_LINE = SPACE + "======================================================================\n";
 
-
+    private Items items;
+    public Duke() {
+        items = new Items();
+    }
     /**
      * method to greet the user
      */
@@ -33,7 +36,11 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (!input.equals("bye")) {
             input = sc.nextLine();
-            printMessage(input);
+            if (input.equals("list")) {
+                printMessage(items.printList());
+            } else {
+                printMessage(items.addItem(input));
+            }
         }
         printMessage("Going so soon? Hope to see you again soon!");
     }
