@@ -35,6 +35,11 @@ public class Duke {
                     deadline(s, list);
                 } else if (s.contains("event")) {
                     event(s, list);
+                } else if (s.contains("delete")) {
+                    int num = getNum(s, list.size());
+                    if (num != -1) {
+                        delete(list, num);
+                    }
                 } else {
                     invalidEntry();
                 }
@@ -55,6 +60,14 @@ public class Duke {
         } catch (DukeException e) {
             e.printError();
         }
+    }
+
+    private static void delete(ArrayList<Task> list, int num) {
+        Task task = list.get(num - 1);
+        list.remove(task);
+        String t = list.size() == 1 ? "task" : "tasks";
+        System.out.printf("Noted.I've removed this task:\n%s\nNow you have %d %s in the list\n",
+                task, list.size(), t);
     }
 
     private static void todo(String s, ArrayList<Task> list) {
@@ -164,9 +177,9 @@ public class Duke {
 
     private static int getNum(String s, int size) throws DoneEmptyException, TaskDoesNotExistException {
         try {
-            if (!s.equals("done") && s.contains(" ")) {
+            if ((!s.equals("done") && s.contains(" ")) || (!s.equals("delete") && s.contains(" "))) {
                 String[] parts = s.split(" ", 2);
-                if (parts[0].equals("done")) {
+                if (parts[0].equals("done") || parts[0].equals("delete")) {
                     try {
                         int num = Integer.parseInt(parts[1]);
                         if (num <= 0 || num > size) {
