@@ -10,9 +10,8 @@ public class Duke {
 
         ui.greet();
         while (!shouldExit) {
-            String commandName = ui.readInput();
-            // Can possibly add a new class that will assign a Command object based on commandName to save space
-            Command command = new Command(commandName);
+            String input = ui.readInput();
+            Command command = new Command(input);
             command.execute();
             shouldExit = command.shouldExit();
         }

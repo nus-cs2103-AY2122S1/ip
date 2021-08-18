@@ -1,23 +1,23 @@
 public class Command {
-    private String commandName;
+    private String input;
     private Ui ui;
 
-    public Command(String commandName) {
-        this.commandName = commandName;
+    public Command(String input) {
+        this.input = input;
         ui = new Ui();
     }
 
     public void execute() {
-        switch (commandName) {
+        switch (input) {
             case "bye":
                 ui.sayBye();
                 break;
             default:
-                ui.echo(commandName);
+                ui.echo(input);
         }
     }
 
     public boolean shouldExit() {
-        return commandName.equals("bye");
+        return input.equals("bye");
     }
 }
