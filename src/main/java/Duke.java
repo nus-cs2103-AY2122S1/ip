@@ -46,6 +46,12 @@ public class Duke {
                     listData.get(index).markAsDone();
 
                     sendMessage("Nice! I've marked this task as done:\n  " + listData.get(index));
+                } else if (userInput.startsWith("delete")) {
+                    int index = Integer.parseInt(userInput.substring(7)) - 1;
+                    Task removedTask = listData.remove(index);
+
+                    sendMessage("Noted. I've removed this task:\n  " + removedTask +
+                            "\nNow you have " + listData.size() + " tasks in the list.");
                 } else if (userInput.startsWith("todo")) {
                     // If no arguments provided
                     if (userInput.length() == 4) {

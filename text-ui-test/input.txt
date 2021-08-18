@@ -9,4 +9,6 @@ deadline /by
 deadline /by
 deadline 3 /by
 deadline /by thurs
+delete 3
+list
 bye
