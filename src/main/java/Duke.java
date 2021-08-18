@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;
 
@@ -15,7 +16,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Scanner input = new Scanner(System.in);
-        Task[] storedInfo = new Task[100];
+        ArrayList<Task> storedInfo = new ArrayList<Task>();
+        //Task[] storedInfo = new Task[100];
         int count = 0;
         while (input.hasNextLine()) {
             String in = input.nextLine();
@@ -39,20 +41,24 @@ public class Duke {
                 /*if (in.substring(4,5) != " ") {
                     System.out.println("Invalid input for done command");
                 };*/
+                if (in.length() < 6) {
+                    System.out.println("Invalid Input for done command");
+                    continue;
+                }
                 int taskDone = parseInt(in.substring(5));
                 if (taskDone > 100) {
                     System.out.println("Invalid Input for done command");
                     continue;
                 }
                 //System.out.println(taskDone);
-                if (storedInfo[taskDone-1] == null) {
+                if (taskDone > count) {
                     System.out.println("Invalid Input for done command");
                     continue;
                 }
-                if (!storedInfo[taskDone-1].isDone) {
+                if (!storedInfo.get(taskDone - 1).isDone) {
                     System.out.println("Nice! I've marked this task as done:");
-                    storedInfo[taskDone - 1].markAsDone();
-                    System.out.println(storedInfo[taskDone - 1]);
+                    storedInfo.get(taskDone - 1).markAsDone();
+                    System.out.println(storedInfo.get(taskDone - 1));
                     continue;
                 } else {
                     System.out.println("This task is already marked as done");
@@ -66,8 +72,8 @@ public class Duke {
                     continue;
                 }
                 System.out.println("Got it. I've added this task:");
-                storedInfo[count] = new ToDoTask(in.substring(4));
-                System.out.println(storedInfo[count]);
+                storedInfo.add(new ToDoTask(in.substring(4)));
+                System.out.println(storedInfo.get(count));
                 count++;
                 if (count == 1) {
                     System.out.println("Now you have " + count + " task in the list.");
@@ -81,8 +87,8 @@ public class Duke {
                     continue;
                 }
                 System.out.println("Got it. I've added this task:");
-                storedInfo[count] = new EventTask(in.substring(6, i), in.substring(i+1));
-                System.out.println(storedInfo[count]);
+                storedInfo.add(new EventTask(in.substring(6, i), in.substring(i + 1)));
+                System.out.println(storedInfo.get(count));
                 count++;
                 if (count == 1) {
                     System.out.println("Now you have " + count + " task in the list.");
@@ -96,8 +102,8 @@ public class Duke {
                     continue;
                 }
                 System.out.println("Got it. I've added this task:");
-                storedInfo[count] = new DeadlineTask(in.substring(9, i), in.substring(i+1));
-                System.out.println(storedInfo[count]);
+                storedInfo.add(new DeadlineTask(in.substring(9, i), in.substring(i + 1)));
+                System.out.println(storedInfo.get(count));
                 count++;
                 if (count == 1) {
                     System.out.println("Now you have " + count + " task in the list.");
