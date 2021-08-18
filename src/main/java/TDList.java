@@ -15,8 +15,12 @@ public class TDList {
      * Used for adding things to the to do list.
      *
      * @param str   Thing to add to the list.
+     *
+     * @param currTaskType The type of the task to add.
+     *
+     * @throws DukeExceptionBase when an invalid input is entered.
      */
-    public void tdlAdd(String str, TDLTask.TaskType currTaskType) {
+    public void tdlAdd(String str, TDLTask.TaskType currTaskType) throws DukeExceptionBase {
         TDLTask createdTask;
 
         int indexOfSlash = -1;
@@ -27,8 +31,7 @@ public class TDList {
             try {
                 todoContents = str.substring(5);
             } catch (StringIndexOutOfBoundsException e) {
-                Duke.dukeSays("Something is wrong with your ToDo Task.");
-                return;
+                throw new DukeExceptionBase("The description of your todo cannot be empty.");
             }
 
             createdTask = new ToDosTask(todoContents);
@@ -37,8 +40,7 @@ public class TDList {
         case EVENT:
             indexOfSlash = str.indexOf("/at");
             if (indexOfSlash == -1) {
-                Duke.dukeSays("Something is wrong with your Event task.");
-                return;
+                throw new DukeExceptionBase("Your Event task needs a '/at' description.");
             }
 
             String eventTaskName = str.substring(6, indexOfSlash);
@@ -46,8 +48,7 @@ public class TDList {
             try {
                 eventAtWhere = str.substring(indexOfSlash + 4);
             } catch (StringIndexOutOfBoundsException e) {
-                Duke.dukeSays("Adding a event description is required.");
-                return;
+                throw new DukeExceptionBase("Adding a event description is required.");
             }
 
             createdTask = new EventTask(eventTaskName, eventAtWhere);
@@ -55,8 +56,7 @@ public class TDList {
         case DEADLINE:
             indexOfSlash = str.indexOf("/by");
             if (indexOfSlash == -1) {
-                Duke.dukeSays("Something is wrong with your Deadline task.");
-                return;
+                throw new DukeExceptionBase("Your Deadline task needs a '/by' description.");
             }
 
             String deadlineTaskName = str.substring(9, indexOfSlash);
@@ -65,14 +65,13 @@ public class TDList {
             try {
                 deadlineByWhen = str.substring(indexOfSlash + 4);
             } catch (StringIndexOutOfBoundsException e) {
-                Duke.dukeSays("Adding a deadline description is required");
-                return;
+                throw new DukeExceptionBase("Adding a deadline description is required.");
             }
 
             createdTask = new DeadlineTask(deadlineTaskName, deadlineByWhen);
             break;
         default:
-            createdTask = new TDLTask(str);
+            throw new DukeExceptionBase("Wrong type of task input to tdlAdd.");
         }
 
         toDoList.add(createdTask);
@@ -92,8 +91,10 @@ public class TDList {
      * @param taskNo The task number in the list.
      *
      * @return Duke's output from this command
+     *
+     * @throws DukeExceptionBase when an invalid task is specified or if task is already done.
      */
-    public String markTaskAsDone(int taskNo) {
+    public String markTaskAsDone(int taskNo) throws DukeExceptionBase {
         //Task list starts from 1 instead of 0 so input in command is 1 more than
         //the task's index in the list
         int taskIndex = taskNo - 1;
@@ -104,7 +105,7 @@ public class TDList {
 
             return "Nice! I've marked this task as done:\n" + currTask.getLineOfTaskInfo();
         } else {
-            return "Invalid Task Specified";
+            throw new DukeExceptionBase("Invalid Task Specified");
         }
     }
 
