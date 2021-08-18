@@ -80,7 +80,7 @@ public class Duke {
                             .append(taskArrayList.get(taskArrayList.size() - 1).description); // no \n for last item
                     System.out.println(sandwich(userInputsList.toString()));
                 } else { // store userInput, tell user their input has been added
-                    taskArrayList.add(new Task(userInput));
+                    taskArrayList.add(new Task(userInput, "old"));
                     System.out.println(sandwich("Task added: " + userInput));
                 }
             }
