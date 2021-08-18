@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -57,7 +58,12 @@ public class Winston {
                 case "done":
                     System.out.println(winston1.getList());
                     System.out.println("Which task number have you completed?");
-                    winston1.markTask(scan.nextInt());
+                    try{
+                        winston1.markTask(scan.nextInt());
+                    } catch(InputMismatchException | IndexOutOfBoundsException e) {
+                        System.out.println("Please give a valid number. Resetting to home menu.");
+                        break;
+                    }
                     System.out.println("Don't worry, I've got you. Task Marked!");
                     System.out.println(winston1.getList());
                     break;
@@ -88,7 +94,7 @@ public class Winston {
                     break;
                 }
                 default: {
-                    System.out.print("Invalid command. Please input a valid command." + "\n");
+                    
                 }
             }
             cmd = scan.nextLine();
