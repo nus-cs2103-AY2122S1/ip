@@ -6,6 +6,8 @@ public class Duke {
 
     private final ArrayList<Task> tasks;
     private Storage store;
+    private Ui ui;
+    private TaskList taskList;
     private Boolean end = false;
 
     private final String lineSeparator = "\t_______________________________";
