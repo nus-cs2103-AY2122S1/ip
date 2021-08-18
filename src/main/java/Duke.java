@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class Duke {
     public enum Keyword {
-        todo, list, deadline, event, done
+        todo, list, deadline, event, done, delete
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -49,10 +49,11 @@ public class Duke {
                         break;
                     case done:
                         index = Integer.parseInt(tokens[1]) - 1;
-                        if (index < 0 || index > list.size() - 1) {
-                            throw new DukeException("Hey! Invalid Task number given.");
-                        }
                         completeATask(index, list);
+                        break;
+                    case delete:
+                        index = Integer.parseInt(tokens[1]) - 1;
+                        deleteTask(index, list);
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -75,6 +76,9 @@ public class Duke {
                     && cmd.length < 2) {
                 throw new DukeException(String.format("☹ OOPS!!! The description of a %s cannot be empty.", keyword));
             }
+            if ((keyword.equals(Keyword.done) || keyword.equals(Keyword.delete)) && (cmd.length < 2)) {
+                throw new DukeException("☹ OOPS!!! Missing task number");
+            }
         } catch (IllegalArgumentException e) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -83,6 +87,9 @@ public class Duke {
 
     private static void iterList(ArrayList<Task> ls) {
         System.out.println("Here are the tasks in your list:");
+        if (ls.size() == 0) {
+            System.out.println("---- No Tasks currently ----");
+        }
         int i = 1;
         for (Task s : ls) {
             System.out.println(i + "." + s);
@@ -100,10 +107,27 @@ public class Duke {
         }
     }
 
-    private static void completeATask(int index, ArrayList<Task> ls) {
+    private static void completeATask(int index, ArrayList<Task> ls) throws DukeException {
+        if (index < 0 || index > ls.size() - 1) {
+            throw new DukeException("Hey! Invalid Task number given.");
+        }
         Task task = ls.get(index);
         task.completeTask();
         System.out.println("Nice! I've marked this task as done:\n  " + task);
+    }
+
+    private static void deleteTask(int index, ArrayList<Task> ls) throws DukeException {
+        if (index < 0 || index > ls.size() - 1) {
+            throw new DukeException("Hey! Invalid Task number given.");
+        }
+        Task task = ls.get(index);
+        ls.remove(index);
+        System.out.println("Noted! I've removed this task:\n" + task);
+        if (ls.size() > 1) {
+            System.out.println(String.format("Now you have %d task in the list.", ls.size()));
+        } else {
+            System.out.println(String.format("Now you have %d tasks in the list.", ls.size()));
+        }
     }
 
     private static void exit() {
