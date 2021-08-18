@@ -102,7 +102,7 @@ public class Petal {
      * @throws InvalidInputException Thrown when an invalid format is given or when a time is not given
      */
     public void handleTasks(String type, String message) throws EmptyDescException, InvalidInputException {
-        Task task ;
+        Task task;
         String[] deadlineEvent = type.equals("deadline") ? message.split("/by")
                                                          : message.split("/at");
         if (message.isBlank() || deadlineEvent[0].isBlank()) {
