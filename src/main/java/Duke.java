@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,10 +15,10 @@ public class Duke {
      */
     public Duke(String filePath) {
         ArrayList<Task> tasks1;
-        this.store = new Storage(filePath);
         try {
+            this.store = new Storage(filePath);
             tasks1 = store.load();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             tasks1 = new ArrayList<>();
         }
         this.tasks = tasks1;
@@ -225,7 +224,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("src/main/java/StoredData.txt").run();
+        java.nio.file.Path filepath = java.nio.file.Paths.get("src",
+                                                "main", "java","data","StoredData.txt");
+        new Duke(filepath.toString()).run();
     }
 
 }

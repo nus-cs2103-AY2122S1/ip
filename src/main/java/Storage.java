@@ -1,7 +1,7 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,12 +12,20 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    public ArrayList<Task> load() throws FileNotFoundException {
-        //TODO:
+    public ArrayList<Task> load() throws IOException {
+        java.nio.file.Path filepath = java.nio.file.Paths.get("src", "main", "java","data");
         File f = new File(this.filepath);
+        if (!Files.isDirectory(filepath)) {
+            //create directory
+            Files.createDirectories(filepath);
+        }
+        if (!f.exists()) {
+            //create file if it does not exist
+            f.createNewFile();
+        }
         Scanner s = new Scanner(f);
+        ArrayList<Task> taskList = new ArrayList<>();
 
-        ArrayList<Task> tasklist = new ArrayList<>();
         while(s.hasNext()) {
             //Parser's job
             //input here will definitely be correct and accurate
@@ -27,29 +35,29 @@ public class Storage {
             String command = lineSplitter.next().trim();
             if (command.equals("todo")) {
                 String description = lineSplitter.nextLine();
-                tasklist.add(new ToDo(description.trim()));
+                taskList.add(new ToDo(description.trim()));
 
             } else if (command.equals("deadline")) {
                 String description = lineSplitter.nextLine();
                 String[] parts = description.split("/by");
-                tasklist.add(new Deadline(parts[0].trim(), parts[1].trim()));
+                taskList.add(new Deadline(parts[0].trim(), parts[1].trim()));
 
             } else if (command.equals("event")) {
                 String description = lineSplitter.nextLine();
                 String[] parts = description.split("/at");
-                tasklist.add(new Event(parts[0].trim(), parts[1].trim()));
+                taskList.add(new Event(parts[0].trim(), parts[1].trim()));
 
             } else if (command.equals("done")) {
                 int indexToMark = lineSplitter.nextInt();
-                tasklist.get(indexToMark - 1).markAsDone();
+                taskList.get(indexToMark - 1).markAsDone();
 
             } else if (command.equals("delete")) {
                 int indexToDelete = lineSplitter.nextInt();
-                tasklist.remove(indexToDelete - 1);
+                taskList.remove(indexToDelete - 1);
 
             }
         }
-        return tasklist;
+        return taskList;
     }
 
     public void appendCommand(String taskCommand) throws IOException {

@@ -1,0 +1,4 @@
+todo go jogging
+deadline Do CS2103T /by Thurs 2359
+done 2
+event Computing Day /at Zoom 1-5pm
