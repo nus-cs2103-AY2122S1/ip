@@ -24,6 +24,15 @@ public class Duke {
                 for (int i = 0; i < inputs.size(); i++) {
                     System.out.println( (i+1) + ": " + inputs.get(i));
                 }
+            } else if (input.matches("done\\s[1-9][0-9]?")) {
+                int taskToComplete = Integer.valueOf(input.split(" ")[1]);
+                inputs.get(taskToComplete - 1).markAsCompleted();
+                System.out.println("Duke The Bear has marked this task as done!");
+                System.out.println("Current List:");
+                System.out.println("---------------");
+                for (int i = 0; i < inputs.size(); i++) {
+                    System.out.println( (i+1) + ": " + inputs.get(i));
+                }
             } else {
                 Task task = new Task(input);
                 inputs.add(task);
