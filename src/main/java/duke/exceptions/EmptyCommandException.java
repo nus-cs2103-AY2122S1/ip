@@ -1,5 +1,7 @@
+package duke.exceptions;
+
 public class EmptyCommandException extends InvalidInputException {
     public EmptyCommandException() {
-        super("Command input cannot be empty!");
+        super("duke.commands.Command input cannot be empty!");
     }
 }

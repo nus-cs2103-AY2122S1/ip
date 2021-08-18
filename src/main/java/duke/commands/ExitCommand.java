@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.exceptions.BadInputFormatException;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+
 import java.io.IOException;
 
 public class ExitCommand extends Command {

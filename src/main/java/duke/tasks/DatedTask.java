@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public abstract class DatedTask extends Task {
     protected String date;
 

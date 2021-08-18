@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class InvalidInputException extends DukeException {
     public InvalidInputException() {
         super("Input is invalid");

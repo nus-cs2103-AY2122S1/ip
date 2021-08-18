@@ -1,3 +1,9 @@
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.utils.Parser;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+
 import java.io.IOException;
 
 public class Duke {

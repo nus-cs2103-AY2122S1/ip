@@ -1,9 +1,13 @@
+package duke.tasks;
+
+import duke.exceptions.BadInputFormatException;
+
 /**
- * Represents a Deadline object.
+ * Represents a duke.tasks.Deadline object.
  */
 public class Deadline extends DatedTask {
     /**
-     * Deadline constructor.
+     * duke.tasks.Deadline constructor.
      *
      * @param description the deadline's description
      * @throws BadInputFormatException if the deadline is badly formatted
@@ -13,7 +17,7 @@ public class Deadline extends DatedTask {
     }
 
     /**
-     * Deadline constructor.
+     * duke.tasks.Deadline constructor.
      *
      * @param description the deadline's description
      * @param by the date to complete the task by
@@ -23,10 +27,10 @@ public class Deadline extends DatedTask {
     }
 
     /**
-     * Factory Deadline method.
+     * Factory duke.tasks.Deadline method.
      *
      * @param description the user's input
-     * @return a new Deadline object
+     * @return a new duke.tasks.Deadline object
      */
     public static Deadline of(String description) throws BadInputFormatException {
         return new Deadline(description);

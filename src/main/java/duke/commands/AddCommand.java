@@ -1,3 +1,16 @@
+package duke.commands;
+
+import duke.enums.Tasks;
+import duke.exceptions.BadInputFormatException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.UnknownTaskTypeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+
 public class AddCommand extends Command {
     private Task task;
 
