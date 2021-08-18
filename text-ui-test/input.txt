@@ -1,14 +1,22 @@
 deadline return book /by Sunday
 
+todo
 list
 deadline return book /by Sunday
 list
 event project meeting /at Mon 2-4pm
 todo borrow book
+deadline
+event
+deadline test
+event test
 list
 done 1
 rubbish
 done 3
+done -123
 todo list bye /at 1234
 list
+delete 1
+delete 9
 bye
