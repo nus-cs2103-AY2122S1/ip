@@ -25,20 +25,20 @@ public class Duke {
             try {
                 currLine = sc.nextLine().split(" ");
                 switch (currLine[0]) {
-                    case "bye":
-                        System.out.println(styleResponse(GOODBYE));
-                        break scanner;
-                    case "list":
-                        System.out.println(this.list());
-                        break;
-                    case "done":
-                        System.out.println(this.markIdxAsDone(currLine));
-                        break;
-                    case "delete":
-                        System.out.println(this.deleteIdx(currLine));
-                        break;
-                    default:
-                        System.out.println(this.add(currLine));
+                case "bye":
+                    System.out.println(styleResponse(GOODBYE));
+                    break scanner;
+                case "list":
+                    System.out.println(this.list());
+                    break;
+                case "done":
+                    System.out.println(this.markIdxAsDone(currLine));
+                    break;
+                case "delete":
+                    System.out.println(this.deleteIdx(currLine));
+                    break;
+                default:
+                    System.out.println(this.add(currLine));
                 }
             } catch (DukeException e) {
                 System.out.println(styleResponse(e.toString()));
@@ -56,17 +56,17 @@ public class Duke {
         printBuffer.add("Got it. I've added this task:");
         Item toAdd = null;
         switch (inputStrings[0]) {
-            case "todo":
-                toAdd = new ToDo(inputStrings);
-                break;
-            case "deadline":
-                toAdd = new Deadline(inputStrings);
-                break;
-            case "event":
-                toAdd = new Event(inputStrings);
-                break;
-            default:
-                throw new DukeException("I'm sorry I don't know what that means.");
+        case "todo":
+            toAdd = new ToDo(inputStrings);
+            break;
+        case "deadline":
+            toAdd = new Deadline(inputStrings);
+            break;
+        case "event":
+            toAdd = new Event(inputStrings);
+            break;
+        default:
+            throw new DukeException("I'm sorry I don't know what that means.");
         }
         this.itemList.add(toAdd);
         printBuffer.add("  " + toAdd.toString());
