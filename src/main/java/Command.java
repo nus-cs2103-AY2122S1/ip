@@ -7,13 +7,16 @@ public class Command {
         ui = new Ui();
     }
 
-    public void execute() {
+    public void execute(TaskList taskList) {
         switch (input) {
             case "bye":
                 ui.sayBye();
                 break;
+            case "list":
+                taskList.listTasks();
+                break;
             default:
-                ui.echo(input);
+                taskList.addTask(input);
         }
     }
 
