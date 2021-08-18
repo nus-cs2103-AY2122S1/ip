@@ -30,6 +30,11 @@ public class Duke {
                     String taskNo = description.substring(5);
                     System.out.println("Nice! I've marked this task as done:");
                     taskList.done(Integer.parseInt(taskNo));
+                } else if (description.startsWith("delete")) {
+                    String taskNo = description.substring(7);
+                    System.out.println("Noted boss. I've removed this task:");
+                    taskList.delete(Integer.parseInt(taskNo));
+                    System.out.println(taskList.toString());
                 } else if (description.startsWith("todo")) {
                     if (description.equals("todo")) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");

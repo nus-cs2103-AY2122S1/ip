@@ -4,9 +4,9 @@ import java.util.ArrayList;
  * The TaskList class encapsulates a List of Tasks.
  */
 public class TaskList {
-    /** An array of Tasks to note all the Tasks stored in the TaskList. */
+    /** An arraylist of Tasks to note all the Tasks stored in the TaskList. */
     private ArrayList<Task> allTasks;
-    /** Pointer to indicate the next position to store the task in the array. */
+    /** Pointer to indicate the next position to store the task in the arraylist. */
     private int nextSpaceToStore;
 
     /**
@@ -22,15 +22,15 @@ public class TaskList {
      * @param toStore The task to store into the TaskList.
      */
     public void store(Task toStore) {
-        this.allTasks.add(toStore);
-        this.nextSpaceToStore = this.nextSpaceToStore + 1;
+        allTasks.add(toStore);
+        nextSpaceToStore = nextSpaceToStore + 1;
     }
 
     /**
      * Method to list out the current tasks in the TaskList.
      */
     public void list() {
-        for (int i = 0; i < this.nextSpaceToStore; i++) {
+        for (int i = 0; i < nextSpaceToStore; i++) {
             int currTask = i + 1;
             System.out.println(currTask + "." + allTasks.get(i).toString());
         }
@@ -44,6 +44,17 @@ public class TaskList {
         Task doneTask = allTasks.get(taskNo - 1);
         doneTask.taskCompleted();
         System.out.println("  " + doneTask.toString());
+    }
+
+    /**
+     * Method to delete the indicated task from the TaskList.
+     * @param taskNo The task to be deleted.
+     */
+    public void delete(int taskNo) {
+        Task deleteTask = allTasks.get(taskNo - 1);
+        allTasks.remove(taskNo - 1);
+        nextSpaceToStore = nextSpaceToStore - 1;
+        System.out.println("  " + deleteTask.toString());
     }
 
     /**
