@@ -8,49 +8,72 @@ Hello from
 What can I do for you?
 
 _________________________
+
 Got it. I've added this task:
-[T][ ] borrow book
+[T][ ] read book
 Now you have 1 tasks in the list.
+
 _________________________
 
 
 _________________________
+
 Got it. I've added this task:
-[D][ ] return book  (by june 6th)
+[D][ ] return book  (by:  june 6th)
 Now you have 2 tasks in the list.
+
 _________________________
 
 
 _________________________
+
 Got it. I've added this task:
-[E][ ] project meeting  (at aug 6 2-4pm)
+[E][ ] project meeting  (at:  aug 6 2-4pm)
 Now you have 3 tasks in the list.
+
 _________________________
 
 
 _________________________
+
 Got it. I've added this task:
 [T][ ] joins sports club
 Now you have 4 tasks in the list.
+
 _________________________
 
 
 _________________________
+
 Got it. I've added this task:
 [T][ ] borrow book
 Now you have 5 tasks in the list.
+
+_________________________
+
+
 _________________________
 
 Nice! I've marked this task as done:
-[T][X] borrow book
+[T][X] read book
+
+_________________________
+
+
+_________________________
+
 Nice! I've marked this task as done:
 [T][X] joins sports club
 
 _________________________
- Here are the tasks in your list:
-1. [T][X] borrow book
-2. [D][ ] return book  (by june 6th)
-3. [E][ ] project meeting  (at aug 6 2-4pm)
+
+
+_________________________
+
+Here are the tasks in your list:
+1. [T][X] read book
+2. [D][ ] return book  (by:  june 6th)
+3. [E][ ] project meeting  (at:  aug 6 2-4pm)
 4. [T][X] joins sports club
 5. [T][ ] borrow book
 
@@ -58,27 +81,98 @@ _________________________
 
 
 _________________________
+
 Got it. I've added this task:
-[D][ ] return book  (by Sunday)
+[D][ ] return book  (by:  Sunday)
 Now you have 6 tasks in the list.
+
 _________________________
 
 
 _________________________
+
 Got it. I've added this task:
-[E][ ] project meeting  (at Mon 2-4pm)
+[E][ ] project meeting  (at:  Mon 2-4pm)
 Now you have 7 tasks in the list.
+
 _________________________
 
 
 _________________________
- Here are the tasks in your list:
-1. [T][X] borrow book
-2. [D][ ] return book  (by june 6th)
-3. [E][ ] project meeting  (at aug 6 2-4pm)
+
+Here are the tasks in your list:
+1. [T][X] read book
+2. [D][ ] return book  (by:  june 6th)
+3. [E][ ] project meeting  (at:  aug 6 2-4pm)
 4. [T][X] joins sports club
 5. [T][ ] borrow book
-6. [D][ ] return book  (by Sunday)
-7. [E][ ] project meeting  (at Mon 2-4pm)
+6. [D][ ] return book  (by:  Sunday)
+7. [E][ ] project meeting  (at:  Mon 2-4pm)
 
 _________________________
+
+
+_________________________
+
+Noted. I've removed this task:
+[E][ ] project meeting  (at:  aug 6 2-4pm)
+Now you have 6 tasks in the list.
+
+_________________________
+
+
+_________________________
+
+Here are the tasks in your list:
+1. [T][X] read book
+2. [D][ ] return book  (by:  june 6th)
+3. [T][X] joins sports club
+4. [T][ ] borrow book
+5. [D][ ] return book  (by:  Sunday)
+6. [E][ ] project meeting  (at:  Mon 2-4pm)
+
+_________________________
+
+
+_________________________
+
+Noted. I've removed this task:
+[T][X] joins sports club
+Now you have 5 tasks in the list.
+
+_________________________
+
+
+_________________________
+
+Here are the tasks in your list:
+1. [T][X] read book
+2. [D][ ] return book  (by:  june 6th)
+3. [T][ ] borrow book
+4. [D][ ] return book  (by:  Sunday)
+5. [E][ ] project meeting  (at:  Mon 2-4pm)
+
+_________________________
+
+
+_________________________
+
+OOPS!!! I'm sorry, but I don't know what that means :-(
+
+_________________________
+
+
+_________________________
+
+OOPS!!! your description is not complete or is in a wrong format
+Got it. I've added this task:
+[ ] null
+Now you have 6 tasks in the list.
+
+_________________________
+
+
+_________________________
+
+Bye. Hope to see you again soon!
+
