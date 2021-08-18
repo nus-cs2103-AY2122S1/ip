@@ -15,6 +15,10 @@ public class Task {
         isDone = true;
     }
 
+    public void markUndone() {
+        isDone = false;
+    }
+
     public String getDescription() {
         return description;
     }

@@ -11,31 +11,46 @@ public class Duke {
 
     public static String getFirstWord(String input) {
         String arr[] = input.split(" ", 2);
-
         String firstWord = arr[0];
         return firstWord;
     }
 
     public static String getSecondWord(String input) {
         String arr[] = input.split(" ", 2);
-
         String secondWord = arr[1].strip();
         return secondWord;
     }
 
     public static Integer getTaskNumber(String input) {
         String arr[] = input.split(" ", 2);
-
         Integer taskNumber = Integer.parseInt(arr[1]);
         return taskNumber;
     }
 
     public static void markTaskDone(String input) {
-        //get which task number is completed
-        int taskDoneNum = getTaskNumber(input);
-        Task taskDone = itemList.get(taskDoneNum - 1);
-        taskDone.markAsDone();
-        System.out.println("Nice! I've marked this task as done:" + '\n' + taskDone.toString());
+        try {
+            int taskDoneNum = getTaskNumber(input);
+            Task taskDone = itemList.get(taskDoneNum - 1);
+            taskDone.markAsDone();
+            System.out.println("Nice! I've marked this task as done:" + '\n' + taskDone.toString());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("☹ OOPS!!! No such task can be marked as done!");
+            start();
+        }
+    }
+
+    public static void deleteTask(String input) {
+        try {
+            int taskDeleteNum = getTaskNumber(input);
+            Task taskToDelete = itemList.get(taskDeleteNum - 1);
+            taskToDelete.markUndone();
+            System.out.println("Noted. I've removed this task:" + '\n' + taskToDelete.toString());
+            itemList.remove(taskDeleteNum - 1);
+            printTaskNumber();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("☹ OOPS!!! No such task can be deleted!");
+            start();
+        }
     }
 
     public static void printItemList() {
@@ -93,36 +108,44 @@ public class Duke {
                 } else {
                     String check = getFirstWord(input);
 
-                    if (check.equals("done")) {
-                        markTaskDone(input);
-                    } else if (check.equals("todo")) {
-                        String description = input.substring(5);
-                        if (input.length() <= 1) {
-                            throw new InvalidDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.");
-                        }
-                        addToDo(description);
-                    } else if (check.equals("deadline")) {
-                        String[] arr = input.split("/");
-                        String description = getSecondWord(arr[0]);
-                        String time = getSecondWord(arr[1]);
-                        if (getSecondWord(arr[1]).length() < 1) {
-                            throw new InvalidTimeException("☹ OOPS!!! The timing of a deadline cannot be empty.");
-                        } else if (!getFirstWord(arr[1]).equals("by:")) {
-                            throw new InvalidTimeException("☹ OOPS!!! Please enter a suitable deadline!");
-                        }
-                        addDeadline(description, time);
-                    } else if (check.equals("event")) {
-                        String[] arr = input.split("/");
-                        String description = getSecondWord(arr[0]);
-                        String time = getSecondWord(arr[1]);
-                        if (getSecondWord(arr[1]).length() < 1) {
-                            throw new InvalidTimeException("☹ OOPS!!! The timing of an event cannot be empty.");
-                        } else if (!getFirstWord(arr[1]).equals("at")) {
-                            throw new InvalidTimeException("☹ OOPS!!! Please enter a suitable event timing!");
-                        }
-                        addEvent(description, time);
-                    } else {
-                        throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    switch (check) {
+                        case "done":
+                            markTaskDone(input);
+                            break;
+                        case "delete":
+                            deleteTask(input);
+                            break;
+                        case "todo":
+                            String description = input.substring(5);
+                            if (description.length() < 1) {
+                                throw new InvalidDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            }
+                            addToDo(description);
+                            break;
+                        case "deadline":
+                            String[] arr = input.split("\\(");
+                            String deadlineDescription = getSecondWord(arr[0]);
+                            String deadlineTime = getSecondWord(arr[1]).substring(0, getSecondWord(arr[1]).length() - 1);
+                            if (getSecondWord(arr[1]).length() < 1) {
+                                throw new InvalidTimeException("☹ OOPS!!! The timing of a deadline cannot be empty.");
+                            } else if (!getFirstWord(arr[1]).equals("by:")) {
+                                throw new InvalidTimeException("☹ OOPS!!! Please enter a suitable deadline!");
+                            }
+                            addDeadline(deadlineDescription, deadlineTime);
+                            break;
+                        case "event":
+                            String[] arr_event = input.split("\\(");
+                            String eventDescription = getSecondWord(arr_event[0]);
+                            String eventTime = getSecondWord(arr_event[1]).substring(0, getSecondWord(arr_event[1]).length() - 1);
+                            if (getSecondWord(arr_event[1]).length() < 1) {
+                                throw new InvalidTimeException("☹ OOPS!!! The timing of an event cannot be empty.");
+                            } else if (!getFirstWord(arr_event[1]).equals("at:")) {
+                                throw new InvalidTimeException("☹ OOPS!!! Please enter a suitable event timing!");
+                            }
+                            addEvent(eventDescription, eventTime);
+                            break;
+                        default:
+                            throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                     System.out.println(lineBreak);
                 }
