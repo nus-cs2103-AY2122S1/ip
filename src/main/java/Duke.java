@@ -27,24 +27,24 @@ public class Duke {
 
         while (!command.equals("bye")) {
             // * Print list of tasks if command is "list"
-            String taskListMessage = "I present to you, your collection of tasks!\n\n";
-
             if (command.equals("list")) {
+                String taskListMessage = "I present to you, your collection of tasks!\n\n";
                 for (int i = 0; i < tasks.size(); i++) {
-                    String t = "\t" + i + ". " + tasks.get(i);
+                    int taskNum = i + 1;
+                    String t = "\t" + taskNum + ". " + tasks.get(i);
                     taskListMessage += t + "\n";
                 }
                 printFormattedMessage(taskListMessage);
             } else {
                 // * For any other text input, add a task to the list
                 tasks.add(new Task(command));
-                printFormattedMessage("added: " + command + "\n");  
+                printFormattedMessage("added: " + command + "\n"); 
             }
             
             // * Ask user for next command
             command = sc.nextLine();         
         }
-        
+
         printFormattedMessage("Bye. Hope to see you again soon!\n");
         sc.close();
     }
