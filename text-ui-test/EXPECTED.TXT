@@ -9,18 +9,18 @@
   ---------------------------------------------
   ---------------------------------------------
     Got it. I've added this task:
-      [D][ ] deadline return book  (by: Friday)
+      [D][ ] return book  (by: Friday)
     Now you have 2 tasks in the list.
   ---------------------------------------------
   ---------------------------------------------
     Here are the tasks in your list:
         1. [T][ ] borrow book
-        2. [D][ ] deadline return book  (by: Friday)
+        2. [D][ ] return book  (by: Friday)
     Now you have 2 tasks in the list.
   ---------------------------------------------
   ---------------------------------------------
     Got it. I've added this task:
-      [E][ ] event family celebration  (at: Sunday 2pm)
+      [E][ ] family celebration  (at: Sunday 2pm)
     Now you have 3 tasks in the list.
   ---------------------------------------------
   ---------------------------------------------
@@ -34,5 +34,5 @@
   ---------------------------------------------
   ---------------------------------------------
     Nice! I've marked this task as done:
-      [E][X] event family celebration  (at: Sunday 2pm)
+      [E][X] family celebration  (at: Sunday 2pm)
   ---------------------------------------------
