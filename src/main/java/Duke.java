@@ -84,7 +84,6 @@ public class Duke {
                 default:
                     System.out.println("\n" + line +
                             "\n☹ OOPS!!! I'm sorry, but I don't know what that means :-(.\n" + line);
-
             }
             if(exit){
                 break;
