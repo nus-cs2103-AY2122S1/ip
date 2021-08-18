@@ -61,11 +61,25 @@ public class Duke {
         } else {
             String[] parsedUserInput = userInput.split(" ", 2);
             if (parsedUserInput[0].equals("done")) { // Mark task as completed
-                int taskDone = Integer.parseInt(parsedUserInput[1]) - 1;
-                toDoList.get(taskDone).markAsCompleted();
-                reply("Nice! I've marked this task as done: \n" + addToStringToPrint(taskDone, ""));
+                if (parsedUserInput.length == 1) {
+                    throw new DukeException("☹ OOPS!!! Please enter \"delete\" followed the number corresponding to " +
+                            "the task you want to mark as completed");
+                } else {
+                    int taskDone = Integer.parseInt(parsedUserInput[1]) - 1;
+                    toDoList.get(taskDone).markAsCompleted();
+                    reply("Nice! I've marked this task as done: \n" + addToStringToPrint(taskDone, ""));
+                }
             } else if (parsedUserInput[0].equals("delete")) { // todo
-                int taskDone = Integer.parseInt(parsedUserInput[1]) - 1;
+                if (parsedUserInput.length == 1) {
+                    throw new DukeException("☹ OOPS!!! Please enter \"delete\" followed the number corresponding to " +
+                            "the task you want deleted");
+                } else {
+                    int taskToDelete = Integer.parseInt(parsedUserInput[1]) - 1;
+                    Task deletedTask = toDoList.get(taskToDelete);
+                    toDoList.remove(taskToDelete);
+                    reply("Noted. I've removed this task: \n" + deletedTask.toString() +
+                                   "\nNow you have " + toDoList.size() + " tasks in the list.");
+                }
             } else if (parsedUserInput[0].equals("todo")) {
                 if (parsedUserInput.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
