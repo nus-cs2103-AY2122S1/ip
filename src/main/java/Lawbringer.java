@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Duke {
+public class Lawbringer {
     public static void main(String[] args) {
         String introMessage = "Hello! I'm Lawbringer!\n" +
                 "What can i do for you?";
@@ -46,10 +46,10 @@ public class Duke {
             } else if (userInput.startsWith("event")) {
                 int index = userInput.indexOf('/');
                 String at = userInput.substring(index+4);
-                Deadline deadline = new Deadline(userInput.substring(6,index), at);
-                tasks.add(deadline);
+                Event event = new Event(userInput.substring(6,index), at);
+                tasks.add(event);
                 String message = "Got it. I've added this task:\n" + "  " +
-                        deadline.toString() + "\nNow you have " + tasks.size() +
+                        event.toString() + "\nNow you have " + tasks.size() +
                         " task(s) in the list." ;
                 System.out.println(message);
             }
