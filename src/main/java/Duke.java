@@ -37,14 +37,14 @@ public class Duke {
             } else if (commandArr[0].equals("deadline")) {
                 int spaceIndex = command.indexOf(" ");
                 int slashIndex = command.indexOf("/");
-                Task t = new Deadline(command.substring(spaceIndex), command.substring(slashIndex + 4, command.length()));
+                Task t = new Deadline(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4, command.length()));
                 taskArr.add(t);
                 System.out.println(t);
 
             } else if (commandArr[0].equals("event")) {
                 int spaceIndex = command.indexOf(" ");
                 int slashIndex = command.indexOf("/");
-                Task t = new Event(command.substring(spaceIndex), command.substring(slashIndex + 4, command.length()));
+                Task t = new Event(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4, command.length()));
                 taskArr.add(t);
                 System.out.println(t);
 
