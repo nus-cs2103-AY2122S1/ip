@@ -6,4 +6,11 @@ list
 done 4
 done 1
 list
+remove
+deadline /by Sunday
+event meeting prof /at
+todo
+delete 2
+delete 3
+list
 bye
