@@ -1,0 +1,5 @@
+todo Buy monitor
+deadline Project /by Thursday
+event Birthday /at 28 Aug
+list
+bye

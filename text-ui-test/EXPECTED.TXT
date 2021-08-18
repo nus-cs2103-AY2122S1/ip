@@ -5,3 +5,16 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Got it. I've added this task:
+[T][ ] Buy monitor
+Now you have 1 tasks in your list.
+Got it. I've added this task:
+[D][ ] Project  (by: Thursday)
+Now you have 2 tasks in your list.
+Got it. I've added this task:
+[E][ ] Birthday (at: 28 Aug)
+Now you have 3 tasks in your list.
+1.[T][ ] Buy monitor
+2.[D][ ] Project  (by: Thursday)
+3.[E][ ] Birthday (at: 28 Aug)
+Bye bye. Duke going to sleep now.
