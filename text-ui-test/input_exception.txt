@@ -1,6 +1,7 @@
 junk
 blegh
 done 2
+delete 1
 list
 todo create errors
 done 4
@@ -12,4 +13,7 @@ event /at run
 deadline
 deadline test /by
 deadline /by 4
+todo make more
+delete -3
+delete 10
 bye
