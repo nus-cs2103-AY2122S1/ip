@@ -32,6 +32,10 @@ public class Duke {
         printMessageWithFormat(msg);
     }
 
+    private void start(){
+        greet();
+        echo();
+    }
     private void echo(){;
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
@@ -50,7 +54,6 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Duke duke = new Duke();
-        duke.greet();
-        duke.echo();
+        duke.start();
     }
 }
