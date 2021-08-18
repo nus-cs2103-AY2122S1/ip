@@ -20,7 +20,12 @@ public class Task {
         return (isDone ? "[X]" : "[ ]"); // mark done task with X
     }
 
-    public Task doneTask() {
-        return new Task(this.description, true);
+    public void doneTask() {
+        this.isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return this.getStatusIcon() + " " + this.description;
     }
 }
