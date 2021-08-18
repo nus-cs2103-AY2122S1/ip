@@ -4,6 +4,7 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
+        this.done = false;
     }
 
     public boolean isDone() {
