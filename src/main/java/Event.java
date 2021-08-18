@@ -4,7 +4,7 @@
 public class Event extends Task {
     private final String timePeriod;
 
-    public Event(String message, String timePeriod) {
+    public Event(String message, String timePeriod){
         super(message);
         this.timePeriod = timePeriod;
     }

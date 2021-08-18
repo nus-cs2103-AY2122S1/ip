@@ -24,8 +24,8 @@ public class Duke {
                     System.out.println("Nice talking to you, goodbye!");
                     return;
                 case "list":
-                    System.out.println("Here's your todo list!");
                     try {
+                        System.out.println("Checking your todo list...");
                         taskList.printList();
                     } catch (EmptyTaskListException e) {
                         System.out.println(e.getMessage() + "\n");
@@ -43,6 +43,8 @@ public class Duke {
                     try {
                         taskList.add(Task.createTask(command, input));
                     } catch (NoSuchCommandException e) {
+                        System.out.println(e.getMessage() + "\n");
+                    } catch (NoTaskNameException e) {
                         System.out.println(e.getMessage() + "\n");
                     }
             }

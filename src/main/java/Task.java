@@ -6,7 +6,10 @@ public class Task {
     private final String message;
     private Boolean completed;
 
-    public static Task createTask(String command, String input) throws NoSuchCommandException {
+    public static Task createTask(String command, String input) throws NoSuchCommandException, NoTaskNameException {
+        if (input.isEmpty()) {
+            throw new NoTaskNameException("No task name, please try again.");
+        }
         switch (command) {
             case "todo":
                 return new ToDo(input);

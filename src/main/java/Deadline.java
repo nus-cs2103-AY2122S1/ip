@@ -5,7 +5,7 @@
 public class Deadline extends Task {
     private final String endTime;
 
-    public Deadline(String message, String endTime) {
+    public Deadline(String message, String endTime){
         super(message);
         this.endTime = endTime;
     }
