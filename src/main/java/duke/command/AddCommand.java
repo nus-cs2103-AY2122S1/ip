@@ -8,6 +8,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
@@ -40,7 +41,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(task);
         ui.print("Got it. I've added this task:",
                 task.toString(),

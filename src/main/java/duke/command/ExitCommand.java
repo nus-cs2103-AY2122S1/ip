@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.BadInputFormatException;
+import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
@@ -15,9 +16,10 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         ui.print("Bye. See ya l8er allig8er!", "\033[3m*shutting down......*\033[0m");
         ui.cleanup();
+        storage.write(tasks);
     }
 
     @Override

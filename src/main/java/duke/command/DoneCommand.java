@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.BadInputFormatException;
 import duke.exception.NoSuchTaskException;
+import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
@@ -21,7 +22,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) throws NoSuchTaskException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoSuchTaskException {
         ui.print("Nice! I've marked this task as done:", tasks.getTask(index).markTaskAsDone().toString());
     }
 

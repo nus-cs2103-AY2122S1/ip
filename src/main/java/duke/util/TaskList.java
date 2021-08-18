@@ -12,6 +12,10 @@ public class TaskList {
         list = new ArrayList<>();
     }
 
+    public TaskList(ArrayList<Task> list) {
+        this.list = list;
+    }
+
     public void add(Task task) {
         list.add(task);
     }
