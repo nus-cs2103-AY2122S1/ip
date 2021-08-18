@@ -59,16 +59,26 @@ public class Duke {
                 System.out.println(taskarr[arrcounter - 1].toString());
                 System.out.println(linebreak);
             } else if (strparse[0].equalsIgnoreCase("deadline")) {
-                // adds a deadline task to the list
+                // adds a deadline task to the list. ASSUMES THERE IS A /BY FFS
                 StringBuilder taskb = new StringBuilder();
                 StringBuilder deadlineb = new StringBuilder();
-                int counter;
-
-                while (!strparse[counter].equalsIgnoreCase("/by")) {
-                    
+                int i = 1;
+                while (!strparse[i].equalsIgnoreCase("/by")
+                        || i > strparse.length) {
+                    taskb.append(strparse[i]);
+                    if (i != strparse.length - 1) {
+                        taskb.append(" ");
+                    }
+                    i++;
                 }
-
-
+                i++;
+                while (i < strparse.length) {
+                    deadlineb.append(strparse[i]);
+                    if (i != strparse.length - 1) {
+                        deadlineb.append(" ");
+                    }
+                    i++;
+                }
                 taskarr[arrcounter] = new Deadline(taskb.toString(), deadlineb.toString());
                 arrcounter++;
 
