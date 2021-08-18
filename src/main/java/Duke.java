@@ -22,7 +22,7 @@ public class Duke {
                     System.out.println("\t" + (i + 1) + ". " + listOfItems[i].toString());
                 }
             } else if (input.equals("bye")) {
-                System.out.println(" \t Bye. Hope to see you again soon!");
+                System.out.println("\tBye. Hope to see you again soon!");
                 break;
             } else if (input.contains("done") && isLastCharDigit) {
                 char itemIndex = input.charAt(input.length() - 1);
@@ -40,20 +40,50 @@ public class Duke {
             }
             else {
                 if (input.contains("todo")) {
-                    int firstIndexAfterDeadline = 5;
-                    listOfItems[index] = new Todo(input.substring(firstIndexAfterDeadline));
+                    String test = input.replaceAll("\\s+","");
+                    if (test.length() == 4) {
+                        System.out.println("\tOOPS!!! The description of a todo cannot be empty.");
+                        continue;
+                    } else {
+                        int firstIndexAfterDeadline = 5;
+                        listOfItems[index] = new Todo(input.substring(firstIndexAfterDeadline));
+                    }
                 } else if (input.contains("deadline")) {
-                    int firstIndexAfterDeadline = 9;
-                    int i = input.indexOf('/');
-                    String deadline = input.substring(i + 1, input.length() - 1+1);
-                    listOfItems[index] = new Deadline(input.substring(firstIndexAfterDeadline, i), deadline);
+                    String test = input.replaceAll("\\s+","");
+                    if (test.length() == 8) {
+                        System.out.println("\tOOPS!!! The description of a deadline cannot be empty.");
+                        continue;
+                    } else {
+                        int firstIndexAfterDeadline = 9;
+                        int i = input.indexOf('/');
+                        if (i == -1) {
+                            System.out.println("\tOOPS!!! The deadline for a deadline cannot be empty or it must be after a '/'");
+                            continue;
+                        } else {
+                            String deadline = input.substring(i + 1, input.length() - 1+1);
+                            listOfItems[index] = new Deadline(input.substring(firstIndexAfterDeadline, i), deadline);
+                        }
+                    }
                 } else if (input.contains("event")) {
-                    int firstIndexAfterDeadline = 6;
-                    int i = input.indexOf('/');
-                    String deadline = input.substring(i + 1, input.length() - 1+1);
-                    listOfItems[index] = new Event(input.substring(firstIndexAfterDeadline, i), deadline);
+                    String test = input.replaceAll("\\s+","");
+                    if (test.length() == 5) {
+                        System.out.println("\tOOPS!!! The description of a deadline cannot be empty.");
+                        continue;
+                    } else {
+                        int firstIndexAfterDeadline = 6;
+                        int i = input.indexOf('/');
+                        if (i == -1) {
+                            System.out.println("\tOOPS!!! The duration for an event cannot be empty or it must be after a '/'");
+                            continue;
+                        } else {
+                            String deadline = input.substring(i + 1, input.length() - 1+1);
+                            listOfItems[index] = new Event(input.substring(firstIndexAfterDeadline, i), deadline);
+                        }
+                    }
+
                 } else {
-                    listOfItems[index] = new Task(input);
+                    System.out.println("\tOOPS!!! I'm sorry, but I don't know what that means :-(");
+                    continue;
                 }
 
                 System.out.println("\tGot it. I've added this task:");

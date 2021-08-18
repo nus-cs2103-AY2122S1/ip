@@ -11,3 +11,8 @@ What can I do for you?
     Now you have 3 tasks in the list.
     Nice! I've marked this task as done:
         [D][X] return book (by Sunday)
+    OOPS!!! The duration for a todo cannot be empty or it must be after a '/'
+
+    OOPS!!! I'm sorry, but I don't know what that means :-(
+    OOPS!!! The description of a deadline cannot be empty.
+    OOPS!!! The deadline for a deadline cannot be empty or it must be after a '/'
