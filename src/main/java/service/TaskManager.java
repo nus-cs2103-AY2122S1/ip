@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * service.TaskManager class.
+ * TaskManager class.
  *
  * This class acts as the manager of tasks held by the Duke.
  */
