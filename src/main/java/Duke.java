@@ -5,6 +5,11 @@ import java.util.NoSuchElementException;
 
 
 public class Duke {
+    // TODO: handle more errors
+    private enum Action {
+        LIST, DONE, REMOVE, TODO, DEADLINE, EVENT
+    }
+
     private static final List<Task> list = new ArrayList<>();
     private static final String divider = "____________________________________________________________";
     private static final String logo = " ____        _        \n"
@@ -13,11 +18,6 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    // TODO: handle more errors
-    // TODO: use enum
-    private enum Action {
-        LIST, DONE, REMOVE, TODO, DEADLINE, EVENT
-    }
 
     private static void launch() {
         System.out.println(divider);
@@ -111,7 +111,6 @@ public class Duke {
                 break;
             }
         }
-
     }
 
     public static void main(String[] args) {
