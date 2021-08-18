@@ -1,10 +1,27 @@
+import java.util.Scanner;
+
 public class Duke {
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Scanner scanObj = new Scanner(System.in);
+
+        String greeting = "Hello! I'm BunnyBot, Joe Wel's personal slave!\n" + "What can I do for you?";
+        System.out.println(greeting);
+
+        while(true) {
+            String userInput = scanObj.nextLine();
+            if (userInput.equals("bye")) {
+                String byeMsg = "    ----------------------------\n"
+                        + "    okay :<, bye!" + "\n"
+                        + "    ----------------------------";
+                System.out.println(byeMsg);
+                break;
+            }
+            String echo = "    ----------------------------\n"
+                    + "    " + userInput + "\n"
+                    + "    ----------------------------";
+            System.out.println(echo);
+
+        }
     }
 }
