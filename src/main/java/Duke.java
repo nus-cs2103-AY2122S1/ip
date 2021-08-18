@@ -51,6 +51,22 @@ public class Duke {
     }
 
     /**
+     * Deletes the task at given index from the list
+     * @param index the index of the task
+     * @return message indicating success
+     */
+    public String delete(int index) throws InvalidIndexException {
+        if (index > Task.count) throw new InvalidIndexException();
+        Task t = this.list.get(index - 1);
+        this.list.remove(index - 1);
+        Task.count--;
+        return wrapText(String.format(
+                "Noted. I've removed this task:\n %s\nNow you have %d task(s) in the list", 
+                t.toString(), 
+                Task.count));
+    }
+
+    /**
      * Outputs the list of items in numbered format
      * @return list of items
      */
@@ -95,6 +111,8 @@ public class Duke {
                     return this.add(new Event(input[0], input[1]));
                 case "done":
                     return this.markDone(Integer.parseInt(input[0].strip()));
+                case "delete":
+                    return this.delete(Integer.parseInt(input[0].strip()));
                 default:
                     throw new InvalidCommandException();
             }
