@@ -59,6 +59,18 @@ public class Duke {
                 System.out.println("Now you have " + counter + " task(s) in the list.");
                 System.out.println(dash);
 
+            } else if (userInput.substring(0, 8).matches("deadline")) {
+                String output = userInput.substring(9);
+                String[] info = output.split("/");
+                tasks[counter] = new Deadline(info[0], info[1].substring(3));
+
+                System.out.println(dash);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(tasks[counter].toString());
+                counter += 1;
+
+                System.out.println("Now you have " + counter + " task(s) in the list.");
+                System.out.println(dash);
 
             }
         }
