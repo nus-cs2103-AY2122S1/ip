@@ -1,15 +1,12 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    List<String> taskList;
-    boolean[] isDone;
+    List<Task> taskList;
 
     public Duke() {
         taskList = new ArrayList<>(100);
-        isDone = new boolean[100];
     }
 
     void startConversation() {
@@ -25,6 +22,10 @@ public class Duke {
                 break;
             }
 
+            String[] parsed = parseInput(strArr);
+            String content = parsed[0];
+            String time= parsed[1];
+
             switch (cmd) {
             case "":
                 break;
@@ -34,56 +35,82 @@ public class Duke {
             case "done":
                 markTaskDone(Integer.parseInt(strArr[1]));
                 break;
-            default:
-                addTask(input);
+            case "todo":
+                addTask(new Task(content));
+                break;
+            case "deadline":
+                addTask(new Deadline(content, time));
+                break;
+            case "event":
+                addTask(new Event(content, time));
+                break;
             }
         }
         sayBye("Alex");
     }
 
-    private void addTask(String task) {
+    private void addTask(Task task) {
         this.taskList.add(task);
         printHorizLine();
-        System.out.println("\tadded " + task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println("\t" + task);
         printHorizLine();
     }
 
     private void listTask() {
         printHorizLine();
+        System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= this.taskList.size(); i++) {
-            if (!isDone[i-1]) {
-                System.out.format("\t%d.[ ] %s\n", i, taskList.get(i-1));
-            } else {
-                System.out.format("\t%d.[X] %s\n", i, taskList.get(i-1));
-            }
-
+            System.out.format("%d.%s\n", i, taskList.get(i-1));
         }
         printHorizLine();
     }
 
     private void markTaskDone(int idx) {
         printHorizLine();
-        this.isDone[idx - 1] = true;
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t[X] " + this.taskList.get(idx-1));
+        Task curr = this.taskList.get(idx - 1);
+        curr.markDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("\t" + curr);
         printHorizLine();
+    }
+
+    private String[] parseInput(String[] strArr) {
+        StringBuilder contentSb = new StringBuilder();
+        StringBuilder timeSb = new StringBuilder();
+        int i=1;
+        for(; i < strArr.length; i++) {
+            String curr = strArr[i];
+            if(!curr.equals("/by") && !curr.equals("/at")) {
+                contentSb.append(curr + " ");
+            } else {
+                i++;
+                break;
+            }
+        }
+        for(; i < strArr.length-1; i++) {
+            timeSb.append(strArr[i] + " ");
+        }
+        timeSb.append(strArr[strArr.length-1]);
+
+        return new String[]{contentSb.toString(),timeSb.toString()};
     }
 
     private void greeting(String name) {
         printHorizLine();
-        System.out.println("\tHello " + name + "!");
-        System.out.println("\tI'm Duke");
+        System.out.println("Hello " + name + "!");
+        System.out.println("I'm Duke");
         printHorizLine();
     }
 
     private void sayBye(String name) {
         printHorizLine();
-        System.out.println("\tBye " + name + ", hope to see you soon!");
+        System.out.println("Bye " + name + ", hope to see you soon!");
         printHorizLine();
     }
 
     private void printHorizLine() {
-        System.out.println("\t————————————————————————————————————————");
+        System.out.println("————————————————————————————————————————");
     }
 
     public static void main(String[] args) {
