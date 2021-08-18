@@ -1,0 +1,22 @@
+public class Task {
+    private String content;
+    private boolean isCompleted;
+
+    public Task(String content){
+        this.content = content;
+        this.isCompleted = false;
+    }
+
+    boolean isComplete(){
+        return this.isCompleted;
+    }
+
+    void markComplete(){
+        this.isCompleted = true;
+    }
+
+    public String toString(){
+        return this.content;
+    }
+
+}
