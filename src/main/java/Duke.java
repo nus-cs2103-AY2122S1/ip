@@ -23,6 +23,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String input = sc.nextLine();
+            String command = input.split(" ")[0];
             if (input.equals("bye")) {
                 // Exit chat bot
                 System.out.printf(format, horizontalLine);
@@ -37,7 +38,7 @@ public class Duke {
                     System.out.printf("\t%d.%s\n", i + 1, tasks.get(i));
                 }
                 System.out.printf(format, horizontalLine);
-            } else if (input.startsWith("done")) {
+            } else if (command.equals("done")) {
                 // Set a task as done
                 String taskNumberString = input.substring(5);
                 System.out.printf(format, horizontalLine);
@@ -54,12 +55,40 @@ public class Duke {
                     System.out.printf(format, "Please type in a valid task number.");
                 }
                 System.out.printf(format, horizontalLine);
-            } else {
-                // Create task object and add it to the list
-                Task task = new Task(input);
+            } else if (command.equals("todo")
+                    || command.equals("deadline")
+                    || command.equals("event")) {
+                // Add a Todo, Deadline or Event task
+                Task task = new Task(input); // placeholder item, this be overridden below
+                if (command.equals("todo")) {
+                    // Add Todo task
+                    task = new Todo(input.substring(5));
+                } else if (command.equals("deadline")) {
+                    // Add Deadline task
+                    String[] splitInput = input.substring(9).split(" /by ");
+                    String taskName = splitInput[0];
+                    String date = splitInput[1];
+                    task = new Deadline(taskName, date);
+                } else {
+                    // Add Event task
+                    String[] splitInput = input.substring(6).split(" /at ");
+                    String taskName = splitInput[0];
+                    String date = splitInput[1];
+                    task = new Event(taskName, date);
+                }
+
+                // Common functionality: add task to list, print task and list size
                 tasks.add(task);
                 System.out.printf(format, horizontalLine);
-                System.out.printf("\tadded: %s\n", input);
+                System.out.printf(format, "Got it. The following task has been added: ");
+                System.out.printf("\t\t%s\n", task.toString());
+                System.out.printf("\tNow you have %d task%s in the list.\n",
+                        tasks.size(), tasks.size() == 1 ? "" : "s");
+                System.out.printf(format, horizontalLine);
+            } else {
+                // Invalid command
+                System.out.printf(format, horizontalLine);
+                System.out.printf(format, "Please enter a valid command.");
                 System.out.printf(format, horizontalLine);
             }
         }
