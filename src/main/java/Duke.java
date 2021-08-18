@@ -14,6 +14,11 @@ public class Duke {
         System.out.println(line);
     }
 
+    public static String buildMessage(String message) {
+        String line = "____________________________________________________________";
+        return line + "\n" + message + "\n" + line;
+    }
+
     public static void print(ArrayList<Task> ls) {
         String line = "____________________________________________________________";
         System.out.println(line);
@@ -24,14 +29,15 @@ public class Duke {
         System.out.println(line);
     }
 
-    public static boolean setDone(String phrase, int listLength) {
-        String[] splited = phrase.split(" ");
-//        System.out.println(splited);
-        if (splited.length != 2) {
-            return false;
-        } else {
-            return splited[0].equals("done") && splited[1].matches("\\d+") && Integer.valueOf(splited[1]) <= listLength;
-        }
+    public static boolean isDone(String input, int listLength) {
+//        String[] splited = phrase.split(" ");
+////        System.out.println(splited);
+//        if (splited.length != 2) {
+//            return false;
+//        } else {
+//            return splited[0].equals("done") && splited[1].matches("\\d+") && Integer.valueOf(splited[1]) <= listLength;
+//        }
+        return input.startsWith("done ");
     }
 
     public static void printAdd(Task toAdd, int size) {
@@ -84,6 +90,10 @@ public class Duke {
         }
     }
 
+    public static boolean isRemove(String input){
+        return input.startsWith("remove ");
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -96,16 +106,31 @@ public class Duke {
         greet();
         String next = sc.nextLine();
         while (!next.equals("bye")) {
-            if (next.equals("list")) {
-                print(tasks);
-            } else if (setDone(next, tasks.size())){
-                String[] splited = next.split(" ");
-                int index = Integer.valueOf(splited[1]) - 1;
-                tasks.get(index).markAsDone();
-                String message = "Nice! I've marked this task as done:\n" + "  " + tasks.get(index);
-                print(message);
-            } else {
-                try {
+            try {
+                if (next.equals("list")) {
+                    print(tasks);
+                } else if (isDone(next, tasks.size())) {
+                    String[] splited = next.split(" ");
+                    if (splited.length < 2 || !splited[1].matches("\\d+") || Integer.valueOf(splited[1]) > tasks.size()) {
+                        throw new DukeException(buildMessage("Please key in valid number to mark as done."));
+                    } else {
+                        int index = Integer.valueOf(splited[1]) - 1;
+                        tasks.get(index).markAsDone();
+                        String message = "Nice! I've marked this task as done:\n" + "  " + tasks.get(index);
+                        print(message);
+                    }
+                } else if (isRemove(next)) {
+                    String[] str = next.split(" ");
+                    if (str.length < 2 || !str[1].matches("\\d+") || Integer.valueOf(str[1]) > tasks.size()) {
+                        throw new DukeException(buildMessage("Please key in valid number to remove."));
+                    } else {
+                        Task toRemove = tasks.get(Integer.valueOf(str[1]) - 1);
+                        tasks.remove(toRemove);
+                        String message = "Noted. I've removed this task:\n" + toRemove + "\nNow you have "
+                                + tasks.size() + " tasks in the list";
+                        print(message);
+                    }
+                } else {
                     String[] splited = next.split(" ");
                     if (splited[0].equals("todo") || splited[0].equals("deadline") || splited[0].equals("event")) {
                         String[] str = splitInput(next, splited[0]);
@@ -125,37 +150,12 @@ public class Duke {
                     } else {
                         throw new InvalidCommandException();
                     }
-                } catch (DukeException e){
-                    System.out.println(e.getMessage());
                 }
-
-//                if (splited[0].equals("todo")) {
-//                    String toAdd = "";
-//                    for (int i = 1; i < splited.length; i++) {
-//                        toAdd += splited[i];
-//                        if (i != splited.length - 1) {
-//                            toAdd += " ";
-//                        }
-//                    }
-//                    ToDo add = new ToDo(toAdd);
-//                    tasks.add(add);
-//                    printAdd(add, tasks.size());
-//                } else if (splited[0].equals("deadline")) {
-//                    String[] str = splitInput(next);
-//                    Deadline add = new Deadline(str[0], str[1]);
-//                    tasks.add(add);
-//                    printAdd(add, tasks.size());
-//                } else if (splited[0].equals("event")) {
-//                    String[] str = splitInput(next);
-//                    Event add = new Event(str[0], str[1]);
-//                    tasks.add(add);
-//                    printAdd(add, tasks.size());
-//                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                next = sc.nextLine();
             }
-            next = sc.nextLine();
-
-            //            print(next);
-        //            next = sc.nextLine();
         }
         print("Bye. Hope to see you again soon!");
         sc.close();
