@@ -24,7 +24,7 @@ public class Duke {
      */
     private void greet() {
         System.out.println(LINE);
-        System.out.println(SPACE + "Hello! I'm Duke, your personal chatbot!");
+        System.out.println(SPACE + "Hello! I'm Bhutu, your personal chatbot!");
         System.out.println(SPACE + "What can I do for you?");
         System.out.println(END_LINE);
     }
