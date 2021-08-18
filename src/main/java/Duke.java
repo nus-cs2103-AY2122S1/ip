@@ -1,9 +1,19 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class Duke {
     private static final String LINEBREAK = "____________________________________________________________";
+    List<String> commands = new ArrayList<String>();
+
+    private final Map<String, Consumer<String>> FUNCTIONS = new HashMap<>() {
+        {
+            put("list", (input) -> list());
+        }
+    };
 
     private void print(String s) {
         System.out.printf("%s\n%s\n%s\n", LINEBREAK, s, LINEBREAK);
@@ -49,8 +59,21 @@ public class Duke {
         System.out.print("SO WHAT DO YOU WANT DO, INSECT?\n ");
     }
 
+    private void list() {
+        System.out.println(LINEBREAK);
+        System.out.println("YOU WISH FOR THESE FOOLISH THINGS:");
+        for (int i = 0; i < commands.size(); i++) {
+            System.out.printf(" %s. %s\n", i + 1, commands.get(i));
+        }
+        System.out.println(LINEBREAK);
+    }
+
+    private void addTask(String task) {
+        print(" SO YOU WANT TO: " + task);
+        commands.add(task);
+    }
+
     private void run() {
-        List<String> commands = new ArrayList<String>();
         greet();
         Scanner input = new Scanner(System.in);
 
@@ -60,16 +83,8 @@ public class Duke {
             if (inputString.equals("bye")) {
                 print(" LIVE OUT YOUR PATHETIC LIFE, WEAKLING.");
                 break;
-            } else if (inputString.equals("list")) {
-                System.out.println(LINEBREAK);
-                System.out.println("YOU WISH FOR THESE FOOLISH THINGS:");
-                for (int i = 0; i < commands.size(); i++) {
-                    System.out.printf(" %s. %s\n", i + 1, commands.get(i));
-                }
-                System.out.println(LINEBREAK);
             } else {
-                print(" SO YOU WANT TO: " + inputString);
-                commands.add(inputString);
+                FUNCTIONS.getOrDefault(inputString, (task) -> addTask(task)).accept(inputString);
             }
             System.out.print("WHAT ELSE DO YOU WANT, INSECT?\n ");
         }
