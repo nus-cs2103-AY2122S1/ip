@@ -4,24 +4,30 @@ Welcome to Ben's. How may I help you?
       [T][ ] create game
     You now have 1 task in the list.
     ***
+
     ***
     Understood. Added the task:
-      [ ]
+      [D][ ] project (by: next week)
     You now have 2 tasks in the list.
     ***
+
     ***
     Understood. Added the task:
       [E][ ] project meeting (at: Tue 2-4pm)
     You now have 3 tasks in the list.
     ***
+
     ***
     These are your tasks in the list:
       1. [T][ ] create game
-      2. [ ]
+      2. [D][ ] project (by: next week)
       3. [E][ ] project meeting (at: Tue 2-4pm)
     ***
+
     ***
     You have successfully done this task:
-      3. [E][X] project meeting (at: Tue 2-4pm)
+      [E][X] project meeting (at: Tue 2-4pm)
     ***
+
+
 Goodbye! Have a nice day. :)
