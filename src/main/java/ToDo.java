@@ -6,7 +6,7 @@ public class ToDo extends Task{
 
     @Override
     public String checkStatus() {
-        return (isDone ? "[T]" : "[]" + " " + this.showDescription());
+        return "[T]" + (isDone ? "[X]" : "[ ]") + " " + this.showDescription();
     }
 
 }

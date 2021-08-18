@@ -7,9 +7,8 @@ public class Duke {
         EXIT, LIST, DONE, TODO, DEADLINE, EVENT
     }
 
-    private final String HORIZONTAL_LINE = "____________________________________________________________";
     private final String INDENTATION = "    ";
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
     private boolean isActive;
 
     private Duke(){
@@ -24,6 +23,7 @@ public class Duke {
     }
 
     private void printMessageWithFormat(String msg){
+        String HORIZONTAL_LINE = "____________________________________________________________";
         System.out.println(INDENTATION + HORIZONTAL_LINE);
         System.out.println(INDENTATION + msg);
         System.out.println(INDENTATION + HORIZONTAL_LINE);
@@ -37,7 +37,8 @@ public class Duke {
 
     private void addTask(Task task){
         this.taskList.add(task);
-        String msg = "added: " + task.showDescription();
+        String msg = "Got it. I've added this task:\n" + INDENTATION + "  " + task.checkStatus();
+        msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskList.size());
         printMessageWithFormat(msg);
     }
 
@@ -54,8 +55,8 @@ public class Duke {
     }
 
     private void listTasks(){
-        String msg = String.format("1. %s", taskList.get(0).checkStatus());
-        for (int i = 2; i <= taskList.size(); i++){
+        String msg = "Here are the tasks in your list:";
+        for (int i = 1; i <= taskList.size(); i++){
             msg += String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i-1).checkStatus());
         }
         printMessageWithFormat(msg);
@@ -81,19 +82,23 @@ public class Duke {
                     break;
 
                 case EVENT:
-                    String eventDescription = "";
-                    Task event = new Event(eventDescription, "");
+                    String eventDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/at")-1);
+                    Task event = new Event(eventDescription, command.substring(command.indexOf("at")+3));
+                    addTask(event);
                     break;
 
                 case DEADLINE:
-                    String deadlineDescription = "";
-                    Task deadline = new Deadline(deadlineDescription, "");
+                    String deadlineDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/by")-1);
+                    Task deadline = new Deadline(deadlineDescription, command.substring(command.indexOf("by")+3));
+                    addTask(deadline);
                     break;
 
                 case TODO:
-                    String toDoDescription = "";
+                    String toDoDescription = command.substring(command.indexOf(" ")+1);
                     Task toDo = new ToDo(toDoDescription);
+                    addTask(toDo);
                     break;
+
             }
         }
         sc.close();

@@ -8,10 +8,10 @@ public class Deadline extends Task{
 
     @Override
     public String checkStatus() {
-        return (isDone ? "[D]" : "[]" + " " + this.showDescription());
+        return "[D]" + (isDone ? "[X]" : "[ ]") + " " + this.showDescription() + " " + this.showDeadline();
     }
 
     public String showDeadline(){
-        return String.format("(%s)", this.by);
+        return String.format("(by: %s)", this.by);
     }
 }

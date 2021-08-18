@@ -8,10 +8,10 @@ public class Event extends Task{
 
     @Override
     public String checkStatus() {
-        return (isDone ? "[E]" : "[]" + " " + this.showDescription());
+        return "[E]" + (isDone ? "[X]" : "[ ]") + " " + this.showDescription() + " " + this.showWhen();
     }
 
     public String showWhen(){
-        return String.format("(%s)", this.when);
+        return String.format("(at: %s)", this.when);
     }
 }
