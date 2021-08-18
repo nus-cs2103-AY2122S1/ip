@@ -9,7 +9,7 @@
     | What can I do for you? |
      ========================
      ==========================================================
-    | It seems that your list is empty.                        |
+    | It seems that your task list is empty.                   |
     | Try adding some task using "todo", "deadline" or "event" |
      ==========================================================
      ==================================================
@@ -31,17 +31,17 @@
     | Now you have 2 tasks in the list.            |
      ==============================================
      ===================================================
-    | Here is your list:                                |
+    | Here is your task list:                           |
     | 1. [D][ ] Individual Project (by: 19 Aug 2359hr)  |
     | 2. [E][ ] CS2103T lecture (at: 19 Aug 1600hr)     |
      ===================================================
+     =========================================
+    | OOPS!!! Did you forget the task number? |
+     =========================================
      =================================================
     | Nice! I've marked this task as done:            |
     |   [D][X] Individual Project (by: 19 Aug 2359hr) |
      =================================================
-     =========================================
-    | OOPS!!! Did you forget the task number? |
-     =========================================
      ====================================================
     | OOPS!!! The description of a todo cannot be empty. |
      ====================================================
@@ -50,15 +50,39 @@
     |   [T][ ] sweep floor              |
     | Now you have 3 tasks in the list. |
      ===================================
+     ===================================
+    | Got it. I've added this task:     |
+    |   [T][ ] read book                |
+    | Now you have 4 tasks in the list. |
+     ===================================
      ==============================
     | Task 5 does not exist.       |
     | Use "list" to see all tasks. |
      ==============================
      ===================================================
-    | Here is your list:                                |
+    | Here is your task list:                           |
     | 1. [D][X] Individual Project (by: 19 Aug 2359hr)  |
     | 2. [E][ ] CS2103T lecture (at: 19 Aug 1600hr)     |
     | 3. [T][ ] sweep floor                             |
+    | 4. [T][ ] read book                               |
+     ===================================================
+     =========================================
+    | OOPS!!! Did you forget the task number? |
+     =========================================
+     ==============================================
+    | Noted. I've removed this task:               |
+    |   [E][ ] CS2103T lecture (at: 19 Aug 1600hr) |
+    | Now you have 3 tasks in the list.            |
+     ==============================================
+     ===================================
+    | Noted. I've removed this task:    |
+    |   [T][ ] sweep floor              |
+    | Now you have 2 tasks in the list. |
+     ===================================
+     ===================================================
+    | Here is your task list:                           |
+    | 1. [D][X] Individual Project (by: 19 Aug 2359hr)  |
+    | 2. [T][ ] read book                               |
      ===================================================
      ==================================
     | Bye. Hope to see you again soon! |

@@ -4,10 +4,15 @@ deadline Individual Project /by 19 Aug 2359hr
 event
 event CS2103T lecture /at 19 Aug 1600hr
 list
-done 1
 done
+done 1
 todo
 todo sweep floor
+todo read book
 done 5
+list
+delete
+delete 2
+delete 2
 list
 bye
