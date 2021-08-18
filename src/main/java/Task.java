@@ -7,11 +7,11 @@ public class Task {
         this.isDone = false;
     }
 
-    private String getStatusIcon() {
+    public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    private String getDescription() {
+    public String getDescription() {
         return description;
     }
 
