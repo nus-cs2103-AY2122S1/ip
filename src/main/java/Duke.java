@@ -41,6 +41,13 @@ public class Duke {
         printMessageWithFormat(msg);
     }
 
+    private void markTaskAsDone(int taskNumber){
+        taskList.get(taskNumber-1).markDone();
+        String msg = "Nice! I've marked this task as done:\n   ";
+        msg += INDENTATION + taskList.get(taskNumber-1).checkStatus();
+        printMessageWithFormat(msg);
+    }
+
     private void start(){
         greet();
         processCommand();
@@ -56,21 +63,30 @@ public class Duke {
 
     private void processCommand(){
         Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
+
         while (this.isActive){
+            String command = sc.nextLine();
             switch(getCommandType(command)){
                 case EXIT:
                     exit();
                     break;
+
                 case LIST:
                     listTasks();
                     break;
+
                 case ADD:
                     Task task = new Task(command);
                     addTask(task);
+                    break;
+
+                case DONE:
+                    int taskNumber = Integer.parseInt(command.split(" ")[1]);
+                    markTaskAsDone(taskNumber);
+                    break;
             }
-            command = sc.nextLine();
         }
+        sc.close();
     }
 
     private CommandTypes getCommandType(String command){
@@ -82,10 +98,14 @@ public class Duke {
             case "bye":
                 return CommandTypes.EXIT;
 
+            case "done":
+                return CommandTypes.DONE;
+
             default:
                 return CommandTypes.ADD;
         }
     }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
