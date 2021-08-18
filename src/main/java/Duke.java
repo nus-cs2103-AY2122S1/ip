@@ -15,7 +15,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String welcomeMessage = logo + "Hello! I'm Duke.\n" + "What can I do for you";
+        String welcomeMessage = logo + "Hello! I'm Duke.\n" + "What can I do for you?";
         System.out.println(formatDukeResponse(welcomeMessage));
     }
 
