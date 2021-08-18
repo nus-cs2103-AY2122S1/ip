@@ -25,25 +25,28 @@ public class Botto {
 
         while(!next.equals("bye")) {
             botto.printDivider();
-            String command = findCommand(next);
 
-            switch(command) {
-                case "list":
-                    botto.printList();
-                    break;
-                case "done":
-                    String integer = next.replaceAll("\\D+", "");
-                    botto.markAsDone(Integer.parseInt(integer) - 1);
-                    break;
-                case "todo":
-                    botto.add(TaskType.TODO, next.split(" ", 2)[1]);
-                    break;
-                case "deadline":
-                    botto.add(TaskType.DEADLINE, next.split(" ", 2)[1]);
-                    break;
-                case "event":
-                    botto.add(TaskType.EVENT, next.split(" ", 2)[1]);
-                    break;
+            try {
+                switch (findCommand(next)) {
+                    case "list":
+                        botto.printList();
+                        break;
+                    case "done":
+                        String integer = next.replaceAll("\\D+", "");
+                        botto.markAsDone(integer);
+                        break;
+                    case "todo":
+                        botto.add(TaskType.TODO, next);
+                        break;
+                    case "deadline":
+                        botto.add(TaskType.DEADLINE, next);
+                        break;
+                    case "event":
+                        botto.add(TaskType.EVENT, next);
+                        break;
+                }
+            } catch (DukeException e) {
+                System.out.println(indentation + e.getMessage());
             }
 
             botto.printDivider();
@@ -55,13 +58,13 @@ public class Botto {
         botto.printDivider();
     }
 
-    private static String findCommand(String command) {
+    private static String findCommand(String command) throws DukeException {
         for(String x: commands) {
             if(command.startsWith(x)) {
                 return x;
             }
         }
-        return "";
+        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     private void printDivider() {
@@ -83,12 +86,30 @@ public class Botto {
         }
     }
 
-    private void add(TaskType type, String description) {
-        String[] array = description.split("/", 2);
+    private void add(TaskType type, String next) throws DukeException {
+        String description;
 
-        Task task = type == TaskType.TODO ? new Todo(description)
-                : type == TaskType.DEADLINE ? new Deadline(array[0].substring(0,array[0].length()-1), array[1].substring(3))
-                : new Event(array[0].substring(0,array[0].length()-1), array[1].substring(3));
+        try {
+            description = next.split(" ", 2)[1];
+        } catch (Exception e) {
+            String task = type == TaskType.TODO ? "a todo"
+                    : type == TaskType.DEADLINE? "a deadline"
+                    : "an event";
+            throw new DukeException("☹ OOPS!!! The description of " + task + " cannot be empty.");
+        }
+
+        String[] array = description.split("/", 2);
+        Task task;
+
+        try {
+            task = type == TaskType.TODO ? new Todo(description)
+                    : type == TaskType.DEADLINE ? new Deadline(array[0].substring(0, array[0].length() - 1), array[1].substring(3))
+                    : new Event(array[0].substring(0, array[0].length() - 1), array[1].substring(3));
+        } catch (Exception e) {
+            String message = "☹ OOPS!!! The command is in wrong format.\n" +
+                    indentation + "Please enter in this format: [deadline/event] [title] /[by/at] [date]";
+            throw new DukeException(message);
+        }
 
         this.list.add(task);
         System.out.println(indentation + "Got it! I've added this task:\n"
@@ -96,8 +117,21 @@ public class Botto {
                 + indentation + "Now you have " + this.list.size() + " tasks in the list.");
     }
 
-    private void markAsDone(int index) {
-        Task subject = this.list.get(index);
+    private void markAsDone(String integer) throws DukeException {
+        int index;
+        try {
+            index = Integer.parseInt(integer);
+        } catch (Exception e) {
+            throw new DukeException("☹ OOPS!!! You have to specify the task.");
+        }
+
+        Task subject;
+
+        try {
+            subject = this.list.get(index);
+        } catch (Exception e) {
+            throw new DukeException("☹ OOPS!!! The task does not exist.");
+        }
         subject.markAsDone();
         System.out.println(indentation + "Nice! I've marked this task as done:");
         System.out.println(indentation + "  " + subject);
