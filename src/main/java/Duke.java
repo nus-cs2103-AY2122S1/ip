@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -35,55 +34,46 @@ public class Duke {
         sc.close();
     }
 
-    public static boolean menu(String command) throws Exception {
-        var parameters = command.split(" ");
-        if (command.equals("list")) {
-            printBanner(renderTaskList());
-        } else if (command.equals("bye")) {
+    public static boolean menu(String input) throws Exception {
+        var parameters = input.split(" ");
+        var command = parameters[0];
+        if (command.equals("bye") && parameters.length == 1) {
             printBanner(BYE_MSG.split("\n"));
             return true;
-        } else if (parameters[0].equals("done") && parameters.length == 2) {
+        } else if (command.equals("list") && parameters.length == 1) {
+            printBanner(renderTaskList());
+        } else if (command.equals("done") && parameters.length == 2) {
             int i = Integer.parseInt(parameters[1]) - 1;
-            var task = tasks.get(i);
+            var task = tasks.get(deletedTaskIndex);
             task.toggle(true);
-
             printBanner(new String[] {
                 "Nice! I've marked this task as done:",
                 "  " + renderTask(task)
             });
-        } else if (parameters[0].equals("delete") && parameters.length == 2) {
+        } else if (command.equals("delete") && parameters.length == 2) {
             int i = Integer.parseInt(parameters[1]) - 1;
             var task = tasks.get(i);
             tasks.remove(i);
-
             printBanner(new String[] {
                 "Noted. I've removed this task:",
                 "  " + renderTask(task),
                 String.format("Now you have %d tasks in the list.", tasks.size()),
             });
-        } else if (parameters[0].equals("todo")) {
+        } else if (command.equals("todo")) {
             if (parameters.length == 1) {
                 throw new Exception("The description of a todo cannot be empty.");
             }
-            String description = command.replace("todo ", "");
-            var task = new Todo(description);
-            tasks.add(task);
-            printBanner(renderNewTask(task));
-        } else if (
-            parameters[0].equals("deadline")
-            && parameters.length > 1
-            && Arrays.stream(parameters).anyMatch("/by"::equals)
-        ) {
-            String[] parts = command.replace("deadline ", "").split(" /by ");
+            String description = input.replace("todo\s+", "").strip();
+            var todoTask = new Todo(description);
+            tasks.add(todoTask);
+            printBanner(renderNewTask(todoTask));
+        } else if (command.equals("deadline") && input.contains("/by")) {
+            String[] parts = input.replace("deadline\s+", "").split("\s+/by\s+", 2);
             var task = new Deadline(parts[0], parts[1]);
             tasks.add(task);
             printBanner(renderNewTask(task));
-        } else if (
-            parameters[0].equals("event")
-            && parameters.length > 1
-            && Arrays.stream(parameters).anyMatch("/at"::equals)
-        ) {
-            String[] parts = command.replace("event ", "").split(" /at ");
+        } else if (command.equals("event") && input.contains("/at")) {
+            String[] parts = input.replace("event\s+", "").split("\s+/at\s+", 2);
             var task = new Event(parts[0], parts[1]);
             tasks.add(task);
             printBanner(renderNewTask(task));
