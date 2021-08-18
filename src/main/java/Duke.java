@@ -5,6 +5,7 @@ import exception.DukeUnknownException;
 import task.*;
 import utils.CommandUtils;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 /**
@@ -99,8 +100,8 @@ public class Duke {
                 try {
                     String[] taskDetails = CommandUtils.extractTaskDetails(description, " /by ");
                     String taskName = taskDetails[0];
-                    String byTime = taskDetails[1];
-                    Deadline deadline = new Deadline(taskName, byTime);
+                    LocalDateTime byDateTime = CommandUtils.extractDeadlineDateTime(taskDetails[1]);
+                    Deadline deadline = new Deadline(taskName, byDateTime);
                     taskManager.addTask(deadline);
                     System.out.println(INDENTATION + "Got it. I've added this task:");
                     System.out.println(INDENTATION + "  " + deadline.toString());
@@ -114,8 +115,8 @@ public class Duke {
                 try {
                     String[] taskDetails = CommandUtils.extractTaskDetails(description, " /at ");
                     String taskName = taskDetails[0];
-                    String atTime = taskDetails[1];
-                    Event event = new Event(taskName, atTime);
+                    EventDateTime eventDateTime = CommandUtils.extractEventDatetime(taskDetails[1], " ");
+                    Event event = new Event(taskName, eventDateTime);
                     taskManager.addTask(event);
                     System.out.println(INDENTATION + "Got it. I've added this task:");
                     System.out.println(INDENTATION + "  " + event.toString());

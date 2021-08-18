@@ -1,7 +1,7 @@
 clear
 todo read book
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
+deadline return book /by 2021-06-06 18:00
+event project meeting /at 2021-08-06 14:00 16:00
 todo join sports club
 list
 todo borrow book
@@ -10,9 +10,9 @@ done 1
 list
 done 4
 list
-deadline return book /by Sunday
+deadline return book /by 2021-08-08 10:00
 list
-event project meeting /at Mon 2-4pm
+event project meeting /at 2021-08-20 14:00 16:00
 list
 todo
 blah

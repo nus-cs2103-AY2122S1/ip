@@ -1,5 +1,8 @@
 package task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The is the Deadline class that extends from Task.
  * Deadline task needs to be done before a specific time.
@@ -11,38 +14,52 @@ package task;
 
 public class Deadline extends Task {
     public static final String ID = "D";
-    private final String byTime;
+    private static final String PRINT_DATE_PATTERN = "MMM dd yyyy";
+    private static final String PRINT_TIME_PATTERN = "hh:mm a";
+    private static final String SAVE_DATE_PATTERN = "yyyy-MM-dd";
+    private static final String SAVE_TIME_PATTERN = "HH:mm";
+    private final LocalDateTime byDateTime;
 
     /**
      * This is constructor method of Deadline.
      *
      * @param name   task name
-     * @param byTime a specific time of task that needs to be done before it
+     * @param byDateTime a specific date and time of task that needs to be done before it
      */
-    public Deadline(String name, String byTime) {
+    public Deadline(String name, LocalDateTime byDateTime) {
         super(name);
-        this.byTime = byTime;
+        this.byDateTime = byDateTime;
     }
 
     /**
      * This is constructor method of Deadline.
      *
      * @param name   task name
-     * @param byTime a specific time of task that needs to be done before it
+     * @param byDateTime a specific date and time of task that needs to be done before it
      * @param isDone task status: done or not done
      */
-    public Deadline(String name, String byTime, boolean isDone) {
+    public Deadline(String name, LocalDateTime byDateTime, boolean isDone) {
         super(name, isDone);
-        this.byTime = byTime;
+        this.byDateTime = byDateTime;
     }
 
     /**
-     * Get the specific time of task that needs to be done before it.
+     * Get the specific date and time of task that needs to be done before it.
      *
-     * @return the specific time of task that needs to be done before it
+     * @return the specific date and time of task that needs to be done before it
      */
-    public String getByTime() {
-        return byTime;
+    public LocalDateTime getByDateTime() {
+        return byDateTime;
+    }
+
+    private String formatPrintDateTime() {
+        return byDateTime.format(DateTimeFormatter.ofPattern(PRINT_DATE_PATTERN)) + " " +
+                byDateTime.format(DateTimeFormatter.ofPattern(PRINT_TIME_PATTERN));
+    }
+
+    private String formatSaveDateTime() {
+        return byDateTime.format(DateTimeFormatter.ofPattern(SAVE_DATE_PATTERN)) + " " +
+            byDateTime.format(DateTimeFormatter.ofPattern(SAVE_TIME_PATTERN));
     }
 
     /**
@@ -59,7 +76,7 @@ public class Deadline extends Task {
         } else {
             done = "1";
         }
-        return new String[]{ID, done, super.getName(), getByTime()};
+        return new String[]{ID, done, super.getName(), formatSaveDateTime()};
     }
 
     /**
@@ -69,7 +86,7 @@ public class Deadline extends Task {
      */
     @Override
     public Deadline markAsDone() {
-        return new Deadline(super.getName(), getByTime(), true);
+        return new Deadline(super.getName(), getByDateTime(), true);
     }
 
     /**
@@ -78,6 +95,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[" + ID + "]" + super.toString() + " (by: " + byTime + ")";
+        return "[" + ID + "]" + super.toString() + " (by: " + formatPrintDateTime() + ")";
     }
 }

@@ -3,7 +3,11 @@ package utils;
 import exception.DukeExtractCommandException;
 import exception.DukeTaskNumberOutOfBoundsException;
 import exception.DukeUnknownException;
+import task.EventDateTime;
 import task.Operation;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * The is the CommandUtils class that extracts contents from command.
@@ -120,5 +124,44 @@ public class CommandUtils {
             }
         }
         return details;
+    }
+
+    /**
+     * Extract event date, start time and end time.
+     *
+     * @param  dateTime extracted from description
+     * @param  regex " "
+     * @return date, start time and end time from datetime if they are not empty and can be extracted properly,
+     *         else throw exception
+     * @throws DukeExtractCommandException if dateTime are empty or cannot be extracted properly
+     */
+    public static EventDateTime extractEventDatetime(String dateTime, String regex) throws DukeExtractCommandException {
+        String[] dateAndTimes = dateTime.split(regex, 3);
+        if (dateAndTimes.length != 3) {
+            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The event date and time cannot be extracted properly.");
+        }
+        String atDate = dateAndTimes[0];
+        String startTime = dateAndTimes[1];
+        String endTime = dateAndTimes[2];
+        try {
+            return new EventDateTime(DateTimeUtils.parseDate(atDate), DateTimeUtils.parseTime(startTime), DateTimeUtils.parseTime(endTime));
+        } catch (DateTimeParseException e) {
+            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The event date and time cannot be extracted properly.");
+        }
+    }
+
+    /**
+     * Extract deadline ate and time.
+     *
+     * @param  dateTime extracted from description
+     * @return dateTime format if it can be extracted properly, else throw exception
+     * @throws DukeExtractCommandException if dateTime cannot be extracted properly
+     */
+    public static LocalDateTime extractDeadlineDateTime(String dateTime) throws DukeExtractCommandException {
+        try {
+            return DateTimeUtils.parseDateTime(dateTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The deadline date and time cannot be extracted properly.");
+        }
     }
 }

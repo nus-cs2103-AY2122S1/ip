@@ -2,6 +2,7 @@ package task;
 
 import exception.DukeIOException;
 import exception.DukeTaskNumberOutOfBoundsException;
+import utils.DateTimeUtils;
 import utils.FileUtils;
 
 import java.util.ArrayList;
@@ -127,12 +128,18 @@ public class TaskManager {
                         break;
                     case Deadline.ID:
                         String byTime = contents[3];
-                        Deadline deadline = new Deadline(name, byTime, isDone.equals("0"));
+                        Deadline deadline = new Deadline(name, DateTimeUtils.parseDateTime(byTime), isDone.equals("0"));
                         addTask(deadline);
                         break;
                     case Event.ID:
                         String atTime = contents[3];
-                        Event event = new Event(name, atTime, isDone.equals("0"));
+                        String[] dateTimes = atTime.split(" ", 2);
+                        String[] times = dateTimes[1].split("-", 2);
+                        String atDate = dateTimes[0];
+                        String startTime = times[0];
+                        String endTime = times[1];
+                        EventDateTime eventDateTime = new EventDateTime(DateTimeUtils.parseDate(atDate), DateTimeUtils.parseTime(startTime), DateTimeUtils.parseTime(endTime));
+                        Event event = new Event(name, eventDateTime, isDone.equals("0"));
                         addTask(event);
                         break;
                 }
