@@ -11,15 +11,17 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    private final static DukeChatBot DUKE_BOT = new DukeChatBot();
+
     private final static TaskManager TASK_MANAGER = new TaskManager();
 
     public static void main(String[] args) {
-        Echoer.print("Hello from\n" + LOGO);
-        Echoer.info("Hello! I'm Duke.\n\tWhat can I do for you?");
+        DUKE_BOT.print("Hello from\n" + LOGO);
+        DUKE_BOT.info("Hello! I'm Duke.\n\tWhat can I do for you?");
 
         run();
 
-        Echoer.info("Bye. Hope to see you again soon!");
+        DUKE_BOT.info("Bye. Hope to see you again soon!");
     }
 
     public static void run() {
@@ -35,17 +37,17 @@ public class Duke {
     public static void makeDecision(String userInput) {
         try {
             if (userInput.equals("list")) {
-                Echoer.list(TASK_MANAGER.listTasks());
+                DUKE_BOT.list(TASK_MANAGER.listTasks());
 
             } else if (userInput.startsWith("done")) {
                 String taskNumberString = userInput.substring(4).trim();
                 Task completedTask = TASK_MANAGER.markTaskAsDone(taskNumberString);
-                Echoer.info("Nice! I've marked this task as done:\n\t  " + completedTask);
+                DUKE_BOT.info("Nice! I've marked this task as done:\n\t  " + completedTask);
 
             } else if (userInput.startsWith("delete")) {
                 String taskNumberString = userInput.substring(6).trim();
                 Task deletedTask = TASK_MANAGER.deleteTask(taskNumberString);
-                Echoer.info("Noted. I've removed this task:\n\t  " + deletedTask +
+                DUKE_BOT.info("Noted. I've removed this task:\n\t  " + deletedTask +
                         "\n\tNow you have " + TASK_MANAGER.getTaskListSize() +
                         " tasks in the list.");
 
@@ -59,16 +61,16 @@ public class Duke {
                 echoTaskCreation(TASK_MANAGER.addDeadlineTask(userInput.substring(8)));
 
             } else {
-                Echoer.error("Please ensure instruction follows specified format.");
+                DUKE_BOT.error("Please ensure instruction follows specified format.");
             }
 
         } catch (TaskManagerException exception) {
-            Echoer.error(exception.getLocalizedMessage());
+            DUKE_BOT.error(exception.getLocalizedMessage());
         }
     }
 
     public static void echoTaskCreation(Task task) {
-        Echoer.info("Got it. I've added this task:\n\t  " + task + "\n\tNow you have " +
+        DUKE_BOT.info("Got it. I've added this task:\n\t  " + task + "\n\tNow you have " +
                 TASK_MANAGER.getTaskListSize() + " tasks in the list.");
     }
 }

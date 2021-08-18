@@ -1,17 +1,17 @@
 import java.util.List;
 
-public class Echoer {
+public class DukeChatBot {
 
     private final static String LINE_SPLIT =
             "___________________________________________________________________________";
 
-    public static void info(String message) {
+    public void info(String message) {
         System.out.println(LINE_SPLIT);
         System.out.println('\t' + message);
         System.out.println(LINE_SPLIT + '\n');
     }
 
-    public static void list(List<String> messageList) {
+    public void list(List<String> messageList) {
         System.out.println(LINE_SPLIT);
         for (String message: messageList) {
             System.out.println('\t' + message);
@@ -19,11 +19,11 @@ public class Echoer {
         System.out.println(LINE_SPLIT + '\n');
     }
 
-    public static void print(String string) {
+    public void print(String string) {
         System.out.println(string);
     }
 
-    public static void error(String errorMessage) {
+    public void error(String errorMessage) {
         info("☹ Error: " + errorMessage);
     }
 }
