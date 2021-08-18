@@ -1,6 +1,23 @@
 import java.util.Scanner;
 
-public class Duke {
+public class Lania {
+
+    /** String array containing user inputs */
+    private static String[] strArray = new String[100];
+    /** Keep track of number of user inputs */
+    private static int count = 0;
+
+    /**
+     * Store user input in array and show that it is added.
+     *
+     * @param s String provided by the user.
+     */
+    public static void update(String s) {
+        strArray[count] = s;
+        count++;
+        System.out.print("added: ");
+        echo(s);
+    }
 
     /**
      * Prints the user input.
@@ -22,7 +39,7 @@ public class Duke {
         Scanner s = new Scanner(System.in);
         String input = s.nextLine();
         while(!input.equals("bye")) {
-            echo(input);
+            update(input);
             input = s.nextLine();
         }
         System.out.println("Bye. Lania looks forward to seeing you again!");
