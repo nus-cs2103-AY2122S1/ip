@@ -6,6 +6,13 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public static Deadline splitDeadline(String input) {
+        String[] partsOfDeadline = input.split("/by ");
+        String deadlineContent = partsOfDeadline[0].substring(9);
+        String by = partsOfDeadline[1];
+        return new Deadline(deadlineContent, by);
+    }
+
     @Override
     public String toString() {
         return "[D]"

@@ -1,15 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
+public class Duke{
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
-
         String welcomeString = "____________________________________________________________\n"
                 + "Yo! Duke here...on behalf of Yang Yuzhao.\n"
                 + "What do ya want from me?\n"
@@ -59,31 +52,55 @@ public class Duke {
             }
 
             // add task
-            if (nextLine.startsWith("todo")) {
-                task = new ToDo(nextLine.substring(5));
-            } else if (nextLine.startsWith("deadline")) {
-                String[] splitDeadline = nextLine.split("/by ");
-                String deadlineContent = splitDeadline[0].substring(9);
-                String by = splitDeadline[1];
-                task = new Deadline(deadlineContent, by);
-            } else {
-                String[] splitEvent = nextLine.split("/at ");
-                String deadlineContent = splitEvent[0].substring(6);
-                String at = splitEvent[1];
-                task = new Event(deadlineContent, at);
+            try {
+                if (nextLine.startsWith("todo")) {
+                    Task.isFirstWordValid(nextLine, "todo");
+                    if (Task.isDescriptionEmpty(nextLine)) {
+                        throw new DukeException("todo", DukeException.ErrorType.EMPTY_DESCRIPTION);
+                    }
+                    task = new ToDo(nextLine.substring(5));
+                } else if (nextLine.startsWith("deadline")) {
+                    Task.isFirstWordValid(nextLine, "deadline");
+                    if (Task.isDescriptionEmpty(nextLine)) {
+                        throw new DukeException("deadline", DukeException.ErrorType.EMPTY_DESCRIPTION);
+                    }
+                    task = Deadline.splitDeadline(nextLine);
+                } else {
+                    Task.isFirstWordValid(nextLine, "event");
+                    if (Task.isDescriptionEmpty(nextLine)) {
+                        throw new DukeException("event", DukeException.ErrorType.EMPTY_DESCRIPTION);
+                    }
+                    task = Event.splitEvent(nextLine);
+                }
+                storeRoom.add(task);
+                System.out.println("____________________________________________________________\n"
+                        + "Got it. I've added this task:\n  "
+                        + task
+                        + "\n"
+                        + "Now you have "
+                        + storeRoom.size()
+                        + " tasks in the list."
+                        + "\n"
+                        + "____________________________________________________________\n");
+                nextLine = in.nextLine();
+            } catch (DukeException dukeException){
+                if (dukeException.errorType.equals(DukeException.ErrorType.EMPTY_DESCRIPTION)){
+                    System.out.println("____________________________________________________________\n"
+                            + "OOPS!!! The description of a "
+                            + dukeException.getMessage()
+                            + " cannot be empty.\n"
+                            + "____________________________________________________________\n");
+                    nextLine = in.nextLine();
+                    continue;
+                }
+                if (dukeException.errorType.equals(DukeException.ErrorType.INVALID_INPUT)){
+                    System.out.println("____________________________________________________________\n"
+                            + "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                            + "____________________________________________________________\n");
+                    nextLine = in.nextLine();
+                    continue;
+                }
             }
-
-            storeRoom.add(task);
-            System.out.println("____________________________________________________________\n"
-                    + "Got it. I've added this task:\n  "
-                    + task
-                    + "\n"
-                    + "Now you have "
-                    + storeRoom.size()
-                    + " tasks in the list."
-                    + "\n"
-                    + "____________________________________________________________\n");
-            nextLine = in.nextLine();
         }
 
         // bye

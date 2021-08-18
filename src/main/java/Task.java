@@ -7,21 +7,24 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]"); // mark done task with X
     }
 
     public void doneTask() {
         this.isDone = true;
+    }
+
+    public static void isFirstWordValid(String input, String expectedTaskName) throws DukeException {
+        String firstWord = input.split(" ", 2)[0];
+        if (!firstWord.equals(expectedTaskName)) {
+            throw new DukeException(firstWord, DukeException.ErrorType.INVALID_INPUT);
+        }
+    }
+
+    public static boolean isDescriptionEmpty(String input) {
+        String removedSpace = input.replaceAll("\\s", "");
+        return removedSpace.equals(input);
     }
 
     @Override
