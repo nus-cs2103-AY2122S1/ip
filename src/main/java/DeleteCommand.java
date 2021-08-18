@@ -1,5 +1,5 @@
 public class DeleteCommand extends Command{
-    private int index;
+    private final int index;
 
     public DeleteCommand (int index) {
         this.index = index;
@@ -9,6 +9,5 @@ public class DeleteCommand extends Command{
     public void execute(TaskList tasklist, Ui ui, Storage store) {
         Task removed = tasklist.delete(index);
         ui.notifySuccessfulDelete(tasklist, removed);
-        return;
     }
 }

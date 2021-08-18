@@ -52,4 +52,8 @@ public class Ui {
     public void showLoadingError() {
         System.out.println("An error occurred while loading in the saved data...");
     }
+
+    public void closing() {
+        System.out.println("Have a Merry Christmas and a Happy New Year!");
+    }
 }

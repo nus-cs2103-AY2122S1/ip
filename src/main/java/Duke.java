@@ -1,9 +1,5 @@
 import java.util.Scanner;
 
-//automated testing script closes super fast; still have to manually run the final FC command in terminal
-//managed to fix the issue with FC not being found however. Git push issues also fixed.
-
-//most obvious uncaught exceptions are incorrect delete/done commands. fix in the future.
 public class Duke {
     private static TaskList tasklist = new TaskList();
     private static Ui ui;
@@ -27,6 +23,7 @@ public class Duke {
                 e.printStackTrace();
             }
         }
+        ui.closing();
     }
 
     public static void main(String[] args) {

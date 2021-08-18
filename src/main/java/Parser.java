@@ -1,4 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public abstract class Parser {
+    private static void checkDescription(String in) throws DukeException {
+        if (in.equals("")) {
+            throw new DukeException("Command has empty description");
+        }
+    }
+
     public static Command parse(String in) throws DukeException {
         if (in.equals("list")) {
             return new ListCommand();
@@ -16,19 +25,31 @@ public abstract class Parser {
             if (in.startsWith("todo")) {
                 in = in.replaceFirst("todo", "");
                 type = "todo";
-            } else if (in.startsWith("deadline")) {
-                in = in.replaceFirst("deadline", "");
-                type = "deadline";
+                checkDescription(in);
+                return new AddCommand(type, in);
+
             } else {
-                in = in.replaceFirst("event", "");
-                type = "event";
-            }
+                if (in.startsWith("deadline")) {
+                    in = in.replaceFirst("deadline", "");
+                    type = "deadline";
+                } else {
+                    in = in.replaceFirst("event", "");
+                    type = "event";
+                }
 
-            if (in.equals("")) {
-                throw new DukeException("Command has empty description");
+                try {
+                    String[] arr = in.split("/", 2);
+                    LocalDate date = LocalDate.parse(arr[1].substring(3));
+                    String label = arr[0];
+                    checkDescription(label);
+                    return new AddCommand(type, label, date);
+                } catch (IndexOutOfBoundsException e) {
+                    //if '/' doesn't split, command was wrong
+                    throw new DukeException("Command had an invalid format");
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("Your date had an invalid format");
+                }
             }
-            return new AddCommand(type, in);
-
         } else if (in.startsWith("delete")) {
             try {
                 String[] temp = in.split(" ");
@@ -41,7 +62,7 @@ public abstract class Parser {
         } else if (in.equals("bye")) {
             return new DoneCommand();
         } else {
-            return new InvalidCommand(); //temporary nonsense
+            return new InvalidCommand();
         }
         return new InvalidCommand();
     }
