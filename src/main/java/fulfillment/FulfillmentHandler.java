@@ -2,10 +2,7 @@ package fulfillment;
 
 import io.InputHandler;
 import io.OutputHandler;
-import messages.Message;
-import messages.MessageConstants;
-import messages.TaskAddMessage;
-import messages.TaskListMessage;
+import messages.*;
 import tasks.Task;
 
 import java.io.IOException;
@@ -48,11 +45,11 @@ public class FulfillmentHandler {
     }
 
     private void handleGreeting() {
-        outputHandler.writeMessage(new Message(MessageConstants.GREETING_MESSAGE));
+        outputHandler.writeMessage(new GreetingMessage());
     }
 
     private void handleBye() {
-        outputHandler.writeMessage(new Message(MessageConstants.BYE_MESSAGE));
+        outputHandler.writeMessage(new ByeMessage());
     }
 
     private void handleTaskList() {
