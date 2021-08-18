@@ -7,7 +7,8 @@
 
 public class DukeList {
     /** The array which stores the messages by the user.*/
-    private String[] itemList;
+    private Task[] itemList;
+    /** The number of elements in the itemList.*/
     private int size;
 
     /**
@@ -15,7 +16,7 @@ public class DukeList {
      */
     public DukeList()
     {
-        itemList = new String[100];
+        itemList = new Task[100];
         size = 0;
     }
 
@@ -25,7 +26,7 @@ public class DukeList {
      */
     public void Add(String input)
     {
-        itemList[size++] = input;
+        itemList[size++] = new Task(input);
     }
 
     /**
@@ -40,5 +41,29 @@ public class DukeList {
             printed += String.format("%d. " + itemList[i] + (i == size - 1 ? "" : "\n"), i + 1);
         }
         return printed;
+    }
+
+    /**
+     * Checks if the item number is within range of the list's items
+     * @param listNumber the item number (not array index) to be checked
+     * @return boolean of whether the number is within the list's range
+     */
+    public boolean WithinRange(int listNumber)
+    {
+        return 0 < listNumber && listNumber <= size;
+    }
+
+    /**
+     * Returns the item at the list number
+     * @param listNumber the item number whose item is to be returned
+     * @return the item at the list number
+     * @throws IllegalArgumentException only accepts integers whose values are within range of the array
+     */
+    public Task GetTask(int listNumber) throws IllegalArgumentException
+    {
+        if (WithinRange(listNumber))
+            return itemList[listNumber - 1]; // -1 due to difference between item list number and array indexes
+        else
+            throw new IllegalArgumentException("Task index is not within range."); // Not within range
     }
 }

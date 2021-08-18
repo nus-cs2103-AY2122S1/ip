@@ -26,7 +26,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String name = "Duchess";
         PrettyPrint("Good day. I am " + name + "\nWhat can I do for you?");
-        duchess.AwaitInput(sc);
+        duchess.HandleInput(sc);
     }
 
     /**
@@ -42,22 +42,53 @@ public class Duke {
      * Gets input from user and PrettyPrints the corresponding response
      * @param sc scanner to be reused
      */
-    public void AwaitInput(Scanner sc)
+    public void HandleInput(Scanner sc)
     {
-        String output = sc.nextLine();
-        switch (output) {
-            case "bye":
-                PrettyPrint("I bid thee farewell.");
-                break;
-            case "list":
-                PrettyPrint(dukeList.PrintList());
-                break;
-            default:
-                PrettyPrint("added: " + output);
-                dukeList.Add(output);
-                break;
+        String input = sc.nextLine();
+        if (input.equals("bye")) {
+            PrettyPrint("I bid thee farewell.");
+            return;
         }
-        if (!output.equals("bye"))
-            AwaitInput(sc);
+        else if (input.equals("list"))
+            PrettyPrint(dukeList.PrintList());
+        else if (input.contains(" ")) {
+            // Done may be called
+            String[] parts = input.split(" ");
+            String checkDone = parts[0];
+            String index = parts[1];
+            if (!checkDone.equals("done"))
+                Echo(input);
+            else {
+                // Parsing a non-numeric string will throw a NumberFormatException
+                try {
+                    if (dukeList.WithinRange(Integer.parseInt(index))) {
+                        // Valid done task
+                        Task task = dukeList.GetTask(Integer.parseInt(index));
+                        task.SetDone(true);
+                        PrettyPrint("Nice! I've marked this task as done:   \n  " + task);
+                    } else {
+                        // "done" followed by an integer outside of range of the list
+                        PrettyPrint("Apologies, that task does not exist and cannot be marked as done.");
+                    }
+                } catch (NumberFormatException e) {
+                    // "done" followed by an invalid non-integer string input
+                    PrettyPrint("The command \"done\" should be followed by an integer.");
+                }
+            }
+        }
+        else
+            Echo(input);
+
+        // Continue to read for inputs unless "bye" is called
+        HandleInput(sc);
+    }
+
+    /**
+     * Echoes the user's input
+     * @param input the input from the user
+     */
+    public void Echo(String input) {
+        PrettyPrint("added: " + input);
+        dukeList.Add(input);
     }
 }
