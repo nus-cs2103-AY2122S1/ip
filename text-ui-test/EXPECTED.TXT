@@ -5,3 +5,75 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Give me something to do!
+===========================================
+
+
+///<<<============ Duke Says: ===========>>>\\\
+Ok, I have added this task:
+[T][ ] Read Book
+Current total amount of tasks in list: 1
+\\\<<<===================================>>>///
+
+
+///<<<============ Duke Says: ===========>>>\\\
+Ok, I have added this task:
+[T][ ] item number 2
+Current total amount of tasks in list: 2
+\\\<<<===================================>>>///
+
+
+///<<<============ Duke Says: ===========>>>\\\
+Ok, I have added this task:
+[E][ ] go there (at: 2 min)
+Current total amount of tasks in list: 3
+\\\<<<===================================>>>///
+
+
+///<<<============ Duke Says: ===========>>>\\\
+Nice! I've marked this task as done:
+[E][X] go there (at: 2 min)
+\\\<<<===================================>>>///
+
+
+///<<<============ Duke Says: ===========>>>\\\
+Here are your current tasks:
+1. [T][ ] Read Book
+2. [T][ ] item number 2
+3. [E][X] go there (at: 2 min)
+\\\<<<===================================>>>///
+
+
+///<<<============ Duke Says: ===========>>>\\\
+Ok, I have added this task:
+[D][ ] finish Week 2 Tasks (by: Thursday)
+Current total amount of tasks in list: 4
+\\\<<<===================================>>>///
+
+
+///<<<============ Duke Says: ===========>>>\\\
+Nice! I've marked this task as done:
+[T][X] item number 2
+\\\<<<===================================>>>///
+
+
+///<<<============ Duke Says: ===========>>>\\\
+Ok, I have added this task:
+[T][ ] Task Number 5
+Current total amount of tasks in list: 5
+\\\<<<===================================>>>///
+
+
+///<<<============ Duke Says: ===========>>>\\\
+Here are your current tasks:
+1. [T][ ] Read Book
+2. [T][X] item number 2
+3. [E][X] go there (at: 2 min)
+4. [D][ ] finish Week 2 Tasks (by: Thursday)
+5. [T][ ] Task Number 5
+\\\<<<===================================>>>///
+
+
+///<<<============ Duke Says: ===========>>>\\\
+Bye. Hope to see you soon!
+\\\<<<===================================>>>///

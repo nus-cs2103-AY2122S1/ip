@@ -1,0 +1,10 @@
+todo Read Book
+todo item number 2
+event go there /at 2 min
+done 3
+list
+deadline finish Week 2 Tasks /by Thursday
+done 2
+todo Task Number 5
+list
+bye
