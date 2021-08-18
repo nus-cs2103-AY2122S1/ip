@@ -6,6 +6,9 @@ public class Duke {
         this.command = command;
     }
 
+    /**
+     * Method to echo the commands entered by the user, and exits when the command is "bye"
+     */
     public void commanding() {
         Scanner scan = new Scanner(System.in);
         String s = scan.nextLine();
