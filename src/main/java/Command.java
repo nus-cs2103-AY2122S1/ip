@@ -4,8 +4,11 @@ public class Command {
 
     public Command(String unparsedCommand) {
         String unparsedCommandWithoutTime;
-
-        if (unparsedCommand.contains("/at ") || unparsedCommand.contains("/by ")) {
+        String[] parsedCommandTemp = unparsedCommand.split(" ", 2);
+        boolean isAddCommandType = parsedCommandTemp[0].equals(Saber.InputCommand.add.name());
+        boolean isTodoCommandType = parsedCommandTemp[0].equals(Saber.InputCommand.todo.name());
+        boolean hasTime = unparsedCommand.contains("/at ") || unparsedCommand.contains("/by ");
+        if (hasTime && !isAddCommandType && !isTodoCommandType) {
             int slashIndex = unparsedCommand.indexOf("/at ");
             if (slashIndex == -1) {
                 slashIndex = unparsedCommand.indexOf("/by ");
