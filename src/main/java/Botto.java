@@ -1,8 +1,12 @@
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Botto {
     final String bot = "Botto";
-    final String indentation = "    ";
+    final String indentation = "   ";
+
+    private List<String> list = new LinkedList<>();
 
     public static void main(String[] args) {
         Botto botto = new Botto();
@@ -17,7 +21,14 @@ public class Botto {
         while(!next.equals("bye")) {
             System.out.println(next);
             botto.printDivider();
-            botto.echo(next);
+            switch (next) {
+                case ("list"):
+                    botto.printList();
+                    break;
+                default:
+                    botto.add(next);
+                    break;
+            }
             botto.printDivider();
             next = scanner.nextLine();
         }
@@ -29,16 +40,25 @@ public class Botto {
     }
 
     private void printDivider() {
-        System.out.println(indentation + "------------------------------------------");
+        System.out.println(indentation + "------------------------------");
     }
 
     private void greet() {
-        String greet = "Hello! I'm " + bot + "\n" + indentation + "What can I do for you?";
+        String greet = "Hello! I'm " + bot + "\n"
+                + indentation + "What can I do for you?";
+
         System.out.println(indentation + greet);
     }
 
-    private void echo(String command) {
-        System.out.println(indentation + command);
+    private void printList() {
+        for(int i = 0; i < this.list.size(); i ++) {
+            System.out.println(indentation + (i + 1) + ": " + this.list.get(i));
+        }
+    }
+
+    private void add(String task) {
+        this.list.add(task);
+        System.out.println(indentation + "added: " + task);
     }
 
     private void bye() {
