@@ -2,7 +2,7 @@
  * The Task class encapsulates all the details of each task.
  */
 public class Task {
-    String message;
+    private String message;
 
     public Task(String message) {
         this.message = message;
