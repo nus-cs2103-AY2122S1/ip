@@ -70,22 +70,22 @@ public class TaskManager {
         return new String[] {description, split};
     }
 
-    public Task markTaskAsDone(String taskNumberAsString) throws TaskManagerException {
+    public Task markTaskAsDone(String taskNumberString) throws TaskManagerException {
         if (TASK_LIST.isEmpty()) {
             throw new TaskManagerException("List is empty.");
         }
 
         int taskNumber;
         try {
-            taskNumber = Integer.parseInt(taskNumberAsString);
+            taskNumber = Integer.parseInt(taskNumberString);
             if (taskNumber < 0 || TASK_LIST.size() < taskNumber) {
                 throw new IllegalArgumentException();
             }
         } catch (NumberFormatException exception) {
-            throw new TaskManagerException("'" + taskNumberAsString + "' is not an integer.");
+            throw new TaskManagerException("'" + taskNumberString + "' is not an integer.");
 
         } catch (IllegalArgumentException exception) {
-            throw new TaskManagerException("Task number '" + taskNumberAsString + "' doesn't exist.");
+            throw new TaskManagerException("Task number '" + taskNumberString + "' is invalid.");
         }
 
         Task selectedTask = TASK_LIST.get(taskNumber - 1); // shift to 0-indexing
