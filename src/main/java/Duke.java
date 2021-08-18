@@ -8,7 +8,7 @@ public class Duke {
                 "What can i do for you?";
         System.out.println(introMessage);
         Scanner scanner = new Scanner(System.in);
-        List<String> userList = new ArrayList<String>();
+        List<Task> tasks = new ArrayList<>();
         while (true) {
             String userInput = scanner.nextLine();
             if (userInput.equals("bye")) {
@@ -16,12 +16,19 @@ public class Duke {
                 break;
             } else if (userInput.equals("list")) {
                 int counter = 1;
-                for (String text : userList) {
-                    System.out.println(counter + ". " + text);
+                for (Task task : tasks) {
+                    System.out.println(counter + ".[" + task.getStatusIcon() + "] " + task.title);
                     counter++;
                 }
+            } else if (userInput.startsWith("done")) {
+                int index = Integer.parseInt(userInput.substring(5)) - 1;
+                tasks.get(index).maskAsDone();
+                Task task = tasks.get(index);
+                String doneMessage = "Nice! I've marked this task as done:\n" +
+                        "  [" + task.getStatusIcon() + "] " + task.title;
+                System.out.println(doneMessage);
             } else {
-                userList.add(userInput);
+                tasks.add(new Task(userInput));
                 System.out.println("added: " + userInput);
             }
         }
