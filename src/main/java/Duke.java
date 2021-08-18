@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    /**
-     * Declares the string that exits the program.
-     */
-    private static String exitString = "bye";
-    private static String exitMessage = "Bye. Hope to see you again soon!";
-    private static String introMessage = "Hello! I'm Duke\nWhat can I do for you?";
-    private static ArrayList<String> tasks = new ArrayList<>();
+    private static final String exitString = "bye";
+    private static final String exitMessage = "Bye. Hope to see you again soon!";
+    private static final String introMessage = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String doneString = "done";
+    private static final String doneMessage = "Nice! I've marked this task as done:\n";
+    private static final String doneOutsideOfList = "Oops, you do not have such a task!";
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -33,37 +33,64 @@ public class Duke {
             }
 
             // Reacts to userInput.
-            react(userInput);
+            System.out.println(formatMessage(react(userInput)));
         }
     }
 
     /**
      * Takes in the user input and reacts accordingly to specification.
      * @param userInput the user input string.
+     * @return string of reaction.
      */
-    private static void react(String userInput) {
+    private static String react(String userInput) {
+        String[] split = userInput.split(" ");
+        if (split.length == 2 && split[0].equals(doneString) && isInteger(split[1])) {
+            int index = Integer.parseInt(split[1]) - 1;
+            if (index < tasks.size()) {
+                Task task = tasks.get(index);
+                task.markAsDone();
+                return doneMessage + task.toString();
+            }
+            return doneOutsideOfList;
+        }
+
         switch (userInput) {
             case ("list"):
-                printTaskList();
-                break;
+                return getTaskListString();
             default:
-                tasks.add(userInput);
-                System.out.println(formatMessage("added: " + userInput));
+                Task task = new Task(userInput);
+                tasks.add(task);
+                return "added: " + userInput;
         }
     }
 
     /**
-     * Method to print the list of items in the tasks array list.
+     * Utility function to test whether input string is an integer.
+     * @param input input String.
+     * @return returns true if input string can be parsed as an integer, else false.
      */
-    private static void printTaskList() {
+    private static Boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Method to get the string of the tasks list.
+     * @return string with the list of tasks.
+     */
+    private static String getTaskListString() {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            output.append(i+1).append(". ").append(tasks.get(i));
+            output.append(i+1).append(". ").append(tasks.get(i).toString());
             if (i != tasks.size() - 1) {
                 output.append("\n");
             }
         }
-        System.out.println(formatMessage(output.toString()));
+        return output.toString();
     }
 
     /**
