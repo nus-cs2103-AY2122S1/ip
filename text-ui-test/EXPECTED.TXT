@@ -80,5 +80,23 @@ Hello from
     OOPS!!! The description of a deadline cannot be empty.
   -----------------------
   -----------------------
+    Got it. I've removed this task:
+    [T][ ] borrow book
+    Now you have 4 tasks in the list.
+  -----------------------
+  -----------------------
+    OOPS!!! A number must be given to specified the task.
+  -----------------------
+  -----------------------
+    OOPS!!! Task number: 10 does not exist.
+  -----------------------
+  -----------------------
+    Here are the tasks in your list:
+    1. [T][X] read book
+    2. [E][ ] project meeting (at: Mon 2 - 4 pm)
+    3. [D][ ] return book (by: Aug 20)
+    4. [D][X] do homework (by: no idea :-p)
+  -----------------------
+  -----------------------
     Bye. Hope to see you again soon!
   -----------------------

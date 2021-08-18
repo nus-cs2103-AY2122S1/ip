@@ -35,6 +35,18 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    public static void showRemoveTaskMessage(Task task, int size) {
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println(INDENTATION + "Got it. I've removed this task:");
+        System.out.println(INDENTATION + task.toString());
+        if (size > 1) {
+            System.out.println(INDENTATION + "Now you have " + size + " tasks in the list.");
+        } else {
+            System.out.println(INDENTATION + "Now you have " + size + " task in the list.");
+        }
+        System.out.println(HORIZONTAL_LINE);
+    }
+
     public static void bye() {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
@@ -108,6 +120,16 @@ public class Duke {
                         taskManagement.addTask(temp);
                         showAddTaskMessage(temp, taskManagement.getSize());
                         break;
+                    }
+                    case "delete": {
+                        try {
+                            int taskNumber = Integer.parseInt(rest);
+                            Task temp = taskManagement.removeTask(taskNumber - 1);
+                            showRemoveTaskMessage(temp, taskManagement.getSize());
+                            break;
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("A number must be given to specified the task.");
+                        }
                     }
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");

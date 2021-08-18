@@ -12,6 +12,13 @@ public class TaskManagement {
         this.tasks.add(task);
     }
 
+    public Task removeTask(int index) {
+        if (index < 0 || index >= tasks.size()) {
+            throw new DukeException("Task number: " + (index + 1) + " does not exist.");
+        }
+        return this.tasks.remove(index);
+    }
+
     public ArrayList<Task> getTasks() {
         ArrayList<Task> result = new ArrayList<>(this.tasks);
         return result;
