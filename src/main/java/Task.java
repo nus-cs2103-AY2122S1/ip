@@ -20,6 +20,8 @@ public class Task {
     }
 
     public String toString() {
-        return this.description;
+        String doneSymbol = this.done ? "[X]" : "[ ]";
+
+        return doneSymbol + " " + this.description;
     }
 }

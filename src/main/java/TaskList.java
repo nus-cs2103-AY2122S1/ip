@@ -25,9 +25,7 @@ public class TaskList {
         for (int i = 0; i < this.taskList.size(); i++) {
             Task task = taskList.get(i);
 
-            String doneSymbol = task.isDone() ? "[X]" : "[ ]";
-
-            s += (i + 1) + ". " + doneSymbol + " " + task + "\n";
+            s += (i + 1) + ". " + task + "\n";
         }
 
         return s;

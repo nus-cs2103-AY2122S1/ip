@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,7 +10,7 @@ public class Duke {
     public void addTodo(String description) {
         Task task = new Task(description);
         this.taskList.addTask(task);
-        this.echo("Added -- " + task + " -- to task list.");
+        this.echo("Added -- " + description + " -- to task list.");
     }
 
     public void printList() {
