@@ -47,41 +47,44 @@ public class Duke {
     }
 
     /**
+     * Given the appropriate processor, process the command and print the result.
+     *
+     * @param processor The processor provided.
+     */
+    private void processCommand(Processor processor) {
+        this.processor = processor;
+        this.processor.process();
+        System.out.println(this.processor);
+    }
+
+    /**
      * Based on the command received, either quit the program or process an event.
      */
     private void readCommand() {
         // Read the command.
         Scanner input = new Scanner(System.in);
-        String command = input.nextLine();
+        String command = input.nextLine().trim();
         if (command.equals("bye")) {
             // Print exiting message and end the program.
             System.out.println(Duke.EXITING_MESSAGE);
             this.isRunning = false;
         } else if (command.equals("list")) {
             // List all added tasks.
-            this.processor = new GetListProcessor();
-            this.processor.process();
-            System.out.println(this.processor);
+            processCommand(new GetListProcessor());
         } else {
             String[] splitted = command.split(" ");
             if (splitted.length == 2 && splitted[0].equals("done")) {
                 try {
                     // Finish a task, mark it as done.
                     int index = Integer.parseInt(splitted[1]) - 1;
-                    this.processor = new TaskDoneProcessor(Duke.tasks[index]);
-                    this.processor.process();
-                    System.out.println(this.processor);
+                    processCommand(new TaskDoneProcessor(Duke.tasks[index]));
                 } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException e) {
                     // Add the task to list and print the action.
-                    this.processor = new AddATaskProcessor(command);
-                    this.processor.process();
-                    System.out.println(this.processor);
+                    processCommand(new AddATaskProcessor(command));
                 }
             } else {
                 // Add the task to list and print the action.
-                this.processor = new AddATaskProcessor(command);
-                this.processor.process();
-                System.out.println(this.processor);
+                processCommand(new AddATaskProcessor(command));
             }
         }
     }
