@@ -2,7 +2,30 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static void printline() {
+    public static class Task {
+        protected String description;
+        protected boolean isDone;
+
+        public Task(String description) {
+            this.description = description;
+            this.isDone = false;
+        }
+
+        public String getStatusIcon() {
+            return (isDone ? "X" : " "); // mark done task with X
+        }
+
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("[" + getStatusIcon() + "]" + " " + description);
+            return sb.toString();
+        }
+
+        public void markAsDone() {
+            this.isDone = true;
+        }
+    }
+    private static void printLine() {
 //        printPadding();
         for (int i = 0; i < 20; i++) {
             System.out.print("-");
@@ -18,11 +41,11 @@ public class Duke {
 
     private static void printStatement(String statement) {
         System.out.println();
-        printline();
+        printLine();
 //        printPadding();
         System.out.println(statement);
         System.out.println();
-        printline();
+        printLine();
         System.out.println();
     }
     public static void main(String[] args) {
@@ -35,18 +58,26 @@ public class Duke {
         printStatement("你好! 我是杜克\n能为您做什么吗？\n");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        ArrayList<String> arrayList = new ArrayList<>(100);
+        ArrayList<Task> arrayList = new ArrayList<>(100);
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 int counter = 1;
                 StringBuilder sb = new StringBuilder();
-                for (String item:arrayList) {
-                    sb.append(String.valueOf(counter) + ". " + item + "\n");
+                sb.append("这是您的菜单：\n");
+                for (Task item:arrayList) {
+                    sb.append(String.valueOf(counter) + ". " + item.toString() + "\n");
                     counter++;
                 }
                 printStatement(sb.toString());
+            } else if (input.contains("done")) {
+                int number = Integer.valueOf(input.split(" ")[1]) - 1;
+                Task task = arrayList.get(number);
+                task.markAsDone();
+                printStatement("Nice! 我帮你记下了：\n" + task);
+
             } else {
-                arrayList.add(input);
+                Task newTask = new Task(input);
+                arrayList.add(newTask);
                 printStatement("added: " + input);
             }
             input = sc.nextLine();
