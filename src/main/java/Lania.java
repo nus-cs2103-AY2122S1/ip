@@ -16,7 +16,7 @@ public class Lania {
         Task t = new Task(s);
         taskArray[count] = t;
         count++;
-        System.out.print("added: ");
+        System.out.print("Lania has added: ");
         echo(s);
     }
 
@@ -29,6 +29,18 @@ public class Lania {
         for (int i = 0; i < count; i++) {
             System.out.println(i + 1 + ".[" + taskArray[i].getStatusIcon() + "] " + taskArray[i].description);
         }
+    }
+
+    /**
+     * Completes given task number.
+     *
+     * @param i The task number to be completed.
+     */
+    public static void complete(int i) {
+        i--;
+        taskArray[i].markAsDone();
+        System.out.println("Good job! Lania has marked this task as done:");
+        System.out.println("[" + taskArray[i].getStatusIcon() + "] " + taskArray[i].description);
     }
 
     /**
@@ -46,17 +58,23 @@ public class Lania {
      * @param args The command line arguments. Not required here.
      **/
     public static void main(String[] args) {
-        System.out.println("Hello I am Lania! How may I be of assistance?");
+        System.out.println("Hello I am Lania! How may Lania be of assistance?");
         System.out.println("Enter 'bye' to exit");
         Scanner s = new Scanner(System.in);
         String input = s.nextLine();
         while(!input.equals("bye")) {
-            if (input.equals("list")) {
-                list();
+            String[] split = input.split(" ");
+            if (split[0].equals("done")) {
+                complete(Integer.parseInt(split[1]));
                 input = s.nextLine();
             } else {
-                update(input);
-                input = s.nextLine();
+                if (input.equals("list")) {
+                    list();
+                    input = s.nextLine();
+                } else {
+                    update(input);
+                    input = s.nextLine();
+                }
             }
         }
         System.out.println("Bye. Lania looks forward to seeing you again!");
