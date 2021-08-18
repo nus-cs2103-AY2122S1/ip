@@ -31,8 +31,7 @@ public class TaskList {
     public void list() {
         for (int i = 0; i < this.nextSpaceToStore; i++) {
             int currTask = i + 1;
-            System.out.println(currTask+ ". [" + allTasks[i].getStatusIcon()
-                    + "] " + allTasks[i].getTaskDescription());
+            System.out.println(currTask + ". " + allTasks[i].toString());
         }
     }
 
@@ -44,5 +43,14 @@ public class TaskList {
         Task doneTask = allTasks[taskNo - 1];
         doneTask.taskCompleted();
         System.out.println("  [" + doneTask.getStatusIcon() + "] " + doneTask.getTaskDescription());
+    }
+
+    /**
+     * Returns the string representation of the number of tasks in the TaskList.
+     * @return String representation of the number of tasks in the TaskList.
+     */
+    @Override
+    public String toString() {
+        return "Now you have " + this.nextSpaceToStore + " tasks in the list.";
     }
 }
