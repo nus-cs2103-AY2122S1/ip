@@ -11,7 +11,7 @@ public class Duke {
         while(!input.equals("bye")){
             String words[] = input.split(" ");
             if(input.equals("list")){
-                System.out.println("Here are the tasks in your list:\n");
+                System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < store.size(); i++){
                     System.out.println((i + 1) + "." + store.get(i).toString());
                 }
@@ -20,31 +20,26 @@ public class Duke {
                 store.get(textNumber - 1).done();
                 System.out.println("Nice! I've marked this task as done:\n"
                         + store.get(textNumber - 1).toString());
-            } else if(words[0].equals("todo")) {
-                ToDo toDo = new ToDo(input.substring(5));
-                store.add(toDo);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(toDo.toString()
-                                + "Now you have " + store.size() + "tasks in the list.");
-            } else if(words[0].equals("deadline")){
-                String content = input.substring(9,input.indexOf("/by")-1);
-                String by = input.substring(input.indexOf("/by") + 4);
-                Deadline deadline = new Deadline(content,by);
-                store.add(deadline);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(deadline.toString()
-                        + "Now you have " + store.size() + "tasks in the list.");
-            } else if(words[0].equals("event")){
-                String content = input.substring(6,input.indexOf("/at")-1);
-                String at = input.substring(input.indexOf("/at") + 4);
-                Event event = new Event(content,at);
-                store.add(event);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(event.toString()
-                        + "Now you have " + store.size() + "tasks in the list.");
             } else {
-                store.add(new Task(input));
-                System.out.println("added: " + input);
+                Task task;
+                if(words[0].equals("todo")) {
+                    task = new ToDo(input.substring(5));
+                } else if(words[0].equals("deadline")){
+                    String content = input.substring(9,input.indexOf("/by")-1);
+                    String by = input.substring(input.indexOf("/by") + 4);
+                    task = new Deadline(content,by);
+                } else if(words[0].equals("event")){
+                    String content = input.substring(6,input.indexOf("/at")-1);
+                    String at = input.substring(input.indexOf("/at") + 4);
+                    task = new Event(content,at);
+                } else {
+                    task = new Task(input);
+                }
+                store.add(task);
+                System.out.println("Got it. I've added this task:\n"
+                                + task.toString()
+                                + "\nNow you have "
+                                + store.size() + " tasks in the list.");
             }
             input = sc.nextLine();
         }
