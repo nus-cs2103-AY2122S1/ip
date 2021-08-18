@@ -69,6 +69,9 @@ public class Duke {
                         throw new DukeException("We don't know what to delete!");
                     }
                     int index = Integer.parseInt(splitInput[1]) - 1;
+                    if (index >= tasks.size() || index <= 0) {
+                        throw new DukeException("Task number does not exist!");
+                    }
                     Task toDelete = tasks.get(index);
                     tasks.remove(index);
                     printer.PrintDelete(toDelete.toString(), tasks.size());
