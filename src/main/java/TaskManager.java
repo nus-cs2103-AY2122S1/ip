@@ -8,8 +8,8 @@ public class TaskManager {
     }
 
     public void list() {
-        for (int i = 1; i <= taskArrayList.size(); i++) {
-            String s = String.format("[%d] %s", i, taskArrayList.get(i));
+        for (int i = 0; i < taskArrayList.size(); i++) {
+            String s = String.format("[%d] %s", i + 1, taskArrayList.get(i));
             System.out.println(s);
         }
     }
