@@ -62,7 +62,7 @@ public class Duke {
                     break;
                 case("event"):
                     String[] eventInfo = splitBetween(userInput, "/at");
-                    taskList[tasks] = new Event(buildDescription(eventInfo, "by"));
+                    taskList[tasks] = new Event(buildDescription(eventInfo, "at"));
                     addTask(taskList[tasks]);
                     break;
                 default:
