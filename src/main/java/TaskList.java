@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Encapsulates all information for a list of Tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> taskList;
 
@@ -14,7 +17,10 @@ public class TaskList {
     /**
      * Prints out the taskList to the console
      */
-    public void printList() {
+    public void printList() throws EmptyTaskListException {
+        if (this.taskList.isEmpty()) {
+            throw new EmptyTaskListException("You have no tasks!");
+        }
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println((i + 1) + ". " + taskList.get(i).toString());
         }

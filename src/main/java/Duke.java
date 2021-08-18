@@ -25,17 +25,25 @@ public class Duke {
                     return;
                 case "list":
                     System.out.println("Here's your todo list!");
-                    taskList.printList();
+                    try {
+                        taskList.printList();
+                    } catch (EmptyTaskListException e) {
+                        System.out.println(e.getMessage() + "\n");
+                    }
                     break;
                 case "done":
                     taskList.doTask(Integer.parseInt(input) - 1);
-                    taskList.printList();
+                    try {
+                        taskList.printList();
+                    } catch (EmptyTaskListException e) {
+                        System.out.println(e.getMessage() + "\n");
+                    }
                     break;
                 default:
                     try {
                         taskList.add(Task.createTask(command, input));
                     } catch (NoSuchCommandException e) {
-                        System.out.println(e.getMessage());
+                        System.out.println(e.getMessage() + "\n");
                     }
             }
         }
