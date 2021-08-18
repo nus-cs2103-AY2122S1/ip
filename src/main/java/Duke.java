@@ -1,9 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
-    private static Task[] tasks = new Task[100];
-    private static int taskCount = 0;
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     private static String formatDukeResponse(String response) {
         return HORIZONTAL_LINE + "\n" + response + "\n" + HORIZONTAL_LINE + "\n";
@@ -30,8 +30,7 @@ public class Duke {
         }
 
         Task task = new Todo(description);
-        tasks[taskCount] = task;
-        taskCount++;
+        tasks.add(task);
         printAddTaskMessage(task);
     }
 
@@ -55,8 +54,7 @@ public class Duke {
                     "a /by or /at respectively, followed by a date or a time.");
         }
 
-        tasks[taskCount] = task;
-        taskCount++;
+        tasks.add(task);
         printAddTaskMessage(task);
     }
 
@@ -68,27 +66,27 @@ public class Duke {
             throw new DukeException("Oops!!! The done command should be followed by an integer.");
         }
 
-        if (taskNumber < 1 || taskNumber > taskCount) {
+        if (taskNumber < 1 || taskNumber > tasks.size()) {
             throw new DukeException("Oops!!! The task number provided is not valid.");
         }
 
-        Task task = tasks[taskNumber - 1];
+        Task task = tasks.get(taskNumber - 1);
         task.markAsDone();
         printMarkTaskDoneMessage(task);
     }
 
     private static void printAddTaskMessage(Task task) {
         System.out.println(formatDukeResponse("Got it. I've added this task:\n" + task
-                + "\nNow you have " + taskCount
-                + (taskCount == 1 ? " task " : " tasks ") + "in the list."));
+                + "\nNow you have " + tasks.size()
+                + (tasks.size() == 1 ? " task " : " tasks ") + "in the list."));
     }
 
     private static void printTasksMessage() {
         StringBuilder tasksMessage = new StringBuilder("Here are the tasks in your list:");
 
-        for (int i = 0; i < taskCount; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             int taskNumber = i + 1;
-            tasksMessage.append("\n").append(taskNumber).append(".").append(tasks[i]);
+            tasksMessage.append("\n").append(taskNumber).append(".").append(tasks.get(i));
         }
 
         System.out.println(formatDukeResponse(tasksMessage.toString()));
