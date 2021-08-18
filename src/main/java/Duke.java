@@ -11,7 +11,6 @@ public class Duke {
     // List of tasks.
     private static Task[] tasks = new Task[100];
     private static int numOfTasks = 0;
-    private Processor processor;
     private boolean isRunning;
 
     /**
@@ -47,14 +46,22 @@ public class Duke {
     }
 
     /**
+     * Returns the number of tasks added.
+     *
+     * @return Number of tasks.
+     */
+    public static int getNumOfTasks() {
+        return Duke.numOfTasks;
+    }
+
+    /**
      * Given the appropriate processor, process the command and print the result.
      *
      * @param processor The processor provided.
      */
     private void processCommand(Processor processor) {
-        this.processor = processor;
-        this.processor.process();
-        System.out.println(this.processor);
+        processor.process();
+        System.out.println(processor);
     }
 
     /**
@@ -72,19 +79,28 @@ public class Duke {
             // List all added tasks.
             processCommand(new GetListProcessor());
         } else {
-            String[] splitted = command.split(" ");
-            if (splitted.length == 2 && splitted[0].equals("done")) {
+            String[] splitted = command.split(" ", 2);
+            if (splitted[0].equals("done")) {
+                // Detect a done command.
                 try {
                     // Finish a task, mark it as done.
                     int index = Integer.parseInt(splitted[1]) - 1;
                     processCommand(new TaskDoneProcessor(Duke.tasks[index]));
                 } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException e) {
                     // Add the task to list and print the action.
-                    processCommand(new AddATaskProcessor(command));
+                    processCommand(new AddATaskProcessor(command, new ToDo(command)));
                 }
+            } else if (splitted[0].equals("deadline")) {
+                // Detect a deadline command.
+                String[] information = splitted[1].split("/by", 2);
+                processCommand(new AddATaskProcessor(command, new Deadline(information[0], information[1])));
+            } else if (splitted[0].equals("event")) {
+                // Detect an event command.
+                String[] information = splitted[1].split("/at", 2);
+                processCommand(new AddATaskProcessor(command, new Event(information[0], information[1])));
             } else {
-                // Add the task to list and print the action.
-                processCommand(new AddATaskProcessor(command));
+                // Detect a todo command.
+                processCommand(new AddATaskProcessor(command, new ToDo(splitted[1])));
             }
         }
     }

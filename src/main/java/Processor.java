@@ -10,7 +10,6 @@ public class Processor {
      */
     public Processor(String command) {
         this.command = command;
-        this.task = new Task(command);
     }
 
     /**
