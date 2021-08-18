@@ -20,4 +20,9 @@ public class ToDos extends Task {
     public String getStatusIcon() {
         return "[T]" + super.getStatusIcon();
     }
+
+    @Override
+    public String printTask() {
+        return super.printTask();
+    }
 }

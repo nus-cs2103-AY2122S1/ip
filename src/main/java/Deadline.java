@@ -23,4 +23,9 @@ public class Deadline extends Task {
     public String getStatusIcon() {
         return "[D]" + super.getStatusIcon();
     }
+
+    @Override
+    public String printTask() {
+        return this.getStatusIcon() + super.printTask();
+    }
 }

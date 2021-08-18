@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -6,52 +7,90 @@ public class Duke {
         System.out.println("Welcome to Ben's. How may I help you?");
 
         Scanner newScan = new Scanner(System.in);
-        String userInput = newScan.nextLine();
         ArrayList<Task> contents = new ArrayList<>();
+        boolean canRun = true;
 
-        while (!userInput.equals("bye")) {
-            if (userInput.equals("list")) {
-                int counter = 1;
-                System.out.println("    ***\n" + "    These are your tasks in the list:");
-                for (Task x: contents) {
-                    System.out.println("      " + counter + ". " + x.printTask());
-                    counter++;
-                }
-                System.out.println("    ***\n");
-            } else if (userInput.startsWith("done ")) {
-                String index = userInput.substring(5);
-                int x = Integer.parseInt(index);
-                Task temp = contents.get(x - 1);
-                temp.markedDone();
-                System.out.println("    ***\n" + "    You have successfully done this task:\n" +
-                        "      " + x + ". " + temp.printTask() + "\n    ***\n");
-            } else {
-                Task newTask;
-                if (userInput.startsWith("deadline ")) {
-                    newTask = new Deadline(userInput);
-                } else if (userInput.startsWith("event ")) {
+        while (userInput) {
+            String userInput = newScan.nextLine().toLowerCase();
+            if (userInput.contains("bye")) {
+                System.out.println("\nGoodbye! Have a nice day. :)");
+                System.exit(0);
+            } else if (userInput.contains("list"):
+            int counter = 1;
+                    System.out.println("    ***\n" + "    These are your tasks in the list:");
+                    for (Task y: contents) {
+                        System.out.println("      " + counter + ". " + y.printTask());
+                        counter++;
+                    }
+                    System.out.println("    ***\n");
+                    break;
+
+                case "done ":
+                    String index = userInput.substring(5);
+                    int y = Integer.parseInt(index);
+                    Task temp = contents.get(y - 1);
+                    temp.markedDone();
+                    System.out.println("    ***\n" + "    You have successfully done this task:\n" +
+                            "      " + y + ". " + temp.printTask() + "\n    ***\n");
+                    break;
+
+                case "deadline ":
+                    Task newTask = new Deadline(userInput);
+                    contents.add(newTask);
+                    if (contents.size() == 1) {
+                        System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
+                                newTask.printTask() + "\n    You now have " + contents.size() + " task in the list.\n" +
+                                "    ***\n");
+                    } else {
+                        System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
+                                newTask.printTask() + "\n    You now have " + contents.size() + " tasks in the list.\n" +
+                                "    ***\n");
+                    }
+                    break;
+
+                case "event ":
                     newTask = new Event(userInput);
-                } else if (userInput.startsWith("todo ")) {
-                    newTask = new ToDos(userInput);
-                } else {
+                    contents.add(newTask);
+                    if (contents.size() == 1) {
+                        System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
+                                newTask.printTask() + "\n    You now have " + contents.size() + " task in the list.\n" +
+                                "    ***\n");
+                    } else {
+                        System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
+                                newTask.printTask() + "\n    You now have " + contents.size() + " tasks in the list.\n" +
+                                "    ***\n");
+                    }
+                    break;
+
+                case "todo ":
+                    newTask = new ToDos (userInput);
+                    contents.add(newTask);
+                    if (contents.size() == 1) {
+                        System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
+                                newTask.printTask() + "\n    You now have " + contents.size() + " task in the list.\n" +
+                                "    ***\n");
+                    } else {
+                        System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
+                                newTask.printTask() + "\n    You now have " + contents.size() + " tasks in the list.\n" +
+                                "    ***\n");
+                    }
+                    break;
+
+                default:
                     newTask = new Task(userInput);
-                }
-                contents.add(newTask);
-                if (contents.size() == 1) {
-                    System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
-                            newTask.printTask() + "\n    You now have " + contents.size() + " task in the list.\n" +
-                            "    ***\n");
-                } else {
-                    System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
-                            newTask.printTask() + "\n    You now have " + contents.size() + " tasks in the list.\n" +
-                            "    ***\n");
-                }
+                    contents.add(newTask);
+                    if (contents.size() == 1) {
+                        System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
+                                newTask.printTask() + "\n    You now have " + contents.size() + " task in the list.\n" +
+                                "    ***\n");
+                    } else {
+                        System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
+                                newTask.printTask() + "\n    You now have " + contents.size() + " tasks in the list.\n" +
+                                "    ***\n");
+                    }
+                    break;
             }
-            newScan = new Scanner(System.in);
-            userInput = newScan.nextLine();
         }
 
-        System.out.println("\nGoodbye! Have a nice day. :)");
-        System.exit(0);
     }
 }

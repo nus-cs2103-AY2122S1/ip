@@ -23,4 +23,9 @@ public class Event extends Task {
     public String getStatusIcon() {
         return "[E]" + super.getStatusIcon();
     }
+
+    @Override
+    public String printTask() {
+        return super.printTask();
+    }
 }
