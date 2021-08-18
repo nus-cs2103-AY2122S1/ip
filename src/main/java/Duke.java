@@ -19,40 +19,98 @@ public class Duke {
         while (active) {
             String input = scanner.nextLine();
             if (input.split(" ")[0].equals("done")) {
-                String[] splitString = input.split(" ");
-                String taskItemNumber = splitString[1];
-                Duke.markAsFinished(taskItemNumber);
+                try {
+                    String[] splitString = input.split(" ");
+                    if (splitString.length == 1) {
+                        throw new DukeException(
+                                "____________________________________________________________\n" +
+                                    "☹ OOPS!!! Choose the task number to be considered done.\n" +
+                                        "____________________________________________________________"
+                        );
+                    }
+                    String taskItemNumber = splitString[1];
+                    Duke.markAsFinished(taskItemNumber);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             }   else if (input.split(" ")[0].equals("todo")) {
-                input = input.replace(input.split(" ")[0], "");
-                ToDo newToDo = new ToDo(input);
-                Duke.addToList(newToDo);
+                //input = input.replace(input.split(" ")[0], "");
+                try {
+                    String actualToDo = input.replace(input.split(" ")[0], "");
+                    if (actualToDo.equals("")) {
+                        throw new DukeException(
+                                "____________________________________________________________\n" +
+                                        "☹ OOPS!!! The description of a todo cannot be empty.\n" +
+                                        "____________________________________________________________"
+                        );
+                    }
+                    ToDo newToDo = new ToDo(actualToDo);
+                    Duke.addToList(newToDo);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             }   else if (input.split(" ")[0].equals("deadline")) {
-                input = input.replace(input.split(" ")[0], "");
-                String by = input.split("/")[1].split(" ", 2)[1];
-                String description = input.split("/")[0];
-                Deadline dead = new Deadline(description, by);
-                Duke.addToList(dead);
+                try {
+                    input = input.replace(input.split(" ")[0], "");
+                    if (input.split("/").length == 1) {
+                        throw new DukeException(
+                                "____________________________________________________________\n" +
+                                        "☹ OOPS!!! The description or by-date (or both) cannot be empty.\n" +
+                                        "____________________________________________________________"
+                        );
+                    }
+                    String by = input.split("/")[1].split(" ", 2)[1];
+                    String description = input.split("/")[0];
+                    Deadline dead = new Deadline(description, by);
+                    Duke.addToList(dead);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             }   else if (input.split(" ")[0].equals("event")) {
-                input = input.replace(input.split(" ")[0], "");
-                String date = input.split("/")[1].split(" ")[1];
-                String time = input.split("/")[1].split(" ")[2];
-                String description = input.split("/")[0];
-                Event someEvent = new Event(description, date, time);
-                Duke.addToList(someEvent);
+                try {
+                    input = input.replace(input.split(" ")[0], "");
+
+                    if (input.split("/").length == 1) {
+                        throw new DukeException(
+                                "____________________________________________________________\n" +
+                                        "☹ OOPS!!! The description of an event, as well as its date and time, cannot be empty.\n" +
+                                        "____________________________________________________________"
+                        );
+                    }
+                    String date = input.split("/")[1].split(" ")[1];
+                    String time = input.split("/")[1].split(" ")[2];
+                    String description = input.split("/")[0];
+                    Event someEvent = new Event(description, date, time);
+                    Duke.addToList(someEvent);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             }   else if (input.equals("list")) {
                 Duke.printList();
             } else if (input.equals("bye")) {
                 Duke.active = false;
                 Duke.sendEndMessage();
                 break;
+            } else {
+                System.out.println("____________________________________________________________");
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("____________________________________________________________");
             }
 
 
         }
     }
 
-    public static void markAsFinished(String taskItemNumber) {
+    public static void markAsFinished(String taskItemNumber) throws DukeException {
         int taskNumber = Integer.parseInt(taskItemNumber);
+
+        if (taskList[taskNumber - 1] == null) {
+            throw new DukeException(
+                    "____________________________________________________________\n" +
+                            "☹ OOPS!!! The task you chose does not exist. Use the 'list' command to check the items in your list.\n" +
+                            "____________________________________________________________"
+            );
+        }
 
         taskList[taskNumber - 1].completeTask();
 
