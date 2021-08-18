@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<String> todoList;
+    private static ArrayList<Task> todoList;
 
     public static void main(String[] args) {
         String separator = "------------------------------------------------------------------";
@@ -19,13 +19,16 @@ public class Duke {
 
         todoList = new ArrayList<>();
 
-        boolean end = false;
         String endCmd = "bye";
         String listCmd = "list";
-        Scanner sc = new Scanner(System.in);
+        String doneCmd = "done";
 
+        Scanner sc = new Scanner(System.in);
+        boolean end = false;
         while (!end) {
-            String cmd = sc.nextLine();
+            String input = sc.nextLine();
+            String[] inputs = input.split(" ", 2);
+            String cmd = inputs[0];
             System.out.println(separator);
 
             if (cmd.equals(endCmd)) {
@@ -33,22 +36,34 @@ public class Duke {
                 end = true;
             } else if (cmd.equals(listCmd)) {
                 displayList();
+            } else if (cmd.equals(doneCmd)) {
+                Integer taskNum = Integer.parseInt(inputs[1]);
+                markTaskDone(taskNum);
             } else {
-                addItem(cmd);
+                addTask(input);
             }
             System.out.println(separator);
         }
     }
 
     private static void displayList() {
-        for (int i = 0; i < todoList.size(); i ++) {
+        System.out.println("Your task list:");
+        for (int i = 0; i < todoList.size(); i++) {
+            Task task = todoList.get(i);
             int num = i+1;
-            System.out.println(num + ". " + todoList.get(i));
+            System.out.println(num + "." + task.toString());
         }
     }
 
-    private static void addItem(String item) {
-        todoList.add(item);
-        System.out.println("added: " + item);
+    private static void addTask(String description) {
+        todoList.add(new Task(description));
+        System.out.println("added: " + description);
+    }
+
+    private static void markTaskDone(Integer taskNum) {
+        Task task = todoList.get(taskNum-1);
+        task.markAsDone();
+        System.out.println("Good work! I've marked this task as done:");
+        System.out.println(task.toString());
     }
 }
