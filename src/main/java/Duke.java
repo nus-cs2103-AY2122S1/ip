@@ -17,6 +17,7 @@ public class Duke {
                 case "list":
                     Duke.printTasks();
                     break;
+
                 case "done":
                     int taskID = Integer.parseInt(rest.trim());
                     if(taskID >= storage.size()){
@@ -27,10 +28,26 @@ public class Duke {
                         Duke.printTasks();
                     }
                     break;
-                default:
-                    storage.add(new Task(first + rest));
-                    System.out.println("added: " + first + rest);
 
+                case "todo":
+                    ToDo newTodo = new ToDo(rest.trim());
+                    addToStorage(newTodo);
+                    break;
+
+                case "deadline":
+                    String[] name_by = rest.trim().split("/by");
+                    Deadline newDeadLine = new Deadline(name_by[0], name_by[1]);
+                    addToStorage(newDeadLine);
+                    break;
+
+                case "event":
+                    String[] name_at = rest.trim().split("/at");
+                    Event newEvent = new Event(name_at[0], name_at[1]);
+                    addToStorage(newEvent);
+                    break;
+
+                default:
+                    storage.add(new ToDo(first + rest));
             }
             first = Sc.next();
             rest = Sc.nextLine();
@@ -43,5 +60,11 @@ public class Duke {
         for (int i = 0; i < storage.size(); i++) {
             System.out.println(storage.get(i));
         }
+    }
+
+    private static void addToStorage(Task t){
+        Duke.storage.add(t);
+        System.out.println("You have " + storage.size() + " tasks in the list");
+        System.out.println(t);
     }
 }
