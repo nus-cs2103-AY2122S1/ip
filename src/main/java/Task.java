@@ -27,5 +27,12 @@ public class Task {
                 + "\nNow you have " + size + " tasks left!");
     }
 
+    public void removeTaskMsg(int size) {
+        System.out.println(
+                "I have removed the task:\n  "
+                        + this
+                        + "\nNow you have " + size + " tasks left!");
+    }
+
 
 }

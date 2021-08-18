@@ -37,6 +37,10 @@ public class Duke {
                     task.markAsDone();
                     System.out.println(" Nice! I've marked this task as done: \n" + task);
                     break;
+                case "delete":
+                    task = myTasks.remove(scan.nextInt() - 1);
+                    task.removeTaskMsg(myTasks.size());
+                    break;
                 case "todo":
                     try {
                         Task newTask = new Todo(scan.nextLine());
