@@ -1,3 +1,16 @@
+package duke.util;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.enums.Commands;
+import duke.exception.DukeException;
+import duke.exception.EmptyCommandException;
+import duke.exception.UnknownCommandException;
+
 /** Utility class that handles parsing of strings to other useful data structures. */
 public class Parser {
     private static Commands commandParser(String fullCommand) {

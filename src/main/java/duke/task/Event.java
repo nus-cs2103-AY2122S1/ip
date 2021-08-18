@@ -1,9 +1,13 @@
+package duke.task;
+
+import duke.exception.BadInputFormatException;
+
 /**
- * Represents an Event object.
+ * Represents an duke.tasks.Event object.
  */
 public class Event extends DatedTask {
     /**
-     * Event constructor.
+     * duke.tasks.Event constructor.
      *
      * @param description the event's description
      * @throws BadInputFormatException if the description is badly formatted
@@ -13,7 +17,7 @@ public class Event extends DatedTask {
     }
 
     /**
-     * Event constructor.
+     * duke.tasks.Event constructor.
      *
      * @param description the event's description
      * @param at the event's time
@@ -23,10 +27,10 @@ public class Event extends DatedTask {
     }
 
     /**
-     * Factory Event method.
+     * Factory duke.tasks.Event method.
      *
      * @param description the user's input
-     * @return a new Event object
+     * @return a new duke.tasks.Event object
      * @throws BadInputFormatException if the input is badly formatted
      */
     public static Event of(String description) throws BadInputFormatException {

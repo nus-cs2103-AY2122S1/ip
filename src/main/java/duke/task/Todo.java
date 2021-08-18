@@ -1,9 +1,11 @@
+package duke.task;
+
 /**
- * Represents a Todo object.
+ * Represents a duke.tasks.Todo object.
  */
 public class Todo extends Task {
     /**
-     * Todo constructor.
+     * duke.tasks.Todo constructor.
      *
      * @param description the description
      */
@@ -12,10 +14,10 @@ public class Todo extends Task {
     }
 
     /**
-     * Factory Todo method.
+     * Factory duke.tasks.Todo method.
      *
      * @param description the description
-     * @return a new Todo object
+     * @return a new duke.tasks.Todo object
      */
     public static Todo of(String description) {
         return new Todo(description);

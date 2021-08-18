@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a task object.
  */
@@ -8,13 +10,13 @@ public abstract class Task {
     /** The status of the task */
     protected boolean isDone;
 
-    /** Task constructor */
+    /** duke.tasks.Task constructor */
     protected Task() {
         this("");
     }
     
     /**
-     * Task constructor.
+     * duke.tasks.Task constructor.
      *
      * @param description the description of the task
      */
@@ -23,7 +25,7 @@ public abstract class Task {
     }
 
     /**
-     * Task constructor.
+     * duke.tasks.Task constructor.
      *
      * @param description the description of the task
      * @param isDone the status of the task
