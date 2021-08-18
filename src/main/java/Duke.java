@@ -22,7 +22,6 @@ public class Duke {
             System.out.print("You: ");
             Scanner sc = new Scanner(System.in);
             String str = sc.nextLine();
-            Task task = new Task(str);
 
             System.out.println(divider);
             if (str.equals("bye")) {
@@ -30,20 +29,37 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
             } else if (str.equals("list")) {
                 int count = 1;
-                for (Task s : request) {
-                    System.out.println(s.getTask());
+                System.out.println("Here are the tasks in your list:");
+                for (Task t : request) {
+                    System.out.println(count + "." + t.getTask());
                     count += 1;
                 }
             } else if (str.contains("done")) {
                 int index = Integer.parseInt(str.substring(5)) - 1;
                 System.out.println(request.get(index).done());
             } else {
+                String[] words = str.split(" ", 2);
+                String type = words[0];
+                String text = words[1];
+                Task task;
+
+                if (type.equals("todo")) {
+                    task = new Todo(text, "");
+                } else if (type.equals("deadline")) {
+                    String[] splitted = text.split("/by ", 2);
+                    text = splitted[0];
+                    String deadline = "(by: " + splitted[1] + ")";
+                    task = new Deadline(text, deadline);
+                } else {
+                    String[] splitted = text.split("/at ", 2);
+                    text = splitted[0];
+                    String time = "(at: " + splitted[1] + ")";
+                    task = new Event(text, time);
+                }
                 request.add(task);
-                System.out.println("added: " + str);
+                System.out.println("Got it. I've added this task: \n" + task.getTask() + "\nNow you have " + request.size() + " tasks in the list.");
             }
             System.out.println(divider);
         }
-
-
     }
 }
