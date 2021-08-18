@@ -1,7 +1,12 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
+
+    enum Command {
+        LIST, DONE, TODO, EVENT, DEADLINE, DELETE
+    }
 
     public static void printAddOrDelete(boolean isAdd, Task task, int numOfTask) {
         Printer.prettyPrint(String.format("%s. I've %s this task:\n\t %s\n\tNow you have %d tasks in the list.",
@@ -38,19 +43,19 @@ public class Duke {
             String[] command = input.split(" ", 2);
             String[] taskDetail;
             try {
-                switch (command[0]) {
-                    case "list":
+                switch (Command.valueOf(command[0].toUpperCase())) {
+                    case LIST:
                         Printer.prettyPrint("Here are the tasks in your list:\n" +
                                 Printer.listTask(tasks, numOfTask));
                         break;
-                    case "done":
+                    case DONE:
                         tasks.get(Integer.parseInt(command[1]) - 1).markAsDone();
                         break;
-                    case "delete":
+                    case DELETE:
                         printAddOrDelete(false, tasks.get(Integer.parseInt(command[1]) - 1), --numOfTask);
                         tasks.remove(Integer.parseInt(command[1]) - 1);
                         break;
-                    case "todo":
+                    case TODO:
                         try {
                             taskDetail = extractCommand(command);
                             Todo todo = new Todo(taskDetail[0]);
@@ -60,7 +65,7 @@ public class Duke {
                             Printer.prettyPrint(e.toString());
                         }
                         break;
-                    case "event":
+                    case EVENT:
                         try {
                             taskDetail = extractCommand(command);
                             Event event = new Event(taskDetail[0], taskDetail[1]);
@@ -70,7 +75,7 @@ public class Duke {
                             Printer.prettyPrint(e.toString());
                         }
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         try {
                             taskDetail = extractCommand(command);
                             Deadline deadline = new Deadline(taskDetail[0], taskDetail[1]);
