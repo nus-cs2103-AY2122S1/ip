@@ -20,13 +20,13 @@ public class Duke {
                 break;
             } else if (userInput.equals("list")) {
                 String message = "    ----------------------------\n"
-                        + "Here are the tasks in your list:\n";
+                        + "    " + "Here are the tasks in your list:\n";
                 int i = 0;
                 while (storedInputs[i] != null) {
-                    message += "    " + (i+1) + ". [" + storedInputs[i].getStatusIcon() + "] " + storedInputs[i].getDescription() + "\n";
+                    message += "    " + (i+1) + ". " + storedInputs[i].toString() + "\n";
                     i++;
                 }
-                message += "    ----------------------------\n";
+                message += "    ----------------------------";
                 System.out.println(message);
             } else if (userInput.substring(0,4).equals("done")) {
                 String userIndex = userInput.substring(5);
@@ -35,14 +35,51 @@ public class Duke {
                     System.out.println("no task found!");
                 } else {
                     storedInputs[i-1].markAsDone();
-                    String message = "Nice! I have marked this task as done:\n"+
-                            "[X] " + storedInputs[i-1].getDescription();
+                    String message = "----------------------------\n"
+                    +"Nice! I have marked this task as done:\n"
+                    +"[X] " + storedInputs[i-1].getDescription() + "\n" + "----------------------------";
                     System.out.println(message);
                 }
+            } else if (userInput.substring(0,4).equals("todo")) {
+                Task A = new ToDo(userInput.substring(5));
+                storedInputs[index] = A;
+                index++;
+                String message = "----------------------------\n"+
+                        "Got it, I've added this task: \n"
+                        + A.toString() + "\n"
+                        + "Now you have " + index + " tasks in the list\n"
+                        +"----------------------------";
+                System.out.println(message);
+            } else if (userInput.substring(0,5).equals("event")) {
+                int i = userInput.indexOf("/");
+                String description = userInput.substring(6,i-1);
+                String time = userInput.substring(i+1);
+                Task A = new Event(description, time);
+                storedInputs[index] = A;
+                index++;
+                String message = "----------------------------\n"
+                        +"Got it, I've added this task: \n"
+                        + A.toString() + "\n"
+                        + "Now you have " + index + " tasks in the list\n"
+                        +"----------------------------";
+                System.out.println(message);
+            } else if (userInput.substring(0,8).equals("deadline")) {
+                int i = userInput.indexOf("/");
+                String description = userInput.substring(9,i-1);
+                String time = userInput.substring(i+1);
+                Task A = new Deadlines(description, time);
+                storedInputs[index] = A;
+                index++;
+                String message = "----------------------------\n"
+                        +"Got it, I've added this task: \n"
+                        + A.toString() + "\n"
+                        + "Now you have " + index + " tasks in the list\n"
+                        +" ----------------------------";
+                System.out.println(message);
             } else {
-                String echo = "    ----------------------------\n"
+                String echo = "----------------------------\n"
                         + "    " + "added task: " + userInput + "\n"
-                        + "    ----------------------------";
+                        + "----------------------------";
                 System.out.println(echo);
                 storedInputs[index] = new Task(userInput);
                 index++;
