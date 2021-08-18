@@ -1,3 +1,6 @@
+import commands.Command;
+import tasks.TaskList;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -11,21 +14,14 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        TaskManager manager = new TaskManager();
+        TaskList taskList = new TaskList();
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
-            String userCommand = manager.getUserCommand(userInput);
-
-            try {
-                manager.processUserInput(userInput);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-            if (userCommand.equals("bye")) {
-                break;
-            }
+            Command command = Command.of(userInput);
+            command.updateLogAndTaskList(taskList);
+            taskList = command.getTaskList();
+            System.out.println(command.getLog());
         }
         sc.close();
     }
