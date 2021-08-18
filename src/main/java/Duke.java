@@ -43,6 +43,10 @@ public class Duke {
                     System.out.println(formatMessage(printList()));
                     break;
                 case "done":
+                    if (params.length == 1) {
+                        System.out.println(formatMessage("Please enter a number after done"));
+                        break;
+                    }
                     String arg = params[1];
                     try {
                         int index = Integer.parseInt(arg);
