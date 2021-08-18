@@ -1,12 +1,10 @@
 public class Task {
 
     private String description;
-    private int index;
     private boolean isDone;
 
-    public Task(String description, int index) {
+    public Task(String description) {
         this.description = description;
-        this.index = index;
         this.isDone = false;
     }
 
@@ -16,12 +14,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return index + "."
-                + "[" + (isDone ? "X" : "") + "] "
+        return "[" + (isDone ? "X" : "") + "] "
                 + description;
-    }
-
-    public String showAsDone() {
-        return "[X] " + description;
     }
 }

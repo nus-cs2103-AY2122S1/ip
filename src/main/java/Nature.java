@@ -14,7 +14,7 @@ public class Nature {
     }
 
     public void addTask(String task) {
-        Task t = new Task(task, taskCount + 1);
+        Task t = new Task(task);
         if (taskCount <= 100) {
             taskList[taskCount] = t;
             taskCount++;
@@ -25,7 +25,7 @@ public class Nature {
     public void printTaskList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskCount; i++) {
-            System.out.println(taskList[i]);
+            System.out.println((i + 1) + ". " + taskList[i]);
         }
     }
 
@@ -36,7 +36,7 @@ public class Nature {
             Task t = taskList[index - 1];
             t.setDone();
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println(t.showAsDone());
+            System.out.println(t);
         }
     }
 
