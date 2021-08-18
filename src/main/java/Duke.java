@@ -2,16 +2,16 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static int lv = 3;
-    private static String[] features = {"", "Greet, Echo, Exit", ", Add, List", ", Mark as Done"};
+    private static final int lv = 3;
+    private static final String[] features = {"", "Greet, Echo, Exit", ", Add, List", ", Mark as Done"};
     private static boolean canExit = false;
-    private static ArrayList<Task> taskArrayList = new ArrayList<>();
+    private static final ArrayList<Task> taskArrayList = new ArrayList<>();
 
     /**
      * This function takes an input string and formats it by including horizontal lines above
      * and below the input string
      *
-     * @param str
+     * @param str input string to be sandwiched
      * @return the original string sandwiched between two horizontal lines
      */
     public static String sandwich(String str) {
