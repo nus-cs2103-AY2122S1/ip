@@ -23,7 +23,16 @@ public class Duke {
     private static void addTask(Task t) {
         tasks.add(t);
         printFormattedMessage("Got it. I've added this task:\n\t" 
-                                + t.toString() 
+                                + t 
+                                + "\n\tNow you have " + tasks.size() + " tasks in the list.\n"); 
+    } 
+
+    private static void deleteTask(int num) {
+        int taskIdx = num - 1;
+        Task taskToDelete = tasks.get(taskIdx);
+        tasks.remove(taskIdx);
+        printFormattedMessage("Noted. I've removed this task:\n\t" 
+                                + taskToDelete
                                 + "\n\tNow you have " + tasks.size() + " tasks in the list.\n"); 
     } 
 
@@ -37,12 +46,13 @@ public class Duke {
         printFormattedMessage(taskListMessage);
     }
 
-    private static void completeTask(Task t) {
+    private static void completeTask(int taskNum) {
+        Task t = tasks.get(taskNum - 1);
         t.setDone(true);
         printFormattedMessage("Good job! I've marked this task as done:\n\n\t" + t + "\n");  
     }
 
-    private static String[] parseTaskWithTime(String command, String type) throws DukeException {
+    private static void handleTaskWithTime(String command, String type) throws DukeException {
         String splitWord = type == "deadline" ? "/by " : "/at ";
         String[] commandSplit = command.split(splitWord);
         String missingInfo = type == "deadline" ? "a deadline!" : "an event time!";
@@ -54,10 +64,37 @@ public class Duke {
         String task = commandSplit[0].split(type)[1];
         String time = commandSplit[1];
 
-        String[] result = new String[2];
-        result[0] = task;
-        result[1] = time;
-        return result;
+        if (type == "deadline") {
+            addTask(new Deadline(task, time));
+        } else {
+            addTask(new Event(task, time));
+        }
+    }
+
+    private static void handleTasksOperation(String command, String action) throws DukeException {
+        if (command.equals(action)) throw new DukeException("You need to specify the task!\n");
+
+        try {
+            int taskNum = Integer.parseInt(command.split(" ")[1]);
+            if (action.equals("done")) {
+                completeTask(taskNum);
+            } else {
+                deleteTask(taskNum);
+            }
+        } catch (NumberFormatException err) {
+            throw new DukeException("Please use the task number instead of task name!\n");
+        } catch (IndexOutOfBoundsException err) {
+            throw new DukeException("I'm sorry, but that task number is out of range.\n");
+        }
+    }
+
+    private static void handleToDo(String command) throws DukeException {
+        if (command.equals("todo")) {
+            throw new DukeException("You need to specify which task you want to add!\n");
+        }
+
+        String todo = command.split("todo")[1];
+        addTask(new ToDo(todo));
     }
 
     public static void main(String[] args) {
@@ -70,29 +107,15 @@ public class Duke {
                 if (command.equals("list")) {
                     printTasks();
                 } else if (command.startsWith("done")) {
-                    if (command.equals("done")) {
-                        throw new DukeException("You need to specify which task you've done!\n");
-                    }
-
-                    try {
-                        int taskIdx = Integer.parseInt(command.split(" ")[1]) - 1;
-                        completeTask(tasks.get(taskIdx));
-                    } catch (NumberFormatException err) {
-                        throw new DukeException("Please use the task number instead of task name!\n");
-                    } catch (IndexOutOfBoundsException err) {
-                        throw new DukeException("I'm sorry, but that task number is out of range.\n");
-                    }
+                    handleTasksOperation(command, "done");
+                } else if (command.startsWith("delete")) {
+                    handleTasksOperation(command, "delete");
                 } else if (command.startsWith("todo")) {
-                    if (command.equals("todo")) {
-                        throw new DukeException("You need to specify which task you want to add!\n");
-                    }
-
-                    String todo = command.split("todo")[1];
-                    addTask(new ToDo(todo));
-                } else if (command.startsWith("deadline") || command.startsWith("event")) {
-                    String taskType = command.split(" ")[0];
-                    String[] timeTask = parseTaskWithTime(command, taskType);
-                    addTask(new Deadline(timeTask[0], timeTask[1]));
+                    handleToDo(command);
+                } else if (command.startsWith("deadline")) {
+                    handleTaskWithTime(command, "deadline");
+                } else if (command.startsWith("event")) {
+                    handleTaskWithTime(command, "event");
                 } else {
                     throw new DukeException("I don't understand that command!\n");
                 }
