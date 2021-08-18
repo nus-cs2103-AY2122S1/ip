@@ -6,8 +6,8 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        String duke = "\nDuke: ";
-        String user = "\nUser: ";
+        String duke = "\nDuke:";
+        String user = "\nUser:";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -37,7 +37,7 @@ public class Duke {
                     System.out.println(duke + "\n\tTasks:");
                     for (int i = 0; i < tasks.size(); i++)
                         System.out.printf("\t\t%d.%s\n", i + 1, tasks.get(i));
-                    System.out.println("\t\tNow you have " + tasks.size() + " tasks in the list.");
+                    System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
                     break;
 
                 case "done":

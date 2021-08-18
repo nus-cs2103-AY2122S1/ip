@@ -5,3 +5,35 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+
+Duke:Hi, what do you want from me?
+
+
+User:
+Duke:
+	Added:
+		[T][ ]  borrow book
+	Now you have 1 tasks in the list.
+
+User:
+Duke:
+	Added:
+		[D][ ]  return book (by: Sunday)
+	Now you have 2 tasks in the list.
+
+User:
+Duke:
+	Added:
+		[E][ ]  project meeting (at: Mon 2-4pm)
+	Now you have 3 tasks in the list.
+
+User:
+Duke:
+	Tasks:
+		1.[T][ ]  borrow book
+		2.[D][ ]  return book (by: Sunday)
+		3.[E][ ]  project meeting (at: Mon 2-4pm)
+	Now you have 3 tasks in the list.
+
+User:
+Duke:Bye. Have a nice day.
