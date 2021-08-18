@@ -152,7 +152,6 @@ public class Duke {
             } else if (nextInput.contains("delete")) {
                 // to extract number from the input
                 String taskToBeRemoved = nextInput.replaceAll("[^0-9]", "");
-                System.out.println("the num is " + taskToBeRemoved);
                 int numToBeRemoved = Integer.parseInt(taskToBeRemoved) - 1;
                 Task removed = tasks.get(numToBeRemoved);
                 tasks.remove(numToBeRemoved);
