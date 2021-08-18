@@ -29,7 +29,7 @@ public class Duke {
                 list.get(index).setStatus(true);
 
                 System.out.println("---------");
-                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("Nice! I've marked this task as done:");
                 System.out.println(list.get(index));
                 System.out.println("---------");
             } else {

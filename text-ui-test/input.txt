@@ -1,0 +1,9 @@
+todo 1
+deadline /by 2 june
+list
+event /at 3 june
+done 3
+done 2
+list
+done 1
+list
