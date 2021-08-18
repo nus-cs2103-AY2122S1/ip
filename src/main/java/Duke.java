@@ -18,13 +18,14 @@ public class Duke {
         String welcome = "Hello! I'm Duke. A friendly chatbot!! :)\n" +
                     "What can I do for you?\n";
         String end_message = "Bye. I hope to talk to you again soon! :)";
+        String prompt_message = "Add to-do list ({input})/ View list (list) / Complete task (done {input}) / End (bye) :";
 
         //Print welcome message to the user
-        System.out.println(start + welcome + end);
+        System.out.println(start + logo + "\n" +  welcome + end);
 
         //Init new scanner to take in inputs
         Scanner s = new Scanner(System.in);
-        System.out.println("Add to-do list (input)/ View list(list) / Complete task (done {input}) / End (bye) :");
+        System.out.println(prompt_message);
         String input = s.nextLine();
         Task t = new Task(input);
 
@@ -33,7 +34,7 @@ public class Duke {
             if (!input.equals("list") && !input.contains("done")) {
                 System.out.println(start + "added: " + input + "\n" + end);
                 toDo.add(t);
-                System.out.println("Add to-do list (input)/ View list(list) / Complete task (done {input}) / End (bye) :");
+                System.out.println(prompt_message);
                 input = s.nextLine();
                 t = new Task(input);
             }
@@ -44,7 +45,7 @@ public class Duke {
                 toDo.get((int) i - 1).markAsDone();
                 String res = (i) + ". " + toDo.get(i-1).toString();
                 System.out.println(res);
-                System.out.println("Add to-do list (input)/ View list(list) / Complete task (done {input}) / End (bye) :");
+                System.out.println(prompt_message);
                 input = s.nextLine();
                 t = new Task(input);
             }
@@ -58,7 +59,7 @@ public class Duke {
                     System.out.println(res);
                 }
                 System.out.println(end);
-                System.out.println("Add to-do list (input)/ View list(list) / Complete task (done {input}) / End (bye) :");
+                System.out.println(prompt_message);
                 input = s.nextLine();
                 t = new Task(input);
             }
