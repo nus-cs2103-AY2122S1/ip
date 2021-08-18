@@ -16,7 +16,7 @@ public class TaskList {
                         + "     " + "Here are the tasks in your list:");
         for (int i = 0; i < list.length; i++) {
             if (list[i] != null) {
-                String taskItem = "     " + (i + 1) + "." + (list[i].checkDone()) + " " + list[i].showTask();
+                String taskItem = "     " + (i + 1) + "." + list[i].showType() + list[i].checkDone() + " " + list[i].showTask();
                 System.out.println(taskItem);
             }
         }
@@ -25,5 +25,15 @@ public class TaskList {
 
     public Task extractTask(int index) {
         return list[index];
+    }
+
+    public int length() {
+        int count = 0;
+        for (int i = 0; i < list.length; i ++) {
+            if (list[i] != null) {
+                count ++;
+            }
+        }
+        return count;
     }
 }

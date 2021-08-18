@@ -16,13 +16,41 @@ public class Duke {
             + "     Bye. Hope to see you again soon!\n"
             + "   _____________________________________\n";
 
-    public static void newTask(String taskName, TaskList tList) {
-        Task newTask = new Task(taskName);
-        tList.addTask(newTask);
-        String echoMessage = "   _____________________________________\n"
-                        + "     added: " + newTask.showTask() + "\n"
-                        + "   _____________________________________\n";
-        System.out.println(echoMessage);
+    public static void newToDo(String taskName, TaskList tList) {
+        ToDo newToDo = new ToDo(taskName);
+        tList.addTask(newToDo);
+        String toDoMessage = "   _____________________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       " + newToDo.showType() + newToDo.checkDone() + " " + newToDo.showTask() + "\n"
+                + "     Now you have " + tList.length() + " tasks in the list.\n"
+                + "   _____________________________________\n";
+        System.out.println(toDoMessage);
+    }
+
+    public static void newDeadline(String taskName, TaskList tList) {
+        Deadline newDeadline = new Deadline(taskName);
+        tList.addTask(newDeadline);
+        String deadlineMessage = "   _____________________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       " + newDeadline.showType()
+                            + newDeadline.checkDone() + " "
+                            + newDeadline.showTask() + "\n"
+                + "     Now you have " + tList.length() + " tasks in the list.\n"
+                + "   _____________________________________\n";
+        System.out.println(deadlineMessage);
+    }
+
+    public static void newEvent(String taskName, TaskList tList) {
+        Event newEvent = new Event(taskName);
+        tList.addTask(newEvent);
+        String eventMessage = "   _____________________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       " + newEvent.showType()
+                + newEvent.checkDone() + " "
+                + newEvent.showTask() + "\n"
+                + "     Now you have " + tList.length() + " tasks in the list.\n"
+                + "   _____________________________________\n";
+        System.out.println(eventMessage);
     }
 
     public static void main(String[] args) {
@@ -34,16 +62,29 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!(input.equals("bye"))) {
-            String[] doneInstruction = input.split(" ");
-            if (doneInstruction[0].equals("done")) {
-                int taskIndex = Integer.parseInt(doneInstruction[1]);
+            String[] instruction = input.split(" ", 2);
+            if (instruction[0].equals("todo")) {
+                newToDo(instruction[1], taskList);
+                input = sc.nextLine();
+                continue;
+            }
+
+            if (instruction[0].equals("deadline")) {
+                newDeadline(instruction[1], taskList);
+                input = sc.nextLine();
+                continue;
+            }
+            if (instruction[0].equals("event")) {
+                newEvent(instruction[1], taskList);
+                input = sc.nextLine();
+                continue;
+            }
+
+            if (instruction[0].equals("done")) {
+                int taskIndex = Integer.parseInt(instruction[1]);
                 Task taskItem = taskList.extractTask(taskIndex - 1);
                 taskItem.isDone();
-                String taskDoneMessage = "   _____________________________________\n"
-                                    + "     Nice! I've marked this task as done:\n"
-                                    + "       " + taskItem.checkDone() + " " + taskItem.showTask() + "\n"
-                                    + "   _____________________________________\n";
-                System.out.println(taskDoneMessage);
+                System.out.println(taskItem.taskDone());
                 input = sc.nextLine();
                 continue;
             }
@@ -53,9 +94,6 @@ public class Duke {
                 input = sc.nextLine();
                 continue;
             }
-
-            newTask(input, taskList);
-            input = sc.nextLine();
         }
 
         System.out.println(ByeMessage);
