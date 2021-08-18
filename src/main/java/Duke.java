@@ -21,8 +21,6 @@ import java.util.Scanner;
 public class Duke {
     private final ArrayList<Task> taskList = new ArrayList<>();
 
-    private enum Keywords {bye, list, done, todo, deadline, event, allCmd, delete}
-
     public static void main(String[] args) {
         Duke chatBot = new Duke();
         chatBot.run();
