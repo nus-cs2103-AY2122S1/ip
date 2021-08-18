@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private final String description;
     private Boolean completionStatus;
 
@@ -11,12 +11,14 @@ public class Task {
         completionStatus = true;
     }
 
+    public String completionIcon() {
+        return completionStatus ? "[X]" : "[ ]";
+    }
+
+    public abstract String typeIcon();
+
     @Override
     public String toString() {
-        if (completionStatus) {
-            return "[X] " + description;
-        } else {
-            return "[ ] " + description;
-        }
+        return typeIcon() + " " + completionIcon() + " " + description;
     }
 }

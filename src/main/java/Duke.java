@@ -31,7 +31,6 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 System.out.println(formatMessage(printList()));
-                continue;
             } else if (input.startsWith("done")) {
                 String arg = input.substring(5);
                 try {
@@ -46,16 +45,20 @@ public class Duke {
                     Task t = list.get(index-1);
                     t.completeTask();
                     System.out.println(formatMessage("Nice! I've marked this task as done\n       " + t));
-                    continue;
 
                 } catch (NumberFormatException e) {
                     System.out.println(formatMessage("Please enter a number after done"));
-                    continue;
                 }
+            } else if (input.startsWith("todo")) {
+                Todo t = new Todo(input.substring(5));
+                addToList(t);
+                System.out.println(formatMessage(
+                        "Got it, I've added this task:\n        " + t +
+                        "\n     Now you have " + list.size() + " task" + (list.size() != 1 ? "s" : "") +
+                        " in the list"));
+            } else {
+                System.out.println(formatMessage("That is not a recognised command"));
             }
-
-            addToList(new Task(input));
-            System.out.println(formatMessage("added: " + input));
         }
         System.out.println(formatMessage("Bye. Hope to see you again soon!"));
     }
