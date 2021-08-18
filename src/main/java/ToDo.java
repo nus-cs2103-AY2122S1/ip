@@ -18,6 +18,12 @@ public class ToDo extends ArrayList<Task> {
         return task.toString();
     }
 
+    public Task deleteTask(int index) {
+        Task task = super.get(index);
+        super.remove(index);
+        return task;
+    }
+
     /**
      * @return String representation of todo list
      */
