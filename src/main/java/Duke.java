@@ -19,58 +19,93 @@ public class Duke {
         formatAndPrint(WELCOME);
         Scanner sc = new Scanner(System.in);
         boolean continueListening = true;
-        while(continueListening) {
+        while (continueListening) {
             String input = sc.nextLine();
-            continueListening = listen(input);
+            try {
+                continueListening = listen(input);
+            } catch (DukeException e) {
+                formatAndPrint(e.getMessage());
+            }
         }
     }
 
     /**
      * Accepts user input and runs the appropriate function.
+     *
      * @param input String containing user input.
      * @return Boolean that controls whether to continue accepting user input.
      */
-    public boolean listen(String input) {
-        if (input.equals("bye")) {
+    public boolean listen(String input) throws DukeException {
+        // Get command
+        String[] splitCommand = input.split(" ", 2);
+        String command = splitCommand[0];
+        switch (command) {
+        case "bye":
             formatAndPrint(BYE);
             return false;
-        } else if (input.equals("list")) {
+        case "list":
             displayList();
-        } else if (input.startsWith("done")) {
-            // Split string into "done" and the value inputted by user.
-            String[] strArray = input.split(" ", 2);
+            break;
+        case "done":
+            // Error handling: number not provided.
+            if (splitCommand.length == 1) {
+                throw new DukeException("Please provide a number to mark as done.");
+            }
             // Retrieve value inputted by user and subtract 1 to get the index in the array.
-            int index = Integer.parseInt(strArray[1]) - 1;
+            int index = Integer.parseInt(splitCommand[1]) - 1;
+            // Error handling: negative number or number more than list length.
+            if (index < 0 || index >= list.size()) {
+                throw new DukeException("Invalid number.");
+            }
             markAsDone(index);
-        } else {
-            addToList(input);
+            break;
+        case "todo":
+            // Error handling: no task name.
+            if (splitCommand.length == 1) {
+                throw new DukeException("Description of a todo cannot be empty.");
+            }
+            addToList(new Todo(splitCommand[1]));
+            break;
+        case "deadline": {
+            // Error handling: no task name.
+            if (splitCommand.length == 1) {
+                throw new DukeException("Description of a deadline cannot be empty.");
+            }
+            // Split deadline message from due date
+            String[] splitMessage = splitCommand[1].split(" /by ", 2);
+            // Error handling: no due date.
+            if (splitMessage.length == 1) {
+                throw new DukeException("Due date cannot be empty.");
+            }
+            addToList(new Deadline(splitMessage[0], splitMessage[1]));
+            break;
+        }
+        case "event": {
+            // Error handling: no task name.
+            if (splitCommand.length == 1) {
+                throw new DukeException("Description of a event cannot be empty.");
+            }
+            // Split event message from due date
+            String[] splitMessage = splitCommand[1].split(" /at ", 2);
+            // Error handling: no time provided.
+            if (splitMessage.length == 1) {
+                throw new DukeException("Time cannot be empty.");
+            }
+            addToList(new Event(splitMessage[0], splitMessage[1]));
+            break;
+        }
+        default:
+            throw new DukeException("Sorry, I don't understand this command.");
         }
         return true;
     }
 
     /**
-     * Adds the user's input to the list and prints user's input.
-     * @param input String that user inputs.
+     * Adds task to the list of tasks.
+     *
+     * @param task Task that the user inputs.
      */
-    public void addToList(String input) {
-        Task task = new Task(input);
-        String[] splitType = input.split(" ", 2);
-        String type = splitType[0];
-        switch (type) {
-        case "todo":
-            task = new Todo(splitType[1]);
-            break;
-        case "deadline": {
-            String[] splitMessage = splitType[1].split(" /by ", 2);
-            task = new Deadline(splitMessage[0], splitMessage[1]);
-            break;
-        }
-        case "event": {
-            String[] splitMessage = splitType[1].split(" /at ", 2);
-            task = new Event(splitMessage[0], splitMessage[1]);
-            break;
-        }
-        }
+    public void addToList(Task task) {
         this.list.add(task);
         formatAndPrint(String.format("Got it. I've added this task:\n%s\nNow you have %d %s in your list.",
                 task,
@@ -95,6 +130,7 @@ public class Duke {
 
     /**
      * Marks a given task as done.
+     *
      * @param itemNo Index of the task in the ArrayList.
      */
     public void markAsDone(int itemNo) {
@@ -105,6 +141,7 @@ public class Duke {
 
     /**
      * Helper function to format output between 2 lines.
+     *
      * @param s String to be outputted.
      */
     private static void formatAndPrint(String s) {

@@ -7,6 +7,7 @@ public class Task {
 
     /**
      * Constructor for a task. When tasks are initialised, they are marked as not complete.
+     *
      * @param taskName Name of the task.
      */
     public Task(String taskName) {
@@ -16,6 +17,7 @@ public class Task {
 
     /**
      * Gets the name of the task.
+     *
      * @return Name of the task.
      */
     public String getName() {
@@ -31,6 +33,7 @@ public class Task {
 
     /**
      * Returns the completion status of the task.
+     *
      * @return Returns X if task is completed, " " otherwise.
      */
     public String getStatusIcon() {
@@ -40,6 +43,7 @@ public class Task {
     /**
      * Returns a string representation of the task.
      * This displays the completion status of the task along with its name.
+     *
      * @return String representation of the task.
      */
     @Override

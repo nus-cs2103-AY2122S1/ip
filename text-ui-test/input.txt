@@ -6,4 +6,9 @@ list
 done 2
 done 3
 list
+invalid input
+deadline
+deadline return book
+event watch lecture
+done
 bye
