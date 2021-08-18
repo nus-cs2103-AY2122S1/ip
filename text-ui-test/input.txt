@@ -1,0 +1,13 @@
+list
+todo read book
+todo cut hair
+deadline finish homework /by tomorrow 3pm
+deadline bio exam /by tues 5am
+event KTV /at Mon 2-4 pm
+list
+done 2
+done 3
+done 1
+list
+todo read another book
+bye
