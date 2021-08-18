@@ -1,7 +1,7 @@
-public class Task {
+public abstract class Task {
 
-    private String name;
-    private boolean isDone;
+    String name;
+    boolean isDone;
 
     public Task(String name) {
         this.name = name;
@@ -12,12 +12,6 @@ public class Task {
         this.isDone = true;
     }
 
-    public String toString() {
-        if (isDone) {
-            return "[x] " + name;
-        } else {
-            return "[ ] " + name;
-        }
-    }
+    public abstract String toString();
 
 }
