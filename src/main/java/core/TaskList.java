@@ -15,12 +15,14 @@ public class TaskList {
     public void addTask(Task task) {
         taskList.add(task);
         Ui.displayLine();
-        System.out.println("added: " + task);
+        System.out.println("Got it. I've added this task:\n" + task);
+        System.out.println(String.format("Now you have %s tasks in the list.", taskList.size()));
         Ui.displayLine();
     }
 
     public void listTasks() {
         Ui.displayLine();
+        System.out.println("Here are the tasks in your list:");
         int index = 1;
         for (Task task : taskList) {
             System.out.println(String.format("%s. %s", index, task));
