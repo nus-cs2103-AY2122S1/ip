@@ -1,4 +1,9 @@
+package core;
+
 import java.util.ArrayList;
+
+import gui.Ui;
+import tasks.Task;
 
 public class TaskList {
     private ArrayList<Task> taskList;

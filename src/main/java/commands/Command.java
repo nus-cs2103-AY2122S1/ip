@@ -1,3 +1,9 @@
+package commands;
+
+import core.TaskList;
+import gui.Ui;
+import tasks.Task;
+
 public class Command {
     private String input;
     private Ui ui;

@@ -1,3 +1,8 @@
+package core;
+
+import commands.Command;
+import gui.Ui;
+
 public class Duke {
     private Ui ui;
     private TaskList taskList;
