@@ -13,30 +13,29 @@ public class Duke {
 
     // The General Strings Used by the ChatBot
     private static final String logo = "\n" +
-            "\t\t /$$      /$$ /$$                 /$$$$$$$              /$$    \n" +
-            "\t\t| $$  /$ | $$| $$                | $$__  $$            | $$    \n" +
-            "\t\t| $$ /$$$| $$| $$$$$$$   /$$$$$$ | $$  \\ $$  /$$$$$$  /$$$$$$  \n" +
-            "\t\t| $$/$$ $$ $$| $$__  $$ /$$__  $$| $$$$$$$  /$$__  $$|_  $$_/  \n" +
-            "\t\t| $$$$_  $$$$| $$  \\ $$| $$  \\ $$| $$__  $$| $$  \\ $$  | $$    \n" +
-            "\t\t| $$$/ \\  $$$| $$  | $$| $$  | $$| $$  \\ $$| $$  | $$  | $$ /$$\n" +
-            "\t\t| $$/   \\  $$| $$  | $$|  $$$$$$/| $$$$$$$/|  $$$$$$/  |  $$$$/\n" +
-            "\t\t|__/     \\__/|__/  |__/ \\______/ |_______/  \\______/    \\___/  \n" +
-            "                                                               \n";
+            "\t\t\t\t\t /$$      /$$ /$$                 /$$$$$$$              /$$    \n" +
+            "\t\t\t\t\t| $$  /$ | $$| $$                | $$__  $$            | $$    \n" +
+            "\t\t\t\t\t| $$ /$$$| $$| $$$$$$$   /$$$$$$ | $$  \\ $$  /$$$$$$  /$$$$$$  \n" +
+            "\t\t\t\t\t| $$/$$ $$ $$| $$__  $$ /$$__  $$| $$$$$$$  /$$__  $$|_  $$_/  \n" +
+            "\t\t\t\t\t| $$$$_  $$$$| $$  \\ $$| $$  \\ $$| $$__  $$| $$  \\ $$  | $$    \n" +
+            "\t\t\t\t\t| $$$/ \\  $$$| $$  | $$| $$  | $$| $$  \\ $$| $$  | $$  | $$ /$$\n" +
+            "\t\t\t\t\t| $$/   \\  $$| $$  | $$|  $$$$$$/| $$$$$$$/|  $$$$$$/  |  $$$$/\n" +
+            "\t\t\t\t\t|__/     \\__/|__/  |__/ \\______/ |_______/  \\______/    \\___/  \n";
 
-    private static final String line = "__________________________________________________________________________________________";
+    private static final String line = "________________________________________________________________________________________________________________";
 
     private static final String bye = "\n" +
-            "\t  /$$$$$$                            /$$ /$$$$$$$                            /$$\n" +
-            "\t /$$__  $$                          | $$| $$__  $$                          | $$\n" +
-            "\t| $$  \\__/  /$$$$$$   /$$$$$$   /$$$$$$$| $$  \\ $$ /$$   /$$  /$$$$$$       | $$\n" +
-            "\t| $$ /$$$$ /$$__  $$ /$$__  $$ /$$__  $$| $$$$$$$ | $$  | $$ /$$__  $$      | $$\n" +
-            "\t| $$|_  $$| $$  \\ $$| $$  \\ $$| $$  | $$| $$__  $$| $$  | $$| $$$$$$$$      |__/\n" +
-            "\t| $$  \\ $$| $$  | $$| $$  | $$| $$  | $$| $$  \\ $$| $$  | $$| $$_____/          \n" +
-            "\t|  $$$$$$/|  $$$$$$/|  $$$$$$/|  $$$$$$$| $$$$$$$/|  $$$$$$$|  $$$$$$$       /$$\n" +
-            "\t\\______/  \\______/  \\______/  \\_______/|_______/  \\____  $$ \\_______/      |__/\n" +
-            "\t                                                   /$$  | $$                    \n" +
-            "\t                                                  |  $$$$$$/                    \n" +
-            "\t                                                   \\______/                     \n";
+            "\t\t\t  /$$$$$$                            /$$ /$$$$$$$                            /$$\n" +
+            "\t\t\t /$$__  $$                          | $$| $$__  $$                          | $$\n" +
+            "\t\t\t| $$  \\__/  /$$$$$$   /$$$$$$   /$$$$$$$| $$  \\ $$ /$$   /$$  /$$$$$$       | $$\n" +
+            "\t\t\t| $$ /$$$$ /$$__  $$ /$$__  $$ /$$__  $$| $$$$$$$ | $$  | $$ /$$__  $$      | $$\n" +
+            "\t\t\t| $$|_  $$| $$  \\ $$| $$  \\ $$| $$  | $$| $$__  $$| $$  | $$| $$$$$$$$      |__/\n" +
+            "\t\t\t| $$  \\ $$| $$  | $$| $$  | $$| $$  | $$| $$  \\ $$| $$  | $$| $$_____/          \n" +
+            "\t\t\t|  $$$$$$/|  $$$$$$/|  $$$$$$/|  $$$$$$$| $$$$$$$/|  $$$$$$$|  $$$$$$$       /$$\n" +
+            "\t\t\t\\______/  \\______/  \\______/  \\_______/|_______/  \\____  $$ \\_______/      |__/\n" +
+            "\t\t\t                                                   /$$  | $$                    \n" +
+            "\t\t\t                                                  |  $$$$$$/                    \n" +
+            "\t\t\t                                                   \\______/                     \n";
 
     // The Global Variables used by the ChatBot
     private static final Scanner cmdReader = new Scanner(System.in);
@@ -77,16 +76,6 @@ public class Duke {
             System.out.println(COLOR_CYAN + line + COLOR_REST);
         } else if (level == LEVEL.MIDDLE) {
             System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_REST + answer);
-        }
-    }
-
-    //Method to Add to List
-    public static void addToList(String item) {
-        if (LIST.add(new Task(item))) {
-            echo("I have added this task to the list: \"" + item + "\"", LEVEL.START);
-            echo("You now have " + LIST.size() + " task(s) in the list.", LEVEL.END);
-        } else {
-            echo("I am sorry. The task couldn't be added, please try again.", LEVEL.COMPLETE);
         }
     }
 
@@ -160,6 +149,51 @@ public class Duke {
         }
     }
 
+    // Method to Add a ToDos type Task into List
+    public static void addTODO(String command) {
+        try {
+            Todo task = new Todo(command.substring(5));
+            if (LIST.add(task)) {
+                echo("I have added this ToDo Task to the list: \"" + task.getDescription() + "\"", LEVEL.START);
+                echo("You now have " + LIST.size() + " task(s) in the list.", LEVEL.END);
+            } else {
+                echo("I am sorry. The task couldn't be added, please try again.", LEVEL.COMPLETE);
+            }
+        } catch (Exception e) {
+            echo("Ensure that the command is of the form \"todo #description\". The description can not be empty.", LEVEL.COMPLETE);
+        }
+    }
+
+    // Method to Add a Events type Task into List
+    public static void addEvent(String command) {
+        try {
+            Event task = new Event(command.substring(6));
+            if (LIST.add(task)) {
+                echo("I have added this Event Task to the list: \"" + task.getDescription() + "\"", LEVEL.START);
+                echo("You now have " + LIST.size() + " task(s) in the list.", LEVEL.END);
+            } else {
+                echo("I am sorry. The task couldn't be added, please try again.", LEVEL.COMPLETE);
+            }
+        } catch (Exception e) {
+            echo("Ensure that the command is of the form \"todo #description\". The description can not be empty.", LEVEL.COMPLETE);
+        }
+    }
+
+    // Method to Add a Deadline type Task into List
+    public static void addDeadline(String command) {
+        try {
+            Deadline task = new Deadline(command.substring(9));
+            if (LIST.add(task)) {
+                echo("I have added this Deadline Task to the list: \"" + task.getDescription() + "\"", LEVEL.START);
+                echo("You now have " + LIST.size() + " task(s) in the list.", LEVEL.END);
+            } else {
+                echo("I am sorry. The task couldn't be added, please try again.", LEVEL.COMPLETE);
+            }
+        } catch (Exception e) {
+            echo("Ensure that the command is of the form \"todo #description\". The description can not be empty.", LEVEL.COMPLETE);
+        }
+    }
+
     //Main Method
     public static void main(String[] args) {
 
@@ -195,9 +229,18 @@ public class Duke {
             } else if (commandList.length == 2 && commandList[0].equals("remove")) {
                 //If input starts with remove, delete the specific item in list
                 removeFromList(commandList[1]);
+            } else if (commandList[0].equals("todo")) {
+                //If input starts with todos, add that to list
+                addTODO(command);
+            } else if (commandList[0].equals("event")) {
+                //If input starts with todos, add that to list
+                addEvent(command);
+            } else if (commandList[0].equals("deadline")) {
+                //If input starts with todos, add that to list
+                addDeadline(command);
             } else {
-                // Else adds the input line to list
-                addToList(command);
+                // Else Invalid
+                echo("Oops, That's an invalid command", LEVEL.COMPLETE);
             }
         }
     }
