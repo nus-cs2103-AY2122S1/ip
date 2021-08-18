@@ -80,7 +80,7 @@ public class Duke {
                 else {
                     System.out.println(INDENTATION  + GIVEN_ADDED + cmd);
                     cmdList[order] = cmd;
-                    task[order] = new Task(cmd, false);
+                    task[order] = new Task(cmd);
                     order ++;
                 }
                 System.out.println(INDENTATION + UNDERLINE);
