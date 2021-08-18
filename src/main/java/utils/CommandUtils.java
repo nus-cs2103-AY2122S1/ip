@@ -1,6 +1,8 @@
 package utils;
 
-import exception.DukeException;
+import exception.DukeExtractCommandException;
+import exception.DukeTaskNumberOutOfBoundsException;
+import exception.DukeUnknownException;
 import task.Operation;
 
 /**
@@ -18,16 +20,17 @@ public class CommandUtils {
      * Extract operation from command.
      *
      * @return operation from command if exists, else throw exception
-     * @throws DukeException if operation is empty
+     * @throws DukeExtractCommandException if operation is empty or cannot be extracted properly
+     * @throws DukeUnknownException if operation is unknown
      */
-    public static Operation extractOperation(String command) throws DukeException {
+    public static Operation extractOperation(String command) throws DukeExtractCommandException, DukeUnknownException {
         String[] contents = command.split(" ");
         if (contents.length == 0) {
-            throw new DukeException(INDENTATION + "☹ OOPS!!! The operation cannot be empty.");
+            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The operation cannot be extracted properly.");
         }
         String operation = contents[0];
         if (operation.equals("")) {
-            throw new DukeException(INDENTATION + "☹ OOPS!!! The operation cannot be empty.");
+            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The operation cannot be empty.");
         } else {
             if (operation.equals(Operation.TODO.getValue())) {
                 return Operation.TODO;
@@ -42,7 +45,7 @@ public class CommandUtils {
             } else if (operation.equals(Operation.BYE.getValue())) {
                 return Operation.BYE;
             } else {
-                throw new DukeException(INDENTATION + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeUnknownException(INDENTATION + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
@@ -52,21 +55,23 @@ public class CommandUtils {
      *
      * @return task number from command if it exists and is a positive integer,
      *         else throw exception
-     * @throws DukeException if task number is empty or not a positive integer
+     * @throws DukeExtractCommandException if task number is empty
+     * @throws NumberFormatException if task number is not a integer
+     * @throws DukeTaskNumberOutOfBoundsException if task number is not a positive integer
      */
-    public static int extractTaskNumber(String command) throws DukeException {
+    public static int extractTaskNumber(String command) throws DukeExtractCommandException, NumberFormatException, DukeTaskNumberOutOfBoundsException {
         String[] contents = command.split(" ", 2);
-        if (contents.length == 1) {
-            throw new DukeException(INDENTATION + "☹ OOPS!!! The task number cannot be empty.");
+        if (contents.length != 2) {
+            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The task number cannot be extracted properly.");
         }
         int number = 0;
         try {
             number = Integer.parseInt(contents[1]);
         } catch (Exception e) {
-            throw new DukeException(INDENTATION + "☹ OOPS!!! The task number is not an integer.");
+            throw new NumberFormatException(INDENTATION + "☹ OOPS!!! The task number is not an integer.");
         }
         if (number < 1) {
-            throw new DukeException(INDENTATION + "☹ OOPS!!! The task number is not a positive integer.");
+            throw new DukeTaskNumberOutOfBoundsException(INDENTATION + "☹ OOPS!!! The task number is not a positive integer.");
         }
         return number;
     }
@@ -74,18 +79,19 @@ public class CommandUtils {
     /**
      * Extract task description from command.
      *
-     * @return task description from command if it exists, else throw exception
-     * @throws DukeException if task description is empty
+     * @return task description from command if it exists and can be extracted properly,
+     *         else throw exception
+     * @throws DukeExtractCommandException if task description is empty or cannot be extracted properly
      */
-    public static String extractTaskDescription(String command) throws DukeException {
+    public static String extractTaskDescription(String command) throws DukeExtractCommandException {
         String[] contents = command.split(" ", 2);
         String operation = contents[0];
-        if (contents.length == 1) {
-            throw new DukeException(INDENTATION + "☹ OOPS!!! The description of a " + operation + " cannot be empty.");
+        if (contents.length != 2) {
+            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The description of a " + operation + " cannot be extracted properly.");
         }
         String description = contents[1];
         if (description.equals("")) {
-            throw new DukeException(INDENTATION + "☹ OOPS!!! The description of a " + operation + " cannot be empty.");
+            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The description of a " + operation + " cannot be empty.");
         }
         return description;
     }
@@ -95,18 +101,18 @@ public class CommandUtils {
      *
      * @param  description extracted from task command
      * @param  regex " /at " or " /by "
-     * @return task details from description if they are not empty and can be extracted properly,
+     * @return task details from description if they exist and can be extracted properly,
      *         else throw exception
-     * @throws DukeException if task details are empty or cannot be extracted properly
+     * @throws DukeExtractCommandException if task details are empty or cannot be extracted properly
      */
-    public static String[] extractTaskDetails(String description, String regex) throws DukeException {
+    public static String[] extractTaskDetails(String description, String regex) throws DukeExtractCommandException {
         String[] details = description.split(regex, 2);
         if (details.length != 2) {
-            throw new DukeException(INDENTATION + "☹ OOPS!!! The task details cannot be extracted properly.");
+            throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The task details cannot be extracted properly.");
         }
         for (String detail: details) {
             if (detail.equals("")) {
-                throw new DukeException(INDENTATION + "☹ OOPS!!! The task details cannot be empty.");
+                throw new DukeExtractCommandException(INDENTATION + "☹ OOPS!!! The task details cannot be empty.");
             }
         }
         return details;
