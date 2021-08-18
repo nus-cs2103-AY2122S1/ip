@@ -8,9 +8,11 @@ public class TaskManager {
     }
 
     public void list() {
+        System.out.println("Duke says >> ");
         for (int i = 0; i < taskArrayList.size(); i++) {
-            String s = String.format("[%d] %s", i + 1, taskArrayList.get(i));
+            String s = String.format("%d. %s", i + 1, taskArrayList.get(i));
             System.out.println(s);
         }
+        System.out.println("");
     }
 }
