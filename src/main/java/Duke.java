@@ -11,30 +11,46 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         String task = sc.nextLine();
         while (!task.equals("bye")) {
-            if (task.length() >= 6 && task.substring(0, 4).equals("done")) {
+            System.out.println("    ____________________________________________________________");
+            if (task.contains("todo")) {
+                String taskName = task.substring(5);
+                tasks[numOfTasks++] = new Todo(taskName);
+                System.out.println("     Got it. I've added this task:");
+                System.out.println("      " + tasks[numOfTasks - 1].toString());
+                System.out.println("     Now you have " + numOfTasks + " tasks in the list.");
+            } else if (task.contains("deadline")) {
+                int position = task.indexOf('\\');
+                String taskName = task.substring(9, position - 1);
+                String deadlineTime = task.substring(position + 4);
+                tasks[numOfTasks++] = new Deadline(taskName, deadlineTime);
+                System.out.println("     Got it. I've added this task:");
+                System.out.println("      " + tasks[numOfTasks - 1].toString());
+                System.out.println("     Now you have " + numOfTasks + " tasks in the list.");
+            } else if (task.contains("event")) {
+                int position = task.indexOf('\\');
+                String taskName = task.substring(6, position - 1);
+                String eventTime = task.substring(position + 4);
+                tasks[numOfTasks++] = new Event(taskName, eventTime);
+                System.out.println("     Got it. I've added this task:");
+                System.out.println("      " + tasks[numOfTasks - 1].toString());
+                System.out.println("     Now you have " + numOfTasks + " tasks in the list.");
+            } else if (task.contains("done")) {
                 int itemDone = Integer.parseInt(task.substring(5));
                 tasks[itemDone - 1].done = true;
-                System.out.println("    ____________________________________________________________");
                 System.out.println("    Nice! I've marked this task as done: ");
                 System.out.println("      " + tasks[itemDone - 1].toString());
-                System.out.println("    ____________________________________________________________");
-                task = sc.nextLine();
             } else if (task.equals("list")) {
-                System.out.println("    ____________________________________________________________");
                 System.out.println("    Here are the tasks in your list:");
                 for (int i = 1; i <= numOfTasks; i++) {
                     System.out.println("    " + i + "." + tasks[i - 1].toString());
                 }
-                System.out.println("    ____________________________________________________________");
-                task = sc.nextLine();
             } else {
                 tasks[numOfTasks] = new Task(task);
                 numOfTasks++;
-                System.out.println("    ____________________________________________________________");
                 System.out.println("    added: " + task);
-                System.out.println("    ____________________________________________________________");
-                task = sc.nextLine();
             }
+            System.out.println("    ____________________________________________________________");
+            task = sc.nextLine();
         }
         System.out.println("    ____________________________________________________________");
         System.out.println("    Bye. Hope to see you again soon!");
