@@ -1,10 +1,11 @@
 import java.util.*;
+
 public class Duke {
-    private String[] taskList;
+    private ArrayList<Task> taskList;
     private int numTask;
 
     public Duke() {
-        taskList = new String[100];
+        taskList = new ArrayList<Task>();
         numTask = 0;
     }
 
@@ -19,10 +20,13 @@ public class Duke {
     }
 
     private void messageHandle(String userInput) {
-        if (userInput.equals("exit")) {
+        String command = userInput.split(" ")[0];
+        if (command.equals("exit")) {
             this.exit();
-        } else if (userInput.equals("list")) {
+        } else if (command.equals("list")) {
             this.list();
+        } else if (command.equals("done")) {
+            this.done(userInput);
         } else {
             this.add(userInput);
         }
@@ -52,12 +56,13 @@ public class Duke {
         System.exit(0);
     }
 
-    private void add(String args) {
-        this.taskList[numTask] = args;
+    private void add(String taskDescription) {
+        Task newTask = new Task(taskDescription);
+        this.taskList.add(newTask);
         numTask = numTask + 1;
         String start = "_____________________________________\n";
         String end = "\n_____________________________________";
-        String output = start + "added: " + args + end;
+        String output = start + "added: " + newTask.getDescription() + end;
         System.out.println(output);
     }
 
@@ -66,14 +71,27 @@ public class Duke {
         if (numTask == 0) {
             task = " ";
         } else {
-            task = "1. " + taskList[0];
+            task = "1. " + taskList.get(0).getFullDescription();
             for(int taskNumber = 2; taskNumber <= numTask; taskNumber++) {
-                task = task + "\n" + taskNumber + ". " + taskList[taskNumber - 1];
+                task = task + "\n" + taskNumber + ". " + taskList.get(taskNumber - 1).getFullDescription();
             }
         }
         String start = "_____________________________________\n";
+        String listStatement = "Here are the tasks in your list:\n";
         String end = "\n_____________________________________";
-        String output = start + task + end;
+        String output = start + listStatement + task + end;
+        System.out.println(output);
+    }
+
+    private void done(String userInput) {
+        int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+        Task currentTask = taskList.get(taskNumber - 1);
+        currentTask.markDone();
+        String start = "_____________________________________\n";
+        String end = "\n_____________________________________";
+        String markDone = "Nice! I've marked this task as done:\n";
+        String taskStatus = currentTask.getFullDescription();
+        String output = start + markDone + taskStatus + end;
         System.out.println(output);
     }
 }
