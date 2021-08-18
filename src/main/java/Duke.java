@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,38 +14,47 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println(duke + "Hi, what do you want from me?\n");
-        System.out.print(user);
 
         Scanner scanner = new Scanner(System.in);
+        boolean exiting = false;
         String userInput;
-        int nTasks = 0;
-        String[] tasks = new String[100];
-        for (int i = 0; i < 100; i++)
-            tasks[i] = "";
-
+        ArrayList<Task> tasks = new ArrayList<>();
 
         do {
+            System.out.print(user);
             userInput = scanner.nextLine();
 
-            if (userInput.equalsIgnoreCase("bye"))
-                break;
+            Scanner userInputScanner = new Scanner(userInput);
+            String operation = userInputScanner.next();
 
-            if (userInput.equalsIgnoreCase("list")) {
-                System.out.println(duke + "\n\tTasks:");
-                if (nTasks == 0)
-                    System.out.println("\t\tNothing in list");
-                else
-                    for (int i = 0; i < nTasks; i++) {
-                        System.out.printf("\t\t%d. %s\n", i + 1, tasks[i]);
-                    }
-            }
-            else {
-                tasks[nTasks++] = userInput;
-                System.out.println(duke + "\n\tAdded: " + userInput);
-            }
+            switch (operation.toLowerCase()) {
+                case "bye":
+                    exiting = true;
+                    break;
 
-            System.out.print(user);
-        } while (true);
+                case "list":
+                    System.out.println(duke + "\n\tTasks:");
+                    if (tasks.size() == 0)
+                        System.out.println("\t\tNothing in list");
+                    else
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.printf("\t\t%d.%s\n", i + 1, tasks.get(i));
+                        }
+                    break;
+
+                case "done":
+                    int taskNum = userInputScanner.nextInt();
+                    tasks.get(taskNum - 1).setDone(true);
+                    System.out.println(duke + "\n\tMarking task as completed:");
+                    System.out.printf("\t\t%s\n", tasks.get(taskNum - 1));
+                    break;
+
+                default:
+                    tasks.add(new Task(userInput));
+                    System.out.println(duke + "\n\tAdded: " + userInput);
+                    break;
+            }
+        } while (!exiting);
 
         System.out.println(duke + "Bye. Have a nice day.");
     }
