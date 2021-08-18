@@ -14,18 +14,19 @@ public class Duke {
     private final static String LIST_ENTRIES_COMMAND = "list";
 
     private final static String MARK_ENTRY_DONE_COMMAND = "done";
+    private final static String DELETE_ENTRY_COMMAND = "delete";
 
     private final static String TODO_COMMAND = "todo";
     private final static String EVENT_COMMAND = "event";
     private final static String DEADLINE_COMMAND = "deadline";
 
-    private static Entry[] entries;
+    private static ArrayList<Entry> entries;
 
     private static int numberOfEntries;
 
     private static void addEntry(Entry entry, String command) throws DukeException {
         if (!entry.isEmpty()){
-            entries[numberOfEntries++] = entry;
+            entries.add(numberOfEntries++, entry);
             System.out.println("Awesome, Duke remembers this event:" + entry);
             if (numberOfEntries < 2) {
                 System.out.println("We now have " + numberOfEntries + " task in our plan!");
@@ -38,15 +39,25 @@ public class Duke {
         }
     }
 
+    private static void deleteEntry(int index) throws DukeException {
+        if (entries.isEmpty() || index < 1 || index > numberOfEntries) {
+            throw new DukeException("Duke can't find anything to delete!");
+        } else {
+            Entry deletedEntry = entries.remove(index - 1);
+            numberOfEntries--;
+            System.out.println("Removed entry\n" + deletedEntry);
+        }
+    }
+
     private static void initialiseDuke() {
-        entries = new Entry[100];
+        entries = new ArrayList<>(100);
         numberOfEntries = 0;
     }
 
     private static void listEntries() throws DukeException {
         if (numberOfEntries > 0) {
             for (int i = 0; i < numberOfEntries; i++) {
-                System.out.println(i + 1 + "." + entries[i]);
+                System.out.println(i + 1 + "." + entries.get(i));
             }
         } else {
             throw new DukeException("No entries to display!");
@@ -55,9 +66,9 @@ public class Duke {
 
     private static void markEntryAsDone(int entryNumber) throws DukeException {
         if (entryNumber > 0 && entryNumber <= numberOfEntries) {
-            if (entries[entryNumber - 1].markEntryAsDone()) {
+            if (entries.get(entryNumber - 1).markEntryAsDone()) {
                 System.out.println("Nice! I've marked this entry as done:");
-                System.out.println("\t" + entries[entryNumber - 1]);
+                System.out.println("\t" + entries.get(entryNumber - 1));
             } else {
                 System.out.println("Entry is already marked as done!");
             }
@@ -149,6 +160,10 @@ public class Duke {
 
             case DEADLINE_COMMAND:
                 addEntry(new Deadline(entry, timing), command);
+                break;
+
+            case DELETE_ENTRY_COMMAND:
+                deleteEntry(Integer.parseInt(entry));
                 break;
 
             default:
