@@ -18,7 +18,7 @@ public class Task {
     public void completeTask() {
         this.isDone = true;
         System.out.println("Nice! I have marked this task as done: \n"
-                + this.toString());
+                + this);
     }
 
     /**

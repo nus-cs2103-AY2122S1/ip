@@ -1,6 +1,14 @@
 import java.util.Scanner;
 
 public class Virushade {
+
+    /**
+     * Prints a line break. Used after every interaction with Virushade.
+     */
+    private static void lineBreak() {
+        System.out.println("_____________________________________________________\n");
+    }
+
     /**
      * Prints the greeting.
      */
@@ -11,12 +19,15 @@ public class Virushade {
                 + " \\ \\  / /  | | | ,__|| | | | \\ \\\n"
                 + "  \\ \\/ /   | | | |   | |_| | _) \\\n"
                 + "   \\__/    |_| |_|    \\__,_||___/\n"
-                + "What can <<Virushade>> do for you?");
+                + "What can <<Virushade>> do for you?\n");
+        lineBreak();
     }
+
+
 
     /**
      * The echo function that Virushade uses. Echoes whatever words that Virushade is given.
-     * @param wordToEcho The word provided by the user for Duke to echo.
+     * @param wordToEcho The word provided by the user for Virushade to echo.
      */
     private static void echo(String wordToEcho) {
         System.out.println(wordToEcho);
@@ -27,7 +38,23 @@ public class Virushade {
      */
     private static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
+        lineBreak();
         System.exit(0);
+    }
+
+    /**
+     * @return The first word of a given string.
+     */
+    private static String firstWord(String str) {
+        int index = str.indexOf(' ');
+
+        if (index > -1) {
+            // If there exists ' ' in the string, take out the first word only.
+            return str.substring(0, index).trim();
+        } else {
+            // If there exists no ' ' in the string, return the entire string.
+            return str;
+        }
     }
 
     /**
@@ -43,10 +70,13 @@ public class Virushade {
             if (str.equals("bye")) {
                 break;
             } else if (str.equals("list")) {
-                Memory.list();
+                TaskList.list();
+            } else if (firstWord(str).equals("done")) {
+                TaskList.completeTask(str);
             } else {
-                Memory.add(str);
+                TaskList.add(str);
             }
+            lineBreak();
         }
 
         sc.close();
