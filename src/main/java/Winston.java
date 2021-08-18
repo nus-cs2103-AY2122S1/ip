@@ -45,7 +45,7 @@ public class Winston {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Hi there! Winston reporting.\nWhat can I do for you? \n" +
+        System.out.println("Hi there! Winston reporting.\nWhat can I do for you?\n" +
                 "Available Commands: done, list, todo, deadline, event, bye");
         String cmd = "";
         Winston winston1 = new Winston();
@@ -88,7 +88,7 @@ public class Winston {
                     break;
                 }
                 default: {
-                    System.out.print("Invalid command. Please input a valid command.");
+                    System.out.print("Invalid command. Please input a valid command." + "\n");
                 }
             }
             cmd = scan.nextLine();
