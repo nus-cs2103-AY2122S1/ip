@@ -30,19 +30,19 @@ public class TaskManager {
         if (description.isEmpty()) {
             throw new TaskManagerException("Task description cannot be empty.");
         }
-        Task todo = new Todo(description);
+        Todo todo = new Todo(description);
         return addTask(todo);
     }
 
     public Task addEventTask(String userInput) throws TaskManagerException {
-        String[] parameterArray = splitUserInput("/at", userInput);
-        Task event = new Event(parameterArray[0], parameterArray[1]); // desc, timing
+        String[] parameterArray = splitUserInput(Event.SPLITTER, userInput);
+        Event event = new Event(parameterArray[0], parameterArray[1]); // desc, timing
         return addTask(event);
     }
 
     public Task addDeadlineTask(String userInput) throws TaskManagerException {
-        String[] parameterArray = splitUserInput("/by", userInput);
-        Task deadline = new Deadline(parameterArray[0], parameterArray[1]);// desc, by
+        String[] parameterArray = splitUserInput(Deadline.SPLITTER, userInput);
+        Deadline deadline = new Deadline(parameterArray[0], parameterArray[1]); // desc, by
         return addTask(deadline);
     }
 

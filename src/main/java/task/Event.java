@@ -2,6 +2,8 @@ package task;
 
 public class Event extends Task {
 
+    public final static String SPLITTER = "at";
+
     private String timing;
 
     public Event(String description, String timing) {
@@ -18,7 +20,7 @@ public class Event extends Task {
     }
 
     public String getFormattedTiming() {
-        return " (at: " + timing + ")";
+        return " (" + SPLITTER + ": " + timing + ")";
     }
 
     @Override
