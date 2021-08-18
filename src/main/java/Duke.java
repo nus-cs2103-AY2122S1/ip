@@ -120,7 +120,7 @@ public class Duke {
                         System.out.println(i+1 + ". " + task.toString());
                     }
                 }
-            } else if (input.contains("task")) {
+            } else if (input.contains("todo")) {
                 ToDo todo = new ToDo(input);
                 dataStore.add(todo);
 
