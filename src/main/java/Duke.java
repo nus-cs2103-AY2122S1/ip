@@ -21,8 +21,8 @@ public class Duke {
                 : size + " tasks";
     }
 
-    private static void doTask(String idx) {
-        Task t = taskList.get(Integer.parseInt(idx) - 1);
+    private static void doTask(int idx) {
+        Task t = taskList.get(idx);
         t.markAsDone();
         System.out.println("Nice! I've marked this task as done: \n\t" + t);
     }
@@ -49,6 +49,12 @@ public class Duke {
         System.out.println("Now you have " + formatNumTasks() + " in the list.");
     }
 
+    private static void deleteTask(int idx) {
+        System.out.println("Noted. I've removed this task: \n\t" + taskList.get(idx));
+        taskList.remove(idx);
+        System.out.println("Now you have " + formatNumTasks() + " in the list.");
+    }
+
     private static TaskType getTaskType(String taskInput) {
         return taskInput.equals("event") ? TaskType.Event
                 : taskInput.equals("deadline") ? TaskType.Deadline
@@ -69,7 +75,9 @@ public class Duke {
             if (firstParam.equals("list")) {
                 displayTasks();
             } else if (firstParam.equals("done")) {
-                doTask(params[1]);
+                doTask(Integer.parseInt(params[1]) - 1);
+            } else if (firstParam.equals("delete")) {
+                deleteTask(Integer.parseInt(params[1]) - 1);
             } else if (!taskNameIsValid(firstParam)) {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             } else if (params.length < 2) {
