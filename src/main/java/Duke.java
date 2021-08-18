@@ -12,7 +12,7 @@ public class Duke {
 
     public static String[] extractCommand(String[] command) throws EmptyDescriptionException {
         if (command.length < 2 || command[1].equals("") || command[1].trim().isEmpty())
-            throw new EmptyDescriptionException("The description of a todo cannot be empty.");
+            throw new EmptyDescriptionException(String.format("The description of a %s cannot be empty.", command[0]));
         return command[1].split(" /by | /at ", 2);
     }
 
