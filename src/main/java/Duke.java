@@ -1,8 +1,10 @@
 public class Duke {
     private Ui ui;
+    private TaskList taskList;
 
     public Duke() {
         ui = new Ui();
+        taskList = new TaskList();
     }
 
     private void run() {
@@ -12,7 +14,7 @@ public class Duke {
         while (!shouldExit) {
             String input = ui.readInput();
             Command command = new Command(input);
-            command.execute();
+            command.execute(taskList);
             shouldExit = command.shouldExit();
         }
     }
