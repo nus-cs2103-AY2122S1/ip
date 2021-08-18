@@ -28,17 +28,17 @@ public class Duke {
         } else if (command.equals("done")) {
             this.done(userInput);
         } else if (command.equals("todo")) {
-            String taskDescription = userInput.split("todo")[1];
+            String taskDescription = userInput.split("todo ")[1];
             Todo newTodo = new Todo(taskDescription);
             this.addTask(newTodo);
         } else if (command.equals("deadline")) {
-            String[] splitString = userInput.split("deadline|/by");
+            String[] splitString = userInput.split("deadline |/by");
             String taskDescription = splitString[1];
             String by = splitString[2];
             Deadline newDeadline = new Deadline(taskDescription, by);
             this.addTask(newDeadline);
         } else if (command.equals("event")) {
-            String[] splitString = userInput.split("event|/at");
+            String[] splitString = userInput.split("event |/at");
             String taskDescription = splitString[1];
             String at = splitString[2];
             Event newEvent = new Event(taskDescription, at);
