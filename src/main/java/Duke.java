@@ -25,70 +25,70 @@ public class Duke {
         Scanner input = new Scanner(System.in);
 
         while(true) {
-            s = input.nextLine();
+            try {
+                s = input.nextLine();
 
-            if (s.startsWith("bye")) {
-                drawLine();
-                System.out.println("\tBye. Hope to see you again soon!");
-                drawLine();
-                break;
-            }
-
-            else if (s.equals("list")) {
-                drawLine();
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < list.size(); i++) {
-                    System.out.println(i+1 + ". " + list.get(i).toString());
+                if (s.startsWith("bye")) {
+                    drawLine();
+                    System.out.println("\tBye. Hope to see you again soon!");
+                    drawLine();
+                    break;
+                } else if (s.equals("list")) {
+                    drawLine();
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < list.size(); i++) {
+                        System.out.println(i + 1 + ". " + list.get(i).toString());
+                    }
+                    drawLine();
+                    continue;
+                } else if (s.startsWith("done")) {
+                    if (s.length() == 4 || s.length() == 5) {
+                        throw new DukeException("☹ OOPS!!! You did not put which task you want me to mark it complete.");
+                    }
+                    drawLine();
+                    System.out.println("\tNice! I've marked this task as done:");
+                    taskNumber = Integer.parseInt(s.substring(s.indexOf(" ") + 1)) - 1;
+                    list.get(taskNumber).markAsDone();
+                    System.out.println("\t\t[" + list.get(taskNumber).getStatusIcon() + "] "
+                            + list.get(taskNumber).getdescription());
+                    drawLine();
+                    continue;
+                } else if (s.startsWith("todo")) {
+                    if (s.length() == 4 || s.length() == 5) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    Todo todo = new Todo(s.substring(s.indexOf(" ") + 1));
+                    list.add(todo);
+                    drawLine();
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("\t" + todo);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    drawLine();
+                } else if (s.startsWith("deadline")) {
+                    Deadline deadline = new Deadline(s.substring(s.indexOf(" ") + 1, s.indexOf(" /by")),
+                            s.substring(s.indexOf("/by") + 4));
+                    list.add(deadline);
+                    drawLine();
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("\t" + deadline);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    drawLine();
+                } else if (s.startsWith("event")) {
+                    Event event = new Event(s.substring(s.indexOf(" ") + 1, s.indexOf(" /at")),
+                            s.substring(s.indexOf("/at") + 4));
+                    list.add(event);
+                    drawLine();
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("\t" + event);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    drawLine();
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-                drawLine();
-                continue;
             }
-
-            else if (s.startsWith("done")) {
+            catch (DukeException e) {
                 drawLine();
-                System.out.println("\tNice! I've marked this task as done:");
-                taskNumber = Integer.parseInt(s.substring(s.indexOf(" ") + 1)) - 1;
-                list.get(taskNumber).markAsDone();
-                System.out.println("\t\t[" + list.get(taskNumber).getStatusIcon() + "] "
-                        + list.get(taskNumber).getdescription());
-                drawLine();
-                continue;
-            }
-
-            else if (s.startsWith("todo")) {
-                Todo todo = new Todo(s.substring(s.indexOf(" ") + 1));
-                list.add(todo);
-                drawLine();
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + todo);
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
-                drawLine();
-            }
-
-            else if (s.startsWith("deadline")) {
-                Deadline deadline = new Deadline(s.substring(s.indexOf(" ") + 1, s.indexOf(" /by")),
-                        s.substring(s.indexOf("/by") + 4));
-                list.add(deadline);
-                drawLine();
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + deadline);
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
-                drawLine();
-            }
-
-            else if (s.startsWith("event")) {
-                Event event = new Event(s.substring(s.indexOf(" ") + 1, s.indexOf(" /at")),
-                        s.substring(s.indexOf("/at") + 4));
-                list.add(event);
-                drawLine();
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + event);
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
-                drawLine();
-            }
-            else {
-                drawLine();
-                System.out.println("I don't understand. Please try again.");
+                System.out.println(e.getMessage());
                 drawLine();
             }
         }
