@@ -1,7 +1,7 @@
 public class Event extends Task{
     private String at;
 
-    public Event(String name, String at){
+    public Event(String name, String at) throws DukeException {
         super(name);
         this.at = at;
     }
