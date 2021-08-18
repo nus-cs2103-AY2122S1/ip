@@ -4,7 +4,8 @@ import Duke.Duke;
 
 public abstract class Command {
     private static final Command[] COMMAND_LIST = {new ExitCommand()};
-    private static final Command UNKOWN_COMMAND = new UnknownCommand();
+    private static final Command ADD_TODO_COMMAND = new AddTodoCommand();
+//    private static final Command UNKOWN_COMMAND = new UnknownCommand();
 
     /**
      * Factory method
@@ -17,7 +18,7 @@ public abstract class Command {
                 return cmd;
         }
 
-        return UNKOWN_COMMAND;
+        return ADD_TODO_COMMAND;
     }
 
     abstract public void run(Duke duke, Duke.UserInput input);

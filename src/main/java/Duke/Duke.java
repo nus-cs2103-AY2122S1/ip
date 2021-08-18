@@ -1,6 +1,7 @@
 package Duke;
 
 import Duke.Commands.Command;
+import Duke.Todo.TodoList;
 
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ public class Duke {
     private static final String INPUT_PROMPT = "> ";
 
     private boolean stopped = false;
+    private final TodoList todoList = new TodoList();
 
     public void say(String message) {
         message = RULER + message + RULER;
@@ -30,6 +32,10 @@ public class Duke {
 
     public void stop() {
         this.stopped = true;
+    }
+
+    public TodoList getTodoList() {
+        return this.todoList;
     }
 
     public static class UserInput {
