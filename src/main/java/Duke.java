@@ -36,45 +36,47 @@ public class Duke {
         while (!input.equals("bye")) {
             String[] command = input.split(" ", 2);
             String[] taskDetail;
-            switch (command[0]) {
-                case "list":
-                    Printer.prettyPrint("Here are the tasks in your list:\n" +
-                            Printer.listTask(tasks));
-                    break;
-                case "done":
-                    tasks[Integer.parseInt(command[1]) - 1].markAsDone();
-                    break;
-                case "todo":
-                    try {
-                        taskDetail = extractCommand(command);
-                        tasks[numOfTask++] = new Todo(taskDetail[0]);
-                        printAdded(tasks[numOfTask - 1], numOfTask);
-                    } catch (EmptyDescriptionException e) {
-                        Printer.prettyPrint(e.toString());
-                    }
-                    break;
-                case "event":
-                    try {
-                        taskDetail = extractCommand(command);
-                        tasks[numOfTask++] = new Event(taskDetail[0], taskDetail[1]);
-                        printAdded(tasks[numOfTask - 1], numOfTask);
-                    } catch (EmptyDescriptionException e) {
-                        Printer.prettyPrint(e.toString());
-                    }
-                    break;
-                case "deadline":
-                    try {
-                        taskDetail = extractCommand(command);
-                        tasks[numOfTask++] = new Deadline(taskDetail[0], taskDetail[1]);
-                        printAdded(tasks[numOfTask - 1], numOfTask);
-                    } catch (EmptyDescriptionException e) {
-                        Printer.prettyPrint(e.toString());
-                    }
-                    break;
-                default:
-                    tasks[numOfTask++] = new Task(input);
-                    Printer.prettyPrint("added: " +
-                            input + "\n");
+            try {
+                switch (command[0]) {
+                    case "list":
+                        Printer.prettyPrint("Here are the tasks in your list:\n" +
+                                Printer.listTask(tasks));
+                        break;
+                    case "done":
+                        tasks[Integer.parseInt(command[1]) - 1].markAsDone();
+                        break;
+                    case "todo":
+                        try {
+                            taskDetail = extractCommand(command);
+                            tasks[numOfTask++] = new Todo(taskDetail[0]);
+                            printAdded(tasks[numOfTask - 1], numOfTask);
+                        } catch (EmptyDescriptionException e) {
+                            Printer.prettyPrint(e.toString());
+                        }
+                        break;
+                    case "event":
+                        try {
+                            taskDetail = extractCommand(command);
+                            tasks[numOfTask++] = new Event(taskDetail[0], taskDetail[1]);
+                            printAdded(tasks[numOfTask - 1], numOfTask);
+                        } catch (EmptyDescriptionException e) {
+                            Printer.prettyPrint(e.toString());
+                        }
+                        break;
+                    case "deadline":
+                        try {
+                            taskDetail = extractCommand(command);
+                            tasks[numOfTask++] = new Deadline(taskDetail[0], taskDetail[1]);
+                            printAdded(tasks[numOfTask - 1], numOfTask);
+                        } catch (EmptyDescriptionException e) {
+                            Printer.prettyPrint(e.toString());
+                        }
+                        break;
+                    default:
+                        throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (UnknownCommandException e) {
+                Printer.prettyPrint(e.toString());
             }
             input = scanner.nextLine();
         }
