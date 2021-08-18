@@ -7,3 +7,5 @@ blah
 deadline
 deadline by Sun
 list
+delete 1
+list
