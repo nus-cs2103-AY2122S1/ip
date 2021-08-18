@@ -33,6 +33,19 @@ public class Duke {
     }
 
     /**
+     * Returns a list of string, which is a copy of `tasks` list.
+     *
+     * @return A copy of tasks list.
+     */
+    public static String[] getTasks() {
+        String[] copy = new String[100];
+        for (int i = 0; i < numOfTasks; i++) {
+            copy[i] = Duke.tasks[i];
+        }
+        return copy;
+    }
+
+    /**
      * Based on the command received, either quit the program or process an event.
      */
     private void readCommand() {
@@ -43,8 +56,13 @@ public class Duke {
             // Print exiting message and end the program.
             System.out.println(Duke.EXITING_MESSAGE);
             this.isRunning = false;
+        } else if (command.equals("list")) {
+            // List all added tasks.
+            this.processor = new GetListProcessor();
+            this.processor.process();
+            System.out.println(this.processor);
         } else {
-            // Create a new event and convert it to string.
+            // Add the task to list and print the action.
             this.processor = new AddATaskProcessor(command);
             this.processor.process();
             System.out.println(this.processor);
