@@ -1,10 +1,11 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    private static String[] itemList = new String[100];
+    private static Task[] taskList = new Task[100];
     private static int index = 0;
+    private static void addTask(Task task) {
+        taskList[index++] = task;
+    }
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -22,15 +23,28 @@ public class Duke {
                 break;
             }else if (input.equals("list")) {
                 for(int i = 0; i < index; i++){
-                    System.out.println((i + 1) + ". " + itemList[i]);
+                    System.out.println((i + 1) + ". " + taskList[i].toString());
                 }
-            }else {
+            }else if(input.split(" ")[0].equals("done")){
+//                if(input.split(" ").length > 2) {
+//                    addTask(new Task(input));
+//                }else {
+//                    try {
+//                        int taskIndex = Integer.parseInt(input.split(" ")[1]);
+//                        taskList[taskIndex - 1].markCompleted();
+//                        System.out.println("Nice! I've marked this task as done:\n" + taskList[taskIndex - 1].toString());
+//                    } catch (NumberFormatException e) {
+//                        System.out.println("");
+//                    }
+//                }
+                int taskIndex = Integer.parseInt(input.split(" ")[1]);
+                taskList[taskIndex - 1].markCompleted();
+                System.out.println("Nice! I've marked this task as done:\n" + taskList[taskIndex - 1].toString());
+            } else {
                 System.out.println("added: " + input);
-                itemList[index++] = input;
+                addTask(new Task(input));
             }
         }
     }
-    private static void addList(String input) {
 
-    }
 }
