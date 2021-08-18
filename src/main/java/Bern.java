@@ -13,7 +13,7 @@ public class Bern {
         Task[] listTask = new Task[100];
         int available = 0;
 
-        System.out.println("Hi! I'm Bern, your trustworthy chatbot. \nWhat can I do for you?");
+        System.out.println("Hi! I'm Bern, your trustworthy chatbot.\nWhat can I do for you?");
 
         while (true) {
             String input = myObj.nextLine();
