@@ -13,7 +13,6 @@ public class Display {
         String[] arrReply = processReply(userReply);
 
         System.out.println(line);
-        System.out.println(arrReply[0]);
         switch(arrReply[0]) {
             case "list":
                 Task.listReply();
@@ -21,10 +20,18 @@ public class Display {
             case "done":
                 Task.done(arrReply[1]);
                 break;
-
-            default:
-                Task.addReply(userReply);
-                System.out.println("added: " + userReply);
+            case "deadline":
+                Deadline dead = new Deadline(arrReply[1]);
+                Task.addReply(dead);
+                break;
+            case "event":
+                Event event = new Event(arrReply[1]);
+                Task.addReply(event);
+                break;
+            case "todo":
+                ToDo todo = new ToDo(arrReply[1]);
+                Task.addReply(todo);
+                break;
         }
         System.out.println(line);
 
