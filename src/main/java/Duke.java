@@ -3,13 +3,13 @@ import java.util.Scanner;
 public class Duke {
 
     private enum Commands {
-        BYE, ADD, LIST
+        EXIT, ADD, LIST
     }
 
     String HORIZONTAL_LINE = "____________________________________________________________";
     String INDENTATION = "    ";
 
-    public Duke(){
+    private Duke(){
     }
 
     private void greet(){
