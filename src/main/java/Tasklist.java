@@ -7,6 +7,9 @@ import java.util.List;
  */
 public class Tasklist {
     private final List<Task> list;
+    public enum TaskTypes {
+        T, D, E
+    }
 
     public Tasklist() {
         this.list = new ArrayList<>();
@@ -19,26 +22,30 @@ public class Tasklist {
         return this.list.get(n-1);
     }
 
-    public void addTask(String line, String type) throws AisuException { // adds new task to taskList
+    public void addTask(String line, TaskTypes type) throws AisuException { // adds new task to taskList
         Task newTask;
-        if (type.equals("T")) {
-            newTask = new Todo(line);
-        } else if (type.equals("D")) {
-            try {
-                String[] temp = line.split(" /by ");
-                newTask = new Deadline(temp[0], temp[1]);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new AisuException("Your formatting is wrong! Write as: deadline (task) /by (date)");
-            }
-        } else if (type == "E") { // later on need to add else if (type == "E"), else portion for validation
-            try {
-                String[] temp = line.split(" /at ");
-                newTask = new Event(temp[0], temp[1]);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new AisuException("Your formatting is wrong! Write as: event (task) /at (date range)");
-            }
-        } else {
-            throw new AisuException("That's an invalid task format...");
+        switch(type) {
+            case T:
+                newTask = new Todo(line);
+                break;
+            case D:
+                try {
+                    String[] temp = line.split(" /by ");
+                    newTask = new Deadline(temp[0], temp[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new AisuException("Your formatting is wrong! Write as: deadline (task) /by (date)");
+                }
+                break;
+            case E:
+                try {
+                    String[] temp = line.split(" /at ");
+                    newTask = new Event(temp[0], temp[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new AisuException("Your formatting is wrong! Write as: event (task) /at (date range)");
+                }
+                break;
+            default:
+                throw new AisuException("That's an invalid task format...");
         }
 
         this.list.add(newTask);

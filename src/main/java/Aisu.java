@@ -25,7 +25,6 @@ public class Aisu {
 
     public static void main(String[] args) {
         Tasklist tasklist = new Tasklist();
-
         System.out.println(Aisu.LOGO + Aisu.DIV_HEAD + " Hello, I'm Ai-su! How may I help you today?" + Aisu.DIV_TAIL);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine(); // get input
@@ -39,16 +38,14 @@ public class Aisu {
                     int n = Integer.parseInt(input.substring(5));
                     tasklist.markDone(n);
                 } else if (input.startsWith("todo ")) {
-                    tasklist.addTask(input.substring(5), "T");
+                    tasklist.addTask(input.substring(5), Tasklist.TaskTypes.T);
                 } else if (input.startsWith("deadline ")) {
-                    tasklist.addTask(input.substring(9), "D");
+                    tasklist.addTask(input.substring(9), Tasklist.TaskTypes.D);
                 } else if (input.startsWith("event ")) {
-                    tasklist.addTask(input.substring(6), "E");
+                    tasklist.addTask(input.substring(6), Tasklist.TaskTypes.E);
                 } else if (input.startsWith("delete ")) {
                     int n = Integer.parseInt(input.substring(7));
                     tasklist.deleteTask(n);
-                } else {
-                    tasklist.addTask(input, "Error");
                 }
             } catch (AisuException | ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println(e);
