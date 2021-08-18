@@ -43,6 +43,8 @@ public class Duke {
                         || command.equals("event")) {
                     // Add a Todo, Deadline or Event task
                     runAddTaskCommand(input, command, tasks);
+                } else if (command.equals("delete")) {
+                    runDeleteCommand(input, tasks);
                 } else {
                     // Invalid command
                     throw new DukeException("You have entered an invalid command.");
@@ -64,9 +66,9 @@ public class Duke {
     }
 
     // Abstraction to make main function neater
-    private static void runDoneCommand(String input, List<Task> tasks) {
+    private static void runDoneCommand(String input, List<Task> tasks) throws DukeException {
         if (input.length() <= 5) {
-            throw new DukeException("Please type in a task number.");
+            throw new DukeException("Please type in a task number to mark as done.");
         }
         String taskNumberString = input.substring(5);
         System.out.printf(FORMAT, LINE);
@@ -80,13 +82,13 @@ public class Duke {
             System.out.printf("\t\t%s\n", doneTask.toString());
         } else {
             // Invalid input (not a number or invalid number)
-            throw new DukeException("Please type in a valid task number.");
+            throw new DukeException("Please type in a valid task number to mark as done.");
         }
         System.out.printf(FORMAT, LINE);
     }
 
     // Abstraction to make main function neater
-    private static void runListCommand(List<Task> tasks) {
+    private static void runListCommand(List<Task> tasks) throws DukeException {
         if (tasks.size() == 0) {
             throw new DukeException("You do not have any tasks currently.");
         }
@@ -99,7 +101,7 @@ public class Duke {
     }
 
     // Abstraction to make main function neater
-    private static void runAddTaskCommand(String input, String command, List<Task> tasks) {
+    private static void runAddTaskCommand(String input, String command, List<Task> tasks) throws DukeException {
         Task task;
         if (command.equals("todo")) {
             // Add Todo task
@@ -128,6 +130,29 @@ public class Duke {
         System.out.printf("\t\t%s\n", task.toString());
         System.out.printf("\tNow you have %d task%s in the list.\n",
                 tasks.size(), tasks.size() == 1 ? "" : "s");
+        System.out.printf(FORMAT, LINE);
+    }
+
+    // Abstraction to make main function neater
+    private static void runDeleteCommand(String input, List<Task> tasks) throws DukeException {
+        if (input.length() <= 7) {
+            throw new DukeException("Please type in a task number to delete.");
+        }
+        String taskNumberString = input.substring(7);
+        System.out.printf(FORMAT, LINE);
+        if (taskNumberString.matches("\\d+")
+                && (Integer.parseInt(taskNumberString) - 1 < tasks.size()
+                && Integer.parseInt(taskNumberString) - 1 >= 0)) {
+            int taskIndex = Integer.parseInt(taskNumberString) - 1;
+            Task removedTask = tasks.remove(taskIndex);
+            System.out.printf(FORMAT, "Got it. The following task has been removed:");
+            System.out.printf("\t\t%s\n", removedTask.toString());
+            System.out.printf("\tNow you have %d task%s in the list.\n",
+                    tasks.size(), tasks.size() == 1 ? "" : "s");
+        } else {
+            // Invalid input (not a number or invalid number)
+            throw new DukeException("Please type in a valid task number to delete.");
+        }
         System.out.printf(FORMAT, LINE);
     }
 }
