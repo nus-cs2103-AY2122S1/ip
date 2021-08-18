@@ -1,15 +1,15 @@
 public class Task {
     private String taskName;
-    private String taskType;
+    private TaskType taskType;
     private boolean isDone;
 
-    public Task(String taskName, String taskType, boolean isDone) {
+    public Task(String taskName, TaskType taskType, boolean isDone) {
         this.taskName = taskName;
         this.taskType = taskType;
         this.isDone = isDone;
     }
 
-    public Task(String taskName, String taskType) {
+    public Task(String taskName, TaskType taskType) {
         this(taskName, taskType, false);
     }
 
@@ -35,3 +35,5 @@ public class Task {
         return String.format("[%s] %s", checked, taskName);
     }
 }
+
+;

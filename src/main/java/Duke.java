@@ -43,15 +43,15 @@ public class Duke {
                         break;
 
                     case "todo":
-                        createNewTask(userInputScanner, "ToDo");
+                        createNewTask(userInputScanner, TaskType.TODO);
                         break;
 
                     case "deadline":
-                        createNewTask(userInputScanner, "Deadline");
+                        createNewTask(userInputScanner, TaskType.DEADLINE);
                         break;
 
                     case "event":
-                        createNewTask(userInputScanner, "Event");
+                        createNewTask(userInputScanner, TaskType.EVENT);
                         break;
 
                     case "delete":
@@ -82,16 +82,16 @@ public class Duke {
         System.out.printf("\t\t%s\n", tasks.get(taskNum - 1));
     }
 
-    private static void createNewTask(Scanner userInputScanner, String taskType)
+    private static void createNewTask(Scanner userInputScanner, TaskType taskType)
             throws MissingInputException {
         if (!userInputScanner.hasNext())
-            throw new MissingInputException();
-        else if (taskType.equalsIgnoreCase("ToDo")) {
+            throw new MissingInputException(taskType);
+        else if (taskType == TaskType.TODO) {
             Task newTask = new ToDo(userInputScanner.nextLine());
             addNewTask(newTask);
         }
         else {
-            if (taskType.equalsIgnoreCase("Deadline"))
+            if (taskType == TaskType.DEADLINE)
                 userInputScanner.useDelimiter(" /by ");
             else
                 userInputScanner.useDelimiter(" /at ");

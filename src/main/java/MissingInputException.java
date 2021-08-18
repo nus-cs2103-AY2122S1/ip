@@ -1,5 +1,5 @@
 public class MissingInputException extends DukeException {
-    public MissingInputException() {
-        super("Missing input for this operation");
+    public MissingInputException(TaskType taskType) {
+        super("The description for " + taskType + " cannot be empty");
     }
 }

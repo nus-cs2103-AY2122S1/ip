@@ -37,7 +37,7 @@ Duke:
 
 User:
 Duke:
-	Error: Missing input for this operation.
+	Error: The description for TODO cannot be empty.
 
 User:
 Duke:
