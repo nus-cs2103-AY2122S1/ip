@@ -21,3 +21,9 @@ class TaskOutOfRangeException extends Exception {
         super(msg);
     }
 }
+
+class InvalidTaskIndexException extends Exception{
+    public InvalidTaskIndexException(String msg) {
+        super(msg);
+    }
+}

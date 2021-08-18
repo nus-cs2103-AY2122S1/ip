@@ -43,7 +43,7 @@ public class BotBrain {
         }
     }
 
-    private void addTaskFeedback(){
+    private void generateTaskFeedback(){
         String output = String.format("%s\n\t\t%s\n\t", botMemory.MESSAGE_ADD_TASK_NOTICE, taskTracker.get(taskTracker.size()-1).toString())
                 + String.format(botMemory.MESSAGE_ADD_TASK_SUMMARY, taskTracker.size());
         botPrinter.print(output);
@@ -58,13 +58,39 @@ public class BotBrain {
         return formattedTask.toString();
     }
 
-    private void markTaskAsDone(String input) throws TaskOutOfRangeException {
+    private void checkTaskListModificationCommand(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
+        if (!isInteger(input.split(" ", 2)[1])) throw new InvalidTaskIndexException(botMemory.ERROR_MESSAGE_INVALID_TASK_INDEX);
         Integer index = Integer.parseInt(input.split(" ", 2)[1]);
-        if (index - 1 > taskTracker.size()) throw new TaskOutOfRangeException(botMemory.ERROR_MESSAGE_TASK_OUT_OF_RANGE);
+        if (index - 1 > taskTracker.size() || taskTracker.size() == 0) throw new TaskOutOfRangeException(botMemory.ERROR_MESSAGE_TASK_OUT_OF_RANGE);
+
+    }
+
+    private void markTaskAsDone(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
+        checkTaskListModificationCommand(input);
+        Integer index = Integer.parseInt(input.split(" ", 2)[1]);
         Task completedTask = taskTracker.get(index-1);
         completedTask.maskAsDone();
-        String output = botMemory.MESSAGE_TASK_COMPLETE + (index) + ". " + completedTask.taskTitle + "\n\t" + botMemory.MESSAGE_CHEERING;
+        String output = String.format("%s\n\t\t%s%s\n\t%s",botMemory.MESSAGE_TASK_COMPLETE, (index) + ". ", completedTask, botMemory.MESSAGE_CHEERING);
         botPrinter.print(output);
+    }
+
+    private void deleteTaskFromList(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
+        checkTaskListModificationCommand(input);
+        Integer index = Integer.parseInt(input.split(" ", 2)[1]);
+        Task removedTask = taskTracker.get(index-1);
+        String output = String.format("%s\n\t\t%s%s\n\t", botMemory.MESSAGE_REMOVE_TASK, (index) + ". ", removedTask)
+                + String.format(botMemory.MESSAGE_ADD_TASK_SUMMARY, taskTracker.size() - 1);
+        taskTracker.remove(removedTask);
+        botPrinter.print(output);
+    }
+
+    private boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
     }
 
     private void interact() {
@@ -79,9 +105,11 @@ public class BotBrain {
                     botPrinter.print(formatTaskTracker());
                 } else if (input.startsWith("done")) {
                     markTaskAsDone(input);
+                } else if (input.startsWith("delete")){
+                    deleteTaskFromList(input);
                 } else {
                     classifyTask(input);
-                    addTaskFeedback();
+                    generateTaskFeedback();
                 }
             }
             catch (Exception error){
