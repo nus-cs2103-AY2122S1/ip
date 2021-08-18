@@ -70,7 +70,19 @@ public class Duke {
         }
     }
 
-    public static int handleInput() {
+    public static void deleteTask(String input) throws DukeException {
+        try {
+            int index = Integer.parseInt(input.substring(7));
+            Task task = taskList.get(index - 1);
+            taskList.remove(index - 1);
+            System.out.println("Okay! This task has been removed:");
+            System.out.println(task.toString() + "\n");
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException("Invalid Task. Please try again.\n");
+        }
+    }
+
+    public static void handleInput() {
         Scanner scanner = new Scanner(System.in);
         String input;
         do{
@@ -88,6 +100,8 @@ public class Duke {
                     addDeadline(input);
                 } else if (input.toUpperCase().startsWith("EVENT")) {
                     addEvent(input);
+                } else if (input.toUpperCase().startsWith("DELETE")) {
+                    deleteTask(input);
                 } else {
                     throw new DukeException("Sorry, I don't understand. :O");
                 }
@@ -96,7 +110,6 @@ public class Duke {
             }
         }
         while (!input.equalsIgnoreCase("BYE"));
-        return 0;
     }
 
 
