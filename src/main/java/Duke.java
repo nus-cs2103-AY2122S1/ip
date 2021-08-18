@@ -44,22 +44,38 @@ public class Duke {
         }
     }
 
+    private static void runCommand(String cmd) throws DukeException {
+        if (cmd.matches("^todo[ \\t]*$")) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        } else if (cmd.matches("^deadline[ \\t]*$")) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        } else if (cmd.matches("^event[ \\t]*$")) {
+            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+        } else if (cmd.matches("^todo[ \\t]+.+$")) {
+            addTodo(cmd.split("[ \\t]+", 2)[1]);
+        } else if (cmd.matches("^deadline[ \\t]+.+[ \\t]+/by[ \\t]+.+$")) {
+            String[] bySplit = cmd.split("[ \\t]+/by[ \\t]+", 2);
+            addDeadline(bySplit[0].split("^deadline[ \\t]+")[1], bySplit[1]);
+        } else if (cmd.matches("^event[ \\t]+.+[ \\t]+/at[ \\t]+.+$")) {
+            String[] atSplit = cmd.split("[ \\t]+/at[ \\t]+", 2);
+            addEvent(atSplit[0].split("^event[ \\t]+")[1], atSplit[1]);
+        } else if (cmd.matches("^list[ \\t]*$")) {
+            listTasks();
+        } else if (cmd.matches("^done[ \\t]+[0-9]+")) {
+            tasks[Integer.parseInt(cmd.split("^done[ \\t]+")[1]) - 1].markAsDone();
+        } else {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
 
     public static void main(String[] args) {
         greet();
         for (String cmd = SCANNER.nextLine(); !cmd.equals("bye"); cmd = SCANNER.nextLine()) {
-            if (cmd.matches("todo .+")) {
-                addTodo(cmd.substring("todo ".length()));
-            } else if (cmd.matches("deadline .+ /by .+")) {
-                String[] bySplit = cmd.split(" /by ", 2);
-                addDeadline(bySplit[0].substring("deadline ".length()), bySplit[1]);
-            } else if (cmd.matches("event .+ /at .+")) {
-                String[] atSplit = cmd.split(" /at ", 2);
-                addEvent(atSplit[0].substring("event ".length()), atSplit[1]);
-            } else if (cmd.equals("list")) {
-                listTasks();
-            } else if (cmd.matches("done [0-9]+")) {
-                tasks[Integer.parseInt(cmd.substring("done ".length())) - 1].markAsDone();
+            try {
+                runCommand(cmd);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
         exit();
