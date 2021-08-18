@@ -20,7 +20,7 @@ public class Duke {
 
     public static void introduceDuke() {
         Scanner sc = new Scanner(System.in);
-        String introduction = "\nHello, I am Ah Seng, the foodcourt uncle. Come chitchat with me.\n";
+        String introduction = "Hello, I am Ah Seng, the foodcourt uncle. Come chitchat with me.";
         formatMessages(introduction);
         respondTo(sc);
     }
