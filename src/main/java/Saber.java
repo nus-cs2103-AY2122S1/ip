@@ -24,7 +24,7 @@ public class Saber {
     protected static String goodbye = lineBreak + "\n      Am I ... no longer needed, Master?\n" +
             "      I understand. I shall excuse myself.\n\n" + lineBreak;
 
-    protected static String listMessage = "      Would you like to know what you \n" +
+    protected static String listMessage = "      Would you like to know what you\n" +
             "      told me to remember?\n" + "\n" +
             "      I'll list them for you, Master.\n";
 
@@ -52,10 +52,11 @@ public class Saber {
         taskList.add(deadline);
         int totalTask = taskList.size();
         System.out.println(lineBreak + "\n      Right, Master.\n"
-                +  "      I'll ensure that you will \n      do this task before the deadline: \n"
+                + "      I'll ensure that you will\n"
+                + "      do this task before the deadline:\n"
                 + "\n        " + deadline);
         String taskPlural = totalTask <= 1 ? "has " + totalTask + " task "
-                : "have " + totalTask + " tasks ";
+                : "have " + totalTask + " tasks";
         System.out.println("\n      Currently, Master " + taskPlural +
                 "\n      in the list." + "\n\n" + lineBreak);
     }
@@ -71,8 +72,8 @@ public class Saber {
         System.out.println(lineBreak + "\n      Understand, Master.\n"
                 + "      I have deleted this task.\n"
                 + "\n        " + task + "\n");
-        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task "
-                : "have " + totalTask + " tasks ";
+        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task"
+                : "have " + totalTask + " tasks";
         System.out.println("      Currently, Master " + taskPlural +
                 "\n      in the list." + "\n\n" + lineBreak);
     }
@@ -93,10 +94,11 @@ public class Saber {
         taskList.add(event);
         int totalTask = taskList.size();
         System.out.println(lineBreak + "\n      Right, Master.\n"
-                +  "      I'll make sure you remember \n      to come to this event: \n"
+                +  "      I'll make sure you remember\n"
+                + "      to come to this event:\n"
                 + "\n        " + event);
-        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task "
-                : "have " + totalTask + " tasks ";
+        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task"
+                : "have " + totalTask + " tasks";
         System.out.println("\n      Currently, Master " + taskPlural +
                 "\n      in the list." + "\n\n" + lineBreak);
     }
@@ -119,10 +121,10 @@ public class Saber {
         taskList.add(todo);
         int totalTask = taskList.size();
         System.out.println(lineBreak + "\n      Yes, Master.\n"
-                +  "      I'll add the following to your Todo list: \n"
+                +  "      I'll add the following to your Todo list:\n"
                 + "\n        " + todo);
-        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task "
-                : "have " + totalTask + " tasks ";
+        String taskPlural = totalTask <= 1 ? "has " + totalTask + " task"
+                : "have " + totalTask + " tasks";
         System.out.println("\n      Currently, Master " + taskPlural +
                 "\n      in the list." + "\n\n" + lineBreak);
     }
@@ -144,8 +146,8 @@ public class Saber {
                             String taskForAdd = command.getArgument();
                             handleAddTask(taskForAdd);
                         } catch (MissingArgumentException e) {
-                            System.out.println(lineBreak + "      I'm sorry, Master.\n"
-                                    + "      What ... exactly do you want me to add?\n"
+                            System.out.println(lineBreak + "\n      I'm sorry, Master.\n"
+                                    + "      What ... exactly do you want me to add?\n\n"
                                     + lineBreak);
                         }
                         break;
@@ -159,14 +161,14 @@ public class Saber {
                             int taskIndex = Integer.parseInt(command.getArgument());
                             handleDoneTask(taskIndex - 1);
                         } catch (MissingArgumentException | NumberFormatException e) {
-                            System.out.println(lineBreak + "      I'm really sorry, Master.\n"
+                            System.out.println(lineBreak + "\n      I'm really sorry, Master.\n"
                                     + "      I'm ... not sure which task you want me\n"
-                                    + "      to mark as done...\n"
+                                    + "      to mark as done...\n\n"
                                     + lineBreak);
                         } catch (TaskNotFoundException e) {
-                            System.out.println(lineBreak + "      I'm really sorry, Master.\n"
+                            System.out.println(lineBreak + "\n      I'm really sorry, Master.\n"
                                     + "      I'm unable to find the task that\n"
-                                    + "      you specified...\n"
+                                    + "      you specified...\n\n"
                                     + lineBreak);
                         }
                         break;
@@ -177,15 +179,15 @@ public class Saber {
                             String deadlineTime = command.getTime();
                             handleDeadlineTask(deadlineTask, deadlineTime);
                         } catch (MissingArgumentException e) {
-                            System.out.println(lineBreak + "      I'm really sorry, Master.\n"
+                            System.out.println(lineBreak + "\n      I'm really sorry, Master.\n"
                                     + "      I'm ... not sure what task you want me\n"
-                                    + "      to add ...\n"
+                                    + "      to add ...\n\n"
                                     + lineBreak);
                         } catch (MissingTimeException e) {
-                            System.out.println(lineBreak + "      I'm sorry, Master.\n"
+                            System.out.println(lineBreak + "\n      I'm sorry, Master.\n"
                                     + "      I won't be able to ensure that you\n"
-                                    + "      do the task on time without \n"
-                                    + "      knowing the deadline...\n"
+                                    + "      do the task on time without\n"
+                                    + "      knowing the deadline...\n\n"
                                     + lineBreak);
                         }
                         break;
@@ -195,14 +197,14 @@ public class Saber {
                             int taskIndex = Integer.parseInt(command.getArgument());
                             handleDeleteTask(taskIndex - 1);
                         } catch (MissingArgumentException | NumberFormatException e) {
-                            System.out.println(lineBreak + "      I'm really sorry, Master.\n"
+                            System.out.println(lineBreak + "\n      I'm really sorry, Master.\n"
                                     + "      I'm ... not sure which task you want\n"
-                                    + "      to delete...\n"
+                                    + "      to delete...\n\n"
                                     + lineBreak);
                         } catch (TaskNotFoundException e) {
-                            System.out.println(lineBreak + "      I'm really sorry, Master.\n"
+                            System.out.println(lineBreak + "\n      I'm really sorry, Master.\n"
                                     + "      I'm unable to find the task that\n"
-                                    + "      you want to delete...\n"
+                                    + "      you want to delete...\n\n"
                                     + lineBreak);
                         }
                         break;
@@ -213,15 +215,15 @@ public class Saber {
                             String eventTime = command.getTime();
                             handleEventTask(eventTask, eventTime);
                         } catch (MissingArgumentException e) {
-                            System.out.println(lineBreak + "      I'm sorry, Master.\n"
+                            System.out.println(lineBreak + "\n      I'm sorry, Master.\n"
                                     + "      I'm ... not sure what event you want me\n"
-                                    + "      to add ...\n"
+                                    + "      to add ...\n\n"
                                     + lineBreak);
                         } catch (MissingTimeException e) {
-                            System.out.println(lineBreak + "      I'm really sorry, Master.\n"
+                            System.out.println(lineBreak + "\n      I'm really sorry, Master.\n"
                                     + "      I won't be able to remind you\n"
                                     + "      to come to this event without\n"
-                                    + "      knowing the time of the event...\n"
+                                    + "      knowing the time of the event...\n\n"
                                     + lineBreak);
                         }
                         break;
@@ -231,9 +233,9 @@ public class Saber {
                             String taskForTodo = command.getArgument();
                             handleTodoTask(taskForTodo);
                         } catch (MissingArgumentException e) {
-                            System.out.println(lineBreak + "      I'm sorry, Master.\n"
+                            System.out.println(lineBreak + "\n      I'm sorry, Master.\n"
                                     + "      What ... exactly do you want me to add\n"
-                                    + "      to your Todo list?\n"
+                                    + "      to your Todo list?\n\n"
                                     + lineBreak);
                         }
                         break;
@@ -243,13 +245,13 @@ public class Saber {
                         break;
 
                     default:
-                        System.out.println(lineBreak + "      I'm sorry, Master. I can't fulfill your command.\n"
-                                + "      What you want from me is beyond my capability.\n"
+                        System.out.println(lineBreak + "\n      I'm sorry, Master. I can't fulfill your command.\n"
+                                + "      What you want from me is beyond my capability.\n\n"
                                 + lineBreak);
                 }
             } catch (SaberCommandNotFoundException e) {
-                System.out.println(lineBreak + "      I'm sorry, Master.\n"
-                        + "      I don't ... understand your command.\n"
+                System.out.println(lineBreak + "\n      I'm sorry, Master.\n"
+                        + "      I don't ... understand your command.\n\n"
                         + lineBreak);
             }
         }
