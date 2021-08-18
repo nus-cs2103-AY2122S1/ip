@@ -1,4 +1,6 @@
-import exception.DukeException;
+import exception.DukeExtractCommandException;
+import exception.DukeTaskNumberOutOfBoundsException;
+import exception.DukeUnknownException;
 import task.*;
 import utils.CommandUtils;
 
@@ -39,9 +41,9 @@ public class Duke {
     private static Operation getOperation(String command) {
         try {
             return CommandUtils.extractOperation(command);
-        } catch (DukeException de) {
+        } catch (DukeExtractCommandException | DukeUnknownException e) {
             System.out.println(HORIZONTAL_LINE);
-            System.out.println(de.getMessage());
+            System.out.println(e.getMessage());
             System.out.println(HORIZONTAL_LINE);
         }
         return null;
@@ -51,9 +53,9 @@ public class Duke {
         int number = 0;
         try {
             number = CommandUtils.extractTaskNumber(command);
-        } catch (DukeException de) {
+        } catch (DukeExtractCommandException | NumberFormatException | DukeTaskNumberOutOfBoundsException e) {
             System.out.println(HORIZONTAL_LINE);
-            System.out.println(de.getMessage());
+            System.out.println(e.getMessage());
             System.out.println(HORIZONTAL_LINE);
         }
         return number;
@@ -63,9 +65,9 @@ public class Duke {
         String description = "";
         try {
             description = CommandUtils.extractTaskDescription(command);
-        } catch (DukeException de) {
+        } catch (DukeExtractCommandException e) {
             System.out.println(HORIZONTAL_LINE);
-            System.out.println(de.getMessage());
+            System.out.println(e.getMessage());
             System.out.println(HORIZONTAL_LINE);
         }
         return description;
@@ -93,8 +95,8 @@ public class Duke {
                     System.out.println(INDENTATION + "  " + deadline.toString());
                     System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
                             (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
-                } catch (DukeException de) {
-                    System.out.println(de.getMessage());
+                } catch (DukeExtractCommandException e) {
+                    System.out.println(e.getMessage());
                 }
                 break;
             case EVENT:
@@ -108,8 +110,8 @@ public class Duke {
                     System.out.println(INDENTATION + "  " + event.toString());
                     System.out.println(INDENTATION + "Now you have " + taskManager.size() + " " +
                             (taskManager.size() <= 1 ? "task" : "tasks") + " in the list.");
-                } catch (DukeException de) {
-                    System.out.println(de.getMessage());
+                } catch (DukeExtractCommandException e) {
+                    System.out.println(e.getMessage());
                 }
                 break;
         }
@@ -123,8 +125,8 @@ public class Duke {
             System.out.println(INDENTATION + "Nice! I've marked this task as done:");
             System.out.println(INDENTATION + "  " + taskManager.findTaskByNumber(number).toString());
             System.out.println(HORIZONTAL_LINE);
-        } catch (DukeException de) {
-            System.out.println(de.getMessage());
+        } catch (DukeTaskNumberOutOfBoundsException e) {
+            System.out.println(e.getMessage());
         }
     }
 

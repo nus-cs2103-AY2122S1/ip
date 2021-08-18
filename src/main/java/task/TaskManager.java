@@ -1,6 +1,6 @@
 package task;
 
-import exception.DukeException;
+import exception.DukeTaskNumberOutOfBoundsException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,12 +59,12 @@ public class TaskManager {
      * Complete task by number, start from 1.
      *
      * @param number number of task
-     * @throws DukeException if task number is out of bounds
+     * @throws DukeTaskNumberOutOfBoundsException if task number is out of bounds
      */
-    public void completeTask(int number) throws DukeException {
+    public void completeTask(int number) throws DukeTaskNumberOutOfBoundsException {
         int index = number - 1;
         if (index < 0 || index >= tasks.size()) {
-            throw new DukeException(INDENTATION + "☹ OOPS!!! Task number is out of bounds.");
+            throw new DukeTaskNumberOutOfBoundsException(INDENTATION + "☹ OOPS!!! Task number is out of bounds.");
         }
         tasks.set(index, tasks.get(index).markAsDone());
     }
