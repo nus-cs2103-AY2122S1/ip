@@ -7,10 +7,17 @@ public class Duke {
         return strArr[0];
     }
 
-    private static int taskNumber(String input) {
+    private static int taskNumber(String input) throws MissingTaskNumberException {
         String[] strArr = input.split(" ", 2);
-        String number = strArr[1];
-        return Integer.parseInt(number);
+        if (strArr.length < 2) {
+            System.out.println("---------------------------------------------");
+            System.out.println("OOPS!!! To delete a task, the task number must be stated.");
+            System.out.println("---------------------------------------------");
+            throw new MissingTaskNumberException();
+        } else {
+            String number = strArr[1];
+            return Integer.parseInt(number);
+        }
     }
 
     private static String getDescription(String input) throws MissingDescriptionException {
@@ -35,7 +42,7 @@ public class Duke {
         }
     }
 
-    private static void completeTask(String input, ArrayList<Task> arr) {
+    private static void completeTask(String input, ArrayList<Task> arr) throws MissingTaskNumberException {
         System.out.println("---------------------------------------------");
         System.out.println("Nice! I've marked this task as done:");
         arr.get(taskNumber(input) - 1).markAsDone();
@@ -55,6 +62,7 @@ public class Duke {
 
     private static void listItems(ArrayList<Task> arr) {
         System.out.println("---------------------------------------------");
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < arr.size(); i++) {
             int j = i + 1;
             System.out.println("     " + j + ". ["
@@ -84,6 +92,24 @@ public class Duke {
         }
     }
 
+    private static void deleteTask(int taskID, ArrayList<Task> arr) throws IllegalArgumentException{
+        if (taskID <=0 || taskID > arr.size()) {
+            System.out.println("---------------------------------------------");
+            System.out.println("No such task exists.");
+            System.out.println("---------------------------------------------");
+            throw new IllegalArgumentException();
+        } else {
+            System.out.println("---------------------------------------------");
+            System.out.println("Noted I've removed this task:");
+            System.out.println("[" + arr.get(taskID - 1).getTaskType() + "]["
+                    + arr.get(taskID - 1).getStatusIcon() + "] "
+                    + arr.get(taskID - 1).description);
+            arr.remove(taskID - 1);
+            System.out.println("Now you have " + arr.size() + " task(s) in the list.");
+            System.out.println("---------------------------------------------");
+        }
+    }
+
     public static void main(String[] args) throws Exception {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -106,15 +132,17 @@ public class Duke {
                 Duke.completeTask(action, toDoList);
             } else if (getCommand(action).equals("todo")
                     || getCommand(action).equals("deadline")
-                    || getCommand(action).equals("event")){ // add task to to-do list
+                    || getCommand(action).equals("event")) { // add task to to-do list
                 Duke.addTask(identifyType(action), toDoList);
-            } else if (action.equals("list")){ // list all items
+            } else if (action.equals("list")) { // list all items
                 Duke.listItems(toDoList);
-            } else if (action.equals("bye")){ // exit
+            } else if (action.equals("bye")) { // exit
                 System.out.println("---------------------------------------------\n"
                         + "     Bye. Hope to see you again soon!" + "\n"
                         + "---------------------------------------------");
                 break;
+            } else if (getCommand(action).equals("delete")) { // delete task
+                deleteTask(taskNumber(action), toDoList);
             } else { // if there is an invalid input
                 System.out.println("-------------------------------------------------------\n"
                         + "OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n"

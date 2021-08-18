@@ -28,6 +28,7 @@ Now you have 4 task(s) in the list.
 Now you have 5 task(s) in the list.
 ---------------------------------------------
 ---------------------------------------------
+Here are the tasks in your list:
      1. [T][ ] borrow book
      2. [T][ ] read book
      3. [D][ ] return book (by: June 6th)
@@ -39,6 +40,7 @@ Nice! I've marked this task as done:
 [D][X] return book (by: June 6th)
 ---------------------------------------------
 ---------------------------------------------
+Here are the tasks in your list:
      1. [T][ ] borrow book
      2. [T][ ] read book
      3. [D][X] return book (by: June 6th)
