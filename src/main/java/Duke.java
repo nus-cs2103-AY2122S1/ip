@@ -109,7 +109,7 @@ public class Duke {
                         System.out.println(indentation + Horizontal_line);
                     } catch (NullPointerException e) {
                         System.out.println(indentation + Horizontal_line);
-                        System.out.println(indentation + "Sorry, you do not have this task");
+                        System.out.println(indentation + "Sorry! you do not have this task");
                         System.out.println(indentation + Horizontal_line);
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println(indentation + Horizontal_line);
