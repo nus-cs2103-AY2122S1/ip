@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -21,13 +21,27 @@ public class Duke {
             if (task.equals("list")) {
                 System.out.println("_______________________");
                 for (int j = 0; j < i; j++) {
-                    System.out.printf("%d. %s%n", j+1, tasks[j]);
+                    System.out.printf("%d. %s%n", j + 1, tasks[j]);
                 }
                 System.out.println("_______________________");
+            } else if (task.matches("done \\d{1}")){
+                int taskNo = Integer.parseInt(task.substring(5));
+                int taskIndex = taskNo - 1;
+                if (taskIndex < 0 || taskIndex >= i) {
+                    System.out.println("_______________________");
+                    System.out.println("Oops! PLease enter a valid task number.");
+                    System.out.println("_______________________");
+                } else {
+                    tasks[taskIndex].markDone();
+                    System.out.println("_______________________");
+                    System.out.println("Good job! I've marked this task as done:");
+                    System.out.println(tasks[taskIndex]);
+                    System.out.println("_______________________");
+                }
             } else {
-                tasks[i] = task;
+                tasks[i] = new Task(task);
                 System.out.println("_______________________");
-                System.out.printf("added: %s%n", tasks[i]);
+                System.out.printf("added: %s%n", task);
                 System.out.println("_______________________");
                 i += 1;
             }
