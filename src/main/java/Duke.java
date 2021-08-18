@@ -1,10 +1,12 @@
 import java.util.*;
+import java.util.logging.Logger;
 
 public class Duke {
 	
     public static void main(String[] args) {
+        Logger logger = Logger.getLogger("Duke");
         boolean isActive = true;
-        ArrayList<String> list = new ArrayList<>(100);
+        ArrayList<Task> list = new ArrayList<>(100);
         String welcomeMsg = "Hey, I'm Duke.\n"
                 + "What's up?\n";
         String exitMsg = "Bye! Hope I helped!\n"
@@ -23,10 +25,25 @@ public class Duke {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 System.out.println(arrayToString(list));
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            } else if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
+                int index = Integer.parseInt(input.substring(5)) - 1;
+                if (index < 0 || index > list.size() - 1) {
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    System.out.println("Something went wrong.. to mark as done,\n" +
+                                        "format your text as <done [number]>.\n");
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    // Throw exception in the future
+                } else {
+                    list.get(index).markAsDone();
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    System.out.println("Awesome! I marked this as done:\n" +
+                            list.get(index).toString());
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                }
             } else {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 System.out.println("added: " + input + "\n");
-                list.add(input);
+                list.add(new Task(input));
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
         }
@@ -36,11 +53,11 @@ public class Duke {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
-    public static String arrayToString(ArrayList<String> list) {
+    public static String arrayToString(ArrayList<Task> list) {
         String answer = "";
         int counter = 1;
-        for (String item : list) {
-            answer += String.format("%d: %s\n", counter, item);
+        for (Task item : list) {
+            answer += String.format("%d: %s\n", counter, item.toString());
             counter++;
         }
         return answer;
