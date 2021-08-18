@@ -24,8 +24,14 @@ public class Duke {
             displayList();
         } else if (input.contains("done")) {
             done(input);
+        } else if (input.contains("todo")) {
+            todo(input);
+        } else if (input.contains("deadline")) {
+            deadline(input);
+        } else if (input.contains("event")) {
+            event(input);
         } else {
-            add(input);
+            reply("Can type properly pls?");
         }
     }
 
@@ -44,10 +50,9 @@ public class Duke {
         manageInput();
     }
 
-    private static void add(String input) {
-        Task newTask = new Task(input);
-        list.add(newTask);
-        reply("added: " + input);
+    private static void add(Task task) {
+        list.add(task);
+        reply("one more thing: " + task.toString() + "\nNow you got " + list.size() + " thing(s). sian");
         manageInput();
     }
 
@@ -67,5 +72,33 @@ public class Duke {
         currTask.markAsDone();
         reply("noice this thing done:\n" + currTask);
         manageInput();
+    }
+
+    private static void todo(String input) {
+        Todo todo = new Todo(input.substring(5));
+        add(todo);
+        manageInput();
+    }
+
+    private static void deadline(String input) {
+        int split = input.indexOf("/");
+        if (split == -1) {
+            reply("this one by when ah? can do it liddis or not: 'deadline task /by when'");
+        } else {
+            Deadline deadline = new Deadline(input.substring(9, split - 1), input.substring(split + 3));
+            add(deadline);
+            manageInput();
+        }
+    }
+
+    private static void event(String input) {
+        int split = input.indexOf("/");
+        if (split == -1) {
+            reply("this one when ah? can do it liddis or not: 'event task /at when'");
+        } else {
+            Event event = new Event(input.substring(6, split - 1), input.substring(split + 3));
+            add(event);
+            manageInput();
+        }
     }
 }
