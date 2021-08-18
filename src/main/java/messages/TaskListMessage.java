@@ -4,6 +4,12 @@ import tasks.Task;
 
 import java.util.List;
 
+/**
+ * Class is responsible for generating message to list all tasks
+ * based on given task list.
+ *
+ * @author kevin9foong
+ */
 public class TaskListMessage extends Message {
     public TaskListMessage(List<Task> tasks) {
         super.setMessageText(generateListMessageText(tasks));
@@ -15,7 +21,7 @@ public class TaskListMessage extends Message {
             if (index != 0) {
                 listMessageText.append("\n");
             }
-            listMessageText.append(index + 1).append(". ")
+            listMessageText.append(index + 1).append(".")
                     .append(tasks.get(index).toString());
         }
         return listMessageText.toString();
