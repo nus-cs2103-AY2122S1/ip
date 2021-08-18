@@ -28,14 +28,18 @@ public class Duke {
     }
 
     public void receiveCommand(String command) {
-        if (command.equals("list")) {
-            this.displayTasks();
-        } else if (command.matches("done \\d+")) {
-            String taskNum = command.replaceAll("\\D+","");
-            int index = Integer.parseInt(taskNum) - 1;
-            this.markTask(index);
-        } else {
-            addTask(command);
+        try {
+            if (command.equals("list")) {
+                this.displayTasks();
+            } else if (command.matches("done \\d+")) {
+                String taskNum = command.replaceAll("\\D+", "");
+                int index = Integer.parseInt(taskNum) - 1;
+                this.markTask(index);
+            } else {
+                addTask(command);
+            }
+        } catch (DukeException e) {
+            printMessage(e.getMessage());
         }
     }
 
@@ -66,24 +70,36 @@ public class Duke {
         }
     }
 
-    public void addTask(String command) {
+    public void addTask(String command) throws DukeException {
         Task task;
         if (command.startsWith("todo")) {
-            task = new Todo(command.replaceFirst("todo ", ""));
+            if (command.length() <= "todo ".length()) {
+                throw new EmptyTaskDescriptionException("todo");
+            } else {
+                task = new Todo(command.replaceFirst("todo ", ""));
+            }
         } else if (command.startsWith("deadline")) {
-            String taskInfo = command.replaceFirst("deadline ", "");
-            int separator = taskInfo.indexOf(" /by ");
-            String description = taskInfo.substring(0, separator);
-            String by = taskInfo.substring(separator + 5);
-            task = new Deadline(description, by);
+            if (command.length() <= "deadline ".length()) {
+                throw new EmptyTaskDescriptionException("deadline");
+            } else {
+                String taskInfo = command.replaceFirst("deadline ", "");
+                int separator = taskInfo.indexOf(" /by ");
+                String description = taskInfo.substring(0, separator);
+                String by = taskInfo.substring(separator + 5);
+                task = new Deadline(description, by);
+            }
         } else if (command.startsWith("event")) {
-            String taskInfo = command.replaceFirst("event ", "");
-            int separator = taskInfo.indexOf(" /at ");
-            String description = taskInfo.substring(0, separator);
-            String at = taskInfo.substring(separator + 5);
-            task = new Event(description, at);
+            if (command.length() <= "event ".length()) {
+                throw new EmptyTaskDescriptionException("event");
+            } else {
+                String taskInfo = command.replaceFirst("event ", "");
+                int separator = taskInfo.indexOf(" /at ");
+                String description = taskInfo.substring(0, separator);
+                String at = taskInfo.substring(separator + 5);
+                task = new Event(description, at);
+            }
         } else {
-            task = new Task(command);
+            throw new InvalidCommandException();
         }
         tasks.add(task);
         printMessage(String.format("Got it. I've added this task:"
