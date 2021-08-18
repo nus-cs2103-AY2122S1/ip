@@ -23,7 +23,7 @@ public class Duke {
 
     private static int numberOfEntries;
 
-    private static void addEntry(Entry entry) {
+    private static void addEntry(Entry entry, String command) throws DukeException {
         if (!entry.isEmpty()){
             entries[numberOfEntries++] = entry;
             System.out.println("Awesome, Duke remembers this event:" + entry);
@@ -33,7 +33,8 @@ public class Duke {
                 System.out.println("We now have " + numberOfEntries + " tasks in our plan!");
             }
         } else {
-            System.out.println("Empty Entry/Timing! :( Try Again");
+//            System.out.println("Empty Entry/Timing! :( Try Again");
+            throw new DukeException("The " + command + " description can't be empty!");
         }
     }
 
@@ -42,17 +43,17 @@ public class Duke {
         numberOfEntries = 0;
     }
 
-    private static void listEntries() {
+    private static void listEntries() throws DukeException {
         if (numberOfEntries > 0) {
             for (int i = 0; i < numberOfEntries; i++) {
                 System.out.println(i + 1 + "." + entries[i]);
             }
         } else {
-            System.out.println("No tasks added!");
+            throw new DukeException("No entries to display!");
         }
     }
 
-    private static void markEntryAsDone(int entryNumber) {
+    private static void markEntryAsDone(int entryNumber) throws DukeException {
         if (entryNumber > 0 && entryNumber <= numberOfEntries) {
             if (entries[entryNumber - 1].markEntryAsDone()) {
                 System.out.println("Nice! I've marked this entry as done:");
@@ -61,7 +62,8 @@ public class Duke {
                 System.out.println("Entry is already marked as done!");
             }
         } else {
-            System.out.println("Invalid Entry Number");
+//            System.out.println("Invalid Entry Number");
+            throw new DukeException("There's no Entry corresponding to that Number!");
         }
     }
 
@@ -120,7 +122,7 @@ public class Duke {
         }
     }
 
-    private static void processInput (String input) {
+    private static void processInput (String input) throws DukeException {
         ArrayList<String> terms = new ArrayList<>();
         parseString(input, terms);
         String command = terms.isEmpty() ? "" : terms.remove(0);
@@ -138,20 +140,19 @@ public class Duke {
                 break;
 
             case TODO_COMMAND:
-                addEntry(new Todo(entry));
+                addEntry(new Todo(entry), command);
                 break;
 
             case EVENT_COMMAND:
-                addEntry(new Event(entry, timing));
+                addEntry(new Event(entry, timing), command);
                 break;
 
             case DEADLINE_COMMAND:
-                addEntry(new Deadline(entry, timing));
+                addEntry(new Deadline(entry, timing), command);
                 break;
 
             default:
-                System.out.println("I can't process this! Try another command");
-                break;
+                throw new DukeException("Sorry! Duke can't understand what that means");
         }
     }
 
@@ -162,7 +163,11 @@ public class Duke {
         Scanner inputScanner = new Scanner(System.in);
         String input = inputScanner.nextLine();
         while (!(input.equals(TERMINATION_COMMAND))) {
-            processInput(input);
+            try {
+                processInput(input);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
             input = inputScanner.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
