@@ -32,7 +32,9 @@ public class Duke {
     }
 
     /**
-     * Runs the whole Duke process. Consists of (1) scanning input and parsing it to a
+     * Runs the whole Duke process.
+     *
+     * Consists of (1) scanning input and parsing it to a
      * Command, (2) parsing the inputs in the format required by the Command and (3)
      * executing the Commanding and returning a String output to be printed to console.
      */
@@ -41,7 +43,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine().trim();
         String output;
-        Command command = Command.parseFromFirstWord(userInput);
+        Command command = Command.parseFromInput(userInput);
 
         while (!command.equals(Command.BYE)) {
             try {
@@ -53,7 +55,7 @@ public class Duke {
 
             } finally {
                 userInput = scanner.nextLine().trim();
-                command = Command.parseFromFirstWord(userInput);
+                command = Command.parseFromInput(userInput);
             }
         }
         scanner.close();

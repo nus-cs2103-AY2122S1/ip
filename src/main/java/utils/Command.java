@@ -14,7 +14,8 @@ public enum Command {
     TODO("todo"),
     EVENT("event"),
     DEADLINE("deadline"),
-    INVALID("\n"); // dummy value
+    EMPTY(""),
+    INVALID("\0"); // dummy value
 
     private final String text;
 
@@ -30,12 +31,15 @@ public enum Command {
     /**
      * Provides a Command from the source string, only examines the first word in source.
      *
-     * @param source source string to obtain command
-     * @return Command
+     * @param input source string to obtain command
+     * @return associate Command, else INVALID as default
      */
-    public static Command parseFromFirstWord(String source) {
-        for (Command command: Command.values()) {
-            if (source.startsWith(command.text)) {
+    public static Command parseFromInput(String input) {
+        String[] instructionArray = input.trim().split(" ", 2); // split first word
+        String instruction = instructionArray[0];
+
+        for (Command command : Command.values()) {
+            if (instruction.equals(command.text)) {
                 return command;
             }
         }
