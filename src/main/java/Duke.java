@@ -27,6 +27,16 @@ public class Duke {
         }
     }
 
+    public static void MarkDone(int index) throws DukeException{
+        if (index <= 0) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
+        } else {
+            System.out.println("Nice! I've marked this task as done:");
+            list.get(index).MarkDone();
+            System.out.println(" " + list.get(index).PrintTaskInfo());
+        }
+    }
+
     public static void HandleTask(String Message) throws DukeException{
         String task = "";
         String deadline = "";
@@ -40,10 +50,22 @@ public class Duke {
         if (Message.indexOf("/") != -1) {
             task = Message.substring(Message.indexOf(" ") + 1, Message.indexOf("/") - 1);
 
-            if (Message.indexOf("/by") != -1) {
-                deadline = Message.substring(Message.indexOf("/by") + 3);
-            } else if (Message.indexOf("/at") != -1){
-                deadline = Message.substring(Message.indexOf("/at") + 3);
+            //throw exceptions for deadline or events' format.
+
+            if (Message.startsWith("deadline")) {
+                if (Message.indexOf("/by") != -1) {
+                    deadline = Message.substring(Message.indexOf("/by") + 3);
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but the format of deadline is wrong :-(");
+                }
+            } else if (Message.startsWith("event")) {
+                if (Message.indexOf("/at") != -1) {
+                    deadline = Message.substring(Message.indexOf("/at") + 3);
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but the format of event is wrong :-(");
+                }
+            } else {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but the format of todo is wrong :-(");
             }
         }
         else {
@@ -56,6 +78,7 @@ public class Duke {
             }
         }
 
+        //Time for deadlines or event cannot be empty.
         if ((Message.startsWith("event") || Message.startsWith("deadline")) && deadline.equals("")) {
             throw new DukeException("☹ OOPS!!! The time of a " + Message.substring(0, Message.indexOf(" ")) +" cannot be empty.");
         }
@@ -63,17 +86,17 @@ public class Duke {
 
         System.out.println("Got it. I've added this task: ");
         if (Message.startsWith("todo")) {
-                Task newTask = new ToDos(false, task);
-                System.out.println(" " + newTask.PrintTaskInfo());
-                list.add(newTask);
+            Task newTask = new ToDos(false, task);
+            System.out.println(" " + newTask.PrintTaskInfo());
+            list.add(newTask);
         } else if (Message.startsWith("event")) {
-                Task newTask = new Events(false, task, deadline);
-                System.out.println(" " + newTask.PrintTaskInfo());
-                list.add(newTask);
+            Task newTask = new Events(false, task, deadline);
+            System.out.println(" " + newTask.PrintTaskInfo());
+            list.add(newTask);
         } else if (Message.startsWith("deadline")){
-                Task newTask = new Deadlines(false, task, deadline);
-                System.out.println(" " + newTask.PrintTaskInfo());
-                list.add(newTask);
+            Task newTask = new Deadlines(false, task, deadline);
+            System.out.println(" " + newTask.PrintTaskInfo());
+            list.add(newTask);
         }
 
         System.out.println("Now you have " + list.size() + "" +
@@ -98,12 +121,13 @@ public class Duke {
                 PrintList();
             }
             else if (Message.startsWith("done")) {
-                int index = Message.charAt(Message.length() - 1) - 49;
+                int index = Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1;
 
-                System.out.println("Nice! I've marked this task as done:");
-                list.get(index).MarkDone();
-                System.out.println(" " + list.get(index).PrintTaskInfo());
-
+                try {
+                    MarkDone(index);
+                } catch (DukeException e){
+                    e.PrintErrorMessage();
+                }
             }
             else  {
                 try {

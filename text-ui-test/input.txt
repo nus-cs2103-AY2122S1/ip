@@ -6,5 +6,7 @@ todo join sports club
 done 3
 todo
 deadline s
-abc
+deadline s /ok Aug 6th
+event k /nope Nov 7th
+todo look /hey Jan 1st
 bye
