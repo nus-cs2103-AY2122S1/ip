@@ -1,5 +1,11 @@
 import java.util.Scanner;
 
+/**
+ * Represents a Duke chatbot that can add tasks
+ * to users' to-do list.
+ *
+ * @author Ne Zhijian, Didymus A0218159Y
+ */
 public class Duke {
     private boolean isOpen;
     private final String dukeLogo;
@@ -33,7 +39,8 @@ public class Duke {
     }
 
     private void addTaskToList(String item) {
-        this.listOfTasks.addTaskToList(item);
+        Task task = Task.createTask(item);
+        this.listOfTasks.addTaskToList(task);
     }
 
     private String chatBotMessage(String reply) {
@@ -42,25 +49,46 @@ public class Duke {
                 "\t____________________________________________________________\n";
     }
 
+    private String getFirstWord(String s) {
+        String[] arrString = s.split(" ", 2);
+        return arrString[0];
+    }
 
+    private int getSecondNum(String s) {
+        String[] arrString = s.split(" ", 2);
+        return Integer.parseInt(arrString[1]);
+    }
 
     public static void main(String[] args) {
         Duke d = new Duke();
         d.openDukeChatBot();
         Scanner sc = new Scanner(System.in);
         while (d.isOpen) {
-            String userInput = sc.nextLine();
-            if (userInput.equals("bye")) {
-                d.closeDukeChatBot();
-                sc.close();
-            } else if (userInput.equals("list")) {
-                System.out.println(d.chatBotMessage(d.listOfTasks.toString()));
-            } else {
-                d.addTaskToList(userInput);
-                System.out.println(d.chatBotMessage("\tadded: " + userInput + "\n"));
+            try {
+                String userInput = sc.nextLine();
+                if (userInput.equals("bye")) {
+                    d.closeDukeChatBot();
+                    sc.close();
+                } else if (userInput.equals("list")) {
+                    System.out.println(d.chatBotMessage(d.listOfTasks.toString()));
+                } else if (d.getFirstWord(userInput).equals("done")) {
+                    int i = d.getSecondNum(userInput);
+                    d.listOfTasks.setTaskAsDone(i);
+                    System.out.println(d.chatBotMessage("\tNice! I've marked this task as done: \n" +
+                            "\t \t" + d.listOfTasks.getTask(i - 1) + "\n"));
+                } else {
+                    d.addTaskToList(userInput);
+                    System.out.println(d.chatBotMessage("\tadded: " + userInput + "\n"));
+                }
+            } catch (IllegalArgumentException e) {
+                if (e.getMessage().equals("For input string: \"zero\"")) {
+                    System.err.println(d.chatBotMessage("\t" + "Input after 'done' has to be an integer\n"));
+                } else {
+                    System.err.println(d.chatBotMessage("\t" + e.getMessage() + "\n"));
+                }
+
             }
         }
-
     }
 }
 
