@@ -1,7 +1,9 @@
 import java.util.Scanner;
 
 public class Duke {
+
     public static class Task{
+
         protected String description;
         protected boolean isDone;
 
@@ -15,10 +17,8 @@ public class Duke {
         }
 
         public void setDone(){
-
             this.isDone = true;
             System.out.println(this.toString());
-
         }
 
         public String toString(){
@@ -27,6 +27,44 @@ public class Duke {
 
     }
 
+    public static class ToDo extends Task{
+        public ToDo(String description){
+            super(description);
+        }
+
+        public String toString(){
+            return "[T] " + "[" + this.getStatusIcon() + "] " + this.description;
+        }
+
+    }
+
+    public static class Deadline extends Task{
+        protected String endTime;
+
+        public Deadline(String description, String endTime){
+            super(description);
+            this.endTime = endTime;
+        }
+
+        public String toString(){
+            return "[D] " + "[" + this.getStatusIcon() + "] " + this.description
+                    + " (by: " + this.endTime + ")";
+        }
+    }
+
+    public static class Event extends Task{
+        protected String timeRange;
+
+        public Event(String description, String timeRange){
+            super(description);
+            this.timeRange = timeRange;
+        }
+
+        public String toString(){
+            return "[E] " + "[" + this.getStatusIcon() + "] " + this.description
+                    + " (at: " + this.timeRange + ")";
+        }
+    }
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
         String logo = "                                        _       \n"
@@ -39,7 +77,7 @@ public class Duke {
 
         System.out.println(logo);
         System.out.println("I'm Mr Meeseeks look at me!");
-        System.out.println("Type in anything and I will keep track of it as a task!");
+        System.out.println("Type in \"todo\", \"deadline\" or \"event\" and I will keep track of a task!");
         System.out.println("Type \"list\" to show all tasks so far");
         System.out.println("Type \"done\" to mark a task as done");
         System.out.println("Type \"bye\" to exit");
@@ -52,7 +90,13 @@ public class Duke {
                 break;
             }
 
-            if (input.equals("list")){
+            if (input.equals("help")){
+                System.out.println("I'm Mr Meeseeks look at me!");
+                System.out.println("Type in \"todo\", \"deadline\" or \"event\" and I will keep track of a task!");
+                System.out.println("Type \"list\" to show all tasks so far");
+                System.out.println("Type \"done\" to mark a task as done");
+                System.out.println("Type \"bye\" to exit");
+            } else if (input.equals("list")){
                 //list out all tracked items
                 System.out.println("Tasks I tracked so far:");
                 for (int i = 1; i<currentIndex+1; i++){
@@ -96,16 +140,66 @@ public class Duke {
                 }
 
 
-            } else {
+            } else if (input.equals("todo") || input.equals("deadline") || input.equals("event")){
+
                 if (currentIndex == 99) {
                     //prevent out of bounds error
                     System.out.println("Oops! My task list is full. No new items can be added");
                 } else {
+                    String type = input;
+                    System.out.println("Ok! A " + type + " task");
+
+                    String taskName;
+
+                    while (true) {
+                        System.out.println("What is the description of the task?");
+                        taskName = reader.nextLine();
+                        if (taskName.equals("")) { //name cannot be null
+                            System.out.println("Oops! You have to give a name/description for that task");
+                        } else {
+                            break;
+                        }
+                    }
+                    Task newTask;
+                    String time;
+                        if (type.equals("todo")){
+                            newTask = new ToDo(taskName);
+                        } else if (type.equals("deadline")){
+                            while(true){
+                                System.out.println("Enter the deadline for the task");
+                                time = reader.nextLine();
+                                if (time.equals("")){ //time cannot be null
+                                    System.out.println("Oops! Please enter a time");
+                                } else{
+                                    break;
+                                }
+                            }
+
+                            newTask = new Deadline(taskName, time);
+                        } else{ //Event
+                            while(true){
+                                System.out.println("Enter the time range for the task");
+                                time = reader.nextLine();
+                                if (time.equals("")){ //time cannot be null
+                                    System.out.println("Oops! Please enter a time");
+                                } else{
+                                    break;
+                                }
+                            }
+                            newTask = new Event(taskName, time);
+                        }
                     //add item to the end of the array.
-                    System.out.println("Added in " + input);
-                    tasks[currentIndex] = new Task(input);
+                    tasks[currentIndex] = newTask;
+                    System.out.println("Ok! I've added the task below");
+                    System.out.println(newTask);
                     currentIndex++;
+                    System.out.println("There are now " + currentIndex + " tasks");
                 }
+
+
+            } else { //if unrecognised command
+                System.out.println("Oops! Sorry I don't recognise that command!");
+                System.out.println("Type \"help\" for list of commands, and ensure that there are no illegal characters or trailing spaces");
             }
         }
     }
