@@ -20,6 +20,17 @@ public class Lania {
     }
 
     /**
+     * Display all tasks stored.
+     *
+     */
+    public static void list() {
+        System.out.println("You have the following task(s):");
+        for (int i = 0; i < count; i++) {
+            System.out.println(i + 1 + ". " + strArray[i]);
+        }
+    }
+
+    /**
      * Prints the user input.
      *
      * @param s String provided by the user.
@@ -29,7 +40,7 @@ public class Lania {
     }
 
     /**
-     * Chatbot that echoes the user input unless 'bye' is given as input
+     * Chatbot that stores and displays the user input.
      *
      * @param args The command line arguments. Not required here.
      **/
@@ -39,8 +50,13 @@ public class Lania {
         Scanner s = new Scanner(System.in);
         String input = s.nextLine();
         while(!input.equals("bye")) {
-            update(input);
-            input = s.nextLine();
+            if (input.equals("list")) {
+                list();
+                input = s.nextLine();
+            } else {
+                update(input);
+                input = s.nextLine();
+            }
         }
         System.out.println("Bye. Lania looks forward to seeing you again!");
     }
