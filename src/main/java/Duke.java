@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    // shows the if the Duke chatbot has been activated
+    // shows if the Duke chatbot has been activated
     private boolean activated;
     // Line Separator
     private static String SEP_LINE = "____________________________________________________________\n";
@@ -24,10 +24,10 @@ public class Duke {
             + "What can I do for you?\n")
             .concat(SEP_LINE);
     // Text Storage
-    private final List<String> storage = new ArrayList<String>();
+    private final List<Task> storage = new ArrayList<Task>();
 
     // Duke Constructor
-    public Duke() {
+    public Duke(Scanner scannerObj) {
         this.activated = true;
     }
 
@@ -41,11 +41,9 @@ public class Duke {
         System.out.println(this.bootMessage);
     }
 
-    // Level-1: Echoes Message input from user
+    // Level-1: echos user message back to user
     public String echo(String text) {
-        // Level-2: adds text to storage
-        this.storage.add(text);
-        return "added: ".concat(text);
+        return text;
     }
 
     // Level-1: Exit Message triggered by "bye"
@@ -54,41 +52,102 @@ public class Duke {
         return " Bye. Hope to see you again soon!";
     }
 
+
+    // Level-2: adds new task to user
+    public String add(String text) {
+        Task nextTask = new Task(text);
+        this.storage.add(nextTask);
+        return "added: ".concat(text);
+    }
     // Level-2: Lists all items in storage
     public String list() {
-        String out = "";
+        String out = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.storage.size(); i++) {
             if (i != 0) out = out.concat("\n");
-            out = out.concat((i+1) + ". ");
-            out = out.concat(this.storage.get(i));
+            out = out.concat((i+1) + ".[")
+                    .concat(this.storage.get(i).getStatusIcon())
+                    .concat("] ")
+                    .concat(this.storage.get(i).getDescription());
         }
         return out;
     }
 
-    // decodes input from user and invokes the relevant method call
-    public String decoder(String text) {
-        String res;
-        if (text.equals("bye")) {
-            res = this.exit();
-        } else if (text.equals("list")) {
-            res = this.list();
-        } else {
-            res = this.echo(text);
-        }
-        return this.messageWrapper(res);
+    // Level-3: Mark items as done
+    public String done(int index) {
+        this.storage.get(index).setDone();
+        Task t = this.storage.get(index);
+        return "Nice! I've marked this task as done: \n  ["
+                .concat(t.getStatusIcon())
+                .concat("] ")
+                .concat(t.getDescription());
     }
 
+    // Level-4: to-do command
+    public String todo() {
+        return "";
+    }
+
+    // wraps all messages between line seperators
     public String messageWrapper(String text) {
         return this.SEP_LINE.concat(text).concat("\n").concat(SEP_LINE);
     }
 
+    // Task class that represents all Tasks
+    public class Task {
+        protected String description;
+        protected boolean isDone;
+
+        public Task(String description) {
+            this.description = description;
+            this.isDone = false;
+        }
+
+        public String getStatusIcon() {
+            return (isDone ? "X" : " ");
+        }
+
+        public String getDescription() {
+            return this.description;
+        }
+
+        public void setDone() {
+            this.isDone = true;
+        }
+    }
+
+    // decodes input from user and passes that argument to a response builder
+    public int decoder(String userInput) {
+        int res;
+        if (userInput.equals("bye")) res = 0;
+        else if (userInput.equals("list")) res = 1;
+        else if (userInput.equals("done")) res = 2;
+        else if (userInput.equals("todo")) res = 3;
+        else res = 4;
+        return res;
+    }
+
     public static void main(String[] args) {
         Scanner scannerObj = new Scanner(System.in);
-        Duke chatBotObj = new Duke();
+        Duke chatBotObj = new Duke(scannerObj);
         chatBotObj.greet();
         while (chatBotObj.isActive()) {
-            String userInput = scannerObj.nextLine();
-            String output = chatBotObj.decoder(userInput);
+            String nextIn = scannerObj.next();
+            int selector = chatBotObj.decoder(nextIn);
+            String output;
+            switch (selector) {
+                case 0: output = chatBotObj.exit();
+                        break;
+                case 1: output = chatBotObj.list();
+                        break;
+                case 2: output = chatBotObj.done(scannerObj.nextInt()-1);
+                        break;
+                case 3: output = chatBotObj.todo();
+                        break;
+                case 4: output = chatBotObj.add(nextIn.concat(scannerObj.nextLine()));
+                        break;
+                default: output = "";
+            }
+            output = chatBotObj.messageWrapper(output);
             System.out.println(output);
         }
     }
