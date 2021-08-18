@@ -16,7 +16,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+        while (scanner.hasNextLine()) {
             String command = scanner.nextLine().trim();
             if (command.equals("bye")) {
                 duke.bye();
