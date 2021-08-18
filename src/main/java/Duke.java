@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Duke {
 
@@ -10,8 +13,35 @@ public class Duke {
   private static final String BREAK_LINE = "____________________________________________________________";
   private static final List<String> GREETING = List.of("Hello! I'm Fergus' Chatbot", "What can I do for you?");
   private static final String FAREWELL = "Bye. Hope to see you again soon!";
-  private static final String DONE = "Nice! I've marked this task as done:";
-  private static final String ALREADY_DONE = "Error! The task has already been marked as complete!";
+  private static final String LIST = "Here are the tasks in your list:";
+
+  private static List<String> addTaskString(String task, String totalTasks) {
+    return List.of(
+      "Got it. I've added this task: ",
+      INDENTATION_1 + task,
+      String.format("Now you have %s tasks in the list.", totalTasks)
+    );
+  }
+
+  private static String getTaskName(String[] commands) {
+    int indexOfDateSeparator = IntStream
+      .range(0, commands.length)
+      .filter(i -> commands[i].equals("/at") || commands[i].equals("/by"))
+      .findFirst()
+      .orElse(commands.length);
+    String[] taskNames = Arrays.copyOfRange(commands, 1, indexOfDateSeparator);
+    return Arrays.stream(taskNames).collect(Collectors.joining(" "));
+  }
+
+  private static String getTaskDate(String[] commands) {
+    int indexOfDateSeparator = IntStream
+      .range(0, commands.length)
+      .filter(i -> commands[i].equals("/at") || commands[i].equals("/by"))
+      .findFirst()
+      .orElse(commands.length);
+    String[] taskNames = Arrays.copyOfRange(commands, indexOfDateSeparator + 1, commands.length);
+    return Arrays.stream(taskNames).collect(Collectors.joining(" "));
+  }
 
   private static String formatOutput(String inputText) {
     return INDENTATION_4 + BREAK_LINE + "\n" + INDENTATION_5 + inputText + "\n" + INDENTATION_4 + BREAK_LINE + "\n";
@@ -34,32 +64,50 @@ public class Duke {
     System.out.println(formatOutput(inputText));
   }
 
-  public static final String BYE_ENUM = "bye";
-  public static final String LIST_ENUM = "list";
-  public static final String DONE_ENUM = "done";
+  private static final String BYE_ENUM = "bye";
+  private static final String LIST_ENUM = "list";
+  private static final String DONE_ENUM = "done";
+  private static final String TODO_ENUM = "todo";
+  private static final String EVENT_ENUM = "event";
+  private static final String DEADLINE_ENUM = "deadline";
 
   public static void handleList(List<Task> taskList) {
     List<String> outputList = new ArrayList<>();
+    outputList.add(LIST);
     for (int i = 0; i < taskList.size(); i++) {
       outputList.add(i + 1 + ". " + taskList.get(i));
     }
     print(outputList);
   }
 
-  public static void handleAdd(List<Task> taskList, String newTaskDescription) {
-    Task newTask = new Task(newTaskDescription);
+  public static void handleAddToDo(List<Task> taskList, String[] command) {
+    Todo newTask = new Todo(getTaskName(command));
+    handleAddHelper(taskList, newTask);
+  }
+
+  public static void handleAddDeadline(List<Task> taskList, String[] command) {
+    String newTaskDescription = getTaskName(command);
+    String newTaskDate = getTaskDate(command);
+    Deadline newTask = new Deadline(newTaskDescription, newTaskDate);
+    handleAddHelper(taskList, newTask);
+  }
+
+  public static void handleAddEvent(List<Task> taskList, String[] command) {
+    String newTaskDescription = getTaskName(command);
+    String newTaskDate = getTaskDate(command);
+    Event newTask = new Event(newTaskDescription, newTaskDate);
+    handleAddHelper(taskList, newTask);
+  }
+
+  public static void handleAddHelper(List<Task> taskList, Task newTask) {
     taskList.add(newTask);
-    print("added: " + newTask.toString());
+    print(addTaskString(newTask.toString(), Integer.toString(taskList.size())));
   }
 
   public static void handleDone(List<Task> taskList, int index) {
     Task indexedTask = taskList.get(index - 1);
-    if (indexedTask.getDone()) {
-      print(ALREADY_DONE);
-      return;
-    }
-    indexedTask.markAsDone();
-    print(List.of(DONE, INDENTATION_1 + indexedTask.toString()));
+    String output = indexedTask.handleMarkAsDone();
+    print(output);
   }
 
   public static void handleCommands() {
@@ -83,6 +131,21 @@ public class Duke {
             handleList(taskArray);
             break;
           }
+        case EVENT_ENUM:
+          {
+            handleAddEvent(taskArray, commands);
+            break;
+          }
+        case DEADLINE_ENUM:
+          {
+            handleAddDeadline(taskArray, commands);
+            break;
+          }
+        case TODO_ENUM:
+          {
+            handleAddToDo(taskArray, commands);
+            break;
+          }
         case DONE_ENUM:
           {
             handleDone(taskArray, Integer.parseInt(commands[1]));
@@ -90,8 +153,7 @@ public class Duke {
           }
         default:
           {
-            handleAdd(taskArray, commandLine);
-            break;
+            System.out.println("There should not be a default case! Placeholder for error handling");
           }
       }
     }

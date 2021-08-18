@@ -1,29 +1,17 @@
-public class Task {
+public abstract class Task {
 
-  private String description;
-  private boolean done;
+  protected String description;
+  protected boolean done;
+  protected static final String ALREADY_DONE = "Error! The task has already been marked as complete!";
+  protected static final String DONE = "Nice! I've marked this task as done:";
+  protected static final String INDENTATION_5 = "     ";
 
-  public Task(String description) {
-    this.description = description;
-    this.done = false;
-  }
-
-  public void markAsDone() {
-    this.done = true;
-  }
-
-  public boolean getDone() {
-    return this.done;
-  }
-
-  public String toString() {
-    String output = "";
+  public String handleMarkAsDone() {
     if (this.done) {
-      output += "[X] ";
+      return Task.ALREADY_DONE;
     } else {
-      output += "[] ";
+      this.done = true;
+      return Task.DONE + "\n" + INDENTATION_5 + this.toString();
     }
-    output += this.description;
-    return output;
   }
 }
