@@ -1,6 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static ArrayList<String> listOfItems = new ArrayList<>();
 
     /**
      * Formats an output by adding a top and bottom border and displays it to the terminal
@@ -25,9 +27,17 @@ public class Duke {
                 // Exit when the user types bye
                 display("Bye. Hope to see you again soon!");
                 break;
+            } else if (input.equals("list")) {
+                // Display list of items when the user types list
+                String output = "";
+                for (int i = 0; i < listOfItems.size(); i++) {
+                    output += String.valueOf(i + 1) + ". " + listOfItems.get(i) + "\n\t ";
+                }
+                display(output);
             } else {
-                // Otherwise, echo commands entered by the user
-                System.out.println(input);
+                // Otherwise, store input text into list
+                listOfItems.add(input);
+                display("added: " + input);
             }
         }
         scanner.close();
