@@ -6,8 +6,12 @@ class Event extends Task{
         this.eventDate = eventDate;
     }
 
-    public static Event parseNewCommand(String newCommand) {
+    public static Event parseNewCommand(String newCommand) throws IllegalArgumentException {
         int sepIndex = newCommand.indexOf("/at");
+        int cmdLen = newCommand.length();
+        if (sepIndex == -1 || cmdLen < 6 || 6 > sepIndex-1 || cmdLen < sepIndex+4) {
+            throw new IllegalArgumentException("Invalid command for a new event.");
+        }
         String newName = newCommand.substring(6, sepIndex-1);
         String newDate = newCommand.substring(sepIndex+4);
 

@@ -42,7 +42,11 @@ class Duke {
         System.out.println(String.format("\tNow you have %d tasks in the list.", tasks.size()));
     }
 
-    private static void markAsDone(int id) {
+    private static void markAsDone(int id) throws IndexOutOfBoundsException {
+        if (id >= tasks.size()) {
+            throw new IndexOutOfBoundsException("Do not have such a task in the list.");
+        }
+
         tasks.get(id-1).setDone(true);
 
         System.out.println("\tNice! I've marked this task as done: ");
@@ -59,45 +63,43 @@ class Duke {
         while (!currCommand.equals(CMD_BYE)) {
             Task newItem = null;
 
-            switch (currCommand) {
-            case CMD_LIST:
-                displayList();
-                break;
-            case CMD_DONE:
-                int doneId = Integer.parseInt(currLine.split(" ")[1]);
-                markAsDone(doneId);
-                break;
-            case CMD_TODO:
-                newItem = new Todo(currLine.substring(5).strip());
-                break;
-            case CMD_DDL:
-                newItem = Deadline.parseNewCommand(currLine);
-                break;
-            case CMD_EVENT:
-                newItem = Event.parseNewCommand(currLine);
+            try {
+                switch (currCommand) {
+                case CMD_LIST:
+                    displayList();
+                    break;
+                case CMD_DONE:
+                    int doneId = Integer.parseInt(currLine.split(" ")[1]);
+                    markAsDone(doneId);
+                    break;
+                case CMD_TODO:
+                    if (currLine.length() <= 4 || currLine.substring(5).strip().equals("")) {
+                        throw new DukeException("The description of a todo cannot be empty.");
+                    }
+
+                    newItem = new Todo(currLine.substring(5).strip());
+                    break;
+                case CMD_DDL:
+                    newItem = Deadline.parseNewCommand(currLine);
+                    break;
+                case CMD_EVENT:
+                    newItem = Event.parseNewCommand(currLine);
+                    break;
+                default:
+                    throw new DukeException("Sorry, Yiyang-bot doesn't know what does that mean.");
+                }
+
+                // check if any new item added
+                if (newItem != null) {
+                    tasks.add(newItem);
+                    displayAddedNew(newItem);
+                }
+            } catch (IllegalArgumentException | IndexOutOfBoundsException | DukeException e) {
+                System.err.println("\tOops :( " + e);
+            } finally {
+                currLine = sc.nextLine();
+                currCommand = currLine.split(" ")[0];
             }
-
-            // check if any new item added
-            if (newItem != null) {
-                tasks.add(newItem);
-                displayAddedNew(newItem);
-            }
-
-            /*
-            if (currCommand.equals(CMD_LIST)) {
-                displayList();
-            } else if (currCommand.equals(CMD_DONE)) {
-                int doneId = Integer.parseInt(currLine.split(" ")[1]);
-                markAsDone(doneId);
-            } else {    // add
-                tasks.add(new Task(currLine));
-                System.out.println("\t added: " + currLine);
-            }
-
-             */
-
-            currLine = sc.nextLine();
-            currCommand = currLine.split(" ")[0];
         }
 
         displayBye();
