@@ -10,14 +10,29 @@ public class Deadline extends Task{
      * Takes in a string and splits msg into based on /by pattern. Set the eventType and time of the instance
      * @param input string from the user
      */
-    public Deadline(String input) throws IndexOutOfBoundsException {
+    public Deadline(String input) throws InvalidDeadlineFormatException {
         super();
         List<String> results = Pattern.compile("/by").splitAsStream(input).map(x->x.trim()).collect(Collectors.toList());
-        String key = results.get(0);
+        String key;
+
+        if (results.size() == 0){
+            throw new InvalidDeadlineFormatException("Missing description and timestamp");
+        } else if (results.size() == 1){
+            throw new InvalidDeadlineFormatException("Invalid timestamp format");
+        }
+
+        key = results.get(0);
+        if (key.equals("")){
+            throw new InvalidDeadlineFormatException("Missing description ");
+        }
+        System.out.println(results.size());
+        System.out.println("this is the first[" + key+ "]");
+
         String time = "(by: " + results.get(1) + ")";
         super.setDescription(key);
         this.eventType = "[D]";
         this.time = time;
+
     }
 
     /**

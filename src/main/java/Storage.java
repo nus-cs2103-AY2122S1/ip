@@ -33,13 +33,20 @@ public class Storage {
      * @throws NumberFormatException if character after "done" is not an integer
      * @throws NullPointerException if the number provided by user is not found in the getStorage printed msg
      */
-    public String done (String input) throws NumberFormatException, NullPointerException {
-        int list_no = Integer.parseInt(input.trim()); //possible NumberFormatException
-        Collection<Task> values = mapper.values();
-        Task second = values.stream().skip(list_no-1).findFirst().orElse(null); // possible for task to be null
-        String key = second.getDescription();
-        mapper.put(key, mapper.get(key).setDone());
-        return mapper.get(key).toString();
+    public String done (String input) throws InvalidDoneFormatException {
+        try {
+            int list_no = Integer.parseInt(input.trim()); //possible NumberFormatException
+            Collection<Task> values = mapper.values();
+            Task second = values.stream().skip(list_no-1).findFirst().orElse(null); // possible for task to be null
+            String key = second.getDescription();
+            mapper.put(key, mapper.get(key).setDone());
+            return mapper.get(key).toString();
+        } catch (NumberFormatException e) {
+            throw new InvalidDoneFormatException("Ensure that list position in NUMERICAL form");
+        } catch (NullPointerException e) {
+            throw new InvalidDoneFormatException("Ensure that number inputted can be found in the list");
+        }
+
     }
 
     /**
@@ -57,7 +64,7 @@ public class Storage {
      * @param input tajes in the input from user
      * @return String that contains the success msg
      */
-    public String deadline (String input) {
+    public String deadline (String input) throws InvalidDeadlineFormatException {
         Deadline deadline = new Deadline(input);
         mapper.put(deadline.getDescription(), deadline);
         return deadline.toString();
@@ -67,7 +74,7 @@ public class Storage {
      * @param input tajes in the input from user
      * @return String that contains the success msg
      */
-    public String event (String input) throws IndexOutOfBoundsException {
+    public String event (String input) throws InvalidEventFormatException {
         Event event = new Event(input);
         mapper.put(event.getDescription(), event);
         return event.toString();
@@ -104,6 +111,10 @@ public class Storage {
         return check;
     }
 
+    /**
+     * Retyrns the number of task in the list
+     * @return int
+     */
     public int listMaxLen(){
         return listLen;
     }

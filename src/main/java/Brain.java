@@ -33,10 +33,8 @@ public class Brain {
                     try {
                         String outputMsg = storage.done(userReq);
                         speech.doneMsg(outputMsg);
-                    } catch (NullPointerException e){
-                        speech.error("input an invalid done value.");
-                    } catch (NumberFormatException e) {
-                        speech.error("did not input an integer after done.");
+                    } catch (InvalidDoneFormatException e){
+                        speech.error(e.toString());
                     }
                     break;
                 case "deadline":
@@ -44,8 +42,8 @@ public class Brain {
                     try{
                         String deadlineSuccess = storage.deadline(userReq);
                         speech.taskAdded(deadlineSuccess, storage);
-                    } catch (IndexOutOfBoundsException e) {
-                        speech.error("did not input /by for timeStamp");
+                    } catch (InvalidDeadlineFormatException e) {
+                        speech.error(e.toString());
                     }
                     break;
                 case "todo":
@@ -58,17 +56,17 @@ public class Brain {
                     try{
                         String eventSucess = storage.event(userReq);
                         speech.taskAdded(eventSucess, storage);
-                    } catch (IndexOutOfBoundsException e) {
-                        speech.error("did not input /at for timeStamp");
+                    } catch (InvalidEventFormatException e) {
+                        speech.error(e.toString());
                     }
                     break;
                 default:
                     throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            speech.error("input an invalid action.");
+            speech.error(new InvalidInputException("User input an invalid action.").toString());
         } catch (ArrayIndexOutOfBoundsException e) {
-            speech.error("are missing info after action");
+            speech.error(new InvalidInputException("Missing info after action").toString());
         }
         return cont;
 

@@ -56,7 +56,7 @@ public class Speech {
      * @param error_msg string that contains details of the error
      */
     public void error(String error_msg) {
-        String[] dukeError = {"I think you " + error_msg, "Please try again" };
+        String[] dukeError = {error_msg, "Please try again" };
         currentBubbleLimit = dukeError[0].length();
         speak(dukeError);
     }
@@ -75,7 +75,6 @@ public class Speech {
      * @param in takes in a string array and cycle through and printing msg
      */
     public void speak(String[] in) {
-//        if (!testing){
             int limit = baseBubbleLimit;
             String base = baseTemplate;
             if (baseBubbleLimit < currentBubbleLimit) {
@@ -91,12 +90,6 @@ public class Speech {
                 msges.append(message_format(x, limit));
             }
             System.out.println( topBorder + msges + botBorder + emoticon);
-//        } else {
-//            for(String x : in){
-//                System.out.println(x);
-//            }
-//        }
-
     }
 
     /**

@@ -12,45 +12,45 @@ Say something to Duke:
           |/
 ( ＾◡＾)ノ
 Say something to Duke: 
-           _________________________________________________
-          | I think you input an invalid done value.        |
-          | Please try again                                |
-          |_________________________________________________|
+           _________________________________________________________________________________
+          | InvalidDoneFormatException: Ensure that number inputted can be found in the list|
+          | Please try again                                                                |
+          |_________________________________________________________________________________|
           |/
 (*°▽°)ノ
 Say something to Duke: 
-           _________________________________________________
-          | I think you input an invalid action.            |
-          | Please try again                                |
-          |_________________________________________________|
+           _____________________________________________________
+          | InvalidInputException: User input an invalid action.|
+          | Please try again                                    |
+          |_____________________________________________________|
           |/
 (o^ω^)
 Say something to Duke: 
-           _________________________________________________
-          | I think you did not input an integer after done.|
-          | Please try again                                |
-          |_________________________________________________|
+           ________________________________________________________________________
+          | InvalidDoneFormatException: Ensure that list position in NUMERICAL form|
+          | Please try again                                                       |
+          |________________________________________________________________________|
           |/
 (✿˘▽˘)
 Say something to Duke: 
            _________________________________________________
-          | I think you are missing info after action       |
+          | InvalidInputException: Missing info after action|
           | Please try again                                |
           |_________________________________________________|
           |/
 ( ﾟ◇ﾟ)/
 Say something to Duke: 
            _________________________________________________
-          | I think you are missing info after action       |
+          | InvalidInputException: Missing info after action|
           | Please try again                                |
           |_________________________________________________|
           |/
 ( ＾◡＾)ノ
 Say something to Duke: 
-           _________________________________________________
-          | I think you input an invalid action.            |
-          | Please try again                                |
-          |_________________________________________________|
+           _____________________________________________________
+          | InvalidInputException: User input an invalid action.|
+          | Please try again                                    |
+          |_____________________________________________________|
           |/
 (*°▽°)ノ
 Say something to Duke: 
@@ -134,10 +134,10 @@ Say something to Duke:
           |/
 (*°▽°)ノ
 Say something to Duke: 
-           _________________________________________________
-          | I think you did not input /at for timeStamp     |
-          | Please try again                                |
-          |_________________________________________________|
+           ______________________________________________________
+          | InvalidEventFormatException: Invalid timestamp format|
+          | Please try again                                     |
+          |______________________________________________________|
           |/
 (o^ω^)
 Say something to Duke: 
@@ -151,13 +151,15 @@ Say something to Duke:
           |/
 (✿˘▽˘)
 Say something to Duke: 
-           _________________________________________________
-          | I think you did not input /by for timeStamp     |
-          | Please try again                                |
-          |_________________________________________________|
+           _________________________________________________________
+          | InvalidDeadlineFormatException: Invalid timestamp format|
+          | Please try again                                        |
+          |_________________________________________________________|
           |/
 ( ﾟ◇ﾟ)/
-Say something to Duke: 
+Say something to Duke: 2
+this is the first[dead by]
+
            _________________________________________________
           | Got it. I've added this task:                   |
           |   [D][ ] dead by (by: tonight)                  |
