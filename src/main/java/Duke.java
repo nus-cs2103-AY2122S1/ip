@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -38,7 +38,7 @@ public class Duke {
                 }
                 System.out.println(dash);
 
-            } else if (userInput.substring(0, 4).matches("done")){
+            } else if (userInput.length() > 3 && userInput.substring(0, 4).matches("done")){
                 Integer index = Integer.parseInt(userInput.substring(5));
                 Task currTask = tasks[index - 1];
                 currTask.completeTask();
@@ -48,43 +48,65 @@ public class Duke {
                 System.out.println(currTask.toString());
                 System.out.println(dash);
 
-            } else if (userInput.substring(0, 4).matches("todo")) {
-                tasks[counter] = new ToDo(userInput.substring(5));
+            } else if (userInput.length() > 3 && userInput.substring(0, 4).matches("todo")) {
 
-                System.out.println(dash);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(tasks[counter].toString());
-                counter += 1;
+                if (userInput.substring(4).length() == 0) {
+                    System.out.println(dash + '\n' + "YIKES!! The description of a todo cannot be empty!" + '\n'+ dash);
+                    // throw new DukeException("YIKES!! The description of a todo cannot be empty!");
+                } else {
+                    tasks[counter] = new ToDo(userInput.substring(5));
 
-                System.out.println("Now you have " + counter + " task(s) in the list.");
-                System.out.println(dash);
+                    System.out.println(dash);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(tasks[counter].toString());
+                    counter += 1;
 
-            } else if (userInput.substring(0, 5).matches("event")) {
-                String output = userInput.substring(6);
-                String[] info = output.split("/");
-                tasks[counter] = new Event(info[0], info[1].substring(3));
+                    System.out.println("Now you have " + counter + " task(s) in the list.");
+                    System.out.println(dash);
+                }
 
-                System.out.println(dash);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(tasks[counter].toString());
-                counter += 1;
 
-                System.out.println("Now you have " + counter + " task(s) in the list.");
-                System.out.println(dash);
+            } else if (userInput.length() > 4 && userInput.substring(0, 5).matches("event")) {
 
-            } else if (userInput.substring(0, 8).matches("deadline")) {
-                String output = userInput.substring(9);
-                String[] info = output.split("/");
-                tasks[counter] = new Deadline(info[0], info[1].substring(3));
+                if (userInput.substring(5).length() == 0) {
+                    System.out.println(dash + '\n' + "YIKES!! The description of an Event cannot be empty!" + '\n'+ dash);
+                    // throw new DukeException("YIKES!! The description of an Event cannot be empty!");
+                } else {
+                    String output = userInput.substring(6);
+                    String[] info = output.split("/");
+                    tasks[counter] = new Event(info[0], info[1].substring(3));
 
-                System.out.println(dash);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(tasks[counter].toString());
-                counter += 1;
+                    System.out.println(dash);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(tasks[counter].toString());
+                    counter += 1;
 
-                System.out.println("Now you have " + counter + " task(s) in the list.");
-                System.out.println(dash);
+                    System.out.println("Now you have " + counter + " task(s) in the list.");
+                    System.out.println(dash);
+                }
 
+            } else if (userInput.length() > 7 && userInput.substring(0, 8).matches("deadline")) {
+
+                if (userInput.substring(8).length() == 0) {
+                    System.out.println(dash + '\n' + "YIKES!! The description of a Deadline cannot be empty!" + '\n'+ dash);
+                    // throw new DukeException("YIKES!! The description of a Deadline cannot be empty!");
+                } else {
+                    String output = userInput.substring(9);
+                    String[] info = output.split("/");
+                    tasks[counter] = new Deadline(info[0], info[1].substring(3));
+
+                    System.out.println(dash);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(tasks[counter].toString());
+                    counter += 1;
+
+                    System.out.println("Now you have " + counter + " task(s) in the list.");
+                    System.out.println(dash);
+                }
+
+            } else {
+                System.out.println(dash + '\n' + "OOPS!! I don't know how to respond to this command! :-(" + '\n'+ dash);
+                // throw new DukeException("OOPS!! I don't know how to respond to this command! :-(");
             }
         }
     }
