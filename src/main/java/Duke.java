@@ -27,10 +27,15 @@ public class Duke {
     private static void outputWrapper(List elements) {
         ListIterator it = elements.listIterator();
         System.out.println(SEPARATOR);
-        while (it.hasNext()) {
-            Integer number = it.nextIndex() + 1;
-            System.out.println(number + ". " + it.next());
+        if (elements.size() == 0) {
+            System.out.println("You have no items in your list. Add some with [todo], [deadline] or [event]!");
+        } else {
+            while (it.hasNext()) {
+                Integer number = it.nextIndex() + 1;
+                System.out.println(number + ". " + it.next());
+            }
         }
+
         System.out.println(SEPARATOR);
     }
 
@@ -52,16 +57,24 @@ public class Duke {
      * function for printing the confirmation message for any item added to list
      * @param task
      */
-    private static void printConfirmation(Task task) {
+    private static void printAdditionConfirmation(Task task) {
         String confirmationMessage = "You have successfully added an item:\n" + task + "\nto the list.\n";
 
         String numberOfItems = String.format("There %s %s %s in the list right now",
-                listOfItems.size() > 1 ? "are" : "is",
+                listOfItems.size() != 1 ? "are" : "is",
                 listOfItems.size(),
-                listOfItems.size() > 1 ? "items" : "item");
+                listOfItems.size() != 1 ? "items" : "item");
         outputWrapper(confirmationMessage + numberOfItems);
     }
+    private static void printDeletionConfirmation(Task task) {
+        String confirmationMessage = "You have successfully deleted an item:\n" + task + "\nfrom the list.\n";
 
+        String numberOfItems = String.format("There %s %s %s in the list right now",
+                listOfItems.size() != 1 ? "are" : "is",
+                listOfItems.size(),
+                listOfItems.size() != 1 ? "items" : "item");
+        outputWrapper(confirmationMessage + numberOfItems);
+    }
     /**
      * Add an item to the list as todo.
      * @param input
@@ -75,7 +88,7 @@ public class Duke {
         String textDescription = elements[1];
         Task todo = new Todo(textDescription);
         listOfItems.add(todo);
-        printConfirmation(todo);
+        printAdditionConfirmation(todo);
     }
 
     private static void markAsEvent(String input) throws DukeException {
@@ -93,7 +106,7 @@ public class Duke {
         String textDescription = elements[0];
         Task event = new Event(textDescription, time);
         listOfItems.add(event);
-        printConfirmation(event);
+        printAdditionConfirmation(event);
     }
 
     private static void markAsDeadline(String input) throws DukeException {
@@ -110,7 +123,20 @@ public class Duke {
         String textDescription = elements[0];
         Task deadline = new Deadline(textDescription, time);
         listOfItems.add(deadline);
-        printConfirmation(deadline);
+        printAdditionConfirmation(deadline);
+    }
+
+    private static void deleteItem(String input) throws DukeException {
+        try {
+            Integer idx = Integer.parseInt(input.split(" ", 2)[1]) - 1;
+            Task item = listOfItems.get(idx);
+            listOfItems.remove(item);
+            printDeletionConfirmation(item);
+        } catch (NumberFormatException e) {
+            throw new DukeException("you need to choose a number from the list in the form: delete (list index)!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("you need to pick an item from within the list!");
+        }
     }
 
     /**
@@ -149,6 +175,9 @@ public class Duke {
                     break;
                 case "deadline":
                     markAsDeadline(input);
+                    break;
+                case "delete":
+                    deleteItem(input);
                     break;
                 default:
                     markAsInvalid(input);

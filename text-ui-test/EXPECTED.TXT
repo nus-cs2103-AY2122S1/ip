@@ -1,5 +1,8 @@
 Hello this is Jeeves, your personal chatbot. What can i do you for today?
 ########################
+You have no items in your list. Add some with [todo], [deadline] or [event]!
+########################
+########################
 You have successfully added an item:
 [E][] buy food  (at: 2-4pm)
 to the list.
@@ -36,6 +39,16 @@ Sorry, you need to describe your event to me in format: event (description)!
 ########################
 ########################
 Sorry, you need to describe your deadline to me in format: deadline (description)!
+########################
+########################
+You have successfully deleted an item:
+[T][X] get home
+from the list.
+There are 2 items in the list right now
+########################
+########################
+1. [E][] buy food  (at: 2-4pm)
+2. [D][] submit assignment  (by: noon)
 ########################
 ########################
 Sorry, you need to describe the todo in format: todo (description)!

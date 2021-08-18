@@ -1,3 +1,4 @@
+items
 event buy food /at 2-4pm
 todo get home
 deadline submit assignment /by noon
@@ -6,6 +7,8 @@ completed 2
 items
 event
 deadline
+delete 2
+items
 todo
 event get food
 deadline buy food
