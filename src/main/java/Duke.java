@@ -15,25 +15,25 @@ public class Duke {
         while (!bye) {
             try {
                 System.out.print("> ");
-                String text = input.nextLine();
+                String text = input.nextLine().trim();
 
                 System.out.println("  ____________________________________________________________");
 
-                if (text.equals("bye")) { // bye function: exits the loop, ends process
+                if (text.split("\\s+")[0].equals("bye")) { // bye function: exits the loop, ends process
                     System.out.println("  See you next time!");
                     bye = true;
                     
-                } else if (text.equals("list")) { // list function: iterates through taskList, prints Tasks' listEntry
+                } else if (text.split("\\s+")[0].equals("list")) { // list function: iterates through taskList, prints Tasks' listEntry
                     System.out.println("  Here are the tasks in your list:");
                     for (int i = 0; i < listLength; ++i) {
                         System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
                     }
                     
-                } else if (text.split(" ")[0].equals("done")) { // done function: sets a task to done
-                    if (text.split(" ").length == 1) {
+                } else if (text.split("\\s+")[0].equals("done")) { // done function: sets a task to done
+                    if (text.split("\\s+").length == 1) {
                         throw new DukeException(DukeExceptionType.INVALIDDONE);
                     } else {
-                        int toSet = Integer.parseInt(text.split(" ")[1]);
+                        int toSet = Integer.parseInt(text.split("\\s+")[1]);
                         if (toSet > listLength || toSet < 1) {
                             throw new DukeException(DukeExceptionType.INVALIDDONE);
                         } else {
@@ -43,11 +43,11 @@ public class Duke {
                         }
                     }
 
-                } else if (text.split(" ")[0].equals("delete")) { // delete function: delete a task
-                    if (text.split(" ").length == 1) {
+                } else if (text.split("\\s+")[0].equals("delete")) { // delete function: delete a task
+                    if (text.split("\\s+").length == 1) {
                         throw new DukeException(DukeExceptionType.INVALIDDELETE);
                     } else {
-                        int toDelete = Integer.parseInt(text.split(" ")[1]);
+                        int toDelete = Integer.parseInt(text.split("\\s+")[1]);
                         if (toDelete > listLength || toDelete < 1) {
                             throw new DukeException(DukeExceptionType.INVALIDDELETE);
                         } else {
@@ -58,7 +58,7 @@ public class Duke {
                     }
                     
                 } else { // task function: add tasks
-                    if (text.split(" ").length == 1) { // task details not given or not valid task
+                    if (text.split("\\s+").length == 1) { // task details not given or not valid task
                         switch (text) {
                             case "deadline":
                                 throw new DukeException(DukeExceptionType.DEADLINEDESC);
@@ -77,7 +77,7 @@ public class Duke {
                         Task newTask;
 
                         // split text string, first string will be the task type and second string will be task details
-                        String[] taskString = text.split(" ", 2);
+                        String[] taskString = text.split("\\s+", 2);
                         String taskType = taskString[0];
                         String taskDetails = taskString[1];
 
