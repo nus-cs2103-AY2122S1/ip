@@ -3,6 +3,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.io.File;
 import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
@@ -17,6 +18,8 @@ public class Storage {
 
     public Storage (String filename) {
         path = FileSystems.getDefault().getPath("data", filename);
+        File directory = new File("data");
+        directory.mkdir();
     }
 
     public ArrayList<Task> load(Ui ui) throws IOException, DukeException {

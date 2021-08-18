@@ -90,4 +90,8 @@ public class Ui {
     public void notifyImproperDateTime() {
         System.out.println("Sorry! I don't recognise the format for the date and time you've entered.");
     }
+
+    public void printLine() {
+        System.out.println("--------------------------------------------------");
+    }
 }

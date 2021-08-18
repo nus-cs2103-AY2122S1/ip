@@ -15,7 +15,7 @@ public class Duke {
             tasklist = new TaskList(storage.load(ui));
         } catch (IOException | DukeException e) {
             ui.notifyLoadingError();
-            e.printStackTrace();
+//            e.printStackTrace();
             tasklist = new TaskList();
         }
     }
@@ -31,23 +31,25 @@ public class Duke {
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.notifyEmptyDescription();
-                e.printStackTrace();
+//                e.printStackTrace();
             } catch (IndexOutOfBoundsException e) {
                 ui.notifyIndexOutOfBounds();
-                e.printStackTrace();
+//                e.printStackTrace();
             } catch (NumberFormatException e) {
                 ui.notifyImproperIndex();
-                e.printStackTrace();
+//                e.printStackTrace();
             } catch (DateTimeParseException e) {
                 ui.notifyImproperDateTime();
-                e.printStackTrace();
+//                e.printStackTrace();
+            } finally {
+                ui.printLine();
             }
         }
         try {
             storage.save(tasklist, ui);
         } catch (IOException e) {
             ui.notifySavingError();
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         ui.closing();
     }
