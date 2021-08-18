@@ -20,23 +20,72 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < taskIndex; i++) {
                     Task task = tasks[i];
-                    System.out.printf("%d.[%s] %s%n", i + 1, task.getStatusIcon(), task.getDescription());
+                    System.out.printf("%d. %s%n", i + 1, task);
                 }
                 System.out.println("---------------------------------");
             } else if (taskDescription.startsWith("done ")) {
-                String [] splitText = taskDescription.split(" ");
-                int serialNum = Integer.parseInt(splitText[1]);
+                int serialNum = Integer.parseInt(taskDescription.split(" ")[1]);
                 Task task = tasks[serialNum - 1];
                 task.markAsDone();
                 System.out.println("---------------------------------");
                 System.out.println("I have marked this task as done");
                 System.out.printf("[%s] %s%n", task.getStatusIcon(), task.getDescription());
                 System.out.println("---------------------------------");
-            } else {
-                tasks[taskIndex] = new Task(taskDescription);
+            } else if (taskDescription.startsWith("deadline ")) {
+                String [] splitText = taskDescription.split(" ");
+                String description = "";
+                StringBuilder sb = new StringBuilder();
+                for (int i = 1; i < splitText.length; i++) {
+                    if (splitText[i].equals("/by")) {
+                        description = sb.toString().trim();
+                        sb = new StringBuilder();
+                    } else {
+                        sb.append(splitText[i]).append(" ");
+                    }
+                }
+                String date = sb.toString().trim();
+                Task task = new Deadline(description, date);
+                tasks[taskIndex] = task;
                 taskIndex++;
                 System.out.println("---------------------------------");
-                System.out.println("added: " + taskDescription);
+                System.out.println("I have added this task: ");
+                System.out.println(task.toString());
+                System.out.printf("Now you have %d tasks.%n", taskIndex);
+                System.out.println("---------------------------------");
+            } else if (taskDescription.startsWith("event ")) {
+                String [] splitText = taskDescription.split(" ");
+                String description = "";
+                StringBuilder sb = new StringBuilder();
+                for (int i = 1; i < splitText.length; i++) {
+                    if (splitText[i].equals("/at")) {
+                        description = sb.toString().trim();
+                        sb = new StringBuilder();
+                    } else {
+                        sb.append(splitText[i]).append(" ");
+                    }
+                }
+                String date = sb.toString().trim();
+                Task task = new Event(description, date);
+                tasks[taskIndex] = task;
+                taskIndex++;
+                System.out.println("---------------------------------");
+                System.out.println("I have added this task: ");
+                System.out.println(task.toString());
+                System.out.printf("Now you have %d tasks.%n", taskIndex);
+                System.out.println("---------------------------------");
+            } else if (taskDescription.startsWith("todo ")){
+                String [] splitText = taskDescription.split(" ");
+                StringBuilder sb = new StringBuilder();
+                for (int i = 1; i < splitText.length; i++) {
+                    sb.append(splitText[i]).append(" ");
+                }
+                Task task = new ToDo(sb.toString().trim());
+                tasks[taskIndex] = task;
+                taskIndex++;
+                System.out.println("---------------------------------");
+                System.out.println("I have added this task: ");
+                System.out.println(task.toString());
+                System.out.printf("Now you have %d tasks.%n", taskIndex);
                 System.out.println("---------------------------------");
             }
         }
