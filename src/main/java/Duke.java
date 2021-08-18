@@ -1,11 +1,13 @@
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean check = true;
-        Task[] tasks = new Task[100];
+//        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<Task>();
         int counter = 0;
 
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
@@ -18,20 +20,20 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
             } else if (s.equals("list")) {
                 for (int i = 0; i < counter; i++) {
-                    System.out.println((i + 1) + tasks[i].toString());
+                    System.out.println((i + 1) + tasks.get(i).toString());
                 }
             } else if (strArray[0].equals("done")) {
                 int idx = Integer.parseInt(strArray[1]) - 1;
-                tasks[idx].setDone();
-                System.out.println("Nice! I've marked this task as done: \n" + "\t" + tasks[idx].toString());
+                tasks.get(idx).setDone();
+                System.out.println("Nice! I've marked this task as done: \n" + "\t" + tasks.get(idx).toString());
             } else if (strArray[0].equals("todo")) {
                 String description = new String();
                 for (int i = 1; i < strArray.length; i++) {
                     description = description + strArray[i] + " ";
                 }
 
-                tasks[counter] = new Todo(description);
-                System.out.println("Got it. I've added this task:\n" + "\t" + tasks[counter].toString());
+                tasks.add(new Todo(description));
+                System.out.println("Got it. I've added this task:\n" + "\t" + tasks.get(counter).toString());
                 counter++;
                 System.out.println("Now you have " + counter + " tasks in your list.");
             } else if (strArray[0].equals("deadline")) {
@@ -52,8 +54,8 @@ public class Duke {
                 if (date.equals("")) {
                     System.out.println("Invalid input. Please try again.");
                 } else {
-                    tasks[counter] = new Deadline(description, date);
-                    System.out.println("Got it. I've added this task:\n" + "\t" + tasks[counter].toString());
+                    tasks.add(new Deadline(description, date));
+                    System.out.println("Got it. I've added this task:\n" + "\t" + tasks.get(counter).toString());
                     counter++;
                     System.out.println("Now you have " + counter + " tasks in your list.");
                 }
@@ -75,8 +77,8 @@ public class Duke {
                 if (date.equals("")) {
                     System.out.println("Invalid input. Please try again.");
                 } else {
-                    tasks[counter] = new Event(description, date);
-                    System.out.println("Got it. I've added this task:\n" + "\t" + tasks[counter].toString());
+                    tasks.add(new Event(description, date));
+                    System.out.println("Got it. I've added this task:\n" + "\t" + tasks.get(counter).toString());
                     counter++;
                     System.out.println("Now you have " + counter + " tasks in your list.");
                 }
