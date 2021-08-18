@@ -13,7 +13,7 @@ public class Duke {
         System.out.println(horizontalLines);
 
         boolean end = false;
-        String added[] = new String[100];
+        Task added[] = new Task[100];
         int i = 0;
 
         while (!end) {
@@ -25,18 +25,25 @@ public class Duke {
                 System.out.println(horizontalLines);
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println(horizontalLines);
-            } else if (str.equals("list")) {
+            } else if (str.length() >= 6 && str.substring(0, 4).equals("done")) {
+                int a = Integer.parseInt(str.substring(5)) - 1;
+                added[a].taskDone();
+                System.out.println(horizontalLines);
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("" + added[a].getTask());
+            }
+            else if (str.equals("list")) {
                 System.out.println(horizontalLines);
                 for (int j = 0; j < i; j++) {
                     int num = j + 1;
-                    System.out.println(num + ". " + added[j]);
+                    System.out.println(num + "." + added[j].getTask());
                 }
                 System.out.println(horizontalLines);
             }
             else {
                 System.out.println(horizontalLines);
+                added[i] = new Task(str);
                 System.out.println( "added: " + str);
-                added[i] = str;
                 System.out.println(horizontalLines);
                 i++;
             }
