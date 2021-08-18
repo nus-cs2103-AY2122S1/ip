@@ -4,6 +4,9 @@ import io.InputHandler;
 import io.OutputHandler;
 import messages.Message;
 import messages.MessageConstants;
+import messages.TaskAddMessage;
+import messages.TaskListMessage;
+import tasks.Task;
 
 import java.io.IOException;
 
@@ -31,11 +34,15 @@ public class FulfillmentHandler {
 
         while(true) {
             String userInput = inputHandler.readInput();
-            if (userInput.equals("bye")) {
-                handleBye();
-                break;
-            } else {
-                echoCommand(userInput);
+            switch (userInput) {
+                case "list":
+                    handleTaskList();
+                    break;
+                case "bye":
+                    handleBye();
+                    return;
+                default:
+                    handleTaskAdd(userInput);
             }
         }
     }
@@ -48,7 +55,12 @@ public class FulfillmentHandler {
         outputHandler.writeMessage(new Message(MessageConstants.BYE_MESSAGE));
     }
 
-    private void echoCommand(String messageText) {
-        outputHandler.writeMessage(new Message(messageText));
+    private void handleTaskList() {
+        outputHandler.writeMessage(new TaskListMessage(Task.getAllTasks()));
+    }
+
+    private void handleTaskAdd(String taskText) {
+        Task.addTask(new Task(taskText));
+        outputHandler.writeMessage(new TaskAddMessage(taskText));
     }
 }

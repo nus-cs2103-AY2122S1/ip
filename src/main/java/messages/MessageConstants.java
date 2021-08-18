@@ -6,4 +6,5 @@ public class MessageConstants {
 
     public static String GREETING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     public static String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+    public static String TASK_ADD_HEADER = "added: ";
 }

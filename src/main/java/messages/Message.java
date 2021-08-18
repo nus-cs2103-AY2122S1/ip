@@ -1,11 +1,17 @@
 package messages;
 
 public class Message {
-    private final String messageText;
+    private String messageText;
     private final String separator =
             "____________________________________________________________";
 
+    public Message() {}
+
     public Message(String messageText) {
+        this.messageText = messageText;
+    }
+
+    public void setMessageText(String messageText) {
         this.messageText = messageText;
     }
 
