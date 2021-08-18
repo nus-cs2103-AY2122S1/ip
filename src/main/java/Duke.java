@@ -14,6 +14,7 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         ArrayList<String> dataStore = new ArrayList<String>();
+        ArrayList<Boolean> status = new ArrayList<Boolean>();
 
         while (true) {
             Scanner sc = new Scanner(System.in);
@@ -25,10 +26,20 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 for (int i = 0; i < dataStore.size(); i++) {
-                    System.out.println((i+1) + ". " + dataStore.get(i));
+                    if (status.get(i).equals(true)) {
+                        System.out.println(i+1 + ". [X] " + dataStore.get(i));
+                    } else {
+                        System.out.println(i+1 + ". [ ] " + dataStore.get(i));
+                    }
                 }
+            } else if (input.contains("done")) {
+                int idx = Integer.parseInt(input.split(" ")[1]);
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("[X] " + dataStore.get(idx));
+                status.set(idx-1, true);
             } else {
                 dataStore.add(input);
+                status.add(false);
                 System.out.println("added: " + input);
             }
         }
