@@ -1,6 +1,8 @@
 import java.util.*;
 
 public class Duke {
+    private static String[] list = new String[100];
+    private static int listIndex = 0;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -15,8 +17,14 @@ public class Duke {
             if (str.equalsIgnoreCase("bye")) {
                 System.out.println("\n_________________________\n" + "Bye. Hope to see you again soon!" + "\n_________________________\n");
                 return;
+            } else if (str.equalsIgnoreCase("list")){
+                for(int i = 0 ; i < listIndex; i++){
+                    System.out.println("\n_________________________\n" + (i + 1) + ". " + list[i ] + "\n_________________________\n");
+                }
             } else {
-                System.out.println("\n_________________________\n" + str + "\n_________________________\n");
+                list[listIndex] = str;
+                listIndex++;
+                System.out.println("\n_________________________\n" + "added: " + str + "\n_________________________\n");
             }
         }
     }
