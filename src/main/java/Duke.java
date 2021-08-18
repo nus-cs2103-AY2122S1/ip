@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class Duke {
   public static void main(String[] args) {
@@ -11,7 +12,8 @@ public class Duke {
        + "|____/ \\__,_|_|\\_\\___|\n";
        System.out.println("Hello from\n" + logo);
     */
-    ArrayList<String> userText = new ArrayList<>();
+    ArrayList<Task> userText = new ArrayList<>();
+    String DONE_REGEX = "done [0-9]+";
     String LINE = "    --------------------------------------------------";
     String INDENTATION = "      ";
     Scanner scan = new Scanner(System.in);
@@ -30,8 +32,13 @@ public class Duke {
       } else if (command.equals("bye")) {
         System.out.println(LINE + "\n" + INDENTATION + "Bye. Hope to see you again soon!\n" + LINE);
         break;
+      } else if (Pattern.matches(DONE_REGEX, command)) {
+        String indexStr = command.substring(5);
+        int index = Integer.parseInt(indexStr) - 1;
+        userText.get(index).markAsDone();
+        System.out.println(LINE + "\n" + INDENTATION + "Nice! I've marked this task as done:\n" + INDENTATION + "  " + userText.get(index) + "\n"  + LINE);
       } else {
-        userText.add(command);
+        userText.add(new Task(command));
         System.out.println(LINE + "\n" + INDENTATION + "added: " + command + "\n" + LINE);
       }
     }
