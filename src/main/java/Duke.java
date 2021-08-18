@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -9,11 +10,10 @@ public class Duke {
         boolean finished = false;
 
         //array to hold tasks
-        Task[] listOfTasks = new Task[100];
-        int arrayCounter = 0;
+        ArrayList<Task> listOfTasks = new ArrayList<>();
 
         //string array to hold keywords
-        String[] commandWords = {"bye", "list", "done", "todo", "deadline", "event", "/by", "/at"};
+        String[] commandWords = {"bye", "list", "done", "todo", "deadline", "event", "/by", "/at", "delete"};
 
         while(!finished) {
             String userResponse = sc.nextLine();
@@ -26,10 +26,9 @@ public class Duke {
                     break;
                 //list
                 } else if (userResponse.contains(commandWords[1])) {
-                    for (int i = 0; i < listOfTasks.length; i++) {
-                        if (listOfTasks[i] != null) {
-                            System.out.println((i + 1) + "." + listOfTasks[i].toString());
-                        }
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < listOfTasks.size(); i++) {
+                        System.out.println((i + 1) + "." + listOfTasks.get(i).toString());
                     }
                 //done
                 } else if (userResponse.contains(commandWords[2])) {
@@ -37,8 +36,12 @@ public class Duke {
                         char indexDone = userResponse.charAt(5);
                         if (Character.isDigit(indexDone)) {
                             int numberIndex = Character.getNumericValue(indexDone) - 1;
-                            listOfTasks[numberIndex].markAsDone();
-                            System.out.println("Nice, I've marked this task as done!\n" + listOfTasks[numberIndex].toString());
+                            if (numberIndex < listOfTasks.size() && numberIndex >= 0) {
+                                listOfTasks.get(numberIndex).markAsDone();
+                                System.out.println("Nice, I've marked this task as done!\n" + listOfTasks.get(numberIndex).toString());
+                            } else {
+                                throw new DukeException("This task does not exist!");
+                            }
                         } else {
                             throw new DukeException("Invalid task number!");
                         }
@@ -51,12 +54,12 @@ public class Duke {
                 } else if (userResponse.contains(commandWords[3])) {
                     try {
                         String desc = userResponse.substring(5);
-                        listOfTasks[arrayCounter] = new Todo(desc);
-                        arrayCounter++;
+                        Todo newTodo = new Todo(desc);
+                        listOfTasks.add(newTodo);
 
                         System.out.println("Got it. I'll add this task:");
-                        System.out.println(listOfTasks[arrayCounter - 1].toString());
-                        System.out.println("Now you've got " + arrayCounter + " tasks in your list.");
+                        System.out.println(newTodo);
+                        System.out.println("Now you've got " + listOfTasks.size() + " tasks in your list.");
                     } catch (StringIndexOutOfBoundsException err) {
                         throw new DukeException("Todo command needs a description!");
                     }
@@ -67,12 +70,12 @@ public class Duke {
                             int slashIndex = userResponse.indexOf("/by");
                             String desc = userResponse.substring(9, slashIndex - 1);
                             String time = userResponse.substring(slashIndex + 4);
-                            listOfTasks[arrayCounter] = new Deadline(desc, time);
-                            arrayCounter++;
+                            Deadline newDeadline = new Deadline(desc, time);
+                            listOfTasks.add(newDeadline);
 
                             System.out.println("Got it. I'll add this task:");
-                            System.out.println(listOfTasks[arrayCounter - 1].toString());
-                            System.out.println("Now you've got " + arrayCounter + " tasks in your list.");
+                            System.out.println(newDeadline);
+                            System.out.println("Now you've got " + listOfTasks.size() + " tasks in your list.");
                         } catch (StringIndexOutOfBoundsException err) {
                             throw new DukeException("Date/time is needed!");
                         }
@@ -86,17 +89,38 @@ public class Duke {
                             int slashIndex = userResponse.indexOf("/at");
                             String desc = userResponse.substring(6, slashIndex - 1);
                             String time = userResponse.substring(slashIndex + 4);
-                            listOfTasks[arrayCounter] = new Event(desc, time);
-                            arrayCounter++;
+                            Event newEvent = new Event(desc, time);
+                            listOfTasks.add(newEvent);
 
                             System.out.println("Got it. I'll add this task:");
-                            System.out.println(listOfTasks[arrayCounter - 1].toString());
-                            System.out.println("Now you've got " + arrayCounter + " tasks in your list.");
+                            System.out.println(newEvent);
+                            System.out.println("Now you've got " + listOfTasks.size() + " tasks in your list.");
                         } catch (StringIndexOutOfBoundsException err) {
                             throw new DukeException("Date/timeis needed!");
                         }
                     } else {
                         throw new DukeException("Event command needs date/time!");
+                    }
+                //delete
+                } else if (userResponse.contains(commandWords[8])) {
+                    try {
+                        char indexDone = userResponse.charAt(7);
+                        if (Character.isDigit(indexDone)) {
+                            int numberIndex = Character.getNumericValue(indexDone) - 1;
+                            if (numberIndex < listOfTasks.size() && numberIndex >= 0) {
+                                System.out.println("Noted, I've removed this task\n" + listOfTasks.get(numberIndex).toString());
+                                listOfTasks.remove(numberIndex);
+                                System.out.println("Now you have " + listOfTasks.size() + " tasks in the list.");
+                            } else {
+                                throw new DukeException("This task does not exist!");
+                            }
+                        } else {
+                            throw new DukeException("Invalid task number!");
+                        }
+                    } catch (NullPointerException err) {
+                        throw new DukeException("This task does not exist!");
+                    } catch (StringIndexOutOfBoundsException err) {
+                        throw new DukeException("Task number needed!");
                     }
                 } else {
                     throw new DukeException("Unrecognised command!");
