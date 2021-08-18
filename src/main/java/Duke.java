@@ -2,17 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String greeting = " __          __  _                            _______    \n" +
-            " \\ \\        / / | |                          |__   __|   \n" +
-            "  \\ \\  /\\  / /__| | ___ ___  _ __ ___   ___     | | ___  \n" +
-            "   \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\    | |/ _ \\ \n" +
-            "    \\  /\\  /  __/ | (_| (_) | | | | | |  __/    | | (_) |\n" +
-            "     \\/  \\/ \\___|_|\\___\\___/|_|_|_| |_|\\___|    |_|\\___/ \n" +
-            "               | \\ | |/ __ \\|  __ \\|  \\/  |              \n" +
-            "               |  \\| | |  | | |__) | \\  / |              \n" +
-            "               | . ` | |  | |  _  /| |\\/| |              \n" +
-            "               | |\\  | |__| | | \\ \\| |  | |              \n" +
-            "               |_| \\_|\\____/|_|  \\_\\_|  |_|\n";
     private static final String divider = "──────────────────────────────────────────────────────────\n";
     private static final String doubleDivider = "══════════════════════════════════════════════════════════\n";
 
@@ -20,8 +9,8 @@ public class Duke {
     public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void greetUser() {
-        System.out.println(doubleDivider + greeting + doubleDivider);
-        System.out.println("Please enter the tasks to be added to the list.\n" +
+        System.out.println(doubleDivider + "Welcome to Duke!\n" + doubleDivider);
+        System.out.println("Please enter the tasks (todo/event/deadline) to be added to the list.\n" +
                 "(Enter 'list' to view the list, or 'bye' to exit.)\n" + divider);
     }
 

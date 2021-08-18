@@ -1,0 +1,14 @@
+todo Study
+deadline Finish CS2103T iP /by 19 Aug
+list
+done 2
+event Attend webinar /at 20 Aug 1pm
+todo Cry
+todo Sleep
+done 4
+list
+todo Cry again
+done 6
+list
+
+
