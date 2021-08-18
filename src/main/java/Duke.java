@@ -27,8 +27,14 @@ public class Duke {
                 } else if (message.equals("list")) {
                     list(toDoList);
 
-                } else if (taskToCheck(message) != 0) {
-                    canTaskBeChecked(taskToCheck(message), toDoList.size());
+                } else if (taskToDelete(message) != 0) {
+                    canTaskBeFound(taskToDelete(message), toDoList.size());
+                    displayDeletedTask(toDoList.get(taskToDelete(message) - 1), toDoList.size() - 1);
+                    toDoList.remove(taskToDelete(message) - 1);
+
+                } else
+                    if (taskToCheck(message) != 0) {
+                    canTaskBeFound(taskToCheck(message), toDoList.size());
                     displayCheckedTask(toDoList.get(taskToCheck(message) - 1));
 
                 } else {
@@ -139,7 +145,7 @@ public class Duke {
         }
     }
 
-    public static void canTaskBeChecked(int taskIndex, int maxTaskIndex) throws TaskNotFoundException {
+    public static void canTaskBeFound(int taskIndex, int maxTaskIndex) throws TaskNotFoundException {
         if (taskIndex < 0 || taskIndex > maxTaskIndex) {
             throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
         }
@@ -155,5 +161,29 @@ public class Duke {
                         " <event name> /at <event duration>");
             }
         }
+    }
+
+    public static int taskToDelete(String message) {
+        StringBuilder number;
+        if (message.length() > 6) {
+            String check = message.substring(0, 6);
+            if (check.equals("delete")) {
+                char firstNumber = message.charAt(7);
+                number = new StringBuilder(Character.toString(firstNumber));
+                int counter = 8;
+                while (counter < message.length()) {
+                    char next = message.charAt(counter);
+                    number.append(next);
+                    counter++;
+                }
+                return Integer.parseInt(number.toString());
+            }
+        }
+        return 0;
+    }
+
+    public static void displayDeletedTask(Task item, int size) {
+        String display = "Noted. I've removed this task:\n  " + item.displayTask();
+        System.out.println(display + "\n Now you have " + size +  " tasks in the list.");
     }
 }
