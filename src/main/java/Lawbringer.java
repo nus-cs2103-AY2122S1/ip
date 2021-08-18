@@ -28,6 +28,14 @@ public class Lawbringer {
                     String doneMessage = "Nice! I've marked this task as done:\n" +
                             "  " + task.toString();
                     System.out.println(doneMessage);
+                } else if (userInput.startsWith("delete")) {
+                    int index = Integer.parseInt(userInput.substring(7)) - 1;
+                    Task task = tasks.get(index);
+                    tasks.remove(index);
+                    String doneMessage = "Noted. I've removed this task:\n" +
+                            "  " + task.toString() + "\nNow you have " + tasks.size() +
+                            " task(s) in the list.";
+                    System.out.println(doneMessage);
                 } else if (userInput.startsWith("todo")) {
                     ToDo todo = new ToDo("");
                     try {
@@ -41,7 +49,7 @@ public class Lawbringer {
                     tasks.add(todo);
                     String message = "Got it. I've added this task:\n" + "  " +
                             todo.toString() + "\nNow you have " + tasks.size() +
-                            " task(s) in the list." ;
+                            " task(s) in the list.";
                     System.out.println(message);
                 } else if (userInput.startsWith("deadline")) {
                     int index = userInput.indexOf('/');
@@ -50,7 +58,7 @@ public class Lawbringer {
                     tasks.add(deadline);
                     String message = "Got it. I've added this task:\n" + "  " +
                             deadline.toString() + "\nNow you have " + tasks.size() +
-                            " task(s) in the list." ;
+                            " task(s) in the list.";
                     System.out.println(message);
                 } else if (userInput.startsWith("event")) {
                     int index = userInput.indexOf('/');
@@ -59,7 +67,7 @@ public class Lawbringer {
                     tasks.add(event);
                     String message = "Got it. I've added this task:\n" + "  " +
                             event.toString() + "\nNow you have " + tasks.size() +
-                            " task(s) in the list." ;
+                            " task(s) in the list.";
                     System.out.println(message);
                 } else {
                     throw new LawbringerException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
