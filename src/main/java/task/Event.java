@@ -10,6 +10,7 @@ package task;
  */
 
 public class Event extends Task {
+    public static final String ID = "E";
     private final String atTime;
 
     /**
@@ -45,6 +46,23 @@ public class Event extends Task {
     }
 
     /**
+     * Format Task to String array:
+     * If task is done, [E, 0, Task1, DateTime]; else, [E, 1, Task1, DateTime]
+     *
+     * @return Task in String array
+     */
+    @Override
+    public String[] formatTask() {
+        String done;
+        if (isDone()) {
+            done = "0";
+        } else {
+            done = "1";
+        }
+        return new String[]{ID, done, super.getName(), getAtTime()};
+    }
+
+    /**
      * Mark task status as done.
      *
      * @return task with done status
@@ -60,6 +78,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + atTime + ")";
+        return "[" + ID + "]" + super.toString() + " (at: " + atTime + ")";
     }
 }

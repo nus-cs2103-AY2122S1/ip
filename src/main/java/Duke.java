@@ -1,4 +1,5 @@
 import exception.DukeExtractCommandException;
+import exception.DukeIOException;
 import exception.DukeTaskNumberOutOfBoundsException;
 import exception.DukeUnknownException;
 import task.*;
@@ -30,6 +31,16 @@ public class Duke {
         System.out.println(INDENTATION + "Hello! I'm Duke");
         System.out.println(INDENTATION + "What can I do for you?");
         System.out.println(HORIZONTAL_LINE);
+    }
+
+    private static void loadTasks(TaskManager taskManager) {
+        try {
+            taskManager.loadTasksFromFile();
+        } catch (DukeIOException e) {
+            System.out.println(HORIZONTAL_LINE);
+            System.out.println(e.getMessage());
+            System.out.println(HORIZONTAL_LINE);
+        }
     }
 
     private static void echo(String command) {
@@ -146,11 +157,28 @@ public class Duke {
         }
     }
 
+    private static void clearTasks(TaskManager taskManager) {
+        taskManager.clearTasks();
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println(INDENTATION + "All tasks are cleared.");
+        System.out.println(HORIZONTAL_LINE);
+    }
+
     private static void listTasks(TaskManager taskManager) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(INDENTATION + "Here are the tasks in your list:");
         taskManager.printTasks();
         System.out.println(HORIZONTAL_LINE);
+    }
+
+    private static void saveTasksToFile(TaskManager taskManager) {
+        try {
+            taskManager.saveTasksToFile();
+        } catch (DukeIOException e) {
+            System.out.println(HORIZONTAL_LINE);
+            System.out.println(e.getMessage());
+            System.out.println(HORIZONTAL_LINE);
+        }
     }
 
     private static void bye() {
@@ -174,6 +202,7 @@ public class Duke {
         TaskManager taskManager = new TaskManager();
         Scanner scanner = new Scanner(System.in);
         greet();
+        loadTasks(taskManager);
         String command = scanner.nextLine();
         Operation operation = getOperation(command);
         while (true) {
@@ -192,6 +221,8 @@ public class Duke {
                 if (number > 0) {
                     deleteTask(taskManager, number);
                 }
+            } else if (operation == Operation.CLEAR) {
+                clearTasks(taskManager);
             } else if (operation == Operation.TODO ||
                     operation == Operation.DEADLINE ||
                     operation == Operation.EVENT) {
@@ -200,6 +231,7 @@ public class Duke {
                     addTask(taskManager, operation, description);
                 }
             }
+            saveTasksToFile(taskManager);
             command = scanner.nextLine();
             operation = getOperation(command);
         }
