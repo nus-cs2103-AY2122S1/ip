@@ -13,6 +13,7 @@ import utils.Command;
 public class Parser {
 
     /** Error messages. */
+
     private static final String EMPTY_COMMAND_MESSAGE = "Command cannot be empty.";
     private static final String UNKNOWN_COMMAND_MESSAGE = "Instruction does not follows specified format.";
     private static final String EMPTY_PARAM_TO_COMMAND_MESSAGE = "User parameter(s) to command '%s' cannot be empty.";

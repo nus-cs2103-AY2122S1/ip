@@ -7,11 +7,14 @@ package service;
  */
 public class ChatBot {
 
-    private final static String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private final static String LOGO = " /$$   /$$  /$$$$$$  /$$     /$$ /$$   /$$\n" +
+            "| $$  /$$/ /$$__  $$|  $$   /$$/| $$  | $$\n" +
+            "| $$ /$$/ | $$  \\ $$ \\  $$ /$$/ | $$  | $$\n" +
+            "| $$$$$/  | $$$$$$$$  \\  $$$$/  | $$  | $$\n" +
+            "| $$  $$  | $$__  $$   \\  $$/   | $$  | $$\n" +
+            "| $$\\  $$ | $$  | $$    | $$    | $$  | $$\n" +
+            "| $$ \\  $$| $$  | $$    | $$    |  $$$$$$/\n" +
+            "|__/  \\__/|__/  |__/    |__/     \\______/ \n";
 
     private final static String LINE_SPLIT =
             "___________________________________________________________________________";
@@ -21,7 +24,8 @@ public class ChatBot {
      */
     public void greet() {
         print("Hello from\n" + LOGO);
-        info("Hello! I'm Duke.\nWhat can I do for you?");
+        info("Hello! I'm Kayu, your alternative personal task management to Duke!\n" +
+                "What can I do for you?");
     }
 
     /**

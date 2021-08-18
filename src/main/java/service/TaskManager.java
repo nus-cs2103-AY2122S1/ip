@@ -17,11 +17,13 @@ import java.util.List;
 public class TaskManager {
 
     /** Error messages. */
+
     private static final String INVALID_TASK_ERROR_MESSAGE = "Task number '%d' is invalid.";
     private static final String FULL_CAPACITY_ERROR_MESSAGE = "Unable to execute as list is full.";
     private static final String EMPTY_LIST_ERROR_MESSAGE = "Unable to execute as list is empty.";
 
     /** Output messages for tasks. */
+
     private static final String EMPTY_LIST_MESSAGE = "List is empty, try adding some tasks first.";
     private static final String TASK_DONE_MESSAGE = "Nice! I've marked this task as done:\n\t%s";
     private static final String TASK_LIST_CONTENTS = "Here are the task(s) in your list:";
