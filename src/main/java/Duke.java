@@ -14,7 +14,7 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println("----------------------");
         Scanner stdin = new Scanner(System.in);
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         while (true){
             String command = stdin.nextLine();
             if ("bye".equals(command)){
@@ -24,13 +24,22 @@ public class Duke {
                 break;
             }
             else if ("list".equals(command)){
-                for (String task : tasks){
+                for (Task task : tasks){
                     System.out.println(task);
+                }
+            }
+            else if (command.startsWith("done ")) {
+                for (Task task : tasks){
+                    if (command.substring(5).equals(task.getName())){
+                        task.markDone();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(task);
+                    }
                 }
             }
             else {
                 System.out.println("----------------------");
-                tasks.add(command);
+                tasks.add(new Task(command));
                 System.out.println("----------------------");
             }
         }
