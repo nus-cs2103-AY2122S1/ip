@@ -4,16 +4,42 @@ public class TaskManager {
     ArrayList<Task> taskArrayList = new ArrayList<>();
 
     public void handle(String command) {
-        String[] arr = command.split(" ", 2);
+        String[] arr = command.split(" ");
         String firstWord = arr[0];
-        if (firstWord.equals("done")) {
-            int id = Integer.parseInt(arr[1]);
-            setDone(id);
-            System.out.println("Your task has been marked as done.");
-            list();
-        } else {
-            add(new Task(command));
-            System.out.println("Added: " + command + "\n");
+        switch (firstWord) {
+            case "done":
+                int id = Integer.parseInt(arr[1]);
+                taskArrayList.get(id - 1).setDone(true);
+                System.out.println("Your task has been marked as done.");
+                list();
+                break;
+            case "todo":
+                String remaining = command.substring(5);
+                add(new ToDo(remaining));
+                System.out.println("Your new todo has been added.");
+                break;
+            case "deadline":
+                int byIndex = command.indexOf("/by");
+                if (byIndex == -1) {
+                    System.out.println("Sorry, invalid command.");
+                }
+                String deadlineName = command.substring(9, byIndex - 1);
+                String deadlineBy = command.substring(byIndex + 4);
+                add(new Deadline(deadlineName, deadlineBy));
+                System.out.println("Your new deadline has been added.");
+                break;
+            case "event":
+                int atIndex = command.indexOf("/at");
+                if (atIndex == -1) {
+                    System.out.println("Sorry, invalid command.");
+                }
+                String eventName = command.substring(6, atIndex - 1);
+                String eventAt = command.substring(atIndex + 4);
+                add(new Event(eventName, eventAt));
+                System.out.println("Your new event has been added.");
+                break;
+            default:
+                System.out.println("Sorry, invalid command.");
         }
     }
 
@@ -23,14 +49,12 @@ public class TaskManager {
 
     public void list() {
         for (int i = 0; i < taskArrayList.size(); i++) {
-            Task t = taskArrayList.get(i);
-            String isDone = t.isDone() ? "x" : " ";
-            System.out.println(String.format("%d.[%s] %s", i + 1, isDone, t));
+            System.out.println(i+1 + "." + taskArrayList.get(i).toString());
         }
         System.out.println();
     }
 
     public void setDone(int id) {
-        taskArrayList.get(id - 1).setDone(true);
+
     }
 }
