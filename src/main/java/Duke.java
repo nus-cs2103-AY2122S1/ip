@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
+    static String[] botList = new String[100];
+    static int numItems = 0;
 
     static String introMsg = "Hello! I'm Biscuit.\n"
             + "What do you want me to do?\n";
@@ -15,12 +17,22 @@ public class Duke {
         while (true) {
             String userInput = sc.nextLine();
 
+            if (userInput.equals("list")) {
+                for (int i = 0; i < numItems; i++) {
+                    System.out.println(botList[i]);
+                }
+                continue;
+            }
+
             if (userInput.equals("bye")) {
                 System.out.println(byeMsg);
                 break;
             }
 
-            System.out.println(userInput);
+            else {
+                botList[numItems++] = numItems + ". " + userInput;
+                System.out.println("added: " + userInput);
+            }
         }
     }
 
