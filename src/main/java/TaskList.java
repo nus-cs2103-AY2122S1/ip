@@ -9,7 +9,10 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public Task markTaskAsDone(int i) {
+    public Task markTaskAsDone(int i) throws DukeException {
+        if (i < 0 || i >= tasks.size()) {
+            throw new DukeException("markTaskAsDone index out of range.");
+        }
         Task task = tasks.get(i);
         task.markAsDone();
         return task;

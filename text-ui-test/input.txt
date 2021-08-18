@@ -9,4 +9,15 @@ event project meeting /at Mon 2-4pm
 deadline do homework /by no idea :-p
 done 4
 list
+todo
+deadline
+deadline a
+deadline /at
+deadline /at a
+event
+event a
+event /by
+event /by a
+done 0
+done 100
 bye

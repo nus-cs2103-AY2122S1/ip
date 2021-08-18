@@ -1,6 +1,6 @@
-public class Deadline extends Task{
+public class Deadline extends Task {
     private String dateTime;
-    public Deadline(String description, String dateTime){
+    public Deadline(String description, String dateTime) throws DukeException {
         super(description);
         this.dateTime = dateTime;
     }

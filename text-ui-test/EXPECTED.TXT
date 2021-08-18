@@ -32,4 +32,15 @@ Here are the tasks in your list:
 3. [D][ ] return book (by: Sunday)
 4. [E][X] project meeting (at: Mon 2-4pm)
 5. [D][ ] do homework (by: no idea :-p)
+HuAI Liddat!!! DukeException: The description of a todo cannot be empty.
+HuAI Liddat!!! DukeException: The description of a deadline cannot be empty.
+HuAI Liddat!!! DukeException: The dateTime of a deadline cannot be empty.
+HuAI Liddat!!! DukeException: The dateTime of a deadline cannot be empty.
+HuAI Liddat!!! DukeException: The dateTime of a deadline cannot be empty.
+HuAI Liddat!!! DukeException: The description of a event cannot be empty.
+HuAI Liddat!!! DukeException: The dateTime of a event cannot be empty.
+HuAI Liddat!!! DukeException: The dateTime of a event cannot be empty.
+HuAI Liddat!!! DukeException: The dateTime of a event cannot be empty.
+HuAI Liddat!!! DukeException: markTaskAsDone index out of range.
+HuAI Liddat!!! DukeException: markTaskAsDone index out of range.
 Bye. Hope to see you again soon!
