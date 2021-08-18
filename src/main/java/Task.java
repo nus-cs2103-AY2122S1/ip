@@ -1,4 +1,4 @@
-class Task {
+abstract class Task {
 
     private final String taskName;
     private final boolean isCompleted;
@@ -8,17 +8,15 @@ class Task {
         this.isCompleted = false;
     }
 
-    private Task(Task oldTask) {
+    protected Task(Task oldTask) {
         this.taskName = oldTask.taskName;
         this.isCompleted = true;
     }
 
-    Task markAsCompleted() {
-        return new Task(this);
-    }
+    abstract Task markAsCompleted();
 
     public String getTaskName() {
-        return taskName;
+        return this.taskName;
     }
 
     @Override
