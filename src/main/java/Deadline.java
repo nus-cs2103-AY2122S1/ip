@@ -1,12 +1,18 @@
-public class Deadlines extends Task {
+/**
+ * Represents a Deadline Task which inherits from Task and contains the dateTime for the deadline.
+ *
+ * @author Sherman Ng Wei Sheng
+ */
+public class Deadline extends Task {
     private String dateTime;
     
     /**
-     * Constructor to initialise a new Task.
+     * Constructor to initialise a new Deadline.
      *
      * @param description The description of the task.
+     * @param dateTime The date and time of the deadline for the task.
      */
-    public Deadlines(String description, String dateTime) {
+    public Deadline(String description, String dateTime) {
         super(description);
         this.dateTime = dateTime;
     }
@@ -18,6 +24,6 @@ public class Deadlines extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + getStatusIcon() + " " + this.description;
+        return String.format("[D][%s] %s (by: %s)", this.getStatusIcon(), this.description, this.dateTime);
     }
 }

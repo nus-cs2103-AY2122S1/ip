@@ -1,11 +1,16 @@
-public class ToDos extends Task {
+/**
+ * Represents a ToDo Task which inherits from Task.
+ *
+ * @author Sherman Ng Wei Sheng
+ */
+public class ToDo extends Task {
     
     /**
-     * Constructor to initialise a new Task.
+     * Constructor to initialise a new ToDo.
      *
      * @param description The description of the task.
      */
-    public ToDos(String description) {
+    public ToDo(String description) {
         super(description);
     }
 
@@ -16,6 +21,6 @@ public class ToDos extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + getStatusIcon() + " " + this.description;
+        return String.format("[T][%s] %s", this.getStatusIcon(), this.description);
     }
 }

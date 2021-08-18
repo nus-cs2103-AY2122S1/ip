@@ -1,12 +1,18 @@
-public class Events extends Task {
+/**
+ * Represents a Event Task which inherits from Task and contains the dateTime for the event.
+ *
+ * @author Sherman Ng Wei Sheng
+ */
+public class Event extends Task {
     private String dateTime;
     
     /**
-     * Constructor to initialise a new Task.
+     * Constructor to initialise a new Event.
      *
      * @param description The description of the task.
+     * @param dateTime The date and time of the event.
      */
-    public Events(String description, String dateTime) {
+    public Event(String description, String dateTime) {
         super(description);
         this.dateTime = dateTime;
     }
@@ -18,6 +24,6 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + getStatusIcon() + " " + this.description;
+        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.description, this.dateTime);
     }
 }

@@ -43,17 +43,17 @@ public class Duke {
     }
 
     /**
-     * Echoes whatever is passed into <code>input</code> as argument with formatting and
-     * add the Task to the list.
+     * Add the given task into the list and print a log accordingly.
      *
-     * @param input The description of the Task to be added.
+     * @param task The Task object to be added.
      */
-    private void addTask(String input) {
-        Task taskToBeAdded = new Task(input);
-        this.list.add(taskToBeAdded);
+    private void addTask(Task task) {
+        this.list.add(task);
         String message =
                 "    ____________________________________________________________\n" +
-                "    added: " + input + "\n" +
+                "    Got it. I've added this task:\n" +
+                "      " + task + "\n" +
+                String.format("    Now you have %d tasks in the list.\n", this.list.size()) +        
                 "    ____________________________________________________________";
         System.out.println(message);
     }
@@ -133,19 +133,35 @@ public class Duke {
 
         while (true) {
             String input = sc.nextLine();
-            boolean isDoneCommand = handleDoneCommand(input);
-            if (isDoneCommand) {
-                continue;
-            }
-            switch (input) {
+            String[] splitWord = input.split(" ", 2);
+            String firstWord = splitWord[0];
+            
+            switch (firstWord) {
                 case "bye":
                     this.terminate();
                     return;
                 case "list":
                     this.printList();
                     break;
-                default:
-                    this.addTask(input);
+                case "done":
+                    boolean isDoneCommand = handleDoneCommand(input);
+                    if (isDoneCommand) {
+                        break;
+                    }
+                case "todo":
+                    String toDoDescription = splitWord[1];
+                    this.addTask(new ToDo(toDoDescription));
+                    break;
+                case "deadline":
+                    String deadlineDescription = splitWord[1].split(" /by ", 2)[0];
+                    String deadlineDateTime = splitWord[1].split(" /by ", 2)[1];
+                    this.addTask(new Deadline(deadlineDescription, deadlineDateTime));
+                    break;
+                case "event":
+                    String eventDescription = splitWord[1].split(" /at ", 2)[0];
+                    String eventDateTime = splitWord[1].split(" /at ", 2)[1];
+                    this.addTask(new Event(eventDescription, eventDateTime));
+                    break;
             }
         }
     }
