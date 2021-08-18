@@ -16,6 +16,12 @@ public class Duke {
         System.out.printf("Great, I've added this task:\n  %s%n", newTask.toString());
         System.out.printf("Now you have %d tasks in the list.%n", tasks.size());
     }
+    private static void deleteTask(int taskNum) {
+        Task currTask = tasks.get(taskNum);
+        tasks.remove(taskNum);
+        System.out.printf("Roger that Sensei, I've removed this task:\n  %s%n", currTask.toString());
+        System.out.printf("Now you have %d tasks in the list.%n", tasks.size());
+    }
     private static void handleToDo(String userInput) throws EmptyTaskDescriptionException {
         try {
             ToDos newToDo = new ToDos(userInput.substring(5));
@@ -101,6 +107,11 @@ public class Duke {
                 } finally {
                     System.out.println(horizontalLines);
                 }
+            } else if (userInput.startsWith("delete")) {
+                System.out.println(horizontalLines);
+                int taskNum = Integer.parseInt(userInput.substring(7)) - 1;
+                deleteTask(taskNum);
+                System.out.println(horizontalLines);
             } else {
                 // All other cases means input error
                 System.out.println(horizontalLines);
