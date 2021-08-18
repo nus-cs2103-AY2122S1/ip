@@ -19,7 +19,7 @@ public class Duke {
     /**
      * Stores the array of todos
      */
-    private static String[] todos = new String[100];
+    private static Task[] todos = new Task[100];
 
     /**
      * Stores the current index that is awaiting to be filled.
@@ -36,11 +36,19 @@ public class Duke {
     }
 
     /**
-     * Asks users for their inputs.
-     * When the string matches cancelWord, program will close.
+     * Starts the Duke chatbot.
+     * Users can input String to interact with the chatbot.
      */
+    public static void main(String[] args) {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        // Initial greeting of user
+        greet();
 
-    private static void askForResponse() {
+        // Starts to ask for string of instruction
         // boolean flag to indicate if loop should be exited
         boolean exit = false;
 
@@ -55,43 +63,27 @@ public class Duke {
                         if (todos[i] == null) {
                             break;
                         } else {
-                            System.out.println(String.format("\t%d. %s", (i+1), todos[i]));
+                            System.out.println(String.format("\t%s",todos[i].toString()));
                         }
                     }
                     System.out.println("\t____________________________________________________________");
                     break;
                 case "bye":
                     System.out.println("\t____________________________________________________________\n\t" +
-                        "Bye. Hope to see you again soon!" +
-                        "\n\t____________________________________________________________");
+                            "Bye. Hope to see you again soon!" +
+                            "\n\t____________________________________________________________");
                     exit = true;
                     break;
                 default:
-                    todos[index] = response;
+                    Task newTask = new Task(response);
+                    todos[index] = newTask;
                     index++;
 
                     System.out.println("\t____________________________________________________________\n\t" +
-                            String.format("added: %s", response) +
+                            String.format("added: %s", newTask.getDescription()) +
                             "\n\t____________________________________________________________");
                     break;
             }
         }
-    }
-
-    /**
-     * Starts the Duke chatbot.
-     * Users can input String to interact with the chatbot.
-     */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        // Initial greeting of user
-        greet();
-
-        // Starts to ask for string of instruction
-        askForResponse();
     }
 }
