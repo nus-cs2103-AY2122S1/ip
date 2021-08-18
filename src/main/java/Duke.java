@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
 
     private enum CommandTypes {
-        EXIT, LIST, DONE, TODO, DEADLINE, EVENT
+        EXIT, LIST, DONE, TODO, DEADLINE, EVENT, UNKNOWN
     }
 
     private final String INDENTATION = "    ";
@@ -13,7 +13,6 @@ public class Duke {
 
     private Duke(){
         this.taskList = new ArrayList<>();
-        this.isActive = true;
     }
 
     private void greet(){
@@ -50,8 +49,19 @@ public class Duke {
     }
 
     private void start(){
+        this.isActive = true;
         greet();
-        processCommand();
+        Scanner sc = new Scanner(System.in);
+
+        while (this.isActive){
+            String command = sc.nextLine();
+            try {
+                processCommand(command);
+            } catch (DukeException e){
+                System.out.println(e.getMessage());
+            }
+        }
+        sc.close();
     }
 
     private void listTasks(){
@@ -62,46 +72,42 @@ public class Duke {
         printMessageWithFormat(msg);
     }
 
-    private void processCommand(){
-        Scanner sc = new Scanner(System.in);
+    private void processCommand(String command) throws DukeException{
+        switch(getCommandType(command)){
+            case EXIT:
+                exit();
+                break;
 
-        while (this.isActive){
-            String command = sc.nextLine();
-            switch(getCommandType(command)){
-                case EXIT:
-                    exit();
-                    break;
+            case LIST:
+                listTasks();
+                break;
 
-                case LIST:
-                    listTasks();
-                    break;
+            case DONE:
+                int taskNumber = Integer.parseInt(command.split(" ")[1]);
+                markTaskAsDone(taskNumber);
+                break;
 
-                case DONE:
-                    int taskNumber = Integer.parseInt(command.split(" ")[1]);
-                    markTaskAsDone(taskNumber);
-                    break;
+            case EVENT:
+                String eventDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/at")-1);
+                Task event = new Event(eventDescription, command.substring(command.indexOf("at")+3));
+                addTask(event);
+                break;
 
-                case EVENT:
-                    String eventDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/at")-1);
-                    Task event = new Event(eventDescription, command.substring(command.indexOf("at")+3));
-                    addTask(event);
-                    break;
+            case DEADLINE:
+                String deadlineDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/by")-1);
+                Task deadline = new Deadline(deadlineDescription, command.substring(command.indexOf("by")+3));
+                addTask(deadline);
+                break;
 
-                case DEADLINE:
-                    String deadlineDescription = command.substring(command.indexOf(" ")+1, command.indexOf("/by")-1);
-                    Task deadline = new Deadline(deadlineDescription, command.substring(command.indexOf("by")+3));
-                    addTask(deadline);
-                    break;
+            case TODO:
+                String toDoDescription = command.substring(command.indexOf(" ")+1);
+                Task toDo = new ToDo(toDoDescription);
+                addTask(toDo);
+                break;
 
-                case TODO:
-                    String toDoDescription = command.substring(command.indexOf(" ")+1);
-                    Task toDo = new ToDo(toDoDescription);
-                    addTask(toDo);
-                    break;
-
-            }
+            case UNKNOWN: default:
+                throw new UnknownCommandException();
         }
-        sc.close();
     }
 
     private CommandTypes getCommandType(String command){
@@ -124,8 +130,10 @@ public class Duke {
 
             case "event":
                 return CommandTypes.EVENT;
+
+            default:
+                return CommandTypes.UNKNOWN;
         }
-        return null;
     }
 
     public static void main(String[] args) {
