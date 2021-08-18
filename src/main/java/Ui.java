@@ -34,5 +34,18 @@ public class Ui {
         System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
     }
 
+    public void notifySuccessfulMarkDone(TaskList tasklist, int index) {
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("  " + tasklist.get(index);
+    }
 
+    public void notifySuccessfulDelete(TaskList tasklist, Task removed) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + removed);
+        System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
+    }
+
+    public void notifyBadCommand() {
+        System.out.println("Sorry! I don't know what your request means. Please try again?");
+    }
 }

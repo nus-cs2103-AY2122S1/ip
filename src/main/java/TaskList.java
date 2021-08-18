@@ -15,7 +15,7 @@ public class TaskList {
         return store.get(i);
     }
 
-    public Task remove(int i) {
+    public Task delete(int i) {
         return store.remove(i);
     }
 

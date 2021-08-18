@@ -68,7 +68,7 @@ public class Duke {
             } else if (in.startsWith("delete")) {
                 try {
                     String[] temp = in.split(" ");
-                    Task removed = tasklist.remove(Integer.parseInt(temp[1]) - 1);
+                    Task removed = tasklist.delete(Integer.parseInt(temp[1]) - 1);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println("  " + removed);
                     System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
