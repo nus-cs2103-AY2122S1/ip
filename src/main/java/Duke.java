@@ -25,6 +25,12 @@ public class Duke {
         return msg;
     }
 
+    private static String markTaskDone(int taskNum) {
+        Task taskToMark = taskList.get(taskNum);
+        taskToMark.markDone();
+        return "Nice! I've marked this task as done: " + "\n  " + taskToMark.toString();
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -38,12 +44,16 @@ public class Duke {
 
         while (true) {
             String user_input = sc.nextLine();
-            if (user_input.equals("bye")) {
+            String command = user_input.split(" ")[0];
+            if (command.equals("bye")) {
                 System.out.println("It has been a pleasure, goodbye!");
                 sc.close();
                 break;
-            } else if (user_input.equals("list")) {
+            } else if (command.equals("list")) {
                 System.out.println((printTaskList()));
+            } else if (command.equals("done")) {
+                int taskNum = Integer.parseInt(user_input.split(" ")[1]) - 1;
+                System.out.println(markTaskDone(taskNum));
             } else {
                 System.out.println(addTask(user_input));
             }
