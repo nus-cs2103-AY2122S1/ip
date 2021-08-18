@@ -13,6 +13,8 @@ public class Duke {
         System.out.println(horizontalLines);
 
         boolean end = false;
+        String added[] = new String[100];
+        int i = 0;
 
         while (!end) {
             System.out.print("Enter a text: ");
@@ -23,11 +25,20 @@ public class Duke {
                 System.out.println(horizontalLines);
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println(horizontalLines);
+            } else if (str.equals("list")) {
+                System.out.println(horizontalLines);
+                for (int j = 0; j < i; j++) {
+                    int num = j + 1;
+                    System.out.println(num + ". " + added[j]);
+                }
+                System.out.println(horizontalLines);
             }
             else {
                 System.out.println(horizontalLines);
-                System.out.println(str);
+                System.out.println( "added: " + str);
+                added[i] = str;
                 System.out.println(horizontalLines);
+                i++;
             }
         }
 
