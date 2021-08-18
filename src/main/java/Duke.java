@@ -8,6 +8,11 @@ public class Duke {
     //     ADDTASK, LIST, DONE, DELETE, BYE
     // }
 
+    /**
+     * Adds the task to the taskslist.
+     * 
+     * @param task the task to be added
+     */
     public void addTask(Task task) {
         System.out.println("Got it. I've added this task: ");
         task.showThisTask();
@@ -22,6 +27,9 @@ public class Duke {
         System.out.println("Now you have " + (tasksList.size()) + taskform + " in the list.");
     }
 
+    /**
+     * List all the tasks in the tasks list by printing them out in sequence.
+     */
     public void listTask() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasksList.size(); i++) {
@@ -31,11 +39,22 @@ public class Duke {
         }
     }
 
+    /**
+     * Mark a task's statis as done and print out the result.
+     * 
+     * @param task the task to be marked as done
+     */
     public void completeTask(Task task) {
         System.out.println("Nice! I've marked this task as done: ");
         task.markAsDone();
     }
 
+    /**
+     * Check if a task that the user requests for exists or not.
+     * 
+     * @param num the task index
+     * @return true when the task exists or false when the task does not exist
+     */
     public boolean checkTaskExists(int num) {
         if (tasksList.size() > num) {
             return true;
@@ -44,6 +63,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Delete a task from the tasks list.
+     * 
+     * @param task the task to be deleted
+     */
     public void deleteTask(Task task) {
         tasksList.remove(task);
         System.out.println("Noted. I've removed this task: ");
@@ -58,11 +82,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException{
-        // String logo = " ____        _        \n"
-        //         + "|  _ \\ _   _| | _____ \n"
-        //         + "| | | | | | | |/ / _ \\\n"
-        //         + "| |_| | |_| |   <  __/\n"
-        //         + "|____/ \\__,_|_|\\_\\___|\n";
         Duke neko = new Duke();
         System.out.println("Hello from Neko!\nWhat can I do for you?\n");
         Scanner sc = new Scanner(System.in);  
