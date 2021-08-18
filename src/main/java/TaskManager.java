@@ -48,7 +48,7 @@ public class TaskManager {
             } else {
                 Todo todo = new Todo(description);
                 taskList.addTask(todo);
-                Util.taskAddConfirmatio(todo, taskList.getNumTask());
+                Util.taskAddConfirmation(todo, taskList.getNumTask());
             }
 
         } else if (userCommand.equals("deadline")) {
@@ -67,7 +67,7 @@ public class TaskManager {
                 } else {
                     Deadline deadline = new Deadline(description, time);
                     taskList.addTask(deadline);
-                    Util.taskAddConfirmatio(deadline, taskList.getNumTask());
+                    Util.taskAddConfirmation(deadline, taskList.getNumTask());
                 }
             }
         } else if (userCommand.equals("event")) {
@@ -86,7 +86,7 @@ public class TaskManager {
                 } else {
                     Event event = new Event(description, time);
                     taskList.addTask(event);
-                    Util.taskAddConfirmatio(event, taskList.getNumTask());
+                    Util.taskAddConfirmation(event, taskList.getNumTask());
                 }
             }
         } else {

@@ -13,7 +13,7 @@ public class Util {
     }
 
     //Print confirmation after the task is added
-    public static void taskAddConfirmatio(Task task, int numTasks) {
+    public static void taskAddConfirmation(Task task, int numTasks) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         if (numTasks == 1) {
