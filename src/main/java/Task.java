@@ -22,6 +22,13 @@ public class Task {
     }
 
     /**
+     * Marks the current task as done.
+     */
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
+    /**
      * Converts the task to a string.
      *
      * @return The string representation of the task.

@@ -63,10 +63,26 @@ public class Duke {
             this.processor.process();
             System.out.println(this.processor);
         } else {
-            // Add the task to list and print the action.
-            this.processor = new AddATaskProcessor(command);
-            this.processor.process();
-            System.out.println(this.processor);
+            String[] splitted = command.split(" ");
+            if (splitted.length == 2 && splitted[0].equals("done")) {
+                try {
+                    // Finish a task, mark it as done.
+                    int index = Integer.parseInt(splitted[1]) - 1;
+                    this.processor = new TaskDoneProcessor(Duke.tasks[index]);
+                    this.processor.process();
+                    System.out.println(this.processor);
+                } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException e) {
+                    // Add the task to list and print the action.
+                    this.processor = new AddATaskProcessor(command);
+                    this.processor.process();
+                    System.out.println(this.processor);
+                }
+            } else {
+                // Add the task to list and print the action.
+                this.processor = new AddATaskProcessor(command);
+                this.processor.process();
+                System.out.println(this.processor);
+            }
         }
     }
 
