@@ -1,10 +1,26 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Scanner sc = new Scanner(System.in);
+
+        String divider = " ------------------------------------------- \n";
+        String indent = "       ";
+
+        System.out.println(indent + "Hello! I'm Viper :) \n");
+        System.out.println(indent + "How can I help you today?");
+        System.out.println(divider);
+
+        String str = sc.nextLine();
+
+        while (!str.equalsIgnoreCase("bye")) {
+            System.out.println(indent + str);
+            System.out.println(divider);
+            str = sc.nextLine();
+        }
+
+        System.out.println(indent + "Bye! See you again~");
+        System.out.println(divider);
+
     }
 }
