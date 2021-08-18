@@ -50,17 +50,33 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
 
         while (!canExit) {
-            String userInput = scanner.nextLine();
-            if (userInput.equals("bye")) { // user inputs 'bye', set canExit to true and Exit
+            String userInput = scanner.next();
+            if (userInput.equals("bye")) { // user inputs "bye, set canExit to true and Exit
                 canExit = true;
                 System.out.println(sandwich(goodbye));
-            } else { // user inputs 'list' or something else
-                if (userInput.equals("list")) { // user inputs 'list', return all text stored
+            } else { // user inputs "done", "list" or something else
+                if (userInput.equals("done")) { // first input is done, check second input for integer
+                    if (scanner.hasNextInt()) {
+                        int taskNum = scanner.nextInt();
+                        taskArrayList.get(taskNum - 1).markAsDone();
+                        System.out.println(sandwich("Congratulations! You finished task "
+                                + taskNum
+                                + ": [X] "
+                                + taskArrayList.get(taskNum - 1).description));
+                    }
+                } else if (userInput.equals("list")) { // user inputs 'list', return all text stored
                     StringBuilder userInputsList = new StringBuilder();
                     for (int i = 0; i < taskArrayList.size() - 1; i++) { // new line except for last item
-                        userInputsList.append(i + 1).append(". ").append(taskArrayList.get(i).description).append("\n");
+                        userInputsList.append(i + 1).append(".")
+                                .append("[")
+                                .append(taskArrayList.get(i).getStatusIcon())
+                                .append("] ")
+                                .append(taskArrayList.get(i).description).append("\n"); // formatted for nicer look
                     }
-                    userInputsList.append(taskArrayList.size()).append(". ")
+                    userInputsList.append(taskArrayList.size()).append(".")
+                            .append("[")
+                            .append(taskArrayList.get(taskArrayList.size() - 1).getStatusIcon())
+                            .append("] ")
                             .append(taskArrayList.get(taskArrayList.size() - 1).description); // no \n for last item
                     System.out.println(sandwich(userInputsList.toString()));
                 } else { // store userInput, tell user their input has been added
