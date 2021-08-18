@@ -17,9 +17,9 @@ public class Duke {
     public static void print(ArrayList<Task> ls) {
         String line = "____________________________________________________________";
         System.out.println(line);
-        System.out.println("Here are the tasks in your list: ");
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < ls.size() ; i++) {
-            System.out.println((i + 1) + ". " + ls.get(i));
+            System.out.println((i + 1) + "." + ls.get(i));
         }
         System.out.println(line);
     }
