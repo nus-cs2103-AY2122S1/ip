@@ -2,52 +2,51 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String divider = "──────────────────────────────────────────────────────────\n";
-    private static final String doubleDivider = "══════════════════════════════════════════════════════════\n";
+    private static final String DIVIDER = "──────────────────────────────────────────────────────────\n";
+    private static final String DOUBLE_DIVIDER = "══════════════════════════════════════════════════════════\n";
 
     public static Scanner scanner = new Scanner(System.in);
     public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void greetUser() {
-        System.out.println(doubleDivider + "Welcome to Duke!\n" + doubleDivider);
+        System.out.println(DOUBLE_DIVIDER + "Welcome to Duke!\n" + DOUBLE_DIVIDER);
         System.out.println("Please enter the tasks (todo/event/deadline) to be added to the list.\n" +
-                "(Enter 'list' to view the list, or 'bye' to exit.)\n" + divider);
+                "(Enter 'list' to view the list, or 'bye' to exit.)\n" + DIVIDER);
     }
 
     public static void byeUser() {
-        System.out.println(divider + "Bye. Hope to see you again soon!\n" + divider);
+        System.out.println(DIVIDER + "Bye. Hope to see you again soon!\n" + DIVIDER);
     }
 
     public static void printList() {
-        System.out.println(divider + "Here are the tasks in your list:");
+        System.out.println(DIVIDER + "Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.get(i - 1);
             System.out.println(i + ". " + task);
         }
-        System.out.print(divider);
+        System.out.print(DIVIDER);
     }
 
-    public static void addTodo(String taskDesc) {
-        Todo todo = new Todo(taskDesc);
-        taskList.add(todo);
-        System.out.println(divider + "Got it. I have added this task:\n  " + todo +
-                "\n Now you have " + taskList.size() + " tasks in the list.\n" + divider);
+    public static Task createTask(String taskType, String taskDesc) {
+        switch (taskType) {
+            case "todo":
+                return new Todo(taskDesc);
+            case "event":
+                String[] eventParams = taskDesc.split(" /at ");
+                return new Event(eventParams[0], eventParams[1]);
+            case "deadline":
+                String[] deadlineParams = taskDesc.split(" /by ");
+                return new Deadline(deadlineParams[0], deadlineParams[1]);
+            default:
+                return null;
+        }
     }
 
-    public static void addDeadline(String taskDesc) {
-        String[] deadlineParams = taskDesc.split(" /by ");
-        Deadline deadline = new Deadline(deadlineParams[0], deadlineParams[1]);
-        taskList.add(deadline);
-        System.out.println(divider + "Got it. I have added this task:\n  " + deadline +
-                "\n Now you have " + taskList.size() + " tasks in the list.\n" + divider);
-    }
-
-    public static void addEvent(String taskDesc) {
-        String[] eventParams = taskDesc.split(" /at ");
-        Event event = new Event(eventParams[0], eventParams[1]);
-        taskList.add(event);
-        System.out.println(divider + "Got it. I have added this task:\n  " + event +
-                "\n Now you have " + taskList.size() + " tasks in the list.\n" + divider);
+    public static void addTask(String taskType, String taskDesc) {
+        Task task = createTask(taskType, taskDesc);
+        taskList.add(task);
+        System.out.println(DIVIDER + "Got it. I have added this task:\n  " + task +
+                "\n Now you have " + taskList.size() + " tasks in the list.\n" + DIVIDER);
     }
 
 
@@ -55,30 +54,37 @@ public class Duke {
         int taskIdx = Integer.valueOf(taskNum) - 1;
         Task task = taskList.get(taskIdx);
         task.markAsDone();
-        System.out.print(divider + "Great! I've marked this task as done:\n" + task + "\n" + divider);
+        System.out.print(DIVIDER + "Great! I've marked this task as done:\n" + task + "\n" + DIVIDER);
     }
 
     public static void getInputs() {
         while (true) {
             String input = scanner.nextLine();
-            if (input.equals("bye")) {
-                byeUser();
-                break;
-            } else if (input.equals("list")) {
-                printList();
+            String taskType, taskDesc;
+
+            if (input.contains(" ")) {
+                taskType = input.substring(0, input.indexOf(' '));
+                taskDesc = input.substring(input.indexOf(' ') + 1);
             } else {
-                String taskType = input.substring(0, input.indexOf(' '));
-                String taskDesc = input.substring(input.indexOf(' ') + 1);
-                if (taskType.equalsIgnoreCase("todo")) {
-                    addTodo(taskDesc);
-                } else if (taskType.equalsIgnoreCase("deadline")) {
-                    addDeadline(taskDesc);
-                } else if (taskType.equalsIgnoreCase("event")) {
-                    addEvent(taskDesc);
-                } else if (taskType.equalsIgnoreCase("done")) {
-                    markTaskAsDone(taskDesc);
-                }
+                taskType = input;
+                taskDesc = "";
             }
+
+            switch (taskType) {
+                case "bye":
+                    byeUser();
+                    return;
+                case "list":
+                    printList();
+                    break;
+                case "done":
+                    markTaskAsDone(taskDesc);
+                    break;
+                default:
+                    addTask(taskType, taskDesc);
+                    break;
+            }
+
         }
     }
 

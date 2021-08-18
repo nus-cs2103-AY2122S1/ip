@@ -10,5 +10,3 @@ list
 todo Cry again
 done 6
 list
-
-
