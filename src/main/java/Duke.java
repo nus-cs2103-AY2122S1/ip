@@ -8,6 +8,8 @@ public class Duke {
     public static final String EXITING_MESSAGE = "____________________________________________________________\n" +
             "Bye. Hope to see you again soon!\n" +
             "____________________________________________________________";
+    private static String[] tasks = new String[100];
+    private static int numOfTasks = 0;
     private Processor processor;
     private boolean isRunning;
 
@@ -18,6 +20,16 @@ public class Duke {
         // Start the program and greet the user.
         this.isRunning = true;
         System.out.println(Duke.GREETING_MESSAGE);
+    }
+
+    /**
+     * Updates a new task to the task list.
+     *
+     * @param task The new task as a string.
+     */
+    public static void updateList(String task) {
+        Duke.tasks[numOfTasks] = task;
+        Duke.numOfTasks++;
     }
 
     /**
@@ -33,8 +45,9 @@ public class Duke {
             this.isRunning = false;
         } else {
             // Create a new event and convert it to string.
-            this.processor = new Processor(command);
+            this.processor = new AddATaskProcessor(command);
             this.processor.process();
+            System.out.println(this.processor);
         }
     }
 
