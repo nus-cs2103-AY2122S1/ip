@@ -44,7 +44,7 @@ public class Duke {
         Integer idx = keywords.length > 1 ? Integer.parseInt(keywords[1]) - 1 : -1;
         Task task = listOfItems.get(idx);
         task.setDone();
-        String completionMessage = "You have successfully completed task " + keywords[1] + ":" + "\n";
+        String completionMessage = String.format("You have successfully completed task %s:\n", keywords[1]);
         outputWrapper(completionMessage + task);
     }
 
@@ -54,8 +54,11 @@ public class Duke {
      */
     private static void printConfirmation(Task task) {
         String confirmationMessage = "You have successfully added an item:\n" + task + "\nto the list.\n";
-        String numberOfItems = "There " + (listOfItems.size() > 1 ? "are " : "is ") + listOfItems.size()
-                                        +  (listOfItems.size() > 1 ? " items " : " item ") + "in the list right now";
+
+        String numberOfItems = String.format("There %s %s %s in the list right now",
+                listOfItems.size() > 1 ? "are" : "is",
+                listOfItems.size(),
+                listOfItems.size() > 1 ? "items" : "item");
         outputWrapper(confirmationMessage + numberOfItems);
     }
 
