@@ -1,7 +1,36 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello this is Jeeves, your personal chatbot. What can i do you for today?
+########################
+You have successfully added an item:
+[E][] buy food  (at: 2-4pm)
+to the list.
+There is 1 item in the list right now
+########################
+########################
+You have successfully added an item:
+[T][] get home
+to the list.
+There are 2 items in the list right now
+########################
+########################
+You have successfully added an item:
+[D][] submit assignment  (at: noon)
+to the list.
+There are 3 items in the list right now
+########################
+########################
+1. [E][] buy food  (at: 2-4pm)
+2. [T][] get home
+3. [D][] submit assignment  (at: noon)
+########################
+########################
+You have successfully completed task 2:
+[T][X] get home
+########################
+########################
+1. [E][] buy food  (at: 2-4pm)
+2. [T][X] get home
+3. [D][] submit assignment  (at: noon)
+########################
+########################
+Thanks for using me. See you again soon!
+########################

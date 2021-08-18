@@ -1,0 +1,7 @@
+event buy food /at 2-4pm
+todo get home
+deadline submit assignment /at noon
+items
+completed 2
+items
+bye

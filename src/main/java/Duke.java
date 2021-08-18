@@ -25,7 +25,7 @@ public class Duke {
      * @param elements
      */
     private static void outputWrapper(List elements) {
-        ListIterator<Task> it = elements.listIterator();
+        ListIterator it = elements.listIterator();
         System.out.println(SEPARATOR);
         while (it.hasNext()) {
             Integer number = it.nextIndex() + 1;
@@ -53,7 +53,7 @@ public class Duke {
      * @param task
      */
     private static void printConfirmation(Task task) {
-        String confirmationMessage = "You have successfully added an item:\n" + task + " \nto the list.\n";
+        String confirmationMessage = "You have successfully added an item:\n" + task + "\nto the list.\n";
         String numberOfItems = "There " + (listOfItems.size() > 1 ? "are " : "is ") + listOfItems.size()
                                         +  (listOfItems.size() > 1 ? " items " : " item ") + "in the list right now";
         outputWrapper(confirmationMessage + numberOfItems);
@@ -163,14 +163,7 @@ public class Duke {
 
     }
     public static void main(String[] args) {
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello this is Jeeves, your personal chatbot. What can i do you for today?");
-
         startBot();
     }
 }
