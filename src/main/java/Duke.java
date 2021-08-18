@@ -56,6 +56,10 @@ public class Duke {
                 : TaskType.None;
     }
 
+    private static boolean taskNameIsValid(String firstParam) {
+        return firstParam.equals("todo") || firstParam.equals("deadline") || firstParam.equals("event");
+    }
+
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         String[] params = sc.nextLine().split(" ", 2);
@@ -66,8 +70,12 @@ public class Duke {
                 displayTasks();
             } else if (firstParam.equals("done")) {
                 doTask(params[1]);
-            }  else {
-               addTask(getTaskType(firstParam), params[1]);
+            } else if (!taskNameIsValid(firstParam)) {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } else if (params.length < 2) {
+                System.out.println("☹ OOPS!!! The description of a " + firstParam + " cannot be empty.");
+            } else {
+                addTask(getTaskType(firstParam), params[1]);
             }
             params = sc.nextLine().split(" ", 2);
             firstParam = params[0];
