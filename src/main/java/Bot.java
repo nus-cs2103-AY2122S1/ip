@@ -24,12 +24,12 @@ public class Bot {
     outputManager.printWelcome();
     this.running = true;
     while (this.running) {
-      System.out.println();
       String[] input = inputManager.getInput().split(" ", 2);
       Command cmd = CommandType.getCommandFromName(input[0]);
       cmd.run(this, new String[]{ input[input.length >=2 ? 1 : 0] });
     }
     outputManager.printGoodbye();
+    inputManager.closeScanner();
   }
 
   public void stop() {

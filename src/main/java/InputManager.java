@@ -1,13 +1,15 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 /**
  * The InputManager handles reading user input/commands
  */
 public class InputManager {
   
-  public InputManager() {}
+  private Scanner reader;
+
+  public InputManager() {
+    this.reader = new Scanner(System.in);
+  }
 
   /**
    * Gets and returns user input
@@ -15,12 +17,11 @@ public class InputManager {
    * @return input string entered by user
    */
   public String getInput() {
-    try {
-      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-      return reader.readLine();
-    } catch (IOException error) {
-      return "";
-    }
+    return reader.nextLine();
+  }
+
+  public void closeScanner() {
+    reader.close();
   }
 
 }
