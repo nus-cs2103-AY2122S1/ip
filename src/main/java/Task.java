@@ -7,6 +7,9 @@ public class Task {
     private int taskNumber;
     private static int numberOfTask = 0;
 
+    /**
+     * Task type enum
+     */
     public enum TaskType {
         TODO,
         DEADLINE,
@@ -14,16 +17,27 @@ public class Task {
         NOTAPPLICABLE
     }
 
+    /**
+     * Constructor for task type
+     * @param name name of task
+     */
     public Task(String name) {
         this.name = name;
         numberOfTask += 1;
         this.taskNumber = numberOfTask;
     }
 
+    /**
+     *  Function used to make a task complete
+     */
     public void completeTask() {
         this.completedStatus = true;
     }
 
+    /**
+     * String representation of task.
+     * @return String. See above
+     */
     public String toString() {
         String status;
         if (completedStatus) {
@@ -34,10 +48,18 @@ public class Task {
        return status + name;
     }
 
+    /**
+     * Getter for the completion status of a task
+     * @return
+     */
     public boolean getCompletedStatus() {
         return this.completedStatus;
     }
 
+    /**
+     * Getter for the total number of task
+     * @return
+     */
     public static int getNumberOfTask() {
         return numberOfTask;
     }
