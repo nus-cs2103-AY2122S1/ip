@@ -10,3 +10,15 @@
            \<
             \<
              \>
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
+      I hear your command, Master.
+      What can I do for you?
+
+      |                                     |
+{o)xxx|===============- * -===============|xxx(o}
+      |                                     |
+
