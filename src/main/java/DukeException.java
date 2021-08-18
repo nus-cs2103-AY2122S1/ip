@@ -5,6 +5,13 @@ public class DukeException extends Exception {
      * @param message Error message.
      */
     public DukeException(String message) {
-        super(message);
+        super("____________________________________________________________\n" +
+                message +
+                "\n____________________________________________________________\n");
+    }
+
+    @Override
+    public String toString() {
+        return super.getMessage();
     }
 }
