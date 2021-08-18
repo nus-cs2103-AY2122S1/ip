@@ -3,35 +3,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static final List<Task> list = new ArrayList<>();
+    private List<Task> list;
 
-    private static void addToList(Task task) {
-        list.add(task);
+    public Duke() {
+        this.list = new ArrayList<Task>(100);
     }
 
-    private static void listTasks() throws DukeException{
-        if (list.size() < 1) {
-            throw new DukeException("You haven't added anything to the list yet! Try adding something.");
-        } else {
-            if (list.size() == 1) {
-                System.out.println("Here is the sole task in your list:");
-            }
-            else {
-                System.out.println("Here are the tasks in your list:");
-            }
-            for (int i = 1; i <= list.size(); i++) {
-                System.out.println(i + ". " + list.get(i - 1));
-            }
-        }
-    }
-
-    private static void completeTask(int index) {
-        Task task = list.get(index - 1);
-        task.setDone();
-        System.out.println("Nice! I've marked this task as done:\n" + "  " + task);
-    }
-
-    public static void main(String[] args) {
+    private void begin() {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         Scanner scanner = new Scanner(System.in);
 
@@ -103,6 +81,16 @@ public class Duke {
                             throw new DukeException("Please ensure that there is an event time. Try again.");
                         }
                     }
+                } else if (input.startsWith("delete")) {
+                    try {
+                        int toDeleteIndex = Integer.parseInt(input.substring(7));
+                        deleteTask(toDeleteIndex);
+                    } catch (NumberFormatException e){
+                        throw new DukeException("Please make sure only a number follows the command 'delete'. " +
+                                "Try again.");
+                    } catch (StringIndexOutOfBoundsException e) {
+                        throw new DukeException("Please add a number after the command 'delete'. Try again.");
+                    }
                 } else {
                     throw new DukeException("I didn't quite get what you meant. To add a task, begin with " +
                             "'deadline', 'event' or 'todo'.");
@@ -112,5 +100,49 @@ public class Duke {
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private void addToList(Task task) {
+        this.list.add(task);
+    }
+
+    private void listTasks() throws DukeException {
+        if (list.size() < 1) {
+            throw new DukeException("You haven't added anything to the list yet! Try adding something.");
+        } else {
+            if (list.size() == 1) {
+                System.out.println("Here is the sole task in your list:");
+            } else {
+                System.out.println("Here are the tasks in your list:");
+            }
+            for (int i = 1; i <= list.size(); i++) {
+                System.out.println(i + ". " + list.get(i - 1));
+            }
+        }
+    }
+
+    private void deleteTask(int index) throws DukeException {
+        if (list.size() < 1) {
+            throw new DukeException("You haven't added anything to the list yet! Try adding something before " +
+                    "deleting.");
+        } else if (index <= list.size() && index >= 1) {
+            Task toDelete = list.get(index - 1);
+            list.remove(index - 1);
+            System.out.println("Noted. I've removed this task:\n" + "  " + toDelete + "\n" + "Now you have " +
+                    list.size() + " task" + (list.size() == 1 ? "" : "s") + " in the list.");
+        } else {
+            throw new DukeException("Couldn't find that task in the list! Try again.");
+        }
+    }
+
+    private void completeTask(int index) {
+        Task task = list.get(index - 1);
+        task.setDone();
+        System.out.println("Nice! I've marked this task as done:\n" + "  " + task);
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.begin();
     }
 }
