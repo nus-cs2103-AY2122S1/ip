@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.lang.StringBuilder;
 
@@ -34,6 +36,9 @@ public class Kermit {
         StringBuilder descriptionBuilder = new StringBuilder();
         StringBuilder flagBuilder = new StringBuilder();
 
+        // ArrayList of all valid commands
+        String[] strCommands = {"bye", "list", "done", "deadline", "todo", "event"};
+        ArrayList<String> commands = new ArrayList<>(Arrays.asList(strCommands));
 
         ToDo list = new ToDo();
 
@@ -59,6 +64,10 @@ public class Kermit {
                 command = commandArr[0];
                 flag = flagArr[0];
 
+                // Check if command is valid
+                if (!commands.contains(command)) {
+                    throw new KermitException(invalidCommandText);
+                }
                 String description = "";
                 String flagArguments = "";
 
@@ -141,8 +150,6 @@ public class Kermit {
                         list.add(newEvent);
                         System.out.println(formatText(printAddTask(newEvent, list)));
                         break;
-                    default:
-                        throw new KermitException(invalidCommandText);
                 }
             } catch (KermitException e) {
                 System.out.println(formatText(e.getMessage()));
