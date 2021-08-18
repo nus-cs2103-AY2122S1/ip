@@ -40,63 +40,78 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         // String logo = " ____        _        \n"
         //         + "|  _ \\ _   _| | _____ \n"
         //         + "| | | | | | | |/ / _ \\\n"
         //         + "| |_| | |_| |   <  __/\n"
         //         + "|____/ \\__,_|_|\\_\\___|\n";
         Duke neko = new Duke();
-        System.out.println("Hello from Neko!\nWhat can I do for you?\n(Nothing actually cos I will just repeat what you say!)\n");
+        System.out.println("Hello from Neko!\nWhat can I do for you?\n");
         Scanner sc = new Scanner(System.in);  
         
         int index = 0;
         
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
+            try {
+                if (userInput.equals("bye")) {
+                    sc.close();
+                    break;
+                }
+                if (userInput.equals("list")) {
+                    neko.listTask();
+                } else if (userInput.length() >= 6 && userInput.substring(0, 5).equals("done ")) {
+                    
+                    
+                    int taskNum = Integer.parseInt(userInput.substring(5));
+                    if (tasksList[taskNum - 1] == null) {
+                        throw new DukeException("You cannot complete a task that does not exist!");
+                    } else {
+                        neko.completeTask(tasksList[taskNum - 1]);
+                    }
+                    
+                    
+                } else {
+                    
+                    if (userInput.length() >= 4 && userInput.substring(0, 4).equals("todo")){
+                        if (userInput.length() == 4) {
+                            throw new DukeException("OOPS!!! The task name of a todo cannot be empty.");
+                        }
+                        Todo curr = new Todo(userInput.substring(5));
+                        neko.addTask(curr, index);
+                    } else if (userInput.length() >= 8 && userInput.substring(0, 8).equals("deadline")) {
+                        if (userInput.length() == 8) {
+                            throw new DukeException("OOPS!!! The task name of a deadline cannot be empty.");
+                        } else if (!userInput.contains("/by")) {
+                            throw new DukeException("Please input date for your deadline!");
+                        }
+                        String name = userInput.substring(9).split("/by")[0];
+                        String date = userInput.substring(9).split("/by")[1];
+                        Deadline curr = new Deadline(name, date);
+                        neko.addTask(curr, index);
+                    } else if (userInput.length() >= 5 && userInput.substring(0, 5).equals("event")) {
+                        if (userInput.length() == 5) {
+                            throw new DukeException("OOPS!!! The task name of an event cannot be empty.");
+                        } else if (!userInput.contains("/at")) {
+                            throw new DukeException("Please input time for your event!");
+                        }
+                        String name = userInput.substring(6).split("/at")[0];
+                        String time = userInput.substring(6).split("/at")[1];
+                        Event curr = new Event(name, time);
+                        neko.addTask(curr, index);
+                    } else {
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                    
+                    
+                    index++;
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
 
-            if (userInput.equals("bye")) {
-                sc.close();
-                break;
-            }
-            if (userInput.equals("list")) {
-                neko.listTask();
-            } else if (userInput.equals("")) {
-                System.out.println("Please input task before entering!");
-            } else if (userInput.length() >= 6 && userInput.substring(0, 5).equals("done ")) {
-                
-                
-                int taskNum = Integer.parseInt(userInput.substring(5));
-                if (tasksList[taskNum - 1] == null) {
-                    System.out.println("You cannot complete a task that does not exist!");
-                } else {
-                    neko.completeTask(tasksList[taskNum - 1]);
-                }
-                
-                
-            } else {
-                
-                if (userInput.length() >= 6 && userInput.substring(0, 5).equals("todo ")){
-                    Todo curr = new Todo(userInput.substring(5));
-                    neko.addTask(curr, index);
-                } else if (userInput.length() >= 10 && userInput.substring(0, 9).equals("deadline ")) {
-                    String name = userInput.substring(9).split("/by")[0];
-                    String date = userInput.substring(9).split("/by")[1];
-                    Deadline curr = new Deadline(name, date);
-                    neko.addTask(curr, index);
-                } else if (userInput.length() >= 7 && userInput.substring(0, 6).equals("event ")) {
-                    String name = userInput.substring(6).split("/at")[0];
-                    String time = userInput.substring(6).split("/at")[1];
-                    Event curr = new Event(name, time);
-                    neko.addTask(curr, index);
-                } else {
-                    Task curr = new Task(userInput);
-                    neko.addTask(curr, index);
-                }
-                
-                
-                index++;
-            }
+            
             
             
         }
