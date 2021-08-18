@@ -6,7 +6,7 @@ public class Duke {
     private ArrayList<Task> tasks;
 
     public Duke() {
-        this.tasks = new ArrayList(100);
+        this.tasks = new ArrayList<Task>(100);
     }
 
     private void start() {
@@ -30,12 +30,8 @@ public class Duke {
                     try {
                         int taskIndex = Integer.parseInt(inputStringArray[1]) - 1;
                         Task doneTask = tasks.get(taskIndex);
-                        if (doneTask == null) {
-                            System.out.println("Error: Task does not exist");
-                            break;
-                        }
                         doneTask.setDone();
-                        System.out.println("Nice! I've marked this task as done:\n" + doneTask.toString());
+                        System.out.println("Nice! I've marked this task as done:\n  " + doneTask.toString());
                     } catch (NumberFormatException | IndexOutOfBoundsException e) {
                         System.out.println("Error: Invalid task number");
                     }
@@ -52,7 +48,7 @@ public class Duke {
                     }
                     Task newDeadline = new Deadline(deadlineInfo[0], deadlineInfo[1]);
                     tasks.add(newDeadline);
-                    System.out.println("Got it. I've added this task:\n" + "  " + newDeadline.toString());
+                    System.out.println("Got it. I've added this task:\n  " + newDeadline.toString());
                     break;
                 case "event":
                     if (inputStringArray.length < 2) {
