@@ -4,11 +4,16 @@ import java.util.Scanner;
 public class Duke {
     private static final TaskList list = new TaskList();
 
-    private static String[] parseInput(String[] arr) {
+    private static String[] parseInput(String[] arr) throws DukeException {
+        if (arr.length == 1) {
+            //user did not specify desc
+            throw new DukeException("OOPS!! The description of a " + arr[0] + " cannot be empty :(");
+        }
         String desc = "";
         String time = "";
         boolean slash = false;
         for (int i = 1; i < arr.length; i++) {
+            System.out.println("entered loop");
             if (arr[i].charAt(0) == '/') {
                 slash = true;
                 continue;
@@ -70,10 +75,13 @@ public class Duke {
                 list.done(split[1]);
             } else if (isAddingNewTask(input)) {
                 //user is adding a new task
-                String command = split[0];
-                String[] taskArgs = parseInput(split);
-
-                addTask(command, taskArgs);
+                try {
+                    String command = split[0];
+                    String[] taskArgs = parseInput(split);
+                    addTask(command, taskArgs);
+                } catch (DukeException e) {
+                    e.print();
+                }
             } else {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :(");
             }
