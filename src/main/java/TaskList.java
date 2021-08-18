@@ -8,6 +8,13 @@ public class TaskList {
     public void addTask(Task task) {
         tasks.add(task);
     }
+
+    public Task markTaskAsDone(int i) {
+        Task task = tasks.get(i);
+        task.markAsDone();
+        return task;
+    }
+
     public ArrayList<Task> getTasks() {
         return tasks;
     }
