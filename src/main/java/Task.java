@@ -8,15 +8,15 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getTask() {
-        return this.isDone ?  "[X] " + this.description : "[] " + this.description;
-    }
-
     public void taskDone() {
         this.isDone = true;
     }
 
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
