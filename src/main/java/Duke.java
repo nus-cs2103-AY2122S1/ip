@@ -59,12 +59,12 @@ public class Duke {
                 System.out.println(taskarr[arrcounter - 1].toString());
                 System.out.println(linebreak);
             } else if (strparse[0].equalsIgnoreCase("deadline")) {
-                // adds a deadline task to the list. ASSUMES THERE IS A /BY FFS
+                // adds a deadline task to the list. now with no deadline assumption
                 StringBuilder taskb = new StringBuilder();
                 StringBuilder deadlineb = new StringBuilder();
                 int i = 1;
-                while (!strparse[i].equalsIgnoreCase("/by")
-                        || i > strparse.length) {
+                while (i < strparse.length
+                        && !strparse[i].equalsIgnoreCase("/by")) {
                     taskb.append(strparse[i]);
                     if (i != strparse.length - 1) {
                         taskb.append(" ");
