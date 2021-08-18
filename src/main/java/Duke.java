@@ -94,7 +94,7 @@ public class Duke {
     }
 
     public static void MarkDone(int index) throws DukeException{
-        if (index < 0) {
+        if (index <= 0) {
             throw new DukeException("☹ OOPS!!! The index is invalid!!!");
         } else {
             System.out.println("Nice! I've marked this task as done:");
@@ -133,7 +133,7 @@ public class Duke {
                 PrintList();
             }
             else if (Message.startsWith("done")) {
-                int index = Message.charAt(Message.length() - 1) - 49;
+                int index = Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1;
 
                 try {
                     MarkDone(index);
