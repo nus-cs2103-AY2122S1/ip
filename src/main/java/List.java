@@ -28,7 +28,7 @@ public class List extends ArrayList<Task> {
     public void done(int index) {
         Task temp = todos.get(index - 1);
         temp.markAsDone();
-        System.out.println("Nice! I've marked this task as done: \n" + temp);
+        System.out.println("Nice! I've marked this task as done:\n" + temp);
     }
 
     public void process(String input) {
@@ -44,11 +44,13 @@ public class List extends ArrayList<Task> {
             Task newItem = new Event(input.substring(6));
             todos.add(newItem);
             echo(newItem);
+        } else {
+            echo(input);
         }
     }
 
     public void echo(Task item) {
-        System.out.println("Got it. I've added this task: \n"
+        System.out.println("Got it. I've added this task:\n"
                 + item
                 + "\nNow you have "
                 + todos.size()
