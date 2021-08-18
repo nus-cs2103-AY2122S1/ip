@@ -71,7 +71,8 @@ public class Storage {
     }
 
     private void createDirectoryIfMissing() {
-        String directoryToSaveTo = filepath.substring(0, filepath.lastIndexOf(File.separator));
+        int indexOfLastFileSeparator = filepath.indexOf(File.separator);
+        String directoryToSaveTo = filepath.substring(0, indexOfLastFileSeparator == -1 ? 0 : indexOfLastFileSeparator);
         File directory = new File(directoryToSaveTo);
         directory.mkdirs();
     }
