@@ -3,12 +3,12 @@ import java.util.Scanner;
 public class Duke {
 
     private static Scanner sc;
-    private static String[] list;
+    private static Task[] list;
     private static int index;
 
     public static void main(String[] args) {
         sc = new Scanner(System.in);
-        list = new String[100];
+        list = new Task[100];
         index = 0;
 
         // Show the logo
@@ -39,9 +39,10 @@ public class Duke {
     }
 
     private static void handleInput(String input) {
+        printSingleDivider();
+
         if (input.equals("bye")) {
 
-            printSingleDivider();
             System.out.println("Output: Goodbye! See you again!");
             printDoubleDivider();
             sc.close();
@@ -49,26 +50,36 @@ public class Duke {
 
         } else if (input.equals("list")) {
 
-            printSingleDivider();
             System.out.println("Output: This is your current list!\n");
             for (int i = 0; i < index; i++) {
                 System.out.println(i + 1 + ". " + list[i]);
             }
-            printDoubleDivider();
 
-            getInput();
+        } else if (input.startsWith("done")) {
+
+            try {
+                int markDone = Integer.parseInt(input.substring(5)) - 1;
+                list[markDone].markAsDone();
+
+                System.out.println("You have successfully marked this task as done:\n");
+                System.out.println(list[markDone]);
+            } catch (StringIndexOutOfBoundsException | NumberFormatException e1) {
+                System.out.println("Please specify which task you would like to mark \n" +
+                                    "as complete by adding a single number after 'done'!\n" +
+                                    "i.e. done 1");
+            } catch (ArrayIndexOutOfBoundsException | NullPointerException e2) {
+                System.out.println("There is no task under that number!");
+            }
 
         } else {
 
-            list[index++] = input;
-
-            printSingleDivider();
+            list[index++] = new Task(input);
             System.out.println("Output: You have added '" + input + "' to the list!");
-            printDoubleDivider();
-
-            getInput();
 
         }
+
+        printDoubleDivider();
+        getInput();
     }
 
     private static void printDoubleDivider() {
