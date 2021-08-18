@@ -9,4 +9,9 @@ event volunteer work /at Fri 3-5pm
 list
 done 1
 list
+event work meeting
+todo
+done a
+list
+blahblah
 bye

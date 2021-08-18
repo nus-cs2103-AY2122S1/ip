@@ -36,4 +36,12 @@ I've marked this task as done:
 2. [D][X] return book (by: Sunday)
 3. [E][X] project meeting (at: Mon 2-4pm)
 4. [E][ ] volunteer work (at: Fri 3-5pm)
+Incorrect format for command.
+The description of a Task cannot be empty.
+Please enter a number after the done command.
+1. [T][X] borrow book
+2. [D][X] return book (by: Sunday)
+3. [E][X] project meeting (at: Mon 2-4pm)
+4. [E][ ] volunteer work (at: Fri 3-5pm)
+Sorry I do not understand this directive.
 Good bye.
