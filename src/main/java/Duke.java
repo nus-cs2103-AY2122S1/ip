@@ -20,7 +20,7 @@ public class Duke {
     }
 
     public static String[] extractCommand(String[] command) throws EmptyDescriptionException, IncompleteDescriptionException {
-        if (command.length < 2 || command[1].equals("") || command[1].trim().isEmpty())
+        if (command.length < 2 || command[1].trim().isEmpty())
             throw new EmptyDescriptionException(String.format("The description of a %s cannot be empty.", command[0]));
         String[] description = command[1].split(" /by | /at ", 2);
         if (!command[0].equals("todo") &&
