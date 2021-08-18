@@ -14,9 +14,10 @@ public class Duke {
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     // Commands
-    private static final String EXIT_COMMAND = "exit";
+    private static final String EXIT_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
 
-    // Message functions
+    // Message methods
     public static void horizontal_line() {
         System.out.print("____________________________________________________________\n");
     }
@@ -27,13 +28,26 @@ public class Duke {
         horizontal_line();
     }
 
+    // Continue loop conditions
+    public static boolean canContinue(String input) {
+        return !input.equalsIgnoreCase(EXIT_COMMAND);
+    }
+
     public static void main(String[] args) {
         System.out.println(LOGO);
         display_message(WELCOME_MESSAGE);
 
+        TodoList todoList = new TodoList();
+
         Scanner sc = new Scanner(System.in);
-        for (String input = sc.nextLine(); !input.equalsIgnoreCase(EXIT_COMMAND); input = sc.nextLine()) {
-            display_message(input);
+        for (String input = sc.nextLine(); canContinue(input); input = sc.nextLine()) {
+            switch (input) {
+                case LIST_COMMAND:
+                    display_message(todoList.toString());
+                    break;
+                default:
+                    display_message(todoList.addTodo(new Todo(input)));
+            }
         }
         sc.close();
 
