@@ -7,7 +7,10 @@ public class Task {
      * Constructor for Task
      * @param description the description of the task
      */
-    public Task(String description) {
+    public Task(String description) throws EmptyDescriptionException {
+        if (description.isEmpty()) {
+            throw new EmptyDescriptionException();
+        }
         this.description = description;
         this.isDone = false;
         Task.count++;

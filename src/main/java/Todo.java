@@ -3,7 +3,7 @@ public class Todo extends Task{
      * Constructor for Todo
      * @param description the description of the task
      */
-    public Todo(String description) {
+    public Todo(String description) throws EmptyDescriptionException {
         super(description);
     }
 

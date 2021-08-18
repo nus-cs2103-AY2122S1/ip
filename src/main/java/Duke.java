@@ -69,10 +69,38 @@ public class Duke {
      * @param index index of task to be marked done
      * @return message indicating success
      */
-    public String markDone(int index) {
+    public String markDone(int index) throws InvalidIndexException {
+        if ((index) > Task.count) throw new InvalidIndexException();
         Task t = this.list.get(index - 1);
         t.setDone();
         return wrapText(String.format("Nice! I've marked this task as done:\n %s", t.toString()));
+    }
+
+    /**
+     * Responds to given user command and input
+     * @param command the user command
+     * @param input the array storing user input split with /
+     * @return Duke's response
+     */
+    public String run(String command, String[] input) {
+        try {
+            switch (command) {
+                case "list":
+                    return this.showList();
+                case "todo":
+                    return this.add(new Todo(input[0]));
+                case "deadline":
+                    return this.add(new Deadline(input[0], input[1]));
+                case "event":
+                    return this.add(new Event(input[0], input[1]));
+                case "done":
+                    return this.markDone(Integer.parseInt(input[0].strip()));
+                default:
+                    throw new InvalidCommandException();
+            }
+        } catch (DukeException e) {
+            return wrapText(e.toString());
+        }
     }
 
     /**
@@ -91,31 +119,14 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        scanner: while (sc.hasNext()) {
+        while (sc.hasNext()) {
             String command = sc.next();
+            if (command.equals("bye")) break;
             String[] input = sc.nextLine().split(" /[a-z][a-z] ");
-
-            switch (command) {
-                case "bye":
-                    System.out.println(bot.goodbye());
-                    break scanner;
-                case "list":
-                    System.out.println(bot.showList());
-                    break;
-                case "todo":
-                    System.out.println(bot.add(new Todo(input[0])));
-                    break;
-                case "deadline":
-                    System.out.println(bot.add(new Deadline(input[0], input[1])));
-                    break;
-                case "event":
-                    System.out.println(bot.add(new Event(input[0], input[1])));
-                    break;
-                case "done":
-                    System.out.println(bot.markDone(Integer.parseInt(input[0].strip())));
-                    break;
-            }
+            System.out.println(bot.run(command, input));
         }
+        
+        System.out.println(bot.goodbye());
         sc.close();
     }
 }

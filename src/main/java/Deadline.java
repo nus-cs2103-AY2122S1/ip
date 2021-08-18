@@ -6,7 +6,7 @@ public class Deadline extends Task {
      * @param description the task description
      * @param by the date or time task needs to be done by
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws EmptyDescriptionException{
         super(description);
         this.by = by;
     }
