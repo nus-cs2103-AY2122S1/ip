@@ -6,7 +6,7 @@ public class Botto {
     final String bot = "Botto";
     final String indentation = "   ";
 
-    private List<String> list = new LinkedList<>();
+    private List<Task> list = new LinkedList<>();
 
     public static void main(String[] args) {
         Botto botto = new Botto();
@@ -19,21 +19,21 @@ public class Botto {
         String next = scanner.nextLine();
 
         while(!next.equals("bye")) {
-            System.out.println(next);
             botto.printDivider();
-            switch (next) {
-                case ("list"):
-                    botto.printList();
-                    break;
-                default:
-                    botto.add(next);
-                    break;
+
+            if(next.equals("list")) {
+                botto.printList();
+            } else if (next.startsWith("done")) {
+                String integer = next.replaceAll("\\D+", "");
+                botto.markAsDone(Integer.parseInt(integer) - 1);
+            } else {
+                botto.add(next);
             }
+
             botto.printDivider();
             next = scanner.nextLine();
         }
 
-        System.out.println(next);
         botto.printDivider();
         botto.bye();
         botto.printDivider();
@@ -51,14 +51,25 @@ public class Botto {
     }
 
     private void printList() {
+        System.out.println(indentation + "Here are the tasks in your list:");
         for(int i = 0; i < this.list.size(); i ++) {
-            System.out.println(indentation + (i + 1) + ": " + this.list.get(i));
+            Task task = this.list.get(i);
+            System.out.println(indentation + (i + 1) + ". [" + task.getStatusIcon() + "] "
+                    + task.getDescription());
         }
     }
 
-    private void add(String task) {
+    private void add(String description) {
+        Task task = new Task(description);
         this.list.add(task);
-        System.out.println(indentation + "added: " + task);
+        System.out.println(indentation + "added: " + description);
+    }
+
+    private void markAsDone(int index) {
+        Task subject = this.list.get(index);
+        subject.markAsDone();
+        System.out.println(indentation + "Nice! I've marked this task as done: ");
+        System.out.println(indentation + "  [" + subject.getStatusIcon() + "] " + subject.getDescription());
     }
 
     private void bye() {
