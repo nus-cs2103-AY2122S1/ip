@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class GetListProcessor extends Processor {
     /**
      * Constructor of the class `GetListProcessor`.
@@ -12,14 +14,10 @@ public class GetListProcessor extends Processor {
      */
     @Override
     public void process() {
-        Task[] tasks = Duke.getTasks();
-        int i = 0;
-        while (i < 100) {
-            if (tasks[i] == null) {
-                break;
-            }
-            this.message += String.format("%o.%s\n", i + 1, tasks[i].toString());
-            i++;
+        ArrayList<Task> tasks = Duke.getTasks();
+        int len = Duke.getNumOfTasks();
+        for (int i = 0; i < len; i++) {
+            this.message += String.format("%o.%s\n", i + 1, tasks.get(i).toString());
         }
     }
 }

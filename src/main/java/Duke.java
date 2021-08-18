@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,8 +10,8 @@ public class Duke {
             "Bye. Hope to see you again soon!\n" +
             "____________________________________________________________";
     // List of tasks.
-    private static Task[] tasks = new Task[100];
-    private static int numOfTasks = 0;
+    private static ArrayList<Task> tasks = new ArrayList<>();
+//    private static int numOfTasks = 0;
     private boolean isRunning;
     private Scanner input;
 
@@ -25,13 +26,13 @@ public class Duke {
     }
 
     /**
-     * Updates a new task to the task list.
+     * Adds a new task to the task list.
      *
      * @param task The new task.
      */
-    public static void updateList(Task task) {
-        Duke.tasks[numOfTasks] = task;
-        Duke.numOfTasks++;
+    public static void addToList(Task task) {
+        Duke.tasks.add(task);
+//        Duke.numOfTasks++;
     }
 
     /**
@@ -39,10 +40,11 @@ public class Duke {
      *
      * @return A copy of tasks list.
      */
-    public static Task[] getTasks() {
-        Task[] copy = new Task[100];
-        for (int i = 0; i < numOfTasks; i++) {
-            copy[i] = Duke.tasks[i];
+    public static ArrayList<Task> getTasks() {
+        ArrayList<Task> copy = new ArrayList<Task>();
+        int len = Duke.getNumOfTasks();
+        for (int i = 0; i < len; i++) {
+            copy.add(Duke.tasks.get(i));
         }
         return copy;
     }
@@ -53,7 +55,7 @@ public class Duke {
      * @return Number of tasks.
      */
     public static int getNumOfTasks() {
-        return Duke.numOfTasks;
+        return Duke.tasks.size();
     }
 
     /**
@@ -82,13 +84,13 @@ public class Duke {
         } else if (splitted[0].equals("done")) {
             try {
                 int index = Integer.parseInt(splitted[1]) - 1;
-                processCommand(new TaskDoneProcessor(Duke.tasks[index]));
-            } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException e) {
+                processCommand(new TaskDoneProcessor(Duke.tasks.get(index)));
+            } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
                 throw new DukeException("☹ OOPS!!! The task number is invalid.");
             }
         } else if (splitted[0].equals("todo")) {
             if (splitted.length >= 2) {
-                processCommand(new AddATaskProcessor(command, new ToDo(splitted[1])));
+                processCommand(new AddATaskProcessor(new ToDo(splitted[1])));
             } else {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
@@ -96,7 +98,7 @@ public class Duke {
             if (splitted.length >= 2) {
                 String[] information = splitted[1].split("/by");
                 if (information.length == 2) {
-                    processCommand(new AddATaskProcessor(command, new Deadline(information[0], information[1])));
+                    processCommand(new AddATaskProcessor(new Deadline(information[0], information[1])));
                 } else if (information.length < 2) {
                     throw new DukeException("☹ OOPS!!! The time of a deadline cannot be empty.");
                 } else {
@@ -109,7 +111,7 @@ public class Duke {
             if (splitted.length >= 2) {
                 String[] information = splitted[1].split("/at");
                 if (information.length == 2) {
-                    processCommand(new AddATaskProcessor(command, new Event(information[0], information[1])));
+                    processCommand(new AddATaskProcessor(new Event(information[0], information[1])));
                 } else if (information.length < 2) {
                     throw new DukeException("☹ OOPS!!! The time of an event cannot be empty.");
                 } else {
