@@ -10,6 +10,7 @@ public class Duke {
     static String listMsg = "Here are the tasks in your list:\n";
     static String doneMsg = "Nice! I've marked this task as done: \n";
     static String todoMsg = "Got it. I've added this task: \n";
+    static String deleteMsg = "Noted. I've removed this task:\n";
 
     static void introduce() {
         System.out.println(introMsg);
@@ -39,8 +40,12 @@ public class Duke {
                         break;
                     case "list":
                         System.out.println(listMsg);
+                        int index = 0;
                         for (int i = 0; i < numItems; i++) {
-                            System.out.println((i + 1) + "." + botList[i]);
+                            if (botList[i] != null) {
+                                System.out.println((index + 1) + "." + botList[i]);
+                                index++;
+                            }
                         }
                         break;
                     case "deadline":
@@ -70,6 +75,13 @@ public class Duke {
                         int intParam = Integer.parseInt(param) - 1;
                         botList[intParam].markAsDone();
                         System.out.println(botList[intParam]);
+                        break;
+                    case "delete":
+                        System.out.println(deleteMsg);
+                        int temp = numItems - 1;
+                        intParam = Integer.parseInt(param) - 1;
+                        botList[intParam] = null;
+                        System.out.printf("Now you have %d tasks in the list.\n", temp);
                         break;
                     case "bye":
                         System.out.println(byeMsg);
