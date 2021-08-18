@@ -61,7 +61,7 @@ public class Duke {
                     System.out.println(format("OOPS!!! No date for deadline! " +
                             "Use format of deadline description /by date \n\t"));
                 }
-            } else if(input.equals("event")) {
+            } else if (input.equals("event")) {
                 String[] text = scanner.nextLine().split("/at ");
                 try {
                     System.out.println(format(commands.event(text[0].trim(), text[1])));
@@ -70,6 +70,12 @@ public class Duke {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(format("OOPS!!! No date for event! " +
                             "Use format of event description /at date \n\t"));
+                }
+            } else if (input.equals("delete")) {
+                try {
+                    System.out.println(format(commands.delete((scanner.nextInt()) - 1)));
+                } catch (DukeException e) {
+                    System.out.println(format(e.toString()));
                 }
             }
         }

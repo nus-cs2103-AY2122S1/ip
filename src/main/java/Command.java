@@ -1,10 +1,11 @@
+import java.util.ArrayList;
+
 /**
  * The Command class encapsulates all commands behaviour for a bot.
  */
 public class Command {
     private String name;
-    private Task[] records = new Task[100];
-    private int count = 0;
+    private ArrayList<Task> records = new ArrayList<>();
 
     /**
      * Constructor for command.
@@ -42,6 +43,8 @@ public class Command {
                 return 4;
             case "event":
                 return 5;
+            case "delete":
+                return 6;
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -59,10 +62,9 @@ public class Command {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         Todo toAdd = new Todo(description);
-        records[count] = toAdd;
-        count += 1;
+        records.add(toAdd);
         return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
-                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), count);
+                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), records.size());
     }
 
     /**
@@ -80,10 +82,9 @@ public class Command {
             throw new DukeException("OOPS!!! No date for event! Use format of event description /at date");
         }
         Event toAdd = new Event(description, at);
-        records[count] = toAdd;
-        count += 1;
+        records.add(toAdd);
         return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
-                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), count);
+                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), records.size());
     }
 
     /**
@@ -101,10 +102,9 @@ public class Command {
             throw new DukeException("OOPS!!! No date for deadline! Use format of deadline description /by date");
         }
         Deadline toAdd = new Deadline(description, by);
-        records[count] = toAdd;
-        count += 1;
+        records.add(toAdd);
         return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
-                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), count);
+                        "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), records.size());
     }
 
     /**
@@ -113,12 +113,28 @@ public class Command {
      * @return formatted string representing elements in records array.
      */
     public String list() {
-        String result = "Here are the tasks in your list:\n\t";
-        for (int i = 0; i < count; i++) {
-            result += String.format("%1$d. %2$s \n\t",
-                    i + 1, records[i].toString());
+        final StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n\t");
+        records.forEach((el) -> sb.append(
+                String.format("%1$d. %2$s \n\t",
+                        records.indexOf(el) + 1, el.toString())));
+        return sb.toString();
+    }
+
+    /**
+     * Returns delete message for bot.
+     * @param index index of task to be deleted.
+     * @return delete message for bot.
+     * @throws DukeException
+     */
+    public String delete(int index) throws DukeException {
+        if (index < 0) {
+            throw new DukeException("OOPS!!! Index must be greater than 0");
+        } else if (index >= records.size()) {
+            throw new DukeException(String.format("OOPS!!! You only have %1$d tasks",records.size()));
         }
-        return result;
+        Task removed = records.remove(index);
+        return String.format("Noted! I've removed this task:\n\t %1$s\n\t" +
+                "Now you have %2$d tasks in the list.\n\t", removed.toString(), records.size());
     }
 
     /**
@@ -128,14 +144,13 @@ public class Command {
      * @return task mark as done message.
      * @throws DukeException if index < 0 or index points to null value.
      */
-    public String done(int index) throws DukeException{
+    public String done(int index) throws DukeException {
         if (index < 0) {
             throw new DukeException("OOPS!!! Index must be greater than 0");
+        } else if (index >= records.size()) {
+            throw new DukeException(String.format("OOPS!!! You only have %1$d tasks",records.size()));
         }
-        Task done = records[index];
-        if (done == null) {
-            throw new DukeException(String.format("OOPS!!! You only have %1$d tasks",count));
-        }
+        Task done = records.get(index);
         done.markAsDone();
         return String.format("Nice! I've marked this task as done:\n\t %1$s \n\t", done.toString());
     }
