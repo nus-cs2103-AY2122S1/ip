@@ -1,26 +1,46 @@
 import java.util.ArrayList;
 
+/**
+ * Encapsulation of the list in Duke.
+ */
 public class DukeList {
+    /** The list in which Duke stores Tasks. */
     private ArrayList<Task> list = new ArrayList<>();
     private int count = 0;
 
+    /**
+     * Constructor of a DukeList.
+     */
     public DukeList() {}
 
-
+    /**
+     * Displays the addition of a task.
+     *
+     * @param task The task to be displayed.
+     */
     private void displayTask(Task task) {
         String response = "Got it. I've added this task:\n";
         String taskCount = "\nNow you have " + list.size() + " tasks in the list.";
         System.out.println(response + task.toString() + taskCount);
     }
 
-
+    /**
+     * Adds a task to the list.
+     *
+     * @param text Description of the task to be added.
+     */
     public void add(String text) {
         list.add(new Task(text));
         count += 1;
         System.out.println("added: " + text);
     }
 
-
+    /**
+     * Adds a ToDos task to the list.
+     *
+     * @param text Body of the task to be added.
+     * @throws DukeException If there is no text.
+     */
     public void addToDo(String text) throws DukeException {
         String message = text.trim();
 
@@ -35,7 +55,11 @@ public class DukeList {
         displayTask(input);
     }
 
-
+    /**
+     * Adds a Deadlines task to the list.
+     *
+     * @param text Body of the task to be added.
+     */
     public void addDeadlines(String text) {
         String[] strings = text.split(" /by ", 2);
 
@@ -48,7 +72,11 @@ public class DukeList {
         displayTask(input);
     }
 
-    
+    /**
+     * Adds an Events task to the list.
+     *
+     * @param text Body of the task to be added.
+     */
     public void addEvents(String text) {
         String[] strings = text.split(" /at ", 2);
 
@@ -61,7 +89,9 @@ public class DukeList {
         displayTask(input);
     }
 
-
+    /**
+     * Lists out the current tasks in the list.
+     */
     public void list() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
@@ -69,7 +99,11 @@ public class DukeList {
         }
     }
 
-
+    /**
+     * Marks a task in the list as done.
+     *
+     * @param item Index of the task marked as done.
+     */
     public void done(int item) {
         Task task = list.get(item - 1);
         task.done();
@@ -78,7 +112,11 @@ public class DukeList {
         System.out.println(response + task.toString());
     }
 
-
+    /**
+     * Deletes a task from the list.
+     *
+     * @param item Index of the task to be deleted.
+     */
     public void delete(int item) {
         Task task = list.get(item - 1);
         list.remove(item - 1);
