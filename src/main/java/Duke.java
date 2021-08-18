@@ -24,25 +24,25 @@ public class Duke {
                 Task item = list.get(Integer.parseInt(modInput.substring(modInput.length() - 1)) - 1);
                 item.markAsDone();
                 System.out.println("    ____________________________________________________________");
-                System.out.println("     Nice! I've marked this task as done: ");
+                System.out.println("     Nice! I've marked this task as done:");
                 System.out.println(String.format("       %s", item.toString()));
-            } else if (input.length() > 5 && inputLower.substring(0, 5).equals("todo ")) {
+            } else if (inputLower.substring(0, 5).contains("todo ")) {
                 Todo t = new Todo(input.substring(5));
                 list.add(t);
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     Got it. I've added this task:");
                 System.out.println("       " + t.toString());
                 System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
-            } else if (input.length() > 6 && inputLower.substring(0, 6).equals("event ")) {
-                String[] splitString = input.substring(6).split("/at ", 2);
+            } else if (input.length() > 6 && inputLower.substring(0, 6).contains("event")) {
+                String[] splitString = input.substring(6).split(" /at ", 2);
                 Event e = new Event(splitString[0], splitString[1]);
                 list.add(e);
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     Got it. I've added this task:");
                 System.out.println("       " + e.toString());
                 System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
-            } else if (input.length() > 9 && inputLower.substring(0, 9).equals("deadline ")) {
-                String[] splitString = input.substring(6).split("/by ", 2);
+            } else if (input.length() > 9 && inputLower.substring(0, 9).contains("deadline")) {
+                String[] splitString = input.substring(9).split(" /by ", 2);
                 Deadline d = new Deadline(splitString[0], splitString[1]);
                 list.add(d);
                 System.out.println("    ____________________________________________________________");
