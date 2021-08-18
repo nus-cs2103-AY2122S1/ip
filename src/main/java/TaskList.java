@@ -9,19 +9,22 @@ public class TaskList {
     }
 
     public String add(String taskDescription) {
-        tasks.add(new Task(taskDescription));
-        return "added task: " + taskDescription;
+        Task task = new Task(taskDescription);
+        tasks.add(task);
+        return "added task: " + task;
+    }
+
+    public String markTaskDone(int i) {
+        Task task = tasks.get(i-1);
+        task.markDone();
+        return "Nice! this task has been marked done: " + task;
     }
 
     public String[] list() {
        String[] taskStringRepresentations = new String[tasks.size()];
        for(int i = 0; i < taskStringRepresentations.length; i++) {
-           taskStringRepresentations[i] = (i+1) + ". " + formatTask(tasks.get(i));
+           taskStringRepresentations[i] = (i+1) + ". " + tasks.get(i);
        }
        return taskStringRepresentations;
-    }
-
-    private String formatTask(Task task) {
-        return task.getDescription();
     }
 }
