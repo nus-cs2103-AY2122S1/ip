@@ -12,7 +12,7 @@ public class Duke {
                 + "\t|____/ \\__,_|_|\\_\\___|\n";
         String format = "\t%s\n";
         String horizontalLine = "______________________________________________________";
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         System.out.print(logo);
         System.out.printf(format, horizontalLine);
@@ -32,13 +32,15 @@ public class Duke {
             } else if (input.equals("list")) {
                 // List all added tasks
                 System.out.printf(format, horizontalLine);
+                System.out.printf(format, "Here is your task list:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.printf("\t%d. %s\n", i + 1, tasks.get(i));
+                    System.out.printf("\t%d.%s\n", i + 1, tasks.get(i));
                 }
                 System.out.printf(format, horizontalLine);
             } else {
-                // Add task
-                tasks.add(input);
+                // Create task object and add it to the list
+                Task task = new Task(input);
+                tasks.add(task);
                 System.out.printf(format, horizontalLine);
                 System.out.printf("\tadded: %s\n", input);
                 System.out.printf(format, horizontalLine);
