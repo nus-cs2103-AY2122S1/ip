@@ -2,9 +2,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static int lv = 2;
-    private static String[] features = {"", "Greet, Echo, Exit", ", Add, List"};
+    private static int lv = 3;
+    private static String[] features = {"", "Greet, Echo, Exit", ", Add, List", ", Mark as Done"};
     private static boolean canExit = false;
+    private static ArrayList<Task> taskArrayList = new ArrayList<>();
 
     /**
      * This function takes an input string and formats it by including horizontal lines above
@@ -48,7 +49,7 @@ public class Duke {
         // Scanner to read user inputs
         Scanner scanner = new Scanner(System.in);
 
-        // storing userInput
+        // storing userInput (no longer used)
         ArrayList<String> inputs = new ArrayList<>();
 
         while (!canExit) {
@@ -59,15 +60,16 @@ public class Duke {
             } else { // user inputs 'list' or something else
                 if (userInput.equals("list")) { // user inputs 'list', return all text stored
                     StringBuilder userInputsList = new StringBuilder();
-                    for (int i = 0; i < inputs.size() - 1; i++) { // new line except for last item
-                        userInputsList.append(i + 1).append(". ").append(inputs.get(i)).append("\n");
+                    for (int i = 0; i < taskArrayList.size() - 1; i++) { // new line except for last item
+                        userInputsList.append(i + 1).append(". ").append(taskArrayList.get(i).description).append("\n");
                     }
-                    userInputsList.append(inputs.size()).append(". ")
-                            .append(inputs.get(inputs.size() - 1));
+                    userInputsList.append(taskArrayList.size()).append(". ")
+                            .append(taskArrayList.get(taskArrayList.size() - 1).description); // no \n for last item
                     System.out.println(sandwich(userInputsList.toString()));
                 } else { // store userInput, tell user their input has been added
-                    inputs.add(userInput);
-                    System.out.println(sandwich("added: " + userInput));
+                    inputs.add(userInput); // no longer used
+                    taskArrayList.add(new Task(userInput));
+                    System.out.println(sandwich("Task added: " + userInput));
                 }
             }
         }
