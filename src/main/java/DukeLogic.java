@@ -26,27 +26,27 @@ public class DukeLogic {
    * @return boolean of whether or not to continue Duke.
    */
   public static boolean takeInput(String input) {
-    if (matches("bye").apply(input)) {
+    if (matches("bye", input)) {
       Duke.renderOutput("Goodbye!");
       return false;
-    } else if (matches("").apply(input)) {
+    } else if (matches("", input)) {
       return true;
-    } else if (matches("list").apply(input)) {
+    } else if (matches("list", input)) {
       listTasks();
       return true;
-    } else if (startsWithOrEquals("done ").apply(input)) {
+    } else if (startsWithOrEquals("done ", input)) {
       doTaskAction(getArgs(input, "done "), Actions.MARK_COMPLETE);
       return true;
-    } else if (startsWithOrEquals("delete ").apply(input)) {
+    } else if (startsWithOrEquals("delete ", input)) {
       doTaskAction(getArgs(input, "delete "), Actions.DELETE);
       return true;
-    } else if (startsWithOrEquals("todo ").apply(input)) {
+    } else if (startsWithOrEquals("todo ", input)) {
       addTask(getArgs(input, "todo "), Task.Type.TODO);
       return true;
-    } else if (startsWithOrEquals("deadline ").apply(input)) {
+    } else if (startsWithOrEquals("deadline ", input)) {
       addTask(getArgs(input, "deadline "), Task.Type.DEADLINE);
       return true;
-    } else if (startsWithOrEquals("event ").apply(input)) {
+    } else if (startsWithOrEquals("event ", input)) {
       addTask(getArgs(input, "event "), Task.Type.EVENT);
       return true;
     } else {
@@ -55,16 +55,16 @@ public class DukeLogic {
     }
   }
 
-  private static Function<String, Boolean> matches(String phrase) {
-    return x -> x.trim().equalsIgnoreCase(phrase);
+  private static boolean matches(String phrase, String input) {
+    return input.trim().equalsIgnoreCase(phrase);
   }
 
-  private static Function<String, Boolean> startsWithOrEquals(String phrase) {
-    return x -> x.trim().startsWith(phrase) || x.trim().equalsIgnoreCase(phrase.trim());
+  private static boolean startsWithOrEquals(String phrase, String input) {
+    return input.trim().startsWith(phrase) || input.trim().equalsIgnoreCase(phrase.trim());
   }
 
-  private static Function<String, Boolean> contains(String phrase) {
-    return x -> x.trim().contains(phrase);
+  private static boolean contains(String phrase, String input) {
+    return input.trim().contains(phrase);
   }
 
   private static String getArgs(String input, String command) {
@@ -98,12 +98,12 @@ public class DukeLogic {
       switch (action) {
         case DELETE:
           tasks.remove(taskNum - 1);
-          output = "Noted. I have deleted the following:\n    " + task;
+          output += "Noted. I have deleted the following:\n    " + task;
           output += String.format("%s\nYou now have %d tasks in the list", output, tasks.size());
           break;
         case MARK_COMPLETE:
           task.markComplete(true);
-          output = "Great! I've marked this task as done:\n    " + task;
+          output += "Great! I've marked this task as done:\n    " + task;
           break;
         default:
           throw new IllegalArgumentException("Invalid action");
