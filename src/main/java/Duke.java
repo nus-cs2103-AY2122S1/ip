@@ -11,8 +11,8 @@ public class Duke {
         Scanner input = new Scanner(System.in);
         String[] storedInfo = new String[100];
         int count = 0;
-        while (input.hasNext()) {
-            String in = input.next();
+        while (input.hasNextLine()) {
+            String in = input.nextLine();
             if (in.equals("bye") || in.equals("Bye")) {
                 break;
             }
