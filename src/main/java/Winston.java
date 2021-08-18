@@ -94,7 +94,7 @@ public class Winston {
                     break;
                 }
                 default: {
-                    
+                    System.out.print("Invalid command. Please input a valid command." + "\n");
                 }
             }
             cmd = scan.nextLine();
