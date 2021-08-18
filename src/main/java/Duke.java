@@ -4,7 +4,8 @@ import java.util.ArrayList;
 public class Duke {
 
     public static class Commands {
-        public static ArrayList<String> arrayList = new ArrayList<>();
+        public static ArrayList<Task> arrayList = new ArrayList<>();
+
         public static void helloCommand() {
             String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -27,13 +28,36 @@ public class Duke {
             System.out.println("____________________________________________________________ \n" +
                     "added: " + inputString + "\n" +
                     "____________________________________________________________");
-            arrayList.add(inputString);
-            printString();
+            Task inputTask = new Task(inputString);
+            arrayList.add(inputTask);
         }
 
         public static void listCommand() {
-            for(int i = 1; i < arrayList.size() + 1; i++) {
-                System.out.println(i + ". " + arrayList.get(i - 1));
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 1; i < arrayList.size() + 1; i++) {
+                Task currTask = arrayList.get(i - 1);
+                System.out.println(i + "." + "[" + currTask.getStatusIcon() + "] " + currTask.getDescription());
+            }
+        }
+
+        public static void removeCommand(int i) {
+            if (arrayList.size() < i) {
+                System.out.println("Sorry! There are no tasks with index number " + i + "! :(");
+            } else {
+                Task iTask = arrayList.get(i - 1);
+                System.out.println("You have removed task : " + iTask.getDescription() + ".");
+                arrayList.remove(i - 1);
+            }
+        }
+
+        public static void doneCommand(int i) {
+            if (arrayList.size() < i) {
+                System.out.println("Sorry! I can't find the tasks you ask for! :(");
+            } else {
+                Task iTask = arrayList.get(i - 1);
+                iTask.statusDone();
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println(i + ". [" + iTask.getStatusIcon() + "] " + iTask.getDescription());
             }
         }
     }
@@ -41,14 +65,25 @@ public class Duke {
     public static void printString() {
         Scanner sc = new Scanner(System.in);
         String inputString = sc.nextLine();
-        if(inputString.equals("list")) {
-            Commands.listCommand();
+        String[] word = inputString.split(" ", 2);
+        String firstWord = word[0];
+        if (firstWord.equals("done")) {
+            int secondWord = Integer.parseInt(word[1]);
+            Commands.doneCommand(secondWord);
+            printString();
+        } else if (firstWord.equals("remove")) {
+            int secondWord = Integer.parseInt(word[1]);
+            Commands.removeCommand(secondWord);
             printString();
         } else {
-            if(inputString.equals("bye")) {
+            if (inputString.equals("list")) {
+                Commands.listCommand();
+                printString();
+            } else if (inputString.equals("bye")) {
                 Commands.byeCommand();
             } else {
                 Commands.addCommand(inputString);
+                printString();
             }
         }
     }
