@@ -43,8 +43,8 @@ public class Duke {
         } else if (input.equals("list")){
             lst.showList();
         } else if (input.contains("done")) {
-            int taskNum = Integer.parseInt(input.split(" ")[1]);
-            lst.markAsDone(taskNum - 1);
+            int index = Integer.parseInt(input.split(" ")[1]) - 1;
+            lst.markAsDone(index);
         } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")){
             if (input.contains("todo") && input.length() == 4) {
                 throw new MissingToDoDescriptionException();
@@ -55,6 +55,9 @@ public class Duke {
             } else {
                 lst.addItem(input);
             }
+        } else if (input.contains("delete")) {
+            int index = Integer.parseInt(input.split(" " )[1]) - 1;
+            lst.deleteItem(index);
         } else {
             throw new InvalidCommandException();
         }

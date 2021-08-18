@@ -25,6 +25,14 @@ public class ToDoList {
         System.out.println("Now you have " + toDoList.size() + " tasks in the list.");
     }
 
+    public void deleteItem(int index) {
+        Task t = getToDo(index);
+        toDoList.remove(index);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(t.toString());
+        System.out.println("Now you have " + toDoList.size() + " tasks in the list.");
+    }
+
     public void showList() {
         System.out.println("Here are the tasks in your list: ");
         for (int i = 1; i <= toDoList.size(); i++) {
