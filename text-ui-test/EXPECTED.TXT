@@ -8,36 +8,50 @@ What can <<Virushade>> do for you?
 
 _____________________________________________________
 
-Added: Test add regular Task
-Now you have 1 tasks in the list.
+OOPS!!! I'm sorry, but I don't know what that means :-(
+_____________________________________________________
+
+OOPS!!! The description of a todo task cannot be empty.
+_____________________________________________________
+
+OOPS!!! The description of an event task cannot be empty.
+_____________________________________________________
+
+OOPS!!! The description of a deadline task cannot be empty.
 _____________________________________________________
 
 Added: Test add todo task
-Now you have 2 tasks in the list.
+Now you have 1 tasks in the list.
 _____________________________________________________
 
 Added: Test add deadline task
-Now you have 3 tasks in the list.
+Now you have 2 tasks in the list.
 _____________________________________________________
 
 Added: Test add event task
-Now you have 4 tasks in the list.
+Now you have 3 tasks in the list.
 _____________________________________________________
 
 Added: Test slashPartition without space
-Now you have 5 tasks in the list.
+Now you have 4 tasks in the list.
 _____________________________________________________
 
 Here are the tasks in your list:
-1.[ ] Test add regular Task
-2.[T][ ] Test add todo task
-3.[D][ ] Test add deadline task (by: now)
-4.[E][ ] Test add event task (at: now)
-5.[D][ ] Test slashPartition without space (by: now)
+1.[T][ ] Test add todo task
+2.[D][ ] Test add deadline task (by: now)
+3.[E][ ] Test add event task (at: now)
+4.[D][ ] Test slashPartition without space (by: now)
 _____________________________________________________
 
-Nice! I have marked this task as done: 
-[T][x] Test add todo task
+OOPS!!! Please enter an integer after 'done'.
+_____________________________________________________
+
+Please enter an integer after 'done ' instead.
+java.lang.NumberFormatException: For input string: "0.5"
+_____________________________________________________
+
+Please enter an integer after 'done ' instead.
+java.lang.NumberFormatException: For input string: "LOL THIS AIN'T NO INTEGER"
 _____________________________________________________
 
 Nice! I have marked this task as done: 
@@ -48,7 +62,21 @@ Nice! I have marked this task as done:
 [E][x] Test add event task (at: now)
 _____________________________________________________
 
+Nice! I have marked this task as done: 
+[D][x] Test slashPartition without space (by: now)
+_____________________________________________________
+
+Please check that you have entered the correct number!
+_____________________________________________________
+
 Please enter an integer greater than 0.
+_____________________________________________________
+
+Here are the tasks in your list:
+1.[T][ ] Test add todo task
+2.[D][x] Test add deadline task (by: now)
+3.[E][x] Test add event task (at: now)
+4.[D][x] Test slashPartition without space (by: now)
 _____________________________________________________
 
 Bye. Hope to see you again soon!

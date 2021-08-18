@@ -45,6 +45,11 @@ public class TaskList {
             Task addedTask;
             String[] pair = slashPartition(addedTaskDescription);
 
+            // Checking if the Task Name is empty (Or filled with Spacebars):
+            if (pair[0].replace(" ", "").equals("")) {
+                System.out.println("OOPS!!! Please enter the task description!!!");
+            }
+
             switch (taskType) {
                 case "TODO":
                     addedTask = new ToDo(addedTaskDescription);
@@ -71,6 +76,7 @@ public class TaskList {
                     }
                     break;
 
+                // The add function would not reach this line at all.
                 default:
                     addedTask = new Task(addedTaskDescription);
             }

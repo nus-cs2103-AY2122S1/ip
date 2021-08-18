@@ -41,6 +41,45 @@ public class Virushade {
     }
 
     /**
+     * Handles unexpected inputs to Virushade.
+     */
+    private static void handle(String str) {
+        if (str.startsWith("todo")) {
+            System.out.println("OOPS!!! The description of a todo task cannot be empty.");
+        } else if (str.startsWith("deadline")) {
+            System.out.println("OOPS!!! The description of a deadline task cannot be empty.");
+        } else if (str.startsWith("event")) {
+            System.out.println("OOPS!!! The description of an event task cannot be empty.");
+        } else if (str.startsWith("done")) {
+            System.out.println("OOPS!!! Please enter an integer after 'done'.");
+        } else {
+            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    /**
+     * Determines what Virushade should do with given string str.
+     * Note: str is assumed to not be "bye".
+     *
+     * @param str The input instructional string.
+     */
+    private static void assignTask(String str) {
+        if (str.equals("list")) {
+            TaskList.list();
+        } else if (str.startsWith("done ")) {
+            TaskList.completeTask(str.substring(5));
+        } else if (str.startsWith("todo ")) {
+            TaskList.add(str.substring(5), "TODO");
+        } else if (str.startsWith("deadline ")) {
+            TaskList.add(str.substring(9), "DEADLINE");
+        } else if (str.startsWith("event ")) {
+            TaskList.add(str.substring(6), "EVENT");
+        } else {
+            handle(str);
+        }
+    }
+
+    /**
      * The running sequence for Virushade.
      */
     public static void run() {
@@ -53,18 +92,8 @@ public class Virushade {
 
             if (str.equals("bye")) {
                 break;
-            } else if (str.equals("list")) {
-                TaskList.list();
-            } else if (str.startsWith("done ")) {
-                TaskList.completeTask(str.substring(5));
-            } else if (str.startsWith("todo ")) {
-                TaskList.add(str.substring(5), "TODO");
-            } else if (str.startsWith("deadline ")) {
-                TaskList.add(str.substring(9), "DEADLINE");
-            } else if (str.startsWith("event ")) {
-                TaskList.add(str.substring(6), "EVENT");
             } else {
-                TaskList.add(str, "");
+                assignTask(str);
             }
 
             lineBreak();

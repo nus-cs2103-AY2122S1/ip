@@ -1,12 +1,20 @@
-Test add regular Task
+Test Check if none of keywords added.
+todo
+event
+deadline
 todo Test add todo task
 deadline Test add deadline task /by now
 event Test add event task /at now
 deadline Test slashPartition without space/by now
 list
+done
+done 0.5
+done LOL THIS AIN'T NO INTEGER
 done 2
 done 3
 done 4
+done 10
 done -1
+list
 bye
-Check if exit
+Check if already Exit.
