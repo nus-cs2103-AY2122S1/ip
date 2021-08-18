@@ -1,54 +1,113 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    static int cnt = 1;
+    private static List<Task> list = new ArrayList<>();
+
+    private static void greet() {
+        System.out.println("Hello! I'm Duke created by Tianyue\n" +
+                "What can I do for you?");
+    }
+
+    private static void bye() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private static void addTask(Task task) {
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("  " + task);
+        if (list.size() == 1) {
+            System.out.println("Now you have 1 task in the list.");
+        } else {
+            System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+        }
+    }
+
+    private static void list() {
+        if (list.isEmpty()) {
+            System.out.println("You have no task for now.");
+            return;
+        }
+
+        System.out.println("Here are the tasks in your list:");
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(String.format("%d. %s",
+                    i + 1, list.get(i)));
+        }
+    }
+
+    private static void setAsDone(int index) {
+        list.get(index - 1).maskAsDone();
+
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("  " + list.get(index - 1));
+    }
 
     public static void main(String[] args) {
+        greet();
+
         Scanner scanner = new Scanner(System.in);
-
-        Task[] list = new Task[100];
-        System.out.println("Hello! I'm Duke created by Tianyue.\n" +
-                "What can I do for you?");
-
-
         String text = scanner.nextLine();
 
 
         while(!text.isEmpty()) {
-            if (text.contains("done")) {
-                System.out.println("Nice! I've marked this task as done: ");
+
+
+            //mark as done
+            if (text.startsWith("done")) {
                 char last_digit = text.charAt(text.length() - 1);
                 int index = Character.getNumericValue(last_digit);
-
-                list[index - 1].maskAsDone();
-                System.out.println("[X] " + list[index - 1].description);
+                setAsDone(index);
                 text = scanner.nextLine();
             }
 
+            //list
             else if (text.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-
-                for (int i = 0; i < cnt - 1; i++) {
-                    System.out.println(i + 1 + "." + list[i].toString());
-                }
-
+                list();
                 text = scanner.nextLine();
             }
 
+            //exit program
             else if (text.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                bye();
                 break;
             }
 
+            //add new task
             else {
-                System.out.println("added: " + text);
-                Task t = new Task(text);
-                list[cnt - 1] = t;
-                cnt++;
+                Task newTask = null;
+                if (text.contains("deadline")) {
+                    int istart = text.indexOf(" ");
+                    int iend = text.indexOf("/");
+                    String description = text.substring(istart , iend);
+                    String date = text.substring(iend + 4);
+                    newTask = new Deadline(description, date);
+                }
+
+                else if (text.contains("event")) {
+                    int istart = text.indexOf(" ");
+                    int iend = text.indexOf("/");
+                    String description = text.substring(istart , iend);
+                    String date = text.substring(iend + 4);
+                    newTask = new Event(description, date);
+                }
+
+                else if (text.contains("todo")) {
+                    int istart = text.indexOf(" ");
+                    String description = text.substring(istart);
+                    newTask = new Todo(description);
+                }
+
+                list.add(newTask);
+                addTask(newTask);
+
                 text = scanner.nextLine();
+
             }
-
-
         }
     }
+
+
 }
