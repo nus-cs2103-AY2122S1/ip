@@ -10,52 +10,63 @@ public class Duke {
         Scanner myObj = new Scanner(System.in);
         String command;
         TaskList tasks = TaskList.createTaskList();
-
-        while (true) {
+        boolean running = true;
+        while (running) {
             command = myObj.nextLine();
             String[] commandSplit = command.split(" ");
             String firstCommand = commandSplit[0];
             try {
-                if (command.equals("bye")) {
-                    System.out.println("Goodbye!");
-                    break;
-                } else if (commandSplit[0].equals("done") && Duke.isInteger(commandSplit[1])) {
-                    int taskIndex = Integer.parseInt(commandSplit[1]);
-                    try {
-                        tasks.markTaskDone(taskIndex);
-                        String task = tasks.getTask(taskIndex);
-                        System.out.println("Nice! I've marked this task as done: ");
-                        System.out.println(task);
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("☹ OOPS!!! The number you gave is out of range!");
-                    }
-                } else if (firstCommand.equals("deadline") || firstCommand.equals("todo") || firstCommand.equals("event") ) {
-                    String date = Duke.findDateInCommand(commandSplit, firstCommand);
-                    String taskDesc = Duke.findTaskDescription(commandSplit);
-                    String aOrAn = firstCommand.equals("event") ? "an" : "a";
-                    if (taskDesc.equals("")) {
-                        throw new DukeException("☹ OOPS!!! The description of " + aOrAn + " " + firstCommand + " cannot be empty.");
-                    } else if (date.equals("") && !firstCommand.equals("todo")) {
-                        throw new DukeException("☹ OOPS!!! The date of " + aOrAn + " " + firstCommand + " cannot be empty.");
-                    } else {
-                        tasks.addTask(taskDesc, convertToTaskType(firstCommand), date);
-                        System.out.println("Got it. I've added this task: ");
-                        System.out.println(tasks.getTask(tasks.getTasksLength()));
-                        System.out.println("Now you have " + tasks.getTasksLength() + " tasks in the list.");
-                    }
-                } else if (firstCommand.equals("delete") && Duke.isInteger(commandSplit[1])) {
-                    try {
-                        tasks.deleteTask(Integer.parseInt(commandSplit[1]));
-                        System.out.println("Noted. I've removed this task: ");
-                        System.out.println("Now you have " + tasks.getTasksLength() + " tasks in the list.");
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("☹ OOPS!!! Index out of range!");
-                    }
-
-                } else if (command.equals("list")) {
-                    tasks.listTasks();
-                } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                switch(firstCommand) {
+                    case "bye":
+                        System.out.println("Goodbye!");
+                        running = false;
+                        break;
+                    case "done":
+                        try {
+                            int taskIndex = Integer.parseInt(commandSplit[1]);
+                            tasks.markTaskDone(taskIndex);
+                            String task = tasks.getTask(taskIndex);
+                            System.out.println("Nice! I've marked this task as done: ");
+                            System.out.println(task);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("☹ OOPS!!! The number you gave is out of range!");
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("☹ OOPS!!! Put a number after 'done'!");
+                        }
+                        break;
+                    case "deadline":
+                    case "todo":
+                    case "event":
+                        String date = Duke.findDateInCommand(commandSplit, firstCommand);
+                        String taskDesc = Duke.findTaskDescription(commandSplit);
+                        String aOrAn = firstCommand.equals("event") ? "an" : "a";
+                        if (taskDesc.equals("")) {
+                            throw new DukeException("☹ OOPS!!! The description of " + aOrAn + " " + firstCommand + " cannot be empty.");
+                        } else if (date.equals("") && !firstCommand.equals("todo")) {
+                            throw new DukeException("☹ OOPS!!! The date of " + aOrAn + " " + firstCommand + " cannot be empty.");
+                        } else {
+                            tasks.addTask(taskDesc, convertToTaskType(firstCommand), date);
+                            System.out.println("Got it. I've added this task: ");
+                            System.out.println(tasks.getTask(tasks.getTasksLength()));
+                            System.out.println("Now you have " + tasks.getTasksLength() + " tasks in the list.");
+                        }
+                        break;
+                    case "delete":
+                        try {
+                            tasks.deleteTask(Integer.parseInt(commandSplit[1]));
+                            System.out.println("Noted. I've removed this task: ");
+                            System.out.println("Now you have " + tasks.getTasksLength() + " tasks in the list.");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("☹ OOPS!!! Index out of range!");
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("☹ OOPS!!! Put a number after 'delete'!");
+                        }
+                        break;
+                    case "list":
+                        tasks.listTasks();
+                        break;
+                    default:
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -69,6 +80,7 @@ public class Duke {
      * @param input String to check.
      * @return Whether string is an integer.
      */
+
     private static boolean isInteger(String input) {
         try {
             Integer.parseInt(input);
