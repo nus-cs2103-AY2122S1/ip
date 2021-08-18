@@ -11,66 +11,69 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private final static DukeChatBot DUKE_BOT = new DukeChatBot();
+    private final static String EXIT_KEY = "bye";
 
-    private final static TaskManager TASK_MANAGER = new TaskManager();
+    private final DukeChatBot dukeChatBot = new DukeChatBot();
+
+    private final TaskManager taskManager = new TaskManager();
 
     public static void main(String[] args) {
-        DUKE_BOT.print("Hello from\n" + LOGO);
-        DUKE_BOT.info("Hello! I'm Duke.\n\tWhat can I do for you?");
-
-        run();
-
-        DUKE_BOT.info("Bye. Hope to see you again soon!");
+        Duke duke = new Duke();
+        duke.run();
     }
 
-    public static void run() {
+    public void run() {
+        dukeChatBot.print("Hello from\n" + LOGO);
+        dukeChatBot.info("Hello! I'm Duke.\n\tWhat can I do for you?");
+
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine().trim();
-        while (!userInput.equals("bye")) {
+        while (!userInput.equals(EXIT_KEY)) {
             makeDecision(userInput);
             userInput = scanner.nextLine().trim();
         }
         scanner.close();
+
+        dukeChatBot.info("Bye. Hope to see you again soon!");
     }
 
-    public static void makeDecision(String userInput) {
+    public void makeDecision(String userInput) {
         try {
             if (userInput.equals("list")) {
-                DUKE_BOT.list(TASK_MANAGER.listTasks());
+                dukeChatBot.list(taskManager.listTasks());
 
             } else if (userInput.startsWith("done")) {
                 String taskNumberString = userInput.substring(4).trim();
-                Task completedTask = TASK_MANAGER.markTaskAsDone(taskNumberString);
-                DUKE_BOT.info("Nice! I've marked this task as done:\n\t  " + completedTask);
+                Task completedTask = taskManager.markTaskAsDone(taskNumberString);
+                dukeChatBot.info("Nice! I've marked this task as done:\n\t  " + completedTask);
 
             } else if (userInput.startsWith("delete")) {
                 String taskNumberString = userInput.substring(6).trim();
-                Task deletedTask = TASK_MANAGER.deleteTask(taskNumberString);
-                DUKE_BOT.info("Noted. I've removed this task:\n\t  " + deletedTask +
-                        "\n\tNow you have " + TASK_MANAGER.getTaskListSize() +
+                Task deletedTask = taskManager.deleteTask(taskNumberString);
+                dukeChatBot.info("Noted. I've removed this task:\n\t  " + deletedTask +
+                        "\n\tNow you have " + taskManager.getTaskListSize() +
                         " tasks in the list.");
 
             } else if (userInput.startsWith("todo")) {
-                echoTaskCreation(TASK_MANAGER.addToDoTask(userInput.substring(4)));
+                echoTaskCreation(taskManager.addToDoTask(userInput.substring(4)));
 
             } else if (userInput.startsWith("event")) {
-                echoTaskCreation(TASK_MANAGER.addEventTask(userInput.substring(5)));
+                echoTaskCreation(taskManager.addEventTask(userInput.substring(5)));
 
             } else if (userInput.startsWith("deadline")) {
-                echoTaskCreation(TASK_MANAGER.addDeadlineTask(userInput.substring(8)));
+                echoTaskCreation(taskManager.addDeadlineTask(userInput.substring(8)));
 
             } else {
-                DUKE_BOT.error("Please ensure instruction follows specified format.");
+                dukeChatBot.error("Please ensure instruction follows specified format.");
             }
 
         } catch (TaskManagerException exception) {
-            DUKE_BOT.error(exception.getLocalizedMessage());
+            dukeChatBot.error(exception.getLocalizedMessage());
         }
     }
 
-    public static void echoTaskCreation(Task task) {
-        DUKE_BOT.info("Got it. I've added this task:\n\t  " + task + "\n\tNow you have " +
-                TASK_MANAGER.getTaskListSize() + " tasks in the list.");
+    public void echoTaskCreation(Task task) {
+        dukeChatBot.info("Got it. I've added this task:\n\t  " + task + "\n\tNow you have " +
+                taskManager.getTaskListSize() + " tasks in the list.");
     }
 }
