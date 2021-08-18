@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static String EXIT_COMMAND = "bye";
+
     public static void printLine() {
         System.out.println("--------------------------------------------------");
     }
@@ -26,13 +28,21 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        Scanner myScanner = new Scanner(System.in);
+
         printLine();
         printBigIcon();
         printHello();
-        printExit();
-//        Scanner myScanner = new Scanner(System.in);
-//
-//        String userCommand = myScanner.nextLine();  // Read user input
-//        System.out.println(userCommand);
+
+        while (true) {
+            String userCommand = myScanner.nextLine();  // Read user input
+            printLine();
+            if (userCommand.equals(EXIT_COMMAND)) {
+                printExit();
+                break;
+            }
+            System.out.println(userCommand);
+            printLine();
+        }
     }
 }
