@@ -20,4 +20,15 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
+
+    /**
+     * Converts the task to a string.
+     *
+     * @return The string representation of the task.
+     */
+    @Override
+    public String toString() {
+        String status = this.getStatusIcon();
+        return String.format("[%s] %s", status, this.description);
+    }
 }
