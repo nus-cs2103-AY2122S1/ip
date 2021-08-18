@@ -5,9 +5,16 @@ public abstract class Task {
     this.done = true;
   }
 
-  public boolean getDone() {
+  public boolean getTaskDone() {
     return this.done;
   }
 
+  @Override
+  public String toString() {
+    String taskChecked = this.done ? "X" : " ";
+    return String.format("[%s] %s", taskChecked, this.getTaskDesc());
+  } 
+
   abstract String getTaskDesc();
+  abstract String getTaskSymbol();
 }

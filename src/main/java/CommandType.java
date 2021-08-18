@@ -3,7 +3,8 @@ import java.util.Map;
 
 public enum CommandType {
 
-  BYE("bye", new ByeCommand()), LIST("list", new ListCommand());
+  BYE("bye", new ByeCommand()), LIST("list", new ListCommand()),
+  DONE("done", new DoneCommand());
 
   private final Command command;
   private final String name;

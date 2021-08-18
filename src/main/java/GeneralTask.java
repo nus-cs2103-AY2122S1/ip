@@ -10,5 +10,10 @@ public class GeneralTask extends Task {
   public String getTaskDesc() {
     return description;
   }
+
+  @Override
+  String getTaskSymbol() {
+    return "G";
+  }
   
 }
