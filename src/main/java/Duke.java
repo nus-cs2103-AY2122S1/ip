@@ -49,9 +49,6 @@ public class Duke {
         // Scanner to read user inputs
         Scanner scanner = new Scanner(System.in);
 
-        // storing userInput (no longer used)
-        ArrayList<String> inputs = new ArrayList<>();
-
         while (!canExit) {
             String userInput = scanner.nextLine();
             if (userInput.equals("bye")) { // user inputs 'bye', set canExit to true and Exit
@@ -67,7 +64,6 @@ public class Duke {
                             .append(taskArrayList.get(taskArrayList.size() - 1).description); // no \n for last item
                     System.out.println(sandwich(userInputsList.toString()));
                 } else { // store userInput, tell user their input has been added
-                    inputs.add(userInput); // no longer used
                     taskArrayList.add(new Task(userInput));
                     System.out.println(sandwich("Task added: " + userInput));
                 }
