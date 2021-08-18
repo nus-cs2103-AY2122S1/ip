@@ -13,82 +13,128 @@ public class Duke {
     }
 
     private static void start() {
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
-        while (sc.hasNext()) {
-            String s = sc.nextLine();
-            if (s.equals("bye")) {
-                exit();
-                break;
-            }
-            if (s.equals("list")) {
-                list(list);
-                continue;
-            }
-            if (s.contains("done") && s.contains(" ") && s.length() > 4) {
-                int num = getNum(s);
-                if (num != -1) {
-                    done(list, num);
-                    continue;
+        try {
+            Scanner sc = new Scanner(System.in);
+            ArrayList<Task> list = new ArrayList<>();
+            System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+            while (sc.hasNext()) {
+                String s = sc.nextLine();
+                if (s.equals("bye")) {
+                    exit();
+                    break;
+                } else if (s.equals("list")) {
+                    list(list);
+                } else if (s.contains("done")) {
+                    int num = getNum(s, list.size());
+                    if (num != -1) {
+                        done(list, num);
+                    }
+                } else if (s.contains("todo")) {
+                    todo(s, list);
+                } else if (s.contains("deadline")) {
+                    deadline(s, list);
+                } else if (s.contains("event")) {
+                    event(s, list);
+                } else {
+                    invalidEntry();
                 }
             }
-            if (s.contains("todo")) {
-                // add to list & getName :")
-                    todo(s, list);
-                    continue;
-            }
-
-
-            if (s.contains("deadline") && s.contains("/by")) {
-               deadline(s, list);
-               continue;
-            }
-
-            if (s.contains("event") && s.contains("/at")) {
-                event(s, list);
-            }
+            sc.close();
+        } catch (DukeException e) {
+            e.printError();
         }
-        sc.close();
     }
 
 
 //    private static void echo(String s) {
 //        System.out.println("added: " + s);
 //    }
+    private static void invalidEntry() throws DukeInvalidException {
+        try {
+            throw new DukeInvalidException("error");
+        } catch (DukeException e) {
+            e.printError();
+        }
+    }
 
     private static void todo(String s, ArrayList<Task> list) {
-        String name = getName(s);
-        if (!name.equals("")) {
-            ToDo todo = new ToDo(name);
-            list.add(todo);
-            echo(todo, list.size());
+        try {
+            String name = getName(s);
+            if (!name.equals("")) {
+                ToDo todo = new ToDo(name);
+                list.add(todo);
+                echo(todo, list.size());
+            }
+        } catch (DukeException e) {
+            e.printError();
         }
     }
 
-    private static void deadline(String s, ArrayList<Task> list) {
-        String[] parts = s.split("/by");
-        if (parts.length == 2) {
-            String name = getName(parts[0]);
-            if (!name.equals("")) {
-                String by = parts[1];
-                Deadline deadline = new Deadline(name, by);
-                list.add(deadline);
-                echo(deadline, list.size());
+    private static void deadline(String s, ArrayList<Task> list) throws TaskNoDateTimeException, TaskNoNameException {
+        try {
+            String description = getName(s);
+            if (!description.equals("") && !description.equals("/by")
+                    && !(description.startsWith("/by") && description.endsWith(" "))
+                    && !(description.startsWith(" ") && description.endsWith("/by"))) {
+                if (description.contains("/by")) {
+                    if(description.startsWith("/by")) {
+                        throw new TaskNoNameException("error", "deadline");
+                    } else if (description.endsWith("/by")) {
+                        throw new TaskNoDateTimeException("error", "deadline");
+                    } else {
+                        String[] parts = description.split("/by");
+                        if (parts[0].equals(" ")) {
+                            throw new TaskNoNameException("error", "deadline");
+                        } else if (parts[1].equals(" ")) {
+                            throw new TaskNoDateTimeException("error", "deadline");
+                        } else {
+                            Deadline deadline = new Deadline(parts[0], parts[1]);
+                            list.add(deadline);
+                            echo(deadline, list.size());
+                        }
+                    }
+                } else {
+                    throw new TaskNoDateTimeException("error", "deadline");
+                }
+            } else {
+                throw new DukeEmptyException("error", "deadline");
             }
+        } catch (DukeException e) {
+            e.printError();
         }
     }
 
-    private static void event(String s, ArrayList<Task> list) {
-        String[] parts = s.split("/at");
-        if (parts.length == 2) {
-            String name = getName(parts[0]);
-            if (!name.equals("")) {
-                String at = parts[1];
-                Event event = new Event(name, at);
-                list.add(event);
-                echo(event, list.size());
+    private static void event(String s, ArrayList<Task> list) throws TaskNoNameException, TaskNoDateTimeException {
+        try {
+            String description = getName(s);
+            if (!description.equals("") && !description.equals("/at")
+                    && !(description.startsWith("/at") && description.endsWith(" "))
+                    && !(description.startsWith(" ") && description.endsWith("/at"))) {
+                if (description.contains("/at")) {
+                    if(description.startsWith("/at")) {
+                        throw new TaskNoNameException("error", "event");
+                    } else if (description.endsWith("/at")) {
+                        throw new TaskNoDateTimeException("error", "event");
+                    } else {
+                        String[] parts = description.split("/at");
+                        if (parts[0].equals(" ")) {
+                            throw new TaskNoNameException("error", "event");
+                        } else if (parts[1].equals(" ")) {
+                            throw new TaskNoDateTimeException("error", "event");
+                        } else {
+                            Event event = new Event(parts[0], parts[1]);
+                            list.add(event);
+                            echo(event, list.size());
+                        }
+                    }
+                } else {
+                    throw new TaskNoDateTimeException("error", "event");
+                }
+            } else {
+                throw new DukeEmptyException("error", "event");
             }
+        } catch (DukeException e) {
+            e.printError();
         }
     }
 
@@ -116,23 +162,44 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:\n" + task);
     }
 
-    private static int getNum(String s) {
-        String[] parts = s.split(" ");
-        if (parts[0].equals("done") && parts.length == 2) {
-            try {
-                int num = Integer.parseInt(parts[1]);
-                return num > 0 ? num : -1;
-            } catch (NumberFormatException nfe) {
+    private static int getNum(String s, int size) throws DoneEmptyException, TaskDoesNotExistException {
+        try {
+            if (!s.equals("done") && s.contains(" ")) {
+                String[] parts = s.split(" ", 2);
+                if (parts[0].equals("done")) {
+                    try {
+                        int num = Integer.parseInt(parts[1]);
+                        if (num <= 0 || num > size) {
+                            throw new TaskDoesNotExistException("error");
+                        } else {
+                            return num;
+                        }
+                    } catch (NumberFormatException nfe) {
+                        System.out.println("( ⚆ _ ⚆ ) OOPS!!! Please enter a valid task number!");
+                        return -1;
+                    }
+                }
                 return -1;
+            } else {
+                throw new DoneEmptyException("error");
             }
+        } catch (DukeException e) {
+            e.printError();
         }
         return -1;
     }
 
-    private static String getName(String s) {
-        String[] parts = s.split(" ", 2);
-        if (parts[0].equals("todo") || parts[0].equals("deadline") || parts[0].equals("event")) {
-            return parts[1];
+    private static String getName(String s) throws DukeEmptyException {
+        if (s.contains(" ")) {
+            String[] parts = s.split(" ", 2);
+            if (parts[0].equals("todo") || parts[0].equals("deadline") || parts[0].equals("event")) {
+                if (parts[1].equals("")) {
+                    throw new DukeEmptyException("error", parts[0]);
+                }
+                return parts[1];
+            }
+        } else {
+            throw new DukeEmptyException("error", s);
         }
         return "";
     }
