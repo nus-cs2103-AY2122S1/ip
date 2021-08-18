@@ -4,30 +4,9 @@ import core.TaskList;
 import gui.Ui;
 import tasks.Task;
 
-public class Command {
-    private String input;
-    private Ui ui;
+public abstract class Command {
 
-    public Command(String input) {
-        this.input = input;
-        ui = new Ui();
-    }
+    public abstract void execute(TaskList taskList);
 
-    public void execute(TaskList taskList) {
-        switch (input) {
-            case "bye":
-                ui.sayBye();
-                break;
-            case "list":
-                taskList.listTasks();
-                break;
-            default:
-                Task newTask = new Task(input);
-                taskList.addTask(newTask);
-        }
-    }
-
-    public boolean shouldExit() {
-        return input.equals("bye");
-    }
+    public abstract boolean shouldExit();
 }
