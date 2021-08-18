@@ -1,3 +1,7 @@
+package commands;
+
+import tasks.TaskList;
+
 public class DoneCommand extends Command {
     private int index;
 
@@ -7,28 +11,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public CommandLambda getCommandLambda() {
-        return new CommandLambda() {
-            @Override
-            public LoggableTaskList updateTaskList(LoggableTaskList loggableTaskList) {
-                TaskList newTaskList = DoneCommand.this.getNewTaskList(loggableTaskList);
-                String newLog = DoneCommand.this.getNewLog(loggableTaskList);
-                return new LoggableTaskList(newTaskList, newLog);
-            }
-        };
-    }
-
-    public String getNewLog(LoggableTaskList loggableTaskList) {
-        String log = "";
-        log += "Nice! I've marked this task as done:\n";
-        log += loggableTaskList.getTaskList().getTask(this.index);
-        return log;
-    }
-
-    public TaskList getNewTaskList(LoggableTaskList loggableTaskList) {
-        TaskList oldTaskList = loggableTaskList.getTaskList();
+    public void updateLogAndTaskList(TaskList oldTaskList) {
+        //Update TaskList
         oldTaskList.markAsDone(this.index);
-        return oldTaskList;
+        this.newTaskList = oldTaskList;
+
+        //Update log
+        this.newLog += "Nice! I've marked this task as done:\n";
+        this.newLog += oldTaskList.getTask(this.index);
     }
 
     public int getIndex() {

@@ -1,23 +1,14 @@
-public class InvalidCommand extends Command {
-    private TaskList newTaskList;
-    private String newLog;
+package commands;
 
+import tasks.TaskList;
+
+public class InvalidCommand extends Command {
     public InvalidCommand() {
         super("");
     }
 
     @Override
-    public CommandLambda getCommandLambda() {
-        return new CommandLambda() {
-            @Override
-            public LoggableTaskList updateTaskList(LoggableTaskList loggableTaskList) {
-                updateLogAndTaskList(loggableTaskList);
-                return new LoggableTaskList(newTaskList, newLog);
-            }
-        };
-    }
-    public void updateLogAndTaskList(LoggableTaskList loggableTaskList) {
-        TaskList oldTaskList = loggableTaskList.getTaskList();
+    public void updateLogAndTaskList(TaskList oldTaskList) {
         this.newTaskList = oldTaskList;
         this.newLog = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }

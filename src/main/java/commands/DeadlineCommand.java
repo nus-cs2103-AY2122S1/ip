@@ -1,7 +1,14 @@
+package commands;
+
+import exceptions.DukeException;
+import exceptions.EmptyDescriptionException;
+import exceptions.EmptyTimeException;
+import tasks.Deadline;
+import tasks.TaskList;
+import utils.Util;
+
 public class DeadlineCommand extends Command {
     private int byIndex;
-    private String newLog = "";
-    private TaskList newTaskList;
 
     public DeadlineCommand(String userInput) {
         super(userInput);
@@ -9,24 +16,12 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public CommandLambda getCommandLambda() {
-        return new CommandLambda() {
-            @Override
-            public LoggableTaskList updateTaskList(LoggableTaskList loggableTaskList) {
-                updateLogAndTaskList(loggableTaskList);
-                return new LoggableTaskList(newTaskList, newLog);
-            }
-        };
-    }
-
-    public void updateLogAndTaskList(LoggableTaskList loggableTaskList) {
-        TaskList oldTaskList = loggableTaskList.getTaskList();
-
+    public void updateLogAndTaskList(TaskList oldTaskList) {
         try {
             String description = this.getDescription();
             String time = this.getTime();
 
-            //Update TaskList
+            //Update tasks.TaskList
             Deadline deadline = new Deadline(description, time);
             oldTaskList.addTask(deadline);
             this.newTaskList = oldTaskList;
@@ -35,8 +30,8 @@ public class DeadlineCommand extends Command {
             this.newLog += Util.taskAddConfirmation(deadline, this.newTaskList.getNumTask());
 
         } catch (DukeException e) {
-            //Unchanged TaskList
-            this.newTaskList = loggableTaskList.getTaskList();
+            //Unchanged tasks.TaskList
+            this.newTaskList = oldTaskList;
             //Log out error message
             this.newLog = e.getMessage();
         }
