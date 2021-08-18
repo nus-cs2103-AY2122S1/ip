@@ -18,7 +18,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String input = sc.next();
+            String input = sc.nextLine();
             if (input.equals("bye")) {
                 System.out.printf(format, horizontalLine);
                 System.out.printf(format, "Goodbye. Have a nice day!");
