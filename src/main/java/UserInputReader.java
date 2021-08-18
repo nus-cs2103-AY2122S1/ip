@@ -3,21 +3,30 @@ import java.util.Scanner;
 /**
  * A class responsible for reading and evaluating user inputs.
  */
-public class UserInputs {
+public class UserInputReader {
+
+    private final static String KEYWORD_DONE = "done";
+    private final static String KEYWORD_LIST = "list";
+    private final static String KEYWORD_BYE = "bye";
+    private final static String KEYWORD_TODO = "todo";
+    private final static String KEYWORD_DEADLINE = "deadline";
+    private final static String KEYWORD_EVENT = "event";
+    private final static String KEYWORD_DELETE = "delete";
 
     private final TaskList taskList;
+    private final Scanner scanner;
 
-    public UserInputs() {
+    public UserInputReader(Scanner scanner) {
         taskList = new TaskList();
+        this.scanner = scanner;
     }
 
     /**
-     * Takes the user input to the chat bot.
-     * @param scanner The scanner used to scan for user input.
+     * Takes the user input to the chat bot and evaluates it.
      * @return The user input as a String.
      */
-    public String getUserInput(Scanner scanner) {
-        return scanner.nextLine();
+    public String getUserInput() {
+        return this.scanner.nextLine();
     }
 
     /**
@@ -27,45 +36,44 @@ public class UserInputs {
      * and wait for the user to input another word.
      */
     public boolean evaluateUserInput(String input) {
-        if (input.equalsIgnoreCase("bye")) {
+        if (input.equalsIgnoreCase(KEYWORD_BYE)) {
             // Ends the chat
             return false;
-        } else if (input.equalsIgnoreCase("list")) {
+        } else if (input.equalsIgnoreCase(KEYWORD_LIST)) {
             // Shows the task history
             this.taskList.listHistory();
             return true;
-        } else if (input.toLowerCase().startsWith("done")) {
+        } else if (input.toLowerCase().startsWith(KEYWORD_DONE)) {
             // Sets a task as done
-            try {
-                int index = Integer.parseInt(input.split(" ")[1]);
-                this.taskList.markTaskAsCompleted(index);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid argument to the \"done\" function.\n");
-            }
+            this.markTaskAsDone(input);
             return true;
-        } else if (input.toLowerCase().startsWith("todo")) {
+        } else if (input.toLowerCase().startsWith(KEYWORD_TODO)) {
             // Creates a todo task
-            String details = UserInputs.removeFirstWordFromString(input, Task.Type.TODO);
+            String details = UserInputReader.removeFirstWordFromString(input, Task.Type.TODO);
             if (details != null && details.trim().length() > 0) {
                 Task task = Todo.newTodoTask(details);
                 this.taskList.addTask(task);
             }
             return true;
-        } else if (input.toLowerCase().startsWith("deadline")) {
+        } else if (input.toLowerCase().startsWith(KEYWORD_DEADLINE)) {
             //Creates a deadline task
-            String details = UserInputs.removeFirstWordFromString(input, Task.Type.DEADLINE);
+            String details = UserInputReader.removeFirstWordFromString(input, Task.Type.DEADLINE);
             if (details != null && this.verifyDeadlineInput(details.trim())) {
                 Task task = Deadline.newDeadlineTask(details);
                 this.taskList.addTask(task);
             }
             return true;
-        } else if (input.toLowerCase().startsWith("event")) {
+        } else if (input.toLowerCase().startsWith(KEYWORD_EVENT)) {
             // Creates an event task
-            String details = UserInputs.removeFirstWordFromString(input, Task.Type.EVENT);
+            String details = UserInputReader.removeFirstWordFromString(input, Task.Type.EVENT);
             if (details != null && this.verifyEventInput(details.trim())) {
                 Task task = Event.newEventTask(details);
                 this.taskList.addTask(task);
             }
+            return true;
+        } else if (input.toLowerCase().startsWith(KEYWORD_DELETE)) {
+            // Sets a task as done
+            this.deleteATask(input);
             return true;
         }
         // Unrecognised input
@@ -82,12 +90,12 @@ public class UserInputs {
      */
     public boolean verifyDeadlineInput(String input) {
         if (!input.contains("-by")) {
-            UserInputs.printErrorMessage(Task.Type.DEADLINE);
+            UserInputReader.printErrorMessage(Task.Type.DEADLINE);
             return false;
         }
         String[] inputParts = input.split(" -by ");
         if (inputParts.length != 2) {
-            UserInputs.printErrorMessage(Task.Type.DEADLINE);
+            UserInputReader.printErrorMessage(Task.Type.DEADLINE);
             return false;
         }
         return true;
@@ -102,15 +110,45 @@ public class UserInputs {
      */
     public boolean verifyEventInput(String input) {
         if (!input.contains("-at")) {
-            UserInputs.printErrorMessage(Task.Type.EVENT);
+            UserInputReader.printErrorMessage(Task.Type.EVENT);
             return false;
         }
         String[] inputParts = input.split(" -at ");
         if (inputParts.length != 2 || inputParts[0].trim().length() == 0 || inputParts[1].trim().length() == 0) {
-            UserInputs.printErrorMessage(Task.Type.EVENT);
+            UserInputReader.printErrorMessage(Task.Type.EVENT);
             return false;
         }
         return true;
+    }
+
+    /**
+     * Marks a task as done based on the user's input after verifying that the user input is valid.
+     * @param input The user's input.
+     */
+    public void markTaskAsDone(String input) {
+        try {
+            int index = Integer.parseInt(input.split(" ", 2)[1].trim());
+            this.taskList.markTaskAsCompleted(index);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid argument to the \"done\" function.\n");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("No argument supplied to the \"done\" function.\n");
+        }
+    }
+
+    /**
+     * Removes a task based on the user's input after verifying that the user input is valid..
+     * @param input The user's input.
+     */
+    public void deleteATask(String input) {
+        try {
+            int index = Integer.parseInt(input.split(" ", 2)[1].trim());
+            this.taskList.removeTask(index);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid argument to the \"delete\" function.\n");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("No argument supplied to the \"delete\" function.\n");
+        }
     }
 
     /**
@@ -135,7 +173,7 @@ public class UserInputs {
         try {
             return string.split(" ", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            UserInputs.printErrorMessage(type);
+            UserInputReader.printErrorMessage(type);
             return null;
         }
     }

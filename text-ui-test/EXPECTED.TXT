@@ -10,27 +10,27 @@ What can I help you with?
 
 Got it! This task has been added:
 [T][] Borrow book
-You currently have 1 uncompleted tasks remaining.
+You currently have 1 tasks in your list with 1 uncompleted tasks remaining.
 
 Got it! This task has been added:
 [D][] Return book (by: Sunday)
-You currently have 2 uncompleted tasks remaining.
+You currently have 2 tasks in your list with 2 uncompleted tasks remaining.
 
 Got it! This task has been added:
 [E][] Birthday (at: Monday 1400)
-You currently have 3 uncompleted tasks remaining.
+You currently have 3 tasks in your list with 3 uncompleted tasks remaining.
 
 congratulations! This task has been completed:
 [T][X] Borrow book
-You currently have 2 uncompleted tasks remaining.
+You currently have 3 tasks in your list with 2 uncompleted tasks remaining.
 
 congratulations! This task has been completed:
 [E][X] Birthday (at: Monday 1400)
-You currently have 1 uncompleted tasks remaining.
+You currently have 3 tasks in your list with 1 uncompleted tasks remaining.
 
 Got it! This task has been added:
 [E][] birthday (at: 365 days later)
-You currently have 2 uncompleted tasks remaining.
+You currently have 4 tasks in your list with 2 uncompleted tasks remaining.
 
 This task has already been completed.
 
@@ -43,9 +43,15 @@ Here are the tasks in your list:
 -----------------------------------------------------------
 This entry does not exist.
 
-Invalid input. Please try again.
+This entry does not exist.
 
 Invalid argument to the "done" function.
+
+Invalid argument to the "done" function.
+
+No argument supplied to the "done" function.
+
+Invalid input. Please try again.
 
 Invalid format. Please enter the deadline format as below:
 deadline {Deadline name} -by {Date to be completed by}
@@ -97,11 +103,11 @@ event {Event name} -at {Date of event}
 
 Got it! This task has been added:
 [D][] Hw (by: mon)
-You currently have 3 uncompleted tasks remaining.
+You currently have 5 tasks in your list with 3 uncompleted tasks remaining.
 
 Got it! This task has been added:
 [E][] lunch (at: tmrw)
-You currently have 4 uncompleted tasks remaining.
+You currently have 6 tasks in your list with 4 uncompleted tasks remaining.
 
 Invalid format. Please enter the deadline format as below:
 deadline {Deadline name} -by {Date to be completed by}
@@ -138,6 +144,55 @@ todo {todo name}
 
 Got it! This task has been added:
 [T][] Test
-You currently have 5 uncompleted tasks remaining.
+You currently have 7 tasks in your list with 5 uncompleted tasks remaining.
+
+Invalid argument to the "delete" function.
+
+Invalid argument to the "delete" function.
+
+No argument supplied to the "delete" function.
+
+-----------------------------------------------------------
+Here are the tasks in your list:
+1. [T][X] Borrow book
+2. [D][] Return book (by: Sunday)
+3. [E][X] Birthday (at: Monday 1400)
+4. [E][] birthday (at: 365 days later)
+5. [D][] Hw (by: mon)
+6. [E][] lunch (at: tmrw)
+7. [T][] Test
+-----------------------------------------------------------
+This entry does not exist.
+
+Understood. I've removed this task:
+[E][X] Birthday (at: Monday 1400)
+You currently have 6 tasks in your list with 5 uncompleted tasks remaining.
+
+Understood. I've removed this task:
+[D][] Hw (by: mon)
+You currently have 5 tasks in your list with 4 uncompleted tasks remaining.
+
+Understood. I've removed this task:
+[E][] lunch (at: tmrw)
+You currently have 4 tasks in your list with 3 uncompleted tasks remaining.
+
+-----------------------------------------------------------
+Here are the tasks in your list:
+1. [T][X] Borrow book
+2. [D][] Return book (by: Sunday)
+3. [E][] birthday (at: 365 days later)
+4. [T][] Test
+-----------------------------------------------------------
+Understood. I've removed this task:
+[T][] Test
+You currently have 3 tasks in your list with 2 uncompleted tasks remaining.
+
+-----------------------------------------------------------
+Here are the tasks in your list:
+1. [T][X] Borrow book
+2. [D][] Return book (by: Sunday)
+3. [E][] birthday (at: 365 days later)
+-----------------------------------------------------------
+This entry does not exist.
 
 Bye!! Hope to see you again!!

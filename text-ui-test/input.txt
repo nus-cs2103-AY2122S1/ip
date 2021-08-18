@@ -4,11 +4,14 @@ event Birthday -at Monday 1400
 done 1
 done 3
 event birthday -at 365 days later
-done 1
+done   1
 list
+done 0
 done 7
-blah
+done 2.0
 done t
+done
+blah
 deadline blah
 event blah
 deadline blah -b blah
@@ -39,4 +42,16 @@ deadline
 event
 todo
 todo   Test
+delete 2.2
+delete a
+delete
+list
+delete 80
+delete 3
+DElete 4
+delete   4
+list
+delete 4
+list
+delete 0
 bye

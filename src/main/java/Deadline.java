@@ -1,4 +1,3 @@
-import java.util.Arrays;
 
 /**
  * A class to abstract a deadline which is a type of task with a date

@@ -9,6 +9,9 @@ import java.util.Scanner;
  */
 public class Duke {
 
+    /**
+     * Error messages
+     */
     public static final String DEADLINE_FORMAT = "deadline {Deadline name} -by {Date to be completed by}";
     public static final String EVENT_FORMAT = "event {Event name} -at {Date of event}";
     public static final String TODO_FORMAT = "todo {todo name}";
@@ -21,10 +24,10 @@ public class Duke {
     public static void main(String[] args) {
         startUp();
         Scanner scanner = new Scanner(System.in);
-        UserInputs userInput = new UserInputs();
+        UserInputReader userInputReader = new UserInputReader(scanner);
         while (true) {
-            String input = userInput.getUserInput(scanner);
-            if (!userInput.evaluateUserInput(input)) {
+            String input = userInputReader.getUserInput();
+            if (!userInputReader.evaluateUserInput(input)) {
                 endChat();
                 break;
             }
