@@ -7,7 +7,7 @@ public class BobbyBot {
     private static final List<Task> tasks = new ArrayList<Task>();
     private static final String div = "____________________________________________________________\n";
     private static int totalTasks = 0;
-    private static final String[] acceptedCommands = {"bye", "list", "done", "deadline", "todo", "event", "delete"};
+    private static final BotCommand[] acceptedCommands = BotCommand.values();
 
     public BobbyBot() {
         System.out.println(div + "Hello! I'm Bobby\nWhat can I do for you?\n" + div);
@@ -16,38 +16,34 @@ public class BobbyBot {
     /**
      * Perform command based on String user input
      * @param userInput string command for chatbot
-     * @throws InvalidCommandException Command not one of the acceptedCommands
      * @throws InvalidArgumentException Invalid or no arguments given
      * @throws TooManyArgumentsException Too many /by or /at connectors
      */
-    public void doCommand(String userInput) throws InvalidCommandException,
-            InvalidArgumentException, TooManyArgumentsException {
+    public void doCommand(String userInput) throws InvalidArgumentException, TooManyArgumentsException {
         List<String> userInputList = new LinkedList<>(Arrays.asList(userInput.split(" ")));
-        String command = userInputList.get(0);
+        BotCommand command = BotCommand.valueOf(userInputList.get(0).toUpperCase());
         String description;
         String[] userInputArgs;
-        if (!commandIsValid(command)) {
-            throw new InvalidCommandException("Invalid Command!");
-        }
+
 
         switch (command) {
-        case "bye":
+        case BYE:
             sayBye();
             break;
-        case "list":
+        case LIST:
             printList();
             break;
-        case "done":
+        case DONE:
             markAsDone(Integer.parseInt(userInputList.get(1)));
             break;
-        case "delete":
+        case DELETE:
             // check delete argument
             if (!isNumeric(userInputList.get(1))) {
                 throw new InvalidArgumentException("Delete argument is not numeric");
             }
             deleteTask(Integer.parseInt(userInputList.get(1)));
             break;
-        case "todo":
+        case TODO:
             userInputList.remove(0);
             if (userInputList.size() == 0) {
                 throw new InvalidArgumentException("No arguments submitted for todo");
@@ -55,7 +51,7 @@ public class BobbyBot {
             description = String.join(" ", userInputList);
             createToDo(description);
             break;
-        case "deadline":
+        case DEADLINE:
             userInputList.remove(0);
             if (userInputList.size() == 0) {
                 throw new InvalidArgumentException("No arguments submitted for deadline");
@@ -71,7 +67,7 @@ public class BobbyBot {
             String by = userInputArgs[1];
             createDeadline(description, by);
             break;
-        case "event":
+        case EVENT:
             userInputList.remove(0);
             if (userInputList.size() == 0) {
                 throw new InvalidArgumentException("No arguments submitted for event");
@@ -89,23 +85,6 @@ public class BobbyBot {
             createEvent(description, at);
             break;
         }
-    }
-
-    /**
-     * Checks if command is valid
-     * @param command command for chatbot eg. (list,delete,todo..)
-     * @return boolean if command is valid
-     */
-    private boolean commandIsValid(String command) {
-        //check valid command
-        boolean commandIsValid = false;
-        for (String acceptedCommand : acceptedCommands) {
-            if (acceptedCommand.equals(command)) {
-                commandIsValid = true;
-                break;
-            }
-        }
-        return commandIsValid;
     }
 
     /**

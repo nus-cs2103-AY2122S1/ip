@@ -14,7 +14,7 @@ public class Main {
             String userInput = sc.nextLine();
             try {
                 chatbot.doCommand(userInput);
-            } catch (InvalidCommandException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(div + "OOPS!!! I'm sorry but I don't know what that mean :-(\n" + div);
             } catch (InvalidArgumentException e) {
                 System.out.println(div + "You did not specify the correct details for this command\n" + div);
