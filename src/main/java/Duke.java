@@ -12,7 +12,7 @@ public class Duke {
     }
 
     /**
-     * This method runs the program indefinitely till user types in "bye"
+     * This method runs the program indefinitely till user types in "bye".
      */
     public static void runProgram() {
         String logo = " ____        _        \n"
@@ -24,15 +24,19 @@ public class Duke {
         System.out.println("What can I do for you?");
         boolean run = true;
         Scanner scanner = new Scanner(System.in);
+        TaskManager taskManager = new TaskManager();
 
-        while(run) {
+        while (run) {
             // wait to read in the user's input
             String input = scanner.nextLine();
             // Ensures that all bye would end the program.
             if (input.toUpperCase().equals("BYE")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 run = false;
-            } else {
+            } else if (input.toUpperCase().equals("LIST")) {
+                taskManager.listAll();
+            }else {
+                taskManager.addTask(new Task(input));
                 System.out.println(input);
             }
         }
