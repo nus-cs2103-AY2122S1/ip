@@ -22,11 +22,25 @@ public class Duke {
         greeting.add("Hello! I'm Alice, your personal assistant");
         greeting.add("What can I do for you?");
         System.out.println(greeting);
+        System.out.print("> ");
         String input = sc.nextLine();
+        Dialog list = Dialog.generate("list");
         while (!input.equals("bye")) {
-            Dialog local = Dialog.generate(input);
-            local.add(input);
-            System.out.println(local);
+            if (input.equals("list")) {
+                System.out.println(list);
+            } else {
+                Dialog local;
+                if (Dialog.have(input)) {
+                    // avoid generating duplicated dialog if the user input the same command
+                    local = Dialog.generate(input + Math.random());
+                } else {
+                    local = Dialog.generate(input);
+                }
+                local.add("added: " + input);
+                list.add((list.length() + 1) + ". " + input);
+                System.out.println(local);
+            }
+            System.out.print("> ");
             input = sc.nextLine();
         }
 

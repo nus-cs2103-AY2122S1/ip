@@ -13,6 +13,14 @@ public class Dialog {
         this.sentences.add(sentence);
     }
 
+    public int length() {
+        return sentences.size();
+    }
+
+    public static boolean have(String id) {
+        return archive.containsKey(id);
+    }
+
     public static Dialog generate(String id) {
         if (archive.containsKey(id)) {
             return archive.get(id);
