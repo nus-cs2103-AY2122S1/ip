@@ -3,7 +3,7 @@
  *
  * @author felix-ong
  */
-public class Task {
+public abstract class Task {
     /** Description of the task. */
     protected String description;
     /** Completion status of the task. */
@@ -14,7 +14,7 @@ public class Task {
      *
      * @param description The description of the task.
      */
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -25,7 +25,7 @@ public class Task {
      * @return "X" if task is done; " " if task is not done.
      */
     private String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (this.isDone ? "X" : " "); // mark done task with X
     }
 
     /**
