@@ -10,30 +10,41 @@ public class Display {
     }
 
     public static void response(String userReply) {
-        String[] arrReply = processReply(userReply);
+        try {
+            String[] arrReply = processReply(userReply);
+            System.out.println(line);
+            switch(arrReply[0]) {
+                case "list":
+                    Task.listReply();
+                    break;
+                case "done":
+                    Task.done(arrReply[1]);
+                    break;
+                case "deadline":
+                    Deadline dead = new Deadline(arrReply[1]);
+                    Task.addReply(dead);
+                    break;
+                case "event":
+                    Event event = new Event(arrReply[1]);
+                    Task.addReply(event);
+                    break;
+                case "todo":
+                    if (arrReply.length == 1) {
+                        throw new SkeltalException("Oh no the description of todo cannot be empty!");
+                    }
+                    ToDo todo = new ToDo(arrReply[1]);
+                    Task.addReply(todo);
+                    break;
+                default:
+                    throw new SkeltalException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (SkeltalException spook) {
+            System.out.println(spook.getMessage());
+        }
 
         System.out.println(line);
-        switch(arrReply[0]) {
-            case "list":
-                Task.listReply();
-                break;
-            case "done":
-                Task.done(arrReply[1]);
-                break;
-            case "deadline":
-                Deadline dead = new Deadline(arrReply[1]);
-                Task.addReply(dead);
-                break;
-            case "event":
-                Event event = new Event(arrReply[1]);
-                Task.addReply(event);
-                break;
-            case "todo":
-                ToDo todo = new ToDo(arrReply[1]);
-                Task.addReply(todo);
-                break;
-        }
-        System.out.println(line);
+
+
 
     }
 

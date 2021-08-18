@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Skeltal {
     static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SkeltalException {
 
         Display.introduction();
 
