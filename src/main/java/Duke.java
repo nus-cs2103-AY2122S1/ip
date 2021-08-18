@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     public enum DukeAction {
-        EXIT, PRINT_LIST, MARK_DONE, TODO, DEADLINE, EVENT
+        EXIT, PRINT_LIST, MARK_DONE, TODO, DEADLINE, EVENT, DELETE
     }
 
     // Constant Strings
@@ -18,6 +18,7 @@ public class Duke {
     private static final String DeadlineWord_By = " /by ";
     private static final String EventWord = "event ";
     private static final String EventWord_At = " /at ";
+    private static final String DeleteWord = "delete ";
 
     private static ArrayList<Task> taskList;
 
@@ -58,6 +59,13 @@ public class Duke {
                         t.isDone = true;
                         PrintWithIndent("Nice! I've marked this task as done: ");
                         PrintWithIndent("  " + t);
+                        break;
+                    case DELETE:
+                        int deleteIndex = Integer.parseInt(userInput.substring(DeleteWord.length())) - 1;
+                        PrintWithIndent("Noted. I've removed this task: ");
+                        PrintWithIndent("  " + taskList.get(deleteIndex));
+                        taskList.remove(deleteIndex);
+                        PrintWithIndent("Now you have " + taskList.size() + " tasks in the list.");
                         break;
                     case TODO:
                         ToDo toDo = new ToDo(userInput);
@@ -121,6 +129,9 @@ public class Duke {
         else if (IsMarkDown(s)) {
             return DukeAction.MARK_DONE;
         }
+        else if (IsDelete(s)) {
+            return DukeAction.DELETE;
+        }
         else if (s.startsWith(ToDoWord)) {
             if (s.length() == ToDoWord.length())
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -132,6 +143,9 @@ public class Duke {
         }
         else if (s.startsWith(EventWord)) {
             return DukeAction.EVENT;
+        }
+        else if (s.equals("done") || s.equals("delete")) {
+            throw new DukeException("OOPS!!! " + s + " should be followed with a whitespace and a task index.");
         }
         else if (s.equals("todo") || s.equals("deadline")) {
             throw new DukeException("OOPS!!! The description of a " + s + " cannot be empty.");
@@ -155,6 +169,22 @@ public class Duke {
                             "Now you have " + taskList.size() + " tasks in the list.");
             } catch (NumberFormatException e) {
                 throw new DukeException("OOPS!!! done should be followed with a number.");
+            }
+        }
+        return false;
+    }
+
+    private static boolean IsDelete(String s) throws DukeException {
+        if (s.length() > DeleteWord.length() && s.startsWith(DeleteWord)) {
+            try {
+                int taskIndex = Integer.parseInt(s.substring(DeleteWord.length()));
+                if (taskIndex >= 1 && taskIndex <= taskList.size())
+                    return true;
+                else
+                    throw new DukeException("OOPS!!! The task index is out of range.\n" + LIndent +
+                            "Now you have " + taskList.size() + " tasks in the list.");
+            } catch (NumberFormatException e) {
+                throw new DukeException("OOPS!!! delete should be followed with a number.");
             }
         }
         return false;
