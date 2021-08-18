@@ -35,6 +35,12 @@ public class Duke {
         this.isActive = false;
     }
 
+    private void addTask(Task task){
+        this.taskList.add(task);
+        String msg = "added: " + task.showDescription();
+        printMessageWithFormat(msg);
+    }
+
     private void markTaskAsDone(int taskNumber){
         taskList.get(taskNumber-1).markDone();
         String msg = "Nice! I've marked this task as done:\n   ";
@@ -72,6 +78,21 @@ public class Duke {
                 case DONE:
                     int taskNumber = Integer.parseInt(command.split(" ")[1]);
                     markTaskAsDone(taskNumber);
+                    break;
+
+                case EVENT:
+                    String eventDescription = "";
+                    Task event = new Event(eventDescription, "");
+                    break;
+
+                case DEADLINE:
+                    String deadlineDescription = "";
+                    Task deadline = new Deadline(deadlineDescription, "");
+                    break;
+
+                case TODO:
+                    String toDoDescription = "";
+                    Task toDo = new ToDo(toDoDescription);
                     break;
             }
         }
