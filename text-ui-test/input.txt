@@ -1,12 +1,15 @@
 todo Homework
-deadline Essay
-deadline Essay /by Tuesday Night
-event examination /at Friday
-todo Workout
+blah
+todo
+deadline hello
+deadline Essay /by Tonight
+essay
+event
+event exam
+event exam /at Saturday
 list
+done
 done 5
-done hello
-done 2
-done 4
+done 1
 list
 bye

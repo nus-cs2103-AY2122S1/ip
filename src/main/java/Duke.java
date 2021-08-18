@@ -123,16 +123,16 @@ public class Duke {
                         try {
                             int listIndex = Integer.parseInt(input[i]);
                             if (listIndex <= 0 || listIndex > taskList.size()) {
-                                System.out.println("Invalid Argument: " + listIndex + "; Index out of bounds!");
+                                System.out.println("Invalid Argument: Index " + listIndex + " is out of bounds!");
                             } else {
                                 taskList.get(listIndex - 1).markAsDone();
                             }
                         } catch (NumberFormatException e) {
-                            System.out.println(e + ": Argument must be an Integer!");
+                            System.out.println("Argument must be an Integer!");
                         }
                     }
                 } else {
-                    System.out.println("Must have an argument!");
+                    System.out.println("Please indicate a task to mark as done");
                 }
 
             } else {
@@ -143,7 +143,7 @@ public class Duke {
                 switch (command) {
                     case "todo" : {
                         if (input.length <= 1) {
-                            System.out.println("Must have an argument!");
+                            System.out.println("The description of a todo cannot be empty!");
                             break;
                         }
 
@@ -152,13 +152,13 @@ public class Duke {
                     }
                     case "deadline" : {
                         if (input.length <= 1) {
-                            System.out.println("Must have an argument!");
+                            System.out.println("The description of a deadline cannot be empty!");
                             break;
                         }
 
                         String[] tmp = input[1].split(" /by ", 2);
                         if (tmp.length <= 1) {
-                            System.out.println("Must have a due date");
+                            System.out.println("A deadline must have a due date!");
                             break;
                         }
 
@@ -167,13 +167,13 @@ public class Duke {
                     }
                     case "event" : {
                         if (input.length <= 1) {
-                            System.out.println("Must have an argument!");
+                            System.out.println("The description of an event cannot be empty!");
                             break;
                         }
 
                         String[] tmp = input[1].split(" /at ", 2);
                         if (tmp.length <= 1) {
-                            System.out.println("Must have a date");
+                            System.out.println("An event must have a time!");
                             break;
                         }
 
@@ -181,7 +181,7 @@ public class Duke {
                         break;
                     }
                     default: {
-                        System.out.println("Invalid input");
+                        System.out.println("I don't know what that means :(");
                     }
                 }
 
