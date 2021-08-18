@@ -29,27 +29,32 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean end = false;
         while (!end) {
-            String input = sc.nextLine();
-            String[] inputs = input.split(" ", 2);
-            String cmd = inputs[0];
-            String description = inputs.length > 1 ? inputs[1] : "";
-            System.out.println(separator);
+            try {
+                String input = sc.nextLine();
+                String[] inputs = input.split(" ", 2);
+                String cmd = inputs[0];
+                String description = inputs.length > 1 ? inputs[1] : "";
+                System.out.println(separator);
 
-            if (cmd.equals(endCmd)) {
-                System.out.println("Bye bye! See you again soon!");
-                end = true;
-            } else if (cmd.equals(listCmd)) {
-                displayList();
-            } else if (cmd.equals(doneCmd)) {
-                markTaskDone(Integer.parseInt(description));
-            } else if (cmd.equals(todoCmd)) {
-                addTask(todoCmd, description);
-            } else if (cmd.equals(deadlineCmd)) {
-                addTask(deadlineCmd, description);
-            } else if (cmd.equals(eventCmd)) {
-                addTask(eventCmd, description);
+                if (cmd.equals(endCmd)) {
+                    System.out.println("Bye bye! See you again soon!");
+                    end = true;
+                } else if (cmd.equals(listCmd)) {
+                    displayList();
+                } else if (cmd.equals(doneCmd)) {
+                    markTaskDone(Integer.parseInt(description));
+                } else if (cmd.equals(todoCmd)) {
+                    addTask(todoCmd, description);
+                } else if (cmd.equals(deadlineCmd)) {
+                    addTask(deadlineCmd, description);
+                } else if (cmd.equals(eventCmd)) {
+                    addTask(eventCmd, description);
+                }
+            } catch (DukeException e) {
+                System.out.println(e.toString());
+            } finally {
+                System.out.println(separator);
             }
-            System.out.println(separator);
         }
     }
 
@@ -62,16 +67,30 @@ public class Duke {
         }
     }
 
-    private static void addTask(String taskType, String description) {
+    private static void addTask(String taskType, String details) throws DukeException {
         Task task;
         if (taskType == "todo") {
-            task = new ToDo(description);
+            task = new ToDo(details);
         } else if (taskType == "deadline") {
-            String[] inputs = description.split(" /by ", 2);
-            task = new Deadline(inputs[0], inputs[1]);
+            int position = details.indexOf("/by");
+            String description, by;
+            if (position >= 0) {
+                description = details.substring(0, position);
+                by = details.substring(position + 3);
+            } else {
+                throw new DukeException("Please indicate the deadline eg \"/by Sunday\" ");
+            }
+            task = new Deadline(description.trim(), by.trim());
         } else if (taskType == "event") {
-            String[] inputs = description.split(" /at ", 2);
-            task = new Event(inputs[0], inputs[1]);
+            int position = details.indexOf("/at");
+            String description, at;
+            if (position >= 0) {
+                description = details.substring(0, position);
+                at = details.substring(position + 3);
+            } else {
+                throw new DukeException("Please indicate the event time eg \"/at Mon 2-4pm\" ");
+            }
+            task = new Event(description.trim(), at.trim());
         } else {
             return;
         }
