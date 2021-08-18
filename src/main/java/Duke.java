@@ -16,35 +16,61 @@ public class Duke {
         String input = sc.next();
         String description = sc.nextLine();
 
-        while(!input.equals("bye")) {
-            action(input, description);
+
+        while (!input.equals("bye")) {
+            try {
+                action(input, description);
+            } catch (InvalidInputException e) {
+                System.out.println(formatString(e.getMessage()));
+            }
             input = sc.next();
             description = sc.nextLine().trim();
         }
 
+
         System.out.println(formatString(EXIT_MSG));
     }
 
-    private static void action(String action, String description) {
+    private static void action(String action, String description) throws InvalidInputException{
         if (action.equals("list")) {
             System.out.print(formatString(getTaskString()));
         } else if (action.equals("done")){
             Integer index = Integer.valueOf(description) - 1;
             System.out.println(formatString(tasks.get(index).markAsDone()));
         } else if (action.equals("todo")){
-            Task newTask = new ToDo(description);
-            tasks.add(newTask);
-            System.out.println(formatString(newTask.actionString() + "\n" + getTaskCountString()));
+            if (description.isBlank()) {
+                throw new InvalidInputException("todo's description cannot be empty!");
+            } else {
+                Task newTask = new ToDo(description);
+                tasks.add(newTask);
+                System.out.println(formatString(newTask.actionString() + "\n" + getTaskCountString()));
+            }
         } else if (action.equals("deadline")){
-            String[] split = description.split("/by");
-            Task newTask = new Deadline(split[0].trim(), split[1].trim());
-            tasks.add(newTask);
-            System.out.println(formatString(newTask.actionString() + "\n" + getTaskCountString()));
+            if (description.isBlank()) {
+                throw new InvalidInputException("deadline's description cannot be empty!");
+            } else {
+                String[] split = description.split("/by", 2);
+                description = split[0];
+                String time = split[1].trim();
+
+                Task newTask = new Deadline(description, time);
+                tasks.add(newTask);
+                System.out.println(formatString(newTask.actionString() + "\n" + getTaskCountString()));
+            }
         } else if (action.equals("event")){
-            String[] split = description.split("/at");
-            Task newTask = new Event(split[0].trim(), split[1].trim());
-            tasks.add(newTask);
-            System.out.println(formatString(newTask.actionString() + "\n" + getTaskCountString()));
+            if (description.isBlank()) {
+                throw new InvalidInputException("event's description cannot be empty!");
+            } else {
+                String[] split = description.split("/at", 2);
+                description = split[0];
+                String time = split[1].trim();
+
+                Task newTask = new Event(description, time);
+                tasks.add(newTask);
+                System.out.println(formatString(newTask.actionString() + "\n" + getTaskCountString()));
+            }
+        } else {
+            throw new InvalidInputException("Invalid command");
         }
     }
 
