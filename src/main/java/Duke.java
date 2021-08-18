@@ -78,7 +78,7 @@ public class Duke {
      */
     private static void add(Task task) {
         tasks.add(task);
-        System.out.println("Alright, I've added the following task:");
-        System.out.println(tasks.get(tasks.size() - 1) + "\n");
+        System.out.println("Alright, I've added the following task:\n");
+        System.out.println(tasks.get(tasks.size() - 1) + "\nNow you have " + tasks.size() + " tasks in the list.\n");
     }
 }
