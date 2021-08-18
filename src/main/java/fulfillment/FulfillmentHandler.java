@@ -1,5 +1,8 @@
 package fulfillment;
 
+import exceptions.DukeException;
+import exceptions.InvalidCommandException;
+import exceptions.InvalidTaskNumberException;
 import io.InputHandler;
 import io.OutputHandler;
 import messages.*;
@@ -42,27 +45,31 @@ public class FulfillmentHandler {
                 userInputBody = splitUserInput[1];
             }
 
-            switch (userCommand) {
-                case "list":
-                    handleTaskList();
-                    break;
-                case "todo":
-                    handleTaskAdd(new ToDo(userInputBody));
-                    break;
-                case "deadline":
-                    handleTaskAdd(new Deadline(userInputBody));
-                    break;
-                case "event":
-                    handleTaskAdd(new Event(userInputBody));
-                    break;
-                case "done":
-                    handleTaskDone(userInputBody);
-                    break;
-                case "bye":
-                    handleBye();
-                    return;
-                default:
-                    handleTaskAdd(new Task(userInput));
+            try {
+                switch (userCommand) {
+                    case "list":
+                        handleTaskList();
+                        break;
+                    case "todo":
+                        handleTaskAdd(new ToDo(userInputBody));
+                        break;
+                    case "deadline":
+                        handleTaskAdd(new Deadline(userInputBody));
+                        break;
+                    case "event":
+                        handleTaskAdd(new Event(userInputBody));
+                        break;
+                    case "done":
+                        handleTaskDone(userInputBody);
+                        break;
+                    case "bye":
+                        handleBye();
+                        return;
+                    default:
+                        throw new InvalidCommandException();
+                }
+            } catch (DukeException e) {
+                outputHandler.writeMessage(new Message(e.getMessage()));
             }
         }
     }
@@ -85,11 +92,15 @@ public class FulfillmentHandler {
                 Task.getNumOfTasks()));
     }
 
-    private void handleTaskDone(String userInputBody) {
-        // user input is 1 greater than index.
-        int index = Integer.parseInt(userInputBody) - 1;
-        Task doneTask = Task.getTask(index);
-        doneTask.setDone();
-        outputHandler.writeMessage(new TaskDoneMessage(doneTask));
+    private void handleTaskDone(String userInputBody) throws InvalidTaskNumberException {
+        try {
+            // user input is 1 greater than index.
+            int index = Integer.parseInt(userInputBody) - 1;
+            Task doneTask = Task.getTask(index);
+            doneTask.setDone();
+            outputHandler.writeMessage(new TaskDoneMessage(doneTask));
+        } catch (NumberFormatException nfe) {
+            outputHandler.writeMessage(new Message(MessageConstants.INVALID_INTEGER_MESSAGE));
+        }
     }
 }

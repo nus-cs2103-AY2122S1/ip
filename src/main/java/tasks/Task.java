@@ -1,5 +1,7 @@
 package tasks;
 
+import exceptions.InvalidTaskNumberException;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -24,7 +26,10 @@ public class Task {
      * @param index index of task to get
      * @return task associated with index number in taskList
      */
-    public static Task getTask(int index) {
+    public static Task getTask(int index) throws InvalidTaskNumberException {
+        if (index < 0 || index >= taskList.size()) {
+            throw new InvalidTaskNumberException();
+        }
         return taskList.get(index);
     }
 

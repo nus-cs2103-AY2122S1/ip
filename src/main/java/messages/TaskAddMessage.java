@@ -8,7 +8,6 @@ package messages;
 public class TaskAddMessage extends Message {
     public TaskAddMessage(String taskText, int numOfTasks) {
         super(MessageConstants.TASK_ADD_HEADER
-                + "\n\t"
                 + taskText
                 + "\nNow you have "
                 + numOfTasks

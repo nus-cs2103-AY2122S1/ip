@@ -18,12 +18,11 @@ public class TaskListMessage extends Message {
     private String generateListMessageText(List<Task> tasks) {
         StringBuilder listMessageBuilder = new StringBuilder();
         listMessageBuilder.append(MessageConstants.TASK_LIST_HEADER);
-        listMessageBuilder.append("\n");
         for (int index = 0; index < tasks.size(); index++) {
-            if (index != 0) {
-                listMessageBuilder.append("\n");
-            }
-            listMessageBuilder.append(index + 1).append(".")
+            listMessageBuilder
+                    .append("\n")
+                    .append(index + 1)
+                    .append(".")
                     .append(tasks.get(index).toString());
         }
         return listMessageBuilder.toString();

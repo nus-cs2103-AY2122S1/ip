@@ -3,57 +3,64 @@ Hello! I'm Duke
 What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
-	[ ] test adding a task
-Now you have 1 task in the list.
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[ ] test adding a task
+
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 	[D][ ] test adding a deadline (by: today)
-Now you have 2 tasks in the list.
+Now you have 1 task in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[ ] test adding a task
-2.[D][ ] test adding a deadline (by: today)
+1.[D][ ] test adding a deadline (by: today)
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 	[E][ ] test adding an event (at: 11.15am monday 16/08/21)
-Now you have 3 tasks in the list.
+Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[ ] test adding a task
-2.[D][ ] test adding a deadline (by: today)
-3.[E][ ] test adding an event (at: 11.15am monday 16/08/21)
+1.[D][ ] test adding a deadline (by: today)
+2.[E][ ] test adding an event (at: 11.15am monday 16/08/21)
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
 	[T][ ] test adding a todo
-Now you have 4 tasks in the list.
+Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[ ] test adding a task
-2.[D][ ] test adding a deadline (by: today)
-3.[E][ ] test adding an event (at: 11.15am monday 16/08/21)
-4.[T][ ] test adding a todo
+1.[D][ ] test adding a deadline (by: today)
+2.[E][ ] test adding an event (at: 11.15am monday 16/08/21)
+3.[T][ ] test adding a todo
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-	[X] test adding a task
+	[D][X] test adding a deadline (by: today)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[X] test adding a task
-2.[D][ ] test adding a deadline (by: today)
-3.[E][ ] test adding an event (at: 11.15am monday 16/08/21)
-4.[T][ ] test adding a todo
+1.[D][X] test adding a deadline (by: today)
+2.[E][ ] test adding an event (at: 11.15am monday 16/08/21)
+3.[T][ ] test adding a todo
+____________________________________________________________
+____________________________________________________________
+☹ Task number provided is invalid. Please try another number.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[D][X] test adding a deadline (by: today)
+2.[E][ ] test adding an event (at: 11.15am monday 16/08/21)
+3.[T][ ] test adding a todo
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done:
+	[E][X] test adding an event (at: 11.15am monday 16/08/21)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
@@ -61,25 +68,55 @@ Nice! I've marked this task as done:
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[X] test adding a task
-2.[D][ ] test adding a deadline (by: today)
-3.[E][ ] test adding an event (at: 11.15am monday 16/08/21)
-4.[T][X] test adding a todo
+1.[D][X] test adding a deadline (by: today)
+2.[E][X] test adding an event (at: 11.15am monday 16/08/21)
+3.[T][X] test adding a todo
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! The description of a todo cannot be empty.
+____________________________________________________________
+____________________________________________________________
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+____________________________________________________________
+____________________________________________________________
+☹ Task number provided is invalid. Please try another number.
+____________________________________________________________
+____________________________________________________________
+☹ Task number provided is invalid. Please try another number.
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
 	[D][X] test adding a deadline (by: today)
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
-	[E][X] test adding an event (at: 11.15am monday 16/08/21)
+☹ Task number must be valid integer. eg. "done 1"
 ____________________________________________________________
 ____________________________________________________________
-Here are the tasks in your list:
-1.[X] test adding a task
-2.[D][X] test adding a deadline (by: today)
-3.[E][X] test adding an event (at: 11.15am monday 16/08/21)
-4.[T][X] test adding a todo
+☹ The description & at fields of an event are not provided. Try eg. "event <description> /at <venue>" instead.
+____________________________________________________________
+____________________________________________________________
+☹ The description & by fields of a deadline are not provided eg."deadline <description> /by <time>" instead
+____________________________________________________________
+____________________________________________________________
+☹ The format of event provided is invalid. Try "event <description> /at <venue>" instead.
+____________________________________________________________
+____________________________________________________________
+☹ The format of deadline provided is invalid. Try "deadline <description> /by <time>" instead.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+	[E][ ]  (at: 123)
+Now you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+	[E][ ] 1 (at: 2)
+Now you have 5 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+	[D][ ] 1 (by: 2)
+Now you have 6 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!

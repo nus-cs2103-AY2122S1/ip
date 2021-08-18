@@ -13,4 +13,17 @@ list
 done 2
 done 3
 list
+todo
+blah
+done 1234
+done 0
+done 1
+done xyz1
+event
+deadline
+event 1
+deadline 1
+event /at 123
+event 1 /at 2
+deadline 1 /by 2
 bye
