@@ -14,6 +14,10 @@ public class TaskManager {
         return task.toString();
     }
 
+    public String doTaskAtIndex(int taskNumber) {
+        return taskList.get(taskNumber - 1).doTask();
+    }
+
     @Override
     public String toString() {
         StringBuilder listString = new StringBuilder();
