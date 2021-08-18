@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Botto {
     final static String bot = "Botto";
     final static String indentation = "   ";
-    final static String[] commands = {"list", "done", "todo", "deadline", "event", "bye"};
+    final static String[] commands = {"list", "done", "todo", "deadline", "event", "delete", "bye"};
 
     enum TaskType {
         TODO, DEADLINE, EVENT
@@ -32,8 +32,7 @@ public class Botto {
                         botto.printList();
                         break;
                     case "done":
-                        String integer = next.replaceAll("\\D+", "");
-                        botto.markAsDone(integer);
+                        botto.markAsDone(next.replaceAll("\\D+", ""));
                         break;
                     case "todo":
                         botto.add(TaskType.TODO, next);
@@ -43,6 +42,9 @@ public class Botto {
                         break;
                     case "event":
                         botto.add(TaskType.EVENT, next);
+                        break;
+                    case "delete":
+                        botto.delete(next.replaceAll("\\D+", ""));
                         break;
                 }
             } catch (DukeException e) {
@@ -120,7 +122,7 @@ public class Botto {
     private void markAsDone(String integer) throws DukeException {
         int index;
         try {
-            index = Integer.parseInt(integer);
+            index = Integer.parseInt(integer) - 1;
         } catch (Exception e) {
             throw new DukeException("☹ OOPS!!! You have to specify the task.");
         }
@@ -135,6 +137,28 @@ public class Botto {
         subject.markAsDone();
         System.out.println(indentation + "Nice! I've marked this task as done:");
         System.out.println(indentation + "  " + subject);
+    }
+
+    private void delete(String integer) throws DukeException {
+        int index;
+        try {
+            index = Integer.parseInt(integer) - 1;
+        } catch (Exception e) {
+            throw new DukeException("☹ OOPS!!! You have to specify which task to delete.");
+        }
+
+        Task subject;
+
+        try {
+            subject = this.list.get(index);
+        } catch (Exception e) {
+            throw new DukeException("☹ OOPS!!! The task does not exist.");
+        }
+
+        this.list.remove(index);
+        System.out.println(indentation + "Noted. I've removed this task:");
+        System.out.println(indentation + "  " + subject);
+        System.out.println(indentation + "Now you have " + this.list.size() + " tasks in the list.");
     }
 
     private void bye() {
