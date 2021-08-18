@@ -14,10 +14,13 @@ public class Duke {
         String exitString = "bye";
         System.out.println("Hello from\n" + logo + startGreeting);
 
+        TaskManager tm = new TaskManager();
+        Parser p = new Parser();
         Scanner sc = new Scanner(System.in);
+
         String userInput = sc.nextLine();
         while(!userInput.toLowerCase().equals(exitString)) {
-            System.out.print(line + userInput + line);
+            System.out.print(line + p.getCommand(userInput).execute(tm) + line);
             userInput = sc.nextLine();
         }
         System.out.println(endGreeting);
