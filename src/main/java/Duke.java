@@ -36,6 +36,20 @@ public class Duke {
                         } catch (NumberFormatException | IndexOutOfBoundsException e) {
                             throw new DukeException("Please specify a valid task number.");
                         }
+                    case "delete":
+                        if (inputStringArray.length < 2) {
+                            throw new DukeException("Please specify a task number.");
+                        }
+                        try {
+                            int taskIndex = Integer.parseInt(inputStringArray[1]) - 1;
+                            Task deletedTask = tasks.get(taskIndex);
+                            tasks.remove(taskIndex);
+                            System.out.println("Noted. I've removed this task:\n  " + deletedTask.toString());
+                            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                            break;
+                        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                            throw new DukeException("Please specify a valid task number.");
+                        }
                     case "deadline":
                         if (inputStringArray.length < 2) {
                             throw new DukeException("Please specify the task info.");
