@@ -1,14 +1,15 @@
 import java.util.Scanner;
 
 public class Duke {
-    static private Task[] myList = new Task[100];
-    static private int index = 0;
+    private static Task[] myList = new Task[100];
+    private static int index = 0;
+    private final static Scanner sc = new Scanner(System.in);
+
 
     public static void main(String[] args) {
         System.out.println("hi sis, type out your task right away! :D");
-        while (true) {
+        while (sc.hasNextLine()) {
             try {
-                Scanner sc = new Scanner(System.in);
                 String text = sc.nextLine();
                 if (text.equals("q")) {
                     System.out.println("ciao!");
@@ -21,7 +22,7 @@ public class Duke {
                     addTask(text, index);
                 }
             } catch (DukeException e) {
-                System.err.println(e);
+                System.out.println(e);
             }
         }
     }

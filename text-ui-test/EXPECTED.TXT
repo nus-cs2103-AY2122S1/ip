@@ -1,7 +1,22 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+hi sis, type out your task right away! :D
+DukeException: The description of a task cannot be empty.
+added: [T][ ] read book
+Now you have 1 task(s) in the list.
+DukeException: use the format --deadline  xx /by xx--
+DukeException: use the format --deadline  xx /by xx--
+DukeException: use the format --deadline  xx /by xx--
+added: [D][ ] do cs2103t (by: monday)
+Now you have 2 task(s) in the list.
+DukeException: use the format --event xx /at xx--
+DukeException: use the format --event xx /at xx--
+DukeException: use the format --event xx /at xx--
+added: [E][ ] movie night (at: thursday 1130pm)
+Now you have 3 task(s) in the list.
+1. [T][ ] read book
+2. [D][ ] do cs2103t (by: monday)
+3. [E][ ] movie night (at: thursday 1130pm)
+[D][X] do cs2103t (by: monday)
+1. [T][ ] read book
+2. [D][X] do cs2103t (by: monday)
+3. [E][ ] movie night (at: thursday 1130pm)
+ciao!

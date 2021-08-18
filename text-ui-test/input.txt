@@ -1,0 +1,14 @@
+todo
+todo read book
+deadline
+deadline do cs2103t
+deadline /by monday
+deadline do cs2103t /by monday
+event
+event movie night
+event /at thursday 1130pm
+event movie night /at thursday 1130pm
+ls
+done 2
+ls
+q
