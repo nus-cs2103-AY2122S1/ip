@@ -1,5 +1,8 @@
 import java.util.Scanner;
 public class Duke {
+    private static String taskList[] = new String[100];
+    private static int counter = 0;
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -21,12 +24,25 @@ public class Duke {
                 case ("bye"):
                     System.out.println("\t" + "Bye! Hope to see you soon :)");
                     break;
+                case ("list"):
+                    int index = 0;
+                    while (index < counter) {
+                        System.out.println("\t" + (index + 1) + ". " + taskList[index] + "\n");
+                        index++;
+                    }
+                    break;
                 default:
-                    System.out.println("\t" + instruction);
+                    addTask(instruction);
+                    System.out.println("\tadded: " + instruction);
                     break;
             }
             System.out.println("----------------------------------\n");
         } while (!instruction.equals("bye"));
+    }
+
+    public static void addTask(String task) {
+        taskList[counter] = task;
+        counter++;
     }
 
 }
