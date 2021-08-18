@@ -13,7 +13,6 @@ public class Task {
         }
         this.description = description;
         this.isDone = false;
-        Task.count++;
     }
 
     /**

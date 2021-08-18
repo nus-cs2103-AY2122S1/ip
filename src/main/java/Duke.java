@@ -43,6 +43,7 @@ public class Duke {
      */
     public String add(Task t) {
         this.list.add(t);
+        Task.count++;
         return wrapText(
                 String.format(
                         "Got it. I've added this task:\n %s\nNow you have %d task(s) in the list",
@@ -98,26 +99,29 @@ public class Duke {
      * @param input the array storing user input split with /
      * @return Duke's response
      */
-    public String run(String command, String[] input) {
+    public String run(String command, String input) {
         try {
-            switch (command) {
-                case "list":
+            Command cmd = Command.valueOf(command.toUpperCase());
+            switch (cmd) {
+                case LIST:
                     return this.showList();
-                case "todo":
-                    return this.add(new Todo(input[0]));
-                case "deadline":
-                    return this.add(new Deadline(input[0], input[1]));
-                case "event":
-                    return this.add(new Event(input[0], input[1]));
-                case "done":
-                    return this.markDone(Integer.parseInt(input[0].strip()));
-                case "delete":
-                    return this.delete(Integer.parseInt(input[0].strip()));
+                case TODO:
+                    return this.add(new Todo(input));
+                case DEADLINE:
+                    return this.add(new Deadline(input.split(" /[a-z][a-z] ")));
+                case EVENT:
+                    return this.add(new Event(input.split(" /[a-z][a-z] ")));
+                case DONE:
+                    return this.markDone(Integer.parseInt(input.strip()));
+                case DELETE:
+                    return this.delete(Integer.parseInt(input.strip()));
                 default:
                     throw new InvalidCommandException();
             }
         } catch (DukeException e) {
             return wrapText(e.toString());
+        } catch (IllegalArgumentException e) { //Thrown by valueOf
+            return wrapText(new InvalidCommandException().toString());
         }
     }
 
@@ -134,14 +138,12 @@ public class Duke {
     public static void main(String[] args) {
         Duke bot = new Duke();
         System.out.println(bot.greet());
-
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
             String command = sc.next();
             if (command.equals("bye")) break;
-            String[] input = sc.nextLine().split(" /[a-z][a-z] ");
-            System.out.println(bot.run(command, input));
+            System.out.println(bot.run(command, sc.nextLine()));
         }
         
         System.out.println(bot.goodbye());

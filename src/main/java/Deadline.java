@@ -3,12 +3,12 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline
-     * @param description the task description
-     * @param by the date or time task needs to be done by
+     * @param input the input array consisting of description and date/time
      */
-    public Deadline(String description, String by) throws EmptyDescriptionException{
-        super(description);
-        this.by = by;
+    public Deadline(String[] input) throws EmptyDescriptionException, EmptyTimeException {
+        super(input[0]);
+        if (input.length < 2) throw new EmptyTimeException();
+        this.by = input[1];
     }
 
     /**

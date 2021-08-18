@@ -3,12 +3,12 @@ public class Event extends Task {
 
     /**
      * Constructor for Event
-     * @param description the description of the event task
-     * @param at the timing of the event
+     * @param input the input array consisting of description and date/time
      */
-    public Event(String description, String at) throws EmptyDescriptionException{
-        super(description);
-        this.at = at;
+    public Event(String[] input) throws EmptyDescriptionException, EmptyTimeException {
+        super(input[0]);
+        if (input.length < 2) throw new EmptyTimeException();
+        this.at = input[1];
     }
 
     /**
