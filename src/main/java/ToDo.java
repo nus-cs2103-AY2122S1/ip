@@ -1,5 +1,7 @@
+/**
+ * This class creates to do instances which can be done any time.
+ */
 public class ToDo extends Task {
-
     /***
      * Constructor to create a task to do.
      *

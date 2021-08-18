@@ -1,5 +1,7 @@
+/**
+ * This class creates event instances which are to be done at a certain time.
+ */
 public class Event extends Task {
-
     // The time of the event.
     protected String time;
 

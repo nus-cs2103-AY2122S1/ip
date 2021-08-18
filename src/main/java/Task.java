@@ -1,5 +1,7 @@
+/**
+ * This class represents tasks to be done by the user.
+ */
 public abstract class Task {
-
     // The name of the task.
     protected String taskName;
     // To track if the task is done.

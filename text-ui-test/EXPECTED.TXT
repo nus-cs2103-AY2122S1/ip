@@ -8,9 +8,17 @@ Gotcha! The following task has been added:
 You now have 1 tasks in your list!
 __________________________________
 __________________________________
+You might have missed out on the time.
+Could you please enter it again?
+__________________________________
+__________________________________
 Gotcha! The following task has been added:
         return book
 You now have 2 tasks in your list!
+__________________________________
+__________________________________
+You might have missed out on the task.
+Could you please enter it again?
 __________________________________
 __________________________________
 Gotcha! The following task has been added:
@@ -46,7 +54,7 @@ __________________________________
 __________________________________
 __________________________________
 I don't quite understand what that means.
-Could you please rephrase it?
+Could you please rephrase that?
 __________________________________
 __________________________________
 Gotcha! The following task has been added:
@@ -66,6 +74,10 @@ __________________________________
 5.[T][ ] borrow book
 6.[D][ ] return book (by: Sunday)
 7.[E][ ] project meeting (at: Mon 2-4pm)
+__________________________________
+__________________________________
+You might have mistyped the task number.
+Please ensure task number is between 1 and 7.
 __________________________________
 __________________________________
 Goodbye. Hope to see you again!

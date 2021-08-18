@@ -1,5 +1,7 @@
+/**
+ * This class creates deadline instances which are to be done by a certain time.
+ */
 public class Deadline extends Task {
-
     // The time to complete the deadline by.
     protected String time;
 
