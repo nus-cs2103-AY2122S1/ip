@@ -60,7 +60,7 @@ Input:
 
 Output:
 
-You have successfully marked this task as done:
+This task is successfully marked as done:
 
     [D][X] return book (by: Sunday)
 
@@ -80,8 +80,8 @@ Output: This is your current list!
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Output: Please specify which task you would like to
-mark as done by adding a single number after 'done'!
+Output: Please specify which task you would like to have
+marked as done by adding a single number after 'done'!
 i.e. done 1
 
 =================================================
@@ -89,8 +89,8 @@ i.e. done 1
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Output: Please specify which task you would like to
-mark as done by adding a single number after 'done'!
+Output: Please specify which task you would like to have
+marked as done by adding a single number after 'done'!
 i.e. done 1
 
 =================================================
@@ -158,8 +158,8 @@ i.e. event project meeting /at Aug 6th 2-4pm
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Output: Please specify which task you would like to
-delete by adding a single number after 'delete'!
+Output: Please specify which task you would like to have
+deleted by adding a single number after 'delete'!
 i.e. delete 1
 
 =================================================
@@ -167,8 +167,8 @@ i.e. delete 1
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Output: Please specify which task you would like to
-delete by adding a single number after 'delete'!
+Output: Please specify which task you would like to have
+deleted by adding a single number after 'delete'!
 i.e. delete 1
 
 =================================================
@@ -192,7 +192,7 @@ Input:
 
 Output:
 
-You have successfully deleted this task:
+This task is successfully deleted:
 
     [E][ ] project meeting (at: Mon 2-4pm)
 

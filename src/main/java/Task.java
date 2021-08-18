@@ -6,7 +6,7 @@ public abstract class Task {
     /**
      * A constructor for this Task.
      *
-     * @param description The description of what the task is.
+     * @param description the description of what the task is.
      */
     public Task(String description) {
         this.description = description;
@@ -24,7 +24,7 @@ public abstract class Task {
      * Returns the string representation of this Task, which follows the following format:
      * [Task status] Task Description
      *
-     * @return A string representation of this Task, which is its status and its description.
+     * @return string representation of this Task, which is its status and its description.
      */
     @Override
     public String toString() {
