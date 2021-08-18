@@ -1,6 +1,11 @@
+package utils;
+
 import tasks.Task;
 
 public class Util {
+    public static boolean isLowerCase(String input) {
+        return input == input.toLowerCase();
+    }
 
     public static boolean isInteger(String s) {
         try {
