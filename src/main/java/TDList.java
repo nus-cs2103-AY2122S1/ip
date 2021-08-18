@@ -16,8 +16,7 @@ public class TDList {
      *
      * @param str   Thing to add to the list.
      */
-    public void tdlAdd(String str) {
-        TDLTask.TaskType currTaskType = checkTaskType(str);
+    public void tdlAdd(String str, TDLTask.TaskType currTaskType) {
         TDLTask createdTask;
 
         int indexOfSlash = -1;
