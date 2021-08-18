@@ -25,8 +25,13 @@ public class TDLTask {
 
     /**
      * Sets the current task as finished.
+     *
+     * @throws DukeExceptionBase if the task being marked as done was already done.
      */
-    public void setAsDone() {
+    public void setAsDone() throws DukeExceptionBase {
+        if (isTaskDone()) {
+            throw new DukeExceptionBase("The specified task was already done.");
+        }
         isDone = true;
     }
 
