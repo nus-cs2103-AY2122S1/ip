@@ -1,0 +1,6 @@
+todo read book
+deadline assignment /by Tue evening
+list
+done 1
+list
+bye
