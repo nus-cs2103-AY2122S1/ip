@@ -1,14 +1,15 @@
 /**
  * Represents a Task object that can be added
- * to users' to-do list.
+ * to users' task list.
+ * A Task can be a ToDo, Deadline or Event.
  *
  * @author Ne Zhijian, Didymus A0218159Y
  */
 public class Task {
-    private boolean isDone;
-    private String task;
+    protected boolean isDone;
+    protected String task;
 
-    private Task(String task) {
+    protected Task(String task) {
         this.isDone = false;
         this.task = task;
     }
@@ -19,7 +20,19 @@ public class Task {
      * @param task String description of the task
      */
     public static Task createTask(String task) {
-        return new Task(task);
+        String[] taskArr = task.split(" ", 2);
+        String firstWord = taskArr[0];
+
+        if (firstWord.equals("todo")) {
+            return new ToDo(taskArr[1]);
+        } else if (firstWord.equals("deadline")) {
+            return new Deadline(taskArr[1].split("/", 2));
+        } else if (firstWord.equals("event")) {
+            return new Event(taskArr[1].split("/", 2));
+        } else {
+            return new Task(task);
+        }
+
     }
 
     /**

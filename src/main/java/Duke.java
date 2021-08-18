@@ -25,8 +25,8 @@ public class Duke {
         System.out.println(chatBotMessage(this.dukeLogo + "\n" +
                 "\tHELLO! I'm Duke\n" +
                 "\tTo ease your experience, here are some commands you can type: \n" +
-                    "\t \t 'list': view all tasks in your task list\n" +
-                    "\t \t 'bye': exit chat\n" +
+                    "\t\t 'list': view all tasks in your task list\n" +
+                    "\t\t 'bye': exit chat\n" +
                 "\tWhat can I do for you?\n"
 
                 )
@@ -38,9 +38,10 @@ public class Duke {
         System.out.println(chatBotMessage("\tBye. Hope to see you again soon!\n"));
     }
 
-    private void addTaskToList(String item) {
+    private Task addTaskToList(String item) {
         Task task = Task.createTask(item);
         this.listOfTasks.addTaskToList(task);
+        return task;
     }
 
     private String chatBotMessage(String reply) {
@@ -75,13 +76,15 @@ public class Duke {
                     int i = d.getSecondNum(userInput);
                     d.listOfTasks.setTaskAsDone(i);
                     System.out.println(d.chatBotMessage("\tNice! I've marked this task as done: \n" +
-                            "\t \t" + d.listOfTasks.getTask(i - 1) + "\n"));
+                            "\t\t" + d.listOfTasks.getTask(i - 1) + "\n"));
                 } else {
-                    d.addTaskToList(userInput);
-                    System.out.println(d.chatBotMessage("\tadded: " + userInput + "\n"));
+                    System.out.println(d.chatBotMessage("\tGot it. I've added this task: \n" +
+                            "\t\t" + d.addTaskToList(userInput) + "\n" +
+                            "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n"
+                            ));
                 }
             } catch (IllegalArgumentException e) {
-                if (e.getMessage().equals("For input string: \"zero\"")) {
+                if (e.getMessage().contains("For input string:")) {
                     System.err.println(d.chatBotMessage("\t" + "Input after 'done' has to be an integer\n"));
                 } else {
                     System.err.println(d.chatBotMessage("\t" + e.getMessage() + "\n"));

@@ -14,27 +14,35 @@ public class TaskList {
     }
 
     /**
-     * Add a task into the list of tasks
+     * Returns the total number of tasks in the list.
+     */
+    public String getTotal() {
+        int total = this.listOfTasks.size();
+        return total + (total == 1 ? " task" : " tasks");
+    }
+
+    /**
+     * Add a task into the list of tasks.
      *
-     * @param task the task to be added into the list of tasks
+     * @param task the task to be added into the list of tasks.
      */
     public void addTaskToList(Task task) {
         this.listOfTasks.add(task);
     }
 
     /**
-     * Create a TaskList object
+     * Create a TaskList object.
      *
-     * @return a new TaskList that has no tasks stored
+     * @return a new TaskList that has no tasks stored.
      */
     public static TaskList makeNewTaskList() {
         return new TaskList();
     }
 
     /**
-     * Sets the status of the specified task as 'done'
+     * Sets the status of the specified task as 'done'.
      * @param i Index of the task in the task list, that
-     *          is to be set as 'done'
+     *          is to be set as 'done'.
      */
     public void setTaskAsDone(int i) throws IllegalArgumentException {
         if (i < 1 || i > this.listOfTasks.size()) {
@@ -44,16 +52,16 @@ public class TaskList {
     }
 
     /**
-     * Returns the task at the specified position
+     * Returns the task at the specified position.
      * @param i Index of the task in the task list, that
-     *          is to be returned
+     *          is to be returned.
      */
     public Task getTask(int i) {
         return this.listOfTasks.get(i);
     }
 
     /**
-     * String representation of the TaskList object
+     * String representation of the TaskList object.
      */
     @Override
     public String toString() {
