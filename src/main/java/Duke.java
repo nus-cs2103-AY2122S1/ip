@@ -66,6 +66,26 @@ public class Duke {
                 }
 
             }
+            if (in.length() > 5 && in.substring(0,6).equals("delete")) {
+                if (in.length() < 8) {
+                    System.out.println("Invalid Input for delete command");
+                    continue;
+                }
+                int taskDeleted = parseInt(in.substring(7));
+                if (taskDeleted > 100) {
+                    System.out.println("Invalid Input for delete command");
+                    continue;
+                }
+                //System.out.println(taskDone);
+                if (taskDeleted > count) {
+                    System.out.println("Invalid Input for delete command");
+                    continue;
+                }
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(storedInfo.get(taskDeleted - 1));
+                storedInfo.remove(taskDeleted-1);
+                continue;
+            }
             if (in.length() > 3 && in.substring(0,4).equals("todo") ) {
                 if (in.length() == 4) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
