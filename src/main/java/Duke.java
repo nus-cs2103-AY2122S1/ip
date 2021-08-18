@@ -47,9 +47,26 @@ public class Duke {
                     System.out.println(sepLine);
                 } catch (NumberFormatException e) {
                     System.out.println("It seems like you have entered an invalid number for done.");
-                    System.out.println("Please enter a whole number.");
+                    System.out.println("Please enter the task number as shown in the list.");
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("That number does not exist in your list of tasks.");
+                    System.out.println("That task number does not exist in your list of tasks.");
+                }
+            } else if (command.equals("delete")) {
+                System.out.println(sepLine);
+                try {
+                    Integer taskNum = Integer.parseInt(next[1]);
+                    Task taskToDelete = taskList.get(taskNum - 1);
+                    System.out.println("The task has been deleted!");
+                    System.out.println(taskToDelete);
+                    taskList.remove(taskNum - 1);
+                    System.out.println(sepLine);
+                } catch (NumberFormatException e) {
+                    System.out.println("It seems like you have entered an invalid number to delete.");
+                    System.out.println("Please enter the task number as shown in the list.");
+                    System.out.println(sepLine);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("That task number does not exist in your list of tasks.");
+                    System.out.println(sepLine);
                 }
             } else if (command.equals("help")) {
                 String helpMessage = sepLine + "\n HELP \n" + sepLine + "\n"
@@ -61,8 +78,10 @@ public class Duke {
                         + "with the given description and due date. \n"
                         + "'event (desc) /at (timing)' - Adds a event item to your task list "
                         + "with the given description and timing. \n"
-                        + "'done (x)' - Marks the task with number x as done"
-                        + "(according to the list given by the command 'list' \n"
+                        + "'done (x)' - Marks the task with number x as done "
+                        + "according to the list given by the command 'list' \n"
+                        + "'delete (x)' - Deletes the task with number x "
+                        + "according to the list given by the command 'list' \n"
                         + "'bye' - Quits this program. \n"
                         + sepLine + "\n"
                         + "To use any command, follow the structure as shown, entering your values \n"
@@ -111,10 +130,14 @@ public class Duke {
                     }
                 } catch (MissingFieldException e) {
                     System.out.println("Please fill in a timing for your deadline / event.");
+                    System.out.println("Use '/by' for deadlines and '/at' for events.");
+                    System.out.println(sepLine);
                 } catch (EmptyDescException e) {
                     System.out.println("Please fill in a description for your task.");
+                    System.out.println(sepLine);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("It seems like your command was not formatted properly.");
+                    System.out.println(sepLine);
                 }
             }
         }
