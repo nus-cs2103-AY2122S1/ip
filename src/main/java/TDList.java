@@ -23,7 +23,16 @@ public class TDList {
 
         switch (currTaskType) {
         case TODO:
-            createdTask = new ToDosTask(str);
+            String todoContents = "";
+            try {
+                todoContents = str.substring(5);
+            } catch (StringIndexOutOfBoundsException e) {
+                Duke.dukeSays("Something is wrong with your ToDo Task.");
+                return;
+            }
+
+            createdTask = new ToDosTask(todoContents);
+
             break;
         case EVENT:
             indexOfSlash = str.indexOf("/at");
