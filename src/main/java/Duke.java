@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -5,6 +6,7 @@ public class Duke {
     private static final TaskList list = new TaskList();
 
     private static String[] parseInput(String[] arr) throws DukeException {
+        System.out.println(Arrays.toString(arr));
         String command = arr[0];
         if (arr.length == 1) {
             //user did not specify desc
@@ -14,7 +16,9 @@ public class Duke {
         String time = "";
         boolean slash = false;
         for (int i = 1; i < arr.length; i++) {
-            if (arr[i].charAt(0) == '/') {
+            if (arr[i].length() == 0) {
+                continue;
+            } else if (arr[i].charAt(0) == '/') {
                 slash = true;
                 continue;
             }
