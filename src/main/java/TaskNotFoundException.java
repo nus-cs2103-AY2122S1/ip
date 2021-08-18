@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public class TaskNotFoundException {
+public class TaskNotFoundException extends SaberException{
+        public TaskNotFoundException(String message) { super(message); }
 }

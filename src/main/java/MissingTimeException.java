@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class MissingTimeException {
+public class MissingTimeException extends SaberException {
+    public MissingTimeException(String message) {
+        super(message);
+    }
 }

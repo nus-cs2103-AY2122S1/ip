@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public class SaberCommandNotFoundException {
+public class SaberCommandNotFoundException extends SaberException {
+    public SaberCommandNotFoundException(String message) { super(message); }
 }

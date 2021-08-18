@@ -41,6 +41,7 @@ public class Saber {
         event,
         todo,
         list,
+        INVALID_INPUT,
     }
 
     public static void handleAddTask(String task) {
@@ -64,7 +65,10 @@ public class Saber {
                 "\n      in the list." + "\n\n" + lineBreak);
     }
 
-    public static void handleDoneTask(int taskIndex) {
+    public static void handleDoneTask(int taskIndex) throws TaskNotFoundException {
+        if (taskIndex >= totalTask || taskIndex < 0) {
+            throw new TaskNotFoundException("Task not found");
+        }
         Task task = taskArray[taskIndex];
         task.markAsDone();
         System.out.println(lineBreak + "\n      Understand, Master.\n" + "      I'll mark this done right away.\n"
@@ -91,6 +95,9 @@ public class Saber {
             Task task = taskArray[i];
             System.out.println("      " + (i + 1) + ". " + task + "\n");
         }
+        if (totalTask == 0) {
+            System.out.println("      Ah, currently Master has no task.\n");
+        }
         System.out.println(lineBreak);
     }
 
@@ -114,49 +121,107 @@ public class Saber {
         System.out.println("\n" + logo);
         System.out.println(greeting);
         while (!end) {
-            String input = sc.nextLine();
+            String input = sc.nextLine().trim();
             Command command = new Command(input);
-            InputCommand commandType = command.getCommandType();
-            switch (commandType) {
-                case add:
-                    String taskForAdd = command.getArgument();
-                    handleAddTask(taskForAdd);
-                    break;
+            InputCommand commandType ;
+            try {
+                commandType = command.getCommandType();
+                switch (commandType) {
+                    case add:
+                        try {
+                            String taskForAdd = command.getArgument();
+                            handleAddTask(taskForAdd);
+                        } catch (MissingArgumentException e) {
+                            System.out.println(lineBreak + "      I'm sorry, Master.\n"
+                                    + "      What ... exactly do you want me to add?\n"
+                                    + lineBreak);
+                        }
+                        break;
 
-                case bye:
-                    end = true;
-                    break;
+                    case bye:
+                        end = true;
+                        break;
 
-                case done:
-                    int taskIndex = Integer.parseInt(command.getArgument());
-                    handleDoneTask(taskIndex - 1);
-                    break;
+                    case done:
+                        try {
+                            int taskIndex = Integer.parseInt(command.getArgument());
+                            handleDoneTask(taskIndex - 1);
+                        } catch (MissingArgumentException | NumberFormatException e) {
+                            System.out.println(lineBreak + "      I'm really sorry, Master.\n"
+                                    + "      I'm ... not sure which task you want me\n"
+                                    + "      to mark as done...\n"
+                                    + lineBreak);
+                        } catch (TaskNotFoundException e) {
+                            System.out.println(lineBreak + "      I'm really sorry, Master.\n"
+                                    + "      I'm unable to find the task that\n"
+                                    + "      you specified...\n"
+                                    + lineBreak);
+                        }
+                        break;
 
-                case deadline:
-                    String deadlineTask = command.getArgument();
-                    String deadlineTime = command.getTime();
-                    handleDeadlineTask(deadlineTask, deadlineTime);
-                    break;
+                    case deadline:
+                        try {
+                            String deadlineTask = command.getArgument();
+                            String deadlineTime = command.getTime();
+                            handleDeadlineTask(deadlineTask, deadlineTime);
+                        } catch (MissingArgumentException e) {
+                            System.out.println(lineBreak + "      I'm really sorry, Master.\n"
+                                    + "      I'm ... not sure what task you want me\n"
+                                    + "      to add ...\n"
+                                    + lineBreak);
+                        } catch (MissingTimeException e) {
+                            System.out.println(lineBreak + "      I'm sorry, Master.\n"
+                                    + "      I won't be able to ensure that you\n"
+                                    + "      do the task on time without \n"
+                                    + "      knowing the deadline...\n"
+                                    + lineBreak);
+                        }
+                        break;
 
-                case event:
-                    String eventTask = command.getArgument();
-                    String eventTime = command.getTime();
-                    handleEventTask(eventTask, eventTime);
-                    break;
+                    case event:
+                        try {
+                            String eventTask = command.getArgument();
+                            String eventTime = command.getTime();
+                            handleEventTask(eventTask, eventTime);
+                        } catch (MissingArgumentException e) {
+                            System.out.println(lineBreak + "      I'm sorry, Master.\n"
+                                    + "      I'm ... not sure what event you want me\n"
+                                    + "      to add ...\n"
+                                    + lineBreak);
+                        } catch (MissingTimeException e) {
+                            System.out.println(lineBreak + "      I'm really sorry, Master.\n"
+                                    + "      I won't be able to remind you\n"
+                                    + "      to come to this event without\n"
+                                    + "      knowing the time of the event...\n"
+                                    + lineBreak);
+                        }
+                        break;
 
-                case todo:
-                    String taskForTodo = command.getArgument();
-                    handleTodoTask(taskForTodo);
-                    break;
+                    case todo:
+                        try {
+                            String taskForTodo = command.getArgument();
+                            handleTodoTask(taskForTodo);
+                        } catch (MissingArgumentException e) {
+                            System.out.println(lineBreak + "      I'm sorry, Master.\n"
+                                    + "      What ... exactly do you want me to add\n"
+                                    + "      to your Todo list?\n"
+                                    + lineBreak);
+                        }
+                        break;
 
-                case list:
-                    handleListTask();
-                    break;
+                    case list:
+                        handleListTask();
+                        break;
 
-                default:
-                    System.out.println(lineBreak + "      I'm sorry, Master. I can't fulfill your command.\n"
-                            + "      What you want from me is beyond my capability\n"
-                            + lineBreak);
+                    default:
+                        System.out.println(lineBreak + "      I'm sorry, Master. I can't fulfill your command.\n"
+                                + "      What you want from me is beyond my capability.\n"
+                                + lineBreak);
+                }
+            } catch (SaberCommandNotFoundException e) {
+                System.out.println(lineBreak + "      I'm sorry, Master.\n"
+                        + "      I don't ... understand your command.\n"
+                        + lineBreak);
             }
         }
         System.out.println(goodbye);

@@ -1,5 +1,5 @@
-public class MissingDescriptionException extends SaberException {
-    public MissingDescriptionException(String message) {
+public class MissingArgumentException extends SaberException {
+    public MissingArgumentException(String message) {
         super(message);
     }
 }
