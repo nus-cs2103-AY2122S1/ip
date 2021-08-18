@@ -1,11 +1,14 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
     private static ArrayList<Task> list;
+    private static int numberOfTasks;
 
     public static void main(String[] args) {
         list = new ArrayList<>();
+        numberOfTasks = 0;
         startDeanBot();
     }
 
@@ -33,7 +36,7 @@ public class Duke {
                 case "list":
                     printSingleLineBorder();
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < list.size(); i++) {
+                    for (int i = 0; i < numberOfTasks; i++) {
                         System.out.println((i + 1) + "." + list.get(i));
                     }
                     printSingleLineBorder();
@@ -55,12 +58,52 @@ public class Duke {
                             System.out.println("Invalid Task Number");
                         }
                     } else {
-                        Task task = new Task(input);
-                        list.add(task);
-                        System.out.println("Added: " + input);
+                        addTask(input);
+
                     }
                     printSingleLineBorder();
             }
+        }
+    }
+
+    // Add task to list.
+    private static void addTask(String input) {
+        Task task;
+        String[] splitInput = input.split(" ");
+        String taskType = splitInput[0];
+        String taskDescription = "";
+        boolean taskHasTimestamp = false;
+        for (int i = 1; i < splitInput.length; i++) {
+            if (splitInput[i].contains("/")) {
+                taskHasTimestamp = true;
+                taskDescription += "(" + splitInput[i].split("/")[1] + ": ";
+            } else if (i != splitInput.length - 1){
+                taskDescription += splitInput[i] + " ";
+            } else {
+                taskDescription += splitInput[i];
+            }
+        }
+        if (taskHasTimestamp) {
+            taskDescription += ")";
+        }
+        if (taskType.equals("todo")) {
+            task = new ToDo(taskDescription);
+            list.add(task);
+        } else if (taskType.equals("deadline")) {
+            task = new Deadline(taskDescription);
+            list.add(task);
+        } else if (taskType.equals("event")) {
+            task = new Event(taskDescription);
+            list.add(task);
+        } else {
+            throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+        numberOfTasks++;
+        System.out.println("Got it. I've added this task:\n" + task);
+        if (numberOfTasks == 1) {
+            System.out.println("Now you have " + numberOfTasks + " task in the list");
+        } else {
+            System.out.println("Now you have " + numberOfTasks + " tasks in the list");
         }
     }
 
