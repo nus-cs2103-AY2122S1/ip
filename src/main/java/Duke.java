@@ -9,10 +9,12 @@ public class Duke {
     private static String sepLineClose = "\\\\\\<<<===================================>>>///";
 
     private static TDList currTDL;
+    private static boolean isExited;
 
     public static void main(String[] args) {
         //Initialize variables
         currTDL = new TDList();
+        isExited = false;
 
 
         String logo = " ____        _        \n"
@@ -39,7 +41,7 @@ public class Duke {
         /* Stores last input by user. */
         String lastInput = null;
 
-        while (true) {
+        while (!isExited) {
             System.out.println("");
             lastInput = currScanner.nextLine();
 
@@ -81,6 +83,7 @@ public class Duke {
      */
     private static void dukeExiter() {
         dukeSays("Bye. Hope to see you soon!");
+        isExited = true;
     }
 
     /**
