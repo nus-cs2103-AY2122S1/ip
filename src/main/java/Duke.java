@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Duke {
 
@@ -12,6 +13,7 @@ public class Duke {
 
     enum Action {
         DONE,
+        DELETE,
         TODO,
         DEADLINE,
         EVENT,
@@ -38,16 +40,16 @@ public class Duke {
                 throw new DukeException("No command was given.");
             }
             String firstWord = arr[0];
-            if (str.equals("bye")) {
+            if (str.equalsIgnoreCase("bye")) {
                 System.out.println(divider + "\tBye. Hope to see you again soon!\n" + divider);
                 return false;
-            } else if (str.equals("list")) {
+            } else if (str.equalsIgnoreCase("list")) {
                 displayList();
             } else {
-                Action action = parseFirstWord(firstWord);
+                Action action = parseFirstWord(firstWord.toLowerCase());
                 CheckedConsumer<String> consumer = actionToFunction(action);
-              if (arr.length < 2 && action == Action.DONE) {
-                    throw new DukeException("Task number for done is not given.");
+              if (arr.length < 2 && (action == Action.DONE || action == Action.DELETE)) {
+                    throw new DukeException("Task number for "+firstWord+" is not given.");
                 } else if (arr.length < 2 || arr[1].isBlank()) {
                     throw new DukeException("The description of " + firstWord + " cannot be empty");
                 } else {
@@ -65,6 +67,8 @@ public class Duke {
         switch (firstWord) {
             case "done":
                 return Action.DONE;
+            case "delete":
+                return Action.DELETE;
             case "todo":
                 return Action.TODO;
             case "deadline":
@@ -81,6 +85,8 @@ public class Duke {
         switch (action) {
             case DONE:
                 return this::done;
+            case DELETE:
+                return this::delete;
             case TODO:
                 return this::addTodo;
             case DEADLINE:
@@ -90,6 +96,24 @@ public class Duke {
             case NONE:
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    private void delete(String str) throws DukeException {
+        try {
+            int i = Integer.parseInt(str);
+
+            if (i > 0 && i <= list.size()) {
+                Task t =list.remove(i-1);
+                System.out.println(divider + "\tGot it. I've removed this task: ");
+                System.out.println("\t" + t);
+                System.out.println("\tNow you have " + list.size() + " task" + (list.size() == 1 ? " " : "s ") + "in the list.");
+                System.out.println(divider);
+            } else {
+                throw new DukeException("No such task found in list.");
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException(str + " cannot be converted to a number.");
         }
     }
 
