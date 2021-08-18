@@ -11,6 +11,15 @@ public class Duke {
     // Regex pattern for finding done commands
     private static final Pattern DONE_PATTERN = Pattern.compile("^done (\\d*)$");
 
+    // Regex pattern for finding done commands
+    private static final Pattern TODO_PATTERN = Pattern.compile("^todo (.*)$");
+
+    // Regex pattern for finding done commands
+    private static final Pattern DEADLINE_PATTERN = Pattern.compile("^deadline (.*) /by (.*)$");
+
+    // Regex pattern for finding done commands
+    private static final Pattern EVENT_PATTERN = Pattern.compile("^event (.*) /at (.*)$");
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -33,7 +42,6 @@ public class Duke {
             } else if (userInput.equals("list")) {
                 // Check if user is requesting to print list.
                 list();
-                continue;
             } else if (DONE_PATTERN.matcher(userInput).matches()) {
                 // Check if user is attempting to mark a task as done.
                 Matcher matcher =  DONE_PATTERN.matcher(userInput);
@@ -42,11 +50,16 @@ public class Duke {
 
                 int taskPosition = Integer.parseInt(taskPositionString);
                 markAsDone(taskPosition);
-                continue;
+            } else if (TODO_PATTERN.matcher(userInput).matches()) {
+                // User is attempting to add a to-do
+                addToDo(userInput);
+            } else if (DEADLINE_PATTERN.matcher(userInput).matches()) {
+                // User is attempting to add a deadline
+                addDeadline(userInput);
+            } else if (EVENT_PATTERN.matcher(userInput).matches()) {
+                // User is attempting to add an event
+                addEvent(userInput);
             }
-
-            // Add input to list and inform user.
-            addToStore(userInput);
         }
     }
 
@@ -113,5 +126,70 @@ public class Duke {
         task.complete();
 
         say("I have marked the task as done!", String.format("%d. %s", taskPosition, task));
+    }
+
+    /**
+     * Adds a to-do which contains a description and no date/time.
+     * @param userInput User input to be split by regex pattern matching
+     */
+    private static void addToDo(String userInput) {
+        Matcher matcher = TODO_PATTERN.matcher(userInput);
+        if (!matcher.find()) {
+            return;
+        }
+        String description = matcher.group(1);
+
+        ToDo todo = new ToDo(description, false);
+
+        // Add to store
+        store[count] = todo;
+        count++;
+
+        // Inform user
+        say("I have added a ToDo!", String.format("%d. %s", count, todo));
+    }
+
+    /**
+     * Adds a to-do which contains a description and an end date/time.
+     * @param userInput User input to be split by regex pattern matching
+     */
+    private static void addDeadline(String userInput) {
+        Matcher matcher = DEADLINE_PATTERN.matcher(userInput);
+        if (!matcher.find()) {
+            return;
+        }
+        String description = matcher.group(1);
+        String endDateTime = matcher.group(2);
+
+        Deadline deadline = new Deadline(description, false, endDateTime);
+
+        // Add to store
+        store[count] = deadline;
+        count++;
+
+        // Inform user
+        say("I have added a new deadline!", String.format("%d. %s", count, deadline));
+    }
+
+    /**
+     * Adds an event which contains a description and a start and end date/time.
+     * @param userInput User input to be split by regex pattern matching
+     */
+    private static void addEvent(String userInput) {
+        Matcher matcher = EVENT_PATTERN.matcher(userInput);
+        if (!matcher.find()) {
+            return;
+        }
+        String description = matcher.group(1);
+        String eventDateTime = matcher.group(2);
+
+        Event event = new Event(description, false, eventDateTime);
+
+        // Add to store
+        store[count] =  event;
+        count++;
+
+        // Inform user
+        say("I have added a new event!", String.format("%d. %s", count, event));
     }
 }
