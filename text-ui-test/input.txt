@@ -1,0 +1,11 @@
+todo cook an egg
+list
+deadline return book /by Saturday
+event project meeting /at Mon 2-8pm
+list
+done 1
+done 3
+list
+done 2
+list
+bye
