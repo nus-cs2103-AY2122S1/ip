@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -22,6 +21,30 @@ public class Duke {
         return command[1].split(" /by | /at ", 2);
     }
 
+    public static void addThenPrint(String[] command, ArrayList<Task> tasks, int numOfTask) {
+        try {
+            String[] descriptions = extractCommand(command);
+            Task task = null;
+            switch (command[0]) {
+                case "todo":
+                    task = new Todo(descriptions[0]);
+                    break;
+                case "event":
+                    task = new Event(descriptions[0], descriptions[1]);
+                    break;
+                case "deadline":
+                    task = new Deadline(descriptions[0], descriptions[1]);
+                    break;
+            }
+            if (task != null) {
+                tasks.add(task);
+                printAddOrDelete(true, task, ++numOfTask);
+            }
+        } catch (EmptyDescriptionException e) {
+            Printer.prettyPrint(e.toString());
+        }
+    }
+
     public static void main(String[] args) {
         // Greet the user
         Printer.prettyPrint("Welcome to\n" +
@@ -41,7 +64,6 @@ public class Duke {
         // Exit when user commands "bye"
         while (!input.equals("bye")) {
             String[] command = input.split(" ", 2);
-            String[] taskDetail;
             try {
                 switch (Command.valueOf(command[0].toUpperCase())) {
                     case LIST:
@@ -56,34 +78,9 @@ public class Duke {
                         tasks.remove(Integer.parseInt(command[1]) - 1);
                         break;
                     case TODO:
-                        try {
-                            taskDetail = extractCommand(command);
-                            Todo todo = new Todo(taskDetail[0]);
-                            tasks.add(todo);
-                            printAddOrDelete(true, todo, ++numOfTask);
-                        } catch (EmptyDescriptionException e) {
-                            Printer.prettyPrint(e.toString());
-                        }
-                        break;
                     case EVENT:
-                        try {
-                            taskDetail = extractCommand(command);
-                            Event event = new Event(taskDetail[0], taskDetail[1]);
-                            tasks.add(event);
-                            printAddOrDelete(true, event, ++numOfTask);
-                        } catch (EmptyDescriptionException e) {
-                            Printer.prettyPrint(e.toString());
-                        }
-                        break;
                     case DEADLINE:
-                        try {
-                            taskDetail = extractCommand(command);
-                            Deadline deadline = new Deadline(taskDetail[0], taskDetail[1]);
-                            tasks.add(deadline);
-                            printAddOrDelete(true, deadline, ++numOfTask);
-                        } catch (EmptyDescriptionException e) {
-                            Printer.prettyPrint(e.toString());
-                        }
+                        addThenPrint(command, tasks, numOfTask++);
                         break;
                     default:
                         throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
