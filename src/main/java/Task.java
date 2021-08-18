@@ -16,7 +16,7 @@ public abstract class Task {
     }
 
     public String showTime(){
-        return this.time;
+        return String.format("(%s)", this.time);
     }
 
     public void markDone(){

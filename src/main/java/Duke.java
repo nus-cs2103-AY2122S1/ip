@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
 
     private enum CommandTypes {
-        EXIT, LIST, DONE
+        EXIT, LIST, DONE, TODO, DEADLINE, EVENT
     }
 
     private final String HORIZONTAL_LINE = "____________________________________________________________";
@@ -33,12 +33,6 @@ public class Duke {
         String msg = "Bye. Hope to see you again soon!";
         printMessageWithFormat(msg);
         this.isActive = false;
-    }
-
-    private void addTask(Task task){
-        this.taskList.add(task);
-        String msg = "added: " + task.showDescription();
-        printMessageWithFormat(msg);
     }
 
     private void markTaskAsDone(int taskNumber){
@@ -95,6 +89,15 @@ public class Duke {
 
             case "done":
                 return CommandTypes.DONE;
+
+            case "todo":
+                return CommandTypes.TODO;
+
+            case "deadline":
+                return CommandTypes.DEADLINE;
+
+            case "event":
+                return CommandTypes.EVENT;
         }
         return null;
     }
