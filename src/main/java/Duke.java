@@ -12,79 +12,61 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         startBot();
 
-        //level 1
-        /*Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            String message = sc.nextLine();
-
-            if (message.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else {
-                System.out.println(message);
-            }
-        }
-        sc.close();*/
-
-        //level 2
-        /*List<String> toDoList = new ArrayList<>();
-
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            String message = sc.nextLine();
-
-            if (message.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (message.equals("list")) {
-                list(toDoList);
-            } else {
-                toDoList.add(message);
-                System.out.println(add(message));
-            }
-        }
-        sc.close();*/
-
         //level 4
         List<Task> toDoList = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String message = sc.nextLine();
+            try {
 
-            if (message.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (message.equals("list")) {
-                list(toDoList);
-            } else if (checkDone(message) != 0 && !(checkDone(message) > toDoList.size())) {
-                //need to check for exceptions
-                //like invalid number entry
-                displayCheckedTask(toDoList.get(checkDone(message) - 1));
-            } else {
-                if (isToDo(message)) {
-                    String taskName = message.substring(message.indexOf(" "));
-                    Task newTask = new Todo(taskName);
-                    toDoList.add(newTask);
-                    System.out.println(add(newTask.displayTask(), toDoList.size()));
+                if (message.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+
+                } else if (message.equals("list")) {
+                    list(toDoList);
+
+                } else if (taskToCheck(message) != 0) {
+                    canTaskBeChecked(taskToCheck(message), toDoList.size());
+                    displayCheckedTask(toDoList.get(taskToCheck(message) - 1));
+
                 } else {
-                    String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
-                    String temp = message.substring(message.indexOf("/") + 1);
-                    String due = temp.substring(temp.indexOf(" ") + 1);
-                    if (isDeadline(message)) {
-                        Task newTask = new Deadline(taskName, due);
+                    if (isToDo(message)) {
+                        isValidEntry(message, "todo");
+                        String taskName = message.substring(message.indexOf(" "));
+                        Task newTask = new Todo(taskName);
                         toDoList.add(newTask);
                         System.out.println(add(newTask.displayTask(), toDoList.size()));
-                    } else if (isEvent(message)) {
-                        Task newTask = new Event(taskName, due);
-                        toDoList.add(newTask);
-                        System.out.println(add(newTask.displayTask(), toDoList.size()));
+
                     } else {
-                        //nothing
-                        System.out.println("Task Type not found.");
+                        if (isDeadline(message)) {
+                            isValidEntry(message, "deadline");
+                            isFormatCorrect(message, "deadline");
+                            String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
+                            String temp = message.substring(message.indexOf("/") + 1);
+                            String due = temp.substring(temp.indexOf(" ") + 1);
+                            Task newTask = new Deadline(taskName, due);
+                            toDoList.add(newTask);
+                            System.out.println(add(newTask.displayTask(), toDoList.size()));
+
+                        } else if (isEvent(message)) {
+                            isValidEntry(message, "event");
+                            isFormatCorrect(message, "event");
+                            String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
+                            String temp = message.substring(message.indexOf("/") + 1);
+                            String due = temp.substring(temp.indexOf(" ") + 1);
+                            Task newTask = new Event(taskName, due);
+                            toDoList.add(newTask);
+                            System.out.println(add(newTask.displayTask(), toDoList.size()));
+
+                        } else {
+                            notValid();
+                        }
                     }
                 }
-
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
         sc.close();
@@ -109,7 +91,7 @@ public class Duke {
         }
     }
 
-    public static int checkDone(String message) {
+    public static int taskToCheck(String message) {
         StringBuilder number;
         if (message.length() > 5) {
             String check = message.substring(0, 4);
@@ -135,14 +117,43 @@ public class Duke {
     }
 
     public static boolean isDeadline(String message) {
-        return (message.length() > 8) && (message.startsWith("deadline"));
+        return message.startsWith("deadline");
     }
 
     public static boolean isToDo(String message) {
-        return (message.length() > 4) && (message.startsWith("todo"));
+        return message.startsWith("todo");
     }
 
     public static boolean isEvent(String message) {
-        return (message.length() >5) && (message.startsWith("event"));
+        return message.startsWith("event");
+    }
+
+    //level 5
+    public static void notValid() throws InvalidTaskTypeException {
+        throw new InvalidTaskTypeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    public static void isValidEntry(String message, String type) throws DescriptionEmptyException {
+        if (message.length() <= type.length() || message.substring(message.indexOf(" ")).isBlank()) {
+            throw new DescriptionEmptyException("☹ OOPS!!! The description of a " + type + " cannot be empty.");
+        }
+    }
+
+    public static void canTaskBeChecked(int taskIndex, int maxTaskIndex) throws TaskNotFoundException {
+        if (taskIndex < 0 || taskIndex > maxTaskIndex) {
+            throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
+        }
+    }
+
+    public static void isFormatCorrect(String message, String type) throws IncorrectFormatException {
+        if (type.equals("deadline") && !message.contains("/by")) {
+            throw new IncorrectFormatException("Input format is incorrect. Please input again in this format : \n" +
+                    " <task name> /by <deadline>");
+        } else {
+            if (type.equals("event") && !message.contains("/at")) {
+                throw new IncorrectFormatException("Input format is incorrect. Please input again in this format : \n" +
+                        " <event name> /at <event duration>");
+            }
+        }
     }
 }
