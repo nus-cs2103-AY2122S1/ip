@@ -13,6 +13,8 @@ public class Duke {
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String LIST_MESSAGE = "Here are the tasks in your list:\n%s";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n %s";
+    private static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d tasks in the list.";
+    private static final String ADD_TASK_MESSAGE = "Got it. I've added this task:\n%s\n" + NUMBER_OF_TASKS_MESSAGE;
     private static final String MISSING_DONE_NUMBER_MESSAGE = "Please input a number after the done command";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
@@ -20,6 +22,11 @@ public class Duke {
     private static final String EXIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String DEADLINE_DELIMITER = "/by";
+    private static final String EVENT_COMMAND = "event";
+    private static final String EVENT_DELIMITER = "/at";
+    private static final String TODO_COMMAND = "todo";
 
     // Message methods
     public static void horizontal_line() {
@@ -60,8 +67,24 @@ public class Duke {
                         display_message(String.format(DONE_MESSAGE, taskList.markTaskAsDone(taskIndex)));
                     }
                     break;
+                case TODO_COMMAND:
+                    display_message(String.format(ADD_TASK_MESSAGE, taskList.addTask(new ToDo(input)), taskList.size()));
+                    break;
+                case DEADLINE_COMMAND:
+                    String[] deadlineInfo = input.split(DEADLINE_DELIMITER);
+                    String deadline = deadlineInfo[1].trim();
+                    String deadlineText = deadlineInfo[0].substring(DEADLINE_COMMAND.length() + 1).trim();
+                    display_message(String.format(ADD_TASK_MESSAGE, taskList.addTask(new Deadline(deadlineText, deadline)), taskList.size()));
+                    break;
+                case EVENT_COMMAND:
+                    String[] eventInfo = input.split(EVENT_DELIMITER);
+                    String event = eventInfo[1].trim();
+                    String eventText = eventInfo[0].substring(EVENT_COMMAND.length() + 1).trim();
+                    display_message(String.format(ADD_TASK_MESSAGE, taskList.addTask(new Event(eventText, event)), taskList.size()));
+                    break;
                 default:
-                    display_message(taskList.addTask(input));
+                    // Do plural etc
+                    // display_message(String.format("%s\n Now you have %d tasks in the list.\n", taskList.addTask(input)));
             }
         }
         sc.close();

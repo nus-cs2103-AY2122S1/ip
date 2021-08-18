@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private final String text;
     private boolean isDone;
 
@@ -7,16 +7,15 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task markDone() {
+    public void markDone() {
         this.isDone = true;
-        return this;
     }
 
-    public String getDoneStatus() {
+    private String getDoneStatus() {
         return this.isDone ? "X" : " ";
     }
 
-    public String getText() {
+    private String getText() {
         return this.text;
     }
 

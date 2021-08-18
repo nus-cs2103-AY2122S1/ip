@@ -8,8 +8,11 @@ public class TaskList {
         this.taskArr = new ArrayList<>();
     }
 
-    public String addTask(String text) {
-        Task task = new Task(text);
+    public int size() {
+        return taskArr.size();
+    }
+
+    public String addTask(Task task) {
         this.taskArr.add(task);
         return String.format("added: %s", task);
     }
