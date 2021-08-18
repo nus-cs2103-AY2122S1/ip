@@ -13,11 +13,21 @@ public class Lania {
      * @param s String provided by the user.
      */
     public static void update(String s) {
-        Task t = new Task(s);
+        Task t = new Task("");
+        String[] split = s.split(" ", 2);
+        if (split[0].equals("todo")) {
+            t = new Todo(split[1]);
+        } else if (split[0].equals("deadline")) {
+            String[] splitDeadline = split[1].split(" /by ");
+            t = new Deadline(splitDeadline[0], splitDeadline[1]);
+        } else if (split[0].equals("event")) {
+            String[] splitEvent = split[1].split(" /at ");
+            t = new Event(splitEvent[0], splitEvent[1]);
+        }
         taskArray[count] = t;
         count++;
-        System.out.print("Lania has added: ");
-        echo(s);
+        System.out.println("Lania has added: ");
+        System.out.println(t);
     }
 
     /**
@@ -64,14 +74,12 @@ public class Lania {
         String input = s.nextLine();
         while(!input.equals("bye")) {
             String[] split = input.split(" ");
-            if (split[0].equals("done")) {
+            if (input.equals("list")) {
+                list();
+            } else if (split[0].equals("done")) {
                 complete(Integer.parseInt(split[1]));
             } else {
-                if (input.equals("list")) {
-                    list();
-                } else {
-                    update(input);
-                }
+                update(input);
             }
             input = s.nextLine();
         }
