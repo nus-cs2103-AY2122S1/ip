@@ -31,7 +31,7 @@ public class TaskList {
     public void list() {
         for (int i = 0; i < this.nextSpaceToStore; i++) {
             int currTask = i + 1;
-            System.out.println(currTask + ". " + allTasks[i].toString());
+            System.out.println(currTask + "." + allTasks[i].toString());
         }
     }
 
@@ -42,7 +42,7 @@ public class TaskList {
     public void done(int taskNo) {
         Task doneTask = allTasks[taskNo - 1];
         doneTask.taskCompleted();
-        System.out.println("  [" + doneTask.getStatusIcon() + "] " + doneTask.getTaskDescription());
+        System.out.println("  " + doneTask.toString());
     }
 
     /**
