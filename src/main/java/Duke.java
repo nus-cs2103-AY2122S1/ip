@@ -13,7 +13,7 @@ public class Duke {
         System.out.println(welcomeLine);
         boolean isRunning = true;
         String input;
-        Task[] listArray = new Task[100];
+        ArrayList<Task> listArray = new ArrayList<Task>(100);
         int count = 0;
         int index;
         String[] split;
@@ -31,7 +31,7 @@ public class Duke {
                             System.out.println("The list is empty!"); //When the list is empty
                         } else {
                             for (int i = 0; i < count; i++) {
-                                System.out.println(i + 1 + ". " + listArray[i]);
+                                System.out.println(i + 1 + ". " + listArray.get(i));
                             }
                         }
                         break;
@@ -41,17 +41,20 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! done will require a task number to update.");
                         }
                         index = Integer.parseInt(input.trim());
+                        if (index > count || index <= 0) { //Catches if the number is > than the number of task or if its negative
+                            throw new DukeException("☹ OOPS!!! The number is not in within the number of tasks!");
+                        }
                         System.out.println("Nice! I've marked this task as done:");
-                        System.out.println("  " + listArray[index - 1].done());
+                        System.out.println("  " + listArray.get(index - 1).done());
                         break;
                     case "todo":  //Inputs a todo task when given the "todo" prompt
                         input = sc.nextLine();
                         if (input.isEmpty()) { //Catch if todo description is empty
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
-                        listArray[count++] = new Todo(input.trim());
+                        listArray.add(count++, new Todo(input.trim()));
                         System.out.println("Got it. I've added this task:");
-                        System.out.println("  " + listArray[count - 1]);
+                        System.out.println("  " + listArray.get(count - 1));
                         System.out.println("Now you have " + count + " in the list.");
                         break;
                     case "deadline": //Inputs a Deadline task when given the "deadline" prompt
@@ -63,9 +66,9 @@ public class Duke {
                         if (split.length <= 1) {
                             throw new DukeException("☹ OOPS!!! Your deadline input format is not valid!");
                         }
-                        listArray[count++] = new Deadline(split[0].trim(), split[1]);
+                        listArray.add(count++, new Deadline(split[0].trim(), split[1]));
                         System.out.println("Got it. I've added this task:");
-                        System.out.println("  " + listArray[count - 1]);
+                        System.out.println("  " + listArray.get(count - 1));
                         System.out.println("Now you have " + count + " in the list.");
                         break;
                     case "event": //Inputs an Event task when given the "event" prompt
@@ -77,10 +80,23 @@ public class Duke {
                         if (split.length <= 1) {
                             throw new DukeException("☹ OOPS!!! Your event input format is not valid!");
                         }
-                        listArray[count++] = new Event(split[0].trim() , split[1]);
+                        listArray.add(count++, new Event(split[0].trim() , split[1]));
                         System.out.println("Got it. I've added this task:");
-                        System.out.println("  " + listArray[count - 1]);
+                        System.out.println("  " + listArray.get(count - 1));
                         System.out.println("Now you have " + count + " in the list.");
+                        break;
+                        case "delete":  //deletes the task when it gets the "delete x" prompt and updates the task as well.
+                        input = sc.nextLine();
+                        if (input.isEmpty()) { //Catch if there is no number after the command
+                            throw new DukeException("☹ OOPS!!! delete will require a task number to update.");
+                        }
+                        index = Integer.parseInt(input.trim());
+                        if (index > count || index <= 0) { //Catches if the number is > than the number of task or if its negative
+                            throw new DukeException("☹ OOPS!!! The number is not in within the number of tasks!");
+                        }
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println("  " + listArray.remove(index - 1));
+                        System.out.println("Now you have " + --count + " in the list.");
                         break;
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

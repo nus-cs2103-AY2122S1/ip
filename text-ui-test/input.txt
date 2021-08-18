@@ -1,3 +1,11 @@
+list
+delete
+done
+done 1
+delete 2
+todo
+event project meeting
+deadline feed cats
 todo borrow book
 list
 deadline return book /by sunday
@@ -6,7 +14,9 @@ list
 random
 done 1
 done 3
+delete 1
 todo find cats
+delete 3
 deadline feed cats /by the time you buy them
 event cat party /at the day you get the cats
 list
