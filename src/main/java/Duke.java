@@ -68,9 +68,10 @@ public class Duke {
                     if (splitInput.length < 2) {
                         throw new DukeException("We don't know what to delete!");
                     }
-                    int index = Integer.parseInt(splitInput[1]);
+                    int index = Integer.parseInt(splitInput[1]) - 1;
+                    Task toDelete = tasks.get(index);
                     tasks.remove(index);
-
+                    printer.PrintDelete(toDelete.toString(), tasks.size());
                 } catch (DukeException e1) {
                     printer.PrintMessage(e1.getMessage());
                 } catch (NumberFormatException e2) {

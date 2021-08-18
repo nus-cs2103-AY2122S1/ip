@@ -39,4 +39,11 @@ public class Printer {
                 message, total);
         PrintMessage(newMsg);
     }
+
+    public void PrintDelete(String message, int total) {
+        String newMsg = String.
+                format("Noted. I've removed this task:\n  %s\nNow you have a total of %d tasks in the list.",
+                        message, total);
+        PrintMessage(newMsg);
+    }
 }
