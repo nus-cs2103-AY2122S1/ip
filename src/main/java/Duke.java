@@ -1,44 +1,37 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Duke {
-    /** Handles user input for the program. */
-    private static void run() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private TaskList tasks;
+    private Ui ui;
 
-        // Greeting
-        Printer.print(
-                "\033[3m*booting up......*\033[0m",
-                "I'm the Hui Zhuan Bot v1.0!",
-                "What do you want me to do?");
+    public Duke() {
+        ui = new Ui();
+        tasks = new TaskList();
+    }
 
-        while (true) {
+    private void run() throws IOException {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                String userInput = reader.readLine();
-                if (userInput.equals("bye")) {
-                    break;
-                }
-                Processor.process(userInput);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InvalidInputException e) {
-                Printer.print(e.getMessage());
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
             }
         }
-
-        // Goodbye
-        Printer.print("Bye. See ya l8er allig8er!", "\033[3m*shutting down......*\033[0m");
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println("Hello from\n" + logo);
-        run();
+        try {
+            new Duke().run();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

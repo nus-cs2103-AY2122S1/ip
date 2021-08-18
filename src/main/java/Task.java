@@ -9,7 +9,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /** Task constructor */
-    private Task() {
+    protected Task() {
         this("");
     }
     
@@ -34,8 +34,8 @@ public abstract class Task {
     }
 
     /** Marks the task's status as done */
-    public void markTaskAsDone() {
+    public Task markTaskAsDone() {
         isDone = true;
-        Printer.print("Nice! I've marked this task as done:", this.toString());
+        return this;
     }
 }

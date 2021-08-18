@@ -1,10 +1,7 @@
 /**
  * Represents an Event object.
  */
-public class Event extends Task {
-    /** The time when the event is happening. */
-    private String at;
-
+public class Event extends DatedTask {
     /**
      * Event constructor.
      *
@@ -22,8 +19,7 @@ public class Event extends Task {
      * @param at the event's time
      */
     private Event(String description, String at) {
-        super(description);
-        this.at = at;
+        super(description, at);
     }
 
     /**
@@ -54,6 +50,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s %s (at: %s)", isDone ? "[X]" : "[ ]", description, at);
+        return String.format("[E]%s %s (at: %s)", isDone ? "[X]" : "[ ]", description, date);
     }
 }
