@@ -1,7 +1,7 @@
 import java.util.Scanner;
 public class Duke {
 
-    private static String[] userInput = new String[100];
+    private static Task[] userInput = new Task[100];
     private static boolean isBye = false;
 
     public static void setArray()
@@ -15,6 +15,8 @@ public class Duke {
     public static void getInput(Scanner scanner, int counter) {
         while (!isBye) {
             String input = scanner.nextLine();
+            String[] splitInput = input.split(" ");
+
             if (input.equals("bye") || input == "bye") {
                 System.out.println("  ---------------------------------------------");
                 System.out.println("    Bye. Hope to see you again soon!");
@@ -22,18 +24,29 @@ public class Duke {
                 isBye = true;
                 scanner.close();
             } else if (input.equals("list") || input == "list") {
-                System.out.println("  ---------------------------------------------");
+                System.out.println("  ---------------------------------------------\n   " +
+                        "Here are the tasks in your list:");
                 int point = 0;
                 while (userInput[point] != null) {
-                    System.out.println("    " + (point + 1) + ". " + userInput[point]);
+                    Task temp = userInput[point];
+                    System.out.println("        " + (point + 1) + ".[" + temp.getStatusIcon()
+                        + "] " + temp.toString());
                     point++;
                 }
                 System.out.println("  ---------------------------------------------");
+            } else if(input.contains("done") && splitInput.length == 2) {
+                Task temp = userInput[Integer.valueOf(splitInput[1]) - 1];
+                temp.markAsDone();
+                System.out.println("---------------------------------------------\n" +
+                        "   Nice! I've marked this task as done:\n     [" +
+                        temp.getStatusIcon() + "] " + temp.toString()
+                            + "\n---------------------------------------------");
             } else {
                 System.out.println("  ---------------------------------------------");
                 System.out.println("    added: " + input);
                 System.out.println("  ---------------------------------------------");
-                userInput[counter] = input;
+                Task addTask = new Task(input);
+                userInput[counter] = addTask;
                 counter++;
             }
 
