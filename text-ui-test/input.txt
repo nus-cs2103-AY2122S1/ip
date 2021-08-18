@@ -1,0 +1,16 @@
+todo
+todo test
+deadline
+deadline test1
+deadline test1 /by 3pm
+event
+event test2
+event test2 /at monday
+list
+done 0
+done 4
+done asd
+done 2
+list
+asd
+bye
