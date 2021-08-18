@@ -105,13 +105,24 @@ public class Duke {
         return time;
     }
 
+    private static void deleteTask(int index) throws IndexOutOfBoundsException {
+        if (index > list.size()) {
+            throw new IndexOutOfBoundsException("The input task number is too big.");
+        }
+        Task removedTask = list.remove(index - 1);
+
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + removedTask);
+        System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+    }
+
     public static void main(String[] args) {
         greet();
 
         Scanner scanner = new Scanner(System.in);
         String text = scanner.nextLine();
 
-        String[] keywords = {"done", "bye", "list", "bye", "deadline", "event", "todo"};
+        String[] keywords = {"done", "bye", "list", "bye", "deadline", "event", "todo", "delete"};
 
         try {
         while (!text.isEmpty()) {
@@ -138,6 +149,14 @@ public class Duke {
                     else if (text.equals("bye")) {
                         bye();
                         break;
+                    }
+
+                    //delete task
+                    else if (text.startsWith("delete")) {
+                        char last_digit = text.charAt(text.length() - 1);
+                        int index = Character.getNumericValue(last_digit);
+                        deleteTask(index);
+                        text = scanner.nextLine();
                     }
 
                     //add new task
