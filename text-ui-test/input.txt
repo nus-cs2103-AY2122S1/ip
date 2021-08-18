@@ -1,0 +1,11 @@
+list
+event ACC1703X lecture /at 10AM tomorrow
+deadline ip Project /by 23:59 tomorrow
+todo walk at least 10000 steps
+I hate myself
+list
+done 1
+   done  2
+done 3
+  list
+bye

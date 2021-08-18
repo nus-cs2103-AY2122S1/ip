@@ -1,7 +1,73 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+------------------------------
+Hello! I'm Duke.
+What can I do for you?
+------------------------------
+Enter command: list
+------------------------------
+Here is the list of all tasks:
+------------------------------
+Enter command: event ACC1703X lecture /at 10AM tomorrow
+------------------------------
+Got it! I've added this task:
+[E][ ] ACC1703X lecture (at 10AM tomorrow)
+Now you have 1 tasks in the list
+------------------------------
+Enter command: deadline ip Project /by 23:59 tomorrow
+------------------------------
+Got it! I've added this task:
+[D][ ] ip Project (by 23:59 tomorrow)
+Now you have 2 tasks in the list
+------------------------------
+Enter command: todo walk at least 10000 steps
+------------------------------
+Got it! I've added this task:
+[T][ ] walk at least 10000 steps
+Now you have 3 tasks in the list
+------------------------------
+Enter command: I hate myself
+------------------------------
+OOPS!!! I'm sorry, but I don't know what that means :-(
+------------------------------
+Enter command: list
+------------------------------
+Here is the list of all tasks:
+1. [E][ ] ACC1703X lecture (at 10AM tomorrow)
+2. [D][ ] ip Project (by 23:59 tomorrow)
+3. [T][ ] walk at least 10000 steps
+------------------------------
+Enter command: done 1
+------------------------------
+Nice! I've marked this task as done:
+[E][X] ACC1703X lecture (at 10AM tomorrow)
+------------------------------
+Enter command:   done  2
+------------------------------
+Nice! I've marked this task as done:
+[D][X] ip Project (by 23:59 tomorrow)
+------------------------------
+Enter command: done 3
+------------------------------
+Nice! I've marked this task as done:
+[T][X] walk at least 10000 steps
+------------------------------
+Enter command: list
+------------------------------
+Here is the list of all tasks:
+1. [E][X] ACC1703X lecture (at 10AM tomorrow)
+2. [D][X] ip Project (by 23:59 tomorrow)
+3. [T][X] walk at least 10000 steps
+------------------------------
+Enter command: bye
+------------------------------
+Program exiting...
+Bye. Hope to see you again soon!
+
+
+Process finished with exit code 0

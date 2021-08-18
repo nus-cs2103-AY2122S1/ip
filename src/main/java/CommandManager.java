@@ -103,6 +103,7 @@ public class CommandManager {
      * Add a horizontal dash line in spaces between commands
      */
     private void addSpace() {
+        System.out.println();
         for (int i = 0; i < 30; i++) {
             System.out.print("-");
         }
