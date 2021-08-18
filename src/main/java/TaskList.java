@@ -1,25 +1,29 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    private static ArrayList<Task> store;
+    private static ArrayList<Task> tl;
 
     public TaskList() {
-        store = new ArrayList<>();
+        tl = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> loadedData) {
+        tl = loadedData;
     }
 
     public int size() {
-        return store.size();
+        return tl.size();
     }
 
     public Task get(int i) {
-        return store.get(i);
+        return tl.get(i);
     }
 
     public Task delete(int i) {
-        return store.remove(i);
+        return tl.remove(i);
     }
 
     public void add(Task t) {
-        store.add(t);
+        tl.add(t);
     }
 }

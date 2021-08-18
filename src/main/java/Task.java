@@ -17,6 +17,18 @@ public abstract class Task {
         this.flag = flag;
     }
 
+    public boolean getFlag() {
+        return flag;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public abstract String getType();
+
+    public abstract String getDate();
+
     @Override
     public String toString() {
         if (flag) {

@@ -49,7 +49,7 @@ public class Ui {
         System.out.println("Sorry! I don't know what your request means. Please try again?");
     }
 
-    public void showLoadingError() {
+    public void notifyLoadingError() {
         System.out.println("An error occurred while loading in the saved data...");
     }
 

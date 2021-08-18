@@ -1,13 +1,23 @@
 import java.util.Scanner;
 
+//delete OOB index not handled.
+//error handling is a mess
+//ui handover to Ui class is still incomplete
+
 public class Duke {
-    private static TaskList tasklist = new TaskList();
+    private static TaskList tasklist;
     private static Ui ui;
     private Storage storage;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        try {
+            tasklist = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.notifyLoadingError();
+            tasklist = new TaskList();
+        }
     }
 
     public void run() {
@@ -23,6 +33,7 @@ public class Duke {
                 e.printStackTrace();
             }
         }
+        storage.save(tasklist);
         ui.closing();
     }
 
