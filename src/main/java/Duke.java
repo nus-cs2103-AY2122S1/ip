@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -7,22 +9,28 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("----------------------");
+        System.out.println("Hello from\n" + logo);
+        System.out.println("What can I do for you?");
+        System.out.println("----------------------");
         Scanner stdin = new Scanner(System.in);
+        List<String> tasks = new ArrayList<>();
         while (true){
-            System.out.println("----------------------");
-            System.out.println("Hello from\n" + logo);
-            System.out.println("What can I do for you?");
-            System.out.println("----------------------");
-            String command = stdin.next();
+            String command = stdin.nextLine();
             if ("bye".equals(command)){
                 System.out.println("----------------------");
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println("----------------------");
                 break;
             }
+            else if ("list".equals(command)){
+                for (String task : tasks){
+                    System.out.println(task);
+                }
+            }
             else {
                 System.out.println("----------------------");
-                System.out.println(command);
+                tasks.add(command);
                 System.out.println("----------------------");
             }
         }
