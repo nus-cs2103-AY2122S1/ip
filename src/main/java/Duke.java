@@ -7,8 +7,6 @@ public class Duke {
     public static void main(String[] args) {
         Scanner userSc = new Scanner(System.in);
         String name = "JARVIS";
-
-
         System.out.println("Hello I am " + name +".\nIs there anything I can do for you Sir?\n");
 
         String userInput = userSc.nextLine();
@@ -16,15 +14,18 @@ public class Duke {
             if(userInput.equals("list")){
                 list();
             } else if(userInput.length() > 3 && userInput.substring(0, 4).equals("done") ){
-                int task = Integer.parseInt(userInput.substring(5)) ;
-                if(task > 0 && task <= items.size()){
-                    markDone(task - 1);
-                    System.out.println("One task down sir. Here is the task I checked off:");
-                    System.out.println("    " + items.get(task - 1).toString() + "\n");
-                } else {
-                    System.out.println("You have entered an invalid task number Sir, please input again.\n");
+                try{
+                    int task = Integer.parseInt(userInput.substring(5));
+                    if(task > 0 && task <= items.size()){
+                        markDone(task - 1);
+                        System.out.println("One task down sir. Here is the task I checked off:");
+                        System.out.println("    " + items.get(task - 1).toString() + "\n");
+                    } else {
+                        System.out.println("You have entered an invalid task number Sir, please input again.\n");
+                    }
+                } catch (NumberFormatException e){
+                    System.out.println("Task number formatted incorrectly. Try again\n");
                 }
-
             } else if(userInput.length() > 8 && userInput.substring(0, 8).equals("deadline")  && userInput.contains("/by")){
 
                 if(userInput.indexOf("/by")  < 11 ){
@@ -52,17 +53,18 @@ public class Duke {
                 }
 
             } else if(userInput.length() > 3 && userInput.substring(0, 4).equals("todo")){
-                if(userInput.length() < 6){
-                    System.out.println("Enter a valid todo activity\n");
-                } else {
+                try {
+                    readActivity(userInput.substring(5), "todo");
                     String description = userInput.substring(5);
                     Task t = new ToDo(description);
                     items.add(t);
                     echo(t.toString());
+                } catch (DukeException e){
+                    System.out.println(e.getMessage());
+                } catch (StringIndexOutOfBoundsException e){
+                    System.out.println("Enter a valid todo activity\n");
                 }
-
-            }
-            else {
+            } else {
                 System.out.println("That is a rather unusual looking request sir.\nPerhaps you might want to specify the kind of task you would like to add.\n");
             }
             userInput = userSc.nextLine();
@@ -85,6 +87,12 @@ public class Duke {
 
     public static void markDone(int n){
         items.get(n).markAsDone();
+    }
+
+    private static void readActivity(String userTask, String taskType) throws DukeException{
+        if(userTask.length() <= 1){
+            throw new DukeException("Enter valid " + taskType + " activity\n");
+        }
     }
 
 }

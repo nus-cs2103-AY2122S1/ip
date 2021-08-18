@@ -1,7 +1,40 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+ [E][ ] marathon (at: Saturday 2-5)
+Now you have 2 tasks in the list.
 
+Got it sir, I have added this task: 
+ [T][ ] send email to mom
+Now you have 3 tasks in the list.
+
+1. [D][ ] reading (by: 530)
+2. [E][ ] marathon (at: Saturday 2-5)
+3. [T][ ] send email to mom
+
+Task number formatted incorrectly. Try again
+
+One task down sir. Here is the task I checked off:
+    [D][X] reading (by: 530)
+
+Task number formatted incorrectly. Try again
+
+One task down sir. Here is the task I checked off:
+    [E][X] marathon (at: Saturday 2-5)
+
+1. [D][X] reading (by: 530)
+2. [E][X] marathon (at: Saturday 2-5)
+3. [T][ ] send email to mom
+
+Enter a valid deadline activity description
+
+Enter a valid event activity description
+
+Enter a valid todo activity
+
+Enter a valid deadline time
+
+Enter a valid event time
+
+1. [D][X] reading (by: 530)
+2. [E][X] marathon (at: Saturday 2-5)
+3. [T][ ] send email to mom
+
+Goodbye Sir! Will take good care of your garden in the meantime.
