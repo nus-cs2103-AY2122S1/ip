@@ -38,7 +38,7 @@ public class FulfillmentHandler {
         while(true) {
             String userInput = inputHandler.readInput();
             String[] splitUserInput = userInput.trim().split(" ", 2);
-            String userCommand = splitUserInput[0];
+            Command userCommand = Command.getCommand(splitUserInput[0].trim());
             String userInputBody = null;
 
             if (splitUserInput.length == 2) {
@@ -46,30 +46,35 @@ public class FulfillmentHandler {
             }
 
             try {
-                switch (userCommand) {
-                    case "list":
-                        handleTaskList();
-                        break;
-                    case "todo":
-                        handleTaskAdd(new ToDo(userInputBody));
-                        break;
-                    case "deadline":
-                        handleTaskAdd(new Deadline(userInputBody));
-                        break;
-                    case "event":
-                        handleTaskAdd(new Event(userInputBody));
-                        break;
-                    case "done":
-                        handleTaskDone(userInputBody);
-                        break;
-                    case "delete":
-                        handleTaskDelete(userInputBody);
-                        break;
-                    case "bye":
-                        handleBye();
-                        return;
-                    default:
-                        throw new InvalidCommandException();
+                if (userCommand != null) {
+                    switch (userCommand) {
+                        case LIST:
+                            handleTaskList();
+                            break;
+                        case TODO:
+                            handleTaskAdd(new ToDo(userInputBody));
+                            break;
+                        case DEADLINE:
+                            handleTaskAdd(new Deadline(userInputBody));
+                            break;
+                        case EVENT:
+                            handleTaskAdd(new Event(userInputBody));
+                            break;
+                        case DONE:
+                            handleTaskDone(userInputBody);
+                            break;
+                        case DELETE:
+                            handleTaskDelete(userInputBody);
+                            break;
+                        case BYE:
+                            handleBye();
+                            return;
+                        // default case in case unexpected no matches occurs.
+                        default:
+                            throw new InvalidCommandException();
+                    }
+                } else {
+                    throw new InvalidCommandException();
                 }
             } catch (DukeException e) {
                 outputHandler.writeMessage(new Message(e.getMessage()));
