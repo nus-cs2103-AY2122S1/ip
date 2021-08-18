@@ -83,30 +83,56 @@ public class Duke {
         System.out.println("Duke is gone. Hello, this is Duchess.\nHow can I help you?");
 
         while (true) {
-            String user_input = sc.nextLine();
-            String command = user_input.split(" ")[0];
-            if (command.equals("bye")) {
-                System.out.println("It has been a pleasure, goodbye!");
-                sc.close();
-                break;
-            } else if (command.equals("todo")) {
-                String taskName = user_input.split(" ", 2)[1];
-                System.out.println(addTodo(taskName));
-            } else if (command.equals("deadline")) {
-                String msg = user_input.split(" ", 2)[1];
-                String[] msg_split = msg.split(" /by ");
-                System.out.println(addDeadline(msg_split[0], msg_split[1]));
-            } else if (command.equals("event")) {
-                String msg = user_input.split(" ", 2)[1];
-                String[] msg_split = msg.split(" /at ");
-                System.out.println(addEvent(msg_split[0], msg_split[1]));
-            } else if (command.equals("list")) {
-                System.out.println(printTaskList());
-            } else if (command.equals("done")) {
-                int taskNum = Integer.parseInt(user_input.split(" ")[1]) - 1;
-                System.out.println(markTaskDone(taskNum));
-            } else {
-                System.out.println(addTask(user_input));
+            try {
+                String user_input = sc.nextLine().trim();
+                String[] input_split = user_input.split(" ", 2);
+                String command = input_split[0];
+                if (command.equals("bye")) {
+                    System.out.println("It has been a pleasure, goodbye!");
+                    sc.close();
+                    break;
+                } else if (command.equals("list")) {
+                    System.out.println(printTaskList());
+                } else if (command.equals("todo")) {
+                    if (input_split.length < 2) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    String taskName = input_split[1];
+                    System.out.println(addTodo(taskName));
+                } else if (command.equals("deadline")) {
+                    if (input_split.length < 2) {
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
+                    String msg = input_split[1];
+                    String[] msg_split = msg.split(" /by ", 2);
+                    if (msg_split.length < 2) {
+                        throw new DukeException("☹ OOPS!!! Please indicate when the task needs to be done by.");
+                    }
+                    System.out.println(addDeadline(msg_split[0], msg_split[1]));
+                } else if (command.equals("event")) {
+                    if (input_split.length < 2) {
+                        throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                    }
+                    String msg = input_split[1];
+                    String[] msg_split = msg.split(" /at ", 2);
+                    if (msg_split.length < 2) {
+                        throw new DukeException("☹ OOPS!!! Please indicate the start and end time of the event.");
+                    }
+                    System.out.println(addEvent(msg_split[0], msg_split[1]));
+                } else if (command.equals("done")) {
+                    if (input_split.length < 2) {
+                        throw new DukeException("☹ OOPS!!! Please indicate which task you want to complete.");
+                    }
+                    String strTaskNum = input_split[1].split(" ")[0];
+                    int taskNum = Integer.parseInt(strTaskNum) - 1;
+                    System.out.println(markTaskDone(taskNum));
+                } else {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                System.err.println(e.getMessage());
+            } catch (IndexOutOfBoundsException e) {
+                System.err.println("Please enter a valid index!");
             }
         }
     }
