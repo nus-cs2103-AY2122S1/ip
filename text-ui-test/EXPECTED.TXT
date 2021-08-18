@@ -33,6 +33,8 @@ Mark Done: Invalid Number, only numbers greater than 0 are accepted
 
 The Done command requires a number, separated by whitespace!
 
+The Done command requires a number, separated by whitespace!
+
 1. [T][ ] fly
 2. [D][X] return book  (by:  sunday)
 3. [E][ ] meeting tmr  (at:  2-4am Sunday)
