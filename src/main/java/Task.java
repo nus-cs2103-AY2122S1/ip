@@ -55,19 +55,27 @@ public class Task {
         return this.getStatusIcon() + " " + this.description;
     }
 
-    public void addTask(ArrayList<Task> storeRoom) {
+    public void addTask(int size) {
         System.out.println("____________________________________________________________\n"
                 + "Got it. I've added this task:\n  "
                 + this
                 + "\n"
                 + "Now you have "
-                + storeRoom.size()
+                + size
                 + " tasks in the list."
                 + "\n"
                 + "____________________________________________________________\n");
     }
-//
-//    public ArrayList<Task> delete(ArrayList<Task> storeRoom, int index) {
-//        storeRoom = storeRoom.remove();
-//    }
+
+    public void printDeleteTask(int size) {
+        System.out.println("____________________________________________________________\n"
+                + "Noted. I've removed this task:\n  "
+                + this
+                + "\n"
+                + "Now you have "
+                + size
+                + " tasks in the list."
+                + "\n"
+                + "____________________________________________________________\n");
+    }
 }

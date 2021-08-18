@@ -7,6 +7,9 @@ done 1
 done 3
 done 4
 list
+delete 4
+list
 todo
 todoo
 todoo 1111
+bye

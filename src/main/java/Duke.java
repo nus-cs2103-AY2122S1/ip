@@ -39,9 +39,16 @@ public class Duke {
             }
 
             // delete task
-//            if (nextLine.startsWith("delete"))
+            if (nextLine.startsWith("delete")) {
+                int intValue = Integer.parseInt(nextLine.replaceAll("[^0-9]", ""));
+                Task taskToDelete = storeRoom.get(intValue - 1);
+                storeRoom.remove(intValue - 1);
+                taskToDelete.printDeleteTask(storeRoom.size());
+                nextLine = in.nextLine();
+                continue;
+            }
 
-            // add task
+            //add task
             try {
                 if (nextLine.startsWith("todo")) {
                     Task.isFirstWordValid(nextLine, "todo");
@@ -63,7 +70,7 @@ public class Duke {
                     task = Event.splitEvent(nextLine);
                 }
                 storeRoom.add(task);
-                task.addTask(storeRoom);
+                task.addTask(storeRoom.size());
                 nextLine = in.nextLine();
             } catch (DukeException dukeException) {
                 System.out.println(dukeException);
