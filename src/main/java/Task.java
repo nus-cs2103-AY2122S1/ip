@@ -21,7 +21,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String fullDescription = String.format("[%s] %s", getStatusIcon(), getDescription());
+        String fullDescription = String.format("[%s]%s", getStatusIcon(), getDescription());
         return fullDescription;
     }
 

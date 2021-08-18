@@ -27,6 +27,22 @@ public class Duke {
             this.list();
         } else if (command.equals("done")) {
             this.done(userInput);
+        } else if (command.equals("todo")) {
+            String taskDescription = userInput.split("todo")[1];
+            Todo newTodo = new Todo(taskDescription);
+            this.addTask(newTodo);
+        } else if (command.equals("deadline")) {
+            String[] splitString = userInput.split("deadline|/by");
+            String taskDescription = splitString[1];
+            String by = splitString[2];
+            Deadline newDeadline = new Deadline(taskDescription, by);
+            this.addTask(newDeadline);
+        } else if (command.equals("event")) {
+            String[] splitString = userInput.split("event|/at");
+            String taskDescription = splitString[1];
+            String at = splitString[2];
+            Event newEvent = new Event(taskDescription, at);
+            this.addTask(newEvent);
         } else {
             this.add(userInput);
         }
@@ -63,6 +79,17 @@ public class Duke {
         String start = "_____________________________________\n";
         String end = "\n_____________________________________";
         String output = start + "added: " + newTask.getDescription() + end;
+        System.out.println(output);
+    }
+
+    private void addTask(Task task) {
+        this.taskList.add(task);
+        numTask = numTask + 1;
+        String start = "_____________________________________\n";
+        String end = "\n_____________________________________";
+        String addTask = String.format("Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.",
+                task.toString(), numTask);
+        String output = start + addTask + end;
         System.out.println(output);
     }
 
