@@ -16,33 +16,34 @@ public class Duke {
         System.out.println(divider);
 
         boolean exit = false;
-        ArrayList<String> request = new ArrayList<String>();
+        ArrayList<Task> request = new ArrayList<Task>();
 
         while (!exit) {
             System.out.print("You: ");
             Scanner sc = new Scanner(System.in);
             String str = sc.nextLine();
+            Task task = new Task(str);
+
+            System.out.println(divider);
             if (str.equals("bye")) {
                 exit = true;
-                break;
+                System.out.println("Bye. Hope to see you again soon!");
             } else if (str.equals("list")) {
                 int count = 1;
-                System.out.println(divider);
-                for (String s : request) {
-                    System.out.println(count + ". " + s);
+                for (Task s : request) {
+                    System.out.println(s.getTask());
                     count += 1;
                 }
-                System.out.println(divider);
+            } else if (str.contains("done")) {
+                int index = Integer.parseInt(str.substring(5)) - 1;
+                System.out.println(request.get(index).done());
             } else {
-                request.add(str);
-                System.out.println(divider);
+                request.add(task);
                 System.out.println("added: " + str);
-                System.out.println(divider);
             }
+            System.out.println(divider);
         }
 
-        System.out.println(divider);
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(divider);
+
     }
 }
