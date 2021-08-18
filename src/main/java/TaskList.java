@@ -25,6 +25,10 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    public void deleteTask(int index) {
+        this.taskList.remove(index);
+    }
+
     public String toString() {
         String description = "";
         for (int i = 0; i < this.taskList.size(); i += 1) {

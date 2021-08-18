@@ -16,6 +16,10 @@ public class Util {
     public static void taskAddConfirmation(Task task, int numTasks) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
+        Util.informNumTask(numTasks);
+    }
+
+    public static void informNumTask(int numTasks) {
         if (numTasks == 1) {
             System.out.println("Now you have " + numTasks + " task in the list.");
         } else if (numTasks > 1) {

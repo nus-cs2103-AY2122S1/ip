@@ -39,6 +39,17 @@ public class TaskManager {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(taskList.getTask(index));
             }
+        } else if (userCommand.equals("delete")) {
+            if (inputList.size() > 1 && Util.isInteger(inputList.get(1))) {
+                //Extract id of task
+                int index = Integer.parseInt(inputList.get(1)) - 1;
+                //Print out confirmation message
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(taskList.getTask(index));
+                //Delete the task
+                taskList.deleteTask(index);
+                Util.informNumTask(taskList.getNumTask());
+            }
         } else if (userCommand.equals("todo")) {
             String description = String.join(" ",
                     inputList.subList(1, inputList.size()));
