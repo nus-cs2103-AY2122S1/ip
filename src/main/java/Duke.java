@@ -24,13 +24,20 @@ public class Duke {
                 todos.trimToSize();
                 System.out.println(end);
                 for (int i = 0; i < todos.size(); i++) {
-                     System.out.println(indentation + (i + 1) + ": " + todos.get(i).taskName);
+                    String checkbox = todos.get(i).isDone ? "[X] " : "[ ] ";
+                    System.out.println(indentation + (i + 1) + ": " + checkbox + todos.get(i).description);
                 }
                 System.out.println(end);
-            } else {
+            } else if (str.contains("done ")) {
+                int taskNo = Integer.valueOf(str.substring(5)) - 1;
+                System.out.println(end);
+                System.out.println(indentation + "Good Job on not procrastinating! This task has been marked as done: ");
+                System.out.println(indentation + "[X] " + list.complete(taskNo));
+                System.out.println(end);
+            }else {
                 Task task = new Task(str);
                 list.add(task);
-                System.out.println(end + "\n" + indentation + "added: " + task.taskName + "\n" + end);
+                System.out.println(end + "\n" + indentation + "added: " + task.description + "\n" + end);
             }
 
             str = sc.nextLine();

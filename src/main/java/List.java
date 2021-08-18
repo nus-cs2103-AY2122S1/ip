@@ -7,10 +7,14 @@ public class List {
 
     public String add(Task task) {
         list.add(task);
-        return task.taskName;
+        return task.description;
     }
 
     public ArrayList<Task> getList() {
         return list;
+    }
+
+    public String complete(int taskNo) {
+        return list.get(taskNo).check();
     }
 }
