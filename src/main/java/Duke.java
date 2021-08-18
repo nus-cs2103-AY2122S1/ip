@@ -61,8 +61,11 @@ public class Duke {
                 storedInfo[count] = new Task(in);
                 System.out.println(storedInfo[count]);
                 count++;
-                System.out.println("Now you have " + count + " tasks in the list.");
-
+                if (count == 1) {
+                    System.out.println("Now you have " + count + " task in the list.");
+                } else {
+                    System.out.println("Now you have " + count + " tasks in the list.");
+                }
 
             }
 
