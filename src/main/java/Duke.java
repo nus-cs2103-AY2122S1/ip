@@ -43,6 +43,10 @@ public class Duke {
                         System.out.println(addTasks(cmds));
                         System.out.println("\t____________________________________________________________\n");
                         break;
+                    case "delete":
+                        System.out.println(deleteTask(Integer.parseInt(cmds[1])));
+                        System.out.println("\t____________________________________________________________\n");
+                        break;
                     default:
                         throw new DukeException("Invalid command given!");
                 }
@@ -107,6 +111,14 @@ public class Duke {
 
     public static String printTask(Task task) {
         return "\tGot it. I've added this task: \n\t\t" +
+                task +
+                "\n\tNow you have " + tasks.size() + " tasks in the list.";
+    }
+
+    public static String deleteTask(int index) {
+        Task task = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        return "\tNoted. I've removed this task: " +
                 task +
                 "\n\tNow you have " + tasks.size() + " tasks in the list.";
     }
