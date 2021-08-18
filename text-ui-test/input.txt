@@ -1,0 +1,22 @@
+list
+list asdf
+done
+done 0
+done 1
+done 999
+done asdf
+deadline
+deadline ip
+deadline ip /by Friday
+event
+event Dinner
+event Dinner /at Thursday 1900-2000
+todo
+todo study
+list
+done 4
+done 2
+list
+asdf
+bye asdf
+bye
