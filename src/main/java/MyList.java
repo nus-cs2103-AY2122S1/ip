@@ -3,14 +3,15 @@ import java.util.List;
 
 public class MyList {
 
-    private List<String> items;
+    private final List<String> items;
 
     MyList() {
         this.items = new ArrayList<String>(100);
     }
 
-    protected void addItem(String item) {
+    protected String addItem(String item) {
         this.items.add(item);
+        return "added: " + item;
     }
 
     protected String getAllItems() {
