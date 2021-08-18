@@ -12,9 +12,7 @@ public class Task {
     }
 
     public void markAsDone() {
-        System.out.println("Nice! I've marked this task as done:");
         isDone = true;
-        System.out.println("    " + this);
     }
 
     public String getDescription() {

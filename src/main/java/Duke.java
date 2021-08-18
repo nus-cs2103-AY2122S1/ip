@@ -4,9 +4,14 @@ import java.util.Scanner;
 public class Duke {
     private final static String GREETING_MSG = "Hello! I'm Duke\nWhat can I do for you?";
     private final static String GOODBYE_MSG = "Bye. Hope to see you again soon!";
+    private final static String LIST_TASK_MSG = "Here are the tasks in your list:";
     private final static String ADD_TASK_MSG_TEMPLATE = "Got it. I've added this task:\n"
-                                                        + "    %s\n"
-                                                        + "Now you have %d tasks in the list.\n";
+                                                        + "  %s\n"
+                                                        + "Now you have %d %s in the list.\n";
+    private final static String DELETE_TASK_MSG_TEMPLATE = "Noted. I've removed this task:\n"
+                                                        + "  %s\n"
+                                                        + "Now you have %d %s in the list.\n";
+    private final static String MARK_DONE_MSG_TEMPLATE = "Nice! I've marked this task as done:\n  %s\n";
     private final static Scanner SCANNER = new Scanner(System.in);
     private final static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -22,26 +27,36 @@ public class Duke {
     private static void addTodo(String description) {
         Task taskToAdd = new Todo(description);
         tasks.add(taskToAdd);
-        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, tasks.size());
+        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, tasks.size(), tasks.size() <= 1 ? "task" : "tasks");
     }
 
     private static void addDeadline(String description, String by) {
         Task taskToAdd = new Deadline(description, by);
         tasks.add(taskToAdd);
-        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, tasks.size());
+        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, tasks.size(), tasks.size() <= 1 ? "task" : "tasks");
     }
 
     private static void addEvent(String description, String at) {
         Task taskToAdd = new Event(description, at);
         tasks.add(taskToAdd);
-        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, tasks.size());
+        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, tasks.size(), tasks.size() <= 1 ? "task" : "tasks");
     }
 
     private static void listTasks() {
-        System.out.println("Here are the tasks in your list:");
+        System.out.println(LIST_TASK_MSG);
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("%d.%s/n", i + 1, tasks.get(i));
+            System.out.printf("%d.%s\n", i + 1, tasks.get(i));
         }
+    }
+
+    private static void doneTask(int index) {
+        tasks.get(index).markAsDone();
+        System.out.printf(MARK_DONE_MSG_TEMPLATE, tasks.get(index));
+    }
+
+    private static void deleteTask(int index) {
+        Task tasksToRemove = tasks.remove(index);
+        System.out.printf(DELETE_TASK_MSG_TEMPLATE, tasksToRemove, tasks.size(), tasks.size() <= 1 ? "task" : "tasks");
     }
 
     private static void runCommand(String cmd) throws DukeException {
@@ -66,13 +81,13 @@ public class Duke {
             if (i < 0 || i >= tasks.size()) {
                 throw new DukeException(String.format("☹ OOPS!!! I'm sorry, but no task numbered %d", i + 1));
             }
-            tasks.get(i).markAsDone();
+            doneTask(i);
         } else if (cmd.matches("^delete[ \\t]+[0-9]+")) {
             int i = Integer.parseInt(cmd.split("^delete[ \\t]+")[1]) - 1;
             if (i < 0 || i >= tasks.size()) {
                 throw new DukeException(String.format("☹ OOPS!!! I'm sorry, but no task numbered %d", i + 1));
             }
-            tasks.remove(i);
+            deleteTask(i);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
