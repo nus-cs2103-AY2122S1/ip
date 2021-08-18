@@ -4,11 +4,18 @@ public class Task {
     protected char typeIndicator;
 
     protected enum TypeIndicators {
-        TODO, EVENT, DEADLINE
+        TODO('T'),
+        EVENT('E'),
+        DEADLINE('D');
+
+        public final char indicator;
+        private TypeIndicators(char indicator) {
+            this.indicator = indicator;
+        }
+        public void setIndicatorForTask(Task task) {
+            task.typeIndicator = this.indicator;
+        }
     }
-    private static final char TYPE_INDICATOR_TODO = 'T';
-    private static final char TYPE_INDICATOR_EVENT = 'E';
-    private static final char TYPE_INDICATOR_DEADLINE = 'D';
 
     /**
      * A constructor for a Task.
@@ -18,17 +25,7 @@ public class Task {
     public Task(String title, TypeIndicators taskType) {
         this.title = title;
         this.done = false;
-        switch (taskType) {
-            case TODO:
-                this.typeIndicator = TYPE_INDICATOR_TODO;
-                break;
-            case EVENT:
-                this.typeIndicator = TYPE_INDICATOR_EVENT;
-                break;
-            case DEADLINE:
-                this.typeIndicator = TYPE_INDICATOR_DEADLINE;
-                break;
-        }
+        taskType.setIndicatorForTask(this);
     }
 
     /**
