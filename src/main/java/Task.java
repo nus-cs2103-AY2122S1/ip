@@ -5,15 +5,18 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String taskType;
 
     /**
      * Creates a task with the specified description, isDone false by default.
      *
-     * @param description
+     * @param description description of task
+     * @param taskType    type of task (todo/deadline/event)
      */
-    public Task(String description) {
+    public Task(String description, String taskType) {
         this.description = description;
         this.isDone = false;
+        this.taskType = taskType;
     }
 
     /**
@@ -23,6 +26,17 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    /**
+     * Getter method for type of task using taskType.
+     *
+     * @return an icon representing the type of the task (T, D, E)
+     */
+    public String getTypeIcon() {
+        return (this.taskType == "todo" ? "T" :
+                this.taskType == "deadline" ? "D" :
+                        this.taskType == "event" ? "E" : "NONE");
     }
 
     /**
