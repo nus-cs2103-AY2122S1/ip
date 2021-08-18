@@ -6,10 +6,12 @@ deadline return book /by Sunday
 done 1
 deadline rrr
 deadline
+delete 2
 list
 event llllll
 event
 event project meeting /at Mon 2-4pm
 done 3
 list
+delete 999
 bye

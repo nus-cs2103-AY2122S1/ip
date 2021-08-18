@@ -17,8 +17,6 @@ Error for command: "todo"
 Error: Arguments required for this command.
 
 1.[T][ ] borrow book
-
-
 added: [D][ ] return book (by: Sunday)
 Now you have 2 tasks
 
@@ -31,10 +29,10 @@ Error: The argument is wrong, did you use the required format?.
 Error for command: "deadline"
 Error: Arguments required for this command.
 
+Removed task 2
+[D][ ] return book (by: Sunday)
+
 1.[T][X] borrow book
-2.[D][ ] return book (by: Sunday)
-
-
 Error for command: "event"
 Error: The argument is wrong, did you use the required format?.
 
@@ -42,14 +40,14 @@ Error for command: "event"
 Error: Arguments required for this command.
 
 added: [E][ ] project meeting (at: Mon 2-4pm)
-Now you have 3 tasks
+Now you have 2 tasks
 
-Task 3 is done
-[E][X] project meeting (at: Mon 2-4pm)
+Error for command: "done"
+Error: Number is out of bounds
 
 1.[T][X] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][X] project meeting (at: Mon 2-4pm)
-
+2.[E][ ] project meeting (at: Mon 2-4pm)
+Error for command: "delete"
+Error: Number is out of bounds
 
 Bye bye

@@ -1,15 +1,14 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     public static String endWord = "bye";
 
-    Task[] storedList;
-    int currentIndex;
+    ArrayList<Task> storedList;
 
     private Duke() {
-        storedList = new Task[100];
-        currentIndex = 0;
+        storedList = new ArrayList<>();
     }
 
     private void start() {
@@ -36,6 +35,9 @@ public class Duke {
                         break;
                     case "event":
                         addEvent(getArgs(strArr));
+                        break;
+                    case "delete":
+                        delete(getArgs(strArr));
                         break;
                     default:
                         throw new InvalidCommandDukeException();
@@ -75,32 +77,53 @@ public class Duke {
     }
 
     private void addTask(Task task) {
-        storedList[currentIndex] = task;
-        currentIndex ++;
+        storedList.add(task);
         System.out.println("added: " + task);
-        System.out.println(String.format("Now you have %d tasks\n", currentIndex));
+        System.out.println(String.format("Now you have %d tasks\n", storedList.size()));
     }
 
     private void printList() {
-        for (int i = 0; i < currentIndex; i++) {
-            System.out.println(String.format("%d.%s", i + 1, storedList[i]));
+        for (int i = 0; i < storedList.size(); i++) {
+            System.out.println(String.format("%d.%s", i + 1, storedList.get(i)));
         }
-        System.out.println("\n");
     }
 
     private String getArgs(String[] arr) throws NoArgumentDukeException {
-        if (arr.length >= 2) {
+        if (arr.length >= 2 && !arr[1].equals("")) {
             return arr[1];
         } else {
             throw new NoArgumentDukeException();
         }
     }
 
-    private void markDone(String indexStr) {
-        int index = Integer.parseInt(indexStr);
-        storedList[index - 1].markDone();
-        System.out.println(String.format("Task %d is done", index));
-        System.out.println(storedList[index - 1] + "\n");
+    private void markDone(String indexStr) throws WrongArgumentDukeException, InvalidOperationDukeException {
+        try {
+            int index = Integer.parseInt(indexStr);
+            if (index < 1 || index > storedList.size()) {
+                throw new InvalidOperationDukeException("Number is out of bounds");
+            }
+            storedList.get(index - 1).markDone();
+            System.out.println(String.format("Task %d is done", index));
+            System.out.println(storedList.get(index - 1) + "\n");
+        } catch (NumberFormatException e) {
+            throw new WrongArgumentDukeException();
+        }
+
+    }
+
+    private void delete(String indexStr) throws WrongArgumentDukeException, InvalidOperationDukeException {
+        try {
+            int index = Integer.parseInt(indexStr);
+            if (index < 1 || index > storedList.size()) {
+                throw new InvalidOperationDukeException("Number is out of bounds");
+            }
+            Task task = storedList.remove(index - 1);
+            System.out.println(String.format("Removed task %d", index));
+            System.out.println(task + "\n");
+        } catch (NumberFormatException e) {
+            throw new WrongArgumentDukeException();
+        }
+
     }
 
 
