@@ -10,6 +10,11 @@ public class Task {
     this.status = false;
   }
 
+  @Override
+  public String toString() {
+    return "[" + getStatusIcon() + "] " + description;
+  }
+
   public String getStatusIcon() {
     return (status ? "X" : " ");
   }
