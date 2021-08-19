@@ -20,14 +20,20 @@ public class Responses {
     }
 
     protected static void next(String uResponse) {
-        if (uResponse.equals ("bye")) {
-            Exit.chat();
-        } else if (uResponse.equals("list")) {
-            List.chat();
-        } else if (uResponse.startsWith("done")) {
-            Done.chat(uResponse);
-        } else {
-            Echo.chat(uResponse);
-        }
+        try {
+            if (uResponse.equals ("bye")) {
+                Exit.chat();
+            } else if (uResponse.equals("list")) {
+                List.chat();
+            } else if (uResponse.startsWith("done")) {
+                Done.chat(uResponse);
+            } else {
+                Echo.chat(uResponse);
+            }
+        } catch (DukeException e) {
+            displayDukeResponse(String.format("\t%s\n", e.getMessage()));
+            next(getUserResponse());
+        } 
     } 
+
 }
