@@ -16,4 +16,8 @@ public class TaskTodo extends Task {
         return "[T]" + checkBox + description;
     }
 
+    String saveString() {
+        return "T" + '\t' + (this.done ? "1" : "0") + '\t' + this.description;
+    }
+
 }

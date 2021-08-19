@@ -24,4 +24,6 @@ public abstract class Task {
                 : "[ ] ";
         return checkBox + description;
     }
+
+    abstract String saveString();
 }

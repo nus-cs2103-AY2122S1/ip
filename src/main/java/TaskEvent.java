@@ -19,4 +19,9 @@ public class TaskEvent extends Task {
         return "[E]" + checkBox + description + " (at: " + at + ")";
     }
 
+    String saveString() {
+        return "E" + '\t' + (this.done ? "1" : "0") + '\t' + this.description + '\t' + this.at;
+    }
+
+
 }

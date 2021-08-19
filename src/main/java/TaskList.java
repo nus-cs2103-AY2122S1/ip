@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -36,6 +38,7 @@ public class TaskList {
                         return null;
                     });
         this.printSize();
+        this.saveList();
     }
 
 
@@ -52,6 +55,7 @@ public class TaskList {
                     ? Ui.OUTPUT_DISPLAY + "sugoi! Duke-san marked this task as done!"
                     : Ui.OUTPUT_DISPLAY + "Duke-san marked this task as not done!");
             System.out.println(Ui.OUTPUT_SPACES + tasks.get(index - 1));
+            saveList();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There's no task at index " + index + "!!");
         }
@@ -69,6 +73,7 @@ public class TaskList {
             System.out.println(Ui.OUTPUT_DISPLAY + "Noted. Duke-san removed this task:");
             System.out.println(Ui.OUTPUT_SPACES + removed);
             this.printSize();
+            saveList();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There's no task at index " + index + "!!");
         }
@@ -85,6 +90,20 @@ public class TaskList {
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.println(Ui.OUTPUT_SPACES + (i + 1) + "." + tasks.get(i));
             }
+        }
+    }
+
+    private void saveList() {
+        try {
+            FileWriter writer = new FileWriter("C:\\Users\\kohjx\\projects\\ip\\data\\TaskList.txt", false);
+            for (Task task : tasks) {
+                writer.write(task.saveString());
+                writer.write("\r\n");
+            }
+            writer.close();
+            System.out.println(Ui.OUTPUT_DISPLAY + "Duke-san saved your list UwU");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

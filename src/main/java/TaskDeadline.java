@@ -19,4 +19,8 @@ public class TaskDeadline extends Task {
         return "[D]" + checkBox + description + " (by: " + by + ")";
     }
 
+    String saveString() {
+        return "D" + '\t' + (this.done ? "1" : "0") + '\t' + this.description + '\t' + this.by;
+    }
+
 }
