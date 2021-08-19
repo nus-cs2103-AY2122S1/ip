@@ -14,7 +14,7 @@ public class Response {
                 + "Hello! I'm Duke\n"
                 + "What can I do for you?\n"
                 + H_LINE;
-        System.out.println("Hello from\n" + logo + helloMsg);
+        System.out.print("Hello from\n" + logo + helloMsg);
     }
 
     public static void respond(String message) {
