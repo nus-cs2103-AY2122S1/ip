@@ -12,10 +12,18 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you? :)");
         Scanner sc = new Scanner(System.in); //initialize scanner
-        String inpt_str = sc.nextLine(); //scanning user's first input
+        String userInput = sc.nextLine(); //scanning user's first input
+
+        // Catch DukeException
+        try{
+            InputChecker ic = new InputChecker(userInput);
+        } catch (DukeException e){
+            System.out.println(e.getMessage());
+        }
+
+        String inpt_str = userInput;
         Task inpt = new Task(inpt_str);
         ArrayList<Task> lst = new ArrayList<>(); // initialize array list
-        String firstWord;
 
         // printing user's input & adding it to an array list, loops until input is "bye"
         while(!inpt.getString().equals("bye")){
@@ -27,26 +35,38 @@ public class Duke {
             } else if(inpt.getString().equals("list")){
                 System.out.println("here are the tasks in your list:");
                 lst.forEach(x -> System.out.println((lst.indexOf(x) + 1) + ". " + x.toString()));
-            } else {
-                firstWord = inpt.getString().substring(0, inpt.getString().indexOf(" "));
-                if(firstWord.equals("deadline")) {
-                    Deadline d = new Deadline(inpt.getString().substring(9, inpt.getString().indexOf("/")),
-                            inpt.getString().substring(inpt.getString().indexOf("/by") + 3));
-                    lst.add(d);
-                    System.out.println("Got it. I've added this deadline: \n" + d.toString());
-                } else if(firstWord.equals("event")){
-                    Event d = new Event(inpt.getString().substring(6, inpt.getString().indexOf("/")),
-                            inpt.getString().substring(inpt.getString().indexOf("/at") + 3));
-                    lst.add(d);
-                    System.out.println("Got it. I've added this event: \n" + d.toString());
-                } else if(firstWord.equals("todo")) {
-                    Todo d = new Todo(inpt.getString().substring(5));
-                    lst.add(d);
-                    System.out.println("Got it. I've added this todo: \n" + d.toString());
+            } else if(inpt_str.contains("deadline") || inpt_str.contains("todo") || inpt_str.contains("event")){
+                if(inpt_str.contains("deadline")) {
+                    if(inpt_str.length() > 8) {
+                        Deadline d = new Deadline(inpt.getString().substring(9, inpt.getString().indexOf("/")),
+                                inpt.getString().substring(inpt.getString().indexOf("/by") + 3));
+                        lst.add(d);
+                        System.out.println("Got it. I've added this deadline: \n" + d.toString());
+                    }
+                } else if(inpt_str.contains("event")){
+                    if(inpt_str.length() > 5) {
+                        Event d = new Event(inpt.getString().substring(6, inpt.getString().indexOf("/")),
+                                inpt.getString().substring(inpt.getString().indexOf("/at") + 3));
+                        lst.add(d);
+                        System.out.println("Got it. I've added this event: \n" + d.toString());
+                    }
+                } else if(inpt_str.contains("todo")) {
+                    if(inpt_str.length() > 4) {
+                        Todo d = new Todo(inpt.getString().substring(5));
+                        lst.add(d);
+                        System.out.println("Got it. I've added this todo: \n" + d.toString());
+                    }
                 }
                 System.out.println("Now you have " + lst.size() + " tasks in the list.");
             }
             inpt_str = sc.nextLine();
+
+            // Catch DukeException
+            try{
+                InputChecker ic = new InputChecker(inpt_str);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
             inpt = new Task(inpt_str);
         }
         System.out.println("Goodbye, I will miss you!");
