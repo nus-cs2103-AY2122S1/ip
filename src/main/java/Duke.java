@@ -1,7 +1,8 @@
+import javax.sound.midi.SysexMessage;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchTaskException, InvalidInputException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -129,18 +130,18 @@ public class Duke {
                 break;
             } else {
                 String output = "";
-                if (input.contains("todo ")) {
+                if (input.contains("todo ") && input.charAt(5) != 97) {
                     String[] strings = input.split(" ", 2);
                     ToDo toDo = new ToDo(strings[1]);
                     output = toDo.status;
-                } else if (input.contains("deadline ")) {
+                } else if (input.contains("deadline ") && input.charAt(9) != 97) {
                     String[] strings = input.split("/", 2);
                     // if strings[1] has more than one "/", then there is a problem. Catch error here.
                     String[] strings1 = strings[0].split(" ", 2);
                     String[] strings2 = strings[1].split(" ", 2);
                     Deadline deadline = new Deadline(strings1[1], strings2[1]);
                     output = deadline.status;
-                } else if (input.contains("event ")) {
+                } else if (input.contains("event ") && input.charAt(6) != 97) {
                     String[] strings = input.split("/", 2);
                     // if strings[1] has more than one "/", then there is a problem. Catch error here.
                     String[] strings1 = strings[0].split(" ", 2);
@@ -148,8 +149,24 @@ public class Duke {
                     Event event = new Event(strings1[1], strings2[1]);
                     output = event.status;
                 } else {
-                    System.out.println("You have entered an invalid message. Please do not commit this idiocy again.");
-                    continue;
+                    // Check if there are any spaces first. if there are no spaces, means that it is either an invalid input or no such task
+
+                    try {
+                        if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+                            throw new InvalidInputException("You fool. You cannot create a task without a description, or you have formatted your description wrongly. Check your spaces and try again.");
+                        } else {
+                            try {
+                                throw new NoSuchTaskException("You have entered an invalid message. Please do not commit this idiocy again.");
+                            } catch(NoSuchTaskException ex) {
+                                System.err.println(ex);
+                                continue;
+                            }
+                        }
+                    } catch(InvalidInputException ex) {
+                        System.err.println(ex);
+                        continue;
+                    }
+
                 }
                 System.out.println(tab + line);
                 System.out.println(tab + "Fine. I've added this sorry task to your list: ");
