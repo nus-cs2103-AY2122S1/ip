@@ -2,9 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static ArrayList<Task> list = new ArrayList<>();
+    public static ArrayList<Task> list = new ArrayList<>();
 
     private static Scanner sc;
+
+    public static final String friendGreeting = "(*^_^*) Friend says: \n";
 
     public static void main(String[] args) {
         String logo
@@ -36,22 +38,21 @@ public class Duke {
         while (sc.hasNextLine()) {
 
             String message = sc.nextLine();
-            String friendGreeting = "(*^_^*) Friend says: \n";
 
             if (message.trim().equals("bye")) {
-                System.out.println(friendGreeting + "See you again, my friend!");
-                return;
+                System.out.println(Duke.friendGreeting + "See you again, my friend!");
+                break;
             }
 
             try {
                 // List tasks
                 if (message.trim().equals("list")) {
-                    System.out.println(friendGreeting + "Your to-do list has the following tasks: \n");
+                    System.out.println(Duke.friendGreeting + "Your to-do list has the following tasks: \n");
                     System.out.println(printList());
                 }
                 // Delete tasks
                 else if (message.startsWith("delete")) {
-                    if (message.length() > 7 && message.substring(6,7).equals(" ")
+                    if (message.length() > 7 && message.substring(6, 7).equals(" ")
                             && message.substring(7).trim().chars().allMatch(Character::isDigit)) {
                         int taskIndex = Integer.parseInt(message.substring(7).trim()) - 1;
                         if (0 <= taskIndex && taskIndex < list.size()) {
@@ -69,7 +70,7 @@ public class Duke {
                 }
                 // Mark tasks as done
                 else if (message.startsWith("done")) {
-                    if (message.length() > 5 && message.substring(4,5).equals(" ")
+                    if (message.length() > 5 && message.substring(4, 5).equals(" ")
                             && message.substring(5).trim().chars().allMatch(Character::isDigit)) {
                         int taskIndex = Integer.parseInt(message.substring(5).trim()) - 1;
                         if (0 <= taskIndex && taskIndex < list.size()) {
@@ -92,10 +93,7 @@ public class Duke {
                 else if (message.startsWith("todo ") || message.equals("todo")) {
                     if (message.length() > 5 && !message.substring(5).isBlank()) {
                         String description = message.substring(5).trim();
-                        list.add(new ToDo(description));
-
-                        System.out.println(friendGreeting + "added: " + list.get(list.size() - 1).toString() + " to your to-do list!");
-                        System.out.println("Now you have " + list.size() + " tasks in the list.");
+                        Task.createTask(description, "", Task.Category.TODO);
                     } else {
                         throw new DukeException.DukeNoDescriptionException();
                     }
@@ -114,11 +112,7 @@ public class Duke {
                                 throw new DukeException.DukeNoTimeGivenException();
                             } else {
                                 // proper description and by
-                                list.add(new Deadline(description, by));
-
-                                System.out.println(friendGreeting + "added: " + list.get(list.size() - 1).toString()
-                                        + " to your to-do list!");
-                                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                                Task.createTask(description, by, Task.Category.DEADLINE);
                             }
                         } else {
                             throw new DukeException.DukeNoTimeGivenException();
@@ -147,11 +141,7 @@ public class Duke {
                                 throw new DukeException.DukeNoTimeGivenException();
                             } else {
                                 // proper description and at
-                                list.add(new Event(description, at));
-
-                                System.out.println(friendGreeting + "added: " + list.get(list.size() - 1).toString()
-                                        + " to your to-do list!");
-                                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                                Task.createTask(description, at, Task.Category.EVENT);
                             }
                         } else {
                             throw new DukeException.DukeNoTimeGivenException();
