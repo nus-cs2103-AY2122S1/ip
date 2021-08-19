@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -16,6 +17,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
+        ArrayList<Task> taskList = new ArrayList<>();
 
         //Echo
         while(!exit){
@@ -24,12 +26,17 @@ public class Duke {
             System.out.println("    ____________________________________________________________");
 
             if(input.equals("list")){
-                System.out.println("    list");
+                for (int i = 0; i < taskList.size(); i++) {
+                    Task task = taskList.get(i);
+                    System.out.println((i+1) + ". " + task.getTaskName());
+                }
             }else if(input.equals("bye")){
                 System.out.println("    Bye. Hope to see you again soon!");
                 exit = true;
             }else {
-                System.out.println("    blah");
+                Task newTask = new Task(input);
+                taskList.add(newTask);
+                System.out.println("    added: " + input);
             }
 
             System.out.println("    ____________________________________________________________");
