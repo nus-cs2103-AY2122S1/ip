@@ -1,7 +1,50 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+    ---
+    What's up, I'm duke!
+    ---
+    ---
+    Got it. I've added this task:
+    [T][ ] testTodo
+    Now you have 1 tasks in the list.
+    ---
+    ---
+    Here are the tasks in your list:
+    1.[T][ ] testTodo
+    ---
+    ---
+    Got it. I've added this task:
+    [D][ ] testDeadline (by: byTime)
+    Now you have 2 tasks in the list.
+    ---
+    ---
+    Here are the tasks in your list:
+    1.[T][ ] testTodo
+    2.[D][ ] testDeadline (by: byTime)
+    ---
+    ---
+    Nice! I've marked this task as done:
+    [D][X] testDeadline (by: byTime)
+    ---
+    ---
+    Got it. I've added this task:
+    [E][ ] testEvent (at: 3pm)
+    Now you have 3 tasks in the list.
+    ---
+    ---
+    Here are the tasks in your list:
+    1.[T][ ] testTodo
+    2.[D][X] testDeadline (by: byTime)
+    3.[E][ ] testEvent (at: 3pm)
+    ---
+    ---
+    Nice! I've marked this task as done:
+    [E][X] testEvent (at: 3pm)
+    ---
+    ---
+    Here are the tasks in your list:
+    1.[T][ ] testTodo
+    2.[D][X] testDeadline (by: byTime)
+    3.[E][X] testEvent (at: 3pm)
+    ---
+    ---
+    Bye mate!
+    ---

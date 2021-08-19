@@ -1,0 +1,10 @@
+todo testTodo
+list
+deadline testDeadline /by byTime
+list
+done 2
+event testEvent /at 3pm
+list
+done 3
+list
+bye
