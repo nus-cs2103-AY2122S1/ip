@@ -13,6 +13,7 @@ public class Duke {
                 + "____________________________________________________________";
         Task[] taskList = new Task[100];
         int i = 0;
+        System.out.println(taskList[0]);
 
         System.out.println(intro);
 
@@ -59,7 +60,8 @@ public class Duke {
                     }
                 } else {
                     if (!inData.contains("deadline") && !inData.contains("todo") && !inData.contains("event")
-                            && !inData.contains("done") && !inData.contains("list") && !inData.contains("bye")) {
+                            && !inData.contains("done") && !inData.contains("list") && !inData.contains("bye")
+                            && !inData.contains("delete")) {
                         System.out.println("____________________________________________________________\n" +
                                 "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                                 "____________________________________________________________");
@@ -134,6 +136,32 @@ public class Duke {
                                                 "____________________________________________________________ \n"
                                                         + "invalid number!"
                                                         + "\n____________________________________________________________");
+                                    }
+                                }
+                            }
+                            if (inData.contains("delete ")) {
+                                if (Objects.equals(inData.substring(0, 7), "delete ")) {
+                                    if (isNumeric(inData.substring(7, inDataLength))) {
+                                        int taskNo = Integer.parseInt(inData.substring(7, inDataLength));
+                                        if (taskNo <= 100 && taskNo <= i) {
+                                            System.out.println(
+                                                    "____________________________________________________________\n"
+                                                            + "Noted. I've removed this task: \n"
+                                                            + " [" + taskList[taskNo - 1].getStatusIcon() + "] "
+                                                            + taskList[taskNo - 1].getDescription()
+                                                            + "\n"
+                                                            + "Now you have " + (i - 1) + " tasks in the list.\n"
+                                                            + "____________________________________________________________");
+                                            taskList[taskNo - 1] = null;
+                                            if (taskNo < i + 1) {
+                                                for (int n = taskNo - 1; n < i; n++) {
+                                                    taskList[n] = taskList[n + 1];
+                                                }
+                                            }
+                                            i--;
+                                        }
+
+
                                     }
                                 }
                             }
