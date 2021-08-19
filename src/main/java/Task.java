@@ -22,7 +22,7 @@ public class Task {
 
                 System.out.println(separator + "\n"
                         + "added: " + farewell + "\n"
-                        + separator + "\n");
+                        + separator);
                 break;
             } else if (input.equals("list")) {
                 int n = listTasks();
@@ -38,6 +38,7 @@ public class Task {
         int n = 0;
 
         System.out.println(separator);
+        System.out.println("Below are your to-dos!");
 
         while (this.tasks[n] != null) {
             System.out.println((n + 1) + ". " + this.tasks[n]);

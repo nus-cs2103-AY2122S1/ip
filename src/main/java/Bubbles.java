@@ -46,7 +46,7 @@ public class Bubbles {
 
         String res = separator + "\n"
                 + str + "\n"
-                + separator + "\n";
+                + separator;
 
        return res;
     }
