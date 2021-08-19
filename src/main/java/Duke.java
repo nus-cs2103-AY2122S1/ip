@@ -15,6 +15,6 @@ public class Duke {
         }
 
         sc.close();
-        commandManager.respondBye();
+        commandManager.exitProgram();
     }
 }

@@ -1,15 +1,18 @@
 public class Deadline extends Task{
 
-    private String time;
-    taskType type;
-    public Deadline(String taskName, String time) {
+    private String taskName;
+    public Deadline(String taskName) {
         super(taskName);
-        this.time = time;
-        type = taskType.DEADLINE;
+        this.taskName = taskName;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by " + this.time + ")";
+        if (taskName.contains("/by")) {
+            return "[D]" + super.toString().
+                    replaceFirst("/", "(") + ")";
+        } else {
+            return "[D]" + super.toString() + " (unknown deadline)";
+        }
     }
 }

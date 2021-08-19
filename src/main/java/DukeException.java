@@ -1,9 +1,9 @@
 public class DukeException extends RuntimeException {
-    public enum exceptionType {INCOMPLETE, INVALID, OUT_OF_BOUND};
-
-    public final exceptionType type;
-    public DukeException(String message, exceptionType type) {
+    public enum TYPE {INCOMPLETE, OUT_OF_BOUND, INVALID};
+    protected final TYPE type;
+    public DukeException(String message, TYPE type) {
         super(message);
         this.type = type;
     }
 }
+

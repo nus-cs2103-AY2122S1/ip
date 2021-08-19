@@ -1,15 +1,18 @@
 public class Event extends Task {
 
-    private String time;
-    public taskType type;
-    public Event(String taskName, String time) {
+    private String taskName;
+    public Event(String taskName) {
         super(taskName);
-        this.time = time;
-        type = taskType.EVENT;
+        this.taskName = taskName;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at " + this.time + ")";
+        if (taskName.contains("/at")) {
+            return "[E]" + super.toString().
+                    replaceFirst("/", "(") + ")";
+        } else {
+            return "[E]" + super.toString() + " (unknown timing)";
+        }
     }
 }
