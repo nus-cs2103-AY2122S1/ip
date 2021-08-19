@@ -32,7 +32,7 @@ Nice! I've marked this task as done:
   [D][X] New deadline (by: deadline time)
 Nice! I've marked this task as done:
   [E][X] New event (at: event time)
-Invalid task number
+Invalid task number!
 Please follow command 'done' with an integer!
 Here are the tasks in your list:
 1.[T][ ] New todo task
