@@ -17,4 +17,9 @@ list
 deadline
 deadline /by
 blah blah
+delete 0
+delete 10
+list
+delete 3
+list
 Bye!

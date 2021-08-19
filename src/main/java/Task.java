@@ -12,7 +12,7 @@ public class Task {
     }
     public String check() {
         this.isDone = true;
-        return this.description;
+        return this.toString();
     }
 
     public String toString() {

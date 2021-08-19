@@ -8,6 +8,7 @@ public class Duke {
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
+    private static final String DELETE = "delete";
 
     private static List list = new List();
 
@@ -56,16 +57,33 @@ public class Duke {
 
     private static void printDone(int taskNo) throws ArrayIndexOutOfBoundsException {
         try {
-            if (taskNo == -1 || taskNo + 1 >= list.getList().size()) {
+            if (taskNo == -1 || taskNo + 1 > list.getList().size()) {
                 throw new ArrayIndexOutOfBoundsException();
             }
             printBreak();
             System.out.println(indentation + "(´• ω •`) What a rarity! This task has been marked as done:");
-            System.out.println(indentation + "[X] " + list.complete(taskNo));
+            System.out.println(indentation + list.complete(taskNo));
             printBreak();
         } catch (ArrayIndexOutOfBoundsException e) {
             printBreak();
-            System.out.println(indentation + "(＃￣ω￣) Eh... No such task found.");
+            System.out.println(indentation + "(＃￣ω￣) Eh... No such task found. Cannot mark as done.");
+            printBreak();
+        }
+    }
+
+    private static void printDelete(int taskNo) throws ArrayIndexOutOfBoundsException {
+        try{
+            if (taskNo == -1 || taskNo + 1 > list.getList().size()) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+            printBreak();
+            System.out.println(indentation + "(￢_￢) Ok... This task has been deleted:");
+            System.out.println(indentation + "deleted: " + list.delete(taskNo));
+            System.out.println("\n" + indentation + "You have " + list.getList().size() + " task(s) to go! (]＞＜)]");
+            printBreak();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printBreak();
+            System.out.println(indentation + "(＃￣ω￣) Eh... No such task found. Cannot delete.");
             printBreak();
         }
     }
@@ -88,6 +106,9 @@ public class Duke {
                 } else if (command.equals(DONE)) {
                     int taskNo = Integer.parseInt(str.split(" ")[1]) - 1;
                     printDone(taskNo);
+                } else if (command.equals(DELETE)) {
+                    int taskNo = Integer.parseInt(str.split(" ")[1]) - 1;
+                    printDelete(taskNo);
                 } else if (command.equals(TODO)) {
                     String desc = str.substring(5);
                     if (desc.equals("")) {

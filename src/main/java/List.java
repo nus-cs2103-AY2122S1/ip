@@ -17,4 +17,10 @@ public class List {
     public String complete(int taskNo) {
         return list.get(taskNo).check();
     }
+
+    public String delete(int taskNo) {
+        String temp = list.get(taskNo).toString();
+        list.remove(taskNo);
+        return temp;
+    }
 }
