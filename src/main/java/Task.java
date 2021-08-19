@@ -1,6 +1,6 @@
 public class Task {
-    private static final String COMPLETED = "[X]";
-    private static final String NOT_COMPLETED = "[]";
+    protected static final String COMPLETED = "[X]";
+    protected static final String NOT_COMPLETED = "[]";
 
     protected final String description;
     protected boolean isDone;

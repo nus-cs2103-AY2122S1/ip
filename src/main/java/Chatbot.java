@@ -7,7 +7,10 @@ public class Chatbot {
     private enum ChatCommands {
         BYE("bye"),
         LIST("list"),
-        DONE("done");
+        DONE("done"),
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event");
 
         private final String command;
 
@@ -73,10 +76,35 @@ public class Chatbot {
         if (this.memory.contains(input)) {
             System.out.println("Here is your task: " + input);
         } else {
-            this.memory.add(input);
-            System.out.println("added: " + input);
+            System.out.println("Sorry, could you rephrase that?");
         }
         return ChatContinue.CONTINUE;
+    }
+
+    private ChatContinue addTodo(String input) {
+        ToDo todo = new ToDo(input);
+        memory.add(todo);
+        this.displayAddTaskSuccessful(todo);
+        return ChatContinue.CONTINUE;
+    }
+
+    private ChatContinue addDeadline(String input) {
+        Deadline deadline = new Deadline(input);
+        memory.add(deadline);
+        this.displayAddTaskSuccessful(deadline);
+        return ChatContinue.CONTINUE;
+    }
+
+    private ChatContinue addEvent(String input) {
+        Event event = new Event(input);
+        memory.add(event);
+        this.displayAddTaskSuccessful(event);
+        return ChatContinue.CONTINUE;
+    }
+
+    private void displayAddTaskSuccessful(Task task) {
+        System.out.println("Got it. Added the following task");
+        System.out.println(task);
     }
 
     private ChatContinue builtInCommands(ChatCommands command, String input) {
@@ -87,6 +115,12 @@ public class Chatbot {
                 return this.list();
             case DONE:
                 return this.markDone(input);
+            case TODO:
+                return this.addTodo(input);
+            case DEADLINE:
+                return this.addDeadline(input);
+            case EVENT:
+                return this.addEvent(input);
             default:
                 System.out.println("How did you get here?");
                 return ChatContinue.END;
