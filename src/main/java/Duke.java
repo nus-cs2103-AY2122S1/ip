@@ -29,6 +29,7 @@ public class Duke {
                     if (wordArray.length > 1) { // if "list" is followed by any word, show a warning
                         System.out.println("Command 'list' should not take any input!");
                     } else {    // list all the tasks
+                        System.out.println("Here are the tasks in your list:");
                         for (int i = 0; i < storage.length; i++) {
                             if (storage[i] == null) break;
                             else {
@@ -74,7 +75,73 @@ public class Duke {
                                 + " task" + (getLength(storage) > 1 ? "s" : "") + " in the list.");
                     }
                     break;
-                default:    // add a new task if no command word is detected
+                case ("deadline"):
+                    if (wordArray.length < 4) {
+                        System.out.println("Please follow format: 'deadline [task name] /by [time]'");
+                        break;
+                    }
+                    String newDeadlineDesc = "";
+                    String newBy = "";
+                    int deadlinePointer = 1;
+                    while (deadlinePointer < wordArray.length && !wordArray[deadlinePointer].equals("/by")) {
+                        newDeadlineDesc += wordArray[deadlinePointer] + " ";
+                        deadlinePointer++;
+                    }
+                    deadlinePointer++;
+                    if (newDeadlineDesc.length() > 0) {
+                        newDeadlineDesc = newDeadlineDesc.substring(0, newDeadlineDesc.length() - 1);
+                    }
+                    while (deadlinePointer < wordArray.length) {
+                        newBy += wordArray[deadlinePointer] + " ";
+                        deadlinePointer++;
+                    }
+                    if (newBy.length() > 0) newBy = newBy.substring(0, newBy.length() - 1);
+                    if (newDeadlineDesc.equals("") || newBy.equals("")) {
+                        System.out.println("Please follow format: 'deadline [task name] /by [time]'");
+                    } else {
+                        storage[index] = new Deadline(newDeadlineDesc, newBy);
+                        Task tempTask = storage[index];
+                        index++;
+                        System.out.println("Got it. I've added this task:\n"
+                                + "  " + tempTask.toString() + "\n"
+                                + "Now you have " + getLength(storage)
+                                + " task" + (getLength(storage) > 1 ? "s" : "") + " in the list.");
+                    }
+                    break;
+                case ("event"):
+                    if (wordArray.length < 4) {
+                        System.out.println("Please follow format: 'event [task name] /at [time]'");
+                        break;
+                    }
+                    String newEventDesc = "";
+                    String newAt = "";
+                    int eventPointer = 1;
+                    while (eventPointer < wordArray.length && !wordArray[eventPointer].equals("/at")) {
+                        newEventDesc += wordArray[eventPointer] + " ";
+                        eventPointer++;
+                    }
+                    eventPointer++;
+                    if (newEventDesc.length() > 0) {
+                        newEventDesc = newEventDesc.substring(0, newEventDesc.length() - 1);
+                    }
+                    while (eventPointer < wordArray.length) {
+                        newAt += wordArray[eventPointer] + " ";
+                        eventPointer++;
+                    }
+                    if (newAt.length() > 0) newAt = newAt.substring(0, newAt.length() - 1);
+                    if (newEventDesc.equals("") || newAt.equals("")) {
+                        System.out.println("Please follow format: 'event [task name] /at [time]'");
+                    } else {
+                        storage[index] = new Event(newEventDesc, newAt);
+                        Task tempTask = storage[index];
+                        index++;
+                        System.out.println("Got it. I've added this task:\n"
+                                + "  " + tempTask.toString() + "\n"
+                                + "Now you have " + getLength(storage)
+                                + " task" + (getLength(storage) > 1 ? "s" : "") + " in the list.");
+                    }
+                    break;
+                default:    // No command word is recognised
                     System.out.println("Command not recognised!");
             }
         }
