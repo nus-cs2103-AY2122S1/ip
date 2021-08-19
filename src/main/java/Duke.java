@@ -1,5 +1,4 @@
 import java.util.Scanner;
-// current assumption is that all input is valid
 
 public class Duke {
     public static void main(String[] args) {
