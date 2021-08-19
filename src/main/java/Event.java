@@ -6,19 +6,13 @@ public class Event extends Task{
         super(description, "E", time);
     }
 
-    public static Event create(Optional<String> description, Optional<String> time) throws DukeExceptions{
-        String desc = description.orElseThrow(() -> new DukeExceptions(
-                "Oops, event command requires a description \n"
-        ));
-        String timemod = time.orElseThrow(()-> new DukeExceptions(
-                "Oops, event command requires a set time \n"
-        ));
-        return new Event(desc, timemod);
+    public static Event create(String description, String time) {
+        return new Event(description, time);
     }
 
     @Override
     public String toString() {
         return "[" + this.taskType + "]" + "[" + getStatusIcon() + "]" + " " + this.description
-                + String.format("(at: %s)", this.time);
+                + String.format("(at:%s)", this.time);
     }
 }

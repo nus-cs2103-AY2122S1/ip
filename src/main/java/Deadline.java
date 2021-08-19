@@ -6,19 +6,13 @@ public class Deadline extends Task{
         super(description, "D", deadline);
     }
 
-    public static Deadline create(Optional<String> description, Optional<String> time) throws DukeExceptions{
-        String desc = description.orElseThrow(() -> new DukeExceptions(
-                "Oops, deadline command requires a description \n"
-        ));
-        String timeMod = time.orElseThrow(()-> new DukeExceptions(
-                "Oops, deadline command requires a set time \n"
-        ));
-        return new Deadline(desc, timeMod);
+    public static Deadline create(String description, String time) {
+        return new Deadline(description, time);
     }
 
     @Override
     public String toString() {
         return '[' + this.taskType + ']' + '[' + getStatusIcon() + ']' + ' ' + this.description
-                + String.format("(by: %s)", this.time);
+                + String.format("(by:%s)", this.time);
     }
 }

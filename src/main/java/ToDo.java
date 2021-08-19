@@ -6,10 +6,7 @@ public class ToDo extends Task{
         super(description, "T");
     }
 
-    public static ToDo create(Optional<String> description) throws DukeExceptions{
-        String desc = description.orElseThrow(() -> new DukeExceptions(
-                "Oops, todo command requires a description \n"
-        ));
-        return new ToDo(desc);
+    public static ToDo create(String description) throws DukeExceptions{
+        return new ToDo(description);
     }
 }

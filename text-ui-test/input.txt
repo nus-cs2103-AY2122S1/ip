@@ -18,5 +18,8 @@ deadline
 deadline terina
 deadline terina /by
 list 34
+done 265
+delete 3
+delete 1
 bye
 
