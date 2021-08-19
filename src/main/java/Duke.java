@@ -6,8 +6,8 @@ public class Duke {
     private ArrayList<Task> list = new ArrayList<>();
 
     private void printLogo() {
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                    + "|  _ \\ _   _| | _____\n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
@@ -15,49 +15,52 @@ public class Duke {
     }
 
 
-    private void checkInput() {
-        while (true) {
-            String userInput = this.input.nextLine();
+    private void greet() {
+        System.out.println("Welcome! I'm Duke.");
+        System.out.println("What can I do for you?\n");
+    }
 
-            if (userInput.equals("bye")) {
+
+    private void run() {
+        while (true) {
+            String[] userInput = this.input.nextLine().split(" ", 2);
+            String command = userInput[0];
+
+            if (command.equals("bye")) {
                 this.exit();
                 break;
-            }
-            if (userInput.equals("list")) {
+            } else if (command.equals("list")) {
                 this.showList();
-                continue;
-            }
-
-            int index = userInput.indexOf(" ");
-            String command = userInput.substring(0, index);
-            String arg = userInput.substring(index + 1);
-
-            if (command.equals("todo")) {
-                this.addTodo(arg);
-                continue;
-            }
-            if (command.equals("event")) {
-                String[] splits = arg.split(" /at ");
+            } else if (command.equals("todo")) {
+                this.addTodo(userInput[1]);
+            } else if (command.equals("event")) {
+                String[] splits = userInput[1].split(" /at ");
                 this.addEvent(splits[0], splits[1]);
-                continue;
-            }
-            if (command.equals("deadline")) {
-                String[] splits = arg.split(" /by ");
+            } else if (command.equals("deadline")) {
+                String[] splits = userInput[1].split(" /by ");
                 this.addDeadline(splits[0], splits[1]);
-                continue;
-            }
-            if (command.equals("done")) {
-                int taskNum = Integer.parseInt(userInput.substring(5));
+            } else if (command.equals("done")) {
+                int taskNum = Integer.parseInt(userInput[1]);
                 this.completeTask(taskNum);
-                continue;
+            } else {
+                this.unknownCommand();
             }
         }
     }
 
 
-    private void greet() {
-        System.out.println("Welcome! I'm Duke.");
-        System.out.println("What can I do for you?\n");
+
+    private void exit() {
+        System.out.println("\tBye, hope to see you again!");
+    }
+
+
+    private void showList() {
+        System.out.println("\tHere are the tasks in your list:");
+        for (int i = 1; i <= this.list.size(); i++) {
+            System.out.println("\t" + i + ". " + this.list.get(i - 1));
+        }
+        System.out.println();
     }
 
 
@@ -82,11 +85,6 @@ public class Duke {
     }
 
 
-    private void exit() {
-        System.out.println("\tBye, hope to see you again!");
-    }
-
-
     private void completeTask(int taskNum) {
         this.list.get(taskNum - 1).markAsDone();
         System.out.println("\tI've marked this task as done!");
@@ -94,12 +92,8 @@ public class Duke {
     }
 
 
-    private void showList() {
-        System.out.println("\tHere are the tasks in your list:");
-        for (int i = 1; i <= this.list.size(); i++) {
-            System.out.println("\t" + i + ". " + this.list.get(i - 1));
-        }
-        System.out.println();
+    private void unknownCommand() {
+        System.out.println("\tPlease check that you have keyed in a correct command!\n");
     }
 
 
@@ -107,6 +101,6 @@ public class Duke {
         Duke duke = new Duke();
         duke.printLogo();
         duke.greet();
-        duke.checkInput();
+        duke.run();
     }
 }

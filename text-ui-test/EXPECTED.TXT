@@ -1,7 +1,39 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Welcome! I'm Duke.
+What can I do for you?
+
+	added todo: drop CS2103T
+	You have 1 tasks in the list.
+
+	added event: macdonald's interview
+	You have 2 tasks in the list.
+
+	added deadline: fail test
+	You have 3 tasks in the list.
+
+	Here are the tasks in your list:
+	1. [T][ ] drop CS2103T
+	2. [E][ ] macdonald's interview (at: 20 Aug 2021 4-6pm)
+	3. [D][ ] fail test (by: exam week)
+
+	added todo: dropout university
+	You have 4 tasks in the list.
+
+	I've marked this task as done!
+		[E][X] macdonald's interview (at: 20 Aug 2021 4-6pm)
+
+	I've marked this task as done!
+		[T][X] drop CS2103T
+
+	Here are the tasks in your list:
+	1. [T][X] drop CS2103T
+	2. [E][X] macdonald's interview (at: 20 Aug 2021 4-6pm)
+	3. [D][ ] fail test (by: exam week)
+	4. [T][ ] dropout university
+
+	Bye, hope to see you again!

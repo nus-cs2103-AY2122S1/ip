@@ -1,0 +1,9 @@
+todo drop CS2103T
+event macdonald's interview /at 20 Aug 2021 4-6pm
+deadline fail test /by exam week
+list
+todo dropout university
+done 2
+done 1
+list
+bye
