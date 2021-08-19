@@ -5,25 +5,55 @@ I am the best chat bot you'll meet! Don't be shy, say something! :P
 -----------------------------------------------------------------------------------------------------------------
 Okay. I've added this task:
 [D][ ] Go for a jog (by: 8pm today)
-You now have 1 task(s)!
+You now have 1 tasks!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 Okay. I've added this task:
 [D][ ] Use a computer (by: 7pm tomorrow)
-You now have 2 task(s)!
+You now have 2 tasks!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 Okay. I've added this task:
 [E][ ] Using a pc (at: 8pm tonight till 7pm tomorrow)
-You now have 3 task(s)!
+You now have 3 tasks!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 Okay. I've added this task:
 [T][ ] Listening to music
-You now have 4 task(s)!
+You now have 4 tasks!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 The description cannot be empty! Enter a valid one! :(
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+Use 'todo <insert activity>' to create a to-do!
+Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
+Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
+Use 'delete <insert task number> to delete a task!
+Use 'done <insert task number>' to mark task as done!
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+I do not understand what you mean :(
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+Use 'todo <insert activity>' to create a to-do!
+Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
+Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
+Use 'delete <insert task number> to delete a task!
+Use 'done <insert task number>' to mark task as done!
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+The description cannot be empty! Enter a valid one! :(
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+Use 'todo <insert activity>' to create a to-do!
+Use 'deadline <insert activity> /by <insert deadline>' to create an activity with a deadline!
+Use 'event <insert activity> /at <insert start/end time>' to create an activity with a start/end time!
+Use 'delete <insert task number> to delete a task!
+Use 'done <insert task number>' to mark task as done!
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+I do not understand what you mean :(
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 Use 'todo <insert activity>' to create a to-do!
@@ -98,17 +128,17 @@ Here you are :D
 -----------------------------------------------------------------------------------------------------------------
 Okay. I've added this task:
 [T][ ] Let's go to the beach!
-You now have 5 task(s)!
+You now have 5 tasks!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 Okay. I've added this task:
-[D][ ] Let's finish watching this show (by: tonight)
-You now have 6 task(s)!
+[D][ ] Let's finish watching this show (by: Tonight)
+You now have 6 tasks!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 Okay. I've added this task:
 [E][ ] Finish watching movie (at: 8-9pm)
-You now have 7 task(s)!
+You now have 7 tasks!
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 The format used was wrong! Try again :(

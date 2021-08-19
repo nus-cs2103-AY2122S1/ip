@@ -1,10 +1,11 @@
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 
 /**
- * The class for the Petal bot
+ * The class for the Petal bot. It is able to respond to
+ * a certain number of pre-determined commands in order to add certain
+ * activities and track them.
  */
 public class Petal {
 
@@ -26,11 +27,11 @@ public class Petal {
     }
 
     /**
-     * Method to give the start message
+     * Method to give the start message and to run the bot.
      */
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        String logo = "Welcome to Petal (•◡•)/ ";
+        String logo = "Welcome to Petal (•◡•)/";
         String logo2 = "\nI am the best chat bot you'll meet! Don't be shy, say something! :P";
         printMessage(logo + logo2);
         while (!bye) {
@@ -41,7 +42,8 @@ public class Petal {
     }
 
     /**
-     * Method that formats the message to be displayed
+     * Method that formats the message to be displayed. It splits the input and takes
+     * the first word (assumed to be command if format followed) and reacts accordingly
      * @param message User input
      */
     public void handleInput(String message) {
@@ -81,7 +83,8 @@ public class Petal {
     }
 
     /**
-     * Method which helps to display the required format
+     * Method which helps guide the user to display the required format if the user has
+     * used the wrong format
      */
     public void requiredFormat() {
         String todo = "Use 'todo <insert activity>' to create a to-do!";
@@ -95,7 +98,7 @@ public class Petal {
     }
 
     /**
-     * Method to handle the tasks
+     * Method to handle the tasks, depending on the command given
      * @param type The type of task: to.do, deadline, event
      * @param message The desc/time of the task
      * @throws EmptyDescException Thrown when the task lacks a description
@@ -108,8 +111,8 @@ public class Petal {
         if (message.isBlank() || deadlineEvent[0].isBlank()) {
             throw new EmptyDescException("The description cannot be empty! Enter a valid one! :(");
         }
-        //No time given or the command /by or /at wasn't given by the user
         if ((type.equals("deadline") || type.equals("event")) && deadlineEvent.length < 2) {
+            //No time given or the command /by or /at wasn't given by the user
             throw new InvalidInputException("The format used was wrong! Try again :(");
         }
         switch (type) {
@@ -127,18 +130,18 @@ public class Petal {
     }
 
     /**
-     * Method to add a task to history
+     * Method to add a task to list of tasks
      * @param task The task to be added
      */
     public void addTask(Task task) {
         tasks.add(task);
-        printMessage("Okay. I've added this task:\n"
-                          + task
-                          +"\nYou now have " + tasks.size() + " task(s)!");
+        String plural = (tasks.size() + 1) > 0 ? " tasks!" : " task!";
+        printMessage("Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size()
+                                                                                + plural);
     }
 
     /**
-     * Method to delete a task from the list
+     * Method to delete a task from the list of tasks
      * @param index The message given by the user input
      * @throws InvalidInputException Thrown if no index inputted by the user or
      *                               when index is out-of-bounds/not valid int or when
@@ -147,20 +150,17 @@ public class Petal {
     public void deleteTask(String index) throws InvalidInputException, EmptyDescException {
         try {
             int indexOfTask = Integer.parseInt(index) - 1;
-            Task toBeDeleted = tasks.get(indexOfTask);
-            tasks.remove(indexOfTask);
+            Task toBeDeleted = tasks.remove(indexOfTask);
             printMessage("Okay. I've deleted this task:\n"
-                                + toBeDeleted
-                                + "\nYou now have " + tasks.size() + " task(s)!");
-        } catch (ArrayIndexOutOfBoundsException e) { //No task number given
-            throw new EmptyDescException("No task number given! Please enter a valid index!", e);
-        } catch (NumberFormatException | IndexOutOfBoundsException e) { //Invalid task number
+                         + toBeDeleted
+                         + "\nYou now have " + tasks.size() + " task(s)!");
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException("Invalid task number given! Please enter another value!", e);
         }
     }
 
     /**
-     * Method for the bot to say goodbye
+     * Method for Petal to say goodbye
      */
     public void goodBye() {
         bye = true;
@@ -175,11 +175,11 @@ public class Petal {
         if (tasks.size() == 0)
             throw new InvalidInputException("No items in list yet!");
         int count = 1;
-        String list = "Here you are :D";
+        StringBuilder list = new StringBuilder("Here you are :D");
         for (Task m : tasks) {
-            list += "\n" + count++ + ". " + m ;
+            list.append("\n").append(count++).append(". ").append(m);
         }
-        printMessage(list);
+        printMessage(list.toString());
     }
 
     /**
@@ -188,13 +188,12 @@ public class Petal {
      * @throws IndexOutOfBoundsException Thrown if string is not within size of list
      * @throws NumberFormatException Thrown if string cannot be converted into valid int
      */
-    public void markTaskAsDone(String indexOfTask) throws InvalidInputException {
+    public void markTaskAsDone(String indexOfTask) throws EmptyDescException, InvalidInputException {
         try {
             Task taskToBeCompleted = tasks.get(Integer.parseInt(indexOfTask) - 1);
             taskToBeCompleted.taskDone();
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            //Parsed string is not within size of history or no index given
-            throw new InvalidInputException("That was an invalid index! Please try again!", e);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidInputException("Invalid task number given! Please enter another value!", e);
         }
     }
 

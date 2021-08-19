@@ -1,11 +1,11 @@
 /**
- * The to.do class that is a subclass of Task
+ * The To.Do class that is a subclass of Task
  * (Used a . in between to prevent IntelliJ from highlighting it)
  */
 public class ToDo extends Task {
 
     /**
-     * Constructor for the to.do class
+     * Constructor for the To.Do class
      * @param description The description of the task
      */
     public ToDo(String description) {

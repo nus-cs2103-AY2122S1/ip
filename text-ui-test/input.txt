@@ -3,8 +3,11 @@ deadline use a computer /by 7pm tomorrow
 event using a pc /at 8pm tonight till 7pm tomorrow
 todo listening to music 
 todo
+listening to music
+todo
+use a computer /deadline
 deadline use a computer /at tomorrow
-event uusing a pc /by 8pm tonight till 7pm tomorrow
+event using a pc /by 8pm tonight till 7pm tomorrow
 deadline
 event
 done 1
