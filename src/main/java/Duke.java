@@ -1,9 +1,11 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static Scanner sc;
+    private  static Scanner sc;
+    private static Task userTasks;
     private static String bye_input = "bye";
     private static String bye_output = "Bye. Hope to see you again soon!";
+    private static String list_input = "list";
     private static String indent = "    ";
     private static String div_line = "    ____________________________________________________________\n";
 
@@ -14,14 +16,18 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         greet();
+        userTasks = new Task();
         sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String next_input = sc.nextLine();
             if (next_input.equals(bye_input)) {
                 exit();
                 break;
+            } else if (next_input.equals(list_input)){
+                userTasks.printAll();
             } else {
-                echo(next_input);
+                userTasks.add(next_input);
+                echo("added : " + next_input);
             }
         }
     }
