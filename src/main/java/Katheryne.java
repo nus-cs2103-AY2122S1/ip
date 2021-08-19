@@ -1,13 +1,7 @@
-import java.io.*;
 import java.util.*;
 
 public class Katheryne {
     public static void main(String[] args) throws KatheryneExceptions {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
         ArrayList<Task> lst = new ArrayList<Task>();
         System.out.println("Ad astra abyssosque! I am Katheryne, the receptionist here at the Adventurers' Guild.");
         System.out.println("How may I assist?");
