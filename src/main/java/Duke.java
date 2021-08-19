@@ -69,6 +69,17 @@ public class Duke {
         }
     }
 
+    /**
+     * Deletes an item from the tasklist and taskstring.
+     * @param i Number of task to be deleted
+     */
+    public static void deleteTask(int i) {
+        Task deletedTask = taskList.get(i - 1);
+        taskList.remove(i - 1);
+        taskString.remove(i - 1);
+        System.out.println("Noted. I've removed this task: \n" + deletedTask + "\nNow you have " + taskString.size() + " tasks in the list.");
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -82,7 +93,7 @@ public class Duke {
                 } else if (task.startsWith("done")) {
                     completeTask(task);
                 } else if (task.startsWith("deadline") || task.startsWith("event") || task.startsWith("todo")) {
-                    switch(task) {
+                    switch (task) {
                         case "deadline":
                             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                         case "event":
@@ -91,6 +102,10 @@ public class Duke {
                             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                     }
                     addSpecificTask(task);
+                } else if (task.startsWith("delete")) {
+                    String numString = task.replaceAll("[^0-9]", "");
+                    int num = Integer.parseInt(numString);
+                    deleteTask(num);
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
