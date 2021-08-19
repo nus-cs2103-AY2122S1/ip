@@ -40,8 +40,11 @@ public class Duke {
                 list.addTask(new Event(content, date));
             }
             else{
-                    System.out.println("Sorry i do not recognize this input\n" +
-                            "Create a task with the following keywords: todo, event and deadline");
+                System.out.println("Sorry i do not recognize this input");
+                System.out.println("Create a task with the following keywords: todo, event and deadline");
+                System.out.println("View your tasks with the keyword: list");
+                System.out.println("Mark a task as done with the keyword: done followed by the task number e.g.done 2");
+
             }
             input = scanner.nextLine();
             inputScanner = new Scanner(input);
