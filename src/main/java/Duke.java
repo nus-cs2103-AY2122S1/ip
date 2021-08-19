@@ -18,6 +18,20 @@ public class Duke {
         }
     }
 
+    public static void deleteTask(String s) throws DukeException {
+        try {
+            int taskNum = Integer.parseInt(s.substring(7));
+            Task curr = tasks.remove(taskNum - 1);
+            System.out.println("Noted. I've removed this task:\n  "
+                    + curr.toString()
+                    + "\nNow you have " + tasks.size() + " tasks in the list.");
+        } catch (NumberFormatException nfe) {
+            throw new DukeException("Please only enter an integer after command 'delete'!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Task number " + s.substring(5) + " does not exist!");
+        }
+    }
+
     public static void addToDo(String s) throws DukeException {
         try {
             Task curr = new ToDo(s.substring(5));
@@ -80,6 +94,8 @@ public class Duke {
                     }
                 } else if (userInput.startsWith("done")) {
                     markAsDone(userInput);
+                } else if (userInput.startsWith("delete")) {
+                    deleteTask(userInput);
                 } else if (userInput.startsWith("todo")) {
                     addToDo(userInput);
                 } else if (userInput.startsWith("event")) {
