@@ -1,9 +1,12 @@
-public class Task {
+public class Task implements Comparable<Task> {
+    private static int count = 0;
     private boolean completed;
     private final String name;
+    private final int id;
 
     public Task(String name) {
         this.name = name;
+        this.id = count++;
     }
 
     public String completeTask() {
@@ -18,5 +21,10 @@ public class Task {
         } else {
             return "[ ] " + this.name;
         }
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        return Integer.compare(this.id, other.id);
     }
 }

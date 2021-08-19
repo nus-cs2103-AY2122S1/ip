@@ -9,7 +9,7 @@ public class Duke {
 
         printMsg("Hello! I'm Duke\n    I am your personal to-do list!");
 
-        taskList inputs = new taskList(100);
+        taskList inputs = new taskList();
         String input;
 
         while (true) {
@@ -26,6 +26,9 @@ public class Duke {
                     printMsg(inputs.getList());
                 } else if (input.matches("done (\\d+)")) {
                     printMsg(inputs.markAsDone(Integer.parseInt(input.replaceAll("[^0-9]",
+                            ""))));
+                } else if (input.matches("delete (\\d+)")) {
+                    printMsg(inputs.deleteTask(Integer.parseInt(input.replaceAll("[^0-9]",
                             ""))));
                 } else {
                     printMsg(inputs.addTask(input));
