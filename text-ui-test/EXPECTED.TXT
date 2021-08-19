@@ -4,110 +4,205 @@ What can I do for you today?
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 Alright. I've added the following task (Todo):
---> [T][ ] do readings
+--> [T][ ] todo #1
 
 You currently have 1 task in the list.
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-1. [T][ ] do readings
+1. [T][ ] todo #1
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+1. [T][ ] todo #1
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 Alright. I've added the following task (Todo):
---> [T][ ] do assignments
+--> [T][ ] todo #2
 
 You currently have 2 tasks in the list.
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-1. [T][ ] do readings
-2. [T][ ] do assignments
+1. [T][ ] todo #1
+2. [T][ ] todo #2
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 Alright. I've added the following task (Deadline):
---> [D][ ] finish readings (By: Thursday)
+--> [D][ ] deadline #1 (By: 1234)
 
 You currently have 3 tasks in the list.
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-1. [T][ ] do readings
-2. [T][ ] do assignments
-3. [D][ ] finish readings (By: Thursday)
+1. [T][ ] todo #1
+2. [T][ ] todo #2
+3. [D][ ] deadline #1 (By: 1234)
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 Alright. I've added the following task (Event):
---> [E][ ] lecture for readings (At: Thursday)
+--> [E][ ] event #1 (At: 4321)
 
 You currently have 4 tasks in the list.
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-1. [T][ ] do readings
-2. [T][ ] do assignments
-3. [D][ ] finish readings (By: Thursday)
-4. [E][ ] lecture for readings (At: Thursday)
+1. [T][ ] todo #1
+2. [T][ ] todo #2
+3. [D][ ] deadline #1 (By: 1234)
+4. [E][ ] event #1 (At: 4321)
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-Alright. I've added the following task (Deadline):
---> [D][ ] finish assignments (By: Thursday)
+Great! I've marked the following task as done:
+[T][X] todo #1
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+1. [T][X] todo #1
+2. [T][ ] todo #2
+3. [D][ ] deadline #1 (By: 1234)
+4. [E][ ] event #1 (At: 4321)
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+Great! I've marked the following task as done:
+[T][X] todo #2
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+1. [T][X] todo #1
+2. [T][X] todo #2
+3. [D][ ] deadline #1 (By: 1234)
+4. [E][ ] event #1 (At: 4321)
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+1. [T][X] todo #1
+2. [T][X] todo #2
+3. [D][ ] deadline #1 (By: 1234)
+4. [E][ ] event #1 (At: 4321)
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+Alright. I've added the following task (Todo):
+--> [T][ ] todo #3
 
 You currently have 5 tasks in the list.
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-1. [T][ ] do readings
-2. [T][ ] do assignments
-3. [D][ ] finish readings (By: Thursday)
-4. [E][ ] lecture for readings (At: Thursday)
-5. [D][ ] finish assignments (By: Thursday)
+1. [T][X] todo #1
+2. [T][X] todo #2
+3. [D][ ] deadline #1 (By: 1234)
+4. [E][ ] event #1 (At: 4321)
+5. [T][ ] todo #3
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 Great! I've marked the following task as done:
-[T][X] do assignments
--~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-
--~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-1. [T][ ] do readings
-2. [T][X] do assignments
-3. [D][ ] finish readings (By: Thursday)
-4. [E][ ] lecture for readings (At: Thursday)
-5. [D][ ] finish assignments (By: Thursday)
+[D][X] deadline #1 (By: 1234)
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 Great! I've marked the following task as done:
-[D][X] finish assignments (By: Thursday)
+[E][X] event #1 (At: 4321)
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-1. [T][ ] do readings
-2. [T][X] do assignments
-3. [D][ ] finish readings (By: Thursday)
-4. [E][ ] lecture for readings (At: Thursday)
-5. [D][X] finish assignments (By: Thursday)
+1. [T][X] todo #1
+2. [T][X] todo #2
+3. [D][X] deadline #1 (By: 1234)
+4. [E][X] event #1 (At: 4321)
+5. [T][ ] todo #3
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-Alright. I've added the following task (Todo):
---> [T][ ] /bye
-
-You currently have 6 tasks in the list.
+OOPS! Sorry, I don't know what that means...
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-1. [T][ ] do readings
-2. [T][X] do assignments
-3. [D][ ] finish readings (By: Thursday)
-4. [E][ ] lecture for readings (At: Thursday)
-5. [D][X] finish assignments (By: Thursday)
-6. [T][ ] /bye
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+OOPS! Sorry, I don't know what that means...
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+1. [T][X] todo #1
+2. [T][X] todo #2
+3. [D][X] deadline #1 (By: 1234)
+4. [E][X] event #1 (At: 4321)
+5. [T][ ] todo #3
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~

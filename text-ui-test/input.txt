@@ -1,17 +1,40 @@
-todo do readings
+hi
+todo
+todo
+todo todo #1
 list
-todo do assignments
 list
-deadline finish readings /by Thursday
+todo todo #2
 list
-event lecture for readings /at Thursday
+deadline
+deadline
+deadline deadline #1
+deadline deadline #1 /by
+deadline deadline #1 /by
+deadline deadline #1 /at
+deadline deadline #1 /by 1234
 list
-deadline finish assignments /by Thursday
+event event #1
+event event #1 /at
+event event #1 /at
+event event #1 /by
+event event #1 /at 4321
+list
+done 1
 list
 done 2
 list
-done 5
+delete 1
 list
-todo /bye
+todo todo #3
+list
+done 3
+done 4
+list
+done
+done
+delete
+delete
+delete 1
 list
 bye
