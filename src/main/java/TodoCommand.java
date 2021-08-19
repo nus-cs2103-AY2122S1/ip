@@ -1,14 +1,15 @@
 package main.java;
+import java.util.ArrayList;
 
 public class TodoCommand extends Command {
 
     protected String input;
 
-    protected Task[] list;
+    protected ArrayList<Task> list;
 
     protected int index;
 
-    TodoCommand(String input, int index, Task[] list) {
+    TodoCommand(String input, int index, ArrayList<Task> list) {
         this.input = input;
         this.list = list;
         this.index = index;
@@ -20,7 +21,7 @@ public class TodoCommand extends Command {
         if (newTask.length() == 0) {
             throw new DukeException("The description of a todo cannot be empty. Please try again!");
         } else {
-            list[index] = new TodoTask(newTask);
+            list.add(new TodoTask(newTask));
             return addTask(newTask, 1, index, "");
         }
     }

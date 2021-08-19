@@ -1,14 +1,15 @@
 package main.java;
+import java.util.ArrayList;
 
 public class EventCommand extends Command {
 
     protected String input;
 
-    protected Task[] list;
+    protected ArrayList<Task> list;
 
     protected int index;
 
-    EventCommand(String input, int index, Task[] list) {
+    EventCommand(String input, int index, ArrayList<Task> list) {
         this.input = input;
         this.list = list;
         this.index = index;
@@ -24,7 +25,7 @@ public class EventCommand extends Command {
         } else if (newInfo.length() == 0) {
             throw new DukeException("The date of an event cannot be empty. Please try again!");
         } else {
-            list[index] = new EventTask(newTask, newInfo);
+            list.add(new EventTask(newTask, newInfo));
             return addTask(newTask, 3, index, newInfo);
         }
     }

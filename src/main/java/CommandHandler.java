@@ -1,4 +1,5 @@
 package main.java;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CommandHandler {
@@ -7,11 +8,11 @@ public class CommandHandler {
 
     protected String input;
 
-    protected Task[] list;
+    protected ArrayList<Task> list;
 
     protected int index = 0;
 
-    CommandHandler(Scanner scanner, Task[] list) {
+    CommandHandler(Scanner scanner, ArrayList<Task> list) {
         this.scanner = scanner;
         this.list = list;
     }
@@ -29,6 +30,13 @@ public class CommandHandler {
             // If the user types "done X" where X is a non-zero integer, mark the task as complete
             DoneCommand command = new DoneCommand(input, this.list);
             System.out.println(command.reply());
+
+        } else if (input.startsWith("delete ")) {
+
+            // If the user types "delete X" where X is a non-zero integer, remove the task
+            DeleteCommand command = new DeleteCommand(input, this.list);
+            System.out.println(command.reply());
+            index--;
 
         } else if (input.startsWith("todo ")) {
 

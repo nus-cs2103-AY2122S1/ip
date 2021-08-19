@@ -1,14 +1,15 @@
 package main.java;
+import java.util.ArrayList;
 
 public class ListCommand extends Command {
 
     protected String input;
 
-    protected Task[] list;
+    protected ArrayList<Task> list;
 
     protected int index;
 
-    ListCommand(String input, int index, Task[] list) {
+    ListCommand(String input, int index, ArrayList<Task> list) {
         this.input = input;
         this.list = list;
         this.index = index;
@@ -21,7 +22,7 @@ public class ListCommand extends Command {
             tasks = tasks
                     + String.valueOf(i + 1)
                     + ". "
-                    + list[i].getTaskState()
+                    + list.get(i).getTaskState()
                     + "\n";
         }
 

@@ -1,4 +1,5 @@
 package main.java;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,7 +18,7 @@ public class Duke {
         System.out.println(start);
 
         // Array of String to store user inputs
-        Task[] list = new Task[250];
+        ArrayList<Task> list = new ArrayList<>();
 
         // Define the scanner to read user inputs
         Scanner reader = new Scanner(System.in);

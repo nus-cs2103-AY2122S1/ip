@@ -1,14 +1,15 @@
 package main.java;
+import java.util.ArrayList;
 
 public class DeadlineCommand extends Command {
 
     protected String input;
 
-    protected Task[] list;
+    protected ArrayList<Task> list;
 
     protected int index;
 
-    DeadlineCommand(String input, int index, Task[] list) {
+    DeadlineCommand(String input, int index, ArrayList<Task> list) {
         this.input = input;
         this.list = list;
         this.index = index;
@@ -24,9 +25,8 @@ public class DeadlineCommand extends Command {
         } else if (newInfo.length() == 0) {
             throw new DukeException("The date of a deadline cannot be empty. Please try again!");
         } else {
-            list[index] = new DeadlineTask(newTask, newInfo);
+            list.add(new DeadlineTask(newTask, newInfo));
             return addTask(newTask, 2, index, newInfo);
         }
     }
 }
-
