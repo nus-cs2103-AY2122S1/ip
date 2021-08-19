@@ -6,11 +6,11 @@ public class MessageFactory {
             return new ExitMessage();
         } else if (userStr.equals("list")) {
             return new GetTasks();
-        } else if (userStr.trim().regionMatches(0, "done", 0, 4)) {
+        } else if (userStr.substring(0, 4).equals("done")) {
             int len = userStr.length();
             int taskIndex = userStr.charAt(len - 1) - 49;
             return new CompleteTask(taskIndex);
-        }else {
+        } else {
             return new AddTask(userStr);
         }
     }

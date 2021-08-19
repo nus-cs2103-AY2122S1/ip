@@ -6,6 +6,7 @@ public class CompleteTask extends DukeMessage{
     public CompleteTask(int index) {
         this.taskIndex = index;
     }
+
     public void display() {
         System.out.println("Nice! I've marked this task as done:");
         ArrayList<Task> taskList = (ArrayList<Task>) TaskList.getTaskList().getTasks();

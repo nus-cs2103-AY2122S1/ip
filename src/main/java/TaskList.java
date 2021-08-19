@@ -22,12 +22,15 @@ public class TaskList {
 
         return this.taskList;
     }
-    public List<? extends Task> addTask(String task) {
+    public List<? extends Task> addTask(Task task) {
         if( MainList == null) {
             MainList = new TaskList();
         }
-        Task newTask = new Task(task);
-        this.taskList.add(newTask);
+        this.taskList.add(task);
         return this.taskList;
+    }
+
+    public int getSize() {
+        return this.taskList.size();
     }
 }
