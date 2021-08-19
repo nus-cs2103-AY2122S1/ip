@@ -1,19 +1,34 @@
 import java.util.Scanner;
 public class Duke {
-    int numOfTasks = 0;
-    String[] tasks = new String[100];
+    int numOfTasks;
+    Task[] tasks;
 
     Duke() {
         numOfTasks= 0;
-        tasks = new String[100];
+        tasks = new Task[100];
     }
 
     void toDo() {
         for (int i = 0; i < this.numOfTasks; i++) {
-            System.out.println(i+1+"."+ this.tasks[i]);
+            Task temp = this.tasks[i];
+            System.out.println(i+1+".["+temp.getStatusIcon() +"] "+temp.getDescription());
         }
         if (this.numOfTasks == 0) {
             System.out.println("List is empty!");
+        }
+    }
+
+    void markAsDone(String taskNumber) {
+        try{
+            int index = Integer.parseInt(taskNumber) - 1;
+            if (index > numOfTasks - 1) {
+                System.out.printf("Cannot find task %s. There are only %s tasks.", taskNumber, numOfTasks);
+                return;
+            }
+            this.tasks[index].markAsDone();
+        }
+        catch (NumberFormatException ex){
+            System.out.println("Task must be an integer!");
         }
     }
     public static void main(String[] args) {
@@ -31,8 +46,14 @@ public class Duke {
                 echo = scanner.nextLine();
                 continue;
             }
+            if (echo.startsWith("done")) {
+                String[] parsed = echo.split(" ");
+                duke.markAsDone(parsed[1]);
+                echo = scanner.nextLine();
+                continue;
+            }
             System.out.println(echo);
-            duke.tasks[duke.numOfTasks] = echo;
+            duke.tasks[duke.numOfTasks] = new Task(echo);
             duke.numOfTasks = duke.numOfTasks + 1;
             echo = scanner.nextLine();
         }
