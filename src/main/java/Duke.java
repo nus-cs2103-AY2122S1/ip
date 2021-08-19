@@ -132,7 +132,7 @@ public class Duke {
             tasks = new ArrayList<>();
 
             while((line = bufferedReader.readLine()) != null) {
-                arr = line.split("-");
+                arr = line.split("\\|");
                 done = arr[1].equals("1");
 
                 switch (arr[0]) {
