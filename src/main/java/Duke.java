@@ -54,7 +54,17 @@ public class Duke {
                     continue;
                 }
                 int endDescription = str.indexOf("/");
+                if (endDescription <= 9) {
+                    System.out.println(lineProducer() + indentationAdder() + "Oh no! Deadlines cannot be empty! Please try again");
+                    System.out.println(lineProducer());
+                    continue;
+                }
                 String description = str.substring(9, endDescription - 1);
+                if (description.equals("") || description.equals(" ")) {
+                    System.out.println(lineProducer() + indentationAdder() + "Oh no! Deadlines cannot be empty! Please try again");
+                    System.out.println(lineProducer());
+                    continue;
+                }
                 String endTime = str.substring(endDescription + 4);
                 Deadline dl = new Deadline(description, endTime);
                 xs.add(dl);
@@ -69,7 +79,17 @@ public class Duke {
                     continue;
                 }
                 int endDescription = str.indexOf("/");
+                if (endDescription < 6) {
+                    System.out.println(lineProducer() + indentationAdder() + "Oh no! Events cannot be empty! Please try again");
+                    System.out.println(lineProducer());
+                    continue;
+                }
                 String description = str.substring(6, endDescription - 1);
+                if (description.equals("") || description.equals(" ")) {
+                    System.out.println(lineProducer() + indentationAdder() + "Oh no! Events cannot be empty! Please try again");
+                    System.out.println(lineProducer());
+                    continue;
+                }
                 String endTime = str.substring(endDescription + 4);
                 Event ev = new Event(description, endTime);
                 xs.add(ev);
@@ -78,7 +98,17 @@ public class Duke {
                 System.out.println(lineProducer());
                 continue;
             } else if (str.contains("todo")) {
+                if (str.length() < 5) {
+                    System.out.println(lineProducer() + indentationAdder() + "Oh no! ToDos cannot be empty! Please try again");
+                    System.out.println(lineProducer());
+                    continue;
+                }
                 String description = str.substring(5);
+                if (description.equals("") || description.equals(" ")) {
+                    System.out.println(lineProducer() + indentationAdder() + "Oh no! ToDos cannot be empty! Please try again");
+                    System.out.println(lineProducer());
+                    continue;
+                }
                 Todo td = new Todo(description);
                 xs.add(td);
                 System.out.println(lineProducer() + indentationAdder() + "Understood! The following task has been added:" + indentationAdder() + " " + td);
