@@ -12,7 +12,7 @@ public class Duke {
     // instance variable to store input  task values
     static ArrayList<Task> list;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -37,7 +37,12 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 printList();
+            } else if (split.length < 2) {
+                throw new NoDescriptionException("☹ OOPS!!! The description of a " + split[0] + " cannot be empty.");
             } else if (split[0].equals("done")) {
+                if (split[1].isEmpty()) {
+                    throw new NoNumberException("☹ OOPS!!! No task number was given in the input");
+                }
                 doneTask(Integer.parseInt(split[1]));
             } else if (split[0].equals("todo")) {
                 createTodo(split[1]);
@@ -50,8 +55,7 @@ public class Duke {
                 String task = split[1].split(" /by ", 2)[0];
                 createDeadline(task, time);
             } else {
-                System.out.println("No such command found");
-                return;
+                throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
@@ -118,10 +122,9 @@ public class Duke {
      *
      * @param n the task number entered by the user
      */
-    static void doneTask(int n) {
+    static void doneTask(int n) throws DukeException {
         if (n > list.size()) {
-            System.out.println("list has only " + list.size() + "tasks. Enter a valid task");
-            return;
+            throw new TaskNotFoundException("list has only " + list.size() + "tasks. Enter a valid task");
         }
         list.get(n - 1).markAsDone();
         System.out.println("Nice! I have marked this task as done:");
