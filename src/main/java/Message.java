@@ -13,10 +13,10 @@ public class Message {
     public static void display_message(String message) {
         horizontal_line();
         String[] lineArr = message.split("\n");
-        for (int i = 0; i < lineArr.length; i++) {
-            int remainingSpace = max(BOX_LENGTH - lineArr[i].length() - INDENT_LENGTH - 2, 0);
-            lineArr[i] = "|" + INDENT + lineArr[i] + " ".repeat(remainingSpace) + "|";
-            System.out.println(lineArr[i]);
+        // Print sides of the box
+        for (String line : lineArr) {
+            int remainingSpace = max(BOX_LENGTH - line.length() - INDENT_LENGTH - 2, 0);
+            System.out.println("|" + INDENT + line + " ".repeat(remainingSpace) + "|");
         }
         horizontal_line();
     }
