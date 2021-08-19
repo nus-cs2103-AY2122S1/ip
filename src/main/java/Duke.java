@@ -113,6 +113,113 @@ public class Duke {
         String end = "Now you have " + count + " tasks in the list.";
         return title + middle + end;
     }
+    /**
+     * Returns a boolean checking whether the user input is
+     * related to to-do operations.
+     *
+     * @return Whether the input is related to to-do or not.
+     */
+    public static boolean checkTodo() {
+        //check with the special response "to-do X", where X is what to do.
+            Todo todo = new Todo(response.substring(5, len));
+            list.add(todo);
+            count++;
+            System.out.println(getPattern(getOutputFrame(todo.toString())));
+            return true;
+    }
+
+    /**
+     * Returns a boolean checking whether the user input is
+     * related to deadline operations.
+     *
+     * @return Whether the input is related to deadline or not.
+     */
+    public static boolean checkDeadline(){
+        //check with the special response "deadline X", where X is what to do and by what time.
+            String[] parts = response.substring(9, len).split(" /by ");
+            String content = parts[0];
+            String time = parts[1];
+            Deadline deadline = new Deadline(content, time);
+            list.add(deadline);
+            count++;
+            System.out.println(getPattern(getOutputFrame(deadline.toString())));
+            return true;
+    }
+
+
+    /**
+     * Returns a boolean checking whether the user input is
+     * related to event operations.
+     *
+     * @return Whether the input is related to event or not.
+     */
+    public static boolean checkEvent(){
+        //check with the special response "event X", where X includes what to do and time to do.
+            String[] parts = response.substring(6, len).split(" /at ");
+            String content = parts[0];
+            String time = parts[1];
+            Event event = new Event(content, time);
+            list.add(event);
+            count++;
+            System.out.println(getPattern(getOutputFrame(event.toString())));
+            return true;
+    }
+
+    /**
+     * Returns a boolean checking whether the user input is
+     * related to delete operations.
+     *
+     * @return Whether the input is related to delete or not.
+     */
+    public static boolean checkDelete(){
+        //check with the special response "delete X", where X is index of deleted item.
+        try {
+            int curr = Integer.parseInt(response.substring(7, len));
+            Task shouldDelete;
+            try {
+                shouldDelete = list.get(curr - 1);
+            } catch (IndexOutOfBoundsException e) {
+                throw new OutOfRangeException();
+            }
+            list.remove(curr - 1);
+            count--;
+            String title = "Noted. I've removed this task: \n";
+            String out = "     " + shouldDelete.toString() + "\n   ";
+            String end = "Now you have " + count + " tasks in the list.";
+            System.out.println(getPattern(title + out + end));
+            return true;
+        } catch (OutOfRangeException e) {
+            System.out.println(getPattern(e.getMessage()));
+            return true;
+        }
+    }
+
+    /**
+     * Returns a boolean checking whether user input is
+     * related to mark done of tasks.
+     *
+     * @return Is done operation or not.
+     */
+    public static boolean checkDone() {
+        //check with the special response "done X", where X is a number.
+        try {
+            int curr = Integer.parseInt(response.substring(5, len));
+            Task shouldMark;
+            try {
+                shouldMark = list.get(curr - 1);
+            } catch (IndexOutOfBoundsException e) {
+                throw new OutOfRangeException();
+            }
+            shouldMark.markAsDone();
+            String title = "Nice! I've marked this task as done: \n";
+            String out = "     " + shouldMark.toString();
+            System.out.println(getPattern(title + out));
+            return true;
+        } catch (OutOfRangeException e) {
+            System.out.println(getPattern(e.getMessage()));
+            return true;
+        }
+    }
 
     /**
      * Returns the correct enum operation according to response,
@@ -173,34 +280,18 @@ public class Duke {
             }
             switch (op) {
             case DEADLINE:
-                //Fallthrough
+                return checkDeadline();
             case TODO:
-                //Fallthrough
+                return checkTodo();
             case EVENT:
-                count++;
-                System.out.println(getPattern(getOutputFrame(
-                        op.eventOrDeadlineOrTodo(response, len, list))));
-                break;
+                return checkEvent();
             case DONE:
-                    System.out.println(getPattern(
-                            op.doneOrDelete(response, len, list, count)));
-                    break;
+                return checkDone();
             case DELETE:
-                //Draft output with ending 'S' or 'F'.
-                String outDraft = op.doneOrDelete(response, len, list, count);
-                int lens = outDraft.length();
-                String outExact = outDraft.substring(0, lens - 1);
-                System.out.println(getPattern(outExact));
-
-                //Judge whether there's a need to decrease count.
-                if (outDraft.charAt(lens - 1) == 'S') {
-                    count--;
-                }
-                break;
+                return checkDelete();
             default:
-                break;
+                return true;
             }
-            return true;
         }
     }
 }
