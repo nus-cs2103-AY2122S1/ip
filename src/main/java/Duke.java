@@ -1,8 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static Task[] taskList = new Task[100];
-    private static int taskCount = 0;
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     private static void start() {
         //Welcome message
@@ -46,7 +46,8 @@ public class Duke {
 
         if (commandWord.equals("done")) {
             if (commandDesc.equals("")) {
-                throw new DukeException("\t☹ OOPS!!! Please specify the task number for the task you want to complete.");
+                throw new DukeException("\t☹ OOPS!!! Please specify the task number for the task " +
+                        "you want to complete.");
             }
             markDone(commandDesc);
 
@@ -71,6 +72,12 @@ public class Duke {
             }
             addEvent(commandDesc);
 
+        } else if (commandWord.equals("delete")) {
+            if (commandDesc.equals("")) {
+                throw new DukeException("\t☹ OOPS!!! Please specify the task number for the task " +
+                        "you want to delete.");
+            }
+            deleteTask(commandDesc);
         } else if (commandWord.equals("bye")) {
             return 1;
         } else {
@@ -87,18 +94,13 @@ public class Duke {
     private static void markDone(String commandDesc) {
         try {
             int taskNumber = Integer.parseInt(commandDesc) - 1;
-            if (taskNumber >= taskCount) {
-                throw new DukeException("\t☹ OOPS!!! This is not a valid task number.");
-            }
-            taskList[taskNumber].markDone();
-            System.out.println("\tNice! I've marked this task as done:\n\t  " + taskList[taskNumber]);
+            taskList.get(taskNumber).markDone();
+            System.out.println("\tNice! I've marked this task as done:\n\t  " + taskList.get(taskNumber));
         } catch (NumberFormatException e) {
             System.out.println("\t☹ OOPS!!! Please input a task number instead.");
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("\t☹ OOPS!!! This is not a valid task number.");
         }
-
-
     }
 
     /**
@@ -106,10 +108,10 @@ public class Duke {
      *
      */
     private static void listTasks() {
-        if (taskCount != 0) {
+        if (!taskList.isEmpty()) {
             System.out.println("\tHere are the tasks in your list:");
-            for (int i = 0; i < taskCount; i++) {
-                System.out.println("\t" + (i + 1) + ". " + taskList[i]);
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.println("\t" + (i + 1) + ". " + taskList.get(i));
             }
         } else {
             System.out.println("\tYou don't have any tasks in your list!");
@@ -123,9 +125,8 @@ public class Duke {
      * @param commandDesc the description of the task.
      */
     private static void addToDo(String commandDesc){
-        taskList[taskCount] = new ToDo(commandDesc);
-        System.out.println("\tGot it. I've added this ToDo:\n" + "\t  " + taskList[taskCount]);
-        taskCount++;
+        taskList.add(new ToDo(commandDesc));
+        System.out.println("\tGot it. I've added this ToDo:\n" + "\t  " + taskList.get(taskList.size() - 1));
         printTaskCount();
     }
 
@@ -136,9 +137,8 @@ public class Duke {
      */
     private static void addDeadline(String commandDesc) {
         String[] commandDescSplit = commandDesc.split("/by");
-        taskList[taskCount] = new Deadline(commandDescSplit[0], commandDescSplit[1]);
-        System.out.println("\tGot it. I've added this Deadline:\n" + "\t  " + taskList[taskCount]);
-        taskCount++;
+        taskList.add(new Deadline(commandDescSplit[0], commandDescSplit[1]));
+        System.out.println("\tGot it. I've added this Deadline:\n" + "\t  " + taskList.get(taskList.size() - 1));
         printTaskCount();
     }
 
@@ -149,10 +149,27 @@ public class Duke {
      */
     private static void addEvent(String commandDesc) {
         String[] commandDescSplit = commandDesc.split("/at");
-        taskList[taskCount] = new Event(commandDescSplit[0], commandDescSplit[1]);
-        System.out.println("\tGot it. I've added this Event:\n" + "\t  " + taskList[taskCount]);
-        taskCount++;
+        taskList.add(new Event(commandDescSplit[0], commandDescSplit[1]));
+        System.out.println("\tGot it. I've added this Event:\n" + "\t  " + taskList.get(taskList.size() - 1));
         printTaskCount();
+    }
+
+    /**
+     * Deletes a specified task that the user chooses.
+     *
+     * @param commandDesc the task number in String format that is selected by the user.
+     */
+    private static void deleteTask(String commandDesc) {
+        try {
+            int taskNumber = Integer.parseInt(commandDesc) - 1;
+            System.out.println("\tNoted. I've removed this task:\n\t  " + taskList.get(taskNumber));
+            taskList.remove(taskNumber);
+            printTaskCount();
+        } catch (NumberFormatException e) {
+            System.out.println("\t☹ OOPS!!! Please input a task number instead.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("\t☹ OOPS!!! This is not a valid task number.");
+        }
     }
 
     /**
@@ -160,7 +177,7 @@ public class Duke {
      *
      */
     private static void printTaskCount() {
-        System.out.println("\tNow you have " + taskCount + " tasks in the list.");
+        System.out.println("\tNow you have " + taskList.size() + " tasks in the list.");
     }
 
     public static void main(String[] args) {
