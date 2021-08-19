@@ -26,7 +26,7 @@ public class Duke {
             this.numTask++;
             System.out.println("Got it. I've added this task: ");
             System.out.println("  " + task);
-            System.out.printf("Now you have %d tasks in the list.\n", this.numTask);
+            System.out.printf("Now you have %d %s in the list.\n", this.numTask, this.numTask == 1 ? "task" : "tasks");
         }
 
 
@@ -43,7 +43,14 @@ public class Duke {
             System.out.println("  " + tasks.get(taskNumber - 1));
         }
 
-
+        public void delete(int taskNumber) {
+            Task task = tasks.get(taskNumber - 1);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println("  " + task);
+            tasks.remove(taskNumber - 1);
+            this.numTask--;
+            System.out.printf("Now you have %d %s in the list.\n", this.numTask, this.numTask == 1 ? "task" : "tasks");
+        }
     }
 
     public void init() {
@@ -90,6 +97,12 @@ public class Duke {
             if (Pattern.matches("done \\d", input)) {
                 String[] items = input.split(" ");
                 storage.done(Integer.parseInt(items[1]));
+                continue;
+            }
+
+            if (Pattern.matches("delete \\d", input)) {
+                String[] items = input.split(" ");
+                storage.delete(Integer.parseInt(items[1]));
                 continue;
             }
 
