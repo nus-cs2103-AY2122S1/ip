@@ -5,3 +5,17 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+What can I do for you?
+added: [T][ ] borrow book
+added: [D][ ] read book  (by: tonight)
+added: [E][ ] return book  (at: 10am tomorrow)
+1.[T][ ] borrow book
+2.[D][ ] read book  (by: tonight)
+3.[E][ ] return book  (at: 10am tomorrow)
+Nice! I've marked this task as done:
+[T][X] borrow book
+1.[T][X] borrow book
+2.[D][ ] read book  (by: tonight)
+3.[E][ ] return book  (at: 10am tomorrow)
+Bye. Hope to see you again soon!
