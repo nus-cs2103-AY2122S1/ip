@@ -44,7 +44,7 @@ public abstract class Command {
             if (t.getTaskName() != NULL_COMMAND) {
                 Duke.todoList.add(t);
                 System.out.println("Got it. I've added this task:\n    " + t);
-                System.out.println("Now you have" + Duke.todoList.size() + "tasks in the list.");
+                System.out.println("Now you have " + Duke.todoList.size() + " tasks in the list.");
             } else {
                 System.out.println("OOPS!!! The description of a todo cannot be empty.");
             }

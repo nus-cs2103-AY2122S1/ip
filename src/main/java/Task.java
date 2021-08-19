@@ -3,13 +3,20 @@
 public abstract class Task {
     private boolean done;
     private final String taskName;
+    private final String note;
 
     protected enum TaskKind {
-        TODO("todo"), DEADLINE("deadline"), EVENT("event");
+        TODO("todo", "T"), DEADLINE("deadline", "D"), EVENT("event", "E");
 
         private String kind;
-        TaskKind(String kind) {
+        private String shortName;
+        TaskKind(String kind, String shortName) {
             this.kind = kind;
+            this.shortName = shortName;
+        }
+
+        private String shortName() {
+            return shortName;
         }
 
         @Override
@@ -18,59 +25,47 @@ public abstract class Task {
         }
     }
 
-    private Task(String taskName) {
-        this.taskName = taskName;
+    private Task(String bodyCommand) {
+        String[] parts = bodyCommand.split(" ", 2);
+        this.taskName = parts[0];
+        if (parts.length > 1) {
+            this.note = parts[1];
+        } else {
+            this.note = "";
+        }
         this.done = false;
     }
 
     private static class Todo extends Task{
-        private Todo(String taskName) {
-            super(taskName);
+        private Todo(String bodyCommand) {
+            super(bodyCommand);
         }
 
         @Override
         public TaskKind taskKind() {
             return TaskKind.TODO;
         }
-
-        @Override
-        public String toString() {
-            String isDone = "[T]" + (super.done ? "[X]" : "[ ]");
-            return isDone + " " + super.taskName;
-        }
     }
 
     private static class Deadline extends Task{
-        private Deadline(String taskName) {
-            super(taskName);
+        private Deadline(String bodyCommand) {
+            super(bodyCommand);
         }
 
         @Override
         public TaskKind taskKind() {
             return TaskKind.DEADLINE;
         }
-
-        @Override
-        public String toString() {
-            String isDone = "[D]" + (super.done ? "[X]" : "[ ]");
-            return isDone + " " + super.taskName;
-        }
     }
 
     private static class Event extends Task{
-        private Event(String taskName) {
-            super(taskName);
+        private Event(String bodyCommand) {
+            super(bodyCommand);
         }
 
         @Override
         public TaskKind taskKind() {
             return TaskKind.EVENT;
-        }
-
-        @Override
-        public String toString() {
-            String isDone = "[E]" + (super.done ? "[X]" : "[ ]");
-            return isDone + " " + super.taskName;
         }
     }
 
@@ -110,4 +105,11 @@ public abstract class Task {
     }
 
     public abstract TaskKind taskKind();
+
+    @Override
+    public String toString() {
+        String shortName = "[" + this.taskKind().shortName() + "]";
+        String isDone = this.done ? "[X]" : "[ ]";
+        return shortName + " " + isDone + " " + this.taskName;
+    }
 }
