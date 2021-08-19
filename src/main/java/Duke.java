@@ -34,7 +34,7 @@ public class Duke {
 
     public static void getList() {
         System.out.println(Duke.end);
-                System.out.println("Your to-do list:");
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < Duke.list.size(); i++) {
                     String res = (i + 1) + ". " + Duke.list.get(i).toString();
                     System.out.println(res);
@@ -47,37 +47,61 @@ public class Duke {
         System.out.println(Duke.start + "Nice! I've marked this task as done: ");
         Duke.list.get((int) i - 1).markAsDone();
         String res = Duke.list.get(i-1).toString();
-        System.out.println("  " + res + "\n" +  Duke.end);
+        System.out.println(res + "\n" +  Duke.end);
+    }
+
+    public static void toDo(String input) {
+        String t = input.split("todo")[1];
+        ToDo td = new ToDo(t);
+        Duke.list.add(td);
+        System.out.println(Duke.start + "Got it. I've added this task: \n " + td.toString() + "\n"
+                            + "Now you have " + Duke.list.size()  + " tasks in the list."  + "\n" +Duke.end);
+    }
+
+    public static void deadline(String input) {
+        String t = input.split("deadline")[1];
+        Deadline dl = new Deadline(t);
+        Duke.list.add(dl);
+        System.out.println(Duke.start + "Got it. I've added this task: \n " + dl.toString() + "\n"
+                + "Now you have " + Duke.list.size()  + " tasks in the list."  + "\n" +Duke.end);
+    }
+
+    public static void event(String input) {
+        String t = input.split("event")[1];
+        Event e = new Event(t);
+        Duke.list.add(e);
+        System.out.println(Duke.start + "Got it. I've added this task: \n " + e.toString() + "\n"
+                + "Now you have " + Duke.list.size()  + " tasks in the list."  + "\n" +Duke.end);
     }
 
     public static void main(String[] args) {
 
         String end_message = "Bye. I hope to talk to you again soon! :)";
-
         //Print welcome message to the user
         Duke.welcomeMessage();
-
-        //Init new scanner to take in inputs
         Scanner s = new Scanner(System.in);
         Duke.getPrompt();
-
         String input = s.nextLine();
 
-
-        //A loop to check for bye. Else will echo the users input
         while (!input.equals("bye")) {
             if (input.contains("list")) {
                 Duke.getList();
             } else if (input.contains("done")) {
                 int i = Integer.valueOf(input.substring(5));
                 Duke.markDone(i);
+            } else if (input.contains("todo")) {
+                Duke.toDo(input);
+            } else if (input.contains("deadline")) {
+                Duke.deadline(input);
+            } else if (input.contains("event")) {
+                Duke.event(input);
             } else {
                 Task t = new Task(input);
                 Duke.addTask(t);
             }
 
             //Get next command for the loop
-            Duke.getPrompt();
+            System.out.println("What else can I do for you?\n");
             input = s.nextLine();
         }
         System.out.println(Duke.start + end_message + "\n" + Duke.end);
