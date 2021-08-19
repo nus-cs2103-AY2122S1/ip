@@ -1,0 +1,11 @@
+deadline return book /by Monday
+deadline meet Mark /by Tuesday
+list
+event project meeting /at Mon 2-4pm
+event project call /at Tue 2-4pm
+list
+done 3
+list
+done 4
+list
+bye

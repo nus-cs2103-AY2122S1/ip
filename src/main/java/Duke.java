@@ -1,9 +1,13 @@
 import java.util.*;
 
 class Client {
+    Scanner scan = new Scanner(System.in);
     public String input() {
-        Scanner scan = new Scanner(System.in);
-        return scan.nextLine();
+        if (scan.hasNextLine()) {
+            String str = scan.nextLine();
+            return str;
+        }
+        return "";
     }
 }
 
@@ -20,6 +24,9 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<Task>();
         while (true) {
             String input = client.input();
+            if (input.equals("")) {
+                break;
+            }
             Task taskInput = new Task(input);
             if (input.equals("bye")) {
                 System.out.println("It's sad to see you go :(");
