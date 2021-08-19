@@ -1,0 +1,40 @@
+Level 3. Mark as Done
+Add the ability to mark tasks as done.
+
+
+list
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[X] read book
+     2.[ ] return book
+     3.[ ] buy bread
+    ____________________________________________________________
+
+done 2
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+       [X] return book
+    ____________________________________________________________
+ When implementing this feature, you are also recommended to implement the following extension:
+
+ Extension: A-Classes
+
+ A-Classes
+ ↳ Use a class to represent tasks
+
+ While it is possible to represent a task list as a multi-dimensional array containing primitive values, the more natural approach is to use a Task class to represent tasks.
+
+ Tasks to achieve level-2:
+
+ 1. Create a Task Class
+    -to keep track of String task and a boolean isDone - DONE
+    - constructor to create task and set isDone false as default - DONE
+    - use toString() -> to display task -- format: [] (task name) - DONE
+            -- [] -> task not done
+            -- [X] -> task done
+
+ 2. Ability to mark task by index in list
+    - Add done command
+    - Change ArrayList to store Task instead of String
+    - Change add command to store task in arraylist
+    - change behavior of list command for Task
