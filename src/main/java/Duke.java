@@ -30,10 +30,31 @@ public class Duke {
                 System.out.println("\n ----------------------------------");
                 continue;
             }
-            Task newTask = new Task(userInput, false);
+            Task newTask = handleInput(userInput);
             tasks.add(newTask);
             System.out.println("Duke: Added Task " + userInput);
             System.out.println("\n ----------------------------------");
+        }
+    }
+    public static Task handleInput(String userInput) {
+        if(userInput.startsWith("todo")) {
+            int id = userInput.indexOf("todo") + 4;
+            String task = userInput.substring(id);
+            return new Todo(task, false);
+        } else if(userInput.startsWith("deadline")) {
+            int start_id = userInput.indexOf("deadline");
+            int task_id = userInput.indexOf("/by");
+            String task = userInput.substring(start_id + 9, task_id);
+            String date = userInput.substring(task_id + 4);
+            return new Deadline(task, false, date);
+        } else if(userInput.startsWith("event")) {
+            int start_id = userInput.indexOf("event");
+            int task_id = userInput.indexOf("/at");
+            String task = userInput.substring(start_id + 6, task_id);
+            String date = userInput.substring(task_id + 4);
+            return new Event(task, false, date);
+        } else {
+            return new Task(userInput, false);
         }
     }
 
