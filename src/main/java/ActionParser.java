@@ -1,11 +1,23 @@
 import java.util.Scanner;
 
+/**
+ * The ActionParser class handles all actions from users' input.
+ */
 public class ActionParser {
+    /**
+     * The Action enum enumerates all possible actions
+     */
     public enum Action {
         BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, UNKNOWN
     }
 
-    public static Action getAction(String input) {
+    /**
+     * Returns an action based on the given input string.
+     *
+     * @param input the given input string.
+     * @return an action based on the given string.
+     */
+    private static Action getAction(String input) {
         switch (input) {
             case "bye": return Action.BYE;
             case "list": return Action.LIST;
@@ -18,6 +30,12 @@ public class ActionParser {
         }
     }
 
+    /**
+     * Receives input from the user and executes Duke's actions
+     *
+     * @param sc the given scanner instance
+     * @param taskManagement the given task management instance.
+     */
     public static void run(Scanner sc, TaskManagement taskManagement) {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
