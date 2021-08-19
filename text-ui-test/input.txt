@@ -1,0 +1,12 @@
+todo Say good morning Duke!
+list
+deadline Say Good morning /by 1159am today
+list
+event Good Afternoon Duke /at 12pm tomorrow
+list
+done 2
+list
+done 1
+list
+bye
+

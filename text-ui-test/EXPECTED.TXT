@@ -1,7 +1,72 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+Hello! I'm
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+
+How can I help?
+-------------------------------------
+Got it. I've added this task:
+[T] [ ] Say good morning Duke!
+Now you have 1 tasks in the list.
+-------------------------------------
+
+-------------------------------------
+Here are the tasks on your list:
+1. [T] [ ] Say good morning Duke!
+-------------------------------------
+
+-------------------------------------
+Got it. I've added this task:
+[D] [ ] Say Good morning (by: 1159am today)
+Now you have 2 tasks in the list.
+-------------------------------------
+
+-------------------------------------
+Here are the tasks on your list:
+1. [T] [ ] Say good morning Duke!
+2. [D] [ ] Say Good morning (by: 1159am today)
+-------------------------------------
+
+-------------------------------------
+Got it. I've added this task:
+[E] [ ] Good Afternoon Duke (at: 12pm tomorrow)
+Now you have 3 tasks in the list.
+-------------------------------------
+
+-------------------------------------
+Here are the tasks on your list:
+1. [T] [ ] Say good morning Duke!
+2. [D] [ ] Say Good morning (by: 1159am today)
+3. [E] [ ] Good Afternoon Duke (at: 12pm tomorrow)
+-------------------------------------
+
+-------------------------------------
+Nice I've marked this task as done!
+[D] [X] Say Good morning (by: 1159am today)
+-------------------------------------
+
+-------------------------------------
+Here are the tasks on your list:
+1. [T] [ ] Say good morning Duke!
+2. [D] [X] Say Good morning (by: 1159am today)
+3. [E] [ ] Good Afternoon Duke (at: 12pm tomorrow)
+-------------------------------------
+
+-------------------------------------
+Nice I've marked this task as done!
+[T] [X] Say good morning Duke!
+-------------------------------------
+
+-------------------------------------
+Here are the tasks on your list:
+1. [T] [X] Say good morning Duke!
+2. [D] [X] Say Good morning (by: 1159am today)
+3. [E] [ ] Good Afternoon Duke (at: 12pm tomorrow)
+-------------------------------------
+
+-------------------------------------
+Bye. Hope to see you again soon!
+-------------------------------------
 
