@@ -34,8 +34,8 @@ public class Response {
     public void echo(Task task) {
         lst.add(task);
         String num = String.valueOf(lst.size());
-        System.out.println(horizontalLine + "    Got it. I've added: " +
-                task.toString() + "\n" + "    Now you have " + num + " tasks in the list" +
+        System.out.println(horizontalLine + "    Got it. I've added this task: \n" + "    " +
+                task.toString() + "\n" + "    Now you have " + num + " tasks in the list\n" +
                 horizontalLine);
     }
 
@@ -70,7 +70,7 @@ public class Response {
         Task task = lst.get(pos);
         task.mark();
         System.out.println(horizontalLine + "    Nice! I've marked this task as done:\n" +
-                "    " + task +
+                "    " + task.toString() +
                 "\n" + horizontalLine);
     }
 }
