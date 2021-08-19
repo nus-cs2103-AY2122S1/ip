@@ -58,7 +58,7 @@ public class TaskDialog extends Dialog {
         for (int i = 0; i < tasks.size(); i++) {
             tasksDialog.append("    ").append(i + 1).append(".").append(tasks.get(i).toString()).append("\n");
         }
-        return "    ____________________________________________________________ \n" +
+        return "    ____________________________________________________________\n" +
                 dialogs +
                 "Here are the tasks in your list:\n"+
                 tasksDialog +

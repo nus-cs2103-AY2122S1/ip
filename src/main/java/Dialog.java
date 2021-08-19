@@ -38,7 +38,7 @@ public class Dialog {
     @Override
     public String toString() {
         String dialogs = this.sentences.stream().reduce("    ", (s1, s2) -> s1 + s2 + "\n    ");
-        return "    ____________________________________________________________ \n" +
+        return "    ____________________________________________________________\n" +
                 dialogs +
                 "____________________________________________________________";
     }

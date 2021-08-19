@@ -1,7 +1,54 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+    ____________________________________________________________
+         ___       __       __    ______  _______
+        /   \     |  |     |  |  /      ||   ____|
+       /  ^  \    |  |     |  | |  ,----'|  |__
+      /  /_\  \   |  |     |  | |  |     |   __|
+     /  _____  \  |  `----.|  | |  `----.|  |____
+    /__/     \__\ |_______||__|  \______||_______|
 
+    Hello! I'm Alice, your personal assistant
+    What can I do for you?
+    ____________________________________________________________
+    ____________________________________________________________
+    This is the following commands, I can perform:
+
+    1. 'todo <task description>' - add a todo task to the list
+    2. 'deadline <task description> /by <by when>' - add a deadline task with specific deadline
+    3. 'event <task description> /at <at when>' - add an event task with specific time
+    2. 'list' - show the current task list
+    3. 'done <task index>' - mark that task as done
+    4. 'commands' - show this current command window
+    5. 'bye' - end session
+    ____________________________________________________________
+>     ____________________________________________________________
+    Got it. I've added this task:
+      [T][ ] finish Automated Text UI Testing
+    Now you have 1 tasks in the list.
+    ____________________________________________________________
+>     ____________________________________________________________
+    Got it. I've added this task:
+      [D][ ] finish everything (by: 23.59)
+    Now you have 2 tasks in the list.
+    ____________________________________________________________
+>     ____________________________________________________________
+    Got it. I've added this task:
+      [E][ ] commit Automated Text UI Testing (at: 19th Aug 7 O'clock)
+    Now you have 3 tasks in the list.
+    ____________________________________________________________
+>     ____________________________________________________________
+    Nice! I've marked this task as done:
+      [T][X] finish Automated Text UI Testing
+    ____________________________________________________________
+>     ____________________________________________________________
+    Nice! I've marked this task as done:
+      [E][X] commit Automated Text UI Testing (at: 19th Aug 7 O'clock)
+    ____________________________________________________________
+>     ____________________________________________________________
+    Here are the tasks in your list:
+    1.[T][X] finish Automated Text UI Testing
+    2.[D][ ] finish everything (by: 23.59)
+    3.[E][X] commit Automated Text UI Testing (at: 19th Aug 7 O'clock)
+    ____________________________________________________________
+>     ____________________________________________________________
+    Bye. Hope to see you again soon!
+    ____________________________________________________________

@@ -1,0 +1,7 @@
+todo finish Automated Text UI Testing
+deadline finish everything /by 23.59
+event commit Automated Text UI Testing /at 19th Aug 7 O'clock
+done 1
+done 3
+list
+bye
