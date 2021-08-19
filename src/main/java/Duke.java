@@ -8,6 +8,7 @@ public class Duke {
     private static String bye_output = "Bye. Hope to see you again soon!";
     private static String list_input = "list";
     private static String done_input = "done";
+    private static String delete_input = "delete";
     private static String indent = "    ";
     private static String div_line = "    ____________________________________________________________";
 
@@ -38,6 +39,20 @@ public class Duke {
                         echo("Nice! I have marked this task as done:\n" + indent + userTasks.get(i));
                     } catch (NumberFormatException | IndexOutOfBoundsException e) {
                         echo("Oops! " + "Enter a valid task no. to complete the task.");
+                    }
+                }
+            } else if (arr[0].equals(delete_input)) {
+                if (arr.length == 1) {
+                    throw new DukeException("Enter task no. to delete the task.");
+                } else {
+                    try {
+                        int i = Integer.parseInt(arr[1]) - 1;
+                        String task_desc = userTasks.get(i).toString();
+                        userTasks.remove(i);
+                        echo("Noted. I've removed this task:\n" + indent + task_desc + "\n" + indent +
+                                "Now you have " + userTasks.size() + " tasks in the list.");
+                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                        echo("Oops! " + "Enter a valid task no. to delete the task.");
                     }
                 }
             } else {
