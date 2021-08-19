@@ -31,4 +31,7 @@ What can I do for you?
 	3. [T][ ] buy food
 	4. [D][ ] do homework (by: Monday)
 	5. [E][ ] birthday party (at: Tuesday 2pm)
+	☹ OOPS!!! You have entered an invalid command, please try again.
+	☹ OOPS!!! Please specify the task number for the task you want to complete.
+	☹ OOPS!!! This is not a valid task number.
 	Bye. Hope to see you again soon!

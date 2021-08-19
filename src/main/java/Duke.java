@@ -23,7 +23,7 @@ public class Duke {
                     System.out.println("\tBye. Hope to see you again soon!");
                 }
             } catch (DukeException e) {
-                System.err.println(e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
         sc.close();
@@ -46,7 +46,7 @@ public class Duke {
 
         if (commandWord.equals("done")) {
             if (commandDesc.equals("")) {
-                throw new DukeException("☹ OOPS!!! Please specify the task number for the task you want to complete.");
+                throw new DukeException("\t☹ OOPS!!! Please specify the task number for the task you want to complete.");
             }
             markDone(commandDesc);
 
@@ -55,26 +55,26 @@ public class Duke {
 
         } else if (commandWord.equals("todo")) {
             if (commandDesc.equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");
             }
             addToDo(commandDesc);
 
         } else if (commandWord.equals("deadline")) {
             if (commandDesc.equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
             }
             addDeadline(commandDesc);
 
         } else if (commandWord.equals("event")) {
             if (commandDesc.equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                throw new DukeException("\t☹ OOPS!!! The description of a event cannot be empty.");
             }
             addEvent(commandDesc);
 
         } else if (commandWord.equals("bye")) {
             return 1;
         } else {
-            throw new DukeException("☹ OOPS!!! You have entered an invalid command, please try again.");
+            throw new DukeException("\t☹ OOPS!!! You have entered an invalid command, please try again.");
         }
         return 0;
     }
@@ -88,14 +88,14 @@ public class Duke {
         try {
             int taskNumber = Integer.parseInt(commandDesc) - 1;
             if (taskNumber >= taskCount) {
-                throw new DukeException("☹ OOPS!!! This is not a valid task number.");
+                throw new DukeException("\t☹ OOPS!!! This is not a valid task number.");
             }
             taskList[taskNumber].markDone();
             System.out.println("\tNice! I've marked this task as done:\n\t  " + taskList[taskNumber]);
         } catch (NumberFormatException e) {
-            System.err.println("☹ OOPS!!! Please input a task number instead.");
+            System.out.println("\t☹ OOPS!!! Please input a task number instead.");
         } catch (DukeException e) {
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
 
 
