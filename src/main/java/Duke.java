@@ -26,6 +26,11 @@ public class Duke {
         System.out.println(output);
     }
 
+    /**
+     * Handle userInput base on the command given.
+     * Split userInput to specific component to allow input into methods.
+     * @param userInput the String entered by the user
+     */
     public void messageHandle(String userInput) {
         String command = userInput.split(" ")[0];
         switch(command) {
@@ -100,8 +105,8 @@ public class Duke {
     }
 
     private void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
@@ -137,7 +142,7 @@ public class Duke {
     private void list() {
         String task;
         if (numTask == 0) {
-            task = " ";
+            task = "";
         } else {
             task = "1. " + taskList.get(0).toString();
             for(int taskNumber = 2; taskNumber <= numTask; taskNumber++) {

@@ -8,17 +8,24 @@ public class Task {
     }
 
     /**
-     *
-     * @return
+     * Get the status of the task (whether is it done)
+     * @return Status Icon
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Get description of the task
+     * @return decription of task
+     */
     public String getDescription(){
         return this.description;
     }
 
+    /**
+     * Mark task as done
+     */
     public void markDone() {
         this.isDone = true;
     }
