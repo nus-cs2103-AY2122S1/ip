@@ -21,6 +21,14 @@ public class Duke {
                     store.get(textNumber - 1).done();
                     System.out.println("Nice! I've marked this task as done:\n"
                             + store.get(textNumber - 1).toString());
+                } else if(words[0].equals("delete")){
+                    int deleteIndex = Integer.parseInt(words[1]);
+                    Task removedTask = store.get(deleteIndex);
+                    store.remove(deleteIndex - 1);
+                    System.out.println("Got it. I've removed this task:\n"
+                            + removedTask.toString()
+                            + "\nNow you have "
+                            + store.size() + " tasks in the list.");
                 } else {
                     Task task;
                     if (words[0].equals("todo")) {
