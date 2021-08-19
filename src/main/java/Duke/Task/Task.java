@@ -7,13 +7,10 @@ public abstract class Task {
     private final String description;
     private boolean isDone;
 
-    Task(String description) {
-        this(description, false);
-    }
-
-    Task(String description, boolean isDone) {
+    Task(String description) throws EmptyDescriptionException {
+        if (description.isEmpty()) throw new EmptyDescriptionException();
         this.description = description;
-        this.isDone = isDone;
+        this.isDone = false;
     }
 
     public void markAsDone() {

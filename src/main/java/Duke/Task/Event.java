@@ -5,7 +5,7 @@ public class Event extends Task {
 
     private final String period;
 
-    public Event(String description, String period) {
+    public Event(String description, String period) throws EmptyDescriptionException {
         super(description);
         this.period = period;
     }

@@ -5,7 +5,7 @@ public class Deadline extends Task {
 
     private final String endDate;
 
-    public Deadline(String description, String endDate) {
+    public Deadline(String description, String endDate) throws EmptyDescriptionException {
         super(description);
         this.endDate = endDate;
     }

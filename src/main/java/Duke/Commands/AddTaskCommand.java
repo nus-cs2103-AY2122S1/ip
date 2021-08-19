@@ -15,14 +15,14 @@ class AddTaskCommand extends Command {
     private static final String EVENT_AT_REGEX = "\\s+/at\\s+";
 
     @Override
-    public void run(Duke duke, Duke.UserInput input) {
+    public void run(Duke duke, Duke.UserInput input) throws EmptyDescriptionException {
         Task newTask = createTask(input);
         TaskList taskList = duke.getTaskList();
         taskList.add(newTask);
         duke.say(String.format(ADD_TASK_SUCCESS_MESSAGE, newTask, taskList.size()));
     }
 
-    private static Task createTask(Duke.UserInput input) {
+    private static Task createTask(Duke.UserInput input) throws EmptyDescriptionException {
         // TODO: use enums for this
         switch (input.getKeyword()) {
             case "todo":

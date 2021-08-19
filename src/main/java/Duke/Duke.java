@@ -1,7 +1,6 @@
 package Duke;
 
 import Duke.Commands.Command;
-import Duke.Commands.UnknownCommandException;
 import Duke.Task.TaskList;
 
 import java.util.Scanner;
@@ -9,7 +8,7 @@ import java.util.Scanner;
 public class Duke {
     private static final String GREETING_MESSAGE = "Hello I'm Duke!";
     private static final String EXIT_MESSAGE = "Bye bye! Hope you have a productive day :)";
-    private static final String HELP_MESSAGE = "Sorry I didn't understand what you meant by: %s";
+    private static final String ERROR_MESSAGE = "Oops! An error occurred: %s";
     private static final String RULER = "\n````````````````````````````````````````````````````````\n";
     private static final String INPUT_PROMPT = "> ";
 
@@ -29,8 +28,8 @@ public class Duke {
             input.readAndParse();
             try {
                 Command.matching(input).run(this, input);
-            } catch (UnknownCommandException e) {
-               this.say(String.format(HELP_MESSAGE, input.getRaw()));
+            } catch (DukeException e) {
+                this.say(String.format(ERROR_MESSAGE, e.getMessage()));
             }
         }
         this.say(EXIT_MESSAGE);
