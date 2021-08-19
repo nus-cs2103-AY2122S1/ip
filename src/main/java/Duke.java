@@ -1,6 +1,35 @@
 import java.util.Scanner;
 
+
+
 public class Duke {
+
+    public enum Command {
+        TODO, DEADLINE, EVENT, LIST, DONE, DELETE, COMMANDS, BYE
+    }
+
+    public static Command stringToCommand(String s) throws DukeException {
+        switch(s) {
+            case "list":
+                return Command.LIST;
+            case "todo":
+                return Command.TODO;
+            case "deadline":
+                return Command.DEADLINE;
+            case "event":
+                return Command.EVENT;
+            case "done":
+                return Command.DONE;
+            case "delete":
+                return Command.DELETE;
+            case "commands":
+                return Command.COMMANDS;
+            case "bye":
+                return Command.BYE;
+            default:
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
+    }
 
     public static void printError(Exception e) throws DialogException {
         if (Dialog.have(e.toString())) {
@@ -43,16 +72,26 @@ public class Duke {
         commandsList.add("8. 'bye' - end session");
         System.out.println(greeting);
         System.out.println(commandsList);
-        System.out.print("> ");
-        String input = sc.nextLine();
+        Command command;
+        String input;
+        while (true) {
+            try {
+                System.out.print("> ");
+                input = sc.nextLine();
+                command = stringToCommand(input.split(" ")[0]);
+                break;
+            } catch (DukeException e) {
+                printError(e);
+            }
+        }
+
         TaskDialog list = (TaskDialog) TaskDialog.generate("list");
-        while (!input.equals("bye")) {
-            String command = input.split(" ")[0];
+        while (command != Command.BYE) {
             switch(command) {
-                case "list":
+                case LIST:
                     System.out.println(list);
                     break;
-                case "todo": {
+                case TODO: {
                     try {
                         if (input.split(" ").length == 1) {
                             throw new EmptyDescriptionException("The description of a todo cannot be empty.");
@@ -63,7 +102,7 @@ public class Duke {
                     }
                     break;
                 }
-                case "deadline": {
+                case DEADLINE: {
                     try {
                         if (input.split(" ").length == 1) {
                             throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
@@ -78,7 +117,7 @@ public class Duke {
                     }
                     break;
                 }
-                case "event": {
+                case EVENT: {
                     try {
                         if (input.split(" ").length == 1) {
                             throw new EmptyDescriptionException("The description of an event cannot be empty.");
@@ -93,7 +132,7 @@ public class Duke {
                     }
                     break;
                 }
-                case "done": {
+                case DONE: {
                     try {
                         if (input.split(" ").length == 1) {
                             throw new EmptyIndexException("The index of done cannot be empty.");
@@ -112,7 +151,7 @@ public class Duke {
                     }
                     break;
                 }
-                case "delete": {
+                case DELETE: {
                     try {
                         if (input.split(" ").length == 1) {
                             throw new EmptyIndexException("The index of delete cannot be empty.");
@@ -131,15 +170,23 @@ public class Duke {
                     }
                     break;
                 }
-                case "commands":
+                case COMMANDS:
                     System.out.println(commandsList);
                     break;
                 default:
-                    printError(new DukeException("I'm sorry, but I don't know what that means :-("));
+                    // UNREACHABLE: already checked via StringToCommand
                     break;
             }
-            System.out.print("> ");
-            input = sc.nextLine();
+            while (true) {
+                try {
+                    System.out.print("> ");
+                    input = sc.nextLine();
+                    command = stringToCommand(input.split(" ")[0]);
+                    break;
+                } catch (DukeException e) {
+                    printError(e);
+                }
+            }
         }
 
         Dialog bye = Dialog.generate("bye");
