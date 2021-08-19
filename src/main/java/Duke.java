@@ -15,7 +15,7 @@ public class Duke {
             System.out.print("Enter command: \t");
             commandLine = sc.nextLine().trim();
             String[] command = commandLine.split(" ", 2);
-            String response = "";
+            System.out.println();
 
             switch (command[0]) {
                 case "bye":
