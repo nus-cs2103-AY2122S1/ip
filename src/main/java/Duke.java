@@ -4,8 +4,7 @@ import java.util.Scanner;
 public class Duke {
     public void Run() {
         Scanner scanner = new Scanner(System.in);
-        Task[] list = new Task[100];
-        int pointer = 0;
+        TaskList list = new TaskList();
 
         System.out.println("──────────────────────────────────────────");
         String logo = " ____        _        \n"
@@ -23,47 +22,40 @@ public class Duke {
             switch(input) {
                 case "list":
                     System.out.println("──────────────────────────────────────────");
-                    for (int i = 0; i < pointer; i++) {
-                        String cur = list[i].toString();
-                        int label = i + 1;
-                        System.out.println(label + ". " + cur);
-                    }
+                    list.display();
                     System.out.println("──────────────────────────────────────────");
                     input = scanner.next();
                     break;
 
                 case "done":
-                    int temp = scanner.nextInt();
-                    if (temp < 1) {
+                    try {
+                        int temp = scanner.nextInt();
+                        Task cur = list.get(temp);
+                        cur.Done();
                         System.out.println("──────────────────────────────────────────");
-                        System.out.println("invalid value!");
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(cur);
+                        System.out.println("──────────────────────────────────────────");
+                        input = scanner.next();
+                        break;
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
                         System.out.println("──────────────────────────────────────────");
                         input = scanner.next();
                         break;
                     }
-                    Task cur = list[temp - 1];
-                    cur.Done();
-                    System.out.println("──────────────────────────────────────────");
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(cur);
-                    System.out.println("──────────────────────────────────────────");
-                    input = scanner.next();
-                    break;
 
                 case "todo":
                     String tdLabel = scanner.nextLine();
                     System.out.println("──────────────────────────────────────────");
                     try {
                         Todo todo = new Todo(tdLabel);
-                        list[pointer] = todo;
-                        pointer++;
-                        System.out.println("added: " + todo);
-                        System.out.println("Now you have " + pointer + " tasks in the list");
+                        list.add(todo);
                         System.out.println("──────────────────────────────────────────");
                         input = scanner.next();
                         break;
                     } catch (DukeException e) {
-                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                        System.out.println(e.getMessage());
                         System.out.println("──────────────────────────────────────────");
                         input = scanner.next();
                         break;
@@ -77,10 +69,7 @@ public class Duke {
                         String dl1 = dlLabel.substring(0, dlSep - 1);
                         String dl2 = dlLabel.substring(dlSep + 3);
                         Deadline deadline = new Deadline(dl1, dl2);
-                        list[pointer] = deadline;
-                        pointer++;
-                        System.out.println("added: " + deadline);
-                        System.out.println("Now you have " + pointer + " tasks in the list");
+                        list.add(deadline);
                         System.out.println("──────────────────────────────────────────");
                         input = scanner.next();
                         break;
@@ -99,10 +88,22 @@ public class Duke {
                         String e1 = eLabel.substring(0, eSep - 1);
                         String e2 = eLabel.substring(eSep + 3);
                         Event event = new Event(e1, e2);
-                        list[pointer] = event;
-                        pointer++;
-                        System.out.println("added: " + event);
-                        System.out.println("Now you have " + pointer + " tasks in the list");
+                        list.add(event);
+                        System.out.println("──────────────────────────────────────────");
+                        input = scanner.next();
+                        break;
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("──────────────────────────────────────────");
+                        input = scanner.next();
+                        break;
+                    }
+
+                case "delete":
+                    try {
+                        System.out.println("──────────────────────────────────────────");
+                        int temp = scanner.nextInt();
+                        list.remove(temp);
                         System.out.println("──────────────────────────────────────────");
                         input = scanner.next();
                         break;
