@@ -31,6 +31,16 @@ What can I do for you?
 	3. [T][ ] buy food
 	4. [D][ ] do homework (by: Monday)
 	5. [E][ ] birthday party (at: Tuesday 2pm)
+	Noted. I've removed this task:
+	  [T][X] borrow book
+	Now you have 4 tasks in the list.
+	Noted. I've removed this task:
+	  [T][X] read book
+	Now you have 3 tasks in the list.
+	Here are the tasks in your list:
+	1. [T][ ] buy food
+	2. [D][ ] do homework (by: Monday)
+	3. [E][ ] birthday party (at: Tuesday 2pm)
 	☹ OOPS!!! You have entered an invalid command, please try again.
 	☹ OOPS!!! Please specify the task number for the task you want to complete.
 	☹ OOPS!!! This is not a valid task number.

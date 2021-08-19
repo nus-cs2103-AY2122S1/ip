@@ -7,6 +7,9 @@ list
 done 1
 done 2
 list
+delete 1
+delete 1
+list
 blah
 done
 done 1000
