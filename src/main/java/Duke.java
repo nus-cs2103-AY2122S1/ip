@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class Duke {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -11,48 +13,26 @@ public class Duke {
                               + "| |_| | |_| |   <  __/\n"
                               + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public static Response welcomeResponse = new Response(new String[]{ "Hello! I'm Duke", "What can I do for you?" });
-    public static Response goodbyeResponse = new Response(new String[]{ "Bye. Hope to see you again soon!" });
-
     private static final TaskCollection tasks = new TaskCollection();
+    private static final Queue<Action> actions = new LinkedList<>();
 
     public static void main(String[] args) throws IOException {
-        Duke.printResponse(Duke.welcomeResponse);
+        Duke.actions.add(new WelcomeUser());
 
         while (true) {
-            String input = Duke.getUserInput();
-            String[] inputSubsections = input.split("\\s", 2);
-            String command = inputSubsections[0];
-            
-            if (command.equals("bye")) {
-                Duke.printResponse(Duke.goodbyeResponse);
+            if (Duke.actions.isEmpty()) {
+                String input = Duke.getUserInput();
+                Request request = Request.create(Duke.tasks, input);
+                Duke.actions.add(request.action());
+            }
+
+            Action action = Duke.actions.remove();
+            Response response = action.execute();
+            Duke.printResponse(response);
+
+            if (action instanceof GoodbyeUser) {
                 break;
             }
-
-            if (command.equals("list")) {
-                Response listResponse = new Response();
-                listResponse.add("Here are the tasks in your list:");
-                listResponse.add(Duke.tasks.toString());
-                Duke.printResponse(listResponse);
-                continue;
-            }
-
-            if (command.equals("done")) {
-                int itemNumber = Integer.parseInt(inputSubsections[1]);
-                Task task = Duke.tasks.get(itemNumber);
-                task.isDone = true;
-                Response doneResponse = new Response();
-                doneResponse.add("Nice! I've marked this task as done: ");
-                doneResponse.add(String.format("  %s", task.toString()));
-                Duke.printResponse(doneResponse);
-                continue;
-            }
-
-            Task newTask = new Task(input);
-            Duke.tasks.add(newTask);
-            Response defaultResponse = new Response();
-            defaultResponse.add(String.format("added: %s", newTask.description));
-            Duke.printResponse(defaultResponse);
         }
     }
 

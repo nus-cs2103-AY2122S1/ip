@@ -24,6 +24,14 @@ public class TaskCollection {
     }
 
     /**
+     * Get the number of Tasks in the TaskCollection.
+     * @return The size of the TaskCollection.
+     */
+    public int size() {
+        return this.tasks.size();
+    }
+
+    /**
      * Converts the TaskCollection to its String representation.
      * @return The String representation of the TaskCollection.
      */
