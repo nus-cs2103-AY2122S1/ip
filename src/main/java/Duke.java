@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,10 +15,9 @@ public class Duke {
 
         Task[] tasks = new Task[100];
         int taskCounter = 0;
-        //boolean[] doneTracker = new boolean[100];
 
         String input = "";
-        while(true){
+        try {while(true){
             input = sc.nextLine();
             if(input.equals("bye")){
                 System.out.println("Bye. Hope to see you again soon!\n");
@@ -27,13 +26,6 @@ public class Duke {
             }
             else if(input.equals("list")) {
                 for(int i = 0; i < taskCounter; i++){
-//                    String done;
-//                    if (tasks[i].done==true){
-//                        done = "X";
-//                    } else {
-//                        done = " ";
-//                    }
-                    //System.out.println((i+1) + "." + "[" + tasks[i].type + "] " + "[" + done + "] " + tasks[i].name);
                     System.out.println((i+1) + "." + tasks[i].toString());
                 }
             } else if (input.length() > 4 && input.substring(0,4).equals("done")){
@@ -41,17 +33,18 @@ public class Duke {
                 int taskDoneIndex = Integer.parseInt(taskDone)-1;
                 tasks[taskDoneIndex].makeDone();
                 System.out.println("Nice! I've marked this task as done: ");
-                //System.out.println("[" + tasks[taskDoneIndex].type + "]" + "  [X] " + tasks[taskDoneIndex].name);
                 System.out.println(tasks[taskDoneIndex].toString());
             }
             else {
+                if(input.length()!= 4 || input.length()!=5 || input.length()!=8){
+                    throw new DukeException("Unacceptable input");
+                }
                 System.out.println("Got it. I've added this task: ");
 
                 if(input.substring(0,4).equals("todo")){
                     Task newTask = new Task(input.substring(5), "T");
                     tasks[taskCounter] = newTask;
                     taskCounter++;
-                    //System.out.println("  [T]" + "[ ] " + input.substring(5));
                     System.out.print("  " + newTask.toString());
 
                 } else if(input.substring(0,5).equals("event")){
@@ -59,33 +52,35 @@ public class Duke {
                     Event newEvent = new Event(input.substring(6).split("/")[0], at);
                     tasks[taskCounter] = newEvent;
                     taskCounter++;
-                    //System.out.println("  [E]" + "[ ] " + input.substring(6));
                     System.out.println("  " + newEvent.toString());
-                } else {
+                } else if(input.substring(0,8).equals("deadline")){
                     // deadline
                     String by = input.split("/")[1].substring(3);
                     Deadline newDeadline = new Deadline(input.substring(9).split("/")[0], by);
                     tasks[taskCounter] = newDeadline;
                     taskCounter++;
-                    //System.out.println("  [D]" + "[ ] " + input.substring(9));
                     System.out.println("  " + newDeadline.toString());
 
+                } else {
+                    throw new DukeException("Unacceptable input");
                 }
 
                 System.out.println("Now you have " +  (taskCounter) + " tasks in the list.");
             }
+        }} catch (DukeException e){
+            System.out.println("OOPS!!! You have enteted an invalid category");
         }
 
     }
 }
 
-class Task{
+class Task {
     String name;
     //String taskNumber;
     boolean done = false;
     String type;
 
-    Task(String name, String type){
+    Task(String name, String type) {
         this.name = name;
         this.type = type;
     }
@@ -128,5 +123,11 @@ class Event extends Task{
         String doneSymbol = done? "X" : " ";
         String result = "[" + type + "] " + "[" + doneSymbol + "] " + name + "(at: " + at + ")";
         return result;
+    }
+}
+
+class DukeException extends Exception {
+    DukeException(String message){
+        super(message);
     }
 }
