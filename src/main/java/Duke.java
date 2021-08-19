@@ -7,7 +7,6 @@ public class Duke {
         boolean running = true;
         String horizontal = "____________________\n";
         String exitText = horizontal + "Bye!\n" + horizontal;
-
         String logo =
               "                     _               _         \n" +
                       "                    | |             | |        \n" +
@@ -19,6 +18,7 @@ public class Duke {
                       "                                         |___/ ";
 
         System.out.println("Hello from\n" + logo);
+        List<String> stored = new ArrayList<>();
 
 
         Scanner sc = new Scanner(System.in);
@@ -26,12 +26,17 @@ public class Duke {
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 running = false;
-                System.out.println(exitText);
+            } else if (input.equals("list")){
+                for (int i = 0; i < stored.size(); i++){
+                    System.out.println((i+1) + ". " + stored.get(i));
+                }
             } else {
-                String wrapped = horizontal + input + "\n" + horizontal;
+                stored.add(input);
+                String wrapped = horizontal + "added: " + input + "\n" + horizontal;
                 System.out.println(wrapped);
             }
         }
         sc.close();
+        System.out.println(exitText);
     }
 }
