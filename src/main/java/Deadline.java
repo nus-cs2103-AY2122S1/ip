@@ -1,4 +1,9 @@
-// tasks that need to be done before a specific date/time
+/**
+ * Deadline class for tasks that need to be done before a specific date/time
+ *
+ * @author: Chen Hsiao Ting
+ */
+
 public class Deadline extends Task {
     protected String description;
     protected String deadline;
@@ -9,6 +14,10 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * Print the status and description of the deadline task.
+     * @return a string representation of the deadline task.
+     */
     public String getTask() {
         String[] splitted = description.split("/by ", 2);
         String text = splitted[0];

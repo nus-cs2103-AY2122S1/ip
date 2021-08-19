@@ -1,3 +1,10 @@
+/**
+ * Duke class encapsulate a chatbot service.
+ * It supports queries such as creating, marking and deleting tasks.
+ *
+ * @author: Chen Hsiao Ting
+ */
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
