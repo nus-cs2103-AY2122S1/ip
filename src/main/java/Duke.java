@@ -10,16 +10,22 @@ public class Duke {
     private final static String line = "\t----------------------------------------------------\n";
     private final static String welcome_changed = line + "\t" + "Hewwo fweind, I am fuwwy, your personal assitant,\n" +
             "\t" + "How can I help you?\n" + line;
-    private static ArrayList<String> tasklist = new ArrayList<>();
+    private static ArrayList<Task> tasklist = new ArrayList<>();
 
     private static void fuwwyEcho(String echo) {
         System.out.println(line + "\t" + echo + "\n" + line);
     }
 
-    private static void addTask(String task) {
+    private static void addTask(Task task) {
         tasklist.add(task);
         fuwwyEcho("Uwu added:\t"
                 + task);
+    }
+
+    private static void taskDone(int n) {
+        Task t = tasklist.get(n - 1);
+        t.setDone(true);
+        fuwwyEcho("Uwu! I've marked this task as done:\n\t" + t + "\n");
     }
 
     public static void main(String[] args) {
@@ -38,8 +44,12 @@ public class Duke {
                 }
                 fuwwyEcho(output);
                 command = sc.nextLine();
-            } else {
-                addTask(command);
+            } else if (command.startsWith("done")){
+                taskDone(Integer.parseInt(command.split(" ")[1]));
+                command = sc.nextLine();
+            }
+            else {
+                addTask(new Task(command));
                 command = sc.nextLine();
             }
         }
