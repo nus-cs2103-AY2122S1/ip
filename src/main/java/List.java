@@ -40,8 +40,21 @@ public class List {
         System.out.println(list.get(index - 1).toString());
     }
 
+    public void deleteTask(int index) {//starts from 1
+        if(index > list.size()){
+            System.out.println("There is no task " + index);
+            return;
+        }
+        System.out.println(list.get(index - 1).toString());
+        list.remove(index - 1);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    }
+
     public void show() {
         int length = list.size();
+        if (length == 0) {
+            System.out.println("YAY! You have no more tasks left :)");
+        }
         for(int i = 1; i <= length; i++) {
             System.out.println(i + "." + list.get(i - 1).toString());
         }

@@ -26,6 +26,19 @@ public class Duke {
                 list.setIndexDone(numInt);
                 input = sc.nextLine();
                 continue;
+            } else if (input.startsWith("delete ")) {
+                String[] parts = input.split(" ");
+                if(parts.length <= 1) {
+                    System.out.println("☹ OOPS!!! I'm sorry, you need to specify which task is done :)");
+                    input = sc.nextLine();
+                    continue;
+                }
+                String numStr = parts[1];
+                int numInt = Integer.valueOf(numStr);
+                System.out.println("Noted. I've removed this task: ");
+                list.deleteTask(numInt);
+                input = sc.nextLine();
+                continue;
             } else if (input.startsWith("todo ")) {
                 String task = input.replaceFirst("todo ", "");
                 if (task.isBlank()) {
