@@ -1,7 +1,9 @@
 /**
+ * This class encapsulates a
+ * deadline task with a specified deadline.
  *
  * @author Pawandeep Singh
- * @version Level-3
+ * @version Level-4
  *
  * */
 public class Deadline extends Task{
@@ -15,6 +17,6 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: "+ this.deadline  +")";
+                + "(by:"+ this.deadline  +")";
     }
 }

@@ -5,7 +5,7 @@ import java.security.PublicKey;
  * for user display.
  *
  * @author Pawandeep Singh
- * @version Level-3
+ * @version Level-6
  *
  * */
 public class GnosisConstants {

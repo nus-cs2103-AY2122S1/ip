@@ -1,7 +1,9 @@
 /**
+ * This exception Class presents exception captured by Gnosis.
+ *
  *
  * @author Pawandeep Singh
- * @version Level-3
+ * @version Level-5
  *
  * */
 public class GnosisException extends Exception {

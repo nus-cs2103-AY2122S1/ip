@@ -10,7 +10,7 @@ import java.util.Scanner;
  * default - adds user input as task
  *
  * @author Pawandeep Singh
- * @version Level-3
+ * @version A-Enums
  *
  * */
 public class Gnosis {
@@ -35,13 +35,16 @@ public class Gnosis {
 
             // display and execute commands
             displayTopDivider();
-            GnosisCommand gc = GnosisCommand.valueOf(command.toUpperCase().trim());
+
             try {
+                GnosisCommand gc = GnosisCommand.valueOf(command.toUpperCase().trim());
                 executeCommand(gc, input.trim());
             } catch (GnosisException ge) {
                 System.out.println(ge.toString());
             } catch (NumberFormatException nfe) {
                 System.out.println(GnosisConstants.DONE_COMMAND_NUM_INPUT_EXCEPT_MESSAGE);
+            } catch (IllegalArgumentException iae ) {
+                System.out.println(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
             }
             displayBottomDivider();
 

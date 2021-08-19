@@ -1,6 +1,9 @@
 /**
+ * This class encapsulates a
+ * event task with a specified schedule.
+ *
  * @author Pawandeep Singh
- * @version Level-3
+ * @version Level-4
  *
  * */
 public class Event extends Task{
@@ -15,6 +18,6 @@ public class Event extends Task{
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (at: "+ this.schedule  +")";
+                + "(at:"+ this.schedule  +")";
     }
 }
