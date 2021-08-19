@@ -52,6 +52,14 @@ public class Pib {
                             }
                             break;
                         }
+                        case "delete": {
+                            try {
+                                delete(taskDetails);
+                            } catch (IndexOutOfBoundsException e) {
+                                System.out.println("Uh oh :( Please enter a valid task number!\n");
+                            }
+                            break;
+                        }
                         default: {
                             throw new PibException("Uh oh :( I don't know that command :(\n");
                         }
@@ -144,6 +152,17 @@ public class Pib {
             list.get(Integer.parseInt(s) - 1).markAsDone();
         }
     }
+
+    private void delete(String s) {
+        if (s.isBlank()) {
+            System.out.println("Tell me which item to delete!\n ");
+        } else {
+            list.remove(Integer.parseInt(s) - 1);
+            System.out.println("Successfully deleted task!\n");
+            System.out.println("Now you have " + list.size() + " task(s) in your list.\n");
+        }
+    }
+
 
     public static void main(String[] args) {
         Pib p = new Pib();
