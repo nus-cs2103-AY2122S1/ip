@@ -38,8 +38,19 @@ public class Duke {
                 printList();
             } else if (split[0].equals("done")) {
                 doneTask(Integer.parseInt(split[1]));
+            } else if (split[0].equals("todo")) {
+                createTodo(split[1]);
+            } else if (split[0].equals("event")) {
+                String time = split[1].split(" /at ", 2)[1];
+                String task = split[1].split(" /at ", 2)[0];
+                createEvent(task, time);
+            } else if (split[0].equals("deadline")) {
+                String time = split[1].split(" /by ", 2)[1];
+                String task = split[1].split(" /by ", 2)[0];
+                createDeadline(task, time);
             } else {
-                addToList(input);
+                System.out.println("Command not found");
+                return;
             }
         }
     }
@@ -62,10 +73,47 @@ public class Duke {
      *
      * @param input String input from the user
      */
-    static void addToList(String input) {
-        Task task = new Task(input, false);
-        list.add(task);
-        System.out.println("added: " + input);
+    static void addToList(Task input) {
+        //Task task = new Task(input, false);
+        list.add(input);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(input.toString());
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    }
+
+    /**
+     * method to create an Event as a Task and add to
+     * the task list
+     *
+     * @param input String task name
+     * @param time  String time of event
+     */
+    static void createEvent(String input, String time) {
+        Event event = new Event(input, false, time);
+        addToList(event);
+    }
+
+    /**
+     * method to create a Task with no time and
+     * add it to the task list
+     *
+     * @param input String task name
+     */
+    static void createTodo(String input) {
+        Todo todo = new Todo(input, false);
+        addToList(todo);
+    }
+
+    /**
+     * method to create a task with a given deadline and
+     * add to the task list
+     *
+     * @param input String task name
+     * @param time  String time of deadline
+     */
+    static void createDeadline(String input, String time) {
+        Deadline deadline = new Deadline(input, false, time);
+        addToList(deadline);
     }
 
     /**
