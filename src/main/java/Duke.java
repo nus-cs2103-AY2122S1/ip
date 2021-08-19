@@ -4,30 +4,38 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        List<String> commandsList = new ArrayList<String>();
+        List<Task> tasksList = new ArrayList<Task>();
 
         echo(greetMessage());
 
         Scanner sc = new Scanner(System.in);
-        String inputCommand = "";
+        String commandLine = "";
 
         do {
             System.out.print("Enter command: \t");
-            inputCommand = sc.nextLine().trim();
+            commandLine = sc.nextLine().trim();
+            String[] command = commandLine.split(" ", 2);
 
-            switch (inputCommand) {
+            switch (command[0]) {
                 case "bye":
                     echo(exitMessage());
                     break;
                 case "list":
-                    echo(displayCommandsList(commandsList));
+                    echo(displayTasksList(tasksList));
+                    break;
+                case "done":
+                    int taskNum = Integer.parseInt(command[1]);
+                    tasksList.get(taskNum - 1).setDone();
+                    Task task = tasksList.get(taskNum - 1);
+                    echo(taskDoneMessage(task));
                     break;
                 default:
-                    commandsList.add(inputCommand);
-                    echo(addedCommandMessage(inputCommand));
+                    Task newTask = new Task(commandLine);
+                    tasksList.add(newTask);
+                    echo(taskAddedMessage(newTask));
                     break;
             }
-        } while (!inputCommand.equals("bye"));
+        } while (!commandLine.equals("bye"));
     }
 
     private static String greetMessage() {
@@ -40,19 +48,25 @@ public class Duke {
     }
 
 
-    private static String addedCommandMessage(String inputCommand) {
-        return "\t" + "added: " + inputCommand;
+    private static String taskAddedMessage(Task newTask) {
+        return "\t" + "added: " + newTask.getDescription();
     }
 
-    private static String displayCommandsList(List<String> commandsList) {
-        String result = "";
+    private static String taskDoneMessage(Task task) {
+        return "\t" + "Nice! I've marked this task as done:" +
+                System.lineSeparator() + "\t\t" + task.toString();
+    }
 
-        for (int i = 0; i < commandsList.size(); i++) {
+    private static String displayTasksList(List<Task> tasksList) {
+        String result = "\t" + "Here are the tasks in your list:"
+                + System.lineSeparator();
+
+        for (int i = 0; i < tasksList.size(); i++) {
             if (i != 0) {
                 result += System.lineSeparator();
             }
 
-            result += "\t" + (i + 1) + ". " + commandsList.get(i);
+            result += "\t\t" + (i + 1) + "." + "\t" + tasksList.get(i).toString();
         }
 
         return result;
