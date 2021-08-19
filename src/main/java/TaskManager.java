@@ -5,7 +5,7 @@ import java.util.List;
  * TaskManager keep track of the Task in the memory.
  */
 public class TaskManager {
-    private List<Task> taskList = new ArrayList<Task>();
+    private final List<Task> taskList = new ArrayList<>();
 
     public TaskManager() {
 
@@ -35,9 +35,7 @@ public class TaskManager {
         Task taskToBeMarked = taskList.get(index - 1);
         taskToBeMarked.markDone();
         System.out.println("Nice! I've marked this task as done: ");
-        String marked = taskToBeMarked.getStatusIcon();
-        String taskInformation = taskToBeMarked.getValue();
-        System.out.println("\t" + taskToBeMarked.toString());
+        System.out.println("\t" + taskToBeMarked);
     }
 
     /**
@@ -51,14 +49,14 @@ public class TaskManager {
 
     public boolean executeCommand(String input) throws IncompleteCommandException {
         boolean run = true;
-        if (input.toUpperCase().equals("BYE")) {
+        if (input.toUpperCase().equals(CommandList.BYE.toString())) {
             System.out.println("Bye. Hope to see you again soon!");
             run = false;
-        } else if (input.toUpperCase().equals("LIST")) {
+        } else if (input.toUpperCase().equals(CommandList.LIST.toString())) {
             listAll();
-        } else if (input.toUpperCase().contains("DELETE")) {
+        } else if (input.toUpperCase().contains(CommandList.DELETE.toString())) {
             if (input.length() > 7) {
-                String stringArr[] = input.split(" ");
+                String[] stringArr = input.split(" ");
                 if (isNumeric(stringArr[1])) {
                     int taskId = Integer.parseInt(stringArr[1]) - 1;
                     Task taskToBeDeleted = taskList.get(taskId);
@@ -91,7 +89,7 @@ public class TaskManager {
         } else {
 
             Task newTask = null;
-            if (input.toUpperCase().contains("TODO")) {
+            if (input.toUpperCase().contains(CommandList.TODO.toString())) {
 
                 if (input.length() > 5) {
                     String taskMessage = input.substring(5);
@@ -100,7 +98,7 @@ public class TaskManager {
                     throw new IncompleteCommandException("OOPS!!! The description of a todo cannot be empty.");
                 }
 
-            } else if (input.toUpperCase().contains("DEADLINE")) {
+            } else if (input.toUpperCase().contains(CommandList.DEADLINE.toString())) {
 
                 if (input.length() > 8) {
                     if (input.contains("/by")) {
@@ -114,7 +112,7 @@ public class TaskManager {
                 }
 
 
-            } else if (input.toUpperCase().contains("EVENT")) {
+            } else if (input.toUpperCase().contains(CommandList.EVENT.toString())) {
 
                 if (input.length() > 5) {
                     if (input.contains("/at")) {
@@ -149,7 +147,7 @@ public class TaskManager {
      */
     public boolean isDone(String input) {
         if (input.length() >= 4) {
-            return input.toUpperCase().substring(0, 4).equals("DONE");
+            return input.toUpperCase().startsWith(CommandList.DONE.toString());
         } else {
             return false;
         }
