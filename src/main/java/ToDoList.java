@@ -5,19 +5,35 @@ public class ToDoList {
     private final ArrayList<Task> arrayList = new ArrayList<>();
 
     public String addToDo(String description) {
-        ToDo toDo = new ToDo(description);
+        ToDo toDo;
+        try {
+            toDo = new ToDo(description);
+        } catch (IllegalArgumentException e){
+            return "??? " + e.getMessage();
+        }
         this.arrayList.add(toDo);
         return "Added this ToDo task:\n" + toDo.toString();
+
     }
 
     public String addDeadLine(String description, String deadline) {
-        Deadline dl = new Deadline(description, deadline);
+        Deadline dl;
+        try {
+            dl = new Deadline(description, deadline);
+        } catch (IllegalArgumentException e){
+            return "??? " + e.getMessage();
+        }
         this.arrayList.add(dl);
         return "Added this Deadline task:\n" + dl.toString();
     }
 
     public String addEvent(String description, String time) {
-        Event event = new Event(description, time);
+        Event event;
+        try {
+            event = new Event(description, time);
+        } catch (IllegalArgumentException e){
+            return "??? " + e.getMessage();
+        }
         this.arrayList.add(event);
         return "Added this Event task:\n" + event.toString();
     }

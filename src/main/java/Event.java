@@ -2,13 +2,16 @@ public class Event extends Task{
     private final String time;
     public Event(String description) {
         super(description);
-        this.type = 'D';
+        if (description.isBlank()) {
+            throw new IllegalArgumentException("Description of Event cannot be empty!");
+        }
+        this.type = 'E';
         this.time = "";
     }
 
     public Event(String description, String time) {
         super(description);
-        this.type = 'D';
+        this.type = 'E';
         this.time = time;
     }
 

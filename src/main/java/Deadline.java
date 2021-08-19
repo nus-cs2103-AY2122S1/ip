@@ -4,6 +4,9 @@ public class Deadline extends Task{
 
     public Deadline(String description) {
         super(description);
+        if (description.isBlank()) {
+            throw new IllegalArgumentException("Description of Deadline cannot be empty!");
+        }
         this.type = 'D';
         this.deadline = "";
     }
