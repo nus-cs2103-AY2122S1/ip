@@ -2,8 +2,19 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Executes commands from user input for record keeping of tasks.
+ * Exits the programme when "bye" is entered.
+ */
 public class Duke {
 
+    /**
+     * Returns true if a valid done operation is entered.
+     * False otherwise.
+     * 
+     * @param input User input of the commands.
+     * @return If the input contains a valid done operations.
+     */
     public static boolean isDoneOps(String input) {
         if (input == null) {
             return false;
@@ -23,6 +34,13 @@ public class Duke {
         return false;
     }
 
+    /**
+     * Returns true if a valid delete operation is entered.
+     * False otherwise.
+     * 
+     * @param input User input of the commands.
+     * @return If the input contains a valid done operations.
+     */
     public static boolean isDeleteOps(String input) {
         if (input == null) {
             return false;
@@ -51,13 +69,23 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the main programme where Duke is activated to receive user input and perform corresponding operations.
+     * Exits when "bye" is entered.
+     * 
+     * @param args A String array from user input
+     * @throws DukeException Exception that is specific to Duke where invalid input is detected
+     */
     public static void main(String[] args) throws DukeException {
         System.out.println("____________________________________________________________\n"
         + "Heyllo! Jackie here\n"
         + "What can I do for you?\n"
         + "____________________________________________________________\n");
 
+        // Bye to check if bye is entered by the user and therefore to determine to terminate the programme.
         boolean bye = false;
+        // Executed to check if there is a valid operation that has been done in a cycle so to determine if to throw.
+        // DukeException.
         boolean executed = false;
         Scanner myObj = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>();
@@ -65,9 +93,14 @@ public class Duke {
 
         while (!bye) {
             try {
+                
+                // Receives user input and obtains first word.
                 String temp = myObj.nextLine();
                 String commandHolder = temp.split(" ", 2)[0];
+                
                 for (Command c : Command.values()) {
+                    
+                    // Goes through the Command Enum to check any matches with valid commands
                     if (c.value.equals(commandHolder)) {
                         switch (c) {
                             case BYE:
@@ -142,9 +175,12 @@ public class Duke {
 
                             case DEADLINE:
                                 if (temp.trim().equals("deadline")) {
-                                    throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+                                    throw new DukeException(
+                                            " ☹ OOPS!!! The description of a deadline cannot be empty.");
                                 } else if (temp.split("/", 2).length == 1) {
-                                    throw new DukeException(" ☹ OH MY DEAR!!! Please enter a time after / following the deadline description");
+                                    throw new DukeException(
+                                            " ☹ OH MY DEAR!!! " +
+                                                    "Please enter a time after / following the deadline description");
                                 } else {
                                     Deadline task = new Deadline(temp);
                                     taskList.add(task);
@@ -160,7 +196,9 @@ public class Duke {
                                 if (temp.trim().equals("event")) {
                                     throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
                                 } else if (temp.split("/", 2).length == 1) {
-                                    throw new DukeException(" ☹ OH MY DEAR!!! Please enter a date after / following the event description");
+                                    throw new DukeException(
+                                            " ☹ OH MY DEAR!!! " +
+                                                    "Please enter a date after / following the event description");
                                 } else {
                                     Event task = new Event(temp);
                                     taskList.add(task);
