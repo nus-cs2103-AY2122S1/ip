@@ -35,12 +35,13 @@ public class Gnosis {
 
             // display and execute commands
             displayTopDivider();
+            GnosisCommand gc = GnosisCommand.valueOf(command.toUpperCase().trim());
             try {
-                executeCommand(command.trim(), input.trim());
+                executeCommand(gc, input.trim());
             } catch (GnosisException ge) {
                 System.out.println(ge.toString());
             } catch (NumberFormatException nfe) {
-                System.out.println(GnosisConstants.DONE_COMMAND_NUM_INPUT_MESSAGE);
+                System.out.println(GnosisConstants.DONE_COMMAND_NUM_INPUT_EXCEPT_MESSAGE);
             }
             displayBottomDivider();
 
@@ -53,41 +54,41 @@ public class Gnosis {
     /**
      * Executes user commands
      * */
-    public static void executeCommand(String command, String input) throws GnosisException,
+    public static void executeCommand(GnosisCommand gc, String input) throws GnosisException,
             NumberFormatException {
         int taskIndex;
-        // convert command to lower case to avoid case issues
-        switch (command.toLowerCase()) {
-            case "todo":
+        // convert command to lower case to match Enum
+        switch (gc) {
+            case TODO:
                 addTodo(input);
                 displayNumOfTasks();
                 break;
-            case "deadline":
+            case DEADLINE:
                 addDeadline(input);
                 displayNumOfTasks();
                 break;
-            case "event":
+            case EVENT:
                 addEvent(input);
                 displayNumOfTasks();
                 break;
-            case "list":
+            case LIST:
                 listTasks();
                 break;
-            case "done":
+            case DONE:
                 // only if "done" command is call, we retrieve task index from user
                 taskIndex = Integer.parseInt(input.trim()) - 1;
                 MarkTaskAsDone(taskIndex);
                 break;
-            case "delete":
+            case DELETE:
                 taskIndex = Integer.parseInt(input.trim()) - 1;
                 deleteTask(taskIndex);
                 displayNumOfTasks();
                 break;
-            case "bye":
+            case BYE:
                 displayByeMessage();
                 break;
             default:
-                throw new GnosisException("COMMAND NOT FOUND.");
+                throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
         }
     }
 
@@ -96,7 +97,7 @@ public class Gnosis {
     public static void addTodo(String todo) throws GnosisException {
         if (todo.trim().equalsIgnoreCase("")) {
             // t0do empty exception
-            throw new GnosisException(GnosisConstants.TODO_EMPTY_MESSAGE);
+            throw new GnosisException(GnosisConstants.TODO_EMPTY_EXCEPT_MESSAGE);
         }
         Todo td = new Todo(todo);
         tasks.add(td);
@@ -108,7 +109,7 @@ public class Gnosis {
         String[] splitTaskInput = deadlineInput.split("/by");
         if (splitTaskInput.length != 2) {
             //deadline empty exception
-            throw new GnosisException(GnosisConstants.DEADLINE_EMPTY_MESSAGE);
+            throw new GnosisException(GnosisConstants.DEADLINE_EMPTY_EXCEPT_MESSAGE);
         }
         String taskName = splitTaskInput[0];
         String taskDeadline = splitTaskInput[1];
@@ -124,7 +125,7 @@ public class Gnosis {
         String[] splitTaskInput = eventInput.split("/at");
         if (splitTaskInput.length != 2) {
             //event empty exception
-            throw new GnosisException(GnosisConstants.EVENT_EMPTY_MESSAGE);
+            throw new GnosisException(GnosisConstants.EVENT_EMPTY_EXCEPT_MESSAGE);
         }
         String taskName = splitTaskInput[0];
         String taskSchedule = splitTaskInput[1];
@@ -137,7 +138,7 @@ public class Gnosis {
 
     public static void MarkTaskAsDone(int taskIndex) throws GnosisException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
-            throw new GnosisException(GnosisConstants.TASK_INDEX_OUT_OF_BOUNDS_MESSAGE);
+            throw new GnosisException(GnosisConstants.TASK_INDEX_OUT_OF_BOUNDS_EXCEPT_MESSAGE);
         }
         tasks.get(taskIndex).setDone(true);
         System.out.println("Task " + (taskIndex+1) +" marked as done:" );
@@ -146,7 +147,7 @@ public class Gnosis {
 
     public static void deleteTask(int taskIndex) throws GnosisException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
-            throw new GnosisException(GnosisConstants.TASK_INDEX_OUT_OF_BOUNDS_MESSAGE);
+            throw new GnosisException(GnosisConstants.TASK_INDEX_OUT_OF_BOUNDS_EXCEPT_MESSAGE);
         }
         Task t = tasks.get(taskIndex);
         tasks.remove(taskIndex);
