@@ -15,6 +15,9 @@ You have the following task(s):
 1.[T][ ] borrow book
 2.[D][ ] return book (by: Sunday)
 3.[E][ ] project meeting (at: Mon 2-4pm)
+Oh no!! The description of todo cannot be empty
+Oh no!! The description of deadline cannot be empty
+Oh no!! Sorry, but Lania doesn't know what that means
 Good job! Lania has marked this task as done:
 [T][X] borrow book
 Good job! Lania has marked this task as done:
