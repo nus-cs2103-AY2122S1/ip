@@ -5,3 +5,49 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello, What Can I do for you ?
+ -------------------------------
+Enter Input Here: 
+Duke: Added Task event Go to meeting /at SOC Com-1
+
+ ----------------------------------
+Enter Input Here: 
+1. [E][ ] Go to meeting (at: SOC Com-1)
+
+ ----------------------------------
+Enter Input Here: 
+Nice! I've marked this task as done: 
+[E][X] Go to meeting (at: SOC Com-1)
+
+ ----------------------------------
+Enter Input Here: 
+1. [E][X] Go to meeting (at: SOC Com-1)
+
+ ----------------------------------
+Enter Input Here: 
+Duke: Added Task deadline Assignment /by 23 January 2021
+
+ ----------------------------------
+Enter Input Here: 
+Duke: Added Task todo individual project
+
+ ----------------------------------
+Enter Input Here: 
+1. [E][X] Go to meeting (at: SOC Com-1)
+2. [D][ ] Assignment (by: 23 January 2021)
+3. [T][ ]  individual project
+
+ ----------------------------------
+Enter Input Here: 
+Nice! I've marked this task as done: 
+[T][X]  individual project
+
+ ----------------------------------
+Enter Input Here: 
+1. [E][X] Go to meeting (at: SOC Com-1)
+2. [D][ ] Assignment (by: 23 January 2021)
+3. [T][X]  individual project
+
+ ----------------------------------
+Enter Input Here: 
+Duke : Bye, Hope to see you again soon !

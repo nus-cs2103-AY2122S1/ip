@@ -1,0 +1,10 @@
+event Go to meeting /at SOC Com-1
+list
+done 1
+list
+deadline Assignment /by 23 January 2021
+todo individual project
+list
+done 3
+list
+bye

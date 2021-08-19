@@ -5,10 +5,10 @@ public class Duke {
     public static void talk() {
         String userInput = "";
         System.out.println("Hello, What Can I do for you ?\n -------------------------------");
-
+        Scanner scanner = new Scanner(System.in);
         while(!userInput.equals("bye")) {
             System.out.println("Enter Input Here: ");
-            Scanner scanner = new Scanner(System.in);
+
             userInput = scanner.nextLine();
             if(userInput.equals("bye")) {
                 System.out.println("Duke : Bye, Hope to see you again soon !");
