@@ -19,9 +19,9 @@ public class Task {
     @Override
     public String toString() {
         if (done) {
-            return "[X]" + taskDetails;
+            return "[X] " + taskDetails;
         } else {
-            return "[ ]" + taskDetails;
+            return "[ ] " + taskDetails;
         }
     }
 }
