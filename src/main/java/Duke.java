@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -77,7 +78,7 @@ public class Duke {
                 params = input.split("/at");
                 params[0] = params[0].substring(6, params[0].length() - 1);
                 params[1] = params[1].substring(1);
-                tasks.add(new Event(params[0], params[1]));
+                tasks.add(new Event(params[0], LocalDate.parse(params[1])));
 
                 System.out.println("____________________________________________________________\n"
                         + "Got it. I've added this task:\n"
@@ -88,7 +89,7 @@ public class Duke {
                 params = input.split("/by");
                 params[0] = params[0].substring(9, params[0].length() - 1);
                 params[1] = params[1].substring(1);
-                tasks.add(new Deadline(params[0], params[1]));
+                tasks.add(new Deadline(params[0], LocalDate.parse(params[1])));
 
                 System.out.println("____________________________________________________________\n"
                         + "Got it. I've added this task:\n"
@@ -139,10 +140,10 @@ public class Duke {
                         tasks.add(new ToDo(done, arr[2]));
                         break;
                     case "E":
-                        tasks.add(new Event(done, arr[2], arr[3]));
+                        tasks.add(new Event(done, arr[2], LocalDate.parse(arr[3])));
                         break;
                     case "D":
-                        tasks.add(new Deadline(done, arr[2], arr[3]));
+                        tasks.add(new Deadline(done, arr[2], LocalDate.parse(arr[3])));
                         break;
                     default:
                         throw new IllegalArgumentException("Unrecognized task flag");
