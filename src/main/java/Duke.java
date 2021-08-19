@@ -45,6 +45,19 @@ public class Duke {
                             System.out.println(task.markedAsDoneToString());
                         }
                     }
+                } else if (input.startsWith("delete")) {
+                    if (input.equals("delete") || input.equals("delete ")) {
+                        throw new DukeException("An index must follow after the command word 'delete'.");
+                    } else {
+                        int arrIndex = Integer.valueOf(input.substring(7)) - 1;
+                        if (arrIndex < 0 || arrIndex >= ls.getSize()) {
+                            throw new DukeException("Item does not exist in the list.");
+                        } else {
+                            Task task = ls.getTask(arrIndex);
+                            ls.removeTask(arrIndex);
+                            System.out.println(ls.removeTaskToString(task));
+                        }
+                    }
                 } else {
                     if (input.startsWith("todo")) {
                         String taskDesc = input.replaceFirst("^todo", "");
