@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String[] arr = new String[100];
+        Task[] arr = new Task[100];
         int count = 0;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -26,12 +26,20 @@ public class Duke {
                 return;
             } else if (input.equals("list")) {
                 System.out.println("____________________________________________________________");
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < count; i++) {
-                    System.out.println(i+1 + ". " + arr[i]);
+                    System.out.println(i + 1 + ".[" + arr[i].getStatusIcon() + "] " + arr[i].getDesription());
                 }
                 System.out.println("____________________________________________________________");
+            } else if (input.startsWith("done ")) {
+                int task = Integer.parseInt(input.split(" ")[1]) - 1;
+                arr[task].markAsDone();
+                System.out.println("____________________________________________________________");
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("    " + "[" + arr[task].getStatusIcon() + "] " + arr[task].getDesription());
+                System.out.println("____________________________________________________________");
             } else {
-                arr[count] = input;
+                arr[count] = new Task(input);
                 count++;
                 String reply = "____________________________________________________________\n" +
                         "added: " + input + "\n" +
