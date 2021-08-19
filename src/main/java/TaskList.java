@@ -1,11 +1,9 @@
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class TaskList {
-    protected List<Task> tasklist;
+    protected ArrayList<Task> tasklist;
 
-    public TaskList(ArrayList tasklist) {
+    public TaskList(ArrayList<Task> tasklist) {
         this.tasklist = tasklist;
     }
 
