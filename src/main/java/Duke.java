@@ -1,10 +1,28 @@
 import java.util.Scanner;
-import java.util.Set;
 import java.util.ArrayList;
 
 public class Duke {
-    private ArrayList<Task> tasks = new ArrayList<>();
-    private static final Set<String> ACTIONS = Set.of("todo", "done", "deadline", "event", "list", "delete");
+    private final ArrayList<Task> tasks = new ArrayList<>();
+
+    private enum Action {
+        BYE("bye"),
+        DEADLINE("deadline"),
+        DELETE("delete"),
+        DONE("done"),
+        EVENT("event"),
+        LIST("list"),
+        TODO("todo");
+
+        private final String name;
+
+        Action (String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
 
     /**
      * Print with 4 spaces infront of param str.
@@ -69,6 +87,7 @@ public class Duke {
      */
     public void markTaskDone(String taskNo) throws DukeException {
         try {
+            validateActionDescription(taskNo, Action.DONE);
             int taskNoInt = Integer.parseInt(taskNo) - 1;
             Task selectedTask = tasks.get(taskNoInt);
             if (tasks.isEmpty()) {
@@ -77,14 +96,14 @@ public class Duke {
                 printMessage(
                         String.format("Task %s is already done!\n\t  %s",
                                 taskNo,
-                                selectedTask.toString()
+                                selectedTask
                         )
                 );
             } else {
                 selectedTask.markAsDone();
                 printMessage(
                         String.format("Nice! I've marked this task as done:\n\t  %s",
-                                selectedTask.toString()
+                                selectedTask
                         )
                 );
             }
@@ -98,12 +117,14 @@ public class Duke {
     private Task lastTask() {
         return tasks.get(tasks.size() - 1);
     }
+
     /**
      * Add a Todo task to tasks.
      *
      * @param message String user input. Should start with "todo"
      */
-    public void addTodoTask(String message) {
+    public void addTodoTask(String message) throws DukeException {
+        validateActionDescription(message, Action.TODO);
         tasks.add(new Todo(message.replace("todo ", "")));
         printAddMessage("Got it. I've  added this task:", lastTask().toString());
     }
@@ -117,6 +138,7 @@ public class Duke {
     public void addDeadlineTask(String message) throws DukeException {
         try {
             String taskDescription = message.replaceAll("/by.*", "");
+            validateActionDescription(taskDescription, Action.DEADLINE);
             String deadline = message.split("/by")[1];
             tasks.add(new Deadline(taskDescription, deadline));
             printAddMessage("Got it. I've  added this task:", lastTask().toString());
@@ -134,6 +156,7 @@ public class Duke {
     public void addEventTask(String message) throws DukeException {
         try {
             String taskDescription = message.replaceAll("/at.*", "");
+            validateActionDescription(taskDescription, Action.EVENT);
             String deadline = message.split("/at")[1];
             tasks.add(new Event(taskDescription, deadline));
             printAddMessage("Got it. I've  added this task:", lastTask().toString());
@@ -144,38 +167,56 @@ public class Duke {
 
     public void deleteTask(String message) throws DukeException {
         try {
+            validateActionDescription(message, Action.DELETE);
             Task selectedTask = tasks.get(Integer.parseInt(message) - 1);
             tasks.remove(selectedTask);
             printAddMessage("Noted. I've removed this task:", selectedTask.toString());
         } catch (NumberFormatException e) {
-            throw  new DukeException("Enter a number for a delete action");
+            throw new DukeException("Enter a number for a delete action");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(String.format("Enter a valid number between 1 - %d", tasks.size()));
         }
     }
 
-    public void handleInput(String message) throws DukeException {
-        String inputAction = message.split(" ")[0];
-        if (ACTIONS.contains(inputAction)) {
-            String parsedMessage = message.replace(inputAction, "").trim();
-            if (parsedMessage.isEmpty() && !inputAction.equals("list")) {
-                throw new DukeException(String.format("The description of a %s cannot be empty.", inputAction));
-            }
+    private void validateActionDescription(String input, Action type) throws DukeException {
+        if (input.isEmpty()) {
+            throw new DukeException(String.format("The description of a %s cannot be empty.", type.getName()));
+        }
+    }
 
-            if (inputAction.equals("list")) {
-                printTasks();
-            } else if (inputAction.equals("done")) {
-                markTaskDone(parsedMessage);
-            } else if (inputAction.equals("todo")) {
-                addTodoTask(parsedMessage);
-            } else if (inputAction.equals("deadline")) {
-                addDeadlineTask(parsedMessage);
-            } else if (inputAction.equals("event")) {
-                addEventTask(parsedMessage);
-            } else if (inputAction.equals("delete")) {
-                deleteTask(parsedMessage);
+    public boolean handleInput(String message) throws DukeException {
+        try {
+            String inputAction = message.split(" ")[0];
+            Action actionEnum = Action.valueOf(inputAction.toUpperCase());
+            String parsedMessage = message.replace(inputAction, "").trim();
+
+            switch (actionEnum) {
+                case BYE:
+                    printMessage("Bye. Hope to see you again soon!");
+                    return false;
+                case DEADLINE:
+                    addDeadlineTask(parsedMessage);
+                    break;
+                case DELETE:
+                    deleteTask(parsedMessage);
+                    break;
+                case DONE:
+                    markTaskDone(parsedMessage);
+                    break;
+                case EVENT:
+                    addEventTask(parsedMessage);
+                    break;
+                case LIST:
+                    printTasks();
+                    break;
+                case TODO:
+                    addTodoTask(parsedMessage);
+                    break;
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
-        } else if (!message.isEmpty()) {
+            return true;
+        } catch (IllegalArgumentException e) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
@@ -192,17 +233,16 @@ public class Duke {
         Duke duke = new Duke();
 
         printMessage("Hello! I'm Duke\n\tWhat can I do for you?");
-        String message = scanner.nextLine().trim();
-        while (!message.equals("bye")) {
-            message = message.trim();
+        String message;
+        boolean isActive = true;
+        while (isActive) {
+            message = scanner.nextLine().trim();
             try {
-                duke.handleInput(message);
+                isActive = duke.handleInput(message);
             } catch (DukeException e) {
                 printMessage(e.getMessage());
             }
-            message = scanner.nextLine();
         }
-        printMessage("Bye. Hope to see you again soon!");
         scanner.close();
     }
 }
