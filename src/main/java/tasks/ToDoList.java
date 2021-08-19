@@ -1,9 +1,15 @@
+package tasks;
+
+import exceptions.EmptyTaskException;
+import exceptions.InvalidCommandException;
+import java.util.ArrayList;
+
 public class ToDoList {
-    private Task[] tasks;
+    private final ArrayList<Task> tasks;
     private int count;
 
     public ToDoList() {
-        this.tasks = new Task[100];
+        this.tasks = new ArrayList<>();
         this.count = 0;
     }
 
@@ -23,10 +29,8 @@ public class ToDoList {
         System.out.println(separator);
         System.out.println("Below are some of the tasks in your list!");
 
-        while (this.tasks[n] != null) {
-            System.out.println((n + 1) + ". " + this.tasks[n]);
-
-            n++;
+        for (Task t : this.tasks) {
+            System.out.println((n + 1) + ". " + t);
         }
 
         System.out.println(separator);
@@ -39,16 +43,37 @@ public class ToDoList {
 
         String[] arr = input.split(" ", 2);
 
-        Task recentlyAdded = null;
+        Task recentlyAdded;
+
         if (arr[0].equals("todo")) {
-            recentlyAdded = ToDo.addToDo(arr[1]);
+            try {
+                recentlyAdded = arr.length == 1
+                                ? ToDo.addToDo("")
+                                : ToDo.addToDo(arr[1]);
+            } catch (EmptyTaskException e) {
+                System.out.println(separator + "\n"
+                        + e
+                        + separator);
+
+                return 0;
+            }
         } else if (arr[0].equals("deadline")) {
             recentlyAdded = Deadline.addDeadline(arr[1]);
         } else if (arr[0].equals("event")) {
             recentlyAdded = Event.addEvent(arr[1]);
+        } else {
+            try {
+                throw new InvalidCommandException(input);
+            } catch (InvalidCommandException e) {
+                System.out.println(separator + "\n"
+                        + e
+                        + separator);
+
+                return 0;
+            }
         }
 
-        this.tasks[count] = recentlyAdded;
+        this.tasks.add(recentlyAdded);
         count++;
 
         String taskCount = "Now you have " + count + " task(s) in the list!";
@@ -72,9 +97,11 @@ public class ToDoList {
                 Integer.valueOf(arr[1]);
                 toDo = true;
             } catch (NumberFormatException e) {
-
+                return false;
             }
         }
+
+        // a possible error arrives from this feature - when done # and the # input exceeds the number of tasks on hand
 
         return toDo;
     }
@@ -84,7 +111,9 @@ public class ToDoList {
         String indentation = "          ";
         String[] arr = input.split(" ");
 
-        Task t = this.tasks[Integer.valueOf(arr[1]) - 1];
+        int index = Integer.parseInt(arr[1]) - 1;
+
+        Task t = this.tasks.get(index);
 
         t.markAsDone();
 
