@@ -1,0 +1,9 @@
+todo brush teeth
+deadline do homework /by 19 Aug
+event project meeting /at 20 Aug
+list
+done 1
+done 2
+done 3
+list
+bye

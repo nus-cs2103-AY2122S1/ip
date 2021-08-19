@@ -1,7 +1,45 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! This is Jarvis.
+What can I do for you sir?
+---------------------------------
+---------------------------------
+I have added this task: 
+[T][ ] brush teeth
+Now you have 1 tasks.
+---------------------------------
+---------------------------------
+I have added this task: 
+[D][ ] do homework (by: 19 Aug)
+Now you have 2 tasks.
+---------------------------------
+---------------------------------
+I have added this task: 
+[E][ ] project meeting (at: 20 Aug)
+Now you have 3 tasks.
+---------------------------------
+---------------------------------
+Here are the tasks in your list:
+1. [T][ ] brush teeth
+2. [D][ ] do homework (by: 19 Aug)
+3. [E][ ] project meeting (at: 20 Aug)
+---------------------------------
+---------------------------------
+I have marked this task as done
+[X] brush teeth
+---------------------------------
+---------------------------------
+I have marked this task as done
+[X] do homework
+---------------------------------
+---------------------------------
+I have marked this task as done
+[X] project meeting
+---------------------------------
+---------------------------------
+Here are the tasks in your list:
+1. [T][X] brush teeth
+2. [D][X] do homework (by: 19 Aug)
+3. [E][X] project meeting (at: 20 Aug)
+---------------------------------
+---------------------------------
+Goodbye Sir. Hope you have a pleasant day sir.
+---------------------------------
