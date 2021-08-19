@@ -65,7 +65,8 @@ public class Storage {
         int number = 0;
         try {
             number = CommandUtils.extractTaskNumber(command);
-        } catch (DukeExtractCommandException | NumberFormatException | DukeTaskNumberOutOfBoundsException e) {
+        } catch (DukeExtractCommandException | NumberFormatException |
+            DukeTaskNumberOutOfBoundsException e) {
             onMessage.show(e.getMessage());
         }
         return number;
@@ -135,6 +136,8 @@ public class Storage {
                     onMessage.show(e.getMessage());
                 }
                 break;
+            default:
+                break;
         }
     }
 
@@ -193,7 +196,7 @@ public class Storage {
      */
     public void listTasks() {
         onMessage.show(Stream.concat(
-            Arrays.stream(new String[]{"Here are the tasks in your list:"}),
+            Arrays.stream(new String[] {"Here are the tasks in your list:"}),
             Arrays.stream(taskManager.printTasks())
         ).toArray(String[]::new));
     }

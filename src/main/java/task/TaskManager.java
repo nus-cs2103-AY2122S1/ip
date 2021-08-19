@@ -126,7 +126,11 @@ public class TaskManager {
                         break;
                     case Deadline.ID:
                         String byTime = contents[3];
-                        Deadline deadline = new Deadline(name, DateTimeUtils.parseDateTime(byTime), isDone.equals("0"));
+                        Deadline deadline = new Deadline(
+                            name,
+                            DateTimeUtils.parseDateTime(byTime),
+                            isDone.equals("0")
+                        );
                         addTask(deadline);
                         break;
                     case Event.ID:
@@ -136,9 +140,15 @@ public class TaskManager {
                         String atDate = dateTimes[0];
                         String startTime = times[0];
                         String endTime = times[1];
-                        EventDateTime eventDateTime = new EventDateTime(DateTimeUtils.parseDate(atDate), DateTimeUtils.parseTime(startTime), DateTimeUtils.parseTime(endTime));
+                        EventDateTime eventDateTime = new EventDateTime(
+                            DateTimeUtils.parseDate(atDate),
+                            DateTimeUtils.parseTime(startTime),
+                            DateTimeUtils.parseTime(endTime)
+                        );
                         Event event = new Event(name, eventDateTime, isDone.equals("0"));
                         addTask(event);
+                        break;
+                    default:
                         break;
                 }
             }

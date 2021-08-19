@@ -11,7 +11,8 @@ import java.util.Scanner;
  */
 
 public class Ui {
-    private static final String HORIZONTAL_LINE = "    ____________________________________________________________";
+    private static final String HORIZONTAL_LINE =
+        "    ____________________________________________________________";
     private static final String INDENTATION = "     ";
     private final Scanner scanner;
 
@@ -58,7 +59,7 @@ public class Ui {
      */
     public void show(String... messages) {
         System.out.println(HORIZONTAL_LINE);
-        for (String message: messages) {
+        for (String message : messages) {
             System.out.println(INDENTATION + message);
         }
         System.out.println(HORIZONTAL_LINE);

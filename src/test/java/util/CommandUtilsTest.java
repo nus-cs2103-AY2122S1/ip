@@ -11,7 +11,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CommandUtilsTest {
 
@@ -22,7 +23,8 @@ class CommandUtilsTest {
     }
 
     @Test
-    void extractTaskNumber() throws DukeExtractCommandException, DukeTaskNumberOutOfBoundsException {
+    void extractTaskNumber()
+        throws DukeExtractCommandException, DukeTaskNumberOutOfBoundsException {
         String command = "done 1";
         assertEquals(1, CommandUtils.extractTaskNumber(command));
     }
@@ -37,7 +39,7 @@ class CommandUtilsTest {
     @Test
     void extractTaskDetails() throws DukeExtractCommandException {
         String description = "project meeting /at 2021-08-06 14:00 16:00";
-        String[] details = new String[]{"project meeting", "2021-08-06 14:00 16:00"};
+        String[] details = new String[] {"project meeting", "2021-08-06 14:00 16:00"};
         assertArrayEquals(details, CommandUtils.extractTaskDetails(description, " /at "));
     }
 

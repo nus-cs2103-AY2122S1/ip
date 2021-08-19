@@ -32,8 +32,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Format Task to String array:
-     * If task is done, [T, 0, Task1]; else, [T, 1, Task1]
+     * Format Task to String array.
+     * If task is done, [T, 0, Task1]; else, [T, 1, Task1].
      *
      * @return Task in String array
      */
@@ -45,7 +45,7 @@ public class Todo extends Task {
         } else {
             done = "1";
         }
-        return new String[]{ID, done, super.getName()};
+        return new String[] {ID, done, super.getName()};
     }
 
     /**

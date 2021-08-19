@@ -10,7 +10,7 @@ class TodoTest {
     @Test
     void formatTask() {
         Todo todo = new Todo("Read book");
-        String[] expected = new String[]{"T", "1", "Read book"};
+        String[] expected = new String[] {"T", "1", "Read book"};
         assertArrayEquals(expected, todo.formatTask());
     }
 

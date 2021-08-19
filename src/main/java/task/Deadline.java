@@ -63,8 +63,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Format Task to String array:
-     * If task is done, [D, 0, Task1, DateTime]; else, [D, 1, Task1, DateTime]
+     * Format Task to String array.
+     * If task is done, [D, 0, Task1, DateTime]; else, [D, 1, Task1, DateTime].
      *
      * @return Task in String array
      */
@@ -76,7 +76,7 @@ public class Deadline extends Task {
         } else {
             done = "1";
         }
-        return new String[]{ID, done, super.getName(), formatSaveDateTime()};
+        return new String[] {ID, done, super.getName(), formatSaveDateTime()};
     }
 
     /**

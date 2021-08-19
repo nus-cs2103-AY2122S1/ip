@@ -35,7 +35,7 @@ public class FileUtils {
         }
         Path filePath = Paths.get(dirPath.toAbsolutePath().toString(), fileName);
         File file = new File(String.valueOf(filePath));
-        if(!file.exists() || file.isDirectory()) {
+        if (!file.exists() || file.isDirectory()) {
             return contents;
         }
         try {
