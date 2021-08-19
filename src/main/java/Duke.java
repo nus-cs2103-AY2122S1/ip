@@ -22,6 +22,7 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }else if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < index; i++){
                     System.out.println((i + 1) + ". " + taskList[i].toString());
                 }
@@ -40,7 +41,29 @@ public class Duke {
                 int taskIndex = Integer.parseInt(input.split(" ")[1]);
                 taskList[taskIndex - 1].markCompleted();
                 System.out.println("Nice! I've marked this task as done:\n" + taskList[taskIndex - 1].toString());
-            } else {
+            } else if(input.split("event")[0].equals("")) {
+                String taskContent = input.split("event ")[1];
+                Task newEvent = new Event(taskContent);
+                addTask(newEvent);
+                System.out.println("Got it. I've added this task: \n" +
+                        "  " + newEvent.toString() + "\n" +
+                        "Now you have " + index + " tasks in the list.");
+            } else if(input.split("deadline")[0].equals("")) {
+                String taskContent = input.split("deadline ")[1];
+                Task newEvent = new Deadline(taskContent);
+                addTask(newEvent);
+                System.out.println(" Got it. I've added this task: \n" +
+                        "  " + newEvent.toString() + "\n" +
+                        "Now you have " + index + " tasks in the list.");
+            } else if(input.split("todo")[0].equals("")) {
+                String taskContent = input.split("todo ")[1];
+                Task newEvent = new ToDo(taskContent);
+                addTask(newEvent);
+                System.out.println("Got it. I've added this task: \n" +
+                        "  " + newEvent.toString() + "\n" +
+                        "Now you have " + index + " tasks in the list.");
+            }
+            else {
                 System.out.println("added: " + input);
                 addTask(new Task(input));
             }

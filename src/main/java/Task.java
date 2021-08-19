@@ -7,12 +7,10 @@ public class Task {
     public void markCompleted() {
         this.completed = true;
     }
-    @Override
-    public String toString() {
-        if(this.completed) {
-            return "[X] " + this.taskContent;
-        }else {
-            return "[ ] " + this.taskContent;
-        }
+    public String getTaskContent() {
+        return this.taskContent;
+    }
+    public boolean isCompleted() {
+        return this.completed;
     }
 }
