@@ -12,5 +12,5 @@ public class DeadlineCommand implements Command {
     Task deadlineTask = new DeadlineTask(splitArgs[0], splitArgs[1]);
     bot.addTask(deadlineTask);
   }
-  
+
 }

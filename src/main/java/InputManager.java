@@ -20,6 +20,9 @@ public class InputManager {
     return reader.nextLine();
   }
 
+  /**
+   * Close scanner for cleanup
+   */
   public void closeScanner() {
     reader.close();
   }

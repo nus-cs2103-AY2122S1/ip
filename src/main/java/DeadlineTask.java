@@ -1,4 +1,5 @@
 public class DeadlineTask extends Task {
+
   private String taskText;
   private String taskDetail;
 

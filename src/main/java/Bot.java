@@ -38,6 +38,9 @@ public class Bot {
     inputManager.closeScanner();
   }
 
+  /**
+   * Stops the task bot
+   */
   public void stop() {
     this.running = false;
   }
@@ -63,6 +66,12 @@ public class Bot {
     return this.taskList;
   }
 
+  /**
+   * Add a new task to the list
+   * 
+   * @param newTask task being added
+   * @return success boolean
+   */
   public Boolean addTask(Task newTask) {
     if (this.taskList.size() >= this.MAX_TASKS) {
       return false;
@@ -76,6 +85,12 @@ public class Bot {
     return true;
   }
 
+  /**
+   * Remove task from the list
+   * 
+   * @param index index of task in list
+   * @return success boolean
+   */
   public Boolean removeTask(int index) {
     if (index < 0 || index >= taskList.size()) {
       return false;
@@ -90,6 +105,12 @@ public class Bot {
     return true;
   }
 
+  /**
+   * Get task at given index
+   * 
+   * @param index position of task in list
+   * @return Task at given index
+   */
   public Task getTaskAt(int index) {
     return this.taskList.get(index);
   }

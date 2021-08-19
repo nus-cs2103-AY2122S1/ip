@@ -10,6 +10,8 @@ public enum CommandType {
 
   private final Command command;
   private final String name;
+
+  // Map to retrieve enum value from name string
   private static final Map<String, CommandType> hash = new HashMap<>();
 
   static {
@@ -23,14 +25,30 @@ public enum CommandType {
     this.command = cmd;
   }
 
+  /**
+   * Get enum value name
+   * 
+   * @return enum value name
+   */
   public String getName() {
     return this.name;
   }
 
+  /**
+   * Get enum value command
+   * 
+   * @return enum value command
+   */
   public Command getCommand() {
     return this.command;
   }
 
+  /**
+   * Get a command with the given name string
+   * 
+   * @param name name string of command
+   * @return command associated with name
+   */
   public static Command getCommandFromName(String name) {
     CommandType cmdType = hash.get(name.toLowerCase());
     return cmdType == null ? new EmptyCommand() : cmdType.getCommand();
