@@ -170,6 +170,9 @@ public abstract class Command {
             } catch (DukeException.DukeEmptyTask e) {
                 System.out.println(e);
                 Duke.printLine();
+            } catch (DukeException.DukeEmptyNote e) {
+                System.out.println(e);
+                Duke.printLine();
             }
         }
     }
