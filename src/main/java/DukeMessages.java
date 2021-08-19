@@ -16,14 +16,24 @@ public class DukeMessages {
         System.out.println(borderLine + input + borderLine);
     }
 
+    /**
+     * Displays the welcome message when the Duke program starts
+     */
     public void welcomeMessage() {
         this.displayText(welcomeMessage);
     }
 
+    /**
+     * Displays the goodbye message when the user inputs "bye"
+     */
     public void goodbyeMessage() {
         this.displayText(goodbyeMessage);
     }
 
+    /**
+     * Displays the message for a task marked as Done
+     * @param taskMarked the task that was marked to be done
+     */
     public void markAsDoneMessage(String taskMarked) {
         String message = String.format("Nice! I've marked this task as done:\n  %s", taskMarked);
         this.displayText(message);
@@ -32,6 +42,7 @@ public class DukeMessages {
     /**
      * Message displayed when a task is deleted from the Task List
      * @param taskString the task deleted from the list
+     * @param listSize size of the task list
      */
     public void taskDeleteMessage(String taskString, int listSize) {
         String message = "Noted. I've removed this task:\n" + taskString + "\n";
@@ -39,6 +50,9 @@ public class DukeMessages {
         this.displayText(message);
     }
 
+    /**
+     * Displayed when the user inputs "list" and the list is empty
+     */
     public void listEmptyMessage() {
         this.displayText("Your List is Empty");
     }
@@ -46,6 +60,7 @@ public class DukeMessages {
     /**
      * Message displayed when a task is added to the Task List
      * @param taskString the task added to the list
+     * @param listSize size of the task list
      */
     public void taskAddMessage(String taskString, int listSize) {
         String message = "Got it. I've added this task:\n" + taskString + "\n";
@@ -55,6 +70,7 @@ public class DukeMessages {
 
     /**
      * Displays all the items in the taskList and their completion status.
+     * @param taskList the list containing Task objects
      */
     public void displayListItems(List<Task> taskList) {
 
