@@ -88,6 +88,13 @@ public class Duke {
                     Event event = new Event(eventName, time);
                     stored.add(event);
                     System.out.println("Ok~ I've added the task:\n" + event.toString());
+                } else if (input.startsWith("delete")){
+                    Scanner s = new Scanner(input);
+                    s.next(); //jump 'delete'
+                    int num = s.nextInt();
+                    Task t = stored.remove(num - 1);
+                    System.out.println("Remove ~ removed~");
+                    System.out.println(t.toString());
                 } else {
                     throw new DukeException("IllegalInput");
                 }
