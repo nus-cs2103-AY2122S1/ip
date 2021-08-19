@@ -11,7 +11,6 @@ public class Duke {
                 + "Hello! I'm Joker \n"
                 + "What can I do for you? \n"
                 + "____________________________________________________________";
-        String[] jokerList = new String[100];
         Task[] taskList = new Task[100];
         int i = 0;
 
@@ -66,7 +65,6 @@ public class Duke {
                                 "____________________________________________________________");
                     } else {
                         if (!Objects.equals(inData, "bye") && Objects.equals(inData.substring(0, 5), "todo ")) {
-                            jokerList[i] = inData.substring(5, inDataLength);
                             taskList[i] = new ToDo(inData.substring(5, inDataLength));
                             System.out.println(
                                     "____________________________________________________________ \n"
@@ -87,7 +85,6 @@ public class Duke {
 
                                 int segmentedLength = segments[0].length();
                                 String description = segments[0].substring(9, segmentedLength);
-                                jokerList[i] = description;
                                 taskList[i] = new Deadline(description, date);
 
                                 System.out.println(
@@ -107,7 +104,6 @@ public class Duke {
 
                                 int segmentedLength = segments[0].length();
                                 String description = segments[0].substring(6, segmentedLength);
-                                jokerList[i] = description;
                                 taskList[i] = new Event(description, date);
 
                                 System.out.println(
@@ -156,11 +152,11 @@ public class Duke {
                     }
                 }
             }
-            System.out.println(
-                    "____________________________________________________________ \n"
+        }
+        System.out.println(
+                "____________________________________________________________ \n"
                             + "Bye. Hope to see you again soon! \n"
                             + "____________________________________________________________");
-        }
     }
 
     public static boolean isNumeric(String string) {
