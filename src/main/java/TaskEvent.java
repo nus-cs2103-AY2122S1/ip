@@ -2,7 +2,11 @@ public class TaskEvent extends Task {
     private String at;
 
     public TaskEvent(String description, String at) {
-        super(description);
+        this(description, at, false);
+    }
+
+    public TaskEvent(String description, String at, boolean done) {
+        super(description, done);
         this.at = at;
     }
 
@@ -18,5 +22,11 @@ public class TaskEvent extends Task {
                 : "[ ] ";
         return "[E]" + checkBox + description + " (at: " + at + ")";
     }
+
+    @Override
+    String saveString() {
+        return "E" + '\t' + (this.done ? "1" : "0") + '\t' + this.description + '\t' + this.at;
+    }
+
 
 }

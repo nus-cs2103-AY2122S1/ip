@@ -37,5 +37,7 @@ public class DukeListener {
                 Ui.OUTPUT_DISPLAY + "kimi no unmei no hito wa boku jyanai\n"
                 + Ui.LINE
         );
+
+        sc.close();
     }
 }
