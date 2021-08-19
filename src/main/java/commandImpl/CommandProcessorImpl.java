@@ -1,7 +1,7 @@
 package commandImpl;
 
-import commandInterface.CommandLogicUnit;
-import commandInterface.CommandProcessor;
+import commandInterface.ICommandLogicUnit;
+import commandInterface.ICommandProcessor;
 import model.Command;
 
 import java.util.Arrays;
@@ -14,10 +14,10 @@ import static util.Display.printSentence;
  * An entity that takes in the input from the console and parse it to valid command or throw exception
  * if the command is invalid
  */
-public class CommandProcessorImpl implements CommandProcessor {
-	private final CommandLogicUnit commandLogicUnit;
+public class CommandProcessorImpl implements ICommandProcessor {
+	private final ICommandLogicUnit commandLogicUnit;
 	
-	public CommandProcessorImpl(CommandLogicUnit commandProcessor) {
+	public CommandProcessorImpl(ICommandLogicUnit commandProcessor) {
 		this.commandLogicUnit = commandProcessor;
 	}
 	

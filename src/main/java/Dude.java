@@ -1,7 +1,9 @@
 import commandImpl.CommandLogicUnitImpl;
 import commandImpl.CommandProcessorImpl;
-import commandInterface.CommandLogicUnit;
-import commandInterface.CommandProcessor;
+import commandInterface.ICommandLogicUnit;
+import commandInterface.ICommandProcessor;
+import dao.TaskDao;
+import dao.TaskDaoImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,8 +19,9 @@ public class Dude {
 	private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
 	// initialize the command processor from logic processing, use the commandParse to process the console input
-	private static final CommandLogicUnit commandLogicUnit = new CommandLogicUnitImpl();
-	private static final CommandProcessor commandProcessor = new CommandProcessorImpl(commandLogicUnit);
+	private static final TaskDao taskDao = new TaskDaoImpl();
+	private static final ICommandLogicUnit commandLogicUnit = new CommandLogicUnitImpl(taskDao);
+	private static final ICommandProcessor commandProcessor = new CommandProcessorImpl(commandLogicUnit);
 	
 	@SuppressWarnings("InfiniteLoopStatement")
 	public static void main(String[] args) throws IOException {

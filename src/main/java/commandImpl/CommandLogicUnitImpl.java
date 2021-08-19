@@ -1,19 +1,24 @@
 package commandImpl;
 
-import commandInterface.CommandLogicUnit;
+import commandInterface.ICommandLogicUnit;
+import dao.TaskDao;
 import model.*;
 
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 import static util.Display.printSentence;
 
 /**
  * Logic class that would handle all the logics and processing, together with the temporary data layer of the commands
  */
-public class CommandLogicUnitImpl implements CommandLogicUnit {
-	private final ArrayList<Task> taskList = new ArrayList<>();
+public class CommandLogicUnitImpl implements ICommandLogicUnit {
+	
+	// temporarily, the database is stored within dao, hence no need for DI
+	private final TaskDao taskDao;
+	
+	public CommandLogicUnitImpl(TaskDao taskDao) {
+		this.taskDao = taskDao;
+	}
 	
 	/**
 	 * command processing functions, in this implementation it accepts all the commands
@@ -58,42 +63,32 @@ public class CommandLogicUnitImpl implements CommandLogicUnit {
 	}
 	
 	private void processAdd(Task task) {
-		taskList.add(task);
+		Task addedTask = taskDao.add(task);
 		
 		printSentence(" Got it. I've added this task: \n" +
-				"\t" + task.toString() + "\n" +
-				" Now you have " + taskList.size() + " tasks in the list.");
+				"\t" + addedTask.toString() + "\n" +
+				" Now you have " + taskDao.size() + " tasks in the list.");
 	}
 	
 	/**
-	 * mark the task in the list done
-	 *
 	 * @param index 0-indexed integer
 	 */
-	public void processDone(int index) {
-		if (index >= taskList.size() || index < 0) {
-			throw new IllegalArgumentException("non valid index for marking the task done");
-		}
+	private void processDone(int index) {
+		Task markedTask = taskDao.markDone(index);
 		
-		taskList.get(index).checkDone();
 		printSentence("Nice! I've marked this task as done: \n" +
-				"\t [X] " + taskList.get(index).getDesc());
+				"\t [X] " + markedTask.getDesc());
 	}
 	
 	/**
-	 * delete the task in the list
-	 *
 	 * @param index 0-indexed integer
 	 */
 	private void processDelete(int index) {
-		if (index >= taskList.size() || index < 0) {
-			throw new IllegalArgumentException("non valid index for deletion");
-		}
+		Task deletedTask = taskDao.delete(index);
 		
-		Task removedTask = taskList.remove(index);
 		printSentence(" Noted. I've removed this task: \n" +
-				"\t" + removedTask.toString() + "\n" +
-				" Now you have " + taskList.size() + " tasks in the list.");
+				"\t" + deletedTask.toString() + "\n" +
+				" Now you have " + taskDao.size() + " tasks in the list.");
 	}
 	
 	private void processBye() {
@@ -101,19 +96,26 @@ public class CommandLogicUnitImpl implements CommandLogicUnit {
 		System.exit(0);
 	}
 	
+	/**
+	 * print the entire list of tasks whether its done or not done
+	 */
 	private void processList() {
-		StringBuilder stringBuilder = new StringBuilder();
+		int numbering = 1;
+		StringBuilder list = new StringBuilder();
 		
-		IntStream.range(1, taskList.size() + 1)
-				.mapToObj(index -> {
-					Task task = taskList.get(index - 1);
-					return " " + index + ". " + task + "\n";
-				})
-				.forEach(stringBuilder::append);
+		for (Task task : taskDao.getAll()) {
+			list.append(" ")
+			    .append(numbering)
+			    .append(". ")
+			    .append(task)
+			    .append("\n");
+			
+			numbering++;
+		}
 		
 		// remove the last extra \n if there is at least an item in the list
-		if (this.taskList.size() > 0) stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+		if (taskDao.size() > 0) list.deleteCharAt(list.length() - 1);
 		
-		printSentence(stringBuilder.toString());
+		printSentence(list.toString());
 	}
 }
