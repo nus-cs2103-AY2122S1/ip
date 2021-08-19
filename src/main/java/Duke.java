@@ -1,9 +1,9 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import exceptions.EmptyDescriptionException;
 import exceptions.InvalidInputException;
 import exceptions.UserInputException;
-
-import java.util.Scanner;
-import java.util.concurrent.CompletionException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -16,100 +16,122 @@ public class Duke {
                 + "   __(.)>   *quack*\n"
                 + "~~ \\___)\n";
 
-        Task[] tasks = new Task[100];
-        int count = 0;
-        boolean active = true;
+        ArrayList<Task> tasks = new ArrayList<>();
+        boolean isActive = true;
 
         Scanner scanner = new Scanner(System.in);
         System.out.println(GREETING);
-        String newUserInput;
 
-        while (active) {
+        while (isActive) {
             try {
-            int startDescription, startDateTime;
-            String description, dateTime;
-            newUserInput = scanner.nextLine();
-            String firstWord = newUserInput.contains(" ")
-                    ? newUserInput.split(" ")[0]
-                    : newUserInput;
-
-            switch (firstWord) {
-                case "bye":
-                    active = false;
-                    System.out.println(BYE);
-                    break;
-                case "list":
-                    if (count == 0) {
-                        System.out.println("There are no tasks on your list. *quack*");
-                    } else if (count == 1) {
-                        System.out.println("There is one task on your list:");
-                        System.out.println("1. " + tasks[0].toString());
-                        System.out.println("*quack*");
-
-                    } else {
-                        System.out.println("Here are the tasks on your list:");
-                        for (int i = 0; i < count; i++) {
-                            System.out.println(i + 1 + ". " + tasks[i].toString());
+                String newUserInput = scanner.nextLine();
+                String firstWord = newUserInput;
+                if (newUserInput.contains(" ")) {
+                    String[] splitString = newUserInput.split(" ", 2);
+                    firstWord = splitString[0];
+                    newUserInput = splitString[1];
+                }
+                switch (firstWord) {
+                    case "bye":
+                        isActive = false;
+                        System.out.println(BYE);
+                        break;
+                    case "list":
+                        if (tasks.isEmpty()) {
+                            System.out.println("There are no tasks on your list. *quack*");
+                        } else if (tasks.size() == 1) {
+                            System.out.println("There is one task on your list:");
+                            System.out.println("1. " + tasks.get(0).toString());
+                            System.out.println("*quack*");
+                        } else {
+                            System.out.println("Here are the tasks on your list:");
+                            for (int i = 0; i < tasks.size(); i++) {
+                                System.out.println(i + 1 + ". " + tasks.get(i).toString());
+                            }
+                            System.out.println("*quack*");
                         }
-                        System.out.println("*quack*");
-                    }
-                    break;
-                case "done":
-                    int taskNo = Integer.parseInt(newUserInput.split(" ")[1]);
-                    if (taskNo < 1 || taskNo > count) {
-                        System.out.println("Error: No such task exists");
-                    } else {
-                        tasks[taskNo - 1].taskDone();
-                        System.out.println("Nice! I've marked this task as done: \n"
-                                + tasks[taskNo - 1].toString());
-                    }
-                    break;
-                case "todo":
-                    startDescription = newUserInput.indexOf(" ") + 1;
-                    if (startDescription == 0) {
-                        throw new EmptyDescriptionException();
-                    }
-                    description = newUserInput.substring(startDescription);
-                    tasks[count] = new Todo(description);
-                    count++;
-                    System.out.println("Got it. I've added this task:\n"
-                            + tasks[count - 1].toString());
-                    System.out.printf("Now you have %d tasks in the list.\n", count);
-                    break;
-                case "deadline":
-                    startDescription = newUserInput.indexOf(" ") + 1;
-                    if (startDescription == 0) {
-                        throw new EmptyDescriptionException();
-                    }
-                    startDateTime = newUserInput.indexOf("/") + 1;
-                    description = newUserInput.substring(startDescription, startDateTime - 2);
-                    dateTime = newUserInput.substring(startDateTime);
-                    tasks[count] = new Deadline(description, dateTime);
-                    count++;
-                    System.out.println("Got it. I've added this task:\n"
-                            + tasks[count - 1].toString());
-                    System.out.printf("Now you have %d tasks in the list.\n", count);
-                    break;
-                case "event":
-                    startDescription = newUserInput.indexOf(" ") + 1;
-                    if (startDescription == 0) {
-                        throw new EmptyDescriptionException();
-                    }
-                    startDateTime = newUserInput.indexOf("/") + 1;
-                    description = newUserInput.substring(startDescription, startDateTime - 2);
-                    dateTime = newUserInput.substring(startDateTime);
-                    tasks[count] = new Event(description, dateTime);
-                    count++;
-                    System.out.println("Got it. I've added this task:\n"
-                            + tasks[count - 1].toString());
-                    System.out.printf("Now you have %d tasks in the list.\n", count);
-                    break;
-                default:
-                    throw new InvalidInputException();
+                        break;
+                    case "done":
+                        int taskNo = Integer.parseInt(newUserInput);
+                        if (taskNo < 1 || taskNo > tasks.size()) {
+                            System.out.printf("Oops! No such task exists\n" +
+                                            "Please use a number from 1 to %s",
+                                    tasks.size());
+                        } else {
+                            Task completedTask = tasks.get(taskNo - 1);
+                            completedTask.taskDone();
+                            tasks.set(taskNo - 1, completedTask);
+                            System.out.println("Nice! I've marked this task as done: \n"
+                                    + tasks.get(taskNo - 1).toString());
+                        }
+                        break;
+                    case "todo":
+                        if (newUserInput.isEmpty()) {
+                            throw new EmptyDescriptionException();
+                        }
+                        tasks.add(new Todo(newUserInput));
 
-            }} catch (UserInputException e) {
-            System.out.println(e.getMessage());
-        }
+                        System.out.println("Got it. I've added this task:\n"
+                                + tasks.get(tasks.size() - 1).toString());
+                        System.out.printf("Now you have %d tasks in the list.\n",
+                                tasks.size());
+                        break;
+                    case "deadline":
+                        if (newUserInput.isEmpty()) {
+                            throw new EmptyDescriptionException();
+                        }
+                        String description, dateTime;
+                        if (newUserInput.contains("/")) {
+                            String[] splitString = newUserInput.split("/by", 2);
+                            description = splitString[0];
+                            dateTime = splitString[1];
+                        } else {
+                            description = newUserInput;
+                            dateTime = "not specified";
+                        }
+                        tasks.add(new Deadline(description, dateTime));
+                        System.out.println("Got it. I've added this task:\n"
+                                + tasks.get(tasks.size() - 1).toString());
+                        System.out.printf("Now you have %d tasks in the list.\n",
+                                tasks.size());
+                        break;
+                    case "event":
+                        if (newUserInput.isEmpty()) {
+                            throw new EmptyDescriptionException();
+                        }
+                        if (newUserInput.contains("/")) {
+                            String[] splitString = newUserInput.split("/at", 2);
+                            description = splitString[0];
+                            dateTime = splitString[1];
+                        } else {
+                            description = newUserInput;
+                            dateTime = "not specified";
+                        }
+                        tasks.add(new Event(description, dateTime));
+                        System.out.println("Got it. I've added this task:\n"
+                                + tasks.get(tasks.size() - 1).toString());
+                        System.out.printf("Now you have %d tasks in the list.\n",
+                                tasks.size());
+                        break;
+                    case "delete":
+                        taskNo = Integer.parseInt(newUserInput);
+                        if (taskNo < 1 || taskNo > tasks.size()) {
+                            System.out.println("Error: No such task exists");
+                        } else {
+                            System.out.println("Noted. I've removed this task: \n"
+                                    + tasks.get(taskNo - 1).toString());
+                            tasks.remove(taskNo - 1);
+                            System.out.printf("Now you have %d tasks in the list.\n",
+                                    tasks.size());
+                        }
+                        break;
+                    default:
+                        throw new InvalidInputException();
+
+                }
+            } catch (UserInputException e) {
+                System.out.println(e.getMessage());
+            }
         }
         scanner.close();
     }
