@@ -4,6 +4,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    public enum inputTypes {
+        BYE("bye"), TODO("todo"), DEADLINE("deadline"), EVENT("event"), LIST("list"), DONE("done"), DELETE("delete");
+
+        private String value;
+
+        inputTypes (String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,10 +31,10 @@ public class Duke {
         System.out.println("    What can I do for you?");
         System.out.println("    ____________________________________________________________");
         String task = sc.nextLine();
-        while (!task.equals("bye")) {
+        while (!task.equals(inputTypes.BYE.getValue())) {
             try {
                 System.out.println("    ____________________________________________________________");
-                if (task.contains("todo")) {
+                if (task.contains(inputTypes.TODO.getValue())) {
                     if (task.length() <= 5) {
                         throw new Exception("todoEmpty");
                     }
@@ -30,7 +43,7 @@ public class Duke {
                     System.out.println("     Got it. I've added this task:");
                     System.out.println("      " + tasks.get(tasks.size() - 1).toString());
                     System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
-                } else if (task.contains("deadline")) {
+                } else if (task.contains(inputTypes.DEADLINE.getValue())) {
                     int position = task.indexOf('/');
                     String taskName = task.substring(9, position - 1);
                     String deadlineTime = task.substring(position + 4);
@@ -38,7 +51,7 @@ public class Duke {
                     System.out.println("     Got it. I've added this task:");
                     System.out.println("      " + tasks.get(tasks.size() - 1).toString());
                     System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
-                } else if (task.contains("event")) {
+                } else if (task.contains(inputTypes.EVENT.getValue())) {
                     int position = task.indexOf('/');
                     String taskName = task.substring(6, position - 1);
                     String eventTime = task.substring(position + 4);
@@ -46,17 +59,17 @@ public class Duke {
                     System.out.println("     Got it. I've added this task:");
                     System.out.println("      " + tasks.get(tasks.size() - 1).toString());
                     System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
-                } else if (task.contains("done")) {
+                } else if (task.contains(inputTypes.DONE.getValue())) {
                     int itemDone = Integer.parseInt(task.substring(5));
                     tasks.get(itemDone - 1).done = true;
                     System.out.println("    Nice! I've marked this task as done:");
                     System.out.println("      " + tasks.get(itemDone - 1).toString());
-                } else if (task.equals("list")) {
+                } else if (task.equals(inputTypes.LIST.getValue())) {
                     System.out.println("    Here are the tasks in your list:");
                     for (int i = 1; i <= tasks.size(); i++) {
                         System.out.println("    " + i + "." + tasks.get(i - 1).toString());
                     }
-                } else if (task.contains("delete")) {
+                } else if (task.contains(inputTypes.DELETE.getValue())) {
                     int itemDeleted = Integer.parseInt(task.substring(7));
                     Task deletedTask = tasks.remove(itemDeleted - 1);
                     System.out.println("    Noted. I've removed this task:");
