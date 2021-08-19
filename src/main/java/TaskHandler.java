@@ -4,6 +4,7 @@ public class TaskHandler {
     private static final String NO_TASKS_FOUND = "Nothing here... :( Type to add something. :^)\n";
     private static final String TASK_ADDED_MESSAGE = "Voila! ^_^ I've added this task:\n%s\n\nYou currently have %d task(s) in the list.\n";
     private static final String TASK_DONE_MESSAGE = "Good Job! :D I've marked this task as done:\n%s\n\nYou currently have %d undone task(s) in the list.\n";
+    private static final String TASK_DELETED_MESSAGE = "Voila! ^_^ I've deleted this task:\n%s\n\nYou currently have %d task(s) in the list.\n";
     private static final String TASK_LIST = "Here are the task(s) in your list! n_n\n";
     private static final String NO_SUCH_TASK_ID = "Awwww, I can't seem to find this task index. Try again? U_U\n";
     private static final String INVALID_DONE_INPUT = "Please enter a number starting from 1! :~)";
@@ -34,13 +35,22 @@ public class TaskHandler {
         return taskList.size();
     }
 
-    public String markTaskAsDone(int n) throws DukeException {
-        if (n > 0 && n <= taskList.size()) {
-            int index = n - 1;
+    public String markTaskAsDone(int taskNumber) throws DukeException {
+        if (taskNumber > 0 && taskNumber <= taskList.size()) {
+            int index = taskNumber - 1;
             Task t = taskList.get(index);
             t.markAsDone();
-            String str = String.format(TASK_DONE_MESSAGE, t, getUndoneTasksCount());
-            return str;
+            return String.format(TASK_DONE_MESSAGE, t, getUndoneTasksCount());
+        } else {
+            throw new DukeException(NO_SUCH_TASK_ID);
+        }
+    }
+
+    public String deleteTask(int taskNumber) throws DukeException {
+        if (taskNumber > 0 && taskNumber <= taskList.size()) {
+            int index = taskNumber - 1;
+            Task t = taskList.remove(index);
+            return String.format(TASK_DELETED_MESSAGE, t, getTotalTasksCount());
         } else {
             throw new DukeException(NO_SUCH_TASK_ID);
         }

@@ -7,6 +7,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[T]%s (at: %s)", super.toString(), time);
+        return String.format("[E]%s (at: %s)", super.toString(), time);
     }
 }
