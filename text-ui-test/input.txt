@@ -7,4 +7,12 @@ event testEvent /at 3pm
 list
 done 3
 list
+todo
+event
+deadline
+random
+list
+event with no time specified
+deadline with no time specified
+list
 bye
