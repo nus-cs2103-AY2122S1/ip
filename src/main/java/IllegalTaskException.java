@@ -1,0 +1,2 @@
+class IllegalTaskException extends Exception {
+}
