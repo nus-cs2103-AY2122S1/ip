@@ -31,13 +31,21 @@ public class Duke {
                 continue;
             }
             String[] commandSplit = command.split("\\s", 2);
+
             try {
                 switch (commandSplit[0]) {
                     case "done":
                         //Marks tasks as done
                         int index = Integer.valueOf(commandSplit[1]) - 1;
-                        list.get(index).setDone();
+                        list.get(index + 1).setDone();
                         System.out.println("I've marked this task as done: \n" + list.get(index));
+                        break;
+
+                    case "delete":
+                        //Deletes tasks
+                        int indexD = Integer.valueOf(commandSplit[1]) - 1;
+                        Task deleted = list.remove(indexD);
+                        System.out.println("Noted. I have removed this task: \n" + deleted);
                         break;
 
                     case "todo":
