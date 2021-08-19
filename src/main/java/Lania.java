@@ -66,6 +66,20 @@ public class Lania {
     }
 
     /**
+     * Removes given task number.
+     *
+     * @param i The task number to be completed.
+     */
+    public static void remove(int i) {
+        i--;
+        Task t = taskArrayList.get(i);
+        taskArrayList.remove(i);
+        System.out.println("Ok, Lania has removed this task:");
+        System.out.println(t);
+        System.out.println("Great! Now you have " + taskArrayList.size() + (taskArrayList.size() == 1 ? " task" : " tasks") + " in your list.");
+    }
+
+    /**
      * Prints the user input.
      *
      * @param s String provided by the user.
@@ -91,6 +105,8 @@ public class Lania {
                     list();
                 } else if (split[0].equals("done")) {
                     complete(Integer.parseInt(split[1]));
+                } else if (split[0].equals("delete")) {
+                    remove(Integer.parseInt(split[1]));
                 } else {
                     update(input);
                 }
