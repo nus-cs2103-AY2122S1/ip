@@ -39,12 +39,12 @@ public class Task {
      *
      * @return returns true if it was successful
      */
-    public boolean markAsDone() {
+    public boolean markAsDone() throws DukeException{
         if (!isDone) {
             isDone = true;
             return true;
         } else {
-            return false;
+           throw new DukeException("Task has already been marked as done!");
         }
     }
 

@@ -242,10 +242,9 @@ public class FeatureMain {
             throw new DukeException("Mark Done:", 2);
         } else {
             if (taskNumber <= commands.size()) {
-                System.out.println("Nice! I've marked this task as done: ");
-
                 Task taskToChange = commands.get(taskNumber - 1);
                 taskToChange.markAsDone();
+                System.out.println("Nice! I've marked this task as done: ");
 
                 System.out.println("   " + taskToChange);
                 newLine();

@@ -29,6 +29,8 @@ Nice! I've marked this task as done:
    [D][X] return book  (by:  sunday)
 
 
+Task has already been marked as done!
+
 Mark Done: Invalid Number, only numbers greater than 0 are accepted
 
 The Done command requires a number, separated by whitespace!
