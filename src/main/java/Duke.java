@@ -28,7 +28,6 @@ public class Duke {
                 addTodo(splitInput);
                 break;
             case "event":
-
                 addEvent(splitInput);
                 break;
             case "deadline":
@@ -43,12 +42,12 @@ public class Duke {
     }
 
     private static void addTodo(String[] input) {
-        if (input.length > 1) {
+        try {
             String name = input[1];
             TodoTask task = new TodoTask(name);
             add(task);
-        } else {
-            System.out.println("todo: adds a to-do task to list.\nexample:\ntodo buy groceries");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error: Description for To-do cannot be empty.\nexample:\ntodo buy groceries");
         }
     }
 
@@ -56,17 +55,17 @@ public class Duke {
 
         String TIME_MARKER = " /at ";
 
-        if (input.length > 1) {
+        try {
             String[] taskAndTime = input[1].split(TIME_MARKER, 2);
             EventTask event;
             if (taskAndTime.length > 1) {
                 event = new EventTask(taskAndTime[0], taskAndTime[1]);
                 add(event);
             } else {
-                System.out.println("need to specify event name and time.\nexample:\nevent meeting /at Tuesday 12pm");
+                System.out.println("Error: Need to specify event name and time.\nexample:\nevent meeting /at Tuesday 12pm");
             }
-        } else {
-            System.out.println("event: adds an event to list.\nexample:\nevent meeting /at Tuesday 12pm");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error: Description for Event cannot be empty.\nexample:\nevent meeting /at Tuesday 12pm");
         }
     }
 
@@ -74,18 +73,17 @@ public class Duke {
 
         String DEADLINE_MARKER = " /by ";
 
-        if (input.length > 1) {
+        try {
             String[] taskAndTime = input[1].split(DEADLINE_MARKER, 2);
-            EventTask event;
             if (taskAndTime.length > 1) {
                 DeadlineTask deadlineTask = new DeadlineTask(taskAndTime[0], taskAndTime[1]);
                 add(deadlineTask);
             } else {
-                System.out.println("need to specify task name and deadline.\nexample:\ndeadline return book /by Sunday");
+                System.out.println("Error: Need to specify task name and deadline.\nexample:\ndeadline return book /by Sunday");
             }
 
-        } else {
-            System.out.println("deadline: adds a task with a deadline to list." +
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error: Description for deadline cannot be empty." +
                     "\nexample:\ndeadline return book /by Sunday");
         }
 

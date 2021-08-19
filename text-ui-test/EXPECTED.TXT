@@ -1,7 +1,15 @@
-Hello from
+Howdy! The name's
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for ya?
+Sure thing. Added to list:
+[T][ ] x
+Sure thing. Added to list:
+[E][ ] y (at: 2359)
+Sure thing. Added to list:
+[D][ ] z (by: 2359)
+Seeya!
