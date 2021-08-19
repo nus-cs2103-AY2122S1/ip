@@ -41,7 +41,7 @@ public class Duke {
         if (command.equals("done")) {
             Task editedTask = todos[Integer.parseInt(output[1])-1];
             editedTask.markIsDone();
-            System.out.println(String.format("____________________________________________________________\n" +
+            System.out.println(String.format("\t____________________________________________________________\n" +
                     "\tNice! I've marked this task as done: \n" +
                     "\t%s\n" +
                     "    ____________________________________________________________", editedTask.toString()));
