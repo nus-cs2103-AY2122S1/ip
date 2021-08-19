@@ -133,5 +133,11 @@ class DukeBot {
                 break;
             }
         }
+
+        end();
+    }
+
+    private void end() {
+        sc.close();
     }
 }
