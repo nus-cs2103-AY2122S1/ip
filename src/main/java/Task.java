@@ -17,7 +17,7 @@ public class Task {
     }
 
     public String markedAsDoneToString() {
-        return ("Nice! I've marked this task as done: \n\t" + this.toString());
+        return ("Nice! I've marked this task as done: \n \t" + this.toString());
     }
 
     public void markAsDone() {

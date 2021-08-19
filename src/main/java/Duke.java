@@ -37,9 +37,24 @@ public class Duke {
                 task.markAsDone();
                 System.out.println(task.markedAsDoneToString());
             } else {
-                Task task = new Task(input);
-                ls.addTask(task);
-                System.out.println("added: " + input);
+                if (input.startsWith("todo")) {
+                    String taskDesc = input.replaceFirst("^todo ", "");
+                    Todo tTask = new Todo(taskDesc);
+                    ls.addTask(tTask);
+                    System.out.println(ls.addTaskToString(tTask));
+                } else if (input.startsWith("deadline")) {
+                    String taskDesc = input.replaceFirst("^deadline ", "").split(" /")[0];
+                    String deadline = input.substring(input.indexOf("/by") + 4);
+                    Deadline dTask = new Deadline(taskDesc, deadline);
+                    ls.addTask(dTask);
+                    System.out.println(ls.addTaskToString(dTask));
+                } else if (input.startsWith("event")) {
+                    String taskDesc = input.replaceFirst("^event ", "").split(" /")[0];
+                    String eventTime = eventTime = input.substring(input.indexOf("/at") + 4);
+                    Event eTask = new Event(taskDesc, eventTime);
+                    ls.addTask(eTask);
+                    System.out.println(ls.addTaskToString(eTask));
+                }
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
