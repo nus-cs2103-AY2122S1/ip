@@ -41,14 +41,18 @@ public class Duke {
                             System.out.println(bar + "\n    Item number not present. Try again?\n" + bar);
                         }
                     } else if (splitted[0].equalsIgnoreCase("todo")) { // adding todo
-                        list[listLen] = new Todo(str);
-                        listLen++;
-                        System.out.println(bar + "\n    added: " + str + "\n    Now you have " + listLen + " tasks in your list\n" +
-                                bar);
+                        if (str.isEmpty()) {
+                            System.out.println(bar + "\n    Task name not provided. FORMAT: \" TODO TASKNAME\"\n" + bar);
+                        } else {
+                            list[listLen] = new Todo(str);
+                            listLen++;
+                            System.out.println(bar + "\n    added: " + str + "\n    Now you have " + listLen + " tasks in your list\n" +
+                                    bar);
+                        }
                     } else if (splitted[0].equalsIgnoreCase("deadline")) { // adding deadline
-                        String[] deadlineSplit = str.split(" /by ");
+                        String[] deadlineSplit = str.split("(?i) /by ");
                         if (deadlineSplit.length == 1) {
-                            System.out.println(bar + "\n    Deadline not provide. FORMAT: \" TASK /by DEADLINE\"\n" + bar);
+                            System.out.println(bar + "\n    Task name or deadline not provided. FORMAT: \" DEADLINE TASKNAME /by DEADLINE\"\n" + bar);
                         } else {
                             list[listLen] = new Deadline(deadlineSplit[0], deadlineSplit[1]);
                             listLen++;
@@ -56,9 +60,9 @@ public class Duke {
                                     bar);
                         }
                     } else if (splitted[0].equalsIgnoreCase("event")) { // adding event
-                        String[] eventSplit = str.split(" /at ");
+                        String[] eventSplit = str.split("(?i) /at ");
                         if (eventSplit.length == 1) {
-                            System.out.println(bar + "\n    Date not provide. FORMAT: \" TASK /at DATE\"\n" + bar);
+                            System.out.println(bar + "\n    Event name or date not provided. FORMAT: \" EVENT TASKNAME /at DATE\"\n" + bar);
                         } else {
                             list[listLen] = new Event(eventSplit[0], eventSplit[1]);
                             listLen++;
