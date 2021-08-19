@@ -28,21 +28,28 @@ public class Session {
     }
 
     private void handleInput(String currInput) {
-        String[] splitInput = currInput.split(" ");
-        switch(splitInput[0]) {
-            case "bye":
-                this.bye();
+        ParsedInput parsedInput = new ParsedInput(currInput);
+        switch (parsedInput.commandType) {
+            case TODO:
+                this.taskList.addTask(new ToDoTask(parsedInput.taskDescription));
                 break;
-            case "list":
+            case DEADLINE:
+                this.taskList.addTask(new DeadlineTask(parsedInput.taskDescription, parsedInput.deadline));
+                break;
+            case EVENT:
+                this.taskList.addTask(new EventTask(parsedInput.taskDescription, parsedInput.eventPeriod));
+                break;
+            case LIST:
                 this.taskList.listTasks();
                 break;
-            default:
-                if(splitInput[0].equals("done")) {
-                    int taskIndex = Integer.parseInt(currInput.split(" ")[1]);
-                    this.taskList.markAsDone(taskIndex);
-                } else {
-                    this.taskList.addTask(currInput);
-                }
+            case DONE:
+                this.taskList.markAsDone(parsedInput.taskIndex);
+                break;
+            case BYE:
+                this.bye();
+                break;
+            case ERROR:
+                output("I Only Listen To Valid Commands. You Are Invalid.");
         }
     }
 

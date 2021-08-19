@@ -1,6 +1,6 @@
 public class Task {
 
-    private String description;
+    private final String description;
     private boolean done;
 
     public Task(String description) {
@@ -18,6 +18,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.description;
+        return this.getTaskStatus() + this.description;
     }
 }
