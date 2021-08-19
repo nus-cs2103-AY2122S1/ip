@@ -6,6 +6,11 @@ public class Duke {
 
     private static final String divider = "____________________________________________________________";
 
+
+
+    /**
+     * An enum describing the type of task.
+     */
     enum TaskType {
         TODO, DEADLINE, EVENT;
 
@@ -14,6 +19,12 @@ public class Duke {
             return this.name().toLowerCase(Locale.ROOT);
         }
 
+        /**
+         * Method to parse a given String input and return a TaskType.
+         *
+         * @param str The given String input.
+         * @return The TaskType matching the String input.
+         */
         public static TaskType getType(String str) {
             for (TaskType type : TaskType.values()) {
                 if (str.contentEquals(type.toString())) return type;
@@ -22,6 +33,11 @@ public class Duke {
         }
     }
 
+
+    /**
+     * A class representing the tasks that the user can create with Duke.
+     * Each Task has a description, and is either done or not yet done.
+     */
     private static class Task {
         private final String description;
         private boolean isDone;
@@ -31,7 +47,14 @@ public class Duke {
             this.isDone = false;
         }
 
-        /** Factory method to create Tasks. */
+        /**
+         * A factory method that returns a task based on a given input, and throws a DukeException
+         * if the input is invalid.
+         *
+         * @param input A String input that is split into half by a space, if there is one.
+         * @return A Task.
+         * @throws DukeException The exception thrown when the input to create a task is invalid.
+         */
         public static Task createTask(String[] input) throws DukeException {
             if(input.length <= 0) throw new DukeException();
 
@@ -78,8 +101,16 @@ public class Duke {
             }
         }
 
+        /**
+         * Returns the status icon indicated whether a task is done.
+         *
+         * @return A status icon showing whether a task is done.
+         */
         private String getStatusIcon() { return (isDone ? "X" : " "); }
 
+        /**
+         * Marks the current task as done.
+         */
         public void markAsDone() {
             this.isDone = true;
             System.out.println("Nice! I've marked this task as done:");
@@ -93,7 +124,9 @@ public class Duke {
     }
 
 
-
+    /**
+     * A Task without any date/time attached to it.
+     */
     public static class ToDo extends Task {
         private static final char symbol = 'T';
 
@@ -108,7 +141,9 @@ public class Duke {
     }
 
 
-
+    /**
+     * A type of task that needs to be done before a specific date/time.
+     */
     public static class Deadline extends Task {
         private static final char symbol = 'D';
 
@@ -127,6 +162,9 @@ public class Duke {
 
 
 
+    /**
+     * A type of Task that starts at a specific time and ends at a specific date/time.
+     */
     public static class Event extends Task {
         private static final char symbol = 'E';
 
@@ -145,7 +183,9 @@ public class Duke {
 
 
     /**
-     * Exceptions unique to Duke.
+     * A class that represents exceptions unique to Duke.
+     * A DukeException is thrown when a given input is not recognised a valid
+     * input for Duke.
      */
     private static class DukeException extends Exception {
 
@@ -154,6 +194,9 @@ public class Duke {
             return "Sorry, I don't know what that means :(";
         }
 
+        /**
+         * An exception which is thrown when the description of a Task is not provided.
+         */
         public static class EmptyDescriptionException extends DukeException {
             private final TaskType type;
 
@@ -167,6 +210,9 @@ public class Duke {
             }
         }
 
+        /**
+         * An exception that is thrown when the date/time of a Deadline or Event is not provided.
+         */
         public static class NoTimeException extends DukeException {
             private final TaskType type;
 
@@ -182,6 +228,7 @@ public class Duke {
     }
 
 
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -189,6 +236,8 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
+
+        // a list of all the tasks created by the user
         ArrayList<Task> taskList = new ArrayList<>();
 
         System.out.println("Hello from\n" + logo +"\n");
@@ -199,18 +248,19 @@ public class Duke {
         String s = in.nextLine();
 
 
+        // Duke continuously asks for the user's input until they type "bye"
         while (!s.contentEquals("bye")) {
 
             System.out.println(divider);
 
-            // split the input into 2 parts, which are divided by a space
+            // split the input into 2 parts, which are divided by a space if any
             String[] input = s.split("\\s+", 2);
             // the first word in the input
             String command = input[0];
 
             if (input.length == 1 && command.contentEquals("list")) {
 
-                // list command
+                // list command, that prints out all the tasks in the taskList.
                 for (int i = 0; i < taskList.size(); i++) {
                     System.out.println((i + 1) + ". " + taskList.get(i));
                 }
@@ -222,14 +272,18 @@ public class Duke {
                     try {
                         int listIndex = Integer.parseInt(input[1]);
                         if (listIndex <= 0 || listIndex > taskList.size()) {
+                            // number given is out of bounds of the taskList
                             System.out.println("Invalid Argument: Index " + listIndex + " is out of bounds!");
                         } else {
+                            // no problems with the input, a task is added
                             taskList.get(listIndex - 1).markAsDone();
                         }
                     } catch (NumberFormatException e) {
+                        // Second parameter is not an integer
                         System.out.println("Argument must be an Integer!");
                     }
                 } else {
+                    // A second parameter is not provided
                     System.out.println("Please indicate a task to mark as done");
                 }
 
@@ -240,8 +294,10 @@ public class Duke {
                     try {
                         int listIndex = Integer.parseInt(input[1]);
                         if (listIndex <= 0 || listIndex > taskList.size()) {
+                            // number given is out of bounds of the taskList
                             System.out.println("Invalid Argument: Index " + listIndex + " is out of bounds!");
                         } else {
+                            // no problems with the input, a task is added
                             Task toDelete = taskList.get(listIndex - 1);
                             taskList.remove(listIndex - 1);
                             System.out.println("Noted. I've removed this task:");
@@ -249,13 +305,19 @@ public class Duke {
                             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                         }
                     } catch (NumberFormatException e) {
-                            System.out.println("Argument must be an Integer!");
+                        // Second parameter is not an integer
+                        System.out.println("Argument must be an Integer!");
                     }
                 } else {
+                    // A second parameter is not provided
                     System.out.println("Please indicate a task to delete");
                 }
 
             } else {
+
+                // If the input is not recognised as any of the above commands,
+                // then try to create a Task with the given input.
+                // If this fails, a DukeException is thrown and the message is printed.
                 try {
                     Task toAdd = Task.createTask(input);
                     taskList.add(toAdd);
@@ -265,6 +327,7 @@ public class Duke {
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
+
             }
 
             System.out.println(divider);
