@@ -6,4 +6,5 @@ list
 event project meeting /at Tue 2-4pm
 done 4
 list
+delete 4
 bye

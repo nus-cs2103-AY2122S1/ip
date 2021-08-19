@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,7 +15,7 @@ public class Duke {
         }
         System.out.println();
 
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<Task>();
         int count = 0;
 
         Scanner in = new Scanner(System.in);
@@ -37,21 +38,31 @@ public class Duke {
                         System.out.println("Indicate a task number that you have completed ☻");
                     }
                     taskDone(x, tasks, count);
+                } else if (cmd.equals("delete")) {
+                    if (x.length == 1) {
+                        System.out.println("Indicate a task number to delete ☻");
+                    } else {
+                        deleteTask(x, tasks, count);
+                        count--;
+                    }
                 } else if (cmd.equals("todo")) {
-                    if (x.length == 1) { missingTaskName("todo"); }
-                    else {
+                    if (x.length == 1) {
+                        missingTaskName("todo");
+                    } else {
                         addToDo(input, tasks, count);
                         count++;
                     }
                 } else if (cmd.equals("deadline")) {
-                    if (x.length == 1) { missingTaskName("deadline"); }
-                    else {
+                    if (x.length == 1) {
+                        missingTaskName("deadline");
+                    } else {
                         addDeadline(input, tasks, count);
                         count++;
                     }
                 } else if (cmd.equals("event")) {
-                    if (x.length == 1) { missingTaskName("event"); }
-                    else {
+                    if (x.length == 1) {
+                        missingTaskName("event");
+                    } else {
                         addEvent(input, tasks, count);
                         count++;
                     }
@@ -64,49 +75,49 @@ public class Duke {
         in.close();
     }
 
-    public static void listTasks(Task[] tasks, int count) {
+    public static void listTasks(ArrayList<Task> tasks, int count) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < count; i++) {
-            Task t = tasks[i];
+            Task t = tasks.get(i);
             System.out.println((i + 1) + "." + t.toString());
         }
     }
 
-    public static void taskDone(String[] inputArray, Task[] tasks, int count) {
-        int index = Integer.parseInt(inputArray[1]) - 1;
+    public static void taskDone(String[] inputArr, ArrayList<Task> tasks, int count) {
+        int index = Integer.parseInt(inputArr[1]) - 1;
         if (index >= count) {
             System.out.println("No task of this number. Add new task or input a different number.");
         } else if (index < 0) {
             System.out.println("Input a task number from 1 - " + count);
         } else {
-            Task t = tasks[index];
+            Task t = tasks.get(index);
             t.markAsDone();
-            System.out.println("Nice! I've marked this task as done:\n[X] " + t.name);
+            System.out.println("Nice! I've marked this task as done:\n  " + t.toString());
         }
     }
 
-    public static void addToDo(String input, Task[] tasks, int count) {
+    public static void addToDo(String input, ArrayList<Task> tasks, int count) {
         String name = input.substring(input.indexOf(" ") + 1);
         ToDo t = new ToDo(name);
-        tasks[count] = t;
+        tasks.add(t);
         System.out.println("Okay! Task added:\n  " + t.toString());
         System.out.println("You now have " + (count + 1) + " task(s) in the list.");
     }
 
-    public static void addDeadline(String input, Task[] tasks, int count) {
+    public static void addDeadline(String input, ArrayList<Task> tasks, int count) {
         String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/by") - 1);
         String by = input.substring(input.lastIndexOf("/by") + 4);
         Deadline d = new Deadline(name, by);
-        tasks[count] = d;
+        tasks.add(d);
         System.out.println("Okay! Task added:\n  " + d.toString());
         System.out.println("You now have " + (count + 1) + " task(s) in the list.");
     }
 
-    public static void addEvent(String input, Task[] tasks, int count) {
+    public static void addEvent(String input, ArrayList<Task> tasks, int count) {
         String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/at") - 1);
         String at = input.substring(input.lastIndexOf("/at") + 4);
         Event e = new Event(name, at);
-        tasks[count] = e;
+        tasks.add(e);
         System.out.println("Okay! Task added:\n  " + e.toString());
         System.out.println("You now have " + (count + 1) + " task(s) in the list.");
     }
@@ -114,6 +125,20 @@ public class Duke {
     public static void missingTaskName(String cmd) {
         String str = String.format("☹ OOPS!!! The description of a %s cannot be empty.", cmd);
         System.out.println(str);
+    }
+
+    public static void deleteTask(String[] inputArr, ArrayList<Task> tasks, int count) {
+        int index = Integer.parseInt(inputArr[1]) - 1;
+        if (index >= count) {
+            System.out.println("No task of this number. Add new task or input a different number.");
+        } else if (index < 0) {
+            System.out.println("Input a task number from 1 - " + count);
+        } else {
+            Task t = tasks.get(index);
+            tasks.remove(index);
+            System.out.println("Ok! I've deleted this task:\n  " + t.toString());
+            System.out.println("You now have " + (count - 1) + " task(s) in the list.");
+        }
     }
 
 }

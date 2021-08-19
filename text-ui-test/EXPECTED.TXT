@@ -18,7 +18,7 @@ Okay! Task added:
   [D][ ] return book (by: Aug 12)
 You now have 3 task(s) in the list.
 Nice! I've marked this task as done:
-[X] borrow book
+  [T][X] borrow book
 Here are the tasks in your list:
 1.[T][X] borrow book
 2.[T][ ] read book
@@ -27,10 +27,13 @@ Okay! Task added:
   [E][ ] project meeting (at: Tue 2-4pm)
 You now have 4 task(s) in the list.
 Nice! I've marked this task as done:
-[X] project meeting
+  [E][X] project meeting (at: Tue 2-4pm)
 Here are the tasks in your list:
 1.[T][X] borrow book
 2.[T][ ] read book
 3.[D][ ] return book (by: Aug 12)
 4.[E][X] project meeting (at: Tue 2-4pm)
+Ok! I've deleted this task:
+  [E][X] project meeting (at: Tue 2-4pm)
+You now have 3 task(s) in the list.
 Bye. Hope to see you again soon! :)
