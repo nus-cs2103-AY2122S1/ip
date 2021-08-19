@@ -26,6 +26,12 @@ Hello from
 	3. [E][X] dinner with fam (at:  friday 1900)
 	____________________________
 	____________________________
+	Sorry! Unable to find task number 0
+	____________________________
+	____________________________
+	Please enter index of the task
+	____________________________
+	____________________________
 	Nice! I've marked this task as done:
  	[T][X] read book
 	____________________________
@@ -42,4 +48,19 @@ Hello from
 	1. [T][X] read book
 	2. [D][X] CS2103T iP (by:  thursday 2359)
 	3. [E][X] dinner with fam (at:  friday 1900)
+	____________________________
+	____________________________
+	Please enter index of the task
+	____________________________
+	____________________________
+	Noted. I've removed this task: 
+	[T][X] read book
+	Now you have 2 tasks in the list
+	____________________________
+	____________________________
+	Sorry! Unable to find task number 3
+	____________________________
+	____________________________
+	1. [D][X] CS2103T iP (by:  thursday 2359)
+	2. [E][X] dinner with fam (at:  friday 1900)
 	____________________________

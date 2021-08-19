@@ -1,3 +1,7 @@
+/**
+ * class to represent tasks
+ *
+ */
 public class Task {
 
   protected String title;

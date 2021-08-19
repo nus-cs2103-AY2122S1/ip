@@ -2,7 +2,13 @@ todo read book
 deadline CS2103T iP /by thursday 2359
 event dinner with fam /at friday 1900
 list
+done 0
+done
 done 1
 list
 done 2
+list
+delete
+delete 1
+delete 3
 list

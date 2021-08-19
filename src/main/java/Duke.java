@@ -35,14 +35,14 @@ public class Duke {
           break;
         } else if (input.equals("list")) {
           this.list();
-        } else if (splitInput[0].equals("done")) {
-          this.markDone(splitInput);
+        } else if (splitInput[0].equals("done") || splitInput[0].equals("delete")) {
+          this.indexCommand(splitInput);
         } else if (splitInput[0].equals("todo") || splitInput[0].equals("deadline") || splitInput[0].equals("event")) {
             this.addTask(splitInput);
         } else {
           System.out.println("\tSorry, I do not know this command!");
         }
-      } catch (DukeTaskDetailsException | DukeDoneInputException e) {
+      } catch (DukeTaskDetailsException | DukeIndexInputException e) {
         System.out.println("\t" + e.toString());
       }
       System.out.println("\t____________________________");
@@ -87,19 +87,27 @@ public class Duke {
     System.out.println("\t____________________________");
   }
 
-  private void markDone(String[] taskArray) throws DukeDoneInputException {
+  private void indexCommand(String[] taskArray) throws DukeIndexInputException {
     if (taskArray.length < 2) {
-      throw new DukeDoneInputException("Please enter index of the task to mark done");
+      throw new DukeIndexInputException("Please enter index of the task");
     }
     try {
       int index = Integer.parseInt(taskArray[1]);
+      if (taskArray[0].equals("done")) {
+
       this.tasks.get(index - 1).markAsDone();
       System.out.println("\tNice! I\'ve marked this task as done:");
       System.out.println(" \t" + this.tasks.get(index - 1).toString());
+      } else {
+        Task removed = this.tasks.remove(index - 1);
+        System.out.println("\tNoted. I've removed this task: ");
+        System.out.println("\t" + removed.toString());
+        System.out.println("\tNow you have " + this.tasks.size() + " tasks in the list");
+      }
     } catch (NumberFormatException e){
-      throw new DukeDoneInputException("Please enter index of the task to mark done");
+      throw new DukeIndexInputException("Please enter index of the task");
     } catch (IndexOutOfBoundsException e) {
-      throw new DukeDoneInputException("Sorry! Unable to find task number " + taskArray[1]);
+      throw new DukeIndexInputException("Sorry! Unable to find task number " + taskArray[1]);
     }
   }
 }

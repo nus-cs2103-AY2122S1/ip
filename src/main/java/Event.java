@@ -1,3 +1,7 @@
+/**
+ * class to represent events, a type of task with a eventDate field
+ *
+ */
 public class Event extends Task {
 
   private String eventDate;

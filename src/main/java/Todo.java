@@ -1,4 +1,7 @@
-
+/**
+ * class to represent todos, a type of task
+ *
+ */
 public class Todo extends Task {
 
   /**

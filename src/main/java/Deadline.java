@@ -1,3 +1,7 @@
+/**
+ * class for deadlines, a type of task, with an added deadline field
+ *
+ */
 public class Deadline extends Task {
 
     private String deadline;
