@@ -1,16 +1,13 @@
-import java.sql.SQLOutput;
-import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I'm \n" + logo + "\nHow can I help?");
+        System.out.println("Hello! I'm\n" + logo + "\nHow can I help?");
 
         TaskList l = new TaskList();
         int length = 0;
@@ -31,64 +28,112 @@ public class Duke {
             if (commands.length > 1) {
                 rest = input.substring(first.length() + 1);
             }
-            if (first.equals("bye")){
-                break;
-            }
-            switch (first) {
-                case "list": {
-                    printOutput(l.toString());
+            try {
+                if (first.equals("bye")) {
                     break;
                 }
-                case "done": {
-                    if (commands.length > 1) {
-                        Task item = l.getItem(Integer.parseInt(rest) - 1);
-                        if (item != null) {
-                            printOutput(item.completeItem());
-                        }
+                switch (first) {
+                    case "list": {
+                        printOutput(l.toString());
+                        break;
                     }
-                    break;
+                    case "done": {
+                        checkDone(rest, l);
+                        break;
+                    }
+                    case "deadline": {
+                        addDeadline(rest, l);
+                        break;
+                    }
+                    case "todo": {
+                        addToDo(rest, l);
+                        break;
+                    }
+                    case "event": {
+                        addEvent(rest, l);
+                        break;
+                    }
+                    case "delete": {
+                        if (rest.matches("\\d+")) {
+                            int index = Integer.parseInt(rest) - 1;
+                            if (index >= 0 || index < l.getLength()) {
+                                Task task = l.deleteTask(0);
+                                printOutput("Noted. I've removed this task:\n" + task + "\nNow you have " + l.getLength() + " tasks in the list.");
+                            }
+                        }
+                        break;
+                    }
+                    default: {
+                        blah();
+                        break;
+                    }
                 }
-                case "deadline": {
-                    String[] details = rest.split("/by ");
-                    Deadline deadline = new Deadline(details[0], details[1]);
-                    l.addToList(deadline);
-                    printOutput("Got it. I've added this task:\n" + deadline + "\nNow you have " + l.getLength()+ " tasks in the list.");
-                    break;
-                }
-                case "todo": {
-                    ToDo td = new ToDo(rest);
-                    l.addToList(td);
-                    printOutput("Got it. I've added this task:\n" + td + "\nNow you have " + l.getLength()+ " tasks in the list.");
-                    break;
-                }
-                case "event": {
-                    String[] details = rest.split("/at ");
-                    Event event = new Event(details[0], details[1]);
-                    l.addToList(event);
-                    printOutput("Got it. I've added this task:\n" + event + "\nNow you have " + l.getLength()+ " tasks in the list.");
-                    break;
-                }
-                default: {
-                    l.addToList(new Task(input));
-                    printOutput("added: " + input);
-                }
+            } catch (DukeException e){
+                printOutput(e.getMessage());
             }
-//            if (first.equals("bye")){
-//                break;
-//            } else if (first.equals("list")) {
-//                printOutput(l.toString());
-//            } else if (commands[0].equals("done") ) {
-//                if (commands.length > 1) {
-//                    Task item = l.getItem(Integer.parseInt(commands[1]) - 1);
-//                    if (item != null) {
-//                        item.completeItem();
-//                    }
-//                }
-//            } else {
-//
-//            }
+
         }
     }
+
+    public static void addToDo(String rest, TaskList l) throws DukeException {
+        if (rest.length() > 0){
+            ToDo td = new ToDo(rest);
+            l.addToList(td);
+            printOutput("Got it. I've added this task:\n" + td + "\nNow you have " + l.getLength() + " tasks in the list.");
+        } else {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+    }
+
+    public static void blah() throws DukeException {
+        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    public static void addDeadline(String rest, TaskList l) throws DukeException {
+        System.out.println(rest);
+        if (rest.length() > 0) {
+            String[] details = rest.split("/by ");
+            if (details.length == 1) {
+                throw new DukeException("☹ OOPS!!! Add a '/by deadline'");
+            } else {
+                Deadline deadline = new Deadline(details[0], details[1]);
+                l.addToList(deadline);
+                printOutput("Got it. I've added this task:\n" + deadline + "\nNow you have " + l.getLength() + " tasks in the list.");
+            }
+        } else {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+    }
+
+    public static void addEvent(String rest, TaskList l) throws DukeException {
+        System.out.println(rest);
+        if (rest.length() > 0) {
+            String[] details = rest.split("/at ");
+            if (details.length == 1) {
+                throw new DukeException("☹ OOPS!!! Add a '/at time of event'");
+            } else {
+                Event event = new Event(details[0], details[1]);
+                l.addToList(event);
+                printOutput("Got it. I've added this task:\n" + event + "\nNow you have " + l.getLength() + " tasks in the list.");
+            }
+        } else {
+            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+        }
+    }
+
+    public static void checkDone(String rest, TaskList l) throws DukeException {
+        if (rest.matches("\\d+")) {
+            Task item = l.getItem(Integer.parseInt(rest) - 1);
+            if (item != null) {
+                printOutput(item.completeItem());
+            } else {
+                throw new DukeException("☹ OOPS!!! Input a valid index");
+            }
+        } else {
+            throw new DukeException("☹ OOPS!!! Input a valid index");
+        }
+    }
+
 
     public static void printOutput(String input) {
         String line = "-------------------------------------";

@@ -12,7 +12,7 @@ public class TaskList {
     }
 
     public Task getItem(int index) {
-        if (this.list.size() < index || index < 0) {
+        if (this.list.size() <= index || index < 0) {
             return null;
         }
         return this.list.get(index);
@@ -20,6 +20,10 @@ public class TaskList {
 
     public int getLength() {
         return this.list.size();
+    }
+
+    public Task deleteTask(int index) {
+        return this.list.remove(index);
     }
     @Override
     public String toString() {
