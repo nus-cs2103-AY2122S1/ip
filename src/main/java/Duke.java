@@ -15,24 +15,43 @@ public class Duke {
 
         Task[] tasks = new Task[100];
         int ctr = 0;
-        String command = sc.nextLine().toLowerCase();
+        String command = sc.nextLine();
 
         while (!command.equals("bye")) {
             if (command.contains("done")) {
                 int idx = Integer.parseInt(command.split(" ")[1]) - 1;
-                System.out.printf("%sNice! I've marked this task as done:\n[X] %s\n%s\n",line, tasks[idx].description, line);
                 tasks[idx].updateStatus();
+                System.out.printf("%sNice! I've marked this task as done:\n%s\n%s\n",line, tasks[idx], line);
             } else if (command.equals("list")) {
                 System.out.println(line+ "Here are the tasks in your list:");
                 for (int i = 0; i < ctr; i++) {
-                    System.out.printf("%d.[%s] %s\n", i + 1, tasks[i].getStatusIcon(), tasks[i].description);
+                    System.out.printf("%d.%s\n", i + 1, tasks[i]);
                 }
                 System.out.println(line);
-            } else {
-                System.out.printf("%sadded: %s\n%s\n", line, command, line);
-                tasks[ctr++] = new Task(command);
+            } else if (command.contains("todo")){
+                int taskIdxStart = command.indexOf(" ") + 1;
+                String task = command.substring(taskIdxStart);
+                tasks[ctr] = new TodoTask(task);
+                System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks[ctr], ctr + 1, line);
+                ctr++;
+            } else if (command.contains("deadline")){
+                int taskIdxStart = command.indexOf(" ") + 1;
+                int timeIdxStart = command.indexOf("/");
+                String task = command.substring(taskIdxStart, timeIdxStart - 1);
+                String time = command.substring(timeIdxStart + 4);
+                tasks[ctr] = new DeadlineTask(task, time);
+                System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks[ctr], ctr + 1, line);
+                ctr++;
+            } else if (command.contains("event")){
+                int taskIdxStart = command.indexOf(" ") + 1;
+                int timeIdxStart = command.indexOf("/");
+                String task = command.substring(taskIdxStart, timeIdxStart - 1);
+                String time = command.substring(timeIdxStart + 4);
+                tasks[ctr] = new EventTask(task, time);
+                System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks[ctr], ctr + 1, line);
+                ctr++;
             }
-            command = sc.nextLine().toLowerCase();
+            command = sc.nextLine();
         }
 
         System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
