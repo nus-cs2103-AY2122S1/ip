@@ -1,8 +1,9 @@
-import java.util.Scanner;
+import exceptions.EmptyDescriptionException;
+import exceptions.InvalidInputException;
+import exceptions.UserInputException;
 
-enum TaskType {
-    TODO, DEADLINE, EVENT
-}
+import java.util.Scanner;
+import java.util.concurrent.CompletionException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -24,6 +25,7 @@ public class Duke {
         String newUserInput;
 
         while (active) {
+            try {
             int startDescription, startDateTime;
             String description, dateTime;
             newUserInput = scanner.nextLine();
@@ -64,6 +66,9 @@ public class Duke {
                     break;
                 case "todo":
                     startDescription = newUserInput.indexOf(" ") + 1;
+                    if (startDescription == 0) {
+                        throw new EmptyDescriptionException();
+                    }
                     description = newUserInput.substring(startDescription);
                     tasks[count] = new Todo(description);
                     count++;
@@ -73,6 +78,9 @@ public class Duke {
                     break;
                 case "deadline":
                     startDescription = newUserInput.indexOf(" ") + 1;
+                    if (startDescription == 0) {
+                        throw new EmptyDescriptionException();
+                    }
                     startDateTime = newUserInput.indexOf("/") + 1;
                     description = newUserInput.substring(startDescription, startDateTime - 2);
                     dateTime = newUserInput.substring(startDateTime);
@@ -84,6 +92,9 @@ public class Duke {
                     break;
                 case "event":
                     startDescription = newUserInput.indexOf(" ") + 1;
+                    if (startDescription == 0) {
+                        throw new EmptyDescriptionException();
+                    }
                     startDateTime = newUserInput.indexOf("/") + 1;
                     description = newUserInput.substring(startDescription, startDateTime - 2);
                     dateTime = newUserInput.substring(startDateTime);
@@ -94,8 +105,11 @@ public class Duke {
                     System.out.printf("Now you have %d tasks in the list.\n", count);
                     break;
                 default:
-                    System.out.println("Error: user input " + newUserInput);
-            }
+                    throw new InvalidInputException();
+
+            }} catch (UserInputException e) {
+            System.out.println(e.getMessage());
+        }
         }
         scanner.close();
     }
