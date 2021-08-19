@@ -1,7 +1,24 @@
-Hello from
+Hello! I'm Duke
+What can I do for you?
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+____________________________________________________________
+I have added this task:
+[T][ ] sleep early
+Now you have 1 task in the list
+____________________________________________________________
+I have added this task:
+[T][ ] listen music
+Now you have 2 tasks in the list
+____________________________________________________________
+added: [D][ ] study (at: 4pm)
+Now you have 3 tasks in the list
+____________________________________________________________
+I've marked this task as done:
+[T][X] sleep early
+Now you have 3 tasks in the list
+____________________________________________________________
