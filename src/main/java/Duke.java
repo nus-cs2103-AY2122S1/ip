@@ -38,7 +38,7 @@ public class Duke {
                 System.out.println("Uwu! Herw arw yourw taskws:\n");
                 int counter = 0;
                 while (taskarr[counter] != null || counter >= 100) {
-                    System.out.println(counter
+                    System.out.println((counter + 1)
                             + ". "
                             + taskarr[counter].toString()
                             + '\n');
@@ -133,39 +133,63 @@ public class Duke {
                         + (arrcounter)
                         + " taskw(s) inw thew wist! uwu\n");
                 System.out.println(linebreakend);
-            } else if (strparse.length == 2 && strparse[0].equalsIgnoreCase("done")) {
+            } else if (strparse[0].equalsIgnoreCase("done")) {
                 // checks for 'done' and integer keywords
                 // checks corresponding task as done
-                boolean passallcheck = false;
-                int i = Integer.parseInt(strparse[1]);
-                if (i >= 0 && i <= 100 && taskarr[i] != null) {
-                    passallcheck = true;
-                }
-                if (passallcheck) {
+                try {
+                    int i = Integer.parseInt(strparse[1]) - 1;
                     taskarr[i].markAsDone();
                     System.out.println(linebreakstart);
                     System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n");
                     System.out.println("   "
-                            + i
+                            + (i + 1)
                             + ". "
                             + taskarr[i].toString()
                             + '\n');
                     System.out.println(linebreakend);
-                } else {
-                    try {
-                        throw new DukeException("Sowwy, thiws commandw iswn't supporwted TwT\n");
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
+                } catch (NullPointerException e) {
+                    System.out.println(linebreakstart);
+                    System.out.println("Sowwy! There'sw now cowwesponding task of that numbwer!\n");
+                    System.out.println(linebreakend);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(linebreakstart);
+                    System.out.println("Ohww noww! Thew descwiption of donew cannyotw bew emptwpy.\n");
+                    System.out.println(linebreakend);
+                } catch (NumberFormatException e) {
+                    System.out.println(linebreakstart);
+                    System.out.println("Sowwy! Youw havew to puwt in a numwberw.\n");
+                    System.out.println(linebreakend);
                 }
-            } else if (strparse.length == 2 && strparse[0].equalsIgnoreCase("delete")) {
-
-
-
-
+            } else if (strparse[0].equalsIgnoreCase("delete")) {
+                // checks for 'done' and integer keywords
+                // checks corresponding task as done
+                try {
+                    int i = Integer.parseInt(strparse[1]) - 1;
+                    taskarr[i].markAsDone();
+                    System.out.println(linebreakstart);
+                    System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw hasw beenw deweted:\n");
+                    System.out.println("   "
+                            + (i + 1)
+                            + ". "
+                            + taskarr[i].toString()
+                            + '\n');
+                    System.out.println(linebreakend);
+                } catch (NullPointerException e) {
+                    System.out.println(linebreakstart);
+                    System.out.println("Sowwy! There'sw now cowwesponding task of that numbwer!\n");
+                    System.out.println(linebreakend);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(linebreakstart);
+                    System.out.println("Ohww noww! Thew descwiption of dewete cannyotw bew emptwpy.\n");
+                    System.out.println(linebreakend);
+                } catch (NumberFormatException e) {
+                    System.out.println(linebreakstart);
+                    System.out.println("Sowwy! Youw havew to puwt in a numwberw.\n");
+                    System.out.println(linebreakend);
+                }
             } else {
                 try {
-                    throw new DukeException("Sowwy, thiws commandw iswn't supporwted TwT\n");
+                    throw new DukeException("Sowwy, thiws commandw iswn't supporwted! TwT\n");
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
