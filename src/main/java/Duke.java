@@ -47,30 +47,41 @@ public class Duke {
             insertTask(input);
             respondTo(sc);
         } else {
-//            insertTask(input);
-            formatMessages("Aiyo, please enter a task hor!");
-            respondTo(sc);
+            try {
+                handleOtherResponses(input);
+            } catch (NonsenseException e) {
+                formatMessages(e.getMessage());
+                respondTo(sc);
+            }
         }
     }
 
+    public static void handleOtherResponses(String input) throws NonsenseException {
+        throw new NonsenseException(input + " ? What talk you...");
+    }
+
     public static void insertTask(String input) {
-        formatMessages(todolist.insertTask(input));
+        try {
+            formatMessages(todolist.insertTask(input));
+        } catch (NoDescriptionException e) {
+            formatMessages(e.getMessage());
+        }
     }
 
     public static void printTasks() {
-        formatMessages(todolist.getList());
+            formatMessages(todolist.getList());
     }
 
     public static void completeTask(String input) {
-        String first = input.split(" ")[0];
-        String second = input.split(" ")[1];
-
         try {
+            String first = input.split(" ")[0];
+            String second = input.split(" ")[1];
             int value = Integer.parseInt(second);
-            formatMessages(todolist.completeTask(value-1));
-
-        } catch (NumberFormatException e) {
-            System.out.println("Aiyo, you say done a task but you never tell me which one leh.");
+            formatMessages(todolist.completeTask(value));
+        } catch (IndexNotInListException e) {
+            formatMessages(e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            formatMessages("Aiyo, you say done a task but you never tell me which one leh.");
         }
     }
 

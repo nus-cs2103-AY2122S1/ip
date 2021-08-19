@@ -22,10 +22,14 @@ public class TodoList {
         return output.toString();
     }
 
-    public String insertTask(String input) {
+    public String insertTask(String input) throws NoDescriptionException {
         String first = input.split(" ",2)[0];
-        String second = input.split(" ",2)[1];
+        if (first.equals(input)) {
+            String message = "Oi, description of your " + first + " cannot be empty lah!";
+            throw new NoDescriptionException(message);
+        }
 
+        String second = input.split(" ",2)[1];
         Task task;
         if (first.equalsIgnoreCase("deadline")) {
             if (second.contains("/by")) {
@@ -57,11 +61,11 @@ public class TodoList {
                 + "\n      You now have " + list.size() + " tasks remaining.";
     }
 
-    public String completeTask(int index) {
-        if (index < 0 || index > list.size()) {
-            return "Aiyo, out of bounds leh!";
+    public String completeTask(int index) throws IndexNotInListException {
+        if (index < 1 || index > list.size()) {
+            throw new IndexNotInListException("Haiyo, you sure there is a task " + index + " anot...");
         } else {
-            return list.get(index).completeTask();
+            return list.get(index-1).completeTask();
         }
     }
 
