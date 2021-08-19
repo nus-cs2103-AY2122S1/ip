@@ -1,0 +1,17 @@
+todo mumu a
+deadline mumu /by a
+event mumu /at a
+list
+done 2
+done 2
+list
+deadline mush /by
+event mush /at
+done 5
+list
+done 7
+done -1
+done a
+melm
+list
+bye
