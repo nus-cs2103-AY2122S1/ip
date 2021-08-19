@@ -31,33 +31,50 @@ public class Duke {
                 continue;
             }
             String[] commandSplit = command.split("\\s", 2);
-            switch(commandSplit[0]) {
-                case "done":
-                    //Marks tasks as done
-                    int index = Integer.valueOf(commandSplit[1]) - 1;
-                    list.get(index).setDone();
-                    System.out.println("I've marked this task as done: \n" + list.get(index));
-                    break;
+            try {
+                switch (commandSplit[0]) {
+                    case "done":
+                        //Marks tasks as done
+                        int index = Integer.valueOf(commandSplit[1]) - 1;
+                        list.get(index).setDone();
+                        System.out.println("I've marked this task as done: \n" + list.get(index));
+                        break;
 
-                case "todo":
-                    //Adds a new Todo to the list
-                    Todo newT = new Todo(commandSplit[1]);
-                    list.add(newT);
-                    System.out.println("I have added this task: \n" + newT);
-                    break;
-                case "deadline":
-                    String[] detailD = commandSplit[1].split(" /by ", 2);
-                    Deadline newD = new Deadline(detailD[0], detailD[1]);
-                    list.add(newD);
-                    System.out.println("added: " + newD);
-                    break;
-                case "event":
-                    String[] detailE = commandSplit[1].split(" /at ", 2);
-                    Event newE = new Event(detailE[0], detailE[1]);
-                    list.add(newE);
-                    System.out.println("added: " + newE);
-                    break;
+                    case "todo":
+                        //Adds a new Todo to the list
+                        if (commandSplit.length == 1) {
+                            throw new TaskException("The description of a todo cannot be empty");
+                        }
+                        Todo newT = new Todo(commandSplit[1]);
+                        list.add(newT);
+                        System.out.println("I have added this task: \n" + newT);
+                        break;
+                    case "deadline":
+                        if (commandSplit.length == 1) {
+                            throw new TaskException("The description of a deadline cannot be empty");
+                        }
+                        Task newD = Deadline.parseCommand(commandSplit[1]);
+                        list.add(newD);
+                        System.out.println("added: " + newD);
+                        break;
+                    case "event":
+                        if (commandSplit.length == 1) {
+                            throw new TaskException("The description of an event cannot be empty");
+                        }
+                        Task newE = Event.parseCommand(commandSplit[1]);
+                        list.add(newE);
+                        System.out.println("added: " + newE);
+                        break;
 
+                    default:
+                        throw new DukeException();
+
+
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            } catch (TaskException e){
+                System.out.println(e.getMessage());
             }
             System.out.println("Now you have " + list.size() + " task" + (list.size() > 1 ? "s " : " ") + "in the list");
 
