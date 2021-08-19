@@ -13,4 +13,8 @@ event meeting
 deadline
 todo
 sugonma
+delete 1
+list
+delete 3
+list
 bye

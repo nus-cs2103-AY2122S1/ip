@@ -64,6 +64,27 @@ ______________________
  Sorry, command does not exist.
 ______________________
 ______________________
+ Successfully deleted:
+ [T][X] farming leylines
+ You now have 4 task(s).
+______________________
+______________________
+ 1. [D][X] clip toenails (by: tomorrow)
+ 2. [D][ ] code (by: tonight 2359)
+ 3. [E][ ] lecture (at: 12pm)
+ 4. [T][X] brush teeth
+______________________
+______________________
+ Successfully deleted:
+ [E][ ] lecture (at: 12pm)
+ You now have 3 task(s).
+______________________
+______________________
+ 1. [D][X] clip toenails (by: tomorrow)
+ 2. [D][ ] code (by: tonight 2359)
+ 3. [T][X] brush teeth
+______________________
+______________________
  Bye. I love Imagine Dragons.
 
 

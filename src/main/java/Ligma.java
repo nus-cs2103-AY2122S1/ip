@@ -1,7 +1,4 @@
-import java.util.InputMismatchException;
-import java.util.MissingFormatArgumentException;
-import java.util.MissingResourceException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Ligma {
 
@@ -9,7 +6,7 @@ public class Ligma {
     private enum TaskType {
         TODO, EVENT, DEADLINE
     }
-    private static Task[] tasks;
+    private static ArrayList<Task> tasks;
     private static int noOfTasks;
 
     private static boolean response(String command) {
@@ -33,6 +30,12 @@ public class Ligma {
                         ? null
                         : command.substring(splitInd + 1);
 
+                int itemIndex = -1 ;
+                if (action.equals("done") || action.equals("delete") && splitInd != -1) {
+                    itemIndex = Character
+                            .getNumericValue(command.charAt(splitInd + 1)) - 1;
+                }
+
                 switch (action) {
                     case "todo":
                         addTask(TaskType.TODO, description);
@@ -44,8 +47,10 @@ public class Ligma {
                         addTask(TaskType.DEADLINE, description);
                         break;
                     case "done":
-                        markTaskDone(Character
-                                .getNumericValue(command.charAt(splitInd + 1)) - 1);
+                        markTaskDone(itemIndex);
+                        break;
+                    case "delete":
+                        deleteTask(itemIndex);
                         break;
                     default:
                         throw new NoSuchMethodException();
@@ -63,8 +68,9 @@ public class Ligma {
 
     private static void list() {
         System.out.println(PARTITION);
-        for (int i = 0; i <= 100 && tasks[i] != null; i++) {
-            System.out.println(String.format(" %d. ", i + 1) + tasks[i]);
+        int capacity = tasks.size();
+        for (int i = 0; i < capacity; i++) {
+            System.out.println(String.format(" %d. ", i + 1) + tasks.get(i));
         }
         System.out.println(PARTITION);
     }
@@ -80,7 +86,7 @@ public class Ligma {
                     ? Deadline.createDeadline(desc)
                     : Event.createEvent(desc);
 
-            tasks[noOfTasks] = task;
+            tasks.add(task);
             noOfTasks++;
 
             System.out.println(PARTITION
@@ -98,10 +104,24 @@ public class Ligma {
         }
     }
 
+    private static void deleteTask(int index) throws InputMismatchException {
+        if (index == -1) {
+            throw new InputMismatchException("Indicate index of item to be deleted.");
+        }
+        Task temp = tasks.remove(index);
+        noOfTasks--;
+        String response = "\n Successfully deleted:\n " + temp
+                + String.format("\n You now have %d task(s).\n", noOfTasks);
+        System.out.println(PARTITION + response + PARTITION);
+    }
+
     private static void markTaskDone(int taskNo) {
-        tasks[taskNo].markAsDone();
+        if (taskNo == -1) {
+            throw new InputMismatchException("Indicate index of item to be marked as done.");
+        }
+        tasks.get(taskNo).markAsDone();
         System.out.println(PARTITION + "\n Successfully marked as done:\n "
-                + tasks[taskNo] + "\n" + PARTITION);
+                + tasks.get(taskNo) + "\n" + PARTITION);
     }
 
     public static void main(String[] args) {
@@ -109,7 +129,7 @@ public class Ligma {
                 + "\n Hello! I'm Ligma, Ligma Balls."
                 + "\n What can I do for you?\n" + PARTITION);
 
-        tasks = new Task[100];
+        tasks = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
