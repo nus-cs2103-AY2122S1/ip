@@ -7,6 +7,23 @@ import java.util.Scanner;
  * @author Felissa Faustine
  */
 public class MyJournal {
+    /**
+     * Prints out the statement after a task is added.
+     *
+     * @param taskList The list of all tasks.
+     * @return The statement to be printed after a task is added.
+     */
+    public static String taskAddPrint(ArrayList<Task> taskList) {
+        return "Okay!! I've added the following task:\n"
+                + taskList.get(taskList.size() - 1) + "\n"
+                + "Now you have " + taskList.size() + " in the list";
+    }
+
+    /**
+     * The main method of the MyJournal class.
+     *
+     * @param args An input of an array of strings.
+     */
     public static void main(String[] args) {
         ArrayList<Task> items = new ArrayList<>();
         String input;
@@ -70,9 +87,7 @@ public class MyJournal {
                                 taskName = taskName + currWord + " ";
                             }
                             items.add(new Todo(taskName));
-                            System.out.println("Okay!! I've added the following task:\n"
-                                    + items.get(items.size() - 1) + "\n"
-                                    + "Now you have " + items.size() + " in the list");
+                            System.out.println(taskAddPrint(items));
                             break;
                         case "event":
                             if (!line.hasNext()) {
@@ -89,9 +104,7 @@ public class MyJournal {
                                 time = time + " " + line.next();
                             }
                             items.add(new Event(taskName, time));
-                            System.out.println("Okay!! I've added the following task:\n"
-                                    + items.get(items.size() - 1) + "\n"
-                                    + "Now you have " + items.size() + " in the list");
+                            System.out.println(taskAddPrint(items));
                             break;
                         case "deadline":
                             if (!line.hasNext()) {
@@ -108,9 +121,7 @@ public class MyJournal {
                                 time = time + " " + line.next();
                             }
                             items.add(new Deadline(taskName, time));
-                            System.out.println("Okay!! I've added the following task:\n"
-                                    + items.get(items.size() - 1) + "\n"
-                                    + "Now you have " + items.size() + " in the list");
+                            System.out.println(taskAddPrint(items));
                             break;
                         default:
                             throw new InvalidTypeException("OOPS!!! Please put either todo/event/deadline!");
