@@ -1,5 +1,6 @@
 Hello! I'm Grace
 How can I help you?
+OOPS! The description of todo cannot be empty.
 Added the task! :)
 [T][] borrow book
 Jiayou! you have 1 tasks in the list.
@@ -28,3 +29,5 @@ Do these soon:
 1. [T][X] borrow book
 2. [D][X] return book (by: Sunday)
 3. [E][] project meeting (at: Mon 2-4pm)
+OOPS!! I'm sorry, but I don't know what that means ;-(
+OOPS!! I'm sorry, but I don't know what that means ;-(
