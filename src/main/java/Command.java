@@ -1,5 +1,14 @@
 import java.util.Scanner;
 
+enum Action {
+  GREET, BYE, 
+  LIST, DONE, DELETE, 
+  TODO, DEADLINE, EVENT, 
+  ECHO, ADD,             // only for testing
+  ALL, REMOVE, CREATE,   // easily mistaken commands
+  UNKNOWN
+}
+
 public class Command {
   protected static final String SPLIT_LINE = "\n" +
     "\t--------------------------------------------------\n";
@@ -65,7 +74,7 @@ public class Command {
 
   /**
    * Run a command line as inputted.
-   * @param  cmd            the input com
+   * @param  cmd            the input command
    * @return true           if there no exception is thrown
    *         false          if an exception is thrown
    * @throws BloomException the exceptions related to the bot
@@ -73,12 +82,13 @@ public class Command {
   public boolean run(String cmd) throws BloomException {
     System.out.println(SPLIT_LINE);
     String[] line = cmd.split(" ");
-    switch (line[0].toUpperCase()) {
-      case "GREET": greet(); break;
-      case "BYE": exit(); break;
-      case "LIST": list(); break;
-      case "DONE":
-      case "DELETE":
+    Action action = get(cmd);
+    switch (action) {
+      case GREET: greet(); break;
+      case BYE: exit(); break;
+      case LIST: list(); break;
+      case DONE:
+      case DELETE:
         try {
           if (line[0].equalsIgnoreCase("DONE"))
             done(Integer.parseInt(line[1]));
@@ -87,7 +97,7 @@ public class Command {
         } catch (IndexOutOfBoundsException e) {
           throw new IncompleteCommandBloomException("INDEX");
         }
-      case "TODO":
+      case TODO:
         try {
           int i = cmd.indexOf(" ") + 1;
           if (i == 0) throw new IncompleteCommandBloomException("INFO");
@@ -96,8 +106,8 @@ public class Command {
         } catch (StringIndexOutOfBoundsException e) {
           throw new IncompleteCommandBloomException("INFO");
         }
-      case "DEADLINE":
-      case "EVENT":
+      case DEADLINE:
+      case EVENT:
         try {
           int i = cmd.indexOf(" ") + 1;
           if (i == 0) throw new IncompleteCommandBloomException("INFO");
@@ -110,20 +120,43 @@ public class Command {
         } catch (StringIndexOutOfBoundsException e) {
           throw new IncompleteCommandBloomException("INFO");
         }
-      case "ECHO":
-      case "ADD":
+      case ECHO:
+      case ADD:
         String str = cmd.substring(cmd.indexOf(" ") + 1);
         if (line[0].equalsIgnoreCase("ECHO"))
           echo(str);
         else add(str);
         break;
-      case "ALL":
-      case "REMOVE":
-      case "CREATE": throw new WrongCommandBloomException(line[0]);
+      case ALL:
+      case REMOVE:
+      case CREATE: throw new WrongCommandBloomException(line[0]);
       default: throw new InvalidCommandBloomException("");
     }
     System.out.println(SPLIT_LINE);
     return !cmd.equals("bye");
+  }
+
+  /**
+   * Get action of the input command.
+   * @param  cmd the input command
+   * @return     corresponding Action
+   */
+  public Action get(String cmd) {
+    String[] line = cmd.split(" ");
+    switch (line[0].toUpperCase()) {
+      case "GREET": return Action.GREET;
+      case "BYE": return Action.BYE;
+      case "LIST": return Action.LIST;
+      case "DONE": return Action.DONE;
+      case "DELETE": return Action.DELETE;
+      case "EVENT": return Action.EVENT;
+      case "ECHO": return Action.ECHO;
+      case "ADD": return Action.ADD;
+      case "ALL": return Action.ALL;
+      case "REMOVE": return Action.REMOVE;
+      case "CREATE": return Action.CREATE;
+      default: return Action.UNKNOWN;
+    }
   }
 
   /**
