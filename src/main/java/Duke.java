@@ -13,6 +13,9 @@ public class Duke {
 
     private static final String SAVE_FILENAME = "dukeSave.txt";
 
+    // | is a special character that has to be escaped.
+    private static final String SAVE_SEPARATOR = " ~ ";
+
     // Enums for Duke chatbot descriptors
     protected enum Descriptors {
         AT("at"),
@@ -82,17 +85,16 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
         // Initialize ArrayList for Task objects.
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks;
 
-//        try {
-//            saveTasksToData(tasks);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        // Read tasks from save file.
         try {
-            readTasksFromData();
+            tasks = readTasksFromData();
         } catch (DukeException dukeException) {
-            dukeException.printStackTrace();
+            System.out.println(dukeException);
+
+            // If failed to read tasks from save, initialize a new Task ArrayList.
+            tasks = new ArrayList<>();
         }
 
         // Scans user inputs and prints corresponding outputs until a "Bye" input is received.
@@ -124,10 +126,77 @@ public class Duke {
                     // Add a task to tasks.
                     addTask(tasks, userInput, '/');
                 }
+
+                // Save tasks to save file after each change.
+                saveTasksToData(tasks);
             } catch (DukeException dukeException) {
                 System.out.println(dukeException);
             }
         }
+    }
+
+    private static String toSaveFormat(Task task) {
+        // Initialize StringBuilder.
+        StringBuilder stringBuilder = new StringBuilder();
+
+        // Get task type, done status and time of task.
+        String taskType = task.getTaskType();
+        int done = task.isDone ? 1 : 0;
+        String time = task.getTime();
+
+        // Build corresponding save string from task.
+        stringBuilder.append(taskType).append(SAVE_SEPARATOR);
+        stringBuilder.append(done).append(SAVE_SEPARATOR);
+        stringBuilder.append(task.description);
+
+        // Deadline and Event tasks have time, so they are also appended via stringBuilder.
+        if (taskType.equals("D") || taskType.equals("E")) {
+            stringBuilder.append(SAVE_SEPARATOR);
+            stringBuilder.append(time);
+        }
+
+        return stringBuilder.toString();
+    }
+
+    private static Task parseSaveFormat(String save) throws DukeException {
+        // Split save string by the save separator.
+        String[] saveSplit = save.split(SAVE_SEPARATOR);
+
+        try {
+            // Get the task type, done status, description of task from saveSplit.
+            String taskType = saveSplit[0];
+            // Save would be corrupt if done status cannot be parsed to int.
+            int isDone = Integer.parseInt(saveSplit[1]);
+            String description = saveSplit[2];
+
+            // Create corresponding Task object.
+            // Save would be corrupt if Deadline and Event tasks do not have time.
+            Task task;
+            switch (taskType) {
+            case "T":
+                task = new Todo(description);
+                break;
+            case "D":
+                String by = saveSplit[3];
+                task = new Deadline(description, by);
+                break;
+            case "E":
+                String at = saveSplit[3];
+                task = new Event(description, at);
+                break;
+            default:
+                throw new DukeException("Save files corrupted. Failed to read tasks from save file.");
+            }
+
+            if (isDone == 1) {
+                task.markAsDone();
+            }
+
+            return task;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("Save files corrupted. Failed to read tasks from save file.");
+        }
+
     }
 
     private static ArrayList<Task> readTasksFromData() throws DukeException {
@@ -150,16 +219,20 @@ public class Duke {
             // Read from save file.
             List<String> rawTasks = Files.readAllLines(absolutePathToSaveFile);
 
-            System.out.println(rawTasks);
+            // Parse each line into a Task object and save to tasks.
+            for (int i = 0; i < rawTasks.size(); i++) {
+                Task task = parseSaveFormat(rawTasks.get(i));
+                tasks.add(task);
+            }
         } catch (IOException ioException) {
             // Failure to read from save file.
-            throw new DukeException("Failed to read from save file.");
+            throw new DukeException("Failed to read tasks from save file.");
         }
 
         return tasks;
     }
 
-    private static void saveTasksToData(ArrayList<Task> tasks) throws IOException {
+    private static void saveTasksToData(ArrayList<Task> tasks) throws DukeException {
 
         // Get the absolute path to data subdirectory of project directory.
         String cwd = System.getProperty("user.dir");
@@ -168,42 +241,47 @@ public class Duke {
         // Check if data directory exists.
         boolean isDirectoryExist = Files.exists(absolutePathToDataDir);
 
-        // If data directory does not exist, create one.
-        if (!isDirectoryExist) {
-            Files.createDirectory(absolutePathToDataDir);
-            System.out.println(Files.exists(absolutePathToDataDir));
-        }
-
-        // Get absolute path to save file.
-        Path absolutePathToSaveFile = Paths.get(absolutePathToDataDir.toString(), SAVE_FILENAME);
-
-        // Check if file exists.
-        boolean isSaveFileExist = Files.exists(absolutePathToSaveFile);
-
-        // If file does not exist, create it.
-        if (!isSaveFileExist) {
-            Files.createFile(absolutePathToSaveFile);
-        }
-
-        if (tasks.size() == 0) {
-            return;
-        }
-
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            stringBuilder.append(tasks.get(i));
-            if (i < (tasks.size() - 1)) {
-                stringBuilder.append("\n");;
+        try {
+            // If data directory does not exist, create one.
+            if (!isDirectoryExist) {
+                Files.createDirectory(absolutePathToDataDir);
             }
 
+            // Get absolute path to save file.
+            Path absolutePathToSaveFile = Paths.get(absolutePathToDataDir.toString(), SAVE_FILENAME);
+
+            // Check if file exists.
+            boolean isSaveFileExist = Files.exists(absolutePathToSaveFile);
+
+            // If file does not exist, create it.
+            if (!isSaveFileExist) {
+                Files.createFile(absolutePathToSaveFile);
+            }
+
+            // Stop if there are no tasks to be saved.
+            if (tasks.size() == 0) {
+                return;
+            }
+
+            // Generate string to be saved to save file.
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < tasks.size(); i++) {
+                String save = toSaveFormat(tasks.get(i));
+                stringBuilder.append(save);
+                // If last task in tasks, no need to append newline.
+                if (i < (tasks.size() - 1)) {
+                    stringBuilder.append("\n");
+                    ;
+                }
+            }
+            String textToSave = stringBuilder.toString();
+
+            // Write to save file.
+            byte[] textToSaveToBytes = textToSave.getBytes();
+            Files.write(absolutePathToSaveFile, textToSaveToBytes);
+        } catch (IOException ioException) {
+            throw new DukeException("Failed to save tasks");
         }
-        String textToSave = stringBuilder.toString();
-
-        System.out.println(textToSave);
-
-        byte[] textToSaveToBytes = textToSave.getBytes();
-
-        Files.write(absolutePathToSaveFile, textToSaveToBytes);
     }
 
     private static int findIndex(String s, Character c) {
@@ -306,14 +384,14 @@ public class Duke {
         // Index of first character following space after descriptor.
         int indexAfterDescriptorSpace = separatorIdx + descriptor.getLength() + 2;
 
-        // User's input after descriptor.
-        String descriptorDescription = userDescription.substring(indexAfterDescriptorSpace);
+        // User's time input.
+        String time = userDescription.substring(indexAfterDescriptorSpace);
 
-        // User's task description.
-        String commandDescription = userDescription.substring(0, separatorIdx);
+        // User's task description. Decrement by 1 as there is a space between task description and separator
+        String commandDescription = userDescription.substring(0, separatorIdx - 1);
 
-        // Returns a String array with the task description and user input after descriptor.
-        return new String[] {commandDescription, descriptorDescription};
+        // Returns a String array with the task description and user time input.
+        return new String[] {commandDescription, time};
     }
 
     private static void addTask(ArrayList<Task> tasks, String userInput, Character separator) throws DukeException {
@@ -340,14 +418,14 @@ public class Duke {
             // Adds to-do task to tasks.
             tasks.add(new Todo(description));
         } else if (userCommand.equals(Commands.DEADLINE.getCommand())) {
-            // Parses description into task description and descriptor description.
+            // Parses description into task description and time.
             String[] descriptions =
                     parseUserDescriptionInput(description, Descriptors.BY, separator, Commands.DEADLINE);
 
             // Adds Deadline task to tasks.
             tasks.add(new Deadline(descriptions[0], descriptions[1]));
         } else {
-            // Parses description into task description and descriptor description.
+            // Parses description into task description and time.
             String[] descriptions =
                     parseUserDescriptionInput(description, Descriptors.AT, separator, Commands.EVENT);
 
