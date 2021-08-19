@@ -13,6 +13,7 @@ public class Event extends Task{
      */
     public Event(String description, String at) {
         super(description);
+        this.category = TaskType.event;
         this.at = at;
     }
 

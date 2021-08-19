@@ -5,9 +5,13 @@ import java.util.ArrayList;
  */
 public class Task {
 
+    enum TaskType {
+        todo, deadline, event
+    }
     private final static ArrayList<Task> taskList = new ArrayList<>();
     private final String description;
     private boolean completed;
+    protected TaskType category;
 
     /**
      * Add a task to the task list
