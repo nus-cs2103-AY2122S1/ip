@@ -224,24 +224,25 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        printMessage("Hello! I'm Duke\n\tWhat can I do for you?");
+    }
 
+    public static void main(String[] args) {
+        greet();
         Scanner scanner = new Scanner(System.in);
         Duke duke = new Duke();
 
-        printMessage("Hello! I'm Duke\n\tWhat can I do for you?");
-        String message;
         boolean isActive = true;
         while (isActive) {
-            message = scanner.nextLine().trim();
             try {
-                isActive = duke.handleInput(message);
+                isActive = duke.handleInput(scanner.nextLine().trim());
             } catch (DukeException e) {
                 printMessage(e.getMessage());
             }
