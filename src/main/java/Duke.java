@@ -59,6 +59,11 @@ public class Duke {
                     System.out.println(lineBreak + "\n");
                     continue;
                 }
+                if (group[0].equals(taskTodo) && group.length == 1) {
+                    System.out.println(" OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println(lineBreak + "\n");
+                    continue;
+                }
 
                 // Case Deadline
                 if (group[0].equals(taskDdl) && input.contains(" /by ")) {
@@ -102,8 +107,15 @@ public class Duke {
             }
 
             // exit
-            System.out.println("     Bye! See you next time! :)" + "\n" + lineBreak + "\n");
-            break;
+            if (input.equals(end)) {
+                System.out.println("     Bye! See you next time! :)" + "\n" + lineBreak + "\n");
+                break;
+            }
+
+            // other inputs
+            System.out.println(" OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println(lineBreak + "\n");
+            continue;
         }
     }
 }
