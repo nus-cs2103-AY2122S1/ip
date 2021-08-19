@@ -42,7 +42,7 @@ public class TaskList {
                         return null;
                     });
         this.printSize();
-        this.saveList();
+        Storage.saveList(tasks);
     }
 
 
@@ -59,7 +59,7 @@ public class TaskList {
                     ? Ui.OUTPUT_DISPLAY + "sugoi! Duke-san marked this task as done!"
                     : Ui.OUTPUT_DISPLAY + "Duke-san marked this task as not done!");
             System.out.println(Ui.OUTPUT_SPACES + tasks.get(index - 1));
-            saveList();
+            Storage.saveList(tasks);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There's no task at index " + index + "!!");
         }
@@ -77,7 +77,7 @@ public class TaskList {
             System.out.println(Ui.OUTPUT_DISPLAY + "Noted. Duke-san removed this task:");
             System.out.println(Ui.OUTPUT_SPACES + removed);
             this.printSize();
-            saveList();
+            Storage.saveList(tasks);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There's no task at index " + index + "!!");
         }
@@ -95,41 +95,5 @@ public class TaskList {
                 System.out.println(Ui.OUTPUT_SPACES + (i + 1) + "." + tasks.get(i));
             }
         }
-    }
-
-    private static String FILE_LOCATION = "C:\\Users\\kohjx\\projects\\ip\\data\\TaskList.txt";
-    private void saveList() {
-        try {
-            FileWriter writer = new FileWriter(TaskList.FILE_LOCATION, false);
-            for (Task task : tasks) {
-                writer.write(task.saveString());
-                writer.write("\r\n");
-            }
-            writer.close();
-            System.out.println(Ui.OUTPUT_DISPLAY + "Duke-san saved your list UwU");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static TaskList loadList() {
-        try {
-            FileReader reader = new FileReader(TaskList.FILE_LOCATION);
-            File file = new File(TaskList.FILE_LOCATION);
-            Scanner text = new Scanner(file);
-
-            ArrayList<Task> loaded = new ArrayList<>();
-            while(text.hasNextLine()) {
-                String task = text.nextLine();
-                loaded.add(Task.StringToTask(task));
-            }
-
-            System.out.println("List loaded!");
-            return new TaskList(loaded);
-
-        } catch (IOException e) {
-            return new TaskList();
-        }
-//        catch (//Errors in text file) {}
     }
 }
