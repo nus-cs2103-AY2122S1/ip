@@ -10,6 +10,8 @@ public class Duke {
         taskList = new ArrayList<>();
     }
 
+    public enum TaskType { TODO, DEADLINE, EVENT }
+
     public void chat() {
         String startText = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(startText);
@@ -40,29 +42,15 @@ public class Duke {
                         break;
                     }
                     case "todo": {
-                        String description = getDescription("todo");
-                        ToDo task = new ToDo(description.trim());
-                        taskList.add(task);
-                        String message = "Alright! New task added:\n" + task + getTaskListStatus();
-                        System.out.println(outputTemplate(message));
+                        addTask(TaskType.TODO);
                         break;
                     }
                     case "deadline": {
-                        String description = getDescription("deadline");
-                        String[] parameters = description.split(" /by ");
-                        Deadline task = new Deadline(parameters[0].trim(), parameters[1]);
-                        taskList.add(task);
-                        String message = "Alright! New task added:\n" + task + getTaskListStatus();
-                        System.out.println(outputTemplate(message));
+                        addTask(TaskType.DEADLINE);
                         break;
                     }
                     case "event": {
-                        String description = getDescription("event");
-                        String[] parameters = description.split(" /at ");
-                        Event task = new Event(parameters[0], parameters[1]);
-                        taskList.add(task);
-                        String message = "Alright! New task added:\n" + task + getTaskListStatus();
-                        System.out.println(outputTemplate(message));
+                        addTask(TaskType.EVENT);
                         break;
                     }
                     case "delete": {
@@ -90,6 +78,38 @@ public class Duke {
     private String outputTemplate(String output) {
         String line = "~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~";
         return line + "\n" + output + line;
+    }
+
+    private void addTask(TaskType type) throws DukeException {
+        String messageHeader = "Alright! New task added:\n";
+        switch (type) {
+            case DEADLINE: {
+                String description = getDescription("deadline");
+                String[] parameters = description.split(" /by ");
+                Deadline task = new Deadline(parameters[0].trim(), parameters[1]);
+                taskList.add(task);
+                String message = messageHeader + task + getTaskListStatus();
+                System.out.println(outputTemplate(message));
+                break;
+            }
+            case EVENT: {
+                String description = getDescription("event");
+                String[] parameters = description.split(" /at ");
+                Event task = new Event(parameters[0], parameters[1]);
+                taskList.add(task);
+                String message = messageHeader + task + getTaskListStatus();
+                System.out.println(outputTemplate(message));
+                break;
+            }
+            case TODO: {
+                String description = getDescription("todo");
+                ToDo task = new ToDo(description.trim());
+                taskList.add(task);
+                String message = messageHeader + task + getTaskListStatus();
+                System.out.println(outputTemplate(message));
+                break;
+            }
+        }
     }
 
     private String getDescription(String taskType) throws DukeException {
