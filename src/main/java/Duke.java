@@ -22,6 +22,14 @@ public class Duke {
                 + task);
     }
 
+    private static void deleteTask(int num) {
+        int id = num - 1;
+        Task delete = tasklist.get(id);
+        tasklist.remove(id);
+        fuwwyEcho("Ono, this task got yeeted:\n\t" + delete + "\n\tNow you have "
+                + tasklist.size() + " tasks in the list, Yay!\n");
+    }
+
     private static void taskDone(int n) {
         Task t = tasklist.get(n - 1);
         t.setDone(true);
@@ -57,15 +65,27 @@ public class Duke {
             try {
                 if (command.equals("list")) {
                     String output = "\n";
-                    for (int i = 0; i < tasklist.size(); i++) {
-                        int n = i + 1;
-                        String list = "\t" + n + ". " + tasklist.get(i);
-                        output += list + "\n";
+                    if (tasklist.size() == 0) {
+                        fuwwyEcho("Owo the list is empty boouwu");
+                    } else {
+                        for (int i = 0; i < tasklist.size(); i++) {
+                            int n = i + 1;
+                            String list = "\t" + n + ". " + tasklist.get(i);
+                            output += list + "\n";
+                        }
+                        fuwwyEcho(output);
                     }
-                    fuwwyEcho(output);
                     command = sc.nextLine();
                 } else if (command.startsWith("done")) {
+                    if (command.equals("done")) {
+                        throw new DukeException("OwO incomplete done!\n");
+                    }
                     taskDone(Integer.parseInt(command.split(" ")[1]));
+                } else if (command.startsWith("delete")) {
+                    if (command.equals("delete")) {
+                        throw new DukeException("OwO incomplete delete!\n");
+                    }
+                    deleteTask(Integer.parseInt(command.split(" ")[1]));
                 } else if (command.startsWith("todo")) {
                     if (command.equals("todo")) {
                         throw new DukeException("OwO incomplete todo!\n");
