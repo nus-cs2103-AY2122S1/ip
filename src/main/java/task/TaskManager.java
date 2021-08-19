@@ -114,7 +114,7 @@ public class TaskManager {
     public void loadTasksFromFile() throws DukeIOException {
         List<String> formattedTasks = FileUtils.loadFile(DIR_NAME, FILE_NAME);
         try {
-            for (String formattedTask : formattedTasks) {
+            formattedTasks.forEach(formattedTask -> {
                 String[] contents = formattedTask.split(" \\| ", 4);
                 String taskID = contents[0];
                 String isDone = contents[1];
@@ -126,7 +126,11 @@ public class TaskManager {
                         break;
                     case Deadline.ID:
                         String byTime = contents[3];
-                        Deadline deadline = new Deadline(name, DateTimeUtils.parseDateTime(byTime), isDone.equals("0"));
+                        Deadline deadline = new Deadline(
+                            name,
+                            DateTimeUtils.parseDateTime(byTime),
+                            isDone.equals("0")
+                        );
                         addTask(deadline);
                         break;
                     case Event.ID:
@@ -136,12 +140,18 @@ public class TaskManager {
                         String atDate = dateTimes[0];
                         String startTime = times[0];
                         String endTime = times[1];
-                        EventDateTime eventDateTime = new EventDateTime(DateTimeUtils.parseDate(atDate), DateTimeUtils.parseTime(startTime), DateTimeUtils.parseTime(endTime));
+                        EventDateTime eventDateTime = new EventDateTime(
+                            DateTimeUtils.parseDate(atDate),
+                            DateTimeUtils.parseTime(startTime),
+                            DateTimeUtils.parseTime(endTime)
+                        );
                         Event event = new Event(name, eventDateTime, isDone.equals("0"));
                         addTask(event);
                         break;
+                    default:
+                        break;
                 }
-            }
+            });
         } catch (Exception e) {
             throw new DukeIOException("☹ OOPS!!! Load tasks from file error.");
         }

@@ -6,7 +6,8 @@ import util.DateTimeUtils;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EventTest {
 
@@ -30,7 +31,7 @@ class EventTest {
         LocalTime endTime = DateTimeUtils.parseTime("15:00");
         EventDateTime eventDateTime = new EventDateTime(atDate, startTime, endTime);
         Event event = new Event("Project meeting", eventDateTime);
-        String[] expected = new String[]{"E", "1", "Project meeting", "2021-08-01 13:00-15:00"};
+        String[] expected = new String[] {"E", "1", "Project meeting", "2021-08-01 13:00-15:00"};
         assertArrayEquals(expected, event.formatTask());
     }
 

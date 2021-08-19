@@ -90,7 +90,7 @@ class TaskManagerTest {
         Deadline deadline = new Deadline("Return book", byDateTime);
         taskManager.addTask(todo);
         taskManager.addTask(deadline);
-        String[] excepted = new String[]{
+        String[] excepted = new String[] {
             "1. [T][ ] Read book",
             "2. [D][ ] Return book (by: Aug 01 2021 01:00 pm)"
         };
@@ -101,7 +101,7 @@ class TaskManagerTest {
     void loadTasksFromFile() throws DukeIOException {
         TaskManager taskManager = new TaskManager();
         taskManager.loadTasksFromFile();
-        String[] excepted = new String[]{
+        String[] excepted = new String[] {
             "1. [T][X] read book",
             "2. [D][X] return book (by: Jun 06 2021 06:00 pm)",
             "3. [T][X] join sports club",

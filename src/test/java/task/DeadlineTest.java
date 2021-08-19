@@ -22,7 +22,7 @@ class DeadlineTest {
     void formatTask() {
         LocalDateTime byDateTime = DateTimeUtils.parseDateTime("2021-08-01 13:00");
         Deadline deadline = new Deadline("Return book", byDateTime);
-        String[] expected = new String[]{"D", "1", "Return book", "2021-08-01 13:00"};
+        String[] expected = new String[] {"D", "1", "Return book", "2021-08-01 13:00"};
         assertArrayEquals(expected, deadline.formatTask());
     }
 
