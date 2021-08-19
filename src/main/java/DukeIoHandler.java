@@ -26,7 +26,7 @@ public class DukeIoHandler {
         } catch (NumberFormatException e) {
             throw new DukeInvalidCommandException("OOPS!!! The task number you type in is not a number.");
         }
-        if (parsedNumber <= 0 || parsedNumber > taskList.size()) {
+        if (parsedNumber < 0 || parsedNumber > taskList.size()) {
             throw new DukeInvalidCommandException("OOPS!!! The task number should be between 0 and " 
                     + taskList.size() + ".");
         }
@@ -88,7 +88,19 @@ public class DukeIoHandler {
         }
         PrintUtil.displayContentBetweenLines(taskList.addTask(new ToDo(parsedInput[1])));
     }
-
+    
+    private void handleDelete(String[] parsedInput) throws DukeInvalidCommandException {
+        if (parsedInput.length < 2) {
+            throw new DukeInvalidCommandException("OOPS!!! Which task do you want to delete?");
+        }
+        int taskIndex = parseTaskIndex(parsedInput[1]);
+        
+        if (taskList.size() == 0) {
+            throw new DukeInvalidCommandException("OOPS!!! The task list is currently empty.");
+        }
+        PrintUtil.displayContentBetweenLines(taskList.delete(taskIndex));
+    }
+    
     private void dukeCommandController(String[] parsedInput) throws DukeInvalidCommandException {
         switch (parsedInput[0]) {
             case "list":
@@ -105,6 +117,9 @@ public class DukeIoHandler {
                 break;
             case "todo":
                 handleTodo(parsedInput);
+                break;
+            case "delete":
+                handleDelete(parsedInput);
                 break;
             default:
                 throw new DukeInvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");

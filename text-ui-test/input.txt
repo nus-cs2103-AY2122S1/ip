@@ -1,5 +1,6 @@
 done lol
 done -1
+delete 1
 todo read book
 deadline
 event
@@ -12,6 +13,8 @@ todo
 todo join sports club
 done 1
 done 4
+delete 
+delete 2
 todo borrow book
 list
 deadline return book /by Sunday
