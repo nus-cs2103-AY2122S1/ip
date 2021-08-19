@@ -9,7 +9,7 @@ public abstract class Task {
     /** Stores the task. */
     private String task;
     /** Stores if the task is done. */
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor for Task.
@@ -18,7 +18,18 @@ public abstract class Task {
      */
     Task(String task) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
+    }
+
+    /**
+     * Constructor for Task
+     *
+     * @param task Task to be stored
+     * @param done Whether the task is done
+     */
+    Task(String task, boolean done) {
+        this.task = task;
+        this.isDone = done;
     }
 
     /**
@@ -29,15 +40,23 @@ public abstract class Task {
      * @return if update is successful.
      */
     public boolean markDone() {
-        if (done)
+        if (isDone)
             return false;
-        done = true;
+        isDone = true;
         return true;
     }
 
-    /** Checks if task is done or not. */
-    public boolean isDone() {
-        return done;
+    /**
+     * Abstract method for the task to return an output to save to the txt file.
+     * Format is as follow: <Type(T/D/E)> <Description> <Done> <DateTime/Deadtime if applicable>
+     *
+     * @return string to save the txt file
+     */
+    public abstract String saveOutput();
+
+    /** Getter for isDone. */
+    public boolean getIsDone() {
+        return isDone;
     }
 
     /**
@@ -51,6 +70,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return (done ? "[X] " : "[ ] ") + task.toString();
+        return (isDone ? "[X] " : "[ ] ") + task.toString();
     }
 }

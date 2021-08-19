@@ -1,3 +1,10 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,8 +15,8 @@ import java.util.stream.IntStream;
  * Main file for chatbot.
  *
  * @author marcuspeh
- * @version A-Enums
- * @since 15 Aug 2021
+ * @version Level-7
+ * @since 19 Aug 2021
  */
 
 public class Duke {
@@ -17,6 +24,8 @@ public class Duke {
     private Scanner sc;
     /** Stores all the task. */
     private List<Task> taskList;
+    /** File name for the storage. */
+    private static final String LOCATION = "./data/duke.txt";
 
     /**
      * Constructor for Duke.
@@ -31,7 +40,7 @@ public class Duke {
      */
     private void chat() {
         greetMessage();
-
+        importTask();
         String message;
         while (true) {
             message = sc.nextLine().strip();
@@ -44,6 +53,7 @@ public class Duke {
             else if (command.equals(Keyword.DONE.getKeyword()))
                 try {
                     markDone(Integer.parseInt(message.substring(Keyword.DONE.length() + 1)));
+                    exportTask();
                 } catch (NumberFormatException e) {
                     doneErrorMessage();
                 } catch (IndexOutOfBoundsException e) {
@@ -53,6 +63,7 @@ public class Duke {
                 try {
                     String[] details = message.split(Keyword.DEADLINE.getSeparator());
                     addDeadline(details[0].substring(Keyword.DEADLINE.length() + 1), details[1]);
+                    exportTask();
                 } catch (IndexOutOfBoundsException e) {
                     deadlineErrorMessage();
                 }
@@ -60,18 +71,21 @@ public class Duke {
                 try {
                     String[] details = message.split(Keyword.EVENTS.getSeparator());
                     addEvent(details[0].substring(Keyword.EVENTS.length() + 1), details[1]);
+                    exportTask();
                 } catch (IndexOutOfBoundsException e) {
                     eventErrorMessage();
                 }
             else if (command.equals(Keyword.TODOS.getKeyword()))
                 try {
                     addTodo(message.substring(Keyword.TODOS.length() + 1));
+                    exportTask();
                 } catch (IndexOutOfBoundsException e) {
                     todoErrorMessage();
                 }
             else if (command.equals(Keyword.DELETE.getKeyword()))
                 try {
                     deleteTask(Integer.parseInt(message.substring(Keyword.DELETE.length() + 1)));
+                    exportTask();
                 } catch (NumberFormatException e) {
                     deleteErrorMessage();
                 } catch (IndexOutOfBoundsException e) {
@@ -165,6 +179,61 @@ public class Duke {
         printMessage("Noted. I've removed this task:",
                 task.toString(),
                 String.format("Now you have %o task(s).", taskList.size()));
+    }
+
+    /**
+     * Export the task in list to a txt file in ./data
+     */
+    private void exportTask() {
+        try {
+            File file = new File(LOCATION);
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+
+            FileWriter fileWrite = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
+            taskList.stream()
+                    .forEach(task -> {
+                        try {
+                            bufferedWriter.write(task.saveOutput());
+                            bufferedWriter.newLine();
+                        } catch (IOException e) {
+                            printMessage(String.format("Unable to save %s", task.toString()));
+                        }
+                    });
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            printMessage("Unable to save task.");
+        }
+    }
+
+    /**
+     * Loads the txt file containing information on the task.
+     */
+    private void importTask() {
+        File file = new File(LOCATION);
+        try {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            bufferedReader.lines()
+                    .forEach(task -> {
+                        String[] taskData = task.split(" \\| ");
+                        if (taskData.length == 3 || taskData.length == 4) {
+                            if (taskData[0].equals(Keyword.DEADLINE.getSaveWord())) {
+                                taskList.add(new Deadlines(taskData[1], taskData[3],
+                                        taskData[2].equals("1") ? true : false));
+                            } else if (taskData[0].equals(Keyword.EVENTS.getSaveWord())) {
+                                taskList.add(new Events(taskData[1], taskData[3],
+                                        taskData[2].equals("1") ? true : false));
+                            } else if (taskData[0].equals(Keyword.TODOS.getSaveWord())) {
+                                taskList.add(new ToDos(taskData[1],
+                                        taskData[2].equals("1") ? true : false));
+                            }
+                        }
+                    });
+        } catch (FileNotFoundException e) {
+            printMessage("No stored task found.");
+        }
     }
 
     /**
