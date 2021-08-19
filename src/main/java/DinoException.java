@@ -22,6 +22,12 @@ class TaskNotCategorizedException extends DinoException {
     }
 }
 
+class EmptyListException extends DinoException {
+    public EmptyListException() {
+        super("😐 You don't have any task in your list~");
+    }
+}
+
 class InvalidIndexException extends DinoException {
     public InvalidIndexException() {
         super("😮 Please enter a valid task index!");
@@ -39,6 +45,14 @@ class TimeNotSpecifiedException extends DinoException {
         super("😛 Please specify the time of your " + type + "!");
     }
 }
+
+class NoSuchModeException extends DinoException {
+    public NoSuchModeException() {
+        super("🤨 Please enter a valid mode!\n" +
+                "You can enter either 'echo' or 'intelligent'.");
+    }
+}
+
 
 /*
 class TaskListFullException extends DinoException {

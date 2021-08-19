@@ -4,17 +4,17 @@ import java.util.List;
 public class Dino {
 
     private final List<Task> taskList = new ArrayList<>();
-    private Mode mode;
-    enum Mode {ECHO, INTELLIGENT}
+    private String mode;
     enum TaskType {TODO, DEADLINE, EVENT}
 
     public Dino() {
-        this.mode = Mode.INTELLIGENT;
+        this.mode = "intelligent";
     }
 
     public void greeting() {
        System.out.println("Hello! I'm dino, your cute dinosaur bot.\n"
-                + "Anything I can do for you?");
+                + "I can help you manage tasks!\n"
+                + "But if you just wanna play around with me, type 'echo' to enter the ECHO mode~\n");
     }
 
     public void farewell() {
@@ -26,30 +26,22 @@ public class Dino {
         System.out.println(input);
     }
 
-    public void switchMode(){
-        Mode mode = this.mode;
-        switch (mode) {
-            case INTELLIGENT:
-                this.mode = Mode.ECHO;
-                break;
-            case ECHO:
-                this.mode = Mode.INTELLIGENT;
-                break;
-        }
+    public void setEcho() {
+        this.mode = "echo";
+        System.out.println("You are now in ECHO mode.\n"
+                + "Type in any command to continue!");
     }
 
-    public Mode getMode() {
+    public String getMode() {
         return this.mode;
     }
 
-
     public void readCommand(String cmd) {
-        if (cmd.equals("bye")) {
-            this.farewell();
-        } else if (cmd.equals("list")) {
-            this.printTaskList();
-        } else {
-            try {
+        try {
+            if (cmd.equals("list")) {
+                if (taskList.size() == 0) throw new EmptyListException();
+                else this.printTaskList();
+            } else {
                 String firstWord = Tool.getFirstWord(cmd);
                 if (firstWord.equals("done") || firstWord.equals("delete")) {
                     int index = Tool.getIndex(cmd, firstWord);
@@ -57,9 +49,9 @@ public class Dino {
                 } else {
                     this.addTask(cmd);
                 }
-            } catch (DinoException e) {
-                System.out.println(e.getMessage());
             }
+        } catch (DinoException e) {
+            System.out.println(e.getMessage());
         }
     }
 
