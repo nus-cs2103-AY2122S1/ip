@@ -15,30 +15,41 @@ public class TaskManager {
     private void listen() {
         while (commandInput.hasNextLine()) {
             String command = commandInput.nextLine();
-            if (command.equalsIgnoreCase("bye")) {
-                Response.exitResponse();
-                break;
-            } else if (command.equalsIgnoreCase("list")) {
-                this.list();
-            } else if (Pattern.compile("done\\s\\d+").matcher(command.toLowerCase()).matches()) {
-                this.markTaskDone(command.substring(5));
-            } else if (Pattern.compile("(t|T)(o|O)(d|D)(o|O)\\s.+").matcher(command).matches()) {
-                this.addTodo(command);
-            } else if (Pattern.compile("(d|D)(e|E)(a|A)(d|D)(l|L)(i|I)(n|N)(e|E)\\s.+( /by ).+").matcher(command).matches()) {
-                this.addDeadline(command);
-            } else if (Pattern.compile("(e|E)(v|V)(e|E)(n|N)(t|T)\\s.+( /at ).+").matcher(command).matches()) {
-                this.addEvent(command);
-            } else {
-                this.commandFail();
+            try {
+                if (command.equalsIgnoreCase("bye")) {
+                    Response.exitResponse();
+                    break;
+                } else if (command.equalsIgnoreCase("list")) {
+                    this.list();
+                } else if (Pattern.compile("done\\s\\d+").matcher(command.toLowerCase()).matches()) {
+                    this.markTaskDone(command.substring(5));
+                } else if (Pattern.compile("(t|T)(o|O)(d|D)(o|O).*").matcher(command).matches()) {
+                    this.addTodo(command);
+                } else if (Pattern.compile("(d|D)(e|E)(a|A)(d|D)(l|L)(i|I)(n|N)(e|E)\\s.+( /by ).+").matcher(command).matches()) {
+                    this.addDeadline(command);
+                } else if (Pattern.compile("(e|E)(v|V)(e|E)(n|N)(t|T)\\s.+( /at ).+").matcher(command).matches()) {
+                    this.addEvent(command);
+                } else {
+                    this.commandFail();
+                }
+            } catch (DukeException ex) {
+                Response.drawLine();
+                System.out.println(ex.getMessage());
+                Response.drawLine();
             }
         }
         commandInput.close();
     }
 
-    private void addTodo(String description) {
-        Todo newTodo = new Todo(description.substring(5));
-        tasks.add(newTodo);
-        this.added();
+    private void addTodo(String description) throws DukeException{
+        String test = description.substring(4);
+        if (Pattern.compile("\\s.+").matcher(test).matches()) {
+            Todo newTodo = new Todo(description.substring(5));
+            tasks.add(newTodo);
+            this.added();
+        } else {
+            throw new DukeException("There appears to be a typo in your Todo command.\nPlease try again.");
+        }
     }
 
     private void addDeadline(String description) {
@@ -82,7 +93,7 @@ public class TaskManager {
         Response.drawLine();
     }
 
-    private void commandFail() {
-        Response.respond("I didn't get that.\nPlease try again.");
+    private void commandFail() throws DukeException {
+        throw new DukeException("I didn't get that. Please try again.");
     }
 }
