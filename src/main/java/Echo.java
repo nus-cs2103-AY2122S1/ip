@@ -5,23 +5,23 @@ public class Echo extends Responses{
         if (uResponse.startsWith("todo")) {
             String description = uResponse.replaceAll("todo", "");
             if (description.trim().isEmpty()) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             t = new Todo(description);
         } else if (uResponse.startsWith("deadline")) {
             String[] split = uResponse.replaceAll("deadline", "").split("/by");
             if (split[0].trim().isEmpty() || split.length == 1 || split[1].trim().isEmpty()) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
             }
             t = new Deadline(split[0], split[1]);
         } else if (uResponse.startsWith("event")) {
             String[] split = uResponse.replaceAll("event", "").split("/at");
             if (split[0].trim().isEmpty() || split.length == 1 || split[1].trim().isEmpty()) {
-                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                throw new DukeException("OOPS!!! The description of an event cannot be empty.");
             }
             t = new Event(split[0], split[1]);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         Responses.list.add(t);
         return t.toString();
