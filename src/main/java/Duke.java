@@ -28,6 +28,14 @@ public class Duke {
                 doneTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(doneTask);
+            } else if (userInput.startsWith("delete")) {
+                String[] split = userInput.split(" ");
+                int index = Integer.parseInt(split[1]);
+                Task deleteTask = tasks.get(index - 1);
+                tasks.remove(index - 1);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(deleteTask);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             }
             else if (userInput.startsWith("todo")) {
                 if (userInput.equals("todo")) {
