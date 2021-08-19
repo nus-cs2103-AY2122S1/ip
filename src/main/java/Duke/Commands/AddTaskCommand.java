@@ -9,8 +9,7 @@ import java.util.Set;
 
 class AddTaskCommand extends Command {
     private static final Set<String> KEYWORDS = new HashSet<>(List.of("todo", "deadline", "event"));
-    private static final String ADD_TASK_SUCCESS_MESSAGE = "I've added this task:\n\t%s\n"
-            + "Now you have %d tasks in the list.";
+    private static final String ADD_TASK_SUCCESS_MESSAGE = "I've added this task:\n\t%s\n" + TASKS_COUNT_MESSAGE;
     private static final String DEADLINE_BY_REGEX = "\\s+/by\\s+";
     private static final String EVENT_AT_REGEX = "\\s+/at\\s+";
 

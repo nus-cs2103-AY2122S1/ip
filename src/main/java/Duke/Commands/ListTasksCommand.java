@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 class ListTasksCommand extends Command {
-    private static final Set<String> KEYWORDS = new HashSet<>(List.of("list"));
+    private static final Set<String> KEYWORDS = new HashSet<>(List.of("list", "ls"));
     private static final String HELP_MESSAGE = "Here are the tasks in your list:\n%s";
 
     @Override

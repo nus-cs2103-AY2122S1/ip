@@ -20,6 +20,12 @@ public class TaskList {
         }
     }
 
+    public Task remove(int taskIndex) throws InvalidTaskException {
+       Task task = this.get(taskIndex);
+       this.list.remove(task);
+       return task;
+    }
+
     public int size() {
        return this.list.size();
     }
