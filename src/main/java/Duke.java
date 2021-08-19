@@ -9,7 +9,7 @@ public class Duke {
         ArrayList<Task> taskList = new ArrayList<>();
 
         String line = "------------------------------------------------------------------------------" +
-                        "---------------------------------------------\n\n";
+                        "-------------------------------\n\n";
         // greeting
         System.out.print(
                 line +
