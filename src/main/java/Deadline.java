@@ -1,3 +1,9 @@
+/**
+ *
+ * @author Pawandeep Singh
+ * @version Level-3
+ *
+ * */
 public class Deadline extends Task{
     private String deadline;
 

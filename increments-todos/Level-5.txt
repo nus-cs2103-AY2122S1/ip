@@ -1,0 +1,36 @@
+Level 5. Handle Errors
+Teach Duke to deal with errors such as incorrect inputs entered by the user.
+
+
+Example:
+
+todo
+    ____________________________________________________________
+     ☹ OOPS!!! The description of a todo cannot be empty.
+    ____________________________________________________________
+
+blah
+    ____________________________________________________________
+     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+    ____________________________________________________________
+ When implementing this feature, you are also recommended to implement the following extension:
+
+Extension: A-Exceptions
+
+A-Exceptions
+↳ Use Exceptions to handle errors
+
+Use exceptions to handle errors. For example, define a class DukeException to represent exceptions specific to Duke.
+
+Minimal: handle at least the two types of errors shown in the example above.
+Stretch goal: handle all possible errors in the current version. As you evolve Duke, continue to handle errors related to the new features added.
+
+Tasks to achieve level-5:
+
+1. Create GnosisException Class: - Done
+    - possible exceptions:
+        - no task specified - Done
+        - no specified command found - Done
+        - task index not found (-1, or more than list size) - Done
+        - for deadline -> deadline not specified - done
+        - for event -> schedule not specified - done

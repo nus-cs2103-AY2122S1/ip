@@ -1,3 +1,8 @@
+/**
+ * @author Pawandeep Singh
+ * @version Level-3
+ *
+ * */
 public class Event extends Task{
     private String schedule;
 
