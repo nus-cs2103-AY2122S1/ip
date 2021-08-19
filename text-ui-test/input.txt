@@ -1,0 +1,11 @@
+list
+done 1
+todo write code
+deadline have lunch
+deadline have dinner /by 7pm
+event presentation /at 2-4am
+list
+done 2
+delete 3
+list
+bye
