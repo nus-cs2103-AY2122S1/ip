@@ -5,3 +5,35 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Duke: What can I help you with?
+Duke: I've added the following task:
+    [T][ ] Read lecture notes
+You have 1 task(s) in the list.
+
+Duke: I've added the following task:
+    [D][ ] Return book (by: Monday)
+You have 2 task(s) in the list.
+
+Duke: I've added the following task:
+    [E][ ] Dinner with friends (at: Tue, 7pm)
+You have 3 task(s) in the list.
+
+Duke: Your current task(s):
+1. [T][ ] Read lecture notes
+2. [D][ ] Return book (by: Monday)
+3. [E][ ] Dinner with friends (at: Tue, 7pm)
+
+Duke: Marked task 1 to done.
+Duke: Your current task(s):
+1. [T][X] Read lecture notes
+2. [D][ ] Return book (by: Monday)
+3. [E][ ] Dinner with friends (at: Tue, 7pm)
+
+Duke: Marked task 3 to done.
+Duke: Your current task(s):
+1. [T][X] Read lecture notes
+2. [D][ ] Return book (by: Monday)
+3. [E][X] Dinner with friends (at: Tue, 7pm)
+
+Duke: Good bye
+Shutting down Duke...

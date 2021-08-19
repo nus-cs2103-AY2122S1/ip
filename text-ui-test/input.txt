@@ -1,0 +1,9 @@
+todo Read lecture notes
+deadline Return book /by Monday
+event Dinner with friends /at Tue, 7pm
+list
+done 1
+list
+done 3
+list
+bye

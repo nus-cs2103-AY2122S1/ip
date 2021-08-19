@@ -3,9 +3,11 @@ import task.*;
 import java.util.Scanner;
 
 public class Duke {
+    private Scanner sc;
     private TaskList taskList;
 
     public Duke() {
+        sc = new Scanner(System.in);
         taskList = new TaskList();
     }
 
@@ -50,7 +52,6 @@ public class Duke {
     }
 
     public String getResponse() {
-        Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 
