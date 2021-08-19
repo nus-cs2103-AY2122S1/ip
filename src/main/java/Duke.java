@@ -16,7 +16,7 @@ public class Duke {
 
     private static void addTask(Task task) {
         System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task);
+        System.out.println(task);
         if (list.size() == 1) {
             System.out.println("Now you have 1 task in the list.");
         } else {
@@ -49,7 +49,7 @@ public class Duke {
             list.get(index - 1).maskAsDone();
 
             System.out.println("Nice! I've marked this task as done: ");
-            System.out.println("  " + list.get(index - 1));
+            System.out.println(list.get(index - 1));
         } catch (DukeIndexException e) {
             System.out.println(e.getMessage());
         }
