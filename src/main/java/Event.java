@@ -1,6 +1,6 @@
 public class Event extends Task {
 
-    private String taskName;
+    private final String taskName;
     public Event(String taskName) {
         super(taskName);
         this.taskName = taskName;

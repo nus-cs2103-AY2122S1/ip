@@ -1,6 +1,6 @@
 public class Deadline extends Task{
 
-    private String taskName;
+    private final String taskName;
     public Deadline(String taskName) {
         super(taskName);
         this.taskName = taskName;

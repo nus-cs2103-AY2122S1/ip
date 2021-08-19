@@ -99,11 +99,11 @@ public class DukeCommandManager {
      * Print all currently available tasks in Duke
      */
     private void respondList() {
-        String output = "Here is the list of all tasks: \n";
+        StringBuilder output = new StringBuilder("Here is the list of all tasks: \n");
         for (int i = 0; i < taskList.size(); i++) {
-            output += (i + 1) + ". " + taskList.get(i) + "\n";
+            output.append(i + 1).append(". ").append(taskList.get(i)).append("\n");
         }
-        respondWith(output);
+        respondWith(output.toString());
     }
 
     /**
