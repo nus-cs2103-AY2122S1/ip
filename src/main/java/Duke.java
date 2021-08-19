@@ -11,7 +11,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         String input;
-        String[] arr = new String[100];
+        Task[] tasks = new Task[100];
         int len = 0;
         while (true) {
             input = scanner.nextLine();
@@ -21,13 +21,23 @@ public class Duke {
                     return;
                 case "list":
                     for (int i = 0; i < len; i++) {
-                        System.out.printf("%d. %s\n", i + 1, arr[i]);
+                        System.out.printf("%d.%s\n", i + 1, tasks[i]);
                     }
                     break;
                 default:
-                    arr[len++] = input;
-                    System.out.println("added: " + input);
+                    if (input.matches("done \\d+")) {
+                        int i = Integer.parseInt(input.substring(5));
+                        System.out.println("Nice! I've marked this task as done:");
+                        Task t = tasks[i - 1];
+                        t.markAsComplete();
+                        System.out.println(t);
+                    } else {
+                        tasks[len++] = new Task(input);
+                        System.out.println("added: " + input);
+                    }
             }
         }
     }
 }
+
+
