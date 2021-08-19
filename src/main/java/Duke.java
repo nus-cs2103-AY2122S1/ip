@@ -72,28 +72,38 @@ public class Duke {
         while (true) {
             response = this.getResponse();
 
-            if (response.equals("list")) {
-                this.printList();
-            } else if (response.equals("bye")) {
-                break;
-            } else if (response.startsWith("done ")) {
-                int index = Integer.parseInt(response.substring(5));
-                this.markDone(index);
-            } else if (response.startsWith("todo ")) {
-                String description = response.substring(5);
-                this.addTodo(description);
-            } else if (response.startsWith("deadline ")) {
-                String[] params = response.substring(9).split(" /by ");
-                String description = params[0];
-                String by = params[1];
-                this.addDeadline(description, by);
-            } else if (response.startsWith("event ")) {
-                String[] params = response.substring(6).split(" /at ");
-                String description = params[0];
-                String at = params[1];
-                this.addEvent(description, at);
-            } else {
-                this.addTodo(response);
+            try {
+                if (response.equals("list")) {
+                    this.printList();
+                } else if (response.equals("bye")) {
+                    break;
+                } else if (response.startsWith("done ")) {
+                    int index = Integer.parseInt(response.substring(5));
+                    this.markDone(index);
+                } else if (response.startsWith("todo ")) {
+                    String description = response.substring(5);
+                    this.addTodo(description);
+                } else if (response.startsWith("deadline ")) {
+                    if (!response.contains(" /by ")) {
+                        throw new DukeException("Invalid format for `deadline` command. '/by' keyword is needed");
+                    }
+                    String[] params = response.substring(9).split(" /by ");
+                    String description = params[0];
+                    String by = params[1];
+                    this.addDeadline(description, by);
+                } else if (response.startsWith("event ")) {
+                    if (!response.contains(" /at ")) {
+                        throw new DukeException("Invalid format for `event` command. '/at' keyword is needed");
+                    }
+                    String[] params = response.substring(6).split(" /at ");
+                    String description = params[0];
+                    String at = params[1];
+                    this.addEvent(description, at);
+                } else {
+                    throw new DukeException("Invalid command: " + response);
+                }
+            } catch (DukeException e) {
+                this.echo(e.getMessage() + "\n");
             }
         }
     }
