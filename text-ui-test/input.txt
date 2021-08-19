@@ -1,0 +1,15 @@
+todo one
+todo two
+deadline three /by Friday
+deadline four /by Saturday
+event five /at Monday 3-5pm
+event six /at Tuesday 1-2am
+list
+done 1
+done 2
+done 3
+done 4
+done 5
+done 6
+list
+bye
