@@ -26,6 +26,18 @@ Now you have 3 tasks in the list.
 > [35mNice! I've marked this task as done:
 [E][X] read book(at: tmr)
 [0m
+> [35mHere are the tasks in your list:
+1. [T][ ] borrow book
+2. [E][X] read book(at: tmr)
+3. [D][ ] return book(by: Friday)
+[0m
+> [35mNoted. I've removed this task:
+  [E][X] read book(at: tmr)
+Now you have 2 tasks in the list.[0m
+> [35mHere are the tasks in your list:
+1. [T][ ] borrow book
+2. [D][ ] return book(by: Friday)
+[0m
 > [31m@_@ OOPS!!! The description of a task cannot be empty.
 [0m
 > [31m@_@ OOPS!!! The description of a task cannot be empty.
@@ -80,6 +92,16 @@ So that I can understand!
 [0m
 > [31m@_@ OOPS!!! Please use the correct format:
   done <index for the task>
+So that I can understand!
+[0m
+> [31m@_@ OOPS!!! Please enter the number within the range of the list!
+[0m
+> [31m@_@ OOPS!!! Please use the correct format:
+  delete <index for the task>
+So that I can understand!
+[0m
+> [31m@_@ OOPS!!! Please use the correct format:
+  delete <index for the task>
 So that I can understand!
 [0m
 > [31m@_@ OOPS!!! Please enter the number within the range of the list!

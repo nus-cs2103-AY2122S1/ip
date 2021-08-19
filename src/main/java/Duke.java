@@ -59,6 +59,9 @@ public class Duke {
             case "done":
                 handleMarkDone(command.getArgument());
                 break;
+            case "delete":
+                handleDelete(command.getArgument());
+                break;
             case "todo":
                 Task task = new Todo(command.getArgument());
                 handleAdd(task);
@@ -73,6 +76,20 @@ public class Duke {
                 break;
             default:
                 throw new UnknownActionException();
+        }
+    }
+
+    private static void handleDelete(String arg) throws WrongFormatException, ListIndexException {
+        try {
+            int idx = Integer.parseInt(arg);
+            Task task = TASKS.remove(idx - 1);
+            hikoPrint("Noted. I've removed this task:\n  " +
+                    task +
+                    "\nNow you have " + TASKS.size() + " tasks in the list.");
+        } catch (NumberFormatException e) {
+            throw new WrongFormatException("delete <index for the task>");
+        } catch (IndexOutOfBoundsException e) {
+            throw new ListIndexException();
         }
     }
 

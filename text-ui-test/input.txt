@@ -3,6 +3,9 @@ event read book /at tmr
 deadline return book /by Friday
 list
 done 2
+list
+delete 2
+list
 todo
 todo
 event
@@ -24,5 +27,8 @@ deadline a /bya
 done
 done e
 done 5
+delete
+delete e
+delete 5
 hello
 bye
