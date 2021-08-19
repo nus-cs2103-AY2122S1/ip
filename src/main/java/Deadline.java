@@ -3,16 +3,15 @@
  * @author Nigel Tan
  */
 public class Deadline extends Task {
-    protected String by;
+    private String by;
 
     /**
      * Constructor
      * @param description the name of the task
-     * @param pos the position in the list
      * @param by the deadline
      */
-    public Deadline(String description, int pos, String by) {
-        super(description, pos);
+    public Deadline(String description, String by) {
+        super(description);
         this.by = by;
     }
 
