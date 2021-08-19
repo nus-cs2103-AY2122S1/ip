@@ -12,6 +12,10 @@ public class Duke {
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
 
         Scanner sc = new Scanner(System.in);
+
+        String[] tasks = new String[100];
+        int taskCounter = 0;
+
         String input = "";
         while(true){
             input = sc.nextLine();
@@ -20,9 +24,16 @@ public class Duke {
                 break;
                 //System.exit();
             }
+            else if(input.equals("list")) {
+                for(int i = 0; i < taskCounter; i++){
+                    System.out.println((i+1) + ". " + tasks[i]);
+                }
+            }
 
             else {
-                System.out.println(input);
+                tasks[taskCounter] = input;
+                taskCounter++;
+                System.out.println("added: " + input);
             }
         }
 
