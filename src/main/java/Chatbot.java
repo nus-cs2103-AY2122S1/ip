@@ -24,6 +24,7 @@ public class Chatbot {
 
     private enum TaskCommands {
         DONE("done"),
+        DELETE("delete"),
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event");
@@ -75,6 +76,8 @@ public class Chatbot {
                 keepChatting = interpret() == ChatContinue.CONTINUE;
             } catch (DukeArgumentException e) {
                 System.out.println(e.getMessage());
+            } catch (DukeTaskException e) {
+                System.out.println(e.getMessage());
             }
         };
     }
@@ -100,6 +103,8 @@ public class Chatbot {
         switch (command) {
             case DONE:
                 return this.markDone(input);
+            case DELETE:
+                return this.delete(input);
             case TODO:
                 return this.addTodo(input);
             case DEADLINE:
@@ -169,12 +174,28 @@ public class Chatbot {
     }
 
     private ChatContinue markDone(String args) {
-        System.out.println(args);
         Task targetTask = new Task(args);
         Task task = memory.stream().filter(t -> t.equals(targetTask)).findAny().get();
         task.markDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + task);
+        return ChatContinue.CONTINUE;
+    }
+
+    private ChatContinue delete(String args) {
+        try {
+            int index = Integer.parseInt(args);
+            if (index > 0 && index <= memory.size()) {
+                Task task = memory.get(index - 1);
+                memory.remove(index - 1);
+                System.out.println("Noted. I have removed this task.");
+                System.out.println("  " + task);
+            } else {
+                throw new DukeTaskException("Task does not exist!");
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeTaskException("Task does not exist!");
+        }
         return ChatContinue.CONTINUE;
     }
 }
