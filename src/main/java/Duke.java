@@ -33,13 +33,44 @@ public class Duke {
                 for (int i = 0; i < inputs.size(); i++) {
                     System.out.println( (i+1) + ": " + inputs.get(i));
                 }
-            } else {
-                Task task = new Task(input);
-                inputs.add(task);
-                System.out.println(input + " has been added to the list!");
+            } else if (input.matches("todo\\s(.*?)")) {
+                String taskname = input.split(" ", 2)[1];
+                ToDo todo = new ToDo(taskname);
+                inputs.add(todo);
+                System.out.println("A ToDo has been added\n");
+                System.out.println("Current List:");
+                System.out.println("---------------");
+                for (int i = 0; i < inputs.size(); i++) {
+                    System.out.println( (i+1) + ": " + inputs.get(i));
+                }
+            } else if (input.matches("deadline\\s(.*?)/by\\s(.*?)")) {
+                String firstCommand = input.split("/by")[0];
+                String taskname = firstCommand.split(" ", 2)[1];
+                String dueDate = input.split("/by")[1];
+                Deadline deadline = new Deadline(taskname, dueDate);
+                inputs.add(deadline);
+                System.out.println("A Deadline has been added\n");
+                System.out.println("Current List:");
+                System.out.println("---------------");
+                for (int i = 0; i < inputs.size(); i++) {
+                    System.out.println( (i+1) + ": " + inputs.get(i));
+                }
+            } else if (input.matches("event\\s(.*?)/at(.*?)")) {
+                String firstCommand = input.split("/at")[0];
+                String taskname = firstCommand.split(" ", 2)[1];
+                String duration = input.split("/at")[1];
+                Event event = new Event(taskname, duration);
+                inputs.add(event);
+                System.out.println("Event: " + taskname + "has been added\n");
+                System.out.println("Current List:");
+                System.out.println("---------------");
+                for (int i = 0; i < inputs.size(); i++) {
+                    System.out.println( (i+1) + ": " + inputs.get(i));
+                }
+            } else
+                System.out.println("Duke the Bear doesn't understand! Try again :(");
             }
 
 
         }
-    }
 }
