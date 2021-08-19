@@ -4,7 +4,6 @@ public class Duke {
     public static void main(String[] args) {
 
         DukeCommandManager commandManager = new DukeCommandManager();
-
         commandManager.gettingStart();
         Scanner sc = new Scanner(System.in).useDelimiter("\n");
         String command = sc.next().trim();

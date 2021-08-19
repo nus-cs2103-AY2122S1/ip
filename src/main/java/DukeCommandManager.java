@@ -5,17 +5,6 @@ public class DukeCommandManager {
 
     private List<Task> taskList;
 
-    public enum commandType {
-        help,
-        list,
-        todo,
-        deadline,
-        event,
-        done,
-        delete,
-        bye
-    }
-
     protected DukeCommandManager() {
         this.taskList = new ArrayList<>();
     }
@@ -35,25 +24,12 @@ public class DukeCommandManager {
         System.out.println("Program exiting... \nBye. Hope to see you again soon!\n");
     }
 
-    public void respondHelp() {
-
-    }
-
-    public void respondDelete(String command) {
-        command = command.substring(6).replaceAll("\\s+", "");
-        int position = Integer.parseInt(command) - 1;
-        if (position > taskList.size() || position < 0) {
-            throw new DukeException("delete", "", DukeException.exceptionType.OUT_OF_BOUND);
-        } else {
-            Task deletedTask = taskList.remove(position);
-            respondWith("Noted. I've removed this task:\n" + deletedTask + "\n Now you have " +
-                    taskList.size() + " tasks in the list");
-        }
-    }
-
     public void processCommand(String command, String commandType) {
         try {
             switch (commandType) {
+                case "help":
+                    respondHelp();
+                    break;
                 case "list":
                     respondList();
                     break;
@@ -73,24 +49,47 @@ public class DukeCommandManager {
                     respondDelete(command);
                     break;
                 default:
-                    defaultResponse();
+                    throw new DukeException("", DukeException.exceptionType.INVALID);
             }
         } catch (DukeException e) {
             if (e.type == DukeException.exceptionType.OUT_OF_BOUND) {
                 respondWith("☹ OOPS!!! Your task number is out of bound!\n" +
                         "To use " + commandType + ", please enter '\"help'\" for instructions");
-            } else {
+            } else if (e.type == DukeException.exceptionType.INCOMPLETE){
                 respondWith("☹ OOPS!!! Your description of a " + commandType + " is incorrect!\n" +
                         "To use " + commandType + ", please enter '\"help'\" for instructions");
+            } else if (e.type == DukeException.exceptionType.INVALID) {
+                respondWith("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             enterCommand();
         }
     }
 
+
+    private void respondHelp() {
+        respondWith("Welcome to Duke! Here are a list of commands that you can use:\n" +
+                "'\"help'\": Getting start with using Duke\n" +
+                "'\"list'\": Display a list of all current tasks you have done\n" +
+                "'\"todo'\": Add a TO_DO type of task on the list, no deadlines or time\n" +
+                "      Regex: todo + <your task name>\n" +
+                "'\"deadline'\": Add a task with a deadline timing to your list\n" +
+                "      Regex: deadline + <your task name> + /by + <your deadline>\n" +
+                "'\"event'\": Add an event task with starting or fixed timing to your list\n" +
+                "      Regex: event + <your task name> + /at + <your deadline>\n" +
+                "'\"done'\": Mark a specified task in your list as done\n" +
+                "      Regex: done + <task number or all>\n" +
+                "'\"delete'\": Delete a specified task in your list\n" +
+                "      Regex: delete + <task number or all>\n" +
+                "'\"bye'\": Exit the program\n" +
+                "Enjoy :D"
+        );
+        enterCommand();
+    }
+
     /**
      * Print all available tasks on the array list
      */
-    public void respondList() {
+    private void respondList() {
         addSpace();
         System.out.println("Here is the list of all tasks: ");
         for (int i = 0; i < taskList.size(); i++) {
@@ -104,17 +103,22 @@ public class DukeCommandManager {
      *
      * @param command
      */
-    public void respondDone(String command) throws DukeException {
+    private void respondDone(String command) throws DukeException {
         command = command.substring(4).replaceAll("\\s+", "");
-        int position = Integer.parseInt(command) - 1;
-        if (position > taskList.size()) {
-            throw new DukeException("done", "", DukeException.exceptionType.OUT_OF_BOUND);
-        } else {
-            Task calledTask = taskList.remove(position);
-            calledTask.markAsCompleted();
-            taskList.add(position, calledTask);
-            respondWith("Nice! I've marked this task as done: \n" + calledTask);
-            enterCommand();
+        try {
+            int position = Integer.parseInt(command) - 1;
+            if (position >= taskList.size() || position < 0) {
+                throw new DukeException("", DukeException.exceptionType.OUT_OF_BOUND);
+            } else {
+                Task calledTask = taskList.remove(position);
+                calledTask.markAsCompleted();
+                taskList.add(position, calledTask);
+                respondWith("Nice! I've marked this task as done: \n" + calledTask);
+                enterCommand();
+            }
+        } catch (NumberFormatException e) {
+            respondWith("☹ OOPS!!! Your description of " + "done" + " is incorrect!\n" +
+                    "To use " + "done" + ", please enter '\"help'\" for instructions");
         }
     }
 
@@ -122,10 +126,32 @@ public class DukeCommandManager {
      *
      * @param command
      */
-    public void respondTodo(String command) throws DukeException {
+    public void respondDelete(String command) {
+        command = command.substring(6).replaceAll("\\s+", "");
+        try {
+            int position = Integer.parseInt(command) - 1;
+            if (position >= taskList.size() || position < 0) {
+                throw new DukeException("", DukeException.exceptionType.OUT_OF_BOUND);
+            } else {
+                Task deletedTask = taskList.remove(position);
+                respondWith("Noted. I've removed this task:\n" + deletedTask + "\n Now you have " +
+                        taskList.size() + " tasks in the list");
+            }
+            enterCommand();
+        } catch (NumberFormatException e) {
+            respondWith("☹ OOPS!!! Your description of " + "delete" + " is incorrect!\n" +
+                    "To use " + "delete" + ", please enter '\"help'\" for instructions");
+        }
+    }
+
+    /**
+     *
+     * @param command
+     */
+    private void respondTodo(String command) throws DukeException {
         command = command.substring(4).trim();
         if (command.equals("")) {
-            throw new DukeException("todo", "Error: ", DukeException.exceptionType.INCOMPLETE);
+            throw new DukeException("Error: ", DukeException.exceptionType.INCOMPLETE);
         } else {
             Task newTask = new Todo(command);
             taskList.add(newTask);
@@ -139,15 +165,12 @@ public class DukeCommandManager {
      *
      * @param command
      */
-    public void respondDeadline(String command) throws DukeException {
+    private void respondDeadline(String command) throws DukeException {
         int time = command.lastIndexOf("/by");
         String taskName = command.substring(8, time).trim();
         String taskTime = command.substring(time + 3).trim();
         Task newTask = new Deadline(taskName, taskTime);
         taskList.add(newTask);
-        if (taskName.equals("")) {
-            throw new DukeException("deadline", "", DukeException.exceptionType.INCOMPLETE);
-        }
         respondWith("Got it! I've added this task:\n" + newTask +
                 "\nNow you have " + taskList.size() + " tasks in the list");
         enterCommand();
@@ -157,7 +180,7 @@ public class DukeCommandManager {
      *
      * @param command
      */
-    public void respondEvent(String command) throws DukeException {
+    private void respondEvent(String command) throws DukeException {
         int time = command.lastIndexOf("/at");
         if (time == -1) time = command.length() - 1;
         String taskName = command.substring(5, time).trim();
@@ -165,17 +188,13 @@ public class DukeCommandManager {
         Task newTask = new Event(taskName, taskTime);
         taskList.add(newTask);
         if (taskName.equals("")) {
-            throw new DukeException("event", "", DukeException.exceptionType.INCOMPLETE);
+            throw new DukeException("", DukeException.exceptionType.INCOMPLETE);
         }
         respondWith("Got it! I've added this task:\n" + newTask +
                 "\nNow you have " + taskList.size() + " tasks in the list");
         enterCommand();
     }
 
-    public void defaultResponse() {
-        respondWith("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        enterCommand();
-    }
 
 
     /**
