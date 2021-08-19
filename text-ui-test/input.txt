@@ -1,0 +1,16 @@
+hello world
+list
+todo borrow book
+deadline return book /by June 6th
+event project meeting /at Aug 6th 2-4pm
+deadline do homework   /by   sometime :p
+event 2103 finals  /at  november
+ list
+todo  test whitespaces
+list
+done 2
+done 4
+list
+done 1
+list
+exit
