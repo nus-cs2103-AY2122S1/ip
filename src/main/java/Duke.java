@@ -1,5 +1,8 @@
-import java.util.Arrays;
 import java.util.Scanner;
+
+enum TaskType {
+    TODO, DEADLINE, EVENT
+}
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,20 +15,22 @@ public class Duke {
                 + "   __(.)>   *quack*\n"
                 + "~~ \\___)\n";
 
-        String[] tasks = new String[100];
-        boolean[] completionStatus = new boolean[100];
-        int index = 0;
+        Task[] tasks = new Task[100];
+        int count = 0;
         boolean active = true;
 
         Scanner scanner = new Scanner(System.in);
         System.out.println(GREETING);
-        String newUserInput = null;
-        
+        String newUserInput;
+
         while (active) {
+            int startDescription, startDateTime;
+            String description, dateTime;
             newUserInput = scanner.nextLine();
             String firstWord = newUserInput.contains(" ")
                     ? newUserInput.split(" ")[0]
                     : newUserInput;
+
             switch (firstWord) {
                 case "bye":
                     active = false;
@@ -33,30 +38,56 @@ public class Duke {
                     break;
                 case "list":
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < index; i++) {
-                        System.out.println(i + 1 + ". ["
-                                + (completionStatus[i] ? "X] " : " ] ")
-                                + tasks[i]);
+                    for (int i = 0; i < count; i++) {
+                        System.out.println(i + 1 + ". " + tasks[i].toString());
                     }
                     break;
                 case "done":
                     int taskNo = Integer.parseInt(newUserInput.split(" ")[1]);
-                    if (taskNo < 1 || taskNo > index) {
+                    if (taskNo < 1 || taskNo > count) {
                         System.out.println("Error: No such task exists");
                     } else {
-                        completionStatus[taskNo - 1] = true;
+                        tasks[taskNo - 1].taskDone();
                         System.out.println("Nice! I've marked this task as done: \n"
-                                + "[X] " + tasks[taskNo - 1]);
-
+                                + tasks[taskNo - 1].toString());
                     }
                     break;
+                case "todo":
+                    startDescription = newUserInput.indexOf(" ") + 1;
+                    description = newUserInput.substring(startDescription);
+                    tasks[count] = new Task(description, TaskType.TODO);
+                    count++;
+                    System.out.println("Got it. I've added this task:\n"
+                            + tasks[count - 1].toString());
+                    System.out.printf("Now you have %d tasks in the list.\n", count);
+                    break;
+                case "deadline":
+                    startDescription = newUserInput.indexOf(" ") + 1;
+                    startDateTime = newUserInput.indexOf("/") + 1;
+                    description = newUserInput.substring(startDescription, startDateTime - 2);
+                    dateTime = newUserInput.substring(startDateTime);
+                    tasks[count] = new Task(description, TaskType.DEADLINE, dateTime);
+                    count++;
+                    System.out.println("Got it. I've added this task:\n"
+                            + tasks[count - 1].toString());
+                    System.out.printf("Now you have %d tasks in the list.\n", count);
+                    break;
+                case "event":
+                    startDescription = newUserInput.indexOf(" ") + 1;
+                    startDateTime = newUserInput.indexOf("/") + 1;
+                    description = newUserInput.substring(startDescription, startDateTime - 2);
+                    dateTime = newUserInput.substring(startDateTime);
+                    tasks[count] = new Task(description, TaskType.EVENT, dateTime);
+                    count++;
+                    System.out.println("Got it. I've added this task:\n"
+                            + tasks[count - 1].toString());
+                    System.out.printf("Now you have %d tasks in the list.\n", count);
+                    break;
                 default:
-                    tasks[index] = newUserInput;
-                    completionStatus[index] = false;
-                    index++;
-                    System.out.println("added: " + newUserInput);
+                    System.out.println("Error: user input " + newUserInput);
             }
         }
+
         scanner.close();
     }
 
