@@ -1,8 +1,7 @@
 public enum Command {
     BYE {
         @Override
-        public void verifyArguments(String remainingText) throws DukeException {
-        }
+        public void verifyArguments(String remainingText) {}
     },
     LIST {
         @Override

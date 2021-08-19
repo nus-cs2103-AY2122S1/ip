@@ -12,15 +12,9 @@ public class Duke {
     private static final String INVALID_EVENT_MESSAGE = "Invalid use of event command. Use 'event <text> /at <datetime>'";
     private static final String INCOHERENT_INPUT_MESSAGE = "I'm sorry, but I don't know what that means :-(";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-    private static final String MISSING_DELETE_NUMBER_MESSAGE = "Please input a number after the delete command";
-    private static final String INVALID_DEADLINE_MESSAGE = "Invalid use of deadline command. Use 'deadline <text> /by <datetime>'";
-    private static final String INVALID_EVENT_MESSAGE = "Invalid use of event command. Use 'event <text> /at <datetime>'";
-    private static final String MISSING_TODO_MESSAGE = "Please input text after the todo command";
 
-    // Commands
-    private static final String DEADLINE_COMMAND = "deadline";
+    // Delimiters
     private static final String DEADLINE_DELIMITER = "/by";
-    private static final String EVENT_COMMAND = "event";
     private static final String EVENT_DELIMITER = "/at";
 
     // Message methods
@@ -58,7 +52,7 @@ public class Duke {
                         if (taskList.size() == 0) {
                             display_message(NO_TASKS_IN_LIST_MESSAGE);
                         } else {
-                            display_message(String.format(LIST_MESSAGE, taskList.toString()));
+                            display_message(String.format(LIST_MESSAGE, taskList));
                         }
                         break;
                     case DONE:
