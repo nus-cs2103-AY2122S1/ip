@@ -1,16 +1,41 @@
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * Contains JUnit5 tests for public members of Task class.
+ */
 class TaskTest {
 
-    @org.junit.jupiter.api.Test
-    void getStatusIcon() {
+    @Test
+    void getStatusIcon_undoneTask_uncheckedBox() {
+        Task task = new Task("Task");
+
+        assertEquals("[ ]", task.getStatusIcon());
     }
 
-    @org.junit.jupiter.api.Test
-    void markAsDone() {
+    @Test
+    void markAsDone_undoneTask_checkedBox() {
+        Task task = new Task("Task");
+
+        task.markAsDone();
+
+        assertEquals("[X]", task.getStatusIcon());
     }
 
-    @org.junit.jupiter.api.Test
-    void testToString() {
+    @Test
+    void toString_undoneTask_descriptionWithCheckedBox() {
+        Task task = new Task("Task");
+
+        assertEquals("[ ] Task", task.toString());
+    }
+
+    @Test
+    void toString_doneTask_descriptionWithUncheckedBox() {
+        Task task = new Task("Task");
+
+        task.markAsDone();
+
+        assertEquals("[X] Task", task.toString());
     }
 }
