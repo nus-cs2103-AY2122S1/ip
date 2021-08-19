@@ -273,35 +273,35 @@ public class Duke {
      * command should be called.
      */
     private String checkForKeyword(String des) {
-            if (des.equals("allCmd")) {
-                return "allCmd";
-            } else if (des.equals("bye")) {
-                return "bye";
-            } else if (des.equals("list")) {
-                return "list";
-            } else if (des.contains("done") && des.startsWith("done")) {
-                try {
-                    String sNum = des.substring(des.indexOf(' ') + 1);
-                    Integer.parseInt(sNum);
-                    return "done";
-                } catch (NumberFormatException e) {
-                    return null;
-                }
-            } else if (des.contains("delete") && des.startsWith("delete")) {
-                try {
-                    String sNum = des.substring(des.indexOf(' ') + 1);
-                    Integer.parseInt(sNum);
-                    return "delete";
-                } catch (NumberFormatException e) {
-                    return null;
-                }
-            } else if (des.contains("deadline") && des.startsWith("deadline")) {
-                return "deadline";
-            } else if (des.contains("event") && des.startsWith("event")) {
-                return "event";
-            } else if (des.contains("todo") && des.startsWith("todo")) {
-                return "todo";
+        if (des.equals("allCmd")) {
+            return "allCmd";
+        } else if (des.equals("bye")) {
+            return "bye";
+        } else if (des.equals("list")) {
+            return "list";
+        } else if (des.contains("done") && des.startsWith("done")) {
+            try {
+                String sNum = des.substring(des.indexOf(' ') + 1);
+                Integer.parseInt(sNum);
+                return "done";
+            } catch (NumberFormatException e) {
+                return null;
             }
+        } else if (des.contains("delete") && des.startsWith("delete")) {
+            try {
+                String sNum = des.substring(des.indexOf(' ') + 1);
+                Integer.parseInt(sNum);
+                return "delete";
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        } else if (des.contains("deadline") && des.startsWith("deadline")) {
+            return "deadline";
+        } else if (des.contains("event") && des.startsWith("event")) {
+            return "event";
+        } else if (des.contains("todo") && des.startsWith("todo")) {
+            return "todo";
+        }
         return null;
     }
 
@@ -404,8 +404,8 @@ public class Duke {
             Scanner sc = new Scanner(tasks);
             while (sc.hasNextLine()) {
                 String atHand = sc.nextLine();
-                String taskType = atHand.substring(1,2);
-                String done = (atHand.charAt(4)==' ') ? "0" : "1";
+                String taskType = atHand.substring(1, 2);
+                String done = (atHand.charAt(4) == ' ') ? " " : "X";
                 String des;
                 String time = "NA";
                 Task t;
@@ -416,13 +416,13 @@ public class Duke {
                 } else if (taskType.equals("E")) {
                     int openBracket = atHand.indexOf('(');
                     int closeBracket = atHand.indexOf(')');
-                    des = atHand.substring(7, openBracket -1);
+                    des = atHand.substring(7, openBracket - 1);
                     time = atHand.substring(openBracket + 5, closeBracket);
                     t = new Event(done, des, time);
                 } else if (taskType.equals("D")) {
                     int openBracket = atHand.indexOf('(');
                     int closeBracket = atHand.indexOf(')');
-                    des = atHand.substring(7, openBracket-1);
+                    des = atHand.substring(7, openBracket - 1);
                     time = atHand.substring(openBracket + 5, closeBracket);
                     t = new Deadline(done, des, time);
                 } else {
@@ -432,7 +432,7 @@ public class Duke {
             }
 
         } catch (FileNotFoundException e) {
-            return ;
+            return;
         } catch (DukeException e) {
             System.out.println(e);
         }
