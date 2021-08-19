@@ -1,2 +1,18 @@
-event dinner /monday
-bye
+list
+todo
+event
+deadline
+todo get some sleep
+event dinner
+event dinner /thurs
+deadline homework
+deadline homework /monday
+list
+done 1
+done 2
+done 3
+list
+remove 1
+list
+delete 1
+list
