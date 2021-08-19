@@ -55,7 +55,10 @@ public class Persistence {
         }
     }
 
-    public static void delete(int position) {
+    public static void delete(int position) throws IndexOutOfBoundsException {
+        if (position == 0) {
+            throw new IndexOutOfBoundsException();
+        };
         log.remove(position - 1);
     }
 }
