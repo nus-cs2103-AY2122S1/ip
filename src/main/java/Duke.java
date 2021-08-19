@@ -2,20 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String LOGO = "\t____        _        \n"
-            + "\t|  _ \\ _   _| | _____ \n"
-            + "\t| | | | | | | |/ / _ \\\n"
-            + "\t| |_| | |_| |   <  __/\n"
-            + "\t|____/ \\__,_|_|\\_\\___|\n";
-
-    private static final String GREETING_TEXT = "\tHello from \n"
-            + LOGO
-            + "\tHow can I help you?";
-
-    private static final String FAREWELL_TEXT = "\t☹☹☹ Why do you choose to leave me!";
-
-    private static final String HORIZONTAL_LINE = "____________________________________________________________";
-
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
     public static void addTask(Task task) {
@@ -26,28 +12,30 @@ public class Duke {
         tasks.remove(index);
     }
 
-    public static String printList() {
+    public static Message printList() {
         StringBuilder itemList = new StringBuilder("\tHere are the tasks in your list:\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            itemList.append("\t").append(i + 1).append(". ").append(tasks.get(i));
-            if (i < tasks.size() - 1) {
-                itemList.append("\n");
+
+        if (tasks.size() == 0) {
+            itemList.append("\tNothing here yet...");
+        } else {
+            for (int i = 0; i < tasks.size(); i++) {
+                itemList.append("\t\t").append(i + 1).append(". ").append(tasks.get(i));
+                if (i < tasks.size() - 1) {
+                    itemList.append("\n");
+                }
             }
         }
 
-        return itemList.toString();
-    }
-
-    public static String wrapAsMessage(String text) {
-        return "\t" + HORIZONTAL_LINE + "\n" + text + "\n\t" + HORIZONTAL_LINE;
+        return new Message(itemList.toString());
     }
 
     private static void printAddedTask(Task task) {
-        String addMessage = "\tGot it. I've added this task:\n\t\t"
+        Message addMessage = new Message("\tGot it. I've added this task:\n\t\t"
                 + task
                 + "\n\tTask(s) remaining in the list: "
-                + tasks.size();
-        System.out.println(Duke.wrapAsMessage(addMessage));
+                + tasks.size()
+        );
+        addMessage.printMessage();
     }
 
     public static void applyCommand(String command) throws DukeException {
@@ -103,9 +91,10 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! The task is already done!");
                         }
                         Duke.tasks.get(item - 1).setDone(true);
-                        String doneMessage = "\tNice! I've marked this task as done:\n\t\t"
-                                + tasks.get(item - 1);
-                        System.out.println(wrapAsMessage(doneMessage));
+                        Message doneMessage = new Message("\tNice! I've marked this task as done:\n\t\t"
+                                + tasks.get(item - 1)
+                        );
+                        doneMessage.printMessage();
                     } else {
                         throw new DukeException("☹ OOPS!!! The item should be an positive integer.");
                     }
@@ -121,12 +110,13 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! The item number is out of bound!");
                         }
                         int numOfTasks = tasks.size() - 1;
-                        String doneMessage = "\tNoted. I've removed this task:\n\t\t"
+                        Message doneMessage = new Message("\tNoted. I've removed this task:\n\t\t"
                                 + tasks.get(item - 1)
                                 + "\n\tTask(s) remaining in the list: "
-                                + numOfTasks;
+                                + numOfTasks
+                        );
                         Duke.removeTask(item - 1);
-                        System.out.println(wrapAsMessage(doneMessage));
+                        doneMessage.printMessage();
                     } else {
                         throw new DukeException("☹ OOPS!!! The item should be an positive integer.");
                     }
@@ -142,8 +132,7 @@ public class Duke {
             case "":
                 throw new DukeException("Your command cannot be empty!");
             case "list":
-                String listMessage = Duke.wrapAsMessage(Duke.printList());
-                System.out.println(listMessage);
+                Duke.printList().printMessage();
                 break;
             case "bye":
                 break;
@@ -153,12 +142,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String greetingMessage = Duke.wrapAsMessage(GREETING_TEXT);
-        String byeMessage = Duke.wrapAsMessage(FAREWELL_TEXT);
-
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
-        System.out.println(greetingMessage);
+        System.out.println(Message.greet());
 
         String input = scanner.next();
 
@@ -166,12 +152,13 @@ public class Duke {
             try {
                 Duke.applyCommand(input);
             } catch (DukeException e) {
-                System.out.println(Duke.wrapAsMessage("\t" + e.getMessage()));
+                Message errorMessage = new Message("\t" + e.getMessage());
+                errorMessage.printMessage();
             } finally {
                 input = scanner.next();
             }
         }
 
-        System.out.println(byeMessage);
+        System.out.println(Message.farewell());
     }
 }
