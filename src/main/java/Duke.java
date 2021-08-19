@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 import java.lang.*;
 
@@ -18,7 +19,7 @@ public class Duke {
                 + linebreakend);
 
         Scanner in = new Scanner(System.in);
-        Task[] taskarr = new Task[100];
+        List<Task> taskarr = new ArrayList<>(100);
         int arrcounter = 0;
         // adds array for 'list' command
         boolean continueloop = true;
@@ -36,14 +37,18 @@ public class Duke {
                 // lists history of past tasks
                 System.out.println(linebreakstart);
                 System.out.println("Uwu! Herw arw yourw taskws:\n");
-                int counter = 0;
-                while (taskarr[counter] != null || counter >= 100) {
-                    System.out.println((counter + 1)
-                            + ". "
-                            + taskarr[counter].toString()
-                            + '\n');
-                    counter++;
+                if (arrcounter == 0) {
+                    System.out.println("Itw seewsm like youw wist is emptwy! Congwats!\n");
+                } else {
+                    for (int i = 0; i < arrcounter; i++) {
+                        System.out.println((i + 1)
+                                + ". "
+                                + taskarr.get(i).toString()
+                                + '\n');
+                    }
                 }
+
+
                 System.out.println(linebreakend);
             } else if (strparse.length > 0 && strparse[0].equalsIgnoreCase("todo")) {
                 // adds a todo task to the list
@@ -58,12 +63,12 @@ public class Duke {
                             taskb.append(" ");
                         }
                     }
-                    taskarr[arrcounter] = new Todo(taskb.toString());
+                    taskarr.add(new Todo(taskb.toString()));
                     arrcounter++;
 
                     System.out.println(linebreakstart);
                     System.out.println("Uwu! Addewd yourw taskws:\n");
-                    System.out.println("   " + taskarr[arrcounter - 1].toString() + '\n');
+                    System.out.println("   " + taskarr.get(arrcounter - 1).toString() + '\n');
                     System.out.println("Youw noww havew "
                             + (arrcounter)
                             + " taskw(s) inw thew wist! uwu\n");
@@ -92,12 +97,12 @@ public class Duke {
                     }
                     i++;
                 }
-                taskarr[arrcounter] = new Deadline(taskb.toString(), deadlineb.toString());
+                taskarr.add(new Deadline(taskb.toString(), deadlineb.toString()));
                 arrcounter++;
 
                 System.out.println(linebreakstart);
                 System.out.println("Uwu! Addewd yourw taskws:\n");
-                System.out.println("   " + taskarr[arrcounter - 1].toString() + '\n');
+                System.out.println("   " + taskarr.get(arrcounter - 1).toString() + '\n');
                 System.out.println("Youw noww havew "
                         + (arrcounter)
                         + " taskw(s) inw thew wist! uwu\n");
@@ -123,12 +128,12 @@ public class Duke {
                     }
                     i++;
                 }
-                taskarr[arrcounter] = new Event(taskb.toString(), atb.toString());
+                taskarr.add(new Event(taskb.toString(), atb.toString()));
                 arrcounter++;
 
                 System.out.println(linebreakstart);
                 System.out.println("Uwu! Addewd yourw taskws:\n");
-                System.out.println("   " + taskarr[arrcounter - 1].toString() + '\n');
+                System.out.println("   " + taskarr.get(arrcounter - 1).toString() + '\n');
                 System.out.println("Youw noww havew "
                         + (arrcounter)
                         + " taskw(s) inw thew wist! uwu\n");
@@ -138,22 +143,20 @@ public class Duke {
                 // checks corresponding task as done
                 try {
                     int i = Integer.parseInt(strparse[1]) - 1;
-                    taskarr[i].markAsDone();
+                    taskarr.get(i).markAsDone();
                     System.out.println(linebreakstart);
                     System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n");
                     System.out.println("   "
-                            + (i + 1)
-                            + ". "
-                            + taskarr[i].toString()
+                            + taskarr.get(i).toString()
                             + '\n');
-                    System.out.println(linebreakend);
-                } catch (NullPointerException e) {
-                    System.out.println(linebreakstart);
-                    System.out.println("Sowwy! There'sw now cowwesponding task of that numbwer!\n");
                     System.out.println(linebreakend);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(linebreakstart);
                     System.out.println("Ohww noww! Thew descwiption of donew cannyotw bew emptwpy.\n");
+                    System.out.println(linebreakend);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(linebreakstart);
+                    System.out.println("Sowwy! There'sw now cowwesponding task of that numbwer!\n");
                     System.out.println(linebreakend);
                 } catch (NumberFormatException e) {
                     System.out.println(linebreakstart);
@@ -161,26 +164,29 @@ public class Duke {
                     System.out.println(linebreakend);
                 }
             } else if (strparse[0].equalsIgnoreCase("delete")) {
-                // checks for 'done' and integer keywords
-                // checks corresponding task as done
+                // checks for 'delete' and integer keywords
+                // deletes corresponding task
                 try {
                     int i = Integer.parseInt(strparse[1]) - 1;
-                    taskarr[i].markAsDone();
+                    Task t = taskarr.get(i);
                     System.out.println(linebreakstart);
                     System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw hasw beenw deweted:\n");
                     System.out.println("   "
-                            + (i + 1)
-                            + ". "
-                            + taskarr[i].toString()
+                            + t.toString()
                             + '\n');
-                    System.out.println(linebreakend);
-                } catch (NullPointerException e) {
-                    System.out.println(linebreakstart);
-                    System.out.println("Sowwy! There'sw now cowwesponding task of that numbwer!\n");
+                    arrcounter--;
+                    taskarr.remove(i);
+                    System.out.println("Youw noww havew "
+                            + (arrcounter)
+                            + " taskw(s) inw thew wist! uwu\n");
                     System.out.println(linebreakend);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(linebreakstart);
                     System.out.println("Ohww noww! Thew descwiption of dewete cannyotw bew emptwpy.\n");
+                    System.out.println(linebreakend);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(linebreakstart);
+                    System.out.println("Sowwy! There'sw now cowwesponding task of that numbwer!\n");
                     System.out.println(linebreakend);
                 } catch (NumberFormatException e) {
                     System.out.println(linebreakstart);
@@ -195,8 +201,7 @@ public class Duke {
                 }
             }
         }
-
-
+        
         // closing lines
         System.out.println(linebreakstart
                 + "\nGoodbywe, Mastwer! Seew youw soown!\n\n"
