@@ -10,27 +10,27 @@ public abstract class Task {
         this.done = false;
     }
 
-    public static Task taskFactory(String cmd, String rest) throws DukeException{
+    public static Task taskFactory(Duke.Commands cmd, String rest) throws DukeException{
         Task newTask;
         switch (cmd) {
-            case "todo":
+            case TODO:
                 newTask = new ToDo(rest.trim());
                 break;
 
-            case "deadline":
-                String[] name_by = rest.trim().split("/by");
+            case DEADLINE:
+                String[] name_by = rest.split("/by");
                 if(name_by.length != 2){
                     throw new DukeException("invalid argument length for deadline");
                 }
-                newTask = new Deadline(name_by[0], name_by[1]);
+                newTask = new Deadline(name_by[0].trim(), name_by[1].trim());
                 break;
 
-            case "event":
-                String[] name_at = rest.trim().split("/at");
+            case EVENT:
+                String[] name_at = rest.split("/at");
                 if(name_at.length != 2){
                     throw new DukeException("invalid argument length for event");
                 }
-                newTask = new Event(name_at[0], name_at[1]);
+                newTask = new Event(name_at[0].trim(), name_at[1].trim());
                 break;
             default:
                 throw new DukeException("command not found");
