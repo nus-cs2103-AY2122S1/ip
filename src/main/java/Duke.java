@@ -1,9 +1,12 @@
 import java.util.*;
 class User {
+    Scanner sc = new Scanner(System.in);
     public String command() {
-        Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
-        return str;
+        if (sc.hasNextLine()) {
+            String str = sc.nextLine();
+            return str;
+        }
+        return "";
     }
 }
 class Task {
@@ -43,7 +46,7 @@ class Event extends Task {
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + "(at: " + at + ")";
     }
 }
 class Todo extends Task {
@@ -62,20 +65,23 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from Duke!");
         System.out.println("Hope you are doing well. How can I help you?");
         User user1 = new User();
         List<Task> userList = new ArrayList<>();
         while (true) {
             String command = user1.command();
+            if (command.equals("")) {
+                break;
+            }
             if (command.equals("bye")) {
-                System.out.println("   Bye. Have a great day!");
+                System.out.println("Bye. Have a great day!");
                 break;
             } else if (command.equals("list")) {
                 int count = 1;
                 for (int i = 0; i < userList.size(); i++) {
                     Task t = userList.get(i);
-                    System.out.println("   " + count + ". " +  t.toString());
+                    System.out.println(count + ". " +  t.toString());
                     count++;
                 }
             } else if (command.startsWith("done") && Character.isDigit(command.charAt(command.length() - 1))
@@ -83,38 +89,38 @@ public class Duke {
                     && Character.isDigit(command.charAt(5))) {
                 int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
                 if (value > userList.size()) {
-                    System.out.println("   Sorry the task doesn't exist yet, please try again!");
+                    System.out.println("Sorry the task doesn't exist yet, please try again!");
                 } else {
                     Task t = userList.get(value - 1);
                     t.markAsDone();
-                    System.out.println("   Nice! I've marked this task as done: ");
-                    System.out.println("     " + t.toString());
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(t.toString());
                 }
             } else {
                 if (command.startsWith("todo")) {
                     Task task = new Todo(command.substring(5));
                     userList.add(task);
-                    System.out.println("   Got it. I've added this task: ");
-                    System.out.println("     " + task.toString());
-                    System.out.println("   Now you have " + userList.size() + " tasks in the list.");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(task.toString());
+                    System.out.println("Now you have " + userList.size() + " tasks in the list.");
                 } else if (command.startsWith("deadline")) {
                     String[] parts =  command.split("/");
                     Task task = new Deadline(parts[0].substring(9), parts[1].substring(3));
                     userList.add(task);
-                    System.out.println("   Got it. I've added this task: ");
-                    System.out.println("     " + task.toString());
-                    System.out.println("   Now you have " + userList.size() + " tasks in the list.");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(task.toString());
+                    System.out.println("Now you have " + userList.size() + " tasks in the list.");
                 } else if (command.startsWith("event")) {
                     String[] parts =  command.split("/");
                     Task task = new Event(parts[0].substring(6), parts[1].substring(3));
                     userList.add(task);
-                    System.out.println("   Got it. I've added this task: ");
-                    System.out.println("     " + task.toString());
-                    System.out.println("   Now you have " + userList.size() + " tasks in the list.");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(task.toString());
+                    System.out.println("Now you have " + userList.size() + " tasks in the list.");
                 } else {
                     Task task = new Task(command);
                     userList.add(task);
-                    System.out.println("   added: " + command);
+                    System.out.println("added: " + command);
                 }
             }
         }
