@@ -12,17 +12,31 @@ public class Lania {
      *
      * @param s String provided by the user.
      */
-    public static void update(String s) {
-        Task t = new Task(s);
+    public static void update(String s) throws LaniaException {
+        Task t;
         String[] split = s.split(" ", 2);
         if (split[0].equals("todo")) {
-            t = new Todo(split[1]);
+            if (split.length == 1) {
+                throw new LaniaEmptyDescriptionException(split[0]);
+            } else {
+                t = new Todo(split[1]);
+            }
         } else if (split[0].equals("deadline")) {
-            String[] splitDeadline = split[1].split(" /by ");
-            t = new Deadline(splitDeadline[0], splitDeadline[1]);
+            if (split.length == 1) {
+                throw new LaniaEmptyDescriptionException(split[0]);
+            } else {
+                String[] splitDeadline = split[1].split(" /by ");
+                t = new Deadline(splitDeadline[0], splitDeadline[1]);
+            }
         } else if (split[0].equals("event")) {
-            String[] splitEvent = split[1].split(" /at ");
-            t = new Event(splitEvent[0], splitEvent[1]);
+            if (split.length == 1) {
+                throw new LaniaEmptyDescriptionException(split[0]);
+            } else {
+                String[] splitEvent = split[1].split(" /at ");
+                t = new Event(splitEvent[0], splitEvent[1]);
+            }
+        } else {
+            throw new LaniaException("Sorry, but Lania doesn't know what that means");
         }
         taskArray[count] = t;
         count++;
@@ -74,15 +88,20 @@ public class Lania {
         Scanner s = new Scanner(System.in);
         String input = s.nextLine();
         while(!input.equals("bye")) {
-            String[] split = input.split(" ");
-            if (input.equals("list")) {
-                list();
-            } else if (split[0].equals("done")) {
-                complete(Integer.parseInt(split[1]));
-            } else {
-                update(input);
+            try {
+                String[] split = input.split(" ");
+                if (input.equals("list")) {
+                    list();
+                } else if (split[0].equals("done")) {
+                    complete(Integer.parseInt(split[1]));
+                } else {
+                    update(input);
+                }
+            } catch (LaniaException e) {
+                System.out.println(e);
+            } finally {
+                input = s.nextLine();
             }
-            input = s.nextLine();
         }
         System.out.println("Bye. Lania looks forward to seeing you again!");
     }
