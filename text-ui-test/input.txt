@@ -1,0 +1,4 @@
+event soccer with friends /at Monday 4:50pm
+todo go to heaven
+deadline CS2103T IP /by Thursday 2359
+done 2

@@ -1,7 +1,23 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+   ------------------------------------------------------------------
+    Hello I'm your friendly chatbot Duke!
+    What can I help you with?
+   ------------------------------------------------------------------
+   ------------------------------------------------------------------
+    Understood! The following task has been added:
+     [E][ ] soccer with friends (at: Monday 4:50pm)
+    You have 1 task in your current list
+   ------------------------------------------------------------------
+   ------------------------------------------------------------------
+    Understood! The following task has been added:
+     [T][ ] go to heaven
+    You have 2 tasks in your current list
+   ------------------------------------------------------------------
+   ------------------------------------------------------------------
+    Understood! The following task has been added:
+     [D][ ] CS2103T IP (by: Thursday 2359)
+    You have 3 tasks in your current list
+   ------------------------------------------------------------------
+   ------------------------------------------------------------------
+    Great job! I've marked the following as done
+    [T][X] go to heaven
+   ------------------------------------------------------------------
