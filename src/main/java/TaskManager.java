@@ -22,17 +22,43 @@ public class TaskManager {
                 this.list();
             } else if (Pattern.compile("done\\s\\d+").matcher(command.toLowerCase()).matches()) {
                 this.markTaskDone(command.substring(5));
+            } else if (Pattern.compile("(t|T)(o|O)(d|D)(o|O)\\s.+").matcher(command).matches()) {
+                this.addTodo(command);
+            } else if (Pattern.compile("(d|D)(e|E)(a|A)(d|D)(l|L)(i|I)(n|N)(e|E)\\s.+( /by ).+").matcher(command).matches()) {
+                this.addDeadline(command);
+            } else if (Pattern.compile("(e|E)(v|V)(e|E)(n|N)(t|T)\\s.+( /at ).+").matcher(command).matches()) {
+                this.addEvent(command);
             } else {
-                this.add(command);
+                this.commandFail();
             }
         }
         commandInput.close();
     }
 
-    private void add(String newTaskDesc) {
-        Task newTask = new Task(newTaskDesc);
-        tasks.add(newTask);
-        Response.respond("added: " + newTaskDesc);
+    private void addTodo(String description) {
+        Todo newTodo = new Todo(description.substring(5));
+        tasks.add(newTodo);
+        this.added();
+    }
+
+    private void addDeadline(String description) {
+        String[] deadlineArr = description.substring(9).split(" /by ", 2);
+        Deadline newDeadline = new Deadline(deadlineArr[0], deadlineArr[1]);
+        tasks.add(newDeadline);
+        this.added();
+    }
+
+    private void addEvent(String description) {
+        String[] eventArr = description.substring(6).split(" /at ", 2);
+        Event newEvent = new Event(eventArr[0], eventArr[1]);
+        tasks.add(newEvent);
+        this.added();
+    }
+
+    private void added() {
+        Response.respond("Got it. I've added this task: \n"
+        + "  " + tasks.get(tasks.size() - 1).toString() + "\n"
+        + "Now you have " + tasks.size() + " tasks in the list.");
     }
 
     private void markTaskDone(String index) {
@@ -41,14 +67,22 @@ public class TaskManager {
             Task currTask = tasks.get(indexInt);
             currTask.markDone();
             Response.respond("Nice! I've marked this task as done:\n"
-                    + "[X] " + currTask.description());
+                    + currTask.toString());
         } else {
-            Response.respond("That task doesn't exist.\nTry again.");
+            Response.respond("That task doesn't exist.\nPlease Try again.");
         }
-
     }
 
     private void list() {
-        Response.listResponse(tasks);
+        Response.drawLine();
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("  " + (i + 1) + "." + tasks.get(i).toString());
+        }
+        Response.drawLine();
+    }
+
+    private void commandFail() {
+        Response.respond("I didn't get that.\nPlease try again.");
     }
 }

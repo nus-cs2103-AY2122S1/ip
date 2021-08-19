@@ -17,19 +17,13 @@ public class Response {
         System.out.println("Hello from\n" + logo + helloMsg);
     }
 
-    public static void listResponse(ArrayList<Task> tasks) {
-        System.out.print(H_LINE);
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + (tasks.get(i).status() ? ".[X] " : ".[ ] ") + tasks.get(i).description());
-        }
-        System.out.print(H_LINE);
-    }
-
     public static void respond(String message) {
         System.out.print(H_LINE + message + "\n" + H_LINE);
     }
 
+    public static void drawLine() {
+        System.out.print(H_LINE);
+    }
     public static void exitResponse() {
         System.out.println(H_LINE + "Bye. Hope to see you again soon!\n" + H_LINE);
     }
