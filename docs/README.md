@@ -1,9 +1,8 @@
 
 # User Guide
-***
 
 ## Gnosis Feature(s)
-***
+
 ### Task Manager
 
 Gnosis provides the ability to create, retrieve and delete different variety of tasks
