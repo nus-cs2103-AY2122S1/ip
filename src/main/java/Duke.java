@@ -17,12 +17,12 @@ public class Duke {
     private final static String EXIT = "bye";
     private final static String LIST = "list";
     private final static String DONE = "done";
-    private final static String GIVEN_ADDED = "added: ";
     private final static String TODO = "todo";
     private final static String DEADLINE = "deadline";
     private final static String EVENT = "event";
+    private final static String DELETE = "delete";
     private static String[] cmdList = new String[100];
-    private static Task[] task = new Task[100];
+    private static ArrayList<Task> task = new ArrayList<>();
     private static int order = 0;
     private static String instruction;
 
@@ -77,13 +77,13 @@ public class Duke {
                     if (cmd.equals(LIST)) {
                         System.out.println(INDENTATION + "Here are the tasks in your list:");
                         for (int i = 0; i < order; i ++) {
-                            System.out.println(INDENTATION + (i + 1) + "." + INDENTATION + task[i]);
+                            System.out.println(INDENTATION + (i + 1) + "." + INDENTATION + task.get(i));
                         }
                     }
 
-                    //mark as done & enter done xxx
                     else if (cmd != null) {
 
+                        //mark as done & enter done xxx
                         if (cmd.split(" ")[0].equals(DONE) &&
                                 cmd.split(" ").length == 2 &&
                                 isInteger(cmd.split(" ")[1])) {
@@ -92,9 +92,28 @@ public class Duke {
                                 throw new EmptyTaskListException("Done");
                             } else {
                                 int num = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                                task[num] = task[num].markDone();
+                                task.get(num).markDone();
                                 System.out.println(INDENTATION + "Nice! I've marked this task as done:");
-                                System.out.println(INDENTATION + " " + task[num]);
+                                System.out.println(INDENTATION + " " + task.get(num));
+                            }
+                        }
+
+                        // delete the task
+                        else if (cmd.split(" ")[0].equals(DELETE) &&
+                                cmd.split(" ").length == 2 &&
+                                isInteger(cmd.split(" ")[1])) {
+
+                            if (Integer.parseInt(cmd.split(" ")[1]) > order) {
+                                throw new DeleteWrongIndexException("Delete");
+                            } else {
+
+                                Task removed = task.remove(Integer.parseInt(cmd.split(" ")[1]) - 1);
+                                int num = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                                order --;
+                                System.out.println(INDENTATION + "Noted. I've removed this task:");
+                                System.out.println(INDENTATION + " " + removed);
+                                System.out.println(INDENTATION + "Now you have " + order  + " tasks in the list.");
+                                task.remove(removed);
                             }
                         }
 
@@ -109,7 +128,7 @@ public class Duke {
                                             throw new NoDescriptionException(instruction);
                                         } else {
                                             Todo todo = new Todo(cmd.substring(5));
-                                            task[order] = todo;
+                                            task.add(order, todo);
                                         }
                                         break;
                                     case DEADLINE:
@@ -119,7 +138,7 @@ public class Duke {
                                         } else {
                                             Deadline deadline = new Deadline(subString_deadline.split(" /by ")[0],
                                                     subString_deadline.split(" /by ")[1]);
-                                            task[order] = deadline;
+                                            task.add(order, deadline);
                                         }
                                         break;
                                     case EVENT:
@@ -129,7 +148,7 @@ public class Duke {
                                         } else {
                                             Event event = new Event(subString_event.split(" /at ")[0],
                                                     subString_event.split(" /at ")[1]);
-                                            task[order] = event;
+                                            task.add(order, event);
                                         }
                                         break;
                                     default:
@@ -150,13 +169,12 @@ public class Duke {
                             }
 
                             System.out.println(INDENTATION + "Got it. I've added this task:");
-                            System.out.println(INDENTATION + INDENTATION + task[order]); //toString in Deadline or Event
+                            System.out.println(INDENTATION + INDENTATION + task.get(order)); //toString in Deadline or Event
+                            order++;
                             System.out.println(INDENTATION + "Now you have " + order + " tasks in the list.");
                             cmdList[order] = cmd;
-                            order++;
                         }
                     }
-
 
                     System.out.println(INDENTATION + UNDERLINE);
 
@@ -165,12 +183,11 @@ public class Duke {
                     System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
                     System.out.println(INDENTATION + UNDERLINE);
                     break;
-
                 }
 
+            } catch (NoDescriptionException | EmptyTaskListException | NoCommandException
+                    | NoTimeException | DeleteWrongIndexException e) {
 
-
-            } catch (NoDescriptionException | EmptyTaskListException | NoCommandException | NoTimeException e) {
                 e.printStackTrace();
             }
 
