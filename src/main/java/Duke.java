@@ -31,22 +31,6 @@ public class Duke {
             System.out.println("  " + task);
             System.out.printf("Now you have %d tasks in the list.\n", this.numTask);
         }
-//
-//        public void addDeadline(String task) {
-//            tasks[this.numTask] = new Deadline(task);
-//            this.numTask++;
-//            System.out.println("Got it. I've added this task: ");
-//            System.out.println("  " + task);
-//            System.out.printf("Now you have %d tasks in the list.", this.numTask);
-//        }
-//
-//        public void addEvent(String task) {
-//            tasks[this.numTask] = new Todo(task);
-//            this.numTask++;
-//            System.out.println("Got it. I've added this task: ");
-//            System.out.println("  " + task);
-//            System.out.printf("Now you have %d tasks in the list.", this.numTask);
-//        }
 
 
         public void list() {
@@ -112,6 +96,18 @@ public class Duke {
                 storage.addCustom(new Todo(todoMatcher.group(1)));
                 continue;
             }
+
+            Matcher deadlineMatcher = deadlinePattern.matcher(input);
+            if (deadlineMatcher.find()) {
+                storage.addCustom(new Deadline(deadlineMatcher.group(1), deadlineMatcher.group(2)));
+                continue;
+            }
+
+//            Matcher todoMatcher = todoPattern.matcher(input);
+//            if (todoMatcher.find()) {
+//                storage.addCustom(new Todo(todoMatcher.group(1)));
+//                continue;
+//            }
 
             // add to list
             storage.add(new Task(input));
