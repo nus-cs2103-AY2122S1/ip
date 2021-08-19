@@ -1,0 +1,11 @@
+todo farming leylines
+deadline clip toenails /by tomorrow
+deadline code /by tonight 2359
+event lecture /at 12pm
+todo brush teeth
+list
+done 2
+list
+done 5
+done 1
+bye

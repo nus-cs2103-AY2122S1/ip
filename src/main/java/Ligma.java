@@ -13,8 +13,9 @@ public class Ligma {
         //returns true if bot should exit, i.e. command is bye
         if (command.equals("bye")) {
             System.out.println(PARTITION
-                    + "\n Bye. Hope you like Imagine Dragons.\n"
-                    + PARTITION);
+                    + "\n Bye. I love Imagine Dragons."
+                    + "\n\n\n Imagine Dragon Deez Nuts Cross Your Face.");
+            System.out.print(PARTITION);
             return true;
         }
         if (command.equals("list")) {
@@ -43,11 +44,11 @@ public class Ligma {
     }
 
     private static void list() {
-        System.out.println(PARTITION + '\n');
+        System.out.println(PARTITION);
         for (int i = 0; i <= 100 && tasks[i] != null; i++) {
-            System.out.println((i+1) + ". " + tasks[i]);
+            System.out.println(String.format(" %d. ", i + 1) + tasks[i]);
         }
-        System.out.println('\n' + PARTITION);
+        System.out.println(PARTITION);
     }
 
     private static void addTask(TaskType t, String desc) {
@@ -60,20 +61,20 @@ public class Ligma {
         noOfTasks++;
         System.out.println(PARTITION
                 + "\n Added: " + task
-                + String.format("\n You now have %d tasks. \n", noOfTasks)
+                + String.format("\n You now have %d tasks.\n", noOfTasks)
                 + PARTITION);
     }
 
     private static void markTaskDone(int taskNo) {
         tasks[taskNo].markAsDone();
-        System.out.println(PARTITION + "\n Successfully marked as done: \n"
+        System.out.println(PARTITION + "\n Successfully marked as done:\n "
                 + tasks[taskNo] + "\n" + PARTITION);
     }
 
     public static void main(String[] args) {
         System.out.println(PARTITION
-                + "\n Hello! I'm Ligma."
-                + "\n What can I do for you? \n" + PARTITION + "\n");
+                + "\n Hello! I'm Ligma, Ligma Balls."
+                + "\n What can I do for you?\n" + PARTITION);
 
         tasks = new Task[100];
 
