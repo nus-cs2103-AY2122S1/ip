@@ -25,6 +25,11 @@ public class TaskManager {
         return tasks.get(taskNumber - 1);
     }
 
+    public boolean remove(int taskNumber) {
+        tasks.remove(taskNumber - 1);
+        return true;
+    }
+
     @Override
     public String toString() {
         StringBuilder listString = new StringBuilder();

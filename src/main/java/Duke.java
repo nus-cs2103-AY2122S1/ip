@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        // TODO: Add enum CommandKeyword "done" "deadline" "event"
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
