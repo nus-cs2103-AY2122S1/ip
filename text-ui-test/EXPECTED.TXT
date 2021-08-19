@@ -12,7 +12,7 @@ Hello from
 	____________________________
 	____________________________
 	Got it. I've added this task:
-	  [D][ ] cs2103t ip (by:  thursday 2359)
+	  [D][ ] CS2103T iP (by:  thursday 2359)
 	Now you have 2 tasks in the list.
 	____________________________
 	____________________________
@@ -22,7 +22,7 @@ Hello from
 	____________________________
 	____________________________
 	1. [T][ ] read book
-	2. [D][ ] cs2103t ip (by:  thursday 2359)
+	2. [D][ ] CS2103T iP (by:  thursday 2359)
 	3. [E][X] dinner with fam (at:  friday 1900)
 	____________________________
 	____________________________
@@ -31,15 +31,15 @@ Hello from
 	____________________________
 	____________________________
 	1. [T][X] read book
-	2. [D][ ] cs2103t ip (by:  thursday 2359)
+	2. [D][ ] CS2103T iP (by:  thursday 2359)
 	3. [E][X] dinner with fam (at:  friday 1900)
 	____________________________
 	____________________________
 	Nice! I've marked this task as done:
- 	[D][X] cs2103t ip (by:  thursday 2359)
+ 	[D][X] CS2103T iP (by:  thursday 2359)
 	____________________________
 	____________________________
 	1. [T][X] read book
-	2. [D][X] cs2103t ip (by:  thursday 2359)
+	2. [D][X] CS2103T iP (by:  thursday 2359)
 	3. [E][X] dinner with fam (at:  friday 1900)
 	____________________________

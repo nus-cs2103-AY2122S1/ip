@@ -8,12 +8,12 @@ public class Duke {
   Duke() { this.tasks = new ArrayList<>(); }
 
   public static void main(String[] args) {
-    String logo = " ____        _        \n"
-                  + "|  _ \\ _   _| | _____ \n"
+    String logo = " ____        _\n"
+                  + "|  _ \\ _   _| | _____\n"
                   + "| | | | | | | |/ / _ \\\n"
                   + "| |_| | |_| |   <  __/\n"
                   + "|____/ \\__,_|_|\\_\\___|\n";
-    System.out.println("Hello from \n" + logo);
+    System.out.println("Hello from\n" + logo);
     // System.out.println("\t____________________________");
     // System.out.println("\tHello!, I'm Duke\n\tWhat can I do for you?");
     // System.out.println("\t____________________________");
@@ -26,24 +26,25 @@ public class Duke {
     while (sc.hasNextLine()) {
       String input = sc.nextLine();
       System.out.println("\t____________________________");
-      input = input.toLowerCase().strip();
+      input = input.strip();
       String[] splitInput = input.split(" ", 2);
+      try {
+
         if (input.equals("bye") || input.equals("exit")) {
           this.exit();
           break;
         } else if (input.equals("list")) {
           this.list();
         } else if (splitInput[0].equals("done")) {
-          this.markDone(splitInput[1]);
+          this.markDone(splitInput);
         } else if (splitInput[0].equals("todo") || splitInput[0].equals("deadline") || splitInput[0].equals("event")) {
-          try {
             this.addTask(splitInput);
-          } catch (DukeTaskDetailsException e) {
-            System.out.println("\t" + e.toString());
-          }
         } else {
           System.out.println("\tSorry, I do not know this command!");
         }
+      } catch (DukeTaskDetailsException | DukeDoneInputException e) {
+        System.out.println("\t" + e.toString());
+      }
       System.out.println("\t____________________________");
     }
   }
@@ -86,14 +87,19 @@ public class Duke {
     System.out.println("\t____________________________");
   }
 
-  private void markDone(String i) {
+  private void markDone(String[] taskArray) throws DukeDoneInputException {
+    if (taskArray.length < 2) {
+      throw new DukeDoneInputException("Please enter index of the task to mark done");
+    }
     try {
-      int index = Integer.parseInt(i);
+      int index = Integer.parseInt(taskArray[1]);
       this.tasks.get(index - 1).markAsDone();
       System.out.println("\tNice! I\'ve marked this task as done:");
       System.out.println(" \t" + this.tasks.get(index - 1).toString());
-    } catch (NumberFormatException | IndexOutOfBoundsException e) {
-      System.out.println("\tPlease input the index of the task to mark done");
+    } catch (NumberFormatException e){
+      throw new DukeDoneInputException("Please enter index of the task to mark done");
+    } catch (IndexOutOfBoundsException e) {
+      throw new DukeDoneInputException("Sorry! Unable to find task number " + taskArray[1]);
     }
   }
 }
