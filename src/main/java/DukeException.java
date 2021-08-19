@@ -15,11 +15,11 @@ public class DukeException extends Exception{
     
     public String print_message() {
         if (e instanceof ArrayIndexOutOfBoundsException) {
-            message = "☹ OOPS!!! The task does not exist.";
+            message = "☹ OOPS!!! The task does not exist.\n";
         } else if (e instanceof StringIndexOutOfBoundsException) {
-            message = "☹ OOPS!!! The description of a task cannot be empty.";
+            message = "☹ OOPS!!! The description of a task cannot be empty.\n";
         } else {
-            message = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            message = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }
         return message;
     }

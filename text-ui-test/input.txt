@@ -10,4 +10,10 @@ list
 done
 todo
 event something at efaevaerb
+deadline hang laundry /by 12pm
+event go for lesson /at 12-2
+todo take notes
+done 2
+delete 2
+delete 12
 bye
