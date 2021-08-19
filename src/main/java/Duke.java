@@ -1,4 +1,6 @@
-import java.util.Scanner;;
+import java.util.Scanner;
+import java.util.*;
+import java.lang.*;
 
 /**
  * @author  Zhang Zhiyao
@@ -22,7 +24,7 @@ public class Duke {
     private static String[] cmdList = new String[100];
     private static Task[] task = new Task[100];
     private static int order = 0;
-    private static String intruction;
+    private static String instruction;
 
     /**
      * the method of greeting at starting of program.
@@ -65,71 +67,87 @@ public class Duke {
         while(true) {
             String cmd = sc.nextLine();
             int numOfTasks = 0;
-            if (!cmd.equals(EXIT)) {
+            try {
 
-                System.out.println(INDENTATION + UNDERLINE);
+                if (!cmd.equals(EXIT)) {
 
-                //enter list
-                if (cmd.equals(LIST)) {
-                    System.out.println(INDENTATION + "Here are the tasks in your list:");
-                    for (int i = 0; i < order; i ++) {
-                        System.out.println(INDENTATION + (i + 1) + "." + INDENTATION + task[i]);
-                    }
-                }
+                    System.out.println(INDENTATION + UNDERLINE);
 
-                //mark as done & enter done xxx
-                else if (cmd != null) {
-
-                    if (cmd.split(" ")[0].equals(DONE) &&
-                            isInteger(cmd.split(" ")[1]) &&
-                            Integer.parseInt(cmd.split(" ")[1]) <= order) {
-
-                        int num = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                        task[num] = task[num].markDone();
-                        System.out.println(INDENTATION + "Nice! I've marked this task as done:");
-                        System.out.println(INDENTATION + " " + task[num]);
+                    //enter list
+                    if (cmd.equals(LIST)) {
+                        System.out.println(INDENTATION + "Here are the tasks in your list:");
+                        for (int i = 0; i < order; i ++) {
+                            System.out.println(INDENTATION + (i + 1) + "." + INDENTATION + task[i]);
+                        }
                     }
 
-                    //print the task
-                    else {
-                        intruction = cmd.split(" ")[0];
-                        switch (intruction) {
-                            case TODO:
-                                Todo todo = new Todo(cmd.substring(5));
-                                task[order] = todo;
-                                break;
-                            case DEADLINE:
-                                String subString_deadline = cmd.substring(9);
-                                Deadline deadline = new Deadline(subString_deadline.split(" /by ")[0],
-                                        subString_deadline.split(" /by ")[1]);
-                                task[order] = deadline;
-                                break;
-                            case EVENT:
-                                String subString_event = cmd.substring(6);
-                                Event event = new Event(subString_event.split(" /at ")[0],
-                                        subString_event.split(" /at ")[1]);
-                                task[order] = event;
-                                break;
+                    //mark as done & enter done xxx
+                    else if (cmd != null) {
+
+                        if (cmd.split(" ")[0].equals(DONE) &&
+                                isInteger(cmd.split(" ")[1]) &&
+                                Integer.parseInt(cmd.split(" ")[1]) <= order) {
+
+                            int num = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                            task[num] = task[num].markDone();
+                            System.out.println(INDENTATION + "Nice! I've marked this task as done:");
+                            System.out.println(INDENTATION + " " + task[num]);
                         }
 
-                        System.out.println(INDENTATION + "Got it. I've added this task:");
-                        System.out.println(INDENTATION + INDENTATION + task[order]); //toString in Deadline or Event
-                        System.out.println(INDENTATION + "Now you have " + order + " tasks in the list.");
-                        cmdList[order] = cmd;
-                        order++;
+                        //print the task
+                        else {
+                            instruction = cmd.split(" ")[0];
+                            switch (instruction) {
+                                case TODO:
+                                    if (cmd.split(" ").length == 1) {
+                                        throw new NoDescriptionException(instruction);
+                                    }
+                                    else {
+                                        Todo todo = new Todo(cmd.substring(5));
+                                        task[order] = todo;
+                                    }
+                                    break;
+                                case DEADLINE:
+                                    String subString_deadline = cmd.substring(9);
+                                    Deadline deadline = new Deadline(subString_deadline.split(" /by ")[0],
+                                            subString_deadline.split(" /by ")[1]);
+                                    task[order] = deadline;
+                                    break;
+                                case EVENT:
+                                    String subString_event = cmd.substring(6);
+                                    Event event = new Event(subString_event.split(" /at ")[0],
+                                            subString_event.split(" /at ")[1]);
+                                    task[order] = event;
+                                    break;
+                                default:
+                                    throw new NoCommandException(instruction);
+                            }
+
+                            System.out.println(INDENTATION + "Got it. I've added this task:");
+                            System.out.println(INDENTATION + INDENTATION + task[order]); //toString in Deadline or Event
+                            System.out.println(INDENTATION + "Now you have " + order + " tasks in the list.");
+                            cmdList[order] = cmd;
+                            order++;
+                        }
                     }
+
+
+                    System.out.println(INDENTATION + UNDERLINE);
+
+                } else {
+                    System.out.println(INDENTATION + UNDERLINE);
+                    System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
+                    System.out.println(INDENTATION + UNDERLINE);
+                    break;
+
                 }
 
 
-                System.out.println(INDENTATION + UNDERLINE);
 
-            } else {
-                System.out.println(INDENTATION + UNDERLINE);
-                System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
-                System.out.println(INDENTATION + UNDERLINE);
-                break;
-
+            } catch (NoDescriptionException | NoCommandException e) {
+                e.printStackTrace();
             }
+
         }
     }
 }
