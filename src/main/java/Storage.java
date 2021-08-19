@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private static String FILE_LOCATION = "C:\\Users\\kohjx\\projects\\ip\\data\\TaskList.txt";
+
+    private static final String FILE_LOCATION = "data\\TaskList.txt";
 
     public static void saveList(ArrayList<Task> tasks) {
         try {
@@ -31,9 +32,11 @@ public class Storage {
                 String task = text.nextLine();
                 loaded.add(Task.StringToTask(task));
             }
+//            System.out.println("FILE LOADED!");
             return new TaskList(loaded);
 
         } catch (FileNotFoundException e) {
+            System.out.println("Save file not found, using new file");
             return new TaskList();
 
         } catch (ParseException | IllegalArgumentException e) {
