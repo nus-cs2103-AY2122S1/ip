@@ -17,10 +17,11 @@ public class Response {
         System.out.println("Hello from\n" + logo + helloMsg);
     }
 
-    public static void listResponse(ArrayList<String> tasks) {
+    public static void listResponse(ArrayList<Task> tasks) {
         System.out.print(H_LINE);
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1 ) + ". " + tasks.get(i));
+            System.out.println((i + 1) + (tasks.get(i).status() ? ".[X] " : ".[ ] ") + tasks.get(i).description());
         }
         System.out.print(H_LINE);
     }
