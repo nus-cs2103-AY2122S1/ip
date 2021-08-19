@@ -16,20 +16,29 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String input = "";
-        int count = 1;
-        ArrayList<String> ls = new ArrayList<>();
+        ArrayList<Task> ls = new ArrayList<>();
 
         while (true) {
             input = sc.nextLine();
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
-                for (int i = 0; i < ls.size(); i++) {
-                    System.out.println(count + ". " + ls.get(i));
-                    count++;
+                if (ls.isEmpty()) {
+                    System.out.println("There are currently no tasks in your list.");
+                } else {
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < ls.size(); i++) {
+                        System.out.println((i+1) + "." + ls.get(i));
+                    }
                 }
+            } else if (input.startsWith("done")) {
+                int arrIndex = Integer.valueOf(input.substring(5)) - 1;
+                Task task = ls.get(arrIndex);
+                task.markAsDone();
+                System.out.println(task.markedAsDoneToString());
             } else {
-                ls.add(input);
+                Task task = new Task(input);
+                ls.add(task);
                 System.out.println("added: " + input);
             }
         }
