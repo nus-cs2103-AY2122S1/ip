@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Duke class
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-2
+ * @version Level-3
  */
 public class Duke {
     private Scanner sc;
@@ -39,7 +39,7 @@ public class Duke {
     }
 
     //Class method to print static line
-    private static void divider() {
+    public static void divider() {
         System.out.println("\t" +
                 "-------------------------------------");
     }
@@ -52,20 +52,35 @@ public class Duke {
         boolean end = false;
 
         do {
-            req = this.sc.nextLine();
+            //Get the first command
+            req = this.sc.next();
             switch (req) {
                 case "list":
                     Duke.divider();
-                    list.getAll();
+                    this.list.getAll();
                     Duke.divider();
                     break;
+
                 case "bye":
                     Duke.goodbye();
                     end = true;
                     break;
-                default:
+
+                case "done":
+                    int index = sc.nextInt(); //catch an error here
+                    Task doneTask = this.list.getIndex(index);
+                    doneTask.markAsDone();
+
                     Duke.divider();
-                    list.add(req);
+                    System.out.println("\tNice! I've marked this task as done:");
+                    System.out.println("\t\t" + doneTask.toString());
+                    Duke.divider();
+                    break;
+
+                default:
+                    Task task = new Task(req + sc.nextLine());
+                    Duke.divider();
+                    list.add(task);
                     Duke.divider();
             }
         } while (!end);

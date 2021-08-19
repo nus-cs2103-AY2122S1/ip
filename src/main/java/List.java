@@ -4,31 +4,35 @@ import java.util.ArrayList;
  * List class: Duke HAS-A List
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-2
+ * @version Level-3
  */
 
 public class List {
 
     //Class fields
-    private ArrayList<String> array;
+    private ArrayList<Task> array;
 
     //Constructor
     public List() {
-        this.array = new ArrayList<String>();
+        this.array = new ArrayList<Task>();
     }
 
     //Add method to insert new entry into list
-    public void add(String s) {
-        this.array.add(s);
-        System.out.println("\t" + "added: "  + s);
+    public void add(Task task) {
+        this.array.add(task);
+        System.out.println("\t" + "added: "  + task.getDescription());
     }
 
+    //getIndex method to return a specific task
+    public Task getIndex(int index) {
+        return array.get(index - 1);
+    }
 
     //getAll method to return all entries in list
     public void getAll() {
         int count = 1;
-        for (String s : this.array) {
-            System.out.println("\t" + count + ": " + s);
+        for (Task t : this.array) {
+            System.out.println("\t" + count + ": " + t.toString());
             count += 1;
         }
     }
