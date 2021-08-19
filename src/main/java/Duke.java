@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Duke {
     private static final String HELLO = "\nHello! I'm Duke\nWhat can I do for you?\n";
-    private static final String LINE = "===============================================";
+    private static final String LINE = "=======================================================";
     private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -10,9 +10,11 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String BYE = "Bye. Hope to see you again soon!\n";
 
-    private static final String TODO_FORMAT = "\nPlease use the following format: todo [todo_description]";
-    private static final String DEADLINE_FORMAT = "\nPlease use the following format: deadline [deadline_description] /by [deadline_date]";
-    private static final String EVENT_FORMAT = "\nPlease use the following format: event [event_description] /at [event_date_and_time]";
+    private static final String TODO_FORMAT = "\nPlease use the following format:\ntodo [todo_description]";
+    private static final String DEADLINE_FORMAT = "\nPlease use the following format:\n" +
+            "deadline [deadline_description] /by [deadline_date]";
+    private static final String EVENT_FORMAT = "\nPlease use the following format:\n" +
+            "event [event_description] /at [event_date_and_time]";
 
     private final ArrayList<Task> taskList = new ArrayList<>();
 
@@ -25,17 +27,16 @@ public class Duke {
     public void start() {
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
-        userInput = userInput.trim();
         try {
-            while (!userInput.equalsIgnoreCase("bye")) {
-                if (userInput.equalsIgnoreCase("list")) {
+            while (!userInput.trim().equalsIgnoreCase("bye")) {
+                if (userInput.trim().equalsIgnoreCase("list")) {
                     printList(taskList);
-                } else if (userInput.split("\\s")[0].equalsIgnoreCase("done")) {
-                    completeTask(userInput);
-                } else if (userInput.split("\\s")[0].equalsIgnoreCase("delete")) {
-                    deleteTask(userInput);
+                } else if (userInput.trim().split("\\s")[0].equalsIgnoreCase("done")) {
+                    completeTask(userInput.trim());
+                } else if (userInput.trim().split("\\s")[0].equalsIgnoreCase("delete")) {
+                    deleteTask(userInput.trim());
                 } else {
-                    categoriseTask(userInput);
+                    categoriseTask(userInput.trim());
                 }
                 userInput = sc.nextLine();
             }
@@ -129,7 +130,7 @@ public class Duke {
                         throw new InvalidKeywordException();
                 }
                 printAddedTasks(task);
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (ArrayIndexOutOfBoundsException ex) {
                 switch (taskType) {
                     case "deadline": throw new IncorrectFormatException(
                             "Please specify a description and date for your deadline!" + DEADLINE_FORMAT);
@@ -143,31 +144,41 @@ public class Duke {
 
     public void completeTask(String input) {
         try {
-            String indexOfTask = input.substring(5).trim();
-            int index = Integer.parseInt(indexOfTask);
-            Task currTask = taskList.get((index - 1));
-                if (currTask.getStatus()) {
-                    throw new RepeatedDoneException();
+                String[] parsedTask = input.split("\\s", 2);
+                String indexOfTask = parsedTask[1].trim();
+                int index = Integer.parseInt(indexOfTask);
+                if (index > 0 && index > taskList.size()) {
+                    throw new NonExistentTaskException();
                 } else {
-                    currTask.markAsDone();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(currTask.toString() + "\n" + LINE);
+                    Task currTask = taskList.get((index - 1));
+                    if (currTask.getStatus()) {
+                        throw new RepeatedDoneException();
+                    } else {
+                        currTask.markAsDone();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(currTask.toString() + "\n" + LINE);
+                    }
                 }
-            } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+        } catch (IndexOutOfBoundsException | NumberFormatException | NullPointerException ex) {
                 throw new InvalidNumberInputException();
             }
     }
 
     public void deleteTask(String input) {
         try {
-            String indexOfTask = input.substring(6).trim();
+            String[] parsedTask = input.split("\\s", 2);
+            String indexOfTask = parsedTask[1].trim();
             int index = Integer.parseInt(indexOfTask);
-            Task currTask = taskList.remove((index - 1));
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(currTask.toString());
-            printRemainingTasks();
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                throw new InvalidNumberInputException();
+            if (index > 0 && index > taskList.size()) {
+                throw new NonExistentTaskException();
+            } else {
+                Task currTask = taskList.remove(index - 1);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(currTask.toString());
+                printRemainingTasks();
+            }
+        } catch (IndexOutOfBoundsException | NumberFormatException | NullPointerException ex) {
+            throw new InvalidNumberInputException();
         }
     }
 
@@ -186,17 +197,17 @@ public class Duke {
     }
 
     public boolean hasEmptyDesc(String[] taskArray) {
-        return taskArray.length == 1 || taskArray[1].isEmpty() || taskArray[1].isBlank();
+        return taskArray.length == 1 || taskArray[1].isBlank() || taskArray[1].isEmpty();
     }
 
     public boolean hasDateButEmptyDesc(String[] taskArray) {
-        return taskArray[0].isBlank() || taskArray[0].isEmpty();
+        return (taskArray[0].isBlank() || taskArray[0].isEmpty()) && (!taskArray[1].isBlank());
     }
 
     public boolean containsTask(Task task, ArrayList<Task> list) {
        boolean ans = false;
         for (Task value : list) {
-            if (value.getDescription().equals(task.getDescription())) {
+             if (value.getDescription().equals(task.getDescription())){
                 ans = true;
                 break;
             }
