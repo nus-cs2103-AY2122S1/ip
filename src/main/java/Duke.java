@@ -14,6 +14,7 @@ public class Duke {
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event"),
+        DELETE("delete"),
         OTHER(" ");
 
         private String text;
@@ -85,6 +86,10 @@ public class Duke {
                                 "    :( OOPS! The description or a time of an event cannot be empty.\n" +
                                 horizontalLine);
                     }
+                    break;
+                case DELETE:
+                    int pos2 = Integer.parseInt(splitWords[1]);
+                    response.delete(pos2 - 1);
                     break;
                 case OTHER:
                     System.out.println(horizontalLine +
