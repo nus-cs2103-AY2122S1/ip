@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
  class Task {
     protected String description;
     protected boolean isDone;
@@ -67,7 +68,12 @@ class Event extends Task {//Starts and ends by a certain time
 }
 
 public class Duke {
-
+    //        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
     static List<Task> toDo = new ArrayList<>();
 
     static int countTasks(){
@@ -92,6 +98,7 @@ public class Duke {
 
         while(myObj.hasNext()){
             System.out.println();
+
             item = myObj.nextLine();//Parse the line
 
             System.out.println(item);//User input typed
@@ -113,23 +120,41 @@ public class Duke {
                 continue;
             }
             if(item.contains("done")){//Complete a task
-                item = item.replaceAll("\\D+","");//Extracts number from input
-                int completedItem = Integer.parseInt(item);
-                toDo.get(completedItem-1).markAsDone();//Set the task to done
-                System.out.println(line);
-                System.out.println("     " + "Nice! I've marked this task as done:");
-                System.out.println("     " + toDo.get(completedItem-1));
-                System.out.println(line);
-                continue;
+                try {
+                    item = item.replaceAll("\\D+","");//Extracts number from input
+                    int completedItem = Integer.parseInt(item);
+                    toDo.get(completedItem-1).markAsDone();//Set the task to done
+                    System.out.println(line);
+                    System.out.println("     " + "Nice! I've marked this task as done:");
+                    System.out.println("     " + toDo.get(completedItem-1));
+                    System.out.println(line);
+                    continue;
+                }
+                catch (IndexOutOfBoundsException e){
+                    System.out.println(line);
+                    System.out.println("     " + "OOPS You dont have this many items in the list :)");
+                    System.out.println(line);
+                    continue;
+                }
+
             }
 
             if(item.contains("todo")){
                 System.out.println(line);
-                String description = item.substring(5,item.length());
-                System.out.println("     added: " + new ToDo(item));//Added item
-                toDo.add(new ToDo(description));//Added new task to arraylist
-                System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
-                System.out.println(line);
+                try{
+                    String description = item.substring(5,item.length());
+                    System.out.println("     added: " + new ToDo(item));//Added item
+                    toDo.add(new ToDo(description));//Added new task to arraylist
+                    System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
+                    System.out.println(line);
+                }
+                catch (StringIndexOutOfBoundsException e){
+
+                    System.out.println("     " + "Please tell us the todo task :)");
+                    System.out.println(line);
+                }
+                continue;
+
             }
             if(item.contains("deadline")){
                 String by = item.substring(item.lastIndexOf("/") + 1);
@@ -140,6 +165,7 @@ public class Duke {
                 toDo.add(new Deadline(description,by));//Added new task to arraylist
                 System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
                 System.out.println(line);
+                continue;
             }
             if(item.contains("event")){
                 String by = item.substring(item.lastIndexOf("/") + 1);
@@ -149,25 +175,16 @@ public class Duke {
                 toDo.add(new Event(description,by));//Added new task to arraylist
                 System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
                 System.out.println(line);
+                continue;
             }
-//            toDo.add(new Task(item));//Added new task to arraylist
-//            add(item);
-//            System.out.println(line);
-//            System.out.println("     added: " + item);//Added item
-//            System.out.println(line);
+            else{
+                 System.out.println(line);
+                 System.out.println("     " + "OOPS You have entered an invalid input :)");
+                 System.out.println(line);
+              }
+
+
         }
-
-
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
-//        for(String s: toDo){
-//
-//            System.out.println(s);
-//        }
 
     }
 }
