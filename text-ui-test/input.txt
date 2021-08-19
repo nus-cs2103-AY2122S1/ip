@@ -1,0 +1,10 @@
+list
+todo finish iP
+todo suanlafen
+list
+event finish iP /at NOW
+deadline finish iP /by TONIGHT
+list
+done 2
+list
+Bye!

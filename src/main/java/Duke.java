@@ -35,7 +35,6 @@ public class Duke {
             for (int i = 0; i < todos.size(); i++) {
                 System.out.println(indentation + (i + 1) + ": " + todos.get(i).toString());
             }
-            System.out.println(indentation + todos.size() + " more to go! (」＞＜)」");
         }
         printBreak();
     }
@@ -44,6 +43,7 @@ public class Duke {
         list.add(task);
         printBreak();
         System.out.println(indentation + "added: " + task.toString());
+        System.out.println("\n" + indentation + "You have " + list.getList().size() + " task(s) to go! (]＞＜)]");
         printBreak();
     }
 
@@ -54,7 +54,8 @@ public class Duke {
     }
 
     private static void printDone(int taskNo) {
-        System.out.println(indentation + "(´• ω •`) What a rarity! This task has been marked as done: ");
+        printBreak();
+        System.out.println(indentation + "(´• ω •`) What a rarity! This task has been marked as done:");
         System.out.println(indentation + "[X] " + list.complete(taskNo));
         printBreak();
     }
