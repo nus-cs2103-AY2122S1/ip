@@ -4,11 +4,11 @@ public class ListCommand extends Command {
 
     protected String input;
 
-    protected TaskList list;
+    protected Task[] list;
 
     protected int index;
 
-    ListCommand(String input, TaskList list, int index) {
+    ListCommand(String input, int index, Task[] list) {
         this.input = input;
         this.list = list;
         this.index = index;
@@ -27,7 +27,6 @@ public class ListCommand extends Command {
 
         return "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
                 + tasks
-                + "\n"
                 + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n";
     }
 }

@@ -4,28 +4,24 @@ public class DoneCommand extends Command {
 
     protected String input;
 
-    protected TaskList list;
+    protected Task[] list;
 
-    DoneCommand(String input, TaskList list) {
+    DoneCommand(String input, Task[] list) {
         this.input = input;
         this.list = list;
     }
 
     public String reply() throws DukeException {
-
         try {
             int index = Integer.parseInt(input.substring(5)) - 1;
-            this.list[index].toggleState();
+            list[index].markAsDone();
             return "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
                     + "Great! I've marked the following task as done:\n"
                     + this.list[index].getTaskState()
                     + "\n"
                     + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n";
         } catch (NumberFormatException e) {
-            throw new DukeException("You have entered an incorrect format for the \"done\" command."
-                    + "\nThe command should be in the format \"done X\" where X is a non-zero integer.");
-        } catch (Exception e) {
-            throw new DukeException("Something went wrong...");
+            throw new DukeException("It looks like you did not enter a valid integer for the \"done\" command. Please try again!");
         }
     }
 }

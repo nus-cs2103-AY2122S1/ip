@@ -35,7 +35,7 @@ public class Task {
     /**
      * Toggles the current state by negating the boolean state value. (Done vs not done)
      */
-    public void toggleState() {
-        this.done = !this.done;
+    public void markAsDone() {
+        this.done = true;
     }
 }

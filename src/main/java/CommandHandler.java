@@ -7,61 +7,52 @@ public class CommandHandler {
 
     protected String input;
 
-    protected TaskList list;
+    protected Task[] list;
 
-    protected int index;
+    protected int index = 0;
 
-    CommandHandler(Scanner scanner, String input, TaskList list, int index) {
+    CommandHandler(Scanner scanner, Task[] list) {
         this.scanner = scanner;
-        this.input = input;
         this.list = list;
-        this.index = index;
     }
 
-    public void handle() throws DukeException {
-        // TODO Change to enums
-        // TODO Error Handling
-        if (this.input.equals("bye")) {
-
-            // If the user types "bye", handle command
-            ByeCommand command = new ByeCommand(this.input);
-            System.out.println(command.reply());
-
-            // End bot
-            this.closeScanner();
-
-        } else if (this.input.equals("list")) {
+    public void handle(String input) throws DukeException {
+        // TODO Change to enums?
+        if (input.equals("list")) {
 
             // If the user types "list", show the list of tasks
-            ListCommand command = new ListCommand(this.input, this.list, this.index);
+            ListCommand command = new ListCommand(input, index, this.list);
             System.out.println(command.reply());
 
-        } else if (this.input.startsWith("done ")) {
+        } else if (input.startsWith("done ")) {
 
             // If the user types "done X" where X is a non-zero integer, mark the task as complete
-            DoneCommand command = new DoneCommand(this.input, this.list);
+            DoneCommand command = new DoneCommand(input, this.list);
             System.out.println(command.reply());
 
-        } else if (this.input.startsWith("todo ") && input.length() > 5) {
+        } else if (input.startsWith("todo ")) {
 
             // If the user types "todo [XXX]" where [XXX] is a substring, store substring as a Todo object
-            TodoCommand command = new TodoCommand(this.input, this.list);
+            TodoCommand command = new TodoCommand(input, index, this.list);
             System.out.println(command.reply());
+            index++;
 
-        } else if (this.input.startsWith("deadline ") && input.contains("/by ")) {
+        } else if (input.startsWith("deadline ") && input.contains("/by ")) {
 
             // If the user types "deadline [XXX]" where [XXX] is a substring, store substring as a Deadline object
-            DeadlineCommand command = new DeadlineCommand(this.input, this.list);
+            DeadlineCommand command = new DeadlineCommand(input, index, this.list);
             System.out.println(command.reply());
+            index++;
 
-        } else if (this.input.startsWith("event ") && input.contains("/at ")) {
+        } else if (input.startsWith("event ") && input.contains("/at ")) {
 
             // If the user types "event [XXX]" where [XXX] is a substring, store substring as an Event object
-            EventCommand command = new EventCommand(this.input, this.list);
+            EventCommand command = new EventCommand(input, index, this.list);
             System.out.println(command.reply());
+            index++;
 
-        } else {
-            throw new DukeException("Invalid command.");
+        } else if (!input.equals("bye")){
+            throw new DukeException("You've entered an unknown request... The bot doesn't know what that means!");
         }
     }
 
