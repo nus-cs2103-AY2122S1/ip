@@ -2,7 +2,7 @@ import java.util.Scanner; // import the Scanner class
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main (String[] args) throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>(100);
         Scanner input = new Scanner(System.in);
         System.out.println("Hello! I'm Duke");
@@ -30,6 +30,9 @@ public class Duke {
                 System.out.println(doneTask);
             }
             else if (userInput.startsWith("todo")) {
+                if (userInput.equals("todo")) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
                 String[] split = userInput.split("todo ");
                 task = new Todo(split[1]);
                 tasks.add(task);
@@ -37,6 +40,9 @@ public class Duke {
                 System.out.println(task);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else if (userInput.startsWith("deadline")) {
+                if (userInput.equals("deadline")) {
+                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                }
                 String[] split = userInput.split("deadline ");
                 String description = split[1].split(" /")[0];
                 String time = split[1].split("/by ")[1];
@@ -47,6 +53,9 @@ public class Duke {
                 System.out.println(task);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else if (userInput.startsWith("event")) {
+                if (userInput.equals("event")) {
+                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                }
                 String[] split = userInput.split("event ");
                 String description = split[1].split(" /")[0];
                 String time = split[1].split("/at ")[1];
@@ -57,7 +66,7 @@ public class Duke {
                 System.out.println(task);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else {
-                System.out.println("Invalid input!");
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
