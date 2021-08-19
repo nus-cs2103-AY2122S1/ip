@@ -7,4 +7,14 @@ deadline finish iP /by TONIGHT
 list
 done 2
 list
+todo
+done 0
+done 10
+event
+event test iP
+event test iP /by
+list
+deadline
+deadline /by
+blah blah
 Bye!

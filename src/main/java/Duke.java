@@ -41,6 +41,7 @@ public class Duke {
 
     private static void printAdd(Task task) {
         list.add(task);
+
         printBreak();
         System.out.println(indentation + "added: " + task.toString());
         System.out.println("\n" + indentation + "You have " + list.getList().size() + " task(s) to go! (]＞＜)]");
@@ -53,11 +54,20 @@ public class Duke {
         printBreak();
     }
 
-    private static void printDone(int taskNo) {
-        printBreak();
-        System.out.println(indentation + "(´• ω •`) What a rarity! This task has been marked as done:");
-        System.out.println(indentation + "[X] " + list.complete(taskNo));
-        printBreak();
+    private static void printDone(int taskNo) throws ArrayIndexOutOfBoundsException {
+        try {
+            if (taskNo == -1 || taskNo + 1 >= list.getList().size()) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+            printBreak();
+            System.out.println(indentation + "(´• ω •`) What a rarity! This task has been marked as done:");
+            System.out.println(indentation + "[X] " + list.complete(taskNo));
+            printBreak();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printBreak();
+            System.out.println(indentation + "(＃￣ω￣) Eh... No such task found.");
+            printBreak();
+        }
     }
 
 
@@ -69,31 +79,58 @@ public class Duke {
             String str = sc.nextLine();
             String command = str.split(" ")[0];
 
-            if (command.equals(BYE)) {
-                printBye();
-                break;
-            } else if (command.equals(LIST)) {
-                printList();
-            } else if (command.equals(DONE)) {
-                int taskNo = Integer.parseInt(str.split(" ")[1]) - 1;
-                printDone(taskNo);
-            } else if (command.equals(TODO)) {
-                String desc = str.substring(5);
-                Todos newTodo = new Todos(desc);
-                printAdd(newTodo);
-            } else if (command.equals(EVENT)) {
-                String desc = str.split(" /at ")[0].substring(6);
-                String at = str.split(" /at ")[1];
-                Events newEvent = new Events(desc, at);
-                printAdd(newEvent);
-            } else if (command.equals(DEADLINE)) {
-                String desc = str.split(" /by ")[0].substring(9);
-                String by = str.split(" /by ")[1];
-                Deadlines newDeadline = new Deadlines(desc, by);
-                printAdd(newDeadline);
-            } else {
+            try {
+                if (command.equals(BYE)) {
+                    printBye();
+                    break;
+                } else if (command.equals(LIST)) {
+                    printList();
+                } else if (command.equals(DONE)) {
+                    int taskNo = Integer.parseInt(str.split(" ")[1]) - 1;
+                    printDone(taskNo);
+                } else if (command.equals(TODO)) {
+                    String desc = str.substring(5);
+                    if (desc.equals("")) {
+                        throw new IllegalArgumentException();
+                    }
+                    Todos newTodo = new Todos(desc);
+                    printAdd(newTodo);
+                } else if (command.equals(EVENT)) {
+                    String desc = str.split(" /at ")[0].substring(6);
+                    if (desc.equals("")) {
+                        throw new IllegalArgumentException();
+                    }
+                    String at = str.split(" /at ")[1];
+                    if (at.equals("")) {
+                        throw new ArrayIndexOutOfBoundsException();
+                    }
+                    Events newEvent = new Events(desc, at);
+                    printAdd(newEvent);
+                } else if (command.equals(DEADLINE)) {
+                    String desc = str.split(" /by ")[0].substring(9);
+                    if (desc.equals("")) {
+                        throw new IllegalArgumentException();
+                    }
+                    String by = str.split(" /by ")[1];
+                    if (by.equals("")) {
+                        throw new ArrayIndexOutOfBoundsException();
+                    }
+                    Deadlines newDeadline = new Deadlines(desc, by);
+                    printAdd(newDeadline);
+                } else {
+                    throw new DukeException("(￣ ￣|||) Sorry I do not understand.");
+                }
+            } catch (DukeException e) {
                 printBreak();
-                System.out.println(indentation + "(￣ ￣|||) Sorry I do not understand.");
+                System.out.println(indentation + "Ehh... " + e);
+                printBreak();
+            } catch (IllegalArgumentException | StringIndexOutOfBoundsException e) {
+                printBreak();
+                System.out.println(indentation + "(・`ω´・) Don't leave it empty!!");
+                printBreak();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                printBreak();
+                System.out.println(indentation + "(-_-) You forgot the date...");
                 printBreak();
             }
         }
