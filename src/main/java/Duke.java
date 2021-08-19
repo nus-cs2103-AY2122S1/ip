@@ -19,12 +19,6 @@ public class Duke {
             this.numTask = 0;
         }
 
-        public void add(Task task) {
-            tasks[this.numTask] = task;
-            this.numTask++;
-            System.out.println("added: " + task.description);
-        }
-
         public void addCustom(Task task) {
             tasks[this.numTask] = task;
             this.numTask++;
@@ -109,9 +103,6 @@ public class Duke {
                 storage.addCustom(new Event(eventMatcher.group(1), eventMatcher.group(2)));
                 continue;
             }
-
-            // add to list
-            storage.add(new Task(input));
         }
     }
 }
