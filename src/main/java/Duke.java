@@ -5,7 +5,7 @@ public class Duke {
         String line = "____________________________________________________________\n";
         String startUp = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int count = 0;
 
         System.out.println(line + startUp + line);
@@ -13,6 +13,13 @@ public class Duke {
         while(true) {
             Scanner myObj = new Scanner(System.in);
             String input = myObj.nextLine();
+
+            if (input.startsWith("done")) {
+                int index = Integer.parseInt(input.substring(5)) - 1;
+                list[index].setDone();
+                System.out.println(line + "Nice! I've marked this task as done: \n" + list[index] + System.lineSeparator() + line);
+                continue;
+            }
 
             if (input.equals("list")) {
                 System.out.print(line);
@@ -25,6 +32,7 @@ public class Duke {
                 System.out.print(line);
                 continue;
             }
+
             if (input.equals("bye")) {
                 System.out.println(line + "Bye. Hope to see you again soon!" + System.lineSeparator() + line);
                 break;
@@ -32,7 +40,7 @@ public class Duke {
 
 
             System.out.println(line + " " + "added: " + input + System.lineSeparator() + line);
-            list[count] = input;
+            list[count] = new Task(input);
             count++;
 
         }
