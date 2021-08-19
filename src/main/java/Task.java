@@ -5,7 +5,7 @@
  * @author Leong Hong Fai
  */
 
-public class Task {
+public abstract class Task {
     private String name;
     private boolean completion;
 

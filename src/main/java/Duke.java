@@ -6,8 +6,8 @@ import java.util.Scanner;
  * Duke the ChatBot allows users to add 3 different types of tasks, mark them as done, and delete tasks.
  * The commands for usage are as follows:
  * 1. "todo <name>" where name is what the user would like the todo to be called.
- * 2. "event <name>" where name is what the user would like the event to be called.
- * 3. "deadline <name>" where name is what the user would like the deadline to be called.
+ * 2. "event <name> /at <date>" where name is what the user would like the event to be called and date is when the event is happening.
+ * 3. "deadline <name> /by <date>" where name is what the user would like the deadline to be called and date is when the deadline is set.
  * 4. "list" to view current tasks added to the tasks list.
  * 5. "done <number>" where number is the task with the corresponding number in the list which the user would like to mark as completed.
  * 6. "delete <number>" where number is the task with the corresponding number in the list which the user would like to remove.
