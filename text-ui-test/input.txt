@@ -7,4 +7,6 @@ list
 done 1
 list
 deadline assignment due /by 12am
+random
+deadline
 bye

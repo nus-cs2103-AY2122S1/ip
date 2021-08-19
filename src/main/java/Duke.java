@@ -58,6 +58,34 @@ class Todo extends Task {
         return "[T]" + super.toString();
     }
 }
+class DukeException extends Exception {
+    private String message;
+    public DukeException(String message) {
+        this.message = message;
+    }
+    public String toString() {
+        return message;
+    }
+}
+
+class EmptyDescriptionException extends DukeException {
+    public EmptyDescriptionException(String message) {
+        super(message);
+    }
+    public String toString() {
+        return super.toString();
+    }
+}
+
+class InvalidCommandException extends DukeException {
+    public InvalidCommandException(String message) {
+        super(message);
+    }
+    public String toString() {
+        return super.toString();
+    }
+}
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -81,7 +109,7 @@ public class Duke {
                 int count = 1;
                 for (int i = 0; i < userList.size(); i++) {
                     Task t = userList.get(i);
-                    System.out.println(count + ". " +  t.toString());
+                    System.out.println(count + ". " + t.toString());
                     count++;
                 }
             } else if (command.startsWith("done") && Character.isDigit(command.charAt(command.length() - 1))
@@ -98,31 +126,48 @@ public class Duke {
                 }
             } else {
                 if (command.startsWith("todo")) {
-                    Task task = new Todo(command.substring(5));
-                    userList.add(task);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(task.toString());
-                    System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                    if (command.length() <= 5) {
+                        displayError("todo");
+                    } else {
+                        Task task = new Todo(command.substring(5));
+                        userList.add(task);
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(task.toString());
+                        System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                    }
                 } else if (command.startsWith("deadline")) {
-                    String[] parts =  command.split("/");
-                    Task task = new Deadline(parts[0].substring(9), parts[1].substring(3));
-                    userList.add(task);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(task.toString());
-                    System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                    if (command.length() <= 9) {
+                        displayError("deadline");
+                    } else {
+                        String[] parts = command.split("/");
+                        Task task = new Deadline(parts[0].substring(9), parts[1].substring(3));
+                        userList.add(task);
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(task.toString());
+                        System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                        
+                    }
                 } else if (command.startsWith("event")) {
-                    String[] parts =  command.split("/");
-                    Task task = new Event(parts[0].substring(6), parts[1].substring(3));
-                    userList.add(task);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(task.toString());
-                    System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                    if (command.length() <= 6) {
+                        displayError("event");
+                    } else {
+                        String[] parts = command.split("/");
+                        Task task = new Event(parts[0].substring(6), parts[1].substring(3));
+                        userList.add(task);
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(task.toString());
+                        System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                    }
                 } else {
-                    Task task = new Task(command);
-                    userList.add(task);
-                    System.out.println("added: " + command);
+                    DukeException exp = new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(exp);
                 }
             }
         }
+    }
+    
+    private static void displayError(String str) {
+        DukeException exp = new EmptyDescriptionException("OOPS!!! The description of a " + str + " cannot be empty.");
+        System.out.println(exp);
     }
 }

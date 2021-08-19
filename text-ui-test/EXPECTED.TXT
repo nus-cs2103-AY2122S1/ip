@@ -25,4 +25,6 @@ Nice! I've marked this task as done:
 Got it. I've added this task:
 [D][ ] assignment due (by: 12am)
 Now you have 4 tasks in the list.
+OOPS!!! I'm sorry, but I don't know what that means :-(
+OOPS!!! The description of a deadline cannot be empty.
 Bye. Have a great day!
