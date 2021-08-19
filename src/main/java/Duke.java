@@ -7,9 +7,6 @@ public class Duke {
             super("OOPS!!! " + errorMessage);
         }
     }
-    public void taskNumberAnnounce(int number) {
-        System.out.println("你目前点了" + String.valueOf(number) + "样菜");
-    }
     public static class Task {
         protected String description;
         protected boolean isDone;
@@ -161,11 +158,35 @@ public class Duke {
                     }
                     sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in da list.");
                     printStatement(sb.toString());
-                }else if (input.substring(0, 4).equals("done")) {
-                    int number = Integer.valueOf(input.split(" ")[1]) - 1;
+                }else if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
+                    String message = input.substring(4);
+                    if (message.equals("")) {
+                        throw new DukeException("Please indicate item to be completed.");
+                    }
+                    message = message.strip();
+                    int number = Integer.parseInt(message) - 1;
                     Task task = arrayList.get(number);
                     task.markAsDone();
                     printStatement("Nice! I've marked this task as done:\n" + task);
+                } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
+                    String message = input.substring(6);
+                    if (message.equals("")) {
+                        throw new DukeException("Please indicate item to be deleted.");
+                    }
+                    message = message.strip();
+                    int index = Integer.parseInt(message) - 1;
+                    if (index > arrayList.size() - 1) {
+                        throw new DukeException("Item does not exist.");
+                    }
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Noted. I've removed this task:\n");
+                    sb.append(arrayList.get(index).toString() + "\n");
+                    arrayList.remove(index);
+                    System.out.println(arrayList);
+                    sb.append("Now you have " + arrayList.size() + " tasks in da list.");
+                    printStatement(sb.toString());
+
+
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
