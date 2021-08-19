@@ -5,17 +5,14 @@
 public class Task {
     private String name;
     private boolean isDone;
-    private int position;
 
     /**
      * Constructor.
      * @param name the name of the task
-     * @param pos the position of the task in the list
      */
-    public Task(String name, int pos) {
+    public Task(String name) {
         this.name = name;
         this.isDone = false;
-        this.position = pos;
     }
 
     /**
