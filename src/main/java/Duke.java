@@ -2,7 +2,7 @@
  * Contains skeleton of Duke chatbot for IP of CS2103 2021
  *
  * @author: Ren Weilin
- * @version: 1.0 (19 August 2021)
+ * @version: 19 August 2021
  */
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import  java.util.Scanner;
 
 public class Duke {
 
-    private ArrayList<String> commandList;
+    private final ArrayList<Task> commandList;
 
     private Duke() {
         commandList = new ArrayList<>(100);
@@ -18,19 +18,12 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke instance = new Duke();
+        instance.begin();
+    }
 
+    public void begin() {
         //Greet
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        printBreakLine();
-        System.out.println("  Hello! I'm Duke");
-        System.out.println("  What can I do for you?");
-        printBreakLine();
+        welcomeGreet();
 
         //Echo
         while (true) {
@@ -46,24 +39,42 @@ public class Duke {
                 break;
             } else  if (command.equals("list")) {
                 printBreakLine();
-                for (int i = 1; i < instance.commandList.size() + 1; i++) {
-                    System.out.printf("  %d. %s%n", i, instance.commandList.get(i - 1));
+                for (int i = 1; i < commandList.size() + 1; i++) {
+                    System.out.printf("  %d. %s%n", i, commandList.get(i - 1)).toString();
                 }
                 printBreakLine();
-            } else {
-                instance.commandList.add(command);
+            } else if(command.contains("done")) {
+                int index = Integer.parseInt(command.split(" ")[1]);
                 printBreakLine();
-                System.out.println("  added:" + command);
+                commandList.get(index - 1).markAsDone();
+                printBreakLine();
+            } else {
+                commandList.add(new Task(command));
+                printBreakLine();
+                System.out.println("  added: " + command);
                 printBreakLine();
             }
         }
     }
 
-
-    private static void printBreakLine() {
+    private void printBreakLine() {
         for (int i = 0; i < 12; i++) {
             System.out.print("==");
         }
         System.out.println();
+    }
+
+    private void welcomeGreet() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+
+        printBreakLine();
+        System.out.println("  Hello! I'm Duke");
+        System.out.println("  What can I do for you?");
+        printBreakLine();
     }
 }
