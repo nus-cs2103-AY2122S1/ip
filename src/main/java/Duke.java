@@ -33,6 +33,12 @@ public class Duke {
                     aList.set(Integer.parseInt(input.split(" ")[1])-1, tempTask.markDone());
                     System.out.println(aList.get(Integer.parseInt(input.split(" ")[1])-1));
                     break;
+                case "delete":
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(" " + aList.get(Integer.parseInt(input.split(" ")[1])-1));
+                    aList.remove(Integer.parseInt(input.split(" ")[1])-1);
+                    System.out.println(String.format("Now you have %d tasks in the list",aList.size()));
+                    break;
                 case "todo":
                     try {
                         ToDos.isLegitInput(input);
@@ -41,7 +47,7 @@ public class Duke {
                         break;
                     }
                     System.out.println("Got it. I've added this task:");
-                    aList.add(new ToDos(input, false));
+                    aList.add(new ToDos(ToDos.getNameInput(input), false));
                     System.out.println(" " + aList.get(aList.size() - 1));
                     System.out.println(String.format("Now you have %d tasks in the list",aList.size()));
                     break;
