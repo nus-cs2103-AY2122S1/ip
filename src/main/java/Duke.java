@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Duke {
     protected static List<Task> todoList;
@@ -28,7 +27,7 @@ public class Duke {
         todoList = new ArrayList<>();
 
         printLine();
-        printBigIcon();
+        // printBigIcon();
         printHello();
 
         Command.process();

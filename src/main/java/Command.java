@@ -7,6 +7,8 @@ public abstract class Command {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
+    private static String pre_command;
+    private static String body_command;
 
     private Command() {}
 
@@ -84,6 +86,7 @@ public abstract class Command {
                 Duke.printLine();
 
                 String[] parts = userCommand.split(" ", 2);
+
                 switch (parts[0]) {
                     case BYE_COMMAND:
                         BYE.execute();
@@ -107,13 +110,30 @@ public abstract class Command {
                         throw new IllegalArgumentException("Unexpected argument: " + parts[0]);
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Error: Need to input format \"done <integer>\"");
-                System.out.println(e);
+                System.out.println("OOPS!!! You need to say format \"done <the order of your task>\"");
                 Duke.printLine();
             } catch (IllegalArgumentException e) {
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-()");
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :(");
                 Duke.printLine();
             }
+        }
+    }
+
+    private static void analyze(String command) {
+        String[] parts = command.split(" ", 2);
+        switch (parts.length) {
+            case 0:
+                Command.pre_command = null;
+                Command.body_command = null;
+                break;
+            case 1:
+                Command.pre_command = parts[0];
+                Command.body_command = null;
+                break;
+            default:
+                Command.pre_command = parts[0];
+                Command.body_command = parts[1];
+                break;
         }
     }
 
