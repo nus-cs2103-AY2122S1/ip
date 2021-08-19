@@ -1,7 +1,7 @@
 public class Task {
-    boolean done;
-    String title;
-    String check;
+    private boolean done;
+    private String title;
+    private String check;
 
     Task(String title) {
         this.done = false;
