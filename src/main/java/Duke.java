@@ -100,7 +100,11 @@ public class Duke {
                 break;
 
             case TODO:
-                String toDoDescription = command.substring(command.indexOf(" ")+1);
+                int spaceIndex = command.indexOf(" ");
+                String toDoDescription = command.substring(spaceIndex+1);
+                if (toDoDescription.isBlank() || spaceIndex == -1){
+                    throw new NoToDoDescriptionException();
+                };
                 Task toDo = new ToDo(toDoDescription);
                 addTask(toDo);
                 break;
