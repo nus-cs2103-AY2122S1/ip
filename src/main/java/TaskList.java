@@ -60,6 +60,13 @@ public class TaskList {
         return this.listOfTasks.get(i);
     }
 
+    public Task deleteTask(int i) throws DukeIncorrectInputs {
+        if (i < 1 || i > this.listOfTasks.size()) {
+            throw new DukeNoSuchTask(new IllegalArgumentException());
+        }
+        return this.listOfTasks.remove(i - 1);
+    }
+
     /**
      * String representation of the TaskList object.
      */

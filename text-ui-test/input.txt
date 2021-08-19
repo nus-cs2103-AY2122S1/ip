@@ -15,6 +15,9 @@ todo
 123456
 done 2
 list
+done
+done one
+done one by one
 done 1
 done 2
 done 3
@@ -27,4 +30,29 @@ done -1
 done -100
 list
 read book
+delete 1
+delete 1
+delete
+delete one
+delete one by one
+delete 1
+delete 1
+delete 1
+todo add book
+todo read book
+todo take book
+todo throw book
+todo return book
+delete 5
+list
+delete 4
+list
+delete 3
+list
+delete 2
+list
+delete 1
+list
+delete 0
+list
 bye

@@ -58,14 +58,21 @@ public class Duke {
         return arrString[0];
     }
 
-    private int getSecondNum(String s) throws DukeDoneIncorrectArgument {
+    private int getSecondNum(String s) throws DukeIncorrectInputs {
         String[] arrString = s.split(" ", 2);
         try {
-            Integer.parseInt(arrString[1]);
+            String second = arrString[1];
+            Integer.parseInt(second);
         } catch (IllegalArgumentException e) {
+            throw new DukeDoneIncorrectArgument();
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeDoneIncorrectArgument();
         }
         return Integer.parseInt(arrString[1]);
+    }
+
+    private Task deleteTask(int i) throws DukeNoSuchTask {
+        return this.listOfTasks.deleteTask(i);
     }
 
     public static void main(String[] args) {
@@ -85,6 +92,11 @@ public class Duke {
                     d.listOfTasks.setTaskAsDone(i);
                     System.out.println(d.chatBotMessage("\tNice! I've marked this task as done:\n" +
                             "\t\t" + d.listOfTasks.getTask(i - 1) + "\n"));
+                } else if (d.getFirstWord(userInput).equals("delete")) {
+                    int i = d.getSecondNum(userInput);
+                    Task taskRemoved = d.deleteTask(i);
+                    System.out.println(d.chatBotMessage("\tNoted. I've removed this task:\n" +
+                            "\t\t" + taskRemoved + "\n"));
                 } else {
                     System.out.println(d.chatBotMessage("\tGot it. I've added this task:\n" +
                             "\t\t" + d.addTaskToList(userInput) + "\n" +
