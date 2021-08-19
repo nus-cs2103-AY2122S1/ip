@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected final String description;
     protected boolean isDone;
 
@@ -19,7 +19,5 @@ public class Task {
         isDone = true;
     }
 
-    public void printTask() {
-        System.out.println(description);
-    }
+    public abstract String showTask();
 }

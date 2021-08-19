@@ -1,154 +1,278 @@
 import java.util.Scanner;
 
-
 public class Duke {
 
-    public static Task[] taskList = new Task[100];
-    public static int num = 0;
+    // Lines to be printed
+    public static final String[] GREETING_LINES = {
+            "Hello! I'm Duke",
+            "What can I do for you?"};
+    public static final String BYE_LINE =
+            "Bye. Hope to see you again soon!";
+    public static final String TASK_DONE_LINE =
+            "Nice! I've marked this task as done:\n  ";
+    public static final String LIST_INTRO_LINE =
+            "Here are the tasks in your list";
+    public static final String NOT_RECOGNISED_LINE =
+            ":( Oh no! Command not recognised";
+    public static final String DONE_FORMAT_LINE =
+            ":( Oh no! Done must follow the format: done <index>";
+    public static final String OUT_OF_RANGE_LINE =
+            ":( Oh no! The index given is out of the range of the number of tasks.";
+    public static final String COMPLETED_LINE =
+            ":( Oh no! The task has already been completed.";
+    public static final String TODO_LINE =
+            ":( Oh no! Description of todo cannot be empty";
+    public static final String DEADLINE_LINE =
+            ":( Oh no! Deadline must follow the format <description> /by <time/date> ";
+    public static final String EVENT_LINE =
+            ":( Oh no! Event must follow the format <description> /at <time/date> ";
 
-    //This function prints the horizontal line
-    public static void printHorizontalLine() {
-        System.out.println("___________________________________________________________________________");
+    // Commands Constant
+    public static final String BYE = "bye";
+    public static final String LIST = "list";
+    public static final String TODO = "todo";
+    public static final String DEADLINE = "deadline";
+    public static final String EVENT = "event";
+    public static final String DONE = "done";
+
+    // Regex Constants
+    public static final String GET_DESCRIPTION_REGEX = "/.+";
+    public static final String GET_AT_REGEX = ".+/at ";
+    public static final String GET_BY_REGEX = ".+/by ";
+    public static final String SPACE_REGEX = "\\s";
+    public static final String START_LINE_REGEX = "^";
+    public static final String DIGITS_REGEX = "\\d+";
+    public static final String DEADLINE_REGEX = ".+/by.+";
+    public static final String EVENT_REGEX = ".+/at.+";
+
+    // Task variables
+    public static Task[] taskList= new Task[100];
+    public static int taskCount = 0;
+
+    // Prints a horizontal dash line
+    public static void printDashLine(){
+        System.out.println("--------------------------------"
+                + "---------------------------------------");
     }
 
-    //This function prints the welcome message
-    public static void printWelcomeMessage() {
-        printHorizontalLine();
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        printHorizontalLine();
+    public static void printOneLine(String line){
+        printDashLine();
+        System.out.println(line);
+        printDashLine();
     }
 
-    //This functions prints the acknowledgement message after a new task has been added
-    public static void printAddTask() {
-        printHorizontalLine();
-        System.out.print("Got it. I've added this task:\n  ");
+    public static void printMultiLine(String[] lines){
+        printDashLine();
+        for (String line : lines){
+            System.out.println(line);
+        }
+        printDashLine();
     }
 
-    //This functions prints the number of tasks
-    public static void printNumOfTasks() {
-        System.out.println("Now you have " + num + " tasks in the list.");
-        printHorizontalLine();
+    // Prints the prompt before every user input
+    public static void printPrompt(){
+        System.out.print("  > ");
     }
 
-    //This function prints errors statements
-    public static void printError() {
-        printHorizontalLine();
-        System.out.println("Command not recognized");
-        printHorizontalLine();
+    // Prints the greet statement
+    public static void printGreeting(){
+        printMultiLine(GREETING_LINES);
     }
 
-    //This function prints the bye message
-    public static void printByeMessage() {
-        printHorizontalLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        printHorizontalLine();
+    // Prints the exit statement
+    public static void printExitLine() {
+        printOneLine(BYE_LINE);
     }
 
-    //This function is used to acknowledge input
-    public static void printAcknowledgement() {
-        printAddTask();
-        taskList[num - 1].printTask();
-        printNumOfTasks();
+    // Print acknowledgement of input
+    public static void printAcknowledgement(){
+        String[] acknowledgeTaskLines = {
+                "Got it. I've added this task:\n  ",
+                taskList[taskCount-1].showTask(),
+                "Now you have " + taskCount + " tasks in the list"
+        };
+        printMultiLine(acknowledgeTaskLines);
     }
 
-    //This function is used to add a to do task to the list of tasks
-    public static void addTodo(String str) {
-        taskList[num] = new Todo(str);
-        num++;
+    // Adding a Todo to list of tasks
+    public static void addTodo(String userInput) throws TodoException{
+
+        if (userInput.equals("todo") || userInput.equals("")){
+            throw new TodoException();
+        }
+        // Create new Todo instance an add it to end taskList
+        taskList[taskCount] = new Todo (userInput);
+        taskCount = taskCount + 1;
+
         printAcknowledgement();
     }
 
-    //This function is used to add a Deadline task to the list of tasks
-    public static void addDeadline(String str) {
-        String description = str.replaceAll(RegexType.GET_DESCRIPTION_REGEX.getRegexType(), "");
-        String by = str.replaceAll(RegexType.GET_BY_REGEX.getRegexType(), "");
-        taskList[num] = new Deadline(description, by);
-        num++;
+    // Adding a Deadline to list of tasks
+    public static void addDeadline(String userInput) throws DeadlineException {
+        // Check if line follows the format "<description> /by <time/date>"
+        if (!userInput.matches(DEADLINE_REGEX)){
+            throw new DeadlineException();
+        }
+
+        // get description and by from line
+        String description = userInput.replaceAll(GET_DESCRIPTION_REGEX, "");
+        String by = userInput.replaceAll(GET_BY_REGEX, "");
+
+        // Create new Deadline instance an add it to end taskList
+        taskList[taskCount] = new Deadline (description, by);
+        taskCount = taskCount + 1;
+
         printAcknowledgement();
     }
 
-    //This function is used to add an Event task to the list of tasks
-    public static void addEvent(String str) {
-        String description = str.replaceAll(RegexType.GET_DESCRIPTION_REGEX.getRegexType(), "");
-        String at = str.replaceAll(RegexType.GET_AT_REGEX.getRegexType(), "");
-        taskList[num] = new Event(description, at);
-        num++;
+    // Adding an Event to list of tasks
+    public static void addEvent(String userInput) throws EventException{
+        // Check if userInput follows the format "<description> /at <time/date>"
+        if (!userInput.matches(EVENT_REGEX)){
+            throw new EventException();
+        }
+
+        // get description and by from userInput
+        String description = userInput.replaceAll(GET_DESCRIPTION_REGEX, "");
+        String at = userInput.replaceAll(GET_AT_REGEX, "");
+
+        // Create new Event instance an add it to end taskList
+        taskList[taskCount] = new Event (description, at);
+        taskCount = taskCount + 1;
+
         printAcknowledgement();
     }
 
-    //This function is used to print the list of all the tasks
+    public static void addNothing() throws NothingException{
+        throw new NothingException();
+    }
+
+    // Print list of task
     public static void printList() {
-        printHorizontalLine();
-        System.out.println("Here are the tasks in your list");
-        for(int i = 0; i < num; i++) {
-            System.out.print((i+1) + ".");
-            taskList[i].printTask();
+        String[] listLines = new String[taskCount+1];
+
+        listLines[0] = LIST_INTRO_LINE;
+
+        // Add each item to listLines
+        for (int i = 1; i <= taskCount; ++i) {
+            listLines[i] = i + ". " + taskList[i-1].showTask();
         }
-        printHorizontalLine();
+
+        printMultiLine(listLines);
     }
 
-    //This function is used to mark the task at the given index as done
-    public static void markStatusAsDone(int i) {
-        if(taskList[i].isDone()) {
-            printHorizontalLine();
-            System.out.println("The task has already been completed.");
-            printHorizontalLine();
-            return;
-        }
-        taskList[i].markAsDone();
+    // Mark the task at the given index as done
+    public static void markAsDone(String userInput)
+            throws DoneFormatException, DoneAlreadyException, DoneRangeException{
 
-        printHorizontalLine();
-        System.out.print("Nice! I've marked this task as done:\n  ");
-        taskList[i].printTask();
-        printHorizontalLine();
+        // Check if the command is done and is followed by a number
+        // and if the index is within the range of number of tasks
+        if (!userInput.matches(DIGITS_REGEX)){
+            throw new DoneFormatException();
+        }
+
+        int index = Integer.parseInt(userInput) - 1;
+        if (index >= taskCount){
+            throw new DoneRangeException();
+        }
+        // Check if task is already done
+        if (taskList[index].isDone()){
+            throw new DoneAlreadyException();
+        }
+
+        // Mark the index as done
+        taskList[index].markAsDone();
+
+        // Acknowledge task is done
+        printMultiLine(new String[]{
+                TASK_DONE_LINE,
+                taskList[index].showTask()
+        });
     }
 
-    //This function is used to read the input and process the command
-    public static void readInput(String str) {
-        String command = str.split(" ", 2)[0];
-        str = str.replaceAll(RegexType.START_LINE_REGEX.getRegexType() + command + RegexType.SPACE_REGEX.getRegexType(), "");
+    // Reads the input of the line to determine the command and run it
+    public static void readInput(String userInput){
 
-        if(str.equals(InputType.LIST.getInputType())) {
+        // Get command from the userInput
+        String[] splitLine = userInput.split(" ", 2);
+        String command = splitLine[0];
+
+        // Remove command from userInput
+        userInput = userInput.replaceAll(START_LINE_REGEX + command + SPACE_REGEX, "");
+
+        // Check the command type then execute the commands
+        if(userInput.equals(LIST)) {
             printList();
-        } else if(command.equals(InputType.DONE.getInputType()) && str.matches(RegexType.DIGITS_REGEX.getRegexType())) {
-            int i = Integer.parseInt(str) - 1;
-            if(i < num) {
-                markStatusAsDone(i);
-            } else {
-                printError();
+
+        } else if (command.equals(DONE) ){
+            try{
+                markAsDone(userInput);
+            } catch (DoneFormatException e) {
+                printOneLine(DONE_FORMAT_LINE);
+            } catch (DoneRangeException e){
+                printOneLine(OUT_OF_RANGE_LINE);
+            } catch (DoneAlreadyException e){
+                printOneLine(COMPLETED_LINE);
             }
-        } else if(command.equals(InputType.TODO.getInputType())) {
-            addTodo(str);
-        } else if(command.equals(InputType.DEADLINE.getInputType()) && str.matches(RegexType.DEADLINE_REGEX.getRegexType())) {
-            addDeadline(str);
-        } else if (command.equals(InputType.EVENT.getInputType()) && str.matches(RegexType.EVENT_REGEX.getRegexType())) {
-            addEvent(str);
+
+        } else if (command.equals(TODO)){
+            try {
+                addTodo(userInput);
+            } catch (TodoException e){
+                printOneLine(TODO_LINE);
+            }
+
+        } else if (command.equals(DEADLINE)){
+            try{
+                addDeadline(userInput);
+            } catch (DeadlineException e){
+                printOneLine(DEADLINE_LINE);
+            }
+
+        } else if (command.equals(EVENT)){
+            try{
+                addEvent(userInput);
+            } catch (EventException e){
+                printOneLine(EVENT_LINE);
+            }
         } else {
-            printError();
+            try{
+                addNothing();
+            } catch (NothingException e){
+                printOneLine(NOT_RECOGNISED_LINE);
+            }
         }
     }
 
-
-
-    public static void main(String[] args) {
-        printWelcomeMessage();
-
+    // Continuously take in input and running the commands until input is BYE then exit
+    public static void runDuke(){
+        // Initialise variables to get input from user
+        String userInput;
         Scanner in = new Scanner(System.in);
 
-        String str;
+        // Get the first input from user
+        printPrompt();
+        userInput = in.nextLine();
 
+        // While the input is not "bye", add input to array of tasks and get another input
+        while (!userInput.equals(BYE)){
 
+            readInput(userInput);
 
-        str = in.nextLine();
-
-        while(!str.equals(String.valueOf(InputType.BYE))) {
-            readInput(str);
-            str = in.nextLine();
+            // Get another input
+            printPrompt();
+            userInput = in.nextLine();
         }
+    }
 
+    public static void main(String[] args) {
+        // Greets user
+        printGreeting();
 
+        // Run Duke until it exits
+        runDuke();
 
-        printByeMessage();
+        // When the input is BYE and we exit from the loop, print exit line
+        printExitLine();
     }
 }
