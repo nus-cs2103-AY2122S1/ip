@@ -9,7 +9,9 @@ public class TaskList {
     private static final String REMOVE_TASK_MESSAGE = "Noted. I've removed this task:\n %s\n" + NUMBER_OF_TASKS_MESSAGE;
 
     // Nouns
-    private final String TASK_WORD = this.size() <= 1 ? "task" : "tasks";
+    private String taskWord() {
+        return this.size() <= 1 ? "task" : "tasks";
+    }
 
     private final List<Task> taskArr;
 
@@ -23,7 +25,7 @@ public class TaskList {
 
     public String addTask(Task task) {
         this.taskArr.add(task);
-        return String.format(ADD_TASK_MESSAGE, task, this.size(), TASK_WORD);
+        return String.format(ADD_TASK_MESSAGE, task, this.size(), taskWord());
     }
 
     public String markTaskAsDone(int taskIndex) throws DukeException {
@@ -43,7 +45,7 @@ public class TaskList {
         int index = taskIndex - 1;
         try {
             Task task = taskArr.remove(index);
-            return String.format(REMOVE_TASK_MESSAGE, task, this.size(), TASK_WORD);
+            return String.format(REMOVE_TASK_MESSAGE, task, this.size(), taskWord());
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException(OUT_OF_BOUNDS_TASK);
         }

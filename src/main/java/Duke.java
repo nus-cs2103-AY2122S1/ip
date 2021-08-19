@@ -9,8 +9,11 @@ public class Duke {
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n %s";
     private static final String INVALID_NUMBER = "Please input a valid task number";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String TOO_MANY_ARGUMENTS_LIST_MESSAGE = "An argument after 'list' is not required. Just 'list' will do.";
 
-    // Delimiters
+    // Errors
+    private static final String MISSING_DELETE_NUMBER_MESSAGE = "Please input a number after the delete command";
+    private static final String MISSING_DONE_NUMBER_MESSAGE = "Please input a number after the done command";
 
     private static void inputLoop(TaskList taskList) {
         Scanner sc = new Scanner(System.in);
@@ -25,10 +28,11 @@ public class Duke {
                     remainingText = input.substring(firstWord.length() + 1).trim();
                 }
                 Command command = Command.initialiseCommand(firstWord);
-                // Verify that the remaining text doesn't have errors related to number of arguments etc
-                command.verifyArguments(remainingText);
                 switch (command) {
                     case LIST:
+                        if (!remainingText.isEmpty()) {
+                            throw new DukeException(TOO_MANY_ARGUMENTS_LIST_MESSAGE);
+                        }
                         if (taskList.size() == 0) {
                             Message.display_message(NO_TASKS_IN_LIST_MESSAGE);
                         } else {
@@ -36,6 +40,9 @@ public class Duke {
                         }
                         break;
                     case DONE:
+                        if (remainingText.isEmpty()) {
+                            throw new DukeException(MISSING_DONE_NUMBER_MESSAGE);
+                        }
                         try {
                             int taskIndex = Integer.parseInt(remainingText);
                             Message.display_message(String.format(DONE_MESSAGE, taskList.markTaskAsDone(taskIndex)));
@@ -44,6 +51,9 @@ public class Duke {
                         }
                         break;
                     case DELETE:
+                        if (remainingText.isEmpty()) {
+                            throw new DukeException(MISSING_DELETE_NUMBER_MESSAGE);
+                        }
                         try {
                             int taskIndex = Integer.parseInt(remainingText);
                             Message.display_message(taskList.deleteTask(taskIndex));
@@ -52,8 +62,7 @@ public class Duke {
                         }
                         break;
                     case TODO:
-                        String todoText = input.substring(Command.TODO.toString().length() + 1).trim();
-                        Message.display_message(taskList.addTask(new ToDo(todoText)));
+                        Message.display_message(taskList.addTask(ToDo.newTodo(remainingText)));
                         break;
                     case DEADLINE:
                         Message.display_message(taskList.addTask(Deadline.newDeadline(remainingText)));

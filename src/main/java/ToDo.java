@@ -1,6 +1,17 @@
 public class ToDo extends Task{
-    public ToDo(String text) {
+    private static final String MISSING_TODO_MESSAGE = "Please input text after the todo command";
+
+    private ToDo(String text) {
         super(text);
+    }
+
+    public static ToDo newTodo(String input) throws DukeException {
+        if (input.isEmpty()) {
+            throw new DukeException(MISSING_TODO_MESSAGE);
+        }
+        String todoText = input.trim();
+
+        return new ToDo(todoText);
     }
 
     @Override
