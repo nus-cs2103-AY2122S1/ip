@@ -13,6 +13,14 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    public void deleteTask(int index) {
+        this.taskList.remove(index);
+    }
+
+    public Task getTask(int index) {
+        return this.taskList.get(index);
+    }
+
     public int size() {
         return this.taskList.size();
     }

@@ -47,6 +47,16 @@ public class Duke {
         this.taskList.markDone(index - 1);
     }
 
+    public void deleteTask(int index) {
+        // Converting 1-based to 0-based
+        Task deletedTask = this.taskList.getTask(index - 1);
+        this.taskList.deleteTask(index - 1);
+
+        this.echo("Deleted the following task successfully:\n"
+                + "    " + deletedTask + "\n"
+                + "You have " + this.taskList.size() + " task(s) in the list.\n");
+    }
+
     public void echo(String s) {
         System.out.println("Duke: " + s);
     }
@@ -80,6 +90,9 @@ public class Duke {
                 } else if (response.startsWith("done ")) {
                     int index = Integer.parseInt(response.substring(5));
                     this.markDone(index);
+                } else if (response.startsWith("delete ")) {
+                    int index = Integer.parseInt(response.substring(7));
+                    this.deleteTask(index);
                 } else if (response.startsWith("todo ")) {
                     String description = response.substring(5);
                     this.addTodo(description);
