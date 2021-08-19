@@ -29,21 +29,21 @@ public class Duke {
             } else if (command.length() > 5 && command.toLowerCase().substring(0, 5).equals("todo ")) {
                 Todo t = new Todo(command.substring(5));
                 list.add(t);
-                System.out.println("     Got it. I've added this task: ");
+                System.out.println("     Got it. I've added this task:");
                 System.out.println(spacing + "  " + t.toString());
                 System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
             }else if (command.length() > 9 && command.toLowerCase().substring(0, 9).equals("deadline ")) {
                 String[] infoArray = command.substring(9).split("/by ", 2);
                 Deadline d = new Deadline(infoArray[0], infoArray[1]);
                 list.add(d);
-                System.out.println("     Got it. I've added this task: ");
+                System.out.println("     Got it. I've added this task:");
                 System.out.println(spacing + "  " + d.toString());
                 System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
             }else if (command.length() > 6 && command.toLowerCase().substring(0, 6).equals("event ")) {
                 String[] infoArray = command.substring(6).split("/at ", 2);
                 Event e = new Event(infoArray[0], infoArray[1]);
                 list.add(e);
-                System.out.println("     Got it. I've added this task: ");
+                System.out.println("     Got it. I've added this task:");
                 System.out.println(spacing + "  " + e.toString());
                 System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
             } else {
@@ -58,7 +58,7 @@ public class Duke {
          if (command.toLowerCase().equals("bye")) {
              System.out.println(line);
              System.out.println(spacing + "Bye. Hope to see you again soon!");
-             System.out.println(line);
+             System.out.print(line);
          }
     }
 }
