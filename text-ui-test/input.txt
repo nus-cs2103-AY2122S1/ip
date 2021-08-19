@@ -1,0 +1,10 @@
+todo borrow book
+todo read book
+todo buy food
+deadline do homework /by Monday
+event birthday party /at Tuesday 2pm
+list
+done 1
+done 2
+list
+bye
