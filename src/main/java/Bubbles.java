@@ -11,7 +11,8 @@ public class Bubbles {
         String introduction = "You should do what you want to do!\n"
                 + "Hello I'm Bubbles from the Powerpuff Girls, what are you up to?";
 
-        System.out.println("Hello from\n" + logo + "\n" + formatting(introduction));
+        System.out.println("Hello from\n" + logo + "\n");
+        formatting(introduction);
 
         echoTask();
     }
@@ -25,10 +26,10 @@ public class Bubbles {
             if (input.equals("bye")) {
                 String farewell = "Bye-bye! Hope to see you again soon!";
 
-                System.out.println(formatting(farewell));
+                int n = formatting(farewell);
                 break;
             } else {
-                System.out.println(formatting(input));
+                int n = formatting(input);
             }
         }
 
@@ -36,18 +37,30 @@ public class Bubbles {
     }
 
     public static void echoTask() {
-        Task toDoList = new Task();
+        Scanner sc = new Scanner(System.in);
+        ToDoList toDoList = new ToDoList();
 
-        toDoList.taskListener();
+        while (sc.hasNext()) {
+            String input = sc.nextLine();
+
+            if (input.equals("bye")) {
+                String farewell = "Bye-bye! Hope to see you again soon!";
+
+                formatting(farewell);
+                break;
+            } else {
+                toDoList.taskListener(input);
+            }
+        }
     }
 
-    public static String formatting(String str) {
+    public static int formatting(String str) {
         String separator = "-----------------------------------------------------------------";
 
-        String res = separator + "\n"
+        System.out.println(separator + "\n"
                 + str + "\n"
-                + separator;
+                + separator);
 
-       return res;
+       return 0;
     }
 }
