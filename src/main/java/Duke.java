@@ -13,8 +13,8 @@ public class Duke {
         EVENT;
     }
 
-    private Scanner Sc;
-    private TaskList taskList;
+    private final Scanner Sc;
+    private final TaskList taskList;
 
     public Duke(){
         Sc = new Scanner(System.in);
@@ -22,42 +22,41 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
-    public static void main(String[] args) {
-        Duke bot = new Duke();
-        String first = bot.getCommand();
-        String rest = bot.getRest();
+    private void run(){
+        String first = this.getFirst();
+        String rest = this.getRest();
         while(true){
             try {
                 Commands cmd = Commands.valueOf((first));
                 switch (cmd) {
                     case BYE:
-                        bot.close();
+                        this.close();
                         return;
                     case LIST:
-                        bot.taskList.printTasks();
+                        this.taskList.printTasks();
                         break;
                     case DONE:
-                        bot.taskList.doneTask(Integer.parseInt(rest));
-                        bot.taskList.printTasks();
+                        this.taskList.doneTask(Integer.parseInt(rest));
+                        this.taskList.printTasks();
                         break;
                     case DELETE:
-                        bot.taskList.deleteTask(Integer.parseInt(rest));
+                        this.taskList.deleteTask(Integer.parseInt(rest));
                         break;
                     default:
                         Task newTask = Task.taskFactory(cmd, rest);
-                        bot.taskList.addToStorage(newTask);
+                        this.taskList.addToStorage(newTask);
                 }
             }catch (DukeException e){
                 System.out.println(e);
             }catch (IllegalArgumentException c){
                 System.out.println("command not found");
             }
-            first = bot.getCommand();
-            rest = bot.getRest();
+            first = this.getFirst();
+            rest = this.getRest();
         }
     }
 
-    private String getCommand(){
+    private String getFirst(){
         return this.Sc.next().toUpperCase(Locale.ROOT);
     }
 
@@ -68,6 +67,11 @@ public class Duke {
     private void close(){
         System.out.println("Bye. Hope to see you again soon!");
         this.Sc.close();
+    }
+
+    public static void main(String[] args) {
+        Duke bot = new Duke();
+        bot.run();
     }
 
 }
