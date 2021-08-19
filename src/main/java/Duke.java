@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -11,15 +13,27 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
+
         String bye = "bye";
+        String list = "list";
+
+        List<String> userList = new ArrayList<>();
 
         while (true) {
             String inp = sc.nextLine();
             if (inp.equals(bye)) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
+            } else if (inp.equals(list)) {
+                int counter = 1;
+                for (String str:userList) {
+                    System.out.println(counter + ". " + str);
+                    counter++;
+                }
+            } else {
+                userList.add(inp);
+                System.out.println("added: " + inp);
             }
-            System.out.println(inp);
         }
     }
 }
