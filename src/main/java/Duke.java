@@ -2,13 +2,15 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static final int lv = 4;
+    private static final int lv = 5;
     private static final String[] features = {
             "",
             "Greet, Echo, Exit",
             ", Add, List",
             ", Mark as Done",
-            ", ToDos, Events, Deadlines"};
+            ", ToDos, Events, Deadlines",
+            ", Handle Errors"
+    };
     private static boolean canExit = false;
     private static final ArrayList<Task> taskArrayList = new ArrayList<>();
 
@@ -93,45 +95,53 @@ public class Duke {
                     } else {
                         switch (userInput) {
                             case "todo":
-                                if (scanner.hasNextLine()) {
-                                    String todoName = scanner.nextLine();
-                                    Task newestTodo = new ToDo(todoName);
-                                    taskArrayList.add(newestTodo);
-                                    System.out.println(sandwich("New todo task added:\n"
-                                            + newestTodo
-                                            + "\n You now have "
-                                            + taskArrayList.size()
-                                            + " item(s) in your task list."));
-                                    break;
-                                } else throw new DukeException("No task description");
+                                String todoName = scanner.nextLine();
+                                if (todoName.trim().equals("")) {
+                                    throw new DukeException("No task description");
+                                }
+                                Task newestTodo = new ToDo(todoName);
+                                taskArrayList.add(newestTodo);
+                                System.out.println(sandwich("New todo task added:\n"
+                                        + newestTodo
+                                        + "\n You now have "
+                                        + taskArrayList.size()
+                                        + " item(s) in your task list."));
+                                break;
+
                             case "deadline":
-                                if (scanner.hasNextLine()) {
-                                    String[] deadlineTokens = scanner.nextLine().split("\\s*/by\\s*");
-                                    String deadlineName = deadlineTokens[0];
-                                    String deadlineReminder = deadlineTokens[1];
-                                    Task newestDeadline = new Deadline(deadlineName, deadlineReminder);
-                                    taskArrayList.add(newestDeadline);
-                                    System.out.println(sandwich("New deadline task added:\n"
-                                            + newestDeadline
-                                            + "\n You now have "
-                                            + taskArrayList.size()
-                                            + " item(s) in your task list."));
-                                    break;
-                                } else throw new DukeException("No task description");
+                                String[] deadlineTokens = scanner.nextLine().split("\\s*/by\\s*");
+                                if (deadlineTokens.length == 0) {
+                                    throw new DukeException("No task description");
+                                } else if (deadlineTokens.length == 1) {
+                                    throw new DukeException("No task deadline");
+                                }
+                                String deadlineName = deadlineTokens[0];
+                                String deadlineReminder = deadlineTokens[1];
+                                Task newestDeadline = new Deadline(deadlineName, deadlineReminder);
+                                taskArrayList.add(newestDeadline);
+                                System.out.println(sandwich("New deadline task added:\n"
+                                        + newestDeadline
+                                        + "\n You now have "
+                                        + taskArrayList.size()
+                                        + " item(s) in your task list."));
+                                break;
                             case "event":
-                                if (scanner.hasNextLine()) {
-                                    String[] eventTokens = scanner.nextLine().split("\\s*/at\\s*");
-                                    String eventName = eventTokens[0];
-                                    String eventReminder = eventTokens[1];
-                                    Task newestEvent = new Event(eventName, eventReminder);
-                                    taskArrayList.add(newestEvent);
-                                    System.out.println(sandwich("New event task added:\n"
-                                            + newestEvent
-                                            + "\n You now have "
-                                            + taskArrayList.size()
-                                            + " item(s) in your task list."));
-                                    break;
-                                } else throw new DukeException("No task description");
+                                String[] eventTokens = scanner.nextLine().split("\\s*/at\\s*");
+                                if (eventTokens.length == 0) {
+                                    throw new DukeException("No task description");
+                                } else if (eventTokens.length == 1) {
+                                    throw new DukeException("No task duration");
+                                }
+                                String eventName = eventTokens[0];
+                                String eventReminder = eventTokens[1];
+                                Task newestEvent = new Event(eventName, eventReminder);
+                                taskArrayList.add(newestEvent);
+                                System.out.println(sandwich("New event task added:\n"
+                                        + newestEvent
+                                        + "\n You now have "
+                                        + taskArrayList.size()
+                                        + " item(s) in your task list."));
+                                break;
                             default:
                                 throw new DukeException("Unknown Input"); // unknown input
                         }
