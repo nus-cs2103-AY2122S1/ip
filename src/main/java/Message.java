@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Message {
     public static void greet() {
         System.out.println("    ____________________________________________________________");
@@ -12,17 +14,17 @@ public class Message {
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void addTask(Task task) {
+    public static void add(Task task) {
         System.out.println("    ____________________________________________________________");
         System.out.println("    Got it. I've added this task: \n      " + task);
         System.out.println("    Now you have " + Task.totalTasks + " in the list.");
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void list() {
+    public static void list(ArrayList<Task> tasks) {
         System.out.println("    ____________________________________________________________");
-        for (Task task : TaskManager.tasks) {
-            System.out.println("    " + task.taskId + ". " + task);
+        for (Task task : tasks) {
+            System.out.println("    " + (tasks.indexOf(task) + 1) + "." + task);
         }
         System.out.println("    ____________________________________________________________");
     }
@@ -36,6 +38,13 @@ public class Message {
     public static void error(String errorMessage) {
         System.out.println("    ____________________________________________________________");
         System.out.println("    " + errorMessage);
+        System.out.println("    ____________________________________________________________");
+    }
+
+    public static void delete(Task task) {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Noted. I've removed this task: \n      " + task);
+        System.out.println("    Now you have " + Task.totalTasks + " in the list.");
         System.out.println("    ____________________________________________________________");
     }
 }

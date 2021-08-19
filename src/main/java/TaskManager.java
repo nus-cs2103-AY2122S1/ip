@@ -1,9 +1,18 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TaskManager {
-    static ArrayList<Task> tasks = new ArrayList<>();
+    protected static ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void addTask(String task, String cmd) {
+    public String taskDescription(String input) throws DukeException.MissingDescriptionException {
+        String[] description = input.split(" ", 2);
+        if (description.length == 1) {
+            throw new DukeException.MissingDescriptionException();
+        }
+        return description[1];
+    }
+
+    public void addTask(String task, String cmd) {
         Task t;
         if (cmd.equals("todo")) {
             t = new Todo(task);
@@ -19,16 +28,63 @@ public class TaskManager {
             t = new Event(task, date);
             tasks.add(t);
         }
-        Message.addTask(t);
+        Message.add(t);
     }
 
-    public static void markDone(int taskId) {
+    public void deleteTask(int taskId) throws DukeException.MissingTaskException {
+        try {
+            Task t = tasks.get(taskId-1);
+            tasks.remove(t);
+            --Task.totalTasks;
+            Message.delete(t);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException.MissingTaskException();
+        }
+    }
+
+    public void markDone(int taskId) throws DukeException.MissingTaskException {
         try {
             Task t = tasks.get(taskId-1);
             t.isDone = true;
             Message.done(t);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("No such task added!");
+            throw new DukeException.MissingTaskException();
         }
+    }
+
+    public void run() {
+        Message.greet();
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+
+        while (!input.equals("bye")) {
+            String[] words = input.split(" ", 2);
+            String command = words[0];
+            try {
+                switch (command) {
+                    case "list":
+                        Message.list(tasks);
+                        break;
+                    case "done":
+                        markDone(Integer.parseInt(taskDescription(input)));
+                        break;
+                    case "todo":
+                    case "deadline":
+                    case "event":
+                        addTask(taskDescription(input), command);
+                        break;
+                    case "delete":
+                        deleteTask(Integer.parseInt(taskDescription(input)));
+                        break;
+                    default:
+                        throw new DukeException.InvalidInputException();
+                }
+            } catch (DukeException e) {
+                Message.error(e.toString());
+            } finally {
+                input = sc.nextLine();
+            }
+        }
+        Message.exit();
     }
 }

@@ -11,8 +11,8 @@ public class DukeException extends RuntimeException {
         return this.errorMessage;
     }
 
-    static class MissingTaskException extends DukeException {
-        public MissingTaskException() {
+    public static class MissingDescriptionException extends DukeException {
+        public MissingDescriptionException() {
             super("OOPS!!! The description of a todo cannot be empty.");
         }
     }
@@ -20,6 +20,12 @@ public class DukeException extends RuntimeException {
     public static class InvalidInputException extends DukeException {
         public InvalidInputException() {
             super("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    public static class MissingTaskException extends DukeException {
+        public MissingTaskException() {
+            super("Huh? You don't have that task option!");
         }
     }
 }

@@ -3,45 +3,13 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+    protected TaskManager taskManager = new TaskManager();
 
-    public static String taskDescription(String input) throws DukeException.MissingTaskException {
-        String[] description = input.split(" ", 2);
-        if (description.length == 1) {
-            throw new DukeException.MissingTaskException();
-        }
-        return description[1];
+    public void run() {
+        taskManager.run();
     }
 
     public static void main(String[] args) {
-        Message.greet();
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-
-        while (!input.equals("bye")) {
-            String[] words = input.split(" ", 2);
-            String command = words[0];
-            try {
-                switch (command) {
-                    case "list":
-                        Message.list();
-                        break;
-                    case "done":
-                        TaskManager.markDone(Integer.parseInt(taskDescription(input)));
-                        break;
-                    case "todo":
-                    case "deadline":
-                    case "event":
-                        TaskManager.addTask(taskDescription(input), command);
-                        break;
-                    default:
-                        throw new DukeException.InvalidInputException();
-                }
-            } catch (DukeException e) {
-                Message.error(e.toString());
-            } finally {
-                input = sc.nextLine();
-            }
-        }
-        Message.exit();
+        new Duke().run();
     }
 }
