@@ -30,14 +30,22 @@ public class Duke {
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     System.out.println(arrayToString(list));
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                } else if (eventType.equals("delete")) {
+                    int index = Integer.parseInt(remainder) - 1;
+                    if (index < 0 || index > list.size() - 1) {
+                        throw DukeException.invalidIndex();
+                    } else {
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        System.out.println("This item will be removed:\n" +
+                                list.get(index).toString() + "\n");
+                        list.remove(index);
+                        System.out.println(String.format("You have %d task(s) at the moment!\n", list.size()));
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    }
                 } else if (eventType.equals("done")) {
                     int index = Integer.parseInt(remainder) - 1;
                     if (index < 0 || index > list.size() - 1) {
-                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        System.out.println("Something went wrong.. to mark as done,\n" +
-                                "format your text as <done [number]>.\n");
-                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        // Throw exception in the future
+                        throw DukeException.invalidIndex();
                     } else {
                         list.get(index).markAsDone();
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");

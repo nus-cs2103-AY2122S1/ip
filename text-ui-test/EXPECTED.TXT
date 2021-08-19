@@ -75,9 +75,20 @@ format your text as <done [number]>.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This item will be removed:
+[E][X] :  project meeting (at: Aug 6th 2-4pm)
+
+You have 2 task(s) at the moment!
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Something went wrong.. to mark as done,
+format your text as <done [number]>.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1: [T][X] :  borrow book
 2: [D][ ] :  return book (by: June 6th)
-3: [E][X] :  project meeting (at: Aug 6th 2-4pm)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
