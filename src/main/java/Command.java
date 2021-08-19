@@ -7,10 +7,21 @@ public abstract class Command {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
+    protected static final String NULL_COMMAND = "nothing";
     private static String pre_command;
     private static String body_command;
 
     private Command() {}
+
+    private static class Nothing extends Command {
+        private Nothing() {}
+
+        @Override
+        protected void execute() {
+            System.out.println("Say something to me :(");
+            Duke.printLine();
+        };
+    }
 
     private static class Bye extends Command {
         private Bye() {}
@@ -30,9 +41,13 @@ public abstract class Command {
 
         @Override
         protected void execute() {
-            Duke.todoList.add(t);
-            System.out.println("Got it. I've added this task:\n    " + t);
-            System.out.println("Now you have" + Duke.todoList.size() + "tasks in the list.");
+            if (t.getTaskName() != NULL_COMMAND) {
+                Duke.todoList.add(t);
+                System.out.println("Got it. I've added this task:\n    " + t);
+                System.out.println("Now you have" + Duke.todoList.size() + "tasks in the list.");
+            } else {
+                System.out.println("OOPS!!! The description of a todo cannot be empty.");
+            }
             Duke.printLine();
         };
     }
@@ -50,23 +65,31 @@ public abstract class Command {
     }
 
     private static class Done extends Command {
-        private int index;
-        private Done(int index) {
+        private String index;
+        private Done(String index) {
             this.index = index;
         }
 
         @Override
         protected void execute() {
-            Task t = Duke.todoList.get(index - 1);
-            t.done();
-            System.out.println("Nice! I've marked this task as done:\n    " + t);
-            Duke.printLine();
+            try {
+                Task t = Duke.todoList.get(Integer.parseInt(index) - 1);
+                t.done();
+                System.out.println("Nice! I've marked this task as done:\n    " + t);
+                Duke.printLine();
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! I'm sorry, but I cannot find that task :(");
+                Duke.printLine();
+            } catch (NumberFormatException e) {
+                System.out.println("OOPS!!! You need to follow format \"done <number>\"");
+                Duke.printLine();
+            }
         };
     }
-
+    private static final Command NOTHING = new Nothing();
     private static final Command BYE = new Bye();
     private static final Command LIST = new List();
-    private static Command done(int index) {
+    private static Command done(String index) {
         Command d = new Done(index);
         return d;
     }
@@ -85,9 +108,12 @@ public abstract class Command {
                 String userCommand = myScanner.nextLine();  // Read user input
                 Duke.printLine();
 
-                String[] parts = userCommand.split(" ", 2);
+                analyze(userCommand);
 
-                switch (parts[0]) {
+                switch (pre_command) {
+                    case NULL_COMMAND:
+                        NOTHING.execute();
+                        break;
                     case BYE_COMMAND:
                         BYE.execute();
                         break outerLoop;
@@ -95,25 +121,25 @@ public abstract class Command {
                         LIST.execute();
                         break;
                     case DONE_COMMAND:
-                        done(Integer.parseInt(parts[1])).execute();
+                        done(body_command).execute();
                         break;
                     case TODO_COMMAND:
-                        add(Task.todo(parts[1])).execute();
+                        add(Task.todo(body_command)).execute();
                         break;
                     case DEADLINE_COMMAND:
-                        add(Task.deadline(parts[1])).execute();
+                        add(Task.deadline(body_command)).execute();
                         break;
                     case EVENT_COMMAND:
-                        add(Task.event(parts[1])).execute();
+                        add(Task.event(body_command)).execute();
                         break;
                     default:
-                        throw new IllegalArgumentException("Unexpected argument: " + parts[0]);
+                        throw new IllegalArgumentException("Unexpected argument: " + pre_command);
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("OOPS!!! You need to say format \"done <the order of your task>\"");
-                Duke.printLine();
             } catch (IllegalArgumentException e) {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :(");
+                Duke.printLine();
+            } catch (DukeException.DukeEmptyTask e) {
+                System.out.println(e);
                 Duke.printLine();
             }
         }
@@ -121,19 +147,13 @@ public abstract class Command {
 
     private static void analyze(String command) {
         String[] parts = command.split(" ", 2);
-        switch (parts.length) {
-            case 0:
-                Command.pre_command = null;
-                Command.body_command = null;
-                break;
-            case 1:
-                Command.pre_command = parts[0];
-                Command.body_command = null;
-                break;
-            default:
-                Command.pre_command = parts[0];
-                Command.body_command = parts[1];
-                break;
+
+        if (parts.length == 1) {
+            Command.pre_command = parts[0].equals("") ? NULL_COMMAND : parts[0];
+            Command.body_command = NULL_COMMAND;
+        } else {
+            Command.pre_command = parts[0];
+            Command.body_command = parts[1];
         }
     }
 

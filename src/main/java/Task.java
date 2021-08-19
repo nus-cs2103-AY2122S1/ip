@@ -1,6 +1,22 @@
+
+
 public abstract class Task {
     private boolean done;
-    private String taskName;
+    private final String taskName;
+
+    protected enum TaskKind {
+        TODO("todo"), DEADLINE("deadline"), EVENT("event");
+
+        private String kind;
+        TaskKind(String kind) {
+            this.kind = kind;
+        }
+
+        @Override
+        public String toString() {
+            return kind;
+        }
+    }
 
     private Task(String taskName) {
         this.taskName = taskName;
@@ -10,6 +26,11 @@ public abstract class Task {
     private static class Todo extends Task{
         private Todo(String taskName) {
             super(taskName);
+        }
+
+        @Override
+        public TaskKind taskKind() {
+            return TaskKind.TODO;
         }
 
         @Override
@@ -25,6 +46,11 @@ public abstract class Task {
         }
 
         @Override
+        public TaskKind taskKind() {
+            return TaskKind.DEADLINE;
+        }
+
+        @Override
         public String toString() {
             String isDone = "[D]" + (super.done ? "[X]" : "[ ]");
             return isDone + " " + super.taskName;
@@ -37,25 +63,42 @@ public abstract class Task {
         }
 
         @Override
+        public TaskKind taskKind() {
+            return TaskKind.EVENT;
+        }
+
+        @Override
         public String toString() {
             String isDone = "[E]" + (super.done ? "[X]" : "[ ]");
             return isDone + " " + super.taskName;
         }
     }
 
-    protected static Task todo(String s) {
+    protected static Task todo(String s) throws DukeException.DukeEmptyTask{
         Task t = new Todo(s);
-        return t;
+        if (s != Command.NULL_COMMAND) {
+            return t;
+        } else {
+            throw new DukeException.DukeEmptyTask(t);
+        }
     }
 
-    protected static Task deadline(String s) {
+    protected static Task deadline(String s) throws DukeException.DukeEmptyTask{
         Task t = new Deadline(s);
-        return t;
+        if (s != Command.NULL_COMMAND) {
+            return t;
+        } else {
+            throw new DukeException.DukeEmptyTask(t);
+        }
     }
 
-    protected static Task event(String s) {
+    protected static Task event(String s) throws DukeException.DukeEmptyTask{
         Task t = new Event(s);
-        return t;
+        if (s != Command.NULL_COMMAND) {
+            return t;
+        } else {
+            throw new DukeException.DukeEmptyTask(t);
+        }
     }
 
     public void done() {
@@ -65,4 +108,6 @@ public abstract class Task {
     public String getTaskName() {
         return taskName;
     }
+
+    public abstract TaskKind taskKind();
 }
