@@ -34,7 +34,9 @@ public class Duke {
     public static String listBeautify(ArrayList<Task> taskArrayList) {
         StringBuilder listBeautified = new StringBuilder();
         for (int i = 0; i < taskArrayList.size(); i++) {
-            listBeautified.append(taskBeautify(taskArrayList.get(i), (i + 1)));
+            listBeautified.append(i + 1)
+                    .append(".")
+                    .append(taskArrayList.get(i).toString());
             if (i < taskArrayList.size() - 1) { // new line except for last item
                 listBeautified.append("\n");
             }
@@ -115,28 +117,28 @@ public class Duke {
                         int taskNum = scanner.nextInt();
                         taskArrayList.get(taskNum - 1).markAsDone();
                         System.out.println(sandwich("Congratulations! You have finished this task: "
-                                + taskBeautify(taskArrayList.get(taskNum - 1), taskNum)));
+                                + taskArrayList.get(taskNum - 1).toString()));
                     }
                 } else {
                     switch (userInput) {
                         case "todo":
                             String todoName = scanner.nextLine();
-                            Task newestTodo = new Task(todoName, "todo");
+                            Task newestTodo = new ToDo(todoName);
                             taskArrayList.add(newestTodo);
                             System.out.println(sandwich("New todo task added: \n"
-                                    + taskBeautify(newestTodo, taskArrayList.size())
+                                    + newestTodo
                                     + "\n You now have "
                                     + taskArrayList.size()
-                                    + " items in your task list."));
+                                    + " item(s) in your task list."));
                             break;
                         case "deadline":
                             String[] deadlineTokens = scanner.nextLine().split("\\s*/by\\s*");
                             String deadlineName = deadlineTokens[0];
                             String deadlineReminder = deadlineTokens[1];
-                            Task newestDeadline = new Task(deadlineName, "deadline", deadlineReminder);
+                            Task newestDeadline = new Deadline(deadlineName, deadlineReminder);
                             taskArrayList.add(newestDeadline);
                             System.out.println(sandwich("New deadline task added: \n"
-                                    + taskBeautify(newestDeadline, taskArrayList.size())
+                                    + newestDeadline
                                     + "\n You now have "
                                     + taskArrayList.size()
                                     + " items in your task list."));
@@ -145,10 +147,10 @@ public class Duke {
                             String[] eventTokens = scanner.nextLine().split("\\s*/at\\s*");
                             String eventName = eventTokens[0];
                             String eventReminder = eventTokens[1];
-                            Task newestEvent = new Task(eventName, "event", eventReminder);
+                            Task newestEvent = new Event(eventName, eventReminder);
                             taskArrayList.add(newestEvent);
                             System.out.println(sandwich("New event task added: \n"
-                                    + taskBeautify(newestEvent, taskArrayList.size())
+                                    + newestEvent
                                     + "\n You now have "
                                     + taskArrayList.size()
                                     + " items in your task list."));

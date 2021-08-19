@@ -10,28 +10,12 @@ public class Task {
 
     /**
      * Creates a task with the specified description, isDone false by default.
+     *  @param description description of task
      *
-     * @param description description of task
-     * @param taskType    type of task (todo/deadline/event)
      */
-    public Task(String description, String taskType) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.taskType = taskType;
-    }
-
-    /**
-     * Creates a task with the specified description, isDone false by default.
-     * Overloaded constructor method that includes reminder, to be used for deadline and event tasks.
-     *
-     * @param description description of task
-     * @param taskType    type of task (todo/deadline/event)
-     */
-    public Task(String description, String taskType, String reminder) {
-        this.description = description;
-        this.isDone = false;
-        this.taskType = taskType;
-        this.reminder = reminder;
     }
 
     /**
@@ -62,10 +46,20 @@ public class Task {
     public String getReminder() {
         return this.reminder;
     }
+
     /**
      * Setter method for isDone of a Task object
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Returns string representation of Task.
+     *
+     * @return string representation of Task
+     */
+    public String toString() {
+        return ("[" + getStatusIcon() + "]" + description);
     }
 }
