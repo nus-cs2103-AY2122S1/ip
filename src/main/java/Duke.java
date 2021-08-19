@@ -26,7 +26,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while(!input.equals("bye")) {
