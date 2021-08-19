@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.lang.Exception;
+import java.util.ArrayList;
 
 public class Duke {
     public static Task[] tasks;
@@ -31,7 +32,6 @@ public class Duke {
         public String toString() {
             return "[" + this.getStatusIcon() + "] " + this.description;
         }
-        //...
     }
 
     public static class Deadline extends Task {
@@ -95,6 +95,11 @@ public class Duke {
         }
     }
 
+    public static String niceLine() {
+        return "______________________________________________________________\n";
+    }
+
+
     public static void main(String[] args) throws DukeException1{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -102,43 +107,41 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        String message = "Hello! I'm Duke \n" + "What can I do for you? \n";
+        String message = niceLine() + "Hello! I'm Duke \n" + "What can I do for you?\n" + niceLine();
         System.out.println(message);
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        Task[] tasks = new Task[100];
-        //String[] tasks = new String[100];
-        int counter = 0;
+        ArrayList<Task> list = new ArrayList<>();
         while(!input.equals("bye")) {
             if(input.equals("list")) {
-                System.out.println(("\t Here are the tasks in your list:"));
-                for(Task s:tasks) {
-                    if(s != null) {
-                        System.out.println("\t" + Integer.toString(s.order) + "." + s.toString());
-                    }
+                System.out.println((niceLine() + "\tHere are the tasks in your list:"));
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.println("\t" + Integer.toString(i + 1) + "." + list.get(i).toString());
                 }
+                System.out.println("\n" + niceLine());
                 input = scanner.nextLine();
             } else if(input.split(" ")[0].equals("done")) {
                 Integer count = Integer.valueOf(input.split(" ")[1]);
-                tasks[count - 1].markAsDone();
-                System.out.println("\t Nice! I've marked this task as done: \n \t \t" +
-                        " [" + tasks[count - 1].getStatusIcon() + "] " + tasks[count - 1].description);
+                list.get(count - 1).markAsDone();
+                System.out.println(niceLine() +  "\tNice! I've marked this task as done: \n \t \t" +
+                        " [" + list.get(count - 1).getStatusIcon() + "] " + list.get(count - 1).description);
+                System.out.println("\n" + niceLine());
                 input = scanner.nextLine();
             } else if(input.split(" ")[0].equals("todo")) {
                 try {
                     if(input.split(" ", 2).length == 1) {
                         ToDo todo = new ToDo(input.split(" ", 2)[0]);
                     } else {
-                        counter = counter + 1;
                         ToDo todo = new ToDo (input.split(" ", 2)[1]);
-                        todo.order = counter;
-                        tasks[counter - 1] = todo;
-                        System.out.println("\t" + "Got it. I've added this task: " + "\n \t \t" + todo.toString() +
-                                "\n \t Now you have " + Integer.toString(counter) + " tasks in the list.");
+                        list.add(todo);
+                        System.out.println(niceLine() +  "\t" + "Got it. I've added this task: " + "\n\t\t" + todo.toString() +
+                                "\n\tNow you have " + Integer.toString(list.size()) + " tasks in the list.");
+                        System.out.println("\n" + niceLine());
                         input = scanner.nextLine();
                     }
                 } catch(DukeException1 e) {
-                    System.out.println("\t OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println(niceLine() +  "\tOOPS!!! The description of a todo cannot be empty.");
+                    System.out.println("\n" + niceLine());
                     input = scanner.nextLine();
                 }
 
@@ -147,48 +150,53 @@ public class Duke {
                     if (input.split(" ", 2).length == 1) {
                         Deadline deadline = new Deadline(input.split(" ", 2)[0], "");
                     } else {
-                        counter = counter + 1;
                         Deadline deadline = new Deadline(input.split(" ", 2)[1].split(" /")[0], input.split("/by ")[1]);
-                        deadline.order = counter;
-                        tasks[counter - 1] = deadline;
-                        System.out.println("\t" + "Got it. I've added this task: " + "\n \t \t" + deadline.toString() +
-                                "\n \t Now you have " + Integer.toString(counter) + " tasks in the list.");
+                        list.add(deadline);
+                        System.out.println(niceLine() +  "\t" + "Got it. I've added this task: " + "\n\t\t" + deadline.toString() +
+                                "\n\tNow you have " + Integer.toString(list.size()) + " tasks in the list.");
+                        System.out.println("\n" + niceLine());
                         input = scanner.nextLine();
                     }
                 } catch(DukeException1 e) {
-                    System.out.println("\t OOPS!!! The description of a deadline cannot be empty.");
+                    System.out.println(niceLine() +  "\tOOPS!!! The description of a deadline cannot be empty.");
+                    System.out.println("\n" + niceLine());
                     input = scanner.nextLine();
                 }
             } else if(input.equals("blah")) {
                 try {
                     Task task = new Task(input);
                 } catch(DukeException1 e) {
-                    System.out.println("\t OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(niceLine() +  "\tOOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("\n" + niceLine());
                     input = scanner.nextLine();
                 }
+            } else if(input.split(" ")[0].equals("delete")) {
+                Integer number = Integer.valueOf(input.split(" ")[1]);
+                System.out.println(niceLine() +  "\tNoted. I've removed this task: \n\t\t" + list.get(number - 1).toString() +
+                        "\n\tNow you have " + Integer.toString(list.size() - 1) + " tasks in the list.");
+                System.out.println("\n" + niceLine());
+                list.remove(number - 1);
+                input = scanner.nextLine();
             } else {
                 try {
                     if (input.split(" ", 2).length == 1) {
                         Event event = new Event(input.split(" ", 2)[0], "");
                     } else {
-                        counter = counter + 1;
                         Event event = new Event(input.split(" ", 2)[1].split(" /")[0], input.split("/at ")[1]);
-                        event.order = counter;
-                        tasks[counter - 1] = event;
-                        //tasks[counter - 1] = Integer.toString(counter) + ". " + input;
-                        System.out.println("\t" + "Got it. I've added this task: " + "\n \t \t" + event.toString() +
-                                "\n \t Now you have " + Integer.toString(counter) + " tasks in the list.");
+                        list.add(event);
+                        System.out.println(niceLine() + "\tGot it. I've added this task: " + "\n\t\t" + event.toString() +
+                                "\n\tNow you have " + Integer.toString(list.size()) + " tasks in the list.");
+                        System.out.println("\n" + niceLine());
                         input = scanner.nextLine();
                     }
                 } catch(DukeException1 e) {
-                    System.out.println("\t OOPS!!! The description of a event cannot be empty.");
+                    System.out.println(niceLine() + "\tOOPS!!! The description of a event cannot be empty.");
+                    System.out.println("\n" + niceLine());
                     input = scanner.nextLine();
                 }
             }
         }
-        //String ending = "Bye. Hope to see you again soon!";
-        //System.out.println("\t" + ending);
-        //System.out.println("does this work?");
-        System.out.println("\t Bye. Hope to see you again soon!");
+        System.out.println(niceLine() + "\tBye. Hope to see you again soon!");
+        System.out.println("\n" + niceLine());
     }
 }
