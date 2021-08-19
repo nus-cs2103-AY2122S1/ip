@@ -1,3 +1,11 @@
+/**
+ * 
+ * This represents a Deadline task with a time limit.
+ * 
+ * @author Rishabh Anand
+ * @version CS2103, AY21/22 Semester 1
+ * 
+ */
 public class Deadline extends Task {
     protected String deadline;
 
@@ -6,6 +14,7 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    // returns the string representation of the Deadline
     @Override
     public String toString() {
         return "[D]" 

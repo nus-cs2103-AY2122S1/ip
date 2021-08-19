@@ -1,3 +1,12 @@
+/**
+ * 
+ * This represents an Event task with a time duration.
+ * 
+ * @author Rishabh Anand
+ * @version CS2103, AY21/22 Semester 1
+ * 
+ */
+
 public class Event extends Task {
     protected String timing;
 
@@ -6,6 +15,7 @@ public class Event extends Task {
         this.timing = timing;
     }
 
+    // returns string representation of the Event
     @Override
     public String toString() {
         return "[E]" 
