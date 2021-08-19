@@ -129,7 +129,7 @@ public class Duke {
         task.setCompleted();
         String message =
                 "____________________________________________________________\n" +
-                " Nice! I've marked this task as done: \n" +
+                " Nice! I've marked this task as done:\n" +
                 String.format("   [%s] %s\n", task.getCompletedMarker(), task.getTask()) +
                 "____________________________________________________________\n";
         System.out.println(message);
