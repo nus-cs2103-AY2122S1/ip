@@ -6,7 +6,8 @@ public class PrintUtil {
      * Print out the separation line between elements of the program
      */
     public static void insertSeparateLine() {
-        String separateLine = "____________________________________________________________";
+        String separateLine = 
+                "___________________________________________________________________________________";
         System.out.println("\t" + separateLine);
     }
 

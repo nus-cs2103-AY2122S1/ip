@@ -29,9 +29,16 @@ public class Task {
 
     /**
      * Mark a task as done
+     * 
+     * @return Response whether the task is already marked as done.
      */
-    public void markAsDone() {
-        this.isDone = true;
+    public boolean markAsDone() {
+        if (this.isDone) {
+            return false;
+        } else {
+            this.isDone = true;
+            return true;
+        }
     }
 
     @Override

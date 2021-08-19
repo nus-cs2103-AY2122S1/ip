@@ -10,6 +10,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * String representation of this task.
+     *
+     * @return The string representation.
+     */
     @Override
     public String toString() {
         return "[E] " + super.toString() + " (at: " + at + ")";
