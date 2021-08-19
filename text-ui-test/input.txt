@@ -5,7 +5,7 @@ event project meeting /at /at
 list
 done 1
 deadline submit proposal /by Sun
-deadline fake command
+deadline
 done 3
 list
 done 2
