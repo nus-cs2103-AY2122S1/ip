@@ -6,7 +6,7 @@ import static java.lang.Integer.parseInt;
 
 public class Duke {
 
-    //List of important keywords
+    //List of enum keywords
     enum Keywords {
         list,
         bye,
@@ -25,13 +25,18 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    //Prints a divider
+    /**
+     * Nullary Function that prints a divider when called
+     */
     static void printDivider() {
         String divider = "____________________________________________________________";
         System.out.println(divider);
     }
 
-    //Initial Greeting from Duke
+    /**
+     * Initial Greeting from Duke
+     * Nullary Function that prints the intro message when called
+     */
     static void greetings() {
         System.out.println(logo);
         printDivider();
@@ -39,16 +44,19 @@ public class Duke {
         printDivider();
     }
 
-    //Goodbye from Duke
+    /**
+     * Goodbye from Duke
+     * Nullary Function that prints a closing message when called
+     */
     static void close() {
         printDivider();
         System.out.println("Bye. Hope to see you again soon!\n");
         printDivider();
     }
 
-    /*
-    Prints list of task
-    Input: List
+    /**
+     * Unary Function that prints list of task
+     * @param lst List of tasks to print
      */
     static void printList(List<Task> lst) {
         printDivider();
@@ -60,33 +68,39 @@ public class Duke {
         printDivider();
     }
 
-    /*
-    Marks task as Done
-    Input: Task
+    /**
+     * Unary Function that marks task as Done and prints a confirmation message
+     * @param task Task that is marked as complete
     */
-    static void markTask(Task task) {
+    static void completeTask(Task task) {
+        task.markAsDone();
+
         printDivider();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("\t" + task.toString());
+        System.out.println("Nice! I've marked this task as done:"
+                            + "\n\t" + task.toString());
         printDivider();
     }
 
-    /*
-    Deletes a task
-    Input: index number
+    /**
+     * Binary Function that deletes a task and prints a confirmation message
+     * @param index  index number of the task to be removed
+     * @param lst Target list of tasks to have a task removed
      */
     static void removeTask(List<Task> lst, int index) {
         Task temp = lst.get(index);
         lst.remove(index);
+
         printDivider();
         System.out.println("Noted. I've removed this task: \n"
                 + "\t" + temp.toString() + "\n"
                 + "Now you have " + lst.size() + " tasks in the list.");
-
         printDivider();
     }
 
-    //Prints the most recently added Task
+    /**
+     * Unary Function that prints the most recently added Task
+     * @param lst List of Task that was added to
+     */
     static void printTask(List<Task> lst) {
         int lastItem = lst.size() - 1;
         printDivider();
@@ -96,10 +110,10 @@ public class Duke {
         printDivider();
     }
 
-    /*
-    Checks if String is an int
-    Input: String
-    */
+    /**
+     * Checks if String is an int
+     * @param str Target string to check
+     */
     static boolean checkForInt(String str) {
         try {
             int test = parseInt(str);
@@ -109,7 +123,14 @@ public class Duke {
         }
     }
 
-    //Processed String into Desc and Time
+    /**
+     * Binary Function that processes String into separate Desc and Time
+     * @param divider The pivot string to divide the input (\by or \at)
+     * @param input Array of Strings containing individual words that was input
+     * @return Returns a list of 2 Strings,
+     *         index 0 contains description,
+     *         index 1 contains the time of the event or the deadline
+     */
     static List<String> processDesc(String divider, String[] input) {
         List<String> list = Arrays.asList(input);
         int index = list.indexOf(divider);
@@ -146,8 +167,7 @@ public class Duke {
                 Keywords key = Keywords.error;
                 int index = 0;
 
-                //Looks for keywords
-                //Simple keywords
+                //Logic that looks for keywords
                 if (input.equals("bye")) {
                     key = Keywords.bye;
                 } else if (input.equals("list")) {
@@ -203,7 +223,6 @@ public class Duke {
                 }
 
                 switch (key) {
-
                     case list:
                         printList(list);
                         break;
@@ -223,8 +242,7 @@ public class Duke {
                         if (index >= list.size()) {
                             throw new DukeException("!!! The number you input exceeds the size of the list !!!");
                         }
-                        list.get(index).markAsDone();
-                        markTask(list.get(index));
+                        completeTask(list.get(index));
                         break;
                     case delete:
                         if (index >= list.size()) {
