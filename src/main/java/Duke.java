@@ -30,6 +30,13 @@ public class Duke {
         System.out.println("    " + task.toString());
     }
 
+    public static void delete(ArrayList<Task> taskList, Task task) {
+        taskList.remove(task);
+        System.out.println("    Got it. I've removed this task:");
+        System.out.println("     " + task.toString());
+        System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
+    }
+
     public static void main(String[] args) throws DukeException{
         //Greet
         String logo = " ____        _        \n"
@@ -96,7 +103,12 @@ public class Duke {
                 catch (ArrayIndexOutOfBoundsException e){
                     throw new DukeException("☹ Please enter the event command in 'deadline [task description]/by [end time]' format");
                 }
-            } else {
+            } else if(command.equals("delete")){
+                int index = Integer.parseInt(pieces[1]);
+                Task task = taskList.get(index-1);
+                delete(taskList, task);
+
+            }else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
@@ -105,4 +117,3 @@ public class Duke {
     }
 
 }
-
