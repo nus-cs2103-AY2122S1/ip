@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,16 +13,16 @@ public class Duke {
         }
     }
     public static class TaskList {
-        private Task[] tasks;
+        private ArrayList<Task> tasks;
         private int numTask;
 
         public TaskList(){
-            this.tasks = new Task[100];
+            this.tasks = new ArrayList<>();
             this.numTask = 0;
         }
 
         public void addCustom(Task task) {
-            tasks[this.numTask] = task;
+            tasks.add(task);
             this.numTask++;
             System.out.println("Got it. I've added this task: ");
             System.out.println("  " + task);
@@ -32,15 +33,17 @@ public class Duke {
         public void list() {
             int counter = 0;
             for (int i = 0; i < this.numTask; i++) {
-                System.out.println((i + 1)+ ". " + tasks[i]);
+                System.out.println((i + 1)+ ". " + tasks.get(i));
             }
         }
 
         public void done(int taskNumber) {
-            tasks[taskNumber - 1].complete();
+            tasks.get(taskNumber - 1).complete();
             System.out.println("Nice! I've marked this task as done: ");
-            System.out.println("  " + tasks[taskNumber - 1]);
+            System.out.println("  " + tasks.get(taskNumber - 1));
         }
+
+
     }
 
     public void init() {
