@@ -1,3 +1,8 @@
+/**
+ * A type of task that requires a deadline that extends from Task
+ *
+ * @author: Wei Yangken
+ */
 public class Deadline extends Task{
 
     private String deadline;

@@ -1,9 +1,13 @@
 import java.util.ArrayList;
 
+/**
+ * Class that contains the initialization of a list to store the tasks
+ *
+ * @author: Wei Yangken
+ */
 public class Tasklist {
     private ArrayList<Task> tasklist;
     private static int currCount = 0;
-    private static String breakline = "____________________________________________________________";
 
     /**
      * Constructor to create a new taskList to store tasks
@@ -19,11 +23,11 @@ public class Tasklist {
     public void add(Task task) {
         try {
             if(task == null) {
-                throw new DukeException("Task has not been added successfully.");
+                throw new DukeException.TaskNotAddedException("Task has not been added successfully.");
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            System.out.println(breakline);
+            System.out.println(Duke.breakline);
             return;
         }
 
@@ -34,7 +38,7 @@ public class Tasklist {
         String counterMsg = String.format("Now you have %d tasks in the list.", currCount);
         System.out.println(addMsg);
         System.out.println(counterMsg);
-        System.out.println(breakline);
+        System.out.println(Duke.breakline);
     }
 
     /**
@@ -44,11 +48,11 @@ public class Tasklist {
     public void list() {
         try {
             if(this.tasklist.size() == 0) {
-                throw new DukeException("List is empty :(");
+                throw new DukeException.EmptyListException("List is empty :(");
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            System.out.println(breakline);
+            System.out.println(Duke.breakline);
             return;
         }
 
@@ -60,7 +64,7 @@ public class Tasklist {
                 System.out.printf("%d. %s\n", i + 1, tasklist.get(i).toString());
             }
         }
-        System.out.println(breakline);
+        System.out.println(Duke.breakline);
     }
 
     /**
@@ -74,7 +78,7 @@ public class Tasklist {
             removedTask = this.tasklist.remove(idx - 1);
         } catch (IndexOutOfBoundsException e) {
             System.out.printf("Item %d cannot be found.", idx);
-            System.out.println(breakline);
+            System.out.println(Duke.breakline);
             return;
         }
 
@@ -82,7 +86,7 @@ public class Tasklist {
         System.out.println(removeMsg);
         currCount = currCount - 1;
         System.out.printf("Now you have %d task(s) in the list.\n", currCount);
-        System.out.println(breakline);
+        System.out.println(Duke.breakline);
     }
 
     /**

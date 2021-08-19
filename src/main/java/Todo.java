@@ -1,3 +1,8 @@
+/**
+ * A type of task that has no additional arguments and extends from Task
+ *
+ * @author: Wei Yangken
+ */
 public class Todo extends Task{
 
     /**

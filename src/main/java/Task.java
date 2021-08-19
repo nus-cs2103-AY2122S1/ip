@@ -1,8 +1,10 @@
-import java.util.Locale;
-
+/**
+ * Encapsulates the creation of tasks found in the to-do list
+ *
+ * @author: Wei Yangken
+ */
 public class Task {
     private String name;
-    private static String breakline = "____________________________________________________________";
     private boolean done;
 
     /**
@@ -35,7 +37,7 @@ public class Task {
         this.done = true;
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(this);
-        System.out.println(breakline);
+        System.out.println(Duke.breakline);
     }
 
     /**
@@ -51,21 +53,21 @@ public class Task {
         try {
             if (taskName.equals("")) {
                 String errorMsg = String.format("Oops!!! %s cannot be empty", taskType.toUpperCase());
-                throw new DukeException(errorMsg);
+                throw new DukeException.InsufficientArgumentsException(errorMsg);
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            System.out.println(breakline);
+            System.out.println(Duke.breakline);
             return null;
         }
 
         try {
-            if (split.equals("")) {
+            if (split.equals("") && taskType.equals("todo")) {
                 return new Todo(taskName);
             } else {
                 if (!taskName.contains(split)) {
                     String errorMsg = String.format("Oops!!! %s cannot be found in %s.", split, taskType);
-                    throw new DukeException(errorMsg);
+                    throw new DukeException.InsufficientArgumentsException(errorMsg);
                 }
 
                 String[] nameNTime = taskName.split(split);
@@ -78,13 +80,13 @@ public class Task {
                 } else if (taskType.equals("event")) {
                     task = new Event(name, time);
                 } else {
-                    throw new DukeException("TaskType cannot be found");
+                    throw new DukeException.TaskTypeNotFoundException("TaskType cannot be found");
                 }
                 return task;
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            System.out.println(breakline);
+            System.out.println(Duke.breakline);
             return null;
         }
 

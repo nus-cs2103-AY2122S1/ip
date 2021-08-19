@@ -1,3 +1,8 @@
+/**
+ * A type of task that requires event details and extends from Task
+ *
+ * @author: Wei Yangken
+ */
 public class Event extends Task{
 
     private String event;

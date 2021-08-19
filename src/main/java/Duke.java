@@ -1,8 +1,13 @@
 import java.util.Scanner;
 
+/**
+ * Allows for the main initialization of the Duke Program
+ *
+ * @author: Wei Yangken
+ */
 public class Duke {
 
-    private static String breakline = "____________________________________________________________";
+    public static String breakline = "____________________________________________________________";
 
     /**
      * Provides the initialization message for the Duke Program
@@ -23,9 +28,6 @@ public class Duke {
         System.out.println(breakline);
     }
 
-    /**
-     * Main method to initialize program
-     */
     public static void main(String[] args) {
         String cmd;
         Scanner scanner = new Scanner(System.in);
