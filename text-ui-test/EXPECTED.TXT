@@ -1,5 +1,21 @@
 Hello!
-list
-blah
-Bye!
+Added:
+[T][ ] one
+There are now 1 tasks in the list.
+Added:
+[D][ ] two (by: two)
+There are now 2 tasks in the list.
+Added:
+[E][ ] three (at: three)
+There are now 3 tasks in the list.
+1.[T][ ] one
+2.[D][ ] two (by: two)
+3.[E][ ] three (at: three)
+Nice! I've marked this task as done:
+[D][X] two (by: two)
+1.[T][ ] one
+2.[D][X] two (by: two)
+3.[E][ ] three (at: three)
+Bye user!
+
 

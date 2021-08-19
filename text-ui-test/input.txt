@@ -1,3 +1,7 @@
+todo one
+deadline two /by two
+event three /at three
 list
-blah
+done 2
+list
 bye
