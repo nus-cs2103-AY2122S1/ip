@@ -1,9 +1,23 @@
-todo say hello
-deadline eat dinner /by 7pm tonight
-event play basketball /at tmr 2-7pm
+todo task 1 time 1
+deadline task 2 /by time 2
+event task 3 /at time 3
 list
 done 0
-done 1
-done 2
 list
+delete 1
+list
+todo
+deadline
+deadline name
+deadline name /by
+deadline name /by too /by many /by time
+deadline /by time
+event
+event name
+event name /at
+event name /at too /at many /at time
+event /at time
+wrongcommand
+done 1000
+delete 1000
 bye

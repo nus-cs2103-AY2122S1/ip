@@ -1,24 +1,35 @@
 Hello! I'm Duke
 What can I do for you?
 You have 1 tasks in the list
-[T][ ] say hello
+[T][ ] task 1 time 1
 You have 2 tasks in the list
-[D][ ] eat dinner  (by:  7pm tonight)
+[D][ ] task 2 (by: time 2)
 You have 3 tasks in the list
-[E][ ] play basketball  (at:  tmr 2-7pm)
-[T][ ] say hello
-[D][ ] eat dinner  (by:  7pm tonight)
-[E][ ] play basketball  (at:  tmr 2-7pm)
-[T][X] say hello
-[D][ ] eat dinner  (by:  7pm tonight)
-[E][ ] play basketball  (at:  tmr 2-7pm)
-[T][X] say hello
-[D][X] eat dinner  (by:  7pm tonight)
-[E][ ] play basketball  (at:  tmr 2-7pm)
-[T][X] say hello
-[D][X] eat dinner  (by:  7pm tonight)
-[E][X] play basketball  (at:  tmr 2-7pm)
-[T][X] say hello
-[D][X] eat dinner  (by:  7pm tonight)
-[E][X] play basketball  (at:  tmr 2-7pm)
+[E][ ] task 3 (at: time 3)
+0: [T][ ] task 1 time 1
+1: [D][ ] task 2 (by: time 2)
+2: [E][ ] task 3 (at: time 3)
+0: [T][X] task 1 time 1
+1: [D][ ] task 2 (by: time 2)
+2: [E][ ] task 3 (at: time 3)
+0: [T][X] task 1 time 1
+1: [D][ ] task 2 (by: time 2)
+2: [E][ ] task 3 (at: time 3)
+removed Task 1
+0: [T][X] task 1 time 1
+1: [E][ ] task 3 (at: time 3)
+DukeException: Please specify name
+DukeException: Please specify time
+DukeException: Please specify time
+DukeException: Please specify time
+DukeException: too many argument
+DukeException: Please specify name
+DukeException: Please specify time
+DukeException: Please specify time
+DukeException: Please specify time
+DukeException: too many argument
+DukeException: Please specify name
+command not found
+DukeException: no such task
+DukeException: no such task
 Bye. Hope to see you again soon!
