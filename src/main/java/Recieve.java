@@ -25,7 +25,7 @@ public class Recieve {
                         try {
                             int pos = Integer.parseInt(input.substring(5)) - 1;
                             if (pos < 0) {
-                                throw new DukeException("Task list index starts from 1!");
+                                throw new InvalidTaskIndexException("Task list index starts from 1!");
                             }
 
                             else if (pos < inputs.size()) {
@@ -34,14 +34,14 @@ public class Recieve {
                                 System.out.println(inputs.get(pos).toString());
                             }
                             else {
-                                throw new DukeException("There are only " + pos + " tasks!");
+                                throw new InvalidTaskIndexException("There are only " + pos + " tasks!");
                             }
                         } catch (NumberFormatException nfe) {
-                            throw new DukeException("A task index should only contain numbers!");
+                            throw new InvalidTaskIndexException("A task index should only contain numbers!");
                         }
 
                     } else {
-                        throw new DukeException("Please specify the task index to be marked as done!");
+                        throw new InvalidTaskIndexException("Please specify the task index to be marked as done!");
                     }
 
 
@@ -64,7 +64,7 @@ public class Recieve {
                             int pos = Integer.parseInt(input.substring(7)) - 1;
 
                             if (pos < 0) {
-                                throw new DukeException("Task list index starts from 1!");
+                                throw new InvalidTaskIndexException("Task list index starts from 1!");
                             }
 
                             else if (pos < inputs.size()) {
@@ -74,15 +74,15 @@ public class Recieve {
                                 System.out.println("Now you have " + inputs.size() + " task(s) in the list.");
                             }
                             else {
-                                throw new DukeException("There are only " + pos + " tasks!");
+                                throw new InvalidTaskIndexException("There are only " + pos + " tasks!");
                             }
                         } catch (NumberFormatException nfe) {
-                            throw new DukeException("A task index should only contain numbers!");
+                            throw new InvalidTaskIndexException("A task index should only contain numbers!");
                         }
 
                     }
                     else {
-                        throw new DukeException("Please specify the task index to be deleted!");
+                        throw new InvalidTaskIndexException("Please specify the task index to be deleted!");
                     }
 
                 }
@@ -97,20 +97,20 @@ public class Recieve {
                             System.out.println("Now you have " + inputs.size() + " task(s) in the list.");
                         }
                         else {
-                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            throw new InvalidFormatException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
 
                     }
                     else if (input.startsWith("deadline ") || input.equals("deadline")) {
                         if (!input.contains(" /by ")) {
-                            throw new DukeException("OOPS!! To add a Deadline, type -> deadline <Description> /by <deadline>!");
+                            throw new InvalidFormatException("OOPS!! To add a Deadline, type -> deadline <Description> /by <deadline>!");
                         }
                         if (input.length() > 12 && input.contains("/by")) {
                             String[] spl = input.substring(9).split("/");
                             if (spl[0].length() < 2 || spl[1].length() < 4) {
                                 System.out.println(spl[0].length());
                                 System.out.println(spl[1].length());
-                                throw new DukeException("☹ OOPS!!! The descriptions of a deadline cannot be empty.");
+                                throw new InvalidFormatException("☹ OOPS!!! The descriptions of a deadline cannot be empty.");
                             }
                             else {
                                 Deadline task = new Deadline(spl[0], spl[1].substring(3));
@@ -122,18 +122,18 @@ public class Recieve {
                             }
                         }
                         else {
-                            throw new DukeException("☹ OOPS!!! The descriptions of a deadline cannot be empty.");
+                            throw new InvalidFormatException("☹ OOPS!!! The descriptions of a deadline cannot be empty.");
                         }
 
                     }
                     else if (input.startsWith("event ") || input.equals("event") ) {
                         if (!input.contains(" /at ")) {
-                            throw new DukeException("OOPS!! To add an Event, type -> event <Description> /at <details>!");
+                            throw new InvalidTaskIndexException("OOPS!! To add an Event, type -> event <Description> /at <details>!");
                         }
                         if (input.length() > 9 && input.contains("/at")) {
                             String[] spl = input.substring(6).split("/");
                             if (spl[0].length() < 2 || spl[1].length() < 4) {
-                                throw new DukeException("☹ OOPS!!! The descriptions of an event cannot be empty.");
+                                throw new InvalidFormatException("☹ OOPS!!! The descriptions of an event cannot be empty.");
                             }
                             else {
                                 Event task = new Event(spl[0], spl[1].substring(3));
@@ -145,7 +145,7 @@ public class Recieve {
                             }
                         }
                         else {
-                            throw new DukeException("☹ OOPS!!! The descriptions of an event cannot be empty.");
+                            throw new InvalidFormatException("☹ OOPS!!! The descriptions of an event cannot be empty.");
                         }
 
                     }
@@ -153,7 +153,7 @@ public class Recieve {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
-            } catch (DukeException ex) {
+            } catch (InvalidTaskIndexException | InvalidFormatException | DukeException ex) {
                 System.out.println(ex.toString());
             }
 
