@@ -159,4 +159,19 @@ public class TaskManager {
             throw new DukeIOException("☹ OOPS!!! Save tasks to file error.");
         }
     }
+
+    /**
+     * Print tasks which contains keyword from TaskManager with format:
+     *      1. Task1
+     *      2. Task2
+     *      ...
+     */
+    public String[] findTasks(String keyword) {
+        List<Task> filteredTasks = tasks.stream()
+            .filter(task -> task.getName().contains(keyword))
+            .collect(Collectors.toList());
+        return IntStream.range(0, filteredTasks.size())
+            .mapToObj(i -> (i + 1) + ". " + filteredTasks.get(i).toString())
+            .collect(Collectors.toList()).toArray(String[]::new);
+    }
 }

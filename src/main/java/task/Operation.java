@@ -17,6 +17,7 @@ public enum Operation {
     DONE("done"),
     DELETE("delete"),
     CLEAR("clear"),
+    FIND("find"),
     BYE("bye");
 
     private final String value;

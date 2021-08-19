@@ -51,6 +51,8 @@ public class Duke implements Message {
                 storage.deleteTask(command);
             } else if (operation == Operation.CLEAR) {
                 storage.clearTasks();
+            } else if (operation == Operation.FIND) {
+                storage.findTasks(command);
             } else if (operation == Operation.TODO ||
                 operation == Operation.DEADLINE ||
                 operation == Operation.EVENT) {
