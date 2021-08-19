@@ -35,7 +35,7 @@ public class Duke {
     }
 
     private static void printList() {
-        System.out.println("Here are the tasks in your list:\n");
+        System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < 100; i++) {
             if(listOfText[i] != null) {
                 System.out.println(i+1 + "." +  listOfText[i].logo() + listOfText[i].getStatusIcon() + " " + listOfText[i].description);
@@ -67,14 +67,14 @@ public class Duke {
                 int number = Integer.parseInt(split[1]);
                 changeStatus(number);
                 input = sc.nextLine();
-            }else if (input.substring(0, 9).equals("deadline ")) {
+            }else if (input.length() > 9 && input.substring(0, 9).equals("deadline ")) {
                 String[] split = input.substring(9).split(" /by ");
                 list(new Deadline(split[0], split[1]));
                 input = sc.nextLine();
-            } else if (input.substring(0, 5).equals("todo ")) {
+            } else if (input.length() > 5 && input.substring(0, 5).equals("todo ")) {
                 list(new ToDo(input.substring(5)));
                 input = sc.nextLine();
-            } else if (input.substring(0, 6).equals("event ")) {
+            } else if (input.length() > 6 && input.substring(0, 6).equals("event ")) {
                 String[] split = input.substring(6).split(" /at ");
                 list(new Event(split[0], split[1]));
                 input = sc.nextLine();
