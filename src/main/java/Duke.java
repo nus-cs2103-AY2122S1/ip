@@ -145,7 +145,6 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         System.out.println(task.toString());
                         System.out.println("Now you have " + userList.size() + " tasks in the list.");
-                        
                     }
                 } else if (command.startsWith("event")) {
                     if (command.length() <= 6) {
@@ -158,6 +157,13 @@ public class Duke {
                         System.out.println(task.toString());
                         System.out.println("Now you have " + userList.size() + " tasks in the list.");
                     }
+                } else if (command.startsWith("delete")) {
+                    int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
+                    Task task = userList.get(value-1);
+                    userList.remove(value-1);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(task);
+                    System.out.println("Now you have " + userList.size() + " tasks in the list.");
                 } else {
                     DukeException exp = new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println(exp);

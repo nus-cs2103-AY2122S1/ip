@@ -9,4 +9,6 @@ list
 deadline assignment due /by 12am
 random
 deadline
+delete 2
+list
 bye
