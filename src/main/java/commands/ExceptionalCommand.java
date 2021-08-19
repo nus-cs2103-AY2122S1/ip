@@ -14,9 +14,7 @@ public class ExceptionalCommand extends Command {
     @Override
     public void execute(TaskList taskList) {
         String message = e.getMessage();
-        Ui.displayLine();
-        System.out.println(message);
-        Ui.displayLine();
+        Ui.formatAndPrint(message);
     }
 
     @Override
