@@ -1,6 +1,6 @@
 public class Display {
 
-    public static String line = "*********************************************";
+    public static String line = "---------------------------------------------";
 
     public static void introduction() {
         System.out.println(line);
@@ -15,25 +15,29 @@ public class Display {
             System.out.println(line);
             switch(arrReply[0]) {
                 case "list":
-                    Task.listReply();
+                    Manager.listReply();
                     break;
                 case "done":
-                    Task.done(arrReply[1]);
+                    Manager.done(arrReply[1]);
                     break;
                 case "deadline":
                     Deadline dead = new Deadline(arrReply[1]);
-                    Task.addReply(dead);
+                    Manager.addReply(dead);
                     break;
                 case "event":
                     Event event = new Event(arrReply[1]);
-                    Task.addReply(event);
+                    Manager.addReply(event);
                     break;
                 case "todo":
                     if (arrReply.length == 1) {
-                        throw new SkeltalException("Oh no the description of todo cannot be empty!");
+                        throw new SkeltalException("OOPS! The description of todo cannot be empty!");
                     }
                     ToDo todo = new ToDo(arrReply[1]);
-                    Task.addReply(todo);
+                    Manager.addReply(todo);
+                    break;
+                case "delete":
+                    System.out.println("Noted. I have removed this task");
+                    Manager.delete(arrReply[1]);
                     break;
                 default:
                     throw new SkeltalException("OOPS!!! I'm sorry, but I don't know what that means :-(");
