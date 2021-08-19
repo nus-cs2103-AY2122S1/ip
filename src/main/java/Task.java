@@ -22,14 +22,6 @@ public class Task {
     }
 
     /**
-     * Gets the description of the task
-     * @return string description of task
-     */
-    public String getDescription() {
-        return this.description;
-    }
-
-    /**
      * Marks this task as done by changing the isDone boolean to true
      */
     public void markAsDone() {
