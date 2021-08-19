@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -55,6 +56,12 @@ public class Duke {
                     for (int i = 1; i <= tasks.size(); i++) {
                         System.out.println("    " + i + "." + tasks.get(i - 1).toString());
                     }
+                } else if (task.contains("delete")) {
+                    int itemDeleted = Integer.parseInt(task.substring(7));
+                    Task deletedTask = tasks.remove(itemDeleted - 1);
+                    System.out.println("    Noted. I've removed this task:");
+                    System.out.println("      " + deletedTask.toString());
+                    System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
                 } else {
                     throw new Exception("Cannot Understand");
                 }
