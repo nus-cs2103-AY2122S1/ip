@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        String[] arr = new String[100];
+        int count = 0;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -22,11 +24,20 @@ public class Duke {
                         "____________________________________________________________";
                 System.out.println(bye);
                 return;
+            } else if (input.equals("list")) {
+                System.out.println("____________________________________________________________");
+                for (int i = 0; i < count; i++) {
+                    System.out.println(i+1 + ". " + arr[i]);
+                }
+                System.out.println("____________________________________________________________");
+            } else {
+                arr[count] = input;
+                count++;
+                String reply = "____________________________________________________________\n" +
+                        "added: " + input + "\n" +
+                        "____________________________________________________________";
+                System.out.println(reply);
             }
-            String reply = "____________________________________________________________\n" +
-                    input + "\n" +
-                    "____________________________________________________________";
-            System.out.println(reply);
         }
     }
 }
