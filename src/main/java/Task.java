@@ -9,7 +9,9 @@ public class Task {
     public void done() {
         this.completedTask = true;
     }
-
+    public String toString() {
+        return getStatusIcon() + this.information;
+    }
     public String getStatusIcon() {
         if (completedTask) {
             return "X";
