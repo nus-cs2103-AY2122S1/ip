@@ -1,11 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        CommandManager commandManager = new CommandManager();
-        List<Task> taskList = new ArrayList<>();
+
+        DukeCommandManager commandManager = new DukeCommandManager();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,19 +17,8 @@ public class Duke {
         String command = sc.next().trim();
 
         while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                commandManager.respondList(taskList);
-            } else if (command.startsWith("done")) {
-                commandManager.respondDone(command, taskList);
-            } else if (command.startsWith("todo")) {
-                commandManager.respondTodo(command, taskList);
-            } else if (command.startsWith("deadline")) {
-                commandManager.respondDeadline(command, taskList);
-            } else if (command.startsWith("event")) {
-                commandManager.respondEvent(command, taskList);
-            } else {
-                commandManager.defaultResponse();
-            }
+            String commandType = command.split(" ", 2)[0];
+            commandManager.processCommand(command, commandType);
             command = sc.next().trim();
         }
 

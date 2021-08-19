@@ -1,9 +1,12 @@
+import java.util.ArrayList;
 import java.util.List;
 
-public class CommandManager {
+public class DukeCommandManager {
 
-    protected CommandManager() {
+    private List<Task> taskList;
 
+    protected DukeCommandManager() {
+        this.taskList = new ArrayList<>();
     }
 
     public void gettingStart() {
@@ -15,11 +18,55 @@ public class CommandManager {
         System.out.println("Program exiting... \nBye. Hope to see you again soon!\n");
     }
 
+    public void respondHelp() {
+
+    }
+
+    public void respondDelete(String command) {
+
+    }
+
+    public void respondClearList() {
+
+    }
+
+    public void processCommand(String command, String commandType) {
+        try {
+            switch (commandType) {
+                case "list":
+                    respondList();
+                    break;
+                case "done":
+                    respondDone(command);
+                    break;
+                case "todo":
+                    respondTodo(command);
+                    break;
+                case "deadline":
+                    respondDeadline(command);
+                    break;
+                case "event":
+                    respondEvent(command);
+                    break;
+                default:
+                    defaultResponse();
+            }
+        } catch (DukeException e) {
+            if (e.type == DukeException.exceptionType.OUT_OF_BOUND) {
+                respondWith("☹ OOPS!!! Your task number is out of bound!\n" +
+                        "To use " + commandType + ", please enter '\"help'\" for instructions");
+            } else {
+                respondWith("☹ OOPS!!! Your description of a " + commandType + " is incorrect!\n" +
+                        "To use " + commandType + ", please enter '\"help'\" for instructions");
+            }
+            enterCommand();
+        }
+    }
+
     /**
      * Print all available tasks on the array list
-     * @param taskList: List of tasks
      */
-    public void respondList(List<Task> taskList) {
+    public void respondList() {
         addSpace();
         System.out.println("Here is the list of all tasks: ");
         for (int i = 0; i < taskList.size(); i++) {
@@ -32,11 +79,13 @@ public class CommandManager {
     /**
      *
      * @param command
-     * @param taskList
      */
-    public void respondDone(String command, List<Task> taskList) {
+    public void respondDone(String command) throws DukeException {
         command = command.substring(4).replaceAll("\\s+", "");
         int position = Integer.parseInt(command) - 1;
+        if (position > taskList.size()) {
+            throw new DukeException("done", "", DukeException.exceptionType.OUT_OF_BOUND);
+        }
         Task calledTask = taskList.remove(position);
         calledTask.markAsCompleted();
         taskList.add(position, calledTask);
@@ -47,28 +96,33 @@ public class CommandManager {
     /**
      *
      * @param command
-     * @param taskList
      */
-    public void respondTodo(String command, List<Task> taskList) {
+    public void respondTodo(String command) throws DukeException {
         command = command.substring(4).trim();
-        Task newTask = new Todo(command);
-        taskList.add(newTask);
-        respondWith("Got it! I've added this task:\n" + newTask +
-                "\nNow you have " + taskList.size() + " tasks in the list");
+        if (command.equals("")) {
+            throw new DukeException("todo", "Error: ", DukeException.exceptionType.INCOMPLETE);
+        } else {
+            Task newTask = new Todo(command);
+            taskList.add(newTask);
+            respondWith("Got it! I've added this task:\n" + newTask +
+                    "\nNow you have " + taskList.size() + " tasks in the list");
+        }
         enterCommand();
     }
 
     /**
      *
      * @param command
-     * @param taskList
      */
-    public void respondDeadline(String command, List<Task> taskList) {
+    public void respondDeadline(String command) throws DukeException {
         int time = command.lastIndexOf("/by");
         String taskName = command.substring(8, time).trim();
         String taskTime = command.substring(time + 3).trim();
         Task newTask = new Deadline(taskName, taskTime);
         taskList.add(newTask);
+        if (taskName.equals("")) {
+            throw new DukeException("deadline", "", DukeException.exceptionType.INCOMPLETE);
+        }
         respondWith("Got it! I've added this task:\n" + newTask +
                 "\nNow you have " + taskList.size() + " tasks in the list");
         enterCommand();
@@ -77,22 +131,22 @@ public class CommandManager {
     /**
      *
      * @param command
-     * @param taskList
      */
-    public void respondEvent(String command, List<Task> taskList) {
+    public void respondEvent(String command) throws DukeException {
         int time = command.lastIndexOf("/at");
+        if (time == -1) time = command.length() - 1;
         String taskName = command.substring(5, time).trim();
         String taskTime = command.substring(time + 3).trim();
         Task newTask = new Event(taskName, taskTime);
         taskList.add(newTask);
+        if (taskName.equals("")) {
+            throw new DukeException("event", "", DukeException.exceptionType.INCOMPLETE);
+        }
         respondWith("Got it! I've added this task:\n" + newTask +
                 "\nNow you have " + taskList.size() + " tasks in the list");
         enterCommand();
     }
 
-    /**
-     *
-     */
     public void defaultResponse() {
         respondWith("OOPS!!! I'm sorry, but I don't know what that means :-(");
         enterCommand();
