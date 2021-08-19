@@ -2,7 +2,7 @@
 Hello! I'm Duke
 What can I do for you?
 *******************************************
-Wrong input
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 *******************************************
 Got it. I've added this task:
   [T][ ] read book
@@ -33,7 +33,7 @@ Nice! I've marked this task as done:
 Nice! I've marked this task as done:
   [T][X] join sports club
 *******************************************
-Wrong input!
+☹ OOPS!!! Task number 6 does not exist!
 *******************************************
 1.[T][X] read book
 2.[D][X] return book (by: June 6th)
