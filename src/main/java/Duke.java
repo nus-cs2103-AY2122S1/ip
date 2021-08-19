@@ -58,6 +58,15 @@ public class Duke {
                 System.out.println("     Got it. I've added this task:");
                 System.out.println(spacing + "  " + e.toString());
                 System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
+            } else if (command.length() > 5 && command.toLowerCase().substring(0, 6).equals("delete")) {
+                if(command.length() == 6) {
+                    throw new DukeException("     ☹ OOPS!!! There must be something to be deleted");
+                }
+                Task item = list.get(Integer.parseInt(command.substring(7)) - 1);
+                System.out.println("     Noted. I've removed this task:");
+                System.out.println(spacing + "  " + item.toString());
+                list.remove(Integer.parseInt(command.substring(7)) - 1);
+                System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
             } else {
                 throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
