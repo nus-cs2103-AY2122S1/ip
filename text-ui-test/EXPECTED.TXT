@@ -1,7 +1,33 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________________
+Hello! I'm Duke: Level 4
+What would you like to do today?
+My current features are: Greet, Echo, Exit, Add, List, Mark as Done, ToDos, Events, Deadlines
+____________________________________________________________
+____________________________________________________________
+New todo task added:
+[T][ ] Clean room
+ You now have 1 item(s) in your task list.
+____________________________________________________________
+____________________________________________________________
+New deadline task added:
+[D][ ] CS2103 ip week 2 (by: tonight)
+ You now have 2 item(s) in your task list.
+____________________________________________________________
+____________________________________________________________
+New event task added:
+[E][ ] watch national address by PM Lee (at: 8pm Friday)
+ You now have 3 item(s) in your task list.
+____________________________________________________________
+____________________________________________________________
+Congratulations! You have finished this task: [T][X] Clean room
+____________________________________________________________
+____________________________________________________________
+1.[T][X] Clean room
+2.[D][ ] CS2103 ip week 2 (by: tonight)
+3.[E][ ] watch national address by PM Lee (at: 8pm Friday)
+____________________________________________________________
+____________________________________________________________
+Thank you for using Duke: Level 4
+See you soon!
+____________________________________________________________
 

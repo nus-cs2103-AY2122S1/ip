@@ -125,7 +125,7 @@ public class Duke {
                             String todoName = scanner.nextLine();
                             Task newestTodo = new ToDo(todoName);
                             taskArrayList.add(newestTodo);
-                            System.out.println(sandwich("New todo task added: \n"
+                            System.out.println(sandwich("New todo task added:\n"
                                     + newestTodo
                                     + "\n You now have "
                                     + taskArrayList.size()
@@ -137,11 +137,11 @@ public class Duke {
                             String deadlineReminder = deadlineTokens[1];
                             Task newestDeadline = new Deadline(deadlineName, deadlineReminder);
                             taskArrayList.add(newestDeadline);
-                            System.out.println(sandwich("New deadline task added: \n"
+                            System.out.println(sandwich("New deadline task added:\n"
                                     + newestDeadline
                                     + "\n You now have "
                                     + taskArrayList.size()
-                                    + " items in your task list."));
+                                    + " item(s) in your task list."));
                             break;
                         case "event":
                             String[] eventTokens = scanner.nextLine().split("\\s*/at\\s*");
@@ -149,11 +149,11 @@ public class Duke {
                             String eventReminder = eventTokens[1];
                             Task newestEvent = new Event(eventName, eventReminder);
                             taskArrayList.add(newestEvent);
-                            System.out.println(sandwich("New event task added: \n"
+                            System.out.println(sandwich("New event task added:\n"
                                     + newestEvent
                                     + "\n You now have "
                                     + taskArrayList.size()
-                                    + " items in your task list."));
+                                    + " item(s) in your task list."));
                             break;
                     }
                 }
