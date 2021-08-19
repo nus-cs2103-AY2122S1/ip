@@ -37,6 +37,7 @@ public class List {
             return;
         }
         list.get(index - 1).setDone();
+        System.out.println("Nice! I've marked this task as done: ");
         System.out.println(list.get(index - 1).toString());
     }
 
@@ -45,6 +46,7 @@ public class List {
             System.out.println("There is no task " + index);
             return;
         }
+        System.out.println("Noted. I've removed this task: ");
         System.out.println(list.get(index - 1).toString());
         list.remove(index - 1);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
