@@ -1,3 +1,5 @@
+package cs2103t.duke.task;
+
 public abstract class Task {
 
     private final String description;

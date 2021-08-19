@@ -1,6 +1,11 @@
+package cs2103t.duke.task;
+
+import cs2103t.duke.ui.Ui;
+
 import java.util.ArrayList;
 
 public class TaskList {
+
 
     private final ArrayList<Task> tasks;
 

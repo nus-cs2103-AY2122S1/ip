@@ -1,3 +1,11 @@
+import cs2103t.duke.command.Command;
+import cs2103t.duke.command.ExitCommand;
+import cs2103t.duke.exception.DukeException;
+import cs2103t.duke.parser.Parser;
+import cs2103t.duke.storage.Storage;
+import cs2103t.duke.task.TaskList;
+import cs2103t.duke.ui.Ui;
+
 public class Duke {
 
     private final Storage storage;

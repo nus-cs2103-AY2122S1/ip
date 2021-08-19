@@ -1,3 +1,13 @@
+package cs2103t.duke.parser;
+
+import cs2103t.duke.command.*;
+import cs2103t.duke.exception.DukeException;
+import cs2103t.duke.task.Deadline;
+import cs2103t.duke.task.Event;
+import cs2103t.duke.task.Task;
+import cs2103t.duke.task.Todo;
+import cs2103t.duke.ui.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 

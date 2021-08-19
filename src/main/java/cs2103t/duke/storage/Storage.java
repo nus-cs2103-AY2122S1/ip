@@ -1,3 +1,9 @@
+package cs2103t.duke.storage;
+
+import cs2103t.duke.exception.DukeException;
+import cs2103t.duke.task.*;
+import cs2103t.duke.ui.Ui;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,15 +1,17 @@
+package cs2103t.duke.ui;
+
 import java.util.Scanner;
 
 public class Ui {
 
-    static String logo = "      ____        _        \n"
+    public static String logo = "      ____        _        \n"
             + "     |  _ \\ _   _| | _____ \n"
             + "     | | | | | | | |/ / _ \\\n"
             + "     | |_| | |_| |   <  __/\n"
             + "     |____/ \\__,_|_|\\_\\___|\n";
-    static String divider = "    ____________________________________________________________";
-    static String space = "     ";
-    static String INVALID_INPUT = space + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public static String divider = "    ____________________________________________________________";
+    public static String space = "     ";
+    public static String INVALID_INPUT = space + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     private final Scanner scanner;
 
