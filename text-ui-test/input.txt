@@ -15,5 +15,10 @@ done 3
 done 5
 done
 list
+delete
+delete 10
+delete nonsense
+delete 3
+list
 bye bye
 bye

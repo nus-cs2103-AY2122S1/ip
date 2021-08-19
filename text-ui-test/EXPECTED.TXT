@@ -38,5 +38,14 @@ Here are the tasks in your list:
 1.[T][ ] New todo task
 2.[D][X] New deadline (by: deadline time)
 3.[E][X] New event (at: event time)
+Please follow command 'delete' with an integer!
+Invalid task number!
+Please follow command 'delete' with an integer!
+Noted. I've removed this task:
+  [E][X] New event (at: event time)
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1.[T][ ] New todo task
+2.[D][X] New deadline (by: deadline time)
 Command not recognised!
 Bye. Hope to see you again soon!
