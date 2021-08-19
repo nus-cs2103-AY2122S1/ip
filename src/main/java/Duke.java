@@ -22,7 +22,50 @@ public class Duke {
         while (true) {
             Scanner sc = new Scanner(System.in);
             String str = sc.nextLine();
-            if (!str.equals("list") && !str.contains("done")) list.add(new Task(str));
+            if (!str.equals("list") && !str.contains("done")) {
+                if (str.contains("todo")) list.add(new ToDo(str.substring(5)));
+                else if (str.contains("deadline")) {
+                    String description = "";
+                    String by = "";
+                    boolean trigger = false;
+                    String[] arr = str.split(" ");
+                    for (String s: arr){
+                        if (s.equals("deadline")) continue;
+                        if (s.equals("/by")) {
+                            trigger = true;
+                            continue;
+                        }
+                        if (!trigger) description += s + " ";
+                        else by += s + " ";
+                    }
+                    description = description.substring(0, description.length()-1);
+                    by = by.substring(0, by.length()-1);
+                    list.add(new Deadline(description, by));
+                }
+                else if (str.contains("event")) {
+                    String description = "";
+                    String at = "";
+                    boolean trigger = false;
+                    String[] arr = str.split(" ");
+                    for (String s: arr){
+                        if (s.equals("deadline")) continue;
+                        if (s.equals("/at")) {
+                            trigger = true;
+                            continue;
+                        }
+                        if (!trigger) description += s + " ";
+                        else at += s + " ";
+                    }
+                    description = description.substring(0, description.length()-1);
+                    at = at.substring(0, at.length()-1);
+                    list.add(new Event(description, at));
+                }
+                System.out.println("    ____________________________________________________________");
+                System.out.println("     Got it. I've added this task: ");
+                System.out.println("       " + list.get(list.size()-1));
+                System.out.println("     Now you have " + list.size() + " tasks in the list.");
+                System.out.println("    ____________________________________________________________");
+            }
             if (str.equals("bye")) {
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     Bye. Hope to see you again soon!");
@@ -41,11 +84,6 @@ public class Duke {
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     Nice! I've marked this task as done: ");
                 System.out.println("       " + list.get(taskNumber-1));
-                System.out.println("    ____________________________________________________________");
-            }
-            else {
-                System.out.println("    ____________________________________________________________");
-                System.out.println("     added: " + str);
                 System.out.println("    ____________________________________________________________");
             }
         }
