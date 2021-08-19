@@ -1,6 +1,5 @@
 Hello from Neko!
 What can I do for you?
-(Nothing actually cos I will just repeat what you say!)
 
 Got it. I've added this task: 
 [T][ ] borrow book
