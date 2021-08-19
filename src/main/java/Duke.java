@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,7 +14,8 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        Task[] tasks = new Task[100];
+        //Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<Task>();
         int taskCounter = 0;
 
         String input = "";
@@ -26,46 +28,62 @@ public class Duke {
             }
             else if(input.equals("list")) {
                 for(int i = 0; i < taskCounter; i++){
-                    System.out.println((i+1) + "." + tasks[i].toString());
+                    System.out.println((i+1) + "." + tasks.get(i).toString());
                 }
             } else if (input.length() > 4 && input.substring(0,4).equals("done")){
                 String taskDone = input.substring(5);
                 int taskDoneIndex = Integer.parseInt(taskDone)-1;
-                tasks[taskDoneIndex].makeDone();
+                tasks.get(taskDoneIndex).makeDone();
                 System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(tasks[taskDoneIndex].toString());
+                System.out.println(tasks.get(taskDoneIndex).toString());
             }
             else {
-                if(input.length()!= 4 || input.length()!=5 || input.length()!=8){
+                if(input.length()<4 ){
                     throw new DukeException("Unacceptable input");
                 }
-                System.out.println("Got it. I've added this task: ");
-
                 if(input.substring(0,4).equals("todo")){
                     Task newTask = new Task(input.substring(5), "T");
-                    tasks[taskCounter] = newTask;
+                    tasks.add(newTask);
                     taskCounter++;
+                    System.out.println("Got it. I've added this task: ");
                     System.out.print("  " + newTask.toString());
 
                 } else if(input.substring(0,5).equals("event")){
                     String at = input.split("/")[1].substring(3);
                     Event newEvent = new Event(input.substring(6).split("/")[0], at);
-                    tasks[taskCounter] = newEvent;
+                    tasks.add(newEvent);
                     taskCounter++;
+                    System.out.println("Got it. I've added this task: ");
                     System.out.println("  " + newEvent.toString());
-                } else if(input.substring(0,8).equals("deadline")){
+                } else if(input.length()>5 && input.length()<8){
+                    throw new DukeException("Unacceptable input");
+                }
+                else if(input.substring(0,6).equals("delete")) {
+                    // delete from arraylist
+                    // reduce counter by 1
+                    int indexToDel = Integer.parseInt(input.substring(7));
+                    Task tasktoDel = tasks.get(indexToDel);
+                    tasks.remove(indexToDel);
+                    taskCounter--;
+                    System.out.println("   Noted. I've removed this task: ");
+                    System.out.println("  " + tasktoDel.toString());
+                }
+                else if(input.substring(0,8).equals("deadline")){
                     // deadline
                     String by = input.split("/")[1].substring(3);
                     Deadline newDeadline = new Deadline(input.substring(9).split("/")[0], by);
-                    tasks[taskCounter] = newDeadline;
+                    tasks.add(newDeadline);
                     taskCounter++;
+                    System.out.println("Got it. I've added this task: ");
                     System.out.println("  " + newDeadline.toString());
 
-                } else {
+                }
+
+                else {
                     throw new DukeException("Unacceptable input");
                 }
 
-                System.out.println("Now you have " +  (taskCounter) + " tasks in the list.");
+                System.out.println("\nNow you have " +  (taskCounter) + " tasks in the list.");
             }
         }} catch (DukeException e){
             System.out.println("OOPS!!! You have enteted an invalid category");
