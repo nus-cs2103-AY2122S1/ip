@@ -18,10 +18,12 @@ public class Duke {
 
             while (!command.equals("bye")) {
                 System.out.println("    ____________________________________________________________");
-                if (!command.equals("list")) {
-                    xs.add(command);
-                } else {
+                if (command.equals("list")) {
                     xs.listOut();
+                } else if (command.contains("done")) {
+                    xs.done(command);
+                } else {
+                    xs.add(command);
                 }
                 System.out.println("    ____________________________________________________________");
                 command = in.nextLine();
