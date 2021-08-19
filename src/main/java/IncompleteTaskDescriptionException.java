@@ -8,6 +8,6 @@ public class IncompleteTaskDescriptionException extends DukeException {
 
     @Override
     public String getMessage() {
-        return String.format("☹ OOPS!!! The description of a %s is either empty or incomplete.", this.taskName);
+        return String.format("☹ OOPS!!! The description of a %s is either empty or in wrong format.", this.taskName);
     }
 }

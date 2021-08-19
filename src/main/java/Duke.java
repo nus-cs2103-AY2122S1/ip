@@ -7,11 +7,21 @@ public class Duke {
     public void run() {
         this.greetUser();
         Scanner sc = new Scanner(System.in);
-        String userInput = sc.nextLine();
-        while (!userInput.equals("bye")) {
-           receiveCommand(userInput);
-           userInput = sc.nextLine();
+        boolean shouldContinue = true;
+        while (shouldContinue) {
+            String commandName = sc.next();
+            try {
+                Command command = Command.valueOf(commandName.toUpperCase());
+                shouldContinue = receiveCommand(command, sc);
+            } catch (IllegalArgumentException e) { // caused by user entering a command that is invalid
+                sc.nextLine(); // clear user's input
+                String errorMessage = new InvalidCommandException().getMessage();
+                printMessage(errorMessage);
+            } catch (DukeException e) {
+                printMessage(e.getMessage());
+            }
         }
+        sc.close();
         this.exit();
     }
 
@@ -27,23 +37,49 @@ public class Duke {
         printMessage(detailsMessage);
     }
 
-    public void receiveCommand(String command) {
-        try {
-            if (command.equals("list")) {
-                this.displayTasks();
-            } else if (command.matches("done \\d+")) {
-                String taskNum = command.replaceAll("\\D+", "");
-                int index = Integer.parseInt(taskNum) - 1;
-                this.markTask(index);
-            } else if (command.matches("delete \\d+")) {
-                String taskNum = command.replaceAll("\\D+", "");
-                int index = Integer.parseInt(taskNum) - 1;
-                this.deleteTask(index);
-            } else {
-                addTask(command);
-            }
-        } catch (DukeException e) {
-            printMessage(e.getMessage());
+    public boolean receiveCommand(Command command, Scanner sc) throws DukeException {
+        boolean shouldContinue = true;
+        String description = sc.nextLine().trim();
+        switch (command) {
+            case TODO:
+            case DEADLINE:
+            case EVENT:
+                addTask(description, command);
+                break;
+            case LIST:
+                if (description.equals("")) {
+                    this.displayTasks();
+                    break;
+                } else {
+                    throw new InvalidCommandException();
+                }
+            case DONE:
+                int indexToMark = stringToInt(description) - 1;
+                this.markTask(indexToMark);
+                break;
+            case DELETE:
+                int indexToDelete = stringToInt(description) - 1;
+                this.deleteTask(indexToDelete);
+                break;
+            case BYE:
+                if (description.equals("")) {
+                    shouldContinue = false;
+                    break;
+                } else {
+                    throw new InvalidCommandException();
+                }
+            default:
+                /* will never be executed because the error would have been caught in run() method
+                   if the user input a command that is invalid */
+        }
+        return shouldContinue;
+    }
+
+    public int stringToInt(String description) throws InvalidCommandException {
+        if (description.matches("\\d+")) {
+            return Integer.parseInt(description);
+        } else {
+            throw new InvalidCommandException();
         }
     }
 
@@ -74,37 +110,39 @@ public class Duke {
         }
     }
 
-    public void addTask(String command) throws DukeException {
-        Task task;
-        if (command.startsWith("todo")) {
-            if (command.matches("todo *[^ ].*")) {
-                String description = command.replaceFirst("todo", "").trim();
-                task = new Todo(description);
-            } else {
-                throw new IncompleteTaskDescriptionException("todo");
-            }
-        } else if (command.startsWith("deadline")) {
-            if (command.matches("deadline *[^ ].* /by *[^ ].*")) {
-                String taskInfo = command.replaceFirst("deadline", "").trim();
-                int separator = taskInfo.indexOf("/by");
-                String description = taskInfo.substring(0, separator).trim();
-                String by = taskInfo.substring(separator + 3).trim();
-                task = new Deadline(description, by);
-            } else {
-                throw new IncompleteTaskDescriptionException("deadline");
-            }
-        } else if (command.startsWith("event")) {
-            if (command.matches("event *[^ ].* /by *[^ ].*")) {
-                throw new IncompleteTaskDescriptionException("event");
-            } else {
-                String taskInfo = command.replaceFirst("event", "").trim();
-                int separator = taskInfo.indexOf("/at");
-                String description = taskInfo.substring(0, separator).trim();
-                String at = taskInfo.substring(separator + 3).trim();
-                task = new Event(description, at);
-            }
-        } else {
-            throw new InvalidCommandException();
+    public void addTask(String description, Command command) throws DukeException {
+        Task task = null;
+        switch (command) {
+            case TODO:
+                if (!description.equals("")) {
+                    task = new Todo(description);
+                    break;
+                } else {
+                    throw new IncompleteTaskDescriptionException("todo");
+                }
+            case DEADLINE:
+                if (description.matches("[^ ].* /by *[^ ].*")) {
+                    int separator = description.indexOf("/by");
+                    String taskDetail = description.substring(0, separator).trim();
+                    String by = description.substring(separator + 3).trim();
+                    task = new Deadline(taskDetail, by);
+                    break;
+                } else {
+                    throw new IncompleteTaskDescriptionException("deadline");
+                }
+            case EVENT:
+                if(description.matches("[^ ].* /at *[^ ].*")) {
+                    int separator = description.indexOf("/at");
+                    String taskDetail = description.substring(0, separator).trim();
+                    String at = description.substring(separator + 3).trim();
+                    task = new Event(taskDetail, at);
+                    break;
+                } else {
+                    throw new IncompleteTaskDescriptionException("deadline");
+                }
+            default:
+                // checked for command validity in receiveCommand(), so this should not execute at all
+                throw new InvalidCommandException();
         }
         tasks.add(task);
         printMessage(String.format("Got it. I've added this task:"
