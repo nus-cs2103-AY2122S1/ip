@@ -13,7 +13,8 @@ public class Duke {
             System.out.println("____________________________________________________________");
             System.out.println("Hello! I'm Duke");
             System.out.println("What can I do for you?");
-            System.out.println("____________________________________________________________");            String command = in.nextLine();
+            System.out.println("____________________________________________________________");
+            String command = in.nextLine();
 
             while (!command.equals("bye")) {
                 System.out.println("    ____________________________________________________________");
