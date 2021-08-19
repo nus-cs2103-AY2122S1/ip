@@ -25,7 +25,7 @@ public class Duke {
         String input = "";
 
         // Define the Command handler to handle user inputs
-        CommandHandler handler = new CommandHandler(reader, list);
+        CommandHandler handler = new CommandHandler(list);
 
         // Continuously listen for user inputs
         while (!input.equals("bye")) {
