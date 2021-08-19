@@ -77,6 +77,7 @@ public class Duke {
                     hasQuit = true;
                     System.out.println("Bye. Hope to see you again soon!");
                 } else if (userInput.equals("list")) { // if user enters "list"
+                    System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < numOfTasks; i++) {
                         Task curr = tasks[i];
                         int taskNum = i + 1;
