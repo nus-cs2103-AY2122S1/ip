@@ -1,4 +1,5 @@
 public class TaskTodo extends Task {
+
     public TaskTodo(String description) {
         this(description, false);
     }
@@ -23,5 +24,4 @@ public class TaskTodo extends Task {
     String saveString() {
         return "T" + '\t' + (this.done ? "1" : "0") + '\t' + this.description;
     }
-
 }

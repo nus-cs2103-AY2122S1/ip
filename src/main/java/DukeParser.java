@@ -14,8 +14,8 @@ public class DukeParser {
     Pattern donePattern = Pattern.compile("done (\\d+)", Pattern.CASE_INSENSITIVE);
     Pattern deletePattern = Pattern.compile("delete (\\d+)", Pattern.CASE_INSENSITIVE);
     Pattern todoPattern = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
-    Pattern deadlinePattern = Pattern.compile("deadline (.+) /by (.+)", Pattern.CASE_INSENSITIVE);
-    Pattern eventPattern = Pattern.compile("event (.+) /at (.+)", Pattern.CASE_INSENSITIVE);
+    Pattern deadlinePattern = Pattern.compile("deadline (.+) /by (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?", Pattern.CASE_INSENSITIVE);
+    Pattern eventPattern = Pattern.compile("event (.+) /at (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?", Pattern.CASE_INSENSITIVE);
 
     /**Constructor
      *
@@ -26,6 +26,7 @@ public class DukeParser {
     }
 
     /** Checks an input passed in and matches the input with any valid command
+     * then redirects the info to the correct function
      *
      * @param input String input from the Listener given by the User
      */
@@ -50,17 +51,14 @@ public class DukeParser {
 
         } else if (checkTodo.matches()) {
             // Add a to-do task to list
-            System.out.println(Ui.OUTPUT_DISPLAY + "Got it. I've added a To-do.");
             taskList.add(checkTodo, TaskType.TODO);
 
         } else if (checkDeadline.matches()) {
             // Add a deadline to list
-            System.out.println(Ui.OUTPUT_DISPLAY + "Got it. I've added a Deadline.");
             taskList.add(checkDeadline, TaskType.DEADLINE);
 
         } else if (checkEvent.matches()) {
             // Add an event to list
-            System.out.println(Ui.OUTPUT_DISPLAY + "Got it. I've added an Event. Don't miss it!");
             taskList.add(checkEvent, TaskType.EVENT);
 
         } else {

@@ -1,13 +1,20 @@
-public class TaskEvent extends Task {
-    private String at;
+import java.time.LocalDate;
+import java.util.Optional;
 
-    public TaskEvent(String description, String at) {
-        this(description, at, false);
+public class TaskEvent extends Task {
+    private LocalDate at;
+    private String time;
+
+    public TaskEvent(String description, LocalDate date, String time) {
+        this(description, date, time,false);
     }
 
-    public TaskEvent(String description, String at, boolean done) {
+    public TaskEvent(String description, LocalDate date, String time, boolean done) {
         super(description, done);
-        this.at = at;
+        this.at = date;
+        this.time = Optional.ofNullable(time)
+                .map(String::strip)
+                .orElse("");
     }
 
     /**
@@ -20,12 +27,16 @@ public class TaskEvent extends Task {
         String checkBox = done
                 ? "[X] "
                 : "[ ] ";
-        return "[E]" + checkBox + description + " (at: " + at + ")";
+        return "[E]" + checkBox + description + " (at: " + at + (!time.equals("") ? " " + time : "") + ")";
     }
 
     @Override
     String saveString() {
-        return "E" + '\t' + (this.done ? "1" : "0") + '\t' + this.description + '\t' + this.at;
+        return "E" + '\t'
+                + (this.done ? "1" : "0") + '\t'
+                + this.description + '\t'
+                + this.at + '\t'
+                + this.time;
     }
 
 

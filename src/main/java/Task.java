@@ -1,4 +1,5 @@
 import java.text.ParseException;
+import java.time.LocalDate;
 
 public abstract class Task {
     protected String description;
@@ -35,12 +36,15 @@ public abstract class Task {
         try {
             switch(taskType) {
                 case "T":
-                    //To-do
                     return new TaskTodo(args[2], args[1].equals("1"));
                 case "D":
-                    return new TaskDeadline(args[2], args[3], !args[1].equals("0"));
+                    return args.length==4
+                            ? new TaskDeadline(args[2], LocalDate.parse(args[3]), null, !args[1].equals("0"))
+                            : new TaskDeadline(args[2], LocalDate.parse(args[3]), args[4], !args[1].equals("0"));
                 case "E":
-                    return new TaskEvent(args[2], args[3], !args[1].equals("0"));
+                    return args.length==4
+                            ? new TaskEvent(args[2], LocalDate.parse(args[3]), null, !args[1].equals("0"))
+                            : new TaskEvent(args[2], LocalDate.parse(args[3]), args[4], !args[1].equals("0"));
                 default:
                     throw new ParseException("Failed to read task; file not read", 0);
             }

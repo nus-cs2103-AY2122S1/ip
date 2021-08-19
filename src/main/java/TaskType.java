@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 
 public enum TaskType {
@@ -13,15 +16,27 @@ public enum TaskType {
      * @return A Task that matches that of its TaskType
      */
     public static Task getTask(Matcher input, TaskType type) {
-        switch(type) {
-            case TODO:
-                return new TaskTodo(input.group(1));
-            case DEADLINE:
-                return new TaskDeadline(input.group(1), input.group(2));
-            case EVENT:
-                return new TaskEvent(input.group(1), input.group(2));
-            default: return null;
+        try {
+            switch(type) {
+                case TODO:
+                    return new TaskTodo(input.group(1));
+                case DEADLINE:
+                    // Description, date, time
+                    return new TaskDeadline(input.group(1), getDate(input.group(2)), input.group(3));
+                case EVENT:
+                    // Description, date, time
+                    return new TaskEvent(input.group(1), getDate(input.group(2)), input.group(3));
+                default: return null;
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("Please enter a valid date! :(");
+            return null;
         }
+    }
+
+    private static LocalDate getDate(String date) throws DateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        return LocalDate.parse(date, formatter);
     }
 
 

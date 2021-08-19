@@ -32,11 +32,12 @@ public class TaskList {
         Optional.ofNullable(
                 TaskType.getTask(input, type))
                     .map(task -> {
+                        System.out.println("Got it. I've added this task:");
                         System.out.println(Ui.OUTPUT_SPACES + task);
                         tasks.add(task);
+                        this.printSize();
                         return null;
                     });
-        this.printSize();
         Storage.saveList(tasks);
     }
 
