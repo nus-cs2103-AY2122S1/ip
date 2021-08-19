@@ -4,16 +4,25 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        displayWithStyle(beginScript());
+        ToDoList toDoList = ToDoList.of();
+
+        displayWithStyle(beginScript()); //display welcome msg
+
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
+            String msgOutput;
             switch (userInput) {
-                case "bye":
-                    displayWithStyle(endScript());
+                case "list":
+                    msgOutput = toDoList.toString();
                     break;
-                default:
-                    displayWithStyle(userInput);
+                case "bye":
+                    msgOutput = endScript();
+                    break;
+                default: //add task to to do list
+                    msgOutput = String.format("added: %s", userInput);
+                    toDoList = toDoList.addTask(Task.of(userInput));
             }
+            displayWithStyle(msgOutput); //output msg to user
         }
 
     }
@@ -26,9 +35,6 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         return ("Hello from\n" + logo);
     }
-//    public static void echo(String text) {
-//        System.out.println(text);
-//    }
 
     public static String endScript() {
         String exitStatment = "Bye, hope to see you again! :)";
@@ -42,9 +48,16 @@ public class Duke {
         String textWithBorders = topBorder +  text + "\n" + bottomBorder;
         String[] lines = textWithBorders.split("\n");
 //        System.out.println(Arrays.toString(lines));
-        for (String line : lines){
+        for (String line : lines) {
             System.out.println(indent + line);
         }
     }
+
+//    public static String toDoListAppend(ToDoList toDoList, String taskSummary) {
+//        String msg = String.format("added: %s", taskSummary);
+//        Task newTask = Task.of(taskSummary);
+//        toDoList.addTask(newTask);
+//        return msg;
+//    }
 }
 
