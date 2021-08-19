@@ -57,7 +57,7 @@ public class Duke {
                 continue;
             } else if (input.contains("deadline")) {
 //                if (input.length() < 10) {
-//                    System.out.println(dukeExp.deadline());
+//                    System.out.println(dukeExp.deadline() todos
 //                } else {
                     String[] split = input.split("/");
                     Deadline deadline = new Deadline(split[0].substring(9), split[1].substring(3));
