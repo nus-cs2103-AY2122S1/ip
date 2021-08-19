@@ -1,3 +1,11 @@
+import java.util.*;
+class User {
+    public String command() {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        return str;
+    }
+}
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -6,5 +14,17 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        System.out.println("Hope you are doing well. How can I help you?");
+        User user1 = new User();
+        while(true) {
+            String command = user1.command();
+            if (command.equals("bye")) {
+                System.out.println("   Bye. Have a great day!");
+                break;
+            } else {
+                System.out.println("   " + command);
+            }
+        }
     }
 }
+
