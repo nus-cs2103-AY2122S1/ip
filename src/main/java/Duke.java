@@ -115,6 +115,17 @@ public class Duke {
                 System.out.println("    You have " + xs.size() + " " + (xs.size() == 1? "task" : "tasks" ) + " in your current list");
                 System.out.println(lineProducer());
                 continue;
+            } else if (str.contains("delete")) {
+                int deleteNumber = Integer.parseInt(str.substring(7));
+                if ((deleteNumber > xs.size() || deleteNumber < 0)) {
+                    System.out.println(lineProducer() + indentationAdder() + "Uh oh! Item " + deleteNumber + " does not seem to exist!\n" + lineProducer());
+                    continue;
+                }
+                Task toDelete = xs.get(deleteNumber - 1);
+                xs.remove(deleteNumber - 1);
+                System.out.println(lineProducer() + indentationAdder() + "Note: I've removed the following task from your list:" +
+                        indentationAdder() + toDelete + "\n" + lineProducer());
+                continue;
             }
             System.out.println(lineProducer() + indentationAdder() + "I'm sorry :( I don't quite seem to understand, try again pls!");
             System.out.println(lineProducer());
