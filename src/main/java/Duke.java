@@ -8,6 +8,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/**
+ * This represents the Duke chatbot and its business logic.
+ */
 public class Duke {
     private static final String TODO_NO_DESC = "OOPS!!! The description of a todo cannot be empty.";
     private static final String DEADLINE_NO_INFO = "OOPS!!! A deadline must have a description and datetime.";
@@ -57,11 +61,18 @@ public class Duke {
      * @throws BotException
      */
     public void errorHandler(String input) throws BotException {
-        if (input.equals("todo")) {
-            throw new BotException(TODO_NO_DESC);
-        } else if (input.equals("deadline") || input.equals("deadline") && !input.contains("/by")) {
-            throw new BotException(DEADLINE_NO_INFO);
-        } 
+        // if (input.equals("todo")) {
+        //     throw new BotException(TODO_NO_DESC);
+        // } else if (input.equals("deadline") || input.equals("deadline") && !input.contains("/by")) {
+        //     throw new BotException(DEADLINE_NO_INFO);
+        // }
+
+        switch (input) {
+            case "todo":
+                throw new BotException(TODO_NO_DESC);
+            case "deadline":
+                throw new BotException(DEADLINE_NO_INFO);
+        }
     }
 
     /**
@@ -73,7 +84,17 @@ public class Duke {
     public void mainLogic(String input) throws BotException {
         errorHandler(input);
 
-        if (input.contains("todo")) {
+        if (input.equals("list")) {
+            for (int i = 0; i < dataStore.size(); i++) {
+                Task task = dataStore.get(i);
+
+                if (task.getStatus()) {
+                    System.out.println(i+1 + ". " + task.toString());
+                } else {
+                    System.out.println(i+1 + ". " + task.toString());
+                }
+            }
+        } else if (input.contains("todo")) {
             ToDo todo = new ToDo(input);
             dataStore.add(todo);
 
