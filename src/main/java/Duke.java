@@ -38,21 +38,29 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         String str;
-        int num = 0;
-        String[] items = new String[100];
+
+        Task listOfTasks = new Task();
 
         str = in.nextLine();
 
         while (!str.equals("bye")) {
-            if (!str.equals("list")) {
-                items[num] = str;
-                num++;
+            if (str.equals("list")) {
                 printHorizontalLine();
-                System.out.println("            " + "added: " + str);
+                System.out.println("            Here are the tasks in your list:");
+                listOfTasks.printTasks();
                 printHorizontalLine();
-
+            } else if(str.matches("^done \\d+")){
+                int position = Integer.parseInt(str.split(" ")[1]);
+                listOfTasks.markStatusAsDone(position);
+                printHorizontalLine();
+                System.out.println("            Nice! I've marked this task as done: ");
+                System.out.println("             [✗] " + listOfTasks.getTasks(position));
+                printHorizontalLine();
             } else {
-                printListOfItems(num, items);
+                listOfTasks.addNewTask(str);
+                printHorizontalLine();
+                System.out.println("            added: " + str);
+                printHorizontalLine();
             }
 
             str = in.nextLine();
