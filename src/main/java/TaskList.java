@@ -28,7 +28,7 @@ public class TaskList {
         }
     }
 
-    public void remove(int pos) throws DukeException {
+    public void delete(int pos) throws DukeException {
         if (pos - 1 < 0 || pos > list.size()) {
             throw new DukeException("☹ OOPS!!! No such task found!");
         }

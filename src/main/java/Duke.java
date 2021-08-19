@@ -65,10 +65,7 @@ public class Duke {
                     try {
                         String dlLabel = scanner.nextLine();
                         System.out.println("──────────────────────────────────────────");
-                        int dlSep = Checker.check(dlLabel, "by ");
-                        String dl1 = dlLabel.substring(0, dlSep - 1);
-                        String dl2 = dlLabel.substring(dlSep + 3);
-                        Deadline deadline = new Deadline(dl1, dl2);
+                        Task deadline = Checker.check(dlLabel, "/by ");
                         list.add(deadline);
                         System.out.println("──────────────────────────────────────────");
                         input = scanner.next();
@@ -84,10 +81,7 @@ public class Duke {
                     try {
                         String eLabel = scanner.nextLine();
                         System.out.println("──────────────────────────────────────────");
-                        int eSep = Checker.check(eLabel, "at ");
-                        String e1 = eLabel.substring(0, eSep - 1);
-                        String e2 = eLabel.substring(eSep + 3);
-                        Event event = new Event(e1, e2);
+                        Task event = Checker.check(eLabel, "/at ");
                         list.add(event);
                         System.out.println("──────────────────────────────────────────");
                         input = scanner.next();
@@ -103,7 +97,7 @@ public class Duke {
                     try {
                         System.out.println("──────────────────────────────────────────");
                         int temp = scanner.nextInt();
-                        list.remove(temp);
+                        list.delete(temp);
                         System.out.println("──────────────────────────────────────────");
                         input = scanner.next();
                         break;
