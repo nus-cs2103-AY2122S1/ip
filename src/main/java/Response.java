@@ -73,6 +73,10 @@ public class Response {
                 "\n" + horizontalLine);
     }
 
+    /**
+     * This method handles the delete response.
+     * @param pos the position of the task in the list to delete
+     */
     public void delete(int pos) {
         Task task = lst.remove(pos);
         String num = String.valueOf(lst.size());
