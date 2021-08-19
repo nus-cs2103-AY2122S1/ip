@@ -1,10 +1,14 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-
+/**
+ * Represents a chatbot to manage a list of tasks.
+ *
+ * @author Adam Ho
+ */
 public class Duke {
     protected TaskManager taskManager = new TaskManager();
 
+    /**
+     * Runs the TaskManager object.
+     */
     public void run() {
         taskManager.run();
     }

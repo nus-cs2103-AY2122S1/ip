@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * Manages the adding, deleting, and marking completion of tasks.
+ *
+ * @author Adam Ho
+ */
 public class Message {
     public static void greet() {
         System.out.println("    ____________________________________________________________");

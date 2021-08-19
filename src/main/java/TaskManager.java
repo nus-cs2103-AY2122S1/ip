@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Manages the adding, deleting, and marking completion of tasks.
+ *
+ * @author Adam Ho
+ */
 public class TaskManager {
 
     private enum Command {
@@ -15,13 +20,19 @@ public class TaskManager {
 
         public final String type;
 
-        private Command(String type) {
+        Command(String type) {
             this.type = type;
         }
     }
 
     protected static ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * Gets the description of the task.
+     * @param input The user input.
+     * @return A string representing the description of the task.
+     * @throws DukeException.MissingDescriptionException The exception is thrown when the user does not input the task description.
+     */
     public String taskDescription(String input) throws DukeException.MissingDescriptionException {
         String[] description = input.split(" ", 2);
         if (description.length == 1) {
@@ -30,6 +41,11 @@ public class TaskManager {
         return description[1];
     }
 
+    /**
+     * Adds a task to the list of tasks.
+     * @param task The task to add.
+     * @param cmd The command input by the user.
+     */
     public void addTask(String task, String cmd) {
         Task t;
         if (cmd.equals("todo")) {
@@ -49,6 +65,11 @@ public class TaskManager {
         Message.add(t);
     }
 
+    /**
+     * Deletes a task from the list of tasks.
+     * @param taskId The task identifier.
+     * @throws DukeException.MissingTaskException The exception is thrown when the user tries to delete a non-existing task.
+     */
     public void deleteTask(int taskId) throws DukeException.MissingTaskException {
         try {
             Task t = tasks.get(taskId-1);
@@ -60,6 +81,11 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Sets the task to be completed.
+     * @param taskId The task identifier.
+     * @throws DukeException.MissingTaskException The exception is thrown when the user tries to delete a non-existing task.
+     */
     public void markDone(int taskId) throws DukeException.MissingTaskException {
         try {
             Task t = tasks.get(taskId-1);
@@ -70,6 +96,11 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Gets the command from the user input.
+     * @param input The user's input.
+     * @return A command enum representing the first word of the user's input.
+     */
     public Command getCommand(String input) {
         String[] words = input.split(" ", 2);
         String command = words[0];
@@ -81,6 +112,9 @@ public class TaskManager {
         return Command.INVALID;
     }
 
+    /**
+     * Gets input from user and respond to the commands accordingly.
+     */
     public void run() {
         Message.greet();
         Scanner sc = new Scanner(System.in);
