@@ -6,17 +6,13 @@ public class Duke {
     private static int listNumber = 0;
 
     private static void update(Task t) {
-        System.out.println("Got it. I've added this task: \n  "
+        System.out.println("Got it. I've added this task:\n  "
                 + t.toString()
                 + "\nNow you have " + listNumber + " tasks in the list.");
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "DUKE\n";
         System.out.println("Hello from\n" + logo + "What can I do for you?");
         Scanner s = new Scanner(System.in);
         String command = s.nextLine();

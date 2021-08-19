@@ -1,0 +1,9 @@
+johnathan joestar
+todo joseph
+deadline jotaro /by 3
+event josuke /at diamond
+list
+done 2
+done 3
+list
+bye
