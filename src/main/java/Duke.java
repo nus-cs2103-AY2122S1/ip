@@ -12,10 +12,9 @@ public class Duke {
         String commandLine = "";
 
         do {
-            System.out.print("Enter command: \t");
+            System.out.println("Enter command: \t");
             commandLine = sc.nextLine().trim();
             String[] command = commandLine.split(" ", 2);
-            System.out.println();
 
             switch (command[0]) {
                 case "bye":
@@ -31,6 +30,13 @@ public class Duke {
                 case "done":
                     try {
                         markDone(command, tasksList);
+                    } catch (DukeException e) {
+                        echo(e.getMessage());
+                    }
+                    break;
+                case "delete":
+                    try {
+                        deleteTask(command, tasksList);
                     } catch (DukeException e) {
                         echo(e.getMessage());
                     }
@@ -58,7 +64,7 @@ public class Duke {
                     break;
                 default:
                     try {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means!");
+                        throw new DukeException("\t" + "☹ OOPS!!! I'm sorry, but I don't know what that means!");
                     } catch (DukeException e) {
                         echo(e.getMessage());
                     }
@@ -69,12 +75,11 @@ public class Duke {
 
     static void displayTasksList(List<Task> tasksList) throws DukeException {
         if (tasksList.size() != 0) {
-            String response = "\t" + "Here are the tasks in your list:" +
-                    System.lineSeparator();
+            String response = "\t" + "Here are the tasks in your list:" + "\n";
 
             for (int i = 0; i < tasksList.size(); i++) {
                 if (i != 0) {
-                    response += System.lineSeparator();
+                    response += "\n";
                 }
 
                 response += "\t\t" + (i + 1) + "." + "\t" + tasksList.get(i).toString();
@@ -82,7 +87,7 @@ public class Duke {
 
             echo(response);
         } else {
-            throw new DukeException("There are no tasks in your list!");
+            throw new DukeException("\t" + "There are no tasks in your list!");
         }
     }
 
@@ -94,14 +99,36 @@ public class Duke {
                 tasksList.get(taskNum - 1).setDone();
                 Task taskDone = tasksList.get(taskNum - 1);
 
-                String response = taskDoneMessage() + System.lineSeparator() +
+                String response = doneTaskMessage() + "\n" +
                         "\t\t" + taskDone;
                 echo(response);
             } else {
-                throw new DukeException("☹ Please select a valid task number to be marked as done.");
+                throw new DukeException("\t" + "☹ Please select a valid task number to be marked as done.");
             }
+
         } else {
-            throw new DukeException("☹ Please select the task number to be marked as done.");
+            throw new DukeException("\t" + "☹ Please select the task number to be marked as done.");
+        }
+    }
+
+    static void deleteTask(String[] command, List<Task> tasksList) throws DukeException {
+        if (command.length == 2) {
+            int taskNum = Integer.parseInt(command[1]);
+
+            if (taskNum <= tasksList.size()) {
+                Task taskToDelete = tasksList.get(taskNum - 1);
+                tasksList.remove(taskToDelete);
+
+                String response = deleteTaskMessage() + "\n" +
+                        "\t\t" + taskToDelete + "\n" +
+                        numOfTasksInList(tasksList);
+                echo(response);
+            } else {
+                throw new DukeException("\t" + "☹ Please select a valid task number to be deleted.");
+            }
+
+        } else {
+            throw new DukeException("\t" + "☹ Please select the task number to be deleted.");
         }
     }
 
@@ -110,12 +137,12 @@ public class Duke {
             Task newToDoTask = new ToDo(TaskType.TODO, command[1]);
             tasksList.add(newToDoTask);
 
-            String response = taskAddedMessage() + System.lineSeparator() +
-                    "\t\t" + newToDoTask + System.lineSeparator() +
+            String response = addTaskMessage() + "\n" +
+                    "\t\t" + newToDoTask + "\n" +
                     numOfTasksInList(tasksList);
             echo(response);
         } else {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("\t" + "☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
@@ -128,16 +155,13 @@ public class Duke {
                         deadlineTaskDetails[0], deadlineTaskDetails[1]);
                 tasksList.add(newDeadlineTask);
 
-                String response = taskAddedMessage() + System.lineSeparator() +
-                        "\t\t" + newDeadlineTask + System.lineSeparator() +
+                String response = addTaskMessage() + "\n" +
+                        "\t\t" + newDeadlineTask + "\n" +
                         numOfTasksInList(tasksList);
                 echo(response);
-            } else {
-                throw new DukeException("☹ OOPS!!! The description and/or " +
-                        "specific date/time of a deadline is not valid.");
             }
         } else {
-            throw new DukeException("☹ OOPS!!! The description and " +
+            throw new DukeException("\t" + "☹ OOPS!!! The description and/or " +
                     "specific date/time of a deadline cannot be empty.");
         }
     }
@@ -151,31 +175,57 @@ public class Duke {
                         eventTaskDetails[0], eventTaskDetails[1]);
                 tasksList.add(newEventTask);
 
-                String response = taskAddedMessage() + System.lineSeparator() +
-                        "\t\t" + newEventTask + System.lineSeparator() +
+                String response = addTaskMessage() + "\n" +
+                        "\t\t" + newEventTask + "\n" +
                         numOfTasksInList(tasksList);
                 echo(response);
-            } else {
-                throw new DukeException("☹ OOPS!!! The description and/or " +
-                        "specific date/time of a deadline is not valid.");
             }
         } else {
-            throw new DukeException("☹ OOPS!!! The description and " +
+            throw new DukeException("☹ OOPS!!! The description and/or " +
                     "specific date/time of an event cannot be empty.");
         }
     }
 
     private static String greetMessage() {
-        return "\t" + "Hello! I'm Duke" + System.lineSeparator() +
-                "\t" + "What can I do for you?";
+        return "\t" + "Hello! I'm Duke, your Personal Assistant Chatbot." + "\n" +
+                "\t" + "What can I do for you?\n\n" +
+                instructions();
+    }
+
+    private static String instructions() {
+        return "\t" + "Menu Options:" + "\n" +
+                "\t\t" + "1." + "\t" + "list" + "\n" +
+                "\t\t\t" + "[List the tasks in your list]" + "\n" +
+                "\t\t" + "2." + "\t" + "todo ABC" + "\n" +
+                "\t\t\t" + "[Add a todo task, ABC, into your list]" + "\n" +
+                "\t\t" + "3." + "\t" + "deadline ABC /by XYZ" + "\n" +
+                "\t\t\t" + "[Add a deadline task, ABC, into your list." +
+                " Specify the date/time, XYZ, it needs to be completed by.]" + "\n" +
+                "\t\t" + "4." + "\t" + "event ABC /at XYZ" + "\n" +
+                "\t\t\t" + "[Add an event task, ABC, into your list."  +
+                " Specify the start and end date/time, XYZ.]" + "\n" +
+                "\t\t" + "5." + "\t" + "done N" + "\n" +
+                "\t\t\t" + "[Mark a task number, N, as done]" + "\n" +
+                "\t\t" + "6." + "\t" + "delete N" + "\n" +
+                "\t\t\t" + "[Delete a task number, N, from your list]" + "\n" +
+                "\t\t" + "7." + "\t" + "bye" + "\n" +
+                "\t\t\t" + "[Exit the chatbot]";
     }
 
     private static String exitMessage() {
         return "\t" + "Bye. Hope to see you again soon!";
     }
 
-    private static String taskAddedMessage() {
+    public static String addTaskMessage() {
         return "\t" + "Got it. I've added this task:";
+    }
+
+    private static String doneTaskMessage() {
+        return "\t" + "Nice! I've marked this task as done:";
+    }
+
+    private static String deleteTaskMessage() {
+        return "\t" + "Noted. I've removed this task:";
     }
 
     private static String numOfTasksInList(List<Task> tasksList) {
@@ -184,14 +234,9 @@ public class Duke {
                 " in the list.";
     }
 
-    private static String taskDoneMessage() {
-        return "\t" + "Nice! I've marked this task as done:";
-    }
-
     private static void echo(String message) {
-        String horizontalLine = "\t" +
-                "____________________________________________________________";
-        String nextLine = System.lineSeparator();
+        String horizontalLine = "\t" + "------------------------------------------------------------";
+        String nextLine = "\n";
         String echoMessage = horizontalLine + nextLine +
                 message + nextLine + horizontalLine;
         System.out.println(echoMessage);

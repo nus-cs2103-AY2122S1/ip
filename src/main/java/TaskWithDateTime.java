@@ -1,8 +1,8 @@
 public abstract class TaskWithDateTime extends Task {
     protected String dateTime;
 
-    public TaskWithDateTime(TaskType type, String description, String dateTime) {
-        super(type, description);
+    public TaskWithDateTime(TaskType taskType, String taskDescription, String dateTime) {
+        super(taskType, taskDescription);
         this.dateTime = dateTime;
     }
 

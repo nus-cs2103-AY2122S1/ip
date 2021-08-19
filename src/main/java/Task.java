@@ -1,20 +1,16 @@
 public abstract class Task {
-    protected TaskType type;
-    protected String description;
+    protected TaskType taskType;
+    protected String taskDescription;
     protected boolean isDone;
 
-    public Task(TaskType type, String description) {
-        this.type = type;
-        this.description = description;
+    public Task(TaskType taskType, String taskDescription) {
+        this.taskType = taskType;
+        this.taskDescription = taskDescription;
         this.isDone = false;
     }
 
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]"); // mark done task with X
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public void setDone() {
@@ -23,6 +19,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return getStatusIcon() + " " + description;
+        return getStatusIcon() + " " + taskDescription;
     }
 }
