@@ -44,6 +44,11 @@ public class Duke {
                     throw new NoNumberException("☹ OOPS!!! No task number was given in the input");
                 }
                 doneTask(Integer.parseInt(split[1]));
+            } else if (split[0].equals("delete")) {
+                if (split[1].isEmpty()) {
+                    throw new NoNumberException("☹ OOPS!!! No task number was given in the input");
+                }
+                deleteTask(Integer.parseInt(split[1]));
             } else if (split[0].equals("todo")) {
                 createTodo(split[1]);
             } else if (split[0].equals("event")) {
@@ -130,6 +135,23 @@ public class Duke {
         System.out.println("Nice! I have marked this task as done:");
         System.out.println(list.get(n - 1).toString());
     }
+
+    /**
+     * Method to mark the task as done
+     *
+     * @param n the task number entered by the user
+     */
+    static void deleteTask(int n) throws DukeException {
+        if (n > list.size()) {
+            throw new TaskNotFoundException("list has only " + list.size() + "tasks. Enter a valid task");
+        }
+        String deletedTask = list.get(n - 1).toString();
+        list.remove(n - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(deletedTask);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    }
+
 
     /**
      * method to print task list on command
