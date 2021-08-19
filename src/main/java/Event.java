@@ -9,7 +9,7 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public Event(boolean done, String description, String at) {
+    public Event(boolean done, String description, LocalDate at) {
         super(done, description);
         this.at = at;
     }
