@@ -49,6 +49,9 @@ public class Duke {
                 System.out.println(task);
                 // System.out.println("[" + task.getStatusIcon() + "] " + task);
             } else if (inp.startsWith("todo ")) { //todo command
+                if (inp.length() == 5) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
                 Task task = new Todo(inp.substring(5));
                 userList.add(task);
                 System.out.println("added: " + task);
@@ -63,9 +66,8 @@ public class Duke {
                 userList.add(task);
                 System.out.println("added: " + task);
             } else {
-                // To be phase out
-                // userList.add(new Task(inp));
-                // System.out.println("added: " + inp);
+                // Invalid input
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
