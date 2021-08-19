@@ -1,5 +1,3 @@
-import org.jetbrains.annotations.Nullable;
-
 import java.util.*;
 import java.util.List;
 
@@ -14,7 +12,6 @@ public class Chatbot {
             this.command = command;
         }
 
-        @Nullable
         public static ChatCommands toEnum (String str) {
             for(ChatCommands chatCommand: ChatCommands.values()) {
                 if (chatCommand.name().equalsIgnoreCase(str)) {
@@ -37,7 +34,6 @@ public class Chatbot {
             this.command = command;
         }
 
-        @Nullable
         public static TaskCommands toEnum (String str) {
             String[] splitCommand = str.split(" ", 2);
             for(TaskCommands chatCommand: TaskCommands.values()) {
@@ -100,15 +96,6 @@ public class Chatbot {
         throw new IllegalArgumentException("Looks like I don't support those commands yet...");
     }
 
-    private ChatContinue customItems(Task input) {
-        if (this.memory.contains(input)) {
-            System.out.println("Here is your task: " + input);
-        } else {
-            System.out.println("Sorry, could you rephrase that?");
-        }
-        return ChatContinue.CONTINUE;
-    }
-
     private ChatContinue addTask(TaskCommands command, String input) {
         switch (command) {
             case DONE:
@@ -126,7 +113,6 @@ public class Chatbot {
     }
 
     private ChatContinue addTodo(String input) {
-        System.out.println(input);
         ToDo todo = new ToDo(input);
         memory.add(todo);
         this.displayAddTaskSuccessful(todo);
