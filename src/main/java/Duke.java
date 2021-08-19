@@ -17,14 +17,26 @@ public class Duke {
                 + "\n\tBye! Thank you for chatting with me!\n"
                 + horizontalLine;
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
+        String[] tasks = new String[100];
 
         System.out.println(greetingMessage);
 
         String input = scanner.next();
+        int numOfTasks = 1;
 
         while (!input.equals("bye")) {
-            System.out.println(horizontalLine + "\n\t" + input + "\n" + horizontalLine);
+            if (input.equals("list")) {
+                System.out.println(horizontalLine);
+                for (int i = 1; i < numOfTasks; i++) {
+                    System.out.println("\t" + i + ". " + tasks[i - 1]);
+                }
+                System.out.println(horizontalLine);
+            } else {
+                System.out.println(horizontalLine + "\n\tadded: " + input + "\n" + horizontalLine);
+                tasks[numOfTasks - 1] = input;
+                numOfTasks++;
+            }
             input = scanner.next();
         }
 
