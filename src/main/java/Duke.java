@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -9,19 +10,28 @@ public class Duke {
         displayWithStyle(beginScript()); //display welcome msg
 
         while (sc.hasNext()) {
+            int numOfTasks = toDoList.length();
             String userInput = sc.nextLine();
-            String msgOutput;
-            switch (userInput) {
-                case "list":
-                    msgOutput = toDoList.toString();
-                    break;
-                case "bye":
-                    msgOutput = endScript();
-                    break;
-                default: //add task to to do list
-                    msgOutput = String.format("added: %s", userInput);
-                    toDoList = toDoList.addTask(Task.of(userInput));
+            String msgOutput = "";
+            if (userInput.equals("list")) {
+                msgOutput = toDoList.toString();
+            } else if (userInput.equals("bye")) {
+                msgOutput = endScript();
+            } else if (userInput.matches("done\s[0-9]{1,2}")) {
+                //eg. done 4
+                int idxFrom0 = Integer.parseInt(userInput.split(" ")[1]) - 1;
+                if (!(idxFrom0 < 0 || idxFrom0 >= numOfTasks)) { //valid argument indexes
+                    toDoList.toggleDone(idxFrom0);
+                    msgOutput = String.format(
+                            "Nice! I've marked this task as done:\n    %s",
+                            toDoList.get(idxFrom0).toString()
+                    );
+                }
+            } else {//add task to to do list
+                msgOutput = String.format("added: %s", userInput);
+                toDoList = toDoList.addTask(Task.of(userInput));
             }
+
             displayWithStyle(msgOutput); //output msg to user
         }
 
