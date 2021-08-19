@@ -67,23 +67,27 @@ public class Duke {
     public Task setTask(String input) {
         Task t;
         if (input.contains("deadline")) {
-            int start = input.indexOf("deadline");
-            int by = input.indexOf("/");
-            String taskDescription = input.substring(start + "deadline ".length(), by - 1);
-            String taskDeadline = input.substring(by + "/by ".length());
-            t = new Deadline(taskDescription, taskDeadline);
+            String [] arr = formatInput(input, "deadline ", "/by ");
+            t = new Deadline(arr[0], arr[1]);
         } else if (input.contains("event")){
-            int start = input.indexOf("event");
-            int at = input.indexOf("/");
-            String eventDescription = input.substring(start + "event ".length(), at - 1);
-            String eventTime = input.substring(at + "/at ".length());
-            t = new Event(eventDescription, eventTime);
-        } else {
+            String [] arr = formatInput(input, "event ", "/at ");
+            t = new Event(arr[0], arr[1]);
+        } else if (input.contains("todo")){
             t = new Todo(input.substring("todo ".length()));
+        } else {
+            t = new Task(input);
         }
         return t;
     }
 
+    private String[] formatInput(String input, String keyword, String tag) {
+        int start = input.indexOf(keyword);
+        int by = input.indexOf(tag.charAt(0));
+        String taskDescription = input.substring(start + keyword.length(), by - 1);
+        String taskTime = input.substring(by + tag.length());
+        return new String[]{taskDescription, taskTime};
+    }
+    
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -105,7 +109,6 @@ public class Duke {
                 Task t = duke.setTask(input);
                 duke.add(t);
             }
-
             input = sc.nextLine();
         }
         System.out.println("@@@ Bye. Hope to see you again soon! @@@");
