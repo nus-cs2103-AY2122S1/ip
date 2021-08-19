@@ -19,6 +19,7 @@ public class Duke {
         int i = 0;
         while (true) {
             String str = sc.nextLine();
+            System.out.print(str + "\n");
             System.out.print("    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             if (str.equals("bye")) {
                 System.out.print("      Have a good day, friend!\n"
