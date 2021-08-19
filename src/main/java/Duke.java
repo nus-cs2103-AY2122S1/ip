@@ -30,7 +30,7 @@ public class Duke {
         System.out.println("    " + task.toString());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         //Greet
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -65,23 +65,40 @@ public class Duke {
                 Task task = getTask(taskList, index-1);
                 done(task);
             } else if (command.equals("todo")) {
-                Task newTask = new Todo(pieces[1]);
-                addTask(taskList, newTask);
+                try {
+                    Task newTask = new Todo(pieces[1]);
+                    addTask(taskList, newTask);
+                }
+                catch (ArrayIndexOutOfBoundsException e){
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
             } else if (command.equals("event")) {
-                String[] eventPieces = pieces[1].split("/", 2);
-                String name = eventPieces[0];
-                String[] timePieces = eventPieces[1].split("at ", 2);
-                String time = timePieces[1];
-                Task newTask = new Event(name, time);
-                addTask(taskList, newTask);
+                try {
+                    String[] eventPieces = pieces[1].split("/", 2);
+                    String name = eventPieces[0];
+                    String[] timePieces = eventPieces[1].split("at ", 2);
+                    String time = timePieces[1];
+                    Task newTask = new Event(name, time);
+                    addTask(taskList, newTask);
+                }
+                catch (ArrayIndexOutOfBoundsException e){
+                    throw new DukeException("☹ Please enter the event command in 'event [task description]/at [start time]' format");
+                }
             } else if (command.equals("deadline")) {
-                String[] eventPieces = pieces[1].split("/", 2);
-                String name = eventPieces[0];
-                String[] timePieces = eventPieces[1].split("by ", 2);
-                String time = timePieces[1];
-                Task newTask = new Deadline(name, time);
-                addTask(taskList, newTask);
-            } else { }
+                try {
+                    String[] eventPieces = pieces[1].split("/", 2);
+                    String name = eventPieces[0];
+                    String[] timePieces = eventPieces[1].split("by ", 2);
+                    String time = timePieces[1];
+                    Task newTask = new Deadline(name, time);
+                    addTask(taskList, newTask);
+                }
+                catch (ArrayIndexOutOfBoundsException e){
+                    throw new DukeException("☹ Please enter the event command in 'deadline [task description]/by [end time]' format");
+                }
+            } else {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
 
             System.out.println("    ____________________________________________________________");
         }
