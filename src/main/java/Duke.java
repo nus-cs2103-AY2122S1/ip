@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -21,24 +22,38 @@ public class Duke {
         greeting.add(logo);
         greeting.add("Hello! I'm Alice, your personal assistant");
         greeting.add("What can I do for you?");
+        Dialog commandsList = Dialog.generate("commands");
+        commandsList.add("This is the following commands, I can perform:\n");
+        commandsList.add("1. 'add <task description>' - add the task to the list");
+        commandsList.add("2. 'list' - show the current task list");
+        commandsList.add("3. 'done <task index> - mark that task as done");
+        commandsList.add("4. 'commands' - show this current command window");
+        commandsList.add("5. 'bye' - end session");
         System.out.println(greeting);
+        System.out.println(commandsList);
         System.out.print("> ");
         String input = sc.nextLine();
-        Dialog list = Dialog.generate("list");
+        TaskDialog list = (TaskDialog) TaskDialog.generate("list");
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                System.out.println(list);
-            } else {
-                Dialog local;
-                if (Dialog.have(input)) {
-                    // avoid generating duplicated dialog if the user input the same command
-                    local = Dialog.generate(input + Math.random());
-                } else {
-                    local = Dialog.generate(input);
-                }
-                local.add("added: " + input);
-                list.add((list.length() + 1) + ". " + input);
-                System.out.println(local);
+            String[] commands = input.split(" ");
+            switch(commands[0]) {
+                case "list":
+                    System.out.println(list);
+                    break;
+                case "add":
+                    list.addTask(new Task(input.substring(("add ").length())));
+                    break;
+                case "done":
+                    list.markTaskAsDone(Integer.parseInt(commands[1]) - 1);
+                    break;
+                case "commands":
+                    System.out.println(commandsList);
+                    break;
+                default:
+                    Dialog unknownCommand = Dialog.generate("unknownCommand");
+                    unknownCommand.add("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(unknownCommand);
+                    break;
             }
             System.out.print("> ");
             input = sc.nextLine();
