@@ -1,6 +1,6 @@
 public class ExitMessage extends DukeMessage{
     public void display() {
-        System.out.println("Bye user!");
+        System.out.println("Ram Ram!");
         Duke.conversationState = false;
     }
 }

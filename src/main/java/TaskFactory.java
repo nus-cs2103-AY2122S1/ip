@@ -1,27 +1,40 @@
 public class TaskFactory {
-    public static Task createTask(String taskStr) {
+    public static Task createTask(String taskStr) throws IllegalFormatException, EmptyDescriptionException, InvalidCommandException {
 
-        if(taskStr.stripLeading().regionMatches(0, "todo", 0, 4)) {
+        if(taskStr.substring(0, 4).equals("todo")) {
             //create a todo task
-            String taskDescription = taskStr.substring(5);
-            return new ToDo(taskDescription);
-        } else if(taskStr.stripLeading().regionMatches(0, "deadline", 0, 8)) {
+            try {
+                String taskDescription = taskStr.substring(5);
+                if(taskDescription.stripLeading().equals(""))
+                    throw new EmptyDescriptionException("Ja ammi se todo ka format seekh ke aa!\n" +
+                            "description bhi dena padta hai");
+                return new ToDo(taskDescription);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new EmptyDescriptionException("Ja ammi se todo ka format seekh ke aa!\n" +
+                        "description bhi dena padta hai");
+            }
+        } else if(taskStr.substring(0, 8).equals("deadline")) {
             //create a deadline task
-            int slashIndex = taskStr.indexOf("/by");
-            String taskDescription = taskStr.substring(9, slashIndex - 1);
-            String deadline = taskStr.substring(slashIndex + 4);
-            return new Deadline(taskDescription, deadline);
-        } else if(taskStr.stripLeading().regionMatches(0, "event", 0, 5)) {
+            try {
+                int slashIndex = taskStr.indexOf("/by");
+                String taskDescription = taskStr.substring(9, slashIndex - 1);
+                String deadline = taskStr.substring(slashIndex + 4);
+                return new Deadline(taskDescription, deadline);
+            } catch (Exception e) {
+                throw new IllegalFormatException("Ja ammi se deadline banane ka format seekh ke aa!");
+            }
+        } else if(taskStr.substring(0, 5).equals("event")) {
             //create an event
-            int slashIndex = taskStr.indexOf("/at");
-            String taskDescription = taskStr.substring(6, slashIndex - 1);
-            String timeSlot = taskStr.substring(slashIndex + 4);
-            return new Event(taskDescription, timeSlot);
+            try {
+                int slashIndex = taskStr.indexOf("/at");
+                String taskDescription = taskStr.substring(6, slashIndex - 1);
+                String timeSlot = taskStr.substring(slashIndex + 4);
+                return new Event(taskDescription, timeSlot);
+            } catch (Exception e) {
+                throw new IllegalFormatException("Ja ammi se event banane ka format seekh ke aa!");
+            }
         } else {
-            //exit for now, later prompt with error messages
-            System.out.println("invalid input!! terminating!!");
-            System.exit(1);
-            return new ToDo("never created");
+            throw new InvalidCommandException("Kya likhra h hero??");
         }
     }
 }
