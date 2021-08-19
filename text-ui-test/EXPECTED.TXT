@@ -1,7 +1,153 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+
+
+--------------------
+Hello! I'm Duke
+What can I do for you?
+
+
+--------------------
+
+
+--------------------
+added: randominputstring
+
+--------------------
+
+
+--------------------
+Here are the tasks in your list:
+1. [ ] randominputstring
+
+
+--------------------
+
+
+--------------------
+Nice! I've marked this task as done:
+[X] randominputstring
+
+--------------------
+
+
+--------------------
+
+
+--------------------
+
+
+--------------------
+Got it. I've added this task:
+[T][ ] buy milk
+Now you have 2 tasks in da list.
+
+
+--------------------
+
+
+--------------------
+
+
+--------------------
+
+
+--------------------
+Got it. I've added this task:
+[E][ ] buy milk (at: 3.30pm Sunday)
+Now you have 3 tasks in da list.
+
+
+--------------------
+
+
+--------------------
+
+
+--------------------
+
+
+--------------------
+Got it. I've added this task:
+[D][ ] project due (by: 2.40pm Saturday)
+Now you have 4 tasks in da list.
+
+
+--------------------
+
+
+--------------------
+Here are the tasks in your list:
+1. [X] randominputstring
+2. [T][ ] buy milk
+3. [E][ ] buy milk (at: 3.30pm Sunday)
+4. [D][ ] project due (by: 2.40pm Saturday)
+
+
+--------------------
+
+
+--------------------
+Nice! I've marked this task as done:
+[T][X] buy milk
+
+--------------------
+
+
+--------------------
+Nice! I've marked this task as done:
+[E][X] buy milk (at: 3.30pm Sunday)
+
+--------------------
+
+
+--------------------
+Nice! I've marked this task as done:
+[D][X] project due (by: 2.40pm Saturday)
+
+--------------------
+
+
+--------------------
+
+
+--------------------
+
+
+--------------------
+Got it. I've added this task:
+[E][ ] buy milk (at: some day)
+Now you have 5 tasks in da list.
+
+
+--------------------
+
+
+--------------------
+Here are the tasks in your list:
+1. [X] randominputstring
+2. [T][X] buy milk
+3. [E][X] buy milk (at: 3.30pm Sunday)
+4. [D][X] project due (by: 2.40pm Saturday)
+5. [E][ ] buy milk (at: some day)
+
+
+--------------------
+
+
+--------------------
+Nice! I've marked this task as done:
+[E][X] buy milk (at: some day)
+
+--------------------
+
+
+--------------------
+Bye. Hope to see you again soon!
+
+--------------------
 

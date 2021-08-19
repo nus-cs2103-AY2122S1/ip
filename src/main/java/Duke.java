@@ -41,7 +41,7 @@ public class Duke {
 
         @Override
         public String toString() {
-            return "[D]" + super.toString() + " (by: " + by + ")";
+            return "[D]" + super.toString() + "(by:" + by + ")";
         }
     }
 
@@ -56,7 +56,7 @@ public class Duke {
 
         @Override
         public String toString() {
-            return "[E]" + super.toString() + " (at: " + at + ")";
+            return "[E]" + super.toString() + "(at:" + at + ")";
         }
     }
 
@@ -104,7 +104,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        printStatement("你好! 我是杜克\n能为您做什么吗？\n");
+        printStatement("Hello! I'm Duke\nWhat can I do for you?\n");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         ArrayList<Task> arrayList = new ArrayList<>(100);
@@ -113,7 +113,7 @@ public class Duke {
             if (input.equals("list")) {
                 int counter = 1;
                 StringBuilder sb = new StringBuilder();
-                sb.append("这是您的菜单：\n");
+                sb.append("Here are the tasks in your list:\n");
                 for (Task item:arrayList) {
                     sb.append(String.valueOf(counter) + ". " + item.toString() + "\n");
                     counter++;
@@ -146,15 +146,16 @@ public class Duke {
                 int number = Integer.valueOf(input.split(" ")[1]) - 1;
                 Task task = arrayList.get(number);
                 task.markAsDone();
-                printStatement("Nice! 我帮你记下了：\n" + task);
+                printStatement("Nice! I've marked this task as done:\n" + task);
             } else {
                 Task newTask = new Task(input);
                 arrayList.add(newTask);
                 printStatement("added: " + input);
             }
+
             input = sc.nextLine();
         }
-        printStatement("再见，请再光临！");
+        printStatement("Bye. Hope to see you again soon!");
 
 
 
