@@ -5,12 +5,16 @@ public class Duke {
         Scanner input = new Scanner(System.in);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+        boolean end = false;
         String answer;
-        answer = input.nextLine();
-        if (answer.equals("bye")) {
-            System.out.println("Bye. Hope to see you again soon!");
-        } else {
-            System.out.println(answer);
+        while (!end) {
+            answer = input.nextLine();
+            if (answer.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                end = true;
+            } else {
+                System.out.println(answer);
+            }
         }
     }
 }
