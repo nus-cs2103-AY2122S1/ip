@@ -1,10 +1,16 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static Task[] taskList = new Task[100];
+    private static ArrayList<Task> taskList = new ArrayList<>();
     private static int index = 0;
     private static void addTask(Task task) {
-        taskList[index++] = task;
+        taskList.add(task);
+        index++;
+    }
+    private static void deleteTask(int taskIndex) {
+        taskList.remove(taskIndex);
+        index--;
     }
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
@@ -21,15 +27,21 @@ public class Duke {
             if(input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            }else if (input.equals("list")) {
+            } else if(input.split(" ")[0].equals("delete")) {
+                Task taskToBeDeleted = taskList.get(Integer.parseInt(input.split(" ")[1]) - 1);
+                deleteTask(Integer.parseInt(input.split(" ")[1]) - 1);
+                System.out.println("Noted. I've removed this task: \n" +
+                         "  " + taskToBeDeleted.toString() +"\n" +
+                        "Now you have " + index + " tasks in the list.");
+            } else if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < index; i++){
-                    System.out.println((i + 1) + ". " + taskList[i].toString());
+                    System.out.println((i + 1) + ". " + taskList.get(i).toString());
                 }
             }else if(input.split(" ")[0].equals("done")){
                 int taskIndex = Integer.parseInt(input.split(" ")[1]);
-                taskList[taskIndex - 1].markCompleted();
-                System.out.println("Nice! I've marked this task as done:\n" + taskList[taskIndex - 1].toString());
+                taskList.get(taskIndex - 1).markCompleted();
+                System.out.println("Nice! I've marked this task as done:\n" + taskList.get(taskIndex - 1).toString());
             } else if(input.split("todo").length == 0) {
                 try {
                     throw new DukeException.emptyToDoDescriptionException();
