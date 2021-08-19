@@ -83,7 +83,7 @@ public class Chatbot {
         };
     }
 
-    private ChatContinue interpret () {
+    private ChatContinue interpret() {
         String input = scanner.nextLine();
         ChatCommands command = ChatCommands.toEnum(input);
         if (command != null) {
@@ -91,7 +91,11 @@ public class Chatbot {
         }
         TaskCommands taskCommand = TaskCommands.toEnum(input);
         if (taskCommand != null) {
-            return addTask(taskCommand, input);
+            String[] arguments = input.split(" ", 2);
+            if (arguments.length == 1) {
+                throw new IllegalArgumentException("No items specified for 'todo'!");
+            }
+            return addTask(taskCommand, arguments[1]);
         }
         throw new IllegalArgumentException("Looks like I don't support those commands yet...");
     }
@@ -122,6 +126,7 @@ public class Chatbot {
     }
 
     private ChatContinue addTodo(String input) {
+        System.out.println(input);
         ToDo todo = new ToDo(input);
         memory.add(todo);
         this.displayAddTaskSuccessful(todo);
