@@ -12,9 +12,19 @@ public class Message {
         System.out.println("    ____________________________________________________________");
     }
 
-    public void echo(String input) {
+    public void addTask(String input) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("    " + input);
+        System.out.println("    added: " + input);
+        System.out.println("    ____________________________________________________________");
+    }
+
+    public void list() {
+        System.out.println("    ____________________________________________________________");
+        int id = 1;
+        for (String task : Duke.tasks) {
+            System.out.println("    " + id + ". " + task);
+            id++;
+        }
         System.out.println("    ____________________________________________________________");
     }
 }
