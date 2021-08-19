@@ -31,11 +31,29 @@ public class Duke {
                 case "done":
                     System.out.println("Nice! I've marked this task as done");
                     Task tempTask = aList.get(Integer.parseInt(input.split(" ")[1])-1);
-                    aList.set(Integer.parseInt(input.split(" ")[1])-1, new Task(tempTask.getName(), tempTask.getNumber(), true));
+                    aList.set(Integer.parseInt(input.split(" ")[1])-1, tempTask.markDone());
                     System.out.println(aList.get(Integer.parseInt(input.split(" ")[1])-1));
                     break;
+                case "todo":
+                    System.out.println("Got it. I've added this task:");
+                    aList.add(new ToDos(input, false));
+                    System.out.println(" " + aList.get(aList.size() - 1));
+                    System.out.println(String.format("Now you have %d tasks in the list",aList.size()));
+                    break;
+                case "deadline":
+                    System.out.println("Got it. I've added this task:");
+                    aList.add(new Deadlines(Deadlines.getNameInput(input), false, Deadlines.getDeadlineInput(input)));
+                    System.out.println(" " + aList.get(aList.size() - 1));
+                    System.out.println(String.format("Now you have %d tasks in the list",aList.size()));
+                    break;
+                case "event":
+                    System.out.println("Got it. I've added this task:");
+                    aList.add(new Events(Events.getNameInput(input), false, Events.getDeadlineInput(input)));
+                    System.out.println(" " + aList.get(aList.size() - 1));
+                    System.out.println(String.format("Now you have %d tasks in the list",aList.size()));
+                    break;
                 default:
-                    aList.add(new Task(input, counter, false));
+                    aList.add(new Task(input,false));
                     counter++;
                     System.out.println("added: " + input);  // Output user input
             }

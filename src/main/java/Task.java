@@ -1,13 +1,19 @@
 public class Task {
 
     private final String name;
-    private final int number;
     private final boolean done;
 
-    Task(String name, int number, boolean done){
+    Task(String name, boolean done){
         this.name = name;
-        this.number = number;
         this.done = done;
+    }
+
+    Task markDone() {
+        return new Task(this.name, true);
+    }
+
+    Task markUndone() {
+        return new Task(this.name, false);
     }
 
     @Override
@@ -19,8 +25,9 @@ public class Task {
         return this.name;
     }
 
-    int getNumber(){
-        return this.number;
+    Boolean getDone(){
+        return this.done;
     }
+
 
 }
