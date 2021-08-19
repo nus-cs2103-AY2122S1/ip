@@ -31,6 +31,17 @@ public class Duke {
                 input = sc.nextLine();
                 continue;
             }
+            if (input.contains("delete")) {
+                System.out.println("Noted. I've removed this task: ");
+                int taskNo = Integer.parseInt(input.substring(7, 8));
+                Task task = list.get(taskNo - 1);
+                list.remove(taskNo - 1);
+                System.out.println(task);
+                int count = list.size();
+                System.out.println("Now you have " + count + " tasks in the list.");
+                input = sc.nextLine();
+                continue;
+            }
             if (input.contains("todo")) {
                 ToDo toDo = new ToDo(input.substring(5));
                 list.add(toDo);
