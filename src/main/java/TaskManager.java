@@ -10,36 +10,38 @@ public class TaskManager {
             case "done":
                 int id = Integer.parseInt(arr[1]);
                 taskArrayList.get(id - 1).setDone(true);
-                System.out.println("Your task has been marked as done.");
+                System.out.printf("Solid work! I've marked task %d as done.%n", id);
                 list();
                 break;
             case "todo":
                 String remaining = command.substring(5);
                 add(new ToDo(remaining));
-                System.out.println("Your new todo has been added.");
+                System.out.println("Great! I've added your todo. Enter 'list' to see your tasks!");
                 break;
             case "deadline":
                 int byIndex = command.indexOf("/by");
                 if (byIndex == -1) {
-                    System.out.println("Sorry, invalid command.");
+                    System.out.println("I'm afraid I don't recognise that, please try again!");
+                } else {
+                    String deadlineName = command.substring(9, byIndex - 1);
+                    String deadlineBy = command.substring(byIndex + 4);
+                    add(new Deadline(deadlineName, deadlineBy));
+                    System.out.println("Great! I've added your deadline. Enter 'list' to see your tasks!");
                 }
-                String deadlineName = command.substring(9, byIndex - 1);
-                String deadlineBy = command.substring(byIndex + 4);
-                add(new Deadline(deadlineName, deadlineBy));
-                System.out.println("Your new deadline has been added.");
                 break;
             case "event":
                 int atIndex = command.indexOf("/at");
                 if (atIndex == -1) {
-                    System.out.println("Sorry, invalid command.");
+                    System.out.println("I'm afraid I don't recognise that, please try again!");
+                } else {
+                    String eventName = command.substring(6, atIndex - 1);
+                    String eventAt = command.substring(atIndex + 4);
+                    add(new Event(eventName, eventAt));
+                    System.out.println("Great! I've added your event. Enter 'list' to see your tasks!");
                 }
-                String eventName = command.substring(6, atIndex - 1);
-                String eventAt = command.substring(atIndex + 4);
-                add(new Event(eventName, eventAt));
-                System.out.println("Your new event has been added.");
                 break;
             default:
-                System.out.println("Sorry, invalid command.");
+                System.out.println("I'm afraid I don't recognise that, please try again!");
         }
     }
 

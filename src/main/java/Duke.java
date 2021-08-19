@@ -8,13 +8,15 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        System.out.println("Stay on track with Duke!\n" +
+                "How can I help you?");
 
         Scanner sc = new Scanner(System.in);
         TaskManager tm = new TaskManager();
         boolean running = true;
 
         while (running) {
-            System.out.print("Command >> ");
+            System.out.print(">> ");
             String command = sc.nextLine();
 
             switch (command) {
