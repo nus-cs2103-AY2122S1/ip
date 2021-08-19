@@ -5,58 +5,66 @@ public class Duke {
     private Scanner input = new Scanner(System.in);
     private ArrayList<Task> list = new ArrayList<>();
 
+    private static enum CommandType {
+        BYE, LIST,
+        TODO, EVENT, DEADLINE,
+        DONE, DELETE,
+    }
 
-    private void printLogo() {
+    private void greet() {
         String logo = " ____        _\n"
                     + "|  _ \\ _   _| | _____\n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
-    }
-
-
-    private void greet() {
         System.out.println("Welcome! I'm Duke.");
         System.out.println("What can I do for you?\n");
     }
 
 
     private void run() {
-        String rawInput = this.input.nextLine();
-        String[] userInput = rawInput.split(" ", 2);
-        String command = userInput[0];
         try {
+            String rawInput = this.input.nextLine();
+            String[] userInput = rawInput.split(" ", 2);
+            CommandType command = this.getCommand(userInput[0]);
             switch (command) {
-                case "bye":
+                case BYE:
                     this.exit();
                     this.input.close();
                     return;
-                case "list":
+                case LIST:
                     this.showList();
                     break;
-                case "todo":
+                case TODO:
                     this.addTodo(userInput);
                     break;
-                case "event":
+                case EVENT:
                     this.addEvent(userInput);
                     break;
-                case "deadline":
+                case DEADLINE:
                     this.addDeadline(userInput);
                     break;
-                case "done":
+                case DONE:
                     this.markAsDone(userInput);
                     break;
-                case "delete":
+                case DELETE:
                     this.delete(userInput);
                     break;
-                default:
-                    throw new DukeUnknownCommandException(command);
             }
         } catch (DukeException e) {
             System.out.printf("\t%s\n\n", e);
         }
         this.run();
+    }
+
+
+    private CommandType getCommand(String command) throws DukeUnknownCommandException {
+        try {
+            return Duke.CommandType.valueOf(command.toUpperCase());
+        } catch (IllegalArgumentException e){
+            throw new DukeUnknownCommandException(command);
+        }
     }
 
 
@@ -153,7 +161,6 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.printLogo();
         duke.greet();
         duke.run();
     }
