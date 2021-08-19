@@ -14,6 +14,10 @@ public abstract class Parser {
             NumberFormatException, DateTimeParseException {
         if (in.equals("list")) {
             return new ListCommand();
+        } else if (in.startsWith("find")) {
+            in = in.replaceFirst("find", "").strip();
+            checkDescription(in);
+            return new FindCommand(in);
         } else if (in.startsWith("done")) {
             String[] temp = in.split(" ");
             return new MarkDoneCommand(Integer.parseInt(temp[1]) - 1);
