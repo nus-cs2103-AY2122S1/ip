@@ -17,9 +17,9 @@ public class Duke {
     private static Task[] tasks = new Task[100];
     private static int taskIndex = 0;
 
-    private static void listTasks() {
+    private static void listTasks() throws DukeException {
         if (taskIndex == 0) {
-            System.out.println(NO_TASKS_MSG);
+            throw new DukeException(NO_TASKS_MSG);
         } else {
             for (int i = 1; i <= taskIndex; i++) {
                 Task currTask = tasks[i - 1];
