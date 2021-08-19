@@ -26,7 +26,7 @@ public class Deadline extends Task {
             this.date = date;
             this.time = time;
         } catch (DateTimeParseException e) {
-            throw new CommandParamException("Deadline");
+            throw new CommandParamException("deadline");
         }
     }
 

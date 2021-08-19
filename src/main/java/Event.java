@@ -26,7 +26,7 @@ public class Event extends Task {
             this.date = date;
             this.time = time;
         } catch (DateTimeParseException e) {
-            throw new CommandParamException("Event");
+            throw new CommandParamException("event");
         }
     }
 
