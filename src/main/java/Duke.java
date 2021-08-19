@@ -21,12 +21,19 @@ public class Duke {
 
         while(!input.equals("bye")){
             try{
-                if(input.equals("list")){
+                if (input.equals("list")) {
                     list.listTasks();
-                }else if(checkForKeyword.equals("done")){
+                } else if(checkForKeyword.equals("done")) {
                     if(inputScanner.hasNextInt()){
                         int taskNumber = inputScanner.nextInt() - 1;
                         list.markDone(taskNumber);
+                    }else{
+                        throw new InvalidCommandParameterException();
+                    }
+                } else if(checkForKeyword.equals("delete")) {
+                    if(inputScanner.hasNextInt()){
+                        int taskNumber = inputScanner.nextInt() - 1;
+                        list.deleteTask(taskNumber);
                     }else{
                         throw new InvalidCommandParameterException();
                     }
