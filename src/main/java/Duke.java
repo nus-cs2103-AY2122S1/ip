@@ -1,13 +1,14 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Duke {
 
     // shows if the Duke chatbot has been activated
     private boolean activated;
     // Line Separator
-    private static String SEP_LINE = "____________________________________________________________\n";
+    private final String SEP_LINE = "____________________________________________________________\n";
     // Standard boot response
     private final String bootMessage =
             SEP_LINE
@@ -64,10 +65,7 @@ public class Duke {
         String out = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.storage.size(); i++) {
             if (i != 0) out = out.concat("\n");
-            out = out.concat((i+1) + ".[")
-                    .concat(this.storage.get(i).getStatusIcon())
-                    .concat("] ")
-                    .concat(this.storage.get(i).getDescription());
+            out = out.concat((i+1) + ".").concat(this.storage.get(i).toString());
         }
         return out;
     }
@@ -76,26 +74,90 @@ public class Duke {
     public String done(int index) {
         this.storage.get(index).setDone();
         Task t = this.storage.get(index);
-        return "Nice! I've marked this task as done: \n  ["
-                .concat(t.getStatusIcon())
-                .concat("] ")
-                .concat(t.getDescription());
+        return "Nice! I've marked this task as done: \n  ".concat(t.toString());
     }
 
-    // Level-4: to-do command
-    public String todo() {
+    // Level-4: setting of task urgency to "to-do"
+    public String todo(String description) {
+        Task task = new Todo(description,state.T);
+        this.storage.add(task);
+        return "Got it. I've added this task:\n  "
+                .concat(task.toString())
+                .concat("\nNow you have ".concat(this.storage.size() + "").concat(" tasks in the list."));
+    }
+
+    // Level-4: setting of task urgency to "deadline"
+    public String deadline(String description, String by) {
+        Task task = new Deadline(description,by,state.D);
+        this.storage.add(task);
+        return "Got it. I've added this task:\n  "
+                .concat(task.toString())
+                .concat("\nNow you have ".concat(this.storage.size() + "").concat(" tasks in the list."));
+    }
+
+    // Level-4: setting of task urgency to "event"
+    public String event(String description, String at) {
+        Task task = new Event(description,at,state.E);
+        this.storage.add(task);
+        return "Got it. I've added this task:\n  "
+                .concat(task.toString())
+                .concat("\nNow you have ".concat(this.storage.size() + "").concat(" tasks in the list."));
+    }
+
+    // Level-6: delete items from list
+    public String delete() {
         return "";
     }
 
     // wraps all messages between line seperators
     public String messageWrapper(String text) {
-        return this.SEP_LINE.concat(text).concat("\n").concat(SEP_LINE);
+        return SEP_LINE.concat(text).concat("\n").concat(SEP_LINE);
+    }
+
+    // decodes input from user and passes that argument to a response builder
+    public int decoder(String userInput) {
+        int res;
+        if (userInput.equals("bye")) res = 0;
+        else if (userInput.equals("list")) res = 1;
+        else if (userInput.equals("done")) res = 2;
+        else if (userInput.equals("todo")) res = 3;
+        else if (userInput.equals("deadline")) res = 4;
+        else if (userInput.equals("event")) res = 5;
+        else if (userInput.equals("delete")) res = 6;
+        else res = 7;
+        return res;
+    }
+
+    // A-Enums: Set Enums for Task type
+    protected enum state {
+        T,D,E;
     }
 
     // Task class that represents all Tasks
-    public class Task {
+    private static class Task {
+
         protected String description;
+        protected String by;
+        protected String at;
         protected boolean isDone;
+        protected state STATE;
+
+        // overloaded constructors for seperate task types
+        public Task(String description, String var, state STATE) {
+
+            if (STATE.equals(state.D)) this.by = var;
+            else this.at = var;
+
+            this.description = description;
+            this.isDone = false;
+            this.STATE = STATE;
+        }
+
+        public Task(String description, state STATE) {
+            this.description = description;
+            this.isDone = false;
+            this.STATE = STATE;
+        }
 
         public Task(String description) {
             this.description = description;
@@ -106,6 +168,21 @@ public class Duke {
             return (isDone ? "X" : " ");
         }
 
+        public String getEventIcon() {
+            String out;
+            switch (this.STATE) {
+                case T: out = "T";
+                        break;
+                case D: out = "D";
+                        break;
+                case E: out = "E";
+                        break;
+                default: out = " ";
+                        break;
+            }
+            return out;
+        }
+
         public String getDescription() {
             return this.description;
         }
@@ -113,17 +190,51 @@ public class Duke {
         public void setDone() {
             this.isDone = true;
         }
+
+        @Override
+        public String toString() {
+            return "["
+                    .concat(this.getEventIcon())
+                    .concat("][")
+                    .concat(this.getStatusIcon())
+                    .concat("] ")
+                    .concat(this.getDescription());
+        }
     }
 
-    // decodes input from user and passes that argument to a response builder
-    public int decoder(String userInput) {
-        int res;
-        if (userInput.equals("bye")) res = 0;
-        else if (userInput.equals("list")) res = 1;
-        else if (userInput.equals("done")) res = 2;
-        else if (userInput.equals("todo")) res = 3;
-        else res = 4;
-        return res;
+    //A-Inheritance: To-do Task Class
+    private static class Todo extends Task {
+
+        public Todo(String description,state STATE) {
+            super(description, STATE);
+        }
+
+    }
+
+    //A-Inheritance: Deadline Task Class
+    private static class Deadline extends Task {
+
+        public Deadline(String description, String at, state STATE) {
+            super(description, at, STATE);
+        }
+
+        @Override
+        public String toString() {
+            return super.toString().concat(" (by: ".concat(this.by).concat(")"));
+        }
+    }
+
+    //A-Inheritance: Event Task Class
+    private static class Event extends Task {
+
+        public Event(String description, String at, state STATE) {
+            super(description, at, STATE);
+        }
+
+        @Override
+        public String toString() {
+            return super.toString().concat(" (at: ".concat(this.at).concat(")"));
+        }
     }
 
     public static void main(String[] args) {
@@ -141,11 +252,36 @@ public class Duke {
                         break;
                 case 2: output = chatBotObj.done(scannerObj.nextInt()-1);
                         break;
-                case 3: output = chatBotObj.todo();
+                case 3: output = chatBotObj.todo(scannerObj.nextLine());
                         break;
-                case 4: output = chatBotObj.add(nextIn.concat(scannerObj.nextLine()));
+                case 4:
+                case 5:
+                    String desc = "";
+                    String var = "";
+                    int x = 0;
+                    while(true) {
+                        nextIn = scannerObj.next();
+
+                        if (nextIn.equals("/by") || nextIn.equals("/at")) {
+                            x = 1;
+                            continue;
+                        }
+
+                        if (x == 1) {
+                            var = nextIn;
+                            var = var.concat(scannerObj.nextLine());
+                            break;
+                        } else {
+                            desc = (desc.equals("") ? nextIn : desc.concat(" ").concat(nextIn));
+                        }
+                    }
+                    output = (selector == 4 ? chatBotObj.deadline(desc,var) : chatBotObj.event(desc,var));
+                    break;
+                case 6: output = chatBotObj.delete();
                         break;
-                default: output = "";
+                case 7: output = chatBotObj.add(nextIn.concat(scannerObj.nextLine()));
+                        break;
+                default: output = chatBotObj.echo(nextIn.concat(scannerObj.nextLine()));
             }
             output = chatBotObj.messageWrapper(output);
             System.out.println(output);
