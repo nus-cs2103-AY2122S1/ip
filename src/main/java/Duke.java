@@ -41,12 +41,22 @@ public class Duke {
                 continue;
             }
             if (input.contains("deadline")) {
-                System.out.println("Got it. I've added this task:\n[T][ ]" + input);
+                String[] split = input.split("/");
+                Deadline deadline = new Deadline(split[0].substring(9), split[1].substring(3));
+                list.add(deadline);
+                System.out.println("Got it. I've added this task:\n" + deadline.toString());
+                int count = list.size();
+                System.out.println("Now you have " + count + " tasks in the list.");
                 input = sc.nextLine();
                 continue;
             }
             if (input.contains("event")) {
-                System.out.println("Got it. I've added this task:\n[T][ ]" + input);
+                String[] split = input.split("/");
+                Event event = new Event(split[0].substring(6), split[1].substring(3));
+                list.add(event);
+                System.out.println("Got it. I've added this task:\n" + event.toString());
+                int count = list.size();
+                System.out.println("Now you have " + count + " tasks in the list.");
                 input = sc.nextLine();
                 continue;
             }
