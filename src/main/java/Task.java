@@ -2,6 +2,12 @@ public abstract class Task {
     private String taskName;
     private boolean status;
 
+    public enum taskType {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
+
     public Task(String taskName) {
         this.taskName = taskName;
         this.status = false;
