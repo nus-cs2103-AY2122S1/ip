@@ -7,6 +7,6 @@ public class Event extends Task{
     }
 
     public String toString() {
-        return "[D]" + super.toString() + " (at:" + at + ")";
+        return "[E]" + super.toString() + " (at:" + at + ")";
     }
 }
