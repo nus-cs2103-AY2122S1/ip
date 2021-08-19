@@ -3,7 +3,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    private static TaskManager taskManager = new TaskManager();
 
     public static String taskDescription(String input) {
         return input.split(" ", 2)[1];
