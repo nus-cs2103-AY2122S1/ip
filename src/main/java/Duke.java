@@ -6,8 +6,8 @@ import java.util.Scanner;
  * @author Sherman Ng Wei Sheng
  */
 public class Duke {
-    private String name;
-    private TaskList list;
+    private final String name;
+    private final TaskList list;
 
     /**
      * Class constructor specifying the name of the Chatbot to be created.
@@ -23,39 +23,104 @@ public class Duke {
      * Print the greeting message of the Chatbot.
      */
     private void greet() {
-        String message = 
-                "    ____________________________________________________________\n" + 
-                "    Hello! I'm " + this.name + "\n" +
-                "    What can I do for you?\n" +
-                "    ____________________________________________________________";
-        System.out.println(message);
+        String message =
+                "Hello! I'm " + this.name + "\n" +
+                "What can I do for you?";
+        printMessage(message);
     }
 
     /**
      * Print the goodbye message of the Chatbot.
      */
     private void terminate() {
-        String message = 
-                "    ____________________________________________________________\n" +
-                "    Bye. Hope to see you again soon!\n" +
-                "    ____________________________________________________________";
-        System.out.println(message);
+        String message = "Bye. Hope to see you again soon!";
+        printMessage(message);
     }
 
     /**
-     * Add the given task into the list and print a log accordingly.
-     *
-     * @param task The Task object to be added.
+     * Add the given todo task into the list and print a log accordingly.
+     * 
+     * @param command The input command given by user.
+     * @throws IllegalFormatException if the description of a todo is empty.
      */
-    private void addTask(Task task) {
-        this.list.add(task);
-        String message =
-                "    ____________________________________________________________\n" +
-                "    Got it. I've added this task:\n" +
-                "      " + task + "\n" +
-                String.format("    Now you have %d tasks in the list.\n", this.list.size()) +        
-                "    ____________________________________________________________";
-        System.out.println(message);
+    private void addTodo(String command) throws IllegalFormatException {
+        String[] splitWord = command.split(" ",2);
+        if (splitWord.length == 1) {
+            throw new IllegalFormatException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        
+        String toDoDescription = command.split(" ",2)[1];
+        if (toDoDescription.length() == 0) {
+            throw new IllegalFormatException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        Task taskToBeAdded = new ToDo(toDoDescription);
+        this.list.add(taskToBeAdded);
+
+        printAddedTaskMessage(taskToBeAdded);
+    }
+
+    /**
+     * Add the given deadline task into the list and print a log accordingly.
+     *
+     * @param command The input command given by user.
+     * @throws IllegalFormatException if the description of a deadline is empty or invalid deadline given.
+     */
+    private void addDeadline(String command) throws IllegalFormatException {
+        String[] splitWord = command.split(" ",2);
+        if (splitWord.length == 1) {
+            throw new IllegalFormatException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+        
+        String[] splitTask = splitWord[1].split(" /by ", 2);
+        String deadlineDescription = splitTask[0];
+        if (deadlineDescription.length() == 0) {
+            throw new IllegalFormatException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+        if (splitTask.length == 1) {
+            throw new IllegalFormatException("☹ OOPS!!! Please specify the deadline date/time in the correct format.");
+        }
+        
+        String deadlineDateTime = splitTask[1];
+        if (deadlineDateTime.length() == 0) {
+            throw new IllegalFormatException("☹ OOPS!!! Please specify the deadline date/time in the correct format.");
+        }
+  
+        Task taskToBeAdded = new Deadline(deadlineDescription, deadlineDateTime);
+        this.list.add(taskToBeAdded);
+
+        printAddedTaskMessage(taskToBeAdded);
+    }
+
+    /**
+     * Add the given event task into the list and print a log accordingly.
+     *
+     * @param command The input command given by user.
+     * @throws IllegalFormatException if the description of a deadline is empty or invalid deadline given.
+     */
+    private void addEvent(String command) throws IllegalFormatException {
+        String[] splitWord = command.split(" ",2);
+        if (splitWord.length == 1) {
+            throw new IllegalFormatException("☹ OOPS!!! The description of a event cannot be empty.");
+        }
+
+        String[] splitTask = splitWord[1].split(" /at ", 2);
+        String eventDescription = splitTask[0];
+        if (eventDescription.length() == 0) {
+            throw new IllegalFormatException("☹ OOPS!!! The description of a event cannot be empty.");
+        }
+        if (splitTask.length == 1) {
+            throw new IllegalFormatException("☹ OOPS!!! Please specify the event date/time in the correct format.");
+        }
+
+        String eventDateTime = splitTask[1];
+        if (eventDateTime.length() == 0) {
+            throw new IllegalFormatException("☹ OOPS!!! Please specify the event date/time in the correct format.");
+        }
+
+        Task taskToBeAdded = new Event(eventDescription, eventDateTime);
+        this.list.add(taskToBeAdded);
+
+        printAddedTaskMessage(taskToBeAdded);
     }
 
     /**
@@ -64,62 +129,48 @@ public class Duke {
     private void printList() {
         int listSize = this.list.size();
         
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Here are the tasks in your list:");
+        StringBuilder message = new StringBuilder("Here are the tasks in your list:");
         for (int i = 0; i < listSize; i++) {
             int index = i + 1;
             Task content = this.list.get(i);
-            System.out.println("    " + index + "." + content);
+            message.append("\n").append(index).append(".").append(content);
         }
-        System.out.println("    ____________________________________________________________");
+        printMessage(message.toString());
     }
 
     /**
      * Check if a given string is a command that denotes that a task is done.
-     * If it is a valid Done command, the corresponding task will be marked done and returns true.
-     * If it is a Done command with an incorrect index, an error prompt will be displayed and returns true.
+     * If it is a valid Done command, the corresponding task will be marked done.
+     * If it is a Done command with an incorrect index, an error prompt will be displayed.
      * For all other command received, returns false.
      * 
      * @param command The string corresponding to the input given by the user in the command line.
-     * @return A boolean value, true if it is a Done command and false otherwise.
+     * @throws InvalidTaskIndexException thrown if an invalid index is provided by the user.
+     * @throws IllegalFormatException thrown if the format for marking task to be done is wrong.
      */
-    private boolean handleDoneCommand(String command) {
-        String[] splitWord = command.split(" ", 2);
+    private void handleDoneCommand(String command) throws InvalidTaskIndexException, IllegalFormatException {
+        String[] splitWord = command.split(" ");
         
         if (splitWord.length != 2) {
-            return false;
+            throw new IllegalFormatException("☹ OOPS!!! Please specify task to be mark done in the correct format.");
         }
-        String firstWord = splitWord[0];
+
         String secondWord = splitWord[1];
         int secondWordLength = secondWord.length();
-        
-        if (firstWord.equals("done")) {
-            for (int i = 0; i < secondWordLength; i++) {
-                if (Character.isDigit(secondWord.charAt(i))) {
-                    continue;
-                } else {
-                    return false;
-                }
+        for (int i = 0; i < secondWordLength; i++) {
+            if (!Character.isDigit(secondWord.charAt(i))) {
+                throw new IllegalFormatException("☹ OOPS!!! Please specify the task to be mark done as a number.");
             }
-            int taskToBeMarkDone = Integer.parseInt(secondWord) - 1;
-            boolean markedDone = this.list.markDoneAtIndex(taskToBeMarkDone);
-            if (markedDone) {
-                String message =
-                        "    ____________________________________________________________\n" +
-                        "    Nice! I've marked this task as done:\n" +
-                        "      " + this.list.get(taskToBeMarkDone) + "\n" +
-                        "    ____________________________________________________________";
-                System.out.println(message);
-            } else {
-                String message =
-                        "    ____________________________________________________________\n" +
-                        "    Kindly key in a valid index to be marked done.\n" +
-                        "    ____________________________________________________________";
-                System.out.println(message);
-            }
-            return true;
+        }
+        int taskToBeMarkDone = Integer.parseInt(secondWord) - 1;
+        boolean markedDone = this.list.markDoneAtIndex(taskToBeMarkDone);
+        if (markedDone) {
+            String message =
+                    "Nice! I've marked this task as done:\n" +
+                    this.list.get(taskToBeMarkDone);
+            printMessage(message);
         } else {
-            return false;
+            throw new InvalidTaskIndexException();
         }
     }
 
@@ -132,38 +183,58 @@ public class Duke {
         this.greet();
 
         while (true) {
-            String input = sc.nextLine();
-            String[] splitWord = input.split(" ", 2);
-            String firstWord = splitWord[0];
             
-            switch (firstWord) {
-                case "bye":
+            try {
+                String input = sc.nextLine();
+                String[] splitWord = input.split(" ", 2);
+                String firstWord = splitWord[0];
+
+                if (input.equals("bye")) {
                     this.terminate();
                     return;
-                case "list":
+                } else if (input.equals("list")) {
                     this.printList();
-                    break;
-                case "done":
-                    boolean isDoneCommand = handleDoneCommand(input);
-                    if (isDoneCommand) {
-                        break;
-                    }
-                case "todo":
-                    String toDoDescription = splitWord[1];
-                    this.addTask(new ToDo(toDoDescription));
-                    break;
-                case "deadline":
-                    String deadlineDescription = splitWord[1].split(" /by ", 2)[0];
-                    String deadlineDateTime = splitWord[1].split(" /by ", 2)[1];
-                    this.addTask(new Deadline(deadlineDescription, deadlineDateTime));
-                    break;
-                case "event":
-                    String eventDescription = splitWord[1].split(" /at ", 2)[0];
-                    String eventDateTime = splitWord[1].split(" /at ", 2)[1];
-                    this.addTask(new Event(eventDescription, eventDateTime));
-                    break;
+                } else if (firstWord.equals("done")) {
+                    this.handleDoneCommand(input);
+                } else if (firstWord.equals("todo")) {
+                    this.addTodo(input);
+                } else if (firstWord.equals("deadline")) {
+                    this.addDeadline(input);
+                } else if (firstWord.equals("event")) {
+                    this.addEvent(input);
+                } else {
+                    throw new UnknownCommandException();
+                }
+            } catch (DukeException e) {
+                printMessage(e.getMessage());
             }
         }
+    }
+
+    /**
+     * Method to format and print to console.
+     * 
+     * @param content The content to be printed, wrapped between horizontal lines.
+     */
+    private void printMessage(String content) {
+        String format = 
+                "\t____________________________________________________________\n" + 
+                "\t%s\n" + 
+                "\t____________________________________________________________\n";
+        System.out.printf(format, content.replaceAll("\n", "\n\t"));
+    }
+
+    /**
+     * Helper method to print the log for task object being added
+     * 
+     * @param task The task object to be printed.
+     */
+    private void printAddedTaskMessage(Task task) {
+        String message =
+                "Got it. I've added this task:\n" +
+                "  " + task + "\n" +
+                String.format("Now you have %d tasks in the list.", this.list.size());
+        printMessage(message);
     }
 
     /**
@@ -176,5 +247,6 @@ public class Duke {
         Duke duke = new Duke("Duke");
 
         duke.start(sc);
+        sc.close();
     }
 }

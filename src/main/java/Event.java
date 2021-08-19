@@ -1,10 +1,10 @@
 /**
- * Represents a Event Task which inherits from Task and contains the dateTime for the event.
+ * Represents an Event Task which inherits from Task and contains the dateTime for the event.
  *
  * @author Sherman Ng Wei Sheng
  */
 public class Event extends Task {
-    private String dateTime;
+    private final String dateTime;
     
     /**
      * Constructor to initialise a new Event.

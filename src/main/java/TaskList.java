@@ -7,7 +7,7 @@ import java.util.List;
  * @author Sherman Ng Wei Sheng
  */
 public class TaskList {
-    private List<Task> list;
+    private final List<Task> list;
 
     /**
      * Constructor to initialise a new TaskList

@@ -4,7 +4,7 @@
  * @author Sherman Ng Wei Sheng
  */
 public class Task {
-    protected String description;
+    protected final String description;
     protected boolean isDone;
 
     /**

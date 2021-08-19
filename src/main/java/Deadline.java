@@ -4,7 +4,7 @@
  * @author Sherman Ng Wei Sheng
  */
 public class Deadline extends Task {
-    private String dateTime;
+    private final String dateTime;
     
     /**
      * Constructor to initialise a new Deadline.

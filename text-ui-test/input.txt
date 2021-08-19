@@ -1,13 +1,26 @@
-todo test todo
-deadline test deadline /by Week 2 Thu 2359
-event test event /at Week 2 Fri 1900
+todo
+todo 
+todo one
+deadline
+deadline 
+deadline two
+deadline two 
+deadline two /by
+deadline two /by 
+deadline two /by TODAY
+event
+event 
+event three
+event three 
+event three /by
+event three /by 
+event three /by TODAY
 list
-list
+done 0
 done 1
 done 2
-list
 done 3
+done 4
 list
-todo test todo again
-list
+byebye
 bye
