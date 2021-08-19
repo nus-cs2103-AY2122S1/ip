@@ -12,36 +12,56 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         Scanner scanner = new Scanner(System.in);
-        String description = scanner.nextLine();
+        String input = scanner.nextLine();
 
         Tasks tasks = new Tasks();
 
-        while (!description.equals("bye")) {
-            if (description.equals("list")) {
-                System.out.println(tasks);
-            } else {
-                if (description.matches(".* by .*")) {
-                    tasks.addTask(new Deadline(description));
-                } else if (description.matches(".* at .*")) {
-                    tasks.addTask(new Event(description));
+        while (!input.equals("bye")) {
+            if (input.equals("list")) {
+                if (tasks.isEmpty()) {
+                    System.out.println("\tYou haven't added any tasks yet\n");
                 } else {
-                    if (description.matches("done (\\d+)$")) {
-                        Integer taskNum = Integer.valueOf(description.split(" ")[1]);
-                        Task toMark = tasks.getTask(taskNum);
-                        if (toMark == null) {
-                            tasks.addTask(new ToDo(description));
-                        } else {
-                            toMark.markAsDone();
+                    System.out.println(tasks);
+                }
+            } else {
+                try {
+                    String[] commandAndDesc = input.split(" ", 2);
+                    String command = commandAndDesc[0];
+                    String description = commandAndDesc.length == 2 ? commandAndDesc[1] : "" ;
+
+                    if (command.equals("deadline")) {
+                        tasks.addTask(new Deadline(description));
+                    } else if (command.equals("event")) {
+                        tasks.addTask(new Event(description));
+                    } else if (command.equals("todo")) {
+                        tasks.addTask(new ToDo(description));
+                    } else if (command.equals("done")) {
+                        try {
+                            Integer taskNum = Integer.valueOf(description);
+                            Task toMark = tasks.getTask(taskNum);
+                            if (toMark == null) {
+                                System.out.println("\tSorry, I can't seem to find that task\n");
+                            } else {
+                                toMark.markAsDone();
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("\tI'm Sorry, WHAT?!?!\n");
                         }
                     } else {
-                        tasks.addTask(new ToDo(description));
+                        if (command.equals("")) {
+                            System.out.println("\tTake your time :)\n");
+                        } else {
+                            System.out.println("\tI don't understand that command (yet...)\n");
+                        }
                     }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
                 }
             }
-            description = scanner.nextLine();
+            input = scanner.nextLine();
         }
-
         scanner.close();
+
     }
 
 }

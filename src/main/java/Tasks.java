@@ -16,6 +16,10 @@ public class Tasks {
         System.out.println("\t Now you have " + tasks.size() + plural + "in the list.\n");
     }
 
+    public boolean isEmpty() {
+        return this.tasks.size() == 0;
+    }
+
     @Override
     public String toString() {
         String toPrint = "";

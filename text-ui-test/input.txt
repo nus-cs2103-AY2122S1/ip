@@ -1,7 +1,13 @@
-do A
-do B
-do C by 4:30
-D at 6
-done 3
+hello
+list
+todo
+todo do one thing
+deadline do 2 things
+deadline do 2 things by Monday
+event a birthday
+event a birthday at 21:00
+done 4
+done ife
+done 2
 list
 bye
