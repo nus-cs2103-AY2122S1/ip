@@ -10,7 +10,7 @@ public class Ui {
 //    }
 
     public static void greet() {
-        System.out.println("Hello! I'm core.Duke\n" + "What can I do for you?");
+        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         Ui.displayLine();
     }
 
