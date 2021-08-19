@@ -1,8 +1,12 @@
 public class Todo extends Task {
 
-    public Todo(String description) {
+    public Todo(String description) throws DukeException {
         super(description);
-        this.description = description;
+        if (description.isEmpty() || description == "" || description == " ") {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        } else {
+            this.description = description.substring(1);
+        }
     }
 
     @Override
