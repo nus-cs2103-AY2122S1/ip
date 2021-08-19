@@ -9,6 +9,7 @@ public class Duke {
         String display = "list";
         String lineBreak = "------------------------------";
         String markDone = "done";
+        String deleteTask = "delete";
         String taskTodo = "todo";
         String taskDdl = "deadline";
         String taskEve = "event";
@@ -39,6 +40,22 @@ public class Duke {
                     inputs.get(index).setDone();
                     System.out.println("Nice! I've marked this task as done: ");
                     System.out.println(inputs.get(index).toString());
+                    System.out.println(lineBreak + "\n");
+                }
+                continue;
+            }
+
+            // delete a task
+            Pattern patternDelete = Pattern.compile("delete\\s\\d+");
+            Matcher matcherDelete = patternDelete.matcher(input);
+            boolean matchFoundDelete = matcherDelete.find();
+            if (matchFoundDelete) {
+                String[] parts = input.split(" ");
+                int index = Integer.parseInt(parts[1]) - 1;
+                if (parts[0].equals(deleteTask) && index < inputs.size()) {
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println(inputs.get(index).toString());
+                    inputs.remove(index);
                     System.out.println(lineBreak + "\n");
                 }
                 continue;
