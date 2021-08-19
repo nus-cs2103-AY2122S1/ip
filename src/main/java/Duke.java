@@ -21,12 +21,14 @@ public class Duke {
      * method to add a task to the list in the chat bot,
      * adds the task to the next available slot in tasks,
      * then prints a statement saying the text has been added.
-     * @param task
+     * @param task task to be added
      */
     public void add(Task task) {
         tasks[counter] = task;
         counter++;
-        System.out.println("~~ added: " + task.toString() + " ~~");
+        System.out.println("\tGot it. I've added this task: ");
+        System.out.println("\t~~" + task.toString() + "~~");
+        System.out.println("\tNow you have " + counter + (counter > 1 ? " tasks" : " task") + " in the list.");
     }
 
     /**
@@ -45,13 +47,41 @@ public class Duke {
      * method to duke to mark a task as done.
      * Marks task indexed num - 1 in tasks done,
      * then, prints out the task.
-     * @param num
+     * @param num index of the task to be marked done
      */
+
     public void markDone(int num) {
         Task taskDone = tasks[num - 1];
         taskDone.markAsDone();
         System.out.println("\tNice! I've marked this task as done: ");
         System.out.println("\t~" + taskDone.toString() + "~ ");
+    }
+
+    /**
+     * method that returns the corresponding task depending on the input
+     * @param input task text
+     *              containing keywords "deadline", "event" or "todo"
+     * @return a subtype of Task depending on the keyword in the input
+     */
+
+    public Task setTask(String input) {
+        Task t;
+        if (input.contains("deadline")) {
+            int start = input.indexOf("deadline");
+            int by = input.indexOf("/");
+            String taskDescription = input.substring(start + "deadline ".length(), by - 1);
+            String taskDeadline = input.substring(by + "/by ".length());
+            t = new Deadline(taskDescription, taskDeadline);
+        } else if (input.contains("event")){
+            int start = input.indexOf("event");
+            int at = input.indexOf("/");
+            String eventDescription = input.substring(start + "event ".length(), at - 1);
+            String eventTime = input.substring(at + "/at ".length());
+            t = new Event(eventDescription, eventTime);
+        } else {
+            t = new Todo(input.substring("todo ".length()));
+        }
+        return t;
     }
 
     public static void main(String[] args) {
@@ -72,7 +102,8 @@ public class Duke {
                 int taskNum = Integer.parseInt(index);
                 duke.markDone(taskNum);
             } else {
-                duke.add(new Task(input));
+                Task t = duke.setTask(input);
+                duke.add(t);
             }
 
             input = sc.nextLine();
