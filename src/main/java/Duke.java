@@ -11,7 +11,7 @@ import Duke.task.Event;
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        TaskList list = new TaskList(100);
+        TaskList list = new TaskList();
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
 
