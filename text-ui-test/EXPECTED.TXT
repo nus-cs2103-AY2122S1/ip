@@ -2,13 +2,7 @@ Hello! I'm Duke
 What can I do for you?
 
 
-Oops i do not understand what you are saying.
-These are the commands i am familiar with:
-todo [task]
-deadline [task]/by[time]
-event [task]/at[time]
-list
-done [task number]
+Oops, unfortunately i am not yet smart enough to understand what you are saying
 
 
 Got it. I've added this task:
