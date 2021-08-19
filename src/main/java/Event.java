@@ -3,7 +3,7 @@
  *
  * Task that has a start and end time
  * @author Timothy Wong Eu-Jin
- * @version Level-4
+ * @version Level-6
  */
 public class Event extends Task {
 

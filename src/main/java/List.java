@@ -3,7 +3,7 @@ import java.util.ArrayList;
  * List class: Duke HAS-A List, List HAS-A Task
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-4
+ * @version Level-6
  */
 
 public class List {
@@ -29,6 +29,16 @@ public class List {
     //getIndex method to return a specific task
     public Task getIndex(int index) {
         return this.array.get(index - 1);
+    }
+
+    //removeTask method delete a task at a specific index
+    public void removeTask(int index) {
+        Task removedTask = this.getIndex(index);
+        this.array.remove(index - 1);
+        Duke.divider();
+        System.out.println("Noted. I've removed this task:\n" + removedTask.toString());
+        this.getNumOfTasks();
+        Duke.divider();
     }
 
     //getNumOfTasks method prints the number of tasks in the list

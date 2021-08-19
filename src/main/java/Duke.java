@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Duke class
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-4
+ * @version Level-6
  */
 public class Duke {
     private Scanner sc;
@@ -50,19 +50,18 @@ public class Duke {
         task.markAsDone();
     }
 
-    private void addToDo(String req) throws NoSuchElementException { //try catch here?
+    //addToDo method throws an exception if there is no description
+    private void addToDo(String req) throws NoSuchElementException {
         if (req.equals("todo")) {
             throw new NoSuchElementException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
-
         String[] splitReq = req.split(" ", 2);
-        String cmd = splitReq[0];
         String body = splitReq[1];
-
-        ToDo todo = new ToDo(req);
+        ToDo todo = new ToDo(body); //Could also throw and error in the constructor
         this.list.add(todo);
     }
 
+    //addDeadline method
     private void addDeadline(String req) {
         String[] splitReq = req.split("/by", 2);
         String desc = splitReq[0];
@@ -71,6 +70,7 @@ public class Duke {
         this.list.add(deadline);
     }
 
+    //addEvent method
     private void addEvent(String req) {
         String[] splitReq = req.split("/at", 2);
         String desc = splitReq[0];
@@ -79,9 +79,20 @@ public class Duke {
         this.list.add(event);
     }
 
+    //wrongInput method called from the default switch statement in this.run()
     private void wrongInput(String req) throws IllegalArgumentException {
       throw new IllegalArgumentException(
         "Sorry! I do not understand you? Try another command!");
+    }
+
+    //deleteTask method throws error if no number is appended to command
+    private void deleteTask(String req) throws NoSuchElementException {
+        if (req.equals("delete")) {
+            throw new NoSuchElementException("☹ OOPS!!! Please indicate a task to delete!");
+        }
+        String[] splitReq = req.split(" ", 2);
+        int index = Integer.parseInt(splitReq[1]);
+        this.list.removeTask(index);
     }
 
     //run method to start instance of duke
@@ -128,6 +139,14 @@ public class Duke {
 
                 case "event":
                     this.addEvent(splitReq[1]);
+                    break;
+
+                case "delete":
+                    try {
+                        this.deleteTask(req);
+                    } catch (NoSuchElementException e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
 
                 default:
