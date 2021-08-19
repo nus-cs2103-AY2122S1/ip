@@ -36,8 +36,19 @@ public class Duke {
             String substr = str.replaceFirst("done ", "");
             int index = Integer.parseInt(substr);
             System.out.println(toDoList.markDone(index));
+        } else if (str.startsWith("todo")) {
+            String substr = str.replaceFirst("todo ", "");
+            System.out.println(toDoList.addToDo(substr));
+        } else if (str.startsWith("deadline")) {
+            String substr = str.replaceFirst("deadline ", "");
+            String[] substrArray = substr.split(" /by ", 2);
+            System.out.println(toDoList.addDeadLine(substrArray[0], substrArray[1]));
+        } else if (str.startsWith("event")) {
+            String substr = str.replaceFirst("event ", "");
+            String[] substrArray = substr.split(" /at ", 2);
+            System.out.println(toDoList.addDeadLine(substrArray[0], substrArray[1]));
         } else {
-            System.out.println(toDoList.add(str));
+            System.out.println("???");
         }
         return true;
     }
