@@ -9,15 +9,10 @@ public class Tool {
         return s;
     }
 
-    public static String getTaskDescription(String s) {
-        String description;
-        if (!s.contains(" ")) return s;
-        if (s.contains("/")) {
-            description = s.substring(s.indexOf(" "), s.indexOf("/"));
-        } else {
-            description = s.substring(s.indexOf(" "));
-        }
-        return description;
+    public static String getTaskDescription(String s) throws EmptyTaskDescriptionException {
+        if (!s.contains(" ") ||s.substring(s.indexOf(" ")).trim().length() == 0) throw new EmptyTaskDescriptionException();
+        if (s.contains("/")) return s.substring(s.indexOf(" "), s.indexOf("/"));
+        else return s.substring(s.indexOf(" "));
     }
 
     public static String getTaskTime(String s) {
@@ -34,11 +29,26 @@ public class Tool {
      */
     public static int getDoneIndex(String s) {
         try {
-            int index  = Integer.parseInt(s.substring(5));
-            return index;
-        } catch (NumberFormatException e){
+            if (s.length() < 6) throw new TaskIndexNotSpecifiedException();
+            try {
+                int index  = Integer.parseInt(s.substring(5));
+                return index;
+            } catch (NumberFormatException e) {
+                throw new InvalidInputException();
+            }
+        } catch (InvalidInputException e) {
+            System.out.println(e.getMessage());
             return 0;
+        } catch (TaskIndexNotSpecifiedException e) {
+            System.out.println(e.getMessage());
+            return -1;
         }
+    }
+
+    public static boolean isTaskCategorized(String s) throws TaskNotCategorizedException {
+        String type = getFirstWord(s);
+        if (type.equals("todo") || type.equals("deadline") || type.equals("event")) return true;
+        else throw new TaskNotCategorizedException();
     }
 
 }
