@@ -3,8 +3,12 @@ package Duke.Commands;
 import Duke.Duke;
 import Duke.Task.Todo;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 class AddTodoCommand extends Command {
-    private static final String KEYWORD = "todo";
+    private static final Set<String> KEYWORDS = new HashSet<>(List.of("todo"));
     private static final String ADD_TODO_SUCCESS_MESSAGE = "added: %s";
 
     @Override
@@ -15,7 +19,7 @@ class AddTodoCommand extends Command {
     }
 
     @Override
-    protected String getKeyword() {
-        return KEYWORD;
+    protected Set<String> getKeywords() {
+        return KEYWORDS;
     }
 }

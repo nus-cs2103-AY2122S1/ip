@@ -2,6 +2,8 @@ package Duke.Commands;
 
 import Duke.Duke;
 
+import java.util.Set;
+
 class UnknownCommand extends Command {
     private static final String HELP_MESSAGE = "Sorry I didn't understand what you meant by: %s";
 
@@ -11,7 +13,7 @@ class UnknownCommand extends Command {
     }
 
     @Override
-    protected String getKeyword() {
+    protected Set<String> getKeywords() {
         return null;
     }
 }

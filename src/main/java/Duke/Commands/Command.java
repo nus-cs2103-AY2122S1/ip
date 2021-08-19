@@ -2,6 +2,8 @@ package Duke.Commands;
 
 import Duke.Duke;
 
+import java.util.Set;
+
 public abstract class Command {
     private static final Command[] COMMAND_LIST = {
             new ExitCommand(),
@@ -18,8 +20,9 @@ public abstract class Command {
      * @return the respective command object if matched, the unknown command object otherwise
      */
     public static Command matching(Duke.UserInput input) {
+        String keyword = input.getKeyword().toLowerCase();
         for (Command cmd : COMMAND_LIST) {
-            if (cmd.getKeyword().equalsIgnoreCase(input.getKeyword()))
+            if (cmd.getKeywords().contains(keyword))
                 return cmd;
         }
 
@@ -28,5 +31,5 @@ public abstract class Command {
 
     abstract public void run(Duke duke, Duke.UserInput input);
 
-    abstract protected String getKeyword();
+    abstract protected Set<String> getKeywords();
 }
