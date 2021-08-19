@@ -10,8 +10,8 @@ The spark to meet your needs.
 How can I assist you ?
 ```
 
-#How to Use
+# How to Use
 Refer to docs folder
 
-#Extra info
+# Extra info
 This project is developed using JDK11.
