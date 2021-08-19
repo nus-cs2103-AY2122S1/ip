@@ -3,6 +3,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+
+    public enum Command {BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE}
+
     private boolean active;
     private final List<Task> list;
 
@@ -13,29 +16,35 @@ public class Duke {
 
     public void executeCommand(String input) throws DukeException {
         String[] parsedInput = input.split(" ");
-        switch (parsedInput[0]) {
-            case "bye":
+        Command command;
+        try {
+            command = Command.valueOf(parsedInput[0].toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new InvalidCommandException("Invalid Command");
+        }
+        switch (command) {
+            case BYE:
                 this.terminate();
                 break;
-            case "list":
+            case LIST:
                 this.listTasks();
                 break;
-            case "done":
+            case DONE:
                 if (parsedInput.length <= 1) {
                     throw new TaskIndexOutOfBoundException("Missing Task Number!");
                 }
                 this.done(Integer.parseInt(parsedInput[1]) - 1);
                 break;
-            case "todo":
+            case TODO:
                 this.addTodo(input);
                 break;
-            case "deadline":
+            case DEADLINE:
                 this.addDeadline(input);
                 break;
-            case "event":
+            case EVENT:
                 this.addEvent(input);
                 break;
-            case "delete":
+            case DELETE:
                 if (parsedInput.length <= 1) {
                     throw new TaskIndexOutOfBoundException("Missing Task Number!");
                 }
