@@ -1,19 +1,21 @@
 import java.util.Scanner;
 
 public class Duke {
-    static String DEFAULT_ERROR_MSG = "im sorry I is no understand.";
-    static String EXIT_MSG = "okay is bye!!";
-    static String NO_TASKS_MSG = "is no tasks today.";
-    static String TOO_MANY_TASKS_MSG = "memory is full please is try later.";
-    static String NOT_ENOUGH_TASKS_MSG = "we is dont have that many tasks yet.";
-    static String INVALID_TASK_NUMBER_MSG = "what kind of number is (||❛︵❛.)";
-    static String TASK_DONE_MSG = "is done!";
+    private static String DEFAULT_ERROR_MSG = "im sorry I is no understand.";
+    private static String BLANK_DESCRIPTION_ERROR_MSG = "is no leave description blank okay.";
+    private static String UNSPECIFIED_TASK_ERROR_MSG = "please is specify task please,";
+    private static String EXIT_MSG = "okay is bye!!";
+    private static String NO_TASKS_MSG = "is no tasks today.";
+    private static String TOO_MANY_TASKS_MSG = "memory is full please is try later.";
+    private static String NOT_ENOUGH_TASKS_MSG = "we is dont have that many tasks yet.";
+    private static String INVALID_TASK_NUMBER_MSG = "what kind of number is (||❛︵❛.)";
+    private static String TASK_DONE_MSG = "is done!";
 
-    static Scanner sc = new Scanner(System.in);
-    static boolean running = true;
+    private static Scanner sc = new Scanner(System.in);
+    private static boolean running = true;
 
-    static Task[] tasks = new Task[100];
-    static int taskIndex = 0;
+    private static Task[] tasks = new Task[100];
+    private static int taskIndex = 0;
 
     private static void listTasks() {
         if (taskIndex == 0) {
@@ -37,21 +39,25 @@ public class Duke {
         }
     }
 
-    private static void completeTask(String input) {
+    private static void completeTask(String input) throws DukeException {
         try {
-            int i = Integer.parseInt(input.substring(5));
-            if (i > taskIndex) {
-                System.out.println(NOT_ENOUGH_TASKS_MSG);
-            } else if (i <= 0) {
-                System.out.println(INVALID_TASK_NUMBER_MSG);
+            if (input.length() < 1) {
+                throw new DukeException(UNSPECIFIED_TASK_ERROR_MSG);
             } else {
-                Task task = tasks[i - 1];
-                task.markAsDone();
-                System.out.println(TASK_DONE_MSG);
-                System.out.println(task.toString());
+                int i = Integer.parseInt(input.substring(1));
+                if (i > taskIndex) {
+                    throw new DukeException(NOT_ENOUGH_TASKS_MSG);
+                } else if (i <= 0) {
+                    throw new DukeException(INVALID_TASK_NUMBER_MSG);
+                } else {
+                    Task task = tasks[i - 1];
+                    task.markAsDone();
+                    System.out.println(TASK_DONE_MSG);
+                    System.out.println(task.toString());
+                }
             }
         } catch (NumberFormatException e) {
-            System.out.println(DEFAULT_ERROR_MSG);
+            throw new DukeException(DEFAULT_ERROR_MSG);
         }
     }
 
@@ -60,33 +66,59 @@ public class Duke {
         running = false;
     }
 
-    private static void parseInput(String input) {
-        if (input.equals("bye")) {
-            exit();
-        } else if (input.equals("list")) {
-            listTasks();
-        } else if (input.startsWith("done ")) {
-            completeTask(input);
-        } else if (input.startsWith("todo ")) {
-            addTask(new ToDo(input.substring(5)));
-        } else if (input.startsWith("deadline ")) {
-            String description = input.substring(9);
+    private static void addToDo(String description) throws DukeException {
+        if (description.length() <= 1) {
+            throw new DukeException(BLANK_DESCRIPTION_ERROR_MSG);
+        } else {
+            addTask(new ToDo(description.substring(1)));
+        }
+    }
+
+    private static void addDeadline(String description) throws DukeException {
+        if (description.length() <= 1) {
+            throw new DukeException(BLANK_DESCRIPTION_ERROR_MSG);
+        } else {
             int i = description.indexOf(" /by ");
             if (i < 0) {
                 addTask(new Deadline(description));
             } else {
                 addTask(new Deadline(description.substring(0, i), description.substring(i + 5)));
             }
-        } else if (input.startsWith("event ")) {
-            String description = input.substring(6);
+        }
+    }
+
+    private static void addEvent(String description) throws DukeException {
+        if (description.length() <= 1) {
+            throw new DukeException(BLANK_DESCRIPTION_ERROR_MSG);
+        } else {
             int i = description.indexOf(" /at ");
             if (i < 0) {
                 addTask(new Event(description));
             } else {
                 addTask(new Event(description.substring(0, i), description.substring(i + 5)));
             }
-        } else {
-            System.out.println(DEFAULT_ERROR_MSG);
+        }
+    }
+
+    private static void parseInput(String input) {
+        try {
+            if (input.equals("bye")) {
+                exit();
+            } else if (input.equals("list")) {
+                listTasks();
+            } else if (input.startsWith("done")) {
+                completeTask(input.substring(4));
+            } else if (input.startsWith("todo")) {
+                addToDo(input.substring(4));
+            } else if (input.startsWith("deadline")) {
+                addDeadline(input.substring(8));
+            } else if (input.startsWith("event")) {
+                addEvent(input.substring(5));
+            } else {
+                throw new DukeException(DEFAULT_ERROR_MSG);
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
