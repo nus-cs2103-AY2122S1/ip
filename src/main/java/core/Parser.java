@@ -12,6 +12,8 @@ public class Parser {
                     return new ListCommand();
                 case "done":
                     return new DoneCommand(Integer.valueOf(splittedInput[1]));
+                case "delete":
+                    return new DeleteCommand(Integer.valueOf(splittedInput[1]));
                 case "bye":
                     return new ByeCommand();
                 case "todo":
