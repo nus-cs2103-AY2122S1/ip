@@ -15,6 +15,11 @@ public class Duke {
         while (shouldContinue) {//create loop for the chat
             if (input.startsWith("done ")) {
                 String[] parts = input.split(" ");
+                if(parts.length <= 1) {
+                    System.out.println("☹ OOPS!!! I'm sorry, you need to specify which task is done :)");
+                    input = sc.nextLine();
+                    continue;
+                }
                 String numStr = parts[1];
                 int numInt = Integer.valueOf(numStr);
                 System.out.println("Nice! I've marked this task as done: ");
@@ -22,17 +27,33 @@ public class Duke {
                 input = sc.nextLine();
                 continue;
             } else if (input.startsWith("todo ")) {
-                list.addToDo(input.replaceFirst("todo ", ""));
+                String task = input.replaceFirst("todo ", "");
+                if (task.isBlank()) {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    input = sc.nextLine();
+                    continue;
+                }
+                list.addToDo(task);
                 input = sc.nextLine();
                 continue;
             } else if (input.startsWith("deadline ")) {
                 String task = input.replaceFirst("deadline ", "");
+                if (task.isBlank()) {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    input = sc.nextLine();
+                    continue;
+                }
                 String[] parts = task.split("/by");
                 list.addDeadline(parts[0], parts[1]);
                 input = sc.nextLine();
                 continue;
             } else if (input.startsWith("event ")) {
                 String task = input.replaceFirst("event ", "");
+                if (task.isBlank()) {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    input = sc.nextLine();
+                    continue;
+                }
                 String[] parts = task.split("/at");
                 list.addEvent(parts[0], parts[1]);
                 input = sc.nextLine();
@@ -52,8 +73,7 @@ public class Duke {
                     break;
 
                 default:
-                    System.out.println("added: " + input);
-                    list.addToDo(input);
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     input = sc.nextLine();
             }
         }
