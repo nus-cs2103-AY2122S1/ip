@@ -44,9 +44,10 @@ public class Duke {
                     System.out.println( (i+1) + ": " + inputs.get(i));
                 }
             } else if (input.matches("deadline\\s(.*?)/by\\s(.*?)")) {
-                String firstCommand = input.split("/by")[0];
+                String firstCommand = input.split("/by", 2)[0];
+                System.out.println(input.split("/by", 2)[1]);
                 String taskname = firstCommand.split(" ", 2)[1];
-                String dueDate = input.split("/by")[1];
+                String dueDate = input.split("/by", 2)[1];
                 Deadline deadline = new Deadline(taskname, dueDate);
                 inputs.add(deadline);
                 System.out.println("A Deadline has been added\n");
@@ -56,9 +57,9 @@ public class Duke {
                     System.out.println( (i+1) + ": " + inputs.get(i));
                 }
             } else if (input.matches("event\\s(.*?)/at(.*?)")) {
-                String firstCommand = input.split("/at")[0];
+                String firstCommand = input.split("/at", 2)[0];
                 String taskname = firstCommand.split(" ", 2)[1];
-                String duration = input.split("/at")[1];
+                String duration = input.split("/at", 2)[1];
                 Event event = new Event(taskname, duration);
                 inputs.add(event);
                 System.out.println("Event: " + taskname + "has been added\n");
