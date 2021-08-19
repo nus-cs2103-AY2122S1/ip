@@ -1,3 +1,4 @@
+list
 read book
 todo read book
 deadline return book /by June 6th
@@ -8,5 +9,21 @@ done 1
 done 2
 done 4
 done 6
+done 0
+done -1
+done s12
+list
+delete 3
+list
+todo
+blah
+event /at infinity
+deadline hello
+list asdfahjk
+deadline do homework /by no idea :-p
+delete s32
+delete 6
+delete 0
+delete -1
 list
 bye

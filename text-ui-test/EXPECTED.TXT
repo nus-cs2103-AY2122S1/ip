@@ -2,6 +2,8 @@
 Hello! I'm Duke
 What can I do for you?
 *******************************************
+Here are the tasks in your list:
+*******************************************
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 *******************************************
 Got it. I've added this task:
@@ -35,12 +37,57 @@ Nice! I've marked this task as done:
 *******************************************
 ☹ OOPS!!! Task number 6 does not exist!
 *******************************************
+☹ OOPS!!! Task number 0 does not exist!
+*******************************************
+☹ OOPS!!! Task number -1 does not exist!
+*******************************************
+☹ OOPS!!! Please only enter an integer after command 'done'!
+*******************************************
 Here are the tasks in your list:
 1.[T][X] read book
 2.[D][X] return book (by: June 6th)
 3.[E][ ] project meeting (at: Aug 6th 2-4pm)
 4.[T][X] join sports club
 5.[T][ ] borrow book
+*******************************************
+Noted. I've removed this task:
+  [E][ ] project meeting (at: Aug 6th 2-4pm)
+Now you have 4 tasks in the list.
+*******************************************
+Here are the tasks in your list:
+1.[T][X] read book
+2.[D][X] return book (by: June 6th)
+3.[T][X] join sports club
+4.[T][ ] borrow book
+*******************************************
+☹ OOPS!!! The description of a todo cannot be empty.
+*******************************************
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+*******************************************
+☹ OOPS!!! The description and time of an event cannot be empty.
+*******************************************
+☹ OOPS!!! The description and time of a deadline cannot be empty.
+*******************************************
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+*******************************************
+Got it. I've added this task:
+  [D][ ] do homework (by: no idea :-p)
+Now you have 5 task(s) in the list.
+*******************************************
+☹ OOPS!!! Please only enter an integer after command 'delete'!
+*******************************************
+☹ OOPS!!! Task number e 6 does not exist!
+*******************************************
+☹ OOPS!!! Task number e 0 does not exist!
+*******************************************
+☹ OOPS!!! Task number e -1 does not exist!
+*******************************************
+Here are the tasks in your list:
+1.[T][X] read book
+2.[D][X] return book (by: June 6th)
+3.[T][X] join sports club
+4.[T][ ] borrow book
+5.[D][ ] do homework (by: no idea :-p)
 *******************************************
 Bye. Hope to see you again soon!
 *******************************************
