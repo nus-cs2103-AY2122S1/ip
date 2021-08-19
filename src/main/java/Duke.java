@@ -1,8 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_PURPLE = "\u001B[35m";
+
+    public static final List<String> TASKS = new ArrayList<>();
 
     public static void main(String[] args) {
         greet();
@@ -33,9 +37,25 @@ public class Duke {
             case "bye":
                 handleBye();
                 break;
+            case "list":
+                handleList();
+                break;
             default:
-                hikoPrint(input);
+                handleAdd(input);
         }
+    }
+
+    private static void handleAdd(String input) {
+        TASKS.add(input);
+        hikoPrint("added: " + input + "\n");
+    }
+
+    private static void handleList() {
+        String output = "";
+        for (int i = 1; i <= TASKS.size(); i++) {
+            output = output +  i + ". " + TASKS.get(i - 1) + "\n";
+        }
+        hikoPrint(output);
     }
 
     private static void handleBye() {
