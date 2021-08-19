@@ -24,9 +24,11 @@ public class Duke {
         greeting.add("What can I do for you?");
         Dialog commandsList = Dialog.generate("commands");
         commandsList.add("This is the following commands, I can perform:\n");
-        commandsList.add("1. 'add <task description>' - add the task to the list");
+        commandsList.add("1. 'todo <task description>' - add a todo task to the list");
+        commandsList.add("2. 'deadline <task description> /by <by when>' - add a deadline task with specific deadline");
+        commandsList.add("3. 'event <task description> /at <at when>' - add an event task with specific time");
         commandsList.add("2. 'list' - show the current task list");
-        commandsList.add("3. 'done <task index> - mark that task as done");
+        commandsList.add("3. 'done <task index>' - mark that task as done");
         commandsList.add("4. 'commands' - show this current command window");
         commandsList.add("5. 'bye' - end session");
         System.out.println(greeting);
@@ -35,16 +37,26 @@ public class Duke {
         String input = sc.nextLine();
         TaskDialog list = (TaskDialog) TaskDialog.generate("list");
         while (!input.equals("bye")) {
-            String[] commands = input.split(" ");
-            switch(commands[0]) {
+            String command = input.split(" ")[0];
+            switch(command) {
                 case "list":
                     System.out.println(list);
                     break;
-                case "add":
-                    list.addTask(new Task(input.substring(("add ").length())));
+                case "todo":
+                    list.addTask(new Todo(input.substring(("todo ").length())));
+                    break;
+                case "deadline":
+                    String dDescription = input.substring(("deadline ").length(), input.indexOf("/"));
+                    String by = input.substring(input.indexOf("/by ") + "/by ".length());
+                    list.addTask(new Deadline(dDescription, by));
+                    break;
+                case "event":
+                    String eDescription = input.substring(("event ").length(), input.indexOf("/"));
+                    String at = input.substring(input.indexOf("/at ") + "/at ".length());
+                    list.addTask(new Event(eDescription, at));
                     break;
                 case "done":
-                    list.markTaskAsDone(Integer.parseInt(commands[1]) - 1);
+                    list.markTaskAsDone(Integer.parseInt(input.substring(("done ").length())) - 1);
                     break;
                 case "commands":
                     System.out.println(commandsList);
