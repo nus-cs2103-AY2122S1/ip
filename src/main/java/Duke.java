@@ -2,10 +2,60 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    enum TaskType {
+        TODO, DEADLINE, EVENT
+    }
+
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
     public static void addTask(Task task) {
         tasks.add(task);
+    }
+
+    private static void printAddedTask(Task task) {
+        Message addMessage = new Message("\tGot it. I've added this task:\n\t\t"
+                + task
+                + "\n\tTask(s) remaining in the list: "
+                + tasks.size()
+        );
+        addMessage.printMessage();
+    }
+
+    public static void addTaskByDescription(TaskType type, String description) throws DukeException {
+        switch (type) {
+            case TODO: {
+                if (description.trim().isEmpty()) {
+                    throw new InvalidCommandException();
+                } else {
+                    Task task = new ToDo(description);
+                    Duke.addTask(task);
+                    printAddedTask(task);
+                }
+                break;
+            }
+            case DEADLINE: {
+                if (description.contains("/by")) {
+                    String[] information = description.split("/by ");
+                    Task task = new Deadline(information[0], information[1]);
+                    Duke.addTask(task);
+                    printAddedTask(task);
+                } else {
+                    throw new CommandNotUsedException("/by");
+                }
+                break;
+            }
+            case EVENT: {
+                if (description.contains("/at")) {
+                    String[] information = description.split("/at ");
+                    Task task = new Event(information[0], information[1]);
+                    Duke.addTask(task);
+                    printAddedTask(task);
+                } else {
+                    throw new CommandNotUsedException("/at");
+                }
+                break;
+            }
+        }
     }
 
     public static void removeTask(int index) {
@@ -29,15 +79,6 @@ public class Duke {
         return new Message(itemList.toString());
     }
 
-    private static void printAddedTask(Task task) {
-        Message addMessage = new Message("\tGot it. I've added this task:\n\t\t"
-                + task
-                + "\n\tTask(s) remaining in the list: "
-                + tasks.size()
-        );
-        addMessage.printMessage();
-    }
-
     public static void applyCommand(String command) throws DukeException {
         if (command.contains(" ")) {
             String commandType = command.split(" ", 2)[0];
@@ -45,35 +86,15 @@ public class Duke {
 
             switch (commandType) {
                 case "todo": {
-                    if (description.trim().isEmpty()) {
-                        throw new InvalidCommandException();
-                    } else {
-                        Task task = new ToDo(description);
-                        Duke.addTask(task);
-                        printAddedTask(task);
-                    }
+                    Duke.addTaskByDescription(TaskType.TODO, description);
                     return;
                 }
                 case "deadline": {
-                    if (description.contains("/by")) {
-                        String[] information = description.split("/by ");
-                        Task task = new Deadline(information[0], information[1]);
-                        Duke.addTask(task);
-                        printAddedTask(task);
-                    } else {
-                        throw new CommandNotUsedException("/by");
-                    }
+                    Duke.addTaskByDescription(TaskType.DEADLINE, description);
                     return;
                 }
                 case "event": {
-                    if (description.contains("/at")) {
-                        String[] information = description.split("/at ");
-                        Task task = new Event(information[0], information[1]);
-                        Duke.addTask(task);
-                        printAddedTask(task);
-                    } else {
-                        throw new CommandNotUsedException("/at");
-                    }
+                    Duke.addTaskByDescription(TaskType.EVENT, description);
                     return;
                 }
                 case "done": {
