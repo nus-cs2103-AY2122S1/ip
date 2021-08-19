@@ -18,15 +18,22 @@ public class Duke {
 
         System.out.println(displayLabel(welcomeLabel));
 
+        // for Level 2
         ArrayList<String> items = new ArrayList<>();
-        ArrayList<Task> tasks = new ArrayList<>();
-        Scanner userInput = new Scanner(System.in);
-        String input = userInput.nextLine();
 
+        // for Level 3 onwards
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        Scanner userInput = new Scanner(System.in);
+
+        // remove try catch for levels 1-4
         try {
-            while (!input.equals("bye")) {
-                Level6(input, tasks);
-                input = userInput.nextLine();
+            while (true) {
+                String input = userInput.nextLine();
+                if (input.equals("bye")) {
+                    break;
+                }
+                Level5(input, tasks);
             }
             System.out.println(displayLabel(byeLabel));
         } catch (DukeException e) {
@@ -129,6 +136,10 @@ public class Duke {
     public static void Level5(String input, ArrayList<Task> tasks) throws DukeException {
             if (input.equals("todo") || input.equals("event") || input.equals("deadline")) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            } else if (input.equals("done")) {
+                throw new DukeException("☹ OOPS!!! The completed task number must be given.");
+            } else if (input.equals("delete")) {
+                throw new DukeException("☹ OOPS!!! You need to specify which task you want to delete.");
             } else if (input.equals("blah")) {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             } else {
