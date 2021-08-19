@@ -36,6 +36,13 @@ public class Duke {
                 System.out.println(line);
                 System.out.println("Nice! I've marked this task as done:\n" + thisTask.toString());
                 System.out.println(line);
+            } else if (parts[0].equals("delete")) {
+                int index = Integer.valueOf(parts[1]);
+                Task thisTask = task.remove(index - 1);
+                System.out.println(line);
+                System.out.println("Noted I've removed this task:\n" + thisTask.toString());
+                System.out.println("Now you have " + task.size() + " tasks in your list");
+                System.out.println(line);
             } else if (parts.length == 1) {
                 System.out.println(line);
                 System.out.println("☹ OOPS!!! The description of a " + parts[0] + " cannot be empty.");
