@@ -20,6 +20,38 @@ public class Duke {
         this.listOfTasks = TaskList.makeNewTaskList();
     }
 
+    /**
+     * Represents the action command keyed in by the user.
+     */
+    public enum Action {
+        LIST("list"),
+        BYE("bye"),
+        DONE("done"),
+        TASK("task"),
+        DELETE("delete"),
+        ERRORS("error");
+
+        private final String actionCommand;
+
+        private Action(String actionCommmand) {
+            this.actionCommand = actionCommmand;
+        }
+
+        /**
+         * Returns the Action type ENUM for each string
+         * @param s action word typed in by user
+         * @return Action that corresponds to the user's entry
+         */
+        public static Action getAction(String s) {
+            for (Action a : values()) {
+                if (a.actionCommand.equals(s)) {
+                    return a;
+                }
+            }
+            return ERRORS;
+        }
+    }
+
     private void openDukeChatBot() {
         this.isOpen = true;
         System.out.println(chatBotMessage(this.dukeLogo + "\n" +
@@ -75,33 +107,50 @@ public class Duke {
         return this.listOfTasks.deleteTask(i);
     }
 
+    /**
+     * Function that runs to execute the chatbot Duke
+     * @param args user inputs
+     */
     public static void main(String[] args) {
         Duke d = new Duke();
         d.openDukeChatBot();
         Scanner sc = new Scanner(System.in);
         while (d.isOpen) {
             try {
-                String userInput = sc.nextLine();
-                if (userInput.equals("bye")) {
-                    d.closeDukeChatBot();
-                    sc.close();
-                } else if (userInput.equals("list")) {
-                    System.out.println(d.chatBotMessage(d.listOfTasks.toString()));
-                } else if (d.getFirstWord(userInput).equals("done")) {
-                    int i = d.getSecondNum(userInput);
-                    d.listOfTasks.setTaskAsDone(i);
-                    System.out.println(d.chatBotMessage("\tNice! I've marked this task as done:\n" +
-                            "\t\t" + d.listOfTasks.getTask(i - 1) + "\n"));
-                } else if (d.getFirstWord(userInput).equals("delete")) {
-                    int i = d.getSecondNum(userInput);
-                    Task taskRemoved = d.deleteTask(i);
-                    System.out.println(d.chatBotMessage("\tNoted. I've removed this task:\n" +
-                            "\t\t" + taskRemoved + "\n"));
-                } else {
-                    System.out.println(d.chatBotMessage("\tGot it. I've added this task:\n" +
-                            "\t\t" + d.addTaskToList(userInput) + "\n" +
-                            "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n"
-                            ));
+                String userInput = sc.nextLine().strip();
+                String firstWord = d.getFirstWord(userInput);
+                firstWord = firstWord.equals("todo") || firstWord.equals("event") || firstWord.equals("deadline")
+                            ? "task" : firstWord;
+                Action actionCommand = Action.getAction(firstWord);
+
+                switch (actionCommand) {
+                    case BYE:
+                        d.closeDukeChatBot();
+                        sc.close();
+                        break;
+                    case LIST:
+                        System.out.println(d.chatBotMessage(d.listOfTasks.toString()));
+                        break;
+                    case DONE:
+                        d.listOfTasks.setTaskAsDone(d.getSecondNum(userInput));
+                        System.out.println(d.chatBotMessage("\tNice! I've marked this task as done:\n" +
+                                "\t\t" + d.listOfTasks.getTask(d.getSecondNum(userInput) - 1) + "\n"));
+                        break;
+                    case DELETE:
+                        Task taskRemoved = d.deleteTask(d.getSecondNum(userInput));
+                        System.out.println(d.chatBotMessage("\tNoted. I've removed this task:\n" +
+                                "\t\t" + taskRemoved + "\n" +
+                                "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n"
+                        ));
+                        break;
+                    case TASK:
+                        System.out.println(d.chatBotMessage("\tGot it. I've added this task:\n" +
+                                "\t\t" + d.addTaskToList(userInput) + "\n" +
+                                "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n"
+                        ));
+                        break;
+                    case ERRORS:
+                        throw new DukeIncorrectCommandWord(new IllegalArgumentException());
                 }
             } catch (DukeException e) {
                 System.err.println(d.chatBotMessage(e.getMessage() + "\n"));

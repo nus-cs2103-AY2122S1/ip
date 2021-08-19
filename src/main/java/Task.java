@@ -48,7 +48,6 @@ public class Task {
         } else {
             throw new DukeIncorrectCommandWord(new IllegalArgumentException());
         }
-
     }
 
     /**
