@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -6,37 +7,36 @@ public class Duke {
     private static String UNSPECIFIED_TASK_ERROR_MSG = "please is specify task please,";
     private static String EXIT_MSG = "okay is bye!!";
     private static String NO_TASKS_MSG = "is no tasks today.";
-    private static String TOO_MANY_TASKS_MSG = "memory is full please is try later.";
+    //private static String TOO_MANY_TASKS_MSG = "memory is full please is try later.";
     private static String NOT_ENOUGH_TASKS_MSG = "we is dont have that many tasks yet.";
     private static String INVALID_TASK_NUMBER_MSG = "what kind of number is (||❛︵❛.)";
     private static String TASK_DONE_MSG = "is done!";
+    private static String TASK_ADDED_MSG = "is added.";
+    private static String TASK_DELETED_MSG = "is deleted!";
 
     private static Scanner sc = new Scanner(System.in);
     private static boolean running = true;
 
-    private static Task[] tasks = new Task[100];
-    private static int taskIndex = 0;
+    //private static Task[] tasks = new Task[100];
+    private static ArrayList<Task> tasks = new ArrayList<>();
+    //private static int taskIndex = 0;
 
     private static void listTasks() throws DukeException {
-        if (taskIndex == 0) {
+        if (tasks.size() == 0) {
             throw new DukeException(NO_TASKS_MSG);
         } else {
-            for (int i = 1; i <= taskIndex; i++) {
-                Task currTask = tasks[i - 1];
-                System.out.println(i + "." + currTask.toString() + ".");
+            for (int i = 1; i <= tasks.size(); i++) {
+                System.out.println(i + "." + tasks.get(i - 1).toString() + ".");
             }
         }
     }
 
     private static void addTask(Task newTask) {
-        if (taskIndex >= 100) {
-            System.out.println(TOO_MANY_TASKS_MSG);
-        } else {
-            tasks[taskIndex] = newTask;
-            taskIndex++;
-            System.out.println("is added.\n" + newTask.toString());
-            System.out.println("now is have " + taskIndex + " tasks.");
-        }
+            tasks.add(newTask);
+            System.out.println(TASK_ADDED_MSG);
+            System.out.println(newTask.toString());
+            System.out.println("now is have " + tasks.size() + " task" +
+                    (tasks.size() == 1 ? "" : "s") + ".");
     }
 
     private static void completeTask(String input) throws DukeException {
@@ -45,15 +45,39 @@ public class Duke {
                 throw new DukeException(UNSPECIFIED_TASK_ERROR_MSG);
             } else {
                 int i = Integer.parseInt(input.substring(1));
-                if (i > taskIndex) {
+                if (i > tasks.size()) {
                     throw new DukeException(NOT_ENOUGH_TASKS_MSG);
                 } else if (i <= 0) {
                     throw new DukeException(INVALID_TASK_NUMBER_MSG);
                 } else {
-                    Task task = tasks[i - 1];
+                    Task task = tasks.get(i - 1);
                     task.markAsDone();
                     System.out.println(TASK_DONE_MSG);
                     System.out.println(task.toString());
+                }
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException(DEFAULT_ERROR_MSG);
+        }
+    }
+
+    private static void deleteTask(String input) throws DukeException {
+        try {
+            if (input.length() < 1) {
+                throw new DukeException(UNSPECIFIED_TASK_ERROR_MSG);
+            } else {
+                int i = Integer.parseInt(input.substring(1));
+                if (i > tasks.size()) {
+                    throw new DukeException(NOT_ENOUGH_TASKS_MSG);
+                } else if (i <= 0) {
+                    throw new DukeException(INVALID_TASK_NUMBER_MSG);
+                } else {
+                    Task task = tasks.get(i - 1);
+                    tasks.remove(i - 1);
+                    System.out.println(TASK_DELETED_MSG);
+                    System.out.println(task.toString());
+                    System.out.println("now is have " + tasks.size() + " task" +
+                            (tasks.size() == 1 ? "" : "s") + ".");
                 }
             }
         } catch (NumberFormatException e) {
@@ -80,9 +104,9 @@ public class Duke {
         } else {
             int i = description.indexOf(" /by ");
             if (i < 0) {
-                addTask(new Deadline(description));
+                addTask(new Deadline(description.substring(1)));
             } else {
-                addTask(new Deadline(description.substring(0, i), description.substring(i + 5)));
+                addTask(new Deadline(description.substring(1, i), description.substring(i + 5)));
             }
         }
     }
@@ -93,9 +117,9 @@ public class Duke {
         } else {
             int i = description.indexOf(" /at ");
             if (i < 0) {
-                addTask(new Event(description));
+                addTask(new Event(description.substring(1)));
             } else {
-                addTask(new Event(description.substring(0, i), description.substring(i + 5)));
+                addTask(new Event(description.substring(1, i), description.substring(i + 5)));
             }
         }
     }
@@ -114,6 +138,8 @@ public class Duke {
                 addDeadline(input.substring(8));
             } else if (input.startsWith("event")) {
                 addEvent(input.substring(5));
+            } else if (input.startsWith("delete")) {
+                deleteTask(input.substring(6));
             } else {
                 throw new DukeException(DEFAULT_ERROR_MSG);
             }
