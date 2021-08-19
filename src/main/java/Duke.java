@@ -5,14 +5,16 @@ import java.util.ArrayList;
 
 
 public class Duke {
-    private static String PATH;
-
     private static boolean run;
     private static ArrayList<Task> tasks;
+    private static int index;
+
+    private enum Commands {
+        BYE (),
+    }
 
 
     public static void main(String[] args) {
-        PATH = System.getProperty("user.dir") + "\\data\\save.txt";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -27,7 +29,7 @@ public class Duke {
         System.out.println(greeting);
 
         run = true;
-        fromFile(PATH);
+        tasks = new ArrayList<Task>();
 
         Scanner inputReader = new Scanner(System.in);
 
@@ -46,14 +48,13 @@ public class Duke {
 
         switch (inputArray[0]) {
             case "bye":
-                saveFile(PATH);
                 System.out.println("____________________________________________________________\n"
                         + "Bye. Don't come again!\n"
                         + "____________________________________________________________\n");
                 return false;
             case "list":
                 System.out.println("____________________________________________________________\n");
-                for(int i = 0; i < tasks.size(); i++) {
+                for(int i = 0; i < index; i++) {
                     System.out.printf("%d. %s\n", i + 1, tasks.get(i).toString());
                 }
                 System.out.println("____________________________________________________________\n");
@@ -71,8 +72,9 @@ public class Duke {
                 selectedTask = Integer.parseInt(inputArray[1]) - 1;
                 System.out.println("Noted. I've removed this task:\n" +
                         tasks.get(selectedTask).toString() + "\n" +
-                        "Now you have " + tasks.size() + " tasks in the list.\n");
+                        "Now you have " + (index - 1) + " tasks in the list.\n");
                 tasks.remove(selectedTask);
+                index--;
                 return true;
             case "event":
                 params = input.split("/at");
@@ -82,8 +84,9 @@ public class Duke {
 
                 System.out.println("____________________________________________________________\n"
                         + "Got it. I've added this task:\n"
-                        + tasks.get(tasks.size() - 1).toString() + "\n"
+                        + tasks.get(index).toString() + "\n"
                         + "____________________________________________________________\n");
+                index++;
                 return true;
             case "deadline":
                 params = input.split("/by");
@@ -93,8 +96,9 @@ public class Duke {
 
                 System.out.println("____________________________________________________________\n"
                         + "Got it. I've added this task:\n"
-                        + tasks.get(tasks.size() - 1).toString() + "\n"
+                        + tasks.get(index).toString() + "\n"
                         + "____________________________________________________________\n");
+                index++;
                 return true;
             case "todo":
                 try {
@@ -105,8 +109,9 @@ public class Duke {
                     tasks.add(new ToDo(name));
                     System.out.println("____________________________________________________________\n"
                             + "Got it. I've added this task:\n"
-                            + tasks.get(tasks.size() - 1).toString() + "\n"
+                            + tasks.get(index).toString() + "\n"
                             + "____________________________________________________________\n");
+                    index++;
                 }
                 catch (StringIndexOutOfBoundsException e) {
                     System.out.println("____________________________________________________________\n" +
@@ -171,5 +176,4 @@ public class Duke {
             System.out.println(e);
         }
     }
-
 }
