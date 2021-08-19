@@ -1,6 +1,5 @@
 package commands;
-
-public abstract class Command {
+public abstract class Command implements forStorage {
     protected final String command_description;
 
     Command(String command_description) {
@@ -8,4 +7,5 @@ public abstract class Command {
     }
 
     public abstract boolean isExecutable();
+
 }
