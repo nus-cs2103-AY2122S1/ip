@@ -3,7 +3,28 @@ import java.util.ArrayList;
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
-    private enum Command { TODO, EVENT, DEADLINE, DONE, DELETE, LIST, BYE }
+    private enum Command {
+        TODO("todo"),
+        EVENT("event"),
+        DEADLINE("deadline"),
+        DONE("done"),
+        DELETE("delete"),
+        LIST("list"),
+        BYE("bye");
+
+        private final String name;
+
+        Command(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+        public Boolean equalsInput(String input) {
+            return name.equals(input);
+        }
+    }
 
     public static void main(String[] args) {
         System.out.println("Hello...\nWhat do you want?\n");
@@ -55,7 +76,7 @@ public class Duke {
     private static void addNewTask(Command command, String answer) throws DukeException {
         String taskDetails = answer.substring(answer.indexOf(" ") + 1);
         if (!answer.contains(" ") || taskDetails.isEmpty()) {
-            throw new DukeException("Description of " + command.toString().toLowerCase() + " cannot be empty");
+            throw new DukeException("Description of " + command.getName() + " cannot be empty");
         }
         switch (command) {
             case TODO:
@@ -133,7 +154,7 @@ public class Duke {
 
     private static Command checkValidTaskType(String taskType) throws DukeException {
         for (Command c : Command.values()) {
-            if (c.toString().toLowerCase().equals(taskType)) return c;
+            if (c.equalsInput(taskType)) return c;
         }
         throw new DukeException("Unknown command...");
     }
