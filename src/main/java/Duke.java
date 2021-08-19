@@ -14,7 +14,6 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         ArrayList<Task> aList = new ArrayList<>();  // Initialize list
-        int counter = 1;
 
         System.out.println("Hello! I'm Duke\n" +   // Welcome Message
                 "What can I do for you?");
@@ -35,27 +34,43 @@ public class Duke {
                     System.out.println(aList.get(Integer.parseInt(input.split(" ")[1])-1));
                     break;
                 case "todo":
+                    try {
+                        ToDos.isLegitInput(input);
+                    } catch (NotEnoughInfoException ex) {
+                        System.err.print(ex);
+                        break;
+                    }
                     System.out.println("Got it. I've added this task:");
                     aList.add(new ToDos(input, false));
                     System.out.println(" " + aList.get(aList.size() - 1));
                     System.out.println(String.format("Now you have %d tasks in the list",aList.size()));
                     break;
                 case "deadline":
+                    try {
+                        Deadlines.isLegitInput(input);
+                    } catch (NotEnoughInfoException ex) {
+                        System.err.print(ex);
+                        break;
+                    }
                     System.out.println("Got it. I've added this task:");
                     aList.add(new Deadlines(Deadlines.getNameInput(input), false, Deadlines.getDeadlineInput(input)));
                     System.out.println(" " + aList.get(aList.size() - 1));
                     System.out.println(String.format("Now you have %d tasks in the list",aList.size()));
                     break;
                 case "event":
+                    try {
+                        Events.isLegitInput(input);
+                    } catch (NotEnoughInfoException ex) {
+                        System.err.print(ex);
+                        break;
+                    }
                     System.out.println("Got it. I've added this task:");
                     aList.add(new Events(Events.getNameInput(input), false, Events.getDeadlineInput(input)));
                     System.out.println(" " + aList.get(aList.size() - 1));
                     System.out.println(String.format("Now you have %d tasks in the list",aList.size()));
                     break;
                 default:
-                    aList.add(new Task(input,false));
-                    counter++;
-                    System.out.println("added: " + input);  // Output user input
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
             input = scanner.nextLine();  // Read user input

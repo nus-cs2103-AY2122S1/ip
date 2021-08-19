@@ -12,4 +12,10 @@ public class ToDos extends Task {
     Task markDone() {
         return new ToDos(getName(), true);
     }
+
+    public static void isLegitInput(String input) throws NotEnoughInfoException {
+        if (input.strip().equals("todo")){
+            throw new NotEnoughInfoException("Could not find name of Task");
+        }
+    }
 }
