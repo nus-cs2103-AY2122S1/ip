@@ -124,31 +124,16 @@ public class Duke {
     }
 
     /**
-     * Prints the formatted list of content in <code>list</code>.
-     */
-    private void printList() {
-        int listSize = this.list.size();
-        
-        StringBuilder message = new StringBuilder("Here are the tasks in your list:");
-        for (int i = 0; i < listSize; i++) {
-            int index = i + 1;
-            Task content = this.list.get(i);
-            message.append("\n").append(index).append(".").append(content);
-        }
-        printMessage(message.toString());
-    }
-
-    /**
      * Check if a given string is a command that denotes that a task is done.
      * If it is a valid Done command, the corresponding task will be marked done.
      * If it is a Done command with an incorrect index, an error prompt will be displayed.
      * For all other command received, returns false.
      * 
      * @param command The string corresponding to the input given by the user in the command line.
-     * @throws InvalidTaskIndexException thrown if an invalid index is provided by the user.
+     * @throws InvalidIndexException thrown if an invalid index is provided by the user.
      * @throws IllegalFormatException thrown if the format for marking task to be done is wrong.
      */
-    private void handleDoneCommand(String command) throws InvalidTaskIndexException, IllegalFormatException {
+    private void handleDoneCommand(String command) throws InvalidIndexException, IllegalFormatException {
         String[] splitWord = command.split(" ");
         
         if (splitWord.length != 2) {
@@ -170,8 +155,83 @@ public class Duke {
                     this.list.get(taskToBeMarkDone);
             printMessage(message);
         } else {
-            throw new InvalidTaskIndexException();
+            throw new InvalidIndexException();
         }
+    }
+
+    /**
+     * Removes the task based on the command given.
+     * 
+     * @param command The input string by the user.
+     * @throws InvalidIndexException thrown when user provides an index that is out of the range of the list.
+     * @throws IllegalFormatException thrown when the user do not follow the format for deleting
+     */
+    private void removeTask(String command) throws InvalidIndexException, IllegalFormatException {
+        String[] splitWord = command.split(" ");
+
+        if (splitWord.length != 2) {
+            throw new IllegalFormatException("☹ OOPS!!! Please specify task to be removed in the correct format.");
+        }
+
+        String secondWord = splitWord[1];
+        int secondWordLength = secondWord.length();
+        for (int i = 0; i < secondWordLength; i++) {
+            if (!Character.isDigit(secondWord.charAt(i))) {
+                throw new IllegalFormatException("☹ OOPS!!! Please specify the task to be mark done as a number.");
+            }
+        }
+        int taskIndexToBeRemoved = Integer.parseInt(secondWord) - 1;
+        Task removed = this.list.deleteAtIndex(taskIndexToBeRemoved);
+        if (removed != null) {
+            String message =
+                    "Noted.I've removed this task:\n" +
+                    "  " + removed + "\n" +
+                    String.format("Now you have %d tasks in the list.", this.list.size());
+            printMessage(message);
+        } else {
+            throw new InvalidIndexException();
+        }
+    }
+
+    /**
+     * Prints the formatted list of content in <code>list</code>.
+     */
+    private void printList() {
+        int listSize = this.list.size();
+
+        StringBuilder message = new StringBuilder("Here are the tasks in your list:");
+        for (int i = 0; i < listSize; i++) {
+            int index = i + 1;
+            Task content = this.list.get(i);
+            message.append("\n").append(index).append(".").append(content);
+        }
+        printMessage(message.toString());
+    }
+    
+    /**
+     * Helper method to print the log for task object being added
+     *
+     * @param task The task object to be printed.
+     */
+    private void printAddedTaskMessage(Task task) {
+        String message =
+                "Got it. I've added this task:\n" +
+                        "  " + task + "\n" +
+                        String.format("Now you have %d tasks in the list.", this.list.size());
+        printMessage(message);
+    }
+    
+    /**
+     * Method to format and print to console.
+     * 
+     * @param content The content to be printed, wrapped between horizontal lines.
+     */
+    private void printMessage(String content) {
+        String format = 
+                "\t____________________________________________________________\n" + 
+                "\t%s\n" + 
+                "\t____________________________________________________________\n";
+        System.out.printf(format, content.replaceAll("\n", "\n\t"));
     }
 
     /**
@@ -183,7 +243,6 @@ public class Duke {
         this.greet();
 
         while (true) {
-            
             try {
                 String input = sc.nextLine();
                 String[] splitWord = input.split(" ", 2);
@@ -202,6 +261,8 @@ public class Duke {
                     this.addDeadline(input);
                 } else if (firstWord.equals("event")) {
                     this.addEvent(input);
+                } else if (firstWord.equals("delete")) {
+                    this.removeTask(input);
                 } else {
                     throw new UnknownCommandException();
                 }
@@ -209,32 +270,6 @@ public class Duke {
                 printMessage(e.getMessage());
             }
         }
-    }
-
-    /**
-     * Method to format and print to console.
-     * 
-     * @param content The content to be printed, wrapped between horizontal lines.
-     */
-    private void printMessage(String content) {
-        String format = 
-                "\t____________________________________________________________\n" + 
-                "\t%s\n" + 
-                "\t____________________________________________________________\n";
-        System.out.printf(format, content.replaceAll("\n", "\n\t"));
-    }
-
-    /**
-     * Helper method to print the log for task object being added
-     * 
-     * @param task The task object to be printed.
-     */
-    private void printAddedTaskMessage(Task task) {
-        String message =
-                "Got it. I've added this task:\n" +
-                "  " + task + "\n" +
-                String.format("Now you have %d tasks in the list.", this.list.size());
-        printMessage(message);
     }
 
     /**

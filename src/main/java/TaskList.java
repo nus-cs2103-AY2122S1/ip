@@ -60,4 +60,18 @@ public class TaskList {
             return true;
         }
     }
+
+    /**
+     * Given a valid index, remove the task at the index and return that Task.
+     * 
+     * @param index The index of the task to be removed.
+     * @return The task that is removed.
+     */
+    public Task deleteAtIndex(int index) {
+        if (index > this.size()-1 || index < 0) {
+            return null;
+        } else {
+            return this.list.remove(index);
+        }
+    }
 }

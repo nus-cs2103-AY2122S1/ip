@@ -21,8 +21,8 @@ class UnknownCommandException extends DukeException {
     }
 }
 
-class InvalidTaskIndexException extends DukeException {
-    public InvalidTaskIndexException() {
-        super("☹ OOPS!!! Kindly key in a valid index to be marked done!");
+class InvalidIndexException extends DukeException {
+    public InvalidIndexException() {
+        super("☹ OOPS!!! Kindly key in a valid index!");
     }
 }
