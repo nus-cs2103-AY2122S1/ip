@@ -8,16 +8,15 @@ public class Events extends Task {
     /**
      * Constructor
      * @param description the name of the task
-     * @param pos the position in the list
      * @param at the start
      */
-    public Events(String description, int pos, String at) {
-        super(description, pos);
+    public Events(String description, String at) {
+        super(description);
         this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 }
