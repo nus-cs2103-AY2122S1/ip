@@ -48,7 +48,7 @@ public class Duke {
             }
             list.get(index - 1).maskAsDone();
 
-            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println("Nice! I've marked this task as done:");
             System.out.println(list.get(index - 1));
         } catch (DukeIndexException e) {
             System.out.println(e.getMessage());
