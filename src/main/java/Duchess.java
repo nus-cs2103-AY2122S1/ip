@@ -14,6 +14,24 @@ public class Duchess {
     private DuchessList duchessList;
 
     /**
+     * The commands recognised by Duchess
+     */
+    private enum Command {
+        BYE ("bye"),
+        LIST ("list"),
+        DONE ("done"),
+        TODO ("todo"),
+        DEADLINE ("deadline"),
+        EVENT ("event"),
+        DELETE ("delete"),
+        INVALID (null);
+        private String commandName;
+        Command(String commandName) {
+            this.commandName = commandName;
+        }
+    }
+
+    /**
      * Constructor for Duchess object
      */
     public Duchess()
@@ -45,25 +63,34 @@ public class Duchess {
     public void handleInput(Scanner sc)
     {
         String input = sc.nextLine();
-        if (input.equals("bye")) {
-            prettyPrint("I bid thee farewell.");
-            return;
-        }
         try {
-            if (input.equals("list"))
-                prettyPrint(duchessList.printList());
-            else if (checkPrefix(input, "done"))
-                handleDone(input);
-            else if (checkPrefix(input, "todo"))
-                handleTodo(input);
-            else if (checkPrefix(input, "deadline"))
-                handleDeadline(input);
-            else if (checkPrefix(input, "event"))
-                handleEvent(input);
-            else if (checkPrefix(input, "delete"))
-                handleDelete(input);
-            else
-                printError();
+            Command c = checkPrefix(input);
+            switch (c) {
+                case BYE:
+                    prettyPrint("I bid thee farewell.");
+                    return; // stop prompting user input
+                case LIST:
+                    prettyPrint(duchessList.printList());
+                    break;
+                case DONE:
+                    handleDone(input);
+                    break;
+                case TODO:
+                    handleTodo(input);
+                    break;
+                case DEADLINE:
+                    handleDeadline(input);
+                    break;
+                case EVENT:
+                    handleEvent(input);
+                    break;
+                case DELETE:
+                    handleDelete(input);
+                    break;
+                case INVALID:
+                    printError();
+                    break;
+            }
         } catch (DuchessException d) {
             prettyPrint(d.getMessage());
         }
@@ -174,8 +201,6 @@ public class Duchess {
      * @throws DuchessException the exception thrown when input does not match the deletion format
      */
     public void handleDelete(String input) throws DuchessException {
-        String invalidMessage = "The command \"delete\" should be followed by " +
-                "a task's number', e.g (delete 1).";
         String index = input.split(" ", 2)[1];
         // Parsing a non-numeric string will throw a NumberFormatException
         try {
@@ -205,22 +230,27 @@ public class Duchess {
     /**
      * Checks if a given string is present at the front of another string
      * @param input the string to be checked against
-     * @param prefix the string to check
      * @throws DuchessException the exception thrown when the prefix is preceded by an empty string
-     * @return whether the prefix string at the front of the string
+     * @return the prefix enum present at the front of the string
      */
-    public boolean checkPrefix(String input, String prefix) throws DuchessException {
+    public Command checkPrefix(String input) throws DuchessException {
         String[] parts = input.split(" ", 2);
         String front = parts[0];
-        if (front.equals(prefix))
-            try {
-                String back = parts[1];
-                if (back.isBlank())
-                    throw new DuchessException("The description of " + prefix + " cannot be empty.");
-                return true;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DuchessException("The description of " + prefix + " cannot be empty.");
-            }
-        return false;
+        // Check if the prefix matches any command recognised by Duchess
+        for (Command c : Command.values()) {
+            if (front.equals(c.commandName))
+                try {
+                    if (front.equals("bye") || front.equals("list"))
+                        return c; // No need second argument
+                    String back = parts[1]; // May throw ArrayIndexOutOfBoundsException
+                    if (back.isBlank()) // Second argument is only whitespaces
+                        throw new DuchessException("The description of " + front + " cannot be empty.");
+                    return c;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DuchessException("The description of " + front + " cannot be empty.");
+                }
+        }
+        // No command recognised
+        return Command.INVALID;
     }
 }
