@@ -36,6 +36,10 @@ public class Duke {
                 System.out.println(line);
                 System.out.println("Nice! I've marked this task as done:\n" + thisTask.toString());
                 System.out.println(line);
+            } else if (parts.length == 1) {
+                System.out.println(line);
+                System.out.println("☹ OOPS!!! The description of a " + parts[0] + " cannot be empty.");
+                System.out.println(line);
             } else if (parts[0].equals("deadline")){
                 String[] part2 = input.split("/by ");
                 String description = part2[0].split("deadline ")[1];
@@ -59,6 +63,10 @@ public class Duke {
                 System.out.println(line + "\n" + "added: " + todo.toString());
                 task.add(todo);
                 System.out.println("Now you have " + task.size() + " tasks in your list");
+                System.out.println(line);
+            } else {
+                System.out.println(line);
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 System.out.println(line);
             }
             input = s.nextLine();
