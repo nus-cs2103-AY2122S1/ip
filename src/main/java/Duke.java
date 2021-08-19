@@ -1,9 +1,8 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    private static int taskCount = 0;
-    private static final int MAX = 100;
-    private static Task[] tasks = new Task[MAX];
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
 
     public static void main(String[] args) {
         System.out.println("Hello...\nWhat do you want?\n");
@@ -15,13 +14,11 @@ public class Duke {
             String taskType = parts[0];
             try {
                 if (taskType.equals("done")) {
-                    String taskNo = answer.substring(answer.indexOf(" ") + 1);
-                    markTaskAsDone(taskNo);
+                    markTaskAsDone(answer);
+                } else if (taskType.equals("delete")) {
+                    deleteTask(answer);
                 } else if (taskType.equals("list")) {
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < taskCount; i++) {
-                        System.out.println((i + 1) + ". " + tasks[i]);
-                    }
+                    printTaskList();
                 } else {
                     addNewTask(taskType, answer);
                 }
@@ -34,12 +31,19 @@ public class Duke {
         System.out.println("Whatever...");
     }
 
+    private static void printTaskList() {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i));
+        }
+    }
+
     private static void addNewTask(String taskType, String answer) throws DukeException {
         String taskDetails = answer.substring(answer.indexOf(" ") + 1);
         if (!answer.contains(" ") || taskDetails.isEmpty()) {
             throw new DukeException("Description of " + taskType + " cannot be empty");
         } else if (taskType.equals("todo")) {
-            tasks[taskCount] = new Todo(taskDetails);
+            tasks.add(new Todo(taskDetails));
         } else if (taskType.equals("event")) {
             String[] parts = taskDetails.split(" /at ");
             if (parts.length < 2) {
@@ -47,7 +51,7 @@ public class Duke {
             }
             String description = parts[0];
             String at = parts[1]; 
-            tasks[taskCount] = new Event(description, at);
+            tasks.add(new Event(description, at));
         } else if (taskType.equals("deadline")) {
             String[] parts = taskDetails.split(" /by ");
             if (parts.length < 2) {
@@ -55,29 +59,48 @@ public class Duke {
             }
             String description = parts[0];
             String by = parts[1];
-            tasks[taskCount] = new Deadline(description, by);
+            tasks.add(new Deadline(description, by));
         } else {
             throw new DukeException("-_-+ Invalid command.");
         }
-        System.out.println("Got it. I've added this task:\n\t" + tasks[taskCount]);
-        taskCount += 1;
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n\t" + tasks.get(tasks.size() - 1));
+        printTasksCount();
     }
 
-    public static void markTaskAsDone(String taskNo) throws DukeException {
+    private static void markTaskAsDone(String answer) throws DukeException {
+        int taskIndex = getValidTaskIndex(answer);
+        tasks.get(taskIndex).markAsDone();
+        System.out.println("I've marked this task as done:");
+        System.out.println("\t" + tasks.get(taskIndex));
+    }
+
+    private static void deleteTask(String answer) throws DukeException {
+        int taskIndex = getValidTaskIndex(answer);
+        Task deletedTask = tasks.get(taskIndex);
+        tasks.remove(taskIndex);
+        System.out.println("Noted. I've removed this task:\n\t" + deletedTask);
+        printTasksCount();
+    }
+
+    private static int getValidTaskIndex(String answer) throws DukeException {
+        String taskNo = answer.substring(answer.indexOf(" ") + 1);
         try {
             int taskIndex = Integer.parseInt(taskNo) - 1;
+            int taskCount = tasks.size();
             if (taskCount == 0) {
-                throw new DukeException("There are no tasks to mark as done.");
+                throw new DukeException("There are no tasks in the list.");
             } else if (taskIndex < 0 || taskIndex >= taskCount) {
-                throw new DukeException("Invalid task number to mark as done. Task number should be between 1 and "
-                                        + taskCount + " inclusive.");
+                throw new DukeException("Invalid task number. Task number should be between 1 and " + taskCount
+                                        + " inclusive.");
             }
-            tasks[taskIndex].markAsDone();
-            System.out.println("I've marked this task as done:");
-            System.out.println("\t" + tasks[taskIndex]);
+            return taskIndex;
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid task number to mark as done. Sample input with correct format: 'done 2'");
+            throw new DukeException("Invalid task number. Sample input with correct format: [command] [taskNo]"
+                                    + " eg. 'done 2'");
         }
+    }
+
+    private static void printTasksCount() {
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 }
