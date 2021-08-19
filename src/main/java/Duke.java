@@ -28,10 +28,15 @@ public class Duke {
         fuwwyEcho("Uwu! I've marked this task as done:\n\t" + t + "\n");
     }
 
-    private static void eorD(String command, String task) {
+    private static void eorD(String command, String task) throws DukeException {
+
+
         String keyword1 = task == "deadline" ? "/by " : "/at ";
         String[] keyword2 = command.split(keyword1);
 
+        if (keyword2.length <= 1) {
+            throw new DukeException("OwO Incomplete command, add time" + "\n");
+        }
 
         String t = keyword2[0].split(task)[1];
         String time = keyword2[1];
@@ -49,32 +54,36 @@ public class Duke {
         String command = sc.nextLine();
 
         while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                String output = "\n";
-                for (int i = 0; i < tasklist.size(); i++) {
-                    int n = i + 1;
-                    String list = "\t" + n + ". " + tasklist.get(i);
-                    output += list + "\n";
+            try {
+                if (command.equals("list")) {
+                    String output = "\n";
+                    for (int i = 0; i < tasklist.size(); i++) {
+                        int n = i + 1;
+                        String list = "\t" + n + ". " + tasklist.get(i);
+                        output += list + "\n";
+                    }
+                    fuwwyEcho(output);
+                    command = sc.nextLine();
+                } else if (command.startsWith("done")) {
+                    taskDone(Integer.parseInt(command.split(" ")[1]));
+                } else if (command.startsWith("todo")) {
+                    if (command.equals("todo")) {
+                        throw new DukeException("OwO incomplete todo!\n");
+                    } else {
+                        addTask(new ToDo(command.split("todo")[1]));
+                    }
+                } else if (command.startsWith("deadline")) {
+                    eorD(command, "deadline");
+                } else if (command.startsWith("event")) {
+                    eorD(command, "event");
+                } else {
+                    throw new DukeException("UwU oops, I don't understand\n");
                 }
-                fuwwyEcho(output);
-                command = sc.nextLine();
-            } else if (command.startsWith("done")){
-                taskDone(Integer.parseInt(command.split(" ")[1]));
-                command = sc.nextLine();
-            } else if (command.startsWith("todo")) {
-                addTask(new ToDo(command.split("todo")[1]));
-                command = sc.nextLine();
-            } else if (command.startsWith("deadline")) {
-                eorD(command, "deadline");
-                command = sc.nextLine();
-            } else if (command.startsWith("event")) {
-                eorD(command, "event");
-                command = sc.nextLine();
+            } catch (DukeException e) {
+                fuwwyEcho(e.getMessage());
             }
-            else {
-                addTask(new Task(command));
-                command = sc.nextLine();
-            }
+
+            command = sc.nextLine();
         }
 
         fuwwyEcho("Bye. Hope to see you again soon!\n");
