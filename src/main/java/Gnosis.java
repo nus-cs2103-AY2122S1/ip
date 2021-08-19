@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Gnosis {
@@ -8,15 +9,18 @@ public class Gnosis {
     private static final String BYE_MESSAGE = "Good bye.\nI hope your needs have been sparked.\n" +
             "I welcome you back soon.";
 
+    private static ArrayList<String> storedTexts;
+
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String userInput;
+        storedTexts = new ArrayList<>();
 
         // Display greeting message
-        displayDivider();
+        displayTopDivider();
         System.out.println(GREET_MESSAGE);
-        displayDivider();
+        displayBottomDivider();
 
 
         // terminates user input only when "bye" is inputted by user
@@ -24,9 +28,9 @@ public class Gnosis {
             userInput = sc.nextLine();
 
             // display and execute commands
-            displayDivider();
+            displayTopDivider();
             executeCommand(userInput);
-            displayDivider();
+            displayBottomDivider();
 
         } while (!userInput.equalsIgnoreCase("BYE"));
 
@@ -38,15 +42,29 @@ public class Gnosis {
     /**
      * Executes user commands
      * */
-    public static void executeCommand(String userCommand) {
+    public static void executeCommand(String input) {
 
         // convert all commands to lower case to avoid case issues
-        switch (userCommand.toLowerCase()) {
+        switch (input.toLowerCase()) {
             case "bye":
                 byeCommand();
                 break;
+            case "list":
+                listCommand();
+                break;
             default:
-                echoCommand(userCommand);
+                // Save text to ArrayList String
+                storedTexts.add(input);
+                addCommand(input);
+        }
+    }
+
+    //Corresponding user command methods
+
+    public static void listCommand() {
+        int len = storedTexts.size();
+        for (int i = 0; i < len; i++) {
+            System.out.println((i+1) + ". " + storedTexts.get(i));
         }
     }
 
@@ -54,14 +72,17 @@ public class Gnosis {
         System.out.println(BYE_MESSAGE);
     }
 
-    public static void echoCommand(String echo) {
-        System.out.println(echo);
+    public static void addCommand(String text) {
+        System.out.println("item saved: " + text);
     }
 
-    /**
-     * utility method to display divider for display format
-     * */
-    public static void displayDivider() {
+
+    //Utility methods to display divider for display format
+
+    public static void displayTopDivider() {
         System.out.println("-- \t============\t --");
+    }
+    public static void displayBottomDivider() {
+        System.out.println("-- \t============\t --" + '\n');
     }
 }
