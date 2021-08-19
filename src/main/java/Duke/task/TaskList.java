@@ -1,5 +1,7 @@
+package Duke.task;
+
 public class TaskList {
-    private Task[] list;
+    private final Task[] list;
     private int taskCounter;
 
     public TaskList(int size){
@@ -10,14 +12,13 @@ public class TaskList {
     public void addTask(Task task){
         list[taskCounter] = task;
         taskCounter++;
-        System.out.println("Got it. I've added this task: \n"
-                + list[taskCounter - 1] + "\nNow you have "
-                + taskCounter + " tasks in the list.");
+        System.out.println("\nGot it. I've added this task:\n"
+                + list[taskCounter - 1] + "\n" + this.listTaskAmount() + "\n");
 
     }
 
-    public void list(){
-        System.out.println("Here are the tasks in your list:");
+    public void listTasks(){
+        System.out.println("\nHere are the tasks in your list:");
         for(int i = 0; i < list.length;i++){
             if(list[i] == null){
                 break;
@@ -25,11 +26,16 @@ public class TaskList {
                 System.out.println((i + 1) + "." + list[i]);
             }
         }
+        System.out.print("\n");
+    }
+
+    public String listTaskAmount(){
+        return "Now you have " + taskCounter + " task(s) in the list.";
     }
 
     public void markDone(int taskPos){
         list[taskPos].markComplete();
-        System.out.println("Nice! I've marked this task as done:\n " + list[taskPos]);
+        System.out.println("\nNice! I've marked this task as done:\n " + list[taskPos] +"\n");
     }
 
 }

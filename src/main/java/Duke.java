@@ -1,19 +1,23 @@
 import java.util.Scanner;
-
+import Duke.task.TaskList;
+import Duke.task.Todo;
+import Duke.task.Deadline;
+import Duke.task.Event;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         TaskList list = new TaskList(100);
 
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
+
         String input = scanner.nextLine();
         Scanner inputScanner = new Scanner(input);
         String checkForKeyword = inputScanner.next();
 
         while(!input.equals("bye")){
             if(input.equals("list")){
-                list.list();
+                list.listTasks();
             }else if(checkForKeyword.equals("done")){
                 try {
                     int taskNumber = inputScanner.nextInt() - 1;
@@ -40,11 +44,9 @@ public class Duke {
                 list.addTask(new Event(content, date));
             }
             else{
-                System.out.println("Sorry i do not recognize this input");
-                System.out.println("Create a task with the following keywords: todo, event and deadline");
-                System.out.println("View your tasks with the keyword: list");
-                System.out.println("Mark a task as done with the keyword: done followed by the task number e.g.done 2");
-
+                System.out.println("\nOops i do not understand what you are saying.");
+                System.out.println("These are the commands i am familiar with:");
+                System.out.println("todo [task]\ndeadline [task]/by[time]\nevent [task]/at[time]\nlist\ndone [task number]\n");
             }
             input = scanner.nextLine();
             inputScanner = new Scanner(input);

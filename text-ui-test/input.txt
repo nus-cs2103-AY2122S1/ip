@@ -1,0 +1,13 @@
+hello
+todo read book
+todo sleep
+deadline eat lunch /by 3pm today
+done 2
+deadline sleep /by 11pm tonight
+event complete ip /at Aug 19 23:59
+event sleep /at Aug 19 00:00
+done 3
+list
+done 5
+list
+bye
