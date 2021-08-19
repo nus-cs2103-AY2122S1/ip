@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,12 +11,16 @@ public class Duke {
             "Bye. Hope to see you again soon!";
     public static final String TASK_DONE_LINE =
             "Nice! I've marked this task as done:\n  ";
+    public static final String TASK_DELETED_LINE =
+            "Noted. I've removed this task:";
     public static final String LIST_INTRO_LINE =
             "Here are the tasks in your list";
     public static final String NOT_RECOGNISED_LINE =
             ":( Oh no! Command not recognised";
     public static final String DONE_FORMAT_LINE =
             ":( Oh no! Done must follow the format: done <index>";
+    public static final String DELETED_FORMAT_LINE =
+            ":( Oh no! Delete must follow the format: delete <index>";
     public static final String OUT_OF_RANGE_LINE =
             ":( Oh no! The index given is out of the range of the number of tasks.";
     public static final String COMPLETED_LINE =
@@ -30,10 +35,11 @@ public class Duke {
     // Commands Constant
     public static final String BYE = "bye";
     public static final String LIST = "list";
+    public static final String DONE = "done";
+    public static final String DELETE = "delete";
     public static final String TODO = "todo";
     public static final String DEADLINE = "deadline";
     public static final String EVENT = "event";
-    public static final String DONE = "done";
 
     // Regex Constants
     public static final String GET_DESCRIPTION_REGEX = "/.+";
@@ -44,10 +50,12 @@ public class Duke {
     public static final String DIGITS_REGEX = "\\d+";
     public static final String DEADLINE_REGEX = ".+/by.+";
     public static final String EVENT_REGEX = ".+/at.+";
+    public static final String TASK_ADDED_LINE = "Got it. I've added this task:";
 
     // Task variables
-    public static Task[] taskList= new Task[100];
-    public static int taskCount = 0;
+//    public static Task[] taskList= new Task[100];
+//    public static int taskCount = 0;
+    public static ArrayList<Task> taskList = new ArrayList<>();
 
     // Prints a horizontal dash line
     public static void printDashLine(){
@@ -84,12 +92,31 @@ public class Duke {
         printOneLine(BYE_LINE);
     }
 
-    // Print acknowledgement of input
-    public static void printAcknowledgement(){
+    // Print list of task
+    public static void printList() {
+        String[] listLines = new String[taskList.size()+1];
+
+        listLines[0] = LIST_INTRO_LINE;
+
+        // Add each item to listLines
+        for (int i = 1; i <= taskList.size(); ++i) {
+            listLines[i] = i + ". " + taskList.get(i-1).showTask();
+        }
+
+        printMultiLine(listLines);
+    }
+
+    // Print number of tasks left
+    public static void printNumOfTask(){
+        printOneLine("Now you have " + taskList.size() + " tasks in the list");
+    }
+
+
+    // Print acknowledgement of task added/ deleted depending on line
+    public static void printAcknowledgement(String line, int index){
         String[] acknowledgeTaskLines = {
-                "Got it. I've added this task:\n  ",
-                taskList[taskCount-1].showTask(),
-                "Now you have " + taskCount + " tasks in the list"
+                line,
+                "  " + taskList.get(index).showTask(),
         };
         printMultiLine(acknowledgeTaskLines);
     }
@@ -101,10 +128,10 @@ public class Duke {
             throw new TodoException();
         }
         // Create new Todo instance an add it to end taskList
-        taskList[taskCount] = new Todo (userInput);
-        taskCount = taskCount + 1;
+        taskList.add(new Todo (userInput));
 
-        printAcknowledgement();
+        printAcknowledgement(TASK_ADDED_LINE, taskList.size()-1);
+        printNumOfTask();
     }
 
     // Adding a Deadline to list of tasks
@@ -119,10 +146,10 @@ public class Duke {
         String by = userInput.replaceAll(GET_BY_REGEX, "");
 
         // Create new Deadline instance an add it to end taskList
-        taskList[taskCount] = new Deadline (description, by);
-        taskCount = taskCount + 1;
+        taskList.add(new Deadline (description, by));
 
-        printAcknowledgement();
+        printAcknowledgement(TASK_ADDED_LINE, taskList.size()-1);
+        printNumOfTask();
     }
 
     // Adding an Event to list of tasks
@@ -137,28 +164,36 @@ public class Duke {
         String at = userInput.replaceAll(GET_AT_REGEX, "");
 
         // Create new Event instance an add it to end taskList
-        taskList[taskCount] = new Event (description, at);
-        taskCount = taskCount + 1;
+        taskList.add(new Event (description, at));
 
-        printAcknowledgement();
+        printAcknowledgement(TASK_ADDED_LINE, taskList.size()-1);
+        printNumOfTask();
     }
 
     public static void addNothing() throws NothingException{
         throw new NothingException();
     }
 
-    // Print list of task
-    public static void printList() {
-        String[] listLines = new String[taskCount+1];
+    // Delete line
+    public static void deleteTask(String userInput)
+            throws DeleteFormatException, DeleteRangeException{
 
-        listLines[0] = LIST_INTRO_LINE;
-
-        // Add each item to listLines
-        for (int i = 1; i <= taskCount; ++i) {
-            listLines[i] = i + ". " + taskList[i-1].showTask();
+        // Check if the command is done and is followed by a number
+        // and if the index is within the range of number of tasks
+        if (!userInput.matches(DIGITS_REGEX)){
+            throw new DeleteFormatException();
         }
 
-        printMultiLine(listLines);
+        int index = Integer.parseInt(userInput) - 1;
+        if (index >= taskList.size()){
+            throw new DeleteRangeException();
+        }
+
+        printAcknowledgement(TASK_DELETED_LINE, index);
+
+        taskList.remove(index);
+
+        printNumOfTask();
     }
 
     // Mark the task at the given index as done
@@ -172,22 +207,19 @@ public class Duke {
         }
 
         int index = Integer.parseInt(userInput) - 1;
-        if (index >= taskCount){
+        if (index >= taskList.size()){
             throw new DoneRangeException();
         }
         // Check if task is already done
-        if (taskList[index].isDone()){
+        if (taskList.get(index).isDone()){
             throw new DoneAlreadyException();
         }
 
         // Mark the index as done
-        taskList[index].markAsDone();
+        taskList.get(index).markAsDone();
 
         // Acknowledge task is done
-        printMultiLine(new String[]{
-                TASK_DONE_LINE,
-                taskList[index].showTask()
-        });
+        printAcknowledgement(TASK_DONE_LINE, index);
     }
 
     // Reads the input of the line to determine the command and run it
@@ -203,17 +235,6 @@ public class Duke {
         // Check the command type then execute the commands
         if(userInput.equals(LIST)) {
             printList();
-
-        } else if (command.equals(DONE) ){
-            try{
-                markAsDone(userInput);
-            } catch (DoneFormatException e) {
-                printOneLine(DONE_FORMAT_LINE);
-            } catch (DoneRangeException e){
-                printOneLine(OUT_OF_RANGE_LINE);
-            } catch (DoneAlreadyException e){
-                printOneLine(COMPLETED_LINE);
-            }
 
         } else if (command.equals(TODO)){
             try {
@@ -235,6 +256,27 @@ public class Duke {
             } catch (EventException e){
                 printOneLine(EVENT_LINE);
             }
+
+        } else if (command.equals(DELETE) ){
+            try{
+                deleteTask(userInput);
+            } catch (DeleteFormatException e) {
+                printOneLine(DELETED_FORMAT_LINE);
+            } catch (DeleteRangeException e){
+                printOneLine(OUT_OF_RANGE_LINE);
+            }
+
+        } else if (command.equals(DONE) ){
+            try{
+                markAsDone(userInput);
+            } catch (DoneFormatException e) {
+                printOneLine(DONE_FORMAT_LINE);
+            } catch (DoneRangeException e){
+                printOneLine(OUT_OF_RANGE_LINE);
+            } catch (DoneAlreadyException e){
+                printOneLine(COMPLETED_LINE);
+            }
+
         } else {
             try{
                 addNothing();
