@@ -7,10 +7,10 @@ public enum DukeCommands {
     LIST("list", (String command) -> {
         // User command is list, print current list of commands and continues asking for commands
         if (Duke.counter == 0) {
-            System.out.println("Nothing has been added to the list");
+            System.out.println("\t Nothing has been added to the list");
         }
         for (int i = 0; i < Duke.counter; i++) {
-            System.out.println((i + 1) + ". " + Duke.taskList.get(i));
+            System.out.println("\t " + (i + 1) + ". " + Duke.taskList.get(i));
         }
         Duke.getCommand();
     }),

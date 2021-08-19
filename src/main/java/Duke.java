@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Duke {
     public static ArrayList<Task> taskList = new ArrayList<>();
     public static int counter = 0;
+    protected static Scanner scanner;
 
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
@@ -12,11 +13,12 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("\t Hello! I'm Duke");
+        scanner = new Scanner(System.in);
         getCommand();
     }
 
     public static void getCommand() {
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         System.out.println("\t What would you like me to do?\n");
         String command = scanner.nextLine();
         String first = command.split(" ")[0];
