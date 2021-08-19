@@ -3,6 +3,27 @@ What's up?
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+It looks like your list is empty. Add a task first!
+Add a task by typing [todo TASKNAME], [deadline TASKNAME /by TIME], or [event TASKNAME /at TIME]
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+☹ OOPS!!! The description of a task cannot be empty.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+☹ OOPS!!! The description of a task cannot be empty.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+☹ OOPS!!! The description of a task cannot be empty.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Alright! I added this task:
 [T][ ] :  borrow book
 
@@ -30,6 +51,11 @@ You have 3 task(s) at the moment!
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Something went wrong.. to mark as done,
+format your text as <done [number]>.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Awesome! I marked this as done:
 [T][X] :  borrow book
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -37,6 +63,21 @@ Awesome! I marked this as done:
 1: [T][X] :  borrow book
 2: [D][ ] :  return book (by: June 6th)
 3: [E][ ] :  project meeting (at: Aug 6th 2-4pm)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Awesome! I marked this as done:
+[E][X] :  project meeting (at: Aug 6th 2-4pm)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Something went wrong.. to mark as done,
+format your text as <done [number]>.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1: [T][X] :  borrow book
+2: [D][ ] :  return book (by: June 6th)
+3: [E][X] :  project meeting (at: Aug 6th 2-4pm)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
