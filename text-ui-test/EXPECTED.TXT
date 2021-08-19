@@ -5,3 +5,32 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Got it. I've added this task:
+[T][ ] eat lunch
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+[D][ ] finish IP  (by:  19 Aug 2359)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+[E][ ] sleep  (at:  tonight 2359)
+Now you have 3 tasks in the list.
+Nice! I've marked this task as done:
+[T][X] eat lunch
+Got it. I've added this task:
+[D][ ] do homework  (by:  no idea :-p)
+Now you have 4 tasks in the list.
+1.[T][X] eat lunch
+2.[D][ ] finish IP  (by:  19 Aug 2359)
+3.[E][ ] sleep  (at:  tonight 2359)
+4.[D][ ] do homework  (by:  no idea :-p)
+Nice! I've marked this task as done:
+[D][X] finish IP  (by:  19 Aug 2359)
+Nice! I've marked this task as done:
+[E][X] sleep  (at:  tonight 2359)
+Nice! I've marked this task as done:
+[D][X] do homework  (by:  no idea :-p)
+1.[T][X] eat lunch
+2.[D][X] finish IP  (by:  19 Aug 2359)
+3.[E][X] sleep  (at:  tonight 2359)
+4.[D][X] do homework  (by:  no idea :-p)
+Bye. Hope to see you again soon!

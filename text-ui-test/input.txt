@@ -1,0 +1,11 @@
+todo eat lunch
+deadline finish IP /by 19 Aug 2359
+event sleep /at tonight 2359
+done 1
+deadline do homework /by no idea :-p
+list
+done 2
+done 3
+done 4
+list
+bye
