@@ -52,10 +52,14 @@ public class List {
      * @param taskNumber The index(plus 1) of the task to be marked as done
      * @return The string representation of the task after it is marked as done
      */
-    public String changeTaskStatus(int taskNumber) {
-        Task task = list.get(taskNumber - 1);
-        task.doneTask();
-        return task.toString();
+    public String changeTaskStatus(int taskNumber) throws DukeException{
+        if (taskNumber < 0 || taskNumber >= this.list.size()) {
+            throw new DukeException("Task does not exist. Use list to check all tasks available.");
+        } else {
+            Task task = list.get(taskNumber - 1);
+            task.doneTask();
+            return task.toString();
+        }
     }
 
     /**
