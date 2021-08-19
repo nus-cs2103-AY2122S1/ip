@@ -1,8 +1,9 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        //enum userFunctions {BYE};
+
         String GREETING = "Hello! I'm Duck \n"
                 + "*quack*  >(.)__\n"
                 + "          (___/ \n"
@@ -10,22 +11,36 @@ public class Duke {
         String BYE = "Bye. Hope to see you again soon!\n"
                 + "   __(.)>   *quack*\n"
                 + "~~ \\___)\n";
-        String userInput = null;
+
+        String newUserInput = null;
+        String[] userInput = new String[100];
+        int index = 0;
+        boolean active = true;
 
         Scanner myObj = new Scanner(System.in);
         System.out.println(GREETING);
-        while (true) {
-            userInput = myObj.nextLine();
-            if (userInput.equals("bye")) {
-                System.out.println(BYE);
-                break;
-            } else {
-                System.out.println(userInput);
+        while (active) {
+            newUserInput = myObj.nextLine();
+            switch (newUserInput) {
+                case "bye":
+                    active = false;
+                    System.out.println(BYE);
+                    break;
+                case "list":
+                    for (int i = 0; i < index; i++) {
+                        System.out.println(i+1 + ". " + userInput[i]);
+                    }
+                    break;
+                default:
+                    userInput[index] = newUserInput;
+                    index++;
+                    System.out.println("added: " + newUserInput);
             }
         }
-
-
     }
 
 
 }
+
+
+
