@@ -5,7 +5,7 @@ public abstract class DukeException extends Exception{
         String INDENTATION = "    ";
         String finalMsg = INDENTATION + HORIZONTAL_LINE + "\n";
         finalMsg += INDENTATION + "☹ OI!!! " + msg + "\n";
-        finalMsg += INDENTATION + HORIZONTAL_LINE + "\n";
+        finalMsg += INDENTATION + HORIZONTAL_LINE;
         return finalMsg;
     }
 }
