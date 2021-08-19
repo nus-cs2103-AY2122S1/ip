@@ -24,6 +24,7 @@ public class Duke {
                 break;
             }
             else if ("list".equals(command)){
+                System.out.println("Here are the tasks in your list:")
                 for (Task task : tasks){
                     System.out.println(task);
                 }
@@ -39,17 +40,26 @@ public class Duke {
             }
             else if (command.startsWith("todo ")) {
                 String name = command.substring(5);
-                tasks.add(new ToDo(name));
+                Task task = new ToDo(name);
+                tasks.add(task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(task);
             }
             else if (command.startsWith("deadline ")){
                 String name = command.split(" /by ", 2)[0].substring(9);
                 String time = command.split(" /by ", 2)[1];
-                tasks.add(new Deadline(name, time));
+                Task task = new Deadline(name, time);
+                tasks.add(task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(task);
             }
             else if (command.startsWith("event ")){
                 String name = command.split(" /at ", 2)[0].substring(6);
                 String time = command.split(" /at ", 2)[1];
-                tasks.add(new Event(name, time));
+                Task task = new Event(name, time);
+                tasks.add(task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(task);
             }
         }
 
