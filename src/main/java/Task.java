@@ -6,6 +6,7 @@
 public class Task {
         /** The content of the task. */
         protected String description;
+
         /** Whether the task is finished or not. */
         protected boolean isDone;
 
