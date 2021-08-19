@@ -21,7 +21,7 @@ public class Message {
 
     public static void list() {
         System.out.println("    ____________________________________________________________");
-        for (Task task : Duke.tasks) {
+        for (Task task : TaskManager.tasks) {
             System.out.println("    " + task.taskId + ". " + task);
         }
         System.out.println("    ____________________________________________________________");
