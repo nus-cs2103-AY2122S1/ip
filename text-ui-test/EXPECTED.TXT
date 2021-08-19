@@ -10,63 +10,88 @@ hello! i'm calico ☺
 how can i assist you?
 ===========================
 ===========================
-added: first task
+ ☹ oops..im sorry, but i dont know what that means :(
 ===========================
 ===========================
-added: second task
+ ☹ oops..im sorry, but i dont know what that means :(
 ===========================
 ===========================
 noted! ive added this task:
   [T][ ] borrow book
-now you have 3 tasks in your list
+now you have 1 tasks in your list
 ===========================
 ===========================
-1.[ ] first task
-2.[ ] second task
-3.[T][ ] borrow book
+1.[T][ ] borrow book
 ===========================
 ===========================
 noted! ive added this task:
   [D][ ] return book (by: Sunday)
-now you have 4 tasks in your list
+now you have 2 tasks in your list
 ===========================
 ===========================
 noted! ive added this task:
   [E][ ] project meeting (at: Mon 2-4pm)
-now you have 5 tasks in your list
+now you have 3 tasks in your list
 ===========================
 ===========================
 noted! ive added this task:
   [D][ ] do homework (by: no idea :-p)
-now you have 6 tasks in your list
+now you have 4 tasks in your list
+===========================
+===========================
+1.[T][ ] borrow book
+2.[D][ ] return book (by: Sunday)
+3.[E][ ] project meeting (at: Mon 2-4pm)
+4.[D][ ] do homework (by: no idea :-p)
 ===========================
 ===========================
 congrats on completing this task! :
-  [X] second task
+  [D][X] return book (by: Sunday)
 ===========================
 ===========================
-congrats on completing this task! :
-  [E][X] project meeting (at: Mon 2-4pm)
+ ☹ oops..i cant seem to find the task you're looking for
 ===========================
 ===========================
-added: done 1000
+ ☹ oops..i cant seem to find the task you're looking for
 ===========================
 ===========================
-added: done 0
+ ☹ oops..i cant seem to find the task you're looking for
 ===========================
 ===========================
-added: done 100
+ ☹ oops..i cant seem to find the task you're looking for
 ===========================
 ===========================
-1.[ ] first task
-2.[X] second task
-3.[T][ ] borrow book
-4.[D][ ] return book (by: Sunday)
-5.[E][X] project meeting (at: Mon 2-4pm)
-6.[D][ ] do homework (by: no idea :-p)
-7.[ ] done 1000
-8.[ ] done 0
-9.[ ] done 100
+1.[T][ ] borrow book
+2.[D][X] return book (by: Sunday)
+3.[E][ ] project meeting (at: Mon 2-4pm)
+4.[D][ ] do homework (by: no idea :-p)
+===========================
+===========================
+ ☹ oops..im sorry, but i dont know what that means :(
+===========================
+===========================
+ ☹ oops..the description of a todo cannot be empty
+===========================
+===========================
+ ☹ oops..the description of a todo cannot be empty
+===========================
+===========================
+ ☹ oops..the description of a deadline cannot be empty
+===========================
+===========================
+ ☹ oops..the description of a event cannot be empty
+===========================
+===========================
+ ☹ oops..im sorry, but i dont know what that means :(
+===========================
+===========================
+1.[T][ ] borrow book
+2.[D][X] return book (by: Sunday)
+3.[E][ ] project meeting (at: Mon 2-4pm)
+4.[D][ ] do homework (by: no idea :-p)
+===========================
+===========================
+ ☹ oops..im sorry, but i dont know what that means :(
 ===========================
 ===========================
 bye friend!
