@@ -28,13 +28,27 @@ public class Duke {
         fuwwyEcho("Uwu! I've marked this task as done:\n\t" + t + "\n");
     }
 
+    private static void eorD(String command, String task) {
+        String keyword1 = task == "deadline" ? "/by " : "/at ";
+        String[] keyword2 = command.split(keyword1);
+
+
+        String t = keyword2[0].split(task)[1];
+        String time = keyword2[1];
+
+        if (task == "deadline") {
+            addTask(new Deadline(t, time));
+        } else {
+            addTask(new Event(t, time));
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(welcome_changed);
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
 
         while (!command.equals("bye")) {
-
             if (command.equals("list")) {
                 String output = "\n";
                 for (int i = 0; i < tasklist.size(); i++) {
@@ -46,6 +60,15 @@ public class Duke {
                 command = sc.nextLine();
             } else if (command.startsWith("done")){
                 taskDone(Integer.parseInt(command.split(" ")[1]));
+                command = sc.nextLine();
+            } else if (command.startsWith("todo")) {
+                addTask(new ToDo(command.split("todo")[1]));
+                command = sc.nextLine();
+            } else if (command.startsWith("deadline")) {
+                eorD(command, "deadline");
+                command = sc.nextLine();
+            } else if (command.startsWith("event")) {
+                eorD(command, "event");
                 command = sc.nextLine();
             }
             else {
