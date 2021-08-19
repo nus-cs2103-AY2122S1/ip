@@ -53,4 +53,11 @@ Current List:
 2: Event: project meeting [ ] (at 3-5pm)
 3: Event: project meeting [X] (at /at)
 4: Deadline: submit proposal [ ] (by Sun)
+I have marked the task as done!
+Current List:
+---------------
+1: ToDo: wash the dishes [X]
+2: Event: project meeting [X] (at 3-5pm)
+3: Event: project meeting [X] (at /at)
+4: Deadline: submit proposal [ ] (by Sun)
 Bye from Duke!

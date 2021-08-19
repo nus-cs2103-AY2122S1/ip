@@ -8,4 +8,5 @@ deadline submit proposal /by Sun
 deadline fake command
 done 3
 list
+done 2
 bye
