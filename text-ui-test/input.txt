@@ -1,0 +1,17 @@
+todo do readings
+list
+todo do assignments
+list
+deadline finish readings /by Thursday
+list
+event lecture for readings /at Thursday
+list
+deadline finish assignments /by Thursday
+list
+done 2
+list
+done 5
+list
+todo /bye
+list
+bye
