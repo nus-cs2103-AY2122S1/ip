@@ -35,5 +35,11 @@ Duke: Your current task(s):
 2. [D][ ] Return book (by: Monday)
 3. [E][X] Dinner with friends (at: Tue, 7pm)
 
+Duke: Invalid command: repo
+
+Duke: Invalid format for `deadline` command. '/by' keyword is needed
+
+Duke: Invalid format for `event` command. '/at' keyword is needed
+
 Duke: Good bye
 Shutting down Duke...

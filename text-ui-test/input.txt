@@ -6,4 +6,7 @@ done 1
 list
 done 3
 list
+repo
+deadline /at tomorrow
+event /by 10pm
 bye
