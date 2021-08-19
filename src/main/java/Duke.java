@@ -22,20 +22,41 @@ public class Duke {
         printHorizontalLine();
     }
 
+    //This function will print the list of items entered by the user
+    public static void printListOfItems(int numOfItems, String[] items) {
+        printHorizontalLine();
+        for (int i = 0; i < numOfItems; i++) {
+            System.out.println("            " + (i + 1) + ". " + items[i]);
+        }
+        printHorizontalLine();
+
+    }
+
     public static void main(String[] args) {
         printWelcomeMessage();
 
         Scanner in = new Scanner(System.in);
 
         String str;
+        int num = 0;
+        String[] items = new String[100];
 
         str = in.nextLine();
 
         while (!str.equals("bye")) {
-            printHorizontalLine();
-            System.out.println("            " + str);
-            printHorizontalLine();
+            if (!str.equals("list")) {
+                items[num] = str;
+                num++;
+                printHorizontalLine();
+                System.out.println("            " + "added: " + str);
+                printHorizontalLine();
+
+            } else {
+                printListOfItems(num, items);
+            }
+
             str = in.nextLine();
+
         }
 
         printByeMessage();
