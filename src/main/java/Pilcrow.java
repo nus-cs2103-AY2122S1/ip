@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 import java.util.Scanner;
 
 /**
@@ -29,51 +28,85 @@ public class Pilcrow {
         while (true) {
             // Reads the text from the scanner
             String text = scanner.nextLine();
-            // Reads the text and does the appropriate action
-            Pilcrow.parseText(text, tasks);
+            String trimmedText = text.trim();
+            String[] splitText = trimmedText.split(" ");
+            ArrayList<String> words = new ArrayList<>();
+            for (int i = 0; i < splitText.length; i++) {
+                if (!splitText[i].equals("")) {
+                    words.add(splitText[i]);
+                }
+            }
 
-            // Exit while loop if text is "bye"
-            if (text.equals("bye")) {
+            // Parses the text and does the appropriate action
+            Pilcrow.parseText(trimmedText, words, tasks);
+
+            // Exit while loop if first word of trimmed text is "bye"
+            if (words.size() > 0 && words.get(0).equals("bye")) {
                 break;
             }
         }
     }
 
-    private static void parseText(String text, ArrayList<Task> tasks) {
-        // Gets command from text entered if text contains command
-        String command = Pilcrow.getCommand(text);
+    private static void parseText(String trimmedText, ArrayList<String> words, ArrayList<Task> tasks) {
+        String displayText = "";
+
+        if (words.size() == 0) {
+            // Error handling?
+            System.out.println("Nothing entered.");
+            return;
+        }
+
+        String command = words.get(0);
 
         // Chooses what to do based on which command is entered
         switch (command) {
+            case "todo":
+                // Error handling?
+                String toDoName = trimmedText.substring(trimmedText.indexOf(" ") + 1);
+                Task newTask = new ToDo(toDoName);
+                tasks.add(newTask);
+                displayText = "Added todo to tasks(" + tasks.size() + "): \n" + newTask.toString();
+                break;
+            case "deadline":
+                // Error handling?
+                String[] splitText = trimmedText.split("/");
+                String deadlineName = splitText[0].trim();
+                deadlineName = deadlineName.substring(deadlineName.indexOf(" ") + 1);
+                String actualDeadline = splitText[1].trim();
+                newTask = new Deadline(deadlineName, actualDeadline);
+                tasks.add(newTask);
+                displayText = "Added deadline to tasks(" + tasks.size() + "): \n" + newTask.toString();
+                break;
+            case "event":
+                // Error handling?
+                splitText = trimmedText.split("/");
+                String eventName = splitText[0].trim();
+                eventName = eventName.substring(eventName.indexOf(" ") + 1);
+                String duration = splitText[1].trim();
+                newTask = new Event(eventName, duration);
+                tasks.add(newTask);
+                displayText = "Added event to tasks(" + tasks.size() + "): \n" + newTask.toString();
+                break;
             case "list":
-                System.out.println(Pilcrow.printAllTasks(tasks));
+                displayText = Pilcrow.printAllTasks(tasks);
                 break;
             case "done":
-                int doneTask = Integer.valueOf(text.split(" ")[1]) - 1;
-                tasks.get(doneTask).markAsDone(true);
-                System.out.println("Task " + doneTask + " set as done: " + tasks.get(doneTask).toString());
+                // Error handling?
+                int doneTask = Integer.valueOf(words.get(1));
+                int taskIndex = doneTask - 1;
+                tasks.get(taskIndex).markAsDone(true);
+                displayText = "Task " + doneTask + " set as done:\n" + tasks.get(taskIndex).toString();
                 break;
             case "bye":
-                System.out.println("C'est fini.\n" + Pilcrow.PILCROW_LOGO);
+                displayText = "C'est fini.\n" + Pilcrow.PILCROW_LOGO;
                 break;
             default:
-                Task newTask = new Task(text);
+                newTask = new Task(trimmedText);
                 tasks.add(newTask);
-                text = "Added: \n" + text;
-                System.out.println(text);
+                displayText = "Added generic task to tasks(" + tasks.size() + "): \n" + newTask.toString();
                 break;
         }
-    }
-
-    // Returns the first word of the text entered as the command
-    private static String getCommand(String text) {
-        String command;
-        if (text.contains(" ")) {
-            command = text.substring(0, text.indexOf(' '));
-        } else {
-            command = text;
-        }
-        return command;
+        System.out.println(displayText);
     }
 
     private static String printAllTasks(ArrayList<Task> tasks) {
@@ -84,9 +117,11 @@ public class Pilcrow {
         return tasksText;
     }
 
+
+    // Inner classes for Task and its subclasses
     private static class Task {
-        private String taskName;
-        private Boolean isDone;
+        protected String taskName;
+        protected Boolean isDone;
 
         /**
          *
@@ -107,9 +142,74 @@ public class Pilcrow {
          */
         @Override
         public String toString() {
-            String taskText = "[" + (this.isDone ? 'X' : ' ') + "] " + taskName;
+            String taskText = "    [" + (this.isDone ? 'X' : ' ') + "] " + taskName;
             return taskText;
         }
     }
-}
 
+    private static class ToDo extends Task {
+        /**
+         *
+         * @return
+         */
+        public ToDo(String toDoName) {
+            super(toDoName);
+        }
+
+        /**
+         *
+         * @return
+         */
+        @Override
+        public String toString() {
+            String toDoText = "[T] [" + (this.isDone ? 'X' : ' ') + "] " + taskName;
+            return toDoText;
+        }
+    }
+
+    private static class Deadline extends Task {
+        String deadline;
+
+        /**
+         *
+         * @param deadlineName
+         * @param deadline
+         */
+        public Deadline(String deadlineName, String deadline) {
+            super(deadlineName);
+            this.deadline = deadline;
+        }
+
+        /**
+         *
+         * @return
+         */
+        @Override
+        public String toString() {
+            String toDoText = "[D] [" + (this.isDone ? 'X' : ' ') + "] " + taskName + " (" + this.deadline + ")";
+            return toDoText;
+        }
+    }
+
+    private static class Event extends Task {
+        String duration;
+
+        /**
+         *
+         */
+        public Event(String eventName, String duration) {
+            super(eventName);
+            this.duration = duration;
+        }
+
+        /**
+         *
+         * @return
+         */
+        @Override
+        public String toString() {
+            String toDoText = "[E] [" + (this.isDone ? 'X' : ' ') + "] " + taskName + " (" + this.duration + ")";
+            return toDoText;
+        }
+    }
+}
