@@ -6,6 +6,7 @@ public class Duke {
     private static List<Task> tasks = new ArrayList<>(100);
     private static int len = 0;
     private static Boolean going = true;
+
     private enum Type{
         DEADLINE, EVENT, TODO
     };
