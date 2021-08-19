@@ -26,7 +26,6 @@ public enum Command {
             if (remainingText.isEmpty()) {
                 throw new DukeException(MISSING_DELETE_NUMBER_MESSAGE);
             }
-
         }
     },
     DEADLINE {

@@ -18,7 +18,7 @@ public class TaskList {
     }
 
     public int size() {
-        return taskArr.size();
+        return taskArr != null ? taskArr.size() : 0;
     }
 
     public String addTask(Task task) {
