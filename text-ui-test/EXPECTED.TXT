@@ -5,24 +5,29 @@
     I won't hold it against you
     Send "help" for help!
  -------------------------------------------------------------
+Duke$IncorrectFormatException:
  -------------------------------------------------------------
-    Task type or task name not specified!
+    Task type or task name not provided!
     Type "help" for help
  -------------------------------------------------------------
  -------------------------------------------------------------
     added: read book
     Now you have 1 tasks in your list
  -------------------------------------------------------------
+Duke$IncorrectFormatException:
  -------------------------------------------------------------
     Item number not present. Try again?
+    Type "help" for help
  -------------------------------------------------------------
  -------------------------------------------------------------
     Nice! I've marked this task as done:
     [T][X] read book
  -------------------------------------------------------------
+Duke$IncorrectFormatException:
  -------------------------------------------------------------
     Task name or deadline not provided.
-    FORMAT: " DEADLINE TASKNAME /by DEADLINE"
+   FORMAT: " DEADLINE TASKNAME /by DEADLINE"
+    Type "help" for help
  -------------------------------------------------------------
  -------------------------------------------------------------
     added: arihtars
