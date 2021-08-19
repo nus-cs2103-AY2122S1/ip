@@ -42,32 +42,43 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println("[X] " + list.get(value-1).description);
             } else if (input.startsWith("todo")) {
-                String firstTodo = input.substring(5);
-                list.add(new Todo(firstTodo));
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(new Todo(firstTodo));
-                System.out.println("Now you have " + list.size() + " tasks in the list");
-            } else if (input.startsWith("deadline")) {
-                String[] temp = input.split("/");
-                String firstDeadline = temp[0].substring(9);
-                String secondDeadline = temp[1].substring(3);
-                list.add(new Deadline(firstDeadline,secondDeadline));
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(new Deadline(firstDeadline,secondDeadline));
-                System.out.println("Now you have " + list.size() + " tasks in the list");
-            } else if (input.startsWith("event")) {
-                String[] tempEvent = input.split("/");
-                String firstEvent = tempEvent[0].substring(6);
-                String secondEvent = tempEvent[1].substring(3);
-                list.add(new Event(firstEvent,secondEvent));
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(new Event(firstEvent,secondEvent));
-                System.out.println("Now you have " + list.size() + " tasks in the list");
-            } else {
-                    list.add(new Task(input));
-                    System.out.println("added: " + input);
+                if (input.length() < 6) {
+                    System.out.println(new NullTaskError().getMsg("todo"));
+                } else {
+                    String firstTodo = input.substring(5);
+                    list.add(new Todo(firstTodo));
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(new Todo(firstTodo));
+                    System.out.println("Now you have " + list.size() + " tasks in the list");
                 }
+            } else if (input.startsWith("deadline")) {
+                if (input.length() < 10) {
+                    System.out.println(new NullTaskError().getMsg("deadline"));
+                } else {
+                    String[] temp = input.split("/");
+                    String firstDeadline = temp[0].substring(9);
+                    String secondDeadline = temp[1].substring(3);
+                    list.add(new Deadline(firstDeadline, secondDeadline));
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(new Deadline(firstDeadline, secondDeadline));
+                    System.out.println("Now you have " + list.size() + " tasks in the list");
+                }
+            } else if (input.startsWith("event")) {
+                if (input.length() < 7) {
+                    System.out.println(new NullTaskError().getMsg("event"));
+                } else {
+                    String[] tempEvent = input.split("/");
+                    String firstEvent = tempEvent[0].substring(6);
+                    String secondEvent = tempEvent[1].substring(3);
+                    list.add(new Event(firstEvent, secondEvent));
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(new Event(firstEvent, secondEvent));
+                    System.out.println("Now you have " + list.size() + " tasks in the list");
+                }
+            } else {
+                DukeException e = new NonExistentKeyword();
+                System.out.println(e.getMsg());
+            }
         }
-
     }
 }
