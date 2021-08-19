@@ -87,8 +87,24 @@ public class Duke {
                     System.out.println("Oops! The event must be at a certain time :(");
                 }
             }
+            else if (command.startsWith("delete ")){
+                String name = command.substring(7);
+                boolean taskFound = false;
+                for (Task task : tasks){
+                    if (task.getName().equals(name)){
+                        tasks.remove(task);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(task);
+                        taskFound = true;
+                        break;
+                    }
+                }
+                if (!taskFound){
+                    System.out.println("Oops! A task of that name could not be found :(");
+                }
+            }
             else {
-                List<String> command_list = Arrays.asList("todo", "deadline", "event");
+                List<String> command_list = Arrays.asList("todo", "deadline", "event", "delete");
                 if (command_list.contains(command)){
                     System.out.println("Oops! The task description cannot be empty L:(");
                 }
