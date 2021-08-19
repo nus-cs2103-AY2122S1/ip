@@ -73,7 +73,7 @@ public class Chatbot {
             System.out.print("User: ");
             try {
                 keepChatting = interpret() == ChatContinue.CONTINUE;
-            } catch (DukeException e) {
+            } catch (DukeArgumentException e) {
                 System.out.println(e.getMessage());
             }
         };
@@ -89,11 +89,11 @@ public class Chatbot {
         if (taskCommand != null) {
             String[] arguments = input.split(" ", 2);
             if (arguments.length == 1) {
-                throw new DukeException("No items specified for '" + taskCommand.command + "'!");
+                throw new DukeArgumentException("No items specified for '" + taskCommand.command + "'!");
             }
             return addTask(taskCommand, arguments[1]);
         }
-        throw new DukeException("Looks like I don't support those commands yet...");
+        throw new DukeArgumentException("Looks like I don't support those commands yet...");
     }
 
     private ChatContinue addTask(TaskCommands command, String input) {

@@ -1,5 +1,5 @@
-public class DukeException extends IllegalArgumentException{
-    public DukeException(String msg) {
+public class DukeArgumentException extends IllegalArgumentException{
+    public DukeArgumentException(String msg) {
         super(msg);
     }
 
