@@ -56,12 +56,23 @@ Nice! I've marked this task as done:
  [E][X] complete ip  (at: Aug 19 23:59)
 
 
+Hey, there is no such task!
+
+
+Ok, I have removed the following task:
+ [D][X] eat lunch  (by: 3pm today)
+Now you have 5 task(s) in the list.
+
+
+Ok, I have removed the following task:
+ [T][ ] read book
+Now you have 4 task(s) in the list.
+
+
 Here are the tasks in your list:
-1.[T][ ] read book
-2.[T][X] sleep
-3.[D][X] eat lunch  (by: 3pm today)
-4.[D][ ] sleep  (by: 11pm tonight)
-5.[E][X] complete ip  (at: Aug 19 23:59)
-6.[E][ ] sleep  (at: Aug 19 00:00)
+1.[T][X] sleep
+2.[D][ ] sleep  (by: 11pm tonight)
+3.[E][X] complete ip  (at: Aug 19 23:59)
+4.[E][ ] sleep  (at: Aug 19 00:00)
 
 Bye. Hope to see you again soon!
