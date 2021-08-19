@@ -2,7 +2,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<Task> tasks = new ArrayList<Task>();
+    private static ArrayList<Task> tasks = new ArrayList<>();
+    private enum Command { TODO, EVENT, DEADLINE, DONE, DELETE, LIST, BYE }
 
     public static void main(String[] args) {
         System.out.println("Hello...\nWhat do you want?\n");
@@ -13,15 +14,7 @@ public class Duke {
             String[] parts = answer.split(" ");
             String taskType = parts[0];
             try {
-                if (taskType.equals("done")) {
-                    markTaskAsDone(answer);
-                } else if (taskType.equals("delete")) {
-                    deleteTask(answer);
-                } else if (taskType.equals("list")) {
-                    printTaskList();
-                } else {
-                    addNewTask(taskType, answer);
-                }
+                handleUserCommand(taskType, answer);
             } catch (DukeException e){
                 System.out.println(e.getMessage());
             }
@@ -31,40 +24,78 @@ public class Duke {
         System.out.println("Whatever...");
     }
 
+    private static void handleUserCommand(String taskType, String answer) throws DukeException {
+        Command command = checkValidTaskType(taskType);
+        switch (command) {
+            case DONE:
+                markTaskAsDone(answer);
+                break;
+            case DELETE:
+                deleteTask(answer);
+                break;
+            case LIST:
+                printTaskList();
+                break;
+            default:
+                addNewTask(command, answer);
+        }
+    }
+
     private static void printTaskList() {
+        if (tasks.size() == 0) {
+            System.out.println("There are no tasks in the list.");
+            return;
+        }
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
     }
 
-    private static void addNewTask(String taskType, String answer) throws DukeException {
+    private static void addNewTask(Command command, String answer) throws DukeException {
         String taskDetails = answer.substring(answer.indexOf(" ") + 1);
         if (!answer.contains(" ") || taskDetails.isEmpty()) {
-            throw new DukeException("Description of " + taskType + " cannot be empty");
-        } else if (taskType.equals("todo")) {
-            tasks.add(new Todo(taskDetails));
-        } else if (taskType.equals("event")) {
-            String[] parts = taskDetails.split(" /at ");
-            if (parts.length < 2) {
-                throw new DukeException("Event descriptions must contain /at [time]");
-            }
-            String description = parts[0];
-            String at = parts[1]; 
-            tasks.add(new Event(description, at));
-        } else if (taskType.equals("deadline")) {
-            String[] parts = taskDetails.split(" /by ");
-            if (parts.length < 2) {
-                throw new DukeException("Deadline descriptions must contain /by [time]");
-            }
-            String description = parts[0];
-            String by = parts[1];
-            tasks.add(new Deadline(description, by));
-        } else {
-            throw new DukeException("-_-+ Invalid command.");
+            throw new DukeException("Description of " + command.toString().toLowerCase() + " cannot be empty");
+        }
+        switch (command) {
+            case TODO:
+                addTodo(taskDetails);
+                break;
+            case EVENT:
+                addEvent(taskDetails);
+                break;
+            case DEADLINE:
+                addDeadline(taskDetails);
+                break;
+            default:
+                throw new DukeException("-_-+ Invalid command.");
         }
         System.out.println("Got it. I've added this task:\n\t" + tasks.get(tasks.size() - 1));
         printTasksCount();
+    }
+
+    private static void addTodo(String taskDetails) {
+        tasks.add(new Todo(taskDetails));
+    }
+
+    private static void addEvent(String taskDetails) throws DukeException {
+        String[] parts = taskDetails.split(" /at ");
+        if (parts.length < 2) {
+            throw new DukeException("Event descriptions must contain /at [time]");
+        }
+        String description = parts[0];
+        String at = parts[1];
+        tasks.add(new Event(description, at));
+    }
+
+    private static void addDeadline(String taskDetails) throws DukeException {
+        String[] parts = taskDetails.split(" /by ");
+        if (parts.length < 2) {
+            throw new DukeException("Deadline descriptions must contain /by [time]");
+        }
+        String description = parts[0];
+        String by = parts[1];
+        tasks.add(new Deadline(description, by));
     }
 
     private static void markTaskAsDone(String answer) throws DukeException {
@@ -98,6 +129,13 @@ public class Duke {
             throw new DukeException("Invalid task number. Sample input with correct format: [command] [taskNo]"
                                     + " eg. 'done 2'");
         }
+    }
+
+    private static Command checkValidTaskType(String taskType) throws DukeException {
+        for (Command c : Command.values()) {
+            if (c.toString().toLowerCase().equals(taskType)) return c;
+        }
+        throw new DukeException("Unknown command...");
     }
 
     private static void printTasksCount() {
