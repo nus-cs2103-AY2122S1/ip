@@ -3,161 +3,183 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private static ArrayList<Task> userInput;
-    private static boolean isBye;
-    private static Scanner scanner;
-    private static int counter;
+    private ArrayList<Task> userInput;
+    private boolean isBye;
+    private Scanner scanner;
 
-    public Duke()
-    {
-        counter = 0;
+    private final static String divider = "  ---------------------------------------------";
+    private final static String indent1 = "    ";
+    private final static String indent2 = "      ";
+
+    public Duke() {
         scanner = new Scanner(System.in);
         userInput = new ArrayList<>();
         isBye = false;
     }
 
-    public static void getInput() {
-            while (!isBye && scanner.hasNext()) {
-                try {
-                    String input = scanner.nextLine().trim();
+    public void getInput() {
+        while (!isBye && scanner.hasNext()) {
+            try {
+                String input = scanner.nextLine().trim();
+                String[] splitInput = input.split(" +");
+                String word = splitInput[0];
 
-                    if (input.equals("bye") || input == "bye") {
-                        System.out.println("  ---------------------------------------------");
-                        System.out.println("    Bye. Hope to see you again soon!");
-                        System.out.println("  ---------------------------------------------");
+                switch (word) {
+
+                    case "bye":
+                        System.out.println(divider);
+                        System.out.println(indent1 + "Bye! Hope to see you again soon :)");
+                        System.out.println(divider);
                         isBye = true;
                         scanner.close();
-                    } else if (input.equals("list") || input == "list") {
-                        System.out.println("  ---------------------------------------------\n" +
-                                "    Here are the tasks in your list:");
+                        break;
+
+                    case "list":
+                        System.out.println(divider);
+                        System.out.println(indent1 + "Here are the tasks in your list:");
                         int point = 0;
                         while (point < userInput.size()) {
                             Task temp = userInput.get(point);
-                            System.out.println("        " + (point + 1) + ". " + temp.toString());
+                            System.out.println(indent2 + (point + 1) + ". " + temp.toString());
                             point++;
                         }
-                        System.out.println("    Now you have " + point + " tasks in the list.\n" +
-                                "  ---------------------------------------------");
-                    } else if (input.contains("done")) {
-                        inputDone(input);
-                    } else if (input.contains("delete")) {
-                        deleteTask(input);
-                    } else {
-                        addTask(input);
-                    }
-                } catch(DukeException e) {
-                    System.out.println("  ---------------------------------------------");
-                    System.out.println(e.getMessage());
-                    System.out.println("  ---------------------------------------------");
+                        printNumberOfTasks();
+                        break;
+
+                    case "done":
+                        inputDone(input, splitInput);
+                        break;
+
+                    case "delete":
+                        deleteTask(input, splitInput);
+                        break;
+
+                    case "todo":
+
+                    case "deadline":
+
+                    case "event":
+                        checkTask(input);
+                        break;
+
+                    default:
+                        throw new DukeException(indent1 + "☹ OH NO I'm sorry, but I don't " +
+                                "know what that means :-(");
                 }
-
+            } catch (DukeException e) {
+                System.out.println(divider);
+                System.out.println(e.getMessage());
+                System.out.println(divider);
             }
+
         }
+    }
 
-        public static void deleteTask(String input) throws DukeException {
-            String[] splitInput = input.split(" +");
-            if(splitInput.length == 2) {
-                int taskNum = Integer.valueOf(splitInput[1]);
-                if(taskNum <= 0 || taskNum > userInput.size()) {
-                    throw new DukeException("     ☹ OOPS!!! There is no corresponding task to be " +
-                            "deleted.");
-                } else {
-
-                    System.out.println("  ---------------------------------------------");
-                    System.out.println("    Noted. I've removed this task:\n" + "      " +
-                            userInput.get(taskNum - 1).toString());
-                    userInput.remove(taskNum-1);
-                    System.out.println("    Now you have " + userInput.size() +
-                            (userInput.size() == 1 ? " task" : " tasks")
-                                + " in the list.");
-                    System.out.println("  ---------------------------------------------");
-
-                }
-            } else {
-                throw new DukeException("     ☹ OOPS!!! The task to be deleted" +
-                        "is not indicated!!");
-            }
-        }
-
-    public static void inputDone(String input) throws DukeException {
-        String[] splitInput = input.split(" +");
-        if(splitInput.length == 2) {
+    public void deleteTask(String input, String[] splitInput) throws DukeException {
+        if (splitInput.length == 2) {
             int taskNum = Integer.valueOf(splitInput[1]);
-            if(taskNum > userInput.size() || taskNum <= 0) {
-                throw new DukeException("     ☹ OOPS!!! There is no corresponding task to be " +
+            if (taskNum <= 0 || taskNum > userInput.size()) {
+                throw new DukeException(indent1 + "☹ OOPS!!! There is no " +
+                        "corresponding task to be deleted.");
+            } else {
+                System.out.println(divider);
+                System.out.println(indent1 + "Sure! I've removed this task:\n" + indent2 +
+                        userInput.get(taskNum - 1).toString());
+                userInput.remove(taskNum - 1);
+                printNumberOfTasks();
+            }
+        } else {
+            throw new DukeException(indent1 + "☹ OOPS!!! The task to be deleted" +
+                    "is not indicated!!");
+        }
+    }
+
+    public void inputDone(String input, String[] splitInput) throws DukeException {
+        if (splitInput.length == 2) {
+            int taskNum = Integer.valueOf(splitInput[1]);
+            if (taskNum > userInput.size() || taskNum <= 0) {
+                throw new DukeException(indent1 + "☹ OOPS!!! There is no corresponding task to be " +
                         "marked done.");
             } else {
                 Task temp = userInput.get(Integer.valueOf(splitInput[1]) - 1);
                 temp.markAsDone();
-                System.out.println("  ---------------------------------------------\n" +
-                        "    Nice! I've marked this task as done:\n      " + temp.toString());
-                System.out.println("  ---------------------------------------------");
+                System.out.println(divider);
+                System.out.println(indent1 + "YAY good job for completing the task :)\n" +
+                        indent1 + "I've marked it as done:\n" + indent2 +
+                        temp.toString());
+                System.out.println(divider);
             }
-        } else if(splitInput.length == 1){
-            throw new DukeException("     ☹ OOPS!!! The task to be marked done is not indicated!!");
+        } else if (splitInput.length == 1) {
+            throw new DukeException(indent1 + "☹ OOPS!!! The task to be marked done is not indicated!!");
         }
     }
 
-    public static void addTask(String input) throws DukeException {
-        String[] splitInput = input.split(" ");
-        String taskType = splitInput[0];
-        if(taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event")) {
+    public void addTask(Task task) {
+        userInput.add(task);
+        System.out.println(divider);
+        System.out.println(indent1 + "Sure! I've added this task:");
+        System.out.println(indent2 + task.toString());
+        printNumberOfTasks();
+    }
 
-            if (splitInput.length > 1) {
-                if (taskType.equals("todo")) {
-                    String description = input.split("todo ")[1];
-                    Todo todo = new Todo(description);
-                    userInput.add(todo);
-                } else if (taskType.equals("event")) {
-                    String[] splitEvent= input.split("/at");
-                    if(splitEvent.length == 1) {
-                        throw new DukeException("      ☹ OOPS!!! The period which the event occurs " +
-                                "is not inputted correctly. Use /at to indicate the period ;)");
-                    } else {
-                        String[] splitEvent2 = splitEvent[0].split("event ");
-                        if (splitEvent2.length == 0) {
-                            throw new DukeException("     ☹ OOPS!!! The description of an " +
-                                    "event cannot be empty.");
-                        } else {
-                            Event event = new Event(splitEvent2[1], splitEvent[1]);
-                            userInput.add(event);
-                        }
+
+    public void printNumberOfTasks() {
+        String numberOfTasks = indent1 + "Now you have " + userInput.size() +
+                (userInput.size() == 1 ? " task" : " tasks") + " in the list.\n" +
+                divider;
+        System.out.println(numberOfTasks);
+    }
+
+    public void checkTask(String input) throws DukeException {
+        String[] splitInput2 = input.split(" +", 2);
+        String taskType = splitInput2[0];
+        if (splitInput2.length == 2) {
+            if (taskType.equals("todo")) {
+                Todo todo = new Todo(splitInput2[1]);
+                addTask(todo);
+            } else {
+                String[] splitTask2 = splitInput2[1].split(" +");
+                String[] splitTask = taskType.equals("deadline")
+                        ? splitInput2[1].split("/by") :
+                        splitInput2[1].split("/at");
+                if (splitTask.length == 2 && !splitTask[0].isBlank()) {
+                    Task toAdd;
+                    switch (taskType) {
+                        case "deadline":
+                            toAdd = new Deadline(splitTask[0], splitTask[1]);
+                            addTask(toAdd);
+                            break;
+                        case "event":
+                            toAdd = new Event(splitTask[0], splitTask[1]);
+                            addTask(toAdd);
+                            break;
                     }
                 } else {
-                    String[] splitDl= input.split("/by");
-                    if(splitDl.length == 1) {
-                        throw new DukeException("      ☹ OOPS!!! The deadline is not " +
-                                "inputted correctly. Use /by to indicate the deadline ;)");
+                    if (taskType.equals("deadline") && !splitInput2[1].contains("/by")
+                            || taskType.equals("event") && !splitInput2[1].contains("/at")) {
+                        throw new DukeException(indent1 + "☹ OOPS!!! The " +
+                                (taskType.equals("event") ? "period which the event occurs" :
+                                        "deadline") + " is not inputted correctly. Use " +
+                                (taskType.equals("event") ? "/at" : "/by") +
+                                " to indicate ;)");
                     } else {
-                        String[] splitDl2 = splitDl[0].split("deadline ");
-                        if(splitDl2.length == 0) {
-                            throw new DukeException("     ☹ OOPS!!! The description of a " +
-                                    "deadline cannot be empty.");
-                        } else {
-                            Deadline deadline = new Deadline(splitDl2[1], splitDl[1]);
-                            userInput.add(deadline);
-                        }
+                        noDescription(taskType);
                     }
+
                 }
 
-                System.out.println("  ---------------------------------------------");
-                System.out.println("    Got it. I've added this task:");
-                int index = userInput.size();
-                System.out.println("      " + userInput.get(index-1).toString());
-                System.out.println("    Now you have " + index + (index == 1 ?
-                        " task in the list" : " tasks in the list."));
-                System.out.println("  ---------------------------------------------");
-            } else {
-                throw new DukeException("     ☹ OOPS!!! The description of " +
-                        (taskType.equals("event") ? "an " : "a ")
-                            + taskType + " cannot be empty.");
             }
         } else {
-            throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't " +
-                    "know what that means :-(");
+            noDescription(taskType);
         }
-
     }
+
+    public static void noDescription(String taskType) throws DukeException {
+        throw new DukeException(indent1 + "☹ OOPS!!! The description of " +
+                (taskType.equals("event") ? "an " : "a ")
+                + taskType + " cannot be empty.");
+    }
+
 
     public static void main(String[] args) {
 
@@ -167,7 +189,7 @@ public class Duke {
         System.out.println("  ---------------------------------------------");
 
         Duke duke = new Duke();
-        getInput();
+        duke.getInput();
 
     }
 }
