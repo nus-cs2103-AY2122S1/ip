@@ -35,10 +35,10 @@ public class BotBrain {
      */
     private void classifyTask(String input) throws InvalidCommandException, InvalidCommandFormatException{
         String[] inputToken = tokenize(input);
-        String taskType = inputToken[0];
+        CommandInput taskType = identifyCommand(input);
 
-        switch (taskType){
-            case "todo":
+        switch (taskType) {
+            case TODO:
                 //  throw invalid format exception if "todo" is entered without anymore information
                 if (inputToken.length == 1) {
                     throw new InvalidCommandFormatException(botMemory.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
@@ -46,7 +46,7 @@ public class BotBrain {
                 taskTracker.add(new ToDo(inputToken[1]));
                 return;
 
-            case "deadline":
+            case DEADLINE:
                 String[] deadlineTask = inputToken[1].split(" /by ", 2);
 
                 // throw invalid format exception if deadline is not in the format of "task /by time"
@@ -56,7 +56,7 @@ public class BotBrain {
                 taskTracker.add(new Deadline(deadlineTask[0].trim(), deadlineTask[1].trim()));
                 return;
 
-            case "event":
+            case EVENT:
                 String[] eventTask = inputToken[1].split(" /at ", 2);
 
                 // throw invalid command format if event is not in the format of "task /at time"
@@ -189,27 +189,12 @@ public class BotBrain {
      */
     private CommandInput identifyCommand(String command) throws InvalidCommandException{
         String commandInitial = command.trim().split(" ")[0];
-        CommandInput taskType;
-
-        if (commandInitial.equals("bye")) {
-            taskType = CommandInput.BYE;
-        } else if (commandInitial.equals("list")) {
-            taskType = CommandInput.LIST;
-        } else if (commandInitial.equals("done")) {
-            taskType = CommandInput.DONE;
-        } else if (commandInitial.equals("delete")) {
-            taskType = CommandInput.DELETE;
-        } else if (commandInitial.equals("todo")) {
-            taskType = CommandInput.TODO;
-        } else if (commandInitial.equals("deadline")) {
-            taskType = CommandInput.DEADLINE;
-        } else if (commandInitial.equals("event")) {
-            taskType = CommandInput.EVENT;
-        } else {
+        try {
+            CommandInput taskType = CommandInput.valueOf(commandInitial.toUpperCase());
+            return taskType;
+        } catch (Exception e) {
             throw new InvalidCommandException(botMemory.ERROR_MESSAGE_INVALID_COMMAND);
         }
-
-        return taskType;
     }
 
     /**
