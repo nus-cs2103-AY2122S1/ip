@@ -14,18 +14,26 @@ public class Duke {
             String command = sc.nextLine();
             String[] commandTokens = command.split(" ");
             // parse command
-            switch (commandTokens[0]) {
-                case "bye":
-                    run = false;
-                    break;
-                case "done":
-                    printMessage(toDoList.markAsCompleted(command.substring(5).trim()));
-                    break;
-                case "list":
-                    printMessage(toDoList.getAllItems());
-                    break;
-                default:
-                    printMessage(toDoList.addItem(command));
+            try {
+                switch (commandTokens[0]) {
+                    case "bye":
+                        run = false;
+                        break;
+                    case "done":
+                        printMessage(toDoList.markAsCompleted(command.substring(5).trim()));
+                        break;
+                    case "list":
+                        printMessage(toDoList.getAllItems());
+                        break;
+                    default:
+                        try {
+                            printMessage(toDoList.addItem(command));
+                        } catch (DukeException ex) {
+                            printMessage(ex.getMessage());
+                        }
+                }
+            } catch (ArrayIndexOutOfBoundsException ex) { // only occurs when the user only types whitespace
+                printMessage("Please type some commands!");
             }
         }
         printMessage("Goodbye for now!");

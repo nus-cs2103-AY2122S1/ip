@@ -12,46 +12,43 @@ class MyList {
         this.listedItems = new HashSet<String>();
     }
 
-    protected String addItem(String command) {
+    protected String addItem(String command) throws DukeException.InvalidCommandException, DukeException.InvalidTaskDescriptionException, DukeException.DuplicateTaskException {
         String[] commandTokens = generateTokens(command, " ");
-        String[] detailTokens;
         String taskName;
         Task task = null;
-        switch (commandTokens[0]) {
-            case ("todo"):
-                taskName = command.substring(5).trim();
-                if (this.listedItems.contains(taskName)) {
-                    return "task already in list!";
-                } else {
-                    task = new ToDo(taskName);
-                    this.listedItems.add(taskName);
-                    this.items.add(task);
-                    break;
-                }
-            case ("event"):
-                detailTokens = generateTokens(command.substring(6), "/");
+        if (commandTokens[0].equals("todo")) {
+            taskName = command.substring(5).trim();
+            if (this.listedItems.contains(taskName)) {
+                throw new DukeException.DuplicateTaskException("Task already in list!");
+            } else if (taskName.length() == 0) {
+               throw new DukeException.InvalidTaskDescriptionException("Missing task description!");
+            } else {
+                task = new ToDo(taskName);
+                this.listedItems.add(taskName);
+                this.items.add(task);
+            }
+        } else if (commandTokens[0].equals("event") || commandTokens[0].equals("deadline")) { // either event ot deadline
+            String details = command.substring(commandTokens[0].length() + 1).trim();
+            String[] detailTokens = generateTokens(details, "/");
+            if (detailTokens.length < 2) {
+                throw new DukeException.InvalidTaskDescriptionException("Invalid task description: missing date/time!");
+            } else if (detailTokens.length > 2) {
+                throw new DukeException.InvalidTaskDescriptionException("Invalid task description: multiple dates/times!");
+            } else if (this.listedItems.contains(detailTokens[0].trim())){ // item alr in list
+                throw new DukeException.DuplicateTaskException("Task already in list!");
+            } else { // valid
                 taskName = detailTokens[0].trim();
-                if (this.listedItems.contains(taskName)) {
-                    return "task already in list!";
-                } else {
-                    task = new Event(taskName, detailTokens[1].trim());
-                    this.listedItems.add(taskName);
-                    this.items.add(task);
-                    break;
+                String dateTime = detailTokens[1].trim();
+                if (commandTokens[0].trim().equals("event")) {
+                    task = new Event(taskName, dateTime);
+                } else { //deadline
+                    task = new Deadline(taskName, dateTime);
                 }
-            case ("deadline"):
-                detailTokens = generateTokens(command.substring(9), "/");
-                taskName = detailTokens[0].trim();
-                if (this.listedItems.contains(taskName)) {
-                    return "task already in list!";
-                } else {
-                    task = new Deadline(taskName, detailTokens[1].trim());
-                    this.listedItems.add(taskName);
-                    this.items.add(task);
-                    break;
-                }
-            default:
-                return "invalid command!!";
+                this.listedItems.add(taskName);
+                this.items.add(task);
+            }
+        } else { // invalid input
+            throw new DukeException.InvalidCommandException("Invalid command!");
         }
         return String.format("New task added to list:\n%s", task.toString()); //TODO
     }
