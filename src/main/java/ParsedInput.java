@@ -5,10 +5,15 @@ public class ParsedInput {
     String eventPeriod = "";
     int taskIndex = -1;
 
-    public ParsedInput(String input) {
+    InputValidator inputValidator = InputValidator.getInstance();
+
+    public ParsedInput(String input) throws JadenInputException {
         String[] splitInput = input.split(" ");
         switch (splitInput[0]) {
             case "todo":
+                if(!inputValidator.checkTodo(splitInput)) {
+                    throw JadenInputException.invalidTodo();
+                }
                 this.commandType = CommandType.TODO;
                 this.taskDescription = joinStrings(splitInput, 1, splitInput.length - 1);
                 break;
@@ -35,7 +40,7 @@ public class ParsedInput {
                 this.commandType = CommandType.BYE;
                 break;
             default:
-                this.commandType = CommandType.ERROR;
+                throw JadenInputException.unrecognized();
         }
     }
 

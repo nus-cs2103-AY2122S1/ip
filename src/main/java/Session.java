@@ -28,7 +28,13 @@ public class Session {
     }
 
     private void handleInput(String currInput) {
-        ParsedInput parsedInput = new ParsedInput(currInput);
+        ParsedInput parsedInput = null;
+        try {
+            parsedInput = new ParsedInput(currInput);
+        } catch (JadenInputException e) {
+            output(e.getMessage());
+            return;
+        }
         switch (parsedInput.commandType) {
             case TODO:
                 this.taskList.addTask(new ToDoTask(parsedInput.taskDescription));
@@ -47,9 +53,6 @@ public class Session {
                 break;
             case BYE:
                 this.bye();
-                break;
-            case ERROR:
-                output("I Only Listen To Valid Commands. You Are Invalid.");
         }
     }
 

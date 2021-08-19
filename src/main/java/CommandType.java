@@ -1,3 +1,3 @@
 public enum CommandType {
-    TODO, DEADLINE, EVENT, LIST, DONE, BYE, ERROR
+    TODO, DEADLINE, EVENT, LIST, DONE, BYE
 }
