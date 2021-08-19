@@ -1,8 +1,10 @@
 import java.util.Scanner;
+import java.util.Set;
 
 public class Duke {
     private Task[] tasks = new Task[100];
     private int count = 0;
+    private static final Set<String> ACTIONS = Set.of("todo", "done", "deadline", "event", "list");
 
     /**
      * Print with 4 spaces infront of param str.
@@ -10,14 +12,14 @@ public class Duke {
      * @param str A String to be printed
      */
     public static void printWithTabIndent(String str) {
-        System.out.println("    " + str);
+        System.out.println("\t" + str);
     }
 
     /**
      * Print horizontal line.
      */
     public static void printLine() {
-        printWithTabIndent("------------------------------------------");
+        printWithTabIndent("-------------------------------------------------------------");
     }
 
     /**
@@ -63,41 +65,33 @@ public class Duke {
      * Marks the corresponding task as done.
      * If message does not contain a number, this method will print an error message.
      *
-     * @param message String user input
+     * @param taskNo String user input
      */
-    public void markTaskDone(String message) {
-        if (message.equals("done")) {
-            printMessage("Please enter the task number.");
-        } else if (message.matches("^done \\d+$")) {
-            String taskNo = message.split(" ")[1];
-            try {
-                int taskNoInt = Integer.parseInt(taskNo) - 1;
-                if (count == 0) {
-                    printMessage("Nothing in the list");
-                } else if (taskNoInt >= count || taskNoInt < 0) {
-                    printMessage(String.format("Enter a valid number between 1 - %d", count));
-                } else if (tasks[taskNoInt].isDone()) {
-                    printMessage(
-                            String.format("Task %s is already done!\n    %s",
-                                    taskNo,
-                                    tasks[taskNoInt].toString()
-                            )
-                    );
-                } else {
-                    tasks[taskNoInt].markAsDone();
-                    printMessage(
-                            String.format("Nice! I've marked this task as done:\n       %s",
-                                    tasks[taskNoInt].toString()
-                            )
-                    );
-                }
-            } catch (NumberFormatException e) {
-                printMessage("Not a number!");
+    public void markTaskDone(String taskNo) throws DukeException {
+        try {
+            int taskNoInt = Integer.parseInt(taskNo) - 1;
+            Task selectedTask = tasks[taskNoInt];
+            if (count == 0) {
+                printMessage("Nothing in the list");
+            } else if (selectedTask.isDone()) {
+                printMessage(
+                        String.format("Task %s is already done!\n\t  %s",
+                                taskNo,
+                                tasks[taskNoInt].toString()
+                        )
+                );
+            } else {
+                selectedTask.markAsDone();
+                printMessage(
+                        String.format("Nice! I've marked this task as done:\n\t  %s",
+                                tasks[taskNoInt].toString()
+                        )
+                );
             }
-        } else if (message.matches("^done [a-zA-Z]+.*$")) {
-            printMessage("Invalid Input");
-        } else {
-            addTask(message);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Enter a task number for a done action!");
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
+            throw new DukeException(String.format("Enter a valid number between 1 - %d", count));
         }
     }
 
@@ -114,41 +108,62 @@ public class Duke {
 
     /**
      * Add a Deadline task to tasks.
+     * Throws DukeException if deadline description or end time is missing.
      *
      * @param message String user input. Should start with "deadline"
      */
-    public void addDeadlineTask(String message) {
-        String taskDescription =
-                message.replace("deadline ", "").replaceAll("/by.*", "");
-        String endDate = message.replaceAll(".*/by ", "");
-        tasks[count] = new Deadline(taskDescription, endDate);
-        count++;
-        printAddMessage("Got it. I've  added this task:", tasks[count - 1].toString());
+    public void addDeadlineTask(String message) throws DukeException {
+        try {
+            String taskDescription = message.replaceAll("/by.*", "");
+            String deadline = message.split("/by")[1];
+            tasks[count] = new Deadline(taskDescription, deadline);
+            count++;
+            printAddMessage("Got it. I've  added this task:", tasks[count - 1].toString());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("The end time of a deadline cannot be empty.");
+        }
     }
 
     /**
      * Add an Event task to tasks.
+     * Throws DukeException if event description or deadline is missing.
      *
-     * @param message String user input. Should start with "event"
+     * @param message String user input
      */
-    public void addEventTask(String message) {
-        String taskDescription =
-                message.replace("event ", "").replaceAll("/at.*", "");
-        String deadline = message.replaceAll(".*/at ", "");
-        tasks[count] = new Event(taskDescription, deadline);
-        count++;
-        printAddMessage("Got it. I've  added this task:", tasks[count - 1].toString());
+    public void addEventTask(String message) throws DukeException {
+        try {
+            String taskDescription = message.replaceAll("/at.*", "");
+            String deadline = message.split("/at")[1];
+            tasks[count] = new Event(taskDescription, deadline);
+            count++;
+            printAddMessage("Got it. I've  added this task:", tasks[count - 1].toString());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("The start and end time of a event cannot be empty.");
+        }
     }
 
-    /**
-     * Add a Task task to tasks.
-     *
-     * @param taskTitle String user input
-     */
-    public void addTask(String taskTitle) {
-        tasks[count] = new Task(taskTitle);
-        count++;
-        printAddMessage("added:", taskTitle);
+    public void handleInput(String message) throws DukeException {
+        String inputAction = message.split(" ")[0];
+        if (ACTIONS.contains(inputAction)) {
+            String parsedMessage = message.replace(inputAction, "").trim();
+            if (parsedMessage.isEmpty() && !inputAction.equals("list")) {
+                throw new DukeException(String.format("The description of a %s cannot be empty.", inputAction));
+            }
+
+            if (inputAction.equals("list")) {
+                printTasks();
+            } else if (inputAction.equals("done")) {
+                markTaskDone(parsedMessage);
+            } else if (inputAction.equals("todo")) {
+                addTodoTask(parsedMessage);
+            } else if (inputAction.equals("deadline")) {
+                addDeadlineTask(parsedMessage);
+            } else if (inputAction.equals("event")) {
+                addEventTask(parsedMessage);
+            }
+        } else if (!message.isEmpty()) {
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
     }
 
     public static void main(String[] args) {
@@ -162,25 +177,18 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         Duke duke = new Duke();
 
-        printMessage("Hello! I'm Duke\n    What can I do for you?");
-        String message = scanner.nextLine();
+        printMessage("Hello! I'm Duke\n\tWhat can I do for you?");
+        String message = scanner.nextLine().trim();
         while (!message.equals("bye")) {
             message = message.trim();
-            if (message.equals("list")) {
-                duke.printTasks();
-            } else if (message.matches("^done.*")) {
-                duke.markTaskDone(message);
-            } else if (message.matches("^todo.*")) {
-                duke.addTodoTask(message);
-            } else if (message.matches("^deadline.*")) {
-                duke.addDeadlineTask(message);
-            } else if (message.matches("^event.*")) {
-                duke.addEventTask(message);
-            } else if (!message.equals("")) {
-                duke.addTask(message);
+            try {
+                duke.handleInput(message);
+            } catch (DukeException e) {
+                printMessage(e.getMessage());
             }
             message = scanner.nextLine();
         }
         printMessage("Bye. Hope to see you again soon!");
+        scanner.close();
     }
 }

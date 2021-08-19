@@ -10,7 +10,7 @@ public class Deadline extends Task {
      */
     public Deadline(String title, String endDate) {
         super(title);
-        this.endDate = endDate;
+        this.endDate = endDate.trim();
     }
 
     /**

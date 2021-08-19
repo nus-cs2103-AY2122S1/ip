@@ -8,7 +8,7 @@ public class Task {
      * @param title Title of Task
      */
     public Task(String title) {
-        this.title = title;
+        this.title = title.trim();
     }
 
     /**

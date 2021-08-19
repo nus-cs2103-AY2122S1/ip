@@ -10,7 +10,7 @@ public class Event extends Task {
      */
     public Event(String title, String deadline) {
         super(title);
-        this.deadline = deadline;
+        this.deadline = deadline.trim();
     }
 
     /**
