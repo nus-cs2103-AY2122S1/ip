@@ -1,11 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Lania {
 
-    /** Task array containing user tasks */
-    private static Task[] taskArray = new Task[100];
-    /** Keep track of number of user inputs */
-    private static int count = 0;
+    private static ArrayList<Task> taskArrayList = new ArrayList<Task>();
 
     /**
      * Store user input in task array and show that it is added.
@@ -38,11 +36,10 @@ public class Lania {
         } else {
             throw new LaniaException("Sorry, but Lania doesn't know what that means");
         }
-        taskArray[count] = t;
-        count++;
+        taskArrayList.add(t);
         System.out.println("Lania has added: ");
         System.out.println(t);
-        System.out.println("Great! Now you have " + count + (count == 1 ? " task" : " tasks") + " in your list.");
+        System.out.println("Great! Now you have " + taskArrayList.size() + (taskArrayList.size() == 1 ? " task" : " tasks") + " in your list.");
     }
 
     /**
@@ -51,8 +48,8 @@ public class Lania {
      */
     public static void list() {
         System.out.println("You have the following task(s):");
-        for (int i = 0; i < count; i++) {
-            System.out.println(i + 1 + "." + taskArray[i]);
+        for (int i = 0; i < taskArrayList.size(); i++) {
+            System.out.println(i + 1 + "." + taskArrayList.get(i));
         }
     }
 
@@ -63,9 +60,9 @@ public class Lania {
      */
     public static void complete(int i) {
         i--;
-        taskArray[i].markAsDone();
+        taskArrayList.get(i).markAsDone();
         System.out.println("Good job! Lania has marked this task as done:");
-        System.out.println(taskArray[i]);
+        System.out.println(taskArrayList.get(i));
     }
 
     /**
