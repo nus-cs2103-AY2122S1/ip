@@ -10,7 +10,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        System.out.println(div_line + "\n" + indent + "Oops! " + this.error + "\n" + div_line);
         return this.error;
     }
 }
