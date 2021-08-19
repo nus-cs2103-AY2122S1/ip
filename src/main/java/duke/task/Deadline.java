@@ -1,6 +1,8 @@
 package duke.task;
 
+import duke.date.Date;
 import duke.exception.BadInputFormatException;
+import duke.exception.InvalidDateException;
 
 /**
  * Represents a duke.tasks.Deadline object.
@@ -12,8 +14,8 @@ public class Deadline extends DatedTask {
      * @param description the deadline's description
      * @throws BadInputFormatException if the deadline is badly formatted
      */
-    private Deadline(String description) throws BadInputFormatException {
-        this(parse(description)[0], parse(description)[1]);
+    private Deadline(String description) throws BadInputFormatException, InvalidDateException {
+        this(parseToDescription(description), parseToDate(description));
     }
 
     /**
@@ -22,7 +24,7 @@ public class Deadline extends DatedTask {
      * @param description the deadline's description
      * @param by the date to complete the task by
      */
-    private Deadline(String description, String by) {
+    private Deadline(String description, Date by) {
         super(description, by);
     }
 
@@ -32,23 +34,24 @@ public class Deadline extends DatedTask {
      * @param description the user's input
      * @return a new duke.tasks.Deadline object
      */
-    public static Deadline of(String description) throws BadInputFormatException {
+    public static Deadline of(String description) throws BadInputFormatException, InvalidDateException {
         return new Deadline(description);
     }
 
-    /**
-     * Parses the description into tokens as string arrays.
-     *
-     * @param description the user's input
-     * @return an array of tokens represented as strings; index 0 contains the description, index 1 contains the time
-     * @throws BadInputFormatException if the input is not properly formatted
-     */
-    private static String[] parse(String description) throws BadInputFormatException {
+    private static Date parseToDate(String description) throws BadInputFormatException, InvalidDateException {
         String[] tokens = description.split(" /by ");
         if (tokens.length < 2) {
             throw new BadInputFormatException();
         }
-        return tokens;
+        return Date.of(tokens[1]);
+    }
+
+    private static String parseToDescription(String description) throws BadInputFormatException {
+        String[] tokens = description.split(" /by ");
+        if (tokens.length < 2) {
+            throw new BadInputFormatException();
+        }
+        return tokens[0];
     }
 
     @Override

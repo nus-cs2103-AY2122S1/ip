@@ -1,12 +1,12 @@
 package duke.task;
 
-public abstract class DatedTask extends Task {
-    protected String date;
+import duke.date.Date;
 
-    protected DatedTask(String description, String date) {
+public abstract class DatedTask extends Task {
+    protected Date date;
+
+    protected DatedTask(String description, Date date) {
         super((description));
         this.date = date;
     }
-
-
 }

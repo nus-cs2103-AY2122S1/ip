@@ -3,6 +3,7 @@ package duke.command;
 import duke.enums.Tasks;
 import duke.exception.BadInputFormatException;
 import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidDateException;
 import duke.exception.UnknownTaskTypeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -21,7 +22,8 @@ public class AddCommand extends Command {
     public static AddCommand of(String content)
             throws BadInputFormatException,
             UnknownTaskTypeException,
-            EmptyDescriptionException {
+            EmptyDescriptionException,
+            InvalidDateException {
         AddCommand command;
         switch (taskTypeParser(content)) {
         case TODO:
