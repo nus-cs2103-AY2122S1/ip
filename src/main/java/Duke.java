@@ -20,7 +20,7 @@ public class Duke {
 
         while (true) {
             System.out.print("> ");
-            String input = in.nextLine();
+            String input = in.next();
 
             if (input.equals("bye")) {
                 printMessage(BYE_TEXT);
@@ -39,6 +39,12 @@ public class Duke {
                 }
 
                 printMessage(builder.toString());
+            } else if (input.equals("done")) {
+                int taskIndex = in.nextInt();
+                Task task = tasks.get(taskIndex - 1);
+                task.markCompleted();
+
+                printMessage("Marking task as completed:\n" + task.toString());
             } else {
                 printMessage(input);
                 tasks.add(new Task(input));

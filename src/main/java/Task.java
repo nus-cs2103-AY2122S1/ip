@@ -7,6 +7,10 @@ public class Task {
         this.isCompleted = false;
     }
 
+    public void markCompleted() {
+        this.isCompleted = true;
+    }
+
     @Override
     public String toString() {
         String statusIcon = this.isCompleted ? "X" : " ";
