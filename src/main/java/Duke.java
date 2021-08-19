@@ -146,17 +146,10 @@ public class Duke {
                     System.out.println(linebreakstart);
                     System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n");
                     System.out.println("   "
-<<<<<<< HEAD
                             + i
                             + ". "
                             + taskarr[i].toString()
                             + '\n');
-=======
-                        + i
-                        + ". "
-                        + taskarr[i].toString()
-                        + '\n');
->>>>>>> 23e7bda8afdd629a5fce429f87fb32c756edd967
                     System.out.println(linebreakend);
                 } else {
                     try {
