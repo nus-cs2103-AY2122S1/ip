@@ -23,7 +23,7 @@ public class Duke {
 
         // Start taking input from the user
         while (running) {
-            System.out.print(">> ");
+            System.out.println("Enter your command:");
             String command = sc.nextLine();
 
             // Handles basic user input such as list and exit
