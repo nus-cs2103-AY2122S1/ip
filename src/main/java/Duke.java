@@ -47,7 +47,7 @@ public class Duke {
                 continue;
             }
 
-            if (firstString.equals("done") ) {
+            if (firstString.equals("done") || firstString.equals("delete")) {
                 if (inputArray.length < 2) {
                     //case if no number is entered
                     System.out.println("Please enter the index of the task to complete after the keyword done!");
@@ -62,8 +62,18 @@ public class Duke {
                         continue;
                     }
                     Task currentTask = taskArray.get(arrayIndex);
-                    currentTask.setCompleted();
-                    System.out.println("Ok, very nice. I have set the following task as completed.\n" + currentTask.toString());
+                    if (firstString.equals("done")) {
+                        currentTask.setCompleted();
+                        System.out.println("Ok, very nice. I have set the following task as completed.\n" + currentTask.toString());
+                        System.out.println("Now you have " + listIndex + " tasks remaining. Get to work!");
+                    } else {
+                        //remaining case is to delete the task.
+                        taskArray.remove(currentTask);
+                        listIndex -= 1;
+                        System.out.println("Ok, very nice. I have deleted the following task.\n" + currentTask.toString());
+                        System.out.println("Now you have " + listIndex + " tasks remaining. Get to work!");
+                    }
+
                 } catch (NumberFormatException e) {
                     System.out.println("Please enter a valid number!");
                 } finally {
