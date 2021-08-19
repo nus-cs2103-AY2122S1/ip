@@ -16,6 +16,20 @@ public class Duke {
         }
     }
 
+    public static void delete(String input) {
+        try {
+            System.out.println("Noted. I've removed this task: ");
+            int taskIndex = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+            Task task = userInputs.get(taskIndex - 1);
+            userInputs.remove(taskIndex-1);
+            System.out.println(" " + task);
+            task = null;
+            System.out.println("Now you have " + userInputs.size() + " tasks in the list.");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public static void List() {
         for (int i = 0; i < userInputs.size(); i++) {
             Task task = userInputs.get(i);
@@ -70,6 +84,8 @@ public class Duke {
                 markAsDone(str);
             } else if (str.equals("list")) {
                 List();
+            } else if (str.startsWith("delete")) {
+                delete(str);
             } else {
                 try {
                     addTask(str);
