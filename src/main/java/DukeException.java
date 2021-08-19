@@ -41,7 +41,7 @@ public class DukeException extends Exception{
     }
 
     /**
-     * Exception when task has not been added
+     * Exception when to-do list is empty
      */
     public static class EmptyListException extends DukeException {
         EmptyListException(String errorMsg) {
