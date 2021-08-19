@@ -6,4 +6,10 @@ todo dropout university
 done 2
 done 1
 list
+event prof ben leong's lecture /at 24 Aug 2021 1-3pm
+delete 2
+done 7
+invalidcommand
+delete qwerty
+todo
 bye

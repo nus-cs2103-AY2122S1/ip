@@ -40,6 +40,8 @@ public class Duke {
                     this.addDeadline(userInput);
                 } else if (command.equals("done")) {
                     this.markAsDone(userInput);
+                } else if (command.equals("delete")) {
+                    this.delete(userInput);
                 } else {
                     throw new DukeUnknownCommandException(command);
                 }
@@ -47,6 +49,7 @@ public class Duke {
                 System.out.printf("\t%s\n\n", e);
             }
         }
+        this.input.close();
     }
 
 
@@ -72,7 +75,7 @@ public class Duke {
         try {
             String description = userInput[1];
             this.list.add(new Todo(description));
-            System.out.println("\tadded todo: " + description);
+            System.out.printf("\tadded todo:\n\t\t%s\n", this.list.get(this.list.size() - 1));
             System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
@@ -84,7 +87,7 @@ public class Duke {
         try {
             String[] splits = userInput[1].split(" /at ", 2);
             this.list.add(new Event(splits[0], splits[1]));
-            System.out.println("\tadded event: " + splits[1]);
+            System.out.printf("\tadded event:\n\t\t%s\n", this.list.get(this.list.size() - 1));
             System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
@@ -96,7 +99,7 @@ public class Duke {
         try {
             String[] splits = userInput[1].split(" /by ", 2);
             this.list.add(new Deadline(splits[0], splits[1]));
-            System.out.println("\tadded deadline: " + splits[1]);
+            System.out.printf("\tadded deadline:\n\t\t%s\n", this.list.get(this.list.size() - 1));
             System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
@@ -114,6 +117,25 @@ public class Duke {
             this.list.get(taskNum - 1).markAsDone();
             System.out.println("\tI've marked this task as done!");
             System.out.printf("\t\t%s\n\n", this.list.get(taskNum - 1));
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentException();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeMissingArgumentException();
+        }
+    }
+
+
+    private void delete(String[] userInput)
+            throws DukeNoTaskFoundException, DukeMissingArgumentException, DukeInvalidArgumentException {
+        try {
+            int taskNum = Integer.parseInt(userInput[1]);
+            if (taskNum > this.list.size()) {
+                throw new DukeNoTaskFoundException(taskNum);
+            }
+            System.out.println("\tI've deleted this task from the list!");
+            System.out.printf("\t\t%s\n", this.list.get(taskNum - 1));
+            this.list.remove(taskNum - 1);
+            System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException();
         } catch (IndexOutOfBoundsException e) {

@@ -7,13 +7,16 @@
 Welcome! I'm Duke.
 What can I do for you?
 
-	added todo: drop CS2103T
+	added todo:
+		[T][ ] drop CS2103T
 	You have 1 tasks in the list.
 
-	added event: macdonald's interview
+	added event:
+		[E][ ] macdonald's interview (at: 20 Aug 2021 4-6pm)
 	You have 2 tasks in the list.
 
-	added deadline: fail test
+	added deadline:
+		[D][ ] fail test (by: exam week)
 	You have 3 tasks in the list.
 
 	Here are the tasks in your list:
@@ -21,7 +24,8 @@ What can I do for you?
 	2. [E][ ] macdonald's interview (at: 20 Aug 2021 4-6pm)
 	3. [D][ ] fail test (by: exam week)
 
-	added todo: dropout university
+	added todo:
+		[T][ ] dropout university
 	You have 4 tasks in the list.
 
 	I've marked this task as done!
@@ -35,5 +39,21 @@ What can I do for you?
 	2. [E][X] macdonald's interview (at: 20 Aug 2021 4-6pm)
 	3. [D][ ] fail test (by: exam week)
 	4. [T][ ] dropout university
+
+	added event:
+		[E][ ] prof ben leong's lecture (at: 24 Aug 2021 1-3pm)
+	You have 5 tasks in the list.
+
+	I've deleted this task from the list!
+		[E][X] macdonald's interview (at: 20 Aug 2021 4-6pm)
+	You have 4 tasks in the list.
+
+	:(( Oops! I cannot find the task with number 7!
+
+	:(( Oops! I do not know how to handle the command 'invalidcommand'!
+
+	:(( Oops! You have invalid argument(s) for this command!
+
+	:(( Oops! You are missing argument(s) for this command!
 
 	Bye, hope to see you again!
