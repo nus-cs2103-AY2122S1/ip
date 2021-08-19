@@ -1,66 +1,24 @@
-import java.util.Scanner;
-
 public class Task {
-    private String[] tasks;
-    private int count;
+    protected String description;
+    protected boolean isDone;
 
-    public Task() {
-        this.tasks = new String[100];
-        this.count = 0;
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
     }
 
-    public void taskListener() {
-        Scanner sc = new Scanner(System.in);
-
-        String separator = "-----------------------------------------------------------------";
-
-        while (sc.hasNext()) {
-            String input = sc.nextLine();
-
-            if (input.equals("bye")) {
-                String farewell = "Bye-bye! Hope to see you again soon!";
-
-                System.out.println(separator + "\n"
-                        + "added: " + farewell + "\n"
-                        + separator);
-                break;
-            } else if (input.equals("list")) {
-                int n = listTasks();
-            } else {
-                int n = addTask(input);
-            }
-        }
+    public void markAsDone() {
+        this.isDone = true;
     }
 
-    public int listTasks() {
-        String separator = "-----------------------------------------------------------------";
-
-        int n = 0;
-
-        System.out.println(separator);
-        System.out.println("Below are your to-dos!");
-
-        while (this.tasks[n] != null) {
-            System.out.println((n + 1) + ". " + this.tasks[n]);
-
-            n++;
-        }
-
-        System.out.println(separator);
-
-        return 0;
+    public String getStatus() {
+        return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public int addTask(String todo) {
-        String separator = "-----------------------------------------------------------------";
+    @Override
+    public String toString() {
+        String res = "[" + getStatus() + "] " + description;
 
-        this.tasks[count] = todo;
-        count++;
-
-        System.out.println(separator + "\n"
-                + "added: " + todo + "\n"
-                + separator);
-
-        return 0;
+        return res;
     }
 }
