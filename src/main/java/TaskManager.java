@@ -22,12 +22,8 @@ public class TaskManager {
         if (taskList.size() > 0) {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < taskList.size(); i++) {
-//                int index = i + 1;
-//                String marked = taskList.get(i).getStatusIcon();
-//                String taskInformation = taskList.get(i).getValue();
-//                System.out.println(index + ".[" + marked + "] " + taskInformation);
                 int index = i + 1;
-                System.out.println(index + "" + taskList.get(i));
+                System.out.println(index + "." + taskList.get(i));
             }
             System.out.println();
         } else {
@@ -60,6 +56,19 @@ public class TaskManager {
             run = false;
         } else if (input.toUpperCase().equals("LIST")) {
             listAll();
+        } else if (input.toUpperCase().contains("DELETE")) {
+            if (input.length() > 7) {
+                String stringArr[] = input.split(" ");
+                if (isNumeric(stringArr[1])) {
+                    int taskId = Integer.parseInt(stringArr[1]) - 1;
+                    Task taskToBeDeleted = taskList.get(taskId);
+                    removeTaskById(taskId);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("\t" + taskToBeDeleted.toString());
+                    System.out.println("Now you have " + getTotalNumberOfTask() + " task in the list.");
+
+                }
+            }
         } else if (isDone(input)) {
             String[] stringArr = input.split(" ");
             if (stringArr.length > 1) {
@@ -162,6 +171,10 @@ public class TaskManager {
             return false;
         }
         return true;
+    }
+
+    public void removeTaskById(int id) {
+        taskList.remove(id);
     }
 
 }
