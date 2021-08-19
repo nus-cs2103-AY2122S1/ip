@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import Tasks.Task;
 import Tasks.Todo;
 import Tasks.Deadline;
@@ -23,51 +24,54 @@ public class Pib {
 
     private void readInput() {
         while (sc.hasNextLine()) {
-            System.out.println(DIVIDER);
-            String next = sc.nextLine();
+            try {
+                System.out.println(DIVIDER);
+                String next = sc.nextLine();
 
-            if (next.contains(" ")) {
-                int spaceDividerIndex = next.indexOf(" ");
-                String taskType = next.substring(0, spaceDividerIndex).toLowerCase();
-                String taskDetails = next.substring(1 + spaceDividerIndex);
-                switch (taskType) {
-                    case "todo":
-                        addToList(TaskType.TODO, taskDetails);
-                        break;
-                    case "deadline": {
-                        addToList(TaskType.DEADLINE, taskDetails);
-                        break;
+                if (next.contains(" ")) {
+                    int spaceDividerIndex = next.indexOf(" ");
+                    String taskType = next.substring(0, spaceDividerIndex).toLowerCase();
+                    String taskDetails = next.substring(1 + spaceDividerIndex);
+                    switch (taskType) {
+                        case "todo":
+                            addToList(TaskType.TODO, taskDetails);
+                            break;
+                        case "deadline": {
+                            addToList(TaskType.DEADLINE, taskDetails);
+                            break;
+                        }
+                        case "event": {
+                            addToList(TaskType.EVENT, taskDetails);
+                            break;
+                        }
+                        case "done": {
+                            try {
+                                markAsDone(taskDetails);
+                            } catch (IndexOutOfBoundsException e) {
+                                System.out.println("Uh oh :( Please enter a valid task number!\n");
+                            }
+                            break;
+                        }
+                        default: {
+                            throw new PibException("Uh oh :( I don't know that command :(\n");
+                        }
                     }
-                    case "event": {
-                        addToList(TaskType.EVENT, taskDetails);
-                        break;
-                    }
-                    case "done": {
-                        markAsDone(taskDetails);
-                        break;
-                    }
-                    default: {
-                        printUnknownCmd();
-                        break;
-                    }
-                }
-            } else {
-                String action = next.toLowerCase();
-                if (action.equals("list")) {
-                    displayList();
-                } else if (action.equals("bye")) {
-                    endPib();
-                    break;
                 } else {
-                    printUnknownCmd();
+                    String action = next.toLowerCase();
+                    if (action.equals("list")) {
+                        displayList();
+                    } else if (action.equals("bye")) {
+                        endPib();
+                        break;
+                    } else {
+                        throw new PibException("Uh oh :( I don't know that command :(\n");
+                    }
                 }
+                System.out.println(DIVIDER);
+            } catch (PibException e) {
+                System.out.println(e.getMessage());
             }
-            System.out.println(DIVIDER);
         }
-    }
-
-    private void printUnknownCmd() {
-        System.out.println("Uh oh! I don't know that command :(\n");
     }
 
     private void endPib() {
@@ -77,18 +81,49 @@ public class Pib {
     }
 
     private void addToList(TaskType t, String taskDetails) {
-        if (t.equals(TaskType.TODO)) {
-            list.add(new Todo(taskDetails));
-        } else if (t.equals(TaskType.DEADLINE)) {
-            int dateDividerIndex = taskDetails.indexOf("/by ");
-            list.add(new Deadline(taskDetails.substring(0, dateDividerIndex),
-                    taskDetails.substring(dateDividerIndex + 4)));
-        } else if (t.equals(TaskType.EVENT)) {
-            int dateDividerIndex = taskDetails.indexOf("/at ");
-            list.add(new Event(taskDetails.substring(0, dateDividerIndex),
-                    taskDetails.substring(dateDividerIndex + 4)));
+        try {
+            if (t.equals(TaskType.TODO)) {
+                if (taskDetails.trim().isBlank()) {
+                    throw new PibException("Task description cannot be empty!\n");
+                }
+                list.add(new Todo(taskDetails));
+            } else {
+                if (t.equals(TaskType.DEADLINE)) {
+                    int dateDividerIndex = taskDetails.indexOf("/by ");
+                    if (dateDividerIndex == -1) {
+                        throw new PibException("Include /by <date>\n");
+                    }
+                    String description = taskDetails.substring(0, dateDividerIndex);
+                    String date = taskDetails.substring(dateDividerIndex + 4);
+                    if (description.trim().isBlank()) {
+                        throw new PibException("Task description cannot be empty!\n");
+                    }
+                    if (date.trim().isBlank()) {
+                        throw new PibException("Date cannot be empty!\n");
+                    }
+                    list.add(new Deadline(taskDetails.substring(0, dateDividerIndex), taskDetails.substring(dateDividerIndex + 4)));
+                } else if (t.equals(TaskType.EVENT)) {
+                    int dateDividerIndex = taskDetails.indexOf("/at ");
+                    if (dateDividerIndex == -1) {
+                        throw new PibException("Include /at <date>\n");
+                    }
+                    String description = taskDetails.substring(0, dateDividerIndex);
+                    String date = taskDetails.substring(dateDividerIndex + 4);
+                    if (description.trim().isBlank()) {
+                        throw new PibException("Task description cannot be empty!\n");
+                    }
+                    if (date.trim().isBlank()) {
+                        throw new PibException("Date cannot be empty!\n");
+                    }
+                    list.add(new Event(taskDetails.substring(0, dateDividerIndex), taskDetails.substring(dateDividerIndex + 4)));
+                } else {
+                    return;
+                }
+            }
+            System.out.println("Now you have " + list.size() + " task(s) in your list.\n");
+        } catch (PibException e) {
+            System.out.println(e.getMessage());
         }
-        System.out.println("Now you have " + list.size() + " task(s) in your list.\n");
     }
 
     private void displayList() {
