@@ -15,4 +15,5 @@ todo whatever
 list
 delete 4
 delete 4
+list
 bye

@@ -1,10 +1,11 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Enums
+ * Current Progress: Level 7. Save
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.
@@ -107,7 +108,7 @@ public class Duke {
         //awaits text
         while (!thisCommand.equals(Command.BYE)) {
             try {
-                switch(thisCommand) {
+                switch (thisCommand) {
                     case LIST:
                         printMessage(taskList.toString());
                         break;
@@ -135,6 +136,8 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 printMessage(e.toString());
+            } catch (IOException i) {
+                printMessage("Error in saving to hard disk");
             } finally {
                 currentCommand = commandScanner.nextLine();
                 checkCommand = currentCommand.split(" ", 2);
