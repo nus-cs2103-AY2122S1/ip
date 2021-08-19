@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
-    public static ArrayList<String> tasks = new ArrayList<>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
     public static void talk() {
         String userInput = "";
         System.out.println("Hello, What Can I do for you ?\n -------------------------------");
@@ -22,7 +22,16 @@ public class Duke {
                 System.out.println("\n ----------------------------------");
                 continue;
             }
-            tasks.add(userInput);
+            if(userInput.startsWith("done")) {
+                int id = Integer.valueOf(userInput.substring(5));
+                Task currTask = tasks.get(id - 1);
+                currTask.markAsDone();
+                System.out.println("Nice! I've marked this task as done: \n" + currTask);
+                System.out.println("\n ----------------------------------");
+                continue;
+            }
+            Task newTask = new Task(userInput, false);
+            tasks.add(newTask);
             System.out.println("Duke: Added Task " + userInput);
             System.out.println("\n ----------------------------------");
         }
