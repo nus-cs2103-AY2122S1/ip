@@ -33,7 +33,7 @@ public class Duke {
             } else if (str.equalsIgnoreCase("list")) {
                 // lists history of past tasks
                 System.out.println(linebreak);
-                System.out.println("Uwu! Herw arw yourw taskws: \n");
+                System.out.println("Uwu! Herw arw yourw taskws:\n");
                 int counter = 0;
                 while (taskarr[counter] != null || counter >= 100) {
                     System.out.println(counter
@@ -56,11 +56,11 @@ public class Duke {
                 arrcounter++;
 
                 System.out.println(linebreak);
-                System.out.println("Uwu! Addewd yourw taskws: \n");
+                System.out.println("Uwu! Addewd yourw taskws:\n");
                 System.out.println("   " + taskarr[arrcounter - 1].toString());
                 System.out.println("\nYouw noww havew "
                         + (arrcounter)
-                        + " taskw(s) inw thew wist! uwu \n");
+                        + " taskw(s) inw thew wist! uwu\n");
                 System.out.println(linebreak);
             } else if (strparse[0].equalsIgnoreCase("deadline")) {
                 // adds a deadline task to the list. now with no deadline assumption
@@ -87,11 +87,11 @@ public class Duke {
                 arrcounter++;
 
                 System.out.println(linebreak);
-                System.out.println("Uwu! Addewd yourw taskws: \n");
+                System.out.println("Uwu! Addewd yourw taskws:\n");
                 System.out.println("   " + taskarr[arrcounter - 1].toString());
                 System.out.println("\nYouw noww havew "
                         + (arrcounter)
-                        + " taskw(s) inw thew wist! uwu \n");
+                        + " taskw(s) inw thew wist! uwu\n");
                 System.out.println(linebreak);
             } else if (strparse[0].equalsIgnoreCase("event")) {
                 // adds an event to the list. pretty much like deadline.
@@ -118,11 +118,11 @@ public class Duke {
                 arrcounter++;
 
                 System.out.println(linebreak);
-                System.out.println("Uwu! Addewd yourw taskws: \n");
+                System.out.println("Uwu! Addewd yourw taskws:\n");
                 System.out.println("   " + taskarr[arrcounter - 1].toString());
                 System.out.println("\nYouw noww havew "
                         + (arrcounter)
-                        + " taskw(s) inw thew wist! uwu \n");
+                        + " taskw(s) inw thew wist! uwu\n");
                 System.out.println(linebreak);
             } else if (strparse.length == 2 && strparse[0].equalsIgnoreCase("done")) {
                 // checks for 'done' and integer keywords
@@ -142,7 +142,9 @@ public class Duke {
                     int i = Integer.parseInt(strparse[1]);
                     taskarr[i].markAsDone();
                     System.out.println(linebreak);
-                    System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe: \n"
+                    System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n"
+                            + "\n"
+                            + "   "
                             + i
                             + ". "
                             + taskarr[i].toString()
