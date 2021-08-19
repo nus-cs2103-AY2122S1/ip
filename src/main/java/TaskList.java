@@ -8,23 +8,26 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
-    public String add(String taskDescription) {
-        Task task = new Task(taskDescription);
+    public String add(Task task) {
         tasks.add(task);
-        return "added task: " + task;
+        return "Got it. I've added this task:\n  " + task + '\n' + "You have " + numTasks() + " tasks in the list\n";
     }
 
     public String markTaskDone(int i) {
         Task task = tasks.get(i-1);
         task.markDone();
-        return "Nice! this task has been marked done: " + task;
+        return "Nice! this task has been marked done:\n  " + task + "\n";
     }
 
-    public String[] list() {
-       String[] taskStringRepresentations = new String[tasks.size()];
-       for(int i = 0; i < taskStringRepresentations.length; i++) {
-           taskStringRepresentations[i] = (i+1) + ". " + tasks.get(i);
+    public String list() {
+        String taskStringRepresentation = "";
+        for(int i = 0; i < numTasks(); i++) {
+           taskStringRepresentation += (i+1) + ". " + tasks.get(i) + "\n";
        }
-       return taskStringRepresentations;
+       return "Here are the tasks in your list:\n" + taskStringRepresentation;
+    }
+
+    private int numTasks() {
+        return tasks.size();
     }
 }

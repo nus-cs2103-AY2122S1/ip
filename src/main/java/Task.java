@@ -1,6 +1,11 @@
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
+
+    public static Task create(String params) {
+        return null;
+    }
+
     public Task(String description){
         this.description = description;
         this.isDone = false;
@@ -12,10 +17,10 @@ public class Task {
 
     @Override
     public String toString() {
-        return description + " " + getStatusIcon();
+        return getStatusIcon() + " " + description;
     }
 
     private String getStatusIcon() {
-        return isDone ? "[\u2713]" : "";
+        return isDone ? "[X]" : "[ ]";
     }
 }
