@@ -1,0 +1,16 @@
+todo borrow book
+event go to school /at 8am
+deadline finish level-6 /by today 2359
+todo go fishing
+event go back home /at 7pm
+deadline finish level-? /by today 2359
+done 1
+List
+delete 2
+delete 0
+done 6
+todo
+event say hi
+deadline watch lecture video
+
+bye

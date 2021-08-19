@@ -20,7 +20,7 @@ public class Duke {
             Task temp = this.tasks.get(i);
             System.out.printf("%s. %s\n", i + 1, temp);
         }
-
+        System.out.println();
     }
 
     public void markAsDone(String taskNumber) {
@@ -41,10 +41,13 @@ public class Duke {
                 throw new DukeException(String.format("There is no task %s.",taskNumber));
             }
             this.tasks.get(index).markAsDone();
+            System.out.println();
         } catch (NumberFormatException ex) {
-            System.err.println("Task must be an integer!");
+            System.out.println("Task must be an integer!");
+            System.out.println();
         } catch (DukeException e) {
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
+            System.out.println();
         }
     }
 
@@ -84,8 +87,10 @@ public class Duke {
             } else {
                 System.out.println("Your list is empty!");
             }
+            System.out.println();
         } catch (DukeException e) {
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
+            System.out.println();
         }
     }
 
@@ -115,10 +120,13 @@ public class Duke {
             } else {
                 System.out.printf("You have %s task left on your list.\n", this.numOfTasks);
             }
+            System.out.println();
         } catch (NumberFormatException ex) {
-            System.err.println("Task must be an integer!");
+            System.out.println("Task must be an integer!");
+            System.out.println();
         } catch (DukeException e) {
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
+            System.out.println();
         }
     }
 
@@ -126,6 +134,7 @@ public class Duke {
 
         Duke duke = new Duke();
         System.out.println("Hello I am Duke.\nWhat can I do for you?");
+        System.out.println();
         Scanner scanner = new Scanner(System.in);
         String echo = scanner.nextLine();
         while (true) {
