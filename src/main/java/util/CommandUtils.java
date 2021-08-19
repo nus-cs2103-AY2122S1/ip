@@ -49,6 +49,8 @@ public class CommandUtils {
                 return Operation.DELETE;
             } else if (operation.equals(Operation.CLEAR.getValue())) {
                 return Operation.CLEAR;
+            } else if (operation.equals(Operation.FIND.getValue())) {
+                return Operation.FIND;
             } else if (operation.equals(Operation.BYE.getValue())) {
                 return Operation.BYE;
             } else {
@@ -130,7 +132,7 @@ public class CommandUtils {
      *
      * @param  dateTime extracted from description
      * @param  regex " "
-     * @return date, start time and end time from datetime if they are not empty and can be extracted properly,
+     * @return date, start time and end time from datetime if they exist and can be extracted properly,
      *         else throw exception
      * @throws DukeExtractCommandException if dateTime are empty or cannot be extracted properly
      */
@@ -162,5 +164,20 @@ public class CommandUtils {
         } catch (DateTimeParseException e) {
             throw new DukeExtractCommandException("☹ OOPS!!! The deadline date and time cannot be extracted properly.");
         }
+    }
+
+    /**
+     * Extract keyword from command.
+     *
+     * @return keyword from command if it can be extracted properly,
+     *         else throw exception
+     * @throws DukeExtractCommandException if keyword cannot be extracted properly
+     */
+    public static String extractKeyword(String command) throws DukeExtractCommandException {
+        String[] contents = command.split(" ", 2);
+        if (contents.length != 2) {
+            throw new DukeExtractCommandException("☹ OOPS!!! The keyword cannot be extracted properly.");
+        }
+        return contents[1];
     }
 }

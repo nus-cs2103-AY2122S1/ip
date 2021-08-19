@@ -71,6 +71,16 @@ public class Storage {
         return number;
     }
 
+    private String getKeyword(String command) {
+        String keyword = "";
+        try {
+            keyword = CommandUtils.extractKeyword(command);
+        } catch (DukeExtractCommandException e) {
+            onMessage.show(e.getMessage());
+        }
+        return keyword;
+    }
+
     private String getTaskDescription(String command) {
         String description = "";
         try {
@@ -142,6 +152,10 @@ public class Storage {
      * Complete task by number extracted from command.
      */
     public void completeTask(String command) {
+        Operation operation = getOperation(command);
+        if (operation == null) {
+            return;
+        }
         int number = getTaskNumber(command);
         if (number <= 0) {
             return;
@@ -161,6 +175,10 @@ public class Storage {
      * Delete task by number extracted from command.
      */
     public void deleteTask(String command) {
+        Operation operation = getOperation(command);
+        if (operation == null) {
+            return;
+        }
         int number = getTaskNumber(command);
         if (number <= 0) {
             return;
@@ -205,6 +223,25 @@ public class Storage {
         try {
             taskManager.saveTasksToFile();
         } catch (DukeIOException e) {
+            onMessage.show(e.getMessage());
+        }
+    }
+
+    /**
+     * Find tasks by keyword extracted from command.
+     */
+    public void findTasks(String command) {
+        Operation operation = getOperation(command);
+        if (operation == null) {
+            return;
+        }
+        try {
+            String keyword = CommandUtils.extractKeyword(command);
+            onMessage.show(Stream.concat(
+                Arrays.stream(new String[]{"Here are the matching tasks in your list:"}),
+                Arrays.stream(taskManager.findTasks(keyword))
+            ).toArray(String[]::new));
+        } catch (DukeExtractCommandException e) {
             onMessage.show(e.getMessage());
         }
     }
