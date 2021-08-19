@@ -1,5 +1,12 @@
-import java.util.List;
+package bot;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import commands.Command;
+import exceptions.InvalidArgumentsException;
+import exceptions.InvalidTaskException;
+import tasks.Task;
 
 /**
  * Bot handles the bot's REPL cycle

@@ -1,3 +1,8 @@
+package commands;
+
+import bot.Bot;
+import bot.OutputManager;
+
 public class EmptyCommand implements Command {
 
   @Override

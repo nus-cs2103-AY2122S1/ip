@@ -1,6 +1,12 @@
+package commands;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import bot.Bot;
+import tasks.Task;
+
 public class ListCommand implements Command {
 
   @Override

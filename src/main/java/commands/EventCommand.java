@@ -1,3 +1,11 @@
+package commands;
+
+import tasks.EventTask;
+import tasks.Task;
+import bot.Bot;
+import bot.OutputManager;
+import exceptions.InvalidArgumentsException;
+
 public class EventCommand implements Command{
 
   @Override

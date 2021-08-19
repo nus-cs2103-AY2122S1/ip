@@ -1,3 +1,9 @@
+package commands;
+
+import tasks.GeneralTask;
+import tasks.Task;
+import bot.Bot;
+
 public class AddTaskCommand implements Command {
 
   @Override

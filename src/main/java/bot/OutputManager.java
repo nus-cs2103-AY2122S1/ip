@@ -1,3 +1,5 @@
+package bot;
+
 /**
  * The OutputManager handles bot output messages to console
  */

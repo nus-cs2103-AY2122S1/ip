@@ -1,3 +1,11 @@
+package commands;
+
+import tasks.DeadlineTask;
+import tasks.Task;
+import bot.Bot;
+import bot.OutputManager;
+import exceptions.InvalidArgumentsException;
+
 public class DeadlineCommand implements Command {
 
   @Override

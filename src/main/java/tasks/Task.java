@@ -1,4 +1,7 @@
+package tasks;
+
 public abstract class Task {
+  
   public boolean done = false;
 
   /**

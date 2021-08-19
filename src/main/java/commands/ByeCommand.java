@@ -1,3 +1,7 @@
+package commands;
+
+import bot.Bot;
+
 public class ByeCommand implements Command {
 
   @Override
