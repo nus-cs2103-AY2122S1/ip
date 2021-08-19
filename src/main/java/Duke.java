@@ -24,10 +24,29 @@ public class Duke {
             }
             if(userInput.startsWith("done")) {
                 int id = Integer.valueOf(userInput.substring(5));
-                Task currTask = tasks.get(id - 1);
-                currTask.markAsDone();
-                System.out.println("Nice! I've marked this task as done: \n" + currTask);
-                System.out.println("\n ----------------------------------");
+                Task currTask = null;
+                try{
+                    currTask = tasks.get(id - 1);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(e.getMessage());
+                }
+                if(currTask != null) {
+                    currTask.markAsDone();
+                    System.out.println("Nice! I've marked this task as done: \n" + currTask);
+                    System.out.println("\n ----------------------------------");
+                }
+                continue;
+            }
+            if(userInput.startsWith("delete")) {
+                int id = Integer.valueOf(userInput.substring(7));
+
+                try{
+                    Task removedTask = tasks.get(id - 1);
+                    tasks.remove(id);
+                    System.out.println("Successfully removed task : " + removedTask);
+                } catch(Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 continue;
             }
             Task newTask = null;
@@ -83,7 +102,7 @@ public class Duke {
             }
             return new Event(task, false, date);
         } else {
-            return new Task(userInput, false);
+            throw new DukeException("I don't understand what you are talking about !");
         }
     }
 

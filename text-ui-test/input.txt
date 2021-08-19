@@ -11,4 +11,8 @@ deadline Assignment 1231 /by
 list
 deadline Assignment 1231 /by 20 August
 list
+delete 1
+delete 2
+list
+delete 5
 bye

@@ -71,4 +71,15 @@ Enter Input Here:
 
  ----------------------------------
 Enter Input Here: 
+Successfully removed task : [E][X] Go to meeting (at:  SOC Com-1)
+Enter Input Here: 
+Successfully removed task : [T][X]  individual project
+Enter Input Here: 
+1. [E][X] Go to meeting (at:  SOC Com-1)
+2. [T][X]  individual project
+
+ ----------------------------------
+Enter Input Here: 
+Index 4 out of bounds for length 2
+Enter Input Here: 
 Duke : Bye, Hope to see you again soon !
