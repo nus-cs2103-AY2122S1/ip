@@ -2,14 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<Task> list = new ArrayList<Task>();
-    private static void printList() {
-        System.out.println("Here are the tasks in your list: \n");
-        for(int i = 0; i < list.size(); i++) {
-            int index = i + 1;
-            System.out.println( index + ". " + list.get(i));
-        }
-    }
+    private static TaskList list = new TaskList();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -27,7 +20,7 @@ public class Duke {
                 break;
             }
             if (command.equals("list")) {
-                printList();
+                list.printList();
                 continue;
             }
             String[] commandSplit = command.split("\\s", 2);
@@ -37,14 +30,14 @@ public class Duke {
                     case "done":
                         //Marks tasks as done
                         int index = Integer.valueOf(commandSplit[1]) - 1;
-                        list.get(index + 1).setDone();
+                        list.setDone(index);
                         System.out.println("I've marked this task as done: \n" + list.get(index));
                         break;
 
                     case "delete":
                         //Deletes tasks
                         int indexD = Integer.valueOf(commandSplit[1]) - 1;
-                        Task deleted = list.remove(indexD);
+                        Task deleted = list.deleteTask(indexD);
                         System.out.println("Noted. I have removed this task: \n" + deleted);
                         break;
 
@@ -54,7 +47,7 @@ public class Duke {
                             throw new TaskException("The description of a todo cannot be empty");
                         }
                         Todo newT = new Todo(commandSplit[1]);
-                        list.add(newT);
+                        list.addTask(newT);
                         System.out.println("I have added this task: \n" + newT);
                         break;
                     case "deadline":
@@ -62,7 +55,7 @@ public class Duke {
                             throw new TaskException("The description of a deadline cannot be empty");
                         }
                         Task newD = Deadline.parseCommand(commandSplit[1]);
-                        list.add(newD);
+                        list.addTask(newD);
                         System.out.println("added: " + newD);
                         break;
                     case "event":
@@ -70,7 +63,7 @@ public class Duke {
                             throw new TaskException("The description of an event cannot be empty");
                         }
                         Task newE = Event.parseCommand(commandSplit[1]);
-                        list.add(newE);
+                        list.addTask(newE);
                         System.out.println("added: " + newE);
                         break;
 
@@ -84,7 +77,7 @@ public class Duke {
             } catch (TaskException e){
                 System.out.println(e.getMessage());
             }
-            System.out.println("Now you have " + list.size() + " task" + (list.size() > 1 ? "s " : " ") + "in the list");
+            System.out.println("Now you have " + list.getNumTask() + " task" + (list.getNumTask() > 1 ? "s " : " ") + "in the list");
 
 //            if (commandSplit[0].equals("todo")) {
 //                Todo newTask = new Todo(commandSplit[1]);
