@@ -94,6 +94,7 @@ public class Duke {
                     System.out.println("       " + list.get(list.size() - 1));
                     System.out.println("     Now you have " + list.size() + " tasks in the list.");
                     System.out.println("    ____________________________________________________________");
+                    continue;
                 }
             }
             if (str.equals("bye")) {
@@ -107,6 +108,7 @@ public class Duke {
                     System.out.println("     " + (i+1) + "." + list.get(i));
                 }
                 System.out.println("    ____________________________________________________________");
+                continue;
             }
             else if (str.contains("done")){
                 int taskNumber = Integer.valueOf(str.substring(5));
@@ -115,6 +117,16 @@ public class Duke {
                 System.out.println("     Nice! I've marked this task as done: ");
                 System.out.println("       " + list.get(taskNumber-1));
                 System.out.println("    ____________________________________________________________");
+                continue;
+            } else if (str.contains("delete")){
+                int taskNumber = Integer.valueOf(str.substring(7));
+                System.out.println("    ____________________________________________________________");
+                System.out.println("     Noted. I've removed this task: ");
+                System.out.println("       " + list.get(taskNumber-1));
+                System.out.println("     Now you have 4 tasks in the list.");
+                System.out.println("    ____________________________________________________________");
+                list.remove(taskNumber-1);
+                continue;
             }
             else {
                 System.out.println("    ____________________________________________________________");
