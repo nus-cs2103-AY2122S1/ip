@@ -1,0 +1,87 @@
+Level 4. ToDos, Events, Deadlines
+Add support for tracking three types of tasks:
+
+
+ToDos: tasks without any date/time attached to it e.g., visit new theme park
+Deadlines: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm
+Events: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm
+Example:
+
+t0do borrow book
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] borrow book
+     Now you have 5 tasks in the list.
+    ____________________________________________________________
+
+list
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][X] read book
+     2.[D][ ] return book (by: June 6th)
+     3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+     4.[T][X] join sports club
+     5.[T][ ] borrow book
+    ____________________________________________________________
+
+deadline return book /by Sunday
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][ ] return book (by: Sunday)
+     Now you have 6 tasks in the list.
+    ____________________________________________________________
+
+event project meeting /at Mon 2-4pm
+    ____________________________________________________________
+     Got it. I've added this task:
+       [E][ ] project meeting (at: Mon 2-4pm)
+     Now you have 7 tasks in the list.
+    ____________________________________________________________
+At this point, dates/times can be treated as strings; there is no need to convert them to actual dates/times.
+
+Example:
+
+
+deadline do homework /by no idea :-p
+    ____________________________________________________________
+     Got it. I've added this task:
+       [D][ ] do homework (by: no idea :-p)
+     Now you have 6 tasks in the list.
+    ____________________________________________________________
+
+Extension: A-Inheritance
+
+A-Inheritance
+↳ Use Inheritance to support multiple task types
+
+As there are multiple types of tasks that have some similarity between them, you can implement classes T0do, Deadline and Event classes to inherit from a Task class.
+
+Furthermore, use polymorphism to store all tasks in a data structure containing Task objects e.g., Task[100].
+
+Tasks to achieve level-4:
+
+1. Create a T0dos Class - DONE
+    - [T] denotes a tdo
+    - no date/time attached to it
+
+2. Deadline Class - DONE
+    - [D] denotes an Event
+    - need to be done before a specific date/time
+
+3. Event Class - DONE
+    - [E] denotes a deadline
+    - has date
+    - starts at a specific time
+    - ends at specific time
+
+4. in Gnosis Class: - DONE
+    - 3 commands:
+        - tdo
+            - e.g: tdo borrow book
+        - deadline
+            - e.g: (task name) /by sunday
+        - event
+            - e.g: (task name)/at Mon 2-4pm
+
+    - Update list command: - DONE
+        - display total number of list

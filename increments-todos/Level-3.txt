@@ -24,7 +24,7 @@ done 2
 
  While it is possible to represent a task list as a multi-dimensional array containing primitive values, the more natural approach is to use a Task class to represent tasks.
 
- Tasks to achieve level-2:
+ Tasks to achieve level-3:
 
  1. Create a Task Class
     -to keep track of String task and a boolean isDone - DONE

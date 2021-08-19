@@ -19,7 +19,6 @@ public class Task {
         this.isDone = done;
     }
 
-
     @Override
     public String toString() {
         String mark = isDone ? "[X]" : "[ ]";
