@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class taskList {
@@ -7,8 +6,6 @@ public class taskList {
     private static final Pattern EVENTS = Pattern.compile("^event\\s.+\\s/at\\s.+");
 
     private final Task[] lst;
-    private final String[] emptyList =
-            new String[] {"The list is empty."};
     private int count;
 
     public taskList(int len) {
@@ -21,18 +18,27 @@ public class taskList {
 
         // Checks if the list is full
         if (this.count >= this.lst.length) {
-            return "Length of list exceeded.";
+            throw new DukeException("Length of list exceeded");
         } else {
             Task newTask;
 
-            if (TODOS.matcher(input).matches()) {
-                newTask = new ToDos(input);
-            } else if (DEADLINES.matcher(input).matches()) {
+            if (input.startsWith("todo")) {
+                if (!TODOS.matcher(input).matches()) {
+                    throw new DukeException("ToDos format: todo [desc]");
+                }
+                newTask = new ToDos(input.substring(4));
+            } else if (input.startsWith("deadline")) {
+                if (!DEADLINES.matcher(input).matches()) {
+                    throw new DukeException("Deadline format: deadline [desc] /by [date]");
+                }
                 newTask = new Deadlines(input);
-            } else if (EVENTS.matcher(input).matches()) {
+            } if (input.startsWith("event")) {
+                if (!EVENTS.matcher(input).matches()) {
+                    throw new DukeException("Event format: event [desc] /at [time]");
+                }
                 newTask = new Events(input);
             } else {
-                newTask = new Task(input);
+                throw new DukeException("Wrong format: please use todo, deadline or event");
             }
 
             this.lst[this.count++] = newTask;
@@ -43,7 +49,7 @@ public class taskList {
     public String[] getList() {
         // Returns emptylist if the list contains no items
         if (this.count == 0) {
-            return this.emptyList;
+            throw new DukeException("The list is empty");
         }
 
         String[] temp = new String[count + 1];
@@ -58,7 +64,7 @@ public class taskList {
 
     public String markAsDone(int n) {
         if (n < 1 || n > count) {
-            return "There is no task " + n;
+            throw new DukeException("There is no task " + n);
         } else {
             return "Nice! I've marked this task as done:\n" +
                     this.lst[n - 1].completeTask();
