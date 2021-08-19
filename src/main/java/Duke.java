@@ -11,6 +11,12 @@ public class Duke {
     private final static String indent1 = "    ";
     private final static String indent2 = "      ";
 
+    public enum Commands {
+        LIST, BYE, DELETE, DONE,
+            TODO, EVENT, DEADLINE;
+    }
+
+
     public Duke() {
         scanner = new Scanner(System.in);
         userInput = new ArrayList<>();
@@ -19,14 +25,14 @@ public class Duke {
 
     public void getInput() {
         while (!isBye && scanner.hasNext()) {
+            String input = scanner.nextLine().trim();
+            String[] splitInput = input.split(" +");
             try {
-                String input = scanner.nextLine().trim();
-                String[] splitInput = input.split(" +");
-                String word = splitInput[0];
+                Commands word = Commands.valueOf(splitInput[0].toUpperCase());
 
                 switch (word) {
 
-                    case "bye":
+                    case BYE:
                         System.out.println(divider);
                         System.out.println(indent1 + "Bye! Hope to see you again soon :)");
                         System.out.println(divider);
@@ -34,7 +40,7 @@ public class Duke {
                         scanner.close();
                         break;
 
-                    case "list":
+                    case LIST:
                         System.out.println(divider);
                         System.out.println(indent1 + "Here are the tasks in your list:");
                         int point = 0;
@@ -46,32 +52,32 @@ public class Duke {
                         printNumberOfTasks();
                         break;
 
-                    case "done":
+                    case DONE:
                         inputDone(input, splitInput);
                         break;
 
-                    case "delete":
+                    case DELETE:
                         deleteTask(input, splitInput);
                         break;
 
-                    case "todo":
+                    case TODO:
 
-                    case "deadline":
+                    case DEADLINE:
 
-                    case "event":
+                    case EVENT:
                         checkTask(input);
                         break;
-
-                    default:
-                        throw new DukeException(indent1 + "☹ OH NO I'm sorry, but I don't " +
-                                "know what that means :-(");
                 }
+            } catch (IllegalArgumentException e) {
+                System.out.println(divider);
+                System.out.println(indent1 + "☹ OH NO I'm sorry, but I don't " +
+                        "know what that means :-(");
+                System.out.println(divider);
             } catch (DukeException e) {
                 System.out.println(divider);
                 System.out.println(e.getMessage());
                 System.out.println(divider);
             }
-
         }
     }
 
