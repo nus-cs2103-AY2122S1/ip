@@ -9,7 +9,7 @@ public class Duke {
     /**
      * This is the scanner object used to get user input.
      */
-    private static Scanner sc= new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
     /**
      * This is the declared string that triggers the exit.
@@ -38,6 +38,9 @@ public class Duke {
     /**
      * Starts the Duke chatbot.
      * Users can input String to interact with the chatbot.
+     * Entering 'bye' exits the program.
+     * Entering 'done' followed by an int will mark the task at that index as complete
+     * Entering any other string will create a new todo.
      */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -63,7 +66,7 @@ public class Duke {
                         if (todos[i] == null) {
                             break;
                         } else {
-                            System.out.println(String.format("\t%s",todos[i].toString()));
+                            System.out.println(String.format("\t%d.%s", (i+1), todos[i].toString()));
                         }
                     }
                     System.out.println("\t____________________________________________________________");
@@ -75,13 +78,23 @@ public class Duke {
                     exit = true;
                     break;
                 default:
-                    Task newTask = new Task(response);
-                    todos[index] = newTask;
-                    index++;
+                    String[] output = response.split(" ");
+                    if (output[0].equals("done")) {
+                        Task editedTask = todos[Integer.parseInt(output[1])-1];
+                        editedTask.markIsDone();
+                        System.out.println(String.format("____________________________________________________________\n" +
+                                "\tNice! I've marked this task as done: \n" +
+                                "\t%s\n" +
+                                "    ____________________________________________________________", editedTask.toString()));
+                    } else {
+                        Task newTask = new Task(response);
+                        todos[index] = newTask;
+                        index++;
 
-                    System.out.println("\t____________________________________________________________\n\t" +
-                            String.format("added: %s", newTask.getDescription()) +
-                            "\n\t____________________________________________________________");
+                        System.out.println("\t____________________________________________________________\n\t" +
+                                String.format("added: %s", newTask.getDescription()) +
+                                "\n\t____________________________________________________________");
+                    }
                     break;
             }
         }
