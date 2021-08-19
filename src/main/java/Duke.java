@@ -2,16 +2,18 @@ import java.util.Scanner;
 
 public class Duke {
 
-    // Constants
+    // Messages
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String LIST_MESSAGE = "Here are the tasks in your list:\n%s";
     private static final String NO_TASKS_IN_LIST_MESSAGE = "You have no tasks currently. Go create some!";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n %s";
-    private static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d %s in the list.";
-    private static final String ADD_TASK_MESSAGE = "Got it. I've added this task:\n%s\n" + NUMBER_OF_TASKS_MESSAGE;
     private static final String INVALID_DONE_NUMBER = "Please input a valid task number";
     private static final String MISSING_DONE_NUMBER_MESSAGE = "Please input a number after the done command";
-    private static final String INCOHERENT_INPUT_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String MISSING_DELETE_NUMBER_MESSAGE = "Please input a number after the delete command";
+    private static final String INVALID_DEADLINE_MESSAGE = "Invalid use of deadline command. Use 'deadline <text> /by <datetime>'";
+    private static final String INVALID_EVENT_MESSAGE = "Invalid use of event command. Use 'event <text> /at <datetime>'";
+    private static final String MISSING_TODO_MESSAGE = "Please input text after the todo command";
+    private static final String INCOHERENT_INPUT_MESSAGE = "I'm sorry, but I don't know what that means :-(";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String MISSING_DELETE_NUMBER_MESSAGE = "Please input a number after the delete command";
     private static final String INVALID_DEADLINE_MESSAGE = "Invalid use of deadline command. Use 'deadline <text> /by <datetime>'";
@@ -27,6 +29,7 @@ public class Duke {
     private static final String EVENT_COMMAND = "event";
     private static final String EVENT_DELIMITER = "/at";
     private static final String TODO_COMMAND = "todo";
+    private static final String DELETE_COMMAND = "delete";
 
     // Message methods
     public static void horizontal_line() {
@@ -70,6 +73,18 @@ public class Duke {
                         try {
                             int taskIndex = Integer.parseInt(secondCommandDone);
                             display_message(String.format(DONE_MESSAGE, taskList.markTaskAsDone(taskIndex)));
+                        } catch (NumberFormatException err) {
+                            throw new DukeException(INVALID_DONE_NUMBER);
+                        }
+                        break;
+                    case DELETE_COMMAND:
+                        if (inputArr.length < 2) {
+                            throw new DukeException(MISSING_DELETE_NUMBER_MESSAGE);
+                        }
+                        String secondCommandDelete = inputArr[1];
+                        try {
+                            int taskIndex = Integer.parseInt(secondCommandDelete);
+                            display_message(taskList.deleteTask(taskIndex));
                         } catch (NumberFormatException err) {
                             throw new DukeException(INVALID_DONE_NUMBER);
                         }
