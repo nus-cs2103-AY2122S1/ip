@@ -10,6 +10,10 @@ public class TodoList {
         this.list.add(newTodo);
     }
 
+    public Todo get(int todoIndex) {
+        return this.list.get(todoIndex);
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
