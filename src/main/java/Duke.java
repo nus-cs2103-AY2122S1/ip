@@ -160,34 +160,34 @@ public class Duke {
         }
     }
 
-    public static void printString() {
-        Scanner sc = new Scanner(System.in);
+    public static void printString(Scanner sc) {
         String inputString = sc.nextLine();
         String[] word = inputString.split(" ", 2);
         String command = word[0];
         if (command.equals("done")) {
             int secondWord = Integer.parseInt(word[1]);
             Commands.doneCommand(secondWord);
-            printString();
+            printString(sc);
         } else if (command.equals("delete")) {
             int secondWord = Integer.parseInt(word[1]);
             Commands.removeCommand(secondWord);
-            printString();
+            printString(sc);
         } else {
             if (inputString.equals("list")) {
                 Commands.listCommand();
-                printString();
+                printString(sc);
             } else if (inputString.equals("bye")) {
                 Commands.byeCommand();
             } else {
                 Commands.addCommand(inputString);
-                printString();
+                printString(sc);
             }
         }
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         Commands.helloCommand();
-        printString();
+        printString(sc);
     }
 }
