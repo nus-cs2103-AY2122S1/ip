@@ -65,12 +65,14 @@ class MyList {
         int i = 0;
         boolean found = false;
         while (i < this.items.size()) {
-            System.out.println(this.items.get(i).getTaskName());
             if (this.items.get(i).getTaskName().equals(taskName)) {
                 Task completedTask = this.items.get(i);
+                if (completedTask.getIsCompleted()) {
+                    return "Task is already completed!";
+                }
                 this.items.remove(i);
                 this.items.add(i, completedTask.markAsCompleted());
-                return "Task marked as completed: \n" + this.items.get(i).toString();
+                return "Task marked as completed:\n" + this.items.get(i).toString();
             } else {
                 i++;
             }
@@ -84,7 +86,7 @@ class MyList {
             sb.append("There are no items in your list!");
             return sb.toString();
         }
-        sb.append("Your list contains: \n");
+        sb.append("Your list contains:\n");
         for (int i = 0; i < this.items.size(); i++) {
             String itemNum = Integer.toString(i + 1) + ". ";
             sb.append(itemNum);

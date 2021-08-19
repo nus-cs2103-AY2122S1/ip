@@ -19,6 +19,10 @@ abstract class Task {
         return this.taskName;
     }
 
+    public boolean getIsCompleted() {
+        return this.isCompleted;
+    }
+
     @Override
     public String toString() {
         return "[" + (isCompleted ? "X": " ") + "] " + this.taskName;
