@@ -53,8 +53,4 @@ public class TaskManager {
         }
         System.out.println();
     }
-
-    public void setDone(int id) {
-
-    }
 }
