@@ -5,17 +5,25 @@ public class Task {
     public static Task of(String taskSummary) {
         return new Task(taskSummary);
     }
-    private Task(String taskSummary) {
+    Task(String taskSummary) {
         this.taskSummary = taskSummary;
         this.isDone = false;
     }
 
-    public void isCompleted() {
+    public void markCompleted() {
         this.isDone = true;
+    }
+
+    //getters
+    public boolean isCompleted() {
+        return this.isDone;
+    }
+    public String getTaskSummary() {
+        return this.taskSummary;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.isDone ? "x" : "",taskSummary.toString());
+        return String.format("[%s] %s", this.isDone ? "x" : "",this.taskSummary);
     }
 }

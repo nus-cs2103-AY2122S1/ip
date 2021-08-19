@@ -13,13 +13,18 @@ public class Duke {
             int numOfTasks = toDoList.length();
             String userInput = sc.nextLine();
             String msgOutput = "";
+
             if (userInput.equals("list")) {
-                msgOutput = toDoList.toString();
+                msgOutput = String.format(
+                        "Here are the tasks in your list:\n%s",toDoList.toString()
+                );
             } else if (userInput.equals("bye")) {
                 msgOutput = endScript();
             } else if (userInput.matches("done\s[0-9]{1,2}")) {
-                //eg. done 4
-                int idxFrom0 = Integer.parseInt(userInput.split(" ")[1]) - 1;
+                //eg. done 12
+                //limiting tasks from 0-99
+                String inputBody = userInput.split(" ", 2)[1];
+                int idxFrom0 = Integer.parseInt(inputBody) - 1;
                 if (!(idxFrom0 < 0 || idxFrom0 >= numOfTasks)) { //valid argument indexes
                     toDoList.toggleDone(idxFrom0);
                     msgOutput = String.format(
@@ -27,9 +32,15 @@ public class Duke {
                             toDoList.get(idxFrom0).toString()
                     );
                 }
-            } else {//add task to to do list
-                msgOutput = String.format("added: %s", userInput);
-                toDoList = toDoList.addTask(Task.of(userInput));
+            } else if (userInput.matches("todo\s.+")) {
+                //eg. todo read book
+                String inputBody = userInput.split(" ", 2)[1];
+                Task newTask = ToDo.of(userInput);
+                msgOutput = String.format(
+                        "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
+                        newTask.toString(), numOfTasks + 1
+                );
+                toDoList = toDoList.addTask(newTask);
             }
 
             displayWithStyle(msgOutput); //output msg to user
@@ -63,11 +74,5 @@ public class Duke {
         }
     }
 
-//    public static String toDoListAppend(ToDoList toDoList, String taskSummary) {
-//        String msg = String.format("added: %s", taskSummary);
-//        Task newTask = Task.of(taskSummary);
-//        toDoList.addTask(newTask);
-//        return msg;
-//    }
 }
 

@@ -36,20 +36,19 @@ public final class ToDoList {
         if (idx < 0 || idx >= this.tasks.length) {
             throw new IllegalArgumentException("task index passed in out of range");
         }
-        this.tasks[idx].isCompleted();
+        this.tasks[idx].markCompleted();
     }
 
     @Override
     public String toString() {
-        String result = "Here are the tasks in your list:\n";
+        String result = "";
         int numOfTasks = this.tasks.length;
-        for (int i = 0; i < numOfTasks - 1; i++) {
+        for (int i = 0; i < numOfTasks; i++) {
             result += String.format("%d: %s\n", i+1, this.tasks[i].toString());
         };
-        //add final task without \n
-        result += String.format("%d: %s", numOfTasks, this.tasks[numOfTasks - 1].toString());
+//        //add final task without \n
+//        result += String.format("%d: %s", numOfTasks, this.tasks[numOfTasks - 1].toString());
         return result;
-//      return Arrays.toString(this.tasks);
     }
 
 
