@@ -13,17 +13,6 @@ public class Duke {
         List list = new List();
         boolean shouldContinue = true;
         while (shouldContinue) {//create loop for the chat
-//            if (input.equals("bye") || input.equals("Bye") || input.equals("BYE")) {//input is bye
-//                System.out.println("Bye. Hope to see you again soon!");
-//                break;
-//            } else if(input.equals("list")) {// shows the current list
-//                list.show();
-//                input = sc.nextLine();
-//            } else { //input is not bye so add input to list
-//                System.out.println("added: " + input);
-//                list.add(input);
-//                input = sc.nextLine();
-//            }
             if (input.startsWith("done ")) {
                 String[] parts = input.split(" ");
                 String numStr = parts[1];
@@ -32,7 +21,24 @@ public class Duke {
                 list.setIndexDone(numInt);
                 input = sc.nextLine();
                 continue;
+            } else if (input.startsWith("todo ")) {
+                list.addToDo(input.replaceFirst("todo ", ""));
+                input = sc.nextLine();
+                continue;
+            } else if (input.startsWith("deadline ")) {
+                String task = input.replaceFirst("deadline ", "");
+                String[] parts = task.split("/by");
+                list.addDeadline(parts[0], parts[1]);
+                input = sc.nextLine();
+                continue;
+            } else if (input.startsWith("event ")) {
+                String task = input.replaceFirst("event ", "");
+                String[] parts = task.split("/at");
+                list.addEvent(parts[0], parts[1]);
+                input = sc.nextLine();
+                continue;
             }
+
             switch(input) {
                 case "bye":
                 case "Bye":
@@ -47,7 +53,7 @@ public class Duke {
 
                 default:
                     System.out.println("added: " + input);
-                    list.add(input);
+                    list.addToDo(input);
                     input = sc.nextLine();
             }
         }
