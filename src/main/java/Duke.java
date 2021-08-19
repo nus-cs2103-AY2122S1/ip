@@ -3,19 +3,13 @@ import java.util.Scanner;
 public class Duke {
 
     // Constants
-    private static final String LOGO =
-            " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String LIST_MESSAGE = "Here are the tasks in your list:\n%s";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n %s";
-    private static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d tasks in the list.";
+    private static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d %s in the list.";
     private static final String ADD_TASK_MESSAGE = "Got it. I've added this task:\n%s\n" + NUMBER_OF_TASKS_MESSAGE;
     private static final String MISSING_DONE_NUMBER_MESSAGE = "Please input a number after the done command";
+    private static final String INCOHERENT_INPUT_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     // Commands
@@ -45,7 +39,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        System.out.println(LOGO);
         display_message(WELCOME_MESSAGE);
 
         TaskList taskList = new TaskList();
@@ -68,23 +61,23 @@ public class Duke {
                     }
                     break;
                 case TODO_COMMAND:
-                    display_message(String.format(ADD_TASK_MESSAGE, taskList.addTask(new ToDo(input)), taskList.size()));
+                    String todoText = input.substring(TODO_COMMAND.length() + 1).trim();
+                    display_message(String.format(ADD_TASK_MESSAGE, taskList.addTask(new ToDo(todoText)), taskList.size(), taskList.size() <= 1 ? "task" : "tasks"));
                     break;
                 case DEADLINE_COMMAND:
                     String[] deadlineInfo = input.split(DEADLINE_DELIMITER);
                     String deadline = deadlineInfo[1].trim();
                     String deadlineText = deadlineInfo[0].substring(DEADLINE_COMMAND.length() + 1).trim();
-                    display_message(String.format(ADD_TASK_MESSAGE, taskList.addTask(new Deadline(deadlineText, deadline)), taskList.size()));
+                    display_message(String.format(ADD_TASK_MESSAGE, taskList.addTask(new Deadline(deadlineText, deadline)), taskList.size(), taskList.size() <= 1 ? "task" : "tasks"));
                     break;
                 case EVENT_COMMAND:
                     String[] eventInfo = input.split(EVENT_DELIMITER);
                     String event = eventInfo[1].trim();
                     String eventText = eventInfo[0].substring(EVENT_COMMAND.length() + 1).trim();
-                    display_message(String.format(ADD_TASK_MESSAGE, taskList.addTask(new Event(eventText, event)), taskList.size()));
+                    display_message(String.format(ADD_TASK_MESSAGE, taskList.addTask(new Event(eventText, event)), taskList.size(), taskList.size() <= 1 ? "task" : "tasks"));
                     break;
                 default:
-                    // Do plural etc
-                    // display_message(String.format("%s\n Now you have %d tasks in the list.\n", taskList.addTask(input)));
+                    display_message(INCOHERENT_INPUT_MESSAGE);
             }
         }
         sc.close();

@@ -1,0 +1,9 @@
+todo eat lunch
+deadline finish assignment /by Dec 20th
+event eat food party /at Aug 20th 2-4pm
+done 1
+todo eat dinner
+todo find friends
+done 4
+list
+bye
