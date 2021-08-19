@@ -20,8 +20,8 @@ public class List {
     public void add(Task task) {
         this.array.add(task);
         Duke.divider();
-        System.out.println("\t" + "Got it. I've added this task:");
-        System.out.println("\t\t" + task.toString());
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task.toString());
         this.getNumOfTasks();
         Duke.divider();
     }
@@ -35,9 +35,9 @@ public class List {
     public void getNumOfTasks() {
         int totalNum = this.array.size();
         if (totalNum == 1) {
-            System.out.println("\t" + "Now you have " + totalNum + " task in the list");
+            System.out.println("Now you have " + totalNum + " task in the list");
         } else {
-            System.out.println("\t" + "Now you have " + totalNum + " tasks in the list");
+            System.out.println("Now you have " + totalNum + " tasks in the list");
         }
     }
 
@@ -45,7 +45,7 @@ public class List {
     public void getAll() {
         int count = 1;
         for (Task t : this.array) {
-            System.out.println("\t" + count + ". " + t.toString());
+            System.out.println(count + ". " + t.toString());
             count += 1;
         }
     }

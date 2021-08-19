@@ -17,29 +17,28 @@ public class Duke {
 
     //Class method to print static line
     public static void divider() {
-        System.out.println("\t" +
-                "-------------------------------------");
+        System.out.println("-------------------------------------");
     }
 
     //Class method to print greeting
     private static void greeting() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println(logo);
         Duke.divider();
-        System.out.println("\t" + "Hello! I'm Duke");
-        System.out.println("\t" + "What can I do for you?");
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
         Duke.divider();
     }
 
     //Class method to print goodbye
     private static void goodbye() {
         Duke.divider();
-        System.out.println("\t" + "Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon!");
         Duke.divider();
     }
 
@@ -115,7 +114,7 @@ public class Duke {
 
                 default:
                     Duke.divider();
-                    System.out.println("\tSorry! I do not understand you? Try another command!");
+                    System.out.println("Sorry! I do not understand you? Try another command!");
                     Duke.divider();
             }
         } while (!end);

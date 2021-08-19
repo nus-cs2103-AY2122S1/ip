@@ -18,8 +18,8 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
         Duke.divider();
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t" + this.toString());
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(this.toString());
         Duke.divider();
     }
 
