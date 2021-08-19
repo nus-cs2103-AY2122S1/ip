@@ -5,6 +5,7 @@ public class Duke {
     private Scanner input = new Scanner(System.in);
     private ArrayList<Task> list = new ArrayList<>();
 
+
     private void printLogo() {
         String logo = " ____        _\n"
                     + "|  _ \\ _   _| | _____\n"
@@ -22,34 +23,40 @@ public class Duke {
 
 
     private void run() {
-        while (true) {
-            String rawInput = this.input.nextLine();
-            String[] userInput = rawInput.split(" ", 2);
-            String command = userInput[0];
-            try {
-                if (command.equals("bye")) {
+        String rawInput = this.input.nextLine();
+        String[] userInput = rawInput.split(" ", 2);
+        String command = userInput[0];
+        try {
+            switch (command) {
+                case "bye":
                     this.exit();
-                    break;
-                } else if (command.equals("list")) {
+                    this.input.close();
+                    return;
+                case "list":
                     this.showList();
-                } else if (command.equals("todo")) {
+                    break;
+                case "todo":
                     this.addTodo(userInput);
-                } else if (command.equals("event")) {
+                    break;
+                case "event":
                     this.addEvent(userInput);
-                } else if (command.equals("deadline")) {
+                    break;
+                case "deadline":
                     this.addDeadline(userInput);
-                } else if (command.equals("done")) {
+                    break;
+                case "done":
                     this.markAsDone(userInput);
-                } else if (command.equals("delete")) {
+                    break;
+                case "delete":
                     this.delete(userInput);
-                } else {
+                    break;
+                default:
                     throw new DukeUnknownCommandException(command);
-                }
-            } catch (DukeException e) {
-                System.out.printf("\t%s\n\n", e);
             }
+        } catch (DukeException e) {
+            System.out.printf("\t%s\n\n", e);
         }
-        this.input.close();
+        this.run();
     }
 
 
