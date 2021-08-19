@@ -45,7 +45,7 @@ public class Duke {
             case "done":
                 try {
                     this.done(userInput);
-                } catch (IndexOutOfBoundsException e) {
+                } catch (IndexOutOfBoundsException | NumberFormatException e) {
                     String invalidNumber = "OOPS!!! Please enter a valid task number.";
                     this.sendMessage(invalidNumber);
                 }
@@ -91,7 +91,7 @@ public class Duke {
             case "delete":
                 try {
                     this.delete(userInput);
-                } catch (IndexOutOfBoundsException e) {
+                } catch (IndexOutOfBoundsException | NumberFormatException eh) {
                     String invalidNumber = "OOPS!!! Please enter a valid task number.";
                     this.sendMessage(invalidNumber);
                 }
