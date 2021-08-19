@@ -5,16 +5,35 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+The list is empty!!
+That is an invalid index!!
+That is not within my scope of action!
+Please enter the number of task to mark as completed!
+Description of task cannot be empty!
+Description of task cannot be empty!
+Description of task cannot be empty!
+Deadline not specified!
+Date of event not specified!
 Got it. I've added this task:
-[T][ ] Buy monitor
+[T][ ] assignment
 Now you have 1 tasks in your list.
 Got it. I've added this task:
-[D][ ] Project  (by: Thursday)
+[D][ ] project  (by: Next Week)
 Now you have 2 tasks in your list.
 Got it. I've added this task:
-[E][ ] Birthday (at: 28 Aug)
+[E][ ] birthday (at: 20 Aug)
 Now you have 3 tasks in your list.
-1.[T][ ] Buy monitor
-2.[D][ ] Project  (by: Thursday)
-3.[E][ ] Birthday (at: 28 Aug)
+Here are your tasks:
+1.[T][ ] assignment
+2.[D][ ] project  (by: Next Week)
+3.[E][ ] birthday (at: 20 Aug)
+That number is not in the list!
+Nice! I've marked this task as done:
+[E][X] birthday (at: 20 Aug)
+Noted. I've removed this task:
+[T][ ] assignment
+Now you have 2 tasks in your list.
+Here are your tasks:
+1.[D][ ] project  (by: Next Week)
+2.[E][X] birthday (at: 20 Aug)
 Bye bye. Duke going to sleep now.

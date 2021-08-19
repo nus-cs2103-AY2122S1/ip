@@ -20,7 +20,7 @@ public class Task {
      * @param size Total number of tasks in the list
      */
     public void addResponse(int size) {
-        System.out.println("Got it. I've added this task: \t");
+        System.out.println("Got it. I've added this task:");
         System.out.println(this.toString());
         System.out.println("Now you have " + size + " tasks in your list.");
     }

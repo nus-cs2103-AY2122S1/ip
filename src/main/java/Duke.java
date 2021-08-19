@@ -102,7 +102,7 @@ public class Duke {
                             }
                             Task task = list.get(index - 1);
                             task.toggleCompleted();
-                            System.out.println("Nice! I've marked this task as done: ");
+                            System.out.println("Nice! I've marked this task as done:");
                             System.out.println(task);
                         } catch (NumberFormatException e) {
                             System.out.println("Please input a proper number pls");
@@ -112,7 +112,7 @@ public class Duke {
                         int i = Integer.parseInt(inputSplit[1]);
                         try {
                             Task t = list.get(i - 1);
-                            System.out.println("Noted. I've removed this task: ");
+                            System.out.println("Noted. I've removed this task:");
                             System.out.println(t);
                             list.remove(i - 1);
                             System.out.println("Now you have " + list.size() + " tasks in your list.");

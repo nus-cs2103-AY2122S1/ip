@@ -1,5 +1,18 @@
-todo Buy monitor
-deadline Project /by Thursday
-event Birthday /at 28 Aug
+list
+delete 1
+random
+done
+todo
+deadline
+event
+deadline project
+event birthday
+todo assignment
+deadline project /by Next Week
+event birthday /at 20 Aug
+list
+done 4
+done 3
+delete 1
 list
 bye
