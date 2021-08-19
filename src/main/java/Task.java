@@ -1,5 +1,12 @@
+/**
+ * Represents the task user want to configure.
+ *
+ * @author QIN GUORUI
+ */
 public class Task {
+        /** The content of the task. */
         protected String description;
+        /** Whether the task is finished or not. */
         protected boolean isDone;
 
         public Task(String description) {

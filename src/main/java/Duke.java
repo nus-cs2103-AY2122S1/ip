@@ -1,11 +1,19 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the robot which has corresponding reaction to the user inputs.
+ *
+ * @author QIN GUORUI
+ */
 public class Duke {
-    /** Number of tasks stored. */
+    /** The data structure used to store the tasks. */
     private static final ArrayList<Task> list = new ArrayList<>(100);
+    /** Number of tasks stored. */
     private static int count;
+    /** User inputs. */
     private static String response;
+    /** The length of user input. */
     private static int len;
 
     public static void main(String[] args) {
@@ -40,14 +48,14 @@ public class Duke {
      */
     public static boolean echo(String response) {
         switch (response) {
-            case "bye":
-                System.out.println(getPattern("Bye, see you soon. ^-^"));
-                return false;
-            case "list":
-                System.out.println(getPattern(toListStrings()));
-                return true;
-            default:
-                return checkAll();
+        case "bye":
+            System.out.println(getPattern("Bye, see you soon. ^-^"));
+            return false;
+        case "list":
+            System.out.println(getPattern(toListStrings()));
+            return true;
+        default:
+            return checkAll();
         }
     }
 
@@ -81,7 +89,7 @@ public class Duke {
             if (i == count - 1) {
                 end = "";
             }
-            String out = ((Integer)(i + 1)).toString() + "." + list.get(i).toString() + end;
+            String out = ((Integer) (i + 1)).toString() + "." + list.get(i).toString() + end;
             curr.append(out);
         }
         return curr.toString();
@@ -98,7 +106,7 @@ public class Duke {
         boolean flag = true;
         int i = 0;
         if (input.charAt(0) == '-') {
-           i = 1;
+            i = 1;
         }
         for (; i < input.length(); i++) {
             char curr = input.charAt(i);
@@ -118,11 +126,11 @@ public class Duke {
      * @throws EmptyInputException When there is no input of digits.
      * @throws OutOfRangeException When digit is out of range.
      */
-    public static boolean checkDone() throws EmptyInputException,OutOfRangeException{
+    public static boolean checkDone() throws EmptyInputException, OutOfRangeException {
         //check with the special response "done X", where X is a number.
         if (response.startsWith("done ")
-                && chekDigit(response.substring(5,len))) {
-            int curr = Integer.parseInt(response.substring(5,len));
+                && chekDigit(response.substring(5, len))) {
+            int curr = Integer.parseInt(response.substring(5, len));
             Task shouldMark;
             try {
                 shouldMark = list.get(curr - 1);
@@ -161,12 +169,12 @@ public class Duke {
      * @return Whether the input is related to todo or not.
      * @throws EmptyInputException When there is no input of digits.
      */
-    public static boolean checkTodo() throws EmptyInputException{
+    public static boolean checkTodo() throws EmptyInputException {
         //check with the special response "todo X", where X is what to do.
         if (response.startsWith("todo ")) {
             Todo todo = new Todo(response.substring(5, len));
             list.add(todo);
-            count ++;
+            count++;
             System.out.println(getPattern(getOutputFrame(todo.toString())));
             return true;
         } else if (response.equals("todo")) {
@@ -183,7 +191,7 @@ public class Duke {
      * @return Whether the input is related to deadline or not.
      * @throws EmptyInputException When there is no input of digits.
      */
-    public static  boolean checkDeadline() throws EmptyInputException{
+    public static boolean checkDeadline() throws EmptyInputException {
         //check with the special response "deadline X", where X is what to do and by what time.
         if (response.startsWith("deadline ")
                 && response.substring(9, len).contains(" /by ")) {
@@ -192,7 +200,7 @@ public class Duke {
             String time = parts[1];
             Deadline deadline = new Deadline(content, time);
             list.add(deadline);
-            count ++;
+            count++;
             System.out.println(getPattern(getOutputFrame(deadline.toString())));
             return true;
         } else if (response.equals("deadline")) {
@@ -209,7 +217,7 @@ public class Duke {
      * @return Whether the input is related to event or not.
      * @throws EmptyInputException When there is no input of digits.
      */
-    public static boolean checkEvent() throws EmptyInputException{
+    public static boolean checkEvent() throws EmptyInputException {
         //check with the special response "event X", where X includes what to do and time to do.
         if (response.startsWith("event ")
                 && response.substring(6, len).contains(" /at ")) {
@@ -218,7 +226,7 @@ public class Duke {
             String time = parts[1];
             Event event = new Event(content, time);
             list.add(event);
-            count ++;
+            count++;
             System.out.println(getPattern(getOutputFrame(event.toString())));
             return true;
         } else if (response.equals("event")) {
@@ -236,11 +244,11 @@ public class Duke {
      * @throws EmptyInputException When there is no input of digits.
      * @throws OutOfRangeException When digit is out of range.
      */
-    public static boolean checkDelete() throws EmptyInputException,OutOfRangeException{
+    public static boolean checkDelete() throws EmptyInputException, OutOfRangeException {
         //check with the special response "delete X", where X is index of deleted item.
         if (response.startsWith("delete ")
-                && chekDigit(response.substring(7,len))) {
-            int curr = Integer.parseInt(response.substring(7,len));
+                && chekDigit(response.substring(7, len))) {
+            int curr = Integer.parseInt(response.substring(7, len));
             Task shouldDelete;
             try {
                 shouldDelete = list.get(curr - 1);

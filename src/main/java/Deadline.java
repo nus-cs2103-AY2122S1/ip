@@ -1,5 +1,10 @@
+/**
+ * Represents the task which has deadline.
+ *
+ * @author QIN GUORUI
+ */
 public class Deadline extends Task {
-
+    /** Stores the deadline. */
     protected String by;
 
     public Deadline(String description, String by) {
