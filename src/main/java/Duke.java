@@ -266,7 +266,6 @@ public class Duke {
         Duke chatBotObj = new Duke();
         chatBotObj.greet();
         while (chatBotObj.isActive()) {
-            String nextIn;
             try {
                 nextIn = scannerObj.next();
             } catch (NoSuchElementException e) {
