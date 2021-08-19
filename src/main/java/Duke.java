@@ -52,21 +52,21 @@ public class Duke {
                     list.add(todo);
                     done_check.add("");
                     System.out.println("Added the task! :)");
-                    System.out.println("[" + todo.get_type() + "][ ] " + todo.get_task());
+                    System.out.println("[" + todo.get_type() + "][] " + todo.get_task());
                     System.out.println("Jiayou! you have " + total + " tasks in the list.");
                 } else if (next_line.substring(0, 1).equals("d")) {
                     Task deadline = new Deadline(next_line);
                     list.add(deadline);
                     done_check.add("");
                     System.out.println("Added the task! :)");
-                    System.out.println("[" + deadline.get_type() + "][ ] " + deadline.get_task());
+                    System.out.println("[" + deadline.get_type() + "][] " + deadline.get_task());
                     System.out.println("Jiayou! you have " + total + " tasks in the list.");
                 } else {
                     Task event = new Event(next_line);
                     list.add(event);
                     done_check.add("");
                     System.out.println("Added the task! :)");
-                    System.out.println("[" + event.get_type() + "][ ] " + event.get_task());
+                    System.out.println("[" + event.get_type() + "][] " + event.get_task());
                     System.out.println("Jiayou! you have " + total + " tasks in the list.");
                 }
 

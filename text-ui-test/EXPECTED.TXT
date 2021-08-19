@@ -1,7 +1,30 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello! I'm Grace
+How can I help you?
+Added the task! :)
+[T][] borrow book
+Jiayou! you have 1 tasks in the list.
+Added the task! :)
+[D][] return book (by: Sunday)
+Jiayou! you have 2 tasks in the list.
+Added the task! :)
+[E][] project meeting (at: Mon 2-4pm)
+Jiayou! you have 3 tasks in the list.
+Do these soon:
 
+1. [T][] borrow book
+2. [D][] return book (by: Sunday)
+3. [E][] project meeting (at: Mon 2-4pm)
+Yay! you have finished this task!
+[D][X] return book (by: Sunday)
+Do these soon:
+
+1. [T][] borrow book
+2. [D][X] return book (by: Sunday)
+3. [E][] project meeting (at: Mon 2-4pm)
+Yay! you have finished this task!
+[T][X] borrow book
+Do these soon:
+
+1. [T][X] borrow book
+2. [D][X] return book (by: Sunday)
+3. [E][] project meeting (at: Mon 2-4pm)
