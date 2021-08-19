@@ -14,7 +14,7 @@ public class Chatbot {
 
         public static ChatCommands toEnum (String str) {
             for(ChatCommands chatCommand: ChatCommands.values()) {
-                if (chatCommand.name().equalsIgnoreCase(str)) {
+                if (chatCommand.command.equalsIgnoreCase(str)) {
                     return chatCommand;
                 }
             }
@@ -37,7 +37,7 @@ public class Chatbot {
         public static TaskCommands toEnum (String str) {
             String[] splitCommand = str.split(" ", 2);
             for(TaskCommands chatCommand: TaskCommands.values()) {
-                if (chatCommand.name().equalsIgnoreCase(splitCommand[0])) {
+                if (chatCommand.command.equalsIgnoreCase(splitCommand[0])) {
                     return chatCommand;
                 }
             }
@@ -73,7 +73,7 @@ public class Chatbot {
             System.out.print("User: ");
             try {
                 keepChatting = interpret() == ChatContinue.CONTINUE;
-            } catch (IllegalArgumentException e) {
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
         };
@@ -89,11 +89,11 @@ public class Chatbot {
         if (taskCommand != null) {
             String[] arguments = input.split(" ", 2);
             if (arguments.length == 1) {
-                throw new IllegalArgumentException("No items specified for 'todo'!");
+                throw new DukeException("No items specified for '" + taskCommand.command + "'!");
             }
             return addTask(taskCommand, arguments[1]);
         }
-        throw new IllegalArgumentException("Looks like I don't support those commands yet...");
+        throw new DukeException("Looks like I don't support those commands yet...");
     }
 
     private ChatContinue addTask(TaskCommands command, String input) {
