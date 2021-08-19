@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
 
     private enum CommandTypes {
-        EXIT, LIST, DONE, TODO, DEADLINE, EVENT, UNKNOWN
+        EXIT, LIST, DONE, TODO, DEADLINE, EVENT, UNKNOWN, DELETE
     }
 
     private final String INDENTATION = "    ";
@@ -37,6 +37,13 @@ public class Duke {
     private void addTask(Task task){
         this.taskList.add(task);
         String msg = "Got it. I've added this task:\n" + INDENTATION + "  " + task.checkStatus();
+        msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskList.size());
+        printMessageWithFormat(msg);
+    }
+
+    private void deleteTask(int taskNum){
+        Task task = taskList.remove(taskNum-1);
+        String msg = "Noted. I've removed this task:\n" + INDENTATION + "  " + task.checkStatus();
         msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskList.size());
         printMessageWithFormat(msg);
     }
@@ -109,6 +116,11 @@ public class Duke {
                 addTask(toDo);
                 break;
 
+            case DELETE:
+                int taskNum = Integer.parseInt(command.substring(command.indexOf(" ")+1));
+                deleteTask(taskNum);
+                break;
+
             case UNKNOWN: default:
                 throw new UnknownCommandException();
         }
@@ -134,6 +146,9 @@ public class Duke {
 
             case "event":
                 return CommandTypes.EVENT;
+
+            case "delete":
+                return CommandTypes.DELETE;
 
             default:
                 return CommandTypes.UNKNOWN;
