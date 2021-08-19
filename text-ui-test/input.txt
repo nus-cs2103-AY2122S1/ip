@@ -8,4 +8,8 @@ done 3
 list
 done 4
 list
+delete 3
+done 2
+delete 2
+list
 bye

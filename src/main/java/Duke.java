@@ -75,6 +75,13 @@ public class Duke {
                     System.out.println(new Event(firstEvent, secondEvent));
                     System.out.println("Now you have " + list.size() + " tasks in the list");
                 }
+            } else if (input.startsWith("delete") && input.length() < 11) {
+                int value = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+                Task removedTask = list.get(value - 1);
+                list.remove(value - 1);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(removedTask.toString());
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
             } else {
                 DukeException e = new NonExistentKeyword();
                 System.out.println(e.getMsg());

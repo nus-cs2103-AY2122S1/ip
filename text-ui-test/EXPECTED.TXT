@@ -30,5 +30,15 @@ Nice! I've marked this task as done:
 2.[D][ ] meet Mark  (by: Tuesday)
 3.[E][X] project meeting  (at: Mon 2-4pm)
 4.[E][X] project call  (at: Tue 2-4pm)
+Noted. I've removed this task:
+[E][X] project meeting  (at: Mon 2-4pm)
+Now you have 3 tasks in the list.
+Nice! I've marked this task as done:
+[X] meet Mark
+Noted. I've removed this task:
+[D][X] meet Mark  (by: Tuesday)
+Now you have 2 tasks in the list.
+1.[D][ ] return book  (by: Monday)
+2.[E][X] project call  (at: Tue 2-4pm)
 It's sad to see you go :(
 Goodbye, hope to you another day!
