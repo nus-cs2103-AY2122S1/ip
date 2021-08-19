@@ -80,7 +80,6 @@ public class Duke {
             String userInput = scanner.next();
             try {
                 if (userInput.equals("bye")) { // user inputs "bye, set canExit to true and Exit
-                    System.out.println("boo");
                     canExit = true;
                     System.out.println(sandwich(goodbye));
                 } else { // check first input

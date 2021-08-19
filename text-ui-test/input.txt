@@ -3,4 +3,6 @@ deadline CS2103 ip week 2 /by tonight
 event watch national address by PM Lee /at 8pm Friday
 done 1
 list
+delete 3
+list
 bye

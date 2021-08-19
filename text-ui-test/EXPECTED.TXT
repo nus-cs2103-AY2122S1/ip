@@ -1,22 +1,22 @@
 ____________________________________________________________
-Hello! I'm Duke: Level 4
+Hello! I'm Duke: Level 6
 What would you like to do today?
-My current features are: Greet, Echo, Exit, Add, List, Mark as Done, ToDos, Events, Deadlines
+My current features are: Greet, Echo, Exit, Add, List, Mark as Done, ToDos, Events, Deadlines, Handle Errors, Delete
 ____________________________________________________________
 ____________________________________________________________
 New todo task added:
 [T][ ] Clean room
- You now have 1 item(s) in your task list.
+You now have 1 item(s) in your task list.
 ____________________________________________________________
 ____________________________________________________________
 New deadline task added:
 [D][ ] CS2103 ip week 2 (by: tonight)
- You now have 2 item(s) in your task list.
+You now have 2 item(s) in your task list.
 ____________________________________________________________
 ____________________________________________________________
 New event task added:
 [E][ ] watch national address by PM Lee (at: 8pm Friday)
- You now have 3 item(s) in your task list.
+You now have 3 item(s) in your task list.
 ____________________________________________________________
 ____________________________________________________________
 Congratulations! You have finished this task: [T][X] Clean room
@@ -27,7 +27,14 @@ ____________________________________________________________
 3.[E][ ] watch national address by PM Lee (at: 8pm Friday)
 ____________________________________________________________
 ____________________________________________________________
-Thank you for using Duke: Level 4
+Got it, I have deleted this task: [E][ ] watch national address by PM Lee (at: 8pm Friday)
+You now have 3 item(s) in your task list.
+____________________________________________________________
+____________________________________________________________
+1.[T][X] Clean room
+2.[D][ ] CS2103 ip week 2 (by: tonight)
+____________________________________________________________
+____________________________________________________________
+Thank you for using Duke: Level 6
 See you soon!
 ____________________________________________________________
-
