@@ -5,25 +5,26 @@ import java.util.Optional;
 
 public class Duke {
 
+    // Comstant and Static Variable
     public static final String HORIZONTAL_LINE = "____________________________________________________________ \n";
     public static ArrayList<Task> taskList = new ArrayList<>();
+    public static final String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    public static final String greeting = "Hello! I am \n"
+            + logo
+            + "The awesome bot helper! \n"
+            + "How can I help you today?\n";
+
+    public static final String goodbye = "Bye. Hope to see you again soon!\n";
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-
-        String greeting = "Hello! I am \n"
-                    + logo
-                    + "The awesome bot helper! \n"
-                    + "How can I help you today?\n";
-
-        String goodbye = "Bye. Hope to see you again soon!\n";
-
+        
         reply(greeting);
+
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 
         while(true) {
