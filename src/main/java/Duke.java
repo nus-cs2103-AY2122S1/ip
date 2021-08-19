@@ -1,19 +1,18 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class Duke {
 
     // shows if the Duke chatbot has been activated
     private boolean activated;
     // Line Separator
-    private final String SEP_LINE = "____________________________________________________________\n";
+    private final String SEP_LINE = "____________________________________________________________";
     // Standard boot response
     private final String bootMessage =
             SEP_LINE
             .concat(
-            " ____        _        \n"
+            " \n____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -21,11 +20,11 @@ public class Duke {
             + "\nMade by Dr-Octavius\n")
             .concat(SEP_LINE)
             .concat(
-            "Hello! I'm Duke\n"
+            "\nHello! I'm Duke\n"
             + "What can I do for you?\n")
             .concat(SEP_LINE);
-    // Text Storage
-    private final List<Task> storage = new ArrayList<Task>();
+    // Level-6 -> A-Collections: Text Storage
+    private final List<Task> storage = new ArrayList<>();
 
     // Duke Constructor
     public Duke() {
@@ -73,8 +72,8 @@ public class Duke {
     // Level-3: Mark items as done
     public String done(int index) {
         this.storage.get(index).setDone();
-        Task t = this.storage.get(index);
-        return "Nice! I've marked this task as done: \n  ".concat(t.toString());
+        Task task = this.storage.get(index);
+        return "Nice! I've marked this task as done: \n  ".concat(task.toString());
     }
 
     // Level-4: setting of task urgency to "to-do"
@@ -105,32 +104,54 @@ public class Duke {
     }
 
     // Level-6: delete items from list
-    public String delete() {
-        return "";
+    public String delete(int index) {
+        Task task = this.storage.get(index);
+        this.storage.remove(index);
+        return "Noted. I've removed this task:\n  "
+                .concat(task.toString())
+                .concat("\nNow you have ".concat(this.storage.size() + "").concat(" tasks in the list."));
     }
 
     // wraps all messages between line seperators
     public String messageWrapper(String text) {
-        return SEP_LINE.concat(text).concat("\n").concat(SEP_LINE);
+        return SEP_LINE.concat("\n").concat(text).concat("\n").concat(SEP_LINE);
     }
 
     // decodes input from user and passes that argument to a response builder
     public int decoder(String userInput) {
         int res;
-        if (userInput.equals("bye")) res = 0;
-        else if (userInput.equals("list")) res = 1;
-        else if (userInput.equals("done")) res = 2;
-        else if (userInput.equals("todo")) res = 3;
-        else if (userInput.equals("deadline")) res = 4;
-        else if (userInput.equals("event")) res = 5;
-        else if (userInput.equals("delete")) res = 6;
-        else res = 7;
+        switch (userInput) {
+            case "bye":
+                res = 0;
+                break;
+            case "list":
+                res = 1;
+                break;
+            case "done":
+                res = 2;
+                break;
+            case "todo":
+                res = 3;
+                break;
+            case "deadline":
+                res = 4;
+                break;
+            case "event":
+                res = 5;
+                break;
+            case "delete":
+                res = 6;
+                break;
+            default:
+                res = 7;
+                break;
+        }
         return res;
     }
 
     // A-Enums: Set Enums for Task type
     protected enum state {
-        T,D,E;
+        T,D,E
     }
 
     // Task class that represents all Tasks
@@ -202,7 +223,7 @@ public class Duke {
         }
     }
 
-    //A-Inheritance: To-do Task Class
+    //Level-4 -> A-Inheritance: To-do Task Class
     private static class Todo extends Task {
 
         public Todo(String description,state STATE) {
@@ -211,7 +232,7 @@ public class Duke {
 
     }
 
-    //A-Inheritance: Deadline Task Class
+    //Level-4 -> A-Inheritance: Deadline Task Class
     private static class Deadline extends Task {
 
         public Deadline(String description, String at, state STATE) {
@@ -224,7 +245,7 @@ public class Duke {
         }
     }
 
-    //A-Inheritance: Event Task Class
+    //Level-4 -> A-Inheritance: Event Task Class
     private static class Event extends Task {
 
         public Event(String description, String at, state STATE) {
@@ -257,7 +278,7 @@ public class Duke {
                 case 4:
                 case 5:
                     String desc = "";
-                    String var = "";
+                    String var;
                     int x = 0;
                     while(true) {
                         nextIn = scannerObj.next();
@@ -277,7 +298,7 @@ public class Duke {
                     }
                     output = (selector == 4 ? chatBotObj.deadline(desc,var) : chatBotObj.event(desc,var));
                     break;
-                case 6: output = chatBotObj.delete();
+                case 6: output = chatBotObj.delete(scannerObj.nextInt()-1);
                         break;
                 case 7: output = chatBotObj.add(nextIn.concat(scannerObj.nextLine()));
                         break;

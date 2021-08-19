@@ -1,5 +1,7 @@
 @ECHO OFF
 
+REM A-TextUITesting
+
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
