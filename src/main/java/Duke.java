@@ -14,34 +14,10 @@ public class Duke {
         String command = scanner.nextLine();
 
         while(!command.equals("bye")) {
-            if(command.equals("list")) { //if the user requests to view task list
-                printList();
-            } else if(command.contains("done")) {
-                int index = getCompletedTask(command);
-                if(index >= 0) { //valid task number to mark as completed
-                    Task finished = tasks[index];
-                    finished.markAsDone();
-                    printFormatted("Nice! I've marked this task as done:\n" + "\t\t" +
-                            finished);
-                } else { //invalid task number, cannot mark this task as completed
-                    printFormatted("Invalid task number!");
-                }
-
-            } else {
-                Task current = new Task("");
-                if(command.contains("todo")) {
-                    current = new Todo(command.substring(5));
-                } else if(command.contains("deadline")) {
-                    current = new Deadline(command.substring(9, command.indexOf('/') - 1),
-                            command.substring(command.indexOf('/') + 4));
-                } else if(command.contains("event")){
-                    current = new Event(command.substring(6, command.indexOf('/') - 1),
-                            command.substring(command.indexOf('/') + 4, command.indexOf('-')),
-                            command.substring(command.indexOf('-') + 1));
-                }
-                tasks[noOfTasks++] = current;
-                printFormatted("Got it. I've added this task:" + "\n\t\t" + current + "\n\tNow you have " +
-                        noOfTasks + " tasks in the list.");
+            try {
+                checkCommand(command);
+            } catch (DukeException ex) {
+                printFormatted(ex.toString());
             }
             command = scanner.nextLine();
         }
@@ -88,5 +64,63 @@ public class Duke {
         }
         return idx <= noOfTasks? idx - 1: -1;
     }
+    public static int checkIndex(String command) throws DukeException {
+        int index = getCompletedTask(command);
+        if(index == -1) {
+            throw new DukeException("You are attempting to mark an invalid task number!");
+        }
+        return index;
+    }
+
+    public static void checkCommand(String command) throws DukeException {
+
+        String keyword = command.substring(0, command.contains(" ") ? command.indexOf(' ') : command.length());
+        boolean isTask = keyword.equals("todo") || keyword.equals("event") || keyword.equals("deadline");
+
+        if(isTask|| keyword.equals("list") || keyword.equals("done")){
+
+            if(isTask && command.length() < keyword.length() + 2) {
+                throw new DukeException("The description of a " + keyword + " cannot be empty.");
+            }
+
+            if(keyword.equals("list")) {
+                if(noOfTasks == 0) {
+                    throw new DukeException("No items added to list yet!");
+                }
+                printList();
+            } else if(keyword.equals("done")) {
+                try {
+                    int index = checkIndex(command);
+                    Task finished = tasks[index];
+                    finished.markAsDone();
+                    printFormatted("Nice! I've marked this task as done:\n" + "\t\t" +
+                            finished);
+                } catch (DukeException ex) {
+                    printFormatted(ex.toString());
+                }
+            } else {
+                Task current = new Task("");
+                if(keyword.equals("todo")) {
+                    current = new Todo(command.substring(5));
+                } else if(keyword.equals("deadline")) {
+                    current = new Deadline(command.substring(9, command.indexOf('/') - 1),
+                            command.substring(command.indexOf('/') + 4));
+                } else if(keyword.equals("event")){
+                    current = new Event(command.substring(6, command.indexOf('/') - 1),
+                            command.substring(command.indexOf('/') + 4, command.indexOf('-')),
+                            command.substring(command.indexOf('-') + 1));
+                }
+                tasks[noOfTasks++] = current;
+                printFormatted("Got it. I've added this task:" + "\n\t\t" + current + "\n\tNow you have " +
+                        noOfTasks + " tasks in the list.");
+            }
+        } else {
+            throw new DukeException("Sorry, but I don't know what that means :-(");
+        }
+
+
+    }
+
+
 
 }
