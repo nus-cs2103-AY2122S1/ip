@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     private Scanner sc = new Scanner(System.in);
-    private ArrayList<String> dukeList = new ArrayList<String>();
+    private ArrayList<Task> dukeList = new ArrayList<Task>();
 
     public static void main(String[] args)  {
         Duke duke = new Duke();
@@ -44,22 +44,36 @@ public class Duke {
     }
 
     void executeCommand(String command) {
-        if(!command.equals("list") && !command.equals("bye")) {
-            addToDukeList(command);
-        } else if (command.equals("list")) {
+        if (command.equals("list")) {
             displayDukeList();
+        } else if (command.length() > 4 && command.substring(0,5).equals("done ")) {
+            int taskIndex = Integer.parseInt(command.substring(5)) - 1;
+            Task toBeCompleted = dukeList.get(taskIndex);
+            toBeCompleted.completeTask();
+            displayTaskCompletion(toBeCompleted);
+        } else {
+            addTaskToDukeList(command);
         }
+
     }
 
-    void addToDukeList(String command) {
-        dukeList.add(command);
+    void displayTaskCompletion(Task toBeCompleted) {
+        printLines();
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println(toBeCompleted);
+        printLines();
+    }
+
+    void addTaskToDukeList(String command) {
+        Task newTask = new Task(command);
+        dukeList.add(newTask);
         displayCommand("added: " + command);
     }
 
     void displayDukeList() {
         printLines();
         for (int i = 0;i < dukeList.size(); i++) {
-            System.out.println( (i+1) + ". " + dukeList.get(i));
+            System.out.println((i+1) + ". " + dukeList.get(i));
         }
         printLines();
     }
