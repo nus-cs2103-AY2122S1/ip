@@ -2,6 +2,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskManager {
+
+    private enum Command {
+
+        LIST("list"),
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event"),
+        DELETE("delete"),
+        DONE("done"),
+        INVALID("");
+
+        public final String type;
+
+        private Command(String type) {
+            this.type = type;
+        }
+    }
+
     protected static ArrayList<Task> tasks = new ArrayList<>();
 
     public String taskDescription(String input) throws DukeException.MissingDescriptionException {
@@ -52,31 +70,41 @@ public class TaskManager {
         }
     }
 
+    public Command getCommand(String input) {
+        String[] words = input.split(" ", 2);
+        String command = words[0];
+        for (Command c : Command.values()) {
+            if (command.equals(c.type)) {
+                return c;
+            }
+        }
+        return Command.INVALID;
+    }
+
     public void run() {
         Message.greet();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            String[] words = input.split(" ", 2);
-            String command = words[0];
+            Command c = getCommand(input);
             try {
-                switch (command) {
-                    case "list":
+                switch (c) {
+                    case LIST:
                         Message.list(tasks);
                         break;
-                    case "done":
+                    case DONE:
                         markDone(Integer.parseInt(taskDescription(input)));
                         break;
-                    case "todo":
-                    case "deadline":
-                    case "event":
-                        addTask(taskDescription(input), command);
+                    case TODO:
+                    case DEADLINE:
+                    case EVENT:
+                        addTask(taskDescription(input), c.type);
                         break;
-                    case "delete":
+                    case DELETE:
                         deleteTask(Integer.parseInt(taskDescription(input)));
                         break;
-                    default:
+                    case INVALID:
                         throw new DukeException.InvalidInputException();
                 }
             } catch (DukeException e) {
