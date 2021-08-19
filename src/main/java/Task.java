@@ -3,8 +3,8 @@ public abstract class Task {
     private boolean done;
 
     public Task(String name) throws DukeException{
-        if(name.equals("")) {
-            throw new DukeException("empty name");
+        if(name.isBlank()) {
+            throw new DukeException("Please specify name");
         }
         this.name = name;
         this.done = false;
@@ -12,25 +12,22 @@ public abstract class Task {
 
     public static Task taskFactory(Duke.Commands cmd, String rest) throws DukeException{
         Task newTask;
+        String[] name_delimit;
         switch (cmd) {
             case TODO:
                 newTask = new ToDo(rest.trim());
                 break;
 
             case DEADLINE:
-                String[] name_by = rest.split("/by");
-                if(name_by.length != 2){
-                    throw new DukeException("invalid argument length for deadline");
-                }
-                newTask = new Deadline(name_by[0].trim(), name_by[1].trim());
+                name_delimit = rest.split("/by");
+                checkArg(name_delimit);
+                newTask = new Deadline(name_delimit[0].trim(), name_delimit[1].trim());
                 break;
 
             case EVENT:
-                String[] name_at = rest.split("/at");
-                if(name_at.length != 2){
-                    throw new DukeException("invalid argument length for event");
-                }
-                newTask = new Event(name_at[0].trim(), name_at[1].trim());
+                name_delimit = rest.split("/at");
+                checkArg(name_delimit);
+                newTask = new Event(name_delimit[0].trim(), name_delimit[1].trim());
                 break;
             default:
                 throw new DukeException("command not found");
@@ -42,6 +39,15 @@ public abstract class Task {
      */
     public void markDone(){
         this.done = true;
+    }
+
+    private static void checkArg(String[] arg) throws DukeException{
+        System.out.println(arg.length);
+        if(arg.length < 2){
+            throw new DukeException("Please specify time");
+        }else if(arg.length > 2){
+            throw new DukeException("too many argument");
+        }
     }
 
     /**
