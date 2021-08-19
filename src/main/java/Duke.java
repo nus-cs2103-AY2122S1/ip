@@ -88,13 +88,22 @@ public class Duke {
                 System.out.println(lineBreak);
                 // deadline[amount] = true;
                 amount++;
+            } else if (response.equals("todo")) {
+                System.out.println(lineBreak);
+                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                System.out.println(lineBreak);
+            } else if (response.equals("deadline")) {
+                System.out.println(lineBreak);
+                System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                System.out.println(lineBreak);
+            } else if (response.equals("event")) {
+                System.out.println(lineBreak);
+                System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                System.out.println(lineBreak);
             } else {
                 System.out.println(lineBreak);
-                System.out.println("\t Got it. I've added this task:");
-                System.out.println("\t   [ ][ ] " + response);
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 System.out.println(lineBreak);
-                list[amount] = "[ ][ ] " + response;
-                amount++;
             }
             response = scanner.nextLine();
         }
