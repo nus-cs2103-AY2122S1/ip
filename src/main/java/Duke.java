@@ -138,7 +138,7 @@ public class Duke {
                     }
                 }
             } catch (DukeException e) {
-                System.err.println(e); // print out
+                e.printStackTrace(); // print stack trace for e
             }
         }
     }
