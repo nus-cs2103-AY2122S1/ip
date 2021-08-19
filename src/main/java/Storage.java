@@ -5,6 +5,10 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This is a Storage class that deals with loading tasks
+ * from the file and saving tasks in the file.
+ */
 public class Storage {
     private final String filepath;
 
@@ -12,56 +16,60 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    public ArrayList<Task> load() throws IOException {
-        java.nio.file.Path filepath = java.nio.file.Paths.get("src", "main", "java","data");
-        File f = new File(this.filepath);
-        if (!Files.isDirectory(filepath)) {
-            //create directory
-            Files.createDirectories(filepath);
-        }
-        if (!f.exists()) {
-            //create file if it does not exist
-            f.createNewFile();
-        }
-        Scanner s = new Scanner(f);
-        ArrayList<Task> taskList = new ArrayList<>();
-
-        while(s.hasNext()) {
-            //Parser's job
-            //input here will definitely be correct and accurate
-            String fullLineOfCommand = s.nextLine();
-            //either, todo, deadline, delete, event, done
-            Scanner lineSplitter = new Scanner(fullLineOfCommand);
-            String command = lineSplitter.next().trim();
-            try {
-                if (command.equals("todo")) {
-                    String description = lineSplitter.nextLine();
-                    taskList.add(new ToDo(description.trim()));
-
-                } else if (command.equals("deadline")) {
-                    String description = lineSplitter.nextLine();
-                    String[] parts = description.split("/by");
-                    taskList.add(new Deadline(parts[0].trim(), parts[1].trim()));
-
-                } else if (command.equals("event")) {
-                    String description = lineSplitter.nextLine();
-                    String[] parts = description.split("/at");
-                    taskList.add(new Event(parts[0].trim(), parts[1].trim()));
-
-                } else if (command.equals("done")) {
-                    int indexToMark = lineSplitter.nextInt();
-                    taskList.get(indexToMark - 1).markAsDone();
-
-                } else if (command.equals("delete")) {
-                    int indexToDelete = lineSplitter.nextInt();
-                    taskList.remove(indexToDelete - 1);
-
-                }
-            } catch (CommandParamException e) {
-                System.out.println("\tError initiating database.");
+    public ArrayList<Task> load() throws DukeFileException {
+        try {
+            java.nio.file.Path filepath = java.nio.file.Paths.get("src", "main", "java", "data");
+            File f = new File(this.filepath);
+            if (!Files.isDirectory(filepath)) {
+                //create directory
+                Files.createDirectories(filepath);
             }
+            if (!f.exists()) {
+                //create file if it does not exist
+                f.createNewFile();
+            }
+            Scanner s = new Scanner(f);
+            ArrayList<Task> taskList = new ArrayList<>();
+
+            while (s.hasNext()) {
+                //Parser's job
+                //input here will definitely be correct and accurate
+                String fullLineOfCommand = s.nextLine();
+                //either, todo, deadline, delete, event, done
+                Scanner lineSplitter = new Scanner(fullLineOfCommand);
+                String command = lineSplitter.next().trim();
+                try {
+                    if (command.equals("todo")) {
+                        String description = lineSplitter.nextLine();
+                        taskList.add(new ToDo(description.trim()));
+
+                    } else if (command.equals("deadline")) {
+                        String description = lineSplitter.nextLine();
+                        String[] parts = description.split("/by");
+                        taskList.add(new Deadline(parts[0].trim(), parts[1].trim()));
+
+                    } else if (command.equals("event")) {
+                        String description = lineSplitter.nextLine();
+                        String[] parts = description.split("/at");
+                        taskList.add(new Event(parts[0].trim(), parts[1].trim()));
+
+                    } else if (command.equals("done")) {
+                        int indexToMark = lineSplitter.nextInt();
+                        taskList.get(indexToMark - 1).markAsDone();
+
+                    } else if (command.equals("delete")) {
+                        int indexToDelete = lineSplitter.nextInt();
+                        taskList.remove(indexToDelete - 1);
+
+                    }
+                } catch (CommandParamException e) {
+                    System.out.println("\tError initiating database.");
+                }
+            }
+            return taskList;
+        } catch (IOException e) {
+            throw new DukeFileException();
         }
-        return taskList;
     }
 
     public void appendCommand(String taskCommand) throws IOException {
