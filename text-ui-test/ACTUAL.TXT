@@ -18,7 +18,8 @@ OOPS!!! The description of a todo cannot be empty.
 OOPS!!! I'm sorry, but I don't know what that means :-(
 OOPS!!! Incorrect command was given for event. Try this: deadline name_here /at date_here
 OOPS!!! Incorrect command was given for deadline. Try this: deadline name_here /by date_here
-Noted. I've removed this task: 
+Noted. I've removed this task:
+
  [D][X] return book (by: June 6th)
 You now have 1 tasks in the list.
 Bye. Hope to see you again soon!
