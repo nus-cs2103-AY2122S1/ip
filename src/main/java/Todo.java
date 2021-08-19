@@ -1,3 +1,6 @@
+/**
+ * Class for todo tasks.
+ */
 public class Todo extends Task {
 
     /**

@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Main class for Duke, scans for inputs and responds to user.
+ */
 public class Duke {
 
     /**
@@ -10,11 +13,10 @@ public class Duke {
     public static void main(String[] args) {
 
         String welcomeMsg = "What's up, I'm duke!";
-        printMsg(welcomeMsg);
-
         Scanner sc = new Scanner(System.in);
-
         boolean exit = false;
+
+        printMsg(welcomeMsg);
 
         while(!exit) {
             try {
@@ -26,6 +28,8 @@ public class Duke {
                     printTasks();
                 } else if (nextInput.startsWith("done ")) {
                     printMsg(Task.markTask(Integer.parseInt(nextInput.substring(5)) - 1));
+                } else if (nextInput.startsWith("delete ")) {
+                    printMsg(Task.deleteTask(Integer.parseInt(nextInput.substring(7)) - 1));
                 } else if (nextInput.startsWith("todo")) {
                     if (nextInput.length() < 6) {
                         throw new DukeException("The description of a todo cannot be empty.");

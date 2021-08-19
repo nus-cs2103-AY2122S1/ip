@@ -1,3 +1,6 @@
+/**
+ * Class for event tasks.
+ */
 public class Event extends Task{
 
     private final String at;

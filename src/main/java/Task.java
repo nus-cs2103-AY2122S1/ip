@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a task in a task list.
+ */
 public class Task {
-    private final static ArrayList<Task> taskList = new ArrayList<>();
 
+    private final static ArrayList<Task> taskList = new ArrayList<>();
     private final String description;
     private boolean completed;
 
@@ -30,12 +33,43 @@ public class Task {
      * @return String reporting that task is marked done.
      */
     public static String[] markTask(int index) {
-        Task t = taskList.get(index);
-        t.completed = true;
-        return new String[] {
-                "Nice! I've marked this task as done:",
-                t.toString()
-        };
+        try {
+            if (invalidID(index)) {
+                throw new DukeException("Task ID out of range!");
+            }
+            Task t = taskList.get(index);
+            t.completed = true;
+            return new String[] {
+                    "Nice! I've marked this task as done:",
+                    t.toString()
+            };
+        } catch (DukeException e){
+            return new String[] {e.getMessage()};
+        }
+    }
+
+    /**
+     * Delete a task from the list.
+     *
+     * @param index Numerical index of task to be removed
+     * @return String reporting that task is removed.
+     */
+    public static String[] deleteTask(int index) {
+        try {
+            if (invalidID(index)) {
+                throw new DukeException("Task ID out of range!");
+            }
+            Task t = taskList.remove(index);
+            return new String[] {
+                    "Noted. I've removed this task:",
+                    t.toString(),
+                    "Now you have "
+                            + taskList.size()
+                            + " tasks in the list."
+            };
+        } catch (DukeException e) {
+            return new String[] {e.getMessage()};
+        }
     }
 
     /**
@@ -50,6 +84,16 @@ public class Task {
             taskStrings[i + 1] = (i + 1) + "." + taskList.get(i).toString();
         }
         return taskStrings;
+    }
+
+    /**
+     * Checks if an ID is an invalid index for the task list.
+     *
+     * @param ID Integer index of the task.
+     * @return Boolean representing validity of ID.
+     */
+    private static boolean invalidID(int ID) {
+        return ID < 0 || ID >= taskList.size();
     }
 
     /**

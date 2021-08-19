@@ -76,5 +76,40 @@
     3.[E][X] testEvent (at: 3pm)
     ---
     ---
+    Noted. I've removed this task:
+    [D][X] testDeadline (by: byTime)
+    Now you have 2 tasks in the list.
+    ---
+    ---
+    Here are the tasks in your list:
+    1.[T][ ] testTodo
+    2.[E][X] testEvent (at: 3pm)
+    ---
+    ---
+    Noted. I've removed this task:
+    [T][ ] testTodo
+    Now you have 1 tasks in the list.
+    ---
+    ---
+    Here are the tasks in your list:
+    1.[E][X] testEvent (at: 3pm)
+    ---
+    ---
+    OOPS!!! Task ID out of range!
+    ---
+    ---
+    OOPS!!! Task ID out of range!
+    ---
+    ---
+    OOPS!!! Task ID out of range!
+    ---
+    ---
+    OOPS!!! Task ID out of range!
+    ---
+    ---
+    Here are the tasks in your list:
+    1.[E][X] testEvent (at: 3pm)
+    ---
+    ---
     Bye mate!
     ---

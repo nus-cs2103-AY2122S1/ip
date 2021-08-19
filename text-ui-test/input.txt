@@ -15,4 +15,13 @@ list
 event with no time specified
 deadline with no time specified
 list
+delete 2
+list
+delete 1
+list
+delete 5
+delete 0
+done 6
+done 0
+list
 bye
