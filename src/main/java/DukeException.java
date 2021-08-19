@@ -21,4 +21,10 @@ abstract class DukeException extends Exception {
             super(message);
         }
     }
+    
+    static class InvalidTaskNumException extends DukeException {
+        InvalidTaskNumException(String message) {
+            super(message);
+        }
+    }
 }

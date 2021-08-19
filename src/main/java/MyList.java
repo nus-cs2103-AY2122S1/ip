@@ -76,6 +76,18 @@ class MyList {
         }
         return "task is not in list!!";
     }
+    
+    protected String deleteItem(String itemNum) throws DukeException.InvalidTaskNumException {
+        int val = Integer.parseInt(itemNum.trim());
+        if (val > this.items.size() || val < 1) {
+            throw new DukeException.InvalidTaskNumException("Task number " + val + " does not exist!");
+        } else {
+            Task toRemove = this.items.get(val - 1);
+            this.items.remove(val - 1);
+            this.listedItems.remove(toRemove.getTaskName());
+            return "Successfully deleted:\n" + toRemove.toString();
+        }
+    }
 
     protected String getAllItems() {
         StringBuilder sb = new StringBuilder();

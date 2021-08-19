@@ -25,6 +25,9 @@ public class Duke {
                     case "list":
                         printMessage(toDoList.getAllItems());
                         break;
+                    case "delete":
+                        printMessage(toDoList.deleteItem(command.substring(7)));
+                        break;
                     default:
                         try {
                             printMessage(toDoList.addItem(command));
@@ -34,6 +37,8 @@ public class Duke {
                 }
             } catch (ArrayIndexOutOfBoundsException ex) { // only occurs when the user only types whitespace
                 printMessage("Please type some commands!");
+            } catch (DukeException.InvalidTaskNumException ex) {
+                printMessage(ex.getMessage());
             }
         }
         printMessage("Goodbye for now!");
