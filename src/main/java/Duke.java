@@ -1,53 +1,73 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class Duke {
-    static Task[] listOfText = new Task[100];
+    static List<Task> listOfText2 = new ArrayList<>();
 
     private static void bye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Adds task to arraylist
+     * @param task
+     */
     private static void list(Task task) {
-        int counter = 0;
-        for(int i = 0; i < 100; i++) {
-            if(listOfText[i] == null) {
-                listOfText[i] = task;
-                break;
-            }
-        }
+        listOfText2.add(task);
+        int counter = listOfText2.size();
 
-        for(int j = 0; j < 100; j++) {
-            if(listOfText[j] != null) {
-                counter++;
-            }
-        }
         System.out.println("Got it. I've added this task:\n" + "  "+ task.toString() +"\nNow you have "+counter+" tasks in the list.");
     }
 
+    /**
+     * Prints the task in the arraylist
+     */
     private static void printList() {
-        System.out.println("Here are the tasks in your list:");
-        for(int i = 0; i < 100; i++) {
-            if(listOfText[i] != null) {
-                System.out.println(i+1 + "." +  listOfText[i].logo() + listOfText[i].getStatusIcon() + " " + listOfText[i].description);
+        if (listOfText2.size() > 0) {
+            System.out.println("Here are the tasks in your list:");
+            for(int i = 0; i < listOfText2.size(); i++) {
+                System.out.println(i+1 + "." +  listOfText2.get(i).logo() + listOfText2.get(i).getStatusIcon() + " " + listOfText2.get(i).description);
             }
-        }
-    }
-
-    private static void changeStatus(int number) { //need check if number is valid
-        if ((number > 0) && (number <= 100)) {
-            if(listOfText[number-1] != null) {
-                listOfText[number-1].markAsDone();
-                System.out.println("Nice! I've marked this task as done:\n  " + listOfText[number-1] );
-            }
+        } else {
+            System.out.println("There are no tasks in your list");
         }
 
     }
 
+    /**
+     * Mark as done at index number-1
+     * @param number
+     */
+    private static void changeStatus(int number) {
+        if(listOfText2.size() <= number) {
+            listOfText2.get(number-1).markAsDone();
+            System.out.println("Nice! I've marked this task as done:\n  " + listOfText2.get(number-1) );
+            return;
+        }
+        System.out.println("The index is incorrect");
+    }
+
+    /**
+     * Check if description is missing
+     * @param input
+     * @return validity
+     */
     private static boolean checkInvalidDescription(String input) {
-        if(input.equals("todo") || input.equals("deadline") || input.equals("event")) {
+        if(input.trim().equals("todo") || input.trim().equals("deadline") || input.trim().equals("event")) {
             return true;
         }
         return false;
+    }
+
+    /**
+     * deletes task in arraylist at index-1
+     * @param index
+     */
+    private static void deleteTask(int index) {
+        Task item = listOfText2.get(index-1);
+        listOfText2.remove(index-1);
+        System.out.println("Noted. I've removed this task:\n  " + item + "\nNow you have " + listOfText2.size() + " tasks left in the list");
     }
 
     public static void main(String[] args) {
@@ -70,6 +90,9 @@ public class Duke {
                 } else if (input.length() > 6 && input.substring(0, 6).equals("event ")) {
                     String[] split = input.substring(6).split(" /at ");
                     list(new Event(split[0], split[1]));
+                } else if (input.length() > 7 && input.substring(0, 7).equals("delete ")) {
+                    String[] split = input.substring(6).split("\\s+");
+                    deleteTask(Integer.parseInt(split[1]));
                 } else if (checkInvalidDescription(input)) {
                     throw new InvalidDescription(input);
                 } else if (input.length() > 0) {
