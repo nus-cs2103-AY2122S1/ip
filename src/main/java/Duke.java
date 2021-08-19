@@ -1,10 +1,17 @@
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * scans for user input and outputs corresponding Duke chatbot responses.
  */
 public class Duke {
+
+    private static final String SAVE_FILENAME = "dukeSave.txt";
 
     // Enums for Duke chatbot descriptors
     protected enum Descriptors {
@@ -77,6 +84,17 @@ public class Duke {
         // Initialize ArrayList for Task objects.
         ArrayList<Task> tasks = new ArrayList<>();
 
+//        try {
+//            saveTasksToData(tasks);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        try {
+            readTasksFromData();
+        } catch (DukeException dukeException) {
+            dukeException.printStackTrace();
+        }
+
         // Scans user inputs and prints corresponding outputs until a "Bye" input is received.
         String userInput = sc.nextLine();
         while (!userInput.equals(Commands.BYE.getCommand())) {
@@ -112,6 +130,82 @@ public class Duke {
         }
     }
 
+    private static ArrayList<Task> readTasksFromData() throws DukeException {
+        // Initialize an ArrayList for Task objects.
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        // Get absolute path to save file.
+        String cwd = System.getProperty("user.dir");
+        Path absolutePathToSaveFile = Paths.get(cwd, "data", SAVE_FILENAME);
+
+        // Check if save file exists.
+        boolean isSaveFileExist = Files.exists(absolutePathToSaveFile);
+
+        try {
+            // If save file does not exist, create save file;
+            if (!isSaveFileExist) {
+                saveTasksToData(tasks);
+            }
+
+            // Read from save file.
+            List<String> rawTasks = Files.readAllLines(absolutePathToSaveFile);
+
+            System.out.println(rawTasks);
+        } catch (IOException ioException) {
+            // Failure to read from save file.
+            throw new DukeException("Failed to read from save file.");
+        }
+
+        return tasks;
+    }
+
+    private static void saveTasksToData(ArrayList<Task> tasks) throws IOException {
+
+        // Get the absolute path to data subdirectory of project directory.
+        String cwd = System.getProperty("user.dir");
+        Path absolutePathToDataDir = Paths.get(cwd, "data");
+
+        // Check if data directory exists.
+        boolean isDirectoryExist = Files.exists(absolutePathToDataDir);
+
+        // If data directory does not exist, create one.
+        if (!isDirectoryExist) {
+            Files.createDirectory(absolutePathToDataDir);
+            System.out.println(Files.exists(absolutePathToDataDir));
+        }
+
+        // Get absolute path to save file.
+        Path absolutePathToSaveFile = Paths.get(absolutePathToDataDir.toString(), SAVE_FILENAME);
+
+        // Check if file exists.
+        boolean isSaveFileExist = Files.exists(absolutePathToSaveFile);
+
+        // If file does not exist, create it.
+        if (!isSaveFileExist) {
+            Files.createFile(absolutePathToSaveFile);
+        }
+
+        if (tasks.size() == 0) {
+            return;
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            stringBuilder.append(tasks.get(i));
+            if (i < (tasks.size() - 1)) {
+                stringBuilder.append("\n");;
+            }
+
+        }
+        String textToSave = stringBuilder.toString();
+
+        System.out.println(textToSave);
+
+        byte[] textToSaveToBytes = textToSave.getBytes();
+
+        Files.write(absolutePathToSaveFile, textToSaveToBytes);
+    }
+
     private static int findIndex(String s, Character c) {
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == c) {
@@ -121,7 +215,6 @@ public class Duke {
         return -1;
     }
 
-    // spaces to read user's number input at the right index.
     private static int parseUserNumInput(String userInput, Commands command) throws DukeException {
         // Parses integer in user input. Invalid user input could throw NumberFormatException.
         try {
