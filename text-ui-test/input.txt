@@ -1,0 +1,10 @@
+todo task1
+deadline task2 /by tonight
+deadline task3 /by tmr
+event shower /at noon
+list
+done 3
+done 4
+list
+bye
+
