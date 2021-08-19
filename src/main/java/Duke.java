@@ -21,6 +21,9 @@ public class Duke {
                 this.listTasks();
                 break;
             case "done":
+                if (parsedInput.length <= 1) {
+                    throw new TaskIndexOutOfBoundException("Missing Task Number!");
+                }
                 this.done(Integer.parseInt(parsedInput[1]) - 1);
                 break;
             case "todo":
@@ -33,6 +36,9 @@ public class Duke {
                 this.addEvent(input);
                 break;
             case "delete":
+                if (parsedInput.length <= 1) {
+                    throw new TaskIndexOutOfBoundException("Missing Task Number!");
+                }
                 this.delete(Integer.parseInt(parsedInput[1]) - 1);
                 break;
             default:
