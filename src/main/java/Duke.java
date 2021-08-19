@@ -46,7 +46,7 @@ public class Duke {
             switch (commandType) {
                 case "todo": {
                     if (description.trim().isEmpty()) {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        throw new InvalidCommandException();
                     } else {
                         Task task = new ToDo(description);
                         Duke.addTask(task);
@@ -61,8 +61,7 @@ public class Duke {
                         Duke.addTask(task);
                         printAddedTask(task);
                     } else {
-                        throw new DukeException("☹ OOPS!!! You did not provide the time." +
-                                "\n\t Please use the command /by");
+                        throw new CommandNotUsedException("/by");
                     }
                     return;
                 }
@@ -73,8 +72,7 @@ public class Duke {
                         Duke.addTask(task);
                         printAddedTask(task);
                     } else {
-                        throw new DukeException("☹ OOPS!!! You did not provide the time." +
-                                "\n\t Please use the command /at");
+                        throw new CommandNotUsedException("/at");
                     }
                     return;
                 }
@@ -82,10 +80,10 @@ public class Duke {
                     if (description.matches("\\d+")) {
                         int item = Integer.parseInt(description);
                         if (item == 0) {
-                            throw new DukeException("☹ OOPS!!! The item should be an positive integer.");
+                            throw new IndexMismatchException();
                         }
                         if (item > tasks.size()) {
-                            throw new DukeException("☹ OOPS!!! The item number is out of bound!");
+                            throw new IndexOutOfBoundException();
                         }
                         if (Duke.tasks.get(item - 1).isDone) {
                             throw new DukeException("☹ OOPS!!! The task is already done!");
@@ -96,7 +94,7 @@ public class Duke {
                         );
                         doneMessage.printMessage();
                     } else {
-                        throw new DukeException("☹ OOPS!!! The item should be an positive integer.");
+                        throw new IndexMismatchException();
                     }
                     return;
                 }
@@ -104,10 +102,10 @@ public class Duke {
                     if (description.matches("\\d+")) {
                         int item = Integer.parseInt(description);
                         if (item == 0) {
-                            throw new DukeException("☹ OOPS!!! The item should be an positive integer.");
+                            throw new IndexMismatchException();
                         }
                         if (item > tasks.size()) {
-                            throw new DukeException("☹ OOPS!!! The item number is out of bound!");
+                            throw new IndexOutOfBoundException();
                         }
                         int numOfTasks = tasks.size() - 1;
                         Message doneMessage = new Message("\tNoted. I've removed this task:\n\t\t"
@@ -118,26 +116,24 @@ public class Duke {
                         Duke.removeTask(item - 1);
                         doneMessage.printMessage();
                     } else {
-                        throw new DukeException("☹ OOPS!!! The item should be an positive integer.");
+                        throw new IndexMismatchException();
                     }
                     return;
                 }
                 default: {
-                    throw new DukeException("☹ OOPS!!! I don't understand that!");
+                    throw new InvalidCommandException();
                 }
             }
         }
 
         switch (command) {
-            case "":
-                throw new DukeException("Your command cannot be empty!");
             case "list":
                 Duke.printList().printMessage();
                 break;
             case "bye":
                 break;
             default:
-                throw new DukeException("☹ OOPS!!! I don't understand that!");
+                throw new InvalidCommandException();
         }
     }
 
