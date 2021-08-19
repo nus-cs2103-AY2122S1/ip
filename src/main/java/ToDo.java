@@ -8,10 +8,9 @@ public class ToDo extends Task {
      * Constructor
      *
      * @param description the name of the task
-     * @param pos         the position in the list
      */
-    public ToDo(String description, int pos) {
-        super(description, pos);
+    public ToDo(String description) {
+        super(description);
     }
 
     @Override
