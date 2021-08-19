@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         List<Task> taskList = new ArrayList<>();
 
@@ -28,7 +28,7 @@ public class Duke {
                 }
             }
             //mark numbered task as done
-            if (str.toLowerCase().contains("done")) {
+            else if (str.toLowerCase().contains("done")) {
                 int taskNo = Integer.parseInt(str.substring(4).trim()) - 1;
                 //check if taskNo exists:
                 if (taskNo < taskList.size()) {
@@ -43,9 +43,12 @@ public class Duke {
                 }
             }
             //for todos:
-            if (str.toLowerCase().contains("todo")) {
+            else if (str.toLowerCase().contains("todo")) {
                 String desc = str.substring(4).trim();
                 Todos addTodo = new Todos(desc);
+                if (desc.isEmpty()) {
+                    throw new DukeException("Oh no!! You cannot leave the description of a todo empty!!! ☹");
+                }
                 taskList.add(addTodo);
                 //print out msg:
                 System.out.println(indent + "Ok! I have added this task to your list: ");
@@ -53,9 +56,12 @@ public class Duke {
                 System.out.println(indent + "Now you have a total of " + taskList.size() + " task(s)!");
             }
             //for deadline:
-            if (str.toLowerCase().contains("deadline")) {
+            else if (str.toLowerCase().contains("deadline")) {
                 String desc = str.substring(8).trim();
                 String[] stringParts = desc.split("/");
+                if (stringParts.length < 2) {
+                    throw new DukeException("Oh no!! Something is missing from your description for the deadline!!! ☹");
+                }
                 Deadlines addDeadline = new Deadlines(stringParts[0].trim(), stringParts[1].trim().substring(2).trim());
                 taskList.add(addDeadline);
                 //print out msg:
@@ -65,9 +71,12 @@ public class Duke {
                 System.out.println(indent + "Now you have a total of " + taskList.size() + " task(s)!");
             }
             //for events:
-            if (str.toLowerCase().contains("event")) {
+            else if (str.toLowerCase().contains("event")) {
                 String desc = str.substring(6).trim();
                 String[] stringParts = desc.split("/");
+                if (stringParts.length < 2) {
+                    throw new DukeException("Oh no!! Something is missing from your description for the event!!! ☹");
+                }
                 Events addEvent = new Events(stringParts[0].trim(), stringParts[1].trim().substring(2).trim());
                 taskList.add(addEvent);
                 //print out msg:
@@ -75,6 +84,11 @@ public class Duke {
                 System.out.println(indent + addEvent);
                 System.out.println(indent + "Now you have a total of " + taskList.size() + " task(s)!");
             }
+            //every other type, which is invalid:
+            else {
+                throw new DukeException("Oops!! Sorry, I do not understand what you mean... ☹");
+            }
+            
             System.out.println(divider);
             String next = sc.nextLine();
             if (next.isEmpty()) {
