@@ -37,11 +37,26 @@ public class ToDoList {
     public int addTask(String input) {
         String separator = "-----------------------------------------------------------------";
 
-        this.tasks[count] = new Task(input);
+        String[] arr = input.split(" ", 2);
+
+        Task recentlyAdded = null;
+        if (arr[0].equals("todo")) {
+            recentlyAdded = ToDo.addToDo(arr[1]);
+        } else if (arr[0].equals("deadline")) {
+            recentlyAdded = Deadline.addDeadline(arr[1]);
+        } else if (arr[0].equals("event")) {
+            recentlyAdded = Event.addEvent(arr[1]);
+        }
+
+        this.tasks[count] = recentlyAdded;
         count++;
 
+        String taskCount = "Now you have " + count + " task(s) in the list!";
+
         System.out.println(separator + "\n"
-                + "added: " + input + "\n"
+                + "Received order! I've added this task:\n"
+                + "     " + recentlyAdded + "\n"
+                + taskCount + "\n"
                 + separator);
 
         return 0;
