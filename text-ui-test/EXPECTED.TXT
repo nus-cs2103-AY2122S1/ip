@@ -1,7 +1,62 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+------------------------------------------------
+Hey there I'm Duke!
+How can I help you today?
+------------------------------------------------
+
+> ------------------------------------------------
+Added the following task:
+    [T][ ] drop CS2103T
+You now have 1 tasks in your list.
+------------------------------------------------
+
+> ------------------------------------------------
+Added the following task:
+    [E][ ] macdonald's interview (at: 20 Aug 2021 4-6pm)
+You now have 2 tasks in your list.
+------------------------------------------------
+
+> ------------------------------------------------
+Added the following task:
+    [D][ ] fail test (by: exam week)
+You now have 3 tasks in your list.
+------------------------------------------------
+
+> ------------------------------------------------
+1. [T][ ] drop CS2103T
+2. [E][ ] macdonald's interview (at: 20 Aug 2021 4-6pm)
+3. [D][ ] fail test (by: exam week)
+------------------------------------------------
+
+> ------------------------------------------------
+Added the following task:
+    [T][ ] dropout university
+You now have 4 tasks in your list.
+------------------------------------------------
+
+> ------------------------------------------------
+Marking task as completed:
+    [E][X] macdonald's interview (at: 20 Aug 2021 4-6pm)
+------------------------------------------------
+
+> ------------------------------------------------
+Marking task as completed:
+    [T][X] drop CS2103T
+------------------------------------------------
+
+> ------------------------------------------------
+1. [T][X] drop CS2103T
+2. [E][X] macdonald's interview (at: 20 Aug 2021 4-6pm)
+3. [D][ ] fail test (by: exam week)
+4. [T][ ] dropout university
+------------------------------------------------
+
+> ------------------------------------------------
+Added the following task:
+    [E][ ] prof ben leong's lecture (at: 24 Aug 2021 1-3pm)
+You now have 5 tasks in your list.
+------------------------------------------------
+
+> ------------------------------------------------
+Bye! Hope to see you again!
+------------------------------------------------
 

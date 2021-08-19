@@ -102,6 +102,7 @@
       in rec {
        devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
+            dos2unix
             openjdk11
             jdt-language-server
           ];
