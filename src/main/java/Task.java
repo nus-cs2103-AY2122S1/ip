@@ -14,7 +14,7 @@ public abstract class Task {
 
     public String completeTask() {
         this.done = true;
-        return "Swee la! You completed this task: \n      " + name;
+        return "Swee la! You completed this task:\n      " + name;
     }
 
     public String getName() {

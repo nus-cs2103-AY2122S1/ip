@@ -9,12 +9,13 @@ public class TodoList {
 
     public String getList() {
         ArrayList<Task> currentList = this.list;
-        StringBuilder output = new StringBuilder("Wahseh, these are all the tasks you haven't do ley! \n      ");
+        StringBuilder output = new StringBuilder("Wahseh, these are all the tasks you haven't do ley!\n      ");
         int i = 1;
         for (Task task : currentList) {
-//            String checkBox = " [" + task.getStatus() + "] ";
-//            output.append(i).append(". ").append(checkBox).append(task.name).append("\n      ");
-            output.append(i).append(". ").append(task.toString()).append("\n      ");
+            if (i != 1) {
+                output.append("      ");
+            }
+            output.append(i).append(". ").append(task.toString()).append("\n");
             i += 1;
         }
 

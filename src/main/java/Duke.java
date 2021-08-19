@@ -15,7 +15,7 @@ public class Duke {
     }
 
     public static void formatMessages(String message) {
-        String output = "     -------------------------------------- \n"
+        String output = "     --------------------------------------\n"
                 + "      " + message + "\n"
                 + "\n     --------------------------------------";
         System.out.println(output);
@@ -67,9 +67,6 @@ public class Duke {
 
         try {
             int value = Integer.parseInt(second);
-//            Task task = todolist.complete(value-1);
-//            String completedTask = "Swee la! You good la sia, finished this task:\n        " + "[X] " + task.getName();
-//            formatMessages(completedTask);
             formatMessages(todolist.completeTask(value-1));
 
         } catch (NumberFormatException e) {
