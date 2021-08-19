@@ -72,4 +72,13 @@ public class Response {
                 "    " + task.toString() +
                 "\n" + horizontalLine);
     }
+
+    public void delete(int pos) {
+        Task task = lst.remove(pos);
+        String num = String.valueOf(lst.size());
+        System.out.println(horizontalLine + "    Noted. I've removed this task:\n" +
+                "    " + task.toString() +
+                "\n" + "    Now you have " + num + " tasks in the list\n"
+                +  horizontalLine);
+    }
 }
