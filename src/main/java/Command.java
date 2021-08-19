@@ -4,6 +4,7 @@ public abstract class Command {
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
+    private static final String DELETE_COMMAND = "delete";
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
@@ -20,7 +21,7 @@ public abstract class Command {
         protected void execute() {
             System.out.println("Say something to me :(");
             Duke.printLine();
-        };
+        }
     }
 
     private static class Bye extends Command {
@@ -30,11 +31,11 @@ public abstract class Command {
         protected void execute() {
             System.out.println("Bye. Hope to see you again soon!");
             Duke.printLine();
-        };
+        }
     }
 
     private static class Add extends Command {
-        private Task t;
+        private final Task t;
         private Add(Task t) {
             this.t = t;
         }
@@ -49,7 +50,7 @@ public abstract class Command {
                 System.out.println("OOPS!!! The description of a todo cannot be empty.");
             }
             Duke.printLine();
-        };
+        }
     }
 
     private static class List extends Command {
@@ -61,11 +62,11 @@ public abstract class Command {
                 System.out.println((i + 1) + ". " + Duke.todoList.get(i).toString());
             }
             Duke.printLine();
-        };
+        }
     }
 
     private static class Done extends Command {
-        private String index;
+        private final String index;
         private Done(String index) {
             this.index = index;
         }
@@ -84,19 +85,44 @@ public abstract class Command {
                 System.out.println("OOPS!!! You need to follow format \"done <number>\"");
                 Duke.printLine();
             }
-        };
+        }
+    }
+
+    private static class Delete extends Command {
+        private final String index;
+        private Delete(String index) {
+            this.index = index;
+        }
+
+        @Override
+        protected void execute() {
+            try {
+                Task t = Duke.todoList.remove(Integer.parseInt(index) - 1);
+                System.out.println("Noted. I've removed this task:\n    " + t);
+                System.out.println("Now you have " + Duke.todoList.size() + " tasks in the list.");
+                Duke.printLine();
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! I'm sorry, but I cannot find that task :(");
+                Duke.printLine();
+            } catch (NumberFormatException e) {
+                System.out.println("OOPS!!! You need to follow format \"done <number>\"");
+                Duke.printLine();
+            }
+        }
     }
     private static final Command NOTHING = new Nothing();
     private static final Command BYE = new Bye();
     private static final Command LIST = new List();
     private static Command done(String index) {
-        Command d = new Done(index);
-        return d;
+        return new Done(index);
+    }
+
+    private static Command delete(String index) {
+        return new Delete(index);
     }
 
     private static Command add(Task t) {
-        Command a = new Add(t);
-        return a;
+        return new Add(t);
     }
 
     public static void process() {
@@ -122,6 +148,9 @@ public abstract class Command {
                         break;
                     case DONE_COMMAND:
                         done(body_command).execute();
+                        break;
+                    case DELETE_COMMAND:
+                        delete(body_command).execute();
                         break;
                     case TODO_COMMAND:
                         add(Task.todo(body_command)).execute();
