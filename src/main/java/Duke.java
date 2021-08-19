@@ -1,9 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) throws IllegalTaskException {
-        Task[] list = new Task[100];
-        int index = 1;
+        ArrayList<Task> list = new ArrayList<Task>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,46 +18,49 @@ public class Duke {
             try{ 
                 if(command.equals("list")){
                     System.out.println("Here are the tasks in your list: ");
-                    for(int i = 1; i < index; i++){
-                        System.out.println(i + ". " + list[i]);
+                    for(int i = 0; i < list.size(); i++){
+                        System.out.println((i + 1) + ". " + list.get(i));
                     }
                 } else if (command.equals("done")) {
-                    int toComplete = Integer.parseInt(input.split(" ")[1]);
-                    list[toComplete].complete();
+                    int toComplete = Integer.parseInt(input.split(" ")[1]) - 1;
+                    list.get(toComplete).complete();
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(String.format("  %s", list[toComplete]));
-                } else if(command.equals("todo")){
+                    System.out.println(String.format("  %s", list.get(toComplete)));
+                } else if (command.equals("delete")) {
+                    int toDelete = Integer.parseInt(input.split(" ")[1]) - 1;
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println(String.format("  %s", list.get(toDelete)));
+                    list.remove(toDelete);
+                    System.out.println(String.format("Now you have %d tasks in the list", list.size()));
+                } else if(command.equals("todo")) {
                     String task = input.replaceFirst("todo ","");
                     if (task.equals("todo")){
                         throw new IllegalTaskException();
                     } else { 
                         ToDo toDo = new ToDo(task);
-                        list[index] = toDo;
+                        list.add(toDo);
                         System.out.println("Got it. I've added this task: ");
                         System.out.println(String.format("  %s", toDo.toString()));
-                        System.out.println(String.format("Now you have %d tasks in the list", index));
-                        index++;
+                        System.out.println(String.format("Now you have %d tasks in the list", list.size()));
                     }
                 } else if (command.equals("deadline")) {
                     String[] taskDate = input.replaceFirst("deadline ", "").split("/by ");
                     String task = taskDate[0];
                     String date = taskDate[1];
                     Deadline deadline = new Deadline(task, date);
-                    list[index] = deadline;
+                    list.add(deadline);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println(String.format("  %s", deadline.toString()));
-                    System.out.println(String.format("Now you have %d tasks in the list", index));
-                    index++;
+                    System.out.println(String.format("Now you have %d tasks in the list", list.size()));
                 } else if (command.equals("event")) {
                     String[] taskDate = input.replaceFirst("event ", "").split("/at ");
                     String task = taskDate[0];
                     String date = taskDate[1];
                     Event event = new Event(task, date);
-                    list[index] = event;
+                    list.add(event);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println(String.format("  %s", event.toString()));
-                    System.out.println(String.format("Now you have %d tasks in the list", index));
-                    index++;
+                    System.out.println(String.format("Now you have %d tasks in the list", list.size()));
                 } else {
                     throw new IllegalCommandException();
                 }
