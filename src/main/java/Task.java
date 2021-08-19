@@ -37,4 +37,14 @@ public class Task {
     String getTask() {
         return task;
     }
+
+    /**
+     * to give the String representation of the task
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "";
+    }
 }
