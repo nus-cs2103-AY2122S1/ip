@@ -5,6 +5,7 @@ import exceptions.InvalidCommandException;
 import java.util.ArrayList;
 
 public class ToDoList {
+    private final String SEPARATOR = "-----------------------------------------------------------------";
     private final ArrayList<Task> tasks;
     private int count;
 
@@ -18,29 +19,29 @@ public class ToDoList {
                 ? listTasks()
                 : toMarkAsDone(input)
                 ? markAsDone(input)
+                : toDeleteTask(input)
+                ? deleteTask(input)
                 : addTask(input);
     }
 
     public int listTasks() {
-        String separator = "-----------------------------------------------------------------";
-
         int n = 0;
 
-        System.out.println(separator);
+        System.out.println(SEPARATOR);
         System.out.println("Below are some of the tasks in your list!");
 
         for (Task t : this.tasks) {
             System.out.println((n + 1) + ". " + t);
+
+            n++;
         }
 
-        System.out.println(separator);
+        System.out.println(SEPARATOR);
 
         return 0;
     }
 
     public int addTask(String input) {
-        String separator = "-----------------------------------------------------------------";
-
         String[] arr = input.split(" ", 2);
 
         Task recentlyAdded;
@@ -51,9 +52,9 @@ public class ToDoList {
                                 ? ToDo.addToDo("")
                                 : ToDo.addToDo(arr[1]);
             } catch (EmptyTaskException e) {
-                System.out.println(separator + "\n"
+                System.out.println(SEPARATOR + "\n"
                         + e
-                        + separator);
+                        + SEPARATOR);
 
                 return 0;
             }
@@ -65,9 +66,9 @@ public class ToDoList {
             try {
                 throw new InvalidCommandException(input);
             } catch (InvalidCommandException e) {
-                System.out.println(separator + "\n"
+                System.out.println(SEPARATOR + "\n"
                         + e
-                        + separator);
+                        + SEPARATOR);
 
                 return 0;
             }
@@ -78,21 +79,22 @@ public class ToDoList {
 
         String taskCount = "Now you have " + count + " task(s) in the list!";
 
-        System.out.println(separator + "\n"
+        System.out.println(SEPARATOR + "\n"
                 + "Received order! I've added this task:\n"
                 + "     " + recentlyAdded + "\n"
                 + taskCount + "\n"
-                + separator);
+                + SEPARATOR);
 
         return 0;
     }
 
+    // to check if user input text is a valid command for marking a task as done
     public boolean toMarkAsDone(String input) {
         String[] arr = input.split(" ");
 
         boolean toDo = false;
 
-        if (arr.length == 2) {
+        if ((arr[0].equals("done")) && (arr.length == 2)) {
             try {
                 Integer.valueOf(arr[1]);
                 toDo = true;
@@ -100,15 +102,13 @@ public class ToDoList {
                 return false;
             }
         }
-
-        // a possible error arrives from this feature - when done # and the # input exceeds the number of tasks on hand
+        // a possible error arrives from this feature:
+        // when # input is invalid
 
         return toDo;
     }
 
     public int markAsDone(String input) {
-        String separator = "-----------------------------------------------------------------";
-        String indentation = "          ";
         String[] arr = input.split(" ");
 
         int index = Integer.parseInt(arr[1]) - 1;
@@ -120,12 +120,50 @@ public class ToDoList {
         String encouragement = "Good job! I've marked this task as done:";
         String reward = "Bubbles will reward you with a piece of candy.";
 
-        System.out.println(separator + "\n"
+        System.out.println(SEPARATOR + "\n"
                 + encouragement + "\n"
-                + indentation + t + "\n"
+                + "     " + t + "\n"
                 + reward + "\n"
-                + separator);
+                + SEPARATOR);
 
+        return 0;
+    }
+
+    // to check if user input text is a valid command for deleting a task
+    public boolean toDeleteTask(String input) {
+        String[] arr = input.split(" ");
+
+        boolean toDelete = false;
+
+        if (arr[0].equals("delete") && (arr.length == 2)) {
+            try {
+                Integer.valueOf(arr[1]);
+                toDelete = true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+        // a possible error arrives from this feature:
+        // when # input is invalid
+
+        return toDelete;
+    }
+
+    public int deleteTask(String input) {
+        String[] arr = input.split(" ");
+
+        int index = Integer.parseInt(arr[1]) - 1;
+
+        Task removed = this.tasks.remove(index);
+        count--;
+
+        String taskCount = "Now you have " + count + " task(s) in the list!";
+
+        System.out.println(SEPARATOR + "\n"
+                + "Noted! I've removed this task:\n"
+                + "     " + removed + "\n"
+                + taskCount + "\n"
+                + SEPARATOR);
         return 0;
     }
 }
