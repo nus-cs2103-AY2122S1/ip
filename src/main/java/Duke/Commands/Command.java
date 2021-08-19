@@ -5,11 +5,11 @@ import Duke.Duke;
 public abstract class Command {
     private static final Command[] COMMAND_LIST = {
             new ExitCommand(),
-            new ListTodosCommand(),
-            new DoneTodoCommand()
+            new ListTasksCommand(),
+            new DoneTaskCommand()
     };
 
-    private static final Command ADD_TODO_COMMAND = new AddTodoCommand();
+    private static final Command ADD_TASK_COMMAND = new AddTaskCommand();
 //    private static final Command UNKOWN_COMMAND = new UnknownCommand();
 
     /**
@@ -23,7 +23,7 @@ public abstract class Command {
                 return cmd;
         }
 
-        return ADD_TODO_COMMAND;
+        return ADD_TASK_COMMAND;
     }
 
     abstract public void run(Duke duke, Duke.UserInput input);

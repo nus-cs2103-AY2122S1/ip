@@ -1,17 +1,17 @@
-package Duke.Todo;
+package Duke.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TodoList {
-    private List<Todo> list = new ArrayList<>();
+public class TaskList {
+    private final List<Task> list = new ArrayList<>();
 
-    public void add(Todo newTodo) {
-        this.list.add(newTodo);
+    public void add(Task newTask) {
+        this.list.add(newTask);
     }
 
-    public Todo get(int todoIndex) {
-        return this.list.get(todoIndex);
+    public Task get(int taskIndex) {
+        return this.list.get(taskIndex);
     }
 
     @Override

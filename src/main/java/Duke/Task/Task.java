@@ -1,17 +1,17 @@
-package Duke.Todo;
+package Duke.Task;
 
-public class Todo {
+public class Task {
     private static final String DONE_ICON = "X";
     private static final String NOT_DONE_ICON = " ";
 
-    private String description;
+    private final String description;
     private boolean isDone;
 
-    public Todo(String description) {
+    public Task(String description) {
         this(description, false);
     }
 
-    public Todo(String description, boolean isDone) {
+    public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
