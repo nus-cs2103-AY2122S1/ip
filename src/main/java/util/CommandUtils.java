@@ -8,6 +8,7 @@ import task.Operation;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 /**
  * The is the CommandUtils class that extracts contents from command.
@@ -130,11 +131,10 @@ public class CommandUtils {
             throw new DukeExtractCommandException(
                 "☹ OOPS!!! The task details cannot be extracted properly.");
         }
-        for (String detail : details) {
-            if (detail.equals("")) {
-                throw new DukeExtractCommandException(
-                    "☹ OOPS!!! The task details cannot be empty.");
-            }
+        if (Arrays.stream(details).filter(detail -> detail.equals(""))
+            .toArray(String[]::new).length > 0) {
+            throw new DukeExtractCommandException(
+                "☹ OOPS!!! The task details cannot be empty.");
         }
         return details;
     }

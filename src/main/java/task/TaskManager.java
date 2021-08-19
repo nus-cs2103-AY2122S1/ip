@@ -114,7 +114,7 @@ public class TaskManager {
     public void loadTasksFromFile() throws DukeIOException {
         List<String> formattedTasks = FileUtils.loadFile(DIR_NAME, FILE_NAME);
         try {
-            for (String formattedTask : formattedTasks) {
+            formattedTasks.forEach(formattedTask -> {
                 String[] contents = formattedTask.split(" \\| ", 4);
                 String taskID = contents[0];
                 String isDone = contents[1];
@@ -151,7 +151,7 @@ public class TaskManager {
                     default:
                         break;
                 }
-            }
+            });
         } catch (Exception e) {
             throw new DukeIOException("☹ OOPS!!! Load tasks from file error.");
         }
