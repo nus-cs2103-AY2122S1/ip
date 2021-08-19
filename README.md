@@ -1,5 +1,5 @@
 
-# Gnosis Project
+# Gnosis
 This is a project for a greenfield CS2103 Individual Project.
 The name Gnosis means knowledge in Greek. 
 Why I named it Gnosis ? 
