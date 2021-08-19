@@ -11,7 +11,7 @@ public class Bubbles {
         String introduction = "You should do what you want to do!\n"
                 + "Hello I'm Bubbles from the Powerpuff Girls, what are you up to?";
 
-        System.out.println("Hello from\n" + logo + "\n");
+        System.out.println("Hello from\n" + logo);
         formatting(introduction);
 
         echoTask();
