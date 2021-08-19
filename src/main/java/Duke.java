@@ -67,7 +67,7 @@ public class Duke {
                     Deadline newDeadline = new Deadline(deadlineDescription, time);
                     dukeList.add(newDeadline);
                     printLines();
-                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("Got it. I've added this task:");
                     System.out.println(newDeadline);
                 } else if (command.equals("event")) {
                     String[] event_and_time = description.split("/");
@@ -76,21 +76,21 @@ public class Duke {
                     Event newEvent = new Event(eventDescription, time);
                     dukeList.add(newEvent);
                     printLines();
-                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("Got it. I've added this task:");
                     System.out.println(newEvent);
                 } else if (command.equals("todo")) {
                     if (description.trim().equals("")) {
                         throw new DukeEmptyTodoDescriptionException();
                     }
                     printLines();
-                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("Got it. I've added this task:");
                     ToDo newTodo = new ToDo(description.substring(1));
                     dukeList.add(newTodo);
                     System.out.println(newTodo);
                 } else if (command.equals("delete")) {
                     int taskIndex = Integer.parseInt(description.substring(1)) - 1;
                     printLines();
-                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println("Noted. I've removed this task:");
                     Task taskToBeDeleted = dukeList.get(taskIndex);
                     System.out.println(taskToBeDeleted);
                     deleteTask(taskIndex);
@@ -114,7 +114,7 @@ public class Duke {
 
     void displayTaskCompletion(Task toBeCompleted) {
         printLines();
-        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("Nice! I've marked this task as done:");
         System.out.println(toBeCompleted);
         printLines();
     }
