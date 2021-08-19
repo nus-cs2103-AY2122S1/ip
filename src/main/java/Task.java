@@ -1,32 +1,50 @@
 public class Task {
-    private String type;
-    private String status;
-    private String todo;
-    private String time;
+    protected String description;
+    protected boolean isDone;
 
-    public Task(String type, String todo, String time) {
-        this.type = type;
-        this.todo = todo;
-        this.status = "[ ]";
-        this.time = time;
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "X" : " "); // mark done task with X
     }
 
     public String getTask() {
-        String str = type + status + " " + todo + time;
-        return str;
+        return "[" + getStatusIcon() + "] " + description;
     }
 
-    public String done() {
-        this.status = "[X]";
-        String str = type + status + " " + todo + " " + time;
-        return "Nice! I've marked this task as done:\n" + str;
+    public void done() {
+        this.isDone = true;
     }
 
-    public String getTodo() {
-        return todo;
+    public String markDone() {
+        done();
+        return "Nice! I've marked this task as done:\n" + getTask();
     }
 
-    public String getStatus() {
-        return status;
+    public String delete() {
+        return getTask();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
