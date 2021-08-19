@@ -1,12 +1,29 @@
+/**
+ * A class encapsulating a Deadline variant of a Task.
+ *
+ * @author Toh Wang Bin
+ */
 public class Deadlines extends Task {
 
+    //The time by which the Task should be completed, i.e. the deadline.
     private String deadline;
 
+    /**
+     * Constructor for a Deadline instance.
+     *
+     * @param name A String describing the Task.
+     * @param deadline A String describing the deadline of the Task.
+     */
     public Deadlines(String name, String deadline) {
         super(name);
         this.deadline = deadline;
     }
 
+    /**
+     * Return the String representation of the Task instance.
+     *
+     * @return A String representing the Task instance.
+     */
     @Override
     public String toString() {
         if (isDone) {

@@ -1,3 +1,8 @@
+/**
+ * An abstract class encapsulating a Task.
+ *
+ * @quthor Toh Wang Bin
+ */
 public abstract class Task {
 
     String name;
@@ -8,10 +13,18 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Set the Task instance as completed.
+     */
     public void setCompleted() {
         this.isDone = true;
     }
 
+    /**
+     * Return the String representation of the Task instance.
+     *
+     * @return A String representing the Task instance.
+     */
     public abstract String toString();
 
 }

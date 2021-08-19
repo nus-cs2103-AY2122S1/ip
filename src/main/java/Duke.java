@@ -2,17 +2,27 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ * A class encapsulating a chat bot.
  *
- *
- *
+ * @author Toh Wang Bin
  */
 public class Duke {
 
+    /**
+     * The variants of the Tasks handled by Duke
+     */
     private enum Tasks {DEADLINE, EVENT, TODO}
-
+    
+    //ArrayList containing tasks stored by Duke
     private static ArrayList<Task> taskArray = new ArrayList<>();
+    //Integer that stores the number of tasks currently stored by Duke.
     private static int listIndex = 0;
 
+    /**
+     * Starts the main process, activating the chatbot.
+     *
+     * @param args The default parameter for the main function.
+     */
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
@@ -112,6 +122,12 @@ public class Duke {
         System.out.println("kthxbye");
     }
 
+    /**
+     * Creates a Task as specified by the parameters.
+     *
+     * @param taskType The type of task to be created.
+     * @param array The array of strings used to create the task.
+     */
     private static void createTask(Tasks taskType, String[] array) {
         //preliminary check if more than 1 string was entered
         if (array.length < 2) {
@@ -137,6 +153,7 @@ public class Duke {
                 boolean stringHasEnded = false;
 
                 for (int i = 1; i < array.length; i++) {
+                    //repeatedly append strings in the array until the time is found
                     String currentArrayElement = array[i];
                     if (stringHasEnded) {
                         time = currentArrayElement;
@@ -163,6 +180,7 @@ public class Duke {
                 boolean stringHasTerminated = false;
 
                 for (int i = 1; i < array.length; i++) {
+                    //repeatedly append strings in the array until the eventTime is found
                     String currentArrayElement = array[i];
                     if (stringHasTerminated) {
                         eventTime = currentArrayElement;
