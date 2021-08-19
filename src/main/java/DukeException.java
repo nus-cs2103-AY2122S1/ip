@@ -1,8 +1,8 @@
-public class JarvisException extends Exception {
+public class DukeException extends Exception {
 
     protected String message;
 
-    public JarvisException(String message) {
+    public DukeException(String message) {
         super(message);
         this.message = message;
     }
