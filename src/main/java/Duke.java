@@ -2,6 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    public static class DukeException extends RuntimeException {
+        public DukeException(String errorMessage) {
+            super("OOPS!!! " + errorMessage);
+        }
+    }
     public void taskNumberAnnounce(int number) {
         System.out.println("你目前点了" + String.valueOf(number) + "样菜");
     }
@@ -109,51 +114,67 @@ public class Duke {
         String input = sc.nextLine();
         ArrayList<Task> arrayList = new ArrayList<>(100);
         while (!input.equals("bye")) {
-            String firstWord = input.split(" ")[0];
-            if (input.equals("list")) {
-                int counter = 1;
-                StringBuilder sb = new StringBuilder();
-                sb.append("Here are the tasks in your list:\n");
-                for (Task item:arrayList) {
-                    sb.append(String.valueOf(counter) + ". " + item.toString() + "\n");
-                    counter++;
-                }
-                printStatement(sb.toString());
-            } else if (firstWord.equals("event") || firstWord.equals("deadline") || firstWord.equals("todo")) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("Got it. I've added this task: \n");
+            try {
+                String firstWord = input.split(" ")[0];
+                if (input.equals("list")) {
+                    int counter = 1;
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Here are the tasks in your list:\n");
+                    for (Task item:arrayList) {
+                        sb.append(String.valueOf(counter) + ". " + item.toString() + "\n");
+                        counter++;
+                    }
+                    printStatement(sb.toString());
+                } else if (firstWord.equals("event") || firstWord.equals("deadline") || firstWord.equals("todo")) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Got it. I've added this task: \n");
 
-                printStatement("");
-
-                if (firstWord.equals("todo")) {
-                    Todo newTodo = new Todo(input.substring(5));
-                    arrayList.add(newTodo);
-                    sb.append(newTodo + "\n");
-                } else if (firstWord.equals("deadline")) {
-                    String[] time = input.substring(9).split("/by");
-                    Deadline newDeadline = new Deadline(time[0], time[1]);
-                    arrayList.add(newDeadline);
-                    sb.append(newDeadline + "\n");
-                } else {//if (firstWord.equals("event")) {
-                    String[] time = input.substring(9).split("/at");
-                    Event newEvent = new Event(time[0], time[1]);
-                    arrayList.add(newEvent);
-                    sb.append(newEvent + "\n");
+                    if (firstWord.equals("todo")) {
+                        String message = input.substring(4);
+                        if (message.equals("")) {
+                            throw new DukeException("The description of a todo cannot be empty.");
+                        }
+                        message = message.strip();
+                        Todo newTodo = new Todo(message);
+                        arrayList.add(newTodo);
+                        sb.append(newTodo + "\n");
+                    } else if (firstWord.equals("deadline")) {
+                        String message = input.substring(8);
+                        if (message.equals("")) {
+                            throw new DukeException("The description of a deadline cannot be empty.");
+                        }
+                        message = message.strip();
+                        String[] time = message.split("/by");
+                        Deadline newDeadline = new Deadline(time[0], time[1]);
+                        arrayList.add(newDeadline);
+                        sb.append(newDeadline + "\n");
+                    } else {//if (firstWord.equals("event")) {
+                        String message = input.substring(5);
+                        if (message.equals("")) {
+                            throw new DukeException("The description of a event cannot be empty.");
+                        }
+                        message = message.strip();
+                        String[] time =message.split("/at");
+                        Event newEvent = new Event(time[0], time[1]);
+                        arrayList.add(newEvent);
+                        sb.append(newEvent + "\n");
+                    }
+                    sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in da list.");
+                    printStatement(sb.toString());
+                }else if (input.substring(0, 4).equals("done")) {
+                    int number = Integer.valueOf(input.split(" ")[1]) - 1;
+                    Task task = arrayList.get(number);
+                    task.markAsDone();
+                    printStatement("Nice! I've marked this task as done:\n" + task);
+                } else {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
-                sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in da list.\n");
-                printStatement(sb.toString());
-            }else if (input.substring(0, 4).equals("done")) {
-                int number = Integer.valueOf(input.split(" ")[1]) - 1;
-                Task task = arrayList.get(number);
-                task.markAsDone();
-                printStatement("Nice! I've marked this task as done:\n" + task);
-            } else {
-                Task newTask = new Task(input);
-                arrayList.add(newTask);
-                printStatement("added: " + input);
+            } catch (DukeException e) {
+                printStatement(e.getMessage());
+            } finally {
+                input = sc.nextLine();
             }
 
-            input = sc.nextLine();
         }
         printStatement("Bye. Hope to see you again soon!");
 

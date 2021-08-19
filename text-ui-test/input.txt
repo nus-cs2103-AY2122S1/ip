@@ -1,14 +1,16 @@
 randominputstring
 list
-done 1
 todo buy milk
 event go buy milk /at 3.30pm Sunday
 deadline project due /by 2.40pm Saturday
 list
+done 1
 done 2
 done 3
-done 4
 event go buy milk /at some day
 list
-done 5
+todo
+event
+deadline
+done 4
 bye
