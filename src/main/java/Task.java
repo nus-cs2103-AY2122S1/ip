@@ -1,8 +1,8 @@
 /**
- * Task class. List HAS-A Task (encapsulation).\
+ * Task class. List HAS-A Task (encapsulation).
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-3
+ * @version Level-4
  */
 
 public class Task {
@@ -17,6 +17,10 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+        Duke.divider();
+        System.out.println("\tNice! I've marked this task as done:");
+        System.out.println("\t\t" + this.toString());
+        Duke.divider();
     }
 
     public String getStatusIcon() {
@@ -29,7 +33,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return ("[" + getStatusIcon() + "] " + getDescription());
+        return ("[" + this.getStatusIcon() + "] " + this.getDescription());
     }
 
 }

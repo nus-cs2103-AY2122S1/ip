@@ -1,10 +1,9 @@
 import java.util.ArrayList;
-
 /**
- * List class: Duke HAS-A List
+ * List class: Duke HAS-A List, List HAS-A Task
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-3
+ * @version Level-4
  */
 
 public class List {
@@ -20,19 +19,33 @@ public class List {
     //Add method to insert new entry into list
     public void add(Task task) {
         this.array.add(task);
-        System.out.println("\t" + "added: "  + task.getDescription());
+        Duke.divider();
+        System.out.println("\t" + "Got it. I've added this task:");
+        System.out.println("\t\t" + task.toString());
+        this.getNumOfTasks();
+        Duke.divider();
     }
 
     //getIndex method to return a specific task
     public Task getIndex(int index) {
-        return array.get(index - 1);
+        return this.array.get(index - 1);
+    }
+
+    //getNumOfTasks method prints the number of tasks in the list
+    public void getNumOfTasks() {
+        int totalNum = this.array.size();
+        if (totalNum == 1) {
+            System.out.println("\t" + "Now you have " + totalNum + " task in the list");
+        } else {
+            System.out.println("\t" + "Now you have " + totalNum + " tasks in the list");
+        }
     }
 
     //getAll method to return all entries in list
     public void getAll() {
         int count = 1;
         for (Task t : this.array) {
-            System.out.println("\t" + count + ": " + t.toString());
+            System.out.println("\t" + count + ". " + t.toString());
             count += 1;
         }
     }

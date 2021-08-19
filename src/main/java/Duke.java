@@ -1,10 +1,9 @@
 import java.util.Scanner;
-
 /**
  * Duke class
  *
  * @author Timothy Wong Eu-Jin
- * @version Level-3
+ * @version Level-4
  */
 public class Duke {
     private Scanner sc;
@@ -14,6 +13,12 @@ public class Duke {
     public Duke(Scanner sc) {
         this.sc = sc;
         this.list = new List();
+    }
+
+    //Class method to print static line
+    public static void divider() {
+        System.out.println("\t" +
+                "-------------------------------------");
     }
 
     //Class method to print greeting
@@ -38,10 +43,32 @@ public class Duke {
         Duke.divider();
     }
 
-    //Class method to print static line
-    public static void divider() {
-        System.out.println("\t" +
-                "-------------------------------------");
+    //done method to mark a task as done
+    private void done(String req) {
+        int index = Integer.parseInt(req);
+        Task task = this.list.getIndex(index);
+        task.markAsDone();
+    }
+
+    private void addToDo(String req) {
+        ToDo todo = new ToDo(req);
+        this.list.add(todo);
+    }
+
+    private void addDeadline(String req) {
+        String[] splitReq = req.split("/by", 2);
+        String desc = splitReq[0];
+        String date = splitReq[1];
+        Deadline deadline = new Deadline(desc, date);
+        this.list.add(deadline);
+    }
+
+    private void addEvent(String req) {
+        String[] splitReq = req.split("/at", 2);
+        String desc = splitReq[0];
+        String date = splitReq[1];
+        Event event = new Event(desc, date);
+        this.list.add(event);
     }
 
     //run method to start instance of duke
@@ -52,9 +79,13 @@ public class Duke {
         boolean end = false;
 
         do {
-            //Get the first command
-            req = this.sc.next();
-            switch (req) {
+            //Get first command
+            req = this.sc.nextLine();
+            String[] splitReq = req.split(" ", 2);
+            String cmd = splitReq[0];
+
+            //Switch statement based on initial command
+            switch (cmd) {
                 case "list":
                     Duke.divider();
                     this.list.getAll();
@@ -67,20 +98,24 @@ public class Duke {
                     break;
 
                 case "done":
-                    int index = sc.nextInt(); //catch an error here
-                    Task doneTask = this.list.getIndex(index);
-                    doneTask.markAsDone();
+                    this.done(splitReq[1]);
+                    break;
 
-                    Duke.divider();
-                    System.out.println("\tNice! I've marked this task as done:");
-                    System.out.println("\t\t" + doneTask.toString());
-                    Duke.divider();
+                case "todo":
+                    this.addToDo(splitReq[1]);
+                    break;
+
+                case "deadline":
+                    this.addDeadline(splitReq[1]);
+                    break;
+
+                case "event":
+                    this.addEvent(splitReq[1]);
                     break;
 
                 default:
-                    Task task = new Task(req + sc.nextLine());
                     Duke.divider();
-                    list.add(task);
+                    System.out.println("\tSorry! I do not understand you? Try another command!");
                     Duke.divider();
             }
         } while (!end);
