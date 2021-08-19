@@ -1,6 +1,1 @@
-todo write documentation
-deadline homeword due /by thursday
-event rock concert /at 2pm
-list
-done 2
-
+deadline homework due /by 2pm

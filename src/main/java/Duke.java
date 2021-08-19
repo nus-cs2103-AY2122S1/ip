@@ -13,12 +13,12 @@ public class Duke {
     static ArrayList<Task> list;
 
     public static void main(String[] args) throws DukeException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+        //System.out.println("Hello from\n" + logo);
         list = new ArrayList<>();
         String input = "";
         System.out.println("Hello, I'm Duke");
@@ -153,14 +153,14 @@ public class Duke {
     }
 
 
-    /**
-     * method to print task list on command
-     */
-    static void printList() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + "." + list.get(i).toString());
-        }
-    }
+//    /**
+//     * method to print task list on command
+//     */
+//    static void printList() {
+//        System.out.println("Here are the tasks in your list:");
+//        for (int i = 0; i < list.size(); i++) {
+//            System.out.println((i + 1) + "." + list.get(i).toString());
+//        }
+//    }
 
 }
