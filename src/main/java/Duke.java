@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    // instance variable to store input values
+    // instance variable to store input  task values
     static ArrayList<Task> list;
 
     public static void main(String[] args) {
