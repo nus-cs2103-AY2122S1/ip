@@ -96,6 +96,28 @@ public class Duke {
                     }
 
                     // Add the Deadline Task to the taskList
+                } else if ((taskObjective.compareToIgnoreCase("delete") == 0) && !flag) {
+
+                    try {
+                        listIndex = Integer.parseInt(taskDescription.substring(first_space_index + 1)) - 1;
+
+                    /*
+                     * Validate that the index number if within the bounds of 0 - List Size. If valid mark task as
+                       complete else inform the user about the invalid list index
+                     */
+                        if (listIndex >= 0 && listIndex < taskList.size()) {
+                            Task removed = taskList.remove(listIndex);
+                            Display("Noted. I've removed this task:");
+                            Display("  " + removed.toString());
+                        } else {
+                            throw new DukeException("OOPS! The Wrong Index! The Number of Tasks in the list is "
+                                    + taskList.size());
+                        }
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("OOPS! The delete Command should be followed by a Task Index!");
+                    }
+
+                    // Add the Deadline Task to the taskList
                 } else if (taskObjective.compareToIgnoreCase("deadline") == 0) {
                     if (!flag) {
                         String taskDetails = taskDescription.substring(first_space_index + 1).trim();
