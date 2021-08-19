@@ -33,15 +33,18 @@ public class Duke {
         System.out.println("Got it. I've added this task:\n" + task);
     }
 
-    public static void main(String[] args) {
+    /**
+     * A method to print the welcome message when the bot is first called.
+     */
+    public static void printWelcomeMessage() {
         String logo = " ______       ____      __\n"
-                     + "|   _   \\    /    \\    |  |\n"
-                     + "|  |_|  /   /  /\\  \\   |  |\n"
-                     + "|  |_|  \\  /  ____  \\  |  |\n"
-                     + "|_______/ /__/    \\__\\ |__|\n";
+                + "|   _   \\    /    \\    |  |\n"
+                + "|  |_|  /   /  /\\  \\   |  |\n"
+                + "|  |_|  \\  /  ____  \\  |  |\n"
+                + "|_______/ /__/    \\__\\ |__|\n";
         System.out.println(logo);
         System.out.println("Hello! I'm Bai.\n" +
-                            "What can I do for you?\n\n" +
+                "What can I do for you?\n\n" +
                 "Available commands:\n" +
                 "   todo <description> - add todo item\n" +
                 "   deadline <description> /by <date> - add a task to be completed by <date>\n" +
@@ -50,6 +53,127 @@ public class Duke {
                 "   delete <number> - delete the specified task <number>\n" +
                 "   list - display the list of tasks");
         printHorizontalLine();
+    }
+
+    /**
+     * A method to print the list of tasks the user has currently.
+     */
+    public static void printList() {
+        printHorizontalLine();
+        if (items.size() > 0) {
+            System.out.println("Here are the tasks in your list:");
+
+            for (int i = 0; i < items.size(); i++) {
+                System.out.printf("%d. " + items.get(i) + "\n", i + 1);
+            }
+        } else {
+            System.out.println("You have no tasks in your list.");
+        }
+
+        printHorizontalLine();
+    }
+
+    /**
+     * A method to mark a task as done.
+     *
+     * @param idx index of the task in the items array list.
+     */
+    public static void doneTask(int idx) {
+        items.get(idx).markAsDone();
+
+        printHorizontalLine();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(items.get(idx));
+        printHorizontalLine();
+    }
+
+    /**
+     * A method to add a Todo task to the list.
+     *
+     * @param userCommand command string entered by the user.
+     */
+    public static void addTodo(String userCommand) {
+        try {
+            Todo newTodo = new Todo(userCommand.substring(5));
+            items.add(newTodo);
+
+            printHorizontalLine();
+            printAddTask(newTodo);
+            printTaskNum(items.size());
+            printHorizontalLine();
+        } catch (StringIndexOutOfBoundsException e) {
+            printHorizontalLine();
+            System.out.println("Please add a description for your todo!");
+            printHorizontalLine();
+        }
+    }
+
+    /**
+     * A method to add a Deadline Task to the items arraylist.
+     *
+     * @param userCommand command string entered by the user.
+     */
+    public static void addDeadline(String userCommand) {
+        try {
+            int byIndex = userCommand.indexOf("/by");
+            String by = userCommand.substring(byIndex + 4);
+            Deadline newDeadline = new Deadline(userCommand.substring(9, byIndex - 1), by);
+            items.add(newDeadline);
+
+            printHorizontalLine();
+            printAddTask(newDeadline);
+            printTaskNum(items.size());
+            printHorizontalLine();
+
+        } catch (StringIndexOutOfBoundsException e) {
+            printHorizontalLine();
+            System.out.println("Please add a description and/or deadline!");
+            printHorizontalLine();
+        }
+    }
+
+    /**
+     * A method to add a Event Task to the items arraylist.
+     *
+     * @param userCommand command string entered by the user.
+     */
+    public static void addEvent(String userCommand) {
+        try {
+            int atIndex = userCommand.indexOf("/at");
+            String at = userCommand.substring(atIndex + 4);
+            Event newEvent = new Event(userCommand.substring(6, atIndex - 1), at);
+            items.add(newEvent);
+
+            printHorizontalLine();
+            printAddTask(newEvent);
+            printTaskNum(items.size());
+            printHorizontalLine();
+        } catch (StringIndexOutOfBoundsException e) {
+            printHorizontalLine();
+            System.out.println("Please add a description and/or date for your event!");
+            printHorizontalLine();
+        }
+    }
+
+    /**
+     * A method to delete a task in the items arraylist.
+     *
+     * @param deleteIdx index of the task in the items arraylist.
+     */
+    public static void deleteTask(int deleteIdx) {
+        Task taskToDelete = items.get(deleteIdx);
+
+        items.remove(deleteIdx);
+
+        printHorizontalLine();
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(taskToDelete);
+        printTaskNum(items.size());
+        printHorizontalLine();
+    }
+
+    public static void main(String[] args) {
+        printWelcomeMessage();
 
         Scanner sc = new Scanner(System.in);
 
@@ -63,18 +187,7 @@ public class Duke {
                         "\n====================================================");
                 break;
             } else if (userCommand.replaceAll("\\s+","").equalsIgnoreCase("list")) {
-                printHorizontalLine();
-                if (items.size() > 0) {
-                    System.out.println("Here are the tasks in your list:");
-
-                    for (int i = 0; i < items.size(); i++) {
-                        System.out.printf("%d. " + items.get(i) + "\n", i + 1);
-                    }
-                } else {
-                    System.out.println("You have no tasks in your list.");
-                }
-
-                printHorizontalLine();
+                printList();
             } else {
                 String[] words = userCommand.split(" ");
 
@@ -82,78 +195,25 @@ public class Duke {
                     switch (words[0].toLowerCase()) {
                         case "done":
                                 int idx = Integer.parseInt(words[1]) - 1;
-                                items.get(idx).markAsDone();
-
-                                printHorizontalLine();
-                                System.out.println("Nice! I've marked this task as done:");
-                                System.out.println(items.get(idx));
-                                printHorizontalLine();
+                                doneTask(idx);
                             break;
 
                         case "todo":
-                            try {
-                                Todo newTodo = new Todo(userCommand.substring(5));
-                                items.add(newTodo);
-
-                                printHorizontalLine();
-                                printAddTask(newTodo);
-                                printTaskNum(items.size());
-                                printHorizontalLine();
-                            } catch (StringIndexOutOfBoundsException e) {
-                                printHorizontalLine();
-                                System.out.println("Please add a description for your todo!");
-                                printHorizontalLine();
-                            }
+                            addTodo(userCommand);
                             break;
 
                         case "deadline":
-                            try {
-                                int byIndex = userCommand.indexOf("/by");
-                                String by = userCommand.substring(byIndex + 4);
-                                Deadline newDeadline = new Deadline(userCommand.substring(9, byIndex - 1), by);
-                                items.add(newDeadline);
-
-                                printHorizontalLine();
-                                printAddTask(newDeadline);
-                                printTaskNum(items.size());
-                                printHorizontalLine();
-
-                            } catch (StringIndexOutOfBoundsException e) {
-                                printHorizontalLine();
-                                System.out.println("Please add a description and/or deadline!");
-                                printHorizontalLine();
-                            }
+                            addDeadline(userCommand);
                             break;
 
                         case "event":
-                            try {
-                                int atIndex = userCommand.indexOf("/at");
-                                String at = userCommand.substring(atIndex + 4);
-                                Event newEvent = new Event(userCommand.substring(6, atIndex - 1), at);
-                                items.add(newEvent);
-
-                                printHorizontalLine();
-                                printAddTask(newEvent);
-                                printTaskNum(items.size());
-                                printHorizontalLine();
-                            } catch (StringIndexOutOfBoundsException e) {
-                                printHorizontalLine();
-                                System.out.println("Please add a description and/or date for your event!");
-                                printHorizontalLine();
-                            }
+                            addEvent(userCommand);
                             break;
 
                         case "delete":
                             int deleteIdx = Integer.parseInt(words[1]) - 1;
-                            Task taskToDelete = items.get(deleteIdx);
+                            deleteTask(deleteIdx);
 
-                            items.remove(deleteIdx);
-
-                            printHorizontalLine();
-                            System.out.println("Noted. I've removed this task:");
-                            System.out.println(taskToDelete);
-                            printTaskNum(items.size());
-                            printHorizontalLine();
                             break;
 
                         default:
