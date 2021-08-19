@@ -1,9 +1,8 @@
-todo
-event
-deadline
-todo return book
-deadline return /by Monday
+todo read book
+deadline return book /by June 6th
+event project meeting/at Aug 6th 2-4pm
+done 1
+delete 4
 done 3
-done 2
 list
 bye
