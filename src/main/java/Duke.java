@@ -32,9 +32,28 @@ public class Duke {
                         t.markAsComplete();
                         System.out.println(t);
                     } else {
-                        tasks[len++] = new Task(input);
-                        System.out.println("added: " + input);
+                        System.out.println("Got it. I've added this task:");
+
+                        if (input.matches("event .+ /at .+")) {
+                            int k = input.indexOf("/at");
+                            Task t  = new Event(input.substring(0, k).trim(),input.substring(k + 3).trim());
+                            System.out.println(t);
+                            tasks[len++] = t;
+                        } else if (input.matches("deadline .+ /by .+")) {
+                            int k = input.indexOf("/by");
+                            Task t  = new Deadline(input.substring(0, k).trim(),input.substring(k + 3).trim());
+                            System.out.println(t);
+                            tasks[len++] = t;
+                        } else if (input.matches("todo .+")) {
+                            Task t = new Todo(input);
+                            System.out.println(t);
+                            tasks[len++] = t;
+                        } else {
+                            System.out.println("invalid");
+                        }
+                        System.out.printf("Now you have %d tasks in the list\n", len);
                     }
+
             }
         }
     }
