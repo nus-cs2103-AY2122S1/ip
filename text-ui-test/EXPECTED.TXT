@@ -11,8 +11,20 @@ Added todo to tasks(3):
 Task 2 set as done:
     [X] def
 Added event to tasks(4): 
-[E] [ ] dinner (by now)
+[E] [ ]  dinner (by now)
 Task 3 set as done:
 [T] [X] 234
 Added deadline to tasks(5): 
-[D] [ ] supper (by 10pm)
+[D] [ ]  supper (by 10pm)
+Added event to tasks(6): 
+[E] [ ]  the rapture (very soon)
+Added event to tasks(7): 
+[E] [ ]  global warming (yesterday, all my troubles seemed so far away)
+Added generic task to tasks(8): 
+    [ ] glug glug glug goes the hippocampus
+Task 4 set as done:
+[E] [X]  dinner (by now)
+Task 1 deleted.
+
+Task 1 deleted.
+

@@ -128,6 +128,29 @@ public class Pilcrow {
             tasks.get(taskIndex).markAsDone(true);
             displayText = "Task " + doneTask + " set as done:\n" + tasks.get(taskIndex).toString();
             break;
+        case "delete":
+            // Exception thrown if no word given after delete command
+            if (words.size() == 1) {
+                throw new InvalidInputException("Must specify a task to delete.");
+            }
+
+            // Exception thrown if word given cannot be converted to integer
+            int taskToDelete;
+            try {
+                taskToDelete = Integer.valueOf(words.get(1));
+            } catch (NumberFormatException exception) {
+                throw new InvalidInputException("Must specify task number as an integer.");
+            }
+
+            taskIndex = taskToDelete - 1;
+            // Exception thrown if task specified does not exist
+            if (taskIndex >= tasks.size()) {
+                throw new InvalidInputException("Must specify a task that exists.");
+            }
+
+            tasks.remove(taskIndex);
+            displayText = "Task " + taskToDelete + " deleted.\n";
+            break;
         case "bye":
             displayText = "C'est fini.\n" + Pilcrow.PILCROW_LOGO;
             break;
