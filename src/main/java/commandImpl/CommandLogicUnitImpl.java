@@ -6,6 +6,7 @@ import model.*;
 
 import java.util.Map;
 
+import static util.Display.printIndexedList;
 import static util.Display.printSentence;
 
 /**
@@ -100,22 +101,6 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
 	 * print the entire list of tasks whether its done or not done
 	 */
 	private void processList() {
-		int numbering = 1;
-		StringBuilder list = new StringBuilder();
-		
-		for (Task task : taskDao.getAll()) {
-			list.append(" ")
-			    .append(numbering)
-			    .append(". ")
-			    .append(task)
-			    .append("\n");
-			
-			numbering++;
-		}
-		
-		// remove the last extra \n if there is at least an item in the list
-		if (taskDao.size() > 0) list.deleteCharAt(list.length() - 1);
-		
-		printSentence(list.toString());
+		printIndexedList(taskDao.getAll());
 	}
 }

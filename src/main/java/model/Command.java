@@ -1,7 +1,7 @@
 package model;
 
 /**
- * list of commands available for dude chatting bot
+ * list of commands available for the logic unit
  * <ol>
  *
  *  <li>

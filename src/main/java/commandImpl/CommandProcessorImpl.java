@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static util.Display.printIndexedList;
 import static util.Display.printSentence;
 
 /**
@@ -16,6 +17,15 @@ import static util.Display.printSentence;
  */
 public class CommandProcessorImpl implements ICommandProcessor {
 	private final ICommandLogicUnit commandLogicUnit;
+	private final List<String> availableCommands = List.of(
+			"bye",
+			"list",
+			"done #index",
+			"deadline #desc /by #deadline",
+			"todo #desc",
+			"event #desc /at #timing",
+			"delete #index"
+	);
 	
 	public CommandProcessorImpl(ICommandLogicUnit commandProcessor) {
 		this.commandLogicUnit = commandProcessor;
@@ -111,6 +121,9 @@ public class CommandProcessorImpl implements ICommandProcessor {
 					processException(e);
 				}
 				
+				break;
+			case "man":
+				printIndexedList(availableCommands);
 				break;
 			default:
 				processException(new IllegalCallerException("I'm sorry, but I don't know what that means :-("));
