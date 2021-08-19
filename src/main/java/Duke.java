@@ -24,16 +24,6 @@ public class Duke {
                     } else {
                         throw new IncorrectFormatException("Item number not present. Try again?");
                     }
-                } else if (splitted[0].equalsIgnoreCase("/delete") && splitted[1] != null) { // removing item
-                    int num = Integer.parseInt(splitted[1]);
-                    if (0 < num && num <= listLen) {
-                        list[num - 1].markDone(); //todo
-                        listLen--;
-                        System.out.println(bar + "\n    Nice! I've removed this task off the face of the Earth:\n    " + list[num - 1].toString() +
-                                "\n    Now you have " + listLen + " tasks in the list.\n" + bar);
-                    } else {
-                        throw new IncorrectFormatException("Item number not present. Try again?");
-                    }
                 } else if (splitted[0].equalsIgnoreCase("todo")) { // adding todo
                     if (input.isEmpty()) {
                         throw new IncorrectFormatException("Task name not provided.\n" + "    FORMAT: \" TODO TASKNAME\"");
@@ -76,8 +66,7 @@ public class Duke {
                             "      FORMAT: deadline TASKNAME /by DEADLINE\n" +
                             "    Events: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm\n" +
                             "      FORMAT: todo TASKNAME /by DATE\n" +
-                            "    \"/done x\" where x is the task number to mark task as done.\n" +
-                            "    \"/delete x\" where x is the task number to be deleted. \n"+ bar);
+                            "    \"/done x\" where x is the task number to mark task as done.\n" + bar);
                 } else {
                     throw new IncorrectFormatException("Task type or task name not provided!");
                 }
