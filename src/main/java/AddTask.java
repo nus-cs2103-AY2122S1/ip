@@ -9,9 +9,9 @@ public class AddTask extends DukeMessage{
     }
 
     public void display() {
-        System.out.println("Added: ");
+        System.out.println("Theek h bhai... ye task bhi list mein daal diya");
         System.out.println(createdTask.getTaskString());
-        System.out.println("There are now " + TaskList.getTaskList().getSize() + " tasks in the list.");
+        System.out.println("Ab " + TaskList.getTaskList().getSize() + " tasks hain list mein.");
         Duke.conversationState = true;
     }
 }

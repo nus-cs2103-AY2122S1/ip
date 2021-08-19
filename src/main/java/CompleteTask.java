@@ -8,7 +8,7 @@ public class CompleteTask extends DukeMessage{
     }
 
     public void display() {
-        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("Theek hai... ye task khatam!");
         ArrayList<Task> taskList = (ArrayList<Task>) TaskList.getTaskList().getTasks();
         Task completedTask = taskList.get(taskIndex);
         completedTask.markAsDone();

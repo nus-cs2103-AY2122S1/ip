@@ -13,7 +13,7 @@ public class TaskFactory {
                 throw new EmptyDescriptionException("Ja ammi se todo ka format seekh ke aa!\n" +
                         "description bhi dena padta hai");
             }
-        } else if(taskStr.substring(0, 8).equals("deadline")) {
+        } else if(taskStr.length() >= 8 && taskStr.substring(0, 8).equals("deadline")) {
             //create a deadline task
             try {
                 int slashIndex = taskStr.indexOf("/by");

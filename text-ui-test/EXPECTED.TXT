@@ -8,14 +8,40 @@ There are now 2 tasks in the list.
 Added:
 [E][ ] three (at: three)
 There are now 3 tasks in the list.
-1.[T][ ] one
-2.[D][ ] two (by: two)
-3.[E][ ] three (at: three)
-Nice! I've marked this task as done:
-[D][X] two (by: two)
-1.[T][ ] one
-2.[D][X] two (by: two)
-3.[E][ ] three (at: three)
-Bye user!
+Namaste chacha!
+Kaise yaad kiye humko?
+Ja ammi se todo ka format seekh ke aa!
+description bhi dena padta hai
+Ja ammi se event banane ka format seekh ke aa!
+Ja ammi se deadline banane ka format seekh ke aa!
+Kya likhra h hero??
+jo task ko select kerra h uska index padha tha??
+jo task ko select kerra h uska index padha tha??
+Theek h bhai... ye task bhi list mein daal diya
+[T][ ] assignment
+Ab 1 tasks hain list mein.
+Theek h bhai... ye task bhi list mein daal diya
+[E][ ] meeting (at: tonight)
+Ab 2 tasks hain list mein.
+Theek h bhai... ye task bhi list mein daal diya
+[D][ ] call home (by: tonight)
+Ab 3 tasks hain list mein.
+1.[T][ ] assignment
+2.[E][ ] meeting (at: tonight)
+3.[D][ ] call home (by: tonight)
+Theek hai... ye task khatam!
+[T][X] assignment
+1.[T][X] assignment
+2.[E][ ] meeting (at: tonight)
+3.[D][ ] call home (by: tonight)
+Theek h bhai... ye task hata diya
+[E][ ] meeting (at: tonight)
+Ab 2 tasks bache list mein.
+Theek hai... ye task khatam!
+[D][X] call home (by: tonight)
+1.[T][X] assignment
+2.[D][X] call home (by: tonight)
+Ram Ram!
+
 
 
