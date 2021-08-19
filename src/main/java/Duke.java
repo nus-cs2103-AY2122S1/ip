@@ -4,8 +4,12 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static String taskDescription(String input) {
-        return input.split(" ", 2)[1];
+    public static String taskDescription(String input) throws DukeException.MissingTaskException {
+        String[] description = input.split(" ", 2);
+        if (description.length == 1) {
+            throw new DukeException.MissingTaskException();
+        }
+        return description[1];
     }
 
     public static void main(String[] args) {
@@ -16,24 +20,27 @@ public class Duke {
         while (!input.equals("bye")) {
             String[] words = input.split(" ", 2);
             String command = words[0];
-
-            switch (command) {
-                case "list":
-                    Message.list();
-                    break;
-                case "done":
-                    TaskManager.markDone(Integer.parseInt(taskDescription(input)));
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    TaskManager.addTask(taskDescription(input), command);
-                    break;
-                default:
-                    return;
-
+            try {
+                switch (command) {
+                    case "list":
+                        Message.list();
+                        break;
+                    case "done":
+                        TaskManager.markDone(Integer.parseInt(taskDescription(input)));
+                        break;
+                    case "todo":
+                    case "deadline":
+                    case "event":
+                        TaskManager.addTask(taskDescription(input), command);
+                        break;
+                    default:
+                        throw new DukeException.InvalidInputException();
+                }
+            } catch (DukeException e) {
+                Message.error(e.toString());
+            } finally {
+                input = sc.nextLine();
             }
-            input = sc.nextLine();
         }
         Message.exit();
     }

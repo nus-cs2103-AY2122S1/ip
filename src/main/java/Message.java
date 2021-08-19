@@ -32,4 +32,10 @@ public class Message {
         System.out.println("    Nice! I've marked this task as done: \n      " + task);
         System.out.println("    ____________________________________________________________");
     }
+
+    public static void error(String errorMessage) {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    " + errorMessage);
+        System.out.println("    ____________________________________________________________");
+    }
 }
