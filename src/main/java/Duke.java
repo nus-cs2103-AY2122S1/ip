@@ -33,7 +33,6 @@ public class Duke {
 
                 //exit command for when entered exit code
                 System.exit(1);
-                break;
             }
             Echo(input);
         }
