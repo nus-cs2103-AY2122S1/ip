@@ -38,6 +38,45 @@ public class Duke {
                 s.next(); //jump 'done'
                 int num = s.nextInt();
                 stored.get(num-1).markAsDone();
+            } else if (input.startsWith("todo")) {
+                Scanner s = new Scanner(input);
+                s.next(); //jump keyword
+                String todoName = s.nextLine();
+                Todo todo = new Todo(todoName);
+                stored.add(todo);
+                System.out.println("Ok~ I've added the task:\n" + todo.toString());
+            } else if (input.startsWith("deadline")) {
+                Scanner s = new Scanner(input);
+                s.next(); //jump keyword
+                String ddlName = "";
+                String time = "";
+                while (s.hasNext()) {
+                    String temp = s.next();
+                    if (temp.equals("/by")) {
+                        time = s.nextLine();
+                    } else {
+                        ddlName += temp+ " ";
+                    }
+                }
+                Deadline ddl = new Deadline(ddlName, time);
+                stored.add(ddl);
+                System.out.println("Ok~ I've added the task:\n" + ddl.toString());
+            } else if (input.startsWith("event")) {
+                Scanner s = new Scanner(input);
+                s.next(); //jump keyword
+                String eventName = "";
+                String time = "";
+                while (s.hasNext()) {
+                    String temp = s.next();
+                    if (temp.equals("/at")) {
+                        time = s.nextLine();
+                    } else {
+                        eventName += temp + " ";
+                    }
+                }
+                Event event = new Event(eventName, time);
+                stored.add(event);
+                System.out.println("Ok~ I've added the task:\n" + event.toString());
             } else {
                 stored.add(new Task(input));
                 System.out.println("added: " + input);
@@ -48,6 +87,5 @@ public class Duke {
         }
 
         sc.close();
-        //System.out.println(exitText);
     }
 }
