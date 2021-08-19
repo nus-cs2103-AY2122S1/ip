@@ -1,7 +1,13 @@
 import java.util.Scanner;
 
+/**
+ * Duke is a Personal Assistant Chatbot that keeps track of various tasks.
+ *
+ * @author Adam Oh Zhi Hong
+ */
 public class Duke {
     public static void main(String[] args) {
+        // Welcome the user
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,10 +21,13 @@ public class Duke {
         TaskManager tm = new TaskManager();
         boolean running = true;
 
+        // Start taking input from the user
         while (running) {
             System.out.print(">> ");
             String command = sc.nextLine();
 
+            // Handles basic user input such as list and exit
+            // All other commands are handled by TaskManager
             switch (command) {
                 case "bye":
                     System.out.println("¡Adiós! See you soon!");

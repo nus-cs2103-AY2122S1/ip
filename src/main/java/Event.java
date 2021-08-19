@@ -1,18 +1,27 @@
+/**
+ * A task with a start and end time
+ */
 public class Event extends Task {
-    private String startTime;
+    /** A string representing the start and end time of the event **/
+    private String startEndTime;
 
+    /**
+     * Initializes a new Event
+     * @param name Name of task
+     * @param startTime Start time of task
+     */
     public Event(String name, String startTime) {
         super(name);
-        this.startTime = startTime;
+        this.startEndTime = startTime;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getStartEndTime() {
+        return startEndTime;
     }
 
     @Override
     public String toString() {
         String isDone = isDone() ? "x" : " ";
-        return String.format("[E][%s] %s (at: %s)", isDone, getName(), getStartTime());
+        return String.format("[E][%s] %s (at: %s)", isDone, getName(), getStartEndTime());
     }
 }

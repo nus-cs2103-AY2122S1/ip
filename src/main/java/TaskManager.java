@@ -1,8 +1,16 @@
 import java.util.ArrayList;
 
+/**
+ * TaskManager handles the management of and interaction with tasks
+ */
 public class TaskManager {
+    /** ArrayList containing all tasks **/
     ArrayList<Task> taskArrayList = new ArrayList<>();
 
+    /**
+     * Handles user input regarding tasks
+     * @param command String that users enter
+     */
     public void handle(String command) {
         String[] arr = command.split(" ");
         String firstWord = arr[0];
@@ -45,10 +53,17 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Adds a new task to taskArrayList
+     * @param task Task object to be added
+     */
     public void add(Task task) {
         taskArrayList.add(task);
     }
 
+    /**
+     * Lists the current Tasks in taskArrayList with numbering
+     */
     public void list() {
         for (int i = 0; i < taskArrayList.size(); i++) {
             System.out.println(i+1 + "." + taskArrayList.get(i).toString());
