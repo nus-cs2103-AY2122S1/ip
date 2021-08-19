@@ -53,12 +53,22 @@ public class List {
      * @return The string representation of the task after it is marked as done
      */
     public String changeTaskStatus(int taskNumber) throws DukeException{
-        if (taskNumber < 0 || taskNumber >= this.list.size()) {
+        if (taskNumber <= 0 || taskNumber > this.list.size()) {
             throw new DukeException("Task does not exist. Use list to check all tasks available.");
         } else {
             Task task = list.get(taskNumber - 1);
             task.doneTask();
-            return task.toString();
+            return task.toString() + "\nNumber of tasks remaining: " + list.size();
+        }
+    }
+
+    public String deleteTask(int taskNumber) throws DukeException{
+        if (taskNumber <= 0 || taskNumber > this.list.size()) {
+            throw new DukeException("Task does not exist. Use list to check all tasks available.");
+        } else {
+            Task task = list.get(taskNumber - 1);
+            list.remove(taskNumber - 1);
+            return task.toString() + "\nNumber of tasks remaining: " + list.size();
         }
     }
 

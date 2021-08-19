@@ -52,6 +52,19 @@ public class Duke {
                         System.out.println(d.getMessage());
                     }
                     break;
+                case("delete"): // Delete the task indicated
+                    try {
+                        int taskNumber = Integer.parseInt(message.split(" ")[1]);
+                        String taskMessage = list.deleteTask(taskNumber);
+                        System.out.println("Alright, I have removed the following task:\n" + taskMessage);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("You forgot to indicate which task!!!");
+                    } catch (NumberFormatException n) {
+                        System.out.println("Enter delete followed by an integer representing the task...");
+                    } catch (DukeException d) {
+                        System.out.println(d.getMessage());
+                    }
+                    break;
                 case("todo"): // Create a ToDo task and display the task
                     try {
                         description = splitMessage[1];
