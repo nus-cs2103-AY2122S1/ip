@@ -4,8 +4,10 @@ public class TaskHandler {
     private static final String NO_TASKS_FOUND = "Nothing here... :( Type to add something. :^)\n";
     private static final String TASK_ADDED_MESSAGE = "Voila! ^_^ I've added this task:\n%s\n\nYou currently have %d task(s) in the list.\n";
     private static final String TASK_DONE_MESSAGE = "Good Job! :D I've marked this task as done:\n%s\n\nYou currently have %d undone task(s) in the list.\n";
-    private static final String TASK_LIST = "Here are the tasks in your list! n_n\n";
+    private static final String TASK_LIST = "Here are the task(s) in your list! n_n\n";
     private static final String NO_SUCH_TASK_ID = "Awwww, I can't seem to find this task index. Try again? U_U\n";
+    private static final String INVALID_DONE_INPUT = "Please enter a number starting from 1! :~)";
+
     private List<Task> taskList;
 
     public TaskHandler() {

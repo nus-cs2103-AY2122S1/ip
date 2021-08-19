@@ -1,8 +1,11 @@
 public enum Command {
     LIST,
-    BYE,
     DONE,
-    ADDTASK;
+    DEADLINE,
+    TODO,
+    EVENT,
+    BYE,
+    INVALID;
 
     public static Command evaluateInput(String input) {
         for (Command cmd : values()) {
@@ -10,6 +13,6 @@ public enum Command {
                 return cmd;
             }
         }
-        return ADDTASK;
+        return INVALID;
     }
 }
