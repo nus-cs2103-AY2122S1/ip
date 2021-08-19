@@ -44,17 +44,17 @@ public class Duke {
             if (command.equals("todo")) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
-            add(command.substring(5), "todo");
+            add(command.substring(5), TaskType.TODO);
         } else if (command.startsWith("deadline")) {
             if (command.equals("deadline")) {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             }
-            add(command.substring(9), "deadline");
+            add(command.substring(9), TaskType.DEADLINE);
         } else if (command.startsWith("event")) {
             if (command.equals("event")) {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
             }
-            add(command.substring(6), "event");
+            add(command.substring(6), TaskType.EVENT);
         } else if (command.startsWith("delete")) {
             delete(command.substring(7));
         } else {
@@ -71,36 +71,36 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void add(String description, String taskType) {
+    public void add(String description, TaskType taskType) {
         if (toDoList.size() < 100) {
 
             System.out.println("Got it. I've added this task:");
 
-            if (taskType.equals("todo")) {
-                Task task = new Todo(description);
-                toDoList.add(task);
-                System.out.println(task);
+            Task task = new Task(description);
 
-            } else if (taskType.equals("deadline")) {
-                String newDescription = description.substring(0, description.indexOf(" /by "));
-                String by = description.substring(description.indexOf("/by ") + 4);
-                Task task = new Deadline(newDescription, by);
-                toDoList.add(task);
-                System.out.println(task);
-
-            } else {
-                String newDescription = description.substring(0, description.indexOf(" /at "));
-                String at = description.substring(description.indexOf("/at ") + 4);
-                Task task = new Event(newDescription, at);
-                toDoList.add(task);
-                System.out.println(task);
+            switch (taskType) {
+                case TODO: {
+                    task = new Todo(description);
+                    break;
+                }
+                case DEADLINE: {
+                    String newDescription = description.substring(0, description.indexOf(" /by "));
+                    String by = description.substring(description.indexOf("/by ") + 4);
+                    task = new Deadline(newDescription, by);
+                    break;
+                }
+                case EVENT: {
+                    String newDescription = description.substring(0, description.indexOf(" /at "));
+                    String at = description.substring(description.indexOf("/at ") + 4);
+                    task = new Event(newDescription, at);
+                    break;
+                }
             }
 
+            toDoList.add(task);
+            System.out.println(task);
             printNowSize();
-
-
         }
-
     }
 
     public void list() {
