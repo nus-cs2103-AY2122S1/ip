@@ -10,7 +10,7 @@ public class ChatBot {
     private final String WELCOME_MESSAGE = "Hello! I'm Duke. What can I do for you?";
     private final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private final int INDENT = 4;
-    private final String BORDER = "-".repeat(100);
+    private final String BORDER = "-".repeat(150);
 
     private boolean isRunning;
 
@@ -23,41 +23,42 @@ public class ChatBot {
     public void start() {
         display(WELCOME_MESSAGE);
         while (isRunning) {
-            String userInput = inputHandler.getInput();
-            respond(userInput);
+            try {
+                String userInput = inputHandler.getInput();
+                respond(userInput);
+            } catch(UnsupportedCommandException | MalformedCommandException e){
+                display(e.getMessage());
+            }
         }
     }
 
-    private void respond(String userInput) {
-        String[] userInputSplit = userInput.split(" ", 2);
-        String command = userInputSplit[0];
+    private void respond(String userInput) throws UnsupportedCommandException, MalformedCommandException {
+        String command = userInput.split(" ", 2)[0];
         switch (command) {
-        case EXIT_COMMAND:
-            display(EXIT_MESSAGE);
-            isRunning = false;
-            break;
-        case LIST_COMMAND:
-            display(taskList.list());
-            break;
-        case DONE_COMMAND:
-            int taskIndex = Integer.valueOf(userInputSplit[1]);
-            display(taskList.markTaskDone(taskIndex));
-            break;
-        case ADD_TODO_COMMAND:
-            String description = userInputSplit[1];
-            Task task = Todo.create(description);
-            display(taskList.add(task));
-            break;
-        case ADD_DEADLINE_COMMAND:
-            Task deadlineTask = Deadline.create(userInputSplit[1]);
-            display(taskList.add(deadlineTask));
-            break;
-        case ADD_EVENT_COMMAND:
-            Task eventTask = Event.create(userInputSplit[1]);
-            display(taskList.add(eventTask));
-            break;
-        default:
-            display("Command not supported");
+            case EXIT_COMMAND:
+                display(EXIT_MESSAGE);
+                isRunning = false;
+                break;
+            case LIST_COMMAND:
+                display(taskList.list());
+                break;
+            case DONE_COMMAND:
+                display(taskList.markTaskDone(userInput));
+                break;
+            case ADD_TODO_COMMAND:
+                Task task = Todo.create(userInput);
+                display(taskList.add(task));
+                break;
+            case ADD_DEADLINE_COMMAND:
+                Task deadlineTask = Deadline.create(userInput);
+                display(taskList.add(deadlineTask));
+                break;
+            case ADD_EVENT_COMMAND:
+                Task eventTask = Event.create(userInput);
+                display(taskList.add(eventTask));
+                break;
+            default:
+                throw new UnsupportedCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 

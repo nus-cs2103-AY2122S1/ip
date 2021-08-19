@@ -13,10 +13,18 @@ public class TaskList {
         return "Got it. I've added this task:\n  " + task + '\n' + "You have " + numTasks() + " tasks in the list\n";
     }
 
-    public String markTaskDone(int i) {
-        Task task = tasks.get(i-1);
-        task.markDone();
-        return "Nice! this task has been marked done:\n  " + task + "\n";
+    public String markTaskDone(String userInput) throws MalformedCommandException {
+        try {
+            String userProvidedIndex = userInput.split(" ", 2)[1];
+            int taskIndex = Integer.valueOf(userProvidedIndex) - 1;
+            Task task = tasks.get(taskIndex);
+            task.markDone();
+            return "Nice! this task has been marked done:\n  " + task + "\n";
+        } catch(NumberFormatException | IndexOutOfBoundsException e) {
+            throw new MalformedCommandException(
+                "Please provide a valid integer index for the task you want to mark as done like so: " +
+                    "done [taskIndex in integer form]");
+        }
     }
 
     public String list() {
