@@ -20,13 +20,13 @@ public class TaskManager {
                 if (arr.length < 2) {
                     throw new MissingTaskNumberException("Missing task number");
                 }
-                int id = Integer.parseInt(arr[1]);
+                int doneTaskNumber = Integer.parseInt(arr[1]);
                 try {
-                    taskArrayList.get(id - 1).setDone(true);
+                    taskArrayList.get(doneTaskNumber - 1).setDone(true);
                 } catch (IndexOutOfBoundsException e) {
                     throw new InvalidTaskNumberException("Task does not exist");
                 }
-                System.out.printf("Solid work! I've marked task %d as done.%n", id);
+                System.out.printf("Solid work! I've marked task %d as done.%n", doneTaskNumber);
                 list();
                 break;
             case "todo":
@@ -36,6 +36,7 @@ public class TaskManager {
                 String remaining = command.substring(5);
                 add(new ToDo(remaining));
                 System.out.println("Great! I've added your todo. Enter 'list' to see your tasks!");
+                System.out.printf("You currently have %d tasks.%n", taskArrayList.size());
                 break;
             case "deadline":
                 if (arr.length < 2) {
@@ -49,6 +50,7 @@ public class TaskManager {
                 String deadlineBy = command.substring(byIndex + 4);
                 add(new Deadline(deadlineName, deadlineBy));
                 System.out.println("Great! I've added your deadline. Enter 'list' to see your tasks!");
+                System.out.printf("You currently have %d tasks.%n", taskArrayList.size());
                 break;
             case "event":
                 if (arr.length < 2) {
@@ -62,6 +64,21 @@ public class TaskManager {
                 String eventAt = command.substring(atIndex + 4);
                 add(new Event(eventName, eventAt));
                 System.out.println("Great! I've added your event. Enter 'list' to see your tasks!");
+                System.out.printf("You currently have %d tasks.%n", taskArrayList.size());
+                break;
+            case "delete":
+                if (arr.length < 2) {
+                    throw new MissingTaskNumberException("Missing task number");
+                }
+                int deleteTaskNumber = Integer.parseInt(arr[1]);
+                try {
+                    taskArrayList.remove(deleteTaskNumber - 1);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new InvalidTaskNumberException("Task does not exist");
+                }
+                System.out.printf("Got it! I've removed task %d.%n", deleteTaskNumber);
+                System.out.printf("You currently have %d tasks.%n", taskArrayList.size());
+                list();
                 break;
             default:
                 throw new InvalidCommandException("Invalid command");
