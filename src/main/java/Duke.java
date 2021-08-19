@@ -17,10 +17,10 @@ public class Duke {
             if (taskType.equals("done")) {
                 int taskIndex = Integer.parseInt(parts[1]) - 1;
                 tasks[taskIndex].markAsDone();
-                System.out.println("I've marked this task as done: ");
+                System.out.println("I've marked this task as done:");
                 System.out.println("\t" + tasks[taskIndex]);
             } else if (taskType.equals("list")) {
-                System.out.println("Here are the tasks in your list: ");
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < taskCount; i++) {
                     System.out.println((i + 1) + ". " + tasks[i]);
                 }
@@ -44,7 +44,7 @@ public class Duke {
             String[] parts = taskDetails.split(" /by ");
             String description = parts[0];
             String by = parts[1]; 
-            tasks[taskCount] = new Event(description, by);
+            tasks[taskCount] = new Deadline(description, by);
         } else {
             return;
         }
