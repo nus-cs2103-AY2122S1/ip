@@ -1,4 +1,3 @@
-help
 list
 abcd
 todo borrow book

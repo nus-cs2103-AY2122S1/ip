@@ -1,8 +1,24 @@
+/**
+ * This class encapsulates a Todo.
+ *
+ * @author Teo Sin Yee
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class Todo extends Task {
+    /**
+     * Instantiates a new Todo.
+     *
+     * @param description the description of the todo task.
+     */
     public Todo(String description) {
         super(description);
     }
 
+    /**
+     * String representation of the todo task.
+     *
+     * @return String representation of the todo task.
+     */
     @Override
     public String toString() {
         return String.format("[T]%s", super.toString());
