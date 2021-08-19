@@ -77,37 +77,57 @@ public class Duke {
         if(taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event")) {
 
             if (splitInput.length > 1) {
-
-                System.out.println("  ---------------------------------------------");
-                System.out.println("    Got it. I've added this task:");
-
                 if (taskType.equals("todo")) {
                     String description = input.split("todo ")[1];
                     Todo todo = new Todo(description);
                     userInput[counter] = todo;
                 } else if (taskType.equals("event")) {
                     String[] splitEvent= input.split("/at");
-                    Event event = new Event(splitEvent[0].split("event ")[1],
-                            splitEvent[1]);
-                    userInput[counter] = event;
+                    if(splitEvent.length == 1) {
+                        throw new DukeException("      ☹ OOPS!!! The period which the event occurs " +
+                                "is not inputted correctly. Use /at to indicate the period ;)");
+                    } else {
+                        String[] splitEvent2 = splitEvent[0].split("event ");
+                        if (splitEvent2.length == 0) {
+                            throw new DukeException("     ☹ OOPS!!! The description of an " +
+                                    "event cannot be empty.");
+                        } else {
+                            Event event = new Event(splitEvent2[1], splitEvent[1]);
+                            userInput[counter] = event;
+                        }
+                    }
                 } else {
                     String[] splitDl= input.split("/by");
-                    Deadline deadline = new Deadline(splitDl[0].split("deadline ")[1],
-                            splitDl[1]);
-                    userInput[counter] = deadline;
+                    if(splitDl.length == 1) {
+                        throw new DukeException("      ☹ OOPS!!! The deadline is not " +
+                                "inputted correctly. Use /by to indicate the deadline ;)");
+                    } else {
+                        String[] splitDl2 = splitDl[0].split("deadline ");
+                        if(splitDl2.length == 0) {
+                            throw new DukeException("     ☹ OOPS!!! The description of a " +
+                                    "deadline cannot be empty.");
+                        } else {
+                            Deadline deadline = new Deadline(splitDl2[1], splitDl[1]);
+                            userInput[counter] = deadline;
+                        }
+                    }
                 }
+
+                System.out.println("  ---------------------------------------------");
+                System.out.println("    Got it. I've added this task:");
                 System.out.println("      " + userInput[counter].toString());
                 counter++;
                 System.out.println("    Now you have " + counter + (counter == 1 ?
                         " task in the list" : " tasks in the list."));
                 System.out.println("  ---------------------------------------------");
             } else {
-                // description of task cannot be empty
-                throw new DukeException("     ☹ OOPS!!! The description of a "
-                        + taskType + " cannot be empty.");
+                throw new DukeException("     ☹ OOPS!!! The description of" +
+                        (taskType.equals("event") ? "an" : "a")
+                            + taskType + " cannot be empty.");
             }
         } else {
-            throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't " +
+                    "know what that means :-(");
         }
 
     }
