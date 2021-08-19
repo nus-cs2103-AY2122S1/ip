@@ -5,7 +5,7 @@
  */
 
 class Command {
-    private String action;
+    private Action action;
     private String argument;
 
     /**
@@ -21,7 +21,7 @@ class Command {
      * getter for the Action.
      * @return the String representing action
      */
-    public String getAction() {
+    public Action getAction() {
         return this.action;
     }
 
@@ -34,14 +34,34 @@ class Command {
     }
 
     private static String toArgument(String input) {
-        if (toCommand(input).length() == input.length()) {
+        String action = input.split(" ")[0];
+        if (action.length() == input.length()) {
             return "";
         } else {
-            return input.substring(toCommand(input).length() + 1);
+            return input.substring(action.length() + 1);
         }
     }
 
-    private static String toCommand(String input) {
-        return input.split(" ")[0];
+    private static Action toCommand(String input) {
+        String action = input.split(" ")[0];
+
+        switch (action) {
+            case "bye":
+                return Action.BYE;
+            case "list":
+                return Action.LIST;
+            case "done":
+                return Action.DONE;
+            case "delete":
+                return Action.DELETE;
+            case "todo":
+                return Action.TODO;
+            case "deadline":
+                return Action.DEADLINE;
+            case "event":
+                return Action.EVENT;
+            default:
+                return Action.UNKNOWN;
+        }
     }
 }

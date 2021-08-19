@@ -50,27 +50,27 @@ public class Duke {
             throws UnknownActionException, EmptyDescriptionException, WrongFormatException, ListIndexException {
         Command command = new Command(input);
         switch (command.getAction()) {
-            case "bye":
+            case BYE:
                 handleBye();
                 break;
-            case "list":
+            case LIST:
                 handleList();
                 break;
-            case "done":
+            case DONE:
                 handleMarkDone(command.getArgument());
                 break;
-            case "delete":
+            case DELETE:
                 handleDelete(command.getArgument());
                 break;
-            case "todo":
+            case TODO:
                 Task task = new Todo(command.getArgument());
                 handleAdd(task);
                 break;
-            case "deadline":
+            case DEADLINE:
                 Task deadline = new Deadline(command.getArgument());
                 handleAdd(deadline);
                 break;
-            case "event":
+            case EVENT:
                 Task event = new Event(command.getArgument());
                 handleAdd(event);
                 break;
