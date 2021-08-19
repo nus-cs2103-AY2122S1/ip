@@ -18,9 +18,16 @@ public class Duke {
         Parser p = new Parser();
         Scanner sc = new Scanner(System.in);
 
+
         String userInput = sc.nextLine();
-        while(!userInput.toLowerCase().equals(exitString)) {
-            System.out.print(line + p.getCommand(userInput).execute(tm) + line);
+        while (!userInput.trim().toLowerCase().equals(exitString)) {
+            try {
+                Command command = p.getCommand(userInput);
+                String output = command.execute(tm);
+                System.out.print(line + output + line);
+            } catch (DukeException e) {
+                System.out.println(line + e.getMessage() + line);
+            }
             userInput = sc.nextLine();
         }
         System.out.println(endGreeting);

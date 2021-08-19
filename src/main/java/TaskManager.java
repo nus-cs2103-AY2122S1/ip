@@ -1,35 +1,39 @@
 import java.util.ArrayList;
 
 public class TaskManager {
-    private ArrayList<Task> taskList;
-    private int totalTasks = 0;
+    private ArrayList<Task> tasks;
 
     public TaskManager() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
-    public String addTask(Task task) {
-        taskList.add(task);
-        totalTasks++;
-        return task.toString();
+    public boolean addTask(Task task) {
+        tasks.add(task);
+        return true;
     }
 
     public int getNumOfTasks() {
-        return totalTasks;
+        return tasks.size();
     }
 
-    public String doTaskAtIndex(int taskNumber) {
-        return taskList.get(taskNumber - 1).doTask();
+    public boolean markAsDone(int taskNumber) {
+        tasks.get(taskNumber - 1).markDone();
+        return true;
+    }
+
+    public Task getTask(int taskNumber) {
+        return tasks.get(taskNumber - 1);
     }
 
     @Override
     public String toString() {
         StringBuilder listString = new StringBuilder();
-        for (int i = 0; i < totalTasks; i++) {
+        int numTasks = tasks.size();
+        for (int i = 0; i < numTasks; i++) {
             listString.append(i + 1);
             listString.append(". ");
-            listString.append(taskList.get(i).toString());
-            if (i != totalTasks - 1) {
+            listString.append(tasks.get(i).toString());
+            if (i != numTasks - 1) {
                 listString.append("\n");
             }
         }

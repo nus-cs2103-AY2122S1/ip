@@ -8,10 +8,11 @@ public class Task {
     }
 
     public String getStatus() {
-        return (isDone ? "X" : " ");// Mark done task with X
+        // Mark done task with X
+        return isDone ? "X" : " ";
     }
 
-    public String doTask() {
+    public String markDone() {
         this.isDone = true;
         return this.toString();
     }

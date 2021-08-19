@@ -1,12 +1,10 @@
-public class AddCommand extends Command {
-    private final Task task;
-
-    public AddCommand(Task task) {
-        this.task = task;
-    }
+public abstract class AddCommand extends Command {
+    protected Task task;
 
     public String execute(TaskManager taskManager) {
-        return "Got it. I've added this task:\n\t" + taskManager.addTask(this.task)
-                + "\nNow you have " + taskManager.getNumOfTasks() + " tasks in the list.";
+        taskManager.addTask(task);
+        int numTasks = taskManager.getNumOfTasks();
+        return "Got it. I've added this task:\n\t" + this.task
+                + "\nNow you have " + numTasks + " tasks in the list.";
     }
 }
