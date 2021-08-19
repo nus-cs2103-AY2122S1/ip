@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Duke {
 
     // instance variable to store input values
-    static ArrayList<String> list;
+    static ArrayList<Task> list;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -28,7 +28,7 @@ public class Duke {
         //loop to check if next input is available
         while (sc.hasNext()) {
             input = sc.nextLine();
-
+            String[] split = input.split(" ");
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
 
@@ -37,6 +37,8 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 printList();
+            } else if (split[0].equals("done")) {
+                doneTask(Integer.parseInt(split[1]));
             } else {
                 addToList(input);
             }
@@ -44,26 +46,42 @@ public class Duke {
     }
 
     /**
-     * @param input function to echo the input value
+     * method to echo the input back to the user
+     *
+     * @param input String input from the user
      */
     static void Echo(String input) {
         System.out.println(input);
     }
 
     /**
-     * @param input method to add input to the list
+     * Method to add the input to the list
+     *
+     * @param input String input from the user
      */
     static void addToList(String input) {
-        list.add(input);
+        Task task = new Task(input, false);
+        list.add(task);
         System.out.println("added: " + input);
     }
 
     /**
-     * method to print list on command
+     * Method to mark the task as done
+     *
+     * @param n the task number entered by the user
+     */
+    static void doneTask(int n) {
+        list.get(n).markAsDone();
+        System.out.println("Nice! I have marked this task as done:");
+        System.out.println("[X] " + list.get(n).getTask());
+    }
+
+    /**
+     * method to print task list on command
      */
     static void printList() {
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(i));
+            System.out.println((i + 1) + ".[" + (list.get(i).getIsDone() ? "X" : " ") + "] " + list.get(i).getTask());
         }
     }
 
