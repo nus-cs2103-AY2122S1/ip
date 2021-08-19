@@ -60,6 +60,8 @@ public class Duchess {
                 handleDeadline(input);
             else if (checkPrefix(input, "event"))
                 handleEvent(input);
+            else if (checkPrefix(input, "delete"))
+                handleDelete(input);
             else
                 printError();
         } catch (DuchessException d) {
@@ -164,6 +166,32 @@ public class Duchess {
         prettyPrint("Understood. I've added this task:\n    " + event
                 + "\nYou now have " + listSize
                 + (listSize > 1 ? " tasks in the list." : " task in the list."));
+    }
+
+    /**
+     * Handles the logic fpr checking and deleting tasks
+     * @param input the user given input
+     * @throws DuchessException the exception thrown when input does not match the deletion format
+     */
+    public void handleDelete(String input) throws DuchessException {
+        String invalidMessage = "The command \"delete\" should be followed by " +
+                "a task's number', e.g (delete 1).";
+        String index = input.split(" ", 2)[1];
+        // Parsing a non-numeric string will throw a NumberFormatException
+        try {
+            if (duchessList.checkWithinRange(Integer.parseInt(index))) {
+                // Valid delete task
+                Task deletedTask = duchessList.delete(Integer.parseInt(index));
+                prettyPrint("Alright. I've removed this task:   \n  " + deletedTask
+                    + "\nNow you have " + duchessList.getSize() + " tasks in the list.");
+            } else {
+                // "delete" followed by an integer outside of range of the list
+                throw new DuchessException("Apologies, that task does not exist and cannot be deleted.");
+            }
+        } catch (NumberFormatException e) {
+            // "delete" followed by an invalid non-integer string input
+            throw new DuchessException("The command \"delete\" should be followed by an integer.");
+        }
     }
 
     /**

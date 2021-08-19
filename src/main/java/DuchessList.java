@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 /**
  * This class implements a DukeList to be used in storing string from Duke
  *
@@ -6,18 +8,15 @@
  */
 
 public class DuchessList {
-    /** The array which stores the messages by the user.*/
-    private Task[] itemList;
-    /** The number of elements in the itemList.*/
-    private int size;
+    /** The ArrayList which stores the messages by the user.*/
+    private ArrayList<Task> itemList;
 
     /**
      * Constructor for DukeList
      */
     public DuchessList()
     {
-        itemList = new Task[100];
-        size = 0;
+        itemList = new ArrayList<>();
     }
 
     /**
@@ -26,7 +25,7 @@ public class DuchessList {
      */
     public void add(Task input)
     {
-        itemList[size++] = input;
+        itemList.add(input);
     }
 
     /**
@@ -36,33 +35,34 @@ public class DuchessList {
     public String printList()
     {
         String printed = "";
+        int size = itemList.size();
         for (int i = 0; i < size; i++)
         {
-            printed += String.format("%d. " + itemList[i] + (i == size - 1 ? "" : "\n"), i + 1);
+            printed += String.format("%d. " + itemList.get(i) + (i == size - 1 ? "" : "\n"), i + 1);
         }
         return printed;
     }
 
     /**
      * Checks if the item number is within range of the list's items
-     * @param listNumber the item number (not array index) to be checked
+     * @param listNumber the item number (not ArrayList index) to be checked
      * @return boolean of whether the number is within the list's range
      */
     public boolean checkWithinRange(int listNumber)
     {
-        return 0 < listNumber && listNumber <= size;
+        return 0 < listNumber && listNumber <= itemList.size();
     }
 
     /**
      * Returns the item at the list number
      * @param listNumber the item number whose item is to be returned
      * @return the item at the list number
-     * @throws IllegalArgumentException only accepts integers whose values are within range of the array
+     * @throws IllegalArgumentException only accepts integers whose values are within range of the ArrayList
      */
     public Task getTask(int listNumber) throws IllegalArgumentException
     {
         if (checkWithinRange(listNumber))
-            return itemList[listNumber - 1]; // -1 due to difference between item list number and array indexes
+            return itemList.get(listNumber - 1); // -1 due to difference between item list number and array indexes
         else
             throw new IllegalArgumentException("Task index is not within range."); // Not within range
     }
@@ -72,6 +72,16 @@ public class DuchessList {
      * @return the number of elements in the DuchessList
      */
     public int getSize() {
-        return this.size;
+        return itemList.size();
+    }
+
+    /**
+     * Deletes the task with the given number in the list
+     * @param listNumber the number in the list of the task to be deleted
+     * @return the deleted task
+     */
+    public Task delete(int listNumber)
+    {
+        return itemList.remove(listNumber - 1); // -1 due to difference between item list number and indexes
     }
 }

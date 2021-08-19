@@ -17,4 +17,8 @@ done 3
 done 3
 done adsad
 list
+delete 3
+delete 10
+delete
+delete a
 bye
