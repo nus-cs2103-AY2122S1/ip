@@ -24,7 +24,7 @@ public class Recieve {
                     if (input.length() > 5 && Character.isDigit(input.charAt(5))) {
                         try {
                             int pos = Integer.parseInt(input.substring(5)) - 1;
-                            if (pos < 1) {
+                            if (pos < 0) {
                                 throw new DukeException("Task list index starts from 1!");
                             }
 
@@ -63,7 +63,7 @@ public class Recieve {
                         try {
                             int pos = Integer.parseInt(input.substring(7)) - 1;
 
-                            if (pos < 1) {
+                            if (pos < 0) {
                                 throw new DukeException("Task list index starts from 1!");
                             }
 
