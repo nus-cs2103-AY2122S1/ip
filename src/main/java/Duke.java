@@ -29,25 +29,24 @@ public class Duke {
      * @param message message to be printed.
      */
     public static void prettify(String message) {
-        System.out.printf("%s\r\n\t%s\r\n%s\r\n", SEPARATOR, message, SEPARATOR);
+        System.out.printf("%s\n\t%s\n%s\n", SEPARATOR, message, SEPARATOR);
     }
 
     /** Prints introduction message when bot is first launched. **/
     private static void printIntroMessage() {
-        System.out.println(logo);
         prettify(
-                "Hello! I'm Duke, your personal CLI bot! :D\r\n\t"
-                        + "I function as a simple TodoList.\r\n\t"
-                        + "I can keep track of 3 types of tasks:\r\n\t"
-                        + "\t> Todo: To add a new todo task, enter 'todo' followed by a task description.\r\n\t"
+                "Hello! I'm Duke, your personal CLI bot! :D\n\t"
+                        + "I function as a simple TodoList.\n\t"
+                        + "I can keep track of 3 types of tasks:\n\t"
+                        + "\t> Todo: To add a new todo task, enter 'todo' followed by a task description.\n\t"
                         + "\t> Deadline: To add a new deadline, enter 'deadline' followed by the task description "
-                        + "and specify the due date using '/by <due-date>'\r\n\t"
+                        + "and specify the due date using '/by <due-date>'\n\t"
                         + "\t> Event: To add a new event, enter 'event' followed by the event description "
-                        + "and specify the time using '/by <time-stamp>'\r\n\t"
-                        + "- To see all your tasks, enter 'list'.\r\n\t"
-                        + "- To delete a task, enter 'delete' followed by the index of the task you wish to delete (e.g delete 2).\r\n\t"
-                        + "- You can also mark tasks as done by typing 'done' followed by the index of the task you completed (e.g done 2).\r\n\t"
-                        + "- Once you are done, just enter 'bye' to quit the program.\r\n\t"
+                        + "and specify the time using '/by <time-stamp>'\n\t"
+                        + "- To see all your tasks, enter 'list'.\n\t"
+                        + "- To delete a task, enter 'delete' followed by the index of the task you wish to delete (e.g delete 2).\n\t"
+                        + "- You can also mark tasks as done by typing 'done' followed by the index of the task you completed (e.g done 2).\n\t"
+                        + "- Once you are done, just enter 'bye' to quit the program.\n\t"
                         + "Have fun! ^_^");
 
     }

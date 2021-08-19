@@ -10,10 +10,10 @@ import java.util.List;
 public class TaskHandler {
     // Initialising constants
     private static final String NO_TASKS_FOUND = "Nothing in the list... :( Type todo/event/deadline to add something first! :^)";
-    private static final String TASK_ADDED_MESSAGE = "Voila! ^_^ I've added this task:\r\n\t  %s\r\n\tYou currently have %d task(s) in the list.";
-    private static final String TASK_DONE_MESSAGE = "Good Job! :D I've marked this task as done:\r\n\t  %s\r\n\tYou currently have %d undone task(s) in the list.";
-    private static final String TASK_DELETED_MESSAGE = "Voila! ^_^ I've deleted this task:\r\n\t  %s\r\n\tYou currently have %d task(s) in the list.";
-    private static final String TASK_LIST = "Here are the task(s) in your list! n_n\r\n\t";
+    private static final String TASK_ADDED_MESSAGE = "Voila! ^_^ I've added this task:\n\t  %s\n\tYou currently have %d task(s) in the list.";
+    private static final String TASK_DONE_MESSAGE = "Good Job! :D I've marked this task as done:\n\t  %s\n\tYou currently have %d undone task(s) in the list.";
+    private static final String TASK_DELETED_MESSAGE = "Voila! ^_^ I've deleted this task:\n\t  %s\n\tYou currently have %d task(s) in the list.";
+    private static final String TASK_LIST = "Here are the task(s) in your list! n_n\n\t";
     private static final String NO_SUCH_TASK_ID = "Awwww, I can't seem to find this task index. Try again? U_U";
     private static final String NEGATIVE_TASK_ID = "Please enter a number starting from 1! V_V";
 
@@ -112,7 +112,7 @@ public class TaskHandler {
             for (int i  = 0; i < taskList.size(); i++) {
                 int taskNumber =  i + 1;
                 String taskName = taskList.get(i).toString();
-                allTasks += String.format("\t%s. %s\r\n\t", taskNumber, taskName);
+                allTasks += String.format("\t%d. %s\n\t", taskNumber, taskName);
             }
         }
         return allTasks;
