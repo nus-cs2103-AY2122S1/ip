@@ -9,15 +9,17 @@ public class Duke {
         String display = "list";
         String lineBreak = "------------------------------";
         String markDone = "done";
+        String taskTodo = "todo";
+        String taskDdl = "deadline";
+        String taskEve = "event";
         ArrayList<Task> inputs = new ArrayList<>();
-
 
         // Welcome message
         System.out.println(lineBreak
                 + "\n"
                 + "Hello! I'm Azure.\n"
                 + "How can I help you today?\n"
-                + lineBreak);
+                + lineBreak + "\n");
 
         Scanner myObj = new Scanner(System.in);
 
@@ -36,30 +38,56 @@ public class Duke {
                 if (parts[0].equals(markDone) && index < inputs.size()) {
                     inputs.get(index).setDone();
                     System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println("[X] " + inputs.get(index).taskName);
+                    System.out.println(inputs.get(index).toString());
                     System.out.println(lineBreak + "\n");
                 }
                 continue;
             }
 
-            // mark a task as Done
-//            if (input.contains("done") && input.contains(" ")) {
-//                String[] parts = input.split(" ");
-//                int index = Integer.parseInt(parts[1]) - 1;
-//                if (parts[0].equals(markDone) && index < inputs.size()) {
-//                    inputs.get(index).setDone();
-//                    System.out.println("Nice! I've marked this task as done: ");
-//                    System.out.println("[X] " + inputs.get(index).taskName);
-//                    System.out.println(lineBreak + "\n");
-//                }
-//                continue;
-//            }
-
             // normal input
             if (!input.equals(end) && !input.equals(display)) {
-                System.out.println("     added: " + input + "\n" + lineBreak + "\n");
-                inputs.add(newTask);
-                continue;
+                String[] group = input.split(" ");
+
+                // Case Todo
+                if (group[0].equals(taskTodo) && group.length > 1) {
+                    String todoToAdd = input.substring(5); // name of the task is after "todo" and space
+                    Task newTodo = new Todo(todoToAdd);
+                    inputs.add(newTodo);
+                    System.out.println("Roger! Added the task: ");
+                    System.out.println("    " + newTodo.toString());
+                    System.out.println("Now you have " + inputs.size() + " tasks in your list.");
+                    System.out.println(lineBreak + "\n");
+                    continue;
+                }
+
+                // Case Deadline
+                if (group[0].equals(taskDdl) && input.contains(" /by ")) {
+                    String[] ddlGroup = input.split(" /by ");
+                    String ddlToAdd = ddlGroup[0].substring(9); // name of the task is after "deadline" and space
+                    String ddlByTime = ddlGroup[1];
+                    Task newDeadline = new Deadline(ddlToAdd, ddlByTime);
+                    inputs.add(newDeadline);
+                    System.out.println("Roger! Added the task: ");
+                    System.out.println("    " + newDeadline.toString());
+                    System.out.println("Now you have " + inputs.size() + " tasks in your list.");
+                    System.out.println(lineBreak + "\n");
+                    continue;
+                }
+
+                // Case Event
+                if (group[0].equals(taskEve) && input.contains(" /at ")) {
+                    String[] eveGroup = input.split(" /at ");
+                    String eveToAdd = eveGroup[0].substring(6); // name of the task is after "event" and space
+                    String eveAtTime = eveGroup[1];
+                    Task newEvent = new Event(eveToAdd, eveAtTime);
+                    inputs.add(newEvent);
+                    System.out.println("Roger! Added the task: ");
+                    System.out.println("    " + newEvent.toString());
+                    System.out.println("Now you have " + inputs.size() + " tasks in your list.");
+                    System.out.println(lineBreak + "\n");
+                    continue;
+                }
+
             }
 
             // display saved inputs
