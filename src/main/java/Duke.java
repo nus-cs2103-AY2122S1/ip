@@ -13,10 +13,12 @@ public class Duke {
 
     public void runDuke() {
         displayWelcomeMessage();
-        String command = sc.nextLine();
+        String command = sc.next();
+        String description = sc.nextLine();
         while(!command.equals("bye")) {
-            executeCommand(command);
-            command = sc.nextLine();
+            executeCommand(command, description);
+            command = sc.next();
+            description = sc.nextLine();
         }
         displayByeMessage();
     }
@@ -37,22 +39,44 @@ public class Duke {
         printLines();
     }
 
-     void displayCommand(String command) {
+     void displayCommand(String description) {
         printLines();
-        System.out.println(command);
+        System.out.println(description);
         printLines();
     }
 
-    void executeCommand(String command) {
+    void executeCommand(String command, String description) {
         if (command.equals("list")) {
             displayDukeList();
-        } else if (command.length() > 4 && command.substring(0,5).equals("done ")) {
-            int taskIndex = Integer.parseInt(command.substring(5)) - 1;
+        } else if (command.equals("done")) {
+            int taskIndex = Integer.parseInt(description.substring(1)) - 1;
             Task toBeCompleted = dukeList.get(taskIndex);
             toBeCompleted.completeTask();
             displayTaskCompletion(toBeCompleted);
         } else {
-            addTaskToDukeList(command);
+            printLines();
+            System.out.println("Got it. I've added this task: ");
+            if (command.equals("deadline")) {
+                String[] description_and_time = description.split("/");
+                String deadlineDescription = (description_and_time[0].split(" ", 2))[1];
+                String time = (description_and_time[1].split(" ", 2))[1];
+                Deadline newDeadline = new Deadline(deadlineDescription, time);
+                dukeList.add(newDeadline);
+                System.out.println(newDeadline);
+            } else if (command.equals("event")) {
+                String[] event_and_time = description.split("/");
+                String eventDescription = (event_and_time[0].split(" ", 2))[1];
+                String time = (event_and_time[1].split(" ", 2))[1];
+                Event newEvent = new Event(eventDescription, time);
+                dukeList.add(newEvent);
+                System.out.println(newEvent);
+            } else {
+                ToDo newTodo = new ToDo(description.substring(1));
+                dukeList.add(newTodo);
+                System.out.println(newTodo);
+            }
+            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            printLines();
         }
 
     }
@@ -64,11 +88,6 @@ public class Duke {
         printLines();
     }
 
-    void addTaskToDukeList(String command) {
-        Task newTask = new Task(command);
-        dukeList.add(newTask);
-        displayCommand("added: " + command);
-    }
 
     void displayDukeList() {
         printLines();
