@@ -7,4 +7,8 @@ todo individual project
 list
 done 3
 list
+deadline Assignment 1231 /by
+list
+deadline Assignment 1231 /by 20 August
+list
 bye

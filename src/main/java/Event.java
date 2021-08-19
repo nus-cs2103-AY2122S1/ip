@@ -1,5 +1,5 @@
 public class Event extends Task {
-    public String date;
+    private String date;
     Event(String description, boolean isDone, String date) {
         super(description, isDone);
         this.date = date;

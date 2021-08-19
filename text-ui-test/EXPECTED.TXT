@@ -12,16 +12,16 @@ Duke: Added Task event Go to meeting /at SOC Com-1
 
  ----------------------------------
 Enter Input Here: 
-1. [E][ ] Go to meeting (at: SOC Com-1)
+1. [E][ ] Go to meeting (at:  SOC Com-1)
 
  ----------------------------------
 Enter Input Here: 
 Nice! I've marked this task as done: 
-[E][X] Go to meeting (at: SOC Com-1)
+[E][X] Go to meeting (at:  SOC Com-1)
 
  ----------------------------------
 Enter Input Here: 
-1. [E][X] Go to meeting (at: SOC Com-1)
+1. [E][X] Go to meeting (at:  SOC Com-1)
 
  ----------------------------------
 Enter Input Here: 
@@ -33,8 +33,8 @@ Duke: Added Task todo individual project
 
  ----------------------------------
 Enter Input Here: 
-1. [E][X] Go to meeting (at: SOC Com-1)
-2. [D][ ] Assignment (by: 23 January 2021)
+1. [E][X] Go to meeting (at:  SOC Com-1)
+2. [D][ ] Assignment (by:  23 January 2021)
 3. [T][ ]  individual project
 
  ----------------------------------
@@ -44,9 +44,30 @@ Nice! I've marked this task as done:
 
  ----------------------------------
 Enter Input Here: 
-1. [E][X] Go to meeting (at: SOC Com-1)
-2. [D][ ] Assignment (by: 23 January 2021)
+1. [E][X] Go to meeting (at:  SOC Com-1)
+2. [D][ ] Assignment (by:  23 January 2021)
 3. [T][X]  individual project
+
+ ----------------------------------
+Enter Input Here: 
+deadline needs to have dates !
+
+ ----------------------------------
+Enter Input Here: 
+1. [E][X] Go to meeting (at:  SOC Com-1)
+2. [D][ ] Assignment (by:  23 January 2021)
+3. [T][X]  individual project
+
+ ----------------------------------
+Enter Input Here: 
+Duke: Added Task deadline Assignment 1231 /by 20 August
+
+ ----------------------------------
+Enter Input Here: 
+1. [E][X] Go to meeting (at:  SOC Com-1)
+2. [D][ ] Assignment (by:  23 January 2021)
+3. [T][X]  individual project
+4. [D][ ] Assignment 1231 (by:  20 August)
 
  ----------------------------------
 Enter Input Here: 

@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
-    public static ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<>();
     public static void talk() {
         String userInput = "";
         System.out.println("Hello, What Can I do for you ?\n -------------------------------");
@@ -30,28 +30,57 @@ public class Duke {
                 System.out.println("\n ----------------------------------");
                 continue;
             }
-            Task newTask = handleInput(userInput);
-            tasks.add(newTask);
-            System.out.println("Duke: Added Task " + userInput);
+            Task newTask = null;
+            try{
+                newTask = handleInput(userInput);
+            } catch(DukeException duke) {
+                System.out.println(duke.getMessage());
+            }
+            if(newTask != null) {
+                tasks.add(newTask);
+                System.out.println("Duke: Added Task " + userInput);
+
+            }
             System.out.println("\n ----------------------------------");
         }
     }
-    public static Task handleInput(String userInput) {
+    public static Task handleInput(String userInput) throws DukeException{
         if(userInput.startsWith("todo")) {
             int id = userInput.indexOf("todo") + 4;
             String task = userInput.substring(id);
+            if(task.replaceAll("\\s+","").equals("")){
+                //if remaining string is whitespace or empty
+                throw new DukeException("Todo needs to have description !");
+            }
             return new Todo(task, false);
         } else if(userInput.startsWith("deadline")) {
             int start_id = userInput.indexOf("deadline");
             int task_id = userInput.indexOf("/by");
             String task = userInput.substring(start_id + 9, task_id);
-            String date = userInput.substring(task_id + 4);
+            String date = userInput.substring(task_id + 3);
+            if(task_id == -1) {
+                throw new DukeException("You need to specify at using /by !");
+            }
+            if(task.replaceAll("\\s+","").equals("")){
+                //if remaining string is whitespace or empty
+                throw new DukeException("Task needs to have description !");
+            }
+            if(date.replaceAll("\\s+","").equals("")) {
+                //if remaining string is whitespace or empty
+                throw new DukeException("deadline needs to have dates !");
+            }
+
+
             return new Deadline(task, false, date);
         } else if(userInput.startsWith("event")) {
             int start_id = userInput.indexOf("event");
             int task_id = userInput.indexOf("/at");
             String task = userInput.substring(start_id + 6, task_id);
-            String date = userInput.substring(task_id + 4);
+            String date = userInput.substring(task_id + 3);
+
+            if(task_id == -1) {
+                throw new DukeException("You need to specify at using /at !");
+            }
             return new Event(task, false, date);
         } else {
             return new Task(userInput, false);
