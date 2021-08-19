@@ -78,6 +78,17 @@ public class Duke {
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The target of finished task cannot be empty.");
             }
+        } else if (input.startsWith("delete")) {
+            try {
+                char temp = input.charAt(7);
+                if (Character.isDigit(temp)) {
+                    int item = Integer.parseInt(input.substring(7, 8));
+                    deleteItem(tasks.get(item - 1));
+                    return;
+                }
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("OOPS!!! The target of deleting task cannot be empty.");
+            }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -123,6 +134,23 @@ public class Duke {
         String out = "Here are the tasks in your list:";
         for(int i = 1; i <= len; i++) {
             out += "\n" + i + "." + tasks.get(i-1).toString();
+        }
+        pack(out);
+    }
+
+    /**
+     * Delete an item from the task list.
+     *
+     * @param task the task that is going to be deleted
+     */
+    public static void deleteItem(Task task) {
+        String out = "Noted. I've removed this task:\n  " + task.toString() + "\n";
+        tasks.remove(task);
+        len--;
+        if (len > 1) {
+            out += "Now you have " + len + " tasks in the list.";
+        } else {
+            out += "Now you have " + len + " task in the list.";
         }
         pack(out);
     }

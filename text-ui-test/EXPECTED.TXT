@@ -44,5 +44,16 @@ OOPS!!! The description of a event cannot be empty.
 OOPS!!! I'm sorry, but I don't know what that means :-(
 ------------------------------------------------------------
 ------------------------------------------------------------
+Noted. I've removed this task:
+  [E][ ] project meeting (at: Mon 2-4pm)
+Now you have 3 tasks in the list.
+------------------------------------------------------------
+------------------------------------------------------------
+Here are the tasks in your list:
+1.[T][ ] borrow book
+2.[D][X] return book (by: Sunday)
+3.[D][ ] do homework (by: no idea :-p)
+------------------------------------------------------------
+------------------------------------------------------------
 Bye. Hope to see you again soon!
 ------------------------------------------------------------

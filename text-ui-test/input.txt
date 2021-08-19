@@ -7,4 +7,6 @@ done 2
 list
 todo
 blah
+delete 3
+list
 bye
