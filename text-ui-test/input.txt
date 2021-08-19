@@ -1,1 +1,6 @@
 deadline homework due /by 2pm
+todo exercise
+event concert /at 5pm
+done 2
+list
+bye
