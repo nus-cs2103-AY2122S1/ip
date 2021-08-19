@@ -79,6 +79,14 @@ public class Duke {
                 + "Now you have " + Duke.list.size()  + " tasks in the list."  + "\n" +Duke.end);
     }
 
+    public static void delete(int i) {
+        System.out.println(Duke.start + "Noted. I've removed this task: ");
+        String deleted = Duke.list.get(i-1).toString();
+        Duke.list.remove(((int) i - 1));
+        System.out.println(" " + deleted);
+        System.out.println("Now you have " + Duke.list.size() + " tasks in the list." + "\n" +  Duke.end);
+    }
+
     public static void main(String[] args) {
 
         String end_message = "Bye. I hope to talk to you again soon! :)";
@@ -95,6 +103,10 @@ public class Duke {
                 } else if (input.contains("done")) {
                     int i = Integer.valueOf(input.substring(5));
                     Duke.markDone(i);
+                } else if (input.contains("delete")) {
+                    int i = Integer.valueOf(input.substring(7));
+                    System.out.println(i);
+                    Duke.delete(i);
                 } else if (input.contains("todo")) {
                     Duke.toDo(input);
                 } else if (input.contains("deadline")) {
