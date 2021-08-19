@@ -20,11 +20,11 @@ public class Ui {
         displayLine();
     }
 
-//    public void echo(String str) {
-//        displayLine();
-//        System.out.println(str);
-//        displayLine();
-//    }
+    public static void formatAndPrint(String output) {
+        displayLine();
+        System.out.println(output);
+        displayLine();
+    }
 
     public static void displayLine() {
         System.out.println("____________________________________________________________");
