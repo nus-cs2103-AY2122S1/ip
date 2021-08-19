@@ -19,4 +19,8 @@ Now you have 3 task(s) in the list.
 1. [T][ ] read book
 2. [D][X] do cs2103t (by: monday)
 3. [E][ ] movie night (at: thursday 1130pm)
+DukeException: Indicate which task you want to delete.
+Noted. I've removed this task:
+[E][ ] movie night (at: thursday 1130pm)
+Now you have 2 task(s) in the list.
 ciao!

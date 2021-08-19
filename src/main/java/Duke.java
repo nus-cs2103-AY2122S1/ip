@@ -1,11 +1,18 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a personalised chat bot for CS2103/T iP.
+ */
 public class Duke {
     private static ArrayList<Task> myList = new ArrayList<Task>();
     private final static Scanner sc = new Scanner(System.in);
 
-
+    /**
+     * The main method of Nat's chat bot.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         System.out.println("hi sis, type out your task right away! :D");
         while (sc.hasNextLine()) {
@@ -29,6 +36,41 @@ public class Duke {
         }
     }
 
+    /**
+     * Prints the list of Tasks.
+     */
+    private static void printList() {
+        int len = myList.size();
+        if (len == 0) { System.out.println("The list is empty!"); }
+        for (int i = 0; i < len; i++) {
+            Task curr = (Task) myList.get(i);
+            System.out.printf("%s. %s\n", i + 1, curr);
+        }
+    }
+
+    /**
+     * Marks a Task as done.
+     *
+     * @param text Command-line input.
+     * @throws DukeException if input does not include which Task to mark as done.
+     */
+    private static void markAsDone(String text) throws DukeException {
+        try {
+            int i = Integer.parseInt(text.split(" ")[1]) - 1;
+            Task curr = (Task) myList.get(i);
+            curr.setDone();
+            System.out.println(curr);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Indicate which task you want to mark as done.");
+        }
+    }
+
+    /**
+     * Deletes a Task from the list.
+     *
+     * @param text Command-line input.
+     * @throws DukeException if input does not include which Task to delete.
+     */
     private static void deleteTask(String text) throws DukeException {
         text = text.trim();
         try {
@@ -42,6 +84,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Adds a Task to the list.
+     *
+     * @param text Command-line input.
+     * @throws DukeException if format of input is wrong.
+     */
     private static void addTask(String text) throws DukeException {
         text = text.trim();
         try {
@@ -68,26 +116,6 @@ public class Duke {
             System.out.printf("Now you have %d task(s) in the list.\n", myList.size());
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The description of a task cannot be empty.");
-        }
-    }
-
-    private static void printList() {
-        int len = myList.size();
-        if (len == 0) { System.out.println("The list is empty!"); }
-        for (int i = 0; i < len; i++) {
-            Task curr = (Task) myList.get(i);
-            System.out.printf("%s. %s\n", i + 1, curr);
-        }
-    }
-
-    private static void markAsDone(String text) throws DukeException {
-        try {
-            int i = Integer.parseInt(text.split(" ")[1]) - 1;
-            Task curr = (Task) myList.get(i);
-            curr.setDone();
-            System.out.println(curr);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Indicate which task you want to mark as done.");
         }
     }
 }

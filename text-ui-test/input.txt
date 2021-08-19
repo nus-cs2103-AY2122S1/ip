@@ -11,4 +11,6 @@ event movie night /at thursday 1130pm
 ls
 done 2
 ls
+delete
+delete 3
 q
