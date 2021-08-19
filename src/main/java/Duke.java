@@ -35,6 +35,46 @@ public class Duke {
                 "\t____________________________________________________________");
     }
 
+    private static void handleInput(String response) {
+        String[] output = response.split(" ");
+        String command = output[0];
+        if (command.equals("done")) {
+            Task editedTask = todos[Integer.parseInt(output[1])-1];
+            editedTask.markIsDone();
+            System.out.println(String.format("____________________________________________________________\n" +
+                    "\tNice! I've marked this task as done: \n" +
+                    "\t%s\n" +
+                    "    ____________________________________________________________", editedTask.toString()));
+        } else {
+            Task newTask = null;
+            switch (command) {
+                case "todo":
+                    String todoDescription = response.substring(5);
+                    newTask = new Todo(todoDescription);
+                    break;
+                case "deadline":
+                    String deadlineDescription = response.substring(9);
+                    newTask = new Deadline(deadlineDescription);
+                    break;
+                case "event":
+                    String eventDescription = response.substring(6);
+                    newTask = new Event(eventDescription);
+                    break;
+                default:
+                    break;
+            }
+
+            todos[index] = newTask;
+            index++;
+
+            System.out.println("\t____________________________________________________________\n\t" +
+                    String.format("Got it. I've added this task:\n" +
+                            "\t  %s\n" +
+                            "\tNow you have %d tasks in the list.", newTask.toString(), index) +
+                    "\n\t____________________________________________________________");
+        }
+    }
+
     /**
      * Starts the Duke chatbot.
      * Users can input String to interact with the chatbot.
@@ -78,23 +118,7 @@ public class Duke {
                     exit = true;
                     break;
                 default:
-                    String[] output = response.split(" ");
-                    if (output[0].equals("done")) {
-                        Task editedTask = todos[Integer.parseInt(output[1])-1];
-                        editedTask.markIsDone();
-                        System.out.println(String.format("____________________________________________________________\n" +
-                                "\tNice! I've marked this task as done: \n" +
-                                "\t%s\n" +
-                                "    ____________________________________________________________", editedTask.toString()));
-                    } else {
-                        Task newTask = new Task(response);
-                        todos[index] = newTask;
-                        index++;
-
-                        System.out.println("\t____________________________________________________________\n\t" +
-                                String.format("added: %s", newTask.getDescription()) +
-                                "\n\t____________________________________________________________");
-                    }
+                    handleInput(response);
                     break;
             }
         }
