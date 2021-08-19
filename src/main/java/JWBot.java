@@ -34,7 +34,7 @@ public class JWBot {
                         System.out.println("OK Bro, I noted you've done this task:\n" +
                                 items.get(index - 1));
                     } catch (Exception e) {
-                        throw new JWBotException("Sorry bro, I think you chose an incorrect index number!");
+                        throw new JWBotException("Sorry bro, I think you chose an incorrect index number to mark done!");
                     }
                 } else if (input.startsWith("deadline ")) {
                     try {
@@ -60,6 +60,17 @@ public class JWBot {
                         System.out.println("OK bro, I just added: " + event);
                     } catch (Exception e) {
                         throw new JWBotException("Sorry bro, I think you made an error with the event format!");
+                    }
+                } else if (input.startsWith("delete ")) {
+                    try {
+                        String[] separated = input.split(" ");
+                        int index = Integer.parseInt(separated[1]);
+                        Task task = items.remove(index - 1);
+                        System.out.println("OK Bro, I noted you've deleted this task:\n" +
+                                task);
+                        System.out.println("So bro, now you have " + items.size() + " tasks stored in the list!");
+                    } catch (Exception e) {
+                        throw new JWBotException("Sorry bro, I think you chose an incorrect index number to delete!");
                     }
                 } else {
                         throw new JWBotException("Sorry bro, I don't understand what you mean!");
