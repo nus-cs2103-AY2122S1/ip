@@ -6,6 +6,11 @@ public class Task {
         this.description = description;
     }
 
+    public Task(boolean done, String description) {
+        this.description = description;
+        this.done = done;
+    }
+
     public void setDone() {
         done = true;
     }
@@ -17,5 +22,13 @@ public class Task {
             indicator = 'X';
         }
         return "[" + indicator + "] " + this.description;
+    }
+
+    public String saveString() {
+        char indicator = '0';
+        if (done) {
+            indicator = '1';
+        }
+        return indicator + "-" + this.description;
     }
 }
