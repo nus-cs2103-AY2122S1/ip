@@ -95,7 +95,7 @@ public class Duke {
 
     public static void MarkDone(int index) throws DukeException{
         if (index <= 0) {
-            throw new DukeException("☹ OOPS!!! The index is invalid!!!");
+            throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
         } else {
             System.out.println("Nice! I've marked this task as done:");
             list.get(index).MarkDone();
@@ -105,7 +105,7 @@ public class Duke {
 
     public static void Delete(int index) throws DukeException{
         if (index < 0) {
-            throw new DukeException("☹ OOPS!!! The index is invalid!!!");
+            throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
         } else {
             System.out.println("Noted. I've removed this task:");
             System.out.println(" " + list.get(index).PrintTaskInfo());
