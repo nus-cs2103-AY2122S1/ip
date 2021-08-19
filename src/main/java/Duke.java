@@ -6,5 +6,20 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
+
+        Scanner sc = new Scanner(System.in);
+        String bye = "bye";
+
+        while (true) {
+            String inp = sc.nextLine();
+            if (inp.equals(bye)) {
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            }
+            System.out.println(inp);
+        }
     }
 }
