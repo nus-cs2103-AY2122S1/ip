@@ -3,89 +3,51 @@ import org.w3c.dom.events.Event;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
-    public static class Task {
-        private enum Type{TODO, DEADLINE, EVENT}
-        protected String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        protected String getStatusIcon() {
-            return (isDone ? "X" : " "); // mark done task with X
-        }
-
-        public String toString() {
-            return String.format("[%s] %s", this.getStatusIcon(), this.description);
-        }
-
-        public void complete() {
-            this.isDone = true;
-        }
-    }
-
-    public static class Todo extends Task {
-        public Todo(String description) {
-            super(description);
-        }
-
-        @Override
-        public String toString() {
-            String stem = super.toString();
-            return String.format("[T]%s", stem);
-        }
-    }
-
-    public static class Deadline extends Task {
-        private String deadline;
-
-        public Deadline(String description, String deadline) {
-            super(description);
-            this.deadline = deadline;
-        }
-
-        @Override
-        public String toString() {
-            String stem = super.toString();
-            return String.format("[D]%s (by: %s)", stem, this.deadline);
-        }
-    }
-
-    public static class Event extends Task {
-        private String eventTime;
-
-        public Event(String description, String eventTime) {
-            super(description);
-            this.eventTime = eventTime;
-        }
-
-        @Override
-        public String toString() {
-            String stem = super.toString();
-            return String.format("[D]%s (at: %s)", stem, this.eventTime);
-        }
-    }
-
     public static class TaskList {
-
         private Task[] tasks;
         private int numTask;
+
+
 
         public TaskList(){
             this.tasks = new Task[100];
             this.numTask = 0;
         }
 
-        public void add(String task) {
-            tasks[this.numTask] = new Task(task);
+        public void add(Task task) {
+            tasks[this.numTask] = task;
             this.numTask++;
-            System.out.println("added: " + task);
+            System.out.println("added: " + task.description);
         }
+
+        public void addCustom(Task task) {
+            tasks[this.numTask] = task;
+            this.numTask++;
+            System.out.println("Got it. I've added this task: ");
+            System.out.println("  " + task);
+            System.out.printf("Now you have %d tasks in the list.\n", this.numTask);
+        }
+//
+//        public void addDeadline(String task) {
+//            tasks[this.numTask] = new Deadline(task);
+//            this.numTask++;
+//            System.out.println("Got it. I've added this task: ");
+//            System.out.println("  " + task);
+//            System.out.printf("Now you have %d tasks in the list.", this.numTask);
+//        }
+//
+//        public void addEvent(String task) {
+//            tasks[this.numTask] = new Todo(task);
+//            this.numTask++;
+//            System.out.println("Got it. I've added this task: ");
+//            System.out.println("  " + task);
+//            System.out.printf("Now you have %d tasks in the list.", this.numTask);
+//        }
+
 
         public void list() {
             int counter = 0;
@@ -102,14 +64,19 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
+        Pattern todoPattern = Pattern.compile("todo (.*)");
+        Pattern deadlinePattern = Pattern.compile("deadline (.*) /by (.*)");
+        Pattern eventPattern = Pattern.compile("event (.*) /at (.*)");
 
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
         TaskList storage = new TaskList();
+
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
@@ -140,8 +107,14 @@ public class Duke {
                 continue;
             }
 
+            Matcher todoMatcher = todoPattern.matcher(input);
+            if (todoMatcher.find()) {
+                storage.addCustom(new Todo(todoMatcher.group(1)));
+                continue;
+            }
+
             // add to list
-            storage.add(input);
+            storage.add(new Task(input));
         }
     }
 }
