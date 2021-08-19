@@ -1,10 +1,10 @@
-test
-todo big test
-event triton /by thursday
+todo
+todo wrwreg
+deadline
 deadline tomorrow /by tomorrow
+event sleep /at never
 list
-deadline lmao
-event lol
-done 2
+done 1
+delete 1
 list
 bye

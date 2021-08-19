@@ -20,6 +20,7 @@ public class Duke {
         System.out.println("\nInput:");
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
+
         try {
             parseInput(userInput);
         }
