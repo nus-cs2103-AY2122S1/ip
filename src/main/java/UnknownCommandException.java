@@ -1,3 +1,6 @@
+/**
+ * This is an UnknownCommandException that extends DukeException.
+ */
 public class UnknownCommandException extends DukeException {
 
     public UnknownCommandException() {

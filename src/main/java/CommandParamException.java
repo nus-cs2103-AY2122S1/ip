@@ -1,3 +1,6 @@
+/**
+ * This is a CommandParamException that extends DukeException.
+ */
 public class CommandParamException extends DukeException {
 
     private final String command;

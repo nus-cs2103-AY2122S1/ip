@@ -1,3 +1,6 @@
+/**
+ * This is an EmptyDescriptionException that extends DukeException.
+ */
 public class EmptyDescriptionException extends DukeException {
 
     private final String command;

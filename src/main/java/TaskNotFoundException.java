@@ -1,3 +1,6 @@
+/**
+ * This is a TaskNotFoundException that extends DukeException.
+ */
 public class TaskNotFoundException extends DukeException {
 
     private final int index;

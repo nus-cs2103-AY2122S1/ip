@@ -1,3 +1,6 @@
+/**
+ * This is a TaskIsCompleteException that extends DukeException.
+ */
 public class TaskIsCompleteException extends DukeException {
 
     private final int index;
