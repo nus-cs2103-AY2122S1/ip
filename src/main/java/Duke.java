@@ -35,40 +35,40 @@ public class Duke {
         String input = sc.nextLine();
         while(!input.equals("bye")) {
             String[] inputList = input.split(" ");
+            String action = inputList[0];
             try {
-                switch (inputList[0]) {
-
-                    case "list":
-                        for (int i = 0; i < tasks.size(); i++) {
-                            System.out.println((i + 1) + "." + tasks.get(i).toString());
-                        }
-                        break;
-                    case "done":
-                        if (inputList.length != 2) {
-                            System.out.println("Please provide the task index to mark as done!");
-                            break;
-                        }
-                        int taskIndex = Integer.parseInt(inputList[1]);
-                        if (tasks.size() < taskIndex || 0 >= taskIndex) {
-                            System.out.println("Invalid task index provided!");
-                            break;
-                        }
+                if (action.equals("list")) {
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i + 1) + "." + tasks.get(i).toString());
+                    }
+                } else if (action.equals("delete") || action.equals("done")) {
+                    if (inputList.length != 2) {
+                        throw new DukeException("Please provide the target task index!");
+                    }
+                    int taskIndex = Integer.parseInt(inputList[1]);
+                    if (tasks.size() < taskIndex || 0 >= taskIndex) {
+                        throw new DukeException("Invalid task index provided!");
+                    }
+                    if (action.equals("done")) {
                         Task currTask = tasks.get(taskIndex - 1);
                         currTask.markAsDone();
                         System.out.println("Nice! I've marked this task as done:\n" + currTask);
-                        break;
-                    case "todo":
-                    case "deadline":
-                    case "event":
-                        Task newTask = createTask(input);
-                        tasks.add(newTask);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println(newTask);
+                    } else {
+                        Task removedTask = tasks.remove(taskIndex - 1);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(removedTask);
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                        break;
-                    default:
-                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    }
+                } else if (action.equals("todo") || action.equals("deadline") || action.equals("event")) {
+                    Task newTask = createTask(input);
+                    tasks.add(newTask);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(newTask);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                } else {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
+
             } catch (DukeException e) {
                 System.out.println("☹ OOPS!!! " + e.getMessage());
             }
