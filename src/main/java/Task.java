@@ -3,7 +3,7 @@ public class Task {
     private boolean isComplete;
 
     public Task(String desc) {
-        this.desc = desc;
+        this.desc = desc.trim();
         this.isComplete = false;
     }
 
@@ -11,7 +11,8 @@ public class Task {
         this.isComplete = true;
     }
 
+    @Override
     public String toString() {
-        return String.format("[%c] %s",this.isComplete ? 'X' : ' ', desc);
+        return String.format("[%c] %s", this.isComplete ? 'X' : ' ', this.desc);
     }
 }
