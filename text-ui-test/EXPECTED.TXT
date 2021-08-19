@@ -33,3 +33,8 @@ Duke$IncorrectFormatException:
     added: arihtars
     Now you have 2 tasks in your list
  -------------------------------------------------------------
+ -------------------------------------------------------------
+    Nice! I've removed this task off the face of the Earth:
+    [T][X] read book
+    Now you have 1 tasks in the list.
+ -------------------------------------------------------------
