@@ -6,7 +6,7 @@ public class Duke {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_PURPLE = "\u001B[35m";
 
-    public static final List<String> TASKS = new ArrayList<>();
+    public static final List<Task> TASKS = new ArrayList<>();
 
     public static void main(String[] args) {
         greet();
@@ -33,27 +33,40 @@ public class Duke {
     }
 
     private static void handleInput(String input) {
-        switch (input) {
+        Command command = new Command(input);
+        switch (command.getAction()) {
             case "bye":
                 handleBye();
                 break;
             case "list":
                 handleList();
                 break;
+            case "done":
+                handleMarkDone(command.getArgument());
+                break;
             default:
                 handleAdd(input);
         }
     }
 
+    private static void handleMarkDone(String arg) {
+        int idx = Integer.parseInt(arg);
+        Task task = TASKS.get(idx - 1);
+        task.setDone();
+        hikoPrint("Nice! I've marked this task as done:\n" + task +"\n");
+    }
+
     private static void handleAdd(String input) {
-        TASKS.add(input);
+        Task task = new Task(input);
+        TASKS.add(task);
         hikoPrint("added: " + input + "\n");
     }
 
     private static void handleList() {
-        String output = "";
+        String output = "Here are the tasks in your list:\n";
         for (int i = 1; i <= TASKS.size(); i++) {
-            output = output +  i + ". " + TASKS.get(i - 1) + "\n";
+            Task task = TASKS.get(i - 1);
+            output += i + ". " + task + "\n";
         }
         hikoPrint(output);
     }
