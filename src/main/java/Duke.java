@@ -123,33 +123,31 @@ public class Duke {
                             String todoName = scanner.nextLine();
                             Task newestTodo = new Task(todoName, "todo");
                             taskArrayList.add(newestTodo);
-                            System.out.println(sandwich("New task added: \n"
+                            System.out.println(sandwich("New todo task added: \n"
                                     + taskBeautify(newestTodo, taskArrayList.size())
                                     + "\n You now have "
                                     + taskArrayList.size()
                                     + " items in your task list."));
                             break;
                         case "deadline":
-                            // scanner.useDelimiter("\\s*/by\\s*");
                             String[] deadlineTokens = scanner.nextLine().split("\\s*/by\\s*");
                             String deadlineName = deadlineTokens[0];
                             String deadlineReminder = deadlineTokens[1];
                             Task newestDeadline = new Task(deadlineName, "deadline", deadlineReminder);
                             taskArrayList.add(newestDeadline);
-                            System.out.println(sandwich("New task added: \n"
+                            System.out.println(sandwich("New deadline task added: \n"
                                     + taskBeautify(newestDeadline, taskArrayList.size())
                                     + "\n You now have "
                                     + taskArrayList.size()
                                     + " items in your task list."));
-                            // scanner.reset();
                             break;
                         case "event":
-                            scanner.useDelimiter("\\s*/at\\s*");
                             String[] eventTokens = scanner.nextLine().split("\\s*/at\\s*");
-                            String eventName = scanner.nextLine();
-                            Task newestEvent = new Task(eventName, "deadline");
+                            String eventName = eventTokens[0];
+                            String eventReminder = eventTokens[1];
+                            Task newestEvent = new Task(eventName, "event", eventReminder);
                             taskArrayList.add(newestEvent);
-                            System.out.println(sandwich("New task added: \n"
+                            System.out.println(sandwich("New event task added: \n"
                                     + taskBeautify(newestEvent, taskArrayList.size())
                                     + "\n You now have "
                                     + taskArrayList.size()
