@@ -12,10 +12,7 @@ public class Duke {
         BYE("bye"),
         LIST("list"),
         DONE("done"),
-        DELETE("delete"),
-        TODO("todo"),
-        EVENT("event"),
-        DEADLINE("deadline");
+        DELETE("delete");
 
         private final String cmd;
 
