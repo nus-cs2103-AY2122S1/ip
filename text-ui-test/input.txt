@@ -14,4 +14,6 @@ event project meeting /at Mon 2-4pm
 list
 done 4
 list
+delete 2
+list
 exit
