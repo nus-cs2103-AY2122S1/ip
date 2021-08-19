@@ -1,9 +1,24 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class Duke {
+    public static Task createTask(String input) {
+        String[] inputList = input.split(" ");
+        if (inputList[0].equals("todo")){
+            return new Todo(input.replaceFirst(Pattern.quote("todo "),""));
+        } else if (inputList[0].equals("deadline")) {
+            String[] withoutAction = input.replaceFirst(Pattern.quote("deadline "),"").split("/by", 2);
+            return new Deadline(withoutAction[0].trim(), withoutAction[1].trim());
+        } else {
+            String[] withoutAction = input.replaceFirst(Pattern.quote("event "),"").split("/at", 2);
+            return new Event(withoutAction[0].trim(), withoutAction[1].trim());
+        }
+    }
     public static void main(String[] args) {
+
         ArrayList<Task> tasks = new ArrayList<Task>();
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -36,10 +51,15 @@ public class Duke {
                     currTask.markAsDone();
                     System.out.println("Nice! I've marked this task as done:\n" + currTask);
                     break;
-                default:
-                    Task newTask = new Task(input);
+                case "todo":
+                case "deadline":
+                case "event":
+                    Task newTask = createTask(input);
                     tasks.add(newTask);
-                    System.out.println("added: " + newTask.getDescription());
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(newTask);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    break;
             }
             input = sc.nextLine();
         }
