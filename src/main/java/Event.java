@@ -1,6 +1,5 @@
 import java.lang.String;
 
-
 public class Event extends Task{
 
     private final String TYPE = "E";

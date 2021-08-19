@@ -181,6 +181,38 @@ public class BotBrain {
     }
 
     /**
+     * A method to identify the command types
+     * and Convert from String to Enum
+     * @param command
+     * @return enum CommandInput
+     * @throws InvalidCommandException
+     */
+    private CommandInput identifyCommand(String command) throws InvalidCommandException{
+        String commandInitial = command.trim().split(" ")[0];
+        CommandInput taskType;
+
+        if (commandInitial.equals("bye")) {
+            taskType = CommandInput.BYE;
+        } else if (commandInitial.equals("list")) {
+            taskType = CommandInput.LIST;
+        } else if (commandInitial.equals("done")) {
+            taskType = CommandInput.DONE;
+        } else if (commandInitial.equals("delete")) {
+            taskType = CommandInput.DELETE;
+        } else if (commandInitial.equals("todo")) {
+            taskType = CommandInput.TODO;
+        } else if (commandInitial.equals("deadline")) {
+            taskType = CommandInput.DEADLINE;
+        } else if (commandInitial.equals("event")) {
+            taskType = CommandInput.EVENT;
+        } else {
+            throw new InvalidCommandException(botMemory.ERROR_MESSAGE_INVALID_COMMAND);
+        }
+
+        return taskType;
+    }
+
+    /**
      * A method to read the user's input and respond to it
      */
     private void interact() {
@@ -188,18 +220,24 @@ public class BotBrain {
         while (true) {
             try {
                 String input = sc.nextLine().trim();
-                if (input.equals("bye")) {
-                    botPrinter.print(botMemory.MESSAGE_GOODBYE);
-                    return;
-                } else if (input.equals("list")) {
-                    botPrinter.print(formatTaskTracker());
-                } else if (input.startsWith("done")) {
-                    markTaskAsDone(input);
-                } else if (input.startsWith("delete")){
-                    deleteTaskFromList(input);
-                } else {
-                    classifyTask(input);
-                    generateTaskFeedback();
+                CommandInput commandInitial = identifyCommand(input);
+
+                switch (commandInitial) {
+                    case BYE:
+                        botPrinter.print(botMemory.MESSAGE_GOODBYE);
+                        return;
+                    case LIST:
+                        botPrinter.print(formatTaskTracker());
+                        break;
+                    case DONE:
+                        markTaskAsDone(input);
+                        break;
+                    case DELETE:
+                        deleteTaskFromList(input);
+                        break;
+                    default:
+                        classifyTask(input);
+                        generateTaskFeedback();
                 }
             }
             catch (Exception error){
@@ -211,7 +249,7 @@ public class BotBrain {
     /**
      * A method to initiate the bot's brain to interact with the user
      */
-    void initiate() {
+    public void initiate() {
         System.out.println("\t" + botMemory.LOGO.replaceAll("\n", "\n\t"));
         botPrinter.print(botMemory.MESSAGE_GREETING);
         this.interact();

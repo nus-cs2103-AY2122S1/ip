@@ -12,7 +12,7 @@ public class BotPrinter {
      * prints each input message within the two horizontal divider
      * @param input
      */
-    void print(String input){
+    public void print(String input){
         System.out.println(HORIZONTAL_LINE);
         System.out.println("\t" + input);
         System.out.println(HORIZONTAL_LINE);
