@@ -2,17 +2,17 @@ import java.util.*;
 import java.lang.*;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String linebreak = "~~*********___\\(owo)/___\\(owo)/___*********~~\n";
+                + "|____/ \\__,_|_|\\_\\___|\n\n";
+        String linebreak = "~~*********___\\(owo)/___\\(owo)/___*********~~\n\n";
         System.out.println(linebreak
-                + "Hewwo!! From:\n"
+                + "Hewwo!! From:\n\n"
                 + logo
-                + "How mayw Iw hewlp youw, Mastwer? uwu\n"
+                + "How mayw Iw hewlp youw, Mastwer? uwu\n\n"
                 + linebreak);
 
         Scanner in = new Scanner(System.in);
@@ -33,7 +33,7 @@ public class Duke {
             } else if (str.equalsIgnoreCase("list")) {
                 // lists history of past tasks
                 System.out.println(linebreak);
-                System.out.println("Uwu! Herw arw yourw taskws:\n");
+                System.out.println("Uwu! Herw arw yourw taskws:\n\n");
                 int counter = 0;
                 while (taskarr[counter] != null || counter >= 100) {
                     System.out.println(counter
@@ -45,23 +45,30 @@ public class Duke {
                 System.out.println(linebreak);
             } else if (strparse.length > 0 && strparse[0].equalsIgnoreCase("todo")) {
                 // adds a todo task to the list
-                StringBuilder taskb = new StringBuilder();
-                for (int i = 1; i < strparse.length; i++) {
-                    taskb.append(strparse[i]);
-                    if (i != strparse.length - 1) {
-                        taskb.append(" ");
+                try {
+                    StringBuilder taskb = new StringBuilder();
+                    if (strparse.length == 1) {
+                        throw new DukeException("Ohww noww! Thew descwiption of todow cannyotw bew emptwpy.\n\n");
                     }
-                }
-                taskarr[arrcounter] = new Todo(taskb.toString());
-                arrcounter++;
+                    for (int i = 1; i < strparse.length; i++) {
+                        taskb.append(strparse[i]);
+                        if (i != strparse.length - 1) {
+                            taskb.append(" ");
+                        }
+                    }
+                    taskarr[arrcounter] = new Todo(taskb.toString());
+                    arrcounter++;
 
-                System.out.println(linebreak);
-                System.out.println("Uwu! Addewd yourw taskws:\n");
-                System.out.println("   " + taskarr[arrcounter - 1].toString());
-                System.out.println("\nYouw noww havew "
-                        + (arrcounter)
-                        + " taskw(s) inw thew wist! uwu\n");
-                System.out.println(linebreak);
+                    System.out.println(linebreak);
+                    System.out.println("Uwu! Addewd yourw taskws:\n\n");
+                    System.out.println("   " + taskarr[arrcounter - 1].toString());
+                    System.out.println("Youw noww havew "
+                            + (arrcounter)
+                            + " taskw(s) inw thew wist! uwu\n\n");
+                    System.out.println(linebreak);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             } else if (strparse[0].equalsIgnoreCase("deadline")) {
                 // adds a deadline task to the list. now with no deadline assumption
                 StringBuilder taskb = new StringBuilder();
@@ -87,11 +94,11 @@ public class Duke {
                 arrcounter++;
 
                 System.out.println(linebreak);
-                System.out.println("Uwu! Addewd yourw taskws:\n");
+                System.out.println("Uwu! Addewd yourw taskws:\n\n");
                 System.out.println("   " + taskarr[arrcounter - 1].toString());
-                System.out.println("\nYouw noww havew "
+                System.out.println("Youw noww havew "
                         + (arrcounter)
-                        + " taskw(s) inw thew wist! uwu\n");
+                        + " taskw(s) inw thew wist! uwu\n\n");
                 System.out.println(linebreak);
             } else if (strparse[0].equalsIgnoreCase("event")) {
                 // adds an event to the list. pretty much like deadline.
@@ -118,11 +125,11 @@ public class Duke {
                 arrcounter++;
 
                 System.out.println(linebreak);
-                System.out.println("Uwu! Addewd yourw taskws:\n");
+                System.out.println("Uwu! Addewd yourw taskws:\n\n");
                 System.out.println("   " + taskarr[arrcounter - 1].toString());
-                System.out.println("\nYouw noww havew "
+                System.out.println("Youw noww havew "
                         + (arrcounter)
-                        + " taskw(s) inw thew wist! uwu\n");
+                        + " taskw(s) inw thew wist! uwu\n\n");
                 System.out.println(linebreak);
             } else if (strparse.length == 2 && strparse[0].equalsIgnoreCase("done")) {
                 // checks for 'done' and integer keywords
@@ -142,8 +149,7 @@ public class Duke {
                     int i = Integer.parseInt(strparse[1]);
                     taskarr[i].markAsDone();
                     System.out.println(linebreak);
-                    System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n"
-                            + "\n"
+                    System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n\n"
                             + "   "
                             + i
                             + ". "
@@ -154,29 +160,24 @@ public class Duke {
                     taskarr[arrcounter] = new Task(str);
                     arrcounter++;
                     System.out.println(linebreak
-                            +  '\n'
                             + "Addwed!: "
                             + str
-                            + '\n'
-                            + '\n'
+                            + "\n\n"
                             + linebreak);
                 }
             } else {
-                System.out.println(linebreak
-                        +  '\n'
-                        + "Sowwy, thiws commandw iswn't supporwted TwT\n"
-                        + '\n'
-                        + linebreak);
+                try {
+                    throw new DukeException("Sowwy, thiws commandw iswn't supporwted TwT\n\n");
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
 
 
         // closing lines
         System.out.println(linebreak
-                + '\n'
-                + "Goodbywe, Mastwer! Seew youw soown!"
-                + '\n'
-                + '\n'
+                + "Goodbywe, Mastwer! Seew youw soown!\n\n"
                 + linebreak);
     }
 }
