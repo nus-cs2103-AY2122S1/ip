@@ -35,10 +35,17 @@ public class Duke {
                     command = s.nextLine();
                     break;
                 case "todo":
-                    Todo toAdd = new Todo(command.substring(5));
-                    list[listNumber] = toAdd;
-                    listNumber += 1;
-                    update(toAdd);
+                    try {
+                        if (command.equals("todo") || command.equals("todo ")) {
+                            throw new DukeException();
+                        }
+                        Todo toAdd = new Todo(command.split(" ", 2)[1]);
+                        list[listNumber] = toAdd;
+                        listNumber += 1;
+                        update(toAdd);
+                    } catch (DukeException exception) {
+                        System.out.println(exception.getMessage());
+                    }
                     command = s.nextLine();
                     break;
                 case "deadline":
@@ -62,9 +69,7 @@ public class Duke {
                     command = s.nextLine();
                     break;
                 default:
-                    System.out.println("added: " + command);
-                    list[listNumber]= new Task(command);
-                    listNumber += 1;
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     command = s.nextLine();
             }
         }
