@@ -27,20 +27,27 @@ public class Duke {
                     System.out.println((i + 1) + ". " + taskList[i].toString());
                 }
             }else if(input.split(" ")[0].equals("done")){
-//                if(input.split(" ").length > 2) {
-//                    addTask(new Task(input));
-//                }else {
-//                    try {
-//                        int taskIndex = Integer.parseInt(input.split(" ")[1]);
-//                        taskList[taskIndex - 1].markCompleted();
-//                        System.out.println("Nice! I've marked this task as done:\n" + taskList[taskIndex - 1].toString());
-//                    } catch (NumberFormatException e) {
-//                        System.out.println("");
-//                    }
-//                }
                 int taskIndex = Integer.parseInt(input.split(" ")[1]);
                 taskList[taskIndex - 1].markCompleted();
                 System.out.println("Nice! I've marked this task as done:\n" + taskList[taskIndex - 1].toString());
+            } else if(input.split("todo").length == 0) {
+                try {
+                    throw new DukeException.emptyToDoDescriptionException();
+                } catch (DukeException.emptyToDoDescriptionException e) {
+                    e.exceptionMessage();
+                }
+            }else if(input.split("deadline").length == 0) {
+                try {
+                    throw new DukeException.emptyDeadlineDescriptionException();
+                } catch (DukeException.emptyDeadlineDescriptionException e) {
+                    e.exceptionMessage();
+                }
+            }else if(input.split("event").length == 0) {
+                try {
+                    throw new DukeException.emptyEventDescriptionException();
+                } catch (DukeException.emptyEventDescriptionException e) {
+                    e.exceptionMessage();
+                }
             } else if(input.split("event")[0].equals("")) {
                 String taskContent = input.split("event ")[1];
                 Task newEvent = new Event(taskContent);
@@ -56,6 +63,7 @@ public class Duke {
                         "  " + newEvent.toString() + "\n" +
                         "Now you have " + index + " tasks in the list.");
             } else if(input.split("todo")[0].equals("")) {
+
                 String taskContent = input.split("todo ")[1];
                 Task newEvent = new ToDo(taskContent);
                 addTask(newEvent);
@@ -64,8 +72,11 @@ public class Duke {
                         "Now you have " + index + " tasks in the list.");
             }
             else {
-                System.out.println("added: " + input);
-                addTask(new Task(input));
+                try{
+                    throw new DukeException.invalidInputException();
+                } catch (DukeException.invalidInputException e) {
+                    e.exceptionMessage();
+                }
             }
         }
     }
