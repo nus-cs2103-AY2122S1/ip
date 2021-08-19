@@ -5,6 +5,12 @@ public class Duke {
     private static final Task[] list = new Task[100];
     private static int listNumber = 0;
 
+    private static void update(Task t) {
+        System.out.println("Got it. I've added this task: \n  "
+                + t.toString()
+                + "\nNow you have " + listNumber + " tasks in the list.");
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -21,7 +27,7 @@ public class Duke {
                     for (int i = 0; i < listNumber; i++) {
                         int num = i + 1;
                         if (list[i] != null) {
-                            System.out.println(num + "." + list[i].getStatusIcon()+ list[i].description);
+                            System.out.println(num + "." + list[i].toString());
                         }
                     }
                     command = s.nextLine();
@@ -29,8 +35,34 @@ public class Duke {
                 case "done":
                     int finished = Integer.parseInt(command.split(" ")[1]) - 1;
                     list[finished].markAsDone();
-                    System.out.println("Nice! I've marked this task as done:\n" + "  " + list[finished].getStatusIcon()
-                            + list[finished].description);
+                    System.out.println("Nice! I've marked this task as done:\n" + "  " + list[finished].toString());
+                    command = s.nextLine();
+                    break;
+                case "todo":
+                    Todo toAdd = new Todo(command.substring(5));
+                    list[listNumber] = toAdd;
+                    listNumber += 1;
+                    update(toAdd);
+                    command = s.nextLine();
+                    break;
+                case "deadline":
+                    String[] splitD = command.split(" ", 2)[1].split(" /by ", 2);
+                    String first = splitD[0];
+                    String second = splitD[1];
+                    Deadline toAdd2 = new Deadline(first, second);
+                    list[listNumber] = toAdd2;
+                    listNumber += 1;
+                    update(toAdd2);
+                    command = s.nextLine();
+                    break;
+                case "event":
+                    String[] splitE = command.split(" ", 2)[1].split(" /at ", 2);
+                    String one = splitE[0];
+                    String two = splitE[1];
+                    Event toAdd3 = new Event(one, two);
+                    list[listNumber] = toAdd3;
+                    listNumber += 1;
+                    update(toAdd3);
                     command = s.nextLine();
                     break;
                 default:
