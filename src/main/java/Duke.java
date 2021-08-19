@@ -33,6 +33,9 @@ public class Duke {
             case "deadline":
                 addDeadline(splitInput);
                 break;
+            case "delete":
+                deleteFromList(splitInput);
+                break;
             default:
                 System.out.println("Command not recognised, sorry.");
                 break;
@@ -125,7 +128,7 @@ public class Duke {
      */
     private static void add(Task task) {
         itemList.add(task);
-        System.out.println("Sure thing. Added to list:\n" + task + "");
+        System.out.println("Sure thing. Added to list:\n" + task + "\nNumber of tasks in list: " + itemList.size());
     }
 
     /**
@@ -139,6 +142,32 @@ public class Duke {
                 System.out.println((i + 1) + ". " + itemList.get(i));
             }
         }
+    }
+
+    private static void deleteFromList(String[] input) {
+        if (input.length < 2) {
+            System.out.println("Error: must specify the index number of task to be deleted.\nexample:\ndelete 1");
+        } else if (itemList.isEmpty()) {
+            System.out.println("No tasks in list!");
+        } else {
+            try {
+
+                int index = Integer.parseInt(input[1]) - 1;
+
+                if (index < 0 || index >= itemList.size()) {
+                    System.out.println("Invalid input, please enter a number from 1 to " + itemList.size());
+                } else {
+                    Task t = itemList.get(index);
+                    itemList.remove(index);
+                    System.out.println("Okay then, I've removed this from the list:\n" + t +
+                            "\nNumber of tasks in list: " + itemList.size());
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input, please enter a number from 1 to " + itemList.size());
+            }
+        }
+
     }
 
     /**
