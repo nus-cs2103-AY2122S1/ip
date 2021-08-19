@@ -1,6 +1,9 @@
 todo eat
-deadline return book /by 20/8/2021
+todo cs2103 tut
+list
 done 1
+deadline return book /by 20/8/2021
+done 2
 event meeting /at Monday
 list
 bye

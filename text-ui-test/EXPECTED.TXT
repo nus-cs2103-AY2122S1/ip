@@ -4,28 +4,43 @@
   _________________________________
   _________________________________
   Got it. I've added this task:
-    [T][ ] borrow book
-  Now you have 0 tasks in the list.
-  _________________________________
-  _________________________________
-  Here are the tasks in your list:
-  1.  [T][ ] borrow book
-  _________________________________
-  _________________________________
-  Got it. I've added this task:
-    [D][ ] return book (by: sunday)
+    [T][ ] eat
   Now you have 1 tasks in the list.
   _________________________________
   _________________________________
   Got it. I've added this task:
-    [E][ ] project meeting (at: Mon 2-4pm)
+    [T][ ] cs2103 tut
   Now you have 2 tasks in the list.
   _________________________________
   _________________________________
   Here are the tasks in your list:
-  1.  [T][ ] borrow book
-  2.  [D][ ] return book (by: sunday)
-  3.  [E][ ] project meeting (at: Mon 2-4pm)
+  1.  [T][ ] eat
+  2.  [T][ ] cs2103 tut
+  _________________________________
+  _________________________________
+  Nice! I've marked this task as done:
+   [T][X] eat
+  _________________________________
+  _________________________________
+  Got it. I've added this task:
+    [D][ ] return book (by: 20/8/2021)
+  Now you have 3 tasks in the list.
+  _________________________________
+  _________________________________
+  Nice! I've marked this task as done:
+   [T][X] cs2103 tut
+  _________________________________
+  _________________________________
+  Got it. I've added this task:
+    [E][ ] meeting (at: Monday)
+  Now you have 4 tasks in the list.
+  _________________________________
+  _________________________________
+  Here are the tasks in your list:
+  1.  [T][X] eat
+  2.  [T][X] cs2103 tut
+  3.  [D][ ] return book (by: 20/8/2021)
+  4.  [E][ ] meeting (at: Monday)
   _________________________________
   _________________________________
   Bye. Hope to see you again soon!
