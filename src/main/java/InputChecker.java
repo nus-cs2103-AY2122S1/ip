@@ -18,6 +18,10 @@ public class InputChecker {
 
         } else if (s.contains("done") && s.length() > 4){
 
+        } else if (s.equals("delete")) {
+            throw new DukeException("Please specify what you are deleting!");
+        } else if (s.contains("delete")) {
+
         } else {
             throw new DukeException("Sorry! I don't get what you're saying!");
         }

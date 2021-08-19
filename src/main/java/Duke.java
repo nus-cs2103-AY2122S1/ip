@@ -58,6 +58,13 @@ public class Duke {
                     }
                 }
                 System.out.println("Now you have " + lst.size() + " tasks in the list.");
+            } else if(inpt_str.contains("delete")){
+                if(inpt_str.length() > 7){
+                    int order = Integer.parseInt(inpt.getString().substring(7)); //getting the order of the task
+                    System.out.println("Noted! I have removed this task: \n" + lst.get(order-1).toString());
+                    lst.remove(order-1);
+                    System.out.println("Now you have " + lst.size() + " tasks in the list.");
+                }
             }
             inpt_str = sc.nextLine();
 
