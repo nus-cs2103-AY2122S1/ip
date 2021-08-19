@@ -8,7 +8,7 @@ public class BotBrain {
     private List<Task> taskTracker = botMemory.taskTracker;
 
     /**
-     * Consttrcutor
+     * Constrcutor
      */
     BotBrain() {
 
@@ -39,7 +39,7 @@ public class BotBrain {
 
         switch (taskType){
             case "todo":
-                //  if "todo" is entered without anymore information
+                //  throw invalid format exception if "todo" is entered without anymore information
                 if (inputToken.length == 1) {
                     throw new InvalidCommandFormatException(botMemory.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
                 }
@@ -49,7 +49,7 @@ public class BotBrain {
             case "deadline":
                 String[] deadlineTask = inputToken[1].split(" /by ", 2);
 
-                // if deadline is not in the format of "task /by time"
+                // throw invalid format exception if deadline is not in the format of "task /by time"
                 if (deadlineTask.length != 2) {
                     throw new InvalidCommandFormatException(botMemory.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
                 }
@@ -59,7 +59,7 @@ public class BotBrain {
             case "event":
                 String[] eventTask = inputToken[1].split(" /at ", 2);
 
-                // if event is not in the format of "task /at time"
+                // throw invalid command format if event is not in the format of "task /at time"
                 if (eventTask.length != 2) {
                     throw new InvalidCommandFormatException(botMemory.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
                 }
@@ -91,7 +91,7 @@ public class BotBrain {
      * @throws EmptyTaskListException for empty list
      */
     private String formatTaskTracker() throws EmptyTaskListException {
-        // if task list is empty
+        // throw empty list exception if task list is empty
         if (taskTracker.size() == 0) {
             throw new EmptyTaskListException(botMemory.ERROR_MESSAGE_EMPTY_TASKLIST);
         }
@@ -128,7 +128,7 @@ public class BotBrain {
      * @throws InvalidTaskIndexException
      */
     private void checkTaskListModificationCommand(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
-        // if index entered is not an Integer
+        // throw invalid index exception if index entered is not an Integer
         if (!isInteger(input.split(" ", 2)[1])) {
             throw new InvalidTaskIndexException(botMemory.ERROR_MESSAGE_INVALID_TASK_INDEX);
         }
@@ -179,8 +179,6 @@ public class BotBrain {
         taskTracker.remove(removedTask);
         botPrinter.print(output);
     }
-
-
 
     /**
      * A method to read the user's input and respond to it
