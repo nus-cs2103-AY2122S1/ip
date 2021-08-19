@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     public static DeleteCommand of(String index) {
-        return new DeleteCommand(Integer.parseInt(index));
+        return new DeleteCommand(Integer.parseInt(index) - 1);
     }
 
     @Override
