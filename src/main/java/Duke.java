@@ -62,9 +62,22 @@ public class Duke {
                         + Duke.tasks[item - 1];
                 System.out.println(wrapAsMessage(doneMessage));
             } else {
-                String addMessage = "\tadded: " + input;
+                Task task = null;
+                if (inputSplit[0].equals("todo")) {
+                    task = new ToDo(inputSplit[1]);
+                } else if (inputSplit[0].equals("deadline")) {
+                    String[] information = inputSplit[1].split("/by ");
+                    task = new Deadline(information[0], information[1]);
+                } else if (inputSplit[0].equals("event")) {
+                    String[] information = inputSplit[1].split("/at ");
+                    task = new Event(information[0], information[1]);
+                }
+                Duke.addTask(task);
+                String addMessage = "\tGot it. I've added this task:\n\t\t"
+                        + task
+                        + "\n\tTask(s) remaining in the list: "
+                        + Duke.numOfTasks;
                 System.out.println(Duke.wrapAsMessage(addMessage));
-                Duke.addTask(new Task(input));
             }
             input = scanner.next();
         }
