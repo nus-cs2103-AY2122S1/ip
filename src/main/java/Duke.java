@@ -34,14 +34,7 @@ public class Duke {
     public static String listBeautify(ArrayList<Task> taskArrayList) {
         StringBuilder listBeautified = new StringBuilder();
         for (int i = 0; i < taskArrayList.size(); i++) {
-            listBeautified.append(i + 1).append(".")
-                    .append("[")
-                    .append(taskArrayList.get(i).getTypeIcon())
-                    .append("]")
-                    .append("[")
-                    .append(taskArrayList.get(i).getStatusIcon())
-                    .append("]")
-                    .append(taskArrayList.get(i).description);
+            listBeautified.append(taskBeautify(taskArrayList.get(i), (i + 1)));
             if (i < taskArrayList.size() - 1) { // new line except for last item
                 listBeautified.append("\n");
             }
