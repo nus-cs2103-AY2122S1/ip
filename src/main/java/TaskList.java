@@ -19,16 +19,6 @@ public class TaskList {
                 + "\nNow you have " + this.tasklist.size() + " tasks in the list.");
     }
 
-    public void removeTask(int index) {
-        this.tasklist.remove(index);
-    }
-
-    public String removeTaskToString(Task task) {
-        return ("Noted. I've removed this task: \n" +
-                task.toString()
-                + "\nNow you have " + this.tasklist.size() + " tasks in the list.");
-    }
-
     public Task getTask(int index) {
         return this.tasklist.get(index);
     }
