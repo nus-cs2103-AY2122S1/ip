@@ -55,6 +55,14 @@ public class Duke {
                 System.out.println("\t " + list[taskNo]);
                 System.out.println(lineBreak);
                 done[taskNo] = true;
+            } else if (response.matches("delete ([0-9]|[1-9][0-9])")) {
+                int taskNo = Integer.parseInt(response.replaceAll("\\D", "")) - 1;
+                System.out.println(lineBreak);
+                System.out.println("\t Noted. I've removed this task:");
+                System.out.println("\t " + list[taskNo]);
+                System.out.println("\t Now you have " + (amount - 1) + " tasks in the list.");
+                System.out.println(lineBreak);
+                list[taskNo] = "deleted";
             } else if (response.matches("todo .+")) {
                 System.out.println(lineBreak);
                 System.out.println("\t Got it. I've added this task:");
@@ -107,7 +115,6 @@ public class Duke {
             }
             response = scanner.nextLine();
         }
-
         System.out.println(lineBreak);
         System.out.println("\t Bye! Talk again sometime!");
         System.out.println(lineBreak);
