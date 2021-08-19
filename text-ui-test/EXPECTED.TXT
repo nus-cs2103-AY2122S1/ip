@@ -1,6 +1,9 @@
    (=^ ･ｪ･^=) < Hello! I'm TiTi~ 
                 What would you like to do nya? 
    (=^ ･x･^=)? < Nya?... I can't find what you are looking for...
+   (=^ ･x･^=)? < Nya? Give me a description of the task.
+   (=^ ･x･^=)? < Nya? Give me a description of the task.
+   (=^ ･ｪ･^=) < Looks like you have no tasks nya~
    (=^ ･ｪ･^=) < A new task? I'll add this to the list:
                   [T][ ] read book
                 We now have 1 task on our list.
@@ -37,20 +40,4 @@
                 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
                 4. [T][X] join sports club
                 5. [T][ ] borrow book
-   (=^ ･ｪ･^=) < A new deadline? Sounds tough nya...
-                  [D][ ] do homework (by: no idea :-P)
-                We now have 6 tasks on our list.
-                Gambatte nya~
-   (=^ ･ｪ･^=) < A new event? Let me record it down:
-                  [E][ ] project meeting (at: Mon 2-4pm)
-                We now have 7 tasks on our list.
-                I'll be waiting nya~
-   (=^ ･ｪ･^=) < Have you competed these tasks nya?
-                1. [T][X] read book
-                2. [D][ ] return book (by: June 6th)
-                3. [E][ ] project meeting (at: Aug 6th 2-4pm)
-                4. [T][X] join sports club
-                5. [T][ ] borrow book
-                6. [D][ ] do homework (by: no idea :-P)
-                7. [E][ ] project meeting (at: Mon 2-4pm)
    (=^ ‐ｪ‐^=) < Already done? Come back again soon nya~

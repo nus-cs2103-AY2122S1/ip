@@ -63,6 +63,14 @@ public class Duke {
                 continue;
             }
 
+            // handle missing description
+            if ((cue.equals("todo") || cue.equals("deadline") || cue.equals("event"))
+                    && input.split(" ", 2).length == 1) {
+                System.out.println(confused + "Nya? Give me a description of the task.");
+                input = sc.nextLine();
+                continue;
+            }
+
             // add todo to list
             if (cue.equals("todo")) {
                 String task = input.split(" ", 2)[1];
