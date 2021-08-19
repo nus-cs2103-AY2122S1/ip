@@ -43,7 +43,7 @@ public class Duke {
      * attempting to amend the list of Tasks when it is currently empty.
      */
 
-    public void run() {
+    private void run() {
 
         greet();
 
