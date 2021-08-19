@@ -66,6 +66,17 @@ public class Duke {
                 .append(task.getStatusIcon())
                 .append("]")
                 .append(taskArrayList.get(index - 1).description);
+
+        // if task has reminder, append reminder to the end of string
+        if (task.taskType == "deadline") {
+            taskBeautified.append(" (by: ")
+                    .append(task.getReminder())
+                    .append(")");
+        } else if (task.taskType == "event") {
+            taskBeautified.append(" (at: ")
+                    .append(task.getReminder())
+                    .append(")");
+        }
         return taskBeautified.toString();
     }
 
@@ -127,17 +138,18 @@ public class Duke {
                             break;
                         case "deadline":
                             scanner.useDelimiter("\\s*/by\\s*");
-                            String deadlineName = scanner.next();
-                            System.out.println("dN: " + deadlineName);
-                            String deadlineReminder = scanner.nextLine();
-                            System.out.println("dR: " + deadlineReminder);
-                            Task newestDeadline = new Task(deadlineName, "deadline");
+                            String[] tokens = scanner.nextLine().split("\\s*/by\\s*");
+                            System.out.println("token length: " + tokens.length);
+                            String deadlineName = tokens[0];
+                            String deadlineReminder = tokens[1];
+                            Task newestDeadline = new Task(deadlineName, "deadline", deadlineReminder);
                             taskArrayList.add(newestDeadline);
                             System.out.println(sandwich("New task added: \n"
                                     + taskBeautify(newestDeadline, taskArrayList.size())
                                     + "\n You now have "
                                     + taskArrayList.size()
                                     + " items in your task list."));
+                            scanner.reset();
                             break;
                         case "event":
                             scanner.useDelimiter("\\s*/at\\s*");
@@ -152,34 +164,6 @@ public class Duke {
                             break;
                     }
                 }
-//                if (userInput.equals("done")) { // first input is done, check second input for integer
-//                    if (scanner.hasNextInt()) {
-//                        int taskNum = scanner.nextInt();
-//                        taskArrayList.get(taskNum - 1).markAsDone();
-//                        System.out.println(sandwich("Congratulations! You finished task "
-//                                + taskNum
-//                                + ": [X] "
-//                                + taskArrayList.get(taskNum - 1).description));
-//                    }
-//                } else if (userInput.equals("list")) { // user inputs 'list', return all text stored
-//                    StringBuilder userInputsList = new StringBuilder();
-//                    for (int i = 0; i < taskArrayList.size() - 1; i++) { // new line except for last item
-//                        userInputsList.append(i + 1).append(".")
-//                                .append("[")
-//                                .append(taskArrayList.get(i).getStatusIcon())
-//                                .append("] ")
-//                                .append(taskArrayList.get(i).description).append("\n"); // formatted for nicer look
-//                    }
-//                    userInputsList.append(taskArrayList.size()).append(".")
-//                            .append("[")
-//                            .append(taskArrayList.get(taskArrayList.size() - 1).getStatusIcon())
-//                            .append("] ")
-//                            .append(taskArrayList.get(taskArrayList.size() - 1).description); // no \n for last item
-//                    System.out.println(sandwich(userInputsList.toString()));
-//                } else { // store userInput, tell user their input has been added
-//                    taskArrayList.add(new Task(userInput, "old"));
-//                    System.out.println(sandwich("Task added: " + userInput));
-//                }
             }
         }
     }
