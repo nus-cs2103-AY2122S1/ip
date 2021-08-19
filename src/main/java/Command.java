@@ -149,6 +149,8 @@ public class Command {
       case "LIST": return Action.LIST;
       case "DONE": return Action.DONE;
       case "DELETE": return Action.DELETE;
+      case "TODO": return Action.TODO;
+      case "DEADLINE": return Action.DEADLINE;
       case "EVENT": return Action.EVENT;
       case "ECHO": return Action.ECHO;
       case "ADD": return Action.ADD;
