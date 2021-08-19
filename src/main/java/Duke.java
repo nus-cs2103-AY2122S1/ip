@@ -60,12 +60,32 @@ public class Duke {
                         }
                     }
                     break;
+                case ("todo"):
+                    if (wordArray.length < 2) {
+                        System.out.println("Please enter a task name!");
+                    } else {
+                        String newDesc = tempString.substring(5);
+                        storage[index] = new Todo(newDesc);
+                        Task tempTask = storage[index];
+                        index++;
+                        System.out.println("Got it. I've added this task:\n"
+                                + "  " + tempTask.toString() + "\n"
+                                + "Now you have " + getLength(storage)
+                                + " task" + (getLength(storage) > 1 ? "s" : "") + " in the list.");
+                    }
+                    break;
                 default:    // add a new task if no command word is detected
-                    storage[index] = new Task(tempString);
-                    index++;
-                    System.out.println("added: " + tempString);
+                    System.out.println("Command not recognised!");
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static <T> int getLength(T[] arr){
+        int count = 0;
+        for(T element : arr) {
+            if (element != null) ++count;
+        }
+        return count;
     }
 }
