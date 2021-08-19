@@ -69,4 +69,14 @@ public class TodoList {
         }
     }
 
+    public String deleteTask(int index) throws IndexNotInListException {
+        if (index < 1 || index > list.size()) {
+            throw new IndexNotInListException("Haiyo, you sure there is a task " + index + " anot...");
+        } else {
+            Task task = list.remove(index-1);
+            return "OK, uncle removed a task for you liao.\n" + "      " + task.toString()
+                    + "\n      You now have " + list.size() + " tasks remaining.";
+        }
+    }
+
 }

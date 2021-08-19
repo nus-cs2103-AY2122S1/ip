@@ -43,8 +43,11 @@ public class Duke {
         } else if (containsDone(input)) {
             completeTask(input);
             respondTo(sc);
-        } else if (isTask(input)) {
+        } else if (containsTask(input)) {
             insertTask(input);
+            respondTo(sc);
+        } else if (containsDelete(input)) {
+            deleteTask(input);
             respondTo(sc);
         } else {
             try {
@@ -85,14 +88,34 @@ public class Duke {
         }
     }
 
+    public static void deleteTask(String input) {
+        try {
+            String first = input.split(" ")[0];
+            String second = input.split(" ")[1];
+            int value = Integer.parseInt(second);
+            formatMessages(todolist.deleteTask(value));
+        } catch (IndexNotInListException e) {
+            formatMessages(e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            formatMessages("Eh, I don't have this task leh");
+        }
+    }
+
+    // These Methods return boolean, to check if they are 1) Done ... 2) Is a task 3) Delete...
+
     public static boolean containsDone(String input) {
         String first = input.split(" ")[0];
         return first.equalsIgnoreCase("done");
     }
 
-    public static boolean isTask(String input) {
+    public static boolean containsTask(String input) {
         String first = input.split(" ")[0];
         return first.equalsIgnoreCase("todo")
                 || first.equalsIgnoreCase("event") || first.equalsIgnoreCase("deadline");
+    }
+
+    public static boolean containsDelete(String input) {
+        String first = input.split(" ")[0];
+        return first.equalsIgnoreCase("delete");
     }
 }
