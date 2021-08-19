@@ -1,3 +1,10 @@
+/**
+ * This class is the Duke class to assess input from user.
+ *
+ * @author Deng Huaiyu(G12)
+ * @version CS2103T AY21/22 Semester 1
+ */
+
 import java.util.Scanner;
 
 public class Duke {
@@ -24,6 +31,11 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method to access input from user.
+     *
+     * @param args takes in input
+     */
     public static void main(String[] args) {
         greeting();
         Scanner sc = new Scanner(System.in);

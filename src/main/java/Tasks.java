@@ -1,3 +1,9 @@
+/**
+ * This class stores all tasks of the user.
+ *
+ * @author Deng Huaiyu(G12)
+ * @version CS2103T AY21/22 Semester 1
+ */
 import java.util.ArrayList;
 
 public class Tasks {
@@ -8,6 +14,12 @@ public class Tasks {
     private static String ind2 = "     ";
     private static String div = ind + "____________________________________________________________";
 
+    /**
+     * the method to add a new task according to instruction
+     *
+     * @param t input from the user
+     * @throws DukeException if the input is invalid
+     */
     public void addTask(String t) throws DukeException{
         String[] ss = t.split(" ");
         switch (ss[0]) {
@@ -54,10 +66,6 @@ public class Tasks {
         }
     }
 
-    public ArrayList<Task> getTasks() {
-        return this.tasks;
-    }
-
     private void noteAdded(Task t) {
         int total = tasks.size();
         String sOrNot = "";
@@ -73,6 +81,9 @@ public class Tasks {
         System.out.println(div);
     }
 
+    /**
+     * The toString method to print all tasks in the list.
+     */
     public void printTasks() {
         System.out.println(div);
         System.out.println(ind2 + "Here are the tasks in your list:");
@@ -84,6 +95,12 @@ public class Tasks {
         System.out.println(div);
     }
 
+    /**
+     * The method to complete a task
+     *
+     * @param pos position of the task to be completed
+     * @throws DukeException if the position is invalid throws exceptions
+     */
     public void complete(int pos) throws DukeException {
         if (this.tasks.size()>pos-1 && pos != 0) {
             String p = this.tasks.get(pos-1).finished();
@@ -94,6 +111,12 @@ public class Tasks {
         }
     }
 
+    /**
+     * The method to delete a task
+     *
+     * @param pos position of the task to be deleted
+     * @throws DukeException if the position is invalid throws exceptions
+     */
     public void delete(int pos) throws DukeException {
         if (this.tasks.size()>pos-1 && pos != 0) {
             Task deleted = this.tasks.get(pos-1);
