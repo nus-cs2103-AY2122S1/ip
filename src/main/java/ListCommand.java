@@ -11,10 +11,6 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList taskList, Storage store, Ui ui)
             throws EmptyListException {
-        if (taskList.getSize() != 0) {
-            ui.printList(taskList.loadList());
-        } else {
-            throw new EmptyListException();
-        }
+            taskList.printTasks(ui);
     }
 }

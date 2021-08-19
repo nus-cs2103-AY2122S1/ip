@@ -22,6 +22,13 @@ public class TaskList {
         tasks.add(t);
     }
 
+    public void printTasks(Ui ui) throws EmptyListException {
+        if (this.tasks.size() <= 0) {
+            throw new EmptyListException();
+        }
+        ui.printList(this.tasks);
+    }
+
     public void safeTasks(Storage store) throws DukeFileException {
         try {
             store.safeFile(this.tasks);
