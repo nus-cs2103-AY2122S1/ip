@@ -8,4 +8,9 @@ done 2
 list
 done 5
 done 1
+deadline cook dinner
+event meeting
+deadline
+todo
+sugonma
 bye

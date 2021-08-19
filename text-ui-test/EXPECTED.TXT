@@ -4,23 +4,23 @@ ______________________
 ______________________
 ______________________
  Added: [T][ ] farming leylines
- You now have 1 tasks.
+ You now have 1 task(s).
 ______________________
 ______________________
  Added: [D][ ] clip toenails (by: tomorrow)
- You now have 2 tasks.
+ You now have 2 task(s).
 ______________________
 ______________________
  Added: [D][ ] code (by: tonight 2359)
- You now have 3 tasks.
+ You now have 3 task(s).
 ______________________
 ______________________
  Added: [E][ ] lecture (at: 12pm)
- You now have 4 tasks.
+ You now have 4 task(s).
 ______________________
 ______________________
  Added: [T][ ] brush teeth
- You now have 5 tasks.
+ You now have 5 task(s).
 ______________________
 ______________________
  1. [T][ ] farming leylines
@@ -47,6 +47,21 @@ ______________________
 ______________________
  Successfully marked as done:
  [T][X] farming leylines
+______________________
+______________________
+ Time must be stipulated for deadlines using '/by'
+______________________
+______________________
+ Time must be stipulated for events using '/at'
+______________________
+______________________
+ The description of DEADLINE cannot be empty.
+______________________
+______________________
+ The description of TODO cannot be empty.
+______________________
+______________________
+ Sorry, command does not exist.
 ______________________
 ______________________
  Bye. I love Imagine Dragons.
