@@ -43,30 +43,52 @@ public class Duke {
                         + taskList[listIndex].checkIsDone()
                         + " " + taskList[listIndex].getDescription() + "\n");
             } else {
-                Task newTask = null;
-                if (str.contains("todo ")) {
-                    newTask = new Todo(str);
-                } else if(str.contains("deadline ")) {
-                    String[] parts = str.split("/");
-                    newTask = new Deadline(parts[0], parts[1]);
-                } else if (str.contains("event ")) {
-                    String[] parts = str.split("/");
-                    newTask = new Event(parts[0], parts[1]);
-                }
-                taskList[i++] = newTask;
-                System.out.print("      Roger! I will add this task in: \n"
-                        + "        "
-                        + newTask.getTaskType()
-                        + newTask.checkIsDone()
-                        + " " + newTask.getDescription() + "\n"
-                        + "      Now you have "
-                        + Task.noOfTask
-                        + " tasks left in the list.\n");
+                try {
+                    Task newTask = null;
+                    if (str.contains("todo")) {
+                        newTask = new Todo(str);
+                    } else if (str.contains("deadline")) {
+                        if (!str.contains("/")) {
+                            newTask = new Deadline(str, "");
+                        } else {
+                            String[] parts = str.split("/");
+                            newTask = new Deadline(parts[0], parts[1]);
+                        }
+                    } else if (str.contains("event")) {
+                        if (!str.contains("/")) {
+                            newTask = new Event(str, "");
+                        } else {
+                            String[] parts = str.split("/");
+                            newTask = new Event(parts[0], parts[1]);
+                        }
+                    }
+                    if (newTask != null) {
+                        taskList[i++] = newTask;
+                        System.out.print("      Roger! I will add this task in: \n"
+                                + "        "
+                                + newTask.getTaskType()
+                                + newTask.checkIsDone()
+                                + newTask.getDescription() + "\n"
+                                + "      Now you have "
+                                + Task.noOfTask
+                                + " tasks left in the list.\n");
 
-            }
+                    } else {
+                        throw new WrongInputException();
+                    }
+
+                }
+                catch (DukeException e) {
+                        System.out.print("      "
+                                + e.toString()
+                                + "\n");
+                    }
+
+                }
             System.out.print("    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         }
     }
 }
+
 
 

@@ -5,12 +5,16 @@ public class Task {
     private String taskType;
     static int noOfTask = 0;
 
-    public Task(String description, String taskType) {
-        this.description = description;
-        this.isDone = false;
-        this.isDoneBox = "[ ]";
-        this.taskType = taskType;
-        noOfTask++;
+    public Task(String description, String taskType) throws TaskDescriptionException {
+        if (description.equals("")) {
+            throw new TaskDescriptionException();
+        } else {
+            this.description = description;
+            this.isDone = false;
+            this.isDoneBox = "[ ]";
+            this.taskType = taskType;
+            noOfTask++;
+        }
     }
 
     public String checkIsDone() {
