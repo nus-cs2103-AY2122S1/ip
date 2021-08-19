@@ -10,7 +10,8 @@ public class TaskList {
 
     public String add(Task task) {
         tasks.add(task);
-        return "Got it. I've added this task:\n  " + task + '\n' + "You have " + numTasks() + " tasks in the list\n";
+        return "Got it. I've added this task:\n  " + task + '\n' +
+            "You have " + numTasks() + " tasks in the list\n";
     }
 
     public String markTaskDone(String userInput) throws MalformedCommandException {
@@ -33,6 +34,20 @@ public class TaskList {
            taskStringRepresentation += (i+1) + ". " + tasks.get(i) + "\n";
        }
        return "Here are the tasks in your list:\n" + taskStringRepresentation;
+    }
+
+    public String delete(String userInput) throws MalformedCommandException {
+        try {
+            String userProvidedIndex = userInput.split(" ", 2)[1];
+            int taskIndex = Integer.valueOf(userProvidedIndex) - 1;
+            Task task = tasks.remove(taskIndex);
+            return "Noted. I've removed this task:\n " + task + '\n' +
+                "You have " + numTasks() + " tasks in the list\n";
+        } catch(NumberFormatException | IndexOutOfBoundsException e) {
+            throw new MalformedCommandException(
+                "Please provide a valid integer index for the task you want to delete: " +
+                    "delete [taskIndex in integer form]");
+        }
     }
 
     private int numTasks() {
