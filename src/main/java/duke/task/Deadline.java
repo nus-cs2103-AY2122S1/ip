@@ -52,4 +52,18 @@ public class Deadline extends Task {
                 + this.time.format(DateTimeFormatter.ofPattern(("h:mma")))
                 + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (super.equals(o)) {
+            if (!(o instanceof Deadline)) {
+                return false;
+            } else {
+                Deadline other = (Deadline) o;
+                return other.date.equals(this.date) && other.time.equals(this.time);
+            }
+        } else {
+            return false;
+        }
+    }
 }

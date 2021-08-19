@@ -52,4 +52,18 @@ public class Event extends Task {
                 + this.time.format(DateTimeFormatter.ofPattern("h:mma"))
                 + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (super.equals(o)) {
+            if (!(o instanceof Event)) {
+                return false;
+            } else {
+                Event other = (Event) o;
+                return other.date.equals(this.date) && other.time.equals(this.time);
+            }
+        } else {
+            return false;
+        }
+    }
 }

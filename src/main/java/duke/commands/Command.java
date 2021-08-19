@@ -17,6 +17,7 @@ public abstract class Command {
 
     protected Command(String command) { //for list or bye
         this.command = command;
+        this.description = "";
         if (command.equals("bye")) {
             this.isExit = true;
         } else {
@@ -32,6 +33,7 @@ public abstract class Command {
 
     protected Command(String command, int index) { //For done or delete
         this.command = command;
+        this.description = "";
         this.isExit = false;
         this.index = index;
     }
@@ -41,5 +43,17 @@ public abstract class Command {
 
     public boolean isExit() {
         return this.isExit;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (!(o instanceof Command)) {
+            return false;
+        } else {
+            Command other = (Command) o;
+            return this.command.equals(other.command)
+                    && this.description.equals(other.description)
+                    && (this.index == other.index);
+        }
     }
 }

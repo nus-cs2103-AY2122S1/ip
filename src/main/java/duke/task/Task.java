@@ -33,5 +33,15 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Task)) {
+            return false;
+        } else {
+            Task other = (Task) o;
+            return this.description.equals(other.description) && (isDone == other.isDone);
+        }
+    }
 }
 
