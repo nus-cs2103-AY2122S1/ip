@@ -1,21 +1,19 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    static Task[] tasks = new Task[100];
-    static int numOfTasks = 0;
+    static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void markAsDone(String s) throws DukeException {
         try {
             int taskNum = Integer.parseInt(s.substring(5));
-            Task curr = tasks[taskNum - 1];
+            Task curr = tasks.get(taskNum - 1);
             curr.markAsDone();
             System.out.println("Nice! I've marked this task as done:\n  "
                     + curr.toString());
         } catch (NumberFormatException nfe) {
             throw new DukeException("Please only enter an integer after command 'done'!");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Task number " + s.substring(5) + " does not exist!");
-        } catch (NullPointerException npe) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number " + s.substring(5) + " does not exist!");
         }
     }
@@ -23,10 +21,9 @@ public class Duke {
     public static void addToDo(String s) throws DukeException {
         try {
             Task curr = new ToDo(s.substring(5));
-            tasks[numOfTasks] = curr;
-            numOfTasks += 1;
+            tasks.add(curr);
             System.out.println("Got it. I've added this task:\n  "
-                    + curr.toString() + "\nNow you have " + numOfTasks
+                    + curr.toString() + "\nNow you have " + tasks.size()
                     + " task(s) in the list.");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The description of a todo cannot be empty.");
@@ -37,10 +34,9 @@ public class Duke {
         try {
             int at = s.lastIndexOf(" /at ");
             Task curr = new Event(s.substring(6, at), s.substring(at + 5));
-            tasks[numOfTasks] = curr;
-            numOfTasks += 1;
+            tasks.add(curr);
             System.out.println("Got it. I've added this task:\n  "
-                    + curr.toString() + "\nNow you have " + numOfTasks
+                    + curr.toString() + "\nNow you have " + tasks.size()
                     + " task(s) in the list.");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The description and time of an event cannot be empty.");
@@ -51,10 +47,9 @@ public class Duke {
         try {
             int by = s.lastIndexOf(" /by ");
             Task curr = new Deadline(s.substring(9, by), s.substring(by + 5));
-            tasks[numOfTasks] = curr;
-            numOfTasks += 1;
+            tasks.add(curr);
             System.out.println("Got it. I've added this task:\n  "
-                    + curr.toString() + "\nNow you have " + numOfTasks
+                    + curr.toString() + "\nNow you have " + tasks.size()
                     + " task(s) in the list.");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The description and time of a deadline cannot be empty.");
@@ -78,8 +73,8 @@ public class Duke {
                     System.out.println("Bye. Hope to see you again soon!");
                 } else if (userInput.equals("list")) { // if user enters "list"
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < numOfTasks; i++) {
-                        Task curr = tasks[i];
+                    for (int i = 0; i < tasks.size(); i++) {
+                        Task curr = tasks.get(i);
                         int taskNum = i + 1;
                         System.out.println(taskNum + "." + curr.toString());
                     }
