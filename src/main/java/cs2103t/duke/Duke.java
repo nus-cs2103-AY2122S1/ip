@@ -1,3 +1,5 @@
+package cs2103t.duke;
+
 import cs2103t.duke.command.Command;
 import cs2103t.duke.command.ExitCommand;
 import cs2103t.duke.exception.DukeException;
