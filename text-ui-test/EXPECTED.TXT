@@ -1,7 +1,117 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
 
+	--------------------------------------------------
+
+	   ____  _                       
+	  |  _ \| |                      
+	  | |_) | | ___   ___  _ __ ___  
+	  |  _ <| |/ _ \ / _ \| '_ ` _ \ 
+	  | |_) | | (_) | (_) | | | | | |
+	  |____/|_|\___/ \___/|_| |_| |_|
+
+	 Hello! I'm Bloom
+	 What can I do for you?
+
+	--------------------------------------------------
+
+
+	--------------------------------------------------
+
+	 Got it. I've added this task:
+	   [T][ ] read book
+	 Now you have 1 tasks in the list.
+
+	--------------------------------------------------
+
+
+	--------------------------------------------------
+
+	 Got it. I've added this task:
+	   [D][ ] return book (by: June 6th)
+	 Now you have 2 tasks in the list.
+
+	--------------------------------------------------
+
+
+	--------------------------------------------------
+
+	 Got it. I've added this task:
+	   [E][ ] project meeting (at: Aug 6th 2-4pm)
+	 Now you have 3 tasks in the list.
+
+	--------------------------------------------------
+
+
+	--------------------------------------------------
+
+	 Got it. I've added this task:
+	   [T][ ] joint sports clob
+	 Now you have 4 tasks in the list.
+
+	--------------------------------------------------
+
+
+	--------------------------------------------------
+
+	 Got it. I've added this task:
+	   [T][ ] borrow book
+	 Now you have 5 tasks in the list.
+
+	--------------------------------------------------
+
+
+	--------------------------------------------------
+
+	 Here are the tasks in your list:
+	 1. [T][ ] read book
+	 2. [D][ ] return book (by: June 6th)
+	 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+	 4. [T][ ] joint sports clob
+	 5. [T][ ] borrow book
+
+	--------------------------------------------------
+
+
+	--------------------------------------------------
+
+	 Nice! I've marked this task as done:
+	   [T][X] read book
+
+	--------------------------------------------------
+
+
+	--------------------------------------------------
+
+	 Nice! I've marked this task as done:
+	   [T][X] joint sports clob
+
+	--------------------------------------------------
+
+
+	--------------------------------------------------
+
+	 Here are the tasks in your list:
+	 1. [T][X] read book
+	 2. [D][ ] return book (by: June 6th)
+	 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+	 4. [T][X] joint sports clob
+	 5. [T][ ] borrow book
+
+	--------------------------------------------------
+
+
+	--------------------------------------------------
+
+	 Got it. I've added this task:
+	   [D][ ] return book (by: Sunday)
+	 Now you have 6 tasks in the list.
+
+	--------------------------------------------------
+
+
+	--------------------------------------------------
+
+	 Please input the description and date with correct format.
+	 For task commands, the format should be as follows:
+	       todo [DESCRIPTION]
+	   deadline [DESCRIPTION] /by [DATE]
+	      event [DESCRIPTION] /at [DATE]
