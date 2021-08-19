@@ -1,11 +1,13 @@
 public class MessageFactory {
-    public DukeMessage createMessage(String userStr) {
+    public static DukeMessage createMessage(String userStr) {
         if(userStr == null) {
             return new GreetMessage();
         } else if (userStr.equals("bye")) {
             return new ExitMessage();
+        } else if (userStr.equals("list")) {
+            return new GetTasks();
         } else {
-            return new EchoMessage(userStr);
+            return new AddTask(userStr);
         }
     }
 }
