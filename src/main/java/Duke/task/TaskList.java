@@ -1,5 +1,7 @@
 package Duke.task;
 
+import Duke.exception.NoSuchTaskException;
+
 public class TaskList {
     private final Task[] list;
     private int taskCounter;
@@ -33,9 +35,13 @@ public class TaskList {
         return "Now you have " + taskCounter + " task(s) in the list.";
     }
 
-    public void markDone(int taskPos){
-        list[taskPos].markComplete();
-        System.out.println("\nNice! I've marked this task as done:\n " + list[taskPos] +"\n");
+    public void markDone(int taskPos) throws NoSuchTaskException {
+        if(taskPos >= 0 && taskPos < taskCounter) {
+            list[taskPos].markComplete();
+            System.out.println("\nNice! I've marked this task as done:\n " + list[taskPos] + "\n");
+        }else{
+            throw new NoSuchTaskException();
+        }
     }
 
 }

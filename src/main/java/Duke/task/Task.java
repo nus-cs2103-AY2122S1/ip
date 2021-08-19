@@ -13,7 +13,7 @@ public class Task {
         return this.isCompleted;
     }
 
-    void markComplete(){
+    void markComplete() {
         this.isCompleted = true;
     }
 

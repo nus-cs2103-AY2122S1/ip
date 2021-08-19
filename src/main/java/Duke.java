@@ -1,4 +1,8 @@
 import java.util.Scanner;
+
+import Duke.exception.DukeException;
+import Duke.exception.InvalidCommandException;
+import Duke.exception.InvalidCommandParameterException;
 import Duke.task.TaskList;
 import Duke.task.Todo;
 import Duke.task.Deadline;
@@ -16,37 +20,50 @@ public class Duke {
         String checkForKeyword = inputScanner.next();
 
         while(!input.equals("bye")){
-            if(input.equals("list")){
-                list.listTasks();
-            }else if(checkForKeyword.equals("done")){
-                try {
-                    int taskNumber = inputScanner.nextInt() - 1;
-                    list.markDone(taskNumber);
-
-                }catch(Exception e){
-                    System.out.println("No such task number");
+            try{
+                if(input.equals("list")){
+                    list.listTasks();
+                }else if(checkForKeyword.equals("done")){
+                    if(inputScanner.hasNextInt()){
+                        int taskNumber = inputScanner.nextInt() - 1;
+                        list.markDone(taskNumber);
+                    }else{
+                        throw new InvalidCommandParameterException();
+                    }
                 }
-            }
-            else if(checkForKeyword.equals("todo")){
-                String secondWord = inputScanner.nextLine();
-                list.addTask(new Todo(secondWord));
-            }
-            else if(checkForKeyword.equals("deadline")){
-                String[] contentAndDate = inputScanner.nextLine().split("/by",2);
-                String content = contentAndDate[0];
-                String date = contentAndDate[1];
-                list.addTask(new Deadline(content, date));
-            }
-            else if(checkForKeyword.equals("event")){
-                String[] contentAndDate = inputScanner.nextLine().split("/at",2);
-                String content = contentAndDate[0];
-                String date = contentAndDate[1];
-                list.addTask(new Event(content, date));
-            }
-            else{
-                System.out.println("\nOops i do not understand what you are saying.");
-                System.out.println("These are the commands i am familiar with:");
-                System.out.println("todo [task]\ndeadline [task]/by[time]\nevent [task]/at[time]\nlist\ndone [task number]\n");
+                else if(checkForKeyword.equals("todo")){
+                    if(inputScanner.hasNextLine()) {
+                        String secondWord = inputScanner.nextLine();
+                        list.addTask(new Todo(secondWord));
+                    }else{
+                        throw new InvalidCommandParameterException();
+                    }
+                }
+                else if(checkForKeyword.equals("deadline")){
+                    if(inputScanner.hasNextLine()) {
+                        String[] contentAndDate = inputScanner.nextLine().split("/by", 2);
+                        String content = contentAndDate[0];
+                        String date = contentAndDate[1];
+                        list.addTask(new Deadline(content, date));
+                    }else{
+                        throw new InvalidCommandParameterException();
+                    }
+                }
+                else if(checkForKeyword.equals("event")){
+                    if(inputScanner.hasNextLine()) {
+                        String[] contentAndDate = inputScanner.nextLine().split("/at", 2);
+                        String content = contentAndDate[0];
+                        String date = contentAndDate[1];
+                        list.addTask(new Event(content, date));
+                    }else {
+                        throw new InvalidCommandParameterException();
+                    }
+                }
+                else{
+                    throw new InvalidCommandException();
+                }
+            } catch(DukeException e) {
+                System.out.println("\n" + e.getMessage() + "\n");
             }
             input = scanner.nextLine();
             inputScanner = new Scanner(input);
