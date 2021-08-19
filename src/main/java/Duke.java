@@ -10,14 +10,11 @@ public class Duke {
     private static final String INVALID_NUMBER = "Please input a valid task number";
     private static final String INVALID_DEADLINE_MESSAGE = "Invalid use of deadline command. Use 'deadline <text> /by <datetime>'";
     private static final String INVALID_EVENT_MESSAGE = "Invalid use of event command. Use 'event <text> /at <datetime>'";
-    private static final String INCOHERENT_INPUT_MESSAGE = "I'm sorry, but I don't know what that means :-(";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     // Delimiters
     private static final String DEADLINE_DELIMITER = "/by";
     private static final String EVENT_DELIMITER = "/at";
-
-
 
     public static void main(String[] args) {
         Message.display_message(WELCOME_MESSAGE);
@@ -35,9 +32,7 @@ public class Duke {
                 if (input.length() > firstWord.length() + 1) {
                     remainingText = input.substring(firstWord.length() + 1).trim();
                 }
-                Command command = Command.valueOf(firstWord.toUpperCase());
-                // Verify that the remaining text don't have errors related to number of arguments etc
-                command.verifyArguments(remainingText);
+                Command command = Command.initialiseCommand(firstWord);
                 switch (command) {
                     case LIST:
                         if (taskList.size() == 0) {
@@ -88,8 +83,6 @@ public class Duke {
                         canContinue = false;
                         break;
                 }
-            } catch (IllegalArgumentException err) {
-                Message.display_message(INCOHERENT_INPUT_MESSAGE);
             } catch (DukeException err) {
                 Message.display_message(err.getMessage());
             }

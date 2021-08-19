@@ -53,6 +53,19 @@ public enum Command {
         }
     };
 
+    public static Command initialiseCommand(String commandString) throws DukeException {
+        try {
+            Command command = Command.valueOf(commandString.toUpperCase());
+            // Verify that the remaining text don't have errors related to number of arguments etc
+            command.verifyArguments(commandString);
+            return command;
+        } catch (IllegalArgumentException err) {
+            throw new DukeException(INCOHERENT_INPUT_MESSAGE);
+        }
+    }
+
+    // Errors
+    private static final String INCOHERENT_INPUT_MESSAGE = "I'm sorry, but I don't know what that means :-(";
     private static final String MISSING_DELETE_NUMBER_MESSAGE = "Please input a number after the delete command";
     private static final String MISSING_DONE_NUMBER_MESSAGE = "Please input a number after the done command";
     private static final String MISSING_TODO_MESSAGE = "Please input text after the todo command";
