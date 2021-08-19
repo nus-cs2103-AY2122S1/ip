@@ -21,13 +21,16 @@ public class Duke {
         instance.begin();
     }
 
-    public void begin() {
+    public void begin() throws DukeException{
+        //TODO
+        //Complete better exception handling
+
         //Greet
         welcomeGreet();
 
         //Echo
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            Scanner scanner = new Scanner(System.in);
             System.out.println();
             String command = scanner.nextLine();
 
@@ -37,6 +40,7 @@ public class Duke {
                 System.out.println(" Bye. Hope to see you again soon!");
                 printBreakLine();
                 break;
+
             } else  if (command.equals("list")) {
                 printBreakLine();
                 System.out.println("  Here are the tasks in your list:");
@@ -44,30 +48,62 @@ public class Duke {
                     System.out.printf("  %d. %s%n", i, commandList.get(i - 1)).toString();
                 }
                 printBreakLine();
+
             } else if(command.contains("done")) {
                 int index = Integer.parseInt(command.split(" ")[1]);
                 printBreakLine();
                 commandList.get(index - 1).markAsDone();
                 printBreakLine();
+
+            } else if(command.contains("delete")) {
+                int index = Integer.parseInt(command.split(" ")[1]);
+                printBreakLine();
+                System.out.println("  Noted. I've removed this task:");
+                System.out.println("  " + commandList.get(index - 1).toString());
+                commandList.remove(index - 1);
+                System.out.printf("  Now you have %d tasks in the list.%n", commandList.size());
+                printBreakLine();
+
             } else if(command.contains("todo")){
                 String description = command.split("/by ")[0].substring(5);
+                if (description.isBlank()) {
+                    printBreakLine();
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                }
                 Task newTask = new ToDo(description);
                 commandList.add(newTask);
                 addTaskMsg(newTask);
+
             } else if(command.contains("deadline")) {
+
                 String description = command.split("/by ")[0].substring(9);
                 String by = command.split("/by ")[1];
+
+                if (description.isBlank()) {
+                    printBreakLine();
+                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                }
 
                 Task newTask = new Deadline(description, by);
                 commandList.add(newTask);
                 addTaskMsg(newTask);
+
             } else if(command.contains("event")) {
                 String description = command.split("/at ")[0].substring(6);
                 String by = command.split("/at ")[1];
 
+                if (description.isBlank()) {
+                    printBreakLine();
+                    throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+                }
+
                 Task newTask = new Event(description, by);
                 commandList.add(newTask);
                 addTaskMsg(newTask);
+
+            } else {
+                printBreakLine();
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
