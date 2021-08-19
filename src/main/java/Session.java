@@ -12,7 +12,7 @@ public class Session {
 
     public Session() {
         this.input = new Scanner(System.in);
-        this.taskList = new TaskList(100);
+        this.taskList = new TaskList();
         this.isActive = true;
         this.greet();
         this.listenForInputs();
@@ -50,6 +50,9 @@ public class Session {
                 break;
             case DONE:
                 this.taskList.markAsDone(parsedInput.taskIndex);
+                break;
+            case DELETE:
+                this.taskList.removeTask(parsedInput.taskIndex);
                 break;
             case BYE:
                 this.bye();

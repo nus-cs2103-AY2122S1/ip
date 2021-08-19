@@ -39,6 +39,10 @@ public class ParsedInput {
             case "bye":
                 this.commandType = CommandType.BYE;
                 break;
+            case "delete":
+                this.commandType = CommandType.DELETE;
+                this.taskIndex = Integer.parseInt(splitInput[1]);
+                break;
             default:
                 throw JadenInputException.unrecognized();
         }
