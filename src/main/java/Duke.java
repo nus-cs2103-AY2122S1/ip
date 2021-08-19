@@ -31,7 +31,7 @@ public class Duke {
             }
             else if (userInput.startsWith("todo")) {
                 String[] split = userInput.split("todo ");
-                task = new Task(split[1], "T", null);
+                task = new Todo(split[1]);
                 tasks.add(task);
                 System.out.println("Got it. I've added this task:");
                 System.out.println(task);
@@ -42,7 +42,7 @@ public class Duke {
                 String time = split[1].split("/by ")[1];
                 System.out.println(description);
                 System.out.println(time);
-                task = new Task(description, "D", time);
+                task = new Deadline(description, time);
                 tasks.add(task);
                 System.out.println(task);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -52,7 +52,7 @@ public class Duke {
                 String time = split[1].split("/at ")[1];
                 System.out.println(description);
                 System.out.println(time);
-                task = new Task(description, "E", time);
+                task = new Event(description, time);
                 tasks.add(task);
                 System.out.println(task);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
