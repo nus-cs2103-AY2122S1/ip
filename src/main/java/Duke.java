@@ -1,16 +1,20 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 public class Duke {
-
+    public static ArrayList<String> tasks = new ArrayList<>();
     public static void talk() {
         String userInput = "";
-        System.out.println("Hello, What Can I do for you ?");
+        System.out.println("Hello, What Can I do for you ?\n -------------------------------");
+
         while(!userInput.equals("bye")) {
+            System.out.println("Enter Input Here: ");
             Scanner scanner = new Scanner(System.in);
-            userInput = scanner.next();
+            userInput = scanner.nextLine();
             if(userInput.equals("bye")) {
-                System.out.println("Bye, Hope to see you again soon !");
+                System.out.println("Duke : Bye, Hope to see you again soon !");
+                break;
             }
-            System.out.println("Duke : " + userInput);
+            System.out.println("Duke: " + userInput + "\n ----------------------------------");
         }
     }
 
