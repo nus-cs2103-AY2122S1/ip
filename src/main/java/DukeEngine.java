@@ -7,13 +7,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class DukeEngine {
-    private final String borderLine = "\n____________________________________________________________\n";
     private final DukeMessages messages = new DukeMessages();
 
     private List<Task> taskList = new ArrayList<Task>();
-
-    //probably not needed for now but might be needed in the future
-    private enum taskCommands {list, todo, deadline, event, delete, done, bye};
 
     /**
      * Main engine to run the program.
@@ -197,7 +193,6 @@ public class DukeEngine {
 
         Event eventTask = new Event(description, at);
         this.taskList.add(eventTask);
-
         messages.taskAddMessage(eventTask.toString(), this.taskList.size());
 
     }

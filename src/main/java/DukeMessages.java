@@ -85,7 +85,7 @@ public class DukeMessages {
         for (int i = 0; i < taskList.size(); i++) {
 
             //displays the current task's status
-            String inputMessage = String.format("%d. %s", i+1, taskList.get(i).toString());
+            String inputMessage = String.format("%d. %s", i + 1, taskList.get(i).toString());
             System.out.println(inputMessage);
         }
 
