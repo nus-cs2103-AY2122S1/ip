@@ -1,19 +1,14 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.List;
-
 
 public class Duke {
 
     private static Task[] tasks = new Task[100];
     private static int noOfTasks = 0;
 
-
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        printFormatted("Hola! I'm Blitz :) \n\tWhat can I do for you?");
+        printFormatted("Hola! I'm Blitz :)\n\tWhat can I do for you?");
 
         //command from the user
         String command = scanner.nextLine();
