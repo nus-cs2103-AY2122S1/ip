@@ -24,13 +24,13 @@ public class Duke {
                 int toComplete = Integer.parseInt(input.split(" ")[1]);
                 list[toComplete].complete();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(list[toComplete]);
+                System.out.println(String.format("  %s", list[toComplete]));
             } else if(command.equals("todo")){
                 String task = input.replaceFirst("todo ","");
                 ToDo toDo = new ToDo(task);
                 list[index] = toDo;
                 System.out.println("Got it. I've added this task: ");
-                System.out.println(toDo.toString());
+                System.out.println(String.format("  %s", toDo.toString()));
                 System.out.println(String.format("Now you have %d tasks in the list", index));
                 index++;
             } else if (command.equals("deadline")) {
@@ -40,7 +40,7 @@ public class Duke {
                 Deadline deadline = new Deadline(task, date);
                 list[index] = deadline;
                 System.out.println("Got it. I've added this task: ");
-                System.out.println(deadline.toString());
+                System.out.println(String.format("  %s", deadline.toString()));
                 System.out.println(String.format("Now you have %d tasks in the list", index));
                 index++;
             } else if (command.equals("event")) {
@@ -50,7 +50,7 @@ public class Duke {
                 Event event = new Event(task, date);
                 list[index] = event;
                 System.out.println("Got it. I've added this task: ");
-                System.out.println(event.toString());
+                System.out.println(String.format("  %s", event.toString()));
                 System.out.println(String.format("Now you have %d tasks in the list", index));
                 index++;
             }

@@ -20,7 +20,7 @@ class Task {
         if(done == 1){
             return String.format("[X] %s", toDo);
         } else {
-            return String.format("[] %s", toDo);
+            return String.format("[ ] %s", toDo);
         }
     }
 
