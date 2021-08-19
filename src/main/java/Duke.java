@@ -103,7 +103,9 @@ public class Duke {
             else if (input.length() >= 4 && input.startsWith("done")) {
                 try {
                     duke.markAsDone(input, list);
-                } catch (NumberFormatException | OutOfBoundException e) {
+                } catch (OutOfBoundException e) {
+                    System.out.println(e.toString());
+                } catch (NumberFormatException e) {
                     System.out.println("Task does not exist. Please send a correct number ><");
                 }
             }
@@ -111,8 +113,10 @@ public class Duke {
             else if (input.startsWith("delete")) {
                 try {
                     duke.deleteTask(input, list);
-                } catch (NumberFormatException | OutOfBoundException e) {
+                } catch (NumberFormatException e) {
                     System.out.println("Task does not exist. Please send a correct number ><");
+                } catch (OutOfBoundException e) {
+                    System.out.println(e.toString());
                 }
             }
 
@@ -121,7 +125,7 @@ public class Duke {
                 try {
                     duke.addTask(input, list);
                 } catch (InvalidTaskException e) {
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(e.toString());
                 } catch (EmptyDescriptionException e) {
                     System.out.println("☹ OOPS!!! The description of a" + input + "cannot be empty.");
                 }
