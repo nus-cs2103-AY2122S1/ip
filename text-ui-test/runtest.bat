@@ -18,4 +18,13 @@ REM run the program, feed commands from input.txt file and redirect the output t
 java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
-FC ACTUAL.TXT EXPECTED.TXT
+REM This line is commented out in favour of replicating the behaviour of the provided runtest.sh
+REM FC ACTUAL.TXT EXPECTED.TXT
+
+fc /b ACTUAL.TXT EXPECTED.TXT
+if errorlevel 1 (
+    echo Test result: FAILED
+	exit /b 1
+) else (
+    echo Test result: PASSED
+)
