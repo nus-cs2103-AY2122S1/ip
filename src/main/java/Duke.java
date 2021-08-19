@@ -17,12 +17,15 @@ public class Duke {
             if(sc.hasNextLine()) {
                 command = sc.nextLine().trim();
             }
-            if (listen(command) == 1) {
-                end = true;
-                System.out.println("\tBye. Hope to see you again soon!");
-            };
+            try {
+                if (listen(command) == 1) {
+                    end = true;
+                    System.out.println("\tBye. Hope to see you again soon!");
+                }
+            } catch (DukeException e) {
+                System.err.println(e.getMessage());
+            }
         }
-
         sc.close();
     }
 
@@ -31,8 +34,9 @@ public class Duke {
      *
      * @param command command entered by the user
      * @return an integer 0 or 1, where 1 represents the user exiting the bot.
+     * @throws DukeException if the user inputs any incorrect commands.
      */
-    private static int listen(String command) {
+    private static int listen(String command) throws DukeException{
         String[] commandSplit = command.split(" ", 2);
         String commandWord = commandSplit[0].toLowerCase();
         String commandDesc = "";
@@ -41,17 +45,36 @@ public class Duke {
         }
 
         if (commandWord.equals("done")) {
+            if (commandDesc.equals("")) {
+                throw new DukeException("☹ OOPS!!! Please specify the task number for the task you want to complete.");
+            }
             markDone(commandDesc);
+
         } else if (commandWord.equals("list")) {
             listTasks();
+
         } else if (commandWord.equals("todo")) {
+            if (commandDesc.equals("")) {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
             addToDo(commandDesc);
+
         } else if (commandWord.equals("deadline")) {
+            if (commandDesc.equals("")) {
+                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            }
             addDeadline(commandDesc);
+
         } else if (commandWord.equals("event")) {
+            if (commandDesc.equals("")) {
+                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+            }
             addEvent(commandDesc);
+
         } else if (commandWord.equals("bye")) {
             return 1;
+        } else {
+            throw new DukeException("☹ OOPS!!! You have entered an invalid command, please try again.");
         }
         return 0;
     }
@@ -62,9 +85,20 @@ public class Duke {
      * @param commandDesc the String format of the task number
      */
     private static void markDone(String commandDesc) {
-        int taskNumber = Integer.parseInt(commandDesc) - 1;
-        taskList[taskNumber].markDone();
-        System.out.println("\tNice! I've marked this task as done:\n\t  " + taskList[taskNumber]);
+        try {
+            int taskNumber = Integer.parseInt(commandDesc) - 1;
+            if (taskNumber >= taskCount) {
+                throw new DukeException("☹ OOPS!!! This is not a valid task number.");
+            }
+            taskList[taskNumber].markDone();
+            System.out.println("\tNice! I've marked this task as done:\n\t  " + taskList[taskNumber]);
+        } catch (NumberFormatException e) {
+            System.err.println("☹ OOPS!!! Please input a task number instead.");
+        } catch (DukeException e) {
+            System.err.println(e.getMessage());
+        }
+
+
     }
 
     /**
@@ -88,7 +122,7 @@ public class Duke {
      *
      * @param commandDesc the description of the task.
      */
-    private static void addToDo(String commandDesc) {
+    private static void addToDo(String commandDesc){
         taskList[taskCount] = new ToDo(commandDesc);
         System.out.println("\tGot it. I've added this ToDo:\n" + "\t  " + taskList[taskCount]);
         taskCount++;
