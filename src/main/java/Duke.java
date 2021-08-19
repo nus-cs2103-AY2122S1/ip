@@ -39,6 +39,7 @@ public class Duke {
                 break;
             } else  if (command.equals("list")) {
                 printBreakLine();
+                System.out.println("  Here are the tasks in your list:");
                 for (int i = 1; i < commandList.size() + 1; i++) {
                     System.out.printf("  %d. %s%n", i, commandList.get(i - 1)).toString();
                 }
@@ -48,11 +49,25 @@ public class Duke {
                 printBreakLine();
                 commandList.get(index - 1).markAsDone();
                 printBreakLine();
-            } else {
-                commandList.add(new Task(command));
-                printBreakLine();
-                System.out.println("  added: " + command);
-                printBreakLine();
+            } else if(command.contains("todo")){
+                String description = command.split("/by ")[0].substring(5);
+                Task newTask = new ToDo(description);
+                commandList.add(newTask);
+                addTaskMsg(newTask);
+            } else if(command.contains("deadline")) {
+                String description = command.split("/by ")[0].substring(9);
+                String by = command.split("/by ")[1];
+
+                Task newTask = new Deadline(description, by);
+                commandList.add(newTask);
+                addTaskMsg(newTask);
+            } else if(command.contains("event")) {
+                String description = command.split("/at ")[0].substring(6);
+                String by = command.split("/at ")[1];
+
+                Task newTask = new Event(description, by);
+                commandList.add(newTask);
+                addTaskMsg(newTask);
             }
         }
     }
@@ -62,6 +77,14 @@ public class Duke {
             System.out.print("==");
         }
         System.out.println();
+    }
+
+    private void addTaskMsg(Task newTask) {
+        printBreakLine();
+        System.out.println("  Got it. I've added this task: ");
+        System.out.println("  " + newTask.toString());
+        System.out.printf("  Now you have %d tasks in the list.%n", commandList.size());
+        printBreakLine();
     }
 
     private void welcomeGreet() {
