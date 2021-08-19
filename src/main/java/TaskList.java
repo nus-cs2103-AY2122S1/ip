@@ -1,7 +1,10 @@
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class TaskList {
@@ -10,6 +13,7 @@ public class TaskList {
     public TaskList() {
         tasks = new ArrayList<>();
     }
+    public TaskList(ArrayList<Task> tasks) { this.tasks = tasks; }
 
     /**
      * Prints the number of tasks in the list
@@ -93,9 +97,10 @@ public class TaskList {
         }
     }
 
+    private static String FILE_LOCATION = "C:\\Users\\kohjx\\projects\\ip\\data\\TaskList.txt";
     private void saveList() {
         try {
-            FileWriter writer = new FileWriter("C:\\Users\\kohjx\\projects\\ip\\data\\TaskList.txt", false);
+            FileWriter writer = new FileWriter(TaskList.FILE_LOCATION, false);
             for (Task task : tasks) {
                 writer.write(task.saveString());
                 writer.write("\r\n");
@@ -105,5 +110,26 @@ public class TaskList {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static TaskList loadList() {
+        try {
+            FileReader reader = new FileReader(TaskList.FILE_LOCATION);
+            File file = new File(TaskList.FILE_LOCATION);
+            Scanner text = new Scanner(file);
+
+            ArrayList<Task> loaded = new ArrayList<>();
+            while(text.hasNextLine()) {
+                String task = text.nextLine();
+                loaded.add(Task.StringToTask(task));
+            }
+
+            System.out.println("List loaded!");
+            return new TaskList(loaded);
+
+        } catch (IOException e) {
+            return new TaskList();
+        }
+//        catch (//Errors in text file) {}
     }
 }

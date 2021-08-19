@@ -1,6 +1,9 @@
 public class TaskTodo extends Task {
-    public TaskTodo(String input) {
-        super(input);
+    public TaskTodo(String description) {
+        this(description, false);
+    }
+    public TaskTodo(String description, boolean done) {
+        super(description, done);
     }
 
     /**
@@ -16,6 +19,7 @@ public class TaskTodo extends Task {
         return "[T]" + checkBox + description;
     }
 
+    @Override
     String saveString() {
         return "T" + '\t' + (this.done ? "1" : "0") + '\t' + this.description;
     }

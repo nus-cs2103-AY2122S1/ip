@@ -10,7 +10,7 @@ public class Duke {
      * Instantiates a Task List and a DukeListener for Duke
      */
     private Duke() {
-        taskList = new TaskList();
+        taskList = TaskList.loadList();
         listener = new DukeListener(taskList);
     }
 
