@@ -33,24 +33,32 @@ class MissingParams extends DukeException {
 
 class NothingAfterCommand extends DukeException {
 
-    NothingAfterCommand(String command) {
-        super(Duke.Box("Meow? There's nothing after your command " + command + "... Meow meow meow?"));
+    NothingAfterCommand(Duke.Commands command) {
+        super(Duke.Box("Meow? There's nothing after your command " + command.toString() + "... Meow meow meow?"));
     }
 
 }
 
 class MissingArguments extends DukeException {
 
-    MissingArguments(String command) {
-        super(Duke.Box("Meow? There's missing arguments in your command " + command + "... Meow meow meow?"));
+    MissingArguments(Duke.Commands command) {
+        super(Duke.Box("Meow? There's missing arguments in your command " + command.toString() + "... Meow meow meow?"));
     }
 
 }
 
 class EmptyListException extends DukeException {
 
-    EmptyListException(String command) {
-        super(Duke.Box("You have nothing in your list to " + command + ", meow!"));
+    EmptyListException(Duke.Commands command) {
+        super(Duke.Box("You have nothing in your list to " + command.toString() + ", meow!"));
+    }
+
+}
+
+class IllegalCommandException extends DukeException {
+
+    IllegalCommandException(String commandStr) {
+        super(Duke.Box("Meow? There is no command " + commandStr + "!"));
     }
 
 }

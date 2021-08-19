@@ -12,6 +12,15 @@ public class Duke {
         return Duke.BOX_LINE + Duke.BOX_MIDDLE + message + "\n" + Duke.BOX_LINE;
     }
 
+    public enum Commands {
+        LIST,
+        DONE,
+        TODO,
+        DEADLINE,
+        EVENT,
+        DELETE
+    }
+
 
     public static void main(String[] args) {
         // Credits to https://manytools.org/hacker-tools/convert-images-to-ascii-art/go/ and Mafumafu Line stickers
@@ -56,6 +65,7 @@ public class Duke {
         String EVENT_NO_AT = BOX_LINE + BOX_MIDDLE + "Meow? There's no date... Please use /at params. \n" + BOX_LINE;
         String NOTHING_AFT_CMD = BOX_LINE + BOX_MIDDLE + "Meow? There's nothing after your command... Meow meow meow?\n" + BOX_LINE;
         */
+        //UnaryOperator<String> EchoMessage = (msg) -> Box(msg + ", meow? Not a command...");
 
         BinaryOperator<String> AddTaskMessage = (x, y) -> Box("Meow. I've added this task:\n   " +
                 x + "\n" + "|  Now you have " + y + " tasks in the list.");
@@ -64,7 +74,7 @@ public class Duke {
         BinaryOperator<String> DeleteTaskMessage =  (x, y) -> Box("Understood, meow! Deleted this task:\n   " +
                 x + "\n" + "|  Now you have " + y + " tasks in the list.");
         UnaryOperator<String> ListMessage = (items) -> Box("Here are the tasks in your list, meow:" + items);
-        UnaryOperator<String> EchoMessage = (msg) -> Box(msg + ", meow? Not a command...");
+
 
         ArrayList<Task> taskList = new ArrayList<>();
 
@@ -75,14 +85,23 @@ public class Duke {
         String input = "";
         input = sc.nextLine();
 
+
+
         while (!input.equalsIgnoreCase("bye")) {
 
             String[] inputArr = input.trim().split("\\s+", 2);
-            String command = inputArr[0].toUpperCase();
+            String commandStr = inputArr[0].toUpperCase();
 
             try {
+                Commands command;
+                try {
+                    command = Commands.valueOf(commandStr);
+                } catch (IllegalArgumentException e) {
+                    throw new IllegalCommandException(commandStr);
+                }
+
                 switch (command) {
-                    case "LIST":
+                    case LIST:
                         if (taskList.size() == 0) {
                             throw new EmptyListException(command);
                         }
@@ -95,7 +114,7 @@ public class Duke {
                         System.out.println(ListMessage.apply(s));
                         break;
 
-                    case "DONE":
+                    case DONE:
                         if (taskList.size() == 0) {
                             throw new EmptyListException(command);
                         }
@@ -125,7 +144,7 @@ public class Duke {
 
                         break;
 
-                    case "TODO":
+                    case TODO:
                         if (inputArr.length < 2) {
                             throw new NothingAfterCommand(command);
                         }
@@ -134,7 +153,7 @@ public class Duke {
                         System.out.println(AddTaskMessage.apply(todo.toString(), Integer.toString(taskList.size())));
                         break;
 
-                    case "DEADLINE":
+                    case DEADLINE:
                         if (inputArr.length < 2) {
                             throw new NothingAfterCommand(command);
                         }
@@ -150,7 +169,7 @@ public class Duke {
                         System.out.println(AddTaskMessage.apply(deadline.toString(), Integer.toString(taskList.size())));
                         break;
 
-                    case "EVENT":
+                    case EVENT:
                         if (inputArr.length < 2) {
                             throw new NothingAfterCommand(command);
                         }
@@ -166,7 +185,7 @@ public class Duke {
                         System.out.println(AddTaskMessage.apply(event.toString(), Integer.toString(taskList.size())));
                         break;
 
-                    case "DELETE":
+                    case DELETE:
                         if (taskList.size() == 0) {
                             throw new EmptyListException(command);
                         }
@@ -196,8 +215,7 @@ public class Duke {
                         break;
 
                     default:
-                        System.out.println(EchoMessage.apply(input));
-                        break;
+                        throw new IllegalCommandException("");      // should be unreachable by design
                 }
 
             } catch (DukeException e) {
