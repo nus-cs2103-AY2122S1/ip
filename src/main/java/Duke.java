@@ -1,7 +1,16 @@
+/**
+ * The Bhutu chatbot app
+ */
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    /**
+     * Add task to taskList
+     *
+     * @param taskList a list of tasks
+     * @param task the task want to add to the list
+     */
     public static void addTask(ArrayList<Task> taskList, Task task) {
         taskList.add(task);
         System.out.println("    Got it. I've added this task:");
@@ -9,14 +18,27 @@ public class Duke {
         System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
     }
 
+    /**
+     * To get the task object in a taskList using its index
+     * @param taskList a list of tasks
+     * @param index the index of task in the tasklist
+     * @return
+     */
     public static Task getTask(ArrayList<Task> taskList, Integer index) {
         return taskList.get(index);
     }
 
+    /**
+     * Handle bye category input
+     */
     public static void bye(){
         System.out.println("    Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Handle list category input
+     * @param taskList a list of tasks
+     */
     public static void list(ArrayList<Task> taskList) {
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
@@ -24,18 +46,28 @@ public class Duke {
         }
     }
 
+    /**
+     * Handle done category input
+     * @param task the task that was completed
+     */
     public static void done(Task task) {
         task.doneTask();
         System.out.println("    Nice! I've marked this task as done: ");
         System.out.println("    " + task.toString());
     }
 
+    /**
+     * Delete a task from the list
+     * @param taskList a list of tasks
+     * @param task the task that want to be deleted from the list
+     */
     public static void delete(ArrayList<Task> taskList, Task task) {
         taskList.remove(task);
         System.out.println("    Got it. I've removed this task:");
         System.out.println("     " + task.toString());
         System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
     }
+
 
     public static void main(String[] args) throws DukeException{
         //Greet
@@ -115,5 +147,7 @@ public class Duke {
             System.out.println("    ____________________________________________________________");
         }
     }
+
+}
 
 }

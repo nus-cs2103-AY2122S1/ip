@@ -1,3 +1,6 @@
+/**
+ * General category
+ */
 public class Task {
     private String name;
     private Boolean completed = false;
@@ -6,6 +9,9 @@ public class Task {
         this.name = name;
     }
 
+    /**
+     * Mark the task completed
+     */
     public void doneTask() {
         this.completed = true;
     }

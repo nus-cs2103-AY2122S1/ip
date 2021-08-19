@@ -1,3 +1,6 @@
+/**
+ * Tasks that start at a specific time and ends at a specific time
+ */
 public class Event extends Task{
     private String startTime;
 
