@@ -1,6 +1,7 @@
 public class TaskTodo extends Task {
     public TaskTodo(String input) {
         super(input);
+        System.out.println(Ui.OUTPUT_DISPLAY + "Got it. I've added a To-do.");
     }
 
     /**

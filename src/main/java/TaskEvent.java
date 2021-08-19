@@ -1,9 +1,18 @@
-public class TaskEvent extends Task {
-    private String at;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
-    public TaskEvent(String description, String at) {
+public class TaskEvent extends Task {
+    private LocalDate at;
+    private String time;
+
+    public TaskEvent(String description, LocalDate date, String time) {
         super(description);
-        this.at = at;
+        System.out.println(Ui.OUTPUT_DISPLAY + "Got it. I've added an Event. Don't miss it!");
+        this.at = date;
+        this.time = Optional.ofNullable(time)
+                .map(String::strip)
+                .orElse("");
     }
 
     /**
@@ -16,7 +25,7 @@ public class TaskEvent extends Task {
         String checkBox = done
                 ? "[X] "
                 : "[ ] ";
-        return "[E]" + checkBox + description + " (at: " + at + ")";
+        return "[E]" + checkBox + description + " (at: " + at + (!time.equals("") ? " " + time : "") + ")";
     }
 
 }

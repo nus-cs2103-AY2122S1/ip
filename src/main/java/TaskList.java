@@ -33,9 +33,9 @@ public class TaskList {
                     .map(task -> {
                         System.out.println(Ui.OUTPUT_SPACES + task);
                         tasks.add(task);
+                        this.printSize();
                         return null;
                     });
-        this.printSize();
     }
 
 

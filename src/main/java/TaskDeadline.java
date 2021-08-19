@@ -1,9 +1,18 @@
-public class TaskDeadline extends Task {
-    private String by;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
-    public TaskDeadline(String description, String by) {
+public class TaskDeadline extends Task {
+    private LocalDate by;
+    private String time;
+
+    public TaskDeadline(String description, LocalDate date, String time) {
         super(description);
-        this.by = by;
+        System.out.println(Ui.OUTPUT_DISPLAY + "Got it. I've added a Deadline.");
+        this.by = date;
+        this.time = Optional.ofNullable(time)
+                .map(String::strip)
+                .orElse("");
     }
 
     /**
@@ -16,7 +25,7 @@ public class TaskDeadline extends Task {
         String checkBox = done
                 ? "[X] "
                 : "[ ] ";
-        return "[D]" + checkBox + description + " (by: " + by + ")";
+        return "[D]" + checkBox + description + " (by: " + by + (!time.equals("") ? " " + time : "") + ")";
     }
 
 }
