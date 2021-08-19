@@ -1,7 +1,130 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+____________________________________________________________
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke. A friendly chatbot!! :)
+What can I do for you?
+____________________________________________________________
+Add to-do list ({input})/ View list (list) / Complete task (done {input}) / End (bye) :
+todo cs2103 ip
+____________________________________________________________
+Got it. I've added this task:
+ [T][ ]  cs2103 ip
+Now you have 1 tasks in the list.
+____________________________________________________________
+What else can I do for you?
+deadline complete 2103 ip /by Thursday
+____________________________________________________________
+Got it. I've added this task:
+ [D][ ]  complete 2103 ip (by: Thursday)
+Now you have 2 tasks in the list.
+____________________________________________________________
+What else can I do for you?
+event  2103 ip 1 /at Thursday 2359
+____________________________________________________________
+Got it. I've added this task:
+ [E][ ]   2103 ip 1 (at: Thursday 2359)
+Now you have 3 tasks in the list.
+____________________________________________________________
+What else can I do for you?
+todo cs2105 project
+____________________________________________________________
+Got it. I've added this task:
+ [T][ ]  cs2105 project
+Now you have 4 tasks in the list.
+____________________________________________________________
+What else can I do for you?
+deadline complete 2105 ip /by Friday
+____________________________________________________________
+Got it. I've added this task:
+ [D][ ]  complete 2105 ip (by: Friday)
+Now you have 5 tasks in the list.
+____________________________________________________________
+What else can I do for you?
+event  2105 project 1 /at Friday 2359
+____________________________________________________________
+Got it. I've added this task:
+ [E][ ]   2105 project 1 (at: Friday 2359)
+Now you have 6 tasks in the list.
+____________________________________________________________
+What else can I do for you?
+todo cs2100 tut
+____________________________________________________________
+Got it. I've added this task:
+ [T][ ]  cs2100 tut
+Now you have 7 tasks in the list.
+____________________________________________________________
+What else can I do for you?
+deadline complete 2100 tut /by Monday
+____________________________________________________________
+Got it. I've added this task:
+ [D][ ]  complete 2100 tut (by: Monday)
+Now you have 8 tasks in the list.
+____________________________________________________________
+What else can I do for you?
+event  cs2100 tut /at Monday 12pm
+____________________________________________________________
+Got it. I've added this task:
+ [E][ ]   cs2100 tut (at: Monday 12pm)
+Now you have 9 tasks in the list.
+____________________________________________________________
+What else can I do for you?
+list
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][ ]  cs2103 ip
+2. [D][ ]  complete 2103 ip (by: Thursday)
+3. [E][ ]   2103 ip 1 (at: Thursday 2359)
+4. [T][ ]  cs2105 project
+5. [D][ ]  complete 2105 ip (by: Friday)
+6. [E][ ]   2105 project 1 (at: Friday 2359)
+7. [T][ ]  cs2100 tut
+8. [D][ ]  complete 2100 tut (by: Monday)
+9. [E][ ]   cs2100 tut (at: Monday 12pm)
+____________________________________________________________
+What else can I do for you?
+done 1
+____________________________________________________________
+Nice! I've marked this task as done:
+[T][X]  cs2103 ip
+____________________________________________________________
+What else can I do for you?
+done 2
+____________________________________________________________
+Nice! I've marked this task as done:
+[D][X]  complete 2103 ip (by: Thursday)
+____________________________________________________________
+What else can I do for you?
+done 8
+____________________________________________________________
+Nice! I've marked this task as done:
+[D][X]  complete 2100 tut (by: Monday)
+____________________________________________________________
+What else can I do for you?
+done 9
+____________________________________________________________
+Nice! I've marked this task as done:
+[E][X]   cs2100 tut (at: Monday 12pm)
+____________________________________________________________
+What else can I do for you?
+list
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][X]  cs2103 ip
+2. [D][X]  complete 2103 ip (by: Thursday)
+3. [E][ ]   2103 ip 1 (at: Thursday 2359)
+4. [T][ ]  cs2105 project
+5. [D][ ]  complete 2105 ip (by: Friday)
+6. [E][ ]   2105 project 1 (at: Friday 2359)
+7. [T][ ]  cs2100 tut
+8. [D][X]  complete 2100 tut (by: Monday)
+9. [E][X]   cs2100 tut (at: Monday 12pm)
+____________________________________________________________
+What else can I do for you?
+bye
+____________________________________________________________
+Bye. I hope to talk to you again soon! :)
+____________________________________________________________

@@ -1,0 +1,16 @@
+todo cs2103 ip
+deadline complete 2103 ip /by Thursday
+event  2103 ip 1 /at Thursday 2359
+todo cs2105 project
+deadline complete 2105 ip /by Friday
+event  2105 project 1 /at Friday 2359
+todo cs2100 tut
+deadline complete 2100 tut /by Monday
+event  cs2100 tut /at Monday 12pm
+list
+done 1
+done 2
+done 8
+done 9
+list
+bye

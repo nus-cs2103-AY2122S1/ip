@@ -101,7 +101,7 @@ public class Duke {
             }
 
             //Get next command for the loop
-            System.out.println("What else can I do for you?\n");
+            System.out.println("What else can I do for you?");
             input = s.nextLine();
         }
         System.out.println(Duke.start + end_message + "\n" + Duke.end);
