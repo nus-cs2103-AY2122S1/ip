@@ -21,63 +21,101 @@ public class Duke {
      * method to add a task to the list in the chat bot,
      * adds the task to the next available slot in tasks,
      * then prints a statement saying the text has been added.
-     * @param task task to be added
+     * @param input task text
+     * @return a log specifing that the task has been added and total tasks
      */
-    public void add(Task task) {
-        tasks[counter] = task;
-        counter++;
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("~~" + task.toString() + "~~");
-        System.out.println("Now you have " + counter + (counter > 1 ? " tasks" : " task")
-                                + " in the list.\n");
-    }
-
-    /**
-     * method to iteratively print out each task stored in tasks
-     * in order of which they are added.
-     */
-
-    public void iterate() {
-        System.out.println("Here are the tasks in your list: ");
-        for(int i = 0; i < counter; i++) {
-            System.out.println((i + 1) + "." + tasks[i].toString());
+    public String add(String input) {
+        try {
+            Task task = setTask(input);
+            if (task != null) {
+                tasks[counter] = task;
+                counter++;
+            }
+            return logger(task);
+        } catch (StringIndexOutOfBoundsException se) {
+            return new DukeException(se).print_message();
+        } catch (NullPointerException ne) {
+            return new DukeException(ne).print_message();
         }
-        System.out.println("");
+    }
+    
+    private String logger(Task task) {
+        try {
+            String string = String.format("Got it. I've added this task: \n~~" + task.toString() +
+                    "~~\nNow you have " + counter +
+                    (counter > 1 ? " tasks" : " task") + " in the list.\n");
+            return string;
+        } catch (NullPointerException ne) {
+            return new DukeException(ne).print_message();
+        }
+    }
+    /**
+     * method that returns a string of tasks
+     * in order of which they are added.
+     * @return string which when printed out displays every task in tasks
+     */
+    
+    public String iterate() {
+        String string = "";
+        try {
+            string += "Here are the tasks in your list: \n";
+            for (int i = 0; i < counter; i++) {
+                string += String.format("%d.%s\n", i + 1, tasks[i].toString());
+            }
+            string += "";
+            return string;
+        } catch (NullPointerException ne) {
+            return new DukeException(ne).print_message();
+        }
     }
 
     /**
      * method to duke to mark a task as done.
      * Marks task indexed num - 1 in tasks done,
      * then, prints out the task.
-     * @param num index of the task to be marked done
+     * @param input the user input text
      */
 
-    public void markDone(int num) {
-        Task taskDone = tasks[num - 1];
-        taskDone.markAsDone();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("~" + taskDone.toString() + "~ \n");
+    public String markDone(String input) {
+        try {
+            String index = input.substring("done ".length());
+            int taskNum = Integer.parseInt(index);
+            Task taskDone = tasks[taskNum - 1];
+            if(taskNum > counter) {
+                Exception ae = new ArrayIndexOutOfBoundsException();
+                return new DukeException(ae).print_message();
+            }
+            taskDone.markAsDone();
+            String string = "Nice! I've marked this task as done: ";
+            string += "~" + taskDone.toString() + "~ \n";
+            return string;
+        } catch (NullPointerException ne) {
+            return new DukeException(ne).print_message();
+        } catch (ArrayIndexOutOfBoundsException ae) {
+            return new DukeException(ae).print_message();
+        } catch (StringIndexOutOfBoundsException se) {
+            Exception ne = new NullPointerException();
+            return new DukeException(ne).print_message();
+        }
     }
 
     /**
      * method that returns the corresponding task depending on the input
      * @param input task text
-     *              containing keywords "deadline", "event" or "todo"
+     * containing keywords "deadline", "event" or "todo"
      * @return a subtype of Task depending on the keyword in the input
      */
 
     public Task setTask(String input) {
-        Task t;
+        Task t = null;
         if (input.contains("deadline")) {
-            String [] arr = formatInput(input, "deadline ", "/by ");
+            String[] arr = formatInput(input, "deadline ", "/by ");
             t = new Deadline(arr[0], arr[1]);
-        } else if (input.contains("event")){
-            String [] arr = formatInput(input, "event ", "/at ");
+        } else if (input.contains("event")) {
+            String[] arr = formatInput(input, "event ", "/at ");
             t = new Event(arr[0], arr[1]);
-        } else if (input.contains("todo")){
+        } else if (input.contains("todo")) {
             t = new Todo(input.substring("todo ".length()));
-        } else {
-            t = new Task(input);
         }
         return t;
     }
@@ -102,16 +140,12 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                duke.iterate();
+                System.out.println(duke.iterate());
             } else if (input.contains("done")) {
-                String index = input.substring("done ".length());
-                int taskNum = Integer.parseInt(index);
-                duke.markDone(taskNum);
+                System.out.println(duke.markDone(input));
             } else {
-                Task t = duke.setTask(input);
-                duke.add(t);
+                System.out.println(duke.add(input));
             }
-
             input = sc.nextLine();
         }
         System.out.println("@@@ Bye. Hope to see you again soon! @@@");
