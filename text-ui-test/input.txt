@@ -7,4 +7,5 @@ todo borrow book
 done 4
 todo
 blah
+delete 3
 bye

@@ -32,6 +32,9 @@ public class Duke {
             case "event":
                 this.addEvent(input);
                 break;
+            case "delete":
+                this.delete(Integer.parseInt(parsedInput[1]) - 1);
+                break;
             default:
                 throw new InvalidCommandException("Invalid Command");
         }
@@ -135,6 +138,21 @@ public class Duke {
         System.out.println(message);
     }
 
+    public void delete(int index) throws TaskIndexOutOfBoundException{
+        if (index >= this.list.size()) {
+            throw new TaskIndexOutOfBoundException("Task index is invalid!");
+        }
+        Task task = this.list.get(index);
+        this.list.remove(index);
+        String message =
+                "____________________________________________________________\n" +
+                " Noted. I've removed this task:\n   " +
+                task.toString() +
+                String.format("\n Now you have %d tasks in the list.\n", this.list.size()) +
+                "____________________________________________________________\n";
+        System.out.println(message);
+    }
+
     public void echo(String input) {
         String message =
                 "____________________________________________________________\n" +
@@ -161,10 +179,10 @@ public class Duke {
                     " ☹ OOPS!!! The description of an event cannot be empty.\n" +
                     "____________________________________________________________\n";
         } else if (e instanceof DeadlineDescriptionNotFoundException) {
-        message =
-                "____________________________________________________________\n" +
-                " ☹ OOPS!!! The description of a deadline cannot be empty.\n" +
-                "____________________________________________________________\n";
+            message =
+                    "____________________________________________________________\n" +
+                    " ☹ OOPS!!! The description of a deadline cannot be empty.\n" +
+                    "____________________________________________________________\n";
         } else if (e instanceof DeadlineNotFoundException) {
             message =
                     "____________________________________________________________\n" +
