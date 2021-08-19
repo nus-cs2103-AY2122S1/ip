@@ -7,5 +7,7 @@ done 2
 list
 done 1
 list
+delete 1
 hi
 hello
+list

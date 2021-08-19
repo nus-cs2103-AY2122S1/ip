@@ -29,5 +29,12 @@ Do these soon:
 1. [T][X] borrow book
 2. [D][X] return book (by: Sunday)
 3. [E][] project meeting (at: Mon 2-4pm)
+Congrats! You have completed this task!
+[T][] borrow book
+2 more to go!! Press on!!
 OOPS!! I'm sorry, but I don't know what that means ;-(
 OOPS!! I'm sorry, but I don't know what that means ;-(
+Do these soon:
+
+1. [D][X] return book (by: Sunday)
+2. [E][] project meeting (at: Mon 2-4pm)

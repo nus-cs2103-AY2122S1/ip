@@ -67,7 +67,22 @@ public class Duke {
                 done_check.set(task_number, "X");
                 System.out.println("[" + list.get(task_number).get_type() + "][" + done_check.get(task_number) + "] " + list.get(task_number).get_task());
                 first_time = 1;
-            } else if (next_line.length() > 4 && next_line.substring(0, 4).equals("todo")) {
+            }
+
+            //deleting task from the list
+            else if (next_line.length() > 6 && next_line.substring(0, 6).equals("delete")) {
+                task_number = Integer.valueOf(next_line.substring(7));
+                total = total - 1;
+                System.out.println("Congrats! You have completed this task!");
+                System.out.println("[" + list.get(task_number - 1).get_type() + "][] " + list.get(task_number - 1).get_task());
+                System.out.println(total + " more to go!! Press on!!");
+                done_check.remove(task_number - 1);
+                list.remove(task_number - 1);
+                first_time = 1;
+            }
+
+            // adding todo to the list
+            else if (next_line.length() > 4 && next_line.substring(0, 4).equals("todo")) {
                 total = total + 1;
                 Task todo = new Todo(next_line);
                 list.add(todo);
@@ -76,7 +91,10 @@ public class Duke {
                 System.out.println("[" + todo.get_type() + "][] " + todo.get_task());
                 System.out.println("Jiayou! you have " + total + " tasks in the list.");
                 first_time = 1;
-            } else if (next_line.length() > 8 && next_line.substring(0, 8).equals("deadline")) {
+            }
+
+            //adding deadline to the list
+            else if (next_line.length() > 8 && next_line.substring(0, 8).equals("deadline")) {
                 total = total + 1;
                 Task deadline = new Deadline(next_line);
                 list.add(deadline);
@@ -85,7 +103,10 @@ public class Duke {
                 System.out.println("[" + deadline.get_type() + "][] " + deadline.get_task());
                 System.out.println("Jiayou! you have " + total + " tasks in the list.");
                 first_time = 1;
-            } else if (next_line.length() > 5 && next_line.substring(0, 5).equals("event")) {
+            }
+
+            //adding event to the list
+            else if (next_line.length() > 5 && next_line.substring(0, 5).equals("event")) {
                 total = total + 1;
                 Task event = new Event(next_line);
                 list.add(event);
@@ -94,27 +115,26 @@ public class Duke {
                 System.out.println("[" + event.get_type() + "][] " + event.get_task());
                 System.out.println("Jiayou! you have " + total + " tasks in the list.");
                 first_time = 1;
-            } else {
-                int caught2 = 0;
+            }
+
+            //catching random expression error
+            else {
 
                 while (true) {
                     try {
                         Duke.random_error(next_line);
                     } catch (DukeException e) {
                         System.out.println(e.output_error());
-                        caught2 = 1;
+                        first_time = 1;
                     } finally {
-                        if (caught2 == 1) {
-                            next_line = scan.nextLine();
-                            caught2 = 0;
-                        } else {
-                            break;
-                        }
+                        first_time = 1;
+                        break;
                     }
                 }
             }
         }
     }
+
 
     public static void random_error(String next_line) throws DukeException {
         DukeException e = new RandomDescription(next_line);
