@@ -30,6 +30,8 @@ public class Duke {
                     String[] splitString = newUserInput.split(" ", 2);
                     firstWord = splitString[0];
                     newUserInput = splitString[1];
+                } else {
+                    newUserInput = "";
                 }
                 switch (firstWord) {
                     case "bye":
@@ -55,7 +57,7 @@ public class Duke {
                         int taskNo = Integer.parseInt(newUserInput);
                         if (taskNo < 1 || taskNo > tasks.size()) {
                             System.out.printf("Oops! No such task exists\n" +
-                                            "Please use a number from 1 to %s",
+                                            "Please use a number from 1 to %s\n",
                                     tasks.size());
                         } else {
                             Task completedTask = tasks.get(taskNo - 1);
@@ -116,7 +118,9 @@ public class Duke {
                     case "delete":
                         taskNo = Integer.parseInt(newUserInput);
                         if (taskNo < 1 || taskNo > tasks.size()) {
-                            System.out.println("Error: No such task exists");
+                            System.out.printf("Oops! No such task exists\n" +
+                                            "Please use a number from 1 to %s\n",
+                                    tasks.size());
                         } else {
                             System.out.println("Noted. I've removed this task: \n"
                                     + tasks.get(taskNo - 1).toString());

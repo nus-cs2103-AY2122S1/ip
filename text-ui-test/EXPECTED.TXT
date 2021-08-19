@@ -1,7 +1,44 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello! I'm Duck 
+*quack*  >(.)__
+          (___/ 
+What can I do for you?
+Got it. I've added this task:
+[T][ ] borrow book
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+[D][ ] read book  (by:  4 Aug)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+[E][ ] return book  (at:  5 Aug 4pm)
+Now you have 3 tasks in the list.
+Here are the tasks on your list:
+1. [T][ ] borrow book
+2. [D][ ] read book  (by:  4 Aug)
+3. [E][ ] return book  (at:  5 Aug 4pm)
+*quack*
+Nice! I've marked this task as done: 
+[D][X] read book  (by:  4 Aug)
+Noted. I've removed this task: 
+[T][ ] borrow book
+Now you have 2 tasks in the list.
+Here are the tasks on your list:
+1. [D][X] read book  (by:  4 Aug)
+2. [E][ ] return book  (at:  5 Aug 4pm)
+*quack*
+☹ OOPS!!! I'm sorry, but I don't know what that means
+*sad quack*
+☹ OOPS!!! The description of a task cannot be empty.
+Got it. I've added this task:
+[D][ ] read book (by: not specified)
+Now you have 3 tasks in the list.
+Got it. I've added this task:
+[E][ ] return book (at: not specified)
+Now you have 4 tasks in the list.
+Oops! No such task exists
+Please use a number from 1 to 4
+Oops! No such task exists
+Please use a number from 1 to 4
+Bye. Hope to see you again soon!
+   __(.)>   *quack*
+~~ \___)
 
