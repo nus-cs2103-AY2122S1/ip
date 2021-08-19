@@ -1,0 +1,9 @@
+event read book /at lunchtime
+deadline return book /by tomorrow
+todo break book
+list
+delete 1
+list
+todo
+askjdhajskd
+bye
