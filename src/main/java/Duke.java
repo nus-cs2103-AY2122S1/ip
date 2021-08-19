@@ -35,6 +35,10 @@ public class Duke {
 
             //cases for specified keywords
             if (firstString.equals("list")) {
+                if (listIndex == 0) {
+                    System.out.println("There are currently no tasks! Stop being so lazy and start doing your tasks!");
+                    continue;
+                }
                 for (int i = 0; i < 100; i++) {
                     if (taskArray[i] == null) {
                         break;
@@ -54,6 +58,7 @@ public class Duke {
                 try {
                     int index = Integer.parseInt(inputArray[1]);
                     int arrayIndex = index - 1;
+                    //case if entered index does not correspond to a task
                     if (index > listIndex || index < 1) {
                         System.out.println("Sorry, that task does not exist!");
                         continue;
@@ -82,14 +87,23 @@ public class Duke {
                 continue;
             }
 
+            //case if first string input is not a keyword
             System.out.println("Whoops, I could not understand your input. Please try again!");
         }
 
+        //exit from the program
         scan.close();
         System.out.println("See you again next time!");
     }
 
     private static void createTask(Tasks taskType, String[] array) {
+        //preliminary check if more than 1 string was entered
+        if (array.length < 2) {
+            //case if no name is entered for the task
+            System.out.println("Whoops! Please enter a name for your Task!");
+            return;
+        }
+
         StringBuilder str = new StringBuilder();
         Task tempTask = null;
         switch (taskType) {
@@ -118,6 +132,11 @@ public class Duke {
                 }
                 str.append(currentArrayElement).append(" ");
             }
+            //check if a time was entered
+            if (!stringHasEnded) {
+                System.out.println("Please enter a time for your deadline!");
+                return;
+            }
 
             tempTask = new Deadlines(str.toString(), time);
             break;
@@ -138,6 +157,11 @@ public class Duke {
                     continue;
                 }
                 str.append(currentArrayElement).append(" ");
+            }
+            //check if a duration was entered
+            if (!stringHasTerminated) {
+                System.out.println("Please enter a duration for your event!");
+                return;
             }
 
             tempTask = new Events(str.toString(), eventTime);
