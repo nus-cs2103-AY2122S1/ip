@@ -9,4 +9,6 @@ list
 repo
 deadline /at tomorrow
 event /by 10pm
+delete 2
+delete 2
 bye
