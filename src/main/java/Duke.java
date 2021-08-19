@@ -13,10 +13,20 @@ public class Duke {
         String line = "____________________________________________________________\n";
         System.out.println(line + "Hello I'm Duke\nWhat can I do for you?\n" + line);
 
-        String command = sc.nextLine().toLowerCase();
-        while (!command.equals("bye")) {
-            System.out.println(line + command + "\n" + line);
-            command = sc.nextLine().toLowerCase();
+        String[] commands = new String[100];
+        int ctr = 0;
+        commands[ctr] = sc.nextLine().toLowerCase();
+        while (!commands[ctr].equals("bye")) {
+            if (commands[ctr].equals("list")) {
+                System.out.print(line);
+                for (int i = 0; i < ctr; i++) {
+                    System.out.printf("%d. %s\n", i + 1, commands[i]);
+                }
+                System.out.println(line);
+            } else {
+                System.out.printf("%sadded: %s\n%s\n", line, commands[ctr], line);
+            }
+            commands[++ctr] = sc.nextLine().toLowerCase();
         }
 
         System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
