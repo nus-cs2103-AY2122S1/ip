@@ -42,7 +42,6 @@ public abstract class Task {
     }
 
     private static void checkArg(String[] arg) throws DukeException{
-        System.out.println(arg.length);
         if(arg.length < 2){
             throw new DukeException("Please specify time");
         }else if(arg.length > 2){

@@ -12,44 +12,62 @@ public class Duke {
         DEADLINE,
         EVENT;
     }
-    public static void main(String[] args) {
-        Scanner Sc = new Scanner(System.in);
+
+    private Scanner Sc;
+    private TaskList taskList;
+
+    public Duke(){
+        Sc = new Scanner(System.in);
+        taskList = new TaskList();
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+    }
 
-        String first = Sc.next().toUpperCase(Locale.ROOT);
-        String rest = Sc.nextLine().trim();
-
-        while(true) {
-            if (first.equals("BYE")) {
-                break;
-            }
+    public static void main(String[] args) {
+        Duke bot = new Duke();
+        String first = bot.getCommand();
+        String rest = bot.getRest();
+        while(true){
             try {
                 Commands cmd = Commands.valueOf((first));
                 switch (cmd) {
+                    case BYE:
+                        bot.close();
+                        return;
                     case LIST:
-                        TaskList.printTasks();
+                        bot.taskList.printTasks();
                         break;
                     case DONE:
-                        TaskList.doneTask(Integer.parseInt(rest));
-                        TaskList.printTasks();
+                        bot.taskList.doneTask(Integer.parseInt(rest));
+                        bot.taskList.printTasks();
                         break;
                     case DELETE:
-                        TaskList.deleteTask(Integer.parseInt(rest));
+                        bot.taskList.deleteTask(Integer.parseInt(rest));
                         break;
                     default:
                         Task newTask = Task.taskFactory(cmd, rest);
-                        TaskList.addToStorage(newTask);
+                        bot.taskList.addToStorage(newTask);
                 }
             }catch (DukeException e){
                 System.out.println(e);
             }catch (IllegalArgumentException c){
                 System.out.println("command not found");
             }
-            first = Sc.next().toUpperCase(Locale.ROOT);
-            rest = Sc.nextLine().trim();
-
+            first = bot.getCommand();
+            rest = bot.getRest();
         }
-        System.out.println("Bye. Hope to see you again soon!");
-        Sc.close();
     }
+
+    private String getCommand(){
+        return this.Sc.next().toUpperCase(Locale.ROOT);
+    }
+
+    private String getRest(){
+        return this.Sc.nextLine().trim();
+    }
+
+    private void close(){
+        System.out.println("Bye. Hope to see you again soon!");
+        this.Sc.close();
+    }
+
 }
