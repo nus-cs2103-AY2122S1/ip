@@ -14,7 +14,7 @@ public class Duke {
      */
 
     public Duke() {
-        System.out.println("~~ Hello! I'm Duke ~~~~~~~~~\n~~ What can I do for you? ~~");
+        System.out.println("~~ Hello! I'm Duke ~~~~~~~~~\n~~ What can I do for you? ~~\n");
     }
 
     /**
@@ -26,9 +26,10 @@ public class Duke {
     public void add(Task task) {
         tasks[counter] = task;
         counter++;
-        System.out.println("\tGot it. I've added this task: ");
-        System.out.println("\t~~" + task.toString() + "~~");
-        System.out.println("\tNow you have " + counter + (counter > 1 ? " tasks" : " task") + " in the list.");
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("~~" + task.toString() + "~~");
+        System.out.println("Now you have " + counter + (counter > 1 ? " tasks" : " task")
+                                + " in the list.\n");
     }
 
     /**
@@ -37,10 +38,11 @@ public class Duke {
      */
 
     public void iterate() {
-        System.out.println("\tHere are the tasks in your list: ");
+        System.out.println("Here are the tasks in your list: ");
         for(int i = 0; i < counter; i++) {
-            System.out.println("\t" + (i + 1) + "." + tasks[i].toString());
+            System.out.println((i + 1) + "." + tasks[i].toString());
         }
+        System.out.println("");
     }
 
     /**
@@ -53,8 +55,8 @@ public class Duke {
     public void markDone(int num) {
         Task taskDone = tasks[num - 1];
         taskDone.markAsDone();
-        System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println("\t~" + taskDone.toString() + "~ ");
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("~" + taskDone.toString() + "~ \n");
     }
 
     /**
@@ -87,7 +89,7 @@ public class Duke {
         String taskTime = input.substring(by + tag.length());
         return new String[]{taskDescription, taskTime};
     }
-    
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -109,6 +111,7 @@ public class Duke {
                 Task t = duke.setTask(input);
                 duke.add(t);
             }
+
             input = sc.nextLine();
         }
         System.out.println("@@@ Bye. Hope to see you again soon! @@@");
