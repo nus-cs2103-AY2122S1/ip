@@ -1,11 +1,12 @@
 todo study
-event dating /at tonight 10pm
-done 1
+event dating /at 10pm
+deadline project /by tonight
 list
-deadline CS2103T IP /by Thu night
-done 4
-done 2
+done 1
+delete 1
 list
 done 3
-list
+delete 3
+done
+delete
 bye

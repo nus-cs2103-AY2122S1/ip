@@ -53,6 +53,12 @@ class NoSuchModeException extends DinoException {
     }
 }
 
+class TaskAlreadyDoneException extends DinoException {
+    public TaskAlreadyDoneException() {
+        super("🤨 Hey you have already done this task!");
+    }
+}
+
 
 /*
 class TaskListFullException extends DinoException {

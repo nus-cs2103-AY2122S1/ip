@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Tool {
 
     public static String getFirstWord(String s) {
@@ -26,23 +28,42 @@ public class Tool {
             String thingsAfterCmd = cmd.substring(cmdType.length() + 1);
             if (thingsAfterCmd.trim().length() == 0) throw new IndexNotSpecifiedException();
             try {
-                return Integer.parseInt(thingsAfterCmd);
+                int index = Integer.parseInt(thingsAfterCmd);
+                if (index < 1) throw new InvalidIndexException();
+                return index;
             } catch (NumberFormatException e) {
                 throw new InvalidInputException();
+            } catch (InvalidIndexException e) {
+                System.out.println(e.getMessage());
             }
-        } catch (InvalidInputException e) {
+        } catch (InvalidInputException | IndexNotSpecifiedException e) {
             System.out.println(e.getMessage());
-            return 0;
-        } catch (IndexNotSpecifiedException e) {
-            System.out.println(e.getMessage());
-            return -1;
         }
+        return -1;
     }
 
-    public static boolean isTaskCategorized(String s) throws TaskNotCategorizedException {
+    public static boolean isTaskCategorized(String s){
         String type = getFirstWord(s);
         if (type.equals("todo") || type.equals("deadline") || type.equals("event")) return true;
-        else throw new TaskNotCategorizedException();
+        else return false;
+    }
+
+    public static void run(){
+        Dino dino = new Dino();
+        dino.greeting();
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()) {
+            String input = sc.nextLine();
+            if (input.equals("echo")) dino.setEcho();
+            else if (input.equals("bye")) {
+                dino.farewell();
+                break;
+            } else {
+                if (dino.getMode().equals("echo")) dino.echo(input);
+                else dino.readCommand(input);
+            }
+        }
+        sc.close();
     }
 
 }
