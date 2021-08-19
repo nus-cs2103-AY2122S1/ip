@@ -32,12 +32,14 @@ public class Duke {
 
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        while(!input.equals("bye")) {
+        while(true) {
+            String input = sc.nextLine();
             String[] inputList = input.split(" ");
             String action = inputList[0];
             try {
-                if (action.equals("list")) {
+                if (action.equals("bye")) {
+                    break;
+                } else if (action.equals("list")) {
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println((i + 1) + "." + tasks.get(i).toString());
                     }
@@ -68,11 +70,9 @@ public class Duke {
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
-
             } catch (DukeException e) {
                 System.out.println("☹ OOPS!!! " + e.getMessage());
             }
-            input = sc.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
