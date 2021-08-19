@@ -30,6 +30,42 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: \n" + t[num - 1].toString());
                 System.out.println("_______________________________________________");
             }
+            else if(response.contains("todo")){
+                String[]str = response.split(" ");
+                String task = str[0];
+                String command = str[1];
+                command = response.substring(response.indexOf(" "));
+                Task td = new Todo(command);
+                t[ctr] = td;
+                System.out.println("Got it! I've added this task: \n" + td.toString());
+                ctr++;
+                System.out.println("Now you have " + ctr + " tasks in the list.");
+                System.out.println("_______________________________________________");
+            }
+            else if(response.contains("deadline")){
+                int tLabelFirst = response.indexOf(" ") + 1;
+                int tTimeFirst = response.indexOf("/");
+                String tLabel = response.substring(tLabelFirst, tTimeFirst - 1);
+                String tTime = response.substring(tTimeFirst + 4);
+                Task td = new Deadline(tLabel, tTime);
+                t[ctr] = td;
+                System.out.println("Got it! I've added this task: \n" + td.toString());
+                ctr++;
+                System.out.println("Now you have " + ctr + " tasks in the list.");
+                System.out.println("_______________________________________________");
+            }
+            else if(response.contains("event")){
+                int tLabelFirst = response.indexOf(" ") + 1;
+                int tTimeFirst = response.indexOf("/");
+                String tLabel = response.substring(tLabelFirst, tTimeFirst - 1);
+                String tTime = response.substring(tTimeFirst + 4);
+                Task td = new Event(tLabel, tTime);
+                t[ctr] = td;
+                System.out.println("Got it! I've added this task: \n" + td.toString());
+                ctr++;
+                System.out.println("Now you have " + ctr + " tasks in the list.");
+                System.out.println("_______________________________________________");
+            }
             else {
                 System.out.println("_______________________________________________");
                 System.out.println("added: " + response);
