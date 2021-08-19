@@ -137,11 +137,10 @@ public class Duke {
                                     + " items in your task list."));
                             break;
                         case "deadline":
-                            scanner.useDelimiter("\\s*/by\\s*");
-                            String[] tokens = scanner.nextLine().split("\\s*/by\\s*");
-                            System.out.println("token length: " + tokens.length);
-                            String deadlineName = tokens[0];
-                            String deadlineReminder = tokens[1];
+                            // scanner.useDelimiter("\\s*/by\\s*");
+                            String[] deadlineTokens = scanner.nextLine().split("\\s*/by\\s*");
+                            String deadlineName = deadlineTokens[0];
+                            String deadlineReminder = deadlineTokens[1];
                             Task newestDeadline = new Task(deadlineName, "deadline", deadlineReminder);
                             taskArrayList.add(newestDeadline);
                             System.out.println(sandwich("New task added: \n"
@@ -149,10 +148,11 @@ public class Duke {
                                     + "\n You now have "
                                     + taskArrayList.size()
                                     + " items in your task list."));
-                            scanner.reset();
+                            // scanner.reset();
                             break;
                         case "event":
                             scanner.useDelimiter("\\s*/at\\s*");
+                            String[] eventTokens = scanner.nextLine().split("\\s*/at\\s*");
                             String eventName = scanner.nextLine();
                             Task newestEvent = new Task(eventName, "deadline");
                             taskArrayList.add(newestEvent);
