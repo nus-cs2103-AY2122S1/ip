@@ -1,21 +1,16 @@
-import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke\n" +
-                           "What can I do for you?");
+                "To add a Todo, type -> todo <Description> \n" +
+                "To add a Deadline, type -> deadline <Description> /by <deadline>\n" +
+                "To add an Event, type -> event <Description> /at <details>\n" +
+                "To mark as done, type -> done <task list index>\n" +
+                "To see all of your tasks, type -> list\n" +
+                "To end session, type -> bye\n" +
+                "What can I do for you today?");
 
 
-
-//        while (true) {
-//            String input = sc.nextLine();
-//            if (!input.equals("bye")) {
-//                System.out.println(input);
-//            } else {
-//                System.out.println("Bye. Hope to see you again soon!");
-//                break;
-//            }
-//        }
         Recieve recieve = new Recieve();
         recieve.run();
 

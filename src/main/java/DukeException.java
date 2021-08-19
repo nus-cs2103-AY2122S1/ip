@@ -5,9 +5,6 @@ public class DukeException extends Exception {
         super(str);
     }
 
-//    public DukeException() {
-//
-//    }
 
     @Override
     public String toString() {
