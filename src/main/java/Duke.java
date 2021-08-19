@@ -2,6 +2,12 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
         Task[] tasks = new Task[100];
         int numOfTasks = 0;
         Scanner sc = new Scanner(System.in);
@@ -19,7 +25,7 @@ public class Duke {
                 System.out.println("      " + tasks[numOfTasks - 1].toString());
                 System.out.println("     Now you have " + numOfTasks + " tasks in the list.");
             } else if (task.contains("deadline")) {
-                int position = task.indexOf('\\');
+                int position = task.indexOf('/');
                 String taskName = task.substring(9, position - 1);
                 String deadlineTime = task.substring(position + 4);
                 tasks[numOfTasks++] = new Deadline(taskName, deadlineTime);
@@ -27,7 +33,7 @@ public class Duke {
                 System.out.println("      " + tasks[numOfTasks - 1].toString());
                 System.out.println("     Now you have " + numOfTasks + " tasks in the list.");
             } else if (task.contains("event")) {
-                int position = task.indexOf('\\');
+                int position = task.indexOf('/');
                 String taskName = task.substring(6, position - 1);
                 String eventTime = task.substring(position + 4);
                 tasks[numOfTasks++] = new Event(taskName, eventTime);
@@ -37,7 +43,7 @@ public class Duke {
             } else if (task.contains("done")) {
                 int itemDone = Integer.parseInt(task.substring(5));
                 tasks[itemDone - 1].done = true;
-                System.out.println("    Nice! I've marked this task as done: ");
+                System.out.println("    Nice! I've marked this task as done:");
                 System.out.println("      " + tasks[itemDone - 1].toString());
             } else if (task.equals("list")) {
                 System.out.println("    Here are the tasks in your list:");
