@@ -6,11 +6,12 @@ import java.util.List;
 public class Duke {
     public static void main(String[] args) {
         // Introduction message
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "______ _____ _   _ \n" +
+                "| ___ \\  ___| \\ | |\n" +
+                "| |_/ / |__ |  \\| |\n" +
+                "| ___ \\  __|| . ` |\n" +
+                "| |_/ / |___| |\\  |\n" +
+                "\\____/\\____/\\_| \\_/\n";
         System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
         drawLine();
 
@@ -37,9 +38,6 @@ public class Duke {
             }
         }
     }
-    public static void checkValidity(String userInput, int taskIndex) {
-
-    }
 
     /**
      * Deletes a task from the array of tasks.
@@ -59,7 +57,7 @@ public class Duke {
         } catch(NumberFormatException e) {
             dukeReply("OOPS!!! Must be a number bodoh");
         } catch(IndexOutOfBoundsException e) {
-            dukeReply("OOPS!!! NUmber doesnt exist");
+            dukeReply("OOPS!!! Number doesnt exist");
         }
     }
 
