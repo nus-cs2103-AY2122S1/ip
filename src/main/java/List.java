@@ -11,7 +11,7 @@ public class List {
         Task newToDo = new ToDo(text);
         list.add(newToDo);
         System.out.println("Got it. I've added this task: ");
-        System.out.println(newToDo.toString());
+        System.out.println(newToDo);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
@@ -19,7 +19,7 @@ public class List {
         Task newDl = new Deadline(text, by);
         list.add(newDl);
         System.out.println("Got it. I've added this task: ");
-        System.out.println(newDl.toString());
+        System.out.println(newDl);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
@@ -27,12 +27,12 @@ public class List {
         Task newEvent = new Event(text, at);
         list.add(newEvent);
         System.out.println("Got it. I've added this task: ");
-        System.out.println(newEvent.toString());
+        System.out.println(newEvent);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
     public void setIndexDone(int index) {// starts from 1
-        if(index > list.size()){
+        if(index > list.size() || index < 1){//check for invalid index number
             System.out.println("There is no task " + index);
             return;
         }
@@ -42,7 +42,7 @@ public class List {
     }
 
     public void deleteTask(int index) {//starts from 1
-        if(index > list.size()){
+        if(index > list.size() || index < 1){
             System.out.println("There is no task " + index);
             return;
         }

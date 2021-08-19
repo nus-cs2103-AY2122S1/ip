@@ -1,14 +1,16 @@
 import java.util.Scanner;
 
 public class Duke {
-    //    public static int extractInt(String input) {
-//        String[] parts = input.split(" ");
-//        if(parts.length <= 1) {
-////          throw error
-//        }
-//        String numStr = parts[1];
-//        return Integer.valueOf(numStr);
-//    }
+    // extract int from done and delete prompts
+    public static int extractInt(String input) throws DukeException {
+        String[] parts = input.split(" ");//split along the whitespace to get the integer
+        if (parts.length <= 1) {// checking for incomplete prompts
+            throw new DukeException();
+        }
+        String numStr = parts[1];
+        return Integer.valueOf(numStr);
+    }
+
     public static void main(String[] args) {
 
         String logo = " ____        _        \n"
@@ -24,48 +26,38 @@ public class Duke {
         while (shouldContinue) {//create loop for the chat
             try {
                 if (input.startsWith("done ")) {
-                    String[] parts = input.split(" ");
-                    if (parts.length <= 1) {
-                        throw new DukeException();
-                    }
-                    String numStr = parts[1];
-                    int numInt = Integer.valueOf(numStr);
+                    int numInt = extractInt(input);
                     list.setIndexDone(numInt);
                     input = sc.nextLine();
                     continue;
                 } else if (input.startsWith("delete ")) {
-                    String[] parts = input.split(" ");
-                    if (parts.length <= 1) {
-                        throw new DukeException();
-                    }
-                    String numStr = parts[1];
-                    int numInt = Integer.valueOf(numStr);
+                    int numInt = extractInt(input);
                     list.deleteTask(numInt);
                     input = sc.nextLine();
                     continue;
                 } else if (input.startsWith("todo ")) {
-                    String task = input.replaceFirst("todo ", "");
-                    if (task.isBlank()) {
+                    String task = input.replaceFirst("todo ", "");//remove to-do from input
+                    if (task.isBlank()) {//check for incomplete input
                         throw new DukeException();
                     }
                     list.addToDo(task);
                     input = sc.nextLine();
                     continue;
                 } else if (input.startsWith("deadline ")) {
-                    String task = input.replaceFirst("deadline ", "");
-                    if (task.isBlank()) {
+                    String task = input.replaceFirst("deadline ", "");//remove deadline from input
+                    if (task.isBlank()) {//checking incomplete input
                         throw new DukeException();
                     }
-                    String[] parts = task.split("/by");
+                    String[] parts = task.split("/by");//split string along keyword /by
                     list.addDeadline(parts[0], parts[1]);
                     input = sc.nextLine();
                     continue;
                 } else if (input.startsWith("event ")) {
-                    String task = input.replaceFirst("event ", "");
-                    if (task.isBlank()) {
+                    String task = input.replaceFirst("event ", "");//remove event from input
+                    if (task.isBlank()) {//checking incomplete input
                         throw new DukeException();
                     }
-                    String[] parts = task.split("/at");
+                    String[] parts = task.split("/at");//split string along keyword /at
                     list.addEvent(parts[0], parts[1]);
                     input = sc.nextLine();
                     continue;
@@ -82,7 +74,6 @@ public class Duke {
                         list.show();
                         input = sc.nextLine();
                         break;
-
                     default:
                         throw new DukeException();
                 }
