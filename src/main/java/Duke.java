@@ -94,12 +94,22 @@ public class Duke {
         return str;
     }
 
+    /**
+     * A method to mark the task as done
+     * @param str The input String
+     * @return The output that you want to be printed out in the console
+     */
     public static String markDone(String str) {
         int a = Integer.parseInt(str.substring(5)) - 1;
         tasks.get(a).taskDone();
         return "Nice! I've marked this task as done: \n" + tasks.get(a);
     }
 
+    /**
+     * A method to add a to-do task
+     * @param str A string the that is the command
+     * @return The output that you want to be printed out in the console
+     */
     public static String todoTask(String str) throws DukeException {
         try {
             str = str.substring(5);
@@ -114,6 +124,11 @@ public class Duke {
 
     }
 
+    /**
+     * A method to add a create deadline task
+     * @param str A string the that is the command
+     * @return The output that you want to be printed out in the console
+     */
     public static String deadlineTask(String str) {
         try {
             int i = str.indexOf("/");
@@ -127,6 +142,11 @@ public class Duke {
         }
     }
 
+    /**
+     * A method to add a create task
+     * @param str A string the that is the command
+     * @return The output that you want to be printed out in the console
+     */
     public static String eventsTask(String str) {
         try {
             int i = str.indexOf("/");
@@ -140,6 +160,11 @@ public class Duke {
         }
     }
 
+    /**
+     * A method to delete a task
+     * @param str A string the that is the command
+     * @return The output that you want to be printed out in the console
+     */
     public static String deleteTask(String str) {
         int index = Integer.parseInt(str.substring(7)) - 1;
         Task t = tasks.get(index);

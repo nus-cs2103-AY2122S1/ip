@@ -6,6 +6,10 @@ public class Events extends Task{
         this.at = at;
     }
 
+    /**
+     *
+     * @return the String representation of a Deadline
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at:" + at + ")";

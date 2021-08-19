@@ -3,6 +3,10 @@ public class Todo extends Task{
         super(description);
     }
 
+    /**
+     *
+     * @return the String representation of a Deadline
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
