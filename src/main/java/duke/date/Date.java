@@ -25,4 +25,13 @@ public class Date {
     public String toString() {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Date) {
+            Date another = (Date) other;
+            return another.toString().equals(this.toString());
+        }
+        return false;
+    }
 }
