@@ -1,6 +1,6 @@
 public class Deadline extends Task {
     String by;
-    public Deadline(String desc, String by) {
+    public Deadline(String desc, String by) throws Exception{
         super(desc);
         this.by = by;
     }

@@ -1,6 +1,6 @@
 public class Event extends Task {
     String at;
-    public Event(String desc, String at) {
+    public Event(String desc, String at) throws Exception {
         super(desc);
         this.at = at;
     }

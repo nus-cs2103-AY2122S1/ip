@@ -2,8 +2,11 @@ public class Task {
     private String desc;
     private boolean isComplete;
 
-    public Task(String desc) {
+    public Task(String desc) throws Exception {
         this.desc = desc.trim();
+        if (desc.trim().length() == 0) {
+            throw new DukeException.EmptyDescriptionException();
+        }
         this.isComplete = false;
     }
 
