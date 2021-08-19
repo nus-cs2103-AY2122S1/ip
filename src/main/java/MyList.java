@@ -1,41 +1,63 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 class MyList {
 
     private final List<Task> items;
+    HashSet<String> listedItems;
 
     MyList() {
         this.items = new ArrayList<Task>(100);
+        this.listedItems = new HashSet<String>();
     }
 
     protected String addItem(String command) {
-        String[] commandTokens = command.split(" ");
+        String[] commandTokens = generateTokens(command, " ");
         String[] detailTokens;
+        String taskName;
         Task task = null;
         switch (commandTokens[0]) {
             case ("todo"):
-                task = new ToDo(command.substring(5).trim());
-                this.items.add(task);
-                break;
+                taskName = command.substring(5).trim();
+                if (this.listedItems.contains(taskName)) {
+                    return "task already in list!";
+                } else {
+                    task = new ToDo(taskName);
+                    this.listedItems.add(taskName);
+                    this.items.add(task);
+                    break;
+                }
             case ("event"):
-                detailTokens = generateTokens(command.substring(6));
-                task = new Event(detailTokens[0].trim(), detailTokens[1].trim());
-                this.items.add(task);
-                break;
+                detailTokens = generateTokens(command.substring(6), "/");
+                taskName = detailTokens[0].trim();
+                if (this.listedItems.contains(taskName)) {
+                    return "task already in list!";
+                } else {
+                    task = new Event(taskName, detailTokens[1].trim());
+                    this.listedItems.add(taskName);
+                    this.items.add(task);
+                    break;
+                }
             case ("deadline"):
-                detailTokens = generateTokens(command.substring(9));
-                task = new Deadline(detailTokens[0].trim(), detailTokens[1].trim());
-                this.items.add(task);
-                break;
+                detailTokens = generateTokens(command.substring(9), "/");
+                taskName = detailTokens[0].trim();
+                if (this.listedItems.contains(taskName)) {
+                    return "task already in list!";
+                } else {
+                    task = new Deadline(taskName, detailTokens[1].trim());
+                    this.listedItems.add(taskName);
+                    this.items.add(task);
+                    break;
+                }
             default:
                 return "invalid command!!";
         }
         return String.format("New task added to list:\n%s", task.toString()); //TODO
     }
 
-    private String[] generateTokens(String taskDetails) {
-        return taskDetails.split("/");
+    private String[] generateTokens(String taskDetails, String delimiter) {
+        return taskDetails.split(delimiter);
     }
 
     protected String markAsCompleted(String taskName) {
