@@ -4,6 +4,11 @@ public class Command {
   protected static final String SPLIT_LINE = "\n" +
     "\t--------------------------------------------------\n";
 
+  /**
+   * Start Bloom. Handle wrong-command, incomplete-complete-command, 
+   * invalid-command exceptions. For now, the bot stops working if 
+   * there exist such exceptions.
+   */
   public void start() {
     Scanner sc = new Scanner(System.in);
     String cmd = "GREET";
@@ -58,6 +63,13 @@ public class Command {
     sc.close();
   }
 
+  /**
+   * Run a command line as inputted.
+   * @param  cmd            the input com
+   * @return true           if there no exception is thrown
+   *         false          if an exception is thrown
+   * @throws BloomException the exceptions related to the bot
+   */
   public boolean run(String cmd) throws BloomException {
     System.out.println(SPLIT_LINE);
     String[] line = cmd.split(" ");
@@ -114,6 +126,9 @@ public class Command {
     return !cmd.equals("bye");
   }
 
+  /**
+   * Greet users.
+   */
   public void greet() {
     String logo =
       "\t   ____  _                       \n" +
@@ -129,20 +144,38 @@ public class Command {
     System.out.println(logo + greeting);
   }
 
+  /**
+   * Echo whatever texts inputted.
+   * @param str the text input
+   */
   public void echo(String str) {
     System.out.println("\t " + str);
   }
 
+  /**
+   * Say goodbye.
+   * NOTE: only for testing purpose therefore
+   *       exception handling is not supported.
+   */
   public void exit() {
     System.out.println("\t Bye. Hope to see you again soon!");
   }
 
+  /**
+   * Add new task.
+   * NOTE: only for testing purpose therefore
+   *       exception handling is not supported.
+   * @param desc the task description
+   */
   public void add(String desc) {
     Task t = new Task(desc);
     Task.tasks.add(t);
     System.out.println("\t added: " + t.description);
   }
 
+  /**
+   * List all tasks.
+   */
   public void list() {
     System.out.println("\t Here are the tasks in your list:");
     for (int i = 1; i <= Task.tasks.size(); ++i) {
@@ -151,6 +184,10 @@ public class Command {
     }
   }
 
+  /**
+   * Mark one task as done.
+   * @param i the order of the task as listed
+   */
   public void done(int i) {
     Task t = Task.tasks.get(i-1);
     t.markAsDone();
@@ -159,6 +196,10 @@ public class Command {
       "\t   " + t);
   }
 
+  /**
+   * Add new to-do task.
+   * @param desc the task description
+   */
   public void todo(String desc) {
     ToDo td = new ToDo(desc);
     Task.tasks.add(td);
@@ -168,6 +209,11 @@ public class Command {
       "\t Now you have " + Task.tasks.size() + " tasks in the list.");
   }
 
+  /**
+   * Add new deadline task.
+   * @param desc the task description
+   * @param by   the date by which the task should be completed
+   */
   public void deadline(String desc, String by) {
     Deadline d = new Deadline(desc, by);
     Task.tasks.add(d);
@@ -177,6 +223,11 @@ public class Command {
       "\t Now you have " + Task.tasks.size() + " tasks in the list.");
   }
 
+  /**
+   * Add new event task.
+   * @param desc the task description
+   * @param at   the date at which the task is happening
+   */
   public void event(String desc, String at) {
     Event e = new Event(desc, at);
     Task.tasks.add(e);
@@ -186,6 +237,10 @@ public class Command {
       "\t Now you have " + Task.tasks.size() + " tasks in the list.");
   }
 
+  /**
+   * Delete one task.
+   * @param i the order of the task as listed
+   */
   public void delete(int i) {
     Task t = Task.tasks.remove(i-1);
     System.out.println(
