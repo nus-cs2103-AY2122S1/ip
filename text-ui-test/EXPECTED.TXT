@@ -1,7 +1,45 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+-- 	============	 --
+Welcome, I am Gnosis.
+The spark to meet your needs.
+How can I assist you ?
+-- 	============	 --
+
+-- 	============	 --
+Todo added:
+[T][ ]  read book
+Total tasks in the list: 1
+-- 	============	 --
+
+-- 	============	 --
+Listing all tasks in your list:
+1. [T][ ]  read book
+-- 	============	 --
+
+-- 	============	 --
+Deadline added:
+[D][ ]  buy book  (by:  tuesday)
+Total tasks in the list: 2
+-- 	============	 --
+
+-- 	============	 --
+Event added:
+[E][ ]  cs2103  (at:  Friday 4-6pm)
+Total tasks in the list: 3
+-- 	============	 --
+
+-- 	============	 --
+Todo added:
+[T][ ]  work hard for cs2103 :)
+Total tasks in the list: 4
+-- 	============	 --
+
+-- 	============	 --
+Task 1 marked as done:
+	[T][X]  read book
+-- 	============	 --
+
+-- 	============	 --
+Task 3 marked as done:
+	[E][X]  cs2103  (at:  Friday 4-6pm)
+-- 	============	 --
 

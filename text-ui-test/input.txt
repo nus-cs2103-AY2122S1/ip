@@ -1,0 +1,7 @@
+todo read book
+list
+deadline buy book /by tuesday
+event cs2103 /at Friday 4-6pm
+todo work hard for cs2103 :)
+done 1
+done 3
