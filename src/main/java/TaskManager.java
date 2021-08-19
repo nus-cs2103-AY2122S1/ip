@@ -41,7 +41,7 @@ public class TaskManager {
         System.out.println("Nice! I've marked this task as done: ");
         String marked = taskToBeMarked.getStatusIcon();
         String taskInformation = taskToBeMarked.getValue();
-        System.out.println("\t[" + marked + "] " + taskInformation);
+        System.out.println("\t" + taskToBeMarked.toString());
     }
 
     /**
