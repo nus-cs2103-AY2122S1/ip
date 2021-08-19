@@ -4,7 +4,7 @@ import java.util.Scanner;  // Import the Scanner class
 public class Duke {
     public static void main(String[] args) {
 
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         String line = "    ____________________________________________________________";
         String spacing = "     ";
@@ -16,12 +16,20 @@ public class Duke {
         while (!command.toLowerCase().equals("bye")) {
             System.out.println(line);
             if (command.toLowerCase().equals("list")) {
+                System.out.println(spacing + "Here are the tasks in your list:");
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.println(String.format(spacing + "%d. %s", (i + 1), list.get(i)));
+                    System.out.println(String.format(spacing + "%d.%s", (i + 1), list.get(i).toString()));
                 }
+            } else if (command.length() > 5 && command.toLowerCase().substring(0, 5).equals("done ")) {
+                Task item = list.get(Integer.parseInt(command.substring(5)) - 1);
+                item.markAsDone();
+                System.out.println(spacing + "Nice! I've marked this task as done:");
+                System.out.println(spacing + "  " + item.toString());
+                // if(item num more than list length then throw error)
             } else {
-                System.out.println(spacing + command);
-                list.add(command);
+                Task t = new Task(command);
+                list.add(t);
+                System.out.println(spacing + "added : " + command);
             }
             System.out.println(line);
             command = myObj.nextLine();
