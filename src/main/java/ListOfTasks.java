@@ -21,7 +21,7 @@ public class ListOfTasks {
         while (a < count) {
             System.out.println("     " + ( a + 1 ) + ". " + this.xs[a].information );
             a = a + 1;
-
         }
+
     }
 }
