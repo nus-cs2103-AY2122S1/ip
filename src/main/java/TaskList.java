@@ -11,7 +11,7 @@ public class TaskList {
     }
 
     /**
-     * Given a string, creates a To-do from that string and adds it to the list of task
+     * Given a string, creates a To-do from that string and adds it to the list of task.
      * @param taskTitle a String of the title of the To-do to be added.
      * @return the newly created Todo.
      */
@@ -22,7 +22,7 @@ public class TaskList {
     }
 
     /**
-     * Given a string, creates a Deadline from that string and adds it to the list of task
+     * Given a string, creates a Deadline from that string and adds it to the list of task.
      * @param taskTitle a String of the title of the Deadline to be added.
      * @return the newly created Deadline.
      */
@@ -33,7 +33,7 @@ public class TaskList {
     }
 
     /**
-     * Given a string, creates a Deadline from that string and adds it to the list of task
+     * Given a string, creates a Deadline from that string and adds it to the list of task.
      * @param taskTitle a String of the title of the Deadline to be added.
      * @return the newly created Deadline.
      */
@@ -44,7 +44,7 @@ public class TaskList {
     }
 
     /**
-     * Given the index number of a task, marks that task as completed
+     * Given the index number of a task, marks that task as completed.
      *
      * @param taskNumber an int representing the index of the task
      * @return the String representation of the completed task
@@ -67,7 +67,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task when given its index number
+     * Deletes a task when given its index number.
      *
      * @param taskNumber an int representing the index of the task
      * @return the String representation of the deleted task
@@ -75,7 +75,9 @@ public class TaskList {
     public String deleteTask(int taskNumber) {
         int taskIndex = taskNumber - 1;
         // Assumes that the task exists.
-        return "Noted. I've removed this task:\n\t" + this.tasks.remove(taskIndex).toString() + this.countTasks();
+        return "Noted. I've removed this task:\n\t"
+                + this.tasks.remove(taskIndex).toString()
+                + this.countTasks();
     }
 
     /**

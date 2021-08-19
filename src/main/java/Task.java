@@ -9,9 +9,11 @@ public class Task {
         DEADLINE('D');
 
         public final char indicator;
+
         private TypeIndicators(char indicator) {
             this.indicator = indicator;
         }
+
         public void setIndicatorForTask(Task task) {
             task.typeIndicator = this.indicator;
         }

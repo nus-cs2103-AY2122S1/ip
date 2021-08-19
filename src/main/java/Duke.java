@@ -17,6 +17,10 @@ public class Duke extends Chatbot {
 
     private TaskList taskList;
 
+    /**
+     * The entrypoint of the Duke chat bot.
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -62,16 +66,20 @@ public class Duke extends Chatbot {
      * Gets the description supplied by the user after a command.
      * @param command a String that describes the command (e.g. "event")
      * @param message the String that is input by the user (e.g. "event Meeting /at tomorrow")
-     * @throws DukeException
      * @return a String representing the description after the command (e.g. "Meeting /at tomorrow")
+     * @throws DukeException indicates that the description is invalid
      */
-    public String getInputAfterCommand(String command, String message) throws DukeException {
+    public String getStringFrom(String command, String message) throws DukeException {
         if (message.length() <= command.length()) {
-            throw new DukeException(String.format("The description of a %s cannot be empty.", command));
+            throw new DukeException(
+                String.format("The description of a %s cannot be empty.", command)
+            );
         }
         String description = message.substring(command.length()).trim();
         if (description.length() == 0) {
-            throw new DukeException(String.format("The description of a %s cannot be empty.", command));
+            throw new DukeException(
+                String.format("The description of a %s cannot be empty.", command)
+            );
         }
         return description;
     }
@@ -81,10 +89,10 @@ public class Duke extends Chatbot {
      * @param command A String command that comes before the desired number. (e.g. "delete")
      * @param message The String that is the full input by the user. (e.g. "delete 2")
      * @return an int representing the description of the command. (e.g. "2")
-     * @throws DukeException
+     * @throws DukeException indicates that the description is invalid
      */
-    public int getIntInputAfterCommand(String command, String message) throws DukeException {
-        return Integer.parseInt(getInputAfterCommand(command, message));
+    public int getIntFrom(String command, String message) throws DukeException {
+        return Integer.parseInt(getStringFrom(command, message));
     }
 
     /**
@@ -101,17 +109,18 @@ public class Duke extends Chatbot {
             if (message.equals(LIST_COMMAND)) {
                 output = this.taskList.toString();
             } else if (message.startsWith(COMPLETE_TASK_COMMAND)) {
-                output = this.taskList.completeTask(getIntInputAfterCommand(COMPLETE_TASK_COMMAND, message));
+                output = this.taskList.completeTask(getIntFrom(COMPLETE_TASK_COMMAND, message));
             } else if (message.startsWith(DELETE_TASK_COMMAND)) {
-                output = this.taskList.deleteTask(getIntInputAfterCommand(DELETE_TASK_COMMAND, message));
+                output = this.taskList.deleteTask(getIntFrom(DELETE_TASK_COMMAND, message));
             } else if (message.startsWith(CREATE_TODO_COMMAND)) {
-                output = this.taskList.addTodo(getInputAfterCommand(CREATE_TODO_COMMAND, message));
+                output = this.taskList.addTodo(getStringFrom(CREATE_TODO_COMMAND, message));
             } else if (message.startsWith(CREATE_EVENT_COMMAND)) {
-                output = this.taskList.addEvent(getInputAfterCommand(CREATE_EVENT_COMMAND, message));
+                output = this.taskList.addEvent(getStringFrom(CREATE_EVENT_COMMAND, message));
             } else if (message.startsWith(CREATE_DEADLINE_COMMAND)) {
-                output = this.taskList.addDeadline(getInputAfterCommand(CREATE_DEADLINE_COMMAND, message));
+                output = this.taskList.addDeadline(getStringFrom(CREATE_DEADLINE_COMMAND, message));
             } else {
-                throw new DukeException("I don't know what that command means.\nPlease input a valid command.");
+                throw new DukeException("I don't know what that command means." +
+                        "\nPlease input a valid command.");
             }
             Chatbot.printMessage(output);
         } catch (DukeException e) {

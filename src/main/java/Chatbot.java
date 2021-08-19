@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class Chatbot {
     public static Scanner sc = new Scanner(System.in);
+
     /**
      * Takes in a single line of input from the user.
      *
