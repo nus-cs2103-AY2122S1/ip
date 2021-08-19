@@ -55,6 +55,7 @@ public class Gnosis {
      * */
     public static void executeCommand(String command, String input) throws GnosisException,
             NumberFormatException {
+        int taskIndex;
         // convert command to lower case to avoid case issues
         switch (command.toLowerCase()) {
             case "todo":
@@ -74,8 +75,13 @@ public class Gnosis {
                 break;
             case "done":
                 // only if "done" command is call, we retrieve task index from user
-                int taskIndex = Integer.parseInt(input.trim()) - 1;
+                taskIndex = Integer.parseInt(input.trim()) - 1;
                 MarkTaskAsDone(taskIndex);
+                break;
+            case "delete":
+                taskIndex = Integer.parseInt(input.trim()) - 1;
+                deleteTask(taskIndex);
+                displayNumOfTasks();
                 break;
             case "bye":
                 displayByeMessage();
@@ -136,6 +142,16 @@ public class Gnosis {
         tasks.get(taskIndex).setDone(true);
         System.out.println("Task " + (taskIndex+1) +" marked as done:" );
         System.out.println("\t" + tasks.get(taskIndex));
+    }
+
+    public static void deleteTask(int taskIndex) throws GnosisException {
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new GnosisException(GnosisConstants.TASK_INDEX_OUT_OF_BOUNDS_MESSAGE);
+        }
+        Task t = tasks.get(taskIndex);
+        tasks.remove(taskIndex);
+        System.out.println("Understood. Task has been deleted:");
+        System.out.println(t);
     }
 
     public static void listTasks() {

@@ -28,8 +28,8 @@ public class GnosisConstants {
     public static final String EVENT_EMPTY_MESSAGE = "Event description and specified schedule cannot be empty.\n" +
             "use /at to denote event schedule";
 
-    public static final String TASK_INDEX_OUT_OF_BOUNDS_MESSAGE = "Tasks can only be marked done " +
-            "using index number from list command";
+    public static final String TASK_INDEX_OUT_OF_BOUNDS_MESSAGE = "You can only use Task index" +
+            "from the task number from the list command";
 
     public static final String DONE_COMMAND_NUM_INPUT_MESSAGE = "Please enter only numbers after done command";
 

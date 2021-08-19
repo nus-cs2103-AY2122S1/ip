@@ -1,0 +1,39 @@
+Level 6. Delete
+Add support for deleting tasks from the list.
+
+
+Example:
+
+list
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][X] read book
+     2.[D][X] return book (by: June 6th)
+     3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+     4.[T][X] join sports club
+     5.[T][ ] borrow book
+    ____________________________________________________________
+
+delete 3
+    ____________________________________________________________
+     Noted. I've removed this task:
+       [E][ ] project meeting (at: Aug 6th 2-4pm)
+     Now you have 4 tasks in the list.
+    ____________________________________________________________
+ When implementing this feature, you are also recommended to implement the following extension:
+
+Extension: A-Collections
+
+A-Collections
+↳ Use Java Collections classes
+
+Use Java Collections classes for storing data. For example, you can use an ArrayList<Task> to store the tasks.
+
+Tasks to achieve level-6:
+
+1. Gnosis Class: - Done
+    - Add "delete" command:
+    - new deleteTask method
+        - retrieve task to display before removing from list
+    - add exception for task index out of bounds for delete command
+
