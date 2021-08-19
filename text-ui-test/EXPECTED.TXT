@@ -22,13 +22,13 @@ Hello from
 	Nothing in the list!
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	☹ OOPS!!! Enter a valid number between 1 - 0
+	☹ OOPS!!! Nothing in the list!
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	☹ OOPS!!! Enter a valid number between 1 - 0
+	☹ OOPS!!! Nothing in the list!
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	☹ OOPS!!! Enter a valid number between 1 - 0
+	☹ OOPS!!! Nothing in the list to delete!
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	Nothing in the list!
@@ -50,48 +50,40 @@ Hello from
 	☹ OOPS!!! The start and end time of a event cannot be empty.
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	Got it. I've  added this task:
-	  [E][ ]  (at: Mon 2-4pm)
-	Now you have 3 tasks in the list.
+	☹ OOPS!!! The description of a event cannot be empty.
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	1. [T][ ] borrow book
 	2. [E][ ] project meeting (at: Mon 2-4pm)
-	3. [E][ ]  (at: Mon 2-4pm)
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	☹ OOPS!!! The description of a todo cannot be empty.
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	Nice! I've marked this task as done:
-	  [E][X]  (at: Mon 2-4pm)
+	☹ OOPS!!! Enter a valid number between 1 - 2
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	Noted. I've removed this task:
 	  [T][ ] borrow book
-	Now you have 2 tasks in the list.
+	Now you have 1 tasks in the list.
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	Got it. I've  added this task:
 	  [D][ ] do homework (by: no idea :-P)
-	Now you have 3 tasks in the list.
+	Now you have 2 tasks in the list.
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	☹ OOPS!!! The end time of a deadline cannot be empty.
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	Got it. I've  added this task:
-	  [D][ ]  (by: sunday)
-	Now you have 4 tasks in the list.
+	☹ OOPS!!! The description of a deadline cannot be empty.
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	1. [E][ ] project meeting (at: Mon 2-4pm)
-	2. [E][X]  (at: Mon 2-4pm)
-	3. [D][ ] do homework (by: no idea :-P)
-	4. [D][ ]  (by: sunday)
+	2. [D][ ] do homework (by: no idea :-P)
 	-------------------------------------------------------------
 	-------------------------------------------------------------
-	☹ OOPS!!! Enter a valid number between 1 - 4
+	☹ OOPS!!! Enter a valid number between 1 - 2
 	-------------------------------------------------------------
 	-------------------------------------------------------------
 	☹ OOPS!!! Enter a number for a done action!

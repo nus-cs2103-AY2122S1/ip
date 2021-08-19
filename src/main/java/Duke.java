@@ -88,11 +88,8 @@ public class Duke {
     public void markTaskDone(String taskNo) throws DukeException {
         try {
             validateActionDescription(taskNo, Action.DONE);
-            int taskNoInt = Integer.parseInt(taskNo) - 1;
-            Task selectedTask = tasks.get(taskNoInt);
-            if (tasks.isEmpty()) {
-                printMessage("Nothing in the list");
-            } else if (selectedTask.isDone()) {
+            Task selectedTask = tasks.get(Integer.parseInt(taskNo) - 1);
+            if (selectedTask.isDone()) {
                 printMessage(
                         String.format("Task %s is already done!\n\t  %s",
                                 taskNo,
@@ -110,6 +107,9 @@ public class Duke {
         } catch (NumberFormatException e) {
             throw new DukeException("Enter a number for a done action!");
         } catch (IndexOutOfBoundsException e) {
+            if (tasks.isEmpty()) {
+                throw new DukeException("Nothing in the list!");
+            }
             throw new DukeException(String.format("Enter a valid number between 1 - %d", tasks.size()));
         }
     }
@@ -174,6 +174,9 @@ public class Duke {
         } catch (NumberFormatException e) {
             throw new DukeException("Enter a number for a delete action");
         } catch (IndexOutOfBoundsException e) {
+            if (tasks.isEmpty()) {
+                throw new DukeException("Nothing in the list to delete!");
+            }
             throw new DukeException(String.format("Enter a valid number between 1 - %d", tasks.size()));
         }
     }
