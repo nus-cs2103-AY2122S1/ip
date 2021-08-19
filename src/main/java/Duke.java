@@ -1,45 +1,62 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void pack(String[] strings) {
-        System.out.println("    ---------------------------------------------");
-        for(int i = 0; i < strings.length; i++) {
-            System.out.println("     " + strings[i]);
-        }
-        System.out.println("    ---------------------------------------------");
+    private static String[] list = new String[100];
+    private static int len = 0;
+    public static void pack(String string) {
+        System.out.println("---------------------------------------------");
+        System.out.println(string);
+        System.out.println("---------------------------------------------");
     }
 
-    //    Level-1 starts
     public static void greet(){
-        String[] greeting = new String[2];
-        greeting[0] = "Hello! I'm Duke";
-        greeting[1] = "What can I do for you?";
+        String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
         pack(greeting);
     }
 
-    public static void echo(){
+    public static void scan(){
         Scanner scan = new Scanner(System.in);
-        String[] s = new String[1];
+        String s;
         do{
-            s[0] = scan.next();
-            if(s[0].equals("bye")) break;
-            pack(s);
-        } while(scan.hasNext());
+            s = scan.nextLine();
+            if(s.equals("bye")) break;
+            if(s.equals("List")) {
+                readList();
+                continue;
+            }
+            addList(s);
+        } while(scan.hasNextLine());
+    }
+
+    public static void addList(String item) {
+        list[len] = item;
+        len++;
+        pack("added: " + item);
+    }
+
+    public static void readList(){
+        String items = "";
+        for(int i = 1; i < len; i++) {
+            items += i + ". " + list[i-1] + "\n";
+        }
+        if(len > 0) {
+            items += len + ". " + list[len-1];
+        }
+        pack(items);
     }
 
     public static void exit(){
-        String[] bye = new String[]{"Bye. Hope to see you again soon!"};
+        String bye = "Bye. Hope to see you again soon!";
         pack(bye);
     }
 
-    public static void level1(){
+    public static void level2(){
         greet();
-        echo();
+        scan();
         exit();
     }
-    //Level-1 ends
 
     public static void main(String[] args) {
-        level1();
+        level2();
     }
 }
