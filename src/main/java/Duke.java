@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static final int MAX_TASKS = 100;
-    private static final String BORDER = "____________________________________________________________\n";
+    private static final String BORDER = "____________________________________________________________";
     private static List<Task> taskList = new ArrayList<>();
 
     private static String printTaskList() {
@@ -74,6 +74,11 @@ public class Duke {
         }
     }
 
+    private static void prettyPrint(String s) {
+        String indentedMsg = s.replaceAll("(?m)^", "    ");
+        System.out.printf("%s\n%s\n%s%n", BORDER, indentedMsg, BORDER);
+    }
+
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -84,7 +89,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Duke is gone. Hello, this is Duchess.\nHow can I help you?");
+        System.out.printf("Duke is gone. Hello, this is Duchess.\nHow can I help you?\n%s%n", BORDER);
 
         while (true) {
             try {
@@ -92,51 +97,51 @@ public class Duke {
                 String[] input_split = user_input.split(" ", 2);
                 String command = input_split[0];
                 if (command.equals("bye")) {
-                    System.out.println("It has been a pleasure, goodbye!");
+                    prettyPrint("It has been a pleasure, goodbye!");
                     sc.close();
                     break;
                 } else if (command.equals("list")) {
-                    System.out.println(printTaskList());
+                    prettyPrint(printTaskList());
                 } else if (command.equals("todo")) {
                     if (input_split.length < 2) {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        throw DukeException.missingInput("todo");
                     }
                     String taskName = input_split[1];
-                    System.out.println(addTodo(taskName));
+                    prettyPrint(addTodo(taskName));
                 } else if (command.equals("deadline")) {
                     if (input_split.length < 2) {
-                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        throw DukeException.missingInput("deadline");
                     }
                     String msg = input_split[1];
                     String[] msg_split = msg.split(" /by ", 2);
                     if (msg_split.length < 2) {
                         throw new DukeException("☹ OOPS!!! Please indicate when the task needs to be done by.");
                     }
-                    System.out.println(addDeadline(msg_split[0], msg_split[1]));
+                    prettyPrint(addDeadline(msg_split[0], msg_split[1]));
                 } else if (command.equals("event")) {
                     if (input_split.length < 2) {
-                        throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                        throw DukeException.missingInput("event");
                     }
                     String msg = input_split[1];
                     String[] msg_split = msg.split(" /at ", 2);
                     if (msg_split.length < 2) {
                         throw new DukeException("☹ OOPS!!! Please indicate the start and end time of the event.");
                     }
-                    System.out.println(addEvent(msg_split[0], msg_split[1]));
+                    prettyPrint(addEvent(msg_split[0], msg_split[1]));
                 } else if (command.equals("done")) {
                     if (input_split.length < 2) {
                         throw new DukeException("☹ OOPS!!! Please indicate which task you want to complete.");
                     }
                     String strTaskNum = input_split[1].split(" ")[0];
                     int taskNum = Integer.parseInt(strTaskNum) - 1;
-                    System.out.println(markTaskDone(taskNum));
+                    prettyPrint(markTaskDone(taskNum));
                 } else if (command.equals("delete")) {
                     if (input_split.length < 2) {
                         throw new DukeException("☹ OOPS!!! Please indicate which task you want to delete.");
                     }
                     String strTaskNum = input_split[1].split(" ")[0];
                     int taskNum = Integer.parseInt(strTaskNum) - 1;
-                    System.out.println(deleteTask(taskNum));
+                    prettyPrint(deleteTask(taskNum));
                 } else {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
