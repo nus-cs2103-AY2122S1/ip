@@ -97,7 +97,7 @@ public class Duke {
                 // adds a deadline task to the list. now with no deadline assumption
                 try {
                     if (strparse.length == 1) {
-                        throw new IncompleteInputException("deadline");
+                        throw new MissingInputException("deadline");
                     }
                     StringBuilder taskb = new StringBuilder();
                     StringBuilder deadlineb = new StringBuilder();
@@ -140,7 +140,7 @@ public class Duke {
                 // adds an event to the list. pretty much like deadline.
                 try {
                     if (strparse.length == 1) {
-                        throw new IncompleteInputException("event");
+                        throw new MissingInputException("event");
                     }
                     StringBuilder taskb = new StringBuilder();
                     StringBuilder atb = new StringBuilder();
@@ -183,7 +183,7 @@ public class Duke {
                 // checks corresponding task as done
                 try {
                     if (strparse.length == 1) {
-                        throw new IncompleteInputException("done");
+                        throw new MissingInputException("done");
                     }
                     try {
                         int i = Integer.parseInt(strparse[1]) - 1;
@@ -194,13 +194,21 @@ public class Duke {
                     if (i >= arrcounter || i < 0) {
                         throw new MissingNoException("done");
                     }
-                    taskarr.get(i).markAsDone();
-                    System.out.println(linebreakstart);
-                    System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n");
-                    System.out.println("   "
-                            + taskarr.get(i).toString()
-                            + '\n');
-                    System.out.println(linebreakend);
+                    boolean check = taskarr.get(i).markAsDone();
+                    if (check) {
+                        System.out.println(linebreakstart);
+                        System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n");
+                        System.out.println("   "
+                                + taskarr.get(i).toString()
+                                + '\n');
+                        System.out.println(linebreakend);
+                    } else {
+                        System.out.println(linebreakstart);
+                        System.out.println("Looksw wike thisw taskw is alweady done! That's gweat!\n");
+                        System.out.println(linebreakend);
+                    }
+
+
                 } catch (DukeException e) {
                     System.out.println(linebreakstart);
                     System.out.println(e.getMessage());
@@ -211,7 +219,7 @@ public class Duke {
                 // deletes corresponding task
                 try {
                     if (strparse.length == 1) {
-                        throw new IncompleteInputException("delete");
+                        throw new MissingInputException("delete");
                     }
                     try {
                         int i = Integer.parseInt(strparse[1]) - 1;

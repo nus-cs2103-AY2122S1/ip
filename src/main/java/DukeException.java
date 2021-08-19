@@ -18,8 +18,8 @@ class IncorrectInputException extends DukeException {
     }
 }
 
-class IncompleteInputException extends DukeException {
-    IncompleteInputException(String keyword) {
+class MissingInputException extends DukeException {
+    MissingInputException(String keyword) {
         super ("Oopsie uwu! Youw cawn't use " + keyword + " withoutw a descwiption forw it!");
     }
 }

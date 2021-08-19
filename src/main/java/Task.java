@@ -15,8 +15,14 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    public void markAsDone() {
-        isDone = true;
+    public boolean markAsDone() {
+        // returns true if task is marked as done, returns false if task is already done
+        if (isDone) {
+            return false;
+        } else {
+            isDone = true;
+            return true;
+        }
     }
 
 }
