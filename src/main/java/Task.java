@@ -1,8 +1,8 @@
 public class Task {
 
     private boolean completed;
-    public String taskName;
-    public String status;
+    private String taskName;
+    protected String status;
 
     public Task(String name) {
         this.completed = false;
@@ -12,7 +12,7 @@ public class Task {
 
     public void complete() {
         this.completed = true;
-        status = "[X] " + taskName;
+        this.status = this.status.replaceFirst(" ", "X");
     }
 
 }
