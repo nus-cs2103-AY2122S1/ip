@@ -8,8 +8,7 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++)
         {
-            String done = list.get(i).getStatusIcon();
-            System.out.println((i + 1) + ".[" + done + "] " + list.get(i).description);
+            System.out.println((i + 1) + ". " + list.get(i).toString());
         }
     }
 
@@ -27,8 +26,27 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: ");
                 int taskNo = Integer.parseInt(input.substring(5, 6));
                 Task task = list.get(taskNo - 1);
-                System.out.println("[X] " + task.description);
                 task.markAsDone();
+                System.out.println(task);
+                input = sc.nextLine();
+                continue;
+            }
+            if (input.contains("todo")) {
+                ToDo toDo = new ToDo(input.substring(5));
+                list.add(toDo);
+                System.out.println("Got it. I've added this task:\n" + toDo.toString());
+                int count = list.size();
+                System.out.println("Now you have " + count + " tasks in the list.");
+                input = sc.nextLine();
+                continue;
+            }
+            if (input.contains("deadline")) {
+                System.out.println("Got it. I've added this task:\n[T][ ]" + input);
+                input = sc.nextLine();
+                continue;
+            }
+            if (input.contains("event")) {
+                System.out.println("Got it. I've added this task:\n[T][ ]" + input);
                 input = sc.nextLine();
                 continue;
             }
