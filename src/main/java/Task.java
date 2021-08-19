@@ -4,6 +4,31 @@
  * @author Wong Yun Rui Chris
  */
 public class Task {
+    /**
+     *
+     * Enum for the different type of task
+     */
+    public enum TaskName {
+        TODO (""),
+        DEADLINE (" /by "),
+        EVENT (" /at ");
+
+        private final String split;
+
+        TaskName(String split) {
+            this.split = split;
+        }
+
+        public String getSplit() {
+            return this.split;
+        }
+
+        @Override
+        public String toString() {
+            return this.name().toLowerCase();
+        }
+    }
+
     protected String description;
     protected boolean isDone;
 

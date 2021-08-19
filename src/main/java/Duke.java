@@ -12,12 +12,37 @@ public class Duke {
     /**
      * A private method to add the new Task into list and return the corresponding String reply.
      *
-     * @param task The Task that will be added into the list
+     * @param type The type of the task that will be added
+     * @param input The corresponding description provided for the task
+     * @throws DukeException Exceptions specific to Duke's input
      * @return The String of the reply after adding a task
      */
-    private String addTask(Task task) {
+    private String addTask(Task.TaskName type, String input) throws DukeException {
+        Task task;
+        String[] inputArray;
+        switch (type) {
+            case TODO:
+                task = new Todo(input);
+                break;
+            case EVENT:
+            case DEADLINE:
+                inputArray = input.split(type.getSplit());
+                if (inputArray.length < 2) {
+                    throw new DukeException("The format for " + type +" is wrong.");
+                } else if(inputArray[0].isBlank()) {
+                    throw new DukeException("The description of " + type + " cannot be empty.");
+                } else if(inputArray[1].isBlank()) {
+                    throw new DukeException("The date/time is missing from " + type +".");
+                }
+                task = type == Task.TaskName.EVENT ? new Event(inputArray[0], inputArray[1])
+                        : new Deadline(inputArray[0], inputArray[1]);
+                break;
+            default:
+                throw new DukeException("Unexpected value: " + type);
+        }
+
         this.list.add(task);
-        return "\tGot it. I've added this task:\n\t\t " + task.toString()
+        return "\tGot it. I've added this task:\n\t\t " + task
                 + "\n\tNow you have " + list.size() + " tasks in the list.";
     }
 
@@ -40,20 +65,44 @@ public class Duke {
     /**
      * A private method to mark the Task at the index of the list to be done.
      *
-     * @param index The index of the Task in the list that is to be mark as done
+     * @param input The index of the Task in the list that is to be mark as done
+     * @throws DukeException Exceptions specific to Duke's input
      * @return The corresponding String reply after marking a task done
      */
-    private String markTask(int index) {
+    private String markTask(String input) throws DukeException {
+        int index;
+
+        try {
+            index = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new DukeException("The index provided is not a number.");
+        }
+        if (index > this.list.size() || index < 1) {
+            throw new DukeException("The index provided is not within the valid range");
+        }
+
         return "\tNice! I've marked this task as done:\n\t\t" + list.get(index - 1).markDone();
     }
 
     /**
      * Delete the task at the specific index.
      *
-     * @param index The index of the task in the list that is to be deleted
+     * @param input The index of the task in the list that is to be deleted
+     * @throws DukeException Exceptions specific to Duke's input
      * @return The corresponding String reply after deleting a task
      */
-    private String deleteTask(int index) {
+    private String deleteTask(String input) throws DukeException {
+        int index;
+
+        try {
+            index = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new DukeException("The index provided is not a number.");
+        }
+        if (index > this.list.size() || index < 1) {
+            throw new DukeException("The index provided is not within the valid range");
+        }
+
         Task deleted = this.list.remove(index - 1);
         return "\tNoted. I've removed this task:\n\t\t" + deleted.toString()
                 + "\nNow you have " + this.list.size() + " tasks in the list.";
@@ -63,6 +112,7 @@ public class Duke {
      * The method to handle all the text input to call the correct corresponding method
      *
      * @param input The text input from the user to Duke
+     * @throws DukeException Exceptions specific to Duke's input
      * @return The corresponding String reply to the user's input
      */
     public String handleInput(String input) throws  DukeException {
@@ -77,72 +127,32 @@ public class Duke {
                 break;
 
             case "done":
-                if (inputArray.length == 1) {
-                    throw new DukeException("The index is missing.");
-                }
-                try {
-                    index = Integer.parseInt(inputArray[1]);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("The index provided is not a number.");
-                }
-                if (index > this.list.size() || index < 1) {
-                    throw new DukeException("The index provided is not within the valid range");
-                }
-                reply = this.markTask(index);
-                break;
-
             case "delete":
                 if (inputArray.length == 1) {
                     throw new DukeException("The index is missing.");
                 }
-                try {
-                    index = Integer.parseInt(inputArray[1]);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("The index provided is not a number.");
-                }
-                if (index > this.list.size() || index < 1) {
-                    throw new DukeException("The index provided is not within the valid range");
-                }
-                reply = this.deleteTask(index);
+                reply = inputArray[0].equals("done") ? this.markTask(inputArray[1]) : this.deleteTask(inputArray[1]);
                 break;
 
             case "todo":
                 if (inputArray.length < 2 || inputArray[1].isBlank()) {
                     throw new DukeException("The description of todo cannot be empty.");
                 }
-                reply = this.addTask(new Todo(inputArray[1]));
+                reply = this.addTask(Task.TaskName.TODO, inputArray[1]);
                 break;
 
             case "deadline":
                 if (inputArray.length < 2 || inputArray[1].isBlank()) {
                     throw new DukeException("The description of deadline cannot be empty.");
                 }
-
-                tempArray = inputArray[1].split(" /by ");
-                if (tempArray.length < 2) {
-                    throw new DukeException("The format for deadline is wrong.");
-                } else if(tempArray[0].isBlank()) {
-                    throw new DukeException("The description of deadline cannot be empty.");
-                } else if(tempArray[1].isBlank()) {
-                    throw new DukeException("The date/time is missing from deadline.");
-                }
-                reply = this.addTask(new Deadline(tempArray[0], tempArray[1]));
+                reply = this.addTask(Task.TaskName.DEADLINE, inputArray[1]);
                 break;
 
             case "event":
                 if (inputArray.length < 2 || inputArray[1].isBlank()) {
                     throw new DukeException("The description of event cannot be empty.");
                 }
-
-                tempArray = inputArray[1].split(" /at ");
-                if (tempArray.length < 2) {
-                    throw new DukeException("The format for event is wrong.");
-                } else if(tempArray[0].isBlank()) {
-                    throw new DukeException("The description of event cannot be empty.");
-                } else if(tempArray[1].isBlank()) {
-                    throw new DukeException("The date/time is missing from event.");
-                }
-                reply = this.addTask(new Event(tempArray[0], tempArray[1]));
+                reply = this.addTask(Task.TaskName.EVENT, inputArray[1]);
                 break;
 
             default:
@@ -150,6 +160,7 @@ public class Duke {
         }
         return reply;
     }
+
     public static void main(String[] args) {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -166,7 +177,7 @@ public class Duke {
             try {
                 System.out.println(duke.handleInput(input));
             } catch (DukeException e) {
-                System.out.println(e.toString());
+                System.out.println(e);
             }
             input = sc.nextLine();
         }
