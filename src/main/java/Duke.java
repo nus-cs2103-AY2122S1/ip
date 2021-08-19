@@ -2,6 +2,13 @@ import java.lang.reflect.Array;
 import java.util.*;
 import java.lang.*;
 
+/**
+ * Modified version of Duke (Personal Assistant Chatbot). Speaks owo language.
+ *
+ * @author Ruth Poh (Lab 10H)
+ *
+ */
+
 public class Duke {
     public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
@@ -21,17 +28,18 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         List<Task> taskarr = new ArrayList<>(100);
         int arrcounter = 0;
-        // adds array for 'list' command
+        // adds array for 'list' command, and arraycounter for no. of tasks on list currently
         boolean continueloop = true;
-        // checks loop
+        // for checking loop
 
         while (continueloop) {
+            // initiates loop.
             String str = in.nextLine();
             String[] strparse = str.split(" ");
-            // split it later to parse for keywords
+            // splits input to parse for keywords.
 
             if (strparse[0].equalsIgnoreCase("bye")) {
-                // breaks loop
+                // breaks loop, closes chatbot.
                 try {
                     if (strparse.length > 1) {
                         throw new IncorrectInputException("bye", "'bye'");
@@ -43,7 +51,7 @@ public class Duke {
                     System.out.println(linebreakend);
                 }
             } else if (strparse[0].equalsIgnoreCase("list")) {
-                // lists history of past tasks
+                // lists history of current tasks.
                 try {
                     if (strparse.length > 1) {
                         throw new IncorrectInputException("list", "'list'");
@@ -67,7 +75,7 @@ public class Duke {
                     System.out.println(linebreakend);
                 }
             } else if (strparse[0].equalsIgnoreCase("todo")) {
-                // adds a todo task to the list
+                // adds a todo task to the list.
                 try {
                     StringBuilder taskb = new StringBuilder();
                     if (strparse.length == 1) {
@@ -94,7 +102,7 @@ public class Duke {
                     System.out.println(linebreakend);
                 }
             } else if (strparse[0].equalsIgnoreCase("deadline")) {
-                // adds a deadline task to the list. now with no deadline assumption
+                // adds a deadline task to the list.
                 try {
                     if (strparse.length == 1) {
                         throw new MissingInputException("deadline");
@@ -179,8 +187,7 @@ public class Duke {
                     System.out.println(linebreakend);
                 }
             } else if (strparse[0].equalsIgnoreCase("done")) {
-                // checks for 'done' and integer keywords
-                // checks corresponding task as done
+                // marks a task as done.
                 try {
                     if (strparse.length == 1) {
                         throw new MissingInputException("done");
@@ -215,8 +222,7 @@ public class Duke {
                     System.out.println(linebreakend);
                 }
             } else if (strparse[0].equalsIgnoreCase("delete")) {
-                // checks for 'delete' and integer keywords
-                // deletes corresponding task
+                // deletes corresponding task on list.
                 try {
                     if (strparse.length == 1) {
                         throw new MissingInputException("delete");
