@@ -5,3 +5,69 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+===========================
+hello! i'm calico ☺
+how can i assist you?
+===========================
+===========================
+added: first task
+===========================
+===========================
+added: second task
+===========================
+===========================
+noted! ive added this task:
+  [T][ ] borrow book
+now you have 3 tasks in your list
+===========================
+===========================
+1.[ ] first task
+2.[ ] second task
+3.[T][ ] borrow book
+===========================
+===========================
+noted! ive added this task:
+  [D][ ] return book (by: Sunday)
+now you have 4 tasks in your list
+===========================
+===========================
+noted! ive added this task:
+  [E][ ] project meeting (at: Mon 2-4pm)
+now you have 5 tasks in your list
+===========================
+===========================
+noted! ive added this task:
+  [D][ ] do homework (by: no idea :-p)
+now you have 6 tasks in your list
+===========================
+===========================
+congrats on completing this task! :
+  [X] second task
+===========================
+===========================
+congrats on completing this task! :
+  [E][X] project meeting (at: Mon 2-4pm)
+===========================
+===========================
+added: done 1000
+===========================
+===========================
+added: done 0
+===========================
+===========================
+added: done 100
+===========================
+===========================
+1.[ ] first task
+2.[X] second task
+3.[T][ ] borrow book
+4.[D][ ] return book (by: Sunday)
+5.[E][X] project meeting (at: Mon 2-4pm)
+6.[D][ ] do homework (by: no idea :-p)
+7.[ ] done 1000
+8.[ ] done 0
+9.[ ] done 100
+===========================
+===========================
+bye friend!
+===========================
