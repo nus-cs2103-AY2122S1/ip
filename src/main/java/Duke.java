@@ -44,10 +44,30 @@ public class Duke {
                 Task task = tasks.get(taskIndex - 1);
                 task.markCompleted();
 
-                printMessage("Marking task as completed:\n" + task.toString());
+                printMessage("Marking task as completed:\n    " + task.toString());
+            } else if (input.equals("todo")) {
+                String todoInput = in.nextLine().trim();
+                Task todo = new Todo(todoInput);
+                tasks.add(todo);
+
+                printMessage("Added the following task:\n    " + todo.toString() + "\n" + "You now have " + tasks.size()
+                        + " tasks in your list.");
+            } else if (input.equals("deadline")) {
+                String[] deadlineInputs = in.nextLine().trim().split("\\s+/by\\s+", 2);
+                Task deadline = new Deadline(deadlineInputs[0], deadlineInputs[1]);
+                tasks.add(deadline);
+
+                printMessage("Added the following task:\n    " + deadline.toString() + "\n" + "You now have " + tasks.size()
+                        + " tasks in your list.");
+            } else if (input.equals("event")) {
+                String[] eventInputs = in.nextLine().trim().split("\\s+/at\\s+", 2);
+                Task event = new Event(eventInputs[0], eventInputs[1]);
+                tasks.add(event);
+
+                printMessage("Added the following task:\n    " + event.toString() + "\n" + "You now have " + tasks.size()
+                        + " tasks in your list.");
             } else {
                 printMessage(input);
-                tasks.add(new Task(input));
             }
         }
 
