@@ -14,7 +14,17 @@ public class Duke {
                 System.out.println("Duke : Bye, Hope to see you again soon !");
                 break;
             }
-            System.out.println("Duke: " + userInput + "\n ----------------------------------");
+            if(userInput.equals("list")) {
+                int numberOfTasks = tasks.size();
+                for(int i = 0; i < numberOfTasks; i++) {
+                    System.out.println(i + 1 + ". " + tasks.get(i));
+                }
+                System.out.println("\n ----------------------------------");
+                continue;
+            }
+            tasks.add(userInput);
+            System.out.println("Duke: Added Task " + userInput);
+            System.out.println("\n ----------------------------------");
         }
     }
 
