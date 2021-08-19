@@ -11,7 +11,7 @@ public class Duke {
         this.list = new ArrayList<Task>();
     }
 
-    public void executeCommand(String input) {
+    public void executeCommand(String input) throws DukeException {
         String[] parsedInput = input.split(" ");
         switch (parsedInput[0]) {
             case "bye":
@@ -33,7 +33,7 @@ public class Duke {
                 this.addEvent(input);
                 break;
             default:
-                this.addTask(input);
+                throw new InvalidCommandException("Invalid Command");
         }
     }
 
@@ -65,7 +65,10 @@ public class Duke {
         System.out.println(message);
     }
 
-    public void addTodo(String input) {
+    public void addTodo(String input) throws ToDoDescriptionNotFoundException {
+    if (input.length() <= 5 || input.substring(5).stripLeading().length() <= 0) {
+        throw new ToDoDescriptionNotFoundException("Missing Description!");
+    }
         String toDo = input.substring(5);
         ToDo newToDo = new ToDo(toDo);
         this.list.add(newToDo);
@@ -78,7 +81,12 @@ public class Duke {
         System.out.println(message);
     }
 
-    public void addDeadline(String input) {
+    public void addDeadline(String input) throws DeadlineDescriptionNotFoundException ,DeadlineNotFoundException{
+        if (input.length() <= 9 || input.substring(9).stripLeading().length() <= 0) {
+            throw new DeadlineDescriptionNotFoundException("Missing Description!");
+        } else if (!input.contains(" /by ")) {
+            throw new DeadlineNotFoundException("Deadline Missing!");
+        }
         int delimiter = input.indexOf(" /by ");
         String task = input.substring(9, delimiter);
         String date = input.substring(delimiter + 5);
@@ -93,7 +101,12 @@ public class Duke {
         System.out.println(message);
     }
 
-    public void addEvent(String input) {
+    public void addEvent(String input) throws EventDescriptionNotFoundException , EventTimeNotFoundException {
+        if (input.length() <= 6 || input.substring(6).stripLeading().length() <= 0) {
+            throw new EventDescriptionNotFoundException("Missing Description!");
+        } else if (!input.contains(" /at ")) {
+            throw new EventTimeNotFoundException("Event Time Missing!");
+        }
         int delimiter = input.indexOf(" /at ");
         String task = input.substring(6, delimiter);
         String time = input.substring(delimiter + 5);
@@ -108,7 +121,10 @@ public class Duke {
         System.out.println(message);
     }
 
-    public void done(int index) {
+    public void done(int index) throws TaskIndexOutOfBoundException{
+        if (index >= this.list.size()) {
+            throw new TaskIndexOutOfBoundException("Task index is invalid!");
+        }
         Task task = this.list.get(index);
         task.setCompleted();
         String message =
@@ -127,17 +143,67 @@ public class Duke {
         System.out.println(message);
     }
 
+    public void handleException(Exception e) {
+        String message;
+        if (e instanceof InvalidCommandException) {
+            message =
+                    "____________________________________________________________\n" +
+                    " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                    "____________________________________________________________\n";
+        } else if (e instanceof ToDoDescriptionNotFoundException) {
+            message =
+                    "____________________________________________________________\n" +
+                    " ☹ OOPS!!! The description of a todo cannot be empty.\n" +
+                    "____________________________________________________________\n";
+        } else if (e instanceof EventDescriptionNotFoundException) {
+            message =
+                    "____________________________________________________________\n" +
+                    " ☹ OOPS!!! The description of an event cannot be empty.\n" +
+                    "____________________________________________________________\n";
+        } else if (e instanceof DeadlineDescriptionNotFoundException) {
+        message =
+                "____________________________________________________________\n" +
+                " ☹ OOPS!!! The description of a deadline cannot be empty.\n" +
+                "____________________________________________________________\n";
+        } else if (e instanceof DeadlineNotFoundException) {
+            message =
+                    "____________________________________________________________\n" +
+                    " ☹ OOPS!!! The date of the deadline cannot be empty.\n" +
+                    "____________________________________________________________\n";
+        } else if (e instanceof EventTimeNotFoundException) {
+            message =
+                    "____________________________________________________________\n" +
+                    " ☹ OOPS!!! The time of an event cannot be empty.\n" +
+                    "____________________________________________________________\n";
+        } else if (e instanceof TaskIndexOutOfBoundException) {
+            message =
+                    "____________________________________________________________\n" +
+                    " ☹ OOPS!!! The task number is invalid.\n" +
+                    "____________________________________________________________\n";
+        } else {
+            message =
+                    "____________________________________________________________\n" +
+                    " ☹ OOPS!!! An unknown error has occurred!\n" +
+                    "____________________________________________________________\n";
+        }
+        System.out.println(message);
+    }
+
     public void run(Scanner sc) {
         String message =
                 "____________________________________________________________\n" +
                 " Hello! I'm Duke\n" +
                 " What can I do for you?\n" +
                 "____________________________________________________________\n";
-
         System.out.println(message);
+
         while (this.active) {
-            String input = sc.nextLine();
-            this.executeCommand(input);
+            try {
+                String input = sc.nextLine();
+                this.executeCommand(input);
+            } catch (Exception e) {
+                this.handleException(e);
+            }
         }
     }
 
