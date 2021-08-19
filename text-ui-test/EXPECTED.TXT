@@ -26,6 +26,6 @@ BotException: OOPS!!! An event must have a description and datetime duration.
 
 BotException: OOPS!!! A deadline must have a description and datetime limit.
 
-BotException: OOPS!!! You provided an invalid task index. Try again.";
+BotException: OOPS!!! You provided an invalid task index. Try again.
 
 Bye. Hope to see you again soon!
