@@ -2,19 +2,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private final static String LOGO = " ____        _        \n"
-                                     + "|  _ \\ _   _| | _____ \n"
-                                     + "| | | | | | | |/ / _ \\\n"
-                                     + "| |_| | |_| |   <  __/\n"
-                                     + "|____/ \\__,_|_|\\_\\___|\n";
     private final static String LINE = "\t----------------------------------------------------\n";
-    private final static String GREETING = "Greetings friend! I am your personal assistant,\n" + 
-                                            LOGO + 
-                                            "\nWhat can I do for you?\n";
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
-        System.out.println(GREETING);
+        greetUser();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
 
@@ -46,6 +38,21 @@ public class Duke {
 
         printFormattedMessage("Bye. Hope to see you again soon!\n");
         sc.close();
+    }
+
+    /**
+     * Print a welcome message to the user.
+     */
+    private static void greetUser() {
+        String LOGO = " ____        _        \n"
+                                     + "|  _ \\ _   _| | _____ \n"
+                                     + "| | | | | | | |/ / _ \\\n"
+                                     + "| |_| | |_| |   <  __/\n"
+                                     + "|____/ \\__,_|_|\\_\\___|\n";
+        String GREETING = "Greetings friend! I am your personal assistant,\n" 
+                            + LOGO 
+                            + "\nWhat can I do for you?\n";
+        System.out.println(GREETING);
     }
 
     /**
