@@ -1,10 +1,11 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
 
-    // shows if the Duke chatbot has been activated
+    // shows if the Duke chat bot has been activated
     private boolean activated;
     // Line Separator
     private final String SEP_LINE = "____________________________________________________________";
@@ -31,7 +32,7 @@ public class Duke {
         this.activated = true;
     }
 
-    // Checks if Duke Chatbot has been activated
+    // Checks if Duke chat bot has been activated
     public boolean isActive() {
         return this.activated;
     }
@@ -42,8 +43,9 @@ public class Duke {
     }
 
     // Level-1: echos user message back to user
-    public String echo(String text) {
-        return text;
+    // Level-5: returns the error message for unknown inputs
+    public String echo() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     // Level-1: Exit Message triggered by "bye"
@@ -112,7 +114,7 @@ public class Duke {
                 .concat("\nNow you have ".concat(this.storage.size() + "").concat(" tasks in the list."));
     }
 
-    // wraps all messages between line seperators
+    // wraps all messages between line separators
     public String messageWrapper(String text) {
         return SEP_LINE.concat("\n").concat(text).concat("\n").concat(SEP_LINE);
     }
@@ -154,7 +156,7 @@ public class Duke {
         T,D,E
     }
 
-    // Task class that represents all Tasks
+    // Level 3 -> A-Classes: Task class that represents all Tasks
     private static class Task {
 
         protected String description;
@@ -163,7 +165,7 @@ public class Duke {
         protected boolean isDone;
         protected state STATE;
 
-        // overloaded constructors for seperate task types
+        // overloaded constructors for separate task types
         public Task(String description, String var, state STATE) {
 
             if (STATE.equals(state.D)) this.by = var;
@@ -258,12 +260,18 @@ public class Duke {
         }
     }
 
+    // Level-5 -> A-Exceptions: Added try and except to handle errors
     public static void main(String[] args) {
         Scanner scannerObj = new Scanner(System.in);
         Duke chatBotObj = new Duke();
         chatBotObj.greet();
         while (chatBotObj.isActive()) {
-            String nextIn = scannerObj.next();
+            String nextIn;
+            try {
+                nextIn = scannerObj.next();
+            } catch (NoSuchElementException e) {
+                continue;
+            }
             int selector = chatBotObj.decoder(nextIn);
             String output;
             switch (selector) {
@@ -273,8 +281,14 @@ public class Duke {
                         break;
                 case 2: output = chatBotObj.done(scannerObj.nextInt()-1);
                         break;
-                case 3: output = chatBotObj.todo(scannerObj.nextLine());
+                case 3:
+                    try {
+                        output = chatBotObj.todo(scannerObj.nextLine());
                         break;
+                    } catch (NoSuchElementException e) {
+                        output = "☹ OOPS!!! The description of a todo cannot be empty.";
+                        break;
+                    }
                 case 4:
                 case 5:
                     String desc = "";
@@ -302,7 +316,7 @@ public class Duke {
                         break;
                 case 7: output = chatBotObj.add(nextIn.concat(scannerObj.nextLine()));
                         break;
-                default: output = chatBotObj.echo(nextIn.concat(scannerObj.nextLine()));
+                default: output = chatBotObj.echo();
             }
             output = chatBotObj.messageWrapper(output);
             System.out.println(output);
