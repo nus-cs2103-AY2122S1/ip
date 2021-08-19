@@ -8,13 +8,9 @@ public class Duke {
     private static final String NO_TASKS_IN_LIST_MESSAGE = "You have no tasks currently. Go create some!";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n %s";
     private static final String INVALID_NUMBER = "Please input a valid task number";
-    private static final String INVALID_DEADLINE_MESSAGE = "Invalid use of deadline command. Use 'deadline <text> /by <datetime>'";
-    private static final String INVALID_EVENT_MESSAGE = "Invalid use of event command. Use 'event <text> /at <datetime>'";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     // Delimiters
-    private static final String DEADLINE_DELIMITER = "/by";
-    private static final String EVENT_DELIMITER = "/at";
 
     private static void inputLoop(TaskList taskList) {
         Scanner sc = new Scanner(System.in);
@@ -60,22 +56,10 @@ public class Duke {
                         Message.display_message(taskList.addTask(new ToDo(todoText)));
                         break;
                     case DEADLINE:
-                        String[] deadlineInfo = remainingText.split(DEADLINE_DELIMITER);
-                        if (deadlineInfo.length < 2) {
-                            throw new DukeException(INVALID_DEADLINE_MESSAGE);
-                        }
-                        String deadline = deadlineInfo[1].trim();
-                        String deadlineText = deadlineInfo[0].trim();
-                        Message.display_message(taskList.addTask(new Deadline(deadlineText, deadline)));
+                        Message.display_message(taskList.addTask(Deadline.newDeadline(remainingText)));
                         break;
                     case EVENT:
-                        String[] eventInfo = remainingText.split(EVENT_DELIMITER);
-                        if (eventInfo.length < 2) {
-                            throw new DukeException(INVALID_EVENT_MESSAGE);
-                        }
-                        String event = eventInfo[1].trim();
-                        String eventText = eventInfo[0].trim();
-                        Message.display_message(taskList.addTask(new Event(eventText, event)));
+                        Message.display_message(taskList.addTask(Event.newEvent(remainingText)));
                         break;
                     case BYE:
                         canContinue = false;
