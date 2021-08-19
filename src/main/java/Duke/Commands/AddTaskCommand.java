@@ -16,8 +16,8 @@ class AddTaskCommand extends Command {
                     .collect(Collectors.toList())
     );
     private static final String ADD_TASK_SUCCESS_MESSAGE = "I've added this task:\n\t%s\n" + TASKS_COUNT_MESSAGE;
-    private static final String DEADLINE_BY_REGEX = "\\s+/by\\s+";
-    private static final String EVENT_AT_REGEX = "\\s+/at\\s+";
+    private static final String DEADLINE_BY_REGEX = "(?i)\\s+/by\\s+";
+    private static final String EVENT_AT_REGEX = "(?i)\\s+/at\\s+";
 
     private enum TaskType {
         TODO,
