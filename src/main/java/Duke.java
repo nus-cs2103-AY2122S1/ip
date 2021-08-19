@@ -21,20 +21,19 @@ public class Duke {
         } else {
             for (int i = 1; i <= taskIndex; i++) {
                 Task currTask = tasks[i - 1];
-                System.out.println(i + ".[" + currTask.getStatusIcon() + "] "
-                        + currTask.getDescription());
+                System.out.println(i + "." + currTask.toString() + ".");
             }
         }
     }
 
-    private static void addTask(String input) {
-        if (taskIndex < 100) {
-            Task newTask = new Task(input);
-            tasks[taskIndex] = newTask;
-            System.out.println("added: " + newTask.getDescription());
-            taskIndex++;
-        } else {
+    private static void addTask(Task newTask) {
+        if (taskIndex >= 100) {
             System.out.println(TOO_MANY_TASKS_MSG);
+        } else {
+            tasks[taskIndex] = newTask;
+            taskIndex++;
+            System.out.println("is added.\n" + newTask.toString());
+            System.out.println("now is have " + taskIndex + " tasks.");
         }
     }
 
@@ -49,7 +48,7 @@ public class Duke {
                 Task task = tasks[i - 1];
                 task.markAsDone();
                 System.out.println(TASK_DONE_MSG);
-                System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
+                System.out.println(task.toString());
             }
         } catch (NumberFormatException e) {
             System.out.println(DEFAULT_ERROR_MSG);
@@ -66,14 +65,28 @@ public class Duke {
             exit();
         } else if (input.equals("list")) {
             listTasks();
-        } else if (input.length() >= 5) {
-            if (input.substring(0, 5).equals("done ")) {
-                completeTask(input);
+        } else if (input.startsWith("done ")) {
+            completeTask(input);
+        } else if (input.startsWith("todo ")) {
+            addTask(new ToDo(input.substring(5)));
+        } else if (input.startsWith("deadline ")) {
+            String description = input.substring(9);
+            int i = description.indexOf(" /by ");
+            if (i < 0) {
+                addTask(new Deadline(description));
             } else {
-                addTask(input);
+                addTask(new Deadline(description.substring(0, i), description.substring(i + 5)));
+            }
+        } else if (input.startsWith("event ")) {
+            String description = input.substring(6);
+            int i = description.indexOf(" /at ");
+            if (i < 0) {
+                addTask(new Event(description));
+            } else {
+                addTask(new Event(description.substring(0, i), description.substring(i + 5)));
             }
         } else {
-            addTask(input);
+            System.out.println(DEFAULT_ERROR_MSG);
         }
     }
 
