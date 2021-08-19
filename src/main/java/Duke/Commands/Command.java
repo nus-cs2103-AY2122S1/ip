@@ -7,7 +7,7 @@ import java.util.Set;
 public abstract class Command {
     private static final Command[] COMMAND_LIST = {
             new ExitCommand(),
-            new AddTodoCommand(),
+            new AddTaskCommand(),
             new ListTasksCommand(),
             new DoneTaskCommand()
     };
