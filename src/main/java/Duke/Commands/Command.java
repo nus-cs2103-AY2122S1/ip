@@ -3,7 +3,7 @@ package Duke.Commands;
 import Duke.Duke;
 
 public abstract class Command {
-    private static final Command[] COMMAND_LIST = {new ExitCommand()};
+    private static final Command[] COMMAND_LIST = {new ExitCommand(), new ListTodosCommand()};
     private static final Command ADD_TODO_COMMAND = new AddTodoCommand();
 //    private static final Command UNKOWN_COMMAND = new UnknownCommand();
 
