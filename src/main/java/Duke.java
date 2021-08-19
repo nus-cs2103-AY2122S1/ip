@@ -27,7 +27,7 @@ public class Duke {
             if (cmd.equals("list")) {       // when command given is "list"
                 System.out.println(line);
                 for (int i = 0; i < count; i++) {
-                    System.out.println((i + 1) + ".[" + cmdList.get(i).getStatusIcon() + "] " + cmdList.get(i));
+                    System.out.println((i + 1) + "." + cmdList.get(i));
                 }
                 System.out.println(line);
             } else if (cmd.matches("^done [0-9]+$")) {      // when command given is "done"
@@ -39,7 +39,7 @@ public class Duke {
                     cmdList.get(itemNo - 1).markDone();
                     System.out.println(line);
                     System.out.println("congrats on completing this task! :");
-                    System.out.println("  [X] " + cmdList.get(itemNo - 1));
+                    System.out.println("  " + cmdList.get(itemNo - 1));
                 } else {        // add command to list
                     System.out.println(line);
                     cmdList.add(new Task(cmd));
@@ -47,7 +47,35 @@ public class Duke {
                     System.out.println("added: " + cmd);
                 }
                 System.out.println(line);
-            }else {         // add command to list
+            } else if (cmd.matches("^todo .*$")
+                || cmd.matches("^deadline .* /by .*$")
+                || cmd.matches("^event .* /at .*$")) {
+            String[] temp = cmd.split(" ", 2);
+
+            System.out.println(line);
+            System.out.println("noted! ive added this task:");
+
+            // Separate into cases
+            switch (temp[0]) {
+                case "todo":
+                    cmdList.add(new Todo(temp[1]));
+                    System.out.println("  " + cmdList.get(count));
+                    break;
+                case "deadline":
+                    String[] temp_deadline = temp[1].split(" /by ", 2);
+                    cmdList.add(new Deadline(temp_deadline[0], temp_deadline[1]));
+                    System.out.println("  " + cmdList.get(count));
+                    break;
+                case "event":
+                    String[] temp_event = temp[1].split(" /at ", 2);
+                    cmdList.add(new Event(temp_event[0], temp_event[1]));
+                    System.out.println("  " + cmdList.get(count));
+                    break;
+            }
+            count++;
+            System.out.println("now you have " + count + " tasks in your list");
+            System.out.println(line);
+        } else {         // add command to list
                 System.out.println(line);
                 cmdList.add(new Task(cmd));
                 count++;
