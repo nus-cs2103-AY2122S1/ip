@@ -1,9 +1,9 @@
 public class Task {
-    private String taskName;
+    private String name;
     private Boolean completed = false;
 
-    public Task(String taskName) {
-        this.taskName = taskName;
+    public Task(String name) {
+        this.name = name;
     }
 
     public void doneTask() {
@@ -12,8 +12,8 @@ public class Task {
 
     public String toString() {
         if(completed){
-            return "[X] " + taskName;
+            return "[X] " + name;
         }
-        return "[ ] " + taskName;
+        return "[ ] " + name;
     }
 }

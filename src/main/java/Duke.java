@@ -27,26 +27,48 @@ public class Duke {
 
             System.out.println("    ____________________________________________________________");
 
-            if(command.equals("list")){
+            if(command.equals("list")) {
                 for (int i = 0; i < taskList.size(); i++) {
                     Task task = taskList.get(i);
-                    System.out.println((i+1) + ". " + task.toString());
+                    System.out.println("    " + (i+1) + ". " + task.toString());
                 }
-            }else if(command.equals("bye")){
+            }else if(command.equals("bye")) {
                 System.out.println("    Bye. Hope to see you again soon!");
                 exit = true;
-            }else if(command.equals("done")){
+            }else if(command.equals("done")) {
                 int index = Integer.parseInt(pieces[1]);
                 Task task = taskList.get(index-1);
                 task.doneTask();
-                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("    Nice! I've marked this task as done: ");
                 System.out.println(task.toString());
-            }
-            else {
-                Task newTask = new Task(input);
+            } else if(command.equals("todo")) {
+                Task newTask = new Todo(pieces[1]);
                 taskList.add(newTask);
-                System.out.println("    added: " + input);
-            }
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("     " + newTask.toString());
+                System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
+            } else if(command.equals("event")) {
+                String[] eventPieces = pieces[1].split("/", 2);
+                String name = eventPieces[0];
+                String[] timePieces = eventPieces[1].split("at ", 2);
+                String time = timePieces[1];
+                Task newTask = new Event(name, time);
+                taskList.add(newTask);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("     " + newTask.toString());
+                System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
+            } else if(command.equals("deadline")) {
+                String[] eventPieces = pieces[1].split("/", 2);
+                String name = eventPieces[0];
+                String[] timePieces = eventPieces[1].split("by ", 2);
+                String time = timePieces[1];
+                Task newTask = new Deadline(name, time);
+                taskList.add(newTask);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("     " + newTask.toString());
+                System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
+            } else{}
+
 
             System.out.println("    ____________________________________________________________");
         }
