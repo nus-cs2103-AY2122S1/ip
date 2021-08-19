@@ -35,6 +35,13 @@ public class Duke {
                 task.markDone();
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(task);
+            } else if (inp.startsWith("delete ")) { //check if command is "delete"
+                int index = Integer.parseInt(inp.substring(7)) - 1;
+                Task task = userList.get(index);
+                userList.remove(index);
+                System.out.println("Noted. I've removed this task: ");
+                System.out.println(task);
+                System.out.println("Now you have " + userList.size() + " tasks in the list.");
             } else if (inp.startsWith("todo ")) { //check if command is "todo"
                 if (inp.length() == 5) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");

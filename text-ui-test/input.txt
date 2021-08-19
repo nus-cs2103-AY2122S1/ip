@@ -4,4 +4,6 @@ event return book /at 10am tomorrow
 list
 done 1
 list
+delete 2
+list
 bye
