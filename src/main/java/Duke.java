@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Duke {
 
     // instance variable to store input  task values
-    static ArrayList<String> list;
+    static ArrayList<Task> list;
 
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
@@ -28,6 +28,7 @@ public class Duke {
         //loop to check if next input is available
         while (sc.hasNext()) {
             input = sc.nextLine();
+            String[] split = input.split(" ", 2);
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
 
@@ -35,11 +36,26 @@ public class Duke {
                 System.exit(1);
             } else if (input.equals("list")) {
                 printList();
+            } else if (split[0].equals("done")) {
+                doneTask(Integer.parseInt(split[1]));
             } else {
                 addToList(input);
             }
         }
     }
+
+
+    /**
+     * Method to mark the task as done
+     *
+     * @param n the task number entered by the user
+     */
+    static void doneTask(int n) {
+        list.get(n - 1).markAsDone();
+        System.out.println("Nice! I have marked this task as done:");
+        System.out.println(list.get(n - 1).toString());
+    }
+
 
     /**
      * Method to add the input to the list
@@ -47,8 +63,8 @@ public class Duke {
      * @param input String input from the user
      */
     static void addToList(String input) {
-        //Task task = new Task(input, false);
-        list.add(input);
+        Task task = new Task(input, false);
+        list.add(task);
         System.out.println("added: " + input);
     }
 
@@ -67,7 +83,7 @@ public class Duke {
     static void printList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(i));
+            System.out.println((i + 1) + ". " + list.get(i).toString());
         }
     }
 
