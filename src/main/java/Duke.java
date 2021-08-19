@@ -36,9 +36,30 @@ public class Duke {
                 System.out.println(line);
                 System.out.println("Nice! I've marked this task as done:\n" + thisTask.toString());
                 System.out.println(line);
-            }else {
-                System.out.println(line + "\n" + "added: " + input + "\n" + line);
-                task.add(new Task(input));
+            } else if (parts[0].equals("deadline")){
+                String[] part2 = input.split("/by ");
+                String description = part2[0].split("deadline ")[1];
+                Task deadline = new Deadline(description, part2[1]);
+                System.out.println(line + "\n" + "added: " + deadline.toString());
+                task.add(deadline);
+                System.out.println("Now you have " + task.size() + " tasks in your list");
+                System.out.println(line);
+            } else if (parts[0].equals("event")){
+                String[] part2 = input.split("/at ");
+                String description = part2[0].split("event ")[1];
+                Task event = new Event(description, part2[1]);
+                System.out.println(line + "\n" + "added: " + event.toString());
+                task.add(event);
+                System.out.println("Now you have " + task.size() + " tasks in your list");
+                System.out.println(line);
+            } else if (parts[0].equals("todo")){
+                String[] part2 = input.split("/");
+                String description = part2[0].split("todo ")[1];
+                Task todo = new Todo(description);
+                System.out.println(line + "\n" + "added: " + todo.toString());
+                task.add(todo);
+                System.out.println("Now you have " + task.size() + " tasks in your list");
+                System.out.println(line);
             }
             input = s.nextLine();
         }
