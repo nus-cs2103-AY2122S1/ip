@@ -1,4 +1,3 @@
-import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -59,7 +58,6 @@ public class Duke {
             }
             text = sc.nextLine();
         }
-        
         response.exit();
     }
 }
