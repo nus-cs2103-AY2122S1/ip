@@ -1,68 +1,68 @@
 
 
-     Hello from
+[36m     Hello from
       ____        _
      |  _ \ _   _| | _____
      | | | | | | | |/ / _ \
      | |_| | |_| |   <  __/
      |____/ \__,_|_|\_\___|
-
+[0m
 ______________________________________________________________________
-     Hello! I'm Duke
-     What can I do for you?
-______________________________________________________________________
-
-______________________________________________________________________
-     Got it. I've added this task:
-       [T][ ] Go to the Bookstore
-     Now you have 1 tasks in the list.
+[36m     Hello! I'm Duke[0m
+[36m     What can I do for you?[0m
 ______________________________________________________________________
 
 ______________________________________________________________________
-     Got it. I've added this task:
-       [T][ ] Rent The Da Vinci Code
-     Now you have 2 tasks in the list.
+[36m     Got it. I've added this task:[0m
+[36m       [T][ ] Go to the Bookstore[0m
+[36m     Now you have 1 tasks in the list.[0m
 ______________________________________________________________________
 
 ______________________________________________________________________
-     Got it. I've added this task:
-       [D][ ] Return The Da Vinci Code (by: Sunday)
-     Now you have 3 tasks in the list.
+[36m     Got it. I've added this task:[0m
+[36m       [T][ ] Rent The Da Vinci Code[0m
+[36m     Now you have 2 tasks in the list.[0m
 ______________________________________________________________________
 
 ______________________________________________________________________
-     Got it. I've added this task:
-       [E][ ] Abhishek's Wedding (at: Udaipur on Saturday 4-10 PM)
-     Now you have 4 tasks in the list.
+[36m     Got it. I've added this task:[0m
+[36m       [D][ ] Return The Da Vinci Code (by: Sunday)[0m
+[36m     Now you have 3 tasks in the list.[0m
 ______________________________________________________________________
 
 ______________________________________________________________________
-     Here are the tasks in your list:
-     1.[T][ ] Go to the Bookstore
-     2.[T][ ] Rent The Da Vinci Code
-     3.[D][ ] Return The Da Vinci Code (by: Sunday)
-     4.[E][ ] Abhishek's Wedding (at: Udaipur on Saturday 4-10 PM)
+[36m     Got it. I've added this task:[0m
+[36m       [E][ ] Abhishek's Wedding (at: Udaipur on Saturday 4-10 PM)[0m
+[36m     Now you have 4 tasks in the list.[0m
 ______________________________________________________________________
 
 ______________________________________________________________________
-     Nice! I've marked this task as done:
-       [T][X] Go to the Bookstore
+[36m     Here are the tasks in your list:[0m
+[36m     1.[T][ ] Go to the Bookstore[0m
+[36m     2.[T][ ] Rent The Da Vinci Code[0m
+[36m     3.[D][ ] Return The Da Vinci Code (by: Sunday)[0m
+[36m     4.[E][ ] Abhishek's Wedding (at: Udaipur on Saturday 4-10 PM)[0m
 ______________________________________________________________________
 
 ______________________________________________________________________
-     Nice! I've marked this task as done:
-       [T][X] Rent The Da Vinci Code
+[36m     Nice! I've marked this task as done:[0m
+[36m       [T][X] Go to the Bookstore[0m
 ______________________________________________________________________
 
 ______________________________________________________________________
-     Here are the tasks in your list:
-     1.[T][X] Go to the Bookstore
-     2.[T][X] Rent The Da Vinci Code
-     3.[D][ ] Return The Da Vinci Code (by: Sunday)
-     4.[E][ ] Abhishek's Wedding (at: Udaipur on Saturday 4-10 PM)
+[36m     Nice! I've marked this task as done:[0m
+[36m       [T][X] Rent The Da Vinci Code[0m
 ______________________________________________________________________
 
 ______________________________________________________________________
-     Bye. Hope to see you again soon!
+[36m     Here are the tasks in your list:[0m
+[36m     1.[T][X] Go to the Bookstore[0m
+[36m     2.[T][X] Rent The Da Vinci Code[0m
+[36m     3.[D][ ] Return The Da Vinci Code (by: Sunday)[0m
+[36m     4.[E][ ] Abhishek's Wedding (at: Udaipur on Saturday 4-10 PM)[0m
+______________________________________________________________________
+
+______________________________________________________________________
+[36m     Bye. Hope to see you again soon![0m
 ______________________________________________________________________
 
