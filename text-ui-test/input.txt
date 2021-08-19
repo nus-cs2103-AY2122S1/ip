@@ -3,6 +3,8 @@ todo two
 event three /at Sunday 2pm - 4pm
 deadline four /by Monday 2pm
 done 1
+delete 2
 deadline five /by Tuesday
 done 3
+
 bye
