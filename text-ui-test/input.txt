@@ -1,8 +1,7 @@
-todo read book
 list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
-done 3
+done 2
 list
 done 1
 event Football /at Mon 12-2pm

@@ -1,1 +1,56 @@
+-----------------------------------------
+Hello! Im Duke
+What can I do for you?
+-----------------------------------------
 
+list
+-----------------------------------------
+-----------------------------------------
+
+deadline return book /by Sunday
+-----------------------------------------
+     added: [D][ ] return book (by Sunday)
+     Now you have 1 task to be done on your list!
+-----------------------------------------
+
+event project meeting /at Mon 2-4pm
+-----------------------------------------
+     added: [E][ ] project meeting (at Mon 2-4pm)
+     Now you have 2 task to be done on your list!
+-----------------------------------------
+
+done 2
+-----------------------------------------
+     Nice! I've marked this task as done:
+     [E][X] project meeting (at Mon 2-4pm)
+-----------------------------------------
+
+list
+-----------------------------------------
+     1. [D][ ] return book (by Sunday)
+     2. [E][X] project meeting (at Mon 2-4pm)
+-----------------------------------------
+
+done 1
+-----------------------------------------
+     Nice! I've marked this task as done:
+     [D][X] return book (by Sunday)
+-----------------------------------------
+
+event Football /at Mon 12-2pm
+-----------------------------------------
+     added: [E][ ] Football (at Mon 12-2pm)
+     Now you have 1 task to be done on your list!
+-----------------------------------------
+
+list
+-----------------------------------------
+     1. [D][X] return book (by Sunday)
+     2. [E][X] project meeting (at Mon 2-4pm)
+     3. [E][ ] Football (at Mon 12-2pm)
+-----------------------------------------
+
+bye
+-----------------------------------------
+     Bye. Hope to see you again soon!
+-----------------------------------------
