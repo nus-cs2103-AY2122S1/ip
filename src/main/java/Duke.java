@@ -19,8 +19,8 @@ public class Duke {
         List<Task> list = new ArrayList<>();
 
         // Take in user input
-        while (true) {
-            Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
             String str = sc.nextLine();
             if (!str.equals("list") && !str.contains("done")) {
                 if (str.contains("todo")) list.add(new ToDo(str.substring(5)));
@@ -48,7 +48,7 @@ public class Duke {
                     boolean trigger = false;
                     String[] arr = str.split(" ");
                     for (String s: arr){
-                        if (s.equals("deadline")) continue;
+                        if (s.equals("event")) continue;
                         if (s.equals("/at")) {
                             trigger = true;
                             continue;
@@ -61,7 +61,7 @@ public class Duke {
                     list.add(new Event(description, at));
                 }
                 System.out.println("    ____________________________________________________________");
-                System.out.println("     Got it. I've added this task: ");
+                System.out.println("     Got it. I've added this task:");
                 System.out.println("       " + list.get(list.size()-1));
                 System.out.println("     Now you have " + list.size() + " tasks in the list.");
                 System.out.println("    ____________________________________________________________");
