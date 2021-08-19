@@ -3,5 +3,26 @@ event read book /at tmr
 deadline return book /by Friday
 list
 done 2
+todo
+todo
+event
+event
+event /at
+event  /at
+event a /at
+event   /at a
+event a/at  a
+event a /ata
+deadline
+deadline
+deadline /by
+deadline  /by
+deadline a /by
+deadline   /by a
+deadline a/by  a
+deadline a /bya
+done
+done e
+done 5
 hello
 bye

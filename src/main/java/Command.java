@@ -1,3 +1,9 @@
+/**
+ * This class parses and stores a command from the user.
+ *
+ * @author Chen Yanyu
+ */
+
 class Command {
     private String action;
     private String argument;

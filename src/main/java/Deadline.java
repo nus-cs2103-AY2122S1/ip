@@ -1,19 +1,24 @@
 /**
  * A deadline is a Task that recognises /by deadline
+ *
+ * @author Chen Yanyu
  */
 
 class Deadline extends Task {
-    public Deadline(String description) {
+    public Deadline(String description) throws EmptyDescriptionException, WrongFormatException {
         super(processDeadline(description));
     }
 
-    private static String processDeadline(String description) {
-        String eventDescription = description.split(" /by")[0];
-        int len = eventDescription.length() + 5;
-        if (len < description.length()) {
-            return eventDescription + "(by: " + description.substring(len) + ")";
+    private static String processDeadline(String description) throws WrongFormatException {
+        String[] descriptionTime = description.split(" /by ");
+        if (description.trim().equals("/by") || description.isBlank()) {
+            return "";
+        } else if (descriptionTime.length < 2) {
+            throw new WrongFormatException("event <description> /by <time>");
+        } else if (descriptionTime[0].isBlank() || descriptionTime[1].isBlank()) {
+            return "";
         } else {
-            return eventDescription + "(by: )";
+            return descriptionTime[0] + "(by: " + descriptionTime[1] + ")";
         }
     }
 

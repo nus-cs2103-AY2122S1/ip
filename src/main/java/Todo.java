@@ -1,9 +1,11 @@
 /**
  * simplest kind of task
+ *
+ * @author Chen Yanyu
  */
 
 class Todo extends Task {
-    public Todo(String description) {
+    public Todo(String description) throws EmptyDescriptionException {
         super(description);
     }
 

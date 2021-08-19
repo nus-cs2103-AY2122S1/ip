@@ -1,5 +1,7 @@
 /**
  * A representation of task with description and status
+ *
+ * @author Chen Yanyu
  */
 
 class Task {
@@ -10,9 +12,13 @@ class Task {
      * Public Constructor for Task.
      * @param description the description for the task.
      */
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
+    public Task(String description) throws EmptyDescriptionException {
+        if (description.isBlank()){
+            throw new EmptyDescriptionException();
+        } else {
+            this.description = description;
+            this.isDone = false;
+        }
     }
 
     /**

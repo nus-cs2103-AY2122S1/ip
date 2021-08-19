@@ -26,6 +26,64 @@ Now you have 3 tasks in the list.
 > [35mNice! I've marked this task as done:
 [E][X] read book(at: tmr)
 [0m
-> [35mOh no, I do not understand that.
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
+[0m
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
+[0m
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
+[0m
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
+[0m
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
+[0m
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
+[0m
+> [31m@_@ OOPS!!! Please use the correct format:
+  event <description> /at <time>
+So that I can understand!
+[0m
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
+[0m
+> [31m@_@ OOPS!!! Please use the correct format:
+  event <description> /at <time>
+So that I can understand!
+[0m
+> [31m@_@ OOPS!!! Please use the correct format:
+  event <description> /at <time>
+So that I can understand!
+[0m
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
+[0m
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
+[0m
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
+[0m
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
+[0m
+> [31m@_@ OOPS!!! Please use the correct format:
+  event <description> /by <time>
+So that I can understand!
+[0m
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
+[0m
+> [31m@_@ OOPS!!! Please use the correct format:
+  event <description> /by <time>
+So that I can understand!
+[0m
+> [31m@_@ OOPS!!! Please use the correct format:
+  event <description> /by <time>
+So that I can understand!
+[0m
+> [31m@_@ OOPS!!! Please use the correct format:
+  done <index for the task>
+So that I can understand!
+[0m
+> [31m@_@ OOPS!!! Please use the correct format:
+  done <index for the task>
+So that I can understand!
+[0m
+> [31m@_@ OOPS!!! Please enter the number within the range of the list!
+[0m
+> [31m@_@ OOPS!!! I'm sorry, but I don't know what that means :-(
 [0m
 > [35mBye! Hope to see you again soon![0m
