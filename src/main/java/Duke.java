@@ -27,11 +27,10 @@ public class Duke {
             Task newTask = new Task(input);
 
             // mark a task as Done
-            // regex: "done" + space + number
-            // if number < inputs.size(), mark input[number] as done
-            // Pattern pattern = Pattern.compile("done\\s\\d+");
-
-            if (input.contains("done") && input.contains(" ")) {
+            Pattern pattern = Pattern.compile("done\\s\\d+");
+            Matcher matcher = pattern.matcher(input);
+            boolean matchFound = matcher.find();
+            if (matchFound) {
                 String[] parts = input.split(" ");
                 int index = Integer.parseInt(parts[1]) - 1;
                 if (parts[0].equals(markDone) && index < inputs.size()) {
@@ -42,6 +41,19 @@ public class Duke {
                 }
                 continue;
             }
+
+            // mark a task as Done
+//            if (input.contains("done") && input.contains(" ")) {
+//                String[] parts = input.split(" ");
+//                int index = Integer.parseInt(parts[1]) - 1;
+//                if (parts[0].equals(markDone) && index < inputs.size()) {
+//                    inputs.get(index).setDone();
+//                    System.out.println("Nice! I've marked this task as done: ");
+//                    System.out.println("[X] " + inputs.get(index).taskName);
+//                    System.out.println(lineBreak + "\n");
+//                }
+//                continue;
+//            }
 
             // normal input
             if (!input.equals(end) && !input.equals(display)) {
@@ -55,9 +67,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list: ");
                 for (int i = 0; i < inputs.size(); i++) {
                     int index = i + 1;
-                    System.out.println(index + ". "
-                            + "[" + inputs.get(i).getStatusIcon() + "] "
-                            + inputs.get(i).taskName);
+                    System.out.println(index + ". " + inputs.get(i).toString());
                 }
                 System.out.println(lineBreak + "\n");
                 continue;
