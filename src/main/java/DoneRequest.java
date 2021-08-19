@@ -1,3 +1,5 @@
+import java.lang.NumberFormatException;
+
 /**
  * DoneRequest represents a request from the user to mark a Task as done in the application.
  */
@@ -8,10 +10,15 @@ public class DoneRequest extends TaskCollectionRequest {
      * Creates a DoneRequest.
      * @param taskCollection The target TaskCollection.
      * @param requestString The request String.
+     * @throws UserException If the request String is invalid.
      */
-    protected DoneRequest(TaskCollection taskCollection, String requestString) {
+    protected DoneRequest(TaskCollection taskCollection, String requestString) throws UserException {
         super(taskCollection);
-        this.taskId = Integer.parseInt(requestString);
+        try {
+            this.taskId = Integer.parseInt(requestString);
+        } catch (NumberFormatException exception) {
+            throw new UserException("The task number of a done request is either missing or invalid.");
+        }
     }
 
     /**

@@ -10,8 +10,9 @@ public class EventRequest extends TaskCollectionRequest {
      * Creates a EventRequest.
      * @param taskCollection The target TaskCollection.
      * @param requestString The request String.
+     * @throws UserException If the request String is invalid.
      */
-    protected EventRequest(TaskCollection taskCollection, String requestString) {
+    protected EventRequest(TaskCollection taskCollection, String requestString) throws UserException {
         super(taskCollection);
         this.event = EventRequest.parseEvent(requestString);
     }
@@ -29,9 +30,19 @@ public class EventRequest extends TaskCollectionRequest {
      * Parses an input String to create a Event into a Event.
      * @param eventString The input String.
      * @return The Event parsed from the input String.
+     * @throws UserException If the eventString is invalid.
      */
-    private static Event parseEvent(String eventString) {
+    private static Event parseEvent(String eventString) throws UserException {
         String[] substrings = eventString.split(EventRequest.AT_DELIMITER, 2);
+
+        if (substrings.length != 2) {
+            String[] exceptionMessages = new String[]{
+                    "A request to create an event task must follow the format:",
+                    "  event <description> /by <datetime>"
+            };
+            throw new UserException(String.join(System.lineSeparator(), exceptionMessages));
+        }
+
         String description = substrings[0];
         String atDateTime = substrings[1];
         return new Event(description, atDateTime);

@@ -20,18 +20,22 @@ public class Duke {
         Duke.actions.add(new WelcomeUser());
 
         while (true) {
-            if (Duke.actions.isEmpty()) {
-                String input = Duke.getUserInput();
-                Request request = Request.create(Duke.tasks, input);
-                Duke.actions.add(request.action());
-            }
+            try {
+                if (Duke.actions.isEmpty()) {
+                    String input = Duke.getUserInput();
+                    Request request = Request.create(Duke.tasks, input);
+                    Duke.actions.add(request.action());
+                }
 
-            Action action = Duke.actions.remove();
-            Response response = action.execute();
-            Duke.printResponse(response);
+                Action action = Duke.actions.remove();
+                Response response = action.execute();
+                Duke.printResponse(response);
 
-            if (action instanceof GoodbyeUser) {
-                break;
+                if (action instanceof GoodbyeUser) {
+                    break;
+                }
+            } catch (UserException exception) {
+                Duke.printResponse(exception.toResponse());
             }
         }
     }

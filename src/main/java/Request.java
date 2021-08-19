@@ -15,16 +15,13 @@ public abstract class Request {
      * @param taskCollection The TaskCollection to perform the Request on.
      * @param requestString The request String.
      * @return The Request related to the request String and TaskCollection.
+     * @throws UserException If the request String is invalid.
      */
-    public static Request create(TaskCollection taskCollection, String requestString) {
+    public static Request create(TaskCollection taskCollection, String requestString) throws UserException {
         String[] substrings = requestString.split(COMMAND_DELIMITER, 2);
         String commandString = substrings[0];
         String commandInput = substrings.length > 1 ? substrings[1] : "";
         Command command = Command.parseFrom(commandString);
-
-        if (command == null) {
-            return new ToDoRequest(taskCollection, requestString);
-        }
 
         switch (command) {
             case BYE:
@@ -43,6 +40,9 @@ public abstract class Request {
                 return new ToDoRequest(taskCollection, commandInput);
         }
 
-        return null;
+        throw new RuntimeException(String.format(
+                "Command %s exists but is not mapped to a corresponding Request.",
+                commandString
+        ));
     }
 }

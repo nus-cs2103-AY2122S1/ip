@@ -10,8 +10,9 @@ public class DeadlineRequest extends TaskCollectionRequest {
      * Creates a DeadlineRequest.
      * @param taskCollection The target TaskCollection.
      * @param requestString The request String.
+     * @throws UserException If the request String is invalid.
      */
-    protected DeadlineRequest(TaskCollection taskCollection, String requestString) {
+    protected DeadlineRequest(TaskCollection taskCollection, String requestString) throws UserException {
         super(taskCollection);
         this.deadline = DeadlineRequest.parseDeadline(requestString);
     }
@@ -29,9 +30,19 @@ public class DeadlineRequest extends TaskCollectionRequest {
      * Parses an input String to create a Deadline into a Deadline.
      * @param deadlineString The input String.
      * @return The Deadline parsed from the input String.
+     * @throws UserException If the deadlineString is invalid.
      */
-    private static Deadline parseDeadline(String deadlineString) {
+    private static Deadline parseDeadline(String deadlineString) throws UserException {
         String[] substrings = deadlineString.split(DeadlineRequest.BY_DELIMITER, 2);
+
+        if (substrings.length != 2) {
+            String[] exceptionMessages = new String[]{
+                    "A request to create a deadline task must follow the format:",
+                    "  deadline <description> /by <datetime>"
+            };
+            throw new UserException(String.join(System.lineSeparator(), exceptionMessages));
+        }
+
         String description = substrings[0];
         String byDateTime = substrings[1];
         return new Deadline(description, byDateTime);

@@ -26,13 +26,15 @@ public enum Command {
      * Parses the input String to determine the related Command.
      * @param commandString The input command String.
      * @return The Command related to the command String.
+     * @throws UserException If the command String is invalid.
      */
-    public static Command parseFrom(String commandString) {
+    public static Command parseFrom(String commandString) throws UserException {
         for (Command command : Command.values()) {
             if (command.name.equals(commandString)) {
                 return command;
             }
         }
-        return null;
+
+        throw new UserException("I'm sorry, but I don't know what that means :-(");
     }
 }

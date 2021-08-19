@@ -8,9 +8,15 @@ public class ToDoRequest extends TaskCollectionRequest {
      * Creates a ToDoRequest.
      * @param taskCollection The target TaskCollection.
      * @param requestString The request String.
+     * @throws UserException If the request String is invalid.
      */
-    protected ToDoRequest(TaskCollection taskCollection, String requestString) {
+    protected ToDoRequest(TaskCollection taskCollection, String requestString) throws UserException {
         super(taskCollection);
+
+        if (requestString.isEmpty()) {
+            throw new UserException("The description of a todo cannot be empty.");
+        }
+
         this.toDo = new ToDo(requestString);
     }
 
