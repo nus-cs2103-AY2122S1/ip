@@ -138,7 +138,19 @@ public class Duke {
                 }
 
             }
+            if(item.contains("delete")){
+                item = item.replaceAll("\\D+","");//Extracts number from input
+                int removeItem = Integer.parseInt(item);
 
+//                toDo.get(completedItem-1).markAsDone();//Set the task to done
+                System.out.println(line);
+                System.out.println("     " + "Noted. I've removed this task:");
+                System.out.println("     " + toDo.get(removeItem-1));
+                toDo.remove(removeItem - 1);//Removes item at the corresponding index
+                System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
+                System.out.println(line);
+                continue;
+            }
             if(item.contains("todo")){
                 System.out.println(line);
                 try{
@@ -177,6 +189,7 @@ public class Duke {
                 System.out.println(line);
                 continue;
             }
+
             else{
                  System.out.println(line);
                  System.out.println("     " + "OOPS You have entered an invalid input :)");
