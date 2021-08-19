@@ -55,10 +55,7 @@ public enum Command {
 
     public static Command initialiseCommand(String commandString) throws DukeException {
         try {
-            Command command = Command.valueOf(commandString.toUpperCase());
-            // Verify that the remaining text don't have errors related to number of arguments etc
-            command.verifyArguments(commandString);
-            return command;
+            return Command.valueOf(commandString.toUpperCase());
         } catch (IllegalArgumentException err) {
             throw new DukeException(INCOHERENT_INPUT_MESSAGE);
         }

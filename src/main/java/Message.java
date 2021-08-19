@@ -1,7 +1,7 @@
 import static java.lang.Math.max;
 
 public class Message {
-    private static final int BOX_LENGTH = 60;
+    private static final int BOX_LENGTH = 80;
     private static final int INDENT_LENGTH = 4;
     private static final String INDENT = " ".repeat(INDENT_LENGTH);
 

@@ -33,6 +33,8 @@ public class Duke {
                     remainingText = input.substring(firstWord.length() + 1).trim();
                 }
                 Command command = Command.initialiseCommand(firstWord);
+                // Verify that the remaining text doesn't have errors related to number of arguments etc
+                command.verifyArguments(remainingText);
                 switch (command) {
                     case LIST:
                         if (taskList.size() == 0) {
