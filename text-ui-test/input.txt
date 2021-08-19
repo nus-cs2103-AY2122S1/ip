@@ -1,0 +1,6 @@
+add read book
+TODO read book
+/done 0
+/done 1
+deadline arsnheiar /by
+event arihtars /At tmr
