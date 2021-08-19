@@ -53,8 +53,7 @@ public class Response {
      */
     public void display() {
         this.count = 1;
-        System.out.println(horizontalLine);
-        System.out.println("    Here are the tasks in your list:");
+        System.out.println(horizontalLine + "    Here are the tasks in your list:");
         lst.forEach(item -> {
             System.out.println("    " + count + ". " + item.toString());
             count++;
