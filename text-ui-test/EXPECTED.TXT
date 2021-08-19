@@ -23,22 +23,33 @@ Here are the tasks in your list:
 3. [E][ ] project meeting (at: 20 Aug)
 ---------------------------------
 ---------------------------------
-I have marked this task as done
-[X] brush teeth
+I have removed this task
+[D][ ] do homework (by: 19 Aug)
+Now you have 2 tasks.
+---------------------------------
+---------------------------------
+Here are the tasks in your list:
+1. [T][ ] brush teeth
+2. [E][ ] project meeting (at: 20 Aug)
 ---------------------------------
 ---------------------------------
 I have marked this task as done
-[X] do homework
+[T][X] brush teeth
 ---------------------------------
 ---------------------------------
 I have marked this task as done
-[X] project meeting
+[E][X] project meeting (at: 20 Aug)
 ---------------------------------
 ---------------------------------
 Here are the tasks in your list:
 1. [T][X] brush teeth
-2. [D][X] do homework (by: 19 Aug)
-3. [E][X] project meeting (at: 20 Aug)
+2. [E][X] project meeting (at: 20 Aug)
+---------------------------------
+---------------------------------
+Sorry Sir, I cannot understand the command
+---------------------------------
+---------------------------------
+Sorry Sir, todo must be followed with a description
 ---------------------------------
 ---------------------------------
 Goodbye Sir. Hope you have a pleasant day sir.

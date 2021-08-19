@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -5,8 +7,7 @@ public class Duke {
         System.out.println("Hello! This is Jarvis.");
         System.out.println("What can I do for you sir?");
         System.out.println("---------------------------------");
-        Task[] tasks = new Task[100];
-        int taskIndex = 0;
+        List<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {
@@ -19,18 +20,18 @@ public class Duke {
                 } else if (taskDescription.equals("list")) {
                     System.out.println("---------------------------------");
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < taskIndex; i++) {
-                        Task task = tasks[i];
+                    for (int i = 0; i < tasks.size(); i++) {
+                        Task task = tasks.get(i);
                         System.out.printf("%d. %s%n", i + 1, task);
                     }
                     System.out.println("---------------------------------");
                 } else if (taskDescription.startsWith("done ")) {
                     int serialNum = Integer.parseInt(taskDescription.split(" ")[1]);
-                    Task task = tasks[serialNum - 1];
+                    Task task = tasks.get(serialNum - 1);
                     task.markAsDone();
                     System.out.println("---------------------------------");
                     System.out.println("I have marked this task as done");
-                    System.out.printf("[%s] %s%n", task.getStatusIcon(), task.getDescription());
+                    System.out.printf("%s%n", task);
                     System.out.println("---------------------------------");
                 } else if (taskDescription.startsWith("deadline ")) {
                     String[] splitText = taskDescription.split(" ");
@@ -46,12 +47,11 @@ public class Duke {
                     }
                     String date = sb.toString().trim();
                     Task task = new Deadline(description, date);
-                    tasks[taskIndex] = task;
-                    taskIndex++;
+                    tasks.add(task);
                     System.out.println("---------------------------------");
                     System.out.println("I have added this task: ");
                     System.out.println(task.toString());
-                    System.out.printf("Now you have %d tasks.%n", taskIndex);
+                    System.out.printf("Now you have %d tasks.%n", tasks.size());
                     System.out.println("---------------------------------");
                 } else if (taskDescription.startsWith("event ")) {
                     String[] splitText = taskDescription.split(" ");
@@ -67,12 +67,11 @@ public class Duke {
                     }
                     String date = sb.toString().trim();
                     Task task = new Event(description, date);
-                    tasks[taskIndex] = task;
-                    taskIndex++;
+                    tasks.add(task);
                     System.out.println("---------------------------------");
                     System.out.println("I have added this task: ");
                     System.out.println(task.toString());
-                    System.out.printf("Now you have %d tasks.%n", taskIndex);
+                    System.out.printf("Now you have %d tasks.%n", tasks.size());
                     System.out.println("---------------------------------");
                 } else if (taskDescription.startsWith("todo ")) {
                     String[] splitText = taskDescription.split(" ");
@@ -84,12 +83,20 @@ public class Duke {
                         sb.append(splitText[i]).append(" ");
                     }
                     Task task = new ToDo(sb.toString().trim());
-                    tasks[taskIndex] = task;
-                    taskIndex++;
+                    tasks.add(task);
                     System.out.println("---------------------------------");
                     System.out.println("I have added this task: ");
                     System.out.println(task.toString());
-                    System.out.printf("Now you have %d tasks.%n", taskIndex);
+                    System.out.printf("Now you have %d tasks.%n", tasks.size());
+                    System.out.println("---------------------------------");
+                }  else if (taskDescription.startsWith("delete ")) {
+                    int serialNum = Integer.parseInt(taskDescription.split(" ")[1]);
+                    Task task = tasks.get(serialNum - 1);
+                    tasks.remove(serialNum - 1);
+                    System.out.println("---------------------------------");
+                    System.out.println("I have removed this task");
+                    System.out.printf("%s%n", task);
+                    System.out.printf("Now you have %d tasks.%n", tasks.size());
                     System.out.println("---------------------------------");
                 } else {
                     throw new DukeException("Sorry Sir, I cannot understand the command");
