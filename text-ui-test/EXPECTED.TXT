@@ -15,51 +15,82 @@
     1. 'todo <task description>' - add a todo task to the list
     2. 'deadline <task description> /by <by when>' - add a deadline task with specific deadline
     3. 'event <task description> /at <at when>' - add an event task with specific time
-    2. 'list' - show the current task list
-    3. 'done <task index>' - mark that task as done
-    4. 'commands' - show this current command window
-    5. 'bye' - end session
+    4. 'list' - show the current task list
+    5. 'done <task index>' - mark that task as done
+    6. 'delete <task index>' - delete that task from the list
+    7. 'commands' - show this current command window
+    8. 'bye' - end session
     ____________________________________________________________
 >     ____________________________________________________________
     Got it. I've added this task:
-      [T][ ] test
+      [T][ ] read book
     Now you have 1 tasks in the list.
     ____________________________________________________________
 >     ____________________________________________________________
-    ☹ OOPS!!! [T][ ] test already exists
-    ____________________________________________________________
->     ____________________________________________________________
-    ☹ OOPS!!! Your list index can only be from 1 to 1.
-    ____________________________________________________________
->     ____________________________________________________________
-    Nice! I've marked this task as done:
-      [T][X] test
-    ____________________________________________________________
->     ____________________________________________________________
-    ☹ OOPS!!! No /at tagger found.
-    ____________________________________________________________
->     ____________________________________________________________
     Got it. I've added this task:
-      [E][ ] commit (at: test)
+      [D][ ] return book (by: June 6th)
     Now you have 2 tasks in the list.
     ____________________________________________________________
 >     ____________________________________________________________
     Got it. I've added this task:
-      [E][ ] commit (at: later)
+      [E][ ] project meeting (at: Aug 6th 2-4pm)
     Now you have 3 tasks in the list.
     ____________________________________________________________
 >     ____________________________________________________________
-    ☹ OOPS!!! [E][ ] commit (at: later) already exists
+    ☹ OOPS!!! [E][ ] project meeting (at: Aug 6th 2-4pm) already exists
     ____________________________________________________________
 >     ____________________________________________________________
-    Nice! I've marked this task as done:
-      [E][X] commit (at: test)
+    Got it. I've added this task:
+      [T][ ] join sports club
+    Now you have 4 tasks in the list.
+    ____________________________________________________________
+>     ____________________________________________________________
+    Got it. I've added this task:
+      [T][ ] borrow book
+    Now you have 5 tasks in the list.
     ____________________________________________________________
 >     ____________________________________________________________
     Here are the tasks in your list:
-    1.[T][X] test
-    2.[E][X] commit (at: test)
-    3.[E][ ] commit (at: later)
+    1.[T][ ] read book
+    2.[D][ ] return book (by: June 6th)
+    3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+    4.[T][ ] join sports club
+    5.[T][ ] borrow book
+    ____________________________________________________________
+>     ____________________________________________________________
+    Nice! I've marked this task as done:
+      [T][X] read book
+    ____________________________________________________________
+>     ____________________________________________________________
+    Nice! I've marked this task as done:
+      [D][X] return book (by: June 6th)
+    ____________________________________________________________
+>     ____________________________________________________________
+    Nice! I've marked this task as done:
+      [T][X] join sports club
+    ____________________________________________________________
+>     ____________________________________________________________
+    Here are the tasks in your list:
+    1.[T][X] read book
+    2.[D][X] return book (by: June 6th)
+    3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+    4.[T][X] join sports club
+    5.[T][ ] borrow book
+    ____________________________________________________________
+>     ____________________________________________________________
+    ☹ OOPS!!! Your list index can only be from 1 to 5.
+    ____________________________________________________________
+>     ____________________________________________________________
+    Noted. I've removed this task:
+      [E][ ] project meeting (at: Aug 6th 2-4pm)
+    Now you have 4 tasks in the list.
+    ____________________________________________________________
+>     ____________________________________________________________
+    Here are the tasks in your list:
+    1.[T][X] read book
+    2.[D][X] return book (by: June 6th)
+    3.[T][X] join sports club
+    4.[T][ ] borrow book
     ____________________________________________________________
 >     ____________________________________________________________
     Bye. Hope to see you again soon!

@@ -1,12 +1,16 @@
-todo test
-todo test
-done 0
+todo read book
+deadline return book /by June 6th
+event project meeting /at Aug 6th 2-4pm
+event project meeting /at Aug 6th 2-4pm
+todo join sports club
+todo borrow book
+list
 done 1
-event commit
-event commit /at test
-event commit /at later
-event commit /at later
 done 2
+done 4
+list
+delete 0
+delete 3
 list
 bye
 

@@ -36,20 +36,36 @@ public class TaskDialog extends Dialog {
         return this.tasks.size();
     }
 
-    public TaskDialog asTaskDialog() {
-        return this;
-    }
-
     public void markTaskAsDone(int index) throws IndexOutOfBoundsException, DialogException {
         if (index < 0 || index > this.tasks.size()) {
             throw new IndexOutOfBoundsException();
         } else {
             Task task = getTaskByIndex(index);
             task.markAsDone();
-            Dialog markAsDoneDialog = Dialog.generate("markAsDone" + task);
+            String id = "markAsDone" + task;
+            Dialog markAsDoneDialog = Dialog.generate(id);
             markAsDoneDialog.add("Nice! I've marked this task as done:");
             markAsDoneDialog.add("  " + task);
             System.out.println(markAsDoneDialog);
+            // allow duplicates later
+            Dialog.archive.remove(id);
+        }
+    }
+
+    public void deleteTaskByIndex(int index) throws IndexOutOfBoundsException, DialogException {
+        if (index < 0 || index > this.tasks.size()) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            Task task = getTaskByIndex(index);
+            tasks.remove(index);
+            String id = "remove" + task;
+            Dialog removeDialog = Dialog.generate(id);
+            removeDialog.add("Noted. I've removed this task:");
+            removeDialog.add("  " + task);
+            removeDialog.add("Now you have " + this.taskLength() + " tasks in the list.");
+            System.out.println(removeDialog);
+            Dialog.archive.remove(id);
+            Dialog.archive.remove(task.toString());
         }
     }
 

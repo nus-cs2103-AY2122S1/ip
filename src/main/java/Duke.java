@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -37,10 +36,11 @@ public class Duke {
         commandsList.add("1. 'todo <task description>' - add a todo task to the list");
         commandsList.add("2. 'deadline <task description> /by <by when>' - add a deadline task with specific deadline");
         commandsList.add("3. 'event <task description> /at <at when>' - add an event task with specific time");
-        commandsList.add("2. 'list' - show the current task list");
-        commandsList.add("3. 'done <task index>' - mark that task as done");
-        commandsList.add("4. 'commands' - show this current command window");
-        commandsList.add("5. 'bye' - end session");
+        commandsList.add("4. 'list' - show the current task list");
+        commandsList.add("5. 'done <task index>' - mark that task as done");
+        commandsList.add("6. 'delete <task index>' - delete that task from the list");
+        commandsList.add("7. 'commands' - show this current command window");
+        commandsList.add("8. 'bye' - end session");
         System.out.println(greeting);
         System.out.println(commandsList);
         System.out.print("> ");
@@ -112,7 +112,25 @@ public class Duke {
                     }
                     break;
                 }
-
+                case "delete": {
+                    try {
+                        if (input.split(" ").length == 1) {
+                            throw new EmptyIndexException("The index of delete cannot be empty.");
+                        } else if (Integer.parseInt(input.split(" ")[1]) <= 0 || Integer.parseInt(input.split(" ")[1]) > list.taskLength()) {
+                            if (list.taskLength() == 0) {
+                                throw new InvalidIndexException("Looks like your list is currently empty.");
+                            } else {
+                                throw new InvalidIndexException("Your list index can only be from 1 to " + list.taskLength() + ".");
+                            }
+                        } else if (input.split(" ").length > 2) {
+                            throw new InvalidArgumentException("The number of arguments seems to exceed for command delete.");
+                        }
+                        list.deleteTaskByIndex(Integer.parseInt(input.substring(("delete ").length())) - 1);
+                    } catch (EmptyIndexException | InvalidArgumentException | InvalidIndexException e) {
+                        Duke.printError(e);
+                    }
+                    break;
+                }
                 case "commands":
                     System.out.println(commandsList);
                     break;
