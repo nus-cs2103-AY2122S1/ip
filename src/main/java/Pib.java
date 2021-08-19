@@ -6,11 +6,17 @@ import Tasks.Todo;
 import Tasks.Deadline;
 import Tasks.Event;
 
+/**
+ * Pib is a Personal Assistant Chat-bot that is able to keep track of tasks (CRUD) and deadlines
+ */
 public class Pib {
-    public static String DIVIDER = "____________________________________________________________\n";
+    private static String DIVIDER = "____________________________________________________________\n";
     private ArrayList<Task> list;
     private Scanner sc;
 
+    /**
+     * Public constructor to instantiate an instance of Pib and start the program
+     */
     public Pib() {
         System.out.println(DIVIDER + "Hello! I'm Pib\n" + "Tell me something!\n" + DIVIDER);
         list = new ArrayList<>();
@@ -61,7 +67,7 @@ public class Pib {
                             break;
                         }
                         default: {
-                            throw new PibException("Uh oh :( I don't know that command :(\n");
+                            throw new PibException("Uh oh :( I don't know that command\n");
                         }
                     }
                 } else {
@@ -72,7 +78,7 @@ public class Pib {
                         endPib();
                         break;
                     } else {
-                        throw new PibException("Uh oh :( I don't know that command :(\n");
+                        throw new PibException("Uh oh :( I don't know that command\n");
                     }
                 }
                 System.out.println(DIVIDER);
