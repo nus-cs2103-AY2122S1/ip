@@ -11,4 +11,7 @@ deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 todo
 fml
+delete 5
+list
+delete 8
 bye

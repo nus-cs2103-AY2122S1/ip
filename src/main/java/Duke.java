@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 public class Duke {
-    private final static String BORDERS = "____________________________________________________________";
+    private final static String BORDERS = "\t____________________________________________________________";
     private static String formatReply(String input) {
-        return BORDERS + "\n" + input + '\n' + BORDERS;
+        return BORDERS + "\n\t " + input + '\n' + BORDERS;
     }
 
     public static void main(String[] args) {

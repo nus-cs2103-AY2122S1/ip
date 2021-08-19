@@ -12,6 +12,12 @@ public class Database {
         return db.get(index);
     }
 
+    public Task delete(int index) {
+        Task t = db.get(index);
+        db.remove(index);
+        return t;
+    }
+
     public int size() {
         return db.size();
     }
@@ -21,7 +27,7 @@ public class Database {
         StringBuilder sb = new StringBuilder();
         if (db.size() == 0) return " You have no tasks!";
         for (int i = 1; i <= db.size(); i++) {
-            sb.append("\n ");
+            sb.append("\n\t ");
             sb.append(i + "." + db.get(i-1));
         }
         sb.deleteCharAt(0);
