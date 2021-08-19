@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     private enum Tasks {DEADLINE, EVENT, TODO}
 
-    private static Task[] taskArray = new Task[100];
+    private static ArrayList<Task> taskArray = new ArrayList<>();
     private static int listIndex = 0;
 
     public static void main(String[] args) {
@@ -39,12 +40,9 @@ public class Duke {
                     System.out.println("There are currently no tasks! Stop being so lazy and start doing your tasks!");
                     continue;
                 }
-                for (int i = 0; i < 100; i++) {
-                    if (taskArray[i] == null) {
-                        break;
-                    }
+                for (int i = 0; i < listIndex; i++) {
                     int listNumber = i + 1;
-                    System.out.println(listNumber + ". " + taskArray[i].toString());
+                    System.out.println(listNumber + ". " + taskArray.get(i).toString());
                 }
                 continue;
             }
@@ -63,8 +61,9 @@ public class Duke {
                         System.out.println("Sorry, that task does not exist!");
                         continue;
                     }
-                    taskArray[arrayIndex].setCompleted();
-                    System.out.println("Ok, very nice. I have set the following task as completed.\n" + taskArray[arrayIndex].toString());
+                    Task currentTask = taskArray.get(arrayIndex);
+                    currentTask.setCompleted();
+                    System.out.println("Ok, very nice. I have set the following task as completed.\n" + currentTask.toString());
                 } catch (NumberFormatException e) {
                     System.out.println("Please enter a valid number!");
                 } finally {
@@ -169,7 +168,7 @@ public class Duke {
 
         }
 
-        taskArray[listIndex] = tempTask;
+        taskArray.add(tempTask);
         listIndex += 1;
 
         System.out.println("Ok can, sure. I have added this task as you wanted.");
