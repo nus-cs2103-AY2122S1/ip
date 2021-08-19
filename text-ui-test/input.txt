@@ -1,7 +1,15 @@
-todo borrow book
-deadline return book /by Monday
+blah
+todo sleep
+todo
+event dinner /at 7pm
+event
+deadline upload report by tmr
+deadline do homework /by monday
 list
-done 2
-event meeting /at Friday 5pm
+todo eat
+delete 5
+done 3
+list
+delete 3
 list
 bye
