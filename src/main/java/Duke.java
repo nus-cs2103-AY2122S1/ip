@@ -14,6 +14,9 @@ public class Duke {
 
         String[] list = new String[100];
         boolean[] done = new boolean[100];
+        // boolean[] td = new boolean[100];
+        // boolean[] deadline = new boolean[100];
+        // boolean[] event = new boolean[100];
         int amount = 0;
 
         String lineBreak = "\t____________________________________________________________";
@@ -21,6 +24,9 @@ public class Duke {
                 + "\n\t Hello! I'm Luke, your slightly useful personal assistant!\n"
                 + "\t What can I do for you, my liege?\n"
                 + "\t Type 'list' to show previous inputs\n"
+                + "\t Type 'todo TASK' to indicate that TASK has to be done\n"
+                + "\t Type 'deadline TASK /by DATE/TIME' to indicate that TASK has to be done by DATE/TIME\n"
+                + "\t Type 'event TASK /at DATE/TIME PERIOD' to indicate that TASK occurs at DATE/TIME PERIOD\n"
                 + "\t Type 'done #' to indicate that task # has been done\n"
                 + "\t Type 'bye' to end\n"
                 + lineBreak);
@@ -34,31 +40,68 @@ public class Duke {
                 for (int i = 0; i < amount; i++) {
                     String doneI = " ";
                     if (done[i]) doneI = "X";
-                    System.out.println("\t " + (i + 1) + ".[" + doneI + "] " + list[i]);
+                    // String type = " ";
+                    // if (td[i]) type = "T";
+                    // if (deadline[i]) type = "D";
+                    // if (event[i]) type = "E";
+                    System.out.println("\t " + (i + 1) + "." + list[i]);
                 }
                 System.out.println(lineBreak);
             } else if (response.matches("done ([0-9]|[1-9][0-9])")) {
                 int taskNo = Integer.parseInt(response.replaceAll("\\D", "")) - 1;
                 System.out.println(lineBreak);
                 System.out.println("\t Nice! I've marked this task as done:");
-                System.out.println("\t   [X] " + list[taskNo]);
+                list[taskNo] = list[taskNo].substring(0,4) + 'X' + list[taskNo].substring(5);
+                System.out.println("\t " + list[taskNo]);
                 System.out.println(lineBreak);
                 done[taskNo] = true;
+            } else if (response.matches("todo .+")) {
+                System.out.println(lineBreak);
+                System.out.println("\t Got it. I've added this task:");
+                System.out.println("\t   [T][ ] " + response.substring(5));
+                System.out.println("\t Now you have " + (amount + 1) + " tasks in the list.");
+                System.out.println(lineBreak);
+                list[amount] = "[T][ ] " + response.substring(5);
+                // td[amount] = true;
+                amount++;
+            } else if (response.matches("deadline .+")) {
+                System.out.println(lineBreak);
+                System.out.println("\t Got it. I've added this task:");
+                int pos = response.indexOf('/');
+                list[amount] = "[D][ ] "
+                        + response.substring(9, pos - 1)
+                        + " (by: " + response.substring(response.indexOf('/') + 4) + ")";
+                System.out.println("\t   " + list[amount]);
+                System.out.println("\t Now you have " + (amount + 1) + " tasks in the list.");
+                System.out.println(lineBreak);
+                // deadline[amount] = true;
+                amount++;
+            } else if (response.matches("event .+")) {
+                System.out.println(lineBreak);
+                System.out.println("\t Got it. I've added this task:");
+                int pos = response.indexOf('/');
+                list[amount] = "[E][ ] "
+                        + response.substring(6, pos - 1)
+                        + " (at: " + response.substring(response.indexOf('/') + 4) + ")";
+                System.out.println("\t   " + list[amount]);
+                System.out.println("\t Now you have " + (amount + 1) + " tasks in the list.");
+                System.out.println(lineBreak);
+                // deadline[amount] = true;
+                amount++;
             } else {
-                System.out.println(lineBreak
-                        + "\n\t added: "
-                        + response
-                        + "\n"
-                        + lineBreak);
-                list[amount] = response;
+                System.out.println(lineBreak);
+                System.out.println("\t Got it. I've added this task:");
+                System.out.println("\t   [ ][ ] " + response);
+                System.out.println(lineBreak);
+                list[amount] = "[ ][ ] " + response;
                 amount++;
             }
             response = scanner.nextLine();
         }
 
-        System.out.println(lineBreak
-                + "\n\t Bye! Talk again sometime!\n"
-                + lineBreak);
+        System.out.println(lineBreak);
+        System.out.println("\t Bye! Talk again sometime!");
+        System.out.println(lineBreak);
 
         scanner.close();
     }
