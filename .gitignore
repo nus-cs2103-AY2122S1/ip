@@ -17,5 +17,4 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 
 # Class file
-/src/main/java/Duke.class
-/src/main/java/Task.class
+/src/main/java/*.class
