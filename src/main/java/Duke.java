@@ -10,9 +10,12 @@ public class Duke {
         BYE       ("Usage: bye"),
         LIST      ("Usage: list"),
         DONE      ("Usage: done [task number]"),
+        DELETE    ("Usage: delete [task number]"),
         TODO      ("Usage: todo [description]"),
         DEADLINE  ("Usage: deadline [description] /by [date and/or time]"),
         EVENT     ("Usage: event [description] /at [date and/or time]");
+
+        private static Command[] taskCommands = {TODO, DEADLINE, EVENT};
 
         /** Help text for the command */
         private final String help_text;
@@ -65,10 +68,28 @@ public class Duke {
                         return Command.DONE;
                     }
                     catch (NumberFormatException e) {
-                        throw new DukeException("Not a number!\n\tUsage: done [number]");
+                        throw new DukeException("Not a number!\n\t" + Command.DONE.help_text);
                     }
                     catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("Task number does not exist!\n\tUsage: done [number]");
+                        throw new DukeException("Task number does not exist!\n\t" + Command.DONE.help_text);
+                    }
+                }
+                case "delete": {
+                    // Make sure there is key phrase after to determine task to mark as done
+                    if (key_phrases == 1) {
+                        throw new DukeException("Delete what brah??\n\t" + Command.DELETE.help_text);
+                    }
+                    // Makes sure that key phrase is a valid int and within range of task list
+                    try {
+                        int index = Integer.parseInt(input_split[1]) - 1;
+                        lst.get(index);
+                        return Command.DELETE;
+                    }
+                    catch (NumberFormatException e) {
+                        throw new DukeException("Not a number!\n\t" + Command.DELETE.help_text);
+                    }
+                    catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("Task number does not exist!\n\t" + Command.DELETE.help_text);
                     }
                 }
                 case "todo": {
@@ -128,11 +149,18 @@ public class Duke {
     /**
      *
      * @param t
-     * @param sum
      * @return String of reply for adding task
      */
-    private static String addTaskReply(String t, int sum) {
-        return reply("Pepper Jack added this task:\n\t" + t + "\nYou have " + String.valueOf(sum) +
+    private static String showTasksReply(Command c, String t) {
+        String show_task = "\nYou have " + lst.size() +" task(s) now so get off that crack rock!";
+        // If adding new task reply with add task message
+        for (Command taskCommand : Command.taskCommands) {
+            if (c == taskCommand) {
+                return reply("Pepper Jack added this task:\n\t" + t + show_task);
+            }
+        }
+        // Else reply with custom message
+        return reply( t + "\nYou have " + lst.size() +
                 " task(s) now so get off that crack rock!");
     }
 
@@ -155,7 +183,7 @@ public class Duke {
 
                 // If command is BYE, end convo
                 if (c == Command.BYE) {
-                    System.out.print(reply("Pepper Jack loves Fraggle Rock!"));
+                    System.out.print(reply("Pepper Jack love Fraggle Rock!"));
                     break;
                 }
                 else {
@@ -180,12 +208,20 @@ public class Duke {
                             System.out.print(reply("Noice! Pepper Jack marked this task as done:\n\t" + t));
                             break;
                         }
+                        case DELETE: {
+                            // Delete task
+                            String desc = user_input.split(" ", 2)[1];
+                            int index = Integer.parseInt(desc) - 1;
+                            Task t = lst.remove(index);
+                            System.out.print(showTasksReply(c, "Aights! Pepper Jack deleted this task:\n\t" + t));
+                            break;
+                        }
                         case TODO: {
                             // Add new to do
                             String desc = user_input.split(" ", 2)[1];
                             Task t = new Todo(desc);
                             lst.add(t);
-                            System.out.print(addTaskReply(t.toString(), lst.size()));
+                            System.out.print(showTasksReply(c, t.toString()));
                             break;
                         }
                         case DEADLINE: {
@@ -193,7 +229,7 @@ public class Duke {
                             String[] desc_date = user_input.split(" ", 2)[1].split(" /by ",2);
                             Task t = new Deadline(desc_date[0], desc_date[1]);
                             lst.add(t);
-                            System.out.print(addTaskReply(t.toString(), lst.size()));
+                            System.out.print(showTasksReply(c, t.toString()));
                             break;
                         }
                         case EVENT: {
@@ -201,7 +237,7 @@ public class Duke {
                             String[] desc_date = user_input.split(" ", 2)[1].split(" /at ",2);
                             Task t = new Event(desc_date[0], desc_date[1]);
                             lst.add(t);
-                            System.out.print(addTaskReply(t.toString(), lst.size()));
+                            System.out.print(showTasksReply(c, t.toString()));
                             break;
                         }
                     }
