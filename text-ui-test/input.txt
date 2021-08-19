@@ -1,0 +1,8 @@
+todo Implement Automated Text UI Testing
+event Run away from problems /at 18 Aug 2021
+deadline Submit IP /by 19 Aug 2021 2359
+list
+done 2
+list
+bye
+

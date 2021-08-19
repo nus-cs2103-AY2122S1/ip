@@ -1,7 +1,23 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello...
+What do you want?
 
+Got it. I've added this task:
+	[T][ ] Implement Automated Text UI Testing
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+	[E][ ] Run away from problems (at: 18 Aug 2021)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+	[D][ ] Submit IP (by: 19 Aug 2021 2359)
+Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1. [T][ ] Implement Automated Text UI Testing
+2. [E][ ] Run away from problems (at: 18 Aug 2021)
+3. [D][ ] Submit IP (by: 19 Aug 2021 2359)
+I've marked this task as done:
+	[E][X] Run away from problems (at: 18 Aug 2021)
+Here are the tasks in your list:
+1. [T][ ] Implement Automated Text UI Testing
+2. [E][X] Run away from problems (at: 18 Aug 2021)
+3. [D][ ] Submit IP (by: 19 Aug 2021 2359)
+Whatever...
