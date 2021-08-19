@@ -1,6 +1,9 @@
 package main.java;
 
-public class Event extends Task {
+/**
+ * Task subclass that encapsulates the individual "Event" task passed into the bot.
+ */
+public class EventTask extends Task {
 
     /**
      * Variable that holds the event time as String
@@ -10,7 +13,7 @@ public class Event extends Task {
     /**
      * Constructor for the Event class
      */
-    Event(String task, String at) {
+    EventTask(String task, String at) {
         super(task);
         this.at = at;
     }
@@ -22,6 +25,6 @@ public class Event extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[E]" + (this.done ? "[X] " + this.task : "[ ] " + this.task) + "(At: " + this.at + ")";
+        return "[E]" + super.getTaskState() + "(At: " + this.at + ")";
     }
 }

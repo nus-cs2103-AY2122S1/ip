@@ -7,9 +7,9 @@ public class Duke {
      * Displays the task added message according to the task input given.
      *
      * @param input The task input to be added to the list.
-     * @param type The type id. Todo: 1, Deadline: 2, Event: 3.
+     * @param type  The type id. Todo: 1, Deadline: 2, Event: 3.
      * @param index The current index of the list.
-     * @param info The information regarding the task (In the format of "(By: ...)" or "(At: ...)", or "" for Todos)
+     * @param info  The information regarding the task (In the format of "(By: ...)" or "(At: ...)", or "" for Todos)
      * @return The String sequence showing that the task has been added to the list.
      */
     public static String addTask(String input, int type, int index, String info) {
@@ -68,93 +68,72 @@ public class Duke {
         // Define the scanner to read user inputs
         Scanner reader = new Scanner(System.in);
 
-
-
         // Continuously listen for user inputs
-        while(true) {
+        while (true) {
 
             // Get the next input from the user
             String input = reader.nextLine();
 
-            if (input.equals("bye")) {
-
-                // If the user types "bye", end bot
-                String bye = "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                        + "Bye... Hope to see you again soon!\n"
-                        + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n";
-                System.out.println(bye);
-                break;
-
-            } else if (input.equals("list")) {
-
-                // If the user types "list", show the list of tasks
-                String list = "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n";
-                for (int i = 0; i < index; i++) {
-                    list = list
-                            + String.valueOf(i + 1)
-                            + ". "
-                            + TaskArray[i].getTaskState()
-                            + "\n";
-                }
-                list += "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n";
-                System.out.println(list);
-
-            } else if (input.startsWith("done ")) {
-
-                // If the user types "done X" where X is a non-zero integer, mark the task as complete
-                // TODO Error handling for inputs
-                int doneIndex = Integer.parseInt(input.substring(5)) - 1;
-                TaskArray[doneIndex].toggleState();
-                String done = "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                        + "Great! I've marked the following task as done:\n"
-                        + TaskArray[doneIndex].getTaskState()
-                        + "\n";
-                done += "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n";
-                System.out.println(done);
-
-            } else if (input.startsWith("todo ") && input.length() > 5) {
-
-                // If the user types "todo [XXX]" where [XXX] is a substring, store substring as a Todo object
-                // TODO Error handling for inputs
-                String newTask = input.substring(5);
-                TaskArray[index] = new Todo(newTask);
-                index++;
-
-                // After storing it, repeat it back to the user
-                System.out.println(addTask(newTask, 1, index, ""));
-
-            } else if (input.startsWith("deadline ") && input.contains("/by ")) {
-                // If the user types "deadline [XXX]" where [XXX] is a substring, store substring as a Deadline object
-                // TODO Error handling for inputs
-                int position = input.indexOf("/by");
-                String newTask = input.substring(9, position);
-                String newInfo = input.substring(position + 4);
-                TaskArray[index] = new Deadline(newTask, newInfo);
-                index++;
-
-                // After storing it, repeat it back to the user
-                System.out.println(addTask(newTask, 2, index, newInfo));
-
-            } else if (input.startsWith("event ") && input.contains("/at ")) {
-                // If the user types "event [XXX]" where [XXX] is a substring, store substring as an Event object
-                // TODO Error handling for inputs
-                int position = input.indexOf("/at");
-                String newTask = input.substring(6, position);
-                String newInfo = input.substring(position + 4);
-                TaskArray[index] = new Event(newTask, newInfo);
-                index++;
-
-                // After storing it, repeat it back to the user
-                System.out.println(addTask(newTask, 3, index, newInfo));
-
-            } else {
-
-                System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                        + "OOPS! Sorry, I don't know what that means...\n"
-                        + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
-
-            }
+            // Continuously run the CommandHandler to handle new inputs from user
+            CommandHandler handler = new CommandHandler(reader, input);
+            handler.handle();
         }
     }
 }
 
+//            } else if (input.startsWith("done ")) {
+//
+//                // If the user types "done X" where X is a non-zero integer, mark the task as complete
+//                // TODO Error handling for inputs
+//                int doneIndex = Integer.parseInt(input.substring(5)) - 1;
+//                TaskArray[doneIndex].toggleState();
+//                String done = "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
+//                        + "Great! I've marked the following task as done:\n"
+//                        + TaskArray[doneIndex].getTaskState()
+//                        + "\n";
+//                done += "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n";
+//                System.out.println(done);
+//
+//            } else if (input.startsWith("todo ") && input.length() > 5) {
+//
+//                // If the user types "todo [XXX]" where [XXX] is a substring, store substring as a Todo object
+//                // TODO Error handling for inputs
+//                String newTask = input.substring(5);
+//                TaskArray[index] = new TodoTask(newTask);
+//                index++;
+//
+//                // After storing it, repeat it back to the user
+//                System.out.println(addTask(newTask, 1, index, ""));
+//
+//            } else if (input.startsWith("deadline ") && input.contains("/by ")) {
+//                // If the user types "deadline [XXX]" where [XXX] is a substring, store substring as a Deadline object
+//                // TODO Error handling for inputs
+//                int position = input.indexOf("/by");
+//                String newTask = input.substring(9, position);
+//                String newInfo = input.substring(position + 4);
+//                TaskArray[index] = new DeadlineTask(newTask, newInfo);
+//                index++;
+//
+//                // After storing it, repeat it back to the user
+//                System.out.println(addTask(newTask, 2, index, newInfo));
+//
+//            } else if (input.startsWith("event ") && input.contains("/at ")) {
+//                // If the user types "event [XXX]" where [XXX] is a substring, store substring as an Event object
+//                // TODO Error handling for inputs
+//                int position = input.indexOf("/at");
+//                String newTask = input.substring(6, position);
+//                String newInfo = input.substring(position + 4);
+//                TaskArray[index] = new EventTask(newTask, newInfo);
+//                index++;
+//
+//                // After storing it, repeat it back to the user
+//                System.out.println(addTask(newTask, 3, index, newInfo));
+//
+//            } else {
+//
+//
+//                System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
+//                        + "OOPS! Sorry, I don't know what that means...\n"
+//                        + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
+//
+//            }

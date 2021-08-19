@@ -1,11 +1,14 @@
 package main.java;
 
-public class Todo extends Task {
+/**
+ * Task subclass that encapsulates the individual "Todo" task passed into the bot.
+ */
+public class TodoTask extends Task {
 
     /**
      * Constructor for the Todo class
      */
-    Todo(String task) {
+    TodoTask(String task) {
         super(task);
     }
 
@@ -16,6 +19,6 @@ public class Todo extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[T]" + (this.done ? "[X] " + this.task : "[ ] " + this.task);
+        return "[T]" + super.getTaskState();
     }
 }

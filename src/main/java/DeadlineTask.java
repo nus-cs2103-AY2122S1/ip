@@ -1,6 +1,9 @@
 package main.java;
 
-public class Deadline extends Task {
+/**
+ * Task subclass that encapsulates the individual "Deadline" task passed into the bot.
+ */
+public class DeadlineTask extends Task {
 
     /**
      * Variable that holds the deadline time as String
@@ -10,7 +13,7 @@ public class Deadline extends Task {
     /**
      * Constructor for the Deadline class
      */
-    Deadline(String task, String by) {
+    DeadlineTask(String task, String by) {
         super(task);
         this.by = by;
     }
@@ -22,6 +25,6 @@ public class Deadline extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[D]" + (this.done ? "[X] " + this.task : "[ ] " + this.task) + "(By: " + this.by + ")";
+        return "[D]" + super.getTaskState() + "(By: " + this.by + ")";
     }
 }
