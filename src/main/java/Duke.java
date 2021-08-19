@@ -61,6 +61,8 @@ public class Duke {
                 x + "\n" + "|  Now you have " + y + " tasks in the list.");
         UnaryOperator<String> DoneTaskMessage =  (task) -> Box("Good job, meow! Marked this task as done:\n   " +
                 task);
+        BinaryOperator<String> DeleteTaskMessage =  (x, y) -> Box("Understood, meow! Deleted this task:\n   " +
+                x + "\n" + "|  Now you have " + y + " tasks in the list.");
         UnaryOperator<String> ListMessage = (items) -> Box("Here are the tasks in your list, meow:" + items);
         UnaryOperator<String> EchoMessage = (msg) -> Box(msg + ", meow? Not a command...");
 
@@ -81,6 +83,10 @@ public class Duke {
             try {
                 switch (command) {
                     case "LIST":
+                        if (taskList.size() == 0) {
+                            throw new EmptyListException(command);
+                        }
+
                         String s = "";
                         for (int i = 0; i < taskList.size(); i++) {
                             s += ("\n   " + (i + 1) + ". " + taskList.get(i));
@@ -90,13 +96,21 @@ public class Duke {
                         break;
 
                     case "DONE":
-                        if (!input.matches("done [0-9]+")) {
+                        if (taskList.size() == 0) {
+                            throw new EmptyListException(command);
+                        }
+
+                        if (inputArr.length < 2) {
+                            throw new NothingAfterCommand(command);
+                        }
+
+                        if (!inputArr[1].matches("[0-9]+")) {
                             throw new TaskIndexNotInteger(taskList.size());
                         }
 
                         int i = -1;
                         try {
-                            i = Integer.parseInt(input.split(" ", 2)[1]) - 1;
+                            i = Integer.parseInt(inputArr[1].trim()) - 1;
                         } catch (NumberFormatException e) {
                             throw new TaskIndexNotInteger(taskList.size());
                         }
@@ -150,6 +164,35 @@ public class Duke {
                         Task event = new Event(inputArr[0], inputArr[1]);
                         taskList.add(event);
                         System.out.println(AddTaskMessage.apply(event.toString(), Integer.toString(taskList.size())));
+                        break;
+
+                    case "DELETE":
+                        if (taskList.size() == 0) {
+                            throw new EmptyListException(command);
+                        }
+
+                        if (inputArr.length < 2) {
+                            throw new NothingAfterCommand(command);
+                        }
+
+                        if (!inputArr[1].matches("[0-9]+")) {
+                            throw new TaskIndexNotInteger(taskList.size());
+                        }
+
+                        int j = -1;
+                        try {
+                            j = Integer.parseInt(inputArr[1].trim()) - 1;
+                        } catch (NumberFormatException e) {
+                            throw new TaskIndexNotInteger(taskList.size());
+                        }
+
+                        if (j >= 0 && j < taskList.size()) {
+                            Task t = taskList.remove(j);
+                            System.out.println(DeleteTaskMessage.apply(t.toString(), Integer.toString(taskList.size())));
+                        } else {
+                            throw new TaskIndexOutOfBounds(taskList.size());
+                        }
+
                         break;
 
                     default:

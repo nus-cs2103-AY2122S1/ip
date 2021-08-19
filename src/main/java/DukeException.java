@@ -47,3 +47,11 @@ class MissingArguments extends DukeException {
 
 }
 
+class EmptyListException extends DukeException {
+
+    EmptyListException(String command) {
+        super(Duke.Box("You have nothing in your list to " + command + ", meow!"));
+    }
+
+}
+
