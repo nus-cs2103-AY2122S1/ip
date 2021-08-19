@@ -35,6 +35,13 @@ public class Duke {
                         echo(e.getMessage());
                     }
                     break;
+                case "delete":
+                    try {
+                        deleteTask(command, tasksList);
+                    } catch (DukeException e) {
+                        echo(e.getMessage());
+                    }
+                    break;
                 case "todo":
                     try {
                         addToDoTask(command, tasksList);
@@ -105,6 +112,26 @@ public class Duke {
         }
     }
 
+    static void deleteTask(String[] command, List<Task> tasksList) throws DukeException {
+        if (command.length == 2) {
+            int taskNum = Integer.parseInt(command[1]);
+
+            if (taskNum <= tasksList.size()) {
+                Task taskToDelete = tasksList.get(taskNum - 1);
+                tasksList.remove(taskToDelete);
+
+                String response = taskDeletedMessage() + "\n" +
+                        "\t\t" + taskToDelete + "\n" +
+                        numOfTasksInList(tasksList);
+                echo(response);
+            } else {
+                throw new DukeException("\t" + "☹ Please select a valid task number to be deleted.");
+            }
+        } else {
+            throw new DukeException("\t" + "☹ Please select the task number to be deleted.");
+        }
+    }
+
     static void addToDoTask(String[] command, List<Task> tasksList) throws DukeException {
         if (command.length == 2) {
             Task newToDoTask = new ToDo(TaskType.TODO, command[1]);
@@ -166,8 +193,29 @@ public class Duke {
     }
 
     private static String greetMessage() {
-        return "\t" + "Hello! I'm Duke" + System.lineSeparator() +
-                "\t" + "What can I do for you?";
+        return "\t" + "Hello! I'm Duke, your Personal Assistant Chatbot." +
+                System.lineSeparator() + "\t" + "What can I do for you?" +
+                System.lineSeparator() + System.lineSeparator() + menuOptions();
+    }
+
+    private static String menuOptions() {
+        return "\t" + "Menu Options:" + System.lineSeparator() +
+                "\t\t" + "1." + "\t" + "list" + System.lineSeparator() +
+                "\t\t\t" + "[List the tasks in your list]" + System.lineSeparator() +
+                "\t\t" + "2." + "\t" + "todo ABC" + System.lineSeparator() +
+                "\t\t\t" + "[Add a todo task, ABC, into your list]" + System.lineSeparator() +
+                "\t\t" + "3." + "\t" + "deadline ABC /by XYZ" + System.lineSeparator() +
+                "\t\t\t" + "[Add a deadline task, ABC, into your list " +
+                "and specify the date/time, XYZ, it needs to be completed by]" + System.lineSeparator() +
+                "\t\t" + "4." + "\t" + "event ABC /at XYZ" + System.lineSeparator() +
+                "\t\t\t" + "[Add an event task, ABC, into your list " +
+                "and specify the start and end date/time, XYZ]" + System.lineSeparator() +
+                "\t\t" + "5." + "\t" + "done N" + System.lineSeparator() +
+                "\t\t\t" + "[Mark a task number, N, as done]" + System.lineSeparator() +
+                "\t\t" + "6." + "\t" + "delete N" + System.lineSeparator() +
+                "\t\t\t" + "[Delete a task number, N, from your list]" + System.lineSeparator() +
+                "\t\t" + "7." + "\t" + "bye" + System.lineSeparator() +
+                "\t\t\t" + "[Exit the chatbot]";
     }
 
     private static String exitMessage() {
@@ -176,6 +224,10 @@ public class Duke {
 
     private static String taskAddedMessage() {
         return "\t" + "Got it. I've added this task:";
+    }
+
+    private static String taskDeletedMessage() {
+        return "\t" + "Noted. I've removed this task:";
     }
 
     private static String numOfTasksInList(List<Task> tasksList) {
