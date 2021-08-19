@@ -1,9 +1,3 @@
-package main.java;
-import main.java.Deadline;
-import main.java.Event;
-import main.java.Task;
-import main.java.Todo;
-
 import java.util.Scanner;
 import java.util.ArrayList;
 

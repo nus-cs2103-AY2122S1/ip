@@ -1,5 +1,3 @@
-package main.java;
-
 public class Event extends Task{
     public String type;
     public String date_time = "";
