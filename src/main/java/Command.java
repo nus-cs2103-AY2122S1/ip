@@ -5,6 +5,7 @@ public enum Command {
     BYE("bye"),
     LIST("list"),
     DONE("done"),
+    DELETE("delete"),
     DEADLINE("deadline"),
     EVENT("event"),
     TODO("todo");

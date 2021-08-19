@@ -29,6 +29,8 @@ public abstract class Request {
 
             case DONE:
                 return new DoneRequest(taskCollection, commandInput);
+            case DELETE:
+                return new DeleteRequest(taskCollection, commandInput);
             case LIST:
                 return new ListRequest(taskCollection);
 

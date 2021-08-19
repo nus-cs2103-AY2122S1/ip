@@ -45,12 +45,12 @@
 
     ____________________________________________________________
      ☹ OOPS!!!
-     The task number of a done request is either missing or invalid.
+     The task number of your done request is either missing or invalid.
     ____________________________________________________________
 
     ____________________________________________________________
      ☹ OOPS!!!
-     The task number of a done request is either missing or invalid.
+     The task number of your done request is either missing or invalid.
     ____________________________________________________________
 
     ____________________________________________________________
@@ -63,6 +63,28 @@
      1.[T][X] borrow book
      2.[D][ ] return book (by: June 6th)
      3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+    ____________________________________________________________
+
+    ____________________________________________________________
+     ☹ OOPS!!!
+     The task number of your delete request is either missing or invalid.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     ☹ OOPS!!!
+     The task number of your delete request is either missing or invalid.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Noted. I've removed this task:
+       [T][X] borrow book
+     Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[D][ ] return book (by: June 6th)
+     2.[E][ ] project meeting (at: Aug 6th 2-4pm)
     ____________________________________________________________
 
     ____________________________________________________________

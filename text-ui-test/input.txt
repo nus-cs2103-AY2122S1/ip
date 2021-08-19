@@ -9,4 +9,8 @@ done
 done not-a-number
 done 1
 list
+delete
+delete not-a-number
+delete 1
+list
 bye
