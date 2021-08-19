@@ -3,7 +3,7 @@ import java.util.List;
 
 public class TaskList {
     private static TaskList MainList = null;
-    private ArrayList<String> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList = new ArrayList<>();
 
     private TaskList() {}
 
@@ -15,19 +15,19 @@ public class TaskList {
         return MainList;
     }
 
-    public List<? extends String> getTasks() {
+    public List<? extends Task> getTasks() {
         if(MainList == null) {
             MainList = new TaskList();
         }
 
         return this.taskList;
     }
-    public List<? extends String> addTask(String task) {
+    public List<? extends Task> addTask(String task) {
         if( MainList == null) {
             MainList = new TaskList();
         }
-
-        this.taskList.add(task);
+        Task newTask = new Task(task);
+        this.taskList.add(newTask);
         return this.taskList;
     }
 }
