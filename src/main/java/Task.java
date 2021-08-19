@@ -4,7 +4,6 @@
 public class Task {
     private String value = null;
     private boolean isDone = false;
-
     public Task(String value){
         this.value = value;
         this.isDone = false;
@@ -39,4 +38,10 @@ public class Task {
     public String getStatusIcon() {
         return this.isDone ? "X" : " ";
     }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + value;
+    }
+
 }
