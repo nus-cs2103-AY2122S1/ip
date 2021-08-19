@@ -55,6 +55,20 @@ public class Duke {
         System.out.println(LINE);
     }
 
+    /**
+     * Adds a specific task according to the correct class
+     * @param task task to be added
+     */
+    private static void addSpecificTask(String task) throws DukeException {
+        if (task.startsWith("deadline")) {
+            addTask(new Deadline(task));
+        } else if (task.startsWith("event") && task.contains("/at ")) {
+            addTask(new Event(task));
+        } else if (task.startsWith("todo")) {
+            addTask(new Todo(task));
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -62,18 +76,26 @@ public class Duke {
         String task = sc.nextLine();
 
         while(!task.equals("bye")) {
-            if (task.equals("list")) {
-                printList();
-            } else if (task.startsWith("done")) {
-                completeTask(task);
-            } else if (task.startsWith("deadline")) {
-                addTask(new Deadline(task));
-            } else if (task.startsWith("event")) {
-                addTask(new Event(task));
-            } else if (task.startsWith("todo")) {
-                addTask(new Todo(task));
-            } else {
-                addTask(new Task(task));
+            try {
+                if (task.equals("list")) {
+                    printList();
+                } else if (task.startsWith("done")) {
+                    completeTask(task);
+                } else if (task.startsWith("deadline") || task.startsWith("event") || task.startsWith("todo")) {
+                    switch(task) {
+                        case "deadline":
+                            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                        case "event":
+                            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+                        case "todo":
+                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    addSpecificTask(task);
+                } else {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
             task = sc.nextLine();
         }
@@ -151,5 +173,11 @@ class Todo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+}
+
+class DukeException extends Exception {
+    public DukeException(String errorMessage) {
+        super(errorMessage);
     }
 }
