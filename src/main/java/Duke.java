@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,14 +11,23 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         String input;
+        String[] arr = new String[100];
+        int len = 0;
         while (true) {
             input = scanner.nextLine();
-            System.out.printf("\t");
-            if ("bye".equals(input)) {
-                System.out.println("Bye. Hope to see you again soon!");
-                return;
+            switch (input) {
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    return;
+                case "list":
+                    for (int i = 0; i < len; i++) {
+                        System.out.printf("%d. %s\n", i + 1, arr[i]);
+                    }
+                    break;
+                default:
+                    arr[len++] = input;
+                    System.out.println("added: " + input);
             }
-            System.out.println(input);
         }
     }
 }
