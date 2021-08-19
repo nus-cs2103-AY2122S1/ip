@@ -3,7 +3,7 @@ public class Deadline extends Task {
     String deadline;
 
     Deadline(String title, String deadline) {
-        super(title);
+        super(title.substring(9));
         this.type = "[D]";
         this.deadline = deadline;
     }

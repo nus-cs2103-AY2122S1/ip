@@ -3,7 +3,7 @@ public class Events extends Task {
     String time;
 
     Events (String title, String time) {
-        super(title);
+        super(title.substring(6));
         this.type = "[E]";
         this.time = time;
     }

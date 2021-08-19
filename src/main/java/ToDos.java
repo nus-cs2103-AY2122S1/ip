@@ -2,7 +2,7 @@ public class ToDos extends Task {
     String type;
 
     ToDos(String title) {
-        super(title);
+        super(title.substring(5));
         this.type = "[T]";
     }
 

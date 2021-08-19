@@ -1,3 +1,4 @@
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -68,6 +69,21 @@ public class Duke {
         }
     }
 
+    //delete a task
+    public void deleteTask(String str, ArrayList<Task> l) throws OutOfBoundException {
+        String i = str.substring(str.length()-1);
+        int index = Integer.parseInt(i);
+        if (index < 0 || index > l.size()) {
+            throw new OutOfBoundException();
+        } else {
+            Task task = l.get(index - 1);
+            l.remove(index - 1);
+            System.out.println("Noted. I've removed this task: ");
+            System.out.println(task.printTask());
+            System.out.println("Now you have " + l.size()
+                    + (l.size() == 1 ? " task in the list" : " tasks in the list."));
+        }
+    }
 
     public static void main(String[] args) throws InvalidTaskException, EmptyDescriptionException, OutOfBoundException {
         Duke duke = new Duke();
@@ -87,6 +103,14 @@ public class Duke {
             else if (input.length() >= 4 && input.startsWith("done")) {
                 try {
                     duke.markAsDone(input, list);
+                } catch (NumberFormatException | OutOfBoundException e) {
+                    System.out.println("Task does not exist. Please send a correct number ><");
+                }
+            }
+
+            else if (input.startsWith("delete")) {
+                try {
+                    duke.deleteTask(input, list);
                 } catch (NumberFormatException | OutOfBoundException e) {
                     System.out.println("Task does not exist. Please send a correct number ><");
                 }
