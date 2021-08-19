@@ -33,9 +33,23 @@ public class Duke {
 
                 //exit command for when entered exit code
                 System.exit(1);
+            } else if (input.equals("list")) {
+                printList();
+            } else {
+                addToList(input);
             }
-            Echo(input);
         }
+    }
+
+    /**
+     * Method to add the input to the list
+     *
+     * @param input String input from the user
+     */
+    static void addToList(String input) {
+        //Task task = new Task(input, false);
+        list.add(input);
+        System.out.println("added: " + input);
     }
 
     /**
@@ -45,6 +59,16 @@ public class Duke {
      */
     static void Echo(String input) {
         System.out.println(input);
+    }
+
+    /**
+     * method to print task list on command
+     */
+    static void printList() {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println((i + 1) + ". " + list.get(i));
+        }
     }
 
 }
