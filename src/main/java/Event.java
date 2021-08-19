@@ -7,11 +7,8 @@
 public class Event extends Task {
     private final String startTime;
 
-    protected Event(String[] arrString) throws IllegalArgumentException {
-        super(arrString[0]);
-        if (arrString.length < 2) {
-            throw new IllegalArgumentException("To indicate the date, please input \"/at {date}\" ");
-        }
+    protected Event(String[] arrString) throws DukeException {
+        super(arrString.length < 2 ? " " : arrString[0]);
         this.startTime = arrString[1];
     }
 
@@ -21,6 +18,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         String[] arrString = this.startTime.split(" ", 2);
-        return "[E]" + super.toString() + "(" + arrString[0] + ": " + arrString[1] + ")";
+        return "[E]" + super.toString() + "(" + arrString[0] + "at: " + arrString[1] + ")";
     }
 }

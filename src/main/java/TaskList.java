@@ -44,9 +44,9 @@ public class TaskList {
      * @param i Index of the task in the task list, that
      *          is to be set as 'done'.
      */
-    public void setTaskAsDone(int i) throws IllegalArgumentException {
+    public void setTaskAsDone(int i) throws DukeIncorrectInputs {
         if (i < 1 || i > this.listOfTasks.size()) {
-            throw new IllegalArgumentException("There is no such task saved in the list.");
+            throw new DukeNoSuchTask(new IllegalArgumentException());
         }
         this.listOfTasks.get(i - 1).markAsDone();
     }

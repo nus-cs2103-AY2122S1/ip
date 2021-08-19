@@ -8,6 +8,9 @@
 	HELLO! I'm Duke
 	To ease your experience, here are some commands you can type: 
 		 'list': view all tasks in your task list
+		 'todo': add a todo task in your task list
+		 'deadline': add a deadline task in your task list
+		 'event': add an event task in your task list
 		 'bye': exit chat
 	What can I do for you?
 	____________________________________________________________
@@ -42,8 +45,13 @@
 	____________________________________________________________
 
 	____________________________________________________________
+	Nice! I've marked this task as done:
+		[T][X] buy financial calculator
+	____________________________________________________________
+
+	____________________________________________________________
 	1. [D][ ] iP due (by: 19 Aug 2359)
-	2. [T][ ] buy financial calculator
+	2. [T][X] buy financial calculator
 	3. [T][ ] recap cs2100 lecture
 	4. [E][ ] lazpitch (at: 16 Aug 2359)
 	____________________________________________________________
@@ -51,6 +59,28 @@
 	____________________________________________________________
 	Nice! I've marked this task as done:
 		[D][X] iP due (by: 19 Aug 2359)
+	____________________________________________________________
+
+	____________________________________________________________
+	Nice! I've marked this task as done:
+		[T][X] buy financial calculator
+	____________________________________________________________
+
+	____________________________________________________________
+	Nice! I've marked this task as done:
+		[T][X] recap cs2100 lecture
+	____________________________________________________________
+
+	____________________________________________________________
+	Nice! I've marked this task as done:
+		[E][X] lazpitch (at: 16 Aug 2359)
+	____________________________________________________________
+
+	____________________________________________________________
+	1. [D][X] iP due (by: 19 Aug 2359)
+	2. [T][X] buy financial calculator
+	3. [T][X] recap cs2100 lecture
+	4. [E][X] lazpitch (at: 16 Aug 2359)
 	____________________________________________________________
 
 	____________________________________________________________

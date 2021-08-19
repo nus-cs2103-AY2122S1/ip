@@ -26,6 +26,9 @@ public class Duke {
                 "\tHELLO! I'm Duke\n" +
                 "\tTo ease your experience, here are some commands you can type: \n" +
                     "\t\t 'list': view all tasks in your task list\n" +
+                    "\t\t 'todo': add a todo task in your task list\n" +
+                    "\t\t 'deadline': add a deadline task in your task list\n" +
+                    "\t\t 'event': add an event task in your task list\n" +
                     "\t\t 'bye': exit chat\n" +
                 "\tWhat can I do for you?\n"
 
@@ -55,8 +58,13 @@ public class Duke {
         return arrString[0];
     }
 
-    private int getSecondNum(String s) {
+    private int getSecondNum(String s) throws DukeDoneIncorrectArgument {
         String[] arrString = s.split(" ", 2);
+        try {
+            Integer.parseInt(arrString[1]);
+        } catch (IllegalArgumentException e) {
+            throw new DukeDoneIncorrectArgument();
+        }
         return Integer.parseInt(arrString[1]);
     }
 
@@ -83,13 +91,8 @@ public class Duke {
                             "\tNow you have " + d.listOfTasks.getTotal() + " in your list.\n"
                             ));
                 }
-            } catch (IllegalArgumentException e) {
-                if (e.getMessage().contains("For input string:")) {
-                    System.err.println(d.chatBotMessage("\t" + "Input after 'done' has to be an integer\n"));
-                } else {
-                    System.err.println(d.chatBotMessage("\t" + e.getMessage() + "\n"));
-                }
-
+            } catch (DukeException e) {
+                System.err.println(d.chatBotMessage(e.getMessage() + "\n"));
             }
         }
     }
