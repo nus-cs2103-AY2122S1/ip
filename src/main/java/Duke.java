@@ -1,5 +1,3 @@
-import org.w3c.dom.events.Event;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,8 +8,6 @@ public class Duke {
     public static class TaskList {
         private Task[] tasks;
         private int numTask;
-
-
 
         public TaskList(){
             this.tasks = new Task[100];
@@ -103,11 +99,11 @@ public class Duke {
                 continue;
             }
 
-//            Matcher todoMatcher = todoPattern.matcher(input);
-//            if (todoMatcher.find()) {
-//                storage.addCustom(new Todo(todoMatcher.group(1)));
-//                continue;
-//            }
+            Matcher eventMatcher = eventPattern.matcher(input);
+            if (eventMatcher.find()) {
+                storage.addCustom(new Event(eventMatcher.group(1), eventMatcher.group(2)));
+                continue;
+            }
 
             // add to list
             storage.add(new Task(input));
