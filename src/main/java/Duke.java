@@ -28,7 +28,7 @@ public class Duke {
     public static void greeting(){
 
         System.out.println(INDENTATION + UNDERLINE);
-        System.out.println(INDENTATION + "Hello! I'm Duke \n" +
+        System.out.println(INDENTATION + "Hello! I'm Duke\n" +
                            INDENTATION + "What can I do for you?");
         System.out.println(INDENTATION + UNDERLINE);
     }
