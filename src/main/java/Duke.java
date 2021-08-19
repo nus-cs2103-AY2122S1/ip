@@ -37,9 +37,19 @@ public class Duke {
                     System.out.println(BYE);
                     break;
                 case "list":
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < count; i++) {
-                        System.out.println(i + 1 + ". " + tasks[i].toString());
+                    if (count == 0) {
+                        System.out.println("There are no tasks on your list. *quack*");
+                    } else if (count == 1) {
+                        System.out.println("There is one task on your list:");
+                        System.out.println("1. " + tasks[0].toString());
+                        System.out.println("*quack*");
+
+                    } else {
+                        System.out.println("Here are the tasks on your list:");
+                        for (int i = 0; i < count; i++) {
+                            System.out.println(i + 1 + ". " + tasks[i].toString());
+                        }
+                        System.out.println("*quack*");
                     }
                     break;
                 case "done":
@@ -55,7 +65,7 @@ public class Duke {
                 case "todo":
                     startDescription = newUserInput.indexOf(" ") + 1;
                     description = newUserInput.substring(startDescription);
-                    tasks[count] = new Task(description, TaskType.TODO);
+                    tasks[count] = new Todo(description);
                     count++;
                     System.out.println("Got it. I've added this task:\n"
                             + tasks[count - 1].toString());
@@ -66,7 +76,7 @@ public class Duke {
                     startDateTime = newUserInput.indexOf("/") + 1;
                     description = newUserInput.substring(startDescription, startDateTime - 2);
                     dateTime = newUserInput.substring(startDateTime);
-                    tasks[count] = new Task(description, TaskType.DEADLINE, dateTime);
+                    tasks[count] = new Deadline(description, dateTime);
                     count++;
                     System.out.println("Got it. I've added this task:\n"
                             + tasks[count - 1].toString());
@@ -77,7 +87,7 @@ public class Duke {
                     startDateTime = newUserInput.indexOf("/") + 1;
                     description = newUserInput.substring(startDescription, startDateTime - 2);
                     dateTime = newUserInput.substring(startDateTime);
-                    tasks[count] = new Task(description, TaskType.EVENT, dateTime);
+                    tasks[count] = new Event(description, dateTime);
                     count++;
                     System.out.println("Got it. I've added this task:\n"
                             + tasks[count - 1].toString());
@@ -87,7 +97,6 @@ public class Duke {
                     System.out.println("Error: user input " + newUserInput);
             }
         }
-
         scanner.close();
     }
 
