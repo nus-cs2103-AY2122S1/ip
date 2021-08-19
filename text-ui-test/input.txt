@@ -1,15 +1,12 @@
-todo Homework
-blah
-todo
-deadline hello
-deadline Essay /by Tonight
-essay
+todo something
+deadline homework
+deadline homework /by friday night
 event
-event exam
-event exam /at Saturday
+event birthday /at next week
 list
-done
-done 5
-done 1
+done 3
 list
+delete 2
+list
+hello
 bye
