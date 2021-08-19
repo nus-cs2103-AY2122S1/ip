@@ -12,4 +12,9 @@ list
 done 1
 list
 unknowncommand
+delete 4
+delete 1
+delete 1
+delete 1
+delete 1
 bye
