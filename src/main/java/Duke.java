@@ -79,6 +79,24 @@ public class Duke {
                         System.out.println("now you have " + count + " tasks in your list");
                         System.out.println(line);
                     }
+                } else if (cmd.matches("^delete [0-9]+$")) {
+                    String[] temp = cmd.split(" ");
+                    int itemNo = Integer.parseInt(temp[1]);
+
+                    // Make sure itemNo is within limit
+                    if ((itemNo <= count) && (itemNo > 0)) {
+
+                        // Remove item from lists
+                        System.out.println(line);
+                        System.out.println("ok, ive deleted this task :");
+                        System.out.println("  " + cmdList.get(itemNo - 1));
+                        cmdList.remove(itemNo - 1);
+                        count--;
+                        System.out.println("now you have " + count + " tasks in your list");
+                    } else {
+                        throw new DukeException("i cant seem to find the task you're looking for");
+                    }
+                    System.out.println(line);
                 } else {         // throw exception
                     // Error handling for todo, deadline & event
                     if (cmd.equals("todo") || cmd.matches("deadline *") || cmd.matches("event *")) {

@@ -94,5 +94,15 @@ congrats on completing this task! :
  ☹ oops..im sorry, but i dont know what that means :(
 ===========================
 ===========================
+ok, ive deleted this task :
+  [T][ ] borrow book
+now you have 3 tasks in your list
+===========================
+===========================
+1.[D][X] return book (by: Sunday)
+2.[E][ ] project meeting (at: Mon 2-4pm)
+3.[D][ ] do homework (by: no idea :-p)
+===========================
+===========================
 bye friend!
 ===========================

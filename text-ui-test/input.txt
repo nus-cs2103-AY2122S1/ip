@@ -20,4 +20,6 @@ event
 
 list
 blah
+delete 1
+list
 bye
