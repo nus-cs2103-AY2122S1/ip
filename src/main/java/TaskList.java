@@ -45,7 +45,7 @@ public class TaskList {
         int count = 0;
         for (Task task : tasks) {
             count++;
-            listAsString.append(DukeCore.space)
+            listAsString.append(Ui.space)
                     .append(count)
                     .append(".")
                     .append(task.getDescriptionWithStatus())

@@ -7,17 +7,24 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class DukeDataHandler {
+public class Storage {
 
-    public TaskList retrieveTaskList() {
+    private final String filePath;
+    private final String space = Ui.space;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public TaskList retrieveTaskList() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
-        File file = new File("./data/duke.txt");
+        File file = new File(filePath);
         if (!file.exists()) {
             try {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
             } catch (IOException e) {
-                System.err.println("OOPS!!! An error occurred when initializing Duke.");
+                System.err.println("\nOOPS!!! Fail to create data file!");
                 System.exit(1);
             }
         }
@@ -28,20 +35,20 @@ public class DukeDataHandler {
                 list.add(t);
             }
         } catch (Exception e) {
-            System.err.println("OOPS!!! An error occurred when initializing Duke.");
-            System.exit(1);
+            System.err.println("\nOOPS!!! An error occurred when reading from the data file.");
+            throw new DukeException("corrupted data file");
         }
         return new TaskList(list);
     }
 
     public void storeTaskList(TaskList list) {
         try {
-            FileWriter fw = new FileWriter("./data/duke.txt");
+            FileWriter fw = new FileWriter(filePath);
             fw.write(list.printList());
             fw.flush();
             fw.close();
         } catch (IOException e) {
-            System.err.println("OOPS!!! An error occurred when writing to the data file.");
+            throw new DukeException(space + "OOPS!!! An error occurred when writing to the data file.");
         }
     }
 
@@ -79,7 +86,7 @@ public class DukeDataHandler {
             }
             return t;
         } else {
-            throw new DukeException("invalid data file");
+            throw new DukeException("fail to parse");
         }
     }
 
