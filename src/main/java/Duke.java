@@ -15,27 +15,99 @@ public class Duke {
             System.out.print("Enter command: \t");
             commandLine = sc.nextLine().trim();
             String[] command = commandLine.split(" ", 2);
+            String response = "";
 
             switch (command[0]) {
                 case "bye":
                     echo(exitMessage());
                     break;
                 case "list":
-                    echo(displayTasksList(tasksList));
+                    displayTasksList(tasksList);
                     break;
                 case "done":
-                    int taskNum = Integer.parseInt(command[1]);
-                    tasksList.get(taskNum - 1).setDone();
-                    Task task = tasksList.get(taskNum - 1);
-                    echo(taskDoneMessage(task));
+                    markDone(command, tasksList);
+                    break;
+                case "todo":
+                    addToDoTask(command, tasksList);
+                    break;
+                case "deadline":
+                    addDeadlineTask(command, tasksList);
+                    break;
+                case "event":
+                    addEventTask(command, tasksList);
                     break;
                 default:
-                    Task newTask = new Task(commandLine);
-                    tasksList.add(newTask);
-                    echo(taskAddedMessage(newTask));
                     break;
             }
         } while (!commandLine.equals("bye"));
+    }
+
+    static void displayTasksList(List<Task> tasksList) {
+        String response = "\t" + "Here are the tasks in your list:" +
+                System.lineSeparator();
+
+        for (int i = 0; i < tasksList.size(); i++) {
+            if (i != 0) {
+                response += System.lineSeparator();
+            }
+
+            response += "\t\t" + (i + 1) + "." + "\t" + tasksList.get(i).toString();
+        }
+
+        echo(response);
+    }
+
+    static void markDone(String[] command, List<Task> tasksList) {
+        int taskNum = Integer.parseInt(command[1]);
+
+        if (taskNum <= tasksList.size()) {
+            tasksList.get(taskNum - 1).setDone();
+            Task taskDone = tasksList.get(taskNum - 1);
+
+            String response = taskDoneMessage() + System.lineSeparator() +
+                    "\t\t" + taskDone;
+            echo(response);
+        }
+    }
+
+    static void addToDoTask(String[] command, List<Task> tasksList) {
+        Task newToDoTask = new ToDo(TaskType.TODO, command[1]);
+        tasksList.add(newToDoTask);
+
+        String response = taskAddedMessage() + System.lineSeparator() +
+                "\t\t" + newToDoTask + System.lineSeparator() +
+                numOfTasksInList(tasksList);
+        echo(response);
+    }
+
+    static void addDeadlineTask(String[] command, List<Task> tasksList) {
+        String[] deadlineTaskDetails = command[1].split("/", 2);
+
+        if (deadlineTaskDetails.length == 2) {
+            Task newDeadlineTask = new Deadline(TaskType.DEADLINE,
+                    deadlineTaskDetails[0], deadlineTaskDetails[1]);
+            tasksList.add(newDeadlineTask);
+
+            String response = taskAddedMessage() + System.lineSeparator() +
+                    "\t\t" + newDeadlineTask + System.lineSeparator() +
+                    numOfTasksInList(tasksList);
+            echo(response);
+        }
+    }
+
+    static void addEventTask(String[] command, List<Task> tasksList) {
+        String[] eventTaskDetails = command[1].split("/", 2);
+
+        if (eventTaskDetails.length == 2) {
+            Task newEventTask = new Event(TaskType.EVENT,
+                    eventTaskDetails[0], eventTaskDetails[1]);
+            tasksList.add(newEventTask);
+
+            String response = taskAddedMessage() + System.lineSeparator() +
+                    "\t\t" + newEventTask + System.lineSeparator() +
+                    numOfTasksInList(tasksList);
+            echo(response);
+        }
     }
 
     private static String greetMessage() {
@@ -47,29 +119,18 @@ public class Duke {
         return "\t" + "Bye. Hope to see you again soon!";
     }
 
-
-    private static String taskAddedMessage(Task newTask) {
-        return "\t" + "added: " + newTask.getDescription();
+    private static String taskAddedMessage() {
+        return "\t" + "Got it. I've added this task:";
     }
 
-    private static String taskDoneMessage(Task task) {
-        return "\t" + "Nice! I've marked this task as done:" +
-                System.lineSeparator() + "\t\t" + task.toString();
+    private static String numOfTasksInList(List<Task> tasksList) {
+        return "\t" + "Now you have " + tasksList.size() +
+                (tasksList.size() > 1 ? " tasks" : " task") +
+                " in the list.";
     }
 
-    private static String displayTasksList(List<Task> tasksList) {
-        String result = "\t" + "Here are the tasks in your list:"
-                + System.lineSeparator();
-
-        for (int i = 0; i < tasksList.size(); i++) {
-            if (i != 0) {
-                result += System.lineSeparator();
-            }
-
-            result += "\t\t" + (i + 1) + "." + "\t" + tasksList.get(i).toString();
-        }
-
-        return result;
+    private static String taskDoneMessage() {
+        return "\t" + "Nice! I've marked this task as done:";
     }
 
     private static void echo(String message) {
