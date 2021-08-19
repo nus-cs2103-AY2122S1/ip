@@ -37,7 +37,22 @@ public class Duke {
                     tm.list();
                     break;
                 default:
-                    tm.handle(command);
+                    try {
+                        tm.handle(command);
+                    } catch (InvalidCommandException e) {
+                        System.out.println("I'm afraid I don't recognise that, please try again!");
+                    } catch (NoNameException e) {
+                        System.out.println("Task name cannot be empty!");
+                    } catch (InvalidTaskNumberException e) {
+                        System.out.println("Sorry, that task does not exist!");
+                    } catch (MissingDeadlineException e) {
+                        System.out.println("When is that due? Let me know after '/by'!");
+                    } catch (MissingEventTimeException e) {
+                        System.out.println("When is the event happening? Let me know after '/at'!");
+                    } catch (DukeException e) {
+                        System.out.println("There seems to be a problem with Duke. " +
+                                "Please try again!");
+                    }
             }
         }
     }
