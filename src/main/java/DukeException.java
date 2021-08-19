@@ -17,7 +17,7 @@ public class DukeException extends Exception{
         if (e instanceof ArrayIndexOutOfBoundsException) {
             message = "☹ OOPS!!! The task does not exist.";
         } else if (e instanceof StringIndexOutOfBoundsException) {
-            message = "☹ OOPS!!! The description of a todo cannot be empty.";
+            message = "☹ OOPS!!! The description of a task cannot be empty.";
         } else {
             message = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
