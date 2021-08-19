@@ -10,8 +10,12 @@ public class Duke {
         TODO, DEADLINE, EVENT
     }
 
-    public static void addTask(TaskType t, String input, ArrayList<Task> list) {
+    public static void addTask(TaskType t, String[] inputSplit, ArrayList<Task> list) {
         try {
+            if (inputSplit.length < 2) {
+                throw new DukeException("Description of task cannot be empty!");
+            }
+            String input = inputSplit[1];
             switch (t) {
                 case TODO:
                     Task todo = new ToDo(input);
@@ -63,22 +67,13 @@ public class Duke {
             try {
                 switch(inputSplit[0]) {
                     case "todo":
-                        if (inputSplit.length < 2) {
-                            throw new DukeException("Description of task cannot be empty!");
-                        }
-                        addTask(TaskType.TODO, inputSplit[1], list);
+                        addTask(TaskType.TODO, inputSplit, list);
                         break;
                     case "deadline":
-                        if (inputSplit.length < 2) {
-                            throw new DukeException("Description of task cannot be empty!");
-                        }
-                        addTask(TaskType.DEADLINE, inputSplit[1], list);
+                        addTask(TaskType.DEADLINE, inputSplit, list);
                         break;
                     case "event":
-                        if (inputSplit.length < 2) {
-                            throw new DukeException("Description of task cannot be empty!");
-                        }
-                        addTask(TaskType.EVENT, inputSplit[1], list);
+                        addTask(TaskType.EVENT, inputSplit, list);
                         break;
                     case "list":
                         if (list.size() == 0) {
@@ -87,8 +82,7 @@ public class Duke {
                         System.out.println("Here are your tasks:");
                         for (int i = 1; i <= list.size(); i++) {
                             Task task = list.get(i - 1);
-                            System.out.println(i + "."
-                                    + task.toString());
+                            System.out.println(i + "." + task.toString());
                         }
                         break;
                     case "done":
@@ -122,6 +116,7 @@ public class Duke {
                         break;
                     case "bye":
                         loop = false;
+                        System.out.println("Bye bye. Duke going to sleep now.");
                         break;
                     default:
                         throw new DukeException("That is not within my scope of action!");
@@ -130,7 +125,5 @@ public class Duke {
                 System.out.println(e.toString().split(" ", 2)[1]);
             }
         }
-
-        System.out.println("Bye bye. Duke going to sleep now.");
     }
 }
