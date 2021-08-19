@@ -12,21 +12,19 @@ public abstract class Command {
             new DoneTaskCommand()
     };
 
-    private static final Command UNKOWN_COMMAND = new UnknownCommand();
-
     /**
      * Factory method
      * @param input input to match against each command in the command list
      * @return the respective command object if matched, the unknown command object otherwise
      */
-    public static Command matching(Duke.UserInput input) {
+    public static Command matching(Duke.UserInput input) throws UnknownCommandException {
         String keyword = input.getKeyword().toLowerCase();
         for (Command cmd : COMMAND_LIST) {
             if (cmd.getKeywords().contains(keyword))
                 return cmd;
         }
 
-        return UNKOWN_COMMAND;
+        throw new UnknownCommandException();
     }
 
     abstract public void run(Duke duke, Duke.UserInput input);
