@@ -30,7 +30,12 @@ public class Duke {
             // wait to read in the user's input
             String input = scanner.nextLine();
             // Ensures that all bye would end the program.
-            run = taskManager.executeCommand(input);
+            try {
+                run = taskManager.executeCommand(input);
+            } catch (IncompleteCommandException e) {
+                System.out.println(e);
+            }
+
         }
     }
 

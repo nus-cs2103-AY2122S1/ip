@@ -7,7 +7,7 @@ import java.util.List;
 public class TaskManager {
     private List<Task> taskList = new ArrayList<Task>();
 
-    public TaskManager(){
+    public TaskManager() {
 
     }
 
@@ -46,20 +46,21 @@ public class TaskManager {
 
     /**
      * Get the total number of task.
+     *
      * @return the number of task in total.
      */
-    public int getTotalNumberOfTask(){
+    public int getTotalNumberOfTask() {
         return taskList.size();
     }
 
-    public boolean executeCommand(String input) {
+    public boolean executeCommand(String input) throws IncompleteCommandException {
         boolean run = true;
         if (input.toUpperCase().equals("BYE")) {
             System.out.println("Bye. Hope to see you again soon!");
             run = false;
         } else if (input.toUpperCase().equals("LIST")) {
             listAll();
-        }else if (isDone(input)) {
+        } else if (isDone(input)) {
             String[] stringArr = input.split(" ");
             if (stringArr.length > 1) {
                 String taskNumber = stringArr[1];
@@ -76,22 +77,45 @@ public class TaskManager {
                 }
 
             } else {
-                System.out.println("Please enter the task number after done! E.g \"done 2\"");
+                throw new IncompleteCommandException("Please enter the task number after done! E.g \"done 2\"");
             }
-        }else {
+        } else {
 
             Task newTask = null;
             if (input.toUpperCase().contains("TODO")) {
-                newTask = new Todo(input.substring(5));
-            } else if (input.toUpperCase().contains("DEADLINE")) {
-                if (input.contains("/by")) {
-                    String[] stringArr = input.substring(9).split("/by");
-                    newTask = new Deadline(stringArr[0], stringArr[1].strip());
+
+                if (input.length() > 5) {
+                    String taskMessage = input.substring(5);
+                    newTask = new Todo(taskMessage.strip());
+                } else {
+                    throw new IncompleteCommandException("OOPS!!! The description of a todo cannot be empty.");
                 }
+
+            } else if (input.toUpperCase().contains("DEADLINE")) {
+
+                if (input.length() > 8) {
+                    if (input.contains("/by")) {
+                        String[] stringArr = input.substring(9).split("/by");
+                        newTask = new Deadline(stringArr[0], stringArr[1].strip());
+                    } else {
+                        System.out.println("Your deadline is missing a /by (date)");
+                    }
+                } else {
+                    throw new IncompleteCommandException("OOPS!!! The description of a deadline cannot be empty.");
+                }
+
+
             } else if (input.toUpperCase().contains("EVENT")) {
-                if (input.contains("/at")) {
-                    String[] stringArr = input.substring(6).split("/at");
-                    newTask = new Event(stringArr[0], stringArr[1].strip());
+
+                if (input.length() > 5) {
+                    if (input.contains("/at")) {
+                        String[] stringArr = input.substring(6).split("/at");
+                        newTask = new Event(stringArr[0], stringArr[1].strip());
+                    } else {
+                        System.out.println("Your Event is missing a /at (date)");
+                    }
+                } else {
+                    throw new IncompleteCommandException("OOPS!!! The description of a event cannot be empty.");
                 }
             }
             if (newTask != null) {
@@ -110,12 +134,13 @@ public class TaskManager {
 
     /**
      * Check if a given input has done command.
+     *
      * @param input a string that is the input of the user.
      * @return a boolean if done command is found.
      */
     public boolean isDone(String input) {
         if (input.length() >= 4) {
-            return input.toUpperCase().substring(0,4).equals("DONE");
+            return input.toUpperCase().substring(0, 4).equals("DONE");
         } else {
             return false;
         }
@@ -123,6 +148,7 @@ public class TaskManager {
 
     /**
      * Check if input string is numeric or not.
+     *
      * @param input a string input from user.
      * @return a boolean if input is numeric.
      */
