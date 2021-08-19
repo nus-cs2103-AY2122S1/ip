@@ -1,10 +1,19 @@
 public class Task {
-    String taskName;
-    public Task(String taskName){
+    private String taskName;
+    private Boolean completed = false;
+
+    public Task(String taskName) {
         this.taskName = taskName;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public void doneTask() {
+        this.completed = true;
+    }
+
+    public String toString() {
+        if(completed){
+            return "[X] " + taskName;
+        }
+        return "[ ] " + taskName;
     }
 }
