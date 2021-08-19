@@ -3,15 +3,19 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Duke {
-    public static Task createTask(String input) {
+    public static Task createTask(String input) throws DukeException {
         String[] inputList = input.split(" ");
         if (inputList[0].equals("todo")){
-            return new Todo(input.replaceFirst(Pattern.quote("todo "),""));
+            String todoDescription = input.replaceFirst(Pattern.quote("todo"),"").trim();
+            if (todoDescription.equals("")) {
+                throw new DukeException("The description of a todo cannot be empty.");
+            }
+            return new Todo(todoDescription);
         } else if (inputList[0].equals("deadline")) {
-            String[] withoutAction = input.replaceFirst(Pattern.quote("deadline "),"").split("/by", 2);
+            String[] withoutAction = input.replaceFirst(Pattern.quote("deadline"),"").split("/by", 2);
             return new Deadline(withoutAction[0].trim(), withoutAction[1].trim());
         } else {
-            String[] withoutAction = input.replaceFirst(Pattern.quote("event "),"").split("/at", 2);
+            String[] withoutAction = input.replaceFirst(Pattern.quote("event"),"").split("/at", 2);
             return new Event(withoutAction[0].trim(), withoutAction[1].trim());
         }
     }
@@ -31,35 +35,42 @@ public class Duke {
         String input = sc.nextLine();
         while(!input.equals("bye")) {
             String[] inputList = input.split(" ");
-            switch (inputList[0]) {
-                case "list":
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println((i + 1) + "." + tasks.get(i).toString());
-                    }
-                    break;
-                case "done":
-                    if (inputList.length != 2) {
-                        System.out.println("Please provide the task index to mark as done!");
+            try {
+                switch (inputList[0]) {
+
+                    case "list":
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println((i + 1) + "." + tasks.get(i).toString());
+                        }
                         break;
-                    }
-                    int taskIndex = Integer.parseInt(inputList[1]);
-                    if (tasks.size() < taskIndex || 0 >= taskIndex ) {
-                        System.out.println("Invalid task index provided!");
+                    case "done":
+                        if (inputList.length != 2) {
+                            System.out.println("Please provide the task index to mark as done!");
+                            break;
+                        }
+                        int taskIndex = Integer.parseInt(inputList[1]);
+                        if (tasks.size() < taskIndex || 0 >= taskIndex) {
+                            System.out.println("Invalid task index provided!");
+                            break;
+                        }
+                        Task currTask = tasks.get(taskIndex - 1);
+                        currTask.markAsDone();
+                        System.out.println("Nice! I've marked this task as done:\n" + currTask);
                         break;
-                    }
-                    Task currTask = tasks.get(taskIndex - 1);
-                    currTask.markAsDone();
-                    System.out.println("Nice! I've marked this task as done:\n" + currTask);
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    Task newTask = createTask(input);
-                    tasks.add(newTask);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(newTask);
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                    break;
+                    case "todo":
+                    case "deadline":
+                    case "event":
+                        Task newTask = createTask(input);
+                        tasks.add(newTask);
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(newTask);
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                        break;
+                    default:
+                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                System.out.println("☹ OOPS!!! " + e.getMessage());
             }
             input = sc.nextLine();
         }
