@@ -1,6 +1,11 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * This program is a chatbot that helps keep track of various tasks.
+ *
+ * @author Lethicia Renissa Santoso (G12)
+ */
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
     private static final String logo = " ____        _        \n"
@@ -10,6 +15,11 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static Scanner scan = new Scanner(System.in);
 
+    /**
+     * The program reads commands given by the user to perform different
+     * task tracking functionalities.
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         Duke.greet();
         String input = scan.nextLine();
@@ -41,12 +51,18 @@ public class Duke {
         Duke.exit();
     }
 
+    /**
+     * Greet user upon running the chatbot.
+     */
     private static void greet() {
         System.out.println("Hello from\n" + logo);
         System.out.println("What do you need to do today?");
         System.out.println("_______________________");
     }
 
+    /**
+     * Close the chatbot when user is done.
+     */
     private static void exit() {
         System.out.println("_______________________");
         System.out.println("See you! Have a nice day!");
@@ -54,6 +70,9 @@ public class Duke {
         scan.close();
     }
 
+    /**
+     * List the current task list.
+     */
     private static void listTasks() {
         System.out.println("Here's your to do list:");
         int j = 0;
@@ -62,6 +81,13 @@ public class Duke {
             j += 1;
         }
     }
+
+    /**
+     * Add a given task into the tracking list.
+     *
+     * @param description The command entered by user.
+     * @throws DukeException Throws if command given is not valid.
+     */
     private static void addTask(String description) throws DukeException {
         if (description.matches("todo(.*)")) {
             try {
@@ -99,6 +125,12 @@ public class Duke {
 
     }
 
+    /**
+     * Delete a task from the current task list.
+     *
+     * @param taskIndex the task no. to be deleted.
+     * @throws DukeException if command or no. given is not valid.
+     */
     private static void deleteTask(String taskIndex) throws DukeException {
         try {
             int i = Integer.parseInt(taskIndex) - 1;
@@ -113,6 +145,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Mark a task in the current list as done.
+     *
+     * @param taskIndex the task no. to be marked done.
+     * @throws DukeException if command or no. given is not valid.
+     */
     private static void doneTask(String taskIndex) throws DukeException {
         try {
             int i = Integer.parseInt(taskIndex) - 1;
