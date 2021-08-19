@@ -99,12 +99,12 @@ public class Duke {
             else if (firstToken.equals("deadline")) {
                 try {
                     // Check for valid description provided
-                    if (input.split("/by")[0].split(" ").length <= 1) {
+                    if (input.split(" /by ")[0].split(" ").length <= 1) {
                         throw new DukeException("☹ OOPS!!! Please provide a valid deadline description.");
                     }
 
                     // Check for valid due date provided
-                    if (input.split("/by").length != 2) {
+                    if (input.split(" /by ").length != 2) {
                         throw new DukeException("☹ OOPS!!! Please provide a valid due date.");
                     }
                     String dueDate = input.split("/by")[1].strip();
@@ -128,12 +128,12 @@ public class Duke {
             else if (firstToken.equals("event")) {
                 try {
                     // Check for valid description provided
-                    if (input.split("/at")[0].split(" ").length <= 1) {
+                    if (input.split(" /at ")[0].split(" ").length <= 1) {
                         throw new DukeException("☹ OOPS!!! Please provide a valid event description.");
                     }
                     
                     // Check for valid event time provided
-                    if (input.split("/at").length != 2) {
+                    if (input.split(" /at ").length != 2) {
                         throw new DukeException("☹ OOPS!!! Please provide a valid event time.");
                     }
                     String eventTime = input.split("/at")[1].strip();
