@@ -1,7 +1,65 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+-------------------------
+Hello I'm Duke!
+What can I do for you?
+-------------------------
+-------------------------
+There are no items in your list!
+-------------------------
+-------------------------
+invalid command!!
+-------------------------
+-------------------------
+invalid command!!
+-------------------------
+-------------------------
+New task added to list:
+T: [ ] project
+-------------------------
+-------------------------
+Your list contains:
+1. T: [ ] project
+-------------------------
+-------------------------
+task already in list!
+-------------------------
+-------------------------
+Task marked as completed:
+T: [X] project
+-------------------------
+-------------------------
+Your list contains:
+1. T: [X] project
+-------------------------
+-------------------------
+New task added to list:
+E: [ ] meeting [on monday 5pm]
+-------------------------
+-------------------------
+task already in list!
+-------------------------
+-------------------------
+New task added to list:
+D: [ ] essay [by sunday 2359]
+-------------------------
+-------------------------
+Your list contains:
+1. T: [X] project
+2. E: [ ] meeting [on monday 5pm]
+3. D: [ ] essay [by sunday 2359]
+-------------------------
+-------------------------
+Task marked as completed:
+D: [X] essay [by sunday 2359]
+-------------------------
+-------------------------
+Task is already completed!
+-------------------------
+-------------------------
+Your list contains:
+1. T: [X] project
+2. E: [ ] meeting [on monday 5pm]
+3. D: [X] essay [by sunday 2359]
+-------------------------
+-------------------------
+Goodbye for now!
+-------------------------

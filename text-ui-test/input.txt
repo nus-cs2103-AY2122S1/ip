@@ -1,0 +1,16 @@
+list
+beans
+hello world
+todo project
+list
+event project /on monday
+done project
+list
+event meeting /on monday 5pm
+deadline meeting/on tuesday 3pm
+deadline essay /by sunday 2359
+list
+done essay
+done essay
+list
+bye
