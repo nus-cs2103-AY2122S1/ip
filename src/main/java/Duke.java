@@ -44,8 +44,20 @@ public class Duke {
             case "done":
                 handleMarkDone(command.getArgument());
                 break;
+            case "todo":
+                Task task = new Todo(command.getArgument());
+                handleAdd(task);
+                break;
+            case "deadline":
+                Task deadline = new Deadline(command.getArgument());
+                handleAdd(deadline);
+                break;
+            case "event":
+                Task event = new Event(command.getArgument());
+                handleAdd(event);
+                break;
             default:
-                handleAdd(input);
+                hikoPrint("Oh no, I do not understand that.\n");
         }
     }
 
@@ -56,10 +68,13 @@ public class Duke {
         hikoPrint("Nice! I've marked this task as done:\n" + task +"\n");
     }
 
-    private static void handleAdd(String input) {
-        Task task = new Task(input);
+    private static void handleAdd(Task task) {
         TASKS.add(task);
-        hikoPrint("added: " + input + "\n");
+        String msg = "Got it. I've added this task:\n  " +
+                task +
+                "\nNow you have " + TASKS.size() + " tasks in the list.\n";
+
+        hikoPrint(msg);
     }
 
     private static void handleList() {

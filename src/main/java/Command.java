@@ -1,4 +1,4 @@
-public class Command {
+class Command {
     private String action;
     private String argument;
 

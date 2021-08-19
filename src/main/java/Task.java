@@ -1,4 +1,8 @@
-public class Task {
+/**
+ * A representation of task with description and status
+ */
+
+class Task {
     private String description;
     private boolean isDone;
 
@@ -15,8 +19,16 @@ public class Task {
      * return the string representation of the task status.
      * @return X if the task is done
      */
-    private String getStatusIcon() {
+    public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    /**
+     * return the description.
+     * @return the description of the task
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     /**
@@ -29,6 +41,6 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() +
-                "] " + this.description;
+            "] " + this.description;
     }
 }
