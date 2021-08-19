@@ -12,7 +12,7 @@ public class Duke {
      */
     private static boolean parseInput(String input) {
 
-        String[] splitInput = input.split(" ");
+        String[] splitInput = input.split(" ", 2);
 
         switch (splitInput[0]) {
             case "bye":
@@ -24,24 +24,86 @@ public class Duke {
             case "done":
                 setTaskDone(splitInput);
                 break;
+            case "todo":
+                addTodo(splitInput);
+                break;
+            case "event":
+
+                addEvent(splitInput);
+                break;
+            case "deadline":
+                addDeadline(splitInput);
+                break;
             default:
-                add(input);
+                System.out.println("Command not recognised, sorry.");
                 break;
         }
 
         return false;
     }
 
+    private static void addTodo(String[] input) {
+        if (input.length > 1) {
+            String name = input[1];
+            TodoTask task = new TodoTask(name);
+            add(task);
+        } else {
+            System.out.println("todo: adds a to-do task to list.\nexample:\ntodo buy groceries");
+        }
+    }
+
+    private static void addEvent(String[] input) {
+
+        String TIME_MARKER = " /at ";
+
+        if (input.length > 1) {
+            String[] taskAndTime = input[1].split(TIME_MARKER, 2);
+            EventTask event;
+            if (taskAndTime.length > 1) {
+                event = new EventTask(taskAndTime[0], taskAndTime[1]);
+                add(event);
+            } else {
+                System.out.println("need to specify event name and time.\nexample:\nevent meeting /at Tuesday 12pm");
+            }
+        } else {
+            System.out.println("event: adds an event to list.\nexample:\nevent meeting /at Tuesday 12pm");
+        }
+    }
+
+    private static void addDeadline(String[] input) {
+
+        String DEADLINE_MARKER = " /by ";
+
+        if (input.length > 1) {
+            String[] taskAndTime = input[1].split(DEADLINE_MARKER, 2);
+            EventTask event;
+            if (taskAndTime.length > 1) {
+                DeadlineTask deadlineTask = new DeadlineTask(taskAndTime[0], taskAndTime[1]);
+                add(deadlineTask);
+            } else {
+                System.out.println("need to specify task name and deadline.\nexample:\ndeadline return book /by Sunday");
+            }
+
+        } else {
+            System.out.println("deadline: adds a task with a deadline to list." +
+                    "\nexample:\ndeadline return book /by Sunday");
+        }
+
+    }
+
     /**
      * Sets a task in itemList as 'done'.
-     * @param input String array of split user input.
+     * @param input String of user input.
      */
     private static void setTaskDone(String[] input) {
 
-        if (itemList.isEmpty()) {
+        if (input.length < 2) {
+            System.out.println("done: mark task in list as done.\nexample:\ndone 1");
+        } else if (itemList.isEmpty()) {
             System.out.println("No tasks in list!");
         } else {
             try {
+
                 int index = Integer.parseInt(input[1]) - 1;
 
                 if (index < 0 || index >= itemList.size()) {
@@ -60,12 +122,12 @@ public class Duke {
     }
 
     /**
-     * Creates a new Task and adds it to itemList.
-     * @param item name of Task to add to itemList.
+     * Adds a given Task to itemList.
+     * @param task Task to add to itemList.
      */
-    private static void add(String item) {
-        itemList.add(new Task(item));
-        System.out.println("added:\n" + item);
+    private static void add(Task task) {
+        itemList.add(task);
+        System.out.println("Sure thing. Added to list:\n" + task + "");
     }
 
     /**
@@ -102,7 +164,6 @@ public class Duke {
         System.out.println("Howdy! The name's\n" + logo + "\nWhat can I do for ya?");
 
         Scanner sc = new Scanner(System.in);
-        boolean exit = false;
 
         while (!parseInput(sc.nextLine())) {
             continue;
