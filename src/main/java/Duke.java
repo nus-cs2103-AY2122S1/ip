@@ -40,12 +40,11 @@ public class Duke {
      * @param number
      */
     private static void changeStatus(int number) {
-        if(listOfText2.size() <= number) {
+        if(listOfText2.size() >= number) {
             listOfText2.get(number-1).markAsDone();
             System.out.println("Nice! I've marked this task as done:\n  " + listOfText2.get(number-1) );
             return;
         }
-        System.out.println("The index is incorrect");
     }
 
     /**
