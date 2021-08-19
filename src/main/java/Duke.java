@@ -18,6 +18,7 @@ public class Duke {
 
         while (!str.trim().equalsIgnoreCase("bye")) {
             //list out items in the list
+            System.out.println(divider);
             if (str.trim().equalsIgnoreCase("list")) {
                 System.out.println(indent + "Here are the tasks in your list:");
                 for (int i = 0; i < taskList.size(); i++) {
@@ -25,7 +26,6 @@ public class Duke {
                     Task currTask = taskList.get(i);
                     System.out.println(indent + currIndex + "." + currTask.toString());
                 }
-                System.out.println(divider);
             }
             //mark numbered task as done
             if (str.toLowerCase().contains("done")) {
@@ -41,7 +41,6 @@ public class Duke {
                 else {
                     System.out.println(indent + "Sorry, this task does not exist. :(");
                 }
-                System.out.println(divider);
             }
             //for todos:
             if (str.toLowerCase().contains("todo")) {
@@ -51,8 +50,7 @@ public class Duke {
                 //print out msg:
                 System.out.println(indent + "Ok! I have added this task to your list: ");
                 System.out.println(indent + "[T][ ] " + desc);
-                System.out.println("Now you have a total of " + taskList.size() + " task(s)!");
-                System.out.println(divider);
+                System.out.println(indent + "Now you have a total of " + taskList.size() + " task(s)!");
             }
             //for deadline:
             if (str.toLowerCase().contains("deadline")) {
@@ -64,11 +62,10 @@ public class Duke {
                 System.out.println(indent + "Oh no! A new deadline?! It's okay, you got this!");
                 System.out.println(indent + "I have added this deadline to your list: ");
                 System.out.println(indent + addDeadline);
-                System.out.println("Now you have a total of " + taskList.size() + " task(s)!");
-                System.out.println(divider);
+                System.out.println(indent + "Now you have a total of " + taskList.size() + " task(s)!");
             }
             //for events:
-            if (str.toLowerCase().contains("events")) {
+            if (str.toLowerCase().contains("event")) {
                 String desc = str.substring(6).trim();
                 String[] stringParts = desc.split("/");
                 Events addEvent = new Events(stringParts[0].trim(), stringParts[1].trim().substring(2).trim());
@@ -76,14 +73,20 @@ public class Duke {
                 //print out msg:
                 System.out.println(indent + "Ok! I have added this event to your list: ");
                 System.out.println(indent + addEvent);
-                System.out.println("Now you have a total of " + taskList.size() + " task(s)!");
-                System.out.println(divider);
+                System.out.println(indent + "Now you have a total of " + taskList.size() + " task(s)!");
             }
-            str = sc.nextLine();
+            System.out.println(divider);
+            String next = sc.nextLine();
+            if (next.isEmpty()) {
+                break;
+            }
+            else {
+                str = next;
+            }
         }
-
+        System.out.println(divider);
         System.out.println(indent + "Bye! See you again~");
         System.out.println(divider);
-
     }
+
 }
