@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class ParserTest {
     @Test
-    void testParseEmptyTask() {
+    void testParse_taskWithEmptyDescription_throwException() {
         Exception exception = assertThrows(DukeException.class, () -> Parser.parse("todo "));
         assertEquals("Command has empty description", exception.getMessage());
     }
 
     @Test
-    void testParseDeadlineDate() throws DukeException {
+    void testParse_parseDeadlineWithDate_DeadlineWithProperDate() throws DukeException {
         Command c = Parser.parse("deadline unit tests /by 2021-11-11");
         TaskList tl = new TaskList();
         Storage store = new Storage("");
