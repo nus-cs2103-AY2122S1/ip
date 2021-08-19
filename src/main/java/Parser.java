@@ -23,12 +23,25 @@ public class Parser {
             stringTaskType = "event";
         }
 
-        command = command.replaceAll(stringTaskType, "");
+        //command = command.replaceAll(stringTaskType, "");
         //Split the list of commands
         Command packagedCommand;
         ArrayList<String> listOfCommandInputs = new ArrayList<>();
         Collections.addAll(listOfCommandInputs,command.split(" "));
-        packagedCommand = new Command(taskType, listOfCommandInputs, command);
+        if (listOfCommandInputs.contains(stringTaskType)) {
+            int redundantIndicator = listOfCommandInputs.indexOf(stringTaskType);
+            for (int i = 0; i <= redundantIndicator; i++) {
+                listOfCommandInputs.remove(0);
+            }
+        }
+
+        String tempCommand = new String();
+        for (String commandsLeft: listOfCommandInputs) {
+            commandsLeft += " ";
+            tempCommand += commandsLeft;
+        }
+
+        packagedCommand = new Command(taskType, listOfCommandInputs, tempCommand);
         return packagedCommand;
     }
 }
