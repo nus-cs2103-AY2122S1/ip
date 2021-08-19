@@ -26,25 +26,64 @@ public class Duke {
         } else if (command.equals("list")) {
             this.list();
         } else if (command.equals("done")) {
-            this.done(userInput);
+            try {
+                this.done(userInput);
+            } catch (IndexOutOfBoundsException e) {
+                String start = "_____________________________________\n";
+                String end = "\n_____________________________________";
+                String invalidNumber = "☹ OOPS!!! Please enter a valid task number.";
+                String output = start + invalidNumber + end;
+                System.out.println(output);
+            }
+
         } else if (command.equals("todo")) {
-            String taskDescription = userInput.split("todo ")[1];
-            Todo newTodo = new Todo(taskDescription);
-            this.addTask(newTodo);
+            try {
+                String taskDescription = userInput.split("todo ")[1];
+                Todo newTodo = new Todo(taskDescription);
+                this.addTask(newTodo);
+            } catch (IndexOutOfBoundsException e) {
+                String start = "_____________________________________\n";
+                String end = "\n_____________________________________";
+                String emptyDescription = "☹ OOPS!!! The description of a todo cannot be empty.";
+                String output = start + emptyDescription + end;
+                System.out.println(output);
+            }
+
         } else if (command.equals("deadline")) {
-            String[] splitString = userInput.split("deadline |/by");
-            String taskDescription = splitString[1];
-            String by = splitString[2];
-            Deadline newDeadline = new Deadline(taskDescription, by);
-            this.addTask(newDeadline);
+            try{
+                String[] splitString = userInput.split("deadline |/by");
+                String taskDescription = splitString[1];
+                String by = splitString[2];
+                Deadline newDeadline = new Deadline(taskDescription, by);
+                this.addTask(newDeadline);
+            } catch (IndexOutOfBoundsException e) {
+                String start = "_____________________________________\n";
+                String end = "\n_____________________________________";
+                String emptyDescription = "☹ OOPS!!! The description/by of a deadline cannot be empty.";
+                String output = start + emptyDescription + end;
+                System.out.println(output);
+            }
+
         } else if (command.equals("event")) {
-            String[] splitString = userInput.split("event |/at");
-            String taskDescription = splitString[1];
-            String at = splitString[2];
-            Event newEvent = new Event(taskDescription, at);
-            this.addTask(newEvent);
+            try{
+                String[] splitString = userInput.split("event |/at");
+                String taskDescription = splitString[1];
+                String at = splitString[2];
+                Event newEvent = new Event(taskDescription, at);
+                this.addTask(newEvent);
+            } catch (IndexOutOfBoundsException e) {
+                String start = "_____________________________________\n";
+                String end = "\n_____________________________________";
+                String emptyDescription = "☹ OOPS!!! The description/at of an event cannot be empty.";
+                String output = start + emptyDescription + end;
+                System.out.println(output);
+            }
         } else {
-            this.add(userInput);
+            String start = "_____________________________________\n";
+            String end = "\n_____________________________________";
+            String lost = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            String output = start + lost + end;
+            System.out.println(output);
         }
     }
 
