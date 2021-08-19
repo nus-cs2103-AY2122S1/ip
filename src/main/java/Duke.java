@@ -16,13 +16,21 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hope you are doing well. How can I help you?");
         User user1 = new User();
+        List<Object> userList = new ArrayList<>();
         while(true) {
             String command = user1.command();
             if (command.equals("bye")) {
                 System.out.println("   Bye. Have a great day!");
                 break;
+            } else if (command.equals("list")) {
+                int count = 1;
+                for (int i = 0; i < userList.size(); i++) {
+                    System.out.println("   " + count + ". " + userList.get(i));
+                    count++;
+                }
             } else {
-                System.out.println("   " + command);
+                userList.add(command);
+                System.out.println("   added: " + command);
             }
         }
     }
