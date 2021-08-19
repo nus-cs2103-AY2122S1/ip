@@ -1,9 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Responses {
 
-    protected static Task[] list = new Task[100];
-    protected static int currLength = 0; 
+    protected static ArrayList<Task> list = new ArrayList<>();
 
     protected static void displayDukeResponse(String dResponse) {
         System.out.println(String.format("\t____________________________________________________________\n%s\t____________________________________________________________", dResponse));
@@ -27,6 +27,8 @@ public class Responses {
                 List.chat();
             } else if (uResponse.startsWith("done")) {
                 Done.chat(uResponse);
+            } else if (uResponse.startsWith("delete")) {
+                Delete.chat(uResponse);
             } else {
                 Echo.chat(uResponse);
             }
