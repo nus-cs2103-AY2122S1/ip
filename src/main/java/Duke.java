@@ -16,23 +16,31 @@ public class Duke {
             if (input.indexOf(' ') > 0) { // checking if command given was >= two words
                 String[] splitted = input.split(" ", 2);
                 input = splitted[1];
-                if (splitted[0].equalsIgnoreCase("/done") && splitted[1] != null) { // done-ing item
-                    int num = Integer.parseInt(splitted[1]);
-                    if (0 < num && num <= listLen) {
-                        list[num - 1].markDone();
-                        System.out.println(bar + "\n    Nice! I've marked this task as done:\n    " + list[num - 1].toString() + "\n" + bar);
+                if (splitted[0].equalsIgnoreCase("/done")) { // done-ing item
+                    if (!checkNum(splitted[1])) {
+                        throw new IncorrectFormatException("Item number not detected. Try again?");
                     } else {
-                        throw new IncorrectFormatException("Item number not present. Try again?");
+                        int num = Integer.parseInt(splitted[1]);
+                        if (0 < num && num <= listLen) {
+                            list[num - 1].markDone();
+                            System.out.println(bar + "\n    Nice! I've marked this task as done:\n    " + list[num - 1].toString() + "\n" + bar);
+                        } else {
+                            throw new IncorrectFormatException("Item number not present. Try again?");
+                        }
                     }
-                } else if (splitted[0].equalsIgnoreCase("/delete") && splitted[1] != null) { // removing item
-                    int num = Integer.parseInt(splitted[1]);
-                    if (0 < num && num <= listLen) {
-                        list[num - 1].markDone(); //todo
-                        listLen--;
-                        System.out.println(bar + "\n    Nice! I've removed this task off the face of the Earth:\n    " + list[num - 1].toString() +
-                                "\n    Now you have " + listLen + " tasks in the list.\n" + bar);
+                } else if (splitted[0].equalsIgnoreCase("/delete")) { // removing item
+                    if (!checkNum(splitted[1])) {
+                        throw new IncorrectFormatException("List does not contain this item number. Try again?");
                     } else {
-                        throw new IncorrectFormatException("Item number not present. Try again?");
+                        int num = Integer.parseInt(splitted[1]);
+                        if (0 < num && num <= listLen) {
+                            list[num - 1].markDone(); //todo
+                            listLen--;
+                            System.out.println(bar + "\n    Nice! I've removed this task off the face of the Earth:\n    " + list[num - 1].toString() +
+                                    "\n    Now you have " + listLen + " tasks in the list.\n" + bar);
+                        } else {
+                            throw new IncorrectFormatException("Item number not present. Try again?");
+                        }
                     }
                 } else if (splitted[0].equalsIgnoreCase("todo")) { // adding todo
                     if (input.isEmpty()) {
@@ -84,6 +92,11 @@ public class Duke {
             }
         }
     }
+
+    public boolean checkNum (String wool) {
+        return (wool != null && wool.matches("^[0-9]*$"));
+    }
+
     public static void main(String[] args) {
         Duke currentList = new Duke();
         boolean away = false;

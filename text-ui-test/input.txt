@@ -4,4 +4,5 @@ TODO read book
 /done 1
 deadline arsnheiar /by
 event arihtars /At tmr
+/delete a
 /delete 1

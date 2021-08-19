@@ -33,6 +33,11 @@ Duke$IncorrectFormatException:
     added: arihtars
     Now you have 2 tasks in your list
  -------------------------------------------------------------
+Duke$IncorrectFormatException:
+ -------------------------------------------------------------
+    List does not contain this item number. Try again?
+    Type "help" for help
+ -------------------------------------------------------------
  -------------------------------------------------------------
     Nice! I've removed this task off the face of the Earth:
     [T][X] read book
