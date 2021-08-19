@@ -2,6 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Main class for the chat bot
+ *
+ * @author  Yim Jaewon
+ */
 public class JWBot {
     public static void main(String[] args) throws JWBotException {
         Scanner sc = new Scanner(System.in);
