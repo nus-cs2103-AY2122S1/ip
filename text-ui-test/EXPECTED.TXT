@@ -8,9 +8,37 @@ Greetings friend! I am your personal assistant,
 What can I do for you?
 
 	----------------------------------------------------
+	I don't understand that command!
+	----------------------------------------------------
+
+What's your next command?
+
+	----------------------------------------------------
+	You need to specify which task you want to add!
+	----------------------------------------------------
+
+What's your next command?
+
+	----------------------------------------------------
 	Got it. I've added this task:
-	[T][ ]  task one
+	[T][ ]  good example item
 	Now you have 1 tasks in the list.
+	----------------------------------------------------
+
+What's your next command?
+
+	----------------------------------------------------
+	I present to you, your collection of tasks!
+
+	1. [T][ ]  good example item
+	----------------------------------------------------
+
+What's your next command?
+
+	----------------------------------------------------
+	I present to you, your collection of tasks!
+
+	1. [T][ ]  good example item
 	----------------------------------------------------
 
 What's your next command?
@@ -24,9 +52,68 @@ What's your next command?
 What's your next command?
 
 	----------------------------------------------------
+	I present to you, your collection of tasks!
+
+	1. [T][ ]  good example item
+	2. [D][ ]  return book (by: Sunday)
+	----------------------------------------------------
+
+What's your next command?
+
+	----------------------------------------------------
+	Good job! I've marked this task as done:
+
+	[D][X]  return book (by: Sunday)
+	----------------------------------------------------
+
+What's your next command?
+
+	----------------------------------------------------
+	I present to you, your collection of tasks!
+
+	1. [T][ ]  good example item
+	2. [D][X]  return book (by: Sunday)
+	----------------------------------------------------
+
+What's your next command?
+
+	----------------------------------------------------
 	Got it. I've added this task:
 	[E][ ]  project meeting (at: Mon 2-4pm)
 	Now you have 3 tasks in the list.
+	----------------------------------------------------
+
+What's your next command?
+
+	----------------------------------------------------
+	I present to you, your collection of tasks!
+
+	1. [T][ ]  good example item
+	2. [D][X]  return book (by: Sunday)
+	3. [E][ ]  project meeting (at: Mon 2-4pm)
+	----------------------------------------------------
+
+What's your next command?
+
+	----------------------------------------------------
+	Noted. I've removed this task:
+	[E][ ]  project meeting (at: Mon 2-4pm)
+	Now you have 2 tasks in the list.
+	----------------------------------------------------
+
+What's your next command?
+
+	----------------------------------------------------
+	I present to you, your collection of tasks!
+
+	1. [T][ ]  good example item
+	2. [D][X]  return book (by: Sunday)
+	----------------------------------------------------
+
+What's your next command?
+
+	----------------------------------------------------
+	I'm sorry, but that task number is out of range.
 	----------------------------------------------------
 
 What's your next command?

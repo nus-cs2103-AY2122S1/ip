@@ -1,4 +1,15 @@
-todo task one
+blah
+todo
+todo good example item
+list
+list all my items
 deadline return book /by Sunday
+list
+done 2
+list items
 event project meeting /at Mon 2-4pm
+list
+delete 3
+list
+delete 3
 bye
