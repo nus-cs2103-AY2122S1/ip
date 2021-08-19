@@ -13,8 +13,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Overridden toString method for the to.do class
-     * @return String representation of to.do object
+     * Overridden toString method for the To.Do class
+     * @return String representation of To.Do object
      */
     @Override
     public String toString() {

@@ -47,10 +47,10 @@ public class Petal {
      * @param message User input
      */
     public void handleInput(String message) {
-        message += " "; //So blank inputs can be handled
-        String command = message.substring(0, message.indexOf(" "));
-        String formatted = message.substring(message.indexOf(' ') + 1).trim();
         try {
+            message += " "; //So blank inputs can be handled
+            String command = message.substring(0, message.indexOf(" "));
+            String formatted = message.substring(message.indexOf(' ') + 1).trim();
             switch (command) { //Checks first word in string
                 case "list":
                     printList();
