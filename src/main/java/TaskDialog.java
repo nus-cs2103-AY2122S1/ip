@@ -4,9 +4,9 @@ public class TaskDialog extends Dialog {
     // This class is a child of dialog class which allow the user to interact with the task
     private final ArrayList<Task> tasks;
 
-    public void addTask(Task task) {
+    public void addTask(Task task) throws DialogException {
+        Dialog addDialog = Dialog.generate(task.toString());
         tasks.add(task);
-        Dialog addDialog = Dialog.generate("add" + task);
         addDialog.add("Got it. I've added this task:");
         addDialog.add("  " + task);
         addDialog.add("Now you have " + this.tasks.size() + " tasks in the list.");
@@ -32,11 +32,15 @@ public class TaskDialog extends Dialog {
         }
     }
 
+    public int taskLength() {
+        return this.tasks.size();
+    }
+
     public TaskDialog asTaskDialog() {
         return this;
     }
 
-    public void markTaskAsDone(int index) throws IndexOutOfBoundsException {
+    public void markTaskAsDone(int index) throws IndexOutOfBoundsException, DialogException {
         if (index < 0 || index > this.tasks.size()) {
             throw new IndexOutOfBoundsException();
         } else {

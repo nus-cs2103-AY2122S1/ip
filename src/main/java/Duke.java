@@ -3,8 +3,18 @@ import java.util.Scanner;
 
 public class Duke {
 
+    public static void printError(Exception e) throws DialogException {
+        if (Dialog.have(e.toString())) {
+            System.out.println(Dialog.getDialog(e.toString()));
+        } else {
+            Dialog errorMessage = Dialog.generate(e.toString());
+            errorMessage.add("☹ OOPS!!! " + e.getMessage());
+            System.out.println(errorMessage);
+        }
+    }
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws DialogException {
         Scanner sc = new Scanner(System.in);
 
         Dialog greeting = Dialog.generate("greeting");
@@ -42,29 +52,72 @@ public class Duke {
                 case "list":
                     System.out.println(list);
                     break;
-                case "todo":
-                    list.addTask(new Todo(input.substring(("todo ").length())));
+                case "todo": {
+                    try {
+                        if (input.split(" ").length == 1) {
+                            throw new EmptyDescriptionException("The description of a todo cannot be empty.");
+                        }
+                        list.addTask(new Todo(input.substring(("todo ").length())));
+                    } catch (DialogException | EmptyDescriptionException e) {
+                        Duke.printError(e);
+                    }
                     break;
-                case "deadline":
-                    String dDescription = input.substring(("deadline ").length(), input.indexOf("/"));
-                    String by = input.substring(input.indexOf("/by ") + "/by ".length());
-                    list.addTask(new Deadline(dDescription, by));
+                }
+                case "deadline": {
+                    try {
+                        if (input.split(" ").length == 1) {
+                            throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
+                        } else if (!input.contains("/by")) {
+                            throw new EmptyTaggerException("No /by tagger found.");
+                        }
+                        String dDescription = input.substring(("deadline ").length(), input.indexOf("/"));
+                        String by = input.substring(input.indexOf("/by ") + "/by ".length());
+                        list.addTask(new Deadline(dDescription, by));
+                    } catch (DialogException | EmptyDescriptionException | EmptyTaggerException e) {
+                      Duke.printError(e);
+                    }
                     break;
-                case "event":
-                    String eDescription = input.substring(("event ").length(), input.indexOf("/"));
-                    String at = input.substring(input.indexOf("/at ") + "/at ".length());
-                    list.addTask(new Event(eDescription, at));
+                }
+                case "event": {
+                    try {
+                        if (input.split(" ").length == 1) {
+                            throw new EmptyDescriptionException("The description of an event cannot be empty.");
+                        } else if (!input.contains("/at")) {
+                            throw new EmptyTaggerException("No /at tagger found.");
+                        }
+                        String eDescription = input.substring(("event ").length(), input.indexOf("/"));
+                        String at = input.substring(input.indexOf("/at ") + "/at ".length());
+                        list.addTask(new Event(eDescription, at));
+                    } catch (DialogException | EmptyDescriptionException | EmptyTaggerException e) {
+                        Duke.printError(e);
+                    }
                     break;
-                case "done":
-                    list.markTaskAsDone(Integer.parseInt(input.substring(("done ").length())) - 1);
+                }
+                case "done": {
+                    try {
+                        if (input.split(" ").length == 1) {
+                            throw new EmptyIndexException("The index of done cannot be empty.");
+                        } else if (Integer.parseInt(input.split(" ")[1]) <= 0 || Integer.parseInt(input.split(" ")[1]) > list.taskLength()) {
+                            if (list.taskLength() == 0) {
+                                throw new InvalidIndexException("Looks like your list is currently empty.");
+                            } else {
+                                throw new InvalidIndexException("Your list index can only be from 1 to " + list.taskLength() + ".");
+                            }
+                        } else if (input.split(" ").length > 2) {
+                            throw new InvalidArgumentException("The number of arguments seems to exceed for command done.");
+                        }
+                        list.markTaskAsDone(Integer.parseInt(input.substring(("done ").length())) - 1);
+                    } catch (EmptyIndexException | InvalidArgumentException | InvalidIndexException e) {
+                        Duke.printError(e);
+                    }
                     break;
+                }
+
                 case "commands":
                     System.out.println(commandsList);
                     break;
                 default:
-                    Dialog unknownCommand = Dialog.generate("unknownCommand");
-                    unknownCommand.add("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    System.out.println(unknownCommand);
+                    printError(new DukeException("I'm sorry, but I don't know what that means :-("));
                     break;
             }
             System.out.print("> ");

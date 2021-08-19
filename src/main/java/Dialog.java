@@ -21,9 +21,9 @@ public class Dialog {
         return archive.containsKey(id);
     }
 
-    public static Dialog generate(String id) {
+    public static Dialog generate(String id) throws DialogException {
         if (archive.containsKey(id)) {
-            return archive.get(id);
+            throw new DialogException(id + " already exists");
         } else {
             final Dialog newDialog = new Dialog(new ArrayList<>());
             archive.put(id, newDialog);
@@ -31,7 +31,7 @@ public class Dialog {
         }
     }
 
-    public static Dialog getDialog(String id) throws Exception{
+    public static Dialog getDialog(String id) {
         return archive.get(id);
     }
 
