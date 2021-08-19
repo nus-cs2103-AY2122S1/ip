@@ -5,45 +5,45 @@ Here are some things I can do now:
 I'll learn what you're saying and repeat it to you next time you say it if it's something new!
 ------------------------------------------------------------------------------------
 How can I help you?
-User: Looks like I don't support those commands yet...
+User: @OOPS!!! Looks like I don't support those commands yet...
 ------------------------------------------------------------------------------------
 How can I help you?
-User: Looks like I don't support those commands yet...
+User: @OOPS!!! Looks like I don't support those commands yet...
 ------------------------------------------------------------------------------------
 How can I help you?
 User: You haven't asked me to store anything yet... Good! :)
 ------------------------------------------------------------------------------------
 How can I help you?
-User: No items specified for 'todo'!
+User: @OOPS!!! No items specified for 'todo'!
 ------------------------------------------------------------------------------------
 How can I help you?
-User: No items specified for 'todo'!
+User: @OOPS!!! No items specified for 'deadline'!
 ------------------------------------------------------------------------------------
 How can I help you?
-User: No items specified for 'todo'!
+User: @OOPS!!! No items specified for 'event'!
 ------------------------------------------------------------------------------------
 How can I help you?
 User: Got it. Added the following task
 [T][ ] test1
 ------------------------------------------------------------------------------------
 How can I help you?
-User: No commands specified for task 'deadline'!
+User: @OOPS!!! No commands specified for task 'deadline'!
 ------------------------------------------------------------------------------------
 How can I help you?
-User: Unknown command provided to Deadline! did you use '/by'?
+User: @OOPS!!! Unknown command provided to Deadline! did you use '/by'?
 ------------------------------------------------------------------------------------
 How can I help you?
-User: Unknown command provided to Deadline! did you use '/by'?
+User: @OOPS!!! Unknown command provided to Deadline! did you use '/by'?
 ------------------------------------------------------------------------------------
 How can I help you?
 User: Got it. Added the following task
 [D][ ] test2 (by: time)
 ------------------------------------------------------------------------------------
 How can I help you?
-User: Unknown command provided to Event! did you use '/at'?
+User: @OOPS!!! Unknown command provided to Event! did you use '/at'?
 ------------------------------------------------------------------------------------
 How can I help you?
-User: Unknown command provided to Event! did you use '/at'?
+User: @OOPS!!! Unknown command provided to Event! did you use '/at'?
 ------------------------------------------------------------------------------------
 How can I help you?
 User: Got it. Added the following task
