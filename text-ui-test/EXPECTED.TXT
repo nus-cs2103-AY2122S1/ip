@@ -22,32 +22,44 @@
     ____________________________________________________________
 >     ____________________________________________________________
     Got it. I've added this task:
-      [T][ ] finish Automated Text UI Testing
+      [T][ ] test
     Now you have 1 tasks in the list.
     ____________________________________________________________
 >     ____________________________________________________________
+    ☹ OOPS!!! [T][ ] test already exists
+    ____________________________________________________________
+>     ____________________________________________________________
+    ☹ OOPS!!! Your list index can only be from 1 to 1.
+    ____________________________________________________________
+>     ____________________________________________________________
+    Nice! I've marked this task as done:
+      [T][X] test
+    ____________________________________________________________
+>     ____________________________________________________________
+    ☹ OOPS!!! No /at tagger found.
+    ____________________________________________________________
+>     ____________________________________________________________
     Got it. I've added this task:
-      [D][ ] finish everything (by: 23.59)
+      [E][ ] commit (at: test)
     Now you have 2 tasks in the list.
     ____________________________________________________________
 >     ____________________________________________________________
     Got it. I've added this task:
-      [E][ ] commit Automated Text UI Testing (at: 19th Aug 7 O'clock)
+      [E][ ] commit (at: later)
     Now you have 3 tasks in the list.
     ____________________________________________________________
 >     ____________________________________________________________
-    Nice! I've marked this task as done:
-      [T][X] finish Automated Text UI Testing
+    ☹ OOPS!!! [E][ ] commit (at: later) already exists
     ____________________________________________________________
 >     ____________________________________________________________
     Nice! I've marked this task as done:
-      [E][X] commit Automated Text UI Testing (at: 19th Aug 7 O'clock)
+      [E][X] commit (at: test)
     ____________________________________________________________
 >     ____________________________________________________________
     Here are the tasks in your list:
-    1.[T][X] finish Automated Text UI Testing
-    2.[D][ ] finish everything (by: 23.59)
-    3.[E][X] commit Automated Text UI Testing (at: 19th Aug 7 O'clock)
+    1.[T][X] test
+    2.[E][X] commit (at: test)
+    3.[E][ ] commit (at: later)
     ____________________________________________________________
 >     ____________________________________________________________
     Bye. Hope to see you again soon!
