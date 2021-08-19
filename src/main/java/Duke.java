@@ -13,10 +13,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        printMessage(WELCOME_TEXT);
-
         Scanner in = new Scanner(System.in);
-        List<String> inputList = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
+
+        printMessage(WELCOME_TEXT);
 
         while (true) {
             System.out.print("> ");
@@ -28,12 +28,12 @@ public class Duke {
             } else if (input.equals("list")) {
                 StringBuilder builder = new StringBuilder();
 
-                for (int i = 0; i < inputList.size(); i++) {
-                    String item = inputList.get(i);
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task item = tasks.get(i);
                     builder.append(i + 1);
                     builder.append(". ");
-                    builder.append(item);
-                    if (i < inputList.size() - 1) {
+                    builder.append(item.toString());
+                    if (i < tasks.size() - 1) {
                         builder.append("\n");
                     }
                 }
@@ -41,7 +41,7 @@ public class Duke {
                 printMessage(builder.toString());
             } else {
                 printMessage(input);
-                inputList.add(input);
+                tasks.add(new Task(input));
             }
         }
 
