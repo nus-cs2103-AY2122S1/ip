@@ -1,15 +1,13 @@
 import org.jetbrains.annotations.Nullable;
 
-import javax.sound.midi.SysexMessage;
-import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class Chatbot {
     private enum ChatCommands {
         BYE("bye"),
-        LIST("list");
+        LIST("list"),
+        DONE("done");
 
         private final String command;
 
@@ -19,8 +17,9 @@ public class Chatbot {
 
         @Nullable
         public static ChatCommands toEnum (String str) {
+            String[] splitCommand = str.split(" ", 2);
             for(ChatCommands chatCommand: ChatCommands.values()) {
-                if (chatCommand.name().equalsIgnoreCase(str)) {
+                if (chatCommand.name().equalsIgnoreCase(splitCommand[0])) {
                     return chatCommand;
                 }
             }
@@ -34,11 +33,11 @@ public class Chatbot {
     }
 
     private Scanner scanner;
-    private List<String> memory;
+    private List<Task> memory;
 
     public Chatbot() {
-        scanner = new Scanner(System.in);
-        memory = new LinkedList<>();
+        this.scanner = new Scanner(System.in);
+        this.memory = new LinkedList<>();
 
         System.out.println("Hey there, I'm Duke! Nice to meet you!");
         System.out.println("I'm a bot build by SpdPnd98, let me know how I can help you!");
@@ -60,26 +59,34 @@ public class Chatbot {
 
     private ChatContinue interpret () {
         String input = scanner.nextLine();
+        String[] inputArgs = input.split(" ", 2);
+        if (inputArgs.length == 1) {
+            inputArgs = new String[] {inputArgs[0], ""};
+        }
         ChatCommands command = ChatCommands.toEnum(input);
-        return command == null ? customMessages(input) : builtInCommands(command);
+        return command == null
+                ? customItems(new Task(input)) :
+                builtInCommands(command, inputArgs[1]);
     }
 
-    private ChatContinue customMessages(String input) {
-        if (memory.contains(input)) {
-            System.out.println("Repeating what you said: " + input);
+    private ChatContinue customItems(Task input) {
+        if (this.memory.contains(input)) {
+            System.out.println("Here is your task: " + input);
         } else {
-            memory.add(input);
+            this.memory.add(input);
             System.out.println("added: " + input);
         }
         return ChatContinue.CONTINUE;
     }
 
-    private ChatContinue builtInCommands(ChatCommands command) {
+    private ChatContinue builtInCommands(ChatCommands command, String input) {
         switch (command) {
             case BYE:
-                return farewell();
+                return this.farewell();
             case LIST:
-                return list();
+                return this.list();
+            case DONE:
+                return this.markDone(input);
             default:
                 System.out.println("How did you get here?");
                 return ChatContinue.END;
@@ -93,14 +100,24 @@ public class Chatbot {
 
     private ChatContinue list() {
         if (memory.size() == 0) {
-            System.out.println("You haven't said anything I don't know yet... Good! :)");
+            System.out.println("You haven't asked me to store anything yet... Good! :)");
         } else {
-            System.out.println("You said these phrases before:");
-            Iterator<String> itr = memory.iterator();
+            System.out.println("Here are the tasks in the list:");
+            Iterator<Task> itr = memory.iterator();
             for (int i = 1; i <= memory.size(); i++) {
                 System.out.println(i + ". " + itr.next());
             }
         }
+        return ChatContinue.CONTINUE;
+    }
+
+    private ChatContinue markDone(String args) {
+        System.out.println(args);
+        Task targetTask = new Task(args);
+        Task task = memory.stream().filter(t -> t.equals(targetTask)).findAny().get();
+        task.markDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("  " + task);
         return ChatContinue.CONTINUE;
     }
 }
