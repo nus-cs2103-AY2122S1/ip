@@ -22,10 +22,12 @@ public class Duke {
             System.out.print(str + "\n");
             System.out.print("    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
             if (str.equals("bye")) {
+                //Prints goodbye message and ends the loop.
                 System.out.print("      Have a good day, friend!\n"
                         + "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                 break;
             } else if (str.equals("list")) {
+                //Prints the task list.
                 for (int j = 0; j < Task.noOfTask; j++) {
                     String listItem = "      "
                             + (j + 1)
@@ -36,6 +38,7 @@ public class Duke {
                     System.out.print(listItem);
                 }
             } else if(str.contains("done ")) {
+                //Sets task as done and prints the message.
                 Integer listIndex = Integer.parseInt(str.substring(5)) - 1;
                 taskList.get(listIndex).markAsDone();
                 System.out.print("      Well Done, I'll get it marked:\n"
@@ -43,6 +46,7 @@ public class Duke {
                         + taskList.get(listIndex).checkIsDone()
                         + " " + taskList.get(listIndex).getDescription() + "\n");
             } else if (str.contains("delete ")) {
+                //Deletes task specified and prints message
                 int removeTaskIndex = Integer.parseInt(str.substring(7)) - 1;
                 Task removedTask = taskList.remove(removeTaskIndex);
                 System.out.print("      Roger! I will remove this task from the list: \n"
@@ -55,6 +59,7 @@ public class Duke {
                         + " tasks left in the list.\n");
             } else {
                     try {
+                        //Initialise the task if its a valid input.
                         Task newTask = null;
                         if (str.contains("todo")) {
                             newTask = new Todo(str);
@@ -74,6 +79,7 @@ public class Duke {
                             }
                         }
                         if (newTask != null) {
+                            //Add task to the list and print message.
                             taskList.add(Task.noOfTask - 1, newTask);
                             System.out.print("      Roger! I will add this task in: \n"
                                     + "        "
@@ -85,6 +91,7 @@ public class Duke {
                                     + " tasks left in the list.\n");
 
                         } else {
+                            //For invalid input message
                             throw new WrongInputException();
                         }
 

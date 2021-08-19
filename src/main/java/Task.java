@@ -17,6 +17,11 @@ public class Task {
         }
     }
 
+    /**
+     * Returns the checkbox of the Task.
+     *
+     * @return string representation of checkbox.
+     */
     public String checkIsDone() {
         return this.isDoneBox;
     }
@@ -25,6 +30,9 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Sets the checkbox of the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
         this.isDoneBox = "[X]";
