@@ -37,9 +37,13 @@ public class Duke {
                         throw new DukeException("An index must follow after the command word 'done'.");
                     } else {
                         int arrIndex = Integer.valueOf(input.substring(5)) - 1;
-                        Task task = ls.getTask(arrIndex);
-                        task.markAsDone();
-                        System.out.println(task.markedAsDoneToString());
+                        if (arrIndex < 0 || arrIndex >= ls.getSize()) {
+                            throw new DukeException("Item does not exist in the list.");
+                        } else {
+                            Task task = ls.getTask(arrIndex);
+                            task.markAsDone();
+                            System.out.println(task.markedAsDoneToString());
+                        }
                     }
                 } else {
                     if (input.startsWith("todo")) {
