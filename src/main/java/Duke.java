@@ -11,14 +11,14 @@ public class Duke {
         Task task;
         while (!end) {
             String userInput = input.nextLine();
-            task = new Task(userInput);
+            // task = new Task(userInput);
             if (userInput.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 end = true;
             } else if (userInput.equals("list")) {
                 int count = 1;
                 for (Task t : tasks) {
-                    System.out.println(count + ".[" + t.getStatusIcon() + "] " + t);
+                    System.out.println(count + "." + t);
                     count += 1;
                 }
             } else if (userInput.startsWith("done")) {
@@ -27,11 +27,37 @@ public class Duke {
                 Task doneTask = tasks.get(index - 1);
                 doneTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("[" + doneTask.getStatusIcon() + "] " + doneTask);
+                System.out.println(doneTask);
             }
-            else {
+            else if (userInput.startsWith("todo")) {
+                String[] split = userInput.split("todo ");
+                task = new Task(split[1], "T", null);
                 tasks.add(task);
-                System.out.println("added: " + task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(task);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } else if (userInput.startsWith("deadline")) {
+                String[] split = userInput.split("deadline ");
+                String description = split[1].split(" /")[0];
+                String time = split[1].split("/by ")[1];
+                System.out.println(description);
+                System.out.println(time);
+                task = new Task(description, "D", time);
+                tasks.add(task);
+                System.out.println(task);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } else if (userInput.startsWith("event")) {
+                String[] split = userInput.split("event ");
+                String description = split[1].split(" /")[0];
+                String time = split[1].split("/at ")[1];
+                System.out.println(description);
+                System.out.println(time);
+                task = new Task(description, "E", time);
+                tasks.add(task);
+                System.out.println(task);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } else {
+                System.out.println("Invalid input!");
             }
         }
     }
