@@ -25,7 +25,6 @@ public class Duke {
         return true;
     }
 
-
     public static void main(String[] args) {
         System.out.println("*******************************************");
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
@@ -55,7 +54,7 @@ public class Duke {
                 int taskNum = Integer.parseInt(userInput.substring(5));
 
                 if (taskNum > numOfTasks || taskNum < 1) {
-                    System.out.println("There is no task number " + taskNum);
+                    System.out.println("Wrong input!");
                 } else {
                     Task curr = tasks[taskNum - 1];
                     curr.markAsDone();
