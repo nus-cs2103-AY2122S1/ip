@@ -5,6 +5,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
+    public static class DukeException extends Exception {
+        public DukeException(String errorMessage) {
+            super(errorMessage);
+        }
+    }
     public static class TaskList {
         private Task[] tasks;
         private int numTask;
