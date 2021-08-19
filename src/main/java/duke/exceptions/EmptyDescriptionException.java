@@ -1,5 +1,7 @@
+package duke.exceptions;
+
 /**
- * This is an EmptyDescriptionException that extends DukeException.
+ * This is an duke.exceptions.EmptyDescriptionException that extends duke.exceptions.DukeException.
  */
 public class EmptyDescriptionException extends DukeException {
 

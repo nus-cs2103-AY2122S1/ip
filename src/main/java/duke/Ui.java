@@ -1,8 +1,11 @@
+package duke;
+
+import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * This is an Ui class that deals with interaction with Users.
+ * This is an duke.Ui class that deals with interaction with Users.
  */
 public class Ui {
 
@@ -70,9 +73,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        //Scanner s = new Scanner(System.in);
         String command = s.nextLine();
-        //s.close();
         return command;
     }
 

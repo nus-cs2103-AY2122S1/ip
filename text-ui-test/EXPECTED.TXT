@@ -52,10 +52,10 @@ Hello I'm FullOfBugs. What can I do for you?
     4. [D][X] do homework (by: Aug 18 2021 11:59PM)
     _______________________________
     _______________________________
-    ☹ OOPS! I don't think your Deadline is keyed in correctly.☹
+    ☹ OOPS! I don't think your duke.task.Deadline is keyed in correctly.☹
     _______________________________
     _______________________________
-    ☹ OOPS! I don't think your Event is keyed in correctly.☹
+    ☹ OOPS! I don't think your duke.task.Event is keyed in correctly.☹
     _______________________________
     _______________________________
     Got it. I've added this task:

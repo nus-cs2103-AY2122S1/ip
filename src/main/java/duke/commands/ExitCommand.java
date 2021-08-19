@@ -1,9 +1,16 @@
+package duke.commands;
+
+import duke.exceptions.DukeFileException;
+import duke.TaskList;
+import duke.Storage;
+import duke.Ui;
+
 /**
- * This is an ExitCommand class that extends Command.
+ * This is an duke.commands.ExitCommand class that extends duke.commands.Command.
  */
 public class ExitCommand extends Command {
 
-    protected ExitCommand() {
+    public ExitCommand() {
         super("bye");
     }
 

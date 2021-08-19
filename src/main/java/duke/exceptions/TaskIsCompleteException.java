@@ -1,5 +1,7 @@
+package duke.exceptions;
+
 /**
- * This is a TaskIsCompleteException that extends DukeException.
+ * This is a duke.exceptions.TaskIsCompleteException that extends duke.exceptions.DukeException.
  */
 public class TaskIsCompleteException extends DukeException {
 

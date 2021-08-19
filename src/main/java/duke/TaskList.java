@@ -1,14 +1,20 @@
+package duke;
+
+import duke.exceptions.DukeFileException;
+import duke.exceptions.EmptyListException;
+import duke.exceptions.TaskIsCompleteException;
+import duke.task.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * This is a TaskList class that contains the task list.
+ * This is a duke.TaskList class that contains the task list.
  */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * Constructors of TaskList
+     * Constructors of duke.TaskList
      */
     public TaskList() {
         tasks = new ArrayList<>();
@@ -41,7 +47,7 @@ public class TaskList {
                     throws TaskIsCompleteException, DukeFileException {
         try {
             Task t = tasks.get(index);
-            if (t.isDone) {
+            if (t.isDone()) {
                 throw new TaskIsCompleteException(index + 1);
             } else {
                 int listInd = index + 1;

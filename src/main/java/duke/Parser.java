@@ -1,7 +1,18 @@
+package duke;
+
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.ListCommand;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.UnknownCommandException;
+
 import java.util.Scanner;
 
 /**
- * This is a Parser class that deals with making sense of the user command.
+ * This is a duke.Parser class that deals with making sense of the user command.
  */
 public class Parser {
 

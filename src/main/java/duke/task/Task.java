@@ -1,7 +1,10 @@
+package duke.task;
+
 /**
- * This is a Task Class.
+ * This is a duke.task.Task Class.
  */
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -16,6 +19,10 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     public String fullCommand() {

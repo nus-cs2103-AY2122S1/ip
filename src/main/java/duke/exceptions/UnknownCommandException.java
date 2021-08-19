@@ -1,5 +1,7 @@
+package duke.exceptions;
+
 /**
- * This is an UnknownCommandException that extends DukeException.
+ * This is an duke.exceptions.UnknownCommandException that extends duke.exceptions.DukeException.
  */
 public class UnknownCommandException extends DukeException {
 

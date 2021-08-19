@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * This is a ToDo class that extends Task.
+ * This is a duke.task.ToDo class that extends duke.task.Task.
  */
 public class ToDo extends Task {
 

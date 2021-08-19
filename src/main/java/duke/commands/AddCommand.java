@@ -1,7 +1,20 @@
+package duke.commands;
+
+import duke.exceptions.CommandParamException;
+import duke.exceptions.DukeFileException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.UnknownCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.TaskList;
+import duke.Storage;
+import duke.Ui;
 import java.io.IOException;
 
 /**
- * This is a AddCommand class that extends Command.
+ * This is a duke.commands.AddCommand class that extends duke.commands.Command.
  */
 public class AddCommand extends Command {
 

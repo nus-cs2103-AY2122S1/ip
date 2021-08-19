@@ -1,5 +1,11 @@
+package duke;
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeFileException;
+
 /**
- * This is the Duke class.
+ * This is the duke.Duke class.
  */
 public class Duke {
 
@@ -8,7 +14,7 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * This is the Constructor of Duke.
+     * This is the Constructor of duke.Duke.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -22,11 +28,11 @@ public class Duke {
     }
 
     /**
-     * This is the main point of interaction of user and Duke.
+     * This is the main point of interaction of user and duke.Duke.
      */
     public void run() {
         ui.showWelcomeMessage();
-        Boolean isExit = false;
+        boolean isExit = false;
 
         while(!isExit) {
             try {

@@ -1,5 +1,12 @@
+package duke.commands;
+
+import duke.exceptions.*;
+import duke.TaskList;
+import duke.Storage;
+import duke.Ui;
+
 /**
- * This is a ListCommand class that extends Command.
+ * This is a duke.commands.ListCommand class that extends duke.commands.Command.
  */
 public class ListCommand extends Command {
 

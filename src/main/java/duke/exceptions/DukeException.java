@@ -1,5 +1,7 @@
+package duke.exceptions;
+
 /**
- * This is a DukeException class.
+ * This is a duke.exceptions.DukeException class.
  */
 public class DukeException extends Exception {
 

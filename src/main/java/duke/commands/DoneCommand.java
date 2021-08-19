@@ -1,5 +1,14 @@
+package duke.commands;
+
+import duke.exceptions.DukeFileException;
+import duke.exceptions.TaskIsCompleteException;
+import duke.exceptions.TaskNotFoundException;
+import duke.TaskList;
+import duke.Storage;
+import duke.Ui;
+
 /**
- * This is a DoneCommand class that extends Command.
+ * This is a duke.commands.DoneCommand class that extends duke.commands.Command.
  */
 public class DoneCommand extends Command {
 

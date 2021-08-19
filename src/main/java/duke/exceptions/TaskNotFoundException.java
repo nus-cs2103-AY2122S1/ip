@@ -1,5 +1,7 @@
+package duke.exceptions;
+
 /**
- * This is a TaskNotFoundException that extends DukeException.
+ * This is a duke.exceptions.TaskNotFoundException that extends duke.exceptions.DukeException.
  */
 public class TaskNotFoundException extends DukeException {
 

@@ -1,5 +1,7 @@
+package duke.exceptions;
+
 /**
- * This is an EmptyListException class that extends DukeException.
+ * This is an duke.exceptions.EmptyListException class that extends duke.exceptions.DukeException.
  */
 public class EmptyListException extends DukeException {
 

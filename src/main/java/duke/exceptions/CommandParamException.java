@@ -1,5 +1,7 @@
+package duke.exceptions;
+
 /**
- * This is a CommandParamException that extends DukeException.
+ * This is a duke.exceptions.CommandParamException that extends duke.exceptions.DukeException.
  */
 public class CommandParamException extends DukeException {
 

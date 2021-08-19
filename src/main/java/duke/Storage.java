@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exceptions.CommandParamException;
+import duke.exceptions.DukeFileException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * This is a Storage class that deals with loading tasks
+ * This is a duke.Storage class that deals with loading tasks
  * from the file and saving tasks in the file.
  */
 public class Storage {
@@ -32,7 +40,7 @@ public class Storage {
             ArrayList<Task> taskList = new ArrayList<>();
 
             while (s.hasNext()) {
-                //Parser's job
+                //duke.Parser's job
                 //input here will definitely be correct and accurate
                 String fullLineOfCommand = s.nextLine();
                 //either, todo, deadline, delete, event, done
@@ -83,7 +91,7 @@ public class Storage {
         for (int i = 0; i < taskList.size(); i++) {
             Task t = taskList.get(i);
             fw.append(t.fullCommand() + System.lineSeparator());
-            if (t.isDone) {
+            if (t.isDone()) {
                 int index = i + 1;
                 fw.append("done " + index + System.lineSeparator());
             }

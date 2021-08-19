@@ -1,5 +1,13 @@
+package duke.commands;
+
+import duke.exceptions.DukeFileException;
+import duke.exceptions.TaskNotFoundException;
+import duke.TaskList;
+import duke.Storage;
+import duke.Ui;
+
 /**
- * This is a DeleteCommand class that extends Command.
+ * This is a duke.commands.DeleteCommand class that extends duke.commands.Command.
  */
 public class DeleteCommand extends Command {
 
