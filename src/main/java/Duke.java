@@ -7,16 +7,6 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-//    private static void list(String line) {
-//        for(int i = 0; i < 100; i++) {
-//            if(listOfText[i] == null) {
-//                listOfText[i] = new Task(line);
-//                break;
-//            }
-//        }
-//        System.out.println("added: " + line);
-//    }
-
     private static void list(Task task) {
         int counter = 0;
         for(int i = 0; i < 100; i++) {
@@ -53,32 +43,43 @@ public class Duke {
 
     }
 
+    private static boolean checkInvalidDescription(String input) {
+        if(input.equals("todo") || input.equals("deadline") || input.equals("event")) {
+            return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        String input = sc.nextLine();
-        while(!(input.equals("bye"))) {
+        String input;
+        while(!((input = sc.nextLine()).equals("bye"))) {
+            try {
+                if(input.equals("list")) {
+                    printList();
+                }else if (input.length() > 5 && input.substring(0, 5).equals("done ")) {
+                    String[] split = input.split("\\s+");
+                    int number = Integer.parseInt(split[1]);
+                    changeStatus(number);
+                }else if (input.length() > 9 && input.substring(0, 9).equals("deadline ")) {
+                    String[] split = input.substring(9).split(" /by ");
+                    list(new Deadline(split[0], split[1]));
+                } else if (input.length() > 5 && input.substring(0, 5).equals("todo ")) {
+                    list(new ToDo(input.substring(5)));
+                } else if (input.length() > 6 && input.substring(0, 6).equals("event ")) {
+                    String[] split = input.substring(6).split(" /at ");
+                    list(new Event(split[0], split[1]));
+                } else if (checkInvalidDescription(input)) {
+                    throw new InvalidDescription(input);
+                } else if (input.length() > 0) {
+                    throw new InvalidArguement();
+                }
 
-            if(input.equals("list")) {
-                printList();
-                input = sc.nextLine();
-            }else if (input.length() > 5 && input.substring(0, 5).equals("done ")) {
-                String[] split = input.split("\\s+");
-                int number = Integer.parseInt(split[1]);
-                changeStatus(number);
-                input = sc.nextLine();
-            }else if (input.length() > 9 && input.substring(0, 9).equals("deadline ")) {
-                String[] split = input.substring(9).split(" /by ");
-                list(new Deadline(split[0], split[1]));
-                input = sc.nextLine();
-            } else if (input.length() > 5 && input.substring(0, 5).equals("todo ")) {
-                list(new ToDo(input.substring(5)));
-                input = sc.nextLine();
-            } else if (input.length() > 6 && input.substring(0, 6).equals("event ")) {
-                String[] split = input.substring(6).split(" /at ");
-                list(new Event(split[0], split[1]));
-                input = sc.nextLine();
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
+
         }
 
         if(input.equals("bye")) {

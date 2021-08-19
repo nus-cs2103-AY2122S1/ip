@@ -34,5 +34,7 @@ Here are the tasks in your list:
 1.[T][X] borrow book
 2.[D][X] return book
 3.[E][X] project meeting
+☹ OOPS!!! The description of a todo cannot be empty.
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 Bye. Hope to see you again soon!
 
