@@ -87,6 +87,13 @@ public class Duke {
                     ToDo newTodo = new ToDo(description.substring(1));
                     dukeList.add(newTodo);
                     System.out.println(newTodo);
+                } else if (command.equals("delete")) {
+                    int taskIndex = Integer.parseInt(description.substring(1)) - 1;
+                    printLines();
+                    System.out.println("Noted. I've removed this task: ");
+                    Task taskToBeDeleted = dukeList.get(taskIndex);
+                    System.out.println(taskToBeDeleted);
+                    deleteTask(taskIndex);
                 } else {
                     throw new DukeUnknownCommandException();
                 }
@@ -99,6 +106,10 @@ public class Duke {
             printLines();
         }
 
+    }
+
+    void deleteTask(int taskIndex) {
+        dukeList.remove(taskIndex);
     }
 
     void displayTaskCompletion(Task toBeCompleted) {
