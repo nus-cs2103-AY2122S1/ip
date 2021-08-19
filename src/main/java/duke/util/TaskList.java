@@ -1,6 +1,8 @@
 package duke.util;
 
+import duke.date.Date;
 import duke.exception.NoSuchTaskException;
+import duke.task.DatedTask;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -43,5 +45,13 @@ public class TaskList {
             copy[i] = (i + 1) + "." + copy[i];
         }
         return copy;
+    }
+
+    public String[] toStringArray(Date date) {
+        return list.stream()
+                .filter((task) -> task instanceof DatedTask)
+                .filter((task) -> ((DatedTask) task).getDate().equals(date))
+                .map(Object::toString)
+                .toArray(String[]::new);
     }
 }

@@ -1,15 +1,27 @@
 package duke.command;
 
+import duke.date.Date;
 import duke.exception.BadInputFormatException;
+import duke.exception.InvalidDateException;
 import duke.util.TaskList;
 import duke.util.Ui;
 
 public class ListCommand extends Command {
-    public static ListCommand of(String content) throws BadInputFormatException {
-        if (content.trim().length() > 0) {
-            throw new BadInputFormatException();
+    private Date date;
+
+    public ListCommand() {
+        super();
+    }
+
+    private ListCommand(Date date) {
+        this.date = date;
+    }
+
+    public static ListCommand of(String content) throws BadInputFormatException, InvalidDateException {
+        if (content.trim().length() < 1) {
+            return new ListCommand();
         }
-        return new ListCommand();
+        return new ListCommand(Date.of(content));
     }
 
     @Override
@@ -18,8 +30,13 @@ public class ListCommand extends Command {
             ui.print("No tasks yet!");
             return;
         }
-        ui.print("Here are the tasks in your list:");
-        ui.print(tasks.toStringArray());
+        if (date == null) {
+            ui.print("Here are the tasks in your list:");
+            ui.print(tasks.toStringArray());
+            return;
+        }
+        ui.print("Here are the tasks happening on " + date + ":");
+        ui.print(tasks.toStringArray(date));
     }
 
     @Override
