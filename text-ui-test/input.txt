@@ -1,0 +1,8 @@
+task one
+todo task two
+done 2
+event task three /at 11pm
+done 3
+deadline task four /by 2359
+list
+bye
