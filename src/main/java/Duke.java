@@ -24,6 +24,15 @@ public class Duke {
 //                list.add(input);
 //                input = sc.nextLine();
 //            }
+            if (input.startsWith("done ")) {
+                String[] parts = input.split(" ");
+                String numStr = parts[1];
+                int numInt = Integer.valueOf(numStr);
+                System.out.println("Nice! I've marked this task as done: ");
+                list.setIndexDone(numInt);
+                input = sc.nextLine();
+                continue;
+            }
             switch(input) {
                 case "bye":
                 case "Bye":
@@ -35,6 +44,7 @@ public class Duke {
                     list.show();
                     input = sc.nextLine();
                     break;
+
                 default:
                     System.out.println("added: " + input);
                     list.add(input);

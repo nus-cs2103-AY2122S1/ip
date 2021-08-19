@@ -13,6 +13,7 @@ public class List {
 
     public void setIndexDone(int index) {// starts from 1
         list.get(index - 1).setDone();
+        System.out.println(index + ".[" + list.get(index - 1).getStatusIcon() + "] " + list.get(index - 1).getDescription());
     }
 
     public void show() {
