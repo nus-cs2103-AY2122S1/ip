@@ -32,6 +32,10 @@ public class Duke {
             return false;
         } else if (str.equals("list")) {
             System.out.println(toDoList.list());
+        } else if (str.startsWith("done")){
+            String substr = str.replaceFirst("done ", "");
+            int index = Integer.parseInt(substr);
+            System.out.println(toDoList.markDone(index));
         } else {
             System.out.println(toDoList.add(str));
         }
