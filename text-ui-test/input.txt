@@ -1,0 +1,8 @@
+todo Do CS2103 Quiz
+list
+deadline Do CS2103 Individual Project /by Thursday
+done 2
+list
+event CS2103 Tutorial /at Mon 3-4pm
+list
+bye
