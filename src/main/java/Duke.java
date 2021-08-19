@@ -17,19 +17,10 @@ public class Duke {
     private static final String DEADLINE_DELIMITER = "/by";
     private static final String EVENT_DELIMITER = "/at";
 
-    // Message methods
-    public static void horizontal_line() {
-        System.out.print("____________________________________________________________\n");
-    }
 
-    public static void display_message(String message) {
-        horizontal_line();
-        System.out.println(message);
-        horizontal_line();
-    }
 
     public static void main(String[] args) {
-        display_message(WELCOME_MESSAGE);
+        Message.display_message(WELCOME_MESSAGE);
 
         TaskList taskList = new TaskList();
 
@@ -50,15 +41,15 @@ public class Duke {
                 switch (command) {
                     case LIST:
                         if (taskList.size() == 0) {
-                            display_message(NO_TASKS_IN_LIST_MESSAGE);
+                            Message.display_message(NO_TASKS_IN_LIST_MESSAGE);
                         } else {
-                            display_message(String.format(LIST_MESSAGE, taskList));
+                            Message.display_message(String.format(LIST_MESSAGE, taskList));
                         }
                         break;
                     case DONE:
                         try {
                             int taskIndex = Integer.parseInt(remainingText);
-                            display_message(String.format(DONE_MESSAGE, taskList.markTaskAsDone(taskIndex)));
+                            Message.display_message(String.format(DONE_MESSAGE, taskList.markTaskAsDone(taskIndex)));
                         } catch (NumberFormatException err) {
                             throw new DukeException(INVALID_NUMBER);
                         }
@@ -66,14 +57,14 @@ public class Duke {
                     case DELETE:
                         try {
                             int taskIndex = Integer.parseInt(remainingText);
-                            display_message(taskList.deleteTask(taskIndex));
+                            Message.display_message(taskList.deleteTask(taskIndex));
                         } catch (NumberFormatException err) {
                             throw new DukeException(INVALID_NUMBER);
                         }
                         break;
                     case TODO:
                         String todoText = input.substring(Command.TODO.toString().length() + 1).trim();
-                        display_message(taskList.addTask(new ToDo(todoText)));
+                        Message.display_message(taskList.addTask(new ToDo(todoText)));
                         break;
                     case DEADLINE:
                         String[] deadlineInfo = remainingText.split(DEADLINE_DELIMITER);
@@ -82,7 +73,7 @@ public class Duke {
                         }
                         String deadline = deadlineInfo[1].trim();
                         String deadlineText = deadlineInfo[0].trim();
-                        display_message(taskList.addTask(new Deadline(deadlineText, deadline)));
+                        Message.display_message(taskList.addTask(new Deadline(deadlineText, deadline)));
                         break;
                     case EVENT:
                         String[] eventInfo = remainingText.split(EVENT_DELIMITER);
@@ -91,20 +82,20 @@ public class Duke {
                         }
                         String event = eventInfo[1].trim();
                         String eventText = eventInfo[0].trim();
-                        display_message(taskList.addTask(new Event(eventText, event)));
+                        Message.display_message(taskList.addTask(new Event(eventText, event)));
                         break;
                     case BYE:
                         canContinue = false;
                         break;
                 }
             } catch (IllegalArgumentException err) {
-                display_message(INCOHERENT_INPUT_MESSAGE);
+                Message.display_message(INCOHERENT_INPUT_MESSAGE);
             } catch (DukeException err) {
-                display_message(err.getMessage());
+                Message.display_message(err.getMessage());
             }
         }
         sc.close();
 
-        display_message(EXIT_MESSAGE);
+        Message.display_message(EXIT_MESSAGE);
     }
 }

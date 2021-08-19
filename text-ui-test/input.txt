@@ -6,4 +6,9 @@ todo eat dinner
 todo find friends
 done 4
 list
+todo
+blah
+toijoijdo
+delete 1
+delete 2
 bye

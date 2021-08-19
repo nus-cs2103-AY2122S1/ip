@@ -4,7 +4,7 @@ import java.util.List;
 public class TaskList {
     private static final String OUT_OF_BOUNDS_TASK = "Could not find task. Check the task number again?";
     private static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d %s in the list.";
-    private static final String ADD_TASK_MESSAGE = "Got it. I've added this task:\n %s\n" + NUMBER_OF_TASKS_MESSAGE;
+    private static final String ADD_TASK_MESSAGE = "Got it. I've added this task:\n  %s\n" + NUMBER_OF_TASKS_MESSAGE;
     private static final String REMOVE_TASK_MESSAGE = "Noted. I've removed this task:\n %s\n" + NUMBER_OF_TASKS_MESSAGE;
 
     private final List<Task> taskArr;

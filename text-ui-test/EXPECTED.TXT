@@ -1,48 +1,67 @@
 ____________________________________________________________
-Hello! I'm Duke
-What can I do for you?
+|    Hello! I'm Duke                                       |
+|    What can I do for you?                                |
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
-added: [T][ ] todo eat lunch
-Now you have 1 tasks in the list.
+|    Got it. I've added this task:                         |
+|      [T][ ] eat lunch                                    |
+|    Now you have 1 task in the list.                      |
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
-added: [D][ ] finish assignment (by: Dec 20th)
-Now you have 2 tasks in the list.
+|    Got it. I've added this task:                         |
+|      [D][ ] finish assignment (by: Dec 20th)             |
+|    Now you have 2 tasks in the list.                     |
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
-added: [E][ ] eat food party (at: Aug 20th 2-4pm)
-Now you have 3 tasks in the list.
+|    Got it. I've added this task:                         |
+|      [E][ ] eat food party (at: Aug 20th 2-4pm)          |
+|    Now you have 3 tasks in the list.                     |
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
- [T][X] todo eat lunch
+|    Nice! I've marked this task as done:                  |
+|     [T][X] eat lunch                                     |
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
-added: [T][ ] todo eat dinner
-Now you have 4 tasks in the list.
+|    Got it. I've added this task:                         |
+|      [T][ ] eat dinner                                   |
+|    Now you have 4 tasks in the list.                     |
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
-added: [T][ ] todo find friends
-Now you have 5 tasks in the list.
+|    Got it. I've added this task:                         |
+|      [T][ ] find friends                                 |
+|    Now you have 5 tasks in the list.                     |
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
- [T][X] todo eat dinner
+|    Nice! I've marked this task as done:                  |
+|     [T][X] eat dinner                                    |
 ____________________________________________________________
 ____________________________________________________________
-Here are the tasks in your list:
-1. [T][X] todo eat lunch
-2. [D][ ] finish assignment (by: Dec 20th)
-3. [E][ ] eat food party (at: Aug 20th 2-4pm)
-4. [T][X] todo eat dinner
-5. [T][ ] todo find friends
+|    Here are the tasks in your list:                      |
+|    1. [T][X] eat lunch                                   |
+|    2. [D][ ] finish assignment (by: Dec 20th)            |
+|    3. [E][ ] eat food party (at: Aug 20th 2-4pm)         |
+|    4. [T][X] eat dinner                                  |
+|    5. [T][ ] find friends                                |
 ____________________________________________________________
 ____________________________________________________________
-Bye. Hope to see you again soon!
+|    Please input text after the todo command              |
+____________________________________________________________
+____________________________________________________________
+|    I'm sorry, but I don't know what that means :-(       |
+____________________________________________________________
+____________________________________________________________
+|    I'm sorry, but I don't know what that means :-(       |
+____________________________________________________________
+____________________________________________________________
+|    Noted. I've removed this task:                        |
+|     [T][X] eat lunch                                     |
+|    Now you have 4 tasks in the list.                     |
+____________________________________________________________
+____________________________________________________________
+|    Noted. I've removed this task:                        |
+|     [E][ ] eat food party (at: Aug 20th 2-4pm)           |
+|    Now you have 3 tasks in the list.                     |
+____________________________________________________________
+____________________________________________________________
+|    Bye. Hope to see you again soon!                      |
 ____________________________________________________________
