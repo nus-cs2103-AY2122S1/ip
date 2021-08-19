@@ -1,3 +1,5 @@
+import org.w3c.dom.events.Event;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -5,6 +7,7 @@ import java.util.regex.Pattern;
 
 public class Duke {
     public static class Task {
+        private enum Type{TODO, DEADLINE, EVENT}
         protected String description;
         protected boolean isDone;
 
@@ -13,7 +16,7 @@ public class Duke {
             this.isDone = false;
         }
 
-        public String getStatusIcon() {
+        protected String getStatusIcon() {
             return (isDone ? "X" : " "); // mark done task with X
         }
 
@@ -26,7 +29,50 @@ public class Duke {
         }
     }
 
+    public static class Todo extends Task {
+        public Todo(String description) {
+            super(description);
+        }
+
+        @Override
+        public String toString() {
+            String stem = super.toString();
+            return String.format("[T]%s", stem);
+        }
+    }
+
+    public static class Deadline extends Task {
+        private String deadline;
+
+        public Deadline(String description, String deadline) {
+            super(description);
+            this.deadline = deadline;
+        }
+
+        @Override
+        public String toString() {
+            String stem = super.toString();
+            return String.format("[D]%s (by: %s)", stem, this.deadline);
+        }
+    }
+
+    public static class Event extends Task {
+        private String eventTime;
+
+        public Event(String description, String eventTime) {
+            super(description);
+            this.eventTime = eventTime;
+        }
+
+        @Override
+        public String toString() {
+            String stem = super.toString();
+            return String.format("[D]%s (at: %s)", stem, this.eventTime);
+        }
+    }
+
     public static class TaskList {
+
         private Task[] tasks;
         private int numTask;
 
