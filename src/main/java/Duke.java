@@ -32,26 +32,39 @@ public class Duke {
                         t.markAsComplete();
                         System.out.println(t);
                     } else {
-                        System.out.println("Got it. I've added this task:");
-
-                        if (input.matches("event .+ /at .+")) {
-                            int k = input.indexOf("/at");
-                            Task t  = new Event(input.substring(0, k).trim(),input.substring(k + 3).trim());
-                            System.out.println(t);
-                            tasks[len++] = t;
-                        } else if (input.matches("deadline .+ /by .+")) {
-                            int k = input.indexOf("/by");
-                            Task t  = new Deadline(input.substring(0, k).trim(),input.substring(k + 3).trim());
-                            System.out.println(t);
-                            tasks[len++] = t;
-                        } else if (input.matches("todo .+")) {
-                            Task t = new Todo(input);
-                            System.out.println(t);
-                            tasks[len++] = t;
-                        } else {
-                            System.out.println("invalid");
+                        try {
+                            if (input.matches("event.*")) {
+                                int k = input.indexOf("/at");
+                                if (k < 0) {
+                                    throw new DukeException.MissingArgumentException("/at");
+                                }
+                                Task t  = new Event(input.substring(5, k).trim(),input.substring(k + 3).trim());
+                                System.out.println("Got it. I've added this task:");
+                                System.out.println(t);
+                                tasks[len++] = t;
+                            } else if (input.matches("deadline.*")) {
+                                int k = input.indexOf("/by");
+                                if (k < 0) {
+                                    throw new DukeException.MissingArgumentException("/by");
+                                }
+                                Task t  = new Deadline(input.substring(8, k).trim(),input.substring(k + 3).trim());
+                                System.out.println("Got it. I've added this task:");
+                                System.out.println(t);
+                                tasks[len++] = t;
+                            } else if (input.matches("todo.*")) {
+                                Task t = new Todo(input.substring(4));
+                                System.out.println("Got it. I've added this task:");
+                                System.out.println(t);
+                                tasks[len++] = t;
+                            } else {
+                                throw new DukeException.UnknownInputException();
+                            }
+                            System.out.printf("Now you have %d tasks in the list\n", len);
+                        } catch (Exception err) {
+                            System.out.println(err.getMessage());
                         }
-                        System.out.printf("Now you have %d tasks in the list\n", len);
+
+
                     }
 
             }
