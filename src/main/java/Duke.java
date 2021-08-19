@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,24 +12,25 @@ public class Duke {
             + LOGO
             + "\tHow can I help you?";
 
-    private static final String FAREWELL_TEXT = "\t☹☹☹ OOPS!!! Why do you choose to leave me!";
+    private static final String FAREWELL_TEXT = "\t☹☹☹ Why do you choose to leave me!";
 
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
 
-    private static final Task[] tasks = new Task[100];
-
-    private static int numOfTasks = 0;
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     public static void addTask(Task task) {
-        tasks[numOfTasks] = task;
-        numOfTasks++;
+        tasks.add(task);
+    }
+
+    public static void removeTask(int index) {
+        tasks.remove(index);
     }
 
     public static String printList() {
         StringBuilder itemList = new StringBuilder("\tHere are the tasks in your list:\n");
-        for (int i = 0; i < numOfTasks; i++) {
-            itemList.append("\t").append(i + 1).append(". ").append(tasks[i]);
-            if (i < numOfTasks - 1) {
+        for (int i = 0; i < tasks.size(); i++) {
+            itemList.append("\t").append(i + 1).append(". ").append(tasks.get(i));
+            if (i < tasks.size() - 1) {
                 itemList.append("\n");
             }
         }
@@ -44,7 +46,7 @@ public class Duke {
         String addMessage = "\tGot it. I've added this task:\n\t\t"
                 + task
                 + "\n\tTask(s) remaining in the list: "
-                + Duke.numOfTasks;
+                + tasks.size();
         System.out.println(Duke.wrapAsMessage(addMessage));
     }
 
@@ -55,7 +57,7 @@ public class Duke {
 
             switch (commandType) {
                 case "todo": {
-                    if (description.isEmpty()) {
+                    if (description.trim().isEmpty()) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     } else {
                         Task task = new ToDo(description);
@@ -94,15 +96,36 @@ public class Duke {
                         if (item == 0) {
                             throw new DukeException("☹ OOPS!!! The item should be an positive integer.");
                         }
-                        if (item > numOfTasks) {
+                        if (item > tasks.size()) {
                             throw new DukeException("☹ OOPS!!! The item number is out of bound!");
                         }
-                        if (Duke.tasks[item - 1].isDone) {
+                        if (Duke.tasks.get(item - 1).isDone) {
                             throw new DukeException("☹ OOPS!!! The task is already done!");
                         }
-                        Duke.tasks[item - 1].setDone(true);
+                        Duke.tasks.get(item - 1).setDone(true);
                         String doneMessage = "\tNice! I've marked this task as done:\n\t\t"
-                                + Duke.tasks[item - 1];
+                                + tasks.get(item - 1);
+                        System.out.println(wrapAsMessage(doneMessage));
+                    } else {
+                        throw new DukeException("☹ OOPS!!! The item should be an positive integer.");
+                    }
+                    return;
+                }
+                case "delete": {
+                    if (description.matches("\\d+")) {
+                        int item = Integer.parseInt(description);
+                        if (item == 0) {
+                            throw new DukeException("☹ OOPS!!! The item should be an positive integer.");
+                        }
+                        if (item > tasks.size()) {
+                            throw new DukeException("☹ OOPS!!! The item number is out of bound!");
+                        }
+                        int numOfTasks = tasks.size() - 1;
+                        String doneMessage = "\tNoted. I've removed this task:\n\t\t"
+                                + tasks.get(item - 1)
+                                + "\n\tTask(s) remaining in the list: "
+                                + numOfTasks;
+                        Duke.removeTask(item - 1);
                         System.out.println(wrapAsMessage(doneMessage));
                     } else {
                         throw new DukeException("☹ OOPS!!! The item should be an positive integer.");
