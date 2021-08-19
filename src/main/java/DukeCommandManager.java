@@ -23,11 +23,15 @@ public class DukeCommandManager {
     }
 
     public void respondDelete(String command) {
-
-    }
-
-    public void respondClearList() {
-
+        command = command.substring(6).replaceAll("\\s+", "");
+        int position = Integer.parseInt(command) - 1;
+        if (position > taskList.size() || position < 0) {
+            throw new DukeException("delete", "", DukeException.exceptionType.OUT_OF_BOUND);
+        } else {
+            Task deletedTask = taskList.remove(position);
+            respondWith("Noted. I've removed this task:\n" + deletedTask + "\n Now you have " +
+                    taskList.size() + " tasks in the list");
+        }
     }
 
     public void processCommand(String command, String commandType) {
@@ -47,6 +51,9 @@ public class DukeCommandManager {
                     break;
                 case "event":
                     respondEvent(command);
+                    break;
+                case "delete":
+                    respondDelete(command);
                     break;
                 default:
                     defaultResponse();
@@ -85,12 +92,13 @@ public class DukeCommandManager {
         int position = Integer.parseInt(command) - 1;
         if (position > taskList.size()) {
             throw new DukeException("done", "", DukeException.exceptionType.OUT_OF_BOUND);
+        } else {
+            Task calledTask = taskList.remove(position);
+            calledTask.markAsCompleted();
+            taskList.add(position, calledTask);
+            respondWith("Nice! I've marked this task as done: \n" + calledTask);
+            enterCommand();
         }
-        Task calledTask = taskList.remove(position);
-        calledTask.markAsCompleted();
-        taskList.add(position, calledTask);
-        respondWith("Nice! I've marked this task as done: \n" + calledTask);
-        enterCommand();
     }
 
     /**
