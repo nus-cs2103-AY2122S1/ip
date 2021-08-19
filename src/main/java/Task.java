@@ -19,4 +19,18 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || !(object.getClass().equals(this.getClass()))) {        // getClass to inherit in subclasses of class
+            return false;
+        } else {
+            Task t = (Task) object;
+            if (this.description == null) {
+                return (t.description == null);
+            } else {
+                return (this.description.equalsIgnoreCase(t.description));
+            }
+        }
+    }
 }

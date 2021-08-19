@@ -10,15 +10,31 @@ public class DukeException extends Exception {
 class TaskIndexNotInteger extends DukeException {
 
     TaskIndexNotInteger(int length) {
-        super(Duke.Box("Meow? That's not an integer... Please enter a task number between 0 and " + length));
+        super(Duke.Box("Meow? That's not an integer... Please enter a task number between 1 and " + length));
+    }
+
+}
+
+class TaskNotFound extends DukeException {
+
+    TaskNotFound(String taskStr) {
+        super(Duke.Box("Meow? I can't find " + taskStr));
+    }
+
+}
+
+class TaskExistsException extends DukeException {
+
+    TaskExistsException(Duke.TaskTypes taskTypes, String taskStr) {
+        super(Duke.Box("Meow? " + taskTypes + " " + taskStr + " already exists."));
     }
 
 }
 
 class TaskIndexOutOfBounds extends DukeException {
 
-    TaskIndexOutOfBounds(int length) {
-        super(Duke.Box("Meow? I can't find that task... Please enter a task number between 0 and " + length));
+    TaskIndexOutOfBounds(int i, int length) {
+        super(Duke.Box("Meow? I can't find task " + i +  "... Please enter a task number between 1 and " + length));
     }
 
 }
@@ -59,6 +75,14 @@ class IllegalCommandException extends DukeException {
 
     IllegalCommandException(String commandStr) {
         super(Duke.Box("Meow? There is no command " + commandStr + "!"));
+    }
+
+}
+
+class IllegalTaskTypeException extends DukeException {
+
+    IllegalTaskTypeException(String taskTypeStr) {
+        super(Duke.Box("Meow? There is no task type " + taskTypeStr + "!"));
     }
 
 }
