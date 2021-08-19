@@ -6,11 +6,7 @@ import java.util.List;
 public class Chatbot {
     private enum ChatCommands {
         BYE("bye"),
-        LIST("list"),
-        DONE("done"),
-        TODO("todo"),
-        DEADLINE("deadline"),
-        EVENT("event");
+        LIST("list");
 
         private final String command;
 
@@ -20,8 +16,31 @@ public class Chatbot {
 
         @Nullable
         public static ChatCommands toEnum (String str) {
-            String[] splitCommand = str.split(" ", 2);
             for(ChatCommands chatCommand: ChatCommands.values()) {
+                if (chatCommand.name().equalsIgnoreCase(str)) {
+                    return chatCommand;
+                }
+            }
+            return null;
+        }
+    }
+
+    private enum TaskCommands {
+        DONE("done"),
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event");
+
+        private final String command;
+
+        TaskCommands(final String command) {
+            this.command = command;
+        }
+
+        @Nullable
+        public static TaskCommands toEnum (String str) {
+            String[] splitCommand = str.split(" ", 2);
+            for(TaskCommands chatCommand: TaskCommands.values()) {
                 if (chatCommand.name().equalsIgnoreCase(splitCommand[0])) {
                     return chatCommand;
                 }
@@ -56,20 +75,25 @@ public class Chatbot {
             System.out.println("------------------------------------------------------------------------------------");
             System.out.println("How can I help you?");
             System.out.print("User: ");
-            keepChatting = interpret() == ChatContinue.CONTINUE;
+            try {
+                keepChatting = interpret() == ChatContinue.CONTINUE;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         };
     }
 
     private ChatContinue interpret () {
         String input = scanner.nextLine();
-        String[] inputArgs = input.split(" ", 2);
-        if (inputArgs.length == 1) {
-            inputArgs = new String[] {inputArgs[0], ""};
-        }
         ChatCommands command = ChatCommands.toEnum(input);
-        return command == null
-                ? customItems(new Task(input)) :
-                builtInCommands(command, inputArgs[1]);
+        if (command != null) {
+            return builtInCommands(command);
+        }
+        TaskCommands taskCommand = TaskCommands.toEnum(input);
+        if (taskCommand != null) {
+            return addTask(taskCommand, input);
+        }
+        throw new IllegalArgumentException("Looks like I don't support those commands yet...");
     }
 
     private ChatContinue customItems(Task input) {
@@ -79,6 +103,22 @@ public class Chatbot {
             System.out.println("Sorry, could you rephrase that?");
         }
         return ChatContinue.CONTINUE;
+    }
+
+    private ChatContinue addTask(TaskCommands command, String input) {
+        switch (command) {
+            case DONE:
+                return this.markDone(input);
+            case TODO:
+                return this.addTodo(input);
+            case DEADLINE:
+                return this.addDeadline(input);
+            case EVENT:
+                return this.addEvent(input);
+            default:
+                System.out.println("This action is not supported yet. Contact the devs for more information.");
+                return ChatContinue.CONTINUE;
+        }
     }
 
     private ChatContinue addTodo(String input) {
@@ -107,20 +147,12 @@ public class Chatbot {
         System.out.println(task);
     }
 
-    private ChatContinue builtInCommands(ChatCommands command, String input) {
+    private ChatContinue builtInCommands(ChatCommands command) {
         switch (command) {
             case BYE:
                 return this.farewell();
             case LIST:
                 return this.list();
-            case DONE:
-                return this.markDone(input);
-            case TODO:
-                return this.addTodo(input);
-            case DEADLINE:
-                return this.addDeadline(input);
-            case EVENT:
-                return this.addEvent(input);
             default:
                 System.out.println("How did you get here?");
                 return ChatContinue.END;
