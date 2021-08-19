@@ -31,14 +31,23 @@ public class Parser {
                 return new AddCommand("deadline", deadlineDetails);
 
             case "todo":
+                if (!s.hasNext()) {
+                    throw new EmptyDescriptionException("todo");
+                }
                 String description = s.nextLine().trim();
                 return new AddCommand("todo", description);
 
             case "delete":
+                if (!s.hasNext()) {
+                    throw new EmptyDescriptionException("delete");
+                }
                 int indexToDelete = s.nextInt() - 1;
                 return new DeleteCommand(indexToDelete);
 
             case "done":
+                if (!s.hasNext()) {
+                    throw new EmptyDescriptionException("done");
+                }
                 int indexToMark = s.nextInt() - 1;
                 return new DoneCommand(indexToMark);
 

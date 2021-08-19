@@ -17,9 +17,12 @@ public class Deadline extends Task {
         //index 0 is date, 1 is time
         //date should be yyyy-mm-dd, time should be 2359...
         if (dateTime.length <= 1 || dateTime.length > 2) {
-            throw new CommandParamException("Deadline");
+            throw new CommandParamException("deadline");
         }
         try {
+            if (dateTime[1].length() < 4) {
+                throw new CommandParamException("deadline");
+            }
             String timeReformatted = dateTime[1].substring(0, 2) + ":" + dateTime[1].substring(2, 4);
             LocalDate date = LocalDate.parse(dateTime[0].trim());
             LocalTime time = LocalTime.parse(timeReformatted);
