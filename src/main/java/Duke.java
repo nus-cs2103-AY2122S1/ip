@@ -50,7 +50,12 @@ public class Duke {
         System.out.println(res + "\n" +  Duke.end);
     }
 
-    public static void toDo(String input) {
+    public static void toDo(String input) throws DukeException {
+        if (input.equals("todo")) {
+            throw new DukeException(Duke.start
+                                    + "☹ OOPS!!! The description of a todo cannot be empty.\n"
+                                    + Duke.end);
+        }
         String t = input.split("todo")[1];
         ToDo td = new ToDo(t);
         Duke.list.add(td);
@@ -84,20 +89,25 @@ public class Duke {
         String input = s.nextLine();
 
         while (!input.equals("bye")) {
-            if (input.contains("list")) {
-                Duke.getList();
-            } else if (input.contains("done")) {
-                int i = Integer.valueOf(input.substring(5));
-                Duke.markDone(i);
-            } else if (input.contains("todo")) {
-                Duke.toDo(input);
-            } else if (input.contains("deadline")) {
-                Duke.deadline(input);
-            } else if (input.contains("event")) {
-                Duke.event(input);
-            } else {
-                Task t = new Task(input);
-                Duke.addTask(t);
+            try {
+                if (input.contains("list")) {
+                    Duke.getList();
+                } else if (input.contains("done")) {
+                    int i = Integer.valueOf(input.substring(5));
+                    Duke.markDone(i);
+                } else if (input.contains("todo")) {
+                    Duke.toDo(input);
+                } else if (input.contains("deadline")) {
+                    Duke.deadline(input);
+                } else if (input.contains("event")) {
+                    Duke.event(input);
+                } else {
+                    throw new DukeException(Duke.start +
+                                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n"
+                                        + Duke.end);
+                }
+            } catch (DukeException error) {
+                    System.out.println(error.getMessage());
             }
 
             //Get next command for the loop
