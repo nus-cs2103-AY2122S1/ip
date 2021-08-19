@@ -7,6 +7,7 @@ deadline do 2 things by Monday
 event a birthday
 event a birthday at 21:00
 done 4
+delete 3
 done ife
 done 2
 list

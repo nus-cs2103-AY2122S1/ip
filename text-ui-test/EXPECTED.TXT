@@ -29,6 +29,10 @@ Hello from
 
 	Sorry, I can't seem to find that task
 
+	 Got it. I've removed this task:
+	 	 [E][ ] a birthday  (at: 21:00)
+	 Now you have 2 tasks in the list.
+
 	I'm Sorry, WHAT?!?!
 
 	 Nice! I've marked this task as done:
@@ -36,5 +40,4 @@ Hello from
 
 	 1. [T][ ] do one thing
 	 2. [D][X] do 2 things  (by: Monday)
-	 3. [E][ ] a birthday  (at: 21:00)
 

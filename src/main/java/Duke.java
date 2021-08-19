@@ -35,14 +35,18 @@ public class Duke {
                         tasks.addTask(new Event(description));
                     } else if (command.equals("todo")) {
                         tasks.addTask(new ToDo(description));
-                    } else if (command.equals("done")) {
+                    } else if (command.equals("done") || command.equals("delete")) {
                         try {
                             Integer taskNum = Integer.valueOf(description);
-                            Task toMark = tasks.getTask(taskNum);
-                            if (toMark == null) {
+                            Task inFocus = tasks.getTask(taskNum);
+                            if (inFocus == null) {
                                 System.out.println("\tSorry, I can't seem to find that task\n");
                             } else {
-                                toMark.markAsDone();
+                                if (command.equals("done")) {
+                                    inFocus.markAsDone();
+                                } else {
+                                    tasks.deleteTask(inFocus);
+                                }
                             }
                         } catch (NumberFormatException e) {
                             System.out.println("\tI'm Sorry, WHAT?!?!\n");

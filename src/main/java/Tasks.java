@@ -16,6 +16,17 @@ public class Tasks {
         System.out.println("\t Now you have " + tasks.size() + plural + "in the list.\n");
     }
 
+    public void deleteTask(Task task) {
+        tasks.remove(task);
+        System.out.println("\t Got it. I've removed this task:");
+        System.out.println("\t \t " + task);
+        int numTasks = tasks.size();
+        String size = numTasks == 0 ? "no" : String.valueOf(numTasks);
+        String maybePlural = numTasks == 1 ? " task " : " tasks ";
+        System.out.println("\t Now you have " + size + maybePlural + "in the list.\n");
+
+    }
+
     public boolean isEmpty() {
         return this.tasks.size() == 0;
     }
