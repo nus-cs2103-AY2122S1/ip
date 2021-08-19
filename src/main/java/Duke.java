@@ -14,17 +14,13 @@ public class Duke {
 
     private final static String UNDERLINE = "_________________________________";
     private final static String INDENTATION ="  ";
-    private final static String EXIT = "bye";
-    private final static String LIST = "list";
-    private final static String DONE = "done";
-    private final static String TODO = "todo";
-    private final static String DEADLINE = "deadline";
-    private final static String EVENT = "event";
-    private final static String DELETE = "delete";
     private static String[] cmdList = new String[100];
     private static ArrayList<Task> task = new ArrayList<>();
     private static int order = 0;
-    private static String instruction;
+    public static enum Operation {
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT
+    }
+
 
     /**
      * the method of greeting at starting of program.
@@ -56,6 +52,138 @@ public class Duke {
         }
     }
 
+    public static void list() {
+        System.out.println(INDENTATION + UNDERLINE);
+        System.out.println(INDENTATION + "Here are the tasks in your list:");
+        for (int i = 0; i < order; i ++) {
+            System.out.println(INDENTATION + (i + 1) + "." + INDENTATION + task.get(i));
+        }
+        System.out.println(INDENTATION + UNDERLINE);
+
+    }
+
+    public static void done(String cmd) throws EmptyTaskListException, NoDescriptionException, NoCommandException {
+
+        if (cmd.split(" ").length == 1) {
+            throw new NoDescriptionException("Done");
+
+        } else if (!isInteger(cmd.split(" ")[1])) {
+            throw new NoCommandException(cmd);
+
+        } else if (Integer.parseInt(cmd.split(" ")[1]) > order) {
+            throw new EmptyTaskListException("Done");
+
+        } else {
+            int num = Integer.parseInt(cmd.split(" ")[1]) - 1;
+            task.get(num).markDone();
+            System.out.println(INDENTATION + UNDERLINE);
+            System.out.println(INDENTATION + "Nice! I've marked this task as done:");
+            System.out.println(INDENTATION + " " + task.get(num));
+            System.out.println(INDENTATION + UNDERLINE);
+
+        }
+    }
+
+    public static void delete(String cmd) throws DeleteWrongIndexException, NoDescriptionException, NoCommandException {
+
+        if (cmd.split(" ").length == 1)  {
+            throw new NoDescriptionException("Delete");
+
+        } else if (!isInteger(cmd.split(" ")[1])) {
+            throw new NoCommandException(cmd);
+
+        } else if (Integer.parseInt(cmd.split(" ")[1]) > order) {
+            throw new DeleteWrongIndexException("Delete");
+
+        } else {
+
+            Task removed = task.remove(Integer.parseInt(cmd.split(" ")[1]) - 1);
+            int num = Integer.parseInt(cmd.split(" ")[1]) - 1;
+            order --;
+            System.out.println(INDENTATION + "Noted. I've removed this task:");
+            System.out.println(INDENTATION + " " + removed);
+            System.out.println(INDENTATION + "Now you have " + order  + " tasks in the list.");
+            System.out.println(INDENTATION + UNDERLINE);
+            task.remove(removed);
+        }
+    }
+
+
+    public static void addTask(String cmd) throws NoDescriptionException, NoTimeException, NoCommandException {
+
+        Operation instruction = Operation.valueOf(cmd.toUpperCase().split(" ")[0]);
+        if (cmd.split(" ").length != 1) {
+            switch (instruction) {
+                case TODO:
+                    if (cmd.split(" ").length == 1) {
+                        throw new NoDescriptionException(instruction.name());
+
+                    } else {
+                        Todo todo = new Todo(cmd.substring(5));
+                        task.add(order, todo);
+                    }
+                    break;
+
+                case DEADLINE:
+                    String subString_deadline = cmd.substring(9);
+                    if (subString_deadline.split(" /by ").length == 1) {
+                        throw new NoTimeException(instruction.name());
+
+                    } else {
+                        Deadline deadline = new Deadline(subString_deadline.split(" /by ")[0],
+                                subString_deadline.split(" /by ")[1]);
+                        task.add(order, deadline);
+                    }
+                    break;
+
+                case EVENT:
+                    String subString_event = cmd.substring(6);
+                    if (subString_event.split(" /at ").length == 1) {
+                        throw new NoTimeException(instruction.name());
+
+                    } else {
+                        Event event = new Event(subString_event.split(" /at ")[0],
+                                subString_event.split(" /at ")[1]);
+                        task.add(order, event);
+                    }
+                    break;
+                default:
+                    throw new NoCommandException(instruction.name());
+            }
+        }
+
+        else {
+            switch (instruction) {
+                case TODO:
+                    throw new NoDescriptionException(instruction.name());
+                case DEADLINE:
+                    throw new NoDescriptionException(instruction.name());
+                case EVENT:
+                    throw new NoDescriptionException(instruction.name());
+                default:
+                    throw new NoCommandException(instruction.name());
+            }
+        }
+
+        System.out.println(INDENTATION + UNDERLINE);
+        System.out.println(INDENTATION + "Got it. I've added this task:");
+        System.out.println(INDENTATION + INDENTATION + task.get(order)); //toString in Deadline or Event
+        order++;
+        System.out.println(INDENTATION + "Now you have " + order + " tasks in the list.");
+        System.out.println(INDENTATION + UNDERLINE);
+        cmdList[order] = cmd;
+
+    }
+
+    public static void bye() {
+        System.out.println(INDENTATION + UNDERLINE);
+        System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
+        System.out.println(INDENTATION + UNDERLINE);
+
+    }
+
+
+
     /**
      * This is Main method
      * @param args
@@ -64,125 +192,53 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         greeting();
+
+loop:
         while(true) {
             String cmd = sc.nextLine();
             int numOfTasks = 0;
+            Operation operation;
+
             try {
+                try {
+                    operation = Operation.valueOf(cmd.toUpperCase().split(" ")[0]);
 
-                if (!cmd.equals(EXIT)) {
+                } catch (Exception e){
+                    throw new NoCommandException(cmd);
+                }
 
-                    System.out.println(INDENTATION + UNDERLINE);
+                switch (operation) {
+                    case BYE:
+                        bye();
+                        break loop;
 
-                    //enter list
-                    if (cmd.equals(LIST)) {
-                        System.out.println(INDENTATION + "Here are the tasks in your list:");
-                        for (int i = 0; i < order; i ++) {
-                            System.out.println(INDENTATION + (i + 1) + "." + INDENTATION + task.get(i));
-                        }
-                    }
+                    case LIST:
+                        list();
+                        continue;
 
-                    else if (cmd != null) {
+                    case DONE:
+                        done(cmd);
+                        continue;
 
-                        //mark as done & enter done xxx
-                        if (cmd.split(" ")[0].equals(DONE) &&
-                                cmd.split(" ").length == 2 &&
-                                isInteger(cmd.split(" ")[1])) {
+                    case DELETE:
+                        delete(cmd);
+                        continue;
 
-                            if (Integer.parseInt(cmd.split(" ")[1]) > order) {
-                                throw new EmptyTaskListException("Done");
-                            } else {
-                                int num = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                                task.get(num).markDone();
-                                System.out.println(INDENTATION + "Nice! I've marked this task as done:");
-                                System.out.println(INDENTATION + " " + task.get(num));
-                            }
-                        }
+                    case TODO:
+                        addTask(cmd);
+                        continue;
 
-                        // delete the task
-                        else if (cmd.split(" ")[0].equals(DELETE) &&
-                                cmd.split(" ").length == 2 &&
-                                isInteger(cmd.split(" ")[1])) {
+                    case DEADLINE:
+                        addTask(cmd);
+                        continue;
 
-                            if (Integer.parseInt(cmd.split(" ")[1]) > order) {
-                                throw new DeleteWrongIndexException("Delete");
-                            } else {
+                    case EVENT:
+                        addTask(cmd);
+                        continue;
 
-                                Task removed = task.remove(Integer.parseInt(cmd.split(" ")[1]) - 1);
-                                int num = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                                order --;
-                                System.out.println(INDENTATION + "Noted. I've removed this task:");
-                                System.out.println(INDENTATION + " " + removed);
-                                System.out.println(INDENTATION + "Now you have " + order  + " tasks in the list.");
-                                task.remove(removed);
-                            }
-                        }
+                    default:
+                        throw new NoCommandException(cmd);
 
-                        //print the task
-                        else {
-                            instruction = cmd.split(" ")[0];
-                            if (cmd.split(" ").length != 1) {
-
-                                switch (instruction) {
-                                    case TODO:
-                                        if (cmd.split(" ").length == 1) {
-                                            throw new NoDescriptionException(instruction);
-                                        } else {
-                                            Todo todo = new Todo(cmd.substring(5));
-                                            task.add(order, todo);
-                                        }
-                                        break;
-                                    case DEADLINE:
-                                        String subString_deadline = cmd.substring(9);
-                                        if (subString_deadline.split(" /by ").length == 1) {
-                                            throw new NoTimeException(instruction);
-                                        } else {
-                                            Deadline deadline = new Deadline(subString_deadline.split(" /by ")[0],
-                                                    subString_deadline.split(" /by ")[1]);
-                                            task.add(order, deadline);
-                                        }
-                                        break;
-                                    case EVENT:
-                                        String subString_event = cmd.substring(6);
-                                        if (subString_event.split(" /at ").length == 1) {
-                                            throw new NoTimeException(instruction);
-                                        } else {
-                                            Event event = new Event(subString_event.split(" /at ")[0],
-                                                    subString_event.split(" /at ")[1]);
-                                            task.add(order, event);
-                                        }
-                                        break;
-                                    default:
-                                        throw new NoCommandException(instruction);
-                                }
-                            }
-                            else {
-                                switch (instruction) {
-                                    case TODO:
-                                        throw new NoDescriptionException(instruction);
-                                    case DEADLINE:
-                                        throw new NoDescriptionException(instruction);
-                                    case EVENT:
-                                        throw new NoDescriptionException(instruction);
-                                    default:
-                                        throw new NoCommandException(instruction);
-                                }
-                            }
-
-                            System.out.println(INDENTATION + "Got it. I've added this task:");
-                            System.out.println(INDENTATION + INDENTATION + task.get(order)); //toString in Deadline or Event
-                            order++;
-                            System.out.println(INDENTATION + "Now you have " + order + " tasks in the list.");
-                            cmdList[order] = cmd;
-                        }
-                    }
-
-                    System.out.println(INDENTATION + UNDERLINE);
-
-                } else {
-                    System.out.println(INDENTATION + UNDERLINE);
-                    System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
-                    System.out.println(INDENTATION + UNDERLINE);
-                    break;
                 }
 
             } catch (NoDescriptionException | EmptyTaskListException | NoCommandException
@@ -190,7 +246,6 @@ public class Duke {
 
                 e.printStackTrace();
             }
-
         }
     }
 }
