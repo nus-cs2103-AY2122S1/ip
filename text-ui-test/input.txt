@@ -2,6 +2,9 @@ todo borrow book
 list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
-list
+deadline do homework /by no idea :-p
 done 2
+list
+todo
+blah
 bye
