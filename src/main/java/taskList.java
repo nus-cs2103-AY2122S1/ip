@@ -1,4 +1,11 @@
+import java.util.Arrays;
+import java.util.regex.Pattern;
+
 public class taskList {
+    private static final Pattern TODOS = Pattern.compile("^todo\\s.+");
+    private static final Pattern DEADLINES = Pattern.compile("^deadline\\s.+\\s/by\\s.+");
+    private static final Pattern EVENTS = Pattern.compile("^event\\s.+\\s/at\\s.+");
+
     private final Task[] lst;
     private final String[] emptyList =
             new String[] {"The list is empty."};
@@ -9,13 +16,27 @@ public class taskList {
         this.count = 0;
     }
 
-    public String addItem(String item) {
+    public String addTask(String input) {
+        input = input.trim();
+
         // Checks if the list is full
         if (this.count >= this.lst.length) {
             return "Length of list exceeded.";
         } else {
-            this.lst[this.count++] = new Task(item);
-            return "added: " + item;
+            Task newTask;
+
+            if (TODOS.matcher(input).matches()) {
+                newTask = new ToDos(input);
+            } else if (DEADLINES.matcher(input).matches()) {
+                newTask = new Deadlines(input);
+            } else if (EVENTS.matcher(input).matches()) {
+                newTask = new Events(input);
+            } else {
+                newTask = new Task(input);
+            }
+
+            this.lst[this.count++] = newTask;
+            return String.format("Got it. I've added this task:\n    %s\nYou now have %d tasks tasks in the list.", newTask, count);
         }
     }
 
@@ -27,6 +48,7 @@ public class taskList {
 
         String[] temp = new String[count + 1];
         temp[0] = "Here are the tasks in your list:";
+
         for (int i = 1; i < this.count + 1; ++i) {
             temp[i] = i + "." + this.lst[i - 1].toString();
         }

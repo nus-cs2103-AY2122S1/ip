@@ -16,19 +16,20 @@ public class Duke {
             System.out.print(">>> ");
             input = s.nextLine();
 
-            if (input.equals("bye")) {
+            if (input.length() == 0) {
+                printMsg("!!! Input cannot be blank");
+            } else if (input.equals("bye")) {
                 printMsg("Bye! Hope to see you again soon!");
                 break;
             } else if (input.equals("list")) {
                 printMsg(inputs.getList());
-            } else if(input.matches("done (\\d+)")) {
+            } else if (input.matches("done (\\d+)")) {
                 printMsg(inputs.markAsDone(Integer.parseInt(input.replaceAll("[^0-9]",
                         ""))));
             } else {
-                printMsg(inputs.addItem(input));
+                printMsg(inputs.addTask(input));
             }
         }
-
         s.close();
     }
 
