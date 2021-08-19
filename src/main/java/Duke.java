@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private ArrayList<String> xs = new ArrayList<>();
+    private static ArrayList<Task> xs = new ArrayList<>();
 
     public static String lineProducer() {
         return "   -----------------------------------------";
@@ -14,7 +14,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
         System.out.println(lineProducer() + indentationAdder() + "Hello I'm your friendly chatbot Duke!" +
                 indentationAdder() + "What can I help you with?\n" + lineProducer() );
@@ -25,13 +24,31 @@ public class Duke {
                 break;
             } else if (str.equals("list")) {
                 System.out.println(lineProducer());
-                for (int i = 0; i < duke.xs.size(); i++) {
-                    System.out.println("    " + (i + 1) + ": " + duke.xs.get(i));
+                boolean allDone = true;
+                for (int i = 0; i < xs.size(); i++) {
+                    System.out.println("    " + (i + 1) + ": " + xs.get(i));
+                    if (!xs.get(i).getIsDone()) {
+                        allDone = false;
+                    }
+                }
+                if (allDone) {
+                    System.out.println("    " + "Congratulations! You've completed all your tasks!");
                 }
                 System.out.println(lineProducer());
                 continue;
+            } else if (str.contains("done")) {
+                int doneNumber = Integer.parseInt(str.substring(5));
+                if ((doneNumber > xs.size() || doneNumber < 0)) {
+                    System.out.println(lineProducer() + indentationAdder() + "Uh oh! Item " + doneNumber + " does not seem to exist!\n" + lineProducer());
+                    continue;
+                }
+                Task taskToChange = xs.get(doneNumber - 1);
+                taskToChange.changeIsDone(true);
+                System.out.println(lineProducer() + indentationAdder() + "Great job! I've marked the following as done\n" +
+                        indentationAdder() + taskToChange + "\n" + lineProducer());
+                continue;
             }
-            duke.xs.add(str);
+            xs.add(new Task(str));
             System.out.println(lineProducer() + indentationAdder() + "added: " + str + "\n" + lineProducer());
         }
 
