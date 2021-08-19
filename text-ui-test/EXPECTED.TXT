@@ -28,9 +28,14 @@ Enter the time range for the task
 Ok! I've added the task below
 [E] [ ] CS2103T tut (at: 11am-12pm)
 There are now 3 tasks
+Which task number should I mark as done?
+From 1 to 3
+Type 0 to cancel
+Ok! I've marked the task below as done!
+[D] [X] finish CS2103T project (by: today)
 Tasks I tracked so far:
 1. [T] [ ] eat lunch
-2. [D] [ ] finish CS2103T project (by: today)
+2. [D] [X] finish CS2103T project (by: today)
 3. [E] [ ] CS2103T tut (at: 11am-12pm)
 Oops! Sorry I don't recognise that command!
 Type "help" for list of commands, and ensure that there are no illegal characters or trailing spaces

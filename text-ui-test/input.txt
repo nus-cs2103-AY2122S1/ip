@@ -7,6 +7,8 @@ today
 event
 CS2103T tut
 11am-12pm
+done
+2
 list
 oops
 bye
