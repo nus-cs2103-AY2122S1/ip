@@ -25,9 +25,10 @@ public abstract class Command {
      * @exception UnknownCommandException if no command matching the keyword was found
      */
     public static Command matching(Duke.UserInput input) throws UnknownCommandException {
-        String keyword = input.getKeyword().toLowerCase();
+        String keyword = input.getKeyword();
         for (Command cmd : COMMAND_LIST) {
-            if (cmd.getKeywords().contains(keyword))
+            // Case insensitive contains
+            if (cmd.getKeywords().stream().anyMatch(keyword::equalsIgnoreCase))
                 return cmd;
         }
 
