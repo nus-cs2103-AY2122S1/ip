@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 /**
  * Duke class
@@ -49,7 +50,15 @@ public class Duke {
         task.markAsDone();
     }
 
-    private void addToDo(String req) {
+    private void addToDo(String req) throws NoSuchElementException { //try catch here?
+        if (req.equals("todo")) {
+            throw new NoSuchElementException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+
+        String[] splitReq = req.split(" ", 2);
+        String cmd = splitReq[0];
+        String body = splitReq[1];
+
         ToDo todo = new ToDo(req);
         this.list.add(todo);
     }
@@ -70,8 +79,13 @@ public class Duke {
         this.list.add(event);
     }
 
+    private void wrongInput(String req) throws IllegalArgumentException {
+      throw new IllegalArgumentException(
+        "Sorry! I do not understand you? Try another command!");
+    }
+
     //run method to start instance of duke
-    private void run() {
+    private void run() throws IllegalArgumentException {
         Duke.greeting();
 
         String req = "";
@@ -101,7 +115,11 @@ public class Duke {
                     break;
 
                 case "todo":
-                    this.addToDo(splitReq[1]);
+                    try {
+                        this.addToDo(req);
+                    } catch (NoSuchElementException e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
 
                 case "deadline":
@@ -113,12 +131,13 @@ public class Duke {
                     break;
 
                 default:
-                    Duke.divider();
-                    System.out.println("Sorry! I do not understand you? Try another command!");
-                    Duke.divider();
+                    try {
+                        this.wrongInput(req);
+                    } catch (IllegalArgumentException e) {
+                        System.err.println(e.getMessage());
+                    }
             }
         } while (!end);
-
         sc.close();
     }
 
