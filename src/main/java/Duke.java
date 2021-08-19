@@ -1,10 +1,10 @@
 import java.util.Scanner;
 import java.util.Set;
+import java.util.ArrayList;
 
 public class Duke {
-    private Task[] tasks = new Task[100];
-    private int count = 0;
-    private static final Set<String> ACTIONS = Set.of("todo", "done", "deadline", "event", "list");
+    private ArrayList<Task> tasks = new ArrayList<>();
+    private static final Set<String> ACTIONS = Set.of("todo", "done", "deadline", "event", "list", "delete");
 
     /**
      * Print with 4 spaces infront of param str.
@@ -42,7 +42,7 @@ public class Duke {
         printLine();
         printWithTabIndent(message);
         printWithTabIndent("  " + taskTitle);
-        printWithTabIndent(String.format("Now you have %d tasks in the list.", count));
+        printWithTabIndent(String.format("Now you have %d tasks in the list.", tasks.size()));
         printLine();
     }
 
@@ -50,12 +50,12 @@ public class Duke {
      * Pretty print the tasks list with the horizontal lines.
      */
     public void printTasks() {
-        if (count == 0) {
+        if (tasks.isEmpty()) {
             printMessage("Nothing in the list!");
         } else {
             printLine();
-            for (int i = 0; i < count; i++) {
-                printWithTabIndent(String.format("%d. %s", i + 1, tasks[i].toString()));
+            for (int i = 0; i < tasks.size(); i++) {
+                printWithTabIndent(String.format("%d. %s", i + 1, tasks.get(i).toString()));
             }
             printLine();
         }
@@ -70,40 +70,42 @@ public class Duke {
     public void markTaskDone(String taskNo) throws DukeException {
         try {
             int taskNoInt = Integer.parseInt(taskNo) - 1;
-            Task selectedTask = tasks[taskNoInt];
-            if (count == 0) {
+            Task selectedTask = tasks.get(taskNoInt);
+            if (tasks.isEmpty()) {
                 printMessage("Nothing in the list");
             } else if (selectedTask.isDone()) {
                 printMessage(
                         String.format("Task %s is already done!\n\t  %s",
                                 taskNo,
-                                tasks[taskNoInt].toString()
+                                selectedTask.toString()
                         )
                 );
             } else {
                 selectedTask.markAsDone();
                 printMessage(
                         String.format("Nice! I've marked this task as done:\n\t  %s",
-                                tasks[taskNoInt].toString()
+                                selectedTask.toString()
                         )
                 );
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("Enter a task number for a done action!");
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
-            throw new DukeException(String.format("Enter a valid number between 1 - %d", count));
+            throw new DukeException("Enter a number for a done action!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(String.format("Enter a valid number between 1 - %d", tasks.size()));
         }
     }
 
+    private Task lastTask() {
+        return tasks.get(tasks.size() - 1);
+    }
     /**
      * Add a Todo task to tasks.
      *
      * @param message String user input. Should start with "todo"
      */
     public void addTodoTask(String message) {
-        tasks[count] = new Todo(message.replace("todo ", ""));
-        count++;
-        printAddMessage("Got it. I've  added this task:", tasks[count - 1].toString());
+        tasks.add(new Todo(message.replace("todo ", "")));
+        printAddMessage("Got it. I've  added this task:", lastTask().toString());
     }
 
     /**
@@ -116,9 +118,8 @@ public class Duke {
         try {
             String taskDescription = message.replaceAll("/by.*", "");
             String deadline = message.split("/by")[1];
-            tasks[count] = new Deadline(taskDescription, deadline);
-            count++;
-            printAddMessage("Got it. I've  added this task:", tasks[count - 1].toString());
+            tasks.add(new Deadline(taskDescription, deadline));
+            printAddMessage("Got it. I've  added this task:", lastTask().toString());
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The end time of a deadline cannot be empty.");
         }
@@ -134,11 +135,22 @@ public class Duke {
         try {
             String taskDescription = message.replaceAll("/at.*", "");
             String deadline = message.split("/at")[1];
-            tasks[count] = new Event(taskDescription, deadline);
-            count++;
-            printAddMessage("Got it. I've  added this task:", tasks[count - 1].toString());
+            tasks.add(new Event(taskDescription, deadline));
+            printAddMessage("Got it. I've  added this task:", lastTask().toString());
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The start and end time of a event cannot be empty.");
+        }
+    }
+
+    public void deleteTask(String message) throws DukeException {
+        try {
+            Task selectedTask = tasks.get(Integer.parseInt(message) - 1);
+            tasks.remove(selectedTask);
+            printAddMessage("Noted. I've removed this task:", selectedTask.toString());
+        } catch (NumberFormatException e) {
+            throw  new DukeException("Enter a number for a delete action");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(String.format("Enter a valid number between 1 - %d", tasks.size()));
         }
     }
 
@@ -160,6 +172,8 @@ public class Duke {
                 addDeadlineTask(parsedMessage);
             } else if (inputAction.equals("event")) {
                 addEventTask(parsedMessage);
+            } else if (inputAction.equals("delete")) {
+                deleteTask(parsedMessage);
             }
         } else if (!message.isEmpty()) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
