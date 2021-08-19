@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,13 +43,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        Pattern todoPattern = Pattern.compile("todo (.*)");
-        Pattern deadlinePattern = Pattern.compile("deadline (.*) /by (.*)");
-        Pattern eventPattern = Pattern.compile("event (.*) /at (.*)");
-
-        TaskList storage = new TaskList();
-
+    public void init() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -58,6 +53,15 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+    }
+
+    public void run() throws IOException, DukeException {
+        Pattern todoPattern = Pattern.compile("todo (.*)");
+        Pattern deadlinePattern = Pattern.compile("deadline (.*) /by (.*)");
+        Pattern eventPattern = Pattern.compile("event (.*) /at (.*)");
+
+        TaskList storage = new TaskList();
+        init();
 
         while (true) {
             // Enter data using BufferReader
@@ -103,6 +107,24 @@ public class Duke {
                 storage.addCustom(new Event(eventMatcher.group(1), eventMatcher.group(2)));
                 continue;
             }
+
+            // identify reason for misinput
+            if (input.substring(0, 4).equals("todo")) {
+                System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                continue;
+            }
+            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        try {
+            duke.run();
+        } catch (IOException e) {
+            System.out.println("Error found while parsing input, shutting down");
+        } catch (DukeException e) {
+
         }
     }
 }
