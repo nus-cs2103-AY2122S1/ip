@@ -15,26 +15,25 @@ class AddTaskCommand extends Command {
     private static final String EVENT_AT_REGEX = "\\s+/at\\s+";
 
     @Override
-    public void run(Duke duke, Duke.UserInput input) throws EmptyDescriptionException {
+    public void run(Duke duke, Duke.UserInput input) throws InvalidTaskException {
         Task newTask = createTask(input);
         TaskList taskList = duke.getTaskList();
         taskList.add(newTask);
         duke.say(String.format(ADD_TASK_SUCCESS_MESSAGE, newTask, taskList.size()));
     }
 
-    private static Task createTask(Duke.UserInput input) throws EmptyDescriptionException {
+    private static Task createTask(Duke.UserInput input) throws InvalidTaskException {
         // TODO: use enums for this
         switch (input.getKeyword()) {
             case "todo":
                 return new Todo(input.getArgs());
             case "deadline": {
-                // TODO: throw IllegalArgumentException if splitInput.length() == 1
                 String[] splitInput = input.getArgs().split(DEADLINE_BY_REGEX, 2);
-                return new Deadline(splitInput[0], splitInput[1]);
+                return new Deadline(splitInput[0], splitInput.length > 1 ? splitInput[1] : "");
             }
             case "event": {
                 String[] splitInput = input.getArgs().split(EVENT_AT_REGEX, 2);
-                return new Event(splitInput[0], splitInput[1]);
+                return new Event(splitInput[0], splitInput.length > 1 ? splitInput[1] : "");
             }
         }
 

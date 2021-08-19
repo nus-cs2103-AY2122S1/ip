@@ -7,8 +7,8 @@ public abstract class Task {
     private final String description;
     private boolean isDone;
 
-    Task(String description) throws EmptyDescriptionException {
-        if (description.isEmpty()) throw new EmptyDescriptionException();
+    Task(String description) throws InvalidTaskException {
+        if (description.isEmpty()) throw new InvalidTaskException("Description cannot be empty.");
         this.description = description;
         this.isDone = false;
     }
