@@ -1,13 +1,31 @@
 public class DukeException extends Exception {
     protected String linebreak = "~~*********___\\(owo)/___\\(owo)/___*********~~";
 
-    public DukeException(String message) {
-        super("~~*********___\\(owo)/___\\(owo)/___*********~~\n\n"
-                + message
-                + "\n~~*********___\\(owo)/___\\(owo)/___*********~~");
+    DukeException(String message) {
+        super(message + '\n');
     }
+}
 
-    public DukeException(String message, Throwable cause) {
-        super (message, cause);
+class InvalidInputException extends DukeException {
+    InvalidInputException() {
+        super ("Sowwy, thiws commandw iswn't supporwted! TwT");
+    }
+}
+
+class IncorrectInputException extends DukeException {
+    IncorrectInputException(String keyword, String suggestion) {
+        super ("Ohw no! Youw cawn't use " + keyword + " likw that! Twy " + suggestion + " inswead!");
+    }
+}
+
+class IncompleteInputException extends DukeException {
+    IncompleteInputException(String keyword) {
+        super ("Oopsie uwu! Youw cawn't use " + keyword + " withoutw a descwiption forw it!");
+    }
+}
+
+class MissingNoException extends DukeException {
+    MissingNoException(String keyword) {
+        super ("Thwere's no suchw taskw! Pwease enterw a *validw* numbewr after '"+ keyword + "'!");
     }
 }
