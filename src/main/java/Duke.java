@@ -23,15 +23,62 @@ import java.util.Scanner;
       return "[" + getStatusIcon() + "] " + description;
     }
 }
+ class Deadline extends Task {//Need to be done by deadline
+
+    protected String by;
+
+    public Deadline(String description, String by) {
+        super(description);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + "(" + by + ")";
+    }
+}
+
+ class ToDo extends Task {//No deadline
+
+
+    public ToDo(String description) {
+        super(description);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+class Event extends Task {//Starts and ends by a certain time
+
+    protected String by;//Range of timing
+
+    public Event(String description, String by) {
+        super(description);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString()  + "(" + by + ")";
+    }
+}
+
 public class Duke {
-//    static String myList = "";
 
     static List<Task> toDo = new ArrayList<>();
 
-//    static void add(String newItem){
-//        int count = toDo.size();
-//        myList += "     " + count + ". " + newItem + "\n";
-//    }
+    static int countTasks(){
+        int count = 0;
+        for(Task task:toDo){
+            if(!task.isDone){
+                count ++;
+            }
+        }
+        return count;
+    }
 
     public static void main(String[] args) {
 
@@ -45,13 +92,16 @@ public class Duke {
 
         while(myObj.hasNext()){
             System.out.println();
-            item = myObj.nextLine();
+            item = myObj.nextLine();//Parse the line
 
             System.out.println(item);//User input typed
-            if(item.equals("bye")){
+
+
+            if(item.equals("bye")){//Stop scanner
                 System.out.println(line);
                 System.out.println("     " + "Bye. Hope to see you again soon!");
                 System.out.println(line);
+                myObj.close();
                 break;
             }
             if(item.equals("list")){//View list of tasks
@@ -62,23 +112,51 @@ public class Duke {
                 System.out.println(line);
                 continue;
             }
-            if(item.contains("done")){
+            if(item.contains("done")){//Complete a task
                 item = item.replaceAll("\\D+","");//Extracts number from input
                 int completedItem = Integer.parseInt(item);
                 toDo.get(completedItem-1).markAsDone();//Set the task to done
                 System.out.println(line);
                 System.out.println("     " + "Nice! I've marked this task as done:");
-                System.out.println("     " + toDo.get(completedItem-1).toString());
+                System.out.println("     " + toDo.get(completedItem-1));
                 System.out.println(line);
                 continue;
             }
-            toDo.add(new Task(item));//Added new task to arraylist
+
+            if(item.contains("todo")){
+                System.out.println(line);
+                String description = item.substring(5,item.length());
+                System.out.println("     added: " + new ToDo(item));//Added item
+                toDo.add(new ToDo(description));//Added new task to arraylist
+                System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
+                System.out.println(line);
+            }
+            if(item.contains("deadline")){
+                String by = item.substring(item.lastIndexOf("/") + 1);
+                String description = item.substring(9,item.lastIndexOf("/"));//Extract description
+//                System.out.println(by);
+                System.out.println(line);
+                System.out.println("     added: " + new Deadline(description,by));//Added item
+                toDo.add(new Deadline(description,by));//Added new task to arraylist
+                System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
+                System.out.println(line);
+            }
+            if(item.contains("event")){
+                String by = item.substring(item.lastIndexOf("/") + 1);
+                String description = item.substring(6,item.lastIndexOf("/"));
+                System.out.println(line);
+                System.out.println("     added: " + new Event(description,by));//Added item
+                toDo.add(new Event(description,by));//Added new task to arraylist
+                System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
+                System.out.println(line);
+            }
+//            toDo.add(new Task(item));//Added new task to arraylist
 //            add(item);
-            System.out.println(line);
-            System.out.println("     added: " + item);//Added item
-            System.out.println(line);
+//            System.out.println(line);
+//            System.out.println("     added: " + item);//Added item
+//            System.out.println(line);
         }
-//myObj.close();
+
 
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
