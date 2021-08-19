@@ -19,4 +19,12 @@ public class Task {
         return this.description;
     }
 
+    public String getTask() {
+        return "untyped";
+    }
+
+    public String getDate() {
+        return null;
+    }
+
 }
