@@ -41,8 +41,10 @@ public class Duke {
                         tm.handle(command);
                     } catch (InvalidCommandException e) {
                         System.out.println("I'm afraid I don't recognise that, please try again!");
-                    } catch (NoNameException e) {
+                    } catch (MissingTaskNameException e) {
                         System.out.println("Task name cannot be empty!");
+                    } catch (MissingTaskNumberException e) {
+                        System.out.println("Did you forget to enter your task number?");
                     } catch (InvalidTaskNumberException e) {
                         System.out.println("Sorry, that task does not exist!");
                     } catch (MissingDeadlineException e) {

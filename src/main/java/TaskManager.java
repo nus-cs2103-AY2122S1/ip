@@ -18,7 +18,7 @@ public class TaskManager {
         switch (firstWord) {
             case "done":
                 if (arr.length < 2) {
-                    throw new NoNameException("Task name cannot be empty");
+                    throw new MissingTaskNumberException("Missing task number");
                 }
                 int id = Integer.parseInt(arr[1]);
                 try {
@@ -31,7 +31,7 @@ public class TaskManager {
                 break;
             case "todo":
                 if (arr.length < 2) {
-                    throw new NoNameException("Task name cannot be empty");
+                    throw new MissingTaskNameException("Missing task name");
                 }
                 String remaining = command.substring(5);
                 add(new ToDo(remaining));
@@ -39,7 +39,7 @@ public class TaskManager {
                 break;
             case "deadline":
                 if (arr.length < 2) {
-                    throw new NoNameException("Task name cannot be empty");
+                    throw new MissingTaskNameException("Missing task name");
                 }
                 int byIndex = command.indexOf("/by");
                 if (byIndex == -1) {
@@ -52,7 +52,7 @@ public class TaskManager {
                 break;
             case "event":
                 if (arr.length < 2) {
-                    throw new NoNameException("Task name cannot be empty");
+                    throw new MissingTaskNameException("Missing task name");
                 }
                 int atIndex = command.indexOf("/at");
                 if (atIndex == -1) {
