@@ -1,9 +1,26 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
 
     private static final String divider = "____________________________________________________________";
+
+    enum TaskType {
+        TODO, DEADLINE, EVENT;
+
+        @Override
+        public String toString() {
+            return this.name().toLowerCase(Locale.ROOT);
+        }
+
+        public static TaskType getType(String str) {
+            for (TaskType type : TaskType.values()) {
+                if (str.contentEquals(type.toString())) return type;
+            }
+            return null;
+        }
+    }
 
     private static class Task {
         private final String description;
@@ -17,37 +34,40 @@ public class Duke {
         /** Factory method to create Tasks. */
         public static Task createTask(String[] input) throws DukeException {
             if(input.length <= 0) throw new DukeException();
+
+            TaskType type = TaskType.getType(input[0]);
+            if (type == null) throw new DukeException();
             
-            switch (input[0]) {
-                case "todo": {
+            switch(type) {
+                case TODO: {
                     if (input.length < 2 || input[1] == null) {
-                        throw new DukeException.EmptyDescriptionException("todo");
+                        throw new DukeException.EmptyDescriptionException(type);
                     } else {
                         return new ToDo(input[1]);
                     }
                 }
-                case "deadline": {
+                case DEADLINE: {
                     if (input.length < 2 || input[1] == null) {
-                        throw new DukeException.EmptyDescriptionException("deadline");
+                        throw new DukeException.EmptyDescriptionException(type);
                     }
 
                     String[] tmp = input[1].split(" /by ", 2);
 
                     if (tmp.length < 2) {
-                        throw new DukeException.NoTimeException("deadline");
+                        throw new DukeException.NoTimeException(type);
                     }
 
                     return new Deadline(tmp[0], tmp[1]);
                 }
-                case "event": {
+                case EVENT: {
                     if (input.length < 2 || input[1] == null) {
-                        throw new DukeException.EmptyDescriptionException("event");
+                        throw new DukeException.EmptyDescriptionException(type);
                     }
 
                     String[] tmp = input[1].split(" /at ", 2);
 
                     if (tmp.length < 2) {
-                        throw new DukeException.NoTimeException("event");
+                        throw new DukeException.NoTimeException(type);
                     }
 
                     return new Event(tmp[0], tmp[1]);
@@ -63,7 +83,7 @@ public class Duke {
         public void markAsDone() {
             this.isDone = true;
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println(this);
+            System.out.println("  " + this);
         }
 
         @Override
@@ -101,8 +121,7 @@ public class Duke {
 
         @Override
         public String toString() {
-            return "[" + symbol + "]" + super.toString()
-                    + " (by: " + time + ")";
+            return "[" + symbol + "]" + super.toString() + " (by: " + time + ")";
         }
     }
 
@@ -120,8 +139,7 @@ public class Duke {
 
         @Override
         public String toString() {
-            return "[" + symbol + "]" + super.toString()
-                    + " (at: " + time + ")";
+            return "[" + symbol + "]" + super.toString() + " (at: " + time + ")";
         }
     }
 
@@ -137,9 +155,9 @@ public class Duke {
         }
 
         public static class EmptyDescriptionException extends DukeException {
-            private final String type;
+            private final TaskType type;
 
-            public EmptyDescriptionException(String type) {
+            public EmptyDescriptionException(TaskType type) {
                 this.type = type;
             }
 
@@ -150,9 +168,9 @@ public class Duke {
         }
 
         public static class NoTimeException extends DukeException {
-            private final String type;
+            private final TaskType type;
 
-            public NoTimeException(String type) {
+            public NoTimeException(TaskType type) {
                 this.type = type;
             }
 
