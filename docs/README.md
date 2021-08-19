@@ -10,7 +10,7 @@ to manage.</br>
 Different types of tasks includes: todos, deadlines and events.
 
 ## Usage
-***
+
 ### `todo` - Creates a todo task
 
 Creates a todo task without any date/time.
