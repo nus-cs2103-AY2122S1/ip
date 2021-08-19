@@ -22,24 +22,31 @@ class TaskNotCategorizedException extends DinoException {
     }
 }
 
-class NoSuchTaskException extends DinoException {
-    public NoSuchTaskException() {
-        super("😮 Wait... you don't even have this task in your list yet!");
+class InvalidIndexException extends DinoException {
+    public InvalidIndexException() {
+        super("😮 Please enter a valid task index!");
     }
 }
 
-class TaskIndexNotSpecifiedException extends DinoException {
-    public TaskIndexNotSpecifiedException() {
+class IndexNotSpecifiedException extends DinoException {
+    public IndexNotSpecifiedException() {
         super("😕 Please specify the index of the task!");
     }
 }
 
+class TimeNotSpecifiedException extends DinoException {
+    public TimeNotSpecifiedException(String type) {
+        super("😛 Please specify the time of your " + type + "!");
+    }
+}
 
+/*
 class TaskListFullException extends DinoException {
     public TaskListFullException() {
         super("😨 Hey you already have 100 tasks! Can't add more XD");
     }
 }
+ */
 
 
 

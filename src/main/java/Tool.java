@@ -9,8 +9,9 @@ public class Tool {
         return s;
     }
 
-    public static String getTaskDescription(String s) throws EmptyTaskDescriptionException {
+    public static String getTaskDescription(String s, String type) throws EmptyTaskDescriptionException, TimeNotSpecifiedException {
         if (!s.contains(" ") ||s.substring(s.indexOf(" ")).trim().length() == 0) throw new EmptyTaskDescriptionException();
+        if ((type.equals("deadline") || type.equals("event")) && !s.contains("/")) throw new TimeNotSpecifiedException(type);
         if (s.contains("/")) return s.substring(s.indexOf(" "), s.indexOf("/"));
         else return s.substring(s.indexOf(" "));
     }
@@ -19,27 +20,20 @@ public class Tool {
         return s.substring(s.indexOf("/") + 4);
     }
 
-    /**
-     * a method that gets the index of the task to be marked as done
-     *
-     * @param s the input string
-     * @return return the index of the task to be marked as done if the input is
-     * in the format "done" followed by a number;
-     * return 0 otherwise
-     */
-    public static int getDoneIndex(String s) {
+    public static int getIndex(String cmd, String cmdType) {
         try {
-            if (s.length() < 6) throw new TaskIndexNotSpecifiedException();
+            if (cmd.length() < cmdType.length() + 2) throw new IndexNotSpecifiedException();
+            String thingsAfterCmd = cmd.substring(cmdType.length() + 1);
+            if (thingsAfterCmd.trim().length() == 0) throw new IndexNotSpecifiedException();
             try {
-                int index  = Integer.parseInt(s.substring(5));
-                return index;
+                return Integer.parseInt(thingsAfterCmd);
             } catch (NumberFormatException e) {
                 throw new InvalidInputException();
             }
         } catch (InvalidInputException e) {
             System.out.println(e.getMessage());
             return 0;
-        } catch (TaskIndexNotSpecifiedException e) {
+        } catch (IndexNotSpecifiedException e) {
             System.out.println(e.getMessage());
             return -1;
         }

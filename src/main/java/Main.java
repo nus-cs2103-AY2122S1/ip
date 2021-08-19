@@ -9,10 +9,10 @@ public class Main {
         while(sc.hasNext()) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
-                dino.farewell();
                 break;
             } else {
-                dino.readCommand(input);
+                if (dino.getMode().equals("echo")) dino.echo(input);
+                else dino.readCommand(input);
             }
         }
         sc.close();
