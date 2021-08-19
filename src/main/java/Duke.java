@@ -85,42 +85,68 @@ public class Duke {
                     else if (cmd != null) {
 
                         if (cmd.split(" ")[0].equals(DONE) &&
-                                isInteger(cmd.split(" ")[1]) &&
-                                Integer.parseInt(cmd.split(" ")[1]) <= order) {
+                                cmd.split(" ").length == 2 &&
+                                isInteger(cmd.split(" ")[1])) {
 
-                            int num = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                            task[num] = task[num].markDone();
-                            System.out.println(INDENTATION + "Nice! I've marked this task as done:");
-                            System.out.println(INDENTATION + " " + task[num]);
+                            if (Integer.parseInt(cmd.split(" ")[1]) > order) {
+                                throw new EmptyTaskListException("Done");
+                            } else {
+                                int num = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                                task[num] = task[num].markDone();
+                                System.out.println(INDENTATION + "Nice! I've marked this task as done:");
+                                System.out.println(INDENTATION + " " + task[num]);
+                            }
                         }
 
                         //print the task
                         else {
                             instruction = cmd.split(" ")[0];
-                            switch (instruction) {
-                                case TODO:
-                                    if (cmd.split(" ").length == 1) {
+                            if (cmd.split(" ").length != 1) {
+
+                                switch (instruction) {
+                                    case TODO:
+                                        if (cmd.split(" ").length == 1) {
+                                            throw new NoDescriptionException(instruction);
+                                        } else {
+                                            Todo todo = new Todo(cmd.substring(5));
+                                            task[order] = todo;
+                                        }
+                                        break;
+                                    case DEADLINE:
+                                        String subString_deadline = cmd.substring(9);
+                                        if (subString_deadline.split(" /by ").length == 1) {
+                                            throw new NoTimeException(instruction);
+                                        } else {
+                                            Deadline deadline = new Deadline(subString_deadline.split(" /by ")[0],
+                                                    subString_deadline.split(" /by ")[1]);
+                                            task[order] = deadline;
+                                        }
+                                        break;
+                                    case EVENT:
+                                        String subString_event = cmd.substring(6);
+                                        if (subString_event.split(" /at ").length == 1) {
+                                            throw new NoTimeException(instruction);
+                                        } else {
+                                            Event event = new Event(subString_event.split(" /at ")[0],
+                                                    subString_event.split(" /at ")[1]);
+                                            task[order] = event;
+                                        }
+                                        break;
+                                    default:
+                                        throw new NoCommandException(instruction);
+                                }
+                            }
+                            else {
+                                switch (instruction) {
+                                    case TODO:
                                         throw new NoDescriptionException(instruction);
-                                    }
-                                    else {
-                                        Todo todo = new Todo(cmd.substring(5));
-                                        task[order] = todo;
-                                    }
-                                    break;
-                                case DEADLINE:
-                                    String subString_deadline = cmd.substring(9);
-                                    Deadline deadline = new Deadline(subString_deadline.split(" /by ")[0],
-                                            subString_deadline.split(" /by ")[1]);
-                                    task[order] = deadline;
-                                    break;
-                                case EVENT:
-                                    String subString_event = cmd.substring(6);
-                                    Event event = new Event(subString_event.split(" /at ")[0],
-                                            subString_event.split(" /at ")[1]);
-                                    task[order] = event;
-                                    break;
-                                default:
-                                    throw new NoCommandException(instruction);
+                                    case DEADLINE:
+                                        throw new NoDescriptionException(instruction);
+                                    case EVENT:
+                                        throw new NoDescriptionException(instruction);
+                                    default:
+                                        throw new NoCommandException(instruction);
+                                }
                             }
 
                             System.out.println(INDENTATION + "Got it. I've added this task:");
@@ -144,7 +170,7 @@ public class Duke {
 
 
 
-            } catch (NoDescriptionException | NoCommandException e) {
+            } catch (NoDescriptionException | EmptyTaskListException | NoCommandException | NoTimeException e) {
                 e.printStackTrace();
             }
 
