@@ -153,7 +153,7 @@ public class Duke {
 
     // A-Enums: Set Enums for Task type
     protected enum state {
-        T,D,E
+        T,D,E;
     }
 
     // Level 3 -> A-Classes: Task class that represents all Tasks
