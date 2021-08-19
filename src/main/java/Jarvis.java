@@ -24,8 +24,8 @@ public class Jarvis {
                 if (ActionTypeEnum.identifyActionType(userInput.trim()) == ActionTypeEnum.EXIT) {
                     break;
                 }
-                Action action2 = Action.createAction(userInput);
-                action2.execute(taskList);
+                Action action = Action.createAction(userInput);
+                action.execute(taskList);
             } catch (JarvisException e) {
                 Output.showError(e);
             }
