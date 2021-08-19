@@ -34,10 +34,12 @@
                   [T][ ] borrow book
                 We now have 5 tasks on our list.
                 Don't forget to complete it nya~
+   (=^ ･ｪ･^=) < Nya! This task shall be removed:
+                  [E][ ] project meeting (at: Aug 6th 2-4pm)
+                We now have 4 tasks on our list.
    (=^ ･ｪ･^=) < Have you competed these tasks nya?
                 1. [T][X] read book
                 2. [D][ ] return book (by: June 6th)
-                3. [E][ ] project meeting (at: Aug 6th 2-4pm)
-                4. [T][X] join sports club
-                5. [T][ ] borrow book
+                3. [T][X] join sports club
+                4. [T][ ] borrow book
    (=^ ‐ｪ‐^=) < Already done? Come back again soon nya~

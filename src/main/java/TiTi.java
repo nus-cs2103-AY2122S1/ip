@@ -2,20 +2,20 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Duke {
+public class TiTi {
 
+    public static String normal =   "   (=^ ･ｪ･^=) < ";
+    public static String buffer =   "                ";
+    public static String sleepy =   "   (=^ ‐ｪ‐^=) < ";
+    public static String confused = "   (=^ ･x･^=)? < ";
+    public static String happy =    "   (=^ ･ω･^=)❀ < ";
 
     public static void main(String[] args) {
         ArrayList<Task> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        String starter =   "   (=^ ･ｪ･^=) < ";
-        String buffer =    "                ";
-        String sleepy =    "   (=^ ‐ｪ‐^=) < ";
-        String confused =  "   (=^ ･x･^=)? < ";
-        String happy =     "   (=^ ･ω･^=)❀ < ";
 
         // Welcome text
-        System.out.println(starter + "Hello! I'm TiTi~ ");
+        System.out.println(normal + "Hello! I'm TiTi~ ");
         System.out.println(buffer + "What would you like to do nya? ");
 
         String input = sc.nextLine();
@@ -33,12 +33,12 @@ public class Duke {
                 int numberOfTasks = list.size();
                 // no tasks
                 if (numberOfTasks == 0) {
-                    System.out.println(starter + "Looks like you have no tasks nya~");
+                    System.out.println(normal + "Looks like you have no tasks nya~");
                     input = sc.nextLine();
                     continue;
                 }
                 // print task list
-                System.out.println(starter + "Have you competed these tasks nya?");
+                System.out.println(normal + "Have you competed these tasks nya?");
                 for (int i = 0; i < numberOfTasks; i++) {
                     System.out.println(buffer + (i + 1) + ". " + list.get(i));
                 }
@@ -63,6 +63,24 @@ public class Duke {
                 continue;
             }
 
+            // delete task
+            if (cue.equals("delete")) {
+                int taskNumber = Integer.parseInt("" + input.charAt(7));
+                int numberOfTasks = list.size();
+                if (taskNumber > numberOfTasks) {
+                    System.out.println(confused + "Nya?... I can't find the task...");
+                } else {
+                    Task task = list.get(taskNumber - 1);
+                    System.out.println(normal + "Nya! This task shall be removed:");
+                    System.out.println(buffer + "  " + task.toString());
+                    list.remove(taskNumber - 1);
+                    System.out.println(buffer + countTasks(list));
+                }
+                input = sc.nextLine();
+                continue;
+            }
+
+
             // handle missing description
             if ((cue.equals("todo") || cue.equals("deadline") || cue.equals("event"))
                     && input.split(" ", 2).length == 1) {
@@ -76,7 +94,7 @@ public class Duke {
                 String task = input.split(" ", 2)[1];
                 ToDo todo = new ToDo(task);
                 list.add(todo);
-                System.out.println(starter + "A new task? I'll add this to the list:");
+                System.out.println(normal + "A new task? I'll add this to the list:");
                 System.out.println(buffer + "  " + todo.toString());
                 System.out.println(buffer + countTasks(list));
                 System.out.println(buffer + "Don't forget to complete it nya~");
@@ -92,7 +110,7 @@ public class Duke {
 
                 Deadline deadline = new Deadline(task, time);
                 list.add(deadline);
-                System.out.println(starter + "A new deadline? Sounds tough nya...");
+                System.out.println(normal + "A new deadline? Sounds tough nya...");
                 System.out.println(buffer + "  " + deadline.toString());
                 System.out.println(buffer + countTasks(list));
                 System.out.println(buffer + "Gambatte nya~");
@@ -108,7 +126,7 @@ public class Duke {
 
                 Event event = new Event(task, time);
                 list.add(event);
-                System.out.println(starter + "A new event? Let me record it down:");
+                System.out.println(normal + "A new event? Let me record it down:");
                 System.out.println(buffer + "  " + event.toString());
                 System.out.println(buffer + countTasks(list));
                 System.out.println(buffer + "I'll be waiting nya~");
