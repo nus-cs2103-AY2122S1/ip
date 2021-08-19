@@ -16,11 +16,7 @@ public class Duke {
     private static final String DEADLINE_DELIMITER = "/by";
     private static final String EVENT_DELIMITER = "/at";
 
-    public static void main(String[] args) {
-        Message.display_message(WELCOME_MESSAGE);
-
-        TaskList taskList = new TaskList();
-
+    private static void inputLoop(TaskList taskList) {
         Scanner sc = new Scanner(System.in);
         boolean canContinue = true;
         while (canContinue) {
@@ -90,7 +86,12 @@ public class Duke {
             }
         }
         sc.close();
+    }
 
+    public static void main(String[] args) {
+        Message.display_message(WELCOME_MESSAGE);
+        TaskList taskList = new TaskList();
+        inputLoop(taskList);
         Message.display_message(EXIT_MESSAGE);
     }
 }

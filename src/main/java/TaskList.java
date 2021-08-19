@@ -2,10 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
+    // Messages
     private static final String OUT_OF_BOUNDS_TASK = "Could not find task. Check the task number again?";
     private static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d %s in the list.";
     private static final String ADD_TASK_MESSAGE = "Got it. I've added this task:\n  %s\n" + NUMBER_OF_TASKS_MESSAGE;
     private static final String REMOVE_TASK_MESSAGE = "Noted. I've removed this task:\n %s\n" + NUMBER_OF_TASKS_MESSAGE;
+
+    // Nouns
+    private final String TASK_WORD = this.size() <= 1 ? "task" : "tasks";
 
     private final List<Task> taskArr;
 
@@ -19,7 +23,7 @@ public class TaskList {
 
     public String addTask(Task task) {
         this.taskArr.add(task);
-        return String.format(ADD_TASK_MESSAGE, task, this.size(), this.size() <= 1 ? "task" : "tasks");
+        return String.format(ADD_TASK_MESSAGE, task, this.size(), TASK_WORD);
     }
 
     public String markTaskAsDone(int taskIndex) throws DukeException {
@@ -39,7 +43,7 @@ public class TaskList {
         int index = taskIndex - 1;
         try {
             Task task = taskArr.remove(index);
-            return String.format(REMOVE_TASK_MESSAGE, task, this.size(), this.size() <= 1 ? "task" : "tasks");
+            return String.format(REMOVE_TASK_MESSAGE, task, this.size(), TASK_WORD);
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException(OUT_OF_BOUNDS_TASK);
         }

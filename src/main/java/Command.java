@@ -1,3 +1,4 @@
+// Adapted from https://stackoverflow.com/a/53163279/12499338
 public enum Command {
     BYE {
         @Override
