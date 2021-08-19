@@ -42,6 +42,17 @@ public class Duke {
                     System.out.println(indent + "Sorry, this task does not exist. :(");
                 }
             }
+            else if (str.toLowerCase().contains("delete")) {
+                int taskNo = Integer.parseInt(str.substring(6).trim()) - 1;
+                if (taskNo < taskList.size()) {
+                    Task currTask = taskList.get(taskNo);
+                    taskList.remove(taskNo);
+                    System.out.println(indent + "Ok!! I have removed the following task from your list:");
+                    System.out.println(indent + currTask.toString());
+                    System.out.println(indent + "Now you have " + taskList.size() + " task(s) left~");
+                }
+            }
+            //for the various types of tasks available
             //for todos:
             else if (str.toLowerCase().contains("todo")) {
                 String desc = str.substring(4).trim();
