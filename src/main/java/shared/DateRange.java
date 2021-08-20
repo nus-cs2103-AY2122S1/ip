@@ -71,6 +71,11 @@ public class DateRange {
         return end.isBefore(dateTime);
     }
 
+    public String toStorageString() {
+        return String.format("%s%s%s", Constants.Input.DATETIME_FORMATTER.format(start),
+                Constants.Input.DATE_RANGE_SEPARATOR, Constants.Input.DATETIME_FORMATTER.format(end));
+    }
+
     @Override
     public String toString() {
         String start = Constants.Display.DATETIME_FORMATTER.format(this.start);

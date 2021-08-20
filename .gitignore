@@ -6,6 +6,9 @@
 # Custom class dir
 /dist/
 
+# Local storage folder
+/data/
+
 # Gradle build files
 /.gradle/
 /build/

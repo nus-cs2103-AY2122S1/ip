@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
@@ -45,7 +44,7 @@ public class Deadline extends Task {
     @Override
     public List<String> storageFields() {
         List<String> fields = super.storageFields();
-        fields.add(dueDate.toString());
+        fields.add(Constants.Input.DATETIME_FORMATTER.format(dueDate));
         return fields;
     }
 

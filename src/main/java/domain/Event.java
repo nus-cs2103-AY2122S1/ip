@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
@@ -52,7 +51,7 @@ public class Event extends Task {
     @Override
     public List<String> storageFields() {
         List<String> fields = super.storageFields();
-        fields.add(dateRange.toString());
+        fields.add(dateRange.toStorageString());
 
         return fields;
     }

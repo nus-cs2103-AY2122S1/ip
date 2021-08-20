@@ -1,0 +1,2 @@
+DateTime formatters should be able to accept a wider variety of formats. Either use SimpleDateFormatter
+or https://stackoverflow.com/questions/44600420/datetimeformatter-accepting-multiple-dates-and-converting-to-one-java-time-libr
