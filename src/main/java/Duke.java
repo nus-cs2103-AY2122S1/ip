@@ -7,6 +7,9 @@ public class Duke {
         return new TaskManager();
     }
 
+    /**
+     * Enum class for types of events.
+     */
     enum Type {
         TODO,
         DEADLINE,
