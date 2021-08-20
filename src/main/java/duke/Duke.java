@@ -1,11 +1,7 @@
 package duke;
 
 import duke.command.Command;
-
-import java.io.*;
-import java.time.LocalDate;
-import java.util.Scanner;
-import java.util.ArrayList;
+import duke.exception.DukeException;
 
 
 public class Duke {
