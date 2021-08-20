@@ -13,7 +13,7 @@ src/main/resources/docs/
 *.iml
 bin/
 
-# Duke save files
+# duke save files
 /data/
 /text-ui-test/data/
 

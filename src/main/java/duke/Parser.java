@@ -1,3 +1,16 @@
+package duke;
+
+import duke.Ui.Commands;
+import duke.Ui.Descriptors;
+
+import duke.command.Command;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.DeleteCommand;
+import duke.command.DateCommand;
+import duke.command.AddCommand;
+
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,17 +22,17 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     public static Command parse(String userInput) {
-        if (userInput.equals(Ui.Commands.LIST.getCommand())) {
+        if (userInput.equals(Commands.LIST.getCommand())) {
             // Print tasks
             return new ListCommand(userInput);
         } else {
-            if (userInput.startsWith(Ui.Commands.DONE.getCommand())) {
+            if (userInput.startsWith(Commands.DONE.getCommand())) {
                 // Mark task as done.
                 return new MarkCommand(userInput);
-            } else if (userInput.startsWith(Ui.Commands.DELETE.getCommand())) {
+            } else if (userInput.startsWith(Commands.DELETE.getCommand())) {
                 // Delete a task.
                 return new DeleteCommand(userInput);
-            } else if (userInput.startsWith(Ui.Commands.DATE.getCommand())) {
+            } else if (userInput.startsWith(Commands.DATE.getCommand())) {
                 // Print tasks that fall on given date.
                 return new DateCommand(userInput);
             } else {
@@ -71,7 +84,7 @@ public class Parser {
         return localDate;
     }
 
-    public static int parseUserNumInput(String userInput, Ui.Commands command) throws DukeException {
+    public static int parseUserNumInput(String userInput, Commands command) throws DukeException {
         // Parses integer in user input. Invalid user input could throw NumberFormatException.
         try {
             // Add 1 as user's number input is separated from command by 1 space.
@@ -91,8 +104,8 @@ public class Parser {
         return -1;
     }
 
-    public static String[] parseUserDescriptionInput(String userDescription, Ui.Descriptors descriptor,
-                                                      Character separator, Ui.Commands command) throws DukeException {
+    public static String[] parseUserDescriptionInput(String userDescription, Descriptors descriptor,
+                                                      Character separator, Commands command) throws DukeException {
         // Index of separator in userDescription.
         int separatorIdx = findIndex(userDescription, separator);
 
@@ -111,7 +124,7 @@ public class Parser {
         // User's task description. Decrement by 1 as there is a space between task description and separator
         String commandDescription = userDescription.substring(0, separatorIdx - 1);
 
-        // Events and Deadline could have empty tasks but taken as they do due to their descriptors and time.
+        // Events and duke.task.Deadline could have empty tasks but taken as they do due to their descriptors and time.
         // Need to run another check on whether their task descriptions are empty.
         if (commandDescription.equals("")) {
             throw new DukeException(Ui.exceptionMissingTaskDescription(command.getCommand()));

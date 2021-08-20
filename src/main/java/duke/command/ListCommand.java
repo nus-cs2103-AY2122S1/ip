@@ -1,7 +1,14 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 public class ListCommand extends Command {
     private String userInput;
 
-    ListCommand(String userInput) {
+    public ListCommand(String userInput) {
         this.userInput = userInput;
     }
 
@@ -17,12 +24,12 @@ public class ListCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         // Prints tasks in tasks.
         this.printTasks(tasks, ui);
 
         try {
-            // Saves edited TaskList to save file.
+            // Saves edited duke.TaskList to save file.
             storage.saveTasksToData(tasks);
         } catch (DukeException dukeException) {
             System.out.println(dukeException);

@@ -1,9 +1,22 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
+import duke.Ui.Commands;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 import java.time.LocalDate;
 
 public class DateCommand extends Command {
     private String userInput;
 
-    DateCommand(String userInput) {
+    public DateCommand(String userInput) {
         this.userInput = userInput;
     }
 
@@ -14,7 +27,7 @@ public class DateCommand extends Command {
         int deadlines = 0;
 
         // Parses user input into LocalDate. User input for date will follow "date" command.
-        String dateString = this.userInput.substring(Ui.Commands.DATE.getLength() + 1);
+        String dateString = this.userInput.substring(Commands.DATE.getLength() + 1);
         LocalDate localDate = Parser.toLocalDate(dateString);
         String formattedDateString = Parser.parseLocalDate(localDate);
 
@@ -25,7 +38,7 @@ public class DateCommand extends Command {
         for (Task task : tasks.getTasks()) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
-                if (localDate.equals(deadline.by)) {
+                if (localDate.equals(deadline.getTime())) {
                     counter++;
                     deadlines++;
                     System.out.println(counter + "." + deadline);
@@ -34,7 +47,7 @@ public class DateCommand extends Command {
 
             if (task instanceof Event) {
                 Event event = (Event) task;
-                if (localDate.equals(event.at)) {
+                if (localDate.equals(event.getTime())) {
                     counter++;
                     events++;
                     System.out.println(counter + "." + event);
@@ -47,12 +60,12 @@ public class DateCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             // Print tasks that fall on user specified date.
             this.printTaskAtDate(tasks, ui);
 
-            // Saves edited TaskList to save file.
+            // Saves edited duke.TaskList to save file.
             storage.saveTasksToData(tasks);
         } catch (DukeException dukeException) {
             System.out.println(dukeException);

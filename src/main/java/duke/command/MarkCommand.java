@@ -1,17 +1,26 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
+import duke.Ui.Commands;
+
 public class MarkCommand extends Command {
     private String userInput;
 
-    MarkCommand(String userInput) {
+    public MarkCommand(String userInput) {
         this.userInput = userInput;
     }
 
     private void markTask(TaskList tasks, Ui ui) throws DukeException {
-        if (userInput.length() <= (Ui.Commands.DONE.getLength() + 1)) {
+        if (userInput.length() <= (Commands.DONE.getLength() + 1)) {
             // Missing user input for index of task to be marked as done.
             throw new DukeException(Ui.exceptionMissingIndexForMarking());
         } else {
             // Parses integer in user input.
-            int userNumInput = Parser.parseUserNumInput(this.userInput, Ui.Commands.DONE);
+            int userNumInput = Parser.parseUserNumInput(this.userInput, Commands.DONE);
 
             // Decrement integer from user input to match indexing of tasks.
             int idx = userNumInput - 1;
@@ -30,12 +39,12 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            // Marks Task at user specified index in TaskList.
+            // Marks duke.task.Task at user specified index in duke.TaskList.
             this.markTask(tasks, ui);
 
-            // Saves edited TaskList to save file.
+            // Saves edited duke.TaskList to save file.
             storage.saveTasksToData(tasks);
         } catch (DukeException dukeException) {
             System.out.println(dukeException);

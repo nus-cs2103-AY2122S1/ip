@@ -1,9 +1,13 @@
+package duke;
+
+import duke.task.Task;
+
 /**
- * Stores commands, descriptors and responses used by Duke chatbot.
+ * Stores commands, descriptors and responses used by duke.Duke chatbot.
  */
 public class Ui {
-    // Enums for Duke chatbot descriptors
-    protected enum Descriptors {
+    // Enums for duke.Duke chatbot descriptors
+    public enum Descriptors {
         AT("at"),
         BY("by");
 
@@ -27,8 +31,8 @@ public class Ui {
         }
     }
 
-    // Enums for Duke chatbot commands
-    protected enum Commands {
+    // Enums for duke.Duke chatbot commands
+    public enum Commands {
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event"),

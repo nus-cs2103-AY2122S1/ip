@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,14 +44,14 @@ public class Storage {
 
         // Get task type, done status of task.
         String taskType = task.getTaskType();
-        int done = task.isDone ? 1 : 0;
+        int done = task.getIsDone() ? 1 : 0;
 
         // Build corresponding save string from task.
         stringBuilder.append(taskType).append(SAVE_SEPARATOR);
         stringBuilder.append(done).append(SAVE_SEPARATOR);
-        stringBuilder.append(task.description);
+        stringBuilder.append(task.getDescription());
 
-        // Deadline tasks have time, so it is obtained and appended via stringBuilder.
+        // duke.task.Deadline tasks have time, so it is obtained and appended via stringBuilder.
         if (taskType.equals("D")) {
             Deadline deadline = (Deadline) task;
             LocalDate localDate = deadline.getTime();
@@ -52,7 +59,7 @@ public class Storage {
             stringBuilder.append(SAVE_SEPARATOR).append(time);
         }
 
-        // Event tasks have time, so it is obtained and appended via stringBuilder.
+        // duke.task.Event tasks have time, so it is obtained and appended via stringBuilder.
         if (taskType.equals("E")) {
             Event event = (Event) task;
             LocalDate localDate = event.getTime();
@@ -74,8 +81,8 @@ public class Storage {
             int isDone = Integer.parseInt(saveSplit[1]);
             String description = saveSplit[2];
 
-            // Create corresponding Task object.
-            // Save would be corrupt if Deadline and Event tasks do not have time.
+            // Create corresponding duke.task.Task object.
+            // Save would be corrupt if duke.task.Deadline and duke.task.Event tasks do not have time.
             Task task;
             switch (taskType) {
             case "T":
@@ -104,7 +111,7 @@ public class Storage {
     }
 
     public TaskList readTasksFromData(Ui ui) throws DukeException {
-        // Initialize an ArrayList for Task objects.
+        // Initialize an ArrayList for duke.task.Task objects.
         ArrayList<Task> tasks = new ArrayList<>();
 
         // Get absolute path to save file.
@@ -123,7 +130,7 @@ public class Storage {
             // Read from save file.
             List<String> rawTasks = Files.readAllLines(absolutePathToSaveFile);
 
-            // Parse each line into a Task object and save to tasks.
+            // Parse each line into a duke.task.Task object and save to tasks.
             for (int i = 0; i < rawTasks.size(); i++) {
                 Task task = parseSaveFormat(rawTasks.get(i));
                 tasks.add(task);
@@ -137,7 +144,7 @@ public class Storage {
     }
 
     public void saveTasksToData(TaskList taskList) throws DukeException {
-        // Extracts ArrayList from TaskList object.
+        // Extracts ArrayList from duke.TaskList object.
         ArrayList<Task> tasks = taskList.getTasks();
 
         // Get the absolute path to data subdirectory of project directory.

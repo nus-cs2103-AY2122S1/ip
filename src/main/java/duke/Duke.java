@@ -1,3 +1,9 @@
+package duke;
+
+import duke.Ui.Commands;
+
+import duke.command.Command;
+
 import java.util.Scanner;
 
 /**
@@ -19,7 +25,7 @@ public class Duke {
         } catch (DukeException dukeException) {
             System.out.println(dukeException);
 
-            // If failed to read tasks from save, initialize a new Task ArrayList.
+            // If failed to read tasks from save, initialize a new duke.task.Task ArrayList.
             tasks = new TaskList(ui);
         }
     }
@@ -33,7 +39,7 @@ public class Duke {
 
         // Scans user inputs and prints corresponding outputs until a "Bye" input is received.
         String userInput = sc.nextLine();
-        while (!userInput.equals(Ui.Commands.BYE.getCommand())) {
+        while (!userInput.equals(Commands.BYE.getCommand())) {
             Command command = Parser.parse(userInput);
             command.execute(this.tasks, this.ui, this.storage);
             userInput = sc.nextLine();
@@ -47,9 +53,9 @@ public class Duke {
     }
 
     /**
-     * The main method is runs the Duke chatbot.
+     * The main method is runs the duke.Duke chatbot.
      *
-     * @param args Command line arguments.
+     * @param args duke.command.Command line arguments.
      */
     public static void main(String[] args) {
         Duke duke = new Duke(SAVE_FILENAME);
