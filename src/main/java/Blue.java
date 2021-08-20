@@ -9,11 +9,11 @@ public class Blue {
             + "|____/| || | | | /  _  \\\n"
             + "|  . \\| || |_| ||   ___/\n"
             + "|____/|_||_____| \\_____/\n";
-    private static final String GREET_CONTENT = "Hello! I'm Blue\n"
-            + "What can I do for you?";
-    private static final String EXIT_CONTENT
-            = "Bye. Hope to never see you again!";
+    private static final String GREET_CONTENT = "Hello! I'm Blue\n" + "What can I do for you?";
+    private static final String EXIT_CONTENT = "Bye. Hope to never see you again!";
     private static final List<Task> tasks = new ArrayList<>();
+    private static final TaskList taskList = new TaskList(tasks);
+    private static final ToDoHandler toDoHandler = new ToDoHandler(taskList);
 
     public static void main(String[] args) {
         System.out.println(LOGO);
@@ -43,7 +43,7 @@ public class Blue {
                 listTasks();
                 break;
             case Command.TODO:
-                handleToDo(input);
+                speak(toDoHandler.handle(input));
                 break;
             case Command.DEADLINE:
                 handleDeadline(input);
@@ -72,19 +72,6 @@ public class Blue {
         }
         content += String.join("\n", lines);
         speak(content);
-    }
-
-    private static void handleToDo(String input) {
-        if (input.contains(" ")) {
-            int index = input.indexOf(" ");
-            String title = input.substring(index + 1);
-            ToDo toDo = new ToDo(title);
-            tasks.add(toDo);
-            String content = "Got it. I've added this task:\n" + toDo + "\n";
-            content += "Now you have " + tasks.size() + " tasks in the list.";
-            speak(content);
-        } else
-            speak("☹ OOPS!!! The description of a todo cannot be empty.");
     }
 
     private static void handleDeadline(String input) {
