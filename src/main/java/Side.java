@@ -200,20 +200,20 @@ public class Side {
      */
     private static COMMAND toCommand(String command) {
         switch (command) {
-            case "todo":
-                return COMMAND.TODO;
-            case "deadline":
-                return COMMAND.DEADLINE;
-            case "event":
-                return COMMAND.EVENT;
-            case "list":
-                return COMMAND.LIST;
-            case "done":
-                return COMMAND.DONE;
-            case "delete":
-                return COMMAND.DELETE;
-            default:
-                return COMMAND.INVALID;
+        case "todo":
+            return COMMAND.TODO;
+        case "deadline":
+            return COMMAND.DEADLINE;
+        case "event":
+            return COMMAND.EVENT;
+        case "list":
+            return COMMAND.LIST;
+        case "done":
+            return COMMAND.DONE;
+        case "delete":
+            return COMMAND.DELETE;
+        default:
+            return COMMAND.INVALID;
         }
     }
 
@@ -229,26 +229,26 @@ public class Side {
 
             try {
                 switch (command) {
-                    case TODO:
-                        addTask(userInput, tasks);
-                        break;
-                    case DEADLINE:
-                        addDeadline(userInput, tasks);
-                        break;
-                    case EVENT:
-                        addEvent(userInput, tasks);
-                        break;
-                    case LIST:
-                        printResponse(tasks.toString());
-                        break;
-                    case DONE:
-                        handleDone(userInput, tasks);
-                        break;
-                    case DELETE:
-                        handleDelete(userInput, tasks);
-                        break;
-                    default:
-                        throw new UnknownCommandException();
+                case TODO:
+                    addTask(userInput, tasks);
+                    break;
+                case DEADLINE:
+                    addDeadline(userInput, tasks);
+                    break;
+                case EVENT:
+                    addEvent(userInput, tasks);
+                    break;
+                case LIST:
+                    printResponse(tasks.toString());
+                    break;
+                case DONE:
+                    handleDone(userInput, tasks);
+                    break;
+                case DELETE:
+                    handleDelete(userInput, tasks);
+                    break;
+                default:
+                    throw new UnknownCommandException();
                 }
             } catch (SideException e) {
                 printResponse(e.getMessage());
