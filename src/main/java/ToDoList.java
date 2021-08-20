@@ -1,50 +1,56 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 // immutable principles?
 public final class ToDoList {
-    private final Task[] tasks;
+    private final ArrayList<Task> tasks;
 
     //only objects of class Task go into array
-    @SafeVarargs
-    public static ToDoList of(Task... tasks) {
+//    @SafeVarargs
+    public static ToDoList of(ArrayList<Task> tasks) {
         return new ToDoList(tasks);
     }
-    private ToDoList(Task[] tasks) {
+    private ToDoList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public ToDoList addTask(Task task) {
-        int newLength = tasks.length + 1;
-        Task[] newTasks = new Task[newLength];
-        for (int i = 0; i < tasks.length; i++) {
-            newTasks[i] = this.tasks[i];
-        }
-        newTasks[newLength - 1] = task;
-        return new ToDoList(newTasks);
+    public void addTask(Task task) {
+        this.tasks.add(task);
     }
+//
+//    public void removeTask(Task task) {
+//        this.tasks.remove(task);
+//    }
 
     public Task get(int idx) {
-        return this.tasks[idx];
+        return this.tasks.get(idx);
     }
 
     public int length() {
-        return tasks.length;
+        return tasks.size();
     }
 
     public void toggleDone(int idx) {
-        if (idx < 0 || idx >= this.tasks.length) {
+        if (idx < 0 || idx >= this.tasks.size()) {
             throw new IllegalArgumentException("task index passed in out of range");
         }
-        this.tasks[idx].markCompleted();
+        this.tasks.get(idx).markCompleted();
+    }
+
+    public void removeTask(int idx) {
+        if (idx < 0 || idx >= this.tasks.size()) {
+            throw new IllegalArgumentException("task index passed in out of range");
+        }
+        this.tasks.remove(idx);
     }
 
     @Override
     public String toString() {
         String result = "";
-        int numOfTasks = this.tasks.length;
+        int numOfTasks = this.tasks.size();
         for (int i = 0; i < numOfTasks; i++) {
-            result += String.format("%d: %s\n", i+1, this.tasks[i].toString());
+            result += String.format("%d: %s\n", i+1, this.tasks.get(i).toString());
         };
 //        //add final task without \n
 //        result += String.format("%d: %s", numOfTasks, this.tasks[numOfTasks - 1].toString());

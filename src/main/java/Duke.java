@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ToDoList toDoList = ToDoList.of();
+        ToDoList toDoList = ToDoList.of(new ArrayList<Task>());
 
         displayWithStyle(beginScript()); //display welcome msg
 
@@ -32,7 +33,19 @@ public class Duke {
                                 toDoList.get(idxFrom0).toString()
                         );
                     }
-                } else if (userInput.matches("todo\\s\\w+.*")) {
+                } else if (userInput.matches("delete\s[0-9]{1,2}")) {
+                    //eg. delete 3
+                    String inputBody = userInput.split(" ", 2)[1];
+                    int idxFrom0 = Integer.parseInt(inputBody) - 1;
+                    if (!(idxFrom0 < 0 || idxFrom0 >= numOfTasks)) { //valid argument indexes
+                        msgOutput = String.format(
+                                "Noted. I've removed this task:\n    %s\nNow you have %d tasks in the list.",
+                                toDoList.get(idxFrom0).toString(),
+                                numOfTasks - 1
+                        );
+                        toDoList.removeTask(idxFrom0);
+                    }
+                }else if (userInput.matches("todo\\s\\w+.*")) {
                     //eg. todo read book
                     String inputBody = userInput.split(" ", 2)[1];
                     Task newTask = ToDo.of(inputBody);
@@ -40,7 +53,7 @@ public class Duke {
                             "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
                             newTask.toString(), numOfTasks + 1
                     );
-                    toDoList = toDoList.addTask(newTask);
+                    toDoList.addTask(newTask);
                 } else if (userInput.matches("deadline\s.+\s\\/by\s.+")) {
                     //eg. deadline xxx /by xxx
                     String inputBody = userInput.split(" ", 2)[1];
@@ -53,7 +66,7 @@ public class Duke {
                             "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
                             newTask.toString(), numOfTasks + 1
                     );
-                    toDoList = toDoList.addTask(newTask);
+                    toDoList.addTask(newTask);
                 } else if (userInput.matches("event\s.+\s\\/at\s.+")) {
                     //eg. deadline xxx /by xxx
                     String inputBody = userInput.split(" ", 2)[1];
@@ -66,8 +79,8 @@ public class Duke {
                             "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
                             newTask.toString(), numOfTasks + 1
                     );
-                    toDoList = toDoList.addTask(newTask);
-                } else {
+                    toDoList.addTask(newTask);
+                }  else {
                             throw new DukeException(userInput);
 //                        msgOutput = defaultReplyToInvalidInput();
                 }
