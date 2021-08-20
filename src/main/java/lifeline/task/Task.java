@@ -28,9 +28,9 @@ public class Task {
 
     public String toString() {
         if (isDone) {
-            return "[✓] " + this.name;
+            return "[\u2713] " + this.name;
         } else {
-            return "[✗] " + this.name;
+            return "[\u2717] " + this.name;
         }
     }
 }
