@@ -10,6 +10,10 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public String getDate() {
+        return this.date;
+    }
+
     @Override
     Task setDone() {
         return new Event(this.getBody(), true, this.date);
