@@ -13,6 +13,7 @@ public class Event extends Task {
         return "E";
     }
 
+    @Override
     public LocalDate getTime() {
         return this.at;
     }

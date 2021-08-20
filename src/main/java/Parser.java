@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * deals with making sense of user commands and inputs.
+ * Deals with making sense of user commands and inputs.
  */
 public class Parser {
 
@@ -50,7 +50,7 @@ public class Parser {
         return localDate;
     }
 
-    public static int parseUserNumInput(String userInput, Duke.Commands command) throws DukeException {
+    public static int parseUserNumInput(String userInput, Ui.Commands command) throws DukeException {
         // Parses integer in user input. Invalid user input could throw NumberFormatException.
         try {
             // Add 1 as user's number input is separated from command by 1 space.
@@ -70,8 +70,8 @@ public class Parser {
         return -1;
     }
 
-    public static String[] parseUserDescriptionInput(String userDescription, Duke.Descriptors descriptor,
-                                                      Character separator, Duke.Commands command) throws DukeException {
+    public static String[] parseUserDescriptionInput(String userDescription, Ui.Descriptors descriptor,
+                                                      Character separator, Ui.Commands command) throws DukeException {
         // Index of separator in userDescription.
         int separatorIdx = findIndex(userDescription, separator);
 

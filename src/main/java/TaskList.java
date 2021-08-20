@@ -1,6 +1,10 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Deals with interactions with user.
+ * Responds accordingly to user commands and inputs.
+ */
 public class TaskList {
     ArrayList<Task> tasks;
 
@@ -17,12 +21,12 @@ public class TaskList {
     }
 
     public void markTask(String userInput) throws DukeException {
-        if (userInput.length() <= (Duke.Commands.DONE.getLength() + 1)) {
+        if (userInput.length() <= (Ui.Commands.DONE.getLength() + 1)) {
             // Missing user input for index of task to be marked as done.
             throw new DukeException("An index must be provided to mark task at the index as done.");
         } else {
             // Parses integer in user input.
-            int userNumInput = Parser.parseUserNumInput(userInput, Duke.Commands.DONE);
+            int userNumInput = Parser.parseUserNumInput(userInput, Ui.Commands.DONE);
 
             // Decrement integer from user input to match indexing of tasks.
             int idx = userNumInput - 1;
@@ -42,12 +46,12 @@ public class TaskList {
     }
 
     public void deleteTask(String userInput) throws DukeException {
-        if (userInput.length() <= (Duke.Commands.DELETE.getLength() + 1)) {
+        if (userInput.length() <= (Ui.Commands.DELETE.getLength() + 1)) {
             // Missing user input for index of task to be deleted.
             throw new DukeException("An index must be provided to delete task at index.");
         } else {
             // Parses integer in user input. 1 space is accounted for as it separates command and index.
-            int userNumInput = Parser.parseUserNumInput(userInput, Duke.Commands.DELETE);
+            int userNumInput = Parser.parseUserNumInput(userInput, Ui.Commands.DELETE);
 
             // Decrement integer from user input to match indexing of tasks.
             int idx = userNumInput - 1;
@@ -73,12 +77,12 @@ public class TaskList {
     public void addTask(String userInput, Character separator) throws DukeException {
         // Checks for command given in user input.
         String userCommand;
-        if (userInput.startsWith(Duke.Commands.TODO.getCommand())) {
-            userCommand = Duke.Commands.TODO.getCommand();
-        } else if (userInput.startsWith(Duke.Commands.DEADLINE.getCommand())) {
-            userCommand = Duke.Commands.DEADLINE.getCommand();
-        } else if (userInput.startsWith(Duke.Commands.EVENT.getCommand())) {
-            userCommand = Duke.Commands.EVENT.getCommand();
+        if (userInput.startsWith(Ui.Commands.TODO.getCommand())) {
+            userCommand = Ui.Commands.TODO.getCommand();
+        } else if (userInput.startsWith(Ui.Commands.DEADLINE.getCommand())) {
+            userCommand = Ui.Commands.DEADLINE.getCommand();
+        } else if (userInput.startsWith(Ui.Commands.EVENT.getCommand())) {
+            userCommand = Ui.Commands.EVENT.getCommand();
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -90,13 +94,13 @@ public class TaskList {
         String description = userInput.substring(userCommand.length() + 1);
 
         // Parses description and adds the corresponding task to tasks.
-        if (userCommand.equals(Duke.Commands.TODO.getCommand())) {
+        if (userCommand.equals(Ui.Commands.TODO.getCommand())) {
             // Adds to-do task to tasks.
             this.tasks.add(new Todo(description));
-        } else if (userCommand.equals(Duke.Commands.DEADLINE.getCommand())) {
+        } else if (userCommand.equals(Ui.Commands.DEADLINE.getCommand())) {
             // Parses description into task description and time.
             String[] descriptions =
-                    Parser.parseUserDescriptionInput(description, Duke.Descriptors.BY, separator, Duke.Commands.DEADLINE);
+                    Parser.parseUserDescriptionInput(description, Ui.Descriptors.BY, separator, Ui.Commands.DEADLINE);
 
             // Convert time to LocalDate.
             LocalDate localDate = Parser.toLocalDate(descriptions[1]);
@@ -106,7 +110,7 @@ public class TaskList {
         } else {
             // Parses description into task description and time.
             String[] descriptions =
-                    Parser.parseUserDescriptionInput(description, Duke.Descriptors.AT, separator, Duke.Commands.EVENT);
+                    Parser.parseUserDescriptionInput(description, Ui.Descriptors.AT, separator, Ui.Commands.EVENT);
 
             // Convert time to LocalDate.
             LocalDate localDate = Parser.toLocalDate(descriptions[1]);
@@ -139,7 +143,7 @@ public class TaskList {
         int deadlines = 0;
 
         // Parses user input into LocalDate. User input for date will follow "date" command.
-        String dateString = userInput.substring(Duke.Commands.DATE.getLength() + 1);
+        String dateString = userInput.substring(Ui.Commands.DATE.getLength() + 1);
         LocalDate localDate = Parser.toLocalDate(dateString);
         String formattedDateString = Parser.parseLocalDate(localDate);
 

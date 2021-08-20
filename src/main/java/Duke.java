@@ -1,65 +1,73 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * scans for user input and outputs corresponding Duke chatbot responses.
+ * Handles initialization of storage and tasks and running of chatbot.
  */
 public class Duke {
+    private static final String SAVE_FILENAME = "dukeSave.txt";
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    // Enums for Duke chatbot descriptors
-    protected enum Descriptors {
-        AT("at"),
-        BY("by");
+    public Duke(String fileName) {
+        storage = new Storage(fileName);
 
-        private final String DESCRIPTOR;
+        // Read tasks from save file.
+        try {
+            tasks = storage.readTasksFromData();
+        } catch (DukeException dukeException) {
+            System.out.println(dukeException);
 
-        public String getDescriptor() {
-            return this.DESCRIPTOR;
-        }
-
-        public int getLength() {
-            return this.DESCRIPTOR.length();
-        }
-
-        Descriptors(String descriptor) {
-            this.DESCRIPTOR = descriptor;
-        }
-
-        @Override
-        public String toString() {
-            return this.DESCRIPTOR;
+            // If failed to read tasks from save, initialize a new Task ArrayList.
+            tasks = new TaskList();
         }
     }
 
-    // Enums for Duke chatbot commands
-    protected enum Commands {
-        TODO("todo"),
-        DEADLINE("deadline"),
-        EVENT("event"),
-        DONE("done"),
-        DELETE("delete"),
-        LIST("list"),
-        DATE("date"),
-        BYE("bye");
+    public void run() {
+        // Initialize scanner object.
+        Scanner sc = new Scanner(System.in);
 
-        private final String COMMAND;
+        // Prints greeting to user.
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
-        public String getCommand() {
-            return this.COMMAND;
+        // Scans user inputs and prints corresponding outputs until a "Bye" input is received.
+        String userInput = sc.nextLine();
+        while (!userInput.equals(Ui.Commands.BYE.getCommand())) {
+            handleUserInput(userInput);
+            userInput = sc.nextLine();
         }
+        System.out.println("Bye. Hope to see you again soon!");
 
-        public int getLength() {
-            return this.COMMAND.length();
-        }
+        // Closes scanner object.
+        sc.close();
+    }
 
-        Commands(String command) {
-            this.COMMAND = command;
-        }
+    private void handleUserInput(String userInput) {
+        if (userInput.equals(Ui.Commands.LIST.getCommand())) {
+            // Print tasks
+            this.tasks.printTasks();
+        } else {
+            // Catches thrown DukeException if any.
+            try {
+                if (userInput.startsWith(Ui.Commands.DONE.getCommand())) {
+                    // Mark task as done.
+                    this.tasks.markTask(userInput);
+                } else if (userInput.startsWith(Ui.Commands.DELETE.getCommand())) {
+                    // Delete a task.
+                    this.tasks.deleteTask(userInput);
+                } else if (userInput.startsWith(Ui.Commands.DATE.getCommand())) {
+                    // Print tasks that fall on given date.
+                    this.tasks.printTaskAtDate(userInput);
+                } else {
+                    // Add a task to tasks.
+                    this.tasks.addTask(userInput, '/');
+                }
 
-        @Override
-        public String toString() {
-            return this.COMMAND;
+                // Save tasks to save file after each change.
+                this.storage.saveTasksToData(this.tasks.getTasks());
+            } catch (DukeException dukeException) {
+                System.out.println(dukeException);
+            }
         }
     }
 
@@ -69,64 +77,8 @@ public class Duke {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        // Initialize scanner object.
-        Scanner sc = new Scanner(System.in);
-
-        // Prints greeting to user.
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-
-        // Initialize TaskList.
-        TaskList tasks;
-
-        // Read tasks from save file.
-        try {
-            tasks = Storage.readTasksFromData();
-        } catch (DukeException dukeException) {
-            System.out.println(dukeException);
-
-            // If failed to read tasks from save, initialize a new Task ArrayList.
-            tasks = new TaskList();
-        }
-
-        // Scans user inputs and prints corresponding outputs until a "Bye" input is received.
-        String userInput = sc.nextLine();
-        while (!userInput.equals(Commands.BYE.getCommand())) {
-            handleUserInput(userInput, tasks);
-            userInput = sc.nextLine();
-        }
-        System.out.println("Bye. Hope to see you again soon!");
-
-        // Closes scanner object.
-        sc.close();
-    }
-
-    private static void handleUserInput(String userInput, TaskList tasks) {
-        if (userInput.equals(Commands.LIST.getCommand())) {
-            // Print tasks
-            tasks.printTasks();
-        } else {
-            // Catches thrown DukeException if any.
-            try {
-                if (userInput.startsWith(Commands.DONE.getCommand())) {
-                    // Mark task as done.
-                    tasks.markTask(userInput);
-                } else if (userInput.startsWith(Commands.DELETE.getCommand())) {
-                    // Delete a task.
-                    tasks.deleteTask(userInput);
-                } else if (userInput.startsWith(Commands.DATE.getCommand())) {
-                    // Print tasks that fall on given date.
-                    tasks.printTaskAtDate(userInput);
-                } else {
-                    // Add a task to tasks.
-                    tasks.addTask(userInput, '/');
-                }
-
-                // Save tasks to save file after each change.
-                Storage.saveTasksToData(tasks.getTasks());
-            } catch (DukeException dukeException) {
-                System.out.println(dukeException);
-            }
-        }
+        Duke duke = new Duke(SAVE_FILENAME);
+        duke.run();
     }
 
 }

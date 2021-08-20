@@ -9,12 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * deals with loading tasks from save file and saving tasks in the file.
+ * Deals with loading tasks from save file and saving tasks in the file.
  */
 public class Storage {
 
     // File name for saved tasks.
-    private static final String SAVE_FILENAME = "dukeSave.txt";
+    private final String SAVE_FILENAME;
+
+    public Storage(String fileName) {
+        this.SAVE_FILENAME = fileName;
+    }
 
     // | is a special character that has to be escaped.
     private static final String SAVE_SEPARATOR = " ~ ";
@@ -99,13 +103,13 @@ public class Storage {
         }
     }
 
-    public static TaskList readTasksFromData() throws DukeException {
+    public TaskList readTasksFromData() throws DukeException {
         // Initialize an ArrayList for Task objects.
         ArrayList<Task> tasks = new ArrayList<>();
 
         // Get absolute path to save file.
         String cwd = System.getProperty("user.dir");
-        Path absolutePathToSaveFile = Paths.get(cwd, "data", SAVE_FILENAME);
+        Path absolutePathToSaveFile = Paths.get(cwd, "data", this.SAVE_FILENAME);
 
         // Check if save file exists.
         boolean isSaveFileExist = Files.exists(absolutePathToSaveFile);
@@ -132,7 +136,7 @@ public class Storage {
         return new TaskList(tasks);
     }
 
-    public static void saveTasksToData(ArrayList<Task> tasks) throws DukeException {
+    public void saveTasksToData(ArrayList<Task> tasks) throws DukeException {
 
         // Get the absolute path to data subdirectory of project directory.
         String cwd = System.getProperty("user.dir");
@@ -148,7 +152,7 @@ public class Storage {
             }
 
             // Get absolute path to save file.
-            Path absolutePathToSaveFile = Paths.get(absolutePathToDataDir.toString(), SAVE_FILENAME);
+            Path absolutePathToSaveFile = Paths.get(absolutePathToDataDir.toString(), this.SAVE_FILENAME);
 
             // Check if file exists.
             boolean isSaveFileExist = Files.exists(absolutePathToSaveFile);
