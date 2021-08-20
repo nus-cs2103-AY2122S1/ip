@@ -5,8 +5,8 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor of superclass Task
-     * @param description description of the task
+     * Constructor of superclass Task.
+     * @param description description of the task.
      */
     public Task(String description) {
         this.description = description;

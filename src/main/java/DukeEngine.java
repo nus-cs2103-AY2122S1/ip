@@ -70,8 +70,9 @@ public class DukeEngine {
 
 
     /**
-     * adds a Task object into the taskList
-     * @param inputArr String array containing input by the user
+     * Adds a TooDo Task into the List containing Tasks.
+     * @param inputArr String array containing input by the user.
+     * @throws InvalidCommandException if inputArr length < 2.
      */
     public void addTask(String[] inputArr) throws InvalidCommandException {
         try {
@@ -94,9 +95,9 @@ public class DukeEngine {
     }
 
     /**
-     * Adds a TooDo Task into the List containing Tasks
-     * @param inputArr String array containing input by the user
-     * @throws DescriptionException exception thrown when there are no descriptions provided
+     * Adds a TooDo Task into the List containing Tasks.
+     * @param inputArr String array containing input by the user.
+     * @throws DescriptionException if inputArr length < 2.
      */
     public void addTodo(String[] inputArr) throws DescriptionException {
         if (inputArr.length < 2) {
@@ -113,10 +114,10 @@ public class DukeEngine {
     }
 
     /**
-     * Adds a Deadline Task into the List containing Tasks
-     * @param inputArr String array containing input by the user
-     * @throws DescriptionException exception thrown when there are no descriptions provided
-     * @throws CommandException exception thrown when the specific command(s) for Deadline are not present
+     * Adds a Deadline Task into the List containing Tasks.
+     * @param inputArr String array containing input by the user.
+     * @throws DescriptionException if inputArr length < 2.
+     * @throws CommandException if "/by" is absent from input.
      */
     public void addDeadline(String[] inputArr) throws DescriptionException, CommandException {
         if (inputArr.length < 2) {
@@ -155,10 +156,10 @@ public class DukeEngine {
     }
 
     /**
-     * Adds an Event Task into the List containing Tasks
-     * @param inputArr String array containing input by the user
-     * @throws DescriptionException exception thrown when there are no descriptions provided
-     * @throws CommandException exception thrown when the command(s) for Event are not present
+     * Adds an Event Task into the List containing Tasks.
+     * @param inputArr String array containing input by the user.
+     * @throws DescriptionException if inputArr length < 2.
+     * @throws CommandException if "/at" is absent from input.
      */
     public void addEvent(String[] inputArr) throws DescriptionException, CommandException {
         if (inputArr.length < 2) {
@@ -198,16 +199,17 @@ public class DukeEngine {
     }
 
     /**
-     * Marks a task in the taskList as done
-     * @param index index of the Task in the taskList to be marked as Done, but need to - 1 due to index starting at 0
+     * Marks a task in the taskList as done.
+     * @param taskNumber task number to be marked as done.
+     * @throws TaskNumberException if the number is < 0 or > taskList size.
      */
-    public void markAsDone(Integer index) throws TaskNumberException {
-        if (index > this.taskList.size()) {
+    public void markAsDone(Integer taskNumber) throws TaskNumberException {
+        if (taskNumber > this.taskList.size() || taskNumber < 0) {
             throw new TaskNumberException();
 
         } else {
             //because our list starts from index 0 instead of index 1
-            int realIndex = index - 1;
+            int realIndex = taskNumber - 1;
             this.taskList.get(realIndex).markAsDone();
 
             messages.markAsDoneMessage(this.taskList.get(realIndex).toString());
@@ -215,17 +217,17 @@ public class DukeEngine {
     }
 
     /**
-     * Deletes a task from the Tasks List
-     * @param index the task to be deleted using 1 as the starting index
-     * @throws TaskNumberException exception thrown when the task's index is not present in the list
+     * Deletes a task from the taskList.
+     * @param taskNumber task number to be deleted.
+     * @throws TaskNumberException if the number is < 0 or > taskList size.
      */
-    public void deleteTask(Integer index) throws TaskNumberException {
-        if (index > this.taskList.size() || index < 0) {
+    public void deleteTask(Integer taskNumber) throws TaskNumberException {
+        if (taskNumber > this.taskList.size() || taskNumber < 0) {
             throw new TaskNumberException();
 
         } else {
             //because our list starts from index 0 instead of index 1
-            int realIndex = index - 1;
+            int realIndex = taskNumber - 1;
             String removedTask = this.taskList.get(realIndex).toString();
             this.taskList.remove(realIndex);
             messages.taskDeleteMessage(removedTask, this.taskList.size());

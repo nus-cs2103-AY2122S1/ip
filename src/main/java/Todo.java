@@ -3,8 +3,8 @@ package main.java;
 public class Todo extends Task {
 
     /**
-     * Constructor for a new TooDo object
-     * @param description description of the TooDo Task
+     * Constructor for a new Todo object.
+     * @param description description of the Todo Task.
      */
     public Todo(String description) {
         super(description);

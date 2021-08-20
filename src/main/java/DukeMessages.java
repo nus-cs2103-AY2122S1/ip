@@ -9,7 +9,7 @@ public class DukeMessages {
 
 
     /**
-     * Displays the message input given by the user with horizontal borderlines on both the top and bottom.
+     * Displays message input with horizontal borderlines on top and bottom.
      * @param input String message to be displayed to user
      */
     public void displayText(String input) {
@@ -17,22 +17,22 @@ public class DukeMessages {
     }
 
     /**
-     * Displays the welcome message when the Duke program starts
+     * Displays welcome message when Duke program starts.
      */
     public void welcomeMessage() {
         this.displayText(welcomeMessage);
     }
 
     /**
-     * Displays the goodbye message when the user inputs "bye"
+     * Displays goodbye message when user inputs "bye".
      */
     public void goodbyeMessage() {
         this.displayText(goodbyeMessage);
     }
 
     /**
-     * Displays the message for a task marked as Done
-     * @param taskMarked the task that was marked to be done
+     * Displays the message for a task marked as Done.
+     * @param taskMarked the task that was marked to be done.
      */
     public void markAsDoneMessage(String taskMarked) {
         String message = String.format("Nice! I've marked this task as done:\n  %s", taskMarked);
@@ -40,9 +40,9 @@ public class DukeMessages {
     }
 
     /**
-     * Message displayed when a task is deleted from the Task List
-     * @param taskString the task deleted from the list
-     * @param listSize size of the task list
+     * Message displayed when a task is deleted.
+     * @param taskString the task deleted from the list.
+     * @param listSize size of the task list after deletion.
      */
     public void taskDeleteMessage(String taskString, int listSize) {
         String message = "Noted. I've removed this task:\n" + taskString + "\n";
@@ -51,16 +51,16 @@ public class DukeMessages {
     }
 
     /**
-     * Displayed when the user inputs "list" and the list is empty
+     * Displays when list is empty.
      */
     public void listEmptyMessage() {
         this.displayText("Your List is Empty");
     }
 
     /**
-     * Message displayed when a task is added to the Task List
-     * @param taskString the task added to the list
-     * @param listSize size of the task list
+     * Message displayed when a task is added.
+     * @param taskString the task added.
+     * @param listSize size of the task list after the addition.
      */
     public void taskAddMessage(String taskString, int listSize) {
         String message = "Got it. I've added this task:\n" + taskString + "\n";
@@ -69,8 +69,8 @@ public class DukeMessages {
     }
 
     /**
-     * Displays all the items in the taskList and their completion status.
-     * @param taskList the list containing Task objects
+     * Displays all items and their completion status.
+     * @param taskList the list containing Task objects.
      */
     public void displayListItems(List<Task> taskList) {
 
