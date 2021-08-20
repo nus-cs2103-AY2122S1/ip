@@ -52,7 +52,7 @@ public class StringHelpers {
 
     // reference
     // https://stackoverflow.com/questions/15888934/how-to-indent-a-multi-line-paragraph-being-written-to-the-console-in-java
-    
+
     /**
      * Returns a given string indented by tabs.
      * 
