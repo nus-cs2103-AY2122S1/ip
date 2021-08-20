@@ -45,5 +45,6 @@ public class Duke {
                 tasklist.actionHalder(splited);
             }
         }
+        input.close();
     }    
 }
