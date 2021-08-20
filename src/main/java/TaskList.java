@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -30,7 +34,7 @@ public class TaskList {
      */
     public void add(Matcher input, TaskType type) {
         Optional.ofNullable(
-                TaskType.getTask(input, type))
+                TaskType.getNewTask(input, type))
                     .map(task -> {
                         System.out.println("Got it. I've added this task:");
                         System.out.println(Ui.OUTPUT_SPACES + task);
@@ -81,14 +85,18 @@ public class TaskList {
 
     /**
      * Displays the list of tasks
+     *
+     * @param pred Predicate to filter; true to display the tasks
      */
-    public void displayList() {
+    public void displayList(Predicate<Task> pred) {
         if (tasks.size() == 0) {
             System.out.println(Ui.OUTPUT_DISPLAY + "There is nothing to display! :angery:");
         } else {
-            System.out.println(Ui.OUTPUT_DISPLAY + "Displaying List:");
+            // Use of streams here?
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(Ui.OUTPUT_SPACES + (i + 1) + "." + tasks.get(i));
+                if (pred.test(tasks.get(i))) {
+                    System.out.println(Ui.OUTPUT_SPACES + (i + 1) + "." + tasks.get(i));
+                }
             }
         }
     }

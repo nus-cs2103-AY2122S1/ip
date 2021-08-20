@@ -1,13 +1,10 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 public class TaskEvent extends Task {
-    private LocalDate at;
-    private String time;
-
-    public TaskEvent(String description, LocalDate date, String time) {
-        this(description, date, time,false);
-    }
+    private final LocalDate at;
+    private final String time;
 
     public TaskEvent(String description, LocalDate date, String time, boolean done) {
         super(description, done);
@@ -27,7 +24,9 @@ public class TaskEvent extends Task {
         String checkBox = done
                 ? "[X] "
                 : "[ ] ";
-        return "[E]" + checkBox + description + " (at: " + at + (!time.equals("") ? " " + time : "") + ")";
+        return "[E]" + checkBox + description
+                + " (at: " + at + (!time.equals("") ? " "
+                + time : "") + ")";
     }
 
     @Override
@@ -37,6 +36,11 @@ public class TaskEvent extends Task {
                 + this.description + '\t'
                 + this.at + '\t'
                 + this.time;
+    }
+
+    @Override
+    boolean isDate(LocalDate date) throws DateTimeParseException {
+        return date.equals(at);
     }
 
 

@@ -1,8 +1,8 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class TaskTodo extends Task {
 
-    public TaskTodo(String description) {
-        this(description, false);
-    }
     public TaskTodo(String description, boolean done) {
         super(description, done);
     }
@@ -22,6 +22,13 @@ public class TaskTodo extends Task {
 
     @Override
     String saveString() {
-        return "T" + '\t' + (this.done ? "1" : "0") + '\t' + this.description;
+        return "T" + '\t'
+                + (this.done ? "1" : "0") + '\t'
+                + this.description;
+    }
+
+    @Override
+    boolean isDate(LocalDate date) throws DateTimeParseException {
+        return false;
     }
 }

@@ -2,12 +2,12 @@
  * Main Duke class
  */
 public class Duke {
-    final DukeListener listener;
-    final TaskList taskList;
+    private final DukeListener listener;
+    private final TaskList taskList;
 
     /**
      * Constructor
-     * Instantiates a Task List and a DukeListener for Duke
+     * Instantiates a (saved) Task List and a DukeListener for Duke
      */
     private Duke() {
         taskList = Storage.loadList();

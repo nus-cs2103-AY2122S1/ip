@@ -9,23 +9,23 @@ public enum TaskType {
     DEADLINE;
 
     /**
-     * Based on the type provided, return the corresponding class
+     * Based on the type provided, return the corresponding class from info provided by Matcher
      *
      * @param input Groups of information needed for the task
      * @param type Type of task to use
      * @return A Task that matches that of its TaskType
      */
-    public static Task getTask(Matcher input, TaskType type) {
+    public static Task getNewTask(Matcher input, TaskType type) {
         try {
             switch(type) {
                 case TODO:
-                    return new TaskTodo(input.group(1));
+                    return new TaskTodo(input.group(1), false);
                 case DEADLINE:
                     // Description, date, time
-                    return new TaskDeadline(input.group(1), getDate(input.group(2)), input.group(3));
+                    return new TaskDeadline(input.group(1), getDate(input.group(2)), input.group(3), false);
                 case EVENT:
                     // Description, date, time
-                    return new TaskEvent(input.group(1), getDate(input.group(2)), input.group(3));
+                    return new TaskEvent(input.group(1), getDate(input.group(2)), input.group(3), false);
                 default: return null;
             }
         } catch (DateTimeParseException e) {
@@ -34,10 +34,14 @@ public enum TaskType {
         }
     }
 
-    private static LocalDate getDate(String date) throws DateTimeParseException {
+    /** Converts a string to a date
+     *
+     * @param date String to convert
+     * @return LocalDate object
+     * @throws DateTimeParseException Thrown if error in parsing
+     */
+    public static LocalDate getDate(String date) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         return LocalDate.parse(date, formatter);
     }
-
-
 }

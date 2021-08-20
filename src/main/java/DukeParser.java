@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +17,7 @@ public class DukeParser {
     Pattern todoPattern = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
     Pattern deadlinePattern = Pattern.compile("deadline (.+) /by (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?", Pattern.CASE_INSENSITIVE);
     Pattern eventPattern = Pattern.compile("event (.+) /at (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?", Pattern.CASE_INSENSITIVE);
+    Pattern findPattern = Pattern.compile("find (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?", Pattern.CASE_INSENSITIVE);
 
     /**Constructor
      *
@@ -25,8 +27,7 @@ public class DukeParser {
         this.taskList = tasks;
     }
 
-    /** Checks an input passed in and matches the input with any valid command
-     * then redirects the info to the correct function
+    /** Parses Input for any list related functions, and carries it out
      *
      * @param input String input from the Listener given by the User
      */
@@ -36,10 +37,11 @@ public class DukeParser {
         Matcher checkTodo = todoPattern.matcher(input);
         Matcher checkDeadline = deadlinePattern.matcher(input);
         Matcher checkEvent = eventPattern.matcher(input);
+        Matcher checkFind = findPattern.matcher(input);
 
         if (input.equals("list")) {
             // Display items
-            taskList.displayList();
+            taskList.displayList(task -> true);
 
         } else if (checkDone.matches()) {
             // Toggles completion of a task
@@ -60,6 +62,14 @@ public class DukeParser {
         } else if (checkEvent.matches()) {
             // Add an event to list
             taskList.add(checkEvent, TaskType.EVENT);
+
+        } else if (checkFind.matches()) {
+            //Display list of dates
+            try {
+                taskList.displayList(task -> task.isDate(TaskType.getDate(checkFind.group(1))));
+            } catch (DateTimeParseException e) {
+                System.out.println("Please enter a valid date! :(");
+            }
 
         } else {
             // Invalid command

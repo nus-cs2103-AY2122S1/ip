@@ -26,9 +26,14 @@ public class DukeListener {
             System.out.println(Ui.LINE);
 
             // Stop listening if "gubbai" is mentioned
-            if (input.equals("gubbai")) { break; }
-
-            parser.parseInput(input);
+            if (input.equals("gubbai")) {
+                break;
+            } else if (input.equals("help")) {
+                Ui.displayHelp();
+            } else {
+                // TaskList related inputs
+                parser.parseInput(input);
+            }
             System.out.println(Ui.LINE);
         }
 
