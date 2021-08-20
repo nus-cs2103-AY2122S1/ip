@@ -1,5 +1,6 @@
 import exceptions.NoSuchCommandException;
 import commands.Command;
+import commands.DeleteCommand;
 import commands.ReadCommand;
 import commands.ReturnCommand;
 import commands.ToDoCommand;
@@ -17,6 +18,7 @@ public class CommandConverter {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
+    private static final String DELETE_COMMAND = "delete";
 
 
     
@@ -53,6 +55,8 @@ public class CommandConverter {
     private Command extractNormalCommand(String commandName, String fullCommandInput) throws NoSuchCommandException {
         if (commandName.equals(READ_COMMAND)) {
             return new ReadCommand(fullCommandInput);
+        } else if (commandName.equals(DELETE_COMMAND)) {
+            return new DeleteCommand(fullCommandInput);
         } else if (commandName.equals(RETURN_COMMAND)) {
             return new ReturnCommand(fullCommandInput);
         } else if (commandName.equals(LIST_COMMAND)) {
@@ -68,6 +72,8 @@ public class CommandConverter {
 
 
     private boolean isNormalCommandType(String commandName) {
-        return (!commandName.equals(TODO_COMMAND)) && (!commandName.equals(DEADLINE_COMMAND)) && (!commandName.equals(EVENT_COMMAND));
+        return (!commandName.equals(TODO_COMMAND)) && 
+        (!commandName.equals(DEADLINE_COMMAND)) && 
+        (!commandName.equals(EVENT_COMMAND));
     }
 }

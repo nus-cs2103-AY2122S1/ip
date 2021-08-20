@@ -2,7 +2,7 @@ package commands;
 import java.util.List;
 
 public class ListCommand extends ExecutableCommand {
-    private static final String ListMessage = "Here are the tasks in your list:";
+    private static final String LIST_MESSAGE = "Here are the tasks in your list:";
 
     public ListCommand(String desc) {
         super(desc);
@@ -15,7 +15,7 @@ public class ListCommand extends ExecutableCommand {
 
     @Override
     public void execute(List<Command> commandList) {
-        System.out.println(ListMessage);
+        System.out.println(LIST_MESSAGE);
         for (int i = 1; i <= commandList.size(); i++) {
             NonExecutableCommand com = (NonExecutableCommand) commandList.get(i - 1);
             NonExecutableCommand listedCom = com.isListed();
