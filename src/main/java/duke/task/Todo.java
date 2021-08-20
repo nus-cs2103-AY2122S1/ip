@@ -15,6 +15,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    private Todo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
     /**
      * Factory duke.tasks.Todo method.
      *
@@ -23,6 +27,10 @@ public class Todo extends Task {
      */
     public static Todo of(String description) {
         return new Todo(description);
+    }
+
+    public static Todo of(String description, boolean isDone) {
+        return new Todo(description, isDone);
     }
 
     @Override

@@ -60,7 +60,7 @@ public abstract class Task {
             task = Event.of(description, (String) obj.get("date"), isDone);
             break;
         case TODO:
-            task = Todo.of(description);
+            task = Todo.of(description, isDone);
             break;
         default:
             throw new UnknownTaskTypeException(taskType);
