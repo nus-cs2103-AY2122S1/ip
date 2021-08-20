@@ -23,8 +23,10 @@ public class BotManager {
                     break;
                 } else if (command.equalsIgnoreCase("list")) {
                     this.list();
-                } else if (Pattern.compile("done\\s\\d+").matcher(command.toLowerCase()).matches()) {
-                    this.markTaskDone(command.substring(5));
+                } else if (Pattern.compile("done\\s+\\d+\\s*").matcher(command.toLowerCase()).matches()) {
+                    this.markTaskDone(command.substring(4).trim());
+                } else if (Pattern.compile("delete\\s+\\d+\\s*").matcher(command.toLowerCase()).matches()) {
+                    this.deleteTask(command.substring(6).trim());
                 } else if (Pattern.compile("(?i)todo.*").matcher(command).matches()) {
                     this.addTodo(command);
                 } else if (Pattern.compile("(?i)deadline.*").matcher(command).matches()) {
@@ -88,7 +90,7 @@ public class BotManager {
     private void added() {
         Response.respond("Got it. I've added this task: \n"
         + "  " + tasks.get(tasks.size() - 1).toString() + "\n"
-        + "Now you have " + tasks.size() + " tasks in the list.");
+        + this.numOfTasks());
     }
 
     private void markTaskDone(String index) {
@@ -97,12 +99,26 @@ public class BotManager {
             Task currTask = tasks.get(indexInt);
             currTask.markDone();
             Response.respond("Nice! I've marked this task as done:\n"
-                    + currTask.toString());
+                    + "  " + currTask.toString());
         } else {
             Response.respond("That task doesn't exist.\nPlease Try again.");
         }
     }
 
+    private void deleteTask(String index) {
+        int indexInt = Integer.parseInt(index) - 1;
+        if (indexInt < tasks.size() && indexInt > -1) {
+            Task currTask = tasks.get(indexInt);
+            tasks.remove(indexInt);
+            Response.respond("Noted. I've removed this task:\n"
+                    + "  " + currTask.toString() + "\n"
+                    + this.numOfTasks());
+            
+        } else {
+            Response.respond("That task doesn't exist.\nPlease Try again.");
+        }
+    }
+    
     private void list() {
         if (tasks.size() > 0) {
             Response.drawLine();
@@ -112,11 +128,20 @@ public class BotManager {
             }
             Response.drawLine();
         } else {
-            Response.respond("There are no tasks in your list.");
+            Response.respond(this.numOfTasks());
         }
     }
 
     private void commandFail() {
         throw new DukeException("I didn't get that. Please try again.");
+    }
+    
+    private String numOfTasks() {
+        if (tasks.size() > 0) {
+            return "Now you have " + tasks.size() + " tasks in the list.";
+        } else {
+            return "There are no tasks in your list.";
+        }
+        
     }
 }
