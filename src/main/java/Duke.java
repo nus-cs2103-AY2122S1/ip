@@ -4,6 +4,11 @@ public class Duke {
     private static int listSize = 0;
     private static Task[] list = new Task[100]; // List to store all the tasks
 
+    /**
+     * Interprets and calls the necessary function for all user inputs.
+     *
+     * @param input the user input
+     */
     public static void handleInput(String input) {
         try {
             if (input.equals("list")) {
@@ -22,6 +27,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Attempts to create a new task based on user input.
+     *
+     * @param desc the user input
+     * @throws IllegalArgumentException
+     */
     public static void addTask(String desc) throws IllegalArgumentException {
         Task newTask;
         if (desc.startsWith("todo ")) {
@@ -40,12 +51,24 @@ public class Duke {
         System.out.println("added: " + newTask);
     }
 
+    /**
+     * Takes in a string that is supposed to contain slash, which is when the user is creating a deadline or event.
+     * Finds the position of the slash character.
+     *
+     * @param desc
+     * @return the integer position of the slash character
+     */
     public static int findEscape(String desc) {
         int escapePos = desc.indexOf("/");
         if (escapePos < 0) throw new IllegalArgumentException("Please provide a duration or deadline.");
         return escapePos;
     }
 
+    /**
+     * Interprets and executes a command to complete a specific task.
+     *
+     * @param input the user input that starts with 'done'
+     */
     public static void completeTask(String input) {
         int completedTaskNumber;
         try {
@@ -61,6 +84,11 @@ public class Duke {
         System.out.println(list[completedTaskNumber]);
     }
 
+    /**
+     * Interprets and executes a command to delete a specific task.
+     *
+     * @param input the user input that starts with 'delete'
+     */
     public static void deleteTask(String input) {
         int deletedTaskNumber;
         try {
