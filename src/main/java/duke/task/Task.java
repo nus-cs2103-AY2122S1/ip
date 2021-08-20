@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 
 public class Task {
@@ -31,6 +33,6 @@ public class Task {
         if (done) {
             indicator = '1';
         }
-        return indicator + "-" + this.description;
+        return indicator + "|" + this.description;
     }
 }

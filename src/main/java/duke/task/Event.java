@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -21,6 +23,6 @@ public class Event extends Task {
 
     @Override
     public String saveString() {
-        return "E-" + super.saveString() + "-" + at;
+        return "E|" + super.saveString() + "|" + at;
     }
 }
