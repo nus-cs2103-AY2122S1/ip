@@ -6,12 +6,17 @@ import duke.task.DatedTask;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class TaskList {
     private ArrayList<Task> list;
 
     public TaskList() {
         list = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> list) {
+        this.list = list;
     }
 
     public void add(Task task) {
@@ -53,5 +58,11 @@ public class TaskList {
                 .filter((task) -> ((DatedTask) task).getDate().equals(date))
                 .map(Object::toString)
                 .toArray(String[]::new);
+    }
+  
+    public void forEach(Consumer<Task> consumer) {
+        for (int i = 0; i < size(); i++) {
+            consumer.accept(list.get(i));
+        }
     }
 }

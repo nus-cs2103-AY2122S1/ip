@@ -3,6 +3,7 @@ package duke.task;
 import duke.date.Date;
 import duke.exception.BadInputFormatException;
 import duke.exception.InvalidDateException;
+import org.json.simple.JSONObject;
 
 /**
  * Represents an duke.tasks.Event object.
@@ -28,6 +29,10 @@ public class Event extends DatedTask {
         super(description, at);
     }
 
+    private Event(String description, String at, boolean isDone) {
+        super(description, at, isDone);
+    }
+
     /**
      * Factory duke.tasks.Event method.
      *
@@ -37,6 +42,10 @@ public class Event extends DatedTask {
      */
     public static Event of(String description) throws BadInputFormatException, InvalidDateException {
         return new Event(description);
+    }
+  
+    public static Event of(String description, String at, boolean isDone) {
+        return new Event(description, at, isDone);
     }
 
     private static Date parseToDate(String description) throws BadInputFormatException, InvalidDateException {
@@ -58,5 +67,16 @@ public class Event extends DatedTask {
     @Override
     public String toString() {
         return String.format("[E]%s %s (at: %s)", isDone ? "[X]" : "[ ]", description, date);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public JSONObject toJSONObject() {
+        JSONObject obj = new JSONObject();
+        obj.put("type", "event");
+        obj.put("description", description);
+        obj.put("isDone", isDone);
+        obj.put("date", date);
+        return obj;
     }
 }

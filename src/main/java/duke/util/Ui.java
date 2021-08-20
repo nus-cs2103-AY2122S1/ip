@@ -21,6 +21,14 @@ public class Ui {
         System.out.println("\t" + errorMessage);
     }
 
+    public void showLoadSuccess() {
+        System.out.println("Found a save, loading......");
+    }
+
+    public void showLoadingError() {
+        System.out.println("No saves found!");
+    }
+
     public void showWelcome() {
         System.out.println("Hello from");
         System.out.println(LOGO);

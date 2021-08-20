@@ -3,6 +3,7 @@ package duke.command;
 import duke.date.Date;
 import duke.exception.BadInputFormatException;
 import duke.exception.InvalidDateException;
+import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
@@ -25,7 +26,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() < 1) {
             ui.print("No tasks yet!");
             return;

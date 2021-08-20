@@ -10,6 +10,11 @@ public abstract class DatedTask extends Task {
         this.date = date;
     }
 
+    protected DatedTask(String description, String date, boolean isDone) {
+        super(description, isDone);
+        this.date = date;
+    }
+  
     public Date getDate() {
         return date;
     }
