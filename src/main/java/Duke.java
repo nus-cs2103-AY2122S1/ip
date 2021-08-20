@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -111,7 +112,7 @@ class Duke {
                     tasks.add(newItem);
                     displayAddedNew(newItem);
                 }
-            } catch (IllegalArgumentException | IndexOutOfBoundsException | DukeException e) {
+            } catch (IllegalArgumentException | DateTimeParseException | IndexOutOfBoundsException | DukeException e) {
                 System.err.println("\tOops :( " + e);
             } finally {
                 currLine = sc.nextLine();
