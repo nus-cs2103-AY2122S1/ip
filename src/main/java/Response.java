@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Response {
 
     private static final String H_LINE = "------------------------------\n";
