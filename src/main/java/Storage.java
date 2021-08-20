@@ -39,7 +39,7 @@ class Storage {
 
         while (sc.hasNextLine()) {
             String currItem = sc.nextLine();
-            String[] itemDetails = currItem.split("|");
+            String[] itemDetails = currItem.split("~");
 
             Task task;
             switch (itemDetails[0]) {
@@ -53,6 +53,7 @@ class Storage {
                 task = new Event(itemDetails[1], itemDetails[2], itemDetails[3]);
                 break;
             default:
+                System.out.println(itemDetails[0]);
                 throw new DukeException("Unidentifiable saved information.");
             }
             tasks.add(task);

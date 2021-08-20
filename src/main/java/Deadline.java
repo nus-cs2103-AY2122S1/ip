@@ -4,24 +4,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 class Deadline extends Task {
-    private String doneBefore;
     private LocalDate date;
-
-    public Deadline(String name, String doneBefore) {
-        super(name);
-        this.doneBefore = doneBefore;
-        this.date = LocalDate.parse(doneBefore);
-    }
 
     public Deadline(String name, LocalDate date) {
         super(name);
         this.date = date;
-        this.doneBefore = date.toString();
     }
 
     public Deadline(String name, String isDone, String doneBefore) {
         super(name, isDone.equals("1"));
-        this.doneBefore = doneBefore;
+        this.date = LocalDate.parse(doneBefore);
     }
 
     public static Deadline parseNewCommand(String newCommand) throws IllegalArgumentException, DateTimeParseException {
@@ -46,6 +38,6 @@ class Deadline extends Task {
 
     @Override
     public String toSaveString() {
-        return "Deadline|" + super.toSaveString() + "|" + doneBefore;
+        return "Deadline~" + super.toSaveString() + "~" + this.date;
     }
 }

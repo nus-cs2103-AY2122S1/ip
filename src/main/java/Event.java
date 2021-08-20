@@ -3,24 +3,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 class Event extends Task{
-    private String eventDate;
     private LocalDate date;
-
-    public Event(String name, String eventDate) {
-        super(name);
-        this.eventDate = eventDate; // stored internally as YYYY-MM-DD
-        this.date = LocalDate.parse(eventDate);
-    }
 
     public Event(String name, LocalDate date) {
         super(name);
         this.date = date;
-        this.eventDate = date.toString();
     }
 
     public Event(String name, String isDone, String eventDate) {
         super(name, isDone.equals("1"));
-        this.eventDate = eventDate;
+        this.date = LocalDate.parse(eventDate);
     }
 
 
@@ -45,6 +37,6 @@ class Event extends Task{
 
     @Override
     public String toSaveString() {
-        return "Event|" + super.toSaveString() + "|" + eventDate;
+        return "Event~" + super.toSaveString() + "~" + this.date;
     }
 }

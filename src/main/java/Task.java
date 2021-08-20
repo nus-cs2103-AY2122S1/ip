@@ -23,7 +23,7 @@ class Task {
 
     // for saving to local file
     public String toSaveString() {
-        return this.name + "|" + (isDone ? "1" : "0");
+        return this.name + "~" + (isDone ? "1" : "0");
     }
 
     public void setDone(boolean done) {

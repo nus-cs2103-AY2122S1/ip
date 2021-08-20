@@ -14,6 +14,6 @@ class Todo extends Task {
 
     @Override
     public String toSaveString() {
-        return "Todo|" + super.toSaveString();
+        return "Todo~" + super.toSaveString();
     }
 }
