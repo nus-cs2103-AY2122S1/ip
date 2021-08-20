@@ -19,7 +19,7 @@ public class Duke {
 
     public Duke(){
         Sc = new Scanner(System.in);
-        store = new Storage(".\\Data\\duke.txt");
+        store = new Storage("./data/duke.txt");
         taskList = new TaskList();
         this.store.retrieveTasks(taskList);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");

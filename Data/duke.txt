@@ -1,6 +1,0 @@
-TODO|task 1|0
-TODO|task 2|1
-DEADLINE|task 3/bytime 3|0
-DEADLINE|task 4/bytime 4|1
-EVENT|task 5/attime 5|0
-EVENT|task 6/attime 6|1
