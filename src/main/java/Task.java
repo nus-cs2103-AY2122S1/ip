@@ -19,4 +19,9 @@ public class Task {
     public void setDone() {
         isDone = true;
     }
+
+    public String save() {
+        int done = isDone ? 1 : 0;
+        return String.format("%d | %s", done, name);
+    }
 }

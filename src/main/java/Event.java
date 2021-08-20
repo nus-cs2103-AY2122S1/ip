@@ -10,4 +10,8 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%s(at: %s)", super.toString(), time);
     }
+
+    public String save() {
+        return String.format("E | %s| %s", super.save(), time);
+    }
 }

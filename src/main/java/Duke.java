@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,6 +23,22 @@ public class Duke {
             throw new DukeException(String.format(Messages.EMPTY.toString(), start));
         }
         return result;
+    }
+
+    public static void save(ArrayList<Task> lib) throws IOException {
+        String location = "data/duke.txt";
+
+        File f = new File(location);
+        if (!f.exists()) {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+        }
+
+        FileWriter fw = new FileWriter(location);
+        for (Task tsk: lib) {
+            fw.write(tsk.save() + System.lineSeparator());
+        }
+        fw.close();
     }
 
     public static void main(String[] args) {
@@ -102,7 +121,10 @@ public class Duke {
                 } else {
                     throw new DukeException(Messages.KNOWN.toString());
                 }
-            } catch (DukeException e) {
+
+                save(library);
+
+            } catch (DukeException | IOException e) {
                 output += "☹ OOPS!!! " + e.getMessage() + "\n";
             } catch (IndexOutOfBoundsException e) {
                 output += "☹ OOPS!!! "+ Messages.EXIST.toString() +"\n";
