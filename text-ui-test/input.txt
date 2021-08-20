@@ -9,8 +9,11 @@ deadline s
 deadline s /ok Aug 6th
 event k /nope Nov 7th
 todo look /hey Jan 1st
+<<<<<<< HEAD
 abc
 list
 delete 3
 list
+=======
+>>>>>>> main
 bye

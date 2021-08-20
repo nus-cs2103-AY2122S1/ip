@@ -26,6 +26,16 @@ public class Duke {
         }
     }
 
+    public static void MarkDone(int index) throws DukeException{
+        if (index <= 0) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
+        } else {
+            System.out.println("Nice! I've marked this task as done:");
+            list.get(index).MarkDone();
+            System.out.println(" " + list.get(index).PrintTaskInfo());
+        }
+    }
+
     public static void HandleTask(String Message) throws DukeException{
         String task = "";
         String deadline = "";
@@ -40,6 +50,10 @@ public class Duke {
             task = Message.substring(Message.indexOf(" ") + 1, Message.indexOf("/") - 1);
 
             //throw exceptions for deadline or events' format.
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
             if (Message.startsWith("deadline")) {
                 if (Message.indexOf("/by") != -1) {
                     deadline = Message.substring(Message.indexOf("/by") + 3);
@@ -73,6 +87,7 @@ public class Duke {
 
 
         System.out.println("Got it. I've added this task: ");
+<<<<<<< HEAD
 
         TaskType[] tasktypes = TaskType.values();
         String tasktype = Message.substring(0, Message.indexOf(" "));
@@ -83,6 +98,20 @@ public class Duke {
                 list.add(newTask);
                 break;
             }
+=======
+        if (Message.startsWith("todo")) {
+            Task newTask = new ToDos(false, task);
+            System.out.println(" " + newTask.PrintTaskInfo());
+            list.add(newTask);
+        } else if (Message.startsWith("event")) {
+            Task newTask = new Events(false, task, deadline);
+            System.out.println(" " + newTask.PrintTaskInfo());
+            list.add(newTask);
+        } else if (Message.startsWith("deadline")){
+            Task newTask = new Deadlines(false, task, deadline);
+            System.out.println(" " + newTask.PrintTaskInfo());
+            list.add(newTask);
+>>>>>>> main
         }
 
         System.out.println("Now you have " + list.size() + "" +
@@ -126,6 +155,7 @@ public class Duke {
                 break;
             }  else if (Message.equals("list")){
                 PrintList();
+<<<<<<< HEAD
             }  else if (Message.startsWith("done")) {
                 int index = Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1;
 
@@ -143,6 +173,19 @@ public class Duke {
                     e.PrintErrorMessage();
                 }
             } else  {
+=======
+            }
+            else if (Message.startsWith("done")) {
+                int index = Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1;
+
+                try {
+                    MarkDone(index);
+                } catch (DukeException e){
+                    e.PrintErrorMessage();
+                }
+            }
+            else  {
+>>>>>>> main
                 try {
                     HandleTask(Message);
                 } catch (DukeException e)
