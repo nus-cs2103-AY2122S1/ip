@@ -18,6 +18,7 @@ public class Duke {
     private static final String TODO_COMMAND = "todo ";
     private static final String DEADLINE_COMMAND = "deadline ";
     private static final String EVENT_COMMAND = "event ";
+    private static final String DELETE_COMMAND = "delete ";
 
     public static void prompt() {
         String input = "";
@@ -46,7 +47,8 @@ public class Duke {
                     }
 
                     addTask(input);
-
+                } else if (input.startsWith(DELETE_COMMAND)) {
+                    deleteTask(input);
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -71,19 +73,17 @@ public class Duke {
         System.out.print(SEPARATOR);
     }
 
-    public static void taskDone(String taskNumber) throws DukeException {
-        String invalid = "OOPS!!! SPlease enter a valid task number.";
+    public static void taskDone(String taskNumber) {
+        String invalid = "OOPS!!! Please enter a valid task number.";
 
         try {
             int taskNo = Integer.parseInt(taskNumber);
             Task task = taskList.get(taskNo - 1);
+            task.setDone();
+            System.out.print(SEPARATOR + TASK_DONE + task.toString() + "\n" + SEPARATOR);
         } catch (Exception e) {
             System.out.println(invalid);
             prompt();
-        } finally {
-            Task task = taskList.get(Integer.parseInt(taskNumber) - 1);
-            task.setDone();
-            System.out.print(SEPARATOR + TASK_DONE + task.toString() + "\n" + SEPARATOR);
         }
     }
 
@@ -102,7 +102,7 @@ public class Duke {
     }
 
     public static void addTask(String input) throws DukeException {
-        Task newTask = null;
+        Task newTask;
 
         if (input.startsWith(TODO_COMMAND)) {
             newTask = new Todo(input);
@@ -117,6 +117,29 @@ public class Duke {
         taskList.add(newTask);
         addTaskSuffix(newTask);
 
+    }
+
+    public static void deleteTask(String input) {
+
+        try {
+            int taskNum = Integer.parseInt(input.substring(7));
+            Task removedTask = taskList.remove(taskNum - 1);
+            int tasksLeft = taskList.size();
+            String t = tasksLeft == 1 ? " task " : " tasks ";
+
+            System.out.print(SEPARATOR +
+                    "Noted. I've removed this task:\n"
+                    + removedTask.toString()
+                    + "\n"
+                    + "Now you have "
+                    + tasksLeft
+                    + t
+                    + "in the list.\n"
+                    + SEPARATOR);
+
+        } catch (Exception e) {
+            System.out.println("OOPS!!! Please input a valid task number.");
+        }
     }
 
     public static void main(String[] args) {
