@@ -32,4 +32,6 @@ delete 1
 list
 delete 1
 list
+event CS2103T /at 12 Dec 21 3pm
+deadline CS2106 /by 3/9/21 2pm
 bye
