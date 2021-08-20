@@ -11,11 +11,22 @@ import cs2103t.duke.ui.Ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a parser for Duke to parse input from users.
+ */
 public class Parser {
 
     String INVALID_INPUT = Ui.INVALID_INPUT;
     String space = Ui.space;
 
+    /**
+     * Parses the specified input from users.
+     * Returns the corresponding command interpreted from the specified input.
+     *
+     * @param input the one-line input entered by users.
+     * @return the corresponding command interpreted from the specified input.
+     * @throws DukeException if the specified input cannot be interpreted as any existing Duke's command.
+     */
     public Command parseCommand(String input) throws DukeException {
         input = input.trim();  // to remove all leading and trailing space of user's input
         if (input.equals("bye")) {

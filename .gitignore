@@ -18,3 +18,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 src/main/java/META-INF/
 
 data/
+/src/main/java/cs2103t/duke/file.lst
