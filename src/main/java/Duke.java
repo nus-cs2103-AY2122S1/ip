@@ -1,87 +1,29 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Duke {
 
-  private static final String INDENTATION_1 = " ";
-  private static final String INDENTATION_4 = "    ";
-  private static final String INDENTATION_5 = "     ";
-  private static final String BREAK_LINE = "____________________________________________________________";
   private static final List<String> GREETING = List.of("Hello! I'm Fergus' Chatbot", "What can I do for you?");
   private static final String FAREWELL = "Bye. Hope to see you again soon!";
   private static final String LIST = "Here are the tasks in your list:";
+  private static final String SAVE = "Saved the file successfully! The following is saved:\n";
   private static final String ERROR_TODO_MISSING_DESCRIPTION = "☹ OOPS!!! The description of a todo cannot be empty.";
   private static final String ERROR_UNKNOWN_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+  private static final String ERROR_UNKNOWN_FILE_COMMAND = "☹ OOPS!!! The saved file might be corrupted!";
   private static final String ERROR_DELETE_INVALID_INDEX = "☹ OOPS!!! Please state a valid index to delete!";
-
-  private static List<String> addTaskString(String task, String totalTasks) {
-    return List.of(
-      "Got it. I've added this task: ",
-      INDENTATION_1 + task,
-      String.format("Now you have %s tasks in the list.", totalTasks)
-    );
-  }
-
-  private static List<String> deleteTaskString(String task, String totalTasks) {
-    return List.of(
-      "Noted. I've removed this task: ",
-      INDENTATION_1 + task,
-      String.format("Now you have %s tasks in the list.", totalTasks)
-    );
-  }
-
-  private static String getTaskName(String[] commands) {
-    int indexOfDateSeparator = IntStream
-      .range(0, commands.length)
-      .filter(i -> commands[i].equals("/at") || commands[i].equals("/by"))
-      .findFirst()
-      .orElse(commands.length);
-    String[] taskNames = Arrays.copyOfRange(commands, 1, indexOfDateSeparator);
-    return Arrays.stream(taskNames).collect(Collectors.joining(" "));
-  }
-
-  private static String getTaskDate(String[] commands) {
-    int indexOfDateSeparator = IntStream
-      .range(0, commands.length)
-      .filter(i -> commands[i].equals("/at") || commands[i].equals("/by"))
-      .findFirst()
-      .orElse(commands.length);
-    String[] taskNames = Arrays.copyOfRange(commands, indexOfDateSeparator + 1, commands.length);
-    return Arrays.stream(taskNames).collect(Collectors.joining(" "));
-  }
-
-  private static String formatOutput(String inputText) {
-    return INDENTATION_4 + BREAK_LINE + "\n" + INDENTATION_5 + inputText + "\n" + INDENTATION_4 + BREAK_LINE + "\n";
-  }
-
-  private static void print(String inputText) {
-    System.out.println(formatOutput(inputText));
-  }
-
-  private static String formatOutput(List<String> inputText) {
-    String output = INDENTATION_4 + BREAK_LINE + "\n";
-    for (int i = 0; i < inputText.size(); i++) {
-      output += INDENTATION_5 + inputText.get(i) + "\n";
-    }
-    output += INDENTATION_4 + BREAK_LINE + "\n";
-    return output;
-  }
-
-  private static void print(List<String> inputText) {
-    System.out.println(formatOutput(inputText));
-  }
+  private static final String ERROR_SAVE = "☹ OOPS!!! I am unable to save the file for an unknown reason!";
 
   private static final String BYE_ENUM = "bye";
   private static final String LIST_ENUM = "list";
   private static final String DONE_ENUM = "done";
-  private static final String TODO_ENUM = "todo";
-  private static final String EVENT_ENUM = "event";
-  private static final String DEADLINE_ENUM = "deadline";
+  protected static final String TODO_ENUM = "todo";
+  protected static final String EVENT_ENUM = "event";
+  protected static final String DEADLINE_ENUM = "deadline";
   private static final String DELETE_ENUM = "delete";
+  private static final String SAVE_ENUM = "save";
 
   public static void handleList(List<Task> taskList) {
     List<String> outputList = new ArrayList<>();
@@ -89,13 +31,18 @@ public class Duke {
     for (int i = 0; i < taskList.size(); i++) {
       outputList.add(i + 1 + ". " + taskList.get(i));
     }
-    print(outputList);
+    Printer.print(outputList);
+  }
+
+  public static void handleAddHelper(List<Task> taskList, Task newTask) {
+    taskList.add(newTask);
+    Printer.print(Printer.addTaskString(newTask.toString(), Integer.toString(taskList.size())));
   }
 
   public static void handleAddToDo(List<Task> taskList, String[] command) {
-    String newTaskDescription = getTaskName(command);
+    String newTaskDescription = Printer.getTaskName(command);
     if (newTaskDescription.equals("")) {
-      print(ERROR_TODO_MISSING_DESCRIPTION);
+      Printer.print(ERROR_TODO_MISSING_DESCRIPTION);
       return;
     }
     Todo newTask = new Todo(newTaskDescription);
@@ -103,38 +50,85 @@ public class Duke {
   }
 
   public static void handleAddDeadline(List<Task> taskList, String[] command) {
-    String newTaskDescription = getTaskName(command);
-    String newTaskDate = getTaskDate(command);
+    String newTaskDescription = Printer.getTaskName(command);
+    String newTaskDate = Printer.getTaskDate(command);
     Deadline newTask = new Deadline(newTaskDescription, newTaskDate);
     handleAddHelper(taskList, newTask);
   }
 
   public static void handleAddEvent(List<Task> taskList, String[] command) {
-    String newTaskDescription = getTaskName(command);
-    String newTaskDate = getTaskDate(command);
+    String newTaskDescription = Printer.getTaskName(command);
+    String newTaskDate = Printer.getTaskDate(command);
     Event newTask = new Event(newTaskDescription, newTaskDate);
     handleAddHelper(taskList, newTask);
-  }
-
-  public static void handleAddHelper(List<Task> taskList, Task newTask) {
-    taskList.add(newTask);
-    print(addTaskString(newTask.toString(), Integer.toString(taskList.size())));
   }
 
   public static void handleDone(List<Task> taskList, int index) {
     Task indexedTask = taskList.get(index - 1);
     String output = indexedTask.handleMarkAsDone();
-    print(output);
+    Printer.print(output);
   }
 
   public static void handleDelete(List<Task> taskList, int index) {
-    if (index < -1 || index >= taskList.size()) print(ERROR_DELETE_INVALID_INDEX);
+    if (index < -1 || index >= taskList.size()) Printer.print(ERROR_DELETE_INVALID_INDEX);
     Task deletedTask = taskList.remove(index - 1);
-    print(deleteTaskString(deletedTask.toString(), Integer.toString(taskList.size())));
+    Printer.print(Printer.deleteTaskString(deletedTask.toString(), Integer.toString(taskList.size())));
   }
 
-  public static void handleCommands() {
+  public static void handleSave(List<Task> taskList) {
+    try {
+      String fileContents = Writer.writeToFile(taskList);
+      List<String> fileContentStrings = Arrays.asList(fileContents.split("\n"));
+      List<String> output = new ArrayList<>();
+      output.add(SAVE);
+      output.addAll(fileContentStrings);
+      Printer.print(output);
+    } catch (IOException e) {
+      Printer.print(ERROR_SAVE);
+    }
+  }
+
+  public static List<Task> handleLoadSavedFile() {
+    List<String> taskArrayAsString = Reader.readTasksFromFile();
     List<Task> taskArray = new ArrayList<>();
+
+    if (taskArrayAsString.isEmpty()) {
+      return taskArray;
+    }
+
+    for (String taskAsString : taskArrayAsString) {
+      String[] commands = taskAsString.split(" \\| ");
+      String command = commands[0];
+      boolean done = commands[1].equals("1");
+      String description = commands[2];
+      switch (command) {
+        case EVENT_ENUM:
+          {
+            String date = commands[3];
+            taskArray.add(new Event(description, date, done));
+            break;
+          }
+        case DEADLINE_ENUM:
+          {
+            String date = commands[3];
+            taskArray.add(new Deadline(description, date, done));
+            break;
+          }
+        case TODO_ENUM:
+          {
+            taskArray.add(new Todo(description, done));
+            break;
+          }
+        default:
+          {
+            Printer.print(ERROR_UNKNOWN_FILE_COMMAND);
+          }
+      }
+    }
+    return taskArray;
+  }
+
+  public static void handleCommands(List<Task> taskArray) {
     Scanner scanner = new Scanner(System.in);
     boolean hasCommands = true;
 
@@ -179,17 +173,23 @@ public class Duke {
             handleDelete(taskArray, Integer.parseInt(commands[1]));
             break;
           }
+        case SAVE_ENUM:
+          {
+            handleSave(taskArray);
+            break;
+          }
         default:
           {
-            print(ERROR_UNKNOWN_COMMAND);
+            Printer.print(ERROR_UNKNOWN_COMMAND);
           }
       }
     }
   }
 
   public static void main(String[] args) {
-    print(GREETING);
-    handleCommands();
-    print(FAREWELL);
+    Printer.print(GREETING);
+    List<Task> taskArray = handleLoadSavedFile();
+    handleCommands(taskArray);
+    Printer.print(FAREWELL);
   }
 }
