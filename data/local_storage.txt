@@ -1,0 +1,5 @@
+T | 1 | hello world
+E | 1 | what | 0pm lolz
+T | 1 | nothing
+T | 1 | loool
+T | 0 | hasdas

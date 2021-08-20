@@ -6,7 +6,7 @@ package shared;
  */
 public class DukeException extends RuntimeException {
     public static enum ExceptionCode {
-        UNPROCESSABLE_ENTITY("Unprocessable command"), INCORRECT_ARGS("Incompatible arguments"),
+        UNPROCESSABLE_ENTITY("Unprocessable entity"), INCORRECT_ARGS("Incompatible arguments"),
         FEWER_THAN_EXPECTED_ARGS("Too few arguments provided"), MORE_THAN_EXPECTED_ARGS("Too many arguments provided"),
         OUT_OF_BOUNDS("Out of bounds");
 

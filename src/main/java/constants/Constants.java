@@ -33,4 +33,11 @@ public class Constants {
         }
 
     }
+
+    public static class Storage {
+        public static final String PERSISTENCE_SEPARATOR = "|";
+        public static final String PERSISTENCE_SEPARATOR_REGEX = String.format("\\%s", PERSISTENCE_SEPARATOR);
+        public static final String PERSISTENCE_SEPARATOR_PRETTY = String.format(" %s ", PERSISTENCE_SEPARATOR);
+        public static final String[] PERSISTENCE_LOCATION = { "data", "local_storage.txt" };
+    }
 }

@@ -1,5 +1,10 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+
+import constants.Constants;
 import shared.StringHelpers;
 
 /**
@@ -7,12 +12,18 @@ import shared.StringHelpers;
  */
 public class Task {
     static enum TaskState {
-        NEW(" "), DONE("X");
+        NEW(" ", "0"), DONE("X", "1");
 
         private String representation;
+        private String storedRepresentation;
 
-        private TaskState(String representation) {
+        private TaskState(String representation, String storedRepresentation) {
             this.representation = representation;
+            this.storedRepresentation = storedRepresentation;
+        }
+
+        public String getStoredRepresentation() {
+            return this.storedRepresentation;
         }
 
         public String toString() {
@@ -20,17 +31,38 @@ public class Task {
         }
     }
 
+    public static final String TYPE_STRING = null;
     public String typeString = null;
     private TaskState state;
     public String name;
 
     public Task(String name) {
-        state = TaskState.NEW;
-        this.name = name;
+        try {
+            state = TaskState.NEW;
+            this.name = name;
+            typeString = (String) this.getClass().getField("TYPE_STRING").get(null);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            System.out.println("Reflection error");
+        }
+    }
+
+    public Task(String name, boolean isDone) {
+        try {
+
+            state = isDone ? TaskState.DONE : TaskState.NEW;
+            this.name = name;
+            typeString = (String) this.getClass().getField("TYPE_STRING").get(null);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            System.out.println("Reflection error");
+        }
     }
 
     public void finish() {
         state = TaskState.DONE;
+    }
+
+    public ArrayList<String> storageFields() {
+        return new ArrayList<>(Arrays.asList(this.typeString, this.state.getStoredRepresentation(), name));
     }
 
     @Override

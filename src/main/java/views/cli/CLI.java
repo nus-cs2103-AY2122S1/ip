@@ -1,7 +1,9 @@
 package views.cli;
 
+import java.util.List;
 import java.util.Scanner;
 
+import constants.Constants;
 import interfaces.PrintableMixin;
 import views.cli.strategies.RespondWith;
 
@@ -10,6 +12,7 @@ import views.cli.strategies.RespondWith;
  * user input via the terminal.
  */
 public class CLI implements PrintableMixin {
+    private Loader loader;
     private Greeter greeter;
     private Scanner sc;
     private RespondWith responder;
@@ -21,15 +24,22 @@ public class CLI implements PrintableMixin {
      *                  when fed input.
      */
     public CLI(RespondWith responder) {
+        loader = new Loader();
         greeter = new Greeter();
         sc = new Scanner(System.in);
         this.responder = responder;
+    }
+
+    public void init() {
+        List<String> dataList = loader.loadRelative(Constants.Storage.PERSISTENCE_LOCATION);
+        responder.load(dataList);
     }
 
     /**
      * Begins listening to user input.
      */
     public void listen() {
+
         greeter.greet();
 
         String query = "";
@@ -37,7 +47,24 @@ public class CLI implements PrintableMixin {
             query = sc.nextLine();
             print(responder.formatResponse(query));
         } while (!responder.shouldEnd(query));
+
+    }
+
+    /**
+     * Runs before the application terminates.
+     */
+    public void end() {
         sc.close();
+        loader.storeRelative(responder.persistToStore(), Constants.Storage.PERSISTENCE_LOCATION);
+    }
+
+    /**
+     * Main method. Initializes, runs and ends the application gracefully.
+     */
+    public void main() {
+        init();
+        listen();
+        end();
     }
 
 }
