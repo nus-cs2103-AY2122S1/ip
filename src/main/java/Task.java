@@ -43,7 +43,7 @@ public class Task {
     }
 
     /**
-     * Get the corresponding status icon for this task.
+     * Gets the corresponding status icon for this task.
      *
      * @return The String representation of the status for this task
      */
