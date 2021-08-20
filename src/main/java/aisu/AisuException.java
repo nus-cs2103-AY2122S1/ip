@@ -1,3 +1,4 @@
+package aisu;
 /**
  * Exceptions class for Aisu.
  */

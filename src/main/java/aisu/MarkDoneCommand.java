@@ -1,3 +1,4 @@
+package aisu;
 public class MarkDoneCommand extends Command {
     private final int parseInt;
 

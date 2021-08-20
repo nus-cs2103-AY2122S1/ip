@@ -1,3 +1,4 @@
+package aisu;
 public class DeleteCommand extends Command {
     private final int parseInt;
 

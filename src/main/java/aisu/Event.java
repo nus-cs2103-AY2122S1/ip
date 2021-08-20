@@ -1,3 +1,4 @@
+package aisu;
 public class Event extends Task {
     private final String eventPeriod;
 

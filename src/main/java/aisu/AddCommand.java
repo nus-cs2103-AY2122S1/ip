@@ -1,3 +1,5 @@
+package aisu;
+
 public class AddCommand extends Command {
     private final Tasklist.TaskTypes taskType;
     private final String input;

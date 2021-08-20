@@ -1,11 +1,13 @@
-public class ShowListCommand extends Command {
+package aisu;
+public class ExitCommand extends Command {
+
     @Override
     public void execute(Tasklist tasklist, Storage storage, Ui ui) {
-        System.out.println(tasklist);
+        // Does nothing
     }
 
     @Override
     public boolean isExit() {
-        return false;
+        return true;
     }
 }

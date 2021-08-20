@@ -1,3 +1,4 @@
+package aisu;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

@@ -1,3 +1,4 @@
+package aisu;
 public abstract class Command {
     public abstract void execute(Tasklist tasklist, Storage storage, Ui ui) throws AisuException;
 
