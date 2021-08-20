@@ -11,11 +11,9 @@ public class Duke {
                     System.out.println((i + 1) + "." + list[i]);
                 }
             } else if (input.startsWith("done ")) {
-                try {
-                    completeTask(input);
-                } catch (NumberFormatException e) {
-                    addTask(input);
-                }
+                completeTask(input);
+            } else if (input.startsWith("delete ")) {
+                deleteTask(input);
             } else {
                 addTask(input);
             }
@@ -49,13 +47,42 @@ public class Duke {
     }
 
     public static void completeTask(String input) {
-        int completedTaskNumber = Integer.parseInt(input.substring(5)) - 1;
+        int completedTaskNumber;
+        try {
+            completedTaskNumber = Integer.parseInt(input.substring(5)) - 1;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid task number provided.");
+        }
         if (completedTaskNumber < 0 || completedTaskNumber >= listSize) {
             throw new IllegalArgumentException("Task with that task number does not exist.");
         }
         list[completedTaskNumber].complete();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(list[completedTaskNumber]);
+    }
+
+    public static void deleteTask(String input) {
+        int deletedTaskNumber;
+        try {
+            deletedTaskNumber = Integer.parseInt(input.substring(7)) - 1;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid task number provided.");
+        }
+        if (deletedTaskNumber < 0 || deletedTaskNumber >= listSize) {
+            throw new IllegalArgumentException("Task with that task number does not exist.");
+        }
+
+        Task deletedTask = list[deletedTaskNumber];
+
+        // Shift all the tasks 1 unit up
+        for (int i = deletedTaskNumber; i < listSize; i++) {
+            list[i] = list[i+1];
+        }
+        listSize--;
+
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(deletedTask);
+        System.out.println("Now you have " + listSize + " tasks in the list.");
     }
 
     public static void main(String[] args) {
