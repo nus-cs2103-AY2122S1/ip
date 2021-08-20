@@ -4,14 +4,6 @@ import java.util.regex.Pattern;
 
 public class Duke {
   public static void main(String[] args) {
-    /*
-       String logo = " ____        _        \n"
-       + "|  _ \\ _   _| | _____ \n"
-       + "| | | | | | | |/ / _ \\\n"
-       + "| |_| | |_| |   <  __/\n"
-       + "|____/ \\__,_|_|\\_\\___|\n";
-       System.out.println("Hello from\n" + logo);
-       */
     ArrayList<Task> userText = new ArrayList<>();
     String DONE_REGEX = "done [0-9]+";
     String DELETE_REGEX = "delete [0-9]+";
