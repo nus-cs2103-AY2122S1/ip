@@ -11,6 +11,24 @@ public class Storage {
 
     public Storage(String path_to_file){
         file = new File(path_to_file);
+        try {
+            checkExist(file.getParentFile());
+            if(!file.exists()){
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("unable to create file");
+            e.printStackTrace();
+        }
+    }
+
+    private void checkExist(File file){
+        if (file.exists()) {
+            return;
+        } else {
+            checkExist(file.getParentFile());
+            file.mkdir();
+        }
     }
 
     public void retrieveTasks(TaskList taskList) {
