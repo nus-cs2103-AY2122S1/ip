@@ -7,7 +7,6 @@ public class Duke {
     private static final String divider = "____________________________________________________________";
 
 
-
     /**
      * An enum describing the type of task.
      */
