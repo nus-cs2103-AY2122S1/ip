@@ -8,7 +8,7 @@ public class MarkCommand extends Command {
     private void markTask(TaskList tasks, Ui ui) throws DukeException {
         if (userInput.length() <= (Ui.Commands.DONE.getLength() + 1)) {
             // Missing user input for index of task to be marked as done.
-            throw new DukeException("An index must be provided to mark task at the index as done.");
+            throw new DukeException(Ui.exceptionMissingIndexForMarking());
         } else {
             // Parses integer in user input.
             int userNumInput = Parser.parseUserNumInput(this.userInput, Ui.Commands.DONE);
@@ -18,7 +18,7 @@ public class MarkCommand extends Command {
 
             // Checks for invalid index.
             if (idx >= tasks.size() || idx < 0) {
-                throw new DukeException("Index provided for done is either less than 1 or exceeds the length of the list, hence invalid.");
+                throw new DukeException(Ui.exceptionInvalidIndexForMarking());
             }
 
             // Marks task at index as done.

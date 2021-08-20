@@ -17,12 +17,12 @@ public class AddCommand extends Command {
         } else if (this.userInput.startsWith(Ui.Commands.EVENT.getCommand())) {
             userCommand = Ui.Commands.EVENT.getCommand();
         } else {
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(Ui.exceptionInvalidUserCommand());
         }
 
         // Checks if user input contains a task description and obtain it if it exists.
         if (this.userInput.length() <= userCommand.length() + 1) {
-            throw new DukeException("The description of " + userCommand + " cannot be empty.");
+            throw new DukeException(Ui.exceptionMissingTaskDescription(userCommand));
         }
         String description = this.userInput.substring(userCommand.length() + 1);
 

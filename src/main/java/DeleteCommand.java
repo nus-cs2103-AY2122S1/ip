@@ -8,7 +8,7 @@ public class DeleteCommand extends Command {
     private void deleteTask(TaskList tasks, Ui ui) throws DukeException {
         if (this.userInput.length() <= (Ui.Commands.DELETE.getLength() + 1)) {
             // Missing user input for index of task to be deleted.
-            throw new DukeException("An index must be provided to delete task at index.");
+            throw new DukeException(Ui.exceptionMissingIndexForDelete());
         } else {
             // Parses integer in user input. 1 space is accounted for as it separates command and index.
             int userNumInput = Parser.parseUserNumInput(this.userInput, Ui.Commands.DELETE);
@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
 
             // Checks for invalid index.
             if (idx >= tasks.size() || idx < 0) {
-                throw new DukeException("Index provided for delete is either less than 1 or exceeds the length of the list, hence invalid.");
+                throw new DukeException(Ui.exceptionInvalidIndexForDelete());
             }
 
             // Deletes task at index and obtain the deleted task

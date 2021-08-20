@@ -36,7 +36,7 @@ public class Parser {
                 output = "0" + original;
             }
         } else if (original.length() > expected) {
-            throw new DukeException("Invalid datetime format");
+            throw new DukeException(Ui.exceptionInvalidDateTimeFormat());
         }
 
         return output;
@@ -46,7 +46,7 @@ public class Parser {
         try {
             return localDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
         } catch (DateTimeException dateTimeException) {
-            throw new DukeException("Stored date is corrupt.");
+            throw new DukeException(Ui.exceptionInvalidLocalDate());
         }
     }
 
@@ -65,7 +65,7 @@ public class Parser {
         try {
             localDate = LocalDate.parse(stringBuilder.toString());
         } catch (DateTimeParseException dateTimeParseException) {
-            throw new DukeException("Invalid datetime format");
+            throw new DukeException(Ui.exceptionInvalidDateTimeFormat());
         }
 
         return localDate;
@@ -78,7 +78,7 @@ public class Parser {
             return Integer.parseInt(userInput.substring(command.getLength() + 1));
         } catch (NumberFormatException nfe) {
             // Invalid user input cannot be parsed into Integer.
-            throw new DukeException("Index for " + command.getCommand() + " must be an integer.");
+            throw new DukeException(Ui.exceptionInvalidNumberInput(command));
         }
     }
 
@@ -99,8 +99,7 @@ public class Parser {
         // Index of space after descriptor
         int indexDescriptorSpace = separatorIdx + descriptor.getLength() + 1;
         if ((separatorIdx == -1) || (userDescription.length() <= indexDescriptorSpace)) {
-            throw new DukeException("/" + descriptor.getDescriptor() +
-                    " must be provided and not empty for " + command.getCommand() + ".");
+            throw new DukeException(Ui.exceptionMissingDescriptor(descriptor, command));
         }
 
         // Index of first character following space after descriptor.
@@ -115,7 +114,7 @@ public class Parser {
         // Events and Deadline could have empty tasks but taken as they do due to their descriptors and time.
         // Need to run another check on whether their task descriptions are empty.
         if (commandDescription.equals("")) {
-            throw new DukeException("The description of " + command.getCommand() + " cannot be empty.");
+            throw new DukeException(Ui.exceptionMissingTaskDescription(command.getCommand()));
         }
 
         // Returns a String array with the task description and user input after descriptor.

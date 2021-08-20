@@ -96,5 +96,57 @@ public class Ui {
                 events + " events) fall on " + formattedDateString);
     }
 
+    public static String exceptionInvalidUserCommand() {
+        return "I'm sorry, but I don't know what that means :-(";
+    }
+
+    public static String exceptionMissingTaskDescription(String userCommand) {
+        return "The description of " + userCommand + " cannot be empty.";
+    }
+
+    public static String exceptionMissingIndexForDelete() {
+        return "An index must be provided to delete task at index.";
+    }
+
+    public static String exceptionInvalidIndexForDelete() {
+        return "Index provided for delete is either less than 1 or exceeds the length of the list, hence invalid.";
+    }
+
+    public static String exceptionMissingIndexForMarking() {
+        return "An index must be provided to mark task at the index as done.";
+    }
+
+    public static String exceptionInvalidIndexForMarking() {
+        return "Index provided for done is either less than 1 or exceeds the length of the list, hence invalid.";
+    }
+
+    public static String exceptionInvalidDateTimeFormat() {
+        return "Cannot read invalid datetime format";
+    }
+
+    public static String exceptionInvalidLocalDate() {
+        return "Stored date is corrupt and cannot be read.";
+    }
+
+    public static String exceptionInvalidNumberInput(Ui.Commands command) {
+        return "Index for " + command.getCommand() + " must be an integer.";
+    }
+
+    public static String exceptionMissingDescriptor(Ui.Descriptors descriptor, Ui.Commands command) {
+        return "/" + descriptor.getDescriptor() +
+                " must be provided and not empty for " + command.getCommand() + ".";
+    }
+
+    public static String exceptionCorruptSaveFile() {
+        return "Save files corrupted. Failed to read tasks from save file.";
+    }
+
+    public static String exceptionCannotReadFile() {
+        return "Failed to read tasks from save file.";
+    }
+
+    public static String exceptionCannotSaveFile() {
+        return "Failed to save tasks";
+    }
 
 }

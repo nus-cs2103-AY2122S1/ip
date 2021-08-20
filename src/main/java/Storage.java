@@ -27,7 +27,7 @@ public class Storage {
         try {
             return localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (DateTimeException dateTimeException) {
-            throw new DukeException("Stored date is corrupt.");
+            throw new DukeException(Ui.exceptionInvalidLocalDate());
         }
     }
 
@@ -90,7 +90,7 @@ public class Storage {
                 task = new Event(description, at);
                 break;
             default:
-                throw new DukeException("Save files corrupted. Failed to read tasks from save file.");
+                throw new DukeException(Ui.exceptionCorruptSaveFile());
             }
 
             if (isDone == 1) {
@@ -99,7 +99,7 @@ public class Storage {
 
             return task;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException("Save files corrupted. Failed to read tasks from save file.");
+            throw new DukeException(Ui.exceptionCorruptSaveFile());
         }
     }
 
@@ -130,7 +130,7 @@ public class Storage {
             }
         } catch (IOException ioException) {
             // Failure to read from save file.
-            throw new DukeException("Failed to read tasks from save file.");
+            throw new DukeException(Ui.exceptionCannotReadFile());
         }
 
         return new TaskList(ui, tasks);
@@ -186,7 +186,7 @@ public class Storage {
             byte[] textToSaveToBytes = textToSave.getBytes();
             Files.write(absolutePathToSaveFile, textToSaveToBytes);
         } catch (IOException ioException) {
-            throw new DukeException("Failed to save tasks");
+            throw new DukeException(Ui.exceptionCannotSaveFile());
         }
     }
 }
