@@ -1,6 +1,6 @@
 public class Task {
 
-    private boolean completed;
+    public boolean completed;
     private String taskName;
     protected String status;
 
