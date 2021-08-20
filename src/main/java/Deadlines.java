@@ -4,8 +4,8 @@ import java.text.ParseException;
  * Class to store deadline. Subclass of task.
  *
  * @author marcuspeh
- * @version Level-4
- * @since 15 Aug 2021
+ * @version Level-8
+ * @since 20 Aug 2021
  */
 public class Deadlines extends Task {
     /**

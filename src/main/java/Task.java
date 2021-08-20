@@ -6,8 +6,8 @@ import java.util.Date;
  * Abstract Class to manage task stored in chatbot.
  *
  * @author marcuspeh
- * @version Level-4
- * @since 15 Aug 2021
+ * @version Level-8
+ * @since 20 Aug 2021
  */
 public abstract class Task {
     /** Stores the task. */
@@ -17,7 +17,7 @@ public abstract class Task {
     /** Stores the date time for the task */
     private Date dateTime;
     /** Date format */
-    private static final String DATETIME = "dd/MM/yyyy HHmm";
+    private static final String DATETIME = "dd/MM/yy HHmm";
     private static final SimpleDateFormat formatDateTime = new SimpleDateFormat(DATETIME);
 
     /**
