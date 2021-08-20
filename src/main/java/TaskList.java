@@ -43,8 +43,7 @@ public class TaskList {
             this.tasks.get(idx).markAsDone();
 
             // Prints response to user after successfully marking task at index as done.
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(this.tasks.get(idx).toString());
+            this.ui.showMarkSuccess(this.tasks.get(idx));
         }
     }
 
@@ -71,9 +70,7 @@ public class TaskList {
             this.tasks.remove(idx);
 
             // Prints response to user after successfully deleting task at index.
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(tempTask.toString());
-            System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
+            this.ui.showDeleteSuccess(tempTask, this.tasks.size());
         }
     }
 
@@ -123,13 +120,11 @@ public class TaskList {
         }
 
         // Prints response to user after successfully adding task to tasks.
-        System.out.println("Got it. I have added this task:");
-        System.out.println(this.tasks.get(this.tasks.size() - 1).toString());
-        System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
+        this.ui.showAddSuccess(this.tasks.get(this.tasks.size() - 1), this.tasks.size());
     }
 
     public void printTasks() {
-        System.out.println("Here are the tasks in your list:");
+        this.ui.showListSuccess();
         for (int i = 0; i < this.tasks.size(); i++) {
             // Increment i by 1 so number matches display indexing which starts from 1.
             int idx = i + 1;
@@ -151,12 +146,10 @@ public class TaskList {
         String formattedDateString = Parser.parseLocalDate(localDate);
 
         // Print to notify users of the date they are searching for.
-        System.out.println("Here are the Deadlines or Events that fall on " + formattedDateString + ":");
+        this.ui.showDateListSuccess(formattedDateString);
 
         // Print Deadlines and Events with LocalDate that matches date input from user.
-        for (int i = 0; i < this.tasks.size(); i++) {
-            Task task = this.tasks.get(i);
-
+        for (Task task : this.tasks) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 if (localDate.equals(deadline.by)) {
@@ -177,7 +170,6 @@ public class TaskList {
         }
 
         // Print a summary of matching tasks to the user.
-        System.out.println("A total of " + counter + " events (" + deadlines + " deadlines and " +
-                events + " events) fall on " + formattedDateString);
+        this.ui.showDateListSummary(formattedDateString, counter, deadlines, events);
     }
 }

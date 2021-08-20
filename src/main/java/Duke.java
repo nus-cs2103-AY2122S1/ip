@@ -29,7 +29,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         // Prints greeting to user.
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        this.ui.showWelcome();
 
         // Scans user inputs and prints corresponding outputs until a "Bye" input is received.
         String userInput = sc.nextLine();
@@ -37,7 +37,9 @@ public class Duke {
             handleUserInput(userInput);
             userInput = sc.nextLine();
         }
-        System.out.println("Bye. Hope to see you again soon!");
+
+        // Prints goodbye message to user.
+        this.ui.showGoodbye();
 
         // Closes scanner object.
         sc.close();
