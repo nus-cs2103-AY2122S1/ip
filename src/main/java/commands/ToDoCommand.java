@@ -1,5 +1,5 @@
 package commands;
-import assignment.*;
+import assignment.AssignmentType;
 import status.Status;
 public class ToDoCommand extends NonExecutableCommand {
     private static final String assignmentType = AssignmentType.TODO.getStatus();

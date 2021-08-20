@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import commands.*;
+import commands.Command;
 import exceptions.NoSuchCommandException;
 
 public class Duke {

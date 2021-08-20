@@ -1,6 +1,13 @@
 import exceptions.NoSuchCommandException;
-import commands.*;
-
+import commands.Command;
+import commands.ReadCommand;
+import commands.ReturnCommand;
+import commands.ToDoCommand;
+import commands.EventCommand;
+import commands.ByeCommand;
+import commands.DeadlineCommand;
+import commands.ListCommand;
+import commands.DoneCommand;
 public class CommandConverter {
     private static final String READ_COMMAND = "read";
     private static final String RETURN_COMMAND = "return";
@@ -21,38 +28,29 @@ public class CommandConverter {
         String[] commandItems = formatted_input.split(" ");
         String commandInput = commandItems[0];
 
-        if (commandInput.equals(READ_COMMAND)) {
-            return new ReadCommand(formatted_input);
-        } else if (commandInput.equals(RETURN_COMMAND)) {
-            return new ReturnCommand(formatted_input);
-        } else if (commandInput.equals(LIST_COMMAND)) {
-            return new ListCommand(formatted_input);
-        } else if (commandInput.equals(BYE_COMMAND)) {
-            return new ByeCommand(formatted_input);
-        } else if (commandInput.equals(DONE_COMMAND)) {
-            return new DoneCommand(formatted_input);
-        } else if (commandInput.equals(TODO_COMMAND)) {
-            return new ToDoCommand(formatted_input);
-        } else if (commandInput.equals(DEADLINE_COMMAND)) {
-            return new DeadlineCommand(formatted_input);
-        } else if (commandInput.equals(EVENT_COMMAND)) {
-            return new EventCommand(formatted_input);
-        } else {
-            String errorMessage = "Command Not Found";
-            throw new NoSuchCommandException(errorMessage);
-        }
 
-        /*
         if (this.isNormalCommandType(commandInput)) {
             return this.extractNormalCommand(commandInput, formatted_input);
         } else {
-            return this.extractSpecialCommand(commandInput)
-        }       
-        */ 
+            return this.extractSpecialCommand(commandInput, formatted_input, commandItems);
+        }
+
     }
 
-    /*
-    private Command extractNormalCommand(String commandName, String fullCommandInput) {
+    private Command extractSpecialCommand(String commandName, String fullCommandInput, String[] commandList) throws NoSuchCommandException {
+        if (commandList.length == 1) {
+            String errorMessage = "☹ OOPS!!! The description of a " + commandName + " cannot be empty.";
+            throw new NoSuchCommandException(errorMessage);
+        } else if (commandName.equals(TODO_COMMAND)) {
+            return new ToDoCommand(fullCommandInput);
+        } else if (commandName.equals(EVENT_COMMAND)) {
+            return new EventCommand(fullCommandInput);
+        }
+        return new DeadlineCommand(fullCommandInput);
+    }
+
+    
+    private Command extractNormalCommand(String commandName, String fullCommandInput) throws NoSuchCommandException {
         if (commandName.equals(READ_COMMAND)) {
             return new ReadCommand(fullCommandInput);
         } else if (commandName.equals(RETURN_COMMAND)) {
@@ -61,20 +59,15 @@ public class CommandConverter {
             return new ListCommand(fullCommandInput);
         } else if (commandName.equals(BYE_COMMAND)) {
             return new ByeCommand(fullCommandInput);
-        } else {
+        } else if (commandName.equals(DONE_COMMAND)) {
             return new DoneCommand(fullCommandInput);
         }
-        (commandName.equals(DONE_COMMAND))
-        else {
-            String errorMessage = "Command Not Found";
-            throw new NoSuchCommandException(errorMessage);
-        }
+        String errorMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        throw new NoSuchCommandException(errorMessage);
     }
-    
+
 
     private boolean isNormalCommandType(String commandName) {
         return (!commandName.equals(TODO_COMMAND)) && (!commandName.equals(DEADLINE_COMMAND)) && (!commandName.equals(EVENT_COMMAND));
     }
-
-    */
 }

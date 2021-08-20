@@ -1,7 +1,10 @@
-import commands.*;
+import commands.Command;
+import commands.ExecutableCommand;
+import commands.NonExecutableCommand;
 import java.util.List;
 import java.util.ArrayList;
-import status.*;
+import status.Status;
+
 
 public class TasksHandler {
     private final List<Command> allTasks;

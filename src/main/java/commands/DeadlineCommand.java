@@ -1,5 +1,5 @@
 package commands;
-import assignment.*;
+import assignment.AssignmentType;
 import status.Status;
 
 public class DeadlineCommand extends NonExecutableCommand {
@@ -31,6 +31,17 @@ public class DeadlineCommand extends NonExecutableCommand {
 
     @Override
     public String toString() {
+        String outputString = this.getOutputMessage();
+        String assignmentProg = assignmentType + this.status + " " + outputString;
+        if (!this.isListed && this.status.equals(Status.NOT_COMPLETED.getStatus())) {
+            String completionMsg = "Got it. I've added this task:";
+            return completionMsg + "\n" + assignmentProg;
+        }
+        return assignmentProg;
+    }
+
+
+    private String getOutputMessage() {
         StringBuilder sb = new StringBuilder("");
         String[] updatedDesc = this.command_description.split("/");
         sb.append(updatedDesc[0] + "(");
@@ -46,11 +57,6 @@ public class DeadlineCommand extends NonExecutableCommand {
             }
         }
         sb.append(")");
-        String assignmentProg = assignmentType + this.status + " " + sb.toString();
-        if (!this.isListed && this.status.equals(Status.NOT_COMPLETED.getStatus())) {
-            String completionMsg = "Got it. I've added this task:";
-            return completionMsg + "\n" + assignmentProg;
-        }
-        return assignmentProg;
+        return sb.toString();
     }
 }
