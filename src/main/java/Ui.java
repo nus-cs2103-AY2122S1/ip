@@ -95,4 +95,6 @@ public class Ui {
         System.out.println("A total of " + counter + " events (" + deadlines + " deadlines and " +
                 events + " events) fall on " + formattedDateString);
     }
+
+
 }

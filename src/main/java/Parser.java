@@ -8,6 +8,27 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
 
+    public static Command parse(String userInput) {
+        if (userInput.equals(Ui.Commands.LIST.getCommand())) {
+            // Print tasks
+            return new ListCommand(userInput);
+        } else {
+            if (userInput.startsWith(Ui.Commands.DONE.getCommand())) {
+                // Mark task as done.
+                return new MarkCommand(userInput);
+            } else if (userInput.startsWith(Ui.Commands.DELETE.getCommand())) {
+                // Delete a task.
+                return new DeleteCommand(userInput);
+            } else if (userInput.startsWith(Ui.Commands.DATE.getCommand())) {
+                // Print tasks that fall on given date.
+                return new DateCommand(userInput);
+            } else {
+                // Add a task to tasks.
+                return new AddCommand(userInput);
+            }
+        }
+    }
+
     private static String padZeros(String original, int expected) throws DukeException {
         String output = original;
         if (original.length() < expected) {
