@@ -83,7 +83,7 @@ public class Duke {
                 + "Now you have "
                 + taskNo
                 + t
-                + "left in the list.\n"
+                + "in the list.\n"
                 + SEPARATOR);
     }
 
