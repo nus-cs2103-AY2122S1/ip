@@ -10,7 +10,7 @@ public class Duke {
 
     public static void run() {
         CLI chatbot = new CLI(new MultiType());
-        chatbot.listen();
+        chatbot.main();
     }
 
     public static void main(String[] args) {

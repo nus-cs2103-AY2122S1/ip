@@ -1,25 +1,31 @@
 package views.cli.strategies;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
+import constants.Constants;
 import domain.Deadline;
 import domain.Event;
 import domain.Task;
 import domain.Todo;
 import shared.DukeException;
+import shared.DukeException.ExceptionCode;
 
 /**
  * A responder that is able to handle tasks with CRUD functionality.
  */
 public class MultiType extends RespondWith {
+
     private final String list = "list";
     private final String done = "done";
     private final String todo = "todo";
     private final String deadline = "deadline";
     private final String event = "event";
     private final String delete = "delete";
-    private List<Task> userTasks;
+
+    private ArrayList<Task> userTasks;
 
     public MultiType() {
         userTasks = new ArrayList<>();
@@ -29,6 +35,55 @@ public class MultiType extends RespondWith {
         commands.put(deadline, this::addDeadline);
         commands.put(event, this::addEvent);
         commands.put(delete, this::deleteTask);
+    }
+
+    @Override
+    public Task rehydrateFromString(String s) {
+        String[] fields = s.split(Constants.Storage.PERSISTENCE_SEPARATOR_REGEX, -1);
+        for (int i = 0; i < fields.length; i++) {
+            fields[i] = fields[i].strip();
+        }
+        String typeString = fields[0];
+        Task task = null;
+        switch (typeString) {
+            case Todo.TYPE_STRING: {
+                task = Todo.generateFromString(fields);
+                break;
+            }
+            case Event.TYPE_STRING: {
+                task = Event.generateFromString(fields);
+                break;
+            }
+
+            case Deadline.TYPE_STRING: {
+                task = Deadline.generateFromString(fields);
+                break;
+            }
+            default: {
+                throw new DukeException(ExceptionCode.UNPROCESSABLE_ENTITY);
+            }
+        }
+
+        return task;
+    }
+
+    @Override
+    public String persistToStore() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Task task : userTasks) {
+            List<String> fields = task.storageFields();
+            String stringToStore = String.join(Constants.Storage.PERSISTENCE_SEPARATOR_PRETTY, fields);
+            stringBuilder.append(stringToStore);
+            stringBuilder.append(System.lineSeparator());
+        }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public void load(List<String> dataList) {
+        for (String data : dataList) {
+            this.userTasks.add(rehydrateFromString(data));
+        }
     }
 
     private String listString(String _query) {

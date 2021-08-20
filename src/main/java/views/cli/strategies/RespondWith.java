@@ -1,6 +1,7 @@
 package views.cli.strategies;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -65,5 +66,17 @@ public abstract class RespondWith {
      */
     public boolean shouldEnd(String query) {
         return query.equals(endMessage);
+    }
+
+    public Object rehydrateFromString(String s) {
+        return null;
+    }
+
+    public String persistToStore() {
+        return "";
+    }
+
+    public void load(List<String> dataList) {
+
     }
 }
