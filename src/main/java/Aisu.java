@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -24,7 +26,15 @@ public class Aisu {
                                         "`--' `--' `--'             `-----'  `-----'   \n";
 
     public static void main(String[] args) {
-        Tasklist tasklist = new Tasklist();
+        Tasklist tasklist;
+        Storage storage = new Storage("data", "test.txt");
+        try {
+            List<Task> cachedData = storage.load();
+            tasklist = new Tasklist(cachedData);
+            System.out.println("got cached list!");
+        } catch (FileNotFoundException | AisuException e) {
+            tasklist = new Tasklist();
+        }
 
         System.out.println(Aisu.LOGO + Aisu.DIV_HEAD + " Hello, I'm Ai-su! How may I help you today?" + Aisu.DIV_TAIL);
         Scanner sc = new Scanner(System.in);
@@ -35,20 +45,23 @@ public class Aisu {
             try {
                 if (input.equals("list")) { // show list
                     System.out.println(tasklist);
-                } else if (input.startsWith("done ")) { // mark task as completed
-                    int n = Integer.parseInt(input.substring(5));
-                    tasklist.markDone(n);
-                } else if (input.startsWith("todo ")) {
-                    tasklist.addTask(input.substring(5), "T");
-                } else if (input.startsWith("deadline ")) {
-                    tasklist.addTask(input.substring(9), "D");
-                } else if (input.startsWith("event ")) {
-                    tasklist.addTask(input.substring(6), "E");
-                } else if (input.startsWith("delete ")) {
-                    int n = Integer.parseInt(input.substring(7));
-                    tasklist.deleteTask(n);
                 } else {
-                    tasklist.addTask(input, "Error");
+                    if (input.startsWith("done ")) { // mark task as completed
+                        int n = Integer.parseInt(input.substring(5));
+                        tasklist.markDone(n);
+                    } else if (input.startsWith("todo ")) {
+                        tasklist.addTask(input.substring(5), "T");
+                    } else if (input.startsWith("deadline ")) {
+                        tasklist.addTask(input.substring(9), "D");
+                    } else if (input.startsWith("event ")) {
+                        tasklist.addTask(input.substring(6), "E");
+                    } else if (input.startsWith("delete ")) {
+                        int n = Integer.parseInt(input.substring(7));
+                        tasklist.deleteTask(n);
+                    } else {
+                        tasklist.addTask(input, "Error");
+                    }
+                    storage.save(tasklist);
                 }
             } catch (AisuException | ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println(e);

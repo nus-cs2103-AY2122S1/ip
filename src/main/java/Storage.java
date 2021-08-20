@@ -34,7 +34,7 @@ public class Storage {
         // it will not throw an error if it does exist and will not overwrite an existing directory.
 
         try {
-            this.file = new File(this.dirPath + "\\" + this.fileName);
+            this.file = new File(this.dirPath + "/" + this.fileName);
             System.out.println("Checking for existing file: " + this.fileName + "...");
             System.out.println(this.file.createNewFile() ? "New " + this.fileName + " created." : this.fileName + " already exists.");
             return true;
@@ -65,16 +65,20 @@ public class Storage {
                 default:
                     throw new AisuException("No such type of task! >:( unchecked exception error!");
             }
+            if (temp[1].equals("1")) {
+                tempTask.markAsDone();
+            }
             result.add(tempTask);
         }
         return result;
     }
 
-    public void save(List<Task> currList) {
+    public void save(Tasklist currList) {
         // save list to file in format with ';;' as dividers and on a new line for each entry. Rewrites the entire file.
+        List<Task> list = currList.getListData();
         try {
-            FileWriter fw = new FileWriter(this.dirPath + "\\" + this.fileName);
-            for (Task t : currList) {
+            FileWriter fw = new FileWriter(this.dirPath + "/" + this.fileName);
+            for (Task t : list) {
                 fw.write(t.ParseData() + System.lineSeparator());
             }
             fw.close();
@@ -91,8 +95,14 @@ public class Storage {
 
     public void changeFilePath(String newDirPath, String newFileName) throws IOException { // have the Ui handle this
         // allow users to change where they want to store the list.
-        Files.copy(Paths.get(this.dirPath + "\\" + this.fileName), Paths.get(newDirPath + "\\" + newFileName));
-        Files.delete(Paths.get(this.dirPath + "\\" + this.fileName));
+        Files.copy(Paths.get(this.dirPath + "/" + this.fileName), Paths.get(newDirPath + "/" + newFileName));
+        Files.delete(Paths.get(this.dirPath + "/" + this.fileName));
     }
+
+/*
+    public static void main(String[] args) {
+        new Storage("data", "tasklist.txt");
+    }
+*/
 
 }
