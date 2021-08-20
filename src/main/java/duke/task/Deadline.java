@@ -27,6 +27,10 @@ public class Deadline extends DatedTask {
         super(description, by);
     }
 
+    private Deadline(String description, String by, boolean isDone) {
+        super(description, by, isDone);
+    }
+
     /**
      * Factory duke.tasks.Deadline method.
      *
@@ -35,6 +39,10 @@ public class Deadline extends DatedTask {
      */
     public static Deadline of(String description) throws BadInputFormatException {
         return new Deadline(description);
+    }
+
+    public static Deadline of(String description, String by, boolean isDone) {
+        return new Deadline(description, by, isDone);
     }
 
     /**

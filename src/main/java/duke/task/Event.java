@@ -27,6 +27,10 @@ public class Event extends DatedTask {
         super(description, at);
     }
 
+    private Event(String description, String at, boolean isDone) {
+        super(description, at, isDone);
+    }
+
     /**
      * Factory duke.tasks.Event method.
      *
@@ -36,6 +40,10 @@ public class Event extends DatedTask {
      */
     public static Event of(String description) throws BadInputFormatException {
         return new Event(description);
+    }
+
+    public static Event of(String description, String at, boolean isDone) {
+        return new Event(description, at, isDone);
     }
 
     /**
