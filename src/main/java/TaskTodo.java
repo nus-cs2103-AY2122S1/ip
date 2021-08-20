@@ -28,7 +28,7 @@ public class TaskTodo extends Task {
     }
 
     @Override
-    boolean isDate(LocalDate date) throws DateTimeParseException {
+    boolean isDate(LocalDate date) {
         return false;
     }
 }

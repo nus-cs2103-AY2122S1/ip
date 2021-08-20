@@ -39,7 +39,7 @@ public class TaskEvent extends Task {
     }
 
     @Override
-    boolean isDate(LocalDate date) throws DateTimeParseException {
+    boolean isDate(LocalDate date){
         return date.equals(at);
     }
 

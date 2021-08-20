@@ -15,9 +15,15 @@ public class DukeParser {
     Pattern donePattern = Pattern.compile("done (\\d+)", Pattern.CASE_INSENSITIVE);
     Pattern deletePattern = Pattern.compile("delete (\\d+)", Pattern.CASE_INSENSITIVE);
     Pattern todoPattern = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
-    Pattern deadlinePattern = Pattern.compile("deadline (.+) /by (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?", Pattern.CASE_INSENSITIVE);
-    Pattern eventPattern = Pattern.compile("event (.+) /at (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?", Pattern.CASE_INSENSITIVE);
-    Pattern findPattern = Pattern.compile("find (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?", Pattern.CASE_INSENSITIVE);
+    Pattern deadlinePattern = Pattern.compile(
+            "deadline (.+) /by (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?",
+            Pattern.CASE_INSENSITIVE);
+    Pattern eventPattern = Pattern.compile(
+            "event (.+) /at (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?",
+            Pattern.CASE_INSENSITIVE);
+    Pattern listPattern = Pattern.compile(
+            "list( /date (\\d{1,2}/\\d{1,2}/\\d{4}+))?",
+            Pattern.CASE_INSENSITIVE);
 
     /**Constructor
      *
@@ -32,16 +38,26 @@ public class DukeParser {
      * @param input String input from the Listener given by the User
      */
     public void parseInput(String input) {
+        Matcher checkList = listPattern.matcher(input);
         Matcher checkDone = donePattern.matcher(input);
         Matcher checkDelete = deletePattern.matcher(input);
         Matcher checkTodo = todoPattern.matcher(input);
         Matcher checkDeadline = deadlinePattern.matcher(input);
         Matcher checkEvent = eventPattern.matcher(input);
-        Matcher checkFind = findPattern.matcher(input);
 
-        if (input.equals("list")) {
-            // Display items
-            taskList.displayList(task -> true);
+
+        if (checkList.matches()) {
+            if (checkList.group(2) != null) {
+                // Display List corresponding to the dates
+                try {
+                    taskList.displayList(task -> task.isDate(TaskType.getDate(checkList.group(2))));
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please enter a valid date! :(");
+                }
+            } else {
+                // Display items
+                taskList.displayList(task -> true);
+            }
 
         } else if (checkDone.matches()) {
             // Toggles completion of a task
@@ -63,15 +79,7 @@ public class DukeParser {
             // Add an event to list
             taskList.add(checkEvent, TaskType.EVENT);
 
-        } else if (checkFind.matches()) {
-            //Display list of dates
-            try {
-                taskList.displayList(task -> task.isDate(TaskType.getDate(checkFind.group(1))));
-            } catch (DateTimeParseException e) {
-                System.out.println("Please enter a valid date! :(");
-            }
-
-        } else {
+        }  else {
             // Invalid command
             System.out.println(Ui.OUTPUT_DISPLAY + "☹ eeeeeee~dameda!! " + input + " isn't a valid command!");
         }

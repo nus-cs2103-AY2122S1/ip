@@ -36,5 +36,5 @@ public abstract class Task {
      * @return Save string
      */
     abstract String saveString();
-    abstract boolean isDate(LocalDate date) throws DateTimeParseException;
+    abstract boolean isDate(LocalDate date);
 }
