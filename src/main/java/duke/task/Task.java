@@ -1,5 +1,9 @@
 package duke.task;
 
+import duke.enums.Tasks;
+import duke.exception.UnknownTaskTypeException;
+import org.json.simple.JSONObject;
+
 /**
  * Represents a task object.
  */
@@ -30,7 +34,7 @@ public abstract class Task {
      * @param description the description of the task
      * @param isDone the status of the task
      */
-    private Task(String description, boolean isDone) {
+    protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
@@ -39,5 +43,28 @@ public abstract class Task {
     public Task markTaskAsDone() {
         isDone = true;
         return this;
+    }
+
+    public abstract JSONObject toJSONObject();
+
+    public static Task fromJSONObject(JSONObject obj) throws UnknownTaskTypeException {
+        Task task;
+        String taskType = (String) obj.get("type");
+        String description = (String) obj.get("description");
+        boolean isDone = (boolean) obj.get("isDone");
+        switch (Tasks.valueOfLabel(taskType)) {
+        case DEADLINE:
+            task = Deadline.of(description, (String) obj.get("date"), isDone);
+            break;
+        case EVENT:
+            task = Event.of(description, (String) obj.get("date"), isDone);
+            break;
+        case TODO:
+            task = Todo.of(description, isDone);
+            break;
+        default:
+            throw new UnknownTaskTypeException(taskType);
+        }
+        return task;
     }
 }
