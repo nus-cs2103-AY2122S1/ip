@@ -9,4 +9,6 @@ event zoomMeeting /at tonight
 list
 done 2
 list
+delete 1
+list
 bye
