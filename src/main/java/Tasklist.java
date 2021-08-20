@@ -54,7 +54,7 @@ public class Tasklist {
                 }
                 break;
             default:
-                throw new AisuException("That's an invalid task format...");
+                throw new AisuException("That's an invalid task format..."); // repeated code w/ Aisu.java. should find a way to remove ltr
         }
 
         this.list.add(newTask);
