@@ -1,18 +1,13 @@
-
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
-
+import java.nio.file.Paths;
 import java.time.DateTimeException;
-import java.time.format.DateTimeParseException;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * scans for user input and outputs corresponding Duke chatbot responses.
@@ -146,47 +141,9 @@ public class Duke {
         }
     }
 
-    private static String padZeros(String original, int expected) throws DukeException {
-        String output = original;
-        if (original.length() < expected) {
-            for (int i = 0; i < (expected - original.length()); i++) {
-                output = "0" + original;
-            }
-        } else if (original.length() > expected) {
-            throw new DukeException("Invalid datetime format");
-        }
 
-        return output;
-    }
 
-    public static String parseLocalDate(LocalDate localDate) throws DukeException {
-        try {
-            return localDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
-        } catch (DateTimeException dateTimeException) {
-            throw new DukeException("Stored date is corrupt.");
-        }
-    }
 
-    private static LocalDate toLocalDate(String dateString) throws DukeException {
-        String[] split = dateString.split("[/\\s]");
-        String date = padZeros(split[0], 2);
-        String month = padZeros(split[1], 2);
-        String year = padZeros(split[2], 4);
-
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(year).append("-");
-        stringBuilder.append(month).append("-");
-        stringBuilder.append(date);
-
-        LocalDate localDate;
-        try {
-            localDate = LocalDate.parse(stringBuilder.toString());
-        } catch (DateTimeParseException dateTimeParseException) {
-            throw new DukeException("Invalid datetime format");
-        }
-
-        return localDate;
-    }
 
     private static String toSaveDateFormat(LocalDate localDate) throws DukeException {
         try {
@@ -201,8 +158,8 @@ public class Duke {
         int events = 0;
         int deadlines = 0;
         String dateString = userInput.substring(Commands.DATE.getLength() + 1);
-        LocalDate localDate = toLocalDate(dateString);
-        String formattedDateString = parseLocalDate(localDate);
+        LocalDate localDate = Parser.toLocalDate(dateString);
+        String formattedDateString = Parser.parseLocalDate(localDate);
 
         System.out.println("Here are the Deadlines or Events that fall on " + formattedDateString + ":");
 
@@ -283,11 +240,11 @@ public class Duke {
                 task = new Todo(description);
                 break;
             case "D":
-                LocalDate by = toLocalDate(saveSplit[3]);
+                LocalDate by = Parser.toLocalDate(saveSplit[3]);
                 task = new Deadline(description, by);
                 break;
             case "E":
-                LocalDate at = toLocalDate(saveSplit[3]);
+                LocalDate at = Parser.toLocalDate(saveSplit[3]);
                 task = new Event(description, at);
                 break;
             default:
@@ -390,33 +347,13 @@ public class Duke {
         }
     }
 
-    private static int findIndex(String s, Character c) {
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == c) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private static int parseUserNumInput(String userInput, Commands command) throws DukeException {
-        // Parses integer in user input. Invalid user input could throw NumberFormatException.
-        try {
-            // Add 1 as user's number input is separated from command by 1 space.
-            return Integer.parseInt(userInput.substring(command.getLength() + 1));
-        } catch (NumberFormatException nfe) {
-            // Invalid user input cannot be parsed into Integer.
-            throw new DukeException("Index for " + command.getCommand() + " must be an integer.");
-        }
-    }
-
     private static void deleteTask(ArrayList<Task> tasks, String userInput) throws DukeException {
         if (userInput.length() <= (Commands.DELETE.getLength() + 1)) {
             // Missing user input for index of task to be deleted.
             throw new DukeException("An index must be provided to delete task at index.");
         } else {
             // Parses integer in user input. 1 space is accounted for as it separates command and index.
-            int userNumInput = parseUserNumInput(userInput, Commands.DELETE);
+            int userNumInput = Parser.parseUserNumInput(userInput, Commands.DELETE);
 
             // Decrement integer from user input to match indexing of tasks.
             int idx = userNumInput - 1;
@@ -456,7 +393,7 @@ public class Duke {
             throw new DukeException("An index must be provided to mark task at the index as done.");
         } else {
             // Parses integer in user input.
-            int userNumInput = parseUserNumInput(userInput, Commands.DONE);
+            int userNumInput = Parser.parseUserNumInput(userInput, Commands.DONE);
 
             // Decrement integer from user input to match indexing of tasks.
             int idx = userNumInput - 1;
@@ -473,37 +410,6 @@ public class Duke {
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(tasks.get(idx).toString());
         }
-    }
-
-    private static String[] parseUserDescriptionInput(String userDescription, Descriptors descriptor,
-            Character separator, Commands command) throws DukeException {
-        // Index of separator in userDescription.
-        int separatorIdx = findIndex(userDescription, separator);
-
-        // Index of space after descriptor
-        int indexDescriptorSpace = separatorIdx + descriptor.getLength() + 1;
-        if ((separatorIdx == -1) || (userDescription.length() <= indexDescriptorSpace)) {
-            throw new DukeException("/" + descriptor.getDescriptor() +
-                    " must be provided and not empty for " + command.getCommand() + ".");
-        }
-
-        // Index of first character following space after descriptor.
-        int indexAfterDescriptorSpace = separatorIdx + descriptor.getLength() + 2;
-
-        // User's time input.
-        String time = userDescription.substring(indexAfterDescriptorSpace);
-
-        // User's task description. Decrement by 1 as there is a space between task description and separator
-        String commandDescription = userDescription.substring(0, separatorIdx - 1);
-
-        // Events and Deadline could have empty tasks but taken as they do due to their descriptors and time.
-        // Need to run another check on whether their task descriptions are empty.
-        if (commandDescription.equals("")) {
-            throw new DukeException("The description of " + command.getCommand() + " cannot be empty.");
-        }
-
-        // Returns a String array with the task description and user input after descriptor.
-        return new String[] {commandDescription, time};
     }
 
     private static void addTask(ArrayList<Task> tasks, String userInput, Character separator) throws DukeException {
@@ -532,20 +438,20 @@ public class Duke {
         } else if (userCommand.equals(Commands.DEADLINE.getCommand())) {
             // Parses description into task description and time.
             String[] descriptions =
-                    parseUserDescriptionInput(description, Descriptors.BY, separator, Commands.DEADLINE);
+                    Parser.parseUserDescriptionInput(description, Descriptors.BY, separator, Commands.DEADLINE);
 
             // Convert time to LocalDate.
-            LocalDate localDate = toLocalDate(descriptions[1]);
+            LocalDate localDate = Parser.toLocalDate(descriptions[1]);
 
             // Adds Deadline task to tasks.
             tasks.add(new Deadline(descriptions[0], localDate));
         } else {
             // Parses description into task description and time.
             String[] descriptions =
-                    parseUserDescriptionInput(description, Descriptors.AT, separator, Commands.EVENT);
+                    Parser.parseUserDescriptionInput(description, Descriptors.AT, separator, Commands.EVENT);
 
             // Convert time to LocalDate.
-            LocalDate localDate = toLocalDate(descriptions[1]);
+            LocalDate localDate = Parser.toLocalDate(descriptions[1]);
 
             // Adds Event task to tasks.
             tasks.add(new Event(descriptions[0], localDate));

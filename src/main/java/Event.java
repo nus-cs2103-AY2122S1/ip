@@ -20,7 +20,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         try {
-            return "[E]" + super.toString() + " (at: " + Duke.parseLocalDate(this.at) + ")";
+            return "[E]" + super.toString() + " (at: " + Parser.parseLocalDate(this.at) + ")";
         } catch (DukeException dukeException) {
             return dukeException.toString();
         }

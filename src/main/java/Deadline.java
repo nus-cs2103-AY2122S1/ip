@@ -20,7 +20,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         try {
-            return "[D]" + super.toString() + " (by: " + Duke.parseLocalDate(this.by) + ")";
+            return "[D]" + super.toString() + " (by: " + Parser.parseLocalDate(this.by) + ")";
         } catch (DukeException dukeException) {
             return dukeException.toString();
         }
