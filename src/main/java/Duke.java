@@ -12,35 +12,49 @@ public class Duke {
     private static final String TASK_DONE = "Nice! I've marked this task as done:\n";
     private static final String PRINT_LIST = "Here are the tasks in your list:";
     private static final String ADD_TASK_PREFIX = "Got it. I've added this task:\n";
+    private static final String EXIT_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String DONE_COMMAND = "done ";
+    private static final String TODO_COMMAND = "todo ";
+    private static final String DEADLINE_COMMAND = "deadline ";
+    private static final String EVENT_COMMAND = "event ";
 
     public static void prompt() {
-        String ExitCommand = "bye";
-        String ListCommand = "list";
-        String DoneCommand = "done ";
-        String ToDoCommand = "todo";
-        String DeadlineCommand = "deadline";
-        String EventCommand = "event";
         String input = "";
 
-        while (!input.equals(ExitCommand)) {
+        while (!input.equals(EXIT_COMMAND)) {
             System.out.println(PROMPT);
             input = sc.nextLine();
-            if (input.equals(ExitCommand)) {
-                exit();
-            } else if (input.equals(ListCommand)) {
-                printList(taskList);
-            } else if (input.startsWith(DoneCommand)) {
-                String taskNumber = input.substring(5);
-                taskDone(taskNumber);
-            } else if (input.startsWith(ToDoCommand)) {
-                addTodo(input);
-            } else if (input.startsWith(DeadlineCommand)) {
-                addDeadline(input);
-            } else if (input.startsWith(EventCommand)) {
-                addEvent(input);
-            } else {
-                System.out.println(input);
+
+            try {
+                if (input.equals(EXIT_COMMAND)) {
+                    exit();
+                } else if (input.equals(LIST_COMMAND)) {
+                    printList(taskList);
+                } else if (input.startsWith(DONE_COMMAND)) {
+                    String taskNumber = input.substring(5);
+                    taskDone(taskNumber);
+                } else if (input.startsWith(TODO_COMMAND) || input.startsWith(DEADLINE_COMMAND) || input.startsWith(EVENT_COMMAND)) {
+
+                    switch (input) {
+                        case "deadline ":
+                            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                        case "event ":
+                            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+                        case "todo ":
+                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    }
+
+                    addTask(input);
+
+                } else {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
+
+
         }
     }
 
@@ -57,8 +71,8 @@ public class Duke {
         System.out.print(SEPARATOR);
     }
 
-    public static void taskDone(String taskNumber) {
-        String invalid = "Please enter a valid task number.";
+    public static void taskDone(String taskNumber) throws DukeException {
+        String invalid = "OOPS!!! SPlease enter a valid task number.";
 
         try {
             int taskNo = Integer.parseInt(taskNumber);
@@ -87,22 +101,22 @@ public class Duke {
                 + SEPARATOR);
     }
 
-    public static void addTodo(String input) {
-        Task newTodo = new Todo(input);
-        taskList.add(newTodo);
-        addTaskSuffix(newTodo);
-    }
+    public static void addTask(String input) throws DukeException {
+        Task newTask = null;
 
-    public static void addDeadline(String input) {
-        Task newDeadline = new Deadline(input);
-        taskList.add(newDeadline);
-        addTaskSuffix(newDeadline);
-    }
+        if (input.startsWith(TODO_COMMAND)) {
+            newTask = new Todo(input);
+        } else if (input.startsWith(DEADLINE_COMMAND) && input.contains("/by ")) {
+            newTask = new Deadline(input);
+        } else if (input.startsWith(EVENT_COMMAND) && input.contains("/at ")) {
+            newTask = new Event(input);
+        } else {
+            throw new DukeException("OOPS!!! Invalid task description");
+        }
 
-    public static void addEvent(String input) {
-        Task newEvent = new Event(input);
-        taskList.add(newEvent);
-        addTaskSuffix(newEvent);
+        taskList.add(newTask);
+        addTaskSuffix(newTask);
+
     }
 
     public static void main(String[] args) {
