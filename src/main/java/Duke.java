@@ -11,15 +11,16 @@ public class Duke {
 
     public Duke(String fileName) {
         storage = new Storage(fileName);
+        ui = new Ui();
 
         // Read tasks from save file.
         try {
-            tasks = storage.readTasksFromData();
+            tasks = storage.readTasksFromData(ui);
         } catch (DukeException dukeException) {
             System.out.println(dukeException);
 
             // If failed to read tasks from save, initialize a new Task ArrayList.
-            tasks = new TaskList();
+            tasks = new TaskList(ui);
         }
     }
 
@@ -64,7 +65,7 @@ public class Duke {
                 }
 
                 // Save tasks to save file after each change.
-                this.storage.saveTasksToData(this.tasks.getTasks());
+                this.storage.saveTasksToData(this.tasks);
             } catch (DukeException dukeException) {
                 System.out.println(dukeException);
             }

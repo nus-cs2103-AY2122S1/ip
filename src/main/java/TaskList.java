@@ -6,14 +6,17 @@ import java.util.ArrayList;
  * Responds accordingly to user commands and inputs.
  */
 public class TaskList {
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
+    private Ui ui;
 
-    public TaskList() {
+    public TaskList(Ui ui) {
         this.tasks = new ArrayList<>();
+        this.ui = ui;
     }
 
-    public TaskList(ArrayList<Task> tasks) {
+    public TaskList(Ui ui, ArrayList<Task> tasks) {
         this.tasks = tasks;
+        this.ui = ui;
     }
 
     public ArrayList<Task> getTasks() {

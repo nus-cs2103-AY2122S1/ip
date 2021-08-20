@@ -103,7 +103,7 @@ public class Storage {
         }
     }
 
-    public TaskList readTasksFromData() throws DukeException {
+    public TaskList readTasksFromData(Ui ui) throws DukeException {
         // Initialize an ArrayList for Task objects.
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -117,7 +117,7 @@ public class Storage {
         try {
             // If save file does not exist, create save file;
             if (!isSaveFileExist) {
-                saveTasksToData(tasks);
+                saveTasksToData(new TaskList(ui, tasks));
             }
 
             // Read from save file.
@@ -133,10 +133,12 @@ public class Storage {
             throw new DukeException("Failed to read tasks from save file.");
         }
 
-        return new TaskList(tasks);
+        return new TaskList(ui, tasks);
     }
 
-    public void saveTasksToData(ArrayList<Task> tasks) throws DukeException {
+    public void saveTasksToData(TaskList taskList) throws DukeException {
+        // Extracts ArrayList from TaskList object.
+        ArrayList<Task> tasks = taskList.getTasks();
 
         // Get the absolute path to data subdirectory of project directory.
         String cwd = System.getProperty("user.dir");
