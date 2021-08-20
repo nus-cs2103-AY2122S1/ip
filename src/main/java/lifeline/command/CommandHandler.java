@@ -46,7 +46,8 @@ public class CommandHandler {
         }
     }
 
-    public static String handleEvent(String command, Storage storage, TaskList taskList, Ui ui) throws LifelineException {
+    public static String handleEvent(String command, Storage storage, TaskList taskList, Ui ui)
+            throws LifelineException {
         String[] commands = getCommands(command);
         String[] description = commands[1].trim().split("/at", 2);
         String errorMessage = "Event date/time not in proper format! Please use event <name> /at "
@@ -79,7 +80,8 @@ public class CommandHandler {
         }
     }
 
-    public static String handleToDo(String command, Storage storage, TaskList taskList, Ui ui) throws LifelineException {
+    public static String handleToDo(String command, Storage storage, TaskList taskList, Ui ui)
+            throws LifelineException {
         String[] commands = getCommands(command);
         Task newTask = new ToDo(commands[1].trim());
         taskList.add(newTask);
@@ -87,7 +89,8 @@ public class CommandHandler {
         return ui.showAddedTask(newTask);
     }
 
-    public static String handleDone(String command, Storage storage, TaskList taskList, Ui ui) throws LifelineException {
+    public static String handleDone(String command, Storage storage, TaskList taskList, Ui ui)
+            throws LifelineException {
         String[] commands = getCommands(command);
         int taskIndex = convertIndexToInt(commands[0], commands[1], taskList);
         taskList.completeTask(taskIndex);
@@ -125,7 +128,10 @@ public class CommandHandler {
             throw new LifelineException("Details of deadline cannot be blank!");
         case "event":
             throw new LifelineException("Details of event cannot be blank!");
+        default:
+            throw new LifelineException("I am sorry! I don't know what that means! ☹");
         }
+
     }
 
     private static int convertIndexToInt(String command, String index, TaskList taskList) throws LifelineException {
