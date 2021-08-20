@@ -3,6 +3,7 @@ import assignment.*;
 import status.Status;
 
 public class DeadlineCommand extends NonExecutableCommand {
+    private static final String taskDirectivePoint = "by";
     private static final String assignmentType = AssignmentType.DEADLINE.getStatus();
 
     public DeadlineCommand(String desc) {
@@ -33,12 +34,16 @@ public class DeadlineCommand extends NonExecutableCommand {
         StringBuilder sb = new StringBuilder("");
         String[] updatedDesc = this.command_description.split("/");
         sb.append(updatedDesc[0] + "(");
-        for (Character c : updatedDesc[1].toCharArray()) {
-            if (c.equals(' ')) {
-                sb.append(": ");
-                continue;
+        String[] formattedDesc = updatedDesc[1].split(" ");
+        for (int i = 0; i < formattedDesc.length; i++) {
+            String c = formattedDesc[i];
+            if (c.equals(taskDirectivePoint)) {
+                sb.append(c + ": ");
+            } else if (i == formattedDesc.length - 1) {
+                sb.append(c);
+            } else {
+                sb.append(c + " ");
             }
-            sb.append(String.valueOf(c));
         }
         sb.append(")");
         String assignmentProg = assignmentType + this.status + " " + sb.toString();

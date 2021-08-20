@@ -2,7 +2,8 @@ package commands;
 import assignment.*;
 import status.Status;
 
-public class EventCommand extends NonExecutableCommand{
+public class EventCommand extends NonExecutableCommand {
+    private static final String taskDirectivePoint = "at";
     private static final String assignmentType = AssignmentType.EVENT.getStatus();
 
     public EventCommand(String desc) {
@@ -34,12 +35,16 @@ public class EventCommand extends NonExecutableCommand{
         StringBuilder sb = new StringBuilder("");
         String[] updatedDesc = this.command_description.split("/");
         sb.append(updatedDesc[0] + "(");
-        for (Character c : updatedDesc[1].toCharArray()) {
-            if (c.equals(' ')) {
-                sb.append(": ");
-                continue;
+        String[] formattedDesc = updatedDesc[1].split(" ");
+        for (int i = 0; i < formattedDesc.length; i++) {
+            String c = formattedDesc[i];
+            if (c.equals(taskDirectivePoint)) {
+                sb.append(c + ": ");
+            } else if (i == formattedDesc.length - 1) {
+                sb.append(c);
+            } else {
+                sb.append(c + " ");
             }
-            sb.append(String.valueOf(c));
         }
         sb.append(")");
         String assignmentProg = assignmentType + this.status + " " + sb.toString();
