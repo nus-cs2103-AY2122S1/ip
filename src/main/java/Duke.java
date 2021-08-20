@@ -7,140 +7,24 @@ public class Duke {
 
     static String line = "____________________________________________________________";
 
-    static List<Task> list = new ArrayList<Task>();
+    static List<String> list = new ArrayList<String>();
 
     public static void HelloMessage() {
         String Hello_message = "Hello! I'm Duke\n" +
-                                "What can I do for you?\n";
+                "What can I do for you?\n";
 
         System.out.println(line + "\n" + Hello_message + line + "\n");
     }
 
     public static void PrintList() {
         int index = 0;
-
-        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             index++;
-            System.out.println(index + "." + list.get(i).PrintTaskInfo());
+            System.out.println(index + "." + list.get(i));
         }
     }
 
-    public static void MarkDone(int index) throws DukeException{
-        if (index <= 0) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
-        } else {
-            System.out.println("Nice! I've marked this task as done:");
-            list.get(index).MarkDone();
-            System.out.println(" " + list.get(index).PrintTaskInfo());
-        }
-    }
-
-    public static void HandleTask(String Message) throws DukeException{
-        String task = "";
-        String deadline = "";
-
-        //If the task type does not belong to the three types, throw an error.
-        if (!(Message.startsWith("todo") || Message.startsWith("event") || Message.startsWith("deadline"))){
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-
-        //Get Task description and time if it has it.
-        if (Message.indexOf("/") != -1) {
-            task = Message.substring(Message.indexOf(" ") + 1, Message.indexOf("/") - 1);
-
-            //throw exceptions for deadline or events' format.
-<<<<<<< HEAD
-=======
-
->>>>>>> main
-            if (Message.startsWith("deadline")) {
-                if (Message.indexOf("/by") != -1) {
-                    deadline = Message.substring(Message.indexOf("/by") + 3);
-                } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but the format of deadline is wrong :-(");
-                }
-            } else if (Message.startsWith("event")) {
-                if (Message.indexOf("/at") != -1) {
-                    deadline = Message.substring(Message.indexOf("/at") + 3);
-                } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but the format of event is wrong :-(");
-                }
-            } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but the format of todo is wrong :-(");
-            }
-        }
-        else {
-            if (Message.indexOf(" ") == -1) {
-                throw new DukeException("☹ OOPS!!! The description of a " + Message +" cannot be empty.");
-            }else {
-                task = Message.substring(Message.indexOf(" ") + 1);
-
-                deadline = "";
-            }
-        }
-
-        //Time for deadlines or event cannot be empty.
-        if ((Message.startsWith("event") || Message.startsWith("deadline")) && deadline.equals("")) {
-            throw new DukeException("☹ OOPS!!! The time of a " + Message.substring(0, Message.indexOf(" ")) +" cannot be empty.");
-        }
-
-
-        System.out.println("Got it. I've added this task: ");
-<<<<<<< HEAD
-
-        TaskType[] tasktypes = TaskType.values();
-        String tasktype = Message.substring(0, Message.indexOf(" "));
-        for (TaskType t : tasktypes) {
-            if (t.toString().equals(tasktype)){
-                Task newTask = t.AssignTaskType(t, task, deadline);
-                System.out.println(" " + newTask.PrintTaskInfo());
-                list.add(newTask);
-                break;
-            }
-=======
-        if (Message.startsWith("todo")) {
-            Task newTask = new ToDos(false, task);
-            System.out.println(" " + newTask.PrintTaskInfo());
-            list.add(newTask);
-        } else if (Message.startsWith("event")) {
-            Task newTask = new Events(false, task, deadline);
-            System.out.println(" " + newTask.PrintTaskInfo());
-            list.add(newTask);
-        } else if (Message.startsWith("deadline")){
-            Task newTask = new Deadlines(false, task, deadline);
-            System.out.println(" " + newTask.PrintTaskInfo());
-            list.add(newTask);
->>>>>>> main
-        }
-
-        System.out.println("Now you have " + list.size() + "" +
-                " tasks in the list.");
-    }
-
-    public static void MarkDone(int index) throws DukeException{
-        if (index <= 0) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
-        } else {
-            System.out.println("Nice! I've marked this task as done:");
-            list.get(index).MarkDone();
-            System.out.println(" " + list.get(index).PrintTaskInfo());
-        }
-    }
-
-    public static void Delete(int index) throws DukeException{
-        if (index < 0) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
-        } else {
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(" " + list.get(index).PrintTaskInfo());
-            list.remove(index);
-            System.out.println("Now you have " + list.size() + " tasks in the list.");
-        }
-    }
-
-
-    public static void PrintMessage() {
+    public static void PrintMessage(){
         Scanner scanner = new Scanner(System.in);
         String Message = "";
         String Goodbye_message = "Bye. Hope to see you again soon!";
@@ -153,62 +37,18 @@ public class Duke {
                 System.out.println(Goodbye_message);
                 System.out.println(line + "\n");
                 break;
-            }  else if (Message.equals("list")){
+            } else if (Message.equals("list")){
                 PrintList();
-<<<<<<< HEAD
-            }  else if (Message.startsWith("done")) {
-                int index = Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1;
-
-                try {
-                    MarkDone(index);
-                } catch (DukeException e){
-                    e.PrintErrorMessage();
-                }
-            } else if (Message.startsWith("delete")) {
-                int index =  Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1;
-
-                try {
-                    Delete(index);
-                } catch (DukeException e){
-                    e.PrintErrorMessage();
-                }
-            } else  {
-=======
             }
-            else if (Message.startsWith("done")) {
-                int index = Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1;
-
-                try {
-                    MarkDone(index);
-                } catch (DukeException e){
-                    e.PrintErrorMessage();
-                }
-            }
-            else  {
->>>>>>> main
-                try {
-                    HandleTask(Message);
-                } catch (DukeException e)
-                {
-                    e.PrintErrorMessage();
-                }
+            else {
+                System.out.println("added: " + Message);
+                list.add(Message);
             }
             System.out.println(line + "\n");
         }
     }
 
-    public enum TaskType{
-        todo, deadline, event;
 
-        public Task AssignTaskType(TaskType t,String task, String time){
-            switch (t) {
-                case todo: return new ToDos(false, task);
-                case deadline: return new Deadlines(false, task, time);
-                case event: return new Events(false, task, time);
-                default: return null;
-            }
-        }
-    }
 
 
     public static void main(String[] args) {
@@ -218,12 +58,11 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-       //Print Hello.
+        //Print Hello.
         HelloMessage();
 
         //Print Message();
         PrintMessage();
-
 
     }
 }
