@@ -1,16 +1,16 @@
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
 
     public Task(String description) throws DukeException {
         if (description.equals("")) {
-            throw new DukeException("empty description");
+            throw new DukeException(DukeException.Type.DESCRIPTION);
         }
         this.description = description;
         this.isDone = false;
     }
 
-    private String getStatus() {
+    public String getStatus() {
         return (isDone ? "X" : " ");
     }
 
@@ -22,4 +22,10 @@ public class Task {
     public void markDone() {
         this.isDone = true;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public abstract String getCode();
 }
