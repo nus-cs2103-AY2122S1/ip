@@ -2,8 +2,11 @@ import java.util.Scanner;
 
 public class Duke {
     private final static String BORDERS = "\t____________________________________________________________";
-    private static String formatReply(String input) {
-        return BORDERS + "\n\t " + input + '\n' + BORDERS;
+    private static void reply(String input) {
+        System.out.print(BORDERS);
+        System.out.print("\n\t ");
+        System.out.println(input);
+        System.out.println(BORDERS);
     }
 
     public static void main(String[] args) {
@@ -15,19 +18,23 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         /* Initialization */
-        Scanner sc = new Scanner(System.in);
-        InputHandler inputH = new InputHandler();
-        System.out.println(formatReply(inputH.greet("").msg()));
-        String input;
-        while (true) {
-            try {
-                input = sc.nextLine();
-                Record r = inputH.query(input);
-                System.out.println(formatReply(r.msg()));
-                if (r.bye()) break;
-            } catch (DukeException e) {
-                System.out.println(formatReply(e.getMessage()));
+        try {
+            Scanner sc = new Scanner(System.in);
+            InputHandler inputH = new InputHandler();
+            reply(inputH.greet("").msg());
+            String input;
+            while (true) {
+                try {
+                    input = sc.nextLine();
+                    Record r = inputH.query(input);
+                    reply(r.msg());
+                    if (r.bye()) break;
+                } catch (DukeException e) {
+                    reply(e.getMessage());
+                }
             }
+        } catch (DukeException e) {
+            reply(e.getMessage());
         }
 
     }

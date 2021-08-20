@@ -9,9 +9,17 @@ public class Event extends Task {
         super(desc);
         this.time = time;
     }
+    public Event(String desc, String time, boolean done) {
+        super(desc, done);
+        this.time = time;
+    }
 
     public void addTime(String time) {
         this.time = time;
+    }
+
+    public String toDB() {
+        return String.format("E | %d | %s | %s", super.done ? 1 : 0, super.desc, time);
     }
 
     @Override

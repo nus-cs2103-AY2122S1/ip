@@ -3,10 +3,11 @@ import java.util.stream.Collectors;
 
 public class InputHandler {
     
-    private Database db = new Database();
+    private Database db;
     private HashMap<String, CheckedFunction<String, Record>> cmds = new HashMap<>();
 
-    public InputHandler() {
+    public InputHandler() throws DukeException {
+        db = new Database();
         cmds.put("greet", this::greet);
         cmds.put("bye", this::bye);
         cmds.put("list", this::list);

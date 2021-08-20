@@ -9,9 +9,17 @@ public class Deadline extends Task {
         super(desc);
         this.dl = dl;
     }
+    public Deadline(String desc, String dl, boolean done) {
+        super(desc, done);
+        this.dl = dl;
+    }
 
     public void addDeadline(String dl) {
         this.dl = dl;
+    }
+    
+    public String toDB() {
+        return String.format("D | %d | %s | %s", super.done ? 1 : 0, super.desc, dl);
     }
 
     @Override
