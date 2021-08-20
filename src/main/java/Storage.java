@@ -39,7 +39,7 @@ class Storage {
 
         while (sc.hasNextLine()) {
             String currItem = sc.nextLine();
-            String[] itemDetails = currItem.split("-");
+            String[] itemDetails = currItem.split("|");
 
             Task task;
             switch (itemDetails[0]) {

@@ -31,6 +31,6 @@ class Event extends Task{
 
     @Override
     public String toSaveString() {
-        return "Event-" + super.toSaveString() + "-" + eventDate;
+        return "Event|" + super.toSaveString() + "|" + eventDate;
     }
 }

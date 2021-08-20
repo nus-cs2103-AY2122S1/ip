@@ -31,6 +31,6 @@ class Deadline extends Task {
 
     @Override
     public String toSaveString() {
-        return "Deadline-" + super.toSaveString() + "-" + doneBefore;
+        return "Deadline|" + super.toSaveString() + "|" + doneBefore;
     }
 }
