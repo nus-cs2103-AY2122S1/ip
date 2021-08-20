@@ -1,8 +1,7 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private LocalDateTime time;
+    private final LocalDateTime time;
 
     public Deadline(String name, LocalDateTime time) {
         super(name);
@@ -11,11 +10,10 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d h.mm a");
-        return String.format("[D]%s(by: %s)", super.toString(), time.format(formatter));
+        return String.format("[D]%s(by: %s)", super.toString(),  Messages.dateFormat(time));
     }
 
     public String save() {
-        return String.format("D | %s| %s", super.save(), time);
+        return String.format("D | %s| %s", super.save(),  Messages.dateFormat(time));
     }
 }

@@ -1,6 +1,10 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -45,7 +49,7 @@ public class Duke {
     public static LocalDateTime dateTime(String time) {
 
         DateTimeFormatter fmt = new DateTimeFormatterBuilder()
-                .appendPattern("d/MM/yyyy")
+                .appendPattern("d/M/yyyy")
                 .optionalStart()
                 .appendPattern(" HHmm")
                 .optionalEnd()
@@ -53,7 +57,6 @@ public class Duke {
                 .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 59)
                 .toFormatter();
 
-//        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy[ HHmm]");
         return LocalDateTime.parse(time, fmt);
     }
 
@@ -143,9 +146,9 @@ public class Duke {
             } catch (DukeException | IOException e) {
                 output += "☹ OOPS!!! " + e.getMessage() + "\n";
             } catch (IndexOutOfBoundsException e) {
-                output += "☹ OOPS!!! "+ Messages.EXIST +"\n";
+                output += "☹ OOPS!!! "+ Messages.EXIST + "\n";
             } catch (DateTimeParseException e) {
-                output += "☹ OOPS!!! "+ Messages.TIME +"\n";
+                output += "☹ OOPS!!! "+ Messages.TIME + "\n";
             }
             System.out.println(output);
         }

@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public enum Messages {
     KNOWN {
         public String toString() {
@@ -16,7 +19,12 @@ public enum Messages {
     },
     TIME {
         public String toString() {
-            return "Date & time format entered is invalid. Follow d/MM/yyyy [HHmm].";
+            return "Date & time format entered is invalid. Follow d/M/yyyy [HHmm].";
         }
-    }
+    };
+
+    public static String dateFormat(LocalDateTime time) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMM d h.mm a");
+        return time.format(formatter);
+    };
 }
