@@ -5,4 +5,8 @@ event project meeting /at Mon 2-4pm
 done 1
 done 2
 done 3
+todo
+event
+deadline
+trolololololol
 bye

@@ -35,33 +35,57 @@ public class Duke {
                 "\t____________________________________________________________");
     }
 
-    private static void handleInput(String response) {
+    /**
+     * Throws the corresposing DukeException when the Task input is empty.
+     *
+     * @param input the array of String input to check
+     * @param type the type of Task it is called with
+     *
+     * @throws DukeException throws the NullDescription
+     */
+    private static void checkInput(String[] input, String type) throws DukeException{
+        if (input.length == 1) {
+            throw new NullDescription(type);
+        }
+    }
+
+    /**
+     * Prints out the feedback when users enter their response.
+     *
+     * @param response the array of String input to check
+     *
+     * @throws DukeException throws the NullDescription
+     */
+    private static void handleInput(String response) throws DukeException {
         String[] output = response.split(" ");
         String command = output[0];
         if (command.equals("done")) {
-            Task editedTask = todos[Integer.parseInt(output[1])-1];
+            Task editedTask = todos[Integer.parseInt(output[1]) - 1];
             editedTask.markIsDone();
             System.out.println(String.format("\t____________________________________________________________\n" +
-                    "\tNice! I've marked this task as done: \n" +
+                    "\tNice! I've marked this task as done:\n" +
                     "\t%s\n" +
-                    "    ____________________________________________________________", editedTask.toString()));
+                    "\t____________________________________________________________", editedTask.toString()));
         } else {
             Task newTask = null;
             switch (command) {
                 case "todo":
+                    checkInput(output, "todo");
                     String todoDescription = response.substring(5);
                     newTask = new Todo(todoDescription);
                     break;
                 case "deadline":
+                    checkInput(output, "deadline");
                     String deadlineDescription = response.substring(9);
                     newTask = new Deadline(deadlineDescription);
                     break;
                 case "event":
+                    checkInput(output, "event");
                     String eventDescription = response.substring(6);
                     newTask = new Event(eventDescription);
                     break;
                 default:
-                    break;
+                    throw new InvalidCommand();
             }
 
             todos[index] = newTask;
@@ -106,7 +130,7 @@ public class Duke {
                         if (todos[i] == null) {
                             break;
                         } else {
-                            System.out.println(String.format("\t%d.%s", (i+1), todos[i].toString()));
+                            System.out.println(String.format("\t%d.%s", (i + 1), todos[i].toString()));
                         }
                     }
                     System.out.println("\t____________________________________________________________");
@@ -118,7 +142,13 @@ public class Duke {
                     exit = true;
                     break;
                 default:
-                    handleInput(response);
+                    try {
+                        handleInput(response);
+                    } catch (DukeException e) {
+                        System.out.println(String.format("\t____________________________________________________________\n" +
+                                "\t%s\n" +
+                                "\t____________________________________________________________", e.toString()));
+                    }
                     break;
             }
         }
