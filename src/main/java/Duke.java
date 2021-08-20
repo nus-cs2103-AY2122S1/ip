@@ -44,6 +44,7 @@ public class Duke {
         DONE("done"),
         DELETE("delete"),
         LIST("list"),
+        DATE("date"),
         BYE("bye");
 
         private final String COMMAND;
@@ -114,6 +115,43 @@ public class Duke {
         }
     }
 
+    private static void printTaskAtDate(ArrayList<Task> tasks, String userInput) throws DukeException {
+        int counter = 0;
+        int events = 0;
+        int deadlines = 0;
+        String dateString = userInput.substring(Commands.DATE.getLength() + 1);
+        LocalDate localDate = toLocalDate(dateString);
+        String formattedDateString = parseLocalDate(localDate);
+
+        System.out.println("Here are the Deadlines or Events that fall on " + formattedDateString + ":");
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                if (localDate.equals(deadline.by)) {
+                    counter++;
+                    deadlines++;
+                    System.out.println(counter + "." + deadline);
+                }
+            }
+
+            if (task instanceof Event) {
+                Event event = (Event) task;
+                if (localDate.equals(event.at)) {
+                    counter++;
+                    events++;
+                    System.out.println(counter + "." + event);
+                }
+            }
+        }
+
+        System.out.println("A total of " + counter + " events (" + deadlines + " deadlines and " +
+                events + " events) fall on " + formattedDateString);
+
+    }
+
     private static LocalDate toLocalDate(String dateString) throws DukeException {
         String[] split = dateString.split("[/\\s]");
         String date = padZeros(split[0], 2);
@@ -148,6 +186,9 @@ public class Duke {
                 } else if (userInput.startsWith(Commands.DELETE.getCommand())) {
                     // Delete a task.
                     deleteTask(tasks, userInput);
+                } else if (userInput.startsWith(Commands.DATE.getCommand())) {
+                    // Print tasks that fall on given date.
+                    printTaskAtDate(tasks, userInput);
                 } else {
                     // Add a task to tasks.
                     addTask(tasks, userInput, '/');
@@ -264,6 +305,12 @@ public class Duke {
 
         // User's task description.
         String commandDescription = userDescription.substring(0, separatorIdx);
+
+        // Events and Deadline could have empty tasks but taken as they do due to their descriptors and time.
+        // Need to run another check on whether their task descriptions are empty.
+        if (commandDescription.equals("")) {
+            throw new DukeException("The description of " + command.getCommand() + " cannot be empty.");
+        }
 
         // Returns a String array with the task description and user input after descriptor.
         return new String[] {commandDescription, descriptorDescription};
