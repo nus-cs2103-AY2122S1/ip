@@ -9,12 +9,12 @@ Now you have 1 task in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] return book (by: June 6th)
+  [D][ ] return book (by: Jun 6 2021)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][ ] project meeting (at: Aug 6th 2-4pm)
+  [E][ ] project meeting (at: Aug 6 2021)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -25,13 +25,13 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][ ] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.[D][ ] return book (by: Jun 6 2021)
+3.[E][ ] project meeting (at: Aug 6 2021)
 4.[T][ ] join sports club
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-  [D][X] return book (by: June 6th)
+  [D][X] return book (by: Jun 6 2021)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
@@ -40,8 +40,8 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][ ] read book
-2.[D][X] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.[D][X] return book (by: Jun 6 2021)
+3.[E][ ] project meeting (at: Aug 6 2021)
 4.[T][X] join sports club
 ____________________________________________________________
 ____________________________________________________________
@@ -51,21 +51,21 @@ Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][ ] orbital meeting (at: Tues 4-5pm)
+  [E][ ] orbital meeting (at: Sep 7 2021)
 Now you have 6 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][ ] read book
-2.[D][X] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.[D][X] return book (by: Jun 6 2021)
+3.[E][ ] project meeting (at: Aug 6 2021)
 4.[T][X] join sports club
 5.[T][ ] borrow book
-6.[E][ ] orbital meeting (at: Tues 4-5pm)
+6.[E][ ] orbital meeting (at: Sep 7 2021)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-  [E][X] orbital meeting (at: Tues 4-5pm)
+  [E][X] orbital meeting (at: Sep 7 2021)
 ____________________________________________________________
 ____________________________________________________________
 This task has already been done!
@@ -73,15 +73,15 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][ ] read book
-2.[D][X] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.[D][X] return book (by: Jun 6 2021)
+3.[E][ ] project meeting (at: Aug 6 2021)
 4.[T][X] join sports club
 5.[T][ ] borrow book
-6.[E][X] orbital meeting (at: Tues 4-5pm)
+6.[E][X] orbital meeting (at: Sep 7 2021)
 ____________________________________________________________
 ____________________________________________________________
 Got it! I've removed this task:
-  [D][X] return book (by: June 6th)
+  [D][X] return book (by: Jun 6 2021)
 Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -92,9 +92,9 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][ ] read book
-2.[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.[E][ ] project meeting (at: Aug 6 2021)
 3.[T][X] join sports club
-4.[E][X] orbital meeting (at: Tues 4-5pm)
+4.[E][X] orbital meeting (at: Sep 7 2021)
 ____________________________________________________________
 ____________________________________________________________
 This command is not recognised! Please enter a valid command!
@@ -119,6 +119,26 @@ Please follow this format: [Task] /by [Date/Time]
 ____________________________________________________________
 ____________________________________________________________
 The description of a event cannot be empty!
+____________________________________________________________
+____________________________________________________________
+Got it! I've removed this task:
+  [E][X] orbital meeting (at: Sep 7 2021)
+Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it! I've removed this task:
+  [T][X] join sports club
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it! I've removed this task:
+  [E][ ] project meeting (at: Aug 6 2021)
+Now you have 1 task in the list.
+____________________________________________________________
+____________________________________________________________
+Got it! I've removed this task:
+  [T][ ] read book
+Now you have 0 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!

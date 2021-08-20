@@ -1,13 +1,13 @@
 todo read book
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
+deadline return book /by 2021-06-06
+event project meeting /at 2021-08-06
 todo join sports club
 list
 done 2
 done 4
 list
 todo borrow book
-event orbital meeting /at Tues 4-5pm
+event orbital meeting /at 2021-09-07
 list
 done 6
 done 6
@@ -22,4 +22,8 @@ done -1
 delete 10
 deadline buy stationery
 event
+delete 4
+delete 3
+delete 2
+delete 1
 bye
