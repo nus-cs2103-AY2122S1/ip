@@ -23,7 +23,6 @@ public class AddCommand extends Command {
         super(taskType, description);
     }
 
-
     @Override
     public void execute(TaskList tasklist, Storage store, Ui ui)
             throws CommandParamException, DukeFileException,
@@ -72,5 +71,10 @@ public class AddCommand extends Command {
         } catch (IOException e) {
             throw new DukeFileException();
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.command + " " + this.description;
     }
 }

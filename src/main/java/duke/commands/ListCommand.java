@@ -20,4 +20,9 @@ public class ListCommand extends Command {
             throws EmptyListException {
             taskList.printTasks(ui);
     }
+
+    @Override
+    public String toString() {
+        return this.command;
+    }
 }

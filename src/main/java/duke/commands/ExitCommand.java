@@ -20,4 +20,9 @@ public class ExitCommand extends Command {
         taskList.safeTasks(store);
         ui.bidFarewell();
     }
+
+    @Override
+    public String toString() {
+        return this.command;
+    }
 }

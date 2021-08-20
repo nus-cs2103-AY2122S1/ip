@@ -24,4 +24,9 @@ public class DeleteCommand extends Command {
             throw new TaskNotFoundException(this.index + 1);
         }
     }
+
+    @Override
+    public String toString() {
+        return this.command + " " + (this.index + 1);
+    }
 }

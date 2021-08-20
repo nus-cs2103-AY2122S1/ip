@@ -25,6 +25,10 @@ public class DoneCommand extends Command {
         } else {
             throw new TaskNotFoundException(this.index + 1);
         }
+    }
 
+    @Override
+    public String toString() {
+        return this.command + " " + (this.index + 1);
     }
 }
