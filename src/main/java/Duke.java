@@ -1,7 +1,11 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.ArrayList;
+
 
 public class Duke {
-    public static void main(String[] args) throws InputNotValidError {
+    public static void main(String[] args) throws InputNotValidError, IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -11,9 +15,11 @@ public class Duke {
         run();
     }
 
-    public static void run() throws InputNotValidError{
+    public static void run() throws InputNotValidError, IOException{
         System.out.println(great());
-        askToDo();
+        ArrayList<String[]> data = Data.loadData("/Users/fukushimayuuichirou/Desktop/ip/data.txt");
+
+        askToDo(data);
     }
 
     public static String great(){
@@ -26,9 +32,10 @@ public class Duke {
         return greatSent;
     }    
 
-    public static void askToDo() throws InputNotValidError{
+    public static void askToDo(ArrayList<String[]> data) throws InputNotValidError, IOException{
         Scanner input = new Scanner(System.in);
         TaskList tasklist = new TaskList();
+        tasklist.LoadTask(data);
         while(true){
             System.out.println("");
             String action = input.nextLine();
@@ -40,9 +47,10 @@ public class Duke {
                 "   Bye. Hope to see you again soon!\n" +
                 "   ____________________________________________________________";
                 System.out.println(byesent);
+                Data.saveData(tasklist.returnTaskList());
                 break;
             }else{
-                tasklist.actionHalder(splited);
+                tasklist.actionHalder(splited, false, false);
             }
         }
         input.close();

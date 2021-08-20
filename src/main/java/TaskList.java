@@ -11,7 +11,30 @@ public class TaskList {
         this.curSize = 0;
     }
 
-    public void addTask(Task task){
+    public void LoadTask(ArrayList<String[]> data) throws InputNotValidError{
+        for (String[] each : data){
+            String[] actions = new String[2];
+            String actionName = each[0];
+            Boolean done = true;
+            if(each[1].equals(" 0 ")){
+                done = false;
+            }
+            if (actionName.equals("T ")){
+                actions[0] = "todo";
+                actions[1] = each[2].substring(1, each[2].length());
+            }else if(actionName.equals("E ")){
+                actions[0] = "event";
+                actions[1] = each[2].substring(1) + "/at"  + each[3].substring(1, each[3].length());
+            }else if(actionName.equals("D ")){
+                actions[0] = "deadline";
+                actions[1] = each[2].substring(1) + "/by" + each[3].substring(1, each[3].length());                
+            }
+            this.actionHalder(actions, done, true);
+        }
+
+    }
+
+    public void addTask(Task task, boolean fromdata){
         this.list.add(task);
         this.curSize++;
         String item = "\n" +
@@ -20,8 +43,9 @@ public class TaskList {
         "       " + task +  "\n" +
         "   Now you have " + curSize + " tasks in the list.\n" +
         "   ____________________________________________________________";
-        System.out.println(item);
-
+        if (!fromdata){
+            System.out.println(item);
+        }
     }
 
     public void done(int num){
@@ -52,8 +76,7 @@ public class TaskList {
         }
     }
 
-    public void actionHalder(String[] actionList) throws InputNotValidError{
-
+    public void actionHalder(String[] actionList, boolean done, boolean fromData) throws InputNotValidError{
         try{
             this.isValidAction(actionList);
         }
@@ -74,11 +97,11 @@ public class TaskList {
             int num = Integer.parseInt(actionList[1]);
             this.done(num);
         }else if(actionName.equals("todo")){
-            this.addToDo(actionList[1]);
+            this.addToDo(actionList[1], done, fromData);
         }else if(actionName.equals("deadline")){
-            this.addDeadline(actionList[1]);
+            this.addDeadline(actionList[1], done, fromData);
         }else if(actionName.equals("event")){
-            this.addEvent(actionList[1]);
+            this.addEvent(actionList[1], done, fromData);
         }else if(actionName.equals("delete")){
             int num = Integer.parseInt(actionList[1]);
             this.delete(num);
@@ -88,26 +111,25 @@ public class TaskList {
 
     }
     
-    public void addToDo(String action){
-        ToDo newTask = new ToDo(action, false);
-        this.addTask(newTask);
+    public void addToDo(String action, boolean done, boolean fromdata){
+        ToDo newTask = new ToDo(action, done, "T");
+        this.addTask(newTask, fromdata);
     }
 
-    public void addDeadline(String action){
+    public void addDeadline(String action, boolean done, boolean fromdata){
         String actionlist[] = action.split("/by");
         action = actionlist[0];
         String date = actionlist[1];
-        Deadline newTask = new Deadline(action, false, date);
-        this.addTask(newTask);
-
+        Deadline newTask = new Deadline(action, done, date, "D");
+        this.addTask(newTask, fromdata);
     }
 
-    public void addEvent(String action){
+    public void addEvent(String action, boolean done, boolean fromdata){
         String actionlist[] = action.split("/at");
         action = actionlist[0];
         String date = actionlist[1];
-        Event newTask = new Event(action, false, date);
-        this.addTask(newTask);
+        Event newTask = new Event(action, done, date, "E");
+        this.addTask(newTask, fromdata);
     }
 
     public void delete(int num){
@@ -138,5 +160,10 @@ public class TaskList {
         res += "    ____________________________________________________________";
         return res;
     }
+
+    public ArrayList<Task> returnTaskList(){
+        return this.list;
+    }
+
 
 }
