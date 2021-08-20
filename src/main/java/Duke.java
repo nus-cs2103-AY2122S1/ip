@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,8 +16,8 @@ import java.util.stream.IntStream;
  * Main file for chatbot.
  *
  * @author marcuspeh
- * @version Level-7
- * @since 19 Aug 2021
+ * @version Level-8
+ * @since 20 Aug 2021
  */
 
 public class Duke {
@@ -116,7 +117,11 @@ public class Duke {
      * @param dateTime Date and time of the event.
      */
     private void addEvent(String s, String dateTime) {
-        addTask(new Events(s, dateTime));
+        try {
+            addTask(new Events(s, dateTime));
+        } catch (ParseException e) {
+            dateTimeErrorMessage();
+        }
     }
 
     /**
@@ -126,7 +131,11 @@ public class Duke {
      * @param dateTime Deadline of the task
      */
     private void addDeadline(String s, String dateTime) {
-        addTask(new Deadlines(s, dateTime));
+        try {
+            addTask(new Deadlines(s, dateTime));
+        } catch (ParseException e) {
+            dateTimeErrorMessage();
+        }
     }
 
     /**
@@ -220,11 +229,20 @@ public class Duke {
                         String[] taskData = task.split(" \\| ");
                         if (taskData.length == 3 || taskData.length == 4) {
                             if (taskData[0].equals(Keyword.DEADLINE.getSaveWord())) {
-                                taskList.add(new Deadlines(taskData[1], taskData[3],
-                                        taskData[2].equals("1") ? true : false));
+                                try {
+                                    taskList.add(new Deadlines(taskData[1], taskData[3],
+                                            taskData[2].equals("1") ? true : false));
+                                } catch (ParseException e) {
+                                    printMessage(String.format("Cant import %s", taskData[1]));
+                                }
                             } else if (taskData[0].equals(Keyword.EVENTS.getSaveWord())) {
-                                taskList.add(new Events(taskData[1], taskData[3],
-                                        taskData[2].equals("1") ? true : false));
+                                try {
+                                    taskList.add(new Events(taskData[1], taskData[3],
+                                            taskData[2].equals("1") ? true : false));
+                                } catch (ParseException e) {
+
+                                    printMessage(String.format("Cant import %s", taskData[1]));
+                                }
                             } else if (taskData[0].equals(Keyword.TODOS.getSaveWord())) {
                                 taskList.add(new ToDos(taskData[1],
                                         taskData[2].equals("1") ? true : false));
@@ -330,6 +348,14 @@ public class Duke {
     private void eventErrorMessage() {
         printMessage("Ugh! The command should be in this format:",
                "event <description> /at <date/time>");
+    }
+
+    /**
+     * Prints out error message if dateTime format is invalid.
+     */
+    private void dateTimeErrorMessage() {
+        printMessage("Date/Time format is wrong. Ensure that it is in the this format:",
+                "dd/mm/yy hhmm (24hrs format)");
     }
 
     /**

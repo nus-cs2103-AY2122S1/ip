@@ -1,34 +1,33 @@
+import java.text.ParseException;
+
 /**
  * Class to store deadline. Subclass of task.
  *
  * @author marcuspeh
- * @version Level-7
- * @since 19 Aug 2021
+ * @version Level-8
+ * @since 20 Aug 2021
  */
 public class Deadlines extends Task {
-    private String deadline;
-
     /**
      * Constructor for Deadline.
      *
-     * @param task Task to be stored
-     * @param deadline Deadline for the task
+     * @param task task to be stored
+     * @param dateTime deadTime for the task
+     * @throws ParseException Date / Time format is invalid.
      */
-    Deadlines(String task, String deadline) {
-        super(task);
-        this.deadline = deadline;
+    Deadlines(String task, String dateTime) throws ParseException {
+        super(task, dateTime);
     }
 
     /**
      * Constructor for Deadline.
      *
      * @param task Task to be stored
-     * @param deadline Deadline for the task
+     * @param dateTime deadTime for the task
      * @param done Whether the task is done
      */
-    Deadlines(String task, String deadline, boolean done) {
-        super(task, done);
-        this.deadline = deadline;
+    Deadlines(String task, String dateTime, boolean done) throws ParseException {
+        super(task, dateTime, done);
     }
 
     /**
@@ -38,19 +37,11 @@ public class Deadlines extends Task {
      * @return string to save the txt file
      */
     public String saveOutput() {
-        return String.format("D | %s | %s | %s", super.getTask(), super.getIsDone() ? 1 : 0, deadline);
-    }
-
-    /** Getter for deadline.
-     *
-     * @return deadline
-     */
-    public String getDeadline() {
-        return deadline;
+        return String.format("D | %s | %s | %s", super.getTask(), super.getIsDone() ? 1 : 0, super.getDateTime());
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline + ")";
+        return "[D]" + super.toString() + " (by: " + super.getDateTime()  + ")";
     }
 }

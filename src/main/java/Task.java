@@ -1,15 +1,24 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Abstract Class to manage task stored in chatbot.
  *
  * @author marcuspeh
- * @version Level-4
- * @since 15 Aug 2021
+ * @version Level-8
+ * @since 20 Aug 2021
  */
 public abstract class Task {
     /** Stores the task. */
     private String task;
     /** Stores if the task is done. */
     private boolean isDone;
+    /** Stores the date time for the task */
+    private Date dateTime;
+    /** Date format */
+    private static final String DATETIME = "dd/MM/yy HHmm";
+    private static final SimpleDateFormat formatDateTime = new SimpleDateFormat(DATETIME);
 
     /**
      * Constructor for Task.
@@ -25,11 +34,38 @@ public abstract class Task {
      * Constructor for Task
      *
      * @param task Task to be stored
-     * @param done Whether the task is done
+     * @param isDone Whether the task is done
      */
-    Task(String task, boolean done) {
+    Task(String task, boolean isDone) {
         this.task = task;
-        this.isDone = done;
+        this.isDone = isDone;
+        this.dateTime = null;
+    }
+
+    /**
+     * Constructor for Task
+     *
+     * @param task Task to be stored
+     * @param dateTime Date / Time of the task.
+     * @param isDone Whether the task is done
+     */
+    Task(String task, String dateTime, boolean isDone) throws ParseException {
+        this.task = task;
+        this.isDone = isDone;
+        this.dateTime = formatDateTime.parse(dateTime);
+    }
+
+    /**
+     * Constructor for Task.
+     *
+     * @param task Task to be stored
+     * @param dateTime Date / Time of the task.
+     * @throws ParseException Date / Time format is invalid.
+     */
+    Task(String task, String dateTime) throws ParseException {
+        this.task = task;
+        this.isDone = false;
+        this.dateTime = formatDateTime.parse(dateTime);
     }
 
     /**
@@ -66,6 +102,14 @@ public abstract class Task {
      */
     public String getTask() {
         return task;
+    }
+
+    /** Getter for dateTime.
+     *
+     * @return dateTime
+     */
+    public String getDateTime() {
+        return formatDateTime.format(dateTime);
     }
 
     @Override

@@ -1,22 +1,22 @@
+import java.text.ParseException;
+
 /**
  * Class to store event. Subclass of task.
  *
  * @author marcuspeh
- * @version Level-7
- * @since 19 Aug 2021
+ * @version Level-8
+ * @since 20 Aug 2021
  */
 public class Events extends Task {
-    private String dateTime;
-
     /**
      * Constructor for Events.
      *
      * @param task task to be stored
      * @param dateTime dateTime for the task
+     * @throws ParseException Date / Time format is invalid.
      */
-    Events(String task, String dateTime) {
-        super(task);
-        this.dateTime = dateTime;
+    Events(String task, String dateTime) throws ParseException {
+        super(task, dateTime);
     }
 
     /**
@@ -26,18 +26,10 @@ public class Events extends Task {
      * @param dateTime dateTime for the task
      * @param done whether the task is done
      */
-    Events(String task, String dateTime, boolean done) {
-        super(task, done);
-        this.dateTime = dateTime;
+    Events(String task, String dateTime, boolean done) throws ParseException {
+        super(task, dateTime, done);
     }
 
-    /** Getter for dateTime.
-     *
-     * @return dateTime
-     */
-    public String getDateTime() {
-        return dateTime;
-    }
 
     /**
      * To save the task to the txt file.
@@ -46,11 +38,11 @@ public class Events extends Task {
      * @return string to save the txt file
      */
     public String saveOutput() {
-        return String.format("D | %s | %s | %s", super.getTask(), super.getIsDone() ? 1 : 0, dateTime);
+        return String.format("D | %s | %s | %s", super.getTask(), super.getIsDone() ? 1 : 0, getDateTime());
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dateTime + ")";
+        return "[E]" + super.toString() + " (at: " + super.getDateTime() + ")";
     }
 }
