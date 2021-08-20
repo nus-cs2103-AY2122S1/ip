@@ -1,6 +1,5 @@
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * This is chatbot (Aisu) class.
@@ -13,9 +12,9 @@ import java.util.Scanner;
  * 6) Type "bye" - Exit program
  */
 public class Aisu {
-    private Storage storage;
+    private final Storage storage;
     private Tasklist tasklist;
-    private Ui ui;
+    private final Ui ui;
 
     public Aisu(String dirPath, String fileName) {
         this.ui = new Ui();
@@ -23,8 +22,7 @@ public class Aisu {
         try {
             List<Task> cachedData = this.storage.load();
             this.tasklist = new Tasklist(cachedData);
-            ui.showToUser("Got cached list!");
-        } catch (FileNotFoundException | AisuException e) {
+        } catch (AisuException e) {
             this.tasklist = new Tasklist();
         }
     }
@@ -40,14 +38,16 @@ public class Aisu {
                 command.execute(this.tasklist, this.storage, this.ui);
                 isExit = command.isExit();
             } catch (AisuException e) {
+                ui.showDivider();
                 ui.showError(e.getMessage());
             } finally {
                 ui.showDivider();
             }
         }
+        ui.showGoodbyeMessage();
     }
 
     public static void main(String[] args) {
-        new Aisu("data", "test1.txt");
+        new Aisu("data", "test1.txt").run();
     }
 }

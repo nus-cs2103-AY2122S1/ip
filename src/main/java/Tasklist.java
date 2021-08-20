@@ -24,15 +24,19 @@ public class Tasklist {
         return this.list;
     }
 
-    private Task getTaskAt(int n) throws ArrayIndexOutOfBoundsException {
+    public int getListSize() {
+        return this.list.size();
+    }
+
+    private Task getTaskAt(int n) throws AisuException {
         if (n <= 0 || n > this.list.size()) {
-            throw new ArrayIndexOutOfBoundsException("That is an invalid task number!");
+            throw new AisuException("That is an invalid task number!");
         }
         return this.list.get(n-1);
     }
 
-    public void addTask(String line, TaskTypes type) throws AisuException { // adds new task to taskList
-        Task newTask;
+    public Task addTask(String line, TaskTypes type) throws AisuException { // adds new task to taskList
+        Task newTask = new Todo("dummy");
         switch(type) {
         case T:
             newTask = new Todo(line);
@@ -53,40 +57,30 @@ public class Tasklist {
                 throw new AisuException("Your formatting is wrong! Write as: event (task) /at (date range)");
             }
             break;
-        default:
-            throw new AisuException("That's an invalid task format..."); // repeated code w/ Aisu.java. should find a way to remove ltr
         }
-
         this.list.add(newTask);
-
-        System.out.println(" Got it! I've added this task:");
-        System.out.println("   " + newTask);
-        System.out.println(" Now you have " + this.list.size() + " task(s) in the list.");
+        return newTask;
     }
 
-    public void deleteTask(int n) throws ArrayIndexOutOfBoundsException {
+    public Task deleteTask(int n) throws AisuException {
         if (n <= 0 || n > this.list.size()) {
-            throw new ArrayIndexOutOfBoundsException("That is an invalid task number!");
+            throw new AisuException("That is an invalid task number!");
         }
         Task deletedTask = this.list.get(n - 1);
         this.list.remove(n - 1);
-
-        System.out.println(" Noted~ I've removed this task:");
-        System.out.println("   " + deletedTask);
-        System.out.println(" Now you have " + this.list.size() + " task(s) in the list.");
+        return deletedTask;
     }
 
-    public void markDone(int n) throws ArrayIndexOutOfBoundsException {
+    public Task markDone(int n) throws AisuException {
         if (n <= 0 || n > this.list.size()) {
-            throw new ArrayIndexOutOfBoundsException("That is an invalid task number!");
+            throw new AisuException("That is an invalid task number!");
         }
         this.list.get(n - 1).markAsDone();
-        System.out.println(" Nice! I've marked this task as completed:");
-        System.out.println(this.getTaskAt(n));
+        return this.getTaskAt(n);
     }
 
     @Override
-    public String toString() { // displays the list
+    public String toString() {
         if (this.list.isEmpty()) {
             return "Oops, the list is empty! :O";
         }

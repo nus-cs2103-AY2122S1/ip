@@ -2,7 +2,7 @@
  * The Parser class deals with making sense of the user command.
  */
 public class Parser {
-    public static Command parse(String input) throws AisuException { // if return true, means exit
+    public static Command parse(String input) throws AisuException {
         if (input.equals("bye")) {
             return new ExitCommand();
         } else if (input.equals("list")) {

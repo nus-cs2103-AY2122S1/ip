@@ -1,4 +1,3 @@
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -20,10 +19,6 @@ public class Ui {
 
     private final Scanner in;
     private final PrintStream out;
-
-    public enum commands {
-        EXIT,
-    }
 
     public Ui() {
         this.in = new Scanner(System.in);
@@ -47,7 +42,7 @@ public class Ui {
     }
 
     public void showError(String message) {
-
+        this.out.println(message);
     }
 
     /** Shows message(s) to the user, called depending on context */
@@ -56,6 +51,4 @@ public class Ui {
             this.out.println(m);
         }
     }
-
-
 }
