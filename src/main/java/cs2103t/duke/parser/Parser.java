@@ -77,24 +77,33 @@ public class Parser {
                     throw new DukeException(space + "☹ OOPS!!! The start/end time of an event cannot be empty.");
                 }
             }
-        } else if (input.length() >= 6 && input.startsWith("done ")) {
-            if (isValidNum(input.substring(5))) {
+        } else if (input.startsWith("done")) {
+            if (input.equals("done")) {
+                throw new DukeException(space + "☹ OOPS!!! Please tell me which task you have done.");
+            }
+            if (input.charAt(4) == ' ' && isValidNum(input.substring(5))) {
                 return new DoneCommand(Integer.parseInt(input.substring(5).trim()));
             } else {
                 throw new DukeException(INVALID_INPUT);
             }
-        } else if (input.length() >= 8 && input.startsWith("delete ")) {
-            if (isValidNum(input.substring(7))) {
+        } else if (input.startsWith("delete")) {
+            if (input.equals("delete")) {
+                throw new DukeException(space + "☹ OOPS!!! Please tell me which task you want to delete.");
+            }
+            if (input.charAt(6) == ' ' && isValidNum(input.substring(7))) {
                 return new DeleteCommand(Integer.parseInt(input.substring(7).trim()));
             } else {
                 throw new DukeException(INVALID_INPUT);
             }
-        } else if (input.length() >= 6 && input.startsWith("find ")) {
-            String searchQuery = input.substring(5).trim();
-            if (searchQuery.equals("")) {
-                throw new DukeException(space + "☹ OOPS!!! The search query cannot be empty.");  // TODO: fix this
+        } else if (input.startsWith("find")) {
+            if (input.equals("find")) {
+                throw new DukeException(space + "☹ OOPS!!! The search query cannot be empty.");
             }
-            return new FindCommand(searchQuery);
+            if (input.charAt(4) == ' ') {
+                return new FindCommand(input.substring(5).trim());
+            } else {
+                throw new DukeException(INVALID_INPUT);
+            }
         } else {
             throw new DukeException(INVALID_INPUT);
         }
