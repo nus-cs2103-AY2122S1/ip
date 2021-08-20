@@ -37,14 +37,14 @@ public class Storage {
             fileWriter.write(gson.toJson(tasks.getTaskList(), ArrayList.class));
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
             throw new LifelineException("Unable to save tasks at the moment");
         }
     }
 
     public TaskList load() throws LifelineException {
         try {
-            JsonArray arr = JsonParser.parseReader(new FileReader(filepath)).getAsJsonArray();
+            FileReader fileReader = new FileReader(filepath);
+            JsonArray arr = JsonParser.parseReader(fileReader).getAsJsonArray();
             TaskList savedTasks = new TaskList(new ArrayList<Task>());
             for (int i = 0; i < arr.size(); i++) {
                 JsonObject currTask = arr.get(i).getAsJsonObject();
@@ -64,6 +64,7 @@ public class Storage {
                             currTask.get("isDone").getAsBoolean()));
                 }
             }
+            fileReader.close();
             return savedTasks;
         } catch (IOException e) {
             throw new LifelineException("Unable to find your saved tasks!\n");
