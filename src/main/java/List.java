@@ -11,30 +11,32 @@ public class List {
         items.add(task);
     }
 
-    public String returnItems() {
-        StringBuilder str = new StringBuilder();
-        str.append("     Here are the tasks in your list:\n");
+    public String[] returnItems() {
+        String[] itemList = new String[items.size() + 1];
+        itemList[0] = "Here are the tasks in your list:";
         for (int i = 0; i < items.size(); i++) {
-            str.append("     ").append(i + 1).append(".").append(items.get(i)).append("\n");
+            itemList[i + 1] = (i + 1) + "." + items.get(i);
         }
-        return str.toString();
+        return itemList;
     }
 
     public String returnItemCount() {
-        return "     Now you have " + items.size() + " tasks in the list.";
+        return "Now you have " + items.size() + " tasks in the list.";
     }
 
-    public String markDone(int index) {
+    public String markDone(int index) throws DukeException{
+        if (index > items.size() || index < 1) {
+            throw new DukeException("index");
+        }
         Task t = items.get(index - 1);
         t.markDone();
         return t.toString();
     }
 
-    public String removeTask(int index) {
+    public String removeTask(int index) throws DukeException{
+        if (index > items.size() || index < 1) {
+            throw new DukeException("index");
+        }
         return items.remove(index - 1).toString();
-    }
-
-    public int getSize() {
-        return items.size();
     }
 }
