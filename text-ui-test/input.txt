@@ -1,0 +1,10 @@
+nocommand
+list
+todo readme
+list
+deadline projSubmission /by yesterday
+event zoomMeeting /at tonight
+list
+done 2
+list
+bye
