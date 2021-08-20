@@ -30,7 +30,6 @@ public class Duke {
 
 
         public void list() {
-            int counter = 0;
             for (int i = 0; i < this.numTask; i++) {
                 System.out.println((i + 1)+ ". " + tasks.get(i));
             }
