@@ -91,8 +91,9 @@ public class Duke {
         } else if (input.startsWith("delete")) {
 
             // If successfully deleted task, then print current number of tasks.
-            if (alterTask(input, TaskAction.DELETE))
+            if (alterTask(input, TaskAction.DELETE)) {
                 printNumberOfTasks();
+            }
 
         } else {
 
@@ -112,7 +113,7 @@ public class Duke {
     private static void addTask(Task newTask) {
         list.add(newTask);
         System.out.println("Output:\n\nYou have successfully added the following task:\n\n" +
-                            "    " + newTask);
+                "    " + newTask);
         printNumberOfTasks();
     }
 
@@ -130,21 +131,23 @@ public class Duke {
 
             int index = Integer.parseInt(input.substring(action.substringIndex)) - 1;
 
-            if (action == TaskAction.DELETE) {          // If delete
+            if (action == TaskAction.DELETE) {
+                // If delete
                 taskToBeAltered = list.remove(index);
-            } else {                                    // If done
+            } else {
+                // If done
                 taskToBeAltered = list.get(index);
                 taskToBeAltered.markAsDone();
             }
 
-            System.out.println("Output:\n\nThis task is successfully " + action.successMessage + ":\n\n" +
-                                "    " + taskToBeAltered);
+            System.out.println("Output:\n\nThis task is successfully " + action.successMessage + ":\n\n"
+                    + "    " + taskToBeAltered);
             return true;
         } catch (StringIndexOutOfBoundsException | NumberFormatException e1) {
 
-            System.out.println("Output: Please specify which task you would like to have\n" +
-                                action.successMessage + " by adding a single number after '" + action.name + "'!\n" +
-                                "i.e. " + action.name + " 1");
+            System.out.println("Output: Please specify which task you would like to have\n"
+                    + action.successMessage + " by adding a single number after '" + action.name + "'!\n"
+                    + "i.e. " + action.name + " 1");
             return false;
 
         } catch (IndexOutOfBoundsException e2) {
@@ -166,9 +169,11 @@ public class Duke {
         Task newTask = null;
 
         try {
-            if (!input.startsWith("todo") && !input.startsWith("deadline") && !input.startsWith("event")) { 
+            if (!input.startsWith("todo") && !input.startsWith("deadline") && !input.startsWith("event")) {
                 throw new InvalidInputException();
             } else {
+                // If it passes the if block, means it is a task-setting command
+
                 // Check if a task description is present
                 checkDescription(input);
 
@@ -231,9 +236,9 @@ public class Duke {
     private static Task setDeadline(String input) throws InvalidParamException {
         String[] deadlineParams = input.split(" /by ");
         if (deadlineParams.length != 2) {
-            throw new InvalidParamException("Please include the deadline of the task after\n" +
-                                            "a task description using a '/by' (only once).\n" +
-                                            "i.e. deadline return book /by Monday");
+            throw new InvalidParamException("Please include the deadline of the task after\n"
+                    + "a task description using a '/by' (only once).\n"
+                    + "i.e. deadline return book /by Monday");
         }
         Task deadline = new Deadline(deadlineParams[0], deadlineParams[1]);
         return deadline;
@@ -249,9 +254,9 @@ public class Duke {
     private static Task setEvent(String input) throws InvalidParamException {
         String[] eventParams = input.split(" /at ");
         if (eventParams.length != 2) {
-            throw new InvalidParamException("Please include the time of the event after\n" +
-                                            "a task description using an '/at' (only once).\n" +
-                                            "i.e. event project meeting /at Aug 6th 2-4pm");
+            throw new InvalidParamException("Please include the time of the event after\n"
+                    + "a task description using an '/at' (only once).\n"
+                    + "i.e. event project meeting /at Aug 6th 2-4pm");
         }
         Task event = new Event(eventParams[0], eventParams[1]);
         return event;
@@ -261,7 +266,8 @@ public class Duke {
      * Prints the number of tasks currently in the task list.
      */
     private static void printNumberOfTasks() {
-        System.out.println("\nYou now have " + list.size() + (list.size() == 1 ? " task " : " tasks ") + "in your list!");
+        System.out.println("\nYou now have " + list.size() + (list.size() == 1 ? " task " : " tasks ")
+                + "in your list!");
     }
 
     /**
