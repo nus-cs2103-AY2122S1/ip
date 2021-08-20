@@ -1,3 +1,7 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -77,6 +81,8 @@ public class Duke {
                                 "  " + task, list.returnItemCount()));
                     } catch (DukeException e) {
                         System.err.println(format(e.toString()));
+                    } catch (DateTimeParseException e) {
+                        System.err.println(format("Date'T'time inputted is not of valid format: YYYY-MM-DDThh:mm" ));
                     }
                 }
                 break;
@@ -95,7 +101,57 @@ public class Duke {
                                 list.returnItemCount()));
                     } catch (DukeException e) {
                         System.err.println(format(e.toString()));
+                    } catch (DateTimeParseException e) {
+                        System.err.println(format("Date'T'time inputted is not of valid format: YYYY-MM-DDThh:mm" ));
                     }
+                }
+                break;
+            case "by":
+                try {
+                    LocalDateTime dateTime = LocalDateTime.parse(sc.nextLine().trim());
+                    ArrayList<DateTimeable> dtarr = list.getEventsBy(dateTime);
+                    String[] strarr = new String[dtarr.size() + 1];
+                    strarr[0] = "Here are the Events happening before "
+                            + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")) + ":";
+                    int count = 1;
+                    for (DateTimeable dt : dtarr) {
+                        strarr[count++] = dt.toString();
+                    }
+                    System.out.println(format(strarr));
+                } catch (DateTimeParseException e) {
+                    System.err.println(format("Date'T'time inputted is not of valid format: YYYY-MM-DDThh:mm" ));
+                }
+                break;
+            case "at":
+                try {
+                    LocalDateTime dateTime = LocalDateTime.parse(sc.nextLine().trim());
+                    ArrayList<DateTimeable> dtarr = list.getEventsAt(dateTime);
+                    String[] strarr = new String[dtarr.size() + 1];
+                    strarr[0] = "Here are the Deadlines to be completed by "
+                            + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")) + ":";
+                    int count = 1;
+                    for (DateTimeable dt : dtarr) {
+                        strarr[count++] = dt.toString();
+                    }
+                    System.out.println(format(strarr));
+                } catch (DateTimeParseException e) {
+                    System.err.println(format("Date'T'time inputted is not of valid format: YYYY-MM-DDThh:mm" ));
+                }
+                break;
+            case "all":
+                try {
+                    LocalDateTime dateTime = LocalDateTime.parse(sc.nextLine().trim());
+                    ArrayList<DateTimeable> dtarr = list.getEventsAll(dateTime);
+                    String[] strarr = new String[dtarr.size() + 1];
+                    strarr[0] = "Here are the timed tasks occurring before "
+                            + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")) + ":";
+                    int count = 1;
+                    for (DateTimeable dt : dtarr) {
+                        strarr[count++] = dt.toString();
+                    }
+                    System.out.println(format(strarr));
+                } catch (DateTimeParseException e) {
+                    System.err.println(format("Date'T'time inputted is not of valid format: YYYY-MM-DDThh:mm" ));
                 }
                 break;
             default:

@@ -1,13 +1,39 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class List {
     private ArrayList<Task> items;
+    private TreeMap<LocalDateTime, ArrayList<DateTimeable>> calendar;
+    private TreeMap<LocalDateTime, ArrayList<DateTimeable>> calendarEvents;
+    private TreeMap<LocalDateTime, ArrayList<DateTimeable>> calendarDeadlines;
 
     public List() {
         items = new ArrayList<>();
+        calendar = new TreeMap<>();
+        calendarEvents = new TreeMap<>();
+        calendarDeadlines = new TreeMap<>();
     }
 
     public void addItem(Task task) {
+        if (task instanceof DateTimeable) {
+            DateTimeable dt = (DateTimeable) task;
+            if (!calendar.containsKey(dt.getDateTime())) {
+                calendar.put(dt.getDateTime(), new ArrayList<DateTimeable>());
+            }
+            calendar.get(dt.getDateTime()).add(dt);
+            if (task instanceof Event) {
+                if (!calendarEvents.containsKey(dt.getDateTime())) {
+                    calendarEvents.put(dt.getDateTime(), new ArrayList<DateTimeable>());
+                }
+                calendarEvents.get(dt.getDateTime()).add(dt);
+            } else {
+                if (!calendarDeadlines.containsKey(dt.getDateTime())) {
+                    calendarDeadlines.put(dt.getDateTime(), new ArrayList<DateTimeable>());
+                }
+                calendarDeadlines.get(dt.getDateTime()).add(dt);
+            }
+        }
         items.add(task);
     }
 
@@ -38,5 +64,23 @@ public class List {
             throw new DukeException("index");
         }
         return items.remove(index - 1).toString();
+    }
+
+    public ArrayList<DateTimeable> getEventsAt(LocalDateTime dt) {
+        ArrayList<DateTimeable> arrayList = new ArrayList<>();
+        calendarEvents.headMap(dt, true).values().forEach(arrayList::addAll);
+        return arrayList;
+    }
+
+    public ArrayList<DateTimeable> getEventsBy(LocalDateTime dt) {
+        ArrayList<DateTimeable> arrayList = new ArrayList<>();
+        calendarDeadlines.headMap(dt, true).values().forEach(arrayList::addAll);
+        return arrayList;
+    }
+
+    public ArrayList<DateTimeable> getEventsAll(LocalDateTime dt) {
+        ArrayList<DateTimeable> arrayList = new ArrayList<>();
+        calendar.headMap(dt, true).values().forEach(arrayList::addAll);
+        return arrayList;
     }
 }
