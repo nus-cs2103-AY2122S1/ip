@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -102,7 +103,11 @@ public class Duke {
      * @param dateTime Date and time of the event.
      */
     private void addEvent(String s, String dateTime) {
-        addTask(new Events(s, dateTime));
+        try {
+            addTask(new Events(s, dateTime));
+        } catch (ParseException e) {
+            dateTimeErrorMessage();
+        }
     }
 
     /**
@@ -112,7 +117,11 @@ public class Duke {
      * @param dateTime Deadline of the task
      */
     private void addDeadline(String s, String dateTime) {
-        addTask(new Deadlines(s, dateTime));
+        try {
+            addTask(new Deadlines(s, dateTime));
+        } catch (ParseException e) {
+            dateTimeErrorMessage();
+        }
     }
 
     /**
@@ -261,6 +270,14 @@ public class Duke {
     private void eventErrorMessage() {
         printMessage("Ugh! The command should be in this format:",
                "event <description> /at <date/time>");
+    }
+
+    /**
+     * Prints out error message if dateTime format is invalid.
+     */
+    private void dateTimeErrorMessage() {
+        printMessage("Date/Time format is wrong. Ensure that it is in the this format:",
+                "dd/mm/yy hhmm (24hrs format)");
     }
 
     /**

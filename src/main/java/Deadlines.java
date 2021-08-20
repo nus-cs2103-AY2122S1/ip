@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 /**
  * Class to store deadline. Subclass of task.
  *
@@ -6,29 +8,20 @@
  * @since 15 Aug 2021
  */
 public class Deadlines extends Task {
-    private String deadline;
-
     /**
      * Constructor for Deadline.
      *
      * @param task task to be stored
-     * @param deadline dealine for the task
+     * @param dateTime deadTime for the task
+     * @throws ParseException Date / Time format is invalid.
      */
-    Deadlines(String task, String deadline) {
-        super(task);
-        this.deadline = deadline;
+    Deadlines(String task, String dateTime) throws ParseException {
+        super(task, dateTime);
     }
 
-    /** Getter for deadline.
-     *
-     * @return deadline
-     */
-    public String getDeadline() {
-        return deadline;
-    }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline + ")";
+        return "[D]" + super.toString() + " (by: " + super.getDateTime()  + ")";
     }
 }

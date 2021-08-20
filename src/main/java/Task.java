@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Abstract Class to manage task stored in chatbot.
  *
@@ -10,6 +14,11 @@ public abstract class Task {
     private String task;
     /** Stores if the task is done. */
     private boolean done;
+    /** Stores the date time for the task */
+    private Date dateTime;
+    /** Date format */
+    private static final String DATETIME = "dd/MM/yyyy HHmm";
+    private static final SimpleDateFormat formatDateTime = new SimpleDateFormat(DATETIME);
 
     /**
      * Constructor for Task.
@@ -19,6 +28,20 @@ public abstract class Task {
     Task(String task) {
         this.task = task;
         this.done = false;
+        this.dateTime = null;
+    }
+
+    /**
+     * Constructor for Task.
+     *
+     * @param task Task to be stored
+     * @param dateTime Date / Time of the task.
+     * @throws ParseException Date / Time format is invalid.
+     */
+    Task(String task, String dateTime) throws ParseException {
+        this.task = task;
+        this.done = false;
+        this.dateTime = formatDateTime.parse(dateTime);
     }
 
     /**
@@ -47,6 +70,14 @@ public abstract class Task {
      */
     public String getTask() {
         return task;
+    }
+
+    /** Getter for dateTime.
+     *
+     * @return dateTime
+     */
+    public String getDateTime() {
+        return formatDateTime.format(dateTime);
     }
 
     @Override
