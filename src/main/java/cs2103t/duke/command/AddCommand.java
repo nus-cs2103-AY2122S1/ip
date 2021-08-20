@@ -27,8 +27,8 @@ public class AddCommand extends Command {
      * Displays a message to the user through the specified UI if the task is successfully added,
      * or exits the current program immediately if the process fails.
      *
-     * @param taskList the specified task list for the task to be added into.
-     * @param ui the specified UI for the message to be displayed through.
+     * @param taskList the task list for the task to be added into.
+     * @param ui the UI for the message to be displayed through.
      */
     @Override
     public void execute(TaskList taskList, Ui ui) {

@@ -24,13 +24,13 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes this command. Looks for all the tasks in Duke's task list
+     * Executes this command. Looks for all the tasks in the specified task list
      * whose description contains a query string.
      * Displays a message to the user through the specified UI
      * listing all the matching tasks found or indicating nothing matches the search query.
      *
-     * @param taskList the specified task list in which the search is conducted.
-     * @param ui the specified UI for the message to be displayed through.
+     * @param taskList the task list in which the search is conducted.
+     * @param ui the UI for the message to be displayed through.
      */
     @Override
     public void execute(TaskList taskList, Ui ui) {
@@ -50,7 +50,7 @@ public class FindCommand extends Command {
         }
         if (hasFound) {
             result.setLength(result.length() - 1);
-            ui.displayText(space + "Here are the matching tasks in your list: \n" + result.toString());
+            ui.displayText(space + "Here are the matching tasks in your list: \n" + result);
         } else {
             ui.displayText(space + "It seems nothing in your list matches the search query...");
         }

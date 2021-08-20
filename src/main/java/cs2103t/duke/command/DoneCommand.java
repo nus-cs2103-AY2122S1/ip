@@ -27,8 +27,8 @@ public class DoneCommand extends Command {
      * Displays a message to the user through the specified UI if the status of the task is successfully changed,
      * or the task has already been marked as done, or the task with the index does not exist.
      *
-     * @param taskList the specified task list that the task to be marked as done is in.
-     * @param ui the specified UI for the message to be displayed through.
+     * @param taskList the task list that the task to be marked as done is in.
+     * @param ui the UI for the message to be displayed through.
      */
     @Override
     public void execute(TaskList taskList, Ui ui) {
