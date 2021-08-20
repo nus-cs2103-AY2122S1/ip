@@ -99,7 +99,7 @@ public class Storage {
         }
     }
 
-    public static ArrayList<Task> readTasksFromData() throws DukeException {
+    public static TaskList readTasksFromData() throws DukeException {
         // Initialize an ArrayList for Task objects.
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -129,7 +129,7 @@ public class Storage {
             throw new DukeException("Failed to read tasks from save file.");
         }
 
-        return tasks;
+        return new TaskList(tasks);
     }
 
     public static void saveTasksToData(ArrayList<Task> tasks) throws DukeException {
