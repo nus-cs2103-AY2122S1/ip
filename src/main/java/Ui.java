@@ -1,11 +1,19 @@
-class Ui {
-    public Ui() {
+import java.util.Scanner;
 
+class Ui {
+    private final Scanner sc;
+
+    public Ui() {
+        sc = new Scanner(System.in);
     }
 
     @Override
     public String toString() {
         return "Yiyang-bot's UI";
+    }
+
+    public String readCommand() {
+        return sc.nextLine();
     }
 
     public void displayGreetings() {
@@ -15,5 +23,13 @@ class Ui {
 
     public void displayBye() {
         System.out.println("\tBye. Hope to see you again.");
+    }
+
+    public void showLine() {
+        System.out.println("\t--------------------------------------------------");
+    }
+
+    public void showError(String errorMsg) {
+        System.err.println(errorMsg);
     }
 }
