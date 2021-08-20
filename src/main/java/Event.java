@@ -8,6 +8,12 @@ public class Event extends Task {
     this.done = false;
   }
 
+  public Event(String description, String date, boolean done) {
+    this.description = description;
+    this.date = date;
+    this.done = done;
+  }
+
   public String toString() {
     String output = "[E]";
     if (this.done) {
@@ -17,6 +23,13 @@ public class Event extends Task {
     }
     output += this.description;
     output += String.format(" (at: %s)", this.date);
+    return output;
+  }
+
+  public String toWriteString() {
+    String output = Duke.EVENT_ENUM;
+    String done = (this.done ? "1" : "0");
+    output += DIVIDER + done + DIVIDER + this.description + DIVIDER + this.date;
     return output;
   }
 }
