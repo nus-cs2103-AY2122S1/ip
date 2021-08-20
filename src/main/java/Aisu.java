@@ -13,34 +13,30 @@ import java.util.Scanner;
  * 6) Type "bye" - Exit program
  */
 public class Aisu {
-    // constants declaration
-    private static final String DIV_HEAD = "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=\n";
-    private static final String DIV_TAIL = "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=\n";
-    private static final String LOGO = " (`-')  _   _               (`-').->           \n" +
-                                        "(OO ).-/  (_)              ( OO)_       .->\n" +
-                                        "/ ,---.   ,-(`-') (`-')   (_)--\\_) ,--.(,--.\n" +
-                                        "| \\ /`.\\  | ( OO) ( OO).->/    _ / |  | |(`-')\n" +
-                                        "'-'|_.' | |  |  )(,------.\\_..`--. |  | |(OO )\n" +
-                                        "(|  .-. |(|  |_/  `------'.-._)   \\|  | | |  \\ \n" +
-                                        "|  | |  | |  |'->         \\      / \\  '-'(_ .'\n" +
-                                        "`--' `--' `--'             `-----'  `-----'   \n";
+    private Storage storage;
+    private Tasklist tasklist;
+    private Ui ui;
 
-    public static void main(String[] args) {
-        Tasklist tasklist;
-        Storage storage = new Storage("data", "test.txt");
+    public Aisu(String dirPath, String fileName) {
+        this.ui = new Ui();
+        this.storage = new Storage(dirPath, fileName);
         try {
-            List<Task> cachedData = storage.load();
-            tasklist = new Tasklist(cachedData);
-            System.out.println("got cached list!");
+            List<Task> cachedData = this.storage.load();
+            this.tasklist = new Tasklist(cachedData);
+            ui.showToUser("Got cached list!");
         } catch (FileNotFoundException | AisuException e) {
-            tasklist = new Tasklist();
+            this.tasklist = new Tasklist();
         }
-        System.out.println(Aisu.LOGO + Aisu.DIV_HEAD + " Hello, I'm Ai-su! How may I help you today?" + Aisu.DIV_TAIL);
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine(); // get input
+    }
 
+    public void run() {
+        ui.showWelcomeMessage();
+
+
+        // let parser decide what to do, ui does the talking for repeated texts/general errors?
+        Parser.parse(input);
         while (!input.equals("bye")) {
-            System.out.println(Aisu.DIV_HEAD);
+            ui.showDivider();
             try {
                 if (input.equals("list")) { // show list
                     System.out.println(tasklist);
@@ -57,17 +53,23 @@ public class Aisu {
                     } else if (input.startsWith("delete ")) {
                         int n = Integer.parseInt(input.substring(7));
                         tasklist.deleteTask(n);
+                    } else {
+                        throw new AisuException("That's an invalid task format...");
                     }
                 }
                 storage.save(tasklist);
             } catch (AisuException | ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println(e);
             } finally {
-                System.out.println(Aisu.DIV_TAIL);
+                ui.showDivider();
 
                 input = sc.nextLine(); // get next input
             }
         }
-        System.out.println(Aisu.DIV_HEAD + " See you next time! :D" + Aisu.DIV_TAIL); // end program when user types bye
+        ui.showGoodbyeMessage();
+    }
+
+    public static void main(String[] args) {
+        new Aisu("data", "test1.txt");
     }
 }

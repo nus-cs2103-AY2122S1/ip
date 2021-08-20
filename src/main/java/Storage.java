@@ -53,17 +53,17 @@ public class Storage {
             //depending on T D or E, create a task and add to the list.
             Task tempTask;
             switch(temp[0]) {
-                case "T":
-                    tempTask = new Todo(temp[2]);
-                    break;
-                case "D":
-                    tempTask = new Deadline(temp[2], temp[3]);
-                    break;
-                case "E":
-                    tempTask = new Event(temp[2], temp[3]);
-                    break;
-                default:
-                    throw new AisuException("No such type of task! >:( unchecked exception error!");
+            case "T":
+                tempTask = new Todo(temp[2]);
+                break;
+            case "D":
+                tempTask = new Deadline(temp[2], temp[3]);
+                break;
+            case "E":
+                tempTask = new Event(temp[2], temp[3]);
+                break;
+            default:
+                throw new AisuException("No such type of task! >:( unchecked exception error!");
             }
             if (temp[1].equals("1")) {
                 tempTask.markAsDone();

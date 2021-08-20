@@ -34,27 +34,27 @@ public class Tasklist {
     public void addTask(String line, TaskTypes type) throws AisuException { // adds new task to taskList
         Task newTask;
         switch(type) {
-            case T:
-                newTask = new Todo(line);
-                break;
-            case D:
-                try {
-                    String[] temp = line.split(" /by ");
-                    newTask = new Deadline(temp[0], temp[1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new AisuException("Your formatting is wrong! Write as: deadline (task) /by (yyyy-mm-dd)");
-                }
-                break;
-            case E:
-                try {
-                    String[] temp = line.split(" /at ");
-                    newTask = new Event(temp[0], temp[1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new AisuException("Your formatting is wrong! Write as: event (task) /at (date range)");
-                }
-                break;
-            default:
-                throw new AisuException("That's an invalid task format...");
+        case T:
+            newTask = new Todo(line);
+            break;
+        case D:
+            try {
+                String[] temp = line.split(" /by ");
+                newTask = new Deadline(temp[0], temp[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new AisuException("Your formatting is wrong! Write as: deadline (task) /by (yyyy-mm-dd)");
+            }
+            break;
+        case E:
+            try {
+                String[] temp = line.split(" /at ");
+                newTask = new Event(temp[0], temp[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new AisuException("Your formatting is wrong! Write as: event (task) /at (date range)");
+            }
+            break;
+        default:
+            throw new AisuException("That's an invalid task format..."); // repeated code w/ Aisu.java. should find a way to remove ltr
         }
 
         this.list.add(newTask);
