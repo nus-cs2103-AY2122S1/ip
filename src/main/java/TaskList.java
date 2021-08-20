@@ -5,7 +5,7 @@ public class TaskList {
     private final List<Task> tasks;
 
     public TaskList() {
-        this(new ArrayList<Task>());
+        this(new ArrayList<>());
     }
 
     // TODO consider changing this constructor so that tasks cannot be directly accessed by others

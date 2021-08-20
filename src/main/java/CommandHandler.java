@@ -9,5 +9,5 @@ abstract class CommandHandler {
      * @param input - the input entered by the user
      * @return response
      */
-    abstract String handle(String input);
+    abstract String handle(String input) throws BlueException;
 }

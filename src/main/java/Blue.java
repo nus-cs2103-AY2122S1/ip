@@ -13,7 +13,12 @@ public class Blue {
     private static final String EXIT_CONTENT = "Bye. Hope to never see you again!";
     private static final List<Task> tasks = new ArrayList<>();
     private static final TaskList taskList = new TaskList(tasks);
+    private static final ListHandler listHandler = new ListHandler(taskList);
     private static final ToDoHandler toDoHandler = new ToDoHandler(taskList);
+    private static final DeadlineHandler deadlineHandler = new DeadlineHandler(taskList);
+    private static final EventHandler eventHandler = new EventHandler(taskList);
+    private static final DoneHandler doneHandler = new DoneHandler(taskList);
+
 
     public static void main(String[] args) {
         System.out.println(LOGO);
@@ -40,19 +45,35 @@ public class Blue {
         }
         switch (command) {
             case Command.LIST:
-                listTasks();
+                speak(listHandler.handle(input));
                 break;
             case Command.TODO:
-                speak(toDoHandler.handle(input));
+                try {
+                    speak(toDoHandler.handle(input));
+                } catch (BlueException e) {
+                    speak(e.getMessage());
+                }
                 break;
             case Command.DEADLINE:
-                handleDeadline(input);
+                try {
+                    speak(deadlineHandler.handle(input));
+                } catch (BlueException e) {
+                    speak(e.getMessage());
+                }
                 break;
             case Command.EVENT:
-                handleEvent(input);
+                try {
+                    speak(eventHandler.handle(input));
+                } catch (BlueException e) {
+                    speak(e.getMessage());
+                }
                 break;
             case Command.DONE:
-                handleDone(input);
+                try {
+                    speak(doneHandler.handle(input));
+                } catch (BlueException e) {
+                    speak(e.getMessage());
+                }
                 break;
             case Command.DELETE:
                 handleDelete(input);
@@ -62,64 +83,6 @@ public class Blue {
                 break;
         }
         return true;
-    }
-
-    private static void listTasks() {
-        String content = "Here are the tasks in your list:\n";
-        String[] lines = new String[tasks.size()];
-        for (int i = 0; i < tasks.size(); i++) {
-            lines[i] = (i + 1) + ". " + tasks.get(i);
-        }
-        content += String.join("\n", lines);
-        speak(content);
-    }
-
-    private static void handleDeadline(String input) {
-        if (input.contains(" /by ")) {
-            int indexSpace = input.indexOf(" ");
-            int indexBy = input.indexOf(" /by ");
-            String title = input.substring(indexSpace + 1, indexBy);
-            String by = input.substring(indexBy + 5);
-            Deadline deadline = new Deadline(title, by);
-            tasks.add(deadline);
-            String content = "Got it. I've added this task:\n" + deadline + "\n";
-            content += "Now you have " + tasks.size() + " tasks in the list.";
-            speak(content);
-        } else
-            speak("☹ OOPS!!! The description of a deadline cannot be empty.");
-    }
-
-    private static void handleEvent(String input) {
-        if (input.contains(" /at ")) {
-            int indexSpace = input.indexOf(" ");
-            int indexAt = input.indexOf(" /at ");
-            String title = input.substring(indexSpace + 1, indexAt);
-            String at = input.substring(indexAt + 5);
-            Event event = new Event(title, at);
-            tasks.add(event);
-            String content = "Got it. I've added this task:\n" + event + "\n";
-            content += "Now you have " + tasks.size() + " tasks in the list.";
-            speak(content);
-        } else
-            speak("☹ OOPS!!! The time of an event cannot be empty.");
-    }
-
-    private static void handleDone(String input) {
-        String[] arguments = getArguments(input);
-        if (arguments.length > 0) {
-            try {
-                int index = Integer.parseInt(arguments[0]) - 1;
-                if (0 <= index && index < tasks.size()) {
-                    Task task = tasks.get(index);
-                    task.markDone();
-                    speak("Nice! I've marked this task as done:\n" + task);
-                } else
-                    speak("☹ OOPS!!! No task found at index " + (index + 1) + ".");
-            } catch (NumberFormatException e) {
-                speak("☹ OOPS!!! Index must be a number.");
-            }
-        } else
-            speak("☹ OOPS!!! The index of done cannot be empty.");
     }
 
     private static void handleDelete(String input) {

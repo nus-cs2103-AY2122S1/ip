@@ -4,7 +4,7 @@ public class ToDoHandler extends CommandHandler {
     }
 
     @Override
-    public String handle(String input) {
+    public String handle(String input) throws BlueException {
         if (input.contains(" ")) {
             int index = input.indexOf(" ");
             String title = input.substring(index + 1);
@@ -14,8 +14,7 @@ public class ToDoHandler extends CommandHandler {
             response += "Now you have " + taskList.size() + " tasks in the list.";
             return response;
         } else {
-            // TODO throw exception
-            return "☹ OOPS!!! The description of a todo cannot be empty.";
+            throw new BlueException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
 }
