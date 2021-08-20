@@ -2,10 +2,43 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputHandler {
+    /*
+    public enum Command {
+        TODO ("todo"),
+        DEADLINE ("deadline"),
+        EVENT ("event"),
+        LIST ("list"),
+        DONE ("done"),
+        DELETE ("delete"),
+        GREET ("greet"),
+        BYE ("bye");
+        
+        private final String name;
+        Command(String name) {
+            this.name = name;
+        }
+        
+        public boolean is(Command that) {
+            return that.name.equals(this.name);
+        }
+    }
+     */
+    
     private Database db = new Database();
+    // private HashMap<Command, CheckedFunction<String, Record>> cmds = new HashMap<>();
     private HashMap<String, CheckedFunction<String, Record>> cmds = new HashMap<>();
 
     public InputHandler() {
+        /*
+        cmds.put(Command.GREET, this::greet);
+        cmds.put(Command.BYE, this::bye);
+        cmds.put(Command.LIST, this::list);
+        cmds.put(Command.DONE, this::done);
+        cmds.put(Command.DELETE, this::delete);
+        cmds.put(Command.TODO, this::todo);
+        cmds.put(Command.DEADLINE, this::deadline);
+        cmds.put(Command.EVENT, this::event);
+         */
         cmds.put("greet", this::greet);
         cmds.put("bye", this::bye);
         cmds.put("list", this::list);
