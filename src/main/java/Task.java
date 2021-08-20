@@ -3,8 +3,12 @@ class Task {
     private boolean isDone;
 
     public Task(String name) {
+        new Task(name, false);
+    }
+
+    public Task(String name, boolean isDone) {
         this.name = name;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -14,6 +18,11 @@ class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.name);
+    }
+
+    // for saving to local file
+    public String toSaveString() {
+        return this.name + "-" + (isDone ? "1" : "0");
     }
 
     public void setDone(boolean done) {

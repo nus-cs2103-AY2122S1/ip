@@ -12,6 +12,8 @@ class Duke {
     private static final String CMD_EVENT = "event";
     private static final String CMD_DEL = "delete";
 
+    private static final String FILE_URL = "data/storedList.txt";
+
     // static fields
     private static List<Task> tasks = new ArrayList<>();
 
@@ -67,6 +69,9 @@ class Duke {
     }
 
     public static void main(String[] args) {
+        Storage storage = new Storage(FILE_URL);
+        tasks = storage.loadStorage();
+
         displayGreetings();
 
         Scanner sc = new Scanner(System.in);
@@ -120,5 +125,6 @@ class Duke {
         }
 
         displayBye();
+        storage.saveStorage(tasks);
     }
 }

@@ -6,6 +6,12 @@ class Event extends Task{
         this.eventDate = eventDate;
     }
 
+    public Event(String name, String isDone, String eventDate) {
+        super(name, isDone.equals("1"));
+        this.eventDate = eventDate;
+    }
+
+
     public static Event parseNewCommand(String newCommand) throws IllegalArgumentException {
         int sepIndex = newCommand.indexOf("/at");
         int cmdLen = newCommand.length();
@@ -21,5 +27,10 @@ class Event extends Task{
     @Override
     public String toString() {
         return "[E]" + super.toString() + String.format(" (by: %s)", this.eventDate);
+    }
+
+    @Override
+    public String toSaveString() {
+        return "Event-" + super.toSaveString() + "-" + eventDate;
     }
 }

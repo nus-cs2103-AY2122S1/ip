@@ -6,6 +6,11 @@ class Deadline extends Task {
         this.doneBefore = doneBefore;
     }
 
+    public Deadline(String name, String isDone, String doneBefore) {
+        super(name, isDone.equals("1"));
+        this.doneBefore = doneBefore;
+    }
+
     public static Deadline parseNewCommand(String newCommand) throws IllegalArgumentException {
         int sepIndex = newCommand.indexOf("/by");
         int cmdLen = newCommand.length();
@@ -22,5 +27,10 @@ class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + String.format(" (by: %s)", this.doneBefore);
+    }
+
+    @Override
+    public String toSaveString() {
+        return "Deadline-" + super.toSaveString() + "-" + doneBefore;
     }
 }
