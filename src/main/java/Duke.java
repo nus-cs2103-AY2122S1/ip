@@ -1,5 +1,10 @@
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * scans for user input and outputs corresponding Duke chatbot responses.
@@ -67,7 +72,6 @@ public class Duke {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-
         // Initialize scanner object.
         Scanner sc = new Scanner(System.in);
 
@@ -87,6 +91,48 @@ public class Duke {
 
         // Closes scanner object.
         sc.close();
+    }
+
+    private static String padZeros(String original, int expected) throws DukeException {
+        String output = original;
+        if (original.length() < expected) {
+            for (int i = 0; i < (expected - original.length()); i++) {
+                output = "0" + original;
+            }
+        } else if (original.length() > expected) {
+            throw new DukeException("Invalid datetime format");
+        }
+
+        return output;
+    }
+
+    public static String parseLocalDate(LocalDate localDate) throws DukeException {
+        try {
+            return localDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
+        } catch (DateTimeException dateTimeException) {
+            throw new DukeException("Stored date is corrupt.");
+        }
+    }
+
+    private static LocalDate toLocalDate(String dateString) throws DukeException {
+        String[] split = dateString.split("[/\\s]");
+        String date = padZeros(split[0], 2);
+        String month = padZeros(split[1], 2);
+        String year = padZeros(split[2], 4);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(year).append("-");
+        stringBuilder.append(month).append("-");
+        stringBuilder.append(date);
+
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(stringBuilder.toString());
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new DukeException("Invalid datetime format");
+        }
+
+        return localDate;
     }
 
     private static void handleUserInput(String userInput, ArrayList<Task> tasks) {
@@ -251,15 +297,21 @@ public class Duke {
             String[] descriptions =
                     parseUserDescriptionInput(description, Descriptors.BY, separator, Commands.DEADLINE);
 
+            // Convert time to LocalDate.
+            LocalDate localDate = toLocalDate(descriptions[1]);
+
             // Adds Deadline task to tasks.
-            tasks.add(new Deadline(descriptions[0], descriptions[1]));
+            tasks.add(new Deadline(descriptions[0], localDate));
         } else {
             // Parses description into task description and descriptor description.
             String[] descriptions =
                     parseUserDescriptionInput(description, Descriptors.AT, separator, Commands.EVENT);
 
+            // Convert time to LocalDate.
+            LocalDate localDate = toLocalDate(descriptions[1]);
+
             // Adds Event task to tasks.
-            tasks.add(new Event(descriptions[0], descriptions[1]));
+            tasks.add(new Event(descriptions[0], localDate));
         }
 
         // Prints response to user after successfully adding task to tasks.
