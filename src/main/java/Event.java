@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * This Event class implements the characteristics of a task
  * that starts at a specific time and ends at a specific time.
@@ -7,7 +10,7 @@
 public class Event extends Task {
 
     /** The date/time on which the event is held */
-    protected String at;
+    protected LocalDate at;
 
     /**
      * Constructor for an Event instance that takes in a description and time frame.
@@ -15,7 +18,7 @@ public class Event extends Task {
      * @param description The given task description.
      * @param at The time frame in which the event is held.
      */
-    public Event(String description, String at) {
+    public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }
@@ -27,6 +30,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

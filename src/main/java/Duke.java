@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,8 +56,10 @@ public class Duke {
      * @param taskCommand Command entered by the user to add a task.
      * @throws EmptyTaskDescriptionException If task description is empty.
      * @throws TimeNotSpecifiedException If the date/time is not specified.
+     * @throws DateTimeParseException If the specified date is in the wrong format.
      */
-    private static void addTask(String taskCommand) throws EmptyTaskDescriptionException, TimeNotSpecifiedException {
+    private static void addTask(String taskCommand) throws EmptyTaskDescriptionException, TimeNotSpecifiedException,
+            DateTimeParseException {
         String[] wordsArr = taskCommand.split(" ");
         String taskType = wordsArr[0];
 
@@ -81,7 +85,8 @@ public class Duke {
             if (deadline.trim().isEmpty()) {
                 throw new TimeNotSpecifiedException(" /by ");
             }
-            taskToBeAdded = new Deadline(task, deadline);
+            LocalDate date = LocalDate.parse(deadline);
+            taskToBeAdded = new Deadline(task, date);
         } else {
             if (!taskDescription.contains(" /at ")) {
                 throw new TimeNotSpecifiedException(" /at ");
@@ -92,7 +97,8 @@ public class Duke {
             if (timeFrame.trim().isEmpty()) {
                 throw new TimeNotSpecifiedException(" /at ");
             }
-            taskToBeAdded = new Event(task, timeFrame);
+            LocalDate date = LocalDate.parse(timeFrame);
+            taskToBeAdded = new Event(task, date);
         }
         tasksList.add(taskToBeAdded);
 
@@ -201,6 +207,10 @@ public class Duke {
                     }
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    System.out.println(HORIZONTAL_LINE);
+                    System.out.println("Please specify the date in this format: yyyy-mm-dd");
+                    System.out.println(HORIZONTAL_LINE);
                 }
             }
             listenToCommands();
