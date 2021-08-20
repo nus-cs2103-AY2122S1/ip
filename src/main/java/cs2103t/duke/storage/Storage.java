@@ -13,15 +13,39 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Represents a storage manager for Duke to manage the back-end data storage.
+ * <p>
+ * Duke saves the latest task list to disk and reloads the task list from disk every time it is started.
+ */
 public class Storage {
 
     private final String filePath;
     private final String space = Ui.space;
 
+    /**
+     * Constructs a storage manager for Duke with the specified file path.
+     * <p>
+     * Duke's data will be retrieved from and stored in the file denoted by the specified file path.
+     *
+     * @param filePath the specified file path to store Duke's data.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Retrieves previously stored task list from disk.
+     * <p>
+     * If Duke is run for the first time, a new data file is created.
+     * The current program is exited immediately if the creation process fails.
+     * <p>
+     * If the saved data file is corrupted, all previous data will be discarded,
+     * and a new empty task list will be created.
+     *
+     * @return the latest task list retrieved from disk.
+     * @throws DukeException if the saved data file is corrupted.
+     */
     public TaskList retrieveTaskList() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
@@ -47,7 +71,13 @@ public class Storage {
         return new TaskList(list);
     }
 
-    public void storeTaskList(TaskList list) {
+    /**
+     * Saves the specified task list to disk.
+     *
+     * @param list the latest task list to be saved to disk.
+     * @throws DukeException if an I/O error occurs when saving the task list.
+     */
+    public void saveTaskList(TaskList list) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write(list.printList());
