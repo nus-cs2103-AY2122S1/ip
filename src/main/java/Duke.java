@@ -13,80 +13,73 @@ public class Duke {
             String userInput = sc.nextLine();
             String msgOutput = "";
 
-            if (userInput.equals("list")) {
-                msgOutput = String.format(
-                        "Here are the tasks in your list:\n%s",toDoList.toString()
-                );
-            } else if (userInput.equals("bye")) {
-                msgOutput = endScript();
-            } else if (userInput.matches("done\s[0-9]{1,2}")) {
-                //eg. done 12
-                //limiting tasks from 0-99
-                String inputBody = userInput.split(" ", 2)[1];
-                int idxFrom0 = Integer.parseInt(inputBody) - 1;
-                if (!(idxFrom0 < 0 || idxFrom0 >= numOfTasks)) { //valid argument indexes
-                    toDoList.toggleDone(idxFrom0);
+            try {
+                if (userInput.equals("list")) {
                     msgOutput = String.format(
-                            "Nice! I've marked this task as done:\n    %s",
-                            toDoList.get(idxFrom0).toString()
+                            "Here are the tasks in your list:\n%s", toDoList.toString()
                     );
-                }
-            } else if (userInput.matches("todo\\s\\w+.*")) {
-                //eg. todo read book
-                String inputBody = userInput.split(" ", 2)[1];
-                Task newTask = ToDo.of(inputBody);
-                msgOutput = String.format(
-                        "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
-                        newTask.toString(), numOfTasks + 1
-                );
-                toDoList = toDoList.addTask(newTask);
-            } else if (userInput.matches("deadline\s.+\s\\/by\s.+")) {
-                //eg. deadline xxx /by xxx
-                String inputBody = userInput.split(" ", 2)[1];
-                String[] deadlineDetails = inputBody.split("\s/by\s", 2);
-                String deadlineTask = deadlineDetails[0];
-                String deadlineByDate = deadlineDetails[1];
+                } else if (userInput.equals("bye")) {
+                    msgOutput = endScript();
+                } else if (userInput.matches("done\s[0-9]{1,2}")) {
+                    //eg. done 12
+                    //limiting tasks from 0-99
+                    String inputBody = userInput.split(" ", 2)[1];
+                    int idxFrom0 = Integer.parseInt(inputBody) - 1;
+                    if (!(idxFrom0 < 0 || idxFrom0 >= numOfTasks)) { //valid argument indexes
+                        toDoList.toggleDone(idxFrom0);
+                        msgOutput = String.format(
+                                "Nice! I've marked this task as done:\n    %s",
+                                toDoList.get(idxFrom0).toString()
+                        );
+                    }
+                } else if (userInput.matches("todo\\s\\w+.*")) {
+                    //eg. todo read book
+                    String inputBody = userInput.split(" ", 2)[1];
+                    Task newTask = ToDo.of(inputBody);
+                    msgOutput = String.format(
+                            "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
+                            newTask.toString(), numOfTasks + 1
+                    );
+                    toDoList = toDoList.addTask(newTask);
+                } else if (userInput.matches("deadline\s.+\s\\/by\s.+")) {
+                    //eg. deadline xxx /by xxx
+                    String inputBody = userInput.split(" ", 2)[1];
+                    String[] deadlineDetails = inputBody.split("\s/by\s", 2);
+                    String deadlineTask = deadlineDetails[0];
+                    String deadlineByDate = deadlineDetails[1];
 
-                Task newTask = Deadline.of(deadlineTask, deadlineByDate);
-                msgOutput = String.format(
-                        "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
-                        newTask.toString(), numOfTasks + 1
-                );
-                toDoList = toDoList.addTask(newTask);
-            } else if (userInput.matches("event\s.+\s\\/at\s.+")) {
-                //eg. deadline xxx /by xxx
-                String inputBody = userInput.split(" ", 2)[1];
-                String[] eventDetails = inputBody.split("\s/at\s", 2);
-                String eventTask = eventDetails[0];
-                String eventTime = eventDetails[1];
+                    Task newTask = Deadline.of(deadlineTask, deadlineByDate);
+                    msgOutput = String.format(
+                            "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
+                            newTask.toString(), numOfTasks + 1
+                    );
+                    toDoList = toDoList.addTask(newTask);
+                } else if (userInput.matches("event\s.+\s\\/at\s.+")) {
+                    //eg. deadline xxx /by xxx
+                    String inputBody = userInput.split(" ", 2)[1];
+                    String[] eventDetails = inputBody.split("\s/at\s", 2);
+                    String eventTask = eventDetails[0];
+                    String eventTime = eventDetails[1];
 
-                Task newTask = Event.of(eventTask, eventTime);
-                msgOutput = String.format(
-                        "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
-                        newTask.toString(), numOfTasks + 1
-                );
-                toDoList = toDoList.addTask(newTask);
-            } else if (userInput.matches("\\w+\\s*")) {
-                String inputWord = userInput.split(" ",2)[0].toLowerCase();
-                switch (inputWord) {
-                    case "todo":
-                        msgOutput = "todo command syntax: \'todo <task>\'";
-                        break;
-                    case "deadline":
-                        msgOutput = "deadline command syntax: \'deadline <task> /by <deadlineTime>\'";
-                        break;
-                    case "event":
-                        msgOutput = "event command syntax: \'event <task> /by <eventTime>\'";
-                        break;
-                    default:
-                        msgOutput = defaultReplyToInvalidInput();
+                    Task newTask = Event.of(eventTask, eventTime);
+                    msgOutput = String.format(
+                            "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
+                            newTask.toString(), numOfTasks + 1
+                    );
+                    toDoList = toDoList.addTask(newTask);
+                } else {
+                            throw new DukeException(userInput);
+//                        msgOutput = defaultReplyToInvalidInput();
                 }
-            } else {
-                //user input not proper
-                msgOutput = defaultReplyToInvalidInput();
+//                else {
+//                    //user input not proper
+//                    msgOutput = defaultReplyToInvalidInput();
+//                }
+            } catch (Exception e) {
+                msgOutput = e.toString();
+            } finally {
+                displayWithStyle(msgOutput); //output msg to user
             }
-
-            displayWithStyle(msgOutput); //output msg to user
         }
 
     }

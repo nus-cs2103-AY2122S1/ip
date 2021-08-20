@@ -8,11 +8,15 @@
 
     ------------------------------------
     ____________________________________
+    Here are the tasks in your list:
 
     ------------------------------------
     ____________________________________
-    Here are the tasks in your list:
-
+    Invalid input!
+        Available commands: [todo, deadline, event, list, bye]
+    ------------------------------------
+    ____________________________________
+    todo command syntax: 'todo <task>'
     ------------------------------------
     ____________________________________
     Got it! I've added this task:
@@ -28,6 +32,10 @@
     Got it! I've added this task:
      [D][] projSubmission (by: yesterday)
     Now you have 2 tasks in the list.
+    ------------------------------------
+    ____________________________________
+    Invalid input!
+        Available commands: [todo, deadline, event, list, bye]
     ------------------------------------
     ____________________________________
     Got it! I've added this task:
