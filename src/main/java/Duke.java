@@ -117,19 +117,6 @@ public class Duke {
     }
 
     /**
-     * Checks if the input contains the description for the task to be added.
-     * Throws a NoDescriptionException otherwise.
-     *
-     * @param input the input string from the Scanner.
-     * @param task the name of the Task attempting to be added into the task list.
-     *
-     * @throws NoDescriptionException if the description of the task is empty.
-     */
-    private static void checkDescription(String input, String task) throws NoDescriptionException {
-        if (input.split(" ").length == 1) throw new NoDescriptionException(task);
-    }
-
-    /**
      * Alters the task depending on the TaskAction given, which could either be delete or done.
      *
      * @param input the input string from the Scanner.
@@ -179,34 +166,28 @@ public class Duke {
         Task newTask = null;
 
         try {
-            if (input.startsWith("todo")) {
-
-                // Check if a task description is present
-                checkDescription(input, "todo");
-
-                // Set the to-do
-                newTask = setTodo(input.substring(5));
-
-            } else if (input.startsWith("deadline")) {
-
-                // Check if a task description is present
-                checkDescription(input, "deadline");
-
-                // Set the deadline
-                newTask = setDeadline(input.substring(9));
-
-            } else if (input.startsWith("event")) {
-
-                // Check if a task description is present
-                checkDescription(input, "event");
-
-                // Set the event
-                newTask = setEvent(input.substring(6));
-
-            } else {
-
+            if (!input.startsWith("todo") && !input.startsWith("deadline") && !input.startsWith("event")) { 
                 throw new InvalidInputException();
+            } else {
+                // Check if a task description is present
+                checkDescription(input);
 
+                if (input.startsWith("todo")) {
+
+                    // Set the to-do
+                    newTask = setTodo(input.substring(5));
+
+                } else if (input.startsWith("deadline")) {
+
+                    // Set the deadline
+                    newTask = setDeadline(input.substring(9));
+
+                } else if (input.startsWith("event")) {
+
+                    // Set the event
+                    newTask = setEvent(input.substring(6));
+
+                }
             }
         } catch (NoDescriptionException | InvalidParamException | InvalidInputException e1) {
             System.out.println("Output: " + e1.getMessage());
@@ -214,6 +195,19 @@ public class Duke {
 
         // If there was no error, then add task. Else, skip this to get input again.
         if (newTask != null) addTask(newTask);
+    }
+
+    /**
+     * Checks if the input contains the description for the task to be added.
+     * Throws a NoDescriptionException otherwise.
+     *
+     * @param input the input string from the Scanner.
+     *
+     * @throws NoDescriptionException if the description of the task is empty.
+     */
+    private static void checkDescription(String input) throws NoDescriptionException {
+        String[] inputArray = input.split(" ");
+        if (inputArray.length == 1) throw new NoDescriptionException(inputArray[0]);
     }
 
     /**
