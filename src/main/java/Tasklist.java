@@ -42,7 +42,7 @@ public class Tasklist {
                     String[] temp = line.split(" /by ");
                     newTask = new Deadline(temp[0], temp[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new AisuException("Your formatting is wrong! Write as: deadline (task) /by (date)");
+                    throw new AisuException("Your formatting is wrong! Write as: deadline (task) /by (yyyy-mm-dd)");
                 }
                 break;
             case E:
