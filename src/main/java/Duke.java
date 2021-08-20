@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -32,7 +31,7 @@ public class Duke {
                             toDoList.get(idxFrom0).toString()
                     );
                 }
-            } else if (userInput.matches("todo\s.+")) {
+            } else if (userInput.matches("todo\\s\\w+.*")) {
                 //eg. todo read book
                 String inputBody = userInput.split(" ", 2)[1];
                 Task newTask = ToDo.of(inputBody);
@@ -67,6 +66,24 @@ public class Duke {
                         newTask.toString(), numOfTasks + 1
                 );
                 toDoList = toDoList.addTask(newTask);
+            } else if (userInput.matches("\\w+\\s*")) {
+                String inputWord = userInput.split(" ",2)[0].toLowerCase();
+                switch (inputWord) {
+                    case "todo":
+                        msgOutput = "todo command syntax: \'todo <task>\'";
+                        break;
+                    case "deadline":
+                        msgOutput = "deadline command syntax: \'deadline <task> /by <deadlineTime>\'";
+                        break;
+                    case "event":
+                        msgOutput = "event command syntax: \'event <task> /by <eventTime>\'";
+                        break;
+                    default:
+                        msgOutput = defaultReplyToInvalidInput();
+                }
+            } else {
+                //user input not proper
+                msgOutput = defaultReplyToInvalidInput();
             }
 
             displayWithStyle(msgOutput); //output msg to user
@@ -100,5 +117,15 @@ public class Duke {
         }
     }
 
+    //checks if input = "keyword" || input = "keyword <body>"
+    public static boolean hasKeywordAndBody(String input, String keyword) {
+        return input.matches(String.format("%s\\s\\S+.*",keyword));
+    }
+
+    public static String defaultReplyToInvalidInput() {
+        return "Invalid input o(>~<)O!\n" +
+                "Checkout the available commands by typing them in the cmdline!\n"+
+                "Available commands: [todo, deadline, event]";
+    }
 }
 
