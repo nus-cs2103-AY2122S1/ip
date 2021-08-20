@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Scanner;
 
 class Duke {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
     // constants for special commands
     private static final String CMD_BYE = "bye";
     private static final String CMD_LIST = "list";
@@ -15,65 +19,19 @@ class Duke {
 
     private static final String FILE_URL = "data/storedList.txt";
 
-    // static fields
-    private static List<Task> tasks = new ArrayList<>();
-
-    private static void displayGreetings() {
-        System.out.println("\tHello this is Yiyang-bot :D");
-        System.out.println("\tWhat can I do for you?");
-    }
-
-    private static void displayList() {
-        if (tasks.size() == 0) {
-            System.out.println("\tYou don't have any task now.");
-            return;
-        }
-
-        System.out.println("\tHere are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(String.format("\t%d. %s",
-                    i+1, tasks.get(i)));
-        }
-    }
-
-    private static void displayBye() {
-        System.out.println("\tBye. Hope to see you again.");
-    }
-
-    private static void displayAddedNew(Task newItem) {
-        System.out.println("\tGot it. I've added this task: ");
-        System.out.println("\t  " + newItem);
-        System.out.println(String.format("\tNow you have %d tasks in the list.", tasks.size()));
-    }
-
-    private static void markAsDone(int id) throws IndexOutOfBoundsException {
-        if (id > tasks.size()) {
-            throw new IndexOutOfBoundsException("Do not have such a task in the list.");
-        }
-
-        tasks.get(id-1).setDone(true);
-
-        System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println("\t  " + tasks.get(id-1));
-    }
-
-    private static void deleteTask(int id) throws IndexOutOfBoundsException {
-        if (id > tasks.size()) {
-            throw new IndexOutOfBoundsException("Do not have such a task in the list.");
-        }
-
-        Task currTask = tasks.remove(id-1);
-
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t  " + currTask);
-        System.out.println(String.format("\tNow you have %d tasks in the list.", tasks.size()));
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.loadStorage());
     }
 
     public static void main(String[] args) {
-        Storage storage = new Storage(FILE_URL);
-        tasks = storage.loadStorage();
+        new Duke(FILE_URL).run();
+    }
 
-        displayGreetings();
+    
+    public void run() {
+        ui.displayGreetings();
 
         Scanner sc = new Scanner(System.in);
         String currLine = sc.nextLine();
@@ -85,15 +43,15 @@ class Duke {
             try {
                 switch (currCommand) {
                 case CMD_LIST:
-                    displayList();
+                    tasks.displayList();
                     break;
                 case CMD_DONE:
                     int doneId = Integer.parseInt(currLine.split(" ")[1]);
-                    markAsDone(doneId);
+                    tasks.markAsDone(doneId);
                     break;
                 case CMD_DEL:
                     int delId = Integer.parseInt(currLine.split(" ")[1]);
-                    deleteTask(delId);
+                    tasks.deleteTask(delId);
                     break;
                 case CMD_TODO:
                     if (currLine.length() <= 4 || currLine.substring(5).strip().equals("")) {
@@ -114,8 +72,7 @@ class Duke {
 
                 // check if any new item added
                 if (newItem != null) {
-                    tasks.add(newItem);
-                    displayAddedNew(newItem);
+                    tasks.addTask(newItem);
                 }
             } catch (IllegalArgumentException | DateTimeParseException | IndexOutOfBoundsException | DukeException e) {
                 System.err.println("\tOops :( " + e);
@@ -125,7 +82,7 @@ class Duke {
             }
         }
 
-        displayBye();
-        storage.saveStorage(tasks);
+        ui.displayBye();
+        storage.saveStorage(tasks.getTasks());
     }
 }
