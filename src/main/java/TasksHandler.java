@@ -1,38 +1,33 @@
 import commands.*;
 import java.util.List;
 import java.util.ArrayList;
+import status.*;
 
 public class TasksHandler {
     private final List<Command> allTasks;
-    private final List<Boolean> isTaskCompleted;
 
     public TasksHandler() {
         this.allTasks = new ArrayList<Command>();
-        this.isTaskCompleted = new ArrayList<Boolean>();
     }
 
-    
-
     protected void storeTasks(Command newCommand) {
-        if (!newCommand.isExecutable()) {
+        if (newCommand.isForStorage() && !newCommand.isExecutable()) {
             NonExecutableCommand comm = (NonExecutableCommand) newCommand;
-            if (!comm.isExitCommand()) {
-                boolean TaskCompleted = false;
-                this.allTasks.add(newCommand);
-                this.isTaskCompleted.add(TaskCompleted);
-                System.out.println("added: " + newCommand);
-            }
+            Command commandStored = comm.updateStatus(Status.NOT_COMPLETED.getStatus(), Status.STORED.getStatus());
+            System.out.println(commandStored);
+            this.allTasks.add(commandStored);
+            System.out.println("Now you have " + this.allTasks.size() + " tasks in the list.");
         }
     }
 
     protected boolean handleTasks(Command newCommand) {
         if (newCommand.isExecutable()) {
             ExecutableCommand exeCommand = (ExecutableCommand) newCommand;
-            exeCommand.execute(this.allTasks, this.isTaskCompleted);
+            exeCommand.execute(this.allTasks);
             return false;
         }
         NonExecutableCommand nonExeCommand = (NonExecutableCommand) newCommand;
-        boolean exit = nonExeCommand.isExitCommand();
+        boolean exit = !nonExeCommand.isForStorage();
         if (exit) {
             System.out.println(nonExeCommand);
         }

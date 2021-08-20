@@ -12,7 +12,8 @@ public abstract class ExecutableCommand extends Command {
         return true;
     }
 
-    public abstract void execute(List<Command> commandList, List<Boolean> completedList);
+    public abstract void execute(List<Command> commandList);
+    
 
 }
 
