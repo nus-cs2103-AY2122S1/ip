@@ -1,5 +1,12 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * This Duke class implements the functionalities of a chatbot,
@@ -19,12 +26,17 @@ public class Duke {
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
 
     /** An ArrayList to store tasks entered by the user */
-    private static final ArrayList<Task> tasksList = new ArrayList<>();
+    private static ArrayList<Task> tasksList = new ArrayList<>();
 
     /** A Scanner instance to obtain user input */
-    private static final Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
+
+    /** Path of the file that stores the tasks in the hard disk */
+    private static final String FILE_PATH = String.valueOf(Paths.get(
+            System.getProperty("user.home"), "data", "dukeFile.txt"));
 
     public static void main(String[] args) {
+        readFile(FILE_PATH);
         greetUser();
         listenToCommands();
     }
@@ -199,6 +211,7 @@ public class Duke {
                     } else {
                         throw new UnrecognisedCommandException();
                     }
+                    writeToFile(FILE_PATH);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -206,4 +219,91 @@ public class Duke {
             listenToCommands();
         }
     }
-}
+
+    /**
+     * Loads the tasks from the specified file.
+     *
+     * @param path The path to the file that stores the tasks.
+     */
+    private static void readFile(String path) {
+        File dukeFile = new File(path);
+        try {
+            Scanner fileScanner = new Scanner(dukeFile);
+            while (fileScanner.hasNext()) {
+                String currentLine = fileScanner.nextLine();
+
+                String[] taskStatus = currentLine.split(Pattern.quote(" | "));
+                String taskType = taskStatus[0];
+                String taskProgress = taskStatus[1];
+                String taskDescription = taskStatus[2];
+                Task taskToAdd;
+
+                if (taskType.equals("T")) {
+                    taskToAdd = new Todo(taskDescription);
+                } else if (taskType.equals("D")) {
+                    taskToAdd = new Deadline(taskDescription, taskStatus[3]);
+                } else {
+                    taskToAdd = new Event(taskDescription, taskStatus[3]);
+                }
+
+                if (taskProgress.equals("1")) {
+                    taskToAdd.markAsDone();
+                }
+
+                tasksList.add(taskToAdd);
+            }
+        } catch (FileNotFoundException e) {
+            // Checking if directory exists
+            java.nio.file.Path directoryPath = Paths.get(System.getProperty("user.home"), "data");
+            if (!Files.exists(directoryPath)) {
+                File directory = new File(String.valueOf(String.valueOf(directoryPath)));
+                directory.mkdir();
+            }
+        }
+    }
+
+    /**
+     * Saves the tasks in the specified file.
+     *
+     * @param path The path to the file that stores the tasks.
+     */
+    private static void writeToFile(String path) {
+        String textToAdd = "";
+
+        for (Task task : tasksList) {
+            String currentLine = "";
+
+            if (task instanceof Todo) {
+                currentLine += "T | ";
+            } else if (task instanceof Deadline) {
+                currentLine += "D | ";
+            } else {
+                currentLine += "E | ";
+            }
+
+            if (task.isDone) {
+                currentLine += "1 | ";
+            } else {
+                currentLine += "0 | ";
+            }
+
+            currentLine += task.description + " | ";
+
+            if (task instanceof Deadline) {
+                currentLine += ((Deadline) task).by;
+            } else if (task instanceof Event) {
+                currentLine += ((Event) task).at;
+            }
+
+            textToAdd += currentLine + System.lineSeparator();
+        }
+
+        try {
+            FileWriter fileWriter = new FileWriter(path);
+            fileWriter.write(textToAdd);
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Unable to write to ./data/dukeFile.txt");
+        }
+    }
+ }
