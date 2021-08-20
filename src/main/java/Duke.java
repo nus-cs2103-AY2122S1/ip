@@ -1,16 +1,24 @@
+
 import java.io.IOException;
 import java.nio.file.Path;
+
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * scans for user input and outputs corresponding Duke chatbot responses.
  */
 public class Duke {
-
+    // File name for saved tasks.
     private static final String SAVE_FILENAME = "dukeSave.txt";
 
     // | is a special character that has to be escaped.
@@ -49,6 +57,7 @@ public class Duke {
         DONE("done"),
         DELETE("delete"),
         LIST("list"),
+        DATE("date"),
         BYE("bye");
 
         private final String COMMAND;
@@ -77,7 +86,6 @@ public class Duke {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-
         // Initialize scanner object.
         Scanner sc = new Scanner(System.in);
 
@@ -122,6 +130,9 @@ public class Duke {
                 } else if (userInput.startsWith(Commands.DELETE.getCommand())) {
                     // Delete a task.
                     deleteTask(tasks, userInput);
+                } else if (userInput.startsWith(Commands.DATE.getCommand())) {
+                    // Print tasks that fall on given date.
+                    printTaskAtDate(tasks, userInput);
                 } else {
                     // Add a task to tasks.
                     addTask(tasks, userInput, '/');
@@ -135,24 +146,119 @@ public class Duke {
         }
     }
 
-    private static String toSaveFormat(Task task) {
+    private static String padZeros(String original, int expected) throws DukeException {
+        String output = original;
+        if (original.length() < expected) {
+            for (int i = 0; i < (expected - original.length()); i++) {
+                output = "0" + original;
+            }
+        } else if (original.length() > expected) {
+            throw new DukeException("Invalid datetime format");
+        }
+
+        return output;
+    }
+
+    public static String parseLocalDate(LocalDate localDate) throws DukeException {
+        try {
+            return localDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
+        } catch (DateTimeException dateTimeException) {
+            throw new DukeException("Stored date is corrupt.");
+        }
+    }
+
+    private static LocalDate toLocalDate(String dateString) throws DukeException {
+        String[] split = dateString.split("[/\\s]");
+        String date = padZeros(split[0], 2);
+        String month = padZeros(split[1], 2);
+        String year = padZeros(split[2], 4);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(year).append("-");
+        stringBuilder.append(month).append("-");
+        stringBuilder.append(date);
+
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(stringBuilder.toString());
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new DukeException("Invalid datetime format");
+        }
+
+        return localDate;
+    }
+
+    private static String toSaveDateFormat(LocalDate localDate) throws DukeException {
+        try {
+            return localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (DateTimeException dateTimeException) {
+            throw new DukeException("Stored date is corrupt.");
+        }
+    }
+
+    private static void printTaskAtDate(ArrayList<Task> tasks, String userInput) throws DukeException {
+        int counter = 0;
+        int events = 0;
+        int deadlines = 0;
+        String dateString = userInput.substring(Commands.DATE.getLength() + 1);
+        LocalDate localDate = toLocalDate(dateString);
+        String formattedDateString = parseLocalDate(localDate);
+
+        System.out.println("Here are the Deadlines or Events that fall on " + formattedDateString + ":");
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                if (localDate.equals(deadline.by)) {
+                    counter++;
+                    deadlines++;
+                    System.out.println(counter + "." + deadline);
+                }
+            }
+
+            if (task instanceof Event) {
+                Event event = (Event) task;
+                if (localDate.equals(event.at)) {
+                    counter++;
+                    events++;
+                    System.out.println(counter + "." + event);
+                }
+            }
+        }
+
+        System.out.println("A total of " + counter + " events (" + deadlines + " deadlines and " +
+                events + " events) fall on " + formattedDateString);
+    }
+
+    private static String toSaveFormat(Task task) throws DukeException {
         // Initialize StringBuilder.
         StringBuilder stringBuilder = new StringBuilder();
 
-        // Get task type, done status and time of task.
+        // Get task type, done status of task.
         String taskType = task.getTaskType();
         int done = task.isDone ? 1 : 0;
-        String time = task.getTime();
 
         // Build corresponding save string from task.
         stringBuilder.append(taskType).append(SAVE_SEPARATOR);
         stringBuilder.append(done).append(SAVE_SEPARATOR);
         stringBuilder.append(task.description);
 
-        // Deadline and Event tasks have time, so they are also appended via stringBuilder.
-        if (taskType.equals("D") || taskType.equals("E")) {
-            stringBuilder.append(SAVE_SEPARATOR);
-            stringBuilder.append(time);
+        // Deadline tasks have time, so it is obtained and appended via stringBuilder.
+        if (taskType.equals("D")) {
+            Deadline deadline = (Deadline) task;
+            LocalDate localDate = deadline.getTime();
+            String time = toSaveDateFormat(localDate);
+            stringBuilder.append(SAVE_SEPARATOR).append(time);
+        }
+
+        // Event tasks have time, so it is obtained and appended via stringBuilder.
+        if (taskType.equals("E")) {
+            Event event = (Event) task;
+            LocalDate localDate = event.getTime();
+            String time = toSaveDateFormat(localDate);
+            stringBuilder.append(SAVE_SEPARATOR).append(time);
         }
 
         return stringBuilder.toString();
@@ -177,11 +283,11 @@ public class Duke {
                 task = new Todo(description);
                 break;
             case "D":
-                String by = saveSplit[3];
+                LocalDate by = toLocalDate(saveSplit[3]);
                 task = new Deadline(description, by);
                 break;
             case "E":
-                String at = saveSplit[3];
+                LocalDate at = toLocalDate(saveSplit[3]);
                 task = new Event(description, at);
                 break;
             default:
@@ -390,7 +496,13 @@ public class Duke {
         // User's task description. Decrement by 1 as there is a space between task description and separator
         String commandDescription = userDescription.substring(0, separatorIdx - 1);
 
-        // Returns a String array with the task description and user time input.
+        // Events and Deadline could have empty tasks but taken as they do due to their descriptors and time.
+        // Need to run another check on whether their task descriptions are empty.
+        if (commandDescription.equals("")) {
+            throw new DukeException("The description of " + command.getCommand() + " cannot be empty.");
+        }
+
+        // Returns a String array with the task description and user input after descriptor.
         return new String[] {commandDescription, time};
     }
 
@@ -422,15 +534,21 @@ public class Duke {
             String[] descriptions =
                     parseUserDescriptionInput(description, Descriptors.BY, separator, Commands.DEADLINE);
 
+            // Convert time to LocalDate.
+            LocalDate localDate = toLocalDate(descriptions[1]);
+
             // Adds Deadline task to tasks.
-            tasks.add(new Deadline(descriptions[0], descriptions[1]));
+            tasks.add(new Deadline(descriptions[0], localDate));
         } else {
             // Parses description into task description and time.
             String[] descriptions =
                     parseUserDescriptionInput(description, Descriptors.AT, separator, Commands.EVENT);
 
+            // Convert time to LocalDate.
+            LocalDate localDate = toLocalDate(descriptions[1]);
+
             // Adds Event task to tasks.
-            tasks.add(new Event(descriptions[0], descriptions[1]));
+            tasks.add(new Event(descriptions[0], localDate));
         }
 
         // Prints response to user after successfully adding task to tasks.
