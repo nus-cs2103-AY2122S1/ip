@@ -1,7 +1,5 @@
 package duke.util;
 
-import com.sun.security.jgss.GSSUtil;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,6 +19,10 @@ public class Ui {
 
     public void showError(String errorMessage) {
         System.out.println("\t" + errorMessage);
+    }
+
+    public void showLoadSuccess() {
+        System.out.println("Found a save, loading......");
     }
 
     public void showLoadingError() {
