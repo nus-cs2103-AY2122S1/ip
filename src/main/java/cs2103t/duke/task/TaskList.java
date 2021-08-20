@@ -50,7 +50,7 @@ public class TaskList {
         int count = 0;
         for (Task task : tasks) {
             count++;
-            listAsString.append(Ui.space)
+            listAsString.append(Ui.SPACE)
                     .append(count)
                     .append(".")
                     .append(task.getDescriptionWithStatus())

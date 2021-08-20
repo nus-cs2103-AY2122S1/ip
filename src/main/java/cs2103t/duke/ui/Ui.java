@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class Ui {
 
-    public static String logo = "      ____        _        \n"
+    public static String LOGO = "      ____        _        \n"
             + "     |  _ \\ _   _| | _____ \n"
             + "     | | | | | | | |/ / _ \\\n"
             + "     | |_| | |_| |   <  __/\n"
             + "     |____/ \\__,_|_|\\_\\___|\n";
-    public static String divider = "    ____________________________________________________________";
-    public static String space = "     ";
-    public static String INVALID_INPUT = space + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public static String DIVIDER = "    ____________________________________________________________";
+    public static String SPACE = "     ";
+    public static String INVALID_INPUT = SPACE + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     private final Scanner scanner;
 
@@ -20,14 +20,14 @@ public class Ui {
     }
 
     public void greet() {
-        System.out.println(divider);
-        System.out.println(logo);
-        System.out.println(space + "Hello! I'm Duke\n" + space + "What can I do for you?");
-        System.out.println(divider + "\n");
+        System.out.println(DIVIDER);
+        System.out.println(LOGO);
+        System.out.println(SPACE + "Hello! I'm Duke\n" + SPACE + "What can I do for you?");
+        System.out.println(DIVIDER + "\n");
     }
 
     public void dismiss() {
-        displayText(space + "Bye. Hope to see you again soon!");
+        displayText(SPACE + "Bye. Hope to see you again soon!");
     }
 
     public String readLine() {
@@ -39,9 +39,9 @@ public class Ui {
     }
 
     public void displayText(String text) {
-        System.out.println(divider);
+        System.out.println(DIVIDER);
         System.out.println(text);
-        System.out.println(divider + "\n");
+        System.out.println(DIVIDER + "\n");
     }
 
 }

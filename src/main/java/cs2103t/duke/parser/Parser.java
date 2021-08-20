@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     String INVALID_INPUT = Ui.INVALID_INPUT;
-    String space = Ui.space;
+    String space = Ui.SPACE;
 
     public Command parseCommand(String input) throws DukeException {
         input = input.trim();  // to remove all leading and trailing space of user's input
