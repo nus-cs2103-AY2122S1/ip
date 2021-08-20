@@ -7,6 +7,9 @@ public class Duke {
     static boolean isListening;
     static ArrayList<Task> lst;
 
+    /**
+     * function to initialize Duke
+     */
     static void initialize(){
         isListening = true;
         lst = new ArrayList<Task>();
@@ -129,8 +132,7 @@ public class Duke {
      * function to mark a task done in the list
      * @param t
      */
-    static void markDone(int t){
-        int order = t;
+    static void markDone(int order){
         Task currentTask = lst.get(order-1);
         currentTask.completed();
         System.out.println("Nice! I've marked this task as done: \n" + currentTask.toString());
