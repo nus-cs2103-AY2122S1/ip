@@ -2,6 +2,9 @@ package constants;
 
 import shared.StringHelpers;
 
+/**
+ * Encapsulates global variables possibly used in multiple areas in code.
+ */
 public class Constants {
 
     public static class Display {

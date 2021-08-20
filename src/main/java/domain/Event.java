@@ -1,5 +1,8 @@
 package domain;
 
+/**
+ * Encapsulates a task taking place over a specified period of time.
+ */
 public class Event extends Task {
     private String dateRange;
 

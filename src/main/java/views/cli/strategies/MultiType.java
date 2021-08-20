@@ -9,6 +9,9 @@ import domain.Task;
 import domain.Todo;
 import shared.DukeException;
 
+/**
+ * A responder that is able to handle tasks with CRUD functionality.
+ */
 public class MultiType extends RespondWith {
     private final String list = "list";
     private final String done = "done";

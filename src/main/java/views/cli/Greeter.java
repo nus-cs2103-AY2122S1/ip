@@ -1,5 +1,8 @@
 package views.cli;
 
+/**
+ * This class is responsible for printing the initial welcome message.
+ */
 public class Greeter {
     private static String welcomeMessage;
 

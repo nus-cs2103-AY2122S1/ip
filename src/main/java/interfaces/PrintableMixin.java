@@ -1,5 +1,8 @@
 package interfaces;
 
+/**
+ * A mixin allowing more convenient calls to System.out.
+ */
 public interface PrintableMixin {
     default void print() {
         System.out.println(this);

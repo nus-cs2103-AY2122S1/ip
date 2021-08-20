@@ -2,6 +2,9 @@ package domain;
 
 import shared.StringHelpers;
 
+/**
+ * Encapsulates a generic task.
+ */
 public class Task {
     static enum TaskState {
         NEW(" "), DONE("X");

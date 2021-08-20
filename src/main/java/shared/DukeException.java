@@ -1,6 +1,9 @@
 package shared;
 
 // This needs to be unchecked, otherwise commands hashmap will be quite troublesome
+/**
+ * Main exception class for the chatbot.
+ */
 public class DukeException extends RuntimeException {
     public static enum ExceptionCode {
         UNPROCESSABLE_ENTITY("Unprocessable command"), INCORRECT_ARGS("Incompatible arguments"),
@@ -14,7 +17,7 @@ public class DukeException extends RuntimeException {
         }
     }
 
-    public ExceptionCode exceptionCode;
+    private ExceptionCode exceptionCode;
 
     public DukeException(ExceptionCode exceptionCode) {
         super(exceptionCode.message);

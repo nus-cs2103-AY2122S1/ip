@@ -6,6 +6,10 @@ import java.util.List;
 import domain.Task;
 
 // Level-3
+
+/**
+ * A responder that is able to mark tasks as done.
+ */
 public class MarkDone extends RespondWith {
     private List<Task> userTasks;
 

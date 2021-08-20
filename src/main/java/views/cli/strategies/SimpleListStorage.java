@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Level-2
+
+/**
+ * A responder that can store tasks.
+ */
 public class SimpleListStorage extends RespondWith {
     private String listCommand = "list";
     private List<String> userText;
