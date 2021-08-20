@@ -37,18 +37,19 @@ public class Lifeline {
                 }
                 System.out.println();
                 Command c = Parser.parse(fullCommand);
-                c.getExecute().apply(fullCommand, storage, taskList, ui);
+                String response = c.getExecute().apply(fullCommand, storage, taskList, ui);
+                ui.printToConsole(response);
                 if (c == Command.BYE) {
                     exit = true;
                 }
             } catch (LifelineException e) {
-                ui.showError(e.getMessage());
+                ui.printToConsole(ui.showError(e.getMessage()));
             }
         }
     }
 
     public void start() {
-        ui.greet(taskList);
+        ui.printToConsole(ui.greet(taskList));
         this.getInput();
     }
 }
