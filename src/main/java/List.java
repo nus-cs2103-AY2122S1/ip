@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -7,17 +8,23 @@ public class List {
     private TreeMap<LocalDateTime, ArrayList<DateTimeable>> calendar;
     private TreeMap<LocalDateTime, ArrayList<DateTimeable>> calendarEvents;
     private TreeMap<LocalDateTime, ArrayList<DateTimeable>> calendarDeadlines;
+    private ArrayList<String> dataStorage;
 
     public List() {
         items = new ArrayList<>();
         calendar = new TreeMap<>();
         calendarEvents = new TreeMap<>();
         calendarDeadlines = new TreeMap<>();
+        dataStorage = new ArrayList<>();
     }
 
     public void addItem(Task task) {
+        items.add(task);
+        String data;
+        data = task.getCode() + "|" + task.getStatus() + "|" + task.getDescription();
         if (task instanceof DateTimeable) {
             DateTimeable dt = (DateTimeable) task;
+            data = data + "|" + dt.getDateTime().format(DateTimeFormatter.ISO_DATE_TIME);
             if (!calendar.containsKey(dt.getDateTime())) {
                 calendar.put(dt.getDateTime(), new ArrayList<DateTimeable>());
             }
@@ -34,7 +41,7 @@ public class List {
                 calendarDeadlines.get(dt.getDateTime()).add(dt);
             }
         }
-        items.add(task);
+        dataStorage.add(data);
     }
 
     public String[] returnItems() {
@@ -52,17 +59,20 @@ public class List {
 
     public String markDone(int index) throws DukeException{
         if (index > items.size() || index < 1) {
-            throw new DukeException("index");
+            throw new DukeException(DukeException.Type.INDEX);
         }
         Task t = items.get(index - 1);
         t.markDone();
+        String data = dataStorage.get(index - 1);
+        dataStorage.set(index - 1, data.substring(0, 2) + 'X' + data.substring(3));
         return t.toString();
     }
 
     public String removeTask(int index) throws DukeException{
         if (index > items.size() || index < 1) {
-            throw new DukeException("index");
+            throw new DukeException(DukeException.Type.INDEX);
         }
+        dataStorage.remove(index - 1);
         return items.remove(index - 1).toString();
     }
 
@@ -82,5 +92,9 @@ public class List {
         ArrayList<DateTimeable> arrayList = new ArrayList<>();
         calendar.headMap(dt, true).values().forEach(arrayList::addAll);
         return arrayList;
+    }
+
+    public ArrayList<String> getDataStorage() {
+        return dataStorage;
     }
 }

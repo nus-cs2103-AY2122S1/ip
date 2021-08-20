@@ -4,6 +4,7 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task implements DateTimeable{
 
+    public final String code = "E";
     private final LocalDateTime at;
 
     public Event(String description, String at) throws DukeException, DateTimeParseException {
@@ -13,11 +14,16 @@ public class Event extends Task implements DateTimeable{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")) + ")";
+        return "[" + code + "]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")) + ")";
     }
 
     @Override
     public LocalDateTime getDateTime() {
         return this.at;
+    }
+
+    @Override
+    public String getCode() {
+        return this.code;
     }
 }
