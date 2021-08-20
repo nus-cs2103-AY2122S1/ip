@@ -1,0 +1,8 @@
+todo buy things
+deadline return book /by Sunday
+event important meeting /at Friday 6-8pm
+list
+done 1
+done 2
+list 
+bye
