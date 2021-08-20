@@ -11,4 +11,8 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + time + ")";
     }
+
+    public String printToFile() {
+        return "E | " + (this.isDone ? 1 : 0) + " | " + this.name + " | " + this.time;
+    }
 }
