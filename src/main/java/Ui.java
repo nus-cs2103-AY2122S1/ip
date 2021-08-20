@@ -21,13 +21,17 @@ public class Ui {
     private final Scanner in;
     private final PrintStream out;
 
+    public enum commands {
+        EXIT,
+    }
+
     public Ui() {
         this.in = new Scanner(System.in);
         this.out = System.out;
     }
 
-    public void getInput() {
-        String input = this.in.nextLine();
+    public String getInput() {
+        return this.in.nextLine();
     }
 
     public void showDivider() {
@@ -42,11 +46,7 @@ public class Ui {
         this.out.println(LOGO + DIVIDER + " See you next time! :D\n" + DIVIDER);
     }
 
-    public void showWrongFormatError(String type) {
-
-    }
-
-    public void showOutOfBoundsError() {
+    public void showError(String message) {
 
     }
 

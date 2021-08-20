@@ -32,41 +32,19 @@ public class Aisu {
     public void run() {
         ui.showWelcomeMessage();
 
-
-        // let parser decide what to do, ui does the talking for repeated texts/general errors?
-        Parser.parse(input);
-        while (!input.equals("bye")) {
-            ui.showDivider();
+        boolean isExit = false;
+        while (!isExit) { // maybe turn into a command class to check if isExit();
             try {
-                if (input.equals("list")) { // show list
-                    System.out.println(tasklist);
-                } else {
-                    if (input.startsWith("done ")) { // mark task as completed
-                        int n = Integer.parseInt(input.substring(5));
-                        tasklist.markDone(n);
-                    } else if (input.startsWith("todo ")) {
-                        tasklist.addTask(input.substring(5), Tasklist.TaskTypes.T);
-                    } else if (input.startsWith("deadline ")) {
-                        tasklist.addTask(input.substring(9), Tasklist.TaskTypes.D);
-                    } else if (input.startsWith("event ")) {
-                        tasklist.addTask(input.substring(6), Tasklist.TaskTypes.E);
-                    } else if (input.startsWith("delete ")) {
-                        int n = Integer.parseInt(input.substring(7));
-                        tasklist.deleteTask(n);
-                    } else {
-                        throw new AisuException("That's an invalid task format...");
-                    }
-                }
-                storage.save(tasklist);
-            } catch (AisuException | ArrayIndexOutOfBoundsException | NumberFormatException e) {
-                System.out.println(e);
+                Command command = Parser.parse(ui.getInput());
+                ui.showDivider();
+                command.execute(this.tasklist, this.storage, this.ui);
+                isExit = command.isExit();
+            } catch (AisuException e) {
+                ui.showError(e.getMessage());
             } finally {
                 ui.showDivider();
-
-                input = sc.nextLine(); // get next input
             }
         }
-        ui.showGoodbyeMessage();
     }
 
     public static void main(String[] args) {
