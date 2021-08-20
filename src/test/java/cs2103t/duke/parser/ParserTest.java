@@ -10,7 +10,7 @@ class ParserTest {
 
     @Test
     public void parseCommand_wrongDeadlineFormat_exceptionThrown() {
-        String space = Ui.space;
+        String space = Ui.SPACE;
         try {
             new Parser().parseCommand("deadline read book /by tomorrow");
             fail();

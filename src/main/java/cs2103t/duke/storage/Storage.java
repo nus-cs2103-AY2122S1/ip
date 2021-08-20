@@ -21,7 +21,7 @@ import java.util.Scanner;
 public class Storage {
 
     private final String filePath;
-    private final String space = Ui.space;
+    private final String space = Ui.SPACE;
 
     /**
      * Constructs a storage manager for Duke with the specified file path.

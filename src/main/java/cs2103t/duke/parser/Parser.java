@@ -17,7 +17,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     String INVALID_INPUT = Ui.INVALID_INPUT;
-    String space = Ui.space;
+    String space = Ui.SPACE;
 
     /**
      * Parses the specified input from users.
