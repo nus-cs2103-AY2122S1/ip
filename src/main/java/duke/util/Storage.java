@@ -1,6 +1,7 @@
 package duke.util;
 
 import duke.exception.FileNotFoundException;
+import duke.exception.InvalidDateException;
 import duke.exception.NoSuchTaskException;
 import duke.exception.UnknownTaskTypeException;
 import duke.task.Task;
@@ -66,7 +67,7 @@ public class Storage {
             arr.forEach((task) -> {
                 try {
                     tasks.add(Task.fromJSONObject((JSONObject) task));
-                } catch (UnknownTaskTypeException e) {
+                } catch (UnknownTaskTypeException | InvalidDateException e) {
                     e.printStackTrace();
                 }
             });

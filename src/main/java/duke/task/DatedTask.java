@@ -10,7 +10,7 @@ public abstract class DatedTask extends Task {
         this.date = date;
     }
 
-    protected DatedTask(String description, String date, boolean isDone) {
+    protected DatedTask(String description, Date date, boolean isDone) {
         super(description, isDone);
         this.date = date;
     }

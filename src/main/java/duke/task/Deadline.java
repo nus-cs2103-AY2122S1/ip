@@ -29,7 +29,7 @@ public class Deadline extends DatedTask {
         super(description, by);
     }
 
-    private Deadline(String description, String by, boolean isDone) {
+    private Deadline(String description, Date by, boolean isDone) {
         super(description, by, isDone);
     }
 
@@ -43,7 +43,7 @@ public class Deadline extends DatedTask {
         return new Deadline(description);
     }
   
-    public static Deadline of(String description, String by, boolean isDone) {
+    public static Deadline of(String description, Date by, boolean isDone) {
         return new Deadline(description, by, isDone);
     }
 
@@ -75,7 +75,7 @@ public class Deadline extends DatedTask {
         obj.put("type", "deadline");
         obj.put("description", description);
         obj.put("isDone", isDone);
-        obj.put("date", date);
+        obj.put("date", date.toJSONString());
         return obj;
     }
 }

@@ -1,6 +1,8 @@
 package duke.task;
 
+import duke.date.Date;
 import duke.enums.Tasks;
+import duke.exception.InvalidDateException;
 import duke.exception.UnknownTaskTypeException;
 import org.json.simple.JSONObject;
 
@@ -47,17 +49,17 @@ public abstract class Task {
 
     public abstract JSONObject toJSONObject();
 
-    public static Task fromJSONObject(JSONObject obj) throws UnknownTaskTypeException {
+    public static Task fromJSONObject(JSONObject obj) throws UnknownTaskTypeException, InvalidDateException {
         Task task;
         String taskType = (String) obj.get("type");
         String description = (String) obj.get("description");
         boolean isDone = (boolean) obj.get("isDone");
         switch (Tasks.valueOfLabel(taskType)) {
         case DEADLINE:
-            task = Deadline.of(description, (String) obj.get("date"), isDone);
+            task = Deadline.of(description, Date.of((String) obj.get("date")), isDone);
             break;
         case EVENT:
-            task = Event.of(description, (String) obj.get("date"), isDone);
+            task = Event.of(description, Date.of((String) obj.get("date")), isDone);
             break;
         case TODO:
             task = Todo.of(description, isDone);

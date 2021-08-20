@@ -6,25 +6,25 @@ done 1
 done 2
 done 3
 list
-add deadline one /by Sunday
-add deadline two /by Monday
-add deadline three /by Tuesday
+add deadline one /by 2020-10-10
+add deadline two /by 2020-11-11
+add deadline three /by 2020-12-12
 list
 done 4
 done 5
 done 6
 list
-add event one /at Mon 2-4pm
-add event two /at Tues 2-4pm
-add event three /at Wed 2-4pm
+add event one /at 2020-10-10
+add event two /at 2020-11-11
+add event three /at 2020-12-12
 list
 done 7
 done 8
 done 9
 list
-delete 10
-delete 9
-delete 8
-delete 7
 list
+list 2020-10-10
+list 2020-11-11
+list 2020-12-12
+list 2020-01-01
 bye

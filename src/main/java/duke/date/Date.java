@@ -26,6 +26,10 @@ public class Date {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    public String toJSONString() {
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other instanceof Date) {

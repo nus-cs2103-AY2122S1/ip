@@ -29,7 +29,7 @@ public class Event extends DatedTask {
         super(description, at);
     }
 
-    private Event(String description, String at, boolean isDone) {
+    private Event(String description, Date at, boolean isDone) {
         super(description, at, isDone);
     }
 
@@ -44,7 +44,7 @@ public class Event extends DatedTask {
         return new Event(description);
     }
   
-    public static Event of(String description, String at, boolean isDone) {
+    public static Event of(String description, Date at, boolean isDone) {
         return new Event(description, at, isDone);
     }
 
@@ -76,7 +76,7 @@ public class Event extends DatedTask {
         obj.put("type", "event");
         obj.put("description", description);
         obj.put("isDone", isDone);
-        obj.put("date", date);
+        obj.put("date", date.toJSONString());
         return obj;
     }
 }
