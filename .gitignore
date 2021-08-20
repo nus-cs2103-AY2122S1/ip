@@ -19,3 +19,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Generated directory and txt file storing the task list
 /src/main/java/data
+
+#test Directory storage
+/src/test/main/java/data
