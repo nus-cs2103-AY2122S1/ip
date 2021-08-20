@@ -41,7 +41,7 @@ public class FindCommand extends Command {
             count++;
             if (t.getDescription().contains(searchQuery)) {
                 hasFound = true;
-                result.append(Ui.space)
+                result.append(space)
                         .append(count)
                         .append(".")
                         .append(t.getDescriptionWithStatus())
