@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,12 +20,62 @@ public class Duke {
     }
 
     public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
+        File f = new File("duke.txt");
         List list = new List();
+        Scanner s = null;
+        try {
+            s = new Scanner(f);
+            while (s.hasNext()) {
+                String[] taskElements = s.nextLine().split("[|]");
+                Task t = null;
+                switch(taskElements[0]) {
+                case "T":
+                    try {
+                        t = new Todo(taskElements[2]);
+                    } catch (DukeException e) {
+                        System.err.println(format("Task description cannot be found in database"));
+                    }
+                    break;
+                case "E":
+                    try {
+                        t = new Event(taskElements[2], taskElements[3]);
+                    } catch (DukeException e) {
+                        System.err.println(format("Task description cannot be found in database"));
+                    }
+                    break;
+                case "D":
+                    try {
+                        t = new Deadline(taskElements[2], taskElements[3]);
+                    } catch (DukeException e) {
+                        System.err.println(format("Task description cannot be found in database"));
+                    }
+                    break;
+                }
+                if (t != null) {
+                    if (taskElements[1].equals("X")) {
+                        t.markDone();
+                    }
+                    list.addItem(t);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            try {
+                f.createNewFile();
+                System.out.println(format("No previous tasks found, a new task list will be created"));
+            } catch (IOException e2) {
+                System.err.println(format("Unable to create new task list", e2.toString()));
+            }
+        } finally {
+            if (s != null) {
+                s.close();
+            }
+        }
+        Scanner sc = new Scanner(System.in);
         String command;
         System.out.println(format("Hello! I'm Duke", "What can I do for you?"));
         command = sc.next();
         while (!command.equals("bye")) {
+            boolean isModified = false;
             Task task;
             switch(command) {
             case "list":
@@ -38,6 +93,7 @@ public class Duke {
                 } else {
                     System.err.println(format("☹ OOPS!!! The index of a task to be marked done must be specified."));
                 }
+                isModified = true;
                 break;
             case "delete":
                 if (sc.hasNextInt()) {
@@ -51,17 +107,19 @@ public class Duke {
                 } else {
                     System.err.println(format("☹ OOPS!!! The index of a task to be marked done must be specified."));
                 }
+                isModified = true;
                 break;
             case "todo":
                 try {
                     command = sc.nextLine();
-                    task = new Todo(command);
+                    task = new Todo(command.trim());
                     list.addItem(task);
                     System.out.println(format("Got it. I've added this task:",
                             "  " + task, list.returnItemCount()));
                 } catch (DukeException e) {
                     System.err.println(format(e.toString()));
                 }
+                isModified = true;
                 break;
             case "deadline":
                 command = sc.nextLine();
@@ -71,7 +129,7 @@ public class Duke {
                             + "'description' /by 'deadline'"));
                 } else {
                     try {
-                        task = new Deadline(deadlineEntry[0], deadlineEntry[1]);
+                        task = new Deadline(deadlineEntry[0].trim(), deadlineEntry[1]);
                         list.addItem(task);
                         System.out.println(format("Got it. I've added this task:",
                                 "  " + task, list.returnItemCount()));
@@ -79,6 +137,7 @@ public class Duke {
                         System.err.println(format(e.toString()));
                     }
                 }
+                isModified = true;
                 break;
             case "event":
                 command = sc.nextLine();
@@ -86,10 +145,9 @@ public class Duke {
                 if (eventEntry.length != 2) {
                     System.err.println(format("☹ OOPS!!! Usage of event does not match"
                             + "'description' /at 'timeframe'"));
-
                 } else {
                     try {
-                        task = new Event(eventEntry[0], eventEntry[1]);
+                        task = new Event(eventEntry[0].trim(), eventEntry[1]);
                         list.addItem(task);
                         System.out.println(format("Got it. I've added this task:", "  " + task,
                                 list.returnItemCount()));
@@ -97,17 +155,32 @@ public class Duke {
                         System.err.println(format(e.toString()));
                     }
                 }
+                isModified = true;
                 break;
             default:
                 System.err.println(format("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
                 break;
             }
+            if (isModified) {
+                try {
+                    FileWriter fw = new FileWriter(f);
+                    ArrayList<String> dataSet = list.getDataStorage();
+                    for (int i = 0; i < dataSet.size() - 1; i++) {
+                        fw.write(dataSet.get(i) + "\n");
+                    }
+                    fw.write(dataSet.get(dataSet.size() - 1));
+                    fw.close();
+                } catch (IOException e) {
+                    System.err.println(format("Unable to modify saved file", e.toString()));
+                }
+            }
             if (sc.hasNext()) {
                 command = sc.next();
             } else {
-                return;
+                break;
             }
         }
         System.out.println(format("Bye. Hope to see you again soon!"));
+        sc.close();
     }
 }
