@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class Duke {
 
     private static final String LINE = "----------------------------------------------";
-//    private Task[] taskList = new Task[100];
     private ArrayList<Task> taskList = new ArrayList<>();
     private int size = 0;
 
@@ -30,44 +29,54 @@ public class Duke {
         System.out.println(frog + greeting + "How may I help you?\n" + LINE);
     }
 
-    public void echo(String input) {
-        if (input.equals("bye")) {
-            System.out.println("See you again in my frog hole! RIBBIT!");
-            System.exit(0);
-        } else if (input.startsWith("done")) {
-            int index = input.charAt(5) - 49;
-            taskList.get(index).markAsDone();
-            System.out.println("You have swallowed that pesky fly! RIBBIT!");
-            System.out.println("  " + taskList.get(index).toString());
-        } else if (input.startsWith("delete")) {
-            int index = input.charAt(7) - 49;
-            System.out.println("Rotten flies deserve to die!");
-            System.out.println("  " + taskList.get(index).toString());
-            taskList.remove(index);
-            size--;
-            System.out.println("Now you have " + size + " flies to eat! RIBBIT!");
-        } else if (input.equals("list")) {
-            System.out.println("Here is your menu for today:");
-            for (int i = 0; i < size; i++) {
-                System.out.println(i + 1 + "." + taskList.get(i).toString());
-            }
-        } else {
-            if (input.startsWith("todo")) {
-                taskList.add(new ToDo(input.substring(5)));
-            } else if (input.startsWith("deadline")) {
-                int index = input.indexOf("/by");
-                taskList.add(new Deadline(input.substring(9, index),
-                        input.substring(index + 4)));
-            } else { // is an Event
-                int index = input.indexOf("/at");
-                taskList.add(new Event(input.substring(6, index),
-                        input.substring(index + 4)));
-            }
+    public void echo(String str) {
 
-            System.out.println("A fly has been added to the menu:");
-            System.out.println("  " + taskList.get(size).toString());
-            size++;
-            System.out.println("Now you have " + size + " flies to eat! RIBBIT!");
+        String[] input = str.split(" ", 2);
+        String arg = input[0];
+
+        switch (arg) {
+            case "bye":
+                System.out.println("See you again in my frog hole! RIBBIT!");
+                System.exit(0);
+            case "done": {
+                int index = Integer.parseInt(input[1]) - 1;
+                taskList.get(index).markAsDone();
+                System.out.println("You have swallowed that pesky fly! RIBBIT!");
+                System.out.println("  " + taskList.get(index).toString());
+                break;
+            }
+            case "delete": {
+                int index = Integer.parseInt(input[1]) - 1;
+                System.out.println("Rotten flies deserve to die!");
+                System.out.println("  " + taskList.get(index).toString());
+                taskList.remove(index);
+                size--;
+                System.out.println("Now you have " + size + " flies to eat! RIBBIT!");
+                break;
+            }
+            case "list":
+                System.out.println("Here is your menu for today:");
+                for (int i = 0; i < size; i++) {
+                    System.out.println(i + 1 + "." + taskList.get(i).toString());
+                }
+                break;
+            default:
+                String task = input[1];
+                if (arg.equals("todo")) {
+                    taskList.add(new ToDo(task));
+                } else if (input[0].equals("deadline")) {
+                    String[] taskDetail = task.split("/by");
+                    taskList.add(new Deadline(taskDetail[0], taskDetail[1]));
+                } else { // is an Event
+                    String[] taskDetail = task.split("/at");
+                    taskList.add(new Event(taskDetail[0], taskDetail[1]));
+                }
+
+                System.out.println("A fly has been added to the menu:");
+                System.out.println("  " + taskList.get(size).toString());
+                size++;
+                System.out.println("Now you have " + size + " flies to eat! RIBBIT!");
+                break;
         }
     }
 
