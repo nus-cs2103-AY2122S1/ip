@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +17,7 @@ public class Duke {
     private final String MESSAGE_DELETE = "Sure, I've deleted this task:";
     
     private final ArrayList<Task> listTasks = new ArrayList<>();
+    private final String fileName = "data.txt";
     
     /**
      * Main body of the bot.
@@ -19,41 +26,134 @@ public class Duke {
         // Print welcome message
         printMessage(MESSAGE_WELCOME);
         
+        // Load local storage data
+        try {
+            loadData();
+        } catch (DataIntegrityException | IOException e) {
+            printMessage(e.getMessage());
+        }
+        
         // Setup scanner for user input
         Scanner sc = new Scanner(System.in);
         String input;
         
-        // Main body of chat box, each if else handles one type of command
+        // Program exits only if user inputs "bye"
         while (!(input = sc.nextLine().trim()).equals("bye")) {
-            interpretCommand(input);
+            try {
+                // Attempt to interpret the command input by user
+                interpretCommand(input);
+                
+                // Update storage file
+                saveData();
+            } catch (DukeException | IOException e) {
+                printMessage(e.getMessage());
+            }
         }
         
         // Close off scanner
         sc.close();
         
-        // Print good bye message
+        // Print goodbye message
         printMessage(MESSAGE_EXIT);
     }
     
-    private void interpretCommand(String command) {
-        try {
-            if (command.equals("list")) {
-                printFullList();
-            } else if (command.matches("^done( .*)?")) {
-                taskDone(command);
-            } else if (command.matches("^todo( .*)?")) {
-                addTodo(command);
-            } else if (command.matches("^deadline( .*)?")) {
-                addDeadline(command);
-            } else if (command.matches("^event( .*)?")) {
-                addEvent(command);
-            } else if (command.matches("^delete( .*)?")) {
-                taskDelete(command);
-            } else {
-                throw new UnknownCommandException();
+    /**
+     * Saves data stored locally. If file does not exist, then a new file will be created.
+     *
+     * @throws IOException if the named file exists but is a directory rather than a regular file, does not exist but
+     * cannot be created, or cannot be opened for any other reason
+     */
+    private void saveData() throws IOException {
+        // Reformat the list of tasks for storage
+        StringBuilder output = new StringBuilder();
+        listTasks.forEach(task -> output.append(task.toString()).append("\n"));
+        
+        // Overwrite the current save file
+        FileWriter fw = new FileWriter(fileName, false);
+        fw.write(output.toString());
+        fw.close();
+    }
+    
+    /**
+     * Loads data stored locally. If file does not exist, then a new file will be created.
+     *
+     * @throws DataIntegrityException if the save file is not in the correct format
+     * @throws IOException if the named file exists but is a directory rather than a regular file, does not exist but
+     * cannot be created, or cannot be opened for any other reason
+     */
+    private void loadData() throws DataIntegrityException, IOException {
+        // Initialize save file and create parent directory
+        File file = new File(fileName);
+        
+        // Attempt to create the parent directory and the save file
+        if (file.createNewFile()) {
+            // File is created, exit function as nothing to read
+            return;
+        }
+        
+        // Attempt to load data
+        String input;
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+        
+        // Read the rest of data and add to list of tasks
+        while ((input = br.readLine()) != null) {
+            Task newTask;
+            String description, time;
+            
+            // Obtain relevant info based on type of task
+            switch (input.charAt(1)) {
+            case 'T': // todo
+                newTask = new Todo(input.substring(7));
+                break;
+            case 'D': // deadline
+                description = input.substring(7, input.indexOf(" ("));
+                time = input.substring(input.indexOf("(by: ") + 5, input.length() - 1);
+                newTask = new Deadline(description, time);
+                break;
+            case 'E': // event
+                description = input.substring(7, input.indexOf(" ("));
+                time = input.substring(input.indexOf("(at: ") + 5, input.length() - 1);
+                newTask = new Event(description, time);
+                break;
+            default: // gg someone messed with the save file
+                throw new DataIntegrityException();
             }
-        } catch (DukeException e) {
-            printMessage(e.getMessage());
+            
+            // Check if task is alr done
+            if (input.charAt(4) == 'X') {
+                newTask.markAsDone();
+            }
+            
+            // Add task to list but do not show a confirmation msg
+            addTask(newTask, false);
+        }
+        
+        // Close reader
+        br.close();
+    }
+    
+    /**
+     * Interprets and performs the command entered by user.
+     *
+     * @param command command to be interpreted
+     * @throws DukeException if user inputs invalid command
+     */
+    private void interpretCommand(String command) throws DukeException {
+        // Each if else handles one type of command
+        if (command.equals("list")) {
+            printFullList();
+        } else if (command.matches("^done( .*)?")) {
+            taskDone(command);
+        } else if (command.matches("^todo( .*)?")) {
+            addTodo(command);
+        } else if (command.matches("^deadline( .*)?")) {
+            addDeadline(command);
+        } else if (command.matches("^event( .*)?")) {
+            addEvent(command);
+        } else if (command.matches("^delete( .*)?")) {
+            taskDelete(command);
+        } else {
+            throw new UnknownCommandException();
         }
     }
     
@@ -62,7 +162,7 @@ public class Duke {
      *
      * @param command command entered by user (delete [task number])
      * @throws IllegalFormatException if user gives empty or invalid task number
-     * @throws TaskNotFoundException if the task specified by the task number does not exists
+     * @throws TaskNotFoundException if the task specified by the task number does not exist
      */
     private void taskDelete(String command) throws IllegalFormatException, TaskNotFoundException {
         // Throw exception if user gives empty or invalid task number
@@ -85,7 +185,9 @@ public class Duke {
         Task task = listTasks.remove(taskNumber);
         
         // Display message
-        printMessage(MESSAGE_DELETE + "\n  " + task + "\n" + "You still have " + listTasks.size() + " tasks in the list.");
+        printMessage(MESSAGE_DELETE + "\n  " +
+                task + "\n" +
+                "You still have " + listTasks.size() + " task(s) in the list.");
     }
     
     /**
@@ -133,7 +235,7 @@ public class Duke {
         // Add new event
         String[] info = command.substring(6).split("/at");
         Task newTask = new Event(info[0].trim(), info[1].trim());
-        addTask(newTask);
+        addTask(newTask, true);
     }
     
     /**
@@ -149,7 +251,7 @@ public class Duke {
         // Add new deadline
         String[] info = command.substring(9).split("/by");
         Task newTask = new Deadline(info[0].trim(), info[1].trim());
-        addTask(newTask);
+        addTask(newTask, true);
     }
     
     /**
@@ -164,20 +266,25 @@ public class Duke {
         
         // Add new todo
         Task newTask = new Todo(command.substring(5).trim());
-        addTask(newTask);
+        addTask(newTask, true);
     }
     
     /**
      * Adds a new task to the list of tasks. Helper method.
      *
      * @param newTask new task to be added
+     * @param showMessage display message if this is true
      */
-    private void addTask(Task newTask) {
+    private void addTask(Task newTask, boolean showMessage) {
         // Add the newly created task into list of tasks
         listTasks.add(newTask);
         
-        // Display message
-        printMessage(MESSAGE_ADD + "\n  " + newTask + "\n" + "Now you have " + listTasks.size() + " tasks in the list.");
+        // Display message depending on showMessage
+        if (showMessage) {
+            printMessage(MESSAGE_ADD + "\n  " +
+                    newTask + "\n" +
+                    "Now you have " + listTasks.size() + " task(s) in the list.");
+        }
     }
     
     private void validateCommand(String command, String regex, String format) throws IllegalFormatException {
@@ -202,10 +309,15 @@ public class Duke {
         
         // Reformat the list of tasks into a string
         for (int i = 0; i < size - 1; i++) {
-            msg.append(i + 1).append(". ").append(listTasks.get(i)).append("\n");
+            msg.append(i + 1)
+               .append(". ")
+               .append(listTasks.get(i))
+               .append("\n");
         }
         
-        msg.append(size).append(". ").append(listTasks.get(size - 1));
+        msg.append(size)
+           .append(". ")
+           .append(listTasks.get(size - 1));
         
         // Display message
         printMessage(MESSAGE_LIST + "\n" + msg);
@@ -226,7 +338,9 @@ public class Duke {
      * @param msg message to be displayed
      */
     private void printMessage(String msg) {
-        String format = HORIZONTAL_LINE + "\t%s\n" + HORIZONTAL_LINE;
+        String format = HORIZONTAL_LINE +
+                "\t%s\n" +
+                HORIZONTAL_LINE;
         System.out.printf(format, msg.replaceAll("\n", "\n\t"));
     }
     

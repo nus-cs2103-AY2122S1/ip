@@ -27,3 +27,9 @@ class EmptyListException extends DukeException {
         super("Your list is empty! Maybe add some tasks into it?");
     }
 }
+
+class DataIntegrityException extends DukeException {
+    public DataIntegrityException() {
+        super("Storage file integrity compromised :(");
+    }
+}
