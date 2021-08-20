@@ -35,7 +35,33 @@ public class Duke {
             } else if (userInput.matches("todo\s.+")) {
                 //eg. todo read book
                 String inputBody = userInput.split(" ", 2)[1];
-                Task newTask = ToDo.of(userInput);
+                Task newTask = ToDo.of(inputBody);
+                msgOutput = String.format(
+                        "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
+                        newTask.toString(), numOfTasks + 1
+                );
+                toDoList = toDoList.addTask(newTask);
+            } else if (userInput.matches("deadline\s.+\s\\/by\s.+")) {
+                //eg. deadline xxx /by xxx
+                String inputBody = userInput.split(" ", 2)[1];
+                String[] deadlineDetails = inputBody.split("\s/by\s", 2);
+                String deadlineTask = deadlineDetails[0];
+                String deadlineByDate = deadlineDetails[1];
+
+                Task newTask = Deadline.of(deadlineTask, deadlineByDate);
+                msgOutput = String.format(
+                        "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
+                        newTask.toString(), numOfTasks + 1
+                );
+                toDoList = toDoList.addTask(newTask);
+            } else if (userInput.matches("event\s.+\s\\/at\s.+")) {
+                //eg. deadline xxx /by xxx
+                String inputBody = userInput.split(" ", 2)[1];
+                String[] eventDetails = inputBody.split("\s/at\s", 2);
+                String eventTask = eventDetails[0];
+                String eventTime = eventDetails[1];
+
+                Task newTask = Event.of(eventTask, eventTime);
                 msgOutput = String.format(
                         "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
                         newTask.toString(), numOfTasks + 1
