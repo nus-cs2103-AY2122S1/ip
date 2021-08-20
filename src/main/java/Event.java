@@ -1,14 +1,23 @@
-public class Event extends Task {
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    private String at;
+public class Event extends Task implements DateTimeable{
 
-    public Event(String description, String at) throws DukeException{
+    private final LocalDateTime at;
+
+    public Event(String description, String at) throws DukeException, DateTimeParseException {
         super(description);
-        this.at = at;
+        this.at = LocalDateTime.parse(at);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")) + ")";
+    }
+
+    @Override
+    public LocalDateTime getDateTime() {
+        return this.at;
     }
 }
