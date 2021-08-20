@@ -1,3 +1,8 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,6 +25,21 @@ public class Duke {
             throw new DukeException(String.format(Messages.EMPTY.toString(), start));
         }
         return result;
+    }
+
+    public static LocalDateTime dateTime(String time) {
+
+        DateTimeFormatter fmt = new DateTimeFormatterBuilder()
+                .appendPattern("d/MM/yyyy")
+                .optionalStart()
+                .appendPattern(" HHmm")
+                .optionalEnd()
+                .parseDefaulting(ChronoField.HOUR_OF_DAY, 23)
+                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 59)
+                .toFormatter();
+
+//        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy[ HHmm]");
+        return LocalDateTime.parse(time, fmt);
     }
 
     public static void main(String[] args) {
@@ -73,7 +93,7 @@ public class Duke {
                             + String.format("Now you have %d tasks in the list.\n", library.size());
                 } else if (input.contains("deadline")) {
                     String name = cut(input, "deadline", "/by");
-                    String time = cut(input, "/by");
+                    LocalDateTime time = dateTime(cut(input, "/by"));
 
                     Deadline newDeadline = new Deadline(name, time);
                     library.add(newDeadline);
@@ -83,7 +103,7 @@ public class Duke {
                             + String.format("Now you have %d tasks in the list.\n", library.size());
                 } else if (input.contains("event")) {
                     String name = cut(input, "event", "/at");
-                    String time = cut(input, "/at");
+                    LocalDateTime time = dateTime(cut(input, "/at"));
 
                     Event newEvent = new Event(name, time);
                     library.add(newEvent);
@@ -105,7 +125,9 @@ public class Duke {
             } catch (DukeException e) {
                 output += "☹ OOPS!!! " + e.getMessage() + "\n";
             } catch (IndexOutOfBoundsException e) {
-                output += "☹ OOPS!!! "+ Messages.EXIST.toString() +"\n";
+                output += "☹ OOPS!!! "+ Messages.EXIST +"\n";
+            } catch (DateTimeParseException e) {
+                output += "☹ OOPS!!! "+ Messages.TIME +"\n";
             }
             System.out.println(output);
         }
