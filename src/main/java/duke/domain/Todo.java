@@ -1,4 +1,4 @@
-package domain;
+package duke.domain;
 
 /**
  * Encapsulates a regular task.

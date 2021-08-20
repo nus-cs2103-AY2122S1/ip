@@ -1,10 +1,10 @@
-package shared;
+package duke.shared;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAccessor;
 
-import constants.Constants;
+import duke.constants.Constants;
 
 public class DateHelpers {
     /**

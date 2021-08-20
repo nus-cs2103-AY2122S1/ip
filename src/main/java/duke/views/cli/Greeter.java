@@ -1,4 +1,4 @@
-package views.cli;
+package duke.views.cli;
 
 /**
  * This class is responsible for printing the initial welcome message.

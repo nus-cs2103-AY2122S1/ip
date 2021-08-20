@@ -1,10 +1,10 @@
-package domain;
+package duke.domain;
 
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-import shared.StringHelpers;
+import duke.shared.StringHelpers;
 
 /**
  * Encapsulates a generic task.

@@ -1,11 +1,11 @@
-package views.cli;
+package duke.views.cli;
 
 import java.util.List;
 import java.util.Scanner;
 
-import constants.Constants;
-import interfaces.PrintableMixin;
-import views.cli.strategies.RespondWith;
+import duke.constants.Constants;
+import duke.interfaces.PrintableMixin;
+import duke.views.cli.strategies.RespondWith;
 
 /**
  * Encapsulates the command line interface. Listens to and generates response to

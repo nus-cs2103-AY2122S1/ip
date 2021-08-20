@@ -1,4 +1,4 @@
-package interfaces;
+package duke.interfaces;
 
 /**
  * A mixin allowing more convenient calls to System.out.

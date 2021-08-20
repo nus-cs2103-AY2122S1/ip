@@ -1,10 +1,10 @@
-package domain;
+package duke.domain;
 
 import java.util.List;
 import java.time.LocalDateTime;
 
-import constants.Constants;
-import shared.DateHelpers;
+import duke.constants.Constants;
+import duke.shared.DateHelpers;
 
 /**
  * Encapsulates a task with a deadline.

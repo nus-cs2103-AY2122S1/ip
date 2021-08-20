@@ -1,4 +1,4 @@
-package views.cli;
+package duke.views.cli;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,5 +1,7 @@
-import views.cli.CLI;
-import views.cli.strategies.*;
+package duke;
+
+import duke.views.cli.CLI;
+import duke.views.cli.strategies.*;
 
 public class Duke {
     public static void test() {

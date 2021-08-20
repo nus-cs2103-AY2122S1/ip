@@ -1,4 +1,4 @@
-package shared;
+package duke.shared;
 
 public class InvalidDateException extends DukeException {
     public InvalidDateException() {

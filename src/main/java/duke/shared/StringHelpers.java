@@ -1,4 +1,4 @@
-package shared;
+package duke.shared;
 
 /**
  * Helper class with various string manipulation methods.

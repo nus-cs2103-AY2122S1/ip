@@ -1,16 +1,16 @@
-package views.cli.strategies;
+package duke.views.cli.strategies;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import constants.Constants;
-import domain.Deadline;
-import domain.Event;
-import domain.Task;
-import domain.Todo;
-import shared.DukeException;
-import shared.DukeException.ExceptionCode;
+import duke.constants.Constants;
+import duke.domain.Deadline;
+import duke.domain.Event;
+import duke.domain.Task;
+import duke.domain.Todo;
+import duke.shared.DukeException;
+import duke.shared.DukeException.ExceptionCode;
 
 /**
  * A responder that is able to handle tasks with CRUD functionality.

@@ -1,9 +1,9 @@
-package constants;
+package duke.constants;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-import shared.StringHelpers;
+import duke.shared.StringHelpers;
 
 /**
  * Encapsulates global variables possibly used in multiple areas in code.

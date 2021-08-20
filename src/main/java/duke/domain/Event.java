@@ -1,10 +1,10 @@
-package domain;
+package duke.domain;
 
 import java.util.List;
 import java.time.LocalDateTime;
 
-import shared.DateHelpers;
-import shared.DateRange;
+import duke.shared.DateHelpers;
+import duke.shared.DateRange;
 
 /**
  * Encapsulates a task taking place over a specified period of time.

@@ -1,4 +1,4 @@
-package shared;
+package duke.shared;
 
 // This needs to be unchecked, otherwise commands hashmap will be quite troublesome
 /**

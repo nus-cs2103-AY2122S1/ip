@@ -1,9 +1,9 @@
-package shared;
+package duke.shared;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import constants.Constants;
+import duke.constants.Constants;
 
 public class DateRange {
     private LocalDateTime start, end;

@@ -1,12 +1,12 @@
-package views.cli.strategies;
+package duke.views.cli.strategies;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import constants.Constants;
-import shared.StringHelpers;
+import duke.constants.Constants;
+import duke.shared.StringHelpers;
 
 /**
  * A template class for responders that gives a string response upon receiving

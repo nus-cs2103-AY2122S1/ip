@@ -1,9 +1,9 @@
-package views.cli.strategies;
+package duke.views.cli.strategies;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.Task;
+import duke.domain.Task;
 
 // Level-3
 
