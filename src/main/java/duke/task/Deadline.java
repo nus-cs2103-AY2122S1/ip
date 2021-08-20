@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.BadInputFormatException;
+import org.json.simple.JSONObject;
 
 /**
  * Represents a duke.tasks.Deadline object.
@@ -54,5 +55,16 @@ public class Deadline extends DatedTask {
     @Override
     public String toString() {
         return String.format("[D]%s %s (by: %s)", isDone ? "[X]" : "[ ]", description, date);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public JSONObject toJSONObject() {
+        JSONObject obj = new JSONObject();
+        obj.put("type", "deadline");
+        obj.put("description", description);
+        obj.put("isDone", isDone);
+        obj.put("date", date);
+        return obj;
     }
 }

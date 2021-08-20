@@ -1,5 +1,7 @@
 package duke.task;
 
+import org.json.simple.JSONObject;
+
 /**
  * Represents a task object.
  */
@@ -40,4 +42,6 @@ public abstract class Task {
         isDone = true;
         return this;
     }
+
+    public abstract JSONObject toJSONObject();
 }

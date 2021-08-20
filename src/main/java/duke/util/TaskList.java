@@ -4,6 +4,7 @@ import duke.exception.NoSuchTaskException;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class TaskList {
     private ArrayList<Task> list;
@@ -47,5 +48,11 @@ public class TaskList {
             copy[i] = (i + 1) + "." + copy[i];
         }
         return copy;
+    }
+
+    public void forEach(Consumer<Task> consumer) {
+        for (int i = 0; i < size(); i++) {
+            consumer.accept(list.get(i));
+        }
     }
 }

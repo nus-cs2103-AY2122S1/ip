@@ -1,5 +1,7 @@
 package duke.task;
 
+import org.json.simple.JSONObject;
+
 /**
  * Represents a duke.tasks.Todo object.
  */
@@ -26,5 +28,15 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return String.format("[T]%s %s", isDone ? "[X]" : "[ ]", description);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public JSONObject toJSONObject() {
+        JSONObject obj = new JSONObject();
+        obj.put("type", "todo");
+        obj.put("description", description);
+        obj.put("isDone", isDone);
+        return obj;
     }
 }

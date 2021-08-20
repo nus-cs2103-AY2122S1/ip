@@ -7,6 +7,4 @@ public abstract class DatedTask extends Task {
         super((description));
         this.date = date;
     }
-
-
 }
