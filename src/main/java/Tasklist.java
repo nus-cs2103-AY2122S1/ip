@@ -15,7 +15,16 @@ public class Tasklist {
         this.list = new ArrayList<>();
     }
 
-    private Task GetTaskAt(int n) throws ArrayIndexOutOfBoundsException {
+    public Tasklist(List<Task> currList) {
+        this.list = currList;
+    }
+
+    public List<Task> getListData() {
+        // May not be good OOP practice.
+        return this.list;
+    }
+
+    private Task getTaskAt(int n) throws ArrayIndexOutOfBoundsException {
         if (n <= 0 || n > this.list.size()) {
             throw new ArrayIndexOutOfBoundsException("That is an invalid task number!");
         }
@@ -73,7 +82,7 @@ public class Tasklist {
         }
         this.list.get(n - 1).markAsDone();
         System.out.println(" Nice! I've marked this task as completed:");
-        System.out.println(this.GetTaskAt(n));
+        System.out.println(this.getTaskAt(n));
     }
 
     @Override

@@ -22,5 +22,7 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public abstract String ParseData(); // Parse data in readable format to be stored in storage.
+
     public abstract String toString();
 }
