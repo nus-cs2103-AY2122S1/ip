@@ -15,10 +15,13 @@ public class Duke {
 
     private final Scanner Sc;
     private final TaskList taskList;
+    private final Storage store;
 
     public Duke(){
         Sc = new Scanner(System.in);
+        store = new Storage(".\\Data\\duke.txt");
         taskList = new TaskList();
+        this.store.retrieveTasks(taskList);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
@@ -65,6 +68,7 @@ public class Duke {
     }
 
     private void close(){
+        this.store.saveToFile(this.taskList);
         System.out.println("Bye. Hope to see you again soon!");
         this.Sc.close();
     }

@@ -34,11 +34,28 @@ public abstract class Task {
         }
         return newTask;
     }
+    public static Task getTask(String s){
+        String[] parts = s.split("\\|");
+        Duke.Commands cmd = Duke.Commands.valueOf(parts[0]);
+        Task t = taskFactory(cmd, parts[1]);
+        if(parts[2].equals("1")){
+            t.markDone();
+        }
+        return t;
+    }
     /**
      * marks this task as done
      */
     public void markDone(){
         this.done = true;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isDone() {
+        return done;
     }
 
     private static void checkArg(String[] arg) throws DukeException{
@@ -48,6 +65,7 @@ public abstract class Task {
             throw new DukeException("too many argument");
         }
     }
+    public abstract String saveTask();
 
     /**
      * override toString method to add a check box beside task

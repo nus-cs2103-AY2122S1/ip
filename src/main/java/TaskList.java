@@ -6,10 +6,14 @@ public class TaskList {
     public TaskList(){
         storage = new ArrayList<>();
     }
+
     public void addToStorage(Task t){
         this.storage.add(t);
         System.out.println("You have " + storage.size() + " tasks in the list");
         System.out.println(t);
+    }
+    public void addToStorage(String s){
+        this.storage.add(Task.getTask(s));
     }
 
     public void printTasks(){
@@ -32,5 +36,14 @@ public class TaskList {
         }
         this.storage.remove(Id);
         System.out.println("removed Task " + Id);
+    }
+
+    public String saveTasklist(){
+        String txt = "";
+        for (int i = 0; i < storage.size(); i++) {
+            txt = txt + storage.get(i).saveTask() + "\n";
+        }
+        return txt;
+
     }
 }
