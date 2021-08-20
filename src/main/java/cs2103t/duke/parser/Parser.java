@@ -78,6 +78,12 @@ public class Parser {
             } else {
                 throw new DukeException(INVALID_INPUT);
             }
+        } else if (input.length() >= 6 && input.startsWith("find ")) {
+            String searchQuery = input.substring(5).trim();
+            if (searchQuery.equals("")) {
+                throw new DukeException(space + "☹ OOPS!!! The search query cannot be empty.");  // TODO: fix this
+            }
+            return new FindCommand(searchQuery);
         } else {
             throw new DukeException(INVALID_INPUT);
         }
