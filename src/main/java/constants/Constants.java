@@ -1,5 +1,8 @@
 package constants;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 import shared.StringHelpers;
 
 /**
@@ -31,7 +34,14 @@ public class Constants {
         static {
             BREAKLINE = StringHelpers.repeat(BREAKLINE_LENGTH, BREAKLINE_PATTERN) + System.lineSeparator();
         }
+        public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter
+                .ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM);
+    }
 
+    public static class Input {
+        public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy[ HHmm]");
+        // note that this means ISO-8601 strings will not be used as input
+        public static final String DATE_RANGE_SEPARATOR = "-";
     }
 
     public static class Storage {

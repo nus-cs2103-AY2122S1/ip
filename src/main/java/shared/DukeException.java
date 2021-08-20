@@ -2,7 +2,8 @@ package shared;
 
 // This needs to be unchecked, otherwise commands hashmap will be quite troublesome
 /**
- * Main exception class for the chatbot.
+ * Main exception class for the chatbot. Responsible for some of the more
+ * generic errors. Subclasses cover errors with narrower scope.
  */
 public class DukeException extends RuntimeException {
     public static enum ExceptionCode {
@@ -17,7 +18,7 @@ public class DukeException extends RuntimeException {
         }
     }
 
-    private ExceptionCode exceptionCode;
+    protected ExceptionCode exceptionCode;
 
     public DukeException(ExceptionCode exceptionCode) {
         super(exceptionCode.message);

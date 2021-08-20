@@ -1,9 +1,8 @@
 package views.cli.strategies;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
 import constants.Constants;
 import domain.Deadline;
@@ -24,8 +23,9 @@ public class MultiType extends RespondWith {
     private final String deadline = "deadline";
     private final String event = "event";
     private final String delete = "delete";
+    private final String on = "on";
 
-    private ArrayList<Task> userTasks;
+    private final List<Task> userTasks;
 
     public MultiType() {
         userTasks = new ArrayList<>();
@@ -35,6 +35,7 @@ public class MultiType extends RespondWith {
         commands.put(deadline, this::addDeadline);
         commands.put(event, this::addEvent);
         commands.put(delete, this::deleteTask);
+        commands.put(on, this::occurringOn);
     }
 
     @Override
@@ -164,6 +165,34 @@ public class MultiType extends RespondWith {
         } catch (NumberFormatException e) {
             throw new DukeException(DukeException.ExceptionCode.INCORRECT_ARGS, "Please give a number");
         }
+    }
+
+    private String occurringOn(String query) throws DukeException {
+        String dateQuery = query.substring(on.length()).strip();
+        if (dateQuery.length() == 0) {
+            dateQuery = Constants.Input.DATETIME_FORMATTER.format(LocalDateTime.now());
+        }
+
+        List<Task> relevantTasks = new ArrayList<>();
+        for (Task task : userTasks) {
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                if (deadline.isDueOn(dateQuery)) {
+                    relevantTasks.add(deadline);
+                }
+            } else if (task instanceof Event) {
+                Event event = (Event) task;
+                if (event.isOccurringOnDay(dateQuery)) {
+                    relevantTasks.add(event);
+                }
+            }
+        }
+
+        String result = "";
+        for (int i = 0; i < relevantTasks.size(); i++) {
+            result += String.format("%d. %s%s", (i + 1), relevantTasks.get(i), System.lineSeparator());
+        }
+        return result;
     }
 
     @Override

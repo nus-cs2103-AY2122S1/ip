@@ -61,7 +61,7 @@ public class Task {
         state = TaskState.DONE;
     }
 
-    public ArrayList<String> storageFields() {
+    public List<String> storageFields() {
         return new ArrayList<>(Arrays.asList(this.typeString, this.state.getStoredRepresentation(), name));
     }
 
