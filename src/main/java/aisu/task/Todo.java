@@ -1,4 +1,8 @@
-package aisu;
+package aisu.task;
+
+import aisu.AisuException;
+import aisu.task.Task;
+
 public class Todo extends Task {
     public Todo(String description) throws AisuException {
         super(description);

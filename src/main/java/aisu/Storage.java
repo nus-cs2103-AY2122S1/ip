@@ -1,5 +1,10 @@
 package aisu;
 
+import aisu.task.Deadline;
+import aisu.task.Event;
+import aisu.task.Task;
+import aisu.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

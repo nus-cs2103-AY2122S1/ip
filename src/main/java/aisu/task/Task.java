@@ -1,4 +1,7 @@
-package aisu;
+package aisu.task;
+
+import aisu.AisuException;
+
 /**
  * This is the Task class.
  * A Task contains a description and a status of being done or not.

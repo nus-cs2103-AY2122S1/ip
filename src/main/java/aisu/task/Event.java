@@ -1,4 +1,8 @@
-package aisu;
+package aisu.task;
+
+import aisu.AisuException;
+import aisu.task.Task;
+
 public class Event extends Task {
     private final String eventPeriod;
 

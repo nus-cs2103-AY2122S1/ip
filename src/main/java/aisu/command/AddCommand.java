@@ -1,4 +1,8 @@
-package aisu;
+package aisu.command;
+
+import aisu.*;
+import aisu.task.Task;
+import aisu.task.Todo;
 
 public class AddCommand extends Command {
     private final Tasklist.TaskTypes taskType;

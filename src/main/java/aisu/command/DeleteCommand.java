@@ -1,4 +1,8 @@
-package aisu;
+package aisu.command;
+
+import aisu.*;
+import aisu.task.Task;
+
 public class DeleteCommand extends Command {
     private final int parseInt;
 

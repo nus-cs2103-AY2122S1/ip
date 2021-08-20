@@ -1,4 +1,7 @@
 package aisu;
+import aisu.command.Command;
+import aisu.task.Task;
+
 import java.util.List;
 
 /**
