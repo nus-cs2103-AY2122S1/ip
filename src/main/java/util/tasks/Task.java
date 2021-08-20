@@ -2,6 +2,8 @@
  * Class of a task to be done.
  *
  */
+package util.tasks;
+
 public abstract class Task {
     protected String name;
     protected String checkBox;

@@ -1,3 +1,5 @@
+package util.tasks;
+
 public class Events extends Task {
     private static String label = "[E]";
     private String date;
