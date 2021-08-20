@@ -3,7 +3,8 @@ class Task {
     private boolean isDone;
 
     public Task(String name) {
-        new Task(name, false);
+        this.name = name;
+        this.isDone = false;
     }
 
     public Task(String name, boolean isDone) {

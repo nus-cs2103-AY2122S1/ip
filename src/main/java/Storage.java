@@ -82,7 +82,7 @@ class Storage {
     private void writeToFile(List<Task> tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         for (Task task : tasks) {
-            fileWriter.write(task.toSaveString());
+            fileWriter.write(task.toSaveString() + System.lineSeparator());
         }
         fileWriter.close();
     }
