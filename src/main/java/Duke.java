@@ -1,6 +1,6 @@
 import java.util.*;
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
 
         String logo = " ____        _        \n"
@@ -18,38 +18,56 @@ public class Duke {
         String command = sc.nextLine();
 
         while (!command.equals("bye")) {
-            if (command.contains("done")) {
-                int idx = Integer.parseInt(command.split(" ")[1]) - 1;
-                tasks[idx].updateStatus();
-                System.out.printf("%sNice! I've marked this task as done:\n%s\n%s\n",line, tasks[idx], line);
-            } else if (command.equals("list")) {
-                System.out.println(line+ "Here are the tasks in your list:");
-                for (int i = 0; i < ctr; i++) {
-                    System.out.printf("%d.%s\n", i + 1, tasks[i]);
+            try {
+                if (command.contains("done")) {
+                    if (command.indexOf(" ") == -1) {
+                        throw new DukeException("OOPS!! done needs the index of the task.");
+                    }
+                    int idx = Integer.parseInt(command.split(" ")[1]) - 1;
+                    tasks[idx].updateStatus();
+                    System.out.printf("%sNice! I've marked this task as done:\n%s\n%s\n", line, tasks[idx], line);
+                } else if (command.equals("list")) {
+                    System.out.println(line + "Here are the tasks in your list:");
+                    for (int i = 0; i < ctr; i++) {
+                        System.out.printf("%d.%s\n", i + 1, tasks[i]);
+                    }
+                    System.out.println(line);
+                } else if (command.contains("todo")) {
+                    if (command.indexOf(" ") == -1) {
+                        throw new DukeException("OOPS!! The description of a todo cannot be empty.");
+                    }
+                    int taskIdxStart = command.indexOf(" ") + 1;
+                    String task = command.substring(taskIdxStart);
+                    tasks[ctr] = new TodoTask(task);
+                    System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks[ctr], ctr + 1, line);
+                    ctr++;
+                } else if (command.contains("deadline")) {
+                    if (command.indexOf(" ") == -1) {
+                        throw new DukeException("OOPS!! The description of a deadline cannot be empty.");
+                    }
+                    int taskIdxStart = command.indexOf(" ") + 1;
+                    int timeIdxStart = command.indexOf("/");
+                    String task = command.substring(taskIdxStart, timeIdxStart - 1);
+                    String time = command.substring(timeIdxStart + 4);
+                    tasks[ctr] = new DeadlineTask(task, time);
+                    System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks[ctr], ctr + 1, line);
+                    ctr++;
+                } else if (command.contains("event")) {
+                    if (command.indexOf(" ") == -1) {
+                        throw new DukeException("OOPS!! The description of an event cannot be empty.");
+                    }
+                    int taskIdxStart = command.indexOf(" ") + 1;
+                    int timeIdxStart = command.indexOf("/");
+                    String task = command.substring(taskIdxStart, timeIdxStart - 1);
+                    String time = command.substring(timeIdxStart + 4);
+                    tasks[ctr] = new EventTask(task, time);
+                    System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks[ctr], ctr + 1, line);
+                    ctr++;
+                } else {
+                    throw new DukeException("OOPS!! I'm sorry, but I don't know what that means :-(");
                 }
-                System.out.println(line);
-            } else if (command.contains("todo")){
-                int taskIdxStart = command.indexOf(" ") + 1;
-                String task = command.substring(taskIdxStart);
-                tasks[ctr] = new TodoTask(task);
-                System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks[ctr], ctr + 1, line);
-                ctr++;
-            } else if (command.contains("deadline")){
-                int taskIdxStart = command.indexOf(" ") + 1;
-                int timeIdxStart = command.indexOf("/");
-                String task = command.substring(taskIdxStart, timeIdxStart - 1);
-                String time = command.substring(timeIdxStart + 4);
-                tasks[ctr] = new DeadlineTask(task, time);
-                System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks[ctr], ctr + 1, line);
-                ctr++;
-            } else if (command.contains("event")){
-                int taskIdxStart = command.indexOf(" ") + 1;
-                int timeIdxStart = command.indexOf("/");
-                String task = command.substring(taskIdxStart, timeIdxStart - 1);
-                String time = command.substring(timeIdxStart + 4);
-                tasks[ctr] = new EventTask(task, time);
-                System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks[ctr], ctr + 1, line);
-                ctr++;
+            } catch (DukeException e) {
+                System.out.println(line + e.getMessage() + "\n"+ line);
             }
             command = sc.nextLine();
         }
