@@ -129,7 +129,7 @@ public class CommandHandler {
         case "event":
             throw new LifelineException("Details of event cannot be blank!");
         default:
-            throw new LifelineException("I am sorry! I don't know what that means! ☹");
+            throw new LifelineException("I am sorry! I don't know what that means! \u2639");
         }
 
     }
