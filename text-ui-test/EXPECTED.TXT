@@ -40,6 +40,6 @@ Duke$IncorrectFormatException:
  -------------------------------------------------------------
  -------------------------------------------------------------
     Nice! I've removed this task off the face of the Earth:
-    [T][X] read book
+    [E][ ] arihtars (at: tmr)
     Now you have 1 tasks in the list.
  -------------------------------------------------------------

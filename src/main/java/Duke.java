@@ -1,15 +1,27 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * General class for the Duke thing
+ *
+ * @author A0217769M
+ */
+
 public class Duke {
     static String bar = " -------------------------------------------------------------";
     int listLen = 0;
-    Task[] list = new Task[100];
+    ArrayList<Task> list = new ArrayList<>();
+
+    /**
+     * General method for handling commands, decided against splitting up the method as it made it too messy
+     * @param input input of user
+     * @throws IncorrectFormatException error if command input is formatted wrongly
+     */
     public void updateList (String input) throws IncorrectFormatException {
         if (input.equalsIgnoreCase("list")) {
             System.out.println(bar);
             for (int i = 1; i <= listLen; i++) {
-                System.out.println("    " + i + "." + list[i - 1].toString());
+                System.out.println("    " + i + "." + list.get(i - 1).toString());
             }
             System.out.println(bar);
         } else{
@@ -22,8 +34,8 @@ public class Duke {
                     } else {
                         int num = Integer.parseInt(splitted[1]);
                         if (0 < num && num <= listLen) {
-                            list[num - 1].markDone();
-                            System.out.println(bar + "\n    Nice! I've marked this task as done:\n    " + list[num - 1].toString() + "\n" + bar);
+                            list.get(num - 1).markDone();
+                            System.out.println(bar + "\n    Nice! I've marked this task as done:\n    " + list.get(num - 1).toString() + "\n" + bar);
                         } else {
                             throw new IncorrectFormatException("Item number not present. Try again?");
                         }
@@ -34,9 +46,9 @@ public class Duke {
                     } else {
                         int num = Integer.parseInt(splitted[1]);
                         if (0 < num && num <= listLen) {
-                            list[num - 1].markDone(); //todo
                             listLen--;
-                            System.out.println(bar + "\n    Nice! I've removed this task off the face of the Earth:\n    " + list[num - 1].toString() +
+                            list.remove(num - 1);
+                            System.out.println(bar + "\n    Nice! I've removed this task off the face of the Earth:\n    " + list.get(num - 1).toString() +
                                     "\n    Now you have " + listLen + " tasks in the list.\n" + bar);
                         } else {
                             throw new IncorrectFormatException("Item number not present. Try again?");
@@ -46,7 +58,7 @@ public class Duke {
                     if (input.isEmpty()) {
                         throw new IncorrectFormatException("Task name not provided.\n" + "    FORMAT: \" TODO TASKNAME\"");
                     } else {
-                        list[listLen] = new Todo(input);
+                        list.add(new Todo(input));
                         listLen++;
                         System.out.println(bar + "\n    added: " + input + "\n    Now you have " + listLen + " tasks in your list\n" +
                                 bar);
@@ -56,7 +68,7 @@ public class Duke {
                     if (deadlineSplit.length == 1) {
                         throw new IncorrectFormatException("Task name or deadline not provided.\n" + "   FORMAT: \" DEADLINE TASKNAME /by DEADLINE\"");
                     } else {
-                        list[listLen] = new Deadline(deadlineSplit[0], deadlineSplit[1]);
+                        list.add(new Deadline(deadlineSplit[0], deadlineSplit[1]));
                         listLen++;
                         System.out.println(bar + "\n    Deadline added: " + deadlineSplit[0] + "\n    Now you have " + listLen + " tasks in your list\n" +
                                 bar);
@@ -66,7 +78,7 @@ public class Duke {
                     if (eventSplit.length == 1) {
                         throw new IncorrectFormatException("Event name or date not provided.\n" + "   FORMAT: \" EVENT TASKNAME /at DATE\"\n");
                     } else {
-                        list[listLen] = new Event(eventSplit[0], eventSplit[1]);
+                        list.add(new Event(eventSplit[0], eventSplit[1]));
                         listLen++;
                         System.out.println(bar + "\n    added: " + eventSplit[0] + "\n    Now you have " + listLen + " tasks in your list\n" +
                                 bar);
@@ -93,6 +105,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to allow for checking if the String is a number, to prevent errors while deleting/ done-ing tasks
+     * @param wool String to be checked
+     * @return boolean true if String is num.
+     */
     public boolean checkNum (String wool) {
         return (wool != null && wool.matches("^[0-9]*$"));
     }
@@ -120,11 +137,15 @@ public class Duke {
                 try {
                     currentList.updateList(str);
                 } catch (IncorrectFormatException e){
-                    System.out.println(e);
+                    e.printStackTrace();
                 }
             }
         } while (!away);
     }
+
+    /**
+     * Parent class Task, contains doneness and task name
+     */
     public class Task {
         protected String description;
         protected boolean isDone;
@@ -142,6 +163,10 @@ public class Duke {
             isDone = true;
         }
     }
+
+    /**
+     * Child class of Task, adds deadline field.
+     */
     public class Deadline extends Task {
 
         protected String by;
@@ -156,6 +181,10 @@ public class Duke {
             return "[D]" + super.toString() + " (by: " + by + ")";
         }
     }
+
+    /**
+     * Child class of Task
+     */
     public class Todo extends Task {
 
         public Todo(String description) {
@@ -167,6 +196,10 @@ public class Duke {
             return "[T]" + super.toString();
         }
     }
+
+    /**
+     * Child class of Task, adds date field.
+     */
     public class Event extends Task {
 
         protected String at;
@@ -181,6 +214,10 @@ public class Duke {
             return "[E]" + super.toString() + " (at: " + at + ")";
         }
     }
+
+    /**
+     * Exception that handles improperly formatted command.
+     */
     public class IncorrectFormatException extends Exception {
         public IncorrectFormatException(String errorMessage) {
             super("\n" + bar + "\n    " + errorMessage + "\n    Type \"help\" for help\n" + bar);
