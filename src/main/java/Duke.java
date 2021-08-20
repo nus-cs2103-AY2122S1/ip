@@ -51,7 +51,8 @@ public class Duke {
       .findFirst()
       .orElse(commands.length);
     String[] taskNames = Arrays.copyOfRange(commands, indexOfDateSeparator + 1, commands.length);
-    return Arrays.stream(taskNames).collect(Collectors.joining(" "));
+    String output = Arrays.stream(taskNames).collect(Collectors.joining(" "));
+    return DateFormatter.formatDate(output);
   }
 
   private static String formatOutput(String inputText) {
