@@ -2,7 +2,10 @@
  * The Duke chatbot app
  */
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
     /**
@@ -18,6 +21,9 @@ public class Duke {
     public static final String BOT_LINE = "============================================================";
     public static final String USER_LINE = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
 
+    private static final String DATA_DIRECTORY = "./data";
+    private static final String DATA_FILE = "duke.txt";
+
     /**
      * The main function of Borat
      * @param args The command line arguments
@@ -32,6 +38,15 @@ public class Duke {
          * The list of the Borat app
          */
         Items list = new Items();
+
+        /**
+         * Read from saved file.
+         */
+        File data = readSaved(list);
+        if (data == null) {
+            System.out.println("File is null");
+            return;
+        }
 
         /**
          * Borat's Greetings
@@ -97,6 +112,56 @@ public class Duke {
          * Good bye message from Borat
          */
         showMessage("Bye. Have a good time!");
+    }
+
+    private static File readSaved(Items list) {
+        File dataDir = new File(DATA_DIRECTORY);
+        dataDir.mkdirs();
+        File dataFile = new File(DATA_DIRECTORY + "/" + DATA_FILE);
+        try {
+            dataFile.createNewFile();
+        } catch (IOException e) {
+            System.out.println("Failed to create a new file");
+            return null;
+        }
+        try {
+            Scanner fileReader = new Scanner(dataFile);
+            while (fileReader.hasNextLine()) {
+                String rawData = fileReader.nextLine();
+                String[] data = rawData.split(" \\| ");
+                String taskType = data[0];
+                boolean isDone = data[1].equals("1");
+                Task task = null;
+                switch (taskType) {
+                    case "T":
+                        // Add a todo task.
+                        task = new Todo(data[2]);
+
+                        break;
+                    case "D":
+                        // Add a deadline task.
+                        task = new Deadline(data[2], data[3]);
+
+                        break;
+                    case "E":
+                        // Add an event task.
+                        task = new Event(data[2], data[3]);
+                }
+                if (task != null) {
+                    if (isDone) {
+                        task.markDone();
+                    }
+                    list.addItem(task);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Failed to read the file");
+            return null;
+        } catch (Exception e) {
+            System.out.println("Failed to read saved data");
+            return null;
+        }
+        return dataFile;
     }
 
     /**
