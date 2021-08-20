@@ -22,7 +22,7 @@ public class Duke {
      * To get the task object in a taskList using its index
      * @param taskList a list of tasks
      * @param index the index of task in the tasklist
-     * @return
+     * @return return the task with corresponding index
      */
     public static Task getTask(ArrayList<Task> taskList, Integer index) {
         return taskList.get(index);
@@ -150,4 +150,3 @@ public class Duke {
 
 }
 
-}
