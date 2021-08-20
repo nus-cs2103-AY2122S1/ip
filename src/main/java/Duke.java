@@ -5,18 +5,22 @@ public class Duke {
     private static Task[] list = new Task[100]; // List to store all the tasks
 
     public static void handleInput(String input) {
-        if (input.equals("list")) {
-            for (int i = 0; i < listSize; i++) {
-                System.out.println((i + 1) + "." + list[i]);
-            }
-        } else if (input.startsWith("done ")) {
-            try {
-                completeTask(input);
-            } catch (NumberFormatException e) {
+        try {
+            if (input.equals("list")) {
+                for (int i = 0; i < listSize; i++) {
+                    System.out.println((i + 1) + "." + list[i]);
+                }
+            } else if (input.startsWith("done ")) {
+                try {
+                    completeTask(input);
+                } catch (NumberFormatException e) {
+                    addTask(input);
+                }
+            } else {
                 addTask(input);
             }
-        } else {
-            addTask(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println("OOPS!! " + e.getMessage());
         }
     }
 
@@ -40,12 +44,15 @@ public class Duke {
 
     public static int findEscape(String desc) {
         int escapePos = desc.indexOf("/");
-        if (escapePos < 0) throw new IllegalArgumentException("Please provide a time");
+        if (escapePos < 0) throw new IllegalArgumentException("Please provide a duration or deadline.");
         return escapePos;
     }
 
     public static void completeTask(String input) {
         int completedTaskNumber = Integer.parseInt(input.substring(5)) - 1;
+        if (completedTaskNumber < 0 || completedTaskNumber >= listSize) {
+            throw new IllegalArgumentException("Task with that task number does not exist.");
+        }
         list[completedTaskNumber].complete();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(list[completedTaskNumber]);
