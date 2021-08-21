@@ -3,6 +3,7 @@ package duke.task;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -76,4 +77,21 @@ class TaskTest {
         Task doneTask = getDoneTask();
         assertEquals("[X] " + DESCRIPTION, doneTask.toString());
     }
+
+    @Test
+    void equals_sameTask_true() {
+        assertEquals(new Task(DESCRIPTION), undoneTask);
+    }
+
+    @Test
+    void equals_differentTask_false() {
+        Task doneTask = new Task(DESCRIPTION);
+        doneTask.markAsDone();
+
+        Task differentDescriptionTask = new Task("other");
+
+        assertNotEquals(undoneTask, doneTask);
+        assertNotEquals(undoneTask, differentDescriptionTask);
+    }
+
 }

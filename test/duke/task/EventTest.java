@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class EventTest {
 
@@ -28,5 +29,26 @@ class EventTest {
     @Test
     void toString_event_formattedString() {
         assertEquals("[E][ ] " + DESCRIPTION + " (at: 1 January 2020)", event.toString());
+    }
+
+    @Test
+    void equals_sameEvent_true() {
+        assertEquals(event, new Event(DESCRIPTION, TIME));
+    }
+
+    @Test
+    void equals_differentEvent_false() {
+        LocalDate otherLocalDate = LocalDate.parse("2020-02-02");
+
+        Event doneEvent = new Event(DESCRIPTION, TIME);
+        doneEvent.markAsDone();
+
+        Event differentTimeEvent = new Event(DESCRIPTION, otherLocalDate);
+
+        Event differentDescriptionEvent = new Event("other", TIME);
+
+        assertNotEquals(event, doneEvent);
+        assertNotEquals(event, differentTimeEvent);
+        assertNotEquals(event, differentDescriptionEvent);
     }
 }
