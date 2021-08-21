@@ -1,29 +1,27 @@
-
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
     static List<Task> tasks = new ArrayList<>();
+    static Storage storage;
 
     public static void main(String[] args) {
         greet();
+        loadStorage();
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
                 String input = scanner.nextLine();
                 if (input.equals("bye")) {
                     print("Bye. Hope to see you again soon!");
+                    storage.close();
                     return;
-                } else if (input.equals("list")) {
-                    print(list());
-                } else if (input.startsWith("done")) {
-                    print(done(input));
-                } else if (input.startsWith("delete")) {
-                    print(delete(input));
                 } else {
-                    print(addTask(input));
+                    print(parse(input));
                 }
+                storage.write(input);
             } catch (Exception e) {
                 print(e.getMessage());
             }
@@ -32,6 +30,29 @@ public class Duke {
 
     static void greet() {
         print("Hello! I'm Duke", "What can I do for you?");
+    }
+
+    static void loadStorage() {
+        try {
+            storage = new Storage("duke.txt");
+            List<String> commands = storage.readAllLines();
+            for (String command : commands)
+                parse(command);
+        } catch (IOException | DukeException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static String[] parse(String input) throws DukeException {
+        if (input.equals("list")) {
+            return list();
+        } else if (input.startsWith("done")) {
+            return done(input);
+        } else if (input.startsWith("delete")) {
+            return delete(input);
+        } else {
+            return addTask(input);
+        }
     }
 
     static String[] list() {
@@ -61,21 +82,21 @@ public class Duke {
         String[] parts = input.split(" ", 2);
         String type = parts[0];
         switch (type) {
-            case "todo":
-                if (parts.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                }
-                return new Todo(parts[1]);
-            case "deadline": {
-                String[] subparts = parts[1].split(" /by ", 2);
-                return new Deadline(subparts[0], subparts[1]);
+        case "todo":
+            if (parts.length == 1) {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
-            case "event": {
-                String[] subparts = parts[1].split(" /at ", 2);
-                return new Event(subparts[0], subparts[1]);
-            }
-            default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            return new Todo(parts[1]);
+        case "deadline": {
+            String[] subparts = parts[1].split(" /by ", 2);
+            return new Deadline(subparts[0], subparts[1]);
+        }
+        case "event": {
+            String[] subparts = parts[1].split(" /at ", 2);
+            return new Event(subparts[0], subparts[1]);
+        }
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
