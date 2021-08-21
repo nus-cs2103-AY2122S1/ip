@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,16 +41,33 @@ public class Duke {
                 ArrayList<Task> taskList = new ArrayList<>();
                 for (String x: text) {
                     String[] data = x.split(Pattern.quote(" | "));
+                    System.out.println(Arrays.toString(data));
                     Task t;
                     switch (data[1]) {
                         case "T":
                             t = new ToDo(data[3]);
                             break;
                         case "E":
-                            t = new Event(data[3], data[4]);
+                            LocalDate date = LocalDate.parse(data[4]);
+                            if (data.length == 5) {
+                                t = new Event(data[3], date);
+                            } else {
+                                String hour = data[5].replace(":", "").substring(0, 2);
+                                String minute = data[5].replace(":", "").substring(2, 4);
+                                LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
+                                t = new Event(data[3], date, time);
+                            }
                             break;
                         case "D":
-                            t = new Deadline(data[3], data[4]);
+                            LocalDate date2 = LocalDate.parse(data[4]);
+                            if (data.length == 5) {
+                                t = new Deadline(data[3], date2);
+                            } else {
+                                String hour = data[5].replace(":", "").substring(0, 2);
+                                String minute = data[5].replace(":", "").substring(2, 4);
+                                LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
+                                t = new Deadline(data[3], date2, time);
+                            }
                             break;
                         default:
                             System.out.println("Invalid task found when loading, skipped!");
@@ -195,7 +214,27 @@ public class Duke {
                             if (split.length < 2) {
                                 throw new InvalidFormatException("`deadline ${item} /by ${time}`");
                             }
-                            t = new Deadline(split[0].substring(9).trim(), split[1].trim());
+                            String[] datetime = split[1].trim().split(" ");
+                            if (datetime.length == 1) {
+                                try {
+                                    LocalDate date = LocalDate.parse(datetime[0].replace("/", "-"));
+                                    t = new Deadline(split[0].substring(9).trim(), date);
+                                } catch (Exception e) {
+                                    throw new InvalidDateTimeException();
+                                }
+                            } else if (datetime.length == 2) {
+                                try {
+                                    LocalDate date = LocalDate.parse(datetime[0].replace("/", "-"));
+                                    String hour = datetime[1].replace(":", "").substring(0, 2);
+                                    String minute = datetime[1].replace(":", "").substring(2, 4);
+                                    LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
+                                    t = new Deadline(split[0].substring(9).trim(), date, time);
+                                } catch (Exception e) {
+                                    throw new InvalidDateTimeException();
+                                }
+                            } else {
+                                throw new InvalidDateTimeException();
+                            }
                             break;
                         }
                         case "event": {
@@ -203,7 +242,27 @@ public class Duke {
                             if (split.length < 2) {
                                 throw new InvalidFormatException("`event ${item} /at ${time}`");
                             }
-                            t = new Event(split[0].substring(5).trim(), split[1].trim());
+                            String[] datetime = split[1].trim().split(" ");
+                            if (datetime.length == 1) {
+                                try {
+                                    LocalDate date = LocalDate.parse(datetime[0].replace("/", "-"));
+                                    t = new Event(split[0].substring(5).trim(), date);
+                                } catch (Exception e) {
+                                    throw new InvalidDateTimeException();
+                                }
+                            } else if (datetime.length == 2) {
+                                try {
+                                    LocalDate date = LocalDate.parse(datetime[0].replace("/", "-"));
+                                    String hour = datetime[1].replace(":", "").substring(0, 2);
+                                    String minute = datetime[1].replace(":", "").substring(2, 4);
+                                    LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
+                                    t = new Event(split[0].substring(5).trim(), date, time);
+                                } catch (Exception e) {
+                                    throw new InvalidDateTimeException();
+                                }
+                            } else {
+                                throw new InvalidDateTimeException();
+                            }
                             break;
                         }
                         default:
