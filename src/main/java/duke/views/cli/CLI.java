@@ -30,6 +30,9 @@ public class CLI implements PrintableMixin {
         this.responder = responder;
     }
 
+    /**
+     * Runs before the application becomes responsive to user input.
+     */
     public void init() {
         List<String> dataList = loader.loadRelative(Constants.Storage.PERSISTENCE_LOCATION);
         responder.load(dataList);

@@ -10,12 +10,18 @@ public class Greeter {
         init();
     }
 
+    /**
+     * Initialises the greeter.
+     */
     public static void init() {
         String hello = "Hello! I'm Duke";
         String query = "What can I do for you?";
         welcomeMessage = String.format("%s%s%s%s", hello, System.lineSeparator(), query, System.lineSeparator());
     }
 
+    /**
+     * Generates greet response.
+     */
     public void greet() {
         System.out.println(welcomeMessage);
     }

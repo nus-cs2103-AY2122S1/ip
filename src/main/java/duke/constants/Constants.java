@@ -9,7 +9,9 @@ import duke.shared.StringHelpers;
  * Encapsulates global variables possibly used in multiple areas in code.
  */
 public class Constants {
-
+    /**
+     * Encapsulates constants related to CLI display.
+     */
     public static class Display {
         public static enum IndentationType {
             TAB("\t"), SPACE("    ");
@@ -38,12 +40,18 @@ public class Constants {
                 .ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM);
     }
 
+    /**
+     * Encapsulates constants relevant to user input.
+     */
     public static class Input {
         public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy[ HHmm]");
         // note that this means ISO-8601 strings will not be used as input
         public static final String DATE_RANGE_SEPARATOR = "-";
     }
 
+    /**
+     * Encapsulates constants relevant to data persistence.
+     */
     public static class Storage {
         public static final String PERSISTENCE_SEPARATOR = "|";
         public static final String PERSISTENCE_SEPARATOR_REGEX = String.format("\\%s", PERSISTENCE_SEPARATOR);

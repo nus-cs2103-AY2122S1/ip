@@ -5,9 +5,18 @@ import java.time.LocalDateTime;
 
 import duke.constants.Constants;
 
+/**
+ * Encapsulates a pair of start datetime and end datetime.
+ */
 public class DateRange {
     private LocalDateTime start, end;
 
+    /**
+     * Creates a DateRange object with the given start and end datetime.
+     * @param start Start datetime.
+     * @param end End datetime.
+     * @throws DukeException When start datetime occurs after end datetime.
+     */
     public DateRange(LocalDateTime start, LocalDateTime end) throws DukeException {
         this.start = start;
         this.end = end;
@@ -16,6 +25,13 @@ public class DateRange {
         }
     }
 
+    /**
+     * Creates a DateRange object with the given start and end datetime strings.
+     * @param start String representing start datetime.
+     * @param end String representing end datetime.
+     * @return DateRange object.
+     * @throws DukeException When start datetime occurs after end datetime.
+     */
     public static DateRange createFromString(String start, String end) throws DukeException {
         return new DateRange(LocalDateTime.parse(start, Constants.Input.DATETIME_FORMATTER),
                 LocalDateTime.parse(end, Constants.Input.DATETIME_FORMATTER));
@@ -43,34 +59,71 @@ public class DateRange {
         return createFromString(start, end);
     }
 
+    /**
+     * Returns whether the date range is valid.
+     * @return Whether the date range is valid.
+     */
     public boolean isValid() {
         return !isInvalid();
     }
 
+    /**
+     * Returns whether the date range is invalid.
+     * @return Whether the date range is invalid.
+     */
     public boolean isInvalid() {
         return start.isAfter(end);
     }
 
+    /**
+     * Returns whether the given datetime occurs before the date range.
+     * @param dateTime Datetime.
+     * @return Whether the given datetime occurs before the date range.
+     */
     public boolean occursBefore(LocalDateTime dateTime) {
         return start.isAfter(dateTime);
     }
 
+    /**
+     * Returns whether the given date occurs in one of the days of the date range.
+     * @param date Date.
+     * @return Whether the given date occurs in one of the days of the date range
+     */
     public boolean occursDuringDay(LocalDate date) {
         return !start.toLocalDate().isAfter(date) && !end.toLocalDate().isBefore(date);
     }
 
+    /**
+     * Returns whether the given datetime occurs between (non-strictly) the date range.
+     * @param dateTime Datetime.
+     * @return Whether the given datetime occurs between (non-strictly) the date range.
+     */
     public boolean occursBetween(LocalDateTime dateTime) {
         return !start.isAfter(dateTime) && !end.isBefore(dateTime);
     }
 
+    /**
+     * Returns whether the given datetime occurs between the date range.
+     * @param dateTime Datetime.
+     * @return Whether the given datetime occurs between the date range.
+     */
     public boolean occursStrictlyBetween(LocalDateTime dateTime) {
         return start.isBefore(dateTime) && end.isAfter(dateTime);
     }
 
+    /**
+     * Returns whether the given datetime occurs after the date range.
+     * @param dateTime Datetime.
+     * @return Whether the given datetime occurs after the date range.
+     */
     public boolean occursAfter(LocalDateTime dateTime) {
         return end.isBefore(dateTime);
     }
 
+    /**
+     * Returns a string that is the stored representation of a date range.
+     * @return String representation of a date range to be stored.
+     */
     public String toStorageString() {
         return String.format("%s%s%s", Constants.Input.DATETIME_FORMATTER.format(start),
                 Constants.Input.DATE_RANGE_SEPARATOR, Constants.Input.DATETIME_FORMATTER.format(end));
