@@ -26,10 +26,11 @@ public class Storage {
 
         for (Task t : savedList) {
             if (t instanceof Deadline) {
-                String taskDetails = "D | " + ((Deadline) t).time;
+                String taskDetails = "D | " + ((Deadline) t).datetime.saveDatetime();
                 taskLine.append(taskDetails);
             } else if (t instanceof Event) {
-                String taskDetails = "D | " + ((Event) t).time;
+                String taskDetails = "E | " + ((Event) t).startDatetime.saveDatetime()
+                        + "/to" + ((Event) t).endDatetime.saveDatetime();
                 taskLine.append(taskDetails);
             } else {
                 taskLine.append("T | No time");
@@ -53,16 +54,18 @@ public class Storage {
             while (fileScanner.hasNextLine()) {
                 String[] lineData = fileScanner.nextLine().split("\\|");
                 String taskType = lineData[0];
-                String taskTime = lineData[1].replace(" ", "");
+                String taskTime = lineData[1].trim();
                 String taskDescription = lineData[2];
                 boolean isTaskDone = lineData[3].equals(" T");
 
                 switch (taskType) {
                 case "D ":
-                    savedList.add(new Deadline(taskDescription, isTaskDone, taskTime));
+                    savedList.add(new Deadline(taskDescription, taskTime, isTaskDone));
                     break;
                 case "E ":
-                    savedList.add(new Event(taskDescription, isTaskDone, taskTime));
+                    if (Parser.findEventDatetime(taskTime) != null) {
+                        savedList.add(new Event(taskDescription, Parser.findEventDatetime(taskTime), isTaskDone));
+                    }
                     break;
                 case "T ":
                     savedList.add(new Task(taskDescription, isTaskDone));

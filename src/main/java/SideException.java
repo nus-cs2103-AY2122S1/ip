@@ -31,7 +31,7 @@ class UnknownCommandException extends SideException {
 
 class WrongFormatException extends SideException {
     public WrongFormatException(String format) {
-        super("Follow this format, don't make this worse:\n  " + format);
+        super("Follow this format, don't make this worse:\n" + format);
     }
 }
 
@@ -56,5 +56,18 @@ class NoIndexException extends SideException {
 class TooManyIndexesException extends SideException {
     public TooManyIndexesException(String input) {
         super("I only have 1 hand, I can only " + input + " 1 at a time...");
+    }
+}
+
+class WrongDatetimeException extends SideException {
+    public WrongDatetimeException() {
+        super("Wrong datetime format...\n" +
+                "Use [YYYY-MM-DD] or [YYYY-MM-DD], [HHMM]");
+    }
+}
+
+class NoSecondDatetimeException extends SideException {
+    public NoSecondDatetimeException() {
+        super("Don't know when your event ends...");
     }
 }

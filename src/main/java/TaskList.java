@@ -65,10 +65,11 @@ public class TaskList {
      * Adds an event to the TaskList.
      *
      * @param description String representation of event information.
-     * @param time Time at which the event happens.
+     * @param startDatetime Time at which the event starts.
+     * @param endDatetime Time at which event ends.
      */
-    public void addEvent(String description, String time) {
-        Event event = new Event(description, time);
+    public void addEvent(String description, String startDatetime, String endDatetime) {
+        Event event = new Event(description, startDatetime, endDatetime);
         this.tasks.add(event);
         taskLabel++;
     }

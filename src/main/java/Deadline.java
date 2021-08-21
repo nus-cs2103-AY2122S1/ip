@@ -12,27 +12,39 @@
  */
 
 public class Deadline extends Task {
-    protected String time;
+    protected DateTime datetime;
 
-    public Deadline(String description, String time) {
+    public Deadline(String description, String datetimeInput) {
         super(description);
-        this.time = time.stripLeading().stripTrailing();
+
+        String[] datetime = datetimeInput.trim().split(", ", 2);
+        if (datetime.length == 2) {
+            this.datetime = new DateTime(datetime[0], datetime[1]);
+        } else {
+            this.datetime = new DateTime(datetime[0]);
+        }
     }
 
-    public Deadline(String description, boolean isDone, String time) {
+    public Deadline(String description, String datetimeInput, Boolean isDone) {
         super(description, isDone);
-        this.time = time.stripLeading().stripTrailing();
+
+        String[] datetime = datetimeInput.split(", ", 2);
+        if (datetime.length == 2)
+            this.datetime = new DateTime(datetime[0], datetime[1]);
+        else
+            this.datetime = new DateTime(datetime[0]);
     }
 
     @Override
     public String toString() {
         StringBuilder deadlineLine = new StringBuilder();
         if (this.isDone) {
-            deadlineLine.append("[D][x]");
+            deadlineLine.append("[D][x] ");
         } else {
-            deadlineLine.append("[D][ ]");
+            deadlineLine.append("[D][ ] ");
         }
-        String deadlineDetails = this.description.replaceFirst("deadline", "") + "(by: " + this.time + ")";
+        String deadlineDetails = this.description.replaceFirst("deadline", "") +
+                "(by: " + this.datetime + ")";
         deadlineLine.append(deadlineDetails);
         return deadlineLine.toString();
     }

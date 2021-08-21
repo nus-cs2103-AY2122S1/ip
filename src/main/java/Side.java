@@ -59,23 +59,6 @@ public class Side {
     }
 
     /**
-     * Helper method to isolate secondary commands like /at and /by.
-     *
-     * @param input String to be searched.
-     * @param arg String to find.
-     * @return String representing time given by usder input.
-     */
-    private static String findTime(String input, String arg) {
-        int argIdx = input.lastIndexOf(arg);
-        String output = input.substring(argIdx + arg.length());
-
-        if (output.replaceAll("\\s", "").length() < 1) {
-            return null;
-        }
-        return output;
-    }
-
-    /**
      * Handles the logic to add a deadline to TaskList.
      *
      * @param input String representation of user input.
@@ -83,13 +66,14 @@ public class Side {
      * @throws WrongFormatException Catches incorrectly formatted input and returns error.
      */
     private static void addDeadline(String input, TaskList taskList) throws WrongFormatException {
-        if (input.contains("/by") && (findTime(input, "/by") != null)) {
-            String time = findTime(input, "/by");
-            String description = input.replace("/by" + time, "");
-            taskList.addDeadline(description, time);
-            echo(new Deadline(description, time).toString(), taskList);
+        if (input.contains("/by") && (Parser.findDeadlineDatetime(input) != null)) {
+            String datetime = Parser.findDeadlineDatetime(input);
+            String description = Parser.findDescription(input);
+            taskList.addDeadline(description, datetime);
+            echo(new Deadline(description, datetime).toString(), taskList);
         } else {
-            throw new WrongFormatException("deadline [task name] /by [time]");
+            throw new WrongFormatException("deadline [task name] /by [YYYY-MM-DD], [HHMM]\n" +
+                    "deadline [task name] /by [YYYY-MM-DD]");
         }
     }
 
@@ -100,14 +84,22 @@ public class Side {
      * @param taskList TaskList to be added to.
      * @throws WrongFormatException Catches incorrectly formatted input and returns error.
      */
-    private static void addEvent(String input, TaskList taskList) throws WrongFormatException {
-        if (input.contains("/at") && (findTime(input, "/at") != null)) {
-            String time = findTime(input, "/at");
-            String description = input.replace("/at" + time, "");
-            taskList.addEvent(description, time);
-            echo(new Event(description, time).toString(), taskList);
+    private static void addEvent(String input, TaskList taskList) throws WrongFormatException
+            , NoSecondDatetimeException {
+        if (input.contains("/at") && (Parser.findEventDatetime(input) != null)) {
+            String[] datetimeArr = Parser.findEventDatetime(input);
+            String description = Parser.findDescription(input);
+            if (datetimeArr.length < 2) {
+                throw new WrongFormatException("event [task name] /at [YYYY-MM-DD], [HHMM] /to [YYYY-MM-DD], [HHMM]\n" +
+                        "event [task name] /at [YYYY-MM-DD] /to [YYYY-MM-DD]");
+            }
+            if (datetimeArr != null && datetimeArr[0] != null && datetimeArr[1] != null) {
+                taskList.addEvent(description, datetimeArr[0], datetimeArr[1]);
+                echo(new Event(description, datetimeArr[0], datetimeArr[1]).toString(), taskList);
+            }
         } else {
-            throw new WrongFormatException("event [task name] /at [time]");
+            throw new WrongFormatException("event [task name] /at [YYYY-MM-DD], [HHMM] /to [YYYY-MM-DD], [HHMM]\n" +
+                    "event [task name] /at [YYYY-MM-DD] /to [YYYY-MM-DD]");
         }
     }
 
