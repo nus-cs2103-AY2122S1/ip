@@ -7,8 +7,8 @@ public class ToDo extends Task {
 		super(name);
 	}
 
-	protected void updateDate(String date) throws HelpBotInvalidTaskTypeException {
-		throw new HelpBotInvalidTaskTypeException(TaskType.TODO);
+	public void updateDate(String date) throws HelpBotInvalidTaskTypeException {
+		throw new HelpBotInvalidTaskTypeException(Type.TODO);
 	}
 
 	@Override

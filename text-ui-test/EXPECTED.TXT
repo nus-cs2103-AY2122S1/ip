@@ -1,5 +1,5 @@
-____________________________________________________________
-Oh great, you again... Name's 
+===================To Your Royal Highness===================
+Oh great, you again... Name's
  ____        _     
 |  _ \      | |    
 | |_) | ___ | |__  
@@ -10,132 +10,121 @@ Oh great, you again... Name's
 Here is the myriad of ways you can inconvenience me:
   > 'list' - view all your tasks
   > 'todo (task)' - add a simple todo task
-  > 'deadline (task) /by (date/time)' - add a task with a deadline
-  > 'event (task) /at (date/time)' - add a task with a specified date/time
-  > 'update (index) /to (date/time)' - change a task to happen at a new date/time
+  > 'deadline (task) /by (date/time)' - add a task to be done by specified date/time
+  > 'event (task) /at (date/time)' - add a task that happens at specified date/time
+  > 'update (task index) /to (date/time)' - modify the date/time of task at specified index
+  > 'delete (task index)' - delete a task
   > 'bye' - (please for the love of God) let me rest! :)
-____________________________________________________________
-____________________________________________________________
+============================================================
+===================To Your Royal Highness===================
 Oh. My. God. Fine. Here are your tasks:
   Oh I'm sorry, were you expecting ME to make you a todo list, you lazy sod?
   Do it yourself, idiot.
-____________________________________________________________
-____________________________________________________________
-Urgh, fine. Your task has been added:
- [E][ ] eat lunch (at: 12pm)
-You now have 1 tasks to do.
-____________________________________________________________
-____________________________________________________________
-Urgh, fine. Your task has been added:
- [D][ ] eat dinner (by: 5pm)
-You now have 2 tasks to do.
-____________________________________________________________
-____________________________________________________________
-Urgh, fine. Your task has been added:
- [T][ ] dig up some bodies
-You now have 3 tasks to do.
-____________________________________________________________
-____________________________________________________________
-You didn't specify the time, dummy!
+============================================================
+===================To Your Royal Highness===================
 Exception in Help Bot:
-The following argument is invalid: null
-____________________________________________________________
-____________________________________________________________
-I literally TOLD you what you can do!
+The following argument is invalid: eat lunch /by 12pm
+============================================================
+===================To Your Royal Highness===================
 Exception in Help Bot:
 The following is not a command: eat lunch /at 12pm
-____________________________________________________________
-____________________________________________________________
-You didn't specify the time, dummy!
+============================================================
+===================To Your Royal Highness===================
 Exception in Help Bot:
-The following argument is invalid: null
-____________________________________________________________
-____________________________________________________________
-I literally TOLD you what you can do!
+The following argument is invalid: eat dinner /at 5pm
+============================================================
+===================To Your Royal Highness===================
 Exception in Help Bot:
 The following is not a command: eat dinner /by 5pm
-____________________________________________________________
-____________________________________________________________
-I literally TOLD you what you can do!
+============================================================
+===================To Your Royal Highness===================
 Exception in Help Bot:
 The following is not a command: dig up some bodies
-____________________________________________________________
-____________________________________________________________
+============================================================
+===================To Your Royal Highness===================
 Oh. My. God. Fine. Here are your tasks:
  1. [E][ ] eat lunch (at: 12pm)
  2. [D][ ] eat dinner (by: 5pm)
  3. [T][ ] dig up some bodies
-____________________________________________________________
-____________________________________________________________
+============================================================
+===================To Your Royal Highness===================
+You've ALREADY forgotten the commands? How???
+Actually, why am I even surprised... here are the commands.
+  > 'list' - view all your tasks
+  > 'todo (task)' - add a simple todo task
+  > 'deadline (task) (date/time)' - add a task to be done by specified date/time
+  > 'event (task) (date/time)' - add a task that happens at specified date/time
+  > 'update (task index) (date/time)' - modify the date/time of task at specified index
+  > 'delete (task index)' - delete a task
+  > 'bye' - (please for the love of God) let me rest! :)
+============================================================
+===================To Your Royal Highness===================
 Dude, make up your mind! I'll update it, but just this once, okay?
  [E][ ] eat lunch (at: 1pm)
-____________________________________________________________
-____________________________________________________________
+============================================================
+===================To Your Royal Highness===================
 Oh. My. God. Fine. Here are your tasks:
  1. [E][ ] eat lunch (at: 1pm)
  2. [D][ ] eat dinner (by: 5pm)
  3. [T][ ] dig up some bodies
-____________________________________________________________
-____________________________________________________________
+============================================================
+===================To Your Royal Highness===================
 Dude, make up your mind! I'll update it, but just this once, okay?
  [D][ ] eat dinner (by: 7pm)
-____________________________________________________________
-____________________________________________________________
+============================================================
+===================To Your Royal Highness===================
 Oh. My. God. Fine. Here are your tasks:
  1. [E][ ] eat lunch (at: 1pm)
  2. [D][ ] eat dinner (by: 7pm)
  3. [T][ ] dig up some bodies
-____________________________________________________________
-____________________________________________________________
-You can't do this, dumbo.
+============================================================
+===================To Your Royal Highness===================
 Exception in Help Bot:
 The operation could not be performed on task type: todo
-____________________________________________________________
-____________________________________________________________
-Hello, do you know what a number is?
+============================================================
+===================To Your Royal Highness===================
 Exception in Help Bot:
 The following argument is invalid: update, caused by:
 Index 'asd' does not correspond to a valid task, caused by:
 java.lang.NumberFormatException: For input string: "asd"
-____________________________________________________________
-____________________________________________________________
+============================================================
+===================To Your Royal Highness===================
 About time you did your work, you lazy bum! I GUESS I'll mark it as done for you:
-   [E][X] eat lunch (at: 1pm)
-____________________________________________________________
-____________________________________________________________
+ [E][X] eat lunch (at: 1pm)
+============================================================
+===================To Your Royal Highness===================
 Oh. My. God. Fine. Here are your tasks:
  1. [E][X] eat lunch (at: 1pm)
  2. [D][ ] eat dinner (by: 7pm)
  3. [T][ ] dig up some bodies
-____________________________________________________________
-____________________________________________________________
-Can't you just keep track of this yourself? Fine, removed this for you:
- [E][X] eat lunch (at: 1pm)
-You now have 2 tasks to do.
-____________________________________________________________
-____________________________________________________________
-Oh. My. God. Fine. Here are your tasks:
- 1. [D][ ] eat dinner (by: 7pm)
- 2. [T][ ] dig up some bodies
-____________________________________________________________
-____________________________________________________________
+============================================================
+===================To Your Royal Highness===================
 Oh, procrastinating now are we? Sure, removed this:
  [D][ ] eat dinner (by: 7pm)
+You now have 2 tasks to do.
+============================================================
+===================To Your Royal Highness===================
+Oh. My. God. Fine. Here are your tasks:
+ 1. [E][X] eat lunch (at: 1pm)
+ 2. [T][ ] dig up some bodies
+============================================================
+===================To Your Royal Highness===================
+Oh, procrastinating now are we? Sure, removed this:
+ [T][ ] dig up some bodies
 You now have 1 tasks to do.
-____________________________________________________________
-____________________________________________________________
+============================================================
+===================To Your Royal Highness===================
 Oh. My. God. Fine. Here are your tasks:
- 1. [T][ ] dig up some bodies
-____________________________________________________________
-____________________________________________________________
-I literally TOLD you what you can do!
+ 1. [E][X] eat lunch (at: 1pm)
+============================================================
+===================To Your Royal Highness===================
 Exception in Help Bot:
-The following is not a command: update windows
-____________________________________________________________
-____________________________________________________________
+The following argument is invalid: windows
+============================================================
+===================To Your Royal Highness===================
 Oh. My. God. Fine. Here are your tasks:
- 1. [T][ ] dig up some bodies
-____________________________________________________________
-____________________________________________________________
+ 1. [E][X] eat lunch (at: 1pm)
+============================================================
+===================To Your Royal Highness===================
 Good riddance...
-____________________________________________________________
+============================================================

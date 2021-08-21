@@ -8,6 +8,7 @@ deadline eat dinner /at 5pm
 eat dinner /by 5pm
 dig up some bodies
 list
+help
 update 1 /to 1pm
 list
 update 2 /to 7pm

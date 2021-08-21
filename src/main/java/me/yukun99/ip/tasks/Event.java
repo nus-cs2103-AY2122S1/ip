@@ -14,7 +14,7 @@ public class Event extends Task {
 		this.date = date;
 	}
 
-	protected void updateDate(String date) {
+	public void updateDate(String date) {
 		this.date = date;
 	}
 
