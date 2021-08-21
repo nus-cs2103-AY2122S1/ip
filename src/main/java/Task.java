@@ -52,7 +52,6 @@ public class Task {
         this.description = description;
     }
 
-
     /**
      * Marks task as done.
      *
