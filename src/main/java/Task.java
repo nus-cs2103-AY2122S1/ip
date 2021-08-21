@@ -25,6 +25,11 @@ abstract public class Task {
         return this.descriptions;
     }
 
+    public String toDatabaseString() {
+        return String.format("%s|%d|%s",
+                this.getTaskType(), this.isDone() ? 1 : 0, this.getDescriptions());
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.descriptions);
