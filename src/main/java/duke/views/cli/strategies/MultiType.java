@@ -3,6 +3,7 @@ package duke.views.cli.strategies;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.constants.Constants;
 import duke.domain.Deadline;
@@ -24,6 +25,7 @@ public class MultiType extends RespondWith {
     private final String event = "event";
     private final String delete = "delete";
     private final String on = "on";
+    private final String find = "find";
 
     private final List<Task> userTasks;
 
@@ -36,6 +38,7 @@ public class MultiType extends RespondWith {
         commands.put(event, this::addEvent);
         commands.put(delete, this::deleteTask);
         commands.put(on, this::occurringOn);
+        commands.put(find, this::findTask);
     }
 
     @Override
@@ -87,16 +90,32 @@ public class MultiType extends RespondWith {
         }
     }
 
-    private String listString(String _query) {
-        if (userTasks.size() == 0) {
-            return "You're clear (for now)" + System.lineSeparator();
-        }
-        String result = "Here are the tasks in your list:" + System.lineSeparator();
-
-        for (int i = 0; i < userTasks.size(); i++) {
-            result += String.format("%d. %s%s", (i + 1), userTasks.get(i), System.lineSeparator());
+    private String stringifyTasks(List<Task> tasks) {
+        String result = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            result += String.format("%d. %s%s", (i + 1), tasks.get(i), System.lineSeparator());
         }
         return result;
+    }
+
+    private String listTasksWithMessage(String message, List<Task> tasks) {
+        return listTasksWithMessage(message, tasks, "Nothing found");
+    }
+
+    private String listTasksWithMessage(String message, List<Task> tasks, String emptyMessage) {
+        if (tasks.size() == 0) {
+            return emptyMessage + System.lineSeparator();
+        }
+        String result = message + System.lineSeparator();
+
+        result += stringifyTasks(tasks);
+        return result;
+    }
+
+    private String listString(String _query) {
+        return listTasksWithMessage("Here are the tasks in your list:",
+                userTasks, "You're clear (for now)");
+
     }
 
     private String markDone(String query) throws DukeException {
@@ -188,11 +207,17 @@ public class MultiType extends RespondWith {
             }
         }
 
-        String result = "";
-        for (int i = 0; i < relevantTasks.size(); i++) {
-            result += String.format("%d. %s%s", (i + 1), relevantTasks.get(i), System.lineSeparator());
-        }
-        return result;
+        return listTasksWithMessage("Tasks occurring on that day:",
+                relevantTasks, "No tasks on that day");
+    }
+
+    private String findTask(String query) {
+        String keyword = query.substring(find.length()).strip();
+        List<Task> filteredTasks = userTasks.stream()
+                .filter(task -> task.match(keyword))
+                .collect(Collectors.toList());
+        return listTasksWithMessage("Here are the matching tasks in your list:",
+                filteredTasks, "No matches found");
     }
 
     @Override

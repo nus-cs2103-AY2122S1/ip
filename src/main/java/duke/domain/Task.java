@@ -68,6 +68,11 @@ public class Task {
         return new ArrayList<>(Arrays.asList(this.typeString, this.state.getStoredRepresentation(), name));
     }
 
+
+    public boolean match(String keyword) {
+        return this.name.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return String.format("%s %s %s", typeString == null ? "" : StringHelpers.bracketWrap(typeString), state, name);
