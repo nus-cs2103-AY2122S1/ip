@@ -1,3 +1,7 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -9,6 +13,40 @@ import java.util.ArrayList;
 
 public class Response {
     private ArrayList<Task> lstOfTasks = new ArrayList<Task>();
+    private FileWriter file;
+
+    Response() {
+        try {
+            file = new FileWriter(Duke.pathAddress, true);
+        } catch (IOException e) {
+            System.out.println("error occurred");
+            e.getStackTrace();
+        }
+    }
+
+    void writeToFile(String text) {
+        try {
+            file.write(text + System.lineSeparator());
+            file.close();
+        } catch (IOException e) {
+            System.out.println("error writing to file");
+            e.getStackTrace();
+        }
+    }
+
+    void modifyTaskInFile(ArrayList<Task> task) {
+        try {
+            Files.deleteIfExists(Paths.get(Duke.pathAddress));
+            FileWriter fileWriter = new FileWriter(Duke.pathAddress);
+            for (Task t : task) {
+                fileWriter.append(t.toString() + System.lineSeparator());
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("error modifying file");
+            e.getStackTrace();
+        }
+    }
 
     /**
      * Returns a farewell statement to the user.
@@ -41,6 +79,7 @@ public class Response {
         Task currTask = lstOfTasks.get(taskNumber);
         currTask.markAsDone();
         res += " [" + currTask.getStatusIcon() + "] " + currTask.description;
+        modifyTaskInFile(lstOfTasks);
         return res;
     }
 
@@ -55,6 +94,7 @@ public class Response {
             return "OOPS!!! The description of a todo cannot be empty.\n";
         }
         Todo taskToDo = new Todo(task);
+        writeToFile(taskToDo.toString());
         lstOfTasks.add(taskToDo);
         return "Got it. I've added this task:\n" + taskToDo.toString() + "\n"
             + "Now you have " + lstOfTasks.size() + " tasks in the list\n";
@@ -89,6 +129,7 @@ public class Response {
             index++;
         }
         DeadLine deadLine = new DeadLine(taskWithDeadLine, by);
+        writeToFile(deadLine.toString());
         lstOfTasks.add(deadLine);
         return "Got it. I've added this task:\n" + deadLine.toString() + "\n"
             + "Now you have " + lstOfTasks.size() + " tasks in the list\n";
@@ -123,6 +164,7 @@ public class Response {
             index++;
         }
         Event event = new Event(eventTask, by);
+        writeToFile(event.toString());
         lstOfTasks.add(event);
         return "Got it. I've added this task:\n" + event.toString() + "\n"
             + "Now you have " + lstOfTasks.size() + " tasks in the list\n";
@@ -135,8 +177,10 @@ public class Response {
      */
 
     String delete(int taskNum) {
-        return "Noted. I've removed this task:\n" + lstOfTasks.remove(taskNum).toString() + "\n"
-                + "Now you have " + lstOfTasks.size() + " in the list.";
+        Task removed = lstOfTasks.remove(taskNum);
+        modifyTaskInFile(lstOfTasks); 
+        return "Noted. I've removed this task:\n" + removed.toString() + "\n"
+            + "Now you have " + lstOfTasks.size() + " in the list.";
     }
 
     /**
@@ -172,13 +216,14 @@ public class Response {
 
         } else if (string.contains("done")) {
             int i = Integer.parseInt(
-                        String.valueOf(
-                                string.toCharArray()[string.length() - 1])) - 1;
+                    String.valueOf(
+                        string.toCharArray()[string.length() - 1])) - 1;
             return done(i);
+
         } else if (string.contains("delete")) {
             int i = Integer.parseInt(
-                        String.valueOf(
-                                string.toCharArray()[string.length() - 1])) - 1;
+                    String.valueOf(
+                        string.toCharArray()[string.length() - 1])) - 1;
             return delete(i);
         }
         return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
