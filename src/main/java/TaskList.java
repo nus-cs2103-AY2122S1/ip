@@ -27,6 +27,14 @@ public class TaskList {
         return ans.toString();
     }
 
+    /**
+     * Initialise event subclass by type.
+     * @param task Task string.
+     * @param type Type enum.
+     * @param done Whether task is done or not Bool.
+     * @param localDateTime Datetime object.
+     * @return Task of requisite type.
+     */
     public static Task initialiseByType(String task, Type type, Boolean done, LocalDateTime localDateTime) {
         if(type == Type.TODO) {
             return new Todo(task, type, done);

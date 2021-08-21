@@ -7,6 +7,11 @@ import java.util.Scanner;
 
 public class Storage {
 
+    /**
+     * Write to file with processed data.
+     * @param tasks Tasks to write to file.
+     * @throws IOException
+     */
     public static void writeToFile(List<Task> tasks) throws IOException {
         int i = 1;
         String lines = "";
@@ -22,6 +27,10 @@ public class Storage {
         fileWriter.close();
     }
 
+    /**
+     * Read file content raw.
+     * @return List of strings.
+     */
     public static List<String> readFile() {
         File file = new File("data/duke.txt");
         List<String> tasks = new ArrayList();

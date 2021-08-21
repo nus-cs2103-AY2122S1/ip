@@ -9,6 +9,12 @@ import java.util.Scanner;
 
 public class Parser {
 
+    /**
+     * Loads task once files contents are read raw.
+     * @param tasks File contents raw.
+     * @return Processed file contents.
+     * @throws FileParseErrorException
+     */
     public static ArrayList<Task> loadTasks(List<String> tasks) throws FileParseErrorException {
         ArrayList<Task> finalTasks = new ArrayList<>();
         for(int i = 0; i<tasks.size();i++) {
@@ -53,6 +59,11 @@ public class Parser {
         return finalTasks;
     }
 
+    /**
+     * Parses date and returns datetime object.
+     * @param datetime Datetime string to parse.
+     * @return Datetime object.
+     */
     public static LocalDateTime parseDate (String datetime) {
         if(datetime.length() == 10) {
             datetime += " 00:00";

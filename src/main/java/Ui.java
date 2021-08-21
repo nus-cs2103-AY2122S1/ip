@@ -41,6 +41,12 @@ public class Ui {
         System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
     }
 
+    /**
+     * Filter tasks out based on regex string.
+     * @param regex String based on which to filter.
+     * @param tasks Task list.
+     * @return Filtered tasks.
+     */
     public static List<Task> findTasks(String regex, List<Task> tasks) {
         List<Task> filteredTasks = new ArrayList<>();
         for(Task task: tasks) {
