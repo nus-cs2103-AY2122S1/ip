@@ -27,29 +27,29 @@ public class Duke {
                 String input = sc.nextLine().trim();
                 // Convert string command to enum value
                 Command command = Command.valueOf(input.split(" ")[0].toUpperCase());
-                switch(command) {
-                    case BYE:
-                        // Exit chat bot
-                        System.out.printf(FORMAT, LINE);
-                        System.out.printf(FORMAT, "Goodbye. Have a nice day!");
-                        System.out.printf(FORMAT, LINE);
-                        return; // To terminate function
-                    case LIST:
-                        runListCommand(tasks);
-                        break;
-                    case DONE:
-                        runDoneCommand(input, tasks);
-                        break;
-                    case TODO:
-                    case DEADLINE:
-                    case EVENT:
-                        runAddTaskCommand(input, command, tasks);
-                        break;
-                    case DELETE:
-                        runDeleteCommand(input, tasks);
-                        break;
-                    default:
-                        throw new DukeException("You have entered an invalid command.");
+                switch (command) {
+                case BYE:
+                    // Exit chat bot
+                    System.out.printf(FORMAT, LINE);
+                    System.out.printf(FORMAT, "Goodbye. Have a nice day!");
+                    System.out.printf(FORMAT, LINE);
+                    return; // To terminate function
+                case LIST:
+                    runListCommand(tasks);
+                    break;
+                case DONE:
+                    runDoneCommand(input, tasks);
+                    break;
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    runAddTaskCommand(input, command, tasks);
+                    break;
+                case DELETE:
+                    runDeleteCommand(input, tasks);
+                    break;
+                default:
+                    throw new DukeException("You have entered an invalid command.");
                 }
             } catch (IllegalArgumentException e) {
                 // When invalid command is given, it is unable to be parsed into the enum
@@ -110,27 +110,27 @@ public class Duke {
     // Abstraction to make main function neater
     private static void runAddTaskCommand(String input, Command command, List<Task> tasks) throws DukeException {
         Task task;
-        switch(command) {
-            case TODO:
-                // Add Todo task
-                if (input.length() <= 5) {
-                    throw new DukeException("The description of a todo cannot be empty.");
-                }
-                task = new Todo(input.substring(5));
-                break;
-            case DEADLINE:
-                String[] splitInput = splitWith(input, 9, " /by ");
-                String taskName = splitInput[0];
-                String date = splitInput[1];
-                task = new Deadline(taskName, date);
-                break;
-            default: // default is guaranteed to be event task due to use of enum + outer control flow
-                // Add Event task
-                splitInput = splitWith(input, 6, " /at ");
-                taskName = splitInput[0];
-                date = splitInput[1];
-                task = new Event(taskName, date);
-                break;
+        switch (command) {
+        case TODO:
+            // Add Todo task
+            if (input.length() <= 5) {
+                throw new DukeException("The description of a todo cannot be empty.");
+            }
+            task = new Todo(input.substring(5));
+            break;
+        case DEADLINE:
+            String[] splitInput = splitWith(input, 9, " /by ");
+            String taskName = splitInput[0];
+            String date = splitInput[1];
+            task = new Deadline(taskName, date);
+            break;
+        default: // default is guaranteed to be event task due to use of enum + outer control flow
+            // Add Event task
+            splitInput = splitWith(input, 6, " /at ");
+            taskName = splitInput[0];
+            date = splitInput[1];
+            task = new Event(taskName, date);
+            break;
         }
 
         // Common functionality: add task to list, print task and list size
