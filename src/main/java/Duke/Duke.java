@@ -14,37 +14,63 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static final ArrayList<Task> taskList = new ArrayList<>();
 
-//    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-//        System.out.println("write file");
-//        try {
-//            FileWriter fw = new FileWriter(filePath);
-//            fw.write(textToAdd);
-//            fw.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("no file");
-//        }
-//    }
-//    private static void printFileContents(String filePath) throws FileNotFoundException {
-//        System.out.println("print file");
-//        File f = new File(filePath); // create a File for the given file path
-//        System.out.println("1");
-//        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-//        System.out.println("2");
-//        while (s.hasNext()) {
-//            System.out.println("loop");
-//            System.out.println(s.nextLine());
-//        }
-//    }
-    private static String createTask(String task, String description) throws InvalidInputException {
-        if (description.length() == 0) {
-            throw new InvalidInputException(task + " needs a description.");
+    private static final String filePath = "taskList.txt";
+
+    private static void saveTasks() throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (int i = 0; i < taskList.size(); i++) {
+            fw.write(taskList.get(i).toString() + System.lineSeparator());
         }
+        fw.close();
+    }
+
+    private static void getFileContents() throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String task = s.next();
+            char type = task.charAt(1);
+            boolean status = task.length() != 4;
+            if (task.length() == 4) {
+                s.next();
+            }
+            String first = s.next();
+            String second = null;
+            switch (type) {
+            case 'T':
+                taskList.add(new ToDo(first));
+                break;
+            case 'D':
+                s.next();
+                second = s.next();
+                taskList.add(new Deadline(first, second.substring(0, second.length() - 1)));
+                break;
+            case 'E':
+                s.next();
+                second = s.next();
+                taskList.add(new Event(first, second.substring(0, second.length() - 1)));
+                break;
+            }
+            if (status) {
+                taskList.get(taskList.size() - 1).complete();
+            }
+            s.nextLine();
+        }
+    }
+
+    private static String createTask(String task, String description) throws InvalidInputException, IOException {
+
+        if (description.length() == 0) {
+            throw new InvalidInputException(task + " task needs a description.");
+        }
+
         String center = null;
         switch (task) {
         case "todo":
@@ -57,6 +83,7 @@ public class Duke {
             center = "/at";
             break;
         }
+
         assert center != null;
         int centerIndex = description.indexOf(center);
         if (centerIndex == -1) {
@@ -65,14 +92,15 @@ public class Duke {
         }
         String first = null;
         String second = null;
-        System.out.println(task.length());
         if (!task.equals("todo")) {
             first = description.substring(0, centerIndex).trim();
             second = description.substring(centerIndex).trim();
             if (first.length() == 0 || second.length() <= center.length()) {
                 throw new InvalidInputException(task + " task must have details before and after " + center + ".");
             }
+            second = second.substring(center.length()).trim();
         }
+
         switch (task) {
         case "todo":
             taskList.add(new ToDo(description));
@@ -84,25 +112,44 @@ public class Duke {
             taskList.add(new Event(first, second));
             break;
         }
+
+        String taskDetails = taskList.get(taskList.size() - 1).toString();
         return "Got it. I've added this task:\n" +
-                "\t\t" + taskList.get(taskList.size() - 1).toString() + "\n" +
+                "\t\t" + taskDetails + "\n" +
                 "\t" + "Now you have " + taskList.size() + " tasks in the list.";
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        try {
+            getFileContents();
+        } catch(FileNotFoundException e) {
+            new File(filePath);
+        }
 
         String line = "------------------------------------------------------------------------------" +
                         "-------------------------------\n\n";
+        String savedTasks = "";
+        if (!taskList.isEmpty()) {
+            savedTasks += "\tSaved tasks:\n";
+            for (int i = 0; i < taskList.size(); i++) {
+                savedTasks += "\t\t" + (i + 1) + ". " + taskList.get(i).toString();
+                if (i != taskList.size() - 1) savedTasks += '\n';
+            }
+            savedTasks += "\n\n";
+        }
         // greeting
         System.out.print(
-                line +
-                "\tHello! I'm Duke\n\n" +
-                "\tWhat can I do for you?\n\n" +
                 line
+                + "\tHello! I'm Duke\n\n"
+                + savedTasks
+                + "\tWhat can I do for you?\n\n"
+                + line
         );
 
         Scanner scanner = new Scanner(System.in);
         try {
+
             String task;
             String text;
             boolean leave = false;
@@ -117,6 +164,7 @@ public class Duke {
                         case "bye":
                             text = "Bye. Hope to see you again soon!";
                             leave = true;
+                            saveTasks();
                             break;
                         case "list":
                             if (taskList.isEmpty()) text = "There are no items in the list.";
@@ -124,7 +172,7 @@ public class Duke {
                                 text = "";
                                 for (int i = 0; i < taskList.size(); i++) {
                                     if (i != 0) text += "\t";
-                                    text += (i + 1) + "." + taskList.get(i).toString();
+                                    text += (i + 1) + ". " + taskList.get(i).toString();
                                     if (i != taskList.size() - 1) text += "\n";
                                 }
                             }
@@ -156,6 +204,7 @@ public class Duke {
                             break;
                         case "todo": case "deadline": case "event":
                             text = createTask(task, text);
+                            break;
                         default:
                             throw new InvalidInstructionException(task);
                     }
@@ -163,6 +212,8 @@ public class Duke {
                     text = e.toString();
                 } catch (InvalidInstructionException e) {
                     text = e.toString();
+                } catch (IOException e) {
+                    text = "" + e;
                 }
 
                 // print text
@@ -174,6 +225,11 @@ public class Duke {
             }
         } catch(IllegalStateException | NoSuchElementException e) {
             // System.in has been closed
+            try {
+                saveTasks();
+            } catch (IOException ie) {
+                System.out.println(ie);
+            }
             System.out.println(e);
         }
     }
