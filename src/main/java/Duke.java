@@ -79,7 +79,7 @@ public class Duke {
         }
     }
 
-    private static int getId(String input, String prefix) throws DukeException {
+    private static int getIdFromString(String input, String prefix) throws DukeException {
         String idString = "";
         try {
             if (!input.startsWith(prefix) || input.length() <= prefix.length())
@@ -97,7 +97,7 @@ public class Duke {
     private static void MarkTask(String input) {
         int taskId = -1;
         try {
-            taskId = getId(input, "done ");
+            taskId = getIdFromString(input, "done ");
             Task t = taskList.get(taskId - 1);
             t.markAsDone();
             System.out.println("Cool, I've marked this task as done\n" + t);
@@ -110,9 +110,9 @@ public class Duke {
     private static void DeleteTask(String input) {
         int taskId = -1;
         try {
-            taskId = getId(input, "delete ");
+            taskId = getIdFromString(input, "delete ");
             Task t = taskList.get(taskId - 1);
-            taskList.remove(taskId);
+            taskList.remove(taskId - 1);
             System.out.println("Okay, I've removed this task\n" + t);
         } catch (IndexOutOfBoundsException e) {
             System.out.printf("Oops, Task #%d doesn't exist\n", taskId);
