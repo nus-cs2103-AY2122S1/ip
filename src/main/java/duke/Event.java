@@ -14,6 +14,6 @@ class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E][%c] %s (at: %s)", isDone ? 'X' : ' ', description, time.format(formatter));
+        return String.format("[E][%c] %s (at: %s)", isDone ? 'X' : ' ', getDescription(), time.format(formatter));
     }
 }
