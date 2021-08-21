@@ -13,9 +13,24 @@ public class DeadlineTask extends Task {
         this.name = arr[0];
     }
 
+    public DeadlineTask(String name, boolean completed) {
+        super(name, completed);
+        this.deadline = "";
+    }
+
+    public DeadlineTask(String name, boolean completed, String date) {
+        super(name, completed);
+        this.deadline = date;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.deadline + ")";
+    }
+
+    @Override
+    public String getDate() {
+        return this.deadline;
     }
 
 }

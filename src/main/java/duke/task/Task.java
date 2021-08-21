@@ -8,7 +8,11 @@ public abstract class Task {
     protected String name;
 
     public Task(String name) {
-        this.completed = false;
+        this(name, false);
+    }
+
+    public Task(String name, boolean completed) {
+        this.completed = completed;
         this.name = name;
     }
 
@@ -26,6 +30,24 @@ public abstract class Task {
         return this.completed;
     }
 
+    /**
+     * Returns the name of the task.
+     * 
+     * @return name of the task
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Return date of the task. It could a deadline/date for the event.
+     * 
+     * @return date of task
+     */
+    public String getDate() {
+        return null;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Task)
@@ -36,6 +58,10 @@ public abstract class Task {
     @Override
     public String toString() {
         return "[" + (this.completed ? "X" : " ") + "] " + this.name;
+    }
+
+    public TaskType getType() {
+        return TaskType.byTask(this.getClass());
     }
 
 }
