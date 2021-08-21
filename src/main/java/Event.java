@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  *  This class represents an Event.
  *  An event: tasks that start at a specific time and ends at a specific time.
@@ -6,25 +10,22 @@
  */
 public class Event extends Task {
 
-    private String at;
+    private String by;
+    private LocalDate date;
 
-    public Event(String description, Task.TYPE type, String at) {
+    public Event(String description, Task.TYPE type, String by) {
         super(description, type);
-        this.at = at;
-    }
-
-    public Event(TYPE type, boolean isDone, String description, String at) {
-        super(type, isDone, description);
-        this.at = at;
-    }
-
-    @Override
-    public String getTime() {
-        return at;
+        try {
+            LocalDate d1 = LocalDate.parse(by);
+            this.date = d1;
+            this.by = d1.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        } catch (DateTimeParseException dateTimeParseException) {
+            this.by = by;
+        }
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + by + ")";
     }
 }
