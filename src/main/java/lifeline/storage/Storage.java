@@ -22,18 +22,37 @@ import lifeline.task.Task;
 import lifeline.task.TaskList;
 import lifeline.task.ToDo;
 
-
+/**
+ * The class Storage handles the saving of tasks to a JSON file and loading saved tasks from a JSON file
+ */
 public class Storage {
 
+    /**
+     * File path to save the tasks
+     */
     private String filepath;
+
+    /**
+     * Used to convert Java Objects into their JSON representation
+     */
     private Gson gson;
 
+    /**
+     * Default constructor for a Storage
+     *
+     * @param filepath Path to save and load tasks from
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
         this.gson = new GsonBuilder().setPrettyPrinting().create();
     }
 
-
+    /**
+     * Saves tasks to JSON
+     *
+     * @param tasks tasks to be saved as JSON
+     * @throws LifelineException if unable to save to file
+     */
     public void save(TaskList tasks) throws LifelineException {
         try {
             createDirectoryIfMissing();
@@ -45,6 +64,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads saved tasks from a JSON file
+     *
+     * @return Saved tasks as TaskList
+     * @throws LifelineException if unable to load file
+     */
     public TaskList load() throws LifelineException {
         try {
             FileReader fileReader = new FileReader(filepath);
