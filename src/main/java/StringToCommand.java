@@ -3,13 +3,14 @@ package main.java;
 /**
  * StringToCommand converts a string to its respective command.
  *
- * @author Zhen Xuan (Tutorial Group 04)
+ * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
 public class StringToCommand {
 
     /**
      * This method converts a string to its respective command.
+     *
      * @param str the string to be converted
      * @return the command
      */

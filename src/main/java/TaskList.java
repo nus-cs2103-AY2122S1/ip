@@ -1,10 +1,11 @@
 package main.java;
+
 import java.util.ArrayList;
 
 /**
  * TaskList stores the list of tasks.
  *
- * @author Zhen Xuan (Tutorial Group 04)
+ * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
 public class TaskList {
@@ -12,7 +13,14 @@ public class TaskList {
     private static final String LIST_INTRO = "\t Here are the tasks in your list:";
     private static final String DONE = "Nice! I've marked this task as done:\n\t   ";
     private static final String DELETE = "Noted. I've removed this task:\n\t   ";
-    private final ArrayList<Task> LIST = new ArrayList<>();
+    private final ArrayList<Task> LIST;
+
+    /**
+     * Constructor for TaskList.
+     */
+    TaskList(ArrayList<Task> list) {
+        this.LIST = list;
+    }
 
     /**
      * Adds the task into the list.

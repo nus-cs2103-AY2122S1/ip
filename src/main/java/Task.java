@@ -3,7 +3,7 @@ package main.java;
 /**
  * A task contains its description and information of whether it is done or not.
  *
- * @author Zhen Xuan (Tutorial Group 04)
+ * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
 public abstract class Task {
@@ -15,8 +15,9 @@ public abstract class Task {
      *
      * @param description the description
      */
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.DESCRIPTION = description;
+        this.isDone = isDone;
     }
 
     /**

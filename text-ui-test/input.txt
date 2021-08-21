@@ -1,26 +1,8 @@
-blah
 done 1
-done
-todo
-deadline
-event
-list 1
-bye 1
-deadline no date
-event no date
-done -1
-done 1.1
-list
-todo read textbook
-list
-deadline ip /by Aug 19th
-done 1
-list
-event lecture /at Aug 17th 12-2pm
+todo cry
+deadline die /by tdy
+event live /at tmr
 done 2
 list
-delete 2
-list
 delete 1
-list
 bye

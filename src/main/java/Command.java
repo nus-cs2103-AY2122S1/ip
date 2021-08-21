@@ -5,7 +5,7 @@ import java.util.Locale;
 /**
  * This is the list of commands that Duke can perform.
  *
- * @author Zhen Xuan (Tutorial Group 04)
+ * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
 public enum Command {

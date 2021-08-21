@@ -3,7 +3,7 @@ package main.java;
 /**
  * ToDo is a task that doesnt have any dates tied to it.
  *
- * @author Zhen Xuan (Tutorial Group 04)
+ * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
 public class ToDo extends Task {
@@ -12,8 +12,8 @@ public class ToDo extends Task {
      *
      * @param description the description
      */
-    public ToDo(String description) {
-        super(description);
+    public ToDo(boolean isDone, String description) {
+        super(description, isDone);
     }
 
     /**

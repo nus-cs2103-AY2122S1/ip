@@ -3,7 +3,7 @@ package main.java;
 /**
  * Deadline is a task that has a date to be done by.
  *
- * @author Zhen Xuan (Tutorial Group 04)
+ * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S2
  */
 public class Deadline extends Task {
@@ -15,8 +15,8 @@ public class Deadline extends Task {
      *
      * @param description the description
      */
-    public Deadline(String description, String date) {
-        super(description);
+    public Deadline(boolean isDone, String description, String date) {
+        super(description, isDone);
         this.date = date;
     }
 
