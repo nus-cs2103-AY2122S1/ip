@@ -2,7 +2,6 @@ package duke.util;
 
 import duke.exception.FileNotFoundException;
 import duke.exception.InvalidDateException;
-import duke.exception.NoSuchTaskException;
 import duke.exception.UnknownTaskTypeException;
 import duke.task.Task;
 import org.json.simple.JSONArray;
@@ -16,19 +15,38 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/** Utility class that handles reading and writing from device storage. */
 public class Storage {
+    /** The FileWriter object. */
     private static FileWriter fileWriter;
+
+    /** The JSONParser object. */
     private static JSONParser jsonParser;
+
+    /** The file path to read and write from. */
     private String filePath;
 
+    /** Default Storage constructor. Use for JUnit tests ONLY.*/
     protected Storage() {
         filePath = null;
     }
 
+    /**
+     * Storage constructor.
+     *
+     * @param filePath The file path to read and write from.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the program file from the file path if the file exists, else creates the file and its associated
+     * directories. Returns an ArrayList of Tasks constructed from data in the program file.
+     *
+     * @return An ArrayList of Tasks.
+     * @throws FileNotFoundException If the file in specified in the filepath does not exist.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         try {
             File file = new File(filePath);
@@ -43,6 +61,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the tasks to a JSON file in the specified file path.
+     *
+     * @param tasks The TaskList created from the instance of the Duke program.
+     */
     @SuppressWarnings("unchecked")
     public void write(TaskList tasks) {
         JSONArray arr = new JSONArray();
@@ -62,6 +85,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses the JSON file from the specified path and returns an ArrayList of Tasks constructed from data in the
+     * specified file.
+     *
+     * @param filePath The file path to read and write from.
+     * @return An ArrayList of Tasks.
+     */
     @SuppressWarnings("unchecked")
     public ArrayList<Task> parseFromJSON(String filePath) {
         ArrayList<Task> tasks = new ArrayList<>();
