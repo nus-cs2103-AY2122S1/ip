@@ -11,6 +11,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    @Override
+    public String getSymbol() {
+        return "D";
+    }
+
     public String getBy() {
         return this.by;
     }

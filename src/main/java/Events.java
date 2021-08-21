@@ -16,6 +16,11 @@ public class Events extends Task {
     }
 
     @Override
+    public String getSymbol() {
+        return "E";
+    }
+
+    @Override
     public Events markAsDone() {
         return new Events(this.getDescription(), this.getDayTime(), true);
     }

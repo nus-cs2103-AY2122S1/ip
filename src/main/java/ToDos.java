@@ -8,6 +8,11 @@ public class ToDos extends Task {
     }
 
     @Override
+    public String getSymbol() {
+        return "T";
+    }
+
+    @Override
     public ToDos markAsDone() {
         return new ToDos(this.getDescription(), true);
     }

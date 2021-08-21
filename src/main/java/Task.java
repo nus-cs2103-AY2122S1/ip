@@ -12,6 +12,14 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public String getSymbol() {
+        return "parent-task";
+    }
+
     public String getDescription() {
         return this.description;
     }
