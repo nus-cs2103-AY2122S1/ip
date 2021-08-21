@@ -7,17 +7,35 @@ import me.yukun99.ip.tasks.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to handle list of all tasks currently in the todo list.
+ */
 public class TaskList {
+	// List of all tasks currently in the todo list.
 	private final List<Task> taskList;
 
+	/**
+	 * Constructor for a TaskList instance.
+	 */
 	public TaskList() {
 		this.taskList = new ArrayList<>();
 	}
 
+	/**
+	 * Adds a task to the TaskList.
+	 *
+	 * @param task Task to be added to the TaskList.
+	 */
 	public void addTask(Task task) {
 		this.taskList.add(task);
 	}
 
+	/**
+	 * Marks task at specified index as done.
+	 *
+	 * @param strIndex String representing the index of the task in the TaskList.
+	 * @throws HelpBotInvalidTaskException If strIndex is not an Integer.
+	 */
 	public void doneTask(String strIndex) throws HelpBotInvalidTaskException {
 		try {
 			int index = Integer.parseInt(strIndex);
@@ -28,6 +46,15 @@ public class TaskList {
 		}
 	}
 
+	/**
+	 * Updates the date of the task at specified index.
+	 *
+	 * @param strIndex String representing the index of the task in the TaskList.
+	 * @param date New date to be updated for the task.
+	 * @return Updated task.
+	 * @throws HelpBotInvalidTaskException If specified Task index does not exist.
+	 * @throws HelpBotInvalidTaskTypeException If specified Task is an instance of ToDo.
+	 */
 	public Task updateTask(String strIndex, String date)
 			throws HelpBotInvalidTaskException, HelpBotInvalidTaskTypeException {
 		try {
@@ -40,6 +67,13 @@ public class TaskList {
 		}
 	}
 
+	/**
+	 * Deletes a task from the TaskList.
+	 *
+	 * @param strIndex String representing the index of the task to be deleted.
+	 * @return Deleted task.
+	 * @throws HelpBotInvalidTaskException If specified Task index does not exist.
+	 */
 	public Task deleteTask(String strIndex) throws HelpBotInvalidTaskException {
 		try {
 			int index = Integer.parseInt(strIndex);
@@ -51,10 +85,20 @@ public class TaskList {
 		}
 	}
 
+	/**
+	 * Gets the number of tasks in the TaskList.
+	 *
+	 * @return Number of tasks in the TaskList.
+	 */
 	public int getRemaining() {
 		return this.taskList.size();
 	}
 
+	/**
+	 * Gets the string representation of the TaskList.
+	 *
+	 * @return String representation of the TaskList.
+	 */
 	@Override
 	public String toString() {
 		StringBuilder message = new StringBuilder("Oh. My. God. Fine. Here are your tasks:");

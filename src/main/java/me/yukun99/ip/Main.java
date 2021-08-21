@@ -1,5 +1,8 @@
 package me.yukun99.ip;
 
+/**
+ * Main class for our chat bot.
+ */
 public class Main {
 	// Fancy name for my instance of help bot
 	private static final String LOGO = " ____        _     \n"
@@ -8,6 +11,7 @@ public class Main {
 			+ "|  _ < / _ \\| '_ \\ \n"
 			+ "| |_) | (_) | |_) |\n"
 			+ "|____/ \\___/|_.__/ \n";
+
 
 	/**
 	 * Entry point for my help bot.

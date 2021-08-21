@@ -1,5 +1,6 @@
 ===================To Your Royal Highness===================
-Oh great, you again... Name's
+Beep... You've reached the voicemail of HelpBot inc.Please speak after the dial tone.
+Still here? Sigh... thought that would work. My name is
  ____        _     
 |  _ \      | |    
 | |_) | ___ | |__  
@@ -126,5 +127,5 @@ Oh. My. God. Fine. Here are your tasks:
  1. [E][X] eat lunch (at: 1pm)
 ============================================================
 ===================To Your Royal Highness===================
-Good riddance...
+Good riddance.
 ============================================================

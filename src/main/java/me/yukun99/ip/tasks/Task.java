@@ -3,6 +3,9 @@ package me.yukun99.ip.tasks;
 import me.yukun99.ip.core.Ui;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
 
+/**
+ * Tasks stored in our task list.
+ */
 public abstract class Task {
 	// Task type list
 	public enum Type {
@@ -69,6 +72,11 @@ public abstract class Task {
 		return this.name.equals(task.name);
 	}
 
+	/**
+	 * Sends the task deletion message via the Ui class.
+	 *
+	 * @param ui Ui instance to send the deletion message from.
+	 */
 	public void deleteMessage(Ui ui) {
 		ui.delete(this, done);
 	}

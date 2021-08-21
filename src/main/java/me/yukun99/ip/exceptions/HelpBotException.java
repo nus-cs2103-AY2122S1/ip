@@ -1,5 +1,8 @@
 package me.yukun99.ip.exceptions;
 
+/**
+ * Exceptions resulting from user input errors when using our chat bot.
+ */
 public class HelpBotException extends Exception {
 	/**
 	 * Constructor for a HelpBotException instance not caused by other errors.

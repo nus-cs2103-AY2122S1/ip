@@ -10,10 +10,15 @@ import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
 
 import java.util.Scanner;
 
+/**
+ * Simple task tracking chat bot.
+ */
 public class HelpBot {
-	// Constants/Variables related to the instance.
+	// Scanner to scan for text inputs.
 	private final Scanner scanner = new Scanner(System.in);
+	// Ui instance to handle text Ui.
 	private final Ui ui;
+	// Command parser to parse user commands.
 	private final Parser parser;
 
 	// Whether to exit bot.
@@ -49,6 +54,9 @@ public class HelpBot {
 		}
 	}
 
+	/**
+	 * Method to exit the bot.
+	 */
 	public void exit() {
 		this.exit = true;
 		this.scanner.close();

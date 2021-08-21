@@ -16,12 +16,27 @@ import java.util.Scanner;
 
 import static me.yukun99.ip.tasks.Task.Type;
 
+/**
+ * Parser for HelpBot commands.
+ */
 public class Parser {
-	private final Scanner scanner;
-	private final TaskList taskList;
+	// Current instance of HelpBot.
 	private final HelpBot helpBot;
+	// Scanner used to scan for user inputs.
+	private final Scanner scanner;
+	// TaskList instance from the current instance of HelpBot.
+	private final TaskList taskList;
+	// Ui instance from the current instance of HelpBot.
 	private final Ui ui;
 
+	/**
+	 * Constructor for a Parser instance.
+	 *
+	 * @param helpBot HelpBot instance that this instance of Parser belongs to.
+	 * @param scanner Scanner used for user input scanning.
+	 * @param taskList TaskList instance from the current instance of HelpBot.
+	 * @param ui Ui instance from the current instance of HelpBot.
+	 */
 	public Parser(HelpBot helpBot, Scanner scanner, TaskList taskList, Ui ui) {
 		this.scanner = scanner;
 		this.taskList = taskList;
@@ -29,6 +44,13 @@ public class Parser {
 		this.ui = ui;
 	}
 
+	/**
+	 * Parses the next command sent by the user.
+	 *
+	 * @return Next command sent to the HelpBot.
+	 * @throws HelpBotIllegalArgumentException If arguments provided for the commands are missing or wrong.
+	 * @throws HelpBotInvalidCommandException If command sent by the user is invalid.
+	 */
 	public final Command parse() throws HelpBotIllegalArgumentException, HelpBotInvalidCommandException {
 		String message = this.scanner.nextLine();
 		Command command = null;
