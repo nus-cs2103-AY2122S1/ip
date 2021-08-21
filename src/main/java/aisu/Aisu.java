@@ -34,7 +34,7 @@ public class Aisu {
         ui.showWelcomeMessage();
 
         boolean isExit = false;
-        while (!isExit) { // maybe turn into a command class to check if isExit();
+        while (!isExit) {
             try {
                 Command command = Parser.parse(ui.getInput());
                 ui.showDivider();

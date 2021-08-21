@@ -34,11 +34,15 @@ public class Tasklist {
         return this.list.size();
     }
 
-    private Task getTaskAt(int n) throws AisuException {
+    private void checkError(int n) throws AisuException {
         if (n <= 0 || n > this.list.size()) {
             throw new AisuException("That is an invalid task number!");
         }
-        return this.list.get(n-1);
+    }
+
+    private Task getTaskAt(int n) throws AisuException {
+        checkError(n);
+        return this.list.get(n - 1);
     }
 
     public Task addTask(String line, TaskTypes type) throws AisuException { // adds new task to taskList
@@ -69,18 +73,14 @@ public class Tasklist {
     }
 
     public Task deleteTask(int n) throws AisuException {
-        if (n <= 0 || n > this.list.size()) {
-            throw new AisuException("That is an invalid task number!");
-        }
+        checkError(n);
         Task deletedTask = this.list.get(n - 1);
         this.list.remove(n - 1);
         return deletedTask;
     }
 
     public Task markDone(int n) throws AisuException {
-        if (n <= 0 || n > this.list.size()) {
-            throw new AisuException("That is an invalid task number!");
-        }
+        checkError(n);
         this.list.get(n - 1).markAsDone();
         return this.getTaskAt(n);
     }
