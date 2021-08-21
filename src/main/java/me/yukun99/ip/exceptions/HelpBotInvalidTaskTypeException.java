@@ -3,9 +3,9 @@ package me.yukun99.ip.exceptions;
 import me.yukun99.ip.tasks.Task;
 
 public class HelpBotInvalidTaskTypeException extends HelpBotException {
-	private final Task.TaskType type;
+	private final Task.Type type;
 
-	public HelpBotInvalidTaskTypeException(Task.TaskType type) {
+	public HelpBotInvalidTaskTypeException(Task.Type type) {
 		super();
 		this.type = type;
 	}
