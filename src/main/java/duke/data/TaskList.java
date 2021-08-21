@@ -34,7 +34,7 @@ public class TaskList {
      * @return the updated list of tasks
      */
     public ArrayList<Task> delete(int index) throws InvalidIndexException {
-        if (index >= this.count || index <= 0) throw new InvalidIndexException();
+        if (index >= this.count || index < 0) throw new InvalidIndexException();
         this.tasks.remove(index);
         this.count--;
         return this.tasks;
@@ -46,7 +46,7 @@ public class TaskList {
      * @return the task at the index
      */
     public Task get(int index) throws InvalidIndexException {
-        if (index >= this.count || index <= 0) throw new InvalidIndexException();
+        if (index >= this.count || index < 0) throw new InvalidIndexException();
         return this.tasks.get(index);
     }
 
@@ -70,7 +70,7 @@ public class TaskList {
      * @return the updated list of tasks
      */
     public ArrayList<Task> markDone(int index) throws InvalidIndexException {
-        if (index >= this.count || index <= 0) throw new InvalidIndexException();
+        if (index >= this.count || index < 0) throw new InvalidIndexException();
         this.tasks.get(index).setDone();
         return this.tasks;
     }
