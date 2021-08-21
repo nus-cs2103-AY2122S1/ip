@@ -6,6 +6,7 @@ package duke.exceptions;
 public class TaskNotFoundException extends DukeException {
 
     private final int index;
+
     public TaskNotFoundException(int index) {
         super("☹ OOPS!!! There is no such task!");
         this.index = index;

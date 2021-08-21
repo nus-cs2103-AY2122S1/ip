@@ -6,6 +6,7 @@ package duke.exceptions;
 public class TaskIsCompleteException extends DukeException {
 
     private final int index;
+
     public TaskIsCompleteException(int indexToMark) {
         super("");
         this.index = indexToMark;

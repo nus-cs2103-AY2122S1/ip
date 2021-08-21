@@ -6,6 +6,7 @@ package duke.exceptions;
 public class EmptyDescriptionException extends DukeException {
 
     private final String command;
+
     public EmptyDescriptionException(String command) {
         super("");
         this.command = command;

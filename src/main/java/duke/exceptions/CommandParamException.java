@@ -6,6 +6,7 @@ package duke.exceptions;
 public class CommandParamException extends DukeException {
 
     private final String command;
+
     public CommandParamException(String command) {
         super("");
         this.command = command;
