@@ -1,6 +1,10 @@
-import java.lang.reflect.Array;
+package duke;
+
+import duke.task.Task;
+import duke.util.DukeException;
+import duke.util.Utility;
+
 import java.util.ArrayList;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class TaskBank {
@@ -26,9 +30,9 @@ public class TaskBank {
             taskId = Utility.getIdFromString(input, "done ");
             Task t = this.taskList.get(taskId - 1);
             t.markAsDone();
-            UI.print("Cool, I've marked this task as done\n" + t);
+            UI.print("Cool, I've marked this duke.task as done\n" + t);
         } catch (IndexOutOfBoundsException e) {
-            UI.print(String.format("Oops, Task #%d doesn't exist\n", taskId));
+            UI.print(String.format("Oops, Task.Task #%d doesn't exist\n", taskId));
         }
         this.storage.writeToDisk(this.taskList);
     }
@@ -39,9 +43,9 @@ public class TaskBank {
             taskId = Utility.getIdFromString(input, "delete ");
             Task t = this.taskList.get(taskId - 1);
             this.taskList.remove(taskId - 1);
-            UI.print("Okay, I've removed this task\n" + t);
+            UI.print("Okay, I've removed this duke.task\n" + t);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(String.format("Oops, Task #%d doesn't exist\n", taskId));
+            throw new DukeException(String.format("Oops, Task.Task #%d doesn't exist\n", taskId));
         }
         this.storage.writeToDisk(this.taskList);
     }

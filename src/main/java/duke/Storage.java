@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,11 +42,11 @@ public class Storage {
 
             return (ArrayList<Task>) (i.readObject());
         } catch (FileNotFoundException e) {
-            System.out.println("WARNING: Task list's save file missing.\n" + e.getMessage());
+            System.out.println("WARNING: Task.Task list's save file missing.\n" + e.getMessage());
         } catch (IOException e) {
-            System.out.println("WARNING: Task List not properly retrieved.\n" + e.getMessage());
+            System.out.println("WARNING: Task.Task List not properly retrieved.\n" + e.getMessage());
         } catch (ClassNotFoundException e) {
-            System.out.println("WARNING: Missing Class ArrayList<Task>.\n" + e.getMessage());
+            System.out.println("WARNING: Missing Class ArrayList<Task.Task>.\n" + e.getMessage());
         }
 
         return new ArrayList<>();
@@ -56,9 +60,9 @@ public class Storage {
             o.writeObject(taskList);
             o.close();
         } catch (FileNotFoundException e) {
-            System.out.println("WARNING: Task list's save file missing.\n" + e.getMessage());
+            System.out.println("WARNING: Task.Task list's save file missing.\n" + e.getMessage());
         } catch (IOException e) {
-            System.out.println("WARNING: Task List not properly saved.\n" + e.getMessage());
+            System.out.println("WARNING: Task.Task List not properly saved.\n" + e.getMessage());
         }
     }
 

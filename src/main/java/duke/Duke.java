@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.util.DukeException;
+
 import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.function.Consumer;

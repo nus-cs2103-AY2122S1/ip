@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.util.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -30,7 +34,7 @@ public class Deadline extends Task {
             throw new DukeException("the [/by] time of deadline cannot be empty");
     }
 
-    //Format: "Deadline: [description] /by [on]
+    //Format: "duke.task.Deadline: [description] /by [on]
     public static Deadline create(String formattedString) throws DukeException {
         checkFormat(formattedString);
 
@@ -47,6 +51,6 @@ public class Deadline extends Task {
         char statusIcon = this.isDone ? 'X' : ' ';
         String timeString = DATE_MED_FORMATTER.format(this.by);
 
-        return String.format("[%c] Deadline: %s(by: %s)", statusIcon, this.description, timeString);
+        return String.format("[%c] duke.task.Deadline: %s(by: %s)", statusIcon, this.description, timeString);
     }
 }

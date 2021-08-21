@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.util.DukeException;
+
 public class ToDo extends Task {
 
     public ToDo(String description) {
@@ -21,6 +25,6 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         char statusIcon = this.isDone ? 'X' : ' ';
-        return String.format("[%c] ToDo: %s", statusIcon, this.description);
+        return String.format("[%c] Task.ToDo: %s", statusIcon, this.description);
     }
 }

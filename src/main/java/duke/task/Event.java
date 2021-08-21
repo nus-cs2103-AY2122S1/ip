@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.util.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -29,7 +33,7 @@ public class Event extends Task {
             throw new DukeException("the [/on] time of event cannot be empty");
     }
 
-    //Format: "Event: [description] /by [on]
+    //Format: "Task.Event: [description] /by [on]
     public static Event create(String formattedString) throws DukeException {
         checkFormat(formattedString);
 
@@ -46,6 +50,6 @@ public class Event extends Task {
         char statusIcon = this.isDone ? 'X' : ' ';
         String timeString = DATE_MED_FORMATTER.format(this.on);
 
-        return String.format("[%c] Event: %s(on: %s)", statusIcon, this.description, timeString);
+        return String.format("[%c] Task.Event: %s(on: %s)", statusIcon, this.description, timeString);
     }
 }
