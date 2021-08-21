@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    static List<Task> tasks = new ArrayList<>();
+    static TaskList tasks = new TaskList();
     static Storage storage;
 
     public static void main(String[] args) {
