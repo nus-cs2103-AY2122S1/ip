@@ -15,6 +15,10 @@ public class UI {
         System.out.println("What can I do for you?");
     }
 
+    public static void goodbyeMessage() {
+        System.out.println("Bye. Hope to see you soon!");
+    }
+
     public static void printDivider() {
         System.out.println(DIVIDER);
     }

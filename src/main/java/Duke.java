@@ -46,7 +46,7 @@ public class Duke {
             UI.printDivider();
         }
 
-        UI.print("Bye. Hope to see you soon!");
+        UI.goodbyeMessage();
         UI.printDivider();
     }
 }
