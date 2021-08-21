@@ -2,6 +2,7 @@ package entity.list;
 
 import exception.InvalidTaskTimeFormatException;
 import exception.InvalidTaskTypeException;
+import exception.InvalidDateTimeException;
 import type.DukeActionTypeEnum;
 
 /**
@@ -32,7 +33,7 @@ public class DukeTask {
      * @throws InvalidTaskTimeFormatException when a task does not have valid time inputs
      */
     public static DukeTask createTask(String description, DukeActionTypeEnum actionType)
-            throws InvalidTaskTypeException, InvalidTaskTimeFormatException {
+            throws InvalidTaskTypeException, InvalidTaskTimeFormatException, InvalidDateTimeException {
         // A valid task is either a to-do, deadline or event
 
         if (actionType.equals(DukeActionTypeEnum.TODO)) {
