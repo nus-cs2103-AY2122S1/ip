@@ -22,104 +22,81 @@ public class Duke {
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String TAB = " ".repeat(4);
 
+    // keywords should have length 1 or 2
+    private static String[] extractCommandsFromInput(String input, String[] keywords) {
+        if (keywords.length == 2) {
+            String[] commands = input.split(keywords[1], 2);
+            String taskDescription = commands[0].split(" ", 2)[1].trim();
+            String timeInfo = commands[1].trim();
+            return new String[] { taskDescription, timeInfo };
+        } else {
+            String taskDescription = input.split(keywords[0],2)[1].trim();
+            return new String[] { taskDescription };
+        }
+    }
+
     private static void parseInput(String input, List<Task> tasks) throws DukeException {
-        String[] commands = input.split("\\s+");
-        String keyWord = commands[0];
-        String taskDescription;
-        String extraDetails;
-        String message = "";
         Task newTask = null;
-        int index = commands.length;
-        switch(keyWord) {
-        case "list":
-            if (commands.length != 1) {
-                throw new UnknownCommandException();
+        String message = "";
+
+        if (input.matches("list")) {
+            int i = 1;
+            for (Task task : tasks) {
+                message += String.format("%d. %s\n", i, task);
+                i++;
             }
-            if (tasks.size() == 0) {
-                message = "No tasks added so far!";
-            } else {
-                index = 1;
-                for (Task task : tasks) {
-                    message += String.format("%d. %s\n", index, task);
-                    index++;
-                }
-                message = message.substring(0, message.length() - 1);
+            message = message.length() > 0
+                    ? message.substring(0, message.length() - 1)
+                    : "No tasks added so far!";
+        } else if (input.matches("event\\s.{1,}\\s\\/at\\s.{1,}")) {
+            String[] commands = extractCommandsFromInput(input, new String[] { "event", "/at" });
+            if (commands[0].length() == 0) {
+                throw new EmptyDescriptionException();
+            } else if (commands[1].length() == 0) {
+                throw new EmptyTimestampException();
             }
-            break;
-        case "todo":
-            taskDescription = String.join(" ", Arrays.copyOfRange(commands, 1, commands.length));
-            if (taskDescription.length() == 0) throw new EmptyDescriptionException();
-            newTask = new Todo(taskDescription);
-            break;
-        case "deadline":
-            for (int i = 1; i < commands.length; i++) {
-                if (commands[i].equals("/by")) {
-                    index = i;
-                    break;
-                }
+            newTask = new Event(commands[0], commands[1]);
+        } else if (input.matches("deadline\\s.{1,}\\s\\/by\\s.{1,}")) {
+            String[] commands = extractCommandsFromInput(input, new String[] { "deadline", "/by" });
+            if (commands[0].length() == 0) {
+                throw new EmptyDescriptionException();
+            } else if (commands[1].length() == 0) {
+                throw new EmptyTimestampException();
             }
-
-            if (commands.length == 1 || index == 1) throw new EmptyDescriptionException();
-            taskDescription = String.join(" ", Arrays.copyOfRange(commands, 1, index));
-
-            if (index+1 == commands.length) throw new EmptyTimestampException();
-            extraDetails = String.join(" ", Arrays.copyOfRange(commands, index+1, commands.length));
-
-            newTask = new Deadline(taskDescription, extraDetails);
-            break;
-        case "event":
-            for (int i = 1; i < commands.length; i++) {
-                if (commands[i].equals("/at")) {
-                    index = i;
-                    break;
-                }
+            newTask = new Deadline(commands[0], commands[1]);
+        } else if (input.matches("todo\\s.{1,}")) {
+            String[] commands = extractCommandsFromInput(input, new String[] { "todo" });
+            if (commands[0].length() == 0) {
+                throw new EmptyDescriptionException();
             }
-
-            if (commands.length == 1 || index == 1) throw new EmptyDescriptionException();
-            taskDescription = String.join(" ", Arrays.copyOfRange(commands, 1, index));
-
-            if (index+1 == commands.length) throw new EmptyTimestampException();
-            extraDetails = String.join(" ", Arrays.copyOfRange(commands, index+1, commands.length));
-
-            newTask = new Event(taskDescription, extraDetails);
-            break;
-        case "done":
-            if (commands.length != 2) throw new UnknownCommandException();
-            try {
-                int taskIndex = Integer.parseInt(commands[1]) - 1;
-                if (taskIndex < 0 || taskIndex >= tasks.size()) {
-                    throw new InvalidTaskNumberException(tasks.size());
-                } else {
-                    Task task = tasks.get(taskIndex);
-                    message = task.markDone()
-                            ? String.format("Nice! I've marked this task as done:\n    %s", task)
-                            : String.format("This was completed previously!:\n    %s", task);
-                }
-            } catch (NumberFormatException e) {
+            newTask = new Todo(commands[0]);
+        } else if (input.matches("done [0-9]{1,}")) {
+            String[] commands = extractCommandsFromInput(input, new String[] { "done" });
+            int index = Integer.parseInt(commands[0]);
+            if (index > tasks.size() || index == 0) {
                 throw new InvalidTaskNumberException(tasks.size());
             }
-            break;
-        case "delete":
-            if (commands.length != 2) throw new UnknownCommandException();
-            try {
-                int taskIndex = Integer.parseInt(commands[1]) - 1;
-                if (taskIndex < 0 || taskIndex >= tasks.size()) {
-                    throw new InvalidTaskNumberException(tasks.size());
-                }
-                Task task = tasks.get(taskIndex);
-                tasks.remove(taskIndex);
-                message = String.format(
-                        "Noted. I've removed this task:\n    %s\nNow you have %d tasks in the list.",
-                        task,
-                        tasks.size()
-                );
-            } catch (NumberFormatException e) {
+            Task task = tasks.get(index - 1);
+            message = task.markDone()
+                    ? String.format("Nice! I've marked this task as done:\n    %s", task)
+                    : String.format("This was completed previously!:\n    %s", task);
+        } else if (input.matches("delete [0-9]{1,}")) {
+            String[] commands = extractCommandsFromInput(input, new String[] { "delete" });
+            int index = Integer.parseInt(commands[0]);
+            if (index > tasks.size() || index == 0) {
                 throw new InvalidTaskNumberException(tasks.size());
             }
-            break;
-        default:
+            Task task = tasks.get(index - 1);
+            tasks.remove(index - 1);
+            message = String.format(
+                    "Noted. I've removed this task:\n    %s\nNow you have %d tasks in the list.",
+                    task,
+                    tasks.size()
+            );
+        } else {
             throw new UnknownCommandException();
         }
+
         if (newTask != null) {
             tasks.add(newTask);
             message = String.format(
@@ -128,6 +105,7 @@ public class Duke {
                     tasks.size()
             );
         }
+
         printOut(message);
     }
 
