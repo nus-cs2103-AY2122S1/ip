@@ -10,7 +10,7 @@
 	____________________________________________________________
 	Sure, I've deleted this task:
 	  [D][ ] return book (by: Jun 6 2021, 5:12 PM)
-	You still have 2 task(s) in the list.
+	You still have 2 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	There is no such tasks with this task number!
@@ -18,7 +18,7 @@
 	____________________________________________________________
 	Sure, I've deleted this task:
 	  [E][ ] project meeting (at: Aug 6 2021, 2:00 PM - 6:00 PM)
-	You still have 1 task(s) in the list.
+	You still have 1 task in the list.
 	____________________________________________________________
 	____________________________________________________________
 	There is no such tasks with this task number!
@@ -40,7 +40,7 @@
 	____________________________________________________________
 	Sure, I've deleted this task:
 	  [T][X] read book
-	You still have 0 task(s) in the list.
+	You have no more task in the list!
 	____________________________________________________________
 	____________________________________________________________
 	Sorry but my database does not have such command.
@@ -51,7 +51,7 @@
 	____________________________________________________________
 	Alright, new task added to the list:
 	  [T][ ] read book
-	Now you have 1 task(s) in the list.
+	Now you have 1 task in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Please follow this format:
@@ -64,7 +64,7 @@
 	____________________________________________________________
 	Alright, new task added to the list:
 	  [D][ ] return book (by: Jun 6 2021, 5:12 PM)
-	Now you have 2 task(s) in the list.
+	Now you have 2 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Please follow this format:
@@ -73,7 +73,7 @@
 	____________________________________________________________
 	Alright, new task added to the list:
 	  [D][ ] pass (by: Jun 6 2021, 5:12 AM)
-	Now you have 3 task(s) in the list.
+	Now you have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Please follow this format:
@@ -82,7 +82,7 @@
 	____________________________________________________________
 	Alright, new task added to the list:
 	  [D][ ] pass (by: Jun 6 2021, 5:12 PM)
-	Now you have 4 task(s) in the list.
+	Now you have 4 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Please follow this format:
@@ -114,12 +114,12 @@
 	____________________________________________________________
 	Sure, I've deleted this task:
 	  [D][ ] pass (by: Jun 6 2021, 5:12 AM)
-	You still have 3 task(s) in the list.
+	You still have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Sure, I've deleted this task:
 	  [D][ ] pass (by: Jun 6 2021, 5:12 PM)
-	You still have 2 task(s) in the list.
+	You still have 2 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Here are the tasks in your list:
@@ -129,7 +129,7 @@
 	____________________________________________________________
 	Alright, new task added to the list:
 	  [E][ ] project meeting (at: Aug 6 2021, 2:00 PM - 6:00 PM)
-	Now you have 3 task(s) in the list.
+	Now you have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Please follow this format:
@@ -158,7 +158,7 @@
 	____________________________________________________________
 	Alright, new task added to the list:
 	  [E][ ] pass (at: Aug 6 2021, 2:00 AM - 6:00 PM)
-	Now you have 4 task(s) in the list.
+	Now you have 4 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Please follow this format:
@@ -171,7 +171,7 @@
 	____________________________________________________________
 	Alright, new task added to the list:
 	  [E][ ] pass (at: Aug 6 2021, 2:00 PM - 6:00 PM)
-	Now you have 5 task(s) in the list.
+	Now you have 5 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Please follow this format:
@@ -199,12 +199,12 @@
 	____________________________________________________________
 	Sure, I've deleted this task:
 	  [E][ ] pass (at: Aug 6 2021, 2:00 AM - 6:00 PM)
-	You still have 4 task(s) in the list.
+	You still have 4 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Sure, I've deleted this task:
 	  [E][ ] pass (at: Aug 6 2021, 2:00 PM - 6:00 PM)
-	You still have 3 task(s) in the list.
+	You still have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Here are the tasks in your list:
