@@ -27,4 +27,20 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+
+    /**
+     * The method is to get type of the event
+     */
+    @Override
+    public String getType() {
+        return "E";
+    }
+
+    /**
+     * The method is to get time of the event
+     */
+    @Override
+    public String getTime() {
+        return this.at;
+    }
 }

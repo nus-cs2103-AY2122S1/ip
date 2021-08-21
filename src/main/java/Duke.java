@@ -5,6 +5,10 @@
  * @version CS2103T AY21/22 Semester 1
  */
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,7 +17,7 @@ public class Duke {
     //for sentences
     private static String ind2 = "     ";
     private static String div = ind + "____________________________________________________________";
-
+    private static File storedList;
     private enum KeyWord {
         END("bye"),
         DELETE("delete"),
@@ -30,6 +34,7 @@ public class Duke {
             return k;
         }
     }
+    private final static String FILE_PATH = "./data/duke.txt";
 
     /**
      * The main method to access input from user.
@@ -38,6 +43,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         greeting();
+        loadFile();
         Scanner sc = new Scanner(System.in);
         Tasks myTasks = new Tasks();
         while (sc.hasNext()) {
@@ -118,5 +124,57 @@ public class Duke {
         }
     }
 
+    private static void loadFile() {
+        storedList = new File(FILE_PATH);
+        try {
+            if (!storedList.exists()) {
+                storedList.createNewFile();
+                System.out.println("Local file created.");
+            }
+            Tasks.loadList(storedList);
+        } catch (IOException e) {
+            System.out.println("error when loading file: "+ e);
+        }
+    }
+
+    /**
+     * The method is to write to the file by appending
+     *
+     * @param s takes in input string
+     */
+    public static void writeToList(String s) {
+        try {
+            FileWriter fw = new FileWriter(FILE_PATH, true);
+            fw.write(s);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(":( Error when writing to file");
+        }
+    }
+
+    /**
+     * The method save the file to hard disk
+     */
+    public static void saveFile() {
+        try {
+            FileWriter fw = new FileWriter(FILE_PATH);
+            fw.write("");
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(":( Error when re-writing file");
+        }
+        ArrayList<Task> arr = Tasks.getTasks();
+        for (Task t: arr) {
+            int c = t.getStatusIcon().equals("X") ? 1 : 0;
+            String now = t.getType() + " | " + c + " | " + t.getDescription();
+            if (!t.getType().equals("T")) {
+                now += " | "+t.getTime();
+            }
+            if (!arr.get(arr.size()-1).equals(t)) {
+                now += "\n";
+            }
+            writeToList(now);
+        }
+    }
 
 }
