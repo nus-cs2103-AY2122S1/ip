@@ -40,28 +40,33 @@ public class Duke {
 
                 }
                 else if (splitLine.length == 4){
+                    String[] dateParameters = splitLine[3].split("-");
+                    int day = Integer.parseInt(dateParameters[2]);
+                    int month = Integer.parseInt(dateParameters[1]);
+                    int year = Integer.parseInt(dateParameters[0]);
+                    LocalDate localDate = LocalDate.of(year, month, day);
                     if (splitLine[0].equals("D")) {
                         if (splitLine[1].equals("0")) {
                             savedTasks.add(new Deadline(splitLine[2],
                                     false,
-                                    splitLine[3].substring(1)));
+                                    localDate));
                         }
                         else {
                             savedTasks.add(new Deadline(splitLine[2],
                                     true,
-                                    splitLine[3].substring(1)));
+                                    localDate));
                         }
                     }
                     else {
                         if (splitLine[1].equals("0")) {
                             savedTasks.add(new Event(splitLine[2],
                                     false,
-                                    splitLine[3].substring(1)));
+                                    localDate));
                         }
                         else {
                             savedTasks.add(new Event(splitLine[2],
                                     true,
-                                    splitLine[3].substring(1)));
+                                    localDate));
                         }
                     }
                 }
@@ -311,7 +316,7 @@ public class Duke {
                 }
             }
             else if (i instanceof Deadline) {
-                String taskDeadline = ((Deadline) i).getDeadline();
+                LocalDate taskDeadline = ((Deadline) i).getDeadline();
                 if (!isDone) {
                     fw.write("D|0|" + taskBody + "|" + taskDeadline + System.lineSeparator());
                 }
@@ -320,7 +325,7 @@ public class Duke {
                 }
             }
             else {
-                String taskDate = ((Event) i).getDate();
+                LocalDate taskDate = ((Event) i).getDate();
                 if (!isDone) {
                     fw.write("E|0|" + taskBody + "|" + taskDate + System.lineSeparator());
                 }
