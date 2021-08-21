@@ -126,5 +126,16 @@ public class DukeList {
         System.out.println(response + task.toString() + taskCount);
     }
 
+    @Override
+    public String toString() {
+        String str = "";
+
+        for (int i = 0; i < list.size(); i++) {
+            str += list.get(i).saveData() + "\n";
+        }
+
+        return str;
+    }
+
 
 }
