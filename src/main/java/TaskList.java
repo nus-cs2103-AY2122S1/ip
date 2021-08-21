@@ -110,7 +110,7 @@ public class TaskList {
         }
 
         try {
-            FileWriter fw = new FileWriter(".duke.txt");
+            FileWriter fw = new FileWriter("./duke.txt");
             fw.write(result);
             fw.close();
         } catch (IOException e) {
