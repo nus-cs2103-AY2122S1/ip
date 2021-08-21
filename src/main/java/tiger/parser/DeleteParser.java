@@ -3,19 +3,19 @@ package tiger.parser;
 import tiger.exceptions.TigerEmptyStringException;
 import tiger.exceptions.TigerInvalidArgumentException;
 
-public class DoneCommand extends Command {
+public class DeleteParser extends Parser {
 
     public int index;
 
-    public DoneCommand(String input) {
+    public DeleteParser(String input) {
+        super(input);
         String[] array = input.split(" ");
-        // TODO: ensure that assertions work
         try {
             this.index = Integer.valueOf(array[1].replaceAll(" ", ""));
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new TigerEmptyStringException("Done index");
+            throw new TigerEmptyStringException("Delete index");
         } catch (NumberFormatException e) {
-            throw new TigerInvalidArgumentException(array[1], "Done");
+            throw new TigerInvalidArgumentException(array[1], "Delete");
         }
     }
 }

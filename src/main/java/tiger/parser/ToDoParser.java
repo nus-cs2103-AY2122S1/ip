@@ -3,11 +3,12 @@ package tiger.parser;
 import tiger.exceptions.TigerEmptyStringException;
 import tiger.utils.RemoveLastSpaces;
 
-public class ToDoCommand extends Command {
+public class ToDoParser extends Parser {
 
     public String todo = "";
 
-    public ToDoCommand(String input) throws TigerEmptyStringException {
+    public ToDoParser(String input) throws TigerEmptyStringException {
+        super(input);
         try {
             String[] array = input.split(" ");
             for (int i = 1; i < array.length; i++) {

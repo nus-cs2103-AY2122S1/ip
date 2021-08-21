@@ -15,12 +15,12 @@ import tiger.exceptions.TigerInvalidArgumentException;
 
 import tiger.exceptions.TigerStorageInitException;
 import tiger.exceptions.TigerStorageLoadException;
-import tiger.parser.CommandParser;
-import tiger.parser.DeadLineCommand;
-import tiger.parser.DeleteCommand;
-import tiger.parser.DoneCommand;
-import tiger.parser.EventCommand;
-import tiger.parser.ToDoCommand;
+import tiger.parser.DeadLineParser;
+import tiger.parser.DeleteParser;
+import tiger.parser.DoneParser;
+import tiger.parser.EventParser;
+import tiger.parser.Parser;
+import tiger.parser.ToDoParser;
 import tiger.storage.Storage;
 
 import java.util.Scanner;
@@ -35,8 +35,8 @@ public class Tiger {
         AppState applicationState = new AppState(false, taskList);
         while (!applicationState.isExited()) {
             String userInput = scanner.nextLine();
-            CommandParser command = new CommandParser(userInput);
-            switch (command.getCommand()) {
+            Parser parser = new Parser(userInput);
+            switch (parser.getCommandKeyword()) {
             case "bye":
                 ByeAction byeAction = new ByeAction(applicationState);
                 applicationState = byeAction.run();
@@ -47,7 +47,7 @@ public class Tiger {
                 break;
             case "done":
                 try {
-                    DoneCommand doneCommand = new DoneCommand(userInput);
+                    DoneParser doneCommand = new DoneParser(userInput);
                     MarkDoneAction markDoneAction = new MarkDoneAction(applicationState, doneCommand.index - 1);
                     applicationState = markDoneAction.run();
                 } catch (TigerEmptyStringException e) {
@@ -58,7 +58,7 @@ public class Tiger {
                 break;
             case "delete":
                 try {
-                    DeleteCommand deleteCommand = new DeleteCommand(userInput);
+                    DeleteParser deleteCommand = new DeleteParser(userInput);
                     DeleteAction deleteAction = new DeleteAction(applicationState, deleteCommand.index - 1);
                     applicationState = deleteAction.run();
                 } catch (TigerEmptyStringException e) {
@@ -69,7 +69,7 @@ public class Tiger {
                 break;
             case "todo":
                 try {
-                    ToDoCommand toDoCommand = new ToDoCommand(userInput);
+                    ToDoParser toDoCommand = new ToDoParser(userInput);
                     ToDoAction toDoAction = new ToDoAction(applicationState, toDoCommand.todo);
                     applicationState = toDoAction.run();
                 } catch (TigerEmptyStringException e) {
@@ -78,7 +78,7 @@ public class Tiger {
                 break;
             case "deadline":
                 try {
-                    DeadLineCommand deadLineCommand = new DeadLineCommand(userInput);
+                    DeadLineParser deadLineCommand = new DeadLineParser(userInput);
                     DeadLineAction deadLineAction = new DeadLineAction(applicationState, deadLineCommand.todo, deadLineCommand.dateLine);
                     applicationState = deadLineAction.run();
                 } catch (TigerEmptyStringException e) {
@@ -87,7 +87,7 @@ public class Tiger {
                 break;
             case "event":
                 try {
-                    EventCommand eventCommand = new EventCommand(userInput);
+                    EventParser eventCommand = new EventParser(userInput);
                     EventAction eventAction = new EventAction(applicationState, eventCommand.todo,
                             eventCommand.eventAt);
                     applicationState = eventAction.run();

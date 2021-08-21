@@ -1,4 +1,0 @@
-T;false;fishing;
-T;false;carping;
-E;true;exam;2pm
-D;false;fishy;2pm

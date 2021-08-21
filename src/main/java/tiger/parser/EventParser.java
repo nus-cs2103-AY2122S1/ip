@@ -6,37 +6,38 @@ import tiger.utils.RemoveLastSpaces;
 import java.util.Arrays;
 import java.util.List;
 
-public class DeadLineCommand extends Command {
+public class EventParser extends Parser {
 
     public String todo = "";
-    public String dateLine = "";
+    public String eventAt = "";
 
-    public DeadLineCommand(String input) {
+    public EventParser(String input) throws TigerEmptyStringException {
+        super(input);
         List<String> array = Arrays.asList(input.split(" "));
-        // TODO: make assert statements work
-        assert (array.contains("/by"));
-        boolean byFound = false;
+        assert (array.contains("/at"));
+        boolean atFound = false;
         for (int i = 1; i < array.size(); i++) {
-            if (array.get(i).equals("/by")) {
-                byFound = true;
+            if (array.get(i).equals("/at")) {
+                atFound = true;
                 continue;
             }
-            if (!byFound) {
+            if (!atFound) {
                 this.todo += (array.get(i) + " ");
             } else {
-                this.dateLine += (array.get(i) + " ");
+                this.eventAt += (array.get(i) + " ");
             }
         }
         RemoveLastSpaces removeLastSpaces = new RemoveLastSpaces();
         try {
             this.todo = removeLastSpaces.removeLastSpaces(this.todo);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new TigerEmptyStringException("Deadline description");
+            throw new TigerEmptyStringException("Event description");
         }
         try {
-            this.dateLine = removeLastSpaces.removeLastSpaces(this.dateLine);
+            this.eventAt = removeLastSpaces.removeLastSpaces(this.eventAt);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new TigerEmptyStringException("Deadline date");
+            throw new TigerEmptyStringException("Event date");
         }
+
     }
 }
