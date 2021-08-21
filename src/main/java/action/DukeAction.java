@@ -8,6 +8,8 @@ import exception.MissingActionDescriptionException;
 import exception.NonExistentActionTypeException;
 import type.DukeActionTypeEnum;
 
+import java.io.IOException;
+
 public abstract class DukeAction {
     public DukeAction() {}
 
@@ -63,7 +65,7 @@ public abstract class DukeAction {
         }
     }
 
-    public abstract void executeAction(DukeTaskList list) throws DukeException;
+    public abstract void executeAction(DukeTaskList list) throws DukeException, IOException;
 
     public abstract Message getOutputMessage();
 }

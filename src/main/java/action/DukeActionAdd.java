@@ -3,6 +3,7 @@ package action;
 import entity.list.DukeTask;
 import entity.list.DukeTaskList;
 import entity.message.AddMessage;
+import exception.ErrorAccessingFile;
 import exception.InvalidTaskTimeFormatException;
 import exception.InvalidTaskTypeException;
 import exception.MissingActionDescriptionException;
@@ -27,7 +28,7 @@ public class DukeActionAdd extends DukeAction {
         return new DukeActionAdd(description, actionType);
     }
 
-    public void executeAction(DukeTaskList list) throws InvalidTaskTypeException, InvalidTaskTimeFormatException {
+    public void executeAction(DukeTaskList list) throws InvalidTaskTypeException, InvalidTaskTimeFormatException, ErrorAccessingFile {
         DukeTask task = DukeTask.createTask(this.description, this.actionType);
         list.addTaskToList(task);
         this.task = task;

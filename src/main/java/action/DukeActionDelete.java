@@ -3,6 +3,7 @@ package action;
 import entity.list.DukeTask;
 import entity.list.DukeTaskList;
 import entity.message.DeleteMessage;
+import exception.ErrorAccessingFile;
 import exception.InvalidTaskNumberException;
 import exception.MissingActionDescriptionException;
 import exception.NonExistentTaskNumberException;
@@ -24,10 +25,8 @@ public class DukeActionDelete extends DukeAction {
         return new DukeActionDelete(DukeAction.getTaskNumberFromMessage(description));
     }
 
-    public void executeAction(DukeTaskList list) throws NonExistentTaskNumberException {
-        DukeTask task = list.getTaskByTaskNumber(this.taskNumber);
-        list.deleteTaskFromList(this.taskNumber);
-        this.task = task;
+    public void executeAction(DukeTaskList list) throws NonExistentTaskNumberException, ErrorAccessingFile {
+        this.task = list.deleteTaskFromList(this.taskNumber);
         this.list = list;
     }
 

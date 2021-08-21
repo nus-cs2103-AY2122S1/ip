@@ -1,7 +1,10 @@
 package entity.list;
 
+import entity.data.DukeFile;
+import exception.ErrorAccessingFile;
 import exception.NonExistentTaskNumberException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -9,14 +12,28 @@ import java.util.ArrayList;
  */
 public class DukeTaskList {
     private ArrayList<DukeTask> list = new ArrayList<>();
+    private DukeFile listFile;
+
+    public DukeTaskList(DukeFile listFile) {
+        this.listFile = listFile;
+    }
+
+    public void scanExistingTaskToList(DukeTask task) {
+        this.list.add(task);
+    }
 
     /**
      * Adds task to a list.
      *
      * @param task is the task be added to the list
      */
-    public void addTaskToList(DukeTask task) {
-        this.list.add(task);
+    public void addTaskToList(DukeTask task) throws ErrorAccessingFile {
+        try {
+            this.listFile.add(task.toString());
+            this.list.add(task);
+        } catch(IOException e) {
+            throw new ErrorAccessingFile("add");
+        }
     }
 
     /**
@@ -24,9 +41,33 @@ public class DukeTaskList {
      *
      * @param taskNumber is the number of the task to be removed from the list
      */
-    public void deleteTaskFromList(int taskNumber) throws NonExistentTaskNumberException {
-        validateTaskNumberExists(taskNumber);
-        this.list.remove(taskNumber - 1);
+    public DukeTask deleteTaskFromList(int taskNumber) throws NonExistentTaskNumberException, ErrorAccessingFile {
+        try {
+            validateTaskNumberExists(taskNumber);
+
+            DukeTask task = this.getTaskByTaskNumber(taskNumber);
+            this.list.remove(taskNumber - 1);
+            this.listFile.rewriteFileWith(this.list);
+
+            return task;
+        } catch(IOException e) {
+            throw new ErrorAccessingFile("delete");
+        }
+    }
+
+    public DukeTask markTaskAsDone(int taskNumber) throws NonExistentTaskNumberException, ErrorAccessingFile {
+        try {
+            validateTaskNumberExists(taskNumber);
+
+            DukeTask task = this.getTaskByTaskNumber(taskNumber);
+            task.markAsDone();
+            this.listFile.rewriteFileWith(this.list);
+
+            return task;
+        } catch (IOException e) {
+            throw new ErrorAccessingFile("mark as done");
+        }
+
     }
 
     /**
@@ -47,25 +88,11 @@ public class DukeTaskList {
         return stringBuilderList.toString();
     }
 
-    /**
-     * Takes in a task number and returns true if the task number exists in the list,
-     * otherwise it returns false.
-     *
-     * @param taskNumber is the number that the task is listed by, starting from 1
-     * @return true if the task number exists in the list, otherwise false
-     */
     private boolean contains(int taskNumber) {
         return taskNumber > 0 && taskNumber <= this.list.size();
     }
 
-    /**
-     * Retrieves the task by the number it is listed by.
-     *
-     * @param taskNumber is the number that the task is listed by, starting from 1
-     * @return a `entity.list.DukeTask`
-     */
-    public DukeTask getTaskByTaskNumber(int taskNumber) throws NonExistentTaskNumberException {
-        validateTaskNumberExists(taskNumber);
+    private DukeTask getTaskByTaskNumber(int taskNumber) {
         return this.list.get(taskNumber - 1);
     }
 

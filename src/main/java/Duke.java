@@ -8,6 +8,7 @@ import entity.data.Data;
 import entity.data.DukeFile;
 import exception.DukeException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -24,12 +25,17 @@ public class Duke {
             return;
         }
 
+        // Scan data to a list
+        DukeTaskList list = Data.scanListFileDataToList(listFile);
+        if (list == null) {
+            return;
+        }
+
         // Greet
         GreetMessage greetingMessage = new GreetMessage("Hello! I'm Duke, what shall we do today?");
         greetingMessage.print();
 
         // Process input
-        DukeTaskList list = new DukeTaskList();
         Scanner inputScanner = new Scanner(System.in);
         String inputMessage = inputScanner.nextLine();
         String exitCommand = "bye";
@@ -43,6 +49,8 @@ public class Duke {
                 outputMessage = action.getOutputMessage();
             } catch (DukeException e) {
                 outputMessage = e.getOutputMessage();
+            } catch (IOException e) {
+                outputMessage = new Message("There is a problem when changing data to the file");
             }
 
             // Print output message

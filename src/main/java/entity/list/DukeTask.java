@@ -10,6 +10,8 @@ import type.DukeActionTypeEnum;
 public class DukeTask {
     private String description;
     private boolean isDone;
+    protected static String STATUS_ICON_DONE = "X";
+    protected static String STATUS_ICON_NOT_DONE = " ";
 
     /**
      * Constructor to instantiate a `entity.list.DukeTask`.
@@ -17,9 +19,9 @@ public class DukeTask {
      *
      * @param description describes what the task is
      */
-    public DukeTask(String description) {
+    public DukeTask(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
@@ -76,7 +78,7 @@ public class DukeTask {
     }
 
     private String getStatusIcon() {
-        return (this.isDone ? "X" : " ");
+        return (this.isDone ? STATUS_ICON_DONE : STATUS_ICON_NOT_DONE);
     }
 
     /**
@@ -87,5 +89,22 @@ public class DukeTask {
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
+    }
+
+    public static DukeTask createTaskFromStoredString(String fullDescription) {
+        String trimmedFullDescription = fullDescription.trim();
+        char taskType = trimmedFullDescription.charAt(1);
+        String descriptionWithoutTaskType = fullDescription.substring(3);
+
+        switch (taskType) {
+        case 'T':
+            return DukeTodoTask.createTaskFromStoredString(descriptionWithoutTaskType);
+        case 'D':
+            return DukeDeadlineTask.createTaskFromStoredString(descriptionWithoutTaskType);
+        case 'E':
+            return DukeEventTask.createTaskFromStoredString(descriptionWithoutTaskType);
+        default:
+            return null;
+        }
     }
 }
