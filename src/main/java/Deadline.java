@@ -1,11 +1,8 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Represents a deadline.
- */
 public class Deadline extends Task {
-    private LocalDateTime dateTime;
+    private final LocalDateTime dateTime;
     
     /**
      * Constructor for deadline.

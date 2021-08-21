@@ -1,10 +1,6 @@
-/**
- * Represents a task.
- */
 public class Task {
-    private String description;
+    private final String description;
     private boolean isDone;
-    
     
     /**
      * Constructor for task.

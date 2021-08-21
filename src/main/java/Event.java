@@ -2,14 +2,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Represents an event.
- */
 public class Event extends Task {
-    private LocalDate date;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    
+    private final LocalDate date;
+    private final LocalTime startTime;
+    private final LocalTime endTime;
     
     /**
      * Constructor for event.
