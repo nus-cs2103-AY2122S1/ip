@@ -73,6 +73,16 @@ public abstract class Database {
     public abstract Task removeTask(int index);
 
     /**
+     * Mark a task as completed in the database.
+     * 
+     * @param index index of the task, {@code 1} for the first task, {@code 2} for
+     *              the second task etc.
+     * @return task that is marked completed, {@code null} if there are no tasks at
+     *         the specified index
+     */
+    public abstract Task markCompleted(int index);
+
+    /**
      * Recreate a task based on provided information. Used when retrieving task from
      * SQL database.
      * 

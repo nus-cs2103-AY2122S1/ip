@@ -116,6 +116,28 @@ public class SQLite extends Database {
         return result;
     }
 
+    @Override
+    public Task markCompleted(int index) {
+        Task result = null;
+        try {
+            this.connection = getSQLConnection();
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + TASK_TABLE_NAME + ";");
+            ResultSet rs = ps.executeQuery();
+            while (rs.absolute(index)) {
+                TaskType type = TaskType.valueOf(rs.getString("type"));
+                String name = rs.getString("name");
+                boolean completed = rs.getBoolean("completed");
+                String date = rs.getString("date");
+                result = this.createTask(type, name, completed, date);
+                rs.updateBoolean("completed", true);
+            }
+            close(ps, rs);
+        } catch (SQLException ex) {
+            // TODO
+        }
+        return result;
+    }
+
     private File createOrOpenDataFile() {
         File dataFolder = new File(this.getDataFolder(), DATABASE_NAME + ".db");
         if (!dataFolder.exists()) {
