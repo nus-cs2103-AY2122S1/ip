@@ -1,5 +1,8 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.zip.DataFormatException;
 
 public class Duke {
     private static ArrayList<Task> userInputRecord;
@@ -59,22 +62,28 @@ public class Duke {
         } else if(userInput.startsWith("deadline")) {
             try {
                 int byPosition = userInput.lastIndexOf("/by");
-                String ddl = userInput.substring(byPosition + 4);
+                LocalDate ddl = LocalDate.parse(userInput.substring(byPosition + 4));
                 String description = userInput.substring(9,byPosition); //Length of "deadline " = 9
                 task = new Deadline(description,ddl);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println(formatMessage("OOPS!!! The description of a deadline cannot be empty.\n" ));
+                return;
+            } catch (DateTimeParseException e) {
+                System.out.println(formatMessage("Please enter the date in the format yyyy-mm-dd!\n"));
                 return;
             }
 
         } else if(userInput.startsWith("event")) {
             try {
                 int atPosition = userInput.lastIndexOf("/at");
-                String time = userInput.substring(atPosition + 4);
+                LocalDate time = LocalDate.parse(userInput.substring(atPosition + 4));
                 String description = userInput.substring(6, atPosition);//Length of "event " = 6
                 task = new Event(description, time);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println(formatMessage("OOPS!!! The description of an event cannot be empty.\n"));
+                return;
+            } catch (DateTimeParseException e) {
+                System.out.println(formatMessage("Please enter the date in the format yyyy-mm-dd!\n"));
                 return;
             }
         } else {
