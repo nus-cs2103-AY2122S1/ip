@@ -86,7 +86,7 @@ public class CommandHandler {
         TaskList foundTasks = new TaskList(new ArrayList<>());
         for (int i = 0; i < taskList.size(); i++) {
             Task currTask = taskList.get(i);
-            if (currTask.getName().contains(commands[1])) {
+            if (currTask.getName().toLowerCase().contains(commands[1].toLowerCase())) {
                 foundTasks.add(currTask);
             }
         }
