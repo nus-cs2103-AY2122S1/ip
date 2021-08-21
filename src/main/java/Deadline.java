@@ -11,12 +11,12 @@ public class Deadline extends Task {
 
     Deadline(String name, String dueDate, boolean isComplete) {
         super(name, isComplete);
-        this.dueDate = dueDate;
+        this.dueDate = Utility.parseDate(dueDate);
     }
 
     @Override
     public String toFile() {
-        return String.format("D | %s | %s", super.toFile(), dueDate);
+        return String.format("D | %s | %s", super.toFile(), Utility.dateToFile(dueDate));
     }
 
     @Override

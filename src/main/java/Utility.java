@@ -14,4 +14,8 @@ public class Utility {
     public static String dateToString(LocalDateTime date) {
         return date.format(outputFormatter);
     }
+
+    public static String dateToFile(LocalDateTime date) {
+        return date.format(inputFormatter);
+    }
 }

@@ -11,12 +11,12 @@ public class Event extends Task {
 
     Event(String name, String startDate, boolean isComplete) {
         super(name, isComplete);
-        this.startDate = startDate;
+        this.startDate = Utility.parseDate(startDate);
     }
 
     @Override
     public String toFile() {
-        return String.format("E | %s | %s", super.toFile(), startDate);
+        return String.format("E | %s | %s", super.toFile(), Utility.dateToFile(startDate));
     }
 
     @Override

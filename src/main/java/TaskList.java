@@ -2,6 +2,7 @@ import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.PrintWriter;
+import java.time.DateTimeException;
 import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
@@ -58,7 +59,7 @@ public class TaskList {
         while ((line = br.readLine()) != null) {
             try {
                 tasks.add(Task.strToObj(line));
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | DateTimeException e) {
                 continue;
             }
         }

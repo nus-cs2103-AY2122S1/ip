@@ -25,7 +25,8 @@ abstract public class Task {
     }
 
     public static Task strToObj(String s) throws IllegalArgumentException {
-        if (!s.matches("[T] [|] [10] [|] [\\w\\s]+$") && !s.matches("[DE] [|] [10] [|] [\\w\\s]+ [|] [\\w\\s-]+$")) {
+        if (!s.matches("[T] [|] [10] [|] [\\w\\s]+$")
+                && !s.matches("[DE] [|] [10] [|] [\\w\\s]+ [|] [0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{4}")) {
             throw new IllegalArgumentException();
         }
         String[] tmp =  s.split(" [|] ");
