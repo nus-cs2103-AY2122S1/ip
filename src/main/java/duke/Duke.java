@@ -27,9 +27,9 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_PATH);
         tasks = new TaskList(storage.load());
         parser = new Parser();
     }
@@ -52,6 +52,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(FILE_PATH).run();
+        new Duke().run();
     }
 }
