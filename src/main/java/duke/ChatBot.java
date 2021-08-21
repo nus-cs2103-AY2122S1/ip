@@ -5,6 +5,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ChatBot {
@@ -42,13 +43,13 @@ public class ChatBot {
         return line + "Well done! You finally completed " + complete.getName() + "!\n" + line;
     }
 
-    public String addDeadline(String name, String deadline) {
+    public String addDeadline(String name, LocalDateTime deadline) {
         Task t = new Deadline(name, deadline);
         tasks.add(t);
         return line + "I've added this task:\n" + t +"\n" + "You have " + tasks.size() + " tasks left!\n" + line;
     }
 
-    public String addEvent(String name, String time) {
+    public String addEvent(String name, LocalDateTime time) {
         Task t = new Event(name, time);
         tasks.add(t);
         return line + "I've added this task:\n" + t +"\n" + "You have " + tasks.size() + " tasks left!\n" + line;
