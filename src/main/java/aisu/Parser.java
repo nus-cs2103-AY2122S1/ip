@@ -21,6 +21,8 @@ public class Parser {
             return new AddCommand(TaskList.TaskTypes.E, input.substring(6));
         } else if (input.startsWith("delete ")) {
             return new DeleteCommand(Integer.parseInt(input.substring(7)));
+        } else if (input.startsWith("find ")) {
+            return new FindCommand(input.substring(5));
         } else {
             throw new AisuException("That's an invalid task format...");
         }

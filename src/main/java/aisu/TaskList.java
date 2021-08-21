@@ -85,6 +85,16 @@ public class TaskList {
         return this.getTaskAt(n);
     }
 
+    public String findTasksWith(String keyword) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < this.list.size(); i++) {
+            if (list.get(i).toString().contains(keyword)) {
+                result.append(i + 1).append(". ").append(list.get(i)).append("\n");
+            }
+        }
+        return result.toString();
+    }
+
     @Override
     public String toString() {
         if (this.list.isEmpty()) {
