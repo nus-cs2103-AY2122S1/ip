@@ -2,33 +2,44 @@ package duke.task;
 
 import org.json.simple.JSONObject;
 
-/**
- * Represents a duke.tasks.Todo object.
- */
+/** Represents a Todo object. */
 public class Todo extends Task {
     /**
-     * duke.tasks.Todo constructor.
+     * Todo constructor.
      *
-     * @param description the description
+     * @param description The description of the Todo.
      */
     Todo(String description) {
         super(description);
     }
 
+    /**
+     * Todo constructor.
+     *
+     * @param description The description of the Todo.
+     * @param isDone The done status of the Todo.
+     */
     Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 
     /**
-     * Factory duke.tasks.Todo method.
+     * Factory Todo method.
      *
-     * @param description the description
-     * @return a new duke.tasks.Todo object
+     * @param description The description
+     * @return A new Todo object
      */
     public static Todo of(String description) {
         return new Todo(description);
     }
 
+    /**
+     * Factory Todo method.
+     *
+     * @param description The description.
+     * @param isDone The done status of the Todo.
+     * @return a new Todo object
+     */
     public static Todo of(String description, boolean isDone) {
         return new Todo(description, isDone);
     }

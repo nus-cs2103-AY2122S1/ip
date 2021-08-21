@@ -5,22 +5,20 @@ import duke.exception.BadInputFormatException;
 import duke.exception.InvalidDateException;
 import org.json.simple.JSONObject;
 
-/**
- * Represents an duke.tasks.Event object.
- */
+/** Represents a.Event object. */
 public class Event extends DatedTask {
     /**
-     * duke.tasks.Event constructor.
+     * Event constructor.
      *
-     * @param description the event's description
-     * @throws BadInputFormatException if the description is badly formatted
+     * @param description The event's description
+     * @throws BadInputFormatException If the description is badly formatted
      */
     Event(String description) throws BadInputFormatException, InvalidDateException {
         this(parseToDescription(description), parseToDate(description));
     }
 
     /**
-     * duke.tasks.Event constructor.
+     * Event constructor.
      *
      * @param description the event's description
      * @param at the event's time
@@ -34,20 +32,37 @@ public class Event extends DatedTask {
     }
 
     /**
-     * Factory duke.tasks.Event method.
+     * Factory Event method.
      *
-     * @param description the user's input
-     * @return a new duke.tasks.Event object
-     * @throws BadInputFormatException if the input is badly formatted
+     * @param description The user's input.
+     * @return An Event object.
+     * @throws BadInputFormatException If the input is badly formatted.
      */
     public static Event of(String description) throws BadInputFormatException, InvalidDateException {
         return new Event(description);
     }
-  
+
+    /**
+     * Factory Event method.
+     *
+     * @param description The Event's description.
+     * @param at The Event's date.
+     * @param isDone The Event's done status.
+     * @return An Event object.
+     */
     public static Event of(String description, Date at, boolean isDone) {
         return new Event(description, at, isDone);
     }
 
+    /**
+     * Helper method to parse the user's input into a Date object by splitting using regex delimited by the "/at"
+     * keyword.
+     *
+     * @param description The user's input.
+     * @return A Date object.
+     * @throws BadInputFormatException If the given input is not well formatted.
+     * @throws InvalidDateException If the date contained in the input does not adhere to the yyyy-MM-dd format.
+     */
     private static Date parseToDate(String description) throws BadInputFormatException, InvalidDateException {
         String[] tokens = description.split(" /at ");
         if (tokens.length < 2) {
@@ -56,6 +71,14 @@ public class Event extends DatedTask {
         return Date.of(tokens[1]);
     }
 
+    /**
+     * Helper method to parse the user's input into the Event description by splitting using regex delimited by the
+     * "/at" keyword.
+     *
+     * @param description The user's input.
+     * @return The description of the Deadline as string.
+     * @throws BadInputFormatException If the given input is not well formatted.
+     */
     private static String parseToDescription(String description) throws BadInputFormatException {
         String[] tokens = description.split(" /at ");
         if (tokens.length < 2) {

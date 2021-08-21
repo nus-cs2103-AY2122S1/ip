@@ -8,11 +8,23 @@ import duke.util.Ui;
 import java.io.IOException;
 
 public class Duke {
+    /** Hardcoded file path to save location. */
     private static final String FILEPATH = "./data/tasks.json";
+
+    /** The storage utility. */
     private Storage storage;
+
+    /** The list of tasks. */
     private TaskList tasks;
+
+    /** The program ui. */
     private Ui ui;
 
+    /**
+     * Duke constructor.
+     *
+     * @param filePath The file path to save location.
+     */
     private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,6 +37,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Entry point for the program.
+     *
+     * @throws IOException If the ui encounters error while reading user input.
+     */
     private void run() throws IOException {
         ui.showWelcome();
         boolean isExit = false;
