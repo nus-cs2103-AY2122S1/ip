@@ -81,7 +81,7 @@ class AddCommandTest {
     }
 
     @Test
-    void execute_MissingTaskDescription_noTaskAdded() {
+    void execute_missingTaskDescription_noTaskAdded() {
         TaskList tasks = new TaskList();
         StorageStub storageStub = new StorageStub(tasks);
         AddCommand addCommand = new AddCommand("event /at 1/1/2020");
@@ -108,7 +108,7 @@ class AddCommandTest {
     }
 
     @Test
-    void execute_MissingSpaces_noTaskAdded() {
+    void execute_missingSpaces_noTaskAdded() {
         TaskList tasks = new TaskList();
         StorageStub storageStub = new StorageStub(tasks);
         // User might want "a" as description.

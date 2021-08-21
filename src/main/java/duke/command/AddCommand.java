@@ -35,23 +35,9 @@ public class AddCommand extends Command {
             throw new DukeException(Ui.exceptionInvalidUserCommand());
         }
 
-        // Checks if user input contains a task description.
-        if (this.userInput.length() <= (userCommand.length() + 1)) {
-            // Check for case where there is a single non-space character right after command.
-            // User might have intended for this to be a description.
-            // Missing spaces error message is more appropriate in this case.
-            if (this.userInput.length() == (userCommand.length() + 1) &&
-                    this.userInput.charAt(userCommand.length() - 1) != ' ') {
-                throw new DukeException(Ui.exceptionMissingSpaceAfterCommand(userCommand));
-            } else {
-                throw new DukeException(Ui.exceptionMissingTaskDescription(userCommand));
-            }
-        }
-
-        // Checks if user input contains a space after the command.
-        if (this.userInput.charAt(userCommand.length()) != ' ') {
-            throw new DukeException(Ui.exceptionMissingSpaceAfterCommand(userCommand));
-        }
+        // Preliminary check for any input following command.
+        Parser.checkInputValidity(this.userInput, userCommand,
+                Ui.exceptionMissingTaskDescription(userCommand));
 
         // Extracts task description.
         String description = this.userInput.substring(userCommand.length() + 1);

@@ -29,6 +29,7 @@ public class DateCommand extends Command {
         // Check if anything is provided 1 space after date command.
         if (this.userInput.length() <= (Commands.DATE.getLength() + 1)) {
             // If nothing is provided, date to search for is not provided.
+            // Unlike other commands, a single character following after command without space is an invalid date.
             throw new DukeException(Ui.exceptionMissingDate());
         }
 

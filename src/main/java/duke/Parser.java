@@ -42,6 +42,25 @@ public class Parser {
         }
     }
 
+    public static void checkInputValidity(String userInput, String command,
+            String exceptionMessage) throws DukeException {
+
+        // If userInput is <= command length, it definitely does not contain desired inputs.
+        if (userInput.length() <= command.length()) {
+            throw new DukeException(exceptionMessage);
+        }
+
+        // If userInput after command is not space, tell users that they are missing space.
+        if (userInput.charAt(command.length()) != ' ') {
+            throw new DukeException(Ui.exceptionMissingSpaceAfterCommand(command));
+        } else {
+            // If user input is like so "command ", it also does not contain desired inputs, despite having space.
+            if (userInput.length() == (command.length() + 1)) {
+                throw new DukeException(exceptionMessage);
+            }
+        }
+    }
+
     private static String padZeros(String original, int expected) throws DukeException {
         String output = original;
         if (original.length() < expected) {
