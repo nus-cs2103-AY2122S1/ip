@@ -5,23 +5,7 @@ import util.tasks.*;
 public class Duke {
 
 
-    /**
-     * DukeException, an exception that arose from inaccurate input.
-     *
-     */
-    public class DukeException extends Exception {
 
-        public DukeException() {
-            super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-
-
-        public DukeException(String message) {
-            super(message);
-        }
-
-
-    }
     private static final String taskRemoved = "Noted, I've removed this task:";
     private static final String DELETE = "delete";
     private static final String TODO = "todo";
@@ -233,6 +217,18 @@ public class Duke {
         }
         this.print(bye);
     }
+
+    /**
+     * The method that runs when the Duke needs to log the
+     * list of Tasks. Occurs every time there is a modification to the
+     * List of tasks.
+     *
+     */
+
+    public void write() {
+
+    }
+
 
 
 

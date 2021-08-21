@@ -5,8 +5,28 @@
 package util.tasks;
 
 public abstract class Task {
+
+    /**
+     * Method to encode the task as a String.
+     * Format - {type of task}{DELIMITER}{DONE/NOTDONE}{DELIMITER}{TASKNAME}{Extra information}
+     *
+     *
+     * @return The encoded task;
+     */
+    public abstract String encode();
+
+
+
+    protected static enum Label {
+        T, E, D;
+    }
+
     protected String name;
-    protected String checkBox;
+    boolean isdone;
+    //what is a better choice for a delimiter
+    protected static String DELIMITER = "/ghx-124";
+    protected static String DONE = "DONETASKe123111";
+    protected static String NOTDONE = "NOTDONETASK454e-e";
     private static String notDone = "[ ]";
     private static String done = "[X]";
 
@@ -18,19 +38,59 @@ public abstract class Task {
      */
     public Task(String s) {
         this.name = s;
-        this.checkBox = s = notDone;
+        this.isdone = false;
     }
 
     /**
      * Marks when the task is done.
      */
     public void done() {
-        this.checkBox = done;
+        this.isdone = true;
     }
+
+    /**
+     * Obtains the corresponding task from the string input.
+     *
+     * @param s The input String.
+     * @return The task the string represents.
+     */
+    public static Task decode(String s) throws DukeException {
+        String[] ssplit = s.split(DELIMITER, 4);
+        Label currentType = Label.valueOf(ssplit[0]);
+        boolean done = ssplit[1].equals(Task.DONE);
+        Task t;
+        switch (currentType) {
+            //For todo
+            case T:
+                t = new ToDos(ssplit[2]);
+                break;
+            case E:
+                t = new Events(ssplit[2], ssplit[3]);
+                break;
+            case D:
+                t = new Deadlines(ssplit[2], ssplit[3]);
+                break;
+            default:
+                throw new DukeException("Not a valid text document");
+        }
+        if (done) {
+            t.done();
+        }
+        return t;
+    }
+
+    public boolean isDone() {
+        return this.isdone;
+    }
+
+
 
     @Override
     public String toString() {
-        return this.checkBox + " " + this.name;
+        String checkBox = this.isdone
+                ? Task.done
+                : Task.notDone;
+        return checkBox + " " + this.name;
     }
 
 
@@ -43,4 +103,6 @@ public abstract class Task {
         }
         return false;
     }
+
+
 }
