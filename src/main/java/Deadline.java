@@ -1,9 +1,12 @@
-public class Deadline extends Task {
-    private final String dueDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
-    Deadline(String name, String dueDate) {
+public class Deadline extends Task {
+    private final LocalDateTime dueDate;
+
+    Deadline(String name, String dueDate) throws DateTimeParseException {
         super(name);
-        this.dueDate = dueDate;
+        this.dueDate = Utility.parseDate(dueDate);
     }
 
     Deadline(String name, String dueDate, boolean isComplete) {
@@ -18,6 +21,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), dueDate);
+        return String.format("[D]%s (by: %s)", super.toString(), Utility.dateToString(dueDate));
     }
 }

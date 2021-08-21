@@ -1,9 +1,12 @@
-public class Event extends Task {
-    private final String startDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
-    Event(String name, String startDate) {
+public class Event extends Task {
+    private final LocalDateTime startDate;
+
+    Event(String name, String startDate) throws DateTimeParseException {
         super(name);
-        this.startDate = startDate;
+        this.startDate = Utility.parseDate(startDate);
     }
 
     Event(String name, String startDate, boolean isComplete) {
@@ -18,6 +21,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), startDate);
+        return String.format("[E]%s (at: %s)", super.toString(), Utility.dateToString(startDate));
     }
 }

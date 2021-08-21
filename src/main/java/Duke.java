@@ -4,6 +4,7 @@ import java.util.stream.IntStream;
 import java.util.function.Consumer;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeParseException;
 
 public class Duke implements Runnable {
     private static final String ERR_CREATE_FILE = "Could not create empty file.";
@@ -21,8 +22,8 @@ public class Duke implements Runnable {
     private final String ERR_NOT_FOUND = "Sorry, I do not recognize that command.";
     private final String ERR_NO_TASKS = "No tasks available!";
     private final String ERR_TODO_FORMAT = "Error in command usage. Usage: todo <name>";
-    private final String ERR_DEADLINE_FORMAT = "Error in command usage. Usage: deadline <name> /by <date>";
-    private final String ERR_EVENT_FORMAT = "Error in command usage. Usage: event <name> /at <date>";
+    private final String ERR_DEADLINE_FORMAT = "Error in command usage. Usage: deadline <name> /by dd/MM/yyyy HHmm";
+    private final String ERR_EVENT_FORMAT = "Error in command usage. Usage: event <name> /at dd/MM/yyyy HHmm";
     private final String ERR_DONE_FORMAT = "Please provide a valid number! Usage: done <num>";
     private final String ERR_DELETE_FORMAT = "Please provide a valid number! Usage: delete <num>";
     private final String ERR_MAX_TASKS = "Sorry! You have reached maximum Task capacity.";
@@ -63,23 +64,31 @@ public class Duke implements Runnable {
     }
 
     private void addDeadline(String args) {
-        if (args.equals("") || !args.contains(" /by ")) {
+        if (!args.contains(" /by ")) {
             printDuke(ERR_DEADLINE_FORMAT);
             return;
         }
-        String[] tmp = args.split(" /by ", 2);
-        tasks.add(new Deadline(tmp[0], tmp[1]));
-        printLatestTask();
+        try {
+            String[] tmp = args.split(" /by ", 2);
+            tasks.add(new Deadline(tmp[0], tmp[1]));
+            printLatestTask();
+        } catch (DateTimeParseException e) {
+            printDuke(ERR_DEADLINE_FORMAT);
+        }
     }
 
     private void addEvent(String args) {
-        if (args.equals("") || !args.contains(" /at ")) {
+        if (!args.contains(" /at ")) {
             printDuke(ERR_EVENT_FORMAT);
             return;
         }
-        String[] tmp = args.split(" /at ", 2);
-        tasks.add(new Event(tmp[0], tmp[1]));
-        printLatestTask();
+        try {
+            String[] tmp = args.split(" /at ", 2);
+            tasks.add(new Event(tmp[0], tmp[1]));
+            printLatestTask();
+        } catch (DateTimeParseException e) {
+            printDuke(ERR_EVENT_FORMAT);
+        }
     }
 
     private void listTasks() {
