@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -159,7 +160,22 @@ public class Duke {
                     System.out.println(exception);
                     continue;
                 }
-                Task newTask = new Deadline(body, deadline);
+                if (deadline.length() != 11) {
+                    DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
+                    System.out.println(exception);
+                    continue;
+                }
+                String[] deadlineArray = deadline.substring(1).split("-");
+                int year = Integer.parseInt(deadlineArray[0]);
+                int month = Integer.parseInt(deadlineArray[1]);
+                int day = Integer.parseInt(deadlineArray[2]);
+                if (month > 12 || day > 31) {
+                    DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
+                    System.out.println(exception);
+                    continue;
+                }
+                LocalDate newDeadline = LocalDate.of(year, month, day);
+                Task newTask = new Deadline(body, newDeadline);
                 savedTasks.add(newTask);
                 System.out.println("I've added this task:\n" + newTask);
                 System.out.println("Now you have " + savedTasks.size() + " tasks in the list!");
@@ -193,11 +209,26 @@ public class Duke {
                     deadline += " " + words[i];
                 }
                 if (deadline.equals("")) {
-                    DukeException exception = new DukeException("Deadline of deadline cannot be empty :(");
+                    DukeException exception = new DukeException("Date of event cannot be empty :(");
                     System.out.println(exception);
                     continue;
                 }
-                Task newTask = new Event(body, deadline);
+                if (deadline.length() != 11) {
+                    DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
+                    System.out.println(exception);
+                    continue;
+                }
+                String[] deadlineArray = deadline.substring(1).split("-");
+                int year = Integer.parseInt(deadlineArray[0]);
+                int month = Integer.parseInt(deadlineArray[1]);
+                int day = Integer.parseInt(deadlineArray[2]);
+                if (month > 12 || day > 31) {
+                    DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
+                    System.out.println(exception);
+                    continue;
+                }
+                LocalDate newDeadline = LocalDate.of(year, month, day);
+                Task newTask = new Event(body, newDeadline);
                 savedTasks.add(newTask);
                 System.out.println("I've added this task:\n" + newTask);
                 System.out.println("Now you have " + savedTasks.size() + " tasks in the list!");
@@ -214,6 +245,42 @@ public class Duke {
                     savedTasks.remove(index);
                     System.out.println("Alright! I've removed this task:\n" + removedTask);
                     System.out.println(String.format("Now you have %d tasks left in the list!", savedTasks.size()));
+                }
+            }
+            else if (userInput.toLowerCase().equals("get")) {
+                String date = sc.next();
+                if (date.length() != 10) {
+                    DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
+                    System.out.println(exception);
+                    continue;
+                }
+                String[] dateArray = date.split("-");
+                int year = Integer.parseInt(dateArray[0]);
+                int month = Integer.parseInt(dateArray[1]);
+                int day = Integer.parseInt(dateArray[2]);
+                if (month > 12 || day > 31) {
+                    DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
+                    System.out.println(exception);
+                    continue;
+                }
+                LocalDate localDate = LocalDate.of(year, month, day);
+                int counter = 0;
+                for (Task i : savedTasks) {
+                    if (i instanceof Event) {
+                        if (((Event) i).getDate().equals(localDate)) {
+                           System.out.println(i);
+                           counter++;
+                        }
+                    }
+                    if (i instanceof Deadline) {
+                        if (((Deadline) i).getDeadline().equals(localDate)) {
+                            System.out.println(i);
+                            counter++;
+                        }
+                    }
+                }
+                if (counter == 0) {
+                    System.out.println("No tasks found!");
                 }
             }
             else {

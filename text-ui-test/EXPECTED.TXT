@@ -11,35 +11,37 @@ I've added this task:
 [T] [ ] Read Book
 Now you have 1 tasks in the list!
 I've added this task:
-[D] [ ] finish assignment (by: 30 Aug)
+[D] [ ] finish assignment (by: Aug 21 2021)
 Now you have 2 tasks in the list!
 I've added this task:
-[E] [ ] CS2103 tutorial (at: Thursday)
+[E] [ ] CS2103 tutorial (at: Aug 21 2021)
 Now you have 3 tasks in the list!
+[D] [ ] finish assignment (by: Aug 21 2021)
+[E] [ ] CS2103 tutorial (at: Aug 21 2021)
 Here are the tasks in your list:
 1. [T] [ ] Read Book
-2. [D] [ ] finish assignment (by: 30 Aug)
-3. [E] [ ] CS2103 tutorial (at: Thursday)
+2. [D] [ ] finish assignment (by: Aug 21 2021)
+3. [E] [ ] CS2103 tutorial (at: Aug 21 2021)
 Nice! I've marked this task as done:
 [T] [X] Read Book
 Nice! I've marked this task as done:
-[D] [X] finish assignment (by: 30 Aug)
+[D] [X] finish assignment (by: Aug 21 2021)
 Nice! I've marked this task as done:
-[E] [X] CS2103 tutorial (at: Thursday)
+[E] [X] CS2103 tutorial (at: Aug 21 2021)
 Here are the tasks in your list:
 1. [T] [X] Read Book
-2. [D] [X] finish assignment (by: 30 Aug)
-3. [E] [X] CS2103 tutorial (at: Thursday)
+2. [D] [X] finish assignment (by: Aug 21 2021)
+3. [E] [X] CS2103 tutorial (at: Aug 21 2021)
 Alright! I've removed this task:
 [T] [X] Read Book
 Now you have 2 tasks left in the list!
 Here are the tasks in your list:
-1. [D] [X] finish assignment (by: 30 Aug)
-2. [E] [X] CS2103 tutorial (at: Thursday)
+1. [D] [X] finish assignment (by: Aug 21 2021)
+2. [E] [X] CS2103 tutorial (at: Aug 21 2021)
 Alright! I've removed this task:
-[D] [X] finish assignment (by: 30 Aug)
+[D] [X] finish assignment (by: Aug 21 2021)
 Now you have 1 tasks left in the list!
 Alright! I've removed this task:
-[E] [X] CS2103 tutorial (at: Thursday)
+[E] [X] CS2103 tutorial (at: Aug 21 2021)
 Now you have 0 tasks left in the list!
 Bye! Hope to see you again soon!

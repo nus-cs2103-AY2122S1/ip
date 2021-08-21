@@ -1,16 +1,20 @@
-public class Event extends Task {
-    private final String date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    Event(String body, String date) {
+
+public class Event extends Task {
+    private final LocalDate date;
+
+    Event(String body, LocalDate date) {
         super(body, false);
         this.date = date;
     }
-    Event(String body, boolean done, String date) {
+    Event(String body, boolean done, LocalDate date) {
         super(body, done);
         this.date = date;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return this.date;
     }
 
@@ -22,10 +26,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (this.getDone()) {
-            return "[E] [X]" + this.getBody() + " (at:" + this.date + ")";
+            return "[E] [X]" + this.getBody() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         }
         else {
-            return "[E] [ ]" + this.getBody() + " (at:" + this.date + ")";
+            return "[E] [ ]" + this.getBody() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         }
     }
 }
