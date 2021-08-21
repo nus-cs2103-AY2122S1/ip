@@ -7,7 +7,6 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Task.resetMaxId();
         Duke duke = new Duke();
 
         duke.printInitialGreeting();
@@ -82,8 +81,11 @@ public class Duke {
 
     private void printList() {
         System.out.println("Here are the tasks in your list:");
+        int iter = 1;
         for (Task t: list) {
-            System.out.println(t);
+            String index = String.valueOf(iter);
+            System.out.println(index + "." + t);
+            iter++;
         }
     }
 
@@ -112,7 +114,7 @@ public class Duke {
     private void deleteTask(int id) throws DukeException {
         try {
             Task deletedTask = this.list.remove(id - 1);
-            System.out.println("Noted. I've removed this task: \n "
+            System.out.println("Noted. I've removed this task:\n "
                     + deletedTask.details()
             );
             printListNumber();
@@ -128,7 +130,7 @@ public class Duke {
             result.append(splitList[i]);
             result.append(" ");
         }
-        return result.substring(0,result.length() - 1).toString();
+        return result.substring(0,result.length() - 1);
     }
 
     public static void printLogo() {
