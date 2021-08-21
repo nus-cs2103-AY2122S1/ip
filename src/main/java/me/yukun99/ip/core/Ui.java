@@ -3,15 +3,17 @@ package me.yukun99.ip.core;
 import me.yukun99.ip.tasks.Task;
 
 /**
- * Text Ui of the HelpBot.
+ * Class used to handle message the Ui and responses from the HelpBot.
  */
 public class Ui {
 	// Name of the HelpBot.
 	private final String name;
+	// List of tasks to be completed.
 	private final TaskList taskList;
 
-	// Name placeholder
+	// Field placeholders.
 	private static final String NAME_PLACEHOLDER = "%name%";
+	private static final String TASKNUM_PLACEHOLDER = "%tasks%";
 
 	// Reply header/footer.
 	private static final String REPLY_HEADER = "===================To Your Royal Highness===================";
@@ -20,10 +22,10 @@ public class Ui {
 	// Line separator.
 	private static final String NEW_LINE = System.lineSeparator();
 
-	// Command echo prefix.
+	// Command help prefix.
 	private static final String CMD_PREFIX = "  > ";
 
-	// Command descriptions.
+	// Command usage descriptions.
 	private static final String HELP_LIST = "view all your tasks";
 	private static final String HELP_TODO = "add a simple todo task";
 	private static final String HELP_DEADLINE = "add a task to be done by specified date/time";
@@ -33,7 +35,9 @@ public class Ui {
 	private static final String HELP_EXIT = "(please for the love of God) let me rest! :)";
 
 	// Message sent to user when bot starts.
-	private static final String ENABLE = "Oh great, you again... Name's"
+	private static final String ENABLE = "Beep... You've reached the voicemail of HelpBot inc."
+			+ "Please speak after the dial tone."
+			+ NEW_LINE + "Still here? Sigh... thought that would work. My name is"
 			+ NEW_LINE + NAME_PLACEHOLDER
 			+ NEW_LINE + "Here is the myriad of ways you can inconvenience me:"
 			+ NEW_LINE + CMD_PREFIX + "'list' - " + HELP_LIST
@@ -61,7 +65,17 @@ public class Ui {
 	// Message sent to user when user deletes unfinished task.
 	private static final String DELETE_UNDONE = "Oh, procrastinating now are we? Sure, removed this:";
 	// Message sent to user when user exits HelpBot.
-	private static final String EXIT = "Good riddance...";
+	private static final String EXIT = "Good riddance.";
+	// Message sent to user when user marks an undone task as done.
+	private static final String DONE_UNCOMPLETED =
+			"About time you did your work, you lazy bum! I GUESS I'll mark it as done for you:";
+	// Message sent to user when user marks a completed task as done.
+	private static final String DONE_COMPLETED =
+			"You've already done this idiot! I'm watching Twitch, stop bothering me!";
+	// Message sent to user to tell user how many tasks are left in the TaskList.
+	private static final String REMAINING = "You now have " + TASKNUM_PLACEHOLDER + " tasks to do.";
+	// Message sent to user when user updates a task's timing.
+	private static final String UPDATE = "Dude, make up your mind! I'll update it, but just this once, okay?";
 
 	/**
 	 * Constructor for a Ui instance.
@@ -69,7 +83,7 @@ public class Ui {
 	 * @param name Name of the HelpBot.
 	 */
 	public Ui(String name, TaskList taskList) {
-		this.name = name;
+		this.name = name.replace("\n", NEW_LINE);
 		this.taskList = taskList;
 	}
 
@@ -91,29 +105,53 @@ public class Ui {
 	 * Sends user a list of all tasks.
 	 */
 	public void list() {
-		sendMessage(this.taskList.toString());
+		sendMessage(this.taskList.toString().replace("\n", NEW_LINE));
 	}
 
+	/**
+	 * Sends user a message telling them task is already done.
+	 *
+	 * @param task Task that has already been done.
+	 */
 	public static void alreadyDone(Task task) {
-		sendMessage("You've already done this task, stop bothering me!"
+		sendMessage(DONE_COMPLETED
 				+ NEW_LINE + task);
 	}
 
+	/**
+	 * Sends user a message telling them a task has been marked as done.
+	 *
+	 * @param task Task that has been marked as done.
+	 */
 	public static void done(Task task) {
-		sendMessage("About time you did your work, you lazy bum! I GUESS I'll mark it as done for you:"
+		sendMessage(DONE_UNCOMPLETED
 				+ NEW_LINE + task);
 	}
 
+	/**
+	 * Gets message containing information on number of tasks in the list.
+	 *
+	 * @return Message containing information on number of tasks in the list.
+	 */
 	private String remaining() {
-		return "You now have " + this.taskList.getRemaining() + " tasks to do.";
+		return REMAINING.replace(TASKNUM_PLACEHOLDER, this.taskList.getRemaining() + "");
 	}
 
+	/**
+	 * Sends user a message telling them a task has been updated.
+	 *
+	 * @param task Task that has been updated.
+	 */
 	public void update(Task task) {
-		String reply = "Dude, make up your mind! I'll update it, but just this once, okay?";
-		reply += NEW_LINE + task;
-		sendMessage(reply);
+		sendMessage(UPDATE + NEW_LINE + task);
 	}
 
+	/**
+	 * Sends user a message telling them a task has been deleted.
+	 *
+	 * @param task Task that has been deleted.
+	 * @param done Whether deleted task has been done.
+	 */
 	public void delete(Task task, boolean done) {
 		String reply;
 		if (done) {
@@ -133,6 +171,11 @@ public class Ui {
 		sendMessage(EXIT);
 	}
 
+	/**
+	 * Sends user error message.
+	 *
+	 * @param e Error to be included in the message.
+	 */
 	public void error(Exception e) {
 		sendMessage(e.toString());
 	}
