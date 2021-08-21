@@ -9,12 +9,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 /**
- * The Storage class deals with loading tasks from the file and saving tasks in the file.
+ * A storage to save and load tasks from the tasklist.
+ *
+ * @author Liaw Xin Yan
  */
 public class Storage {
     private final String dirPath;
@@ -22,18 +25,21 @@ public class Storage {
     private File file;
 
     public Storage(String dirPath, String fileName) {
-        // suppose we init Storage on first setup of Aisu and ask for the filepath to save the list in. and ask for the filename to save it as.
-        // but we will hardcode the file name and location first. eg. "data/tasklist.txt"
         this.dirPath = dirPath;
         this.fileName = fileName;
         this.createFile();
     }
 
+    /**
+     * Creates a file to store tasklist.
+     *
+     * @return A boolean to represent whether the file was successfully created.
+     */
     private boolean createFile() {
         System.out.println("Checking for old directories...");
         System.out.println(new File(this.dirPath).mkdirs() ? "New directory created." : "Directory already exists.");
         // if directory does not exist, create it.
-        // using .exists() to check is not a good solution! just use .mkdirs() directly,
+        // using .exists() to check is not a good solution! Use .mkdirs() directly,
         // it will not throw an error if it does exist and will not overwrite an existing directory.
 
         try {
@@ -47,8 +53,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasklist from existing file.
+     *
+     * @return Loaded tasklist.
+     * @throws AisuException If file doesn't exist at filepath.
+     */
     public List<Task> load() throws AisuException {
-        // loads list from file in format
         List<Task> result = new ArrayList<>();
         try {
             Scanner s = new Scanner(this.file);
@@ -79,7 +90,12 @@ public class Storage {
         }
     }
 
-    public void save(TaskList currList) {
+    /**
+     * Saves the tasklist to the storage at the filepath.
+     *
+     * @param currList The current tasklist to be saved.
+     */
+    public void save(TaskList currList) throws AisuException {
         // save list to file in format with ';;' as dividers and on a new line for each entry. Rewrites the entire file.
         List<Task> list = currList.getListData();
         try {
@@ -94,7 +110,7 @@ public class Storage {
             if (this.createFile()) {
                 this.save(currList);
             } else {
-                System.out.println("There is something wrong with the system.");
+                throw new AisuException("There is something wrong with the system.");
             }
         }
     }

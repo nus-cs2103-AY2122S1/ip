@@ -1,4 +1,5 @@
 package aisu;
+
 import aisu.task.Deadline;
 import aisu.task.Event;
 import aisu.task.Task;
@@ -8,8 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is the TaskList class.
- * It stores Tasks as a list.
+ * A TaskList class that stores Tasks as a list.
+ *
+ * @author Liaw Xin Yan
  */
 public class TaskList {
     private final List<Task> list;
@@ -26,7 +28,6 @@ public class TaskList {
     }
 
     public List<Task> getListData() {
-        // May not be good OOP practice.
         return this.list;
     }
 
@@ -34,6 +35,12 @@ public class TaskList {
         return this.list.size();
     }
 
+    /**
+     * Checks if a number is within range of the tasklist size.
+     *
+     * @param n Integer to be checked.
+     * @throws AisuException If out of range.
+     */
     private void checkError(int n) throws AisuException {
         if (n <= 0 || n > this.list.size()) {
             throw new AisuException("That is an invalid task number!");
@@ -45,6 +52,14 @@ public class TaskList {
         return this.list.get(n - 1);
     }
 
+    /**
+     * Adds a given task to the tasklist.
+     *
+     * @param line Information of the task to be added.
+     * @param type Type of task.
+     * @return The task that is added.
+     * @throws AisuException If task formatting is invalid.
+     */
     public Task addTask(String line, TaskTypes type) throws AisuException { // adds new task to taskList
         Task newTask = new Todo("dummy");
         switch(type) {
