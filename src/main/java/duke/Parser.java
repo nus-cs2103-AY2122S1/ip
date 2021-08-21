@@ -115,20 +115,30 @@ public class Parser {
             throw new DukeException(Ui.exceptionMissingDescriptor(descriptor, command));
         }
 
+        // Events and duke.task.Deadline could have empty tasks but taken as they do due to their descriptors and time.
+        // Need to run another check on whether their task descriptions are empty.
+        if (separatorIdx == 0) {
+            throw new DukeException(Ui.exceptionMissingTaskDescription(command.getCommand()));
+        }
+
+        // Check whether the front of separatorIdx is an empty space.
+        if (userDescription.charAt(separatorIdx - 1) != ' ') {
+            throw new DukeException(Ui.exceptionMissingSpaceBeforeDescriptor(descriptor));
+        }
+
         // Index of first character following space after descriptor.
         int indexAfterDescriptorSpace = separatorIdx + descriptor.getLength() + 2;
+
+        // Check whether the back of descriptor is followed by a space.
+        if (userDescription.charAt(indexAfterDescriptorSpace - 1) != ' ') {
+            throw new DukeException(Ui.exceptionMissingSpaceAfterDescriptor(descriptor));
+        }
 
         // User's time input.
         String time = userDescription.substring(indexAfterDescriptorSpace);
 
         // User's task description. Decrement by 1 as there is a space between task description and separator
         String commandDescription = userDescription.substring(0, separatorIdx - 1);
-
-        // Events and duke.task.Deadline could have empty tasks but taken as they do due to their descriptors and time.
-        // Need to run another check on whether their task descriptions are empty.
-        if (commandDescription.equals("")) {
-            throw new DukeException(Ui.exceptionMissingTaskDescription(command.getCommand()));
-        }
 
         // Returns a String array with the task description and user input after descriptor.
         return new String[] {commandDescription, time};

@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.TaskList;
 import duke.Parser;
-import duke.Storage;
+import duke.Storable;
 import duke.Ui;
 import duke.Ui.Commands;
 
@@ -60,7 +60,7 @@ public class DateCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storable storage) {
         try {
             // Print tasks that fall on user specified date.
             this.printTaskAtDate(tasks, ui);

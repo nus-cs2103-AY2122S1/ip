@@ -32,4 +32,14 @@ public class Event extends Task {
         }
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event) {
+            Event other = (Event) obj;
+            return (this.isDone == other.getIsDone() &&
+                    this.description.equals(other.getDescription()) &&
+                    this.at.equals(other.getTime()));
+        }
+        return false;
+    }
 }

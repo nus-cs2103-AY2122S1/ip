@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.TaskList;
 import duke.Parser;
-import duke.Storage;
+import duke.Storable;
 import duke.Ui;
 import duke.Ui.Commands;
 
@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storable storage) {
         try {
             // Deletes task at user specified index.
             this.deleteTask(tasks, ui);

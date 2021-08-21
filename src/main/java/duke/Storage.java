@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Deals with loading tasks from save file and saving tasks in the file.
  */
-public class Storage {
+public class Storage implements Storable {
 
     // File name for saved tasks.
     private final String SAVE_FILENAME;
@@ -110,7 +110,7 @@ public class Storage {
         }
     }
 
-    public TaskList readTasksFromData(Ui ui) throws DukeException {
+    public TaskList readTasksFromData() throws DukeException {
         // Initialize an ArrayList for duke.task.Task objects.
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -124,7 +124,7 @@ public class Storage {
         try {
             // If save file does not exist, create save file;
             if (!isSaveFileExist) {
-                saveTasksToData(new TaskList(ui, tasks));
+                saveTasksToData(new TaskList(tasks));
             }
 
             // Read from save file.
@@ -140,7 +140,7 @@ public class Storage {
             throw new DukeException(Ui.exceptionCannotReadFile());
         }
 
-        return new TaskList(ui, tasks);
+        return new TaskList(tasks);
     }
 
     public void saveTasksToData(TaskList taskList) throws DukeException {

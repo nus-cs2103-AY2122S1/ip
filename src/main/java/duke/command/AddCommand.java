@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.TaskList;
 import duke.Parser;
-import duke.Storage;
+import duke.Storable;
 import duke.Ui;
 import duke.Ui.Commands;
 import duke.Ui.Descriptors;
@@ -21,6 +21,7 @@ public class AddCommand extends Command {
         this.userInput = userInput;
     }
 
+
     private void addTask(TaskList tasks, Ui ui, Character separator) throws DukeException {
         // Checks for command given in user input.
         String userCommand;
@@ -34,10 +35,25 @@ public class AddCommand extends Command {
             throw new DukeException(Ui.exceptionInvalidUserCommand());
         }
 
-        // Checks if user input contains a task description and obtain it if it exists.
-        if (this.userInput.length() <= userCommand.length() + 1) {
-            throw new DukeException(Ui.exceptionMissingTaskDescription(userCommand));
+        // Checks if user input contains a task description.
+        if (this.userInput.length() <= (userCommand.length() + 1)) {
+            // Check for case where there is a single non-space character right after command.
+            // User might have intended for this to be a description.
+            // Missing spaces error message is more appropriate in this case.
+            if (this.userInput.length() == (userCommand.length() + 1) &&
+                    this.userInput.charAt(userCommand.length() - 1) != ' ') {
+                throw new DukeException(Ui.exceptionMissingSpaceAfterCommand(userCommand));
+            } else {
+                throw new DukeException(Ui.exceptionMissingTaskDescription(userCommand));
+            }
         }
+
+        // Checks if user input contains a space after the command.
+        if (this.userInput.charAt(userCommand.length()) != ' ') {
+            throw new DukeException(Ui.exceptionMissingSpaceAfterCommand(userCommand));
+        }
+
+        // Extracts task description.
         String description = this.userInput.substring(userCommand.length() + 1);
 
         // Parses description and adds the corresponding task to tasks.
@@ -71,7 +87,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storable storage) {
         try {
             // Add task according to user specifications.
             this.addTask(tasks, ui, '/');

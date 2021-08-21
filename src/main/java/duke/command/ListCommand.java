@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Storage;
+import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
 
@@ -24,7 +24,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storable storage) {
         // Prints tasks in tasks.
         this.printTasks(tasks, ui);
 

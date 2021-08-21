@@ -132,13 +132,25 @@ public class Ui {
         return "Stored date is corrupt and cannot be read.";
     }
 
-    public static String exceptionInvalidNumberInput(Ui.Commands command) {
+    public static String exceptionInvalidNumberInput(Commands command) {
         return "Index for " + command.getCommand() + " must be an integer.";
     }
 
-    public static String exceptionMissingDescriptor(Ui.Descriptors descriptor, Ui.Commands command) {
+    public static String exceptionMissingDescriptor(Descriptors descriptor, Commands command) {
         return "/" + descriptor.getDescriptor() +
                 " must be provided and not empty for " + command.getCommand() + ".";
+    }
+
+    public static String exceptionMissingSpaceAfterCommand(String userCommand) {
+        return "There is a missing space after " + userCommand;
+    }
+
+    public static String exceptionMissingSpaceBeforeDescriptor(Descriptors descriptor) {
+        return "There is a missing space before the descriptor " + descriptor.getDescriptor();
+    }
+
+    public static String exceptionMissingSpaceAfterDescriptor(Descriptors descriptor) {
+        return "There is a missing space after the descriptor " + descriptor.getDescriptor();
     }
 
     public static String exceptionCorruptSaveFile() {

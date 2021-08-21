@@ -1,11 +1,15 @@
 package duke;
 
 public class DukeException extends Exception {
-    private String errorMessage;
+    private final String errorMessage;
 
     public DukeException(String errorMessage) {
         super(errorMessage);
         this.errorMessage = errorMessage;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
     @Override

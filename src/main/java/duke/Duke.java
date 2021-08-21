@@ -21,12 +21,12 @@ public class Duke {
 
         // Read tasks from save file.
         try {
-            tasks = storage.readTasksFromData(ui);
+            tasks = storage.readTasksFromData();
         } catch (DukeException dukeException) {
             System.out.println(dukeException);
 
             // If failed to read tasks from save, initialize a new duke.task.Task ArrayList.
-            tasks = new TaskList(ui);
+            tasks = new TaskList();
         }
     }
 

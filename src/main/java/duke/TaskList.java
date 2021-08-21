@@ -10,16 +10,13 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
-    private Ui ui;
 
-    public TaskList(Ui ui) {
+    public TaskList() {
         this.tasks = new ArrayList<>();
-        this.ui = ui;
     }
 
-    public TaskList(Ui ui, ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
-        this.ui = ui;
     }
 
     public int size() {
@@ -39,6 +36,10 @@ public class TaskList {
         Task tempTask = this.tasks.get(idx);
         this.tasks.remove(idx);
         return tempTask;
+    }
+
+    public boolean equals(TaskList other) {
+        return this.tasks.equals(other.getTasks());
     }
 
     public ArrayList<Task> getTasks() {

@@ -31,4 +31,15 @@ public class Deadline extends Task {
             return dukeException.toString();
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
+            Deadline other = (Deadline) obj;
+            return (this.isDone == other.getIsDone() &&
+                    this.description.equals(other.getDescription()) &&
+                    this.by.equals(other.getTime()));
+        }
+        return false;
+    }
 }
