@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
@@ -12,26 +11,25 @@ public class Duke {
     public static void main(String[] args) {
         greet();
         loadStorage();
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                String input = scanner.nextLine();
+                String input = Ui.nextLine();
                 if (input.equals("bye")) {
-                    print("Bye. Hope to see you again soon!");
+                    Ui.show("Bye. Hope to see you again soon!");
                     storage.close();
                     return;
                 } else {
-                    print(parse(input));
+                    Ui.show(parse(input));
                 }
                 storage.write(input);
             } catch (Exception e) {
-                print(e.getMessage());
+                Ui.show(e.getMessage());
             }
         }
     }
 
     static void greet() {
-        print("Hello! I'm Duke", "What can I do for you?");
+        Ui.show("Hello! I'm Duke", "What can I do for you?");
     }
 
     static void loadStorage() {
@@ -111,21 +109,6 @@ public class Duke {
 
     static String getTasksLeftMsg() {
         return String.format("Now you have %d %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
-    }
-
-    static void print(String... lines) {
-        printSeparator();
-        for (String line : lines)
-            println(line);
-        printSeparator();
-    }
-
-    static void printSeparator() {
-        System.out.println("\t____________________________________");
-    }
-
-    static void println(String out) {
-        System.out.println("\t " + out);
     }
 
 }
