@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -6,21 +10,34 @@ public class Duke {
         LIST, DONE, TODO, DEADLINE, EVENT, DELETE
     }
 
+    private static final String FILE_PATH = "data/duke.txt";
     private static final String LINE_SEPARATOR = "\t____________________________________________________________\n";
     private static final ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String input;
-        Duke.start();
+
+        try {
+            start();
+        } catch (DukeException e) {
+            print(e.getMessage());
+        }
+
         while (!(input = scanner.nextLine().trim()).equals("bye")) {
             try {
                 handleUserInput(input);
             } catch (DukeException e) {
-                Duke.print(e.getMessage());
+                print(e.getMessage());
             }
         }
-        Duke.exit();
+
+        try {
+            exit();
+        } catch (DukeException e) {
+            print(e.getMessage());
+        }
+
         scanner.close();
     }
 
@@ -42,24 +59,24 @@ public class Duke {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
 
-        switch(command) {
+        switch (command) {
         case LIST:
-            Duke.printTaskList();
+            printTaskList();
             break;
         case DONE:
-            Duke.setTaskDone(userInput);
+            setTaskDone(userInput);
             break;
         case TODO:
-            Duke.addTodo(userInput);
+            addTodo(userInput);
             break;
         case DEADLINE:
-            Duke.addDeadline(userInput);
+            addDeadline(userInput);
             break;
         case EVENT:
-            Duke.addEvent(userInput);
+            addEvent(userInput);
             break;
         case DELETE:
-            Duke.deleteTask(userInput);
+            deleteTask(userInput);
             break;
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -67,17 +84,93 @@ public class Duke {
     }
 
     /**
-     * Message to be printed by Duke when Duke is first started.
+     * Loads task list from file path.
+     *
+     * @param filePath The file path where the list of tasks reside.
      */
-    private static void start() {
-        Duke.print("Hello! I'm Duke\nWhat can I do for you?");
+    private static void loadTasks(String filePath) throws FileNotFoundException, DukeException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String[] taskString = s.nextLine().trim().split(" \\| ");
+            Task task;
+            switch (taskString[0]) {
+            case "T":
+                task = new Todo(taskString[2]);
+                break;
+            case "D":
+                task = new Deadline(taskString[2], taskString[3]);
+                break;
+            case "E":
+                task = new Event(taskString[2], taskString[3]);
+                break;
+            default:
+                throw new DukeException("Invalid task type found!");
+            }
+            if (taskString[1].equals("1")) {
+                task.setDone();
+            }
+            taskList.add(task);
+        }
+        s.close();
     }
 
     /**
-     * Message to be printed by Duke upon exit.
+     * Saves task list to file path.
+     *
+     * @param filePath The target file path to save the tasks in.
      */
-    private static void exit() {
-        Duke.print("Bye. Hope to see you again soon!");
+    private static void saveTasks(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        StringBuilder fileData = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            fileData.append(task.toDataFormat());
+            if (i != taskList.size() - 1) {
+                fileData.append(System.lineSeparator());
+            }
+        }
+        fw.write(fileData.toString());
+        fw.close();
+    }
+
+    /**
+     * Creates file at the specified file path.
+     *
+     * @param filePath The file path where the file will be created.
+     */
+    private static void createFile(String filePath) throws IOException {
+        File f = new File(filePath);
+        f.getParentFile().mkdirs();
+        f.createNewFile();
+    }
+
+    /**
+     * Initialises Duke and prints starting message when Duke is first started.
+     */
+    private static void start() throws DukeException {
+        try {
+            loadTasks(FILE_PATH);
+        } catch (FileNotFoundException e) {
+            try {
+                createFile(FILE_PATH);
+            } catch (IOException ei) {
+                throw new DukeException("Oh no! I could not load and create the task list!");
+            }
+        }
+        print("Hello! I'm Duke\nWhat can I do for you?");
+    }
+
+    /**
+     * Prints exit message upon exit.
+     */
+    private static void exit() throws DukeException {
+        try {
+            saveTasks(FILE_PATH);
+        } catch (IOException e) {
+            throw new DukeException("Oh no! I was not able to save your tasks.");
+        }
+        print("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -87,7 +180,7 @@ public class Duke {
      */
     private static void print(String message) {
         String indentedMessage = "\t " + message.replaceAll("\n", "\n\t ") + "\n";
-        System.out.println(Duke.LINE_SEPARATOR + indentedMessage + Duke.LINE_SEPARATOR);
+        System.out.println(LINE_SEPARATOR + indentedMessage + LINE_SEPARATOR);
     }
 
     /**
@@ -97,7 +190,7 @@ public class Duke {
      */
     public static void addTask(Task input) {
         taskList.add(input);
-        Duke.print(String.format("Got it. I've added this task:\n  %s\nNow you have %d %s in the list.",
+        print(String.format("Got it. I've added this task:\n  %s\nNow you have %d %s in the list.",
                 input, taskList.size(), taskList.size() == 1 ? "task" : "tasks"));
     }
 
@@ -108,7 +201,7 @@ public class Duke {
      */
     public static void addTodo(String[] userInput) throws DukeException {
         try {
-            Duke.addTask(new Todo(userInput[1]));
+            addTask(new Todo(userInput[1]));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Todo description cannot be empty");
         }
@@ -123,7 +216,7 @@ public class Duke {
         try {
             String deadlineDescription = userInput[1].split(" /by ")[0];
             String by = userInput[1].split(" /by ")[1];
-            Duke.addTask(new Deadline(deadlineDescription, by));
+            addTask(new Deadline(deadlineDescription, by));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Deadline description and time by cannot be empty");
         }
@@ -138,7 +231,7 @@ public class Duke {
         try {
             String eventDescription = userInput[1].split(" /at ")[0];
             String by = userInput[1].split(" /at ")[1];
-            Duke.addTask(new Event(eventDescription, by));
+            addTask(new Event(eventDescription, by));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Event description and time at cannot be empty");
         }
@@ -190,6 +283,6 @@ public class Duke {
                     : String.format("%d.%s\n", i + 1, taskList.get(i));
             tasksString.append(taskAsString);
         }
-        Duke.print(tasksString.toString());
+        print(tasksString.toString());
     }
 }

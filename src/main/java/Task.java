@@ -4,7 +4,7 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -13,14 +13,14 @@ public class Task {
      * @return X if done, empty otherwise.
      */
     public String getStatusIcon() {
-        return (this.isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done task with X
     }
 
     /**
      * Sets task to be done.
      */
     public void setDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -30,6 +30,15 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] " + description;
+    }
+
+    /**
+     * Returns the string representation which is use to store the tasks.
+     *
+     * @return string representation used for storing task.
+     */
+    public String toDataFormat() {
+        return String.format("  | %s | %s", isDone ? "1" : "0", description);
     }
 }
