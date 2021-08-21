@@ -1,6 +1,13 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
+import java.io.File;
 
 /**
  * The class for the Petal bot. It is able to respond to
@@ -10,13 +17,17 @@ import java.util.List;
 public class Petal {
 
     //The line used to display on the output
-    public static final String LINE = "---------------------------------------"
-                                      + "-------------------------------------"
-                                      + "-------------------------------------";
+    public static final String LINE = "ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ"
+                                      + "ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ"
+                                      + "ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ";
+
     //Boolean representing if the user has said bye
     private boolean bye;
     //List of user inputted tasks
     private final List<Task> tasks;
+    private final String folderPath = System.getProperty("user.dir") + "/PetalData";
+    private final String filePath = folderPath + "/Tasks.txt";
+    private boolean savedProperly;
 
     /**
      * Constructor for the Duke class
@@ -30,6 +41,7 @@ public class Petal {
      * Method to give the start message and to run the bot.
      */
     public void run() {
+        createDirectory(); //IOException already handled internally
         Scanner scanner = new Scanner(System.in);
         String logo = "Welcome to Petal (•◡•)/";
         String logo2 = "\nI am the best chat bot you'll meet! Don't be shy, say something! :P";
@@ -53,7 +65,7 @@ public class Petal {
             String formatted = message.substring(message.indexOf(' ') + 1).trim();
             switch (command) { //Checks first word in string
                 case "list":
-                    printList();
+                    printMessage(printList());
                     break;
                 case "bye":
                     goodBye();
@@ -99,7 +111,7 @@ public class Petal {
 
     /**
      * Method to handle the tasks, depending on the command given
-     * @param type The type of task: to.do, deadline, event
+     * @param type The type of task: To.Do, deadline, event
      * @param message The desc/time of the task
      * @throws EmptyDescException Thrown when the task lacks a description
      * @throws InvalidInputException Thrown when an invalid format is given or when a time is not given
@@ -130,14 +142,28 @@ public class Petal {
     }
 
     /**
+     * Overloaded method to add previously saved tasks to the list of tasks
+     * @param addTasks The arraylist of previously saved tasks
+     */
+    public void addTask(ArrayList<Task> addTasks) {
+        tasks.addAll(addTasks);
+        printMessage("Welcome back! It definitely is good to see you again :D");
+    }
+
+    /**
      * Method to add a task to list of tasks
      * @param task The task to be added
      */
     public void addTask(Task task) {
-        tasks.add(task);
-        String plural = (tasks.size() + 1) > 0 ? " tasks!" : " task!";
-        printMessage("Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size()
-                                                                                + plural);
+        try {
+            tasks.add(task);
+            String plural = (tasks.size() + 1) > 0 ? " tasks!" : " task!";
+            printMessage("Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size()
+                    + plural);
+            saveTasks();
+        } catch (IOException e) {
+            printMessage("Sorry, the tasks couldn't be saved :/");
+        }
     }
 
     /**
@@ -154,9 +180,72 @@ public class Petal {
             printMessage("Okay. I've deleted this task:\n"
                          + toBeDeleted
                          + "\nYou now have " + tasks.size() + " task(s)!");
+            saveTasks();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException("Invalid task number given! Please enter another value!", e);
+        } catch (IOException e) {
+            printMessage("Sorry, the tasks couldn't be saved :/");
         }
+    }
+
+    public boolean retrieveTasks() {
+        try {
+            File tasks = new File(filePath);
+            Scanner scanner = new Scanner(tasks);
+            ArrayList<Task> toBeAdded = new ArrayList<>();
+            while (scanner.hasNextLine()) {
+                String taskLine = scanner.nextLine();
+                char Task = taskLine.charAt(4);
+                String taskDesc = taskLine.substring(10);
+                switch (Task) {
+                    case 'T':
+                        ToDo todo = new ToDo(taskDesc);
+                        toBeAdded.add(todo);
+                        break;
+                    case 'D':
+                        String[] split = taskDesc.split("by");
+                        Deadline deadline = new Deadline(split[0], split[1]);
+                        toBeAdded.add(deadline);
+                        break;
+                    case 'E':
+                        String[] splitEvent = taskDesc.split("at");
+                        Event event = new Event(splitEvent[0], splitEvent[1]);
+                        toBeAdded.add(event);
+                        break;
+                }
+            }
+            addTask(toBeAdded);
+        } catch (FileNotFoundException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public void createDirectory() {
+        try {
+            if (retrieveTasks()) {
+                savedProperly = true;
+                return;
+            }
+            Path path = Paths.get(folderPath);
+            Files.createDirectories(path);
+            File petalData = new File(filePath);
+            petalData.createNewFile();
+            savedProperly = true;
+        } catch (IOException e) {
+            savedProperly = false;
+            printMessage("Something when wrong whilst creating/accessing these files :/\n"
+                          + "As such, the saving/retrieval of tasks will be turned off. Sorry!");
+        }
+    }
+
+    public void saveTasks() throws IOException {
+        if (!savedProperly) {
+            return;
+        }
+        FileWriter fileWriter = new FileWriter(filePath);
+        fileWriter.write(printList());
+        fileWriter.close();
     }
 
     /**
@@ -168,18 +257,20 @@ public class Petal {
     }
 
     /**
-     * Method to print the list
-     * @throws InvalidInputException Thrown when the list is empty
+     * Method that returns the string representations of the tasks
+     * @return String containing the number, type, and description of tasks
      */
-    public void printList() throws InvalidInputException {
+    public String printList() {
         if (tasks.size() == 0)
-            throw new InvalidInputException("No items in list yet!");
+            return "No items in list yet!";
         int count = 1;
-        StringBuilder list = new StringBuilder("Here you are :D");
+        StringBuilder list = new StringBuilder("");
         for (Task m : tasks) {
-            list.append("\n").append(count++).append(". ").append(m);
+            //I do this check to ensure there isn't a newline at the top
+            list = count == 1 ? list.append(count++).append(". ").append(m)
+                              : list.append("\n").append(count++).append(". ").append(m);
         }
-        printMessage(list.toString());
+        return list.toString();
     }
 
     /**
@@ -205,7 +296,7 @@ public class Petal {
         System.out.println(LINE + "\n" + message + "\n" + LINE);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Petal petal = new Petal();
         petal.run();
     }
