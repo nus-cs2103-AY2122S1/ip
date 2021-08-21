@@ -10,10 +10,13 @@ import Exceptions.InvalidTaskNumberException;
 import Exceptions.UnknownCommandException;
 
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
 
@@ -109,10 +112,45 @@ public class Duke {
         printOut(message);
     }
 
+    private static List<Task> createData() {
+        File directory = new File("./data");
+        File data = new File("./data/duke.txt");
+        List<Task> tasks= new ArrayList<>();
+
+        try {
+            data.createNewFile();
+            Scanner reader = new Scanner(data);
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+                String[] info = line.split(" \\| ");
+                String command = info[0];
+                Task task = null;
+                boolean done = info[1].equals("1");
+                if (command.equals("T")) {
+                    task = new Todo(info[2]);
+                } else if (command.equals("D")) {
+                    task = new Deadline(info[2], info[3]);
+                } else if (command.equals("E")) {
+                    task = new Event(info[2], info[3]);
+                }
+                if (task != null) {
+                    if (done) {
+                        task.markDone();
+                    }
+                    tasks.add(task);
+                }
+            }
+            return tasks;
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return tasks;
+        }
+    }
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
+        List<Task> tasks = createData();
 
         printOut(WELCOME_MESSAGE);
         String input = scanner.nextLine();
