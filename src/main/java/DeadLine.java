@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  *  This class represents a Deadline.
  *  A Deadline: tasks that need to be done before a specific date/time.
@@ -7,10 +11,19 @@
 public class DeadLine extends Task {
 
     private String by;
+    private LocalDate date;
 
     public DeadLine(String description, TYPE type, String by) {
         super(description, type);
-        this.by = by;
+        try {
+            LocalDate d1 = LocalDate.parse(by);
+            this.date = d1;
+            this.by = d1.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            System.out.println(this.by);
+        } catch (DateTimeParseException dateTimeParseException) {
+            this.by = by;
+            System.out.println(dateTimeParseException.getMessage());
+        }
     }
 
     @Override
