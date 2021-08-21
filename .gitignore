@@ -13,5 +13,9 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Misc files
+/*.class
+
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+./duke.txt
