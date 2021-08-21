@@ -2,10 +2,11 @@
  * The Duke chatbot app
  */
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
-import java.io.File;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 public class Duke {
     /**
@@ -23,6 +24,7 @@ public class Duke {
 
     private static final String DATA_DIRECTORY = "./data";
     private static final String DATA_FILE = "duke.txt";
+    private static final String DATA_FILE_DIRECTORY = DATA_DIRECTORY + "/" + DATA_FILE;
 
     /**
      * The main function of Borat
@@ -42,9 +44,9 @@ public class Duke {
         /**
          * Read from saved file.
          */
-        File data = readSaved(list);
-        if (data == null) {
-            System.out.println("File is null");
+        List<String> fileContent = readSaved(list);
+        if (fileContent == null) {
+            System.out.println("File read error");
             return;
         }
 
@@ -66,6 +68,7 @@ public class Duke {
             try {
                 String[] input = parseInput(rawInput);
                 String command = input[0];
+                String task = "";
 
                 switch (command) {
                     case "bye":
@@ -77,32 +80,55 @@ public class Duke {
 
                         break;
                     case "done":
+                        int idx = Integer.parseInt(input[1]);
                         // Marks a task as done.
-                        output = list.markDone(Integer.parseInt(input[1]));
+                        output = list.markDone(idx);
+                        // Edit the file content.
+                        task = fileContent.get(idx - 1);
+                        task = task.substring(0, 4) + "1" + task.substring(5);
+                        fileContent.set(idx - 1, task);
 
                         break;
                     case "todo":
                         // Add a todo task in the list.
                         output = list.addItem(new Todo(input[1]));
+                        // Add to file content.
+                        task = "T | 0 | " + input[1];
+                        fileContent.add(task);
 
                         break;
                     case "deadline":
                         // Add a deadline task in the list.
                         output = list.addItem(new Deadline(input[1], input[2]));
+                        // Add to file content.
+                        task = "D | 0 | " + input[1] + " | " + input[2];
+                        fileContent.add(task);
 
                         break;
                     case "event":
                         // Add an event task in the list.
                         output = list.addItem(new Event(input[1], input[2]));
+                        // Add to file content.
+                        task = "E | 0 | " + input[1] + " | " + input[2];
+                        fileContent.add(task);
 
                         break;
                     case "delete":
+                        int id = Integer.parseInt(input[1]);
                         // Delete an event from the list.
-                        output = list.removeItem(Integer.parseInt(input[1]));
+                        output = list.removeItem(id);
+                        // Remove from file content.
+                        fileContent.remove(id-1);
+
+                        break;
                 }
+                Files.write(Paths.get(DATA_FILE_DIRECTORY), fileContent, StandardCharsets.UTF_8);
                 showMessage(output);
             } catch (DukeException e) {
                 showMessage(e.getMessage());
+            } catch (Exception e) {
+                showMessage(e.getMessage());
+                return;
             }
 
             rawInput = getInput(sc);
@@ -114,7 +140,14 @@ public class Duke {
         showMessage("Bye. Have a good time!");
     }
 
-    private static File readSaved(Items list) {
+
+    /**
+     * Read the data from a file and save it to the given list.
+     * @param list The list of tasks
+     * @return Each line of the file in a list.
+     */
+    private static List<String> readSaved(Items list) {
+        // Make directory and/or file if they don't exist
         File dataDir = new File(DATA_DIRECTORY);
         dataDir.mkdirs();
         File dataFile = new File(DATA_DIRECTORY + "/" + DATA_FILE);
@@ -124,10 +157,13 @@ public class Duke {
             System.out.println("Failed to create a new file");
             return null;
         }
+
+        List<String> fileContent = new ArrayList<>();
         try {
             Scanner fileReader = new Scanner(dataFile);
             while (fileReader.hasNextLine()) {
                 String rawData = fileReader.nextLine();
+                fileContent.add(rawData);
                 String[] data = rawData.split(" \\| ");
                 String taskType = data[0];
                 boolean isDone = data[1].equals("1");
@@ -155,13 +191,12 @@ public class Duke {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Failed to read the file");
+            showMessage("No Saved data found");
             return null;
-        } catch (Exception e) {
-            System.out.println("Failed to read saved data");
-            return null;
+        } catch (DukeException e) {
+            showMessage("Loading Saved Data Fault: " + e.getMessage());
         }
-        return dataFile;
+        return fileContent;
     }
 
     /**
