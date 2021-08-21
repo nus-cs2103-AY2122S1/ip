@@ -56,6 +56,10 @@ public class Task {
         }
     }
 
+    public boolean isDone() {
+        return state == TaskState.DONE;
+    }
+
     public void finish() {
         state = TaskState.DONE;
     }
