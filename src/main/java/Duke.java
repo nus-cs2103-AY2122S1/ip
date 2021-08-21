@@ -12,7 +12,7 @@ public class Duke {
     private Scanner sc;
     /** Stores all the task. */
     private TaskList taskList;
-    /** Get the ui to interact with the user */
+    /** Get the ui to interact with the user. */
     private Ui ui;
     /** deals with loading and saving tasks. */
     private Storage storage;
@@ -33,36 +33,16 @@ public class Duke {
     private void chat() {
         ui.greetMessage();
         String message;
-        Keyword keyword;
+        Command command;
         boolean isRunning = true;
         while (isRunning) {
             message = sc.nextLine().strip();
             try {
-                keyword = Parser.parseChat(message);
-
-                switch (keyword) {
-                case EXIT:
+                command = Parser.parseChat(message);
+                if (command == null)
                     isRunning = false;
-                    break;
-                case LIST:
-                    ui.listTask(taskList.getTaskList());
-                    break;
-                case DONE:
-                    taskList.markDone(message);
-                    break;
-                case DEADLINE:
-                    taskList.addDeadline(message);
-                    break;
-                case EVENTS:
-                    taskList.addEvent(message);
-                    break;
-                case TODOS:
-                    taskList.addTodo(message);
-                    break;
-                case DELETE:
-                    taskList.deleteTask(message);
-                    break;
-                }
+                else
+                    command.execute(taskList, ui);
             } catch (DukeException e) {
                 ui.chatErrorMessage();
             }

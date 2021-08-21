@@ -45,7 +45,7 @@ public class TaskList {
      * @param s Description of the task.
      * @param dateTime Date and time of the event.
      */
-    private void addEvent(String s, String dateTime) {
+    public void addEvent(String s, String dateTime) {
         try {
             addTask(new Events(s, dateTime));
             saveTaskList();
@@ -55,45 +55,17 @@ public class TaskList {
     }
 
     /**
-     * Parses the message and invoke another private function to add event.
-     *
-     * @param message Message sent by the user.
-     */
-    public void addEvent(String message) {
-        try {
-            String[] details = message.split(Keyword.EVENTS.getSeparator());
-            addEvent(details[0].substring(Keyword.EVENTS.length() + 1), details[1]);
-        } catch (IndexOutOfBoundsException e) {
-            ui.eventErrorMessage();
-        }
-    }
-
-    /**
      * Adds a new deadline to the task list.
      *
      * @param s Description of the task.
      * @param dateTime Deadline of the task.
      */
-    private void addDeadline(String s, String dateTime) {
+    public void addDeadline(String s, String dateTime) {
         try {
             addTask(new Deadlines(s, dateTime));
             saveTaskList();
         } catch (ParseException e) {
             ui.dateTimeErrorMessage();
-        }
-    }
-
-    /**
-     * Parses the message and invoke another private function to add deadline.
-     *
-     * @param message Message sent by the user.
-     */
-    public void addDeadline(String message) {
-        try {
-            String[] details = message.split(Keyword.DEADLINE.getSeparator());
-            addDeadline(details[0].substring(Keyword.DEADLINE.length() + 1), details[1]);
-        } catch (IndexOutOfBoundsException e) {
-            ui.deadlineErrorMessage();
         }
     }
 
@@ -116,7 +88,7 @@ public class TaskList {
      *
      * @param n the task to be mark as done.
      */
-    private void markDone(int n) {
+    public void markDone(int n) {
         Task task = taskList.get(n - 1);
         boolean success = task.markDone();
         if (success) {
@@ -126,45 +98,16 @@ public class TaskList {
             ui.doneFailedMessage(task);
     }
 
-    /**
-     * Parses the message and invoke another private function to mark event as done.
-     *
-     * @param message Message sent by the user.
-     */
-    public void markDone(String message) {
-        try {
-            markDone(Integer.parseInt(message.substring(Keyword.DONE.length() + 1)));
-        } catch (NumberFormatException e) {
-            ui.doneErrorMessage();
-        } catch (IndexOutOfBoundsException e) {
-            ui.doneIndexErrorMessage();
-        }
-    }
 
     /**
      * Delete the nth task from the task list.
      *
      * @param n the task to be deleted.
      */
-    private void deleteTask(int n) {
+    public void deleteTask(int n) {
         Task task = taskList.remove(n - 1);
         saveTaskList();
         ui.deleteMessage(task, taskList.size());
-    }
-
-    /**
-     * Parses the message and invoke another private function to delete event.
-     *
-     * @param message Message sent by the user.
-     */
-    public void deleteTask(String message) {
-        try {
-            deleteTask(Integer.parseInt(message.substring(Keyword.DELETE.length() + 1)));
-        } catch (NumberFormatException e) {
-            ui.deleteErrorMessage();
-        } catch (IndexOutOfBoundsException e) {
-            ui.deleteIndexErrorMessage();
-        }
     }
 
     /**
@@ -175,7 +118,7 @@ public class TaskList {
     }
 
     /**
-     * Return the list of task
+     * Return the list of task.
      */
     public List<Task> getTaskList() {
         return taskList;

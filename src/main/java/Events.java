@@ -38,7 +38,8 @@ public class Events extends Task {
      * @return string to save the txt file.
      */
     public String saveOutput() {
-        return String.format("D | %s | %s | %s", super.getTask(), super.getIsDone() ? 1 : 0, getDateTime());
+        return String.format("D | %s | %s | %s", super.getTask(),
+                super.getIsDone() ? 1 : 0, getDateTime());
     }
 
     @Override

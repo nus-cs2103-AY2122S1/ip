@@ -19,7 +19,7 @@ import java.util.List;
 public class Storage {
     /** File name for the storage. */
     private final String LOCATION = "./data/duke.txt";
-    /** To deals with the errorMessages */
+    /** To deals with the errorMessages. */
     private Ui ui;
 
     /**

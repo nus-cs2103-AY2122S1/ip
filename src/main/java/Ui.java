@@ -14,21 +14,13 @@ public class Ui {
     /**
      * List out all the task stored by the user.
      *
-     * @param taskList To list out all the task.
+     * @param taskArray To list out all the task.
      */
-    public void listTask(List<Task> taskList) {
-
-        if (taskList.size() == 0) {
+    public void listTask(String[] taskArray) {
+        if (taskArray.length == 0)
             printMessage("You have no task.");
-            return;
-        }
-
-        String[] task = IntStream.range(0, taskList.size())
-                .mapToObj(x -> (x + 1) + ". " + taskList.get(x).toString())
-                .collect(Collectors.toList())
-                .toArray(new String[0]);
-
-        printMessage(task);
+        else
+            printMessage(taskArray);
     }
 
     /**

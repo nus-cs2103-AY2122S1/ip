@@ -37,7 +37,8 @@ public class Deadlines extends Task {
      * @return string to save the txt file.
      */
     public String saveOutput() {
-        return String.format("D | %s | %s | %s", super.getTask(), super.getIsDone() ? 1 : 0, super.getDateTime());
+        return String.format("D | %s | %s | %s", super.getTask(),
+                super.getIsDone() ? 1 : 0, super.getDateTime());
     }
 
     @Override
