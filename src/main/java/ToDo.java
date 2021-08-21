@@ -4,7 +4,17 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public static ToDo create(String formattedString) {
+    private static void checkFormat(String formattedString) throws DukeException {
+        String keyword = formattedString.split(" ", 1)[0];
+
+        if (!keyword.startsWith("todo"))
+            throw new DukeException("I can't seem to find the todo keyword");
+        else if (formattedString.length() <= 5 || formattedString.substring(5).isEmpty())
+            throw new DukeException("the description of todo cannot be empty");
+    }
+
+    public static ToDo create(String formattedString) throws DukeException {
+        checkFormat(formattedString);
         return new ToDo(formattedString.substring(5));
     }
 
