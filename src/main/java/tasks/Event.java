@@ -17,6 +17,14 @@ public class Event extends Task{
     }
 
     /**
+     * Returns this Event's timing.
+     * @return A string showing what the timing of this Event is.
+     */
+    public String getTiming() {
+        return this.timing;
+    }
+
+    /**
      * Returns this task's status and description.
      * @return A string showing what the task is, its description and its timing.
      */
