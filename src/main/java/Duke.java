@@ -1,15 +1,12 @@
-import action.DukeAction;
-import entity.list.DukeTaskList;
-import entity.message.ExitMessage;
-import entity.message.GreetMessage;
-import entity.message.Message;
+import command.Command;
+import tasklist.TaskList;
+import parser.Parser;
+import ui.Ui;
+import ui.message.Message;
 
-import entity.data.Data;
-import entity.data.DukeFile;
+import storage.Storage;
+import storage.StorageFile;
 import exception.DukeException;
-
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Encapsulates a chatbot that greets the user,
@@ -18,48 +15,56 @@ import java.util.Scanner;
  * and exits when the user types `bye`.
  */
 public class Duke {
-    public static void main(String[] args) {
+    private StorageFile storageFile;
+    private TaskList list;
+    private Ui ui;
+    private Parser parser;
+
+    public Duke() {
         // Load data
-        DukeFile listFile = Data.loadListFile();
-        if (listFile == null) {
-            return;
-        }
+        StorageFile storageFile = Storage.loadListFile();
+        this.storageFile = storageFile;
 
         // Scan data to a list
-        DukeTaskList list = Data.scanListFileDataToList(listFile);
-        if (list == null) {
+        TaskList list = Storage.scanListFileDataToList(storageFile);
+        this.list = list;
+
+        this.ui = new Ui();
+        this.parser = new Parser();
+    }
+
+    private void run() {
+        // Check config
+        if (this.storageFile == null || this.list == null) {
             return;
         }
 
         // Greet
-        GreetMessage greetingMessage = new GreetMessage("Hello! I'm Duke, what shall we do today?");
-        greetingMessage.print();
+        this.ui.showWelcome();
 
-        // Process input
-        Scanner inputScanner = new Scanner(System.in);
-        String inputMessage = inputScanner.nextLine();
-        String exitCommand = "bye";
-
-        while (!inputMessage.trim().equals(exitCommand)) {
+        // Process user inputs
+        String inputMessage = this.ui.readInputMessage();
+        while (!this.parser.detectExitCommand(inputMessage)) {
             Message outputMessage;
 
             try {
-                DukeAction action = DukeAction.makeAction(inputMessage);
-                action.executeAction(list);
-                outputMessage = action.getOutputMessage();
+                Command command = this.parser.makeCommand(inputMessage);
+                command.execute(this.list);
+                outputMessage = command.getOutputMessage();
             } catch (DukeException e) {
                 outputMessage = e.getOutputMessage();
-            } catch (IOException e) {
-                outputMessage = new Message("There is a problem when changing data to the file");
             }
 
             // Print output message
-            outputMessage.print();
-            inputMessage = inputScanner.nextLine();
+            this.ui.showMessage(outputMessage);
+            inputMessage = this.ui.readInputMessage();
         }
 
         // Exit
-        ExitMessage exitMessage = new ExitMessage("Bye, see you again");
-        exitMessage.print();
+        ui.showGoodbye();
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }

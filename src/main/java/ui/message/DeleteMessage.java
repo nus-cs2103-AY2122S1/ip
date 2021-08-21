@@ -1,15 +1,15 @@
-package entity.message;
+package ui.message;
 
 /**
  * Encapsulates a deleted message used to inform a user that a message has been deleted from a list.
- * It inherits from `entity.message.DukeListChangedMessage`.
- * It overrides methods in `entity.message.DukeListChangedMessage` to format the message differently for deleting.
+ * It inherits from `ui.message.DukeListChangedMessage`.
+ * It overrides methods in `ui.message.DukeListChangedMessage` to format the message differently for deleting.
  */
 public class DeleteMessage extends ListChangeMessage {
     private static String DELETED_PREFIX = "Noted. I've removed this task:";
 
     /**
-     * Constructor to instantiate a `entity.message.DukeDeletedMessage`.
+     * Constructor to instantiate a `ui.message.DukeDeletedMessage`.
      *
      * @param message the string to be used in the deleted message.
      * @param itemsInList the number of items in the list after the change.

@@ -1,23 +1,23 @@
-package entity.data;
+package storage;
 
-import entity.list.DukeTaskList;
-import entity.message.Message;
+import tasklist.TaskList;
+import ui.message.Message;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Data {
+public class Storage {
     private final static String dataDirectoryPath = "./data";
 
-    public static DukeFile loadListFile() {
+    public static StorageFile loadListFile() {
         try {
             File directory = new File(dataDirectoryPath);
             directory.mkdirs();
 
             String listFileName = "duke.txt";
             String filePath = String.format("%s/%s", dataDirectoryPath, listFileName);
-            return DukeFile.loadFile(filePath);
+            return StorageFile.loadFile(filePath);
         } catch (IOException e) {
             Message message = new Message("There was a problem in getting the list data");
             message.print();
@@ -25,9 +25,9 @@ public class Data {
         }
     }
 
-    public static DukeTaskList scanListFileDataToList(DukeFile listFile) {
+    public static TaskList scanListFileDataToList(StorageFile listFile) {
         try {
-            DukeTaskList list = new DukeTaskList(listFile);
+            TaskList list = new TaskList(listFile);
             listFile.scanFileDataToList(list);
             return list;
         } catch (FileNotFoundException e) {

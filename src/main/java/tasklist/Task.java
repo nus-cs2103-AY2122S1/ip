@@ -1,14 +1,14 @@
-package entity.list;
+package tasklist;
 
 import exception.InvalidTaskTimeFormatException;
 import exception.InvalidTaskTypeException;
 import exception.InvalidDateTimeException;
-import type.DukeActionTypeEnum;
+import type.DukeCommandTypeEnum;
 
 /**
  * Encapsulates a task containing a description and status.
  */
-public class DukeTask {
+public class Task {
     private String description;
     private boolean isDone;
     protected static String STATUS_ICON_DONE = "X";
@@ -20,7 +20,7 @@ public class DukeTask {
      *
      * @param description describes what the task is
      */
-    public DukeTask(String description, boolean isDone) {
+    public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
@@ -34,20 +34,20 @@ public class DukeTask {
      * @throws InvalidTaskTypeException when the type of task is not recognised
      * @throws InvalidTaskTimeFormatException when a task does not have valid time inputs
      */
-    public static DukeTask createTask(String description, DukeActionTypeEnum actionType)
+    public static Task createTask(String description, DukeCommandTypeEnum actionType)
             throws InvalidTaskTypeException, InvalidTaskTimeFormatException, InvalidDateTimeException {
         // A valid task is either a to-do, deadline or event
 
-        if (actionType.equals(DukeActionTypeEnum.TODO)) {
-            return DukeTodoTask.createTask(description);
+        if (actionType.equals(DukeCommandTypeEnum.TODO)) {
+            return TodoTask.createTask(description);
         }
 
-        if (actionType.equals(DukeActionTypeEnum.DEADLINE)) {
-            return DukeDeadlineTask.createTask(description);
+        if (actionType.equals(DukeCommandTypeEnum.DEADLINE)) {
+            return DeadlineTask.createTask(description);
         }
 
-        if (actionType.equals(DukeActionTypeEnum.EVENT)) {
-            return DukeEventTask.createTask(description);
+        if (actionType.equals(DukeCommandTypeEnum.EVENT)) {
+            return EventTask.createTask(description);
         }
 
         throw new InvalidTaskTypeException(actionType);
@@ -92,18 +92,18 @@ public class DukeTask {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 
-    public static DukeTask createTaskFromStoredString(String fullDescription) {
+    public static Task createTaskFromStoredString(String fullDescription) {
         String trimmedFullDescription = fullDescription.trim();
         char taskType = trimmedFullDescription.charAt(1);
         String descriptionWithoutTaskType = fullDescription.substring(3);
 
         switch (taskType) {
         case 'T':
-            return DukeTodoTask.createTaskFromStoredString(descriptionWithoutTaskType);
+            return TodoTask.createTaskFromStoredString(descriptionWithoutTaskType);
         case 'D':
-            return DukeDeadlineTask.createTaskFromStoredString(descriptionWithoutTaskType);
+            return DeadlineTask.createTaskFromStoredString(descriptionWithoutTaskType);
         case 'E':
-            return DukeEventTask.createTaskFromStoredString(descriptionWithoutTaskType);
+            return EventTask.createTaskFromStoredString(descriptionWithoutTaskType);
         default:
             return null;
         }

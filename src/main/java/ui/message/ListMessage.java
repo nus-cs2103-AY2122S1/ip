@@ -1,16 +1,16 @@
-package entity.message;
+package ui.message;
 
 /**
  * Encapsulates a message containing a list of tasks.
- * It inherits from `entity.message.DukeOutputMessage`.
- * It overrides methods in `entity.message.DukeOutputMessage` to format the message differently for a list.
+ * It inherits from `ui.message.DukeOutputMessage`.
+ * It overrides methods in `ui.message.DukeOutputMessage` to format the message differently for a list.
  */
 public class ListMessage extends Message {
     private static String LIST_PREFIX = "Here are the tasks in your list:";
 
     /**
-     * Constructor to instantiate a `entity.message.DukeListMessage`.
-     * Instantiates a parent `entity.message.DukeOutputMessage`.
+     * Constructor to instantiate a `ui.message.DukeListMessage`.
+     * Instantiates a parent `ui.message.DukeOutputMessage`.
      *
      * @param message the string to be used in the list message
      */

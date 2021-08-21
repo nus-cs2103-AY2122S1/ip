@@ -1,7 +1,7 @@
-package entity.data;
+package storage;
 
-import entity.list.DukeTask;
-import entity.list.DukeTaskList;
+import tasklist.Task;
+import tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,26 +14,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class DukeFile {
+public class StorageFile {
     private String filePath;
     private File file;
 
-    private DukeFile(String filePath, File file) {
+    private StorageFile(String filePath, File file) {
         this.filePath = filePath;
         this.file = file;
     }
 
-    public static DukeFile loadFile(String filePath) throws IOException {
+    public static StorageFile loadFile(String filePath) throws IOException {
         File file = new File(filePath);
         file.createNewFile();
-        return new DukeFile(filePath, file);
+        return new StorageFile(filePath, file);
     }
 
-    public void scanFileDataToList(DukeTaskList list) throws FileNotFoundException {
+    public void scanFileDataToList(TaskList list) throws FileNotFoundException {
         Scanner s = new Scanner(this.file);
         while (s.hasNext()) {
             String lineData = s.nextLine();
-            list.scanExistingTaskToList(DukeTask.createTaskFromStoredString(lineData));
+            list.scanExistingTaskToList(Task.createTaskFromStoredString(lineData));
         }
     }
 

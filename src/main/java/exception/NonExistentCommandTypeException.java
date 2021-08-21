@@ -1,7 +1,7 @@
 package exception;
 
-public class NonExistentActionTypeException extends DukeException {
-    public NonExistentActionTypeException(String inputMessage) {
+public class NonExistentCommandTypeException extends DukeException {
+    public NonExistentCommandTypeException(String inputMessage) {
         super(String.format(
                 "Sorry I do not recognise this command '%s'",
                 inputMessage

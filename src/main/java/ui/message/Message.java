@@ -1,4 +1,4 @@
-package entity.message;
+package ui.message;
 
 /**
  * Encapsulates the base output message that Duke replies to the user.
@@ -9,7 +9,7 @@ public class Message {
     private String message;
 
     /**
-     * Constructor to instantiate a `entity.message.DukeOutputMessage`.
+     * Constructor to instantiate a `ui.message.DukeOutputMessage`.
      *
      * @param message the string to be used in the output message
      */
