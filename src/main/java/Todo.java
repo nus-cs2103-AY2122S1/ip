@@ -24,4 +24,12 @@ public class Todo extends Task{
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * The method is to get type of the todo task
+     */
+    @Override
+    public String getType() {
+        return "T";
+    }
 }

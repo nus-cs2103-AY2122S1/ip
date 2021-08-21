@@ -47,4 +47,32 @@ public class Task {
         this.isDone = true;
         return this.toString();
     }
+
+    /**
+     * The method is to finish the task.
+     */
+    public void setFinish() {
+        this.isDone = true;
+    }
+
+    /**
+     * The method is to get type of the task
+     */
+    public String getType() {
+        return "";
+    }
+
+    /**
+     * The method is to get description of the task
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * The method is to get time of the task
+     */
+    public String getTime() {
+        return "";
+    }
 }
