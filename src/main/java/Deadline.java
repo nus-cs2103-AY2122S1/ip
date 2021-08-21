@@ -9,7 +9,7 @@ public class Deadline extends Task {
      * Constructor for Deadline
      * @param input the input array consisting of description and date/time
      */
-    public Deadline(String[] input) throws EmptyDescriptionException, EmptyTimeException, InvalidTimeException {
+    public Deadline(String[] input) throws DukeException {
         super(input[0]);
         if (input.length < 2) throw new EmptyTimeException();
         try {
@@ -18,12 +18,21 @@ public class Deadline extends Task {
             throw new InvalidTimeException();
         }
     }
-    
+
+    /**
+     * Constructor for Deadline
+     * @param input the input array consisting of description and date/time from saved data
+     * @param isDone deadline's status from saved data
+     */
     public Deadline(String[] input, boolean isDone) {
         super(input[0], isDone);
         this.by = LocalDateTime.parse(input[1]);
     }
-    
+
+    /**
+     * Converts content to formatted text to save into storage
+     * @return formatted text to save into storage
+     */
     @Override
     public String convertToData() {
         return String.format("D/%s/%s/%s", this.isDone ? "1" : "0", this.description, this.by);
