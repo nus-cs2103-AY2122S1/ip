@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a parser that interprets commands
+ */
 class Parser {
     private TaskList tasks;
 
@@ -16,6 +19,13 @@ class Parser {
         return input.equals("bye");
     }
 
+    /**
+     * Runs command and returns output
+     *
+     * @param input Command from user
+     * @return Array of outputs to be shown to user
+     * @throws DukeException If command is not valid
+     */
     String[] parse(String input) throws DukeException {
         if (input.equals("list")) {
             return list();
