@@ -1,23 +1,25 @@
 package util.tasks;
 
-public class Deadlines extends Task {
+import java.time.LocalDate;
+
+public class Deadlines extends DatedTask {
     private static String label = "[D]";
-    private String dl;
-    public Deadlines(String s, String dl) {
-        super(s.trim());
-        this.dl = "(by: " + dl.trim() + ")";
+
+    public Deadlines(String s, LocalDate dl) {
+        super(s.trim(), dl);
+
     }
 
     @Override
     public String toString() {
-        return this.label + super.toString() + " " + this.dl;
+        return this.label + super.toString() + " " + "(by: " + this.localDate() + ")";
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Deadlines) {
             Deadlines dl = (Deadlines) obj;
-            return this.name.equals(dl.name) && this.dl.equals(dl.dl);
+            return this.name.equals(dl.name) && this.lDate.equals(dl.lDate);
         }
         return false;
     }
