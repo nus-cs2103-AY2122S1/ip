@@ -8,12 +8,12 @@ public class ListOfTasks {
     }
 
     public void add(String information) {
-        System.out.println("     Got it. I've added this task:");
-        information = remove(information, "todo");
-        xs[count] = new ToDo(information);
-        System.out.println("       " + xs[count].toString());
-        count++;
-        System.out.println("     Now you have "+ count + " task" + ((count > 1) ? "s" : "" ) +" in the list.");
+            System.out.println("     Got it. I've added this task:");
+            information = remove(information, "todo");
+            xs[count] = new ToDo(information);
+            System.out.println("       " + xs[count].toString());
+            count++;
+            System.out.println("     Now you have " + count + " task" + ((count > 1) ? "s" : "") + " in the list.");
     }
 
     public void listOut() {
@@ -50,6 +50,7 @@ public class ListOfTasks {
     }
 
     public void addEvent(String information) {
+
         if (!information.contains("/at")) {
 
             System.out.println("    Invalid Input. Please try again.");

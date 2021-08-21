@@ -6,6 +6,7 @@ public class Task {
         this.information = information;
         this.completedTask = false;
     }
+
     public void done() {
         this.completedTask = true;
     }
