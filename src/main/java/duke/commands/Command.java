@@ -1,6 +1,7 @@
 package duke.commands;
 
 import java.util.LinkedList;
+import duke.Item;
 
 abstract class Command {
     String fullCommand;
