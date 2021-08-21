@@ -6,7 +6,7 @@ package ui.message;
  * It overrides methods in `ui.message.DukeOutputMessage` to format the message differently for marking a task as done.
  */
 public class DoneMessage extends Message {
-    private static String DONE_PREFIX = "Nice! I've marked this task as done:";
+    private static String PREFIX_DONE = "Nice! I've marked this task as done:";
 
     /**
      * Constructor to instantiate a `ui.message.DukeDoneMessage`.
@@ -25,6 +25,6 @@ public class DoneMessage extends Message {
      */
     @Override
     protected String getMessage() {
-        return DONE_PREFIX + "\n\t\t" + super.getMessage();
+        return PREFIX_DONE + "\n\t\t" + super.getMessage();
     }
 }

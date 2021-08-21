@@ -30,7 +30,9 @@ public class DeadlineTask extends Task {
      * @param description The input task string by the user
      * @return a `entity.list.DukeDeadlineTask` containing an action description and deadline information
      */
-    public static DeadlineTask createTask (String description) throws InvalidTaskTimeFormatException, InvalidDateTimeException {
+    public static DeadlineTask createTask (String description) throws
+            InvalidTaskTimeFormatException,
+            InvalidDateTimeException {
         // Split the description into its action and time parts
         String[] splitPartsUsingBy = splitActionAndTime(
                 description,
@@ -38,7 +40,10 @@ public class DeadlineTask extends Task {
         );
 
         if (splitPartsUsingBy.length != 2) {
-            throw new InvalidTaskTimeFormatException(DukeCommandTypeEnum.DEADLINE.toString(), DeadlineTask.TIME_SPLITTER_INPUT);
+            throw new InvalidTaskTimeFormatException(
+                    DukeCommandTypeEnum.DEADLINE.toString(),
+                    DeadlineTask.TIME_SPLITTER_INPUT
+            );
         }
 
         String actionDescription = splitPartsUsingBy[0];

@@ -6,7 +6,7 @@ package ui.message;
  * It overrides methods in `ui.message.DukeOutputMessage` to format the message differently for adding.
  */
 public class AddMessage extends ListChangeMessage {
-    private static String ADD_PREFIX = "Got it. I've added this task:";
+    private static String PREFIX_ADD = "Got it. I've added this task:";
 
     /**
      * Constructor to instantiate a `ui.message.DukeAddedMessage`.
@@ -27,7 +27,7 @@ public class AddMessage extends ListChangeMessage {
     protected String getMessage() {
         return String.format(
                 "%s\n\t\t%s",
-                ADD_PREFIX,
+                PREFIX_ADD,
                 super.getMessage()
         );
     }

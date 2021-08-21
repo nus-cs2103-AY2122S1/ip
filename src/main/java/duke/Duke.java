@@ -1,11 +1,13 @@
+package duke;
+
 import command.Command;
+import storage.StorageFile;
 import tasklist.TaskList;
 import parser.Parser;
 import ui.Ui;
 import ui.message.Message;
 
 import storage.Storage;
-import storage.StorageFile;
 import exception.DukeException;
 
 /**

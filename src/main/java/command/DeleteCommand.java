@@ -18,7 +18,9 @@ public class DeleteCommand extends Command {
         this.taskNumber = taskNumber;
     }
 
-    public static DeleteCommand createCommand(String description) throws InvalidTaskNumberException, MissingCommandDescriptionException {
+    public static DeleteCommand createCommand(String description) throws
+            InvalidTaskNumberException,
+            MissingCommandDescriptionException {
         // Validate before creating the action
         Command.validateDescriptionNotEmpty(DukeCommandTypeEnum.DELETE, description);
 
