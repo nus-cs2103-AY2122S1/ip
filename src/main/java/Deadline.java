@@ -2,14 +2,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task implements DateTimeable {
+public class Deadline extends DateTimeTask {
 
     public final String code = "D";
     private final LocalDateTime by;
 
-    public Deadline(String description, String by) throws DukeException, DateTimeParseException {
-        super(description);
-        this.by = LocalDateTime.parse(by);
+    public Deadline(String[] input) throws DukeException, DateTimeParseException {
+        super(input[0]);
+        if (input.length != 2) {
+            throw new DukeException(DukeException.Type.DEADLINE);
+        }
+        this.by = LocalDateTime.parse(input[1]);
     }
 
     @Override

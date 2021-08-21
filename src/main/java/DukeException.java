@@ -2,16 +2,28 @@ public class DukeException extends Exception{
 
     private String errorMessage;
     public enum Type {
-        DESCRIPTION, INDEX
+        DESCRIPTION, INDEX, COMMAND, DEADLINE, EVENT
     }
     private Type type;
 
     public DukeException(Type s) {
         type = s;
-        if (s.equals(Type.DESCRIPTION)) {
+        switch (type) {
+        case DESCRIPTION:
             this.errorMessage = "☹ OOPS!!! The description of a task cannot be empty.";
-        } else if (s.equals(Type.INDEX)) {
+            break;
+        case INDEX:
             this.errorMessage = "☹ OOPS!!! The index of the task is out of range.";
+            break;
+        case COMMAND:
+            this.errorMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            break;
+        case DEADLINE:
+            this.errorMessage =  "☹ OOPS!!! Usage of deadline does not match 'description' /by 'deadline'";
+            break;
+        case EVENT:
+            this.errorMessage = "☹ OOPS!!! Usage of event does not match 'description' /at 'timeframe'";
+            break;
         }
     }
 

@@ -2,14 +2,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task implements DateTimeable{
+public class Event extends DateTimeTask {
 
     public final String code = "E";
     private final LocalDateTime at;
 
-    public Event(String description, String at) throws DukeException, DateTimeParseException {
-        super(description);
-        this.at = LocalDateTime.parse(at);
+    public Event(String[] input) throws DukeException, DateTimeParseException {
+        super(input[0]);
+        if (input.length != 2) {
+            throw new DukeException(DukeException.Type.EVENT);
+        }
+        this.at = LocalDateTime.parse(input[1]);
     }
 
     @Override
