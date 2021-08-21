@@ -8,10 +8,15 @@ import duke.Storage;
 import duke.Ui;
 
 /**
- * This is a duke.commands.DoneCommand class that extends duke.commands.Command.
+ * This is a DoneCommand class that extends Command.
  */
 public class DoneCommand extends Command {
 
+    /**
+     * This is the constructor of a DoneCommand.
+     *
+     * @param index An int representing the index of task to be marked done.
+     */
     public DoneCommand(int index) {
         super("done", index);
     }
