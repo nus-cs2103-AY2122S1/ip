@@ -44,7 +44,7 @@ public class Ui {
     /**
      * Filter tasks out based on regex string.
      * @param regex String based on which to filter.
-     * @param tasks Task list.
+     * @param tasks Task list from which to filter.
      * @return Filtered tasks.
      */
     public static List<Task> findTasks(String regex, List<Task> tasks) {
