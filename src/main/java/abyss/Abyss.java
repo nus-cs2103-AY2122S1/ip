@@ -2,6 +2,7 @@ package abyss;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Abyss {
     private static ArrayList<Task> tasks = new ArrayList<>();
@@ -107,12 +108,14 @@ public class Abyss {
     }
 
     private static void addDeadline(String description, String by) {
-        Task newTask = new Deadline(description, by);
+        LocalDate date = LocalDate.parse(by);
+        Task newTask = new Deadline(description, date);
         addTask(newTask);
     }
 
     private static void addEvent(String description, String at) {
-        Task newTask = new Event(description, at);
+        LocalDate date = LocalDate.parse(at);
+        Task newTask = new Event(description, date);
         addTask(newTask);
     }
 
