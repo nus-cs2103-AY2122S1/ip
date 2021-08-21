@@ -5,6 +5,12 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String toText() {
+        String[] props = new String[]{"T", super.getStatusIcon(), super.getName()};
+        return String.join(" | ", props);
+    }
+
+    @Override
     public String toString() {
         return String.format("[T]%s", super.toString());
     }

@@ -68,6 +68,14 @@ public class TaskManager {
         return count;
     }
 
+    private String toText() {
+        String[] tasks = new String[taskList.size()];
+        for (int i = 0; i < taskList.size(); i++) {
+            tasks[i] = taskList.get(i).toText();
+        }
+        return String.join("\n", tasks);
+    }
+
     @Override
     public String toString() {
         String[] allTasks = new String[taskList.size()];

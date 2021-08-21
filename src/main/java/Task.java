@@ -12,13 +12,19 @@ public abstract class Task {
         return this;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public boolean checkTaskDone() {
         return isDone;
     }
 
-    private String getStatusIcon() {
+    public String getStatusIcon() {
         return isDone ? "X" : " ";
     }
+
+    public abstract String toText();
 
     @Override
     public String toString() {
