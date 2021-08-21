@@ -17,9 +17,10 @@ public class Duke {
         System.out.println("Stay on track with Duke!\n" +
                 "How can I help you?");
 
-        Scanner sc = new Scanner(System.in);
         TaskManager tm = new TaskManager();
+        tm.getTasksFromStorage();
         boolean running = true;
+        Scanner sc = new Scanner(System.in);
 
         // Start taking input from the user
         while (running) {
@@ -31,6 +32,7 @@ public class Duke {
             switch (command) {
                 case "bye":
                     System.out.println("¡Adiós! See you soon!");
+                    tm.saveTasksToStorage();
                     running = false;
                     break;
                 case "list":

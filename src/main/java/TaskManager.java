@@ -1,4 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * TaskManager handles the management of and interaction with tasks
@@ -101,5 +106,67 @@ public class TaskManager {
             System.out.println(i+1 + "." + taskArrayList.get(i).toString());
         }
         System.out.println();
+    }
+
+    /**
+     * Retrieves a list of tasks from previous sessions, stored in data/duke.txt
+     */
+    public void getTasksFromStorage() {
+        try {
+            File taskFile = new File("data/duke.txt");
+            Scanner sc = new Scanner(taskFile);
+            while (sc.hasNext()) {
+                String[] commandArr = sc.nextLine().split("\\|");
+                boolean isDone = commandArr[1].equals("1");
+                switch (commandArr[0]) {
+                    case "T":
+                        add(new ToDo(commandArr[2], isDone));
+                        break;
+                    case "D":
+                        add(new Deadline(commandArr[2], commandArr[3], isDone));
+                        break;
+                    case "E":
+                        add(new Event(commandArr[2], commandArr[3], isDone));
+                        break;
+                }
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            File newTaskFile = new File("data/duke.txt");
+        }
+    }
+
+    /**
+     * Saves the current list of tasks to data/duke.txt to be used in future sessions
+     */
+    public void saveTasksToStorage() {
+        try {
+            for (int i = 0; i < taskArrayList.size(); i++) {
+                Task task = taskArrayList.get(i);
+                String taskString;
+                String isDone = task.isDone() ? "1|" : "0|";
+                if (task instanceof ToDo) {
+                    taskString = "T|" + isDone + task.getName();
+                } else if (task instanceof Deadline) {
+                    Deadline deadline = (Deadline) task;
+                    taskString = "D|" + isDone + task.getName() + "|" + deadline.getEndDate();
+                } else {
+                    Event event = (Event) task;
+                    taskString = "E|" + isDone + task.getName() + "|" + event.getStartEndTime();
+                }
+                FileWriter fw;
+                if (i == 0) {
+                    fw = new FileWriter("data/duke.txt");
+                } else {
+                    fw = new FileWriter("data/duke.txt", true);
+                    fw.write("\n");
+                }
+                fw.write(taskString);
+                fw.close();
+            }
+        } catch (IOException e) {
+            System.out.println("IOException");
+        }
+
     }
 }
