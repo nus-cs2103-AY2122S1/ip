@@ -17,11 +17,12 @@ public class Deadline extends Task {
      * @return The deadline of the task.
      */
     public String getDate() {
-        return finishByDate;
+        return finishByDate.toString();
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + finishByDate + ")";
+        return "[D]" + super.toString() + " (by: " + finishByDate.getDayOfMonth() + " "
+                + finishByDate.getMonth() + " " + finishByDate.getYear() + ")";
     }
 }

@@ -349,6 +349,9 @@ public class Pix {
     private static void saveTaskList() throws IOException {
         try {
             FileWriter pixFile = new FileWriter("src/main/java/data/Pix.txt");
+            pixFile.write("");
+            pixFile.close();
+
             for (Task task : taskList) {
                 String done;
                 if (task.isDone()) {
@@ -358,14 +361,17 @@ public class Pix {
                 }
 
                 if (task instanceof ToDo) {
+                    pixFile = new FileWriter("src/main/java/data/Pix.txt", true);
                     pixFile.write("T | " + done + " | " + task.getTaskName() + System.lineSeparator());
                     pixFile.close();
                 } else if (task instanceof Deadline) {
+                    pixFile = new FileWriter("src/main/java/data/Pix.txt", true);
                     Deadline deadline = (Deadline) task;
                     pixFile.write("D | " + done + " | " + deadline.getTaskName() + " | "
                             + deadline.getDate() + System.lineSeparator());
                     pixFile.close();
                 } else { //else it is an event and there is no other case that it returns invalid
+                    pixFile = new FileWriter("src/main/java/data/Pix.txt", true);
                     Event event = (Event) task;
                     pixFile.write("E | " + done + " | " + event.getTaskName() + " | "
                             + event.getDate() + System.lineSeparator());
@@ -378,7 +384,6 @@ public class Pix {
     }
 
     /**
-<<<<<<< HEAD
      * Checks whether a certain date is valid
      * @param date Date in string format.
      * @return Returns true if the date is a valid date format, and false if not.

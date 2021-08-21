@@ -17,11 +17,12 @@ public class Event extends Task {
      * @return The date of the event.
      */
     public String getDate() {
-        return eventDate;
+        return eventDate.toString();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + eventDate + ")";
+        return "[E]" + super.toString() + " (at: " + eventDate.getDayOfMonth() + " "
+                + eventDate.getMonth() + " " + eventDate.getYear() + ")";
     }
 }
