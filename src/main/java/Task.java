@@ -11,6 +11,10 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    public String getStatusForHistory() {
+        return (isDone ? "X" : " "); // mark done task with X
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
@@ -18,5 +22,9 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
+    }
+
+    public String toHistory() {
+        return " | " + getStatusForHistory() + " | " + this.description;
     }
 }
