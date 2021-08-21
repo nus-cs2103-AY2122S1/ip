@@ -23,4 +23,8 @@ public class Event extends Task{
         return "[E]" + super.toString() + " (by: " + this.eventTimeframe + ")";
     }
 
+    @Override
+    public String format() {
+        return String.format("E | %s | %s", super.format(), this.eventTimeframe);
+    }
 }
