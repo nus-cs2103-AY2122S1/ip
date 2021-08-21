@@ -1,9 +1,16 @@
+import java.io.*;
 import java.util.*;
 
 public class Duke {
 	private Scanner sc = new Scanner(System.in);
 	private OutputHandler oh = new OutputHandler();
-	private List<Task> tasks = new ArrayList<>();
+	private List<Task> tasks;
+	private Storage storage;
+
+	public Duke(String dirName, String fileName) throws IOException {
+		this.storage = new Storage(dirName, fileName);
+		this.tasks = storage.loadTasks();
+	}
 
 	private void printStartUpMessage() {
 		oh.add("Hello! I'm Duke");
@@ -76,7 +83,11 @@ public class Duke {
 		oh.print();
 	}
 
-	private void run() {
+	private void saveTasks() throws IOException {
+		this.storage.saveTasks(this.tasks);
+	}
+
+	private void run() throws IOException {
 		printStartUpMessage();
 
 		while (true) {
@@ -102,14 +113,16 @@ public class Duke {
 				}
 			} catch (DukeException ex) {
 				printErrorMessage(ex);
+			} finally {
+				saveTasks();
 			}
 		}
 
 		printClosingMessage();
 	}
 
-	public static void main(String[] args) {
-		Duke duke = new Duke();
+	public static void main(String[] args) throws IOException {
+		Duke duke = new Duke("data", "duke.txt");
 		duke.run();
 	}
 }
