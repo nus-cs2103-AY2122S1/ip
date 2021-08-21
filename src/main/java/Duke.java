@@ -134,6 +134,11 @@ public class Duke {
                     "NoIndexError: Please enter an index to indicate your task of interest.");
         }
 
+        if (!inputs[1].matches("\\d+")) {
+            throw new DukeException(
+                    "IndexFormatException: Index entered should only contain positive numerals.");
+        }
+
         return Integer.parseInt(inputs[1]);
     }
 

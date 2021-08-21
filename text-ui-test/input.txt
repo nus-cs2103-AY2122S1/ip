@@ -26,8 +26,11 @@ event multipleDateTimeTest /at 12AM /at 2Am
 done -1
 done 1000
 done
+done abc123
 delete
 delete -1
 delete 1000
+delete abc123
 asdf
+list
 exit

@@ -131,7 +131,7 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______    
 	MultipleDateTimeError: Please input only one date/time!
 	--------------------------------------------------------
 	--------------------------------------------------------
-	NegativeIndexError: I can't handle negative indexing.
+	IndexFormatException: Index entered should only contain positive numerals.
 	--------------------------------------------------------
 	--------------------------------------------------------
 	IndexOutOfBoundsError: Please enter an index that is shown in 'list'.
@@ -140,16 +140,29 @@ ____    __    ____  _______  __        ______   ______   .___  ___.  _______    
 	NoIndexError: Please enter an index to indicate your task of interest.
 	--------------------------------------------------------
 	--------------------------------------------------------
+	IndexFormatException: Index entered should only contain positive numerals.
+	--------------------------------------------------------
+	--------------------------------------------------------
 	NoIndexError: Please enter an index to indicate your task of interest.
 	--------------------------------------------------------
 	--------------------------------------------------------
-	NegativeIndexError: I can't handle negative indexing.
+	IndexFormatException: Index entered should only contain positive numerals.
 	--------------------------------------------------------
 	--------------------------------------------------------
 	IndexOutOfBoundsError: Please enter an index that is shown in 'list'.
+	--------------------------------------------------------
+	--------------------------------------------------------
+	IndexFormatException: Index entered should only contain positive numerals.
 	--------------------------------------------------------
 	--------------------------------------------------------
 	NoSuchCommandError: Unrecognised command `asdf`. Perhaps you made a typo?
+	--------------------------------------------------------
+	--------------------------------------------------------
+	Here are the tasks in your list:
+	1. [T][X] declare temperature later
+	2. [D][X] review cs2100 lecture (by: 15 Aug 8AM)
+	3. [E][ ] cs2101 tutorial (at: Mon 12PM)
+	4. [E][X] hackerschool (at: Sat 10AM)
 	--------------------------------------------------------
 	--------------------------------------------------------
 	Bye bye! See you again soon!

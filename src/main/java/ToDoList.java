@@ -51,8 +51,6 @@ public class ToDoList {
         if (index > list.size()) {
             throw new DukeException(
                     "IndexOutOfBoundsError: Please enter an index that is shown in 'list'.");
-        } else if (index < 0) {
-            throw new DukeException("NegativeIndexError: I can't handle negative indexing.");
         } else {
             Task task = list.get(index - 1);
             task.markAsDone();
