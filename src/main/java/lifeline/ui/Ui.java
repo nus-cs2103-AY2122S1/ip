@@ -45,7 +45,7 @@ public class Ui {
 
     public String showFoundTasks(TaskList foundTasks, String keyword) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Here are the tasks containing the keyword " + keyword + ":\n");
+        stringBuilder.append((foundTasks.size() == 1 ? "Task" : "Tasks") + " with keyword " + keyword + ":\n");
         for (int i = 0; i < foundTasks.size(); i++) {
             stringBuilder.append(foundTasks.get(i) + "\n");
         }

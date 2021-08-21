@@ -253,7 +253,7 @@ public class CommandHandlerTest {
             TaskList taskList = new TaskList(tasks);
             Ui ui = new Ui();
             String output = Command.FIND.getExecute().apply("find book", storage, taskList, ui);
-            assertEquals("Here are the tasks containing the keyword book:\n" + "[T][ ] read book\n", output);
+            assertEquals("Task with keyword book:\n" + "[T][ ] read book\n", output);
     }
 
     @AfterEach
