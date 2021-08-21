@@ -62,6 +62,13 @@ public class Task {
     this.type = type;
   }
 
+  /**
+   * Converts string (as stored in database) to a task.
+   * Throws an error if there is an issue parsing the string.
+   *
+   * @param stringifiedTask
+   * @return Task object
+   */
   public static Task stringToTask(String stringifiedTask) {
     // {TYPE}|{DESCRIPTION}|{DATE or DATES or BLANK}
     String[] taskAttr = stringifiedTask.split(Pattern.quote(DELIMITER));
@@ -89,6 +96,11 @@ public class Task {
     }
   }
 
+  /**
+   * Converts task into a database ready String representation.
+   *
+   * @return String representation of the task to be saved in database.
+   */
   public String taskToString() {
     String type;
     switch (this.type) {

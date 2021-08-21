@@ -6,10 +6,20 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 import tasks.Task;
 
+/**
+ * Handle database data and operations for Duke.
+ * Source of truth for the task list as well as able to write to and read from
+ * the database as necessary.
+ */
 public class DukeStorage {
 
   public static final ArrayList<Task> tasksList = new ArrayList<>();
 
+  /**
+   * Checks for the save file, and if it exists, read from it to restore tasks.
+   * Relies on the Task class to handle conversions to and from a task object to
+   * a string stored in the database.
+   */
   public static void readFromDatabase() {
     String dukeLocation = System.getProperty("user.dir");
     Path filePath = Paths.get(dukeLocation, "data", "tasks");
@@ -51,6 +61,10 @@ public class DukeStorage {
     }
   }
 
+  /**
+   * Updates the user save file with the latest list of tasks.
+   * If such a save file does not exist, it will create it.
+   */
   public static void writeToDatabase() {
     String dukeLocation = System.getProperty("user.dir");
     Path folderPath = Paths.get(dukeLocation, "data");
@@ -73,7 +87,7 @@ public class DukeStorage {
       }
       Files.write(filePath, saveResult);
     } catch (IOException e) {
-      // TODO: Handle this properly in the future
+      // Potentially add why it failed (e.g. no write permissions in folder)
       Duke.renderOutput("File could not be saved. - " + e.getMessage());
     }
   }
