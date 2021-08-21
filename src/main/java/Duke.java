@@ -1,5 +1,12 @@
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.util.regex.Pattern;
 
 public class Duke {
 
@@ -8,12 +15,81 @@ public class Duke {
         DELETE
     }
 
+    private enum Format {
+        LIST,
+        SAVE
+    }
+
     private static String wrapOutput(String s) {
         // Align list items properly
         // Adapted regex from https://stackoverflow.com/questions/15888934/how-to-indent-a-multi-line-paragraph-being-written-to-the-console-in-java
 
         String mstr = s.replaceAll("(?m)^", "\t\t\t ");
         return "\n\t@Herb:~$" + mstr.substring(3) + "\n";
+    }
+
+    private static ArrayList<Task> loadTaskList(String relativePath) {
+        String home = System.getProperty("user.dir");
+        Path path = Paths.get(home, relativePath);
+        boolean directoryExists = Files.exists(path);
+
+        if (directoryExists) {
+            try {
+                List<String> text = Files.readAllLines(path);
+                ArrayList<Task> taskList = new ArrayList<>();
+                for (String x: text) {
+                    String[] data = x.split(Pattern.quote(" | "));
+                    Task t;
+                    switch (data[1]) {
+                        case "T":
+                            t = new ToDo(data[3]);
+                            break;
+                        case "E":
+                            t = new Event(data[3], data[4]);
+                            break;
+                        case "D":
+                            t = new Deadline(data[3], data[4]);
+                            break;
+                        default:
+                            System.out.println("Invalid task found when loading, skipped!");
+                            continue;
+                    }
+
+                    if (data[2].equals("1")) {
+                        t.markAsDone();
+                    }
+                    taskList.add(t);
+                }
+                return taskList;
+            } catch (IOException e) {
+                System.out.println("Couldn't load file :(");
+                return new ArrayList<>();
+            }
+        } else {
+            System.out.println("File not found :(");
+            return new ArrayList<>();
+        }
+    }
+
+    private static void saveTaskList(ArrayList<Task> taskList) {
+        String home = System.getProperty("user.dir");
+        String text = handleList(taskList, Format.SAVE);
+        Path path = Paths.get(home, "data");
+        boolean directoryExists = Files.exists(path);
+
+        if (!directoryExists) {
+            try {
+                Files.createDirectory(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            Files.write(Paths.get(home,"data", "taskList.txt"), text.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void handleAction(ArrayList<Task> taskList, String[] in, Command c) throws DukeException {
@@ -50,17 +126,18 @@ public class Duke {
         }
     }
 
-    private static void handleList(ArrayList<Task> taskList) {
+    private static String handleList(ArrayList<Task> taskList, Format format) {
         if (taskList.size() == 0) {
-            System.out.println(wrapOutput("No tasks added yet!"));
-            return;
+            return "No tasks added yet!";
         }
         StringBuilder res = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
             Task t = taskList.get(i);
-            res.append(i + 1).append(". ").append(t.toString()).append("\n");
+            res.append(i + 1).append(". ").append(
+                    format == Format.LIST ? t.toString() : t.toSaveString()
+                ).append("\n");
         }
-        System.out.println(wrapOutput(res.substring(0, res.length() - 1)));
+        return res.substring(0, res.length() - 1);
     }
 
     public static void main(String[] args) {
@@ -76,7 +153,7 @@ public class Duke {
                 + "\t\t `bye` to end this chat\n";
         String endMessage = "\n\tSad to see you go :(\n\t...shutting down...";
 
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = loadTaskList("data/taskList.txt");
 
         System.out.println(welcomeMessage);
         Scanner sc = new Scanner(System.in);
@@ -90,7 +167,7 @@ public class Duke {
                     System.out.println(endMessage);
                     break;
                 } else if (input.equals("list")) {
-                    handleList(taskList);
+                    System.out.println(wrapOutput(handleList(taskList, Format.LIST)));
                 } else {
                     String[] words = input.split(" ");
                     String mainCommand = words[0];
@@ -99,16 +176,18 @@ public class Duke {
                     switch (mainCommand) {
                         case "done":
                             handleAction(taskList, words, Command.DONE);
+                            saveTaskList(taskList);
                             continue;
                         case "delete":
                             handleAction(taskList, words, Command.DELETE);
+                            saveTaskList(taskList);
                             continue;
                         case "todo": {
                             String[] split = input.split(" ");
                             if (split.length < 2) {
                                 throw new MissingDescriptionException();
                             }
-                            t = new ToDo(input.substring(5));
+                            t = new ToDo(input.substring(5).trim());
                             break;
                         }
                         case "deadline": {
@@ -140,6 +219,8 @@ public class Duke {
                             + t.toString() + "\nNow you have " + taskList.size()
                             + plurality + " in the list."));
 
+
+                    saveTaskList(taskList);
                 }
             } catch (DukeException e) {
                 System.out.println(wrapOutput(e.getMessage()));
