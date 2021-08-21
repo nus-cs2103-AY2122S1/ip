@@ -1,23 +1,36 @@
+import java.io.IOException;
 import java.util.Scanner;
 
-import model.Storage;
+import exception.LogicException;
+import exception.ParserException;
+import executor.ExecutionUnit;
 import view.Response;
 
 public class BobCat {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanObj = new Scanner(System.in);
-
-        boolean toTerminate = false;
         Response response = new Response();
-        Storage storage = new Storage();
 
-        Response.respond(new String[]{"Hello! I'm BobCat!", "What can I do for you?"});
-        while(!toTerminate) {
+        ExecutionUnit executor = new ExecutionUnit();
+
+        response.respond(new String[]{"Hello! I'm BobCat!", "Trying to remember what happened..."});
+        try {
+            executor.initStorage();
+        } catch (IOException e) {
+            response.respond(new String[]{"Oops! File does not seem to be found / readable! Starting from blank state..."});
+        } catch (ParserException | LogicException e) {
+            response.respond("Memory may have been corrupted! Starting from blank state...");
+            executor.storageClear();
+        } finally {
+            response.respond(new String[] {"Initialisation done!", "What can I do for you?"});
+        }
+
+        while(true) {
             String inp = scanObj.nextLine();
+            response.respond(executor.executeCommand(inp));
             if (inp.equals("bye")) {
-                toTerminate = true;
+                break;
             }
-            response.respond(inp, storage);
         }
         scanObj.close();
     }

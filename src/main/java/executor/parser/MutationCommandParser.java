@@ -1,4 +1,4 @@
-package parser;
+package executor.parser;
 
 import exception.CommandArityException;
 import exception.InvalidArgumentException;

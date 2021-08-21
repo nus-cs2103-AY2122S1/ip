@@ -1,4 +1,4 @@
-package parser;
+package executor.parser;
 
 public class BasicCommandParser implements CommandParser{
     @Override

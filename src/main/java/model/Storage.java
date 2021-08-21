@@ -9,7 +9,7 @@ import model.task.ToDo;
 import java.util.ArrayList;
 
 public class Storage {
-    private final ArrayList<Task> storage;
+    private ArrayList<Task> storage;
     private int index;
 
     public Storage() {
@@ -58,4 +58,5 @@ public class Storage {
     public int numTasks() {
         return index;
     }
+
 }
