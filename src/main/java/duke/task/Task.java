@@ -4,7 +4,9 @@ import duke.date.Date;
 import duke.enums.Tasks;
 import duke.exception.InvalidDateException;
 import duke.exception.UnknownTaskTypeException;
+
 import org.json.simple.JSONObject;
+import java.util.regex.Pattern;
 
 /** Represents a Task object. */
 public abstract class Task {
@@ -79,5 +81,15 @@ public abstract class Task {
             throw new UnknownTaskTypeException(taskType);
         }
         return task;
+    }
+
+    /**
+     * Matches a keyword with the description of the Task. The keyword must match a whole word in the description.
+     *
+     * @param keyword The keyword as a string.
+     * @return True if the description matches the keyword, false otherwise.
+     */
+    public final boolean keywordMatcher(String keyword) {
+        return Pattern.compile(".*\\b" + keyword + "\\b.*").matcher( description ).find();
     }
 }

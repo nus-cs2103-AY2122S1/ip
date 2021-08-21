@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.enums.Commands;
 import duke.exception.DukeException;
@@ -76,6 +77,9 @@ public class Parser {
             break;
         case DELETE:
             command = DeleteCommand.of(contentParser(fullCommand));
+            break;
+        case FIND:
+            command = FindCommand.of(contentParser(fullCommand));
             break;
         default:
             throw new UnknownCommandException(fullCommand);
