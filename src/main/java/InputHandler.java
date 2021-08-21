@@ -75,7 +75,7 @@ public class InputHandler {
     }
 
     private Record deadline(String raw) throws DukeException {
-        String[] args = raw.split( " /by ");
+        String[] args = raw.split( "( /by )");
         Deadline t = new Deadline();
         if (args.length == 0 || args[0].equals(new String()))
             throw new DukeException("The description of a deadline cannot be empty.");
@@ -88,7 +88,7 @@ public class InputHandler {
     }
 
     private Record event(String raw) throws DukeException {
-        String[] args = raw.split( " /at ");
+        String[] args = raw.split( "( /at )");
         Event t = new Event();
         if (args.length == 0 || args[0].equals(new String()))
             throw new DukeException("The description of a deadline cannot be empty.");

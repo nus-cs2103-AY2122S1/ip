@@ -44,7 +44,7 @@ public abstract class Task {
     
     @Override
     public String toString() {
-        return (done ? "[X]" : "[ ]") + desc;
+        return (done ? "[X] " : "[ ] ") + desc;
     }
 
 }
