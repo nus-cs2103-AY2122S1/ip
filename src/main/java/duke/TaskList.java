@@ -4,6 +4,7 @@ import duke.exceptions.DukeFileException;
 import duke.exceptions.EmptyListException;
 import duke.exceptions.TaskIsCompleteException;
 import duke.task.Task;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * Constructors of duke.TaskList
+     * Constructors of TaskList
      */
     public TaskList() {
         tasks = new ArrayList<>();
@@ -44,7 +45,7 @@ public class TaskList {
     }
 
     public void markTask(int index, Storage store, Ui ui)
-                    throws TaskIsCompleteException, DukeFileException {
+            throws TaskIsCompleteException, DukeFileException {
         try {
             Task t = tasks.get(index);
             if (t.isDone()) {
@@ -61,7 +62,7 @@ public class TaskList {
     }
 
     public void deleteTask(int index, Storage store, Ui ui)
-                    throws DukeFileException {
+            throws DukeFileException {
         try {
             Task t = tasks.get(index);
             int indOnList = index + 1;
