@@ -21,4 +21,14 @@ public class DeleteCommand extends Command{
         int delId = Integer.parseInt(fullCommand.split(" ")[1]);
         taskList.deleteTask(delId);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DeleteCommand that = (DeleteCommand) o;
+
+        return fullCommand != null ? fullCommand.equals(that.fullCommand) : that.fullCommand == null;
+    }
 }

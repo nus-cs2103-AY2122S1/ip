@@ -21,4 +21,14 @@ public class DoneCommand extends Command{
         int doneId = Integer.parseInt(fullCommand.split(" ")[1]);
         taskList.markAsDone(doneId);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DoneCommand that = (DoneCommand) o;
+
+        return fullCommand != null ? fullCommand.equals(that.fullCommand) : that.fullCommand == null;
+    }
 }

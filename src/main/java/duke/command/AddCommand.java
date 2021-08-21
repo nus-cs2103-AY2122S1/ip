@@ -37,4 +37,15 @@ public class AddCommand extends Command{
             System.err.println("\tOops :( " + e);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AddCommand that = (AddCommand) o;
+
+        if (fullCommand != null ? !fullCommand.equals(that.fullCommand) : that.fullCommand != null) return false;
+        return taskType == that.taskType;
+    }
 }
