@@ -33,7 +33,7 @@ public class Events extends Task {
     }
 
     /**
-     * To save the task to the txt file.
+     * Saves the task to the txt file.
      * Format is as follow: <Type(E)> | <Description> | <Done> | <DateTime>.
      *
      * @return string to save the txt file.

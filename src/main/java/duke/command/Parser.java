@@ -12,7 +12,8 @@ import duke.task.Keyword;
  */
 public class Parser {
     /**
-     * Static method to parses the user command and make sense of the command by the user.
+     * Returns a Command based on the input by the user.
+     * If user is non-parsable, null will be returned.
      *
      * @param message command input by the user.
      * @return the type of command as a enum duke.task.Keyword.

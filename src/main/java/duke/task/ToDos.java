@@ -28,7 +28,7 @@ public class ToDos extends Task {
     }
 
     /**
-     * To save the task to the txt file.
+     * Saves the task to the txt file.
      * Format is as follow: <Type(T)> | <Description> | <Done>.
      *
      * @return string to save the txt file.

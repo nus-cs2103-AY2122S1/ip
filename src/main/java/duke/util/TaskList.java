@@ -38,7 +38,7 @@ public class TaskList {
     }
 
     /**
-     * Add the task entered by the user into the list.
+     * Adds the task entered by the user into the list.
      *
      * @param task task input by the user.
      */
@@ -78,7 +78,7 @@ public class TaskList {
     }
 
     /**
-     * Add a new todo to the task list.
+     * Adds a new todo to the task list.
      *
      * @param message Description of the task.
      */
@@ -92,7 +92,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the nth task as done.
+     * Marks the nth task as done.
      *
      * @param n the task to be mark as done.
      */
@@ -108,7 +108,7 @@ public class TaskList {
 
 
     /**
-     * Delete the nth task from the task list.
+     * Deletes the nth task from the task list.
      *
      * @param n the task to be deleted.
      */

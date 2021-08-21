@@ -8,7 +8,7 @@ import duke.util.Ui;
  */
 public interface Command {
     /**
-     * Main codes to run for the chat.
+     * Runs for the chat.
      *
      * @param taskList duke.main.TaskList to execute the command.
      * @param ui To interact with the user.

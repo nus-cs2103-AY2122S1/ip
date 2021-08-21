@@ -17,7 +17,7 @@ public class DoneCommand implements Command {
     }
 
     /**
-     * Main codes to run for the chat.
+     * Adds a new task to the task list.
      *
      * @param taskList duke.main.TaskList to execute the command.
      * @param ui       To interact with the user.

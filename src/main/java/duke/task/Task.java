@@ -85,7 +85,7 @@ public abstract class Task {
     }
 
     /**
-     * Abstract method for the task to return an output to save to the txt file.
+     * Returns an output to save to the txt file.
      * Format is as follow: <Type(T/D/E)> <Description> <Done> <DateTime if applicable>.
      *
      * @return string to save the txt file

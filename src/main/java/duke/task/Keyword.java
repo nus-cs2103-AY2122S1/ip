@@ -55,7 +55,7 @@ public enum Keyword {
     }
 
     /**
-     * Find the length of the keyword.
+     * Finds the length of the keyword.
      *
      * @return the length of the keyword.
      */

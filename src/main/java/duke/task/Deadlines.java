@@ -33,7 +33,7 @@ public class Deadlines extends Task {
     }
 
     /**
-     * To save the task to the txt file.
+     * Saves the task to the txt file.
      * Format is as follow: <Type(D)> | <Description> | <Done> | <Datetime>.
      *
      * @return string to save the txt file.

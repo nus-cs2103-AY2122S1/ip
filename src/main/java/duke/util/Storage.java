@@ -40,7 +40,7 @@ public class Storage {
     }
 
     /**
-     * Export the task in list to a txt file in ./data.
+     * Exports the task in list to a txt file in ./data.
      *
      * @param taskList list of task to be stored.
      */

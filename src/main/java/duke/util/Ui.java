@@ -12,7 +12,7 @@ import duke.task.Task;
  */
 public class Ui {
     /**
-     * List out all the task stored by the user.
+     * Lists out all the task stored by the user.
      *
      * @param taskArray To list out all the task.
      */
@@ -106,7 +106,7 @@ public class Ui {
     }
 
     /**
-     * Print out the greeting message used when the chat started.
+     * Prints out the greeting message used when the chat started.
      */
     public void greetMessage() {
         printMessage("Good day there! I'm DUKE\n", "What can I do for you?");
@@ -123,7 +123,7 @@ public class Ui {
     }
 
     /**
-     * Print out the exit message when chat ends.
+     * Prints out the exit message when chat ends.
      */
     public void exitMessage() {
         printMessage("Farewell! Hope to see you again.");

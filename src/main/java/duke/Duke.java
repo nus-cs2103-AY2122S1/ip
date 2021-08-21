@@ -37,7 +37,7 @@ public class Duke {
     }
 
     /**
-     * Start the chatbot and get it to chat with the user.
+     * Starts the chatbot and get it to chat with the user.
      */
     private void chat() {
         ui.greetMessage();
@@ -60,7 +60,7 @@ public class Duke {
     }
 
     /**
-     * Main function to run the chatbot.
+     * Runs the chatbot.
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
