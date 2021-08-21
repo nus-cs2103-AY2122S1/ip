@@ -44,6 +44,10 @@ public class Task {
         }
     }
 
+    public boolean onDate(String date) {
+        return false;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);

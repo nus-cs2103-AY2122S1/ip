@@ -64,6 +64,18 @@ public class TaskList {
         }
     }
 
+    public void printList(String dateString) {
+        int index = 1;
+
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currTask = taskList.get(i);
+            if (currTask.onDate(dateString)) {
+                System.out.println(INDENTATION + String.format("%d:%s", index, currTask));
+                index++;
+            }
+        }
+    }
+
     /**
      * Marks tasks (based on index) as done if it exists.
      *
