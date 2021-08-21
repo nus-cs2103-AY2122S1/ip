@@ -12,8 +12,10 @@ public class ToDo extends Task{
         )));
     }
 
+    public String getTaskType() { return "T"; }
+
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%s]%s", this.getTaskType(), super.toString());
     }
 }

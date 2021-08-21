@@ -21,7 +21,10 @@ public class Event extends Task{
     }
 
     @Override
+    public String getTaskType() { return "E"; }
+
+    @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.time);
+        return String.format("[%s]%s (at: %s)", this.getTaskType() , super.toString(), this.time);
     }
 }

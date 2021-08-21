@@ -20,8 +20,10 @@ public class Deadline extends Task{
         return new Deadline(parsedArgs[0], parsedArgs[1]);
     }
 
+    public String getTaskType() { return "D"; }
+
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.time);
+        return String.format("[%s]%s (by: %s)", this.getTaskType(), super.toString(), this.time);
     }
 }
