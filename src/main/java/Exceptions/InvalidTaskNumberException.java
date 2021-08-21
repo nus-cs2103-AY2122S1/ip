@@ -1,3 +1,5 @@
+package Exceptions;
+
 public class InvalidTaskNumberException extends DukeException {
 
     public InvalidTaskNumberException(int n) {

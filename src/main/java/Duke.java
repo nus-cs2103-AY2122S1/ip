@@ -1,3 +1,15 @@
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.Todo;
+
+import Exceptions.DukeException;
+import Exceptions.EmptyDescriptionException;
+import Exceptions.EmptyTimestampException;
+import Exceptions.InvalidTaskNumberException;
+import Exceptions.UnknownCommandException;
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,92 +31,94 @@ public class Duke {
         Task newTask = null;
         int index = commands.length;
         switch(keyWord) {
-            case "list":
-                if (commands.length != 1) throw new UnknownCommandException();
-                if (tasks.size() == 0) {
-                    message = "No tasks added so far!";
-                } else {
-                    index = 1;
-                    for (Task task : tasks) {
-                        message += String.format("%d. %s\n", index, task);
-                        index++;
-                    }
-                    message = message.substring(0, message.length() - 1);
-                }
-                break;
-            case "todo":
-                taskDescription = String.join(" ", Arrays.copyOfRange(commands, 1, commands.length));
-                if (taskDescription.length() == 0) throw new EmptyDescriptionException();
-                newTask = new Todo(taskDescription);
-                break;
-            case "deadline":
-                for (int i = 1; i < commands.length; i++) {
-                    if (commands[i].equals("/by")) {
-                        index = i;
-                        break;
-                    }
-                }
-
-                if (commands.length == 1 || index == 1) throw new EmptyDescriptionException();
-                taskDescription = String.join(" ", Arrays.copyOfRange(commands, 1, index));
-
-                if (index+1 == commands.length) throw new EmptyTimestampException();
-                extraDetails = String.join(" ", Arrays.copyOfRange(commands, index+1, commands.length));
-
-                newTask = new Deadline(taskDescription, extraDetails);
-                break;
-            case "event":
-                for (int i = 1; i < commands.length; i++) {
-                    if (commands[i].equals("/at")) {
-                        index = i;
-                        break;
-                    }
-                }
-
-                if (commands.length == 1 || index == 1) throw new EmptyDescriptionException();
-                taskDescription = String.join(" ", Arrays.copyOfRange(commands, 1, index));
-
-                if (index+1 == commands.length) throw new EmptyTimestampException();
-                extraDetails = String.join(" ", Arrays.copyOfRange(commands, index+1, commands.length));
-
-                newTask = new Event(taskDescription, extraDetails);
-                break;
-            case "done":
-                if (commands.length != 2) throw new UnknownCommandException();
-                try {
-                    int taskIndex = Integer.parseInt(commands[1]) - 1;
-                    if (taskIndex < 0 || taskIndex >= tasks.size()) {
-                        throw new InvalidTaskNumberException(tasks.size());
-                    } else {
-                        Task task = tasks.get(taskIndex);
-                        message = task.markDone()
-                                ? String.format("Nice! I've marked this task as done:\n    %s", task)
-                                : String.format("This was completed previously!:\n    %s", task);
-                    }
-                } catch (NumberFormatException e) {
-                    throw new InvalidTaskNumberException(tasks.size());
-                }
-                break;
-            case "delete":
-                if (commands.length != 2) throw new UnknownCommandException();
-                try {
-                    int taskIndex = Integer.parseInt(commands[1]) - 1;
-                    if (taskIndex < 0 || taskIndex >= tasks.size()) {
-                        throw new InvalidTaskNumberException(tasks.size());
-                    }
-                    Task task = tasks.get(taskIndex);
-                    tasks.remove(taskIndex);
-                    message = String.format(
-                            "Noted. I've removed this task:\n    %s\nNow you have %d tasks in the list.",
-                            task,
-                            tasks.size()
-                    );
-                } catch (NumberFormatException e) {
-                    throw new InvalidTaskNumberException(tasks.size());
-                }
-                break;
-            default:
+        case "list":
+            if (commands.length != 1) {
                 throw new UnknownCommandException();
+            }
+            if (tasks.size() == 0) {
+                message = "No tasks added so far!";
+            } else {
+                index = 1;
+                for (Task task : tasks) {
+                    message += String.format("%d. %s\n", index, task);
+                    index++;
+                }
+                message = message.substring(0, message.length() - 1);
+            }
+            break;
+        case "todo":
+            taskDescription = String.join(" ", Arrays.copyOfRange(commands, 1, commands.length));
+            if (taskDescription.length() == 0) throw new EmptyDescriptionException();
+            newTask = new Todo(taskDescription);
+            break;
+        case "deadline":
+            for (int i = 1; i < commands.length; i++) {
+                if (commands[i].equals("/by")) {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (commands.length == 1 || index == 1) throw new EmptyDescriptionException();
+            taskDescription = String.join(" ", Arrays.copyOfRange(commands, 1, index));
+
+            if (index+1 == commands.length) throw new EmptyTimestampException();
+            extraDetails = String.join(" ", Arrays.copyOfRange(commands, index+1, commands.length));
+
+            newTask = new Deadline(taskDescription, extraDetails);
+            break;
+        case "event":
+            for (int i = 1; i < commands.length; i++) {
+                if (commands[i].equals("/at")) {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (commands.length == 1 || index == 1) throw new EmptyDescriptionException();
+            taskDescription = String.join(" ", Arrays.copyOfRange(commands, 1, index));
+
+            if (index+1 == commands.length) throw new EmptyTimestampException();
+            extraDetails = String.join(" ", Arrays.copyOfRange(commands, index+1, commands.length));
+
+            newTask = new Event(taskDescription, extraDetails);
+            break;
+        case "done":
+            if (commands.length != 2) throw new UnknownCommandException();
+            try {
+                int taskIndex = Integer.parseInt(commands[1]) - 1;
+                if (taskIndex < 0 || taskIndex >= tasks.size()) {
+                    throw new InvalidTaskNumberException(tasks.size());
+                } else {
+                    Task task = tasks.get(taskIndex);
+                    message = task.markDone()
+                            ? String.format("Nice! I've marked this task as done:\n    %s", task)
+                            : String.format("This was completed previously!:\n    %s", task);
+                }
+            } catch (NumberFormatException e) {
+                throw new InvalidTaskNumberException(tasks.size());
+            }
+            break;
+        case "delete":
+            if (commands.length != 2) throw new UnknownCommandException();
+            try {
+                int taskIndex = Integer.parseInt(commands[1]) - 1;
+                if (taskIndex < 0 || taskIndex >= tasks.size()) {
+                    throw new InvalidTaskNumberException(tasks.size());
+                }
+                Task task = tasks.get(taskIndex);
+                tasks.remove(taskIndex);
+                message = String.format(
+                        "Noted. I've removed this task:\n    %s\nNow you have %d tasks in the list.",
+                        task,
+                        tasks.size()
+                );
+            } catch (NumberFormatException e) {
+                throw new InvalidTaskNumberException(tasks.size());
+            }
+            break;
+        default:
+            throw new UnknownCommandException();
         }
         if (newTask != null) {
             tasks.add(newTask);
@@ -116,6 +130,7 @@ public class Duke {
         }
         printOut(message);
     }
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
