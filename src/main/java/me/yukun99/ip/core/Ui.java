@@ -2,6 +2,8 @@ package me.yukun99.ip.core;
 
 import me.yukun99.ip.tasks.Task;
 
+import java.io.IOException;
+
 /**
  * Class used to handle message the Ui and responses from the HelpBot.
  */
@@ -10,6 +12,8 @@ public class Ui {
 	private final String name;
 	// List of tasks to be completed.
 	private final TaskList taskList;
+	// Storage instance from the current HelpBot.
+	private final Storage storage;
 
 	// Field placeholders.
 	private static final String NAME_PLACEHOLDER = "%name%";
@@ -59,6 +63,8 @@ public class Ui {
 			+ NEW_LINE + CMD_PREFIX + "'delete (task index)' - " + HELP_DELETE
 			+ NEW_LINE + CMD_PREFIX + "'bye' - " + HELP_EXIT;
 
+	// Message sent to user when user adds new task.
+	private static final String ADD = "Urgh, fine. Your task has been added:";
 	// Message sent to user when user deletes finished task.
 	private static final String DELETE_DONE = "Can't you just keep track of this yourself? Fine, removed this for " +
 			"you:";
@@ -82,9 +88,10 @@ public class Ui {
 	 *
 	 * @param name Name of the HelpBot.
 	 */
-	public Ui(String name, TaskList taskList) {
+	public Ui(String name, TaskList taskList, Storage storage) {
 		this.name = name.replace("\n", NEW_LINE);
 		this.taskList = taskList;
+		this.storage = storage;
 	}
 
 	/**
@@ -109,11 +116,22 @@ public class Ui {
 	}
 
 	/**
+	 * Sends user a message telling them task has been added.
+	 *
+	 * @param task Task that has been added.
+	 */
+	public void add(Task task) {
+		sendMessage(ADD
+				+ NEW_LINE + task
+				+ NEW_LINE + remaining());
+	}
+
+	/**
 	 * Sends user a message telling them task is already done.
 	 *
 	 * @param task Task that has already been done.
 	 */
-	public static void alreadyDone(Task task) {
+	public void alreadyDone(Task task) {
 		sendMessage(DONE_COMPLETED
 				+ NEW_LINE + task);
 	}
@@ -123,7 +141,7 @@ public class Ui {
 	 *
 	 * @param task Task that has been marked as done.
 	 */
-	public static void done(Task task) {
+	public void done(Task task) {
 		sendMessage(DONE_UNCOMPLETED
 				+ NEW_LINE + task);
 	}
@@ -185,9 +203,14 @@ public class Ui {
 	 *
 	 * @param message Message to be formatted.
 	 */
-	private static void sendMessage(String message) {
-		System.out.println(REPLY_HEADER);
-		System.out.println(message);
-		System.out.println(REPLY_FOOTER);
+	private void sendMessage(String message) {
+		String reply = REPLY_HEADER
+				+ NEW_LINE + message
+				+ NEW_LINE + REPLY_FOOTER
+				+ NEW_LINE;
+		System.out.print(reply);
+		try {
+			this.storage.saveMessage(reply);
+		} catch (IOException ignored) {}
 	}
 }

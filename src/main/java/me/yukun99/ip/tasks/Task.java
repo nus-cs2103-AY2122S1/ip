@@ -34,13 +34,13 @@ public abstract class Task {
 	/**
 	 * Marks a task as done.
 	 */
-	public void setDone() {
+	public void setDone(Ui ui) {
 		if (done) {
-			Ui.alreadyDone(this);
+			ui.alreadyDone(this);
 			return;
 		}
 		done = true;
-		Ui.done(this);
+		ui.done(this);
 	}
 
 	/**

@@ -35,5 +35,6 @@ public class AddCommand extends Command {
 			throw new HelpBotIllegalArgumentException(this.args[0]);
 		}
 		this.taskList.addTask(task);
+		this.ui.add(task);
 	}
 }

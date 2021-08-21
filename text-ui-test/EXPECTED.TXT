@@ -23,6 +23,21 @@ Oh. My. God. Fine. Here are your tasks:
   Do it yourself, idiot.
 ============================================================
 ===================To Your Royal Highness===================
+Urgh, fine. Your task has been added:
+ [E][ ] eat lunch (at: 12pm)
+You now have 1 tasks to do.
+============================================================
+===================To Your Royal Highness===================
+Urgh, fine. Your task has been added:
+ [D][ ] eat dinner (by: 5pm)
+You now have 2 tasks to do.
+============================================================
+===================To Your Royal Highness===================
+Urgh, fine. Your task has been added:
+ [T][ ] dig up some bodies
+You now have 3 tasks to do.
+============================================================
+===================To Your Royal Highness===================
 Exception in Help Bot:
 The following argument is invalid: eat lunch /by 12pm
 ============================================================

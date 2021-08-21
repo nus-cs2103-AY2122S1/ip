@@ -38,9 +38,9 @@ public class Parser {
 	 * @param ui Ui instance from the current instance of HelpBot.
 	 */
 	public Parser(HelpBot helpBot, Scanner scanner, TaskList taskList, Ui ui) {
+		this.helpBot = helpBot;
 		this.scanner = scanner;
 		this.taskList = taskList;
-		this.helpBot = helpBot;
 		this.ui = ui;
 	}
 

@@ -11,6 +11,6 @@ public class DoneCommand extends Command {
 
 	@Override
 	public void run() throws HelpBotInvalidTaskException {
-		this.taskList.doneTask(this.args[0]);
+		this.taskList.doneTask(this.args[0], this.ui);
 	}
 }
