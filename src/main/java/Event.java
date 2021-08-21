@@ -1,16 +1,19 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String dateTime;
+    private LocalDate dateTime;
     public Event(String description, String dateTime) throws DukeException {
         super(description);
-        this.dateTime = dateTime;
+        this.dateTime = LocalDate.parse(dateTime);
     }
     public String toString() {
         return String.format("[E][%s] %s (at: %s)",
-                getStatusIcon(), description, dateTime);
+                getStatusIcon(), description, getDateTime());
     }
 
     public String getDateTime() {
-        return dateTime;
+        return dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     @Override
