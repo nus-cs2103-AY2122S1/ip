@@ -15,6 +15,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Returns a new Duke object.
+     *
+     * @param filePath Path to the file storing saved data and to save new data to.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the bot Duke.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

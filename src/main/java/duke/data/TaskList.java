@@ -10,13 +10,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TaskList {
+
+    /** ArrayList to store all tasks */
     private ArrayList<Task> items;
+    /** Calendar object to store dates and times of timed tasks */
     private Calendar calendar;
 
+    /**
+     * Returns a new TaskList object when there is no previously saved data.
+     * Item list and calendar initialized to be empty.
+     */
     public TaskList() {
         this.items = new ArrayList<>();
         this.calendar = new Calendar();
     }
+
+    /**
+     * Returns a new TaskList object when there is previously saved data.
+     * Converts saved data to Task objects and initializes item list and calendar with saved data.
+     *
+     * @param taskArrayList ArrayList of String arrays, each representing a task.
+     * @throws DukeException If data is corrupt or missing information.
+     * @throws FileNotFoundException If data file cannot be found.
+     */
     public TaskList(ArrayList<String[]> taskArrayList) throws DukeException, FileNotFoundException {
         this.items = new ArrayList<>();
         this.calendar = new Calendar();
@@ -44,6 +60,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a task to item list and storage.
+     * If the task is a timed task, adds it to calendar as well.
+     *
+     * @param task Task to be added.
+     * @param storage Storage object to store task data.
+     */
     public void addItem(Task task, Storage storage) {
         this.items.add(task);
         if (task instanceof DateTimeTask) {
@@ -55,6 +78,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the String representation of all tasks in an array.
+     *
+     * @return String array containing a header as the first element and enumerated tasks for subsequent elements.
+     */
     public String[] returnItems() {
         String[] itemList = new String[this.items.size() + 1];
         itemList[0] = "Here are the tasks in your list:";
@@ -64,10 +92,24 @@ public class TaskList {
         return itemList;
     }
 
+    /**
+     * Returns a formatted String representation of the number of tasks.
+     *
+     * @param offset Number to decrement current number of tasks by.
+     * @return String array containing a header as the first element and enumerated tasks for subsequent elements.
+     */
     public String returnItemCount(int offset) {
         return "Now you have " + (this.items.size() - offset) + " tasks in the list.";
     }
 
+    /**
+     * Changes the status of a task to done.
+     *
+     * @param index Index of task to be modified.
+     * @param storage Storage object to save modification of task status.
+     * @return Task that was modified.
+     * @throws DukeException If index is invalid.
+     */
     public Task markDone(int index, Storage storage) throws DukeException{
         if (index > this.items.size() || index < 1) {
             throw new DukeException(DukeException.Type.INDEX);
@@ -78,14 +120,33 @@ public class TaskList {
         return t;
     }
 
+    /**
+     * Returns String representation of a task.
+     *
+     * @param index Index of task to be returned.
+     * @return String representation of a task at index.
+     */
     public String returnTask(int index) {
         return this.items.get(index - 1).toString();
     }
 
+    /**
+     * Returns String representation of the last task added.
+     *
+     * @return String representation of the last task added.
+     */
     public String returnLastTask() {
         return this.returnTask(items.size());
     }
 
+    /**
+     * Removes a task completely.
+     *
+     * @param index Index of task to be removed.
+     * @param storage Storage object to save removal of task.
+     * @return Task that was removed.
+     * @throws DukeException If index is invalid.
+     */
     public Task removeTask(int index, Storage storage) throws DukeException{
         if (index > this.items.size() || index < 1) {
             throw new DukeException(DukeException.Type.INDEX);
@@ -94,6 +155,12 @@ public class TaskList {
         return items.remove(index - 1);
     }
 
+    /**
+     * Returns String array of formatted String representations of all events occurring before a given date and time.
+     *
+     * @param dt Date and time limit of events returned.
+     * @return String array of String, with each String representing an event.
+     */
     public String[] getEventsAt(LocalDateTime dt) {
         ArrayList<DateTimeTask> tasks = calendar.getEventsAt(dt);
         String[] strArr = new String[tasks.size() + 1];
@@ -106,6 +173,12 @@ public class TaskList {
         return strArr;
     }
 
+    /**
+     * Returns String array of formatted String representations of all deadlines due by given date and time.
+     *
+     * @param dt Date and time limit of deadlines returned.
+     * @return String array of String, with each String representing deadline.
+     */
     public String[] getDeadlinesBy(LocalDateTime dt) {
         ArrayList<DateTimeTask> tasks = calendar.getDeadlinesBy(dt);
         String[] strArr = new String[tasks.size() + 1];
@@ -118,6 +191,12 @@ public class TaskList {
         return strArr;
     }
 
+    /**
+     * Returns String array of all events and deadlines formatted as Strings occurring before a given date and time.
+     *
+     * @param dt Date and time limit of events and deadlines returned.
+     * @return String array of String, with each String representing an event or deadline.
+     */
     public String[] getAllBy(LocalDateTime dt) {
         ArrayList<DateTimeTask> tasks = calendar.getAllBy(dt);
         String[] strArr = new String[tasks.size() + 1];
