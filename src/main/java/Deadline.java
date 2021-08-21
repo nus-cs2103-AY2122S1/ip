@@ -1,7 +1,10 @@
 import java.util.*;
+import java.time.*;
+import java.time.format.*;
 
 public class Deadline extends Task {
 	private String by;
+	private LocalDate date;
 
 	public static Deadline init(String line) {
 		int pos = line.indexOf("/by");
@@ -14,7 +17,14 @@ public class Deadline extends Task {
 	public Deadline(String description, String by) {
 		super(description);
 		this.type = "Deadline";
-		this.by = by;
+
+		try {
+			this.date = LocalDate.parse(by);
+			this.by = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+		} catch (DateTimeParseException ex) {
+			this.date = null;
+			this.by = by;
+		}
 	}
 
 	public String getFormat() {
