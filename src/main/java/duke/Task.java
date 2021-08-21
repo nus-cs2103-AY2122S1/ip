@@ -38,4 +38,8 @@ public class Task {
     public void setDone(boolean done) {
         isDone = done;
     }
+
+    public boolean isFound(String target) {
+        return this.name.contains(target);
+    }
 }
