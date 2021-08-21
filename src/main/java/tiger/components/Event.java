@@ -1,15 +1,23 @@
 package tiger.components;
 
+import tiger.exceptions.inputs.TigerDateParsingException;
 import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.storage.TigerStorageLoadException;
+import tiger.utils.CustomDate;
+import tiger.utils.DateStringConverter;
 
 public class Event extends Task {
 
-    private String eventAt;
+    private CustomDate customDate;
 
-    private Event(String taskDescription, boolean done, String eventAt) {
+    private Event(String taskDescription, boolean done, String eventAt) throws TigerDateParsingException {
         super(taskDescription, done);
-        this.eventAt = eventAt;
+        this.customDate = new DateStringConverter().getDateFromString(eventAt);
+    }
+
+    private Event(String taskDescription, boolean done, CustomDate customDate) throws TigerDateParsingException {
+        super(taskDescription, done);
+        this.customDate = customDate;
     }
 
     public static Event of(String taskDescription, boolean done, String eventAt) throws TigerEmptyStringException {
@@ -18,20 +26,20 @@ public class Event extends Task {
 
     @Override
     public Event markDone() {
-        return new Event(this.taskDescription, true, this.eventAt);
+        return new Event(this.taskDescription, true, this.customDate);
     }
 
     @Override
     public String toString() {
         if (this.done) {
-            return String.format("[E] [X] %s (at %s)", this.taskDescription, this.eventAt);
+            return String.format("[E] [X] %s (at %s)", this.taskDescription, this.customDate.toString());
         } else {
-            return String.format("[E] [ ] %s (at %s)", this.taskDescription, this.eventAt);
+            return String.format("[E] [ ] %s (at %s)", this.taskDescription, this.customDate.toString());
         }
     }
 
     protected String getStorageRepresentation() {
-        return String.format("E;%s;%s;%s", this.done, this.taskDescription, this.eventAt);
+        return String.format("E;%s;%s;%s", this.done, this.taskDescription, this.customDate.toString());
     }
 
     protected static Event getTaskFromStringRepresentation(String s) throws TigerStorageLoadException {

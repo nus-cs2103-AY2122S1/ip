@@ -7,11 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class GetDateFromString {
-
-    public GetDateFromString() {
-
-    }
+public class DateStringConverter {
 
     public CustomDate getDateFromString(String input) throws TigerDateParsingException {
         String editedInput = new RemoveSpaces().removeBackAndFrontSpaces(input);
@@ -20,12 +16,13 @@ public class GetDateFromString {
             assert (array.length <= 2);
             if (array.length == 1) {
                 // means that the user has only inputted the date or the time, but not both
-                assert(array[0].contains(":") || array[0].contains("/"));
+                assert(array[0].contains(":") || array[0].contains("-"));
                 // TODO: add support for am, pm
-                if (array[0].contains("/")) {
+                // TODO; add support for other date formats: ie 2021/12/21
+                if (array[0].contains("-")) {
                     // means the first entry is the date
                     String dateString = new RemoveSpaces().removeBackAndFrontSpaces(array[0]);
-                    LocalDate date = LocalDate.from(DateTimeFormatter.ofPattern("dd/MM/yyyy").parse(dateString));
+                    LocalDate date = LocalDate.from(DateTimeFormatter.ofPattern("yyyy-MM-dd").parse(dateString));
                     LocalTime time = LocalTime.from(DateTimeFormatter.ofPattern("HH:mm").parse("00:00"));
                     return new CustomDate(date, time, false);
                 } else {
@@ -39,17 +36,19 @@ public class GetDateFromString {
                 // means the user input is in the format dd/MM/yyyy HH:mm
                 String dateString = new RemoveSpaces().removeBackAndFrontSpaces(array[0]);
                 String timeString = new RemoveSpaces().removeBackAndFrontSpaces(array[1]);
-                LocalDate date = LocalDate.from(DateTimeFormatter.ofPattern("dd/MM/yyyy").parse(dateString));
+                LocalDate date = LocalDate.from(DateTimeFormatter.ofPattern("yyyy-MM-dd").parse(dateString));
                 LocalTime time = LocalTime.from(DateTimeFormatter.ofPattern("HH:mm").parse(timeString));
                 return new CustomDate(date, time, true);
             }
         } catch (DateTimeParseException e) {
             throw new TigerDateParsingException(e.toString());
+        } catch (AssertionError e) {
+            throw new TigerDateParsingException(e.toString());
         }
     }
 
     public static void main(String[] args) {
-        CustomDate customDate = new GetDateFromString().getDateFromString("       08:00        ");
+        CustomDate customDate = new DateStringConverter().getDateFromString("23:59");
         System.out.println(customDate.toString());
     }
 }

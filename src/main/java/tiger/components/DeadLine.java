@@ -1,14 +1,22 @@
 package tiger.components;
 
+import tiger.exceptions.inputs.TigerDateParsingException;
 import tiger.exceptions.storage.TigerStorageLoadException;
+import tiger.utils.CustomDate;
+import tiger.utils.DateStringConverter;
 
 public class DeadLine extends Task {
 
-    private String deadLine;
+    private CustomDate customDate;
 
-    private DeadLine(String taskDescription, boolean done, String deadLine) {
+    private DeadLine(String taskDescription, boolean done, String deadLine) throws TigerDateParsingException {
         super(taskDescription, done);
-        this.deadLine = deadLine;
+        this.customDate = new DateStringConverter().getDateFromString(deadLine);
+    }
+
+    private DeadLine(String taskDescription, boolean done, CustomDate customDate) throws TigerDateParsingException {
+        super(taskDescription, done);
+        this.customDate = customDate;
     }
 
     public static DeadLine of(String taskDescription, boolean done, String deadLine) {
@@ -17,20 +25,20 @@ public class DeadLine extends Task {
 
     @Override
     public DeadLine markDone() {
-        return new DeadLine(this.taskDescription, true, this.deadLine);
+        return new DeadLine(this.taskDescription, true, this.customDate);
     }
 
     @Override
     public String toString() {
         if (this.done) {
-            return String.format("[D] [X] %s (by %s)", this.taskDescription, this.deadLine);
+            return String.format("[D] [X] %s (by %s)", this.taskDescription, this.customDate.toString());
         } else {
-            return String.format("[D] [ ] %s (by %s)", this.taskDescription, this.deadLine);
+            return String.format("[D] [ ] %s (by %s)", this.taskDescription, this.customDate.toString());
         }
     }
 
     protected String getStorageRepresentation() {
-        return String.format("D;%s;%s;%s", this.done, this.taskDescription, this.deadLine);
+        return String.format("D;%s;%s;%s", this.done, this.taskDescription, this.customDate.toString());
     }
 
     protected static DeadLine getTaskFromStringRepresentation(String s) throws TigerStorageLoadException {
