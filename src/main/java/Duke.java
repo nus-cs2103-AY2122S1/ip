@@ -103,8 +103,10 @@ public class Duke {
                         + "\t- Event: To add a new event, type 'event' followed by the event description "
                         + "and specify the timing using '/by <dateTime>'\r\n\t"
                         + "To see all your task currently, type 'list'.\r\n\t"
-                        + "To delete a task, type 'delete' followed by the index of the task you wish to delete (e.g delete 2).\r\n\t"
-                        + "You can also mark tasks as done by typing 'done' followed by the index of the task you completed (e.g done 2).\r\n\t"
+                        + "To delete a task, type 'delete' followed by the index of the task you wish to "
+                        + "delete (e.g delete 2).\r\n\t"
+                        + "You can also mark tasks as done by typing 'done' followed by the index of the "
+                        + "task you completed (e.g done 2).\r\n\t"
                         + "Once you are done, just type 'exit' to quit the program.");
     }
 
