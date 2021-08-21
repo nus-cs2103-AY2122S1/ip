@@ -47,7 +47,7 @@ public class TaskList {
 
             Task task = this.getTaskByTaskNumber(taskNumber);
             this.list.remove(taskNumber - 1);
-            this.listFile.rewriteFileWith(this.list);
+            this.listFile.rewriteFile(this.list);
 
             return task;
         } catch(IOException e) {
@@ -61,7 +61,7 @@ public class TaskList {
 
             Task task = this.getTaskByTaskNumber(taskNumber);
             task.markAsDone();
-            this.listFile.rewriteFileWith(this.list);
+            this.listFile.rewriteFile(this.list);
 
             return task;
         } catch (IOException e) {

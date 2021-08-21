@@ -43,7 +43,7 @@ public class StorageFile {
         fw.close();
     }
 
-    public void rewriteFileWith(List<?> items) throws IOException {
+    public void rewriteFile(List<?> items) throws IOException {
         List<String> lines = new ArrayList<>();
         items.forEach((item) -> lines.add(item.toString()));
         Path path = Paths.get(this.filePath);

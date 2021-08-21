@@ -9,15 +9,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Storage {
-    private final static String dataDirectoryPath = "./data";
+    private final static String storageDirectoryPath = "./storage";
 
     public static StorageFile loadListFile() {
         try {
-            File directory = new File(dataDirectoryPath);
+            File directory = new File(storageDirectoryPath);
             directory.mkdirs();
 
             String listFileName = "duke.txt";
-            String filePath = String.format("%s/%s", dataDirectoryPath, listFileName);
+            String filePath = String.format("%s/%s", storageDirectoryPath, listFileName);
             return StorageFile.loadFile(filePath);
         } catch (IOException e) {
             Message message = new ErrorMessage("There was a problem in loading the list data");
