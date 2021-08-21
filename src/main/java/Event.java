@@ -10,4 +10,8 @@ class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
     }
+
+    public String fileFormat() {
+        return String.format("E%s | %s", super.fileFormat(), this.at);
+    }
 }

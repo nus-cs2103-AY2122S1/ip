@@ -22,4 +22,8 @@ class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public String fileFormat() {
+        return String.format(" | %s | %s", this.isDone ? "1" : "0", this.description);
+    }
 }
