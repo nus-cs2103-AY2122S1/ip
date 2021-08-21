@@ -20,30 +20,30 @@ A fly has been added to the menu:
 Now you have 1 flies to eat! RIBBIT!
 ----------------------------------------------
 A fly has been added to the menu:
-  [D][ ] cs2103t homework  (by: thursday)
+  [D][ ] cs2103t homework (by: thursday)
 Now you have 2 flies to eat! RIBBIT!
 ----------------------------------------------
 A fly has been added to the menu:
-  [E][ ] CCA!  (at: tues 6.30-9.30pm)
+  [E][ ] CCA! (at: tues 6.30-9.30pm)
 Now you have 3 flies to eat! RIBBIT!
 ----------------------------------------------
 Here is your menu for today:
 1.[T][ ] sleep
-2.[D][ ] cs2103t homework  (by: thursday)
-3.[E][ ] CCA!  (at: tues 6.30-9.30pm)
+2.[D][ ] cs2103t homework (by: thursday)
+3.[E][ ] CCA! (at: tues 6.30-9.30pm)
 ----------------------------------------------
 You have swallowed that pesky fly! RIBBIT!
   [T][X] sleep
 ----------------------------------------------
 You have swallowed that pesky fly! RIBBIT!
-  [D][X] cs2103t homework  (by: thursday)
+  [D][X] cs2103t homework (by: thursday)
 ----------------------------------------------
 You have swallowed that pesky fly! RIBBIT!
-  [E][X] CCA!  (at: tues 6.30-9.30pm)
+  [E][X] CCA! (at: tues 6.30-9.30pm)
 ----------------------------------------------
 Here is your menu for today:
 1.[T][X] sleep
-2.[D][X] cs2103t homework  (by: thursday)
-3.[E][X] CCA!  (at: tues 6.30-9.30pm)
+2.[D][X] cs2103t homework (by: thursday)
+3.[E][X] CCA! (at: tues 6.30-9.30pm)
 ----------------------------------------------
 See you again in my frog hole! RIBBIT!
