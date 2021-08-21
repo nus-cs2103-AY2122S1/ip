@@ -1,9 +1,12 @@
 package main.java;
 
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.*;
 
 public class DukeEngine {
     private final DukeMessages messages = new DukeMessages();
@@ -16,41 +19,7 @@ public class DukeEngine {
      */
     public void runProgram() {
 
-        /*
-        Todo sampleTask = new Todo("todoh-kun");
-        Deadline deadline = new Deadline("Eat pizzas", "Today");
-        Task event = new Event("Nightlife", "Wimbledon");
-
-        List<Task> sampleList = new ArrayList<Task>();
-        sampleList.add(sampleTask);
-        sampleList.add(deadline);
-        sampleList.add(event);
-
-        this.taskList = databaseEngine.readFromDatabase();
-        for (Task s: taskList) {
-            if (s instanceof Todo) {
-                System.out.println("\n" + s + " is an instance of ToDo!\n");
-            }
-
-            if (s instanceof Deadline) {
-                System.out.println("\n" + s + " is an instance of Deadline!\n");
-            }
-
-            if (s instanceof Event) {
-                System.out.println("\n" + s + " is an instance of Event!\n");
-            }
-        }
-
-
-        //this.taskList = databaseEngine.readFromDatabase();
-        //System.out.println("The retrieved task list is: ");
-        //System.out.println(this.taskList);
-
-        //databaseEngine.writeToDatabase(sampleList);
-         */
-
         this.loadData();
-
 
         //initialises the scanner
         Scanner sc = new Scanner(System.in);
@@ -187,18 +156,55 @@ public class DukeEngine {
         String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
         String description = String.join(" ", descriptionArray);
 
-        String by;
-        if (commandIndex + 1 <= inputArr.length - 1) {
-            String[] byArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
-            by = String.join(" ", byArray);
-        } else {
-            //TODO: might need to throw error here because this case is /by and nothing behind?
-            by = "No data was inputted";
-        }
+        try {
+            if (commandIndex + 1 <= inputArr.length - 1) {
+                String[] byArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
 
-        Deadline deadlineTask = new Deadline(description, by);
-        this.taskList.add(deadlineTask);
-        messages.taskAddMessage(deadlineTask.toString(), this.taskList.size());
+                if (byArray.length >= 3) {
+                    throw new DukeException("Command after /by should at most only have 2 parts for date and time!");
+                }
+
+                /*
+                System.out.println("byArray's Length: " + byArray.length);
+                if (byArray.length == 2) {
+                    //first input was a time
+                    if (byArray[0].length() == 4) {
+                        LocalTime time = LocalTime.parse(byArray[0]);
+                        LocalDate date = LocalDate.parse(byArray[1]);
+                        by =  LocalDateTime.of(date, time);
+                    } else {
+                        //first input is a date
+                        LocalTime time = LocalTime.parse(byArray[1]);
+                        LocalDate date = LocalDate.parse(byArray[0]);
+                        by =  LocalDateTime.of(date, time);
+                    }
+
+                } else {
+                    if (byArray[0].length() == 4) {
+                        throw new DukeException("Input has to be a date and not time!");
+                    } else {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
+                    }
+                }
+                */
+
+                if (byArray.length == 1) {
+                    LocalDate by = LocalDate.parse(byArray[0]);
+                    Deadline deadlineTask = new Deadline(description, by);
+                    this.taskList.add(deadlineTask);
+                    messages.taskAddMessage(deadlineTask.toString(), this.taskList.size());
+                }
+
+
+            } else {
+                throw new DukeException("Command after /by cannot be empty!");
+            }
+        } catch (DateTimeParseException e) {
+            messages.wrongDateInputMessage();
+        } catch (DukeException e) {
+            messages.displayText(e.toString());
+        }
     }
 
     /**

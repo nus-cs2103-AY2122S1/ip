@@ -2,6 +2,8 @@ package main.java;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.*;
 
@@ -23,6 +25,8 @@ public class DatabaseEngine {
         this.dir = Paths.get(System.getProperty("user.dir"), "database");
         this.fileDir = Paths.get(System.getProperty("user.dir"), "database", "database.json");
         this.file = new File(this.fileDir.toString());
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
     /**
@@ -36,7 +40,7 @@ public class DatabaseEngine {
                     .writeValue(file, taskList);
 
         } catch (IOException e) {
-            messages.displayText("An error occurred while trying to save to database. Please contact our staff for more information.");
+            messages.displayText("Error writing");
         }
     }
 

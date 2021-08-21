@@ -99,5 +99,12 @@ public class DukeMessages {
         this.displayText("The directory reference in DatabaseEngine is wrong. Please help to check it!");
     }
 
+    public void wrongDateInputMessage() {
+        this.displayText("The input should be a date! Some standard forms include (but are not exhaustive):\n" +
+                "yyyy-mm-dd\n" +
+                "MMM dd yyyy\n" +
+                "dd/mm/yyyy tttt");
+    }
+
 
 }
