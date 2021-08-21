@@ -1,12 +1,12 @@
 package Tasks;
 
 public class Deadline extends Task {
-    private String deadlineDetails;
-    public Deadline(String taskDetails, String deadlineDetails) {
+    private String timeInfo;
+    public Deadline(String taskDetails, String timeInfo) {
         super(taskDetails);
-        this.deadlineDetails = deadlineDetails;
+        this.timeInfo = timeInfo;
     }
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.deadlineDetails);
+        return String.format("[D]%s (by: %s)", super.toString(), this.timeInfo);
     }
 }

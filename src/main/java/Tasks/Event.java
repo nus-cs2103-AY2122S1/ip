@@ -1,14 +1,14 @@
 package Tasks;
 
 public class Event extends Task {
-    private String eventDetails;
-    public Event(String taskDetails, String eventDetails) {
+    private String timeInfo;
+    public Event(String taskDetails, String timeInfo) {
         super(taskDetails);
-        this.eventDetails = eventDetails;
+        this.timeInfo = timeInfo;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.eventDetails);
+        return String.format("[E]%s (at: %s)", super.toString(), this.timeInfo);
     }
 }
