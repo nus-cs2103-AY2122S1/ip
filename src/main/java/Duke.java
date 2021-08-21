@@ -3,11 +3,23 @@ import duke.*;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * This class consists exclusively of methods unique for Duke class.
+ *
+ * @author Lee Jae Ho
+ * @since 0.1
+ */
+
 public class Duke implements Runnable {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Constructor for Duke class. Initializes Ui, Storage, TaskList classes.
+     *
+     * @param filePath file URL where task information will be stored.
+     */
     public Duke(String filePath) {
         // initialization
         ui = new Ui();
@@ -19,6 +31,12 @@ public class Duke implements Runnable {
         }
     }
 
+    /**
+     * Method that allows Duke to be run as a program. Uses Scanner to read user commands.
+     * Error controls to tackle EmptyDescriptionError and UnknownCommandError. Uses Parser
+     * class to classify commands and control code flows. "bye" command will store the current
+     * taskList as a duke.txt file and close the scanner.
+     */
     public void run() {
         // greet the user
         ui.hi();
@@ -90,6 +108,12 @@ public class Duke implements Runnable {
         }
     }
 
+    /**
+     * Our main method. It reads the filepath of the duke.txt file, which stores the taskList
+     * information, then executes the Duke program.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }

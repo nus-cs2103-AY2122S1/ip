@@ -7,13 +7,28 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 
+/**
+ * This class will be responsible for loading and storing the taskList.
+ */
 public class Storage {
     protected File f;
 
+    /**
+     * Constructor method for Storage.
+     *
+     * @param filePath User must specify where they wish their file be created.
+     */
     public Storage(String filePath) {
         this.f = new File(filePath);
     }
 
+    /**
+     * This method loads the currently existing taskList memory to Duke. If the file
+     * does not exist, then it will be created.
+     *
+     * @return Returns the taskList for the TaskList class to be initialized.
+     * @throws IOException Error control for potential IOException.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> result = new ArrayList<>();
         // if the directory "data" does not exist, then create the directory
@@ -28,7 +43,7 @@ public class Storage {
                 Task t;
                 switch(line[0]) {
                     case "T":
-                        t = new Todo(line[2]);
+                        t = new Todo("todo " + line[2]);
                         break;
                     case "D":
                         t = new Deadline(line[2], LocalDate.parse(line[3]));
@@ -48,6 +63,11 @@ public class Storage {
         return result;
     }
 
+    /**
+     * This method stores the current taskList from Duke to the device.
+     *
+     * @throws IOException Error control for potential IOException.
+     */
     public void store(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(f);
         for (Task t : tasks.tasks) {
