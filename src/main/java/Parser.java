@@ -1,4 +1,18 @@
+/**
+ * Deals with making sense of the user command.
+ *
+ * @author marcuspeh
+ * @version A-MoreOOP
+ * @since 21 Aug 2021
+ */
 public class Parser {
+    /**
+     * Static method to parses the user command and make sense of the command by the user.
+     *
+     * @param message command input by the user.
+     * @return the type of command as a enum Keyword.
+     * @throws DukeException if the command is not recognised.
+     */
     public static Keyword parseChat(String message) throws DukeException {
         String command = message.split(" ")[0].toLowerCase();
 
@@ -17,6 +31,6 @@ public class Parser {
         else if (command.equals(Keyword.DELETE.getKeyword()))
             return Keyword.DELETE;
 
-        throw new DukeException("Command not parserable");
+        throw new DukeException("Command not parsable");
     }
 }

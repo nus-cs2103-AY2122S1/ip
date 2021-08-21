@@ -1,16 +1,12 @@
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Main file for chatbot.
  *
  * @author marcuspeh
- * @version Level-8
- * @since 20 Aug 2021
+ * @version A-MoreOOP
+ * @since 21 Aug 2021
  */
-
 public class Duke {
     /** For the chatboard to read the user input. */
     private Scanner sc;
@@ -18,7 +14,7 @@ public class Duke {
     private TaskList taskList;
     /** Get the ui to interact with the user */
     private Ui ui;
-    /** Deaks with loading of task */
+    /** deals with loading and saving tasks. */
     private Storage storage;
 
     /**

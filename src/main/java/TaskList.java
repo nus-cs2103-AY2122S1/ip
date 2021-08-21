@@ -1,12 +1,28 @@
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Deals with storing of task as well as operations involving the tasks.
+ *
+ * @author marcuspeh
+ * @version A-MoreOOP
+ * @since 21 Aug 2021
+ */
 public class TaskList {
+    /** List to store all the task. */
     private List<Task> taskList;
+    /** To deal with the errorMessages. */
     private Ui ui;
+    /** Deals with load and saving of task. */
     private Storage storage;
 
+    /**
+     * Constructor for TaskList.
+     *
+     * @param taskList List to store all the task.
+     * @param ui To deal with the error messages.
+     * @param storage deals with load and saving of tasks.
+     */
     TaskList(List<Task> taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
         this.ui = ui;
@@ -16,7 +32,7 @@ public class TaskList {
     /**
      * Add the task entered by the user into the list.
      *
-     * @param task task input by the user
+     * @param task task input by the user.
      */
     private void addTask(Task task) {
         taskList.add(task);
@@ -38,6 +54,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Parses the message and invoke another private function to add event.
+     *
+     * @param message Message sent by the user.
+     */
     public void addEvent(String message) {
         try {
             String[] details = message.split(Keyword.EVENTS.getSeparator());
@@ -50,8 +71,8 @@ public class TaskList {
     /**
      * Adds a new deadline to the task list.
      *
-     * @param s Description of the task
-     * @param dateTime Deadline of the task
+     * @param s Description of the task.
+     * @param dateTime Deadline of the task.
      */
     private void addDeadline(String s, String dateTime) {
         try {
@@ -62,6 +83,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Parses the message and invoke another private function to add deadline.
+     *
+     * @param message Message sent by the user.
+     */
     public void addDeadline(String message) {
         try {
             String[] details = message.split(Keyword.DEADLINE.getSeparator());
@@ -100,6 +126,11 @@ public class TaskList {
             ui.doneFailedMessage(task);
     }
 
+    /**
+     * Parses the message and invoke another private function to mark event as done.
+     *
+     * @param message Message sent by the user.
+     */
     public void markDone(String message) {
         try {
             markDone(Integer.parseInt(message.substring(Keyword.DONE.length() + 1)));
@@ -121,6 +152,11 @@ public class TaskList {
         ui.deleteMessage(task, taskList.size());
     }
 
+    /**
+     * Parses the message and invoke another private function to delete event.
+     *
+     * @param message Message sent by the user.
+     */
     public void deleteTask(String message) {
         try {
             deleteTask(Integer.parseInt(message.substring(Keyword.DELETE.length() + 1)));
@@ -131,10 +167,16 @@ public class TaskList {
         }
     }
 
+    /**
+     * Saves the task list by calling the method in storage.
+     */
     private void saveTaskList() {
         storage.exportTask(this.taskList);
     }
 
+    /**
+     * Return the list of task
+     */
     public List<Task> getTaskList() {
         return taskList;
     }

@@ -9,11 +9,24 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ *
+ * @author marcuspeh
+ * @version A-MoreOOP
+ * @since 21 Aug 2021
+ */
 public class Storage {
     /** File name for the storage. */
     private final String LOCATION = "./data/duke.txt";
+    /** To deals with the errorMessages */
     private Ui ui;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param ui to deal with the errorMessages.
+     */
     Storage(Ui ui) {
         this.ui = ui;
     }

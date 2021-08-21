@@ -2,9 +2,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * Deals with the interactions with the user. This class only
+ * prints out messages to the user.
+ *
+ * @author marcuspeh
+ * @version A-MoreOOP
+ * @since 21 Aug 2021
+ */
 public class Ui {
     /**
      * List out all the task stored by the user.
+     *
+     * @param taskList To list out all the task.
      */
     public void listTask(List<Task> taskList) {
 
@@ -21,40 +31,86 @@ public class Ui {
         printMessage(task);
     }
 
+    /**
+     * Prints out a message when task is added.
+     *
+     * @param task Task that is added.
+     * @param totalTask Total number of task stored.
+     */
     public void addMessage(Task task, int totalTask) {
         printMessage("Got it. I've added this task:",
                 task.toString(),
                 String.format("Now you have %o task(s).", totalTask));
     }
 
+    /**
+     * Prints out a message when the task is marked as done.
+     *
+     * @param task Task that is marked as done.
+     */
     public void doneSuccessMessage(Task task) {
         printMessage("Nice! I've did mark this task as done:", task.toString());
     }
 
+    /**
+     * Prints out a message when the user tries to mark a task as done when it
+     * is already marked as done.
+     *
+     * @param task Task to be marked as done.
+     */
     public void doneFailedMessage(Task task) {
         printMessage("Ugh! This task was already done:", task.toString());
     }
 
+    /**
+     * Prints out a message when the user deletes the task.
+     *
+     * @param task Task to be deleted.
+     * @param totalTask Total number of task stored.
+     */
     public void deleteMessage(Task task, int totalTask) {
         printMessage("Noted. I've removed this task:",
                 task.toString(),
                 String.format("Now you have %o task(s).", totalTask));
     }
 
+    /**
+     * Prints out a message when a task is unable to be exported and saved.
+     *
+     * @param task Task to be exported and saved.
+     */
     public void exportTaskErrorMessage(Task task) {
         printMessage(String.format("Unable to save %s", task.toString()));
     }
 
+    /**
+     * Prints out a message when all the task is unable to be exported and saved.
+     */
     public void exportTaskErrorMessage() {
         printMessage("Unable to save task.");
     }
 
+    /**
+     * Prints out a message when the task cannot be imported.
+     *
+     * @param description Description of task to be imported.
+     */
     public void importTaskErrorMessage(String description) {
         printMessage(String.format("Cant import %s", description));
     }
 
+    /**
+     * Prints out a message if this is the first time the user is using Duke.
+     */
     public void importTaskErrorMessage() {
-        printMessage("No stored task found.");
+        printMessage("This are the commands that I recognised:",
+                "bye - Ends the chat session.",
+                "todo <description> - Adds a new todo to the task list.",
+                "deadline <description> /by <date/time> - Adds a new deadline to the task list",
+                "event <description> /at <date/time> - Adds a new event to the task list",
+                "list - return a list of all the task",
+                "done <number> - Sets the task to be done",
+                "delete <number> - Delete the task");
     }
 
     /**
