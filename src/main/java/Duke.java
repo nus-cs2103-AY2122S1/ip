@@ -1,5 +1,9 @@
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Executes commands from user input for record keeping of tasks.
@@ -58,6 +62,25 @@ public class Duke {
         }
         return false;
     }
+
+    public static boolean isListOps(String input) throws DukeException {
+        if (input == null) {
+            return false;
+        }
+        int length = input.length();
+        if (length < 6) {
+            return false;
+        }
+        if (input.startsWith("list ")) {
+            try {
+                LocalDate holder = LocalDate.parse(input.substring(5).trim());
+                return true;
+            } catch (DateTimeParseException e) {
+                throw new DukeException(" ☹ SORZ but I only understand date in yyyy-MM-dd format!");
+            }
+        }
+        return false;
+    }
     
     public enum Command {
         TODO("todo"), DEADLINE("deadline"), EVENT("event"), 
@@ -100,7 +123,9 @@ public class Duke {
                     
                     // Goes through the Command Enum to check any matches with valid commands
                     if (c.value.equals(commandHolder)) {
-                        switch (c) { 
+
+                        switch (c) {
+
                         case BYE:
                             System.out.println("____________________________________________________________\n"
                                     + "Bye bye. Love you\n"
@@ -110,7 +135,15 @@ public class Duke {
                             break;
 
                         case LIST:
-                            System.out.println(taskList.toString());
+                            if (taskList.size() == 0) {
+                                System.out.println("____________________________________________________________\n"
+                                        + "Darling, you have nothing in your list though \n" 
+                                        +"____________________________________________________________\n");
+                            } else if (isListOps(temp)) {
+                                taskList.listSchedule(temp);
+                            } else {
+                                System.out.println(taskList.toString());
+                            }
                             ifExecuted = true;
                             break;
 
@@ -122,6 +155,7 @@ public class Duke {
                                 }
                                 taskList.doneTask(index);
                                 ifExecuted = true;
+
                             } else {
                                 throw new DukeException("☹ Would you specify the task for me my dear?");
                             }

@@ -20,4 +20,8 @@ public class Todo extends Task{
     public String getType() {
         return TYPE;
     }
+        
+    public boolean hasSchedule() {
+        return false;
+    }
 }

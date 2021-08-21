@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class TaskList {
     
@@ -63,7 +65,6 @@ public class TaskList {
         } catch (IOException e) {
             throw new DukeException("☹ OH NOOOOO! I cannot locate the file!!" + e.getMessage());
         }
-
     }
     
     @Override
@@ -82,6 +83,24 @@ public class TaskList {
     
     public int size() {
         return this.taskList.size();
+    }
+    
+    public void listSchedule(String content) {
+        LocalDate dateFilter = LocalDate.parse(content.substring(5).trim());
+        ArrayList<Task> filteredTaskList = this.taskList.stream()
+                .filter(Task::hasSchedule).collect(Collectors.toCollection(ArrayList::new));
+        System.out.println(String
+                .format("____________________________________________________________\n"
+                                + "Darling, here are the tasks with a schedule of %s:\n"
+                        , dateFilter.toString()));
+        for (int i = 0; i < filteredTaskList.size(); i++) {
+            Task task = filteredTaskList.get(i);
+            String entry = String.format("%d. %s",
+                    i+1, task.toString());
+            System.out.println(entry);
+        }
+        System.out.println("____________________________________________________________\n");
+
     }
     
     public void doneTask(int index) throws DukeException {
@@ -155,7 +174,5 @@ public class TaskList {
         } catch (IOException e) {
             throw new DukeException("☹ OH NOOOOO! Something wrong with the file!!" + e.getMessage());
         }
-
-
     }
 }
