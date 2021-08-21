@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * Class to store task. Subclass of Task.
+ * Class to store task. Subclass of duke.task.Task.
  *
  * @author marcuspeh
  * @version A-MoreOOP
@@ -11,17 +13,17 @@ public class ToDos extends Task {
      *
      * @param task task to be stored.
      */
-    ToDos(String task) {
+    public ToDos(String task) {
         super(task);
     }
 
     /**
      * Constructor for Todo.
      *
-     * @param task Task to be stored.
+     * @param task duke.task.Task to be stored.
      * @param done Whether the task is done.
      */
-    ToDos(String task, boolean done) {
+    public ToDos(String task, boolean done) {
         super(task, done);
     }
 

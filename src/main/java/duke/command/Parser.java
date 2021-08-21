@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.util.DukeException;
+import duke.task.Keyword;
+
 /**
  * Deals with making sense of the user command.
  *
@@ -10,7 +15,7 @@ public class Parser {
      * Static method to parses the user command and make sense of the command by the user.
      *
      * @param message command input by the user.
-     * @return the type of command as a enum Keyword.
+     * @return the type of command as a enum duke.task.Keyword.
      * @throws DukeException if the command is not recognised.
      */
     public static Command parseChat(String message) throws DukeException {
@@ -31,6 +36,6 @@ public class Parser {
         else if (command.equals(Keyword.DELETE.getKeyword()))
             return new DeleteCommand(message);
 
-        throw new DukeException("Command not parsable");
+        throw new DukeException("duke.command.Command not parsable");
     }
 }

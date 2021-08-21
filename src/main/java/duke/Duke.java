@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.Parser;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 import java.util.Scanner;
 
 /**
@@ -18,7 +27,7 @@ public class Duke {
     private Storage storage;
 
     /**
-     * Constructor for Duke.
+     * Constructor for duke.Duke.
      */
     Duke() {
         sc = new Scanner(System.in);

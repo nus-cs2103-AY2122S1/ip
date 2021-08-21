@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.text.ParseException;
 
 /**
@@ -15,18 +17,18 @@ public class Deadlines extends Task {
      * @param dateTime deadTime for the task.
      * @throws ParseException Date / Time format is invalid.
      */
-    Deadlines(String task, String dateTime) throws ParseException {
+    public Deadlines(String task, String dateTime) throws ParseException {
         super(task, dateTime);
     }
 
     /**
      * Constructor for Deadline.
      *
-     * @param task Task to be stored.
+     * @param task duke.task.Task to be stored.
      * @param dateTime deadTime for the task.
      * @param done Whether the task is done.
      */
-    Deadlines(String task, String dateTime, boolean done) throws ParseException {
+    public Deadlines(String task, String dateTime, boolean done) throws ParseException {
         super(task, dateTime, done);
     }
 

@@ -1,3 +1,11 @@
+package duke.util;
+
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Keyword;
+import duke.task.Task;
+import duke.task.ToDos;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -23,11 +31,11 @@ public class Storage {
     private Ui ui;
 
     /**
-     * Constructor for Storage.
+     * Constructor for duke.main.Storage.
      *
      * @param ui to deal with the errorMessages.
      */
-    Storage(Ui ui) {
+    public Storage(Ui ui) {
         this.ui = ui;
     }
 

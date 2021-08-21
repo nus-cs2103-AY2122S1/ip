@@ -15,6 +15,7 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/data/
 
 # checkstyle
 checkstyle-8.2-all.jar

@@ -1,19 +1,25 @@
+package duke.command;
+
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.task.Keyword;
+
 public class DeadlineCommand implements Command {
     /** Stores the message entered by the user. */
     private String message;
 
-    /** Constructor for DeadlineCommand.
+    /** Constructor for duke.command.DeadlineCommand.
      *
      * @param message Stores the message entered by the user.
      */
-    DeadlineCommand(String message) {
+    public DeadlineCommand(String message) {
         this.message = message;
     }
 
     /**
      * Main codes to run for the chat.
      *
-     * @param taskList TaskList to execute the command.
+     * @param taskList duke.main.TaskList to execute the command.
      * @param ui       To interact with the user.
      */
     @Override

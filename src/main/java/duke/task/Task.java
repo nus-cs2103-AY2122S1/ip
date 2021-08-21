@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +23,7 @@ public abstract class Task {
     private static final SimpleDateFormat formatDateTime = new SimpleDateFormat(DATETIME);
 
     /**
-     * Constructor for Task.
+     * Constructor for duke.task.Task.
      *
      * @param task task to be stored.
      */
@@ -31,9 +33,9 @@ public abstract class Task {
     }
 
     /**
-     * Constructor for Task.
+     * Constructor for duke.task.Task.
      *
-     * @param task Task to be stored.
+     * @param task duke.task.Task to be stored.
      * @param isDone Whether the task is done.
      */
     Task(String task, boolean isDone) {
@@ -43,9 +45,9 @@ public abstract class Task {
     }
 
     /**
-     * Constructor for Task.
+     * Constructor for duke.task.Task.
      *
-     * @param task Task to be stored.
+     * @param task duke.task.Task to be stored.
      * @param dateTime Date / Time of the task.
      * @param isDone Whether the task is done.
      */
@@ -56,9 +58,9 @@ public abstract class Task {
     }
 
     /**
-     * Constructor for Task.
+     * Constructor for duke.task.Task.
      *
-     * @param task Task to be stored.
+     * @param task duke.task.Task to be stored.
      * @param dateTime Date / Time of the task.
      * @throws ParseException Date / Time format is invalid.
      */

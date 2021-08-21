@@ -1,8 +1,13 @@
+package duke.command;
+
+import duke.util.TaskList;
+import duke.util.Ui;
+
 public class TodoCommand implements Command {
     /** Stores the message entered by the user. */
     private String message;
 
-    /** Constructor for TodoCommand.
+    /** Constructor for duke.task.Deadlines.TodoCommand.
      *
      * @param message Stores the message entered by the user.
      */
@@ -13,7 +18,7 @@ public class TodoCommand implements Command {
     /**
      * Main codes to run for the chat.
      *
-     * @param taskList TaskList to execute the command.
+     * @param taskList duke.main.TaskList to execute the command.
      * @param ui To interact with the user.
      */
     @Override

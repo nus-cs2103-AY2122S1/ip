@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Enum file for chatbot commands.
  *
@@ -8,20 +10,20 @@
 public enum Keyword {
     /** Exit message. */
     EXIT("bye"),
-    /** Keyword for listing out all the task. */
+    /** duke.task.Keyword for listing out all the task. */
     LIST("list"),
-    /** Keyword for marking task as done. */
+    /** duke.task.Keyword for marking task as done. */
     DONE("done"),
-    /** Keyword for marking task as Deadline task." */
+    /** duke.task.Keyword for marking task as Deadline task." */
     DEADLINE("deadline", " /by ", "D"),
-    /** Keyword for marking task as Events. */
+    /** duke.task.Keyword for marking task as duke.task.Events. */
     EVENTS("event", " /at ", "E"),
-    /** Keyword for marking task as Todos. */
+    /** duke.task.Keyword for marking task as Todos. */
     TODOS("todo", "", "T"),
-    /** Keyword for deleting task. */
+    /** duke.task.Keyword for deleting task. */
     DELETE("delete");
 
-    /** Keyword for command. */
+    /** duke.task.Keyword for command. */
     private String keyword;
     /** Separator for spliting up various input. */
     private String separator;
@@ -29,9 +31,9 @@ public enum Keyword {
     private  String saveWord;
 
     /**
-     * Constructor for Keyword Enum.
+     * Constructor for duke.task.Keyword Enum.
      *
-     * @param keyword Keyword for command
+     * @param keyword duke.task.Keyword for command
      */
     Keyword(String keyword) {
         this.keyword = keyword;
@@ -40,9 +42,9 @@ public enum Keyword {
     }
 
     /**
-     * Constructor for Keyword Enum.
+     * Constructor for duke.task.Keyword Enum.
      *
-     * @param keyword Keyword for command.
+     * @param keyword duke.task.Keyword for command.
      * @param separator Separator for spliting up various input.
      * @param saveWord saveWord for task.
      */

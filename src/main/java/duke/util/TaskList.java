@@ -1,3 +1,11 @@
+package duke.util;
+
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Keyword;
+import duke.task.Task;
+import duke.task.ToDos;
+
 import java.text.ParseException;
 import java.util.List;
 
@@ -17,13 +25,13 @@ public class TaskList {
     private Storage storage;
 
     /**
-     * Constructor for TaskList.
+     * Constructor for duke.main.TaskList.
      *
      * @param taskList List to store all the task.
      * @param ui To deal with the error messages.
      * @param storage deals with load and saving of tasks.
      */
-    TaskList(List<Task> taskList, Ui ui, Storage storage) {
+    public TaskList(List<Task> taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
         this.ui = ui;
         this.storage = storage;

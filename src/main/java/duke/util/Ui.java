@@ -1,6 +1,6 @@
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+package duke.util;
+
+import duke.task.Task;
 
 /**
  * Deals with the interactions with the user. This class only
@@ -26,7 +26,7 @@ public class Ui {
     /**
      * Prints out a message when task is added.
      *
-     * @param task Task that is added.
+     * @param task duke.task.Task that is added.
      * @param totalTask Total number of task stored.
      */
     public void addMessage(Task task, int totalTask) {
@@ -38,7 +38,7 @@ public class Ui {
     /**
      * Prints out a message when the task is marked as done.
      *
-     * @param task Task that is marked as done.
+     * @param task duke.task.Task that is marked as done.
      */
     public void doneSuccessMessage(Task task) {
         printMessage("Nice! I've did mark this task as done:", task.toString());
@@ -48,7 +48,7 @@ public class Ui {
      * Prints out a message when the user tries to mark a task as done when it
      * is already marked as done.
      *
-     * @param task Task to be marked as done.
+     * @param task duke.task.Task to be marked as done.
      */
     public void doneFailedMessage(Task task) {
         printMessage("Ugh! This task was already done:", task.toString());
@@ -57,7 +57,7 @@ public class Ui {
     /**
      * Prints out a message when the user deletes the task.
      *
-     * @param task Task to be deleted.
+     * @param task duke.task.Task to be deleted.
      * @param totalTask Total number of task stored.
      */
     public void deleteMessage(Task task, int totalTask) {
@@ -69,7 +69,7 @@ public class Ui {
     /**
      * Prints out a message when a task is unable to be exported and saved.
      *
-     * @param task Task to be exported and saved.
+     * @param task duke.task.Task to be exported and saved.
      */
     public void exportTaskErrorMessage(Task task) {
         printMessage(String.format("Unable to save %s", task.toString()));
@@ -92,7 +92,7 @@ public class Ui {
     }
 
     /**
-     * Prints out a message if this is the first time the user is using Duke.
+     * Prints out a message if this is the first time the user is using duke.Duke.
      */
     public void importTaskErrorMessage() {
         printMessage("This are the commands that I recognised:",

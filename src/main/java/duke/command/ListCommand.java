@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.task.Task;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -6,7 +12,7 @@ public class ListCommand implements Command {
     /**
      * Main codes to run for the chat.
      *
-     * @param taskList TaskList to execute the command.
+     * @param taskList duke.main.TaskList to execute the command.
      * @param ui       To interact with the user.
      */
     @Override
