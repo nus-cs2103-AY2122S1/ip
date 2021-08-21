@@ -19,7 +19,7 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac  -Xlint:none -d ../../../bin *.java
+if ! javac  -classpath . -Xlint:none -d ../../../bin duke/Duke.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
