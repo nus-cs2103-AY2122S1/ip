@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 class Event extends Task {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy hh:mma");
-    private LocalDateTime time;
+    private final LocalDateTime time;
 
     Event(String description, LocalDateTime time) {
         this.description = description;

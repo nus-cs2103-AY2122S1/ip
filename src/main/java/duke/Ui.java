@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Represents a user interface that the user can input commands to and read from
  */
 class Ui {
-    private static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
 
     /**
      * Returns next line of input from user

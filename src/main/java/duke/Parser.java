@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * Represents a parser that interprets commands
  */
 class Parser {
-    private TaskList tasks;
+    private final TaskList tasks;
 
     Parser(TaskList taskList) {
         tasks = taskList;

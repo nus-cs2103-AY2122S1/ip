@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 class Deadline extends Task {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy hh:mma");
-    private LocalDateTime time;
+    private final LocalDateTime time;
 
     Deadline(String description, LocalDateTime time) {
         this.description = description;

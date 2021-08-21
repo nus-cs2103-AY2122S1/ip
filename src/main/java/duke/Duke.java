@@ -6,8 +6,8 @@ import java.io.IOException;
  * This is Duke, my java bot!
  */
 class Duke {
-    private static TaskList tasks = new TaskList();
-    private static Parser parser = new Parser(tasks);
+    private static final TaskList tasks = new TaskList();
+    private static final Parser parser = new Parser(tasks);
     private static Storage storage;
 
     /**
