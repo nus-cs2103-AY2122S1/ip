@@ -19,10 +19,8 @@ public class DeadLine extends Task {
             LocalDate d1 = LocalDate.parse(by);
             this.date = d1;
             this.by = d1.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-            System.out.println(this.by);
         } catch (DateTimeParseException dateTimeParseException) {
             this.by = by;
-            System.out.println(dateTimeParseException.getMessage());
         }
     }
 

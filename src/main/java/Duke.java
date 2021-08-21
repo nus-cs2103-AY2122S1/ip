@@ -7,15 +7,18 @@ import java.util.Scanner;
  * @author Ryan Tian Jun.
  */
 public class Duke {
-    public static void main(String[] args) {
-        Intro printIntro = new Intro();
-        Farewell printFarewell = new Farewell();
+    private Storage storage;
+    private Intro intro;
+    private Farewell farewell;
 
-        printIntro.printIntro();
+    public Duke(String filePath) {
+        this.intro = new Intro();
+        this.farewell = new Farewell();
+        this.storage = new Storage(filePath);
+    }
 
-        // Attempts to find and read List history
-        TaskSave file = new TaskSave("data/duke.txt");
-
+    public void run() {
+        this.intro.printIntro();
         // Starts reading user input
         Scanner scanner = new Scanner(System.in);
         String command = "";
@@ -23,12 +26,16 @@ public class Duke {
             command = scanner.nextLine();
             // Processes user input
             if (!command.toLowerCase().equals("bye")) {
-                FeatureMain feature = new Feature(command);
+                Ui feature = new Feature(command);
 
             }
         }
-        FeatureMain.saveList();
-        printFarewell.printFarewell();
+        // Save commands on hard drive
+        TaskList.saveList();
+        farewell.printFarewell();
+    }
 
+    public static void main(String[] args) {
+       new Duke("data/duke.txt").run();
     }
 }

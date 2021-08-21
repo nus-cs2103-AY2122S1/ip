@@ -57,7 +57,7 @@ public class Task {
      *
      * @return returns true if it was successful.
      */
-    public boolean markAsDone() throws DukeException{
+    public boolean markAsDone() throws DukeException {
         if (!isDone) {
             isDone = true;
             return true;

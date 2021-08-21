@@ -1,4 +1,3 @@
-T | 0 | there
-D | 1 | test  | sunday
-E | 0 | testing  | 2010-10-9
-D | 0 | there  | Oct 10 2010
+T | 0 | fly
+D | 1 | return book  | sunday
+E | 0 | meeting tmr  | 2-4am sunday

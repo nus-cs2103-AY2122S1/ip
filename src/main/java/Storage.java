@@ -12,11 +12,11 @@ import java.util.Scanner;
  *
  * @author Ryan Tian Jun.
  */
-public class TaskSave {
+public class Storage {
 
     private String path;
 
-    public TaskSave(String path) {
+    public Storage(String path) {
         try {
             File file = new File(path);
             Scanner scanner = new Scanner(file);
@@ -76,7 +76,7 @@ public class TaskSave {
         } else {
             task = new Task("", Task.TYPE.O);
         }
-        FeatureMain.setList(task);
+        Ui.setList(task);
     }
     /**
      * Creates Task to be saved in hard drive.

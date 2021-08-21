@@ -4,7 +4,7 @@
  *
  * @author Ryan Tian Jun.
  */
-public class Feature extends FeatureMain {
+public class Feature extends Ui {
 
     public Feature (String command) {
         super(command);
