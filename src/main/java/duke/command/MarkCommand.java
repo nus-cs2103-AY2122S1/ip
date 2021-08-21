@@ -15,27 +15,28 @@ public class MarkCommand extends Command {
     }
 
     private void markTask(TaskList tasks, Ui ui) throws DukeException {
-        if (userInput.length() <= (Commands.DONE.getLength() + 1)) {
-            // Missing user input for index of task to be marked as done.
-            throw new DukeException(Ui.exceptionMissingIndexForMarking());
-        } else {
-            // Parses integer in user input.
-            int userNumInput = Parser.parseUserNumInput(this.userInput, Commands.DONE);
 
-            // Decrement integer from user input to match indexing of tasks.
-            int idx = userNumInput - 1;
+        // Preliminary check for any input following command.
+        Parser.checkInputValidity(this.userInput, Commands.DONE.getCommand(),
+                Ui.exceptionMissingIndexForMarking());
 
-            // Checks for invalid index.
-            if (idx >= tasks.size() || idx < 0) {
-                throw new DukeException(Ui.exceptionInvalidIndexForMarking());
-            }
+        // Parses integer in user input.
+        int userNumInput = Parser.parseUserNumInput(this.userInput, Commands.DONE);
 
-            // Marks task at index as done.
-            tasks.get(idx).markAsDone();
+        // Decrement integer from user input to match indexing of tasks.
+        int idx = userNumInput - 1;
 
-            // Prints response to user after successfully marking task at index as done.
-            ui.showMarkSuccess(tasks.get(idx));
+        // Checks for invalid index.
+        if (idx >= tasks.size() || idx < 0) {
+            throw new DukeException(Ui.exceptionInvalidIndexForMarking());
         }
+
+        // Marks task at index as done.
+        tasks.get(idx).markAsDone();
+
+        // Prints response to user after successfully marking task at index as done.
+        ui.showMarkSuccess(tasks.get(idx));
+
     }
 
     @Override

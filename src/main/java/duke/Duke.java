@@ -39,6 +39,7 @@ public class Duke {
 
         // Scans user inputs and prints corresponding outputs until a "Bye" input is received.
         String userInput = sc.nextLine();
+        // Only exactly "bye" is read as exit command.
         while (!userInput.equals(Commands.BYE.getCommand())) {
             Command command = Parser.parse(userInput);
             command.execute(this.tasks, this.ui, this.storage);

@@ -22,6 +22,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     public static Command parse(String userInput) {
+        // Only exactly "list" will be accepted for ListCommand.
         if (userInput.equals(Commands.LIST.getCommand())) {
             // Print tasks
             return new ListCommand(userInput);

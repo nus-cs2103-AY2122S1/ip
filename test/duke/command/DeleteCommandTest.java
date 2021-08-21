@@ -52,13 +52,9 @@ class DeleteCommandTest {
         StorageStub storageStub = new StorageStub(taskList);
         DeleteCommand deleteCommand = new DeleteCommand("delete");
         DeleteCommand deleteCommand1 = new DeleteCommand("delete ");
-        DeleteCommand deleteCommand2 = new DeleteCommand("delete 100");
-        DeleteCommand deleteCommand3 = new DeleteCommand("delete abc");
 
         deleteCommand.execute(taskList, this.ui, storageStub);
         deleteCommand1.execute(taskList, this.ui, storageStub);
-        deleteCommand2.execute(taskList, this.ui, storageStub);
-        deleteCommand3.execute(taskList, this.ui, storageStub);
 
         assertTrue(getTaskListOneTodo().equals(taskList));
     }
