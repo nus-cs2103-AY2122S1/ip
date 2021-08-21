@@ -12,6 +12,7 @@ public abstract class Task {
     private boolean isDone;
 
     public abstract String saveAsString();
+    
     /**
      * Constructor for a Task.
      *
@@ -57,6 +58,11 @@ public abstract class Task {
             // should NOT reach default as this function is only called in corresponding children of Tasks
             return null;
         }
+
+    }
+
+    public boolean onDate(String date) {
+        return false;
     }
 
     @Override

@@ -4,14 +4,15 @@ import static java.lang.Integer.parseInt;
 /**
  * Project Duke: Incrementally building a Chatbot.
  *
- * Current Progress: Level 7. Save
+ * Current Progress: Level 8. Date and Times
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted commands:
  *   - 'todo x' -> adds a ToDo task of x with no date/time attached
- *   - 'deadline x /by y' -> adds a Deadline task of x that needs to be done by y
- *   - 'event x /at y' -> adds an Event task of x that starts and ends at a specific time y
+ *   - 'deadline x /by a b' -> adds a Deadline task of x that needs to be done by date a and time b (time is optional)
+ *   - 'event x /at a b c' -> adds an Event task of x that is on date a and starts at time b and ends at time c
  *   - 'list' -> displays current list of tasks
+ *   - 'check x' -> displays list of tasks due on date x
  *   - 'done x' -> marks Task x as done
  *   - 'delete x' -> deletes Task x from the task list
  *   - 'bye' -> exits the program
@@ -22,7 +23,7 @@ import static java.lang.Integer.parseInt;
  */
 public class Duke {
     private enum Command {
-        LIST, DONE, TODO, DEADLINE, EVENT, DELETE, BYE, UNKNOWN
+        LIST, CHECK, DONE, TODO, DEADLINE, EVENT, DELETE, BYE, UNKNOWN
     }
 
     private static final String INDENTATION = "     ";
@@ -45,6 +46,8 @@ public class Duke {
             return Command.BYE;
         case "list":
             return Command.LIST;
+        case "check":
+            return Command.CHECK;
         case "done":
             return Command.DONE;
         case "todo":
@@ -81,6 +84,12 @@ public class Duke {
     private static void displayTasks() {
         System.out.println(LINE_SEPARATOR);
         tasksList.printList();
+        System.out.println(LINE_SEPARATOR + "\n");
+    }
+
+    private static void displayTasks(String dateString) {
+        System.out.println(LINE_SEPARATOR);
+        tasksList.printList(dateString);
         System.out.println(LINE_SEPARATOR + "\n");
     }
 
@@ -167,6 +176,9 @@ public class Duke {
                 switch (command) {
                 case LIST:
                     displayTasks();
+                    break;
+                case CHECK:
+                    displayTasks(filterTaskDescription(input));
                     break;
                 case DONE:
                     completeTask(filterTaskIndex(input));

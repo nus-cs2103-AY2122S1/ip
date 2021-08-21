@@ -12,14 +12,20 @@
 
     ____________________________________________________________
      I've added this task but it's not like I did it for you or anything!
-       [D][ ] return book (by: June 6th)
+       [D][ ] return book (by: Aug 23 2021 00:00)
      Now you have 2 tasks in the list. Do your best doing them okay?
     ____________________________________________________________
 
     ____________________________________________________________
      I've added this task but it's not like I did it for you or anything!
-       [E][ ] project meeting (by: Aug 6th 2-4pm)
+       [E][ ] project meeting (by: Aug 23 2021 14:00-16:00)
      Now you have 3 tasks in the list. Do your best doing them okay?
+    ____________________________________________________________
+
+    ____________________________________________________________
+     I've added this task but it's not like I did it for you or anything!
+       [E][ ] lecture (by: Aug 20 2021 16:00-18:00)
+     Now you have 4 tasks in the list. Do your best doing them okay?
     ____________________________________________________________
 
     ____________________________________________________________
@@ -29,31 +35,38 @@
 
     ____________________________________________________________
      1:[T][X] read book
-     2:[D][ ] return book (by: June 6th)
-     3:[E][ ] project meeting (by: Aug 6th 2-4pm)
+     2:[D][ ] return book (by: Aug 23 2021 00:00)
+     3:[E][ ] project meeting (by: Aug 23 2021 14:00-16:00)
+     4:[E][ ] lecture (by: Aug 20 2021 16:00-18:00)
     ____________________________________________________________
 
     ____________________________________________________________
      I've added this task but it's not like I did it for you or anything!
        [T][ ] graduate
-     Now you have 4 tasks in the list. Do your best doing them okay?
+     Now you have 5 tasks in the list. Do your best doing them okay?
     ____________________________________________________________
 
     ____________________________________________________________
      You completed a task! Maybe you aren't so incompetent after all.
-       [D][X] return book (by: June 6th)
+       [D][X] return book (by: Aug 23 2021 00:00)
     ____________________________________________________________
 
     ____________________________________________________________
      You completed a task! Maybe you aren't so incompetent after all.
-       [E][X] project meeting (by: Aug 6th 2-4pm)
+       [E][X] project meeting (by: Aug 23 2021 14:00-16:00)
     ____________________________________________________________
 
     ____________________________________________________________
      1:[T][X] read book
-     2:[D][X] return book (by: June 6th)
-     3:[E][X] project meeting (by: Aug 6th 2-4pm)
-     4:[T][ ] graduate
+     2:[D][X] return book (by: Aug 23 2021 00:00)
+     3:[E][X] project meeting (by: Aug 23 2021 14:00-16:00)
+     4:[E][ ] lecture (by: Aug 20 2021 16:00-18:00)
+     5:[T][ ] graduate
+    ____________________________________________________________
+
+    ____________________________________________________________
+     1:[D][X] return book (by: Aug 23 2021 00:00)
+     2:[E][X] project meeting (by: Aug 23 2021 14:00-16:00)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -65,7 +78,14 @@
     ____________________________________________________________
 
     ____________________________________________________________
-     BAKA! Input a valid index!! You have 4 tasks currently!
+     BAKA! I don't understand this Time input!
+     Time: 2500
+     It should be a valid time in the form HH:MM or HHMM!
+    ____________________________________________________________
+
+    ____________________________________________________________
+     You completed a task! Maybe you aren't so incompetent after all.
+       [T][X] graduate
     ____________________________________________________________
 
     ____________________________________________________________
@@ -77,17 +97,20 @@
     ____________________________________________________________
      I've deleted this task so show me some gratitude!
        [T][X] read book
+     Now you have 4 tasks in the list. Do your best doing them okay?
+    ____________________________________________________________
+
+    ____________________________________________________________
+     1:[D][X] return book (by: Aug 23 2021 00:00)
+     2:[E][X] project meeting (by: Aug 23 2021 14:00-16:00)
+     3:[E][ ] lecture (by: Aug 20 2021 16:00-18:00)
+     4:[T][X] graduate
+    ____________________________________________________________
+
+    ____________________________________________________________
+     I've deleted this task so show me some gratitude!
+       [T][X] graduate
      Now you have 3 tasks in the list. Do your best doing them okay?
-    ____________________________________________________________
-
-    ____________________________________________________________
-     1:[D][X] return book (by: June 6th)
-     2:[E][X] project meeting (by: Aug 6th 2-4pm)
-     3:[T][ ] graduate
-    ____________________________________________________________
-
-    ____________________________________________________________
-     BAKA! Input a valid index!! You have 3 tasks currently!
     ____________________________________________________________
 
     ____________________________________________________________
