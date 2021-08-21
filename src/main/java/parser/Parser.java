@@ -26,6 +26,8 @@ public class Parser {
             return DoneCommand.createCommand(trimmedMessage);
         case DELETE:
             return DeleteCommand.createCommand(trimmedMessage);
+        case FIND:
+            return FindCommand.createCommand(trimmedMessage);
         default:
             return AddCommand.createCommand(trimmedMessage, commandType);
         }

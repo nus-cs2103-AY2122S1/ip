@@ -6,7 +6,7 @@ package ui.message;
  * It overrides methods in `ui.message.DukeOutputMessage` to format the message differently for a list.
  */
 public class ListMessage extends Message {
-    private static String LIST_PREFIX = "Here are the tasks in your list:";
+    private String prefix;
 
     /**
      * Constructor to instantiate a `ui.message.DukeListMessage`.
@@ -14,8 +14,9 @@ public class ListMessage extends Message {
      *
      * @param message the string to be used in the list message
      */
-    public ListMessage(String message) {
+    public ListMessage(String prefix, String message) {
         super(message, "ヽ(°〇°)ﾉ");
+        this.prefix = prefix;
     }
 
     /**
@@ -25,6 +26,6 @@ public class ListMessage extends Message {
      */
     @Override
     protected String getMessage() {
-        return LIST_PREFIX + "\n\t" + super.getMessage();
+        return prefix + "\n\t" + super.getMessage();
     }
 }

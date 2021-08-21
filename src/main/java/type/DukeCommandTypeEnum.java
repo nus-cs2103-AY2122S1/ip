@@ -2,6 +2,7 @@ package type;
 
 public enum DukeCommandTypeEnum {
     LIST("list"),
+    FIND("find"),
     DONE("done"),
     DELETE("delete"),
     TODO("todo"),

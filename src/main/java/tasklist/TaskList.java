@@ -71,6 +71,19 @@ public class TaskList {
     }
 
     /**
+     * Gets a new list of only tasks whose description contains the keyword.
+     *
+     * @param keyword Keyword to search for.
+     * @return `TaskList`.
+     */
+    public TaskList getListContainingKeyword(String keyword) {
+        TaskList resultList = new TaskList(this.listFile);
+        resultList.list = new ArrayList<>(this.list);
+        resultList.list.removeIf(task -> !task.contains(keyword));
+        return resultList;
+    }
+
+    /**
      * Formats tasks in a numbered list form, starting from 1.
      *
      * @return the numbered list

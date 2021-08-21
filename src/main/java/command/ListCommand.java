@@ -15,6 +15,6 @@ public class ListCommand extends Command {
     }
 
     public ListMessage getOutputMessage() {
-        return new ListMessage(this.list.toString());
+        return new ListMessage("Here are the tasks in your list:", this.list.toString());
     }
 }
