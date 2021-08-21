@@ -15,7 +15,7 @@ public class Deadline extends DatedTask {
      * @param description the deadline's description
      * @throws BadInputFormatException if the deadline is badly formatted
      */
-    private Deadline(String description) throws BadInputFormatException, InvalidDateException {
+    Deadline(String description) throws BadInputFormatException, InvalidDateException {
         this(parseToDescription(description), parseToDate(description));
     }
 
@@ -25,7 +25,7 @@ public class Deadline extends DatedTask {
      * @param description the deadline's description
      * @param by the date to complete the task by
      */
-    private Deadline(String description, Date by) {
+    Deadline(String description, Date by) {
         super(description, by);
     }
 

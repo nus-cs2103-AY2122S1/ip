@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 public class Date {
     private LocalDate date;
 
-    private Date(LocalDate date) {
+    Date(LocalDate date) {
         this.date = date;
     }
 

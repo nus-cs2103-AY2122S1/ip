@@ -11,11 +11,11 @@ public class Todo extends Task {
      *
      * @param description the description
      */
-    private Todo(String description) {
+    Todo(String description) {
         super(description);
     }
 
-    private Todo(String description, boolean isDone) {
+    Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 

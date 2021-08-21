@@ -21,6 +21,10 @@ public class Storage {
     private static JSONParser jsonParser;
     private String filePath;
 
+    protected Storage() {
+        filePath = null;
+    }
+
     public Storage(String filePath) {
         this.filePath = filePath;
     }

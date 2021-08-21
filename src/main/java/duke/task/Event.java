@@ -15,7 +15,7 @@ public class Event extends DatedTask {
      * @param description the event's description
      * @throws BadInputFormatException if the description is badly formatted
      */
-    private Event(String description) throws BadInputFormatException, InvalidDateException {
+    Event(String description) throws BadInputFormatException, InvalidDateException {
         this(parseToDescription(description), parseToDate(description));
     }
 
@@ -25,7 +25,7 @@ public class Event extends DatedTask {
      * @param description the event's description
      * @param at the event's time
      */
-    private Event(String description, Date at) {
+    Event(String description, Date at) {
         super(description, at);
     }
 
