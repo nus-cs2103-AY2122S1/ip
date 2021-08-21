@@ -22,4 +22,9 @@ public class DoneCommand extends Command {
         ui.showCommandDone("Nice! I've marked this task as done:\n  " + completedTask);
         storage.save(tasks);
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }

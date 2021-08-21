@@ -28,4 +28,9 @@ public class DeleteCommand extends Command {
 
         storage.save(tasks);
     }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }
