@@ -1,6 +1,9 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Executes commands from user input for record keeping of tasks.
@@ -59,6 +62,25 @@ public class Duke {
         }
         return false;
     }
+
+    public static boolean isListOps(String input) throws DukeException {
+        if (input == null) {
+            return false;
+        }
+        int length = input.length();
+        if (length < 6) {
+            return false;
+        }
+        if (input.startsWith("list ")) {
+            try {
+                LocalDate holder = LocalDate.parse(input.substring(5).trim());
+                return true;
+            } catch (DateTimeParseException e) {
+                throw new DukeException(" ☹ SORZ but I only understand date in yyyy-MM-dd format!");
+            }
+        }
+        return false;
+    }
     
     public static enum Command {
         TODO("todo"), DEADLINE("deadline"), EVENT("event"), 
@@ -103,14 +125,34 @@ public class Duke {
                     // Goes through the Command Enum to check any matches with valid commands
                     if (c.value.equals(commandHolder)) {
                         switch (c) {
-                            case BYE:
-                                System.out.println("____________________________________________________________\n"
-                                        + "Bye bye. Love you\n"
-                                        + "____________________________________________________________\n");
-                                bye = true;
-                                break;
+                        case BYE:
+                            System.out.println("____________________________________________________________\n"
+                                    + "Bye bye. Love you\n"
+                                    + "____________________________________________________________\n");
+                            bye = true;
+                            break;
 
-                            case LIST:
+                        case LIST:
+                            if (taskList.size() == 0) {
+                                System.out.println("____________________________________________________________\n"
+                                        + "Darling, you have nothing in your list though \n" 
+                                        +"____________________________________________________________\n");
+                            } else if (isListOps(temp)) {
+                                LocalDate dateFilter = LocalDate.parse(temp.substring(5).trim());
+                                ArrayList<Task> filteredTaskList = taskList.stream()
+                                        .filter(Task::hasSchedule).collect(Collectors.toCollection(ArrayList::new));
+                                System.out.println(String
+                                        .format("____________________________________________________________\n" 
+                                                + "Darling, here are the tasks with a schedule of %s:\n"
+                                                , dateFilter.toString()));
+                                for (int i = 0; i < filteredTaskList.size(); i++) {
+                                    Task task = filteredTaskList.get(i);
+                                    String entry = String.format("%d. %s",
+                                            i+1, task.toString());
+                                    System.out.println(entry);
+                                }
+                                System.out.println("____________________________________________________________\n");
+                            } else {
                                 System.out.println("____________________________________________________________\n"
                                         + "Darling, here are the tasks in your list:\n");
                                 for (int i = 0; i < taskList.size(); i++) {
@@ -120,95 +162,96 @@ public class Duke {
                                     System.out.println(entry);
                                 }
                                 System.out.println("____________________________________________________________\n");
+                            }
+                            executed = true;
+                            break;
+
+                        case DONE:
+                            if (isDoneOps(temp)) {
+                                int index = Integer.parseInt(temp.substring(5));
+                                if (index > taskList.size())
+                                    throw new DukeException("☹ oopsie!!! The specified task does not exit.");
+                                taskList.get(index - 1).doneTask();
+                                System.out.println("____________________________________________________________\n"
+                                        + "Noice! I've marked this task as done: \n"
+                                        + taskList.get(index - 1).toString()
+                                        + "\n"
+                                        + "____________________________________________________________\n");
                                 executed = true;
-                                break;
+                            } else {
+                                throw new DukeException("☹ Would you specify the task for me my dear?");
+                            }
+                            break;
 
-                            case DONE:
-                                if (isDoneOps(temp)) {
-                                    int index = Integer.parseInt(temp.substring(5));
-                                    if (index > taskList.size())
-                                        throw new DukeException("☹ oopsie!!! The specified task does not exit.");
-                                    taskList.get(index - 1).doneTask();
-                                    System.out.println("____________________________________________________________\n"
-                                            + "Noice! I've marked this task as done: \n"
-                                            + taskList.get(index - 1).toString()
-                                            + "\n"
-                                            + "____________________________________________________________\n");
-                                    executed = true;
-                                } else {
-                                    throw new DukeException("☹ Would you specify the task for me my dear?");
-                                }
-                                break;
+                        case DELETE:
+                            if (isDeleteOps(temp)) {
+                                int index = Integer.parseInt(temp.substring(7));
+                                if (index > taskList.size())
+                                    throw new DukeException("☹ oopsie!!! The specified task does not exit.");
+                                String holder = taskList.get(index - 1).toString();
+                                taskList.remove(index - 1);
+                                taskList.trimToSize();
+                                System.out.println("____________________________________________________________\n"
+                                        + "okie! I've removed this annoying task: \n"
+                                        + holder
+                                        + "\nNow you have " + taskList.size() + " tasks in the list.\n"
+                                        + "____________________________________________________________\n");
+                                executed = true;
+                            } else {
+                                throw new DukeException("☹ Would you specify the task for me my dear?");
+                            }
+                            break;
 
-                            case DELETE:
-                                if (isDeleteOps(temp)) {
-                                    int index = Integer.parseInt(temp.substring(7));
-                                    if (index > taskList.size())
-                                        throw new DukeException("☹ oopsie!!! The specified task does not exit.");
-                                    String holder = taskList.get(index - 1).toString();
-                                    taskList.remove(index - 1);
-                                    taskList.trimToSize();
-                                    System.out.println("____________________________________________________________\n"
-                                            + "okie! I've removed this annoying task: \n"
-                                            + holder
-                                            + "\nNow you have " + taskList.size() + " tasks in the list.\n"
-                                            + "____________________________________________________________\n");
-                                    executed = true;
-                                } else {
-                                    throw new DukeException("☹ Would you specify the task for me my dear?");
-                                }
-                                break;
+                        case TODO:
+                            if (temp.trim().equals("todo")) {
+                                throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                            } else {
+                                Todo task = new Todo(temp);
+                                taskList.add(task);
+                                System.out.println("____________________________________________________________\n"
+                                        + "Gotcha my dear. I've added this task for you: \n" + task.toString()
+                                        + "\nNow you have " + taskList.size() + " tasks in the list.\n"
+                                        + "____________________________________________________________\n");
+                                executed = true;
+                            }
+                            break;
 
-                            case TODO:
-                                if (temp.trim().equals("todo")) {
-                                    throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
-                                } else {
-                                    Todo task = new Todo(temp);
-                                    taskList.add(task);
-                                    System.out.println("____________________________________________________________\n"
-                                            + "Gotcha my dear. I've added this task for you: \n" + task.toString()
-                                            + "\nNow you have " + taskList.size() + " tasks in the list.\n"
-                                            + "____________________________________________________________\n");
-                                    executed = true;
-                                }
-                                break;
+                        case DEADLINE:
+                            if (temp.trim().equals("deadline")) {
+                                throw new DukeException(
+                                        " ☹ OOPS!!! The description of a deadline cannot be empty.");
+                            } else if (temp.split("/", 2).length == 1) {
+                                throw new DukeException(
+                                        " ☹ OH MY DEAR!!! " +
+                                                "Please enter a time after / following the deadline description");
+                            } else {
+                                Deadline task = new Deadline(temp);
+                                taskList.add(task);
+                                System.out.println("____________________________________________________________\n"
+                                        + "Gotcha my dear. I've added this task for you: \n" + task.toString()
+                                        + "\nNow you have " + taskList.size() + " tasks in the list.\n"
+                                        + "____________________________________________________________\n");
+                                executed = true;
+                            }
+                            break;
 
-                            case DEADLINE:
-                                if (temp.trim().equals("deadline")) {
-                                    throw new DukeException(
-                                            " ☹ OOPS!!! The description of a deadline cannot be empty.");
-                                } else if (temp.split("/", 2).length == 1) {
-                                    throw new DukeException(
-                                            " ☹ OH MY DEAR!!! " +
-                                                    "Please enter a time after / following the deadline description");
-                                } else {
-                                    Deadline task = new Deadline(temp);
-                                    taskList.add(task);
-                                    System.out.println("____________________________________________________________\n"
-                                            + "Gotcha my dear. I've added this task for you: \n" + task.toString()
-                                            + "\nNow you have " + taskList.size() + " tasks in the list.\n"
-                                            + "____________________________________________________________\n");
-                                    executed = true;
-                                }
-                                break;
-
-                            case EVENT:
-                                if (temp.trim().equals("event")) {
-                                    throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
-                                } else if (temp.split("/", 2).length == 1) {
-                                    throw new DukeException(
-                                            " ☹ OH MY DEAR!!! " +
-                                                    "Please enter a date after / following the event description");
-                                } else {
-                                    Event task = new Event(temp);
-                                    taskList.add(task);
-                                    System.out.println("____________________________________________________________\n"
-                                            + "Gotcha my dear. I've added this task for you: \n" + task.toString()
-                                            + "\nNow you have " + taskList.size() + " tasks in the list.\n"
-                                            + "____________________________________________________________\n");
-                                    executed = true;
-                                }
-                                break;
+                        case EVENT:
+                            if (temp.trim().equals("event")) {
+                                throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
+                            } else if (temp.split("/", 2).length == 1) {
+                                throw new DukeException(
+                                        " ☹ OH MY DEAR!!! " +
+                                                "Please enter a date after / following the event description");
+                            } else {
+                                Event task = new Event(temp);
+                                taskList.add(task);
+                                System.out.println("____________________________________________________________\n"
+                                        + "Gotcha my dear. I've added this task for you: \n" + task.toString()
+                                        + "\nNow you have " + taskList.size() + " tasks in the list.\n"
+                                        + "____________________________________________________________\n");
+                                executed = true;
+                            }
+                            break;
                                 
                         }
                     } 

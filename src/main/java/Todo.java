@@ -9,4 +9,9 @@ public class Todo extends Task{
         return String.format("[T][%s] %s",
                 this.getStatus() ? "X" : " ", this.getContent());
     }
+
+    @Override
+    public boolean hasSchedule() {
+        return false;
+    }
 }

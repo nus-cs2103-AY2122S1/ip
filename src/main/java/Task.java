@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String content;
     private boolean status;
 
@@ -24,5 +24,7 @@ public class Task {
         return String.format("[%s] %s",
                 this.status ? "x" : " ", this.content);
     }
+    
+    abstract public boolean hasSchedule();
 
 }
