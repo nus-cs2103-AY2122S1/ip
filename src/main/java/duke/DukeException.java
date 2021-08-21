@@ -18,7 +18,8 @@ public class DukeException extends Exception{
             this.errorMessage = "☹ OOPS!!! The index of the task is out of range.";
             break;
         case COMMAND:
-            this.errorMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            this.errorMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "Type help to get a list of available commands!";
             break;
         case DEADLINE:
             this.errorMessage =  "☹ OOPS!!! Usage of deadline does not match 'description' /by 'deadline'";

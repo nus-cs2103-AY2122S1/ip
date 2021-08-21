@@ -33,7 +33,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println(format("duke.task.Task description cannot be found in database","A new file will be created"));
+        System.out.println(format("Task description cannot be found in database","A new file will be created"));
     }
 
     public void showSavingError() {
@@ -60,6 +60,17 @@ public class Ui {
         switch (c) {
         case BYE:
             System.out.println(format("Bye. Hope to see you again soon!"));
+            break;
+        case HELP:
+            System.out.println(format("  bye : Closes Duke", "  list : Returns all tasks added",
+                    "  todo <description> : Adds a todo task",
+                    "  event <description> /at <time: YYYY-MM-DDThh:mm> : Adds an event at time <time>",
+                    "  deadline <description> /by <time: YYYY-MM-DDThh:mm> : Adds a task with deadline at time <time>",
+                    "  done <index> : Marks the task at <index> as done",
+                    "  delete <index> : deletes the task at <index>",
+                    "  at <time: YYYY-MM-DDThh:mm> : Returns all events up till <time>",
+                    "  by <time: YYYY-MM-DDThh:mm> : Returns all tasks with deadline due before or at <time>",
+                    "  all <time: YYYY-MM-DDThh:mm> : Returns all timed tasks with times up till <time>"));
             break;
         case LIST:
             System.out.println(format(list.returnItems()));
