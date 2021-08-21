@@ -28,6 +28,12 @@ public class Task {
         return description;
     }
 
+    public String getTask() { return description; }
+
+    public String getType() {
+        return null;
+    }
+
     @Override
     public String toString() {
         return getStatusIcon() + " " + this.description;
