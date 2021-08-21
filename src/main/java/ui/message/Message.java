@@ -14,6 +14,9 @@ public class Message {
         this.face = face;
     }
 
+    /**
+     * Prints the formatted message for the user to see.
+     */
     public void print() {
         System.out.println(this.getFormattedMessage());
     }

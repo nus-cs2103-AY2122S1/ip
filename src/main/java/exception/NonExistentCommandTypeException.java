@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * Encapsulates an exception when a user inputs a command that is not recognised.
+ */
 public class NonExistentCommandTypeException extends DukeException {
     public NonExistentCommandTypeException(String inputMessage) {
         super(String.format(

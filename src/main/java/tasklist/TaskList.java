@@ -18,6 +18,11 @@ public class TaskList {
         this.listFile = listFile;
     }
 
+    /**
+     * Scans tasks from storage to list.
+     *
+     * @param task Task to be scanned into list.
+     */
     public void scanExistingTaskToList(Task task) {
         this.list.add(task);
     }
@@ -25,7 +30,7 @@ public class TaskList {
     /**
      * Adds task to a list.
      *
-     * @param task is the task be added to the list
+     * @param task Task be added to the list
      */
     public void addTaskToList(Task task) throws ErrorAccessingFile {
         try {
@@ -37,9 +42,9 @@ public class TaskList {
     }
 
     /**
-     * Delete task from a list.
+     * Deletes task from a list.
      *
-     * @param taskNumber is the number of the task to be removed from the list
+     * @param taskNumber Number of the task to be removed from the list.
      */
     public Task deleteTaskFromList(int taskNumber) throws NonExistentTaskNumberException, ErrorAccessingFile {
         try {
@@ -55,6 +60,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks task in the list as done, finding the task by its task number.
+     *
+     * @param taskNumber Task number of the task in the list, starting from 1.
+     * @return Task.
+     * @throws NonExistentTaskNumberException If the task number does not exist in the list.
+     * @throws ErrorAccessingFile If there is an error accessing the storage file.
+     */
     public Task markTaskAsDone(int taskNumber) throws NonExistentTaskNumberException, ErrorAccessingFile {
         try {
             validateTaskNumberExists(taskNumber);
@@ -73,7 +86,7 @@ public class TaskList {
     /**
      * Formats tasks in a numbered list form, starting from 1.
      *
-     * @return the numbered list
+     * @return Numbered list.
      */
     @Override
     public String toString() {
@@ -97,9 +110,9 @@ public class TaskList {
     }
 
     /**
-     * Gets the number of tasks in the list
+     * Gets the number of tasks in the list.
      *
-     * @return the number of tasks in the list
+     * @return Number of tasks in the list.
      */
     public int getNumberOfTasks() {
         return this.list.size();

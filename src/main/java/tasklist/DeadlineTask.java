@@ -27,10 +27,10 @@ public class DeadlineTask extends Task {
     /**
      * Processes the input string to create a deadline task with an action and deadline.
      *
-     * @param description The input task string by the user
-     * @return a `entity.list.DukeDeadlineTask` containing an action description and deadline information
+     * @param description Input task string.
+     * @return App representation of a task containing an action description and deadline information.
      */
-    public static DeadlineTask createTask (String description) throws InvalidTaskTimeFormatException, InvalidDateTimeException {
+    protected static DeadlineTask createTask (String description) throws InvalidTaskTimeFormatException, InvalidDateTimeException {
         // Split the description into its action and time parts
         String[] splitPartsUsingBy = splitActionAndTime(
                 description,
@@ -56,7 +56,7 @@ public class DeadlineTask extends Task {
     /**
      * Formats the task in string form, displaying the task type, status, description and deadline.
      *
-     * @return the task in a displayed string format
+     * @return Task in a displayed string format.
      */
     @Override
     public String toString() {
@@ -65,6 +65,12 @@ public class DeadlineTask extends Task {
         return String.format("[D]%s (by: %s)", super.toString(), formattedDeadline);
     }
 
+    /**
+     * Creates an app representation of a deadline task from the storage representation of the task.
+     *
+     * @param description Storage representation of a deadline task.
+     * @return App representation of a deadline task.
+     */
     public static DeadlineTask createTaskFromStoredString(String description) {
         String statusIcon = description.substring(1, 2);
         boolean isDone = false;

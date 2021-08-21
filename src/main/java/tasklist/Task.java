@@ -92,6 +92,12 @@ public class Task {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 
+    /**
+     * Creates an app representation of a task from the storage representation of the task.
+     *
+     * @param fullDescription Storage representation of the task including the task type.
+     * @return App representation of the task.
+     */
     public static Task createTaskFromStoredString(String fullDescription) {
         String trimmedFullDescription = fullDescription.trim();
         char taskType = trimmedFullDescription.charAt(1);

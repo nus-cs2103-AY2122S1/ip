@@ -6,13 +6,31 @@ import exception.MissingCommandDescriptionException;
 import exception.NonExistentCommandTypeException;
 import type.DukeCommandTypeEnum;
 
+/**
+ * Encapsulates a `Parser` that parses string inputs to commands or throws exceptions if they are invalid.
+ */
 public class Parser {
     private final static String EXIT_COMMAND = "bye";
 
+    /**
+     * Detects if an input is the exit command.
+     *
+     * @param inputMessage Input string taken in by System.in.
+     * @return True if it the input is the exit command, false otherwise.
+     */
     public boolean detectExitCommand(String inputMessage) {
         return inputMessage.trim().equals(EXIT_COMMAND);
     }
 
+    /**
+     * Creates a command from the input string.
+     *
+     * @param inputMessage Input string taken in by System.in.
+     * @return `Command`.
+     * @throws InvalidTaskNumberException If the `Command` has an invalid task number.
+     * @throws NonExistentCommandTypeException If the `Command` has a command type that is not recognised.
+     * @throws MissingCommandDescriptionException If the `Command` has a missing description.
+     */
     public Command makeCommand(String inputMessage)
             throws InvalidTaskNumberException, NonExistentCommandTypeException, MissingCommandDescriptionException {
         DukeCommandTypeEnum commandType = getCommandType(inputMessage);

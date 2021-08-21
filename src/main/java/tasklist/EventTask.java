@@ -20,8 +20,8 @@ public class EventTask extends Task {
     /**
      * Processes the input string to create an event task with an action and time.
      *
-     * @param description The input task string by the user
-     * @return a `entity.list.DukeEventTask` containing an action description and time information
+     * @param description Input task string.
+     * @return App representation of a task containing an action description and time information.
      */
     public static EventTask createTask (String description) throws InvalidTaskTimeFormatException {
         // Split the description into its action and time parts
@@ -43,13 +43,19 @@ public class EventTask extends Task {
     /**
      * Formats the task in string form, displaying the task type, status, description and time.
      *
-     * @return the task in a displayed string format
+     * @return Task in a displayed string format.
      */
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), this.time);
     }
 
+    /**
+     * Creates an app representation of an event task from the storage representation of the task.
+     *
+     * @param description Storage representation of an event task.
+     * @return App representation of an event task.
+     */
     public static EventTask createTaskFromStoredString(String description) {
         String statusIcon = description.substring(1, 2);
         boolean isDone = false;

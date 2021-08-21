@@ -8,9 +8,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Encapsulates the object handling data that is stored in the hard disk.
+ */
 public class Storage {
     private final static String storageDirectoryPath = "./storage";
 
+    /**
+     * Loads storage file containing the list.
+     * Creates new storage file for the list if the file does not exist.
+     *
+     * @return `StorageFile`.
+     */
     public static StorageFile loadListFile() {
         try {
             File directory = new File(storageDirectoryPath);
@@ -26,10 +35,16 @@ public class Storage {
         }
     }
 
-    public static TaskList scanListFileDataToList(StorageFile listFile) {
+    /**
+     * Scan data from the storage list to app representation of the list.
+     *
+     * @param storageFile Storage file containing the list data.
+     * @return App representation of the list.
+     */
+    public static TaskList scanListFileDataToList(StorageFile storageFile) {
         try {
-            TaskList list = new TaskList(listFile);
-            listFile.scanFileDataToList(list);
+            TaskList list = new TaskList(storageFile);
+            storageFile.scanFileDataToList(list);
             return list;
         } catch (FileNotFoundException e) {
             Message message = new ErrorMessage("There was a problem in scanning the storage data to a list");
