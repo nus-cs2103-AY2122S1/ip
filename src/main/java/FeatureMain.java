@@ -22,17 +22,17 @@ public class FeatureMain {
                 markDone();
             } else if (isToDo(command)) {
                 this.currentCommand = command;
-                Task task = new ToDo(command.substring(5).trim(), Task.TYPE.T);
+                Task task = new ToDo(command.substring(5), Task.TYPE.T);
                 FeatureMain.commands.add(task);
                 printTask(task);
             } else if (isDeadLine(command)) {
                 this.currentCommand = command;
-                Task task = new DeadLine(command.substring(9).trim(), Task.TYPE.D, returnDeadline(command).trim());
+                Task task = new DeadLine(command.substring(9), Task.TYPE.D, returnDeadline(command));
                 FeatureMain.commands.add(task);
                 printTask(task);
             } else if (isEvent(command)) {
                 this.currentCommand = command;
-                Task task = new Event(command.substring(6).trim(), Task.TYPE.E, returnTimeline(command).trim());
+                Task task = new Event(command.substring(6), Task.TYPE.E, returnTimeline(command));
                 FeatureMain.commands.add(task);
                 printTask(task);
             } else if (isDelete(command)) {
@@ -46,29 +46,13 @@ public class FeatureMain {
         } catch (DukeException e) {
             System.out.println(e + "\n");
         }
+
     }
 
 
     // checks if command given is a list
     private boolean isList(String command) {
         return command.equals("list");
-    }
-
-    /**
-     * Sets saved list history read from hard drive.
-     */
-    public static void setList(Task task) {
-        commands.add(task);
-    }
-
-    /**
-     * Saves list of commands to hard drive upon program exit.
-     */
-    public static void saveList() {
-        TaskSave.wipeOldSave();
-        for (Task task : commands) {
-            TaskSave.writeTask(task);
-        }
     }
 
     /**
@@ -249,10 +233,6 @@ public class FeatureMain {
      */
     private static String userCommands() {
         int count = 1;
-
-        if (commands.size() == 0) {
-            System.out.println("List is empty!");
-        }
         for (Task item : commands) {
             System.out.println(count + ". "  + item);
             count++;

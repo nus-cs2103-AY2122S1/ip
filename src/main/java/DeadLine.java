@@ -1,8 +1,7 @@
 /**
- *  This class represents a Deadline.
- *  A Deadline: tasks that need to be done before a specific date/time.
- *
- * @author Ryan Tian Jun.
+ *  This class represents a Deadline
+ *  A Deadline: tasks that need to be done before a specific date/time
+ * @author Ryan Tian Jun
  */
 public class DeadLine extends Task {
 

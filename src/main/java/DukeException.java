@@ -1,8 +1,7 @@
 /**
- *  This class represents the Exceptions thrown by Duke.
- *  Consult comments for error codes.
- *
- * @author Ryan Tian Jun.
+ *  This class represents the Exceptions thrown by Duke
+ *  Consult comments for error codes
+ * @author Ryan Tian Jun
  */
 
 public class DukeException extends Exception {
@@ -15,14 +14,6 @@ public class DukeException extends Exception {
         super(errorMessage);
         this.message = errorMessage;
     }
-
-    /**
-     * This constructor is used for more general exceptions.
-     * Refer to error codes for more details.
-     *
-     * @param errorMessage Error Message to be Displayed.
-     * @param type type of the error, denoted by comment above.
-     */
     public DukeException(String errorMessage, int type) {
         super(errorMessage);
         this.message = errorMessage;
