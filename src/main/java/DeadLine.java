@@ -1,22 +1,27 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * DeadLine class for implementing tasks that have a deadline.
+ * Only accepts date inputs of the format yyyy-mm-dd.
  */
 public class DeadLine extends Task {
 
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Constructor of the Deadline class.
      * @param description the name of the task
-     * @param by when is the dateline of the task
+     * @param by when is the dateline of the task in the formate yyyy-mm-dd
      */
     public DeadLine(String description, String by) {
         super(description, TypeOfTasks.DEADLINE);
-        this.by = by;
+        this.by = LocalDate.parse(by.trim());
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by:" + by + ")";
+        String formattedDate = this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return "[D]" + super.toString() + " (by:" + formattedDate + ")";
     }
 }
