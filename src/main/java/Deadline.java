@@ -27,20 +27,4 @@ public class Deadline extends Task{
     public String toString() {
         return "[D]" + super.toString() + " (by: " + ddl + ")";
     }
-
-    /**
-     * The method is to get type of the deadline event
-     */
-    @Override
-    public String getType() {
-        return "D";
-    }
-
-    /**
-     * The method is to get time of the deadline event
-     */
-    @Override
-    public String getTime() {
-        return this.ddl;
-    }
 }

@@ -4,13 +4,10 @@
  * @author Deng Huaiyu(G12)
  * @version CS2103T AY21/22 Semester 1
  */
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Tasks {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
     //for division
     private static String ind = "    ";
     //for sentences
@@ -77,7 +74,6 @@ public class Tasks {
         } else {
             sOrNot = "tasks";
         }
-        Duke.saveFile();
         System.out.println(div);
         System.out.println(ind2 + "Got it. I've added this task: ");
         System.out.println(ind2 +" "+ t);
@@ -108,7 +104,6 @@ public class Tasks {
     public void complete(int pos) throws DukeException {
         if (this.tasks.size()>pos-1 && pos != 0) {
             String p = this.tasks.get(pos-1).finished();
-            Duke.saveFile();
             System.out.println(div + "\n" + ind2 + "Nice! I've marked this task as done: " + "\n" +
                     ind2 + ind2 + p + "\n" + div);
         } else {
@@ -133,7 +128,6 @@ public class Tasks {
                 sOrNot = "tasks";
             }
             this.tasks.remove(deleted);
-            Duke.saveFile();
             System.out.println(div);
             System.out.println(ind2 + "Noted. I've removed this task: ");
             System.out.println(ind2 +" "+ deleted);
@@ -178,53 +172,5 @@ public class Tasks {
             result[0] = name;
             result[1] = time;
             return result;
-    }
-
-    /**
-     * The method is to load tasks previously stored in local hard disk into the arraylist.
-     *
-     * @param f the file read from disk
-     */
-    public static void loadList(File f) throws FileNotFoundException {
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            String next = s.nextLine();
-            String[] n = next.split(" \\| ");
-            switch (n[0]) {
-                case("T"):
-                    Todo t = new Todo(n[2]);
-                    int completed = Integer.parseInt(n[1]);
-                    if (completed == 1) {
-                        t.setFinish();
-                    }
-                    tasks.add(t);
-                    break;
-                case("E"):
-                    Event e = new Event(n[2], n[3]);
-                    int c = Integer.parseInt(n[1]);
-                    if (c == 1) {
-                        e.setFinish();
-                    }
-                    tasks.add(e);
-                    break;
-                case("D"):
-                    Deadline d = new Deadline(n[2], n[3]);
-                    int cd = Integer.parseInt(n[1]);
-                    if (cd == 1) {
-                        d.setFinish();
-                    }
-                    tasks.add(d);
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
-    /**
-     * The method is to get all the tasks listed.
-     */
-    public static ArrayList<Task> getTasks() {
-        return tasks;
     }
 }
