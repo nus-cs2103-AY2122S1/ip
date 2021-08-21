@@ -1,8 +1,8 @@
 todo borrow book
 list
-deadline return book /by Sunday
+deadline return book /by 20/08/2021 0900
 list
-event project meeting /at Mon 2-4pm
+event project meeting /at 21/08/2021 1800
 list
 todo
 deadline try/by Tmr
