@@ -1,3 +1,5 @@
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,9 +9,17 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private final ArrayList<Task> list = new ArrayList<>();
+    private final ArrayList<Task> list;
+    private final Storage db;
 
-    public Duke() {}
+    /**
+     * Constructor for Duke
+     * @param filePath the path for the file where data is stored
+     */
+    public Duke(Path filePath) {
+        this.db = new Storage(filePath);
+        this.list = db.loadData();
+    }
 
     /**
      * Returns a greeting message
@@ -28,27 +38,18 @@ public class Duke {
     }
 
     /**
-     * Echos the given input
-     * @param input the given text
-     * @return same input
-     */
-    public String echo(String input) {
-        return wrapText(input);
-    }
-
-    /**
      * Adds the given task into list
      * @param t the task to add
      * @return message indicating successful addition to list
      */
     public String add(Task t) {
         this.list.add(t);
-        Task.count++;
+        db.saveData(this.list);
         return wrapText(
                 String.format(
                         "Got it. I've added this task:\n %s\nNow you have %d task(s) in the list",
                         t.toString(),
-                        Task.count));
+                        this.list.size()));
     }
 
     /**
@@ -57,14 +58,14 @@ public class Duke {
      * @return message indicating success
      */
     public String delete(int index) throws InvalidIndexException {
-        if (index > Task.count) throw new InvalidIndexException();
+        if (index > this.list.size()) throw new InvalidIndexException();
         Task t = this.list.get(index - 1);
         this.list.remove(index - 1);
-        Task.count--;
+        db.saveData(this.list);
         return wrapText(String.format(
                 "Noted. I've removed this task:\n %s\nNow you have %d task(s) in the list", 
                 t.toString(), 
-                Task.count));
+                this.list.size()));
     }
 
     /**
@@ -72,7 +73,7 @@ public class Duke {
      * @return list of items
      */
     public String showList () {
-        Task[] lst = list.toArray(new Task[0]);
+        Task[] lst = this.list.toArray(new Task[0]);
         StringBuilder output = new StringBuilder("Here are the tasks in your list:");
         int index = 1;
         for (Task t : lst) {
@@ -87,9 +88,10 @@ public class Duke {
      * @return message indicating success
      */
     public String markDone(int index) throws InvalidIndexException {
-        if ((index) > Task.count) throw new InvalidIndexException();
+        if ((index) > this.list.size()) throw new InvalidIndexException();
         Task t = this.list.get(index - 1);
         t.setDone();
+        db.saveData(this.list);
         return wrapText(String.format("Nice! I've marked this task as done:\n %s", t.toString()));
     }
 
@@ -136,7 +138,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke bot = new Duke();
+        String projectDir = System.getProperty("user.dir");
+        Path path = Paths.get(projectDir, "data", "duke.txt");
+        Duke bot = new Duke(path);
+        
         System.out.println(bot.greet());
         Scanner sc = new Scanner(System.in);
 

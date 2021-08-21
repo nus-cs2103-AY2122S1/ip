@@ -10,6 +10,16 @@ public class Deadline extends Task {
         if (input.length < 2) throw new EmptyTimeException();
         this.by = input[1];
     }
+    
+    public Deadline(String[] input, boolean isDone) {
+        super(input[0], isDone);
+        this.by = input[1];
+    }
+    
+    @Override
+    public String convertToData() {
+        return String.format("D/%s/%s/%s", this.isDone ? "1" : "0", this.description, this.by);
+    }
 
     /**
      * Returns string representation of this deadline
