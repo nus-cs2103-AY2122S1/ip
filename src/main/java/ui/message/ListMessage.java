@@ -4,10 +4,11 @@ package ui.message;
  * Encapsulates a message containing a list of tasks.
  */
 public class ListMessage extends Message {
-    private static String LIST_PREFIX = "Here are the tasks in your list:";
+    private String prefix;
 
-    public ListMessage(String message) {
+    public ListMessage(String prefix, String message) {
         super(message, "ヽ(°〇°)ﾉ");
+        this.prefix = prefix;
     }
 
     /**
@@ -17,6 +18,6 @@ public class ListMessage extends Message {
      */
     @Override
     protected String getMessage() {
-        return LIST_PREFIX + "\n\t" + super.getMessage();
+        return prefix + "\n\t" + super.getMessage();
     }
 }

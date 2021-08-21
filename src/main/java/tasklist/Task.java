@@ -114,4 +114,14 @@ public class Task {
             return null;
         }
     }
+
+    /**
+     * Checks if the task description contains a keyword.
+     *
+     * @param keyword Keyword to search for.
+     * @return True if task description contains the keyword, false otherwise.
+     */
+    protected boolean contains(String keyword) {
+        return this.description.contains(keyword);
+    }
 }
