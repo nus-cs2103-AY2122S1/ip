@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     private final String description;
     private boolean isDone;
@@ -15,7 +17,7 @@ public class Task {
     /**
      * Marks the task as done.
      */
-    public void markAsDone() {
+    public void setDone() {
         isDone = true;
     }
     

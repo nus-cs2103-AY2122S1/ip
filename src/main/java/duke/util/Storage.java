@@ -1,3 +1,5 @@
+package duke.util;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,6 +15,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DataIntegrityException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class Storage {
     private final String filePath;
@@ -126,7 +134,7 @@ public class Storage {
             
             // Check if task is alr done
             if (input.charAt(4) == 'X') {
-                newTask.markAsDone();
+                newTask.setDone();
             }
             
             // Add task to list but do not show a confirmation msg

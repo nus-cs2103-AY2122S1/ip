@@ -1,3 +1,9 @@
+package duke.util;
+
+import duke.exception.DukeException;
+import duke.exception.UnknownCommandException;
+import duke.task.TaskList;
+
 public class Parser {
     /**
      * Interprets the command entered by user.
@@ -23,8 +29,4 @@ public class Parser {
             throw new UnknownCommandException();
         }
     }
-}
-
-interface CheckedFunction {
-    String execute(TaskList t) throws DukeException;
 }

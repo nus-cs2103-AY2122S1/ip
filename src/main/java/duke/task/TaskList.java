@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -6,6 +8,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.EmptyListException;
+import duke.exception.IllegalFormatException;
+import duke.exception.TaskNotFoundException;
 
 public class TaskList {
     private final String MESSAGE_DONE = "Congrats! You have accomplished the following task:";
@@ -102,7 +108,7 @@ public class TaskList {
         
         // Mark the task as done
         Task task = tasks.get(taskNumber);
-        task.markAsDone();
+        task.setDone();
         
         // Return confirmation message
         return MESSAGE_DONE + "\n  " + task;
