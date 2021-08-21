@@ -1,27 +1,18 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+
+
+
 import util.tasks.*;
 
 public class Duke {
 
-
-    /**
-     * DukeException, an exception that arose from inaccurate input.
-     *
-     */
-    public class DukeException extends Exception {
-
-        public DukeException() {
-            super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-
-
-        public DukeException(String message) {
-            super(message);
-        }
-
-
-    }
+    private static final String tempFilePath = "data/temp.txt";
+    private static final String saveFilePath = "data/save.txt";
     private static final String taskRemoved = "Noted, I've removed this task:";
     private static final String DELETE = "delete";
     private static final String TODO = "todo";
@@ -41,6 +32,12 @@ public class Duke {
     private final ArrayList<Task> inputs =  new ArrayList<>();
     //pointer to the last location of inputs available
     private int ptr = 0;
+
+
+    public Duke() {
+        this.read();
+    }
+
 
 
     /**
@@ -88,7 +85,7 @@ public class Duke {
         this.ptr++;
         this.print("Got it, I've added this task\n\t  " + t.toString() +
                 "\n\tNow you have " + ptr + " tasks in the list.");
-
+        write(saveFilePath);
     }
 
     /**
@@ -177,6 +174,7 @@ public class Duke {
             Task removed = inputs.remove(val);
             print(taskRemoved + "\n\t" + removed.toString());
             ptr--;
+            write(saveFilePath);
         } else if (twoInputs[0].equals("done")) {
 
             //and at what point is this considered using exception handling to dictate the control
@@ -189,6 +187,7 @@ public class Duke {
                 throw new DukeException("☹ OOPS!!! The list is not that long!");
             inputs.get(val).done();
             print(taskComplete + "\n\t" + this.inputs.get(val));
+            write(saveFilePath);
             //this is ridiculous, is there a way to nest the exceptions within the class
             //without having to use the array as an input... -- maybe encapsulate the parsing in a function to make it look neat
         } else if (twoInputs[0].equals(TODO)) {
@@ -233,6 +232,89 @@ public class Duke {
         }
         this.print(bye);
     }
+
+
+    /**
+     * The method used to read from the current save File. --Use a save object?
+     * Can allow for multiple saves --> could use such an object to handle
+     * the saves in an arraylist.
+     *
+     */
+    private void read() {
+        try {
+            File f = new File(saveFilePath);
+            if (!f.exists()) return;
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                this.inputs.add(Task.decode(sc.nextLine()));
+                ptr++;
+            }
+
+        } catch (IOException | DukeException ioe) {
+            this.print(ioe.getMessage());
+
+        } finally {
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+    /**
+     * The method that runs when the Duke needs to log the
+     * list of Tasks. Occurs every time there is a modification to the
+     * List of tasks.
+     *
+     * todo -- check if it is possible to have write and read in a seperate class file (encapsulate in a package)?
+     * maybe its not better though?
+     */
+
+    private void write(String filename) {
+        try {
+            //creating the directory
+            File dir = new File("./data");
+            if (!dir.exists()) dir.mkdirs();
+            //creating the files
+            File saveFile = new File(filename);
+            File tempfile = new File(tempFilePath);
+            //if the file does not exist
+            if (!saveFile.exists()) {
+                //When the old save file does not exist
+                //do not have to use the tempfile
+                saveFile.createNewFile();
+                FileWriter wr = new FileWriter(filename);
+                writeTasks(wr);
+                wr.close();
+
+            } else {
+                //could use a temp file and switch after writing?
+                FileWriter wr = new FileWriter(saveFilePath);
+                writeTasks(wr);
+                wr.close();
+
+            }
+
+        } catch (IOException e) {
+            this.print(e.getMessage());
+        }
+
+    }
+
+    private void writeTasks(FileWriter writer) throws IOException {
+        for (int i = 0; i < this.inputs.size(); i++) {
+            writer.write(inputs.get(i).encode());
+            writer.write("\n");
+        }
+
+
+    }
+
 
 
 

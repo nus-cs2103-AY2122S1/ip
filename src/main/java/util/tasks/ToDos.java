@@ -11,4 +11,14 @@ public class ToDos extends Task {
     public String toString() {
         return this.label + super.toString();
     }
+
+    @Override
+    public String encode() {
+        //String indicating whether this task is done or not.
+        String d = this.isDone()
+                ? Task.DONE
+                : Task.NOTDONE;
+
+        return Task.Label.T + Task.DELIMITER + d + Task.DELIMITER + this.name;
+    }
 }
