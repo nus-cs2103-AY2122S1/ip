@@ -4,7 +4,6 @@ import java.util.Collection;
 
 public class Duke {
     static Scanner userInput = new Scanner(System.in);
-
     static String linebreaker = "____________________________________________________________";
     static String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
     static String farewell = "Bye. Hope to see you again soon!";
@@ -17,6 +16,12 @@ public class Duke {
     private String instruction;
     private ArrayList<Task> improvedList= new ArrayList<Task>();
     private enum Commands {list, done, todo, event, deadline, delete };
+    Storage storage;
+
+    Duke () {
+        this.storage = new Storage("./src/main/duke.txt");
+        this.improvedList = storage.parseFile();
+    }
 
     void setInstruction() {
         instruction = userInput.nextLine();
@@ -26,9 +31,14 @@ public class Duke {
         System.out.println(instruction);
     }
 
+
     boolean checkBye(){
         if(instruction.equalsIgnoreCase("bye")){
             running = false;
+            storage.fileClear();
+            for(int i = 0; i < improvedList.size(); i++) {
+                storage.writeToFile(improvedList.get(i).toHistory());
+            }
             return true;
         }
         return false;
@@ -52,47 +62,46 @@ public class Duke {
         if(strings.length == 1 && !operative.equalsIgnoreCase("list")) {
             throw new NoDescriptionError(operative);
         }
-
-            switch (command) {
-                case list:
-                    printArrayList();
-                    break;
-                case done:
-                    item = strings[1];
-                    taskPointer = Integer.parseInt(item) - 1;
-                    improvedList.get(taskPointer).markAsDone();
-                    completeTaskMessage(improvedList.get(taskPointer));
-                    break;
-                case todo:
-                    item = strings[1];
-                    toAdd = new Todo(item);
-                    improvedList.add(toAdd);
-                    addedTaskMessage(toAdd.toString());
-                    break;
-                case event:
-                    item = strings[1];
-                    temp = item.split("/at ");
-                    date = temp[1];
-                    description = temp[0];
-                    toAdd = new Event(description, date);
-                    improvedList.add(toAdd);
-                    addedTaskMessage(toAdd.toString());
-                    break;
-                case delete:
-                    item = strings[1];
-                    taskPointer = Integer.parseInt(item) - 1;
-                    Task deleted = improvedList.remove(taskPointer);
-                    deleteTaskMessage(deleted.toString());
-                    break;
-                case deadline:
-                    item = strings[1];
-                    temp = item.split("/by ");
-                    date = temp[1];
-                    description = temp[0];
-                    toAdd = new Deadline(description, date);
-                    improvedList.add(toAdd);
-                    addedTaskMessage(toAdd.toString());
-                    break;
+        switch (command) {
+        case list:
+            printArrayList();
+            break;
+        case done:
+            item = strings[1];
+            taskPointer = Integer.parseInt(item) - 1;
+            improvedList.get(taskPointer).markAsDone();
+            completeTaskMessage(improvedList.get(taskPointer));
+            break;
+        case todo:
+            item = strings[1];
+            toAdd = new Todo(item);
+            improvedList.add(toAdd);
+            addedTaskMessage(toAdd.toString());
+            break;
+        case event:
+            item = strings[1];
+            temp = item.split("/at ");
+            date = temp[1];
+            description = temp[0];
+            toAdd = new Event(description, date);
+            improvedList.add(toAdd);
+            addedTaskMessage(toAdd.toString());
+            break;
+        case delete:
+            item = strings[1];
+            taskPointer = Integer.parseInt(item) - 1;
+            Task deleted = improvedList.remove(taskPointer);
+            deleteTaskMessage(deleted.toString());
+            break;
+        case deadline:
+            item = strings[1];
+            temp = item.split("/by ");
+            date = temp[1];
+            description = temp[0];
+            toAdd = new Deadline(description, date);
+            improvedList.add(toAdd);
+            addedTaskMessage(toAdd.toString());
+            break;
         }
     }
 
@@ -137,6 +146,10 @@ public class Duke {
         System.out.println("  " + task);
         taskCounterMessage();
         printLineBreak();
+    }
+
+    void writeToFile(String text) {
+        this.storage.writeToFile(text);
     }
 
     void taskCounterMessage () {
