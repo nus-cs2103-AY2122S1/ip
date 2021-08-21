@@ -12,7 +12,7 @@ public abstract class Task {
     }
 
     public String completionIcon() {
-        return completionStatus ? "[X]" : "[ ]";
+        return completionStatus ? "[X]" : "[-]";
     }
 
     public abstract String typeIcon();
