@@ -1,5 +1,7 @@
 package tasks;
 
+import java.util.regex.Pattern;
+
 /**
  * Task class that encapsulate task behaviour and data.
  */
@@ -16,6 +18,7 @@ public class Task {
     DEADLINE,
   }
 
+  private static final String DELIMITER = "--|--";
   private final String title;
   private final Type type;
   private boolean isComplete = false;
@@ -57,6 +60,51 @@ public class Task {
     }
     this.title = title;
     this.type = type;
+  }
+
+  public static Task stringToTask(String stringifiedTask) {
+    // {TYPE}|{DESCRIPTION}|{DATE or DATES or BLANK}
+    String[] taskAttr = stringifiedTask.split(Pattern.quote(DELIMITER));
+    if (taskAttr.length < 2 || taskAttr.length > 3) {
+      throw new IllegalArgumentException(
+        "This task is not correctly stringified. - " + stringifiedTask
+      );
+    }
+
+    String type = taskAttr[0];
+    String descr = taskAttr[1];
+    String date = taskAttr.length == 2 ? "" : taskAttr[2];
+
+    switch (type) {
+      case "T":
+        return Task.createTask(descr, Task.Type.TODO);
+      case "E":
+        return Task.createTask(String.format("%s /at %s", descr, date), Task.Type.EVENT);
+      case "D":
+        return Task.createTask(String.format("%s /by %s", descr, date), Task.Type.DEADLINE);
+      default:
+        throw new IllegalArgumentException(
+          "This task is not correctly stringified. - " + stringifiedTask
+        );
+    }
+  }
+
+  public String taskToString() {
+    String type;
+    switch (this.type) {
+      case EVENT:
+        type = "E";
+        break;
+      case DEADLINE:
+        type = "D";
+        break;
+      case TODO:
+        type = "T";
+        break;
+      default:
+        throw new IllegalArgumentException("Task type enums inconsistently applied");
+    }
+    return String.format("%s%s%s%s", type, DELIMITER, this.title, DELIMITER);
   }
 
   /**
