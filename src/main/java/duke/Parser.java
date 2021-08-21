@@ -101,6 +101,19 @@ public class Parser {
             }, false);
             break;
         }
+        case "find":
+            if (commandSplit.length < 2) {
+                throw new DukeException("The key of find cannot be empty.");
+            }
+            command = new Command((taskList, ui, storage) -> {
+                String key = commandSplit[1].trim();
+                ArrayList<Task> tasks = taskList.findTasks(key);
+                ui.showln("Here are the matching tasks in your list:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    ui.showln(String.format("%d. %s", i + 1, tasks.get(i)));
+                }
+            }, false);
+            break;
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
