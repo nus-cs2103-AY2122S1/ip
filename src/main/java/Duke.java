@@ -1,10 +1,60 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
+import java.io.File;
 
 public class Duke {
     public static void main(String[] args) {
+
+        File directory = new File("./");
+        System.out.println(directory.getAbsolutePath());
+
+        File f = new File("data/duke.txt");
+        try {
+            f.createNewFile();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        List<Task> strList = new ArrayList<Task>();
+        try {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String currentEntry = s.nextLine();
+                String[] currentEntryArray = currentEntry.split(" \\| ");
+                switch(currentEntryArray[0]) {
+                    case "T":
+                        Todo newTodo = new Todo(currentEntryArray[2]);
+                        if (currentEntryArray[1].equals("1")) {
+                            newTodo.setDone();
+                        }
+                        strList.add(newTodo);
+                        break;
+                    case "D":
+                        Deadline newDeadline = new Deadline(currentEntryArray[2], currentEntryArray[3]);
+                        if (currentEntryArray[1].equals("1")) {
+                            newDeadline.setDone();
+                        }
+                        strList.add(newDeadline);
+                        break;
+                    case "E":
+                        Event newEvent = new Event(currentEntryArray[2], currentEntryArray[3]);
+                        if (currentEntryArray[1].equals("1")) {
+                            newEvent.setDone();
+                        }
+                        strList.add(newEvent);
+                        break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
         displayLogo();
         greet();
-        addToList();
+        addToList(strList);
+
+
     }
 
     public static void displayLogo() {
@@ -34,9 +84,9 @@ public class Duke {
         }
     }
 
-    public static void addToList() {
+    public static void addToList(List<Task> dataList) {
         Scanner sc = new Scanner(System.in);
-        List<Task> strList = new ArrayList<Task>();
+        List<Task> strList = dataList;
         while(true) {
             try {
                 String str = sc.nextLine();
