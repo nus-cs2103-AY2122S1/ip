@@ -154,7 +154,8 @@ public class CommandHandler {
      * @return All tasks whose name contains the keyword
      * @throws LifelineException if user does not specify a keyword or no tasks are found
      */
-    public static String handleFind(String command, Storage storage, TaskList taskList, Ui ui) throws LifelineException {
+    public static String handleFind(String command, Storage storage, TaskList taskList, Ui ui)
+            throws LifelineException {
         String[] commands = getCommands(command);
         TaskList foundTasks = new TaskList(new ArrayList<>());
         for (int i = 0; i < taskList.size(); i++) {

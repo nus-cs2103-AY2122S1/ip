@@ -245,15 +245,15 @@ public class CommandHandlerTest {
     }
 
     @Test
-    public void handleFind_completeCommandTaskFound_success() throws LifelineException{
-            Storage storage = new Storage("test.json");
-            ArrayList<Task> tasks = new ArrayList<>();
-            Task todo = new ToDo("read book");
-            tasks.add(todo);
-            TaskList taskList = new TaskList(tasks);
-            Ui ui = new Ui();
-            String output = Command.FIND.getExecute().apply("find book", storage, taskList, ui);
-            assertEquals("Task with keyword book:\n" + "[T][ ] read book\n", output);
+    public void handleFind_completeCommandTaskFound_success() throws LifelineException {
+        Storage storage = new Storage("test.json");
+        ArrayList<Task> tasks = new ArrayList<>();
+        Task todo = new ToDo("read book");
+        tasks.add(todo);
+        TaskList taskList = new TaskList(tasks);
+        Ui ui = new Ui();
+        String output = Command.FIND.getExecute().apply("find book", storage, taskList, ui);
+        assertEquals("Task with keyword book:\n" + "[T][ ] read book\n", output);
     }
 
     @AfterEach
