@@ -98,6 +98,7 @@ public class Ui {
         case HELP:
             System.out.println(format("  bye : Closes Duke", "  list : Returns all tasks added",
                     "  todo <description> : Adds a todo task",
+                    "  find <description> : Returns all tasks with <description> in their description",
                     "  event <description> /at <time: YYYY-MM-DDThh:mm> : Adds an event at time <time>",
                     "  deadline <description> /by <time: YYYY-MM-DDThh:mm> : Adds a task with deadline at time <time>",
                     "  done <index> : Marks the task at <index> as done",
@@ -162,5 +163,9 @@ public class Ui {
                     "  " + t, list.returnItemCount(1)));
             break;
         }
+    }
+
+    public void displayCommand(Command.Commands c, String toFind, TaskList list) {
+        System.out.print(format(list.returnFoundItem(toFind)));
     }
 }

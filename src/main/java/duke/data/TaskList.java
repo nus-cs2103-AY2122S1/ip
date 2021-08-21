@@ -208,4 +208,16 @@ public class TaskList {
         }
         return strArr;
     }
+
+    public String[] returnFoundItem(String toFind) {
+        ArrayList<String > strArr = new ArrayList<>();
+        strArr.add("Here are the matching tasks in your list:");
+        int count = 1;
+        for (Task t : items) {
+            if (t.getDescription().contains(toFind)) {
+                strArr.add(count++ + "." + t);
+            }
+        }
+        return strArr.toArray(new String[strArr.size()]);
+    }
 }

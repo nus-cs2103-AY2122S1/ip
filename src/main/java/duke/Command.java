@@ -15,8 +15,9 @@ public class Command {
 
     /** Enumeration of valid commands */
     public enum Commands {
-        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, BY, AT, ALL, HELP
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, BY, AT, ALL, HELP, FIND
     }
+
     /** Types of commands */
     public enum Types {
         SINGLE_INPUT, INT_INPUT, STR_INPUT, STR_ARR_INPUT, DATETIME_INPUT
@@ -116,9 +117,13 @@ public class Command {
             storage.save();
             break;
         case STR_INPUT:
-            tasks.addItem(new Todo(this.description), storage);
-            ui.displayCommand(this.command, tasks);
-            storage.save();
+            if (this.command.equals(Commands.TODO)) {
+                tasks.addItem(new Todo(this.description), storage);
+                ui.displayCommand(this.command, tasks);
+                storage.save();
+            } else {
+                ui.displayCommand(this.command, this.description, tasks);
+            }
             break;
         case STR_ARR_INPUT:
             Task task;

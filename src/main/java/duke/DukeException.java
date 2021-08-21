@@ -24,7 +24,7 @@ public class DukeException extends Exception{
             break;
         case COMMAND:
             this.errorMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                    + "Type help to get a list of available commands!";
+                    + "     Type help to get a list of available commands!";
             break;
         case DEADLINE:
             this.errorMessage =  "☹ OOPS!!! Usage of deadline does not match 'description' /by 'deadline'";

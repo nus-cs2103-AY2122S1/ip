@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
-public class Duke {
+class Duke {
 
     private Storage storage;
     private TaskList tasks;
