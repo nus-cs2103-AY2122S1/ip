@@ -1,4 +1,5 @@
 import javax.swing.text.html.Option;
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +10,7 @@ import java.util.stream.Stream;
 public class TaskManager {
     static private List<Task> taskList = new ArrayList<>();
 
-    public static Task addTask(String type, Optional<String> args) throws DukeException, IllegalArgumentException {
+    public static Task addTask(String type, Optional<String> args) throws DukeException, IllegalArgumentException, DateTimeException {
         Task ret = null;
         // parse raw task string
         switch (type) {
