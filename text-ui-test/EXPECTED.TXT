@@ -20,14 +20,14 @@ ____________________________________________________________
 
 ____________________________________________________________
 Got it. I've added this task:
- [D][ ] return book (by: June 6th)
+ [D][ ] return book (by: 6 Jun 2021 6:30PM)
 Now you have 2 task(s) in the list
 ____________________________________________________________
 
 
 ____________________________________________________________
 Got it. I've added this task:
- [E][ ] project meeting (at: Aug 6th 2-4pm)
+ [E][ ] project meeting (at: 6 Aug 2021 2:00PM)
 Now you have 3 task(s) in the list
 ____________________________________________________________
 
@@ -61,8 +61,8 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][X] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.[D][ ] return book (by: 6 Jun 2021 6:30PM)
+3.[E][ ] project meeting (at: 6 Aug 2021 2:00PM)
 4.[T][X] join sports club
 5.[T][ ] borrow book
 ____________________________________________________________
@@ -70,14 +70,14 @@ ____________________________________________________________
 
 ____________________________________________________________
 Got it. I've added this task:
- [D][ ] return book (by: Sunday)
+ [D][ ] return book (by: 4 May 2021 9:00AM)
 Now you have 6 task(s) in the list
 ____________________________________________________________
 
 
 ____________________________________________________________
 Got it. I've added this task:
- [E][ ] project meeting (at: Mon 2-4pm)
+ [E][ ] project meeting (at: 22 Aug 2021 10:30AM)
 Now you have 7 task(s) in the list
 ____________________________________________________________
 
@@ -85,12 +85,12 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][X] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.[D][ ] return book (by: 6 Jun 2021 6:30PM)
+3.[E][ ] project meeting (at: 6 Aug 2021 2:00PM)
 4.[T][X] join sports club
 5.[T][ ] borrow book
-6.[D][ ] return book (by: Sunday)
-7.[E][ ] project meeting (at: Mon 2-4pm)
+6.[D][ ] return book (by: 4 May 2021 9:00AM)
+7.[E][ ] project meeting (at: 22 Aug 2021 10:30AM)
 ____________________________________________________________
 
 
