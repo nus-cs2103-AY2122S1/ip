@@ -65,6 +65,7 @@ Now you have 1 tasks in the list.
 ### `event` - Creates a new event task
 
 Creates a new event task adding to the back of the list with timing specified by /at.
+Timing is to be specified in a yyyy-mm-dd format
 
 Example of usage:
 
@@ -83,6 +84,7 @@ Now you have 2 tasks in the list.
 ### `deadline` - Creates a new deadline task
 
 Creates a new deadline task adding to the back of the list with timing specified by /by.
+Timing is to be specified in a yyyy-mm-dd format
 
 Example of usage:
 
