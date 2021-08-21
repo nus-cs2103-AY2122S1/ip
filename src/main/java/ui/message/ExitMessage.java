@@ -13,16 +13,6 @@ public class ExitMessage extends Message {
      * @param message the string to be used in the exit message
      */
     public ExitMessage(String message) {
-        super(message);
-    }
-
-    /**
-     * Gets the message with a waving face added to it
-     *
-     * @return the string message with a waving face
-     */
-    @Override
-    public String getMessageWithFace() {
-        return this.getMessage() + " ヾ(=´･∀･｀=)";
+        super(message, "ヾ(=´･∀･｀=)");
     }
 }

@@ -5,24 +5,26 @@ package ui.message;
  * It includes methods to format the output message.
  */
 public class Message {
-    private static String FORMATTED_LINE = "_________________________________________________";
-    private String message;
+    private final static String FORMATTED_LINE = "_________________________________________________";
+    private final String message;
+    private String face;
 
-    /**
-     * Constructor to instantiate a `ui.message.DukeOutputMessage`.
-     *
-     * @param message the string to be used in the output message
-     */
-    public Message(String message) {
+    public Message(String message, String face) {
         this.message = message;
+        this.face = face;
     }
 
     protected String getMessage() {
         return this.message;
     }
 
-    protected String getMessageWithFace() {
-        return this.message + " ｢(ﾟﾍﾟ)";
+    private String getMessageWithFace() {
+        char lastCharacter = this.getMessage().charAt(this.getMessage().length() - 1);
+
+        if (Character.isWhitespace(lastCharacter)) {
+            return String.format("%s%s", this.getMessage(), this.face);
+        }
+        return String.format("%s %s", this.getMessage(), this.face);
     }
 
     private String getFormattedMessage() {

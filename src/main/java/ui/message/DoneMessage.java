@@ -15,7 +15,7 @@ public class DoneMessage extends Message {
      * @param message the string to be used in the done message
      */
     public DoneMessage(String message) {
-        super(message);
+        super(message,"≧(´▽｀)≦");
     }
 
     /**
@@ -26,15 +26,5 @@ public class DoneMessage extends Message {
     @Override
     public String getMessage() {
         return DONE_PREFIX + "\n\t\t" + super.getMessage();
-    }
-
-    /**
-     * Gets the message with a happy face added to it
-     *
-     * @return the string message with a happy face
-     */
-    @Override
-    public String getMessageWithFace() {
-        return this.getMessage() + " ≧(´▽｀)≦";
     }
 }

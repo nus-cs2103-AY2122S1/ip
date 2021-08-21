@@ -15,7 +15,7 @@ public class ListChangeMessage extends Message {
      * @param itemsInList the number of items in the list after the change.
      */
     public ListChangeMessage(String message, int itemsInList) {
-        super(message);
+        super(message, "(＾＾)b");
         this.itemsInList = itemsInList;
     }
 
@@ -34,15 +34,5 @@ public class ListChangeMessage extends Message {
                 super.getMessage(),
                 numOfTasks,
                 task);
-    }
-
-    /**
-     * Gets the message with a thumbs up face added to it.
-     *
-     * @return the string message with a thumbs up face.
-     */
-    @Override
-    public String getMessageWithFace() {
-        return this.getMessage() + " (＾＾)b";
     }
 }

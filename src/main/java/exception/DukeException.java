@@ -1,5 +1,6 @@
 package exception;
 
+import ui.message.ErrorMessage;
 import ui.message.Message;
 
 public class DukeException extends Exception {
@@ -8,6 +9,6 @@ public class DukeException extends Exception {
     }
 
     public Message getOutputMessage() {
-        return new Message(this.getMessage());
+        return new ErrorMessage(this.getMessage());
     }
 }

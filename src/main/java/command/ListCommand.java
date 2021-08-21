@@ -6,8 +6,6 @@ import tasklist.TaskList;
 public class ListCommand extends Command {
     private TaskList list;
 
-    public ListCommand() {}
-
     public static ListCommand createCommand() {
         return new ListCommand();
     }

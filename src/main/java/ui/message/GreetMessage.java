@@ -13,16 +13,6 @@ public class GreetMessage extends Message {
      * @param message the string to be used in the greeting message
      */
     public GreetMessage(String message) {
-        super(message);
-    }
-
-    /**
-     * Gets the message with a cheering face added to it
-     *
-     * @return the string message with a cheering face
-     */
-    @Override
-    public String getMessageWithFace() {
-        return this.getMessage() + " ٩(｡•́‿•̀｡)۶";
+        super(message, "٩(｡•́‿•̀｡)۶");
     }
 }

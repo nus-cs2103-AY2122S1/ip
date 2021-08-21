@@ -15,7 +15,7 @@ public class ListMessage extends Message {
      * @param message the string to be used in the list message
      */
     public ListMessage(String message) {
-        super(message);
+        super(message, "ヽ(°〇°)ﾉ");
     }
 
     /**
@@ -26,15 +26,5 @@ public class ListMessage extends Message {
     @Override
     public String getMessage() {
         return LIST_PREFIX + "\n\t" + super.getMessage();
-    }
-
-    /**
-     * Gets the message with a shocked face added to it
-     *
-     * @return the string message with a shocked face
-     */
-    @Override
-    public String getMessageWithFace() {
-        return this.getMessage() + "ヽ(°〇°)ﾉ";
     }
 }

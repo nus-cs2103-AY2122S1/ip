@@ -1,6 +1,7 @@
 package storage;
 
 import tasklist.TaskList;
+import ui.message.ErrorMessage;
 import ui.message.Message;
 
 import java.io.File;
@@ -19,7 +20,7 @@ public class Storage {
             String filePath = String.format("%s/%s", dataDirectoryPath, listFileName);
             return StorageFile.loadFile(filePath);
         } catch (IOException e) {
-            Message message = new Message("There was a problem in getting the list data");
+            Message message = new ErrorMessage("There was a problem in loading the list data");
             message.print();
             return null;
         }
@@ -31,7 +32,7 @@ public class Storage {
             listFile.scanFileDataToList(list);
             return list;
         } catch (FileNotFoundException e) {
-            Message message = new Message("There was a problem in scanning the list data to a list");
+            Message message = new ErrorMessage("There was a problem in scanning the storage data to a list");
             message.print();
             return null;
         }
