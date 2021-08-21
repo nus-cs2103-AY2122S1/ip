@@ -19,13 +19,13 @@ public class Deadline extends Task {
      * @param description the description of the deadline task.
      * @param deadline the deadline
      */
-    public Deadline(String description, String deadline) throws DukeException {
+    public Deadline(String description, String deadline) {
         super(description);
         this.deadlineString = deadline;
         this.deadline = parseDateTime(deadline);
     }
 
-    private Date parseDateTime(String dateTime) throws DukeException {
+    private Date parseDateTime(String dateTime) {
         Date date;
         DateFormat inFormat;
 

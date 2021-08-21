@@ -6,9 +6,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DataManager {
-    private static final File data = new File("./data/data.txt");
+    private final File data;
+    private final String filePath;
 
-    public static ArrayList<Task> readData() {
+    public DataManager(String filePath) {
+        data = new File(filePath);
+        this.filePath = filePath;
+    }
+
+    public ArrayList<Task> readData() {
         try {
             Scanner sc = new Scanner(data);
             ArrayList<Task> loadedTasks = new ArrayList<>();
@@ -22,13 +28,13 @@ public class DataManager {
         }
     }
 
-    public static void writeToFile(Task task) throws DukeException {
+    public void writeToFile(Task task) throws DukeException {
         if (!data.exists()) {
             createNewFile();
         }
 
         try {
-            FileWriter fw = new FileWriter("./data/data.txt", true);
+            FileWriter fw = new FileWriter(filePath, true);
             fw.write(task.convertToTxt() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
@@ -36,9 +42,9 @@ public class DataManager {
         }
     }
 
-    public static void updateData(ArrayList<Task> tasks) throws DukeException {
+    public void updateData(ArrayList<Task> tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter("./data/data.txt");
+            FileWriter fw = new FileWriter(filePath);
             for (Task t: tasks) {
                 fw.write(t.convertToTxt() + System.lineSeparator());
             }
@@ -48,7 +54,7 @@ public class DataManager {
         }
     }
 
-    private static Task convertTxtToTasks(String txt) {
+    private Task convertTxtToTasks(String txt) {
         String[] extracted = txt.split(" \\| ");
         String taskType = extracted[0];
         Task task;
@@ -72,7 +78,7 @@ public class DataManager {
         return task;
     }
 
-    private static void createNewFile() {
+    private void createNewFile() {
         try {
             data.getParentFile().mkdirs();
             data.createNewFile();

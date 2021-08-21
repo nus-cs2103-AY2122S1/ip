@@ -8,25 +8,17 @@ import java.util.ArrayList;
  */
 public class ToDoList {
     private final ArrayList<Task> list;
+    private final DataManager dataManager;
 
     /** Instantiates a new To do list. */
-    public ToDoList(ArrayList<Task> list) {
+    public ToDoList(ArrayList<Task> list, DataManager dataManager) {
         this.list = list;
+        this.dataManager = dataManager;
     }
 
     /** Prints the list of items that the user entered. */
     public void printList() {
-        System.out.println(Duke.divider);
-        // Custom message for when user types 'list' when nothing is added.
-        if (list.size() == 0) {
-            System.out.println("\tYou are all done for the day :-)");
-        } else {
-            System.out.println("\tHere are the tasks in your list:");
-            for (int i = 1; i <= list.size(); i++) {
-                System.out.printf("\t%s. %s\r\n", i, list.get(i - 1));
-            }
-        }
-        System.out.println(Duke.divider);
+        Ui.printList(list);
     }
 
     /**
@@ -36,7 +28,7 @@ public class ToDoList {
      */
     public void addToList(Task task) {
         list.add(task);
-        Duke.prettyPrint(
+        Ui.prettyPrint(
                 String.format(
                         "Got it. I've added this task:\r\n\t  %s\r\n\tNow you have %s tasks in the list.",
                         task, list.size()));
@@ -54,7 +46,7 @@ public class ToDoList {
         } else {
             Task task = list.get(index - 1);
             task.markAsDone();
-            Duke.prettyPrint(String.format("Good job on completing this task!\r\n\t  %s", task));
+            Ui.prettyPrint(String.format("Good job on completing this task!\r\n\t  %s", task));
         }
     }
 
@@ -66,7 +58,7 @@ public class ToDoList {
             throw new DukeException("NegativeIndexError: I can't handle negative indexing.");
         } else {
             Task task = list.get(index - 1);
-            Duke.prettyPrint(
+            Ui.prettyPrint(
                     String.format(
                             "Noted. I've removed this task:\r\n\t  %s\r\n\tNow you have %s tasks in the list.",
                             task, list.size() - 1));
@@ -75,6 +67,6 @@ public class ToDoList {
     }
 
     public void updateData() throws DukeException {
-        DataManager.updateData(list);
+        dataManager.updateData(list);
     }
 }
