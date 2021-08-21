@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 /**
@@ -10,7 +11,12 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String task) {
         super(task);
         String[] arr = task.split(" /by ", 2);
-        this.date = arr.length == 2 ? LocalDate.parse(arr[1]) : null;
+        if (arr.length >= 2) {
+            try {
+                this.date = LocalDate.parse(arr[1]);
+            } catch (DateTimeException e) {
+            }
+        }
         this.name = arr[0];
     }
 

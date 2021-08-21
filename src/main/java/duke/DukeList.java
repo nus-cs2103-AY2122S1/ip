@@ -18,7 +18,6 @@ public class DukeList {
     public DukeList() {
         this.database = new SQLite();
         this.database.load();
-        this.database.initialize();
     }
 
     /**

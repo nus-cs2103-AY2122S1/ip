@@ -1,19 +1,26 @@
 package duke.database;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
+import duke.exception.DatabaseAccessException;
+import duke.exception.DatabaseIOException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TaskType;
 import duke.task.ToDoTask;
 
+/**
+ * Encapsulates a database access and necessary methods for Duke's list.
+ */
 public abstract class Database {
     protected Connection connection;
     /** Name of database table. */
@@ -36,15 +43,14 @@ public abstract class Database {
      * Initializes and tests SQL connection by attempting to execute select
      * statements from respective tables in the database.
      */
-    public void initialize() {
+    protected void initialize() {
         connection = this.getSQLConnection();
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + TASK_TABLE_NAME);
             ResultSet rs = ps.executeQuery();
             close(ps, rs);
         } catch (SQLException ex) {
-            // TODO
-            ex.printStackTrace();
+            throw new DatabaseAccessException("Unable to access SQLite database...");
         }
     }
 
@@ -94,14 +100,16 @@ public abstract class Database {
      * @param date      date of the task, nullable
      * @return
      */
-    protected Task createTask(TaskType type, String name, boolean completed, LocalDate date) {
+    protected Task createTask(TaskType type, String name, boolean completed, String date) {
+        LocalDate localDate = Optional.ofNullable(date).filter(str -> !str.equals("null"))
+                .map(str -> LocalDate.parse(str)).orElse(null);
         switch (type) {
         case TODO:
             return new ToDoTask(name, completed);
         case DEADLINE:
-            return new DeadlineTask(name, completed, date);
+            return new DeadlineTask(name, completed, localDate);
         case EVENT:
-            return new EventTask(name, completed, date);
+            return new EventTask(name, completed, localDate);
         default:
             return null;
         }
@@ -123,8 +131,7 @@ public abstract class Database {
             if (this.connection != null)
                 connection.close();
         } catch (SQLException ex) {
-            // TODO
-            ex.printStackTrace();
+            throw new DatabaseAccessException("Unable to close SQLite connection...");
         }
     }
 
@@ -141,8 +148,7 @@ public abstract class Database {
             if (this.connection != null)
                 connection.close();
         } catch (SQLException ex) {
-            // TODO
-            ex.printStackTrace();
+            throw new DatabaseAccessException("Unable to close SQLite connection...");
         }
     }
 
@@ -151,9 +157,21 @@ public abstract class Database {
      * 
      * @return database directory
      */
-    protected File getDataFolder() {
+    private File getDataFolder() {
         File dataFolder = new File("data");
         dataFolder.mkdir();
+        return dataFolder;
+    }
+
+    protected File createOrOpenDataFile() {
+        File dataFolder = new File(this.getDataFolder(), DATABASE_NAME + ".db");
+        if (!dataFolder.exists()) {
+            try {
+                dataFolder.createNewFile();
+            } catch (IOException e) {
+                throw new DatabaseIOException("Unable to create data file!");
+            }
+        }
         return dataFolder;
     }
 }
