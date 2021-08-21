@@ -63,34 +63,34 @@ public class Duke {
         while (command != Command.BYE) {
             try {
                 switch (command) {
-                case LIST:
-                    taskList.printTaskList();
-                    break;
-                case DONE:
-                    int doneIndex = extractIndex(input, Command.DONE);
-                    formatPrint(taskList.markTaskDone(doneIndex));
-                    break;
-                case HELP:
-                    printHelp();
-                    break;
-                case TODO:
-                    String toDoInfo = extractInfo(input, Command.TODO);
-                    formatPrint(taskList.addTask(toDoInfo, Command.TODO));
-                    break;
-                case DEADLINE:
-                    String deadlineInfo = extractInfo(input, Command.DEADLINE);
-                    formatPrint(taskList.addTask(deadlineInfo, Command.DEADLINE));
-                    break;
-                case EVENT:
-                    String eventInfo = extractInfo(input, Command.EVENT);
-                    formatPrint(taskList.addTask(eventInfo, Command.EVENT));
-                    break;
-                case DELETE:
-                    int deleteIndex = extractIndex(input, Command.DELETE);
-                    formatPrint(taskList.deleteTask(deleteIndex));
-                    break;
-                default:
-                    throw new DukeException("Invalid command @_@ Try typing 'help' to see my list of commands!");
+                    case LIST:
+                        taskList.printTaskList();
+                        break;
+                    case DONE:
+                        int doneIndex = extractIndex(input, Command.DONE);
+                        formatPrint(taskList.markTaskDone(doneIndex));
+                        break;
+                    case HELP:
+                        printHelp();
+                        break;
+                    case TODO:
+                        String toDoInfo = extractInfo(input, Command.TODO);
+                        formatPrint(taskList.addTask(toDoInfo, Command.TODO));
+                        break;
+                    case DEADLINE:
+                        String deadlineInfo = extractInfo(input, Command.DEADLINE);
+                        formatPrint(taskList.addTask(deadlineInfo, Command.DEADLINE));
+                        break;
+                    case EVENT:
+                        String eventInfo = extractInfo(input, Command.EVENT);
+                        formatPrint(taskList.addTask(eventInfo, Command.EVENT));
+                        break;
+                    case DELETE:
+                        int deleteIndex = extractIndex(input, Command.DELETE);
+                        formatPrint(taskList.deleteTask(deleteIndex));
+                        break;
+                    default:
+                        throw new DukeException("Invalid command @_@ Try typing 'help' to see my list of commands!");
                 }
             } catch (DukeException e) {
                 formatPrint(e.getMessage());
@@ -122,25 +122,25 @@ public class Duke {
     public static void printHelp() {
         System.out.println(DIVIDER);
         System.out.println("Here is the list of my available commands!\n"
-                + "1. todo [description] - Adds a ToDo task to task list\n"
-                + "2. deadline [description] /by [deadline] - Adds a Deadline to task list\n"
-                + "3. event [description] /at [event duration] - Adds a Event to task list\n"
-                + "4. list - Display list of items you have added\n"
-                + "5. done [index of completed task] - Marks specified tasks as completed\n"
-                + "6. delete [index of task to be deleted] - Deletes specified task\n"
-                + "7. bye - End the program");
+            + "1. todo [description] - Adds a ToDo task to task list\n"
+            + "2. deadline [description] /by [deadline] - Adds a Deadline to task list\n"
+            + "3. event [description] /at [event duration] - Adds a Event to task list\n"
+            + "4. list - Display list of items you have added\n"
+            + "5. done [index of completed task] - Marks specified tasks as completed\n"
+            + "6. delete [index of task to be deleted] - Deletes specified task\n"
+            + "7. bye - End the program");
         System.out.println(DIVIDER);
     }
 
     /**
      * Extract out the information given in user input by separating out command.
      *
-     * @param input   User raw input.
+     * @param input User raw input.
      * @param command The specific command given by user.
      * @return String containing information that we need.
      * @throws DukeException Prevent empty descriptions.
      */
-    public static String extractInfo(String input, Command command) throws DukeException {
+    public static String extractInfo(String input, Command command) throws DukeException{
         String[] info = input.split(" ", 2);
         if (info.length < 2) {
             throw new DukeException(String.format("Error: OOPS!!! The description of %s cannot be empty.",
@@ -152,12 +152,12 @@ public class Duke {
     /**
      * Extract out the index given in user input by separating out command.
      *
-     * @param input   User raw input.
+     * @param input User raw input.
      * @param command The specific command given by user.
      * @return int of the task user wants to select.
      * @throws DukeException Prevent empty indexes.
      */
-    public static int extractIndex(String input, Command command) throws DukeException {
+    public static int extractIndex(String input, Command command) throws DukeException{
         String[] info = input.split(" ", 2);
         if (info.length < 2 || info[1].equals("")) {
             throw new DukeException(String.format("Error: OOPS!!! The index argument for %s cannot be empty.",
