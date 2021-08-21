@@ -36,11 +36,12 @@ public class Duke {
     private enum Commands {
         list        ("", "Lists all the tasks."),
         todo        ("[description]", "Adds a todo task."),
-        deadline    ("[description] /by [deadline]", "Adds a task with a deadline"),
-        event       ("[description] /at [datetime]", "Adds an event to the task"),
+        deadline    ("[description] /by [dd-MM-yyyy] [*optional hh:mm]", "Adds a task with a deadline"),
+        event       ("[description] /at [dd-MM-yyyy] [*optional hh:mm]", "Adds an event to the task"),
         delete      ("[index]", "Removes a task from the task list"),
         done        ("[index]", "Marks a task as done"),
         help        ("", "Shows all the commands available"),
+        dates       ("", "Shows all the available date and time type"),
         bye         ("", "Quit the app");
 
 
@@ -55,6 +56,35 @@ public class Duke {
         @Override
         public String toString() {
             return this.name() + " " + arguments + "   -->   " + description;
+        }
+    }
+
+
+    /**
+     * Accepted Dates
+     */
+    private enum Dates {
+
+        today       ("today", "today"),
+        tomorrow    ("tomorrow", "tomorrow"),
+        ydash       ("yyyy-MM-dd", "2021-12-25"),
+        yslash      ("yyyy/MM/dd", "2021/12/25"),
+        ddash       ("dd-MM-yyyy", "25-12-2021"),
+        dslash      ("dd/MM/yyyy", "25/12/2021"),
+        dtimedot    ("[date] hh:mm", "[date] 18:00"),
+        dtimeblank    ("[date] hhmm", "[date] 1800");
+
+        private final String accepted;
+        private final String example;
+
+        Dates(String accepted, String example) {
+            this.accepted = accepted;
+            this.example = example;
+        }
+
+        @Override
+        public String toString() {
+            return accepted + "   -->   example: " + example;
         }
     }
 
@@ -158,6 +188,8 @@ public class Duke {
                         fileContent.remove(id-1);
 
                         break;
+                    case dates:
+                        output = showAllAcceptedDates();
                 }
                 Files.write(Paths.get(DATA_FILE_DIRECTORY), fileContent, StandardCharsets.UTF_8);
                 showMessage(output);
@@ -246,103 +278,110 @@ public class Duke {
     private static String[] parseInput(String rawInput) throws DukeException {
         String[] input = rawInput.split("\\s+");
         if (input.length < 1) {
-            throw new DukeException("What you mean? Do: `help`");
+            throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
         }
         Commands command;
         try {
             command = Commands.valueOf(input[0]);
         } catch (Exception e) {
-            throw new DukeException("What you mean? Do: `help`");
+            throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
         }
         switch (command) {
             case list:
                 if (input.length != 1) {
-                    throw new DukeException("Do you mean `list`?");
+                    throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString() + " `list` command has no arguments");
                 }
                 return new String[] {input[0]};
 
             case done:
                 if (input.length != 2) {
-                    throw new DukeException("'done' command needs exactly 1 argument. (example: 'done 5')");
+                    throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString() + " (example: 'done 5')");
                 }
                 try {
                     // Check if the argument is a number
                     Integer.parseInt(input[1]);
                 } catch (Exception e) {
-                    throw new DukeException("'done' command needs an integer as a number. (example: 'done 5')");
+                    throw new DukeException(DukeException.Errors.WRONG_ARGUMENT_TYPE.toString() + " (example: 'done 5')");
                 }
                 return new String[] {input[0], input[1]};
 
             case todo:
                 if (input.length < 2) {
-                    throw new DukeException("'todo' command needs a description. (example: 'todo watch Borat')");
+                    throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString() + " (example: 'todo watch Borat')");
                 }
                 String description = combineStringArray(input, 1, input.length);
                 return new String[] {input[0], description};
 
             case deadline:
                 if (input.length < 2) {
-                    throw new DukeException("'deadline' command needs a description. (example: 'deadline watch Borat /by tonight')");
+                    throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString() + " (example: 'deadline watch Borat /by 2021-08-21 18:00')");
                 }
                 String arguments = combineStringArray(input, 1, input.length);
                 String[] divided = arguments.split(" /by ");
                 if (divided.length < 2) {
-                    throw new DukeException("'deadline' command needs a deadline. use '/by'. (example: 'deadline watch Borat /by tonight')");
+                    throw new DukeException(DukeException.Errors.MISSING_DATE.toString() + " (example: 'deadline watch Borat /by 2021-08-21 18:00')");
                 } else if (divided.length > 2) {
-                    throw new DukeException("'deadline' command has too many deadline. use 1 '/by'. (example: 'deadline watch Borat /by tonight')");
+                    throw new DukeException(DukeException.Errors.INVALID_DATE.toString() + " (example: 'deadline watch Borat /by 2021-08-21 18:00')");
                 }
                 String date = parseDate(divided[1]);
                 try {
                     LocalDateTime.parse(date);
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("invalid date");
+                    throw new DukeException(DukeException.Errors.INVALID_DATE.toString());
                 }
                 return new String[] {input[0], divided[0], date};
 
             case event:
                 if (input.length < 2) {
-                    throw new DukeException("'event' command needs a description. (example: 'event Borat concert /at Aug 6th 2-4pm')");
+                    throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString() + " (example: 'event Borat concert /at 2021-08-21 18:00')");
                 }
                 String args = combineStringArray(input, 1, input.length);
                 String[] div = args.split(" /at ");
                 if (div.length < 2) {
-                    throw new DukeException("'event' command needs a deadline. use '/by'. (example: 'event Borat concert /at Aug 6th 2-4pm')");
+                    throw new DukeException(DukeException.Errors.MISSING_DATE.toString() + " (example: 'event watch Borat /at 2021-08-21 18:00')");
                 } else if (div.length > 2) {
-                    throw new DukeException("'event' command has too many deadline. use 1 '/by'. (example: 'event Borat concert /at Aug 6th 2-4pm')");
+                    throw new DukeException(DukeException.Errors.INVALID_DATE.toString() + " (example: 'event watch Borat /at 2021-08-21 18:00')");
                 }
                 String dateTest = parseDate(div[1]);
                 try {
                     LocalDateTime.parse(dateTest);
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("invalid date");
+                    throw new DukeException(DukeException.Errors.INVALID_DATE.toString());
                 }
                 return new String[] {input[0], div[0], parseDate(div[1])};
 
             case bye:
                 if (input.length != 1) {
-                    throw new DukeException("Do you mean `bye`?");
+                    throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString() + " `bye` command has no arguments");
                 }
                 return new String[] {input[0]};
 
             case delete:
                 if (input.length != 2) {
-                    throw new DukeException("'delete' command needs exactly 1 argument. (example: 'delete 5')");
+                    throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString() + " (example: 'delete 5')");
                 }
                 try {
                     // Check if the argument is a number
                     Integer.parseInt(input[1]);
                 } catch (Exception e) {
-                    throw new DukeException("'delete' command needs an integer as a number. (example: 'delete 5')");
+                    throw new DukeException(DukeException.Errors.WRONG_ARGUMENT_TYPE.toString() + " (example: 'delete 5')");
                 }
                 return new String[] {input[0], input[1]};
 
             case help:
                 if (input.length != 1) {
-                    throw new DukeException("Do you mean `help`?");
+                    throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString() + " `help` command has no arguments");
                 }
                 return new String[] {input[0]};
+
+            case dates:
+                if (input.length != 1) {
+                    throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString() + " `dates` command has no arguments");
+                }
+                return new String[] {input[0]};
+
             default:
-                throw new DukeException("What you mean? Do: `help` to list all commands");
+                throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString());
         }
     }
 
@@ -354,40 +393,28 @@ public class Duke {
      * @throws DukeException Thrown if the input is an invalid date
      */
     private static String parseDate(String input) throws DukeException {
-        /** Available date inputs
-         * today
-         * tomorrow
-         *
-         * yyyy-MM-dd
-         * dd-MM-yyyy
-         * yyyy/MM/dd
-         * dd/MM/yyyy
-         *
-         * hhmm
-         * hh:mm
-         */
-
         String[] dateTime = input.split("\\s+");
         int len = dateTime.length;
-        String formatPattern = "MMM d yyyy";
+        String formatPattern = "yyyy-MM-dd";
         if (len < 1 || len > 2) {
-            throw new DukeException("Invalid date");
+            throw new DukeException(DukeException.Errors.INVALID_DATE.toString());
         }
+        String result = "";
         if (dateTime[0].equals("today")) {
             LocalDate date = LocalDate.now();
-            return date.format(DateTimeFormatter.ofPattern(formatPattern)) + "T23:59";
+            result += date.format(DateTimeFormatter.ofPattern(formatPattern));
         } else if (dateTime[0].equals("tomorrow")) {
             LocalDate date = LocalDate.now().plusDays(1);
-            return date.format(DateTimeFormatter.ofPattern(formatPattern)) + "T23:59";
-        }
-        // Date
-        String result = "";
-        String[] date1 = dateTime[0].split("-");
-        String[] date2 = dateTime[0].split("/");
-        if (date1.length == 3 || date2.length == 3) {
-            result = date1.length == 3 ? stringToDate(date1) : stringToDate(date2);
+            result += date.format(DateTimeFormatter.ofPattern(formatPattern));
         } else {
-            throw new DukeException("Invalid date");
+            // Date
+            String[] date1 = dateTime[0].split("-");
+            String[] date2 = dateTime[0].split("/");
+            if (date1.length == 3 || date2.length == 3) {
+                result = date1.length == 3 ? stringToDate(date1) : stringToDate(date2);
+            } else {
+                throw new DukeException(DukeException.Errors.INVALID_DATE.toString());
+            }
         }
         // Time
         if (dateTime.length == 2) {
@@ -408,7 +435,7 @@ public class Duke {
     private static String stringToTime(String time) throws DukeException {
         String[] splitTime = time.split(":");
         if (splitTime.length > 2 || splitTime.length < 1) {
-            throw new DukeException("Invalid time");
+            throw new DukeException(DukeException.Errors.INVALID_TIME.toString());
         }
         for (String s : splitTime) {
             try {
@@ -416,7 +443,7 @@ public class Duke {
                 Integer.parseInt(s);
             } catch (Exception e) {
                 System.out.println("Time is not a number");
-                throw new DukeException("Invalid time");
+                throw new DukeException(DukeException.Errors.INVALID_TIME.toString());
             }
         }
         if (splitTime.length == 2) {
@@ -441,7 +468,7 @@ public class Duke {
                 return hh + ":" + mm;
             }
         }
-        throw new DukeException("Invalid date");
+        throw new DukeException(DukeException.Errors.INVALID_TIME.toString());
     }
 
     /**
@@ -458,8 +485,7 @@ public class Duke {
             Integer.parseInt(date[1]);
             Integer.parseInt(date[2]);
         } catch (Exception e) {
-            System.out.println("Date is not a number");
-            throw new DukeException("Invalid date");
+            throw new DukeException(DukeException.Errors.INVALID_DATE.toString() + " Date is not a number.");
         }
 
         if (
@@ -483,7 +509,7 @@ public class Duke {
             String day = String.format("%02d", Integer.parseInt(date[0]));
             return year + "-" + month + "-" + day;
         }
-        throw new DukeException("Invalid date");
+        throw new DukeException(DukeException.Errors.INVALID_DATE.toString());
     }
 
 
@@ -541,6 +567,21 @@ public class Duke {
         StringBuilder sb = new StringBuilder();
         int i = 1;
         for (Commands c : Commands.values()) {
+            sb.append("(" + i++ + ") ");
+            sb.append(c.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Show the list of accepted dates type
+     * @return A String of all the dates and their description
+     */
+    private static String showAllAcceptedDates() {
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for (Dates c : Dates.values()) {
             sb.append("(" + i++ + ") ");
             sb.append(c.toString());
             sb.append("\n");

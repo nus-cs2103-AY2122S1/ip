@@ -38,9 +38,11 @@ public class Items {
         index = index - 1;
         if (index < 0 || index >= list.size()) {
             if (list.size() == 0) {
-                throw new DukeException("No task found, please add task");
+                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString() + " Task list is empty.");
+            } else if (list.size() == 1) {
+                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString() + " Only 1 item in the list.");
             } else {
-                throw new DukeException("No task found, input a number from [1..." + list.size() + "]");
+                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString() + " Input a number from [1..." + list.size() + "].");
             }
         }
         Task task = list.get(index);
@@ -58,9 +60,11 @@ public class Items {
         index = index - 1;
         if (index < 0 || index >= list.size()) {
             if (list.size() == 0) {
-                throw new DukeException("No task found, please add task");
+                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString() + " Task list is empty.");
+            } else if (list.size() == 1) {
+                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString() + " Only 1 item in the list.");
             } else {
-                throw new DukeException("No task found, input a number from [1..." + list.size() + "]");
+                throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString() + " Input a number from [1..." + list.size() + "].");
             }
         }
         Task task = list.get(index);
