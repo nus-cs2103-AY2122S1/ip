@@ -1,7 +1,5 @@
 package tiger.parser;
 
-import tiger.exceptions.inputs.TigerInvalidInputException;
-
 public class Parser {
 
     String command;
@@ -9,6 +7,8 @@ public class Parser {
     public Parser(String command) {
         this.command = command;
     }
+
+    // TODO: rewrite parsing functionality with regrex
 
     public String getCommandKeyword() {
         String[] array = this.command.split(" ");

@@ -9,6 +9,7 @@ import java.util.List;
 public class EventParser extends Parser {
 
     public String todo = "";
+    private String dateString = "";
     public String eventAt = "";
 
     public EventParser(String input) throws TigerEmptyStringException {

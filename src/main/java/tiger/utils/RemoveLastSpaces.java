@@ -2,6 +2,8 @@ package tiger.utils;
 
 public class RemoveLastSpaces {
 
+    // TODO: remove front spaces as well
+
     public RemoveLastSpaces() {
     }
 
