@@ -7,7 +7,7 @@ public class Todo extends Task {
     }
 
     public String toDB() {
-        return String.format("T | %d | %s | ", super.done ? 1 : 0, super.desc);
+        return String.format("T | %d | %s ", super.done ? 1 : 0, super.desc);
     }
 
     @Override

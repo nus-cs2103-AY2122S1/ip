@@ -53,7 +53,8 @@ public class InputHandler {
         return new Record("Hello! I'm Duke\n\t What can I do for you?");
     }
 
-    private Record bye(String args) {
+    private Record bye(String args) throws DukeException {
+        db.close();
         return new Record("Bye. Hope to see you again soon!", true);
     }
 
@@ -63,8 +64,7 @@ public class InputHandler {
 
     private Record done(String args) throws DukeException {
         try {
-            Task t = db.get(Integer.parseInt(args) - 1);
-            t.markComplete();
+            Task t = db.markAsDone(Integer.parseInt(args) - 1);
             return new Record("Nice! I've marked this task as done:\n\t   " + t);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             if (db.size() == 0) throw new DukeException("You have no tasks.");
@@ -111,7 +111,6 @@ public class InputHandler {
         if (args.size() >= 1)
             t.addDesc(args.get(0));
         if (args.size() == 2)
-            if (db.size() == 0) throw new DukeException("You have no tasks.");
             t.addTime(args.get(1));
         db.add(t);
         return new Record("Got it. I've added this task:\n\t   " + t + sizeMsg());
