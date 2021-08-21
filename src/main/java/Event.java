@@ -16,7 +16,12 @@ public class Event extends Task {
 
     public Event(String description, String time) {
         super(description);
-        this.time = time;
+        this.time = time.stripLeading().stripTrailing();
+    }
+
+    public Event(String description, boolean isDone, String time) {
+        super(description, isDone);
+        this.time = time.stripLeading().stripTrailing();
     }
 
     @Override
@@ -27,7 +32,8 @@ public class Event extends Task {
         } else {
             deadlineLine.append("[E][ ]");
         }
-        deadlineLine.append(this.description.replaceFirst("event", "") + "(at:" + this.time + ")");
+        String deadlineDetails = this.description.replaceFirst("event", "") + "(at: " + this.time + ")";
+        deadlineLine.append(deadlineDetails);
         return deadlineLine.toString();
     }
 }
