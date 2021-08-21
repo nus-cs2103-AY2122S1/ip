@@ -64,14 +64,14 @@ public class FileManager {
                 String[] inputArray = sc.nextLine().split(SEPARATOR);
                 boolean isDone = inputArray[0].equals("1");
 
-                switch (inputArray[1]) {
-                case "T":
+                switch (inputArray[1].charAt(0)) {
+                case 'T':
                     newTask = new Todo(inputArray[2]);
                     break;
-                case "D":
+                case 'D':
                     newTask = new Deadline(inputArray[2], inputArray[3]);
                     break;
-                case "E":
+                case 'E':
                     newTask = new Event(inputArray[2], inputArray[3]);
                     break;
                 }
