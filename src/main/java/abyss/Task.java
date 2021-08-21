@@ -1,6 +1,6 @@
 package abyss;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -13,6 +13,10 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    public int getIsDone() {
+        return isDone ? 1 : 0;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
@@ -21,4 +25,6 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    abstract public String toFileEntry();
 }
