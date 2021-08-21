@@ -1,7 +1,12 @@
 package entity.list;
 
 import exception.InvalidTaskTimeFormatException;
+import exception.InvalidDateTimeException;
 import type.DukeActionTypeEnum;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Encapsulates a task with a deadline.
@@ -10,9 +15,11 @@ import type.DukeActionTypeEnum;
 public class DukeDeadlineTask extends DukeTask {
     private static String TIME_SPLITTER_INPUT = "/by";
     private static String TIME_SPLITTER_DATA = "\\(by:";
-    private String deadline;
+    private static String DEADLINE_INPUT_FORMAT = "dd-MM-yyyy HHmm";
+    private static String DEADLINE_OUTPUT_FORMAT = "MMM d yyyy HHmm";
+    private LocalDateTime deadline;
 
-    private DukeDeadlineTask(String description, boolean isDone, String deadline) {
+    private DukeDeadlineTask(String description, boolean isDone, LocalDateTime deadline) {
         super(description, isDone);
         this.deadline = deadline;
     }
@@ -23,20 +30,26 @@ public class DukeDeadlineTask extends DukeTask {
      * @param description The input task string by the user
      * @return a `entity.list.DukeDeadlineTask` containing an action description and deadline information
      */
-    protected static DukeDeadlineTask createTask (String description) throws InvalidTaskTimeFormatException {
+    public static DukeDeadlineTask createTask (String description) throws InvalidTaskTimeFormatException, InvalidDateTimeException {
         // Split the description into its action and time parts
         String[] splitPartsUsingBy = DukeTask.splitActionAndTime(
                 description,
                 DukeDeadlineTask.TIME_SPLITTER_INPUT
         );
 
+        if (splitPartsUsingBy.length != 2) {
+            throw new InvalidTaskTimeFormatException(DukeActionTypeEnum.DEADLINE.toString(), DukeDeadlineTask.TIME_SPLITTER_INPUT);
+        }
+
+        String actionDescription = splitPartsUsingBy[0];
+        String dateTimeDescription = splitPartsUsingBy[1];
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DEADLINE_INPUT_FORMAT);
+
         try {
-            return new DukeDeadlineTask(splitPartsUsingBy[0], false, splitPartsUsingBy[1]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidTaskTimeFormatException(
-                    DukeActionTypeEnum.DEADLINE.toString(),
-                    DukeDeadlineTask.TIME_SPLITTER_INPUT
-            );
+            LocalDateTime deadline = LocalDateTime.from(dateTimeFormatter.parse(dateTimeDescription));
+            return new DukeDeadlineTask(actionDescription, false, deadline);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException(DEADLINE_INPUT_FORMAT);
         }
     }
 
@@ -47,7 +60,9 @@ public class DukeDeadlineTask extends DukeTask {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.deadline);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DEADLINE_OUTPUT_FORMAT);
+        String formattedDeadline = this.deadline.format(dateTimeFormatter);
+        return String.format("[D]%s (by: %s)", super.toString(), formattedDeadline);
     }
 
     public static DukeDeadlineTask createTaskFromStoredString(String description) {
@@ -64,7 +79,9 @@ public class DukeDeadlineTask extends DukeTask {
 
         String actionDescription = splitPartsUsingBy[0];
         String deadlineWithClosingBracket = splitPartsUsingBy[1];
-        String deadline = deadlineWithClosingBracket.substring(0, deadlineWithClosingBracket.length() - 1);
+        String deadlineString = deadlineWithClosingBracket.substring(0, deadlineWithClosingBracket.length() - 1);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DEADLINE_OUTPUT_FORMAT);
+        LocalDateTime deadline = LocalDateTime.from(dateTimeFormatter.parse(deadlineString));
 
         return new DukeDeadlineTask(actionDescription, isDone, deadline);
     }

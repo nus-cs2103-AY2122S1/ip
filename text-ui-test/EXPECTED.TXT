@@ -11,7 +11,7 @@
 	_________________________________________________
 	_________________________________________________
 	Got it. I've added this task:
-		[D][ ] watch movie (by: 4pm)
+		[D][ ] watch movie (by: Apr 12 2020 1500)
 	Now you have 2 tasks in the list. (＾＾)b
 	_________________________________________________
 	_________________________________________________
@@ -22,7 +22,7 @@
 	_________________________________________________
 	Here are the tasks in your list:
 	1. [T][ ] eat cake
-	2. [D][ ] watch movie (by: 4pm)
+	2. [D][ ] watch movie (by: Apr 12 2020 1500)
 	3. [E][ ] eat icecream (at: everyday)
 	ヽ(°〇°)ﾉ
 	_________________________________________________
@@ -33,7 +33,7 @@
 	_________________________________________________
 	Here are the tasks in your list:
 	1. [T][X] eat cake
-	2. [D][ ] watch movie (by: 4pm)
+	2. [D][ ] watch movie (by: Apr 12 2020 1500)
 	3. [E][ ] eat icecream (at: everyday)
 	ヽ(°〇°)ﾉ
 	_________________________________________________
@@ -49,7 +49,7 @@
 	_________________________________________________
 	Here are the tasks in your list:
 	1. [T][X] eat cake
-	2. [D][ ] watch movie (by: 4pm)
+	2. [D][ ] watch movie (by: Apr 12 2020 1500)
 	3. [E][X] eat icecream (at: everyday)
 	4. [T][ ] read book
 	ヽ(°〇°)ﾉ
@@ -59,16 +59,16 @@
 	_________________________________________________
 	_________________________________________________
 	Got it. I've added this task:
-		[D][ ] do homework (by: 3pm)
+		[D][ ] do homework (by: Mar 12 2020 0900)
 	Now you have 5 tasks in the list. (＾＾)b
 	_________________________________________________
 	_________________________________________________
 	Here are the tasks in your list:
 	1. [T][X] eat cake
-	2. [D][ ] watch movie (by: 4pm)
+	2. [D][ ] watch movie (by: Apr 12 2020 1500)
 	3. [E][X] eat icecream (at: everyday)
 	4. [T][ ] read book
-	5. [D][ ] do homework (by: 3pm)
+	5. [D][ ] do homework (by: Mar 12 2020 0900)
 	ヽ(°〇°)ﾉ
 	_________________________________________________
 	_________________________________________________

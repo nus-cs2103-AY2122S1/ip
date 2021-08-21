@@ -7,6 +7,7 @@ import exception.ErrorAccessingFile;
 import exception.InvalidTaskTimeFormatException;
 import exception.InvalidTaskTypeException;
 import exception.MissingActionDescriptionException;
+import exception.InvalidDateTimeException;
 import type.DukeActionTypeEnum;
 
 public class DukeActionAdd extends DukeAction {
@@ -28,7 +29,7 @@ public class DukeActionAdd extends DukeAction {
         return new DukeActionAdd(description, actionType);
     }
 
-    public void executeAction(DukeTaskList list) throws InvalidTaskTypeException, InvalidTaskTimeFormatException, ErrorAccessingFile {
+    public void executeAction(DukeTaskList list) throws InvalidTaskTypeException, InvalidTaskTimeFormatException, ErrorAccessingFile, InvalidDateTimeException {
         DukeTask task = DukeTask.createTask(this.description, this.actionType);
         list.addTaskToList(task);
         this.task = task;
