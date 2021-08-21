@@ -1,0 +1,12 @@
+todo read book
+todo cook dinner
+list
+deadline CS2105 assignment /by Tuesday
+deadline CS2103T task /by Today
+done 1
+list
+event archery course /at Aug 26 5-7 pm
+done 3
+done 4
+list
+bye
