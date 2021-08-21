@@ -7,11 +7,17 @@ import duke.Ui;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Main class for running Duke
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * @param filePath path to tasks storage file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main loop for interactions with user
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

@@ -3,8 +3,17 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Task with an additional dateTime field storing an event time
+ */
 public class Event extends Task {
     private LocalDate dateTime;
+
+    /**
+     * @param description Description of Task
+     * @param dateTime Event time for task, formatted in YYYY-MM-DD
+     * @throws DukeException
+     */
     public Event(String description, String dateTime) throws DukeException {
         super(description);
         this.dateTime = LocalDate.parse(dateTime);

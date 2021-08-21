@@ -1,9 +1,16 @@
 package duke;
 
+/**
+ * Base class for all tasks that can be marked as done.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * @param description Task description, must not be empty
+     * @throws DukeException
+     */
     public Task(String description) throws DukeException {
         if (description.equals("")) {
             throw new DukeException("The description of a todo cannot be empty.");
@@ -12,6 +19,9 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Mark Task as done
+     */
     public void markAsDone() {
         this.isDone = true;
     }
