@@ -1,11 +1,21 @@
 package duke.exceptions;
 
 /**
- * This is an duke.exceptions.EmptyDescriptionException that extends duke.exceptions.DukeException.
+ * This is an EmptyDescriptionException that extends DukeException.
+ * This exception is thrown when a Command is provided without descriptions.
  */
 public class EmptyDescriptionException extends DukeException {
 
+    /**
+     * This is the class field of EmptyDescriptionException instance.
+     */
     private final String command;
+
+    /**
+     * This is a EmptyDescriptionException Contructor.
+     *
+     * @param command A String representing the command provided but without description.
+     */
     public EmptyDescriptionException(String command) {
         super("");
         this.command = command;

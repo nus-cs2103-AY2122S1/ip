@@ -1,10 +1,14 @@
 package duke.exceptions;
 
 /**
- * This is an duke.exceptions.EmptyListException class that extends duke.exceptions.DukeException.
+ * This is an EmptyListException class that extends DukeException.
+ * This exception is thrown when the user wants to see the list when it is empty.
  */
 public class EmptyListException extends DukeException {
 
+    /**
+     * This is the EmptyListException constructor.
+     */
     public EmptyListException() {
         super("☹ Sorry! The list is empty! ☹");
     }
