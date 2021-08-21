@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 /**
  * This class implements a Deadline object which inherits from Task and has a dueBy info.
  *
@@ -8,12 +11,13 @@
  */
 public class Deadline extends Task{
     /** String representing dueBy date/time of Deadline. */
-    protected String dueBy;
+    protected Calendar dueByCalendar;
+    protected static SimpleDateFormat formatter = new SimpleDateFormat("MMM dd YYYY hh:mm aaa");
 
     /** Default constructor. */
-    public Deadline(String description, String dueBy) {
+    public Deadline(String description, Calendar dueByCalendar) {
         super(description);
-        this.dueBy = dueBy;
+        this.dueByCalendar = dueByCalendar;
     }
 
     /**
@@ -23,7 +27,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + dueBy + ")";
+        return "[D]" + super.toString() + "(by: " + formatter.format(dueByCalendar.getTime()) + ")";
     }
 
 }

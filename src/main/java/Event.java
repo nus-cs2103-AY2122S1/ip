@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 /**
  * This class implements a Deadline object which inherits from Task and additionally stores times of Event.
  *
@@ -8,12 +11,13 @@
  */
 public class Event extends Task{
     /** String representing time of Event. */
-    protected String during;
+    protected Calendar atCalendar;
+    protected static SimpleDateFormat formatter = new SimpleDateFormat("MMM dd YYYY hh:mm aaa");
 
     /** Default constructor. */
-    public Event(String description, String during) {
+    public Event(String description, Calendar atCalendar) {
         super(description);
-        this.during = during;
+        this.atCalendar = atCalendar;
     }
 
     /**
@@ -23,6 +27,6 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + during + ")";
+        return "[E]" + super.toString() + "(at: " + formatter.format(atCalendar.getTime()) + ")";
     }
 }

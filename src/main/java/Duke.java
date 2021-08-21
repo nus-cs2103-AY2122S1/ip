@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ public class Duke {
         System.out.println("Also known as the List Of Tasks That Eventually Require Your Attention");
         System.out.println("What can I do for you?");
         System.out.println(dottedLines);
+
 
         Scanner keyboard = new Scanner(System.in);
 
@@ -106,7 +110,7 @@ public class Duke {
                         System.out.println(dottedLines);
                         break;
                     case "deadline": {
-                        int dueByIndex = userDescription.indexOf("/by");
+                        int dueByIndex = userDescription.indexOf("/by ");
                         if (userDescription.isBlank() || dueByIndex == 0) {
                             throw new DukeException("OOPS!!! The description of a deadline cannot be empty");
                         }
@@ -117,13 +121,22 @@ public class Duke {
 
                         String desc = userDescription.substring(0, dueByIndex);
                         System.out.println("A");
-                        String dueBy = userDescription.substring(dueByIndex + 3);
+                        String dueBy = userDescription.substring(dueByIndex + 4);
                         System.out.println("B");
                         if (dueBy.isBlank()) {
                             throw new DukeException("OOPS!!! The description of /by cannot be empty");
                         }
 
-                        Deadline deadline = new Deadline(desc, dueBy);
+                        Calendar deadlineCal = Calendar.getInstance();
+                        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("d/MM/YYYY HHmm");
+
+                        try {
+                            deadlineCal.setTime(dateTimeFormat.parse(dueBy));
+                        } catch(ParseException e) {
+                            throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yy 0000");
+                        }
+
+                        Deadline deadline = new Deadline(desc, deadlineCal);
                         toDoList.add(deadline);
                         System.out.println(dottedLines);
                         System.out.println("Got it. I've added this task:\n" + deadline.toString());
@@ -132,23 +145,32 @@ public class Duke {
                         break;
                     }
                     case "event": {
-                        int duringIndex = userDescription.indexOf("/at");
-                        if (userDescription.isBlank() || duringIndex == 0) {
+                        int atIndex = userDescription.indexOf("/at ");
+                        if (userDescription.isBlank() || atIndex == 0) {
                             throw new DukeException("OOPS!!! The description of an event cannot be empty");
                         }
 
-                        if (duringIndex == -1) {
+                        if (atIndex == -1) {
                             throw new DukeException("OOPS!! No event time has been set. Reinput Event with '/at time'");
                         }
 
-                        String desc = userDescription.substring(0, duringIndex);
-                        String during = userDescription.substring(duringIndex + 3);
+                        String desc = userDescription.substring(0, atIndex);
+                        String at = userDescription.substring(atIndex + 4);
 
-                        if (during.isBlank()) {
+                        if (at.isBlank()) {
                             throw new DukeException("OOPS!!! The description of /at cannot be empty");
                         }
 
-                        Event event = new Event(desc, during);
+                        Calendar eventCal = Calendar.getInstance();
+                        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("d/MM/YYYY HHmm");
+
+                        try {
+                            eventCal.setTime(dateTimeFormat.parse(at));
+                        } catch(ParseException e) {
+                            throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yy 0000");
+                        }
+
+                        Event event = new Event(desc, eventCal);
                         toDoList.add(event);
                         System.out.println(dottedLines);
                         System.out.println("Got it. I've added this task:\n" + event.toString());
