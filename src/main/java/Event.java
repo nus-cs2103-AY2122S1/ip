@@ -12,11 +12,11 @@ public class Event extends Task {
     }
 
     public static Event fromText(String text) throws DukeException {
-        String[] eventDetails = text.split(" | ", 4);
+        String[] eventDetails = text.split(" \\| ", 4);
         if (eventDetails.length < 4) {
-            throw new DukeException("Cannot parse Event from text - not enough arguments supplied.");
+            throw new DukeException(String.format("Cannot parse Event from \n\t`%s`", text));
         }
-        boolean isDone = eventDetails[1] == "X";
+        boolean isDone = eventDetails[1].equals("X");
         String name = eventDetails[2];
         String timestamp = eventDetails[3];
         return new Event(name, isDone, timestamp);

@@ -12,11 +12,11 @@ public class Deadline extends Task {
     }
 
     public static Deadline fromText(String text) throws DukeException {
-        String[] deadlineDetails = text.split(" | ", 4);
+        String[] deadlineDetails = text.split(" \\| ", 4);
         if (deadlineDetails.length < 4) {
-            throw new DukeException("Cannot parse Deadline from text - not enough arguments supplied.");
+            throw new DukeException(String.format("Cannot parse Deadline from \n\t`%s`", text));
         }
-        boolean isDone = deadlineDetails[1] == "X";
+        boolean isDone = deadlineDetails[1].equals("X");
         String name = deadlineDetails[2];
         String dueDate = deadlineDetails[3];
         return new Deadline(name, isDone, dueDate);

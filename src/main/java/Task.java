@@ -28,6 +28,20 @@ public abstract class Task {
         return isDone ? "X" : " ";
     }
 
+    public static Task fromText(String text) throws DukeException {
+        char taskType = text.charAt(0);
+        switch (taskType) {
+        case 'T':
+            return ToDo.fromText(text);
+        case 'D':
+            return Deadline.fromText(text);
+        case 'E':
+            return Event.fromText(text);
+        default:
+            throw new DukeException(String.format("Cannot parse Task from \n\t`%s`", text));
+        }
+    }
+
     public abstract String toText();
 
     @Override
