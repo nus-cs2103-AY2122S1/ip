@@ -222,6 +222,7 @@ public class Duke {
         }
     }
 
+    // Method to Save List to WhoBot's Memory
     public static void saveMemory() throws DukeException {
         try {
             FileWriter dataWriter = new FileWriter(taskFile);
@@ -246,6 +247,7 @@ public class Duke {
         }
     }
 
+    // Method to Initialize the List from Memory
     public static void getStarted() throws DukeException {
         taskFile = new File("." + File.separator + "data" + File.separator + "WhoBotData.txt");
         if (!taskFile.exists()) {
