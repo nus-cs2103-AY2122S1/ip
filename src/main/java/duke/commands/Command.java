@@ -8,7 +8,7 @@ abstract class Command {
 
     abstract void execute(LinkedList<Item> itemList);
 
-    abstract void parseArg(String args);
+    abstract void parseArg(String line);
 
     public boolean isExit() {
         return false;

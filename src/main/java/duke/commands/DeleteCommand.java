@@ -7,7 +7,7 @@ public class DeleteCommand extends Command {
     private int index;
 
     @Override
-    public void parseArg(String args) {
+    public void parseArg(String line) {
         this.index = 0;
     }
 
