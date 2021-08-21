@@ -12,12 +12,15 @@ Enter Command:
 --------------------------------------------------------------------------------
 Here is the list of my available commands!
 1. todo [description] - Adds a ToDo task to task list
-2. deadline [description] /by [deadline] - Adds a Deadline to task list
-3. event [description] /at [event duration] - Adds a Event to task list
-4. list - Display list of items you have added
-5. done [index of completed task] - Marks specified tasks as completed
-6. delete [index of task to be deleted] - Deletes specified task
-7. bye - End the program
+2. deadline [description] /by [date] [time] - Adds a Deadline to task list.
+3. event [description] /at [date] [time]-[time] - Adds a Event to task list
+4. filter [date] - Filters out list of task on this date
+Date formats: dd/mm/yyyy, dd-mm-yyyy, yyyy-mm-dd
+Time format: HHmm
+5. list - Display list of items you have added
+6. done [index of completed task] - Marks specified tasks as completed
+7. delete [index of task to be deleted] - Deletes specified task
+8. bye - End the program
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
@@ -41,27 +44,27 @@ Here are the tasks in your list:
 Enter Command: 
 --------------------------------------------------------------------------------
 Got it! I've added this task:
-  [D][ ] return book (by: Sunday)
+  [D][ ] return book (by: Aug 22 2021 18:00)
 Now you have 2 task(s) in the list.
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
 Here are the tasks in your list:
 1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
+2.[D][ ] return book (by: Aug 22 2021 18:00)
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
 Got it! I've added this task:
-  [E][ ] project meeting (by: Mon 2-4pm)
+  [E][ ] project meeting (at: Sep 01 2021 09:00-13:00)
 Now you have 3 task(s) in the list.
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
 Here are the tasks in your list:
 1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (by: Mon 2-4pm)
+2.[D][ ] return book (by: Aug 22 2021 18:00)
+3.[E][ ] project meeting (at: Sep 01 2021 09:00-13:00)
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
@@ -80,37 +83,37 @@ Enter Command:
 --------------------------------------------------------------------------------
 Here are the tasks in your list:
 1.[T][X] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (by: Mon 2-4pm)
+2.[D][ ] return book (by: Aug 22 2021 18:00)
+3.[E][ ] project meeting (at: Sep 01 2021 09:00-13:00)
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
 Good job! I've marked this task as done:
-  [D][X] return book (by: Sunday)
+  [D][X] return book (by: Aug 22 2021 18:00)
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
 Good job! I've marked this task as done:
-  [E][X] project meeting (by: Mon 2-4pm)
+  [E][X] project meeting (at: Sep 01 2021 09:00-13:00)
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
 Here are the tasks in your list:
 1.[T][X] borrow book
-2.[D][X] return book (by: Sunday)
-3.[E][X] project meeting (by: Mon 2-4pm)
+2.[D][X] return book (by: Aug 22 2021 18:00)
+3.[E][X] project meeting (at: Sep 01 2021 09:00-13:00)
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
 Noted! I've removed this task:
-  [D][X] return book (by: Sunday)
+  [D][X] return book (by: Aug 22 2021 18:00)
 Now you have 2 task(s) in the list.
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
 Here are the tasks in your list:
 1.[T][X] borrow book
-2.[E][X] project meeting (by: Mon 2-4pm)
+2.[E][X] project meeting (at: Sep 01 2021 09:00-13:00)
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------
@@ -147,6 +150,19 @@ Error: '/at' argument is missing!
 Enter Command: 
 --------------------------------------------------------------------------------
 Error: OOPS!!! Argument after '/at' is empty!
+--------------------------------------------------------------------------------
+Enter Command: 
+--------------------------------------------------------------------------------
+Got it! I've added this task:
+  [D][ ] pay bills (by: Sep 01 2021 12:00)
+Now you have 3 task(s) in the list.
+--------------------------------------------------------------------------------
+Enter Command: 
+--------------------------------------------------------------------------------
+Here is your list of task on this day:
+1.[E][X] project meeting (at: Sep 01 2021 09:00-13:00)
+2.[D][ ] pay bills (by: Sep 01 2021 12:00)
+
 --------------------------------------------------------------------------------
 Enter Command: 
 --------------------------------------------------------------------------------

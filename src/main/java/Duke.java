@@ -60,6 +60,10 @@ public class Duke {
                     int deleteIndex = extractIndex(input, Command.DELETE);
                     formatPrint(taskList.deleteTask(deleteIndex));
                     break;
+                case FILTER:
+                    String filterInfo = extractInfo(input, Command.FILTER);
+                    formatPrint(taskList.filterByDate(filterInfo));
+                    break;
                 default:
                     throw new DukeException("Invalid command @_@ Try typing 'help' to see my list of commands!");
                 }
@@ -94,12 +98,15 @@ public class Duke {
         System.out.println(DIVIDER);
         System.out.println("Here is the list of my available commands!\n"
                 + "1. todo [description] - Adds a ToDo task to task list\n"
-                + "2. deadline [description] /by [deadline] - Adds a Deadline to task list\n"
-                + "3. event [description] /at [event duration] - Adds a Event to task list\n"
-                + "4. list - Display list of items you have added\n"
-                + "5. done [index of completed task] - Marks specified tasks as completed\n"
-                + "6. delete [index of task to be deleted] - Deletes specified task\n"
-                + "7. bye - End the program");
+                + "2. deadline [description] /by [date] [time] - Adds a Deadline to task list.\n"
+                + "3. event [description] /at [date] [time]-[time] - Adds a Event to task list\n"
+                + "4. filter [date] - Filters out list of task on this date\n"
+                + "Date formats: dd/mm/yyyy, dd-mm-yyyy, yyyy-mm-dd\n"
+                + "Time format: HHmm\n"
+                + "5. list - Display list of items you have added\n"
+                + "6. done [index of completed task] - Marks specified tasks as completed\n"
+                + "7. delete [index of task to be deleted] - Deletes specified task\n"
+                + "8. bye - End the program");
         System.out.println(DIVIDER);
     }
 

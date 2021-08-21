@@ -12,6 +12,7 @@ public enum Command {
     HELP("help"),
     BYE("bye"),
     DELETE("delete"),
+    FILTER("filter"),
     INVALID("invalid");
 
     public final String label;
@@ -28,7 +29,7 @@ public enum Command {
      */
     public static Command valueOfLabel(String label) {
         for (Command c : values()) {
-            if (c.label.equals(label)) {
+            if (c.label.equalsIgnoreCase(label)) {
                 return c;
             }
         }

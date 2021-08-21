@@ -137,4 +137,21 @@ public class TaskList {
             throw new DukeException("No such task :< (Check the index input!!!)");
         }
     }
+
+    public String filterByDate(String date) throws DukeException {
+        String ls = "";
+        int count = 1;
+        for (int i = 0; i < this.list.size(); i++) {
+            Task task = this.list.get(i);
+            if (task.checkDate(date)) {
+                ls += String.format("%d.%s\n", count, task);
+                count++;
+            }
+        }
+        if (ls.equals("")) {
+            return "You do not have any tasks on this day! :>";
+        } else {
+            return "Here is your list of task on this day:\n" + ls;
+        }
+    }
 }
