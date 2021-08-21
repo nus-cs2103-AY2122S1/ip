@@ -3,7 +3,7 @@ package duke.task;
 /**
  * This is a Task Class that represent the Task user keys into Duke.
  */
-public class Task {
+public abstract class Task {
 
     /**
      * These are class field of a Task.
@@ -51,9 +51,7 @@ public class Task {
      *
      * @return A String representing the command that created this task.
      */
-    public String fullCommand() {
-        return "";
-    }
+    public abstract String fullCommand();
 
     @Override
     public String toString() {
