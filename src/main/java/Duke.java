@@ -21,6 +21,10 @@ import static java.lang.Integer.parseInt;
  * @author Benedict Chua
  */
 public class Duke {
+    private enum Command {
+        LIST, DONE, TODO, DEADLINE, EVENT, DELETE, BYE, UNKNOWN
+    }
+
     private static final String INDENTATION = "     ";
     private static final String LINE_SEPARATOR = "    ____________________________________________________________";
     private static final String[] GREETING = {"Hey! I'm Duke (Tsun)!", "What do you want?",
@@ -28,6 +32,33 @@ public class Duke {
     private static final String[] GOODBYE = {"Hmph! It's not like I want to see you again or anything!"};
 
     private static TaskList tasksList;
+
+    /**
+     * From the input given by the user, returns the Command (first keyword) in it.
+     *
+     * @param input the String that the user enters into Duke.
+     * @return the corresponding Command in the input.
+     */
+    private static Command getCommand(String input) {
+        switch (input.split(" ")[0]) {
+        case "bye":
+            return Command.BYE;
+        case "list":
+            return Command.LIST;
+        case "done":
+            return Command.DONE;
+        case "todo":
+            return Command.TODO;
+        case "deadline":
+            return Command.DEADLINE;
+        case "event":
+            return Command.EVENT;
+        case "delete":
+            return Command.DELETE;
+        default:
+            return Command.UNKNOWN;
+        }
+    }
 
     /**
      * Prints messages line by line enclosed within line separators.
@@ -129,35 +160,37 @@ public class Duke {
         displayMessage(GREETING);
 
         // Carries out commands inputted by user into the Scanner
-        String command = sc.nextLine();
-        while(!command.equals("bye")) {
+        String input = sc.nextLine();
+        Command command = getCommand(input);
+        while(command != Command.BYE) {
             try {
-                switch (command.split(" ")[0]) {
-                case "list":
+                switch (command) {
+                case LIST:
                     displayTasks();
                     break;
-                case "done":
-                    completeTask(filterTaskIndex(command));
+                case DONE:
+                    completeTask(filterTaskIndex(input));
                     break;
-                case "delete":
-                    deleteTask(filterTaskIndex(command));
+                case DELETE:
+                    deleteTask(filterTaskIndex(input));
                     break;
-                case "todo":
-                    addToList(filterTaskDescription(command), "ToDo");
+                case TODO:
+                    addToList(filterTaskDescription(input), "ToDo");
                     break;
-                case "deadline":
-                    addToList(filterTaskDescription(command), "Deadline");
+                case DEADLINE:
+                    addToList(filterTaskDescription(input), "Deadline");
                     break;
-                case "event":
-                    addToList(filterTaskDescription(command), "Event");
+                case EVENT:
+                    addToList(filterTaskDescription(input), "Event");
                     break;
                 default:
-                    throw new InvalidCommandException(command);
+                    throw new InvalidCommandException(input);
                 }
             } catch (DukeException e) {
                 displayMessage(new String[] {e.toString()});
             } finally {
-                command = sc.nextLine();
+                input = sc.nextLine();
+                command = getCommand(input);
             }
         }
 
