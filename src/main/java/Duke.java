@@ -8,6 +8,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String userInput = "";
+        readTasks();
 
         String logo = "┏━━┓╋╋╋┏━━┓╋╋╋┏┓\n" +
                       "┃┏┓┃╋╋╋┃┏┓┃╋╋┏┛┗┓\n" +
@@ -94,6 +95,45 @@ public class Duke {
         }
     }
 
+    private static void readTasks() {
+        File savedTasksFile = new File("./src/main/data/tasks.txt");
+        if (!savedTasksFile.exists()) {
+            return;
+        } else {
+            try {
+                Scanner reader = new Scanner(savedTasksFile);
+                while (reader.hasNextLine()) {
+                    String taskString = reader.nextLine();
+                    String[] taskStringArr = taskString.split("\\|");
+                    String type = taskStringArr[0];
+                    Task task;
+                    switch(type) {
+                    case "T":
+                        task = new Todo(taskStringArr[2]);
+                        break;
+                    case "D":
+                        task = new Deadline(taskStringArr[2], taskStringArr[3]);
+                        // addTask(taskStringArr[2], taskStringArr[3], TaskType.DEADLINE);
+                        break;
+                    case "E":
+                        task = new Event(taskStringArr[2], taskStringArr[3]);
+                        // addTask(taskStringArr[2], taskStringArr[3], TaskType.EVENT);
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + type);
+                    }
+                    if (taskStringArr[1].equals("1")) {
+                        task.markAsDone();
+                    }
+                    tasks.add(task);
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println("An error has occurred");
+                e.printStackTrace();
+            }
+        }
+    }
+
     private static void saveData() {
         File dataDirectory = new File("./src/main/data");
         if (!dataDirectory.exists()) {
@@ -117,7 +157,6 @@ public class Duke {
                 builder.append("|");
                 builder.append(task.getTiming());
                 builder.append("\n");
-                System.out.println(builder.toString());
                 writer.write(builder.toString());
 
             }
