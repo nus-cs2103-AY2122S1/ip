@@ -39,3 +39,9 @@ class InvalidDateTimeException extends DukeException {
         super("Incorrect date/time format given!");
     }
 }
+
+class LoadingError extends DukeException {
+    LoadingError(String message) {
+        super("Loading Error: " + message);
+    }
+}
