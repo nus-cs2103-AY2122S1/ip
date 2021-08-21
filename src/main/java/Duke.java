@@ -1,7 +1,8 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-
+    //Task and Subclasses
     public static class Task{
 
         protected String description;
@@ -72,7 +73,7 @@ public class Duke {
                 + " | '  \\| '_| | '  \\/ -_) -_|_-</ -_) -_) / /(_-<\n"
                 + " |_|_|_|_|   |_|_|_\\___\\___/__/\\___\\___|_\\_\\/__/\n"
                 + "\n";
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<>();
         int currentIndex = 0;
 
         System.out.println(logo);
@@ -100,7 +101,7 @@ public class Duke {
                 //list out all tracked items
                 System.out.println("Tasks I tracked so far:");
                 for (int i = 1; i<currentIndex+1; i++){
-                    System.out.println(i + ". " + tasks[i-1]);
+                    System.out.println(i + ". " + tasks.get(i-1));
                 }
             } else if (input.equals("done")){
                 if (currentIndex == 0){
@@ -135,7 +136,7 @@ public class Duke {
                             System.out.println("From 1 to " + currentIndex);
                         } else{
                             System.out.println("Ok! I've marked the task below as done!");
-                            tasks[taskNumber-1].setDone();
+                            tasks.get(taskNumber-1).setDone();
                             break;
                         }
 
@@ -146,11 +147,10 @@ public class Duke {
             } else if (input.equals("todo") || input.equals("deadline") || input.equals("event")){
 
                 if (currentIndex == 99) {
-                    //prevent out of bounds error
+                    //limit of 100 items
                     System.out.println("Oops! My task list is full. No new items can be added");
                 } else {
-                    String type = input;
-                    System.out.println("Ok! A " + type + " task");
+                    System.out.println("Ok! A " + input + " task");
 
                     String taskName;
 
@@ -165,9 +165,9 @@ public class Duke {
                     }
                     Task newTask;
                     String time;
-                        if (type.equals("todo")){
+                        if (input.equals("todo")){
                             newTask = new ToDo(taskName);
-                        } else if (type.equals("deadline")){
+                        } else if (input.equals("deadline")){
                             while(true){
                                 System.out.println("Enter the deadline for the task");
                                 time = reader.nextLine();
@@ -192,7 +192,7 @@ public class Duke {
                             newTask = new Event(taskName, time);
                         }
                     //add item to the end of the array.
-                    tasks[currentIndex] = newTask;
+                    tasks.add(newTask);
                     System.out.println("Ok! I've added the task below");
                     System.out.println(newTask);
                     currentIndex++;
@@ -200,6 +200,52 @@ public class Duke {
                 }
 
 
+            } else if (input.equals("delete")){
+                if (currentIndex == 0){
+                    System.out.println("Oops! There are no tasks to delete right now");
+                } else{
+                    //delete item of index i as done.
+                    System.out.println("Which task number should I delete?");
+                    System.out.println("From 1 to " + currentIndex);
+                    System.out.println("Type 0 to cancel");
+
+                    while (true) {
+
+                        String temp = reader.nextLine();
+                        int taskNumber;
+
+                        try{
+                            taskNumber = Integer.parseInt(temp);
+                        } catch (Exception e){ //if entered an invalid integer
+                            System.out.println("Oops! Please enter a valid integer");
+                            System.out.println("From 1 to " + currentIndex);
+                            continue;
+                        }
+
+
+                        //a way to exit if not deleting a task
+                        if (taskNumber == 0){
+                            System.out.println("Ok! Back to main");
+                            break;
+                        }
+
+                        if (taskNumber > currentIndex || taskNumber < 0){
+                            //prevent out of bounds error
+                            System.out.println("Oops! Please enter a valid task number.");
+                            System.out.println("From 1 to " + currentIndex);
+                        } else{
+                            System.out.println("Ok! I've marked the task below as done!");
+                            System.out.println(tasks.get(taskNumber-1));
+                            tasks.remove(taskNumber-1);
+                            currentIndex--;
+                            System.out.println("There are now " + currentIndex + " tasks.");
+                            break;
+                        }
+
+                    }
+
+
+                }
             } else { //if unrecognised command
                 System.out.println("Oops! Sorry I don't recognise that command!");
                 System.out.println("Type \"help\" for list of commands, and ensure that there are no illegal characters or trailing spaces");
