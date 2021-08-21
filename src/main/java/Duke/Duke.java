@@ -8,15 +8,88 @@ import duke.task.Event;
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidInstructionException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
-        ArrayList<Task> taskList = new ArrayList<>();
+//    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+//        System.out.println("write file");
+//        try {
+//            FileWriter fw = new FileWriter(filePath);
+//            fw.write(textToAdd);
+//            fw.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("no file");
+//        }
+//    }
+//    private static void printFileContents(String filePath) throws FileNotFoundException {
+//        System.out.println("print file");
+//        File f = new File(filePath); // create a File for the given file path
+//        System.out.println("1");
+//        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+//        System.out.println("2");
+//        while (s.hasNext()) {
+//            System.out.println("loop");
+//            System.out.println(s.nextLine());
+//        }
+//    }
+    private static String createTask(String task, String description) throws InvalidInputException {
+        if (description.length() == 0) {
+            throw new InvalidInputException(task + " needs a description.");
+        }
+        String center = null;
+        switch (task) {
+        case "todo":
+            center = "";
+            break;
+        case "deadline":
+            center = "/by";
+            break;
+        case "event":
+            center = "/at";
+            break;
+        }
+        assert center != null;
+        int centerIndex = description.indexOf(center);
+        if (centerIndex == -1) {
+            throw new InvalidInputException("To create a " + task + " task: enter \"" + task + " (task details) "
+                    + center + " (task details)\"");
+        }
+        String first = null;
+        String second = null;
+        System.out.println(task.length());
+        if (!task.equals("todo")) {
+            first = description.substring(0, centerIndex).trim();
+            second = description.substring(centerIndex).trim();
+            if (first.length() == 0 || second.length() <= center.length()) {
+                throw new InvalidInputException(task + " task must have details before and after " + center + ".");
+            }
+        }
+        switch (task) {
+        case "todo":
+            taskList.add(new ToDo(description));
+            break;
+        case "deadline":
+            taskList.add(new Deadline(first, second));
+            break;
+        case "event":
+            taskList.add(new Event(first, second));
+            break;
+        }
+        return "Got it. I've added this task:\n" +
+                "\t\t" + taskList.get(taskList.size() - 1).toString() + "\n" +
+                "\t" + "Now you have " + taskList.size() + " tasks in the list.";
+    }
+
+    public static void main(String[] args) {
 
         String line = "------------------------------------------------------------------------------" +
                         "-------------------------------\n\n";
@@ -81,63 +154,8 @@ public class Duke {
                                 throw new InvalidInputException("Task number does not exist.");
                             }
                             break;
-                        case "todo":
-                            if (text.length() == 0) {
-                                throw new InvalidInputException("ToDo task needs a description.");
-                            } else {
-                                ToDo toDo = new ToDo(text);
-                                taskList.add(toDo);
-                                text = "Got it. I've added this task:\n" +
-                                        "\t\t" + taskList.get(taskList.size() - 1).toString() + "\n" +
-                                        "\t" + "Now you have " + taskList.size() + " tasks in the list.";
-                            }
-                            break;
-                        case "deadline":
-                            int byIndex = text.indexOf("/by");
-                            if (byIndex == -1) {
-                                throw new InvalidInputException(
-                                        "To create a deadline task: enter \"deadline (task details) /by (deadline)\""
-                                );
-                            } else {
-                                String details = text.substring(0, byIndex).trim();
-                                if (details.length() == 0)
-                                    throw new InvalidInputException("Deadline task needs a description.");
-                                else if (text.substring(byIndex).trim().length() <= 3)
-                                    throw new InvalidInputException("Deadline task needs a deadline.");
-                                else {
-                                    String by = text.substring(byIndex + 3).trim();
-                                    Deadline deadline = new Deadline(details, by);
-                                    taskList.add(deadline);
-                                    text = "Got it. I've added this task:\n" +
-                                            "\t\t" + taskList.get(taskList.size() - 1).toString() + "\n" +
-                                            "\t" + "Now you have " + taskList.size() + " tasks in the list.";
-
-                                }
-                            }
-                            break;
-                        case "event":
-                            int atIndex = text.indexOf("/at");
-                            if (atIndex == -1) {
-                                throw new InvalidInputException(
-                                        "To create an event task: enter \"event (task details) /at (event timing)\""
-                                );
-                            } else {
-                                String details = text.substring(0, atIndex).trim();
-                                if (details.length() == 0)
-                                    throw new InvalidInputException("Event task needs a description.");
-                                else if (text.substring(atIndex).trim().length() <= 3)
-                                    throw new InvalidInputException("Event task needs an event timing.");
-                                else {
-                                    String by = text.substring(atIndex + 3).trim();
-                                    Event event = new Event(details, by);
-                                    taskList.add(event);
-                                    text = "Got it. I've added this task:\n" +
-                                            "\t\t" + taskList.get(taskList.size() - 1).toString() + "\n" +
-                                            "\t" + "Now you have " + taskList.size() + " tasks in the list.";
-
-                                }
-                            }
-                            break;
+                        case "todo": case "deadline": case "event":
+                            text = createTask(task, text);
                         default:
                             throw new InvalidInstructionException(task);
                     }
