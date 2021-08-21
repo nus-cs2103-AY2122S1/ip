@@ -28,14 +28,19 @@ public class CommandHandler {
     public static String handleDeadline(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
+
+        // Check if user has typed in correct input
         String[] description = commands[1].split("/by", 2);
         if (description.length != 2) {
             throw new LifelineException("Deadline is not of the correct format! Please use deadline <name> /by "
                     + "<dd/MM/yy HHmm>");
         }
         try {
+            // Parse date from user input
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
             LocalDateTime dateTime = LocalDateTime.parse(description[1].trim(), formatter);
+
+            // Create new task
             Task newTask = new Deadline(description[0].trim(), dateTime);
             taskList.add(newTask);
             storage.save(taskList);
