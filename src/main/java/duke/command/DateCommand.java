@@ -26,8 +26,21 @@ public class DateCommand extends Command {
         int events = 0;
         int deadlines = 0;
 
+        // Check if anything is provided 1 space after date command.
+        if (this.userInput.length() <= (Commands.DATE.getLength() + 1)) {
+            // If nothing is provided, date to search for is not provided.
+            throw new DukeException(Ui.exceptionMissingDate());
+        }
+
+        // Check for space after date command.
+        // This prevents wrong date being read by reminding user to add space.
+        if (this.userInput.charAt(Commands.DATE.getLength()) != ' ') {
+            throw new DukeException(Ui.exceptionMissingSpaceAfterCommand(Commands.DATE.getCommand()));
+        }
+
         // Parses user input into LocalDate. User input for date will follow "date" command.
         String dateString = this.userInput.substring(Commands.DATE.getLength() + 1);
+
         LocalDate localDate = Parser.toLocalDate(dateString);
         String formattedDateString = Parser.parseLocalDate(localDate);
 

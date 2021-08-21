@@ -65,6 +65,12 @@ public class Parser {
 
     public static LocalDate toLocalDate(String dateString) throws DukeException {
         String[] split = dateString.split("[/\\s]");
+
+        // Check if split has 3 elements. If not, this is already an invalid date format.
+        if (split.length != 3) {
+            throw new DukeException(Ui.exceptionInvalidDateTimeFormat());
+        }
+
         String date = padZeros(split[0], 2);
         String month = padZeros(split[1], 2);
         String year = padZeros(split[2], 4);

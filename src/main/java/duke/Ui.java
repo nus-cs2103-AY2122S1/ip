@@ -108,6 +108,10 @@ public class Ui {
         return "The description of " + userCommand + " cannot be empty.";
     }
 
+    public static String exceptionMissingDate() {
+        return "No date is provided to search for.";
+    }
+
     public static String exceptionMissingIndexForDelete() {
         return "An index must be provided to delete task at index.";
     }
@@ -125,7 +129,7 @@ public class Ui {
     }
 
     public static String exceptionInvalidDateTimeFormat() {
-        return "Cannot read invalid datetime format";
+        return "Cannot read invalid datetime format.";
     }
 
     public static String exceptionInvalidLocalDate() {
@@ -142,15 +146,15 @@ public class Ui {
     }
 
     public static String exceptionMissingSpaceAfterCommand(String userCommand) {
-        return "There is a missing space after " + userCommand;
+        return "There is a missing space after " + userCommand + ".";
     }
 
     public static String exceptionMissingSpaceBeforeDescriptor(Descriptors descriptor) {
-        return "There is a missing space before the descriptor " + descriptor.getDescriptor();
+        return "There is a missing space before the descriptor " + descriptor.getDescriptor() + ".";
     }
 
     public static String exceptionMissingSpaceAfterDescriptor(Descriptors descriptor) {
-        return "There is a missing space after the descriptor " + descriptor.getDescriptor();
+        return "There is a missing space after the descriptor " + descriptor.getDescriptor() + ".";
     }
 
     public static String exceptionCorruptSaveFile() {
@@ -162,7 +166,7 @@ public class Ui {
     }
 
     public static String exceptionCannotSaveFile() {
-        return "Failed to save tasks";
+        return "Failed to save tasks.";
     }
 
 }
