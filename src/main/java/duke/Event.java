@@ -17,7 +17,6 @@ public class Event extends Task{
         this.date = LocalDate.parse(eventDate);
     }
 
-
     /**
      * parses a command and generates a new Event instance.
      * @param newCommand the full Command.
@@ -25,7 +24,8 @@ public class Event extends Task{
      * @throws IllegalArgumentException If the command is of illegal format.
      * @throws DateTimeParseException If the event date is of illegal format.
      */
-    public static Event parseNewCommand(String newCommand) throws IllegalArgumentException, DateTimeParseException {
+    public static Event parseNewCommand(String newCommand)
+            throws IllegalArgumentException, DateTimeParseException {
         int sepIndex = newCommand.indexOf("/at");
         int cmdLen = newCommand.length();
         if (sepIndex == -1 || cmdLen < 6 || 6 > sepIndex-1 || cmdLen < sepIndex+4) {

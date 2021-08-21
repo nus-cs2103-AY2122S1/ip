@@ -24,7 +24,8 @@ public class Deadline extends Task {
      * @throws IllegalArgumentException If the command is of illegal format.
      * @throws DateTimeParseException If the due date is of illegal format.
      */
-    public static Deadline parseNewCommand(String newCommand) throws IllegalArgumentException, DateTimeParseException {
+    public static Deadline parseNewCommand(String newCommand)
+            throws IllegalArgumentException, DateTimeParseException {
         int sepIndex = newCommand.indexOf("/by");
         int cmdLen = newCommand.length();
         if (sepIndex == -1 || cmdLen < 9 || 9 > sepIndex-1 || cmdLen < sepIndex+4) {
