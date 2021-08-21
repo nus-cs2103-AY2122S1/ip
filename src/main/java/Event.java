@@ -8,11 +8,16 @@ public class Event extends Task {
     /**
      * Initializes a new Event
      * @param name Name of task
-     * @param startTime Start time of task
+     * @param startEndTime Start time of task
      */
-    public Event(String name, String startTime) {
+    public Event(String name, String startEndTime) {
         super(name);
-        this.startEndTime = startTime;
+        this.startEndTime = startEndTime;
+    }
+
+    public Event(String name, String startEndTime, boolean isDone) {
+        super(name, isDone);
+        this.startEndTime = startEndTime;
     }
 
     public String getStartEndTime() {
