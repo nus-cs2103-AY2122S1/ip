@@ -10,18 +10,17 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
+<<<<<<< HEAD
     private String at;
+=======
+    private String by;
     private LocalDate date;
+>>>>>>> branch-Level-8
 
-    public Event(String description, Task.TYPE type, String by) {
+    public Event(String description, Task.TYPE type, String at) {
         super(description, type);
-        try {
-            LocalDate d1 = LocalDate.parse(by);
-            this.date = d1;
-            this.at = d1.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        } catch (DateTimeParseException dateTimeParseException) {
-            this.at = by;
-        }
+<<<<<<< HEAD
+        this.at = at;
     }
 
     public Event(TYPE type, boolean isDone, String description, String at) {
@@ -32,6 +31,15 @@ public class Event extends Task {
     @Override
     public String getTime() {
         return at;
+=======
+        try {
+            LocalDate d1 = LocalDate.parse(by);
+            this.date = d1;
+            this.by = d1.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        } catch (DateTimeParseException dateTimeParseException) {
+            this.by = by;
+        }
+>>>>>>> branch-Level-8
     }
 
     @Override
