@@ -1,7 +1,6 @@
 package lifeline;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import lifeline.command.Command;
 import lifeline.exception.LifelineException;
@@ -10,14 +9,33 @@ import lifeline.storage.Storage;
 import lifeline.task.TaskList;
 import lifeline.ui.Ui;
 
+/**
+ * The class Lifeline is the entry point to the Lifeline program.
+ * Calling start on this class will start the program.
+ */
 public class Lifeline {
-    private Scanner sc;
+
+    /**
+     * List of tasks created by the user
+     */
     private TaskList taskList;
+
+    /**
+     * Used to save new tasks or load saved tasks
+     */
     private Storage storage;
+
+    /**
+     * Used to display information to the user
+     */
     private Ui ui;
 
+    /**
+     * Default constructor for a Lifeline
+     *
+     * @param filepath Path to load or save tasks
+     */
     Lifeline(String filepath) {
-        this.sc = new Scanner(System.in);
         this.storage = new Storage(filepath);
         this.ui = new Ui();
         try {
@@ -48,8 +66,11 @@ public class Lifeline {
         }
     }
 
+    /**
+     * Starts the program
+     */
     public void start() {
-        ui.printToConsole(ui.greet(taskList));
+        ui.printToConsole(ui.greet());
         this.getInput();
     }
 }
