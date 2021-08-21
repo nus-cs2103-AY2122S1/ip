@@ -3,48 +3,51 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 /**
  * Response class contains the logic for processing the commands from Duke.
  * It supports (i) the list command, (ii) the bye command,
  * (iii) adding different types of tasks to the list, (iv) and marking the tasks as done,
- * (v) removing tasks
+ * (v) removing tasks. Currently, the only tasks that can be changed are those
+ * added in the same session. Tasks from previous sessions cannot be changed.
+ * Additionally, uses the list of tasks from previous sessions
  */
 
 public class Response {
     private ArrayList<Task> lstOfTasks = new ArrayList<Task>();
-    private FileWriter file;
 
-    Response() {
-        try {
-            file = new FileWriter(Duke.pathAddress, true);
-        } catch (IOException e) {
-            System.out.println("error occurred");
-            e.getStackTrace();
-        }
-    }
-
+    /**
+     * Writes text to duke.txt.
+     * @param text the text to be written to the file
+     */
     void writeToFile(String text) {
         try {
-            file.write(text + System.lineSeparator());
-            file.close();
+            FileWriter temp = new FileWriter(Duke.pathAddress, true);
+            temp.write(text + System.lineSeparator());
+            temp.close();
         } catch (IOException e) {
             System.out.println("error writing to file");
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 
+    /**
+     * Modifies entire duke.txt file when a recently added event is done or removed
+     * @param task the list of tasks that we are modifying
+     */
     void modifyTaskInFile(ArrayList<Task> task) {
         try {
             Files.deleteIfExists(Paths.get(Duke.pathAddress));
-            FileWriter fileWriter = new FileWriter(Duke.pathAddress);
+            FileWriter fileWriter = new FileWriter(Duke.pathAddress, true);
             for (Task t : task) {
                 fileWriter.append(t.toString() + System.lineSeparator());
             }
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("error modifying file");
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -53,6 +56,7 @@ public class Response {
      * @return A string to bids farewell to the user
      */
     String bye() {
+        modifyTaskInFile(lstOfTasks);
         return "Bye. Hope to see you again soon!";
     }
 
@@ -62,11 +66,18 @@ public class Response {
      */
     String list() {
         String res = "";
-        for (int i = 0; i < lstOfTasks.size(); i++) {
-            res += (i + 1) + ". " +
-                lstOfTasks.get(i).toString() + "\n";
+        int counter = 1;
+        try {
+            Scanner textFile = new Scanner(Duke.dataFile);
+            while (textFile.hasNext()) {
+                res += counter + ". " + textFile.nextLine() + System.lineSeparator();
+                counter++;
+            }
+            textFile.close();
+            return "Here are the tasks in your list:\n" + res;
+        } catch (FileNotFoundException e) {
+            return "File not found!";
         }
-        return "Here are the tasks in your list:\n" + res;
     }
 
     /**
@@ -76,11 +87,14 @@ public class Response {
      */
     String done(int taskNumber) {
         String res = "Nice! I've marked this task as done:\n";
-        Task currTask = lstOfTasks.get(taskNumber);
-        currTask.markAsDone();
-        res += " [" + currTask.getStatusIcon() + "] " + currTask.description;
-        modifyTaskInFile(lstOfTasks);
-        return res;
+        try {
+            Task currTask = lstOfTasks.get(taskNumber);
+            currTask.markAsDone();
+            res += " [" + currTask.getStatusIcon() + "] " + currTask.description;
+            return res;
+        } catch (IndexOutOfBoundsException e) {
+            return "Sorry item was not recently added and hence can't be removed! :(";
+        }
     }
 
     /**
@@ -94,7 +108,6 @@ public class Response {
             return "OOPS!!! The description of a todo cannot be empty.\n";
         }
         Todo taskToDo = new Todo(task);
-        writeToFile(taskToDo.toString());
         lstOfTasks.add(taskToDo);
         return "Got it. I've added this task:\n" + taskToDo.toString() + "\n"
             + "Now you have " + lstOfTasks.size() + " tasks in the list\n";
@@ -129,7 +142,6 @@ public class Response {
             index++;
         }
         DeadLine deadLine = new DeadLine(taskWithDeadLine, by);
-        writeToFile(deadLine.toString());
         lstOfTasks.add(deadLine);
         return "Got it. I've added this task:\n" + deadLine.toString() + "\n"
             + "Now you have " + lstOfTasks.size() + " tasks in the list\n";
@@ -164,7 +176,6 @@ public class Response {
             index++;
         }
         Event event = new Event(eventTask, by);
-        writeToFile(event.toString());
         lstOfTasks.add(event);
         return "Got it. I've added this task:\n" + event.toString() + "\n"
             + "Now you have " + lstOfTasks.size() + " tasks in the list\n";
@@ -178,7 +189,6 @@ public class Response {
 
     String delete(int taskNum) {
         Task removed = lstOfTasks.remove(taskNum);
-        modifyTaskInFile(lstOfTasks); 
         return "Noted. I've removed this task:\n" + removed.toString() + "\n"
             + "Now you have " + lstOfTasks.size() + " in the list.";
     }
