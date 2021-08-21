@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 /**
  * This class encapsulates a CLI bot named Duke.
  *
@@ -18,6 +19,10 @@ public class Duke {
         parser = new Parser(list, dataManager);
     }
 
+    public static void main(String[] args) {
+        new Duke("./data/task.txt").run();
+    }
+
     public void run() {
         ui.printWelcomeMessage();
 
@@ -25,63 +30,41 @@ public class Duke {
         Command command = parser.detectCommand(input);
 
         while (command != Command.EXIT) {
-            switch (command) {
-            case TODO:
-                try {
+            try {
+                switch (command) {
+                case TODO:
                     parser.handleTodo(input);
-                } catch (DukeException e) {
-                    Ui.prettyPrint(e.getMessage());
-                }
-                break;
-            case DEADLINE:
-                try {
+                    break;
+                case DEADLINE:
                     parser.handleDeadline(input);
-                } catch (DukeException e) {
-                    Ui.prettyPrint(e.getMessage());
-                }
-                break;
-            case EVENT:
-                try {
+                    break;
+                case EVENT:
                     parser.handleEvent(input);
-                } catch (DukeException e) {
-                    Ui.prettyPrint(e.getMessage());
-                }
-                break;
-            case LIST:
-                list.printList();
-                break;
-            case DONE:
-                try {
+                    break;
+                case LIST:
+                    list.printList();
+                    break;
+                case DONE:
                     int index = parser.extractIndex(input);
                     list.markTaskAsDone(index);
                     list.updateData();
-                } catch (DukeException e) {
-                    Ui.prettyPrint(e.getMessage());
-                }
-                break;
-            case DELETE:
-                try {
-                    int index = parser.extractIndex(input);
+                    break;
+                case DELETE:
+                    index = parser.extractIndex(input);
                     list.removeFromList(index);
                     list.updateData();
-                } catch (DukeException e) {
-                    Ui.prettyPrint(e.getMessage());
+                    break;
+                case UNRECOGNISED:
+                    throw new NoSuchCommandException(input.split(" ", 2)[0]);
                 }
-                break;
-            case UNRECOGNISED:
-                Ui.prettyPrint(
-                        String.format(
-                                "NoSuchCommandError: Unrecognised command `%s`. Perhaps you made a typo?",
-                                input.split(" ", 2)[0]));
-                break;
+            } catch (DukeException e) {
+                ui.printException(e.getMessage());
             }
             input = sc.nextLine();
             command = parser.detectCommand(input);
         }
         ui.printExitMessage();
     }
-
-    public static void main(String[] args) {
-        new Duke("./data/task.txt").run();
-    }
 }
+
+

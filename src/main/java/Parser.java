@@ -34,13 +34,11 @@ public class Parser {
 
         // Check whether user input index
         if (inputs.length < 2) {
-            throw new DukeException(
-                    "NoIndexError: Please enter an index to indicate your task of interest.");
+            throw new MissingIndexException();
         }
 
         if (!inputs[1].matches("\\d+")) {
-            throw new DukeException(
-                    "IndexFormatException: Index entered should only contain positive numerals.");
+            throw new IndexFormatException();
         }
 
         return Integer.parseInt(inputs[1]);
@@ -56,8 +54,7 @@ public class Parser {
 
         // Check whether description is entered
         if (extracted.length < 2) {
-            throw new DukeException(
-                    "NoDescriptionError: todo has to be followed by a description.");
+            throw new MissingDescriptionException();
         }
 
         ToDo task = new ToDo(extracted[1]);
@@ -73,17 +70,16 @@ public class Parser {
     public void handleDeadline(String input) throws DukeException {
         // Check whether description is entered
         if (input.split(" ").length < 2) {
-            throw new DukeException(
-                    "NoDescriptionError: deadline has to be followed by a description.");
+            throw new MissingDescriptionException();
         }
 
         String[] extracted = input.split(" ", 2)[1].split(" /by ");
 
         // Check whether deadline is specified correctly
         if (extracted.length < 2) {
-            throw new DukeException("NoDeadlineError: Please specify a deadline with '/by'.");
+            throw new MissingDateTimeException("'/by'");
         } else if (extracted.length > 2) {
-            throw new DukeException("MultipleDeadLineError: Please input only one deadline!");
+            throw new MultipleDateTimeException();
         }
 
         String description = extracted[0];
@@ -101,17 +97,16 @@ public class Parser {
     public void handleEvent(String input) throws DukeException {
         // Check whether description is entered
         if (input.split(" ").length < 2) {
-            throw new DukeException(
-                    "NoDescriptionError: event has to be followed by a description.");
+            throw new MissingDescriptionException();
         }
 
         String[] extracted = input.split(" ", 2)[1].split(" /at ");
 
         // Check whether deadline is specified correctly
         if (extracted.length < 2) {
-            throw new DukeException("NoDateTimeError: Please specify a date/time with '/at'.");
+            throw new MissingDateTimeException("'/at'");
         } else if (extracted.length > 2) {
-            throw new DukeException("MultipleDateTimeError: Please input only one date/time!");
+            throw new MultipleDateTimeException();
         }
 
         String description = extracted[0];

@@ -38,7 +38,7 @@ public class DataManager {
             fw.write(task.convertToTxt() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("IOException: Unable to write to file");
+            throw new DukeIOException();
         }
     }
 
@@ -50,7 +50,7 @@ public class DataManager {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("IOException: Unable to write to file");
+            throw new DukeIOException();
         }
     }
 

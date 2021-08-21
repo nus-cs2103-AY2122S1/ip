@@ -41,8 +41,7 @@ public class ToDoList {
      */
     public void markTaskAsDone(int index) throws DukeException {
         if (index > list.size()) {
-            throw new DukeException(
-                    "IndexOutOfBoundsError: Please enter an index that is shown in 'list'.");
+            throw new InvalidIndexException(list.size());
         } else {
             Task task = list.get(index - 1);
             task.markAsDone();
@@ -52,10 +51,9 @@ public class ToDoList {
 
     public void removeFromList(int index) throws DukeException {
         if (index > list.size()) {
-            throw new DukeException(
-                    "IndexOutOfBoundsError: Please enter an index that is shown in 'list'.");
+            throw new InvalidIndexException(list.size());
         } else if (index < 0) {
-            throw new DukeException("NegativeIndexError: I can't handle negative indexing.");
+            throw new DukeNegativeIndexException();
         } else {
             Task task = list.get(index - 1);
             Ui.prettyPrint(

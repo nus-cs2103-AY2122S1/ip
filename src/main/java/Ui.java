@@ -59,4 +59,8 @@ public class Ui {
         }
         System.out.println(divider);
     }
+
+    public void printException(String message) {
+        System.out.println("\t" + message);
+    }
 }
