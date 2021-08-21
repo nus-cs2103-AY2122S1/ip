@@ -1,5 +1,6 @@
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class InputHandler {
     

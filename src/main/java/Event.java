@@ -23,12 +23,13 @@ public class Event extends Task {
 
     public String toDB() {
         // return String.format("E | %d | %s | %s", super.done ? 1 : 0, super.desc, time);
-        return String.format("E | %d | %s | %s", super.done ? 1 : 0, super.desc, details);
+        return String.format("E | %d | %s | %s | %s", super.done ? 1 : 0, super.desc, dateTime.format(Task.formatter), 
+                details);
     }
 
     @Override
     public String toString() {
         String timeSeq = formatTime();
-        return "[E]" + super.toString() + (timeSeq != null ? String.format(" (at:%s)", timeSeq) : "");
+        return "[E]" + super.toString() + (timeSeq != null ? String.format(" (at: %s)", timeSeq) : "");
     }
 }

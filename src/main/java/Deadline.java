@@ -20,12 +20,13 @@ public class Deadline extends Task {
     
     public String toDB() {
         // return String.format("D | %d | %s | %s", super.done ? 1 : 0, super.desc, dl);
-        return String.format("D | %d | %s | %s", super.done ? 1 : 0, super.desc, details);
+        return String.format("D | %d | %s | %s | %s", super.done ? 1 : 0, super.desc, dateTime.format(Task.formatter),
+                details);
     }
 
     @Override
     public String toString() {
         String timeSeq = formatTime();
-        return "[D]" + super.toString() + (timeSeq != null ? String.format(" (by:%s)", timeSeq) : "");
+        return "[D]" + super.toString() + (timeSeq != null ? String.format(" (by: %s)", timeSeq) : "");
     }
 }

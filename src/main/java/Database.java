@@ -3,8 +3,6 @@ import java.io.RandomAccessFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.function.BiConsumer;
 
 public class Database {
     private final static DukeException ERROR_DB = new DukeException("Error loading database.");
@@ -20,7 +18,7 @@ public class Database {
                 Task t = parse(raf.readLine());
                 if (t != null) db.add(t);
             }
-            raf.writeBytes(System.lineSeparator());
+            update();
         } catch (IOException e) {
             throw ERROR_DB;
         }
@@ -33,7 +31,8 @@ public class Database {
             String type = args[0];
             boolean done = Integer.parseInt(args[1]) == 1;
             String desc = args[2];
-            String opt = (args.length > 3) ? args[3] : "";
+            String details = (args.length > 3) ? args[3] : null;
+            String opt = (args.length > 4) ? details + " / " + args[4] : details;
             switch (type) {
                 case "T" :
                     return new Todo(desc, done);
@@ -49,6 +48,20 @@ public class Database {
         }
     }
     
+    private void update() throws DukeException {
+        try {
+            raf.seek(0);
+            raf.setLength(0);
+            for (Task a : db) {
+                raf.writeBytes(a.toDB());
+                raf.writeBytes(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            throw new DukeException("Error in writing to duke.txt.");
+        }
+    }
+    
+    /*
     private void edit(int index, Task task, CheckedBiConsumer<RandomAccessFile, Task> edit) {
         try {
             File temp = new File("temp.txt");
@@ -86,6 +99,7 @@ public class Database {
             temp.delete();
         } catch (IOException | DukeException e) { }
     }
+     */
 
     // fix the adding problems
     public void add(Task task) throws DukeException {
@@ -98,26 +112,17 @@ public class Database {
         }
     }
     
-    public Task markAsDone(int index) {
+    public Task markAsDone(int index) throws DukeException {
         Task t = db.get(index);
         t.markComplete();
-        CheckedBiConsumer<RandomAccessFile, Task> editor = (reader, task) -> {
-            try { 
-                reader.writeBytes(task.toDB());
-                reader.writeBytes(System.lineSeparator());
-            }
-            catch (IOException e) { throw ERROR_DB; }
-        };
-        edit(index, t, editor);
+        update();
         return t;
     }
 
-    // TODO: DELETE FROM DB
-    public Task delete(int index) {
+    public Task delete(int index) throws DukeException {
         Task t = db.get(index);
         db.remove(index);
-        CheckedBiConsumer<RandomAccessFile, Task> editor = (reader, task) -> {};
-        edit(index, t, editor);
+        update();
         return t;
     }
 
@@ -137,7 +142,7 @@ public class Database {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (db.size() == 0) return " You have no tasks!";
+        if (db.size() == 0) return "You have no tasks!";
         for (int i = 1; i <= db.size(); i++) {
             sb.append("\n\t ");
             sb.append(i + "." + db.get(i-1));
