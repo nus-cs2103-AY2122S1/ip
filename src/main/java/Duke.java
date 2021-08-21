@@ -1,13 +1,3 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -17,10 +7,10 @@ import java.util.function.Function;
 public class Duke {
 
     private static ArrayList<Task> taskList;
-    private static final File dataFile = new File("data/duke.txt");
+    private static Storage storage = new Storage("data/duke.txt");
 
     public static void main(String[] args) {
-        taskList = readFromDisk();
+        taskList = storage.readFromDisk();
 
         String sectionBreak = "------------------------------------------";
         String logo = " ____        _        \n"
@@ -70,7 +60,7 @@ public class Duke {
         Task e = create.apply(formattedString);
         taskList.add(e);
         System.out.printf("added: %s\n", e);
-        writeToDisk();
+        storage.writeToDisk(taskList);
     }
 
     private static void printTaskList() {
@@ -104,7 +94,7 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             System.out.printf("Oops, Task #%d doesn't exist\n", taskId);
         }
-        writeToDisk();
+        storage.writeToDisk(taskList);
     }
 
     private static void DeleteTask(String input) {
@@ -117,51 +107,6 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             System.out.printf("Oops, Task #%d doesn't exist\n", taskId);
         }
-        writeToDisk();
-    }
-
-    private static ArrayList<Task> readFromDisk() {
-        //Create data file if missing
-        if (!dataFile.exists()) {
-            try {
-                Files.createDirectory(Path.of("data"));
-                Files.createFile(Path.of("data/duke.txt"));
-            } catch (IOException e) {
-                System.out.println("WARNING: Cannot create save file");
-            }
-        }
-        // Return empty list if file is empty
-        if (dataFile.length() == 0)
-            return new ArrayList<>();
-
-        // Else, deserialize data
-        try {
-            FileInputStream f = new FileInputStream(dataFile);
-            ObjectInputStream i = new ObjectInputStream(f);
-
-            return (ArrayList<Task>) (i.readObject());
-        } catch (FileNotFoundException e) {
-            System.out.println("WARNING: Task list's save file missing.\n" + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("WARNING: Task List not properly retrieved.\n" + e.getMessage());
-        } catch (ClassNotFoundException e) {
-            System.out.println("WARNING: Missing Class ArrayList<Task>.\n" + e.getMessage());
-        }
-
-        return new ArrayList<>();
-    }
-
-    private static void writeToDisk() {
-        try {
-            FileOutputStream f = new FileOutputStream(dataFile);
-            ObjectOutputStream o = new ObjectOutputStream(f);
-
-            o.writeObject(taskList);
-            o.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("WARNING: Task list's save file missing.\n" + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("WARNING: Task List not properly saved.\n" + e.getMessage());
-        }
+        storage.writeToDisk(taskList);
     }
 }
