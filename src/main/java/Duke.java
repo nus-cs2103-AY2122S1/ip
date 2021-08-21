@@ -242,7 +242,7 @@ public class Duke {
         if (deadlineParams.length != 2) {
             throw new InvalidParamException("Please include the deadline of the task after\n"
                     + "a task description using a '/by' (only once).\n"
-                    + "i.e. deadline return book /by Monday");
+                    + "i.e. deadline return book /by 2021-12-25");
         }
         Task deadline = new Deadline(deadlineParams[0], deadlineParams[1]);
         return deadline;
