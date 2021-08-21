@@ -11,14 +11,19 @@ import java.util.List;
 
 public class Storage {
     /** File name for the storage. */
-    private static final String LOCATION = "./data/duke.txt";
+    private final String LOCATION = "./data/duke.txt";
+    private Ui ui;
+
+    Storage(Ui ui) {
+        this.ui = ui;
+    }
 
     /**
      * Export the task in list to a txt file in ./data.
      *
      * @param taskList list of task to be stored.
      */
-    public static void exportTask(List<Task> taskList) {
+    public void exportTask(List<Task> taskList) {
         try {
             File file = new File(LOCATION);
             file.getParentFile().mkdirs();
@@ -32,12 +37,12 @@ public class Storage {
                             bufferedWriter.write(task.saveOutput());
                             bufferedWriter.newLine();
                         } catch (IOException e) {
-                            Duke.printMessage(String.format("Unable to save %s", task.toString()));
+                            ui.exportTaskErrorMessage(task);
                         }
                     });
             bufferedWriter.flush();
         } catch (IOException e) {
-            Duke.printMessage("Unable to save task.");
+            ui.exportTaskErrorMessage();
         }
     }
 
@@ -46,7 +51,7 @@ public class Storage {
      *
      * @return A list of all the task stored.
      */
-    public static List<Task> importTask() {
+    public List<Task> importTask() {
         File file = new File(LOCATION);
         List<Task> taskList = new ArrayList<>();
         try {
@@ -61,14 +66,14 @@ public class Storage {
                                     taskList.add(new Deadlines(taskData[1], taskData[3],
                                             taskData[2].equals("1") ? true : false));
                                 } catch (ParseException e) {
-                                    Duke.printMessage(String.format("Cant import %s", taskData[1]));
+                                    ui.importTaskErrorMessage(taskData[1]);
                                 }
                             } else if (taskData[0].equals(Keyword.EVENTS.getSaveWord())) {
                                 try {
                                     taskList.add(new Events(taskData[1], taskData[3],
                                             taskData[2].equals("1") ? true : false));
                                 } catch (ParseException e) {
-                                    Duke.printMessage(String.format("Cant import %s", taskData[1]));
+                                    ui.importTaskErrorMessage(taskData[1]);
                                 }
                             } else if (taskData[0].equals(Keyword.TODOS.getSaveWord())) {
                                 taskList.add(new ToDos(taskData[1],
@@ -77,7 +82,7 @@ public class Storage {
                         }
                     });
         } catch (FileNotFoundException e) {
-            Duke.printMessage("No stored task found.");
+            ui.importTaskErrorMessage();
         }
         return taskList;
     }

@@ -4,13 +4,13 @@ import java.util.List;
 
 public class TaskList {
     private List<Task> taskList;
+    private Ui ui;
+    private Storage storage;
 
-    TaskList() {
-        taskList = new ArrayList<>();
-    }
-
-    TaskList(List<Task> taskList) {
+    TaskList(List<Task> taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
+        this.ui = ui;
+        this.storage = storage;
     }
 
     /**
@@ -20,9 +20,7 @@ public class TaskList {
      */
     private void addTask(Task task) {
         taskList.add(task);
-        Duke.printMessage("Got it. I've added this task:",
-                task.toString(),
-                String.format("Now you have %o task(s).", taskList.size()));
+        ui.addMessage(task, taskList.size());
     }
 
     /**
@@ -36,7 +34,7 @@ public class TaskList {
             addTask(new Events(s, dateTime));
             saveTaskList();
         } catch (ParseException e) {
-            dateTimeErrorMessage();
+            ui.dateTimeErrorMessage();
         }
     }
 
@@ -45,7 +43,7 @@ public class TaskList {
             String[] details = message.split(Keyword.EVENTS.getSeparator());
             addEvent(details[0].substring(Keyword.EVENTS.length() + 1), details[1]);
         } catch (IndexOutOfBoundsException e) {
-            eventErrorMessage();
+            ui.eventErrorMessage();
         }
     }
 
@@ -60,7 +58,7 @@ public class TaskList {
             addTask(new Deadlines(s, dateTime));
             saveTaskList();
         } catch (ParseException e) {
-            dateTimeErrorMessage();
+            ui.dateTimeErrorMessage();
         }
     }
 
@@ -69,7 +67,7 @@ public class TaskList {
             String[] details = message.split(Keyword.DEADLINE.getSeparator());
             addDeadline(details[0].substring(Keyword.DEADLINE.length() + 1), details[1]);
         } catch (IndexOutOfBoundsException e) {
-            deadlineErrorMessage();
+            ui.deadlineErrorMessage();
         }
     }
 
@@ -83,7 +81,7 @@ public class TaskList {
             addTask(new ToDos(message.substring(Keyword.TODOS.length() + 1)));
             saveTaskList();
         } catch (IndexOutOfBoundsException e) {
-            todoErrorMessage();
+            ui.todoErrorMessage();
         }
     }
 
@@ -97,18 +95,18 @@ public class TaskList {
         boolean success = task.markDone();
         if (success) {
             saveTaskList();
-            Duke.printMessage("Nice! I've did mark this task as done:", task.toString());
+            ui.doneSuccessMessage(task);
         } else
-            Duke.printMessage("Ugh! This task was already done:", task.toString());
+            ui.doneFailedMessage(task);
     }
 
     public void markDone(String message) {
         try {
             markDone(Integer.parseInt(message.substring(Keyword.DONE.length() + 1)));
         } catch (NumberFormatException e) {
-            doneErrorMessage();
+            ui.doneErrorMessage();
         } catch (IndexOutOfBoundsException e) {
-            doneIndexErrorMessage();
+            ui.doneIndexErrorMessage();
         }
     }
 
@@ -120,93 +118,24 @@ public class TaskList {
     private void deleteTask(int n) {
         Task task = taskList.remove(n - 1);
         saveTaskList();
-        Duke.printMessage("Noted. I've removed this task:",
-                task.toString(),
-                String.format("Now you have %o task(s).", taskList.size()));
+        ui.deleteMessage(task, taskList.size());
     }
 
     public void deleteTask(String message) {
         try {
             deleteTask(Integer.parseInt(message.substring(Keyword.DELETE.length() + 1)));
         } catch (NumberFormatException e) {
-            deleteErrorMessage();
+            ui.deleteErrorMessage();
         } catch (IndexOutOfBoundsException e) {
-            deleteIndexErrorMessage();
+            ui.deleteIndexErrorMessage();
         }
     }
 
     private void saveTaskList() {
-        Storage.exportTask(this.taskList);
+        storage.exportTask(this.taskList);
     }
 
     public List<Task> getTaskList() {
         return taskList;
-    }
-
-
-    /**
-     * Prints out error message if done message does not contains number.
-     */
-    private void doneErrorMessage() {
-        Duke.printMessage("Ugh! The command should be in this format:",
-                "done <number>");
-    }
-
-    /**
-     * Prints out error message if done message is out of range.
-     */
-    private void doneIndexErrorMessage() {
-        Duke.printMessage("Ugh! The command should be in this format:",
-                "done <number>",
-                "Note: number is based on the number from command 'list'");
-    }
-
-    /**
-     * Prints out error message if todo message does not contains description.
-     */
-    private void todoErrorMessage() {
-        Duke.printMessage("Ugh! The command should be in this format:",
-                "todo <description>");
-    }
-
-    /**
-     * Prints out error message if deadline message does not contains /by.
-     */
-    private void deadlineErrorMessage() {
-        Duke.printMessage("Ugh! The command should be in this format:",
-                "deadline <description> /by <date/time>");
-    }
-
-    /**
-     * Prints out error message if delete message does not contains number.
-     */
-    private void deleteErrorMessage() {
-        Duke.printMessage("Ugh! The command should be in this format:",
-                "delete <number>");
-    }
-
-    /**
-     * Prints out error message if delete message is out of range.
-     */
-    private void deleteIndexErrorMessage() {
-        Duke.printMessage("Ugh! The command should be in this format:",
-                "delete <number>",
-                "Note: number is based on the number from command 'list'");
-    }
-
-    /**
-     * Prints out error message if event message does not contains /at.
-     */
-    private void eventErrorMessage() {
-        Duke.printMessage("Ugh! The command should be in this format:",
-                "event <description> /at <date/time>");
-    }
-
-    /**
-     * Prints out error message if dateTime format is invalid.
-     */
-    private void dateTimeErrorMessage() {
-        Duke.printMessage("Date/Time format is wrong. Ensure that it is in the this format:",
-                "dd/mm/yy hhmm (24hrs format)");
     }
 }

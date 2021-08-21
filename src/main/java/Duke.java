@@ -16,20 +16,26 @@ public class Duke {
     private Scanner sc;
     /** Stores all the task. */
     private TaskList taskList;
+    /** Get the ui to interact with the user */
+    private Ui ui;
+    /** Deaks with loading of task */
+    private Storage storage;
 
     /**
      * Constructor for Duke.
      */
     Duke() {
         sc = new Scanner(System.in);
-        taskList = new TaskList(Storage.importTask());
+        ui = new Ui();
+        storage = new Storage(ui);
+        taskList = new TaskList(storage.importTask(), ui, storage);
     }
 
     /**
      * Start the chatbot and get it to chat with the user.
      */
     private void chat() {
-        greetMessage();
+        ui.greetMessage();
         String message;
         Keyword keyword;
         boolean isRunning = true;
@@ -43,7 +49,7 @@ public class Duke {
                     isRunning = false;
                     break;
                 case LIST:
-                    listTask();
+                    ui.listTask(taskList.getTaskList());
                     break;
                 case DONE:
                     taskList.markDone(message);
@@ -62,79 +68,10 @@ public class Duke {
                     break;
                 }
             } catch (DukeException e) {
-                chatErrorMessage();
+                ui.chatErrorMessage();
             }
         }
-        exitMessage();
-    }
-
-    /**
-     * List out all the task stored by the user.
-     */
-    private void listTask() {
-        List<Task> fullList = taskList.getTaskList();
-
-        if (fullList.size() == 0) {
-            printMessage("You have no task.");
-            return;
-        }
-
-        String[] task = IntStream.range(0, fullList.size())
-                    .mapToObj(x -> (x + 1) + ". " + fullList.get(x).toString())
-                    .collect(Collectors.toList())
-                    .toArray(new String[0]);
-
-        printMessage(task);
-    }
-
-    /**
-     * Print out the greeting message used when the chat started.
-     */
-    private void greetMessage() {
-        printMessage("Good day there! I'm DUKE\n", "What can I do for you?");
-    }
-
-    /**
-     * Echos the message the user sends for level-1.
-     *
-     * @param s Message user sent.
-     * @Deprecated Level-2
-     */
-    private void echoMessage(String s) {
-        printMessage(s);
-    }
-
-    /**
-     * Print out the exit message when chat ends.
-     */
-    private void exitMessage() {
-        printMessage("Farewell! Hope to see you again.");
-    }
-
-    /**
-     * Prints out chat error message when command is not recognized.
-     */
-    private void chatErrorMessage() {
-        printMessage("Ugh! Only the following commands are recognised.",
-                "bye - Ends the chat session.",
-                "todo <description> - Adds a new todo to the task list.",
-                "deadline <description> /by <date/time> - Adds a new deadline to the task list",
-                "event <description> /at <date/time> - Adds a new event to the task list",
-                "list - return a list of all the task",
-                "done <number> - Sets the task to be done",
-                "delete <number> - Delete the task");
-    }
-
-    /**
-     * Formats the sentences that will be printed out by the chatbot.
-     *
-     * @param strings Arbitrary number of strings to be printed out
-     */
-    public static void printMessage(String... strings) {
-        System.out.println("\t____________________________________________________________");
-        for (String str: strings)
-            System.out.println("\t" + str);
-        System.out.println("\t____________________________________________________________");
+        ui.exitMessage();
     }
 
     /**
