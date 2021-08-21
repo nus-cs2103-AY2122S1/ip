@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -19,7 +20,7 @@ public class Duke {
     /**
      * Stores the array of todos
      */
-    private static Task[] todos = new Task[100];
+    private static ArrayList<Task> todos = new ArrayList<>();
 
     /**
      * Stores the current index that is awaiting to be filled.
@@ -39,11 +40,10 @@ public class Duke {
      * Throws the corresposing DukeException when the Task input is empty.
      *
      * @param input the array of String input to check
-     * @param type the type of Task it is called with
-     *
+     * @param type  the type of Task it is called with
      * @throws DukeException throws the NullDescription
      */
-    private static void checkInput(String[] input, String type) throws DukeException{
+    private static void checkInput(String[] input, String type) throws DukeException {
         if (input.length == 1) {
             throw new NullDescription(type);
         }
@@ -53,50 +53,70 @@ public class Duke {
      * Prints out the feedback when users enter their response.
      *
      * @param response the array of String input to check
-     *
      * @throws DukeException throws the NullDescription
      */
     private static void handleInput(String response) throws DukeException {
         String[] output = response.split(" ");
-        String command = output[0];
-        if (command.equals("done")) {
-            Task editedTask = todos[Integer.parseInt(output[1]) - 1];
-            editedTask.markIsDone();
-            System.out.println(String.format("\t____________________________________________________________\n" +
-                    "\tNice! I've marked this task as done:\n" +
-                    "\t%s\n" +
-                    "\t____________________________________________________________", editedTask.toString()));
-        } else {
-            Task newTask = null;
-            switch (command) {
-                case "todo":
-                    checkInput(output, "todo");
-                    String todoDescription = response.substring(5);
-                    newTask = new Todo(todoDescription);
-                    break;
-                case "deadline":
-                    checkInput(output, "deadline");
-                    String deadlineDescription = response.substring(9);
-                    newTask = new Deadline(deadlineDescription);
-                    break;
-                case "event":
-                    checkInput(output, "event");
-                    String eventDescription = response.substring(6);
-                    newTask = new Event(eventDescription);
-                    break;
-                default:
-                    throw new InvalidCommand();
-            }
 
-            todos[index] = newTask;
-            index++;
 
-            System.out.println("\t____________________________________________________________\n\t" +
-                    String.format("Got it. I've added this task:\n" +
-                            "\t  %s\n" +
-                            "\tNow you have %d tasks in the list.", newTask.toString(), index) +
-                    "\n\t____________________________________________________________");
+        if (output.length == 0 || output[0].isEmpty() || output[0].equals(" ")) {
+            throw new InvalidCommand();
         }
+
+        String command = output[0];
+        Task newTask = null;
+
+        switch (command) {
+            case "done":
+                Task editedTask = todos.get(Integer.parseInt(output[1]) - 1);
+                editedTask.markIsDone();
+                System.out.println(String.format("\t____________________________________________________________\n" +
+                        "\tNice! I've marked this task as done:\n" +
+                        "\t%s\n" +
+                        "\t____________________________________________________________", editedTask.toString()));
+                break;
+            case "delete":
+                try {
+                    int index = Integer.parseInt(output[1]) - 1;
+                    Task removedTask = todos.remove(index);
+                    System.out.println(String.format("\tNoted. I've removed this task:\n" +
+                            "\t%s\n" +
+                            "\tNow you have %d tasks in the list.", removedTask.toString(), todos.size()));
+                } catch (IndexOutOfBoundsException | NumberFormatException f) {
+                    throw new InvalidValue();
+                }
+                break;
+            case "todo":
+                checkInput(output, "todo");
+                String todoDescription = response.substring(5);
+                newTask = new Todo(todoDescription);
+                handleAdd(newTask);
+                break;
+            case "deadline":
+                checkInput(output, "deadline");
+                String deadlineDescription = response.substring(9);
+                newTask = new Deadline(deadlineDescription);
+                handleAdd(newTask);
+                break;
+            case "event":
+                checkInput(output, "event");
+                String eventDescription = response.substring(6);
+                newTask = new Event(eventDescription);
+                handleAdd(newTask);
+                break;
+            default:
+                throw new InvalidCommand();
+        }
+    }
+
+    private static void handleAdd(Task newTask) {
+        todos.add(newTask);
+
+        System.out.println("\t____________________________________________________________\n\t" +
+                String.format("Got it. I've added this task:\n" +
+                        "\t  %s\n" +
+                        "\tNow you have %d tasks in the list.", newTask.toString(), todos.size()) +
+                "\n\t____________________________________________________________");
     }
 
     /**
@@ -126,12 +146,8 @@ public class Duke {
             switch (response) {
                 case "list":
                     System.out.println("\t____________________________________________________________");
-                    for (int i = 0; i < todos.length; i++) {
-                        if (todos[i] == null) {
-                            break;
-                        } else {
-                            System.out.println(String.format("\t%d.%s", (i + 1), todos[i].toString()));
-                        }
+                    for (int i = 0; i < todos.size(); i++) {
+                        System.out.println(String.format("\t%d.%s", (i + 1), todos.get(i).toString()));
                     }
                     System.out.println("\t____________________________________________________________");
                     break;
