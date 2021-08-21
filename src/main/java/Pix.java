@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -44,7 +46,7 @@ public class Pix {
             case "todo":
                 ArrayList<String> tempArrayToDo = new ArrayList<>(Arrays.asList(command).subList(1, command.length));
                 String taskName = String.join(" ", tempArrayToDo);
-                addTask(taskName, TaskType.TODO, "");
+                addTask(taskName, TaskType.TODO, LocalDate.parse("2021-10-09"));
                 nextCommand();
                 break;
             case "deadline":
@@ -57,11 +59,19 @@ public class Pix {
                 }
 
                 if (splitterDeadline != -1) {
-                    ArrayList<String> tempTaskName = new ArrayList<>(Arrays.asList(command).subList(1, splitterDeadline));
-                    ArrayList<String> tempArray = new ArrayList<>(Arrays.asList(command).subList(splitterDeadline + 1, command.length));
+                    ArrayList<String> tempTaskName = new ArrayList<>(Arrays.asList(command).
+                            subList(1, splitterDeadline));
+                    ArrayList<String> tempArray = new ArrayList<>(Arrays.asList(command).
+                            subList(splitterDeadline + 1, command.length));
                     String taskNameDeadline = String.join(" ", tempTaskName);
                     String date = String.join(" ", tempArray);
-                    addTask(taskNameDeadline, TaskType.DEADLINE, date);
+
+                    if (isValidDate(date)) {
+                        addTask(taskNameDeadline, TaskType.DEADLINE, LocalDate.parse(date));
+                    } else {
+                        throw new PixInvalidDateException();
+                    }
+
                 } else { //Cannot find the "/by"
                     throw new PixInvalidTaskException();
                 }
@@ -82,7 +92,12 @@ public class Pix {
                     ArrayList<String> tempArray = new ArrayList<>(Arrays.asList(command).subList(splitterEvent + 1, command.length));
                     String taskNameDeadline = String.join(" ", tempTaskName);
                     String date = String.join(" ", tempArray);
-                    addTask(taskNameDeadline, TaskType.EVENT, date);
+                    if (isValidDate(date)) {
+                        addTask(taskNameDeadline, TaskType.EVENT, LocalDate.parse(date));
+                    } else {
+                        throw new PixInvalidDateException();
+                    }
+
                 } else { //Cannot find the "/at"
                     throw new PixInvalidTaskException();
                 }
@@ -99,10 +114,7 @@ public class Pix {
             default:
                 throw new PixUnknownCommandException();
             }
-        } catch (PixUnknownCommandException e) {
-            System.out.println(e.getMessage());
-            nextCommand();
-        } catch (PixInvalidTaskException e) {
+        } catch (PixUnknownCommandException | PixInvalidTaskException | PixInvalidDateException e) {
             System.out.println(e.getMessage());
             nextCommand();
         }
@@ -124,7 +136,7 @@ public class Pix {
      * @param type The type of task to be added.
      * @param date The date/time of the task (if applicable)
      */
-    private static void addTask(String item, TaskType type, String date) throws PixException {
+    private static void addTask(String item, TaskType type, LocalDate date) throws PixException {
         try {
             if (item.equals("")) {
                 throw new PixInvalidTaskException();
@@ -215,6 +227,20 @@ public class Pix {
         }
 
         return true;
+    }
+
+    /**
+     * Checks whether a certain date is valid
+     * @param date Date in string format.
+     * @return Returns true if the date is a valid date format, and false if not.
+     */
+    private static boolean isValidDate(String date) throws DateTimeParseException {
+        try {
+            LocalDate.parse(date);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     public static void main(String[] args) throws PixException {
