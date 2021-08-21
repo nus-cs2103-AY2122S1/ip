@@ -4,6 +4,7 @@ public class Storage {
 
     public Storage(String path, DukeList list) {
         this.path = path;
+        this.list = list;
     }
 
 
