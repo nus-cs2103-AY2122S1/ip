@@ -2,7 +2,7 @@ package duke;
 
 import duke.command.*;
 
-public class Parser {
+class Parser {
     // constants for special commands
     private static final String CMD_BYE = "bye";
     private static final String CMD_LIST = "list";
@@ -13,9 +13,9 @@ public class Parser {
     private static final String CMD_DEL = "delete";
 
     public static Command parse(String fullCommand) throws DukeException {
-        String keyword = fullCommand.split(" ")[0];
+        String keywork = fullCommand.split(" ")[0];
 
-        switch (keyword) {
+        switch (keywork) {
         case CMD_LIST:
             return new DisplayListCommand();
         case CMD_DONE:
