@@ -1,8 +1,12 @@
 package executor;
 
+import executor.parser.StorageParser;
 import model.Storage;
+import model.task.Deadline;
+import model.task.Event;
 import model.task.Task;
 import executor.parser.QueryParser;
+import model.task.ToDo;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -20,10 +24,12 @@ public class ExecutionUnit {
     private Storage storage = new Storage();
 
     public void initStorage(String storagePath) throws IOException {
+        StorageParser storeParser = new StorageParser();
         Path path = Paths.get(storagePath);
         List<String> read = Files.readAllLines(path);
-        for (String cmd : read) {
-            this.executeCommand(cmd);
+        for (String storeCmd : read) {
+            Task t = storeParser.parse(storeCmd);
+            storage.push(t);
         }
     }
 
@@ -38,16 +44,17 @@ public class ExecutionUnit {
         BufferedWriter bw = Files.newBufferedWriter(path, StandardOpenOption.APPEND);
 
         for (Task t : all) {
-            bw.append(t.toString());
+            bw.write(t.toString() + "\n");
         }
+        bw.close();
     }
 
     public void initStorage() throws IOException {
-        initStorage("src/main/resources/storage.txt");
+        initStorage("memory/storage.txt");
     }
 
     public void saveStorage() throws IOException {
-        saveStorage("src/main/resources/storage.txt");
+        saveStorage("memory/storage.txt");
     }
 
     public String[] executeCommand(String query) throws IOException {
@@ -78,7 +85,15 @@ public class ExecutionUnit {
                         "  " + deletedTask.toString(),
                         "Now you have " + storage.numTasks() + " tasks in the list"};
             default:
-                Task addedTask = storage.push(queryArr);
+                Task toAdd;
+                if (command.equals("todo")) {
+                    toAdd = new ToDo(queryArr[1]);
+                } else if (command.equals("deadline")) {
+                    toAdd = new Deadline(queryArr[1], queryArr[2]);
+                } else {
+                    toAdd = new Event(queryArr[1], queryArr[2]);
+                }
+                Task addedTask = storage.push(toAdd);
                 this.saveStorage();
                 return new String[]{"Got it. I've added this task:",
                         "  " + addedTask.toString(),

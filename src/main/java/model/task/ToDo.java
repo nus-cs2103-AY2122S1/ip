@@ -1,6 +1,11 @@
 package model.task;
 
 public class ToDo extends Task {
+
+    public ToDo(String entry, boolean status) {
+        super(entry, status);
+    }
+
     public ToDo(String entry) {
         super(entry);
     }

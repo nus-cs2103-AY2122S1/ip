@@ -4,8 +4,12 @@ public class Task {
     private final String description;
     private boolean isDone;
 
-    public Task(String entry) {
+    public Task(String entry, boolean status) {
         this.description = entry;
+        this.isDone = status;
+    }
+    public Task(String entry) {
+        this(entry, false);
     }
 
     public void markDone() {

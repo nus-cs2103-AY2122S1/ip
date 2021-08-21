@@ -10,14 +10,13 @@ public class BobCat {
     public static void main(String[] args) throws IOException {
         Scanner scanObj = new Scanner(System.in);
         Response response = new Response();
-
         ExecutionUnit executor = new ExecutionUnit();
 
         response.respond(new String[]{"Hello! I'm BobCat!", "Trying to remember what happened..."});
         try {
             executor.initStorage();
         } catch (IOException e) {
-            response.respond(new String[]{"Oops! File does not seem to be found / readable! Starting from blank state..."});
+            response.respond(new String[]{"Memory file not found! Starting from blank state..."});
         } catch (ParserException | LogicException e) {
             response.respond("Memory may have been corrupted! Starting from blank state...");
             executor.storageClear();
@@ -27,7 +26,12 @@ public class BobCat {
 
         while(true) {
             String inp = scanObj.nextLine();
-            response.respond(executor.executeCommand(inp));
+            try {
+                String[] results = executor.executeCommand(inp);
+                response.respond(results);
+            } catch (ParserException | LogicException e) {
+                response.respond(e.getMessage());
+            }
             if (inp.equals("bye")) {
                 break;
             }
