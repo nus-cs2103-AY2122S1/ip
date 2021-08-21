@@ -4,11 +4,34 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The class Event encapsulates an event with a date, start time and end time
+ */
 public class Event extends Task {
+
+    /**
+     * Start time of the event
+     */
     private LocalTime startTime;
+
+    /**
+     * End time of the event
+     */
     private LocalTime endTime;
+
+    /**
+     * Date of the event
+     */
     private LocalDate date;
 
+    /**
+     * Default constructor for an Event
+     *
+     * @param name Name of the event
+     * @param date Date of the event
+     * @param startTime Start time of the event
+     * @param endTime End time of the event
+     */
     public Event(String name, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(name);
         this.date = date;
@@ -16,6 +39,15 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    /**
+     * Constructor to be used when loading saved Event
+     *
+     * @param name Name of the event
+     * @param date Date of the event
+     * @param startTime Start time of the event
+     * @param endTime End time of the event
+     * @param isDone Indicates whether the event is done
+     */
     public Event(String name, LocalDate date, LocalTime startTime, LocalTime endTime, boolean isDone) {
         super(name, isDone);
         this.date = date;
