@@ -25,8 +25,6 @@ import java.util.Scanner;
 public class Duke {
     private final ArrayList<Task> taskList = new ArrayList<>();
 
-    private enum Keywords {bye, list, done, todo, deadline, event, allCmd, delete}
-
     public static void main(String[] args) {
         Duke chatBot = new Duke();
         chatBot.run();
@@ -407,7 +405,7 @@ public class Duke {
                 String taskType = atHand.substring(1, 2);
                 String done = (atHand.charAt(4) == ' ') ? " " : "X";
                 String des;
-                String time = "NA";
+                String time;
                 Task t;
 
                 if (taskType.equals("T")) {
