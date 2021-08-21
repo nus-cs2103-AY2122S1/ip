@@ -1,4 +1,6 @@
-class Task {
+package duke;
+
+public class Task {
     private String name;
     private boolean isDone;
 

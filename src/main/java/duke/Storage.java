@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -6,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class Storage {
+public class Storage {
     private final String filePath;
 
     public Storage(String filePath) {
@@ -43,13 +45,13 @@ class Storage {
 
             Task task;
             switch (itemDetails[0]) {
-            case "Todo":
+            case "duke.Todo":
                 task = new Todo(itemDetails[1], itemDetails[2]);
                 break;
-            case "Deadline":
+            case "duke.Deadline":
                 task = new Deadline(itemDetails[1], itemDetails[2], itemDetails[3]);
                 break;
-            case "Event":
+            case "duke.Event":
                 task = new Event(itemDetails[1], itemDetails[2], itemDetails[3]);
                 break;
             default:
@@ -67,7 +69,7 @@ class Storage {
             f.getParentFile().mkdirs();
             f.createNewFile();
         } catch (IOException e) {
-            System.err.println("Unable to initialise an empty file for Storage.");
+            System.err.println("Unable to initialise an empty file for duke.Storage.");
         }
     }
 
@@ -76,7 +78,7 @@ class Storage {
         try {
             writeToFile(tasks);
         } catch (IOException e) {
-            System.err.println("Something went wrong. Unable to write to Storage.");
+            System.err.println("Something went wrong. Unable to write to duke.Storage.");
         }
     }
 

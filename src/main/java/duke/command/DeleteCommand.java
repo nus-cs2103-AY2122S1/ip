@@ -1,4 +1,10 @@
-class DeleteCommand extends Command{
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+public class DeleteCommand extends Command{
     private final String fullCommand;
 
     public DeleteCommand(String fullCommand) {

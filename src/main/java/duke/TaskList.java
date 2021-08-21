@@ -1,7 +1,9 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class TaskList {
+public class TaskList {
     private List<Task> tasks;
 
     public TaskList() {
@@ -14,7 +16,7 @@ class TaskList {
 
     @Override
     public String toString() {
-        return "Yiyang-bot's TaskList";
+        return "Yiyang-bot's duke.TaskList";
     }
 
     public List<Task> getTasks() {

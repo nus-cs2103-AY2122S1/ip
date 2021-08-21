@@ -1,8 +1,10 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-class Event extends Task{
+public class Event extends Task{
     private LocalDate date;
 
     public Event(String name, LocalDate date) {
@@ -37,6 +39,6 @@ class Event extends Task{
 
     @Override
     public String toSaveString() {
-        return "Event~" + super.toSaveString() + "~" + this.date;
+        return "duke.Event~" + super.toSaveString() + "~" + this.date;
     }
 }

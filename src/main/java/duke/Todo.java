@@ -1,4 +1,6 @@
-class Todo extends Task {
+package duke;
+
+public class Todo extends Task {
     public Todo(String name) {
         super(name);
     }
@@ -14,6 +16,6 @@ class Todo extends Task {
 
     @Override
     public String toSaveString() {
-        return "Todo~" + super.toSaveString();
+        return "duke.Todo~" + super.toSaveString();
     }
 }
