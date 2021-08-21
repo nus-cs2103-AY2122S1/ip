@@ -2,11 +2,19 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * This is Duke, my java bot!
+ */
 class Duke {
     private static TaskList tasks = new TaskList();
     private static Parser parser = new Parser(tasks);
     private static Storage storage;
 
+    /**
+     * Runs Duke, my java bot!
+     *
+     * @param args Input arguments, will be ignored
+     */
     public static void main(String[] args) {
         Ui.show("Hello! I'm Duke", "What can I do for you?");
         loadStorage();
@@ -29,7 +37,7 @@ class Duke {
 
     private static void loadStorage() {
         try {
-            storage = new Storage("duke.txt");
+            storage = new Storage("bbb/duke.txt");
             for (String command : storage.readAllLines())
                 parser.parse(command);
         } catch (IOException | DukeException e) {
