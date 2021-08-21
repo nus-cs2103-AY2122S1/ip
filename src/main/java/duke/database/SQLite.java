@@ -85,13 +85,35 @@ public class SQLite extends Database {
         try {
             connection = getSQLConnection();
             PreparedStatement ps = connection
-                    .prepareStatement("REPLACE INTO " + TASK_TABLE_NAME + " (type, name, completed, date) VALUES('"
+                    .prepareStatement("INSERT INTO " + TASK_TABLE_NAME + " (type, name, completed, date) VALUES('"
                             + type + "', '" + name + "', " + completed + ", '" + date + "')");
             ps.executeUpdate();
             close(ps);
         } catch (SQLException ex) {
             // TODO
         }
+    }
+
+    @Override
+    public Task removeTask(int index) {
+        Task result = null;
+        try {
+            this.connection = getSQLConnection();
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + TASK_TABLE_NAME + ";");
+            ResultSet rs = ps.executeQuery();
+            while (rs.absolute(index)) {
+                TaskType type = TaskType.valueOf(rs.getString("type"));
+                String name = rs.getString("name");
+                boolean completed = rs.getBoolean("completed");
+                String date = rs.getString("date");
+                result = this.createTask(type, name, completed, date);
+                rs.deleteRow();
+            }
+            close(ps, rs);
+        } catch (SQLException ex) {
+            // TODO
+        }
+        return result;
     }
 
     private File createOrOpenDataFile() {

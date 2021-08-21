@@ -64,6 +64,15 @@ public abstract class Database {
     public abstract void addTask(Task task);
 
     /**
+     * Removes a task from the database.
+     * 
+     * @param index index of the task, {@code 1} for the first task, {@code 2} for
+     *              the second task etc.
+     * @return {@code null} if there are no tasks at the specified index
+     */
+    public abstract Task removeTask(int index);
+
+    /**
      * Recreate a task based on provided information. Used when retrieving task from
      * SQL database.
      * 
