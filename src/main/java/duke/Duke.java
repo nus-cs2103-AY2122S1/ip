@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 
 public class Duke {
@@ -34,6 +36,4 @@ public class Duke {
             e.printStackTrace();
         }
     }
-
-
 }
