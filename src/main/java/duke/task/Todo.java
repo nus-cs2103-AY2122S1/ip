@@ -1,8 +1,12 @@
+package duke.task;
+
+import duke.DukeException;
+
 public class Todo extends Task{
 
     public final String code = "T";
 
-    public Todo(String description) throws DukeException{
+    public Todo(String description) throws DukeException {
         super(description);
     }
 

@@ -1,10 +1,10 @@
     ____________________________________________________________
-     Task description cannot be found in database
+     duke.task.Task description cannot be found in database
      A new file will be created
     ____________________________________________________________
 
     ____________________________________________________________
-     Hello! I'm Duke
+     Hello! I'm duke.Duke
      What can I do for you?
     ____________________________________________________________
 

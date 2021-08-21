@@ -1,3 +1,8 @@
+package duke.data;
+
+import duke.DukeException;
+import duke.task.*;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -45,8 +50,9 @@ public class TaskList {
             DateTimeTask dt = (DateTimeTask) task;
             calendar.add(dt);
             storage.saveTask(task.getCode(), task.getStatus(), task.getDescription(), dt.getDateTime());
+        } else {
+            storage.saveTask(task.getCode(), task.getStatus(), task.getDescription());
         }
-        storage.saveTask(task.getCode(), task.getStatus(), task.getDescription());
     }
 
     public String[] returnItems() {

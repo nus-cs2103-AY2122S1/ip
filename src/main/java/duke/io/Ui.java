@@ -1,3 +1,10 @@
+package duke.io;
+
+import duke.Command;
+import duke.DukeException;
+import duke.data.TaskList;
+import duke.task.Task;
+
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -26,7 +33,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println(format("Task description cannot be found in database","A new file will be created"));
+        System.out.println(format("duke.task.Task description cannot be found in database","A new file will be created"));
     }
 
     public void showSavingError() {
@@ -38,7 +45,7 @@ public class Ui {
     }
 
     public void showWelcome() {
-        System.out.println(format("Hello! I'm Duke", "What can I do for you?"));
+        System.out.println(format("Hello! I'm duke.Duke", "What can I do for you?"));
     }
 
     public void showDateTimeException() {
