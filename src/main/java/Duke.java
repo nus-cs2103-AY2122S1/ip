@@ -31,22 +31,23 @@ public class Duke {
 
         while (true) {
             String input = sc.nextLine();
-
             if (input.equals("bye")) break;
 
             String keyword = input.split(" ", 2)[0];
+            if (!commandTable.containsKey(keyword)) {
+                UI.print("Oops, I'm not sure what you mean :o");
+                continue;
+            }
+
             try {
-                if (commandTable.containsKey(keyword))
-                    commandTable.get(keyword).accept(input);
-                else
-                    throw new DukeException("I'm not sure what you mean");
+                commandTable.get(keyword).accept(input);
             } catch (DukeException e) {
                 UI.print(e.toString());
             }
+
             UI.printDivider();
         }
 
         UI.goodbyeMessage();
-        UI.printDivider();
     }
 }
