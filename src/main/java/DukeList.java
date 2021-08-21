@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -87,16 +88,18 @@ public class DukeList {
      *
      * @param text Body of the task to be added.
      */
-    public void addDeadlines(String text) {
+    public void addDeadlines(String text) throws DukeException {
         String[] strings = text.split(" /by ", 2);
 
-        String limit = strings.length == 1 ? "" : strings[1];
-
-        Deadlines input = new Deadlines(strings[0].trim(), limit);
-        list.add(input);
-        count += 1;
-
-        displayTask(input);
+        String limit = strings[1];
+        try {
+            Deadlines input = new Deadlines(strings[0].trim(), limit);
+            list.add(input);
+            count += 1;
+            displayTask(input);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("☹ OOPS!!! The deadline follows the format yyyy-MM-dd.");
+        }
     }
 
     /**
