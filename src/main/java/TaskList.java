@@ -46,7 +46,7 @@ public class TaskList {
     }
 
     /**
-     * The string that is outputted when the user terminates the chatbot.
+     * The string that is outputted when user terminates bot.
      * @return Message to say bye to user.
      */
     public String byeString() {
