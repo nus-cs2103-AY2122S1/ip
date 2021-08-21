@@ -8,4 +8,13 @@ public class Deadline extends Task {
         return String.format("[D][%s] %s (by: %s)",
                 getStatusIcon(), description, dateTime);
     }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.DEADLINE;
+    }
 }

@@ -8,4 +8,13 @@ public class Event extends Task {
         return String.format("[E][%s] %s (at: %s)",
                 getStatusIcon(), description, dateTime);
     }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.EVENT;
+    }
 }
