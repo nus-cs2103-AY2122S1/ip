@@ -18,6 +18,13 @@ public class Event extends Task{
     }
 
 
+    /**
+     * parses a command and generates a new Event instance.
+     * @param newCommand the full Command.
+     * @return the new Event instance.
+     * @throws IllegalArgumentException If the command is of illegal format.
+     * @throws DateTimeParseException If the event date is of illegal format.
+     */
     public static Event parseNewCommand(String newCommand) throws IllegalArgumentException, DateTimeParseException {
         int sepIndex = newCommand.indexOf("/at");
         int cmdLen = newCommand.length();
@@ -37,6 +44,10 @@ public class Event extends Task{
                 + String.format(" (by: %s)", this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
+    /**
+     * Returns the Event item as a string for storage.
+     * @return the string for storage.
+     */
     @Override
     public String toSaveString() {
         return "duke.Event~" + super.toSaveString() + "~" + this.date;

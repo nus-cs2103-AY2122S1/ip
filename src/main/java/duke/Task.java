@@ -23,11 +23,18 @@ public class Task {
         return String.format("[%s] %s", this.getStatusIcon(), this.name);
     }
 
-    // for saving to local file
+    /**
+     * Returns the Task item as a string for storage.
+     * @return the string for storage.
+     */
     public String toSaveString() {
         return this.name + "~" + (isDone ? "1" : "0");
     }
 
+    /**
+     * Sets the done status.
+     * @param done the new done status.
+     */
     public void setDone(boolean done) {
         isDone = done;
     }

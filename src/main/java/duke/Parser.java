@@ -12,6 +12,12 @@ class Parser {
     private static final String CMD_EVENT = "event";
     private static final String CMD_DEL = "delete";
 
+    /**
+     * Parses the given command to determine what to execute next.
+     * @param fullCommand the String command.
+     * @return a Command instance.
+     * @throws DukeException When the command keyword cannot be understood.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String keywork = fullCommand.split(" ")[0];
 

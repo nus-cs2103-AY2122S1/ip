@@ -14,6 +14,10 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Returns the To do item as a string for storage.
+     * @return the string for storage.
+     */
     @Override
     public String toSaveString() {
         return "duke.Todo~" + super.toSaveString();

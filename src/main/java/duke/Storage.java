@@ -15,7 +15,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    // Load from File
+    /**
+     * Loads the task list from file storage.
+     * @return the loaded task list.
+     */
     public List<Task> loadStorage() {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -73,7 +76,11 @@ public class Storage {
         }
     }
 
-    // Save to File
+    /**
+     * Saves task list to file storage.
+     * Called when the program ends.
+     * @param tasks the task list to be saved.
+     */
     public void saveStorage(List<Task> tasks) {
         try {
             writeToFile(tasks);

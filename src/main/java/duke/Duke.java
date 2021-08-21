@@ -19,6 +19,9 @@ class Duke {
         new Duke(FILE_URL).run();
     }
 
+    /**
+     * Runs the program with the correct components and storage file set-ups.
+     */
     public void run() {
         ui.displayGreetings();
         boolean isExit = false;
