@@ -5,18 +5,88 @@
  * @author Clifford
  */
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ChatBot {
     private boolean isRunning;
     private ArrayList<Task> tasks;
     private static final int tasksLimit = 100;
     private int currentIdx;
+    private final String tasksFilePath = "bin/data/tasks.txt";
 
     public ChatBot() {
         this.isRunning = true;
         this.tasks = new ArrayList<>();
         this.currentIdx = 0;
+    }
+
+    public void retrieveTasks()  {
+        File file = new File(tasksFilePath);
+        try {
+            if (file.exists()) {
+                Scanner sc = new Scanner(file);
+                while(sc.hasNext()) {
+                    record(convertStringToTask(sc.nextLine()));
+                }
+            } else {
+                throw new FileNotFoundException();
+            }
+        } catch (FileNotFoundException e) {
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            } catch (IOException e2) {
+                System.out.println("Something happened when creating a new save taskData file: " + e2.getMessage());
+            }
+        }
+    }
+
+    public void saveTasks()  {
+        File file = new File(tasksFilePath);
+        try {
+            if (file.exists()) {
+                FileWriter fw = new FileWriter(tasksFilePath);
+                StringBuilder sb = new StringBuilder();
+                for(int i = 0; i < currentIdx; i++) {
+                    if(i == 0) {
+                        sb.append(convertTaskToText(tasks.get(i)));
+                        continue;
+                    }
+                    sb.append(System.lineSeparator()).append(convertTaskToText(tasks.get(i)));
+                }
+                fw.write(sb.toString());
+                fw.close();
+            } else {
+                throw new FileNotFoundException();
+            }
+        } catch(FileNotFoundException e) {
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            } catch(IOException e2) {
+                System.out.println("Something happened when creating a new file to save tasks:" + e2.getMessage());
+            }
+        } catch(IOException e) {
+            System.out.println("Something happened when saving: " + e.getMessage());
+        }
+    }
+
+    public String convertTaskToText(Task task) {
+        return task.convertToText();
+    }
+
+    public Task convertStringToTask(String text) {
+        try {
+            return Task.createTaskFromText(text);
+        } catch(IllegalArgumentException e) {
+            System.out.println("File data cannot be retrieved because of improper formatting: " +e.getMessage());
+            return null; // todo maybe consider what to return in this case
+        }
     }
 
     public boolean isRunning() {
@@ -130,6 +200,7 @@ public class ChatBot {
             }
             tasks.add(task);
             currentIdx++;
+            saveTasks();
             return "Noted task down! I've added this task:\n  " + task.toString();
         } catch(IndexOutOfBoundsException e) {
             e.printStackTrace();
@@ -167,7 +238,13 @@ public class ChatBot {
                 throw new IllegalArgumentException(
                     String.format("taskId of %1$d invalid as there are %2$d recorded task(s)", taskId, currentIdx));
             }
-            return tasks.get(taskId - 1).markAsDone();
+            Task task = tasks.get(taskId - 1);
+            boolean isChanged = task.markAsDone();
+            if(!isChanged) {
+                return "Task is already marked as done";
+            }
+            saveTasks();
+            return "Nice! I've marked this task as done:\n  " + task.toString();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return "No such task exists to be marked as done!";
@@ -190,6 +267,7 @@ public class ChatBot {
             Task deletedTask = tasks.get(taskId - 1);
             tasks.remove(taskId - 1);
             currentIdx--;
+            saveTasks();
             return String.format("Noted I've removed this task:\n  %s\nNow you have %d task(s) in the list",
                 deletedTask.toString(),
                 currentIdx);
