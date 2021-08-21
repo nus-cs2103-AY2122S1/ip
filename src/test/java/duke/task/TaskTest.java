@@ -1,9 +1,7 @@
 package duke.task;
 
-import duke.Parser;
 import duke.exceptions.CommandParamException;
-import duke.exceptions.EmptyDescriptionException;
-import duke.exceptions.UnknownCommandException;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
