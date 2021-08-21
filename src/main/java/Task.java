@@ -12,7 +12,12 @@ public abstract class Task {
     public Task() {}
 
     public Task(String desc) {
+            this.desc = desc;
+    }
+    
+    public Task(String desc, boolean done) {
         this.desc = desc;
+        this.done = done;
     }
 
     public void addDesc(String desc) {
@@ -42,6 +47,8 @@ public abstract class Task {
         }
     }
     
+    public abstract String toDB();
+
     @Override
     public String toString() {
         return (done ? "[X] " : "[ ] ") + desc;
