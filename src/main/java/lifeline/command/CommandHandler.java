@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import lifeline.exception.LifelineException;
 import lifeline.storage.Storage;
@@ -80,6 +81,21 @@ public class CommandHandler {
         }
     }
 
+    public static String handleFind(String command, Storage storage, TaskList taskList, Ui ui) throws LifelineException {
+        String[] commands = getCommands(command);
+        TaskList foundTasks = new TaskList(new ArrayList<>());
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currTask = taskList.get(i);
+            if (currTask.getName().contains(commands[1])) {
+                foundTasks.add(currTask);
+            }
+        }
+        if (foundTasks.size() == 0) {
+            throw new LifelineException("No tasks found with the given keyword " + commands[1]);
+        }
+        return ui.showFoundTasks(foundTasks, commands[1]);
+    }
+
     public static String handleToDo(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
@@ -128,6 +144,8 @@ public class CommandHandler {
             throw new LifelineException("Details of deadline cannot be blank!");
         case "event":
             throw new LifelineException("Details of event cannot be blank!");
+        case "find":
+            throw new LifelineException("Keyword was not provided! Please use find <keyword>");
         default:
             throw new LifelineException("I am sorry! I don't know what that means! \u2639");
         }
