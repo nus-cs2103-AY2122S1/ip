@@ -1,7 +1,8 @@
 /**
- *  This class represents an Event
- *  An event: tasks that start at a specific time and ends at a specific time
- * @author Ryan Tian Jun
+ *  This class represents an Event.
+ *  An event: tasks that start at a specific time and ends at a specific time.
+ *
+ * @author Ryan Tian Jun.
  */
 public class Event extends Task {
 

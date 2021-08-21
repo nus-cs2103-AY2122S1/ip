@@ -1,5 +1,11 @@
 import java.util.Scanner;
 
+/**
+ *  This class is the entry point into the program, Duke.
+ *  Duke is a chat bot that helps manage tasks that you have.
+ *
+ * @author Ryan Tian Jun.
+ */
 public class Duke {
     public static void main(String[] args) {
         Intro printIntro = new Intro();

@@ -1,6 +1,7 @@
 /**
- *  This class represents the displayed logo throughout the program
- * @author Ryan Tian Jun
+ *  This class represents the displayed logo throughout the program.
+ *
+ * @author Ryan Tian Jun.
  */
 public class Logo {
     private String logo = " ____        _        \n"
@@ -14,12 +15,11 @@ public class Logo {
     }
 
     /**
-     * Displays the logo Duke for the bot
+     * Displays the logo Duke for the bot.
      *
-     * @return returns the bot logo
+     * @return returns the bot logo.
      */
     public String printLogo() {
         return logo;
     }
-
 }

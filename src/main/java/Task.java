@@ -1,6 +1,7 @@
 /**
- *  This class represents the tasks in a list
- * @author Ryan Tian Jun
+ *  This class represents the tasks in a list.
+ *
+ * @author Ryan Tian Jun.
  */
 public class Task {
     protected String description;
@@ -35,9 +36,9 @@ public class Task {
 
 
     /**
-     * Marks task as done
+     * Marks task as done.
      *
-     * @return returns true if it was successful
+     * @return returns true if it was successful.
      */
     public boolean markAsDone() throws DukeException{
         if (!isDone) {
