@@ -8,6 +8,10 @@ public class ToDo extends Item {
         this.setName(line.substring(5, line.length()));
     }
 
+    public ToDo(String name) {
+        super(name);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

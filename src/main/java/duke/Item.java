@@ -8,6 +8,10 @@ public abstract class Item {
         this.checkInput(strings);
     }
 
+    public Item(String name) {
+        this.setName(name);
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }

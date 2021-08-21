@@ -11,6 +11,10 @@ public class Deadline extends Item {
         this.time = line.substring(idx + 4, line.length());
     }
 
+    public Deadline(String name) {
+        super(name);
+    }
+
     @Override
     public void checkInput(String[] strings) {
         super.checkInput(strings);

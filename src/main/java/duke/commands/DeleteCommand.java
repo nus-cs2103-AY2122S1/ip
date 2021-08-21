@@ -3,7 +3,6 @@ package duke.commands;
 import duke.Item;
 import java.util.LinkedList;
 
-
 public class DeleteCommand extends Command {
     private int index;
 

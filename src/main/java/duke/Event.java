@@ -11,6 +11,10 @@ public class Event extends Item {
         this.time = line.substring(idx + 4, line.length());
     }
 
+    public Event(String name) {
+        super(name);
+    }
+
     @Override
     public void checkInput(String[] strings) {
         super.checkInput(strings);
