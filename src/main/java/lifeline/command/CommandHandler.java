@@ -15,28 +15,60 @@ import lifeline.task.TaskList;
 import lifeline.task.ToDo;
 import lifeline.ui.Ui;
 
-
+/**
+ * The class CommandHandler handles all commands supplied by the user
+ */
 public class CommandHandler {
+
+    /**
+     * Prints out given TaskList using the given Ui
+     *
+     * @param command User input
+     * @param storage Storage to save or load tasks
+     * @param taskList List of tasks
+     * @param ui Ui to display information to user
+     * @return String to represent all tasks
+     */
     public static String handleList(String command, Storage storage, TaskList taskList, Ui ui) {
         return ui.showTaskList(taskList);
     }
 
+    /**
+     * Displays goodbye message to the user when user exits the program
+     *
+     * @param command User input
+     * @param storage Storage to save or load tasks
+     * @param taskList List of tasks
+     * @param ui Ui to display information to user
+     * @return Goodbye message
+     */
     public static String handleBye(String command, Storage storage, TaskList taskList, Ui ui) {
         return ui.exit();
     }
 
+    /**
+     * Creates and saves an instance of a Deadline. Instance is added to TaskList
+     *
+     * @param command User input
+     * @param storage Storage to save or load tasks
+     * @param taskList List of tasks
+     * @param ui Ui to display information to user
+     * @return Message to notify user that the deadline has been created
+     * @throws LifelineException if command is incomplete or not of the correct format or tasklist is not able to be
+     *                           saved
+     */
     public static String handleDeadline(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
-        String[] description = commands[1].split("/by", 2);
-        if (description.length != 2) {
+        String[] descriptions = commands[1].split("/by", 2);
+        if (descriptions.length != 2) {
             throw new LifelineException("Deadline is not of the correct format! Please use deadline <name> /by "
                     + "<dd/MM/yy HHmm>");
         }
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
-            LocalDateTime dateTime = LocalDateTime.parse(description[1].trim(), formatter);
-            Task newTask = new Deadline(description[0].trim(), dateTime);
+            LocalDateTime dateTime = LocalDateTime.parse(descriptions[1].trim(), formatter);
+            Task newTask = new Deadline(descriptions[0].trim(), dateTime);
             taskList.add(newTask);
             storage.save(taskList);
             return ui.showAddedTask(newTask);
@@ -46,32 +78,59 @@ public class CommandHandler {
         }
     }
 
+    /**
+     * Creates and saves an instance of an Event. Instance is added to TaskList
+     *
+     * @param command User input
+     * @param storage Storage to save or load tasks
+     * @param taskList List of tasks
+     * @param ui Ui to display information to user
+     * @return Message to notify user that the event has been created
+     * @throws LifelineException if command is incomplete or not of the correct format or tasklist is not able to be
+     *                           saved
+     */
     public static String handleEvent(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
-        String[] commands = getCommands(command);
-        String[] description = commands[1].trim().split("/at", 2);
         String errorMessage = "Event date/time not in proper format! Please use event <name> /at "
                 + "<dd/MM/yy> <HHmm>-<HHmm>";
-        if (description.length != 2) {
+        String[] commands = getCommands(command);
+
+        // Get event name and details
+        String[] descriptions = commands[1].trim().split("/at", 2);
+        if (descriptions.length != 2) {
             throw new LifelineException(errorMessage);
         }
-        String[] eventDateAndDuration = description[1].trim().split("\\s", 2);
+
+        // Get event date and duration
+        String[] eventDateAndDuration = descriptions[1].trim().split("\\s", 2);
         if (eventDateAndDuration.length != 2) {
             throw new LifelineException(errorMessage);
         }
         String eventDate = eventDateAndDuration[0];
         String eventDuration = eventDateAndDuration[1];
+
         try {
+            // Create date pattern
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+
+            // Parse input date as LocalDate object
             LocalDate date = LocalDate.parse(eventDate.trim(), dateFormatter);
+
+            // Get start time and endtime of event
             String[] duration = eventDuration.split("-", 2);
             if (duration.length != 2) {
                 throw new LifelineException(errorMessage);
             }
+
+            // Create time pattern
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+
+            // Parse start time and end time as LocalTime Object
             LocalTime startTime = LocalTime.parse(duration[0], timeFormatter);
             LocalTime endTime = LocalTime.parse(duration[1], timeFormatter);
-            Task newTask = new Event(description[0].trim(), date, startTime, endTime);
+
+            // Create new Task and add to tasklist
+            Task newTask = new Event(descriptions[0].trim(), date, startTime, endTime);
             taskList.add(newTask);
             storage.save(taskList);
             return ui.showAddedTask(newTask);
@@ -80,6 +139,17 @@ public class CommandHandler {
         }
     }
 
+    /**
+     * Creates and saves an instance of ToDo. Instance is added to TaskList
+     *
+     * @param command User input
+     * @param storage Storage to save or load tasks
+     * @param taskList List of tasks
+     * @param ui Ui to display information to user
+     * @return Message to notify user that the todo has been created
+     * @throws LifelineException if command is incomplete or not of the correct format or tasklist is not able to be
+     *                           saved
+     */
     public static String handleToDo(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
@@ -89,6 +159,17 @@ public class CommandHandler {
         return ui.showAddedTask(newTask);
     }
 
+    /**
+     * Marks a task at specified index as completed
+     *
+     * @param command User input
+     * @param storage Storage to save or load tasks
+     * @param taskList List of tasks
+     * @param ui Ui to display information to user
+     * @return Message to notify user that the task has been marked as completed
+     * @throws LifelineException if command is incomplete or the index given is out of bounds or not an integer or
+     *                           taskList is not able to be saved
+     */
     public static String handleDone(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
@@ -98,6 +179,17 @@ public class CommandHandler {
         return ui.showCompletedTask(taskList.get(taskIndex));
     }
 
+    /**
+     * Deletes a task at specified index
+     *
+     * @param command User input
+     * @param storage Storage to save or load tasks
+     * @param taskList List of tasks
+     * @param ui Ui to display information to user
+     * @return Message to the user that the task has been deleted
+     * @throws LifelineException if command is incomplete or the index given is out of bounds or not an integer or
+     *                           taskList is not able to be saved
+     */
     public static String handleDelete(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
