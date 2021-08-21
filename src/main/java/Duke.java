@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
     private static ArrayList<Task> taskList;
@@ -83,11 +84,11 @@ public class Duke {
                 break;
             case "deadline" :
                 if (check.length == 1) throw new EmptyDescriptionError("deadline");
-                taskList.add(t = new Deadline(split[0].substring(9), split[1].substring(3)));
+                taskList.add(t = new Deadline(split[0].substring(9), LocalDate.parse(split[1].substring(3))));
                 break;
             case "event" :
                 if (check.length == 1) throw new EmptyDescriptionError("event");
-                taskList.add(t = new Event(split[0].substring(6), split[1].substring(3)));
+                taskList.add(t = new Event(split[0].substring(6), LocalDate.parse(split[1].substring(3))));
                 break;
             default :
                 t = new Task(input); // for tasks other than todo, deadline, event in future
@@ -110,5 +111,3 @@ public class Duke {
                 String.format("     Now you have %d tasks in the list.\n", taskList.size());
     }
 }
-
-
