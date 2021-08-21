@@ -13,7 +13,7 @@ public class TaskNotFoundException extends DukeException {
 
     @Override
     public String getMessage() {
-        return super.getMessage() + String.format("\n\tI can't seem to find the task at number %d !", this.index);
+        return super.getMessage() + String.format("\n    I can't seem to find the task at number %d !", this.index);
     }
 
 }
