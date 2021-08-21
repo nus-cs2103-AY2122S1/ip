@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class Duke {
     /** The data structure used to store the tasks. */
-    private static final ArrayList<Task> list = new ArrayList<>(100);
+    private static final ArrayList<Task> TASK_LIST = new ArrayList<>(100);
 
     /** Number of tasks stored. */
     private static int count;
@@ -72,7 +72,7 @@ public class Duke {
             if (i == count - 1) {
                 end = "";
             }
-            String out = ((Integer) (i + 1)).toString() + "." + list.get(i).toString() + end;
+            String out = ((Integer) (i + 1)).toString() + "." + TASK_LIST.get(i).toString() + end;
             curr.append(out);
         }
         return curr.toString();
@@ -122,7 +122,7 @@ public class Duke {
     public static boolean checkTodo() {
         //check with the special response "to-do X", where X is what to do.
             Todo todo = new Todo(response.substring(5, len));
-            list.add(todo);
+            TASK_LIST.add(todo);
             count++;
             System.out.println(getPattern(getOutputFrame(todo.toString())));
             return true;
@@ -140,7 +140,7 @@ public class Duke {
             String content = parts[0];
             String time = parts[1];
             Deadline deadline = new Deadline(content, time);
-            list.add(deadline);
+            TASK_LIST.add(deadline);
             count++;
             System.out.println(getPattern(getOutputFrame(deadline.toString())));
             return true;
@@ -159,7 +159,7 @@ public class Duke {
             String content = parts[0];
             String time = parts[1];
             Event event = new Event(content, time);
-            list.add(event);
+            TASK_LIST.add(event);
             count++;
             System.out.println(getPattern(getOutputFrame(event.toString())));
             return true;
@@ -177,11 +177,11 @@ public class Duke {
             int curr = Integer.parseInt(response.substring(7, len));
             Task shouldDelete;
             try {
-                shouldDelete = list.get(curr - 1);
+                shouldDelete = TASK_LIST.get(curr - 1);
             } catch (IndexOutOfBoundsException e) {
-                throw new OutOfRangeException();
+                throw new OutOfRangeException("delete");
             }
-            list.remove(curr - 1);
+            TASK_LIST.remove(curr - 1);
             count--;
             String title = "Noted. I've removed this task: \n";
             String out = "     " + shouldDelete.toString() + "\n   ";
@@ -206,9 +206,9 @@ public class Duke {
             int curr = Integer.parseInt(response.substring(5, len));
             Task shouldMark;
             try {
-                shouldMark = list.get(curr - 1);
+                shouldMark = TASK_LIST.get(curr - 1);
             } catch (IndexOutOfBoundsException e) {
-                throw new OutOfRangeException();
+                throw new OutOfRangeException("done");
             }
             shouldMark.markAsDone();
             String title = "Nice! I've marked this task as done: \n";
