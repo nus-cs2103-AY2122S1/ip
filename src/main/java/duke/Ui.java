@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private final String lineSeparator = "\t_______________________________";
+    private final String lineSeparator = "    _______________________________";
     private Scanner s = new Scanner(System.in);
 
     public void showWelcomeMessage() {
@@ -22,52 +22,52 @@ public class Ui {
 
     public void showLoadingError() {
         printLine();
-        System.out.println("\tError loading file!!");
+        System.out.println("    Error loading file!!");
         printLine();
     }
 
     public void showError(String message) {
         printLine();
-        System.out.printf("\t%s\n", message);
+        System.out.printf("    %s\n", message);
         printLine();
     }
 
     public void printAddTask(Task t, TaskList tasks) {
         printLine();
-        System.out.println("\tGot it. I've added this task:");
-        System.out.printf("\t  %s\n", t);
-        System.out.printf("\tNow you have %d ", tasks.getSize());
+        System.out.println("    Got it. I've added this task:");
+        System.out.printf("      %s\n", t);
+        System.out.printf("    Now you have %d ", tasks.getSize());
         System.out.println((tasks.getSize() <= 1 ? "task" : "tasks") + " in the list.");
         printLine();
     }
 
     public void printRemoveTask(Task t, int remainingSize) {
         printLine();
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.printf("\t  %s\n", t);
-        System.out.printf("\tNow you have %d ", remainingSize);
+        System.out.println("    Noted. I've removed this task:");
+        System.out.printf("      %s\n", t);
+        System.out.printf("    Now you have %d ", remainingSize);
         System.out.println((remainingSize <= 1 ? "task" : "tasks") + " in the list.");
         printLine();
     }
 
     public void printMarkTaskDone(Task t) {
         printLine();
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.printf("\t%s\n", t);
+        System.out.println("    Nice! I've marked this task as done:");
+        System.out.printf("    %s\n", t);
         printLine();
     }
 
     public void printList(ArrayList<Task> tasks) {
         printLine();
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("\t%d. %s\n", i + 1, tasks.get(i));
+            System.out.printf("    %d. %s\n", i + 1, tasks.get(i));
         }
         printLine();
     }
 
     public void bidFarewell() {
         printLine();
-        System.out.println("\tBye. Hope to see you again soon!");
+        System.out.println("    Bye. Hope to see you again soon!");
         printLine();
         s.close();
     }
