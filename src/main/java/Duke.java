@@ -4,7 +4,7 @@ import static java.lang.Integer.parseInt;
 /**
  * Project Duke: Incrementally building a Chatbot.
  *
- * Current Progress: Level 6. Delete
+ * Current Progress: Level 7. Save
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted commands:
