@@ -43,26 +43,26 @@ public class Duke {
         }
 
         switch(command) {
-            case LIST:
-                Duke.printTaskList();
-                break;
-            case DONE:
-                Duke.setTaskDone(userInput);
-                break;
-            case TODO:
-                Duke.addTodo(userInput);
-                break;
-            case DEADLINE:
-                Duke.addDeadline(userInput);
-                break;
-            case EVENT:
-                Duke.addEvent(userInput);
-                break;
-            case DELETE:
-                Duke.deleteTask(userInput);
-                break;
-            default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        case LIST:
+            Duke.printTaskList();
+            break;
+        case DONE:
+            Duke.setTaskDone(userInput);
+            break;
+        case TODO:
+            Duke.addTodo(userInput);
+            break;
+        case DEADLINE:
+            Duke.addDeadline(userInput);
+            break;
+        case EVENT:
+            Duke.addEvent(userInput);
+            break;
+        case DELETE:
+            Duke.deleteTask(userInput);
+            break;
+        default:
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
