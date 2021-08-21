@@ -6,7 +6,7 @@ public class Parser {
         String body = "";
         String date = inputArr[inputArr.length-1];
         boolean hasDate = false;
-        for (int i = 0; i < inputArr.length; i++) {
+        for (int i = 1; i < inputArr.length; i++) {
             if (inputArr[i].equals("/by") || inputArr[i].equals("/at")) {
                 hasDate = true;
                 break;

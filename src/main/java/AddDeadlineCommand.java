@@ -15,5 +15,6 @@ public class AddDeadlineCommand extends Command {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ui.showAddedMessage(this.deadline, tasks);
     }
 }

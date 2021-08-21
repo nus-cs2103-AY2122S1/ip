@@ -15,5 +15,6 @@ public class AddEventCommand extends Command {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ui.showAddedMessage(this.event, tasks);
     }
 }

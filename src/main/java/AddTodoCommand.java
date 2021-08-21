@@ -15,5 +15,6 @@ public class AddTodoCommand extends Command {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ui.showAddedMessage(this.todo, tasks);
     }
 }
