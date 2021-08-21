@@ -1,6 +1,7 @@
 package tiger.components;
 
 import tiger.exceptions.TigerIndexOutOfBoundsException;
+import tiger.exceptions.TigerStorageLoadException;
 
 import java.util.ArrayList;
 
@@ -68,5 +69,14 @@ public class TaskList {
             returnString += "\n";
         }
         return returnString;
+    }
+
+    public static TaskList getTaskListFromStringRepresentation(String s) throws TigerStorageLoadException {
+        String[] stringArray = s.split("\n");
+        ArrayList<Task> newTaskList = new ArrayList<Task>();
+        for (String line: stringArray) {
+            newTaskList.add(Task.getTaskListFromStringRepresentation(line));
+        }
+        return new TaskList(newTaskList);
     }
 }

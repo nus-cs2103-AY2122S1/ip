@@ -1,6 +1,7 @@
 package tiger.components;
 
 import tiger.exceptions.TigerEmptyStringException;
+import tiger.exceptions.TigerStorageLoadException;
 
 public class Event extends Task {
 
@@ -30,6 +31,30 @@ public class Event extends Task {
     }
 
     protected String getStorageRepresentation() {
-        return String.format("E|%s|%s|%s", this.done, this.taskDescription, this.eventAt);
+        return String.format("E;%s;%s;%s", this.done, this.taskDescription, this.eventAt);
+    }
+
+    protected static Event getTaskFromStringRepresentation(String s) throws TigerStorageLoadException {
+        /* s should be of the form T|true/false|taskDescription| */
+        String[] stringArray = s.split(";");
+        int length = stringArray.length;
+        try {
+            assert (length == 4);
+            // check if task is indeed a Event task
+            assert (stringArray[0].equals("E"));
+            // check task done value is either true or false
+            assert (stringArray[1].equals("true") || stringArray[1].equals("false"));
+            // check that task description is non-empty
+            assert (!stringArray[2].equals(""));
+            // check that the event timing is non-empty
+            assert (!stringArray[3].equals(""));
+            if (stringArray[1].equals("true")) {
+                return new Event(stringArray[2], true, stringArray[3]); // task description, done, timing
+            } else {
+                return new Event(stringArray[2], false, stringArray[3]); // task description, done, timing
+            }
+        } catch (AssertionError e) {
+            throw new TigerStorageLoadException(e.toString());
+        }
     }
 }

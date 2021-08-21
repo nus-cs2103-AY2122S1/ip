@@ -14,6 +14,7 @@ import tiger.exceptions.TigerEmptyStringException;
 import tiger.exceptions.TigerInvalidArgumentException;
 
 import tiger.exceptions.TigerStorageInitException;
+import tiger.exceptions.TigerStorageLoadException;
 import tiger.parser.CommandParser;
 import tiger.parser.DeadLineCommand;
 import tiger.parser.DeleteCommand;
@@ -96,9 +97,16 @@ public class Tiger {
                 break;
             case "save":
                 try {
-                    Storage s = new Storage(taskList);
-                    s.save();
+                    new Storage().save(taskList);
                 } catch (TigerStorageInitException e) {
+                    System.out.println(e);
+                }
+                break;
+            case "load":
+                try {
+                    taskList = new Storage().load();
+                    applicationState = new AppState(applicationState.isExited(), taskList);
+                } catch (TigerStorageLoadException e) {
                     System.out.println(e);
                 }
                 break;

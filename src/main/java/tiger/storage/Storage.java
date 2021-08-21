@@ -2,21 +2,23 @@ package tiger.storage;
 
 import tiger.components.TaskList;
 import tiger.exceptions.TigerStorageInitException;
+import tiger.exceptions.TigerStorageLoadException;
 import tiger.exceptions.TigerStorageSaveException;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Storage {
 
     public static final String FILE_PATH = "./data/Tiger.txt";
     public static final String DIRECTORY_PATH = "./data/";
-    private TaskList taskList;
     private File file;
 
-    public Storage(TaskList taskList) throws TigerStorageInitException {
-        this.taskList = taskList;
+    public Storage() throws TigerStorageInitException {
         new File(DIRECTORY_PATH).mkdir();
         this.file = new File(FILE_PATH);
         if (!this.file.exists()) {
@@ -40,8 +42,17 @@ public class Storage {
         }
     }
 
-    public void save() throws TigerStorageSaveException {
-        String textToAdd = this.taskList.getStorageRepresentation();
+    public void save(TaskList taskList) throws TigerStorageSaveException {
+        String textToAdd = taskList.getStorageRepresentation();
         writeToFile(FILE_PATH, textToAdd);
+    }
+
+    public TaskList load() throws TigerStorageLoadException {
+        try {
+            String textToParse = Files.readString(Paths.get(FILE_PATH), StandardCharsets.US_ASCII);
+            return TaskList.getTaskListFromStringRepresentation(textToParse);
+        } catch (IOException e) {
+            throw new TigerStorageLoadException(e.toString());
+        }
     }
 }
