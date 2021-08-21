@@ -43,6 +43,7 @@ public abstract class Database {
             close(ps, rs);
         } catch (SQLException ex) {
             // TODO
+            ex.printStackTrace();
         }
     }
 
@@ -122,6 +123,7 @@ public abstract class Database {
                 connection.close();
         } catch (SQLException ex) {
             // TODO
+            ex.printStackTrace();
         }
     }
 
@@ -139,6 +141,7 @@ public abstract class Database {
                 connection.close();
         } catch (SQLException ex) {
             // TODO
+            ex.printStackTrace();
         }
     }
 
@@ -148,6 +151,8 @@ public abstract class Database {
      * @return database directory
      */
     protected File getDataFolder() {
-        return new File("data");
+        File dataFolder = new File("data");
+        dataFolder.mkdir();
+        return dataFolder;
     }
 }

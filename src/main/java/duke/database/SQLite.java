@@ -37,15 +37,16 @@ public class SQLite extends Database {
             new Response("SQLite exception on initialize").print();
         } catch (ClassNotFoundException ex) {
             new Response("You need the SQLite JBDC library. Google it. Put it in /lib folder.").print();
+            ex.printStackTrace();
         }
         return null;
     }
 
     @Override
     public void load() {
-        connection = getSQLConnection();
+        this.connection = getSQLConnection();
         try {
-            Statement s = connection.createStatement();
+            Statement s = this.connection.createStatement();
             s.executeUpdate(SQLITE_CREATE_TASK_TABLE_STATEMENT);
             s.close();
         } catch (SQLException e) {
@@ -59,8 +60,7 @@ public class SQLite extends Database {
         List<Task> list = new ArrayList<>();
         try {
             this.connection = getSQLConnection();
-            PreparedStatement ps = connection
-                    .prepareStatement("SELECT * FROM " + TASK_TABLE_NAME + " WHERE player = '" + null + "';");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + TASK_TABLE_NAME + ";");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 TaskType type = TaskType.valueOf(rs.getString("type"));
@@ -72,6 +72,7 @@ public class SQLite extends Database {
             close(ps);
         } catch (SQLException ex) {
             // TODO
+            ex.printStackTrace();
         }
         return list;
     }
@@ -91,6 +92,7 @@ public class SQLite extends Database {
             close(ps);
         } catch (SQLException ex) {
             // TODO
+            ex.printStackTrace();
         }
     }
 
@@ -99,19 +101,29 @@ public class SQLite extends Database {
         Task result = null;
         try {
             this.connection = getSQLConnection();
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + TASK_TABLE_NAME + ";");
+            PreparedStatement ps = connection
+                    .prepareStatement("SELECT rowid, * FROM " + TASK_TABLE_NAME + " ORDER BY rowid;");
             ResultSet rs = ps.executeQuery();
-            while (rs.absolute(index)) {
-                TaskType type = TaskType.valueOf(rs.getString("type"));
-                String name = rs.getString("name");
-                boolean completed = rs.getBoolean("completed");
-                String date = rs.getString("date");
-                result = this.createTask(type, name, completed, date);
-                rs.deleteRow();
+
+            int row = 0;
+            while (rs.next() && row < index) {
+                if (++row == index) {
+                    TaskType type = TaskType.valueOf(rs.getString("type"));
+                    String name = rs.getString("name");
+                    boolean completed = rs.getBoolean("completed");
+                    String date = rs.getString("date");
+                    result = this.createTask(type, name, completed, date);
+
+                    int rowid = rs.getInt("rowid");
+                    ps = connection
+                            .prepareStatement("DELETE FROM " + TASK_TABLE_NAME + " WHERE rowid = " + rowid + ";");
+                    ps.executeUpdate();
+                }
             }
             close(ps, rs);
         } catch (SQLException ex) {
             // TODO
+            ex.printStackTrace();
         }
         return result;
     }
@@ -121,19 +133,27 @@ public class SQLite extends Database {
         Task result = null;
         try {
             this.connection = getSQLConnection();
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + TASK_TABLE_NAME + ";");
+            PreparedStatement ps = connection.prepareStatement("SELECT rowid, * FROM " + TASK_TABLE_NAME + ";");
             ResultSet rs = ps.executeQuery();
-            while (rs.absolute(index)) {
-                TaskType type = TaskType.valueOf(rs.getString("type"));
-                String name = rs.getString("name");
-                boolean completed = rs.getBoolean("completed");
-                String date = rs.getString("date");
-                result = this.createTask(type, name, completed, date);
-                rs.updateBoolean("completed", true);
+
+            int row = 0;
+            while (rs.next() && row < index) {
+                if (++row == index) {
+                    TaskType type = TaskType.valueOf(rs.getString("type"));
+                    String name = rs.getString("name");
+                    String date = rs.getString("date");
+                    result = this.createTask(type, name, true, date);
+
+                    int rowid = rs.getInt("rowid");
+                    ps = connection.prepareStatement(
+                            "UPDATE " + TASK_TABLE_NAME + " SET completed = " + 1 + " WHERE rowid = " + rowid + ";");
+                    ps.executeUpdate();
+                }
             }
             close(ps, rs);
         } catch (SQLException ex) {
             // TODO
+            ex.printStackTrace();
         }
         return result;
     }

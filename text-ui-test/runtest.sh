@@ -20,7 +20,7 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin duke.Duke < input.txt > ACTUAL.TXT
+java -classpath .:../bin/sqlite-jdbc-3.36.0.1.jar:../bin duke.Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
