@@ -59,6 +59,16 @@ class InvalidCommandException extends DukeException {
 
 }
 
+class FileWritingException extends DukeException {
+
+    public FileWritingException() {
+
+        super("Hi, Duke ran into an error trying to save task to your hard drive. Please try again!");
+
+    }
+
+}
+
 class IndexOutOfRangeException extends DukeException {
 
     public IndexOutOfRangeException(int enteredIndex, int listSize) {

@@ -18,6 +18,7 @@ public class Duke {
 
     private static final String horizontalLine = "____________________________________________________________";
     private static Tasklist taskList;
+    private static Store store = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
 
     /**
      * Prints out message according to desired format to user
@@ -95,22 +96,22 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileWritingException {
         //initialize program
         String greeting = "Hello! I'm Duke"
                 + "\nWhat can I do for you?";
         printMessage(greeting);
+        taskList = store.loadTaskFromStore();
         Scanner commandScanner = new Scanner(System.in);
         String currentCommand = commandScanner.nextLine();
         String[] checkCommand = currentCommand.split(" ", 2);
         Command thisCommand = Command.changeToCommand(checkCommand[0]);
-        taskList = new Tasklist();
         //awaits text
         while (!thisCommand.equals(Command.BYE)) {
             try {
                 switch (thisCommand) {
                     case LIST:
-                        printMessage(taskList.toString());
+                        printMessage("Here are the tasks in your list:\n" + taskList.toString());
                         break;
                     case DONE:
                         int taskNumber = checkInteger(checkCommand, "marking of task");
@@ -144,7 +145,12 @@ public class Duke {
                 thisCommand = Command.changeToCommand(checkCommand[0]);
             }
         }
-        String byeString = "Bye. Hope to see you again soon!";
-        printMessage(byeString);
+        try {
+            store.saveTasksToStore(taskList);
+            String byeString = "Bye. Hope to see you again soon!";
+            printMessage(byeString);
+        } catch (FileWritingException e) {
+            printMessage(e.toString());
+        }
     }
 }
