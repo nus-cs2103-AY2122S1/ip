@@ -4,7 +4,7 @@
 public abstract class Task {
 
     /**
-     * Get a description of the task filled with its details.
+     * Returns a description of the task filled with its details.
      *
      * @return The description of the task.
      */
@@ -37,7 +37,7 @@ public abstract class Task {
     }
 
     /**
-     * Prints the string representation of the type of task.
+     * Returns the string representation of the type of task.
      *
      * @return The required string representation.
      */
@@ -52,7 +52,7 @@ public abstract class Task {
     }
 
     /**
-     * A string representation of the task with its task name and its completion status.
+     * Returns a string representation of the task with its task name and its completion status.
      *
      * @return The string representation of the task.
      */

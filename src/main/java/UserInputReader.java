@@ -34,7 +34,8 @@ public class UserInputReader {
     }
 
     /**
-     * Evaluates a user's input to the chat bot and carries out the appropriate functions.
+     * Evaluates a user's input to the chat bot and carries out the appropriate functions. It also checks if the
+     * user's input is a keyword to close the chat bot.
      *
      * @param input The user's input.
      * @return False if the user's input is supposed to close the chat bot. Else, the chat bot continues
