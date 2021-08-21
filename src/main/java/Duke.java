@@ -1,21 +1,35 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Duke {
     private static ArrayList<Task> taskList;
+    private final static String PATH = "./data/duke.txt";
 
     public static void main(String[] args) {
+        // initialization
+        taskList = new ArrayList<>();
+        try {
+            load();
+        } catch (InvalidCommandException e) {
+            System.out.println(reply(e.getMessage()));
+        } catch (IOException e) {
+            System.out.println(reply(e.getMessage()+"\n"));
+        }
+        // greet the user
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        // greet the user
         String greeting = "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" ;
         System.out.println(reply(greeting));
-        taskList = new ArrayList<>();
         // listen to user input
         Scanner scan = new Scanner(System.in);
         String command = scan.nextLine();
@@ -38,8 +52,11 @@ public class Duke {
             command = scan.nextLine();
         }
         // farewell the user
-        String bye = "     Bye. Hope to see you again soon!\n";
-        System.out.println(reply(bye));
+        try {
+            System.out.println(reply(bye()));
+        } catch (IOException e) {
+            System.out.println(reply(e.getMessage()+"\n"));
+        }
     }
 
     private static String reply(String content) {
@@ -108,6 +125,63 @@ public class Duke {
         return "     Noted. I've removed this task: \n" +
                 String.format("       %s\n", t) +
                 String.format("     Now you have %d tasks in the list.\n", taskList.size());
+    }
+
+    private static void load() throws InvalidCommandException, IOException {
+        File f = new File(PATH);
+        // if the directory "data" does not exist, then create the directory
+        if (!f.getParentFile().exists()) {
+            f.getParentFile().mkdirs();
+        }
+        // check if "duke.txt" exists. If yes, load the info to taskList. Else, create the file.
+        if (!f.createNewFile()) {
+            Scanner s = new Scanner(f);
+            while (s.hasNextLine()) {
+                String[] command = s.nextLine().split(" \\| ");
+                Task t;
+                switch(command[0]) {
+                    case "T":
+                        t = new Todo(command[2]);
+                        break;
+                    case "D":
+                        t = new Deadline(command[2], command[3]);
+                        break;
+                    case "E":
+                        t = new Event(command[2], command[3]);
+                        break;
+                    default:
+                        t = new Task(command[2]); // for tasks other than todo, deadline, event in future
+                        throw new UnknownCommandError("");
+                }
+                if (command[1].equals("1")) {
+                    t.markAsDone();
+                }
+                taskList.add(t);
+            }
+        }
+    }
+
+    private static void save() throws IOException {
+        // overwrite the file "duke.txt"
+        File f = new File(PATH);
+        FileWriter fw = new FileWriter(f);
+        for (Task t : taskList) {
+            String line = "";
+            if (t instanceof Todo) {
+                line += String.format("T | %d | %s\n", t.isDone ? 1 : 0, t.description);
+            } else if (t instanceof Event) {
+                line += String.format("E | %d | %s | %s\n", t.isDone ? 1 : 0, t.description, ((Event)t).at);
+            } else if (t instanceof Deadline) {
+                line += String.format("D | %d | %s | %s\n", t.isDone ? 1 : 0, t.description, ((Deadline)t).by);;
+            }
+            fw.write(line);
+        }
+        fw.close();
+    }
+
+    private static String bye() throws IOException {
+        save();
+        return "     Bye. Hope to see you again soon!\n";
     }
 }
 
