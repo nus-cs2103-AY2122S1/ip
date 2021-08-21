@@ -6,7 +6,9 @@ import duke.task.DatedTask;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class TaskList {
     private ArrayList<Task> list;
@@ -64,5 +66,21 @@ public class TaskList {
         for (int i = 0; i < size(); i++) {
             consumer.accept(list.get(i));
         }
+    }
+
+    /**
+     * Returns a TaskList containing Task that satisfy the supplied predicate.
+     *
+     * @param predicate The predicate to test the Task with.
+     * @return A TaskList containing Task that satisfies the given predicate.
+     */
+    public TaskList filter(Function<Task, Boolean> predicate) {
+        ArrayList<Task> res = new ArrayList<>();
+        for (int i = 0; i < size(); i++) {
+            if (predicate.apply(list.get(i))) {
+                res.add(list.get(i));
+            }
+        }
+        return new TaskList(res);
     }
 }

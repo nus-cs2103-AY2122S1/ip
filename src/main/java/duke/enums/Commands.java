@@ -9,6 +9,7 @@ public enum Commands {
     DELETE("delete"),
     DONE("done"),
     EXIT("bye"),
+    FIND("find"),
     INVALID("");
 
     private final String LABEL;
