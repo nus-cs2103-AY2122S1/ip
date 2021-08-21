@@ -244,7 +244,6 @@ public class Pix {
     }
 
     public static void main(String[] args) throws PixException {
-
         System.out.println("This is Pix. Why did you summon me AGAIN...");
         System.out.println("What do want now?");
 
