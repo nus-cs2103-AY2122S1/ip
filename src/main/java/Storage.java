@@ -72,7 +72,6 @@ public class Storage {
 
     void writeToFile (String text) {
         try {
-            System.out.println("text");
             FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(),true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(text);
