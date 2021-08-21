@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private boolean shouldSave;
     private final String filePath;
     private final File file;
 
@@ -23,11 +22,9 @@ public class Storage {
             } catch (IOException e) {
                 System.out.printf("An error occurred when trying to access file %s." +
                         "Changes to your task list will not be saved locally.\n", filePath);
-                shouldSave = false;
                 return;
             }
         }
-        shouldSave = true;
     }
 
     public List<Task> loadTasks() {
@@ -46,8 +43,6 @@ public class Storage {
             }
             bufferedReader.close();
             fileReader.close();
-        } catch (FileNotFoundException e) {
-            return taskList;
         } catch (IOException e) {
             System.out.printf("An error occurred when trying to load %s.\n", filePath);
         }
@@ -55,9 +50,6 @@ public class Storage {
     }
 
     public void saveTasks(String tasks) throws DukeException {
-        if (!shouldSave) {
-            return;
-        }
         try {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(tasks);
