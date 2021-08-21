@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -79,6 +80,9 @@ public class Petal {
                 case "deadline":
                     handleTasks("deadline", formatted);
                     break;
+                case "date":
+                    tasksOnThisDay(formatted);
+                    break;
                 case "event":
                     handleTasks("event", formatted);
                     break;
@@ -89,6 +93,16 @@ public class Petal {
             printMessage(e.getMessage());
             printMessage(Responses.REQUIRED_FORMAT);
         }
+    }
+
+    public void tasksOnThisDay(String date) throws InvalidInputException {
+        try {
+            String result = Deadline.deadlinesOnDate(date);
+            printMessage(result);
+        } catch (DateTimeParseException e) {
+            throw new InvalidInputException("The date/time format used was wrong! Try again :(");
+        }
+
     }
 
     /**
