@@ -1,10 +1,10 @@
 package duke;
 
-public abstract class Task {
+abstract class Task {
     String description;
     Boolean isDone = false;
 
-    public void setDone() {
+    void setDone() {
         isDone = true;
     }
 }

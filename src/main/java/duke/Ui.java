@@ -2,8 +2,8 @@ package duke;
 
 import java.util.Scanner;
 
-public class Ui {
-    static Scanner sc = new Scanner(System.in);
+class Ui {
+    private static Scanner sc = new Scanner(System.in);
 
     static String nextLine() {
         return sc.nextLine();

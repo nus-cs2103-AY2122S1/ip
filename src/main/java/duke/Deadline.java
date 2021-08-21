@@ -3,11 +3,11 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
-    static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy hh:mma");
-    LocalDateTime time;
+class Deadline extends Task {
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy hh:mma");
+    private LocalDateTime time;
 
-    public Deadline(String description, LocalDateTime time) {
+    Deadline(String description, LocalDateTime time) {
         this.description = description;
         this.time = time;
     }

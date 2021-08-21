@@ -2,10 +2,10 @@ package duke;
 
 import java.io.IOException;
 
-public class Duke {
-    static TaskList tasks = new TaskList();
-    static Parser parser = new Parser(tasks);
-    static Storage storage;
+class Duke {
+    private static TaskList tasks = new TaskList();
+    private static Parser parser = new Parser(tasks);
+    private static Storage storage;
 
     public static void main(String[] args) {
         Ui.show("Hello! I'm Duke", "What can I do for you?");
@@ -27,7 +27,7 @@ public class Duke {
         }
     }
 
-    static void loadStorage() {
+    private static void loadStorage() {
         try {
             storage = new Storage("duke.txt");
             for (String command : storage.readAllLines())
