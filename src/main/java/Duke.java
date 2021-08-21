@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Duke {
     private static String logo = " ____        _        \n"
@@ -13,13 +14,17 @@ public class Duke {
     private static String PATH;
 
     public static void main(String[] args) {
-        PATH = System.getProperty("user.dir") + "\\data\\data.txt";
+        PATH = System.getProperty("user.dir");
 
         DukeList list = new DukeList();
 
         Storage storage = new Storage(PATH, list);
 
-        storage.load();
+        try {
+            storage.load();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
 
         Scanner scan = new Scanner(System.in);
 

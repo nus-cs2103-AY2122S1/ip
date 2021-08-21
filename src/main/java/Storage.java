@@ -1,7 +1,12 @@
 import java.io.BufferedReader;
-import java.io.FileWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Storage {
     private String path;
@@ -15,7 +20,7 @@ public class Storage {
 
     public void save() {
         try {
-            FileWriter fileWriter = new FileWriter(this.path);
+            FileWriter fileWriter = new FileWriter(this.path + "\\data\\data.txt");
             fileWriter.write(list.toString());
             fileWriter.close();
         } catch (IOException e) {
@@ -24,9 +29,26 @@ public class Storage {
     }
 
 
-    public void load() {
+    public void load() throws IOException{
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(this.path));
+            Path folderPath = Paths.get(this.path + "\\data");
+            Path filePath = Paths.get(this.path + "\\data\\data.txt");
+            boolean hasDirectory = Files.exists(folderPath);
+            boolean hasSaveFile = Files.exists(filePath);
+
+            if (!hasDirectory) {
+                File folder = new File(this.path + "\\data");
+                File saveFile = new File(this.path + "\\data\\data.txt");
+
+                folder.mkdir();
+                saveFile.createNewFile();
+            } else if (!hasSaveFile) {
+                File saveFile = new File(this.path + "\\data\\data.txt");
+                saveFile.createNewFile();
+            }
+
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(this.path
+                    + "\\data\\data.txt"));
             String data = bufferedReader.readLine();
             String type;
             String state;
