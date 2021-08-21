@@ -14,8 +14,24 @@ public abstract class Task {
     /**
      * Sets the Task to complete.
      */
-    public void CompleteTask() {
+    public void completeTask() {
         done = true;
+    }
+
+    /**
+     * Shows whether the task is completed.
+     * @return True if the task is complete and false otherwise.
+     */
+    public boolean isDone() {
+        return done;
+    }
+
+    /**
+     * Getter for the task's name.
+     * @return
+     */
+    public String getTaskName() {
+        return name;
     }
 
     @Override

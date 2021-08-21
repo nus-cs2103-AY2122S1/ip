@@ -10,6 +10,14 @@ public class Event extends Task {
         this.eventDate = eventDate;
     }
 
+    /**
+     * Retrieves the date of the event.
+     * @return The date of the event.
+     */
+    public String getDate() {
+        return eventDate;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + eventDate + ")";

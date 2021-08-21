@@ -10,6 +10,14 @@ public class Deadline extends Task {
         this.finishByDate = finishByDate;
     }
 
+    /**
+     * Retrieves the date of the deadline of the task.
+     * @return The deadline of the task.
+     */
+    public String getDate() {
+        return finishByDate;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + finishByDate + ")";
