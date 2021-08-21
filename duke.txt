@@ -1,7 +1,0 @@
-D | 1 | s | mesme
-T | 1 | ok its 
-T | 1 | nothing
-
-E | 0 |  horse |  5pm
-D | 0 |  meme |  2pm
-D | 0 |  dead |  2pm
