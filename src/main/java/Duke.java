@@ -2,6 +2,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    public enum Command {
+        LIST("list"), DONE("done"), TODO("todo"),
+        DEADLINE("deadline"), EVENT("event"), DELETE("delete");
+
+        public final String command;
+
+        private Command(String command) {
+            this.command = command;
+        }
+    }
+
     public static void main(String[] args) {
         //Greet
         System.out.println("Hello! I'm Duke!\nWhat can I do for you?\n");
@@ -11,99 +22,122 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        //Continuously gets input from user if input is not 'bye'
         while (!input.equals("bye")) {
-            // 'list' command
-            if (input.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                // No tasks
-                if (task.isEmpty()) {
-                    System.out.println("There are no tasks!");
-                } else {
-                    // Display the list of tasks
-                    for (int i = 1; i < task.size() + 1; i++) {
-                        System.out.printf("  %d.%s%n", i, task.get(i - 1));
+            String[] parsed = input.split(" ", 2);
+
+            try {
+                boolean validCommand = false;
+                for (Command current : Command.values()) {
+                    if (current.command.equals(parsed[0])) {
+                        validCommand = true;
+                        switch (current) {
+                            case LIST: {
+                                if (task.isEmpty()) {
+                                    System.out.println("There are no tasks!");
+                                } else {
+                                    System.out.println("Here are the tasks in your list:");
+                                    for (int i = 1; i < task.size() + 1; i++) {
+                                        System.out.printf("  %d.%s%n", i, task.get(i - 1));
+                                    }
+                                }
+                                break;
+                            }
+
+                            case DONE: {
+
+                                if (parsed.length == 1) {
+                                    throw new NoDescriptionException("Description of task cannot be empty!");
+                                } else {
+                                    String description = parsed[1];
+                                    int taskNo = Integer.parseInt(description);
+                                    task.get(taskNo - 1).markAsDone();
+                                    System.out.println("Nice! I've marked this task as done:\n  " + task.get(taskNo - 1));
+                                    break;
+                                }
+                            }
+
+                            case DELETE: {
+
+                                if (parsed.length == 1) {
+                                    throw new NoDescriptionException("Description of task cannot be empty!");
+                                } else {
+                                    String description = parsed[1];
+                                    int taskNo = Integer.parseInt(description);
+                                    Task deletedTask = task.get(taskNo - 1);
+                                    task.remove(taskNo - 1);
+                                    System.out.printf("Noted. I've removed this task:\n  %s\nNow you have %d task(s) in the list.%n",
+                                            deletedTask, task.size());
+                                    break;
+                                }
+                            }
+
+                            case TODO: {
+                                if (parsed.length == 1) {
+                                    throw new NoDescriptionException("Description of task cannot be empty!");
+                                } else {
+                                    String description = parsed[1];
+                                    Task newTask = new Todo(description);
+                                    task.add(newTask);
+                                    System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.%n",
+                                            newTask, task.size());
+                                }
+                                break;
+                            }
+
+                            case DEADLINE: {
+                                if (parsed.length == 1) {
+                                    throw new NoDescriptionException("Description of task cannot be empty!");
+                                } else {
+                                    String description = parsed[1];
+                                    int index = description.indexOf("by");
+                                    if (index == -1) {
+                                        throw new WrongDescriptionException("Deadline not included! Try: deadline ... /by ...");
+                                    } else {
+                                        Task newTask = new Deadline(description.substring(0, index - 2), description.substring(index + 3));
+                                        task.add(newTask);
+                                        System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.%n",
+                                                newTask, task.size());
+                                    }
+                                }
+                                break;
+                            }
+
+                            case EVENT: {
+                                if (parsed.length == 1) {
+                                    throw new NoDescriptionException("Description of task cannot be empty!");
+                                } else {
+                                    String description = parsed[1];
+                                    int index = description.indexOf("at");
+                                    if (index == -1) {
+                                        throw new WrongDescriptionException("Deadline not included! Try: deadline ... /at ...");
+                                    } else {
+                                        Task newTask = new Deadline(description.substring(0, index - 2), description.substring(index + 3));
+                                        task.add(newTask);
+                                        System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.%n",
+                                                newTask, task.size());
+                                    }
+                                }
+                                break;
+                            }
+                        }
                     }
                 }
-            } else if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
-                //Mark task as done
-                int taskNo = Integer.parseInt(input.substring(input.length() - 1));
-                task.get(taskNo - 1).markAsDone();
-                System.out.println("Nice! I've marked this task as done:\n  " + task.get(taskNo - 1));
-            } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
-                int taskNo = Integer.parseInt(input.substring(input.length() - 1));
-                Task deletedTask = task.get(taskNo - 1);
-                task.remove(taskNo - 1);
-                System.out.printf("Noted. I've removed this task:\n  %s\nNow you have %d task(s) in the list.%n",
-                        deletedTask, task.size());
-            } else {
-                    //Adding task
-                    Task newTask = new Task("");
 
-                    try {
-                        //Determine the type of task and content
-                        int spaceIndex = input.indexOf(" ");
-                        String typeofTask = input;
-                        String content = input;
-                        //If there is more than one word
-                        if (spaceIndex != -1) {
-                            typeofTask = input.substring(0, spaceIndex);
-                            content = input.substring(spaceIndex + 1);
-                        } else {
-                            // 1 word means there is no description
-                            content = " ";
-                        }
-                        //Type of task is not one of the three: todo, deadline, event
-                        if (!typeofTask.equals("todo") && !typeofTask.equals("deadline") && !typeofTask.equals("event")) {
-                            throw new InvalidTaskException("Not supported! Supported tasks: todo, deadline, event");
-                        }
+                if (!validCommand) {
+                    throw new InvalidTaskException("Invalid command! Please enter the following commands only:\n" +
+                            "list\ndone (task number)\n" +
+                            "delete (task number)\ntodo (description)\n" +
+                            "deadline (description) /by (time)\nevent (description) /at (time)");
+                }
 
-                        //There is no description
-                        if (content.isBlank()) {
-                            throw new NoDescriptionException("Description of task cannot be empty!");
-                        }
+                input = sc.nextLine();
 
-
-                        switch (typeofTask) {
-                            case "todo":
-                                newTask = new Todo(content);
-                                break;
-                            case "deadline": {
-                                int index = content.indexOf("by");
-                                if (index == -1) {
-                                    throw new WrongDescriptionException("Deadline not included! Try: deadline ... /by ...");
-                                } else {
-                                    newTask = new Deadline(content.substring(0, index - 2), content.substring(index + 3));
-                                }
-                                break;
-                            }
-                            case "event": {
-                                int index = content.indexOf("at");
-                                if (index == -1) {
-                                    throw new WrongDescriptionException("Time of event not included! Try: event ... /at ...");
-                                } else {
-                                    newTask = new Event(content.substring(0, index - 2), input.substring(index + 3));
-                                }
-                                break;
-                            }
-                        }
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                        input = sc.nextLine();
-                        continue;
-                    }
-
-                    task.add(newTask);
-                    System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.%n",
-                            newTask, task.size());
-
-
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                input = sc.nextLine();
             }
-
-            input = sc.nextLine();
         }
-
+        
         System.out.println("Bye. Hope to see you again!");
-
     }
 }
