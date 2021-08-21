@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -55,7 +57,7 @@ public class Storage {
             } else if (t instanceof Event) {
                 line += String.format("E | %d | %s | %s\n", t.isDone ? 1 : 0, t.description, ((Event)t).at);
             } else if (t instanceof Deadline) {
-                line += String.format("D | %d | %s | %s\n", t.isDone ? 1 : 0, t.description, ((Deadline)t).by);;
+                line += String.format("D | %d | %s | %s\n", t.isDone ? 1 : 0, t.description, ((Deadline)t).by);
             }
             fw.write(line);
         }

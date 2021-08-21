@@ -1,16 +1,12 @@
-import java.io.FileNotFoundException;
+package duke;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-import java.time.LocalDate;
 
 public class Duke implements Runnable {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Duke(String filePath) {
         // initialization
