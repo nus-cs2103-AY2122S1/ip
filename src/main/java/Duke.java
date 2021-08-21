@@ -30,7 +30,28 @@ public class Duke {
      * Available commands
      */
     private enum Commands {
-        list, todo, deadline, event, delete, done, bye
+        list        ("", "Lists all the tasks."),
+        todo        ("[description]", "Adds a todo task."),
+        deadline    ("[description] /by [deadline]", "Adds a task with a deadline"),
+        event       ("[description] /at [datetime]", "Adds an event to the task"),
+        delete      ("[index]", "Removes a task from the task list"),
+        done        ("[index]", "Marks a task as done"),
+        help        ("", "Shows all the commands available"),
+        bye         ("", "Quit the app");
+
+
+        private final String arguments;
+        private final String description;
+
+        Commands(String arguments, String description) {
+            this.arguments = arguments;
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return this.name() + " " + arguments + "   -->   " + description;
+        }
     }
 
     /**
@@ -78,6 +99,11 @@ public class Duke {
                 String task = "";
 
                 switch (command) {
+                    case help:
+                        // Show help
+                        output = showCommandMenu();
+
+                        break;
                     case bye:
                         // Quit program
                         break label;
@@ -206,6 +232,7 @@ public class Duke {
         return fileContent;
     }
 
+
     /**
      * Parse the user input string into a meaningful String array.
      * @param rawInput The user input
@@ -215,13 +242,13 @@ public class Duke {
     private static String[] parseInput(String rawInput) throws DukeException {
         String[] input = rawInput.split("\\s+");
         if (input.length < 1) {
-            throw new DukeException("What you mean?");
+            throw new DukeException("What you mean? Do: `help`");
         }
         Commands command;
         try {
             command = Commands.valueOf(input[0]);
         } catch (Exception e) {
-            throw new DukeException("What you mean?");
+            throw new DukeException("What you mean? Do: `help`");
         }
         switch (command) {
             case list:
@@ -242,7 +269,7 @@ public class Duke {
                 }
                 return new String[] {input[0], input[1]};
 
-            case "todo":
+            case todo:
                 if (input.length < 2) {
                     throw new DukeException("'todo' command needs a description. (example: 'todo watch Borat')");
                 }
@@ -293,10 +320,16 @@ public class Duke {
                 }
                 return new String[] {input[0], input[1]};
 
+            case help:
+                if (input.length != 1) {
+                    throw new DukeException("Do you mean `help`?");
+                }
+                return new String[] {input[0]};
             default:
-                throw new DukeException("What you mean?");
+                throw new DukeException("What you mean? Do: `help` to list all commands");
         }
     }
+
 
     /**
      * Get the user input
@@ -306,6 +339,7 @@ public class Duke {
     private static String getInput(Scanner sc) {
         return sc.nextLine();
     }
+
 
     /**
      * Displays Borat's message to the user
@@ -318,6 +352,7 @@ public class Duke {
         System.out.println(" ");
         System.out.println(SPACE + BOT_LINE);
     }
+
 
     /**
      * Combine an array of strings into a space separated sentence.
@@ -339,5 +374,17 @@ public class Duke {
             }
         }
         return tmp.toString();
+    }
+
+
+    private static String showCommandMenu() {
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for (Commands c : Commands.values()) {
+            sb.append("(" + i++ + ") ");
+            sb.append(c.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }
