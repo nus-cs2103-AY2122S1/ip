@@ -20,6 +20,7 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
+pwd
 java -classpath ../bin Tiger < input.txt > ACTUAL.TXT
 
 # convert to UNIX format  

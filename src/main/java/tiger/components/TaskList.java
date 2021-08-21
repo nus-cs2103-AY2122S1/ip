@@ -73,9 +73,11 @@ public class TaskList {
 
     public static TaskList getTaskListFromStringRepresentation(String s) throws TigerStorageLoadException {
         String[] stringArray = s.split("\n");
-        ArrayList<Task> newTaskList = new ArrayList<Task>();
+        ArrayList<Task> newTaskList = new ArrayList<>();
         for (String line: stringArray) {
-            newTaskList.add(Task.getTaskListFromStringRepresentation(line));
+            if (line.length() != 0) {
+                newTaskList.add(Task.getTaskListFromStringRepresentation(line));
+            }
         }
         return new TaskList(newTaskList);
     }

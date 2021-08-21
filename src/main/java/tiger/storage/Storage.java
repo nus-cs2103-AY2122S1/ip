@@ -16,14 +16,13 @@ public class Storage {
 
     public static final String FILE_PATH = "./data/Tiger.txt";
     public static final String DIRECTORY_PATH = "./data/";
-    private File file;
 
-    public Storage() throws TigerStorageInitException {
+    public static void makeFileIfNotPresent() throws TigerStorageInitException {
         new File(DIRECTORY_PATH).mkdir();
-        this.file = new File(FILE_PATH);
-        if (!this.file.exists()) {
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
             try {
-                this.file.createNewFile();
+                file.createNewFile();
             } catch (IOException e) {
                 // hopefully it will never reach this line
                 throw new TigerStorageInitException(e.toString());
@@ -42,17 +41,26 @@ public class Storage {
         }
     }
 
-    public void save(TaskList taskList) throws TigerStorageSaveException {
+    public static void save(TaskList taskList) throws TigerStorageSaveException {
         String textToAdd = taskList.getStorageRepresentation();
         writeToFile(FILE_PATH, textToAdd);
     }
 
-    public TaskList load() throws TigerStorageLoadException {
+    public static TaskList load() throws TigerStorageLoadException {
         try {
             String textToParse = Files.readString(Paths.get(FILE_PATH), StandardCharsets.US_ASCII);
             return TaskList.getTaskListFromStringRepresentation(textToParse);
         } catch (IOException e) {
             throw new TigerStorageLoadException(e.toString());
         }
+    }
+
+    public static TaskList partialLoad() {
+        // TODO: implement partial loading
+        return new TaskList();
+    }
+
+    public static void wipeStorage() {
+        writeToFile(FILE_PATH, "");
     }
 }

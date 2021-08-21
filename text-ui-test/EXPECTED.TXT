@@ -1,5 +1,4 @@
-Hello! I'm Tiger :)
-What can I do for you?
+Hello, I am Tiger, your personal assistant. I have fetched 0 tasks from my memory.
 Excellent! I've added this task:
 [T] [ ] A
 Excellent! I've added this task:
@@ -52,4 +51,10 @@ Feeling lazy today? I've deleted:
 Index 999 is out of bounds of your task list size of 3.
 Please make sure your index is at least 1.
 Use the list command to see task indices.
+Feeling lazy today? I've deleted:
+[D] [ ] C (by 2020-07-21)
+Feeling lazy today? I've deleted:
+[E] [X] D (at Mon 2-4pm)
+Feeling lazy today? I've deleted:
+[T] [ ] E
 Bye. Hope to see you again soon!
