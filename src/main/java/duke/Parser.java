@@ -11,6 +11,7 @@ class Parser {
     private static final String CMD_DDL = "deadline";
     private static final String CMD_EVENT = "event";
     private static final String CMD_DEL = "delete";
+    private static final String CMD_FIND = "find";
 
     public static Command parse(String fullCommand) throws DukeException {
         String keywork = fullCommand.split(" ")[0];
@@ -30,6 +31,8 @@ class Parser {
             return new AddCommand(fullCommand, TaskEnum.EVENT);
         case CMD_BYE:
             return new ExitCommand();
+        case CMD_FIND:
+            return new FindCommand(fullCommand);
         default:
             throw new DukeException("Sorry, Yiyang-bot doesn't know what does that mean.");
         }

@@ -67,4 +67,16 @@ public class TaskList {
         System.out.println(String.format("\tNow you have %d tasks in the list.", this.tasks.size()));
     }
 
+    public void displayFind(String target) {
+        System.out.println("\tHere are the matching tasks in your list:");
+
+        int i = 1;
+        for (Task task :  this.tasks) {
+            if (task.isFound(target)) {
+                System.out.println("\t" + i + "." + task);
+                i++;
+            }
+        }
+    }
+
 }
