@@ -41,4 +41,14 @@ public class Ui {
         System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
     }
 
+    public static List<Task> findTasks(String regex, List<Task> tasks) {
+        List<Task> filteredTasks = new ArrayList<>();
+        for(Task task: tasks) {
+            if(task.getTask().contains(regex)) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
+    }
+
 }

@@ -13,7 +13,7 @@ public class TaskList {
      * This method provides a string that is the visual representation of the tasks seen by the user.
      * @return The visual representation of task list.
      */
-    public String taskListString() {
+    public static String taskListString(List<Task> tasks) {
         StringBuilder ans = new StringBuilder();
         ans.append("Here are the tasks in your list:\n");
         for(int i = 0; i < tasks.size(); i++) {
@@ -57,7 +57,7 @@ public class TaskList {
         if(input.equals("bye")) {
             System.out.println(byeString());
         } else if(input.equals("list")) {
-            System.out.println(taskListString());
+            System.out.println(taskListString(tasks));
         } else if(input.equals("hello")) {
             System.out.println("Hello! I'm Duke\n" +
                     "What can I do for you?");
@@ -89,6 +89,9 @@ public class TaskList {
             Ui.addTask(task, type, localDateTime, tasks);
         } else if (input.startsWith("delete ")) {
             Ui.deleteTask(Integer.parseInt(input.substring(7)), tasks);
+        } else if (input.startsWith("find ")) {
+            List<Task> filteredTasks = Ui.findTasks(input.substring(5), tasks);
+            System.out.println(taskListString(filteredTasks));
         } else {
             throw new CommandNotFoundException();
         }
