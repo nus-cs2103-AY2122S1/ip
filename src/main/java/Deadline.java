@@ -1,8 +1,15 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Deadline extends Task {
 
-    private String by;
+    private static final DateTimeFormatter DATE_SHORT_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter DATE_MED_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
 
-    public Deadline(String description, String by) {
+    private LocalDate by;
+
+    public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
@@ -27,14 +34,19 @@ public class Deadline extends Task {
     public static Deadline create(String formattedString) throws DukeException {
         checkFormat(formattedString);
 
-        int onIndex = formattedString.indexOf("/by");
-        return new Deadline(formattedString.substring(9, onIndex),
-                formattedString.substring(onIndex + 4));
+        int byIndex = formattedString.indexOf("/by");
+        LocalDate time = LocalDate.parse(
+                formattedString.substring(byIndex + 4),
+                DATE_SHORT_FORMATTER);
+
+        return new Deadline(formattedString.substring(9, byIndex), time);
     }
 
     @Override
     public String toString() {
         char statusIcon = this.isDone ? 'X' : ' ';
-        return String.format("[%c] Deadline: %s(by: %s)", statusIcon, this.description, this.by);
+        String timeString = DATE_MED_FORMATTER.format(this.by);
+
+        return String.format("[%c] Deadline: %s(by: %s)", statusIcon, this.description, timeString);
     }
 }

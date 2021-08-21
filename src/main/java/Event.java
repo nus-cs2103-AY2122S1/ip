@@ -1,8 +1,15 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Event extends Task {
 
-    private String on;
+    private static final DateTimeFormatter DATE_SHORT_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter DATE_MED_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
 
-    public Event(String description, String on) {
+    private LocalDate on;
+
+    public Event(String description, LocalDate on) {
         super(description);
         this.on = on;
     }
@@ -27,13 +34,18 @@ public class Event extends Task {
         checkFormat(formattedString);
 
         int onIndex = formattedString.indexOf("/on ");
-        return new Event(formattedString.substring(6, onIndex),
-                formattedString.substring(onIndex + 4));
+        LocalDate time = LocalDate.parse(
+                formattedString.substring(onIndex + 4),
+                DATE_SHORT_FORMATTER);
+
+        return new Event(formattedString.substring(6, onIndex), time);
     }
 
     @Override
     public String toString() {
         char statusIcon = this.isDone ? 'X' : ' ';
-        return String.format("[%c] Event: %s(on: %s)", statusIcon, this.description, this.on);
+        String timeString = DATE_MED_FORMATTER.format(this.on);
+
+        return String.format("[%c] Event: %s(on: %s)", statusIcon, this.description, timeString);
     }
 }
