@@ -19,4 +19,9 @@ public class Event extends Task{
     public String toString() {
         return super.toString() + String.format(" (at: %s)", eventDate); // No preposition
     }
+
+    @Override
+    public String getDataLine() {
+        return super.getDataLine() + " | " + eventDate;
+    }
 }

@@ -19,4 +19,9 @@ public class Deadline extends Task{
     public String toString() {
         return super.toString() + String.format(" (by: %s)", dateOfDeadline); // No preposition
     }
+
+    @Override
+    public String getDataLine() {
+        return super.getDataLine() + " | " + dateOfDeadline;
+    }
 }

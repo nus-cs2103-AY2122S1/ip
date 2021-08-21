@@ -3,7 +3,7 @@ import java.util.Objects;
 /**
  * Task is a general class for any task that is to be saved by Duke.
  */
-public class Task {
+public abstract class Task {
     private final String description, taskType;
     private boolean isDone;
 
@@ -59,5 +59,13 @@ public class Task {
     @Override
     public String toString() {
         return String.format("%s %s", this.getStatus(), this.getDescription());
+    }
+
+    /**
+     * Gets the string that is to be appended in the dukedata.txt file.
+     * @return The associated string
+     */
+    public String getDataLine() {
+        return String.format("%s | %d | %s", taskType, isDone ? 1 : 0, description);
     }
 }

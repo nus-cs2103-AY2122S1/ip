@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,10 +8,9 @@ import java.util.Scanner;
  */
 public class Duke {
     private static final ArrayList<Task> storage = new ArrayList<>();
-    private static int storageCount = 0;
 
     private static void addTask(String[] splitInput) {
-        String action;
+        String action; // eg. event, deadline, todo
         StringBuilder descriptionBuilder = new StringBuilder();
         String preposition = null; // eg. at, by, etc
         StringBuilder dateBuilder = new StringBuilder();
@@ -59,15 +59,62 @@ public class Duke {
         default:
             throw new DukeException("Only todo, event or deadline allowed.");
         }
-        storage.add(storageCount++, newTask);
+        storage.add(newTask);
         System.out.println("Got it. I have added this task:");
         System.out.println("    " + newTask);
+        try {
+            updateDukeTextFile();
+        } catch (IOException e) {
+            System.out.println("However an error occured while writing to dukedata.txt:");
+            e.printStackTrace();
+        }
         printNumberOfTasks();
     }
 
+    private static void deleteTask(int taskNumber) {
+        Task task = storage.remove(taskNumber - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("    " + task);
+        try {
+            updateDukeTextFile();
+        } catch (IOException e) {
+            System.out.println("However an error occured while writing to dukedata.txt:");
+            e.printStackTrace();
+        }
+        printNumberOfTasks();
+    }
+
+    private static boolean doneTask(int taskNumber) { // returns true if success
+        if (storage.get(taskNumber - 1).markAsDone()) {
+            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println("    " + storage.get(taskNumber - 1));
+            try {
+                updateDukeTextFile();
+            } catch (IOException e) {
+                System.out.println("However an error occured while writing to dukedata.txt:");
+                e.printStackTrace();
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private static void printNumberOfTasks() {
-        System.out.println("Now you have " + storageCount + " task"
-                + (storageCount <= 1 ? " in the list" : "s in the list"));
+        System.out.println("Now you have " + storage.size() + " task"
+                + (storage.size() <= 1 ? " in the list" : "s in the list"));
+    }
+
+    // A naive but good enough approach. A better way will be just to edit the lines,
+    // but only if the text file is correct, which is hard to enforce.
+    private static void updateDukeTextFile() throws IOException {
+        File textFile = new File("./dukedata.txt");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(textFile));
+        writer.write(""); // Overwrites everything
+        for (Task task : storage) {
+            writer.append(task.getDataLine()).append("\n");
+        }
+        writer.close();
     }
 
     /**
@@ -77,6 +124,7 @@ public class Duke {
      * @return true only if a command ("bye") to shut down the chat is given
      */
     private static boolean processInput(String input) {
+        int storageCount = storage.size();
         switch (input) {
         case "bye":
             System.out.println("Bye. Hope to see you again soon!");
@@ -109,18 +157,11 @@ public class Duke {
                         throw new DukeException("Please enter a number after " + splitInput[0]);
                     }
                     if (splitInput[0].equals("done")) {
-                        if (storage.get(taskNumber - 1).markAsDone()) {
-                            System.out.println("Nice! I've marked this task as done: ");
-                            System.out.println("    " + storage.get(taskNumber - 1));
-                        } else {
+                        if (!doneTask(taskNumber)) { // attempts to mark task as done
                             throw new DukeException("You have already marked this as done");
                         }
                     } else { // first word is delete
-                        Task task = storage.remove(taskNumber - 1);
-                        storageCount--;
-                        System.out.println("Noted. I've removed this task:");
-                        System.out.println("    " + task);
-                        printNumberOfTasks();
+                        deleteTask(taskNumber);
                     }
                 }
             } else if (storageCount < 100) {
