@@ -19,7 +19,7 @@ public class Storage {
             throw new DukeException("File not found");
         }
     }
-    public void saveState() {
+    public void saveState(LinkedList<Item> itemList) {
         StringBuffer buffer = new StringBuffer();
     }
 
