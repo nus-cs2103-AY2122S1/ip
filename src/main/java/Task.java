@@ -1,6 +1,6 @@
 public abstract class Task {
 
-    private String description;
+    private final String DESCRIPTION;
     private boolean isDone;
 
     /**
@@ -9,7 +9,7 @@ public abstract class Task {
      * @param description the description of what the task is.
      */
     public Task(String description) {
-        this.description = description;
+        this.DESCRIPTION = description;
         this.isDone = false;
     }
 
@@ -29,6 +29,15 @@ public abstract class Task {
     @Override
     public String toString() {
         String statusIcon = this.isDone ? "X" : " ";
-        return "[" + statusIcon + "] " + this.description;
+        return "[" + statusIcon + "] " + this.DESCRIPTION;
     }
+
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.DESCRIPTION;
+    }
+
 }

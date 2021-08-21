@@ -1,10 +1,13 @@
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class Duke {
 
-    private static Scanner sc;
     private static ArrayList<Task> list;
+    private static FileManager fileManager;
+    private static Scanner sc;
+
     private enum TaskAction {
         DELETE("delete", 7, "deleted"),
         DONE("done", 5, "marked as done");
@@ -26,8 +29,12 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        sc = new Scanner(System.in);
         list = new ArrayList<>();
+        fileManager = new FileManager();
+        sc = new Scanner(System.in);
+
+        // Obtain data from save file if it exists
+        fileManager.copyFromFileToList(list);
 
         // Show the logo
         showLogo();
@@ -41,11 +48,11 @@ public class Duke {
      */
     private static void showLogo() {
         String logo = " _______       ___      _______   __     __   _\n"
-                    + "|   ____|     / ^ \\     |   _  \\  \\ \\   / /  | |\n"
-                    + "|  | ___     / /_\\ \\    |  |_|  |  \\ \\ / /   | |\n"
-                    + "|  ||_  |   /  ___  \\   |  __  <    \\   /    |_|\n"
-                    + "|  |__| |  /  /   \\  \\  |  | \\  \\    | |      _ \n"
-                    + "|_______| /__/\t   \\__\\ |--|  \\--\\   |_|     |_|\n";
+                + "|   ____|     / ^ \\     |   _  \\  \\ \\   / /  | |\n"
+                + "|  | ___     / /_\\ \\    |  |_|  |  \\ \\ / /   | |\n"
+                + "|  ||_  |   /  ___  \\   |  __  <    \\   /    |_|\n"
+                + "|  |__| |  /  /   \\  \\  |  | \\  \\    | |      _ \n"
+                + "|_______| /__/\t   \\__\\ |--|  \\--\\   |_|     |_|\n";
 
         printDoubleDivider();
         System.out.println("Hello! My name is\n" + logo);
@@ -96,11 +103,10 @@ public class Duke {
             }
 
         } else {
-
             vetoTask(input);
-
         }
 
+        fileManager.writeToFile(list);
         printDoubleDivider();
         getInput();
     }
@@ -125,7 +131,6 @@ public class Duke {
      * @return true if the task is successfully altered, false otherwise.
      */
     private static boolean alterTask(String input, TaskAction action) {
-
         try {
             Task taskToBeAltered;
 
@@ -156,7 +161,6 @@ public class Duke {
             return false;
 
         }
-
     }
 
     /**
@@ -221,7 +225,7 @@ public class Duke {
      * @param input the string containing the to-do task description.
      * @return the to-do task constructed from the given description.
      */
-    private static Task setTodo(String input) {
+    public static Task setTodo(String input) {
         Task todo = new Todo(input);
         return todo;
     }
