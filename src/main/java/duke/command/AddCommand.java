@@ -13,7 +13,7 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-/** Represents an Add command */
+/** Represents an "add" command */
 public class AddCommand extends Command {
     /** The Task object. */
     private Task task;
@@ -59,6 +59,13 @@ public class AddCommand extends Command {
         return command;
     }
 
+    /**
+     * Adds the Task into the TaskList.
+     *
+     * @param tasks The list of tasks in the program.
+     * @param ui The UI object.
+     * @param storage The storage utility.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(task);
