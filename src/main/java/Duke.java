@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -81,7 +84,16 @@ public class Duke {
 
         public Deadline(String description, String by) {
             super(description);
-            this.by = by;
+            System.out.println("Provided date " + by);
+            String date;
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                date = LocalDate.parse(by, formatter).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            } catch (DateTimeParseException e) {
+                date = by;
+            }
+
+            this.by = date;
         }
 
         @Override
@@ -96,12 +108,21 @@ public class Duke {
 
         public Event(String description, String at) {
             super(description);
-            this.at = at;
+            System.out.println("Provided date " + at);
+            String date;
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                date = LocalDate.parse(at, formatter).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            } catch (DateTimeParseException e) {
+                date = at;
+            }
+
+            this.at = date;
         }
 
         @Override
         public String toString() {
-            return "[E]" + super.toString() + "(at:" + at + ")";
+            return "[E]" + super.toString() + "(at: " + at + ")";
         }
     }
 
@@ -120,18 +141,12 @@ public class Duke {
     }
 
     private static void printLine() {
-//        printPadding();
         for (int i = 0; i < 20; i++) {
             System.out.print("-");
         }
         System.out.println();
     }
 
-    private static void printPadding() {
-        for (int i = 0; i < 5; i++) {
-            System.out.print(" ");
-        }
-    }
 
     private static void printStatement(String statement) {
         System.out.println();
@@ -155,7 +170,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         ArrayList<Task> arrayList = new ArrayList<>(100);
-        boolean hasEnded = false;
+//        boolean hasEnded = false;
 
         String[] commandAndParameter = Command.inputParser(input);
         Command currentCommand = Command.commandParser(commandAndParameter[0]);
@@ -168,10 +183,10 @@ public class Duke {
                 switch (currentCommand) {
                 case UNKNOWN:
                     throw new DukeException("Unknown input");
-                case BYE:
-                    hasEnded = true;
-                    printStatement("Bye. Hope to see you again soon!");
-                    break;
+//                case BYE:
+//                    hasEnded = true;
+//                    printStatement("Bye. Hope to see you again soon!");
+//                    break;
                 case LIST:
                     int counter = 1;
                     sb.append("Here are the tasks in your list:\n");
@@ -201,7 +216,7 @@ public class Duke {
                         throw new DukeException("Missing /at command");
                     }
                     String[] time = currentParameter.split("/at");
-                    Event newEvent = new Event(time[0], time[1]);
+                    Event newEvent = new Event(time[0].strip(), time[1].strip());
                     arrayList.add(newEvent);
                     sb.append(newEvent + "\n");
                     sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in the list.");
@@ -260,98 +275,8 @@ public class Duke {
             commandAndParameter = Command.inputParser(input);
             currentCommand = Command.commandParser(commandAndParameter[0]);
             currentParameter = commandAndParameter.length == 2 ? commandAndParameter[1] : "";
-        } while (!hasEnded);
-
-
-//        while (!input.equals("bye")) {
-//            try {
-//                String firstWord = input.split(" ")[0];
-//                if (input.equals("list")) {
-//                    int counter = 1;
-//                    StringBuilder sb = new StringBuilder();
-//                    sb.append("Here are the tasks in your list:\n");
-//                    for (Task item:arrayList) {
-//                        sb.append(String.valueOf(counter) + ". " + item.toString() + "\n");
-//                        counter++;
-//                    }
-//                    printStatement(sb.toString());
-//                } else if (firstWord.equals("event") || firstWord.equals("deadline") || firstWord.equals("todo")) {
-//                    StringBuilder sb = new StringBuilder();
-//                    sb.append("Got it. I've added this task: \n");
-//
-//                    if (firstWord.equals("todo")) {
-//                        String message = input.substring(4);
-//                        if (message.equals("")) {
-//                            throw new DukeException("The description of a todo cannot be empty.");
-//                        }
-//                        message = message.strip();
-//                        Todo newTodo = new Todo(message);
-//                        arrayList.add(newTodo);
-//                        sb.append(newTodo + "\n");
-//                    } else if (firstWord.equals("deadline")) {
-//                        String message = input.substring(8);
-//                        if (message.equals("")) {
-//                            throw new DukeException("The description of a deadline cannot be empty.");
-//                        }
-//                        message = message.strip();
-//                        String[] time = message.split("/by");
-//                        Deadline newDeadline = new Deadline(time[0], time[1]);
-//                        arrayList.add(newDeadline);
-//                        sb.append(newDeadline + "\n");
-//                    } else {//if (firstWord.equals("event")) {
-//                        String message = input.substring(5);
-//                        if (message.equals("")) {
-//                            throw new DukeException("The description of a event cannot be empty.");
-//                        }
-//                        message = message.strip();
-//                        String[] time =message.split("/at");
-//                        Event newEvent = new Event(time[0], time[1]);
-//                        arrayList.add(newEvent);
-//                        sb.append(newEvent + "\n");
-//                    }
-//                    sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in da list.");
-//                    printStatement(sb.toString());
-//                }else if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
-//                    String message = input.substring(4);
-//                    if (message.equals("")) {
-//                        throw new DukeException("Please indicate item to be completed.");
-//                    }
-//                    message = message.strip();
-//                    int number = Integer.parseInt(message) - 1;
-//                    Task task = arrayList.get(number);
-//                    task.markAsDone();
-//                    printStatement("Nice! I've marked this task as done:\n" + task);
-//                } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
-//                    String message = input.substring(6);
-//                    if (message.equals("")) {
-//                        throw new DukeException("Please indicate item to be deleted.");
-//                    }
-//                    message = message.strip();
-//                    int index = Integer.parseInt(message) - 1;
-//                    if (index > arrayList.size() - 1) {
-//                        throw new DukeException("Item does not exist.");
-//                    }
-//                    StringBuilder sb = new StringBuilder();
-//                    sb.append("Noted. I've removed this task:\n");
-//                    sb.append(arrayList.get(index).toString() + "\n");
-//                    arrayList.remove(index);
-//                    System.out.println(arrayList);
-//                    sb.append("Now you have " + arrayList.size() + " tasks in da list.");
-//                    printStatement(sb.toString());
-//
-//
-//                } else {
-//                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
-//                }
-//            } catch (DukeException e) {
-//                printStatement(e.getMessage());
-//            } finally {
-//                input = sc.nextLine();
-//            }
-//
-//        }
-//        printStatement("Bye. Hope to see you again soon!");
-
-
+        } while (!currentCommand.equals(Command.BYE));
+        printStatement("Bye. Hope to see you again soon!");
+        System.exit(0);
     }
 }
