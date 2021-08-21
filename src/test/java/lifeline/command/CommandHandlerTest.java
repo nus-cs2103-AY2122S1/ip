@@ -214,6 +214,48 @@ public class CommandHandlerTest {
                 storage, taskList, ui));
     }
 
+    @Test
+    public void handleFind_missingKeyword_exceptionThrown() {
+        try {
+            Storage storage = new Storage("test.json");
+            ArrayList<Task> tasks = new ArrayList<>();
+            Task todo = new ToDo("read book");
+            tasks.add(todo);
+            TaskList taskList = new TaskList(tasks);
+            Ui ui = new Ui();
+            Command.FIND.getExecute().apply("find", storage, taskList, ui);
+        } catch (LifelineException e) {
+            assertEquals("Keyword was not provided! Please use find <keyword>", e.getMessage());
+        }
+    }
+
+    @Test
+    public void handleFind_noTaskFound_exceptionThrown() {
+        try {
+            Storage storage = new Storage("test.json");
+            ArrayList<Task> tasks = new ArrayList<>();
+            Task todo = new ToDo("read book");
+            tasks.add(todo);
+            TaskList taskList = new TaskList(tasks);
+            Ui ui = new Ui();
+            Command.FIND.getExecute().apply("find abc", storage, taskList, ui);
+        } catch (LifelineException e) {
+            assertEquals("No tasks found with the given keyword abc", e.getMessage());
+        }
+    }
+
+    @Test
+    public void handleFind_completeCommandTaskFound_success() throws LifelineException{
+            Storage storage = new Storage("test.json");
+            ArrayList<Task> tasks = new ArrayList<>();
+            Task todo = new ToDo("read book");
+            tasks.add(todo);
+            TaskList taskList = new TaskList(tasks);
+            Ui ui = new Ui();
+            String output = Command.FIND.getExecute().apply("find book", storage, taskList, ui);
+            assertEquals("Task with keyword book:\n" + "[T][ ] read book\n", output);
+    }
+
     @AfterEach
     public void deleteTestFiles() {
         File testFile = new File("test.json");

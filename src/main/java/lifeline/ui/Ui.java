@@ -67,6 +67,15 @@ public class Ui {
         return stringBuilder.toString();
     }
 
+    public String showFoundTasks(TaskList foundTasks, String keyword) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append((foundTasks.size() == 1 ? "Task" : "Tasks") + " with keyword " + keyword + ":\n");
+        for (int i = 0; i < foundTasks.size(); i++) {
+            stringBuilder.append(foundTasks.get(i) + "\n");
+        }
+        return stringBuilder.toString();
+    }
+
     /**
      * Returns information on deleted task
      *

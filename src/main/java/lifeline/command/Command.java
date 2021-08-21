@@ -12,6 +12,7 @@ public enum Command {
     DELETE(CommandHandler::handleDelete),
     DONE(CommandHandler::handleDone),
     EVENT(CommandHandler::handleEvent),
+    FIND(CommandHandler:: handleFind),
     LIST(CommandHandler::handleList),
     TODO(CommandHandler::handleToDo);
 
