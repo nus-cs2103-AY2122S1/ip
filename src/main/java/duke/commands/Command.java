@@ -1,8 +1,13 @@
 package duke.commands;
 
-abstract class Command {
+import java.util.LinkedList;
 
-    abstract void execute(int i);
+abstract class Command {
+    String fullCommand;
+
+    abstract void execute(LinkedList<Item> itemList);
+
+    abstract void parseArg(String args);
 
     public boolean isExit() {
         return false;
