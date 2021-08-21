@@ -5,6 +5,8 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+import java.io.FileNotFoundException;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -17,8 +19,12 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showDukeException(e);
+            tasks = new TaskList();
+        } catch (FileNotFoundException e) {
+            tasks = new TaskList();
         } catch (Exception e) {
             ui.showException(e);
+            tasks = new TaskList();
         }
     }
 
