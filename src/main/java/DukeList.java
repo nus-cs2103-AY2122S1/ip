@@ -35,6 +35,33 @@ public class DukeList {
         System.out.println("added: " + text);
     }
 
+    public void loadData(String type, String state, String body) throws DukeException {
+        Task task;
+        String[] sections;
+
+        switch (type) {
+        case "todo":
+            task = new ToDos(body);
+            break;
+        case "deadline":
+            sections = body.split(" /by ", 2);
+            task = new Deadlines(sections[0], sections[1]);
+            break;
+        case "event":
+            sections = body.split(" /at ", 2);
+            task = new Events(sections[0], sections[1]);
+            break;
+        default:
+            throw new DukeException("☹ OOPS!!! Unknown task type in saved data");
+        }
+
+        if (state.equals("1")) {
+            task.done();
+        }
+
+        this.list.add(task);
+    }
+
     /**
      * Adds a ToDos task to the list.
      *
@@ -124,6 +151,17 @@ public class DukeList {
         String response = "Noted. I've removed this task:\n";
         String taskCount = "\nNow you have " + list.size() + " tasks in the list.";
         System.out.println(response + task.toString() + taskCount);
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+
+        for (int i = 0; i < list.size(); i++) {
+            str += list.get(i).saveData() + "\n";
+        }
+
+        return str;
     }
 
 

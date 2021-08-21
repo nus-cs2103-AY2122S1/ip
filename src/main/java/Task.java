@@ -34,6 +34,13 @@ public class Task {
         this.isDone = true;
     }
 
+
+    public String saveData() {
+        String doneState = this.isDone ? "1" : "0";
+
+        return doneState + " " + this.description;
+    }
+
     /**
      * Returns the string form of the task object.
      *

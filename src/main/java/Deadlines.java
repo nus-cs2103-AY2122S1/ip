@@ -16,6 +16,11 @@ public class Deadlines extends Task {
         this.limit = limit;
     }
 
+    @Override
+    public String saveData() {
+        return "deadline " + super.saveData() + " /by " + this.limit;
+    }
+
     /**
      * Returns the string form of the Deadlines object.
      *

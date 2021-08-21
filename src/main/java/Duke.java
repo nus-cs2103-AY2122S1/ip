@@ -1,17 +1,30 @@
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Duke {
+    private static String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static String greeting = "\nHello I'm Duke!\n"
+            + "What can I do for you?\n";
+    private static String exit = "Bye. Hope to see you again soon!";
+
+    private static String PATH;
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String greeting = "\nHello I'm Duke!\n"
-                + "What can I do for you?\n";
-        String exit = "Bye. Hope to see you again soon!";
+        PATH = System.getProperty("user.dir");
 
         DukeList list = new DukeList();
+
+        Storage storage = new Storage(PATH, list);
+
+        try {
+            storage.load();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
 
         Scanner scan = new Scanner(System.in);
 
@@ -46,6 +59,8 @@ public class Duke {
 
             input = scan.nextLine();
         }
+
+        storage.save();
 
         System.out.println(exit);
     }
