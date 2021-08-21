@@ -21,44 +21,44 @@ public class Abyss {
                     list();
                 } else if (cmd.matches("^done.*")) {
                     if (!cmd.matches("^done[ ]+\\d*$")) {
-                        throw new InvalidInputException("Command 'done' should be followed by " +
+                        throw new InvalidCommandException("Command 'done' should be followed by " +
                                 "the index of the task piece.");
                     }
                     if (tasks.isEmpty()) {
-                        throw new InvalidInputException("The Abyss is empty");
+                        throw new InvalidCommandException("The Abyss is empty");
                     }
 
                     String index = cmd.split("done[ ]+", 2)[1];
                     int i = Integer.parseInt(index);
                     if (i < 1 || i > getNumberOfTasks()) {
-                        throw new InvalidInputException("Index should be within 1 and " + getNumberOfTasks());
+                        throw new InvalidCommandException("Index should be within 1 and " + getNumberOfTasks());
                     }
                     markAsDone(i);
                 } else if (cmd.matches("^delete.*")) {
                     if (!cmd.matches("^delete[ ]+\\d*$")) {
-                        throw new InvalidInputException("Command 'delete' should be followed by " +
+                        throw new InvalidCommandException("Command 'delete' should be followed by " +
                                 "the index of the task piece.");
                     }
                     if (tasks.isEmpty()) {
-                        throw new InvalidInputException("The Abyss is empty");
+                        throw new InvalidCommandException("The Abyss is empty");
                     }
 
                     String index = cmd.split("delete[ ]+", 2)[1];
                     int i = Integer.parseInt(index);
                     if (i < 1 || i > getNumberOfTasks()) {
-                        throw new InvalidInputException("Index should be within 1 and " + getNumberOfTasks());
+                        throw new InvalidCommandException("Index should be within 1 and " + getNumberOfTasks());
                     }
                     deleteTask(i);
                 } else if (cmd.matches("^todo.*")) {
                     if (!cmd.matches(TODO_REGEX)) {
-                        throw new InvalidInputException("Description of a 'todo' task piece cannot be empty.");
+                        throw new InvalidTodoException("Description of a 'todo' task piece cannot be empty.");
                     }
 
                     String description = cmd.split("todo[ ]+", 2)[1];
                     addToDo(description);
                 } else if (cmd.matches("^deadline.*")) {
                     if (!cmd.matches(DEADLINE_REGEX)) {
-                        throw new InvalidInputException("Description and date of a 'deadline' task piece " +
+                        throw new InvalidDeadlineException("Description and date of a 'deadline' task piece " +
                                 "cannot be empty.");
                     }
 
@@ -67,7 +67,7 @@ public class Abyss {
                     addDeadline(parts[0], parts[1]);
                 } else if (cmd.matches("^event.*")) {
                     if (!cmd.matches(EVENT_REGEX)) {
-                        throw new InvalidInputException("Description and date of an 'event' task piece " +
+                        throw new InvalidEventException("Description and date of an 'event' task piece " +
                                 "cannot be empty.");
                     }
 
@@ -75,13 +75,14 @@ public class Abyss {
                     String[] parts = content.split("\\/at[ ]+", 2);
                     addEvent(parts[0], parts[1]);
                 } else {
-                    throw new InvalidInputException("The Abyss does not understand your command.");
+                    throw new InvalidCommandException("The Abyss does not understand your command.");
                 }
-            } catch (InvalidInputException e) {
+            } catch (AbyssException e) {
                 reply(e.getMessage());
             }
             cmd = sc.nextLine();
         }
+        sc.close();
         reply("Exiting the Abyss. We look forward to your return.");
     }
 
