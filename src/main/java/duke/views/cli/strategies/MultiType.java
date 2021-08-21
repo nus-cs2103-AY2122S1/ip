@@ -47,22 +47,22 @@ public class MultiType extends RespondWith {
         String typeString = fields[0];
         Task task = null;
         switch (typeString) {
-            case Todo.TYPE_STRING: {
-                task = Todo.generateFromString(fields);
-                break;
-            }
-            case Event.TYPE_STRING: {
-                task = Event.generateFromString(fields);
-                break;
-            }
+        case Todo.TYPE_STRING: {
+            task = Todo.generateFromString(fields);
+            break;
+        }
+        case Event.TYPE_STRING: {
+            task = Event.generateFromString(fields);
+            break;
+        }
 
-            case Deadline.TYPE_STRING: {
-                task = Deadline.generateFromString(fields);
-                break;
-            }
-            default: {
-                throw new DukeException(ExceptionCode.UNPROCESSABLE_ENTITY);
-            }
+        case Deadline.TYPE_STRING: {
+            task = Deadline.generateFromString(fields);
+            break;
+        }
+        default: {
+            throw new DukeException(ExceptionCode.UNPROCESSABLE_ENTITY);
+        }
         }
 
         return task;

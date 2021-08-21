@@ -1,7 +1,5 @@
 package duke.views.cli.strategies;
 
-// Level-1
-
 /**
  * A responder that echoes back whatever is fed to it.
  */

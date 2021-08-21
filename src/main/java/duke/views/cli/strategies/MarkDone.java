@@ -5,7 +5,6 @@ import java.util.List;
 
 import duke.domain.Task;
 
-// Level-3
 
 /**
  * A responder that is able to mark tasks as done.

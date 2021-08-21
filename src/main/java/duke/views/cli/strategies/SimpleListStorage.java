@@ -3,8 +3,6 @@ package duke.views.cli.strategies;
 import java.util.ArrayList;
 import java.util.List;
 
-// Level-2
-
 /**
  * A responder that can store tasks.
  */
