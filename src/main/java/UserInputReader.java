@@ -65,7 +65,13 @@ public class UserInputReader {
             //Creates a deadline task
             String details = UserInputReader.removeFirstWordFromString(input, Task.Type.DEADLINE);
             if (details != null && this.verifyDeadlineInput(details.trim())) {
-                Task task = Deadline.newDeadlineTask(details);
+                Task task;
+                try {
+                    task = Deadline.newDeadlineTask(details);
+                } catch (DukeInvalidDateException e) {
+                    System.out.println(e.getMessage() + "\n");
+                    return true;
+                }
                 this.taskList.addTask(task);
             }
             return true;
@@ -73,7 +79,13 @@ public class UserInputReader {
             // Creates an event task
             String details = UserInputReader.removeFirstWordFromString(input, Task.Type.EVENT);
             if (details != null && this.verifyEventInput(details.trim())) {
-                Task task = Event.newEventTask(details);
+                Task task;
+                try {
+                    task = Event.newEventTask(details);
+                } catch (DukeInvalidDateException e) {
+                    System.out.println(e.getMessage() + "\n");
+                    return true;
+                }
                 this.taskList.addTask(task);
             }
             return true;
@@ -95,12 +107,12 @@ public class UserInputReader {
      * @param input The deadline details.
      * @return True if the deadline details inputted by the user is correct. Otherwise, false.
      */
-    public boolean verifyDeadlineInput(String input) {
-        if (!input.contains("-by")) {
+    private boolean verifyDeadlineInput(String input) {
+        if (!input.contains("-by") && !input.contains("/by")) {
             UserInputReader.printErrorMessage(Task.Type.DEADLINE);
             return false;
         }
-        String[] inputParts = input.split(" -by ");
+        String[] inputParts = input.split(" -by | /by ");
         if (inputParts.length != 2) {
             UserInputReader.printErrorMessage(Task.Type.DEADLINE);
             return false;
@@ -116,12 +128,12 @@ public class UserInputReader {
      * @param input The event details.
      * @return True if the event details inputted by the user is correct. Otherwise, false.
      */
-    public boolean verifyEventInput(String input) {
-        if (!input.contains("-at")) {
+    private boolean verifyEventInput(String input) {
+        if (!input.contains("-at") && !input.contains("/at")) {
             UserInputReader.printErrorMessage(Task.Type.EVENT);
             return false;
         }
-        String[] inputParts = input.split(" -at ");
+        String[] inputParts = input.split(" -at | /at ");
         if (inputParts.length != 2 || inputParts[0].trim().length() == 0 || inputParts[1].trim().length() == 0) {
             UserInputReader.printErrorMessage(Task.Type.EVENT);
             return false;

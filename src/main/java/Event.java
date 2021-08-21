@@ -5,9 +5,9 @@
 public class Event extends Task {
 
     /** The time of the event */
-    private final String eventTime;
+    private final DukeDate eventTime;
 
-    private Event(String taskName, String eventTime) {
+    private Event(String taskName, DukeDate eventTime) {
         super(taskName, Type.EVENT);
         this.eventTime = eventTime;
     }
@@ -18,12 +18,18 @@ public class Event extends Task {
      * @param input An input in the form of a event name followed by the keyword "-at"
      *              then followed by the timing of the event.
      * @return The newly created event task.
+     * @throws DukeInvalidDateException Throws an exception when the user tries to create an Event
+     * task with a specified date but formats the date wrongly.
      */
-    public static Event newEventTask(String input) {
-        String[] inputArr = input.split("-at");
+    public static Event newEventTask(String input) throws DukeInvalidDateException {
+        String[] inputArr = input.split("-at|/at");
         String name = inputArr[0].trim();
         String time = inputArr[1].trim();
-        return new Event(name, time);
+        if (input.contains("-at")) {
+            return new Event(name, DukeDate.of(time, false));
+        } else {
+            return new Event(name, DukeDate.of(time, true));
+        }
     }
 
     @Override

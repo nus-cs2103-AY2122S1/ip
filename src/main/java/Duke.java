@@ -10,9 +10,12 @@ import java.util.Scanner;
 public class Duke {
 
     /** Error messages */
-    public static final String DEADLINE_FORMAT = "deadline {Deadline name} -by {Date to be completed by}";
-    public static final String EVENT_FORMAT = "event {Event name} -at {Date of event}";
+    public static final String DEADLINE_FORMAT = "deadline {Deadline name} -by {Date to be completed by}.\n"
+            + "Use \"/by\" to specify that the input date is a formatted date.";
+    public static final String EVENT_FORMAT = "event {Event name} -at {Date of event}.\n"
+            + "Use \"/at\" to specify that the input date is a formatted date.";
     public static final String TODO_FORMAT = "todo {todo name}";
+    public static final String DATE_FORMAT = "dd/MM/yyyy or dd/MM/yyyy HHmm";
 
     /**
      * When run, opens a chat bot that greets the user and echos any user's input. If the input
