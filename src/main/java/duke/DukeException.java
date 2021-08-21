@@ -1,3 +1,5 @@
+package duke;
+
 /**
  *  This class represents the Exceptions thrown by Duke.
  *  Consult comments for error codes.

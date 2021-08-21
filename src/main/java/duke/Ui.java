@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+package duke;
 
 /**
  *  This class handles interactions with the user
@@ -120,7 +119,7 @@ public class Ui {
     /**
      * Prints a Task Object neatly on the command line.
      *
-     * @param task Takes in a task objec, invoking its toString method.
+     * @param task Takes in a task object, invoking its toString method.
      */
     private void printTask(Task task) {
         System.out.println("Got it. I've added this task:");

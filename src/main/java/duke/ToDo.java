@@ -1,3 +1,5 @@
+package duke;
+
 /**
  *  This class represents a ToDo.
  *  A ToDo: tasks without any date/time attached to it.

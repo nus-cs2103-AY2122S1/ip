@@ -2,11 +2,11 @@
 
 ## Features 
 
-### Feature-ABC
+### duke.Feature-ABC
 
 Description of the feature.
 
-### Feature-XYZ
+### duke.Feature-XYZ
 
 Description of the feature.
 

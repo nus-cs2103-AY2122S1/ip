@@ -1,10 +1,12 @@
+package duke;
+
 /**
  *  This class greets the user when the bot is first used.
  *
  * @author Ryan Tian Jun.
  */
 public class Intro {
-    private String intro = "Hello! I'm Duke\n" +
+    private String intro = "Hello! I'm Duke!\n" +
             "What can I do for you? Type something to get started!";
     private final Logo logo = new Logo();
 

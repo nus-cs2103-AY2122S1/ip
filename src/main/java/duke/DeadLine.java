@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,7 +15,7 @@ public class DeadLine extends Task {
     private String by;
     private LocalDate date;
 
-    public DeadLine(String description, TYPE type, String by) {
+    public DeadLine(String description, Task.TYPE type, String by) {
         super(description, type);
         try {
             LocalDate d1 = LocalDate.parse(by);
@@ -24,7 +26,7 @@ public class DeadLine extends Task {
         }
     }
 
-    public DeadLine(TYPE type, boolean isDone, String description, String by) {
+    public DeadLine(Task.TYPE type, boolean isDone, String description, String by) {
         super(type, isDone, description);
         this.by = by;
     }

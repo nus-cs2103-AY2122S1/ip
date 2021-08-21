@@ -1,3 +1,5 @@
+package duke;
+
 /**
  *  This class handles the farewell when the user exits the program.
  *
