@@ -94,6 +94,10 @@ public class Duke implements Runnable {
                     t = tasks.delete(Integer.parseInt(input.substring(7)) - 1);
                     ui.delete(t, tasks.size());
                     break;
+                case "find":
+                    String keyword = input.substring(5);
+                    ui.reply(tasks.find(keyword));
+                    break;
                 default:
                     try {
                         throw new UnknownCommandError("");
