@@ -26,11 +26,12 @@ public class Task {
         return isDone;
     }
 
+    @Override
     public String toString() {
         if (isDone) {
-            return "[\u2713] " + this.name;
+            return "[X] " + this.name;
         } else {
-            return "[\u2717] " + this.name;
+            return "[ ] " + this.name;
         }
     }
 }

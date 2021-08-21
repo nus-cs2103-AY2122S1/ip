@@ -29,7 +29,7 @@ public class EventTest {
     public void testEventToString() {
         Event event = new Event("wedding", LocalDate.of(2021, 3, 4), LocalTime.of(10, 30),
                 LocalTime.of(12, 30));
-        assertEquals("[E][✗] wedding (at: Mar 4 2021 10:30 AM - 12:30 PM)", event.toString());
+        assertEquals("[E][ ] wedding (at: Mar 4 2021 10:30 AM - 12:30 PM)", event.toString());
     }
 
     @Test

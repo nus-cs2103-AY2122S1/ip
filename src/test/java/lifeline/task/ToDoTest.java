@@ -22,7 +22,7 @@ public class ToDoTest {
     @Test
     public void testToDoToString() {
         ToDo todo = new ToDo("read book");
-        assertEquals("[T][✗] read book", todo.toString());
+        assertEquals("[T][ ] read book", todo.toString());
     }
 
     @Test

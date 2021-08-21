@@ -58,7 +58,7 @@ public class ParserTest {
             Command c = Parser.parse("blah");
             fail();
         } catch (LifelineException e) {
-            assertEquals("I am sorry! I don't know what that means! ☹", e.getMessage());
+            assertEquals("I am sorry! I don't know what that means!", e.getMessage());
         }
     }
 }

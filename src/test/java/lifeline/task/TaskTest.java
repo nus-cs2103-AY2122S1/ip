@@ -23,7 +23,7 @@ public class TaskTest {
     @Test
     public void testTaskToString() {
         Task task = new Task("read book");
-        assertEquals("[✗] read book", task.toString());
+        assertEquals("[ ] read book", task.toString());
     }
 
     @Test

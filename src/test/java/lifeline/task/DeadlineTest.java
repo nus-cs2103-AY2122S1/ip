@@ -25,7 +25,7 @@ public class DeadlineTest {
     @Test
     public void testDeadlineToString() {
         Deadline deadline = new Deadline("project", LocalDateTime.of(2021, 3, 4, 18, 30));
-        assertEquals("[D][✗] project (by: Mar 4 2021 6:30 PM)", deadline.toString());
+        assertEquals("[D][ ] project (by: Mar 4 2021 6:30 PM)", deadline.toString());
     }
 
     @Test
