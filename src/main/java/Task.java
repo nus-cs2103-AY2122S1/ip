@@ -10,13 +10,17 @@ public abstract class Task {
     //Boolean of whether a task is done
     protected boolean isDone;
 
+    public abstract String taskType();
+
+    public abstract String strForSaving();
+
     /**
      * The constructor for the Task class
      * @param description The description of the task
      */
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = firstLetter(description);
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
@@ -31,10 +35,10 @@ public abstract class Task {
      * Method to set a task as done
      */
     public void taskDone() {
-        System.out.println(Petal.LINE + "\nYou have completed the task: " + "'"
+        System.out.println(Responses.LINE + "\nYou have completed the task: " + "'"
                                       + this.description + "'!"
                                       + "\nI am so happy for you!\n"
-                                      + Petal.LINE);
+                                      + Responses.LINE);
         this.isDone = true;
     }
 

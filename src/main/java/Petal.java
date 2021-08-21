@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.List;
 import java.io.File;
@@ -15,11 +16,6 @@ import java.io.File;
  * activities and track them.
  */
 public class Petal {
-
-    //The line used to display on the output
-    public static final String LINE = "ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ"
-                                      + "ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ"
-                                      + "ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ";
 
     //Boolean representing if the user has said bye
     private boolean bye;
@@ -43,9 +39,6 @@ public class Petal {
     public void run() {
         createDirectory(); //IOException already handled internally
         Scanner scanner = new Scanner(System.in);
-        String logo = "Welcome to Petal (•◡•)/";
-        String logo2 = "\nI am the best chat bot you'll meet! Don't be shy, say something! :P";
-        printMessage(logo + logo2);
         while (!bye) {
             String message = scanner.nextLine();
             handleInput(message.trim().toLowerCase());
@@ -90,23 +83,8 @@ public class Petal {
             }
         } catch (PetalException e) {
             printMessage(e.getMessage());
-            requiredFormat();
+            printMessage(Responses.REQUIRED_FORMAT);
         }
-    }
-
-    /**
-     * Method which helps guide the user to display the required format if the user has
-     * used the wrong format
-     */
-    public void requiredFormat() {
-        String todo = "Use 'todo <insert activity>' to create a to-do!";
-        String deadline = "\nUse 'deadline <insert activity> /by <insert deadline>' "
-                          + "to create an activity with a deadline!";
-        String event = "\nUse 'event <insert activity> /at <insert start/end time>' "
-                       + "to create an activity with a start/end time!";
-        String delete = "\nUse 'delete <insert task number> to delete a task!";
-        String done = "\nUse 'done <insert task number>' to mark task as done!";
-        printMessage(todo + deadline + event + delete + done);
     }
 
     /**
@@ -129,13 +107,13 @@ public class Petal {
         }
         switch (type) {
             case "todo":
-                task = new ToDo(message);
+                task = new ToDo(message, false);
                 break;
             case "deadline":
-                task = new Deadline(deadlineEvent[0], deadlineEvent[1]);
+                task = new Deadline(deadlineEvent[0], deadlineEvent[1], false);
                 break;
             default: //Represents the Event task
-                task = new Event(deadlineEvent[0], deadlineEvent[1]);
+                task = new Event(deadlineEvent[0], deadlineEvent[1], false);
                 break;
         }
         addTask(task);
@@ -146,8 +124,8 @@ public class Petal {
      * @param addTasks The arraylist of previously saved tasks
      */
     public void addTask(ArrayList<Task> addTasks) {
-        tasks.addAll(addTasks);
-        printMessage("Welcome back! It definitely is good to see you again :D");
+        tasks.addAll(addTasks); //Add done ability
+        printMessage(Responses.WELCOME_BACK);
     }
 
     /**
@@ -155,15 +133,10 @@ public class Petal {
      * @param task The task to be added
      */
     public void addTask(Task task) {
-        try {
-            tasks.add(task);
-            String plural = (tasks.size() + 1) > 0 ? " tasks!" : " task!";
-            printMessage("Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size()
-                    + plural);
-            saveTasks();
-        } catch (IOException e) {
-            printMessage("Sorry, the tasks couldn't be saved :/");
-        }
+        tasks.add(task);
+        String plural = (tasks.size() + 1) > 0 ? " tasks!" : " task!";
+        printMessage("Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size()
+                + plural);
     }
 
     /**
@@ -180,11 +153,8 @@ public class Petal {
             printMessage("Okay. I've deleted this task:\n"
                          + toBeDeleted
                          + "\nYou now have " + tasks.size() + " task(s)!");
-            saveTasks();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException("Invalid task number given! Please enter another value!", e);
-        } catch (IOException e) {
-            printMessage("Sorry, the tasks couldn't be saved :/");
         }
     }
 
@@ -195,22 +165,17 @@ public class Petal {
             ArrayList<Task> toBeAdded = new ArrayList<>();
             while (scanner.hasNextLine()) {
                 String taskLine = scanner.nextLine();
-                char Task = taskLine.charAt(4);
-                String taskDesc = taskLine.substring(10);
-                switch (Task) {
-                    case 'T':
-                        ToDo todo = new ToDo(taskDesc);
-                        toBeAdded.add(todo);
+                String[] components = taskLine.split("\\|");
+                boolean isDone = Objects.equals(components[1], "X");
+                switch (components[0]) {
+                    case "T":
+                        toBeAdded.add(new ToDo(components[2], isDone));
                         break;
-                    case 'D':
-                        String[] split = taskDesc.split("by");
-                        Deadline deadline = new Deadline(split[0], split[1]);
-                        toBeAdded.add(deadline);
+                    case "D":
+                        toBeAdded.add(new Deadline(components[2], components[3], isDone));
                         break;
-                    case 'E':
-                        String[] splitEvent = taskDesc.split("at");
-                        Event event = new Event(splitEvent[0], splitEvent[1]);
-                        toBeAdded.add(event);
+                    case "E":
+                        toBeAdded.add(new Event(components[2], components[3], isDone));
                         break;
                 }
             }
@@ -232,10 +197,10 @@ public class Petal {
             File petalData = new File(filePath);
             petalData.createNewFile();
             savedProperly = true;
+            printMessage(Responses.START_MESSAGE);
         } catch (IOException e) {
             savedProperly = false;
-            printMessage("Something when wrong whilst creating/accessing these files :/\n"
-                          + "As such, the saving/retrieval of tasks will be turned off. Sorry!");
+            printMessage(Responses.FILE_ERROR);
         }
     }
 
@@ -244,7 +209,7 @@ public class Petal {
             return;
         }
         FileWriter fileWriter = new FileWriter(filePath);
-        fileWriter.write(printList());
+        fileWriter.write(formatForSaving());
         fileWriter.close();
     }
 
@@ -252,8 +217,14 @@ public class Petal {
      * Method for Petal to say goodbye
      */
     public void goodBye() {
-        bye = true;
-        printMessage("You're leaving :( I hope you return soon!");
+        try {
+            bye = true;
+            saveTasks();
+        } catch (IOException e) {
+            printMessage(Responses.SAVE_ERROR);
+        } finally {
+            printMessage(Responses.GOODBYE);
+        }
     }
 
     /**
@@ -264,13 +235,33 @@ public class Petal {
         if (tasks.size() == 0)
             return "No items in list yet!";
         int count = 1;
-        StringBuilder list = new StringBuilder("");
+        StringBuilder list = new StringBuilder();
         for (Task m : tasks) {
             //I do this check to ensure there isn't a newline at the top
-            list = count == 1 ? list.append(count++).append(". ").append(m)
-                              : list.append("\n").append(count++).append(". ").append(m);
+            if (count == 1) {
+                list.append(count++).append(". ").append(m);
+            } else {
+                list.append("\n").append(count++).append(". ").append(m);
+            }
         }
         return list.toString();
+    }
+
+    public String formatForSaving() {
+        if (tasks.size() == 0) {
+            return "";
+        }
+        int count = 1;
+        StringBuilder result = new StringBuilder();
+        for (Task m : tasks) {
+            if (count == 1) {
+                result.append(m.strForSaving());
+            } else {
+                result.append("\n").append(m.strForSaving());
+            }
+            count++;
+        }
+        return result.toString();
     }
 
     /**
@@ -292,11 +283,19 @@ public class Petal {
      * Method to add the indentation to the message
      * @param message Message to be printed
      */
-    public void printMessage(String message) {
-        System.out.println(LINE + "\n" + message + "\n" + LINE);
+    public void printMessage(Responses message) {
+        System.out.println(Responses.LINE + "\n" + message.toString() + "\n" + Responses.LINE);
     }
 
-    public static void main(String[] args) throws IOException {
+    /**
+     * Method to add the indentation to the message
+     * @param message Message to be printed
+     */
+    public void printMessage(String message) {
+        System.out.println(Responses.LINE + "\n" + message + "\n" + Responses.LINE);
+    }
+
+    public static void main(String[] args) {
         Petal petal = new Petal();
         petal.run();
     }

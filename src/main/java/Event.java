@@ -5,16 +5,26 @@
 public class Event extends Task {
 
     //The start time of the Event
-    protected String startTime;
+    protected String time;
 
     /**
      * The constructor for the Event class
      * @param description The description of the event
      * @param startTime The start time of the event
      */
-    public Event(String description, String startTime) {
-        super(description.trim());
-        this.startTime = startTime.trim();
+    public Event(String description, String startTime, boolean isDone) {
+        super(description.trim(), isDone);
+        this.time = startTime.trim();
+    }
+
+    @Override
+    public String taskType() {
+        return "event";
+    }
+
+    @Override
+    public String strForSaving() {
+        return "E|" + this.getStatusIcon() + "|" + this.description + "|" + this.time;
     }
 
     /**
@@ -23,6 +33,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + super.firstLetter(startTime) + ")";
+        return "[E]" + super.toString() + " (at: " + super.firstLetter(time) + ")";
     }
 }

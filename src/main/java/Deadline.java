@@ -5,16 +5,26 @@
 public class Deadline extends Task {
 
     //String representing the deadline
-    protected String endDate;
+    protected String time;
 
     /**
      * The constructor for the Deadline class
      * @param description The description of the object
      * @param endDate The endDate
      */
-    public Deadline(String description, String endDate) {
-        super(description.trim());
-        this.endDate = endDate.trim();
+    public Deadline(String description, String endDate, boolean isDone) {
+        super(description.trim(), isDone);
+        this.time = endDate.trim();
+    }
+
+    @Override
+    public String taskType() {
+        return "deadline";
+    }
+
+    @Override
+    public String strForSaving() {
+        return "D|" + this.getStatusIcon() + "|" + this.description + "|" + this.time;
     }
 
     /**
@@ -23,6 +33,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + super.firstLetter(this.endDate) + ")";
+        return "[D]" + super.toString() + " (by: " + super.firstLetter(this.time) + ")";
     }
 }

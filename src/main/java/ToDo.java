@@ -4,12 +4,23 @@
  */
 public class ToDo extends Task {
 
+
     /**
      * Constructor for the To.Do class
      * @param description The description of the task
      */
-    public ToDo(String description) {
-        super(description.trim());
+    public ToDo(String description, boolean isDone) {
+        super(description.trim(), isDone);
+    }
+
+    @Override
+    public String taskType() {
+        return "todo";
+    }
+
+    @Override
+    public String strForSaving() {
+        return "T|" + this.getStatusIcon() + "|" + this.description;
     }
 
     /**
