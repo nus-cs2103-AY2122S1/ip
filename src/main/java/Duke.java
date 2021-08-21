@@ -12,22 +12,13 @@ public class Duke {
     public static void main(String[] args) {
         taskList = storage.readFromDisk();
 
-        String sectionBreak = "------------------------------------------";
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println("\nHello buddy! I am");
-        System.out.println(logo);
-        System.out.println("What can I do for you?");
-        System.out.println(sectionBreak);
+        UI.welcomeMessage();
+        UI.printDivider();
 
         Scanner sc=new Scanner(System.in);
 
         Hashtable<String, Consumer<String>> commandTable = new Hashtable<>();
-        commandTable.put("list", (x) -> printTaskList());
+        commandTable.put("list", (x) -> UI.printTasks(taskList));
         commandTable.put("event", (x) -> AddTask(x, Event::create));
         commandTable.put("deadline", (x) -> AddTask(x, Deadline::create));
         commandTable.put("todo", (x) -> AddTask(x, ToDo::create));
@@ -47,26 +38,20 @@ public class Duke {
                 else
                     throw new DukeException("I'm not sure what you mean");
             } catch (DukeException e) {
-                System.out.println(e);
+                UI.print(e.toString());
             }
-            System.out.println(sectionBreak);
+            UI.printDivider();
         }
 
-        System.out.println("Bye. Hope to see you soon!");
-        System.out.println(sectionBreak);
+        UI.print("Bye. Hope to see you soon!");
+        UI.printDivider();
     }
 
     private static void AddTask(String formattedString, Function<String, ? extends Task> create) {
         Task e = create.apply(formattedString);
         taskList.add(e);
-        System.out.printf("added: %s\n", e);
+        UI.print(String.format("added: %s", e));
         storage.writeToDisk(taskList);
-    }
-
-    private static void printTaskList() {
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.printf("%d. %s\n", i + 1, taskList.get(i));
-        }
     }
 
     private static int getIdFromString(String input, String prefix) throws DukeException {
@@ -90,9 +75,9 @@ public class Duke {
             taskId = getIdFromString(input, "done ");
             Task t = taskList.get(taskId - 1);
             t.markAsDone();
-            System.out.println("Cool, I've marked this task as done\n" + t);
+            UI.print("Cool, I've marked this task as done\n" + t);
         } catch (IndexOutOfBoundsException e) {
-            System.out.printf("Oops, Task #%d doesn't exist\n", taskId);
+            UI.print(String.format("Oops, Task #%d doesn't exist\n", taskId));
         }
         storage.writeToDisk(taskList);
     }
@@ -103,9 +88,9 @@ public class Duke {
             taskId = getIdFromString(input, "delete ");
             Task t = taskList.get(taskId - 1);
             taskList.remove(taskId - 1);
-            System.out.println("Okay, I've removed this task\n" + t);
+            UI.print("Okay, I've removed this task\n" + t);
         } catch (IndexOutOfBoundsException e) {
-            System.out.printf("Oops, Task #%d doesn't exist\n", taskId);
+            throw new DukeException(String.format("Oops, Task #%d doesn't exist\n", taskId));
         }
         storage.writeToDisk(taskList);
     }
