@@ -67,6 +67,13 @@ public class Ui {
         return stringBuilder.toString();
     }
 
+    /**
+     * Returns all tasks with specified keyword
+     *
+     * @param foundTasks List of tasks containing keyword
+     * @param keyword Keyword used to find tasks
+     * @return Tasks with specified keyword
+     */
     public String showFoundTasks(TaskList foundTasks, String keyword) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append((foundTasks.size() == 1 ? "Task" : "Tasks") + " with keyword " + keyword + ":\n");
