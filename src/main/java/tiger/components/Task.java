@@ -11,4 +11,6 @@ abstract public class Task {
 
     abstract public Task markDone();
 
+    abstract protected String getStorageRepresentation();
+
 }

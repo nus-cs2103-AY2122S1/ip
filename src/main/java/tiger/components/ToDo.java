@@ -25,4 +25,8 @@ public class ToDo extends Task{
             return String.format("[T] [ ] %s", this.taskDescription);
         }
     }
+
+    protected String getStorageRepresentation() {
+        return String.format("T|%s|%s|%s", this.done, this.taskDescription, "");
+    }
 }

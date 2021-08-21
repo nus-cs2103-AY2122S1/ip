@@ -26,4 +26,8 @@ public class DeadLine extends Task {
             return String.format("[D] [ ] %s (by %s)", this.taskDescription, this.deadLine);
         }
     }
+
+    protected String getStorageRepresentation() {
+        return String.format("D|%s|%s|%s", this.done, this.taskDescription, this.deadLine);
+    }
 }

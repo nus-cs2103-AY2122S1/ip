@@ -60,4 +60,13 @@ public class TaskList {
         }
         return  returnString;
     }
+
+    public String getStorageRepresentation() {
+        String returnString = "";
+        for (Task t: this.taskList) {
+            returnString += t.getStorageRepresentation();
+            returnString += "\n";
+        }
+        return returnString;
+    }
 }

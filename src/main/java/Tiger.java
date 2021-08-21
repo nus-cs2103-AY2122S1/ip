@@ -13,12 +13,14 @@ import tiger.components.TaskList;
 import tiger.exceptions.TigerEmptyStringException;
 import tiger.exceptions.TigerInvalidArgumentException;
 
+import tiger.exceptions.TigerStorageInitException;
 import tiger.parser.CommandParser;
 import tiger.parser.DeadLineCommand;
 import tiger.parser.DeleteCommand;
 import tiger.parser.DoneCommand;
 import tiger.parser.EventCommand;
 import tiger.parser.ToDoCommand;
+import tiger.storage.Storage;
 
 import java.util.Scanner;
 
@@ -89,6 +91,14 @@ public class Tiger {
                             eventCommand.eventAt);
                     applicationState = eventAction.run();
                 } catch (TigerEmptyStringException e) {
+                    System.out.println(e);
+                }
+                break;
+            case "save":
+                try {
+                    Storage s = new Storage(taskList);
+                    s.save();
+                } catch (TigerStorageInitException e) {
                     System.out.println(e);
                 }
                 break;

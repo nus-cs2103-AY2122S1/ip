@@ -28,4 +28,8 @@ public class Event extends Task {
             return String.format("[E] [ ] %s (at %s)", this.taskDescription, this.eventAt);
         }
     }
+
+    protected String getStorageRepresentation() {
+        return String.format("E|%s|%s|%s", this.done, this.taskDescription, this.eventAt);
+    }
 }
