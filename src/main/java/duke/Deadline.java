@@ -1,15 +1,17 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
+public class Deadline extends Task {
     private LocalDate dateTime;
-    public Event(String description, String dateTime) throws DukeException {
+    public Deadline(String description, String dateTime) throws DukeException {
         super(description);
         this.dateTime = LocalDate.parse(dateTime);
     }
     public String toString() {
         String dateString = dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        return String.format("[E][%s] %s (at: %s)",
+        return String.format("[D][%s] %s (by: %s)",
                 getStatusIcon(), description, dateString);
     }
 
@@ -19,6 +21,6 @@ public class Event extends Task {
 
     @Override
     public TaskType getType() {
-        return TaskType.EVENT;
+        return TaskType.DEADLINE;
     }
 }

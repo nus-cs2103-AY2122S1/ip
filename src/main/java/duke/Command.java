@@ -1,3 +1,5 @@
+package duke;
+
 public class Command {
     TriConsumer func;
     private boolean isExit;
@@ -7,7 +9,7 @@ public class Command {
         this.isExit = isExit;
     }
 
-    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, Exception {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, Exception {
         func.execute(taskList, ui, storage);
     }
     public boolean isExit() {
