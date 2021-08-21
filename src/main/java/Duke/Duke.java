@@ -20,27 +20,28 @@ public class Duke {
 
     private static ArrayList<Task> taskList = new ArrayList<>();
 
-//    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-//        System.out.println("write file");
-//        try {
-//            FileWriter fw = new FileWriter(filePath);
-//            fw.write(textToAdd);
-//            fw.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("no file");
-//        }
-//    }
-//    private static void printFileContents(String filePath) throws FileNotFoundException {
-//        System.out.println("print file");
-//        File f = new File(filePath); // create a File for the given file path
-//        System.out.println("1");
-//        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-//        System.out.println("2");
-//        while (s.hasNext()) {
-//            System.out.println("loop");
-//            System.out.println(s.nextLine());
-//        }
-//    }
+    private static Boolean isDate(String str) {
+        try {
+            if (str.length() > 10) {
+                return false;
+            }
+            if (str.charAt(4) != str.charAt(7)) {
+                return false;
+            }
+            int year = Integer.parseInt(str.substring(0, 4));
+            int month = Integer.parseInt(str.substring(5, 7));
+            if (month < 0 || month > 12) {
+                return false;
+            }
+            int day = Integer.parseInt(str.substring(8));
+            if (day < 0 || day > 31) {
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     private static String createTask(String task, String description) throws InvalidInputException {
         if (description.length() == 0) {
             throw new InvalidInputException(task + " needs a description.");
@@ -63,14 +64,19 @@ public class Duke {
             throw new InvalidInputException("To create a " + task + " task: enter \"" + task + " (task details) "
                     + center + " (task details)\"");
         }
-        String first = null;
-        String second = null;
-        System.out.println(task.length());
+        String details = null;
+        String timing = null;
+        String date = null;
         if (!task.equals("todo")) {
-            first = description.substring(0, centerIndex).trim();
-            second = description.substring(centerIndex).trim();
-            if (first.length() == 0 || second.length() <= center.length()) {
+            details = description.substring(0, centerIndex).trim();
+            timing = description.substring(centerIndex).trim();
+            if (details.length() == 0 || timing.length() <= center.length()) {
                 throw new InvalidInputException(task + " task must have details before and after " + center + ".");
+            }
+            timing = timing.substring(3).trim();
+            if (isDate(timing)) {
+                date = timing.substring(0, 4) + '-' + timing.substring(5, 7) + '-' + timing.substring(8);
+                timing = null;
             }
         }
         switch (task) {
@@ -78,10 +84,10 @@ public class Duke {
             taskList.add(new ToDo(description));
             break;
         case "deadline":
-            taskList.add(new Deadline(first, second));
+            taskList.add(new Deadline(details, timing, date));
             break;
         case "event":
-            taskList.add(new Event(first, second));
+            taskList.add(new Event(details, timing, date));
             break;
         }
         return "Got it. I've added this task:\n" +
@@ -124,7 +130,7 @@ public class Duke {
                                 text = "";
                                 for (int i = 0; i < taskList.size(); i++) {
                                     if (i != 0) text += "\t";
-                                    text += (i + 1) + "." + taskList.get(i).toString();
+                                    text += (i + 1) + ". " + taskList.get(i).toString();
                                     if (i != taskList.size() - 1) text += "\n";
                                 }
                             }
@@ -156,6 +162,7 @@ public class Duke {
                             break;
                         case "todo": case "deadline": case "event":
                             text = createTask(task, text);
+                            break;
                         default:
                             throw new InvalidInstructionException(task);
                     }
