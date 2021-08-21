@@ -1,6 +1,6 @@
 package tiger.components;
 
-import tiger.exceptions.DukeEmptyStringException;
+import tiger.exceptions.TigerEmptyStringException;
 
 public class ToDo extends Task{
 
@@ -8,7 +8,7 @@ public class ToDo extends Task{
         super(taskDescription, done);
     }
 
-    public static ToDo of(String taskDescription, boolean done) throws DukeEmptyStringException {
+    public static ToDo of(String taskDescription, boolean done) throws TigerEmptyStringException {
         return new ToDo(taskDescription, done);
     }
 

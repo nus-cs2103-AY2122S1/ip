@@ -10,8 +10,8 @@ import tiger.actions.ToDoAction;
 
 import tiger.components.TaskList;
 
-import tiger.exceptions.DukeEmptyStringException;
-import tiger.exceptions.DukeInvalidArgumentException;
+import tiger.exceptions.TigerEmptyStringException;
+import tiger.exceptions.TigerInvalidArgumentException;
 
 import tiger.parser.CommandParser;
 import tiger.parser.DeadLineCommand;
@@ -22,7 +22,7 @@ import tiger.parser.ToDoCommand;
 
 import java.util.Scanner;
 
-public class Duke {
+public class Tiger {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String greetingMessage = "Hello! I'm Tiger :)\nWhat can I do for you?";
@@ -47,9 +47,9 @@ public class Duke {
                     DoneCommand doneCommand = new DoneCommand(userInput);
                     MarkDoneAction markDoneAction = new MarkDoneAction(applicationState, doneCommand.index - 1);
                     applicationState = markDoneAction.run();
-                } catch (DukeEmptyStringException e) {
+                } catch (TigerEmptyStringException e) {
                     System.out.println(e);
-                } catch (DukeInvalidArgumentException e) {
+                } catch (TigerInvalidArgumentException e) {
                     System.out.println(e);
                 }
                 break;
@@ -58,9 +58,9 @@ public class Duke {
                     DeleteCommand deleteCommand = new DeleteCommand(userInput);
                     DeleteAction deleteAction = new DeleteAction(applicationState, deleteCommand.index - 1);
                     applicationState = deleteAction.run();
-                } catch (DukeEmptyStringException e) {
+                } catch (TigerEmptyStringException e) {
                     System.out.println(e.toString());
-                } catch (DukeInvalidArgumentException e) {
+                } catch (TigerInvalidArgumentException e) {
                     System.out.println(e.toString());
                 }
                 break;
@@ -69,7 +69,7 @@ public class Duke {
                     ToDoCommand toDoCommand = new ToDoCommand(userInput);
                     ToDoAction toDoAction = new ToDoAction(applicationState, toDoCommand.todo);
                     applicationState = toDoAction.run();
-                } catch (DukeEmptyStringException e) {
+                } catch (TigerEmptyStringException e) {
                     System.out.println(e);
                 }
                 break;
@@ -78,7 +78,7 @@ public class Duke {
                     DeadLineCommand deadLineCommand = new DeadLineCommand(userInput);
                     DeadLineAction deadLineAction = new DeadLineAction(applicationState, deadLineCommand.todo, deadLineCommand.dateLine);
                     applicationState = deadLineAction.run();
-                } catch (DukeEmptyStringException e) {
+                } catch (TigerEmptyStringException e) {
                     System.out.println(e);
                 }
                 break;
@@ -88,7 +88,7 @@ public class Duke {
                     EventAction eventAction = new EventAction(applicationState, eventCommand.todo,
                             eventCommand.eventAt);
                     applicationState = eventAction.run();
-                } catch (DukeEmptyStringException e) {
+                } catch (TigerEmptyStringException e) {
                     System.out.println(e);
                 }
                 break;

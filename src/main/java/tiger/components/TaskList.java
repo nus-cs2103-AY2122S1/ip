@@ -1,6 +1,6 @@
 package tiger.components;
 
-import tiger.exceptions.DukeIndexOutOfBoundsException;
+import tiger.exceptions.TigerIndexOutOfBoundsException;
 
 import java.util.ArrayList;
 
@@ -25,11 +25,11 @@ public class TaskList {
         return new TaskList(this.taskList);
     }
 
-    public String showTask(int index) throws DukeIndexOutOfBoundsException {
+    public String showTask(int index) throws TigerIndexOutOfBoundsException {
         try {
             return this.taskList.get(index).toString();
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeIndexOutOfBoundsException(index, this.taskList.size());
+            throw new TigerIndexOutOfBoundsException(index, this.taskList.size());
         }
     }
 
@@ -37,12 +37,12 @@ public class TaskList {
         return this.taskList.size();
     }
 
-    public TaskList markTaskDone(int index) throws DukeIndexOutOfBoundsException {
+    public TaskList markTaskDone(int index) throws TigerIndexOutOfBoundsException {
         // index should be between 0 and n-1
         try {
             this.taskList.set(index, this.taskList.get(index).markDone());
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeIndexOutOfBoundsException(index, this.taskList.size());
+            throw new TigerIndexOutOfBoundsException(index, this.taskList.size());
         } finally {
             return new TaskList(this.taskList);
         }

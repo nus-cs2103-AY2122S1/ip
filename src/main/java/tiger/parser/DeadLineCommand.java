@@ -1,6 +1,6 @@
 package tiger.parser;
 
-import tiger.exceptions.DukeEmptyStringException;
+import tiger.exceptions.TigerEmptyStringException;
 import tiger.utils.RemoveLastSpaces;
 
 import java.util.Arrays;
@@ -31,12 +31,12 @@ public class DeadLineCommand extends Command {
         try {
             this.todo = removeLastSpaces.removeLastSpaces(this.todo);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeEmptyStringException("Deadline description");
+            throw new TigerEmptyStringException("Deadline description");
         }
         try {
             this.dateLine = removeLastSpaces.removeLastSpaces(this.dateLine);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeEmptyStringException("Deadline date");
+            throw new TigerEmptyStringException("Deadline date");
         }
     }
 }

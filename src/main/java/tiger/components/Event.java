@@ -1,6 +1,6 @@
 package tiger.components;
 
-import tiger.exceptions.DukeEmptyStringException;
+import tiger.exceptions.TigerEmptyStringException;
 
 public class Event extends Task {
 
@@ -11,7 +11,7 @@ public class Event extends Task {
         this.eventAt = eventAt;
     }
 
-    public static Event of(String taskDescription, boolean done, String eventAt) throws DukeEmptyStringException {
+    public static Event of(String taskDescription, boolean done, String eventAt) throws TigerEmptyStringException {
         return new Event(taskDescription, done, eventAt);
     }
 

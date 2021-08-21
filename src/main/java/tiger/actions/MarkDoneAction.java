@@ -1,7 +1,7 @@
 package tiger.actions;
 
 import tiger.components.TaskList;
-import tiger.exceptions.DukeIndexOutOfBoundsException;
+import tiger.exceptions.TigerIndexOutOfBoundsException;
 
 public class MarkDoneAction extends Action {
     AppState applicationState;
@@ -19,7 +19,7 @@ public class MarkDoneAction extends Action {
             newTaskList = taskList.markTaskDone(index);
             System.out.println(String.format("Nice! I've marked this task as done:\n%s",
                     newTaskList.showTask(index)));
-        } catch (DukeIndexOutOfBoundsException e) {
+        } catch (TigerIndexOutOfBoundsException e) {
             System.out.println(e.toString());
         } finally {
             return new AppState(applicationState.userExit, newTaskList);

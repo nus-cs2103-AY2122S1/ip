@@ -1,7 +1,7 @@
 package tiger.parser;
 
-import tiger.exceptions.DukeEmptyStringException;
-import tiger.exceptions.DukeInvalidArgumentException;
+import tiger.exceptions.TigerEmptyStringException;
+import tiger.exceptions.TigerInvalidArgumentException;
 
 public class DeleteCommand extends Command {
 
@@ -13,9 +13,9 @@ public class DeleteCommand extends Command {
         try {
             this.index = Integer.valueOf(array[1].replaceAll(" ", ""));
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeEmptyStringException("Delete index");
+            throw new TigerEmptyStringException("Delete index");
         } catch (NumberFormatException e) {
-            throw new DukeInvalidArgumentException(array[1], "Delete");
+            throw new TigerInvalidArgumentException(array[1], "Delete");
         }
     }
 }

@@ -1,7 +1,7 @@
 package tiger.actions;
 
 import tiger.components.TaskList;
-import tiger.exceptions.DukeIndexOutOfBoundsException;
+import tiger.exceptions.TigerIndexOutOfBoundsException;
 
 public class DeleteAction extends Action {
     AppState applicationState;
@@ -19,7 +19,7 @@ public class DeleteAction extends Action {
             System.out.println(String.format("Feeling lazy today? I've deleted:\n%s",
                     taskList.showTask(index)));
             newTaskList = taskList.deleteTask(index);
-        } catch (DukeIndexOutOfBoundsException e) {
+        } catch (TigerIndexOutOfBoundsException e) {
             System.out.println(e.toString());
         } finally {
             return new AppState(applicationState.userExit, newTaskList);

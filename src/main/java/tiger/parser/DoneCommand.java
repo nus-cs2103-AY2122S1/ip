@@ -1,7 +1,7 @@
 package tiger.parser;
 
-import tiger.exceptions.DukeEmptyStringException;
-import tiger.exceptions.DukeInvalidArgumentException;
+import tiger.exceptions.TigerEmptyStringException;
+import tiger.exceptions.TigerInvalidArgumentException;
 
 public class DoneCommand extends Command {
 
@@ -13,9 +13,9 @@ public class DoneCommand extends Command {
         try {
             this.index = Integer.valueOf(array[1].replaceAll(" ", ""));
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeEmptyStringException("Done index");
+            throw new TigerEmptyStringException("Done index");
         } catch (NumberFormatException e) {
-            throw new DukeInvalidArgumentException(array[1], "Done");
+            throw new TigerInvalidArgumentException(array[1], "Done");
         }
     }
 }
