@@ -1,9 +1,9 @@
 import java.util.Map;
-import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.stream.IntStream;
 import java.util.function.Consumer;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke implements Runnable {
     private final String BORDER = "---------------------------------------------------";
@@ -33,7 +33,11 @@ public class Duke implements Runnable {
         "event", (args) -> addEvent(args),
         "delete", (args) -> deleteTask(args)
     );
-    private List<Task> tasks = new ArrayList<>();
+    private TaskList tasks;
+
+    public Duke() throws FileNotFoundException, IOException {
+        this.tasks = TaskList.init();
+    }
 
     private void printLatestTask() {
         printDuke(
@@ -166,6 +170,12 @@ public class Duke implements Runnable {
     }
 
     public static void main(String[] args) {
-       new Duke().run();
+        try {
+            new Duke().run();
+        } catch (FileNotFoundException e) {
+            System.out.println("Could not create empty file.");
+        } catch (IOException e) {
+            System.out.println("Unexpected error occured.");
+        }
     }
 }

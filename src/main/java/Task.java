@@ -7,6 +7,11 @@ abstract public class Task {
         this.isComplete = false;
     }
 
+    Task(String name, boolean isComplete) {
+        this.name = name;
+        this.isComplete = isComplete;
+    }
+
     public String getName() {
         return name;
     }
@@ -17,6 +22,26 @@ abstract public class Task {
 
     public void markComplete() {
         this.isComplete = true;
+    }
+
+    public static Task strToObj(String s) throws IllegalArgumentException {
+        if (!s.matches("[T] [|] [10] [|] [\\w\\s]+$") && !s.matches("[DE] [|] [10] [|] [\\w\\s]+ [|] [\\w\\s-]+$")) {
+            throw new IllegalArgumentException();
+        }
+        String[] tmp =  s.split(" [|] ");
+        boolean isComplete = tmp[1].equals("1") ? true : false;
+        switch (tmp[0]) {
+        case "T":
+            return new Todo(tmp[2], isComplete);
+        case "D":
+            return new Deadline(tmp[2], tmp[3], isComplete);
+        default:
+            return new Event(tmp[2], tmp[3], isComplete);
+        }
+    }
+
+    public String toFile() {
+        return String.format("%d | %s", isComplete ? 1 : 0, name);
     }
 
     @Override
