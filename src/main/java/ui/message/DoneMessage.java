@@ -4,7 +4,7 @@ package ui.message;
  * Encapsulates a done message used to inform a user when a task is marked as done.
  */
 public class DoneMessage extends Message {
-    private static String DONE_PREFIX = "Nice! I've marked this task as done:";
+    private static String PREFIX_DONE = "Nice! I've marked this task as done:";
 
     public DoneMessage(String message) {
         super(message,"≧(´▽｀)≦");
@@ -17,6 +17,6 @@ public class DoneMessage extends Message {
      */
     @Override
     protected String getMessage() {
-        return DONE_PREFIX + "\n\t\t" + super.getMessage();
+        return PREFIX_DONE + "\n\t\t" + super.getMessage();
     }
 }

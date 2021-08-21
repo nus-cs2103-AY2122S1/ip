@@ -49,7 +49,11 @@ public class AddCommand extends Command {
      * @throws ErrorAccessingFile If there is an error accessing the storage file.
      * @throws InvalidDateTimeException If a task meant to contain time information has an invalid datetime format.
      */
-    public void execute(TaskList list) throws InvalidTaskTypeException, InvalidTaskTimeFormatException, ErrorAccessingFile, InvalidDateTimeException {
+    public void execute(TaskList list) throws
+            InvalidTaskTypeException,
+            InvalidTaskTimeFormatException,
+            ErrorAccessingFile,
+            InvalidDateTimeException {
         Task task = Task.createTask(this.description, this.commandType);
         list.addTaskToList(task);
         this.task = task;

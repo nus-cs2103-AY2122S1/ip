@@ -29,7 +29,9 @@ public class DeleteCommand extends Command {
      * @throws InvalidTaskNumberException If task number in description is not a number.
      * @throws MissingCommandDescriptionException If description is empty.
      */
-    public static DeleteCommand createCommand(String description) throws InvalidTaskNumberException, MissingCommandDescriptionException {
+    public static DeleteCommand createCommand(String description) throws
+            InvalidTaskNumberException,
+            MissingCommandDescriptionException {
         // Validate before creating the action
         Command.validateDescriptionNotEmpty(DukeCommandTypeEnum.DELETE, description);
 
