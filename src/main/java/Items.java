@@ -32,6 +32,7 @@ public class Items {
      * Marks the task at the given index as done
      * @param index The index to be marked as done
      * @return  A status message to be displayed
+     * @throws DukeException
      */
     public String markDone(int index) throws DukeException {
         index = index - 1;
