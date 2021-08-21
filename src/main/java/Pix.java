@@ -1,5 +1,11 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -71,7 +77,6 @@ public class Pix {
                     } else {
                         throw new PixInvalidDateException();
                     }
-
                 } else { //Cannot find the "/by"
                     throw new PixInvalidTaskException();
                 }
@@ -89,7 +94,8 @@ public class Pix {
 
                 if (splitterEvent != -1) {
                     ArrayList<String> tempTaskName = new ArrayList<>(Arrays.asList(command).subList(1, splitterEvent));
-                    ArrayList<String> tempArray = new ArrayList<>(Arrays.asList(command).subList(splitterEvent + 1, command.length));
+                    ArrayList<String> tempArray = new ArrayList<>(Arrays.asList(command).
+                            subList(splitterEvent + 1, command.length));
                     String taskNameDeadline = String.join(" ", tempTaskName);
                     String date = String.join(" ", tempArray);
                     if (isValidDate(date)) {
@@ -97,7 +103,6 @@ public class Pix {
                     } else {
                         throw new PixInvalidDateException();
                     }
-
                 } else { //Cannot find the "/at"
                     throw new PixInvalidTaskException();
                 }
@@ -124,9 +129,13 @@ public class Pix {
      * Displays the itemList.
      */
     private static void displayList() {
-        System.out.println("Why can't you keep track of these yourself:");
-        for (int i = 1; i < taskList.size() + 1; i++) {
-            System.out.println(i + ". " + taskList.get(i - 1).toString());
+        if (taskList.size() == 0) {
+            System.out.println("There is nothing in the list, go and do something!");
+        } else {
+            System.out.println("Why can't you keep track of these yourself:");
+            for (int i = 1; i < taskList.size() + 1; i++) {
+                System.out.println(i + ". " + taskList.get(i - 1).toString());
+            }
         }
     }
 
@@ -145,7 +154,7 @@ public class Pix {
                 case TODO:
                     ToDo toDo = new ToDo(item);
                     taskList.add(toDo);
-                    System.out.println(" this task: \n" + toDo);
+                    System.out.println("Added this task: \n" + toDo);
                     System.out.println("You now have " + taskList.size() + " task(s) in your list");
                     break;
                 case DEADLINE:
@@ -161,10 +170,108 @@ public class Pix {
                     System.out.println("You now have " + taskList.size() + " task(s) in your list");
                     break;
                 }
+
+                saveTaskList();
             }
         } catch (PixInvalidTaskException e) {
             System.out.println(e.getMessage());
             nextCommand();
+        } catch (IOException e) {
+            System.out.println("There is an I/O error!");
+        }
+    }
+
+    /**
+     * Processes input and adds tasks from Pix.txt to the Task List.
+     */
+    private static void addTask(String task) throws PixException {
+        try {
+            String[] strArray = task.split(" ", 0);
+            switch (strArray[0]) {
+                case "T":
+                    //Add To Do task
+                    ArrayList<String> tempTaskName = new ArrayList<>(Arrays.asList(strArray).
+                            subList(4, strArray.length));
+                    String taskName = String.join(" ", tempTaskName);
+                    ToDo toDo = new ToDo(taskName);
+                    if (strArray[2].equals("1")) {
+                        toDo.completeTask();
+                        taskList.add(toDo);
+                    } else if (strArray[2].equals("0")) {
+                        taskList.add(toDo);
+                    } else {
+                        throw new PixIOException();
+                    }
+                    break;
+                case "D":
+                    //Add Deadline task
+                    int splitter = -1;
+                    for (int i = 4; i < strArray.length; i++) {
+                        if (strArray[i].equals("|")) {
+                            splitter = i;
+                            break;
+                        }
+                    }
+                    //Check if the task name or date is an empty field
+                    if (splitter == 4 || splitter == strArray.length - 1 || splitter == -1) {
+                        throw new PixIOException();
+                    }
+                    tempTaskName = new ArrayList<>(Arrays.asList(strArray).
+                            subList(4, splitter));
+                    String taskDate = strArray[splitter + 1];
+                    if (!isValidDate(taskDate)) {
+                        throw new PixIOException();
+                    }
+
+                    taskName = String.join(" ", tempTaskName);
+
+                    Deadline deadline = new Deadline(taskName, LocalDate.parse(taskDate));
+                    if (strArray[2].equals("1")) {
+                        deadline.completeTask();
+                        taskList.add(deadline);
+                    } else if (strArray[2].equals("0")) {
+                        taskList.add(deadline);
+                    } else {
+                        throw new PixIOException();
+                    }
+                    break;
+                case "E":
+                    //Add Event task
+                    //Add Deadline task
+                    splitter = -1;
+                    for (int i = 4; i < strArray.length; i++) {
+                        if (strArray[i].equals("|")) {
+                            splitter = i;
+                            break;
+                        }
+                    }
+                    //Check if the task name or date is an empty field
+                    if (splitter == 4 || splitter == strArray.length - 1 || splitter == -1) {
+                        throw new PixIOException();
+                    }
+                    tempTaskName = new ArrayList<>(Arrays.asList(strArray).
+                            subList(4, splitter));
+                    taskName = String.join(" ", tempTaskName);
+                    taskDate = strArray[splitter + 1];
+                    if (!isValidDate(taskDate)) {
+                        throw new PixIOException();
+                    }
+                    Event event = new Event(taskName, LocalDate.parse(taskDate));
+                    if (strArray[2].equals("1")) {
+                        event.completeTask();
+                        taskList.add(event);
+                    } else if (strArray[2].equals("0")) {
+                        taskList.add(event);
+                    } else {
+                        throw new PixIOException();
+                    }
+                    break;
+                default:
+                    //throw PixIOException
+                    throw new PixIOException();
+            }
+        } catch (PixIOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -174,11 +281,14 @@ public class Pix {
      */
     private static void completeTask(int n) {
         try {
-            taskList.get(n - 1).CompleteTask();
+            taskList.get(n - 1).completeTask();
             System.out.println("Wow. You did it. Yay.");
             System.out.println(taskList.get(n - 1));
+            saveTaskList();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("You can't complete what literally isn't there!");
+        } catch (IOException e) {
+            System.out.println("There is an I/O error!");
         }
     }
 
@@ -193,8 +303,11 @@ public class Pix {
             System.out.println(taskToDelete);
             taskList.remove(n - 1);
             System.out.println("You now have " + taskList.size() + " task(s) in your list");
+            saveTaskList();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("You can't delete what literally isn't there!");
+        } catch (IOException e) {
+            System.out.println("There is an I/O error!");
         }
     }
 
@@ -218,6 +331,7 @@ public class Pix {
     /**
      * Checks if the String is an integer.
      * @param str String to be tested.
+     * @return Returns true if it is an integer and false if it is not.
      */
     private static boolean isInteger(String str) {
         try {
@@ -228,8 +342,43 @@ public class Pix {
 
         return true;
     }
+    
+    /**
+     * Saves the tasks in the Task List into Pix.txt.
+     */
+    private static void saveTaskList() throws IOException {
+        try {
+            FileWriter pixFile = new FileWriter("src/main/java/data/Pix.txt");
+            for (Task task : taskList) {
+                String done;
+                if (task.isDone()) {
+                    done = "1";
+                } else {
+                    done = "0";
+                }
+
+                if (task instanceof ToDo) {
+                    pixFile.write("T | " + done + " | " + task.getTaskName() + System.lineSeparator());
+                    pixFile.close();
+                } else if (task instanceof Deadline) {
+                    Deadline deadline = (Deadline) task;
+                    pixFile.write("D | " + done + " | " + deadline.getTaskName() + " | "
+                            + deadline.getDate() + System.lineSeparator());
+                    pixFile.close();
+                } else { //else it is an event and there is no other case that it returns invalid
+                    Event event = (Event) task;
+                    pixFile.write("E | " + done + " | " + event.getTaskName() + " | "
+                            + event.getDate() + System.lineSeparator());
+                    pixFile.close();
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("There's an I/O error!");
+        }
+    }
 
     /**
+<<<<<<< HEAD
      * Checks whether a certain date is valid
      * @param date Date in string format.
      * @return Returns true if the date is a valid date format, and false if not.
@@ -242,11 +391,26 @@ public class Pix {
             return false;
         }
     }
+    /**
+     * Reads the text file Pix.txt and loads the tasks in the Task List from it.
+     */
+    private static void startPix() throws PixException, FileNotFoundException {
+        try {
+            File pixFile = new File("src/main/java/data/Pix.txt");
+            Scanner sc = new Scanner(pixFile);
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                addTask(line);
+            }
+            System.out.println("This is Pix. Why did you summon me AGAIN...");
+            System.out.println("What do want now?");
+            nextCommand();
+        } catch (FileNotFoundException e) {
+            System.out.println("I can't seem to find the file! (Pix.txt)");
+        }
+    }
 
-    public static void main(String[] args) throws PixException {
-        System.out.println("This is Pix. Why did you summon me AGAIN...");
-        System.out.println("What do want now?");
-
-        nextCommand();
+    public static void main(String[] args) throws PixException, FileNotFoundException {
+        startPix();
     }
 }

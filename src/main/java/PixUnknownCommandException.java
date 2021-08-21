@@ -5,6 +5,6 @@ public class PixUnknownCommandException extends PixException {
 
     @Override
     public String getMessage() {
-        return "(ಠ ∩ಠ) Unknown Command: Do you even know what you're typing..?";
+        return "Unknown Command: Do you even know what you're typing..?";
     }
 }
