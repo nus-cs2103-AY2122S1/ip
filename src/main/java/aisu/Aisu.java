@@ -30,6 +30,15 @@ public class Aisu {
         }
     }
 
+    public List<Task> getTasklistData() {
+        // for testing purposes
+        return this.tasklist.getListData();
+    }
+
+    public Storage getStorage() {
+        return this.storage;
+    }
+
     public void run() {
         ui.showWelcomeMessage();
 
