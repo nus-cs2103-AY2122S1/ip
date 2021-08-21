@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Task with an additional dateTime field storing a deadline
@@ -14,7 +15,7 @@ public class Deadline extends Task {
      * @param dateTime Deadline for task, formatted in YYYY-MM-DD
      * @throws DukeException
      */
-    public Deadline(String description, String dateTime) throws DukeException {
+    public Deadline(String description, String dateTime) throws DukeException, DateTimeParseException {
         super(description);
         this.dateTime = LocalDate.parse(dateTime);
     }
