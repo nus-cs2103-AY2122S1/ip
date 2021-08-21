@@ -9,12 +9,12 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public TaskManager generateTaskManager() {
-        return new TaskManager();
+    public TaskList generateTaskList() {
+        return new TaskList();
     }
 
     public static void main(String[] args) {
-        TaskManager taskManager = new Duke().generateTaskManager();
+        TaskList taskManager = new Duke().generateTaskList();
         String hello = "Hello! I'm Duke\n" +
                 "What can I do for you?";
         System.out.println(hello);
