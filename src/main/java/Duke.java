@@ -13,6 +13,9 @@ public class Duke {
 
         printIntro.printIntro();
 
+        // Attempts to find and read List history
+        TaskSave file = new TaskSave("data/duke.txt");
+
         // Starts reading user input
         Scanner scanner = new Scanner(System.in);
         String command = "";
@@ -21,9 +24,10 @@ public class Duke {
             // Processes user input
             if (!command.toLowerCase().equals("bye")) {
                 FeatureMain feature = new Feature(command);
+
             }
         }
-
+        FeatureMain.saveList();
         printFarewell.printFarewell();
 
     }

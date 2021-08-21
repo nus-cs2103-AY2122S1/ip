@@ -13,8 +13,18 @@ public class DeadLine extends Task {
         this.by = by;
     }
 
+    public DeadLine(TYPE type, boolean isDone, String description, String by) {
+        super(type, isDone, description);
+        this.by = by;
+    }
+
+    @Override
+    public String getTime() {
+        return by;
+    }
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return super.toString() + " (by: " + by + ")";
     }
 }
