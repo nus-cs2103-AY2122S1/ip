@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 public class Parser {
-    public static Command parse(String fullCommand) throws DukeException, Exception {
+    public static Command parse(String fullCommand) throws DukeException {
         String[] commandSplit = fullCommand.split(" ", 2);
         String commandType = "";
         if (commandSplit.length >= 1) {
@@ -25,7 +25,7 @@ public class Parser {
                 }
             }, false);
             break;
-        case "done": {
+        case "done":
             command = new Command((taskList, ui, storage) -> {
                 int i = Integer.parseInt(commandSplit[1].trim());
                 Task task = taskList.markTaskAsDone(i - 1);
@@ -34,8 +34,7 @@ public class Parser {
                 storage.save(taskList.getTasks());
             }, false);
             break;
-        }
-        case "todo": {
+        case "todo":
             if (commandSplit.length < 2) {
                 throw new DukeException(String.format("The description of a %s cannot be empty.", commandType));
             }
@@ -49,7 +48,6 @@ public class Parser {
                 ui.showTaskCount(taskList.getSize());
             }, false);
             break;
-        }
         case "deadline": {
             if (commandSplit.length < 2) {
                 throw new DukeException(String.format("The description of a %s cannot be empty.", commandType));
@@ -90,7 +88,7 @@ public class Parser {
             }, false);
             break;
         }
-        case "delete": {
+        case "delete":
             command = new Command((taskList, ui, storage) -> {
                 int i = Integer.parseInt(commandSplit[1].trim());
                 Task task = taskList.removeTask(i - 1);
@@ -100,7 +98,6 @@ public class Parser {
                 ui.showTaskCount(taskList.getSize());
             }, false);
             break;
-        }
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
