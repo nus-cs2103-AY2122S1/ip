@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 
 public class Duke implements Runnable {
+    private static final String ERR_CREATE_FILE = "Could not create empty file.";
+    private static final String ERR_UNEXPECTED = "Unexpected error occured.";
     private final String BORDER = "---------------------------------------------------";
     private final String GREETING = "Hello! I'm Duke, what can I do for you?";
     private final String FAREWELL = "Bye. Hope to see you again soon!";
@@ -106,7 +108,7 @@ public class Duke implements Runnable {
                 printDuke(String.format(ERR_TASK_COMPLETE, tasks.get(idx - 1).getName()));
                 return;
             }
-            tasks.get(idx - 1).markComplete();
+            tasks.markComplete(idx);
             printDuke(String.format(
                 MSG_TASK_COMPLETE,
                 String.format("   %s", tasks.get(idx - 1))));
@@ -173,9 +175,9 @@ public class Duke implements Runnable {
         try {
             new Duke().run();
         } catch (FileNotFoundException e) {
-            System.out.println("Could not create empty file.");
+            System.out.println(ERR_CREATE_FILE);
         } catch (IOException e) {
-            System.out.println("Unexpected error occured.");
+            System.out.println(ERR_UNEXPECTED);
         }
     }
 }
