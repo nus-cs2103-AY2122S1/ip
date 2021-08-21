@@ -203,6 +203,32 @@ You now have 2 tasks in your list!
 Input: 
 - - - - - - - - - - - - - - - - - - - - - - - - -
 
+Output:
+
+This task is successfully deleted:
+
+    [T][ ] borrow book
+
+You now have 1 task in your list!
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
+Output:
+
+This task is successfully deleted:
+
+    [D][X] return book (by: Sunday)
+
+You now have 0 tasks in your list!
+
+=================================================
+
+Input: 
+- - - - - - - - - - - - - - - - - - - - - - - - -
+
 Output: Goodbye! See you again!
 
 =================================================
