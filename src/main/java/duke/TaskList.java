@@ -39,4 +39,16 @@ public class TaskList {
     public int size() {
         return tasks.size();
     }
+
+    public String find(String keyword) {
+        int count = 1;
+        StringBuilder result = new StringBuilder("     Here are the matching tasks in your list:\n");
+        for (Task task : tasks) {
+            if (task.description.contains(keyword)) {
+                result.append(String.format("     %d.%s\n", count, task));
+                count++;
+            }
+        }
+        return result.toString();
+    }
 }

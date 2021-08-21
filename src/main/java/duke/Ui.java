@@ -44,4 +44,8 @@ public class Ui {
                 String.format("     Now you have %d tasks in the list.\n", size);
         reply(message);
     }
+
+    public void find() {
+
+    }
 }
