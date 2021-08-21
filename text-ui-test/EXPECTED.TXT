@@ -20,10 +20,10 @@ Nice! I've marked this task as done:
 [E] [X] D (at Mon 2-4pm)
 Excellent! I've added this task:
 [T] [ ] E
-exceptions.DukeIndexOutOfBoundsException: Index 6 is out of bounds of your task list size of 5.
+Index 6 is out of bounds of your task list size of 5.
 Please make sure your index is at least 1.
 Use the list command to see task indices.
-exceptions.DukeIndexOutOfBoundsException: Index -1 is out of bounds of your task list size of 5.
+Index -1 is out of bounds of your task list size of 5.
 Please make sure your index is at least 1.
 Use the list command to see task indices.
 1. [T] [X] A
@@ -31,16 +31,16 @@ Use the list command to see task indices.
 3. [D] [ ] C (by 2020-07-21)
 4. [E] [X] D (at Mon 2-4pm)
 5. [T] [ ] E
-exceptions.DukeEmptyStringException: Deadline date property cannot be empty.
+Deadline date property cannot be empty.
 Please ensure you key in the command in the format specified.
-exceptions.DukeEmptyStringException: Deadline description property cannot be empty.
+Deadline description property cannot be empty.
 Please ensure you key in the command in the format specified.
 1. [T] [X] A
 2. [T] [X] B
 3. [D] [ ] C (by 2020-07-21)
 4. [E] [X] D (at Mon 2-4pm)
 5. [T] [ ] E
-exceptions.DukeEmptyStringException: ToDo description property cannot be empty.
+ToDo description property cannot be empty.
 Please ensure you key in the command in the format specified.
 Feeling lazy today? I've deleted:
 [T] [X] B
@@ -49,7 +49,7 @@ Feeling lazy today? I've deleted:
 1. [D] [ ] C (by 2020-07-21)
 2. [E] [X] D (at Mon 2-4pm)
 3. [T] [ ] E
-exceptions.DukeIndexOutOfBoundsException: Index 999 is out of bounds of your task list size of 3.
+Index 999 is out of bounds of your task list size of 3.
 Please make sure your index is at least 1.
 Use the list command to see task indices.
 Bye. Hope to see you again soon!
