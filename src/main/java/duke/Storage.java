@@ -6,6 +6,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,19 +19,19 @@ import java.util.Scanner;
  * from the file and saving tasks in the file.
  */
 public class Storage {
-    private final String filepath;
+    private final String filePath;
 
     public Storage(String filepath) {
-        this.filepath = filepath;
+        this.filePath = filepath;
     }
 
     public ArrayList<Task> load() throws DukeFileException {
         try {
-            java.nio.file.Path filepath = java.nio.file.Paths.get("src", "main", "java", "data");
-            File f = new File(this.filepath);
-            if (!Files.isDirectory(filepath)) {
+            java.nio.file.Path directoryPath = java.nio.file.Paths.get("src", "main", "java", "data");
+            File f = new File(this.filePath);
+            if (!Files.isDirectory(directoryPath)) {
                 //create directory
-                Files.createDirectories(filepath);
+                Files.createDirectories(directoryPath);
             }
             if (!f.exists()) {
                 //create file if it does not exist
@@ -81,13 +82,13 @@ public class Storage {
     }
 
     public void appendCommand(String taskCommand) throws IOException {
-        FileWriter fw = new FileWriter(this.filepath, true);
+        FileWriter fw = new FileWriter(this.filePath, true);
         fw.append(taskCommand + System.lineSeparator());
         fw.close();
     }
 
     public void safeFile(ArrayList<Task> taskList) throws IOException {
-        FileWriter fw = new FileWriter(this.filepath);
+        FileWriter fw = new FileWriter(this.filePath);
         for (int i = 0; i < taskList.size(); i++) {
             Task t = taskList.get(i);
             fw.append(t.fullCommand() + System.lineSeparator());
