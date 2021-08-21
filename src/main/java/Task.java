@@ -1,9 +1,17 @@
 import java.util.Objects;
 
+/**
+ * Task is a general class for any task that is to be saved by Duke.
+ */
 public class Task {
     private final String description, taskType;
     private boolean isDone;
 
+    /**
+     * The constructor for a task object
+     * @param description The description of the task
+     * @param taskType The type of task (to<></>do/event/deadline)
+     */
     public Task(String description, String taskType) {
         this.description = description;
         this.taskType = taskType;

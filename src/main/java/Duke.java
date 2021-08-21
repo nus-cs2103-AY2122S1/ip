@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Duke is a personal assistant that allows users to keep track of events, deadlines and things to do.
+ * The main method will start the personal assistant in the console.
+ */
 public class Duke {
-    private static ArrayList<Task> storage = new ArrayList<>();
+    private static final ArrayList<Task> storage = new ArrayList<>();
     private static int storageCount = 0;
 
     private static void addTask(String[] splitInput) {
@@ -33,27 +37,27 @@ public class Duke {
         }
         Task newTask;
         switch (action) {
-            case "todo":
-                newTask = new Todo(descriptionBuilder.toString().trim());
-                break;
-            case "event":
-                if (preposition == null || !preposition.equals("at")) {
-                    throw new DukeException("Use the preposition \"at\".");
-                } else if (dateBuilder.length() == 0) {
-                    throw new DukeException("Enter the date of the event.");
-                }
-                newTask = new Event(descriptionBuilder.toString().trim(), dateBuilder.toString().trim());
-                break;
-            case "deadline":
-                if (preposition == null || !preposition.equals("by")) {
-                    throw new DukeException("Use the preposition \"by\".");
-                } else if (dateBuilder.length() == 0) {
-                    throw new DukeException("Enter the deadline.");
-                }
-                newTask = new Deadline(descriptionBuilder.toString().trim(), dateBuilder.toString().trim());
-                break;
-            default:
-                throw new DukeException("Only todo, event or deadline allowed.");
+        case "todo":
+            newTask = new Todo(descriptionBuilder.toString().trim());
+            break;
+        case "event":
+            if (preposition == null || !preposition.equals("at")) {
+                throw new DukeException("Use the preposition \"at\".");
+            } else if (dateBuilder.length() == 0) {
+                throw new DukeException("Enter the date of the event.");
+            }
+            newTask = new Event(descriptionBuilder.toString().trim(), dateBuilder.toString().trim());
+            break;
+        case "deadline":
+            if (preposition == null || !preposition.equals("by")) {
+                throw new DukeException("Use the preposition \"by\".");
+            } else if (dateBuilder.length() == 0) {
+                throw new DukeException("Enter the deadline.");
+            }
+            newTask = new Deadline(descriptionBuilder.toString().trim(), dateBuilder.toString().trim());
+            break;
+        default:
+            throw new DukeException("Only todo, event or deadline allowed.");
         }
         storage.add(storageCount++, newTask);
         System.out.println("Got it. I have added this task:");
@@ -74,56 +78,56 @@ public class Duke {
      */
     private static boolean processInput(String input) {
         switch (input) {
-            case "bye":
-                System.out.println("Bye. Hope to see you again soon!");
-                return true;
-            case "list":
-                for (int i = 1; i <= storageCount; i++) {
-                    Task task = storage.get(i - 1);
-                    String leadingSpace = " ".repeat((int) Math.log10(storageCount) - (int) Math.log10(i));
-                    // For better formatting if numbers exceed 9
-                    System.out.printf("%s%d: %s\n", leadingSpace, i, task);
-                }
-                break;
-            default:
-                String[] splitInput = input.split(" ");
-                if (splitInput[0].equals("done") || splitInput[0].equals("delete")) {
-                    int taskNumber;
-                    if (splitInput.length != 2) {
-                        System.out.printf("Please key in %s [number].\n", splitInput[0]);
-                    } else {
-                        try {
-                            taskNumber = Integer.parseInt(splitInput[1]);
-                            if (taskNumber < 1 || taskNumber > storageCount) {
-                                throw new DukeException(storageCount > 1
-                                        ? "Please input a value between 1 and " + storageCount
-                                        : storageCount == 1
-                                        ? "You can only input the value 1"
-                                        : "There are no tasks so far");
-                            }
-                        } catch (NumberFormatException e) {
-                            throw new DukeException("Please enter a number after " + splitInput[0]);
-                        }
-                        if (splitInput[0].equals("done")) {
-                            if (storage.get(taskNumber - 1).markAsDone()) {
-                                System.out.println("Nice! I've marked this task as done: ");
-                                System.out.println("    " + storage.get(taskNumber - 1));
-                            } else {
-                                throw new DukeException("You have already marked this as done");
-                            }
-                        } else { // first word is delete
-                            Task task = storage.remove(taskNumber - 1);
-                            storageCount--;
-                            System.out.println("Noted. I've removed this task:");
-                            System.out.println("    " + task);
-                            printNumberOfTasks();
-                        }
-                    }
-                } else if (storageCount < 100) {
-                    addTask(splitInput);
+        case "bye":
+            System.out.println("Bye. Hope to see you again soon!");
+            return true;
+        case "list":
+            for (int i = 1; i <= storageCount; i++) {
+                Task task = storage.get(i - 1);
+                String leadingSpace = " ".repeat((int) Math.log10(storageCount) - (int) Math.log10(i));
+                // For better formatting if numbers exceed 9
+                System.out.printf("%s%d: %s\n", leadingSpace, i, task);
+            }
+            break;
+        default:
+            String[] splitInput = input.split(" ");
+            if (splitInput[0].equals("done") || splitInput[0].equals("delete")) {
+                int taskNumber;
+                if (splitInput.length != 2) {
+                    System.out.printf("Please key in %s [number].\n", splitInput[0]);
                 } else {
-                    throw new DukeException("Maximum storage size reached.");
+                    try {
+                        taskNumber = Integer.parseInt(splitInput[1]);
+                        if (taskNumber < 1 || taskNumber > storageCount) {
+                            throw new DukeException(storageCount > 1
+                                    ? "Please input a value between 1 and " + storageCount
+                                    : storageCount == 1
+                                    ? "You can only input the value 1"
+                                    : "There are no tasks so far");
+                        }
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("Please enter a number after " + splitInput[0]);
+                    }
+                    if (splitInput[0].equals("done")) {
+                        if (storage.get(taskNumber - 1).markAsDone()) {
+                            System.out.println("Nice! I've marked this task as done: ");
+                            System.out.println("    " + storage.get(taskNumber - 1));
+                        } else {
+                            throw new DukeException("You have already marked this as done");
+                        }
+                    } else { // first word is delete
+                        Task task = storage.remove(taskNumber - 1);
+                        storageCount--;
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println("    " + task);
+                        printNumberOfTasks();
+                    }
                 }
+            } else if (storageCount < 100) {
+                addTask(splitInput);
+            } else {
+                throw new DukeException("Maximum storage size reached.");
+            }
         }
         return false;
     }
