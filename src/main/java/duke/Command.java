@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class Command {
 
     public enum COMMANDS {
-        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, BY, AT, ALL, HELP
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, BY, AT, ALL, HELP, FIND
     }
     public enum TYPES {
         SINGLE_INPUT, INT_INPUT, STR_INPUT, STR_ARR_INPUT, DATETIME_INPUT
@@ -79,9 +79,13 @@ public class Command {
             storage.save();
             break;
         case STR_INPUT:
-            tasks.addItem(new Todo(this.description), storage);
-            ui.displayCommand(this.command, tasks);
-            storage.save();
+            if (this.command.equals(COMMANDS.TODO)) {
+                tasks.addItem(new Todo(this.description), storage);
+                ui.displayCommand(this.command, tasks);
+                storage.save();
+            } else {
+                ui.displayCommand(this.command, this.description, tasks);
+            }
             break;
         case STR_ARR_INPUT:
             Task task;
