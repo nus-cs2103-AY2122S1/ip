@@ -5,16 +5,19 @@ import duke.exceptions.DukeException;
 import duke.exceptions.DukeFileException;
 
 /**
- * This is the duke.Duke class.
+ * This is the Duke class that interacts with users using inputs from users in CLI.
  */
 public class Duke {
 
+    /**
+     * The following are private class fields of a Duke instance.
+     */
     private Storage store;
     private Ui ui;
     private TaskList taskList;
 
     /**
-     * This is the Constructor of duke.Duke.
+     * This is the Constructor of Duke.
      */
     public Duke(String filePath) {
         ui = new Ui();

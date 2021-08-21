@@ -12,10 +12,18 @@ import duke.exceptions.UnknownCommandException;
 import java.util.Scanner;
 
 /**
- * This is a duke.Parser class that deals with making sense of the user command.
+ * This is a Parser class that deals with making sense of the user command.
  */
 public class Parser {
 
+    /**
+     * Returns a Command instance based on the input String from the user.
+     *
+     * @param command A String representing the command and details keyed in by the user.
+     * @return  A Command object that when its execute() method is called, make changes to the tasks list or Duke.
+     * @throws EmptyDescriptionException An exception thrown when no description follows a recognizable command.
+     * @throws UnknownCommandException  An exception thrown when the command is not recognizable.
+     */
     public static Command decipher(String command)
             throws EmptyDescriptionException, UnknownCommandException {
         Scanner s = new Scanner(command);
