@@ -1,6 +1,11 @@
+package entity.list;
+
+import exception.InvalidTaskTimeFormatException;
+import type.DukeActionTypeEnum;
+
 /**
  * Encapsulates a task with that will occur at a specified time period.
- * It inherits from `DukeTask`.
+ * It inherits from `entity.list.DukeTask`.
  */
 public class DukeEventTask extends DukeTask {
     private static String TIME_SPLITTER = "/at";
@@ -15,7 +20,7 @@ public class DukeEventTask extends DukeTask {
      * Processes the input string to create an event task with an action and time.
      *
      * @param description The input task string by the user
-     * @return a `DukeEventTask` containing an action description and time information
+     * @return a `entity.list.DukeEventTask` containing an action description and time information
      */
     public static DukeEventTask createTask (String description) throws InvalidTaskTimeFormatException {
         // Split the description into its action and time parts

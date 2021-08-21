@@ -1,6 +1,11 @@
+package entity.list;
+
+import exception.InvalidTaskTimeFormatException;
+import type.DukeActionTypeEnum;
+
 /**
  * Encapsulates a task with a deadline.
- * It inherits from `DukeTask`.
+ * It inherits from `entity.list.DukeTask`.
  */
 public class DukeDeadlineTask extends DukeTask {
     private static String TIME_SPLITTER = "/by";
@@ -15,7 +20,7 @@ public class DukeDeadlineTask extends DukeTask {
      * Processes the input string to create a deadline task with an action and deadline.
      *
      * @param description The input task string by the user
-     * @return a `DukeDeadlineTask` containing an action description and deadline information
+     * @return a `entity.list.DukeDeadlineTask` containing an action description and deadline information
      */
     public static DukeDeadlineTask createTask (String description) throws InvalidTaskTimeFormatException {
         // Split the description into its action and time parts

@@ -1,16 +1,18 @@
+package entity.message;
+
 /**
  * Encapsulates a greeting message used when Duke starts.
- * It inherits from `DukeOutputMessage`.
- * It overrides methods in `DukeOutputMessage` to format the message differently for greeting.
+ * It inherits from `entity.message.DukeOutputMessage`.
+ * It overrides methods in `entity.message.DukeOutputMessage` to format the message differently for greeting.
  */
-public class DukeGreetingMessage extends DukeOutputMessage {
+public class GreetMessage extends Message {
     /**
-     * Constructor to instantiate a `DukeGreetingMessage`.
-     * Instantiates a parent `DukeOutputMessage`.
+     * Constructor to instantiate a `entity.message.DukeGreetingMessage`.
+     * Instantiates a parent `entity.message.DukeOutputMessage`.
      *
      * @param message the string to be used in the greeting message
      */
-    public DukeGreetingMessage(String message) {
+    public GreetMessage(String message) {
         super(message);
     }
 

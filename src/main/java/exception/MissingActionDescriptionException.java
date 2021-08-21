@@ -1,10 +1,12 @@
+package exception;
+
 /**
  * Encapsulates the exception thrown when a user inputs an action with an empty description,
  * when the action requires a description.
  */
 public class MissingActionDescriptionException extends DukeException {
     /**
-     * Constructor to instantiate a `MissingActionDescriptionException`
+     * Constructor to instantiate a `exception.MissingActionDescriptionException`
      *
      * @param actionType is the type of the action
      */

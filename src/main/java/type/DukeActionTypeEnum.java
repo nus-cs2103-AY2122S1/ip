@@ -1,3 +1,5 @@
+package type;
+
 public enum DukeActionTypeEnum {
     LIST("list"),
     DONE("done"),

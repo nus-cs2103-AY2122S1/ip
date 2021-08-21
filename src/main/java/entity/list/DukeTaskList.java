@@ -1,3 +1,7 @@
+package entity.list;
+
+import exception.NonExistentTaskNumberException;
+
 import java.util.ArrayList;
 
 /**
@@ -58,7 +62,7 @@ public class DukeTaskList {
      * Retrieves the task by the number it is listed by.
      *
      * @param taskNumber is the number that the task is listed by, starting from 1
-     * @return a `DukeTask`
+     * @return a `entity.list.DukeTask`
      */
     public DukeTask getTaskByTaskNumber(int taskNumber) throws NonExistentTaskNumberException {
         validateTaskNumberExists(taskNumber);

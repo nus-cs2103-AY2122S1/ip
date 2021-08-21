@@ -1,3 +1,5 @@
+package entity.list;
+
 public class DukeTodoTask extends DukeTask {
     private static String TASK_TYPE = "todo";
 

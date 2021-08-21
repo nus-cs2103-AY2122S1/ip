@@ -1,3 +1,8 @@
+package action;
+
+import entity.message.ListMessage;
+import entity.list.DukeTaskList;
+
 public class DukeActionList extends DukeAction {
     private DukeTaskList list;
 
@@ -11,7 +16,7 @@ public class DukeActionList extends DukeAction {
         this.list = list;
     }
 
-    public DukeListMessage getOutputMessage() {
-        return new DukeListMessage(this.list.toString());
+    public ListMessage getOutputMessage() {
+        return new ListMessage(this.list.toString());
     }
 }

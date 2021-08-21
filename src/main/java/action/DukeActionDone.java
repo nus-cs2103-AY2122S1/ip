@@ -1,3 +1,13 @@
+package action;
+
+import entity.list.DukeTask;
+import entity.list.DukeTaskList;
+import entity.message.DoneMessage;
+import exception.InvalidTaskNumberException;
+import exception.MissingActionDescriptionException;
+import exception.NonExistentTaskNumberException;
+import type.DukeActionTypeEnum;
+
 public class DukeActionDone extends DukeAction {
     private int taskNumber;
     private DukeTask task;
@@ -20,7 +30,7 @@ public class DukeActionDone extends DukeAction {
         this.task = task;
     }
 
-    public DukeDoneMessage getOutputMessage() {
-        return new DukeDoneMessage(task.toString());
+    public DoneMessage getOutputMessage() {
+        return new DoneMessage(task.toString());
     }
 }

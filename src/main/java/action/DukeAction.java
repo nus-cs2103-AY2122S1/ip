@@ -1,3 +1,13 @@
+package action;
+
+import entity.list.DukeTaskList;
+import entity.message.Message;
+import exception.DukeException;
+import exception.InvalidTaskNumberException;
+import exception.MissingActionDescriptionException;
+import exception.NonExistentActionTypeException;
+import type.DukeActionTypeEnum;
+
 public abstract class DukeAction {
     public DukeAction() {}
 
@@ -42,18 +52,18 @@ public abstract class DukeAction {
         String messageWithoutCommand = removeCommandPrefix(inputMessage, actionType.toString());
         String trimmedMessage = messageWithoutCommand.trim();
         switch (actionType) {
-            case LIST:
-                return DukeActionList.createAction();
-            case DONE:
-                return DukeActionDone.createAction(trimmedMessage);
-            case DELETE:
-                return DukeActionDelete.createAction(trimmedMessage);
-            default:
-                return DukeActionAdd.createAction(trimmedMessage, actionType);
+        case LIST:
+            return DukeActionList.createAction();
+        case DONE:
+            return DukeActionDone.createAction(trimmedMessage);
+        case DELETE:
+            return DukeActionDelete.createAction(trimmedMessage);
+        default:
+            return DukeActionAdd.createAction(trimmedMessage, actionType);
         }
     }
 
     public abstract void executeAction(DukeTaskList list) throws DukeException;
 
-    public abstract DukeOutputMessage getOutputMessage();
+    public abstract Message getOutputMessage();
 }

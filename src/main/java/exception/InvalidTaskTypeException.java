@@ -1,9 +1,13 @@
+package exception;
+
+import type.DukeActionTypeEnum;
+
 /**
  * Encapsulates the exception thrown when a user inputs an invalid message that is not a task.
  */
 public class InvalidTaskTypeException extends DukeException {
     /**
-     * Constructor to instantiate an `InvalidTaskTypeException`
+     * Constructor to instantiate an `exception.InvalidTaskTypeException`
      *
      * @param actionType the invalid input by the user
      */

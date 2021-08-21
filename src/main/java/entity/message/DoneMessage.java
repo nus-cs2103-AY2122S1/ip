@@ -1,18 +1,20 @@
+package entity.message;
+
 /**
  * Encapsulates a done message used to inform a user when a task is marked as done.
- * It inherits from `DukeOutputMessage`.
- * It overrides methods in `DukeOutputMessage` to format the message differently for marking a task as done.
+ * It inherits from `entity.message.DukeOutputMessage`.
+ * It overrides methods in `entity.message.DukeOutputMessage` to format the message differently for marking a task as done.
  */
-public class DukeDoneMessage extends DukeOutputMessage {
+public class DoneMessage extends Message {
     private static String DONE_PREFIX = "Nice! I've marked this task as done:";
 
     /**
-     * Constructor to instantiate a `DukeDoneMessage`.
-     * Instantiates a parent `DukeOutputMessage`.
+     * Constructor to instantiate a `entity.message.DukeDoneMessage`.
+     * Instantiates a parent `entity.message.DukeOutputMessage`.
      *
      * @param message the string to be used in the done message
      */
-    public DukeDoneMessage(String message) {
+    public DoneMessage(String message) {
         super(message);
     }
 

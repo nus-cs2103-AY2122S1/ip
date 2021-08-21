@@ -1,3 +1,13 @@
+import action.DukeAction;
+import entity.list.DukeTaskList;
+import entity.message.ExitMessage;
+import entity.message.GreetMessage;
+import entity.message.Message;
+
+import entity.data.Data;
+import entity.data.DukeFile;
+import exception.DukeException;
+
 import java.util.Scanner;
 
 /**
@@ -8,9 +18,15 @@ import java.util.Scanner;
  */
 public class Duke {
     public static void main(String[] args) {
+        // Load data
+        DukeFile listFile = Data.loadListFile();
+        if (listFile == null) {
+            return;
+        }
+
         // Greet
-        DukeGreetingMessage greetingMessage = new DukeGreetingMessage("Hello! I'm Duke, what shall we do today?");
-        System.out.println(greetingMessage.getFormattedMessage());
+        GreetMessage greetingMessage = new GreetMessage("Hello! I'm Duke, what shall we do today?");
+        greetingMessage.print();
 
         // Process input
         DukeTaskList list = new DukeTaskList();
@@ -19,7 +35,7 @@ public class Duke {
         String exitCommand = "bye";
 
         while (!inputMessage.trim().equals(exitCommand)) {
-            DukeOutputMessage outputMessage;
+            Message outputMessage;
 
             try {
                 DukeAction action = DukeAction.makeAction(inputMessage);
@@ -30,12 +46,12 @@ public class Duke {
             }
 
             // Print output message
-            System.out.println(outputMessage.getFormattedMessage());
+            outputMessage.print();
             inputMessage = inputScanner.nextLine();
         }
 
         // Exit
-        DukeExitMessage exitMessage = new DukeExitMessage("Bye, see you again");
-        System.out.println(exitMessage.getFormattedMessage());
+        ExitMessage exitMessage = new ExitMessage("Bye, see you again");
+        exitMessage.print();
     }
 }

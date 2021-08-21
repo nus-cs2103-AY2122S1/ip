@@ -1,18 +1,20 @@
+package entity.message;
+
 /**
  * Encapsulates a message used to inform a user that there is a change on the list.
- * It inherits from `DukeOutputMessage`.
- * It overrides methods in `DukeOutputMessage` to format the message differently for a list change.
+ * It inherits from `entity.message.DukeOutputMessage`.
+ * It overrides methods in `entity.message.DukeOutputMessage` to format the message differently for a list change.
  */
-public class DukeListChangedMessage extends DukeOutputMessage {
+public class ListChangeMessage extends Message {
     private int itemsInList;
 
     /**
-     * Constructor to instantiate a `DukeListChangedMessage`.
+     * Constructor to instantiate a `entity.message.DukeListChangedMessage`.
      *
      * @param message the string to be used in the added message.
      * @param itemsInList the number of items in the list after the change.
      */
-    public DukeListChangedMessage(String message, int itemsInList) {
+    public ListChangeMessage(String message, int itemsInList) {
         super(message);
         this.itemsInList = itemsInList;
     }

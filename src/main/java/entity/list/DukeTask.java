@@ -1,3 +1,9 @@
+package entity.list;
+
+import exception.InvalidTaskTimeFormatException;
+import exception.InvalidTaskTypeException;
+import type.DukeActionTypeEnum;
+
 /**
  * Encapsulates a task containing a description and status.
  */
@@ -6,7 +12,7 @@ public class DukeTask {
     private boolean isDone;
 
     /**
-     * Constructor to instantiate a `DukeTask`.
+     * Constructor to instantiate a `entity.list.DukeTask`.
      * The isDone field is set to false by default as new tasks should not be done yet.
      *
      * @param description describes what the task is
@@ -17,11 +23,11 @@ public class DukeTask {
     }
 
     /**
-     * Creates a specific `DukeTask` based on the prefix in the user input.
+     * Creates a specific `entity.list.DukeTask` based on the prefix in the user input.
      * Supported types of tasks include todo, deadline and event.
      *
      * @param description the full user input that may or may not be a valid type of task
-     * @return A new `DukeTask`
+     * @return A new `entity.list.DukeTask`
      * @throws InvalidTaskTypeException when the type of task is not recognised
      * @throws InvalidTaskTimeFormatException when a task does not have valid time inputs
      */

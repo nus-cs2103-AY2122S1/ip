@@ -1,3 +1,13 @@
+package action;
+
+import entity.list.DukeTask;
+import entity.list.DukeTaskList;
+import entity.message.AddMessage;
+import exception.InvalidTaskTimeFormatException;
+import exception.InvalidTaskTypeException;
+import exception.MissingActionDescriptionException;
+import type.DukeActionTypeEnum;
+
 public class DukeActionAdd extends DukeAction {
     private String description;
     private DukeActionTypeEnum actionType;
@@ -24,7 +34,7 @@ public class DukeActionAdd extends DukeAction {
         this.list = list;
     }
 
-    public DukeAddedMessage getOutputMessage() {
-        return new DukeAddedMessage(task.toString(), list.getNumberOfTasks());
+    public AddMessage getOutputMessage() {
+        return new AddMessage(task.toString(), list.getNumberOfTasks());
     }
 }

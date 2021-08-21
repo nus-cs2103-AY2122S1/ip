@@ -1,18 +1,20 @@
+package entity.message;
+
 /**
  * Encapsulates a message containing a list of tasks.
- * It inherits from `DukeOutputMessage`.
- * It overrides methods in `DukeOutputMessage` to format the message differently for a list.
+ * It inherits from `entity.message.DukeOutputMessage`.
+ * It overrides methods in `entity.message.DukeOutputMessage` to format the message differently for a list.
  */
-public class DukeListMessage extends DukeOutputMessage{
+public class ListMessage extends Message {
     private static String LIST_PREFIX = "Here are the tasks in your list:";
 
     /**
-     * Constructor to instantiate a `DukeListMessage`.
-     * Instantiates a parent `DukeOutputMessage`.
+     * Constructor to instantiate a `entity.message.DukeListMessage`.
+     * Instantiates a parent `entity.message.DukeOutputMessage`.
      *
      * @param message the string to be used in the list message
      */
-    public DukeListMessage(String message) {
+    public ListMessage(String message) {
         super(message);
     }
 

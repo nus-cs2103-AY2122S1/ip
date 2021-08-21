@@ -1,16 +1,18 @@
+package entity.message;
+
 /**
  * Encapsulates an exit message used when Duke exits.
- * It inherits from `DukeOutputMessage`.
- * It overrides methods in `DukeOutputMessage` to format the message differently for exiting.
+ * It inherits from `entity.message.DukeOutputMessage`.
+ * It overrides methods in `entity.message.DukeOutputMessage` to format the message differently for exiting.
  */
-public class DukeExitMessage extends DukeOutputMessage {
+public class ExitMessage extends Message {
     /**
-     * Constructor to instantiate a `DukeExitMessage`.
-     * Instantiates a parent `DukeOutputMessage`.
+     * Constructor to instantiate a `entity.message.DukeExitMessage`.
+     * Instantiates a parent `entity.message.DukeOutputMessage`.
      *
      * @param message the string to be used in the exit message
      */
-    public DukeExitMessage(String message) {
+    public ExitMessage(String message) {
         super(message);
     }
 

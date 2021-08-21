@@ -1,3 +1,5 @@
+package exception;
+
 public class NonExistentActionTypeException extends DukeException {
     public NonExistentActionTypeException(String inputMessage) {
         super(String.format(

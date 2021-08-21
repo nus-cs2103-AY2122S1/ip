@@ -1,9 +1,11 @@
+package exception;
+
 /**
  * Encapsulates the exception thrown when a task meant to carry time information is incorrectly formatted.
  */
 public class InvalidTaskTimeFormatException extends DukeException {
     /**
-     * Constructor to instantiate an `InvalidTaskTimeFormatException`.
+     * Constructor to instantiate an `exception.InvalidTaskTimeFormatException`.
      *
      * @param taskType is the type of the task
      * @param timeSplitter separates the action from the time information in the task description

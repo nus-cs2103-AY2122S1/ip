@@ -1,3 +1,13 @@
+package action;
+
+import entity.list.DukeTask;
+import entity.list.DukeTaskList;
+import entity.message.DeleteMessage;
+import exception.InvalidTaskNumberException;
+import exception.MissingActionDescriptionException;
+import exception.NonExistentTaskNumberException;
+import type.DukeActionTypeEnum;
+
 public class DukeActionDelete extends DukeAction {
     private int taskNumber;
     private DukeTask task;
@@ -21,7 +31,7 @@ public class DukeActionDelete extends DukeAction {
         this.list = list;
     }
 
-    public DukeDeletedMessage getOutputMessage() {
-        return new DukeDeletedMessage(task.toString(), list.getNumberOfTasks());
+    public DeleteMessage getOutputMessage() {
+        return new DeleteMessage(task.toString(), list.getNumberOfTasks());
     }
 }
