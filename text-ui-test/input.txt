@@ -1,7 +1,7 @@
 todo A
 todo B
 deadline C /by 2020-07-21
-event D /at Mon 2-4pm
+event D /at 2020-07-21 16:00
 done 1
 done 2
 list
@@ -11,13 +11,24 @@ done 6
 done -1
 list
 deadline F /by
-deadline /by 2020-08-22
+deadline /by 12:00
+deadline G /by 25:00
+deadline G /by 20:70
+deadline G /by 999-08-21
+deadline G /by -999-08-21
+deadline G /by 1999-13-21
+deadline G /by 1999-11-32
+deadline H /by 1999-02-31
+deadline G /by 2020-08-21 12:00
 list
 todo
 delete 2
 delete 1
 list
 delete 999
+delete 1
+delete 1
+delete 1
 delete 1
 delete 1
 delete 1

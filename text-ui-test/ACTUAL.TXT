@@ -6,7 +6,7 @@ Excellent! I've added this task:
 Excellent! I've added this deadline:
 [D] [ ] C (by 2020-07-21)
 Excellent! I've added this event:
-[E] [ ] D (at Mon 2-4pm)
+[E] [ ] D (at 2020-07-21 16:00)
 Nice! I've marked this task as done:
 [T] [X] A
 Nice! I've marked this task as done:
@@ -14,9 +14,9 @@ Nice! I've marked this task as done:
 1. [T] [X] A
 2. [T] [X] B
 3. [D] [ ] C (by 2020-07-21)
-4. [E] [ ] D (at Mon 2-4pm)
+4. [E] [ ] D (at 2020-07-21 16:00)
 Nice! I've marked this task as done:
-[E] [X] D (at Mon 2-4pm)
+[E] [X] D (at 2020-07-21 16:00)
 Excellent! I've added this task:
 [T] [ ] E
 Index 6 is out of bounds of your task list size of 5.
@@ -28,17 +28,29 @@ Use the list command to see task indices.
 1. [T] [X] A
 2. [T] [X] B
 3. [D] [ ] C (by 2020-07-21)
-4. [E] [X] D (at Mon 2-4pm)
+4. [E] [X] D (at 2020-07-21 16:00)
 5. [T] [ ] E
 Deadline date property cannot be empty.
 Please ensure you key in the command in the format specified.
 Deadline description property cannot be empty.
 Please ensure you key in the command in the format specified.
+Please ensure you key in dates in the input specified.
+Please ensure you key in dates in the input specified.
+Please ensure you key in dates in the input specified.
+Please ensure you key in dates in the input specified.
+Please ensure you key in dates in the input specified.
+Please ensure you key in dates in the input specified.
+Excellent! I've added this deadline:
+[D] [ ] H (by 1999-02-28)
+Excellent! I've added this deadline:
+[D] [ ] G (by 2020-08-21 12:00)
 1. [T] [X] A
 2. [T] [X] B
 3. [D] [ ] C (by 2020-07-21)
-4. [E] [X] D (at Mon 2-4pm)
+4. [E] [X] D (at 2020-07-21 16:00)
 5. [T] [ ] E
+6. [D] [ ] H (by 1999-02-28)
+7. [D] [ ] G (by 2020-08-21 12:00)
 ToDo description property cannot be empty.
 Please ensure you key in the command in the format specified.
 Feeling lazy today? I've deleted:
@@ -46,15 +58,24 @@ Feeling lazy today? I've deleted:
 Feeling lazy today? I've deleted:
 [T] [X] A
 1. [D] [ ] C (by 2020-07-21)
-2. [E] [X] D (at Mon 2-4pm)
+2. [E] [X] D (at 2020-07-21 16:00)
 3. [T] [ ] E
-Index 999 is out of bounds of your task list size of 3.
+4. [D] [ ] H (by 1999-02-28)
+5. [D] [ ] G (by 2020-08-21 12:00)
+Index 999 is out of bounds of your task list size of 5.
 Please make sure your index is at least 1.
 Use the list command to see task indices.
 Feeling lazy today? I've deleted:
 [D] [ ] C (by 2020-07-21)
 Feeling lazy today? I've deleted:
-[E] [X] D (at Mon 2-4pm)
+[E] [X] D (at 2020-07-21 16:00)
 Feeling lazy today? I've deleted:
 [T] [ ] E
+Feeling lazy today? I've deleted:
+[D] [ ] H (by 1999-02-28)
+Feeling lazy today? I've deleted:
+[D] [ ] G (by 2020-08-21 12:00)
+Index 1 is out of bounds of your task list size of 0.
+Please make sure your index is at least 1.
+Use the list command to see task indices.
 Bye. Hope to see you again soon!
