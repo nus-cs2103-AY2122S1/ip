@@ -30,23 +30,8 @@ public class InputHandler {
         }
     }
 
-    public List<String> parse(String raw, String separator) {
-        List<String> tokens = new Scanner(raw).tokens().collect(Collectors.toList());
-        List<String> args = new ArrayList<>();
-        if (tokens.size() == 0) return args;
-        String curr = new String();
-        for (String in : tokens) {
-            if (in.equals(separator)) {
-                args.add(curr);
-                curr = new String();
-            } else curr += " " + in;
-        }
-        args.add(curr);
-        return args;
-    }
-
     public String sizeMsg() {
-        return "\n\t Now you have " + db.size() + String.format(" task%sin the list.", db.size() > 1 ? "s " : " ");
+        return "\n\t Now you have " + db.size() + String.format(" task%sin the list.", db.size() != 1 ? "s " : " ");
     }
 
     public Record greet(String args) {
@@ -59,15 +44,16 @@ public class InputHandler {
     }
 
     private Record list(String args) {
+        if (db.size() == 0) return new Record("You have no tasks!");
         return new Record("Here are the tasks in your list:\n " + db.toString());
     }
 
     private Record done(String args) throws DukeException {
+        if (db.size() == 0) throw new DukeException("You have no tasks.");
         try {
             Task t = db.markAsDone(Integer.parseInt(args) - 1);
             return new Record("Nice! I've marked this task as done:\n\t   " + t);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            if (db.size() == 0) throw new DukeException("You have no tasks.");
             throw new DukeException(String.format("Enter a valid index (from 1 to %d).", db.size()));
         }
     }
@@ -91,27 +77,27 @@ public class InputHandler {
     }
 
     private Record deadline(String raw) throws DukeException {
-        List<String> args = parse(raw, "/by");
+        String[] args = raw.split("( /by )");
         Deadline t = new Deadline();
-        if (args.size() == 0 || args.get(0).equals(new String()))
+        if (args.length == 0 || args[0].equals(new String()))
             throw new DukeException("The description of a deadline cannot be empty.");
-        if (args.size() >= 1)
-            t.addDesc(args.get(0));
-        if (args.size() == 2)
-            t.addDeadline(args.get(1));
+        if (args.length >= 1)
+            t.addDesc(args[0]);
+        if (args.length == 2)
+            t.addDeadline(args[1]);
         db.add(t);
         return new Record("Got it. I've added this task:\n\t   " + t + sizeMsg());
     }
 
     private Record event(String raw) throws DukeException {
-        List<String> args = parse(raw, "/at");
+        String[] args = raw.split("( /at )");
         Event t = new Event();
-        if (args.size() == 0 || args.get(0).equals(new String()))
+        if (args.length == 0 || args[0].equals(new String()))
             throw new DukeException("The description of a event cannot be empty.");
-        if (args.size() >= 1)
-            t.addDesc(args.get(0));
-        if (args.size() == 2)
-            t.addTime(args.get(1));
+        if (args.length >= 1)
+            t.addDesc(args[0]);
+        if (args.length == 2)
+            t.addTime(args[1]);
         db.add(t);
         return new Record("Got it. I've added this task:\n\t   " + t + sizeMsg());
     }

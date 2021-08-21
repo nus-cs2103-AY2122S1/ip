@@ -29,6 +29,7 @@ public class Database {
     private Task parse(String line) throws DukeException {
         try {
             String[] args = line.split("( \\| )");
+            if (args.length < 3) return null;
             String type = args[0];
             boolean done = Integer.parseInt(args[1]) == 1;
             String desc = args[2];
@@ -55,13 +56,23 @@ public class Database {
             raf.seek(0);
             int i;
             for (i = 0; i < index && raf.getFilePointer() < raf.length(); i++) {
-                tmpraf.writeBytes(raf.readLine());
+                String s = raf.readLine();
+                if (s.equals("\n")) {
+                    i--;
+                    break;
+                }
+                tmpraf.writeBytes(s);
                 tmpraf.writeBytes(System.lineSeparator());
             }
             edit.accept(tmpraf, task);
             if (raf.getFilePointer() < raf.length()) raf.readLine();
-            for (i = index + 1; i < db.size() && raf.getFilePointer() < raf.length(); i++) {
-                tmpraf.writeBytes(raf.readLine());
+            for (i = index; i < db.size() && raf.getFilePointer() < raf.length(); i++) {
+                String s = raf.readLine();
+                if (s.equals("\n")) {
+                    i--;
+                    break;
+                }
+                tmpraf.writeBytes(s);
                 tmpraf.writeBytes(System.lineSeparator());
             }
             raf.seek(0);
@@ -70,6 +81,7 @@ public class Database {
                 raf.writeBytes(tmpraf.readLine());
                 raf.writeBytes(System.lineSeparator());
             }
+            raf.setLength(tmpraf.length());
             tmpraf.close();
             temp.delete();
         } catch (IOException | DukeException e) { }
