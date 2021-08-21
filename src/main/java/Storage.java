@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,7 +21,6 @@ public class Storage {
             } catch (IOException e) {
                 System.out.printf("An error occurred when trying to access file %s." +
                         "Changes to your task list will not be saved locally.\n", filePath);
-                return;
             }
         }
     }
@@ -44,18 +42,18 @@ public class Storage {
             bufferedReader.close();
             fileReader.close();
         } catch (IOException e) {
-            System.out.printf("An error occurred when trying to load %s.\n", filePath);
+            System.out.printf("An error occurred when trying to load %s:\n\t%s\n", filePath, e.getMessage());
         }
         return taskList;
     }
 
-    public void saveTasks(String tasks) throws DukeException {
+    public void saveTasks(String tasks) {
         try {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(tasks);
             fileWriter.close();
         } catch (IOException e) {
-            throw new DukeException("An error occurred when trying to save tasks locally: " + e.getMessage());
+            System.out.printf("An error occurred when trying to save tasks locally:\n\t%s\n", e.getMessage());
         }
     }
 }
