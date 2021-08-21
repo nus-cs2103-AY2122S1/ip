@@ -5,25 +5,15 @@
  */
 public class Event extends Task {
 
-    private String at;
+    private String by;
 
-    public Event(String description, Task.TYPE type, String at) {
+    public Event(String description, Task.TYPE type, String by) {
         super(description, type);
-        this.at = at;
-    }
-
-    public Event(TYPE type, boolean isDone, String description, String at) {
-        super(type, isDone, description);
-        this.at = at;
-    }
-
-    @Override
-    public String getTime() {
-        return at;
+        this.by = by;
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + by + ")";
     }
 }

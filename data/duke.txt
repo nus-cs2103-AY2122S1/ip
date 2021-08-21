@@ -1,3 +1,0 @@
-T | 0 | there
-D | 0 | return book | No Deadline
-E | 0 | project meeting | Aug 6th 2-4pm
