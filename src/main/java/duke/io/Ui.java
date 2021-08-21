@@ -10,8 +10,12 @@ import java.util.Scanner;
 
 public class Ui {
 
+
     private Scanner sc;
 
+    /**
+     * Returns a new Ui object.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
@@ -28,34 +32,64 @@ public class Ui {
         return str.toString();
     }
 
+    /**
+     * Prints an error statement to screen if a user fails to input an int when required.
+     */
     public void showIntError() {
         System.err.println(format("☹ OOPS!!! The index of a task must be specified."));
     }
 
+    /**
+     * Prints a statement to screen if the saved file cannot be loaded.
+     */
     public void showLoadingError() {
         System.out.println(format("Task description cannot be found in database", "A new file will be created"));
     }
 
+    /**
+     * Prints an error statement to screen if the data file cannot be saved.
+     */
     public void showSavingError() {
         System.err.println(format("File cannot be saved"));
     }
 
+    /**
+     * Prints the content of a DukeException as an error message.
+     */
     public void showDukeException(DukeException e) {
         System.err.println(format(e.toString()));
     }
 
+    /**
+     * Prints a welcome statement when Duke is launched.
+     */
     public void showWelcome() {
-        System.out.println(format("Hello! I'm duke.Duke", "What can I do for you?"));
+        System.out.println(format("Hello! I'm Duke", "What can I do for you?"));
     }
 
+    /**
+     * Prints an error statement to screen if the user inputs the date and time in a wrong format.
+     */
     public void showDateTimeException() {
         System.err.println(format("Date'T'time inputted is not of valid format: YYYY-MM-DDThh:mm" ));
     }
 
+    /**
+     * Returns a line of user input.
+     *
+     * @return String User input formatted as a String.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Prints a statement showing the outcome of a the command the user inputted.
+     * Used for commands involving a single word or for addition of tasks.
+     *
+     * @param c Type of command the user has inputted.
+     * @param list Current TaskList used.
+     */
     public void displayCommand(Command.Commands c, TaskList list) {
         switch (c) {
         case BYE:
@@ -86,6 +120,14 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints a statement showing the outcome of a the command the user inputted.
+     * Used for commands involving involving retrieval of tasks based on date and time.
+     *
+     * @param c Type of command the user has inputted.
+     * @param list Current TaskList used.
+     * @param dt Date and Time used by the command.
+     */
     public void displayCommand(Command.Commands c, TaskList list, LocalDateTime dt) {
         switch (c) {
         case AT:
@@ -100,6 +142,15 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints a statement showing the outcome of a the command the user inputted.
+     * Used for commands involving modification of tasks.
+     *
+     * @param c Type of command the user has inputted
+     * @param index Index of task modified by the command.
+     * @param t Task modified by the command.
+     * @param list Current TaskList used.
+     */
     public void displayCommand(Command.Commands c, int index, Task t, TaskList list) {
         switch (c) {
         case DONE:

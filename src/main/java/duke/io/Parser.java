@@ -7,6 +7,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+
+    /**
+     * Returns a Command object based on user input.
+     *
+     * @param entry String inputted by the user.
+     * @return Command object.
+     * @throws NumberFormatException If an int is expected to be inputted but the user fails to do so.
+     * @throws DateTimeParseException If the user enters the date and time in a wrong format.
+     * @throws DukeException If the user enters the command in a wrong format.
+     */
     public static Command parse(String entry) throws NumberFormatException, DateTimeParseException, DukeException {
         String main;
         String aux = "";
