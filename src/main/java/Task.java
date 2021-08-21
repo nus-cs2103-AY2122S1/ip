@@ -1,8 +1,6 @@
 /**
- * CS2103T Individual Project AY 21/22 Sem 1
- * Project Duke: Incrementally building a Chatbot.
- *
  * The Task Class is a representation of a task that Duke is keeping track of.
+ *
  * It contains information relating to the task:
  * - description
  * - isDone

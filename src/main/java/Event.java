@@ -1,8 +1,6 @@
 /**
- * CS2103T Individual Project AY 21/22 Sem 1
- * Project Duke: Incrementally building a Chatbot.
- *
  * The Event Class represents a task that starts and ends at specific timings.
+ *
  * It contains information relating to the task:
  * - description
  * - isDone

@@ -1,8 +1,6 @@
 /**
- * CS2103T Individual Project AY 21/22 Sem 1
- * Project Duke: Incrementally building a Chatbot.
- *
  * The Deadline Class represents a task that needs to be done before a specific date/time.
+ *
  * It contains information relating to the task:
  * - description
  * - isDone

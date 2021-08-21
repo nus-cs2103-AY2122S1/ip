@@ -1,10 +1,8 @@
 import java.util.ArrayList;
 
 /**
- * CS2103T Individual Project AY 21/22 Sem 1
- * Project Duke: Incrementally building a Chatbot.
- *
  * The TaskList Class is a representation of a list of tasks that Duke is keeping track of.
+ *
  * Tasks can be added into the list via Duke and the list can be displayed as well.
  *
  * @author Benedict Chua

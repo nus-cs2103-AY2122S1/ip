@@ -1,7 +1,4 @@
 /**
- * CS2103T Individual Project AY 21/22 Sem 1
- * Project Duke: Incrementally building a Chatbot.
- *
  * The DukeException is an exception that is thrown when Duke is run.
  *
  * It contains the exceptions that are thrown due to wrong inputs given and is specific to this version of Duke.

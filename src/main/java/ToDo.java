@@ -1,8 +1,6 @@
 /**
- * CS2103T Individual Project AY 21/22 Sem 1
- * Project Duke: Incrementally building a Chatbot.
- *
  * The ToDo Class represents a task without any date/time attached to it.
+ *
  * It contains information relating to the task:
  * - description
  * - isDone

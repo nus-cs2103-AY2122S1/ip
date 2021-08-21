@@ -2,7 +2,6 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 /**
- * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke: Incrementally building a Chatbot.
  *
  * Current Progress: Level 6. Delete
@@ -18,6 +17,7 @@ import static java.lang.Integer.parseInt;
  *   - 'bye' -> exits the program
  *   - any other String of different patterns -> throws an exception
  *
+ * CS2103T Individual Project AY 21/22 Sem 1
  * @author Benedict Chua
  */
 public class Duke {
@@ -28,7 +28,7 @@ public class Duke {
     private static final String INDENTATION = "     ";
     private static final String LINE_SEPARATOR = "    ____________________________________________________________";
     private static final String[] GREETING = {"Hey! I'm Duke (Tsun)!", "What do you want?",
-        "...It's not like I want to help you or anything!"};
+            "...It's not like I want to help you or anything!"};
     private static final String[] GOODBYE = {"Hmph! It's not like I want to see you again or anything!"};
 
     private static TaskList tasksList;
