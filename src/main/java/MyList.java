@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+//master merge conflict
 /**
  * MyList class that encapsulates the bot list object and functionalities.
  *
