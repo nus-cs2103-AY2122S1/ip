@@ -5,7 +5,7 @@ import duke.exception.BadInputFormatException;
 import duke.exception.InvalidDateException;
 import org.json.simple.JSONObject;
 
-/** Represents a.Event object. */
+/** Represents an Event object. */
 public class Event extends DatedTask {
     /**
      * Event constructor.

@@ -38,7 +38,7 @@ public class Ui {
         System.out.println("Found a save, loading......");
     }
 
-    /** Indicated the program could not load data from storage. */
+    /** Indicates the program could not load data from storage. */
     public void showLoadingError() {
         System.out.println("No saves found!");
     }
