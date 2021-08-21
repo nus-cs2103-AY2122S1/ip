@@ -1,6 +1,11 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
+
 
 /**
  * This class is an implementation of Project Duke customised to be named LOTTERY-A
@@ -20,6 +25,53 @@ public class Duke {
      * Core function of bot that opens scanner and reads user input to decide what to do next.
      */
     public static void runDuke() {
+        String home = System.getProperty("user.home");
+        Path path = Paths.get(home, "duke", "dir");
+        String txtPath = new StringBuilder().append(home).append("\\duke").append("\\dir").append("\\duke.txt").toString();
+        boolean directoryExists = Files.exists(path);
+        File f;
+        BufferedWriter writer;
+        BufferedReader reader;
+
+        try {
+            if (!directoryExists) {
+                Files.createDirectories(path);
+            }
+
+            f = new File(txtPath);
+
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+            reader = new BufferedReader(new FileReader(txtPath));
+
+            String s;
+            while((s = reader.readLine()) != null) {
+                char type = s.charAt(1);
+                switch (type) {
+                    case 'T':
+                        Todo t = new Todo(s.substring(7));
+                        toDoList.add(t);
+                        break;
+                    case 'D':
+                        int deadlineIndex = s.indexOf("(by:");
+                        Deadline d = new Deadline(s.substring(7, deadlineIndex),
+                                s.substring(deadlineIndex + 4, s.length() - 1));
+                        toDoList.add(d);
+                        break;
+                    case 'E':
+                        int eventIndex = s.indexOf("(at:");
+                        Event e = new Event(s.substring(7, eventIndex), s.substring(eventIndex + 4, s.length() - 1));
+                        toDoList.add(e);
+                }
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
         String dottedLines = "----------------------------------------------------------------------------------------";
         System.out.println(dottedLines);
         System.out.println("Hello I'm LOTTERY-A");
@@ -42,6 +94,14 @@ public class Duke {
                         System.out.println(dottedLines);
                         System.out.println("Bye. Don't forget, these tasks will still require your attention when you return!");
                         System.out.println(dottedLines);
+                        f.delete();
+                        f.createNewFile();
+                        writer = new BufferedWriter(new FileWriter(txtPath));
+                        for (int i = 0; i < toDoList.size(); i++) {
+                           writer.write(toDoList.get(i).toString() + "\n");
+                        }
+
+                        writer.close();
                         break label;
                     case "list":
                         for (int i = 0; i < toDoList.size(); i++) {
@@ -159,7 +219,7 @@ public class Duke {
                     default:
                         throw new DukeException("OOPS!!! I'm Sorry, but I don't know what that means");
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.out.print(e);
             }
 
