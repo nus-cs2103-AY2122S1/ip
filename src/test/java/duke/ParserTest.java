@@ -77,11 +77,31 @@ public class ParserTest {
     }
 
     @Test
+    public void deleteCommandTest_emptyDescriptionExceptionThrown() {
+        try {
+            assertEquals(new DeleteCommand(123), Parser.decipher("delete"));
+            fail();
+        } catch (DukeException e) {
+            assertEquals(new EmptyDescriptionException("delete").getMessage(), e.getMessage());
+        }
+    }
+
+    @Test
     public void doneCommandTest_sameResult()
             throws EmptyDescriptionException, UnknownCommandException {
         assertEquals(new DoneCommand(0), Parser.decipher("done 1"));
         assertEquals(new DoneCommand(1), Parser.decipher("done 2"));
         assertEquals(new DoneCommand(2), Parser.decipher("done 3"));
+    }
+
+    @Test
+    public void doneCommandTest_emptyDescriptionExceptionThrown() {
+        try {
+            assertEquals(new DoneCommand(123), Parser.decipher("done"));
+            fail();
+        } catch (DukeException e) {
+            assertEquals(new EmptyDescriptionException("done").getMessage(), e.getMessage());
+        }
     }
 
     @Test
