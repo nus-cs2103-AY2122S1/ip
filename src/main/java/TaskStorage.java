@@ -13,6 +13,11 @@ public class TaskStorage {
         return returnString;
     }
 
+    // returns number of Tasks stored in the storage
+    public int size() {
+        return storage.size();
+    }
+
     // Checks if the storage is empty
     public boolean isEmpty() {
         return storage.isEmpty();
@@ -55,4 +60,5 @@ public class TaskStorage {
         }
         return result;
     }
+
 }

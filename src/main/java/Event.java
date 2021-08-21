@@ -1,6 +1,6 @@
 public class Event extends Task {
 
-    private final String identifier = "[E]";
+    private final String identifier = "E";
     private String interval;
 
     public Event(String description, String interval) {
@@ -10,9 +10,17 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String result = identifier;
+        String result = "[" + identifier + "]";
         result += super.toString();
         result += " (at: " + this.interval + ")";
+        return result;
+    }
+
+    @Override
+    public String databaseString() {
+        String result = identifier + "|";
+        result += getStatus() ? "1|" : "0|";
+        result += getDescription() + "|" + this.interval;
         return result;
     }
 }

@@ -25,4 +25,6 @@ public abstract class Task {
         result += this.description;
         return result;
     }
+
+    abstract public String databaseString();
 }
