@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -79,6 +81,7 @@ public class Duke {
     }
 
     static Task makeTask(String input) throws DukeException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         String[] parts = input.split(" ", 2);
         String type = parts[0];
         switch (type) {
@@ -89,11 +92,11 @@ public class Duke {
             return new Todo(parts[1]);
         case "deadline": {
             String[] subparts = parts[1].split(" /by ", 2);
-            return new Deadline(subparts[0], subparts[1]);
+            return new Deadline(subparts[0], LocalDateTime.parse(subparts[1], formatter));
         }
         case "event": {
             String[] subparts = parts[1].split(" /at ", 2);
-            return new Event(subparts[0], subparts[1]);
+            return new Event(subparts[0], LocalDateTime.parse(subparts[1], formatter));
         }
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
