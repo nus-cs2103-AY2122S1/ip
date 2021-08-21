@@ -5,11 +5,8 @@
  */
 public class DukeException extends Exception {
 
-    /** Horizontal line for formatting */
-    private static final String HORIZONTAL_LINE = "____________________________________________________________";
-
     public DukeException(String message) {
-        super(HORIZONTAL_LINE + "\n" + message + "\n" + HORIZONTAL_LINE);
+        super(message);
     }
 }
 
