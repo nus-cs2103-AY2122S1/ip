@@ -5,9 +5,15 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 
+/**
+ * Represents the persistent storage for tasks in Duke
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * @param filePath Path to tasks data file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         File file = new File(filePath);
@@ -15,6 +21,13 @@ public class Storage {
             file.getParentFile().mkdir();
         }
     }
+
+    /**
+     * Loads file data to an ArrayList of tasks
+     * @return ArrayList of tasks loaded from file
+     * @throws DukeException
+     * @throws Exception
+     */
     public ArrayList<Task> load() throws DukeException, Exception{
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
@@ -45,6 +58,13 @@ public class Storage {
         scanner.close();
         return taskList;
     }
+
+    /**
+     * Saves an ArrayList of tasks into file
+     * @param tasks ArrayList of tasks to be stored in file
+     * @throws DukeException
+     * @throws Exception
+     */
     public void save(ArrayList<Task> tasks) throws DukeException, Exception{
         FileWriter writer = new FileWriter(filePath);
         String data = "";

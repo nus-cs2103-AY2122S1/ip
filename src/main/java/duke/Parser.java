@@ -2,7 +2,17 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Static class that parses input lines into Commands
+ */
 public class Parser {
+    /**
+     * Parses a line of input to a Command object
+     * @param fullCommand string containing exactly one line of input
+     * @return Command object represented by fullCommmand
+     * @throws DukeException
+     * @throws Exception
+     */
     public static Command parse(String fullCommand) throws DukeException, Exception {
         String[] commandSplit = fullCommand.split(" ", 2);
         String commandType = "";

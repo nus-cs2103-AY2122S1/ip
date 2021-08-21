@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Handles the System input and output
+ */
 public class Ui {
     private Scanner scanner;
     public Ui() {
@@ -42,10 +45,18 @@ public class Ui {
         System.out.println(bar);
     }
 
+    /**
+     * Prints error message from duke
+     * @param e Erorr thrown by Duke
+     */
     public void showDukeException(DukeException e) {
         System.out.printf("HuAI Liddat!!! %s\n", e);
     }
 
+    /**
+     * Prints stack trace of other error messages
+     * @param e Erorr thrown by Java
+     */
     public void showException(Exception e) {
         e.printStackTrace();
     }
