@@ -51,8 +51,8 @@ public class TaskList {
             if (t.isDone()) {
                 throw new TaskIsCompleteException(index + 1);
             } else {
-                int listInd = index + 1;
-                store.appendCommand("done " + listInd);
+                int indexOnList = index + 1;
+                store.appendCommand("done " + indexOnList);
                 t.markAsDone();
                 ui.printMarkTaskDone(t);
             }
@@ -65,8 +65,8 @@ public class TaskList {
             throws DukeFileException {
         try {
             Task t = tasks.get(index);
-            int indOnList = index + 1;
-            store.appendCommand("delete " + indOnList);
+            int indexOnList = index + 1;
+            store.appendCommand("delete " + indexOnList);
             tasks.remove(index);
             ui.printRemoveTask(t, tasks.size());
         } catch (IOException e) {

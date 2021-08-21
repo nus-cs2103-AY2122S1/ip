@@ -40,6 +40,7 @@ public class Duke {
                 Command c = Parser.decipher(fullCommand);
                 c.execute(taskList, store, ui);
                 isExit = c.isExit();
+
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             }
@@ -49,7 +50,7 @@ public class Duke {
 
     public static void main(String[] args) {
         java.nio.file.Path filepath = java.nio.file.Paths.get("src",
-                                                "main", "java","data","StoredData.txt");
+                "main", "java","data","StoredData.txt");
         new Duke(filepath.toString()).run();
     }
 

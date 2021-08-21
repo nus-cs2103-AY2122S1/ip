@@ -21,8 +21,8 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
 
-    public Storage(String filepath) {
-        this.filePath = filepath;
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
     public ArrayList<Task> load() throws DukeFileException {

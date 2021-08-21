@@ -9,15 +9,15 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private final String lineSeparator = "    _______________________________";
+    private static final String LINE_SEPARATOR = "    _______________________________";
     private Scanner s = new Scanner(System.in);
 
     public void showWelcomeMessage() {
         System.out.println("Hello I'm FullOfBugs. What can I do for you?");
     }
 
-    public void printLine() {
-        System.out.println(lineSeparator);
+    private void printLine() {
+        System.out.println(LINE_SEPARATOR);
     }
 
     public void showLoadingError() {
@@ -32,12 +32,12 @@ public class Ui {
         printLine();
     }
 
-    public void printAddTask(Task t, TaskList tasks) {
+    public void printAddTask(Task t, int newSize) {
         printLine();
         System.out.println("    Got it. I've added this task:");
         System.out.printf("      %s\n", t);
-        System.out.printf("    Now you have %d ", tasks.getSize());
-        System.out.println((tasks.getSize() <= 1 ? "task" : "tasks") + " in the list.");
+        System.out.printf("    Now you have %d ", newSize);
+        System.out.println((newSize <= 1 ? "task" : "tasks") + " in the list.");
         printLine();
     }
 

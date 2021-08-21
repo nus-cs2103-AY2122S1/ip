@@ -20,6 +20,7 @@ public class Parser {
             throws EmptyDescriptionException, UnknownCommandException {
         Scanner s = new Scanner(command);
         String commandType = s.next();
+
         switch (commandType) {
         case "bye":
             return new ExitCommand();
