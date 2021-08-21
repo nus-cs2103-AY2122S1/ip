@@ -10,12 +10,15 @@ public class Duke {
 
         ChatBot bot = new ChatBot();
         System.out.println(bot.getStartMessage());
+        bot.start();
+//        bot.addDeadline("homework", "2", false);
 
         // create object of Scanner to take inputs
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         Boolean running = true;
         String commandList = "unknown command!";
+
 
 
         while (running) {
@@ -57,14 +60,14 @@ public class Duke {
                         if (info.length == 1) {
                             throw new DukeException("Please specify the deadline\n");
                         }
-                        System.out.println(bot.addDeadline(info[0], info[1]));
+                        System.out.println(bot.addDeadline(info[0], info[1], false));
                         input = sc.nextLine();
                         break;
                     case "todo":
                         if (inputs.length == 1) {
                             throw new DukeException("Please specify the todo description\n");
                         }
-                        System.out.println(bot.addTodo(inputs[1]));
+                        System.out.println(bot.addTodo(inputs[1], false));
                         input = sc.nextLine();
                         break;
                     case "event":
@@ -75,7 +78,7 @@ public class Duke {
                         if (info.length == 1) {
                             throw new DukeException("Please specify the time\n");
                         }
-                        System.out.println(bot.addEvent(info[0], info[1]));
+                        System.out.println(bot.addEvent(info[0], info[1], false));
                         input = sc.nextLine();
                         break;
                     case "delete":

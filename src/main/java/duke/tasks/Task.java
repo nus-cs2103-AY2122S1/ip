@@ -2,15 +2,27 @@ package duke.tasks;
 
 public class Task {
     private String name;
-    private boolean done;
+    private boolean isDone;
 
-    public Task(String name) {
+    public Task(String name, boolean isDone) {
         this.name = name;
-        this.done = false;
+        this.isDone = isDone;
+    }
+
+    public String getDoneMarker() {
+        return this.isDone ? "X" : " ";
     }
 
     public String getDone() {
-        return this.done ? "X" : " ";
+        return isDone ? "1" : "0";
+    }
+
+    public String getMarker() {
+        return " ";
+    }
+
+    public String getTime() {
+        return " ";
     }
 
     public String getName() {
@@ -18,12 +30,12 @@ public class Task {
     }
 
     public void completeTask() {
-        this.done = true;
+        this.isDone = true;
     }
 
     @Override
     public String toString() {
-        return "[" + this.getDone() + "] " + this.getName();
+        return "[" + this.getDoneMarker() + "] " + this.getName();
     }
 
 }
