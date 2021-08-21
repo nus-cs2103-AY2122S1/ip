@@ -16,7 +16,12 @@ public class Deadline extends Task {
 
     public Deadline(String description, String time) {
         super(description);
-        this.time = time;
+        this.time = time.stripLeading().stripTrailing();
+    }
+
+    public Deadline(String description, boolean isDone, String time) {
+        super(description, isDone);
+        this.time = time.stripLeading().stripTrailing();
     }
 
     @Override
@@ -27,7 +32,8 @@ public class Deadline extends Task {
         } else {
             deadlineLine.append("[D][ ]");
         }
-        deadlineLine.append(this.description.replaceFirst("deadline", "") + "(by:" + this.time + ")");
+        String deadlineDetails = this.description.replaceFirst("deadline", "") + "(by: " + this.time + ")";
+        deadlineLine.append(deadlineDetails);
         return deadlineLine.toString();
     }
 }

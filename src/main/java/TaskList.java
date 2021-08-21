@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +19,26 @@ public class TaskList {
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.taskLabel = 0;
+    }
+
+    public String retrieve()  {
+        try {
+            String filepath = "./data";
+            this.tasks = Storage.retrieve(filepath);
+            this.taskLabel = this.tasks.size();
+            return "Here's your history...\n" + this.listToString();
+        } catch (FileNotFoundException e) {
+            return "You have no history...";
+        }
+    }
+
+    public void save() {
+        try {
+            String filepath = "./data";
+            Storage.save(this.tasks, filepath);
+        } catch (IOException e) {
+            System.out.println("Problem");
+        }
     }
 
     /**
@@ -88,17 +110,27 @@ public class TaskList {
         return "Fine, I'll delete: " + taskToDelete.toString() + taskCount;
     }
 
-    @Override
-    public String toString() {
+    public String listToString() {
         StringBuilder tasksList = new StringBuilder();
+
         if (this.taskLabel == 0) {
-            return "No tasks yet, stop checking...";
+            return "Nothing to see here...";
         }
 
         for (int i = 0; i < this.taskLabel; i++) {
             String fullTaskLine = (i + 1) + ". " + this.tasks.get(i).toString() + "\n";
             tasksList.append(fullTaskLine);
         }
-        return "Fine, here are your tasks: \n" + tasksList.toString();
+
+        return tasksList.toString();
+    }
+
+    @Override
+    public String toString() {
+        if (this.taskLabel == 0) {
+            return "No tasks yet, stop checking...";
+        }
+
+        return "Fine, here are your tasks: \n" + this.listToString();
     }
 }

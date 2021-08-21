@@ -16,8 +16,13 @@ public class Task {
     protected boolean isDone;
 
     public Task(String description) {
-        this.description = description;
+        this.description = description.stripLeading().stripTrailing() + " ";
         this.isDone = false;
+    }
+
+    public Task(String description, boolean isDone) {
+        this.description = description.stripLeading().stripTrailing() + " ";
+        this.isDone = isDone;
     }
 
     /**

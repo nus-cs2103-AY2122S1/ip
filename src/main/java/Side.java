@@ -221,6 +221,8 @@ public class Side {
         printLogo();
         System.out.println(GREETING);
         TaskList tasks = new TaskList();
+        String history = tasks.retrieve();
+        printResponse(history);
 
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
@@ -255,7 +257,7 @@ public class Side {
             }
             userInput = scanner.nextLine();
         }
-
+        tasks.save();
         System.out.println(GOODBYE);
     }
 }
