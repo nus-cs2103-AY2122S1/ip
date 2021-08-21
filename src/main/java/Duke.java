@@ -12,7 +12,7 @@ public class Duke {
         BYE("bye"),
         UNKNOWN("unknown");
 
-        public static Command[] inputCommands = new Command[] {
+        public static Command[] inputCommands = new Command[]{
                 TODO, EVENT, DEADLINE
         };
 
@@ -24,10 +24,9 @@ public class Duke {
         }
 
 
-
         public static String[] inputParser(String input) {
 //            System.out.println("split" + input.split(" ",2)[0]);
-            return input.split(" ",2);
+            return input.split(" ", 2);
         }
 
         public static Command commandParser(String input) {
@@ -50,6 +49,7 @@ public class Duke {
             super("OOPS!!! " + errorMessage);
         }
     }
+
     public static class Task {
         protected String description;
         protected boolean isDone;
@@ -160,109 +160,107 @@ public class Duke {
         String[] commandAndParameter = Command.inputParser(input);
         Command currentCommand = Command.commandParser(commandAndParameter[0]);
 
-        String currentParameter = commandAndParameter.length == 2 ?  commandAndParameter[1] : "";
+        String currentParameter = commandAndParameter.length == 2 ? commandAndParameter[1] : "";
 
         do {
             try {
                 StringBuilder sb = new StringBuilder();
-                switch (currentCommand){
-                    case UNKNOWN:
-                        throw new DukeException("Unknown input");
-                    case BYE:
-                        hasEnded = true;
-                        printStatement("Bye. Hope to see you again soon!");
-                        break;
-                    case LIST:
-                        int counter = 1;
-                        sb.append("Here are the tasks in your list:\n");
-                        for (Task item:arrayList) {
-                            sb.append(String.valueOf(counter) + ". " + item.toString() + "\n");
-                            counter++;
-                        }
-                        printStatement(sb.toString());
-                        break;
-                    case TODO:
-                        sb.append("Got it. I've added this task: \n");
-                        if (currentParameter == "") {
-                            throw new DukeException("TODO cannot have empty parameter.");
-                        }
-                        Todo newTodo = new Todo(currentParameter);
-                        arrayList.add(newTodo);
-                        sb.append(newTodo + "\n");
+                switch (currentCommand) {
+                case UNKNOWN:
+                    throw new DukeException("Unknown input");
+                case BYE:
+                    hasEnded = true;
+                    printStatement("Bye. Hope to see you again soon!");
+                    break;
+                case LIST:
+                    int counter = 1;
+                    sb.append("Here are the tasks in your list:\n");
+                    for (Task item : arrayList) {
+                        sb.append(String.valueOf(counter) + ". " + item.toString() + "\n");
+                        counter++;
+                    }
+                    printStatement(sb.toString());
+                    break;
+                case TODO:
+                    sb.append("Got it. I've added this task: \n");
+                    if (currentParameter == "") {
+                        throw new DukeException("TODO cannot have empty parameter.");
+                    }
+                    Todo newTodo = new Todo(currentParameter);
+                    arrayList.add(newTodo);
+                    sb.append(newTodo + "\n");
 
-                        sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in the list.");
-                        printStatement(sb.toString());
-                        break;
-                    case EVENT:
-                        sb.append("Got it. I've added this task: \n");
-                        if (currentParameter.equals("")) {
-                            throw new DukeException("The description of a event cannot be empty.");
-                        } else if (!currentParameter.contains(" /at ")) {
-                            throw new DukeException("Missing /at command");
-                        }
-                        String[] time = currentParameter.split("/at");
-                        Event newEvent = new Event(time[0], time[1]);
-                        arrayList.add(newEvent);
-                        sb.append(newEvent + "\n");
-                        sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in the list.");
-                        printStatement(sb.toString());
-                        break;
-                    case DEADLINE:
-                        sb.append("Got it. I've added this task: \n");
-                        if (currentParameter.equals("")) {
-                            throw new DukeException("The description of a deadline cannot be empty.");
-                        } else if (!currentParameter.contains(" /by ")) {
-                            throw new DukeException("Missing /by command");
-                        }
-                        time = currentParameter.split("/by");
+                    sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in the list.");
+                    printStatement(sb.toString());
+                    break;
+                case EVENT:
+                    sb.append("Got it. I've added this task: \n");
+                    if (currentParameter.equals("")) {
+                        throw new DukeException("The description of a event cannot be empty.");
+                    } else if (!currentParameter.contains(" /at ")) {
+                        throw new DukeException("Missing /at command");
+                    }
+                    String[] time = currentParameter.split("/at");
+                    Event newEvent = new Event(time[0], time[1]);
+                    arrayList.add(newEvent);
+                    sb.append(newEvent + "\n");
+                    sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in the list.");
+                    printStatement(sb.toString());
+                    break;
+                case DEADLINE:
+                    sb.append("Got it. I've added this task: \n");
+                    if (currentParameter.equals("")) {
+                        throw new DukeException("The description of a deadline cannot be empty.");
+                    } else if (!currentParameter.contains(" /by ")) {
+                        throw new DukeException("Missing /by command");
+                    }
+                    time = currentParameter.split("/by");
 //                        System.out.println(time[0]);
 //                        System.out.println(time[1]);
-                        Deadline newDeadline = new Deadline(time[0].strip(), time[1].strip());
-                        arrayList.add(newDeadline);
-                        sb.append(newDeadline + "\n");
-                        sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in the list.");
-                        printStatement(sb.toString());
-                        break;
-                    case DELETE:
-                        if (currentParameter.equals("")) {
-                            throw new DukeException("Please indicate item to be deleted.");
-                        }
-                        int index = Integer.parseInt(currentParameter) - 1;
-                        if (index > arrayList.size() - 1) {
-                            throw new DukeException("Item does not exist.");
-                        }
-                        sb = new StringBuilder();
-                        sb.append("Noted. I've removed this task:\n");
-                        sb.append(arrayList.get(index).toString() + "\n");
-                        arrayList.remove(index);
+                    Deadline newDeadline = new Deadline(time[0].strip(), time[1].strip());
+                    arrayList.add(newDeadline);
+                    sb.append(newDeadline + "\n");
+                    sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in the list.");
+                    printStatement(sb.toString());
+                    break;
+                case DELETE:
+                    if (currentParameter.equals("")) {
+                        throw new DukeException("Please indicate item to be deleted.");
+                    }
+                    int index = Integer.parseInt(currentParameter) - 1;
+                    if (index > arrayList.size() - 1) {
+                        throw new DukeException("Item does not exist.");
+                    }
+                    sb = new StringBuilder();
+                    sb.append("Noted. I've removed this task:\n");
+                    sb.append(arrayList.get(index).toString() + "\n");
+                    arrayList.remove(index);
 //                        System.out.println(arrayList);
-                        sb.append("Now you have " + arrayList.size() + " tasks in the list.");
-                        printStatement(sb.toString());
-                        break;
-                    case DONE:
-                        if (currentParameter.equals("")) {
-                            throw new DukeException("Please indicate item to be completed.");
-                        }
-                        int number = Integer.parseInt(currentParameter) - 1;
-                        if (number > arrayList.size() - 1 || number < 0) {
-                            throw new DukeException("Invalid item does not exist");
-                        }
-                        Task task = arrayList.get(number);
-                        task.markAsDone();
-                        printStatement("Nice! I've marked this task as done:\n" + task);
+                    sb.append("Now you have " + arrayList.size() + " tasks in the list.");
+                    printStatement(sb.toString());
+                    break;
+                case DONE:
+                    if (currentParameter.equals("")) {
+                        throw new DukeException("Please indicate item to be completed.");
+                    }
+                    int number = Integer.parseInt(currentParameter) - 1;
+                    if (number > arrayList.size() - 1 || number < 0) {
+                        throw new DukeException("Invalid item does not exist");
+                    }
+                    Task task = arrayList.get(number);
+                    task.markAsDone();
+                    printStatement("Nice! I've marked this task as done:\n" + task);
 
-                        break;
+                    break;
                 }
             } catch (DukeException e) {
                 printStatement(e.getMessage());
             }
-        input = sc.nextLine();
-        commandAndParameter = Command.inputParser(input);
-        currentCommand = Command.commandParser(commandAndParameter[0]);
-        currentParameter = commandAndParameter.length == 2 ?  commandAndParameter[1] : "";
+            input = sc.nextLine();
+            commandAndParameter = Command.inputParser(input);
+            currentCommand = Command.commandParser(commandAndParameter[0]);
+            currentParameter = commandAndParameter.length == 2 ? commandAndParameter[1] : "";
         } while (!hasEnded);
-
-
 
 
 //        while (!input.equals("bye")) {
@@ -353,7 +351,6 @@ public class Duke {
 //
 //        }
 //        printStatement("Bye. Hope to see you again soon!");
-
 
 
     }
