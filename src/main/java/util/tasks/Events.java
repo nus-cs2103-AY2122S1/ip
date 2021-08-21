@@ -1,23 +1,30 @@
 package util.tasks;
 
-public class Events extends Task {
+import java.time.LocalDate;
+
+public class Events extends DatedTask {
     private static String label = "[E]";
-    private String date;
+
+    public Events(String name, LocalDate date) {
+        super(name.trim(), date);
+
+    }
+
     public Events(String name, String date) {
-        super(name.trim());
-        this.date = "(at: " + date.trim() + ")";
+        super(name.trim(), LocalDate.parse(date.trim()));
+
     }
 
     @Override
     public String toString() {
-        return this.label + super.toString() + " " + this.date;
+        return this.label + super.toString() + " (at: " + this.localDate() + ")";
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Events) {
             Events e = (Events) obj;
-            return this.name.equals(e.name) && e.date.equals(this.date);
+            return this.name.equals(e.name) && e.lDate.equals(this.lDate);
         }
         return false;
     }
@@ -29,6 +36,6 @@ public class Events extends Task {
                 ? Task.DONE
                 : Task.NOTDONE;
 
-        return Task.Label.T + Task.DELIMITER + d + Task.DELIMITER + this.name + Task.DELIMITER + this.date;
+        return Task.Label.E + Task.DELIMITER + d + Task.DELIMITER + this.name + Task.DELIMITER + this.lDate;
     }
 }

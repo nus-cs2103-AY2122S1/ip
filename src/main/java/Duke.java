@@ -1,13 +1,14 @@
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
-
-
-
 import util.tasks.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
 
@@ -18,6 +19,8 @@ public class Duke {
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
+    //the command for listing all the tasks under a certain date.
+    private static final String DLIST = "dlist";
     private static final String taskComplete = "Nice, I've marked this task as done";
     private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -32,6 +35,23 @@ public class Duke {
     private final ArrayList<Task> inputs =  new ArrayList<>();
     //pointer to the last location of inputs available
     private int ptr = 0;
+
+    //list of tasks that have a deadline/date
+    private final HashMap<LocalDate, ArrayList<DatedTask>> datedTaskTable = new HashMap<>();
+
+
+    /**
+     * Method to parse the string into a date.
+     * Goal: To be able to parse as many possible formats
+     * as possible. (TBC)
+     *
+     * @param s The string to parse
+     * @return The LocalDate object representing the input date.
+     */
+    private LocalDate dateParse(String s) {
+
+        return LocalDate.parse(s.trim());
+    }
 
 
     public Duke() {
@@ -91,13 +111,13 @@ public class Duke {
     /**
      * Prints all the strings added.
      */
-    private void list() throws DukeException {
+    private void list(ArrayList<? extends Task> ls) throws DukeException {
         String output = "";
-        if (ptr == 0) return;
-        output += "1." + this.inputs.get(0);
-        for (int i = 1; i < ptr; i++) {
+        if (ls.size() == 0) return;
+        output += "1." + ls.get(0);
+        for (int i = 1; i < ls.size(); i++) {
             int indi = i + 1;
-            output += "\n\t" + indi + "." + this.inputs.get(i);
+            output += "\n\t" + indi + "." + ls.get(i);
         }
         this.print(output);
     }
@@ -125,13 +145,16 @@ public class Duke {
      */
     private void deadline(String input) throws DukeException {
         String[] arr = input.split("/by", 2);
-
         if (arr.length == 1) throw new DukeException("☹ OOPS!!! The deadline must be filled in prefixed by /by");
-        Task t = new Deadlines(arr[0], arr[1]);
+        LocalDate date = dateParse(arr[1].trim());
+        Deadlines t = new Deadlines(arr[0], date);
         if (isAdded(t)) {
             this.print("Added: " + t.toString());
             return;
         }
+
+        if (this.datedTaskTable.get(date) == null) this.datedTaskTable.put(date, new ArrayList<>());
+        this.datedTaskTable.get(date).add(t);
         this.add(t);
 
     }
@@ -146,11 +169,14 @@ public class Duke {
     private void event(String input) throws DukeException {
         String[] arr = input.split("/at", 2);
         if (arr.length == 1) throw new DukeException("☹ OOPS!!! The event deadline must be filled in prefixed by /at");
-        Task t = new Events(arr[0], arr[1]);
+        LocalDate date = dateParse(arr[1].trim());
+        Events t = new Events(arr[0], date);
         if (isAdded(t)) {
             this.print("Added: " + t.toString());
             return;
         }
+        if (this.datedTaskTable.get(date) == null) this.datedTaskTable.put(date, new ArrayList<>());
+        this.datedTaskTable.get(date).add(t);
         this.add(t);
     }
 
@@ -161,9 +187,13 @@ public class Duke {
      * @param input The input String
      * @throws DukeException Exception due to wrong input.
      */
-    public void inputsParser(String input) throws DukeException {
+    public void inputsParser(String input) throws DukeException, DateTimeParseException {
         String[] twoInputs = input.split(" ", 2);
-        if (twoInputs[0].equals(DELETE)) {
+        if (twoInputs[0].equals(DLIST)) {
+            if (twoInputs.length == 1) throw new DukeException("Expected date after " + DLIST);
+            list(this.datedTaskTable.get(LocalDate.parse(twoInputs[1].trim())));
+
+        } else if (twoInputs[0].equals(DELETE)) {
             if (twoInputs.length == 1) {
                 throw new DukeException("Number expected after done.");
             }
@@ -203,7 +233,7 @@ public class Duke {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             deadline(twoInputs[1]);
         } else if (input.equals("list")) {
-            this.list();
+            this.list(this.inputs);
 
         } else {
             throw new DukeException();
@@ -227,6 +257,8 @@ public class Duke {
                 inputsParser(inpt);
             } catch (DukeException e) {
                 this.print(e.getMessage());
+            } catch (DateTimeParseException e) {
+                this.print("Expected date format YYYY MM DD");
             }
             inpt = sc.nextLine();
         }
