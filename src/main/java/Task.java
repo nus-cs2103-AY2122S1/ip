@@ -13,6 +13,7 @@ public abstract class Task {
     /** The type of the task, defined by the enum Type */
     private Type type;
 
+    /** The datetime object for the event */
     private LocalDateTime datetime;
 
     /**
