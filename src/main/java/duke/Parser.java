@@ -20,7 +20,7 @@ class Parser {
         if (input.equals("list")) {
             return list();
         } else if (input.startsWith("done")) {
-            return done(input);
+            return finishTask(input);
         } else if (input.startsWith("delete")) {
             return delete(input);
         } else {
@@ -37,7 +37,7 @@ class Parser {
         return out.toArray(new String[0]);
     }
 
-    private String[] done(String input) {
+    private String[] finishTask(String input) {
         int ind = Integer.parseInt(input.split(" ", 2)[1]);
         Task task = tasks.get(ind - 1);
         task.setDone();
