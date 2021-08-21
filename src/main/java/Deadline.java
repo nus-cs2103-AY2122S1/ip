@@ -18,6 +18,12 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    @Override
+    public String convertToTxt() {
+        return String.format("E | %d | %s | %s", super.getDone() ? 1 : 0, super.getDescription(),
+                this.deadline + System.lineSeparator());
+    }
+
     /**
      * String representation of a Deadline.
      *

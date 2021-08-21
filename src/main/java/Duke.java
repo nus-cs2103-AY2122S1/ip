@@ -18,9 +18,9 @@ public class Duke {
                     + "    \\__/  \\__/     |_______||_______| \\______| \\______/  |__|  |__| |_______|       |__|      \\______/     |_______/  \\______/  |__|\\__\\ |_______|(__) \r\n"
                     + "                                                                                                                                                       ";
 
-    static final ToDoList list = new ToDoList();
+    private static Scanner sc = new Scanner(System.in);
 
-    static Scanner sc = new Scanner(System.in);
+    private static final ToDoList list = new ToDoList(DataManager.readData());
 
     public static void main(String[] args) {
         printWelcomeMessage();
@@ -56,6 +56,7 @@ public class Duke {
                     try {
                         int index = extractIndex(input);
                         list.markTaskAsDone(index);
+                        list.updateData();
                     } catch (DukeException e) {
                         prettyPrint(e.getMessage());
                     }
@@ -64,6 +65,7 @@ public class Duke {
                     try {
                         int index = extractIndex(input);
                         list.removeFromList(index);
+                        list.updateData();
                     } catch (DukeException e) {
                         prettyPrint(e.getMessage());
                     }
@@ -158,6 +160,7 @@ public class Duke {
 
         ToDo task = new ToDo(extracted[1]);
         list.addToList(task);
+        DataManager.writeToFile(task);
     }
 
     /**
@@ -185,6 +188,7 @@ public class Duke {
         String deadline = extracted[1];
         Deadline task = new Deadline(description, deadline);
         list.addToList(task);
+        DataManager.writeToFile(task);
     }
 
     /**
@@ -212,6 +216,7 @@ public class Duke {
         String dateTime = extracted[1];
         Event task = new Event(description, dateTime);
         list.addToList(task);
+        DataManager.writeToFile(task);
     }
 
     /** Prints the exit message when user types in the exit command. */
