@@ -83,7 +83,11 @@ public class Duke {
 		oh.print();
 	}
 
-	private void run() {
+	private void saveTasks() throws IOException {
+		this.storage.saveTasks(this.tasks);
+	}
+
+	private void run() throws IOException {
 		printStartUpMessage();
 
 		while (true) {
@@ -109,6 +113,8 @@ public class Duke {
 				}
 			} catch (DukeException ex) {
 				printErrorMessage(ex);
+			} finally {
+				saveTasks();
 			}
 		}
 

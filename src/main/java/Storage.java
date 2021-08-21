@@ -3,6 +3,7 @@ import java.util.*;
 
 class Storage {
 	private final String relativePath = "../../../";
+	private final String filePath;
 	private File file;
 
 	public Storage(String dirName, String fileName) throws IOException {
@@ -13,7 +14,8 @@ class Storage {
 			dir.mkdir();
 		}
 
-		this.file = new File(relativePath + dirName + "/" + fileName);
+		this.filePath = relativePath + dirName + "/" + fileName;
+		this.file = new File(filePath);
 		/* case when file does not exist */
 		this.file.createNewFile();
 	}
@@ -47,5 +49,16 @@ class Storage {
 		}
 
 		return tasks;
+	}
+
+	public void saveTasks(List<Task> tasks) throws IOException {
+		/* re-write the entire contents of the file */
+		FileWriter fw = new FileWriter(this.filePath);
+		String delim = "-";
+		for (Task task : tasks) {
+			fw.write(String.join(delim, task.getSaveParameters()));
+			fw.write(System.lineSeparator());
+		}
+		fw.close();
 	}
 }

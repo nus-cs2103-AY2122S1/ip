@@ -8,7 +8,7 @@ public class Deadline extends Task {
 		if (pos == -1 || line.length() < pos + 5) {
 			throw new TaskException(new Deadline("?", "?"));
 		}
-		return new Deadline(line.substring(9, pos), line.substring(pos+4));
+		return new Deadline(line.substring(9, pos-1), line.substring(pos+4));
 	}
 
 	public Deadline(String description, String by) {
@@ -19,6 +19,12 @@ public class Deadline extends Task {
 
 	public String getFormat() {
 		return "deadline {description} /by {by when?}";
+	}
+
+	public List<String> getSaveParameters() {
+		List<String> params = super.getSaveParameters();
+		params.add(by);
+		return params;
 	}
 
 	public String toString() {

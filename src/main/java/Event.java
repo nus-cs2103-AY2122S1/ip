@@ -8,7 +8,7 @@ public class Event extends Task {
 		if (pos == -1 || line.length() < pos + 5) {
 			throw new TaskException(new Event("?", "?"));
 		}
-		return new Event(line.substring(6, pos), line.substring(pos+4));
+		return new Event(line.substring(6, pos-1), line.substring(pos+4));
 	}
 
 	public Event(String description, String at) {
@@ -19,6 +19,12 @@ public class Event extends Task {
 
 	public String getFormat() {
 		return "event {description} /at {event period}";
+	}
+
+	public List<String> getSaveParameters() {
+		List<String> params = super.getSaveParameters();
+		params.add(at);
+		return params;
 	}
 
 	public String toString() {

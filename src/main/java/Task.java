@@ -24,6 +24,14 @@ abstract class Task {
 
 	abstract String getFormat();
 
+	public List<String> getSaveParameters() {
+		List<String> params = new ArrayList<>();
+		params.add(type.substring(0, 1));
+		params.add(isDone ? "1" : "0");
+		params.add(description);
+		return params;
+	}
+
 	public String toString() {
 		return String.format("[%c][%s] %s", type.charAt(0), (isDone ? "X" : " "), description);
 	}
