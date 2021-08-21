@@ -9,13 +9,13 @@ import java.util.List;
 public class EventParser extends Parser {
 
     public String todo = "";
-    private String dateString = "";
     public String eventAt = "";
 
     public EventParser(String input) throws TigerEmptyStringException {
         super(input);
-        List<String> array = Arrays.asList(input.split(" "));
-        assert (array.contains("/at"));
+        RemoveSpaces removeSpaces = new RemoveSpaces();
+        List<String> array =
+                Arrays.asList(removeSpaces.removeBackAndFrontSpaces(input).split(" "));
         boolean atFound = false;
         for (int i = 1; i < array.size(); i++) {
             if (array.get(i).equals("/at")) {
@@ -28,14 +28,13 @@ public class EventParser extends Parser {
                 this.eventAt += (array.get(i) + " ");
             }
         }
-        RemoveSpaces removeLastSpaces = new RemoveSpaces();
         try {
-            this.todo = removeLastSpaces.removeLastSpaces(this.todo);
+            this.todo = removeSpaces.removeLastSpaces(this.todo);
         } catch (StringIndexOutOfBoundsException e) {
             throw new TigerEmptyStringException("Event description");
         }
         try {
-            this.eventAt = removeLastSpaces.removeLastSpaces(this.eventAt);
+            this.eventAt = removeSpaces.removeLastSpaces(this.eventAt);
         } catch (StringIndexOutOfBoundsException e) {
             throw new TigerEmptyStringException("Event date");
         }

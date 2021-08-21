@@ -10,33 +10,33 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeadLineParserTest {
     @Test
-    public void DeadLineParser_deadLineWithIndexAndTime_checkToDo() {
+    public void deadLineParser_deadLineWithDescriptionAndTime_checkToDo() {
         // we assume time input is correct
         assertEquals("Q",
                 new DeadLineParser("dateline Q /by 2020-11-21 08:35").todo);
     }
 
     @Test
-    public void DeadLineParser_deadLineWithIndexAndTime_checkTime() {
+    public void deadLineParser_deadLineWithDescriptionAndTime_checkTime() {
         assertEquals("2020-11-21 08:35",
                 new DeadLineParser("dateline Q /by 2020-11-21 08:35").dateLine);
     }
 
     @Test
-    public void DeadLineParser_spaces_checkToDo() {
+    public void deadLineParser_spaces_checkToDo() {
     assertEquals("Q",
                 new DeadLineParser("  dateline Q /by 2020-11-21 08:35  ").todo);
     }
 
     @Test
-    public void DeadLineParser_spaces_checkTime() {
+    public void deadLineParser_spaces_checkTime() {
         assertEquals("2020-11-21 08:35",
                 new DeadLineParser("  dateline Q /by 2020-11-21 08:35  ").dateLine);
     }
 
 
     @Test
-    public void DeadLineParser_missingArgumentsDescription_failure() {
+    public void deadLineParser_missingArgumentsDescription_failure() {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             DeadLineParser deadLineParser = new DeadLineParser("dateline /by 2020-11-21 08:35");
         });
@@ -47,7 +47,7 @@ public class DeadLineParserTest {
     }
 
     @Test
-    public void DeadLineParser_missingArgumentsDateTime_failure() {
+    public void deadLineParser_missingArgumentsDateTime_failure() {
         TigerException thrown = assertThrows(TigerEmptyStringException.class, () -> {
             DeadLineParser deadLineParser = new DeadLineParser("dateline " +
                     "QQ /by");
