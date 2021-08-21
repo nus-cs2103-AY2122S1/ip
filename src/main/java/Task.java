@@ -12,7 +12,7 @@ public abstract class Task {
     private boolean isDone;
 
     public abstract String saveAsString();
-    
+
     /**
      * Constructor for a Task.
      *

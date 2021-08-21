@@ -10,8 +10,10 @@ import java.util.ArrayList;
 public class TaskList {
     private static final String INDENTATION = "     ";
     private ArrayList<Task> taskList;
+    private Storage storage;
 
-    public TaskList(ArrayList<String> existingTask) {
+    public TaskList(ArrayList<String> existingTask, Storage storage) {
+        this.storage = storage;
         if (existingTask != null) {
             taskList = new ArrayList<>();
 
@@ -58,17 +60,11 @@ public class TaskList {
             taskList.add(new ToDo(task));
             break;
         case "Deadline":
-            String[] deadlineDetails = task.split(" /by ");
-            if (deadlineDetails.length == 1) {
-                throw new MissingArgumentException("'/by'", "Deadline");
-            }
+            String[] deadlineDetails = Parser.parseDeadlineDate(task);
             taskList.add(new Deadline(deadlineDetails[0], deadlineDetails[1]));
             break;
         case "Event":
-            String[] eventDetails = task.split(" /at ");
-            if (eventDetails.length == 1) {
-                throw new MissingArgumentException("'/at'", "Event");
-            }
+            String[] eventDetails = Parser.parseEventDate(task);
             taskList.add(new Event(eventDetails[0], eventDetails[1]));
             break;
         default:
@@ -77,7 +73,7 @@ public class TaskList {
             break;
         }
 
-        FileAssistant.writeToFile(convertListToString());
+        storage.writeToFile(convertListToString());
 
         return new String[] {
                 "I've added this task but it's not like I did it for you or anything!",
@@ -90,21 +86,21 @@ public class TaskList {
     /**
      * Prints the tasks in the list with indexing starting from 1.
      */
-    public void printList() {
-        for (int i = 0; i < taskList.size(); i++) {
-            Task currTask = taskList.get(i);
-            System.out.println(INDENTATION + String.format("%d:%s", i + 1, currTask));
-        }
-    }
-
     public void printList(String dateString) {
-        int index = 1;
+        if (dateString != null) {
+            int index = 1;
 
-        for (int i = 0; i < taskList.size(); i++) {
-            Task currTask = taskList.get(i);
-            if (currTask.onDate(dateString)) {
-                System.out.println(INDENTATION + String.format("%d:%s", index, currTask));
-                index++;
+            for (int i = 0; i < taskList.size(); i++) {
+                Task currTask = taskList.get(i);
+                if (currTask.onDate(dateString)) {
+                    System.out.println(INDENTATION + String.format("%d:%s", index, currTask));
+                    index++;
+                }
+            }
+        } else {
+            for (int i = 0; i < taskList.size(); i++) {
+                Task currTask = taskList.get(i);
+                System.out.println(INDENTATION + String.format("%d:%s", i + 1, currTask));
             }
         }
     }
@@ -124,7 +120,7 @@ public class TaskList {
                 taskList.get(index - 1).markTaskAsDone()
         };
 
-        FileAssistant.writeToFile(convertListToString());
+        storage.writeToFile(convertListToString());
 
         return message;
 
@@ -143,7 +139,7 @@ public class TaskList {
                         taskList.size(), taskList.size() == 1 ? "task" : "tasks")
         };
 
-        FileAssistant.writeToFile(convertListToString());
+        storage.writeToFile(convertListToString());
 
         return message;
 
