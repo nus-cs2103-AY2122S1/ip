@@ -1,7 +1,7 @@
 public class Todo extends Task {
 
-    public Todo(String description) {
-        super(description);
+    public Todo(String input) {
+        super(input.substring(5));
     }
 
     @Override
