@@ -32,43 +32,16 @@ public class Augury {
         String description;
         String time;
 
-        switch(type){
-            case "todo":
-                if (arg.length() <= 5) {
-                    // command doesn't have any arguments
-                    throw new InvalidTaskCreationException("Description of todo cannot be empty!");
-                }
-                description = arg.substring(5).trim();
-                speak(taskList.add(description, Task.TaskTypes.TODO));
-                break;
-            case "deadline":
-                if (arg.length() <= 9) {
-                    // command doesn't have any arguments
-                    throw new InvalidTaskCreationException("Description of deadline cannot be empty!");
-                }
-                if (arg.split("/by ").length < 2 || arg.split("/by ")[1].length() <= 4) {
-                    // command doesn't include '/by' portion
-                    throw new InvalidTaskCreationException("Deadline task must include time! (using /by time)");
-                }
-                description = arg.substring(9).split("/by ")[0].trim();
-                time = arg.split("/by ")[1].trim();
-                speak(taskList.add(description, Task.TaskTypes.DEADLINE, time));
-                break;
-            case "event":
-                if (arg.length() <= 6) {
-                    // command doesn't have any arguments
-                    throw new InvalidTaskCreationException("Description of event cannot be empty!");
-                }
-                if (arg.split("/at ").length < 2 || arg.split("/at ")[1].length() <= 4) {
-                    // command doesn't include '/at' portion
-                    throw new InvalidTaskCreationException("Event task must include time! (using /at time)");
-                }
-                description = arg.substring(6).split("/at ")[0].trim();
-                time = arg.split("/at ")[1].trim();
-                speak(taskList.add(description, Task.TaskTypes.EVENT, time));
-                break;
-            default:
-                throw new UnknownCommandException("I don't understand that command.");
+        try {
+            TaskFactory tf = new TaskFactory();
+            Task newTask = tf.createTask(type, arg);
+
+            if (newTask == null) {
+                throw new UnknownCommandException("Invalid command entered.");
+            }
+            speak(taskList.addTask(type, newTask));
+        } catch (AuguryException e) {
+            throw new AuguryException(e.getMessage());
         }
     }
 

@@ -11,12 +11,12 @@
 	 Hello! How may I help you?
 	_________________________________
 	_________________________________
-	 I've added your todo: 
+	 I've added your todo:
 		[T][ ] item one
 	 1 tasks in total.
 	_________________________________
 	_________________________________
-	 I've added your event: 
+	 I've added your event:
 		[E][ ] item two (at: 22/2/2012 2pm)
 	 2 tasks in total.
 	_________________________________
@@ -26,7 +26,7 @@
 	 2. [E][ ] item two (at: 22/2/2012 2pm)
 	_________________________________
 	_________________________________
-	 I've added your deadline: 
+	 I've added your deadline:
 		[D][ ] item three (by: next tuesday)
 	 3 tasks in total.
 	_________________________________
@@ -61,7 +61,7 @@
 	 Please try again.
 	_________________________________
 	_________________________________
-	 I've added your event: 
+	 I've added your event:
 		[E][ ] item four (at: tomorrow)
 	 4 tasks in total.
 	_________________________________
@@ -78,22 +78,22 @@
 	 4. [E][ ] item four (at: tomorrow)
 	_________________________________
 	_________________________________
-	 I've added your todo: 
+	 I've added your todo:
 		[T][ ] 5
 	 5 tasks in total.
 	_________________________________
 	_________________________________
-	 I've added your todo: 
+	 I've added your todo:
 		[T][ ] 6
 	 6 tasks in total.
 	_________________________________
 	_________________________________
-	 I've added your todo: 
+	 I've added your todo:
 		[T][ ] 7
 	 7 tasks in total.
 	_________________________________
 	_________________________________
-	 I've added your todo: 
+	 I've added your todo:
 		[T][ ] 8
 	 8 tasks in total.
 	_________________________________

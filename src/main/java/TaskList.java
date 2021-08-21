@@ -6,39 +6,10 @@ import java.util.Set;
 public class TaskList {
     private ArrayList<Task> tasks;
 
-    public String add(String description, Task.TaskTypes type) {
+    public String addTask(String taskType, Task t) {
         String res = "";
-        Task t;
-        switch(type) {
-            case TODO:
-                t = new TodoTask(description);
-                tasks.add(t);
-                res += "I've added your todo: \n\t\t" + t;
-                break;
-            default:
-                return "Invalid task type.";
-        }
-        res += "\n\t " + tasks.size() + " tasks in total.";
-        return res;
-    }
-
-    public String add(String description, Task.TaskTypes type, String time) {
-        String res = "";
-        Task t;
-        switch(type) {
-            case EVENT:
-                t = new EventTask(description, time);
-                tasks.add(t);
-                res += "I've added your event: \n\t\t" + t;
-                break;
-            case DEADLINE:
-                t = new DeadlineTask(description, time);
-                tasks.add(t);;
-                res += "I've added your deadline: \n\t\t" + t;
-                break;
-            default:
-                return "Invalid task type";
-        }
+        tasks.add(t);
+        res += "I've added your " + taskType.toLowerCase() + ":\n\t\t" + t;
         res += "\n\t " + tasks.size() + " tasks in total.";
         return res;
     }
