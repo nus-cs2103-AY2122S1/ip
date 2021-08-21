@@ -1,23 +1,27 @@
 package main.java;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-/*
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "d")
 
- */
+@JsonIgnoreProperties(
+        ignoreUnknown = true
+)
 @JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME)
+        use = JsonTypeInfo.Id.NAME
+)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Todo.class, name = "Todo"),
         @JsonSubTypes.Type(value = Deadline.class, name = "Deadline"),
         @JsonSubTypes.Type(value = Event.class, name = "Event")
 })
 public class Task {
+
+    @JsonProperty
     protected String description;
+
+    @JsonProperty
     protected boolean isDone;
 
     /**
@@ -27,6 +31,13 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    /**
+     * Required for JackSon.
+     */
+    public Task() {
+
     }
 
     /**

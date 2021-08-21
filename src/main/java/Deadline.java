@@ -1,7 +1,10 @@
 package main.java;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Deadline extends Task {
 
+    @JsonProperty
     protected String by;
 
     /**
@@ -13,6 +16,11 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
     }
+
+    /**
+     * Required for JackSon.
+     */
+    private Deadline() {}
 
     @Override
     public String toString() {

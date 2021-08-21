@@ -1,6 +1,7 @@
 package main.java;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.io.*;
 
@@ -14,89 +15,75 @@ public class DatabaseEngine {
 
     private Path dir;
     private Path fileDir;
+    private File file;
     private DukeMessages messages = new DukeMessages();
-    private ObjectMapper mapper;
-
+    private ObjectMapper mapper = new ObjectMapper();
 
     public DatabaseEngine() {
         this.dir = Paths.get(System.getProperty("user.dir"), "database");
-        this.fileDir = Paths.get(System.getProperty("user.dir"), "database", "database.txt");
+        this.fileDir = Paths.get(System.getProperty("user.dir"), "database", "database.json");
+        this.file = new File(this.fileDir.toString());
     }
 
+    /**
+     * Writes current list to local storage's JSON.
+     * @param taskList list to be saved.
+     */
     public void writeToDatabase(List<Task> taskList) {
-
         try {
-            //deletes original file if it is present.
-            this.clearDatabase();
-            FileWriter writer = new FileWriter(this.fileDir.toString());
+            mapper
+                    .writerFor(new TypeReference<List<Task>>() {})
+                    .writeValue(file, taskList);
 
-
-            writer.close();
-
-        } catch (Exception e) {
-            //TODO: Should be using DukeMessages
-            System.out.println("Might not be working?");
-            System.out.println(this.dir);
-            System.out.println(this.fileDir);
-            messages.displayText("An error occurred while trying to write to the database.");
-        }
-    }
-
-    public List<Task> readFromDatabase() {
-
-        try {
-            this.createDirectory();
         } catch (IOException e) {
-            messages.displayText("Cannot create file directory. Please check if you have the" +
-                    "read / write file permissions");
-        }
-
-        try {
-            Reader reader = Files.newBufferedReader(this.fileDir);
-
-            //TODO: replace
-            List<Task> taskList = new ArrayList<Task>();
-            //List<Task> taskList = Arrays.asList(gson.fromJson(reader, Task[].class));
-
-            reader.close();
-            return taskList;
-
-        } catch (Exception e) {
-            //as we are writing to local memory, IOException should not be thrown at all.
-            messages.displayText("No database inside directory or it is empty. Creating one now at: " + this.dir);
-            this.createDatabase();
-
-            List<Task> taskList = new ArrayList<Task>();
-            return taskList;
+            messages.displayText("An error occurred while trying to save to database. Please contact our staff for more information.");
         }
     }
 
+    /**
+     * Reads from local storage's JSON.
+     * @return list containing Tasks stored in local storage.
+     */
+    public List<Task> readFromDatabase() {
+        try {
+            return mapper
+                    .readerFor(new TypeReference<ArrayList<Task>>() {})
+                    .readValue(file);
 
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("Error: Unable to read from database.");
+            return new ArrayList<Task>();
+        }
+    }
+
+    /**
+     * Creates a json file if not present in local storage.
+     */
     public void createDatabase() {
         try {
             File file = new File(String.valueOf(this.fileDir));
             file.createNewFile();
         } catch (IOException e) {
             //should not occur since we are writing to local memory as opposed to network file
-            messages.displayText("An issue occurred while trying to create a directory. Please check that " +
-                    "you have admin permissions and can read and write to folders. Any work done in this program" +
-                    "session will not be saved.");
+            messages.displayText("Error: Unable to create json file.");
         }
 
     }
 
-    public void clearDatabase() throws IOException {
-        new File(this.fileDir.toString()).delete();
-    }
+    /**
+     * Creates a directory if not present in local storage.
+     */
+    public void createDirectory() {
 
-    public void createDirectory() throws IOException {
-        if(!Files.exists(this.dir)) {
-            messages.displayText("You currently do not have a directory to save the database. " +
-                    "Creating one now at: " + this.dir);
-            Files.createDirectory(this.dir);
+        try {
+            if(!Files.exists(this.dir)) {
+                messages.displayText("You currently do not have a directory to save the database. " +
+                        "Creating one now at: " + this.dir);
+                Files.createDirectory(this.dir);
+            }
+        } catch (IOException e) {
+            messages.displayText("Error: Unable to create the directory.");
         }
     }
-
-
-
 }

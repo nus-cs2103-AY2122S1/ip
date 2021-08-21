@@ -1,7 +1,5 @@
 package main.java;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
@@ -18,6 +16,7 @@ public class DukeEngine {
      */
     public void runProgram() {
 
+        /*
         Todo sampleTask = new Todo("todoh-kun");
         Deadline deadline = new Deadline("Eat pizzas", "Today");
         Task event = new Event("Nightlife", "Wimbledon");
@@ -27,26 +26,40 @@ public class DukeEngine {
         sampleList.add(deadline);
         sampleList.add(event);
 
+        this.taskList = databaseEngine.readFromDatabase();
+        for (Task s: taskList) {
+            if (s instanceof Todo) {
+                System.out.println("\n" + s + " is an instance of ToDo!\n");
+            }
 
-        databaseEngine.readFromDatabase();
-        databaseEngine.writeToDatabase(sampleList);
+            if (s instanceof Deadline) {
+                System.out.println("\n" + s + " is an instance of Deadline!\n");
+            }
 
-        //this.loadData();
-
-        /*
-        try {
-            databaseEngine.printer();
-        } catch (Exception e) {
-
+            if (s instanceof Event) {
+                System.out.println("\n" + s + " is an instance of Event!\n");
+            }
         }
 
+
+        //this.taskList = databaseEngine.readFromDatabase();
+        //System.out.println("The retrieved task list is: ");
+        //System.out.println(this.taskList);
+
+        //databaseEngine.writeToDatabase(sampleList);
          */
+
+        this.loadData();
+
 
         //initialises the scanner
         Scanner sc = new Scanner(System.in);
         String input;
 
         while (true) {
+
+            //saves the latest copy of the task list
+            this.saveData();
 
             //removes additional space from the input
             input = sc.nextLine().trim();
@@ -95,11 +108,10 @@ public class DukeEngine {
     }
 
     public void loadData() {
-        try {
-            this.taskList = databaseEngine.readFromDatabase();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+
+        databaseEngine.createDirectory();
+        databaseEngine.createDatabase();
+        this.taskList = databaseEngine.readFromDatabase();
     }
 
 
@@ -266,5 +278,12 @@ public class DukeEngine {
             this.taskList.remove(realIndex);
             messages.taskDeleteMessage(removedTask, this.taskList.size());
         }
+    }
+
+    /**
+     * Saves the current task list to local memory's json.
+     */
+    public void saveData() {
+        databaseEngine.writeToDatabase(this.taskList);
     }
 }

@@ -1,7 +1,10 @@
 package main.java;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Event extends Task {
 
+    @JsonProperty
     protected String at;
 
     /**
@@ -13,6 +16,11 @@ public class Event extends Task {
         super(description);
         this.at = at;
     }
+
+    /**
+     * Required for JackSon.
+     */
+    private Event() {}
 
     @Override
     public String toString() {
