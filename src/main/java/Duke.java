@@ -1,14 +1,11 @@
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -101,13 +98,22 @@ public class Duke {
 
         Deadline(String description, String by, boolean isDone) {
             super(description, isDone);
-            this.by = by;
+            String date;
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                date = LocalDate.parse(by, formatter).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            } catch (DateTimeParseException e) {
+                date = by;
+            }
+
+            this.by = date;
         }
 
         protected String by;
 
         public Deadline(String description, String by) {
             this(description, by, false);
+
         }
 
         @Override
@@ -122,16 +128,24 @@ public class Duke {
 
         public Event(String description, String at, boolean isDone) {
             super(description, isDone);
-            this.at = at;
+            String date;
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                date = LocalDate.parse(at, formatter).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            } catch (DateTimeParseException e) {
+                date = at;
+            }
+
+            this.at = date;
+        }
+        public Event(String description, String at) {
+            this(description, at, false);
         }
 
-        public Event(String description, String at) {
-            this(description,at, false);
-        }
 
         @Override
         public String toString() {
-            return "[E]" + super.toString() + "(at:" + at + ")";
+            return "[E]" + super.toString() + " (at: " + at + ")";
         }
     }
 
@@ -154,18 +168,12 @@ public class Duke {
     }
 
     private static void printLine() {
-//        printPadding();
         for (int i = 0; i < 20; i++) {
             System.out.print("-");
         }
         System.out.println();
     }
 
-    private static void printPadding() {
-        for (int i = 0; i < 5; i++) {
-            System.out.print(" ");
-        }
-    }
 
     private static void printStatement(String statement) {
         System.out.println();
@@ -284,9 +292,6 @@ public class Duke {
 
 
 
-
-        boolean hasEnded = false;
-
         String[] commandAndParameter = inputParser(input);
         Command currentCommand = commandParser(commandAndParameter[0]);
 
@@ -298,10 +303,10 @@ public class Duke {
                 switch (currentCommand) {
                 case UNKNOWN:
                     throw new DukeException("Unknown input");
-                case BYE:
-                    hasEnded = true;
-                    printStatement("Bye. Hope to see you again soon!");
-                    break;
+//                case BYE:
+//                    hasEnded = true;
+//                    printStatement("Bye. Hope to see you again soon!");
+//                    break;
                 case LIST:
                     int counter = 1;
                     sb.append("Here are the tasks in your list:\n");
@@ -333,7 +338,7 @@ public class Duke {
                         throw new DukeException("Missing /at command");
                     }
                     String[] time = currentParameter.split("/at");
-                    Event newEvent = new Event(time[0], time[1]);
+                    Event newEvent = new Event(time[0].strip(), time[1].strip());
                     arrayList.add(newEvent);
                     sb.append(newEvent + "\n");
                     sb.append("Now you have " + String.valueOf(arrayList.size()) + " tasks in the list.");
@@ -395,11 +400,9 @@ public class Duke {
             commandAndParameter = inputParser(input);
             currentCommand = commandParser(commandAndParameter[0]);
             currentParameter = commandAndParameter.length == 2 ? commandAndParameter[1] : "";
-        } while (!hasEnded);
 
-
-
-
-
+        } while (!currentCommand.equals(Command.BYE));
+        printStatement("Bye. Hope to see you again soon!");
+        System.exit(0);
     }
 }
