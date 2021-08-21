@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.TaskAlreadyDoneException;
+import duke.exception.TaskIndexOutOfBoundsException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class DoneCommand extends Command {
 
     private int taskId;

@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.TaskAlreadyDoneException;
+import duke.exception.TaskIndexOutOfBoundsException;
+
 import java.util.ArrayList;
 
 public class TaskList {

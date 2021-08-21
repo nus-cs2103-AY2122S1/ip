@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -22,6 +24,11 @@ public class Event extends Task {
         super(description);
         this.at = at;
     }
+
+    public LocalDate getDate() {
+        return this.at;
+    }
+
 
     /**
      * Returns the string representation of an Event instance.

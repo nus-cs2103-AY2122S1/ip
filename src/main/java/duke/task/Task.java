@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * This Task class implements the characteristics of a task.
  *
@@ -20,6 +22,14 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     /**
