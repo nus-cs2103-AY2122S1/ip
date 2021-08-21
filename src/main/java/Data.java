@@ -23,8 +23,8 @@ public class Data {
     return res;
     }
 
-    static void saveData(ArrayList<Task> tasks) throws IOException{
-        File fout = new File("out.txt");
+    static void saveData(ArrayList<Task> tasks, String outpath) throws IOException{
+        File fout = new File(outpath);
         FileOutputStream fos = new FileOutputStream(fout);
      
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));

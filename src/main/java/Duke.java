@@ -47,7 +47,7 @@ public class Duke {
                 "   Bye. Hope to see you again soon!\n" +
                 "   ____________________________________________________________";
                 System.out.println(byesent);
-                Data.saveData(tasklist.returnTaskList());
+                Data.saveData(tasklist.returnTaskList(),"/Users/fukushimayuuichirou/Desktop/ip/data.txt");
                 break;
             }else{
                 tasklist.actionHalder(splited, false, false);
