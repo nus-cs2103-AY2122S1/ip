@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class InvalidInstructionException extends DukeException {
 
     private String instruction;

@@ -1,3 +1,13 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+
+import duke.exception.InvalidInputException;
+import duke.exception.InvalidInstructionException;
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
