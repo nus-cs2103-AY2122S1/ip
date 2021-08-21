@@ -3,6 +3,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String logo = " ____        _        \n"
+                                     + "|  _ \\ _   _| | _____ \n"
+                                     + "| | | | | | | |/ / _ \\\n"
+                                     + "| |_| | |_| |   <  __/\n"
+                                     + "|____/ \\__,_|_|\\_\\___|\n";
     private static final int MAX_TASKS = 100;
     private static final String BORDER = "____________________________________________________________";
     private static List<Task> taskList = new ArrayList<>();
@@ -81,15 +86,10 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        System.out.printf("Duke is gone. Hello, this is Duchess.\nHow can I help you?\n%s%n", BORDER);
 
         Scanner sc = new Scanner(System.in);
-        System.out.printf("Duke is gone. Hello, this is Duchess.\nHow can I help you?\n%s%n", BORDER);
 
         while (true) {
             try {
