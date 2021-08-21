@@ -20,8 +20,7 @@ public class Event extends Task {
 
     @Override
     public String convertToTxt() {
-        return String.format("E | %d | %s | %s", super.getDone() ? 1 : 0, super.getDescription(),
-                this.dateTime + System.lineSeparator());
+        return String.format("E | %s | %s", super.convertToTxt(), this.dateTime);
     }
 
     /**

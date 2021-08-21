@@ -32,15 +32,9 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public Boolean getDone() {
-        return this.isDone;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    abstract public String convertToTxt();
+    public String convertToTxt() {
+        return String.format("%d | %s", isDone ? 1 : 0, this.description);
+    };
 
     /**
      * String representation of a task.

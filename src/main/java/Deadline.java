@@ -20,8 +20,7 @@ public class Deadline extends Task {
 
     @Override
     public String convertToTxt() {
-        return String.format("E | %d | %s | %s", super.getDone() ? 1 : 0, super.getDescription(),
-                this.deadline + System.lineSeparator());
+        return String.format("D | %s | %s", super.convertToTxt(), this.deadline);
     }
 
     /**

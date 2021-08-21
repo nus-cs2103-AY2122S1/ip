@@ -40,7 +40,7 @@ public class DataManager {
         try {
             FileWriter fw = new FileWriter("./data/data.txt");
             for (Task t: tasks) {
-                fw.write(t.convertToTxt());
+                fw.write(t.convertToTxt() + System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {

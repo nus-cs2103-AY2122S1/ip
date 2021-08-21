@@ -16,7 +16,7 @@ public class ToDo extends Task {
 
     @Override
     public String convertToTxt() {
-        return String.format("T | %d | %s", super.getDone() ? 1 : 0, super.getDescription() + System.lineSeparator());
+        return String.format("T | %s", super.convertToTxt());
     }
 
     /**
