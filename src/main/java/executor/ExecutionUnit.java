@@ -4,10 +4,12 @@ import model.Storage;
 import model.task.Task;
 import executor.parser.QueryParser;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,11 +27,30 @@ public class ExecutionUnit {
         }
     }
 
+    // TODO: Find a better way to do this..
+    public void saveStorage(String storagePath) throws IOException {
+        Path path = Paths.get(storagePath);
+        Files.createDirectories(path.getParent());
+        Files.deleteIfExists(path);
+        Files.createFile(path);
+
+        Task[] all = storage.getAllTasks();
+        BufferedWriter bw = Files.newBufferedWriter(path, StandardOpenOption.APPEND);
+
+        for (Task t : all) {
+            bw.append(t.toString());
+        }
+    }
+
     public void initStorage() throws IOException {
         initStorage("src/main/resources/storage.txt");
     }
 
-    public String[] executeCommand(String query) {
+    public void saveStorage() throws IOException {
+        saveStorage("src/main/resources/storage.txt");
+    }
+
+    public String[] executeCommand(String query) throws IOException {
         String[] queryArr;
         queryArr = parser.parse(query);
 
@@ -48,14 +69,17 @@ public class ExecutionUnit {
                 return new String[]{"Bye! Hope to see you again soon!"};
             case "done":
                 Task markedTask = storage.markDone(Integer.parseInt(queryArr[1]));
+                this.saveStorage();
                 return new String[]{"Nice! I've marked this task as done:", "  " + markedTask.toString()};
             case "delete":
                 Task deletedTask = storage.deleteTaskByIdx(Integer.parseInt(queryArr[1]));
+                this.saveStorage();
                 return new String[]{"Noted. I've removed this task:",
                         "  " + deletedTask.toString(),
                         "Now you have " + storage.numTasks() + " tasks in the list"};
             default:
                 Task addedTask = storage.push(queryArr);
+                this.saveStorage();
                 return new String[]{"Got it. I've added this task:",
                         "  " + addedTask.toString(),
                         "Now you have " + storage.numTasks() + " tasks in the list"};
