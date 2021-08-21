@@ -6,15 +6,21 @@
 
 public class Deadline extends Task {
     protected String by;
+    protected final static String taskSymbol = "[D]";
 
     public Deadline(String description, String by) throws IllegalArgumentException {
-        super(description);
+        super(description, taskSymbol);
         if (by.equals("")) {throw new IllegalArgumentException();}
         this.by = by;
     }
 
     @Override
+    public String convertToText() {
+        return super.convertToText() + super.getDivider() + by;
+    }
+
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return super.toString() + " (by: " + by + ")";
     }
 }

@@ -15,6 +15,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         ChatBot bot = new ChatBot();
+        bot.retrieveTasks();
         Printer.prettyPrint(bot.greet());
         Scanner sc = new Scanner(System.in);
         while(bot.isRunning()) {
