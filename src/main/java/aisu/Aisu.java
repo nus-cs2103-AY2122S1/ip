@@ -18,6 +18,7 @@ public class Aisu {
     public Aisu(String dirPath, String fileName) {
         this.ui = new Ui();
         this.storage = new Storage(dirPath, fileName);
+
         try {
             List<Task> cachedData = this.storage.load();
             this.tasklist = new TaskList(cachedData);
@@ -42,6 +43,7 @@ public class Aisu {
         ui.showWelcomeMessage();
 
         boolean isExit = false;
+
         while (!isExit) {
             try {
                 Command command = Parser.parse(ui.getInput());
