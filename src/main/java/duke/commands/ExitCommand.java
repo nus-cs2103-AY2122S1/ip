@@ -15,8 +15,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage store, Ui ui)
-            throws DukeFileException {
+    public void execute(TaskList taskList, Storage store, Ui ui) throws DukeFileException {
         taskList.safeTasks(store);
         ui.bidFarewell();
     }

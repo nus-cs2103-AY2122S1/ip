@@ -11,6 +11,7 @@ import duke.task.ToDo;
 import duke.TaskList;
 import duke.Storage;
 import duke.Ui;
+
 import java.io.IOException;
 
 /**
@@ -25,8 +26,7 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(TaskList tasklist, Storage store, Ui ui)
-            throws CommandParamException, DukeFileException,
-            EmptyDescriptionException, UnknownCommandException {
+            throws CommandParamException, DukeFileException, EmptyDescriptionException, UnknownCommandException {
         try {
             Task t;
             if (this.command.equals("todo")) {
@@ -65,9 +65,11 @@ public class AddCommand extends Command {
             } else {
                 throw new UnknownCommandException();
             }
+
             tasklist.addToList(t);
             store.appendCommand(t.fullCommand());
-            ui.printAddTask(t, tasklist);
+            ui.printAddTask(t, tasklist.getSize());
+
         } catch (IOException e) {
             throw new DukeFileException();
         }

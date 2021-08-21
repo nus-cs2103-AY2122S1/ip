@@ -16,7 +16,6 @@ public class DoneCommand extends Command {
         super("done", index);
     }
 
-
     @Override
     public void execute(TaskList taskList, Storage store, Ui ui)
             throws DukeFileException, TaskIsCompleteException, TaskNotFoundException {

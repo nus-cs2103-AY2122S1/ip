@@ -15,7 +15,7 @@ public abstract class Command {
     protected String description;
     protected int index;
 
-    protected Command(String command) { //for list or bye
+    protected Command(String command) {
         this.command = command;
         this.description = "";
         if (command.equals("bye")) {
@@ -25,21 +25,20 @@ public abstract class Command {
         }
     }
 
-    protected Command(String command, String description) { //For addCommand
+    protected Command(String command, String description) {
         this.command = command;
         this.isExit = false;
         this.description = description;
     }
 
-    protected Command(String command, int index) { //For done or delete
+    protected Command(String command, int index) {
         this.command = command;
         this.description = "";
         this.isExit = false;
         this.index = index;
     }
 
-    public abstract void execute(TaskList taskList, Storage store, Ui ui)
-            throws DukeException;
+    public abstract void execute(TaskList taskList, Storage store, Ui ui) throws DukeException;
 
     public boolean isExit() {
         return this.isExit;
