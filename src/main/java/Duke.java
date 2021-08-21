@@ -10,10 +10,16 @@ public class Duke {
             + "What can I do for you?\n";
     private static String exit = "Bye. Hope to see you again soon!";
 
-    
+    private static String PATH;
+
     public static void main(String[] args) {
+        PATH = System.getProperty("user.dir") + "\\data\\data.txt";
 
         DukeList list = new DukeList();
+
+        Storage storage = new Storage(PATH, list);
+
+        storage.load();
 
         Scanner scan = new Scanner(System.in);
 
@@ -48,6 +54,8 @@ public class Duke {
 
             input = scan.nextLine();
         }
+
+        storage.save();
 
         System.out.println(exit);
     }
