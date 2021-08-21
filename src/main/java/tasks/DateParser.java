@@ -46,6 +46,10 @@ public class DateParser {
   public static String toHumanReadable(LocalDateTime dateTime) {
     return dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a"));
   }
+
+  public static String toDatabaseFormat(LocalDateTime dateTime) {
+    return dateTime.format(DateTimeFormatter.ofPattern("yyyy-mm-dd HHmm"));
+  }
 }
 /*
 Notes for REGEX:

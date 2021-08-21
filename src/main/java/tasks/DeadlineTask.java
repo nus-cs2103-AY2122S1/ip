@@ -16,7 +16,7 @@ public class DeadlineTask extends Task {
 
   @Override
   public String taskToString() {
-    return super.taskToString() + this.date;
+    return super.taskToString() + DateParser.toDatabaseFormat(this.date);
   }
 
   @Override
