@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public class Event extends Task {
     private String marker = "[E]";
     private String time;
@@ -6,10 +8,6 @@ public class Event extends Task {
         super(name);
         this.time = time;
     }
-
-//    public String getMarker() {
-//        return this.marker;
-//    }
 
     @Override
     public String toString() {

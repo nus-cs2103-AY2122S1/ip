@@ -1,8 +1,15 @@
+package duke;
+
+import duke.tasks.Task;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
+
 import java.util.ArrayList;
 
 public class ChatBot {
 
-    static String line = "___________________________________________________\n";
+    public static String line = "___________________________________________________\n";
     private ArrayList<Task> tasks = new ArrayList<>();
 
     public String getStartMessage() {
