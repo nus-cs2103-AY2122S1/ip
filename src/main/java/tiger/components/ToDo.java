@@ -1,10 +1,7 @@
 package tiger.components;
 
-import tiger.exceptions.TigerEmptyStringException;
-import tiger.exceptions.TigerStorageLoadException;
-
-import java.util.HashMap;
-import java.util.Map;
+import tiger.exceptions.inputs.TigerEmptyStringException;
+import tiger.exceptions.storage.TigerStorageLoadException;
 
 public class ToDo extends Task{
 

@@ -1,9 +1,9 @@
 package tiger.storage;
 
 import tiger.components.TaskList;
-import tiger.exceptions.TigerStorageInitException;
-import tiger.exceptions.TigerStorageLoadException;
-import tiger.exceptions.TigerStorageSaveException;
+import tiger.exceptions.storage.TigerStorageInitException;
+import tiger.exceptions.storage.TigerStorageLoadException;
+import tiger.exceptions.storage.TigerStorageSaveException;
 
 import java.io.File;
 import java.io.FileWriter;

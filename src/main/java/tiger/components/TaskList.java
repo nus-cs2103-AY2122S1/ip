@@ -1,7 +1,7 @@
 package tiger.components;
 
-import tiger.exceptions.TigerIndexOutOfBoundsException;
-import tiger.exceptions.TigerStorageLoadException;
+import tiger.exceptions.inputs.TigerIndexOutOfBoundsException;
+import tiger.exceptions.storage.TigerStorageLoadException;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,7 @@
 package tiger.parser;
 
+import tiger.exceptions.inputs.TigerInvalidInputException;
+
 public class Parser {
 
     String command;
@@ -12,4 +14,5 @@ public class Parser {
         String[] array = this.command.split(" ");
         return array[0];
     }
+
 }

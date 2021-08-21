@@ -1,7 +1,7 @@
 package tiger.parser;
 
-import tiger.exceptions.TigerEmptyStringException;
-import tiger.exceptions.TigerInvalidArgumentException;
+import tiger.exceptions.inputs.TigerEmptyStringException;
+import tiger.exceptions.inputs.TigerInvalidArgumentException;
 
 public class DeleteParser extends Parser {
 

@@ -1,6 +1,6 @@
 package tiger.components;
 
-import tiger.exceptions.TigerStorageLoadException;
+import tiger.exceptions.storage.TigerStorageLoadException;
 
 abstract public class Task {
     protected String taskDescription;

@@ -1,7 +1,7 @@
 package tiger.actions;
 
 import tiger.components.TaskList;
-import tiger.exceptions.TigerIndexOutOfBoundsException;
+import tiger.exceptions.inputs.TigerIndexOutOfBoundsException;
 
 public class MarkDoneAction extends Action {
     AppState applicationState;

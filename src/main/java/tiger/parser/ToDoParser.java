@@ -1,6 +1,6 @@
 package tiger.parser;
 
-import tiger.exceptions.TigerEmptyStringException;
+import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.utils.RemoveLastSpaces;
 
 public class ToDoParser extends Parser {
