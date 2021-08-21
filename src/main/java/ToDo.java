@@ -14,6 +14,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    @Override
+    public String convertToTxt() {
+        return String.format("T | %s", super.convertToTxt());
+    }
+
     /**
      * String representation of Todos task.
      *

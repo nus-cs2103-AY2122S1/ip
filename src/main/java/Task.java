@@ -4,7 +4,7 @@
  * @author Tan Yi Guan
  * @version CS2103T AY21/22 Semester 1
  */
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
 
@@ -31,6 +31,10 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public String convertToTxt() {
+        return String.format("%d | %s", isDone ? 1 : 0, this.description);
+    };
 
     /**
      * String representation of a task.

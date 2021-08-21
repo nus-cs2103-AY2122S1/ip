@@ -10,8 +10,8 @@ public class ToDoList {
     private final ArrayList<Task> list;
 
     /** Instantiates a new To do list. */
-    public ToDoList() {
-        list = new ArrayList<>();
+    public ToDoList(ArrayList<Task> list) {
+        this.list = list;
     }
 
     /** Prints the list of items that the user entered. */
@@ -72,5 +72,9 @@ public class ToDoList {
                             task, list.size() - 1));
             list.remove(index - 1);
         }
+    }
+
+    public void updateData() throws DukeException {
+        DataManager.updateData(list);
     }
 }

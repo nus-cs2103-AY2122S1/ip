@@ -18,6 +18,11 @@ public class Event extends Task {
         this.dateTime = dateTime;
     }
 
+    @Override
+    public String convertToTxt() {
+        return String.format("E | %s | %s", super.convertToTxt(), this.dateTime);
+    }
+
     /**
      * String representation of an Event.
      *
