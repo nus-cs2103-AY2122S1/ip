@@ -18,7 +18,8 @@ public class Event extends Task{
     }
 
 
-    public static Event parseNewCommand(String newCommand) throws IllegalArgumentException, DateTimeParseException {
+    public static Event parseNewCommand(String newCommand)
+            throws IllegalArgumentException, DateTimeParseException {
         int sepIndex = newCommand.indexOf("/at");
         int cmdLen = newCommand.length();
         if (sepIndex == -1 || cmdLen < 6 || 6 > sepIndex-1 || cmdLen < sepIndex+4) {

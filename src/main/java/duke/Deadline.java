@@ -17,7 +17,8 @@ public class Deadline extends Task {
         this.date = LocalDate.parse(doneBefore);
     }
 
-    public static Deadline parseNewCommand(String newCommand) throws IllegalArgumentException, DateTimeParseException {
+    public static Deadline parseNewCommand(String newCommand)
+            throws IllegalArgumentException, DateTimeParseException {
         int sepIndex = newCommand.indexOf("/by");
         int cmdLen = newCommand.length();
         if (sepIndex == -1 || cmdLen < 9 || 9 > sepIndex-1 || cmdLen < sepIndex+4) {
