@@ -16,6 +16,7 @@ public class Deadline extends Task{
                 : LocalDate.parse(date);
     }
 
+    @Override
     public LocalDate getDate() {
         return this.date;
     }

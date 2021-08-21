@@ -8,10 +8,8 @@ import duke.task.Event;
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidInstructionException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -22,7 +20,7 @@ public class Duke {
 
     private static Boolean isDate(String str) {
         try {
-            if (str.length() > 10) {
+            if (str.length() != 10) {
                 return false;
             }
             if (str.charAt(4) != str.charAt(7)) {
@@ -120,51 +118,78 @@ public class Duke {
 
                 try {
                     switch (task) {
-                        case "bye":
-                            text = "Bye. Hope to see you again soon!";
-                            leave = true;
-                            break;
-                        case "list":
-                            if (taskList.isEmpty()) text = "There are no items in the list.";
-                            else {
+                    case "bye":
+                        text = "Bye. Hope to see you again soon!";
+                        leave = true;
+                        break;
+                    case "list":
+                        if (taskList.isEmpty()) text = "There are no items in the list.";
+                        else {
+                            text = "";
+                            for (int i = 0; i < taskList.size(); i++) {
+                                if (i != 0) text += "\t";
+                                text += (i + 1) + ". " + taskList.get(i).toString();
+                                if (i != taskList.size() - 1) text += "\n";
+                            }
+                        }
+                        break;
+                    case "done":
+                        try {
+                            int index = Integer.parseInt(text);
+                            taskList.get(index - 1).complete();
+                            text = "Nice! I've marked this task as done:\n" +
+                                    "\t\t" + taskList.get(index - 1).toString();
+                        } catch (NumberFormatException e) {
+                            throw new InvalidInputException("To complete a task: enter \"done (task number)\"");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new InvalidInputException("Task number does not exist.");
+                        }
+                        break;
+                    case "delete":
+                        try {
+                            int index = Integer.parseInt(text);
+                            text = "Noted. I've removed this task: \n" +
+                                    "\t\t" + taskList.get(index - 1).toString() + "\n" +
+                                    "\tNow you have " + (taskList.size() - 1) + " tasks in the list.";
+                            taskList.remove(index - 1);
+                        } catch (NumberFormatException e) {
+                            throw new InvalidInputException("To delete a task: enter \"delete (task number)\"");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new InvalidInputException("Task number does not exist.");
+                        }
+                        break;
+                    case "todo": case "deadline": case "event":
+                        text = createTask(task, text);
+                        break;
+                    case "date":
+                        if (text.length() == 0) {
+                            throw new InvalidInputException("Enter a date in YYYY-MM-DD format after \"date\".");
+                        } else {
+                            if (isDate(text)) {
+                                LocalDate date = LocalDate.parse(text.substring(0, 4)
+                                        + '-' + text.substring(5, 7) + '-'
+                                        + text.substring(8));
                                 text = "";
                                 for (int i = 0; i < taskList.size(); i++) {
-                                    if (i != 0) text += "\t";
-                                    text += (i + 1) + ". " + taskList.get(i).toString();
-                                    if (i != taskList.size() - 1) text += "\n";
+                                    if (taskList.get(i).getDate().equals(date)) {
+                                        text += "\t\t" + taskList.get(i).toString() + '\n';
+                                    }
                                 }
+                                if (text.equals("")) {
+                                    text = "No tasks are due/happening on "
+                                            + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +'.';
+                                } else {
+                                    text = "These tasks are due/happening on "
+                                            + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ":\n"
+                                            + text;
+                                }
+                            } else {
+                                throw new InvalidInputException("Date format is incorrect. Correct format: YYYY-MM-DD.");
                             }
-                            break;
-                        case "done":
-                            try {
-                                int index = Integer.parseInt(text);
-                                taskList.get(index - 1).complete();
-                                text = "Nice! I've marked this task as done:\n" +
-                                        "\t\t" + taskList.get(index - 1).toString();
-                            } catch (NumberFormatException e) {
-                                throw new InvalidInputException("To complete a task: enter \"done (task number)\"");
-                            } catch (IndexOutOfBoundsException e) {
-                                throw new InvalidInputException("Task number does not exist.");
-                            }
-                            break;
-                        case "delete":
-                            try {
-                                int index = Integer.parseInt(text);
-                                text = "Noted. I've removed this task: \n" +
-                                        "\t\t" + taskList.get(index - 1).toString() + "\n" +
-                                        "\tNow you have " + (taskList.size() - 1) + " tasks in the list.";
-                                taskList.remove(index - 1);
-                            } catch (NumberFormatException e) {
-                                throw new InvalidInputException("To delete a task: enter \"delete (task number)\"");
-                            } catch (IndexOutOfBoundsException e) {
-                                throw new InvalidInputException("Task number does not exist.");
-                            }
-                            break;
-                        case "todo": case "deadline": case "event":
-                            text = createTask(task, text);
-                            break;
-                        default:
-                            throw new InvalidInstructionException(task);
+                        }
+                        break;
+                    default:
+                        throw new InvalidInstructionException(task);
                     }
                 } catch (InvalidInputException e) {
                     text = e.toString();

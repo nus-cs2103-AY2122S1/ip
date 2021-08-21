@@ -1,5 +1,11 @@
 deadline return book /by 2000-12-20
-deadline return book /by 1999/03/11
+deadline return book 2 /by 1999/03/11
 event project meeting /at 2021-08-22
+event project meeting 2 /at 2000-12-20
+date
+date asdfhasdf
+date 2000-12-20
+date 2021/08/22
+date 2021-12-03
 list
 bye
