@@ -10,8 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class encapsulating the interface between local storage and the application logic.
+ * Has methods for loading from local storage and writing to local storage.
+ */
 public class Loader {
 
+    /**
+     * Returns a list of strings for each line read in a text file located at the given relative path.
+     * @param pathResolve Array of strings to be resolved to a path.
+     * @return List of strings for each line read.
+     */
     public List<String> loadRelative(String... pathResolve) {
         Scanner sc = null;
         List<String> result = new ArrayList<>();
@@ -35,6 +44,11 @@ public class Loader {
         }
     }
 
+    /**
+     * Stores the given content to a text file located at the given relative path.
+     * @param content Content to be stored.
+     * @param pathResolve Array of strings to be resolved to a relative path.
+     */
     public void storeRelative(String content, String... pathResolve) {
         FileWriter f = null;
         try {

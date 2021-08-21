@@ -35,6 +35,10 @@ public class Task {
     private TaskState state;
     public String name;
 
+    /**
+     * Creates an incomplete task.
+     * @param name Name of task.
+     */
     public Task(String name) {
         try {
             state = TaskState.NEW;
@@ -45,6 +49,11 @@ public class Task {
         }
     }
 
+    /**
+     * Creates a task with given name and completion status.
+     * @param name Name of task.
+     * @param isDone Whether task is to be marked as complete upon creation.
+     */
     public Task(String name, boolean isDone) {
         try {
 
@@ -56,14 +65,25 @@ public class Task {
         }
     }
 
+    /**
+     * Returns whether task is completed.
+     * @return Whether task is completed.
+     */
     public boolean isDone() {
         return state == TaskState.DONE;
     }
 
+    /**
+     * Marks task as done.
+     */
     public void finish() {
         state = TaskState.DONE;
     }
 
+    /**
+     * Returns a list of string fields to be serialized and stored.
+     * @return A list of string fields representing the task.
+     */
     public List<String> storageFields() {
         return new ArrayList<>(Arrays.asList(this.typeString, this.state.getStoredRepresentation(), name));
     }
