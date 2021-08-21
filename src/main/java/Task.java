@@ -6,14 +6,19 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    private TYPE type;
+    protected TYPE type;
 
     // ToDos, DeadLines, Events, Others(Placeholder)
     protected enum TYPE {
         T, D, E, O
     }
 
-
+    /**
+     * This constructor receives new tasks from the command line.
+     *
+     * @param description Task description.
+     * @param type Task type, refer to enum TYPE.
+     */
     public Task(String description, TYPE type) {
         this.description = description;
         this.isDone = false;
@@ -32,6 +37,19 @@ public class Task {
         } else {
             this.type = TYPE.O;
         }
+    }
+
+    /**
+     * This constructor receives tasks from stored file (history).
+     *
+     * @param type Task type, refer to enum TYPE.
+     * @param isDone Whether the task has been done.
+     * @param description Task description.
+     */
+    public Task(TYPE type, boolean isDone, String description) {
+        this.type = type;
+        this.isDone = isDone;
+        this.description = description;
     }
 
 
@@ -65,8 +83,17 @@ public class Task {
         return (isDone ? "[X] " : "[ ] "); // mark done task with X
     }
 
+    /**
+     * Returns time if task is Deadline or Event.
+     *
+     * @return String representation of time.
+     */
+    public String getTime() {
+        return "";
+    }
+
     @Override
     public String toString() {
-        return getStatusIcon() + getDescription();
+        return getType() + getStatusIcon() + getDescription();
     }
 }

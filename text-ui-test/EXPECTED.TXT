@@ -6,27 +6,27 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 Hello! I'm Duke
-What can I do for you?
+What can I do for you? Type something to get started!
 
 Got it. I've added this task:
 [T][ ] fly
 Now you have 1 tasks in the list.
 
 Got it. I've added this task:
-[D][ ] return book  (by:  sunday)
+[D][ ] return book  (by: sunday)
 Now you have 2 tasks in the list.
 
 Got it. I've added this task:
-[E][ ] meeting tmr  (at:  2-4am Sunday)
+[E][ ] meeting tmr  (at: 2-4am Sunday)
 Now you have 3 tasks in the list.
 
 1. [T][ ] fly
-2. [D][ ] return book  (by:  sunday)
-3. [E][ ] meeting tmr  (at:  2-4am Sunday)
+2. [D][ ] return book  (by: sunday)
+3. [E][ ] meeting tmr  (at: 2-4am Sunday)
 
 
 Nice! I've marked this task as done: 
-   [D][X] return book  (by:  sunday)
+   [D][X] return book  (by: sunday)
 
 
 Task has already been marked as done!
@@ -38,8 +38,8 @@ The Done command requires a number, separated by whitespace!
 The Done command requires a number, separated by whitespace!
 
 1. [T][ ] fly
-2. [D][X] return book  (by:  sunday)
-3. [E][ ] meeting tmr  (at:  2-4am Sunday)
+2. [D][X] return book  (by: sunday)
+3. [E][ ] meeting tmr  (at: 2-4am Sunday)
 
 
 The description of ToDo cannot be empty!
@@ -57,7 +57,7 @@ The Deadline Command and Description must be separated by whitespace!
 Error, Invalid Command
 
 Noted. I've removed this task: 
-   [D][X] return book  (by:  sunday)
+   [D][X] return book  (by: sunday)
 Now you have 2 tasks in the list.
 
 
@@ -69,4 +69,4 @@ Unable to Delete: Task does not exist
 
 The Delete command requires a number, separated by whitespace!
 
-Bye. Hope to see you again soon!
+Bye. Thank You for using Duke!
