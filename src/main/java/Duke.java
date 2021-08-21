@@ -1,8 +1,9 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         int count = 0;
         boolean exit = false;
         ArrayList<Task> arrList = new ArrayList<>();
@@ -10,6 +11,9 @@ public class Duke {
         String logo = line + " Hello! I'm Duke\n" + " What can I do for you?\n" + line;
         Scanner sc = new Scanner(System.in);
         System.out.println(logo);
+        String filePath = "data/duke.txt";
+        Save save = new Save(filePath);
+        arrList = save.readFile(filePath);
 
         while(sc.hasNext()){
             String command = sc.next();
@@ -29,9 +33,14 @@ public class Duke {
                     break;
                 case "done":
                     int doneNum = sc.nextInt() - 1;
-                    arrList.get(doneNum).markAsDone();
-                    System.out.println(line + "Nice! I've marked this task as done:\n" + arrList.get(doneNum));
-                    break;
+                    try{
+                        arrList.get(doneNum).markAsDone();
+                        System.out.println(line + "Nice! I've marked this task as done:\n" + arrList.get(doneNum));
+                        break;
+                    }catch (Exception e){
+                        System.out.println("No such task");
+                        break;
+                    }
                 case "delete":
                     int delNum = sc.nextInt()-1;
                     Task delete = arrList.get(delNum);
@@ -85,6 +94,9 @@ public class Duke {
                     System.out.println("\n" + line +
                             "\n☹ OOPS!!! I'm sorry, but I don't know what that means :-(.\n" + line);
             }
+
+            save.writeToFile(filePath,arrList);
+
             if(exit){
                 break;
             }
