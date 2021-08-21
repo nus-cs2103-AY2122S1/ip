@@ -153,7 +153,7 @@ public class Duke {
 
     public static void main(String[] args) {
         // Initialise program
-        tasksList = new TaskList();
+        tasksList = new TaskList(FileAssistant.retrieveData()); // add in file contents
         Scanner sc = new Scanner(System.in);
 
         // Greets user

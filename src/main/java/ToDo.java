@@ -12,6 +12,19 @@ public class ToDo extends Task {
         super(description);
     }
 
+    public ToDo(String completed, String description) {
+        super(description);
+
+        if (completed.equals("1")) {
+            super.markTaskAsDone();
+        }
+    }
+
+    @Override
+    public String saveAsString() {
+        return super.formatString("T");
+    }
+
     @Override
     public String toString() {
         return String.format("[T]%s", super.toString());

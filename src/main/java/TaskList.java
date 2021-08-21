@@ -11,8 +11,39 @@ public class TaskList {
     private static final String INDENTATION = "     ";
     private ArrayList<Task> taskList;
 
-    public TaskList() {
-        taskList = new ArrayList<>();
+    public TaskList(ArrayList<String> existingTask) {
+        if (existingTask != null) {
+            taskList = new ArrayList<>();
+
+            for (String taskString : existingTask) {
+                String[] taskDetails = taskString.split(" \\| ");
+                switch (taskDetails[0]) {
+                case "T":
+                    taskList.add(new ToDo(taskDetails[1], taskDetails[2]));
+                    break;
+                case "D":
+                    taskList.add(new Deadline(taskDetails[1], taskDetails[2], taskDetails[3]));
+                    break;
+                case "E":
+                    taskList.add(new Event(taskDetails[1], taskDetails[2], taskDetails[3]));
+                    break;
+                default:
+                    // Unrecognised string -> do something next time?
+                    // Ignore for now.
+                    break;
+                }
+            }
+        } else {
+            taskList = new ArrayList<>();
+        }
+    }
+
+    private String convertListToString() {
+        String allTasks = "";
+        for (Task task : taskList) {
+            allTasks = allTasks + task.saveAsString() + "\n";
+        }
+        return allTasks;
     }
 
     /**
@@ -46,6 +77,8 @@ public class TaskList {
             break;
         }
 
+        FileAssistant.writeToFile(convertListToString());
+
         return new String[] {
                 "I've added this task but it's not like I did it for you or anything!",
                 String.format("  %s", taskList.get(taskList.size() - 1)),
@@ -78,6 +111,9 @@ public class TaskList {
                 "You completed a task! Maybe you aren't so incompetent after all.",
                 taskList.get(index - 1).markTaskAsDone()
         };
+
+        FileAssistant.writeToFile(convertListToString());
+
         return message;
 
     }
@@ -94,6 +130,9 @@ public class TaskList {
                 String.format("Now you have %d %s in the list. Do your best doing them okay?",
                         taskList.size(), taskList.size() == 1 ? "task" : "tasks")
         };
+
+        FileAssistant.writeToFile(convertListToString());
+
         return message;
 
     }

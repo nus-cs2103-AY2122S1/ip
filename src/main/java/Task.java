@@ -7,10 +7,11 @@
  *
  * @author Benedict Chua
  */
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
+    public abstract String saveAsString();
     /**
      * Constructor for a Task.
      *
@@ -41,6 +42,20 @@ public class Task {
             return "  " + this.toString();
         } else {
             return "Wait...  You've already completed this task before you dummy!";
+        }
+    }
+
+    public String formatString(String ...args) {
+        switch (args.length) {
+        case 1:
+            // returns type of task, completion and description as a string
+            return String.format("%s | %d | %s", args[0], this.isDone ? 1 : 0, this.description);
+        case 2:
+            // returns additional date element
+            return String.format("%s | %d | %s | %s", args[0], this.isDone ? 1 : 0, this.description, args[1]);
+        default:
+            // should NOT reach default as this function is only called in corresponding children of Tasks
+            return null;
         }
     }
 

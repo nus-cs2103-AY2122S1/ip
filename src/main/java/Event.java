@@ -16,6 +16,20 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    public Event(String completed, String description, String eventTime) {
+        super(description);
+        this.eventTime = eventTime;
+
+        if (completed.equals("1")) {
+            super.markTaskAsDone();
+        }
+    }
+
+    @Override
+    public String saveAsString() {
+        return super.formatString("E", this.eventTime);
+    }
+
     @Override
     public String toString() {
         return String.format("[E]%s (by: %s)", super.toString(), this.eventTime);
