@@ -1,7 +1,7 @@
 package tiger.parser;
 
 import tiger.exceptions.inputs.TigerEmptyStringException;
-import tiger.utils.RemoveLastSpaces;
+import tiger.utils.RemoveSpaces;
 
 public class ToDoParser extends Parser {
 
@@ -14,7 +14,7 @@ public class ToDoParser extends Parser {
             for (int i = 1; i < array.length; i++) {
                 this.todo += (array[i] + " ");
             }
-            RemoveLastSpaces removeLastSpaces = new RemoveLastSpaces();
+            RemoveSpaces removeLastSpaces = new RemoveSpaces();
             this.todo = removeLastSpaces.removeLastSpaces(this.todo);
         } catch (StringIndexOutOfBoundsException e) {
             throw new TigerEmptyStringException("ToDo description");

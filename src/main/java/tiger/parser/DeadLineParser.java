@@ -1,7 +1,7 @@
 package tiger.parser;
 
 import tiger.exceptions.inputs.TigerEmptyStringException;
-import tiger.utils.RemoveLastSpaces;
+import tiger.utils.RemoveSpaces;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +27,7 @@ public class DeadLineParser extends Parser {
                 this.dateLine += (array.get(i) + " ");
             }
         }
-        RemoveLastSpaces removeLastSpaces = new RemoveLastSpaces();
+        RemoveSpaces removeLastSpaces = new RemoveSpaces();
         try {
             this.todo = removeLastSpaces.removeLastSpaces(this.todo);
         } catch (StringIndexOutOfBoundsException e) {
