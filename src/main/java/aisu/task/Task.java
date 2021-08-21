@@ -3,8 +3,11 @@ package aisu.task;
 import aisu.AisuException;
 
 /**
- * This is the Task class.
+ * The Task class.
  * A Task contains a description and a status of being done or not.
+ * There are three types of tasks: Todo, Deadline, Event.
+ *
+ * @author Liaw Xin Yan
  */
 public abstract class Task {
     protected String description;
@@ -18,15 +21,33 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Gets the icon that represents whether the task is done or not.
+     *
+     * @return The icon.
+     */
     public String getStatusIcon() {
         return (isDone ? "[x]" : "[ ]");
     }
 
+    /**
+     * Marks task as complete.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
-    public abstract String ParseData(); // Parse data in readable format to be stored in storage.
+    /**
+     * Parses data in readable format to be stored in storage.
+     *
+     * @return Parsed data.
+     */
+    public abstract String ParseData();
 
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return The Task in readable format.
+     */
     public abstract String toString();
 }

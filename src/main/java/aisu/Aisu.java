@@ -1,18 +1,14 @@
 package aisu;
+
 import aisu.command.Command;
 import aisu.task.Task;
 
 import java.util.List;
 
 /**
- * This is chatbot (Aisu) class.
- * You can:
- * 1) Type "todo (task)" - Add tasks without any date/time attached to it
- * 2) Type "list" - Show list
- * 3) Type "done (taskNumber)" - Mark task as done
- * 4) Type "deadline (task) /by (date)" - Add tasks that need to be done before a specific date/time
- * 5) Type "event (task) /at (date)" - Add tasks that start at a specific time and ends at a specific time
- * 6) Type "bye" - Exit program
+ * A tasklist chatbot, named Aisu.
+ *
+ * @author Liaw Xin Yan
  */
 public class Aisu {
     private final Storage storage;
@@ -31,7 +27,6 @@ public class Aisu {
     }
 
     public List<Task> getTaskListData() {
-        // for testing purposes
         return this.tasklist.getListData();
     }
 
@@ -39,6 +34,10 @@ public class Aisu {
         return this.storage;
     }
 
+    /**
+     * Starts the tasklist program and requests for user input.
+     * If user types "bye", the program ends.
+     */
     public void run() {
         ui.showWelcomeMessage();
 
@@ -59,6 +58,12 @@ public class Aisu {
         ui.showGoodbyeMessage();
     }
 
+    /**
+     * Calls the run() function.
+     * Serves as an entrypoint of the program.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         new Aisu("data", "test1.txt").run();
     }

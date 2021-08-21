@@ -3,9 +3,19 @@ package aisu;
 import aisu.command.*;
 
 /**
- * The Parser class deals with making sense of the user command.
+ * A Parser for text inputs.
+ *
+ * @author Liaw Xin Yan
  */
 public class Parser {
+
+    /**
+     * Parses the input.
+     *
+     * @param input String input by user.
+     * @return Command to be called.
+     * @throws AisuException if input is invalid.
+     */
     public static Command parse(String input) throws AisuException {
         if (input.equals("bye")) {
             return new ExitCommand();

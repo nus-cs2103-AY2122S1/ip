@@ -1,10 +1,16 @@
 package aisu.task;
+
 import aisu.AisuException;
-import aisu.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A Deadline task.
+ * Consists of a description and a deadline, written in a valid date-time format.
+ *
+ * @author Liaw Xin Yan
+ */
 public class Deadline extends Task {
     private final LocalDate deadline;
 
@@ -18,11 +24,21 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Parses data in readable format to be stored in storage.
+     *
+     * @return Parsed data.
+     */
     @Override
     public String ParseData() {
         return "D;;" + (this.isDone ? "1" : "0") + ";;" + this.description + ";;" + this.deadline;
     }
 
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return The Task in readable format.
+     */
     @Override
     public String toString() {
         return String.format("[DeadL] %s %s (by: %s)",
