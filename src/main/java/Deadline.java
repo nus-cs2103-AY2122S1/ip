@@ -1,14 +1,22 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDateTime by;
 
     /**
      * Constructor for Deadline
      * @param input the input array consisting of description and date/time
      */
-    public Deadline(String[] input) throws EmptyDescriptionException, EmptyTimeException {
+    public Deadline(String[] input) throws EmptyDescriptionException, EmptyTimeException, InvalidTimeException {
         super(input[0]);
         if (input.length < 2) throw new EmptyTimeException();
-        this.by = input[1];
+        try {
+            this.by = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new InvalidTimeException();
+        }
     }
     
     public Deadline(String[] input, boolean isDone) {
@@ -27,6 +35,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("d MMM yyyy h:mma")) + ")";
     }
 }
