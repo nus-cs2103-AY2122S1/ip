@@ -1,7 +1,16 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.exception.NoSuchCommandException;
+import duke.util.DataManager;
+import duke.util.Parser;
+import duke.util.ToDoList;
+import duke.util.Ui;
+
 import java.util.Scanner;
 
 /**
- * This class encapsulates a CLI bot named Duke.
+ * This class encapsulates a CLI bot named duke.Duke.
  *
  * @author Tan Yi Guan
  * @version CS2103T AY21/22 Semester 1

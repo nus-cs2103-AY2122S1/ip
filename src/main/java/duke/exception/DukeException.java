@@ -1,12 +1,14 @@
+package duke.exception;
+
 /**
- * This class encapsulates all exceptions specific to Duke.
+ * This class encapsulates all exceptions specific to duke.Duke.
  *
  * @author Tan Yi Guan
  * @version CS2103T AY21/22 Semester 1
  */
 public class DukeException extends Exception {
     /**
-     * Instantiates a new Duke exception.
+     * Instantiates a new duke.Duke exception.
      *
      * @param error the error
      */

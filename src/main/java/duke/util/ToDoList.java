@@ -1,3 +1,10 @@
+package duke.util;
+
+import duke.task.Task;
+import duke.exception.DukeException;
+import duke.exception.DukeNegativeIndexException;
+import duke.exception.InvalidIndexException;
+
 import java.util.ArrayList;
 
 /**
@@ -24,7 +31,7 @@ public class ToDoList {
     /**
      * Adds user input to list and pretty prints a visual feedback.
      *
-     * @param task Task to be stored into the list.
+     * @param task duke.task.Task to be stored into the list.
      */
     public void addToList(Task task) {
         list.add(task);

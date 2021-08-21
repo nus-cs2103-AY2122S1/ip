@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * This class encapsulates exception due to multiple date/time input by user.
  *

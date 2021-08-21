@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * All commands available to Duke.
+ * All commands available to duke.Duke.
  *
  * @author Tan Yi Guan
  * @version CS2103T AY21/22 Semester 1
@@ -17,7 +19,7 @@ public enum Command {
     /**
      * Convert input command.
      *
-     * @param input Command issued by user in String format.
+     * @param input duke.Command issued by user in String format.
      * @return Corresponding command.
      */
     public static Command convertInput(String input) {

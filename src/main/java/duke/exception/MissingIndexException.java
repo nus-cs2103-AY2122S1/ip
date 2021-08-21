@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * This class encapsulates exception due to missing index in user input.
  *

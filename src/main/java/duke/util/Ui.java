@@ -1,7 +1,12 @@
+package duke.util;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class Ui {
-    private static final String divider = "\t--------------------------------------------------------";
+    private static final String divider = "\t" +
+            "-------------------------------------------------------------------------";
 
     private static final String banner =
             "____    __    ____  _______  __        ______   ______   .___  ___.  _______    .___________.  ______       _______   __    __   __  ___  _______  __  \r\n"
@@ -61,6 +66,6 @@ public class Ui {
     }
 
     public void printException(String message) {
-        System.out.println("\t" + message);
+        System.err.println("\t" + message);
     }
 }

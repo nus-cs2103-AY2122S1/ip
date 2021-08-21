@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * This class encapsulates a Task.
+ * This class encapsulates a duke.task.Task.
  *
  * @author Tan Yi Guan
  * @version CS2103T AY21/22 Semester 1
@@ -9,7 +11,7 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Instantiates a new Task.
+     * Instantiates a new duke.task.Task.
      *
      * @param description the description for the task
      */
