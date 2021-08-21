@@ -37,6 +37,42 @@ public class Duke {
 
                 a = sc.nextLine();
                 b = a.split(" ", 2);
+            } else if (b[0].equals("todo")) {
+                ToDo task = new ToDo(b[1]);
+                history.add(task);
+                int length = history.size();
+
+                System.out.println("Added task:");
+                System.out.println(task);
+                System.out.println("You have " + String.valueOf(length) + " tasks in the list");
+
+                a = sc.nextLine();
+                b = a.split(" ", 2);
+            } else if (b[0].equals("deadline")){
+                String[] c = b[1].split(" /by ", 2);
+                Deadline task = new Deadline(c[0], c[1]);
+                history.add(task);
+                int length = history.size();
+
+                System.out.println("Added task:");
+                System.out.println(task);
+                System.out.println("You have " + String.valueOf(length) + " tasks in the list");
+
+                a = sc.nextLine();
+                b = a.split(" ", 2);
+
+            } else if (b[0].equals("event")) {
+                String[] c = b[1].split(" /at ", 2);
+                Event task = new Event(c[0], c[1]);
+                history.add(task);
+                int length = history.size();
+
+                System.out.println("Added task:");
+                System.out.println(task);
+                System.out.println("You have " + String.valueOf(length) + " tasks in the list");
+
+                a = sc.nextLine();
+                b = a.split(" ", 2);
             } else {
                 System.out.println(a);
                 Task todo = new Task(a);
