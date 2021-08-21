@@ -7,11 +7,15 @@ package ui.message;
 public class Message {
     private final static String FORMATTED_LINE = "_________________________________________________";
     private final String message;
-    private String face;
+    private final String face;
 
     public Message(String message, String face) {
         this.message = message;
         this.face = face;
+    }
+
+    public void print() {
+        System.out.println(this.getFormattedMessage());
     }
 
     protected String getMessage() {
@@ -31,9 +35,5 @@ public class Message {
         return "\t" + FORMATTED_LINE
                 + "\n\t" + this.getMessageWithFace()
                 + "\n\t" + FORMATTED_LINE;
-    }
-
-    public void print() {
-        System.out.println(this.getFormattedMessage());
     }
 }

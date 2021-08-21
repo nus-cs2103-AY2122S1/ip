@@ -25,7 +25,7 @@ public class ListChangeMessage extends Message {
      * @return the string message.
      */
     @Override
-    public String getMessage() {
+    protected String getMessage() {
         int numOfTasks = this.itemsInList;
         String task = numOfTasks == 1 ? "task" : "tasks";
 

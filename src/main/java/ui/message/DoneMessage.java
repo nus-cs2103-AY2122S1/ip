@@ -24,7 +24,7 @@ public class DoneMessage extends Message {
      * @return the string message with the prefix
      */
     @Override
-    public String getMessage() {
+    protected String getMessage() {
         return DONE_PREFIX + "\n\t\t" + super.getMessage();
     }
 }

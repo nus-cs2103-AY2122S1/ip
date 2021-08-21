@@ -24,7 +24,7 @@ public class ListMessage extends Message {
      * @return the string message with the prefix
      */
     @Override
-    public String getMessage() {
+    protected String getMessage() {
         return LIST_PREFIX + "\n\t" + super.getMessage();
     }
 }

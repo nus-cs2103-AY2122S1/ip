@@ -6,7 +6,7 @@ package ui.message;
  * It overrides methods in `ui.message.DukeListChangedMessage` to format the message differently for deleting.
  */
 public class DeleteMessage extends ListChangeMessage {
-    private static String DELETED_PREFIX = "Noted. I've removed this task:";
+    private static String DELETE_PREFIX = "Noted. I've removed this task:";
 
     /**
      * Constructor to instantiate a `ui.message.DukeDeletedMessage`.
@@ -24,10 +24,10 @@ public class DeleteMessage extends ListChangeMessage {
      * @return the string message with a prefix.
      */
     @Override
-    public String getMessage() {
+    protected String getMessage() {
         return String.format(
                 "%s\n\t\t%s",
-                DELETED_PREFIX,
+                DELETE_PREFIX,
                 super.getMessage()
         );
     }
