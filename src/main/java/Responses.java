@@ -1,14 +1,14 @@
 public enum Responses {
 
     WELCOME_BACK("Welcome back! It definitely is good to see you again :D"),
-    LINE("ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ"
-            + "ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ"
-            + "ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ"),
+    LINE("ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ"
+          + "ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ"
+          + "ꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤꕤ"),
     START_MESSAGE("Welcome to Petal (•◡•)/" + "\nI am the best chat bot you'll meet! Don't be shy, say something! :P" +
                   "\nPssss here's a disclaimer: use the 'bye' command to exit or else your tasks won't save properly!"),
     UNINTELLIGIBLE("I do not understand what you mean :("),
     REQUIRED_FORMAT("Use 'todo <insert activity>' to create a to-do!" +
-                    "\nUse 'deadline <insert activity> /by <insert deadline>' " +
+                    "\nUse 'deadline <insert activity> /by <DD/MM/YYYY> <Time in 24-hour format>' " +
                     "to create an activity with a deadline!" +
                     "\nUse 'event <insert activity> /at <insert start/end time>' " +
                     "to create an activity with a start/end time!" +

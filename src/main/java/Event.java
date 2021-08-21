@@ -18,11 +18,6 @@ public class Event extends Task {
     }
 
     @Override
-    public String taskType() {
-        return "event";
-    }
-
-    @Override
     public String strForSaving() {
         return "E|" + this.getStatusIcon() + "|" + this.description + "|" + this.time;
     }

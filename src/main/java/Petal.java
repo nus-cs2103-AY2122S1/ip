@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -21,8 +22,11 @@ public class Petal {
     private boolean bye;
     //List of user inputted tasks
     private final List<Task> tasks;
+    //Relative path of the folder containing Tasks.txt
     private final String folderPath = System.getProperty("user.dir") + "/PetalData";
+    //Relative path of the txt file with the taks
     private final String filePath = folderPath + "/Tasks.txt";
+    //Boolean representing if saving should be performed
     private boolean savedProperly;
 
     /**
@@ -110,7 +114,11 @@ public class Petal {
                 task = new ToDo(message, false);
                 break;
             case "deadline":
-                task = new Deadline(deadlineEvent[0], deadlineEvent[1], false);
+                try {
+                    task = new Deadline(deadlineEvent[0], deadlineEvent[1], false);
+                } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidInputException("The date/time format used was wrong! Try again :(");
+                }
                 break;
             default: //Represents the Event task
                 task = new Event(deadlineEvent[0], deadlineEvent[1], false);
@@ -136,7 +144,7 @@ public class Petal {
         tasks.add(task);
         String plural = (tasks.size() + 1) > 0 ? " tasks!" : " task!";
         printMessage("Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size()
-                + plural);
+                     + plural);
     }
 
     /**
@@ -158,6 +166,10 @@ public class Petal {
         }
     }
 
+    /**
+     * Method to parse the text from Tasks.txt in tasks
+     * @return True if tasks were retrieved, false if no tasks (new user) or exception occurred
+     */
     public boolean retrieveTasks() {
         try {
             File tasks = new File(filePath);
@@ -186,6 +198,9 @@ public class Petal {
         return true;
     }
 
+    /**
+     * Method to create the main PetalData folder, containing Tasks.txt
+     */
     public void createDirectory() {
         try {
             if (retrieveTasks()) {
@@ -204,6 +219,11 @@ public class Petal {
         }
     }
 
+    /**
+     * Method to save the tasks. If the folder was not able to be created, Petal does not
+     * save any of the tasks.
+     * @throws IOException Thrown if tasks are not saved properly
+     */
     public void saveTasks() throws IOException {
         if (!savedProperly) {
             return;
@@ -214,7 +234,8 @@ public class Petal {
     }
 
     /**
-     * Method for Petal to say goodbye
+     * Method for Petal to say goodbye. In the case saveTasks() throws an error,
+     * Petal does not save any of the tasks.
      */
     public void goodBye() {
         try {
@@ -247,6 +268,11 @@ public class Petal {
         return list.toString();
     }
 
+    /**
+     * Method that takes the tasks and returns a formatted string representation
+     * which can be easily parsed by retrieveTasks() once the program is run again
+     * @return Formatted string representation of all the user-added tasks
+     */
     public String formatForSaving() {
         if (tasks.size() == 0) {
             return "";

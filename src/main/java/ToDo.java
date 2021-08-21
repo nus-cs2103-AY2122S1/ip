@@ -14,11 +14,6 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String taskType() {
-        return "todo";
-    }
-
-    @Override
     public String strForSaving() {
         return "T|" + this.getStatusIcon() + "|" + this.description;
     }
