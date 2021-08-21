@@ -2,10 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  This class handles user commands when keyed onto the terminal.
- *  Supported Commands: Todo, Event, Deadline, Delete, Done, List.
+ *  This class handles user commands when keyed onto the terminal
  *
- * @author Ryan Tian Jun.
+ * @author Ryan Tian Jun
  */
 public class FeatureMain {
     private String currentCommand;
@@ -56,11 +55,10 @@ public class FeatureMain {
     }
 
     /**
-     * Checks if it is a 'Done' command.
+     * Checks if it is a 'Done' command
      *
-     * @param command Takes in command line input to process.
-     * @throws DukeException Either a syntax error or lack of number provided.
-     * @return returns true if it is said command.
+     * @throws DukeException Either a syntax error or lack of number provided
+     * @return returns true if it is said command
      */
     private boolean isDone(String command) throws DukeException {
         if (command.length() >= 4 && command.startsWith("done")) {
@@ -80,11 +78,10 @@ public class FeatureMain {
     }
 
     /**
-     * Checks if it is a 'Todo' command.
+     * Checks if it is a 'Todo' command
      *
-     * @param command Takes in command line input to process.
-     * @throws DukeException Either a syntax error or lack of description.
-     * @return returns true if it is said command.
+     * @throws DukeException Either a syntax error or lack of description
+     * @return returns true if it is said command
      */
     private boolean isToDo(String command) throws DukeException {
         if (command.length() >= 4 && command.startsWith("todo")) {
@@ -101,11 +98,10 @@ public class FeatureMain {
     }
 
     /**
-     * Checks if it is a 'Deadline' command.
+     * Checks if it is a 'Deadline' command
      *
-     * @param command Takes in command line input to process.
-     * @throws DukeException Either a syntax error or lack of description.
-     * @return returns true if it is said command.
+     * @throws DukeException Either a syntax error or lack of description
+     * @return returns true if it is said command
      */
     private boolean isDeadLine(String command) throws DukeException{
         if (command.length() >= 8 && command.startsWith("deadline")) {
@@ -122,11 +118,10 @@ public class FeatureMain {
     }
 
     /**
-     * Checks if it is an 'Event' command.
+     * Checks if it is an 'Event' command
      *
-     * @param command Takes in command line input to process.
-     * @throws DukeException Either a syntax error or lack of description.
-     * @return returns true if it is said command.
+     * @throws DukeException Either a syntax error or lack of description
+     * @return returns true if it is said command
      */
     private boolean isEvent(String command) throws DukeException {
         if (command.length() >= 5 && command.startsWith("event")) {
@@ -143,11 +138,10 @@ public class FeatureMain {
     }
 
     /**
-     * Checks if it is a 'Delete' command.
+     * Checks if it is a 'Delete' command
      *
-     * @param command Takes in command line input to process.
-     * @throws DukeException Syntax errors, spacing.
-     * @return returns true if it is said command.
+     * @throws DukeException -
+     * @return returns true if it is said command
      */
     private boolean isDelete(String command) throws DukeException {
         if (command.length() >= 6 && command.startsWith("delete")) {
@@ -168,7 +162,6 @@ public class FeatureMain {
         }
     }
 
-    // Parses out Deadline from Deadline Command
     private String returnDeadline(String command) {
         int startNumber = command.indexOf("/by");
 
@@ -179,7 +172,6 @@ public class FeatureMain {
         }
     }
 
-    // Parses out Timeline from Event Command
     private String returnTimeline(String command) {
         int startNumber = command.indexOf("/at");
 
@@ -191,7 +183,7 @@ public class FeatureMain {
     }
 
 
-    // Checks if String is numeric
+    // checks if String is numeric
     private static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
@@ -202,10 +194,9 @@ public class FeatureMain {
     }
 
     /**
-     * Echos user commands.
-     * Level-1 Increment, not used anymore.
+     * Echos user commands
      *
-     * @return returns an echo of the users commands.
+     * @return returns an echo of the users commands
      */
     private String echoCommand() {
         System.out.println(currentCommand);
@@ -214,10 +205,9 @@ public class FeatureMain {
     }
 
     /**
-     * Adds user commands to history ArrayList commands.
-     * Level-2 Increment, not used anymore.
+     * Adds user commands to history ArrayList commands
      *
-     * @return Notifies the user that their command has been added.
+     * @return Notifies the user that their command has been added
      */
     private String addCommand() {
         System.out.println("added: " + currentCommand);
@@ -227,9 +217,9 @@ public class FeatureMain {
 
 
     /**
-     * Prints past commands.
+     * Prints past commands
      *
-     * @return returns a printout of all the past user commands.
+     * @return returns a printout of all the past user commands
      */
     private static String userCommands() {
         int count = 1;
@@ -242,10 +232,10 @@ public class FeatureMain {
     }
 
     /**
-     * Marks tasks as done.
+     * Marks tasks as done
      *
-     * @throws DukeException Handles out of range errors.
-     * @return returns a String message.
+     * @throws DukeException Handles numbers less than 1
+     * @return returns a String message
      */
     private String markDone() throws DukeException {
         if (taskNumber <= 0) {
@@ -254,11 +244,10 @@ public class FeatureMain {
             if (taskNumber <= commands.size()) {
                 Task taskToChange = commands.get(taskNumber - 1);
                 taskToChange.markAsDone();
-
                 System.out.println("Nice! I've marked this task as done: ");
+
                 System.out.println("   " + taskToChange);
                 newLine();
-
                 return "   " + taskToChange;
             } else {
                 throw new DukeException("Task does not exist");
@@ -268,10 +257,10 @@ public class FeatureMain {
     }
 
     /**
-     * Deletes Tasks from the list.
+     * Deletes Tasks from the list
      *
-     * @throws DukeException Handles out of range errors.
-     * @return returns a String message.
+     * @throws DukeException Handles numbers less than 1
+     * @return returns a String message
      */
     private String deleteTask() throws DukeException {
         if (taskNumber <= 0) {
@@ -299,11 +288,7 @@ public class FeatureMain {
         return "\n";
     }
 
-    /**
-     * Prints a Task Object neatly on the command line.
-     *
-     * @param task Takes in a task objec, invoking its toString method.
-     */
+    // prints addition of task
     private void printTask(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
