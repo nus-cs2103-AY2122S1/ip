@@ -33,16 +33,4 @@ public class Ui {
     public static void bidFarewell() {
         displayMessage(GOODBYE);
     }
-
-    /**
-     * Prints tasks line by line enclosed within line separators.
-     *
-     * Each task is indexed by the order they were added into the task list, starting from 1.
-     */
-    public static void displayTasks(TaskList tasksList, String dateString) {
-        System.out.println(LINE_SEPARATOR);
-
-        System.out.println(LINE_SEPARATOR + "\n");
-    }
-
 }

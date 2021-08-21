@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 import java.util.Scanner;
 
 /**
@@ -20,11 +29,11 @@ import java.util.Scanner;
  * CS2103T Individual Project AY 21/22 Sem 1
  * @author Benedict Chua
  */
-public class Duke {
+public class DukeStub {
     public static void main(String[] args) {
         // Initialise program
         Storage storage = new Storage();
-        TaskList tasksList = new TaskList(storage.retrieveData(), storage);
+        TaskList tasksList = new TaskList(null, storage); // remove file dependency
         Parser parser = new Parser(tasksList);
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;
