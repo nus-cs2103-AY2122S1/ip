@@ -1,3 +1,8 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,6 +20,7 @@ public class Duke {
     //This method creates the while loop for echo, and calls different methods depending on user's input
     private static void echo() {
         userInputRecord = new ArrayList<>();
+        autoLoad();
         Scanner myScanner = new Scanner(System.in);
         String userInput = myScanner.nextLine();
 
@@ -83,6 +89,7 @@ public class Duke {
         }
 
         userInputRecord.add(task);
+        autoSave();
         System.out.println(formatMessage( "Got it. I've added this task:\n" +
                 subIndentation + task + "\n" + indentation +
                 "Now you have " + userInputRecord.size() + " tasks in the list.\n" ));
@@ -93,7 +100,6 @@ public class Duke {
         if(userInputRecord.isEmpty()) {
             System.out.println(formatMessage("Ah oh, seems like nothing is added yet :( \n" + indentation +
                     "Try to input something first! \n" ));
-
         } else {
             System.out.println("    ____________________________________________________________");
             System.out.println("     Here are the tasks in your list:");
@@ -134,6 +140,9 @@ public class Duke {
             userInputRecord.set(itemToComplete, taskDone);
             System.out.println(formatMessage("Nice! I've marked this task as done:\n" +
                     subIndentation + userInputRecord.get(itemToComplete) + "\n"));
+            autoSave();
+            System.out.println(formatMessage("Nice! I've marked this task as done:\n" +
+                            subIndentation + userInputRecord.get(itemToComplete) + "\n"));
         } catch (IndexOutOfBoundsException e) {
             System.out.println(formatMessage("Oops, the ID of the task does not exist!\n"));
         } catch (NumberFormatException e) {
@@ -146,6 +155,7 @@ public class Duke {
             int itemToDelete = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
             Task itemDeleted = userInputRecord.get(itemToDelete);
             userInputRecord.remove(itemToDelete);
+            autoSave();
             System.out.println(formatMessage("Noted. I've removed this task:\n" +
                     subIndentation+ itemDeleted + "\n" + indentation +
                     "Now you have " + userInputRecord.size() + " tasks in the list.\n"));
@@ -153,6 +163,67 @@ public class Duke {
             System.out.println(formatMessage("Oops, the ID of the task does not exist!\n"));
         } catch (NumberFormatException e) {
             System.out.println(formatMessage("Please enter a valid ID!\n"));
+        }
+    }
+
+    private static void autoSave() {
+        boolean directoryExists = Files.exists( Paths.get("data"));
+        boolean fileExists = Files.exists(Paths.get("data","record"));
+        if(!directoryExists) {
+            try {
+                Files.createDirectory(Path.of("data"));
+            } catch (IOException e) {
+                System.out.println("Something is wrong " + e);
+            }
+        } else if(!fileExists) {
+            try {
+                Files.createFile(Path.of("data","record"));
+            } catch (IOException e) {
+                System.out.println("Something is wrong " + e);
+            }
+        }
+        try {
+            FileWriter writer = new FileWriter(Paths.get("data","record").toString());
+            for (Task task : userInputRecord) {
+                writer.write(task.toString());
+                writer.write(System.getProperty("line.separator"));
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Something is wrong " + e);
+        }
+    }
+
+    private static void autoLoad() {
+        try {
+            Scanner scanner = new Scanner(Paths.get("data","record"));
+            while (scanner.hasNextLine()) {
+                String itemInfo = scanner.nextLine();
+                if(itemInfo.startsWith("[T]")) {
+                    Task task = new ToDo(itemInfo.substring(7));
+                    if(itemInfo.contains("[X]")) {
+                        task.setDone(true);
+                    }
+                    userInputRecord.add(task);
+                } else if(itemInfo.startsWith("[D]")) {
+                    Task task = new Deadline(itemInfo.substring(7, itemInfo.indexOf("(by")),
+                            itemInfo.substring(itemInfo.indexOf("(by") + 5, itemInfo.length() -1));
+                    if(itemInfo.contains("[X]")) {
+                        task.setDone(true);
+                    }
+                    userInputRecord.add(task);
+                } else if(itemInfo.startsWith("[E]")) {
+                    Task task = new Event(itemInfo.substring(7, itemInfo.indexOf("(at")),
+                            itemInfo.substring(itemInfo.indexOf("(at") + 5, itemInfo.length() -1));
+                    if(itemInfo.contains("[X]")) {
+                        task.setDone(true);
+                    }
+                    userInputRecord.add(task);
+                }
+            }
+            scanner.close();
+        } catch (Exception ignored) {
+
         }
     }
 
