@@ -1,3 +1,7 @@
+package duke.data.task;
+
+import duke.data.exception.EmptyDescriptionException;
+
 public class Todo extends Task{
     /**
      * Constructor for Todo

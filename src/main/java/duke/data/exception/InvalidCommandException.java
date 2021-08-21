@@ -1,3 +1,5 @@
+package duke.data.exception;
+
 public class InvalidCommandException extends DukeException{
     @Override
     public String toString() {

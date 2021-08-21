@@ -1,3 +1,11 @@
+package duke.commands;
+
+import duke.data.TaskList;
+import duke.data.exception.InvalidIndexException;
+import duke.data.task.Task;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 public class DeleteCommand extends Command {
     private final int  index;
     
@@ -12,6 +20,6 @@ public class DeleteCommand extends Command {
         ui.print(String.format(
                 "Noted. I've removed this task:\n %s\nNow you have %d task(s) in the list",
                 t.toString(),
-                tasks.count));
+                tasks.getCount()));
     }
 }

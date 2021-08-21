@@ -1,3 +1,11 @@
+package duke.commands;
+
+import duke.data.TaskList;
+import duke.data.exception.InvalidIndexException;
+import duke.data.task.Task;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 public class DoneCommand extends Command {
     private final int index;
     

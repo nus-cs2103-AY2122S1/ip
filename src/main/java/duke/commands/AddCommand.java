@@ -1,3 +1,10 @@
+package duke.commands;
+
+import duke.data.TaskList;
+import duke.data.task.Task;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 public class AddCommand extends Command {
     private Task t;
 
@@ -15,6 +22,6 @@ public class AddCommand extends Command {
         ui.print(String.format(
                         "Got it. I've added this task:\n %s\nNow you have %d task(s) in the list",
                         this.t.toString(),
-                        tasks.count));
+                        tasks.getCount()));
     }
 }

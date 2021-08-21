@@ -1,3 +1,7 @@
+package duke.data.task;
+
+import duke.data.exception.EmptyDescriptionException;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -42,6 +46,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s",this.getStatusIcon(), this.description);
+        return String.format("[%s] %s",this.getStatusIcon(), this.description);
     }
 }

@@ -1,3 +1,10 @@
+package duke.storage;
+
+import duke.data.task.Deadline;
+import duke.data.task.Event;
+import duke.data.task.Task;
+import duke.data.task.Todo;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;

@@ -1,3 +1,8 @@
+package duke.data;
+
+import duke.data.exception.InvalidIndexException;
+import duke.data.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -68,5 +73,9 @@ public class TaskList {
         if (index >= this.count || index <= 0) throw new InvalidIndexException();
         this.tasks.get(index).setDone();
         return this.tasks;
+    }
+    
+    public int getCount() {
+        return this.count;
     }
 }

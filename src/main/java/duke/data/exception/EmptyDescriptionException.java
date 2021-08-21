@@ -1,3 +1,5 @@
+package duke.data.exception;
+
 public class EmptyDescriptionException extends DukeException{
     @Override
     public String toString() {

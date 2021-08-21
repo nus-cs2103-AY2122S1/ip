@@ -1,3 +1,9 @@
+package duke.parser;
+
+import duke.commands.*;
+import duke.data.exception.DukeException;
+import duke.data.exception.InvalidCommandException;
+
 /**
  * Deals with making sense of the user command
  */

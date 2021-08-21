@@ -1,3 +1,5 @@
+package duke.data.exception;
+
 public class InvalidTimeException extends DukeException {
     @Override
     public String toString() {

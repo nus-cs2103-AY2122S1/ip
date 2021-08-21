@@ -1,3 +1,5 @@
+package duke.data.exception;
+
 public class EmptyTimeException extends DukeException {
     @Override
     public String toString() {
