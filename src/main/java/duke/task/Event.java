@@ -7,13 +7,23 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * This is an duke.task.Event class that extends duke.task.Task.
+ * This is an Event class that extends Task.
  */
 public class Event extends Task {
 
+    /**
+     * These are class field of Event.
+     */
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * This is a Event constructor.
+     *
+     * @param description A String representing the description of the event.
+     * @param at A String representing the date and time of the event.
+     * @throws CommandParamException An exception thrown when the date and time is not formatted properly.
+     */
     public Event(String description, String at) throws CommandParamException {
         super(description);
         String[] dateTime = at.trim().split(" ");

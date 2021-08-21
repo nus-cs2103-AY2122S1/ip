@@ -7,13 +7,23 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * This is a duke.task.Deadline class that extends duke.task.Task.
+ * This is a Deadline class that extends Task.
  */
 public class Deadline extends Task {
 
+    /**
+     * These are class field of Deadline.
+     */
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * This is a Deadline Constructor.
+     *
+     * @param description A String representing the description of the deadline.
+     * @param by A String representing the date and time of deadline.
+     * @throws CommandParamException An exception thrown when the date and time is not formatted properly.
+     */
     public Deadline(String description, String by) throws CommandParamException {
         super(description);
         String[] dateTime = by.trim().split(" ");
