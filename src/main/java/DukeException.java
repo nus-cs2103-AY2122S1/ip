@@ -33,3 +33,9 @@ class MissingDescriptionException extends DukeException {
         super("A task requires a description following it!");
     }
 }
+
+class InvalidDateTimeException extends DukeException {
+    InvalidDateTimeException() {
+        super("Incorrect date/time format given!");
+    }
+}
