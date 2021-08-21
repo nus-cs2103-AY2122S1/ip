@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.io.IOException;
 
@@ -168,6 +171,20 @@ public class Duke {
         sc.close();
     }
 
+    private String dateTimeFormatter(String unformattedDate) {
+        // 2/12/2019 1800
+        String stringDate = unformattedDate.split(" ")[1];
+        String time = unformattedDate.split(" ")[2];
+
+        LocalDate date = LocalDate.of(Integer.parseInt(stringDate.split("/")[2]),
+                Integer.parseInt(stringDate.split("/")[1]), Integer.parseInt(stringDate.split("/")[0]));
+
+        LocalDateTime dateTime = date.atTime(Integer.parseInt(time.substring(0, 2)),
+                Integer.parseInt(time.substring(2, 4)));
+
+        return dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
+    }
+
     public void start() throws FileNotFoundException, IOException {
         String userInput = "";
         String action = "";
@@ -187,7 +204,7 @@ public class Duke {
             actionDescription = userInput.split(" ", 2);
 
             try {
-                action = userInput.split(" ")[0];
+                action = actionDescription[0];
                 switch (action) {
                     case "bye":
                         this.printBye();
@@ -215,6 +232,7 @@ public class Duke {
                         descriptions = actionDescription[1];
                         onlyDescription = descriptions.split("/")[0];
                         by = descriptions.split("/by")[1];
+                        by = dateTimeFormatter(by);
                         Deadline deadline = new Deadline(onlyDescription, by);
                         this.addTask(deadline);
                         inputToStorage = deadline.getSymbol() + " | 0 | " + deadline.getDescription() + "|"
@@ -246,6 +264,7 @@ public class Duke {
                         break;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(e);
                 this.printMessage(STATICS.ERROR_MSG_EMPTY_DESCRIPTION);
                 continue;
             }
