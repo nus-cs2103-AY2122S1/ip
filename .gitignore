@@ -16,5 +16,8 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Task history saved files
+taskList.txt
+
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT

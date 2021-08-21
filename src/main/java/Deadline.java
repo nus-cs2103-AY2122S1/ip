@@ -8,7 +8,7 @@ public class Deadline extends Task {
     /** The deadline that this task should be completed by. */
     private final String deadline;
 
-    private Deadline(String taskName, String deadline) {
+    public Deadline(String taskName, String deadline) {
         super(taskName, Type.DEADLINE);
         this.deadline = deadline;
     }
@@ -30,5 +30,11 @@ public class Deadline extends Task {
     @Override
     public String taskDescription() {
         return this.getTaskName() + " (by: " + this.deadline + ")";
+    }
+
+    @Override
+    public String taskSaveString() {
+        String isDone = this.isDone() ? "1" : "0";
+        return "D | " + isDone + " | " + this.getTaskName() + " | " + this.deadline;
     }
 }

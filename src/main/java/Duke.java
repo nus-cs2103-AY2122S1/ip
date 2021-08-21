@@ -24,6 +24,7 @@ public class Duke {
         startUp();
         Scanner scanner = new Scanner(System.in);
         UserInputReader userInputReader = new UserInputReader(scanner);
+        Storage.initialise(userInputReader.getTaskList());
         while (true) {
             String input = userInputReader.getUserInput();
             if (!userInputReader.evaluateUserInput(input)) {

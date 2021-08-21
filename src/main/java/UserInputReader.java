@@ -184,4 +184,8 @@ public class UserInputReader {
             return null;
         }
     }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
 }

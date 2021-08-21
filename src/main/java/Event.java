@@ -7,7 +7,7 @@ public class Event extends Task {
     /** The time of the event */
     private final String eventTime;
 
-    private Event(String taskName, String eventTime) {
+    public Event(String taskName, String eventTime) {
         super(taskName, Type.EVENT);
         this.eventTime = eventTime;
     }
@@ -29,5 +29,11 @@ public class Event extends Task {
     @Override
     public String taskDescription() {
         return this.getTaskName() + " (at: " + this.eventTime + ")";
+    }
+
+    @Override
+    public String taskSaveString() {
+        String isDone = this.isDone() ? "1" : "0";
+        return "E | " + isDone + " | " + this.getTaskName() + " | " + this.eventTime;
     }
 }
