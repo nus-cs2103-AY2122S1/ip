@@ -1,5 +1,4 @@
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,24 +21,7 @@ public class Deadline extends Task {
     public Deadline(String description, String deadline) {
         super(description);
         this.deadlineString = deadline;
-        this.deadline = parseDateTime(deadline);
-    }
-
-    private Date parseDateTime(String dateTime) {
-        Date date;
-        DateFormat inFormat;
-
-        if (dateTime.split(" ").length == 2) {
-            inFormat = new SimpleDateFormat("yyyy-MM-dd hhmm");
-        } else {
-            inFormat = new SimpleDateFormat("yyyy-MM-dd");
-        }
-        try {
-            date = inFormat.parse(dateTime);
-        } catch (ParseException e) {
-            return null;
-        }
-        return date;
+        this.deadline = Parser.parseDateTime(deadline);
     }
 
     private String deadlineToString() {
@@ -58,7 +40,7 @@ public class Deadline extends Task {
 
     @Override
     public String convertToTxt() {
-        return String.format("D | %s | %s", super.convertToTxt(), this.deadline);
+        return String.format("D | %s | %s", super.convertToTxt(), deadlineToString());
     }
 
     /**

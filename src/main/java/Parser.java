@@ -1,3 +1,8 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Parser {
     private final ToDoList list;
     private final DataManager dataManager;
@@ -114,5 +119,22 @@ public class Parser {
         Event task = new Event(description, dateTime);
         list.addToList(task);
         dataManager.writeToFile(task);
+    }
+
+    public static Date parseDateTime(String dateTime) {
+        Date date;
+        DateFormat inFormat;
+
+        if (dateTime.split(" ").length == 2) {
+            inFormat = new SimpleDateFormat("yyyy-MM-dd hhmm");
+        } else {
+            inFormat = new SimpleDateFormat("yyyy-MM-dd");
+        }
+        try {
+            date = inFormat.parse(dateTime);
+        } catch (ParseException e) {
+            return null;
+        }
+        return date;
     }
 }
