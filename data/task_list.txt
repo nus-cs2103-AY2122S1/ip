@@ -1,0 +1,5 @@
+T | 0 | fsdfasdf
+D | 1 | fsadfasdfsdaf asdfasdfasd | fasdfafasdfs
+E | 0 | fasdfsd  |  fsafasdfs
+T | 1 | fasdfsda
+T | 0 | fasdfsda
