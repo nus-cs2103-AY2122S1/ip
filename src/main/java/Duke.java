@@ -90,6 +90,19 @@ public class Duke {
 
                         a = sc.nextLine();
                         b = a.split(" ", 2);
+                    } else if (b[0].equals("delete")) {
+                        int taskIndex = Integer.valueOf(b[1]);
+                        Task removed = history.get(taskIndex - 1);
+
+                        history.remove(taskIndex - 1);
+                        int length = history.size();
+
+                        System.out.println("Ok! I have removed this task:");
+                        System.out.println(removed);
+                        System.out.println("Now you have " + String.valueOf(length) + " tasks in the list.");
+
+                        a= sc.nextLine();
+                        b = a.split(" ", 2);
                     } else {
                         throw new DukeException("I do not know what you want to do!");
                     }
