@@ -2,7 +2,6 @@ package duke.util;
 
 import duke.exception.FileNotFoundException;
 import duke.exception.InvalidDateException;
-import duke.exception.NoSuchTaskException;
 import duke.exception.UnknownTaskTypeException;
 import duke.task.Task;
 import org.json.simple.JSONArray;
