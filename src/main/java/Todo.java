@@ -25,6 +25,6 @@ public class Todo extends Task {
     @Override
     public String taskSaveString() {
         String isDone = this.isDone() ? "1" : "0";
-        return "T | " + isDone + " | " + this.getTaskName();
+        return "T | " + isDone + " | 0 | " + this.getTaskName();
     }
 }

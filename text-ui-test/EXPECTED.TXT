@@ -58,52 +58,68 @@ Invalid argument to the "done" function.
 Invalid input. Please try again.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Got it! This task has been added:
 [D][] Hw (by: mon)
@@ -114,34 +130,44 @@ Got it! This task has been added:
 You currently have 6 tasks in your list with 4 uncompleted tasks remaining.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the deadline format as below:
-deadline {Deadline name} -by {Date to be completed by}
+deadline {Deadline name} -by {Date to be completed by}.
+Use "/by" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the event format as below:
-event {Event name} -at {Date of event}
+event {Event name} -at {Date of event}.
+Use "/at" to specify that the input date is a formatted date.
 
 Invalid format. Please enter the todo format as below:
 todo {todo name}

@@ -12,7 +12,10 @@ public abstract class Task {
 
     /**
      * Converts a task into a specified String format for saving into local storage.
-     * The format to save the strings is {type of task} | {is done} | {task name} | {time (if applicable}
+     * The format to save the strings is {type of task} | {is done} | {type of date}|
+     * {task name} | {time (if applicable)}.
+     * The type of date is based on the static variables in the DukeDate class. It is only applicable
+     * for deadline and event tasks.
      *
      * @return The String format to save the task as.
      */
@@ -73,14 +76,15 @@ public abstract class Task {
         String[] strComponents = saveString.split("\\|");
         String typeOfTask = strComponents[0].strip();
         boolean isDone = strComponents[1].strip().equals("1");
-        String taskName = strComponents[2].strip();
+        int dukeDateType = Integer.parseInt(strComponents[2].strip());
+        String taskName = strComponents[3].strip();
         Task loadedTask;
         if (typeOfTask.equals("T")) {
             loadedTask = Todo.newTodoTask(taskName);
         } else if (typeOfTask.equals("D")) {
-            loadedTask = new Deadline(taskName, strComponents[3].strip());
+            loadedTask = new Deadline(taskName, DukeDate.GetDukeDateFromType(strComponents[4].strip(), dukeDateType));
         } else {
-            loadedTask = new Event(taskName, strComponents[3].strip());
+            loadedTask = new Event(taskName, DukeDate.GetDukeDateFromType(strComponents[4].strip(), dukeDateType));
         }
         loadedTask.isDone = isDone;
         return loadedTask;
