@@ -11,7 +11,7 @@ public class MarkDoneCommand extends Command {
     }
 
     @Override
-    public void execute(Tasklist tasklist, Storage storage, Ui ui) throws AisuException {
+    public void execute(TaskList tasklist, Storage storage, Ui ui) throws AisuException {
         Task completedTask = tasklist.markDone(this.parseInt);
         storage.save(tasklist);
         ui.showToUser(" Nice! I've marked this task as completed:\n" + completedTask);

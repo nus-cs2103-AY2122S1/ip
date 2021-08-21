@@ -11,7 +11,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Tasklist tasklist, Storage storage, Ui ui) throws AisuException {
+    public void execute(TaskList tasklist, Storage storage, Ui ui) throws AisuException {
         Task deletedTask = tasklist.deleteTask(this.parseInt);
         storage.save(tasklist);
         ui.showToUser(" Noted~ I've removed this task:",

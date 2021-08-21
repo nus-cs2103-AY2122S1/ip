@@ -9,22 +9,22 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TasklistTest {
+public class TaskListTest {
     @Test
     public void addTest() throws AisuException {
-        // a unit test for Tasklist#addTask(String, TaskTypes) method
+        // a unit test for TaskList#addTask(String, TaskTypes) method
         Todo testTodo = new Todo("add todo task");
-        Tasklist testTasklist = new Tasklist();
-        assertEquals(testTodo.toString(), testTasklist.addTask("add todo task", Tasklist.TaskTypes.T).toString());
+        TaskList testTaskList = new TaskList();
+        assertEquals(testTodo.toString(), testTaskList.addTask("add todo task", TaskList.TaskTypes.T).toString());
     }
 
     @Test
     public void deleteTest() throws AisuException {
-        // a unit test for Tasklist#deleteTask(int) method
+        // a unit test for TaskList#deleteTask(int) method
         Todo testTodo = new Todo("delete this task");
         List<Task> list = new ArrayList<>();
         list.add(testTodo);
-        Tasklist testTasklist = new Tasklist(list);
-        assertEquals(testTodo.toString(), testTasklist.deleteTask(1).toString());
+        TaskList testTaskList = new TaskList(list);
+        assertEquals(testTodo.toString(), testTaskList.deleteTask(1).toString());
     }
 }

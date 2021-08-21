@@ -79,7 +79,7 @@ public class Storage {
         }
     }
 
-    public void save(Tasklist currList) {
+    public void save(TaskList currList) {
         // save list to file in format with ';;' as dividers and on a new line for each entry. Rewrites the entire file.
         List<Task> list = currList.getListData();
         try {

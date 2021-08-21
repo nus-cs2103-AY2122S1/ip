@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class Aisu {
     private final Storage storage;
-    private Tasklist tasklist;
+    private TaskList tasklist;
     private final Ui ui;
 
     public Aisu(String dirPath, String fileName) {
@@ -24,13 +24,13 @@ public class Aisu {
         this.storage = new Storage(dirPath, fileName);
         try {
             List<Task> cachedData = this.storage.load();
-            this.tasklist = new Tasklist(cachedData);
+            this.tasklist = new TaskList(cachedData);
         } catch (AisuException e) {
-            this.tasklist = new Tasklist();
+            this.tasklist = new TaskList();
         }
     }
 
-    public List<Task> getTasklistData() {
+    public List<Task> getTaskListData() {
         // for testing purposes
         return this.tasklist.getListData();
     }

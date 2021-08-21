@@ -8,20 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is the Tasklist class.
+ * This is the TaskList class.
  * It stores Tasks as a list.
  */
-public class Tasklist {
+public class TaskList {
     private final List<Task> list;
     public enum TaskTypes {
         T, D, E
     }
 
-    public Tasklist() {
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
-    public Tasklist(List<Task> currList) {
+    public TaskList(List<Task> currList) {
         this.list = currList;
     }
 

@@ -1,14 +1,13 @@
 package aisu.command;
 
 import aisu.Storage;
-import aisu.Tasklist;
+import aisu.TaskList;
 import aisu.Ui;
-import aisu.command.Command;
 
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(Tasklist tasklist, Storage storage, Ui ui) {
+    public void execute(TaskList tasklist, Storage storage, Ui ui) {
         // Does nothing
     }
 
