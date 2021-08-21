@@ -1,9 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Encapsulates a task to be done with a deadline.
  */
 public class Deadlines extends Task {
     /** When the task must be done by. */
-    private String limit;
+    private LocalDate limit;
 
     /**
      * Constructor of a Deadlines object.
@@ -13,12 +16,16 @@ public class Deadlines extends Task {
      */
     public Deadlines(String description, String limit) {
         super(description);
-        this.limit = limit;
+        this.limit = LocalDate.parse(limit.replace("/", "-"));
     }
 
     @Override
     public String saveData() {
-        return "deadline " + super.saveData() + " /by " + this.limit;
+        return "deadline " + super.saveData() + " /by " + this.limit.toString();
+    }
+
+    private String dateConverter() {
+        return this.limit.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
     /**
@@ -28,6 +35,6 @@ public class Deadlines extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.limit + ")";
+        return "[D]" + super.toString() + " (by: " + this.dateConverter() + ")";
     }
 }
