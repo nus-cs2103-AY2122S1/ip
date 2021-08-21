@@ -21,7 +21,7 @@ public class Event extends Task {
     
     public Event(String[] input, boolean isDone) {
         super(input[0], isDone);
-        this.at = input[1];
+        this.at = LocalDateTime.parse(input[1]);
     }
     
     @Override
