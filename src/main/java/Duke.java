@@ -24,6 +24,9 @@ public class Duke {
 
   private static void monitor() {
     Scanner sc = new Scanner(System.in);
+
+    DukeStorage.readFromDatabase();
+
     while (sc.hasNextLine()) {
       String input = sc.nextLine();
       DukeLogic.takeInput(input);
@@ -31,6 +34,8 @@ public class Duke {
         break;
       }
     }
+    sc.close();
+    DukeStorage.writeToDatabase();
   }
 
   /**
