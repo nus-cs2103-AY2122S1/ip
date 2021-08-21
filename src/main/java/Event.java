@@ -1,8 +1,5 @@
-import java.util.regex.Pattern;
-
 public class Event extends Task {
 
-    private static final Pattern descriptionFormat = Pattern.compile("event [^/]* /on .*");
     private String on;
 
     public Event(String description, String on) {
