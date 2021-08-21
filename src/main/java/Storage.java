@@ -26,9 +26,6 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] lineSplit = line.split(" \\| ");
-                for (String s: lineSplit) {
-                    System.out.println(s);
-                }
                 String lineType = lineSplit[0];
                 Task newTask;
                 switch (lineType) {
