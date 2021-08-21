@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import duke.task.DeadlineTask;
@@ -93,7 +94,7 @@ public abstract class Database {
      * @param date      date of the task, nullable
      * @return
      */
-    protected Task createTask(TaskType type, String name, boolean completed, String date) {
+    protected Task createTask(TaskType type, String name, boolean completed, LocalDate date) {
         switch (type) {
         case TODO:
             return new ToDoTask(name, completed);

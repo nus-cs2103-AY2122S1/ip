@@ -1,36 +1,32 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * A task specifying an event with a date and time.
  */
 public class EventTask extends Task {
-    private String dateTime;
 
     public EventTask(String task) {
         super(task);
         String[] arr = task.split(" /at ", 2);
-        this.dateTime = arr.length >= 2 ? arr[1] : "";
+        this.date = arr.length >= 2 ? LocalDate.parse(arr[1]) : null;
         this.name = arr[0];
     }
 
     public EventTask(String name, boolean completed) {
         super(name, completed);
-        this.dateTime = "";
+        this.date = null;
     }
 
-    public EventTask(String name, boolean completed, String date) {
+    public EventTask(String name, boolean completed, LocalDate date) {
         super(name, completed);
-        this.dateTime = date;
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.dateTime + ")";
-    }
-
-    @Override
-    public String getDate() {
-        return this.dateTime;
+        return "[E]" + super.toString() + " (at: " + this.getDateString() + ")";
     }
 
 }

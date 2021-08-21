@@ -1,11 +1,15 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Encapsulates a task in DukeList.
  */
 public abstract class Task {
     private boolean completed;
     protected String name;
+    protected LocalDate date;
 
     public Task(String name) {
         this(name, false);
@@ -44,8 +48,8 @@ public abstract class Task {
      * 
      * @return date of task
      */
-    public String getDate() {
-        return null;
+    public LocalDate getDate() {
+        return this.date;
     }
 
     @Override
@@ -62,6 +66,10 @@ public abstract class Task {
 
     public TaskType getType() {
         return TaskType.byTask(this.getClass());
+    }
+
+    protected String getDateString() {
+        return this.date == null ? "" : this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
 }

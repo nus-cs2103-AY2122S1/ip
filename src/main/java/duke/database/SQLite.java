@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +68,7 @@ public class SQLite extends Database {
                 String name = rs.getString("name");
                 boolean completed = rs.getBoolean("completed");
                 String date = rs.getString("date");
-                list.add(this.createTask(type, name, completed, date));
+                list.add(this.createTask(type, name, completed, LocalDate.parse(date)));
             }
             close(ps);
         } catch (SQLException ex) {
@@ -82,7 +83,7 @@ public class SQLite extends Database {
         TaskType type = task.getType(); // TODO
         String name = task.getName();
         int completed = task.isCompleted() ? 1 : 0;
-        String date = task.getDate();
+        String date = task.getDate().toString();
         try {
             connection = getSQLConnection();
             PreparedStatement ps = connection
@@ -112,7 +113,7 @@ public class SQLite extends Database {
                     String name = rs.getString("name");
                     boolean completed = rs.getBoolean("completed");
                     String date = rs.getString("date");
-                    result = this.createTask(type, name, completed, date);
+                    result = this.createTask(type, name, completed, LocalDate.parse(date));
 
                     int rowid = rs.getInt("rowid");
                     ps = connection
@@ -142,7 +143,7 @@ public class SQLite extends Database {
                     TaskType type = TaskType.valueOf(rs.getString("type"));
                     String name = rs.getString("name");
                     String date = rs.getString("date");
-                    result = this.createTask(type, name, true, date);
+                    result = this.createTask(type, name, true, LocalDate.parse(date));
 
                     int rowid = rs.getInt("rowid");
                     ps = connection.prepareStatement(
