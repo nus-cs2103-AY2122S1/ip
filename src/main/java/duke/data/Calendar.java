@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class Calendar {
+class Calendar {
 
     private TreeMap<LocalDateTime, ArrayList<DateTimeTask>> calendar;
     private TreeMap<LocalDateTime, ArrayList<DateTimeTask>> calendarEvents;
@@ -37,21 +37,21 @@ public class Calendar {
         }
     }
 
-        public ArrayList<DateTimeTask> getEventsAt(LocalDateTime dt) {
-            ArrayList<DateTimeTask> arrayList = new ArrayList<>();
-            calendarEvents.headMap(dt, true).values().forEach(arrayList::addAll);
-            return arrayList;
-        }
+    public ArrayList<DateTimeTask> getEventsAt(LocalDateTime dt) {
+        ArrayList<DateTimeTask> arrayList = new ArrayList<>();
+        calendarEvents.headMap(dt, true).values().forEach(arrayList::addAll);
+        return arrayList;
+    }
 
-        public ArrayList<DateTimeTask> getDeadlinesBy(LocalDateTime dt) {
-            ArrayList<DateTimeTask> arrayList = new ArrayList<>();
-            calendarDeadlines.headMap(dt, true).values().forEach(arrayList::addAll);
-            return arrayList;
-        }
+    public ArrayList<DateTimeTask> getDeadlinesBy(LocalDateTime dt) {
+        ArrayList<DateTimeTask> arrayList = new ArrayList<>();
+        calendarDeadlines.headMap(dt, true).values().forEach(arrayList::addAll);
+        return arrayList;
+    }
 
-        public ArrayList<DateTimeTask> getAllBy(LocalDateTime dt) {
-            ArrayList<DateTimeTask> arrayList = new ArrayList<>();
-            calendar.headMap(dt, true).values().forEach(arrayList::addAll);
-            return arrayList;
-        }
+    public ArrayList<DateTimeTask> getAllBy(LocalDateTime dt) {
+        ArrayList<DateTimeTask> arrayList = new ArrayList<>();
+        calendar.headMap(dt, true).values().forEach(arrayList::addAll);
+        return arrayList;
+    }
 }

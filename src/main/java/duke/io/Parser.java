@@ -18,27 +18,27 @@ public class Parser {
         }
         switch (main) {
         case "bye":
-            return new Command(Command.COMMANDS.BYE);
+            return new Command(Command.Commands.BYE);
         case "list":
-            return new Command(Command.COMMANDS.LIST);
+            return new Command(Command.Commands.LIST);
         case "help":
-            return new Command(Command.COMMANDS.HELP);
+            return new Command(Command.Commands.HELP);
         case "done":
-            return new Command(Command.COMMANDS.DONE, Integer.parseInt(aux));
+            return new Command(Command.Commands.DONE, Integer.parseInt(aux));
         case "delete":
-            return new Command(Command.COMMANDS.DELETE, Integer.parseInt(aux));
+            return new Command(Command.Commands.DELETE, Integer.parseInt(aux));
         case "todo":
-            return new Command(Command.COMMANDS.TODO, aux);
+            return new Command(Command.Commands.TODO, aux);
         case "deadline":
-            return new Command(Command.COMMANDS.DEADLINE, aux.split(" /by "));
+            return new Command(Command.Commands.DEADLINE, aux.split(" /by "));
         case "event":
-            return new Command(Command.COMMANDS.EVENT, aux.split(" /at "));
+            return new Command(Command.Commands.EVENT, aux.split(" /at "));
         case "by":
-            return new Command(Command.COMMANDS.BY, LocalDateTime.parse(aux));
+            return new Command(Command.Commands.BY, LocalDateTime.parse(aux));
         case "at":
-            return new Command(Command.COMMANDS.AT, LocalDateTime.parse(aux));
+            return new Command(Command.Commands.AT, LocalDateTime.parse(aux));
         case "all":
-            return new Command(Command.COMMANDS.ALL, LocalDateTime.parse(aux));
+            return new Command(Command.Commands.ALL, LocalDateTime.parse(aux));
         default:
             throw new DukeException(DukeException.Type.COMMAND);
         }

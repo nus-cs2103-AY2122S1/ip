@@ -33,7 +33,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println(format("Task description cannot be found in database","A new file will be created"));
+        System.out.println(format("Task description cannot be found in database", "A new file will be created"));
     }
 
     public void showSavingError() {
@@ -56,7 +56,7 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void displayCommand(Command.COMMANDS c, TaskList list) {
+    public void displayCommand(Command.Commands c, TaskList list) {
         switch (c) {
         case BYE:
             System.out.println(format("Bye. Hope to see you again soon!"));
@@ -76,9 +76,9 @@ public class Ui {
             System.out.println(format(list.returnItems()));
             break;
         case TODO:
-            //fallthrough
+            //Fallthrough
         case EVENT:
-            //fallthrough
+            //Fallthrough
         case DEADLINE:
             System.out.println(format("Got it. I've added this task:",
                     "  " + list.returnLastTask(), list.returnItemCount(0)));
@@ -86,7 +86,7 @@ public class Ui {
         }
     }
 
-    public void displayCommand(Command.COMMANDS c, TaskList list, LocalDateTime dt) {
+    public void displayCommand(Command.Commands c, TaskList list, LocalDateTime dt) {
         switch (c) {
         case AT:
             System.out.println(format(list.getEventsAt(dt)));
@@ -100,7 +100,7 @@ public class Ui {
         }
     }
 
-    public void displayCommand(Command.COMMANDS c, int index, Task t, TaskList list) {
+    public void displayCommand(Command.Commands c, int index, Task t, TaskList list) {
         switch (c) {
         case DONE:
             System.out.println(format("Nice! I've marked this task as done:",

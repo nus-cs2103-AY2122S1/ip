@@ -13,46 +13,46 @@ import java.time.LocalDateTime;
 
 public class Command {
 
-    public enum COMMANDS {
+    public enum Commands {
         BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, BY, AT, ALL, HELP
     }
-    public enum TYPES {
+    public enum Types {
         SINGLE_INPUT, INT_INPUT, STR_INPUT, STR_ARR_INPUT, DATETIME_INPUT
     }
-    private COMMANDS command;
-    private TYPES type;
+    private Commands command;
+    private Types type;
     private LocalDateTime dateTime;
     private int index;
     private String[] subInputs;
     private String description;
     private boolean isExit = false;
 
-    public Command(COMMANDS command) {
+    public Command(Commands command) {
         this.command = command;
-        this.type = TYPES.SINGLE_INPUT;
+        this.type = Types.SINGLE_INPUT;
     }
 
-    public Command(COMMANDS command, int index) {
+    public Command(Commands command, int index) {
         this.command = command;
-        this.type = TYPES.INT_INPUT;
+        this.type = Types.INT_INPUT;
         this.index = index;
     }
 
-    public Command(COMMANDS command, String description) {
+    public Command(Commands command, String description) {
         this.command = command;
-        this.type = TYPES.STR_INPUT;
+        this.type = Types.STR_INPUT;
         this.description = description;
     }
 
-    public Command(COMMANDS command, String[] subitems) {
+    public Command(Commands command, String[] subitems) {
         this.command = command;
-        this.type = TYPES.STR_ARR_INPUT;
+        this.type = Types.STR_ARR_INPUT;
         this.subInputs = subitems;
     }
 
-    public Command(COMMANDS command, LocalDateTime dateTime) {
+    public Command(Commands command, LocalDateTime dateTime) {
         this.command = command;
-        this.type = TYPES.DATETIME_INPUT;
+        this.type = Types.DATETIME_INPUT;
         this.dateTime = dateTime;
     }
 
@@ -64,13 +64,13 @@ public class Command {
         switch (this.type) {
         case SINGLE_INPUT:
             ui.displayCommand(this.command, tasks);
-            if (this.command.equals(COMMANDS.BYE)) {
+            if (this.command.equals(Commands.BYE)) {
                 this.isExit = true;
             }
             break;
         case INT_INPUT:
             Task t;
-            if (this.command.equals(COMMANDS.DONE)) {
+            if (this.command.equals(Commands.DONE)) {
                 t = tasks.markDone(this.index, storage);
             } else {
                 t = tasks.removeTask(this.index, storage);
@@ -85,7 +85,7 @@ public class Command {
             break;
         case STR_ARR_INPUT:
             Task task;
-            if (this.command.equals(COMMANDS.DEADLINE)) {
+            if (this.command.equals(Commands.DEADLINE)) {
                 task = new Deadline(subInputs);
             } else {
                 task = new Event(subInputs);
