@@ -6,6 +6,22 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
+    public Deadline(String name, boolean isDone, String dueDate) {
+        super(name, isDone);
+        this.dueDate = dueDate;
+    }
+
+    public static Deadline fromText(String text) throws DukeException {
+        String[] deadlineDetails = text.split(" | ", 4);
+        if (deadlineDetails.length < 4) {
+            throw new DukeException("Cannot parse Deadline from text - not enough arguments supplied.");
+        }
+        boolean isDone = deadlineDetails[1] == "X";
+        String name = deadlineDetails[2];
+        String dueDate = deadlineDetails[3];
+        return new Deadline(name, isDone, dueDate);
+    }
+
     @Override
     public String toText() {
         String[] props = new String[]{"D", super.getStatusIcon(), super.getName(), this.dueDate};
