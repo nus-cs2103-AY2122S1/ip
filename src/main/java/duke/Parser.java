@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a parser that interprets commands
@@ -33,18 +34,15 @@ class Parser {
             return finishTask(input);
         } else if (input.startsWith("delete")) {
             return delete(input);
+        } else if (input.startsWith("find")) {
+            return find(input);
         } else {
             return addTask(input);
         }
     }
 
     private String[] list() {
-        List<String> out = new ArrayList<>();
-        out.add("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            out.add(String.format("%d.%s", i + 1, tasks.get(i)));
-        }
-        return out.toArray(new String[0]);
+        return formatList("Here are the tasks in your list:", tasks);
     }
 
     private String[] finishTask(String input) {
@@ -82,6 +80,23 @@ class Parser {
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    private String[] find(String input) {
+        String searchString = input.split(" ", 2)[1];
+        List<Task> filteredTasks = tasks.stream()
+                .filter((t) -> t.getDescription().contains(searchString))
+                .collect(Collectors.toList());
+        return formatList("Here are the matching tasks in your list:", filteredTasks);
+    }
+
+    private String[] formatList(String message, List<Task> list) {
+        List<String> out = new ArrayList<>();
+        out.add(message);
+        for (int i = 0; i < list.size(); i++) {
+            out.add(String.format("%d.%s", i + 1, list.get(i)));
+        }
+        return out.toArray(new String[0]);
     }
 
     private String[] delete(String input) {
