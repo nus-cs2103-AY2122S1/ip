@@ -9,6 +9,10 @@ public class ToDoTask extends Task {
         super(name);
     }
 
+    public ToDoTask(String name, boolean completed) {
+        super(name, completed);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

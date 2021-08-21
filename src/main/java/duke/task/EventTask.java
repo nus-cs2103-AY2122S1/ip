@@ -13,9 +13,24 @@ public class EventTask extends Task {
         this.name = arr[0];
     }
 
+    public EventTask(String name, boolean completed) {
+        super(name, completed);
+        this.dateTime = "";
+    }
+
+    public EventTask(String name, boolean completed, String date) {
+        super(name, completed);
+        this.dateTime = date;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.dateTime + ")";
+    }
+
+    @Override
+    public String getDate() {
+        return this.dateTime;
     }
 
 }

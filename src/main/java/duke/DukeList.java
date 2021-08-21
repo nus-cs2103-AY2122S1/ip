@@ -1,8 +1,10 @@
 package duke;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
+
+import duke.database.Database;
+import duke.database.SQLite;
 import duke.exception.InvalidArgumentException;
 import duke.task.Task;
 
@@ -11,10 +13,12 @@ import duke.task.Task;
  * its manipulation.
  */
 public class DukeList {
-    private final List<Task> list;
+    private final Database database;
 
     public DukeList() {
-        this.list = new ArrayList<>();
+        this.database = new SQLite();
+        this.database.load();
+        this.database.initialize();
     }
 
     /**
@@ -24,7 +28,7 @@ public class DukeList {
      * @return response to the addition
      */
     public Response addWithResponse(Task task) {
-        this.list.add(task);
+        this.database.addTask(task);
         return new Response("Got it. I've added this task:\n" + task + "\n" + currentSizeMessage());
     }
 
@@ -34,7 +38,8 @@ public class DukeList {
      * @return response to be printed
      */
     public Response currentListResponse() {
-        String message = IntStream.range(0, this.list.size()).mapToObj(i -> (i + 1) + ". " + list.get(i))
+        List<Task> list = this.database.getTasksList();
+        String message = IntStream.range(0, list.size()).mapToObj(i -> (i + 1) + ". " + list.get(i))
                 .reduce((str1, str2) -> str1 + "\n" + str2).orElse("You have not added any tasks!");
         return new Response(message);
     }
@@ -47,12 +52,9 @@ public class DukeList {
      * @return response on whether it is succcessful
      */
     public Response markCompleted(int i) {
-        this.testInRange(i);
-
-        Task task = this.list.get(i - 1);
-        if (task.isCompleted())
-            return new Response("Bruh I've already marked it as completed!\n" + task);
-        task.markCompleted();
+        Task task = this.database.markCompleted(i);
+        if (task == null)
+            throw new InvalidArgumentException("Invalid index!\n" + currentSizeMessage());
         return new Response("Nice! I've marked this task as done:\n" + task);
     }
 
@@ -64,21 +66,16 @@ public class DukeList {
      * @return response on whether it is succcessful
      */
     public Response deleteWithResponse(int i) {
-        this.testInRange(i);
-
-        Task task = this.list.remove(i - 1);
+        Task task = this.database.removeTask(i);
+        if (task == null)
+            throw new InvalidArgumentException("Invalid index!\n" + currentSizeMessage());
         return new Response("Noted. I've removed this task:\n" + task + "\n" + currentSizeMessage());
     }
 
     private String currentSizeMessage() {
-        int size = this.list.size();
+        int size = this.database.getTasksList().size();
         String unit = size == 1 ? "task" : "tasks";
-        return "You now have " + this.list.size() + " " + unit + " in the list!";
-    }
-
-    private void testInRange(int i) {
-        if (i < 1 || i > this.list.size())
-            throw new InvalidArgumentException("Invalid index!\n" + currentSizeMessage());
+        return "You now have " + size + " " + unit + " in the list!";
     }
 
 }
