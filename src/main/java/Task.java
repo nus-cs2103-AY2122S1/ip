@@ -1,5 +1,5 @@
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -15,6 +15,12 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract String getType();
+
+    public abstract String getDescription();
+
+    public abstract String getTiming();
 
     @Override
     public String toString() {

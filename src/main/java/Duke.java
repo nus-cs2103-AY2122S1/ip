@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,6 +28,7 @@ public class Duke {
                 switch (words[0]) {
                 case "bye":
                     sayGoodBye();
+                    saveData();
                     break;
                 case "list":
                     printList();
@@ -90,6 +92,42 @@ public class Duke {
                 printLineSeparator();
             }
         }
+    }
+
+    private static void saveData() {
+        File dataDirectory = new File("./src/main/data");
+        if (!dataDirectory.exists()) {
+            dataDirectory.mkdirs();
+        }
+        File savedTasksFile = new File("./src/main/data/tasks.txt");
+        try {
+            savedTasksFile.createNewFile();
+            FileWriter writer = new FileWriter(savedTasksFile, false);
+            for (int i = 0; i < tasks.size(); i++) {
+                StringBuilder builder = new StringBuilder();
+                Task task = tasks.get(i);
+                builder.append(task.getType());
+                builder.append("|");
+                if (task.getStatusIcon() == "X") {
+                    builder.append("1|");
+                } else {
+                    builder.append("0|");
+                }
+                builder.append(task.getDescription());
+                builder.append("|");
+                builder.append(task.getTiming());
+                builder.append("\n");
+                System.out.println(builder.toString());
+                writer.write(builder.toString());
+
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("AN ERROR HAS OCCURRED!!!");
+            e.printStackTrace();
+        }
+
+
     }
 
     private static void deleteTask(int delIndex) {

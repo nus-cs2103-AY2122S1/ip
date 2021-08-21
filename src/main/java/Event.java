@@ -7,6 +7,21 @@ public class Event extends Task {
     }
 
     @Override
+    public String getType() {
+        return "E";
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public String getTiming() {
+        return timing;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + timing + ")";
     }
