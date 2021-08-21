@@ -9,7 +9,6 @@ import duke.exception.InvalidInputException;
 import duke.exception.InvalidInstructionException;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -31,8 +30,25 @@ public class Duke {
             if (month < 0 || month > 12) {
                 return false;
             }
-            int day = Integer.parseInt(str.substring(8));
+            int day = Integer.parseInt(str.substring(8, 10));
             if (day < 0 || day > 31) {
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private static Boolean isTime(String str) {
+        try {
+            if (str.length() != 4) {
+                return false;
+            }
+            int time = Integer.parseInt(str);
+            if (time < 0 || time > 2359) {
+                return false;
+            } else if (time % 100 > 59){
                 return false;
             }
             return true;
@@ -63,18 +79,40 @@ public class Duke {
                     + center + " (task details)\"");
         }
         String details = null;
-        String timing = null;
+        String aftCenter = null;
         String date = null;
+        int time1 = -1;
+        int time2 = -1;
         if (!task.equals("todo")) {
+
             details = description.substring(0, centerIndex).trim();
-            timing = description.substring(centerIndex).trim();
-            if (details.length() == 0 || timing.length() <= center.length()) {
+            aftCenter = description.substring(centerIndex).trim();
+            if (details.length() == 0 || aftCenter.length() <= center.length()) {
                 throw new InvalidInputException(task + " task must have details before and after " + center + ".");
             }
-            timing = timing.substring(3).trim();
-            if (isDate(timing)) {
-                date = timing.substring(0, 4) + '-' + timing.substring(5, 7) + '-' + timing.substring(8);
-                timing = null;
+
+            aftCenter = aftCenter.substring(3).trim();
+
+            if (task.equals("deadline")) {
+                if (aftCenter.length() == 15) {
+                    if (isDate(aftCenter.substring(0, 10)) && isTime(aftCenter.substring(11))) {
+                        date = aftCenter.substring(0, 4) + '-' + aftCenter.substring(5, 7) + '-'
+                                + aftCenter.substring(8, 10);
+                        time1 = Integer.parseInt(aftCenter.substring(11));
+                        aftCenter = null;
+                    }
+                }
+            } else if (task.equals("event")) {
+                if (aftCenter.length() == 20) {
+                    if (isDate(aftCenter.substring(0, 10)) && isTime(aftCenter.substring(11, 15))
+                            && isTime(aftCenter.substring(16))) {
+                        date = aftCenter.substring(0, 4) + '-' + aftCenter.substring(5, 7) + '-'
+                                + aftCenter.substring(8, 10);
+                        time1 = Integer.parseInt(aftCenter.substring(11, 15));
+                        time2 = Integer.parseInt(aftCenter.substring(16));
+                        aftCenter = null;
+                    }
+                }
             }
         }
         switch (task) {
@@ -82,10 +120,10 @@ public class Duke {
             taskList.add(new ToDo(description));
             break;
         case "deadline":
-            taskList.add(new Deadline(details, timing, date));
+            taskList.add(new Deadline(details, aftCenter, date, time1));
             break;
         case "event":
-            taskList.add(new Event(details, timing, date));
+            taskList.add(new Event(details, aftCenter, date, time1, time2));
             break;
         }
         return "Got it. I've added this task:\n" +
@@ -162,29 +200,31 @@ public class Duke {
                         text = createTask(task, text);
                         break;
                     case "date":
-                        if (text.length() == 0) {
-                            throw new InvalidInputException("Enter a date in YYYY-MM-DD format after \"date\".");
+                        if (text.length() != 15) {
+                            throw new InvalidInputException(
+                                    "Enter the date and time after \"date\" in this format: YYYY-MM-DD (24hr time).");
                         } else {
-                            if (isDate(text)) {
+                            if (isDate(text.substring(0, 10)) && isTime(text.substring(11))) {
                                 LocalDate date = LocalDate.parse(text.substring(0, 4)
                                         + '-' + text.substring(5, 7) + '-'
-                                        + text.substring(8));
+                                        + text.substring(8, 10));
+                                int time = Integer.parseInt(text.substring(11));
                                 text = "";
                                 for (int i = 0; i < taskList.size(); i++) {
-                                    if (taskList.get(i).getDate().equals(date)) {
+                                    if (date.equals(taskList.get(i).getDate()) &&
+                                            taskList.get(i).getTime() == time) {
                                         text += "\t\t" + taskList.get(i).toString() + '\n';
                                     }
                                 }
                                 if (text.equals("")) {
-                                    text = "No tasks are due/happening on "
-                                            + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +'.';
+                                    text = "No tasks are due/happening.";
                                 } else {
-                                    text = "These tasks are due/happening on "
-                                            + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ":\n"
+                                    text = "These tasks are due/happening:\n"
                                             + text;
                                 }
                             } else {
-                                throw new InvalidInputException("Date format is incorrect. Correct format: YYYY-MM-DD.");
+                                throw new InvalidInputException(
+                                        "Date and time format is incorrect. Correct format: YYYY-MM-DD (24hr time).");
                             }
                         }
                         break;

@@ -23,6 +23,7 @@ abstract public class Task {
     }
 
     abstract public LocalDate getDate();
+    abstract public int getTime();
 
     @Override
     public String toString() {

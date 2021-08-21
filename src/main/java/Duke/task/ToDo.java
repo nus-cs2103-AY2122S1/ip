@@ -14,6 +14,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public int getTime() {
+        return -1;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
