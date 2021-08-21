@@ -1,6 +1,7 @@
 package main.java;
 
-
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 
 public class DukeEngine {
     private final DukeMessages messages = new DukeMessages();
+    private final DatabaseEngine databaseEngine = new DatabaseEngine();
 
     private List<Task> taskList = new ArrayList<Task>();
 
@@ -15,6 +17,30 @@ public class DukeEngine {
      * Main engine to run the program.
      */
     public void runProgram() {
+
+        Todo sampleTask = new Todo("todoh-kun");
+        Deadline deadline = new Deadline("Eat pizzas", "Today");
+        Task event = new Event("Nightlife", "Wimbledon");
+
+        List<Task> sampleList = new ArrayList<Task>();
+        sampleList.add(sampleTask);
+        sampleList.add(deadline);
+        sampleList.add(event);
+
+
+        databaseEngine.readFromDatabase();
+        databaseEngine.writeToDatabase(sampleList);
+
+        //this.loadData();
+
+        /*
+        try {
+            databaseEngine.printer();
+        } catch (Exception e) {
+
+        }
+
+         */
 
         //initialises the scanner
         Scanner sc = new Scanner(System.in);
@@ -68,6 +94,14 @@ public class DukeEngine {
         sc.close();
     }
 
+    public void loadData() {
+        try {
+            this.taskList = databaseEngine.readFromDatabase();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 
     /**
      * Adds a TooDo Task into the List containing Tasks.
@@ -95,7 +129,7 @@ public class DukeEngine {
     }
 
     /**
-     * Adds a TooDo Task into the List containing Tasks.
+     * Adds a Todo Task into the List containing Tasks.
      * @param inputArr String array containing input by the user.
      * @throws DescriptionException if inputArr length < 2.
      */

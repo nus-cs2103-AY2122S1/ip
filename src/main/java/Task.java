@@ -1,5 +1,21 @@
 package main.java;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+/*
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "d")
+
+ */
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Todo.class, name = "Todo"),
+        @JsonSubTypes.Type(value = Deadline.class, name = "Deadline"),
+        @JsonSubTypes.Type(value = Event.class, name = "Event")
+})
 public class Task {
     protected String description;
     protected boolean isDone;

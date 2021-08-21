@@ -92,5 +92,12 @@ public class DukeMessages {
         System.out.println(borderLine);
     }
 
+    /**
+     * Displays the message that the database path is wrong.
+     */
+    public void wrongDirectoryMessage() {
+        this.displayText("The directory reference in DatabaseEngine is wrong. Please help to check it!");
+    }
+
 
 }
