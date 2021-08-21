@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Storage {
     private String path;
@@ -14,11 +11,15 @@ public class Storage {
 
 
     public void save() {
-
+        try {
+            FileWriter fileWriter = new FileWriter(this.path);
+            fileWriter.write(list.toString());
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
     }
 
 
     public void load() {
-
     }
 }
