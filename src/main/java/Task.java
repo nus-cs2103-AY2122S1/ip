@@ -11,6 +11,10 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    public String getSaveIcon() {
+        return (isDone ? "1" : "0");
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
@@ -18,5 +22,9 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public String toSaveString() {
+        return this.getSaveIcon() + " | " + this.description;
     }
 }
