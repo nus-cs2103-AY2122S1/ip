@@ -6,6 +6,8 @@ import duke.Ui;
 import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MarkCommandTest {
@@ -76,5 +78,21 @@ class MarkCommandTest {
         markCommand1.execute(tasks, this.ui, storageStub);
 
         assertTrue(getTaskListOneUndoneTodo().equals(tasks));
+    }
+
+    @Test
+    void equals_sameMarkCommand_true() {
+        MarkCommand markCommand = new MarkCommand("list");
+        MarkCommand markCommand1 = new MarkCommand("list");
+
+        assertEquals(markCommand, markCommand1);
+    }
+
+    @Test
+    void equals_differentMarkCommand_false() {
+        MarkCommand markCommand = new MarkCommand("list");
+        MarkCommand markCommand1 = new MarkCommand("other");
+
+        assertNotEquals(markCommand, markCommand1);
     }
 }

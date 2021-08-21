@@ -84,4 +84,13 @@ public class AddCommand extends Command {
             System.out.println(dukeException);
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AddCommand) {
+            AddCommand other = (AddCommand) obj;
+            return this.userInput.equals(other.userInput);
+        }
+        return false;
+    }
 }

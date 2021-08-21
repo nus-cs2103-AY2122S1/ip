@@ -51,4 +51,13 @@ public class MarkCommand extends Command {
             System.out.println(dukeException);
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof MarkCommand) {
+            MarkCommand other = (MarkCommand) obj;
+            return this.userInput.equals(other.userInput);
+        }
+        return false;
+    }
 }

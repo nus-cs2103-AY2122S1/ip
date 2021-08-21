@@ -6,6 +6,8 @@ import duke.Ui;
 import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DeleteCommandTest {
@@ -71,5 +73,21 @@ class DeleteCommandTest {
         deleteCommand1.execute(taskList, this.ui, storageStub);
 
         assertTrue(getTaskListOneTodo().equals(taskList));
+    }
+
+    @Test
+    void equals_sameDeleteCommand_true() {
+        DeleteCommand deleteCommand = new DeleteCommand("list");
+        DeleteCommand deleteCommand1 = new DeleteCommand("list");
+
+        assertEquals(deleteCommand, deleteCommand1);
+    }
+
+    @Test
+    void equals_differentDeleteCommand_false() {
+        DeleteCommand deleteCommand = new DeleteCommand("list");
+        DeleteCommand deleteCommand1 = new DeleteCommand("other");
+
+        assertNotEquals(deleteCommand, deleteCommand1);
     }
 }

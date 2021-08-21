@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.StorageStub;
 import duke.TaskList;
 import duke.Ui;
@@ -13,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AddCommandTest {
@@ -132,6 +133,20 @@ class AddCommandTest {
         assertTrue(new TaskList().equals(tasks));
     }
 
+    @Test
+    void equals_sameAddCommand_true() {
+        AddCommand addCommand = new AddCommand("list");
+        AddCommand addCommand1 = new AddCommand("list");
 
+        assertEquals(addCommand, addCommand1);
+    }
+
+    @Test
+    void equals_differentAddCommand_false() {
+        AddCommand addCommand = new AddCommand("list");
+        AddCommand addCommand1 = new AddCommand("other");
+
+        assertNotEquals(addCommand, addCommand1);
+    }
 
 }

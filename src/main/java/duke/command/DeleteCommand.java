@@ -52,4 +52,13 @@ public class DeleteCommand extends Command {
             System.out.println(dukeException);
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DeleteCommand) {
+            DeleteCommand other = (DeleteCommand) obj;
+            return this.userInput.equals(other.userInput);
+        }
+        return false;
+    }
 }

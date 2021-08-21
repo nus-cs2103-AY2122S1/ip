@@ -85,4 +85,13 @@ public class DateCommand extends Command {
             System.out.println(dukeException);
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DateCommand) {
+            DateCommand other = (DateCommand) obj;
+            return this.userInput.equals(other.userInput);
+        }
+        return false;
+    }
 }

@@ -35,4 +35,13 @@ public class ListCommand extends Command {
             System.out.println(dukeException);
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ListCommand) {
+            ListCommand other = (ListCommand) obj;
+            return this.userInput.equals(other.userInput);
+        }
+        return false;
+    }
 }
