@@ -6,6 +6,7 @@ import duke.tasks.Event;
 import duke.tasks.Todo;
 import duke.storage.Storage;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ChatBot {
@@ -46,14 +47,15 @@ public class ChatBot {
         return line + "Well done! You finally completed " + complete.getName() + "!\n" + line;
     }
 
-    public String addDeadline(String name, String deadline, boolean isDone) {
+    public String addDeadline(String name, LocalDateTime deadline, boolean isDone) {
         Task t = new Deadline(name, deadline, isDone);
+
         tasks.add(t);
         s.saveTasks(tasks);
         return line + "I've added this task:\n" + t +"\n" + "You have " + tasks.size() + " tasks left!\n" + line;
     }
 
-    public String addEvent(String name, String time, boolean isDone) {
+    public String addEvent(String name, LocalDateTime time, boolean isDone) {
         Task t = new Event(name, time, isDone);
         tasks.add(t);
         s.saveTasks(tasks);

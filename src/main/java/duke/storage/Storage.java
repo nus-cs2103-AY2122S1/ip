@@ -1,11 +1,18 @@
 package duke.storage;
 
-import duke.tasks.Task;
-import duke.tasks.Event;
 import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
 import duke.tasks.Todo;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,27 +20,29 @@ import java.util.Scanner;
 public class Storage {
 
     final String TERMINATOR = "/@";
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public void makeDir() {
         File f = new File("data");
-        boolean bool = f.mkdir();
-        if(bool){
-            System.out.println("Directory created successfully");
-        }else{
-            System.out.println("Sorry couldn’t create specified directory");
-        }
+//        boolean bool = f.mkdir();
+//        if(bool){
+//            System.out.println("Directory created successfully");
+//        }else{
+//            System.out.println("Sorry couldn’t create specified directory");
+//        }
     }
 
     public void checkFile() {
         try {
             File myObj = new File("data/duke.txt");
-            if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
+            myObj.createNewFile();
+//            if (myObj.createNewFile()) {
+//                System.out.println("File created: " + myObj.getName());
+//            } else {
+//                System.out.println("File already exists.");
+//            }
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred when creating the file");
             e.printStackTrace();
         }
     }
@@ -48,7 +57,7 @@ public class Storage {
                 String marker = data[0];
                 boolean isDone = (data[1].equals("1"));
                 String name = data[2];
-                String time = data[3];
+                LocalDateTime time = LocalDateTime.parse(data[3], formatter);
 
                 switch (marker) {
                     case "D":

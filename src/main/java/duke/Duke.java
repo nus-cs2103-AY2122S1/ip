@@ -1,6 +1,11 @@
 package duke;
 
 import duke.exception.DukeException;
+
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 
@@ -11,11 +16,16 @@ public class Duke {
         ChatBot bot = new ChatBot();
         System.out.println(bot.getStartMessage());
         bot.start();
-//        bot.addDeadline("homework", "2", false);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+//        LocalDateTime parsedDate = LocalDateTime.parse("10/10/2020 1830", formatter);
+//        System.out.println(bot.addDeadline("homework", parsedDate));
+
 
         // create object of Scanner to take inputs
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+//        String input = "deadline ggh /by 10/10/2020 1830";
         Boolean running = true;
         String commandList = "unknown command!";
 
@@ -56,12 +66,17 @@ public class Duke {
                         if (inputs.length == 1) {
                             throw new DukeException("Please specify the deadline description\n");
                         }
-                        String[] info = inputs[1].split("/by");
+                        String[] info = inputs[1].split("/by", 0);
                         if (info.length == 1) {
                             throw new DukeException("Please specify the deadline\n");
                         }
-                        System.out.println(bot.addDeadline(info[0], info[1], false));
-                        input = sc.nextLine();
+                        try {
+                            LocalDateTime parsedDate = LocalDateTime.parse(info[1].trim(), formatter);
+                            System.out.println(bot.addDeadline(info[0].trim(), parsedDate, false));
+                            input = sc.nextLine();
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("The format of date & time is wrong. Please use {dd/mm/yyyy hhmm}\n");
+                        }
                         break;
                     case "todo":
                         if (inputs.length == 1) {
@@ -78,8 +93,13 @@ public class Duke {
                         if (info.length == 1) {
                             throw new DukeException("Please specify the time\n");
                         }
-                        System.out.println(bot.addEvent(info[0], info[1], false));
-                        input = sc.nextLine();
+                        try {
+                            LocalDateTime parsedDate = LocalDateTime.parse(info[1].trim(), formatter);
+                            System.out.println(bot.addEvent(info[0].trim(), parsedDate, false));
+                            input = sc.nextLine();
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("The format of date & time is wrong. Please use {dd/mm/yyyy hhmm}\n");
+                        }
                         break;
                     case "delete":
                         if (inputs.length == 1) {

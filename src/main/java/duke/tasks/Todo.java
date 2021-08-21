@@ -2,7 +2,7 @@ package duke.tasks;
 
 public class Todo extends Task {
     private String marker = "T";
-    private String time = "nil";
+    private String time = "10/10/1999 1010";
 
     public Todo(String name, boolean isDone) {
         super(name, isDone);
