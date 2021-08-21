@@ -1,10 +1,75 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
     public static void main(String[] args) {
         List<Task> savedTasks = new ArrayList<>();
+        File directory = new File("data");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        File saveFile = new File("data/duke.txt");
+        try {
+            if (saveFile.createNewFile()) {
+                System.out.println("Save file created!");
+            } else {
+                System.out.println("Save file found!");
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading save file :(");
+            e.printStackTrace();
+        }
+        try {
+            Scanner sc2 = new Scanner(saveFile);
+            while (sc2.hasNextLine()) {
+                String nextLine = sc2.nextLine();
+                String[] splitLine = nextLine.split("[|]");
+                if (splitLine.length == 3) {
+                    if (splitLine[1].equals("0")) {
+                        savedTasks.add(new Todo(splitLine[2], false));
+                    }
+                    else {
+                        savedTasks.add(new Todo(splitLine[2], true));
+                    }
+
+                }
+                else if (splitLine.length == 4){
+                    if (splitLine[0].equals("D")) {
+                        if (splitLine[1].equals("0")) {
+                            savedTasks.add(new Deadline(splitLine[2],
+                                    false,
+                                    splitLine[3].substring(1)));
+                        }
+                        else {
+                            savedTasks.add(new Deadline(splitLine[2],
+                                    true,
+                                    splitLine[3].substring(1)));
+                        }
+                    }
+                    else {
+                        if (splitLine[1].equals("0")) {
+                            savedTasks.add(new Event(splitLine[2],
+                                    false,
+                                    splitLine[3].substring(1)));
+                        }
+                        else {
+                            savedTasks.add(new Event(splitLine[2],
+                                    true,
+                                    splitLine[3].substring(1)));
+                        }
+                    }
+                }
+            }
+            sc2.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         Scanner sc = new Scanner(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -154,7 +219,49 @@ public class Duke {
             else {
                 DukeException exception = new DukeException("I'm sorry but I don't understand what that means :(");
                 System.out.println(exception);
+                continue;
+            }
+            try {
+                updateFile(savedTasks);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
             }
         }
+    }
+
+    private static void updateFile (List<Task> updatedTasks) throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt");
+        for (Task i : updatedTasks) {
+            String taskBody = i.getBody();
+            boolean isDone = i.getDone();
+            if (i instanceof Todo) {
+                if (!isDone) {
+                    fw.write("T|0|" + taskBody + System.lineSeparator());
+                }
+                else {
+                    fw.write("T|1|" + taskBody + System.lineSeparator());
+                }
+            }
+            else if (i instanceof Deadline) {
+                String taskDeadline = ((Deadline) i).getDeadline();
+                if (!isDone) {
+                    fw.write("D|0|" + taskBody + "|" + taskDeadline + System.lineSeparator());
+                }
+                else {
+                    fw.write("D|1|" + taskBody + "|" + taskDeadline + System.lineSeparator());
+                }
+            }
+            else {
+                String taskDate = ((Event) i).getDate();
+                if (!isDone) {
+                    fw.write("E|0|" + taskBody + "|" + taskDate + System.lineSeparator());
+                }
+                else {
+                    fw.write("E|1|" + taskBody + "|" + taskDate + System.lineSeparator());
+                }
+            }
+        }
+        fw.close();
     }
 }

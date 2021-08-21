@@ -11,6 +11,10 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public String getDeadline() {
+        return this.deadline;
+    }
+
     @Override
     Task setDone() {
         return new Deadline(this.getBody(), true, this.deadline);
