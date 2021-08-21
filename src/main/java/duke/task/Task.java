@@ -6,9 +6,7 @@ import duke.exception.InvalidDateException;
 import duke.exception.UnknownTaskTypeException;
 import org.json.simple.JSONObject;
 
-/**
- * Represents a task object.
- */
+/** Represents a Task object. */
 public abstract class Task {
     /** The description of the task */
     protected String description;
@@ -16,13 +14,13 @@ public abstract class Task {
     /** The status of the task */
     protected boolean isDone;
 
-    /** duke.tasks.Task constructor */
+    /** Default Task constructor */
     protected Task() {
         this("");
     }
     
     /**
-     * duke.tasks.Task constructor.
+     * Task constructor.
      *
      * @param description the description of the task
      */
@@ -31,7 +29,7 @@ public abstract class Task {
     }
 
     /**
-     * duke.tasks.Task constructor.
+     * Task constructor.
      *
      * @param description the description of the task
      * @param isDone the status of the task
@@ -47,8 +45,21 @@ public abstract class Task {
         return this;
     }
 
+    /**
+     * Returns the Task as a JSON object.
+     *
+     * @return A JSON object.
+     */
     public abstract JSONObject toJSONObject();
 
+    /**
+     * Returns a Task object or its subclass from a JSON object.
+     *
+     * @param obj The JSON object.
+     * @return A Task object.
+     * @throws UnknownTaskTypeException If the Task type is not known.
+     * @throws InvalidDateException If the given date is badly formatted.
+     */
     public static Task fromJSONObject(JSONObject obj) throws UnknownTaskTypeException, InvalidDateException {
         Task task;
         String taskType = (String) obj.get("type");
