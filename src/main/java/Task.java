@@ -1,7 +1,16 @@
+/**
+ * Represents a task.
+ */
 public class Task {
     private String description;
     private boolean isDone;
     
+    
+    /**
+     * Constructor for task.
+     *
+     * @param description description of the task
+     */
     public Task(String description) {
         this.description = description;
         isDone = false;
