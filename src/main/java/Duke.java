@@ -1,4 +1,4 @@
-package duke;
+import duke.*;
 
 import java.io.IOException;
 import java.util.Scanner;
