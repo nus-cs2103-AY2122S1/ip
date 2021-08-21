@@ -1,3 +1,7 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Encapsulates a task that has a description and takes place at a specific time.
  *
@@ -5,16 +9,17 @@
  */
 
 public class Event extends Task {
-    protected String at;
+    protected LocalDateTime dateTime;
+    final DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern("d/M/yyyy, HHmm");
+    final DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
 
-    public Event(String description, String at) throws IllegalArgumentException {
+    public Event(String description, String dateTime) throws DateTimeParseException {
         super(description);
-        if (at.equals("")) {throw new IllegalArgumentException();}
-        this.at = at;
+        this.dateTime = LocalDateTime.parse(dateTime, parseFormat);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + dateTime.format(outputFormat) + ")";
     }
 }

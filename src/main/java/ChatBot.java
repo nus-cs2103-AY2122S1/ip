@@ -5,6 +5,7 @@
  * @author Clifford
  */
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class ChatBot {
@@ -86,9 +87,10 @@ public class ChatBot {
             try {
                 String[] descriptionDatePair = temp[1].split("/by", 2);
                 return recordDeadline(descriptionDatePair[0].trim(), descriptionDatePair[1].trim());
-            } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
+            } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
                 e.printStackTrace();
-                return "deadline should be in format: [DESCRIPTION] /by [DATE]!";
+                return "deadline should be in format: [DESCRIPTION] /by [DATE]!\n" +
+                    "Only accepted [DATE] format is: date/month/year, HHMM (24h time)";
             }
         }
         if(temp[0].equals("event")) {
@@ -97,7 +99,8 @@ public class ChatBot {
                 return recordEvent(descriptionDatePair[0].trim(), descriptionDatePair[1].trim());
             } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
                 e.printStackTrace();
-                return "event should be in format: [DESCRIPTION] /at [DATE]!";
+                return "event should be in format: [DESCRIPTION] /by [DATE]!\n" +
+                    "Only accepted [DATE] format is: date/month/year, HHMM (24h time)";
             }
         }
         return "Sorry, I don't understand what you are saying!";
