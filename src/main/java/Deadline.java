@@ -1,21 +1,21 @@
 public class Deadline extends Task {
-    private String dl = null;
 
     public Deadline() {}
     public Deadline(String desc) {
         super(desc);
     }
-    public Deadline(String desc, String dl) {
+    public Deadline(String desc, String time) throws DukeException {
         super(desc);
-        this.dl = dl;
+        addTime(time);
     }
 
-    public void addDeadline(String dl) {
-        this.dl = dl;
+    public void addTime(String time) {
+        super.addTime(time);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + (dl != null ? String.format(" (by:%s)", dl) : "");
+        String timeSeq = formatTime();
+        return "[D]" + super.toString() + (timeSeq != null ? String.format(" (by:%s)", timeSeq) : "");
     }
 }

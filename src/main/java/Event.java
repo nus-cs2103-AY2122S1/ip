@@ -1,21 +1,23 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
-    private String time = null;
 
     public Event() {}
     public Event(String desc) {
         super(desc);
     }
-    public Event(String desc, String time) {
+    public Event(String desc, String time) throws DukeException {
         super(desc);
-        this.time = time;
+        addTime(time);
     }
-
+    
     public void addTime(String time) {
-        this.time = time;
+        super.addTime(time);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + (time != null ? String.format(" (at:%s)", time) : "");
+        String timeSeq = formatTime();
+        return "[E]" + super.toString() + (timeSeq != null ? String.format(" (at:%s)", timeSeq) : "");
     }
 }
