@@ -12,7 +12,7 @@ abstract public class Task {
         this.taskSymbol = taskSymbol;
     }
 
-    public static Task createTaskFromText(String text) throws IllegalArgumentException {
+    public static Task createTaskFromText(String text) throws DukeException {
         String[] taskInformation = text.split(divider);
         String taskType = taskInformation[0].trim();
         String taskStatus = taskInformation[1].trim();
@@ -31,7 +31,7 @@ abstract public class Task {
                 changeStatusFromText(event, taskStatus);
                 return event;
             default:
-                throw new IllegalArgumentException("Task symbol from text is not recognised.");
+                throw new DukeException("Task symbol from text is not recognised.");
         }
     }
 
