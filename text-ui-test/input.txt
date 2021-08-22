@@ -1,5 +1,5 @@
 todo Read Book
-deadline finish assignment /by 2021-08-21
+deadline Return Book /by 2021-08-21
 event CS2103 tutorial /at 2021-08-21
 get 2021-08-21
 list
@@ -7,6 +7,7 @@ done 1
 done 2
 done 3
 list
+find Book
 delete 1
 list
 delete 1
