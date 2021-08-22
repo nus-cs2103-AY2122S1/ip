@@ -3,24 +3,40 @@ package util.tasks;
 import java.time.LocalDate;
 import util.commons.*;
 
-public class Events extends DatedTask {
+public class Event extends DatedTask {
     private static String label = "[E]";
 
 
 
-    private Events(String name, String date) {
+    private Event(String name, String date) {
         super(name.trim(), date.trim());
 
     }
 
-    public static Events of(String total) throws DukeException {
+    /**
+     * The factory method of the Event class that takes in the
+     * String that has not been split.
+     *
+     * @param total The String with the /at delimiter
+     * @return The Event from it.
+     * @throws DukeException
+     */
+    public static Event of(String total) throws DukeException {
         String[] ss = total.split("/at", 2);
         if (ss.length == 0) throw new DukeException(Messages.EVENT_NO_INPUT_ERROR_MESSAGE);
-        return new Events(ss[0], ss[1]);
+        return new Event(ss[0], ss[1]);
     }
 
-    public static Events of(String name, String date) throws DukeException {
-        return new Events(name, date);
+    /**
+     * The factory method of the Event class that takes in the String that has been split.
+     *
+     * @param name The name of the object.
+     * @param date The date of the object.
+     * @return The Event object that is created.
+     * @throws DukeException
+     */
+    public static Event of(String name, String date) throws DukeException {
+        return new Event(name, date);
     }
 
 
@@ -32,8 +48,8 @@ public class Events extends DatedTask {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Events) {
-            Events e = (Events) obj;
+        if (obj instanceof Event) {
+            Event e = (Event) obj;
             return this.name.equals(e.name) && e.lDate.equals(this.lDate);
         }
         return false;

@@ -11,7 +11,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import util.tasks.*;
 
-
+/**
+ * The storage class is the class representing the stored
+ * information.
+ *
+ */
 public class Storage {
 
     private String tempFilePath;
@@ -20,6 +24,13 @@ public class Storage {
     //Use a custom ui for storage?
 
 
+    /**
+     * Constructor for the storage class.
+     *
+     * @param saveFilePath The path to write to.
+     * @param tempFilePath The temp file to use.
+     * @param dateTaskTable The dateTaskTable to store tasks with dates.
+     */
     public Storage(String saveFilePath, String tempFilePath, DateTaskTable dateTaskTable) {
         this.tempFilePath = tempFilePath;
         this.saveFilePath = saveFilePath;
@@ -64,6 +75,8 @@ public class Storage {
 
 
     }
+
+
 
     private void writeTasks(FileWriter writer, ArrayList<? extends Task> inputs) throws IOException {
         for (int i = 0; i < inputs.size(); i++) {

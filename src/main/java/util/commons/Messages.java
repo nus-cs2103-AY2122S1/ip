@@ -40,7 +40,8 @@ public class Messages {
     public static final String INVALID_DONE_INPUT =
             "☹ OOPS!!! The input integer is invalid for the task list.";
 
-
+    public static final String DEADLINE_NO_INPUT_ERROR_MESSAGE =
+            "☹ OOPS!!! The deadline deadline must be filled in prefixed by /by";
 
 
 }

@@ -20,9 +20,9 @@ public class DukeTester {
         try {
             DateTaskTable t = new DateTaskTable();
             DatedTask[] arr = new DatedTask[3];
-            arr[0] = Deadlines.of("Working by life /by 2020-08-20");
-            arr[1] = Deadlines.of("Sleeping in life /by 2020-08-20");
-            arr[2] = Deadlines.of("kdsfmekfsdf /by 2020-08-20");
+            arr[0] = Deadline.of("Working by life /by 2020-08-20");
+            arr[1] = Deadline.of("Sleeping in life /by 2020-08-20");
+            arr[2] = Deadline.of("kdsfmekfsdf /by 2020-08-20");
 
 
             t.add(arr[0]);
@@ -46,16 +46,16 @@ public class DukeTester {
         try {
             DateTaskTable t = new DateTaskTable();
             TaskList tasklist = new TaskList();
-            t.add(Deadlines.of("Driving a car /by 2020-08-20"));
-            t.add(Deadlines.of("Driving a traing/by2020-08-20"));
-            t.add(Deadlines.of("Building a car/by 2020-08-20"));
-            tasklist.add(Deadlines.of("Driving a car /by 2020-08-20"));
-            tasklist.add(Deadlines.of("Driving a traing/by2020-08-20"));
-            tasklist.add(Deadlines.of("Building a car/by 2020-08-20"));
+            t.add(Deadline.of("Driving a car /by 2020-08-20"));
+            t.add(Deadline.of("Driving a traing/by2020-08-20"));
+            t.add(Deadline.of("Building a car/by 2020-08-20"));
+            tasklist.add(Deadline.of("Driving a car /by 2020-08-20"));
+            tasklist.add(Deadline.of("Driving a traing/by2020-08-20"));
+            tasklist.add(Deadline.of("Building a car/by 2020-08-20"));
             DelCommand removeDrCar = new DelCommand(1, tasklist, t);
             removeDrCar.execute();
-            assertEquals(Deadlines.of("Driving a traing/by2020-08-20"), tasklist.get(0));
-            assertEquals(Deadlines.of("Driving a traing/by2020-08-20"), t.get(Parser.dateParse("2020-08-20")).get(0));
+            assertEquals(Deadline.of("Driving a traing/by2020-08-20"), tasklist.get(0));
+            assertEquals(Deadline.of("Driving a traing/by2020-08-20"), t.get(Parser.dateParse("2020-08-20")).get(0));
         } catch (DukeException e) {
             System.err.println(e.getMessage());
         }

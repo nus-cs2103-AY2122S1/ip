@@ -7,6 +7,12 @@ import util.parser.*;
 import util.storage.*;
 import util.ui.*;
 
+
+/**
+ * The class representing the Duke.
+ *
+ *
+ */
 public class Duke {
 
     private final Parser parser;
@@ -19,11 +25,12 @@ public class Duke {
     private final DateTaskTable dateTaskTable;
 
 
-
-
-
-
-
+    /**
+     * Constructor for duke.
+     *
+     * @param filename The file to save at.
+     * @param tempfilepath The tempfile name to use.
+     */
     public Duke(String filename, String tempfilepath) {
         this.tasks = new TaskList();
         this.dateTaskTable = new DateTaskTable();

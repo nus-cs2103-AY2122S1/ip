@@ -1,14 +1,24 @@
 package util.tasks;
 
-public class ToDos extends Task {
+public class ToDo extends Task {
+
+
     private static String label = "[T]";
-    public ToDos(String s) {
+
+
+    private ToDo(String s) {
         super(s.trim());
 
     }
 
+    /**
+     * The factory method of the todo class
+     *
+     * @param s The name of the todo task.
+     * @return The Task with the corresponding name.
+     */
     public static Task of(String s) {
-        return new ToDos(s);
+        return new ToDo(s);
     }
 
     @Override

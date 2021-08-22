@@ -3,6 +3,10 @@ package util.commands;
 import util.tasks.*;
 import util.ui.*;
 
+/**
+ * The class representing the delete command.
+ *
+ */
 public class DelCommand implements Command {
     private final int delPos;
     private final TaskList tasklist;
@@ -10,6 +14,13 @@ public class DelCommand implements Command {
     private final Ui delUI = new Ui();
     private final DateTaskTable table;
 
+    /**
+     * Constructor for the delete command.
+     *
+     * @param delPost The position to delete at.
+     * @param tasklist The tasklist to delete from.
+     * @param table The dateTaskTable we might delete from.
+     */
     public DelCommand(int delPost, TaskList tasklist, DateTaskTable table) {
         this.delPos = delPost;
         this.tasklist = tasklist;

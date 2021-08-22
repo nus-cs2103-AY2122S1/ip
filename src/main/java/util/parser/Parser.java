@@ -13,6 +13,11 @@ import util.ui.*;
 import util.tasks.*;
 import util.storage.*;
 
+/**
+ * The class representing the parser that interprets the input.
+ *
+ */
+
 public class Parser {
 
 
@@ -29,14 +34,20 @@ public class Parser {
     //is it just me or does the parser
     //have to contain all the objects to send the information to
     private final Ui ui;
-    private final TaskList tasklist;
+    private final TaskList taskList;
     private final DateTaskTable dateTaskList;
 
 
-
-    public Parser(Ui ui, TaskList tasklist, DateTaskTable dateTaskList) {
+    /**
+     * Constructor for the parser class.
+     *
+     * @param ui The ui that displays the information.
+     * @param taskList The tasklist that contains the tasks.
+     * @param dateTaskList The datetasktable that contains the datetasks as well.
+     */
+    public Parser(Ui ui, TaskList taskList, DateTaskTable dateTaskList) {
         this.ui = ui;
-        this.tasklist = tasklist;
+        this.taskList = taskList;
         this.dateTaskList = dateTaskList;
     }
 
@@ -63,7 +74,7 @@ public class Parser {
                     cmds.add(new ExitCommand());
                     break;
                 case LIST:
-                    cmds.add(() -> ui.list(this.tasklist));
+                    cmds.add(() -> ui.list(this.taskList));
                     break;
                 case DLIST:
                 case DONE:
@@ -80,8 +91,8 @@ public class Parser {
             switch (cmd) {
                 case DONE:
                     int i = Integer.parseInt(description) - 1;
-                    if (i > tasklist.size() || i < 0) throw new DukeException(Messages.INVALID_DONE_INPUT);
-                    Task b = tasklist.get(i);
+                    if (i > taskList.size() || i < 0) throw new DukeException(Messages.INVALID_DONE_INPUT);
+                    Task b = taskList.get(i);
                     cmds.add(new DoneCommand(b, this.ui));
                     break;
                     //dlist does not work -- suspect is coz of the hashmap
@@ -93,20 +104,20 @@ public class Parser {
                     });
                     break;
                 case DELETE:
-                    cmds.add(new DelCommand(Integer.parseInt(description), this.tasklist, this.dateTaskList));
+                    cmds.add(new DelCommand(Integer.parseInt(description), this.taskList, this.dateTaskList));
                     break;
                 case TODO:
-                    Task t = ToDos.of(description);
-                    cmds.add(new AddCommand(tasklist, t));
+                    Task t = ToDo.of(description);
+                    cmds.add(new AddCommand(taskList, t));
                     break;
                 case EVENT:
-                    Events e = Events.of(description);
-                    cmds.add(new AddCommand(tasklist, e));
+                    Event e = Event.of(description);
+                    cmds.add(new AddCommand(taskList, e));
                     cmds.add(() -> dateTaskList.add(e));
                     break;
                 case DEADLINE:
-                    Deadlines d = Deadlines.of(description);
-                    cmds.add(new AddCommand(tasklist, d));
+                    Deadline d = Deadline.of(description);
+                    cmds.add(new AddCommand(taskList, d));
                     cmds.add(() -> dateTaskList.add(d));
                     break;
                 default:

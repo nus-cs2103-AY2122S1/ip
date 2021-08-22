@@ -6,7 +6,11 @@ package util.tasks;
 
 public abstract class Task {
 
-
+    /**
+     * The method to check if the Task is
+     * dated or not.
+     * @return Whether this task is dated.
+     */
     public boolean isDated() {
         return false;
     }
@@ -70,13 +74,13 @@ public abstract class Task {
         switch (currentType) {
             //For todo
             case T:
-                t = ToDos.of(ssplit[2]);
+                t = ToDo.of(ssplit[2]);
                 break;
             case E:
-                t = Events.of(ssplit[2], ssplit[3]);
+                t = Event.of(ssplit[2], ssplit[3]);
                 break;
             case D:
-                t = Deadlines.of(ssplit[2], ssplit[3]);
+                t = Deadline.of(ssplit[2], ssplit[3]);
                 break;
             default:
                 throw new DukeException("Not a valid text document");
@@ -87,6 +91,11 @@ public abstract class Task {
         return t;
     }
 
+    /**
+     * Whether this task is done or not.
+     *
+     * @return true if the task is done and false otherwise.
+     */
     public boolean isDone() {
         return this.isdone;
     }
