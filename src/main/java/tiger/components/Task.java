@@ -34,6 +34,16 @@ abstract public class Task {
     abstract protected String getStorageRepresentation();
 
     /**
+     * Get the task description.
+     *
+     * @return the task description.
+     */
+
+    public String getTaskDescription() {
+        return this.taskDescription;
+    }
+
+    /**
      * Given a String loaded from storage, interpret it and return its corresponding {@code Task}
      * @param s String loaded from storage.
      * @return the corresponding {@code Task} object.

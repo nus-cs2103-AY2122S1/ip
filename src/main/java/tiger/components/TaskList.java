@@ -81,11 +81,11 @@ public class TaskList {
     public TaskList findRelevantTasks(String searchString) {
         TaskList taskList = new TaskList();
         for (Task t: this.taskList) {
-            if (t.toString().contains(searchString)) {
+            if (t.getTaskDescription().contains(searchString)) {
                 taskList.addTask(t);
             }
         }
-        return  taskList;
+        return taskList;
     }
 
     /**

@@ -3,6 +3,7 @@ package tiger.command;
 import tiger.actions.Action;
 import tiger.actions.AppState;
 import tiger.actions.ByeAction;
+import tiger.actions.ClearAction;
 import tiger.actions.DeadLineAction;
 import tiger.actions.DeleteAction;
 import tiger.actions.EventAction;
@@ -61,6 +62,8 @@ public class Command {
         case "find":
             FindParser findCommand = new FindParser(command);
             return new FindAction(applicationState, findCommand.findString);
+        case "clear":
+            return new ClearAction(applicationState);
         default:
             return new InvalidAction(applicationState);
         }

@@ -4,6 +4,13 @@ deadline C /by 2020-07-21
 event D /at 2020-07-21 16:00
 done 1
 done 2
+todo carp
+todo carpfishy
+todo eat something
+event koifishy /at 14:35
+deadline feed fish /by 2021-12-21 12:22
+find carp
+find fish
 list
 done 4
 todo E
@@ -20,6 +27,8 @@ deadline G /by -999-08-21
 deadline G /by 1999-13-21
 deadline G /by 1999-11-32
 deadline H /by 1999-02-31
+deadline H /by 1999-02-31 ; 
+deadline ; H /by 1999-02-31 ; 
 deadline G /by 2020-08-21 12:00
 list
 todo
@@ -27,10 +36,5 @@ delete 2
 delete 1
 list
 delete 999
-delete 1
-delete 1
-delete 1
-delete 1
-delete 1
-delete 1
+clear
 bye

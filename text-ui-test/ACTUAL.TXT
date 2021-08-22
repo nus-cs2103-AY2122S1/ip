@@ -11,28 +11,52 @@ Nice! I've marked this task as done:
 [T] [X] A
 Nice! I've marked this task as done:
 [T] [X] B
+Excellent! I've added this task:
+[T] [ ] carp
+Excellent! I've added this task:
+[T] [ ] carpfishy
+Excellent! I've added this task:
+[T] [ ] eat something
+Excellent! I've added this event:
+[E] [ ] koifishy (at 2021-08-22 14:35)
+Excellent! I've added this deadline:
+[D] [ ] feed fish (by 2021-12-21 12:22)
+1. [T] [ ] carp
+2. [T] [ ] carpfishy
+1. [T] [ ] carpfishy
+2. [E] [ ] koifishy (at 2021-08-22 14:35)
+3. [D] [ ] feed fish (by 2021-12-21 12:22)
 1. [T] [X] A
 2. [T] [X] B
 3. [D] [ ] C (by 2020-07-21)
 4. [E] [ ] D (at 2020-07-21 16:00)
+5. [T] [ ] carp
+6. [T] [ ] carpfishy
+7. [T] [ ] eat something
+8. [E] [ ] koifishy (at 2021-08-22 14:35)
+9. [D] [ ] feed fish (by 2021-12-21 12:22)
 Nice! I've marked this task as done:
 [E] [X] D (at 2020-07-21 16:00)
 Excellent! I've added this task:
 [T] [ ] E
-Index 6 is out of bounds of your task list size of 5.
+Nice! I've marked this task as done:
+[T] [X] carpfishy
+Index 14 is out of bounds of your task list size of 10.
 Please make sure your index is at least 1.
 Use the list command to see task indices.
-Index 14 is out of bounds of your task list size of 5.
-Please make sure your index is at least 1.
-Use the list command to see task indices.
-Index -1 is out of bounds of your task list size of 5.
+Index -1 is out of bounds of your task list size of 10.
 Please make sure your index is at least 1.
 Use the list command to see task indices.
 1. [T] [X] A
 2. [T] [X] B
 3. [D] [ ] C (by 2020-07-21)
 4. [E] [X] D (at 2020-07-21 16:00)
-5. [T] [ ] E
+5. [T] [ ] carp
+6. [T] [X] carpfishy
+7. [T] [ ] eat something
+8. [E] [ ] koifishy (at 2021-08-22 14:35)
+9. [D] [ ] feed fish (by 2021-12-21 12:22)
+10. [T] [ ] E
 Deadline date property cannot be empty.
 Please ensure you key in the command in the format specified.
 Deadline description property cannot be empty.
@@ -45,15 +69,22 @@ Please ensure you key in dates in the input specified.
 Please ensure you key in dates in the input specified.
 Excellent! I've added this deadline:
 [D] [ ] H (by 1999-02-28)
+Input command cannot contain semicolons! (;)
+Input command cannot contain semicolons! (;)
 Excellent! I've added this deadline:
 [D] [ ] G (by 2020-08-21 12:00)
 1. [T] [X] A
 2. [T] [X] B
 3. [D] [ ] C (by 2020-07-21)
 4. [E] [X] D (at 2020-07-21 16:00)
-5. [T] [ ] E
-6. [D] [ ] H (by 1999-02-28)
-7. [D] [ ] G (by 2020-08-21 12:00)
+5. [T] [ ] carp
+6. [T] [X] carpfishy
+7. [T] [ ] eat something
+8. [E] [ ] koifishy (at 2021-08-22 14:35)
+9. [D] [ ] feed fish (by 2021-12-21 12:22)
+10. [T] [ ] E
+11. [D] [ ] H (by 1999-02-28)
+12. [D] [ ] G (by 2020-08-21 12:00)
 ToDo description property cannot be empty.
 Please ensure you key in the command in the format specified.
 Feeling lazy today? I've deleted:
@@ -62,23 +93,16 @@ Feeling lazy today? I've deleted:
 [T] [X] A
 1. [D] [ ] C (by 2020-07-21)
 2. [E] [X] D (at 2020-07-21 16:00)
-3. [T] [ ] E
-4. [D] [ ] H (by 1999-02-28)
-5. [D] [ ] G (by 2020-08-21 12:00)
-Index 999 is out of bounds of your task list size of 5.
+3. [T] [ ] carp
+4. [T] [X] carpfishy
+5. [T] [ ] eat something
+6. [E] [ ] koifishy (at 2021-08-22 14:35)
+7. [D] [ ] feed fish (by 2021-12-21 12:22)
+8. [T] [ ] E
+9. [D] [ ] H (by 1999-02-28)
+10. [D] [ ] G (by 2020-08-21 12:00)
+Index 999 is out of bounds of your task list size of 10.
 Please make sure your index is at least 1.
 Use the list command to see task indices.
-Feeling lazy today? I've deleted:
-[D] [ ] C (by 2020-07-21)
-Feeling lazy today? I've deleted:
-[E] [X] D (at 2020-07-21 16:00)
-Feeling lazy today? I've deleted:
-[T] [ ] E
-Feeling lazy today? I've deleted:
-[D] [ ] H (by 1999-02-28)
-Feeling lazy today? I've deleted:
-[D] [ ] G (by 2020-08-21 12:00)
-Index 1 is out of bounds of your task list size of 0.
-Please make sure your index is at least 1.
-Use the list command to see task indices.
+I've cleared all your tasks!
 Bye. Hope to see you again soon!
