@@ -27,6 +27,6 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return "[E][" + this.getStatusIcon() + "] " + this.getDescription() + "(at:" + this.getDayTime() + ")";
+        return "[E][" + this.getStatusIcon() + "] " + this.getDescription() + " (at: " + this.getDayTime() + ")";
     }
 }

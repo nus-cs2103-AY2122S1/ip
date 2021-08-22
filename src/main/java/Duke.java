@@ -15,12 +15,10 @@ public class Duke {
         this.taskList = new TaskList();
     }
 
-    
-
     private String dateTimeFormatter(String unformattedDate) {
         // 2/12/2019 1800
-        String stringDate = unformattedDate.split(" ")[1];
-        String time = unformattedDate.split(" ")[2];
+        String stringDate = unformattedDate.split(" ")[0];
+        String time = unformattedDate.split(" ")[1];
 
         LocalDate date = LocalDate.of(Integer.parseInt(stringDate.split("/")[2]),
                 Integer.parseInt(stringDate.split("/")[1]), Integer.parseInt(stringDate.split("/")[0]));
@@ -77,23 +75,23 @@ public class Duke {
 
                     case "deadline":
                         descriptions = actionDescription[1];
-                        onlyDescription = descriptions.split("/")[0];
-                        by = descriptions.split("/by")[1];
+                        onlyDescription = descriptions.split(" /")[0];
+                        by = descriptions.split(" /by ")[1];
                         by = dateTimeFormatter(by);
                         Deadline deadline = new Deadline(onlyDescription, by);
                         taskList.addTask(deadline);
-                        inputToStorage = deadline.getSymbol() + " | 0 | " + deadline.getDescription() + "|"
+                        inputToStorage = deadline.getSymbol() + " | 0 | " + deadline.getDescription() + " | "
                                 + deadline.getBy();
                         storage.appendToData(inputToStorage);
                         break;
 
                     case "event":
                         descriptions = actionDescription[1];
-                        onlyDescription = descriptions.split("/")[0];
-                        dayTime = descriptions.split("/at")[1];
+                        onlyDescription = descriptions.split(" /")[0];
+                        dayTime = descriptions.split(" /at ")[1];
                         Events event = new Events(onlyDescription, dayTime);
                         taskList.addTask(event);
-                        inputToStorage = event.getSymbol() + " | 0 | " + event.getDescription() + "|"
+                        inputToStorage = event.getSymbol() + " | 0 | " + event.getDescription() + " | "
                                 + event.getDayTime();
                         storage.appendToData(inputToStorage);
                         break;

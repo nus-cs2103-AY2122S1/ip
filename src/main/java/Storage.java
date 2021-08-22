@@ -29,7 +29,7 @@ public class Storage {
         Scanner sc = new Scanner(data);
         while (sc.hasNext()) {
             currLine = sc.nextLine();
-            stringArr = currLine.replace("|", "/").split("/");
+            stringArr = currLine.replace("|", "/").split(" / ");
             type = currLine.split("")[0];
             isDone = false;
             switch (type) {
