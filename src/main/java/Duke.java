@@ -52,7 +52,6 @@ public class Duke {
 
         //initialising Duke
         //via greetings
-        ui.print_logo();
         ui.print(Messages.GREETINGS);
 
         while(!ExitCommand.isExit) {
