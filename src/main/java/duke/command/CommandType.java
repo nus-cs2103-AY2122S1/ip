@@ -1,4 +1,4 @@
-package duke.ui;
+package duke.command;
 
 /**
  * Represents the different types of commands.
