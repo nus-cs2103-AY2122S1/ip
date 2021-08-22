@@ -12,9 +12,6 @@ public class Todo extends Task {
      */
     public Todo(String title)  {
         super(title);
-        if (title.replaceAll("\\s+", "").length() == 4) {
-
-        }
     }
 
     /**
@@ -34,9 +31,9 @@ public class Todo extends Task {
     @Override
     public String toString() {
         if (!this.getDone()) {
-            return String.format("[T][ ]" + this.getTitle());
+            return "[T][ ]" + this.getTitle();
         } else {
-            return String.format("[T][X]" + this.getTitle());
+            return "[T][X]" + this.getTitle();
         }
 
     }

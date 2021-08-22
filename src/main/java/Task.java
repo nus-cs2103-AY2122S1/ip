@@ -1,8 +1,10 @@
+import java.io.Serializable;
+
 /**
  * A Task class which provides the basic skeleton for what a Task should have.
  */
 
-public class Task {
+public class Task implements Serializable {
     private boolean done;
     private String title;
 
@@ -22,7 +24,7 @@ public class Task {
      */
     public void setDone(boolean status) {
         done = status;
-        System.out.println(String.format("Nice! I've marked this task as done:\n[X]" + this.title));
+        System.out.println("Nice! I've marked this task as done:\n[X]" + this.title);
     }
 
     /**

@@ -4,8 +4,10 @@
  */
 
 
+import java.io.*;
 import java.util.Scanner;
 import java.util.LinkedList;
+
 public class GreetingBot {
 
     /**
@@ -46,11 +48,12 @@ public class GreetingBot {
      * Method that reads input and decides what method to call to deal with the input.
      */
     private void store() {
+        loadData();
         Scanner inputScanner = new Scanner(System.in);
         while (true) {
             try {
                 String nextLine = inputScanner.nextLine();
-                if (nextLine.equals("list")) {
+                if (nextLine.startsWith("list")) {
                     list(myList);
                 } else if (nextLine.equals("bye")) {
                     break;
@@ -68,6 +71,34 @@ public class GreetingBot {
                 System.out.println(ex.toString());
                 continue;
             }
+        }
+    }
+
+    /**
+     * load data from list file in data folder.
+     */
+    @SuppressWarnings("unchecked")
+    private void loadData() {
+            // Create data folder if it does not exist.
+            File dataFolder = new File("./data/");
+            if (!dataFolder.exists()) {
+                dataFolder.mkdir();
+            }
+
+        try {
+            File dataFile = new File("./data/list.txt");
+            if (dataFile.createNewFile()) {
+                // If dataFile does not exist (has not been created before)
+                System.out.println("Seems like a new list has been created!");
+            } else {
+                // dataFile already has been created before
+                System.out.println("Let's load up your list!");
+                FileInputStream listIn = new FileInputStream("./data/list.txt");
+                ObjectInputStream in = new ObjectInputStream(listIn);
+                myList = (LinkedList<Task>) in.readObject();
+            }
+        } catch (IOException | ClassNotFoundException error) {
+            System.out.println("Something went wrong with loading a list up!");
         }
     }
 
@@ -177,14 +208,14 @@ public class GreetingBot {
      * @param myList
      * @throws DukeException
      */
-    private void list(LinkedList<Task> myList) throws DukeException{
+    private void list(LinkedList<Task> myList) throws DukeException {
         if (myList.isEmpty()) {
             throw new DukeException("Yo! Your list looks empty to me!");
         }
         System.out.println("Here are the tasks in your list:");
         int counter = 0;
         while(counter < myList.size()) {
-            System.out.println((counter + 1) + "." + myList.get(counter).toString());
+            System.out.println((counter + 1) + ". " + myList.get(counter).toString());
             counter += 1;
         }
     }
@@ -209,8 +240,24 @@ public class GreetingBot {
      * Method to print the exit message and stop the program.
      */
     private void exit() {
+        updateData();
         String exitMessage = "Leaving just like that? Fine. See you soon I guess.";
         System.out.println(exitMessage);
+    }
+
+    /**
+     * Update data in list file.
+     */
+    private void updateData() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("./data/list.txt");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(myList);
+            out.close();
+            fileOut.close();
+        } catch (IOException error) {
+            System.out.println("Something went wrong when I tried to save your list :(");
+        }
     }
 }
 

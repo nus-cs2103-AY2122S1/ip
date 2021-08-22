@@ -22,7 +22,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getInfo() {
-        return "[D][ ]" + this.getTitle() + "(by: " + this.date + ")";
+        return "[D][ ]" + this.getTitle() + "| (by: " + this.date + ")";
     }
 
     /**
@@ -32,9 +32,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (!this.getDone()) {
-            return String.format("[D][ ]" + this.getTitle() + "(by: " + this.date + ")");
+            return "[D][ ]" + this.getTitle() + "| (by: " + this.date + ")";
         } else {
-            return String.format("[D][X]" + this.getTitle() + "(by: " + this.date + ")");
+            return "[D][X]" + this.getTitle() + "| (by: " + this.date + ")";
         }
 
     }

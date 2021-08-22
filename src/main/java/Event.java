@@ -21,7 +21,7 @@ public class Event extends Task {
      */
     @Override
     public String getInfo() {
-        return "[E][ ]" + this.getTitle() + "(at: " + this.date + ")";
+        return "[E][ ]" + this.getTitle() + "| (at: " + this.date + ")";
     }
 
     /**
@@ -31,9 +31,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (!this.getDone()) {
-            return String.format("[E][ ]" + this.getTitle() + "(at: " + this.date + ")");
+            return "[E][ ]" + this.getTitle() + "| (at: " + this.date + ")";
         } else {
-            return String.format("[E][X]" + this.getTitle() + "(at: " + this.date + ")");
+            return "[E][X]" + this.getTitle() + "| (at: " + this.date + ")";
         }
 
     }
