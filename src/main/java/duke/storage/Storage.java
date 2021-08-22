@@ -59,15 +59,15 @@ public class Storage {
                 String[] txt = line.split("/");
                 boolean isDone = txt[1].equals("1");
                 switch (txt[0]) {
-                    case "T": 
-                        lst.add(new Todo(txt[2], isDone));
-                        break;
-                    case "E":
-                        lst.add(new Event(Arrays.copyOfRange(txt, 2, 4), isDone));
-                        break;
-                    case "D":
-                        lst.add(new Deadline(Arrays.copyOfRange(txt, 2, 4), isDone));
-                        break;
+                case "T":
+                    lst.add(new Todo(txt[2], isDone));
+                    break;
+                case "E":
+                    lst.add(new Event(Arrays.copyOfRange(txt, 2, 4), isDone));
+                    break;
+                case "D":
+                    lst.add(new Deadline(Arrays.copyOfRange(txt, 2, 4), isDone));
+                    break;
                 }
             }
             return lst;

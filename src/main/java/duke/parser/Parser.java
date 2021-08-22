@@ -25,22 +25,22 @@ public class Parser {
             
             String rest = i == -1 ? "" : fullCommand.substring(i).strip();
             switch (cmd) {
-                case LIST:
-                    return new ListCommand();
-                case TODO:
-                    return new TodoCommand(rest);
-                case DEADLINE:
-                    return new DeadlineCommand(rest);
-                case EVENT:
-                    return new EventCommand(rest);
-                case DONE:
-                    return new DoneCommand(rest);
-                case DELETE:
-                    return new DeleteCommand(rest);
-                case BYE:
-                    return new ExitCommand();
-                default:
-                    throw new InvalidCommandException();
+            case LIST:
+                return new ListCommand();
+            case TODO:
+                return new TodoCommand(rest);
+            case DEADLINE:
+                return new DeadlineCommand(rest);
+            case EVENT:
+                return new EventCommand(rest);
+            case DONE:
+                return new DoneCommand(rest);
+            case DELETE:
+                return new DeleteCommand(rest);
+            case BYE:
+                return new ExitCommand();
+            default:
+                throw new InvalidCommandException();
             }
         } catch (IllegalArgumentException e) { //Thrown by value of
             throw new InvalidCommandException();
