@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -103,6 +104,8 @@ public class Duke {
                 System.out.println("Lollipop: No such task number found.");
             } catch (NumberFormatException e) {
                 System.out.println("Lollipop: Please input a number.");
+            } catch (DateTimeParseException e) {
+                System.out.println("Lollipop: Please specify a valid date format, such as YYYY-MM-DD");
             }
 
             System.out.println("");
