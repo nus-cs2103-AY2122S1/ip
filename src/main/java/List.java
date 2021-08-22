@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
 
@@ -8,7 +10,11 @@ public class List extends ArrayList<Task> {
         todos = new ArrayList<>();
     }
 
-    public void addTask(String input) {
+    public List(ArrayList<Task> data) {
+        todos = data;
+    }
+
+    public void addTask(String input) throws IOException {
         if (input.equals("list")) {
             showList();
         } else {
@@ -49,7 +55,7 @@ public class List extends ArrayList<Task> {
 
     }
 
-    public void process(String input) throws DukeException {
+    public void process(String input) throws DukeException, IOException {
         String[] split = input.split(" ", 2);
         if (split[0].equals("done")) {
             done(split);
@@ -79,6 +85,7 @@ public class List extends ArrayList<Task> {
         } else {
             throw new DukeException();
         }
+        writeToFile();
     }
 
     public void echo(Task item) {
@@ -91,7 +98,12 @@ public class List extends ArrayList<Task> {
                 + " in the list"); // will take care of when it is 1
     }
 
-    public void echo(String input) {
-        System.out.println(input);
+    public static void writeToFile() throws IOException {
+        FileWriter myWriter = new FileWriter("filename.txt");
+        for (int i = 0; i < todos.size(); i++) {
+            myWriter.write(todos.get(i).toDataString());
+            myWriter.write(System.lineSeparator());
+        }
+        myWriter.close();
     }
 }

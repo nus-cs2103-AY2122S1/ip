@@ -15,4 +15,8 @@ public class Task {
     public String toString() {
         return "[" + (this.done ? "X" : " ") + "] " + this.name;
     }
+
+    public String toDataString() {
+        return this.done ? "T|" : "F|" + this.name;
+    }
 }
