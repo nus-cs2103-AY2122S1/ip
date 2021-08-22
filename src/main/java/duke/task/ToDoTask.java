@@ -19,6 +19,13 @@ public class ToDoTask extends Task {
     }
 
     @Override
+    public String getFileRepresentation() {
+        int done = isDone() ? 1 : 0;
+        String description = getDescription();
+        return String.format("%s %d %s", TYPE_MARK, done, description);
+    }
+
+    @Override
     String getTypeIndicator() {
         return String.format("[%s]", TYPE_MARK);
     }

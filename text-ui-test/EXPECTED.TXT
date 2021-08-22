@@ -79,13 +79,13 @@
 
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] return book (by: June 6th)
+       [D][ ] return book (by: 18:00 June 6 2022)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] do homework (by: no idea :-p)
+       [D][ ] do homework (by: 23:59 December 31 9999)
      Now you have 3 tasks in the list.
     ____________________________________________________________
 
@@ -109,23 +109,23 @@
 
     ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] project meeting (at: Aug 6th 2-4pm)
+       [E][ ] project meeting (at: 14:00 August 6 2022)
      Now you have 4 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
-       [E][ ] graduation (at: a long time away TT)
+       [E][ ] graduation (at: 23:59 June 30 2024)
      Now you have 5 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] read book
-     2.[D][ ] return book (by: June 6th)
-     3.[D][ ] do homework (by: no idea :-p)
-     4.[E][ ] project meeting (at: Aug 6th 2-4pm)
-     5.[E][ ] graduation (at: a long time away TT)
+     2.[D][ ] return book (by: 18:00 June 6 2022)
+     3.[D][ ] do homework (by: 23:59 December 31 9999)
+     4.[E][ ] project meeting (at: 14:00 August 6 2022)
+     5.[E][ ] graduation (at: 23:59 June 30 2024)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -148,16 +148,16 @@
 
     ____________________________________________________________
      Noted. I've removed this task:
-       [E][ ] project meeting (at: Aug 6th 2-4pm)
+       [E][ ] project meeting (at: 14:00 August 6 2022)
      Now you have 4 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][X] read book
-     2.[D][ ] return book (by: June 6th)
-     3.[D][ ] do homework (by: no idea :-p)
-     4.[E][ ] graduation (at: a long time away TT)
+     2.[D][ ] return book (by: 18:00 June 6 2022)
+     3.[D][ ] do homework (by: 23:59 December 31 9999)
+     4.[E][ ] graduation (at: 23:59 June 30 2024)
     ____________________________________________________________
 
     ____________________________________________________________

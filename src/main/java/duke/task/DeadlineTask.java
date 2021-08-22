@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a task with a deadline.
  *
@@ -16,8 +18,16 @@ public class DeadlineTask extends TemporalTask {
      * @param taskDescription The description of the task with a deadline.
      * @param time The deadline.
      */
-    public DeadlineTask(String taskDescription, String time) {
+    public DeadlineTask(String taskDescription, LocalDateTime time) {
         super(taskDescription, time);
+    }
+
+    @Override
+    public String getFileRepresentation() {
+        int done = isDone() ? 1 : 0;
+        String description = getDescription();
+        String time = getFileFormattedTime();
+        return String.format("%s %d %s /%s %s", TYPE_MARK, done, description, TIME_RELATION, time);
     }
 
     @Override

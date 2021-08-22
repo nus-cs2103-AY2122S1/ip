@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a task that occurs at a specific time.
  *
@@ -16,8 +18,16 @@ public class EventTask extends TemporalTask {
      * @param taskDescription The description of the event task.
      * @param time The time the event occurs.
      */
-    public EventTask(String taskDescription, String time) {
+    public EventTask(String taskDescription, LocalDateTime time) {
         super(taskDescription, time);
+    }
+
+    @Override
+    public String getFileRepresentation() {
+        int done = isDone() ? 1 : 0;
+        String description = getDescription();
+        String time = getFileFormattedTime();
+        return String.format("%s %d %s /%s %s", TYPE_MARK, done, description, TIME_RELATION, time);
     }
 
     @Override

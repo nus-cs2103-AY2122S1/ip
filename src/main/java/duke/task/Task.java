@@ -23,10 +23,35 @@ public abstract class Task {
     }
 
     /**
+     * Gets the representation of the task for file storage.
+     *
+     * @return The representation of the task.
+     */
+    public abstract String getFileRepresentation();
+
+    abstract String getTypeIndicator();
+
+    /**
      * Marks the task as done.
      */
     public void markDone() {
         isDone = true;
+    }
+
+    private String getDoneIndicator() {
+        if (isDone) {
+            return String.format("[%s]", DONE_MARK);
+        } else {
+            return "[ ]";
+        }
+    }
+
+    boolean isDone() {
+        return isDone;
+    }
+
+    String getDescription() {
+        return description;
     }
 
     @Override
@@ -37,15 +62,5 @@ public abstract class Task {
         sb.append(" ");
         sb.append(description);
         return sb.toString();
-    }
-
-    abstract String getTypeIndicator();
-
-    private String getDoneIndicator() {
-        if (isDone) {
-            return String.format("[%s]", DONE_MARK);
-        } else {
-            return "[ ]";
-        }
     }
 }
