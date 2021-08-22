@@ -44,7 +44,7 @@ public class DoneCommand extends Command{
         if (isDoneOps(command)) {
             index = Integer.parseInt(command.substring(5)) - 1;
         } else {
-            throw new DukeException("☹ Would you specify the duke.task for me my dear?");
+            throw new DukeException("☹ Would you specify the task for me my dear?");
         }
     }
 
@@ -59,7 +59,7 @@ public class DoneCommand extends Command{
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index > taskList.size()) {
-            throw new DukeException("☹ oopsie!!! The specified duke.task does not exit.");
+            throw new DukeException("☹ oopsie!!! The specified task does not exit.");
         }
         taskList.doneTask(index);
         ui.showDone(taskList.getTask(index));

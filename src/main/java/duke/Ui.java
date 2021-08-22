@@ -144,6 +144,14 @@ public class Ui {
                 + "\nNow you have " + num + " tasks in the list.\n");
         showLine();
     }
+    
+    public void showFindList(TaskList taskList, String searchFilter) {
+        showLine();
+        System.out.println(String.format("Darling, here are the matching tasks(with %s) in your list:\n"
+                , searchFilter));
+        System.out.println(taskList.listFind(searchFilter));
+        showLine();
+    }
 
     /**
      * Prints the exit interface. 
