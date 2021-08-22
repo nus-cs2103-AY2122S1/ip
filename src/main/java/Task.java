@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * The Task class that encapsulates a directive given
  * by the user to track a certain activity and may have
@@ -9,10 +11,19 @@ public abstract class Task {
     protected String description;
     //Boolean of whether a task is done
     protected boolean isDone;
-
-    public abstract String taskType();
+    protected LocalDate localDate;
 
     public abstract String strForSaving();
+
+    /**
+     * The constructor for the Task class
+     * @param description The description of the task
+     */
+    public Task(String description, boolean isDone, LocalDate localDate) {
+        this.description = firstLetter(description);
+        this.localDate = localDate;
+        this.isDone = isDone;
+    }
 
     /**
      * The constructor for the Task class
@@ -36,9 +47,9 @@ public abstract class Task {
      */
     public void taskDone() {
         System.out.println(Responses.LINE + "\nYou have completed the task: " + "'"
-                                      + this.description + "'!"
-                                      + "\nI am so happy for you!\n"
-                                      + Responses.LINE);
+                                          + this.description + "'!"
+                                          + "\nI am so happy for you!\n"
+                                          + Responses.LINE);
         this.isDone = true;
     }
 

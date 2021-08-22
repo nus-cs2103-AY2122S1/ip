@@ -19,7 +19,16 @@ public class EmptyDescException extends PetalException {
      * @param cause Initial Cause
      */
     public EmptyDescException(String message, Throwable cause) {
-        super(message);
+        super(message, cause);
+    }
+
+    /**
+     * Constructor for the EmptyDescException (Used as wrapper)
+     * @param response The exception message
+     * @param cause Initial Cause
+     */
+    public EmptyDescException(Responses response, Throwable cause) {
+        super(response.toString(), cause);
     }
 
 }
