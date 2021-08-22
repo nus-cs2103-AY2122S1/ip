@@ -26,6 +26,7 @@ public class MyList {
         try {
             File dataFile = new File("src/main/java/Data.txt");
             Scanner s = new Scanner(dataFile);
+            Duke.setFormat(s.nextLine());
             while (s.hasNextLine()) {
                 String input = s.nextLine();
                 Task t = Task.getTaskFromString(input);
@@ -43,7 +44,7 @@ public class MyList {
      */
     public void addTask(Task t) {
         myList.add(t);
-        writeToFile();
+        writeToFile(false);
         System.out.println("Got it! I have added:");
         System.out.println(t.toString());
         int noOfItems = this.myList.size();
@@ -92,7 +93,7 @@ public class MyList {
      */
     public void deleteTask(int index) {
         Task removed = this.myList.remove(index - 1);
-        writeToFile();
+        writeToFile(false);
         System.out.println("Noted. I've removed this task:");
         System.out.println(removed.toString());
         int noOfItems = this.myList.size();
@@ -107,20 +108,37 @@ public class MyList {
      * Method to update the Data.txt file with all the items in the list.
      * This would allow the saving of data even when Duke restarts
      */
-    private void writeToFile() {
-        try {
-            int listLength = myList.size();
-            String input = "";
-            FileWriter fw = new FileWriter("src/main/java/Data.txt");
-            for (int i = 0; i < listLength; i++) {
-                Task t = myList.get(i);
-                int index = i + 1;
-                input += index + ". " + t.toString() + "\n";
+    public void writeToFile(boolean updateFormat) {
+        if (updateFormat) {
+            try {
+                int listLength = myList.size();
+                String input = Duke.getFormat() + "\n";
+                FileWriter fw = new FileWriter("src/main/java/Data.txt");
+                for (int i = 0; i < listLength; i++) {
+                    Task t = myList.get(i);
+                    System.out.println("create data: " + t.createData());
+                    input += t.createData() + "\n";
+                }
+                fw.write(input);
+                fw.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
-            fw.write(input);
-            fw.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        } else {
+            try {
+                int listLength = myList.size();
+                String input = Duke.getFormat() + "\n";
+                FileWriter fw = new FileWriter("src/main/java/Data.txt");
+                for (int i = 0; i < listLength; i++) {
+                    Task t = myList.get(i);
+                    input += t.createData() + " " + Duke.getFormat() + "\n";
+                }
+                fw.write(input);
+                fw.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
+
     }
 }
