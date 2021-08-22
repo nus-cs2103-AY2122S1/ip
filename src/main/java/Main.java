@@ -2,12 +2,11 @@ import java.util.Scanner;
 
 class Main {
     public static void main(String[] args) {
-        enumVersion();
+        levelSeven();
     }
 
-    public static void enumVersion() {
+    public static void levelSeven() {
         Duke duke = new Duke();
-        duke.greet();
         Scanner sc = new Scanner(System.in);
         while (duke.isLive()) {
             String command = sc.nextLine();

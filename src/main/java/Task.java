@@ -2,7 +2,7 @@ class Task {
     /**
      * To indicate if a task is done.
      */
-    public boolean isDone = false;
+    public boolean isDone;
     public final String description;
 
     /**
@@ -10,8 +10,9 @@ class Task {
      *
      * @param description description for the task.
      */
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
+        this.isDone = isDone;
     }
 
     /**
@@ -38,8 +39,8 @@ class ToDo extends Task {
      *
      * @param description description for the task.
      */
-    public ToDo(String description) {
-        super(description);
+    public ToDo(String description, boolean isDone) {
+        super(description, isDone);
     }
 
     /**
@@ -49,7 +50,7 @@ class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + (this.isDone ? "[X]" : "[ ]") + " " + this.description;
+        return "[T]" + " | " + (this.isDone ? "[X]" : "[ ]") + " | " + this.description;
     }
 }
 
@@ -61,8 +62,8 @@ class  DeadLine extends Task {
      *
      * @param description description for the task.
      */
-    public DeadLine(String description, String deadline) {
-        super(description);
+    public DeadLine(String description, String deadline, boolean isDone) {
+        super(description, isDone);
         this.deadline = deadline;
     }
 
@@ -73,7 +74,7 @@ class  DeadLine extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + (this.isDone ? "[X]" : "[ ]") + " " + this.description + "(by: " + this.deadline + ")";
+        return "[D]" + " | " + (this.isDone ? "[X]" : "[ ]") + " | " + this.description + " | " + this.deadline;
     }
 }
 
@@ -85,8 +86,8 @@ class Event extends Task {
      *
      * @param description description for the task.
      */
-    public Event(String description,String timePeriod) {
-        super(description);
+    public Event(String description,String timePeriod, boolean isDone) {
+        super(description, isDone);
         this.timePeriod = timePeriod;
     }
 
@@ -97,6 +98,6 @@ class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + (this.isDone ? "[X]" : "[ ]") + " " + this.description + "(at: " + this.timePeriod + ")";
+        return "[E]" + " | " + (this.isDone ? "[X]" : "[ ]") + " | " + this.description + " | " + this.timePeriod;
     }
 }
