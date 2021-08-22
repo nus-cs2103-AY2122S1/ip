@@ -5,7 +5,7 @@ import java.util.Scanner;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level 7. Save
+ * Current Progress: Level 8. Dates and Times
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.
@@ -137,8 +137,6 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 printMessage(e.toString());
-            } catch (IOException i) {
-                printMessage("Error in saving to hard disk");
             } finally {
                 currentCommand = commandScanner.nextLine();
                 checkCommand = currentCommand.split(" ", 2);
