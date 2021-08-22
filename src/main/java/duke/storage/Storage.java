@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -60,19 +61,19 @@ public class Storage {
                 LocalDateTime time = LocalDateTime.parse(data[3], formatter);
 
                 switch (marker) {
-                    case "D":
-                        Task t = new Deadline(name, time, isDone);
-                        load.add(t);
-                        break;
-                    case "T":
-                        t = new Todo(name, isDone);
-                        load.add(t);
-                        break;
-                    case "E":
-                        t = new Event(name, time, isDone);
-                        load.add(t);
-                        break;
-                    default:
+                case "D":
+                    Task t = new Deadline(name, time, isDone);
+                    load.add(t);
+                    break;
+                case "T":
+                    t = new Todo(name, isDone);
+                    load.add(t);
+                    break;
+                case "E":
+                    t = new Event(name, time, isDone);
+                    load.add(t);
+                    break;
+                default:
                 }
             }
             myReader.close();
@@ -83,14 +84,13 @@ public class Storage {
         return load;
     }
 
-    public void saveTasks(ArrayList<Task> tasks) {
-
+    public void saveTasks(TaskList tasklist) {
         try {
             FileWriter fw = new FileWriter("data/duke.txt");
             BufferedWriter bw = new BufferedWriter(fw);
-            for (int i = 0; i < tasks.size(); i++) {
+            for (int i = 0; i < tasklist.getTotalTasksNumber(); i++) {
                 StringBuilder s = new StringBuilder();
-                Task current = tasks.get(i);
+                Task current = tasklist.getTask(i);
                 s.append(current.getMarker());
                 s.append(TERMINATOR);
                 s.append(current.getDone());
