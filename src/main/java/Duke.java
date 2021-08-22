@@ -12,7 +12,7 @@ public class Duke {
 
     public void run() {
         ui.welcome();
-        parser.parse();
+        ui.readUserInput(parser);
         ui.exit();
     }
 

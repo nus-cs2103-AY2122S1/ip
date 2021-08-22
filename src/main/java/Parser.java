@@ -30,9 +30,8 @@ public class Parser {
         return copy.isEmpty();
     }
 
-    public void parse() {
-        Scanner myScanner = new Scanner(System.in);
-        String userInput = myScanner.nextLine();
+    public void parse(Scanner scanner) {
+        String userInput = scanner.nextLine();
         while(!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 ui.printUserInputRecord(tasks.getStorage().getUserInputRecord());
@@ -51,9 +50,8 @@ public class Parser {
             } else {
                 tasks.add(userInput, tasks.getStorage().getUserInputRecord());
             }
-            userInput = myScanner.nextLine();
+            userInput = scanner.nextLine();
         }
-        myScanner.close();
     }
 
 }

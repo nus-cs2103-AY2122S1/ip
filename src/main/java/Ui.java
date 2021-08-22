@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Ui {
     private FormatAdapter adapter;
@@ -13,6 +14,12 @@ public class Ui {
 
     public void exit() {
         System.out.println(adapter.formatMessage("Bye. Hope to see you again soon!\n"));
+    }
+
+    public void readUserInput(Parser parser) {
+        Scanner scanner = new Scanner(System.in);
+        parser.parse(scanner);
+        scanner.close();
     }
 
     //This method prints the saved list of events from the user.
