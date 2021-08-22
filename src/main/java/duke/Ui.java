@@ -130,7 +130,7 @@ public class Ui {
     }
 
     /**
-     * Prins the standard response for success in finding tasks by date.
+     * Prints the standard response for success in finding tasks by date.
      *
      * @param formattedDateString Date being searched for.
      * @param counter Total count of tasks found to fall on date being searched for.
@@ -141,11 +141,20 @@ public class Ui {
         System.out.println("A total of " + counter + " events (" + deadlines + " deadlines and " +
                 events + " events) fall on " + formattedDateString);
     }
-    
+
+    /**
+     * Prints the standard response for beginning search for tasks matching a keyword.
+     */
     public void showFindBegin() {
         System.out.println("Here are the matching tasks in your list:");
     }
 
+    /**
+     * Prints the standard response for success in finding tasks that match a search keyword.
+     *
+     * @param counter Total count of tasks found to match the search keyword.
+     * @param keyword Search keyword being searched for.
+     */
     public void showFindSuccess(int counter, String keyword) {
         System.out.println("A total of " + counter
                 + " tasks in your list match your search keyword, " + keyword + ".");
