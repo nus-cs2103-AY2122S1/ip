@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Duke {
@@ -206,6 +208,42 @@ public class Duke {
         }
     }
 
+    public static void showOnDate(String command) throws DukeException {
+        try {
+            if (!command.contains("/on ")) {
+                throw new DukeException("Ensure that the command is of the form \"show /on #date\". The deadline must be given.");
+            }
+            LocalDate date = LocalDate.parse(command.split(" /on ")[1], DateTimeFormatter.ofPattern("d/M/yyyy"));
+            ArrayList<Task> tasksToDisplay = new ArrayList<>();
+            for (Task tempTask : LIST) {
+                if (tempTask instanceof Deadline) {
+                    if (((Deadline) tempTask).getDeadline().toLocalDate().equals(date)) {
+                        tasksToDisplay.add(tempTask);
+                    }
+                } else if (tempTask instanceof Event) {
+                    if (((Event) tempTask).getTiming().toLocalDate().equals(date)) {
+                        tasksToDisplay.add(tempTask);
+                    }
+                }
+            }
+            String dateString = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            if (tasksToDisplay.isEmpty()) {
+                echo("There are currently no tasks on " + dateString, TYPE.COMPLETE);
+                return;
+            }
+            Collections.sort(tasksToDisplay);
+            String listString = "The tasks on " + dateString + " are:\n";
+            int i;
+            for (i = 0; i < tasksToDisplay.size() - 1; i++) {
+                listString = listString.concat("\t\t\t" + (i + 1) + ". " + tasksToDisplay.get(i) + "\n");
+            }
+            listString = listString.concat("\t\t\t" + (i + 1) + ". " + tasksToDisplay.get(i));
+            echo(listString, TYPE.COMPLETE);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Ensure that the command is of the form \"show /on #date\". The description can not be empty.");
+        }
+    }
+
     //Main Method
     public static void main(String[] args) {
 
@@ -256,6 +294,9 @@ public class Duke {
                 } else if (commandList[0].equals("deadline")) {
                     //If input starts with todos, add that to list
                     addDeadline(command);
+                } else if (commandList[0].equals("show")) {
+                    //If input starts with todos, add that to list
+                    showOnDate(command);
                 } else {
                     // Else Invalid
                     throw new DukeException("Oops, That's an invalid command. Type in help to get list of possible commands.");

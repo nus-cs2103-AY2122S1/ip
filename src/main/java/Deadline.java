@@ -1,15 +1,20 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task{
 
     private LocalDateTime deadline;
     private boolean hasTime;
 
-    public Deadline(String task) {
+    public Deadline(String task) throws DukeException {
         super(task.split(" /by ")[0]);
-        this.deadline = processDateTime(task.split(" /by ")[1]);
+        try {
+            this.deadline = processDateTime(task.split(" /by ")[1]);
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("Ensure that date time is of the format d/M/yyyy HH:mm");
+        }
     }
 
     private LocalDateTime processDateTime(String dateTime) {
@@ -33,6 +38,9 @@ public class Deadline extends Task{
         return "[D] " + super.getDescription() + " (by: " + this.getDateTimeFormatted() + ")";
     }
 
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
 
     @Override
     public String toString() {
@@ -45,6 +53,8 @@ public class Deadline extends Task{
         if (val == 0) {
             if (o instanceof Deadline) {
                 return this.deadline.compareTo(((Deadline) o).deadline);
+            } else if (o instanceof Event) {
+                return this.deadline.compareTo(((Event) o).getTiming());
             } else {
                 return this.getDescription().compareTo(o.getDescription());
             }

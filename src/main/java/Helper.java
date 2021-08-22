@@ -11,19 +11,21 @@ public class Helper {
         helpString += "\t\t\t 2. "+ Duke.COLOR_PURPLE + "help #command" + Duke.COLOR_RESET
                 + " -> Prints out Command specific help page.\n";
         helpString += "\t\t\t 3. "+ Duke.COLOR_PURPLE + "todo #description" + Duke.COLOR_RESET
-                + " -> Adds a ToDo Task to the List\n";
+                + " -> Adds a ToDo Task to the List.\n";
         helpString += "\t\t\t 4. "+ Duke.COLOR_PURPLE + "event #description /at #timing" + Duke.COLOR_RESET
-                + " -> Adds an Event Task to the List\n";
+                + " -> Adds an Event Task to the List.\n";
         helpString += "\t\t\t 5. "+ Duke.COLOR_PURPLE + "deadline #description /by #deadline" + Duke.COLOR_RESET
-                + " -> Adds a Deadline Task to the List\n";
-        helpString += "\t\t\t 6. "+ Duke.COLOR_PURPLE + "done #index" + Duke.COLOR_RESET
-                + " -> Marks Task at #index in the List as completed\n";
-        helpString += "\t\t\t 7. "+ Duke.COLOR_PURPLE + "undo #index" + Duke.COLOR_RESET
-                + " -> Marks Task at #index in the List as incomplete\n";
-        helpString += "\t\t\t 8. "+ Duke.COLOR_PURPLE + "delete #index" + Duke.COLOR_RESET
-                + " -> Delete Task at #index in the List\n";
-        helpString += "\t\t\t 9. "+ Duke.COLOR_PURPLE + "bye/goodbye" + Duke.COLOR_RESET
-                + " -> Quits the ChatBot";
+                + " -> Adds a Deadline Task to the List.\n";
+        helpString += "\t\t\t 6. "+ Duke.COLOR_PURPLE + "show /on #date" + Duke.COLOR_RESET
+                + " -> Prints out the List of Tasks on Given Date.\n";
+        helpString += "\t\t\t 7. "+ Duke.COLOR_PURPLE + "done #index" + Duke.COLOR_RESET
+                + " -> Marks Task at #index in the List as completed.\n";
+        helpString += "\t\t\t 8. "+ Duke.COLOR_PURPLE + "undo #index" + Duke.COLOR_RESET
+                + " -> Marks Task at #index in the List as incomplete.\n";
+        helpString += "\t\t\t 9. "+ Duke.COLOR_PURPLE + "delete #index" + Duke.COLOR_RESET
+                + " -> Delete Task at #index in the List.\n";
+        helpString += "\t\t\t 10. "+ Duke.COLOR_PURPLE + "bye/goodbye" + Duke.COLOR_RESET
+                + " -> Quits the ChatBot.";
         Duke.echo(helpString, Duke.TYPE.COMPLETE);
     }
 
@@ -50,8 +52,15 @@ public class Helper {
     public static void showDeadlineHelp() {
         Duke.echo(Duke.COLOR_PURPLE + "deadline #description /by #deadline:" + Duke.COLOR_RESET +
                 "\n\t\t\tThis command will add a new Deadline Task with the given description and deadline." +
-                "\n\t\t\tThe description and deadline are required. The deadline should be of the format d/m/yyyy HH:mm or d/m/yyyy." +
+                "\n\t\t\tThe description and deadline are required and should be of the format d/m/yyyy HH:mm or d/m/yyyy." +
                 "\n\t\t\tFor example: deadline Return Books /by 28/9/2021 18:00 or deadline Return Books /by 28/9/2021", Duke.TYPE.COMPLETE);
+    }
+
+    public static void showShowHelp() {
+        Duke.echo(Duke.COLOR_PURPLE +"show /on #date:" + Duke.COLOR_RESET +
+                "\n\t\t\tThis command will show you on tasks on given date. " +
+                "\n\t\t\t#date is required and must be in the format d/m/yyyy" +
+                "\n\t\t\tFor example: show /on 28/9/2021", Duke.TYPE.COMPLETE);
     }
 
     public static void showDoneHelp() {
@@ -78,16 +87,17 @@ public class Helper {
     }
 
     public static void showCommandHelp(String command) {
-        List<String> commandList = Arrays.asList("list", "todo", "event", "deadline", "done", "undo", "delete");
+        List<String> commandList = Arrays.asList("list", "todo", "event", "deadline", "show", "done", "undo", "delete");
         int ind = commandList.indexOf(command);
         switch (ind) {
             case 0 -> showListHelp();
             case 1 -> showTodoHelp();
             case 2 -> showEventHelp();
             case 3 -> showDeadlineHelp();
-            case 4 -> showDoneHelp();
-            case 5 -> showUndoHelp();
-            case 6 -> showDeleteHelp();
+            case 4 -> showShowHelp();
+            case 5 -> showDoneHelp();
+            case 6 -> showUndoHelp();
+            case 7 -> showDeleteHelp();
             default -> showDefaultHelp();
         }
     }
