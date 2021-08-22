@@ -17,14 +17,27 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * Represents the file in the hard disk that stores the tasks.
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Constructor for a Storage instance that takes in a file path.
+     *
+     * @param filePath The path to the file storing the tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Retrieves the tasks from the hard disk.
+     *
+     * @return An ArrayList containing the retrieved tasks.
+     */
     public ArrayList<Task> load() {
         File dukeFile = new File(this.filePath);
         ArrayList<Task> tasksList = new ArrayList<>();
@@ -65,6 +78,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current tasks to the hard drive.
+     *
+     * @param taskList The task list.
+     */
     public void save(TaskList taskList) {
         String textToAdd = "";
         ArrayList<Task> tasksList = taskList.getTaskList();

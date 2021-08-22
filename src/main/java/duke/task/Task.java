@@ -2,15 +2,10 @@ package duke.task;
 
 /**
  * This Task class implements the characteristics of a task.
- *
- * @author Yeo Jun Wei
  */
 public class Task {
 
-    /** The description of the task */
     protected String description;
-
-    /** To indicate if the task has been done */
     protected boolean isDone;
 
     /**
@@ -24,10 +19,20 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Indicates if the task has been completed.
+     *
+     * @return A boolean value indicating the completion status.
+     */
     public boolean isDone() {
         return this.isDone;
     }
 
+    /**
+     * Returns the description of the task.
+     *
+     * @return Task description.
+     */
     public String getDescription() {
         return this.description;
     }
@@ -35,7 +40,7 @@ public class Task {
     /**
      * Returns an icon, indicating if the current task has been done.
      *
-     * @return An icon representing the status of the task.
+     * @return A String representing the completion status of the task.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");

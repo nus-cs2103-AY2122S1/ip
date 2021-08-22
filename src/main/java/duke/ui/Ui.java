@@ -6,18 +6,14 @@ import duke.task.TaskList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This Ui class deals with interactions with the user.
+ */
 public class Ui {
 
-    /** Horizontal line for formatting */
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
-
-    /** Greeting message to be displayed when bot starts running */
     private static final String GREETING_MESSAGE = "Hello! I'm JWBot\nWhat can I do for you?";
-
-    /** Goodbye message to be displayed when bot stops running */
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
-
-    /** A Scanner instance to obtain user input */
     private Scanner scanner = new Scanner(System.in);
 
     /**
@@ -39,16 +35,31 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    /**
+     * Displays the formatted error message to the user.
+     *
+     * @param errorMessage The specified error message.
+     */
     public void showError(String errorMessage) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(errorMessage);
         System.out.println(HORIZONTAL_LINE);
     }
 
+    /**
+     * Reads in user input.
+     *
+     * @return The command that the user inputted.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
 
+    /**
+     * Displays the current list of tasks to the user.
+     *
+     * @param taskList The task list.
+     */
     public void listTasks(TaskList taskList) {
         ArrayList<Task> tasksList = taskList.getTaskList();
         System.out.println(HORIZONTAL_LINE);
@@ -59,6 +70,12 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    /**
+     * Displays a formatted message indicating that the command
+     * has been successfully executed.
+     *
+     * @param message The completion message of a command.
+     */
     public void showCommandDone(String message) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(message);

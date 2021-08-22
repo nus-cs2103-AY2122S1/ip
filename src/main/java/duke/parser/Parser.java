@@ -14,8 +14,22 @@ import duke.exception.UnrecognisedCommandException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
 
+    /**
+     * Parses user input into a command for execution.
+     *
+     * @param command The user input string.
+     * @return A command to be executed based on the user input.
+     * @throws UnrecognisedCommandException If the entered command is not recognised.
+     * @throws MissingTaskIndexException If the task index is not provided.
+     * @throws EmptyTaskDescriptionException If the task description is not provided.
+     * @throws TimeNotSpecifiedException If the date is not provided.
+     * @throws DateTimeParseException If the date cannot be parsed into a LocalDate instance.
+     */
     public Command parse(String command) throws UnrecognisedCommandException, MissingTaskIndexException,
             EmptyTaskDescriptionException, TimeNotSpecifiedException, DateTimeParseException {
         if (command.equals("bye")) {
