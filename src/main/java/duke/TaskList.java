@@ -75,7 +75,12 @@ public class TaskList {
         }
         return result.toString();
     }
-    
+
+    /**
+     * Returns a String representation of the ArrayList after being filtered by a String. 
+     * @param searchFilter A String used to filter the ArrayList of Task objects.
+     * @return A String representation of the ArrayList after being filtered by a String. 
+     */
     public String listFind(String searchFilter) {
         ArrayList<Task> filteredTaskList = this.taskList.stream()
                 .filter(ele -> ele.getContent().contains(searchFilter))

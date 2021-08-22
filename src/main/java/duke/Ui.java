@@ -111,6 +111,20 @@ public class Ui {
     }
 
     /**
+     * Prints the TaskList after being filtered by a String.
+     *
+     * @param taskList A TaskList that contains all the duke.task.Task objects' information. 
+     * @param searchFilter A String object that is used to filter the TaskList.
+     */
+    public void showFindList(TaskList taskList, String searchFilter) {
+        showLine();
+        System.out.println(String.format("Darling, here are the matching tasks(with %s) in your list:\n"
+                , searchFilter));
+        System.out.println(taskList.listFind(searchFilter));
+        showLine();
+    }
+
+    /**
      * Prints the delete interface with information of the deleted task.
      * 
      * @param task A duke.task.Task object that was deleted.
@@ -142,14 +156,6 @@ public class Ui {
         showLine();
         System.out.println("Gotcha my dear. I've added this task for you: \n" + task
                 + "\nNow you have " + num + " tasks in the list.\n");
-        showLine();
-    }
-    
-    public void showFindList(TaskList taskList, String searchFilter) {
-        showLine();
-        System.out.println(String.format("Darling, here are the matching tasks(with %s) in your list:\n"
-                , searchFilter));
-        System.out.println(taskList.listFind(searchFilter));
         showLine();
     }
 
