@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 // testing new branch
 // add another commit to feature1 branch
@@ -13,6 +15,7 @@ public class Deadline extends Task {
     private String deadline;
     private String description = " ";
     private boolean isDone;
+    private LocalDate deadline1;
 
     /**
      * constructor for the deadline class.
@@ -21,7 +24,7 @@ public class Deadline extends Task {
      * @throws WrongCommandFormatException Thrown when the user enters the
      *                                      command with the wrong format.
      */
-    public Deadline(String description, boolean isDone) throws WrongCommandFormatException{
+    public Deadline(String description, boolean isDone) throws WrongCommandFormatException {
         super(description, isDone);
         Scanner s = new Scanner(description);
         while (s.hasNext()) {
@@ -29,13 +32,23 @@ public class Deadline extends Task {
             if (next.equals("/at")) {
                 throw new WrongCommandFormatException("Wrong keyword used. Please try again with /by");
             } else if (next.equals("/by")) {
-                if (s.hasNextLine()) {
-                    this.deadline = s.nextLine();
-                } else {
+                try {
+                    if (s.hasNextLine()) {
+                        this.deadline1 = LocalDate.parse(s.nextLine().substring(1), Duke.getFormat());
+                        System.out.println(this.deadline1.toString());
+                    } else {
+                        throw new WrongCommandFormatException(
+                                "No deadline specified. Please specify a deadline after `/by`"
+                        );
+                    }
+                } catch (DateTimeParseException ex) {
+                    System.out.println(ex.getMessage());
                     throw new WrongCommandFormatException(
-                            "No deadline specified. Please specify a deadline after `/by`"
+                            "Wrong deadline format specified. \n"
+                            + "Acceptable formats: \n"
                     );
                 }
+
             } else {
               this.description += next;
             }
@@ -88,8 +101,8 @@ public class Deadline extends Task {
                 + " "
                 + statusIcon
                 + this.description
-                + " (by:"
-                + this.deadline
+                + " (by: "
+                + this.deadline1.format(Duke.getFormat())
                 + ")";
     }
 
