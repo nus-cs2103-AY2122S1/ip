@@ -21,8 +21,8 @@ public class FileInputOutputHandler {
      * Instantiates a <code>FileIO</code> object.
      * Creates directories and files at the filepath provided if it does not exist.
      *
-     * @param filePath filepath of file to read from and write to
-     * @throws IOException thrown when error reading or writing to target file occurs
+     * @param filePath filepath of file to read from and write to.
+     * @throws IOException thrown when error reading or writing to target file occurs.
      */
     public FileInputOutputHandler(String filePath) throws IOException {
         this.filePath = filePath;
@@ -43,8 +43,8 @@ public class FileInputOutputHandler {
     /**
      * Reads target file line by line.
      *
-     * @return List of strings containing each line of target file
-     * @throws IOException thrown when error reading from file occurs
+     * @return List of strings containing each line of target file.
+     * @throws IOException thrown when error reading from file occurs.
      */
     public List<String> readLinesFromFile() throws IOException {
         List<String> fileLines = new LinkedList<>();
@@ -59,8 +59,8 @@ public class FileInputOutputHandler {
     /**
      * Writes each String of given list on a new line to the target file.
      *
-     * @param lines List of strings to write to target file
-     * @throws IOException thrown when error writing to file occurs
+     * @param lines List of strings to write to target file.
+     * @throws IOException thrown when error writing to file occurs.
      */
     public void saveLinesToFile(List<String> lines) throws IOException {
         try (FileWriter fw = new FileWriter(this.filePath)) {

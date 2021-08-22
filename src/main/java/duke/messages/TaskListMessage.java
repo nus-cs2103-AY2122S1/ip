@@ -15,6 +15,13 @@ public class TaskListMessage extends Message {
         super.setMessageText(generateListMessageText(tasks));
     }
 
+    /**
+     * Generates message from given list.
+     *
+     * @param tasks tasks to be included in the message.
+     * @return user-friendly message including textual representations of all tasks
+     * provided in the given list.
+     */
     private String generateListMessageText(List<Task> tasks) {
         StringBuilder listMessageBuilder = new StringBuilder();
         listMessageBuilder.append(MessageConstants.TASK_LIST_HEADER);
