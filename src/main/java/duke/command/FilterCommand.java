@@ -8,6 +8,12 @@ import duke.util.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * This class encapsulates the command dealing with filtering the tasks list using a date/time specified.
+ *
+ * @author Tan Yi Guan
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class FilterCommand extends Command {
     private final String input;
     private final ToDoList list;
@@ -23,6 +29,13 @@ public class FilterCommand extends Command {
         handleFilter(input);
     }
 
+    /**
+     * Handles Filter command logic.
+     *
+     * @param input Raw user's input.
+     * @throws DukeException if no date/time is entered by the user.
+     * @throws MultipleDateTimeException if multiple date/time is detected.
+     */
     public void handleFilter(String input) throws DukeException {
         if (input.split(" ").length < 2) {
             throw new DukeException("MissingDateTimeException: Enter a date/time after your command!");

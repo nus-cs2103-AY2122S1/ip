@@ -34,6 +34,12 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Converts the task into text format meant for persisted storage.
+     * Returns the formatted string.
+     *
+     * @return Formatted string of task meant for persisted storage.
+     */
     public String convertToTxt() {
         return String.format("%d | %s", isDone ? 1 : 0, this.description);
     };

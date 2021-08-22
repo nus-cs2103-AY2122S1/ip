@@ -16,11 +16,23 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Converts the todo task into text format meant for persisted storage.
+     * Returns the formatted string.
+     *
+     * @return Formatted string of task meant for persisted storage.
+     */
     @Override
     public String convertToTxt() {
         return String.format("T | %s", super.convertToTxt());
     }
 
+    /**
+     * Checks whether the date and time user input is the same as the deadline of task.
+     *
+     * @param dateTime the date and time that the user input.
+     * @return true if deadline of task is the same as date and time of user input.
+     */
     @Override
     public boolean isSameDateTime(String dateTime) {
         return false;

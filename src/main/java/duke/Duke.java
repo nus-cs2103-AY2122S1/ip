@@ -10,7 +10,7 @@ import duke.util.Ui;
 import java.util.Scanner;
 
 /**
- * This class encapsulates a CLI bot named duke.Duke.
+ * This class encapsulates a CLI bot named Duke.
  *
  * @author Tan Yi Guan
  * @version CS2103T AY21/22 Semester 1
@@ -29,6 +29,7 @@ public class Duke {
         new Duke("./data/task.txt").run();
     }
 
+    /** Runs Duke */
     public void run() {
         Ui.printWelcomeMessage();
         String input;

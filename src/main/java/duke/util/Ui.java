@@ -4,6 +4,12 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * This class encapsulates the UI used for displaying data to the user.
+ *
+ * @author Tan Yi Guan
+ * @version CS2103T AY21/22 Semester 1
+ */
 public class Ui {
     private static final String divider = "\t" +
             "-------------------------------------------------------------------------";
@@ -53,6 +59,12 @@ public class Ui {
         prettyPrint("Bye bye! See you again soon!");
     }
 
+    /**
+     * Prints all the task contained in the list.
+     * Prints a customized message when list is empty.
+     *
+     * @param list the ArrayList containing all the tasks entered by the user.
+     */
     public static void printList(ArrayList<Task> list) {
         System.out.println(divider);
         // Custom message for when user types 'list' when nothing is added.
@@ -67,6 +79,11 @@ public class Ui {
         System.out.println(divider);
     }
 
+    /**
+     * Prints error/exceptions messages appropriately in System.err.
+     *
+     * @param message the error/exception message to be dispalyed.
+     */
     public static void printException(String message) {
         System.err.println("\t" + message);
     }
