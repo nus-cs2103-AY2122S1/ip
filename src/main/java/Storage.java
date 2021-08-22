@@ -6,26 +6,18 @@ import java.time.LocalDateTime;
 
 public class Storage {
     public File txt;
-    public Storage(TaskList t) {
-        loadFile();
-        readFromFile(t);
-    }
-    public void loadFile() {
-        try {
-            Path p = Paths.get("data");
-            if (!Files.exists(p)) {
-                Files.createDirectories(p);
-            }
-            File f = Paths.get("data", "duke.txt").toFile();
-            f.createNewFile();
-            txt = f;
-        } catch(Exception e) {
-            System.out.println(Duke.formatMessage("The file could not be created"));
+    public void loadFile() throws Exception {
+        Path p = Paths.get("data");
+        if (!Files.exists(p)) {
+            Files.createDirectories(p);
         }
+        File f = Paths.get("data", "duke.txt").toFile();
+        f.createNewFile();
+        txt = f;
     }
     public void readFromFile(TaskList t){
         try {
-            BufferedReader br = new BufferedReader(new FileReader(txt)) ;
+            BufferedReader br = new BufferedReader(new FileReader(txt));
             String curLine;
             while ((curLine = br.readLine()) != null) {
                 String[] parts = curLine.split(" ", 3);
@@ -48,24 +40,18 @@ public class Storage {
                     break;
                 }
             }
-
-
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Read error: " + e.getMessage());
         }
     }
-    public void writeToFile(TaskList t) {
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(txt));
-            String curLine;
-            for(int i=0; i<t.size(); i++) {
-                curLine = t.getTask(i).toString();
-                bw.write(curLine + "\n");
-            }
-            bw.close();
-        } catch(Exception e) {
-            System.out.println(Duke.formatMessage("An error occurred"));
+    public void writeToFile(TaskList t) throws Exception {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(txt));
+        String curLine;
+        for(int i=0; i<t.size(); i++) {
+            curLine = t.getTask(i).toString();
+            bw.write(curLine + "\n");
         }
+        bw.close();
     }
 
 }

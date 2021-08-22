@@ -40,4 +40,8 @@ public class DateTimeHandler {
         return sb.toString();
     }
 
+    public String invalidFormat() {
+        return "Please enter a valid date-time format. Type formats to see valid formats";
+    }
+
 }

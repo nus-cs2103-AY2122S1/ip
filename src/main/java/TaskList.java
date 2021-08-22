@@ -20,10 +20,12 @@ public class TaskList {
         return res.toString();
     }
 
-    public String taskAddedMessage(Task t) {
-        return Duke.formatMessage(
-                "Got it, I've added this task:\n        " + t +
-                        "\n     " + numOfTasks());
+    public String[] taskAddedMessage(Task t) {
+        return new String[]{
+                "Got it, I've added this task:",
+                t.toString(),
+                numOfTasks()
+        };
     }
 
     public int size() {

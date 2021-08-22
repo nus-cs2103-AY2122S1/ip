@@ -1,25 +1,34 @@
 import java.time.LocalDateTime;
 import java.util.Scanner;
 public class Duke {
+    private final UI ui;
     private final Storage storage;
     private final DateTimeHandler dth;
     private final TaskList taskList;
 
-    public static String formatMessage(String s) {
-        return "    ____________________________________________________________\n     " +
-                s + "\n" +
-                "    ____________________________________________________________";
-    }
     public Duke() {
+        ui = new UI();
         taskList = new TaskList();
-        storage = new Storage(taskList);
+        storage = new Storage();
         dth = new DateTimeHandler();
+    }
 
+    public void print(String s) {
+        System.out.println(ui.formatMessage(s));
+    }
+    public void print(String[] s) {
+        System.out.println(ui.formatMessage(s));
     }
 
     public void run() {
+        try {
+            storage.loadFile();
+            storage.readFromFile(taskList);
+        } catch (Exception e) {
+            print("The file could not be created");
+        }
         Scanner scanner = new Scanner(System.in);
-        System.out.println(formatMessage("Hello! I'm Duke\n" + "     What can I do for you?"));
+        ui.welcomeMessage();
         while (true) {
             String input = scanner.nextLine();
             String[] params = input.split(" ", 2);
@@ -30,116 +39,121 @@ public class Duke {
             }
             switch (params[0]) {
             case "list":
-                System.out.println(formatMessage(taskList.printList()));
+                System.out.println(ui.formatMessage(taskList.printList()));
                 break;
             case "done":
                 if (params.length == 1) {
-                    System.out.println(formatMessage("Please enter a number after done"));
+                    System.out.println(ui.formatMessage("Please enter a number after done"));
                     break;
                 }
                 arg = params[1];
                 try {
                     int index = Integer.parseInt(arg);
                     if (index > taskList.size()) {
-                        System.out.println(formatMessage("There are only " + taskList.size() + " tasks"));
+                        print("There are only " + taskList.size() + " tasks");
                         break;
                     } else if (index == 0) {
-                        System.out.println(formatMessage("There is no task 0"));
+                        print(ui.formatMessage("There is no task 0"));
                         break;
                     }
                     Task t = taskList.getTask(index - 1);
                     t.completeTask();
-                    System.out.println(formatMessage(
+                    System.out.println(ui.formatMessage(
                             "Nice! I've marked this task as done:\n       " + t + "\n     " +
                                     taskList.numOfTasks()
                     ));
 
                 } catch (NumberFormatException e) {
-                    System.out.println(formatMessage("Please enter a number after done"));
+                    System.out.println(ui.formatMessage("Please enter a number after done"));
                 }
                 break;
             case "delete":
                 if (params.length == 1) {
-                    System.out.println(formatMessage("Please enter a number after delete"));
+                    System.out.println(ui.formatMessage("Please enter a number after delete"));
                     break;
                 }
                 arg = params[1];
                 try {
                     int index = Integer.parseInt(arg);
                     if (index > taskList.size()) {
-                        System.out.println(formatMessage("There are only " + taskList.size() + " tasks"));
+                        System.out.println(ui.formatMessage("There are only " + taskList.size() + " tasks"));
                         break;
                     } else if (index == 0) {
-                        System.out.println(formatMessage("There is no task 0"));
+                        System.out.println(ui.formatMessage("There is no task 0"));
                         break;
                     }
                     Task t = taskList.getTask(index - 1);
                     taskList.removeTask(index-1);
-                    System.out.println(formatMessage(
+                    System.out.println(ui.formatMessage(
                             "Noted. I've removed this task:\n       " + t + "\n     " +
                                     taskList.numOfTasks()
                     ));
 
                 } catch (NumberFormatException e) {
-                    System.out.println(formatMessage("Please enter a number after done"));
+                    System.out.println(ui.formatMessage("Please enter a number after done"));
                 }
                 break;
             case "todo":
                 if (params.length == 1) {
-                    System.out.println(formatMessage("Please enter the name of the task after todo"));
+                    System.out.println(ui.formatMessage("Please enter the name of the task after todo"));
                     break;
                 }
                 Todo t = new Todo(params[1], false);
                 taskList.addToList(t);
-                System.out.println(taskList.taskAddedMessage(t));
+                print(taskList.taskAddedMessage(t));
                 break;
             case "deadline":
                 if (params.length == 1) {
-                    System.out.println(formatMessage("Please enter the name of the task after deadline"));
+                    System.out.println(ui.formatMessage("Please enter the name of the task after deadline"));
                     break;
                 }
                 if (!params[1].contains("/by")) {
-                    System.out.println(formatMessage("Please enter the deadline of the task after /by"));
+                    System.out.println(ui.formatMessage("Please enter the deadline of the task after /by"));
                     break;
                 }
                 parts = params[1].split(" /by ");
                 LocalDateTime deadlineDate = dth.parseDate(parts[1]);
                 if (deadlineDate == null) {
-                    System.out.println(formatMessage("Please enter a valid date-time format. Type formats to see valid formats"));
+                    print(dth.invalidFormat());
                     break;
                 }
                 Deadline d = new Deadline(parts[0], false, deadlineDate);
                 taskList.addToList(d);
-                System.out.println(taskList.taskAddedMessage(d));
+                print(taskList.taskAddedMessage(d));
                 break;
             case "event":
                 if (params.length == 1) {
-                    System.out.println(formatMessage("Please enter the name of the task after event"));
+                    System.out.println(ui.formatMessage("Please enter the name of the task after event"));
                     break;
                 }
                 if (!params[1].contains("/at")) {
-                    System.out.println(formatMessage("Please enter the start date of the task after /at"));
+                    System.out.println(ui.formatMessage("Please enter the start date of the task after /at"));
                     break;
                 }
                 parts = params[1].split(" /at ");
                 LocalDateTime startDate = dth.parseDate(parts[1]);
                 if (startDate == null) {
-                    System.out.println(formatMessage("Please enter a valid date-time format. Type formats to see valid formats"));
+                    print(dth.invalidFormat());
                     break;
                 }
                 Event e = new Event(parts[0], false, startDate);
                 taskList.addToList(e);
-                System.out.println(taskList.taskAddedMessage(e));
+                print(taskList.taskAddedMessage(e));
                 break;
             case "formats":
-                System.out.println(formatMessage(dth.getFormatList()));
+                System.out.println(ui.formatMessage(dth.getFormatList()));
                 break;
             default:
-                System.out.println(formatMessage("That is not a recognised command"));
+                System.out.println(ui.formatMessage("That is not a recognised command"));
             }
-            storage.writeToFile(taskList);
+            try {
+                storage.writeToFile(taskList);
+            } catch (Exception e) {
+                print("An Error Occurred");
+            }
+
         }
-        System.out.println(formatMessage("Bye. Hope to see you again soon!"));
+        System.out.println(ui.formatMessage("Bye. Hope to see you again soon!"));
 
     }
 
