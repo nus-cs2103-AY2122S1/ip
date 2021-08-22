@@ -28,7 +28,7 @@ public enum Command {
      */
     public static Command valueOfLabel(String label) {
         for (Command c : values()) {
-            if (c.label.equals(label)) {
+            if (c.label.equalsIgnoreCase(label)) {
                 return c;
             }
         }
