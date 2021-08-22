@@ -21,8 +21,6 @@ public class Duke {
         DELETE("Noted. I've removed this task:"),
         LIST("Here are the tasks in your list:"),
         EXIT("Bye. Hope to see you again soon!"),
-        INVALID("☹ OOPS!!! I'm sorry, but I don't know what that means :-("),
-        NOSUCHTASK("There is no such task.");
 
         private final String command;
 
@@ -80,20 +78,27 @@ public class Duke {
      * @param input The user input to Duke.
      */
     private static void handleInvalidInputs(String input) {
-        switch (input) {
-            case "todo":
-            case "deadline":
-            case "event": {
-                System.out.println(
-                        String.format(
-                                "%4s☹ OOPS!!! The description of a %s cannot be empty.",
-                                " ", input)
-                );
-                break;
+        try {
+            switch (input) {
+                case "todo":
+                case "deadline":
+                case "event": {
+                    System.out.println(
+                            String.format(
+                                    "%4s☹ OOPS!!! The description of a %s cannot be empty.",
+                                    " ", input)
+                    );
+                    break;
+                }
+                default:
+                    throw new DukeException(
+                            "☹ OOPS!!! I'm sorry, but I don't know what that means :-("
+                    );
             }
-            default:
-                Commands.INVALID.printCommand();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
+
     }
 
     /**
@@ -103,46 +108,51 @@ public class Duke {
      */
     private static void updateTaskList(String command) {
         // The type of the task indicated before the first space.
-        int indexOfFirstSpace = command.indexOf(" ");
+        try {
+            int indexOfFirstSpace = command.indexOf(" ");
 
-        // Only got one word or no description entered.
-        if (indexOfFirstSpace == -1) {
-            handleInvalidInputs(command);
-            return;
-        }
-        String taskType = command.substring(0, indexOfFirstSpace);
-        String description = command.substring(indexOfFirstSpace + 1);
-
-        Task newTask;
-
-        switch (taskType) {
-            case "todo":
-                newTask = new ToDo(description);
-                break;
-            case "deadline":
-                int deadlineIndex = description.indexOf("/by");
-                newTask = new Deadline(description.substring(0, deadlineIndex),
-                        description.substring(deadlineIndex + 4));
-                break;
-            case "event":
-                int timeIndex = description.indexOf("/at");
-                newTask = new Event(description.substring(0, timeIndex),
-                        description.substring(timeIndex + 4));
-                break;
-            default:
-                Commands.INVALID.printCommand();
+            // Only got one word or no description entered.
+            if (indexOfFirstSpace == -1) {
+                handleInvalidInputs(command);
                 return;
+            }
+            String taskType = command.substring(0, indexOfFirstSpace);
+            String description = command.substring(indexOfFirstSpace + 1);
 
-        }
+            Task newTask;
 
-        divider();
-        Duke.taskList = taskList.add(newTask);
-        Commands.ADD.printCommand();
-        System.out.println(
-                String.format("%5s%s\n%4s%s", " ", newTask,
-                        " ", taskList.status())
-        );
-        divider();
+            switch (taskType) {
+                case "todo":
+                    newTask = new ToDo(description);
+                    break;
+                case "deadline":
+                    int deadlineIndex = description.indexOf("/by");
+                    newTask = new Deadline(description.substring(0, deadlineIndex),
+                            description.substring(deadlineIndex + 4));
+                    break;
+                case "event":
+                    int timeIndex = description.indexOf("/at");
+                    newTask = new Event(description.substring(0, timeIndex),
+                            description.substring(timeIndex + 4));
+                    break;
+                default:
+                    throw new DukeException(
+                            "☹ OOPS!!! I'm sorry, but I don't know what that means :-("
+                    );
+
+            }
+
+            divider();
+            Duke.taskList = taskList.add(newTask);
+            Commands.ADD.printCommand();
+            System.out.println(
+                    String.format("%5s%s\n%4s%s", " ", newTask,
+                            " ", taskList.status())
+            );
+            divider();
+        } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
     }
 
     /**
@@ -150,7 +160,7 @@ public class Duke {
      *
      * @param index Index of the task to be deleted.
      */
-    private static void markTaskAsCompleted(int index) {
+    private static void markTaskAsCompleted(int index) throws DukeException {
         boolean isValid = taskList.isValidTaskIndex(index);
         divider();
         if (isValid) {
@@ -161,7 +171,7 @@ public class Duke {
                             " ", taskList.status())
             );
         } else {
-            Commands.NOSUCHTASK.printCommand();
+            throw new DukeException("There is no such task.");
         }
         divider();
     }
@@ -171,7 +181,7 @@ public class Duke {
      *
      * @param index Index of the task to be deleted.
      */
-    private static void deleteTask(int index) {
+    private static void deleteTask(int index) throws DukeException {
         boolean isValid = taskList.isValidTaskIndex(index);
         divider();
         if (isValid) {
@@ -183,7 +193,7 @@ public class Duke {
                             " ", taskList.status())
             );
         } else {
-            Commands.NOSUCHTASK.printCommand();
+            throw new DukeException("There is no such task.");
         }
         divider();
     }
@@ -213,7 +223,7 @@ public class Duke {
                     String[] arrOfCommandWords = command.split(" ", 2);
                     if (arrOfCommandWords.length <= 1) {
                         // No task specified.
-                        Commands.INVALID.printCommand();
+                        throw new DukeException("Please enter the task index.");
                         continue;
                     }
                     int taskIndex = Integer.parseInt(arrOfCommandWords[1]) - 1;
@@ -222,7 +232,7 @@ public class Duke {
                     } else {
                         Duke.deleteTask(taskIndex);
                     }
-                } catch (NumberFormatException e){
+                } catch (NumberFormatException|DukeException e){
                     System.out.println(e.getMessage());
                 } finally {
                     // TODO: implement cleanup
