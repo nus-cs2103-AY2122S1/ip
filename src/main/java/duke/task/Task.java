@@ -2,39 +2,85 @@ package duke.task;
 
 import java.util.*;
 
+/**
+ * The abstract Task class encapsulates information
+ * and methods pertaining to Tasks in Duke.
+ *
+ * @author Frederick Pek
+ * @version CS2103 AY21/22 Sem 1 iP
+ */
 public abstract class Task {
-	protected String description;
-	protected boolean isDone;
-	protected String type;
+    /* A description of this Task */
+    protected String description;
 
-	public Task(String description) {
-		this.description = description;
-		this.isDone = false;
-	}
+    /* A boolean value pertaining to if this task has been done */
+    protected boolean isDone;
+    
+    /* A String value denoting the type of Task */
+    protected String type;
 
-	public String getType() {
-		return this.type;
-	}
+    /**
+     * Creates and initalizes a new Task with the description.
+     *
+     * @param description The description of the task.
+     * @return A new Task object.
+     */
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
 
-	public String getDescription() {
-		return this.description;
-	}
+    /**
+     * Returns the String representing this task.
+     *
+     * @return Returns the type of this Task.
+     */
+    public String getType() {
+        return this.type;
+    }
 
-	public void markDone() {
-		this.isDone = true;
-	}
+    /**
+     * Returns the description of this task.
+     *
+     * @return Returns the description of this Task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
 
-	public abstract String getFormat();
+    /**
+     * Marks this task as done.
+     */
+    public void markDone() {
+        this.isDone = true;
+    }
 
-	public List<String> getSaveParameters() {
-		List<String> params = new ArrayList<>();
-		params.add(type.substring(0, 1));
-		params.add(isDone ? "1" : "0");
-		params.add(description);
-		return params;
-	}
+    /**
+     * Returns the format a user should use to creating this task with Duke.
+     *
+     * @return Returns the format a user should use to creating this task with Duke.
+     */
+    public abstract String getFormat();
 
-	public String toString() {
-		return String.format("[%c][%s] %s", type.charAt(0), (isDone ? "X" : " "), description);
-	}
+    /**
+     * Returns the list of parameters used to represent this task.
+     *
+     * @return Returns a list of parameters.
+     */
+    public List<String> getSaveParameters() {
+        List<String> params = new ArrayList<>();
+        params.add(type.substring(0, 1));
+        params.add(isDone ? "1" : "0");
+        params.add(description);
+        return params;
+    }
+
+    /**
+     * The String representation of this Task object.
+     *
+     * @return Returns the String representation of this Task object.
+     */
+    public String toString() {
+        return String.format("[%c][%s] %s", type.charAt(0), (isDone ? "X" : " "), description);
+    }
 }
