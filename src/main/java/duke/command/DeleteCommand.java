@@ -29,14 +29,14 @@ public class DeleteCommand extends Command {
         if (isDeleteOps(command)) {
             this.index = Integer.parseInt(command.substring(7)) - 1;
         } else {
-            throw new DukeException("☹ Would you specify the duke.task for me my dear?");
+            throw new DukeException("☹ Would you specify the task for me my dear?");
         }
     }
     
     @Override
     public void execute(duke.TaskList taskList, duke.Ui ui, duke.Storage storage) throws DukeException {
         if (index > taskList.size()) {
-            throw new DukeException("☹ oopsie!!! The specified duke.task does not exit.");
+            throw new DukeException("☹ oopsie!!! The specified task does not exit.");
         }
         duke.task.Task holder = taskList.getTask(index);
         taskList.deleteTask(index);

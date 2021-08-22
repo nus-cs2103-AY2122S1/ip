@@ -43,7 +43,20 @@ public class TaskList {
             result.append(entry);
         }
         return result.toString();
-
+    }
+    
+    public String listFind(String searchFilter) {
+        ArrayList<Task> filteredTaskList = this.taskList.stream()
+                .filter(ele -> ele.getContent().contains(searchFilter))
+                .collect(Collectors.toCollection(ArrayList::new));
+        StringBuilder result = new StringBuilder("");
+        for (int i = 0; i < filteredTaskList.size(); i++) {
+            Task task = filteredTaskList.get(i);
+            String entry = String.format("%d. %s \n",
+                    i+1, task.toString());
+            result.append(entry);
+        }
+        return result.toString();
     }
     
     public void doneTask(int index) throws DukeException {

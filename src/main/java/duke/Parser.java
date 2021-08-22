@@ -4,7 +4,7 @@ import duke.command.*;
 public class Parser {
 
     private enum CommandWord {
-        TODO("todo"), DEADLINE("deadline"), EVENT("event"),
+        TODO("todo"), DEADLINE("deadline"), EVENT("event"), FIND("find"),
         DONE("done"), DELETE("delete"), BYE("bye"), LIST("list");
         private String value;
         private CommandWord(String value) {
@@ -31,6 +31,9 @@ public class Parser {
                     
                 case DELETE:
                     return new DeleteCommand(command);
+                    
+                case FIND:
+                    return new FindCommand(command);
                     
                 case TODO:
 
