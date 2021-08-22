@@ -1,8 +1,14 @@
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
-import java.util.*;
 public class Duke {
-    List<Task> commands = new ArrayList<>();
-
+    ArrayList<Task> commands = new ArrayList<>();
+    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("d-MM-yyyy");
+    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d-MM-yyyy HHmm");
     void list(){
         try {
             if (commands.size() == 0) {
@@ -39,7 +45,8 @@ public class Duke {
                         if (deadline.length < 2) {
                             throw new NoTimeException();
                         }
-                        commands.add(new Deadline(deadline[0], deadline[1]));
+                        LocalDate date = LocalDate.parse(deadline[1].trim(),formatter1);
+                        commands.add(new Deadline(deadline[0], date));
                         taskToAdd = true;
                     }
                     break;
@@ -51,7 +58,8 @@ public class Duke {
                         if (event.length < 2) {
                             throw new NoTimeException();
                         }
-                        commands.add(new Event(event[0], event[1]));
+                        LocalDateTime time = LocalDateTime.parse(event[1].trim(),formatter2);
+                        commands.add(new Event(event[0], time));
                         taskToAdd = true;
                     }
                     break;
