@@ -7,6 +7,19 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    public String getStatus() {
+        return (isDone ? "true" : "false");
+    }
+
+    public String save() {
+        return String.format("%s-%s-%s-\n", this.getType(), this.getStatus(), this.description);
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }

@@ -1,11 +1,71 @@
-import java.util.*;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     private static ArrayList<Task> list = new ArrayList<>(100);
     private static int listIndex = 0;
+    private static final String FILE_PATH = "data/mango.txt";
 
     public static void greet() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Mango\nWhat can I do for you?");
+    }
+
+    public static void loadData() throws IOException {
+        File f = new File(FILE_PATH);
+        if (!f.exists()) {
+            File directory = new File(f.getParent());
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            f.createNewFile();
+        } else {
+            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            while (s.hasNext()) {
+                String[] task = s.nextLine().split("-", 4);
+                Task toAdd;
+                switch (task[0]) {
+                case "D":
+                    toAdd = new Deadline(task[2], task[3], task[1]);
+                    break;
+                case "E":
+                    toAdd = new Event(task[2], task[3], task[1]);
+                    break;
+                case "T":
+                    toAdd = new Todo(task[2], task[1]);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + task[0]);
+                }
+
+                list.add(toAdd);
+                listIndex++;
+            }
+        }
+    }
+
+    public static void saveData() throws IOException {
+        String tempFilePath = "temp/mango.txt";
+        File f = new File(tempFilePath);
+        File directory = new File(f.getParent());
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        f.createNewFile();
+
+        FileWriter fw = new FileWriter(tempFilePath);
+        for (Task t : list) {
+            fw.write(t.save());
+        }
+        fw.close();
+
+        Files.copy(Paths.get(tempFilePath), Paths.get(FILE_PATH), StandardCopyOption.REPLACE_EXISTING);
+        Files.delete(Paths.get(tempFilePath));
     }
 
     public static void echo(String str) {
@@ -100,19 +160,32 @@ public class Duke {
     }
 
     public static void exit() {
+        try {
+            Duke.saveData();
+        } catch (IOException e) {
+            System.out.println("Error encountered when saving data: " + e.getMessage());
+        }
+
         System.out.println("Bye. Hope to see you again soon!");
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = " __  __    ___    _  _     ___     ___\n"
+                + "|  \\/  |  /   \\  | \\| |   / __|   / _ \\\n"
+                + "| |\\/| |  | - |  | .` |  | (_ |  | (_) |\n"
+                + "|_|__|_|  |_|_|  |_|\\_|   \\___|   \\___/\n"
+                + "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|\n"
+                + "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\n";
+
 
         System.out.println("Hello from\n" + logo);
 
         Duke.greet();
+        try {
+            Duke.loadData();
+        } catch (IOException e) {
+            System.out.println("Error encountered when loading data: " + e.getMessage());
+        }
 
         Scanner sc = new Scanner(System.in);
         String str;

@@ -6,6 +6,11 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public Deadline(String description, String date, String status) {
+        super(description, status.equals("true"));
+        this.date = date;
+    }
+
     public String getType() {
         return "D";
     }
@@ -20,5 +25,9 @@ public class Deadline extends Task {
 
     public String getDescription() {
         return String.format("%s (by: %s)", this.description, this.date);
+    }
+
+    public String save() {
+        return String.format("%s-%s-%s-%s\n", this.getType(), this.getStatus(), this.description, this.date);
     }
 }
