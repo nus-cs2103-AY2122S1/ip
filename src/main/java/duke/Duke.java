@@ -1,8 +1,10 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Duke is a personal assistant that allows users to keep track of events, deadlines and things to do.
+ * duke.Duke is a personal assistant that allows users to keep track of events, deadlines and things to do.
  * The main method will start the personal assistant in the console.
  */
 public class Duke {
@@ -15,10 +17,12 @@ public class Duke {
         String preposition = null; // eg. at, by, etc
         StringBuilder dateBuilder = new StringBuilder();
         if (splitInput == null || splitInput.length < 2) {
-            throw new DukeException("Invalid input. Please enter the action, followed by \"/at\" or \"/by\".\n" +
+            throw new DukeException("Invalid input. Please enter the action, followed by the description.\n" +
+                    "If action is \"deadline\", add a date in the format:\"/by dd/mm/yyyy hh:mm\".\n" +
+                    "If action is \"event\", add a date in the format: \"/at dd/mm/yyyy hh:mm\".\n" +
                     "For example: todo Buy a gift for mum\n" +
-                    "For example: deadline CS2103T individual project /by 19 August\n" +
-                    "For example: event CS2103T lecture /at 19 August");
+                    "For example: deadline CS2103T individual project /by 26/08/2021 23:59\n" +
+                    "For example: event CS2103T lecture /at 19/08/2021 16:00");
         }
         action = splitInput[0];
         for (int i = 1; i < splitInput.length; i++) {
@@ -71,7 +75,7 @@ public class Duke {
     }
 
     /**
-     * Processes the input and prints the responses, or throw a DukeException if input is wrong.
+     * Processes the input and prints the responses, or throw a duke.DukeException if input is wrong.
      *
      * @param input The input from the user
      * @return true only if a command ("bye") to shut down the chat is given

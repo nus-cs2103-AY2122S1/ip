@@ -1,7 +1,9 @@
+package duke;
+
 import java.util.Objects;
 
 /**
- * Task is a general class for any task that is to be saved by Duke.
+ * duke.Task is a general class for any task that is to be saved by duke.Duke.
  */
 public class Task {
     private final String description, taskType;

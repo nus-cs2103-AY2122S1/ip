@@ -1,9 +1,11 @@
+package duke;
+
 /**
  * A simple task with no deadline
  */
 public class Todo extends Task {
     /**
-     * Creates a Todo object that does not have any dates.
+     * Creates a duke.Todo object that does not have any dates.
      *
      * @param description The description of the task to be done
      */
