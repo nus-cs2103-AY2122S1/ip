@@ -1,14 +1,16 @@
 package Command;
 
-import java.util.Scanner;
+import Duke.Parser;
 
 public abstract class Command {
     private String args;
+
     protected Command(String args){
         this.args = args;
     }
+    
     public static Command createCommand(String input) throws Exception{
-        String[] cmd_args = input.split(" ", 2);
+        String[] cmd_args = Parser.parseInput(input);
         Command cmd;
         switch (cmd_args[0]){
             case "bye":
@@ -39,13 +41,4 @@ public abstract class Command {
     }
 
     public abstract void execute();
-
-    public static void main(String[] args) throws Exception {
-        Scanner Sc = new Scanner(System.in);
-        while(true){
-            String input = Sc.nextLine() + " ";
-            Command cmd = Command.createCommand(input);
-            cmd.execute();
-        }
-    }
 }

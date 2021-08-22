@@ -1,5 +1,6 @@
 import java.util.Locale;
-import java.util.Scanner;
+import Duke.Ui;
+import Duke.Parser;
 
 
 public class Duke {
@@ -13,21 +14,23 @@ public class Duke {
         EVENT;
     }
 
-    private final Scanner Sc;
     private final TaskList taskList;
     private final Storage store;
+    private final Ui ui;
 
     public Duke(){
-        Sc = new Scanner(System.in);
         store = new Storage("./data/duke.txt");
         taskList = new TaskList();
         this.store.retrieveTasks(taskList);
+        this.ui = new Ui();
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
     private void run(){
-        String first = this.getFirst();
-        String rest = this.getRest();
+        String input = ui.getInput();
+        String[] cmd_args = Parser.parseInput(input);
+        String first = cmd_args[0].toUpperCase(Locale.ROOT);
+        String rest = cmd_args[1].trim();
         while(true){
             try {
                 Commands cmd = Commands.valueOf((first));
@@ -54,23 +57,19 @@ public class Duke {
             }catch (IllegalArgumentException c){
                 System.out.println("command not found");
             }
-            first = this.getFirst();
-            rest = this.getRest();
+            input = ui.getInput();
+            cmd_args = Parser.parseInput(input);
+            first = cmd_args[0].toUpperCase(Locale.ROOT);
+            rest = cmd_args[1].trim();
         }
     }
 
-    private String getFirst(){
-        return this.Sc.next().toUpperCase(Locale.ROOT);
-    }
-
-    private String getRest(){
-        return this.Sc.nextLine().trim();
-    }
 
     private void close(){
         this.store.saveToFile(this.taskList);
+        this.ui.close();
         System.out.println("Bye. Hope to see you again soon!");
-        this.Sc.close();
+
     }
 
     public static void main(String[] args) {
