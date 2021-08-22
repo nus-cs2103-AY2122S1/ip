@@ -1,12 +1,8 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Duke {
+public class UI {
 
     // Colors used to Display Text
     public static final String COLOR_RESET = "\u001B[0m";
@@ -14,6 +10,7 @@ public class Duke {
     public static final String COLOR_CYAN = "\u001B[36m";
     public static final String COLOR_PURPLE = "\u001B[35m";
     public static final String COLOR_RED = "\u001B[31m";
+    public static final String COLOR_GREEN = "\u001B[32m";
 
     // The General Strings Used by the ChatBot
     private static final String logo = "\n" +
@@ -42,44 +39,48 @@ public class Duke {
             "\t\t\t                                                   \\______/\n";
 
     // The Global Variables used by the ChatBot
-    private static final Scanner cmdReader = new Scanner(System.in);
-    public final UI ui;
-    private Storage storage;
-    private final Parser parser;
-    private TaskList taskList;
+    public static final Scanner cmdReader = new Scanner(System.in);
+    public enum TYPE {START, MIDDLE, END, COMPLETE, ERROR};
 
-    public Duke() {
-        this.parser = new Parser();
-        this.ui = new UI();
-        try {
-            this.storage = new Storage("." + File.separator + "data" + File.separator + "WhoBotData.txt");
-            this.taskList = new TaskList(storage);
-        } catch (DukeException ex) {
-            ui.echo(ex.getMessage(), UI.TYPE.ERROR);
-            System.exit(0);
+    // Method to Print Greeting
+    public void greeting() {
+        System.out.println(COLOR_CYAN + line + COLOR_RESET);
+        System.out.println(COLOR_CYAN + line + COLOR_RESET);
+        System.out.println(COLOR_BLUE + logo + COLOR_RESET);
+        System.out.println(COLOR_CYAN + line + COLOR_RESET);
+        echo("Hello! I'm the WhoBot.", UI.TYPE.START);
+        echo("What can I do for you?", UI.TYPE.END);
+    }
+
+    // Method to Print GoodBye Message
+    public void goodbye() {
+        System.out.println(COLOR_CYAN + line + COLOR_RESET);
+        System.out.println(COLOR_CYAN + line + COLOR_RESET);
+        System.out.println(COLOR_BLUE + bye + COLOR_RESET);
+        echo("I hope to see you again soon :)", UI.TYPE.MIDDLE);
+        System.out.println(COLOR_CYAN + line + COLOR_RESET);
+        System.out.println(COLOR_CYAN + line + COLOR_RESET);
+    }
+
+    //Method to Echo the Given Word
+    public void echo(String answer, UI.TYPE type) {
+        if (type == UI.TYPE.COMPLETE) {
+            System.out.println(COLOR_CYAN + line + COLOR_RESET);
+            System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
+            System.out.println(COLOR_CYAN + line + COLOR_RESET);
+        } else if (type == UI.TYPE.START) {
+            System.out.println(COLOR_CYAN + line + COLOR_RESET);
+            System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
+        } else if (type == UI.TYPE.END) {
+            System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
+            System.out.println(COLOR_CYAN + line + COLOR_RESET);
+        } else if (type == UI.TYPE.MIDDLE) {
+            System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
+        } else if (type == UI.TYPE.ERROR) {
+            System.out.println(COLOR_CYAN + line + COLOR_RESET);
+            System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RED + answer + COLOR_RESET);
+            System.out.println(COLOR_CYAN + line + COLOR_RESET);
         }
     }
 
-
-    public void run() {
-        ui.greeting();
-        while (true) {
-            try {
-                String command;
-                System.out.print(COLOR_PURPLE + "> " + COLOR_RESET);
-                command = cmdReader.nextLine().trim();
-                if (parser.parse(command, ui, storage, taskList) == -1) {
-                    break;
-                };
-            } catch (DukeException ex) {
-                ui.echo(ex.getMessage(), UI.TYPE.ERROR);
-            }
-        }
-    }
-
-    //Main Method
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
 }
