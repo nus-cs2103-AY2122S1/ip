@@ -9,7 +9,7 @@ public abstract class Task {
   protected static final String INDENTATION_5 = "     ";
   protected static final String DIVIDER = " | ";
 
-  public String handleMarkAsDone() {
+  public String setTaskAsDone() {
     if (this.done) {
       return Task.ERROR_ALREADY_DONE;
     } else {
