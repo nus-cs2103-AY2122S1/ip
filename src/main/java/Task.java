@@ -56,4 +56,41 @@ public class Task {
     public String getTypeIcon() {
         return "[ ]";
     }
+
+    public static Task getTaskFromString(String s) {
+        String taskType = s.substring(3, 6);
+        String taskDescription = s.substring(10);
+        Task t = null;
+        try {
+            if (s.substring(7, 10). equals("[X]")) {
+                switch (taskType) {
+                case "[T]":
+                    t = new Todo(taskDescription, true);
+                    break;
+                case "[D]":
+                    t =  new Deadline(taskDescription, true);
+                    break;
+                case "[E]":
+                    t =  new Event(taskDescription, true);
+                    break;
+                }
+            } else {
+                switch (taskType) {
+                case "[T]":
+                    t = new Todo(taskDescription, false);
+                    break;
+                case "[D]":
+                    t = new Deadline(taskDescription, false);
+                    break;
+                case "[E]":
+                    t = new Event(taskDescription, false);
+                    break;
+                }
+            }
+        } catch (WrongCommandFormatException e) {
+            System.out.println("Error loading tasks");
+        }
+
+        return t;
+    }
 }
