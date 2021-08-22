@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,11 +15,11 @@ public class TaskManager {
     static private List<Task> taskList = new ArrayList<>();
     static private final String DB_NAME = "db.txt";
 
-    public static void initialize() {
+    public static void initialize() throws DateTimeException {
         load(DB_NAME);
     }
 
-    public static Task addTask(String type, Optional<String> args) throws DukeException, IllegalArgumentException {
+    public static Task addTask(String type, Optional<String> args) throws DukeException, IllegalArgumentException, DateTimeException {
         Task ret = null;
         // parse raw task string
         switch (type) {
@@ -70,7 +71,7 @@ public class TaskManager {
                 .collect(Collectors.joining("\n"));
     }
 
-    private static void load(String dbName) {
+    private static void load(String dbName) throws DateTimeException {
         Path path = Paths.get(".", dbName);
         boolean fileExists = Files.exists(path);
         if(!fileExists) {

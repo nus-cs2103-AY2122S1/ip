@@ -1,6 +1,7 @@
 import com.sun.source.util.TaskListener;
 
 import javax.swing.text.html.Option;
+import java.time.DateTimeException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Optional;
@@ -91,7 +92,7 @@ public class Duke {
                             .orElseThrow(() -> new InvalidDukeCommandException())
                             .apply(cmdArg)
                 );
-            } catch (IllegalArgumentException | DukeException e) {
+            } catch (IllegalArgumentException | DukeException | DateTimeException e) {
                 reply(e.getMessage());
             }
         }

@@ -1,11 +1,11 @@
 list
-deadline return book /by June 6th
+deadline return book /by 2021-01-01
 todo read book
-event project meeting /at Mon 2-4pm
+event project meeting /at 2021-02-02
 done 1
 list
-deadline return book /by Sunday
-event project meeting /at Aug 6th 2-4pm
+deadline return book /by 2021-03-03
+event project meeting /at 2021-04-04
 list
 done 2
 done 3
