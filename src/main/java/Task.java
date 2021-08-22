@@ -12,14 +12,16 @@ public class Task {
         this.taskType = taskType;
     }
 
+    public String saveTaskFormat() {
+        return String.format("|%s|%s", isDone? 1 : 0, description);
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
     public void setDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:\n"
-                + this.toString());
     }
 
     @Override
